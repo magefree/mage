@@ -74,10 +74,9 @@ public final class FrontierSiege extends CardImpl {
 
 class FrontierSiegeKhansTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "At the beginning of each of your main phases, ";
-
     FrontierSiegeKhansTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddManaToManaPoolSourceControllerEffect(Mana.GreenMana(2)), false);
+
     }
 
     private FrontierSiegeKhansTriggeredAbility(final FrontierSiegeKhansTriggeredAbility ability) {
@@ -101,9 +100,10 @@ class FrontierSiegeKhansTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "At the beginning of each of your main phases, " ;
     }
+
 }
 
 class FrontierSiegeFightEffect extends OneShotEffect {

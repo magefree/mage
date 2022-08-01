@@ -59,8 +59,6 @@ public final class Necropotence extends CardImpl {
 
 class NecropotenceTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever you discard a card, ";
-
     NecropotenceTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
     }
@@ -89,8 +87,8 @@ class NecropotenceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever you discard a card, " ;
     }
 }
 

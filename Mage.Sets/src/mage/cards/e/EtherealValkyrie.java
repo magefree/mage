@@ -62,8 +62,6 @@ public final class EtherealValkyrie extends CardImpl {
 
 class EtherealValkyrieTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever {this} enters the battlefield or attacks, ";
-
     EtherealValkyrieTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
     }
@@ -99,8 +97,8 @@ class EtherealValkyrieTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever {this} enters the battlefield or attacks, ";
     }
 }
 

@@ -48,8 +48,6 @@ public final class ZhurTaaDruid extends CardImpl {
 
 class ZhurTaaDruidAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever you tap {this} for mana, ";
-
     ZhurTaaDruidAbility() {
         super(Zone.BATTLEFIELD, new DamagePlayersEffect(1, TargetController.OPPONENT));
     }
@@ -76,8 +74,8 @@ class ZhurTaaDruidAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever you tap {this} for mana, " ;
     }
 
     @Override

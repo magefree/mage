@@ -50,8 +50,6 @@ public final class Dreadhound extends CardImpl {
 
 class DreadhoundTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever a creature dies or a creature card is put into a graveyard from a library, ";
-
     public DreadhoundTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LoseLifeOpponentsEffect(1));
     }
@@ -87,7 +85,7 @@ class DreadhoundTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever a creature dies or a creature card is put into a graveyard from a library, ";
     }
 }

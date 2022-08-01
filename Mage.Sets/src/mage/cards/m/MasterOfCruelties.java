@@ -57,8 +57,6 @@ public final class MasterOfCruelties extends CardImpl {
 
 class MasterOfCrueltiesTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever {this} attacks a player and isn't blocked, ";
-
     public MasterOfCrueltiesTriggeredAbility() {
         super(Zone.BATTLEFIELD, new MasterOfCrueltiesEffect());
         this.addEffect(new MasterOfCrueltiesNoDamageEffect());
@@ -99,8 +97,8 @@ class MasterOfCrueltiesTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever {this} attacks a player and isn't blocked, ";
     }
 }
 

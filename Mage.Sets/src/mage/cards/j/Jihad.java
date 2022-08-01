@@ -65,8 +65,6 @@ public final class Jihad extends CardImpl {
 
 class JihadTriggeredAbility extends StateTriggeredAbility {
 
-    private static final String staticTriggerPhrase = "When the chosen player controls no nontoken permanents of the chosen color, ";
-
     public JihadTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
     }
@@ -90,8 +88,8 @@ class JihadTriggeredAbility extends StateTriggeredAbility {
     }
     
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "When the chosen player controls no nontoken permanents of the chosen color, " ;
     }
 }
 

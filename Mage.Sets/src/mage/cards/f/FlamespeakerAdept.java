@@ -46,8 +46,6 @@ public final class FlamespeakerAdept extends CardImpl {
 }
 class ScryTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever you scry, ";
-
     public ScryTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BoostSourceEffect(2,0, Duration.EndOfTurn), false);
         this.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
@@ -73,7 +71,7 @@ class ScryTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever you scry, " ;
     }
 }

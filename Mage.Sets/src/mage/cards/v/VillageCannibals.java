@@ -45,8 +45,6 @@ public final class VillageCannibals extends CardImpl {
 
 class VillageCannibalsTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever another Human creature dies, ";
-
     public VillageCannibalsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
     }
@@ -79,7 +77,7 @@ class VillageCannibalsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever another Human creature dies, " ;
     }
 }

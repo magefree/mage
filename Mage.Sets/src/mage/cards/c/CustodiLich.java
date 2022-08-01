@@ -55,8 +55,6 @@ public final class CustodiLich extends CardImpl {
 
 class BecomesMonarchSourceControllerTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever you become the monarch, ";
-
     public BecomesMonarchSourceControllerTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
     }
@@ -76,8 +74,8 @@ class BecomesMonarchSourceControllerTriggeredAbility extends TriggeredAbilityImp
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever you become the monarch, " ;
     }
 
     @Override

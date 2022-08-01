@@ -71,8 +71,6 @@ public final class GoldspanDragon extends CardImpl {
 
 class GoldspanDragonTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever {this} attacks or becomes the target of a spell, ";
-
     GoldspanDragonTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new TreasureToken()));
     }
@@ -103,8 +101,8 @@ class GoldspanDragonTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever {this} attacks or becomes the target of a spell, " ;
     }
 
     @Override

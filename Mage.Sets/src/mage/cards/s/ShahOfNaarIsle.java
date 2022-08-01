@@ -53,7 +53,6 @@ public final class ShahOfNaarIsle extends CardImpl {
 
 class ShahOfNaarIsleTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "When {this}'s echo cost is paid, ";
     public ShahOfNaarIsleTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ShahOfNaarIsleEffect(), false);
     }
@@ -78,8 +77,8 @@ class ShahOfNaarIsleTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "When {this}'s echo cost is paid, " ;
     }
 }
 

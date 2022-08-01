@@ -56,8 +56,6 @@ public final class CurseOfShakenFaith extends CardImpl {
 
 class CurseOfShakenFaithTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever enchanted player casts a spell other than the first spell they cast each turn or copies a spell, ";
-
     public CurseOfShakenFaithTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CurseOfShakenFaithEffect());
         this.addWatcher(new SpellsCastWatcher());
@@ -98,8 +96,8 @@ class CurseOfShakenFaithTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever enchanted player casts a spell other than the first spell they cast each turn or copies a spell, ";
     }
 }
 

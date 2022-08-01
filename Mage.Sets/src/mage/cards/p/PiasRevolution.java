@@ -87,7 +87,6 @@ class PiasRevolutionReturnEffect extends OneShotEffect {
 
 class PiasRevolutionTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever a nontoken artifact is put into your graveyard from the battlefield, ";
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent();
 
     static {
@@ -129,7 +128,7 @@ class PiasRevolutionTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever a nontoken artifact is put into your graveyard from the battlefield, " ;
     }
 }

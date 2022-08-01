@@ -101,8 +101,6 @@ class MisfortuneTellerEffect extends OneShotEffect {
 
 class MisfortuneTellerTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever {this} enters the battlefield or deals combat damage to a player, ";
-
     public MisfortuneTellerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new MisfortuneTellerEffect());
     }
@@ -134,7 +132,7 @@ class MisfortuneTellerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever {this} enters the battlefield or deals combat damage to a player, ";
     }
 }

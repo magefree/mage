@@ -53,8 +53,6 @@ public final class XantidSwarm extends CardImpl {
 
 class XantidSwarmTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever {this} attacks, ";
-
     public XantidSwarmTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
     }
@@ -84,8 +82,8 @@ class XantidSwarmTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever {this} attacks, " ;
     }
 }
 

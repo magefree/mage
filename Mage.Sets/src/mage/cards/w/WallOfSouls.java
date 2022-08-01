@@ -50,8 +50,6 @@ public final class WallOfSouls extends CardImpl {
 
 class WallOfSoulsTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever {this} is dealt combat damage, ";
-
     public WallOfSoulsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(SavedDamageValue.MUCH, "it"));
     }
@@ -80,7 +78,7 @@ class WallOfSoulsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever {this} is dealt combat damage, " ;
     }
 }

@@ -63,8 +63,6 @@ public final class Detritivore extends CardImpl {
 
 class DetritivoreTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever a time counter is removed from {this} while it's exiled, ";
-
     public DetritivoreTriggeredAbility() {
         super(Zone.EXILED, new DestroyTargetEffect(), false);
         this.addTarget(new TargetNonBasicLandPermanent());
@@ -90,9 +88,10 @@ class DetritivoreTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever a time counter is removed from {this} while it's exiled, " ;
     }
+
 }
 
 class NonBasicLandsInOpponentsGraveyards implements DynamicValue {

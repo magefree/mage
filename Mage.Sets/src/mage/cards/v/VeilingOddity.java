@@ -50,8 +50,6 @@ public final class VeilingOddity extends CardImpl {
 
 class VeilingOddityTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "When the last time counter is removed from {this} while it's exiled, ";
-
     public VeilingOddityTriggeredAbility() {
         super(Zone.EXILED, new CantBeBlockedAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES, Duration.EndOfTurn), false);
     }
@@ -71,8 +69,8 @@ class VeilingOddityTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "When the last time counter is removed from {this} while it's exiled, " ;
     }
 
     @Override

@@ -49,8 +49,6 @@ public final class FathomMage extends CardImpl {
 
 class FathomMageTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever a +1/+1 counter is put on {this}, ";
-
     public FathomMageTriggeredAbility() {
         super(Zone.ALL, new DrawCardSourceControllerEffect(1), true);
     }
@@ -75,7 +73,7 @@ class FathomMageTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever a +1/+1 counter is put on {this}, " ;
     }
 }

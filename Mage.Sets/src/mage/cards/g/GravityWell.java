@@ -41,8 +41,6 @@ public final class GravityWell extends CardImpl {
 
 class GravityWellTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever a creature with flying attacks, ";
-
     public GravityWellTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GravityWellEffect());
     }
@@ -69,8 +67,8 @@ class GravityWellTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever a creature with flying attacks, " ;
     }
 
     @Override

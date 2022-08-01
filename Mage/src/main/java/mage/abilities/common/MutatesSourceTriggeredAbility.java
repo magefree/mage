@@ -41,7 +41,7 @@ public class MutatesSourceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
+    public String getTriggerPhrase() {
         return "Whenever this creature mutates, " ;
     }
 }

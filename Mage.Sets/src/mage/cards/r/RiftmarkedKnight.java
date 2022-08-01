@@ -58,8 +58,6 @@ public final class RiftmarkedKnight extends CardImpl {
 
 class RiftmarkedKnightTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "When the last time counter is removed from {this} while it's exiled, ";
-
     public RiftmarkedKnightTriggeredAbility() {
         super(Zone.EXILED, new CreateTokenEffect(new RiftmarkedKnightToken()), false);
     }
@@ -79,8 +77,8 @@ class RiftmarkedKnightTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "When the last time counter is removed from {this} while it's exiled, " ;
     }
 
     @Override

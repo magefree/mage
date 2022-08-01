@@ -57,8 +57,6 @@ public final class SavraQueenOfTheGolgari extends CardImpl {
 
 class SavraSacrificeBlackCreatureAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever you sacrifice a black creature, ";
-
     public SavraSacrificeBlackCreatureAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new SavraSacrificeEffect(), new PayLifeCost(2)));
         this.setLeavesTheBattlefieldTrigger(true);
@@ -86,8 +84,8 @@ class SavraSacrificeBlackCreatureAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever you sacrifice a black creature, " ;
     }
 }
 
@@ -137,8 +135,6 @@ class SavraSacrificeEffect extends OneShotEffect {
 
 class SavraSacrificeGreenCreatureAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever you sacrifice a green creature, ";
-
     public SavraSacrificeGreenCreatureAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(2));
     }
@@ -165,7 +161,7 @@ class SavraSacrificeGreenCreatureAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever you sacrifice a green creature, " ;
     }
 }

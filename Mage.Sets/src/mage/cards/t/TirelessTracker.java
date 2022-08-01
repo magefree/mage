@@ -57,8 +57,6 @@ public final class TirelessTracker extends CardImpl {
 
 class TirelessTrackerTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever you sacrifice a Clue, ";
-
     public TirelessTrackerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
         setLeavesTheBattlefieldTrigger(true);
@@ -85,7 +83,7 @@ class TirelessTrackerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever you sacrifice a Clue, " ;
     }
 }

@@ -64,8 +64,6 @@ public final class VoltaicVisionary extends CardImpl {
 
 class VoltaicVisionaryTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "When you play a card exiled with {this}, ";
-
     VoltaicVisionaryTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TransformSourceEffect());
         this.addWatcher(new VoltaicVisionaryWatcher());
@@ -99,8 +97,8 @@ class VoltaicVisionaryTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "When you play a card exiled with {this}, ";
     }
 }
 

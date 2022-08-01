@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
@@ -56,12 +55,12 @@ public final class FiveAlarmFire extends CardImpl {
 
 class FiveAlarmFireTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever a creature you control deals combat damage, ";
-
     // Because a creature that is blocked by multiple creatures it deals damage to, only causes to add one counter to ,
     // it's neccessary to remember which creature already triggered
     Set<UUID> triggeringCreatures = new HashSet<>();
 
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+    
     public FiveAlarmFireTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.BLAZE.createInstance()), false);
     }
@@ -89,7 +88,7 @@ class FiveAlarmFireTriggeredAbility extends TriggeredAbilityImpl {
                 || event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
             if (((DamagedEvent) event).isCombatDamage() && !triggeringCreatures.contains(event.getSourceId())) {
                 Permanent permanent = game.getPermanent(event.getSourceId());
-                if (permanent != null && StaticFilters.FILTER_CONTROLLED_A_CREATURE.match(permanent, controllerId, this, game)) {
+                if (permanent != null && filter.match(permanent, controllerId, this, game)) {
                     triggeringCreatures.add(event.getSourceId());
                     return true;
                 }
@@ -103,7 +102,8 @@ class FiveAlarmFireTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-            return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+            return "Whenever a creature you control deals combat damage, " ;
     }
+
 }

@@ -42,8 +42,6 @@ public final class KnowledgeAndPower extends CardImpl {
 
 class ScryTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever you scry, ";
-
     public ScryTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new DamageTargetEffect(2), new GenericManaCost(2)), false);
         this.addTarget(new TargetAnyTarget());
@@ -69,7 +67,7 @@ class ScryTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever you scry, " ;
     }
 }

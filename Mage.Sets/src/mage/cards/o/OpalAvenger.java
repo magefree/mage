@@ -39,8 +39,6 @@ public final class OpalAvenger extends CardImpl {
 
 class OpalAvengerStateTriggeredAbility extends StateTriggeredAbility {
 
-    private static final String staticTriggerPhrase = "When you have 10 or less life, if {this} is an enchantment, " ;
-
     public OpalAvengerStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new OpalAvengerToken(), "", Duration.Custom, true, false));
     }
@@ -97,8 +95,8 @@ class OpalAvengerStateTriggeredAbility extends StateTriggeredAbility {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "When you have 10 or less life, if {this} is an enchantment, " ;
     }
 
 }

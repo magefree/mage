@@ -49,8 +49,6 @@ public final class MassacreWurm extends CardImpl {
 
 class MassacreWurmTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever a creature an opponent controls dies, ";
-
     MassacreWurmTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2));
     }
@@ -84,7 +82,7 @@ class MassacreWurmTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever a creature an opponent controls dies, " ;
     }
 }

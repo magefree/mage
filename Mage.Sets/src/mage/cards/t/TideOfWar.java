@@ -46,8 +46,6 @@ public final class TideOfWar extends CardImpl {
 
 class BlocksTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever one or more creatures block, ";
-
     public BlocksTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
     }
@@ -72,8 +70,8 @@ class BlocksTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever one or more creatures block, " ;
     }
 
     @Override

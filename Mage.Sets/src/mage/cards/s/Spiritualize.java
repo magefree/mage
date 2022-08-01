@@ -47,8 +47,6 @@ public final class Spiritualize extends CardImpl {
 
 class SpiritualizeTriggeredAbility extends DelayedTriggeredAbility {
 
-    private static final String staticTriggerPhrase = "Whenever target creature deals damage, ";
-
     public SpiritualizeTriggeredAbility() {
         super(new GainLifeEffect(SavedDamageValue.MUCH), Duration.EndOfTurn, false);
     }
@@ -81,7 +79,7 @@ class SpiritualizeTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever target creature deals damage, " ;
     }
 }

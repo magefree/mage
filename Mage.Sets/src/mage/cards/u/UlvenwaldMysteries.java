@@ -56,8 +56,6 @@ public final class UlvenwaldMysteries extends CardImpl {
 
 class UlvenwaldMysteriesTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever you sacrifice a Clue, ";
-
     public UlvenwaldMysteriesTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new HumanSoldierToken()));
         setLeavesTheBattlefieldTrigger(true);
@@ -84,7 +82,7 @@ class UlvenwaldMysteriesTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever you sacrifice a Clue, " ;
     }
 }

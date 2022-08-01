@@ -53,8 +53,6 @@ public final class MazirekKraulDeathPriest extends CardImpl {
 
 class PlayerSacrificesPermanentTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever a player sacrifices another permanent, ";
-
     public PlayerSacrificesPermanentTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
     }
@@ -75,8 +73,8 @@ class PlayerSacrificesPermanentTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever a player sacrifices another permanent, " ;
     }
 
     @Override

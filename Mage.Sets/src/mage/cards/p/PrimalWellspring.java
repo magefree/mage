@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -51,7 +50,7 @@ public final class PrimalWellspring extends CardImpl {
 
 class PyrimalWellspringTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "When that mana is used to cast an instant or sorcery spell, ";
+    private static final FilterInstantOrSorcerySpell filter = new FilterInstantOrSorcerySpell();
 
     String abilityOriginalId;
 
@@ -79,7 +78,7 @@ class PyrimalWellspringTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getData().equals(abilityOriginalId)) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY.match(spell, getControllerId(), this, game)) {
+            if (spell != null && filter.match(spell, getControllerId(), this, game)) {
                 for (Effect effect : getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                 }
@@ -90,7 +89,7 @@ class PyrimalWellspringTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "When that mana is used to cast an instant or sorcery spell, " ;
     }
 }

@@ -63,8 +63,6 @@ public final class UlamogTheCeaselessHunger extends CardImpl {
 
 class UlamogExilePermanentsOnCastAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "When you cast this spell, ";
-
     UlamogExilePermanentsOnCastAbility() {
         super(Zone.STACK, new ExileTargetEffect("exile two target permanents"));
         this.addTarget(new TargetPermanent(2, new FilterPermanent()));
@@ -91,14 +89,12 @@ class UlamogExilePermanentsOnCastAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "When you cast this spell, " ;
     }
 }
 
 class UlamogAttackTriggeredAbility extends TriggeredAbilityImpl {
-
-    private static final String staticTriggerPhrase = "Whenever {this} attacks, ";
 
     public UlamogAttackTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
@@ -132,8 +128,8 @@ class UlamogAttackTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever {this} attacks, " ;
     }
 }
 

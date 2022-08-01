@@ -61,8 +61,6 @@ public final class GlintHornBuccaneer extends CardImpl {
 
 class GlintHornBuccaneerTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever you discard a card, ";
-
     GlintHornBuccaneerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamagePlayersEffect(1, TargetController.OPPONENT), false);
     }
@@ -88,7 +86,7 @@ class GlintHornBuccaneerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever you discard a card, " ;
     }
 }

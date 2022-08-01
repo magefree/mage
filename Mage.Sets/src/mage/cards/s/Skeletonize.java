@@ -73,8 +73,6 @@ class SkeletonizeEffect extends OneShotEffect {
 
 class SkeletonizeDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    private static final String staticTriggerPhrase = "When a creature dealt damage this way dies this turn, ";
-
     public SkeletonizeDelayedTriggeredAbility() {
         super(new CreateTokenEffect(new SkeletonRegenerateToken()), Duration.EndOfTurn);
     }
@@ -106,7 +104,7 @@ class SkeletonizeDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "When a creature dealt damage this way dies this turn, " ;
     }
 }

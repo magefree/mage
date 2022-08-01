@@ -59,7 +59,6 @@ public final class AAT1 extends CardImpl {
 
         public AAT1TriggeredAbility(Effect effect) {
             super(Zone.BATTLEFIELD, effect);
-            setTriggerPhrase("Whenever a repair counter is removed from a creature card in your graveyard ");
         }
 
         public AAT1TriggeredAbility(AAT1TriggeredAbility ability) {
@@ -82,6 +81,11 @@ public final class AAT1 extends CardImpl {
                 return true;
             }
             return false;
+        }
+
+        @Override
+        public String getTriggerPhrase() {
+            return "Whenever a repair counter is removed from a creature card in your graveyard " ;
         }
 
         @Override

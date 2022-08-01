@@ -43,8 +43,6 @@ public final class TotalWar extends CardImpl {
 
 class TotalWarTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever a player attacks with one or more creatures, ";
-
     public TotalWarTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TotalWarDestroyEffect());
     }
@@ -69,8 +67,8 @@ class TotalWarTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever a player attacks with one or more creatures, " ;
     }
 }
 

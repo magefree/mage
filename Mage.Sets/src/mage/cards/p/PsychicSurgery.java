@@ -46,8 +46,6 @@ public final class PsychicSurgery extends CardImpl {
 
 class PsychicSurgeryTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever an opponent shuffles their library, ";
-
     public PsychicSurgeryTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PsychicSurgeryEffect(), true);
     }
@@ -76,8 +74,8 @@ class PsychicSurgeryTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever an opponent shuffles their library, " ;
     }
 }
 

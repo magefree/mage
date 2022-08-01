@@ -65,8 +65,6 @@ public final class FleshCarver extends CardImpl {
 
 class FleshCarverAbility extends DiesSourceTriggeredAbility {
 
-    private static final String staticTriggerPhrase = "When Flesh Carver dies, ";
-
     public FleshCarverAbility() {
         super(new FleshCarverEffect(), false);
     }
@@ -95,8 +93,8 @@ class FleshCarverAbility extends DiesSourceTriggeredAbility {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "When Flesh Carver dies, " ;
     }
 }
 

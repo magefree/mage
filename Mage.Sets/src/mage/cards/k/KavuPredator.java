@@ -50,8 +50,6 @@ public final class KavuPredator extends CardImpl {
 
 class KavuPredatorTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever an opponent gains life, " ;
-
     public KavuPredatorTriggeredAbility() {
         super(Zone.BATTLEFIELD, new KavuPredatorEffect());
     }
@@ -80,8 +78,8 @@ class KavuPredatorTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever an opponent gains life, " ;
     }
 }
 

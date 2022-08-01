@@ -47,8 +47,6 @@ public final class Tamanoa extends CardImpl {
 
 class TamanoaDealsDamageTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever a noncreature source you control deals damage, ";
-
     public TamanoaDealsDamageTriggeredAbility(Zone zone, Effect effect, boolean optional) {
         super(zone, effect, optional);
     }
@@ -83,7 +81,7 @@ class TamanoaDealsDamageTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever a noncreature source you control deals damage, " ;
     }
 }

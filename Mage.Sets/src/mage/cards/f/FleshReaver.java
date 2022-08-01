@@ -44,8 +44,6 @@ public final class FleshReaver extends CardImpl {
 
 class FleshReaverTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever {this} deals damage to a creature or opponent, ";
-
     FleshReaverTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageControllerEffect(SavedDamageValue.MUCH));
     }
@@ -80,7 +78,7 @@ class FleshReaverTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever {this} deals damage to a creature or opponent, ";
     }
 }

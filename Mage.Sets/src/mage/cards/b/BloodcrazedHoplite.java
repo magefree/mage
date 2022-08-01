@@ -52,8 +52,6 @@ public final class BloodcrazedHoplite extends CardImpl {
 
 class BloodcrazedHopliteTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever a +1/+1 counter is put on {this}, ";
-
     public BloodcrazedHopliteTriggeredAbility() {
         super(Zone.ALL, new RemoveCounterTargetEffect(CounterType.P1P1.createInstance()), false);
     }
@@ -78,7 +76,7 @@ class BloodcrazedHopliteTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever a +1/+1 counter is put on {this}, " ;
     }
 }

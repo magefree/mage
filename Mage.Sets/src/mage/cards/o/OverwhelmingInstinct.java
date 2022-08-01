@@ -35,3 +35,34 @@ public final class OverwhelmingInstinct extends CardImpl {
         return new OverwhelmingInstinct(this);
     }
 }
+
+class OverwhelmingInstinctTriggeredAbility extends TriggeredAbilityImpl {
+
+    public OverwhelmingInstinctTriggeredAbility(Effect effect) {
+        super(Zone.BATTLEFIELD, effect);
+    }
+
+    public OverwhelmingInstinctTriggeredAbility(final OverwhelmingInstinctTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public OverwhelmingInstinctTriggeredAbility copy() {
+        return new OverwhelmingInstinctTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DECLARED_ATTACKERS;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return game.getCombat().getAttackers().size() >= 3 && game.getCombat().getAttackingPlayerId().equals(getControllerId());
+    }
+
+    @Override
+    public String getTriggerPhrase() {
+        return "Whenever you attack with three or more creatures, " ;
+    }
+}

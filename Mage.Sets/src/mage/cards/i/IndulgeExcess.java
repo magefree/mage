@@ -64,8 +64,6 @@ public final class IndulgeExcess extends SplitCard {
 
 class IndulgeTriggeredAbility extends DelayedTriggeredAbility {
 
-    private static final String staticTriggerPhrase = "Whenever a creature you control attacks this turn, ";
-
     IndulgeTriggeredAbility() {
         super(new CreateTokenEffect(
                 new CitizenGreenWhiteToken(), 1, true, true
@@ -92,8 +90,8 @@ class IndulgeTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever a creature you control attacks this turn, ";
     }
 }
 

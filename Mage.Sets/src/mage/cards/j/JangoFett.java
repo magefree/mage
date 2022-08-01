@@ -62,14 +62,20 @@ public final class JangoFett extends CardImpl {
 
 class JangoFettTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever {this} attacks, ";
+    protected String text;
 
     public JangoFettTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
     }
 
+    public JangoFettTriggeredAbility(Effect effect, boolean optional, String text) {
+        super(Zone.BATTLEFIELD, effect, optional);
+        this.text = text;
+    }
+
     public JangoFettTriggeredAbility(final JangoFettTriggeredAbility ability) {
         super(ability);
+        this.text = ability.text;
     }
 
     @Override
@@ -79,17 +85,18 @@ class JangoFettTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getSourceId().equals(this.getSourceId())) {
-            return false;
+        if (event.getSourceId().equals(this.getSourceId())) {
+            UUID defenderId = game.getCombat().getDefendingPlayerId(getSourceId(), game);
+            if (defenderId != null) {
+                return true;
+            }
         }
-
-        UUID defenderId = game.getCombat().getDefendingPlayerId(getSourceId(), game);
-        return defenderId != null;
+        return false;
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever {this} attacks, ";
     }
 
     @Override

@@ -38,7 +38,6 @@ public final class HiddenPredators extends CardImpl {
 
 class HiddenPredatorsStateTriggeredAbility extends StateTriggeredAbility {
 
-    private static final String staticTriggerPhrase = "When an opponent controls a creature with 4 or greater power, if {this} is an enchantment, ";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
@@ -99,8 +98,8 @@ class HiddenPredatorsStateTriggeredAbility extends StateTriggeredAbility {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "When an opponent controls a creature with 4 or greater power, if {this} is an enchantment, " ;
     }
 
 }

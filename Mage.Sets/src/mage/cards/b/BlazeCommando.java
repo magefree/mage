@@ -57,7 +57,6 @@ class BlazeCommandoTriggeredAbility extends TriggeredAbilityImpl {
 
     public BlazeCommandoTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new SoldierTokenWithHaste(), 2), false);
-        setTriggerPhrase("Whenever an instant or sorcery spell you control deals damage, ");
     }
 
     public BlazeCommandoTriggeredAbility(final BlazeCommandoTriggeredAbility ability) {
@@ -102,5 +101,10 @@ class BlazeCommandoTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
+    }
+
+    @Override
+    public String getTriggerPhrase() {
+        return "Whenever an instant or sorcery spell you control deals damage, " ;
     }
 }

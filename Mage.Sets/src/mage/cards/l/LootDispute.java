@@ -51,8 +51,6 @@ public final class LootDispute extends CardImpl {
 
 class LootDisputeTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever you attack a player who has the initiative, ";
-
     LootDisputeTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new TreasureToken()));
     }
@@ -77,7 +75,7 @@ class LootDisputeTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever you attack a player who has the initiative, ";
     }
 }

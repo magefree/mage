@@ -28,6 +28,12 @@ import mage.game.permanent.Permanent;
  */
 public final class RashkaTheSlayer extends CardImpl {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("black creature");
+
+    static {
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
+    }
+
     public RashkaTheSlayer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.addSuperType(SuperType.LEGENDARY);
@@ -40,7 +46,7 @@ public final class RashkaTheSlayer extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // Whenever Rashka the Slayer blocks one or more black creatures, Rashka gets +1/+2 until end of turn.
-        this.addAbility(new RashkaTheSlayerTriggeredAbility(new BoostSourceEffect(1, 2, Duration.EndOfTurn)));
+        this.addAbility(new RashkaTheSlayerTriggeredAbility(new BoostSourceEffect(1, 2, Duration.EndOfTurn), filter, false));
     }
 
     private RashkaTheSlayer(final RashkaTheSlayer card) {
@@ -55,19 +61,16 @@ public final class RashkaTheSlayer extends CardImpl {
 
 class RashkaTheSlayerTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever {this} blocks a black creature, " ;
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("black creature");
+    protected FilterPermanent filter;
 
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
-    }
-
-    public RashkaTheSlayerTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect, false);
+    public RashkaTheSlayerTriggeredAbility(Effect effect, FilterPermanent filter, boolean optional) {
+        super(Zone.BATTLEFIELD, effect, optional);
+        this.filter = filter;
     }
 
     public RashkaTheSlayerTriggeredAbility(final RashkaTheSlayerTriggeredAbility ability) {
         super(ability);
+        this.filter = ability.filter;
     }
 
     @Override
@@ -87,8 +90,8 @@ class RashkaTheSlayerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever {this} blocks a " + filter.getMessage() + ", " ;
     }
 
     @Override

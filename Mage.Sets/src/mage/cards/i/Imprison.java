@@ -65,8 +65,6 @@ public final class Imprison extends CardImpl {
 
 class ImprisonTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever a player activates an ability of enchanted creature with {T} in its activation cost that isn't a mana ability, ";
-
     ImprisonTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new CounterTargetEffect().setText("counter that ability"), new DestroySourceEffect(), new ManaCostsImpl<>("{1}")));
     }
@@ -105,8 +103,8 @@ class ImprisonTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever a player activates an ability of enchanted creature with {T} in its activation cost that isn't a mana ability, " ;
     }
 }
 

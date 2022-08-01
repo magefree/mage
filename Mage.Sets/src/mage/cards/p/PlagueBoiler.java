@@ -86,8 +86,6 @@ class PlagueBoilerEffect extends OneShotEffect {
 
 class PlagueBoilerTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "When {this} has three or more plague counters on it, ";
-
     public PlagueBoilerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PlagueBoilerSacrificeDestroyEffect(), false);
     }
@@ -118,8 +116,8 @@ class PlagueBoilerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "When {this} has three or more plague counters on it, " ;
     }
 }
 

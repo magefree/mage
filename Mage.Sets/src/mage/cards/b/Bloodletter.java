@@ -48,8 +48,6 @@ public final class Bloodletter extends CardImpl {
 
 class BloodletterStateTriggeredAbility extends StateTriggeredAbility {
 
-    private static final String staticTriggerPhrase = "When the names of three or more nonland permanents begin with the same letter, ";
-
     public BloodletterStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BloodletterEffect());
     }
@@ -80,8 +78,8 @@ class BloodletterStateTriggeredAbility extends StateTriggeredAbility {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase ;
+    public String getTriggerPhrase() {
+        return "When the names of three or more nonland permanents begin with the same letter, " ;
     }
 }
 

@@ -46,7 +46,6 @@ public final class CeaselessSearblades extends CardImpl {
 
 class CeaselessSearbladesTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever you activate an ability of an Elemental, ";
     private static final FilterCard filter = new FilterCard("an Elemental");
 
     static {
@@ -86,7 +85,7 @@ class CeaselessSearbladesTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever you activate an ability of an Elemental, ";
     }
 }

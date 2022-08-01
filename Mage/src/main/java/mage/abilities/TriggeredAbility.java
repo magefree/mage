@@ -58,16 +58,7 @@ public interface TriggeredAbility extends Ability {
 
     GameEvent getTriggerEvent();
 
-    /**
-     * If the trigger phrase for the ability never changes, store it in a `private static final String` in the
-     * ability class and return it with this method.
-     * <p>
-     * If the trigger phrase DOES change (e.g. the ability takes a filter as input) then set the value using
-     * {@link TriggeredAbility#setTriggerPhrase(String)}
-     *
-     * @return
-     */
-    String getStaticTriggerPhrase();
+    String getTriggerPhrase();
 
     TriggeredAbility setTriggerPhrase(String triggerPhrase);
 }

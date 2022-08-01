@@ -50,8 +50,6 @@ public final class NefariousImp extends CardImpl {
 
 class NefariousImpTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever one or more permanents you control leave the battlefield, ";
-
     NefariousImpTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ScryEffect(1));
     }
@@ -86,7 +84,7 @@ class NefariousImpTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever one or more permanents you control leave the battlefield, ";
     }
 }

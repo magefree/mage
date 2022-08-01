@@ -54,8 +54,6 @@ public final class CurseOfChaos extends CardImpl {
 
 class CurseOfChaosTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever a player attacks enchanted player with one or more creatures, ";
-
     public CurseOfChaosTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CurseOfChaosEffect(), false); // false because handled in effect
     }
@@ -84,8 +82,8 @@ class CurseOfChaosTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever a player attacks enchanted player with one or more creatures, " ;
     }
 
     @Override

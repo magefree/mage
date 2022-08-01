@@ -121,7 +121,6 @@ class AthreosDiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
     AthreosDiesCreatureTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
-        setTriggerPhrase("Whenever " + filter.getMessage() + " dies, ");
     }
 
     private AthreosDiesCreatureTriggeredAbility(AthreosDiesCreatureTriggeredAbility ability) {
@@ -152,5 +151,10 @@ class AthreosDiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
             effect.setValue("creatureId", event.getTargetId());
         }
         return true;
+    }
+
+    @Override
+    public String getTriggerPhrase() {
+        return "Whenever " + filter.getMessage() + " dies, " ;
     }
 }

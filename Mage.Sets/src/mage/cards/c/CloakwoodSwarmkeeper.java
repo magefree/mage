@@ -46,8 +46,6 @@ public final class CloakwoodSwarmkeeper extends CardImpl {
 
 class CloakwoodSwarmkeeperTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever one or more tokens enter the battlefield under your control, ";
-
     CloakwoodSwarmkeeperTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
         this.withFlavorWord("Gathered Swarm");
@@ -81,7 +79,7 @@ class CloakwoodSwarmkeeperTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever one or more tokens enter the battlefield under your control, ";
     }
 }

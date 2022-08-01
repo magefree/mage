@@ -61,8 +61,6 @@ public final class FungalBehemoth extends CardImpl {
 
 class FungalBehemothTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever a time counter is removed from {this} while it's exiled, ";
-
     public FungalBehemothTriggeredAbility() {
         super(Zone.EXILED, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), true);
         addTarget(new TargetCreaturePermanent());
@@ -88,9 +86,10 @@ class FungalBehemothTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever a time counter is removed from {this} while it's exiled, " ;
     }
+
 }
 
 class P1P1CountersOnControlledCreaturesCount implements DynamicValue {

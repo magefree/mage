@@ -44,8 +44,6 @@ public final class DesolationTwin extends CardImpl {
 
 class DesolationTwinOnCastAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "When you cast this spell, ";
-
     DesolationTwinOnCastAbility() {
         super(Zone.STACK, new CreateTokenEffect(new EldraziToken()));
     }
@@ -71,7 +69,7 @@ class DesolationTwinOnCastAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "When you cast this spell, " ;
     }
 }

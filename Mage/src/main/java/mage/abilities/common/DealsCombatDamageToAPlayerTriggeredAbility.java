@@ -100,7 +100,7 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
 
     // TODO: This class needs refactoring to specify onlyOppontns and OrPLaneswalkers in constructor
     @Override
-    public String getStaticTriggerPhrase() {
+    public String getTriggerPhrase() {
         return "Whenever {this} deals combat damage to "
                 + (onlyOpponents ? "an opponent" : "a player")
                 + (orPlaneswalker ? " or planeswalker" : "")

@@ -57,7 +57,6 @@ public final class EfreetWeaponmaster extends CardImpl {
 
 class EfreetWeaponmasterAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "When {this} enters the battlefield or is turned face up, ";
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target creature you control");
 
     static {
@@ -99,7 +98,8 @@ class EfreetWeaponmasterAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "When {this} enters the battlefield or is turned face up, " ;
     }
+
 }

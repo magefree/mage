@@ -55,8 +55,6 @@ public final class KnightsOfTheBlackRose extends CardImpl {
 
 class KnightsOfTheBlackRoseTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever an opponent becomes the monarch, if you were the monarch as the turn began, ";
-
     public KnightsOfTheBlackRoseTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
     }
@@ -88,8 +86,8 @@ class KnightsOfTheBlackRoseTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever an opponent becomes the monarch, if you were the monarch as the turn began, ";
     }
 
     @Override
@@ -105,6 +103,7 @@ class KnightsOfTheBlackRoseWatcher extends Watcher {
     public KnightsOfTheBlackRoseWatcher() {
         super(WatcherScope.GAME);
     }
+
 
     @Override
     public void watch(GameEvent event, Game game) {

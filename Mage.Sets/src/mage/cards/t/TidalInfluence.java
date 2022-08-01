@@ -111,9 +111,8 @@ class TidalInfluenceCost extends CostImpl {
     }
 }
 
-class TidalInfluenceTriggeredAbility extends StateTriggeredAbility {
 
-    private static final String staticTriggerPhrase = "Whenever there are four tide counters on {this}, ";
+class TidalInfluenceTriggeredAbility extends StateTriggeredAbility {
 
     public TidalInfluenceTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
@@ -134,8 +133,8 @@ class TidalInfluenceTriggeredAbility extends StateTriggeredAbility {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever there are four tide counters on {this}, " ;
     }
 
 }

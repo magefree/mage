@@ -44,8 +44,6 @@ public final class InvokePrejudice extends CardImpl {
 
 class InvokePrejudiceTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever an opponent casts a creature spell that doesn't share a color with a creature you control, ";
-
     public InvokePrejudiceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new InvokePrejudiceEffect(), false);
     }
@@ -89,8 +87,8 @@ class InvokePrejudiceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever an opponent casts a creature spell that doesn't share a color with a creature you control, " ;
     }
 }
 

@@ -62,7 +62,6 @@ class BridgeFromBelowAbility extends TriggeredAbilityImpl {
     public BridgeFromBelowAbility(Effect effect, FilterCreaturePermanent filter) {
         super(Zone.GRAVEYARD, effect, false);
         this.filter = filter;
-        setTriggerPhrase(filter.getMessage() + ", if {this} is in your graveyard, ");
     }
 
     public BridgeFromBelowAbility(BridgeFromBelowAbility ability) {
@@ -96,5 +95,10 @@ class BridgeFromBelowAbility extends TriggeredAbilityImpl {
         Player controller = game.getPlayer(this.getControllerId());
         return controller != null
                 && controller.getGraveyard().contains(this.getSourceId());
+    }
+
+    @Override
+    public String getTriggerPhrase() {
+        return filter.getMessage() + ", if {this} is in your graveyard, " ;
     }
 }

@@ -55,8 +55,6 @@ public final class BreathOfFury extends CardImpl {
 
 class BreathOfFuryAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "When enchanted creature deals combat damage to a player, " ;
-
     public BreathOfFuryAbility() {
         super(Zone.BATTLEFIELD, new BreathOfFuryEffect());
     }
@@ -94,8 +92,8 @@ class BreathOfFuryAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "When enchanted creature deals combat damage to a player, " ;
     }
 }
 

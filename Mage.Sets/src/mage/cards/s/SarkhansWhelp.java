@@ -48,7 +48,6 @@ public final class SarkhansWhelp extends CardImpl {
 
 class SarkhansWhelpTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever you activate an ability of a Sarkhan planeswalker, ";
     private static final FilterControlledPlaneswalkerPermanent filter
             = new FilterControlledPlaneswalkerPermanent(
                     SubType.SARKHAN,
@@ -83,7 +82,7 @@ class SarkhansWhelpTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever you activate an ability of a Sarkhan planeswalker, " ;
     }
 }

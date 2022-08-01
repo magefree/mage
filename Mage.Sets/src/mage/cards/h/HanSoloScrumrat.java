@@ -65,8 +65,6 @@ public final class HanSoloScrumrat extends CardImpl {
 
 class HanSoloScrumratTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever {this} creature deals damage during your turn, ";
-
     public HanSoloScrumratTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false);
     }
@@ -95,7 +93,7 @@ class HanSoloScrumratTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever {this} creature deals damage during your turn, " ;
     }
 }

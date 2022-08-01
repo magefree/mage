@@ -47,8 +47,6 @@ public final class BronzeBombshell extends CardImpl {
 
 class LoseControlTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "When a player other than {this}'s owner controls it, ";
-
     public LoseControlTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
     }
@@ -80,8 +78,8 @@ class LoseControlTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "When a player other than {this}'s owner controls it, " ;
     }
 }
 

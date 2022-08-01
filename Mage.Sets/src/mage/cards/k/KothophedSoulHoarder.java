@@ -69,8 +69,6 @@ public final class KothophedSoulHoarder extends CardImpl {
 
 class KothophedSoulHoarderTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever a creature leaves an opponent's graveyard, ";
-
     public KothophedSoulHoarderTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
     }
@@ -101,7 +99,7 @@ class KothophedSoulHoarderTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever a creature leaves an opponent's graveyard, " ;
     }
 }

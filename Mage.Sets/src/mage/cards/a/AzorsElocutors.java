@@ -52,7 +52,6 @@ class AzorsElocutorsTriggeredAbility extends TriggeredAbilityImpl {
 
     public AzorsElocutorsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new RemoveCounterSourceEffect(CounterType.FILIBUSTER.createInstance()), false);
-        setTriggerPhrase("Whenever a source deals damage to you, ");
     }
 
     public AzorsElocutorsTriggeredAbility(final AzorsElocutorsTriggeredAbility ability) {
@@ -73,6 +72,12 @@ class AzorsElocutorsTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getTargetId().equals(this.controllerId);
     }
+
+    @Override
+    public String getTriggerPhrase() {
+        return "Whenever a source deals damage to you, " ;
+    }
+
 }
 
 class AzorsElocutorsEffect extends OneShotEffect {

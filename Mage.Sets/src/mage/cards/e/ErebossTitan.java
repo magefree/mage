@@ -62,8 +62,6 @@ public final class ErebossTitan extends CardImpl {
 
 class ErebossTitanTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever a creature card leaves an opponent's graveyard, ";
-
     public ErebossTitanTriggeredAbility() {
         super(Zone.GRAVEYARD, new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect(), new DiscardCardCost()));
     }
@@ -97,7 +95,7 @@ class ErebossTitanTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever a creature card leaves an opponent's graveyard, " ;
     }
 }

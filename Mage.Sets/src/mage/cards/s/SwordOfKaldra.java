@@ -46,8 +46,6 @@ public final class SwordOfKaldra extends CardImpl {
 
 class SwordOfKaldraTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever equipped creature deals damage to a creature, ";
-
     public SwordOfKaldraTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ExileTargetEffect("exile that creature. (Exile it only if it's still on the battlefield.)"), false);
     }
@@ -79,7 +77,8 @@ class SwordOfKaldraTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever equipped creature deals damage to a creature, ";
     }
+
 }

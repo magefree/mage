@@ -54,8 +54,6 @@ public final class GlyphOfLife extends CardImpl {
 
 class GlyphOfLifeTriggeredAbility extends DelayedTriggeredAbility {
 
-    private static final String staticTriggerPhrase = "Whenever that creature is dealt damage by an attacking creature this turn, ";
-
     public GlyphOfLifeTriggeredAbility() {
         super(new GlyphOfLifeGainLifeEffect(), Duration.EndOfTurn, false);
     }
@@ -88,8 +86,8 @@ class GlyphOfLifeTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever that creature is dealt damage by an attacking creature this turn, " ;
     }
 }
 

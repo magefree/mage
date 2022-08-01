@@ -44,8 +44,6 @@ public final class HighPriestOfPenance extends CardImpl {
 
 class HighPriestOfPenanceTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever {this} is dealt damage, ";
-
     public HighPriestOfPenanceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), true);
         this.addTarget(new TargetNonlandPermanent());
@@ -71,7 +69,8 @@ class HighPriestOfPenanceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever {this} is dealt damage, " ;
     }
+
 }

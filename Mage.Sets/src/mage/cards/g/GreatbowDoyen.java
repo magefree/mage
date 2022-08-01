@@ -56,8 +56,6 @@ public final class GreatbowDoyen extends CardImpl {
 
 class GreatbowDoyenTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever an Archer you control deals damage to a creature, ";
-
     public GreatbowDoyenTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GreatbowDoyenEffect());
     }
@@ -93,8 +91,8 @@ class GreatbowDoyenTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever an Archer you control deals damage to a creature, " ;
     }
 }
 

@@ -50,8 +50,6 @@ public final class RuthlessDeathfang extends CardImpl {
 
 class RuthlessDeathfangTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever you sacrifice a creature, ";
-
     public RuthlessDeathfangTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "target opponent"), false);
         setLeavesTheBattlefieldTrigger(true);
@@ -78,7 +76,7 @@ class RuthlessDeathfangTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever you sacrifice a creature, " ;
     }
 }

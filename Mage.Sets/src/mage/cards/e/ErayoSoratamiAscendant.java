@@ -57,8 +57,6 @@ public final class ErayoSoratamiAscendant extends CardImpl {
 
 class ErayoSoratamiAscendantTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever the fourth spell of a turn is cast, ";
-
     public ErayoSoratamiAscendantTriggeredAbility() {
         super(Zone.BATTLEFIELD, getFlipEffect(), false);
     }
@@ -85,8 +83,8 @@ class ErayoSoratamiAscendantTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever the fourth spell of a turn is cast, " ;
     }
 
     @Override
@@ -120,8 +118,6 @@ class ErayosEssenceToken extends TokenImpl {
 
 class ErayosEssenceTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever an opponent casts a spell for the first time each turn, ";
-
     public ErayosEssenceTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
     }
@@ -150,8 +146,8 @@ class ErayosEssenceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever an opponent casts a spell for the first time each turn, " ;
     }
 
     @Override

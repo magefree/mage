@@ -67,8 +67,6 @@ public final class CircleOfConfinement extends CardImpl {
 
 class CircleOfConfinementTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever an opponent casts a Vampire spell with the same name as a card exiled with {this}, ";
-
     public CircleOfConfinementTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(2));
     }
@@ -106,7 +104,7 @@ class CircleOfConfinementTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever an opponent casts a Vampire spell with the same name as a card exiled with {this}, ";
     }
 }

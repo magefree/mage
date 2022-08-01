@@ -44,8 +44,6 @@ public final class GravePact extends CardImpl {
 
 class GravePactTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever a creature you control dies, ";
-
     public GravePactTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GravePactEffect());
     }
@@ -75,8 +73,8 @@ class GravePactTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever a creature you control dies, " ;
     }
 }
 

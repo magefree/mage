@@ -59,8 +59,6 @@ public final class InfiniteAuthority extends CardImpl {
 
 class InfiniteAuthorityTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever enchanted creature blocks or becomes blocked by a creature with toughness 3 or less, ";
-
     InfiniteAuthorityTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new InfiniteAuthorityEffect())));
     }
@@ -106,8 +104,8 @@ class InfiniteAuthorityTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever enchanted creature blocks or becomes blocked by a creature with toughness 3 or less, ";
     }
 }
 

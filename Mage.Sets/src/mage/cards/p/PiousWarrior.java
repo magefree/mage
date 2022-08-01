@@ -48,8 +48,6 @@ public final class PiousWarrior extends CardImpl {
 
 class PiousWarriorTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever {this} is dealt combat damage, ";
-
     public PiousWarriorTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PiousWarriorGainLifeEffect());
     }
@@ -78,10 +76,11 @@ class PiousWarriorTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever {this} is dealt combat damage, " ;
     }
 }
+
 
 class PiousWarriorGainLifeEffect extends OneShotEffect {
 

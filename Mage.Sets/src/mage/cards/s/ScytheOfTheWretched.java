@@ -61,8 +61,6 @@ public final class ScytheOfTheWretched extends CardImpl {
 
 class ScytheOfTheWretchedTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever a creature dealt damage by equipped creature this turn dies, ";
-
     public ScytheOfTheWretchedTriggeredAbility() {
         super(Zone.ALL, new ScytheOfTheWretchedReanimateEffect(), false);
     }
@@ -99,8 +97,8 @@ class ScytheOfTheWretchedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever a creature dealt damage by equipped creature this turn dies, " ;
     }
 
     private void setTarget(TargetPointer target) {

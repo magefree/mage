@@ -52,8 +52,6 @@ public final class FatalMutation extends CardImpl {
 
 class FatalMutationAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever enchanted creature is turned face up, ";
-
     public FatalMutationAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
     }
@@ -83,8 +81,9 @@ class FatalMutationAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever enchanted creature is turned face up, " ;
     }
+
 }
 

@@ -55,8 +55,6 @@ public final class ProsperTomeBound extends CardImpl {
 
 class ProsperTomeBoundTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever you play a card from exile, ";
-
     ProsperTomeBoundTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new TreasureToken()));
         this.flavorWord = "Pact Boon";
@@ -83,7 +81,7 @@ class ProsperTomeBoundTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever you play a card from exile, ";
     }
 }

@@ -56,8 +56,6 @@ public final class StuffyDoll extends CardImpl {
 
 class StuffyDollTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever {this} is dealt damage, ";
-
     public StuffyDollTriggeredAbility() {
         super(Zone.BATTLEFIELD, new StuffyDollGainLifeEffect());
     }
@@ -86,8 +84,8 @@ class StuffyDollTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever {this} is dealt damage, " ;
     }
 }
 

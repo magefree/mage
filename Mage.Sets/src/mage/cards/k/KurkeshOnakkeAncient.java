@@ -49,8 +49,6 @@ public final class KurkeshOnakkeAncient extends CardImpl {
 
 class KurkeshOnakkeAncientTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever you activate an ability of an artifact, if it isn't a mana ability";
-
     KurkeshOnakkeAncientTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new CopyStackAbilityEffect(), new GenericManaCost(1)));
     }
@@ -87,7 +85,7 @@ class KurkeshOnakkeAncientTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever you activate an ability of an artifact, if it isn't a mana ability" ;
     }
 }

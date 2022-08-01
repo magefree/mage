@@ -49,8 +49,6 @@ public final class GladehartCavalry extends CardImpl {
 
 class GladehartCavalryTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever a creature you control with a +1/+1 counter on it dies, ";
-
     public GladehartCavalryTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(2));
     }
@@ -85,7 +83,7 @@ class GladehartCavalryTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever a creature you control with a +1/+1 counter on it dies, " ;
     }
 }

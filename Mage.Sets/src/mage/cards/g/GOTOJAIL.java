@@ -90,8 +90,6 @@ class GoToJailExileEffect extends OneShotEffect {
 
 class GoToJailTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "At the beginning of the chosen player's upkeep, ";
-
     public GoToJailTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GoToJailUpkeepEffect(), false);
     }
@@ -116,8 +114,8 @@ class GoToJailTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "At the beginning of the chosen player's upkeep, " ;
     }
 }
 

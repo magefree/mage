@@ -49,7 +49,6 @@ public final class FeywildVisitor extends CardImpl {
 
 class FeywildVisitorAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever one or more nontoken creatures you control deal combat damage to a player, you ";
     private final List<UUID> damagedPlayerIds = new ArrayList<>();
 
     FeywildVisitorAbility() {
@@ -93,7 +92,7 @@ class FeywildVisitorAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever one or more nontoken creatures you control deal combat damage to a player, you ";
     }
 }

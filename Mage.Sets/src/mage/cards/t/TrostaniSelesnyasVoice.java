@@ -60,8 +60,6 @@ public final class TrostaniSelesnyasVoice extends CardImpl {
 
 class TrostaniSelesnyasVoiceTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever another creature enters the battlefield under your control, ";
-
     public TrostaniSelesnyasVoiceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TrostaniSelesnyasVoiceEffect(), false);
     }
@@ -92,8 +90,8 @@ class TrostaniSelesnyasVoiceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever another creature enters the battlefield under your control, " ;
     }
 
     @Override

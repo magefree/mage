@@ -61,7 +61,6 @@ public final class CapturedByTheConsulate extends CardImpl {
 
 class CapturedByTheConsulateTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever an opponent casts a spell, if it has a single target, ";
     /**
      * @param zone
      * @param effect
@@ -113,8 +112,8 @@ class CapturedByTheConsulateTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever an opponent casts a spell, if it has a single target, ";
     }
 
     @Override

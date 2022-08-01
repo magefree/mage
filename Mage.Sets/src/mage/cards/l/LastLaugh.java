@@ -50,8 +50,6 @@ public final class LastLaugh extends CardImpl {
 
 class LastLaughStateTriggeredAbility extends StateTriggeredAbility {
 
-    private static final String staticTriggerPhrase = "When no creatures are on the battlefield, ";
-
     public LastLaughStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
     }
@@ -71,7 +69,8 @@ class LastLaughStateTriggeredAbility extends StateTriggeredAbility {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "When no creatures are on the battlefield, " ;
     }
+
 }

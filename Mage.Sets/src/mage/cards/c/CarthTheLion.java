@@ -54,7 +54,6 @@ public final class CarthTheLion extends CardImpl {
 class CarthTheLionTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterPlaneswalkerCard filter = new FilterPlaneswalkerCard("a planeswalker card");
-    private static final String staticTriggerPhrase = "Whenever {this} enters the battlefield or a planeswalker you control dies, ";
 
     public CarthTheLionTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LookLibraryAndPickControllerEffect(
@@ -93,8 +92,8 @@ class CarthTheLionTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever {this} enters the battlefield or a planeswalker you control dies, " ;
     }
 }
 

@@ -48,8 +48,6 @@ public final class InfiltrationLens extends CardImpl {
 
 class EquippedBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever equipped creature becomes blocked by a creature, ";
-
     public EquippedBecomesBlockedTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
     }
@@ -76,8 +74,8 @@ class EquippedBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever equipped creature becomes blocked by a creature, " ;
     }
 
     @Override

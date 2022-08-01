@@ -34,8 +34,11 @@ public final class TalonOfPain extends CardImpl {
     public TalonOfPain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        // Whenever a source you control other than Talon of Pain deals damage to an opponent,
-        // put a charge counter on Talon of Pain.
+
+        /*
+         * Whenever a source you control other than Talon of Pain deals damage to an opponent,
+         * put a charge counter on Talon of Pain.
+         */
         this.addAbility(new TalonOfPainTriggeredAbility());
 
         // {X}, {T}, Remove X charge counters from Talon of Pain: Talon of Pain deals X damage to any target.
@@ -44,6 +47,7 @@ public final class TalonOfPain extends CardImpl {
         ability.addCost(new TalonOfPainRemoveVariableCountersSourceCost(CounterType.CHARGE.createInstance()));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
+
     }
 
     private TalonOfPain(final TalonOfPain card) {
@@ -54,51 +58,49 @@ public final class TalonOfPain extends CardImpl {
     public TalonOfPain copy() {
         return new TalonOfPain(this);
     }
-}
 
-class TalonOfPainTriggeredAbility extends TriggeredAbilityImpl {
+    private class TalonOfPainTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever a source you control other than {this} deals damage to an opponent, ";
+        public TalonOfPainTriggeredAbility() {
+            super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()));
+        }
 
-    public TalonOfPainTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()));
-    }
+        public TalonOfPainTriggeredAbility(final TalonOfPainTriggeredAbility ability) {
+            super(ability);
+        }
 
-    public TalonOfPainTriggeredAbility(final TalonOfPainTriggeredAbility ability) {
-        super(ability);
-    }
+        @Override
+        public TalonOfPainTriggeredAbility copy() {
+            return new TalonOfPainTriggeredAbility(this);
+        }
 
-    @Override
-    public TalonOfPainTriggeredAbility copy() {
-        return new TalonOfPainTriggeredAbility(this);
-    }
+        @Override
+        public boolean checkEventType(GameEvent event, Game game) {
+            return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+        }
 
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        // to another player
-        Player controller = game.getPlayer(this.getControllerId());
-        if (controller == null) {
+        @Override
+        public boolean checkTrigger(GameEvent event, Game game) {
+            // to another player
+            Player controller = game.getPlayer(this.getControllerId());
+            if (controller == null) {
+                return false;
+            }
+            if (controller.hasOpponent(event.getTargetId(), game)) {
+                // a source you control other than Talon of Pain
+                UUID sourceControllerId = game.getControllerId(event.getSourceId());
+                // return true so the effect will fire and a charge counter will be added
+                return sourceControllerId != null
+                        && sourceControllerId.equals(this.getControllerId())
+                        && !this.getSourceId().equals(event.getSourceId());
+            }
             return false;
         }
-        if (controller.hasOpponent(event.getTargetId(), game)) {
-            // a source you control other than Talon of Pain
-            UUID sourceControllerId = game.getControllerId(event.getSourceId());
-            // return true so the effect will fire and a charge counter will be added
-            return sourceControllerId != null
-                    && sourceControllerId.equals(this.getControllerId())
-                    && !this.getSourceId().equals(event.getSourceId());
-        }
-        return false;
-    }
 
-    @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+        @Override
+        public String getTriggerPhrase() {
+            return "Whenever a source you control other than {this} deals damage to an opponent, ";
+        }
     }
 }
 

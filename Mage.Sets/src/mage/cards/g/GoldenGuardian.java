@@ -103,8 +103,6 @@ class GoldenGuardianEffect extends OneShotEffect {
 
 class GoldenGuardianDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    private static final String staticTriggerPhrase = "When {this} dies this turn, ";
-
     public GoldenGuardianDelayedTriggeredAbility() {
         super(new GoldenGuardianReturnTransformedEffect(), Duration.EndOfTurn);
     }
@@ -129,8 +127,8 @@ class GoldenGuardianDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "When {this} dies this turn, " ;
     }
 }
 

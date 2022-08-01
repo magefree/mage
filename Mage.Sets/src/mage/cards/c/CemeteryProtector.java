@@ -99,8 +99,6 @@ class CemeteryProtectorEffect extends OneShotEffect {
 
 class CemeteryProtectorTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever you play a land or cast a spell, if it shares a card type with the exiled card, ";
-
     public CemeteryProtectorTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new HumanToken()));
     }
@@ -168,7 +166,7 @@ class CemeteryProtectorTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever you play a land or cast a spell, if it shares a card type with the exiled card, ";
     }
 }

@@ -46,8 +46,6 @@ public final class NorinTheWary extends CardImpl {
 
 class NorinTheWaryTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "When a player casts a spell or a creature attacks, ";
-
     public NorinTheWaryTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(), false);
     }
@@ -68,8 +66,8 @@ class NorinTheWaryTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "When a player casts a spell or a creature attacks, " ;
     }
 
     @Override

@@ -55,8 +55,6 @@ public final class NightDealings extends CardImpl {
 
     private static final class NightDealingsTriggeredAbility extends TriggeredAbilityImpl {
 
-        private static final String staticTriggerPhrase = "Whenever a source you control deals damage to another player, ";
-
         private NightDealingsTriggeredAbility() {
             super(Zone.BATTLEFIELD, new NightDealingsEffect());
         }
@@ -87,8 +85,8 @@ public final class NightDealings extends CardImpl {
         }
 
         @Override
-        public String getStaticTriggerPhrase() {
-            return staticTriggerPhrase;
+        public String getTriggerPhrase() {
+            return "Whenever a source you control deals damage to another player, " ;
         }
     }
 

@@ -50,7 +50,6 @@ class AsLuckWouldHaveItTriggeredAbility extends TriggeredAbilityImpl {
 
     public AsLuckWouldHaveItTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AsLuckWouldHaveItEffect(), false);
-        setTriggerPhrase("Whenever you roll a die, ");
     }
 
     public AsLuckWouldHaveItTriggeredAbility(final AsLuckWouldHaveItTriggeredAbility ability) {
@@ -79,6 +78,11 @@ class AsLuckWouldHaveItTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public String getTriggerPhrase() {
+        return "Whenever you roll a die, " ;
     }
 }
 

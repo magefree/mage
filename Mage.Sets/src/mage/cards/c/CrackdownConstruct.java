@@ -46,8 +46,6 @@ public final class CrackdownConstruct extends CardImpl {
 
 class CrackdownConstructTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever you activate an ability of an artifact or creature that isn't a mana ability, ";
-
     CrackdownConstructTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), false);
     }
@@ -81,7 +79,7 @@ class CrackdownConstructTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever you activate an ability of an artifact or creature that isn't a mana ability, " ;
     }
 }

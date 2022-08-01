@@ -60,8 +60,6 @@ public final class ObeliskSpider extends CardImpl {
 
 class ObeliskSpiderTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever you put one or more -1/-1 counters on a creature, ";
-
     public ObeliskSpiderTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
     }
@@ -96,7 +94,7 @@ class ObeliskSpiderTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever you put one or more -1/-1 counters on a creature, " ;
     }
 }

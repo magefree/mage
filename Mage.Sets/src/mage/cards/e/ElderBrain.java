@@ -46,8 +46,6 @@ public final class ElderBrain extends CardImpl {
 
 class ElderBrainTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever {this} attacks a player, ";
-
     ElderBrainTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ElderBrainEffect());
     }
@@ -77,8 +75,8 @@ class ElderBrainTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever {this} attacks a player, ";
     }
 }
 

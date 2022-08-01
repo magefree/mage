@@ -47,8 +47,6 @@ public final class BloodstoneGoblin extends CardImpl {
 
 class BloodstoneGoblinTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever you cast a spell, if that spell was kicked, ";
-
     BloodstoneGoblinTriggeredAbility() {
         super(
                 Zone.BATTLEFIELD,
@@ -83,7 +81,7 @@ class BloodstoneGoblinTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever you cast a spell, if that spell was kicked, ";
     }
 }

@@ -48,9 +48,7 @@ public final class ContainmentConstruct extends CardImpl {
     }
 }
 
-class ContainmentConstructTriggeredAbility extends TriggeredAbilityImpl { // TODO: Refactor to use DiscardCardControllerTriggeredAbility
-
-    private static final String staticTriggerPhrase = "Whenever you discard a card, ";
+class ContainmentConstructTriggeredAbility extends TriggeredAbilityImpl {
 
     public ContainmentConstructTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ContainmentConstructEffect(), false);
@@ -81,8 +79,8 @@ class ContainmentConstructTriggeredAbility extends TriggeredAbilityImpl { // TOD
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever you discard a card, ";
     }
 }
 

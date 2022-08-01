@@ -85,8 +85,6 @@ class CreaturesAttackedWatcher extends Watcher {
 
 class GrandWarlordRadhaTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever one or more creatures you control attack, ";
-
     public GrandWarlordRadhaTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GrandWarlordRadhaEffect(), false);
     }
@@ -119,8 +117,8 @@ class GrandWarlordRadhaTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever one or more creatures you control attack, " ;
     }
 }
 

@@ -43,8 +43,6 @@ public final class ForbiddenOrchard extends CardImpl {
 
 class ForbiddenOrchardTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String staticTriggerPhrase = "Whenever you tap {this} for mana, ";
-
     ForbiddenOrchardTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenTargetEffect(new SpiritToken()));
         this.addTarget(new TargetOpponent());
@@ -72,8 +70,8 @@ class ForbiddenOrchardTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getStaticTriggerPhrase() {
-        return staticTriggerPhrase;
+    public String getTriggerPhrase() {
+        return "Whenever you tap {this} for mana, " ;
     }
 
     @Override
