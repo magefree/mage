@@ -61,10 +61,6 @@ public enum DomainValue implements DynamicValue {
         return "1";
     }
 
-    public int getAmount() {
-        return 1;
-    }
-
     @Override
     public String getMessage() {
         return "basic land type among lands " + (this == TARGET ? "they control" : "you control");

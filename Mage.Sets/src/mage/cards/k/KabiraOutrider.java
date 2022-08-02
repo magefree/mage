@@ -30,8 +30,7 @@ public final class KabiraOutrider extends CardImpl {
 
         // When Kabria Outrider enters the battlefield, target creature gets +1/+1 until end of turn for each creature in your party.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(
-                PartyCount.instance, PartyCount.instance, Duration.EndOfTurn, true
-        ));
+                PartyCount.instance, PartyCount.instance, Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability.addHint(PartyCountHint.instance));
     }

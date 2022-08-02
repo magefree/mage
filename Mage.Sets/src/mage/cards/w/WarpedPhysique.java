@@ -1,5 +1,3 @@
-
-
 package mage.cards.w;
 
 import java.util.UUID;
@@ -18,16 +16,15 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LevelX2
  */
 
-
 public final class WarpedPhysique extends CardImpl {
+
+    private static final DynamicValue xValue = new SignInversionDynamicValue(CardsInControllerHandCount.instance);
 
     public WarpedPhysique(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{B}");
 
-
         // Target creature gets +X/-X until end of turn, where X is the number of cards in your hand.
-        DynamicValue xValue =  CardsInControllerHandCount.instance;
-        this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, new SignInversionDynamicValue(xValue), Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(CardsInControllerHandCount.instance, xValue, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

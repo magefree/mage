@@ -48,4 +48,9 @@ public class LimitedDynamicValue implements DynamicValue {
     public String getMessage() {
         return value.getMessage();
     }
+
+    @Override
+    public int getSign() {
+        return value.getSign();
+    }
 }

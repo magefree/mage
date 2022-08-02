@@ -21,7 +21,7 @@ public final class AlliedAssault extends CardImpl {
 
         // Up to two target creatures each get +X/+X until end of turn, where X is the number of creatures in your party.
         this.getSpellAbility().addEffect(new BoostTargetEffect(
-                PartyCount.instance, PartyCount.instance, Duration.EndOfTurn, true
+                PartyCount.instance, PartyCount.instance, Duration.EndOfTurn
         ).setText("up to two target creatures each get +X/+X until end of turn, " +
                 "where X is the number of creatures in your party. " + PartyCount.getReminder()
         ));

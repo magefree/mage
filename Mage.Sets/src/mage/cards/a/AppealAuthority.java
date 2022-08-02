@@ -32,7 +32,7 @@ public final class AppealAuthority extends SplitCard {
         // Until end of turn, target creature gains trample and gets +X/+X, where X is the number of creatures you control.
         getLeftHalfCard().getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn)
                 .setText("Until end of turn, target creature gains trample"));
-        getLeftHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(CreaturesYouControlCount.instance, CreaturesYouControlCount.instance, Duration.EndOfTurn, true)
+        getLeftHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(CreaturesYouControlCount.instance, CreaturesYouControlCount.instance, Duration.EndOfTurn)
                 .setText("and gets +X/+X, where X is the number of creatures you control"));
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
         getLeftHalfCard().getSpellAbility().addHint(CreaturesYouControlHint.instance);
