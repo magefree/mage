@@ -32,7 +32,7 @@ public class DealsDamageToOpponentTriggeredAbility extends TriggeredAbilityImpl 
         super(Zone.BATTLEFIELD, effect, optional);
         this.onlyCombat = onlyCombat;
         this.setTargetPointer = setTargetPointer;
-        setTriggerPhrase("Whenever {this} deals " + (onlyCombat ? "combat" : "") + " damage to an opponent, ");
+        setTriggerPhrase("Whenever {this} deals " + (onlyCombat ? "combat " : "") + "damage to an opponent, ");
     }
 
     public DealsDamageToOpponentTriggeredAbility(final DealsDamageToOpponentTriggeredAbility ability) {

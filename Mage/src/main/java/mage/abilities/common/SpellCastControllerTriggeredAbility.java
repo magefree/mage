@@ -15,13 +15,13 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
 
-    protected FilterSpell filter; // TODO: This sould be final, but is not because of the telescoping contructors
-    protected String rule;
+    protected final FilterSpell filter;
+    protected String rule;  // TODO: This sould be final, but is not because of the telescoping contructors
 
     // The source SPELL that triggered the ability will be set as target to effect
-    protected boolean rememberSource = false;
+    protected boolean rememberSource;
     // Use it if you want remember CARD instead spell
-    protected boolean rememberSourceAsCard = false;
+    protected boolean rememberSourceAsCard;
 
     public SpellCastControllerTriggeredAbility(Effect effect, boolean optional) {
         this(Zone.BATTLEFIELD, effect, StaticFilters.FILTER_SPELL_A, optional, false);

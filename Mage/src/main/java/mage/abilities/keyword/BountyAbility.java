@@ -29,7 +29,7 @@ public class BountyAbility extends DiesCreatureTriggeredAbility {
 
     public BountyAbility(Effect effect, boolean optional, boolean setTargetPointer) {
         super(effect, optional, bountyCounterFilter, setTargetPointer);
-        setTriggerPhrase("<i>Bounty</i> &mdash; ");
+        setTriggerPhrase("<i>Bounty</i> &mdash; Whenever a creature an opponent controls with a bounty counter on it dies, ");
     }
 
     public BountyAbility(final BountyAbility ability) {
