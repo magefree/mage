@@ -63,6 +63,7 @@ class GlintHornBuccaneerTriggeredAbility extends TriggeredAbilityImpl {
 
     GlintHornBuccaneerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamagePlayersEffect(1, TargetController.OPPONENT), false);
+        setTriggerPhrase("Whenever you discard a card, ");
     }
 
     private GlintHornBuccaneerTriggeredAbility(final GlintHornBuccaneerTriggeredAbility ability) {
@@ -82,11 +83,5 @@ class GlintHornBuccaneerTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return isControlledBy(event.getPlayerId());
-
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you discard a card, " ;
     }
 }

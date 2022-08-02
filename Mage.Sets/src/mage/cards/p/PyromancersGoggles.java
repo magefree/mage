@@ -64,6 +64,7 @@ class PyromancersGogglesTriggeredAbility extends TriggeredAbilityImpl {
     public PyromancersGogglesTriggeredAbility(UUID abilityOriginalId, Effect effect) {
         super(Zone.ALL, effect, false);
         this.abilityOriginalId = abilityOriginalId.toString();
+        setTriggerPhrase("When that mana is used to cast a red instant or sorcery spell, ");
     }
 
     public PyromancersGogglesTriggeredAbility(final PyromancersGogglesTriggeredAbility ability) {
@@ -93,10 +94,5 @@ class PyromancersGogglesTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When that mana is used to cast a red instant or sorcery spell, " ;
     }
 }

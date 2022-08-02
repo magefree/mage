@@ -62,6 +62,7 @@ class HowlpackAvengerTriggeredAbility extends TriggeredAbilityImpl {
     HowlpackAvengerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(SavedDamageValue.MUCH));
         this.addTarget(new TargetAnyTarget());
+        setTriggerPhrase("Whenever a permanent you control is dealt damage, ");
     }
 
     private HowlpackAvengerTriggeredAbility(final HowlpackAvengerTriggeredAbility ability) {
@@ -92,10 +93,5 @@ class HowlpackAvengerTriggeredAbility extends TriggeredAbilityImpl {
         }
         this.getEffects().setValue("damage", damage);
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a permanent you control is dealt damage, ";
     }
 }

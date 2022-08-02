@@ -116,6 +116,7 @@ class TidalInfluenceTriggeredAbility extends StateTriggeredAbility {
 
     public TidalInfluenceTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
+        setTriggerPhrase("Whenever there are four tide counters on {this}, ");
     }
 
     public TidalInfluenceTriggeredAbility(final TidalInfluenceTriggeredAbility ability) {
@@ -131,10 +132,4 @@ class TidalInfluenceTriggeredAbility extends StateTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         return new CountersSourceCount(CounterType.TIDE).calculate(game, this, null) == 4;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever there are four tide counters on {this}, " ;
-    }
-
 }

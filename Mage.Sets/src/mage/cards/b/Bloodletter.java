@@ -50,6 +50,7 @@ class BloodletterStateTriggeredAbility extends StateTriggeredAbility {
 
     public BloodletterStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BloodletterEffect());
+        setTriggerPhrase("When the names of three or more nonland permanents begin with the same letter, ");
     }
 
     public BloodletterStateTriggeredAbility(final BloodletterStateTriggeredAbility ability) {
@@ -75,11 +76,6 @@ class BloodletterStateTriggeredAbility extends StateTriggeredAbility {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When the names of three or more nonland permanents begin with the same letter, " ;
     }
 }
 

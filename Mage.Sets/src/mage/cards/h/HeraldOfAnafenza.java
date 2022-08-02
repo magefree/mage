@@ -53,6 +53,7 @@ class HeraldOfAnafenzaTriggeredAbility extends TriggeredAbilityImpl {
 
     public HeraldOfAnafenzaTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new WarriorToken()), false);
+        setTriggerPhrase("Whenever you activate {this}'s outlast ability, ");
     }
 
     public HeraldOfAnafenzaTriggeredAbility(final HeraldOfAnafenzaTriggeredAbility ability) {
@@ -78,10 +79,5 @@ class HeraldOfAnafenzaTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you activate {this}'s outlast ability, " ;
     }
 }

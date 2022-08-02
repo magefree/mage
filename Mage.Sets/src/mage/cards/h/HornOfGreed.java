@@ -40,6 +40,7 @@ class HornOfGreedAbility extends TriggeredAbilityImpl {
 
     public HornOfGreedAbility() {
         super(Zone.BATTLEFIELD, new DrawCardTargetEffect(1), false);
+        setTriggerPhrase("Whenever a player plays a land, ");
     }
 
     public HornOfGreedAbility(final HornOfGreedAbility ability) {
@@ -60,10 +61,5 @@ class HornOfGreedAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a player plays a land, " ;
     }
 }

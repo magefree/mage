@@ -59,6 +59,7 @@ class PaladinOfPrahvTriggeredAbility extends DelayedTriggeredAbility {
     
     public PaladinOfPrahvTriggeredAbility() {
         super(new GainLifeEffect(SavedDamageValue.MUCH), Duration.EndOfTurn, false);
+        setTriggerPhrase("Whenever target creature deals damage this turn, ");
     }
 
     public PaladinOfPrahvTriggeredAbility(final PaladinOfPrahvTriggeredAbility ability) {
@@ -90,10 +91,5 @@ class PaladinOfPrahvTriggeredAbility extends DelayedTriggeredAbility {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever target creature deals damage this turn, " ;
     }
 }

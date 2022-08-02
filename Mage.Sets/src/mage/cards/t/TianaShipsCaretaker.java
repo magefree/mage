@@ -64,6 +64,7 @@ class TianaShipsCaretakerTriggeredAbility extends TriggeredAbilityImpl {
 
     TianaShipsCaretakerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TianaShipsCaretakerEffect(), true);
+        setTriggerPhrase("Whenever an Aura or Equipment you control is put into a graveyard from the battlefield, ");
     }
 
     TianaShipsCaretakerTriggeredAbility(final TianaShipsCaretakerTriggeredAbility ability) {
@@ -96,11 +97,6 @@ class TianaShipsCaretakerTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever an Aura or Equipment you control is put into a graveyard from the battlefield, " ;
     }
 }
 

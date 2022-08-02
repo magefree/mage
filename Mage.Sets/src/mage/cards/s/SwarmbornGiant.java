@@ -65,6 +65,7 @@ class SwarmbornGiantTriggeredAbility extends TriggeredAbilityImpl {
 
     public SwarmbornGiantTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect(), false);
+        setTriggerPhrase("When you're dealt combat damage, ");
     }
 
     public SwarmbornGiantTriggeredAbility(final SwarmbornGiantTriggeredAbility ability) {
@@ -88,10 +89,5 @@ class SwarmbornGiantTriggeredAbility extends TriggeredAbilityImpl {
             return damagedEvent.isCombatDamage();
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When you're dealt combat damage, " ;
     }
 }

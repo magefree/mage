@@ -50,6 +50,7 @@ class EquippedBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl {
 
     public EquippedBecomesBlockedTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever equipped creature becomes blocked by a creature, ");
     }
 
     public EquippedBecomesBlockedTriggeredAbility(final EquippedBecomesBlockedTriggeredAbility ability) {
@@ -71,11 +72,6 @@ class EquippedBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever equipped creature becomes blocked by a creature, " ;
     }
 
     @Override

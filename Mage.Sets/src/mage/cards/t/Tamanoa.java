@@ -49,6 +49,7 @@ class TamanoaDealsDamageTriggeredAbility extends TriggeredAbilityImpl {
 
     public TamanoaDealsDamageTriggeredAbility(Zone zone, Effect effect, boolean optional) {
         super(zone, effect, optional);
+        setTriggerPhrase("Whenever a noncreature source you control deals damage, ");
     }
 
     public TamanoaDealsDamageTriggeredAbility(final TamanoaDealsDamageTriggeredAbility ability) {
@@ -78,10 +79,5 @@ class TamanoaDealsDamageTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a noncreature source you control deals damage, " ;
     }
 }

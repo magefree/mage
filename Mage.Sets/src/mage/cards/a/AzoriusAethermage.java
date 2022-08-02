@@ -49,10 +49,9 @@ public final class AzoriusAethermage extends CardImpl {
 
 class AzoriusAEthermageAbility extends TriggeredAbilityImpl {
 
-    private static final String rule = "Whenever a permanent is returned to your hand, ";
-
     public AzoriusAEthermageAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        setTriggerPhrase("Whenever a permanent is returned to your hand, ");
     }
 
     private AzoriusAEthermageAbility(final AzoriusAEthermageAbility ability) {
@@ -81,11 +80,6 @@ class AzoriusAEthermageAbility extends TriggeredAbilityImpl {
         }
 
         return StaticFilters.FILTER_PERMANENT_CREATURE.match(permanentThatMoved, controllerId, this, game);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return rule;
     }
 
     @Override

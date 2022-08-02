@@ -48,6 +48,7 @@ class LightmineFieldTriggeredAbility extends TriggeredAbilityImpl {
 
     public LightmineFieldTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LightmineFieldEffect());
+        setTriggerPhrase("Whenever one or more creatures attack, ");
     }
 
     public LightmineFieldTriggeredAbility(final LightmineFieldTriggeredAbility ability) {
@@ -77,11 +78,6 @@ class LightmineFieldTriggeredAbility extends TriggeredAbilityImpl {
             effect.setValue("Lightmine Field", attackSet);
         }
         return !attackSet.isEmpty();
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever one or more creatures attack, " ;
     }
 }
 

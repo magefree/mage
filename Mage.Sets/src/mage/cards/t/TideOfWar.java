@@ -48,6 +48,7 @@ class BlocksTriggeredAbility extends TriggeredAbilityImpl {
 
     public BlocksTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever one or more creatures block, ");
     }
 
     public BlocksTriggeredAbility(final BlocksTriggeredAbility ability) {
@@ -67,11 +68,6 @@ class BlocksTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever one or more creatures block, " ;
     }
 
     @Override

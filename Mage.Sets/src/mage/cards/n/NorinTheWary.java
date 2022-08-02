@@ -48,6 +48,7 @@ class NorinTheWaryTriggeredAbility extends TriggeredAbilityImpl {
 
     public NorinTheWaryTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(), false);
+        setTriggerPhrase("When a player casts a spell or a creature attacks, ");
     }
 
     public NorinTheWaryTriggeredAbility(final NorinTheWaryTriggeredAbility ability) {
@@ -63,11 +64,6 @@ class NorinTheWaryTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When a player casts a spell or a creature attacks, " ;
     }
 
     @Override

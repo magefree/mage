@@ -63,6 +63,7 @@ class FiveAlarmFireTriggeredAbility extends TriggeredAbilityImpl {
     
     public FiveAlarmFireTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.BLAZE.createInstance()), false);
+        setTriggerPhrase("Whenever a creature you control deals combat damage, ");
     }
 
     public FiveAlarmFireTriggeredAbility(final FiveAlarmFireTriggeredAbility ability) {
@@ -100,10 +101,4 @@ class FiveAlarmFireTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-            return "Whenever a creature you control deals combat damage, " ;
-    }
-
 }

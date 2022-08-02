@@ -62,6 +62,7 @@ class ObeliskSpiderTriggeredAbility extends TriggeredAbilityImpl {
 
     public ObeliskSpiderTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever you put one or more -1/-1 counters on a creature, ");
     }
 
     public ObeliskSpiderTriggeredAbility(ObeliskSpiderTriggeredAbility ability) {
@@ -91,10 +92,5 @@ class ObeliskSpiderTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public ObeliskSpiderTriggeredAbility copy() {
         return new ObeliskSpiderTriggeredAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you put one or more -1/-1 counters on a creature, " ;
     }
 }

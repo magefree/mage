@@ -70,6 +70,7 @@ class RoilingHorrorTriggeredAbility extends TriggeredAbilityImpl {
         Effect effect = new GainLifeEffect(1);
         effect.setText("and you gain 1 life");
         this.addEffect(effect);
+        setTriggerPhrase("Whenever a time counter is removed from {this} while it's exiled, ");
     }
 
     public RoilingHorrorTriggeredAbility(final RoilingHorrorTriggeredAbility ability) {
@@ -90,12 +91,6 @@ class RoilingHorrorTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getData().equals(CounterType.TIME.getName()) && event.getTargetId().equals(this.getSourceId());
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a time counter is removed from {this} while it's exiled, " ;
-    }
-
 }
 
 class RoilingHorrorDynamicValue implements DynamicValue {

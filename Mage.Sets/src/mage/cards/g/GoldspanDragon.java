@@ -73,6 +73,7 @@ class GoldspanDragonTriggeredAbility extends TriggeredAbilityImpl {
 
     GoldspanDragonTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new TreasureToken()));
+        setTriggerPhrase("Whenever {this} attacks or becomes the target of a spell, ");
     }
 
     private GoldspanDragonTriggeredAbility(final GoldspanDragonTriggeredAbility ability) {
@@ -98,11 +99,6 @@ class GoldspanDragonTriggeredAbility extends TriggeredAbilityImpl {
             default:
                 return false;
         }
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} attacks or becomes the target of a spell, " ;
     }
 
     @Override

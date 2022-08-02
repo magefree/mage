@@ -59,6 +59,7 @@ class HapatraVizierOfPoisonsTriggeredAbility extends TriggeredAbilityImpl {
 
     HapatraVizierOfPoisonsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new DeathtouchSnakeToken()), false);
+        setTriggerPhrase("Whenever you put one or more -1/-1 counters on a creature, ");
     }
 
     private HapatraVizierOfPoisonsTriggeredAbility(HapatraVizierOfPoisonsTriggeredAbility ability) {
@@ -87,10 +88,5 @@ class HapatraVizierOfPoisonsTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public HapatraVizierOfPoisonsTriggeredAbility copy() {
         return new HapatraVizierOfPoisonsTriggeredAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you put one or more -1/-1 counters on a creature, " ;
     }
 }

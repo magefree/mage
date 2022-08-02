@@ -45,6 +45,7 @@ class TheRackTriggeredAbility extends TriggeredAbilityImpl {
 
     public TheRackTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TheRackEffect(), false);
+        setTriggerPhrase("At the beginning of the chosen player's upkeep, ");
     }
 
     public TheRackTriggeredAbility(final TheRackTriggeredAbility ability) {
@@ -65,12 +66,6 @@ class TheRackTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(game.getState().getValue(this.getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY));
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "At the beginning of the chosen player's upkeep, " ;
-    }
-
 }
 
 class TheRackEffect extends OneShotEffect {

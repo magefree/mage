@@ -229,8 +229,8 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         return sb.toString();
     }
 
-    // TODO: Many (all?) of these overrides are not needed and can be replaced with a call to setTriggerPhrase
     @Override
+    @Deprecated
     public String getTriggerPhrase() {
         return "";
     }

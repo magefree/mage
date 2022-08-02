@@ -29,12 +29,6 @@ import java.util.UUID;
  */
 public final class VraskaSwarmsEminence extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("creature you control with deathtouch");
-
-    static {
-        filter.add(new AbilityPredicate(DeathtouchAbility.class));
-    }
-
     public VraskaSwarmsEminence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{B/G}{B/G}");
 
@@ -44,8 +38,7 @@ public final class VraskaSwarmsEminence extends CardImpl {
 
         // Whenever a creature you control with deathtouch deals damage to a player or planeswalker, put a +1/+1 counter on that creature.
         this.addAbility(new VraskaSwarmsEminenceTriggeredAbility(Zone.BATTLEFIELD,
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()).setText("put a +1/+1 counter on that creature"),
-                filter)
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance()).setText("put a +1/+1 counter on that creature"))
         );
 
         // -2: Create a 1/1 black Assassin creature token with deathtouch and "Whenever this creature deals damage to a planeswalker, destroy that planeswalker."
@@ -64,16 +57,20 @@ public final class VraskaSwarmsEminence extends CardImpl {
 
 class VraskaSwarmsEminenceTriggeredAbility extends TriggeredAbilityImpl {
 
-    private final FilterPermanent filter;
 
-    public VraskaSwarmsEminenceTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter) {
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("creature you control with deathtouch");
+
+    static {
+        filter.add(new AbilityPredicate(DeathtouchAbility.class));
+    }
+
+    public VraskaSwarmsEminenceTriggeredAbility(Zone zone, Effect effect) {
         super(zone, effect, false);
-        this.filter = filter;
+        setTriggerPhrase("Whenever a creature you control with deathtouch deals damage to a player or planeswalker, ");
     }
 
     public VraskaSwarmsEminenceTriggeredAbility(final VraskaSwarmsEminenceTriggeredAbility ability) {
         super(ability);
-        this.filter = ability.filter;
     }
 
     @Override
@@ -102,10 +99,4 @@ class VraskaSwarmsEminenceTriggeredAbility extends TriggeredAbilityImpl {
         getEffects().setTargetPointer(new FixedTarget(permanent.getId(), permanent.getZoneChangeCounter(game)));
         return true;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature you control with deathtouch deals damage to a player or planeswalker, ";
-    }
-
 }

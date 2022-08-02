@@ -51,6 +51,7 @@ class KurkeshOnakkeAncientTriggeredAbility extends TriggeredAbilityImpl {
 
     KurkeshOnakkeAncientTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new CopyStackAbilityEffect(), new GenericManaCost(1)));
+        setTriggerPhrase("Whenever you activate an ability of an artifact, if it isn't a mana ability");
     }
 
     KurkeshOnakkeAncientTriggeredAbility(final KurkeshOnakkeAncientTriggeredAbility ability) {
@@ -82,10 +83,5 @@ class KurkeshOnakkeAncientTriggeredAbility extends TriggeredAbilityImpl {
         }
         this.getEffects().setValue("stackAbility", stackAbility);
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you activate an ability of an artifact, if it isn't a mana ability" ;
     }
 }

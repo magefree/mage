@@ -54,6 +54,7 @@ class FatalMutationAbility extends TriggeredAbilityImpl {
 
     public FatalMutationAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        setTriggerPhrase("Whenever enchanted creature is turned face up, ");
     }
 
     public FatalMutationAbility(final FatalMutationAbility ability) {
@@ -79,11 +80,5 @@ class FatalMutationAbility extends TriggeredAbilityImpl {
         return false;
 
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever enchanted creature is turned face up, " ;
-    }
-
 }
 

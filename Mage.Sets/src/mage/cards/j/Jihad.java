@@ -67,6 +67,7 @@ class JihadTriggeredAbility extends StateTriggeredAbility {
 
     public JihadTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
+        setTriggerPhrase("When the chosen player controls no nontoken permanents of the chosen color, ");
     }
 
     public JihadTriggeredAbility(final JihadTriggeredAbility ability) {
@@ -85,11 +86,6 @@ class JihadTriggeredAbility extends StateTriggeredAbility {
         filter.add(new ColorPredicate((ObjectColor) game.getState().getValue(getSourceId() + "_color")));
         filter.add(TokenPredicate.FALSE);
         return game.getBattlefield().countAll(filter, chosenOpponent, game) == 0;
-    }
-    
-    @Override
-    public String getTriggerPhrase() {
-        return "When the chosen player controls no nontoken permanents of the chosen color, " ;
     }
 }
 

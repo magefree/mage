@@ -67,6 +67,7 @@ class MortalObstinacyAbility extends TriggeredAbilityImpl {
     public MortalObstinacyAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new DestroyTargetEffect(), new SacrificeSourceCost()));
         addTarget(new TargetEnchantmentPermanent());
+        setTriggerPhrase("Whenever enchanted creature deals combat damage to a player, ");
     }
 
     public MortalObstinacyAbility(final MortalObstinacyAbility ability) {
@@ -88,11 +89,6 @@ class MortalObstinacyAbility extends TriggeredAbilityImpl {
         DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
         Permanent damageMakingCreature = game.getPermanent(event.getSourceId());
         return damageEvent.isCombatDamage() && damageMakingCreature != null && damageMakingCreature.getAttachments().contains(this.getSourceId());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever enchanted creature deals combat damage to a player, " ;
     }
 }
 

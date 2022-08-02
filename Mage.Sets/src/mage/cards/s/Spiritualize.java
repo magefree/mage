@@ -49,6 +49,7 @@ class SpiritualizeTriggeredAbility extends DelayedTriggeredAbility {
 
     public SpiritualizeTriggeredAbility() {
         super(new GainLifeEffect(SavedDamageValue.MUCH), Duration.EndOfTurn, false);
+        setTriggerPhrase("Whenever target creature deals damage, ");
     }
 
     public SpiritualizeTriggeredAbility(final SpiritualizeTriggeredAbility ability) {
@@ -76,10 +77,5 @@ class SpiritualizeTriggeredAbility extends DelayedTriggeredAbility {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever target creature deals damage, " ;
     }
 }

@@ -26,11 +26,7 @@ import mage.game.events.GameEvent;
  */
 public final class EssenceSymbiote extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("creature you control mutates");
 
-    static {
-        filter.add(new AbilityPredicate(MutateAbility.class));
-    }
 
     public EssenceSymbiote(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
@@ -41,8 +37,7 @@ public final class EssenceSymbiote extends CardImpl {
 
         // Whenever a creature you control mutates, put a +1/+1 counter on that creature and you gain 2 life.
         Ability ability = new EssenceSymbioteTriggeredAbility(Zone.BATTLEFIELD,
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()).setText("put a +1/+1 counter on that creature"),
-                filter);
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance()).setText("put a +1/+1 counter on that creature"));
         // You gain 2 life when Essence Symbiote’s ability resolves, even if you can’t put a +1/+1 counter on the mutated creature
         ability.addEffect(new GainLifeEffect(2).concatBy("and"));
         this.addAbility(ability);
@@ -60,16 +55,19 @@ public final class EssenceSymbiote extends CardImpl {
 
 class EssenceSymbioteTriggeredAbility extends TriggeredAbilityImpl {
 
-    private final FilterPermanent filter;
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("creature you control mutates");
 
-    public EssenceSymbioteTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter) {
+    static {
+        filter.add(new AbilityPredicate(MutateAbility.class));
+    }
+
+    public EssenceSymbioteTriggeredAbility(Zone zone, Effect effect) {
         super(zone, effect, false);
-        this.filter = filter;
+        setTriggerPhrase("Whenever a creature you control mutates, ");
     }
 
     public EssenceSymbioteTriggeredAbility(final mage.cards.e.EssenceSymbioteTriggeredAbility ability) {
         super(ability);
-        this.filter = ability.filter;
     }
 
     @Override
@@ -106,10 +104,4 @@ class EssenceSymbioteTriggeredAbility extends TriggeredAbilityImpl {
         */
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature you control mutates, " ;
-    }
-
 }

@@ -45,6 +45,7 @@ class BlackViseTriggeredAbility extends TriggeredAbilityImpl {
 
     public BlackViseTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BlackViseEffect(), false);
+        setTriggerPhrase("At the beginning of the chosen player's upkeep, ");
     }
 
     public BlackViseTriggeredAbility(final BlackViseTriggeredAbility ability) {
@@ -64,11 +65,6 @@ class BlackViseTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(game.getState().getValue(getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY));
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "At the beginning of the chosen player's upkeep, " ;
     }
 }
 

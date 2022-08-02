@@ -48,7 +48,7 @@ public final class TawnossCoffin extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         //When Tawnos's Coffin leaves the battlefield or becomes untapped, return the exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it, and if you do, return the exiled Aura cards to the battlefield under their owner's control attached to that permanent.
-        Ability ability3 = new TawnossCoffinTriggeredAbility(new TawnossCoffinReturnEffect(), false);
+        Ability ability3 = new TawnossCoffinTriggeredAbility(new TawnossCoffinReturnEffect());
         this.addAbility(ability3);
     }
 
@@ -64,8 +64,9 @@ public final class TawnossCoffin extends CardImpl {
 
 class TawnossCoffinTriggeredAbility extends LeavesBattlefieldTriggeredAbility {
 
-    public TawnossCoffinTriggeredAbility(Effect effect, boolean isOptional) {
-        super(effect, isOptional);
+    public TawnossCoffinTriggeredAbility(Effect effect) {
+        super(effect, false);
+        setTriggerPhrase("When {this} leaves the battlefield or becomes untapped, ");
     }
 
     public TawnossCoffinTriggeredAbility(final TawnossCoffinTriggeredAbility ability) {
@@ -90,11 +91,6 @@ class TawnossCoffinTriggeredAbility extends LeavesBattlefieldTriggeredAbility {
             return super.checkTrigger(event, game);
         }
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When {this} leaves the battlefield or becomes untapped, " ;
-    }
 }
 
 class TawnossCoffinEffect extends OneShotEffect {
@@ -107,7 +103,8 @@ class TawnossCoffinEffect extends OneShotEffect {
 
     public TawnossCoffinEffect() {
         super(Outcome.Detriment);
-        this.staticText = "exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature";
+        this.staticText = "exile target creature and all Auras attached to it. " +
+                          "Note the number and kind of counters that were on that creature";
     }
 
     public TawnossCoffinEffect(final TawnossCoffinEffect effect) {
@@ -124,26 +121,25 @@ class TawnossCoffinEffect extends OneShotEffect {
         // Exile enchanted creature and all Auras attached to it.
         Permanent sourceObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && sourceObject != null) {
-            Permanent enchantedCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (enchantedCreature != null) {
-                UUID exileZoneId = CardUtil.getCardExileZoneId(game, source);
-                Set<Card> toExile = new HashSet<>();
-                toExile.add(enchantedCreature);
-                for (UUID attachementId : enchantedCreature.getAttachments()) {
-                    Permanent attachment = game.getPermanent(attachementId);
-                    if (attachment != null && attachment.hasSubtype(SubType.AURA, game)) {
-                        toExile.add(attachment);
-                    }
-                }
-                controller.moveCardsToExile(toExile, source, game, true, exileZoneId, sourceObject.getIdName());
-                game.getState().setValue(exileZoneId.toString() + "NotedCounters", enchantedCreature.getCounters(game).copy());
-                game.getState().setValue(exileZoneId.toString() + "EnchantedCreature", enchantedCreature.getId());
-            }
-            return true;
+        Permanent enchantedCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (controller == null || sourceObject == null || enchantedCreature == null) {
+            return false;
         }
 
-        return false;
+        UUID exileZoneId = CardUtil.getCardExileZoneId(game, source);
+        Set<Card> toExile = new HashSet<>();
+        toExile.add(enchantedCreature);
+        for (UUID attachementId : enchantedCreature.getAttachments()) {
+            Permanent attachment = game.getPermanent(attachementId);
+            if (attachment != null && attachment.hasSubtype(SubType.AURA, game)) {
+                toExile.add(attachment);
+            }
+        }
+        controller.moveCardsToExile(toExile, source, game, true, exileZoneId, sourceObject.getIdName());
+        game.getState().setValue(exileZoneId.toString() + "NotedCounters", enchantedCreature.getCounters(game).copy());
+        game.getState().setValue(exileZoneId.toString() + "EnchantedCreature", enchantedCreature.getId());
+
+        return true;
     }
 }
 
@@ -151,7 +147,8 @@ class TawnossCoffinReturnEffect extends OneShotEffect {
 
     public TawnossCoffinReturnEffect() {
         super(Outcome.Benefit);
-        this.staticText = "return the exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it. If you do, return the exiled Aura cards to the battlefield under their owner's control attached to that permanent";
+        this.staticText = "return the exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it. " +
+                          "If you do, return the exiled Aura cards to the battlefield under their owner's control attached to that permanent";
     }
 
     public TawnossCoffinReturnEffect(final TawnossCoffinReturnEffect effect) {
@@ -181,48 +178,51 @@ class TawnossCoffinReturnEffect extends OneShotEffect {
         if (!exileZone.contains(enchantedCreatureId)) {
             return true; // Card was removed from exile meanwhile, other card sstay in exile
         }
-        Card enchantedCreature = game.getCard(enchantedCreatureId);
-        if (enchantedCreature == null) {
+        Card enchantedCreatureCard = game.getCard(enchantedCreatureId);
+        if (enchantedCreatureCard == null) {
             return false;
         }
-        controller.moveCards(enchantedCreature, Zone.BATTLEFIELD, source, game, true, false, true, null);
-        Permanent newPermanent = game.getPermanent(enchantedCreature.getId());
-        if (newPermanent != null) {
-            // Add the noted counters
-            Counters notedCounters = (Counters) game.getState().getValue(exileZoneId.toString() + "NotedCounters");
-            if (notedCounters != null) {
-                for (Counter c : notedCounters.values()) { //would be nice if could just use that copy function to set the whole field
-                    if (c != null) {
-                        newPermanent.getCounters(game).addCounter(c); // it's restore counters, not add (e.g. without add events)
-                    }
+        controller.moveCards(enchantedCreatureCard, Zone.BATTLEFIELD, source, game, true, false, true, null);
+        Permanent newPermanent = game.getPermanent(enchantedCreatureCard.getId());
+        if (newPermanent == null) {
+            return false;
+        }
+        // Add the noted counters
+        Counters notedCounters = (Counters) game.getState().getValue(exileZoneId.toString() + "NotedCounters");
+        if (notedCounters != null) {
+            for (Counter c : notedCounters.values()) { //would be nice if could just use that copy function to set the whole field
+                if (c != null) {
+                    newPermanent.getCounters(game).addCounter(c); // it's restore counters, not add (e.g. without add events)
                 }
             }
-            // Return the exiled auras
-            Set<Card> returningAuras = new HashSet<>();
-            for (Card enchantment : exileZone.getCards(game)) {
-                if (enchantment.hasSubtype(SubType.AURA, game)) {
-                    boolean canTarget = false;
-                    for (Target target : enchantment.getSpellAbility().getTargets()) {
-                        Filter filter2 = target.getFilter();
-                        if (filter2.match(newPermanent, game)) {
-                            canTarget = true;
-                            break;
-                        }
+        }
+        game.applyEffects();
+
+        // Return the exiled auras
+        Set<Card> returningAuras = new HashSet<>();
+        for (Card enchantment : exileZone.getCards(game)) {
+            if (enchantment.hasSubtype(SubType.AURA, game)) {
+                boolean canTarget = false;
+                for (Target target : enchantment.getSpellAbility().getTargets()) {
+                    Filter filter2 = target.getFilter();
+                    if (filter2.match(newPermanent, game)) {
+                        canTarget = true;
+                        break;
                     }
-                    if (!canTarget) {
-                        // Aura stays exiled
-                        continue;
-                    }
-                    returningAuras.add(enchantment);
-                    game.getState().setValue("attachTo:" + enchantment.getId(), newPermanent);
                 }
+                if (!canTarget) {
+                    // Aura stays exiled
+                    continue;
+                }
+                returningAuras.add(enchantment);
+                game.getState().setValue("attachTo:" + enchantment.getId(), newPermanent);
             }
-            controller.moveCards(returningAuras, Zone.BATTLEFIELD, source, game, false, false, true, null);
-            for (Card enchantment : returningAuras) {
-                Permanent permanent = game.getPermanent(enchantment.getId());
-                if (permanent != null) {
-                    newPermanent.addAttachment(permanent.getId(), source, game);
-                }
+        }
+        controller.moveCards(returningAuras, Zone.BATTLEFIELD, source, game, false, false, true, null);
+        for (Card enchantment : returningAuras) {
+            Permanent permanent = game.getPermanent(enchantment.getId());
+            if (permanent != null) {
+                newPermanent.addAttachment(permanent.getId(), source, game);
             }
         }
         return true;
