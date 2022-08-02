@@ -37,7 +37,7 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl {
     }
 
     public BoostEnchantedEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
-        super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, isCanKill(toughness) ? Outcome.UnboostCreature : Outcome.BoostCreature);
+        super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, CardUtil.getBoostOutcome(power, toughness));
         this.power = power;
         this.toughness = toughness;
         this.staticText = "enchanted creature gets " + CardUtil.getBoostText(power, toughness, duration);

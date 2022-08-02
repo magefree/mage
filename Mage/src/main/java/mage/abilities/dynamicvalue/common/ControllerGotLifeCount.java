@@ -45,7 +45,7 @@ public enum ControllerGotLifeCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "the amount of life you've gained this turn";
+        return "the amount of life you gained this turn";
     }
 
     public static Hint getHint() {

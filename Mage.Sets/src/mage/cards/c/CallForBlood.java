@@ -30,9 +30,8 @@ public final class CallForBlood extends CardImpl {
         // As an additional cost to cast this spell, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         // Target creature gets -X/-X until end of turn, where X is the sacrificed creature's power.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-
     }
 
     private CallForBlood(final CallForBlood card) {

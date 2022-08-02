@@ -65,7 +65,7 @@ public final class PaladinClass extends CardImpl {
 
         // Whenever you attack, until end of turn, target attacking creature gets +1/+1 for each other attacking creature and gains double strike.
         Ability ability = new AttacksWithCreaturesTriggeredAbility(
-                new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn, true)
+                new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn)
                         .setText("until end of turn, target attacking creature " +
                                 "gets +1/+1 for each other attacking creature"),
                 1

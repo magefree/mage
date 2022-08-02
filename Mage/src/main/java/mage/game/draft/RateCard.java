@@ -38,10 +38,14 @@ public final class RateCard {
      * Ratings are in [1,10] range, so setting it high will make new cards appear more often.
      * nowadays, cards that are more rare are more powerful, lets trust that and play the shiny cards.
      */
+    private static final int DEFAULT_BASIC_LAND_RATING = 1;
     private static final int DEFAULT_NOT_RATED_CARD_RATING = 40;
     private static final int DEFAULT_NOT_RATED_UNCOMMON_RATING = 60;
     private static final int DEFAULT_NOT_RATED_RARE_RATING = 75;
     private static final int DEFAULT_NOT_RATED_MYTHIC_RATING = 90;
+    
+    // Cards that aren't in the deck's colors get a penalty to their rating
+    private static final int OFF_COLOR_PENALTY = -100;
 
     private static String RATINGS_DIR = "/ratings/";
     private static String RATINGS_SET_LIST = RATINGS_DIR + "setsWithRatings.csv";
@@ -204,7 +208,11 @@ public final class RateCard {
                     newRating = DEFAULT_NOT_RATED_MYTHIC_RATING;
                     break;
                 default:
-                    newRating = DEFAULT_NOT_RATED_CARD_RATING;
+                    if (isBasicLand(card)) {
+                        newRating = DEFAULT_BASIC_LAND_RATING;
+                    } else {
+                        newRating = DEFAULT_NOT_RATED_CARD_RATING;
+                    }
                     break;
             }
         } else {
@@ -327,6 +335,12 @@ public final class RateCard {
             }
             return 2 * (converted - colorPenalty + 1);
         }
+        
+        // Basic lands have no value so they're always treated as off-color
+        if (isBasicLand(card)) {
+            return OFF_COLOR_PENALTY;
+        }
+        
         final Map<String, Integer> singleCount = new HashMap<>();
         int maxSingleCount = 0;
         for (String symbol : card.getManaCostSymbols()) {
@@ -339,7 +353,7 @@ public final class RateCard {
                     }
                 }
                 if (count == 0) {
-                    return -100;
+                    return OFF_COLOR_PENALTY;
                 }
                 Integer typeCount = singleCount.get(symbol);
                 if (typeCount == null) {
@@ -407,5 +421,24 @@ public final class RateCard {
             }
         }
         return symbols.size();
+    }
+    
+    /**
+     * Return true if the card is one of the basic land types that can be added to the deck for free.
+     *
+     * @param card
+     * @return
+     */
+     public static boolean isBasicLand(Card card) {
+        String name = card.getName();
+        if (name.equals("Plains")
+                || name.equals("Island")
+                || name.equals("Swamp")
+                || name.equals("Mountain")
+                || name.equals("Forest")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

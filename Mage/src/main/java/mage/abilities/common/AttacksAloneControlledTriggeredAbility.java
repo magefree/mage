@@ -9,6 +9,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
+import mage.util.CardUtil;
 
 /**
  * @author TheElk801
@@ -34,7 +36,7 @@ public class AttacksAloneControlledTriggeredAbility extends TriggeredAbilityImpl
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
-        setTriggerPhrase("Whenever " + filter.getMessage() + " attacks alone, ");
+        setTriggerPhrase("Whenever " + CardUtil.addArticle(filter.getMessage()) + " attacks alone, ");
     }
 
     private AttacksAloneControlledTriggeredAbility(final AttacksAloneControlledTriggeredAbility ability) {
