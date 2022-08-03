@@ -67,6 +67,7 @@ import javax.swing.event.PopupMenuListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.SocketException;
@@ -191,6 +192,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
      * Creates new form MageFrame
      */
     public MageFrame() throws MageException {
+        System.setProperty("javax.net.ssl.trustStore", System.getProperty("user.dir") + "/src/main/resources/cacerts".replace('/', File.separatorChar));
+        System.setProperty("javax.net.ssl.trustStorePassword","changeit");
         setWindowTitle();
 
         EDTExceptionHandler.registerExceptionHandler();
