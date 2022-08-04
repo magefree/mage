@@ -31,6 +31,8 @@ public class AddLandDialog extends MageDialog {
     private static final Logger logger = Logger.getLogger(MageDialog.class);
 
     private Deck deck;
+    
+    private DeckEditorMode mode;
 
     private static final int DEFAULT_SEALED_DECK_CARD_NUMBER = 40;
 
@@ -41,6 +43,7 @@ public class AddLandDialog extends MageDialog {
 
     public void showDialog(Deck deck, DeckEditorMode mode) {
         this.deck = deck;
+        this.mode = mode;
         SortedSet<String> landSetNames = new TreeSet<>();
         String defaultSetName = null;
         if (mode != DeckEditorMode.FREE_BUILDING) {
@@ -73,10 +76,6 @@ public class AddLandDialog extends MageDialog {
         // if still no set with lands found, add list of all available
         List<ExpansionInfo> basicLandSets = ExpansionRepository.instance.getSetsWithBasicLandsByReleaseDate();
         for (ExpansionInfo expansionInfo : basicLandSets) {
-            // snow lands only in free mode
-            if (mode != DeckEditorMode.FREE_BUILDING && CardRepository.haveSnowLands(expansionInfo.getCode())) {
-                continue;
-            }
             landSetNames.add(expansionInfo.getName());
         }
         if (landSetNames.isEmpty()) {
@@ -150,7 +149,12 @@ public class AddLandDialog extends MageDialog {
         } else {
             criteria.ignoreSetsWithSnowLands();
         }
-        criteria.rarities(Rarity.LAND).name(landName);
+        if (mode != DeckEditorMode.FREE_BUILDING) {
+            criteria.nameExact(landName);
+        } else {
+            criteria.name(landName); // snow basics only in free mode
+        }
+        criteria.rarities(Rarity.LAND);        
         List<CardInfo> cards = CardRepository.instance.findCards(criteria);
         if (cards.isEmpty()) {
             logger.error("No basic lands found in Set: " + landSetName);
