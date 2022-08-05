@@ -2212,7 +2212,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (!landSets.isEmpty()) {
             criteria.setCodes(landSets.toArray(new String[landSets.size()]));
         }
-        criteria.rarities(Rarity.LAND).name(landName);
+        criteria.rarities(Rarity.LAND).nameExact(landName);
         List<CardInfo> cards = CardRepository.instance.findCards(criteria);
 
         if (cards.isEmpty()) {
