@@ -349,10 +349,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             setWindowTitle();
         });
 
-        if (SystemUtil.isMacOSX()) {
-            SystemUtil.enableMacOSFullScreenMode(this);
+        if (MacFullscreenUtil.isMacOSX()) {
+            MacFullscreenUtil.enableMacOSFullScreenMode(this);
             if (fullscreenMode) {
-                SystemUtil.toggleMacOSFullScreenMode(this);
+                MacFullscreenUtil.toggleMacOSFullScreenMode(this);
             }
         }
     }
