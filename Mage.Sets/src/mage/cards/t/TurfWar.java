@@ -21,6 +21,7 @@ import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.players.PlayerList;
 import mage.target.Target;
 import mage.target.common.TargetLandPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
@@ -132,15 +133,24 @@ class TurfWarTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
+        if (!damageEvent.isCombatDamage()) {
+            return false;
+        }
         UUID creatureId = damageEvent.getSourceId();
+        Permanent creature = game.getPermanentOrLKIBattlefield(creatureId);
+        if (creature == null) {
+            return false;
+        }
         UUID playerId = damageEvent.getPlayerId();
-        if (damageEvent.isCombatDamage()) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_LAND, playerId, game)) {
-                if (permanent.getCounters(game).getCount(CounterType.CONTESTED) > 0) {
-                    this.getEffects().setValue("creature", creatureId);
-                    this.getEffects().setValue("player", playerId);
-                    return true;
-                }
+        PlayerList inRange = game.getState().getPlayersInRange(controllerId, game);
+        if (!inRange.contains(playerId) || !inRange.contains(creature.getControllerId())) {
+            return false;
+        }
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_LAND, playerId, game)) {
+            if (permanent.getCounters(game).getCount(CounterType.CONTESTED) > 0) {
+                this.getEffects().setValue("creature", creatureId);
+                this.getEffects().setValue("player", playerId);
+                return true;
             }
         }
         return false;
