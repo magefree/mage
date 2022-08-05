@@ -312,6 +312,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Together Forever", 212, Rarity.RARE, mage.cards.t.TogetherForever.class));
         cards.add(new SetCardInfo("Treasure Cruise", 237, Rarity.COMMON, mage.cards.t.TreasureCruise.class));
         cards.add(new SetCardInfo("Treeshaker Chimera", 318, Rarity.RARE, mage.cards.t.TreeshakerChimera.class));
+        cards.add(new SetCardInfo("Turf War", 54, Rarity.RARE, mage.cards.t.TurfWar.class));
         cards.add(new SetCardInfo("Twilight Mire", 443, Rarity.RARE, mage.cards.t.TwilightMire.class));
         cards.add(new SetCardInfo("Twinning Staff", 383, Rarity.RARE, mage.cards.t.TwinningStaff.class));
         cards.add(new SetCardInfo("Urban Evolution", 355, Rarity.UNCOMMON, mage.cards.u.UrbanEvolution.class));
