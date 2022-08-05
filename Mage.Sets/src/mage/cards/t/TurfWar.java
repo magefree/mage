@@ -170,7 +170,7 @@ class TurfWarControlEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanent(getUUIDValue("creature"));
+        Permanent creature = game.getPermanentOrLKIBattlefield(getUUIDValue("creature"));
         if (creature == null) {
             return false;
         }
