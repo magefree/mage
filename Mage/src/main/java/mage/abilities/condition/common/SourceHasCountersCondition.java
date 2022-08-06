@@ -20,7 +20,6 @@ public enum SourceHasCountersCondition implements Condition {
                 .values()
                 .stream()
                 .mapToInt(Counter::getCount)
-                .max()
-                .orElse(0) > 0;
+                .anyMatch(x -> x > 0);
     }
 }
