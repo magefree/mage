@@ -41,7 +41,7 @@ public class WaveOfRats extends CardImpl {
         );
 
         // Blitz {4}{B} (If you cast this spell for its blitz cost, it gains haste and “When this creature dies, draw a card.” Sacrifice it at the beginning of the next end step.)
-        this.addAbility(new BlitzAbility(this, "{4]{B}"));
+        this.addAbility(new BlitzAbility(this, "{4}{B}"));
     }
 
     private WaveOfRats(final WaveOfRats card) {

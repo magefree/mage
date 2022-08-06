@@ -250,7 +250,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Protection Racket", 39, Rarity.RARE, mage.cards.p.ProtectionRacket.class));
         cards.add(new SetCardInfo("Puppeteer Clique", 257, Rarity.RARE, mage.cards.p.PuppeteerClique.class));
         cards.add(new SetCardInfo("Quietus Spike", 377, Rarity.RARE, mage.cards.q.QuietusSpike.class));
-        cards.add(new SetCardInfo("Rain of Riches", 50, Rarity.RARE, mage.cards.r.RakdosSignet.class));
+        cards.add(new SetCardInfo("Rain of Riches", 50, Rarity.RARE, mage.cards.r.RainOfRiches.class));
         cards.add(new SetCardInfo("Rakdos Signet", 378, Rarity.UNCOMMON, mage.cards.r.RakdosSignet.class));
         cards.add(new SetCardInfo("Rampant Growth", 304, Rarity.COMMON, mage.cards.r.RampantGrowth.class));
         cards.add(new SetCardInfo("Reign of the Pit", 258, Rarity.RARE, mage.cards.r.ReignOfThePit.class));
