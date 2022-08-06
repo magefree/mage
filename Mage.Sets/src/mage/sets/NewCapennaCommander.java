@@ -343,6 +343,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Wall of Roots", 319, Rarity.COMMON, mage.cards.w.WallOfRoots.class));
         cards.add(new SetCardInfo("Warstorm Surge", 277, Rarity.RARE, mage.cards.w.WarstormSurge.class));
         cards.add(new SetCardInfo("Waste Management", 40, Rarity.RARE, mage.cards.w.WasteManagement.class));
+        cards.add(new SetCardInfo("Wave of Rats", 41, Rarity.RARE, mage.cards.w.WaveOfRats.class));
         cards.add(new SetCardInfo("Wayfarer's Bauble", 384, Rarity.COMMON, mage.cards.w.WayfarersBauble.class));
         cards.add(new SetCardInfo("Weathered Sentinels", 85, Rarity.RARE, mage.cards.w.WeatheredSentinels.class));
         cards.add(new SetCardInfo("Whirler Rogue", 238, Rarity.UNCOMMON, mage.cards.w.WhirlerRogue.class));
