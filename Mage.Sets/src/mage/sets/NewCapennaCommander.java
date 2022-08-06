@@ -334,6 +334,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Twinning Staff", 383, Rarity.RARE, mage.cards.t.TwinningStaff.class));
         cards.add(new SetCardInfo("Urban Evolution", 355, Rarity.UNCOMMON, mage.cards.u.UrbanEvolution.class));
         cards.add(new SetCardInfo("Utter End", 356, Rarity.RARE, mage.cards.u.UtterEnd.class));
+        cards.add(new SetCardInfo("Vazi, Keen Negotiator", 92, Rarity.RARE, mage.cards.v.VaziKeenNegotiator.class));
         cards.add(new SetCardInfo("Victimize", 261, Rarity.UNCOMMON, mage.cards.v.Victimize.class));
         cards.add(new SetCardInfo("Vivid Creek", 444, Rarity.UNCOMMON, mage.cards.v.VividCreek.class));
         cards.add(new SetCardInfo("Vivid Grove", 445, Rarity.UNCOMMON, mage.cards.v.VividGrove.class));
