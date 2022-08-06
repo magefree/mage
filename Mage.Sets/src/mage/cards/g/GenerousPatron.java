@@ -38,7 +38,7 @@ public final class GenerousPatron extends CardImpl {
         this.addAbility(new SupportAbility(this, 2));
 
         // Whenever you put one or more counters on a creature you don't control, draw a card.
-        this.addAbility(new PutCounterOnCreatureTriggeredAbility(new DrawCardSourceControllerEffect(1), filter, false));
+        this.addAbility(new PutCounterOnCreatureTriggeredAbility(new DrawCardSourceControllerEffect(1), filter));
     }
 
     private GenerousPatron(final GenerousPatron card) {

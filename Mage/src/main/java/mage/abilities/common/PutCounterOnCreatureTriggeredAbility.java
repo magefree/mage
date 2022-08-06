@@ -19,30 +19,36 @@ import mage.target.targetpointer.FixedTarget;
 public class PutCounterOnCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
     private final Counter counterType; // when null, any counter type is accepted
-    protected FilterPermanent filter;
+    private final FilterPermanent filter;
     private final boolean setTargetPointer;
 
     public PutCounterOnCreatureTriggeredAbility(Effect effect) {
-        this(effect, false);
+        this(effect, (Counter) null);
     }
 
-    public PutCounterOnCreatureTriggeredAbility(Effect effect, boolean optional) {
-        this(effect, null, new FilterCreaturePermanent(), optional, false);
+    public PutCounterOnCreatureTriggeredAbility(Effect effect, Counter counter) {
+        this(effect, counter, new FilterCreaturePermanent());
     }
 
-    public PutCounterOnCreatureTriggeredAbility(Effect effect, Counter counter, boolean optional) {
-        this(effect, counter, new FilterCreaturePermanent(), optional, false);
+    public PutCounterOnCreatureTriggeredAbility(Effect effect, FilterPermanent filter) {
+        this(effect, null, filter);
     }
 
-    public PutCounterOnCreatureTriggeredAbility(Effect effect, FilterPermanent filter, boolean optional) {
-        this(effect, null, filter, optional, false);
+    public PutCounterOnCreatureTriggeredAbility(Effect effect, Counter counter, FilterPermanent filter) {
+        this(effect, counter, filter, false);
     }
 
-    public PutCounterOnCreatureTriggeredAbility(Effect effect, Counter counter, FilterPermanent filter, boolean optional, boolean setTargetPointer) {
-        super(Zone.BATTLEFIELD, effect, optional);
+    public PutCounterOnCreatureTriggeredAbility(Effect effect, Counter counter, FilterPermanent filter, boolean setTargetPointer) {
+        super(Zone.BATTLEFIELD, effect);
         this.counterType = counter;
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
+        if (counter == null) {
+            setTriggerPhrase("Whenever you put one or more counters on a " + filter.getMessage() + ", ");
+        }
+        else {
+            setTriggerPhrase("Whenever you put one or more " + counter.getName() + " counters on a " + filter.getMessage() + ", ");
+        }
     }
 
     public PutCounterOnCreatureTriggeredAbility(final PutCounterOnCreatureTriggeredAbility ability) {
@@ -71,20 +77,13 @@ public class PutCounterOnCreatureTriggeredAbility extends TriggeredAbilityImpl {
         if (permanent == null || !filter.match(permanent, controllerId, this, game)) {
             return false;
         }
+        if (counterType != null && !event.getData().equals(counterType.getName())) {
+            return false;
+        }
         if (setTargetPointer) {
             getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
         }
         getEffects().setValue("countersAdded", event.getAmount());
-        return counterType == null || event.getData().equals(counterType.getName());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        if (counterType == null) {
-            return "Whenever you put one or more counters on a " + filter.getMessage() + ", " ;
-        }
-        else {
-            return "Whenever you put one or more " + counterType.getName() + " counters on a " + filter.getMessage() + ", " ;
-        }
+        return true;
     }
 }

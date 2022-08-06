@@ -50,7 +50,7 @@ public final class KrosDefenseContractor extends CardImpl {
         this.addAbility(ability);
 
         // Whenever you put one or more counters on a creature you don't control, tap that creature and goad it. It gains trample until your next turn.
-        this.addAbility(new PutCounterOnCreatureTriggeredAbility(new KrosDefenseContractorEffect(), null, filter, false, true));
+        this.addAbility(new PutCounterOnCreatureTriggeredAbility(new KrosDefenseContractorEffect(), null, filter, true));
     }
 
     private KrosDefenseContractor(final KrosDefenseContractor card) {

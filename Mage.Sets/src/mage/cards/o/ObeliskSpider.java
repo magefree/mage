@@ -36,7 +36,7 @@ public final class ObeliskSpider extends CardImpl {
         this.addAbility(new DealsDamageToACreatureTriggeredAbility(new AddCountersTargetEffect(CounterType.M1M1.createInstance(1)), true, false, true));
 
         // Whenever you put one or more -1/-1 counters on a creature, each opponent loses 1 life and you gain 1 life.
-        Ability ability = new PutCounterOnCreatureTriggeredAbility(new LoseLifeOpponentsEffect(1), CounterType.M1M1.createInstance(), false);
+        Ability ability = new PutCounterOnCreatureTriggeredAbility(new LoseLifeOpponentsEffect(1), CounterType.M1M1.createInstance());
         Effect effect = new GainLifeEffect(1);
         effect.setText("and you gain 1 life");
         ability.addEffect(effect);

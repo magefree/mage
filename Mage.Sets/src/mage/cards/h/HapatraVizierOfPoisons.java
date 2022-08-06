@@ -37,7 +37,7 @@ public final class HapatraVizierOfPoisons extends CardImpl {
         this.addAbility(ability);
 
         // Whenever you put one or more -1/-1 counters on a creature, create a 1/1 green Snake creature token with deathtouch.
-        this.addAbility(new PutCounterOnCreatureTriggeredAbility(new CreateTokenEffect(new DeathtouchSnakeToken()), CounterType.M1M1.createInstance(), false));
+        this.addAbility(new PutCounterOnCreatureTriggeredAbility(new CreateTokenEffect(new DeathtouchSnakeToken()), CounterType.M1M1.createInstance()));
     }
 
     private HapatraVizierOfPoisons(final HapatraVizierOfPoisons card) {
