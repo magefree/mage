@@ -27,6 +27,7 @@ public final class FeatherToken extends TokenImpl {
         );
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
+        setOriginalExpansionSetCode("IKO");
     }
 
     private FeatherToken(final FeatherToken token) {
