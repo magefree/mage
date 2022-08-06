@@ -276,6 +276,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Shadowblood Ridge", 426, Rarity.RARE, mage.cards.s.ShadowbloodRidge.class));
         cards.add(new SetCardInfo("Shadowmage Infiltrator", 351, Rarity.UNCOMMON, mage.cards.s.ShadowmageInfiltrator.class));
         cards.add(new SetCardInfo("Shamanic Revelation", 311, Rarity.RARE, mage.cards.s.ShamanicRevelation.class));
+        cards.add(new SetCardInfo("Shield Broker", 29, Rarity.RARE, mage.cards.s.ShieldBroker.class));
         cards.add(new SetCardInfo("Silent-Blade Oni", 352, Rarity.RARE, mage.cards.s.SilentBladeOni.class));
         cards.add(new SetCardInfo("Skyboon Evangelist", 20, Rarity.RARE, mage.cards.s.SkyboonEvangelist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skyboon Evangelist", 121, Rarity.RARE, mage.cards.s.SkyboonEvangelist.class, NON_FULL_USE_VARIOUS));
