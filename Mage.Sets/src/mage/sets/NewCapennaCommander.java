@@ -255,6 +255,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Rampant Growth", 304, Rarity.COMMON, mage.cards.r.RampantGrowth.class));
         cards.add(new SetCardInfo("Reign of the Pit", 258, Rarity.RARE, mage.cards.r.ReignOfThePit.class));
         cards.add(new SetCardInfo("Rekindling Phoenix", 273, Rarity.MYTHIC, mage.cards.r.RekindlingPhoenix.class));
+        cards.add(new SetCardInfo("Resourceful Defense", 19, Rarity.RARE, mage.cards.r.ResourcefulDefense.class));
         cards.add(new SetCardInfo("Rishkar's Expertise", 306, Rarity.RARE, mage.cards.r.RishkarsExpertise.class));
         cards.add(new SetCardInfo("Rishkar, Peema Renegade", 305, Rarity.RARE, mage.cards.r.RishkarPeemaRenegade.class));
         cards.add(new SetCardInfo("Rite of the Raging Storm", 274, Rarity.UNCOMMON, mage.cards.r.RiteOfTheRagingStorm.class));
