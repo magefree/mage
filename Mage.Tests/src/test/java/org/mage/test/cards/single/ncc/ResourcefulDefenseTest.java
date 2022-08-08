@@ -93,6 +93,10 @@ public class ResourcefulDefenseTest  extends CardTestPlayerBase {
 
     /**
      * Move multiple counter types from one permanent to another.
+     *
+     * Also tests that when a creature without counters dies that you won't be prompted.
+     * The hydra has no counters after the second activation and will die because toughtness==0, but we aren't prompted
+     * for targets when it dies.
      */
     @Test
     public void testMoveAllMultipleCounters() {

@@ -133,12 +133,12 @@ class ResourcefulDefenseMoveCounterEffect extends OneShotEffect {
 class ResourcefulDefenseTriggeredAbility extends LeavesBattlefieldAllTriggeredAbility {
 
     ResourcefulDefenseTriggeredAbility() {
-        super(null, StaticFilters.FILTER_CONTROLLED_PERMANENT);
+        super(new ResourcefulDefenseLeaveEffect(), StaticFilters.FILTER_CONTROLLED_PERMANENT);
+        setTriggerPhrase("Whenever a creature you control leaves the battlefield, if it had counters on it, ");
     }
 
     private ResourcefulDefenseTriggeredAbility(final ResourcefulDefenseTriggeredAbility ability) {
         super(ability);
-        setTriggerPhrase("Whenever a creature you control leaves the battlefield, if it had counters on it, ");
     }
 
     public ResourcefulDefenseTriggeredAbility copy() {
@@ -161,36 +161,20 @@ class ResourcefulDefenseTriggeredAbility extends LeavesBattlefieldAllTriggeredAb
         if (counters.values().stream().mapToInt(Counter::getCount).noneMatch(x -> x > 0)) {
             return false;
         }
-        this.getEffects().clear();
-        this.addEffect(new ResourcefulDefenseLeaveEffect(counters));
-//        TargetPermanent targetPermanent = new TargetPermanent();
-
-//        if (!targetPermanent.choose(Outcome.BoostCreature, controller.getId(), this.getId(), this, game)) {
-//            return false;
-//        }
-//        this.getEffects().setTargetPointer(new FixedTarget(targetPermanent.getFirstTarget()));
-
+        this.getEffects().setValue("counters", counters);
         return true;
-    }
-
-    public String getRule() {
-        return " put those counters on {this}.";
     }
 }
 
 class ResourcefulDefenseLeaveEffect extends OneShotEffect {
 
-    private final Counters counters;
-
-    ResourcefulDefenseLeaveEffect(Counters counters) {
+    ResourcefulDefenseLeaveEffect() {
         super(Outcome.Benefit);
-        this.counters = counters.copy();
-        staticText = "put those counters on target permanent you control.";
+        staticText = "put those counters on target permanent you control";
     }
 
     private ResourcefulDefenseLeaveEffect(final ResourcefulDefenseLeaveEffect effect) {
         super(effect);
-        this.counters = effect.counters.copy();
     }
 
     @Override
@@ -204,7 +188,9 @@ class ResourcefulDefenseLeaveEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
+        Counters counters = (Counters) this.getValue("counters");
         counters.values()
+                .stream().filter(counter -> counter.getCount() > 0)
                 .forEach(counter -> permanent.addCounters(counter, source.getControllerId(), source, game));
         return true;
     }
