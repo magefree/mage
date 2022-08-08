@@ -57,7 +57,6 @@ public class SyrixCarrierOfTheFlame extends CardImpl {
 
         // At the beginning of each end step, if a creature card left your graveyard this turn,
         // target Phoenix you control deals damage equal to its power to any target.
-        // TODO: Flesh//Blood, Soul's Fire, and this
         BeginningOfEndStepTriggeredAbility ability = new BeginningOfEndStepTriggeredAbility(
                 new TargetControlledDealsDamageAnyTargetEffect(description),
                 TargetController.EACH_PLAYER,
@@ -113,7 +112,7 @@ class SyrixCarrierOfTheFlameCastEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        if (controller.chooseUse(outcome.Benefit, "Cast " + card.getIdName() + " from your graveyard?", source, game)) {
+        if (controller.chooseUse(Outcome.Benefit, "Cast " + card.getIdName() + " from your graveyard?", source, game)) {
             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
             controller.cast(controller.chooseAbilityForCast(card, game, false),
                     game, false, new ApprovingObject(source, game));
@@ -134,10 +133,17 @@ class SyrixCarrierOfTheFlameCastEffect extends OneShotEffect {
 enum SyrixCarrierOfTheFlameCondition implements Condition {
     instance;
 
+    private static final String string = "a creature card left your graveyard this turn";
+
     @Override
     public boolean apply(Game game, Ability source) {
         SyrixCarrierOfTheFlameWatcher watcher = game.getState().getWatcher(SyrixCarrierOfTheFlameWatcher.class);
         return watcher != null && watcher.hadACreatureLeave(source.getControllerId());
+    }
+
+    @Override
+    public String toString() {
+        return string;
     }
 }
 

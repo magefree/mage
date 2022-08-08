@@ -59,6 +59,8 @@ class SmugglersBuggyCastAndReturnEffect extends OneShotEffect {
 
     SmugglersBuggyCastAndReturnEffect() {
         super(Outcome.Benefit);
+        this.staticText = "you may cast the exiled card without paying its mana cost. " +
+                          "If you do, return Smuggler's Buggy to its owner's hand";
     }
 
     private SmugglersBuggyCastAndReturnEffect(final SmugglersBuggyCastAndReturnEffect effect) {

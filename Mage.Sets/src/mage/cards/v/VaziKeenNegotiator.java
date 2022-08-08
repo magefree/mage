@@ -58,7 +58,8 @@ public class VaziKeenNegotiator extends CardImpl {
         Ability castAbility = new ConditionalInterveningIfTriggeredAbility(
                 new VaziKeenNegotiatorOpponentCastsOrActivatesTriggeredAbility(),
                 TreasureSpentToCastCondition.instance,
-                "Whenever an opponent casts a spell or activates an ability, if mana from a Treasure was spent to cast it or activate it,");
+                "Whenever an opponent casts a spell or activates an ability, if mana from a Treasure was spent to cast it or activate it," +
+                     "put a +1/+1 counter on target creature, then draw a card.");
         castAbility.addTarget(new TargetOpponent());
         castAbility.addEffect(new DrawCardSourceControllerEffect(1));
         this.addAbility(castAbility);

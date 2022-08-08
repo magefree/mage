@@ -38,7 +38,7 @@ public class ParnesseTheSubtleBrush extends CardImpl {
 
         // Whenever you or a permanent you control becomes the target of a spell or ability an opponent controls,
         // counter that spell or ability unless that player pays 4 life.
-        this.addAbility(new TargetOfOpponentsSpellOrAbilityTriggeredAbility(new CounterUnlessPaysEffect(new PayLifeCost(4))));
+        this.addAbility(new TargetOfOpponentsSpellOrAbilityTriggeredAbility(new CounterUnlessPaysEffect(new PayLifeCost(4).setText("4 life"))));
 
         // Whenever you copy a spell, up to one target opponent may also copy that spell.
         // They may choose new targets for that copy.

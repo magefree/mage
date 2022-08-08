@@ -35,6 +35,7 @@ public class FamilysFavor extends CardImpl {
         //      “Whenever this creature deals combat damage to a player,
         //       remove a shield counter from it.
         //       If you do, draw a card.”
+        // (If a creature with a shield counter on it would be dealt damage or destroyed, remove a shield counter from it instead.)
         Ability attacksAbility = new AttacksWithCreaturesTriggeredAbility(new AddCountersTargetEffect(CounterType.SHIELD.createInstance()), 1);
         attacksAbility.addEffect(new GainAbilityTargetEffect(
                 new DealsCombatDamageToAPlayerTriggeredAbility(new FamilysFavorRemoveShieldDrawEffect(), false),
