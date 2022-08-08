@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static mage.cards.c.CityInABottle.getArabianNightsNamePredicates;
+import static mage.cards.c.CityInABottle.arabianNightsNamePredicatesOtherThanCityInABottle;
 
 /**
  * @author emerald000
@@ -51,86 +51,86 @@ public final class CityInABottle extends CardImpl {
         return new CityInABottle(this);
     }
 
-    static public List<NamePredicate> getArabianNightsNamePredicates() {
-        List<NamePredicate> namePredicatesArabianNights = new ArrayList<>();
-        namePredicatesArabianNights.add(new NamePredicate("Abu Ja'far"));
-        namePredicatesArabianNights.add(new NamePredicate("Aladdin"));
-        namePredicatesArabianNights.add(new NamePredicate("Aladdin's Lamp"));
-        namePredicatesArabianNights.add(new NamePredicate("Aladdin's Ring"));
-        namePredicatesArabianNights.add(new NamePredicate("Ali Baba"));
-        namePredicatesArabianNights.add(new NamePredicate("Ali from Cairo"));
-        namePredicatesArabianNights.add(new NamePredicate("Army of Allah"));
-        namePredicatesArabianNights.add(new NamePredicate("Bazaar of Baghdad"));
-        namePredicatesArabianNights.add(new NamePredicate("Bird Maiden"));
-        namePredicatesArabianNights.add(new NamePredicate("Bottle of Suleiman"));
-        namePredicatesArabianNights.add(new NamePredicate("Brass Man"));
-        namePredicatesArabianNights.add(new NamePredicate("Camel"));
-        namePredicatesArabianNights.add(new NamePredicate("City of Brass"));
-        namePredicatesArabianNights.add(new NamePredicate("Cuombajj Witches"));
-        namePredicatesArabianNights.add(new NamePredicate("Cyclone"));
-        namePredicatesArabianNights.add(new NamePredicate("Dancing Scimitar"));
-        namePredicatesArabianNights.add(new NamePredicate("Dandan"));
-        namePredicatesArabianNights.add(new NamePredicate("Desert"));
-        namePredicatesArabianNights.add(new NamePredicate("Desert Nomads"));
-        namePredicatesArabianNights.add(new NamePredicate("Desert Twister"));
-        namePredicatesArabianNights.add(new NamePredicate("Diamond Valley"));
-        namePredicatesArabianNights.add(new NamePredicate("Drop of Honey"));
-        namePredicatesArabianNights.add(new NamePredicate("Ebony Horse"));
-        namePredicatesArabianNights.add(new NamePredicate("Elephant Graveyard"));
-        namePredicatesArabianNights.add(new NamePredicate("El-Hajjaj"));
-        namePredicatesArabianNights.add(new NamePredicate("Erg Raiders"));
-        namePredicatesArabianNights.add(new NamePredicate("Erhnam Djinn"));
-        namePredicatesArabianNights.add(new NamePredicate("Eye for an Eye"));
-        namePredicatesArabianNights.add(new NamePredicate("Fishliver Oil"));
-        namePredicatesArabianNights.add(new NamePredicate("Flying Carpet"));
-        namePredicatesArabianNights.add(new NamePredicate("Flying Men"));
-        namePredicatesArabianNights.add(new NamePredicate("Ghazban Ogre"));
-        namePredicatesArabianNights.add(new NamePredicate("Giant Tortoise"));
-        namePredicatesArabianNights.add(new NamePredicate("Guardian Beast"));
-        namePredicatesArabianNights.add(new NamePredicate("Hasran Ogress"));
-        namePredicatesArabianNights.add(new NamePredicate("Hurr Jackal"));
-        namePredicatesArabianNights.add(new NamePredicate("Ifh-Biff Efreet"));
-        namePredicatesArabianNights.add(new NamePredicate("Island Fish Jasconius"));
-        namePredicatesArabianNights.add(new NamePredicate("Island of Wak-Wak"));
-        namePredicatesArabianNights.add(new NamePredicate("Jandor's Ring"));
-        namePredicatesArabianNights.add(new NamePredicate("Jandor's Saddlebags"));
-        namePredicatesArabianNights.add(new NamePredicate("Jeweled Bird"));
-        namePredicatesArabianNights.add(new NamePredicate("Jihad"));
-        namePredicatesArabianNights.add(new NamePredicate("Junun Efreet"));
-        namePredicatesArabianNights.add(new NamePredicate("Juzam Djinn"));
-        namePredicatesArabianNights.add(new NamePredicate("Khabal Ghoul"));
-        namePredicatesArabianNights.add(new NamePredicate("King Suleiman"));
-        namePredicatesArabianNights.add(new NamePredicate("Kird Ape"));
-        namePredicatesArabianNights.add(new NamePredicate("Library of Alexandria"));
-        namePredicatesArabianNights.add(new NamePredicate("Magnetic Mountain"));
-        namePredicatesArabianNights.add(new NamePredicate("Merchant Ship"));
-        namePredicatesArabianNights.add(new NamePredicate("Metamorphosis"));
-        namePredicatesArabianNights.add(new NamePredicate("Mijae Djinn"));
-        namePredicatesArabianNights.add(new NamePredicate("Moorish Cavalry"));
-        namePredicatesArabianNights.add(new NamePredicate("Mountain"));
-        namePredicatesArabianNights.add(new NamePredicate("Nafs Asp"));
-        namePredicatesArabianNights.add(new NamePredicate("Oasis"));
-        namePredicatesArabianNights.add(new NamePredicate("Old Man of the Sea"));
-        namePredicatesArabianNights.add(new NamePredicate("Oubliette"));
-        namePredicatesArabianNights.add(new NamePredicate("Piety"));
-        namePredicatesArabianNights.add(new NamePredicate("Pyramids"));
-        namePredicatesArabianNights.add(new NamePredicate("Repentant Blacksmith"));
-        namePredicatesArabianNights.add(new NamePredicate("Ring of Ma'ruf"));
-        namePredicatesArabianNights.add(new NamePredicate("Rukh Egg"));
-        namePredicatesArabianNights.add(new NamePredicate("Sandals of Abdallah"));
-        namePredicatesArabianNights.add(new NamePredicate("Sandstorm"));
-        namePredicatesArabianNights.add(new NamePredicate("Serendib Djinn"));
-        namePredicatesArabianNights.add(new NamePredicate("Serendib Efreet"));
-        namePredicatesArabianNights.add(new NamePredicate("Shahrazad"));
-        namePredicatesArabianNights.add(new NamePredicate("Sindbad"));
-        namePredicatesArabianNights.add(new NamePredicate("Singing Tree"));
-        namePredicatesArabianNights.add(new NamePredicate("Sorceress Queen"));
-        namePredicatesArabianNights.add(new NamePredicate("Stone-Throwing Devils"));
-        namePredicatesArabianNights.add(new NamePredicate("Unstable Mutation"));
-        namePredicatesArabianNights.add(new NamePredicate("War Elephant"));
-        namePredicatesArabianNights.add(new NamePredicate("Wyluli Wolf"));
-        namePredicatesArabianNights.add(new NamePredicate("Ydwen Efreet"));
-        return namePredicatesArabianNights;
+    static public List<NamePredicate> arabianNightsNamePredicatesOtherThanCityInABottle() {
+        List<NamePredicate> namePredicatesOtherThanCityInABottle = new ArrayList<>();
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Abu Ja'far"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Aladdin"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Aladdin's Lamp"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Aladdin's Ring"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Ali Baba"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Ali from Cairo"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Army of Allah"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Bazaar of Baghdad"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Bird Maiden"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Bottle of Suleiman"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Brass Man"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Camel"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("City of Brass"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Cuombajj Witches"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Cyclone"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Dancing Scimitar"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Dandan"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Desert"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Desert Nomads"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Desert Twister"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Diamond Valley"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Drop of Honey"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Ebony Horse"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Elephant Graveyard"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("El-Hajjaj"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Erg Raiders"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Erhnam Djinn"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Eye for an Eye"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Fishliver Oil"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Flying Carpet"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Flying Men"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Ghazban Ogre"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Giant Tortoise"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Guardian Beast"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Hasran Ogress"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Hurr Jackal"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Ifh-Biff Efreet"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Island Fish Jasconius"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Island of Wak-Wak"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Jandor's Ring"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Jandor's Saddlebags"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Jeweled Bird"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Jihad"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Junun Efreet"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Juzam Djinn"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Khabal Ghoul"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("King Suleiman"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Kird Ape"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Library of Alexandria"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Magnetic Mountain"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Merchant Ship"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Metamorphosis"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Mijae Djinn"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Moorish Cavalry"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Mountain"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Nafs Asp"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Oasis"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Old Man of the Sea"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Oubliette"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Piety"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Pyramids"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Repentant Blacksmith"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Ring of Ma'ruf"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Rukh Egg"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Sandals of Abdallah"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Sandstorm"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Serendib Djinn"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Serendib Efreet"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Shahrazad"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Sindbad"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Singing Tree"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Sorceress Queen"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Stone-Throwing Devils"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Unstable Mutation"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("War Elephant"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Wyluli Wolf"));
+        namePredicatesOtherThanCityInABottle.add(new NamePredicate("Ydwen Efreet"));
+        return namePredicatesOtherThanCityInABottle;
     }
 }
 
@@ -140,7 +140,7 @@ class CityInABottleStateTriggeredAbility extends StateTriggeredAbility {
 
     static {
         filter.add(TokenPredicate.FALSE);
-        filter.add(Predicates.or(getArabianNightsNamePredicates()));
+        filter.add(Predicates.or(arabianNightsNamePredicatesOtherThanCityInABottle()));
 
     }
 
@@ -174,7 +174,7 @@ class CityInABottleSacrificeEffect extends OneShotEffect {
 
     static {
         filter.add(TokenPredicate.FALSE);
-        filter.add(Predicates.or(getArabianNightsNamePredicates()));
+        filter.add(Predicates.or(arabianNightsNamePredicatesOtherThanCityInABottle()));
     }
 
     CityInABottleSacrificeEffect() {
@@ -205,7 +205,7 @@ class CityInABottleCantPlayEffect extends ContinuousRuleModifyingEffectImpl {
     private static final FilterCard filter = new FilterCard("cards originally printed in the Arabian Nights expansion");
 
     static {
-        filter.add(Predicates.or(getArabianNightsNamePredicates()));
+        filter.add(Predicates.or(arabianNightsNamePredicatesOtherThanCityInABottle()));
     }
 
     CityInABottleCantPlayEffect() {
