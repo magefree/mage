@@ -20,6 +20,7 @@ public final class BirdSoldierToken extends TokenImpl {
         color.setWhite(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
+        setOriginalExpansionSetCode("ARB");
 
         addAbility(FlyingAbility.getInstance());
     }
