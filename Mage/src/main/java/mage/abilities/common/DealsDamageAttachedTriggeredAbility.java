@@ -15,6 +15,7 @@ public class DealsDamageAttachedTriggeredAbility extends TriggeredAbilityImpl {
 
     public DealsDamageAttachedTriggeredAbility(Zone zone, Effect effect, boolean optional) {
         super(zone, effect, optional);
+        setTriggerPhrase("Whenever enchanted creature deals damage, ");
     }
 
     public DealsDamageAttachedTriggeredAbility(final DealsDamageAttachedTriggeredAbility ability) {
@@ -46,10 +47,5 @@ public class DealsDamageAttachedTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever enchanted creature deals damage, " ;
     }
 }

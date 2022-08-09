@@ -21,6 +21,7 @@ public class BeginningOfCombatTriggeredAbility extends TriggeredAbilityImpl {
         super(zone, effect, isOptional);
         this.targetController = targetController;
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase(generateTriggerPhrase());
     }
 
     public BeginningOfCombatTriggeredAbility(final BeginningOfCombatTriggeredAbility ability) {
@@ -74,8 +75,7 @@ public class BeginningOfCombatTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    @Override
-    public String getTriggerPhrase() {
+    private String generateTriggerPhrase() {
         switch (targetController) {
             case YOU:
                 return "At the beginning of combat on your turn, " + generateZoneString();

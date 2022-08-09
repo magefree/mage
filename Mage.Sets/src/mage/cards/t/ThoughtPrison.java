@@ -115,6 +115,7 @@ class ThoughtPrisonTriggeredAbility extends TriggeredAbilityImpl {
 
     public ThoughtPrisonTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ThoughtPrisonDamageEffect(), false);
+        setTriggerPhrase("Whenever a player casts a spell that shares a color or mana value with the exiled card, ");
     }
 
     public ThoughtPrisonTriggeredAbility(final ThoughtPrisonTriggeredAbility ability) {
@@ -135,45 +136,42 @@ class ThoughtPrisonTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = (Spell) game.getObject(event.getTargetId());
         Permanent sourcePermanent = game.getPermanent(this.getSourceId());
-
-        if (spell instanceof Spell) {
-            if (sourcePermanent == null) {
-                sourcePermanent = (Permanent) game.getLastKnownInformation(event.getSourceId(), Zone.BATTLEFIELD);
-            }
-            if (sourcePermanent != null && sourcePermanent.getImprinted() != null && !sourcePermanent.getImprinted().isEmpty()) {
-                Card imprintedCard = game.getCard(sourcePermanent.getImprinted().get(0));
-                if (imprintedCard != null && game.getState().getZone(imprintedCard.getId()) == Zone.EXILED) {
-                    // Check if spell's color matches the imprinted card
-                    ObjectColor spellColor = spell.getColor(game);
-                    ObjectColor imprintedColor = imprintedCard.getColor(game);
-                    boolean matches = false;
-
-                    if (spellColor.shares(imprintedColor)) {
-                        matches = true;
-                    }
-                    // Check if spell's CMC matches the imprinted card
-                    int cmc = spell.getManaValue();
-                    int imprintedCmc = imprintedCard.getManaValue();
-                    if (cmc == imprintedCmc) {
-                        matches = true;
-                    }
-
-                    if (matches) {
-                        for (Effect effect : this.getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                        }
-                        return matches;
-                    }
-                }
-            }
+        if (spell == null) {
+            return false;
         }
 
-        return false;
-    }
+        if (sourcePermanent == null) {
+            sourcePermanent = (Permanent) game.getLastKnownInformation(event.getSourceId(), Zone.BATTLEFIELD);
+        }
+        if (sourcePermanent == null || sourcePermanent.getImprinted() == null || sourcePermanent.getImprinted().isEmpty()) {
+            return false;
+        }
 
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a player casts a spell that shares a color or mana value with the exiled card, " ;
+        Card imprintedCard = game.getCard(sourcePermanent.getImprinted().get(0));
+        if (imprintedCard == null || game.getState().getZone(imprintedCard.getId()) != Zone.EXILED) {
+            return false;
+        }
+        // Check if spell's color matches the imprinted card
+        ObjectColor spellColor = spell.getColor(game);
+        ObjectColor imprintedColor = imprintedCard.getColor(game);
+        boolean matches = false;
+        if (spellColor.shares(imprintedColor)) {
+            matches = true;
+        }
+
+        // Check if spell's CMC matches the imprinted card
+        int cmc = spell.getManaValue();
+        int imprintedCmc = imprintedCard.getManaValue();
+        if (cmc == imprintedCmc) {
+            matches = true;
+        }
+
+        if (matches) {
+            for (Effect effect : this.getEffects()) {
+                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+            }
+        }
+        return matches;
     }
 }
 

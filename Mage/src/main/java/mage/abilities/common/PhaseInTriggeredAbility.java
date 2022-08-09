@@ -14,6 +14,7 @@ public class PhaseInTriggeredAbility extends TriggeredAbilityImpl {
 
     public PhaseInTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("When {this} phases in, ");
     }
 
     public PhaseInTriggeredAbility(final PhaseInTriggeredAbility ability) {
@@ -33,10 +34,5 @@ public class PhaseInTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return getSourceId().equals(event.getTargetId());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When {this} phases in, " ;
     }
 }

@@ -48,6 +48,7 @@ class ElderBrainTriggeredAbility extends TriggeredAbilityImpl {
 
     ElderBrainTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ElderBrainEffect());
+        setTriggerPhrase("Whenever {this} attacks a player, ");
     }
 
     private ElderBrainTriggeredAbility(final ElderBrainTriggeredAbility ability) {
@@ -72,11 +73,6 @@ class ElderBrainTriggeredAbility extends TriggeredAbilityImpl {
         }
         this.getEffects().setTargetPointer(new FixedTarget(player.getId()));
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} attacks a player, ";
     }
 }
 

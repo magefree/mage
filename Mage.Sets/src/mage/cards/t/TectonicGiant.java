@@ -56,6 +56,7 @@ class TectonicGiantTriggeredAbility extends TriggeredAbilityImpl {
     TectonicGiantTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamagePlayersEffect(3, TargetController.OPPONENT), false);
         this.addMode(new Mode(new TectonicGiantEffect()));
+        setTriggerPhrase("Whenever {this} attacks or becomes the target of a spell an opponent controls, ");
     }
 
     private TectonicGiantTriggeredAbility(final TectonicGiantTriggeredAbility ability) {
@@ -84,11 +85,6 @@ class TectonicGiantTriggeredAbility extends TriggeredAbilityImpl {
                 }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} attacks or becomes the target of a spell an opponent controls, " ;
     }
 
     @Override

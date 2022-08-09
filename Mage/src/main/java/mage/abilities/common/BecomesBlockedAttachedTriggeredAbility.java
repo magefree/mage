@@ -25,6 +25,7 @@ public class BecomesBlockedAttachedTriggeredAbility extends TriggeredAbilityImpl
     public BecomesBlockedAttachedTriggeredAbility(Effect effect, boolean optional, SetTargetPointer setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever enchanted creature becomes blocked, ");
     }
 
     public BecomesBlockedAttachedTriggeredAbility(final BecomesBlockedAttachedTriggeredAbility ability) {
@@ -56,11 +57,6 @@ public class BecomesBlockedAttachedTriggeredAbility extends TriggeredAbilityImpl
                 break;
         }
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever enchanted creature becomes blocked, ";
     }
 
     @Override

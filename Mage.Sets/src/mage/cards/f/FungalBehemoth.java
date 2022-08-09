@@ -64,6 +64,7 @@ class FungalBehemothTriggeredAbility extends TriggeredAbilityImpl {
     public FungalBehemothTriggeredAbility() {
         super(Zone.EXILED, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), true);
         addTarget(new TargetCreaturePermanent());
+        setTriggerPhrase("Whenever a time counter is removed from {this} while it's exiled, ");
     }
 
     public FungalBehemothTriggeredAbility(final FungalBehemothTriggeredAbility ability) {
@@ -84,12 +85,6 @@ class FungalBehemothTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getData().equals(CounterType.TIME.getName()) && event.getTargetId().equals(this.getSourceId());
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a time counter is removed from {this} while it's exiled, " ;
-    }
-
 }
 
 class P1P1CountersOnControlledCreaturesCount implements DynamicValue {

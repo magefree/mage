@@ -61,6 +61,7 @@ class InfiniteAuthorityTriggeredAbility extends TriggeredAbilityImpl {
 
     InfiniteAuthorityTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new InfiniteAuthorityEffect())));
+        setTriggerPhrase("Whenever enchanted creature blocks or becomes blocked by a creature with toughness 3 or less, ");
     }
 
     InfiniteAuthorityTriggeredAbility(final InfiniteAuthorityTriggeredAbility ability) {
@@ -101,11 +102,6 @@ class InfiniteAuthorityTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever enchanted creature blocks or becomes blocked by a creature with toughness 3 or less, ";
     }
 }
 

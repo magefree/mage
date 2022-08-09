@@ -42,6 +42,7 @@ public class SpellCastOpponentTriggeredAbility extends TriggeredAbilityImpl {
         super(zone, effect, optional);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever an opponent casts " + filter.getMessage() + ", ");
     }
 
     public SpellCastOpponentTriggeredAbility(final SpellCastOpponentTriggeredAbility ability) {
@@ -78,11 +79,6 @@ public class SpellCastOpponentTriggeredAbility extends TriggeredAbilityImpl {
                 throw new UnsupportedOperationException("Value of SetTargetPointer not supported!");
         }
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever an opponent casts " + filter.getMessage() + ", " ;
     }
 
     @Override

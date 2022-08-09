@@ -48,6 +48,7 @@ class PsychicSurgeryTriggeredAbility extends TriggeredAbilityImpl {
 
     public PsychicSurgeryTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PsychicSurgeryEffect(), true);
+        setTriggerPhrase("Whenever an opponent shuffles their library, ");
     }
 
     public PsychicSurgeryTriggeredAbility(final PsychicSurgeryTriggeredAbility ability) {
@@ -71,11 +72,6 @@ class PsychicSurgeryTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever an opponent shuffles their library, " ;
     }
 }
 

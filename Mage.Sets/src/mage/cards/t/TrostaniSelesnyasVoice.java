@@ -62,6 +62,7 @@ class TrostaniSelesnyasVoiceTriggeredAbility extends TriggeredAbilityImpl {
 
     public TrostaniSelesnyasVoiceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TrostaniSelesnyasVoiceEffect(), false);
+        setTriggerPhrase("Whenever another creature enters the battlefield under your control, ");
     }
 
     public TrostaniSelesnyasVoiceTriggeredAbility(TrostaniSelesnyasVoiceTriggeredAbility ability) {
@@ -76,22 +77,18 @@ class TrostaniSelesnyasVoiceTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null
-                && permanent.isCreature(game)
-                && permanent.isControlledBy(this.controllerId)
-                && !Objects.equals(event.getTargetId(), this.getSourceId())) {
-            Effect effect = this.getEffects().get(0);
-            // life is determined during resolution so it has to be retrieved there (e.g. Giant Growth before resolution)
-            effect.setValue("lifeSource", event.getTargetId());
-            effect.setValue("zoneChangeCounter", permanent.getZoneChangeCounter(game));
-            return true;
+        if (permanent == null
+                || !permanent.isCreature(game)
+                || !permanent.isControlledBy(this.controllerId)
+                || Objects.equals(event.getTargetId(), this.getSourceId())) {
+            return false;
         }
-        return false;
-    }
 
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever another creature enters the battlefield under your control, " ;
+        Effect effect = this.getEffects().get(0);
+        // life is determined during resolution so it has to be retrieved there (e.g. Giant Growth before resolution)
+        effect.setValue("lifeSource", event.getTargetId());
+        effect.setValue("zoneChangeCounter", permanent.getZoneChangeCounter(game));
+        return true;
     }
 
     @Override

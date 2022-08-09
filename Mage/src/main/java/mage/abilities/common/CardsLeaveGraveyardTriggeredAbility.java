@@ -17,6 +17,7 @@ public class CardsLeaveGraveyardTriggeredAbility extends TriggeredAbilityImpl {
 
     public CardsLeaveGraveyardTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        setTriggerPhrase("Whenever one or more cards leave your graveyard, ");
     }
 
     private CardsLeaveGraveyardTriggeredAbility(final CardsLeaveGraveyardTriggeredAbility ability) {
@@ -45,10 +46,5 @@ public class CardsLeaveGraveyardTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public CardsLeaveGraveyardTriggeredAbility copy() {
         return new CardsLeaveGraveyardTriggeredAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever one or more cards leave your graveyard, " ;
     }
 }

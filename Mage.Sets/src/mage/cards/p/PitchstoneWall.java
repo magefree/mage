@@ -51,6 +51,7 @@ class PitchstoneWallTriggeredAbility extends TriggeredAbilityImpl {
 
     public PitchstoneWallTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new ReturnToHandTargetEffect().setText("return the discarded card from your graveyard to your hand"), new SacrificeSourceCost()), false);
+        setTriggerPhrase("Whenever you discard a card, ");
     }
 
     public PitchstoneWallTriggeredAbility(final PitchstoneWallTriggeredAbility ability) {
@@ -75,10 +76,5 @@ class PitchstoneWallTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you discard a card, " ;
     }
 }

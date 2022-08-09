@@ -11,8 +11,7 @@ import mage.filter.StaticFilters;
 public class ProwessAbility extends SpellCastControllerTriggeredAbility {
 
     public ProwessAbility() {
-        super(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false);
-        this.filter = StaticFilters.FILTER_SPELL_NON_CREATURE;
+        super(new BoostSourceEffect(1, 1, Duration.EndOfTurn), StaticFilters.FILTER_SPELL_NON_CREATURE, false);
     }
 
     public ProwessAbility(final ProwessAbility ability) {

@@ -17,7 +17,6 @@ import mage.game.permanent.Permanent;
 public class BecomesTargetAttachedTriggeredAbility extends TriggeredAbilityImpl {
 
     private final FilterStackObject filter;
-    private final String enchantType;
 
     public BecomesTargetAttachedTriggeredAbility(Effect effect) {
         this(effect, StaticFilters.FILTER_SPELL_OR_ABILITY_A);
@@ -30,13 +29,12 @@ public class BecomesTargetAttachedTriggeredAbility extends TriggeredAbilityImpl 
     public BecomesTargetAttachedTriggeredAbility(Effect effect, FilterStackObject filter, String enchantType) {
         super(Zone.BATTLEFIELD, effect);
         this.filter = filter.copy();
-        this.enchantType = enchantType;
+        setTriggerPhrase("When enchanted " + enchantType + " becomes the target of " + filter.getMessage() + ", ");
     }
 
     public BecomesTargetAttachedTriggeredAbility(final BecomesTargetAttachedTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter.copy();
-        this.enchantType = ability.enchantType;
     }
 
     @Override
@@ -60,10 +58,5 @@ public class BecomesTargetAttachedTriggeredAbility extends TriggeredAbilityImpl 
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When enchanted " + enchantType + " becomes the target of " + filter.getMessage() + ", ";
     }
 }

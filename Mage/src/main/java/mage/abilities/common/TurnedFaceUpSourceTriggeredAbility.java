@@ -30,6 +30,7 @@ public class TurnedFaceUpSourceTriggeredAbility extends TriggeredAbilityImpl {
         // has to be set so the ability triggers if card is turn faced up
         this.setWorksFaceDown(true);
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("When {this} is turned face up, ");
     }
 
     public TurnedFaceUpSourceTriggeredAbility(final TurnedFaceUpSourceTriggeredAbility ability) {
@@ -58,10 +59,5 @@ public class TurnedFaceUpSourceTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When {this} is turned face up, " ;
     }
 }

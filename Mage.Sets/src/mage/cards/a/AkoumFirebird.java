@@ -61,6 +61,7 @@ class AkoumFirebirdLandfallAbility extends TriggeredAbilityImpl {
 
     public AkoumFirebirdLandfallAbility(Effect effect, boolean optional) {
         this(Zone.GRAVEYARD, effect, optional);
+        setTriggerPhrase("<i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, " );
     }
 
     public AkoumFirebirdLandfallAbility (Zone zone, Effect effect, boolean optional ) {
@@ -80,11 +81,6 @@ class AkoumFirebirdLandfallAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         return permanent != null && permanent.isLand(game) && permanent.isControlledBy(this.controllerId);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "<i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, " ;
     }
 
     @Override

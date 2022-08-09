@@ -21,6 +21,7 @@ public class DrawCardOpponentTriggeredAbility extends TriggeredAbilityImpl {
     public DrawCardOpponentTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever an opponent draws a card, ");
     }
 
     public DrawCardOpponentTriggeredAbility(final DrawCardOpponentTriggeredAbility ability) {
@@ -49,10 +50,5 @@ public class DrawCardOpponentTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever an opponent draws a card, ";
     }
 }

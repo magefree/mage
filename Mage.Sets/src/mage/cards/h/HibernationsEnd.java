@@ -51,6 +51,7 @@ class HibernationsEndAbility extends TriggeredAbilityImpl {
 
     public HibernationsEndAbility() {
         super(Zone.BATTLEFIELD, new HibernationsEndEffect(), true);
+        setTriggerPhrase("Whenever you pay {this}'s cumulative upkeep, ");
     }
 
     public HibernationsEndAbility(final HibernationsEndAbility ability) {
@@ -70,11 +71,6 @@ class HibernationsEndAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getTargetId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you pay {this}'s cumulative upkeep, " ;
     }
 }
 

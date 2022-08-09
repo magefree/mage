@@ -53,6 +53,7 @@ class TrailOfCrumbsTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new LookLibraryAndPickControllerEffect(
                 2, 1, StaticFilters.FILTER_CARD_PERMANENT, PutCards.HAND, PutCards.BOTTOM_ANY
         ), new GenericManaCost(1)));
+        setTriggerPhrase("Whenever you sacrifice a Food, ");
     }
 
     private TrailOfCrumbsTriggeredAbility(final TrailOfCrumbsTriggeredAbility ability) {
@@ -75,10 +76,5 @@ class TrailOfCrumbsTriggeredAbility extends TriggeredAbilityImpl {
         return permanent != null
                 && event.getPlayerId().equals(this.getControllerId())
                 && permanent.hasSubtype(SubType.FOOD, game);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you sacrifice a Food, ";
     }
 }

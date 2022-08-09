@@ -35,6 +35,11 @@ public class AttackingCreaturePutIntoGraveyardTriggeredAbility extends Triggered
         this.filterPermanent = filterPermanent;
         this.onlyToControllerGraveyard = onlyToControllerGraveyard;
         this.itDies = itDies;
+        setTriggerPhrase("Whenever " + filterPermanent.getMessage() +
+                (itDies ?
+                        " dies, " :
+                        " is put into " + (onlyToControllerGraveyard ? "your" : "a") + " graveyard from the battlefield, ")
+        );
     }
 
     private AttackingCreaturePutIntoGraveyardTriggeredAbility(final AttackingCreaturePutIntoGraveyardTriggeredAbility ability) {
@@ -111,14 +116,4 @@ public class AttackingCreaturePutIntoGraveyardTriggeredAbility extends Triggered
                 return false;
         }
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        if (itDies) {
-            return "Whenever " + filterPermanent.getMessage() + " dies, ";
-        }
-        return "Whenever " + filterPermanent.getMessage() + " is put into " + (onlyToControllerGraveyard ? "your" : "a")
-                + " graveyard from the battlefield, ";
-    }
-
 }

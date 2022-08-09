@@ -150,6 +150,7 @@ class DhalsimPliablePacifistTriggeredAbility extends TriggeredAbilityImpl {
     DhalsimPliablePacifistTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
         this.withFlavorWord("Fierce Punch");
+        setTriggerPhrase("Whenever one or more creatures you control deal combat damage to a player, ");
     }
 
     private DhalsimPliablePacifistTriggeredAbility(final DhalsimPliablePacifistTriggeredAbility ability) {
@@ -189,10 +190,5 @@ class DhalsimPliablePacifistTriggeredAbility extends TriggeredAbilityImpl {
         }
         damagedPlayerIds.add(event.getPlayerId());
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever one or more creatures you control deal combat damage to a player, ";
     }
 }

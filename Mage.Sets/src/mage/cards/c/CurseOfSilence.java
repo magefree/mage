@@ -108,6 +108,7 @@ class CurseOfSilenceTriggeredAbility extends TriggeredAbilityImpl {
                 new DrawCardSourceControllerEffect(1),
                 new SacrificeSourceCost()
         ));
+        setTriggerPhrase("Whenever enchanted player casts a spell with the chosen name, ");
     }
 
     private CurseOfSilenceTriggeredAbility(final CurseOfSilenceTriggeredAbility ability) {
@@ -135,10 +136,5 @@ class CurseOfSilenceTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever enchanted player casts a spell with the chosen name, ";
     }
 }

@@ -53,6 +53,7 @@ class FeywildVisitorAbility extends TriggeredAbilityImpl {
 
     FeywildVisitorAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new FaerieDragonToken()), false);
+        setTriggerPhrase("Whenever one or more nontoken creatures you control deal combat damage to a player, you ");
     }
 
     private FeywildVisitorAbility(final FeywildVisitorAbility ability) {
@@ -89,10 +90,5 @@ class FeywildVisitorAbility extends TriggeredAbilityImpl {
         }
         damagedPlayerIds.add(event.getTargetId());
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever one or more nontoken creatures you control deal combat damage to a player, you ";
     }
 }

@@ -43,6 +43,7 @@ class FurnaceCelebrationAbility extends TriggeredAbilityImpl {
     public FurnaceCelebrationAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new DamageTargetEffect(2), new ManaCostsImpl<>("{2}")));
         this.addTarget(new TargetAnyTarget());
+        setTriggerPhrase("Whenever you sacrifice another permanent, ");
     }
 
     public FurnaceCelebrationAbility(final FurnaceCelebrationAbility ability) {
@@ -63,11 +64,4 @@ class FurnaceCelebrationAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(this.getControllerId()) && !event.getTargetId().equals(sourceId);
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you sacrifice another permanent, " ;
-    }
-
-
 }

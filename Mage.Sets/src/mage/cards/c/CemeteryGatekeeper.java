@@ -100,6 +100,7 @@ class CemeteryGatekeeperTriggeredAbility extends TriggeredAbilityImpl {
 
     public CemeteryGatekeeperTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2, true, "that player"));
+        setTriggerPhrase("Whenever a player plays a land or casts a spell, if it shares a card type with the exiled card, ");
     }
 
     private CemeteryGatekeeperTriggeredAbility(final CemeteryGatekeeperTriggeredAbility ability) {
@@ -160,10 +161,5 @@ class CemeteryGatekeeperTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a player plays a land or casts a spell, if it shares a card type with the exiled card, ";
     }
 }

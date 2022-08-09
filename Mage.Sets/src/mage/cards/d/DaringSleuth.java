@@ -48,6 +48,7 @@ class DaringSleuthTriggeredAbility extends TriggeredAbilityImpl {
 
     public DaringSleuthTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TransformSourceEffect());
+        setTriggerPhrase("When you sacrifice a Clue, ");
     }
 
     public DaringSleuthTriggeredAbility(final DaringSleuthTriggeredAbility ability) {
@@ -68,10 +69,5 @@ class DaringSleuthTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(this.getControllerId())
                 && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).hasSubtype(SubType.CLUE, game);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When you sacrifice a Clue, " ;
     }
 }

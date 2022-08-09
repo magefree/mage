@@ -94,6 +94,8 @@ class UnboundFlourishingCopyAbility extends TriggeredAbilityImpl {
 
     UnboundFlourishingCopyAbility() {
         super(Zone.BATTLEFIELD, new UnboundFlourishingCopyEffect(), false);
+        setTriggerPhrase("Whenever you cast an instant or sorcery spell or activate an ability, " +
+                         "if that spell's mana cost or that ability's activation cost contains {X}" );
     }
 
     UnboundFlourishingCopyAbility(final UnboundFlourishingCopyAbility ability) {
@@ -113,37 +115,32 @@ class UnboundFlourishingCopyAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId().equals(getControllerId())) {
+        if (!event.getPlayerId().equals(getControllerId())) {
+            return false;
+        }
 
-            // activated ability
-            if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY) {
-                StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-                if (stackAbility != null && !(stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl)) {
-                    if (stackAbility.getManaCostsToPay().containsX()) {
-                        game.getState().setValue(this.getSourceId() + UnboundFlourishing.needPrefix, stackAbility);
-                        return true;
-                    }
+        // activated ability
+        if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY) {
+            StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
+            if (stackAbility != null && !(stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl)) {
+                if (stackAbility.getManaCostsToPay().containsX()) {
+                    game.getState().setValue(this.getSourceId() + UnboundFlourishing.needPrefix, stackAbility);
+                    return true;
                 }
             }
+        }
 
-            // spell
-            if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-                Spell spell = game.getStack().getSpell(event.getTargetId());
-                if (spell != null && spell.isInstantOrSorcery(game)) {
-                    if (spell.getSpellAbility().getManaCostsToPay().containsX()) {
-                        game.getState().setValue(this.getSourceId() + UnboundFlourishing.needPrefix, spell);
-                        return true;
-                    }
+        // spell
+        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (spell != null && spell.isInstantOrSorcery(game)) {
+                if (spell.getSpellAbility().getManaCostsToPay().containsX()) {
+                    game.getState().setValue(this.getSourceId() + UnboundFlourishing.needPrefix, spell);
+                    return true;
                 }
             }
-
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you cast an instant or sorcery spell or activate an ability, if that spell's mana cost or that ability's activation cost contains {X}" ;
     }
 }
 

@@ -67,6 +67,7 @@ class HanSoloScrumratTriggeredAbility extends TriggeredAbilityImpl {
 
     public HanSoloScrumratTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false);
+        setTriggerPhrase("Whenever {this} creature deals damage during your turn, ");
     }
 
     public HanSoloScrumratTriggeredAbility(final HanSoloScrumratTriggeredAbility ability) {
@@ -90,10 +91,5 @@ class HanSoloScrumratTriggeredAbility extends TriggeredAbilityImpl {
         return source != null
                 && game.isActivePlayer(source.getControllerId())
                 && event.getSourceId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} creature deals damage during your turn, " ;
     }
 }

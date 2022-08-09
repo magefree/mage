@@ -71,6 +71,7 @@ class KothophedSoulHoarderTriggeredAbility extends TriggeredAbilityImpl {
 
     public KothophedSoulHoarderTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
+        setTriggerPhrase("Whenever a creature leaves an opponent's graveyard, ");
     }
 
     public KothophedSoulHoarderTriggeredAbility(final KothophedSoulHoarderTriggeredAbility ability) {
@@ -96,10 +97,5 @@ class KothophedSoulHoarderTriggeredAbility extends TriggeredAbilityImpl {
             return card != null && controller != null && controller.hasOpponent(card.getOwnerId(), game);
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature leaves an opponent's graveyard, " ;
     }
 }

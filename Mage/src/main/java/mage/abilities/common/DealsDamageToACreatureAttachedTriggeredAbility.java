@@ -25,6 +25,8 @@ public class DealsDamageToACreatureAttachedTriggeredAbility extends TriggeredAbi
         this.combatOnly = combatOnly;
         this.setTargetPointer = setTargetPointer;
         this.attachedDescription = attachedDescription;
+        setTriggerPhrase("Whenever " + attachedDescription + " deals "
+                              + (combatOnly ? "combat " : "") + "damage to a creature, ");
     }
 
     public DealsDamageToACreatureAttachedTriggeredAbility(final DealsDamageToACreatureAttachedTriggeredAbility ability) {
@@ -64,11 +66,5 @@ public class DealsDamageToACreatureAttachedTriggeredAbility extends TriggeredAbi
             }
         }
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever " + attachedDescription + " deals "
-                + (combatOnly ? "combat " : "") + "damage to a creature, ";
     }
 }

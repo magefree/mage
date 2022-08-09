@@ -67,6 +67,7 @@ class ImprisonTriggeredAbility extends TriggeredAbilityImpl {
 
     ImprisonTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new CounterTargetEffect().setText("counter that ability"), new DestroySourceEffect(), new ManaCostsImpl<>("{1}")));
+        setTriggerPhrase("Whenever a player activates an ability of enchanted creature with {T} in its activation cost that isn't a mana ability, ");
     }
 
     ImprisonTriggeredAbility(final ImprisonTriggeredAbility ability) {
@@ -100,11 +101,6 @@ class ImprisonTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a player activates an ability of enchanted creature with {T} in its activation cost that isn't a mana ability, " ;
     }
 }
 

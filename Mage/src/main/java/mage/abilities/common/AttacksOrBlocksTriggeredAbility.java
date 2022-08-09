@@ -9,28 +9,22 @@ import mage.game.events.GameEvent;
 
 public class AttacksOrBlocksTriggeredAbility extends TriggeredAbilityImpl {
 
-    protected String startText = "Whenever";
-
     public AttacksOrBlocksTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         if (effect instanceof CreateDelayedTriggeredAbilityEffect) {
-            startText = "When";
+            setTriggerPhrase("When {this} attacks or blocks, ");
+        } else {
+            setTriggerPhrase("Whenever {this} attacks or blocks, ");
         }
     }
 
     public AttacksOrBlocksTriggeredAbility(final AttacksOrBlocksTriggeredAbility ability) {
         super(ability);
-        this.startText = ability.startText;
     }
 
     @Override
     public AttacksOrBlocksTriggeredAbility copy() {
         return new AttacksOrBlocksTriggeredAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return startText + " {this} attacks or blocks, " ;
     }
 
     @Override

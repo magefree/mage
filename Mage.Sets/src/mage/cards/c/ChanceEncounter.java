@@ -51,6 +51,7 @@ class ChanceEncounterTriggeredAbility extends TriggeredAbilityImpl {
 
     ChanceEncounterTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.LUCK.createInstance()), false);
+        setTriggerPhrase("Whenever you win a coin flip, ");
     }
 
     private ChanceEncounterTriggeredAbility(final ChanceEncounterTriggeredAbility ability) {
@@ -73,10 +74,5 @@ class ChanceEncounterTriggeredAbility extends TriggeredAbilityImpl {
         return flipEvent.getPlayerId().equals(controllerId)
                 && flipEvent.isWinnable()
                 && (flipEvent.getChosen() == flipEvent.getResult());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you win a coin flip, " ;
     }
 }

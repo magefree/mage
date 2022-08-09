@@ -60,6 +60,7 @@ class RiftmarkedKnightTriggeredAbility extends TriggeredAbilityImpl {
 
     public RiftmarkedKnightTriggeredAbility() {
         super(Zone.EXILED, new CreateTokenEffect(new RiftmarkedKnightToken()), false);
+        setTriggerPhrase("When the last time counter is removed from {this} while it's exiled, ");
     }
 
     public RiftmarkedKnightTriggeredAbility(final RiftmarkedKnightTriggeredAbility ability) {
@@ -74,11 +75,6 @@ class RiftmarkedKnightTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return (event.getTargetId().equals(this.getSourceId()) && game.getCard(event.getTargetId()).getCounters(game).getCount(CounterType.TIME) == 0);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When the last time counter is removed from {this} while it's exiled, " ;
     }
 
     @Override
