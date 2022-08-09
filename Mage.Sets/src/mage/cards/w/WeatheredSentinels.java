@@ -44,11 +44,13 @@ public class WeatheredSentinels extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Weathered Sentinels can attack players who attacked you during their last turn as though it didn't have defender.
-        this.addAbility(new SimpleStaticAbility(new ConditionalAsThoughEffect(
-            new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield),
-            WeatheredSentinelsCanAttackSomeoneCondition.instance)
-                .setText("Weathered Sentinels can attack players who attacked you during their last turn as though it didn't have defender.")
-        ));
+        this.addAbility(new SimpleStaticAbility(
+                new ConditionalAsThoughEffect(
+                        new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield),
+                        WeatheredSentinelsCanAttackSomeoneCondition.instance)
+                        .setText("Weathered Sentinels can attack players who attacked you during their last turn as though it didn't have defender.")),
+                new WeatheredSentinelsLastTurnAttackersWatcher()
+        );
 
         // Whenever Weathered Sentinels attacks, it gets +3/+3 and gains indestructible until end of turn.
         Ability ability = new AttacksTriggeredAbility(
@@ -185,7 +187,7 @@ enum WeatheredSentinelsCanAttackSomeoneCondition implements Condition {
 
         for (UUID opponentId : game.getOpponents(controller.getId())) {
             Player opponent = game.getPlayer(opponentId);
-            if (opponent != null && watcher.checkPlayer(opponentId, controller.getId())) {
+            if (opponent != null && watcher.checkPlayer(controller.getId(), opponentId)) {
                 return true;
             }
         }

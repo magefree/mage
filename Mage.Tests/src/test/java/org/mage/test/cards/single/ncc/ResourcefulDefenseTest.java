@@ -16,7 +16,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author Alex-Vasile
  */
-public class ResourcefulDefenseTest  extends CardTestPlayerBase {
+public class ResourcefulDefenseTest extends CardTestPlayerBase {
     private static final String resourcefulDefense = "Resourceful Defense";
     // Vivid Creek enters the battlefield tapped with two charge counters on it.
     private static final String vividCreek = "Vivid Creek";
