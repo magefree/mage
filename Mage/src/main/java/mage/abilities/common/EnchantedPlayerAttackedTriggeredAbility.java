@@ -15,6 +15,7 @@ public class EnchantedPlayerAttackedTriggeredAbility extends TriggeredAbilityImp
 
     public EnchantedPlayerAttackedTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        setTriggerPhrase("Whenever enchanted player is attacked, ");
     }
 
     public EnchantedPlayerAttackedTriggeredAbility(final EnchantedPlayerAttackedTriggeredAbility ability) {
@@ -34,11 +35,6 @@ public class EnchantedPlayerAttackedTriggeredAbility extends TriggeredAbilityImp
             return game.getCombat().getPlayerDefenders(game, false).contains(enchantment.getAttachedTo());
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever enchanted player is attacked, " ;
     }
 
     @Override

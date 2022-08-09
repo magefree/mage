@@ -19,7 +19,7 @@ import java.util.Locale;
  */
 public class AttacksAttachedTriggeredAbility extends TriggeredAbilityImpl {
 
-    private AttachmentType attachmentType;
+    private final AttachmentType attachmentType;
     private final boolean setTargetPointer;
 
     public AttacksAttachedTriggeredAbility(Effect effect) {
@@ -38,6 +38,7 @@ public class AttacksAttachedTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, optional);
         this.attachmentType = attachmentType;
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever " + attachmentType.verb().toLowerCase(Locale.ENGLISH) + " creature attacks, ");
     }
 
     public AttacksAttachedTriggeredAbility(final AttacksAttachedTriggeredAbility abiltity) {
@@ -73,12 +74,5 @@ public class AttacksAttachedTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        StringBuilder sb = new StringBuilder("Whenever ");
-        sb.append(attachmentType.verb().toLowerCase(Locale.ENGLISH));
-        return sb.append(" creature attacks, ").toString();
     }
 }

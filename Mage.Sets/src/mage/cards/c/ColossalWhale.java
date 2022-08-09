@@ -61,6 +61,7 @@ class ColossalWhaleAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null);
         this.addEffect(new ColossalWhaleExileEffect());
         this.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
+        setTriggerPhrase("Whenever {this} attacks, ");
     }
 
     public ColossalWhaleAbility(final ColossalWhaleAbility ability) {
@@ -85,11 +86,6 @@ class ColossalWhaleAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} attacks, " ;
     }
 
     @Override

@@ -54,6 +54,7 @@ class BloodcrazedHopliteTriggeredAbility extends TriggeredAbilityImpl {
 
     public BloodcrazedHopliteTriggeredAbility() {
         super(Zone.ALL, new RemoveCounterTargetEffect(CounterType.P1P1.createInstance()), false);
+        setTriggerPhrase("Whenever a +1/+1 counter is put on {this}, ");
     }
 
     public BloodcrazedHopliteTriggeredAbility(BloodcrazedHopliteTriggeredAbility ability) {
@@ -73,10 +74,5 @@ class BloodcrazedHopliteTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public BloodcrazedHopliteTriggeredAbility copy() {
         return new BloodcrazedHopliteTriggeredAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a +1/+1 counter is put on {this}, " ;
     }
 }

@@ -59,6 +59,7 @@ class UlvenwaldMysteriesTriggeredAbility extends TriggeredAbilityImpl {
     public UlvenwaldMysteriesTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new HumanSoldierToken()));
         setLeavesTheBattlefieldTrigger(true);
+        setTriggerPhrase("Whenever you sacrifice a Clue, ");
     }
 
     public UlvenwaldMysteriesTriggeredAbility(final UlvenwaldMysteriesTriggeredAbility ability) {
@@ -79,10 +80,5 @@ class UlvenwaldMysteriesTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(this.getControllerId())
                 && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).hasSubtype(SubType.CLUE, game);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you sacrifice a Clue, " ;
     }
 }

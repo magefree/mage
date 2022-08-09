@@ -39,18 +39,19 @@ import mage.target.targetpointer.FixedTarget;
 public class HauntAbility extends TriggeredAbilityImpl {
 
     private boolean usedFromExile = false;
-    private boolean creatureHaunt;
 
     public HauntAbility(Card card, Effect effect) {
         super(Zone.ALL, effect, false);
-        creatureHaunt = card.isCreature();
+        boolean creatureHaunt = card.isCreature();
         addSubAbility(new HauntExileAbility(creatureHaunt));
+        setTriggerPhrase((creatureHaunt ? "When {this} enters the battlefield or the creature it haunts dies, "
+                                        : "When the creature {this} haunts dies, ")
+        );
     }
 
     private HauntAbility(final HauntAbility ability) {
         super(ability);
         this.usedFromExile = ability.usedFromExile;
-        this.creatureHaunt = ability.creatureHaunt;
     }
 
     @Override
@@ -103,13 +104,6 @@ public class HauntAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return (creatureHaunt ? "When {this} enters the battlefield or the creature it haunts dies, "
-                : "When the creature {this} haunts dies, ")
-                ;
-    }
 }
 
 class HauntExileAbility extends ZoneChangeTriggeredAbility {
@@ -127,7 +121,6 @@ class HauntExileAbility extends ZoneChangeTriggeredAbility {
         this.creatureHaunt = creatureHaunt;
         this.setRuleAtTheTop(creatureHaunt);
         this.addTarget(new TargetCreaturePermanent());
-
     }
 
     private HauntExileAbility(final HauntExileAbility ability) {

@@ -901,6 +901,16 @@ public final class CardUtil {
         return sb.toString();
     }
 
+    public static Outcome getBoostOutcome(DynamicValue power, DynamicValue toughness) {
+        if (toughness.getSign() < 0) {
+            return Outcome.Removal;
+        }
+        if (power.getSign() < 0) {
+            return Outcome.UnboostCreature;
+        }
+        return Outcome.BoostCreature;
+    }
+
     public static boolean isSpliceAbility(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
             return ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLICE;

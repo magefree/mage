@@ -28,7 +28,7 @@ public final class Skyreaping extends CardImpl {
 
         // Skyreaping deals damage to each creature with flying equal to your devotion to green.
         Effect effect = new DamageAllEffect(DevotionCount.G, filter);
-        effect.setText("{this} deals damage to each creature with flying equal to your devotion to green <i>(Each {G} in the mana costs of permanents you control counts toward your devotion to green.)</i>");
+        effect.setText("{this} deals damage to each creature with flying equal to your devotion to green. " + DevotionCount.G.getReminder());
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addHint(DevotionCount.G.getHint());
     }

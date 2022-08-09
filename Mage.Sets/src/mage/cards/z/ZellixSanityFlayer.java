@@ -65,6 +65,7 @@ class ZellixSanityFlayerTriggeredAbility extends TriggeredAbilityImpl {
     ZellixSanityFlayerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new Horror2Token()));
         this.withFlavorWord("Hive Mind");
+        setTriggerPhrase("Whenever a player mills one or more creature cards, you ");
     }
 
     private ZellixSanityFlayerTriggeredAbility(final ZellixSanityFlayerTriggeredAbility ability) {
@@ -84,10 +85,5 @@ class ZellixSanityFlayerTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return ((MilledCardsEvent) event).getCards().count(StaticFilters.FILTER_CARD_CREATURE, game) > 0;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a player mills one or more creature cards, you ";
     }
 }

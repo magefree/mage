@@ -27,6 +27,7 @@ public class TapForManaAllTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever " + filter.getMessage() + " for mana, ");
     }
 
     public TapForManaAllTriggeredAbility(TapForManaAllTriggeredAbility ability) {
@@ -67,10 +68,5 @@ public class TapForManaAllTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public TapForManaAllTriggeredAbility copy() {
         return new TapForManaAllTriggeredAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever " + filter.getMessage() + " for mana, " ;
     }
 }

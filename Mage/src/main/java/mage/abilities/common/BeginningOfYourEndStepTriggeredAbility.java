@@ -13,17 +13,17 @@ import mage.game.events.GameEvent;
  */
 public class BeginningOfYourEndStepTriggeredAbility extends TriggeredAbilityImpl {
     public BeginningOfYourEndStepTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
+        this(Zone.BATTLEFIELD, effect, optional);
     }
 
     public BeginningOfYourEndStepTriggeredAbility(Zone zone, Effect effect, boolean optional) {
         super(zone, effect, optional);
+        setTriggerPhrase("At the beginning of your end step, ");
     }
 
     public BeginningOfYourEndStepTriggeredAbility(final BeginningOfYourEndStepTriggeredAbility ability) {
         super(ability);
     }
-
 
     @Override
     public BeginningOfYourEndStepTriggeredAbility copy() {
@@ -38,10 +38,5 @@ public class BeginningOfYourEndStepTriggeredAbility extends TriggeredAbilityImpl
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(this.controllerId);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "At the beginning of your end step, ";
     }
 }

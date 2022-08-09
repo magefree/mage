@@ -8,6 +8,7 @@ import mage.game.events.GameEvent;
 public class AtTheEndOfCombatDelayedTriggeredAbility extends DelayedTriggeredAbility {
     public AtTheEndOfCombatDelayedTriggeredAbility(Effect effect) {
         super(effect);
+        setTriggerPhrase("At end of combat, ");
     }
 
     public AtTheEndOfCombatDelayedTriggeredAbility(AtTheEndOfCombatDelayedTriggeredAbility ability) {
@@ -27,10 +28,5 @@ public class AtTheEndOfCombatDelayedTriggeredAbility extends DelayedTriggeredAbi
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "At end of combat, ";
     }
 }

@@ -57,6 +57,7 @@ public final class NightDealings extends CardImpl {
 
         private NightDealingsTriggeredAbility() {
             super(Zone.BATTLEFIELD, new NightDealingsEffect());
+            setTriggerPhrase("Whenever a source you control deals damage to another player, ");
         }
 
         private NightDealingsTriggeredAbility(final NightDealingsTriggeredAbility ability) {
@@ -82,11 +83,6 @@ public final class NightDealings extends CardImpl {
             }
             this.getEffects().setValue("damageAmount", event.getAmount());
             return true;
-        }
-
-        @Override
-        public String getTriggerPhrase() {
-            return "Whenever a source you control deals damage to another player, " ;
         }
     }
 

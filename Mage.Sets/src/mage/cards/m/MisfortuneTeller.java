@@ -103,6 +103,7 @@ class MisfortuneTellerTriggeredAbility extends TriggeredAbilityImpl {
 
     public MisfortuneTellerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new MisfortuneTellerEffect());
+        setTriggerPhrase("Whenever {this} enters the battlefield or deals combat damage to a player, ");
     }
 
     private MisfortuneTellerTriggeredAbility(final MisfortuneTellerTriggeredAbility ability) {
@@ -129,10 +130,5 @@ class MisfortuneTellerTriggeredAbility extends TriggeredAbilityImpl {
         } else {
             return false;
         }
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} enters the battlefield or deals combat damage to a player, ";
     }
 }

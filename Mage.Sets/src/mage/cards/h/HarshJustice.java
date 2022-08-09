@@ -63,6 +63,7 @@ class HarshJusticeTriggeredAbility extends DelayedTriggeredAbility {
 
     public HarshJusticeTriggeredAbility() {
         super(new HarshJusticeEffect(), Duration.EndOfTurn, false);
+        setTriggerPhrase("This turn, whenever an attacking creature deals combat damage to you, ");
     }
 
     public HarshJusticeTriggeredAbility(final HarshJusticeTriggeredAbility ability) {
@@ -94,11 +95,6 @@ class HarshJusticeTriggeredAbility extends DelayedTriggeredAbility {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "This turn, whenever an attacking creature deals combat damage to you, " ;
     }
 }
 

@@ -67,6 +67,7 @@ class FleshCarverAbility extends DiesSourceTriggeredAbility {
 
     public FleshCarverAbility() {
         super(new FleshCarverEffect(), false);
+        setTriggerPhrase("When Flesh Carver dies, ");
     }
 
     public FleshCarverAbility(final FleshCarverAbility ability) {
@@ -90,11 +91,6 @@ class FleshCarverAbility extends DiesSourceTriggeredAbility {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When Flesh Carver dies, " ;
     }
 }
 
@@ -123,5 +119,4 @@ class FleshCarverEffect extends OneShotEffect {
     public FleshCarverEffect copy() {
         return new FleshCarverEffect(this);
     }
-
 }

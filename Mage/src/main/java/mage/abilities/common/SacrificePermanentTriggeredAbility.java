@@ -35,6 +35,7 @@ public class SacrificePermanentTriggeredAbility extends TriggeredAbilityImpl {
         setLeavesTheBattlefieldTrigger(true);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever you sacrifice " + filter.getMessage() + ", ");
     }
 
     public SacrificePermanentTriggeredAbility(final SacrificePermanentTriggeredAbility ability) {
@@ -65,10 +66,5 @@ public class SacrificePermanentTriggeredAbility extends TriggeredAbilityImpl {
             this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
         }
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you sacrifice " + filter.getMessage() + ", ";
     }
 }

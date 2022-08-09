@@ -25,6 +25,7 @@ public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityI
     public DiesThisOrAnotherCreatureTriggeredAbility(Effect effect, boolean optional, FilterPermanent filter) {
         super(Zone.ALL, effect, optional); // Needs "ALL" if the source itself should trigger or multiple (incl. source go to grave)
         this.filter = filter;
+        setTriggerPhrase("Whenever {this} or another " + filter.getMessage() + " dies, ");
     }
 
     public DiesThisOrAnotherCreatureTriggeredAbility(DiesThisOrAnotherCreatureTriggeredAbility ability) {
@@ -68,10 +69,5 @@ public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityI
     @Override
     public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
         return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} or another " + filter.getMessage() + " dies, ";
     }
 }

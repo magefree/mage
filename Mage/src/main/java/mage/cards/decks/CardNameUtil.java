@@ -19,7 +19,7 @@ public class CardNameUtil {
             .replace("à", "a")
             .replace("é", "e")
             .replace("ú", "u")
-            .replace("\"", "'");
+            .replace("†", "+");
     }
 
 }

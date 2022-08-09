@@ -52,6 +52,7 @@ class NefariousImpTriggeredAbility extends TriggeredAbilityImpl {
 
     NefariousImpTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ScryEffect(1));
+        setTriggerPhrase("Whenever one or more permanents you control leave the battlefield, ");
     }
 
     private NefariousImpTriggeredAbility(final NefariousImpTriggeredAbility ability) {
@@ -81,10 +82,5 @@ class NefariousImpTriggeredAbility extends TriggeredAbilityImpl {
                         .map(game::getPermanent)
                         .filter(Objects::nonNull)
         ).map(Controllable::getControllerId).anyMatch(this::isControlledBy);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever one or more permanents you control leave the battlefield, ";
     }
 }

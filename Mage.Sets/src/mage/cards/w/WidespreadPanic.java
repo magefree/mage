@@ -45,6 +45,7 @@ class WidespreadPanicTriggeredAbility extends TriggeredAbilityImpl {
 
     public WidespreadPanicTriggeredAbility() {
         super(Zone.BATTLEFIELD, new WidespreadPanicEffect(), false);
+        setTriggerPhrase("Whenever a spell or ability causes its controller to shuffle their library, ");
     }
 
     public WidespreadPanicTriggeredAbility(final WidespreadPanicTriggeredAbility ability) {
@@ -71,11 +72,6 @@ class WidespreadPanicTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a spell or ability causes its controller to shuffle their library, " ;
     }
 }
 

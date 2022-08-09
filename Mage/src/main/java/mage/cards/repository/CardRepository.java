@@ -12,7 +12,6 @@ import com.j256.ormlite.table.TableUtils;
 import mage.constants.CardType;
 import mage.constants.SetType;
 import mage.constants.SuperType;
-import mage.game.events.Listener;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
@@ -37,7 +36,6 @@ public enum CardRepository {
     private static final long CARD_CONTENT_VERSION = 241;
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;
-    private final RepositoryEventSource eventSource = new RepositoryEventSource();
 
     public static final Set<String> snowLandSetCodes = new HashSet<>(Arrays.asList(
             "CSP",
@@ -65,14 +63,9 @@ public enum CardRepository {
 
             TableUtils.createTableIfNotExists(connectionSource, CardInfo.class);
             cardDao = DaoManager.createDao(connectionSource, CardInfo.class);
-            eventSource.fireRepositoryDbLoaded();
         } catch (SQLException ex) {
             Logger.getLogger(CardRepository.class).error("Error creating card repository - ", ex);
         }
-    }
-
-    public void subscribe(Listener<RepositoryEvent> listener) {
-        eventSource.addListener(listener);
     }
 
     public void saveCards(final List<CardInfo> newCards, long newContentVersion) {
@@ -99,7 +92,6 @@ public enum CardRepository {
             });
 
             setContentVersion(newContentVersion);
-            eventSource.fireRepositoryDbUpdated();
         } catch (Exception ex) {
             //
         }

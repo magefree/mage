@@ -57,6 +57,7 @@ class BreathOfFuryAbility extends TriggeredAbilityImpl {
 
     public BreathOfFuryAbility() {
         super(Zone.BATTLEFIELD, new BreathOfFuryEffect());
+        setTriggerPhrase("When enchanted creature deals combat damage to a player, ");
     }
 
     public BreathOfFuryAbility(final BreathOfFuryAbility ability) {
@@ -89,11 +90,6 @@ class BreathOfFuryAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When enchanted creature deals combat damage to a player, " ;
     }
 }
 

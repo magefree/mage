@@ -33,6 +33,7 @@ public enum CounterType {
     COIN("coin"),
     COLLECTION("collection"),
     COMPONENT("component"),
+    CONTESTED("contested"),
     CORPSE("corpse"),
     CORRUPTION("corruption"),
     CREDIT("credit"),

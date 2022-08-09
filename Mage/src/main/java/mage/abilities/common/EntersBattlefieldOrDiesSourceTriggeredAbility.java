@@ -22,6 +22,8 @@ public class EntersBattlefieldOrDiesSourceTriggeredAbility extends TriggeredAbil
         super(Zone.BATTLEFIELD, effect, optional);
         this.diesText = diesText;
         setLeavesTheBattlefieldTrigger(true);
+        setTriggerPhrase("When {this} enters the battlefield or " +
+                (diesText ? "dies" : "is put into a graveyard from the battlefield") + ", ");
     }
 
     public EntersBattlefieldOrDiesSourceTriggeredAbility(final EntersBattlefieldOrDiesSourceTriggeredAbility ability) {
@@ -53,11 +55,5 @@ public class EntersBattlefieldOrDiesSourceTriggeredAbility extends TriggeredAbil
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When {this} enters the battlefield or " +
-                (diesText ? "dies" : "is put into a graveyard from the battlefield") + ", ";
     }
 }

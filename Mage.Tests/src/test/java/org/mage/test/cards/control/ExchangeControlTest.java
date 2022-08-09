@@ -5,6 +5,7 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -277,6 +278,56 @@ public class ExchangeControlTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
         assertGraveyardCount(playerA, "Gilded Drake", 1);
+    }
 
+    /**
+     * 1. Kiki-Jiki copied Gilded Drake.
+     * 2. Gilded Drake copy is exchanged for another creature.
+     * 3. After the exchange occurs, Gilded Drake is killed by any means.
+     * 4. Exchange creature is returned to previous controller (possible owner) during the next phase.
+     * <p>
+     * See https://github.com/magefree/mage/issues/8742
+     */
+    @Ignore
+    @Test
+    public void testGildedDrakeCopyExchange() {
+        addCard(Zone.BATTLEFIELD, playerA, "Kiki-Jiki, Mirror Breaker");
+        addCard(Zone.HAND, playerA, "Gilded Drake");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 2);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Dwarven Trader"); // Exchange target
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion"); // Exchange target
+
+        setStrictChooseMode(true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gilded Drake");
+        addTarget(playerA, "Dwarven Trader"); // Target for Gilded Drake
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true); // Skip the cast and grab the ETB
+
+        // Copy the drake
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}", "Gilded Drake", "When {this}");
+        addTarget(playerA, "Silvercoat Lion"); // Target for Gilded Drake
+
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // Destroy both of the Drakes
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt");
+        addTarget(playerA, "Gilded Drake");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt");
+        addTarget(playerA, "Gilded Drake");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Kiki-Jiki, Mirror Breaker", 1);
+        assertPermanentCount(playerA, "Dwarven Trader", 1);  // Original's exhange target
+        assertPermanentCount(playerA, "Silvercoat Lion", 1); // Copy's exchange target
+
+        assertPermanentCount(playerA, "Gilded Drake", 0);
+        assertPermanentCount(playerB, "Gilded Drake", 0);
     }
 }

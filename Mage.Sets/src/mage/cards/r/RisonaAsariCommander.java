@@ -66,6 +66,7 @@ class RisonaAsariCommanderTriggeredAbility extends TriggeredAbilityImpl {
 
     public RisonaAsariCommanderTriggeredAbility() {
         super(Zone.BATTLEFIELD, new RemoveCounterSourceEffect(CounterType.INDESTRUCTIBLE.createInstance()));
+        setTriggerPhrase("Whenever combat damage is dealt to you, ");
     }
 
     private RisonaAsariCommanderTriggeredAbility(final RisonaAsariCommanderTriggeredAbility ability) {
@@ -97,11 +98,6 @@ class RisonaAsariCommanderTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever combat damage is dealt to you, ";
     }
 }
 

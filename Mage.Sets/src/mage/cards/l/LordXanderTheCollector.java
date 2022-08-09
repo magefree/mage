@@ -15,7 +15,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
@@ -71,6 +70,7 @@ enum LordXanderTheCollectorEffectType {
 }
 
 class LordXanderTheCollectorEffect extends OneShotEffect {
+
     private final LordXanderTheCollectorEffectType effectType;
 
     LordXanderTheCollectorEffect(LordXanderTheCollectorEffectType LordXanderTheCollectorEffectType) {
@@ -111,17 +111,16 @@ class LordXanderTheCollectorEffect extends OneShotEffect {
                 player.millCards(count / 2, source, game);
                 return true;
             case SACRIFICE:
-                count = game.getBattlefield().count(
-                        StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND, player.getId(), source, game
-                );
+                count = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND, player.getId(), game).size();
                 if (count < 2) {
                     return false;
                 }
-                TargetPermanent target = new TargetControlledPermanent(
+                TargetPermanent target = new TargetPermanent(
                         count / 2, StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND
                 );
                 target.setNotTarget(true);
                 target.withChooseHint("sacrifice");
+                target.setRequired(true);
                 player.choose(outcome, target, source, game);
                 for (UUID permanentId : target.getTargets()) {
                     Permanent permanent = game.getPermanent(permanentId);

@@ -18,6 +18,7 @@ public class AttacksAloneSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     public AttacksAloneSourceTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
+        setTriggerPhrase("Whenever {this} attacks alone, ");
     }
 
     public AttacksAloneSourceTriggeredAbility(final AttacksAloneSourceTriggeredAbility ability) {
@@ -51,10 +52,5 @@ public class AttacksAloneSourceTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} attacks alone, " ;
     }
 }

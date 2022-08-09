@@ -42,7 +42,7 @@ public final class SickeningShoal extends CardImpl {
         )));
 
         // Target creature gets -X/-X until end of turn.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

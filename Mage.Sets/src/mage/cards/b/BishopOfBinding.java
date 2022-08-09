@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -34,11 +33,11 @@ import mage.util.CardUtil;
  */
 public final class BishopOfBinding extends CardImpl {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.VAMPIRE, "Vampire");
+
     public BishopOfBinding(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
-
-        this.subtype.add(SubType.VAMPIRE);
-        this.subtype.add(SubType.CLERIC);
+        this.subtype.add(SubType.VAMPIRE, SubType.CLERIC);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
@@ -49,10 +48,8 @@ public final class BishopOfBinding extends CardImpl {
         this.addAbility(ability);
 
         // Whenever Bishop of Binding attacks, target Vampire gets +X/+X until end of turn, where X is the power of the exiled card.
-        DynamicValue xVale = new BishopOfBindingExiledCardsPowerCount();
-        ability = new AttacksTriggeredAbility(new BoostTargetEffect(xVale, xVale, Duration.EndOfTurn, true)
-                .setText("target Vampire gets +X/+X until end of turn, where X is the power of the exiled card"), false);
-        ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent(SubType.VAMPIRE, "Vampire")));
+        ability = new AttacksTriggeredAbility(new BoostTargetEffect(BishopOfBindingValue.instance, BishopOfBindingValue.instance, Duration.EndOfTurn));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 
@@ -69,7 +66,7 @@ public final class BishopOfBinding extends CardImpl {
 class BishopOfBindingExileEffect extends OneShotEffect {
 
     public BishopOfBindingExileEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Exile);
         this.staticText = "exile target creature an opponent controls until {this} leaves the battlefield";
     }
 
@@ -94,7 +91,8 @@ class BishopOfBindingExileEffect extends OneShotEffect {
     }
 }
 
-class BishopOfBindingExiledCardsPowerCount implements DynamicValue {
+enum BishopOfBindingValue implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -109,13 +107,17 @@ class BishopOfBindingExiledCardsPowerCount implements DynamicValue {
     }
 
     @Override
-    public BishopOfBindingExiledCardsPowerCount copy() {
-        return new BishopOfBindingExiledCardsPowerCount();
+    public BishopOfBindingValue copy() {
+        return instance;
+    }
+
+    @Override
+    public String toString() {
+        return "X";
     }
 
     @Override
     public String getMessage() {
-        return "power of the exiled card";
+        return "the power of the exiled card";
     }
-
 }

@@ -45,6 +45,7 @@ class HiveMindTriggeredAbility extends TriggeredAbilityImpl {
 
     public HiveMindTriggeredAbility() {
         super(Zone.BATTLEFIELD, new HiveMindEffect());
+        setTriggerPhrase("Whenever a player casts an instant or sorcery spell, ");
     }
 
     public HiveMindTriggeredAbility(final HiveMindTriggeredAbility ability) {
@@ -74,11 +75,6 @@ class HiveMindTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a player casts an instant or sorcery spell, " ;
     }
 }
 

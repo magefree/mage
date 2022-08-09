@@ -64,6 +64,7 @@ class EtherealValkyrieTriggeredAbility extends TriggeredAbilityImpl {
 
     EtherealValkyrieTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        setTriggerPhrase("Whenever {this} enters the battlefield or attacks, ");
     }
 
     EtherealValkyrieTriggeredAbility(final EtherealValkyrieTriggeredAbility ability) {
@@ -94,11 +95,6 @@ class EtherealValkyrieTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} enters the battlefield or attacks, ";
     }
 }
 
