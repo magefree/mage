@@ -198,7 +198,7 @@ public class ManaOptionsTest extends CardTestPlayerBase {
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
 
-        //Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
         assertManaOptions("{C}{G}{Any}", manaOptions);
     }
 
@@ -239,7 +239,7 @@ public class ManaOptionsTest extends CardTestPlayerBase {
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
 
-        //Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
         assertManaOptions("{C}{G}{G}{G}", manaOptions);
 
     }
@@ -340,7 +340,7 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        //Assert.assertEquals("mana variations don't fit", 3, manaOptions.size());
+        Assert.assertEquals("mana variations don't fit", 3, manaOptions.size());
         assertManaOptions("{C}{C}", manaOptions);
         assertManaOptions("{Any}{Any}", manaOptions);
         assertManaOptions("{C}{Any}", manaOptions);
@@ -379,7 +379,7 @@ public class ManaOptionsTest extends CardTestPlayerBase {
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
 
-        //Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size()); // TODO: Why one, should there be {B} and {B}{U}?
         assertManaOptions("{W}{B}", manaOptions);
     }
 
@@ -556,7 +556,7 @@ public class ManaOptionsTest extends CardTestPlayerBase {
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
 
-        //Assert.assertEquals("mana variations don't fit", 88, manaOptions.size());
+        Assert.assertEquals("mana variations don't fit", 88, manaOptions.size());
 
         assertManaOptions("{G}{G}{G}{G}{G}{G}{G}{G}{W}{W}{W}{W}{W}{W}{W}{W}{W}", manaOptions);
         assertManaOptions("{G}{G}{G}{G}{G}{G}{G}{G}{W}{W}{W}{W}{W}{W}{W}{W}{U}", manaOptions);
@@ -576,7 +576,7 @@ public class ManaOptionsTest extends CardTestPlayerBase {
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
 
-        //Assert.assertEquals("mana variations don't fit", 4, manaOptions.size());
+        Assert.assertEquals("mana variations don't fit", 4, manaOptions.size());
         assertManaOptions("{U}{U}", manaOptions);
         assertManaOptions("{G}{G}{W}", manaOptions);
         assertManaOptions("{G}{W}{U}", manaOptions);
