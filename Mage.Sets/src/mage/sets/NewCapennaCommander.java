@@ -231,6 +231,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Oracle's Vault", 374, Rarity.RARE, mage.cards.o.OraclesVault.class));
         cards.add(new SetCardInfo("Orzhov Advokist", 207, Rarity.UNCOMMON, mage.cards.o.OrzhovAdvokist.class));
         cards.add(new SetCardInfo("Orzhov Signet", 375, Rarity.UNCOMMON, mage.cards.o.OrzhovSignet.class));
+        cards.add(new SetCardInfo("Oskar, Rubbish Reclaimer", 77, Rarity.RARE, mage.cards.o.OskarRubbishReclaimer.class));
         cards.add(new SetCardInfo("Outpost Siege", 272, Rarity.RARE, mage.cards.o.OutpostSiege.class));
         cards.add(new SetCardInfo("Overgrown Battlement", 303, Rarity.UNCOMMON, mage.cards.o.OvergrownBattlement.class));
         cards.add(new SetCardInfo("Painful Truths", 255, Rarity.RARE, mage.cards.p.PainfulTruths.class));
