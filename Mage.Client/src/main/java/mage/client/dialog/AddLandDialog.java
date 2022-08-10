@@ -76,6 +76,10 @@ public class AddLandDialog extends MageDialog {
         // if still no set with lands found, add list of all available
         List<ExpansionInfo> basicLandSets = ExpansionRepository.instance.getSetsWithBasicLandsByReleaseDate();
         for (ExpansionInfo expansionInfo : basicLandSets) {
+            // snow lands only in free mode
+            if (mode != DeckEditorMode.FREE_BUILDING && CardRepository.haveSnowLands(expansionInfo.getCode())) {
+                continue;
+            }
             landSetNames.add(expansionInfo.getName());
         }
         if (landSetNames.isEmpty()) {
