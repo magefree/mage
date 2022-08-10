@@ -224,6 +224,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Nadir Kraken", 228, Rarity.RARE, mage.cards.n.NadirKraken.class));
         cards.add(new SetCardInfo("Naya Panorama", 417, Rarity.COMMON, mage.cards.n.NayaPanorama.class));
         cards.add(new SetCardInfo("Nesting Grounds", 418, Rarity.RARE, mage.cards.n.NestingGrounds.class));
+        cards.add(new SetCardInfo("Next of Kin", 62, Rarity.RARE, mage.cards.n.NextOfKin.class));
         cards.add(new SetCardInfo("Nightmare Unmaking", 253, Rarity.RARE, mage.cards.n.NightmareUnmaking.class));
         cards.add(new SetCardInfo("Noxious Gearhulk", 254, Rarity.MYTHIC, mage.cards.n.NoxiousGearhulk.class));
         cards.add(new SetCardInfo("Oblivion Stone", 373, Rarity.RARE, mage.cards.o.OblivionStone.class));
