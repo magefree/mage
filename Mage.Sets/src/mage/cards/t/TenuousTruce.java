@@ -62,11 +62,10 @@ public class TenuousTruce extends CardImpl {
 
 class TenuousTruceAttackTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String triggerPhrase = "When you attack enchanted opponent or a planeswalker they control " +
-                                                "or when they attack you or a planeswalker you control, ";
-
     TenuousTruceAttackTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect(), false);
+        setTriggerPhrase("When you attack enchanted opponent or a planeswalker they control " +
+                "or when they attack you or a planeswalker you control, ");
     }
 
     TenuousTruceAttackTriggeredAbility(final TenuousTruceAttackTriggeredAbility ability) {
@@ -119,10 +118,5 @@ class TenuousTruceAttackTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public TenuousTruceAttackTriggeredAbility copy() {
         return new TenuousTruceAttackTriggeredAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return triggerPhrase;
     }
 }
