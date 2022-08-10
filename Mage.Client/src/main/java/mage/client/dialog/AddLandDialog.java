@@ -142,10 +142,11 @@ public class AddLandDialog extends MageDialog {
 
     private void addLands(String landName, int number, boolean useFullArt) {
         String landSetName = (String) cbLandSet.getSelectedItem();
-        ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByName(landSetName);
+        ExpansionInfo expansionInfo = null;
 
         CardCriteria criteria = new CardCriteria();
         if (!landSetName.equals("<Random lands>")) {
+            expansionInfo = ExpansionRepository.instance.getSetByName(landSetName);
             if (expansionInfo == null) {
                 throw new IllegalArgumentException("Code of Set " + landSetName + " not found");
             }
