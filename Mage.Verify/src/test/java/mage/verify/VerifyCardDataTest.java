@@ -884,7 +884,7 @@ public class VerifyCardDataTest {
                     break;
                 }
             }
-            if (needSnow != haveSnow && !haveNonSnow) {
+            if (needSnow != (haveSnow && !haveNonSnow)) {
                 errorsList.add("Error: found incorrect snow land info in set " + set.getCode() + ": "
                         + ((haveSnow && !haveNonSnow) ? "set has exclusively snow basics" : "set doesn't have exclusively snow basics")
                         + ", but xmage thinks that it " + (needSnow ? "does" : "doesn't"));
