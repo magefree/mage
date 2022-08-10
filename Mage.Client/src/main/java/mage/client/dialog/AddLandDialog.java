@@ -142,10 +142,10 @@ public class AddLandDialog extends MageDialog {
 
     private void addLands(String landName, int number, boolean useFullArt) {
         String landSetName = (String) cbLandSet.getSelectedItem();
+        ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByName(landSetName);
 
         CardCriteria criteria = new CardCriteria();
         if (!landSetName.equals("<Random lands>")) {
-            ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByName(landSetName);
             if (expansionInfo == null) {
                 throw new IllegalArgumentException("Code of Set " + landSetName + " not found");
             }
@@ -153,10 +153,10 @@ public class AddLandDialog extends MageDialog {
         } else {
             criteria.ignoreSetsWithSnowLands();
         }
-        if (mode != DeckEditorMode.FREE_BUILDING) {
-            criteria.nameExact(landName);
+        if (mode == DeckEditorMode.FREE_BUILDING && expansionInfo != null && CardRepository.haveSnowLands(expansionInfo.getCode())) {
+            criteria.name(landName); // snow basics added only if in free mode and the chosen set has exclusively snow basics
         } else {
-            criteria.name(landName); // snow basics only in free mode
+            criteria.nameExact(landName);
         }
         criteria.rarities(Rarity.LAND);        
         List<CardInfo> cards = CardRepository.instance.findCards(criteria);
