@@ -10,7 +10,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 /**
  * @author Alex-Vasile
  */
-public class PutCardFromHandOrGraveyardOntoBattlefieldEffectTest extends CardTestPlayerBase {
+public class PutCardFromOneOfTwoZonesOntoBattlefieldEffectTest extends CardTestPlayerBase {
 
     // −5: You may put a creature card with mana value less than or equal to the number of lands you control onto the battlefield from your hand or graveyard with two +1/+1 counters on it.
     private static final String nissa = "Nissa of Shadowed Boughs";

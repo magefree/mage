@@ -5,7 +5,7 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutCardFromHandOrGraveyardOntoBattlefieldEffect;
+import mage.abilities.effects.common.PutCardFromOneOfTwoZonesOntoBattlefieldEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -55,7 +55,7 @@ public final class NissaOfShadowedBoughs extends CardImpl {
         this.addAbility(ability);
 
         // −5: You may put a creature card with mana value less than or equal to the number of lands you control onto the battlefield from your hand or graveyard with two +1/+1 counters on it.
-        Effect putCardEffect = new PutCardFromHandOrGraveyardOntoBattlefieldEffect(filter, false, new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)));
+        Effect putCardEffect = new PutCardFromOneOfTwoZonesOntoBattlefieldEffect(filter, false, new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)));
         putCardEffect.setText("You may put a creature card with mana value less than or equal to " +
                 "the number of lands you control onto the battlefield from your hand or graveyard " +
                 "with two +1/+1 counters on it.");

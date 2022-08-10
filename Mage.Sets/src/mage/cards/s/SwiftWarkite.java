@@ -10,7 +10,7 @@ import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbil
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutCardFromHandOrGraveyardOntoBattlefieldEffect;
+import mage.abilities.effects.common.PutCardFromOneOfTwoZonesOntoBattlefieldEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -52,7 +52,7 @@ public final class SwiftWarkite extends CardImpl {
 
         // When Swift Warkite enters the battlefield, you may put a creature card with converted mana cost 3 or less from your hand or graveyard onto the battlefield. That creature gains haste. Return it to your hand at the beginning of the next end step.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new PutCardFromHandOrGraveyardOntoBattlefieldEffect(filter, false, new SwiftWarkiteEffect()),
+                new PutCardFromOneOfTwoZonesOntoBattlefieldEffect(filter, false, new SwiftWarkiteEffect()),
                 true)
         );
     }
