@@ -35,7 +35,8 @@ import java.util.stream.Collectors;
 public class NextOfKin extends CardImpl {
 
     public NextOfKin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{}, "");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
+        this.addSubType(SubType.AURA);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
