@@ -37,13 +37,11 @@ public enum CardRepository {
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;
 
+    // sets with exclusively snow basics
     public static final Set<String> snowLandSetCodes = new HashSet<>(Arrays.asList(
             "CSP",
             "MH1",
-            "SLD",
-            "ME2",
-            "ICE",
-            "KHM"
+            "ME2"
     ));
 
     CardRepository() {

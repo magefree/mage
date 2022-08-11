@@ -246,7 +246,7 @@ public class CardCriteria {
             where.ne("setCode", ignoreSetCode);
         }
         if (!ignoreSetCodes.isEmpty()) {
-            where.or(ignoreSetCodes.size());
+            where.and(ignoreSetCodes.size());
             clausesCount++;
         }
 
