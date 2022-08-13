@@ -136,7 +136,7 @@ class EtherealValkyrieEffect extends OneShotEffect {
                     foretellAbility = new ForetellAbility(exileCard, leftHalfCost, rightHalfCost);
                 } else if (exileCard instanceof ModalDoubleFacesCard) {
                     ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) exileCard).getLeftHalfCard();
-                    if (!leftHalfCard.isLand(game)) {
+                    if (!leftHalfCard.isLand(game)) {  // Only MDFC cards with a left side a land have a land on the right side too
                         String leftHalfCost = CardUtil.reduceCost(leftHalfCard.getManaCost(), 2).getText();
                         game.getState().setValue(exileCard.getMainCard().getId().toString() + "Foretell Cost", leftHalfCost);
                         ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) exileCard).getRightHalfCard();
@@ -154,14 +154,21 @@ class EtherealValkyrieEffect extends OneShotEffect {
                     game.getState().setValue(exileCard.getMainCard().getId().toString() + "Foretell Cost", creatureCost);
                     game.getState().setValue(exileCard.getMainCard().getId().toString() + "Foretell Split Cost", spellCost);
                     foretellAbility = new ForetellAbility(exileCard, creatureCost, spellCost);
-                } else {
+                } else if (!exileCard.isLand()){
                     // normal card
                     String costText = CardUtil.reduceCost(exileCard.getManaCost(), 2).getText();
                     game.getState().setValue(exileCard.getId().toString() + "Foretell Cost", costText);
                     foretellAbility = new ForetellAbility(exileCard, costText);
                 }
+
+                // All card types (including lands) must be exiled
+                UUID exileId = CardUtil.getExileZoneId(exileCard.getMainCard().getId().toString() + "foretellAbility", game);
+                controller.moveCardsToExile(exileCard, source, game, true, exileId, " Foretell Turn Number: " + game.getTurnNum());
+                exileCard.setFaceDown(true, game);
+
                 // all done pre-processing so stick the foretell cost effect onto the main card
                 // note that the card is not foretell'd into exile, it is put into exile and made foretold
+                // If the card is a non-land, it will not be exiled.
                 if (foretellAbility != null) {
                     // copy source and use it for the foretold effect on the exiled card
                     // bug #8673
@@ -169,9 +176,6 @@ class EtherealValkyrieEffect extends OneShotEffect {
                     copiedSource.newId();
                     copiedSource.setSourceId(exileCard.getId());
                     game.getState().setValue(exileCard.getMainCard().getId().toString() + "Foretell Turn Number", game.getTurnNum());
-                    UUID exileId = CardUtil.getExileZoneId(exileCard.getMainCard().getId().toString() + "foretellAbility", game);
-                    controller.moveCardsToExile(exileCard, source, game, true, exileId, " Foretell Turn Number: " + game.getTurnNum());
-                    exileCard.setFaceDown(true, game);
                     foretellAbility.setSourceId(exileCard.getId());
                     foretellAbility.setControllerId(exileCard.getOwnerId());
                     game.getState().addOtherAbility(exileCard, foretellAbility);
