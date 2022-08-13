@@ -6,8 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.mana.ManaEffect;
 import mage.choices.Choice;
-import mage.choices.ChoiceColor;
-import mage.constants.ColoredManaSymbol;
+import mage.constants.ManaType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -16,7 +15,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author CountAndromalius
@@ -24,11 +25,7 @@ import java.util.List;
 public class AnyColorPermanentTypesManaAbility extends ActivatedManaAbilityImpl {
 
     public AnyColorPermanentTypesManaAbility(TargetController targetController, FilterPermanent permanentTypes) {
-        this(targetController, true, permanentTypes);
-    }
-
-    public AnyColorPermanentTypesManaAbility(TargetController targetController, boolean onlyColors, FilterPermanent permanentTypes) {
-        super(Zone.BATTLEFIELD, new AnyColorPermanentTypesManaEffect(targetController, onlyColors, permanentTypes), new TapSourceCost());
+        super(Zone.BATTLEFIELD, new AnyColorPermanentTypesManaEffect(targetController, permanentTypes), new TapSourceCost());
     }
 
     public AnyColorPermanentTypesManaAbility(final AnyColorPermanentTypesManaAbility ability) {
@@ -55,155 +52,88 @@ public class AnyColorPermanentTypesManaAbility extends ActivatedManaAbilityImpl 
 class AnyColorPermanentTypesManaEffect extends ManaEffect {
 
     private final FilterPermanent filter;
-    private final boolean onlyColors; // false if mana types can be produced (also Colorless mana), if true only colors can be produced (no Colorless mana).
 
-    private boolean inManaTypeCalculation = false;
+    private transient boolean inManaTypeCalculation = false;
 
-    public AnyColorPermanentTypesManaEffect(TargetController targetController, boolean onlyColors, FilterPermanent permanentTypes) {
+    public AnyColorPermanentTypesManaEffect(TargetController targetController, FilterPermanent permanentTypes) {
         super();
         filter = permanentTypes;
-        this.onlyColors = onlyColors;
         filter.add(targetController.getControllerPredicate());
-        String text = targetController == TargetController.OPPONENT ? "an opponent controls." : "you control.";
-        staticText = "Add one mana of any " + (this.onlyColors ? "color" : "type") + " among " + permanentTypes.getMessage() + " " + text;
+        staticText = "Add one mana of any color" +
+                " among " + permanentTypes.getMessage() + " " +
+                (targetController == TargetController.OPPONENT ? "an opponent controls." : "you control.");
     }
 
     public AnyColorPermanentTypesManaEffect(final AnyColorPermanentTypesManaEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
-        this.onlyColors = effect.onlyColors;
     }
 
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
-        List<Mana> netManas = new ArrayList<>();
-        Mana types = getManaTypes(game, source);
-        if (types.getBlack() > 0) {
-            netManas.add(new Mana(ColoredManaSymbol.B));
-        }
-        if (types.getRed() > 0) {
-            netManas.add(new Mana(ColoredManaSymbol.R));
-        }
-        if (types.getBlue() > 0) {
-            netManas.add(new Mana(ColoredManaSymbol.U));
-        }
-        if (types.getGreen() > 0) {
-            netManas.add(new Mana(ColoredManaSymbol.G));
-        }
-        if (types.getWhite() > 0) {
-            netManas.add(new Mana(ColoredManaSymbol.W));
-        }
-        if (!onlyColors && types.getColorless() > 0) {
-            netManas.add(Mana.ColorlessMana(1));
-        }
-        if (types.getAny() > 0) {
-            netManas.add(Mana.AnyMana(1));
-        }
-        return netManas;
+        return game == null ? new ArrayList<>() : ManaType.getManaListFromManaTypes(getManaTypes(game, source), true);
     }
 
     @Override
     public Mana produceMana(Game game, Ability source) {
-        Mana mana = new Mana();
         if (game == null) {
-            return mana;
+            return null;
         }
-        Mana types = getManaTypes(game, source);
-        Choice choice = new ChoiceColor(true);
-        choice.getChoices().clear();
-        choice.setMessage("Pick a mana color");
-        if (types.getBlack() > 0) {
-            choice.getChoices().add("Black");
-        }
-        if (types.getRed() > 0) {
-            choice.getChoices().add("Red");
-        }
-        if (types.getBlue() > 0) {
-            choice.getChoices().add("Blue");
-        }
-        if (types.getGreen() > 0) {
-            choice.getChoices().add("Green");
-        }
-        if (types.getWhite() > 0) {
-            choice.getChoices().add("White");
-        }
-        if (!onlyColors && types.getColorless() > 0) {
-            choice.getChoices().add("Colorless");
-        }
-        if (types.getAny() > 0) {
-            choice.getChoices().add("Black");
-            choice.getChoices().add("Red");
-            choice.getChoices().add("Blue");
-            choice.getChoices().add("Green");
-            choice.getChoices().add("White");
-            if (!onlyColors) {
-                choice.getChoices().add("Colorless");
-            }
 
+        Set<ManaType> types = getManaTypes(game, source);
+        if (types.isEmpty()) {
+            return null;
         }
-        if (!choice.getChoices().isEmpty()) {
+
+        Choice choice = ManaType.getChoiceOfManaTypes(types, true);
+        if (choice.getChoices().size() == 1) {
+            choice.setChoice(choice.getChoices().iterator().next());
+        } else {
             Player player = game.getPlayer(source.getControllerId());
-            if (choice.getChoices().size() == 1) {
-                choice.setChoice(choice.getChoices().iterator().next());
-            } else {
-                if (!player.choose(outcome, choice, game)) {
-                    return mana;
-                }
-            }
-            if (choice.getChoice() != null) {
-
-                switch (choice.getChoice()) {
-                    case "Black":
-                        mana.setBlack(1);
-                        break;
-                    case "Blue":
-                        mana.setBlue(1);
-                        break;
-                    case "Red":
-                        mana.setRed(1);
-                        break;
-                    case "Green":
-                        mana.setGreen(1);
-                        break;
-                    case "White":
-                        mana.setWhite(1);
-                        break;
-                    case "Colorless":
-                        mana.setColorless(1);
-                        break;
-                }
+            if (player == null || !player.choose(outcome, choice, game)) {
+                return null;
             }
         }
-        return mana;
+
+        ManaType chosenType = ManaType.findByName(choice.getChoice());
+        return chosenType == null ? null : new Mana(chosenType);
     }
 
-    private Mana getManaTypes(Game game, Ability source) {
-        Mana types = new Mana();
-        if (game == null || game.getPhase() == null) {
-            return types;
-        }
-        if (inManaTypeCalculation) {
-            return types;
+    private Set<ManaType> getManaTypes(Game game, Ability source) {
+        Set<ManaType> manaTypes = new HashSet<>(6);
+        if (game == null || game.getPhase() == null || inManaTypeCalculation) {
+            return manaTypes;
         }
         inManaTypeCalculation = true;
 
         ObjectColor permanentColor;
-
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game);
-
         for (Permanent permanent : permanents) {
             permanentColor = permanent.getColor(game);
-            if (permanentColor.isColorless()) {
-                types.add(Mana.ColorlessMana(1));
-            } else {
-                List<ObjectColor> permanentColors = permanent.getColor(game).getColors();
-                for (ObjectColor color : permanentColors) {
-                    types.add(new Mana(color.getOneColoredManaSymbol()));
-                }
+
+            if (permanentColor.isBlack()) {
+                manaTypes.add(ManaType.BLACK);
+            }
+            if (permanentColor.isBlue()) {
+                manaTypes.add(ManaType.BLUE);
+            }
+            if (permanentColor.isGreen()) {
+                manaTypes.add(ManaType.GREEN);
+            }
+            if (permanentColor.isRed()) {
+                manaTypes.add(ManaType.RED);
+            }
+            if (permanentColor.isWhite()) {
+                manaTypes.add(ManaType.WHITE);
+            }
+
+            // If all types are already added, exit early
+            if (manaTypes.size() == 5) {
+                break;
             }
         }
         inManaTypeCalculation = false;
-        return types;
+        return manaTypes;
     }
 
     @Override

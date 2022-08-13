@@ -11,6 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
+import mage.constants.ManaType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -48,17 +49,13 @@ public final class AstralCornucopia extends CardImpl {
 
 class AstralCornucopiaManaEffect extends ManaEffect {
 
-    private final Mana computedMana;
-
     public AstralCornucopiaManaEffect() {
         super();
-        computedMana = new Mana();
         this.staticText = "Choose a color. Add one mana of that color for each charge counter on {this}";
     }
 
     public AstralCornucopiaManaEffect(final AstralCornucopiaManaEffect effect) {
         super(effect);
-        this.computedMana = effect.computedMana.copy();
     }
 
     @Override
@@ -69,59 +66,47 @@ class AstralCornucopiaManaEffect extends ManaEffect {
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netMana = new ArrayList<>();
-        if (game != null) {
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-            if (sourcePermanent != null) {
-                int counters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE.getName());
-                if (counters > 0) {
-                    netMana.add(Mana.AnyMana(counters));
-                }
-            }
+        if (game == null) {
+            return netMana;
+        }
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        if (sourcePermanent == null) {
+            return netMana;
+        }
+
+        int counters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE.getName());
+        if (counters > 0) {
+            netMana.add(Mana.WhiteMana(counters));
+            netMana.add(Mana.BlueMana(counters));
+            netMana.add(Mana.BlackMana(counters));
+            netMana.add(Mana.GreenMana(counters));
+            netMana.add(Mana.RedMana(counters));
         }
         return netMana;
     }
 
     @Override
     public Mana produceMana(Game game, Ability source) {
-        Mana mana = new Mana();
         if (game == null) {
-            return mana;
+            return null;
         }
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (sourcePermanent != null) {
-            int counters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE.getName());
-            if (counters > 0) {
-                Player controller = game.getPlayer(source.getControllerId());
-                if (controller != null) {
-                    ChoiceColor choice = new ChoiceColor();
-                    choice.setMessage("Choose a color to add mana of that color");
-                    if (controller.choose(outcome, choice, game)) {
-                        if (choice.getChoice() != null) {
-                            String color = choice.getChoice();
-                            switch (color) {
-                                case "Red":
-                                    mana.setRed(counters);
-                                    break;
-                                case "Blue":
-                                    mana.setBlue(counters);
-                                    break;
-                                case "White":
-                                    mana.setWhite(counters);
-                                    break;
-                                case "Black":
-                                    mana.setBlack(counters);
-                                    break;
-                                case "Green":
-                                    mana.setGreen(counters);
-                                    break;
-                            }
-                        }
-                    }
-                }
-            }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (sourcePermanent == null || controller == null) {
+            return null;
+        }
+        int counters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE.getName());
+        if (counters == 0) {
+            return null;
         }
 
-        return mana;
-    }
+        ChoiceColor choice = new ChoiceColor();
+        choice.setMessage("Choose a color to add mana of that color");
+        if (!controller.choose(outcome, choice, game)) {
+            return null;
+        }
 
+        ManaType chosenType = ManaType.findByName(choice.getChoice());
+        return chosenType == null ? null : new Mana(chosenType);
+    }
 }
