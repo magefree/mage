@@ -30,7 +30,6 @@ public final class EpiphanyAtTheDrownyard extends CardImpl {
 
         // Reveal the top X plus one cards of your library and separate them into two piles. An opponent chooses one of those piles. Put that pile into your hand and the other into your graveyard.
         this.getSpellAbility().addEffect(new EpiphanyAtTheDrownyardEffect());
-        this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
     private EpiphanyAtTheDrownyard(final EpiphanyAtTheDrownyard card) {
