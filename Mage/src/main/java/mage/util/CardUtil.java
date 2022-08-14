@@ -63,7 +63,7 @@ public final class CardUtil {
 
     public static final List<String> RULES_ERROR_INFO = ImmutableList.of("Exception occurred in rules generation");
 
-    private static final String SOURCE_EXILE_ZONE_TEXT = "SourceExileZone";
+    public static final String SOURCE_EXILE_ZONE_TEXT = "SourceExileZone";
 
     static final String[] numberStrings = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
             "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"};

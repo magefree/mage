@@ -290,6 +290,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Skyclave Shade", 260, Rarity.RARE, mage.cards.s.SkyclaveShade.class));
         cards.add(new SetCardInfo("Skycloud Expanse", 427, Rarity.RARE, mage.cards.s.SkycloudExpanse.class));
         cards.add(new SetCardInfo("Skyship Plunderer", 232, Rarity.UNCOMMON, mage.cards.s.SkyshipPlunderer.class));
+        cards.add(new SetCardInfo("Skyway Robber", 31, Rarity.RARE, mage.cards.s.SkywayRobber.class));
         cards.add(new SetCardInfo("Slippery Bogbonder", 312, Rarity.RARE, mage.cards.s.SlipperyBogbonder.class));
         cards.add(new SetCardInfo("Smoldering Marsh", 428, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
         cards.add(new SetCardInfo("Smuggler's Share", 21, Rarity.RARE, mage.cards.s.SmugglersShare.class));
