@@ -311,6 +311,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Sungrass Prairie", 430, Rarity.RARE, mage.cards.s.SungrassPrairie.class));
         cards.add(new SetCardInfo("Sunken Hollow", 431, Rarity.RARE, mage.cards.s.SunkenHollow.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 382, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
+        cards.add(new SetCardInfo("Swindler's Scheme", 88, Rarity.RARE, mage.cards.s.SwindlersScheme.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 211, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
         cards.add(new SetCardInfo("Sylvan Offering", 314, Rarity.RARE, mage.cards.s.SylvanOffering.class));
         cards.add(new SetCardInfo("Talrand's Invocation", 234, Rarity.UNCOMMON, mage.cards.t.TalrandsInvocation.class));
