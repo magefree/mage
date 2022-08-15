@@ -327,6 +327,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("The Beamtown Bullies", 6, Rarity.MYTHIC, mage.cards.t.TheBeamtownBullies.class));
         cards.add(new SetCardInfo("Thief of Sanity", 354, Rarity.RARE, mage.cards.t.ThiefOfSanity.class));
         cards.add(new SetCardInfo("Thragtusk", 316, Rarity.RARE, mage.cards.t.Thragtusk.class));
+        cards.add(new SetCardInfo("Threefold Signal", 93, Rarity.MYTHIC, mage.cards.t.ThreefoldSignal.class));
         cards.add(new SetCardInfo("Thriving Bluff", 438, Rarity.COMMON, mage.cards.t.ThrivingBluff.class));
         cards.add(new SetCardInfo("Thriving Grove", 439, Rarity.COMMON, mage.cards.t.ThrivingGrove.class));
         cards.add(new SetCardInfo("Thriving Heath", 440, Rarity.COMMON, mage.cards.t.ThrivingHeath.class));
