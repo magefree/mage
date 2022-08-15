@@ -44,7 +44,7 @@ public class EachSpellYouCastHasReplicateEffect extends ContinuousEffectImpl {
         this.filter = filter;
         this.fixedNewCost = fixedNewCost;
         this.staticText = "Each " + this.filter.getMessage() + " you cast has replicate" +
-                (this.fixedNewCost == null ? ". The replicate cost is equal to its mana cost" : this.fixedNewCost.getText())
+                (this.fixedNewCost == null ? ". The replicate cost is equal to its mana cost" : ' ' + this.fixedNewCost.getText())
                 + ". <i>(When you cast it, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)</i>";
     }
 
