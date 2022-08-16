@@ -4,8 +4,11 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
@@ -38,7 +41,11 @@ public class FamilysFavor extends CardImpl {
         // (If a creature with a shield counter on it would be dealt damage or destroyed, remove a shield counter from it instead.)
         Ability attacksAbility = new AttacksWithCreaturesTriggeredAbility(new AddCountersTargetEffect(CounterType.SHIELD.createInstance()), 1);
         attacksAbility.addEffect(new GainAbilityTargetEffect(
-                new DealsCombatDamageToAPlayerTriggeredAbility(new FamilysFavorRemoveShieldDrawEffect(), false),
+                new DealsCombatDamageToAPlayerTriggeredAbility(
+                        new DoIfCostPaid(
+                                new DrawCardSourceControllerEffect(1),
+                                new RemoveCountersSourceCost(CounterType.SHIELD.createInstance())),
+                        false),
                 Duration.EndOfTurn,
                 "Until end of turn, it gains " +
                         "\"Whenever this creature deals combat damage to a player, remove a shield counter from it. " +
@@ -61,42 +68,5 @@ public class FamilysFavor extends CardImpl {
     @Override
     public FamilysFavor copy() {
         return new FamilysFavor(this);
-    }
-}
-
-class FamilysFavorRemoveShieldDrawEffect extends OneShotEffect {
-
-    FamilysFavorRemoveShieldDrawEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "remove a shield counter from it. If you do, draw a card.";
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent attacker = game.getPermanent(source.getSourceId());
-        if (controller == null || attacker == null) {
-            return false;
-        }
-
-        Counter tmpShieldCounter = CounterType.SHIELD.createInstance();
-        Counter shieldCountersOnAttacker = attacker.getCounters(game).get(tmpShieldCounter.getName());
-        if (shieldCountersOnAttacker == null || shieldCountersOnAttacker.getCount() == 0) {
-            return false;
-        }
-
-        attacker.removeCounters(tmpShieldCounter.getName(), 1, source, game);
-        game.applyEffects();
-        controller.drawCards(1, source, game);
-        return true;
-    }
-
-    FamilysFavorRemoveShieldDrawEffect(final FamilysFavorRemoveShieldDrawEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public Effect copy() {
-        return new FamilysFavorRemoveShieldDrawEffect(this);
     }
 }
