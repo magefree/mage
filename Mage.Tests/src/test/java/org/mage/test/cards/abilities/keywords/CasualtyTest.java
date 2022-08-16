@@ -90,8 +90,6 @@ public class CasualtyTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, obNixilisTheAdversary);
-        // TODO: Change after change in test
-//        setChoice(playerA, "Yes");
         setChoice(playerA, aetherwindBasker);
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
