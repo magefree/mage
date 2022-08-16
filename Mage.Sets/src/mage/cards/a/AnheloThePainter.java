@@ -4,15 +4,12 @@ import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.CasualtyAbility;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -22,10 +19,8 @@ import mage.players.Player;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
-import java.util.stream.Stream;
 
 /**
  * @author Alex-Vasile
@@ -63,7 +58,6 @@ public class AnheloThePainter extends CardImpl {
 
 class AnheloThePainterGainCausalityEffect extends ContinuousEffectImpl {
 
-
     AnheloThePainterGainCausalityEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "The first instant or sorcery spell you cast each turn has casualty 2. " +
@@ -83,46 +77,26 @@ class AnheloThePainterGainCausalityEffect extends ContinuousEffectImpl {
             return false;
         }
 
-        // Get all instant and socery cards owned by the player
-        Stream<Card> cardStream = Stream.concat(
-                controller.getLibrary().getCards(game).stream().filter(Card::isInstantOrSorcery),
-                controller.getGraveyard().getCards(game).stream().filter(Card::isInstantOrSorcery));
-        cardStream = Stream.concat(cardStream,
-                game.getExile().getAllCards(game, controller.getId()).stream().filter(Card::isInstantOrSorcery));
-        cardStream =  Stream.concat(cardStream,
-                controller.getHand().getCards(game).stream().filter(Card::isInstantOrSorcery));
-        // TODO: This still isn't good since it must still capture opponents cards that the controller may get access to.
-
-        Iterator<Card> cardIterator = cardStream.iterator();
-        while (cardIterator.hasNext()) {
-            Card card = cardIterator.next();
-            // TODO: I know this doesn't work, not sure how to check this
-            if (FirstInstantOrSorceryEachTurnCondition.instance.apply(game, source)) {
-                game.getState().addOtherAbility(card, new CasualtyAbility(card, 2));
+        boolean applied = false;
+        for (StackObject stackObject : game.getStack()) {
+            if (!(stackObject instanceof Spell)
+                    || stackObject.isCopy()
+                    || !stackObject.isControlledBy(source.getControllerId())
+                    || !AnheloThePainterWatcher.checkSpell(stackObject, game) ) {
+                continue;
             }
+            Spell spell = (Spell) stackObject;
+            Card card = spell.getCard();
+            game.getState().addOtherAbility(card, new CasualtyAbility(2));
+            applied = true;
         }
 
-        return true;
+        return applied;
     }
 
     @Override
     public AnheloThePainterGainCausalityEffect copy() {
         return new AnheloThePainterGainCausalityEffect(this);
-    }
-}
-
-enum FirstInstantOrSorceryEachTurnCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        if (game.getStack().isEmpty()) {
-            return false;
-        }
-
-        AnheloThePainterWatcher watcher = game.getState().getWatcher(AnheloThePainterWatcher.class);
-        StackObject stackObject = game.getStack().getFirst();
-        return watcher != null && AnheloThePainterWatcher.checkSpell(stackObject, game);
     }
 }
 
