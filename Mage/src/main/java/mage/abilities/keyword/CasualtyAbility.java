@@ -1,87 +1,95 @@
 package mage.abilities.keyword;
 
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
-import mage.abilities.costs.Cost;
+import mage.abilities.costs.*;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.CopySourceSpellEffect;
-import mage.abilities.effects.common.InfoEffect;
-import mage.cards.Card;
 import mage.constants.ComparisonType;
+import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
+import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
-import java.util.UUID;
-
 /**
- * @author TheElk801
+ * @author TheElk801, Alex-Vasile
  */
-public class CasualtyAbility extends StaticAbility {
+public class CasualtyAbility extends StaticAbility implements OptionalAdditionalSourceCosts {
 
-    public CasualtyAbility(Card card, int number) {
-        super(Zone.ALL, new InfoEffect(
-                "Casualty " + number + " <i>(As you cast this spell, " +
-                        "you may sacrifice a creature with power " + number +
-                        " or greater. When you do, copy this spell.)</i>"
-        ));
-        card.getSpellAbility().addCost(new CasualtyCost(number));
+    private static final String keywordText = "Casualty";
+    private final String promptString;
+
+    protected OptionalAdditionalCost additionalCost;
+
+    private static TargetControlledPermanent makeFilter(int number) {
+        FilterControlledPermanent filter = new FilterControlledCreaturePermanent(
+                "creature with power " + number + " or greater"
+        );
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, number - 1));
+        return new TargetControlledPermanent(1, 1, filter, true);
+    }
+
+    public CasualtyAbility(int number) {
+        super(Zone.STACK, null);
+        String reminderText = "As you cast this spell, you may sacrifice a creature with power " +
+                number + " or greater. When you do, copy this spell.";
+        this.promptString = "Sacrifice a creature with power " + number + " or greater?";
+        this.additionalCost = new OptionalAdditionalCostImpl(keywordText, reminderText, new SacrificeTargetCost(makeFilter(number)));
+        this.additionalCost.setRepeatable(false);
         this.setRuleAtTheTop(true);
     }
 
     private CasualtyAbility(final CasualtyAbility ability) {
         super(ability);
+        this.additionalCost = ability.additionalCost;
+        this.promptString = ability.promptString;
+    }
+
+    public void resetCasualty() {
+        if (additionalCost != null) {
+            additionalCost.reset();
+        }
     }
 
     @Override
     public CasualtyAbility copy() {
         return new CasualtyAbility(this);
     }
-}
-
-class CasualtyCost extends SacrificeTargetCost {
-
-    CasualtyCost(int number) {
-        super(new TargetControlledPermanent(0, 1, makeFilter(number), true));
-        this.text = "";
-    }
-
-    private CasualtyCost(final CasualtyCost cost) {
-        super(cost);
-    }
 
     @Override
-    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        if (!super.pay(ability, game, source, controllerId, noMana, costToPay)) {
-            return false;
+    public void addOptionalAdditionalCosts(Ability ability, Game game) {
+        if (!(ability instanceof SpellAbility)) {
+            return;
         }
-        if (!getPermanents().isEmpty()) {
-            game.fireReflexiveTriggeredAbility(new ReflexiveTriggeredAbility(
-                    new CopySourceSpellEffect(), false, "when you do, copy this spell"
-            ), source);
+
+        Player player = game.getPlayer(ability.getControllerId());
+        if (player == null) {
+            return;
         }
-        return true;
+
+        this.resetCasualty();
+        boolean canPay = additionalCost.canPay(ability, this, ability.getControllerId(), game);
+        if (!canPay || !player.chooseUse(Outcome.Sacrifice, promptString, ability, game)) {
+            return;
+        }
+
+        additionalCost.activate();
+        for (Cost cost : ((Costs<Cost>) additionalCost)) {
+            ability.getCosts().add(cost.copy());
+        }
+        game.fireReflexiveTriggeredAbility(new ReflexiveTriggeredAbility(
+                new CopySourceSpellEffect(), false, "when you do, copy this spell"
+        ), ability);
     }
 
     @Override
-    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return true;
-    }
-
-    @Override
-    public CasualtyCost copy() {
-        return new CasualtyCost(this);
-    }
-
-    private static FilterControlledPermanent makeFilter(int number) {
-        FilterControlledPermanent filter = new FilterControlledCreaturePermanent(
-                "creature with power " + number + " or greater"
-        );
-        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, number - 1));
-        return filter;
+    public String getCastMessageSuffix() {
+        return additionalCost == null ? "" : additionalCost.getCastSuffixMessage(0);
     }
 }

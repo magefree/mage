@@ -38,6 +38,7 @@ public class CasualtyTest extends CardTestPlayerBase {
         skipInitShuffling();
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, aLittleChat);
+        setChoice(playerA, "Yes");
         setChoice(playerA, aetherwindBasker);
         addTarget(playerA, "Desert");
         addTarget(playerA, "Desert");
@@ -62,6 +63,7 @@ public class CasualtyTest extends CardTestPlayerBase {
         skipInitShuffling();
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, aLittleChat);
+        setChoice(playerA, "Yes");
         setChoice(playerA, aetherwindBasker);
         // If a second target was possible, it would have prompted us for another and this test would fail when strict choose mode was on
         addTarget(playerA, "Desert");
@@ -88,6 +90,8 @@ public class CasualtyTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, obNixilisTheAdversary);
+        // TODO: Change after change in test
+//        setChoice(playerA, "Yes");
         setChoice(playerA, aetherwindBasker);
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);

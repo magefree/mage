@@ -18,7 +18,7 @@ public final class JoinTheMaestros extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}");
 
         // Casualty 2
-        this.addAbility(new CasualtyAbility(this, 2));
+        this.addAbility(new CasualtyAbility(2));
 
         // Create a 4/3 black Ogre Warrior creature token.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new OgreWarriorToken()));
