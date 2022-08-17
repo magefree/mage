@@ -84,9 +84,10 @@ class TheBeamtownBulliesEffect extends OneShotEffect {
             // Get Cards from controller's graveyard
             Cards cards = new CardsImpl(game.getPlayer(source.getControllerId()).getGraveyard().getCards(game));
 
-            // Allow opponent to choose a non-legendary creature to put on the battlefield under their control
+            // Choose a non-legendary creature to put on the battlefield under their control
+            Player controller = game.getPlayer(source.getControllerId());
             TargetCard target = new TargetCard(1, Zone.GRAVEYARD, filter);
-            opponent.chooseTarget(outcome, cards, target, source, game);
+            controller.chooseTarget(outcome, cards, target, source, game);
             Card card = game.getCard(target.getFirstTarget());
 
             // Put the chosen card onto the battlefield under opponents control
