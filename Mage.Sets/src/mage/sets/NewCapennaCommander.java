@@ -301,6 +301,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Temur Sabertooth", 315, Rarity.UNCOMMON, mage.cards.t.TemurSabertooth.class));
         cards.add(new SetCardInfo("Terminate", 353, Rarity.UNCOMMON, mage.cards.t.Terminate.class));
         cards.add(new SetCardInfo("Tezzeret's Gambit", 235, Rarity.RARE, mage.cards.t.TezzeretsGambit.class));
+        cards.add(new SetCardInfo("The Beamtown Bullies", 6, Rarity.MYTHIC, mage.cards.t.TheBeamtownBullies.class));
         cards.add(new SetCardInfo("Thief of Sanity", 354, Rarity.RARE, mage.cards.t.ThiefOfSanity.class));
         cards.add(new SetCardInfo("Thragtusk", 316, Rarity.RARE, mage.cards.t.Thragtusk.class));
         cards.add(new SetCardInfo("Thriving Bluff", 438, Rarity.COMMON, mage.cards.t.ThrivingBluff.class));
