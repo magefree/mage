@@ -14,14 +14,18 @@ import mage.abilities.effects.common.combat.GoadTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.VigilanceAbility;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetCard;
+import mage.target.TargetPlayer;
+import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.common.TargetOpponentWhoseTurnItIs;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -31,6 +35,12 @@ import java.util.UUID;
  */
 public final class TheBeamtownBullies extends CardImpl {
 
+    private static final FilterCard filter = new FilterCard("nonlegendary creature card");
+
+    static {
+        filter.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));
+        filter.add(CardType.CREATURE.getPredicate());
+    }
     public TheBeamtownBullies(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}{G}");
 
@@ -47,6 +57,10 @@ public final class TheBeamtownBullies extends CardImpl {
 
         // Target opponent whose turn it is puts target nonlegendary creature card from your graveyard onto the battlefield under their control. It gains haste. Goad it. At the beginning of the next end step, exile it.
         Ability ability = new SimpleActivatedAbility(new TheBeamtownBulliesEffect(), new TapSourceCost());
+
+        // Choose a non-legendary creature to put on the battlefield under their control
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
+
         this.addAbility(ability);
     }
 
@@ -61,12 +75,6 @@ public final class TheBeamtownBullies extends CardImpl {
 }
 
 class TheBeamtownBulliesEffect extends OneShotEffect {
-    private static final FilterCard filter = new FilterCard("nonlegendary creature card");
-
-    static {
-        filter.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));
-        filter.add(CardType.CREATURE.getPredicate());
-    }
     public TheBeamtownBulliesEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Target opponent whose turn it is puts target nonlegendary creature card from your graveyard onto the battlefield under their control. It gains haste. Goad it. At the beginning of the next end step, exile it.";
@@ -77,20 +85,17 @@ class TheBeamtownBulliesEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player opponent = game.getPlayer(game.getActivePlayerId());
-        // check to ensure it is an opponent's turn
-        if (opponent != null && opponent.hasOpponent(source.getControllerId(), game))
+        // Ability is targeted
+        TargetPlayer targetOpponent = new TargetOpponentWhoseTurnItIs(game);
+        Player controller = game.getPlayer(source.getControllerId());
+        controller.chooseTarget(Outcome.Neutral, targetOpponent, source, game);
+        Player opponent = game.getPlayer(targetOpponent.getFirstTarget());
+
+        // check to ensure it is the chosen opponent's turn
+        if (opponent != null && opponent.getId().equals(game.getActivePlayerId()))
         {
-            // Get Cards from controller's graveyard
-            Cards cards = new CardsImpl(game.getPlayer(source.getControllerId()).getGraveyard().getCards(game));
-
-            // Choose a non-legendary creature to put on the battlefield under their control
-            Player controller = game.getPlayer(source.getControllerId());
-            TargetCard target = new TargetCard(1, Zone.GRAVEYARD, filter);
-            controller.chooseTarget(outcome, cards, target, source, game);
-            Card card = game.getCard(target.getFirstTarget());
-
             // Put the chosen card onto the battlefield under opponents control
+            Card card = game.getCard(source.getTargets().getFirstTarget());
             if (card == null || !opponent.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                 return false;
             }
