@@ -46,6 +46,8 @@ Dark Ascension|DarkAscension|
 Darksteel|Darksteel|
 Dissension|Dissension|
 Dominaria|Dominaria|
+Dominaria United|DominariaUnited|
+Dominaria United Commander|DominariaUnitedCommander|
 Dragon's Maze|DragonsMaze|
 Dragons of Tarkir|DragonsOfTarkir|
 Duel Decks: Ajani vs. Nicol Bolas|DuelDecksAjaniVsNicolBolas|

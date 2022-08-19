@@ -16,31 +16,29 @@ import mage.game.permanent.Permanent;
  */
 public class ZoneChangeAllTriggeredAbility extends TriggeredAbilityImpl {
 
-    protected FilterPermanent filter;
-    protected Zone fromZone;
-    protected Zone toZone;
-    protected String rule;
+    protected final FilterPermanent filter;
+    protected final Zone fromZone;
+    protected final Zone toZone;
 
-    public ZoneChangeAllTriggeredAbility(Zone zone, Zone toZone, Effect effect, FilterPermanent filter, String rule, boolean optional) {
-        this(zone, null, toZone, effect, filter, rule, optional);
+    public ZoneChangeAllTriggeredAbility(Zone zone, Zone toZone, Effect effect, FilterPermanent filter, String triggerPhrase, boolean optional) {
+        this(zone, null, toZone, effect, filter, triggerPhrase, optional);
     }
 
-    public ZoneChangeAllTriggeredAbility(Zone zone, Zone fromZone, Zone toZone, Effect effect, FilterPermanent filter, String rule, boolean optional) {
+    public ZoneChangeAllTriggeredAbility(Zone zone, Zone fromZone, Zone toZone, Effect effect, FilterPermanent filter, String triggerPhrase, boolean optional) {
         super(zone, effect, optional);
         if (fromZone == Zone.BATTLEFIELD) {
             setLeavesTheBattlefieldTrigger(true);
         }        
         this.fromZone = fromZone;
         this.toZone = toZone;
-        this.rule = rule;
         this.filter = filter;
+        setTriggerPhrase(triggerPhrase);
     }
 
     public ZoneChangeAllTriggeredAbility(final ZoneChangeAllTriggeredAbility ability) {
         super(ability);
         this.fromZone = ability.fromZone;
         this.toZone = ability.toZone;
-        this.rule = ability.rule;
         this.filter = ability.filter;
     }
 
@@ -65,11 +63,6 @@ public class ZoneChangeAllTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return rule ;
     }
 
     @Override

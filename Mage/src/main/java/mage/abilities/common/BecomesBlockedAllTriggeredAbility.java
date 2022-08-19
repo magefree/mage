@@ -26,6 +26,7 @@ public class BecomesBlockedAllTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever " + filter.getMessage() + " becomes blocked, ");
     }
 
     public BecomesBlockedAllTriggeredAbility(final BecomesBlockedAllTriggeredAbility ability) {
@@ -49,11 +50,6 @@ public class BecomesBlockedAllTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever " + filter.getMessage() + " becomes blocked, " ;
     }
 
     @Override

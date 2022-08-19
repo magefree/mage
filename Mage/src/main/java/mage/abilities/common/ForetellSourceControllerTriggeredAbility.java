@@ -15,6 +15,7 @@ public class ForetellSourceControllerTriggeredAbility extends TriggeredAbilityIm
 
     public ForetellSourceControllerTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        setTriggerPhrase("Whenever you foretell a card, ");
     }
 
     public ForetellSourceControllerTriggeredAbility(final ForetellSourceControllerTriggeredAbility ability) {
@@ -33,11 +34,6 @@ public class ForetellSourceControllerTriggeredAbility extends TriggeredAbilityIm
         return (card != null
                 && player != null
                 && isControlledBy(player.getId()));
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you foretell a card, ";
     }
 
     @Override

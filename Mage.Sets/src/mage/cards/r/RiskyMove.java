@@ -102,6 +102,7 @@ class RiskyMoveTriggeredAbility extends TriggeredAbilityImpl {
 
     public RiskyMoveTriggeredAbility() {
         super(Zone.BATTLEFIELD, new RiskyMoveFlipCoinEffect(), false);
+        setTriggerPhrase("When you gain control of {this} from another player, ");
     }
 
     public RiskyMoveTriggeredAbility(final RiskyMoveTriggeredAbility ability) {
@@ -121,11 +122,6 @@ class RiskyMoveTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getTargetId().equals(sourceId);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When you gain control of {this} from another player, ";
     }
 }
 

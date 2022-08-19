@@ -53,6 +53,7 @@ class SoulsOfTheFaultlessTriggeredAbility extends TriggeredAbilityImpl {
 
     public SoulsOfTheFaultlessTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SoulsOfTheFaultlessEffect());
+        setTriggerPhrase("Whenever {this} is dealt combat damage, ");
     }
 
     public SoulsOfTheFaultlessTriggeredAbility(final SoulsOfTheFaultlessTriggeredAbility effect) {
@@ -85,11 +86,6 @@ class SoulsOfTheFaultlessTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} is dealt combat damage, " ;
     }
 }
 

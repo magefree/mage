@@ -110,6 +110,7 @@ class ManaVortexStateTriggeredAbility extends StateTriggeredAbility {
 
     public ManaVortexStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
+        setTriggerPhrase("When there are no lands on the battlefield, ");
     }
 
     public ManaVortexStateTriggeredAbility(final ManaVortexStateTriggeredAbility ability) {
@@ -125,10 +126,4 @@ class ManaVortexStateTriggeredAbility extends StateTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         return game.getBattlefield().count(StaticFilters.FILTER_LANDS, this.getControllerId(), this, game) == 0;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When there are no lands on the battlefield, " ;
-    }
-
 }

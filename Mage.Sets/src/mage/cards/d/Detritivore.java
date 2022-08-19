@@ -66,6 +66,7 @@ class DetritivoreTriggeredAbility extends TriggeredAbilityImpl {
     public DetritivoreTriggeredAbility() {
         super(Zone.EXILED, new DestroyTargetEffect(), false);
         this.addTarget(new TargetNonBasicLandPermanent());
+        setTriggerPhrase("Whenever a time counter is removed from {this} while it's exiled, ");
     }
 
     public DetritivoreTriggeredAbility(final DetritivoreTriggeredAbility ability) {
@@ -86,12 +87,6 @@ class DetritivoreTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getData().equals(CounterType.TIME.getName()) && event.getTargetId().equals(this.getSourceId());
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a time counter is removed from {this} while it's exiled, " ;
-    }
-
 }
 
 class NonBasicLandsInOpponentsGraveyards implements DynamicValue {

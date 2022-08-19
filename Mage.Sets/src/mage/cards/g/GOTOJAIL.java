@@ -92,6 +92,7 @@ class GoToJailTriggeredAbility extends TriggeredAbilityImpl {
 
     public GoToJailTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GoToJailUpkeepEffect(), false);
+        setTriggerPhrase("At the beginning of the chosen player's upkeep, ");
     }
 
     public GoToJailTriggeredAbility(final GoToJailTriggeredAbility ability) {
@@ -111,11 +112,6 @@ class GoToJailTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(game.getState().getValue(this.getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY));
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "At the beginning of the chosen player's upkeep, " ;
     }
 }
 

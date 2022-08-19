@@ -40,6 +40,8 @@ public class DealsDamageToACreatureAllTriggeredAbility extends TriggeredAbilityI
         this.combatOnly = combatOnly;
         this.setTargetPointer = setTargetPointer;
         this.filterPermanent = filterPermanent;
+        setTriggerPhrase("Whenever " + filterPermanent.getMessage() + " deals "
+                              + (combatOnly ? "combat " : "") + "damage to a creature, ");
     }
 
     public DealsDamageToACreatureAllTriggeredAbility(final DealsDamageToACreatureAllTriggeredAbility ability) {
@@ -89,11 +91,5 @@ public class DealsDamageToACreatureAllTriggeredAbility extends TriggeredAbilityI
                 break;
         }
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever " + filterPermanent.getMessage() + " deals "
-                + (combatOnly ? "combat " : "") + "damage to a creature, ";
     }
 }

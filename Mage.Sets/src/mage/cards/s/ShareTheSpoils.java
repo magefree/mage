@@ -267,11 +267,11 @@ class ShareTheSpoilsExileCardWhenPlayACardAbility extends TriggeredAbilityImpl {
     ShareTheSpoilsExileCardWhenPlayACardAbility() {
         super(Zone.BATTLEFIELD, new ShareTheSpoilsExileSingleCardEffect());
         setRuleVisible(false);
+        setTriggerPhrase("When they do");
     }
 
     private ShareTheSpoilsExileCardWhenPlayACardAbility(final ShareTheSpoilsExileCardWhenPlayACardAbility ability) {
         super(ability);
-
         triggeringPlayerID = ability.triggeringPlayerID;
     }
 
@@ -288,11 +288,6 @@ class ShareTheSpoilsExileCardWhenPlayACardAbility extends TriggeredAbilityImpl {
     @Override
     public TriggeredAbility copy() {
         return new ShareTheSpoilsExileCardWhenPlayACardAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When they do";
     }
 
     @Override

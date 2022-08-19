@@ -43,6 +43,8 @@ public class DealsDamageToAPlayerAllTriggeredAbility extends TriggeredAbilityImp
         this.onlyCombat = onlyCombat;
         this.affectsDefendingPlayer = affectsDefendingPlayer;
         this.targetController = targetController;
+        setTriggerPhrase("Whenever " + filter.getMessage() + " deals " + (onlyCombat ? "combat " : "") + "damage to "
+                + (targetController == TargetController.OPPONENT ? "an opponent" : "a player") + ", ");
     }
 
     public DealsDamageToAPlayerAllTriggeredAbility(final DealsDamageToAPlayerAllTriggeredAbility ability) {
@@ -92,11 +94,5 @@ public class DealsDamageToAPlayerAllTriggeredAbility extends TriggeredAbilityImp
             }
         }
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever " + filter.getMessage() + " deals " + (onlyCombat ? "combat " : "") + "damage to "
-                + (targetController == TargetController.OPPONENT ? "an opponent" : "a player") + ", " ;
     }
 }

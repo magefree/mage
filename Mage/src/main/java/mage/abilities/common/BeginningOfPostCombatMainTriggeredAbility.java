@@ -24,6 +24,7 @@ public class BeginningOfPostCombatMainTriggeredAbility extends TriggeredAbilityI
         super(zone, effect, isOptional);
         this.targetController = targetController;
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase(generateTriggerPhrase());
     }
 
     public BeginningOfPostCombatMainTriggeredAbility(final BeginningOfPostCombatMainTriggeredAbility ability) {
@@ -76,8 +77,7 @@ public class BeginningOfPostCombatMainTriggeredAbility extends TriggeredAbilityI
         return false;
     }
 
-    @Override
-    public String getTriggerPhrase() {
+    private String generateTriggerPhrase() {
         switch (targetController) {
             case YOU:
                 return "At the beginning of your postcombat main phase, " + generateZoneString();

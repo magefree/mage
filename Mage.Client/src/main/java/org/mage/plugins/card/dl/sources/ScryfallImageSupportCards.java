@@ -512,6 +512,8 @@ public class ScryfallImageSupportCards {
             add("SLX"); // Universes Within
             add("CLB"); // Commander Legends: Battle for Baldur's Gate
             add("2X2"); // Double Masters 2022
+            add("DMU"); // Dominaria United
+            add("DMC"); // Dominaria United Commander
             add("40K"); // Warhammer 40,000
         }
     };

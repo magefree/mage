@@ -43,7 +43,7 @@ public final class AllSeeingArbiter extends CardImpl {
 
         // Whenever you discard a card, target creature an opponent controls gets -X/-0 until your next turn, where X is the number of different mana values among cards in your graveyard.
         Ability ability = new DiscardCardControllerTriggeredAbility(new BoostTargetEffect(
-                AllSeeingArbiterValue.instance, StaticValue.get(0), Duration.UntilYourNextTurn, true
+                AllSeeingArbiterValue.instance, StaticValue.get(0), Duration.UntilYourNextTurn
         ), false);
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);
@@ -91,5 +91,10 @@ enum AllSeeingArbiterValue implements DynamicValue {
     @Override
     public String getMessage() {
         return "the number of different mana values among cards in your graveyard";
+    }
+
+    @Override
+    public int getSign() {
+        return -1;
     }
 }

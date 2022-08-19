@@ -52,6 +52,7 @@ class WallOfEssenceTriggeredAbility extends TriggeredAbilityImpl {
 
     public WallOfEssenceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PiousWarriorGainLifeEffect());
+        setTriggerPhrase("Whenever {this} is dealt combat damage, ");
     }
 
     public WallOfEssenceTriggeredAbility(final WallOfEssenceTriggeredAbility effect) {
@@ -79,11 +80,6 @@ class WallOfEssenceTriggeredAbility extends TriggeredAbilityImpl {
         }
         this.getEffects().setValue("damageAmount", event.getAmount());
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} is dealt combat damage, " ;
     }
 }
 

@@ -58,6 +58,7 @@ class SatoruUmezawaTriggeredAbility extends TriggeredAbilityImpl {
     SatoruUmezawaTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LookLibraryAndPickControllerEffect(3, 1, PutCards.HAND, PutCards.BOTTOM_ANY));
         this.setTriggersOnce(true);
+        setTriggerPhrase("Whenever you activate a ninjutsu ability, ");
     }
 
     private SatoruUmezawaTriggeredAbility(final SatoruUmezawaTriggeredAbility ability) {
@@ -81,11 +82,6 @@ class SatoruUmezawaTriggeredAbility extends TriggeredAbilityImpl {
         }
         StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getTargetId());
         return stackAbility.getStackAbility() instanceof NinjutsuAbility;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you activate a ninjutsu ability, ";
     }
 }
 

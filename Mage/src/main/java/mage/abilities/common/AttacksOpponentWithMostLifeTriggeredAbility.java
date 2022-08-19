@@ -16,6 +16,7 @@ public class AttacksOpponentWithMostLifeTriggeredAbility extends TriggeredAbilit
 
     public AttacksOpponentWithMostLifeTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever this creature attacks a player, if no opponent has more life than that player, ");
     }
 
     private AttacksOpponentWithMostLifeTriggeredAbility(final AttacksOpponentWithMostLifeTriggeredAbility ability) {
@@ -47,11 +48,6 @@ public class AttacksOpponentWithMostLifeTriggeredAbility extends TriggeredAbilit
                 .orElse(Integer.MIN_VALUE)
                 <= defender
                 .getLife();
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever this creature attacks a player, if no opponent has more life than that player, ";
     }
 
     @Override

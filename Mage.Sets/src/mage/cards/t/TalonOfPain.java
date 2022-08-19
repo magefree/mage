@@ -58,49 +58,45 @@ public final class TalonOfPain extends CardImpl {
     public TalonOfPain copy() {
         return new TalonOfPain(this);
     }
+}
 
-    private class TalonOfPainTriggeredAbility extends TriggeredAbilityImpl {
+class TalonOfPainTriggeredAbility extends TriggeredAbilityImpl {
 
-        public TalonOfPainTriggeredAbility() {
-            super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()));
-        }
+    public TalonOfPainTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()));
+        setTriggerPhrase("Whenever a source you control other than {this} deals damage to an opponent, ");
+    }
 
-        public TalonOfPainTriggeredAbility(final TalonOfPainTriggeredAbility ability) {
-            super(ability);
-        }
+    public TalonOfPainTriggeredAbility(final TalonOfPainTriggeredAbility ability) {
+        super(ability);
+    }
 
-        @Override
-        public TalonOfPainTriggeredAbility copy() {
-            return new TalonOfPainTriggeredAbility(this);
-        }
+    @Override
+    public TalonOfPainTriggeredAbility copy() {
+        return new TalonOfPainTriggeredAbility(this);
+    }
 
-        @Override
-        public boolean checkEventType(GameEvent event, Game game) {
-            return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-        }
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+    }
 
-        @Override
-        public boolean checkTrigger(GameEvent event, Game game) {
-            // to another player
-            Player controller = game.getPlayer(this.getControllerId());
-            if (controller == null) {
-                return false;
-            }
-            if (controller.hasOpponent(event.getTargetId(), game)) {
-                // a source you control other than Talon of Pain
-                UUID sourceControllerId = game.getControllerId(event.getSourceId());
-                // return true so the effect will fire and a charge counter will be added
-                return sourceControllerId != null
-                        && sourceControllerId.equals(this.getControllerId())
-                        && !this.getSourceId().equals(event.getSourceId());
-            }
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        // to another player
+        Player controller = game.getPlayer(this.getControllerId());
+        if (controller == null) {
             return false;
         }
-
-        @Override
-        public String getTriggerPhrase() {
-            return "Whenever a source you control other than {this} deals damage to an opponent, ";
+        if (controller.hasOpponent(event.getTargetId(), game)) {
+            // a source you control other than Talon of Pain
+            UUID sourceControllerId = game.getControllerId(event.getSourceId());
+            // return true so the effect will fire and a charge counter will be added
+            return sourceControllerId != null
+                    && sourceControllerId.equals(this.getControllerId())
+                    && !this.getSourceId().equals(event.getSourceId());
         }
+        return false;
     }
 }
 

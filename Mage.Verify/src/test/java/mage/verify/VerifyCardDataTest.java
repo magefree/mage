@@ -870,19 +870,23 @@ public class VerifyCardDataTest {
             // TODO: add test to check num cards (hasBasicLands and numLand > 0)
         }
 
-        // CHECK: wrong snow land info
+        // CHECK: wrong snow land info - set needs to have exclusively snow basics to qualify
         for (ExpansionSet set : sets) {
             boolean needSnow = CardRepository.haveSnowLands(set.getCode());
             boolean haveSnow = false;
+            boolean haveNonSnow = false;
             for (ExpansionSet.SetCardInfo card : set.getSetCardInfo()) {
                 if (card.getName().startsWith("Snow-Covered ")) {
                     haveSnow = true;
+                }
+                if (isNonSnowBasicLandName(card.getName())) {
+                    haveNonSnow = true;
                     break;
                 }
             }
-            if (needSnow != haveSnow) {
+            if (needSnow != (haveSnow && !haveNonSnow)) {
                 errorsList.add("Error: found incorrect snow land info in set " + set.getCode() + ": "
-                        + (haveSnow ? "set has snow cards" : "set doesn't have snow card")
+                        + ((haveSnow && !haveNonSnow) ? "set has exclusively snow basics" : "set doesn't have exclusively snow basics")
                         + ", but xmage thinks that it " + (needSnow ? "does" : "doesn't"));
             }
         }
@@ -1819,6 +1823,14 @@ public class VerifyCardDataTest {
                 || checkName.equals("Swamp")
                 || checkName.equals("Plains")
                 || checkName.equals("Mountain");
+    }
+    
+    private boolean isNonSnowBasicLandName(String name) {
+        return name.equals("Island")
+                || name.equals("Forest")
+                || name.equals("Swamp")
+                || name.equals("Plains")
+                || name.equals("Mountain");
     }
 
     private void checkBasicLands(Card card, MtgJsonCard ref) {

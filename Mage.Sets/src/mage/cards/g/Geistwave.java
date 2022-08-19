@@ -57,7 +57,7 @@ class GeistwaveEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getControllerId());
+        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (player == null || permanent == null) {
             return false;
         }

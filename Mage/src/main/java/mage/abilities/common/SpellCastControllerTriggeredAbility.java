@@ -15,13 +15,13 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
 
-    protected FilterSpell filter;
-    protected String rule;
+    protected final FilterSpell filter;
+    protected String rule;  // TODO: This sould be final, but is not because of the telescoping contructors
 
     // The source SPELL that triggered the ability will be set as target to effect
-    protected boolean rememberSource = false;
+    protected boolean rememberSource;
     // Use it if you want remember CARD instead spell
-    protected boolean rememberSourceAsCard = false;
+    protected boolean rememberSourceAsCard;
 
     public SpellCastControllerTriggeredAbility(Effect effect, boolean optional) {
         this(Zone.BATTLEFIELD, effect, StaticFilters.FILTER_SPELL_A, optional, false);
@@ -49,6 +49,7 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
         this.filter = filter;
         this.rememberSource = rememberSource;
         this.rememberSourceAsCard = rememberSourceAsCard;
+        setTriggerPhrase("Whenever you cast " + filter.getMessage() + ", ");
     }
 
     public SpellCastControllerTriggeredAbility(final SpellCastControllerTriggeredAbility ability) {
@@ -86,15 +87,7 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        if (rule != null && !rule.isEmpty()) {
-            return rule;
-        }
-        return super.getRule();
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you cast " + filter.getMessage() + ", ";
+        return rule != null ? rule : super.getRule();
     }
 
     @Override

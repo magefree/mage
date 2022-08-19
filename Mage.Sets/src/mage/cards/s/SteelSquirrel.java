@@ -54,6 +54,7 @@ class SteelSquirrelTriggeredAbility extends TriggeredAbilityImpl {
 
     public SteelSquirrelTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SteelSquirrelEffect());
+        setTriggerPhrase("Whenever you roll a 5 or higher on a die, ");
     }
 
     public SteelSquirrelTriggeredAbility(final SteelSquirrelTriggeredAbility ability) {
@@ -74,16 +75,12 @@ class SteelSquirrelTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         DieRolledEvent drEvent = (DieRolledEvent) event;
         // silver border card must look for "result" instead "natural result"
-        if (this.isControlledBy(event.getPlayerId()) && drEvent.getResult() >= 5) {
-            this.getEffects().setValue("rolled", drEvent.getResult());
-            return true;
+        if (this.isControlledBy(event.getPlayerId()) && drEvent.getResult() < 5) {
+            return false;
         }
-        return false;
-    }
 
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you roll a 5 or higher on a die, " ;
+        this.getEffects().setValue("rolled", drEvent.getResult());
+        return true;
     }
 }
 

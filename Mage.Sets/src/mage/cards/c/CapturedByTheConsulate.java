@@ -67,6 +67,7 @@ class CapturedByTheConsulateTriggeredAbility extends TriggeredAbilityImpl {
      */
     CapturedByTheConsulateTriggeredAbility(Zone zone, Effect effect) {
         super(zone, effect, false);
+        setTriggerPhrase("Whenever an opponent casts a spell, if it has a single target, ");
     }
 
     private CapturedByTheConsulateTriggeredAbility(final CapturedByTheConsulateTriggeredAbility ability) {
@@ -109,11 +110,6 @@ class CapturedByTheConsulateTriggeredAbility extends TriggeredAbilityImpl {
             return numberOfTargets == 1;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever an opponent casts a spell, if it has a single target, ";
     }
 
     @Override

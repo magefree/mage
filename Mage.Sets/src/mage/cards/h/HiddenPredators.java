@@ -47,6 +47,7 @@ class HiddenPredatorsStateTriggeredAbility extends StateTriggeredAbility {
 
     public HiddenPredatorsStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new HiddenPredatorsToken(), "", Duration.Custom, true, false));
+        setTriggerPhrase("When an opponent controls a creature with 4 or greater power, if {this} is an enchantment, ");
     }
 
     public HiddenPredatorsStateTriggeredAbility(final HiddenPredatorsStateTriggeredAbility ability) {
@@ -96,12 +97,6 @@ class HiddenPredatorsStateTriggeredAbility extends StateTriggeredAbility {
     public void counter(Game game) {
         game.getState().setValue(this.getSourceId().toString() + "triggered", Boolean.FALSE);
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When an opponent controls a creature with 4 or greater power, if {this} is an enchantment, " ;
-    }
-
 }
 
 class HiddenPredatorsToken extends TokenImpl {

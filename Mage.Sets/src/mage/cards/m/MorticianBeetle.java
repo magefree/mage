@@ -47,6 +47,7 @@ class PlayerSacrificesCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
     public PlayerSacrificesCreatureTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever a player sacrifices a creature, ");
     }
 
     public PlayerSacrificesCreatureTriggeredAbility(final PlayerSacrificesCreatureTriggeredAbility ability) {
@@ -65,11 +66,6 @@ class PlayerSacrificesCreatureTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a player sacrifices a creature, " ;
     }
 
     @Override

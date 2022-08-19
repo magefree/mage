@@ -66,6 +66,7 @@ class MarchesaTheBlackRoseTriggeredAbility extends TriggeredAbilityImpl {
 
     public MarchesaTheBlackRoseTriggeredAbility() {
         super(Zone.BATTLEFIELD, new MarchesaTheBlackRoseEffect());
+        setTriggerPhrase("Whenever a creature you control with a +1/+1 counter on it dies, ");
     }
 
     public MarchesaTheBlackRoseTriggeredAbility(final MarchesaTheBlackRoseTriggeredAbility ability) {
@@ -98,11 +99,6 @@ class MarchesaTheBlackRoseTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature you control with a +1/+1 counter on it dies, " ;
     }
 }
 

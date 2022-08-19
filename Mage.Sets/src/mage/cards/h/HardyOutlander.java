@@ -33,7 +33,7 @@ public final class HardyOutlander extends CardImpl {
 
         // Commander creatures you own have "Whenever this creature attacks a player, if no opponent has more life than that player, another target creature you control gets +X/+X until end of turn, where X is this creature's power."
         Ability ability = new AttacksOpponentWithMostLifeTriggeredAbility(new BoostTargetEffect(
-                xValue, xValue, Duration.EndOfTurn, true
+                xValue, xValue, Duration.EndOfTurn
         ).setText("another target creature you control gets +X/+X until end of turn, where X is this creature's power"), false);
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(

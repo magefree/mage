@@ -67,6 +67,7 @@ class EfreetWeaponmasterAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new BoostTargetEffect(3,0, Duration.EndOfTurn), false);
         this.addTarget(new TargetControlledCreaturePermanent(filter));
         this.setWorksFaceDown(true);
+        setTriggerPhrase("When {this} enters the battlefield or is turned face up, ");
     }
 
     public EfreetWeaponmasterAbility(final EfreetWeaponmasterAbility ability) {
@@ -96,10 +97,4 @@ class EfreetWeaponmasterAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When {this} enters the battlefield or is turned face up, " ;
-    }
-
 }

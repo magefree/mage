@@ -622,6 +622,7 @@ public class TestPlayer implements Player {
                     }
                     // TODO: fix wrong commands (on non existing card), it's HUGE (350+ failed tests with wrong commands)
                     //Assert.fail("Can't find ability to activate command: " + command);
+                    LOGGER.warn("Can't find ability to activate command: " + command);
                 } else if (action.getAction().startsWith(ACTIVATE_MANA)) {
                     String command = action.getAction();
                     command = command.substring(command.indexOf(ACTIVATE_MANA) + ACTIVATE_MANA.length());
@@ -1064,8 +1065,8 @@ public class TestPlayer implements Player {
 
     /**
      * Adds actions to the player actions after an executed rollback Actions
-     * have to be added after the rollback becauuse otherwise the actions are
-     * not valid because otehr ot the same actions are already taken before the
+     * have to be added after the rollback because otherwise the actions are
+     * not valid because other ot the same actions are already taken before the
      * rollback.
      *
      * @param game
@@ -2016,6 +2017,7 @@ public class TestPlayer implements Player {
             }
             // TODO: enable fail checks and fix tests
             //Assert.fail("Wrong choice");
+            LOGGER.warn("Wrong choice");
         }
 
         String choicesInfo;
@@ -2049,6 +2051,7 @@ public class TestPlayer implements Player {
 
             // TODO: enable fail checks and fix tests
             //Assert.fail("wrong choice");
+            LOGGER.warn("Wrong choice");
         }
 
         this.chooseStrictModeFailed("choice", game, String.join("\n", rEffects.values()));
@@ -2644,6 +2647,7 @@ public class TestPlayer implements Player {
 
             // TODO: enable fail checks and fix tests
             //Assert.fail("Wrong target");
+            LOGGER.warn("Wrong target");
         }
 
         this.chooseStrictModeFailed("target", game, getInfo(source, game) + "\n" + getInfo(target));
@@ -2662,6 +2666,7 @@ public class TestPlayer implements Player {
             }
             // TODO: enable fail checks and fix tests
             //Assert.fail("Wrong choice");
+            LOGGER.warn("Wrong choice");
         }
 
         this.chooseStrictModeFailed("choice", game,
@@ -2692,6 +2697,7 @@ public class TestPlayer implements Player {
             }
             // TODO: enable fail checks and fix tests
             //Assert.fail("Wrong choice");
+            LOGGER.warn("Wrong choice");
         }
 
         this.chooseStrictModeFailed("choice", game, getInfo(source, game)
@@ -4013,6 +4019,7 @@ public class TestPlayer implements Player {
             }
             // TODO: enable fail checks and fix tests
             //Assert.fail("Wrong choice");
+            LOGGER.warn("Wrong choice");
         }
 
         this.chooseStrictModeFailed("choice", game, getInfo(target));
@@ -4385,6 +4392,7 @@ public class TestPlayer implements Player {
 
             // TODO: enable fail checks and fix tests
             //Assert.fail("Wrong choice");
+            LOGGER.warn("Wrong choice");
         }
 
         String allInfo = useable.values().stream().map(Object::toString).collect(Collectors.joining("\n"));
@@ -4416,10 +4424,6 @@ public class TestPlayer implements Player {
         }
 
         // non-strict mode allows computer assisted choices (for old tests compatibility only)
-        if (!this.strictChooseMode) {
-            return true;
-        }
-
-        return false;
+        return !this.strictChooseMode;
     }
 }

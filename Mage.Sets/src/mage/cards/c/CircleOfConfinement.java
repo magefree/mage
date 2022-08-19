@@ -69,6 +69,7 @@ class CircleOfConfinementTriggeredAbility extends TriggeredAbilityImpl {
 
     public CircleOfConfinementTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(2));
+        setTriggerPhrase("Whenever an opponent casts a Vampire spell with the same name as a card exiled with {this}, ");
     }
 
     private CircleOfConfinementTriggeredAbility(final CircleOfConfinementTriggeredAbility ability) {
@@ -101,10 +102,5 @@ class CircleOfConfinementTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever an opponent casts a Vampire spell with the same name as a card exiled with {this}, ";
     }
 }

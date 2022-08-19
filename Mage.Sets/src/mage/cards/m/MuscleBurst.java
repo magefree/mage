@@ -45,7 +45,7 @@ public final class MuscleBurst extends CardImpl {
 
         // Target creature gets +X/+X until end of turn, where X is 3 plus the number of cards named Muscle Burst in all graveyards.
         this.getSpellAbility().addEffect(new BoostTargetEffect(
-                xValue, xValue, Duration.EndOfTurn, true
+                xValue, xValue, Duration.EndOfTurn
         ).setText("Target creature gets +X/+X until end of turn, where X is 3 plus the number of cards named Muscle Burst in all graveyards."));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

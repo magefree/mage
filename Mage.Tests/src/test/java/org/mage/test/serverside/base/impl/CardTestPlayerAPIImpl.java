@@ -1578,6 +1578,13 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         addPlayerAction(player, turnNum, step, ACTIVATE_CAST + cardName);
     }
 
+    public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, boolean waitStackResolved) {
+        castSpell(turnNum, step, player, cardName);
+        if (waitStackResolved) {
+            waitStackResolved(turnNum, step, player);
+        }
+    }
+
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, Player target) {
         //Assert.assertNotEquals("", cardName);
         // warning, target in spell cast command setups without choose target call
@@ -1708,6 +1715,24 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         assertAliaseSupportInActivateCommand(cardName, true);
         assertAliaseSupportInActivateCommand(targetName, true);
         addPlayerAction(player, turnNum, step, ACTIVATE_CAST + cardName + "$target=" + targetName);
+    }
+
+    /**
+     * @param turnNum
+     * @param step
+     * @param player
+     * @param cardName
+     * @param targetName        for modes you can add "mode=3" before target name;
+     *                          multiple targets can be seperated by ^;
+     *                          no target marks as TestPlayer.NO_TARGET;
+     *                          warning, do not support cards with target adjusters - use addTarget instead
+     * @param waitStackResolved if true, wait for stack to resolve
+     */
+    public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName, boolean waitStackResolved) {
+        castSpell(turnNum, step, player, cardName, targetName);
+        if (waitStackResolved) {
+            waitStackResolved(turnNum, step, player);
+        }
     }
 
     /**
@@ -2092,6 +2117,12 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         }
         if (playerD != null) {
             waitStackResolved(turnNum, step, playerD, skipOneStackObjectOnly);
+        }
+    }
+
+    public void waitStackResolved(int turnNum, PhaseStep step, int numberOfResolutions) {
+        for (int i = 0; i < numberOfResolutions; i++) {
+            waitStackResolved(turnNum, step, true);
         }
     }
 

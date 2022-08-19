@@ -17,6 +17,7 @@ public class AttacksOrBlocksAttachedTriggeredAbility extends TriggeredAbilityImp
     public AttacksOrBlocksAttachedTriggeredAbility(Effect effect, AttachmentType attachmentType) {
         super(Zone.BATTLEFIELD, effect);
         this.attachmentType = attachmentType;
+        setTriggerPhrase("Whenever " + attachmentType.verb().toLowerCase() + " creature attacks or blocks, ");
     }
 
     public AttacksOrBlocksAttachedTriggeredAbility(final AttacksOrBlocksAttachedTriggeredAbility ability) {
@@ -39,10 +40,5 @@ public class AttacksOrBlocksAttachedTriggeredAbility extends TriggeredAbilityImp
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enchantment = getSourcePermanentOrLKI(game);
         return enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever " + attachmentType.verb().toLowerCase() + " creature attacks or blocks, ";
     }
 }

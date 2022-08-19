@@ -15,6 +15,7 @@ import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.keyword.ShieldCounterEffect;
+import mage.abilities.effects.keyword.StunCounterEffect;
 import mage.abilities.keyword.*;
 import mage.abilities.mana.DelayedTriggeredManaAbility;
 import mage.abilities.mana.TriggeredManaAbility;
@@ -674,7 +675,7 @@ public abstract class GameImpl implements Game {
             } else if (obj != null) {
                 logger.error(String.format(
                         "getSpellOrLKIStack got non-spell id %s correlating to non-spell object %s.",
-                        obj.getClass().getName(),obj.getName()),
+                        obj.getClass().getName(), obj.getName()),
                         new Throwable()
                 );
             }
@@ -1122,6 +1123,9 @@ public abstract class GameImpl implements Game {
 
         // Apply shield counter mechanic from SNC
         state.addAbility(new SimpleStaticAbility(Zone.ALL, new ShieldCounterEffect()), null);
+
+        // Apply stun counter mechanic
+        state.addAbility(new SimpleStaticAbility(Zone.ALL, new StunCounterEffect()), null);
 
         // Handle companions
         Map<Player, Card> playerCompanionMap = new HashMap<>();

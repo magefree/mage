@@ -64,6 +64,7 @@ class EnigmaSphinxTriggeredAbility extends TriggeredAbilityImpl {
 
     public EnigmaSphinxTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.ALL, effect, optional);
+        setTriggerPhrase("When {this} is put into your graveyard from the battlefield, ");
     }
 
     EnigmaSphinxTriggeredAbility(EnigmaSphinxTriggeredAbility ability) {
@@ -92,11 +93,6 @@ class EnigmaSphinxTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When {this} is put into your graveyard from the battlefield, " ;
     }
 }
 

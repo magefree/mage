@@ -52,6 +52,7 @@ class VeilingOddityTriggeredAbility extends TriggeredAbilityImpl {
 
     public VeilingOddityTriggeredAbility() {
         super(Zone.EXILED, new CantBeBlockedAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES, Duration.EndOfTurn), false);
+        setTriggerPhrase("When the last time counter is removed from {this} while it's exiled, ");
     }
 
     public VeilingOddityTriggeredAbility(final VeilingOddityTriggeredAbility ability) {
@@ -66,11 +67,6 @@ class VeilingOddityTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return (event.getTargetId().equals(this.getSourceId()) && game.getCard(event.getTargetId()).getCounters(game).getCount(CounterType.TIME) == 0);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When the last time counter is removed from {this} while it's exiled, " ;
     }
 
     @Override

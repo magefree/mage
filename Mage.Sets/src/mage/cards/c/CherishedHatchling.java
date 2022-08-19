@@ -70,6 +70,7 @@ class CherishedHatchlingTriggeredAbility extends DelayedTriggeredAbility {
 
     public CherishedHatchlingTriggeredAbility() {
         super(getEffectToAdd(), Duration.EndOfTurn, true);
+        setTriggerPhrase("and whenever you cast a Dinosaur spell this turn, ");
     }
 
     private static Effect getEffectToAdd() {
@@ -104,10 +105,5 @@ class CherishedHatchlingTriggeredAbility extends DelayedTriggeredAbility {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "and whenever you cast a Dinosaur spell this turn, " ;
     }
 }

@@ -75,6 +75,7 @@ class SkeletonizeDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     public SkeletonizeDelayedTriggeredAbility() {
         super(new CreateTokenEffect(new SkeletonRegenerateToken()), Duration.EndOfTurn);
+        setTriggerPhrase("When a creature dealt damage this way dies this turn, ");
     }
 
     public SkeletonizeDelayedTriggeredAbility(final SkeletonizeDelayedTriggeredAbility ability) {
@@ -101,10 +102,5 @@ class SkeletonizeDelayedTriggeredAbility extends DelayedTriggeredAbility {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When a creature dealt damage this way dies this turn, " ;
     }
 }

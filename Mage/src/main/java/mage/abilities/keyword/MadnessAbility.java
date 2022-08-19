@@ -172,6 +172,7 @@ class MadnessTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.EXILED, new MadnessCastEffect(madnessCost, lifeCost), true);
         this.madnessOriginalId = madnessOriginalId;
         this.setRuleVisible(false);
+        setTriggerPhrase("When this card is exiled this way, ");
     }
 
     private MadnessTriggeredAbility(final MadnessTriggeredAbility ability) {
@@ -214,11 +215,6 @@ class MadnessTriggeredAbility extends TriggeredAbilityImpl {
         // if cast was not successfull, the card is moved to graveyard
         owner.moveCards(card, Zone.GRAVEYARD, this, game);
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When this card is exiled this way, ";
     }
 }
 

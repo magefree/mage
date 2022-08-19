@@ -374,6 +374,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     /**
      * Draw cards. If you call it in replace events then use method with event.appliedEffects param instead.
+     * Returns 0 if replacement effect triggers on card draw.
      *
      * @param num
      * @param source can be null for game default draws (non effects, example: start of the turn)
@@ -384,6 +385,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     /**
      * Draw cards with applied effects, for replaceEvent
+     * Returns 0 if replacement effect triggers on card draw.
      *
      * @param num
      * @param source can be null for game default draws (non effects, example: start of the turn)

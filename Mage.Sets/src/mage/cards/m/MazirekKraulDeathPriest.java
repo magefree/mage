@@ -55,6 +55,7 @@ class PlayerSacrificesPermanentTriggeredAbility extends TriggeredAbilityImpl {
 
     public PlayerSacrificesPermanentTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever a player sacrifices another permanent, ");
     }
 
     public PlayerSacrificesPermanentTriggeredAbility(final PlayerSacrificesPermanentTriggeredAbility ability) {
@@ -70,11 +71,6 @@ class PlayerSacrificesPermanentTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         MageObject mageObject = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
         return mageObject != null && !event.getTargetId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a player sacrifices another permanent, " ;
     }
 
     @Override

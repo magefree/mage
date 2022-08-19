@@ -85,6 +85,7 @@ class SaffiEriksdotterDelayedTriggeredAbility extends DelayedTriggeredAbility {
         super(new ReturnToBattlefieldUnderYourControlTargetEffect(), Duration.EndOfTurn);
         this.getEffects().get(0).setTargetPointer(fixedTarget);
         this.fixedTarget = fixedTarget;
+        setTriggerPhrase("When target creature is put into your graveyard from the battlefield this turn, ");
     }
 
     public SaffiEriksdotterDelayedTriggeredAbility(final SaffiEriksdotterDelayedTriggeredAbility ability) {
@@ -112,10 +113,5 @@ class SaffiEriksdotterDelayedTriggeredAbility extends DelayedTriggeredAbility {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When target creature is put into your graveyard from the battlefield this turn, " ;
     }
 }

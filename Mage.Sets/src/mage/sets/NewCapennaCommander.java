@@ -181,6 +181,8 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Kitt Kanto, Mayhem Diva", 4, Rarity.MYTHIC, mage.cards.k.KittKantoMayhemDiva.class));
         cards.add(new SetCardInfo("Kodama's Reach", 298, Rarity.COMMON, mage.cards.k.KodamasReach.class));
         cards.add(new SetCardInfo("Kresh the Bloodbraided", 345, Rarity.MYTHIC, mage.cards.k.KreshTheBloodbraided.class));
+        cards.add(new SetCardInfo("Kros, Defense Contractor", 7, Rarity.MYTHIC, mage.cards.k.KrosDefenseContractor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kros, Defense Contractor", 105, Rarity.MYTHIC, mage.cards.k.KrosDefenseContractor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Leafkin Druid", 299, Rarity.COMMON, mage.cards.l.LeafkinDruid.class));
         cards.add(new SetCardInfo("Life Insurance", 74, Rarity.RARE, mage.cards.l.LifeInsurance.class));
         cards.add(new SetCardInfo("Life of the Party", 48, Rarity.RARE, mage.cards.l.LifeOfTheParty.class));
@@ -193,6 +195,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Luminarch Aspirant", 205, Rarity.RARE, mage.cards.l.LuminarchAspirant.class));
         cards.add(new SetCardInfo("Maestros Confluence", 75, Rarity.RARE, mage.cards.m.MaestrosConfluence.class));
         cards.add(new SetCardInfo("Magus of the Wheel", 271, Rarity.RARE, mage.cards.m.MagusOfTheWheel.class));
+        cards.add(new SetCardInfo("Make an Example", 37, Rarity.RARE, mage.cards.m.MakeAnExample.class));
         cards.add(new SetCardInfo("March of the Multitudes", 346, Rarity.MYTHIC, mage.cards.m.MarchOfTheMultitudes.class));
         cards.add(new SetCardInfo("Martial Coup", 206, Rarity.RARE, mage.cards.m.MartialCoup.class));
         cards.add(new SetCardInfo("Mask of Riddles", 347, Rarity.UNCOMMON, mage.cards.m.MaskOfRiddles.class));
@@ -263,6 +266,8 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Shadowmage Infiltrator", 351, Rarity.UNCOMMON, mage.cards.s.ShadowmageInfiltrator.class));
         cards.add(new SetCardInfo("Shamanic Revelation", 311, Rarity.RARE, mage.cards.s.ShamanicRevelation.class));
         cards.add(new SetCardInfo("Silent-Blade Oni", 352, Rarity.RARE, mage.cards.s.SilentBladeOni.class));
+        cards.add(new SetCardInfo("Skyboon Evangelist", 20, Rarity.RARE, mage.cards.s.SkyboonEvangelist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Skyboon Evangelist", 121, Rarity.RARE, mage.cards.s.SkyboonEvangelist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skyclave Shade", 260, Rarity.RARE, mage.cards.s.SkyclaveShade.class));
         cards.add(new SetCardInfo("Skycloud Expanse", 427, Rarity.RARE, mage.cards.s.SkycloudExpanse.class));
         cards.add(new SetCardInfo("Skyship Plunderer", 232, Rarity.UNCOMMON, mage.cards.s.SkyshipPlunderer.class));
@@ -296,6 +301,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Temur Sabertooth", 315, Rarity.UNCOMMON, mage.cards.t.TemurSabertooth.class));
         cards.add(new SetCardInfo("Terminate", 353, Rarity.UNCOMMON, mage.cards.t.Terminate.class));
         cards.add(new SetCardInfo("Tezzeret's Gambit", 235, Rarity.RARE, mage.cards.t.TezzeretsGambit.class));
+        cards.add(new SetCardInfo("The Beamtown Bullies", 6, Rarity.MYTHIC, mage.cards.t.TheBeamtownBullies.class));
         cards.add(new SetCardInfo("Thief of Sanity", 354, Rarity.RARE, mage.cards.t.ThiefOfSanity.class));
         cards.add(new SetCardInfo("Thragtusk", 316, Rarity.RARE, mage.cards.t.Thragtusk.class));
         cards.add(new SetCardInfo("Thriving Bluff", 438, Rarity.COMMON, mage.cards.t.ThrivingBluff.class));
@@ -309,6 +315,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Together Forever", 212, Rarity.RARE, mage.cards.t.TogetherForever.class));
         cards.add(new SetCardInfo("Treasure Cruise", 237, Rarity.COMMON, mage.cards.t.TreasureCruise.class));
         cards.add(new SetCardInfo("Treeshaker Chimera", 318, Rarity.RARE, mage.cards.t.TreeshakerChimera.class));
+        cards.add(new SetCardInfo("Turf War", 54, Rarity.RARE, mage.cards.t.TurfWar.class));
         cards.add(new SetCardInfo("Twilight Mire", 443, Rarity.RARE, mage.cards.t.TwilightMire.class));
         cards.add(new SetCardInfo("Twinning Staff", 383, Rarity.RARE, mage.cards.t.TwinningStaff.class));
         cards.add(new SetCardInfo("Urban Evolution", 355, Rarity.UNCOMMON, mage.cards.u.UrbanEvolution.class));

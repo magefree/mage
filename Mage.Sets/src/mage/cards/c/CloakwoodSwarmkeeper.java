@@ -49,6 +49,7 @@ class CloakwoodSwarmkeeperTriggeredAbility extends TriggeredAbilityImpl {
     CloakwoodSwarmkeeperTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
         this.withFlavorWord("Gathered Swarm");
+        setTriggerPhrase("Whenever one or more tokens enter the battlefield under your control, ");
     }
 
     private CloakwoodSwarmkeeperTriggeredAbility(final CloakwoodSwarmkeeperTriggeredAbility ability) {
@@ -76,10 +77,5 @@ class CloakwoodSwarmkeeperTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public CloakwoodSwarmkeeperTriggeredAbility copy() {
         return new CloakwoodSwarmkeeperTriggeredAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever one or more tokens enter the battlefield under your control, ";
     }
 }

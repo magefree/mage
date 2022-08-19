@@ -52,6 +52,7 @@ class DreadhoundTriggeredAbility extends TriggeredAbilityImpl {
 
     public DreadhoundTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LoseLifeOpponentsEffect(1));
+        setTriggerPhrase("Whenever a creature dies or a creature card is put into a graveyard from a library, ");
     }
 
     private DreadhoundTriggeredAbility(final DreadhoundTriggeredAbility ability) {
@@ -82,10 +83,5 @@ class DreadhoundTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature dies or a creature card is put into a graveyard from a library, ";
     }
 }

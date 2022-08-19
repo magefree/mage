@@ -26,15 +26,13 @@ public final class DranasSilencer extends CardImpl {
 
     public DranasSilencer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}");
-
-        this.subtype.add(SubType.VAMPIRE);
-        this.subtype.add(SubType.ROGUE);
+        this.subtype.add(SubType.VAMPIRE, SubType.ROGUE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
         // When Drana's Silencer enters the battlefield, target creature an opponent controls gets -X/-X until end of turn, where X is the number of creatures in your party.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(
-                xValue, xValue, Duration.EndOfTurn, true
+                xValue, xValue, Duration.EndOfTurn
         ).setText("target creature an opponent controls gets -X/-X until end of turn, " +
                 "where X is the number of creatures in your party. " + PartyCount.getReminder()));
         ability.addTarget(new TargetOpponentsCreaturePermanent());
