@@ -83,7 +83,8 @@ class MirriWeatherlightDuelistBlockRestrictionEffect extends RestrictionEffect {
             return true;
         }
         for (UUID creature : game.getCombat().getBlockers()) {
-            if (game.getPlayer(game.getPermanent(creature).getOwnerId()).hasOpponent(attacker.getControllerId(), game)) {
+            if (game.getPlayer(game.getPermanent(creature).getControllerId()).hasOpponent(attacker.getControllerId(), game) &&
+                game.getPermanent(creature).isControlledBy(blocker.getControllerId())) {
                 return false;
             }
         }
