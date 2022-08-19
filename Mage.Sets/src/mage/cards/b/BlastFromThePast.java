@@ -41,7 +41,7 @@ public final class BlastFromThePast extends CardImpl {
         // Blast from the Past deals 2 damage to any target. If this spell was kicked, create a 1/1 red Goblin creature token.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new CreateTokenEffect(new GoblinToken()), KickedCondition.instance));
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new CreateTokenEffect(new GoblinToken()), KickedCondition.ONCE));
     }
 
     public BlastFromThePast (final BlastFromThePast card) {

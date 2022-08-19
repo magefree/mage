@@ -31,7 +31,7 @@ public final class GiftOfGrowth extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new UntapTargetEffect().setText("Untap target creature"));
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new BoostTargetEffect(4, 4, Duration.EndOfTurn),
-                new BoostTargetEffect(2, 2, Duration.EndOfTurn), new LockedInCondition(KickedCondition.instance),
+                new BoostTargetEffect(2, 2, Duration.EndOfTurn), new LockedInCondition(KickedCondition.ONCE),
                 "It gets +2/+2 until end of turn. If this spell was kicked, that creature gets +4/+4 until end of turn instead."));
     }
 
