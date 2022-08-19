@@ -30,7 +30,9 @@ public final class ArchangelOfWrath extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Kicker {B} and/or {R}
-        this.addAbility(new KickerAbility("{B} and/or {R}"));
+        KickerAbility kickerAbility = new KickerAbility("{B}");
+        kickerAbility.addKickerCost("{R}");
+        this.addAbility(kickerAbility);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
