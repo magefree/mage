@@ -111,6 +111,7 @@ public class VerifyCardDataTest {
         // subtype
         skipListCreate(SKIP_LIST_SUBTYPE);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
+        skipListAddName(SKIP_LIST_SUBTYPE, "DMU", "Benalish Sleeper"); // temporary
 
         // number
         skipListCreate(SKIP_LIST_NUMBER);
