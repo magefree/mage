@@ -42,7 +42,7 @@ public final class UrborgSkeleton extends CardImpl {
         // If Urborg Skeleton was kicked, it enters the battlefield with a +1/+1 counter on it.
         Ability ability = new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
-                KickedCondition.instance, staticText, "");
+                KickedCondition.ONCE, staticText, "");
         this.addAbility(ability);
     }
 

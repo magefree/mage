@@ -26,7 +26,7 @@ public final class Cinderclasm extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageAllEffect(2, StaticFilters.FILTER_PERMANENT_CREATURE),
                 new DamageAllEffect(1, StaticFilters.FILTER_PERMANENT_CREATURE),
-                KickedCondition.instance, "{this} deals 1 damage to each creature. " +
+                KickedCondition.ONCE, "{this} deals 1 damage to each creature. " +
                 "If it was kicked, it deals 2 damage to each creature instead"
         ));
     }

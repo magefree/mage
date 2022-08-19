@@ -35,7 +35,7 @@ public final class Jilt extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         Effect effect = new ConditionalOneShotEffect(
                 new DamageTargetEffect(2, "it"),
-                KickedCondition.instance,
+                KickedCondition.ONCE,
                 "if this spell was kicked, it deals 2 damage to another target creature");
         effect.setTargetPointer(new SecondTargetPointer());
         this.getSpellAbility().addEffect(effect);
@@ -60,7 +60,7 @@ enum JiltAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (!KickedCondition.instance.apply(game, ability)) {
+        if (!KickedCondition.ONCE.apply(game, ability)) {
             return;
         }
         FilterCreaturePermanent filter = new FilterCreaturePermanent("Another creature: Damaged");

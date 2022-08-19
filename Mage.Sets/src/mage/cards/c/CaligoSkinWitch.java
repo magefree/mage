@@ -38,7 +38,7 @@ public final class CaligoSkinWitch extends CardImpl {
                         false,
                         TargetController.OPPONENT
                 )),
-                KickedCondition.instance,
+                KickedCondition.ONCE,
                 "When {this} enters the battlefield, if it was kicked, each opponent discards two cards."
         ));
     }
