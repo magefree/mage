@@ -61,7 +61,7 @@ public final class ShanidSleepersScourge extends CardImpl {
 
         // Other legendary creatures you control have menace.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                new MenaceAbility(false),
+                new MenaceAbility(),
                 Duration.WhileOnBattlefield,
                 otherLegendaryCreaturesFilter,
                 true)));
