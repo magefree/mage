@@ -28,7 +28,6 @@ public class SpellskiteTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
         assertPermanentCount(playerA, "Spellskite", 1);
@@ -79,7 +78,6 @@ public class SpellskiteTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Spellskite", 1);
         assertPermanentCount(playerB, "Frost Titan", 1);
@@ -119,7 +117,6 @@ public class SpellskiteTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
 
@@ -161,7 +158,6 @@ public class SpellskiteTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Cryptic Command", 1);
 
@@ -194,7 +190,6 @@ public class SpellskiteTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
 
@@ -221,7 +216,6 @@ public class SpellskiteTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Flame Slash", 1);
         assertPowerToughness(playerB, "Spellskite", 3, 7);
@@ -262,7 +256,6 @@ public class SpellskiteTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 + 5 - 2);
         assertGraveyardCount(playerB, 2);
@@ -298,7 +291,6 @@ public class SpellskiteTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 + 5 - 2);
         assertGraveyardCount(playerB, 1);
@@ -333,7 +325,6 @@ public class SpellskiteTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 + 5 - 2);
         assertGraveyardCount(playerB, "Memnite", 0);

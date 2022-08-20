@@ -34,7 +34,6 @@ public class IrencragFeatTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, "Dwarven Trader", 1);
         assertPermanentCount(playerA, "Dwarven Trader", 1);
@@ -72,7 +71,6 @@ public class IrencragFeatTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, "Dwarven Trader", 1);
         assertPermanentCount(playerA, "Dwarven Trader", 3);
@@ -94,7 +92,6 @@ public class IrencragFeatTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, "Lightning Bolt", 0);
         assertLife(playerB, 20 - 4 * 3);
@@ -124,7 +121,6 @@ public class IrencragFeatTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, "Lightning Bolt", 4 - 3);
         assertLife(playerB, 20 - 3 * 3);
@@ -146,7 +142,6 @@ public class IrencragFeatTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, "Dwarven Trader", 0);
         assertPermanentCount(playerA, "Dwarven Trader", 4);

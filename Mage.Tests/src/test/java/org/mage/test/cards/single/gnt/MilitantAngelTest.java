@@ -56,7 +56,6 @@ public class MilitantAngelTest extends CardTestCommander4Players {
         setStrictChooseMode(true);
         setStopAt(6, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     private void mustHaveValue(String needInfo, int turnNum, PhaseStep step, int needValue) {

@@ -24,7 +24,6 @@ public class ContainmentPriestTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount(playerA, "Grizzly Bears", 1);
         assertExileCount(playerB, "Scryb Sprites", 1);

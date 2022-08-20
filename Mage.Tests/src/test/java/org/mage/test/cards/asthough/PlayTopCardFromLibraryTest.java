@@ -29,7 +29,6 @@ public class PlayTopCardFromLibraryTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Balduvian Bears", 1);
         assertLife(playerA, 20 - 2);
@@ -47,7 +46,6 @@ public class PlayTopCardFromLibraryTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Balduvian Bears", 1);
     }
@@ -68,7 +66,6 @@ public class PlayTopCardFromLibraryTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Scourge of Nel Toth", 1);
         assertLife(playerA, 20);
@@ -100,7 +97,6 @@ public class PlayTopCardFromLibraryTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, (20 - 6) * 2);
         assertLife(playerB, 20 / 2);
@@ -120,7 +116,6 @@ public class PlayTopCardFromLibraryTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20 - 2);
         assertLife(playerB, 20);
@@ -145,7 +140,6 @@ public class PlayTopCardFromLibraryTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Balduvian Bears", 1);
         assertLife(playerA, 20);
@@ -169,7 +163,6 @@ public class PlayTopCardFromLibraryTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Swamp", 1);
         assertLife(playerA, 20);
@@ -195,7 +188,6 @@ public class PlayTopCardFromLibraryTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20 * 2);
         assertLife(playerB, 20 / 2);
@@ -220,7 +212,6 @@ public class PlayTopCardFromLibraryTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);

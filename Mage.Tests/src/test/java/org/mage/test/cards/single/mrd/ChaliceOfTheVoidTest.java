@@ -33,7 +33,6 @@ public class ChaliceOfTheVoidTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Chalice of the Void", 2);
 
@@ -91,7 +90,6 @@ public class ChaliceOfTheVoidTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount(playerB, "Conflagrate", 1);
         //TODO: Apparently there are two mountains in the graveyard at the end of the test now.

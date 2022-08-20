@@ -49,7 +49,6 @@ public class MerfolkTricksterTest extends CardTestPlayerBase {
         flashAbility.add(FlashAbility.getInstance());
         assertAbilities(playerB, mTrickster, flashAbility); // has flash
 
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -72,7 +71,6 @@ public class MerfolkTricksterTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Flying Men", 1);
         assertPermanentCount(playerB, mTrickster, 1);
         assertDamageReceived(playerB, mTrickster, 1);
-        assertAllCommandsUsed();
     }
 
     @Test

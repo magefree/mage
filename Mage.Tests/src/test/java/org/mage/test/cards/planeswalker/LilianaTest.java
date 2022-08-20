@@ -57,7 +57,6 @@ public class LilianaTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, bMummy, 1);
         assertPermanentCount(playerA, liliannaDM, 1);

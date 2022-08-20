@@ -29,9 +29,8 @@ public class CantUseActivatedAbilitiesTest extends CardTestPlayerBase {
                   
         setStopAt(1, PhaseStep.END_COMBAT);                
         setStrictChooseMode(true);
-        execute();        
-        assertAllCommandsUsed();
-        
+        execute();
+
         // Sol Ring can't produce mana
         Assert.assertTrue("PlayerB may not be able to produce any mana but he he can produce " + playerB.getManaAvailable(currentGame).toString(), playerB.getManaAvailable(currentGame).toString().equals("[]"));
     }

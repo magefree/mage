@@ -41,7 +41,6 @@ public class LayerTests extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertType("Swamp", CardType.LAND, SubType.ADVISOR); // Subtype changed with Conspiracy
         assertPowerToughness(playerA, "Swamp", 1, 1); // boosted with Glorious Anthem
@@ -76,7 +75,6 @@ public class LayerTests extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         // everything dies
         assertPermanentCount(playerA, "Humility", 0);
@@ -224,7 +222,6 @@ public class LayerTests extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         // all lands are forests in addition to other types
         assertType("Plains", CardType.CREATURE, SubType.FOREST);

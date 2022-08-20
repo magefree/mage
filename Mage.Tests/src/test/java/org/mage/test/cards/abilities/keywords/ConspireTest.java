@@ -97,7 +97,6 @@ public class ConspireTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Wort, the Raidmother", 1);
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
@@ -131,7 +130,6 @@ public class ConspireTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Wort, the Raidmother", 1);
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
@@ -260,7 +258,6 @@ public class ConspireTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Burn Trail", 1);
         assertLife(playerB, 20 - 3 - 3);
@@ -285,7 +282,6 @@ public class ConspireTest extends CardTestPlayerBase {
         //setStrictChooseMode(true); - AI must choose
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Burn Trail", 1);
         assertLife(playerB, 20 - 3 - 3);
@@ -310,7 +306,6 @@ public class ConspireTest extends CardTestPlayerBase {
         //setStrictChooseMode(true); - AI must choose
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Burn Trail", 1);
         assertLife(playerB, 20 - 3); // simple cast

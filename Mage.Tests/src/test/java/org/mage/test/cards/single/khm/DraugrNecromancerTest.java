@@ -50,7 +50,6 @@ public class DraugrNecromancerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount(playerB, bear, 0);
         assertPermanentCount(playerA, bear, 1);
@@ -71,7 +70,6 @@ public class DraugrNecromancerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount(playerB, bear, 0);
         assertPermanentCount(playerA, bear, 1);
@@ -97,7 +95,6 @@ public class DraugrNecromancerTest extends CardTestPlayerBase {
 
         try { // TODO: The bears are labelled as playable for some reason. Need the try-catch
             execute();
-            assertAllCommandsUsed();
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
@@ -125,7 +122,6 @@ public class DraugrNecromancerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount(playerB, pair, 0);
         assertPermanentCount(playerA, pair, 1);
@@ -146,7 +142,6 @@ public class DraugrNecromancerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount(playerB, pair, 1);
         assertGraveyardCount(playerB, pair, 0);
@@ -168,7 +163,6 @@ public class DraugrNecromancerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount(playerB, pair, 0);
         assertPermanentCount(playerA, pair, 1);
@@ -189,7 +183,6 @@ public class DraugrNecromancerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount(playerB, pair, 1);
         assertGraveyardCount(playerB, pair, 0);
@@ -213,7 +206,6 @@ public class DraugrNecromancerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, birgi, 1);
         assertGraveyardCount(playerB, birgi, 0);
@@ -237,7 +229,6 @@ public class DraugrNecromancerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, harnfel, 1);
         assertPermanentCount(playerA, birgi, 0);
@@ -262,7 +253,6 @@ public class DraugrNecromancerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, birgi, 1);
         assertGraveyardCount(playerB, birgi, 0);
@@ -286,7 +276,6 @@ public class DraugrNecromancerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, harnfel, 1);
         assertPermanentCount(playerA, birgi, 0);

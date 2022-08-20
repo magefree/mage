@@ -32,9 +32,7 @@ public class TargetRestrictionsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
-        
-        assertAllCommandsUsed();
-        
+
         assertPermanentCount(playerA, "Dream Leash", 1);
         assertPermanentCount(playerA, "Sejiri Merfolk", 1);
         
@@ -68,10 +66,8 @@ public class TargetRestrictionsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
-        
-        assertAllCommandsUsed();
-        
-        
+
+
         assertGraveyardCount(playerA, "Take into Custody", 1);
         assertGraveyardCount(playerB, "Ornamental Courage", 1);
         assertPermanentCount(playerA, "Dream Leash", 1);

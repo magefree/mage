@@ -28,7 +28,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertCommandZoneCount(playerA, "Balduvian Bears", 0);
         assertPermanentCount(playerA, "Balduvian Bears", 1);
@@ -64,7 +63,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertCommandZoneCount(playerA, "Balduvian Bears", 0);
         assertPermanentCount(playerA, "Balduvian Bears", 1);
@@ -83,7 +81,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertCommandZoneCount(playerA, "Academy Ruins", 0);
         assertPermanentCount(playerA, "Academy Ruins", 1);
@@ -122,7 +119,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStopAt(5, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertCommandZoneCount(playerA, "Academy Ruins", 0);
         assertPermanentCount(playerA, "Academy Ruins", 1);
@@ -156,7 +152,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -185,7 +180,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -226,7 +220,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(9, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -248,7 +241,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -271,7 +263,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -319,7 +310,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertCommandZoneCount(playerA, "Balduvian Bears", 1);
     }
@@ -375,7 +365,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(5, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -484,7 +473,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(13, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -540,7 +528,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(5, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -577,7 +564,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -606,7 +592,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20 + 3);
         assertPermanentCount(playerA, "Swamp", 1);
@@ -634,7 +619,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCommandZoneCount(playerA, "Balduvian Bears", 0);
         assertPermanentCount(playerA, "Balduvian Bears", 1);

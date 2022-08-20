@@ -25,7 +25,6 @@ public class HotheadedGiantTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, giant, CounterType.M1M1, 0);
     }
@@ -40,7 +39,6 @@ public class HotheadedGiantTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, giant, CounterType.M1M1, 2);
     }

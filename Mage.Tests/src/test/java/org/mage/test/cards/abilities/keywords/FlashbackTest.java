@@ -564,7 +564,6 @@ public class FlashbackTest extends CardTestPlayerBase {
         // TODO: Can't use checkPlayableAbility on Force of Will in this case.
         try {
             execute();
-            assertAllCommandsUsed();
 
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
@@ -655,6 +654,5 @@ public class FlashbackTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
     }
 }

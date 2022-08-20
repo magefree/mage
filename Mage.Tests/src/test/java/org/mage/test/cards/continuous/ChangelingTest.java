@@ -103,7 +103,6 @@ public class ChangelingTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, cohort, CounterType.P1P1, 1);
         assertCounterCount(playerA, "Shapeshifter Token", CounterType.P1P1, 1);
@@ -123,7 +122,6 @@ public class ChangelingTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped(amoeboid, true);
         assertPowerToughness(playerA, "Shapeshifter Token", 2, 2);

@@ -40,8 +40,6 @@ public class PhageTheUntouchableTest extends CardTestPlayerBase {
         
         execute();
 
-        assertAllCommandsUsed();
-        
         assertLife(playerA, 20);
         assertLife(playerB, 20);
 

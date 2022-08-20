@@ -18,7 +18,6 @@ public class CelestialEnforcerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped("Grizzly Bears", true);
     }

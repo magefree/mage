@@ -54,8 +54,6 @@ public class AminatousAuguryTest extends CardTestPlayerBase {
         checkPlayableAbility("Cannot cast second creature from exile", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Pillarfield Ox", Boolean.FALSE); // Type Creature type is already consumed
         execute();
 
-        assertAllCommandsUsed();
-        
         assertGraveyardCount(playerA, "Aminatou's Augury", 1);
         assertPermanentCount(playerA, "Mountain", 1);
         assertPermanentCount(playerA, "Badlands", 1);

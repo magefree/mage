@@ -177,7 +177,6 @@ public class ExchangeControlTest extends CardTestPlayerBase {
 
         try {
             execute();
-            assertAllCommandsUsed();
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Player PlayerB must have 0 actions but found 1")) {
@@ -321,7 +320,6 @@ public class ExchangeControlTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Kiki-Jiki, Mirror Breaker", 1);
         assertPermanentCount(playerA, "Dwarven Trader", 1);  // Original's exhange target

@@ -154,7 +154,6 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Swamp", 1);
         assertGraveyardCount(playerA, "Forest", 1);
@@ -187,7 +186,6 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Swamp", 1);
         assertGraveyardCount(playerA, "Forest", 1);
@@ -258,7 +256,6 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBaseWithAIHelps {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Mountain", 2);
         assertPermanentCount(playerA, "Silvercoat Lion", 0);
@@ -305,7 +302,6 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBaseWithAIHelps {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Mountain", 2);
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
@@ -355,7 +351,6 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBaseWithAIHelps {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 15);
         assertPermanentCount(playerB, "Fallen Shinobi", 1);
@@ -407,7 +402,6 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBaseWithAIHelps {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 15);
         assertPermanentCount(playerB, "Fallen Shinobi", 1);
@@ -468,7 +462,6 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBaseWithAIHelps {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 15);
         assertPermanentCount(playerB, "Fallen Shinobi", 1);
@@ -510,7 +503,6 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Alpha Myr", 1);
     }

@@ -60,7 +60,6 @@ public class KickerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Aether Figment", 1);
         assertCounterCount("Aether Figment", CounterType.P1P1, 2);
@@ -80,7 +79,6 @@ public class KickerTest extends CardTestPlayerBase {
         //setStrictChooseMode(true); - AI must choose
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Aether Figment", 1);
         assertCounterCount("Aether Figment", CounterType.P1P1, 2);
@@ -98,7 +96,6 @@ public class KickerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Aether Figment", 1);
         assertCounterCount("Aether Figment", CounterType.P1P1, 0);
@@ -118,7 +115,6 @@ public class KickerTest extends CardTestPlayerBase {
         //setStrictChooseMode(true); - AI must choose
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Aether Figment", 1);
         assertCounterCount("Aether Figment", CounterType.P1P1, 0);
@@ -143,7 +139,6 @@ public class KickerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Apex Hawks", 1);
         assertCounterCount("Apex Hawks", CounterType.P1P1, 1);
@@ -164,7 +159,6 @@ public class KickerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Apex Hawks", 1);
         assertCounterCount("Apex Hawks", CounterType.P1P1, 2);
@@ -182,7 +176,6 @@ public class KickerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Apex Hawks", 1);
         assertCounterCount("Apex Hawks", CounterType.P1P1, 0);
@@ -206,7 +199,6 @@ public class KickerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Sunscape Battlemage", 1);
         assertHandCount(playerA, 2);
@@ -234,7 +226,6 @@ public class KickerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Birds of Paradise", 1);
         assertPermanentCount(playerA, "Sunscape Battlemage", 1);
@@ -271,7 +262,6 @@ public class KickerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, "Birds of Paradise", 1);
         assertGraveyardCount(playerB, "Ertai's Trickery", 1);
@@ -305,7 +295,6 @@ public class KickerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, "Hallar, the Firefletcher", CounterType.P1P1, 1);
         assertLife(playerB, 20 - 2 - 1); // 2 damage from kicked spell, 1 damage from hallar's trigger
@@ -346,7 +335,6 @@ public class KickerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Boomerang", 1);
         assertGraveyardCount(playerB, "Birds of Paradise", 1);
@@ -393,7 +381,6 @@ public class KickerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20 - 2 * 2);
     }
@@ -451,7 +438,6 @@ public class KickerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // cast spell - countered
         // copied spell - resolved (2 damage)
@@ -497,7 +483,6 @@ public class KickerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
 
         // cast spell - countered
@@ -550,7 +535,6 @@ public class KickerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
     }
 
     /**
@@ -582,7 +566,6 @@ public class KickerTest extends CardTestPlayerBase {
 
         try {
             execute();
-            assertAllCommandsUsed();
 
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
@@ -622,7 +605,6 @@ public class KickerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         Assert.assertEquals("All mana has to be used", "[]", playerA.getManaAvailable(currentGame).toString());
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
@@ -653,7 +635,6 @@ public class KickerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertTappedCount("Swamp", true, 5);
         assertGraveyardCount(playerA, "Marsh Casualties", 1);
@@ -683,7 +664,6 @@ public class KickerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, "Ardent Soldier", CounterType.P1P1, 1); // from kicker
     }
@@ -717,7 +697,6 @@ public class KickerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Brain in a Jar", 1);
     }

@@ -38,7 +38,6 @@ public class OverloadTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Vandalblast", 1);
         assertGraveyardCount(playerB, "Mental Misstep", 1);
@@ -67,7 +66,6 @@ public class OverloadTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Cyclonic Rift", 1);
         assertPermanentCount(playerB, "Swamp", 1);
@@ -96,7 +94,6 @@ public class OverloadTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Cyclonic Rift", 1);
         assertPermanentCount(playerB, "Swamp", 1);
@@ -141,7 +138,6 @@ public class OverloadTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount(playerA, "Cyclonic Rift", 1);
         assertGraveyardCount(playerA, "Cyclonic Rift", 0); // imprinted copy discarded

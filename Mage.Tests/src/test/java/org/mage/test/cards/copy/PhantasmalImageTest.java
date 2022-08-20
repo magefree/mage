@@ -624,8 +624,6 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
-
         Permanent staffA = getPermanent("Chimeric Staff", playerA);
         assertTrue("Phantasmal Image should be an artifact", staffA.isArtifact(currentGame));
         assertTrue("Phantasmal Image should not be a creature", !staffA.isCreature(currentGame));
@@ -653,8 +651,6 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-
-        assertAllCommandsUsed();
 
         Permanent cloakA = getPermanent("Cloak and Dagger", playerA);
         assertTrue("Phantasmal Image should be an artifact", cloakA.isArtifact(currentGame));

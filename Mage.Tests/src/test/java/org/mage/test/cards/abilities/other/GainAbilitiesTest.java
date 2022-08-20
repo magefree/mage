@@ -33,7 +33,6 @@ public class GainAbilitiesTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         Permanent permanent = getPermanent("Balduvian Bears");
         Assert.assertEquals("must have only 1 singleton ability instance from two attachments",
@@ -58,7 +57,6 @@ public class GainAbilitiesTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         Permanent permanent = getPermanent("Balduvian Bears");
         Assert.assertEquals("must have 2 dynamic ability instances from two attachments",

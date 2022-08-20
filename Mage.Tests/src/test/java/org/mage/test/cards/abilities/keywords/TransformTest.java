@@ -173,7 +173,6 @@ public class TransformTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, 13);
         assertGraveyardCount(playerA, "Startled Awake", 0);
@@ -198,7 +197,6 @@ public class TransformTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, 13);
         assertGraveyardCount(playerA, "Startled Awake", 0);
@@ -308,7 +306,6 @@ public class TransformTest extends CardTestPlayerBase {
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
@@ -489,7 +486,6 @@ public class TransformTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Delver of Secrets", 1);
         assertPermanentCount(playerA, "Insectile Aberration", 0);

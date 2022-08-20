@@ -57,7 +57,6 @@ public class DreamDevourerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Grizzly Bears", 2);
     }
@@ -88,7 +87,6 @@ public class DreamDevourerTest extends CardTestPlayerBase {
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -120,7 +118,6 @@ public class DreamDevourerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Akoum Warrior", 1);
     }
@@ -153,7 +150,6 @@ public class DreamDevourerTest extends CardTestPlayerBase {
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Jorn, God of Winter", 1);
         assertPermanentCount(playerA, "Kaldring, the Rimestaff", 1);
@@ -200,7 +196,6 @@ public class DreamDevourerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(5, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Lonesome Unicorn", 2);
         assertPermanentCount(playerA, "Knight Token", 1);

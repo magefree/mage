@@ -68,7 +68,7 @@ public class GripOfChaosTest extends CardTestPlayerBase {
         // If both select the same permanent to exile, one spell fizzles so zcc == 7 otherwise 9
         if (zcc != 7) {
             Assert.assertEquals("Sum of zone change counter should be 9", 9, zcc);
-            assertAllCommandsUsed(); // creates error if the random targets do select the same target twice zcc is 7 then the second trigger has an invalid target
+            // creates error if the random targets do select the same target twice zcc is 7 then the second trigger has an invalid target
         }
     }
 

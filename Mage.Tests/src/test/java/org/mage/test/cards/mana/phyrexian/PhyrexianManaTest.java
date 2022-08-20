@@ -53,8 +53,6 @@ public class PhyrexianManaTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
-        
         //PlayerA pays life but PlayerB cannot
         assertLife(playerA, 18);
         assertLife(playerB, 20);
@@ -149,9 +147,7 @@ public class PhyrexianManaTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-       
-        //PlayerA pays life
+       //PlayerA pays life
         assertLife(playerA, 18);
         assertLife(playerB, 20);
         
@@ -181,9 +177,7 @@ public class PhyrexianManaTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-
-        assertGraveyardCount(playerB, "Lightning Bolt", 1);
+       assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertGraveyardCount(playerA, "K'rrik, Son of Yawgmoth", 1);
         
         assertHandCount(playerA, "Banehound", 1);

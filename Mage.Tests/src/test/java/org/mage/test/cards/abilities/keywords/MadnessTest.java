@@ -49,7 +49,6 @@ public class MadnessTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Arrogant Wurm", 1);
         assertGraveyardCount(playerA, "Raven's Crime", 1);
@@ -70,7 +69,6 @@ public class MadnessTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Arrogant Wurm", 0);
         assertGraveyardCount(playerA, "Raven's Crime", 1);
@@ -130,7 +128,6 @@ public class MadnessTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Haunting Hymn", 1);
         assertGraveyardCount(playerA, "Avacyn's Judgment", 1);
@@ -185,7 +182,6 @@ public class MadnessTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Falkenrath Gorger", 1);
         assertPermanentCount(playerA, "Asylum Visitor", 1);

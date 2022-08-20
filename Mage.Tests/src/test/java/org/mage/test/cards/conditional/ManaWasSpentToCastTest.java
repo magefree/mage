@@ -5,7 +5,6 @@ import mage.abilities.keyword.HasteAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -103,7 +102,6 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped("Silvercoat Lion", true);
     }
@@ -119,7 +117,6 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertAbility(playerA, "Jaded Sell-Sword", FirstStrikeAbility.getInstance(), true);
         assertAbility(playerA, "Jaded Sell-Sword", HasteAbility.getInstance(), true);
@@ -134,7 +131,6 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertAbility(playerA, "Jaded Sell-Sword", FirstStrikeAbility.getInstance(), false);
         assertAbility(playerA, "Jaded Sell-Sword", HasteAbility.getInstance(), false);
@@ -151,7 +147,6 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, "Verazol, the Split Current", CounterType.P1P1, 4);
         assertPowerToughness(playerA, "Verazol, the Split Current", 4, 4);
@@ -170,7 +165,6 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Kobolds of Kher Keep", 7);
     }
@@ -187,7 +181,6 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Pyretic Ritual", 1);
         assertPermanentCount(playerA, "Gray Ogre", 1);
@@ -212,7 +205,6 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped("Isochron Scepter", true);
         assertExileCount(playerA, "Pyretic Ritual", 1);
@@ -235,7 +227,6 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Mana Drain", 1);
         assertGraveyardCount(playerA, "Gray Ogre", 1);
@@ -265,7 +256,6 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped("Isochron Scepter", true);
         assertExileCount(playerA, "Mana Drain", 1);

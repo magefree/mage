@@ -24,7 +24,6 @@ public class SanctifierEnVecTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, sanctifier, 1);
         assertGraveyardCount(playerA, "Divination", 1);
         assertExileCount(playerA, "Lightning Bolt", 1);
@@ -53,7 +52,6 @@ public class SanctifierEnVecTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
         // Test that Midnight Reaper did not trigger
         assertLife(playerA, 20);
         assertLife(playerB, 20);
@@ -85,7 +83,6 @@ public class SanctifierEnVecTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, painter, 1);
         assertPermanentCount(playerA, sanctifier, 1);
         assertExileCount(playerA, "Divination", 1);
@@ -122,7 +119,6 @@ public class SanctifierEnVecTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
         // Test that Midnight Reaper did not trigger
         assertLife(playerA, 20);
         assertLife(playerB, 20);

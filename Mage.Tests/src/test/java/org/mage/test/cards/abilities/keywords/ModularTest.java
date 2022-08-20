@@ -161,7 +161,6 @@ public class ModularTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Arcbound Lancer", 1);
         assertGraveyardCount(playerA, "Puncture Blast", 1);

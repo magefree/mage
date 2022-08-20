@@ -29,7 +29,6 @@ public class CastSplitCardsWithFuseTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Wear // Tear", 1);
 
@@ -56,7 +55,6 @@ public class CastSplitCardsWithFuseTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Wear // Tear", 1);
 
@@ -90,7 +88,6 @@ public class CastSplitCardsWithFuseTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Wear // Tear", 1);
 

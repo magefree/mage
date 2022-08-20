@@ -10,7 +10,6 @@ import mage.game.GameException;
 import mage.game.mulligan.MulliganType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.util.functions.Function;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.player.TestPlayer;
@@ -119,7 +118,6 @@ public class GoadTest extends CardTestMultiPlayerBase {
 
         setStopAt(2, PhaseStep.DECLARE_BLOCKERS);
         execute();
-        assertAllCommandsUsed();
 
         assertGoaded(lion, playerA);
         assertAttacking(lion, playerB, playerC);
@@ -138,7 +136,6 @@ public class GoadTest extends CardTestMultiPlayerBase {
 
         setStopAt(2, PhaseStep.DECLARE_BLOCKERS);
         execute();
-        assertAllCommandsUsed();
 
         assertGoaded(lion, playerA);
         assertAttacking(lion, playerC);
@@ -158,7 +155,6 @@ public class GoadTest extends CardTestMultiPlayerBase {
 
         setStopAt(2, PhaseStep.DECLARE_BLOCKERS);
         execute();
-        assertAllCommandsUsed();
 
         assertGoaded(lion, playerA);
         assertAttacking(lion, playerA);
@@ -182,7 +178,6 @@ public class GoadTest extends CardTestMultiPlayerBase {
 
         setStopAt(3, PhaseStep.DECLARE_BLOCKERS);
         execute();
-        assertAllCommandsUsed();
 
         assertGoaded(lion, playerA, playerD);
         assertAttacking(lion, playerB);
@@ -207,7 +202,6 @@ public class GoadTest extends CardTestMultiPlayerBase {
 
         setStopAt(3, PhaseStep.DECLARE_BLOCKERS);
         execute();
-        assertAllCommandsUsed();
 
         assertGoaded(lion, playerA, playerD);
         assertAttacking(lion, playerA, playerD);
@@ -219,7 +213,6 @@ public class GoadTest extends CardTestMultiPlayerBase {
 
         setStopAt(1, PhaseStep.DECLARE_BLOCKERS);
         execute();
-        assertAllCommandsUsed();
 
         assertAttacking("Berserkers of Blood Ridge", playerB, playerC, playerD);
     }
@@ -253,7 +246,6 @@ public class GoadTest extends CardTestMultiPlayerBase {
         setStopAt(2, PhaseStep.DECLARE_BLOCKERS);
 
         execute();
-        assertAllCommandsUsed();
 
         assertGoaded("Goblin Balloon Brigade", playerA);
         assertNotGoaded("Goblin Champion", playerA);

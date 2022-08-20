@@ -47,8 +47,6 @@ public class GainControlOfOwnedCreaturesTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-
         assertGraveyardCount(playerA, "Dubious Challenge", 1);
         assertPermanentCount(playerA, "Void Winnower", 1);
         assertPowerToughness(playerA, "Void Winnower", 11, 9);
@@ -100,8 +98,6 @@ public class GainControlOfOwnedCreaturesTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(8, PhaseStep.PRECOMBAT_MAIN);
         execute();
-
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Dubious Challenge", 1);
         assertPermanentCount(playerA, "Void Winnower", 1);

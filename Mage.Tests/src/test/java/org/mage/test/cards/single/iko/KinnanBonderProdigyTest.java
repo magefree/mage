@@ -34,7 +34,6 @@ public class KinnanBonderProdigyTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, hovermyr, 1);
         assertPermanentCount(playerA, egg, 0);
@@ -63,7 +62,6 @@ public class KinnanBonderProdigyTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, hovermyr, 1);
         assertPermanentCount(playerA, "Treasure Token", 0);

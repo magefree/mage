@@ -28,7 +28,6 @@ public class KnightOfDuskTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, knight, 1);
         assertPermanentCount(playerB, lion, 0);
@@ -52,7 +51,6 @@ public class KnightOfDuskTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, knight, 0);
         assertPermanentCount(playerB, lion, 0);
@@ -76,7 +74,6 @@ public class KnightOfDuskTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, knight, 1);
         assertPermanentCount(playerB, lion, 0);

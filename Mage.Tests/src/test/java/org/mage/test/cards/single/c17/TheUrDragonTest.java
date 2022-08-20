@@ -39,8 +39,7 @@ public class TheUrDragonTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.END_COMBAT);
         
         execute();
-        assertAllCommandsUsed();
-        
+
         assertPermanentCount(playerA, "Dragon Hatchling", 2);
         assertPermanentCount(playerA, "Silvercoat Lion", 1  );
         assertHandCount(playerA, 3);

@@ -39,8 +39,6 @@ public class PreventAllDamageTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertAllCommandsUsed();
-
         assertGraveyardCount(playerA, "Safe Passage", 1);
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
 
@@ -77,8 +75,6 @@ public class PreventAllDamageTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Ethereal Haze", 1);
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
@@ -128,8 +124,6 @@ public class PreventAllDamageTest extends CardTestPlayerBase {
         
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);        
         execute();
-
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Energy Storm", 1);
         assertPermanentCount(playerA, "Abbey Griffin", 1);

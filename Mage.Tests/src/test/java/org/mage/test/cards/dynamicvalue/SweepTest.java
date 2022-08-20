@@ -91,7 +91,6 @@ public class SweepTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Raging Goblin", 1);
         assertPermanentCount(playerA, "Plains", 5);

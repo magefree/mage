@@ -404,7 +404,6 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Uro, Titan of Nature's Wrath", 1);
     }

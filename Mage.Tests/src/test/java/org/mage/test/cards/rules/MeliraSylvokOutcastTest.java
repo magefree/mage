@@ -38,7 +38,6 @@ public class MeliraSylvokOutcastTest extends CardTestPlayerBase {
         // TODO: Needed since Melira's ability isn't been caught by the is playable check
         try {
             execute();
-            assertAllCommandsUsed();
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {

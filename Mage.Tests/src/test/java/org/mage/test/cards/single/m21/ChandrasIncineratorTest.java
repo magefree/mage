@@ -23,7 +23,6 @@ public class ChandrasIncineratorTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         // {R} lightning bolt + {2}{R} Chandra's Incinerator
         assertTappedCount("Mountain", true, 4);

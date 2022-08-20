@@ -35,7 +35,6 @@ public class MuragandaPetroglyphsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Grizzly Bears", 4, 4, Filter.ComparisonScope.Any);
         assertPowerToughness(playerB, "Grizzly Bears", 4, 4, Filter.ComparisonScope.Any);
@@ -57,7 +56,6 @@ public class MuragandaPetroglyphsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
         assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 4, 4);
@@ -80,7 +78,6 @@ public class MuragandaPetroglyphsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
         //assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2); // no boost (permanent have haste)
@@ -99,7 +96,6 @@ public class MuragandaPetroglyphsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Soldier Token", 3, 3);
     }
@@ -117,7 +113,6 @@ public class MuragandaPetroglyphsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerB, "Goblin Guide", 2, 3);
     }
@@ -130,7 +125,6 @@ public class MuragandaPetroglyphsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Hundroog", 4, 7);
     }
@@ -150,7 +144,6 @@ public class MuragandaPetroglyphsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Forest", 6, 4);
 
@@ -183,7 +176,6 @@ public class MuragandaPetroglyphsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Grizzly Bears", 4, 2);
 
@@ -208,7 +200,6 @@ public class MuragandaPetroglyphsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Grizzly Bears", 2, 2);
     }
@@ -229,7 +220,6 @@ public class MuragandaPetroglyphsTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         // Graveyard has artifact, enchantment and tribal
         assertPowerToughness(playerA, "Tarmogoyf", 3, 4);

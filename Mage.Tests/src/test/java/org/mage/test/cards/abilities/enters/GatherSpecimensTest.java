@@ -35,8 +35,6 @@ public class GatherSpecimensTest extends CardTestPlayerBase {
 
         execute();
 
-        assertAllCommandsUsed();
-        
         assertGraveyardCount(playerA, "Gather Specimens", 1);
         
         assertPermanentCount(playerA, "Memnite", 1);

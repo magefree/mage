@@ -38,7 +38,6 @@ public class DependentEffectsTest extends CardTestPlayerBase {
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Enchanted Evening", 5, 5);
         assertPowerToughness(playerA, "War Horn", 3, 3);
@@ -83,7 +82,6 @@ public class DependentEffectsTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Enchanted Evening");
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Rite of Replication", 1);
         assertGraveyardCount(playerB, "Raise the Alarm", 1);
@@ -139,7 +137,6 @@ public class DependentEffectsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Yixlid Jailer", 1);
 

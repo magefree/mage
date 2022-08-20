@@ -32,7 +32,6 @@ public class ApproachOfTheSecondSunTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 27);
         assertLibraryCount(playerA, 1); // 1 approach put back into library
@@ -57,7 +56,6 @@ public class ApproachOfTheSecondSunTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertResult(playerA, GameResult.DRAW);
         assertLife(playerA, 27);
@@ -91,7 +89,6 @@ public class ApproachOfTheSecondSunTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 27);
         assertLibraryCount(playerA, 9);
@@ -125,7 +122,6 @@ public class ApproachOfTheSecondSunTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 27);
         assertLibraryCount(playerA, 0);
@@ -161,7 +157,6 @@ public class ApproachOfTheSecondSunTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 27);
         assertLibraryCount(playerA, 0);
@@ -208,7 +203,6 @@ public class ApproachOfTheSecondSunTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertResult(playerA, GameResult.WON);
         assertLife(playerA, 34);
@@ -249,7 +243,6 @@ public class ApproachOfTheSecondSunTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertResult(playerA, GameResult.WON);
         assertLife(playerA, 34);
@@ -291,7 +284,6 @@ public class ApproachOfTheSecondSunTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertResult(playerA, GameResult.WON);
         assertLife(playerA, 41);
@@ -318,7 +310,6 @@ public class ApproachOfTheSecondSunTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20); // Countered, no lifegain
         assertLibraryCount(playerA, "Approach of the Second Sun", 0); // 0 approach put back into library
@@ -345,7 +336,6 @@ public class ApproachOfTheSecondSunTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 27); // lifegain from first spell
         assertLibraryCount(playerA, "Approach of the Second Sun", 1); // 1 approach put back into library

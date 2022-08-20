@@ -45,7 +45,6 @@ public class LivingLoreTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Living Lore", 0);
         assertGraveyardCount(playerA, "Lightning Bolt", 1);

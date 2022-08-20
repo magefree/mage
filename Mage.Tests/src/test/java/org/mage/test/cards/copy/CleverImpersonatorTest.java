@@ -74,7 +74,6 @@ public class CleverImpersonatorTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, "Clever Impersonator", 0);
         assertCounterCount(playerB, "Liliana, Defiant Necromancer", CounterType.LOYALTY, 3);  // 3

@@ -70,7 +70,6 @@ public class CostModificationTest extends CardTestPlayerBase {
 
         try {
             execute();
-            assertAllCommandsUsed();
 
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
@@ -119,7 +118,6 @@ public class CostModificationTest extends CardTestPlayerBase {
 
         try {
             execute();
-            assertAllCommandsUsed();
 
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
@@ -284,7 +282,6 @@ public class CostModificationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Grapeshot", 1);
     }
@@ -318,7 +315,6 @@ public class CostModificationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -357,7 +353,6 @@ public class CostModificationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Engulfing Flames", 1);
     }
@@ -398,7 +393,6 @@ public class CostModificationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(6, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -454,7 +448,6 @@ public class CostModificationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Vivien Reid", 1);
         assertGraveyardCount(playerA, "Huatli, Warrior Poet", 1);
@@ -494,6 +487,5 @@ public class CostModificationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 }

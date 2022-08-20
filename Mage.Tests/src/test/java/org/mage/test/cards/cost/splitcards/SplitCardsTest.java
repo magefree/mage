@@ -36,7 +36,6 @@ public class SplitCardsTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 22);
         assertLife(playerB, 18);

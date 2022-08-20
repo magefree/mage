@@ -286,7 +286,6 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Cavern of Souls", 1);
         assertGraveyardCount(playerA, "Runeclaw Bear", 1);

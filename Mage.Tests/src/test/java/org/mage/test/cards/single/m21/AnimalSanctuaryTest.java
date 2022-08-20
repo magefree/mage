@@ -27,7 +27,6 @@ public class AnimalSanctuaryTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, bird, CounterType.P1P1, 1);
     }
@@ -43,7 +42,6 @@ public class AnimalSanctuaryTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, cat, CounterType.P1P1, 1);
     }
@@ -59,7 +57,6 @@ public class AnimalSanctuaryTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, dog, CounterType.P1P1, 1);
     }
@@ -75,7 +72,6 @@ public class AnimalSanctuaryTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, goat, CounterType.P1P1, 1);
     }
@@ -91,7 +87,6 @@ public class AnimalSanctuaryTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, ox, CounterType.P1P1, 1);
     }
@@ -107,7 +102,6 @@ public class AnimalSanctuaryTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, snake, CounterType.P1P1, 1);
     }

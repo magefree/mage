@@ -36,7 +36,6 @@ public class TwinningStaffTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, zada, 3 + 3, 3 + 3);
         assertPowerToughness(playerA, bear, 2 + 3 + 3, 2 + 3 + 3);
@@ -57,7 +56,6 @@ public class TwinningStaffTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, zada, 3 + 3, 3 + 3);
         assertPowerToughness(playerA, bear, 2 + 3 + 3 + 3, 2 + 3 + 3 + 3);
@@ -81,7 +79,6 @@ public class TwinningStaffTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, disfigure, 1);
         assertGraveyardCount(playerA, fork, 1);

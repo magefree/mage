@@ -23,8 +23,6 @@ public class GrimHaruspexTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-        
         assertGraveyardCount(playerA, "Grim Haruspex", 1);
         assertHandCount(playerA, 0);
     }

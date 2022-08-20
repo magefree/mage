@@ -131,7 +131,6 @@ public class GideonTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(5, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
         assertLife(playerA, 7);
@@ -154,7 +153,6 @@ public class GideonTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertType("Gideon Jura", CardType.CREATURE, true);
         assertDamageReceived(playerA, "Gideon Jura", 3);
@@ -174,7 +172,6 @@ public class GideonTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertType("Gideon Jura", CardType.CREATURE, true);
         assertDamageReceived(playerA, "Gideon Jura", 2);

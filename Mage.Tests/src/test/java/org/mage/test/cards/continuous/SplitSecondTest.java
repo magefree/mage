@@ -25,7 +25,6 @@ public class SplitSecondTest extends CardTestPlayerBase {
         // TODO: Needed, see https://github.com/magefree/mage/issues/8973
         try {
             execute();
-            assertAllCommandsUsed();
 
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
@@ -55,7 +54,6 @@ public class SplitSecondTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 2 - 2);
         assertPermanentCount(playerA, "Raging Goblin", 1);

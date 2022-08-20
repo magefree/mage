@@ -80,8 +80,6 @@ public class DeflectingPalmTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertAllCommandsUsed();
-
         assertGraveyardCount(playerB, "Deflecting Palm", 1);
         assertGraveyardCount(playerA, "Dromoka's Command", 1);
 

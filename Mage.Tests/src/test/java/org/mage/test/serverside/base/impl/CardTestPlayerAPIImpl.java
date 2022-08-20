@@ -1497,7 +1497,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      *
      * @throws AssertionError
      */
-    public void assertAllCommandsUsed() throws AssertionError {
+    private void assertAllCommandsUsed() throws AssertionError {
         for (Player player : currentGame.getPlayers().values()) {
             TestPlayer testPlayer = (TestPlayer) player;
             assertActionsMustBeEmpty(testPlayer);

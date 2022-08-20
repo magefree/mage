@@ -26,7 +26,6 @@ public class NivmagusElementalTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, nivmagus, CounterType.P1P1, 2);
         assertLife(playerB, 20);
@@ -49,7 +48,6 @@ public class NivmagusElementalTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, nivmagus, CounterType.P1P1, 6);
         assertLife(playerB, 20);

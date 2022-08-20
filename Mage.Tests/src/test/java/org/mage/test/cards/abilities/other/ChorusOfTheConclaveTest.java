@@ -84,8 +84,6 @@ public class ChorusOfTheConclaveTest extends CardTestPlayerBase {
         
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Goblin Roughrider", 1); // costs {R}{2} + {1} = 4
         assertCounterCount("Goblin Roughrider", CounterType.P1P1, 1);

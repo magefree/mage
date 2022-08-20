@@ -49,7 +49,6 @@ public class CastCommanderTest extends CardTestCommanderDuelBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
         assertLife(playerA, 40);
         assertLife(playerB, 40);
 
@@ -85,7 +84,6 @@ public class CastCommanderTest extends CardTestCommanderDuelBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
         assertLife(playerA, 40);
         assertLife(playerB, 40);
        
@@ -117,8 +115,6 @@ public class CastCommanderTest extends CardTestCommanderDuelBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-        
         assertPermanentCount(playerA, "Ob Nixilis of the Black Oath", 0);
         assertLibraryCount(playerA, "Ob Nixilis of the Black Oath", 0);
         assertCommandZoneCount(playerA, "Ob Nixilis of the Black Oath", 1);

@@ -43,7 +43,6 @@ public class TidehollowScullerTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerB, "Bloodflow Connoisseur", 1);
         assertPermanentCount(playerA, "Tidehollow Sculler", 0);
@@ -95,7 +94,6 @@ public class TidehollowScullerTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test

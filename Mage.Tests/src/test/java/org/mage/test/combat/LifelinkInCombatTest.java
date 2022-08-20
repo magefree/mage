@@ -23,7 +23,6 @@ public class LifelinkInCombatTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Elderwood Scion", 5, 5);
         assertLife(playerA, 24);
@@ -51,7 +50,6 @@ public class LifelinkInCombatTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Brion Stoutarm", 5, 5);
         assertLife(playerA, 24);
@@ -78,7 +76,6 @@ public class LifelinkInCombatTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Elderwood Scion", 5, 5);
         assertLife(playerA, 24);
@@ -100,7 +97,6 @@ public class LifelinkInCombatTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Ajani's Sunstriker", 2, 2);
         assertLife(playerA, 20);
@@ -124,7 +120,6 @@ public class LifelinkInCombatTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Elderwood Scion", 5, 5);
         assertLife(playerA, 23);
@@ -152,7 +147,6 @@ public class LifelinkInCombatTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Elderwood Scion", 5, 5);
         assertLife(playerA, 23);

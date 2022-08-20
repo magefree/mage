@@ -25,7 +25,6 @@ public class ValkiGodOfLiesTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Tibalt, Cosmic Impostor", 1);
         assertPermanentCount(playerA, "Grizzly Bears", 1);

@@ -35,7 +35,6 @@ public class WorldEnchantmentsRuleTest extends CardTestMultiPlayerBase {
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Nether Void", 0);
         assertPermanentCount(playerD, "Nether Void", 1);
@@ -58,7 +57,6 @@ public class WorldEnchantmentsRuleTest extends CardTestMultiPlayerBase {
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Nether Void", 1);
         assertPermanentCount(playerC, "Nether Void", 1);
@@ -98,7 +96,6 @@ public class WorldEnchantmentsRuleTest extends CardTestMultiPlayerBase {
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerD, "Concordant Crossroads", 0);
         assertPermanentCount(playerA, "Concordant Crossroads", 1);
@@ -133,7 +130,6 @@ public class WorldEnchantmentsRuleTest extends CardTestMultiPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Charmed Griffin", 1);
         assertPermanentCount(playerD, "Concordant Crossroads", 0);

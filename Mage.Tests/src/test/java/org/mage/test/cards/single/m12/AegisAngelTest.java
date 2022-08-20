@@ -27,7 +27,6 @@ public class AegisAngelTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertAbility(playerA, lion, IndestructibleAbility.getInstance(), true);
     }
@@ -44,7 +43,6 @@ public class AegisAngelTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertAbility(playerA, lion, IndestructibleAbility.getInstance(), true);
     }
@@ -64,7 +62,6 @@ public class AegisAngelTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, angel, 1);
         assertGraveyardCount(playerA, murder, 1);
@@ -86,7 +83,6 @@ public class AegisAngelTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, angel, 1);
         assertGraveyardCount(playerA, murder, 1);
@@ -109,7 +105,6 @@ public class AegisAngelTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, act, 1);
         assertPermanentCount(playerB, angel, 1);

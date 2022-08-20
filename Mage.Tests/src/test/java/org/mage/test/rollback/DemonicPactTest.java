@@ -113,8 +113,6 @@ public class DemonicPactTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
         assertGraveyardCount(playerB, "Pact of Negation", 1);
 

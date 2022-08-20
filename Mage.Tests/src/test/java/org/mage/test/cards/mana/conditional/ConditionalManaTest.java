@@ -233,7 +233,6 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, "Empowered Autogenerator", CounterType.CHARGE, 1);
         assertLife(playerB, 20 - 3);
@@ -260,7 +259,6 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, "Empowered Autogenerator", CounterType.CHARGE, 2);
         assertLife(playerB, 20 - 3);
@@ -287,7 +285,6 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, "Empowered Autogenerator", CounterType.CHARGE, 2);
         assertLife(playerB, 20 - 3);
@@ -310,7 +307,6 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 3);
     }
@@ -331,7 +327,6 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
         assertDuplicatedManaOptions(manaOptions);
@@ -356,7 +351,6 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 3);
     }
@@ -380,8 +374,6 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Titans' Nest", 1);
         

@@ -39,7 +39,6 @@ public class SagaTest extends CardTestPlayerBase {
 
         setStopAt(5, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, rite, 1);
         assertPermanentCount(playerA, rite, 0);
@@ -70,7 +69,6 @@ public class SagaTest extends CardTestPlayerBase {
         castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, flicker, rite);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, rite, 0);
         assertPermanentCount(playerA, rite, 1);
@@ -102,7 +100,6 @@ public class SagaTest extends CardTestPlayerBase {
         castSpell(5, PhaseStep.PRECOMBAT_MAIN, playerA, boomerang, rite);
         setStopAt(5, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, rite, 1);
         assertPermanentCount(playerA, rite, 0);
@@ -126,7 +123,6 @@ public class SagaTest extends CardTestPlayerBase {
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, rite, 1);
         assertPermanentCount(playerA, rite, 0);
@@ -151,7 +147,6 @@ public class SagaTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, saga, 0);
         assertGraveyardCount(playerA, saga, 1);
@@ -175,7 +170,6 @@ public class SagaTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, saga, 0);
         assertGraveyardCount(playerA, saga, 1);

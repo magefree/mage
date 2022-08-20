@@ -27,7 +27,6 @@ public class EmrakulThePromisedEndTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertActivePlayer(playerB);
     }
@@ -45,7 +44,6 @@ public class EmrakulThePromisedEndTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertActivePlayer(playerA);
     }
@@ -63,7 +61,6 @@ public class EmrakulThePromisedEndTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(4, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertActivePlayer(playerA);
     }
@@ -85,7 +82,6 @@ public class EmrakulThePromisedEndTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Emrakul, the Promised End", 1);
     }
@@ -112,7 +108,6 @@ public class EmrakulThePromisedEndTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Emrakul, the Promised End", 1);
     }

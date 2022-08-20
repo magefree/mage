@@ -42,7 +42,6 @@ public class RepeatedReverberationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, ajani, 1);
         assertGraveyardCount(playerA, repeatedReverb, 1);
@@ -76,7 +75,6 @@ public class RepeatedReverberationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, soothingBalm, 1);
         assertGraveyardCount(playerA, repeatedReverb, 1);
@@ -107,7 +105,6 @@ public class RepeatedReverberationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, soulFeast, 1);
         assertGraveyardCount(playerA, repeatedReverb, 1);
@@ -135,7 +132,6 @@ public class RepeatedReverberationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Balduvian Bears", 1);
         assertGraveyardCount(playerA, repeatedReverb, 1);

@@ -75,8 +75,6 @@ public class StateValuesTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
-
         assertLife(playerA, 20);
         assertLife(playerB, 20);
 
@@ -104,7 +102,6 @@ public class StateValuesTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
 
         execute();
-        assertAllCommandsUsed();
 
         // Before rollback
         assertTappedCount("Plains", true, 4);
@@ -138,7 +135,6 @@ public class StateValuesTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
 
         execute();
-        assertAllCommandsUsed();
 
         // Before rollback
         assertTappedCount("Plains", true, 2);

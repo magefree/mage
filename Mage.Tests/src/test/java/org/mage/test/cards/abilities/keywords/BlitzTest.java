@@ -46,7 +46,6 @@ public class BlitzTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, decoy, 1);
         assertBlitzed(decoy, true);
@@ -62,7 +61,6 @@ public class BlitzTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, decoy, 0);
         assertGraveyardCount(playerA, decoy, 1);
@@ -79,7 +77,6 @@ public class BlitzTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, decoy, 1);
         assertBlitzed(decoy, false);
@@ -119,7 +116,6 @@ public class BlitzTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertBlitzed(underdog, true);
         assertLife(playerA, 20 - 2);
@@ -137,7 +133,6 @@ public class BlitzTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertBlitzed(underdog, false);
         assertLife(playerA, 20);

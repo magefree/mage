@@ -73,7 +73,6 @@ public class ForceOfWillTest extends CardTestPlayerBase {
         // TODO: Needed since the alternative cost is not being properly check for playability.
         try {
             execute();
-            assertAllCommandsUsed();
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Can't find available command - activate:Cast Force of Will$target=Thoughtseize")) {

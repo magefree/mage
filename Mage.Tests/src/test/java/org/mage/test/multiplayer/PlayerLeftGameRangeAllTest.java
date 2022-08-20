@@ -458,8 +458,6 @@ public class PlayerLeftGameRangeAllTest extends CardTestMultiPlayerBase {
         
         execute();
 
-        assertAllCommandsUsed();
-        
         assertPermanentCount(playerD, "Silvercoat Lion", 1);
         
         assertGraveyardCount(playerC, "Lightning Bolt", 1);

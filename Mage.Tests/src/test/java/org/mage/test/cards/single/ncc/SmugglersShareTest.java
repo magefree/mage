@@ -112,7 +112,6 @@ public class SmugglersShareTest extends CardTestCommander4Players {
 
         setStopAt(1, PhaseStep.CLEANUP);
         execute();
-        assertAllCommandsUsed();
 
         // 2 lands entered the battlefield under opponent's control, create Treasure token.
         assertPermanentCount(playerB, treasureToken, 1);
@@ -143,7 +142,6 @@ public class SmugglersShareTest extends CardTestCommander4Players {
 
         setStopAt(1, PhaseStep.CLEANUP);
         execute();
-        assertAllCommandsUsed();
 
         // More than 2 cards were drawn by an opponent, draw a card.
         assertHandCount(playerB, 1);
@@ -180,7 +178,6 @@ public class SmugglersShareTest extends CardTestCommander4Players {
 
         setStopAt(1, PhaseStep.CLEANUP);
         execute();
-        assertAllCommandsUsed();
 
         // 2 lands entered the battlefield under opponent's control, create Treasure token.
         assertPermanentCount(playerB, treasureToken, 1);
@@ -236,7 +233,6 @@ public class SmugglersShareTest extends CardTestCommander4Players {
 
         setStopAt(1, PhaseStep.CLEANUP);
         execute();
-        assertAllCommandsUsed();
 
         // 2 lands entered the battlefield for 2 different opponents, create 2 Treasure tokens.
         assertPermanentCount(playerD, treasureToken, 2);
@@ -282,7 +278,6 @@ public class SmugglersShareTest extends CardTestCommander4Players {
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         // 1 card drawn for turn
         assertHandCount(playerA, 1);
@@ -291,7 +286,6 @@ public class SmugglersShareTest extends CardTestCommander4Players {
 
         setStopAt(1, PhaseStep.CLEANUP);
         execute();
-        assertAllCommandsUsed();
 
         // 2 lands entered the battlefield under opponent's control, create Treasure token.
         assertPermanentCount(playerA, treasureToken, 1);

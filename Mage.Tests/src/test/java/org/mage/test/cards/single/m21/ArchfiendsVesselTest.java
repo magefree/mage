@@ -23,7 +23,6 @@ public class ArchfiendsVesselTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Demon Token", 1);
         assertPermanentCount(playerA, archfiendsVessel, 0);
@@ -46,7 +45,6 @@ public class ArchfiendsVesselTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Demon Token", 1);
         assertPermanentCount(playerA, archfiendsVessel, 0);
@@ -71,7 +69,6 @@ public class ArchfiendsVesselTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Demon Token", 0);
         assertPermanentCount(playerA, archfiendsVessel, 0);

@@ -38,7 +38,6 @@ public class TheTarrasqueTest extends CardTestPlayerBase {
 
         setStopAt(4, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertAbility(playerA, tarrasque, HasteAbility.getInstance(), true);
     }
@@ -69,7 +68,6 @@ public class TheTarrasqueTest extends CardTestPlayerBase {
 
         setStopAt(4, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertAbility(playerA, tarrasque, HasteAbility.getInstance(), false);
     }
@@ -110,7 +108,6 @@ public class TheTarrasqueTest extends CardTestPlayerBase {
 
         setStopAt(4, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertAbility(playerA, tarrasque, HasteAbility.getInstance(), false);
         assertAbility(playerA, sakashima, HasteAbility.getInstance(), true);

@@ -59,7 +59,6 @@ public class MimicVatTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount("Clone", 1);
         assertPermanentCount(playerB, "Silvercoat Lion", 1);

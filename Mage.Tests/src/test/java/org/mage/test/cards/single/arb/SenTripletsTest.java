@@ -32,7 +32,6 @@ public class SenTripletsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, relic);
         addCard(Zone.HAND, playerB, "Island");
 
-        assertAllCommandsUsed();
     }
 
     /**
@@ -48,7 +47,6 @@ public class SenTripletsTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, triplets, 1);
         assertPermanentCount(playerA, relic, 1);
         assertPermanentCount(playerA, "Island", 1);
@@ -71,7 +69,6 @@ public class SenTripletsTest extends CardTestPlayerBase {
 
         try {
             execute();
-            assertAllCommandsUsed();
 
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
@@ -96,7 +93,6 @@ public class SenTripletsTest extends CardTestPlayerBase {
 
         try {
             execute();
-            assertAllCommandsUsed();
 
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {

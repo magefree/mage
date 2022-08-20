@@ -59,7 +59,6 @@ public class EssenceOfTheWildCopyTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Silvercoat Lion", 0);
         assertPermanentCount(playerA, "Essence of the Wild", 2);
@@ -84,7 +83,6 @@ public class EssenceOfTheWildCopyTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Silvercoat Lion", 0);
         assertPermanentCount(playerA, "Essence of the Wild", 3);
@@ -116,7 +114,6 @@ public class EssenceOfTheWildCopyTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Soldier Token", 0);
         assertPermanentCount(playerA, "Essence of the Wild", 1 + 5);
@@ -156,7 +153,6 @@ public class EssenceOfTheWildCopyTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Silvercoat Lion", 0);
         assertPermanentCount(playerA, "Essence of the Wild", 2);
@@ -190,7 +186,6 @@ public class EssenceOfTheWildCopyTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Terror", 1);
         assertGraveyardCount(playerA, "Essence of the Wild", 1);

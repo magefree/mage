@@ -69,7 +69,6 @@ public class DisturbTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     /**
@@ -108,7 +107,6 @@ public class DisturbTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     /**
@@ -128,7 +126,6 @@ public class DisturbTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     /**
@@ -164,7 +161,6 @@ public class DisturbTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     /**
@@ -199,7 +195,6 @@ public class DisturbTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     /**
@@ -222,14 +217,12 @@ public class DisturbTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, ghastlyMimictry, 1);
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, lightningBolt, "Alloy Myr");
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertExileCount(mirrorhallMimic, 1);
     }
 }

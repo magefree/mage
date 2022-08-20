@@ -35,7 +35,6 @@ public class CantCastTest extends CardTestPlayerBase {
 
         try {
             execute();
-            assertAllCommandsUsed();
 
             assertHandCount(playerA, "Jayemdae Tome", 1);
             assertPermanentCount(playerA, "Jayemdae Tome", 0);
@@ -71,7 +70,6 @@ public class CantCastTest extends CardTestPlayerBase {
         //       longer shown as castable.
         try {
             execute();
-            assertAllCommandsUsed();
 
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
@@ -240,7 +238,6 @@ public class CantCastTest extends CardTestPlayerBase {
 
         try {
             execute();
-            assertAllCommandsUsed();
 
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {

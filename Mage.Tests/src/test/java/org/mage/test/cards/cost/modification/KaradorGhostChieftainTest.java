@@ -27,7 +27,6 @@ public class KaradorGhostChieftainTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Karador, Ghost Chieftain");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, "Karador, Ghost Chieftain", 1);
     }
 
@@ -55,7 +54,6 @@ public class KaradorGhostChieftainTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Karador, Ghost Chieftain");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, "Karador, Ghost Chieftain", 1);
     }
 
@@ -84,8 +82,6 @@ public class KaradorGhostChieftainTest extends CardTestPlayerBase {
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
-
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Silvercoat Lion", 2);
         assertGraveyardCount(activePlayer, "Cloudshift", 1);
@@ -135,7 +131,6 @@ public class KaradorGhostChieftainTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
     }
 
 }

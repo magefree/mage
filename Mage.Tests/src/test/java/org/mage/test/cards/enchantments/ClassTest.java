@@ -36,7 +36,6 @@ public class ClassTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertClassLevel(wizard, 1);
         assertHandCount(playerA, 0);
@@ -51,7 +50,6 @@ public class ClassTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertClassLevel(wizard, 2);
         assertHandCount(playerA, 2);
@@ -68,7 +66,6 @@ public class ClassTest extends CardTestPlayerBase {
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertClassLevel(wizard, 3);
         assertHandCount(playerA, 3);
@@ -80,7 +77,6 @@ public class ClassTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, druid);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
         assertClassLevel(druid, 1);
         assertHandCount(playerA, 0);
     }
@@ -97,7 +93,6 @@ public class ClassTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertClassLevel(druid, 2);
         assertHandCount(playerA, 0);
@@ -120,7 +115,6 @@ public class ClassTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertClassLevel(druid, 3);
         assertHandCount(playerA, 0);

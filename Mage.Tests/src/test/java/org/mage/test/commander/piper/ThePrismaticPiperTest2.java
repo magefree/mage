@@ -33,7 +33,6 @@ public class ThePrismaticPiperTest2 extends ThePrismaticPiperBaseTest {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertColor(playerA, piper, "R", true);
     }

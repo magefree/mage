@@ -30,8 +30,6 @@ public class AcornCatapultTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-
         assertPermanentCount(playerA, "Acorn Catapult", 1);
 
         assertGraveyardCount(playerB, "Acolyte of Xathrid", 1);
@@ -54,8 +52,6 @@ public class AcornCatapultTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Acorn Catapult", 1);
 

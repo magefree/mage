@@ -138,7 +138,6 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Hostage Taker", 1);
         assertTappedCount("Mountain", true, 4);
@@ -167,7 +166,6 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20 - 1);
@@ -203,7 +201,6 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Flicker", 1);
         assertLife(playerA, 20);
@@ -240,7 +237,6 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         Assert.assertTrue("Mana pool of conditional mana has to be empty", playerA.getManaPool().getConditionalMana().isEmpty());
         assertExileCount("Pillarfield Ox", 1);
@@ -261,7 +257,6 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Adriana, Captain of the Guard", 1);
     }

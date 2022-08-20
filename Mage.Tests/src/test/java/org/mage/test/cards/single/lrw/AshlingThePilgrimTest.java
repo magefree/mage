@@ -35,7 +35,6 @@ public class AshlingThePilgrimTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, ashling, 0);
         assertLife(playerA, 17);
     }
@@ -53,7 +52,6 @@ public class AshlingThePilgrimTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, ashling, 1);
         assertCounterCount(ashling, CounterType.P1P1, 4);
         assertLife(playerA, 20);
@@ -75,7 +73,6 @@ public class AshlingThePilgrimTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, ashling, 0);
         assertLife(playerA, 13);
     }
@@ -95,7 +92,6 @@ public class AshlingThePilgrimTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, ashling, 1);
         assertCounterCount(ashling, CounterType.P1P1, 2);
         assertLife(playerA, 20);
@@ -118,7 +114,6 @@ public class AshlingThePilgrimTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, ashling, 0);
         assertLife(playerA, 17);
     }
@@ -137,7 +132,6 @@ public class AshlingThePilgrimTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, ashling, 0);
         assertLife(playerA, 17);
     }
@@ -159,7 +153,6 @@ public class AshlingThePilgrimTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, ashling, 0);
         assertPermanentCount(playerA, slbrt, 0);
         assertLife(playerA, 17);
@@ -179,7 +172,6 @@ public class AshlingThePilgrimTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, ashling, 1);
         assertCounterCount(playerA, ashling, CounterType.P1P1, 2);
         assertLife(playerA, 20);
@@ -203,7 +195,6 @@ public class AshlingThePilgrimTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
-        assertAllCommandsUsed();
         assertManaPool(playerA, ManaType.RED, 0);
         assertAbility(playerA, slbrt, TrampleAbility.getInstance(), true);
     }

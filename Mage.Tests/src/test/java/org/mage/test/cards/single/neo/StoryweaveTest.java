@@ -34,7 +34,6 @@ public class StoryweaveTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, fang, CounterType.P1P1, 2);
         assertCounterCount(playerA, colossus, CounterType.P1P1, 0);
@@ -53,7 +52,6 @@ public class StoryweaveTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, fang, CounterType.P1P1, 0);
         assertPermanentCount(playerA, "Centaur Token", 2);
@@ -78,7 +76,6 @@ public class StoryweaveTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, fang, CounterType.P1P1, 2);
         assertPermanentCount(playerA, "Centaur Token", 2);

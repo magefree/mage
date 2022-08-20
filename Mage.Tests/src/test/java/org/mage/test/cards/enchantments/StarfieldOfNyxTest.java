@@ -49,7 +49,6 @@ public class StarfieldOfNyxTest extends CardTestPlayerBase {
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Thopter Spy Network", 0);
         assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(),
@@ -116,7 +115,6 @@ public class StarfieldOfNyxTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Master of the Feast", 3, 3, Filter.ComparisonScope.All);
         assertPowerToughness(playerA, "Humility", 4, 4, Filter.ComparisonScope.All);
@@ -162,7 +160,6 @@ public class StarfieldOfNyxTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Always Watching", 5);
         assertPermanentCount(playerB, "Song of the Dryads", 1);

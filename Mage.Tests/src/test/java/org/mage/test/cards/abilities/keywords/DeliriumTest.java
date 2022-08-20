@@ -37,7 +37,6 @@ public class DeliriumTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount(playerA, "Balduvian Bears", 4);
         assertGraveyardCount(playerA, "Descend upon the Sinful", 1);
@@ -70,7 +69,6 @@ public class DeliriumTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount(playerA, "Balduvian Bears", 4);
         assertGraveyardCount(playerA, "Descend upon the Sinful", 1);
@@ -110,7 +108,6 @@ public class DeliriumTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         assertExileCount(playerA, "Balduvian Bears", 4);
@@ -145,7 +142,6 @@ public class DeliriumTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         assertExileCount(playerA, "Balduvian Bears", 4);

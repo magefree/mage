@@ -37,7 +37,6 @@ public class TheOzolithTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, FERTILID, 0);
         assertCounterCount(THE_OZOLITH, CounterType.P1P1, 2);
@@ -61,7 +60,6 @@ public class TheOzolithTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, FERTILID, 0);
         assertCounterCount(WALKING_CORPSE, CounterType.P1P1, 2);
@@ -84,7 +82,6 @@ public class TheOzolithTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, FERTILID, 0);
         assertCounterCount(TATTERKITE, CounterType.P1P1, 0);
@@ -109,7 +106,6 @@ public class TheOzolithTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, FERTILID, 0);
         assertCounterCount(WALKING_CORPSE, CounterType.P1P1, 0);
@@ -136,7 +132,6 @@ public class TheOzolithTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, FERTILID, 0);
         assertCounterCount(WALKING_CORPSE, CounterType.P1P1, 4);
@@ -160,7 +155,6 @@ public class TheOzolithTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, FERTILID, 0);
         // The Ozolith should be a creature which received 4 +1/+1 counters and 3 -1/-1 counters

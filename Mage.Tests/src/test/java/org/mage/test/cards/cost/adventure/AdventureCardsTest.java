@@ -31,7 +31,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         assertPermanentCount(playerA, "Food Token", 1);
@@ -53,7 +52,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         assertPermanentCount(playerA, "Food Token", 1);
@@ -72,7 +70,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         assertPermanentCount(playerA, "Food Token", 0);
@@ -94,7 +91,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         assertPermanentCount(playerA, "Food Token", 1);
@@ -122,7 +118,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         assertPermanentCount(playerA, "Food Token", 1);
@@ -143,7 +138,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 1);
         assertPermanentCount(playerA, "Food Token", 0);
@@ -166,7 +160,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 1);
         assertPermanentCount(playerA, "Food Token", 1);
@@ -186,7 +179,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         assertPermanentCount(playerA, "Food Token", 0);
@@ -222,7 +214,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         assertExileCount(playerA, "Curious Pair", 0);
@@ -245,7 +236,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         assertPermanentCount(playerA, "Food Token", 2);
@@ -273,7 +263,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         assertPermanentCount(playerA, "Food Token", 2);
@@ -303,7 +292,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         assertPermanentCount(playerA, "Food Token", 0);
@@ -338,7 +326,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         assertHandCount(playerB, 0);
@@ -381,7 +368,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         assertPermanentCount(playerA, "Rimrock Knight", 2);
@@ -401,7 +387,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         assertPermanentCount(playerA, "Rimrock Knight", 1);
@@ -447,7 +432,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         assertPermanentCount(playerA, 4);
@@ -472,7 +456,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Curious Pair", 0);
         assertLibraryCount(playerA, 1);
@@ -498,7 +481,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         assertPermanentCount(playerA, "Food Token", 0);
@@ -522,7 +504,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Food Token", 0);
         assertLibraryCount(playerA, 1);
@@ -556,7 +537,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         assertPermanentCount(playerA, "Food Token", 1);
@@ -590,7 +570,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         assertPermanentCount(playerA, 3);
@@ -614,7 +593,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -633,7 +611,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -652,7 +629,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -671,7 +647,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -710,7 +685,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -764,7 +738,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -790,7 +763,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Curious Pair", 0);
         assertPermanentCount(playerA, "Food Token", 1);
@@ -819,7 +791,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Flaxen Intruder", 1);
         assertPermanentCount(playerA, "Bear", 0);
@@ -838,7 +809,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Curious Pair", 0);
         assertPermanentCount(playerA, "Food Token", 1);
@@ -858,7 +828,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Flaxen Intruder", 1);
         assertPermanentCount(playerA, "Bear", 0);
@@ -877,7 +846,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Lonesome Unicorn", 0);
         assertPermanentCount(playerA, "Knight Token", 1);

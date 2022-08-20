@@ -57,7 +57,6 @@ public class LegendarySorceryTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Urza's Ruinous Blast", 0);
 

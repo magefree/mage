@@ -75,8 +75,6 @@ public class ExquisiteBloodTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Defiant Bloodlord", 6, 7);
         assertCounterCount("Ajani, Inspiring Leader", CounterType.LOYALTY, 7);
@@ -120,8 +118,6 @@ public class ExquisiteBloodTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        
-        assertAllCommandsUsed();
 
         assertExileCount(playerA, "Silvercoat Lion", 1);
         assertPowerToughness(playerA, "Defiant Bloodlord", 4, 5);

@@ -324,7 +324,6 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
 
         try {
             execute();
-            assertAllCommandsUsed();
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Player PlayerD must have 0 actions but found 1")) {
@@ -386,8 +385,6 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-
-        assertAllCommandsUsed();
 
         assertLife(playerA, 2);
 

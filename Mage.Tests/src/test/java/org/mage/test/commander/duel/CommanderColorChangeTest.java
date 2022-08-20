@@ -47,7 +47,6 @@ public class CommanderColorChangeTest extends CardTestCommanderDuelBase {
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Norin the Wary", 1);
         
@@ -106,8 +105,7 @@ public class CommanderColorChangeTest extends CardTestCommanderDuelBase {
         execute();
 
         assertPermanentCount(playerA, "Norin the Wary", 1);
-        assertAllCommandsUsed();
-        
+
         Permanent norin = getPermanent("Norin the Wary", playerA);
         Assert.assertEquals(false, norin.getColor(currentGame).isBlue());
         Assert.assertEquals(true, norin.getColor(currentGame).isRed());

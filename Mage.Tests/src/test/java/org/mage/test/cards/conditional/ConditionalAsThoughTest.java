@@ -65,7 +65,6 @@ public class ConditionalAsThoughTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -131,6 +130,5 @@ public class ConditionalAsThoughTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
     }
 }

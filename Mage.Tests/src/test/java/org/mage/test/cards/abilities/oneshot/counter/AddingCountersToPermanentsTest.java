@@ -151,7 +151,6 @@ public class AddingCountersToPermanentsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertPowerToughness(playerA, "Kitchen Finks", 2, 1);
