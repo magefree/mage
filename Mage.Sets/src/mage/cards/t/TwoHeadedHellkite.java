@@ -29,7 +29,7 @@ public final class TwoHeadedHellkite extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Haste
         this.addAbility(HasteAbility.getInstance());
