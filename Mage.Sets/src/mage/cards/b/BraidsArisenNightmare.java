@@ -1,9 +1,7 @@
 package mage.cards.b;
 
-import java.util.HashSet;
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -14,12 +12,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SharesCardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -96,8 +95,9 @@ class BraidsArisenNightmareEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        FilterControlledPermanent opponentFilter = new FilterControlledPermanent("a permanent that shares a card type with " + permanent.getName());
-        opponentFilter.add(new BraidsArisenNightmarePredicate(new HashSet<>(permanent.getCardType(game))));
+        SharesCardTypePredicate predicate = new SharesCardTypePredicate(permanent.getCardType(game));
+        FilterControlledPermanent opponentFilter = new FilterControlledPermanent(predicate.toString());
+        opponentFilter.add(predicate);
         if (!permanent.sacrifice(source, game)) {
             return false;
         }
@@ -119,30 +119,11 @@ class BraidsArisenNightmareEffect extends OneShotEffect {
         if (!target.canChoose(opponent.getId(), source, game)) {
             return false;
         }
-        if (!opponent.chooseUse(Outcome.Sacrifice, "Sacrifice " + opponentFilter.getMessage() + '?', source, game)) {
+        if (!opponent.chooseUse(Outcome.Sacrifice, "Sacrifice " + CardUtil.addArticle(opponentFilter.getMessage()) + '?', source, game)) {
             return false;
         }
         opponent.chooseTarget(Outcome.Sacrifice, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         return permanent != null && permanent.sacrifice(source, game);
-    }
-}
-
-class BraidsArisenNightmarePredicate implements Predicate<MageObject> {
-
-    private final HashSet<CardType> cardTypes;
-
-    public BraidsArisenNightmarePredicate(HashSet<CardType> cardTypes) {
-        this.cardTypes = cardTypes;
-    }
-
-    @Override
-    public boolean apply(MageObject input, Game game) {
-        for (CardType type : input.getCardType(game)) {
-            if (cardTypes.contains(type)) {
-                return true;
-            }
-        }
-        return false;
     }
 }
