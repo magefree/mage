@@ -32,6 +32,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Surrak Dragonclaw", 169, Rarity.MYTHIC, mage.cards.s.SurrakDragonclaw.class));
         cards.add(new SetCardInfo("Thrill of Possibility", 127, Rarity.COMMON, mage.cards.t.ThrillOfPossibility.class));
         cards.add(new SetCardInfo("Two-Headed Hellkite", 14, Rarity.RARE, mage.cards.t.TwoHeadedHellkite.class));
+        cards.add(new SetCardInfo("Unite the Coalition", 15, Rarity.RARE, mage.cards.u.UniteTheCoalition.class));
         cards.add(new SetCardInfo("Zeriam, Golden Wind", 5, Rarity.RARE, mage.cards.z.ZeriamGoldenWind.class));
     }
 }
