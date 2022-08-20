@@ -359,7 +359,7 @@ public class CopySpellTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         // Flying, vigilance, deathtouch, lifelink
         // At the beginning of your end step, proliferate.
-        addCard(Zone.BATTLEFIELD, playerA, "Atraxa, Praetors' Voice", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Atraxa, Praetors' Voice", 1);
         // Walking Ballista enters the battlefield with X +1/+1 counters on it.
         // {4}: Put a +1/+1 counter on Walking Ballista.
         // Remove a +1/+1 counter from Walking Ballista: It deals 1 damage to any target.
@@ -372,6 +372,8 @@ public class CopySpellTest extends CardTestPlayerBase {
         // When Dualcaster Mage enters the battlefield, copy target instant or sorcery spell. You may choose new targets for the copy.
         addCard(Zone.HAND, playerB, "Dualcaster Mage"); // Creature {1}{R}{R}
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 4);
+
+        setStrictChooseMode(true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Walking Ballista");
         setChoice(playerA, "X=1");

@@ -156,7 +156,6 @@ public class PlayerLeftGameRangeAllTest extends CardTestMultiPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Confiscate", "Jace, Unraveler of Secrets");
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "-8: You get an emblem with");
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Blind with Anger", "Rootwater Commando");
         attack(2, playerD, "Silvercoat Lion", playerC);
 
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerB, "Silvercoat Lion");

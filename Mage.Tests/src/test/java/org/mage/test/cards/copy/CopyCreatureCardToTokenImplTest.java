@@ -71,7 +71,7 @@ public class CopyCreatureCardToTokenImplTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Thrashing Brontodon");
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}, Sacrifice");
-        addTarget(playerB, "Alpha Myr");
+        // Alpha Myr is auto-chosen since only valid target
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();

@@ -17,12 +17,13 @@ public class StateValuesTest extends CardTestPlayerBase {
     public void testDragonWhelpActivatedFourTimes() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
         // Flying
+        // 2/3
         // {R}: Dragon Whelp gets +1/+0 until end of turn. If this ability has been activated four or more times this turn, sacrifice Dragon Whelp at the beginning of the next end step.
         addCard(Zone.BATTLEFIELD, playerA, "Dragon Whelp", 1); // 2/3
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}: ");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}: ");
-        attack(1, playerA, "Dragon Whelp");
+        attack(1, playerA, "Dragon Whelp"); // 4 damage
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}: ");
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}: ");
@@ -35,7 +36,7 @@ public class StateValuesTest extends CardTestPlayerBase {
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}: ");
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}: ");
 
-        attack(3, playerA, "Dragon Whelp");
+//        attack(3, playerA, "Dragon Whelp");
         rollbackAfterActionsEnd();
 
         setStopAt(4, PhaseStep.UPKEEP);
@@ -46,7 +47,6 @@ public class StateValuesTest extends CardTestPlayerBase {
 
         assertLife(playerA, 20);
         assertLife(playerB, 12);
-
     }
 
     @Test

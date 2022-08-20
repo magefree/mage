@@ -114,7 +114,6 @@ public class EvolveTest extends CardTestPlayerBase {
 
     @Test
     public void testMultipleCreaturesComeIntoPlay() {
-
         // Cloudfin Raptor gets one +1/+1 because itself and other creatur return from exile
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
         addCard(Zone.BATTLEFIELD, playerA, "Judge's Familiar", 1);
@@ -124,8 +123,11 @@ public class EvolveTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 6);
         addCard(Zone.HAND, playerB, "Banisher Priest", 2);
 
+        setStrictChooseMode(true);
+
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Banisher Priest");
         addTarget(playerB, "Cloudfin Raptor");
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Banisher Priest");
         addTarget(playerB, "Judge's Familiar");
 
@@ -139,7 +141,7 @@ public class EvolveTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerB, "Banisher Priest", 0);
 
-        assertGraveyardCount(playerB, 2);
+        assertGraveyardCount(playerB, "Banisher Priest", 2);
         assertGraveyardCount(playerA, 1);
 
         assertPermanentCount(playerA, "Cloudfin Raptor", 1);

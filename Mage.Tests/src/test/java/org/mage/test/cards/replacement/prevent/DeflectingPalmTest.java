@@ -112,6 +112,8 @@ public class DeflectingPalmTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain");
         addCard(Zone.HAND, playerB, "Lightning Bolt");
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Deflecting Palm", null, "Lightning Bolt");
         setChoice(playerA, "Lightning Bolt");

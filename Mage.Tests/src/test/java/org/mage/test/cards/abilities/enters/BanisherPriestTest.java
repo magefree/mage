@@ -104,7 +104,7 @@ public class BanisherPriestTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
 
         addCard(Zone.GRAVEYARD, playerB, "Banisher Priest");
-        /**
+        /*
          * Seance
          * {2}{W}{W}
          * Enchantment
@@ -114,8 +114,12 @@ public class BanisherPriestTest extends CardTestPlayerBase {
          * Exile it at the beginning of the next end step.
          */
         addCard(Zone.BATTLEFIELD, playerB, "Seance");
+
+        setStrictChooseMode(true);
+
+        setChoice(playerB, "Yes");
         addTarget(playerB, "Banisher Priest"); // Return the Banisher Priest from graveyard with Seance
-        // The Silvercoat Lion is autochosen for Banisher Priest's ETB since it's the only creature on the opponent's board
+        addTarget(playerB, "Silvercoat Lion");
 
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();

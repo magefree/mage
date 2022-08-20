@@ -58,7 +58,7 @@ public class WinLoseEffectsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 6);
         
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Set Adrift");
-        addTarget(playerB, "Platinum Angel");
+        // Platinum Angel is auto-chosen since only possible target
         
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();

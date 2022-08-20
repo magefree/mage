@@ -83,6 +83,8 @@ public class FlashbackTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Snapcaster Mage", 1);
         addCard(Zone.GRAVEYARD, playerA, "Repeal", 1);
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
         addTarget(playerA, "Repeal");
 
@@ -112,6 +114,8 @@ public class FlashbackTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerA, "Snapcaster Mage", 1);
         addCard(Zone.GRAVEYARD, playerA, "Blaze", 1);
+
+        setStrictChooseMode(true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
         addTarget(playerA, "Blaze");
@@ -153,6 +157,8 @@ public class FlashbackTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
 
         addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
+
+        setStrictChooseMode(true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Unburial Rites", "Iona, Shield of Emeria");
         setChoice(playerA, "Red");
@@ -253,6 +259,8 @@ public class FlashbackTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
         addTarget(playerA, "Ancestral Vision");
 
@@ -345,6 +353,8 @@ public class FlashbackTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Berserkers' Onslaught", 1);
 
         addCard(Zone.BATTLEFIELD, playerB, "Icefall Regent", 1);
+
+        setStrictChooseMode(true);
 
         // When Snapcaster Mage enters the battlefield, target instant or sorcery card in your graveyard gains flashback until end of turn.
         // The flashback cost is equal to its mana cost.
@@ -507,7 +517,7 @@ public class FlashbackTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, memnite);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback"); // Flashback Dread Return
-        addTarget(playerA, bSable); // return to battlefield
+        // Bronze Sable is auto-chosen since only possible target
         // Only 3 creature under playerA's control, let them be auto-sac'ed to pay
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

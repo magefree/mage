@@ -174,29 +174,31 @@ public class CantCastTest extends CardTestPlayerBase {
     }
 
     /**
-     * Test that panic can only be cast during the correct pahse/steü
+     * Test that panic can only be cast during the correct phase/step
      */
     @Test
     public void testPanic() {
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
 
         // Cast Panic only during combat before blockers are declared.
         // Target creature can't block this turn.
         // Draw a card at the beginning of the next turn's upkeep.
-        addCard(Zone.HAND, playerA, "Panic", 4); // Instant - {R}
+        addCard(Zone.HAND, playerA, "Panic", 2); // Instant - {R}
 
+        addCard(Zone.BATTLEFIELD, playerA, "Akroan Conscriptor", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Panic", "Silvercoat Lion");
+        checkPlayableAbility("not in precombat", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Panic", false);
+        attack(1, playerA, "Akroan Conscriptor");
         castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerA, "Panic", "Silvercoat Lion");
-        castSpell(1, PhaseStep.DECLARE_BLOCKERS, playerA, "Panic", "Silvercoat Lion");
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Panic", "Silvercoat Lion");
+        checkPlayableAbility("not on declare blockers", 1, PhaseStep.DECLARE_BLOCKERS, playerA, "Cast Panic", false);
+        checkPlayableAbility("not in postcombat", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Panic", false);
 
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
-        assertHandCount(playerA, "Panic", 3);
-        assertHandCount(playerA, 4);
+        assertHandCount(playerA, "Panic", 1);
+        assertHandCount(playerA, 2);
         assertGraveyardCount(playerA, "Panic", 1);
     }
 

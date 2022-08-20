@@ -2,6 +2,7 @@ package org.mage.test.cards.single.avr;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -19,10 +20,9 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Cavern of Souls");
         addCard(Zone.HAND, playerA, "Azure Drake");
 
-        setChoice(playerA, "Drake");
-        setChoice(playerA, "Blue");
-
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cavern of Souls");
+        setChoice(playerA, "Drake");
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Azure Drake");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -32,30 +32,29 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests "Cavern of Souls" with "Human" creature type chosen. Then tests
-     * casting Azure Drake (should fail) and Elite Vanguard (should be ok as it
-     * has "Human" subtype)
+     * Tests "Cavern of Souls" with "Human" creature type chosen.
+     * Then tests casting Abuna Acolyte (should fail) and Elite Vanguard (should be ok as ithas "Human" subtype)
      */
     @Test
     public void testNoCastBecauseOfCreatureType() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         addCard(Zone.HAND, playerA, "Cavern of Souls");
         addCard(Zone.HAND, playerA, "Abuna Acolyte");
-        addCard(Zone.HAND, playerA, "Elite Vanguard");
-
-        setChoice(playerA, "Human");
-        setChoice(playerA, "White");
-        setChoice(playerA, "White");
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cavern of Souls"); // choose Human
+        setChoice(playerA, "Human");
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Abuna Acolyte");  // not Human but Cat Cleric
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Elite Vanguard"); // Human
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
-        execute();
 
-        assertPermanentCount(playerA, "Abuna Acolyte", 0);
-        assertPermanentCount(playerA, "Elite Vanguard", 1);
+        try {
+            execute();
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
+                Assert.fail("Should have had error playerA having too many actions, but got:\n" + e.getMessage());
+            }
+        }
     }
 
     /**
@@ -149,35 +148,38 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
     public void testConditionlManaWorksIfCavernIsReplayed() {
         addCard(Zone.HAND, playerA, "Cavern of Souls");
         addCard(Zone.HAND, playerA, "Gladecover Scout"); // Elf costing {G}
-        // addCard(Zone.HAND, playerA, "Fume Spitter"); // Horror costing {B}
+        addCard(Zone.HAND, playerA, "Fume Spitter"); // Horror costing {B}
 
         // Instant - {U}{U} - Return target permanent to its owner's hand.
         addCard(Zone.HAND, playerB, "Boomerang");
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
 
+        setStrictChooseMode(true);
+
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cavern of Souls");
         setChoice(playerA, "Elf");
 
         // getting green mana for Elf into pool
-        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add 1 mana of any one color. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.");
+        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add one mana of ");
         setChoice(playerA, "Green");
 
         // return cavern to hand
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerB, "Boomerang", "Cavern of Souls");
-
-        // playing the cavern again choose different creature type
-        playLand(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cavern of Souls");
-        setChoice(playerA, "Horror");
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
 
         // the green mana usable for Elf should be in the mana pool
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Gladecover Scout");
 
-        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add 1 mana of any one color. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.");
-        setChoice(playerA, "Black");
+        // playing the cavern again choose different creature type
+        playLand(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cavern of Souls");
+        setChoice(playerA, "Horror");
 
         // the black mana usable for Horror should be in the mana pool
-        // castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Fume Spitter");
-        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        activateManaAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Add one mana of ");
+        setChoice(playerA, "Black");
+        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Fume Spitter");
+
+        setStopAt(3, PhaseStep.END_TURN);
         execute();
 
         assertGraveyardCount(playerB, "Boomerang", 1);
@@ -186,7 +188,7 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
         // Check the elf was cast
         assertPermanentCount(playerA, "Gladecover Scout", 1);
         // Check Horror on the Battlefield
-        // assertPermanentCount(playerA, "Fume Spitter", 1);
+        assertPermanentCount(playerA, "Fume Spitter", 1);
     }
 
     /**
@@ -212,7 +214,7 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
         setChoice(playerA, "Drake");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Return to the Ranks");
         setChoice(playerA, "X=1");
-        addTarget(playerA, "Silvercoat Lion");
+        // Silvercoat Lion is auto-chosen since only target
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Counterspell", "Return to the Ranks");
 
@@ -224,7 +226,6 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Counterspell", 1);
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
         assertPermanentCount(playerA, "Silvercoat Lion", 0);
-
     }
 
     /**
@@ -242,14 +243,13 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cavern of Souls");
         setChoice(playerA, "Drake");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Desert Drake");
+        checkPlayableAbility("Can't cast the drak", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Desert", false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertPermanentCount(playerA, "Cavern of Souls", 1);
         assertPermanentCount(playerA, "Desert Drake", 0);
-
     }
 
     @Test

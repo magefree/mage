@@ -73,6 +73,8 @@ public class EmbalmTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, yOx);
         addCard(Zone.BATTLEFIELD, playerB, wKnight);
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, aSanctions);
         addTarget(playerA, yOx);
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, dBlade);
@@ -122,7 +124,8 @@ public class EmbalmTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, aSanctions);
         addTarget(playerA, yOx);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, dBlade);
-        addTarget(playerB, aSanctions);
+        // Angel of Sanction is auto-chosen since only option
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Embalm");
         addTarget(playerA, wKnight);
         castSpell(1, PhaseStep.END_TURN, playerB, dBlade);

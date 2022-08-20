@@ -76,7 +76,7 @@ public class AddingCountersToPermanentsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Soulstinger");
-        addTarget(playerA, "Soulstinger");
+        // Soulstinger auto-chosen since only target
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Turn to Slag", "Soulstinger");
 

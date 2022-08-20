@@ -90,12 +90,14 @@ public class LegendarySorceryTest extends CardTestPlayerBase {
         // Exile all nonland permanents that aren't legendary.
         addCard(Zone.GRAVEYARD, playerB, "Urza's Ruinous Blast"); // Sorcery Legendary  {4}{W}
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dire Fleet Daredevil");
         addTarget(playerA, "Urza's Ruinous Blast");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Urza's Ruinous Blast");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Urza's Ruinous Blast");
 
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertExileCount(playerB, "Urza's Ruinous Blast", 1);

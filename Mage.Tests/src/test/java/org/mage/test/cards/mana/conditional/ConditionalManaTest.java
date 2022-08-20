@@ -105,8 +105,9 @@ public class ConditionalManaTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Snapping Drake");
+        setStrictChooseMode(true);
 
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Snapping Drake");
         activateManaAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{T}: Add {C}{C}{C}{C}");
 
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{X}, {T}: Untap");

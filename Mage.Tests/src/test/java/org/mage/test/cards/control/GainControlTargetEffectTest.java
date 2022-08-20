@@ -215,7 +215,9 @@ public class GainControlTargetEffectTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, oGorger);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
         addCard(Zone.BATTLEFIELD, playerB, aLight);
-        
+
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, oGorger);
         setChoice(playerA, true); // opt to use Kirin's ability
         addTarget(playerA, aLight); // target Angel of Light with Kirin's take control ability

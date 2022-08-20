@@ -26,7 +26,7 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Abzan Banner");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tin Street Hooligan");
-        addTarget(playerA, "Abzan Banner");
+        // Abzan Banner is auto-chosen since only possible target
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 

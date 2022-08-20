@@ -113,7 +113,9 @@ public class InfectTest extends CardTestPlayerBase {
         // Delve (Each card you exile from your graveyard while casting this spell pays for 1.)
         // Target creature gets +6/+6 until end of turn.
         addCard(Zone.HAND, playerA, "Become Immense", 1);
-        
+
+        setStrictChooseMode(true);
+
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: {this} becomes");
         attack(1, playerA, "Inkmoth Nexus");
         castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerA, "Become Immense");
@@ -129,7 +131,6 @@ public class InfectTest extends CardTestPlayerBase {
     
         @Test
     public void testInkmothPumpedByBecomeImmense2() {
-        
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 7);
         // {1}: Inkmoth Nexus becomes a 1/1 Blinkmoth artifact creature with flying and infect until end of turn. It's still a land.
         // (It deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
@@ -145,15 +146,15 @@ public class InfectTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: {this} becomes");
         attack(1, playerA, "Inkmoth Nexus");
         castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerA, "Mutagenic Growth");
-        addTarget(playerA, "Inkmoth Nexus");
+        // Inkmoth Nexus is auto-chosen since it's the only possible target
         castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerA, "Might of Old Krosa");
-        addTarget(playerA, "Inkmoth Nexus");
+        // Inkmoth Nexus is auto-chosen since it's the only possible target
         // +5 poison
         
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: {this} becomes");
         attack(3, playerA, "Inkmoth Nexus");
         castSpell(3, PhaseStep.DECLARE_ATTACKERS, playerA, "Become Immense");
-        addTarget(playerA, "Inkmoth Nexus");
+        // Inkmoth Nexus is auto-chosen since it's the only possible target
         // +7 poison
         
         setStopAt(3, PhaseStep.END_COMBAT);

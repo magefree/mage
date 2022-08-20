@@ -37,7 +37,7 @@ public class GontiLordOfLuxuryEffectTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gonti, Lord of Luxury");
-        addTarget(playerA, playerB);
+        // Player B is autochosen since only option
         setChoice(playerA, "Rashmi, Eternities Crafter");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Rashmi, Eternities Crafter");
 
@@ -82,7 +82,7 @@ public class GontiLordOfLuxuryEffectTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Cyclonic Rift", 1); // Intant {1}{U}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gonti, Lord of Luxury");
-        addTarget(playerA, playerB);
+        // Player B is autochosen since only option
         setChoice(playerA, "Mirari's Wake");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Mirari's Wake");
         castSpell(1, PhaseStep.END_TURN, playerB, "Cyclonic Rift", "Mirari's Wake");
@@ -124,7 +124,7 @@ public class GontiLordOfLuxuryEffectTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gonti, Lord of Luxury");
-        addTarget(playerA, playerB);
+        // Player B is autochosen since only option
         setChoice(playerA, "Lingering Souls");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lingering Souls");
@@ -174,7 +174,7 @@ public class GontiLordOfLuxuryEffectTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Dross Crocodile", 2); // Creature 5/1
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gonti, Lord of Luxury");
-        addTarget(playerA, playerB);
+        // Player B is autochosen since only option
         setChoice(playerA, "Ob Nixilis Reignited");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Ob Nixilis Reignited");
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "-3:", "Dross Crocodile");

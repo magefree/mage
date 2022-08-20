@@ -533,6 +533,8 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Supplant Form", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 6);
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma, Angel of Fury");
         setChoice(playerA, true); // cast it face down as 2/2 creature
 //        showBattlefield("A battle", 1, PhaseStep.POSTCOMBAT_MAIN, playerA);

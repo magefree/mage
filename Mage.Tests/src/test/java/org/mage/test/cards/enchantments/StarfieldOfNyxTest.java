@@ -83,8 +83,10 @@ public class StarfieldOfNyxTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Silumgar, the Drifting Death", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Starfield of Nyx");
+        setStrictChooseMode(true);
 
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Starfield of Nyx");
+        setChoice(playerA, "Yes");
         addTarget(playerA, "Singing Bell Strike");
         setChoice(playerA, "Silumgar, the Drifting Death");
 
@@ -97,9 +99,9 @@ public class StarfieldOfNyxTest extends CardTestPlayerBase {
         Permanent enchantment = getPermanent("Singing Bell Strike", playerA);
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Permanent enchanted = currentGame.getPermanent(enchantment.getAttachedTo());
-            Assert.assertEquals("Silumgar was enchanted", enchanted.getName().equals("Silumgar, the Drifting Death"), true);
+            Assert.assertEquals("Silumgar was enchanted", "Silumgar, the Drifting Death", enchanted.getName());
         } else {
-            Assert.assertEquals("Singing Bell Strike not on the battlefield", false, true);
+            Assert.fail("Singing Bell Strike not on the battlefield");
         }
     }
 

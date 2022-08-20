@@ -81,11 +81,12 @@ public class MerfolkTricksterTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
         addCard(Zone.HAND, playerB, mTrickster);
 
+        setStrictChooseMode(true);
+
         attack(1, playerA, "Footlight Fiend");
         castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerB, mTrickster);
         addTarget(playerB, "Footlight Fiend");
         block(1, playerB, mTrickster, "Footlight Fiend");
-        addTarget(playerA, mTrickster);
 
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
@@ -95,7 +96,6 @@ public class MerfolkTricksterTest extends CardTestPlayerBase {
         assertTappedCount("Island", true, 2);
         assertPermanentCount(playerB, mTrickster, 1);
         assertDamageReceived(playerB, mTrickster, 1);
-        //assertAllCommandsUsed(); // uncommenting this will force a failure since PlayerA cannot do a command to target Trickster, as expected
     }
 
     @Test
@@ -110,13 +110,14 @@ public class MerfolkTricksterTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
         addCard(Zone.HAND, playerB, mTrickster);
 
+        setStrictChooseMode(true);
+
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-2:");
 
         attack(3, playerA, "Devil Token");
         castSpell(3, PhaseStep.DECLARE_ATTACKERS, playerB, mTrickster);
         addTarget(playerB, "Devil Token");
         block(3, playerB, mTrickster, "Devil Token");
-        addTarget(playerA, mTrickster);
 
         setStopAt(3, PhaseStep.END_COMBAT);
         execute();
@@ -127,6 +128,5 @@ public class MerfolkTricksterTest extends CardTestPlayerBase {
         assertTappedCount("Island", true, 2);
         assertPermanentCount(playerB, mTrickster, 1);
         assertDamageReceived(playerB, mTrickster, 1);
-        // assertAllCommandsUsed(); // uncommenting this should force a failure since PlayerA cannot do a command to target Trickster, as expected
     }
 }
