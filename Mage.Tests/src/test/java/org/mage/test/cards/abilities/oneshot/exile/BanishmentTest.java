@@ -10,6 +10,7 @@ public class BanishmentTest extends CardTestCommander4Players {
     @Test
     public void testBanishment() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite", 4);
         addCard(Zone.HAND, playerA, "Banishment", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Memnite", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Steel Overseer", 4);
@@ -22,7 +23,7 @@ public class BanishmentTest extends CardTestCommander4Players {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, "Memnite", 0);
+        assertPermanentCount(playerA, "Memnite", 4);
         assertPermanentCount(playerA, "Banishment", 1);
         assertPermanentCount(playerB, "Memnite", 0);
         assertPermanentCount(playerB, "Steel Overseer", 4);
