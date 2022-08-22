@@ -1,10 +1,5 @@
 package mage.cards.b;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
@@ -20,12 +15,16 @@ import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.util.CardUtil;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -90,7 +89,7 @@ class BanishmentEffect extends OneShotEffect {
         filter.add(new NamePredicate(targeted.getName()));
 
         Set<Card> toExile = game.getBattlefield().getAllActivePermanents(filter, game)
-                .stream().filter(p -> !p.getControllerId().equals(controller.getId()))
+                .stream().filter(p -> controller.hasOpponent(p.getControllerId(),game))
                 .collect(Collectors.toCollection(LinkedHashSet::new));
 
         if (!toExile.isEmpty()) {
