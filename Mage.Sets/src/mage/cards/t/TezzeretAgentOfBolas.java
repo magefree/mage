@@ -10,7 +10,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -46,7 +46,7 @@ public final class TezzeretAgentOfBolas extends CardImpl {
         Effect effect = new AddCardTypeTargetEffect(Duration.EndOfGame, CardType.ARTIFACT, CardType.CREATURE);
         effect.setText("Target artifact becomes an artifact creature");
         LoyaltyAbility ability1 = new LoyaltyAbility(effect, -1);
-        effect = new SetPowerToughnessTargetEffect(5, 5, Duration.EndOfGame);
+        effect = new SetBasePowerToughnessTargetEffect(5, 5, Duration.EndOfGame);
         effect.setText("with base power and toughness 5/5");
         ability1.addEffect(effect);
         ability1.addTarget(new TargetArtifactPermanent());

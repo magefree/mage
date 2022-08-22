@@ -8,7 +8,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -105,7 +105,7 @@ class KatsumasaTheAnimatorEffect extends OneShotEffect {
                 FlyingAbility.getInstance(), Duration.EndOfTurn
         ), source);
         if (!permanent.hasSubtype(SubType.VEHICLE, game)) {
-            game.addEffect(new SetPowerToughnessTargetEffect(
+            game.addEffect(new SetBasePowerToughnessTargetEffect(
                     1, 1, Duration.EndOfTurn
             ), source);
         }

@@ -8,7 +8,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -46,12 +46,12 @@ public final class StorvaldFrostGiantJarl extends CardImpl {
         // Whenever Storvald, Frost Giant Jarl enters the battlefield or attacks, choose one or both —
         // • Target creature has base power and toughness 7/7 until end of turn.
         Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(
-                new SetPowerToughnessTargetEffect(7, 7, Duration.EndOfTurn)
+                new SetBasePowerToughnessTargetEffect(7, 7, Duration.EndOfTurn)
         );
         ability.addTarget(new TargetCreaturePermanent());
 
         // • Target creature has base power and toughness 1/1 until end of turn.
-        Mode mode = new Mode(new SetPowerToughnessTargetEffect(1, 1, Duration.EndOfTurn));
+        Mode mode = new Mode(new SetBasePowerToughnessTargetEffect(1, 1, Duration.EndOfTurn));
         mode.addTarget(new TargetCreaturePermanent());
         ability.addMode(mode);
         ability.getModes().setMinModes(1);

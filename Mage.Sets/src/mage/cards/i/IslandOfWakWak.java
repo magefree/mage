@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -68,7 +68,7 @@ class IslandOfWakWakEffect extends OneShotEffect {
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
         if (targetCreature != null) {
             int toughness = targetCreature.getToughness().getBaseValueModified();
-            game.addEffect(new SetPowerToughnessTargetEffect(0, toughness, Duration.EndOfTurn), source);
+            game.addEffect(new SetBasePowerToughnessTargetEffect(0, toughness, Duration.EndOfTurn), source);
             return true;
         }
         return false;

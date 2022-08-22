@@ -7,7 +7,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
@@ -44,7 +44,7 @@ public final class TezzeretCruelMachinist extends CardImpl {
         Ability ability = new LoyaltyAbility(new AddCardTypeTargetEffect(
                 Duration.UntilYourNextTurn, CardType.ARTIFACT, CardType.CREATURE
         ).setText("Until your next turn, target artifact you control becomes an artifact creature"), 0);
-        ability.addEffect(new SetPowerToughnessTargetEffect(
+        ability.addEffect(new SetBasePowerToughnessTargetEffect(
                 5, 5, Duration.UntilYourNextTurn
         ).setText("with base power and toughness 5/5"));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT));
