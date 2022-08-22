@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.ControllerPlaysLandTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -15,6 +15,8 @@ import mage.abilities.meta.OrTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterPermanent;
+import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
@@ -25,10 +27,17 @@ import java.util.UUID;
  * @author freaisdead
  */
 public final class ShanidSleepersScourge extends CardImpl {
-    private static final FilterCreaturePermanent otherLegendaryCreaturesFilter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent otherLegendaryCreaturesFilter = new FilterCreaturePermanent("other legendary creatures");
+    private static final FilterSpell legendarySpellFilter = new FilterSpell("a legendary spell");
+    private static final FilterPermanent legendaryLandFilter = new FilterPermanent("a legendary land");
 
     static {
         otherLegendaryCreaturesFilter.add(SuperType.LEGENDARY.getPredicate());
+
+        legendarySpellFilter.add(SuperType.LEGENDARY.getPredicate());
+
+        legendaryLandFilter.add(CardType.LAND.getPredicate());
+        legendaryLandFilter.add(SuperType.LEGENDARY.getPredicate());
     }
 
     public ShanidSleepersScourge(UUID ownerId, CardSetInfo setInfo) {
@@ -51,11 +60,11 @@ public final class ShanidSleepersScourge extends CardImpl {
                 true)));
         // Whenever you play a legendary land or cast a legendary spell, you draw a card and you lose 1 life.
         this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD,
-                new DrawAndLoseEFfect(1,1),
+                new DrawAndLoseEffect(1, 1),
                 false,
                 "Whenever you play a legendary land or cast a legendary spell, ",
-                new ControllerPlaysLandTriggeredAbility(Zone.BATTLEFIELD, null, true),
-                new SpellCastControllerTriggeredAbility(null, true)
+                new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, null, legendaryLandFilter, true),
+                new SpellCastControllerTriggeredAbility(null, legendarySpellFilter, false)
         ));
     }
 
@@ -70,15 +79,15 @@ public final class ShanidSleepersScourge extends CardImpl {
 }
 
 
-class DrawAndLoseEFfect extends OneShotEffect {
+class DrawAndLoseEffect extends OneShotEffect {
 
-    DrawAndLoseEFfect(int drawAmount, int loseLifeAMount) {
+    DrawAndLoseEffect(int drawAmount, int loseLifeAMount) {
         super(Outcome.Benefit);
         String cardRule = "a card";
-        if(drawAmount > 1) {
+        if (drawAmount > 1) {
             cardRule = String.format("%d cards", drawAmount);
         }
-        this.staticText = String.format("draw %s and you lose %d life",cardRule,loseLifeAMount);
+        this.staticText = String.format("draw %s and you lose %d life", cardRule, loseLifeAMount);
     }
 
     @Override
@@ -96,12 +105,12 @@ class DrawAndLoseEFfect extends OneShotEffect {
         return true;
     }
 
-    private DrawAndLoseEFfect(final DrawAndLoseEFfect effect) {
+    private DrawAndLoseEffect(final DrawAndLoseEffect effect) {
         super(effect);
     }
 
     @Override
-    public DrawAndLoseEFfect copy() {
-        return new DrawAndLoseEFfect(this);
+    public DrawAndLoseEffect copy() {
+        return new DrawAndLoseEffect(this);
     }
 }

@@ -48,7 +48,7 @@ public class ShanidSleepersScourgeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Gaddock Teeg");
         addCard(Zone.BATTLEFIELD, playerB, "Gaddock Teeg");
 
-        setStopAt(1, PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
         assertLife(playerA, 20);
         assertHandCount(playerA, 0);
