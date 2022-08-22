@@ -2,7 +2,6 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -49,6 +48,7 @@ public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect 
         this.ownerControl = ownerControl;
         this.haste = haste;
         this.attacking = attacking;
+        setText();
     }
 
     public ReturnSourceFromGraveyardToBattlefieldEffect(final ReturnSourceFromGraveyardToBattlefieldEffect effect) {
@@ -96,8 +96,7 @@ public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect 
         return true;
     }
 
-    @Override
-    public String getText(Mode mode) {
+    private void setText() {
         StringBuilder sb = new StringBuilder("return {this} from your graveyard to the battlefield");
         if (tapped) {
             sb.append(" tapped");
@@ -111,6 +110,6 @@ public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect 
         if (ownerControl) {
             sb.append(" under its owner's control");
         }
-        return sb.toString();
+        staticText = sb.toString();
     }
 }

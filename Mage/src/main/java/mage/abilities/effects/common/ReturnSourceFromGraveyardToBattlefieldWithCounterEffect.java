@@ -1,7 +1,6 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -25,6 +24,7 @@ public class ReturnSourceFromGraveyardToBattlefieldWithCounterEffect extends Ret
     public ReturnSourceFromGraveyardToBattlefieldWithCounterEffect(Counter counter, boolean tapped, boolean ownerControl, boolean haste, boolean attacking) {
         super(tapped, ownerControl, haste, attacking);
         this.counter = counter;
+        setText();
     }
 
     private ReturnSourceFromGraveyardToBattlefieldWithCounterEffect(final ReturnSourceFromGraveyardToBattlefieldWithCounterEffect effect) {
@@ -44,9 +44,8 @@ public class ReturnSourceFromGraveyardToBattlefieldWithCounterEffect extends Ret
         return super.apply(game, source);
     }
 
-    @Override
-    public String getText(Mode mode) {
-        StringBuilder sb = new StringBuilder(super.getText(mode));
+    private void setText() {
+        StringBuilder sb = new StringBuilder(staticText);
         sb.append(" with ");
         if (counter.getCount() == 1) {
             sb.append('a');
@@ -60,7 +59,7 @@ public class ReturnSourceFromGraveyardToBattlefieldWithCounterEffect extends Ret
             sb.append('s');
         }
         sb.append(" on it");
-        return sb.toString();
+        staticText = sb.toString();
     }
 }
 
