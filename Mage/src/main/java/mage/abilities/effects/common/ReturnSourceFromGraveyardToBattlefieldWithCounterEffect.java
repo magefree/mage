@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -20,7 +21,11 @@ public class ReturnSourceFromGraveyardToBattlefieldWithCounterEffect extends Ret
     public ReturnSourceFromGraveyardToBattlefieldWithCounterEffect(Counter counter, boolean tapped) {
         super(tapped);
         this.counter = counter;
-        setText();
+    }
+
+    public ReturnSourceFromGraveyardToBattlefieldWithCounterEffect(Counter counter, boolean tapped, boolean ownerControl, boolean haste, boolean attacking) {
+        super(tapped, ownerControl, haste, attacking);
+        this.counter = counter;
     }
 
     private ReturnSourceFromGraveyardToBattlefieldWithCounterEffect(final ReturnSourceFromGraveyardToBattlefieldWithCounterEffect effect) {
@@ -40,14 +45,9 @@ public class ReturnSourceFromGraveyardToBattlefieldWithCounterEffect extends Ret
         return super.apply(game, source);
     }
 
-    private void setText() {
-        StringBuilder sb = new StringBuilder("return it to the battlefield");
-        if (tapped) {
-            sb.append(" tapped");
-        }
-        if (ownerControl) {
-            sb.append(" under its owner's control");
-        }
+    @Override
+    public String getText(Mode mode) {
+        StringBuilder sb = new StringBuilder(super.getText(mode));
         sb.append(" with ");
         if (counter.getCount() == 1) {
             sb.append('a');
@@ -61,7 +61,7 @@ public class ReturnSourceFromGraveyardToBattlefieldWithCounterEffect extends Ret
             sb.append('s');
         }
         sb.append(" on it");
-        staticText = sb.toString();
+        return sb.toString();
     }
 }
 
