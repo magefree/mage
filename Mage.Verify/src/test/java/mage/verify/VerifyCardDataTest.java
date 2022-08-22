@@ -111,7 +111,6 @@ public class VerifyCardDataTest {
         // subtype
         skipListCreate(SKIP_LIST_SUBTYPE);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
-        skipListAddName(SKIP_LIST_SUBTYPE, "DMU", "Benalish Sleeper"); // temporary
 
         // number
         skipListCreate(SKIP_LIST_NUMBER);
@@ -1825,7 +1824,7 @@ public class VerifyCardDataTest {
                 || checkName.equals("Plains")
                 || checkName.equals("Mountain");
     }
-    
+
     private boolean isNonSnowBasicLandName(String name) {
         return name.equals("Island")
                 || name.equals("Forest")

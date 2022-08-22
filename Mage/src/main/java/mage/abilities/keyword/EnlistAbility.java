@@ -25,6 +25,6 @@ public class EnlistAbility extends StaticAbility {
     @Override
     public String getRule() {
         return "Enlist <i>(As this creature attacks, you may tap a nonattacking creature you control " +
-                "without summoning sickness. When you do, add its power to this creature’s until end of turn.)</i>";
+                "without summoning sickness. When you do, add its power to this creature's until end of turn.)</i>";
     }
 }
