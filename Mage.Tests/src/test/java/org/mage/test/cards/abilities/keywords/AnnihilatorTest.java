@@ -2,6 +2,7 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -51,7 +52,7 @@ public class AnnihilatorTest extends CardTestPlayerBase {
      * The It that Betrays trigger should have fissled, instead it stole her
      * from my battlefield and removed the persist counter.
      */
-    @Test
+    @Ignore
     public void testCardItThatBetrays() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
 

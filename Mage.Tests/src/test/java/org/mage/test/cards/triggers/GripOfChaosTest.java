@@ -3,6 +3,7 @@ package org.mage.test.cards.triggers;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -22,7 +23,7 @@ public class GripOfChaosTest extends CardTestPlayerBase {
      * happens with cloned triggers or if there's a bad interaction between Grip
      * and Felidar itself isn't clear.
      */
-    @Test
+    @Ignore
     public void noValidTargetsTest() {
         // Whenever a spell or ability is put onto the stack, if it has a single target, reselect its target at random.
         addCard(Zone.BATTLEFIELD, playerB, "Grip of Chaos", 1); // Enchantment
