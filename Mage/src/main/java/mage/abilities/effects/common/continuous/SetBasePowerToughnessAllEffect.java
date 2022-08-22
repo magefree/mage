@@ -21,22 +21,22 @@ import java.util.Locale;
 /**
  * @author LevelX2
  */
-public class SetPowerToughnessAllEffect extends ContinuousEffectImpl {
+public class SetBasePowerToughnessAllEffect extends ContinuousEffectImpl {
 
     private final FilterPermanent filter;
     private DynamicValue power;
     private DynamicValue toughness;
     private final boolean lockedInPT;
 
-    public SetPowerToughnessAllEffect(int power, int toughness, Duration duration) {
+    public SetBasePowerToughnessAllEffect(int power, int toughness, Duration duration) {
         this(StaticValue.get(power), StaticValue.get(toughness), duration, new FilterCreaturePermanent("Creatures"), true);
     }
 
-    public SetPowerToughnessAllEffect(int power, int toughness, Duration duration, FilterPermanent filter, boolean lockedInPT) {
+    public SetBasePowerToughnessAllEffect(int power, int toughness, Duration duration, FilterPermanent filter, boolean lockedInPT) {
         this(StaticValue.get(power), StaticValue.get(toughness), duration, filter, lockedInPT);
     }
 
-    public SetPowerToughnessAllEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterPermanent filter, boolean lockedInPT) {
+    public SetBasePowerToughnessAllEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterPermanent filter, boolean lockedInPT) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
@@ -44,7 +44,7 @@ public class SetPowerToughnessAllEffect extends ContinuousEffectImpl {
         this.lockedInPT = lockedInPT;
     }
 
-    public SetPowerToughnessAllEffect(final SetPowerToughnessAllEffect effect) {
+    public SetBasePowerToughnessAllEffect(final SetBasePowerToughnessAllEffect effect) {
         super(effect);
         this.power = effect.power;
         this.toughness = effect.toughness;
@@ -53,8 +53,8 @@ public class SetPowerToughnessAllEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public SetPowerToughnessAllEffect copy() {
-        return new SetPowerToughnessAllEffect(this);
+    public SetBasePowerToughnessAllEffect copy() {
+        return new SetBasePowerToughnessAllEffect(this);
     }
 
     @Override

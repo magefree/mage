@@ -9,7 +9,7 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessAllEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -87,7 +87,7 @@ class BrineHagEffect extends OneShotEffect {
         if (!list.isEmpty()) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             filter.add(new PermanentInListPredicate(list));
-            game.addEffect(new SetPowerToughnessAllEffect(0, 2, Duration.Custom, filter, true), source);
+            game.addEffect(new SetBasePowerToughnessAllEffect(0, 2, Duration.Custom, filter, true), source);
         }
         return true;
     }
