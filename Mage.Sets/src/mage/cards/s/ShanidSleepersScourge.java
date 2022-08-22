@@ -1,20 +1,22 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.ControllerPlaysLandTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.MenaceAbility;
+import mage.abilities.meta.OrTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -48,7 +50,13 @@ public final class ShanidSleepersScourge extends CardImpl {
                 otherLegendaryCreaturesFilter,
                 true)));
         // Whenever you play a legendary land or cast a legendary spell, you draw a card and you lose 1 life.
-        this.addAbility(new DrawAndLoseLife(1, 1));
+        this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD,
+                new DrawAndLoseEFfect(1,1),
+                false,
+                "Whenever you play a legendary land or cast a legendary spell, ",
+                new ControllerPlaysLandTriggeredAbility(Zone.BATTLEFIELD, null, true),
+                new SpellCastControllerTriggeredAbility(null, true)
+        ));
     }
 
     private ShanidSleepersScourge(final ShanidSleepersScourge card) {
@@ -62,54 +70,38 @@ public final class ShanidSleepersScourge extends CardImpl {
 }
 
 
-class DrawAndLoseLife extends TriggeredAbilityImpl {
+class DrawAndLoseEFfect extends OneShotEffect {
 
-    public DrawAndLoseLife(int drawAmount, int loseLifeAmount) {
-        super(Zone.BATTLEFIELD, new LoseLifeSourceControllerEffect(loseLifeAmount), false);
-        this.addEffect(new DrawCardSourceControllerEffect(drawAmount));
-    }
-
-    public DrawAndLoseLife(DrawAndLoseLife ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.LAND_PLAYED || event.getType() == GameEvent.EventType.SPELL_CAST;
+    DrawAndLoseEFfect(int drawAmount, int loseLifeAMount) {
+        super(Outcome.Benefit);
+        String cardRule = "a card";
+        if(drawAmount > 1) {
+            cardRule = String.format("%d cards", drawAmount);
+        }
+        this.staticText = String.format("draw %s and you lose %d life",cardRule,loseLifeAMount);
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId().equals(this.getControllerId())) {
-            return false;
-        } else if (event.getType() == GameEvent.EventType.LAND_PLAYED) {
-            Permanent land = game.getPermanent(event.getTargetId());
-            return land != null && land.getControllerId().equals(this.getControllerId()) && land.getSuperType().contains(SuperType.LEGENDARY);
-        } else if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            return spell != null && spell.getControllerId().equals(this.getControllerId()) && spell.getSuperType().contains(SuperType.LEGENDARY);
-        } else {
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
+
+        Effect drawEffectController = new DrawCardSourceControllerEffect(1);
+        drawEffectController.apply(game, source);
+        Effect drawEffectOpponent = new LoseLifeSourceControllerEffect(1);
+        drawEffectOpponent.apply(game, source);
+
+        return true;
+    }
+
+    private DrawAndLoseEFfect(final DrawAndLoseEFfect effect) {
+        super(effect);
     }
 
     @Override
-    public boolean checkInterveningIfClause(Game game) {
-        Player player = game.getPlayer(this.getControllerId());
-        if (player != null) {
-            return player.getLandsPlayed() != 1;
-        }
-        return false;
+    public DrawAndLoseEFfect copy() {
+        return new DrawAndLoseEFfect(this);
     }
-
-    @Override
-    public DrawAndLoseLife copy() {
-        return new DrawAndLoseLife(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you play a legendary land or cast a legendary spell, you draw a card and you lose 1 life.";
-    }
-
 }
