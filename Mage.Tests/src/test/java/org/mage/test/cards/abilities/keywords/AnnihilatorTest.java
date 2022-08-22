@@ -66,10 +66,15 @@ public class AnnihilatorTest extends CardTestPlayerBase {
         // Whenever an opponent sacrifices a nontoken permanent, put that card onto the battlefield under your control.
         addCard(Zone.BATTLEFIELD, playerB, "It That Betrays");
 
+        setStrictChooseMode(true);
+
         attack(2, playerB, "It That Betrays");
         setChoice(playerA, "Academy Rector"); // Annihilator
         setChoice(playerA, "Plains"); // Annihilator
         castSpell(2, PhaseStep.DECLARE_ATTACKERS, playerA, "Cauldron Haze", "Academy Rector", "Annihilator");
+        setChoice(playerB, "Whenever an opponent");  // Put the sacrifice triggers on the stack, order doesn't matter
+        setChoice(playerA, "persist"); // Put the persist trigger on the stack first
+        setChoice(playerA, "No");  // Do not exile the Academy Rector
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
