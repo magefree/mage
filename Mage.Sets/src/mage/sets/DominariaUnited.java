@@ -4,10 +4,15 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author TheElk801
  */
 public final class DominariaUnited extends ExpansionSet {
+
+    private static final List<String> unfinished = Arrays.asList("Guardian of New Benalia", "Keldon Flamesage", "Yavimaya Steelcrusher");
 
     private static final DominariaUnited instance = new DominariaUnited();
 
@@ -90,6 +95,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Vineshaper Prodigy", 187, Rarity.COMMON, mage.cards.v.VineshaperProdigy.class));
         cards.add(new SetCardInfo("Yavimaya Coast", 261, Rarity.RARE, mage.cards.y.YavimayaCoast.class));
         cards.add(new SetCardInfo("Yavimaya Iconoclast", 190, Rarity.UNCOMMON, mage.cards.y.YavimayaIconoclast.class));
+        cards.add(new SetCardInfo("Yavimaya Steelcrusher", 152, Rarity.COMMON, mage.cards.y.YavimayaSteelcrusher.class));
     }
 
 //    @Override
