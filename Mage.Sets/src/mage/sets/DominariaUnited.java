@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class DominariaUnited extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Guardian of New Benalia", "Keldon Flamesage", "Yavimaya Steelcrusher");
+    private static final List<String> unfinished = Arrays.asList("Argivian Cavalier", "Coalition Skyknight", "Guardian of New Benalia", "Keldon Flamesage", "Yavimaya Steelcrusher");
 
     private static final DominariaUnited instance = new DominariaUnited();
 
