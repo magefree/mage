@@ -35,6 +35,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Adarkar Wastes", 243, Rarity.RARE, mage.cards.a.AdarkarWastes.class));
         cards.add(new SetCardInfo("Ajani, Sleeper Agent", 192, Rarity.MYTHIC, mage.cards.a.AjaniSleeperAgent.class));
         cards.add(new SetCardInfo("Archangel of Wrath", 3, Rarity.RARE, mage.cards.a.ArchangelOfWrath.class));
+        cards.add(new SetCardInfo("Argivian Cavalier", 4, Rarity.COMMON, mage.cards.a.ArgivianCavalier.class));
         cards.add(new SetCardInfo("Aron, Benalia's Ruin", 292, Rarity.UNCOMMON, mage.cards.a.AronBenaliasRuin.class));
         cards.add(new SetCardInfo("Astor, Bearer of Blades", 194, Rarity.RARE, mage.cards.a.AstorBearerOfBlades.class));
         cards.add(new SetCardInfo("Balduvian Atrocity", 79, Rarity.UNCOMMON, mage.cards.b.BalduvianAtrocity.class));
