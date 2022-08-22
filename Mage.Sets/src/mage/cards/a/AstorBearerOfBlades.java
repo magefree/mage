@@ -56,7 +56,7 @@ public final class AstorBearerOfBlades extends CardImpl {
 
         // Equipment you control have equip {1}.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                new EquipAbility(1), Duration.WhileOnBattlefield,
+                new EquipAbility(1, false), Duration.WhileOnBattlefield,
                 StaticFilters.FILTER_PERMANENT_EQUIPMENT
         )));
 
