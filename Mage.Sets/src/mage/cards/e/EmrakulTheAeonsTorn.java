@@ -16,7 +16,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterStackObject;
+import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 
@@ -25,7 +25,7 @@ import mage.filter.predicate.mageobject.ColorlessPredicate;
  */
 public final class EmrakulTheAeonsTorn extends CardImpl {
 
-    private static final FilterStackObject filter = new FilterStackObject("spells that are one or more colors");
+    private static final FilterSpell filter = new FilterSpell("spells that are one or more colors");
 
     static {
         filter.add(Predicates.not(ColorlessPredicate.instance));
