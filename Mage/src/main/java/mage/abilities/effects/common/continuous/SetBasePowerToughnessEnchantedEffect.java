@@ -13,31 +13,31 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class SetPowerToughnessEnchantedEffect extends ContinuousEffectImpl {
+public class SetBasePowerToughnessEnchantedEffect extends ContinuousEffectImpl {
 
     private final int power;
     private final int toughness;
 
-    public SetPowerToughnessEnchantedEffect() {
+    public SetBasePowerToughnessEnchantedEffect() {
         this(0, 2);
     }
 
-    public SetPowerToughnessEnchantedEffect(int power, int toughness) {
+    public SetBasePowerToughnessEnchantedEffect(int power, int toughness) {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
         staticText = "Enchanted creature has base power and toughness " + power + "/" + toughness;
         this.power = power;
         this.toughness = toughness;
     }
 
-    public SetPowerToughnessEnchantedEffect(final SetPowerToughnessEnchantedEffect effect) {
+    public SetBasePowerToughnessEnchantedEffect(final SetBasePowerToughnessEnchantedEffect effect) {
         super(effect);
         this.power = effect.power;
         this.toughness = effect.toughness;
     }
 
     @Override
-    public SetPowerToughnessEnchantedEffect copy() {
-        return new SetPowerToughnessEnchantedEffect(this);
+    public SetBasePowerToughnessEnchantedEffect copy() {
+        return new SetBasePowerToughnessEnchantedEffect(this);
     }
 
     @Override
