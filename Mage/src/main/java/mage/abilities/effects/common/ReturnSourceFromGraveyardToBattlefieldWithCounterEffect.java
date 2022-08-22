@@ -19,8 +19,7 @@ public class ReturnSourceFromGraveyardToBattlefieldWithCounterEffect extends Ret
     private final Counter counter;
 
     public ReturnSourceFromGraveyardToBattlefieldWithCounterEffect(Counter counter, boolean tapped) {
-        super(tapped);
-        this.counter = counter;
+        this(counter, tapped, true, false, false);
     }
 
     public ReturnSourceFromGraveyardToBattlefieldWithCounterEffect(Counter counter, boolean tapped, boolean ownerControl, boolean haste, boolean attacking) {
