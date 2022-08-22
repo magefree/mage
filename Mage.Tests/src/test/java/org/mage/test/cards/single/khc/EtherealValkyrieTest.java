@@ -162,6 +162,7 @@ public class EtherealValkyrieTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, etherealValkyrie);
         addTarget(playerA, alrund);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, etherealValkyrie);
         addTarget(playerA, alrund);
 
@@ -170,6 +171,7 @@ public class EtherealValkyrieTest extends CardTestPlayerBase {
         assertExileCount(playerA, alrund, 2);
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell {1}");
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell {U}");
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
