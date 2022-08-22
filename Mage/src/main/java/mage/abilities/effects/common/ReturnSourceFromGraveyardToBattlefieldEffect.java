@@ -48,7 +48,7 @@ public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect 
         this.ownerControl = ownerControl;
         this.haste = haste;
         this.attacking = attacking;
-        setText();
+        this.staticText = setText();
     }
 
     public ReturnSourceFromGraveyardToBattlefieldEffect(final ReturnSourceFromGraveyardToBattlefieldEffect effect) {
@@ -96,7 +96,7 @@ public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect 
         return true;
     }
 
-    private void setText() {
+    private String setText() {
         StringBuilder sb = new StringBuilder("return {this} from your graveyard to the battlefield");
         if (tapped) {
             sb.append(" tapped");
@@ -110,6 +110,6 @@ public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect 
         if (ownerControl) {
             sb.append(" under its owner's control");
         }
-        staticText = sb.toString();
+        return sb.toString();
     }
 }
