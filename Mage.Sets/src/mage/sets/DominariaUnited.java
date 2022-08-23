@@ -95,6 +95,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Soul of Windgrace", 220, Rarity.MYTHIC, mage.cards.s.SoulOfWindgrace.class));
         cards.add(new SetCardInfo("Stall for Time", 34, Rarity.COMMON, mage.cards.s.StallForTime.class));
         cards.add(new SetCardInfo("Strength of the Coalition", 180, Rarity.UNCOMMON, mage.cards.s.StrengthOfTheCoalition.class));
+        cards.add(new SetCardInfo("Stronghold Arena", 110, Rarity.RARE, mage.cards.s.StrongholdArena.class));
         cards.add(new SetCardInfo("Sulfurous Springs", 256, Rarity.RARE, mage.cards.s.SulfurousSprings.class));
         cards.add(new SetCardInfo("Swamp", 268, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Take Up the Shield", 35, Rarity.COMMON, mage.cards.t.TakeUpTheShield.class));

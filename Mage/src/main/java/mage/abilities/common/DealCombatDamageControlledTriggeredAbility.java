@@ -36,11 +36,15 @@ public class DealCombatDamageControlledTriggeredAbility extends TriggeredAbility
     }
 
     public DealCombatDamageControlledTriggeredAbility(Zone zone, Effect effect, boolean setTargetPointer, boolean onlyOpponents) {
-        super(zone, effect, false);
+        this(zone, effect, setTargetPointer, onlyOpponents, false);
+    }
+
+    public DealCombatDamageControlledTriggeredAbility(Zone zone, Effect effect, boolean setTargetPointer, boolean onlyOpponents, boolean optional) {
+        super(zone, effect, optional);
         this.setTargetPointer = setTargetPointer;
         this.onlyOpponents = onlyOpponents;
         setTriggerPhrase("Whenever one or more creatures you control deal combat damage to "
-                              + (onlyOpponents ? "an opponent" : "a player") + ", ");
+                + (onlyOpponents ? "an opponent" : "a player") + ", ");
     }
 
     public DealCombatDamageControlledTriggeredAbility(final DealCombatDamageControlledTriggeredAbility ability) {
