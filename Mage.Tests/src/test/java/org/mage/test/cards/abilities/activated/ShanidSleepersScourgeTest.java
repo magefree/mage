@@ -53,8 +53,8 @@ public class ShanidSleepersScourgeTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertHandCount(playerA, 0);
         assertLife(playerB, 20);
-        assertAbility(playerA, "Gaddock Teeg", new MenaceAbility(), true);
-        assertAbility(playerB, "Gaddock Teeg", new MenaceAbility(), false);
+        assertAbility(playerA, "Gaddock Teeg", new MenaceAbility(false), true);
+        assertAbility(playerB, "Gaddock Teeg", new MenaceAbility(false), false);
     }
 
 }
