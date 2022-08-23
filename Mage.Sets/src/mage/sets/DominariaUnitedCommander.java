@@ -30,6 +30,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Nethroi, Apex of Death", 163, Rarity.MYTHIC, mage.cards.n.NethroiApexOfDeath.class));
         cards.add(new SetCardInfo("O-Kagachi, Vengeful Kami", 164, Rarity.MYTHIC, mage.cards.o.OKagachiVengefulKami.class));
         cards.add(new SetCardInfo("Path to Exile", 104, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
+        cards.add(new SetCardInfo("Shanid, Sleepers' Scourge", 4, Rarity.MYTHIC, mage.cards.s.ShanidSleepersScourge.class));
         cards.add(new SetCardInfo("Surrak Dragonclaw", 169, Rarity.MYTHIC, mage.cards.s.SurrakDragonclaw.class));
         cards.add(new SetCardInfo("Thrill of Possibility", 127, Rarity.COMMON, mage.cards.t.ThrillOfPossibility.class));
         cards.add(new SetCardInfo("Two-Headed Hellkite", 14, Rarity.RARE, mage.cards.t.TwoHeadedHellkite.class));
