@@ -1,4 +1,4 @@
-package org.mage.test.cards.abilities.oneshot.exile;
+package org.mage.test.cards.single.clb;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
