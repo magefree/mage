@@ -78,12 +78,13 @@ class MirriWeatherlightDuelistBlockRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canBlock(Permanent attacker, Permanent newBlocker, Ability source, Game game, boolean canUseChooseDialogs) {
         if (attacker == null) {
             return true;
         }
-        for (UUID creature : game.getCombat().getBlockers()) {
-            if (game.getPlayer(game.getPermanent(creature).getOwnerId()).hasOpponent(attacker.getControllerId(), game)) {
+        for (UUID creatureId : game.getCombat().getBlockers()) {
+            Permanent existingBlocker = game.getPermanent(creatureId);
+            if (game.getPlayer(existingBlocker.getControllerId()).hasOpponent(attacker.getControllerId(), game) && existingBlocker.isControlledBy(newBlocker.getControllerId())) {
                 return false;
             }
         }
