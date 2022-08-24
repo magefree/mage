@@ -116,6 +116,8 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Yavimaya Coast", 261, Rarity.RARE, mage.cards.y.YavimayaCoast.class));
         cards.add(new SetCardInfo("Yavimaya Iconoclast", 190, Rarity.UNCOMMON, mage.cards.y.YavimayaIconoclast.class));
         cards.add(new SetCardInfo("Yavimaya Steelcrusher", 152, Rarity.COMMON, mage.cards.y.YavimayaSteelcrusher.class));
+        cards.add(new SetCardInfo("Zur, Eternal Schemer", 228, Rarity.MYTHIC, mage.cards.z.ZurEternalSchemer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Zur, Eternal Schemer", 327, Rarity.MYTHIC, mage.cards.z.ZurEternalSchemer.class, NON_FULL_USE_VARIOUS));
     }
 
 //    @Override
