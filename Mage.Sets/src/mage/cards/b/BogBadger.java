@@ -35,7 +35,8 @@ public final class BogBadger extends CardImpl {
                 new EntersBattlefieldTriggeredAbility(new GainAbilityControlledEffect(
                         new MenaceAbility(false), Duration.EndOfTurn
                 )), KickedCondition.ONCE, "When {this} enters the battlefield, " +
-                "if it was kicked, creatures you control gain menace until end of turn."
+                "if it was kicked, creatures you control gain menace until end of turn. " +
+                "<i>(A creature with menace can't be blocked except by two or more creatures.)</i>"
         ));
     }
 
