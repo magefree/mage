@@ -90,6 +90,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Pilfer", 102, Rarity.UNCOMMON, mage.cards.p.Pilfer.class));
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Protect the Negotiators", 62, Rarity.UNCOMMON, mage.cards.p.ProtectTheNegotiators.class));
+        cards.add(new SetCardInfo("Quirion Beastcaller", 175, Rarity.RARE, mage.cards.q.QuirionBeastcaller.class));
         cards.add(new SetCardInfo("Raff, Weatherlight Stalwart", 212, Rarity.UNCOMMON, mage.cards.r.RaffWeatherlightStalwart.class));
         cards.add(new SetCardInfo("Resolute Reinforcements", 29, Rarity.UNCOMMON, mage.cards.r.ResoluteReinforcements.class));
         cards.add(new SetCardInfo("Rona's Vortex", 63, Rarity.UNCOMMON, mage.cards.r.RonasVortex.class));
