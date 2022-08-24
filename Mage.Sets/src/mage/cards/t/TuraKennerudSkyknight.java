@@ -17,9 +17,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class TuraKennerüdSkyknight extends CardImpl {
+public final class TuraKennerudSkyknight extends CardImpl {
 
-    public TuraKennerüdSkyknight(UUID ownerId, CardSetInfo setInfo) {
+    public TuraKennerudSkyknight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}{U}");
 
         this.addSuperType(SuperType.LEGENDARY);
@@ -38,12 +38,12 @@ public final class TuraKennerüdSkyknight extends CardImpl {
         ));
     }
 
-    private TuraKennerüdSkyknight(final TuraKennerüdSkyknight card) {
+    private TuraKennerudSkyknight(final TuraKennerudSkyknight card) {
         super(card);
     }
 
     @Override
-    public TuraKennerüdSkyknight copy() {
-        return new TuraKennerüdSkyknight(this);
+    public TuraKennerudSkyknight copy() {
+        return new TuraKennerudSkyknight(this);
     }
 }
