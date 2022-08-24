@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class DominariaUnited extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Argivian Cavalier", "Coalition Skyknight", "Guardian of New Benalia", "Keldon Flamesage", "Yavimaya Steelcrusher");
+    private static final List<String> unfinished = Arrays.asList("Argivian Cavalier", "Coalition Skyknight", "Guardian of New Benalia", "Keldon Flamesage", "Linebreaker Baloth", "Yavimaya Steelcrusher");
 
     private static final DominariaUnited instance = new DominariaUnited();
 
@@ -36,7 +36,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Ajani, Sleeper Agent", 192, Rarity.MYTHIC, mage.cards.a.AjaniSleeperAgent.class));
         cards.add(new SetCardInfo("Archangel of Wrath", 3, Rarity.RARE, mage.cards.a.ArchangelOfWrath.class));
         cards.add(new SetCardInfo("Argivian Cavalier", 4, Rarity.COMMON, mage.cards.a.ArgivianCavalier.class));
-        cards.add(new SetCardInfo("Aron, Benalia's Ruin", 292, Rarity.UNCOMMON, mage.cards.a.AronBenaliasRuin.class));
+        cards.add(new SetCardInfo("Aron, Benalia's Ruin", 193, Rarity.UNCOMMON, mage.cards.a.AronBenaliasRuin.class));
         cards.add(new SetCardInfo("Astor, Bearer of Blades", 194, Rarity.RARE, mage.cards.a.AstorBearerOfBlades.class));
         cards.add(new SetCardInfo("Automatic Librarian", 229, Rarity.COMMON, mage.cards.a.AutomaticLibrarian.class));
         cards.add(new SetCardInfo("Balduvian Atrocity", 79, Rarity.UNCOMMON, mage.cards.b.BalduvianAtrocity.class));
@@ -84,9 +84,11 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Molten Monstrosity", 139, Rarity.COMMON, mage.cards.m.MoltenMonstrosity.class));
         cards.add(new SetCardInfo("Monstrous War-Leech", 98, Rarity.UNCOMMON, mage.cards.m.MonstrousWarLeech.class));
         cards.add(new SetCardInfo("Mountain", 271, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Negate", 58, Rarity.COMMON, mage.cards.n.Negate.class));
         cards.add(new SetCardInfo("Nishoba Brawler", 174, Rarity.UNCOMMON, mage.cards.n.NishobaBrawler.class));
         cards.add(new SetCardInfo("Phoenix Chick", 140, Rarity.UNCOMMON, mage.cards.p.PhoenixChick.class));
         cards.add(new SetCardInfo("Phyrexian Espionage", 60, Rarity.COMMON, mage.cards.p.PhyrexianEspionage.class));
+        cards.add(new SetCardInfo("Phyrexian Rager", 99, Rarity.COMMON, mage.cards.p.PhyrexianRager.class));
         cards.add(new SetCardInfo("Pilfer", 102, Rarity.UNCOMMON, mage.cards.p.Pilfer.class));
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Protect the Negotiators", 62, Rarity.UNCOMMON, mage.cards.p.ProtectTheNegotiators.class));
