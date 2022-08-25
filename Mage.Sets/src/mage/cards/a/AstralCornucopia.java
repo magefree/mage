@@ -107,6 +107,6 @@ class AstralCornucopiaManaEffect extends ManaEffect {
         }
 
         ManaType chosenType = ManaType.findByName(choice.getChoice());
-        return chosenType == null ? null : new Mana(chosenType);
+        return chosenType == null ? null : new Mana(chosenType, counters);
     }
 }
