@@ -84,7 +84,7 @@ public class TheTarrasqueTest extends CardTestPlayerBase {
         setChoice(playerA, true);
         setChoice(playerA, tarrasque);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, sakashima);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, sakashima);
         setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.END_TURN);

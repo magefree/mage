@@ -32,7 +32,7 @@ public class GreenbeltRampagerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Greenbelt Rampager");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Greenbelt Rampager");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Greenbelt Rampager", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Greenbelt Rampager");
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
@@ -48,8 +48,8 @@ public class GreenbeltRampagerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Greenbelt Rampager");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Greenbelt Rampager");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Greenbelt Rampager");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Greenbelt Rampager", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Greenbelt Rampager", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Greenbelt Rampager");
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
@@ -74,7 +74,7 @@ public class GreenbeltRampagerTest extends CardTestPlayerBase {
 
         skipInitShuffling();
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gonti, Lord of Luxury");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gonti, Lord of Luxury", true);
         // addTarget(playerA, playerB); playerB is autochosen since only option
         setChoice(playerA, "Greenbelt Rampager");
 

@@ -73,6 +73,7 @@ public class SpellskiteTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Frost Titan");
         addTarget(playerB, "Silvercoat Lion");
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN, 1);
 
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{U/P}: Change a target", "stack ability (Whenever {this} enters ");
 
@@ -154,7 +155,7 @@ public class SpellskiteTest extends CardTestPlayerBase {
         setModeChoice(playerA, "2"); // return target permanent to its owner's hand
         setModeChoice(playerA, "3"); // tap all creatures your opponents control
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{U/P}: Change a target of target spell or ability to {this}.", "Cryptic Command");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{U/P}: Change a target of target", "Cryptic Command", "Cryptic Command");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();

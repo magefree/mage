@@ -20,7 +20,7 @@ public class EmrakulThePromisedEndTest extends CardTestPlayerBase {
         // After that turn, that player takes an extra turn.
         addCard(Zone.HAND, playerB, "Emrakul, the Promised End");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Teferi, Mage of Zhalfir");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Teferi, Mage of Zhalfir",  true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Emrakul, the Promised End");
         addTarget(playerB, playerA);
 
@@ -37,7 +37,7 @@ public class EmrakulThePromisedEndTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Teferi, Mage of Zhalfir");
         addCard(Zone.HAND, playerB, "Emrakul, the Promised End");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Teferi, Mage of Zhalfir");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Teferi, Mage of Zhalfir", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Emrakul, the Promised End");
         addTarget(playerB, playerA);
 
@@ -54,7 +54,7 @@ public class EmrakulThePromisedEndTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Teferi, Mage of Zhalfir");
         addCard(Zone.HAND, playerB, "Emrakul, the Promised End");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Teferi, Mage of Zhalfir");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Teferi, Mage of Zhalfir", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Emrakul, the Promised End");
         addTarget(playerB, playerA);
 

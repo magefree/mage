@@ -19,6 +19,7 @@ public class StoryweaveTest extends CardTestPlayerBase {
         // casting the spell is a pain to set up, this is easier
         addCustomCardWithAbility("tester", playerA, Storyweave.makeAbility());
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
     }
 
     @Test
@@ -28,7 +29,7 @@ public class StoryweaveTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, colossus);
 
         addEffectToGame();
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, fang);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, fang, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, colossus);
 
         setStrictChooseMode(true);
@@ -46,7 +47,7 @@ public class StoryweaveTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, fang);
 
         addEffectToGame();
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, intervention);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, intervention, true);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, fang);
 
         setStrictChooseMode(true);

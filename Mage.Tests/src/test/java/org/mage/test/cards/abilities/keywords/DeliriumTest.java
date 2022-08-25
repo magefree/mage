@@ -103,6 +103,7 @@ public class DeliriumTest extends CardTestPlayerBaseWithAIHelps {
         addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 4);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spirit Mantle", "Balduvian Bears");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Descend upon the Sinful");
 
         setStrictChooseMode(true);

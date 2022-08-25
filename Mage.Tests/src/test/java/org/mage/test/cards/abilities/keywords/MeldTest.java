@@ -42,8 +42,8 @@ public class MeldTest extends CardTestPlayerBase {
 
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
-            if (!e.getMessage().contains("Player PlayerB must have 0 actions but found 1")) {
-                Assert.fail("Should have thrown error about cannot attack, but got:\n" + e.getMessage());
+            if (!e.getMessage().contains("Cast Silvercoat Lion")) {
+                Assert.fail("Should have thrown error about casting Silvercoat Lion, but got:\n" + e.getMessage());
             }
         }
 
@@ -85,7 +85,7 @@ public class MeldTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bruna, the Fading Light");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Silvercoat Lion");
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Gisela, the Broken Blade");
-        castSpell(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Vanish into Memory", "Brisela, Voice of Nightmares");
+        castSpell(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Vanish into Memory", "Brisela, Voice of Nightmares", true);
         castSpell(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Silvercoat Lion");
 
         setStopAt(4, PhaseStep.BEGIN_COMBAT);
@@ -127,10 +127,11 @@ public class MeldTest extends CardTestPlayerBase {
         // If you do, discard cards equal to that creature's toughness.
         addCard(Zone.HAND, playerB, "Vanish into Memory", 1); // Instant {2}{W}{U}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bruna, the Fading Light");
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Silvercoat Lion");
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Gisela, the Broken Blade");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bruna, the Fading Light", true);
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Silvercoat Lion", true);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Gisela, the Broken Blade", true);
         castSpell(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Vanish into Memory", "Brisela, Voice of Nightmares");
+        waitStackResolved(4, PhaseStep.PRECOMBAT_MAIN);
         castSpell(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Silvercoat Lion");
 
         // End step turn 7 the meld takes place again

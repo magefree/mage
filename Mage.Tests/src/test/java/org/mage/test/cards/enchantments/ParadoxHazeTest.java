@@ -23,6 +23,7 @@ public class ParadoxHazeTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Verdant Force", 1); // {5}{G}{G}{G}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Paradox Haze", playerA);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Verdant Force");
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
@@ -48,7 +49,8 @@ public class ParadoxHazeTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Verdant Force", 1); // {5}{G}{G}{G}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Paradox Haze", playerA);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Copy Enchantment");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Copy Enchantment", true);
         setChoice(playerA, "Paradox Haze");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Verdant Force");
 

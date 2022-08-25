@@ -46,7 +46,9 @@ public class SanctifierEnVecTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Midnight Reaper");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Grizzly Bears");
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Divination");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "One with Nothing");
         setStopAt(2, PhaseStep.END_TURN);
@@ -77,7 +79,7 @@ public class SanctifierEnVecTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, painter);
         setStrictChooseMode(true);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, painter);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, painter, true);
         setChoice(playerA, "Black");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, sanctifier);
         setStopAt(1, PhaseStep.END_TURN);
@@ -114,6 +116,7 @@ public class SanctifierEnVecTest extends CardTestPlayerBase {
         setChoice(playerA, "Red");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Midnight Reaper");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Grizzly Bears");
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Divination");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "One with Nothing");
         setStopAt(2, PhaseStep.END_TURN);

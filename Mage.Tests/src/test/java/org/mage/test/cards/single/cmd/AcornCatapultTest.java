@@ -23,7 +23,7 @@ public class AcornCatapultTest extends CardTestPlayerBase {
         // {1}{B}, {T}: Target player loses 1 life.
         addCard(Zone.BATTLEFIELD, playerB, "Acolyte of Xathrid"); // Creature 0/1
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Acorn Catapult");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Acorn Catapult", true);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}, {T}:", "Acolyte of Xathrid");
 
@@ -46,7 +46,7 @@ public class AcornCatapultTest extends CardTestPlayerBase {
         // That permanent's controller or that player creates a 1/1 green Squirrel creature token.
         addCard(Zone.HAND, playerA, "Acorn Catapult"); //Artifact {4}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Acorn Catapult");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Acorn Catapult", true);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}, {T}:", playerB);
 

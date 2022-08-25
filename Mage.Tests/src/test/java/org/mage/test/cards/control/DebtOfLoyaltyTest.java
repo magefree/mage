@@ -26,6 +26,7 @@ public class DebtOfLoyaltyTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Metallic Sliver"); // 1/1
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Debt of Loyalty", "Metallic Sliver");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tremor");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

@@ -27,7 +27,7 @@ public class TheUrDragonTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Dragon Hatchling", 2); // Creature Dragon {1}{R}  (0/1)
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dragon Hatchling");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dragon Hatchling", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dragon Hatchling");
         
         attack(3, playerA, "The Ur-Dragon");

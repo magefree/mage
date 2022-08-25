@@ -85,8 +85,8 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest");
         addCard(Zone.HAND, playerA, "Curious Pair");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair", true);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -154,8 +154,8 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Edgewall Innkeeper");
         addCard(Zone.HAND, playerA, "Curious Pair");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair", true);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -319,8 +319,9 @@ public class AdventureCardsTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Psychic Intrusion", playerB);
         setChoice(playerA, "Curious Pair");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair");
 
         setStrictChooseMode(true);
@@ -361,8 +362,10 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Rimrock Knight", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Boulder Rush", "Eager Cadet");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Boulder Rush", "Eager Cadet");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rimrock Knight");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rimrock Knight", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rimrock Knight");
 
         setStrictChooseMode(true);

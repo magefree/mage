@@ -417,6 +417,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Birchlore Rangers");
         setChoice(playerA, true); // cast it face down as 2/2 creature
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Swords to Plowshares", "");
 
@@ -456,6 +457,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ashcloud Phoenix");
         setChoice(playerA, true); // cast it face down as 2/2 creature
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", EmptyNames.FACE_DOWN_CREATURE.toString());
 
@@ -661,7 +663,7 @@ public class MorphTest extends CardTestPlayerBase {
         try {
             execute();
         } catch (Throwable e) {
-            if (!e.getMessage().contains("Can't find available command - activate:Cast Rattleclaw Mystic (use checkPlayableAbility for \"non available\" checks)")) {
+            if (!e.getMessage().contains("Cast Rattleclaw Mystic")) {
                 Assert.fail("Should have gotten an error about not being able to cast Rattleclaw, but got:\n" + e.getMessage());
             }
         }
@@ -899,6 +901,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Quicksilver Dragon");
         setChoice(playerA, true); // cast it face down as 2/2 creature
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", EmptyNames.FACE_DOWN_CREATURE.toString());
 

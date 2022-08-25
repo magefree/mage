@@ -112,10 +112,11 @@ public class PreventAllDamageTest extends CardTestPlayerBase {
 
         attack(1, playerA, "Abbey Griffin");
         
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", playerA);                
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Abbey Griffin");                
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Abbey Griffin");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Fire Ambush", playerA);
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Fire Ambush", "Abbey Griffin");
 
         attack(2, playerB, "Silvercoat Lion");
@@ -134,6 +135,5 @@ public class PreventAllDamageTest extends CardTestPlayerBase {
 
         assertLife(playerA, 18);
         assertLife(playerB, 18);
-
     }
 }

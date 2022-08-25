@@ -73,7 +73,7 @@ public class GideonTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gideon, Champion of Justice");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gideon, Champion of Justice", true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "0: Until end of turn");
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Put a loyalty counter on", playerB);

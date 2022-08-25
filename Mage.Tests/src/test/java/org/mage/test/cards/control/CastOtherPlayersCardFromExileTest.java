@@ -52,10 +52,11 @@ public class CastOtherPlayersCardFromExileTest extends CardTestPlayerBase {
 
 //        setStrictChooseMode(true);
 
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Bottle Gnomes");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Bottle Gnomes", true);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Sacrifice");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Wildwood Rebirth", "Bottle Gnomes");
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Bottle Gnomes");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
@@ -86,6 +87,7 @@ public class CastOtherPlayersCardFromExileTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Bottle Gnomes");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Saving Grasp", "Bottle Gnomes");
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Bottle Gnomes");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);

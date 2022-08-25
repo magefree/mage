@@ -27,6 +27,7 @@ public class BruenorBattlehammerTest extends CardTestPlayerBase {
         // activate {2} for free
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {2}", lion);
         setChoice(playerA, true); // use for free
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         // activate {1} for mana
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {1}", lion);
 

@@ -58,7 +58,7 @@ public class JourneyToNowhereTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
     }
 
-    /*
+    /**
      10/1/2009: If Journey to Nowhere leaves the battlefield before its first ability has resolved, its second ability will
      trigger and do nothing. Then its first ability will resolve and exile the targeted creature forever.
      */
@@ -73,7 +73,7 @@ public class JourneyToNowhereTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Journey to Nowhere");
         // Silvercoat Lion" is auto-chosen since only target
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Disenchant", "Journey to Nowhere");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Disenchant", "Journey to Nowhere", "When {this} enters");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

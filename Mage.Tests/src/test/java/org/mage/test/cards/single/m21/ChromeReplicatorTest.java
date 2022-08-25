@@ -51,7 +51,7 @@ public class ChromeReplicatorTest extends CardTestPlayerBase {
         // create 2 soldier tokens
         addCard(Zone.HAND, playerA, "Raise the Alarm");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Raise the Alarm");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Raise the Alarm", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chrome Replicator");
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);

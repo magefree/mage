@@ -48,7 +48,7 @@ public class AegisAngelTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void testAngelDiesBeforeEntering() {
+    public void testAngelDiesBeforeETBResolves() {
         addCard(Zone.BATTLEFIELD, playerA, "Scrubland", 9);
         addCard(Zone.BATTLEFIELD, playerA, lion);
         addCard(Zone.HAND, playerA, angel);
@@ -56,8 +56,8 @@ public class AegisAngelTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, angel);
         addTarget(playerA, lion);
-
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, murder, angel);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, murder, angel, "When ");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

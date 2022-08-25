@@ -36,6 +36,7 @@ public class BanisherPriestTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Rockslide Elemental");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Banisher Priest");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);  // Let Banisher Priest enter the battlefield, but don't let its ETB ability resolve
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Incinerate", "Banisher Priest");
 

@@ -69,9 +69,10 @@ public class CopyCreatureCardToTokenImplTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Thrashing Brontodon"); // Creature {1}{G}{G}
         addCard(Zone.BATTLEFIELD, playerB, "Forest", 4);
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Thrashing Brontodon");
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}, Sacrifice");
-        // Alpha Myr is auto-chosen since only valid target
+        setStrictChooseMode(true);
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Thrashing Brontodon", true);
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}, Sacrifice", "Alpha Myr");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -84,5 +85,4 @@ public class CopyCreatureCardToTokenImplTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Thrashing Brontodon", 1);
         assertType("Thrashing Brontodon", CardType.ARTIFACT, true);
     }
-
 }

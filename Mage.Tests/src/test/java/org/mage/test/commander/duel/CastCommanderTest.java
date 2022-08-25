@@ -106,7 +106,7 @@ public class CastCommanderTest extends CardTestCommanderDuelBase {
         // Put target nonland permanent into its owner's library just beneath the top X cards of that library.
         addCard(Zone.HAND, playerA, "Unexpectedly Absent"); // Instant {X}{W}{W}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ob Nixilis of the Black Oath"); // {3}{B}{B}
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ob Nixilis of the Black Oath", true); // {3}{B}{B}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Unexpectedly Absent", "Ob Nixilis of the Black Oath");
         setChoice(playerA, "X=0");

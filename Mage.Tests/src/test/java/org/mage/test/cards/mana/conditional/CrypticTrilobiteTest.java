@@ -56,7 +56,7 @@ public class CrypticTrilobiteTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 10);
         
         
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cryptic Trilobite");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cryptic Trilobite", true);
         setChoice(playerA, "X=5");
         
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}:");

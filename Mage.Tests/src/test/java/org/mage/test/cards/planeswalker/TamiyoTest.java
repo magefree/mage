@@ -7,21 +7,23 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
+ * {@link mage.cards.t.TamiyoFieldResearcher Tamiyo, Field Researcher}
+ *  {1}{G}{W}{U}
+ *  4 loyalty
+ * +1: Choose up to two target creatures. Until your next turn, whenever either of those creatures deals combat damage, you draw a card.
+ * −2: Tap up to two target nonland permanents. They don't untap during their controller's next untap step.
+ * −7: Draw three cards. You get an emblem with "You may cast nonland cards from your hand without paying their mana costs."
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public class TamiyoTest extends CardTestPlayerBase {
 
-    /*
+    /**
      * Reported bug: I activated Tamiyo's +1 ability on a 5/5 Gideon and his 2/2 Knight Ally, but when they both attacked
      *  and dealt damage I only drew one card when I'm pretty sure I was supposed to draw for each of the two.
      */
     @Test
     public void testFieldResearcherFirstEffectOnGideon() {
-
-        // Tamiyo, Field Researcher {1}{G}{W}{U} - 4 loyalty
-        // +1: Choose up to two target creatures. Until your next turn,
-        // whenever either of those creatures deals combat damage, you draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Tamiyo, Field Researcher", 1);
 
         /* Gideon, Ally of Zendikar {2}{W}{W} - 4 loyalty
@@ -36,6 +38,7 @@ public class TamiyoTest extends CardTestPlayerBase {
 
         // next, activate Gideon to make him a 5/5 human soldier ally creature
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Until end of turn");
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
         // finally, use Tamiyo +1 on both creatures
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Choose up to two");
         addTarget(playerA, "Knight Ally Token^Gideon, Ally of Zendikar"); // both token and Gideon as creature
@@ -54,22 +57,18 @@ public class TamiyoTest extends CardTestPlayerBase {
         assertHandCount(playerA, 3); // two cards drawn from each creature dealing damage + 1 card drawn on turn
     }
 
-    /*
+    /**
      * Testing more basic scenario with Tamiyo, Field of Researcher +1 effect
      */
     @Test
     public void testFieldResearcherFirstEffectSimpleCreatureAttacks() {
-
-        // Tamiyo, Field Researcher {1}{G}{W}{U} - 4 loyalty
-        // +1: Choose up to two target creatures. Until your next turn,
-        // whenever either of those creatures deals combat damage, you draw a card.
         addCard(Zone.HAND, playerA, "Tamiyo, Field Researcher", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Bronze Sable", 1); // 2/1
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tamiyo, Field Researcher");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tamiyo, Field Researcher", true);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Choose up to two");
         addTarget(playerA, "Bronze Sable");
@@ -83,15 +82,11 @@ public class TamiyoTest extends CardTestPlayerBase {
         assertHandCount(playerA, 1);
     }
 
-    /*
+    /**
      * Testing more basic scenario with Tamiyo, Field of Researcher +1 effect
      */
     @Test
     public void testFieldResearcherFirstEffectSimpleCreaturesAttacks() {
-
-        // Tamiyo, Field Researcher {1}{G}{W}{U} - 4 loyalty
-        // +1: Choose up to two target creatures. Until your next turn,
-        // whenever either of those creatures deals combat damage, you draw a card.
         addCard(Zone.HAND, playerA, "Tamiyo, Field Researcher", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
@@ -99,7 +94,7 @@ public class TamiyoTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Bronze Sable", 1); // 2/1
         addCard(Zone.BATTLEFIELD, playerA, "Sylvan Advocate", 1); // 2/3
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tamiyo, Field Researcher");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tamiyo, Field Researcher", true);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Choose up to two");
         addTarget(playerA, "Bronze Sable^Sylvan Advocate");
@@ -114,15 +109,11 @@ public class TamiyoTest extends CardTestPlayerBase {
         assertHandCount(playerA, 2);
     }
 
-    /*
+    /**
      * Testing more basic scenarios with Tamiyo, Field of Researcher +1 effect
      */
     @Test
     public void testFieldResearcherFirstEffectAttackAndBlock() {
-
-        // Tamiyo, Field Researcher {1}{G}{W}{U} - 4 loyalty
-        // +1: Choose up to two target creatures. Until your next turn,
-        // whenever either of those creatures deals combat damage, you draw a card.
         addCard(Zone.HAND, playerA, "Tamiyo, Field Researcher", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
@@ -130,7 +121,7 @@ public class TamiyoTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Sylvan Advocate", 1); // 2/3
         addCard(Zone.BATTLEFIELD, playerB, "Memnite", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tamiyo, Field Researcher");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tamiyo, Field Researcher", true);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Choose up to two");
         addTarget(playerA, "Sylvan Advocate");
@@ -146,18 +137,11 @@ public class TamiyoTest extends CardTestPlayerBase {
         assertHandCount(playerA, 2); // Sylvan Advocate dealt combat damage twice
     }
 
-    /*
+    /**
      * Reported bug: Tamiyo's +1 ability remains on the creature for the entirety of the game.
      */
     @Test
     public void testFieldResearcherFirstEffectOnlyPersistsUntilYourNextTurn() {
-
-        /*
-        // Tamiyo, Field Researcher {1}{G}{W}{U} - 4 loyalty
-            +1: Choose up to two target creatures. Until your next turn, whenever either of those creatures deals combat damage, you draw a card.
-            −2: Tap up to two target nonland permanents. They don't untap during their controller's next untap step.
-            −7: Draw three cards. You get an emblem with "You may cast nonland cards from your hand without paying their mana costs."
-         */
         addCard(Zone.HAND, playerA, "Tamiyo, Field Researcher", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
@@ -168,7 +152,7 @@ public class TamiyoTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Memnite", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 3);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tamiyo, Field Researcher");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tamiyo, Field Researcher", true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Choose up to two");
         addTarget(playerA, "Sylvan Advocate");
 
@@ -191,19 +175,12 @@ public class TamiyoTest extends CardTestPlayerBase {
         assertHandCount(playerA, 3); // 2 cards drawn from Advocate + 1 card during T3 draw step.
     }
 
-    /*
+    /**
      *  I activated his +1 ability once. then, the next turn, i activated it one more time, and then
      *  i get to draw 3 cards of three creatures. So i think the first activation wasn't away.
      */
     @Test
     public void testDrawEffectGetsRemoved() {
-
-        /*
-        // Tamiyo, Field Researcher {1}{G}{W}{U} - 4 loyalty
-            +1: Choose up to two target creatures. Until your next turn, whenever either of those creatures deals combat damage, you draw a card.
-            −2: Tap up to two target nonland permanents. They don't untap during their controller's next untap step.
-            −7: Draw three cards. You get an emblem with "You may cast nonland cards from your hand without paying their mana costs."
-         */
         addCard(Zone.HAND, playerA, "Tamiyo, Field Researcher", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
@@ -212,7 +189,7 @@ public class TamiyoTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1); // 2/2
         addCard(Zone.BATTLEFIELD, playerA, "Pillarfield Ox", 1); // 2/4
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tamiyo, Field Researcher");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tamiyo, Field Researcher", true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Choose up to two", "Sylvan Advocate");
 
         attack(1, playerA, "Sylvan Advocate");
@@ -232,12 +209,6 @@ public class TamiyoTest extends CardTestPlayerBase {
 
     @Test
     public void testFieldResearcherFirstAbilityTargetOpponentCreature() {
-        /*
-        // Tamiyo, Field Researcher {1}{G}{W}{U} - 4 loyalty
-            +1: Choose up to two target creatures. Until your next turn, whenever either of those creatures deals combat damage, you draw a card.
-            −2: Tap up to two target nonland permanents. They don't untap during their controller's next untap step.
-            −7: Draw three cards. You get an emblem with "You may cast nonland cards from your hand without paying their mana costs."
-         */
         addCard(Zone.HAND, playerA, "Tamiyo, Field Researcher", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
@@ -245,7 +216,7 @@ public class TamiyoTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Bronze Sable", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tamiyo, Field Researcher");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tamiyo, Field Researcher", true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Choose up to two");
         addTarget(playerA, "Bronze Sable");
 
@@ -260,12 +231,6 @@ public class TamiyoTest extends CardTestPlayerBase {
 
     @Test
     public void testFieldResearcherFirstAbilityTargetOpponentCreatures() {
-        /*
-        // Tamiyo, Field Researcher {1}{G}{W}{U} - 4 loyalty
-            +1: Choose up to two target creatures. Until your next turn, whenever either of those creatures deals combat damage, you draw a card.
-            −2: Tap up to two target nonland permanents. They don't untap during their controller's next untap step.
-            −7: Draw three cards. You get an emblem with "You may cast nonland cards from your hand without paying their mana costs."
-         */
         addCard(Zone.HAND, playerA, "Tamiyo, Field Researcher", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
@@ -274,7 +239,7 @@ public class TamiyoTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Bronze Sable", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Memnite", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tamiyo, Field Researcher");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tamiyo, Field Researcher", true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Choose up to two");
         addTarget(playerA, "Bronze Sable^Memnite");
 

@@ -97,7 +97,7 @@ public class DraugrNecromancerTest extends CardTestPlayerBase {
             execute();
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
-            if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
+            if (!e.getMessage().contains("Cast Grizzly Bears")) {
                 Assert.fail("Needed error about PlayerA having too many actions, but got:\n" + e.getMessage());
             }
         }

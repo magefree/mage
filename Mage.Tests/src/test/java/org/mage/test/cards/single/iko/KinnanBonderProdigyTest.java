@@ -57,6 +57,7 @@ public class KinnanBonderProdigyTest extends CardTestPlayerBase {
         // sacrifice treasure and add additional mana
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Sacrifice");
         setChoice(playerA, "Red");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, hovermyr);
 
         setStrictChooseMode(true);
