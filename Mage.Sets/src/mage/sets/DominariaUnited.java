@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class DominariaUnited extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Argivian Cavalier", "Coalition Skyknight", "Guardian of New Benalia", "Keldon Flamesage", "Linebreaker Baloth", "Yavimaya Steelcrusher");
+    private static final List<String> unfinished = Arrays.asList("Argivian Cavalier", "Balduvian Berserker", "Coalition Skyknight", "Guardian of New Benalia", "Keldon Flamesage", "Linebreaker Baloth", "Yavimaya Steelcrusher");
 
     private static final DominariaUnited instance = new DominariaUnited();
 
@@ -120,6 +120,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Territorial Maro", 184, Rarity.UNCOMMON, mage.cards.t.TerritorialMaro.class));
         cards.add(new SetCardInfo("The Raven Man", 103, Rarity.RARE, mage.cards.t.TheRavenMan.class));
         cards.add(new SetCardInfo("Threats Undetected", 185, Rarity.RARE, mage.cards.t.ThreatsUndetected.class));
+        cards.add(new SetCardInfo("Thrill of Possibility", 148, Rarity.COMMON, mage.cards.t.ThrillOfPossibility.class));
         cards.add(new SetCardInfo("Timeless Lotus", 239, Rarity.MYTHIC, mage.cards.t.TimelessLotus.class));
         cards.add(new SetCardInfo("Timely Interference", 70, Rarity.COMMON, mage.cards.t.TimelyInterference.class));
         cards.add(new SetCardInfo("Tolarian Geyser", 71, Rarity.COMMON, mage.cards.t.TolarianGeyser.class));
