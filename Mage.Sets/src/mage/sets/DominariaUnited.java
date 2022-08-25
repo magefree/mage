@@ -54,6 +54,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Cleaving Skyrider", 12, Rarity.UNCOMMON, mage.cards.c.CleavingSkyrider.class));
         cards.add(new SetCardInfo("Coalition Skyknight", 14, Rarity.UNCOMMON, mage.cards.c.CoalitionSkyknight.class));
         cards.add(new SetCardInfo("Colossal Growth", 158, Rarity.COMMON, mage.cards.c.ColossalGrowth.class));
+        cards.add(new SetCardInfo("Cosmic Epiphany", 283, Rarity.RARE, mage.cards.c.CosmicEpiphany.class));
         cards.add(new SetCardInfo("Cult Conscript", 88, Rarity.UNCOMMON, mage.cards.c.CultConscript.class));
         cards.add(new SetCardInfo("Cut Down", 89, Rarity.UNCOMMON, mage.cards.c.CutDown.class));
         cards.add(new SetCardInfo("Dragon Whelp", 120, Rarity.UNCOMMON, mage.cards.d.DragonWhelp.class));
