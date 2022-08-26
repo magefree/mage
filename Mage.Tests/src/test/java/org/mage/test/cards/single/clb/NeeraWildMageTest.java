@@ -13,7 +13,7 @@ public class NeeraWildMageTest extends CardTestPlayerBase {
 
     @Test
     public void TestNeeraWildMage() {
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
 
         // Whenever you cast a spell, you may put it on the bottom of its owner's library.
         // If you do, reveal cards from the top of your library until you reveal a nonland card.
@@ -25,27 +25,26 @@ public class NeeraWildMageTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Consider");
 
         playerA.getLibrary().clear();
-        addCard(Zone.LIBRARY, playerA, "Island");
-        addCard(Zone.LIBRARY, playerA, "Island");
         addCard(Zone.LIBRARY, playerA, "Mental Note");
+        addCard(Zone.LIBRARY, playerA, "Island");
+        addCard(Zone.LIBRARY, playerA, "Island");
         skipInitShuffling();
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Consider");
         // Choose to use Neera's ability
         setChoice(playerA, true);
-        // Cast Mental Note
-        setChoice(playerA, true);
+        // Do not cast Mental Note revealed with Neera's ability
+        setChoice(playerA, false);
 
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        // Before casting Mental Note, the library consists of 2 Islands on top and the Consider on the bottom
-        // When casting Mental Note, the two islands will be milled into the graveyard and Consider will be drawn
-        assertLibraryCount(playerA, 0);
+        // Consider was not cast so should be on top of the deck after resolving Neera's ability
+        // On turn 3 it will be drawn by player A
         assertHandCount(playerA, 1);
         assertHandCount(playerA, "Consider", 1);
-        assertGraveyardCount(playerA, 3);
-        assertGraveyardCount(playerA, "Mental Note", 1);
-        assertGraveyardCount(playerA, "Island", 2);
+        assertLibraryCount(playerA, 3);
+        assertLibraryCount(playerA, "Mental Note", 1);
+        assertLibraryCount(playerA, "Island", 2);
     }
 }

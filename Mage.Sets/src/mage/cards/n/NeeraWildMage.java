@@ -77,34 +77,40 @@ class NeeraWildMageEffect extends OneShotEffect {
             return false;
         }
 
-        spellController.putCardsOnBottomOfLibrary(spell, game, source, true);
-
-        boolean cardWasCast = false;
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && controller.getLibrary().hasCards()) {
-            CardsImpl toReveal = new CardsImpl();
-            Card eligibleCard = null;
-            for (Card card : controller.getLibrary().getCards(game)) {
-                toReveal.add(card);
-                if (!card.isLand(game)) {
-                    eligibleCard = card;
-                    break;
-                }
-            }
-            controller.revealCards(source, toReveal, game);
-            if (eligibleCard != null
-                    && controller.chooseUse(Outcome.PlayForFree, "Cast " + eligibleCard.getLogName() + " without paying its mana cost?", source, game)) {
-                game.getState().setValue("PlayFromNotOwnHandZone" + eligibleCard.getId(), Boolean.TRUE);
-                cardWasCast = controller.cast(controller.chooseAbilityForCast(eligibleCard, game, true),
-                        game, true, new ApprovingObject(source, game));
-                game.getState().setValue("PlayFromNotOwnHandZone" + eligibleCard.getId(), null);
-                if (cardWasCast) {
-                    toReveal.remove(eligibleCard);
-                }
-            }
-            controller.putCardsOnBottomOfLibrary(toReveal, game, source, false);
+        if(!spellController.putCardsOnBottomOfLibrary(spell, game, source, true)) {
+            return false;
         }
-        return cardWasCast;
+
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null || controller.getLibrary() == null || !controller.getLibrary().hasCards()) {
+            return false;
+        }
+
+        CardsImpl toReveal = new CardsImpl();
+        Card eligibleCard = null;
+        for (Card card : controller.getLibrary().getCards(game)) {
+            toReveal.add(card);
+            if (!card.isLand(game)) {
+                eligibleCard = card;
+                break;
+            }
+        }
+
+        controller.revealCards(source, toReveal, game);
+        if (eligibleCard != null
+                && controller.chooseUse(Outcome.PlayForFree, "Cast " + eligibleCard.getLogName() + " without paying its mana cost?", source, game)) {
+            game.getState().setValue("PlayFromNotOwnHandZone" + eligibleCard.getId(), Boolean.TRUE);
+            boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(eligibleCard, game, true),
+                    game, true, new ApprovingObject(source, game));
+            game.getState().setValue("PlayFromNotOwnHandZone" + eligibleCard.getId(), null);
+            if (cardWasCast) {
+                toReveal.remove(eligibleCard);
+            }
+        }
+
+        controller.putCardsOnBottomOfLibrary(toReveal, game, source, false);
+
+        return true;
     }
 
     @Override
