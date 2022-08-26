@@ -33,7 +33,7 @@ public final class AronBenaliasRuin extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility(false));
+        this.addAbility(new MenaceAbility());
 
         // {W}{B}, {T}, Sacrifice another creature: Put a +1/+1 counter on each creature you control.
         Ability ability = new SimpleActivatedAbility(
