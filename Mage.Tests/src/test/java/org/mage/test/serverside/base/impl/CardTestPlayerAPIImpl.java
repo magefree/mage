@@ -905,10 +905,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
         if (mustHave) {
             assertTrue("No such ability=" + ability.toString() + ", player=" + player.getName()
-                    + ", cardName" + cardName, found.getAbilities(currentGame).containsRule(ability));
+                    + ", cardName=" + cardName, found.getAbilities(currentGame).containsRule(ability));
         } else {
             Assert.assertFalse("Card shouldn't have such ability=" + ability.toString() + ", player=" + player.getName()
-                    + ", cardName" + cardName, found.getAbilities(currentGame).containsRule(ability));
+                    + ", cardName=" + cardName, found.getAbilities(currentGame).containsRule(ability));
         }
     }
 
