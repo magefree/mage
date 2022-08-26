@@ -71,6 +71,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Cult Conscript", 88, Rarity.UNCOMMON, mage.cards.c.CultConscript.class));
         cards.add(new SetCardInfo("Cut Down", 89, Rarity.UNCOMMON, mage.cards.c.CutDown.class));
         cards.add(new SetCardInfo("Deathbloom Gardener", 159, Rarity.COMMON, mage.cards.d.DeathbloomGardener.class));
+        cards.add(new SetCardInfo("Destroy Evil", 17, Rarity.COMMON, mage.cards.d.DestroyEvil.class));
         cards.add(new SetCardInfo("Drag to the Bottom", 91, Rarity.RARE, mage.cards.d.DragToTheBottom.class));
         cards.add(new SetCardInfo("Dragon Whelp", 120, Rarity.UNCOMMON, mage.cards.d.DragonWhelp.class));
         cards.add(new SetCardInfo("Elas il-Kor, Sadistic Pilgrim", 198, Rarity.UNCOMMON, mage.cards.e.ElasIlKorSadisticPilgrim.class));
