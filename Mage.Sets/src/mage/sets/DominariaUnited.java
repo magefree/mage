@@ -78,6 +78,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Frostfist Strider", 51, Rarity.UNCOMMON, mage.cards.f.FrostfistStrider.class));
         cards.add(new SetCardInfo("Gaea's Might", 164, Rarity.COMMON, mage.cards.g.GaeasMight.class));
         cards.add(new SetCardInfo("Gibbering Barricade", 95, Rarity.COMMON, mage.cards.g.GibberingBarricade.class));
+        cards.add(new SetCardInfo("Goblin Picker", 128, Rarity.COMMON, mage.cards.g.GoblinPicker.class));
         cards.add(new SetCardInfo("Griffin Protector", 18, Rarity.COMMON, mage.cards.g.GriffinProtector.class));
         cards.add(new SetCardInfo("Hammerhand", 129, Rarity.COMMON, mage.cards.h.Hammerhand.class));
         cards.add(new SetCardInfo("Haughty Djinn", 52, Rarity.RARE, mage.cards.h.HaughtyDjinn.class));
