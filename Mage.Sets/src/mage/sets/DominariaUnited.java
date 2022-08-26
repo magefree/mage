@@ -137,6 +137,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Smash to Dust", 144, Rarity.COMMON, mage.cards.s.SmashToDust.class));
         cards.add(new SetCardInfo("Snarespinner", 179, Rarity.COMMON, mage.cards.s.Snarespinner.class));
         cards.add(new SetCardInfo("Soul of Windgrace", 220, Rarity.MYTHIC, mage.cards.s.SoulOfWindgrace.class));
+        cards.add(new SetCardInfo("Splatter Goblin", 109, Rarity.COMMON, mage.cards.s.SplatterGoblin.class));
         cards.add(new SetCardInfo("Sprouting Goblin", 145, Rarity.UNCOMMON, mage.cards.s.SproutingGoblin.class));
         cards.add(new SetCardInfo("Stall for Time", 34, Rarity.COMMON, mage.cards.s.StallForTime.class));
         cards.add(new SetCardInfo("Strength of the Coalition", 180, Rarity.UNCOMMON, mage.cards.s.StrengthOfTheCoalition.class));
