@@ -1,4 +1,4 @@
-package org.mage.test.cards.triggers;
+package org.mage.test.cards.single.clb;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -13,7 +13,7 @@ public class NeeraWildMageTest extends CardTestPlayerBase {
 
     @Test
     public void TestNeeraWildMage() {
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
 
         // Whenever you cast a spell, you may put it on the bottom of its owner's library.
         // If you do, reveal cards from the top of your library until you reveal a nonland card.
@@ -24,15 +24,14 @@ public class NeeraWildMageTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerA, "Consider");
 
+        playerA.getLibrary().clear();
         addCard(Zone.LIBRARY, playerA, "Island");
         addCard(Zone.LIBRARY, playerA, "Island");
         addCard(Zone.LIBRARY, playerA, "Mental Note");
-        addCard(Zone.LIBRARY, playerA, "Island");
-
         skipInitShuffling();
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Consider");
-        // Put Ponder on bottom of library
+        // Choose to use Neera's ability
         setChoice(playerA, true);
         // Cast Mental Note
         setChoice(playerA, true);
@@ -40,12 +39,12 @@ public class NeeraWildMageTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        // Assert Consider was put on the bottom of the library
-        assertLibraryCount(playerA, "Consider", 1);
-        // Assert the Island on top of Mental note was put on the bottom of the library
-        assertLibraryCount(playerA, "Island", 1);
-        // Assert Mental Note was cast
+        // Before casting Mental Note, the library consists of 2 Islands on top and the Consider on the bottom
+        // When casting Mental Note, the two islands will be milled into the graveyard and Consider will be drawn
+        assertLibraryCount(playerA, 0);
         assertHandCount(playerA, 1);
+        assertHandCount(playerA, "Consider", 1);
+        assertGraveyardCount(playerA, 3);
         assertGraveyardCount(playerA, "Mental Note", 1);
         assertGraveyardCount(playerA, "Island", 2);
     }

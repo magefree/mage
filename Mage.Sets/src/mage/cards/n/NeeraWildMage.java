@@ -2,7 +2,6 @@ package mage.cards.n;
 
 import mage.ApprovingObject;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -10,8 +9,11 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.constants.*;
-import mage.filter.FilterSpell;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -38,7 +40,8 @@ public final class NeeraWildMage extends CardImpl {
         // You may cast that card without paying its mana cost.
         // Then put the rest on the bottom of your library in a random order.
         // This ability triggers only once each turn.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new NeeraWildMageEffect(), new FilterSpell(),  true, true).setTriggersOnce(true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new NeeraWildMageEffect(), StaticFilters.FILTER_SPELL_A,
+                true, true).setTriggersOnce(true));
     }
 
     private NeeraWildMage(final NeeraWildMage card) {
@@ -65,11 +68,6 @@ class NeeraWildMageEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
-        boolean noLongerOnStack = false; // Spell needs to be on the stack to put it on the bottom of your library
-        if (spell == null) {
-            spell = ((Spell) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK));
-            noLongerOnStack = true;
-        }
         if (spell == null) {
             return false;
         }
@@ -79,18 +77,7 @@ class NeeraWildMageEffect extends OneShotEffect {
             return false;
         }
 
-        MageObject sourceObject = source.getSourceObject(game);
-        if (sourceObject == null) {
-            return false;
-        }
-
-        if (!noLongerOnStack) {
-            spellController.putCardsOnBottomOfLibrary(spell, game, source, true);
-        }
-
-        if (!spellController.getLibrary().hasCards()) {
-            return true;
-        }
+        spellController.putCardsOnBottomOfLibrary(spell, game, source, true);
 
         boolean cardWasCast = false;
         Player controller = game.getPlayer(source.getControllerId());
