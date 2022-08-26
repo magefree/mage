@@ -1,25 +1,18 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.LookLibraryControllerEffect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.players.Player;
-import mage.util.CardUtil;
-import mage.watchers.common.CardsDrawnDuringDrawStepWatcher;
 import mage.watchers.common.CardsDrawnThisTurnWatcher;
 
 import java.util.UUID;
@@ -55,7 +48,7 @@ public final class ScionOfHalaster extends CardImpl {
 class ScionOfHalasterReplacementEffect extends ReplacementEffectImpl {
 
     ScionOfHalasterReplacementEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "The first time you would draw a card each turn, instead look at the top two cards of your library. Put one of them into your graveyard and the other back on top of your library. Then draw a card";
     }
 
@@ -88,6 +81,9 @@ class ScionOfHalasterReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!event.getPlayerId().equals(source.getControllerId())) {
+            return false;
+        }
+        if (source.getSourceId().equals(event.getSourceId())) {
             return false;
         }
         CardsDrawnThisTurnWatcher watcher = game.getState().getWatcher(CardsDrawnThisTurnWatcher.class);

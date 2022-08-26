@@ -17,7 +17,7 @@ public class ScionOfHalasterTest extends CardTestCommanderDuelBase {
 
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
-        setDecknamePlayerA("CommanderAnafenza_WBG.dck"); // Commander = Anafenza, the Foremost
+        setDecknamePlayerA("CommanderDuel_Partners.dck"); // Commander = Ishai, Ojutai Dragonspeaker and Thrasios, Triton Hero
         return super.createNewGameAndPlayers();
     }
 
@@ -26,30 +26,56 @@ public class ScionOfHalasterTest extends CardTestCommanderDuelBase {
         addCard(Zone.BATTLEFIELD, playerA, "Scion of Halaster", 1);
 
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
 
-        // Cast Commander so Scion of Halaster takes effect
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Anafenza, the Foremost");
+        // Cast commander so Scion of Halaster takes effect
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thrasios, Triton Hero");
 
         playerA.getLibrary().clear();
-        addCard(Zone.LIBRARY, playerA, "Island");
+        addCard(Zone.LIBRARY, playerA, "Lightning Bolt");
         addCard(Zone.LIBRARY, playerA, "Mountain");
         skipInitShuffling();
-
-        // Choose to put Island in the graveyard with Scion of Halaster's replacement effect
-        setChoice(playerA, "Island");
 
         // Continue to turn 3 so we get to Player A's draw step
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
-        // Before casting Mental Note, the library consists of 2 Islands on top and the Consider on the bottom
-        // When casting Mental Note, the two islands will be milled into the graveyard and Consider will be drawn
+        // AI considers Lightning Bolt a better card than Mountain so it will discard the Mountain
         assertLibraryCount(playerA, 0);
         assertHandCount(playerA, 1);
-        assertHandCount(playerA, "Mountain", 1);
+        assertHandCount(playerA, "Lightning Bolt", 1);
         assertGraveyardCount(playerA, 1);
-        assertGraveyardCount(playerA, "Island", 1);
+        assertGraveyardCount(playerA, "Mountain", 1);
+    }
+
+    @Test
+    public void TestScionOfHalaster_withPartnerCommanders() {
+        addCard(Zone.BATTLEFIELD, playerA, "Scion of Halaster", 1);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+
+        // Cast commander so Scion of Halaster takes effect
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thrasios, Triton Hero", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ishai, Ojutai Dragonspeaker");
+
+        playerA.getLibrary().clear();
+        addCard(Zone.LIBRARY, playerA, "Lightning Bolt");
+        addCard(Zone.LIBRARY, playerA, "Mountain");
+        addCard(Zone.LIBRARY, playerA, "Mountain");
+        skipInitShuffling();
+
+        // Continue to turn 3 so we get to Player A's draw step
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        // AI considers Lightning Bolt a better card than Mountain so it will discard the Mountains
+        assertLibraryCount(playerA, 0);
+        assertHandCount(playerA, 1);
+        assertHandCount(playerA, "Lightning Bolt", 1);
+        assertGraveyardCount(playerA, 2);
+        assertGraveyardCount(playerA, "Mountain", 2);
     }
 }
