@@ -148,25 +148,22 @@ public class EtherealValkyrieTest extends CardTestPlayerBase {
      */
     @Test
     public void testMDFCCreatureCreature() {
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 8);
+        addCard(Zone.BATTLEFIELD, playerA, "Tundra", 12);
         addCard(Zone.HAND, playerA, etherealValkyrie, 2);
 
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
         addCard(Zone.HAND, playerA, alrund);
 
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Zone.HAND, playerA, alrund);
 
         setStrictChooseMode(true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, etherealValkyrie);
         addTarget(playerA, alrund);
-        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, etherealValkyrie);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, etherealValkyrie);
         addTarget(playerA, alrund);
 
-        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertExileCount(playerA, alrund, 2);
 
