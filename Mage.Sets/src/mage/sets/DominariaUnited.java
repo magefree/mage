@@ -47,6 +47,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Balmor, Battlemage Captain", 196, Rarity.UNCOMMON, mage.cards.b.BalmorBattlemageCaptain.class));
         cards.add(new SetCardInfo("Barkweave Crusher", 154, Rarity.COMMON, mage.cards.b.BarkweaveCrusher.class));
         cards.add(new SetCardInfo("Battle-Rage Blessing", 80, Rarity.COMMON, mage.cards.b.BattleRageBlessing.class));
+        cards.add(new SetCardInfo("Battlefly Swarm", 81, Rarity.COMMON, mage.cards.b.BattleflySwarm.class));
         cards.add(new SetCardInfo("Battlewing Mystic", 43, Rarity.UNCOMMON, mage.cards.b.BattlewingMystic.class));
         cards.add(new SetCardInfo("Benalish Faithbonder", 7, Rarity.COMMON, mage.cards.b.BenalishFaithbonder.class));
         cards.add(new SetCardInfo("Benalish Sleeper", 8, Rarity.COMMON, mage.cards.b.BenalishSleeper.class));
