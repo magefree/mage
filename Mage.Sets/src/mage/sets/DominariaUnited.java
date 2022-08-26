@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class DominariaUnited extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Argivian Cavalier", "Balduvian Berserker", "Coalition Skyknight", "Guardian of New Benalia", "Keldon Flamesage", "Linebreaker Baloth", "Yavimaya Steelcrusher");
+    private static final List<String> unfinished = Arrays.asList("Argivian Cavalier", "Balduvian Berserker", "Barkweave Crusher", "Benalish Faithbonder", "Coalition Skyknight", "Coalition Warbrute", "Guardian of New Benalia", "Hexbane Tortoise", "Keldon Flamesage", "Linebreaker Baloth", "Yavimaya Steelcrusher");
 
     private static final DominariaUnited instance = new DominariaUnited();
 
@@ -47,9 +47,12 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Battlewing Mystic", 43, Rarity.UNCOMMON, mage.cards.b.BattlewingMystic.class));
         cards.add(new SetCardInfo("Benalish Sleeper", 8, Rarity.COMMON, mage.cards.b.BenalishSleeper.class));
         cards.add(new SetCardInfo("Bog Badger", 156, Rarity.COMMON, mage.cards.b.BogBadger.class));
+        cards.add(new SetCardInfo("Bone Splinters", 83, Rarity.COMMON, mage.cards.b.BoneSplinters.class));
         cards.add(new SetCardInfo("Bortuk Bonerattle", 197, Rarity.UNCOMMON, mage.cards.b.BortukBonerattle.class));
         cards.add(new SetCardInfo("Braids, Arisen Nightmare", 84, Rarity.RARE, mage.cards.b.BraidsArisenNightmare.class));
         cards.add(new SetCardInfo("Briar Hydra", 286, Rarity.RARE, mage.cards.b.BriarHydra.class));
+        cards.add(new SetCardInfo("Broken Wings", 157, Rarity.COMMON, mage.cards.b.BrokenWings.class));
+        cards.add(new SetCardInfo("Captain's Call", 9, Rarity.COMMON, mage.cards.c.CaptainsCall.class));
         cards.add(new SetCardInfo("Caves of Koilos", 244, Rarity.RARE, mage.cards.c.CavesOfKoilos.class));
         cards.add(new SetCardInfo("Charismatic Vanguard", 10, Rarity.COMMON, mage.cards.c.CharismaticVanguard.class));
         cards.add(new SetCardInfo("Citizen's Arrest", 11, Rarity.COMMON, mage.cards.c.CitizensArrest.class));
@@ -64,18 +67,22 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Elas il-Kor, Sadistic Pilgrim", 198, Rarity.UNCOMMON, mage.cards.e.ElasIlKorSadisticPilgrim.class));
         cards.add(new SetCardInfo("Electrostatic Infantry", 122, Rarity.UNCOMMON, mage.cards.e.ElectrostaticInfantry.class));
         cards.add(new SetCardInfo("Elvish Hydromancer", 162, Rarity.UNCOMMON, mage.cards.e.ElvishHydromancer.class));
+        cards.add(new SetCardInfo("Essence Scatter", 49, Rarity.COMMON, mage.cards.e.EssenceScatter.class));
         cards.add(new SetCardInfo("Evolved Sleeper", 93, Rarity.RARE, mage.cards.e.EvolvedSleeper.class));
         cards.add(new SetCardInfo("Extinguish the Light", 94, Rarity.COMMON, mage.cards.e.ExtinguishTheLight.class));
         cards.add(new SetCardInfo("Fires of Victory", 123, Rarity.UNCOMMON, mage.cards.f.FiresOfVictory.class));
         cards.add(new SetCardInfo("Forest", 274, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frostfist Strider", 51, Rarity.UNCOMMON, mage.cards.f.FrostfistStrider.class));
         cards.add(new SetCardInfo("Gaea's Might", 164, Rarity.COMMON, mage.cards.g.GaeasMight.class));
+        cards.add(new SetCardInfo("Griffin Protector", 18, Rarity.COMMON, mage.cards.g.GriffinProtector.class));
+        cards.add(new SetCardInfo("Hammerhand", 129, Rarity.COMMON, mage.cards.h.Hammerhand.class));
         cards.add(new SetCardInfo("Haughty Djinn", 52, Rarity.RARE, mage.cards.h.HaughtyDjinn.class));
         cards.add(new SetCardInfo("Herd Migration", 165, Rarity.RARE, mage.cards.h.HerdMigration.class));
         cards.add(new SetCardInfo("Hero's Heirloom", 231, Rarity.UNCOMMON, mage.cards.h.HerosHeirloom.class));
         cards.add(new SetCardInfo("Hurler Cyclops", 130, Rarity.UNCOMMON, mage.cards.h.HurlerCyclops.class));
         cards.add(new SetCardInfo("Hurloon Battle Hymn", 131, Rarity.UNCOMMON, mage.cards.h.HurloonBattleHymn.class));
         cards.add(new SetCardInfo("Impede Momentum", 54, Rarity.COMMON, mage.cards.i.ImpedeMomentum.class));
+        cards.add(new SetCardInfo("Impulse", 55, Rarity.COMMON, mage.cards.i.Impulse.class));
         cards.add(new SetCardInfo("Inscribed Tablet", 232, Rarity.UNCOMMON, mage.cards.i.InscribedTablet.class));
         cards.add(new SetCardInfo("Island", 265, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jaya's Firenado", 134, Rarity.COMMON, mage.cards.j.JayasFirenado.class));
@@ -95,6 +102,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Llanowar Loamspeaker", 170, Rarity.RARE, mage.cards.l.LlanowarLoamspeaker.class));
         cards.add(new SetCardInfo("Magnigoth Sentry", 172, Rarity.COMMON, mage.cards.m.MagnigothSentry.class));
         cards.add(new SetCardInfo("Mesa Cavalier", 26, Rarity.COMMON, mage.cards.m.MesaCavalier.class));
+        cards.add(new SetCardInfo("Meteorite", 235, Rarity.COMMON, mage.cards.m.Meteorite.class));
         cards.add(new SetCardInfo("Micromancer", 57, Rarity.UNCOMMON, mage.cards.m.Micromancer.class));
         cards.add(new SetCardInfo("Molten Monstrosity", 139, Rarity.COMMON, mage.cards.m.MoltenMonstrosity.class));
         cards.add(new SetCardInfo("Monstrous War-Leech", 98, Rarity.UNCOMMON, mage.cards.m.MonstrousWarLeech.class));
