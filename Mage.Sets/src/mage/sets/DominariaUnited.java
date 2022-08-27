@@ -132,6 +132,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prayer of Binding", 28, Rarity.UNCOMMON, mage.cards.p.PrayerOfBinding.class));
         cards.add(new SetCardInfo("Protect the Negotiators", 62, Rarity.UNCOMMON, mage.cards.p.ProtectTheNegotiators.class));
+        cards.add(new SetCardInfo("Radiant Grove", 253, Rarity.COMMON, mage.cards.r.RadiantGrove.class));
         cards.add(new SetCardInfo("Raff, Weatherlight Stalwart", 212, Rarity.UNCOMMON, mage.cards.r.RaffWeatherlightStalwart.class));
         cards.add(new SetCardInfo("Ragefire Hellkite", 285, Rarity.RARE, mage.cards.r.RagefireHellkite.class));
         cards.add(new SetCardInfo("Resolute Reinforcements", 29, Rarity.UNCOMMON, mage.cards.r.ResoluteReinforcements.class));
