@@ -1,5 +1,6 @@
 package mage.cards.s;
 
+import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HexproofAbility;
@@ -26,6 +27,7 @@ public final class ShoreUp extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(
                 HexproofAbility.getInstance(), Duration.EndOfTurn
         ).setText("and gains hexproof until end of turn"));
+        this.getSpellAbility().addEffect(new UntapTargetEffect("Untap it"));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
     }
 
