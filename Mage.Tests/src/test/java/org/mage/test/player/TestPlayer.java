@@ -1733,7 +1733,7 @@ public class TestPlayer implements Player {
                 // Second check to filter creature for combat - less strict to workaround issue in #3038
                 FilterCreatureForCombat secondFilter = new FilterCreatureForCombat();
                 // secondFilter.add(Predicates.not(AttackingPredicate.instance));
-                secondFilter.add(Predicates.not(new SummoningSicknessPredicate()));
+                secondFilter.add(Predicates.not(SummoningSicknessPredicate.instance));
                 // TODO: Cannot enforce legal attackers multiple times per combat. See issue #3038
                 Permanent attacker = findPermanent(secondFilter, groups[0], computerPlayer.getId(), game, false);
                 if (attacker != null && attacker.canAttack(defenderId, game)) {
