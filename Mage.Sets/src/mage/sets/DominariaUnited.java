@@ -161,6 +161,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Samite Herbalist", 31, Rarity.COMMON, mage.cards.s.SamiteHerbalist.class));
         cards.add(new SetCardInfo("Scout the Wilderness", 176, Rarity.COMMON, mage.cards.s.ScoutTheWilderness.class));
         cards.add(new SetCardInfo("Sengir Connoisseur", 104, Rarity.UNCOMMON, mage.cards.s.SengirConnoisseur.class));
+        cards.add(new SetCardInfo("Serra Redeemer", 282, Rarity.RARE, mage.cards.s.SerraRedeemer.class));
         cards.add(new SetCardInfo("Shadow Prophecy", 105, Rarity.COMMON, mage.cards.s.ShadowProphecy.class));
         cards.add(new SetCardInfo("Shadow-Rite Priest", 106, Rarity.RARE, mage.cards.s.ShadowRitePriest.class));
         cards.add(new SetCardInfo("Shalai's Acolyte", 33, Rarity.UNCOMMON, mage.cards.s.ShalaisAcolyte.class));
