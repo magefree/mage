@@ -136,6 +136,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Nishoba Brawler", 174, Rarity.UNCOMMON, mage.cards.n.NishobaBrawler.class));
         cards.add(new SetCardInfo("Phoenix Chick", 140, Rarity.UNCOMMON, mage.cards.p.PhoenixChick.class));
         cards.add(new SetCardInfo("Phyrexian Espionage", 60, Rarity.COMMON, mage.cards.p.PhyrexianEspionage.class));
+        cards.add(new SetCardInfo("Phyrexian Missionary", 27, Rarity.UNCOMMON, mage.cards.p.PhyrexianMissionary.class));
         cards.add(new SetCardInfo("Phyrexian Rager", 99, Rarity.COMMON, mage.cards.p.PhyrexianRager.class));
         cards.add(new SetCardInfo("Phyrexian Vivisector", 100, Rarity.COMMON, mage.cards.p.PhyrexianVivisector.class));
         cards.add(new SetCardInfo("Phyrexian Warhorse", 101, Rarity.COMMON, mage.cards.p.PhyrexianWarhorse.class));
