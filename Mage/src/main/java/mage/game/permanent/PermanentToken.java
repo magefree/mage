@@ -26,8 +26,8 @@ public class PermanentToken extends PermanentImpl {
         this.token.getAbilities().newOriginalId(); // neccessary if token has ability like DevourAbility()
         this.token.getAbilities().setSourceId(objectId);
         // TODO: Should this be using base or modified toughness?
-        this.power.modifyBaseValue(token.getPower().getBaseValueModified());
-        this.toughness.modifyBaseValue(token.getToughness().getBaseValueModified());
+        this.power.setModifiedBaseValue(token.getPower().getModifiedBaseValue());
+        this.toughness.setModifiedBaseValue(token.getToughness().getModifiedBaseValue());
         this.copyFromToken(this.token, game, false); // needed to have at this time (e.g. for subtypes for entersTheBattlefield replacement effects)
 
         // token's ZCC must be synced with original token to keep abilities settings

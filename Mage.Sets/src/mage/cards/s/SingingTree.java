@@ -63,7 +63,7 @@ class SingingTreeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
         if (targetCreature != null) {
-            int toughness = targetCreature.getToughness().getBaseValueModified();
+            int toughness = targetCreature.getToughness().getModifiedBaseValue();
             game.addEffect(new SetBasePowerToughnessTargetEffect(0, toughness, Duration.EndOfTurn), source);
             return true;
         }

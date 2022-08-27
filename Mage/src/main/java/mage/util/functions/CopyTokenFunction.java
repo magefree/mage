@@ -91,8 +91,8 @@ public class CopyTokenFunction implements Function<Token, Card> {
         }
 
         // TODO: Should this be copying the base value or the modified base value?
-        target.getPower().modifyBaseValue(sourceObj.getPower().getBaseValueModified());
-        target.getToughness().modifyBaseValue(sourceObj.getToughness().getBaseValueModified());
+        target.getPower().setModifiedBaseValue(sourceObj.getPower().getModifiedBaseValue());
+        target.getToughness().setModifiedBaseValue(sourceObj.getToughness().getModifiedBaseValue());
         target.setStartingLoyalty(sourceObj.getStartingLoyalty());
 
         return target;

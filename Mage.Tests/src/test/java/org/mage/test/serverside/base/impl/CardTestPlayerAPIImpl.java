@@ -788,8 +788,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             if (!isObjectHaveTargetNameOrAlias(player, permanent, cardName) || !permanent.getControllerId().equals(player.getId())) {
                 continue;
             }
-            int powerFound      = checkBaseValues ? permanent.getPower().getBaseValueModified()     : permanent.getPower().getValue();
-            int toughnessFound  = checkBaseValues ? permanent.getToughness().getBaseValueModified() : permanent.getToughness().getValue();
+            int powerFound      = checkBaseValues ? permanent.getPower().getModifiedBaseValue()     : permanent.getPower().getValue();
+            int toughnessFound  = checkBaseValues ? permanent.getToughness().getModifiedBaseValue() : permanent.getToughness().getValue();
 
             count++;
             if (scope == Filter.ComparisonScope.All) {

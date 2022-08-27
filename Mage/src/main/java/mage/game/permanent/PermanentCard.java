@@ -163,8 +163,8 @@ public class PermanentCard extends PermanentImpl {
     @Override
     public boolean turnFaceUp(Ability source, Game game, UUID playerId) {
         if (super.turnFaceUp(source, game, playerId)) {
-            power.modifyBaseValue(power.getBaseValue());
-            toughness.modifyBaseValue(toughness.getBaseValue());
+            power.setModifiedBaseValue(power.getBaseValue());
+            toughness.setModifiedBaseValue(toughness.getBaseValue());
             setManifested(false);
             setMorphed(false);
             return true;

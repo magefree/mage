@@ -29,7 +29,7 @@ public class MageInt implements Serializable, Copyable<MageInt> {
     // The original P/T value, can never change
     protected final int baseValue;
     // The current base value. Can be changed by effects such as Biomass Mutation
-    protected int baseValueModified;
+    protected int modifiedBaseValue;
     // The curent final value: current base + any modifications (e.g. +1/+1 counters or "creature gets +1/+1")
     protected int boostedValue;
     // String representation of the current base value, update automatically
@@ -37,21 +37,21 @@ public class MageInt implements Serializable, Copyable<MageInt> {
 
     public MageInt(int value) {
         this.baseValue = value;
-        this.baseValueModified = baseValue;
+        this.modifiedBaseValue = baseValue;
         this.boostedValue = baseValue;
         this.cardValue = Integer.toString(value);
     }
 
     public MageInt(int baseValue, String cardValue) {
         this.baseValue = baseValue;
-        this.baseValueModified = baseValue;
+        this.modifiedBaseValue = baseValue;
         this.boostedValue = baseValue;
         this.cardValue = cardValue;
     }
 
     public MageInt(int baseValue, int baseValueModified, int boostedValue, String cardValue) {
         this.baseValue = baseValue;
-        this.baseValueModified = baseValueModified;
+        this.modifiedBaseValue = baseValueModified;
         this.boostedValue = boostedValue;
         this.cardValue = cardValue;
     }
@@ -61,15 +61,15 @@ public class MageInt implements Serializable, Copyable<MageInt> {
         if (Objects.equals(this, EmptyMageInt)) {
             return this;
         }
-        return new MageInt(baseValue, baseValueModified, boostedValue, cardValue);
+        return new MageInt(baseValue, modifiedBaseValue, boostedValue, cardValue);
     }
 
     public int getBaseValue() {
         return baseValue;
     }
 
-    public int getBaseValueModified() {
-        return baseValueModified;
+    public int getModifiedBaseValue() {
+        return modifiedBaseValue;
     }
 
     public int getValue() {
@@ -86,8 +86,8 @@ public class MageInt implements Serializable, Copyable<MageInt> {
      *      transformPermanent
      * @param value
      */
-    public void modifyBaseValue(int value) {
-        this.baseValueModified = value;
+    public void setModifiedBaseValue(int value) {
+        this.modifiedBaseValue = value;
         this.boostedValue = value;
         this.cardValue = Integer.toString(value);
     }
@@ -101,12 +101,12 @@ public class MageInt implements Serializable, Copyable<MageInt> {
     }
 
     public void resetToModifiedBaseValue() {
-        this.boostedValue = this.baseValueModified;
+        this.boostedValue = this.modifiedBaseValue;
     }
 
     // TODO
     public void resetToBaseValue() {
-        modifyBaseValue(this.baseValue);
+        setModifiedBaseValue(this.baseValue);
     }
 
     @Override

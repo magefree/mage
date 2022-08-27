@@ -66,14 +66,14 @@ class MoltenSentryEffect extends OneShotEffect {
         if (controller != null && permanent != null) {
             if (controller.flipCoin(source, game, false)) {
                 game.informPlayers("Heads: " + permanent.getLogName() + " enters the battlefield as a 5/2 creature with haste");
-                permanent.getPower().modifyBaseValue(5);
-                permanent.getToughness().modifyBaseValue(2);
+                permanent.getPower().setModifiedBaseValue(5);
+                permanent.getToughness().setModifiedBaseValue(2);
                 game.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield), source);
                 return true;
             } else {
                 game.informPlayers("Tails: " + permanent.getLogName() + " enters the battlefield as a 2/5 creature with defender");
-                permanent.getPower().modifyBaseValue(2);
-                permanent.getToughness().modifyBaseValue(5);
+                permanent.getPower().setModifiedBaseValue(2);
+                permanent.getToughness().setModifiedBaseValue(5);
                 game.addEffect(new GainAbilitySourceEffect(DefenderAbility.getInstance(), Duration.WhileOnBattlefield), source);
                 return true;
             }

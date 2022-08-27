@@ -21,7 +21,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -118,8 +117,8 @@ public final class PrimalClay extends CardImpl {
                         game.addEffect(new GainAbilitySourceEffect(DefenderAbility.getInstance(), Duration.Custom), source);
                         break;
                 }
-                permanent.getPower().modifyBaseValue(power);
-                permanent.getToughness().modifyBaseValue(toughness);
+                permanent.getPower().setModifiedBaseValue(power);
+                permanent.getToughness().setModifiedBaseValue(toughness);
                 // game.addEffect(new SetPowerToughnessSourceEffect(power, toughness, Duration.Custom, SubLayer.SetPT_7b), source);
             }
             return false;

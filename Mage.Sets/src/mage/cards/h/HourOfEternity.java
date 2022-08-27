@@ -94,8 +94,8 @@ class HourOfEternityEffect extends OneShotEffect {
                     EmptyToken token = new EmptyToken();
                     CardUtil.copyTo(token).from(card, game);
                     token.removePTCDA();
-                    token.getPower().modifyBaseValue(4);
-                    token.getToughness().modifyBaseValue(4);
+                    token.getPower().setModifiedBaseValue(4);
+                    token.getToughness().setModifiedBaseValue(4);
                     token.getColor().setColor(ObjectColor.BLACK);
                     token.removeAllCreatureTypes();
                     token.addSubType(SubType.ZOMBIE);
