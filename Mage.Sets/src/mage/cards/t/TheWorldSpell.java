@@ -49,6 +49,7 @@ public final class TheWorldSpell extends CardImpl {
 
         // III -- Put up to two non-Saga permanent cards from your hand onto the battlefield.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new TheWorldSpellEffect());
+        this.addAbility(sagaAbility);
     }
 
     private TheWorldSpell(final TheWorldSpell card) {

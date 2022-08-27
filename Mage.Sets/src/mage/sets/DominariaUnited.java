@@ -174,6 +174,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Tattered Apparition", 111, Rarity.COMMON, mage.cards.t.TatteredApparition.class));
         cards.add(new SetCardInfo("Temporal Firestorm", 147, Rarity.RARE, mage.cards.t.TemporalFirestorm.class));
         cards.add(new SetCardInfo("Territorial Maro", 184, Rarity.UNCOMMON, mage.cards.t.TerritorialMaro.class));
+        cards.add(new SetCardInfo("The Elder Dragon War", 121, Rarity.RARE, mage.cards.t.TheElderDragonWar.class));
         cards.add(new SetCardInfo("The Raven Man", 103, Rarity.RARE, mage.cards.t.TheRavenMan.class));
         cards.add(new SetCardInfo("The World Spell", 189, Rarity.MYTHIC, mage.cards.t.TheWorldSpell.class));
         cards.add(new SetCardInfo("Threats Undetected", 185, Rarity.RARE, mage.cards.t.ThreatsUndetected.class));
