@@ -7,7 +7,8 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
- * @author rjayz
+ * @author R
+ * jayz
  */
 public class GaleWaterdeepProdigyTest extends CardTestPlayerBase {
 

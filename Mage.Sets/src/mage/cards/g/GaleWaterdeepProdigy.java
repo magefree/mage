@@ -22,7 +22,7 @@ import mage.watchers.common.CastFromHandWatcher;
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author Rjayz
  */
 public final class GaleWaterdeepProdigy extends CardImpl {
 
