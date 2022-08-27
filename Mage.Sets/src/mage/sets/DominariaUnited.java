@@ -4,15 +4,10 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * @author TheElk801
  */
 public final class DominariaUnited extends ExpansionSet {
-
-    private static final List<String> unfinished = Arrays.asList("Argivian Cavalier", "Balduvian Berserker", "Barkweave Crusher", "Benalish Faithbonder", "Coalition Skyknight", "Coalition Warbrute", "Guardian of New Benalia", "Hexbane Tortoise", "Keldon Flamesage", "Linebreaker Baloth", "Yavimaya Steelcrusher");
 
     private static final DominariaUnited instance = new DominariaUnited();
 
