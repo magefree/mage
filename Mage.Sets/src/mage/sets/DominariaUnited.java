@@ -183,6 +183,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Talas Lookout", 68, Rarity.COMMON, mage.cards.t.TalasLookout.class));
         cards.add(new SetCardInfo("Tangled Islet", 258, Rarity.COMMON, mage.cards.t.TangledIslet.class));
         cards.add(new SetCardInfo("Tattered Apparition", 111, Rarity.COMMON, mage.cards.t.TatteredApparition.class));
+        cards.add(new SetCardInfo("Tear Asunder", 183, Rarity.UNCOMMON, mage.cards.t.TearAsunder.class));
         cards.add(new SetCardInfo("Temporal Firestorm", 147, Rarity.RARE, mage.cards.t.TemporalFirestorm.class));
         cards.add(new SetCardInfo("Territorial Maro", 184, Rarity.UNCOMMON, mage.cards.t.TerritorialMaro.class));
         cards.add(new SetCardInfo("The Raven Man", 103, Rarity.RARE, mage.cards.t.TheRavenMan.class));
