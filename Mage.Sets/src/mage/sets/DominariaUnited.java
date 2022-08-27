@@ -51,6 +51,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Battlewing Mystic", 43, Rarity.UNCOMMON, mage.cards.b.BattlewingMystic.class));
         cards.add(new SetCardInfo("Benalish Faithbonder", 7, Rarity.COMMON, mage.cards.b.BenalishFaithbonder.class));
         cards.add(new SetCardInfo("Benalish Sleeper", 8, Rarity.COMMON, mage.cards.b.BenalishSleeper.class));
+        cards.add(new SetCardInfo("Bite Down", 155, Rarity.COMMON, mage.cards.b.BiteDown.class));
         cards.add(new SetCardInfo("Bog Badger", 156, Rarity.COMMON, mage.cards.b.BogBadger.class));
         cards.add(new SetCardInfo("Bone Splinters", 83, Rarity.COMMON, mage.cards.b.BoneSplinters.class));
         cards.add(new SetCardInfo("Bortuk Bonerattle", 197, Rarity.UNCOMMON, mage.cards.b.BortukBonerattle.class));
