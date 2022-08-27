@@ -134,6 +134,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Linebreaker Baloth", 168, Rarity.UNCOMMON, mage.cards.l.LinebreakerBaloth.class));
         cards.add(new SetCardInfo("Llanowar Loamspeaker", 170, Rarity.RARE, mage.cards.l.LlanowarLoamspeaker.class));
         cards.add(new SetCardInfo("Llanowar Stalker", 171, Rarity.COMMON, mage.cards.l.LlanowarStalker.class));
+        cards.add(new SetCardInfo("Love Song of Night and Day", 25, Rarity.UNCOMMON, mage.cards.l.LoveSongOfNightAndDay.class));
         cards.add(new SetCardInfo("Magnigoth Sentry", 172, Rarity.COMMON, mage.cards.m.MagnigothSentry.class));
         cards.add(new SetCardInfo("Meria's Outrider", 138, Rarity.COMMON, mage.cards.m.MeriasOutrider.class));
         cards.add(new SetCardInfo("Mesa Cavalier", 26, Rarity.COMMON, mage.cards.m.MesaCavalier.class));
