@@ -117,6 +117,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Meteorite", 235, Rarity.COMMON, mage.cards.m.Meteorite.class));
         cards.add(new SetCardInfo("Micromancer", 57, Rarity.UNCOMMON, mage.cards.m.Micromancer.class));
         cards.add(new SetCardInfo("Molten Monstrosity", 139, Rarity.COMMON, mage.cards.m.MoltenMonstrosity.class));
+        cards.add(new SetCardInfo("Molten Tributary", 251, Rarity.COMMON, mage.cards.m.MoltenTributary.class));
         cards.add(new SetCardInfo("Monstrous War-Leech", 98, Rarity.UNCOMMON, mage.cards.m.MonstrousWarLeech.class));
         cards.add(new SetCardInfo("Mossbeard Ancient", 173, Rarity.UNCOMMON, mage.cards.m.MossbeardAncient.class));
         cards.add(new SetCardInfo("Mountain", 271, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
