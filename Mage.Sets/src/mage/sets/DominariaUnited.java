@@ -82,6 +82,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Evolved Sleeper", 93, Rarity.RARE, mage.cards.e.EvolvedSleeper.class));
         cards.add(new SetCardInfo("Extinguish the Light", 94, Rarity.COMMON, mage.cards.e.ExtinguishTheLight.class));
         cards.add(new SetCardInfo("Fires of Victory", 123, Rarity.UNCOMMON, mage.cards.f.FiresOfVictory.class));
+        cards.add(new SetCardInfo("Floriferous Vinewall", 163, Rarity.COMMON, mage.cards.f.FloriferousVinewall.class));
         cards.add(new SetCardInfo("Flowstone Infusion", 124, Rarity.COMMON, mage.cards.f.FlowstoneInfusion.class));
         cards.add(new SetCardInfo("Flowstone Kavu", 125, Rarity.COMMON, mage.cards.f.FlowstoneKavu.class));
         cards.add(new SetCardInfo("Forest", 274, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
