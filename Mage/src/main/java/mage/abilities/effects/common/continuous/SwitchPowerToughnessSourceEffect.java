@@ -45,8 +45,8 @@ public class SwitchPowerToughnessSourceEffect extends ContinuousEffectImpl {
         Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (sourcePermanent != null) {
             int power = sourcePermanent.getPower().getValue();
-            sourcePermanent.getPower().setValue(sourcePermanent.getToughness().getValue());
-            sourcePermanent.getToughness().setValue(power);
+            sourcePermanent.getPower().setBoostedValue(sourcePermanent.getToughness().getValue());
+            sourcePermanent.getToughness().setBoostedValue(power);
             return true;
         } else {
             if (duration.isOnlyValidIfNoZoneChange()) {

@@ -127,8 +127,8 @@ class GristTheHungerTideTypeEffect extends ContinuousEffectImpl {
                 if (sublayer != SubLayer.SetPT_7b) {
                     break;
                 }
-                sourceObject.getPower().setValue(1);
-                sourceObject.getToughness().setValue(1);
+                sourceObject.getPower().setBoostedValue(1);
+                sourceObject.getToughness().setBoostedValue(1);
                 break;
         }
         return true;

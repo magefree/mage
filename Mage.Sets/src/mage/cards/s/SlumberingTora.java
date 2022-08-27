@@ -91,8 +91,8 @@ public final class SlumberingTora extends CardImpl {
                     break;
                 case PTChangingEffects_7:
                     if (sublayer == SubLayer.SetPT_7b) {
-                        permanent.getPower().setValue(convManaCosts);
-                        permanent.getToughness().setValue(convManaCosts);
+                        permanent.getPower().setBoostedValue(convManaCosts);
+                        permanent.getToughness().setBoostedValue(convManaCosts);
                     }
             }
             return true;

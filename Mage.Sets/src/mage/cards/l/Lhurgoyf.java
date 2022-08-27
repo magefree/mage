@@ -76,8 +76,8 @@ class LhurgoyfEffect extends ContinuousEffectImpl {
                     }
                 }
 
-                mageObject.getPower().setValue(number);
-                mageObject.getToughness().setValue(number + 1);
+                mageObject.getPower().setBoostedValue(number);
+                mageObject.getToughness().setBoostedValue(number + 1);
                 return true;
 
             }

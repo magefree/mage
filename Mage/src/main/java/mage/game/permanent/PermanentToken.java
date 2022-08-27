@@ -1,6 +1,5 @@
 package mage.game.permanent;
 
-import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
@@ -49,8 +48,8 @@ public class PermanentToken extends PermanentImpl {
         copyFromToken(token, game, true);
         super.reset(game);
         // Because the P/T objects have there own base value for reset we have to take it from there instead of from the basic token object
-        this.power.resetToBaseValue();
-        this.toughness.resetToBaseValue();
+        this.power.resetToModifiedBaseValue();
+        this.toughness.resetToModifiedBaseValue();
     }
 
     @Override

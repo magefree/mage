@@ -52,10 +52,10 @@ public class SetBasePowerToughnessTargetEffect extends ContinuousEffectImpl {
             Permanent target = game.getPermanent(targetId);
             if (target != null) {
                 if (power != null) {
-                    target.getPower().setValue(power.calculate(game, source, this));
+                    target.getPower().setBoostedValue(power.calculate(game, source, this));
                 }
                 if (toughness != null) {
-                    target.getToughness().setValue(toughness.calculate(game, source, this));
+                    target.getToughness().setBoostedValue(toughness.calculate(game, source, this));
                 }
                 result = true;
             }

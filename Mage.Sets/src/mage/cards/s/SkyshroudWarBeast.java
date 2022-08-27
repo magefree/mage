@@ -84,8 +84,8 @@ class SkyshroudWarBeastEffect extends ContinuousEffectImpl {
                 FilterLandPermanent filter = FilterLandPermanent.nonbasicLand();
                 filter.add(new ControllerIdPredicate(playerId));
                 int number = new PermanentsOnBattlefieldCount(filter).calculate(game, source, this);
-                target.getPower().setValue(number);
-                target.getToughness().setValue(number);
+                target.getPower().setBoostedValue(number);
+                target.getToughness().setBoostedValue(number);
                 return true;
             }
         }

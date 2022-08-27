@@ -133,8 +133,8 @@ public class TestCardRenderDialog extends MageDialog {
         }
 
         if (damage > 0) perm.damage(damage, controllerId, null, game);
-        if (power > 0) perm.getPower().setValue(power);
-        if (toughness > 0) perm.getToughness().setValue(toughness);
+        if (power > 0) perm.getPower().setBoostedValue(power);
+        if (toughness > 0) perm.getToughness().setBoostedValue(toughness);
         perm.removeSummoningSickness();
         perm.setTapped(tapped);
         PermanentView cardView = new PermanentView(perm, permCard, controllerId, game);

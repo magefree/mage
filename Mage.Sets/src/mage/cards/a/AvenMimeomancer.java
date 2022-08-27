@@ -73,8 +73,8 @@ class AvenEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (target != null) {
-            target.getPower().setValue(3);
-            target.getToughness().setValue(1);
+            target.getPower().setBoostedValue(3);
+            target.getToughness().setBoostedValue(1);
             return true;
         }
         return false;

@@ -1298,12 +1298,12 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public void addPower(int power) {
-        this.power.boostValue(power);
+        this.power.increaseBoostedValue(power);
     }
 
     @Override
     public void addToughness(int toughness) {
-        this.toughness.boostValue(toughness);
+        this.toughness.increaseBoostedValue(toughness);
     }
 
     /**

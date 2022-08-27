@@ -160,8 +160,8 @@ class ChimericStaffEffect extends ContinuousEffectImpl {
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
                     int xValue = source.getManaCostsToPay().getX();
-                    permanent.getPower().setValue(xValue);
-                    permanent.getToughness().setValue(xValue);
+                    permanent.getPower().setBoostedValue(xValue);
+                    permanent.getToughness().setBoostedValue(xValue);
                 }
         }
         return true;

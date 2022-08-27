@@ -77,8 +77,8 @@ class AwakenedAwarenessEffect extends ContinuousEffectImpl {
         if (enchantment != null) {
             Permanent creature = game.getPermanent(enchantment.getAttachedTo());
             if (creature != null && creature.isCreature(game)) {
-                creature.getPower().setValue(1);
-                creature.getToughness().setValue(1);
+                creature.getPower().setBoostedValue(1);
+                creature.getToughness().setBoostedValue(1);
                 return true;
             }
         }

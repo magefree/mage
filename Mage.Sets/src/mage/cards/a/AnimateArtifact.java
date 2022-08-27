@@ -80,8 +80,8 @@ class AnimateArtifactContinuousEffect extends ContinuousEffectImpl {
             if (permanent != null && !permanent.isCreature(game)) {
                 if (sublayer == SubLayer.NA) {
                     permanent.addCardType(game, CardType.CREATURE);
-                    permanent.getPower().setValue(permanent.getManaValue());
-                    permanent.getToughness().setValue(permanent.getManaValue());
+                    permanent.getPower().setBoostedValue(permanent.getManaValue());
+                    permanent.getToughness().setBoostedValue(permanent.getManaValue());
                 }
             }
             return true;

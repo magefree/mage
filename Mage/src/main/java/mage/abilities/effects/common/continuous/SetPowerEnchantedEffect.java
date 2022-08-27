@@ -40,7 +40,7 @@ public class SetPowerEnchantedEffect extends ContinuousEffectImpl {
                 && enchantment.getAttachedTo() != null) {
             Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
             if (enchanted != null) {
-                enchanted.getPower().setValue(power);
+                enchanted.getPower().setBoostedValue(power);
             }
             return true;
         }

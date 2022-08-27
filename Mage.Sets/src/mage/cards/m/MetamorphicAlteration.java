@@ -139,8 +139,8 @@ class MetamorphicAlterationEffect extends ContinuousEffectImpl {
         for (Ability ability : copied.getAbilities()) {
             permanent.addAbility(ability, source.getSourceId(), game);
         }
-        permanent.getPower().setValue(copied.getPower().getBaseValueModified());
-        permanent.getToughness().setValue(copied.getToughness().getBaseValueModified());
+        permanent.getPower().setBoostedValue(copied.getPower().getBaseValueModified());
+        permanent.getToughness().setBoostedValue(copied.getToughness().getBaseValueModified());
         return true;
     }
 

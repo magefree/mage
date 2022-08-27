@@ -83,8 +83,8 @@ class CurseOfConformityEffect extends ContinuousEffectImpl {
                     break;
                 case PTChangingEffects_7:
                     if (sublayer == SubLayer.SetPT_7b) {
-                        permanent.getPower().setValue(3);
-                        permanent.getToughness().setValue(3);
+                        permanent.getPower().setBoostedValue(3);
+                        permanent.getToughness().setBoostedValue(3);
                     }
             }
         }

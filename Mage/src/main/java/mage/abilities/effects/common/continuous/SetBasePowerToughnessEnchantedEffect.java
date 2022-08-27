@@ -46,8 +46,8 @@ public class SetBasePowerToughnessEnchantedEffect extends ContinuousEffectImpl {
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
             if (enchanted != null) {
-                enchanted.getPower().setValue(power);
-                enchanted.getToughness().setValue(toughness);
+                enchanted.getPower().setBoostedValue(power);
+                enchanted.getToughness().setBoostedValue(toughness);
             }
             return true;
         }

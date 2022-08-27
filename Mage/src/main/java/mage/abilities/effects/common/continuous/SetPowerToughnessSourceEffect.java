@@ -71,15 +71,15 @@ public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl {
         }
         if (amount != null) {
             int value = amount.calculate(game, source, this);
-            mageObject.getPower().setValue(value);
-            mageObject.getToughness().setValue(value);
+            mageObject.getPower().setBoostedValue(value);
+            mageObject.getToughness().setBoostedValue(value);
             return true;
         } else {
             if (power != Integer.MIN_VALUE) {
-                mageObject.getPower().setValue(power);
+                mageObject.getPower().setBoostedValue(power);
             }
             if (toughness != Integer.MIN_VALUE) {
-                mageObject.getToughness().setValue(toughness);
+                mageObject.getToughness().setBoostedValue(toughness);
             }
         }
         return true;

@@ -106,8 +106,8 @@ class WildShapeEffect extends ContinuousEffectImpl {
                 return true;
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
-                    permanent.getPower().setValue(power);
-                    permanent.getToughness().setValue(toughness);
+                    permanent.getPower().setBoostedValue(power);
+                    permanent.getToughness().setBoostedValue(toughness);
                     return true;
                 }
         }

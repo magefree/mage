@@ -13,20 +13,20 @@ public class MageInt implements Serializable, Copyable<MageInt> {
         private static final String exceptionMessage = "MageInt.EmptyMageInt can't be modified.";
 
         @Override
-        public void boostValue(int amount) {
+        public void increaseBoostedValue(int amount) {
             throw new RuntimeException(exceptionMessage);
         }
 
         @Override
-        public void setValue(int value) {
+        public void setBoostedValue(int value) {
             throw new RuntimeException(exceptionMessage);
         }
     };
 
-    protected int baseValue;
+    protected final int baseValue;
     protected int baseValueModified;
     protected int boostedValue;
-    protected String cardValue = "";
+    protected String cardValue;
 
     public MageInt(int value) {
         this.baseValue = value;
@@ -69,22 +69,36 @@ public class MageInt implements Serializable, Copyable<MageInt> {
         return boostedValue;
     }
 
+    /**
+     * TODO:
+     * Special cases:
+     * - Morph
+     *      setPermanentToFaceDownCreature
+     *      turnFaceUp
+     * - Transform
+     *      transformPermanent
+     * @param value
+     */
     public void modifyBaseValue(int value) {
         this.baseValueModified = value;
         this.boostedValue = value;
         this.cardValue = Integer.toString(value);
     }
 
-    public void setValue(int value) {
+    public void setBoostedValue(int value) {
         this.boostedValue = value;
     }
 
-    public void boostValue(int amount) {
+    public void increaseBoostedValue(int amount) {
         this.boostedValue = CardUtil.overflowInc(this.boostedValue, amount);
     }
 
-    public void resetToBaseValue() {
+    public void resetToModifiedBaseValue() {
         this.boostedValue = this.baseValueModified;
+    }
+
+    public void resetToBaseValue() {
+        modifyBaseValue(this.baseValue);
     }
 
     @Override

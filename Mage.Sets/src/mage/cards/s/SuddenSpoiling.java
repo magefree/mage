@@ -85,8 +85,8 @@ class SuddenSpoilingEffect extends ContinuousEffectImpl {
                             break;
                         case PTChangingEffects_7:
                             if (sublayer == SubLayer.SetPT_7b) {
-                                permanent.getPower().setValue(0);
-                                permanent.getToughness().setValue(2);
+                                permanent.getPower().setBoostedValue(0);
+                                permanent.getToughness().setBoostedValue(2);
                             }
                     }
                 }

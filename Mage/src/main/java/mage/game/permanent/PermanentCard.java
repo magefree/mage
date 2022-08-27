@@ -92,8 +92,8 @@ public class PermanentCard extends PermanentImpl {
         // when the permanent is reset, copy all original values from the card
         // must copy card each reset so that the original values don't get modified
         copyFromCard(card, game);
-        power.resetToBaseValue();
-        toughness.resetToBaseValue();
+        power.resetToModifiedBaseValue();
+        toughness.resetToModifiedBaseValue();
         super.reset(game);
     }
 

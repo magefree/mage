@@ -128,8 +128,8 @@ public final class StarfieldOfNyx extends CardImpl {
                                 && permanent.isCreature(game)
                                 && !permanent.hasSubtype(SubType.AURA, game)) {
                             int manaCost = permanent.getManaValue();
-                            permanent.getPower().setValue(manaCost);
-                            permanent.getToughness().setValue(manaCost);
+                            permanent.getPower().setBoostedValue(manaCost);
+                            permanent.getToughness().setBoostedValue(manaCost);
                         }
                         break;
                 }

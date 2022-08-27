@@ -79,16 +79,16 @@ public class SetBasePowerToughnessAllEffect extends ContinuousEffectImpl {
             for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) {
                 Permanent permanent = it.next().getPermanent(game);
                 if (permanent != null) {
-                    permanent.getPower().setValue(newPower);
-                    permanent.getToughness().setValue(newToughness);
+                    permanent.getPower().setBoostedValue(newPower);
+                    permanent.getToughness().setBoostedValue(newToughness);
                 } else {
                     it.remove(); // no longer on the battlefield, remove reference to object
                 }
             }
         } else {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-                permanent.getPower().setValue(newPower);
-                permanent.getToughness().setValue(newToughness);
+                permanent.getPower().setBoostedValue(newPower);
+                permanent.getToughness().setBoostedValue(newToughness);
             }
         }
         return true;
