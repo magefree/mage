@@ -74,6 +74,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Destroy Evil", 17, Rarity.COMMON, mage.cards.d.DestroyEvil.class));
         cards.add(new SetCardInfo("Drag to the Bottom", 91, Rarity.RARE, mage.cards.d.DragToTheBottom.class));
         cards.add(new SetCardInfo("Dragon Whelp", 120, Rarity.UNCOMMON, mage.cards.d.DragonWhelp.class));
+        cards.add(new SetCardInfo("Eerie Soultender", 92, Rarity.COMMON, mage.cards.e.EerieSoultender.class));
         cards.add(new SetCardInfo("Elas il-Kor, Sadistic Pilgrim", 198, Rarity.UNCOMMON, mage.cards.e.ElasIlKorSadisticPilgrim.class));
         cards.add(new SetCardInfo("Electrostatic Infantry", 122, Rarity.UNCOMMON, mage.cards.e.ElectrostaticInfantry.class));
         cards.add(new SetCardInfo("Elfhame Wurm", 161, Rarity.COMMON, mage.cards.e.ElfhameWurm.class));
