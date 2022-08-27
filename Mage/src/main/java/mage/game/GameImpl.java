@@ -120,7 +120,9 @@ public abstract class GameImpl implements Game {
 
     // game states to allow player rollback
     protected transient Map<Integer, GameState> gameStatesRollBack = new HashMap<>();
+    protected transient GameState previousPhaseRollBack;
     protected transient boolean executingRollback;
+    protected transient boolean executingRollbackToPreviousPhase;
     protected transient int turnToGoToForRollback;
 
     protected Date startTime;
@@ -757,6 +759,10 @@ public abstract class GameImpl implements Game {
         if (!simulation && gameStates != null) {
             if (bookmark || saveGame) {
                 gameStates.save(state);
+                if(getPhase().getType().equals(TurnPhase.PRECOMBAT_MAIN)
+                || getPhase().getType().equals(TurnPhase.POSTCOMBAT_MAIN)) {
+                    previousPhaseRollBack = state.copy();
+                }
             }
         }
     }
@@ -3597,6 +3603,25 @@ public abstract class GameImpl implements Game {
         executingRollback = false;
     }
 
+    public void rollbackToPreviousPhaseExecution() {
+        GameState restore = previousPhaseRollBack;
+        if (restore != null) {
+            informPlayers(GameLog.getPlayerRequestColoredText("Player request: Rolling back to previous phase"));
+            state.restoreForRollBack(restore);
+            playerList.setCurrent(state.getPlayerByOrderId());
+            // Reset temporary created bookmarks because no longer valid after rollback
+            savedStates.clear();
+            gameStates.clear();
+
+            for (Player playerObject : getPlayers().values()) {
+                if (playerObject.isInGame()) {
+                    playerObject.abortReset();
+                }
+            }
+        }
+        executingRollbackToPreviousPhase = false;
+    }
+
     @Override
     public synchronized void rollbackTurns(int turnsToRollback) {
         if (gameOptions.rollbackTurnsAllowed && !executingRollback) {
@@ -3616,6 +3641,28 @@ public abstract class GameImpl implements Game {
                 fireUpdatePlayersEvent();
                 if (gameOptions.testMode && gameStopped) { // in test mode execute rollback directly
                     rollbackTurnsExecution(turnToGoToForRollback);
+                }
+            }
+        }
+    }
+
+    public synchronized void rollbackPreviousPhase() {
+        if (gameOptions.rollbackTurnsAllowed && !executingRollbackToPreviousPhase) {
+            int turnToGoTo = previousPhaseRollBack.getTurnNum();
+            if (turnToGoTo < 1 || previousPhaseRollBack == null) {
+                informPlayers(GameLog.getPlayerRequestColoredText("Player request: It's not possible to rollback to previous phase"));
+            } else {
+                executingRollbackToPreviousPhase = true;
+                for (Player playerObject : getPlayers().values()) {
+                    if (playerObject.isHuman() && playerObject.canRespond()) {
+                        playerObject.resetStoredBookmark(this);
+                        playerObject.abort();
+                        playerObject.resetPlayerPassedActions();
+                    }
+                }
+                fireUpdatePlayersEvent();
+                if (gameOptions.testMode && gameStopped) { // in test mode execute rollback directly
+                    rollbackToPreviousPhaseExecution();
                 }
             }
         }
