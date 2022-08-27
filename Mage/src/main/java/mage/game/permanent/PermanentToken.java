@@ -1,5 +1,6 @@
 package mage.game.permanent;
 
+import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
@@ -25,6 +26,7 @@ public class PermanentToken extends PermanentImpl {
         this.token = token.copy();
         this.token.getAbilities().newOriginalId(); // neccessary if token has ability like DevourAbility()
         this.token.getAbilities().setSourceId(objectId);
+        // TODO: Should this be using base or modified toughness?
         this.power.modifyBaseValue(token.getPower().getBaseValueModified());
         this.toughness.modifyBaseValue(token.getToughness().getBaseValueModified());
         this.copyFromToken(this.token, game, false); // needed to have at this time (e.g. for subtypes for entersTheBattlefield replacement effects)
