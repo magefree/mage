@@ -122,6 +122,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Joint Exploration", 56, Rarity.UNCOMMON, mage.cards.j.JointExploration.class));
         cards.add(new SetCardInfo("Juniper Order Rootweaver", 22, Rarity.COMMON, mage.cards.j.JuniperOrderRootweaver.class));
         cards.add(new SetCardInfo("Karplusan Forest", 250, Rarity.RARE, mage.cards.k.KarplusanForest.class));
+        cards.add(new SetCardInfo("Keldon Strike Team", 136, Rarity.COMMON, mage.cards.k.KeldonStrikeTeam.class));
         cards.add(new SetCardInfo("King Darien XLVIII", 204, Rarity.RARE, mage.cards.k.KingDarienXLVIII.class));
         cards.add(new SetCardInfo("Knight of Dawn's Light", 23, Rarity.UNCOMMON, mage.cards.k.KnightOfDawnsLight.class));
         cards.add(new SetCardInfo("Knight of Dusk's Shadow", 96, Rarity.UNCOMMON, mage.cards.k.KnightOfDusksShadow.class));
