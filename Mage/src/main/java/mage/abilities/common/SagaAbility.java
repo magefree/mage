@@ -118,7 +118,7 @@ public class SagaAbility extends SimpleStaticAbility {
     @Override
     public String getRule() {
         return (readAhead
-                ? "Choose a chapter and start with that many lore counters. " +
+                ? "Read ahead <i>(Choose a chapter and start with that many lore counters. " +
                 "Add one after your draw step. Skipped chapters don't trigger."
                 : "<i>(As this Saga enters and after your draw step, add a lore counter.")
                 + (showSacText ? " Sacrifice after " + maxChapter.toString() + '.' : "") + ")</i> ";
