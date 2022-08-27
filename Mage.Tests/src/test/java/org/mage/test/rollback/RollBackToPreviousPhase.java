@@ -12,7 +12,7 @@ public class RollBackToPreviousPhase extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
         addCard(Zone.BATTLEFIELD, playerA, "Llanowar Elves", 1);
         attack(3, playerA, "Llanowar Elves");
-        setStopAt(3, PhaseStep.END_TURN);
+        setStopAt(3, PhaseStep.END_COMBAT);
         execute();
 
         currentGame.rollbackToPreviousPhaseExecution();
