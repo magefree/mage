@@ -70,6 +70,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Colossal Growth", 158, Rarity.COMMON, mage.cards.c.ColossalGrowth.class));
         cards.add(new SetCardInfo("Contaminated Aquifer", 245, Rarity.COMMON, mage.cards.c.ContaminatedAquifer.class));
         cards.add(new SetCardInfo("Cosmic Epiphany", 283, Rarity.RARE, mage.cards.c.CosmicEpiphany.class));
+        cards.add(new SetCardInfo("Crystal Grotto", 246, Rarity.COMMON, mage.cards.c.CrystalGrotto.class));
         cards.add(new SetCardInfo("Cult Conscript", 88, Rarity.UNCOMMON, mage.cards.c.CultConscript.class));
         cards.add(new SetCardInfo("Cut Down", 89, Rarity.UNCOMMON, mage.cards.c.CutDown.class));
         cards.add(new SetCardInfo("Deathbloom Gardener", 159, Rarity.COMMON, mage.cards.d.DeathbloomGardener.class));
