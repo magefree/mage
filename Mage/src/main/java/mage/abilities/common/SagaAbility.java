@@ -205,7 +205,7 @@ class ChapterTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.COUNTER_ADDED;
+        return event.getType() == GameEvent.EventType.COUNTERS_ADDED;
     }
 
     @Override
