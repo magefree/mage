@@ -6,6 +6,9 @@ import mage.util.Copyable;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Wrapper class for the Integer used to represent power and toughness.
+ */
 public class MageInt implements Serializable, Copyable<MageInt> {
 
     public static final MageInt EmptyMageInt = new MageInt(Integer.MIN_VALUE, "") {
@@ -23,9 +26,13 @@ public class MageInt implements Serializable, Copyable<MageInt> {
         }
     };
 
+    // The original P/T value, can never change
     protected final int baseValue;
+    // The current base value. Can be changed by effects such as Biomass Mutation
     protected int baseValueModified;
+    // The curent final value: current base + any modifications (e.g. +1/+1 counters or "creature gets +1/+1")
     protected int boostedValue;
+    // String representation of the current base value, update automatically
     protected String cardValue;
 
     public MageInt(int value) {
@@ -97,6 +104,7 @@ public class MageInt implements Serializable, Copyable<MageInt> {
         this.boostedValue = this.baseValueModified;
     }
 
+    // TODO
     public void resetToBaseValue() {
         modifyBaseValue(this.baseValue);
     }
@@ -105,5 +113,4 @@ public class MageInt implements Serializable, Copyable<MageInt> {
     public String toString() {
         return cardValue;
     }
-
 }
