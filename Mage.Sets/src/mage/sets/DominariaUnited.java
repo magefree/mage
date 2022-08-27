@@ -87,6 +87,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Griffin Protector", 18, Rarity.COMMON, mage.cards.g.GriffinProtector.class));
         cards.add(new SetCardInfo("Hammerhand", 129, Rarity.COMMON, mage.cards.h.Hammerhand.class));
         cards.add(new SetCardInfo("Haughty Djinn", 52, Rarity.RARE, mage.cards.h.HaughtyDjinn.class));
+        cards.add(new SetCardInfo("Haunted Mire", 248, Rarity.COMMON, mage.cards.h.HauntedMire.class));
         cards.add(new SetCardInfo("Herd Migration", 165, Rarity.RARE, mage.cards.h.HerdMigration.class));
         cards.add(new SetCardInfo("Hero's Heirloom", 231, Rarity.UNCOMMON, mage.cards.h.HerosHeirloom.class));
         cards.add(new SetCardInfo("Hurler Cyclops", 130, Rarity.UNCOMMON, mage.cards.h.HurlerCyclops.class));
