@@ -67,6 +67,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Faithless Looting", 122, Rarity.COMMON, mage.cards.f.FaithlessLooting.class));
         cards.add(new SetCardInfo("Farseek", 133, Rarity.COMMON, mage.cards.f.Farseek.class));
         cards.add(new SetCardInfo("Fellwar Stone", 182, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
+        cards.add(new SetCardInfo("Flood Plain", 210, Rarity.UNCOMMON, mage.cards.f.FloodPlain.class));
         cards.add(new SetCardInfo("Foreboding Ruins", 211, Rarity.RARE, mage.cards.f.ForebodingRuins.class));
         cards.add(new SetCardInfo("Frontier Bivouac", 212, Rarity.UNCOMMON, mage.cards.f.FrontierBivouac.class));
         cards.add(new SetCardInfo("Fusion Elemental", 150, Rarity.UNCOMMON, mage.cards.f.FusionElemental.class));
@@ -83,6 +84,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Hero's Downfall", 112, Rarity.UNCOMMON, mage.cards.h.HerosDownfall.class));
         cards.add(new SetCardInfo("Heroes' Podium", 185, Rarity.RARE, mage.cards.h.HeroesPodium.class));
         cards.add(new SetCardInfo("Honor-Worn Shaku", 187, Rarity.UNCOMMON, mage.cards.h.HonorWornShaku.class));
+        cards.add(new SetCardInfo("Illuna, Apex of Wishes", 154, Rarity.MYTHIC, mage.cards.i.IllunaApexOfWishes.class));
         cards.add(new SetCardInfo("Iridian Maelstrom", 12, Rarity.RARE, mage.cards.i.IridianMaelstrom.class));
         cards.add(new SetCardInfo("Jazal Goldmane", 102, Rarity.MYTHIC, mage.cards.j.JazalGoldmane.class));
         cards.add(new SetCardInfo("Josu Vess, Lich Knight", 113, Rarity.RARE, mage.cards.j.JosuVessLichKnight.class));
