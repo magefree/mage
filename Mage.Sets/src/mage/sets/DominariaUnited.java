@@ -144,6 +144,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Phyrexian Vivisector", 100, Rarity.COMMON, mage.cards.p.PhyrexianVivisector.class));
         cards.add(new SetCardInfo("Phyrexian Warhorse", 101, Rarity.COMMON, mage.cards.p.PhyrexianWarhorse.class));
         cards.add(new SetCardInfo("Pilfer", 102, Rarity.UNCOMMON, mage.cards.p.Pilfer.class));
+        cards.add(new SetCardInfo("Pixie Illusionist", 61, Rarity.COMMON, mage.cards.p.PixieIllusionist.class));
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prayer of Binding", 28, Rarity.UNCOMMON, mage.cards.p.PrayerOfBinding.class));
         cards.add(new SetCardInfo("Protect the Negotiators", 62, Rarity.UNCOMMON, mage.cards.p.ProtectTheNegotiators.class));
