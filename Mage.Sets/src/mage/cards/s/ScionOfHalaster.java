@@ -3,7 +3,6 @@ package mage.cards.s;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
@@ -13,6 +12,7 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.players.Player;
 import mage.watchers.common.CardsDrawnThisTurnWatcher;
 
 import java.util.UUID;
@@ -32,7 +32,7 @@ public final class ScionOfHalaster extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                new SimpleStaticAbility(new ScionOfHalasterReplacementEffect()),
                 Duration.WhileOnBattlefield, StaticFilters.FILTER_CREATURES_OWNED_COMMANDER
-        )));
+        )), new CardsDrawnThisTurnWatcher());
     }
 
     private ScionOfHalaster(final ScionOfHalaster card) {
@@ -69,7 +69,10 @@ class ScionOfHalasterReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         new LookLibraryAndPickControllerEffect(2, 1, LookLibraryControllerEffect.PutCards.GRAVEYARD, LookLibraryControllerEffect.PutCards.TOP_ANY).apply(game, source);
-        new DrawCardSourceControllerEffect(1).concatBy(", then").apply(game, source);
+        Player you = game.getPlayer(event.getPlayerId());
+        if (you != null) {
+            you.drawCards(1, source, game, event);
+        }
         return true;
     }
 
@@ -81,9 +84,6 @@ class ScionOfHalasterReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!event.getPlayerId().equals(source.getControllerId())) {
-            return false;
-        }
-        if (source.getSourceId().equals(event.getSourceId())) {
             return false;
         }
         CardsDrawnThisTurnWatcher watcher = game.getState().getWatcher(CardsDrawnThisTurnWatcher.class);
