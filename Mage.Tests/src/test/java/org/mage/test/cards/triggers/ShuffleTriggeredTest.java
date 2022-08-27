@@ -23,7 +23,7 @@ public class ShuffleTriggeredTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerA, "Silvercoat Lion");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Widespread Panic");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Widespread Panic", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Untamed Wilds");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -54,7 +54,7 @@ public class ShuffleTriggeredTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerB, "Silvercoat Lion");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Widespread Panic");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Widespread Panic", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Knowledge Exploitation", playerB);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

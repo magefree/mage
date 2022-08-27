@@ -23,7 +23,7 @@ public class LoseAbilityTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Air Elemental");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grounded", "Elite Vanguard");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grounded", "Air Elemental");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Grounded", "Air Elemental");
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
@@ -53,7 +53,7 @@ public class LoseAbilityTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Drake Umbra");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grounded", "Air Elemental");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Drake Umbra", "Air Elemental");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Drake Umbra", "Air Elemental");
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
@@ -81,7 +81,9 @@ public class LoseAbilityTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Drake Umbra", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Drake Umbra", "Air Elemental");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Drake Umbra", "Air Elemental");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grounded", "Air Elemental");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

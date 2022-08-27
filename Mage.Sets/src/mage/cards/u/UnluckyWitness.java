@@ -34,7 +34,7 @@ public final class UnluckyWitness extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Unlucky Witness dies, exile the top two cards of your library. Until your next end step, you may play one of those cards.
-        this.addAbility(new DiesSourceTriggeredAbility(new UnluckyWitnessEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new UnluckyWitnessEffect()), new UnluckyWitnessWatcher());
     }
 
     private UnluckyWitness(final UnluckyWitness card) {

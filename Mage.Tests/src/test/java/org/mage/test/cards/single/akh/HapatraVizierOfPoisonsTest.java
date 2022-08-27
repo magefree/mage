@@ -119,7 +119,7 @@ public class HapatraVizierOfPoisonsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, concordantCrossroads, 1);
         addCard(Zone.BATTLEFIELD, playerB, krakenHatchling, 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, sprout);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, sprout, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, triumphOfTheHordes);
 
         attack(1, playerA, "Saproling Token");

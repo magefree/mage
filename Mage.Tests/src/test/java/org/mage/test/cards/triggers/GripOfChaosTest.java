@@ -13,11 +13,11 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class GripOfChaosTest extends CardTestPlayerBase {
 
     /**
-     * From #6344 I just had a game where we had an interaction between Grip of
-     * Chaos, Felidar Guardian, and Panharmonicon in which the cloned Felidar
-     * trigger fizzled with valid targets on field because Grip retargeted that
-     * trigger onto Felidar itself, which isn't a valid target. Grip of Chaos
-     * specifically states it only chooses from valid targets when retargeting,
+     * Reported bug: https://github.com/magefree/mage/issues/6344
+     * I just had a game where we had an interaction between Grip of Chaos, Felidar Guardian, and Panharmonicon.
+     * The cloned Felidar trigger fizzled with valid targets on field because Grip retargeted that
+     * trigger onto Felidar itself, which isn't a valid target.
+     * Grip of Chaos specifically states it only chooses from valid targets when retargeting,
      * so this is a bug somewhere in that interaction, though whether it only
      * happens with cloned triggers or if there's a bad interaction between Grip
      * and Felidar itself isn't clear.
@@ -39,16 +39,14 @@ public class GripOfChaosTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
 
-        setStrictChooseMode(true);
+        // NOTE: Cannot use setStrictChoiseMode(true) with current test setup.
+        // When both ETB triggers target the same permanent because of Grip of Chaos the second (bottom-most)
+        // Ability will fizzle.
+        // This will cause random errors since setStrictChoiseMode(true) will require the player to make an explicit choice
+        // About whether or not to apply the effect of the ETB trigger.
+        // HOWEVER, when the second ETB fizzles, the "setChoice(playerA, "Yes")" will error out since it was a choice that did not get used.
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Felidar Guardian");
-
-        setChoice(playerA, "When "); // Select order of Felidar trigger
-
-        setChoice(playerB, "Whenever "); // Select order of Grip of Chaos trigger
-
-        setChoice(playerA, true); // use for the original trigger of Felidar Guardian
-        setChoice(playerA, true); // use for the copied trigger of Felidar Guardian
 
         addTarget(playerA, "Forest");
         addTarget(playerA, "Mountain");
@@ -73,7 +71,7 @@ public class GripOfChaosTest extends CardTestPlayerBase {
     }
 
     /**
-     * Maybe also good situation to create an test for 9/20/2016 Panharmonicon
+     * TODO: Maybe also good situation to create an test for 9/20/2016 Panharmonicon
      *
      * In some cases involving linked abilities, an ability requires information
      * about “the exiled card.” When this happens, the ability gets multiple

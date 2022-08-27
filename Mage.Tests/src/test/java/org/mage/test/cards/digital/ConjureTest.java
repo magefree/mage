@@ -36,7 +36,7 @@ public class ConjureTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 6);
         addCard(Zone.HAND, playerA, trainer);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, trainer);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, trainer, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, pegasus);
 
         setStrictChooseMode(true);

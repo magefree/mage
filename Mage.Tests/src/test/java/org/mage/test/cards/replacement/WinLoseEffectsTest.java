@@ -128,7 +128,7 @@ public class WinLoseEffectsTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerA, "Bogardan Hellkite", 3); // 24 life lost
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Angel's Grace");
-        
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ad Nauseam");
         setChoice(playerA, true);
         setChoice(playerA, true);

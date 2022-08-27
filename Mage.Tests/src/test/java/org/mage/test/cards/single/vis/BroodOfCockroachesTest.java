@@ -89,6 +89,7 @@ public class BroodOfCockroachesTest extends CardTestPlayerBase {
     private void brood_of_cockroaches_diesat_precombat_main_phase() {
         addCard(BATTLEFIELD, playerB, "Mountain", 1);
         addCard(HAND, playerB, SHOCK, 1);
+        waitStackResolved(1, PRECOMBAT_MAIN);
         castSpell(TURN_1, PRECOMBAT_MAIN, playerB, SHOCK, BROOD_OF_COCKROACHES);
     }
 

@@ -42,7 +42,8 @@ public class SenTripletsTest extends CardTestPlayerBase {
         initTriplets();
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bolt, playerB);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, relic);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, relic, true);
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Island");
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -72,12 +73,10 @@ public class SenTripletsTest extends CardTestPlayerBase {
 
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
-            if (!e.getMessage().contains("Player PlayerB must have 0 actions but found 1")) {
+            if (!e.getMessage().contains("Can't find ability to activate command: {T}")) {
                 Assert.fail("must throw error about bad targets, but got:\n" + e.getMessage());
             }
         }
-
-        assertTapped("Taiga", false);
     }
 
     /**
@@ -96,12 +95,9 @@ public class SenTripletsTest extends CardTestPlayerBase {
 
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
-            if (!e.getMessage().contains("Player PlayerB must have 0 actions but found 1")) {
+            if (!e.getMessage().contains("Cast Lightning Bolt$targetPlayer=PlayerA")) {
                 Assert.fail("must throw error about bad targets, but got:\n" + e.getMessage());
             }
         }
-
-        assertHandCount(playerB, bolt, 1);
-        assertLife(playerA, 20);
     }
 }

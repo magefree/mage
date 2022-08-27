@@ -620,9 +620,7 @@ public class TestPlayer implements Player {
                             groupsForTargetHandling = null;
                         }
                     }
-                    // TODO: fix wrong commands (on non existing card), it's HUGE (350+ failed tests with wrong commands)
-                    //Assert.fail("Can't find ability to activate command: " + command);
-                    LOGGER.warn("Can't find ability to activate command: " + command);
+                    Assert.fail("Can't find ability to activate command: " + command);
                 } else if (action.getAction().startsWith(ACTIVATE_MANA)) {
                     String command = action.getAction();
                     command = command.substring(command.indexOf(ACTIVATE_MANA) + ACTIVATE_MANA.length());

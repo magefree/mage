@@ -1,4 +1,4 @@
-package org.mage.test.cards.triggers;
+package org.mage.test.cards.single.lea;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -6,11 +6,14 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- * @author ayratn
+ * {@link mage.cards.m.Manabarbs Manabarbs}
+ * {3}{R}
+ * Enchantment
+ * Whenever a player taps a land for mana, Manabarbs deals 1 damage to that player.
  *
- * Card: Whenever a player taps a land for mana, Manabarbs deals 1 damage to that player.
+ * @author ayratn
  */
-public class ManabarbsTest2 extends CardTestPlayerBase {
+public class ManabarbsTest extends CardTestPlayerBase {
 
     /**
      * Issue 374: manabarb enchantment
@@ -27,7 +30,7 @@ public class ManabarbsTest2 extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Lightning Elemental");
         addCard(Zone.HAND, playerA, "Ball Lightning");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ball Lightning");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ball Lightning", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Elemental");
         attack(1, playerA, "Ball Lightning");
         attack(1, playerA, "Lightning Elemental");

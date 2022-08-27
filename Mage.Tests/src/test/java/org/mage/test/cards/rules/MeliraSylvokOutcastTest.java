@@ -31,7 +31,7 @@ public class MeliraSylvokOutcastTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Devoted Druid", 1); // 0/2
 
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}");
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Put a -1/-1 counter on ");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Put a -1/-1 counter on");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
 
@@ -40,7 +40,7 @@ public class MeliraSylvokOutcastTest extends CardTestPlayerBase {
             execute();
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
-            if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
+            if (!e.getMessage().contains("Put a -1/-1 counter on")) {
                 Assert.fail("Needed error about not being able to use the Devoted Druid's -1/-1 ability, but got:\n" + e.getMessage());
             }
         }

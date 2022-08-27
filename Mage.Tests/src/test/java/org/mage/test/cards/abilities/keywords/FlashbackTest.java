@@ -293,7 +293,8 @@ public class FlashbackTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback");
         addTarget(playerA, "Silvercoat Lion");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Runic Repetition");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Runic Repetition", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silent Departure", "Silvercoat Lion");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -567,19 +568,20 @@ public class FlashbackTest extends CardTestPlayerBase {
 
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
-            if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
+            if (!e.getMessage().contains("Flashback$spellOnStack=Lightning Bolt")) {
                 Assert.fail("Should have thrown error about not being able to play Force of Will, but got:\n" + e.getMessage());
             }
         }
 
-        assertPermanentCount(playerA, "Snapcaster Mage", 0);
-
-        assertGraveyardCount(playerA, "Snapcaster Mage", 1);
-        assertGraveyardCount(playerA, "Force of Will", 1);
-
-        assertGraveyardCount(playerB, "Lightning Bolt", 1);
-
-        assertLife(playerA, 20);
+        // TODO: Re-enable when checkPlayableAbility can be used instead of try-catch
+//        assertPermanentCount(playerA, "Snapcaster Mage", 0);
+//
+//        assertGraveyardCount(playerA, "Snapcaster Mage", 1);
+//        assertGraveyardCount(playerA, "Force of Will", 1);
+//
+//        assertGraveyardCount(playerB, "Lightning Bolt", 1);
+//
+//        assertLife(playerA, 20);
     }
 
     /**
@@ -597,7 +599,7 @@ public class FlashbackTest extends CardTestPlayerBase {
         // Flashback-{1}{U}, Pay 3 life.
         addCard(Zone.HAND, playerA, "Deep Analysis"); // {3}{U}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Deep Analysis");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Deep Analysis", true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

@@ -48,7 +48,7 @@ public class LilianaTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
         addCard(Zone.BATTLEFIELD, playerB, yOx);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, liliannaDM);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, liliannaDM, true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-3:"); // Liliana -3
         addTarget(playerA, wShepherd); // returns to battlefield and become zombie on top of other types
         setChoice(playerA, true); // use Binding Mummy ability
@@ -93,7 +93,7 @@ public class LilianaTest extends CardTestPlayerBase {
         // Whenever one or more creature cards leave your graveyard, create a 1/1 black Bat creature token with flying.
         addCard(Zone.BATTLEFIELD, playerA, "Desecrated Tomb", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, liliannaUbD);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, liliannaUbD, true);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-3:"); // Liliana -3
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Carrion Feeder");

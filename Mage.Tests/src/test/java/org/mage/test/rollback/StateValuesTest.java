@@ -91,7 +91,7 @@ public class StateValuesTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
 
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Battle Screech");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Battle Screech", true);
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback");
         setChoice(playerA, "Bird Token");

@@ -29,6 +29,7 @@ public class ExquisiteBloodTest extends CardTestPlayerBase {
 
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bump in the Night", playerB);
 
         attack(1, playerA, "Raging Goblin");

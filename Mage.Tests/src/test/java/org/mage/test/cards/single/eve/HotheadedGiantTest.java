@@ -19,7 +19,7 @@ public class HotheadedGiantTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, goblin);
         addCard(Zone.HAND, playerA, giant);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, goblin);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, goblin, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, giant);
 
         setStrictChooseMode(true);

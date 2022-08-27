@@ -76,6 +76,7 @@ public class PakoArcaneRetrieverTest extends CardTestPlayerBase {
         attack(1, playerA, "Pako, Arcane Retriever");        
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Call of the Conclave");
         
         setStopAt(1, PhaseStep.END_TURN);
@@ -86,7 +87,5 @@ public class PakoArcaneRetrieverTest extends CardTestPlayerBase {
                
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
         assertGraveyardCount(playerB, "Call of the Conclave", 1);
-        
-
-    }    
+    }
 }

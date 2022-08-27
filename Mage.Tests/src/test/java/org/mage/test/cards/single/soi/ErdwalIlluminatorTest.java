@@ -52,7 +52,7 @@ public class ErdwalIlluminatorTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thraben Inspector");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thraben Inspector", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thraben Inspector");
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();

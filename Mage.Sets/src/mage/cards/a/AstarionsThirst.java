@@ -80,7 +80,7 @@ class AstarionsThirstEffect extends OneShotEffect {
         }
         List<Permanent> commanders = game
                 .getBattlefield()
-                .getActivePermanents(filter, source.getSourceId(), source, game);
+                .getActivePermanents(filter, source.getControllerId(), source, game);
         Permanent commander;
         switch (commanders.size()) {
             case 0:

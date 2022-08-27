@@ -30,7 +30,7 @@ public class WorldEnchantmentsRuleTest extends CardTestMultiPlayerBase {
         addCard(Zone.HAND, playerD, "Nether Void", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nether Void");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion"); // just needed to get different craete time to second Nether Void
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Silvercoat Lion"); // just needed to get different craete time to second Nether Void
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, "Nether Void");
 
         setStopAt(2, PhaseStep.END_TURN);
@@ -40,7 +40,9 @@ public class WorldEnchantmentsRuleTest extends CardTestMultiPlayerBase {
         assertPermanentCount(playerD, "Nether Void", 1);
     }
 
-    // 801.12 The "world rule" applies to a permanent only if other world permanents are within its controller's range of influence.
+    /**
+     * 801.12 The "world rule" applies to a permanent only if other world permanents are within its controller's range of influence.
+     */
     @Test
     public void TestTwoWorldEnchantmentsNotInRangeOfInfluence() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
@@ -52,7 +54,7 @@ public class WorldEnchantmentsRuleTest extends CardTestMultiPlayerBase {
         addCard(Zone.HAND, playerC, "Nether Void", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nether Void");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion"); // just needed to get different craete time to second Nether Void
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Silvercoat Lion"); // just needed to get different craete time to second Nether Void
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerC, "Nether Void");
 
         setStopAt(3, PhaseStep.END_TURN);
@@ -62,9 +64,11 @@ public class WorldEnchantmentsRuleTest extends CardTestMultiPlayerBase {
         assertPermanentCount(playerC, "Nether Void", 1);
     }
 
-    // 704.5 In the event of a tie for the shortest amount of time, all are put into their owners’ graveyards. This is called the “world rule.”
-    // In this example the execution order of the leaves the battlefield triggers of the two Oblivion Rings decide, which World Enchnatment may stay
-    // Player order: A -> D -> C -> B
+    /**
+     * 704.5 In the event of a tie for the shortest amount of time, all are put into their owners’ graveyards. This is called the “world rule.”
+     * In this example the execution order of the leaves the battlefield triggers of the two Oblivion Rings decide, which World Enchnatment may stay
+     * Player order: A -> D -> C -> B
+     */
     @Test
     public void TestTwoWorldEnchantmentsFromTriggers() {
         setStrictChooseMode(true);
@@ -87,14 +91,14 @@ public class WorldEnchantmentsRuleTest extends CardTestMultiPlayerBase {
         addCard(Zone.BATTLEFIELD, playerD, "Plains", 1);
         addCard(Zone.BATTLEFIELD, playerD, "Mountain", 6);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Oblivion Ring");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Oblivion Ring", true);
         addTarget(playerA, "Concordant Crossroads");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Concordant Crossroads");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Concordant Crossroads", true);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, "Oblivion Ring");
         addTarget(playerD, "Concordant Crossroads");
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, "Anarchy"); // Both World Enchantments return at the same time and go to grave
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerD, "Anarchy"); // Both World Enchantments return at the same time and go to grave
 
-        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerD, "Concordant Crossroads", 0);

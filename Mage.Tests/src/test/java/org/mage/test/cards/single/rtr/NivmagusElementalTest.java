@@ -41,8 +41,10 @@ public class NivmagusElementalTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bolt, playerB);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Exile");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, grapeshot, playerB);
-        setChoice(playerA, false);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1); // Let the storm resolve to put both copies on the stack
+        setChoice(playerA, false);  // Don't change targets for the copy
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Exile");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Exile");
 

@@ -216,12 +216,12 @@ public class EvolveTest extends CardTestPlayerBase {
         // Evolve
         addCard(Zone.HAND, playerA, "Adaptive Snapjaw", 1); // {4}{G} - Creature 6/2
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ivy Lane Denizen");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ivy Lane Denizen", true);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Renegade Krasis");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Renegade Krasis", true);
         addTarget(playerA, "Ivy Lane Denizen"); // Ivy target
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ivy Lane Denizen"); // Renegade Krasis evolves
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ivy Lane Denizen", true); // Renegade Krasis evolves
         addTarget(playerA, "Renegade Krasis"); // Ivy target
         setChoice(playerA, "Whenever another green creature"); // So +1/+1 counter from Renegade is first put onto Ivy
 

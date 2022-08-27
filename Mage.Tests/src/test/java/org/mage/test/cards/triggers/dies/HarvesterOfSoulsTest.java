@@ -35,7 +35,7 @@ public class HarvesterOfSoulsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Arrogant Bloodlord", 1);
         
         // Put three 1/1 red Human creature tokens with haste onto the battlefield. Sacrifice those tokens at the beginning of the next end step.
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thatcher Revolt");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thatcher Revolt", true);
         // Destroy all creatures.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Day of Judgment");
 
@@ -48,5 +48,4 @@ public class HarvesterOfSoulsTest extends CardTestPlayerBase {
         assertHandCount(playerA, 2); // draw a card for Harvester and Craw Wurm
         assertHandCount(playerB, 0);
     }
-
 }

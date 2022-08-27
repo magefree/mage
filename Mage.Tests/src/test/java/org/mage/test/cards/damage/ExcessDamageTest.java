@@ -100,7 +100,7 @@ public class ExcessDamageTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, bolt);
 
         setStrictChooseMode(true);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bolt, gideon);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bolt, gideon, true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "0:");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, spill, gideon);

@@ -98,6 +98,8 @@ public class ProfaneTransfusionTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, skullcrack, playerB);
         addTarget(playerA, playerA);
         addTarget(playerA, playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, transfusion);
 
         setStrictChooseMode(true);
