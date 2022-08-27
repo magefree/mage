@@ -72,6 +72,10 @@ public class IdentityThiefTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Primal Clay", 1);
     }
 
+    /**
+     * Reported bug: https://github.com/magefree/mage/issues/2131
+     *      If I copy a creature with a +1/+1 counter on it, it copies the counter as well as the other stats. This should not be the case.
+     */
     @Test
     public void testShouldNotCopyP1P1Counters() {
         addCard(Zone.BATTLEFIELD, playerA, "Sylvan Advocate", 1); // {1}{G} 2/3 vigilance
@@ -99,6 +103,6 @@ public class IdentityThiefTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Identity Thief", 0);
         assertPermanentCount(playerB, "Sylvan Advocate", 1);
         assertCounterCount(playerB, "Sylvan Advocate", CounterType.P1P1, 0);
-        assertPowerToughness(playerB, "Sylvan Advocate", 2, 3); // finds it with 3 power 4 toughness
+        assertPowerToughness(playerB, "Sylvan Advocate", 2, 3);
     }
 }
