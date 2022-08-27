@@ -99,6 +99,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Haunted Mire", 248, Rarity.COMMON, mage.cards.h.HauntedMire.class));
         cards.add(new SetCardInfo("Herd Migration", 165, Rarity.RARE, mage.cards.h.HerdMigration.class));
         cards.add(new SetCardInfo("Hero's Heirloom", 231, Rarity.UNCOMMON, mage.cards.h.HerosHeirloom.class));
+        cards.add(new SetCardInfo("Heroic Charge", 20, Rarity.COMMON, mage.cards.h.HeroicCharge.class));
         cards.add(new SetCardInfo("Hexbane Tortoise", 166, Rarity.COMMON, mage.cards.h.HexbaneTortoise.class));
         cards.add(new SetCardInfo("Hurler Cyclops", 130, Rarity.UNCOMMON, mage.cards.h.HurlerCyclops.class));
         cards.add(new SetCardInfo("Hurloon Battle Hymn", 131, Rarity.UNCOMMON, mage.cards.h.HurloonBattleHymn.class));
