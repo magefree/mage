@@ -199,6 +199,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Tori D'Avenant, Fury Rider", 223, Rarity.UNCOMMON, mage.cards.t.ToriDAvenantFuryRider.class));
         cards.add(new SetCardInfo("Toxic Abomination", 112, Rarity.COMMON, mage.cards.t.ToxicAbomination.class));
         cards.add(new SetCardInfo("Tura Kennerud, Skyknight", 224, Rarity.UNCOMMON, mage.cards.t.TuraKennerudSkyknight.class));
+        cards.add(new SetCardInfo("Valiant Veteran", 38, Rarity.RARE, mage.cards.v.ValiantVeteran.class));
         cards.add(new SetCardInfo("Vanquisher's Axe", 240, Rarity.COMMON, mage.cards.v.VanquishersAxe.class));
         cards.add(new SetCardInfo("Viashino Branchrider", 150, Rarity.COMMON, mage.cards.v.ViashinoBranchrider.class));
         cards.add(new SetCardInfo("Vineshaper Prodigy", 187, Rarity.COMMON, mage.cards.v.VineshaperProdigy.class));
