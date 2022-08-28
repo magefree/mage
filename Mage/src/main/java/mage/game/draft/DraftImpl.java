@@ -254,7 +254,6 @@ public abstract class DraftImpl implements Draft {
             }
         }, 0, PLAYER_PICK_HANDLE_INTERVAL, TimeUnit.SECONDS);
     }
-    }
     
     protected void cancelPlayerPickHandle() {
         if (playerPickHandle != null) {
@@ -306,7 +305,7 @@ public abstract class DraftImpl implements Draft {
     public void firePickCardEvent(UUID playerId) {
         DraftPlayer player = players.get(playerId);
         int cardNum = Math.min(15, this.cardNum);
-        int time = timing.getPickTimeout(cardNum) - playerPickHandleTimesExecuted * playerPickHandleInterval;
+        int time = timing.getPickTimeout(cardNum) - playerPickHandleTimesExecuted * PLAYER_PICK_HANDLE_INTERVAL;
         playerQueryEventSource.pickCard(playerId, "Pick card", player.getBooster(), time);
     }
 
@@ -326,6 +325,12 @@ public abstract class DraftImpl implements Draft {
             }
         }
         return !player.isPicking();
+    }
+    
+    @Override
+    public void setBoosterLoaded(UUID playerId) {
+        DraftPlayer player = players.get(playerId);
+        player.setBoosterLoaded();
     }
 
     @Override

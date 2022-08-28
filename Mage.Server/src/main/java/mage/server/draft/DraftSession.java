@@ -144,5 +144,9 @@ public class DraftSession {
     public void setMarkedCard(UUID markedCard) {
         this.markedCard = markedCard;
     }
+    
+    public void setBoosterLoaded() {
+        draft.setBoosterLoaded(playerId);
+    }
 
 }

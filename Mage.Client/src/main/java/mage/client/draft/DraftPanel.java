@@ -304,7 +304,7 @@
              countdown.start();
          }
          
-         //SessionHandler.setBoosterLoaded(draftId);
+         SessionHandler.setBoosterLoaded(draftId);
      }
 
      private void loadCardsToPickedCardsArea(SimpleCardsView pickedCards) {
