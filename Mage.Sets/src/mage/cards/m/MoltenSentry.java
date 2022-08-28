@@ -84,7 +84,7 @@ class MoltenSentryEffect extends OneShotEffect {
             gainedAbility = DefenderAbility.getInstance();
             game.addEffect(new GainAbilitySourceEffect(DefenderAbility.getInstance(), Duration.WhileOnBattlefield), source);
         }
-        game.addEffect(new SetBasePowerSourceEffect(power, toughness), source);
+        game.addEffect(new SetPowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield, true), source);
         game.addEffect(new GainAbilitySourceEffect(gainedAbility, Duration.WhileOnBattlefield), source);
         return true;
     }

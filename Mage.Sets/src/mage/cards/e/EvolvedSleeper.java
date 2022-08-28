@@ -34,7 +34,7 @@ public final class EvolvedSleeper extends CardImpl {
                 Duration.Custom, SubType.HUMAN, SubType.CLERIC
         ).setText("{this} becomes a Human Cleric"), new ManaCostsImpl<>("{B}"));
         ability.addEffect(new SetPowerToughnessSourceEffect(
-                2, 2, Duration.Custom, SubLayer.SetPT_7b
+                2, 2, Duration.Custom, SubLayer.SetPT_7b, true
         ).setText("with base power and toughness 2/2"));
         this.addAbility(ability);
 
@@ -87,7 +87,7 @@ class EvolvedSleeperClericEffect extends OneShotEffect {
                 Duration.Custom, SubType.PHYREXIAN, SubType.HUMAN, SubType.CLERIC
         ), source);
         game.addEffect(new SetPowerToughnessSourceEffect(
-                3, 3, Duration.Custom, SubLayer.SetPT_7b
+                3, 3, Duration.Custom, SubLayer.SetPT_7b, true
         ), source);
         return true;
     }

@@ -55,8 +55,7 @@ public class LevelerCardBuilder {
             staticAbility.setRuleVisible(false);
             constructed.add(staticAbility);
         }
-
-        ContinuousEffect effect = new SetPowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield, SubLayer.SetPT_7b);
+        ContinuousEffect effect = new SetPowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield, SubLayer.SetPT_7b, true);
         ConditionalContinuousEffect ptEffect = new ConditionalContinuousEffect(effect, condition, rule);
         constructed.add(new SimpleStaticAbility(Zone.BATTLEFIELD, ptEffect));
 

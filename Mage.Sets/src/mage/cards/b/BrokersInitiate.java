@@ -27,9 +27,10 @@ public final class BrokersInitiate extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {4}{G/U}: Brokers Initiate has base power and toughness 5/5 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(new SetPowerToughnessSourceEffect(
-                5, 5, Duration.EndOfTurn, SubLayer.SetPT_7b
-        ), new ManaCostsImpl<>("{4}{G/U}")));
+        this.addAbility(new SimpleActivatedAbility(
+                new SetPowerToughnessSourceEffect(5, 5, Duration.EndOfTurn, SubLayer.SetPT_7b, true),
+                new ManaCostsImpl<>("{4}{G/U}")
+        ));
     }
 
     private BrokersInitiate(final BrokersInitiate card) {

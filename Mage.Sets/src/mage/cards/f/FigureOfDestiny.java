@@ -35,7 +35,7 @@ public final class FigureOfDestiny extends CardImpl {
                 Duration.Custom, SubType.KITHKIN, SubType.SPIRIT
         ).setText("{this} becomes a Kithkin Spirit"), new ManaCostsImpl<>("{R/W}"));
         ability.addEffect(new SetPowerToughnessSourceEffect(
-                2, 2, Duration.Custom, SubLayer.SetPT_7b
+                2, 2, Duration.Custom, SubLayer.SetPT_7b, true
         ).setText("with base power and toughness 2/2"));
         this.addAbility(ability);
 
@@ -86,7 +86,7 @@ class FigureOfDestinySpiritEffect extends OneShotEffect {
                 Duration.Custom, SubType.KITHKIN, SubType.SPIRIT, SubType.WARRIOR
         ), source);
         game.addEffect(new SetPowerToughnessSourceEffect(
-                4, 4, Duration.Custom, SubLayer.SetPT_7b
+                4, 4, Duration.Custom, SubLayer.SetPT_7b, true
         ), source);
         return true;
     }
@@ -119,7 +119,7 @@ class FigureOfDestinyWarriorEffect extends OneShotEffect {
                 Duration.Custom, SubType.KITHKIN, SubType.SPIRIT, SubType.WARRIOR, SubType.AVATAR
         ), source);
         game.addEffect(new SetPowerToughnessSourceEffect(
-                8, 8, Duration.Custom, SubLayer.SetPT_7b
+                8, 8, Duration.Custom, SubLayer.SetPT_7b, true
         ), source);
         game.addEffect(new GainAbilitySourceEffect(
                 FlyingAbility.getInstance(), Duration.Custom

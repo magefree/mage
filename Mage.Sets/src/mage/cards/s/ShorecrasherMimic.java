@@ -44,7 +44,11 @@ public final class ShorecrasherMimic extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever you cast a spell that's both green and blue, Shorecrasher Mimic has base power and toughness 5/3 until end of turn and gains trample until end of turn.
-        Ability ability = new SpellCastControllerTriggeredAbility(new SetPowerToughnessSourceEffect(5, 3, Duration.EndOfTurn, SubLayer.SetPT_7b), filter, false, rule);
+        Ability ability = new SpellCastControllerTriggeredAbility(
+                new SetPowerToughnessSourceEffect(5, 3, Duration.EndOfTurn, SubLayer.SetPT_7b, true),
+                filter,
+                false,
+                rule);
         ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, false, true));
         this.addAbility(ability);
 

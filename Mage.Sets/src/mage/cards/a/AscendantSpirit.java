@@ -37,7 +37,11 @@ public final class AscendantSpirit extends CardImpl {
                 Duration.Custom, SubType.SPIRIT, SubType.WARRIOR
         ).setText("{this} becomes a Spirit Warrior"), new ManaCostsImpl<>("{S}{S}"));
         ability.addEffect(new SetPowerToughnessSourceEffect(
-                2, 3, Duration.Custom, SubLayer.SetPT_7b
+                2,
+                3,
+                Duration.WhileOnBattlefield,
+                SubLayer.SetPT_7b,
+                true
         ).setText("with base power and toughness 2/3"));
         this.addAbility(ability);
 
@@ -90,7 +94,7 @@ class AscendantSpiritWarriorEffect extends OneShotEffect {
                 Duration.Custom, SubType.SPIRIT, SubType.WARRIOR, SubType.ANGEL
         ), source);
         game.addEffect(new SetPowerToughnessSourceEffect(
-                4, 4, Duration.Custom, SubLayer.SetPT_7b
+                4, 4, Duration.Custom, SubLayer.SetPT_7b, true
         ), source);
         return true;
     }

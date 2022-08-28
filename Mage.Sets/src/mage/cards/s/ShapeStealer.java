@@ -69,14 +69,13 @@ class ShapeStealerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
-            if (permanent != null) {
-                ContinuousEffect effect = new SetPowerToughnessSourceEffect(permanent.getPower().getValue(), permanent.getToughness().getValue(), Duration.EndOfTurn, SubLayer.SetPT_7b);
-                game.addEffect(effect, source);
-                return true;
-            }
+        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
+        if (controller == null || permanent == null) {
+            return false;
         }
-        return false;
+
+        ContinuousEffect effect = new SetPowerToughnessSourceEffect(permanent.getPower().getValue(), permanent.getToughness().getValue(), Duration.EndOfTurn, SubLayer.SetPT_7b, true);
+        game.addEffect(effect, source);
+        return true;
     }
 }

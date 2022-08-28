@@ -118,7 +118,7 @@ public final class PrimalClay extends CardImpl {
                     game.addEffect(new GainAbilitySourceEffect(DefenderAbility.getInstance(), Duration.Custom), source);
                     break;
             }
-            game.addEffect(new SetBasePowerSourceEffect(power, toughness), source);
+            game.addEffect(new SetPowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield, true), source);
             return false;
         }
 

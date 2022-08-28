@@ -72,22 +72,21 @@ class HalfdaneUpkeepEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-            if (permanent != null) {
-                ContinuousEffect effect = new HalfdaneSetPowerToughnessEffect(permanent.getPower().getValue(), permanent.getToughness().getValue());
-                game.addEffect(effect, source);
-                return true;
-            }
+        Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
+        if (controller == null || permanent == null) {
+            return false;
         }
-        return false;
+
+        ContinuousEffect effect = new HalfdaneSetPowerToughnessEffect(permanent.getPower().getValue(), permanent.getToughness().getValue());
+        game.addEffect(effect, source);
+        return true;
     }
 }
 
 class HalfdaneSetPowerToughnessEffect extends SetPowerToughnessSourceEffect {
 
     public HalfdaneSetPowerToughnessEffect(int power, int toughness) {
-        super(power, toughness, Duration.UntilYourNextTurn, SubLayer.SetPT_7b);
+        super(power, toughness, Duration.UntilYourNextTurn, SubLayer.SetPT_7b, true);
     }
 
     public HalfdaneSetPowerToughnessEffect(final HalfdaneSetPowerToughnessEffect effect) {

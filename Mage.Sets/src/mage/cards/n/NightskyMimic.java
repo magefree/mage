@@ -44,7 +44,11 @@ public final class NightskyMimic extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever you cast a spell that's both white and black, Nightsky Mimic has base power and toughness 4/4 until end of turn and gains flying until end of turn.
-        Ability ability = new SpellCastControllerTriggeredAbility(new SetPowerToughnessSourceEffect(4, 4, Duration.EndOfTurn, SubLayer.SetPT_7b), filter, false, rule);
+        Ability ability = new SpellCastControllerTriggeredAbility(
+                new SetPowerToughnessSourceEffect(4, 4, Duration.EndOfTurn, SubLayer.SetPT_7b, true),
+                filter,
+                false,
+                rule);
         ability.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, false, true));
         this.addAbility(ability);
     }

@@ -26,9 +26,12 @@ public final class RisenRiptide extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Whenever you cast a kicked spell, Risen Riptide has base power and toughness 5/5 until end of turn.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new SetPowerToughnessSourceEffect(
-                5, 5, Duration.EndOfTurn, SubLayer.SetPT_7b
-        ).setText("{this} has base power and toughness 5/5 until end of turn"), StaticFilters.FILTER_SPELL_KICKED_A, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                new SetPowerToughnessSourceEffect(5, 5, Duration.EndOfTurn, SubLayer.SetPT_7b, true)
+                        .setText("{this} has base power and toughness 5/5 until end of turn"),
+                StaticFilters.FILTER_SPELL_KICKED_A,
+                false)
+        );
     }
 
     private RisenRiptide(final RisenRiptide card) {
