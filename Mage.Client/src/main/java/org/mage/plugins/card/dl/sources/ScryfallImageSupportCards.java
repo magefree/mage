@@ -516,6 +516,7 @@ public class ScryfallImageSupportCards {
             add("DMU"); // Dominaria United
             add("DMC"); // Dominaria United Commander
             add("40K"); // Warhammer 40,000
+            add("GN3"); // Game Night 2022
         }
     };
 
