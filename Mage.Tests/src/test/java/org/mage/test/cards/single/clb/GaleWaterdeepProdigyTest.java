@@ -36,7 +36,8 @@ public class GaleWaterdeepProdigyTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Divination", true);
         // Target Lightning Bolt in graveyard with Gale's ability
         addTarget(playerA, "Lightning Bolt");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt");
+        // Choose to cast Lightning Bolt when prompted
+        setChoice(playerA, true);
         // Target opponent with Lightning bolt
         addTarget(playerA, playerB);
 

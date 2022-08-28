@@ -1,22 +1,28 @@
 package mage.cards.g;
 
+import mage.ApprovingObject;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.ChooseABackgroundAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.CastCardFromGraveyardThenExileItEffect;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.ReplacementEffectImpl;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.stack.Spell;
+import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.CastFromHandWatcher;
 
 import java.util.UUID;
@@ -35,12 +41,11 @@ public final class GaleWaterdeepProdigy extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // Whenever you cast an instant or sorcery spell from your hand, you may cast up to one of the other type from your graveyard. 
+        // Whenever you cast an instant or sorcery spell from your hand,
+        // you may cast up to one of the other type from your graveyard.
         // If a spell cast from your graveyard this way would be put into your graveyard, exile it instead.
-        CastCardFromGraveyardThenExileItEffect effect = new CastCardFromGraveyardThenExileItEffect();
-        effect.setText("you may cast up to one of the other type from your graveyard. If a spell cast from your graveyard this way would be put into your graveyard, exile it instead.");
         this.addAbility(
-                new GaleWaterdeepProdigyTriggeredAbility(effect,
+                new GaleWaterdeepProdigyTriggeredAbility(new GaleWaterdeepProdigyEffect(),
                         new FilterInstantOrSorcerySpell("an instant or sorcery spell from your hand"),
                         false),
                 new CastFromHandWatcher());
@@ -101,5 +106,82 @@ class GaleWaterdeepProdigyTriggeredAbility extends SpellCastControllerTriggeredA
     @Override
     public mage.cards.g.GaleWaterdeepProdigyTriggeredAbility copy() {
         return new mage.cards.g.GaleWaterdeepProdigyTriggeredAbility(this);
+    }
+}
+
+class GaleWaterdeepProdigyEffect extends OneShotEffect {
+
+    GaleWaterdeepProdigyEffect() {
+        super(Outcome.Neutral);
+        this.staticText = "you may cast up to one of the other type from your graveyard. " +
+                "If a spell cast from your graveyard this way would be put into your graveyard, exile it instead.";
+    }
+
+    private GaleWaterdeepProdigyEffect(final mage.cards.g.GaleWaterdeepProdigyEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public mage.cards.g.GaleWaterdeepProdigyEffect copy() {
+        return new mage.cards.g.GaleWaterdeepProdigyEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
+        if (card != null
+                && controller.chooseUse(Outcome.Neutral, "Cast " + card.getLogName() + '?', source, game)) {
+            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+            controller.cast(controller.chooseAbilityForCast(card, game, false),
+                    game, false, new ApprovingObject(source, game));
+            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+            ContinuousEffect effect = new mage.cards.g.GaleWaterdeepProdigyReplacementEffect(card.getId());
+            effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
+            game.addEffect(effect, source);
+        }
+        return true;
+    }
+}
+
+class GaleWaterdeepProdigyReplacementEffect extends ReplacementEffectImpl {
+
+    private final UUID cardId;
+
+    GaleWaterdeepProdigyReplacementEffect(UUID cardId) {
+        super(Duration.EndOfTurn, Outcome.Exile);
+        this.cardId = cardId;
+        staticText = "If a spell cast from your graveyard this way would be put into your graveyard, exile it instead.";
+    }
+
+    private GaleWaterdeepProdigyReplacementEffect(final mage.cards.g.GaleWaterdeepProdigyReplacementEffect effect) {
+        super(effect);
+        this.cardId = effect.cardId;
+    }
+
+    @Override
+    public mage.cards.g.GaleWaterdeepProdigyReplacementEffect copy() {
+        return new mage.cards.g.GaleWaterdeepProdigyReplacementEffect(this);
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
+        return false;
+    }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        return zEvent.getToZone() == Zone.GRAVEYARD
+                && zEvent.getTargetId().equals(this.cardId);
     }
 }
