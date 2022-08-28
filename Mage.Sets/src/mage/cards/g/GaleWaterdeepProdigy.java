@@ -34,14 +34,16 @@ public final class GaleWaterdeepProdigy extends CardImpl {
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
-        
+
         // Whenever you cast an instant or sorcery spell from your hand, you may cast up to one of the other type from your graveyard. 
         // If a spell cast from your graveyard this way would be put into your graveyard, exile it instead.
         CastCardFromGraveyardThenExileItEffect effect = new CastCardFromGraveyardThenExileItEffect();
         effect.setText("you may cast up to one of the other type from your graveyard. If a spell cast from your graveyard this way would be put into your graveyard, exile it instead.");
-        this.addAbility(new GaleWaterdeepProdigyTriggeredAbility(effect,
-                new FilterInstantOrSorcerySpell("an instant or sorcery spell from your hand"),
-                false), new CastFromHandWatcher());
+        this.addAbility(
+                new GaleWaterdeepProdigyTriggeredAbility(effect,
+                        new FilterInstantOrSorcerySpell("an instant or sorcery spell from your hand"),
+                        false),
+                new CastFromHandWatcher());
 
         // Choose a Background
         this.addAbility(ChooseABackgroundAbility.getInstance());
@@ -69,26 +71,31 @@ class GaleWaterdeepProdigyTriggeredAbility extends SpellCastControllerTriggeredA
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (super.checkTrigger(event, game)) {
-            CastFromHandWatcher watcher = game.getState().getWatcher(CastFromHandWatcher.class);
-            if (watcher != null && watcher.spellWasCastFromHand(event.getSourceId())) {
-                Spell spell = game.getState().getStack().getSpell(event.getSourceId());
-                if (spell != null) {
-                    FilterCard filterCard = new FilterCard();
-                    if(spell.getCardType(game).contains(CardType.SORCERY)) {
-                        filterCard.setMessage("an instant card");
-                        filterCard.add(CardType.INSTANT.getPredicate());
-                    } else {
-                        filterCard.setMessage("a sorcery card");
-                        filterCard.add(CardType.SORCERY.getPredicate());
-                    }
-                    this.getTargets().clear();
-                    this.getTargets().add(new TargetCardInYourGraveyard(filterCard));
-                    return true;
-                }
-            }
+        if (!super.checkTrigger(event, game)) {
+            return false;
         }
-        return false;
+
+        CastFromHandWatcher watcher = game.getState().getWatcher(CastFromHandWatcher.class);
+        if (watcher == null || !watcher.spellWasCastFromHand(event.getSourceId())) {
+            return false;
+        }
+
+        Spell spell = game.getState().getStack().getSpell(event.getSourceId());
+        if (spell == null) {
+            return false;
+        }
+
+        FilterCard filterCard = new FilterCard();
+        if (spell.getCardType(game).contains(CardType.SORCERY)) {
+            filterCard.setMessage("an instant card");
+            filterCard.add(CardType.INSTANT.getPredicate());
+        } else {
+            filterCard.setMessage("a sorcery card");
+            filterCard.add(CardType.SORCERY.getPredicate());
+        }
+        this.getTargets().clear();
+        this.getTargets().add(new TargetCardInYourGraveyard(filterCard));
+        return true;
     }
 
     @Override

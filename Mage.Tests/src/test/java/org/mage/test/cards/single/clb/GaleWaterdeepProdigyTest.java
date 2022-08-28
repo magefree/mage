@@ -6,23 +6,22 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
- * @author R
- * jayz
+ * @author Rjayz
  */
 public class GaleWaterdeepProdigyTest extends CardTestPlayerBase {
 
     @Test
     public void TestGaleWaterDeepProdigy() {
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 10);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 10);
 
         // Whenever you cast an instant or sorcery spell from your hand, you may cast up to one of the other type from your graveyard.
         // If a spell cast from your graveyard this way would be put into your graveyard, exile it instead.
         addCard(Zone.BATTLEFIELD, playerA, "Gale, Waterdeep Prodigy", 1);
 
-        // Draw two cards on a sorcery
+        // Draw two cards, sorcery
         addCard(Zone.HAND, playerA, "Divination");
+        // Deal three damage to any target, instant
         addCard(Zone.GRAVEYARD, playerA, "Lightning Bolt");
 
         playerA.getLibrary().clear();
@@ -32,18 +31,30 @@ public class GaleWaterdeepProdigyTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Divination");
+        // Cast Divination from hand,
+        // this will trigger Gale's ability and let playerA cast an instant from their graveyard
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Divination", true);
         // Target Lightning Bolt in graveyard with Gale's ability
         addTarget(playerA, "Lightning Bolt");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt");
+        // Target opponent with Lightning bolt
+        addTarget(playerA, playerB);
 
         execute();
 
-        // Divination will have been cast, Lightning bolt should not have been cast
+        // Assert Divination was cast from hand
         assertHandCount(playerA, 2);
         assertHandCount(playerA, "Island", 2);
         assertLibraryCount(playerA, 0);
-        assertGraveyardCount(playerA, 2);
+        assertGraveyardCount(playerA, 1);
         assertGraveyardCount(playerA, "Divination", 1);
-        assertGraveyardCount(playerA, "Lightning Bolt", 1);
+
+        // Assert Lightning Bolt was cast from graveyard,
+        // and afterwards exiled instead of being put back into the graveyard
+        assertExileCount(playerA, 1);
+        assertExileCount(playerA, "Lightning Bolt", 1);
+
+        // Assert opponent was targeted by Lightning Bolt
+        assertLife(playerB, 17);
     }
 }
