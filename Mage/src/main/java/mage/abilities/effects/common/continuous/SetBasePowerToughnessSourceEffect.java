@@ -9,25 +9,27 @@ import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 
 /**
  * Sets the base power and toughness for a creature. E.g. Molten Spray, Primal Clay
  * @author Alex-Vasile
  */
-public class SetBasePowerSourceEffect extends ContinuousEffectImpl {
+public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
 
     private int power;
     private int toughness;
 
-    public SetBasePowerSourceEffect(int power, int toughness) {
-        super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.CharacteristicDefining_7a, Outcome.BoostCreature);
+    public SetBasePowerToughnessSourceEffect(int power, int toughness) {
+        this(power, toughness, Duration.WhileOnBattlefield, SubLayer.CharacteristicDefining_7a);
+    }
+
+    public SetBasePowerToughnessSourceEffect(int power, int toughness, Duration duration, SubLayer subLayer) {
+        super(duration, Layer.PTChangingEffects_7, subLayer, Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
     }
 
-    private SetBasePowerSourceEffect(final SetBasePowerSourceEffect effect) {
+    private SetBasePowerToughnessSourceEffect(final SetBasePowerToughnessSourceEffect effect) {
         super(effect);
         this.power = effect.power;
         this.toughness = effect.toughness;
@@ -50,6 +52,6 @@ public class SetBasePowerSourceEffect extends ContinuousEffectImpl {
 
     @Override
     public ContinuousEffect copy() {
-        return new SetBasePowerSourceEffect(this);
+        return new SetBasePowerToughnessSourceEffect(this);
     }
 }
