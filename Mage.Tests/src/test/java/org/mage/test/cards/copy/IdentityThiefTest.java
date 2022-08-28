@@ -34,10 +34,9 @@ public class IdentityThiefTest extends CardTestPlayerBase {
         setFlipCoinResult(playerA, true);
 
         attack(2, playerB, "Identity Thief");
-        setChoice(playerB, true);
         addTarget(playerB, "Molten Sentry");
+        setChoice(playerB, true);
 
-        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
@@ -62,18 +61,20 @@ public class IdentityThiefTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Primal Clay");
+        setChoice(playerA, "a 3/3 artifact creature");
 
         attack(2, playerB, "Identity Thief");
+        setChoice(playerB, "Yes");
         addTarget(playerB, "Primal Clay");
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertExileCount(playerA, 1);
-        assertExileCount("Primal Clay", 1);
+        assertExileCount(playerA, "Primal Clay", 1);
 
         assertPermanentCount(playerB, "Identity Thief", 0);
         assertPermanentCount(playerB, "Primal Clay", 1);
+        assertPowerToughness(playerB, "Primal Clay", 3, 3);
     }
 
     /**

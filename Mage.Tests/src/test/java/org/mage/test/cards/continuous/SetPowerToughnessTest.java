@@ -1,5 +1,6 @@
 package org.mage.test.cards.continuous;
 
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.h.HalimarTidecaller;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -62,22 +63,21 @@ public class SetPowerToughnessTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-
         assertBasePowerToughness(playerA, lion, 2, 2);
-        assertPowerToughness(playerA, lion, 3, 3);
+        assertPowerToughness(playerA, lion, 3, 3); // 2/2 + +1/+1
         assertBasePowerToughness(playerA, airElemental, 4, 4);
-        assertPowerToughness(playerA, airElemental, 3, 3);
+        assertPowerToughness(playerA, airElemental, 3, 3); // 3/3 + -1/-1
 
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, biomassMutation);
-        setChoice(playerA, "X=5");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, biomassMutation);
+        setChoice(playerA, "X=5"); // Everyone should have base P/T of 5/5
 
-        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
         assertBasePowerToughness(playerA, lion, 5, 5);
         assertPowerToughness(playerA, lion, 6, 6);
         assertBasePowerToughness(playerA, airElemental, 5, 5);
-        assertPowerToughness(playerA, airElemental, 6, 6);
+        assertPowerToughness(playerA, airElemental, 4, 4);
     }
 
     /**
@@ -89,11 +89,15 @@ public class SetPowerToughnessTest extends CardTestPlayerBase {
         // Enchanted artifact is a creature with base power and toughness 5/5 in addition to its other types.
         String ensoulArtifact = "Ensoul Artifact";
         String solRing = "Sol Ring";
+        // Destroy target artifact, enchantment, or creature with flying.
+        String brokenWing = "Broken Wings";
 
         addCard(Zone.HAND, playerA, ensoulArtifact);
         addCard(Zone.HAND, playerA, arcaneFlight);
+        addCard(Zone.HAND, playerA, brokenWing);
         addCard(Zone.BATTLEFIELD, playerA, solRing);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, ensoulArtifact);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
@@ -101,13 +105,24 @@ public class SetPowerToughnessTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
+        assertPowerToughness(playerA, solRing, 6, 6);
+        assertBasePowerToughness(playerA, solRing, 5, 5);
+        assertAbility(playerA, solRing, FlyingAbility.getInstance(), true);
 
-        assertBasePowerToughness(playerA, solRing, 6, 6);
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN); // wait two turns and make sure it keeps working
+        execute();
+        assertPowerToughness(playerA, solRing, 6, 6);
+        assertBasePowerToughness(playerA, solRing, 5, 5);
+        assertAbility(playerA, solRing, FlyingAbility.getInstance(), true);
 
-        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, brokenWing, ensoulArtifact);
+        setStopAt(5, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
-        assertPowerToughness(playerA, solRing, 5, 5);
+        // Remove Ensoul Artifact, and have Arcane Flight fall off, and check that the Sol Ring goes back to 0/0
+        assertPowerToughness(playerA, solRing, 0, 0);
+        assertBasePowerToughness(playerA, solRing, 0, 0);
+        assertAbility(playerA, solRing, FlyingAbility.getInstance(), false);
     }
 
     /**

@@ -50,15 +50,16 @@ public class SetBasePowerToughnessTargetEffect extends ContinuousEffectImpl {
         boolean result = false;
         for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
             Permanent target = game.getPermanent(targetId);
-            if (target != null) {
-                if (power != null) {
-                    target.getPower().setBoostedValue(power.calculate(game, source, this));
-                }
-                if (toughness != null) {
-                    target.getToughness().setBoostedValue(toughness.calculate(game, source, this));
-                }
-                result = true;
+            if (target == null) {
+                continue;
             }
+            if (power != null) {
+                target.getPower().setModifiedBaseValue(power.calculate(game, source, this));
+            }
+            if (toughness != null) {
+                target.getToughness().setModifiedBaseValue(toughness.calculate(game, source, this));
+            }
+            result = true;
         }
         return result;
     }

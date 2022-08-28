@@ -1,5 +1,6 @@
 package mage.game.permanent;
 
+import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
@@ -26,8 +27,8 @@ public class PermanentToken extends PermanentImpl {
         this.token.getAbilities().newOriginalId(); // neccessary if token has ability like DevourAbility()
         this.token.getAbilities().setSourceId(objectId);
         // TODO: Should this be using base or modified toughness?
-        this.power.setModifiedBaseValue(token.getPower().getModifiedBaseValue());
-        this.toughness.setModifiedBaseValue(token.getToughness().getModifiedBaseValue());
+        this.power = new MageInt(token.getPower().getModifiedBaseValue());
+        this.toughness = new MageInt(token.getToughness().getModifiedBaseValue());
         this.copyFromToken(this.token, game, false); // needed to have at this time (e.g. for subtypes for entersTheBattlefield replacement effects)
 
         // token's ZCC must be synced with original token to keep abilities settings
@@ -48,8 +49,8 @@ public class PermanentToken extends PermanentImpl {
         copyFromToken(token, game, true);
         super.reset(game);
         // Because the P/T objects have there own base value for reset we have to take it from there instead of from the basic token object
-        this.power.resetToModifiedBaseValue();
-        this.toughness.resetToModifiedBaseValue();
+        this.power.resetToBaseValue();
+        this.toughness.resetToBaseValue();
     }
 
     @Override

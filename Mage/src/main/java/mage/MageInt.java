@@ -100,11 +100,6 @@ public class MageInt implements Serializable, Copyable<MageInt> {
         this.boostedValue = CardUtil.overflowInc(this.boostedValue, amount);
     }
 
-    public void resetToModifiedBaseValue() {
-        this.boostedValue = this.modifiedBaseValue;
-    }
-
-    // TODO
     public void resetToBaseValue() {
         setModifiedBaseValue(this.baseValue);
     }
