@@ -39,7 +39,6 @@ public final class GravenDominator extends CardImpl {
         // When Graven Dominator enters the battlefield or the creature it haunts dies, each other creature has base power and toughness 1/1 until end of turn.
         Ability ability = new HauntAbility(this, new SetBasePowerToughnessAllEffect(1,1, Duration.EndOfTurn, filter, true));
         this.addAbility(ability);
-
     }
 
     private GravenDominator(final GravenDominator card) {

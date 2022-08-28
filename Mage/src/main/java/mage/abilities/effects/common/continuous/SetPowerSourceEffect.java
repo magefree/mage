@@ -25,6 +25,7 @@ public class SetPowerSourceEffect extends ContinuousEffectImpl {
 
     public SetPowerSourceEffect(DynamicValue amount, Duration duration, SubLayer subLayer) {
         super(duration, Layer.PTChangingEffects_7, subLayer, Outcome.BoostCreature);
+        setCharacterDefining(subLayer == SubLayer.CharacteristicDefining_7a);
         this.amount = amount;
         staticText = "{this}'s power is equal to the number of " + amount.getMessage();
     }

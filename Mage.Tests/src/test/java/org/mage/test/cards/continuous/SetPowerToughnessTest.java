@@ -151,4 +151,27 @@ public class SetPowerToughnessTest extends CardTestPlayerBase {
         assertBasePowerToughness(playerA, lion, 2, 2);
         assertPowerToughness(playerA, lion, 3, 3);
     }
+
+    /**
+     * Test that BecomesCreatureAttachedEffect works properly
+     */
+    @Test
+    public void becomesTokenWorks() {
+        // {2}{W}
+        // Enchant creature
+        // Enchanted creature loses all abilities and is a blue Fish with base power and toughness 0/1.
+        String ichthyomorphosis = "Ichthyomorphosis";
+
+        addCard(Zone.HAND, playerA, ichthyomorphosis);
+        addCard(Zone.BATTLEFIELD, playerA, lion);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, ichthyomorphosis, lion);
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertBasePowerToughness(playerA, lion, 0, 1);
+        assertPowerToughness(playerA, lion, 0, 1);
+    }
 }

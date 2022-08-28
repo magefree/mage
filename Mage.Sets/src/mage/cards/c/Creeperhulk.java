@@ -41,7 +41,6 @@ public final class Creeperhulk extends CardImpl {
         ability.addTarget(new TargetControlledCreaturePermanent());
         ability.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, "and gains Trample"));
         this.addAbility(ability);
-
     }
 
     private Creeperhulk(final Creeperhulk card) {

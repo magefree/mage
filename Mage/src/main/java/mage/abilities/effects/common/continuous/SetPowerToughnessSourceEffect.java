@@ -32,7 +32,8 @@ public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl {
         if (power == toughness) { // When power and toughness are equal, a previous constructor passes the same object for both power nad toughness, so use == instead of .equals
             this.staticText = "{this}'s " + (changeBaseValue ? "base " : "") + "power and toughness are each equal to the number of " + power.getMessage();
         } else {  // The only other constructor creates the power and toughenss dynamic values as static values from passed-in ints.
-            this.staticText = "{this}'s " + (changeBaseValue ? "base " : "") + "power and toughness is " + power.toString() + '/' + toughness + ' ' + duration.toString();
+            String value = (power != null ? power.toString() : toughness.toString());
+            this.staticText = "{this}'s " + (changeBaseValue ? "base " : "") + "power and toughness is " + value + '/' + toughness + ' ' + duration.toString();
         }
     }
 

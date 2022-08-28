@@ -95,8 +95,8 @@ class SludgeMonsterEffect extends ContinuousEffectImpl {
                     break;
                 case PTChangingEffects_7:
                     if (sublayer == SubLayer.SetPT_7b) {
-                        permanent.getPower().setBoostedValue(2);
-                        permanent.getToughness().setBoostedValue(2);
+                        permanent.getPower().setModifiedBaseValue(2);
+                        permanent.getToughness().setModifiedBaseValue(2);
                     }
             }
         }

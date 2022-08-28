@@ -84,8 +84,8 @@ class PoppetFactoryEffect extends ContinuousEffectImpl {
                     break;
                 case PTChangingEffects_7:
                     if (sublayer == SubLayer.SetPT_7b) {
-                        permanent.getPower().setBoostedValue(3);
-                        permanent.getToughness().setBoostedValue(3);
+                        permanent.getPower().setModifiedBaseValue(3);
+                        permanent.getToughness().setModifiedBaseValue(3);
                     }
                     break;
             }

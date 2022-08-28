@@ -137,8 +137,8 @@ class TezzeretTheSeekerEffect3 extends ContinuousEffectImpl {
                         break;
                     case PTChangingEffects_7:
                         if (sublayer == SubLayer.SetPT_7b) {
-                            permanent.getPower().setBoostedValue(5);
-                            permanent.getToughness().setBoostedValue(5);
+                            permanent.getPower().setModifiedBaseValue(5);
+                            permanent.getToughness().setModifiedBaseValue(5);
                         }
                 }
             }

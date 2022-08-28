@@ -172,8 +172,8 @@ class TezzeretBetrayerOfFleshTypeEffect extends ContinuousEffectImpl {
                         || permanent.hasSubtype(SubType.VEHICLE, game)) {
                     return false;
                 }
-                permanent.getPower().setBoostedValue(4);
-                permanent.getToughness().setBoostedValue(4);
+                permanent.getPower().setModifiedBaseValue(4);
+                permanent.getToughness().setModifiedBaseValue(4);
                 return true;
         }
         return false;

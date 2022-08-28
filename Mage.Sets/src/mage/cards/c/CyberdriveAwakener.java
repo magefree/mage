@@ -105,8 +105,8 @@ class CyberdriveAwakenerEffect extends ContinuousEffectImpl {
                     break;
                 case PTChangingEffects_7:
                     if (sublayer == SubLayer.SetPT_7b) {
-                        permanent.getPower().setBoostedValue(4);
-                        permanent.getToughness().setBoostedValue(4);
+                        permanent.getPower().setModifiedBaseValue(4);
+                        permanent.getToughness().setModifiedBaseValue(4);
                     }
             }
         }

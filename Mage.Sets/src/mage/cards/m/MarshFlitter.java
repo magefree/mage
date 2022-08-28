@@ -48,7 +48,6 @@ public final class MarshFlitter extends CardImpl {
         effect.setText("{this} has base power and toughness 3/3 until end of turn");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
-
     }
 
     private MarshFlitter(final MarshFlitter card) {

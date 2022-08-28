@@ -76,16 +76,6 @@ public class MageInt implements Serializable, Copyable<MageInt> {
         return boostedValue;
     }
 
-    /**
-     * TODO:
-     * Special cases:
-     * - Morph
-     *      setPermanentToFaceDownCreature
-     *      turnFaceUp
-     * - Transform
-     *      transformPermanent
-     * @param value
-     */
     public void setModifiedBaseValue(int value) {
         this.modifiedBaseValue = value;
         this.boostedValue = value;
