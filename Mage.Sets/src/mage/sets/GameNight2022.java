@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
@@ -20,5 +21,7 @@ public class GameNight2022 extends ExpansionSet {
         super("Game Night 2022", "GN3", ExpansionSet.buildDate(2019, 10, 14), SetType.SUPPLEMENTAL);
         this.hasBoosters = false;
         this.hasBasicLands = false; //temporary
+
+        cards.add(new SetCardInfo("Zamriel, Seraph of Steel", 1, Rarity.MYTHIC, mage.cards.z.ZamrielSeraphOfSteel.class));
     }
 }
