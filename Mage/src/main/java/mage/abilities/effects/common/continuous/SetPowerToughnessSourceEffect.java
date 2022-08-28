@@ -4,6 +4,7 @@ package mage.abilities.effects.common.continuous;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -13,41 +14,65 @@ import mage.game.Game;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com, North
+ * @author BetaSteward_at_googlemail.com, North, Alex-Vasile
  */
 public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl {
 
-    private DynamicValue amount;
-    private int power;
-    private int toughness;
+    private DynamicValue power;
+    private DynamicValue toughness;
+    // If true, the base power/toughness are net, otherwise the final value is set.
+    private boolean changeBaseValue;
+
+    public SetPowerToughnessSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration, SubLayer subLayer, boolean changeBaseValue) {
+        super(duration, Layer.PTChangingEffects_7, subLayer, Outcome.BoostCreature);
+        setCharacterDefining(subLayer == SubLayer.CharacteristicDefining_7a);
+        this.power = power;
+        this.toughness = toughness;
+        this.changeBaseValue = changeBaseValue;
+        if (power == toughness) { // When power and toughness are equal, a previous constructor passes the same object for both power nad toughness, so use == instead of .equals
+            this.staticText = "{this}'s " + (changeBaseValue ? "base " : "") + "power and toughness are each equal to the number of " + power.getMessage();
+        } else {  // The only other constructor creates the power and toughenss dynamic values as static values from passed-in ints.
+            this.staticText = "{this}'s " + (changeBaseValue ? "base " : "") + "power and toughness is " + power.toString() + '/' + toughness + ' ' + duration.toString();
+        }
+    }
 
     public SetPowerToughnessSourceEffect(DynamicValue amount, Duration duration) {
-        this(amount, duration, SubLayer.CharacteristicDefining_7a);
+        this(amount, duration, false);
+    }
+
+    public SetPowerToughnessSourceEffect(DynamicValue amount, Duration duration, boolean changeBaseValue) {
+        this(amount, duration, SubLayer.CharacteristicDefining_7a, changeBaseValue);
     }
 
     public SetPowerToughnessSourceEffect(DynamicValue amount, Duration duration, SubLayer subLayer) {
-        super(duration, Layer.PTChangingEffects_7, subLayer, Outcome.BoostCreature);
-        setCharacterDefining(subLayer == SubLayer.CharacteristicDefining_7a);
-        this.amount = amount;
-        staticText = "{this}'s power and toughness are each equal to the number of " + amount.getMessage();
+        this(amount, duration, subLayer, false);
+    }
+
+    public SetPowerToughnessSourceEffect(DynamicValue amount, Duration duration, SubLayer subLayer, boolean changeBaseValue) {
+        this(amount, amount, duration, subLayer, false);
     }
 
     public SetPowerToughnessSourceEffect(int power, int toughness, Duration duration) {
-        this(power, toughness, duration, SubLayer.CharacteristicDefining_7a);
+        this(power, toughness, duration, false);
+    }
+
+    public SetPowerToughnessSourceEffect(int power, int toughness, Duration duration, boolean changeBaseValue) {
+        this(power, toughness, duration, SubLayer.CharacteristicDefining_7a, changeBaseValue);
     }
 
     public SetPowerToughnessSourceEffect(int power, int toughness, Duration duration, SubLayer subLayer) {
-        super(duration, Layer.PTChangingEffects_7, subLayer, Outcome.BoostCreature);
-        this.power = power;
-        this.toughness = toughness;
-        staticText = "{this}'s power and toughness is " + power + '/' + toughness + ' ' + duration.toString();
+        this(power, toughness, duration, subLayer, false);
+    }
+
+    public SetPowerToughnessSourceEffect(int power, int toughness, Duration duration, SubLayer subLayer, boolean changeBaseValue) {
+        this(StaticValue.get(power), StaticValue.get(toughness), duration, subLayer, changeBaseValue);
     }
 
     public SetPowerToughnessSourceEffect(final SetPowerToughnessSourceEffect effect) {
         super(effect);
-        this.amount = effect.amount;
         this.power = effect.power;
         this.toughness = effect.toughness;
+        this.changeBaseValue = effect.changeBaseValue;
     }
 
     @Override
@@ -67,20 +92,26 @@ public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl {
         }
         if (mageObject == null) {
             discard();
-            return true;
+            return false;
         }
-        if (amount != null) {
-            int value = amount.calculate(game, source, this);
-            mageObject.getPower().setBoostedValue(value);
-            mageObject.getToughness().setBoostedValue(value);
-            return true;
-        } else {
-            if (power != Integer.MIN_VALUE) {
+
+        if (this.power != null) {
+            int power = this.power.calculate(game, source, this);
+            if (changeBaseValue) {
+                mageObject.getPower().setModifiedBaseValue(power);
+            } else {
                 mageObject.getPower().setBoostedValue(power);
             }
-            if (toughness != Integer.MIN_VALUE) {
+        }
+
+        if (this.toughness != null) {
+            int toughness = this.toughness.calculate(game, source, this);
+            if (changeBaseValue) {
+                mageObject.getToughness().setModifiedBaseValue(toughness);
+            } else {
                 mageObject.getToughness().setBoostedValue(toughness);
             }
+
         }
         return true;
     }
