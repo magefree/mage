@@ -2,10 +2,9 @@ package mage.cards.j;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.costadjusters.DomainAdjuster;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.hint.common.DomainHint;
@@ -13,8 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
-import mage.game.Game;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -32,7 +29,7 @@ public final class JodahsCodex extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addEffect(new InfoEffect("This ability costs {1} less to activate for each basic land type among lands you control."));
-        ability.setCostAdjuster(JodahsCodexAdjuster.instance);
+        ability.setCostAdjuster(DomainAdjuster.instance);
         ability.setAbilityWord(AbilityWord.DOMAIN);
         ability.addHint(DomainHint.instance);
         this.addAbility(ability);
@@ -45,14 +42,5 @@ public final class JodahsCodex extends CardImpl {
     @Override
     public JodahsCodex copy() {
         return new JodahsCodex(this);
-    }
-}
-
-enum JodahsCodexAdjuster implements CostAdjuster {
-    instance;
-
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        CardUtil.reduceCost(ability, DomainValue.REGULAR.calculate(game, ability, null));
     }
 }
