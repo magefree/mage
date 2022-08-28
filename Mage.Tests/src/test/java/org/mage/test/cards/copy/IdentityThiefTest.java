@@ -28,6 +28,8 @@ public class IdentityThiefTest extends CardTestPlayerBase {
         //   Return the exiled card to the battlefield under its owner's control at the beginning of the next end step.
         addCard(Zone.BATTLEFIELD, playerB, "Identity Thief"); // {2}{U}{U}
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Molten Sentry");
         setFlipCoinResult(playerA, true);
 
@@ -56,6 +58,8 @@ public class IdentityThiefTest extends CardTestPlayerBase {
         //   If you do, Identity Thief becomes a copy of that creature until end of turn.
         //   Return the exiled card to the battlefield under its owner's control at the beginning of the next end step.
         addCard(Zone.BATTLEFIELD, playerB, "Identity Thief"); // {2}{U}{U}
+
+        setStrictChooseMode(true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Primal Clay");
 
