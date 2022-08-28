@@ -58,6 +58,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Bog Badger", 156, Rarity.COMMON, mage.cards.b.BogBadger.class));
         cards.add(new SetCardInfo("Bone Splinters", 83, Rarity.COMMON, mage.cards.b.BoneSplinters.class));
         cards.add(new SetCardInfo("Bortuk Bonerattle", 197, Rarity.UNCOMMON, mage.cards.b.BortukBonerattle.class));
+        cards.add(new SetCardInfo("Braids's Frightful Return", 85, Rarity.UNCOMMON, mage.cards.b.BraidssFrightfulReturn.class));
         cards.add(new SetCardInfo("Braids, Arisen Nightmare", 84, Rarity.RARE, mage.cards.b.BraidsArisenNightmare.class));
         cards.add(new SetCardInfo("Briar Hydra", 286, Rarity.RARE, mage.cards.b.BriarHydra.class));
         cards.add(new SetCardInfo("Broken Wings", 157, Rarity.COMMON, mage.cards.b.BrokenWings.class));
