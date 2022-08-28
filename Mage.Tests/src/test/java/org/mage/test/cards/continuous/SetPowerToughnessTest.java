@@ -7,6 +7,12 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+/**
+ * Check that effects which increase the base PT interact correctly with effects which boost PT.
+ * And check that the test functions created to read both base and boosted values work correctly.
+ *
+ * @author Alex-Vasile
+ */
 public class SetPowerToughnessTest extends CardTestPlayerBase {
     // {U}
     // Enchanted creature gets +1/+1 and has flying.
@@ -15,9 +21,6 @@ public class SetPowerToughnessTest extends CardTestPlayerBase {
     // Creatures you control have base power and toughness X/X until end of turn.
     private static final String biomassMutation = "Biomass Mutation";
     private static final String lion = "Silvercoat Lion";
-
-    // TODO: https://scryfall.com/search?q=o%3A%22base+power%22
-    //       https://scryfall.com/search?q=o%3A%22base+toughness%22
 
     /**
      * Test that for a boosted creature, both base and the boosted power and toughness are correctly measured
