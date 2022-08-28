@@ -77,7 +77,7 @@ public class ChangelingTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, woodlandChangeling, 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 10);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, mimic);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, mimic, true);
         setChoice(playerA, "Sliver");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, woodlandChangeling);
@@ -103,7 +103,6 @@ public class ChangelingTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, cohort, CounterType.P1P1, 1);
         assertCounterCount(playerA, "Shapeshifter Token", CounterType.P1P1, 1);
@@ -123,7 +122,6 @@ public class ChangelingTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped(amoeboid, true);
         assertPowerToughness(playerA, "Shapeshifter Token", 2, 2);

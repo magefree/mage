@@ -91,7 +91,6 @@ public class TestAliases extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -125,7 +124,6 @@ public class TestAliases extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -146,7 +144,6 @@ public class TestAliases extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Lightning Bolt", 3);
         assertGraveyardCount(playerA, "Silvercoat Lion", 3);
@@ -162,7 +159,6 @@ public class TestAliases extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
@@ -178,7 +174,6 @@ public class TestAliases extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "@bolt", 1);
         assertGraveyardCount(playerA, "@lion", 1);
@@ -196,7 +191,6 @@ public class TestAliases extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Embermage Goblin", 2);
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
@@ -216,7 +210,6 @@ public class TestAliases extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "@goblin.1", 1);
         assertPermanentCount(playerA, "@goblin.2", 1);
@@ -239,7 +232,6 @@ public class TestAliases extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped("@mana.1", false);
         assertTapped("@mana.2", true);

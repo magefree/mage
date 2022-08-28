@@ -80,7 +80,6 @@ public class SharuumTheHegemonTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 24);
         assertLife(playerB, 16);

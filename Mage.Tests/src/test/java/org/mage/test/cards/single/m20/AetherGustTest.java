@@ -40,7 +40,6 @@ public class AetherGustTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, aetherGust, 1);
         assertPermanentCount(playerA, barkhide, 0);
         assertLibraryCount(playerA, 1);
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -64,6 +63,5 @@ public class AetherGustTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, aetherGust, 1);
         assertPermanentCount(playerA, barkhide, 0);
         assertLibraryCount(playerA, 1);
-        assertAllCommandsUsed();
     }
 }

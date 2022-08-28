@@ -33,7 +33,7 @@ public class ManaSourceTest extends CardTestPlayerBase {
         try {
             execute();
         } catch (Throwable e) {
-            if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
+            if (!e.getMessage().contains("Cast Myr Superion")) {
                 Assert.fail("must not have throw error about bad targets, but got:\n" + e.getMessage());
             }
         }

@@ -53,8 +53,6 @@ public class PhyrexianManaTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
-        
         //PlayerA pays life but PlayerB cannot
         assertLife(playerA, 18);
         assertLife(playerB, 20);
@@ -72,7 +70,7 @@ public class PhyrexianManaTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);
 
         setChoice(playerA, true); //yes to pay 2 life to cast Crypt Ghast
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crypt Ghast"); //3 mana used, 2 life paid (18 life total)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crypt Ghast", true); //3 mana used, 2 life paid (18 life total)
         setChoice(playerA, true); //yes to pay 2 life to cast Banehound
         setChoice(playerA, true); //yes to Extort
         setChoice(playerA, true); //yes to pay 2 life to Extort
@@ -149,9 +147,7 @@ public class PhyrexianManaTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-       
-        //PlayerA pays life
+       //PlayerA pays life
         assertLife(playerA, 18);
         assertLife(playerB, 20);
         
@@ -181,9 +177,7 @@ public class PhyrexianManaTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-
-        assertGraveyardCount(playerB, "Lightning Bolt", 1);
+       assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertGraveyardCount(playerA, "K'rrik, Son of Yawgmoth", 1);
         
         assertHandCount(playerA, "Banehound", 1);

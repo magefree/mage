@@ -26,7 +26,6 @@ public class ConjureTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, trainer, 1);
         assertHandCount(playerA, pegasus, 1);
@@ -37,13 +36,12 @@ public class ConjureTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 6);
         addCard(Zone.HAND, playerA, trainer);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, trainer);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, trainer, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, pegasus);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, trainer, 1);
         assertPermanentCount(playerA, pegasus, 1);
@@ -62,7 +60,6 @@ public class ConjureTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, skeleton, 2);
         assertGraveyardCount(playerA, murder, 1);

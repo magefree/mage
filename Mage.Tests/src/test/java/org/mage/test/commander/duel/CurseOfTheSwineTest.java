@@ -18,21 +18,23 @@ public class CurseOfTheSwineTest  extends CardTestCommanderDuelBase {
         setDecknamePlayerA("CommanderDuel_UW.dck"); // Commander = Daxos of Meletis
         return super.createNewGameAndPlayers();
     }
-    /*
-        In a Commander game, if a commander is put into the command zone
-        instead of being exiled by Curse of the Swine, its controller will
-        still get a Boar token.
+
+    /**
+     *  In a Commander game, if a commander is put into the command zone
+     *  instead of being exiled by Curse of the Swine, its controller will
+     *  still get a Boar token.
      */
     @Test
-    public void TestCurseOfTheSwine()
-    {
+    public void TestCurseOfTheSwine() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
         addCard(Zone.HAND, playerA, "Curse of the Swine");
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Daxos of Meletis");
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Curse of the Swine");
         setChoice(playerA, "X=1");
-        addTarget(playerA, "Daxos of Meletis");
+        // Daxos of Meletis is auto-chosen since only target
+
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 

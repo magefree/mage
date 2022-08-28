@@ -26,6 +26,7 @@ public class TurnToFrogTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Turn to Frog");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{R}{G}: Until end of turn, {this} becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\" It's still a land.");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Turn to Frog", "Raging Ravine");
         attack(1, playerA, "Raging Ravine");
 
@@ -47,6 +48,7 @@ public class TurnToFrogTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Turn to Frog");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{R}{G}: Until end of turn, {this} becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\" It's still a land.");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Turn to Frog", "Raging Ravine");
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{R}{G}: Until end of turn, {this} becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\" It's still a land.");
@@ -82,5 +84,4 @@ public class TurnToFrogTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Llanowar Elves", 0);
         assertPowerToughness(playerB, "Craw Wurm", -1, 1);
     }
-
 }

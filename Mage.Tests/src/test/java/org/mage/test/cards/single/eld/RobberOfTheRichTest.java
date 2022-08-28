@@ -29,7 +29,6 @@ public class RobberOfTheRichTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20 + 5);
         assertGraveyardCount(playerB, passage, 1);
@@ -52,7 +51,6 @@ public class RobberOfTheRichTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20 + 5);
         assertGraveyardCount(playerB, passage, 1);

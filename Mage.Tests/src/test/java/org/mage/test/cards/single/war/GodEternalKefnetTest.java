@@ -36,7 +36,6 @@ public class GodEternalKefnetTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(5, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, "Precision Bolt", 1);
         assertGraveyardCount(playerA, "Precision Bolt", 0);
@@ -70,7 +69,6 @@ public class GodEternalKefnetTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, "Fire // Ice", 1);
         assertGraveyardCount(playerA, "Fire // Ice", 0);

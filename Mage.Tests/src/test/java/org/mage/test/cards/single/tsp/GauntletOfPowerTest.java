@@ -28,7 +28,6 @@ public class GauntletOfPowerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, maaka, 2 + 1, 2 + 1);
         assertPowerToughness(playerA, myr, 1, 2);
@@ -47,7 +46,6 @@ public class GauntletOfPowerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, maaka, 2 + 1, 2 + 1);
     }
@@ -67,7 +65,6 @@ public class GauntletOfPowerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerB, maaka, 2 + 1, 2 + 1);
     }

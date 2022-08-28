@@ -35,7 +35,7 @@ public class FiendHunterTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Primeval Titan");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fiend Hunter");
-        addTarget(playerA, "Primeval Titan");
+        // Target autochosen since only one option
 
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();

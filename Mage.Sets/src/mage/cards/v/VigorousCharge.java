@@ -18,7 +18,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -39,7 +38,7 @@ public final class VigorousCharge extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
         // Whenever that creature deals combat damage this turn, if this spell was kicked, you gain life equal to that damage.
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new GainAbilityTargetEffect(new VigorousChargeTriggeredAbility(), Duration.EndOfTurn),
-        new LockedInCondition(KickedCondition.instance), staticText));
+        new LockedInCondition(KickedCondition.ONCE), staticText));
 
     }
 

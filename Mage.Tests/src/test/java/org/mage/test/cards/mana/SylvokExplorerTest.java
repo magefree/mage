@@ -24,7 +24,6 @@ public class SylvokExplorerTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         ManaOptions options = playerA.getAvailableManaTest(currentGame);
         Assert.assertEquals("Player should be able to create 1 red and 1 white mana", "{R}{W}", options.get(0).toString());
@@ -44,7 +43,6 @@ public class SylvokExplorerTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         ManaOptions options = playerA.getAvailableManaTest(currentGame);
         Assert.assertEquals("Player should be able to create 3 white mana", "{W}{W}{W}", options.get(0).toString());

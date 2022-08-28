@@ -1824,7 +1824,7 @@ public class VerifyCardDataTest {
                 || checkName.equals("Plains")
                 || checkName.equals("Mountain");
     }
-    
+
     private boolean isNonSnowBasicLandName(String name) {
         return name.equals("Island")
                 || name.equals("Forest")

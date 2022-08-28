@@ -26,7 +26,6 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         setStrictChooseMode(true);
         execute();
 
-        assertAllCommandsUsed();
         assertExileCount(playerA, 1);
         assertExileCount(playerB, 1);
         assertExileCount(playerC, 1);
@@ -49,7 +48,6 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         setStrictChooseMode(true);
         execute();
 
-        assertAllCommandsUsed();
         assertExileCount(playerA, 1);
         assertExileCount(playerB, 1);
         assertExileCount(playerC, 1);
@@ -69,7 +67,6 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         setStrictChooseMode(true);
         execute();
 
-        assertAllCommandsUsed();
         assertExileCount(playerA, 1);
         assertExileCount(playerB, 1);
         assertExileCount(playerC, 1);
@@ -94,7 +91,6 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         setStrictChooseMode(true);
         execute();
 
-        assertAllCommandsUsed();
         assertExileCount(playerA, 0);
         assertExileCount(playerB, 1);
         assertExileCount(playerC, 1);
@@ -121,7 +117,6 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         setStrictChooseMode(true);
         execute();
 
-        assertAllCommandsUsed();
         assertExileCount(playerA, 0);
         assertExileCount(playerB, 1);
         assertExileCount(playerC, 1);
@@ -154,8 +149,6 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
 
         setStrictChooseMode(true);
         execute();
-
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Tana, the Bloodsower", 1);
 
@@ -195,8 +188,6 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         setStrictChooseMode(true);
         execute();
 
-        assertAllCommandsUsed();
-
         assertPermanentCount(playerA, "Exotic Orchard", 1);
 
         assertExileCount(playerA, "Exotic Orchard", 0);
@@ -235,8 +226,6 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
 
         setStrictChooseMode(true);
         execute();
-
-        assertAllCommandsUsed();
 
         assertExileCount(playerA, "Lightning Bolt", 1);
         assertExileCount(playerA, "Reliquary Tower", 0);
@@ -278,8 +267,6 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
 
         setStrictChooseMode(true);
         execute();
-
-        assertAllCommandsUsed();
 
         assertExileCount(playerA, "Exotic Orchard", 0);
         assertExileCount(playerA, "Lightning Bolt", 1);
@@ -335,8 +322,6 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
 
         setStrictChooseMode(true);
         execute();
-
-        assertAllCommandsUsed();
 
         // 1 exiled with Share the Spoils
         // 1 exiled Prosper (he only exiles one since we stop before the end step of playerA's second turn)
@@ -398,8 +383,6 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         setStrictChooseMode(true);
         execute();
 
-        assertAllCommandsUsed();
-
         assertPermanentCount(playerA, "Ardenvale Tactician", 1);
 
         assertExileCount(playerA, "Lovestruck Beast", 1);
@@ -456,8 +439,6 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         setStrictChooseMode(true);
         execute();
 
-        assertAllCommandsUsed();
-
         assertExileCount(playerA, "Aether Helix", 0);
         assertExileCount(playerA, "Exotic Orchard", 1);
 
@@ -511,8 +492,6 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         setStrictChooseMode(true);
         execute();
 
-        assertAllCommandsUsed();
-
         assertExileCount(playerA, "Aether Helix", 0);
         assertExileCount(playerA, "Exotic Orchard", 1);
 
@@ -554,8 +533,6 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
 
         setStrictChooseMode(true);
         execute();
-
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerD, "Exotic Orchard",1);
 

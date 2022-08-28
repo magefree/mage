@@ -30,7 +30,7 @@ public class OblivionSowerTest extends CardTestPlayerBase {
         skipInitShuffling();
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Oblivion Sower");
-        addTarget(playerA, playerB);
+        // addTarget(playerA, playerB); Auto-chosen since only option
 
         addTarget(playerA, "Canopy Vista^Canopy Vista^Canopy Vista");
 

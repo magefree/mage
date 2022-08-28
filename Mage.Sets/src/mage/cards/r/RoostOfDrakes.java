@@ -28,7 +28,7 @@ public final class RoostOfDrakes extends CardImpl {
         // When Roost of Drakes enters the battlefield, if it was kicked, create a 2/2 blue Drake creature token with flying.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new DrakeToken())),
-                KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, " +
+                KickedCondition.ONCE, "When {this} enters the battlefield, if it was kicked, " +
                 "create a 2/2 blue Drake creature token with flying."
         ));
 

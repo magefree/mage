@@ -54,7 +54,6 @@ public class EssenceOfTheWildTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Silvercoat Lion", 0);
         assertPermanentCount(playerA, "Essence of the Wild", 2);
@@ -79,7 +78,6 @@ public class EssenceOfTheWildTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Silvercoat Lion", 0);
         assertPermanentCount(playerA, "Essence of the Wild", 3);
@@ -104,7 +102,7 @@ public class EssenceOfTheWildTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
 
         // apply -1/-1 effect (+2: Put a -1/-1 counter on up to one target creature.)
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "+2:", "Essence of the Wild");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2:", "Essence of the Wild");
 
         // copy
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Silvercoat Lion");
@@ -112,7 +110,6 @@ public class EssenceOfTheWildTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Silvercoat Lion", 0);
         assertPermanentCount(playerA, "Essence of the Wild", 2);

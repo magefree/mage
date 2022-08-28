@@ -46,6 +46,8 @@ Dark Ascension|DarkAscension|
 Darksteel|Darksteel|
 Dissension|Dissension|
 Dominaria|Dominaria|
+Dominaria United|DominariaUnited|
+Dominaria United Commander|DominariaUnitedCommander|
 Dragon's Maze|DragonsMaze|
 Dragons of Tarkir|DragonsOfTarkir|
 Duel Decks: Ajani vs. Nicol Bolas|DuelDecksAjaniVsNicolBolas|
@@ -100,6 +102,7 @@ Future Sight|FutureSight|
 Game Day|GameDay|
 Game Night|GameNight|
 Game Night 2019|GameNight2019|
+Game Night 2022|GameNight2022|
 Gatecrash|Gatecrash|
 Global Series: Jiang Yanggu & Mu Yanling|GlobalSeriesJiangYangguAndMuYanling|
 Grand Prix|GrandPrixPromos|

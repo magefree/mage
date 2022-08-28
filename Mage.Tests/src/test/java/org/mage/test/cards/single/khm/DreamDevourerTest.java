@@ -57,7 +57,6 @@ public class DreamDevourerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Grizzly Bears", 2);
     }
@@ -88,7 +87,6 @@ public class DreamDevourerTest extends CardTestPlayerBase {
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -120,7 +118,6 @@ public class DreamDevourerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Akoum Warrior", 1);
     }
@@ -142,9 +139,8 @@ public class DreamDevourerTest extends CardTestPlayerBase {
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkExileCount("after foretell", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Jorn, God of Winter", 2);
 
-        checkPlayableAbility("foretell cast left side", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell {G}", true);
-        checkPlayableAbility("foretell cast right side", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell {U}{B}", true);
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell {G}");
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell {U}{B}");
         waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
         checkPermanentCount("after foretell cast", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Jorn, God of Winter", 1);
@@ -153,7 +149,6 @@ public class DreamDevourerTest extends CardTestPlayerBase {
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Jorn, God of Winter", 1);
         assertPermanentCount(playerA, "Kaldring, the Rimestaff", 1);
@@ -200,7 +195,6 @@ public class DreamDevourerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(5, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Lonesome Unicorn", 2);
         assertPermanentCount(playerA, "Knight Token", 1);

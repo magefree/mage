@@ -59,7 +59,6 @@ public class AngelOfSerenityTest extends CardTestMultiPlayerBase {
 
         setStopAt(6, PhaseStep.UPKEEP);
         execute();
-        assertAllCommandsUsed();
 
         Assert.assertFalse("Player of Angel of Serenity did not leave the game", playerC.isInGame());
         assertPermanentCount(playerA, 8);

@@ -26,7 +26,7 @@ public class SatyrFiredancerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        addTarget(playerA, "Silvercoat Lion");
+        // Silvercoat Lion autochosen since only option
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

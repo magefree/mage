@@ -31,7 +31,6 @@ public class AquitectsWillTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 3);
         assertGraveyardCount(playerA, will, 1);
@@ -56,7 +55,6 @@ public class AquitectsWillTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 3);
         assertGraveyardCount(playerA, will, 1);
@@ -80,7 +78,6 @@ public class AquitectsWillTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, will, 1);
         assertGraveyardCount(playerA, hexmage, 1);

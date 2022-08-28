@@ -24,7 +24,6 @@ public class EmbodimentOfAgoniesTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // Creature should be 5/5 as there are 5 distinct mana costs in graveyard
         assertPowerToughness(playerA, "Embodiment of Agonies", 5, 5);
@@ -41,7 +40,6 @@ public class EmbodimentOfAgoniesTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // Creature should be 1/1 as there 1 distinct mana cost in graveyard
         assertPowerToughness(playerA, "Embodiment of Agonies", 1, 1);
@@ -59,7 +57,6 @@ public class EmbodimentOfAgoniesTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // Creature should be 3/3 as there are 3 distinct mana costs in graveyard
         assertPowerToughness(playerA, "Embodiment of Agonies", 3, 3);
@@ -75,7 +72,6 @@ public class EmbodimentOfAgoniesTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // Creature should be dead as there are no mana costs in graveyards
         assertGraveyardCount(playerA, "Embodiment of Agonies", 1);
@@ -92,7 +88,6 @@ public class EmbodimentOfAgoniesTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // Creature should be 2/2 as there are 2 distinct mana costs in graveyard
         assertPowerToughness(playerA, "Embodiment of Agonies", 2, 2);

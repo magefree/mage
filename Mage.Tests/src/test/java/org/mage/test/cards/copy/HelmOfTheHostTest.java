@@ -32,9 +32,11 @@ public class HelmOfTheHostTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Helm of the Host", 1);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "0: Until end of turn");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip");
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "0: Until end of turn");
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "0: Until end of turn");
 
         attack(3, playerA, "Gideon of the Trials");
@@ -50,5 +52,4 @@ public class HelmOfTheHostTest extends CardTestPlayerBase {
         assertLife(playerB, 12);
         assertLife(playerA, 20);
     }
-
 }

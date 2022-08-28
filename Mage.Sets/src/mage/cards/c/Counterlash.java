@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -9,17 +8,14 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
-import mage.filter.predicate.Predicate;
-import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SharesCardTypePredicate;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetSpell;
 import mage.util.CardUtil;
 
-import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward
@@ -70,17 +66,9 @@ class CounterlashEffect extends OneShotEffect {
         if (stackObject == null || controller == null) {
             return false;
         }
-        Set<Predicate<MageObject>> predicates = stackObject
-                .getCardType(game)
-                .stream()
-                .map(CardType::getPredicate)
-                .collect(Collectors.toSet());
-        game.getStack().counter(source.getFirstTarget(), source, game);
-        if (predicates.isEmpty()) {
-            return true;
-        }
         FilterCard filter = new FilterCard();
-        filter.add(Predicates.or(predicates));
+        filter.add(new SharesCardTypePredicate(stackObject.getCardType(game)));
+        game.getStack().counter(source.getFirstTarget(), source, game);
         CardUtil.castSpellWithAttributesForFree(controller, source, game, new CardsImpl(controller.getHand()), filter);
         return true;
     }

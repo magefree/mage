@@ -41,7 +41,7 @@ public class BasicSaheeliSublimeArtificerTest extends CardTestOathbreaker3Player
         // Whenever you cast a noncreature spell, create a 1/1 colorless Servo artifact creature token.
         // -2: Target artifact you control becomes a copy of another target artifact or creature you control until end of turn,
         // except it's an artifact in addition to its other types.
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Saheeli, Sublime Artificer"); // Planeswalker 5  {1}{U/R}{U/R}
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Saheeli, Sublime Artificer", true); // Planeswalker 5  {1}{U/R}{U/R}
 
         // Affinity for artifacts
         // Draw two cards.
@@ -59,6 +59,5 @@ public class BasicSaheeliSublimeArtificerTest extends CardTestOathbreaker3Player
         assertHandCount(playerA, 3);
         assertPermanentCount(playerA, "Saheeli, Sublime Artificer", 1);
         assertCommandZoneCount(playerA, "Thoughtcast", 1);
-
     }
 }

@@ -24,7 +24,7 @@ public class SkipTurnTest extends CardTestPlayerBase {
         // When Eater of Days enters the battlefield, you skip your next two turns.
         addCard(Zone.HAND, playerA, "Eater of Days", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Eater of Days");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Eater of Days", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shrine of Boundless Growth");
 
         setStopAt(5, PhaseStep.PRECOMBAT_MAIN);

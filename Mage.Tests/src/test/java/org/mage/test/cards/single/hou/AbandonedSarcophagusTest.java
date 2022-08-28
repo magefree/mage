@@ -25,8 +25,6 @@ public class AbandonedSarcophagusTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         execute();
 
-        assertAllCommandsUsed();
-
         assertPermanentCount(playerA, "Astral Drift", 1);
     }
 
@@ -46,7 +44,6 @@ public class AbandonedSarcophagusTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         execute();
 
-        assertAllCommandsUsed();
     }
 
     /**
@@ -71,8 +68,6 @@ public class AbandonedSarcophagusTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         execute();
 
-        assertAllCommandsUsed();
-
         assertHandCount(playerA, 2);
         assertGraveyardCount(playerA, 2);
     }
@@ -89,7 +84,7 @@ public class AbandonedSarcophagusTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Ash Barrens"); // Land
         addCard(Zone.HAND, playerA, "Beast Within", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Astral Drift");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Astral Drift", true);
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ash Barrens");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Beast Within", "Astral Drift");
@@ -100,8 +95,6 @@ public class AbandonedSarcophagusTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-
-        assertAllCommandsUsed();
 
         assertExileCount(playerA, 2);
     }

@@ -21,7 +21,6 @@ public class HoodedBlightfangTest extends CardTestPlayerBase {
         attack(1, playerA, goblin);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20 + 1);
         assertLife(playerB, 20 - 1 - 1);
@@ -37,7 +36,6 @@ public class HoodedBlightfangTest extends CardTestPlayerBase {
         attack(1, playerA, goblin, jace);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, jace, 0);
         assertGraveyardCount(playerB, jace, 1);

@@ -64,7 +64,7 @@ public class CommanderReplaceEffectTest extends CardTestCommanderDuelBase {
 
         // Daxos of Meletis can't be blocked by creatures with power 3 or greater.
         // Whenever Daxos of Meletis deals combat damage to a player, exile the top card of that player's library. You gain life equal to that card's converted mana cost. Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast it.
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Daxos of Meletis");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Daxos of Meletis", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gift of Immortality", "Daxos of Meletis");
 
         // Destroy all creatures, then put an X/X colorless Horror artifact creature token onto the battlefield, where X is the number of creatures destroyed this way.

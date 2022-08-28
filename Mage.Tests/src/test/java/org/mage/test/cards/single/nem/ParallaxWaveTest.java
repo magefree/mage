@@ -44,7 +44,7 @@ public class ParallaxWaveTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
         
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Parallax Wave");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Parallax Wave", true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Remove a fade counter from {this}: Exile target creature", "Silvercoat Lion");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Remove a fade counter from {this}: Exile target creature", "Parallax Wave");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -65,7 +65,7 @@ public class ParallaxWaveTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox", 1);
         
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Parallax Wave");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Parallax Wave", true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Remove a fade counter from {this}: Exile target creature", "Silvercoat Lion");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Remove a fade counter from {this}: Exile target creature", "Parallax Wave");
 

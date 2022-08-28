@@ -18,10 +18,12 @@ public class HopeOfGhirapurTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
         addCard(Zone.HAND, playerB, "Shock");
 
+        setStrictChooseMode(true);
+
         attack(1, playerA, "Hope of Ghirapur");
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Sacrifice", playerB);
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Shock", playerA);
+        checkPlayableAbility("Can't Shock", 2, PhaseStep.PRECOMBAT_MAIN, playerB, "Shock", false);
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -31,8 +33,10 @@ public class HopeOfGhirapurTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Hope of Ghirapur", 0);
     }
 
-    // Test that ability cannot be activated if after damage Hope of Ghirapur was removed
-    // from the battlefield and returned back.
+    /**
+     * Test that ability cannot be activated if after damage Hope of Ghirapur was removed
+     * from the battlefield and returned back.
+     */
     @Test
     public void testWhenHopeOfGhirapurWasRemovedAndReturnedBack() {
         // Flying
@@ -47,7 +51,7 @@ public class HopeOfGhirapurTest extends CardTestPlayerBase {
 
         attack(1, playerA, "Hope of Ghirapur");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cloudshift", "Hope of Ghirapur");
-        activateAbility(1, PhaseStep.END_TURN, playerA, "Sacrifice", playerB);
+        checkPlayableAbility("Hope of Ghirapur died", 1, PhaseStep.END_TURN, playerA, "Sacrifice", false);
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Shock", playerA);
 
@@ -58,5 +62,4 @@ public class HopeOfGhirapurTest extends CardTestPlayerBase {
         assertLife(playerB, 19);
         assertPermanentCount(playerA, "Hope of Ghirapur", 1);
     }
-
 }

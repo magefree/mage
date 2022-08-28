@@ -18,7 +18,9 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class ChandrasEmbercatTest extends CardTestPlayerBase {
 
-    // Make sure we can use the mana to cast elementals
+    /**
+     * Make sure we can use the mana to cast elementals
+     */
     @Test
     public void testCanCastElementalWithMana() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
@@ -36,7 +38,9 @@ public class ChandrasEmbercatTest extends CardTestPlayerBase {
 
     }
 
-    // Make sure we can use the mana to cast Chandra Planeswalkers
+    /**
+     * Make sure we can use the mana to cast Chandra Planeswalkers
+     */
     @Test
     public void testCanCastChandraPlaneswalkerWithMana() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
@@ -54,7 +58,9 @@ public class ChandrasEmbercatTest extends CardTestPlayerBase {
 
     }
 
-    // Make sure we cant use the mana to cast non-Chandra Planeswalkers
+    /**
+     * Make sure we can't use the mana to cast non-Chandra Planeswalkers.
+     */
     @Test
     public void testCantCastNonChandraPlaneswalkerWithMana() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
@@ -63,7 +69,7 @@ public class ChandrasEmbercatTest extends CardTestPlayerBase {
         //A non-Chandra planeswalker that costs {2}{U}{U}
         addCard(Zone.HAND, playerA, "Jace, the Mind Sculptor", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Jace, the Mind Sculptor");
+        checkPlayableAbility("Mana should be restricted", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Jace", false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -72,7 +78,9 @@ public class ChandrasEmbercatTest extends CardTestPlayerBase {
 
     }
 
-    // Make sure we cant use the mana to cast non-Elemental creatures
+    /**
+     * Make sure we can't use the mana to cast non-Elemental creatures.
+     */
     @Test
     public void testCantCastNonElementalCreatureWithMana() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
@@ -81,13 +89,11 @@ public class ChandrasEmbercatTest extends CardTestPlayerBase {
         //A non-elemental creature that costs {1}{R}
         addCard(Zone.HAND, playerA, "Raptor Hatchling", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Raptor Hatchling");
+        checkPlayableAbility("Mana should be restricted", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Raptor", false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertPermanentCount(playerA, "Raptor Hatchling", 0);
-
     }
-
 }

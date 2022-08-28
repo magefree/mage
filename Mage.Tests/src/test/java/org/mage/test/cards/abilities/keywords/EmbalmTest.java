@@ -7,6 +7,11 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
+ * 702.128. Embalm
+ * 702.128a Embalm is an activated ability that functions while the card with embalm is in a graveyard.
+ *          “Embalm [cost]” means
+ *          “[Cost], Exile this card from your graveyard: Create a token that’s a copy of this card, except it’s white, it has no mana cost, and it’s a Zombie in addition to its other types. Activate only as a sorcery.”
+ * 702.128b A token is “embalmed” if it’s created by a resolving embalm ability.
  *
  * @author noxx
  */
@@ -44,7 +49,6 @@ public class EmbalmTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, aSanctions, 1);
         assertPermanentCount(playerB, yOx, 0);
         assertPermanentCount(playerB, wKnight, 1);
-
     }
 
     /*
@@ -73,6 +77,8 @@ public class EmbalmTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, yOx);
         addCard(Zone.BATTLEFIELD, playerB, wKnight);
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, aSanctions);
         addTarget(playerA, yOx);
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, dBlade);
@@ -90,11 +96,10 @@ public class EmbalmTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, aSanctions, 0);
     }
 
-    /*
+    /**
+     * Reported bug: https://github.com/magefree/mage/issues/3144
      * Tests that not only creature targeted by original creature is returned.
      * After using Embalm creature will exile another creature and should return it back when leaves battlefield.
-     *
-     * Bug: #3144
      */
     @Test
     public void testCreatureExiledByEmbalmCreatureReturns() {
@@ -121,12 +126,13 @@ public class EmbalmTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, aSanctions);
         addTarget(playerA, yOx);
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, dBlade);
-        addTarget(playerB, aSanctions);
+
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, dBlade, aSanctions);
+
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Embalm");
         addTarget(playerA, wKnight);
-        castSpell(1, PhaseStep.END_TURN, playerB, dBlade);
-        addTarget(playerB, aSanctions);
+
+        castSpell(1, PhaseStep.END_TURN, playerB, dBlade, aSanctions);
 
         setStopAt(1, PhaseStep.CLEANUP);
         execute();
@@ -135,7 +141,6 @@ public class EmbalmTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, aSanctions, 0);
         assertPermanentCount(playerB, yOx, 1);
         // second creature should also return after embalm token leaves battlefield
-        // Bug: #3144
         assertPermanentCount(playerB, wKnight, 1);
         assertGraveyardCount(playerA, aSanctions, 0);
         assertGraveyardCount(playerB, dBlade, 2);

@@ -36,6 +36,7 @@ public class CastFromLibraryWithoutPayingManaCostTest extends CardTestPlayerBase
 
         // Equip Sunforger to Storm Crow.
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", "Storm Crow");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         // Unattach Sunforger to cast Utter End from library targeting Gray Ogre.
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}{W}, Unattach");
         addTarget(playerA, "Utter End");
@@ -46,6 +47,7 @@ public class CastFromLibraryWithoutPayingManaCostTest extends CardTestPlayerBase
 
         // Equip Sunforger to Storm Crow again.
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Equip", "Storm Crow");
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);
         // Unattach Sunforger to cast Utter End from library targeting Hill Giant.
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{R}{W}, Unattach");
         addTarget(playerA, "Utter End");
@@ -73,11 +75,12 @@ public class CastFromLibraryWithoutPayingManaCostTest extends CardTestPlayerBase
         // converted mana cost 4 or less and cast that card without paying its mana cost. Then shuffle your library.
         // Equip {3}
         addCard(Zone.BATTLEFIELD, playerA, "Sunforger");
-        addCard(Zone.BATTLEFIELD, playerA, "Elixir of Immortality");
         // {2}, {T}: You gain 5 life. Shuffle Elixir of Immortality and your graveyard into their owner's library.
+        addCard(Zone.BATTLEFIELD, playerA, "Elixir of Immortality");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 10);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 10);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 10);
+        // Instant
         // Exile target nonland permanent.
         addCard(Zone.HAND, playerA, "Utter End");
 
@@ -92,6 +95,7 @@ public class CastFromLibraryWithoutPayingManaCostTest extends CardTestPlayerBase
 
         // Equip Sunforger to Storm Crow.
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Equip", "Storm Crow");
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);
         // Unattach Sunforger to cast Utter End from library targeting Hill Giant.
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{R}{W}, Unattach");
         addTarget(playerA, "Utter End");
@@ -111,5 +115,4 @@ public class CastFromLibraryWithoutPayingManaCostTest extends CardTestPlayerBase
         // Check that Utter End is in the graveyard.
         assertGraveyardCount(playerA, "Utter End", 1);
     }
-
 }

@@ -48,7 +48,6 @@ public class ElshaOfTheInfiniteTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Harnfel, Horn of Bounty", 1);
     }

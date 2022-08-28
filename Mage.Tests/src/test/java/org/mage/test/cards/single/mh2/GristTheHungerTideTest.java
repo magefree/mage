@@ -28,7 +28,6 @@ public class GristTheHungerTideTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         for (Card card : currentGame.getCards()) {
             if (!card.getName().equals(grist)) {
@@ -55,7 +54,6 @@ public class GristTheHungerTideTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         for (Card card : currentGame.getCards()) {
             if (!card.getName().equals(grist)) {
@@ -77,7 +75,6 @@ public class GristTheHungerTideTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // Grist is a creature spell when cast and triggers bounty
         assertPermanentCount(playerA, "Beast Token", 1);

@@ -61,6 +61,6 @@ class ElfhameDruidConditionalMana extends ConditionalMana {
 
     public ElfhameDruidConditionalMana(Mana mana) {
         super(mana);
-        addCondition(KickedCondition.instance);
+        addCondition(KickedCondition.ONCE);
     }
 }

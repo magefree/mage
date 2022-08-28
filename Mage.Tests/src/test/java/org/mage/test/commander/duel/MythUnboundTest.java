@@ -47,7 +47,6 @@ public class MythUnboundTest extends CardTestCommanderDuelBase {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Myth Unbound", 1);
         assertGraveyardCount(playerB, "Lightning Bolt", 1);

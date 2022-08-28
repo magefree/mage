@@ -147,7 +147,8 @@ public class CascadeTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Unsummon"); // Instant  {U}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Enlisted Wurm");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Unsummon", "Enlisted Wurm");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Unsummon", "Enlisted Wurm", true);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Enlisted Wurm");
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -156,7 +157,6 @@ public class CascadeTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Unsummon", 1);
         assertPermanentCount(playerA, "Silvercoat Lion", 2);
         assertPermanentCount(playerA, "Enlisted Wurm", 1);
-
     }
 
     /**

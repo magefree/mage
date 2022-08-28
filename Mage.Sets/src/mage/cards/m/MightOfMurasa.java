@@ -60,7 +60,7 @@ class MightOfMurasaEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int i = KickedCondition.instance.apply(game, source) ? 5 : 3;
+        int i = KickedCondition.ONCE.apply(game, source) ? 5 : 3;
         game.addEffect(new BoostTargetEffect(i, i, Duration.EndOfTurn), source);
         return true;
     }

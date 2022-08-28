@@ -28,8 +28,6 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-        
         //Gray Ogre is cast with the discard
         assertPermanentCount(playerA, "Gray Ogre", 1);
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
@@ -99,7 +97,6 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Alpha Myr", 1);
         assertTappedCount("Plains", false, 3); // must discard 1 instead tap
@@ -124,7 +121,6 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Alpha Myr", 1);
     }
@@ -146,7 +142,6 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -164,8 +159,7 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
-        
+
         assertGraveyardCount(playerA, "Invigorate", 1);
         assertPowerToughness(playerA, "Silvercoat Lion", 6, 6);
         assertLife(playerB, 23);
@@ -188,8 +182,7 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
-        
+
         assertGraveyardCount(playerA, "Invigorate", 1);
         assertPowerToughness(playerA, "Silvercoat Lion", 2, 2);
         assertLife(playerB, 20);
@@ -203,6 +196,5 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 }

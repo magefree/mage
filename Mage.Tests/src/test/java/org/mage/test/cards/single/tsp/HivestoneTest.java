@@ -25,7 +25,7 @@ public class HivestoneTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Muscle Sliver", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Runeclaw Bear", 1); // Creature 2/2
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hivestone");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

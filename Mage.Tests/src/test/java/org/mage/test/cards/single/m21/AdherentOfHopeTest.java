@@ -20,7 +20,6 @@ public class AdherentOfHopeTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, "Adherent of Hope", CounterType.P1P1, 1);
 
@@ -36,7 +35,6 @@ public class AdherentOfHopeTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, "Adherent of Hope", CounterType.P1P1, 1);
 
@@ -50,7 +48,6 @@ public class AdherentOfHopeTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, "Adherent of Hope", CounterType.P1P1, 0);
 

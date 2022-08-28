@@ -388,7 +388,6 @@ public class CursesTest extends CardTestPlayerBase {
 
         try {
             execute();
-            assertAllCommandsUsed();
         } catch (Throwable e) {
             if (!e.getMessage().contains("Missing CHOICE def for turn 2, step UPKEEP, PlayerB")) {
                 Assert.fail("Should have had error about needing a target, but got:\n" + e.getMessage());

@@ -127,7 +127,6 @@ public class HexproofTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Swamp", 1);
         assertCounterCount(playerA, "Liliana Vess", CounterType.LOYALTY, 5 + 1);
@@ -154,7 +153,6 @@ public class HexproofTest extends CardTestPlayerBaseWithAIHelps {
 
         try {
             execute();
-            assertAllCommandsUsed();
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("setup good targets")) {
@@ -181,7 +179,6 @@ public class HexproofTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // no discarded cards
         assertGraveyardCount(playerA, 0);
@@ -212,7 +209,6 @@ public class HexproofTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // no discarded cards
         assertGraveyardCount(playerA, 0);
@@ -231,7 +227,6 @@ public class HexproofTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 3 * 3);
     }
@@ -265,6 +260,5 @@ public class HexproofTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 }

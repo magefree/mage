@@ -43,7 +43,6 @@ public class NestOfScarabsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, nestScarabs, 1);
         assertPermanentCount(playerA, stinger, 1);

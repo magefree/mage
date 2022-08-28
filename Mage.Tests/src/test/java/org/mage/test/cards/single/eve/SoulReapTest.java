@@ -26,7 +26,6 @@ public class SoulReapTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, lion, 0);
         assertPermanentCount(playerA, rats, 1);
@@ -46,7 +45,6 @@ public class SoulReapTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, lion, 0);
         assertGraveyardCount(playerA, lion, 1);

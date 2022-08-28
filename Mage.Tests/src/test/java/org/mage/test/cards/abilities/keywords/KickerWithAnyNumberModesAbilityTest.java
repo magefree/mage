@@ -29,7 +29,6 @@ public class KickerWithAnyNumberModesAbilityTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Balduvian Bears", 2 + 2, 2 + 2);
         assertLife(playerA, 20);
@@ -57,7 +56,6 @@ public class KickerWithAnyNumberModesAbilityTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Balduvian Bears", 2 + 2, 2 + 2);
         assertLife(playerA, 20 + 4);
@@ -87,7 +85,6 @@ public class KickerWithAnyNumberModesAbilityTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Balduvian Bears", 2 + 2, 2 + 2);
         assertLife(playerA, 20 + 4);
@@ -117,7 +114,6 @@ public class KickerWithAnyNumberModesAbilityTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Balduvian Bears", 2 + 2, 2 + 2);
         assertLife(playerA, 20 + 4);
@@ -149,7 +145,6 @@ public class KickerWithAnyNumberModesAbilityTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Balduvian Bears", 2 + 2, 2 + 2);
         assertLife(playerA, 20 + 4);

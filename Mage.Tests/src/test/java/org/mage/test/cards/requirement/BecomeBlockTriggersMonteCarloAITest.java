@@ -32,7 +32,6 @@ public class BecomeBlockTriggersMonteCarloAITest extends CardTestPlayerBaseWithM
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, 0);
         assertGraveyardCount(playerB, 1);

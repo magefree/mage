@@ -41,7 +41,7 @@ public final class DesolationGiant extends CardImpl {
         this.addAbility(new KickerAbility("{W}{W}"));
         // When Desolation Giant enters the battlefield, destroy all other creatures you control. If it was kicked, destroy all other creatures instead.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(new DestroyAllEffect(filter),
-            new DestroyAllEffect(filter2), KickedCondition.instance, "destroy all other creatures you control. If it was kicked, destroy all other creatures instead.")));
+            new DestroyAllEffect(filter2), KickedCondition.ONCE, "destroy all other creatures you control. If it was kicked, destroy all other creatures instead.")));
 }
 
     private DesolationGiant(final DesolationGiant card) {

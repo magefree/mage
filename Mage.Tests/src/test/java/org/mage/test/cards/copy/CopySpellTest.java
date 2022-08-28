@@ -53,7 +53,6 @@ public class CopySpellTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, "Silvercoat Lion", 1);
         assertHandCount(playerB, "Pillarfield Ox", 2);
@@ -83,7 +82,6 @@ public class CopySpellTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Angelic Blessing", 1);
         // original target
@@ -120,7 +118,6 @@ public class CopySpellTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Bonecrusher Giant", 4 + 2 * 2, 3 + 2 * 2);
         assertPowerToughness(playerA, "Grizzly Bears", 2, 2);
@@ -152,7 +149,6 @@ public class CopySpellTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Bonecrusher Giant", 4 + 2, 3 + 2);
         assertPowerToughness(playerA, "Grizzly Bears", 2 + 2, 2 + 2);
@@ -184,7 +180,6 @@ public class CopySpellTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Bonecrusher Giant", 4 + 2, 3 + 2);
         assertPowerToughness(playerA, "Grizzly Bears", 2 + 2, 2 + 2);
@@ -359,7 +354,7 @@ public class CopySpellTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         // Flying, vigilance, deathtouch, lifelink
         // At the beginning of your end step, proliferate.
-        addCard(Zone.BATTLEFIELD, playerA, "Atraxa, Praetors' Voice", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Atraxa, Praetors' Voice", 1);
         // Walking Ballista enters the battlefield with X +1/+1 counters on it.
         // {4}: Put a +1/+1 counter on Walking Ballista.
         // Remove a +1/+1 counter from Walking Ballista: It deals 1 damage to any target.
@@ -372,6 +367,8 @@ public class CopySpellTest extends CardTestPlayerBase {
         // When Dualcaster Mage enters the battlefield, copy target instant or sorcery spell. You may choose new targets for the copy.
         addCard(Zone.HAND, playerB, "Dualcaster Mage"); // Creature {1}{R}{R}
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 4);
+
+        setStrictChooseMode(true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Walking Ballista");
         setChoice(playerA, "X=1");
@@ -419,7 +416,6 @@ public class CopySpellTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Mountain", 1);
         assertPermanentCount(playerA, "Island", 1);
@@ -478,7 +474,6 @@ public class CopySpellTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 3 * 2); // 2x bolts from 2x cascades
     }
@@ -521,7 +516,6 @@ public class CopySpellTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -574,7 +568,6 @@ public class CopySpellTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -639,7 +632,6 @@ public class CopySpellTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // counters checks
         int originalCounters = currentGame.getBattlefield().getAllActivePermanents().stream()
@@ -779,7 +771,6 @@ public class CopySpellTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
 
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Sol Ring", 2); // 1 taken by original, one by copy
         assertPermanentCount(playerB, "Sol Ring", 0);
