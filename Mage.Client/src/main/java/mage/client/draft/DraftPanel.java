@@ -303,6 +303,8 @@
          if (timeout != 0) {
              countdown.start();
          }
+         
+         //SessionHandler.setBoosterLoaded(draftId);
      }
 
      private void loadCardsToPickedCardsArea(SimpleCardsView pickedCards) {

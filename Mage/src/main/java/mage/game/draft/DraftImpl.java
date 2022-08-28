@@ -9,6 +9,11 @@ import mage.game.events.TableEvent.EventType;
 import mage.players.Player;
 import mage.players.PlayerList;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -25,12 +30,17 @@ public abstract class DraftImpl implements Draft {
     protected int boosterNum = 1; // starts with booster 1
     protected int cardNum = 1; // starts with card number 1, increases by +1 after each picking
     protected TimingOption timing;
+    protected int playerPickHandleTimesExecuted; // number of times packs have been sent to players until all are confirmed to have received them
+    protected final int PLAYER_PICK_HANDLE_INTERVAL = 3; // interval in seconds
 
     protected boolean abort = false;
     protected boolean started = false;
 
     protected transient TableEventSource tableEventSource = new TableEventSource();
     protected transient PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
+    
+    protected ScheduledFuture<?> playerPickHandle;
+    protected final ScheduledExecutorService playerPickExecutor = Executors.newSingleThreadScheduledExecutor();
 
     public DraftImpl(DraftOptions options, List<ExpansionSet> sets) {
         id = UUID.randomUUID();
@@ -209,18 +219,51 @@ public abstract class DraftImpl implements Draft {
                 return false;
             }
             player.setPicking();
-            player.getPlayer().pickCard(player.getBooster(), player.getDeck(), this);
+            player.setBoosterNotLoaded();
         }
-        cardNum++;
+        playerPickHandleTimesExecuted = 0;
+        setupPlayerPickHandle();
         synchronized (this) {
             while (!donePicking()) {
                 try {
-                    this.wait(10000);
+                    this.wait(3000);
                 } catch (InterruptedException ex) {
                 }
             }
         }
+        cardNum++;
         return true;
+    }
+    
+    protected void setupPlayerPickHandle() {
+        cancelPlayerPickHandle();
+        playerPickHandle = playerPickExecutor.scheduleAtFixedRate(() -> {
+            try {
+                boolean allBoostersLoaded = true;
+                for (DraftPlayer player : players.values()) {
+                    if (player.isPicking() && !player.isBoosterLoaded()) {
+                        allBoostersLoaded = false;
+                        playerPickCard(player);
+                    }
+                }
+                playerPickHandleTimesExecuted++;
+                if (allBoostersLoaded == true) {
+                    cancelPlayerPickHandle();
+                }
+            } catch (Exception ex) {
+            }
+        }, 0, PLAYER_PICK_HANDLE_INTERVAL, TimeUnit.SECONDS);
+    }
+    }
+    
+    protected void cancelPlayerPickHandle() {
+        if (playerPickHandle != null) {
+            playerPickHandle.cancel(true);
+        }
+    }
+    
+    protected void playerPickCard (DraftPlayer player) {
+        player.getPlayer().pickCard(player.getBooster(), player.getDeck(), this);
     }
 
     protected boolean donePicking() {
@@ -263,7 +306,7 @@ public abstract class DraftImpl implements Draft {
     public void firePickCardEvent(UUID playerId) {
         DraftPlayer player = players.get(playerId);
         int cardNum = Math.min(15, this.cardNum);
-        int time = timing.getPickTimeout(cardNum);
+        int time = timing.getPickTimeout(cardNum) - playerPickHandleTimesExecuted * playerPickHandleInterval;
         playerQueryEventSource.pickCard(playerId, "Pick card", player.getBooster(), time);
     }
 
