@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAllTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -92,9 +91,7 @@ class MazzyAttackTriggeredAbility extends AttacksAllTriggeredAbility {
             }
             Set<UUID> opponents = game.getOpponents(this.getControllerId());
             if (opponents != null && opponents.contains(defender.getId())) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getSourceId(), game));
-                }
+                getEffects().setTargetPointer(new FixedTarget(event.getSourceId(), game));
                 return true;
             }
         }
