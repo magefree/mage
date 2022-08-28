@@ -60,9 +60,6 @@ public class DraftPlayer {
     }
 
     public void addPick(Card card, Set<UUID> hiddenCards) {
-        if (picking == false) {
-            return;
-        }
         deck.getSideboard().add(card);
         if (hiddenCards != null) {
             this.hiddenCards = hiddenCards;
