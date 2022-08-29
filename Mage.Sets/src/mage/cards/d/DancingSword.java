@@ -88,8 +88,8 @@ class DancingSwordEffect extends ContinuousEffectImpl {
                 return true;
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
-                    permanent.getPower().setBoostedValue(2);
-                    permanent.getToughness().setBoostedValue(1);
+                    permanent.getPower().setModifiedBaseValue(2);
+                    permanent.getToughness().setModifiedBaseValue(1);
                     return true;
                 }
         }

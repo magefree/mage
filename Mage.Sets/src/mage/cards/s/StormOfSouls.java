@@ -115,8 +115,8 @@ class StormOfSoulsChangeCreatureEffect extends ContinuousEffectImpl {
                     break;
                 case PTChangingEffects_7:
                     if (sublayer == SubLayer.SetPT_7b) {
-                        permanent.getPower().setBoostedValue(1);
-                        permanent.getToughness().setBoostedValue(1);
+                        permanent.getPower().setModifiedBaseValue(1);
+                        permanent.getToughness().setModifiedBaseValue(1);
                     }
                     break;
             }

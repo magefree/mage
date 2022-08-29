@@ -133,8 +133,8 @@ class DuplicantContinuousEffect extends ContinuousEffectImpl {
                 break;
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
-                    permanent.getPower().setBoostedValue(card.getPower().getValue());
-                    permanent.getToughness().setBoostedValue(card.getToughness().getValue());
+                    permanent.getPower().setModifiedBaseValue(card.getPower().getValue());
+                    permanent.getToughness().setModifiedBaseValue(card.getToughness().getValue());
                 }
         }
         return true;

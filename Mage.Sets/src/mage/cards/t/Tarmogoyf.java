@@ -6,6 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -63,8 +64,8 @@ class TarmogoyfEffect extends ContinuousEffectImpl {
             return false;
         }
         int number = CardTypesInGraveyardCount.ALL.calculate(game, source, this);
-        target.getPower().setBoostedValue(number);
-        target.getToughness().setBoostedValue(number + 1);
+        target.getPower().setModifiedBaseValue(number);
+        target.getToughness().setModifiedBaseValue(number + 1);
         return true;
     }
 }

@@ -8,9 +8,12 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
+import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,7 +37,8 @@ import mage.players.Player;
  * @author LevelX2
  */
 public final class MythRealized extends CardImpl {
-    
+
+    private static final DynamicValue loreCounterCount = new CountersSourceCount(CounterType.LORE);
     private static final FilterSpell filterNonCreature = new FilterSpell("a noncreature spell");
 
     static {
@@ -52,11 +56,11 @@ public final class MythRealized extends CardImpl {
 
         // {W}: Until end of turn, Myth Realized becomes a Monk Avatar creature in addition to its other types and gains "This creature's power and toughness are each equal to the number of lore counters on it."
         Effect effect = new BecomesCreatureSourceEffect(new MythRealizedToken(), null, Duration.EndOfTurn);
-        effect.setText("Until end of turn, {this} becomes a Monk Avatar creature in addition to its other types");
+        effect.setText("Until end of turn, {this} becomes a Monk Avatar creature in addition to its other types ");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{W}"));
-        ability.addEffect(new MythRealizedSetPTEffect(Duration.EndOfTurn));
-        this.addAbility(ability);        
-        
+        ability.addEffect(new SetPowerToughnessSourceEffect(loreCounterCount, Duration.EndOfTurn).setText("and gains \"This creature's power and toughness are each equal to the number of lore counters on it.\""));
+
+        this.addAbility(ability);
     }
 
     private MythRealized(final MythRealized card) {
@@ -87,39 +91,4 @@ class MythRealizedToken extends TokenImpl {
     public MythRealizedToken copy() {
         return new MythRealizedToken(this);
     }
-}
-
-class MythRealizedSetPTEffect extends ContinuousEffectImpl {
-
-    public MythRealizedSetPTEffect(Duration duration) {
-        super(duration, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
-        staticText = "and gains \"This creature's power and toughness are each equal to the number of lore counters on it.\"";
-    }
-
-    public MythRealizedSetPTEffect(final MythRealizedSetPTEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MythRealizedSetPTEffect copy() {
-        return new MythRealizedSetPTEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent != null && new MageObjectReference(source.getSourceObject(game), game).refersTo(permanent, game)) {
-                int amount = permanent.getCounters(game).getCount(CounterType.LORE);
-                permanent.getPower().setBoostedValue(amount);
-                permanent.getToughness().setBoostedValue(amount);
-                return true;
-            } else {
-                discard();
-            }
-        }
-        return false;
-    }
-
 }

@@ -112,8 +112,8 @@ class GrandMasterOfFlowersEffect extends ContinuousEffectImpl {
                 return true;
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
-                    permanent.getPower().setBoostedValue(7);
-                    permanent.getToughness().setBoostedValue(7);
+                    permanent.getPower().setModifiedBaseValue(7);
+                    permanent.getToughness().setModifiedBaseValue(7);
                     return true;
                 }
         }

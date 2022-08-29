@@ -91,8 +91,8 @@ class TheBlackstaffOfWaterdeepEffect extends ContinuousEffectImpl {
                 return true;
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
-                    artifact.getPower().setBoostedValue(4);
-                    artifact.getToughness().setBoostedValue(4);
+                    artifact.getPower().setModifiedBaseValue(4);
+                    artifact.getToughness().setModifiedBaseValue(4);
                     return true;
                 }
         }

@@ -90,13 +90,13 @@ class TitaniasSongEffect extends ContinuousEffectImpl {
                 }
                 break;
             case PTChangingEffects_7:
-                if (sublayer == SubLayer.SetPT_7b) {
+                if (sublayer == SubLayer.CharacteristicDefining_7a) {
                     for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
                         Permanent permanent = it.next().getPermanent(game);
                         if (permanent != null) {
                             int manaCost = permanent.getManaValue();
-                            permanent.getPower().setBoostedValue(manaCost);
-                            permanent.getToughness().setBoostedValue(manaCost);
+                            permanent.getPower().setModifiedBaseValue(manaCost);
+                            permanent.getToughness().setModifiedBaseValue(manaCost);
                         }
                     }
                 }

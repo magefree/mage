@@ -5,7 +5,12 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.AdditiveDynamicValue;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -25,6 +30,9 @@ import mage.players.Player;
  */
 public final class Lhurgoyf extends CardImpl {
 
+    private static final DynamicValue powerValue = new CardsInAllGraveyardsCount(StaticFilters.FILTER_CARD_CREATURE);
+    private static final DynamicValue toughnessValue = new AdditiveDynamicValue(powerValue, StaticValue.get(1));
+
     public Lhurgoyf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         this.subtype.add(SubType.LHURGOYF);
@@ -33,7 +41,7 @@ public final class Lhurgoyf extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Lhurgoyf's power is equal to the number of creature cards in all graveyards and its toughness is equal to that number plus 1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LhurgoyfEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(powerValue, toughnessValue, Duration.WhileOnBattlefield, SubLayer.CharacteristicDefining_7a, false)));
     }
 
     private Lhurgoyf(final Lhurgoyf card) {
@@ -44,46 +52,4 @@ public final class Lhurgoyf extends CardImpl {
     public Lhurgoyf copy() {
         return new Lhurgoyf(this);
     }
-}
-
-class LhurgoyfEffect extends ContinuousEffectImpl {
-
-    public LhurgoyfEffect() {
-        super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.CharacteristicDefining_7a, Outcome.BoostCreature);
-        staticText = "{this}'s power is equal to the number of creature cards in all graveyards and its toughness is equal to that number plus 1";
-    }
-
-    public LhurgoyfEffect(final LhurgoyfEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public LhurgoyfEffect copy() {
-        return new LhurgoyfEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            MageObject mageObject = game.getObject(source);
-            if (mageObject != null) {
-                int number = 0;
-                for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                    Player player = game.getPlayer(playerId);
-                    if (player != null) {
-                        number += player.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game);
-                    }
-                }
-
-                mageObject.getPower().setBoostedValue(number);
-                mageObject.getToughness().setBoostedValue(number + 1);
-                return true;
-
-            }
-        }
-
-        return false;
-    }
-
 }

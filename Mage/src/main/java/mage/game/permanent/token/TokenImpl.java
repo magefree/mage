@@ -374,16 +374,6 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     }
 
     @Override
-    public void setPower(int power) {
-        this.power.setBoostedValue(power);
-    }
-
-    @Override
-    public void setToughness(int toughness) {
-        this.toughness.setBoostedValue(toughness);
-    }
-
-    @Override
     public int getTokenType() {
         return tokenType;
     }

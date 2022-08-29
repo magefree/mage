@@ -71,8 +71,8 @@ class ConsumingBlobEffect extends ContinuousEffectImpl {
             return false;
         }
         int number = CardTypesInGraveyardCount.YOU.calculate(game, source, this);
-        target.getPower().setBoostedValue(number);
-        target.getToughness().setBoostedValue(number + 1);
+        target.getPower().setModifiedBaseValue(number);
+        target.getToughness().setModifiedBaseValue(number + 1);
         return true;
     }
 }

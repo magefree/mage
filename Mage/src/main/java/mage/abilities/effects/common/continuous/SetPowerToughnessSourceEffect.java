@@ -20,41 +20,39 @@ public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl {
 
     private DynamicValue power;
     private DynamicValue toughness;
-    // If true, the base power/toughness are net, otherwise the final value is set.
-    private boolean changeBaseValue;
 
-    public SetPowerToughnessSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration, SubLayer subLayer, boolean changeBaseValue) {
+    /**
+     *
+     * @param power
+     * @param toughness
+     * @param duration
+     * @param subLayer
+     * @param baseInText    Whether or not the rules text should refer to "base power and toughness" or "power and toughness"
+     *                      Either way, it is always the based power and toughness that are set.
+     */
+    public SetPowerToughnessSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration, SubLayer subLayer, boolean baseInText) {
         super(duration, Layer.PTChangingEffects_7, subLayer, Outcome.BoostCreature);
         setCharacterDefining(subLayer == SubLayer.CharacteristicDefining_7a);
         this.power = power;
         this.toughness = toughness;
-        this.changeBaseValue = changeBaseValue;
         if (power == toughness) { // When power and toughness are equal, a previous constructor passes the same object for both power nad toughness, so use == instead of .equals
-            this.staticText = "{this}'s " + (changeBaseValue ? "base " : "") + "power and toughness are each equal to the number of " + power.getMessage();
+            this.staticText = "{this}'s " + (baseInText ? "base " : "") + "power and toughness are each equal to the number of " + power.getMessage();
         } else {  // The only other constructor creates the power and toughenss dynamic values as static values from passed-in ints.
             String value = (power != null ? power.toString() : toughness.toString());
-            this.staticText = "{this}'s " + (changeBaseValue ? "base " : "") + "power and toughness is " + value + '/' + toughness + ' ' + duration.toString();
+            this.staticText = "{this}'s " + (baseInText ? "base " : "") + "power and toughness is " + value + '/' + toughness + ' ' + duration.toString();
         }
     }
 
     public SetPowerToughnessSourceEffect(DynamicValue amount, Duration duration) {
-        this(amount, duration, false);
-    }
-
-    public SetPowerToughnessSourceEffect(DynamicValue amount, Duration duration, boolean changeBaseValue) {
-        this(amount, duration, SubLayer.CharacteristicDefining_7a, changeBaseValue);
+        this(amount, duration, SubLayer.CharacteristicDefining_7a, false);
     }
 
     public SetPowerToughnessSourceEffect(DynamicValue amount, Duration duration, SubLayer subLayer) {
-        this(amount, duration, subLayer, false);
+        this(amount, duration, subLayer, true);
     }
 
     public SetPowerToughnessSourceEffect(DynamicValue amount, Duration duration, SubLayer subLayer, boolean changeBaseValue) {
-        this(amount, amount, duration, subLayer, false);
-    }
-
-    public SetPowerToughnessSourceEffect(int power, int toughness, Duration duration) {
-        this(power, toughness, duration, false);
+        this(amount, amount, duration, subLayer, changeBaseValue);
     }
 
     public SetPowerToughnessSourceEffect(int power, int toughness, Duration duration, boolean changeBaseValue) {
@@ -73,7 +71,6 @@ public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl {
         super(effect);
         this.power = effect.power;
         this.toughness = effect.toughness;
-        this.changeBaseValue = effect.changeBaseValue;
     }
 
     @Override
@@ -91,28 +88,19 @@ public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl {
                 mageObject = game.getObject(source);
             }
         }
-        if (mageObject == null) {
+        if (mageObject == null || (power == null && toughness == null)) {
             discard();
             return false;
         }
 
         if (this.power != null) {
             int power = this.power.calculate(game, source, this);
-            if (changeBaseValue) {
-                mageObject.getPower().setModifiedBaseValue(power);
-            } else {
-                mageObject.getPower().setBoostedValue(power);
-            }
+            mageObject.getPower().setModifiedBaseValue(power);
         }
 
         if (this.toughness != null) {
             int toughness = this.toughness.calculate(game, source, this);
-            if (changeBaseValue) {
-                mageObject.getToughness().setModifiedBaseValue(toughness);
-            } else {
-                mageObject.getToughness().setBoostedValue(toughness);
-            }
-
+            mageObject.getToughness().setModifiedBaseValue(toughness);
         }
         return true;
     }
