@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
-import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -28,7 +28,7 @@ public final class NightstalkerEngine extends CardImpl {
 
         // Nightstalker Engine's power is equal to the number of creature cards in your graveyard.
         CardsInControllerGraveyardCount count = new CardsInControllerGraveyardCount(new FilterCreatureCard("creature cards"));
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerSourceEffect(count, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(count, Duration.EndOfGame)));
     }
 
     private NightstalkerEngine(final NightstalkerEngine card) {

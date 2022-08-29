@@ -10,7 +10,7 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -117,7 +117,7 @@ class DracoplasmEffect extends ReplacementEffectImpl {
                 toughness = CardUtil.overflowInc(toughness, targetCreature.getToughness().getValue());
             }
         }
-        ContinuousEffect effect = new SetPowerToughnessSourceEffect(power, toughness, Duration.Custom, SubLayer.SetPT_7b);
+        ContinuousEffect effect = new SetBasePowerToughnessSourceEffect(power, toughness, Duration.Custom, SubLayer.SetPT_7b);
         game.addEffect(effect, source);
         return true;
     }

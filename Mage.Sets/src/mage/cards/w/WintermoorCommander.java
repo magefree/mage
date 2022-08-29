@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.common.continuous.SetToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBaseToughnessSourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
@@ -51,7 +51,7 @@ public final class WintermoorCommander extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // Wintermoor Commander's toughness is equal to the number of Knights you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetToughnessSourceEffect(xValue, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBaseToughnessSourceEffect(xValue, Duration.EndOfGame)));
 
         // Whenever Wintermoor Commander attacks, another target Knight you control gains indestructible until end of turn.
         Ability ability = new AttacksTriggeredAbility(new GainAbilityTargetEffect(

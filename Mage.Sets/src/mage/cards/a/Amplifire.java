@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.*;
 import mage.constants.*;
 import mage.game.Game;
@@ -80,14 +80,14 @@ class AmplifireEffect extends OneShotEffect {
         }
         player.revealCards(source, cards, game);
         if (lastCard != null) {
-            SetPowerToughnessSourceEffect setPowerToughnessSourceEffect = new SetPowerToughnessSourceEffect(
+            SetBasePowerToughnessSourceEffect setBasePowerToughnessSourceEffect = new SetBasePowerToughnessSourceEffect(
                     2*lastCard.getPower().getValue(),
                     2*lastCard.getToughness().getValue(),
                     Duration.UntilYourNextTurn,
                     SubLayer.SetPT_7b,
                     true
             );
-            game.addEffect(setPowerToughnessSourceEffect, source);
+            game.addEffect(setBasePowerToughnessSourceEffect, source);
         }
         player.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;

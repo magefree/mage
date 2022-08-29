@@ -9,7 +9,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.AddCardSubTypeSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -36,7 +36,7 @@ public final class AscendantSpirit extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new AddCardSubTypeSourceEffect(
                 Duration.Custom, SubType.SPIRIT, SubType.WARRIOR
         ).setText("{this} becomes a Spirit Warrior"), new ManaCostsImpl<>("{S}{S}"));
-        ability.addEffect(new SetPowerToughnessSourceEffect(
+        ability.addEffect(new SetBasePowerToughnessSourceEffect(
                 2,
                 3,
                 Duration.WhileOnBattlefield,
@@ -93,7 +93,7 @@ class AscendantSpiritWarriorEffect extends OneShotEffect {
         game.addEffect(new AddCardSubTypeSourceEffect(
                 Duration.Custom, SubType.SPIRIT, SubType.WARRIOR, SubType.ANGEL
         ), source);
-        game.addEffect(new SetPowerToughnessSourceEffect(
+        game.addEffect(new SetBasePowerToughnessSourceEffect(
                 4, 4, Duration.Custom, SubLayer.SetPT_7b, true
         ), source);
         return true;

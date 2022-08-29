@@ -5,7 +5,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -65,7 +65,7 @@ class ElvishImpersonatorsEffect extends OneShotEffect {
         List<Integer> results = controller.rollDice(outcome, source, game, 6, 2, 0);
         int firstRoll = results.get(0);
         int secondRoll = results.get(1);
-        game.addEffect(new SetPowerToughnessSourceEffect(firstRoll, secondRoll, Duration.WhileOnBattlefield, SubLayer.SetPT_7b, true), source);
+        game.addEffect(new SetBasePowerToughnessSourceEffect(firstRoll, secondRoll, Duration.WhileOnBattlefield, SubLayer.SetPT_7b, true), source);
         return true;
     }
 }

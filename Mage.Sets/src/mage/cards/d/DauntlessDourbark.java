@@ -9,7 +9,7 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -51,7 +51,7 @@ public final class DauntlessDourbark extends CardImpl {
 
         // Dauntless Dourbark's power and toughness are each equal to the number of Forests you control plus the number of Treefolk you control.
         DynamicValue amount = new PermanentsOnBattlefieldCount(filter);
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(amount, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(amount, Duration.EndOfGame)));
         
         // Dauntless Dourbark has trample as long as you control another Treefolk.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield), new PermanentsOnTheBattlefieldCondition(filter2), rule)));

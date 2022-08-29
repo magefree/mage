@@ -13,10 +13,10 @@ import mage.constants.SubLayer;
 import mage.game.Game;
 
 /**
- *
+ * RENAME
  * @author BetaSteward_at_googlemail.com, North, Alex-Vasile
  */
-public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl {
+public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
 
     private DynamicValue power;
     private DynamicValue toughness;
@@ -30,7 +30,7 @@ public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl {
      * @param baseInText    Whether or not the rules text should refer to "base power and toughness" or "power and toughness"
      *                      Either way, it is always the based power and toughness that are set.
      */
-    public SetPowerToughnessSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration, SubLayer subLayer, boolean baseInText) {
+    public SetBasePowerToughnessSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration, SubLayer subLayer, boolean baseInText) {
         super(duration, Layer.PTChangingEffects_7, subLayer, Outcome.BoostCreature);
         setCharacterDefining(subLayer == SubLayer.CharacteristicDefining_7a);
         this.power = power;
@@ -43,39 +43,39 @@ public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl {
         }
     }
 
-    public SetPowerToughnessSourceEffect(DynamicValue amount, Duration duration) {
+    public SetBasePowerToughnessSourceEffect(DynamicValue amount, Duration duration) {
         this(amount, duration, SubLayer.CharacteristicDefining_7a, false);
     }
 
-    public SetPowerToughnessSourceEffect(DynamicValue amount, Duration duration, SubLayer subLayer) {
+    public SetBasePowerToughnessSourceEffect(DynamicValue amount, Duration duration, SubLayer subLayer) {
         this(amount, duration, subLayer, true);
     }
 
-    public SetPowerToughnessSourceEffect(DynamicValue amount, Duration duration, SubLayer subLayer, boolean changeBaseValue) {
+    public SetBasePowerToughnessSourceEffect(DynamicValue amount, Duration duration, SubLayer subLayer, boolean changeBaseValue) {
         this(amount, amount, duration, subLayer, changeBaseValue);
     }
 
-    public SetPowerToughnessSourceEffect(int power, int toughness, Duration duration, boolean changeBaseValue) {
+    public SetBasePowerToughnessSourceEffect(int power, int toughness, Duration duration, boolean changeBaseValue) {
         this(power, toughness, duration, SubLayer.CharacteristicDefining_7a, changeBaseValue);
     }
 
-    public SetPowerToughnessSourceEffect(int power, int toughness, Duration duration, SubLayer subLayer) {
+    public SetBasePowerToughnessSourceEffect(int power, int toughness, Duration duration, SubLayer subLayer) {
         this(power, toughness, duration, subLayer, false);
     }
 
-    public SetPowerToughnessSourceEffect(int power, int toughness, Duration duration, SubLayer subLayer, boolean changeBaseValue) {
+    public SetBasePowerToughnessSourceEffect(int power, int toughness, Duration duration, SubLayer subLayer, boolean changeBaseValue) {
         this(StaticValue.get(power), StaticValue.get(toughness), duration, subLayer, changeBaseValue);
     }
 
-    public SetPowerToughnessSourceEffect(final SetPowerToughnessSourceEffect effect) {
+    public SetBasePowerToughnessSourceEffect(final SetBasePowerToughnessSourceEffect effect) {
         super(effect);
         this.power = effect.power;
         this.toughness = effect.toughness;
     }
 
     @Override
-    public SetPowerToughnessSourceEffect copy() {
-        return new SetPowerToughnessSourceEffect(this);
+    public SetBasePowerToughnessSourceEffect copy() {
+        return new SetBasePowerToughnessSourceEffect(this);
     }
 
     @Override

@@ -11,7 +11,7 @@ import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -71,7 +71,7 @@ class GigantiformAbility extends StaticAbility {
         super(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA));
         Ability ability = new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
-                new SetPowerToughnessSourceEffect(8, 8, Duration.WhileOnBattlefield, SubLayer.SetPT_7b, true)
+                new SetBasePowerToughnessSourceEffect(8, 8, Duration.WhileOnBattlefield, SubLayer.SetPT_7b, true)
         );
         this.addEffect(new GainAbilityAttachedEffect(ability, AttachmentType.AURA));
     }

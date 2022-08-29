@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -118,7 +118,7 @@ public final class PrimalClay extends CardImpl {
                     game.addEffect(new GainAbilitySourceEffect(DefenderAbility.getInstance(), Duration.Custom), source);
                     break;
             }
-            game.addEffect(new SetPowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield, true), source);
+            game.addEffect(new SetBasePowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield, true), source);
             return false;
         }
 

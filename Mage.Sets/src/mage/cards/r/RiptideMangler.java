@@ -8,7 +8,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -71,7 +71,7 @@ class RiptideManglerEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        game.addEffect(new SetPowerToughnessSourceEffect(StaticValue.get(permanent.getPower().getValue()), null, Duration.WhileOnBattlefield, SubLayer.SetPT_7b, true), source);
+        game.addEffect(new SetBasePowerToughnessSourceEffect(StaticValue.get(permanent.getPower().getValue()), null, Duration.WhileOnBattlefield, SubLayer.SetPT_7b, true), source);
         return true;
     }
 }

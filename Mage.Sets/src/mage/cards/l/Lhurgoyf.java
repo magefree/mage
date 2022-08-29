@@ -2,27 +2,20 @@ package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.AdditiveDynamicValue;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -41,7 +34,7 @@ public final class Lhurgoyf extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Lhurgoyf's power is equal to the number of creature cards in all graveyards and its toughness is equal to that number plus 1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(powerValue, toughnessValue, Duration.WhileOnBattlefield, SubLayer.CharacteristicDefining_7a, false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetBasePowerToughnessSourceEffect(powerValue, toughnessValue, Duration.WhileOnBattlefield, SubLayer.CharacteristicDefining_7a, false)));
     }
 
     private Lhurgoyf(final Lhurgoyf card) {

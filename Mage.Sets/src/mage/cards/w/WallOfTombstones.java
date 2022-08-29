@@ -6,8 +6,7 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
-import mage.abilities.effects.common.continuous.SetToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -66,7 +65,7 @@ class WallOfTombstonesEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int newToughness = CardUtil.overflowInc(1, new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE).calculate(game, source, this));
-        game.addEffect(new SetPowerToughnessSourceEffect(null, StaticValue.get(newToughness), Duration.WhileOnBattlefield, SubLayer.SetPT_7b, true), source);
+        game.addEffect(new SetBasePowerToughnessSourceEffect(null, StaticValue.get(newToughness), Duration.WhileOnBattlefield, SubLayer.SetPT_7b, true), source);
         return true;
     }
 }

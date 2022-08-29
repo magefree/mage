@@ -10,7 +10,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -41,7 +41,7 @@ public final class BloodswornKnight extends CardImpl {
         this.nightCard = true;
 
         // Bloodsworn Knight's power and toughness are each equal to the number of creature cards in your graveyard.
-        this.addAbility(new SimpleStaticAbility(new SetPowerToughnessSourceEffect(xValue, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(new SetBasePowerToughnessSourceEffect(xValue, Duration.EndOfGame)));
 
         // {1}{B}, Discard a card: Bloodsworn Knight gains indestructible until end of turn. Tap it.
         Ability ability = new SimpleActivatedAbility(

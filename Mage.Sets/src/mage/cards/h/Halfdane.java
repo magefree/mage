@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -77,19 +77,19 @@ class HalfdaneUpkeepEffect extends OneShotEffect {
             return false;
         }
 
-        ContinuousEffect effect = new HalfdaneSetPowerToughnessEffect(permanent.getPower().getValue(), permanent.getToughness().getValue());
+        ContinuousEffect effect = new HalfdaneSetBasePowerToughnessEffect(permanent.getPower().getValue(), permanent.getToughness().getValue());
         game.addEffect(effect, source);
         return true;
     }
 }
 
-class HalfdaneSetPowerToughnessEffect extends SetPowerToughnessSourceEffect {
+class HalfdaneSetBasePowerToughnessEffect extends SetBasePowerToughnessSourceEffect {
 
-    public HalfdaneSetPowerToughnessEffect(int power, int toughness) {
+    public HalfdaneSetBasePowerToughnessEffect(int power, int toughness) {
         super(power, toughness, Duration.UntilYourNextTurn, SubLayer.SetPT_7b, true);
     }
 
-    public HalfdaneSetPowerToughnessEffect(final HalfdaneSetPowerToughnessEffect effect) {
+    public HalfdaneSetBasePowerToughnessEffect(final HalfdaneSetBasePowerToughnessEffect effect) {
         super(effect);
     }
 
@@ -102,8 +102,8 @@ class HalfdaneSetPowerToughnessEffect extends SetPowerToughnessSourceEffect {
     }
 
     @Override
-    public HalfdaneSetPowerToughnessEffect copy() {
-        return new HalfdaneSetPowerToughnessEffect(this);
+    public HalfdaneSetBasePowerToughnessEffect copy() {
+        return new HalfdaneSetBasePowerToughnessEffect(this);
     }
 
 }

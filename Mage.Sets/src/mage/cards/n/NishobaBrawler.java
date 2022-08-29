@@ -3,7 +3,7 @@ package mage.cards.n;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DomainValue;
-import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.abilities.hint.common.DomainHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -30,7 +30,7 @@ public final class NishobaBrawler extends CardImpl {
 
         // Domain — Nishoba Brawler's power is equal to the number of basic land types among lands you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetPowerSourceEffect(DomainValue.REGULAR, Duration.EndOfGame)
+                Zone.ALL, new SetBasePowerSourceEffect(DomainValue.REGULAR, Duration.EndOfGame)
         ).setAbilityWord(AbilityWord.DOMAIN).addHint(DomainHint.instance));
     }
 

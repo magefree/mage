@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -86,7 +86,7 @@ class TrenchGorgerEffect extends OneShotEffect {
             }
         }
         controller.shuffleLibrary(source, game);
-        game.addEffect(new SetPowerToughnessSourceEffect(count, count, Duration.WhileOnBattlefield, SubLayer.SetPT_7b, true), source);
+        game.addEffect(new SetBasePowerToughnessSourceEffect(count, count, Duration.WhileOnBattlefield, SubLayer.SetPT_7b, true), source);
         return true;
     }
 }

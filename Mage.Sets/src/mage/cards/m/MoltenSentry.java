@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
@@ -84,7 +84,7 @@ class MoltenSentryEffect extends OneShotEffect {
             gainedAbility = DefenderAbility.getInstance();
             game.addEffect(new GainAbilitySourceEffect(DefenderAbility.getInstance(), Duration.WhileOnBattlefield), source);
         }
-        game.addEffect(new SetPowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield, true), source);
+        game.addEffect(new SetBasePowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield, true), source);
         game.addEffect(new GainAbilitySourceEffect(gainedAbility, Duration.WhileOnBattlefield), source);
         return true;
     }

@@ -13,7 +13,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -48,8 +48,8 @@ public final class GaeasLiege extends CardImpl {
 
         // As long as Gaea's Liege isn't attacking, its power and toughness are each equal to the number of Forests you control. As long as Gaea's Liege is attacking, its power and toughness are each equal to the number of Forests defending player controls.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new ConditionalContinuousEffect(
-                new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterLands), Duration.EndOfGame),
-                new SetPowerToughnessSourceEffect(new DefendersForestCount(), Duration.EndOfCombat),
+                new SetBasePowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterLands), Duration.EndOfGame),
+                new SetBasePowerToughnessSourceEffect(new DefendersForestCount(), Duration.EndOfCombat),
                 new InvertCondition(SourceAttackingCondition.instance),
                 "As long as {this} isn't attacking, its power and toughness are each equal to the number of Forests you control. As long as {this} is attacking, its power and toughness are each equal to the number of Forests defending player controls.")));
         // {T}: Target land becomes a Forest until Gaea's Liege leaves the battlefield.

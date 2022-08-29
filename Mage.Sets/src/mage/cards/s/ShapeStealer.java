@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -74,7 +74,7 @@ class ShapeStealerEffect extends OneShotEffect {
             return false;
         }
 
-        ContinuousEffect effect = new SetPowerToughnessSourceEffect(permanent.getPower().getValue(), permanent.getToughness().getValue(), Duration.EndOfTurn, SubLayer.SetPT_7b, true);
+        ContinuousEffect effect = new SetBasePowerToughnessSourceEffect(permanent.getPower().getValue(), permanent.getToughness().getValue(), Duration.EndOfTurn, SubLayer.SetPT_7b, true);
         game.addEffect(effect, source);
         return true;
     }

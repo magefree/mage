@@ -8,7 +8,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -39,7 +39,7 @@ public final class KalonianTwingrove extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Kalonian Twingrove's power and toughness are each equal to the number of Forests you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterLands), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterLands), Duration.EndOfGame)));
         // When Kalonian Twingrove enters the battlefield, create a green Treefolk Warrior creature token with "This creature's power and toughness are each equal to the number of Forests you control."
         Effect effect = new CreateTokenEffect(new KalonianTwingroveTreefolkWarriorToken());
         effect.setText("create a green Treefolk Warrior creature token with \"This creature's power and toughness are each equal to the number of Forests you control.\"");

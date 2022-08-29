@@ -6,8 +6,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
-import mage.abilities.effects.common.continuous.SetToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -78,7 +77,7 @@ class SentinelEffect extends OneShotEffect {
         Permanent targetPermanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (controller != null && targetPermanent != null) {
             int newToughness = CardUtil.overflowInc(targetPermanent.getPower().getValue(), 1);
-            game.addEffect(new SetPowerToughnessSourceEffect(null, StaticValue.get(newToughness), Duration.WhileOnBattlefield, SubLayer.SetPT_7b, true), source);
+            game.addEffect(new SetBasePowerToughnessSourceEffect(null, StaticValue.get(newToughness), Duration.WhileOnBattlefield, SubLayer.SetPT_7b, true), source);
             return true;
         }
         return false;

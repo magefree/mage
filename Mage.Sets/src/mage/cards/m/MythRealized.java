@@ -3,34 +3,26 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TokenImpl;
-import mage.players.Player;
 
 /**
  *
@@ -58,7 +50,7 @@ public final class MythRealized extends CardImpl {
         Effect effect = new BecomesCreatureSourceEffect(new MythRealizedToken(), null, Duration.EndOfTurn);
         effect.setText("Until end of turn, {this} becomes a Monk Avatar creature in addition to its other types ");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{W}"));
-        ability.addEffect(new SetPowerToughnessSourceEffect(loreCounterCount, Duration.EndOfTurn).setText("and gains \"This creature's power and toughness are each equal to the number of lore counters on it.\""));
+        ability.addEffect(new SetBasePowerToughnessSourceEffect(loreCounterCount, Duration.EndOfTurn).setText("and gains \"This creature's power and toughness are each equal to the number of lore counters on it.\""));
 
         this.addAbility(ability);
     }
