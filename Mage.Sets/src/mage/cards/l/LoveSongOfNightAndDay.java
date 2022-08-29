@@ -1,8 +1,10 @@
 package mage.cards.l;
 
 import mage.abilities.common.SagaAbility;
+import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -12,6 +14,7 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.permanent.token.BirdToken;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
 
@@ -30,8 +33,11 @@ public final class LoveSongOfNightAndDay extends CardImpl {
 
         // I -- You and target opponent each draw two cards.
         sagaAbility.addChapterEffect(
-                this, SagaChapter.CHAPTER_I, new DrawCardSourceControllerEffect(2).setText("you"),
-                new DrawCardSourceControllerEffect(2).setText("and target opponent each draw two cards")
+                this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_I,
+                new Effects(
+                        new DrawCardSourceControllerEffect(2).setText("you"),
+                        new DrawCardTargetEffect(2).setText("and target opponent each draw two cards")
+                ), new TargetOpponent()
         );
 
         // II -- Create a 1/1 white Bird creature token with flying.
