@@ -223,6 +223,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Tori D'Avenant, Fury Rider", 223, Rarity.UNCOMMON, mage.cards.t.ToriDAvenantFuryRider.class));
         cards.add(new SetCardInfo("Toxic Abomination", 112, Rarity.COMMON, mage.cards.t.ToxicAbomination.class));
         cards.add(new SetCardInfo("Tura Kennerud, Skyknight", 224, Rarity.UNCOMMON, mage.cards.t.TuraKennerudSkyknight.class));
+        cards.add(new SetCardInfo("Twinferno", 149, Rarity.UNCOMMON, mage.cards.t.Twinferno.class));
         cards.add(new SetCardInfo("Urza Assembles the Titans", 37, Rarity.RARE, mage.cards.u.UrzaAssemblesTheTitans.class));
         cards.add(new SetCardInfo("Uurg, Spawn of Turg", 225, Rarity.UNCOMMON, mage.cards.u.UurgSpawnOfTurg.class));
         cards.add(new SetCardInfo("Valiant Veteran", 38, Rarity.RARE, mage.cards.v.ValiantVeteran.class));
