@@ -15,6 +15,7 @@ import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestAPI;
 import org.mage.test.serverside.base.MageTestBase;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,10 +45,11 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
      * @param gameZone {@link mage.constants.Zone} to add cards to.
      * @param player   {@link Player} to add cards for. Use either playerA or playerB.
      * @param cardName Card name in string format.
+     * @return An array with a single element: the UUID for the card added
      */
     @Override
-    public void addCard(Zone gameZone, TestPlayer player, String cardName) {
-        addCard(gameZone, player, cardName, 1, false);
+    public List<UUID> addCard(Zone gameZone, TestPlayer player, String cardName) {
+        return addCard(gameZone, player, cardName, 1, false);
     }
 
     /**
@@ -57,10 +59,11 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
      * @param player   {@link Player} to add cards for. Use either playerA or playerB.
      * @param cardName Card name in string format.
      * @param count    Amount of cards to be added.
+     * @return {@link List<UUID>} An array containing UUIDs corresponding to each card added
      */
     @Override
-    public void addCard(Zone gameZone, TestPlayer player, String cardName, int count) {
-        addCard(gameZone, player, cardName, count, false);
+    public List<UUID> addCard(Zone gameZone, TestPlayer player, String cardName, int count) {
+        return addCard(gameZone, player, cardName, count, false);
     }
 
     /**
@@ -72,10 +75,11 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
      * @param count    Amount of cards to be added.
      * @param tapped   In case gameZone is Battlefield, determines whether permanent should be tapped.
      *                 In case gameZone is other than Battlefield, {@link IllegalArgumentException} is thrown
+     * @return {@link List<UUID>} An array containing UUIDs corresponding to each card added
      */
     @Override
-    public void addCard(Zone gameZone, TestPlayer player, String cardName, int count, boolean tapped) {
-
+    public List<UUID> addCard(Zone gameZone, TestPlayer player, String cardName, int count, boolean tapped) {
+        List<UUID> uuidList = new ArrayList<>();
 
         if (gameZone == Zone.BATTLEFIELD) {
             for (int i = 0; i < count; i++) {
@@ -85,6 +89,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
                     throw new IllegalArgumentException("[TEST] Couldn't find a card: " + cardName);
                 }
                 PermanentCard p = new PermanentCard(card, null, currentGame);
+                uuidList.add(p.getId());
                 p.setTapped(tapped);
                 if (player.equals(playerA)) {
                     battlefieldCardsA.add(p);
@@ -97,12 +102,20 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
                 throw new IllegalArgumentException("Parameter tapped=true can be used only for Zone.BATTLEFIELD.");
             }
             List<Card> cards = getCardList(gameZone, player);
+            if (cards == null) {
+                cards = new ArrayList<>();
+            }
             for (int i = 0; i < count; i++) {
                 CardInfo cardInfo = CardRepository.instance.findCard(cardName);
-                Card card = cardInfo != null ? cardInfo.getCard() : null;
+                if (cardInfo == null) {
+                    continue;
+                }
+                Card card = cardInfo.getCard();
                 cards.add(card);
+                uuidList.add(card.getId());
             }
         }
+        return uuidList;
     }
 
     /**

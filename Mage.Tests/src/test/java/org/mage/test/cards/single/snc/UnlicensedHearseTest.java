@@ -6,6 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+import java.util.UUID;
+
 /**
  * {@link mage.cards.u.UnlicensedHearse Unlicensed Hearse}
  * {2}
@@ -19,13 +21,15 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class UnlicensedHearseTest extends CardTestPlayerBase {
 
+    private UUID unlicensedHearseID;
+
     /**
      * Give Player A one Unlicensed Hearse on the battlefield and give
      * Player B two cards in their graveyard.
      */
     @Before
     public void createHearseAndFillGraveyard() {
-        addCard(Zone.BATTLEFIELD, playerA, "Unlicensed Hearse");
+        unlicensedHearseID = addCard(Zone.BATTLEFIELD, playerA, "Unlicensed Hearse").get(0);
         addCard(Zone.GRAVEYARD, playerB, "Grizzly Bears");
         addCard(Zone.GRAVEYARD, playerB, "Forest Bear");
     }
@@ -44,7 +48,7 @@ public class UnlicensedHearseTest extends CardTestPlayerBase {
         execute();
 
         assertGraveyardCount(playerB, 1);
-        assertPowerToughness(playerA, "Unlicensed Hearse", 1, 1);
+        assertPowerToughness(unlicensedHearseID, 1, 1);
     }
 
     /**
@@ -61,6 +65,6 @@ public class UnlicensedHearseTest extends CardTestPlayerBase {
         execute();
 
         assertGraveyardCount(playerB, 0);
-        assertPowerToughness(playerA, "Unlicensed Hearse", 2, 2);
+        assertPowerToughness(unlicensedHearseID, 2, 2);
     }
 }
