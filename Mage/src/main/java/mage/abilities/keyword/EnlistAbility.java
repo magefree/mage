@@ -48,7 +48,9 @@ public class EnlistAbility extends StaticAbility {
 
 class EnlistEffect extends ReplacementEffectImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another untapped nonattacking creature you control without summoning sickness");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent(
+            "another untapped nonattacking creature you control without summoning sickness"
+    );
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -86,7 +88,7 @@ class EnlistEffect extends ReplacementEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (creature == null || controller == null
                 || !game.getBattlefield().contains(filter, source, game, 1)
-                || !controller.chooseUse(outcome, "Enlist a creature for " + creature.getName() + '?', source, game)) {
+                || !controller.chooseUse(outcome, "Enlist a creature for " + creature.getLogName() + '?', source, game)) {
             return false;
         }
         TargetPermanent target = new TargetPermanent(filter);
