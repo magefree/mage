@@ -58,12 +58,14 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Bog Badger", 156, Rarity.COMMON, mage.cards.b.BogBadger.class));
         cards.add(new SetCardInfo("Bone Splinters", 83, Rarity.COMMON, mage.cards.b.BoneSplinters.class));
         cards.add(new SetCardInfo("Bortuk Bonerattle", 197, Rarity.UNCOMMON, mage.cards.b.BortukBonerattle.class));
+        cards.add(new SetCardInfo("Braids's Frightful Return", 85, Rarity.UNCOMMON, mage.cards.b.BraidssFrightfulReturn.class));
         cards.add(new SetCardInfo("Braids, Arisen Nightmare", 84, Rarity.RARE, mage.cards.b.BraidsArisenNightmare.class));
         cards.add(new SetCardInfo("Briar Hydra", 286, Rarity.RARE, mage.cards.b.BriarHydra.class));
         cards.add(new SetCardInfo("Broken Wings", 157, Rarity.COMMON, mage.cards.b.BrokenWings.class));
         cards.add(new SetCardInfo("Captain's Call", 9, Rarity.COMMON, mage.cards.c.CaptainsCall.class));
         cards.add(new SetCardInfo("Caves of Koilos", 244, Rarity.RARE, mage.cards.c.CavesOfKoilos.class));
         cards.add(new SetCardInfo("Charismatic Vanguard", 10, Rarity.COMMON, mage.cards.c.CharismaticVanguard.class));
+        cards.add(new SetCardInfo("Choking Miasma", 86, Rarity.UNCOMMON, mage.cards.c.ChokingMiasma.class));
         cards.add(new SetCardInfo("Citizen's Arrest", 11, Rarity.COMMON, mage.cards.c.CitizensArrest.class));
         cards.add(new SetCardInfo("Cleaving Skyrider", 12, Rarity.UNCOMMON, mage.cards.c.CleavingSkyrider.class));
         cards.add(new SetCardInfo("Clockwork Drawbridge", 13, Rarity.COMMON, mage.cards.c.ClockworkDrawbridge.class));
@@ -94,6 +96,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Flowstone Infusion", 124, Rarity.COMMON, mage.cards.f.FlowstoneInfusion.class));
         cards.add(new SetCardInfo("Flowstone Kavu", 125, Rarity.COMMON, mage.cards.f.FlowstoneKavu.class));
         cards.add(new SetCardInfo("Forest", 274, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Founding the Third Path", 50, Rarity.UNCOMMON, mage.cards.f.FoundingTheThirdPath.class));
         cards.add(new SetCardInfo("Frostfist Strider", 51, Rarity.UNCOMMON, mage.cards.f.FrostfistStrider.class));
         cards.add(new SetCardInfo("Furious Bellow", 126, Rarity.COMMON, mage.cards.f.FuriousBellow.class));
         cards.add(new SetCardInfo("Gaea's Might", 164, Rarity.COMMON, mage.cards.g.GaeasMight.class));
@@ -146,6 +149,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Monstrous War-Leech", 98, Rarity.UNCOMMON, mage.cards.m.MonstrousWarLeech.class));
         cards.add(new SetCardInfo("Mossbeard Ancient", 173, Rarity.UNCOMMON, mage.cards.m.MossbeardAncient.class));
         cards.add(new SetCardInfo("Mountain", 271, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nael, Avizoa Aeronaut", 207, Rarity.UNCOMMON, mage.cards.n.NaelAvizoaAeronaut.class));
         cards.add(new SetCardInfo("Negate", 58, Rarity.COMMON, mage.cards.n.Negate.class));
         cards.add(new SetCardInfo("Nishoba Brawler", 174, Rarity.UNCOMMON, mage.cards.n.NishobaBrawler.class));
         cards.add(new SetCardInfo("Phoenix Chick", 140, Rarity.UNCOMMON, mage.cards.p.PhoenixChick.class));
@@ -166,6 +170,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Ragefire Hellkite", 285, Rarity.RARE, mage.cards.r.RagefireHellkite.class));
         cards.add(new SetCardInfo("Relic of Legends", 236, Rarity.UNCOMMON, mage.cards.r.RelicOfLegends.class));
         cards.add(new SetCardInfo("Resolute Reinforcements", 29, Rarity.UNCOMMON, mage.cards.r.ResoluteReinforcements.class));
+        cards.add(new SetCardInfo("Rith, Liberated Primeval", 214, Rarity.MYTHIC, mage.cards.r.RithLiberatedPrimeval.class));
         cards.add(new SetCardInfo("Rona's Vortex", 63, Rarity.UNCOMMON, mage.cards.r.RonasVortex.class));
         cards.add(new SetCardInfo("Rulik Mons, Warren Chief", 217, Rarity.UNCOMMON, mage.cards.r.RulikMonsWarrenChief.class));
         cards.add(new SetCardInfo("Runic Shot", 30, Rarity.UNCOMMON, mage.cards.r.RunicShot.class));
@@ -178,11 +183,13 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Shadow Prophecy", 105, Rarity.COMMON, mage.cards.s.ShadowProphecy.class));
         cards.add(new SetCardInfo("Shadow-Rite Priest", 106, Rarity.RARE, mage.cards.s.ShadowRitePriest.class));
         cards.add(new SetCardInfo("Shalai's Acolyte", 33, Rarity.UNCOMMON, mage.cards.s.ShalaisAcolyte.class));
+        cards.add(new SetCardInfo("Sheoldred's Restoration", 108, Rarity.UNCOMMON, mage.cards.s.SheoldredsRestoration.class));
         cards.add(new SetCardInfo("Sheoldred, the Apocalypse", 107, Rarity.MYTHIC, mage.cards.s.SheoldredTheApocalypse.class));
         cards.add(new SetCardInfo("Shield-Wall Sentinel", 238, Rarity.COMMON, mage.cards.s.ShieldWallSentinel.class));
         cards.add(new SetCardInfo("Shivan Devastator", 143, Rarity.MYTHIC, mage.cards.s.ShivanDevastator.class));
         cards.add(new SetCardInfo("Shivan Reef", 255, Rarity.RARE, mage.cards.s.ShivanReef.class));
         cards.add(new SetCardInfo("Shore Up", 64, Rarity.COMMON, mage.cards.s.ShoreUp.class));
+        cards.add(new SetCardInfo("Silverback Elder", 177, Rarity.MYTHIC, mage.cards.s.SilverbackElder.class));
         cards.add(new SetCardInfo("Slimefoot's Survey", 178, Rarity.UNCOMMON, mage.cards.s.SlimefootsSurvey.class));
         cards.add(new SetCardInfo("Smash to Dust", 144, Rarity.COMMON, mage.cards.s.SmashToDust.class));
         cards.add(new SetCardInfo("Snarespinner", 179, Rarity.COMMON, mage.cards.s.Snarespinner.class));
@@ -208,6 +215,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("The Cruelty of Gix", 87, Rarity.RARE, mage.cards.t.TheCrueltyOfGix.class));
         cards.add(new SetCardInfo("The Elder Dragon War", 121, Rarity.RARE, mage.cards.t.TheElderDragonWar.class));
         cards.add(new SetCardInfo("The Raven Man", 103, Rarity.RARE, mage.cards.t.TheRavenMan.class));
+        cards.add(new SetCardInfo("The Weatherseed Treaty", 188, Rarity.UNCOMMON, mage.cards.t.TheWeatherseedTreaty.class));
         cards.add(new SetCardInfo("The World Spell", 189, Rarity.MYTHIC, mage.cards.t.TheWorldSpell.class));
         cards.add(new SetCardInfo("Threats Undetected", 185, Rarity.RARE, mage.cards.t.ThreatsUndetected.class));
         cards.add(new SetCardInfo("Thrill of Possibility", 148, Rarity.COMMON, mage.cards.t.ThrillOfPossibility.class));
@@ -220,6 +228,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Toxic Abomination", 112, Rarity.COMMON, mage.cards.t.ToxicAbomination.class));
         cards.add(new SetCardInfo("Tura Kennerud, Skyknight", 224, Rarity.UNCOMMON, mage.cards.t.TuraKennerudSkyknight.class));
         cards.add(new SetCardInfo("Twinferno", 149, Rarity.UNCOMMON, mage.cards.t.Twinferno.class));
+        cards.add(new SetCardInfo("Urza Assembles the Titans", 37, Rarity.RARE, mage.cards.u.UrzaAssemblesTheTitans.class));
         cards.add(new SetCardInfo("Uurg, Spawn of Turg", 225, Rarity.UNCOMMON, mage.cards.u.UurgSpawnOfTurg.class));
         cards.add(new SetCardInfo("Valiant Veteran", 38, Rarity.RARE, mage.cards.v.ValiantVeteran.class));
         cards.add(new SetCardInfo("Vanquisher's Axe", 240, Rarity.COMMON, mage.cards.v.VanquishersAxe.class));
@@ -227,6 +236,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Vineshaper Prodigy", 187, Rarity.COMMON, mage.cards.v.VineshaperProdigy.class));
         cards.add(new SetCardInfo("Voda Sea Scavenger", 74, Rarity.COMMON, mage.cards.v.VodaSeaScavenger.class));
         cards.add(new SetCardInfo("Vodalian Hexcatcher", 75, Rarity.RARE, mage.cards.v.VodalianHexcatcher.class));
+        cards.add(new SetCardInfo("Vodalian Mindsinger", 76, Rarity.RARE, mage.cards.v.VodalianMindsinger.class));
         cards.add(new SetCardInfo("Wooded Ridgeline", 260, Rarity.COMMON, mage.cards.w.WoodedRidgeline.class));
         cards.add(new SetCardInfo("Writhing Necromass", 115, Rarity.COMMON, mage.cards.w.WrithingNecromass.class));
         cards.add(new SetCardInfo("Yavimaya Coast", 261, Rarity.RARE, mage.cards.y.YavimayaCoast.class));
