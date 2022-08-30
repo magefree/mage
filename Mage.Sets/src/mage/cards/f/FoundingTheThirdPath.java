@@ -57,6 +57,7 @@ public final class FoundingTheThirdPath extends CardImpl {
                 new FoundingTheThirdPathEffect(),
                 new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD)
         );
+        this.addAbility(sagaAbility);
     }
 
     private FoundingTheThirdPath(final FoundingTheThirdPath card) {
