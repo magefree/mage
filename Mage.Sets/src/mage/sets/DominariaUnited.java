@@ -85,6 +85,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Electrostatic Infantry", 122, Rarity.UNCOMMON, mage.cards.e.ElectrostaticInfantry.class));
         cards.add(new SetCardInfo("Elfhame Wurm", 161, Rarity.COMMON, mage.cards.e.ElfhameWurm.class));
         cards.add(new SetCardInfo("Elvish Hydromancer", 162, Rarity.UNCOMMON, mage.cards.e.ElvishHydromancer.class));
+        cards.add(new SetCardInfo("Ertai Resurrected", 199, Rarity.RARE, mage.cards.e.ErtaiResurrected.class));
         cards.add(new SetCardInfo("Ertai's Scorn", 48, Rarity.UNCOMMON, mage.cards.e.ErtaisScorn.class));
         cards.add(new SetCardInfo("Essence Scatter", 49, Rarity.COMMON, mage.cards.e.EssenceScatter.class));
         cards.add(new SetCardInfo("Evolved Sleeper", 93, Rarity.RARE, mage.cards.e.EvolvedSleeper.class));
