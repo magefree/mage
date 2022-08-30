@@ -60,6 +60,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Broken Wings", 157, Rarity.COMMON, mage.cards.b.BrokenWings.class));
         cards.add(new SetCardInfo("Captain's Call", 9, Rarity.COMMON, mage.cards.c.CaptainsCall.class));
         cards.add(new SetCardInfo("Caves of Koilos", 244, Rarity.RARE, mage.cards.c.CavesOfKoilos.class));
+        cards.add(new SetCardInfo("Chaotic Transformation", 117, Rarity.RARE, mage.cards.c.ChaoticTransformation.class));
         cards.add(new SetCardInfo("Charismatic Vanguard", 10, Rarity.COMMON, mage.cards.c.CharismaticVanguard.class));
         cards.add(new SetCardInfo("Choking Miasma", 86, Rarity.UNCOMMON, mage.cards.c.ChokingMiasma.class));
         cards.add(new SetCardInfo("Citizen's Arrest", 11, Rarity.COMMON, mage.cards.c.CitizensArrest.class));
