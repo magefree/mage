@@ -115,6 +115,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Idyllic Beachfront", 249, Rarity.COMMON, mage.cards.i.IdyllicBeachfront.class));
         cards.add(new SetCardInfo("Impede Momentum", 54, Rarity.COMMON, mage.cards.i.ImpedeMomentum.class));
         cards.add(new SetCardInfo("Impulse", 55, Rarity.COMMON, mage.cards.i.Impulse.class));
+        cards.add(new SetCardInfo("In Thrall to the Pit", 132, Rarity.COMMON, mage.cards.i.InThrallToThePit.class));
         cards.add(new SetCardInfo("Inscribed Tablet", 232, Rarity.UNCOMMON, mage.cards.i.InscribedTablet.class));
         cards.add(new SetCardInfo("Island", 265, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jaya's Firenado", 134, Rarity.COMMON, mage.cards.j.JayasFirenado.class));
