@@ -172,6 +172,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Rith, Liberated Primeval", 214, Rarity.MYTHIC, mage.cards.r.RithLiberatedPrimeval.class));
         cards.add(new SetCardInfo("Rona's Vortex", 63, Rarity.UNCOMMON, mage.cards.r.RonasVortex.class));
         cards.add(new SetCardInfo("Rulik Mons, Warren Chief", 217, Rarity.UNCOMMON, mage.cards.r.RulikMonsWarrenChief.class));
+        cards.add(new SetCardInfo("Rundvelt Hordemaster", 142, Rarity.RARE, mage.cards.r.RundveltHordemaster.class));
         cards.add(new SetCardInfo("Runic Shot", 30, Rarity.UNCOMMON, mage.cards.r.RunicShot.class));
         cards.add(new SetCardInfo("Sacred Peaks", 254, Rarity.COMMON, mage.cards.s.SacredPeaks.class));
         cards.add(new SetCardInfo("Salvaged Manaworker", 237, Rarity.COMMON, mage.cards.s.SalvagedManaworker.class));
