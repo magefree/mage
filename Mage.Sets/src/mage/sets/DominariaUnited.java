@@ -27,6 +27,7 @@ public final class DominariaUnited extends ExpansionSet {
         this.ratioBoosterMythic = 7;
         this.maxCardNumberInBooster = 281;
 
+        cards.add(new SetCardInfo("Academy Loremaster", 40, Rarity.RARE, mage.cards.a.AcademyLoremaster.class));
         cards.add(new SetCardInfo("Academy Wall", 41, Rarity.COMMON, mage.cards.a.AcademyWall.class));
         cards.add(new SetCardInfo("Adarkar Wastes", 243, Rarity.RARE, mage.cards.a.AdarkarWastes.class));
         cards.add(new SetCardInfo("Aether Channeler", 42, Rarity.RARE, mage.cards.a.AetherChanneler.class));

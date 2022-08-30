@@ -55,6 +55,9 @@ public class SpellsCostIncreasingAllEffect extends CostModificationEffectImpl {
             case OPPONENT:
                 sb.append(" your opponents cast");
                 break;
+            case ACTIVE:
+                sb.append(" the active player casts");
+                break;
             case ANY:
                 break;
             default:
@@ -110,6 +113,10 @@ public class SpellsCostIncreasingAllEffect extends CostModificationEffectImpl {
                         return false;
                     }
                     break;
+                case ACTIVE:
+                    if (!game.isActivePlayer(abilityController.getId())) {
+                        return false;
+                    }
                 case ANY:
                     break;
                 default:
