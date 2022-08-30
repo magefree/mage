@@ -96,8 +96,7 @@ class ToymakerEffect extends ContinuousEffectImpl {
                 break;
 
             case PTChangingEffects_7:
-                // TODO: Is this 7a or 7b?
-                if (sublayer == SubLayer.CharacteristicDefining_7a) {
+                if (sublayer == SubLayer.SetPT_7b) {
                     int cmc = artifact.getManaValue();
                     artifact.getPower().setModifiedBaseValue(cmc);
                     artifact.getToughness().setModifiedBaseValue(cmc);

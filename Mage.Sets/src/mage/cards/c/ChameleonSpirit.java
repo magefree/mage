@@ -10,12 +10,9 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ChooseColorEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -41,6 +38,7 @@ public final class ChameleonSpirit extends CardImpl {
         // Chameleon Spirit's power and toughness are each equal to the number 
         // of permanents of the chosen color your opponents control.
         this.addAbility(new SimpleStaticAbility(
+                Zone.ALL,
                 new SetBasePowerToughnessSourceEffect(
                         PermanentsOfTheChosenColorOpponentsControlCount.instance,
                         Duration.EndOfGame)));

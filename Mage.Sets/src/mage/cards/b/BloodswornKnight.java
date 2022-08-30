@@ -17,6 +17,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;
@@ -41,7 +42,7 @@ public final class BloodswornKnight extends CardImpl {
         this.nightCard = true;
 
         // Bloodsworn Knight's power and toughness are each equal to the number of creature cards in your graveyard.
-        this.addAbility(new SimpleStaticAbility(new SetBasePowerToughnessSourceEffect(xValue, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue, Duration.EndOfGame)));
 
         // {1}{B}, Discard a card: Bloodsworn Knight gains indestructible until end of turn. Tap it.
         Ability ability = new SimpleActivatedAbility(

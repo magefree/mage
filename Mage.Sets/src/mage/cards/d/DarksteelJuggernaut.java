@@ -32,8 +32,10 @@ public final class DarksteelJuggernaut extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // Darksteel Juggernaut's power and toughness are each equal to the number of artifacts you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL,
-                new SetBasePowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(new FilterControlledArtifactPermanent("artifacts you control")), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(
+                Zone.ALL,
+                new SetBasePowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(new FilterControlledArtifactPermanent("artifacts you control")), Duration.EndOfGame)
+        ));
 
         // Darksteel Juggernaut attacks each turn if able.
         this.addAbility(new AttacksEachCombatStaticAbility());

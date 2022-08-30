@@ -90,7 +90,7 @@ class TitaniasSongEffect extends ContinuousEffectImpl {
                 }
                 break;
             case PTChangingEffects_7:
-                if (sublayer == SubLayer.CharacteristicDefining_7a) {
+                if (sublayer == SubLayer.SetPT_7b) {
                     for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
                         Permanent permanent = it.next().getPermanent(game);
                         if (permanent != null) {

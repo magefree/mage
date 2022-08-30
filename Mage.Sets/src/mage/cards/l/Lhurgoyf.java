@@ -34,7 +34,11 @@ public final class Lhurgoyf extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Lhurgoyf's power is equal to the number of creature cards in all graveyards and its toughness is equal to that number plus 1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetBasePowerToughnessSourceEffect(powerValue, toughnessValue, Duration.WhileOnBattlefield, SubLayer.CharacteristicDefining_7a, false)));
+        this.addAbility(new SimpleStaticAbility(
+                Zone.ALL,
+                new SetBasePowerToughnessSourceEffect(powerValue, toughnessValue, Duration.EndOfGame, SubLayer.CharacteristicDefining_7a, false)
+                        .setText("{this}'s power is equal to the number of creature cards in all graveyards and its toughness is equal to that number plus 1")
+        ));
     }
 
     private Lhurgoyf(final Lhurgoyf card) {
