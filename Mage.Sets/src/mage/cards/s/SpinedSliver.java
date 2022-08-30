@@ -1,7 +1,6 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.BecomesBlockedAllTriggeredAbility;
 import mage.abilities.dynamicvalue.common.BlockingCreatureCount;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
