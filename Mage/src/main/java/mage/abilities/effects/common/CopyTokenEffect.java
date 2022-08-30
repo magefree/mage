@@ -41,7 +41,6 @@ public class CopyTokenEffect extends ContinuousEffectImpl {
         for (Ability ability : token.getAbilities()) {
             permanent.addAbility(ability, source.getSourceId(), game);
         }
-        // TODO: I am not sure if this should be getBaseValue() or getModifiedBaseValue()
         permanent.getPower().setModifiedBaseValue(token.getPower().getModifiedBaseValue());
         permanent.getToughness().setModifiedBaseValue(token.getToughness().getModifiedBaseValue());
         //permanent.getLoyalty().setBoostedValue(card.getLoyalty().getValue());
