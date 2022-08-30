@@ -599,7 +599,6 @@ public class ManaOptionsTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
         // The size below is based on no optimization to remove any mana possibilities beyond exact duplicates.
@@ -624,7 +623,6 @@ public class ManaOptionsTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
     }
