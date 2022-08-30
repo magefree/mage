@@ -237,6 +237,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Voda Sea Scavenger", 74, Rarity.COMMON, mage.cards.v.VodaSeaScavenger.class));
         cards.add(new SetCardInfo("Vodalian Hexcatcher", 75, Rarity.RARE, mage.cards.v.VodalianHexcatcher.class));
         cards.add(new SetCardInfo("Vodalian Mindsinger", 76, Rarity.RARE, mage.cards.v.VodalianMindsinger.class));
+        cards.add(new SetCardInfo("Walking Bulwark", 241, Rarity.UNCOMMON, mage.cards.w.WalkingBulwark.class));
         cards.add(new SetCardInfo("Wooded Ridgeline", 260, Rarity.COMMON, mage.cards.w.WoodedRidgeline.class));
         cards.add(new SetCardInfo("Writhing Necromass", 115, Rarity.COMMON, mage.cards.w.WrithingNecromass.class));
         cards.add(new SetCardInfo("Yavimaya Coast", 261, Rarity.RARE, mage.cards.y.YavimayaCoast.class));
