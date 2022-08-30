@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
@@ -36,7 +36,7 @@ public final class HauntingFigment extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Haunting Figment can't be blocked as long as you've cast an instant or sorcery spell this turn.
-        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
                 new CantBeBlockedSourceEffect(Duration.WhileOnBattlefield), HauntingFigmentCondition.instance,
                 "can't be blocked as long as you've cast an instant or sorcery spell this turn"
         )), new SpellsCastWatcher());
