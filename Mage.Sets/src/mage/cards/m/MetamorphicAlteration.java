@@ -139,9 +139,8 @@ class MetamorphicAlterationEffect extends ContinuousEffectImpl {
         for (Ability ability : copied.getAbilities()) {
             permanent.addAbility(ability, source.getSourceId(), game);
         }
-        // TODO: Should this be copying the base or the modified base value?
-        permanent.getPower().setModifiedBaseValue(copied.getPower().getModifiedBaseValue());
-        permanent.getToughness().setModifiedBaseValue(copied.getToughness().getModifiedBaseValue());
+        permanent.getPower().setModifiedBaseValue(copied.getPower().getBaseValue());
+        permanent.getToughness().setModifiedBaseValue(copied.getToughness().getBaseValue());
         return true;
     }
 
