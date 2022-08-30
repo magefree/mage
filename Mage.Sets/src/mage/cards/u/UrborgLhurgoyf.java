@@ -5,9 +5,14 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.AdditiveDynamicValue;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.MillCardsControllerEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -22,6 +27,9 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class UrborgLhurgoyf extends CardImpl {
+
+    private static final DynamicValue powerValue = new CardsInAllGraveyardsCount(StaticFilters.FILTER_CARD_CREATURE);
+    private static final DynamicValue toughnessValue = new AdditiveDynamicValue(powerValue, StaticValue.get(1));
 
     public UrborgLhurgoyf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
@@ -43,7 +51,11 @@ public final class UrborgLhurgoyf extends CardImpl {
         ));
 
         // Urborg Lhurgoyf's power is equal to the number of creature cards in your graveyard and its toughness is equal to that number plus 1.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new UrborgLhurgoyfEffect()));
+        this.addAbility(new SimpleStaticAbility(
+                Zone.ALL,
+                new SetBasePowerToughnessSourceEffect(powerValue, toughnessValue, Duration.EndOfGame, SubLayer.CharacteristicDefining_7a, false)
+                        .setText("{this}'s power is equal to the number of creature cards in all graveyards and its toughness is equal to that number plus 1")
+        ));
     }
 
     private UrborgLhurgoyf(final UrborgLhurgoyf card) {
@@ -53,35 +65,5 @@ public final class UrborgLhurgoyf extends CardImpl {
     @Override
     public UrborgLhurgoyf copy() {
         return new UrborgLhurgoyf(this);
-    }
-}
-
-class UrborgLhurgoyfEffect extends ContinuousEffectImpl {
-
-    public UrborgLhurgoyfEffect() {
-        super(Duration.EndOfGame, Layer.PTChangingEffects_7, SubLayer.CharacteristicDefining_7a, Outcome.BoostCreature);
-        staticText = "{this}'s power is equal to the number of creature cards in your graveyard and its toughness is equal to that number plus 1";
-    }
-
-    public UrborgLhurgoyfEffect(final UrborgLhurgoyfEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public UrborgLhurgoyfEffect copy() {
-        return new UrborgLhurgoyfEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (player == null || sourceObject == null) {
-            return false;
-        }
-        int number = player.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game);
-        sourceObject.getPower().setValue(number);
-        sourceObject.getToughness().setValue(number + 1);
-        return true;
     }
 }
