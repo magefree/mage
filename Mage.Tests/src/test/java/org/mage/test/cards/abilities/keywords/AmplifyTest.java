@@ -31,7 +31,6 @@ public class AmplifyTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Kilnmouth Dragon", 1);
         assertPowerToughness(playerA, "Kilnmouth Dragon", 8,8); // 5 + 3 from Amplify
@@ -55,7 +54,6 @@ public class AmplifyTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Kilnmouth Dragon", 1);
         assertPowerToughness(playerA, "Kilnmouth Dragon", 11,11); // 5 + 6 from Amplify
@@ -88,7 +86,6 @@ public class AmplifyTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Kilnmouth Dragon", 1);
         assertPowerToughness(playerA, "Kilnmouth Dragon", 8,8); // 5 + 3 from Amplify
@@ -123,7 +120,6 @@ public class AmplifyTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Kilnmouth Dragon", 1);
         assertPowerToughness(playerA, "Kilnmouth Dragon", 5,5); // 5 + 0 from Amplify

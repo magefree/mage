@@ -35,7 +35,7 @@ public class NightSideCMCTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Repeal");
         setChoice(playerB, "X=1");
-        addTarget(playerB, insect);
+        // Insectile Aberration is auto-chosen since only target
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

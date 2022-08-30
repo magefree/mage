@@ -86,7 +86,6 @@ public class DungeonTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 2 + 2, 3);
         assertPermanentCount(playerA, "Goblin Token", 0);
@@ -109,7 +108,6 @@ public class DungeonTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 2 + 2, 3);
         assertPermanentCount(playerA, "Goblin Token", 1);
@@ -135,7 +133,6 @@ public class DungeonTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 2 + 2, 3);
         assertPermanentCount(playerA, "Goblin Token", 1);
@@ -163,7 +160,6 @@ public class DungeonTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 2 + 2, 3);
         assertPermanentCount(playerA, "Goblin Token", 1);
@@ -187,7 +183,6 @@ public class DungeonTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Goblin Token", 1);
         assertDungeonRoom(null, null);
@@ -211,7 +206,6 @@ public class DungeonTest extends CardTestPlayerBase {
         rollbackTurns(2, PhaseStep.END_TURN, playerA, 0);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Goblin Token", 1);
         assertDungeonRoom(LOST_MINE_OF_PHANDELVER, "Goblin Lair");
@@ -243,7 +237,6 @@ public class DungeonTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, SILVERCOAT_LION, 3, 3);
         assertCounterCount(playerA, SILVERCOAT_LION, CounterType.P1P1, 1);
@@ -282,7 +275,6 @@ public class DungeonTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 2 + 2, 3);
         assertPowerToughness(playerB, FLAMESPEAKER_ADEPT, 2 + 2 + 2, 3);
@@ -314,7 +306,6 @@ public class DungeonTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertAbility(playerA, GLOOM_STALKER, DoubleStrikeAbility.getInstance(), true);
         assertDungeonRoom(null, null);
@@ -326,7 +317,6 @@ public class DungeonTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertAbility(playerA, GLOOM_STALKER, DoubleStrikeAbility.getInstance(), false);
         assertDungeonRoom(null, null);
@@ -355,7 +345,6 @@ public class DungeonTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertAbility(playerA, GLOOM_STALKER, DoubleStrikeAbility.getInstance(), true);
         assertDungeonRoom(null, null);
@@ -380,7 +369,6 @@ public class DungeonTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, DUNGEON_CRAWLER, 1);
         assertDungeonRoom(null, null);
@@ -403,7 +391,6 @@ public class DungeonTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 2 + 2 + 2, 3);
         assertPermanentCount(playerA, "Goblin Token", 2);
@@ -430,7 +417,6 @@ public class DungeonTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, FLAMESPEAKER_ADEPT, 2 + 2, 3);
         assertPermanentCount(playerA, "Goblin Token", 1);

@@ -54,7 +54,6 @@ public class DayNightTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertRuffianSmasher(true);
     }
@@ -70,7 +69,6 @@ public class DayNightTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertRuffianSmasher(false);
     }
@@ -86,7 +84,6 @@ public class DayNightTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertRuffianSmasher(false);
     }
@@ -103,7 +100,6 @@ public class DayNightTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertRuffianSmasher(true);
     }
@@ -120,7 +116,6 @@ public class DayNightTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertRuffianSmasher(true);
         assertPermanentCount(playerA, outcasts, 0);
@@ -140,7 +135,6 @@ public class DayNightTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertDayNight(true);
         assertPowerToughness(playerA, smasher, 6 + 1, 5 + 1);
@@ -170,7 +164,6 @@ public class DayNightTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertRuffianSmasher(true);
     }
@@ -195,7 +188,6 @@ public class DayNightTest extends CardTestPlayerBase {
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertRuffianSmasher(false);
     }
@@ -225,7 +217,6 @@ public class DayNightTest extends CardTestPlayerBase {
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertRuffianSmasher(false);
     }
@@ -240,7 +231,6 @@ public class DayNightTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertDayNight(true);
         Permanent permanent = getPermanent(curse);
@@ -259,7 +249,6 @@ public class DayNightTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertDayNight(false);
         assertPermanentCount(playerA, curse, 0);
@@ -277,7 +266,6 @@ public class DayNightTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertDayNight(false);
         assertPermanentCount(playerA, curse, 0);
@@ -297,7 +285,6 @@ public class DayNightTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertDayNight(true);
         Permanent permanent = getPermanent(curse);
@@ -315,7 +302,6 @@ public class DayNightTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertDayNight(true);
         assertLife(playerB, 20);
@@ -341,7 +327,6 @@ public class DayNightTest extends CardTestPlayerBase {
 
         setStopAt(4, PhaseStep.UPKEEP);
         execute();
-        assertAllCommandsUsed();
 
         assertDayNight(true);
         assertLife(playerB, 20 - 1 - 3 - 3 - 1);

@@ -25,7 +25,7 @@ public class HeartbeatOfSpringTest extends CardTestPlayerBase {
         // Whenever a player casts a white spell, you may gain 1 life.
         addCard(Zone.HAND, playerA, "Angel's Feather"); // {2}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Heartbeat of Spring");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Heartbeat of Spring", true);
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Urza's Mine");
 
         activateManaAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}:");

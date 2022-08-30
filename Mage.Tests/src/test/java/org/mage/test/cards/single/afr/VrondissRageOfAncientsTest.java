@@ -41,6 +41,5 @@ public class VrondissRageOfAncientsTest extends CardTestMultiPlayerBase {
         // Should only be one trigger since it should only trigger off of playerA's roll
 
         execute();
-        assertAllCommandsUsed();
     }
 }

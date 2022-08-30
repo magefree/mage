@@ -363,7 +363,6 @@ public class MorphTest extends CardTestPlayerBase {
         // showBattlefield("A battle after", 1, PhaseStep.END_TURN, playerA);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20);
 
@@ -418,6 +417,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Birchlore Rangers");
         setChoice(playerA, true); // cast it face down as 2/2 creature
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Swords to Plowshares", "");
 
@@ -457,6 +457,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ashcloud Phoenix");
         setChoice(playerA, true); // cast it face down as 2/2 creature
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", EmptyNames.FACE_DOWN_CREATURE.toString());
 
@@ -532,6 +533,8 @@ public class MorphTest extends CardTestPlayerBase {
         // Return target creature to its owner's hand. You put a token onto the battlefield that's a copy of that creature
         addCard(Zone.HAND, playerB, "Supplant Form", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 6);
+
+        setStrictChooseMode(true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma, Angel of Fury");
         setChoice(playerA, true); // cast it face down as 2/2 creature
@@ -660,7 +663,7 @@ public class MorphTest extends CardTestPlayerBase {
         try {
             execute();
         } catch (Throwable e) {
-            if (!e.getMessage().contains("Can't find available command - activate:Cast Rattleclaw Mystic (use checkPlayableAbility for \"non available\" checks)")) {
+            if (!e.getMessage().contains("Cast Rattleclaw Mystic")) {
                 Assert.fail("Should have gotten an error about not being able to cast Rattleclaw, but got:\n" + e.getMessage());
             }
         }
@@ -698,7 +701,6 @@ public class MorphTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Reflector Mage", 1);
         assertPermanentCount(playerB, "Rattleclaw Mystic", 0);
@@ -791,7 +793,6 @@ public class MorphTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Brine Elemental", 1);
         assertPermanentCount(playerB, "Brine Elemental", 1);
@@ -900,6 +901,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Quicksilver Dragon");
         setChoice(playerA, true); // cast it face down as 2/2 creature
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", EmptyNames.FACE_DOWN_CREATURE.toString());
 
@@ -966,8 +968,6 @@ public class MorphTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
-
         assertPermanentCount(playerA, "Zoetic Cavern", 1);
     }
 
@@ -985,7 +985,6 @@ public class MorphTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Zoetic Cavern", 0);
         assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
@@ -1013,7 +1012,6 @@ public class MorphTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Island", 1);
         assertPermanentCount(playerA, "Zoetic Cavern", 0);
@@ -1039,7 +1037,6 @@ public class MorphTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Zoetic Cavern", 0);
         assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
@@ -1063,7 +1060,6 @@ public class MorphTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -1084,7 +1080,6 @@ public class MorphTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
     }
@@ -1107,7 +1102,6 @@ public class MorphTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
     }
@@ -1139,7 +1133,6 @@ public class MorphTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
     }

@@ -34,7 +34,6 @@ public class ProwlTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 19);
         assertPermanentCount(playerA, "Bloodmark Mentor", 1);
@@ -70,7 +69,6 @@ public class ProwlTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 18);
         assertPermanentCount(playerA, "Goblin Warchief", 1);

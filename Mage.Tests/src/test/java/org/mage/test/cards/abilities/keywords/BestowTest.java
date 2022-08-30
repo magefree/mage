@@ -53,7 +53,6 @@ public class BestowTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // because of protection the Hopeful Eidolon should be a creature on the battlefield
         assertPermanentCount(playerA, "Silent Artisan", 1);
@@ -73,7 +72,6 @@ public class BestowTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Silent Artisan", 1);
         assertPowerToughness(playerA, "Silent Artisan", 4, 6);
@@ -103,7 +101,6 @@ public class BestowTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // because Boon Satyr is no creature on the battlefield, evolve may not trigger
         assertPermanentCount(playerA, "Boon Satyr", 1);
@@ -135,7 +132,6 @@ public class BestowTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // because Boon Satyr is no creature on the battlefield, evolve may not trigger
         assertLife(playerA, 20);
@@ -171,7 +167,6 @@ public class BestowTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // because Boon Satyr is no creature on the battlefield, evolve may not trigger
         assertPermanentCount(playerA, "Silent Artisan", 1);
@@ -225,7 +220,6 @@ public class BestowTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, "Cyclops of One-Eyed Pass", 1);
         assertHandCount(playerB, 0);
@@ -268,7 +262,6 @@ public class BestowTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         //
         assertHandCount(playerA, "Hypnotic Siren", 0);
@@ -306,7 +299,6 @@ public class BestowTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 18); // -2 from Chandra's Outrage
         assertLife(playerB, 18); // -2 from attack of Mogis's Warhound
@@ -365,7 +357,6 @@ public class BestowTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 18); // -2 from Chandra's Outrage
         assertLife(playerA, 16); // -3 from attack Alesha with bestowed Nighthowler
@@ -394,7 +385,6 @@ public class BestowTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20);
         assertTapped("Sightless Brawler", false);
@@ -417,7 +407,6 @@ public class BestowTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 15);
         assertTapped("Sightless Brawler", true);
@@ -440,7 +429,6 @@ public class BestowTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, "Sightless Brawler", 0);
         assertLife(playerB, 20);
@@ -467,7 +455,6 @@ public class BestowTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, "Sightless Brawler", 0);
         assertLife(playerB, 14);
@@ -505,7 +492,6 @@ public class BestowTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, "Song of the Dryads", 1);
 
@@ -538,7 +524,6 @@ public class BestowTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Nylea's Emissary", 1);
         assertPowerToughness(playerA, "Silvercoat Lion", 5, 5);

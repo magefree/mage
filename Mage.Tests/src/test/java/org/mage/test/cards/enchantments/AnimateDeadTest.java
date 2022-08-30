@@ -44,7 +44,10 @@ public class AnimateDeadTest extends CardTestPlayerBase {
         // Enchanted creature gets -1/-0.
         addCard(Zone.HAND, playerA, "Animate Dead"); // {1}{B}
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Animate Dead", "Eternal Witness");
+        setChoice(playerA, "Yes");
         addTarget(playerA, "Silvercoat Lion");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -80,8 +83,12 @@ public class AnimateDeadTest extends CardTestPlayerBase {
         // Enchanted creature gets -1/-0.
         addCard(Zone.HAND, playerA, "Animate Dead"); // {1}{B}
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Animate Dead", "Eternal Witness");
+        setChoice(playerA, "Yes");
         addTarget(playerA, "Silvercoat Lion");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Eternal Witness");
 
@@ -188,8 +195,6 @@ public class AnimateDeadTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
-
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);

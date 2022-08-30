@@ -36,6 +36,7 @@ public class BanisherPriestTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Rockslide Elemental");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Banisher Priest");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);  // Let Banisher Priest enter the battlefield, but don't let its ETB ability resolve
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Incinerate", "Banisher Priest");
 
@@ -104,7 +105,7 @@ public class BanisherPriestTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
 
         addCard(Zone.GRAVEYARD, playerB, "Banisher Priest");
-        /**
+        /*
          * Seance
          * {2}{W}{W}
          * Enchantment
@@ -114,8 +115,12 @@ public class BanisherPriestTest extends CardTestPlayerBase {
          * Exile it at the beginning of the next end step.
          */
         addCard(Zone.BATTLEFIELD, playerB, "Seance");
+
+        setStrictChooseMode(true);
+
+        setChoice(playerB, "Yes");
         addTarget(playerB, "Banisher Priest"); // Return the Banisher Priest from graveyard with Seance
-        // The Silvercoat Lion is autochosen for Banisher Priest's ETB since it's the only creature on the opponent's board
+        addTarget(playerB, "Silvercoat Lion");
 
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();

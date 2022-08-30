@@ -42,7 +42,6 @@ public class UnlicensedHearseTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, 1);
         assertPowerToughness(playerA, "Unlicensed Hearse", 1, 1);
@@ -60,7 +59,6 @@ public class UnlicensedHearseTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, 0);
         assertPowerToughness(playerA, "Unlicensed Hearse", 2, 2);

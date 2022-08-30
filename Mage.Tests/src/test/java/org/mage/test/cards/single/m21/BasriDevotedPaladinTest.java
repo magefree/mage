@@ -28,7 +28,6 @@ public class BasriDevotedPaladinTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertAbility(playerA, "Savannah Lions", VigilanceAbility.getInstance(), true);
         assertCounterCount(playerA, "Savannah Lions", CounterType.P1P1, 1);
@@ -47,7 +46,6 @@ public class BasriDevotedPaladinTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(5, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 17);
         assertCounterCount(playerA, "Savannah Lions", CounterType.P1P1, 1);
@@ -73,7 +71,6 @@ public class BasriDevotedPaladinTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(5, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Savannah Lions", 6, 5);
         assertAbility(playerA, "Savannah Lions", FlyingAbility.getInstance(), true);

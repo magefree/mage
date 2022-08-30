@@ -30,7 +30,7 @@ public class TreeOfPerditionTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD,playerB,"Island",1);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Exchange");
-        addTarget(playerA, playerB);
+        // Player B is auto-targeted since they're the only option
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Unsummon");
 
@@ -54,7 +54,7 @@ public class TreeOfPerditionTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Exchange");
-        addTarget(playerA, playerB);
+        // Player B is auto-targeted since they're the only option
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

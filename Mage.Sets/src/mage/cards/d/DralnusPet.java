@@ -49,7 +49,7 @@ public final class DralnusPet extends CardImpl {
         kickerCosts.add(new DiscardCardCost(StaticFilters.FILTER_CARD_CREATURE));
         this.addAbility(new KickerAbility(kickerCosts));
         // If Dralnu's Pet was kicked, it enters the battlefield with flying and with X +1/+1 counters on it, where X is the discarded card's converted mana cost.
-        Ability ability = new EntersBattlefieldAbility(new DralnusPetEffect(), KickedCondition.instance,
+        Ability ability = new EntersBattlefieldAbility(new DralnusPetEffect(), KickedCondition.ONCE,
                 "If {this} was kicked, it enters the battlefield with flying and with X +1/+1 counters on it, where X is the discarded card's mana value.", "");
         ability.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield));
         this.addAbility(ability);

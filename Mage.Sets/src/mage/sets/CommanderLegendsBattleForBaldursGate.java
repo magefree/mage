@@ -67,6 +67,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Band Together", 216, Rarity.COMMON, mage.cards.b.BandTogether.class));
         cards.add(new SetCardInfo("Bane's Contingency", 57, Rarity.UNCOMMON, mage.cards.b.BanesContingency.class));
         cards.add(new SetCardInfo("Bane's Invoker", 7, Rarity.COMMON, mage.cards.b.BanesInvoker.class));
+        cards.add(new SetCardInfo("Banishment", 8, Rarity.UNCOMMON, mage.cards.b.Banishment.class));
         cards.add(new SetCardInfo("Basilisk Collar", 300, Rarity.RARE, mage.cards.b.BasiliskCollar.class));
         cards.add(new SetCardInfo("Basilisk Gate", 346, Rarity.COMMON, mage.cards.b.BasiliskGate.class));
         cards.add(new SetCardInfo("Battle Angels of Tyr", 9, Rarity.MYTHIC, mage.cards.b.BattleAngelsOfTyr.class));
@@ -363,6 +364,9 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Martial Impetus", 33, Rarity.COMMON, mage.cards.m.MartialImpetus.class));
         cards.add(new SetCardInfo("Marut", 322, Rarity.COMMON, mage.cards.m.Marut.class));
         cards.add(new SetCardInfo("Maskwood Nexus", 865, Rarity.RARE, mage.cards.m.MaskwoodNexus.class));
+        cards.add(new SetCardInfo("Mazzy, Truesword Paladin", 283, Rarity.RARE, mage.cards.m.MazzyTrueswordPaladin.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mazzy, Truesword Paladin", 430, Rarity.RARE, mage.cards.m.MazzyTrueswordPaladin.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mazzy, Truesword Paladin", 541, Rarity.RARE, mage.cards.m.MazzyTrueswordPaladin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Memory Plunder", 849, Rarity.RARE, mage.cards.m.MemoryPlunder.class));
         cards.add(new SetCardInfo("Meteor Golem", 323, Rarity.UNCOMMON, mage.cards.m.MeteorGolem.class));
         cards.add(new SetCardInfo("Midnight Clock", 727, Rarity.RARE, mage.cards.m.MidnightClock.class));
@@ -403,6 +407,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Nature's Lore", 244, Rarity.COMMON, mage.cards.n.NaturesLore.class));
         cards.add(new SetCardInfo("Nautiloid Ship", 328, Rarity.MYTHIC, mage.cards.n.NautiloidShip.class));
         cards.add(new SetCardInfo("Navigation Orb", 329, Rarity.COMMON, mage.cards.n.NavigationOrb.class));
+        cards.add(new SetCardInfo("Neera, Wild Mage", 288, Rarity.RARE, mage.cards.n.NeeraWildMage.class));
         cards.add(new SetCardInfo("Nefarious Imp", 137, Rarity.COMMON, mage.cards.n.NefariousImp.class));
         cards.add(new SetCardInfo("Nemesis Phoenix", 189, Rarity.UNCOMMON, mage.cards.n.NemesisPhoenix.class));
         cards.add(new SetCardInfo("Nemesis of Reason", 850, Rarity.RARE, mage.cards.n.NemesisOfReason.class));
@@ -492,6 +497,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Sarevok's Tome", 685, Rarity.RARE, mage.cards.s.SarevoksTome.class));
         cards.add(new SetCardInfo("Sarevok, Deathbringer", 144, Rarity.UNCOMMON, mage.cards.s.SarevokDeathbringer.class));
         cards.add(new SetCardInfo("Scaled Nurturer", 252, Rarity.COMMON, mage.cards.s.ScaledNurturer.class));
+        cards.add(new SetCardInfo("Scion of Halaster", 145, Rarity.COMMON, mage.cards.s.ScionOfHalaster.class));
         cards.add(new SetCardInfo("Scouting Hawk", 41, Rarity.COMMON, mage.cards.s.ScoutingHawk.class));
         cards.add(new SetCardInfo("Sculpted Sunburst", 42, Rarity.RARE, mage.cards.s.SculptedSunburst.class));
         cards.add(new SetCardInfo("Sea Gate", 359, Rarity.COMMON, mage.cards.s.SeaGate.class));

@@ -38,7 +38,6 @@ public class IdentityThiefTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount(playerA, 1);
         assertExileCount("Molten Sentry", 1);

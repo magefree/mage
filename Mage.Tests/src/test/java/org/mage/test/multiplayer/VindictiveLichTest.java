@@ -55,7 +55,7 @@ public class VindictiveLichTest extends CardTestMultiPlayerBase {
         setModeChoice(playerA, "2");
         addTarget(playerA, playerC);
         setModeChoice(playerA, "3");
-        addTarget(playerA, playerD);
+        // Player D is auto-chosen since each mode needs a different opponent
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

@@ -23,7 +23,6 @@ public class BalanceTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Plains", 2);
         assertPermanentCount(playerA, "Runeclaw Bear", 2);

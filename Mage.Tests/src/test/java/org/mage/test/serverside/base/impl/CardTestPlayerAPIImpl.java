@@ -285,8 +285,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             logger.info(Thread.currentThread().getStackTrace()[2].getMethodName() + " has been executed. Execution time: " + (t2 - t1) / 1000000 + " ms");
         }
 
-        // TODO: 01.12.2018, JayDi85 - uncomment and fix MANY broken tests with wrong commands
-        //assertAllCommandsUsed();
+        assertAllCommandsUsed();
     }
 
     protected TestPlayer createNewPlayer(String playerName, RangeOfInfluence rangeOfInfluence) {
@@ -870,7 +869,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
         for (Ability ability : abilities) {
             assertTrue("No such ability=" + ability.toString() + ", player=" + player.getName()
-                    + ", cardName" + cardName, found.getAbilities().contains(ability));
+                    + ", cardName=" + cardName, found.getAbilities().contains(ability));
         }
     }
 
@@ -906,10 +905,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
         if (mustHave) {
             assertTrue("No such ability=" + ability.toString() + ", player=" + player.getName()
-                    + ", cardName" + cardName, found.getAbilities(currentGame).containsRule(ability));
+                    + ", cardName=" + cardName, found.getAbilities(currentGame).containsRule(ability));
         } else {
             Assert.assertFalse("Card shouldn't have such ability=" + ability.toString() + ", player=" + player.getName()
-                    + ", cardName" + cardName, found.getAbilities(currentGame).containsRule(ability));
+                    + ", cardName=" + cardName, found.getAbilities(currentGame).containsRule(ability));
         }
     }
 
@@ -1498,7 +1497,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      *
      * @throws AssertionError
      */
-    public void assertAllCommandsUsed() throws AssertionError {
+    private void assertAllCommandsUsed() throws AssertionError {
         for (Player player : currentGame.getPlayers().values()) {
             TestPlayer testPlayer = (TestPlayer) player;
             assertActionsMustBeEmpty(testPlayer);
@@ -1640,7 +1639,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     public void waitStackResolved(int turnNum, PhaseStep step, TestPlayer player) {
-        waitStackResolved(1, step, player, false);
+        waitStackResolved(turnNum, step, player, false);
     }
 
     public void waitStackResolved(int turnNum, PhaseStep step, TestPlayer player, boolean skipOneStackObjectOnly) {

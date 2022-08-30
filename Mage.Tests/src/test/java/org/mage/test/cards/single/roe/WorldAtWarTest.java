@@ -88,7 +88,7 @@ public class WorldAtWarTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
         addCard(Zone.BATTLEFIELD, playerA, "Warclamp Mastiff");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "World at War");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "World at War", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "World at War");
 
         attack(1, playerA, "Elite Vanguard");

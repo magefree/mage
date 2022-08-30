@@ -20,7 +20,6 @@ public class MobilizedDistrictTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Mobilized District", 3, 3);
     }
@@ -45,7 +44,6 @@ public class MobilizedDistrictTest extends CardTestPlayerBase {
 
         setStopAt(5, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Mobilized District", 3, 3);
         assertTappedCount("Mobilized District", true, 1);

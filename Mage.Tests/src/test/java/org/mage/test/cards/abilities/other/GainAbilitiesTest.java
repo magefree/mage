@@ -26,6 +26,7 @@ public class GainAbilitiesTest extends CardTestPlayerBase {
 
         // attach all
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "@attach.1", "@bear");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "@attach.2", "@bear");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkAbility("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "@bear", VigilanceAbility.class, true);
@@ -33,7 +34,6 @@ public class GainAbilitiesTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         Permanent permanent = getPermanent("Balduvian Bears");
         Assert.assertEquals("must have only 1 singleton ability instance from two attachments",
@@ -51,14 +51,12 @@ public class GainAbilitiesTest extends CardTestPlayerBase {
 
         // attach all
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "@attach.1", "@bear");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "@attach.2", "@bear");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        //checkAbility("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "@bear", VigilanceAbility.class, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "@attach.2", "@bear");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         Permanent permanent = getPermanent("Balduvian Bears");
         Assert.assertEquals("must have 2 dynamic ability instances from two attachments",

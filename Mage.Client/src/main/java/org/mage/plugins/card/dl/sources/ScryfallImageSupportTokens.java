@@ -1740,6 +1740,10 @@ public class ScryfallImageSupportTokens {
             put ("2X2/Emblem Wrenn and Six", "https://api.scryfall.com/cards/t2x2/24/en?format=image");
             put ("2X2/Zombie", "https://api.scryfall.com/cards/t2x2/12/en?format=image");
 
+            // CC2
+            put ("CC2/Snake", "https://api.scryfall.com/cards/cc2/9/en?format=image&face=front");
+            put ("CC2/Zombie", "https://api.scryfall.com/cards/cc2/9/en?format=image&face=back");
+
 
             // generate supported sets
             supportedSets.clear();

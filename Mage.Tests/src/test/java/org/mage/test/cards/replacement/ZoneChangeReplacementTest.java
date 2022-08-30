@@ -229,6 +229,7 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.COMBAT_DAMAGE, playerA, "Unsummon", "Pillarfield Ox");
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Pillarfield Ox");
+        waitStackResolved(2, PhaseStep.POSTCOMBAT_MAIN);
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Terminate", "Pillarfield Ox");
 
         setStopAt(2, PhaseStep.END_TURN);
@@ -267,6 +268,7 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Legacy Weapon");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Mana Drain", "Legacy Weapon");
 
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN); // Let the Mana Drain delayed triggered ability resolve
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Legacy Weapon");
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();

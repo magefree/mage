@@ -26,7 +26,6 @@ public class RuneOfFlightTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertAbility(playerA, "Grizzly Bears", FlyingAbility.getInstance(), true);
     }
@@ -46,7 +45,6 @@ public class RuneOfFlightTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertAbility(playerA, "Grizzly Bears", FlyingAbility.getInstance(), true);
     }

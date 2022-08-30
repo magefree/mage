@@ -31,7 +31,6 @@ public class TorbranThaneOfRedFellTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 11); // damage from: attack 2 + 2 Bolt 3 + 2
@@ -64,7 +63,6 @@ public class TorbranThaneOfRedFellTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
 
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 15); // Attack from Horde 3+2
         assertLife(playerB, 18); // Damage from planeswalker 2
@@ -101,7 +99,6 @@ public class TorbranThaneOfRedFellTest extends CardTestPlayerBase {
         setStopAt(4, PhaseStep.BEGIN_COMBAT);
 
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 15); // Attack from Horde 3+2
         assertLife(playerB, 18); // Damage from planeswalker 2

@@ -25,7 +25,7 @@ public class RalZarekTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, ralZarek);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, ralZarek, true);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1:", "Silvercoat Lion"); // Ral Zarek +1
         addTarget(playerA, "Mountain"); // Untap the Mountain

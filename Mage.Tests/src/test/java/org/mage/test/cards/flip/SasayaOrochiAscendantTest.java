@@ -7,6 +7,7 @@ import mage.constants.Zone;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
+
 import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
 
 /**
@@ -36,7 +37,6 @@ public class SasayaOrochiAscendantTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Sasaya's Essence", 1);
         assertPermanentCount(playerA, "Upwelling", 1);
@@ -70,7 +70,6 @@ public class SasayaOrochiAscendantTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Sasaya's Essence", 1);
         assertPermanentCount(playerA, "Upwelling", 1);
@@ -110,7 +109,6 @@ public class SasayaOrochiAscendantTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Sasaya's Essence", 1);
         assertPermanentCount(playerA, "Upwelling", 1);

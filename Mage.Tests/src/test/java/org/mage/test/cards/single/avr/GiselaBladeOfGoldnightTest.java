@@ -68,7 +68,6 @@ public class GiselaBladeOfGoldnightTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // Player A should take double damage
         assertLife(playerA, 20 - 10);
@@ -86,7 +85,6 @@ public class GiselaBladeOfGoldnightTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // creature takes 2 damage and dies
         assertPermanentCount(playerA, "Grizzly Bears", 0);
@@ -103,7 +101,6 @@ public class GiselaBladeOfGoldnightTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // Player A should take the full 4 damage
         assertLife(playerA, 20 - 4);
@@ -119,7 +116,6 @@ public class GiselaBladeOfGoldnightTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // Player A should take the full 5 damage
         assertLife(playerA, 15);
@@ -136,7 +132,6 @@ public class GiselaBladeOfGoldnightTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // Player A should take half damage 2 (prevent 4/2 round up = 2 damage)
         assertLife(playerA, 20 - 2);
@@ -153,7 +148,6 @@ public class GiselaBladeOfGoldnightTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // Player A should take full damage 5 (wrong result: 2 damage)
         assertLife(playerA, 20 - 5);
@@ -171,7 +165,6 @@ public class GiselaBladeOfGoldnightTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // creature must be alife, half damage done
         assertPermanentCount(playerA, "Grizzly Bears", 1);
@@ -190,7 +183,6 @@ public class GiselaBladeOfGoldnightTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // creature must die, full damage
         assertPermanentCount(playerA, "Colossal Dreadmaw", 0);

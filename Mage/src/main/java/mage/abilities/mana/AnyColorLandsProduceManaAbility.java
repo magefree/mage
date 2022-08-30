@@ -57,7 +57,7 @@ public class AnyColorLandsProduceManaAbility extends ActivatedManaAbilityImpl {
     }
 
     public static Set<ManaType> getManaTypesFromPermanent(Permanent permanent, Game game) {
-        Set<ManaType> allTypes = new HashSet<>();
+        Set<ManaType> allTypes = new HashSet<>(6);
         if (permanent != null) {
             Abilities<ActivatedManaAbilityImpl> manaAbilities = permanent.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD);
             for (ActivatedManaAbilityImpl ability : manaAbilities) {
@@ -73,7 +73,7 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
     private final FilterPermanent filter;
     private final boolean onlyColors; // false if mana types can be produced (also Colorless mana), if true only colors can be produced (no Colorless mana).
 
-    private boolean inManaTypeCalculation = false;
+    private transient boolean inManaTypeCalculation = false;
 
     AnyColorLandsProduceManaEffect(TargetController targetController, boolean onlyColors, FilterPermanent filter) {
         super();
@@ -97,57 +97,36 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
 
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
-        List<Mana> netManas = new ArrayList<>();
-        if (game != null) {
-            netManas = ManaType.getManaListFromManaTypes(getManaTypes(game, source), onlyColors);
-        }
-        return netManas;
+        return game == null ? new ArrayList<>() : ManaType.getManaListFromManaTypes(getManaTypes(game, source), onlyColors);
     }
 
     @Override
     public Mana produceMana(Game game, Ability source) {
-        Mana mana = new Mana();
         if (game == null) {
-            return mana;
+            return null;
         }
-        Choice choice = ManaType.getChoiceOfManaTypes(getManaTypes(game, source), onlyColors);
-        if (!choice.getChoices().isEmpty()) {
+
+        Set<ManaType> types = getManaTypes(game, source);
+        if (types.isEmpty()) {
+            return null;
+        }
+
+        Choice choice = ManaType.getChoiceOfManaTypes(types, onlyColors);
+        if (choice.getChoices().size() == 1) {
+            choice.setChoice(choice.getChoices().iterator().next());
+        } else {
             Player player = game.getPlayer(source.getControllerId());
-            if (choice.getChoices().size() == 1) {
-                choice.setChoice(choice.getChoices().iterator().next());
-            } else {
-                if (player == null || !player.choose(outcome, choice, game)) {
-                    return null;
-                }
-            }
-            if (choice.getChoice() != null) {
-                switch (choice.getChoice()) {
-                    case "Black":
-                        mana.setBlack(1);
-                        break;
-                    case "Blue":
-                        mana.setBlue(1);
-                        break;
-                    case "Red":
-                        mana.setRed(1);
-                        break;
-                    case "Green":
-                        mana.setGreen(1);
-                        break;
-                    case "White":
-                        mana.setWhite(1);
-                        break;
-                    case "Colorless":
-                        mana.setColorless(1);
-                        break;
-                }
+            if (player == null || !player.choose(outcome, choice, game)) {
+                return null;
             }
         }
-        return mana;
+
+        ManaType chosenType = ManaType.findByName(choice.getChoice());
+        return chosenType == null ? null : new Mana(chosenType);
     }
 
     private Set<ManaType> getManaTypes(Game game, Ability source) {
-        Set types = new HashSet<>();
+        Set<ManaType> types = new HashSet<>(6);
         if (game == null || game.getPhase() == null) {
             return types;
         }
@@ -162,6 +141,11 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
             }
         }
         inManaTypeCalculation = false;
+
+        if (onlyColors) {
+            types.remove(ManaType.COLORLESS);
+        }
+
         return types;
     }
 

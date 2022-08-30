@@ -34,7 +34,7 @@ public final class KavuTitan extends CardImpl {
         this.addAbility(new KickerAbility("{2}{G}"));
         // If Kavu Titan was kicked, it enters the battlefield with three +1/+1 counters on it and with trample.
         Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)),
-                KickedCondition.instance,
+                KickedCondition.ONCE,
                 "If Kavu Titan was kicked, it enters the battlefield with three +1/+1 counters on it and with trample.", "");
         ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield));
         this.addAbility(ability);

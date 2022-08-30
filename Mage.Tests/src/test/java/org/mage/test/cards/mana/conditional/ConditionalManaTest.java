@@ -93,7 +93,7 @@ public class ConditionalManaTest extends CardTestPlayerBase {
     }
 
     /**
-     * I wasunable to use "Rosheen Meanderer" ability to pay for "Candelabra of
+     * I was unable to use "Rosheen Meanderer" ability to pay for "Candelabra of
      * Tawnos" ability even thought it has "X" on its cost
      */
     @Test
@@ -107,8 +107,9 @@ public class ConditionalManaTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Snapping Drake");
+        setStrictChooseMode(true);
 
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Snapping Drake", true);
         activateManaAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{T}: Add {C}{C}{C}{C}");
 
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{X}, {T}: Untap");
@@ -117,6 +118,7 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         addTarget(playerB, "Island");
         addTarget(playerB, "Island");
         addTarget(playerB, "Island");
+        waitStackResolved(2, PhaseStep.POSTCOMBAT_MAIN);
 
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Snapping Drake");
 
@@ -234,7 +236,6 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, "Empowered Autogenerator", CounterType.CHARGE, 1);
         assertLife(playerB, 20 - 3);
@@ -261,7 +262,6 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, "Empowered Autogenerator", CounterType.CHARGE, 2);
         assertLife(playerB, 20 - 3);
@@ -288,7 +288,6 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, "Empowered Autogenerator", CounterType.CHARGE, 2);
         assertLife(playerB, 20 - 3);
@@ -311,7 +310,6 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 3);
     }
@@ -332,7 +330,6 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
@@ -356,7 +353,6 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 3);
     }
@@ -380,8 +376,6 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Titans' Nest", 1);
         

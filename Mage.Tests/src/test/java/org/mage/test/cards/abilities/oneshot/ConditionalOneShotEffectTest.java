@@ -26,8 +26,7 @@ public class ConditionalOneShotEffectTest extends CardTestPlayerBase {
         
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
-        
+
         assertGraveyardCount(playerA, "Unlicensed Disintegration", 1);
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
 
@@ -61,8 +60,7 @@ public class ConditionalOneShotEffectTest extends CardTestPlayerBase {
         
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
-        
+
         assertGraveyardCount(playerA, "Unlicensed Disintegration", 1);
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
 

@@ -1861,3 +1861,7 @@
 |Generate|TOK:2X2|Vampire|||IxalanVampireToken|
 |Generate|TOK:2X2|Worm|||BlackGreenWormToken|
 |Generate|TOK:2X2|Zombie|||ZombieToken|
+
+# CC2
+|Generate|TOK:CC2|Snake|||OphiomancerSnakeToken|
+|Generate|TOK:CC2|Zombie|||ZombieToken|

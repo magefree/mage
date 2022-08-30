@@ -49,7 +49,7 @@ public final class ShatterskullCharger extends CardImpl {
 
         // If Shatterskull Charger was kicked, it enters the battlefield with a +1/+1 counter on it.
         this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), KickedCondition.instance,
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), KickedCondition.ONCE,
                 "If {this} was kicked, it enters the battlefield with a +1/+1 counter on it.", ""
         ));
 

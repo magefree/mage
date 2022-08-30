@@ -28,7 +28,7 @@ public final class BogDown extends CardImpl {
 
         // Target player discards two cards. If Bog Down was kicked, that player discards three cards instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DiscardTargetEffect(3),
-                new DiscardTargetEffect(2), KickedCondition.instance,
+                new DiscardTargetEffect(2), KickedCondition.ONCE,
                 "Target player discards two cards. If this spell was kicked, that player discards three cards instead."));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

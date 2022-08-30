@@ -65,7 +65,6 @@ public class ZadaHedronGrinderTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
@@ -97,7 +96,6 @@ public class ZadaHedronGrinderTest extends CardTestPlayerBase {
         //setStrictChooseMode(true); // no strict mode for AI
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);

@@ -6,6 +6,7 @@ import mage.constants.Zone;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
+
 import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
 
 /**
@@ -33,8 +34,6 @@ public class HarvestMageTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertAllCommandsUsed();
-        
         assertPermanentCount(playerA, "Harvest Mage", 1);
         
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
@@ -63,8 +62,6 @@ public class HarvestMageTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertAllCommandsUsed();
-        
         assertPermanentCount(playerA, "Harvest Mage", 1);
         
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);

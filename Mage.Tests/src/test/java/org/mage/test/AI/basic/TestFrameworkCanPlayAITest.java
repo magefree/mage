@@ -27,7 +27,6 @@ public class TestFrameworkCanPlayAITest extends CardTestPlayerBaseWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
         assertPermanentCount(playerB, "Balduvian Bears", 5 - 1);
@@ -46,7 +45,6 @@ public class TestFrameworkCanPlayAITest extends CardTestPlayerBaseWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Lightning Bolt", 3);
         assertPermanentCount(playerB, "Balduvian Bears", 5 - 3);
@@ -62,7 +60,6 @@ public class TestFrameworkCanPlayAITest extends CardTestPlayerBaseWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 2);
     }
@@ -79,7 +76,6 @@ public class TestFrameworkCanPlayAITest extends CardTestPlayerBaseWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, 1);
         assertGraveyardCount(playerB, 1);
@@ -102,7 +98,6 @@ public class TestFrameworkCanPlayAITest extends CardTestPlayerBaseWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         Assert.assertEquals(1, currentGame.getBattlefield().getAllActivePermanents(CardType.CREATURE, currentGame).size());
         Permanent permanent = currentGame.getBattlefield().getAllActivePermanents(CardType.CREATURE, currentGame).get(0);

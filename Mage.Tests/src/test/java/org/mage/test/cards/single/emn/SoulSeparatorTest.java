@@ -27,6 +27,8 @@ public class SoulSeparatorTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
         addCard(Zone.GRAVEYARD, playerA, "Sylvan Advocate"); // 2/3 vigilance
 
+        setStrictChooseMode(true);
+
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{5}");
         addTarget(playerA, "Sylvan Advocate");
 
@@ -60,6 +62,8 @@ public class SoulSeparatorTest extends CardTestPlayerBase {
         // Tree of Perdition {3}{B} Creature - Defender (0/13)
         // {tap}: Exchange target opponent's life total with Tree of Perdition's toughness.
         addCard(Zone.GRAVEYARD, playerA, "Tree of Perdition");
+
+        setStrictChooseMode(true);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{5}");
         addTarget(playerA, "Tree of Perdition");

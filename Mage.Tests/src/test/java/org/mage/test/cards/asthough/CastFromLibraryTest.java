@@ -31,15 +31,12 @@ public class CastFromLibraryTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 8);
 
         addCard(Zone.LIBRARY, playerA, "Silvercoat Lion", 2);
-        // You may look at the top card of your library. (You may do this at any time.)
-        // You may cast the top card of your library if it's a creature card.
-        // You may spend mana as though it were mana of any type to cast creature spells.
         addCard(Zone.HAND, playerA, "Vizier of the Menagerie", 1); // Creature 3/4 {3}{G}
 
         skipInitShuffling();
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Vizier of the Menagerie");
-        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Silvercoat Lion");
+        checkPlayableAbility("Can't cast at instant speed", 1, PhaseStep.BEGIN_COMBAT, playerA, "Cast Silvercoat Lion", false);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Silvercoat Lion");
 
         setStopAt(1, PhaseStep.END_TURN);

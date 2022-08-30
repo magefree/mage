@@ -27,8 +27,6 @@ public class MindbreakTrapTest extends CardTestPlayerBase {
      */
     @Test
     public void mindBreakTrap_Exile_All_Spells() {
-
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 4);
 
         addCard(Zone.HAND, playerA, mindBreakTrap);
@@ -37,18 +35,18 @@ public class MindbreakTrapTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, shock, playerA);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, shock, playerA);
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, grapeShot, playerA);
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, mindBreakTrap, "Grapeshot^Grapeshot^Grapeshot");
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, grapeShot, playerA);
 
-        setStopAt(2, PhaseStep.END_COMBAT);
+        waitStackResolved(2, PhaseStep.POSTCOMBAT_MAIN, 1); // Let the storm ability resolve to put the copies on the stack
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, mindBreakTrap, "Grapeshot^Grapeshot^Grapeshot");
+
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertGraveyardCount(playerB, shock, 2);
-        assertGraveyardCount(playerB, grapeShot, 0); // exiled by Mindbreak Trap
+        assertExileCount(playerB, grapeShot, 1); // exiled by Mindbreak Trap
         assertGraveyardCount(playerA, mindBreakTrap, 1);
         assertLife(playerA, 16); // 2x2 from two Shock  = 4 and 3 (Storm twice) from Grapeshot get exiled
     }
-
-
 }

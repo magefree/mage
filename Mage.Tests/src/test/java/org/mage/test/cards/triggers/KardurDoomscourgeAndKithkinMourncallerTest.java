@@ -37,7 +37,6 @@ public class KardurDoomscourgeAndKithkinMourncallerTest extends CardTestPlayerBa
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Elvish Archers", 1);
 
@@ -60,7 +59,6 @@ public class KardurDoomscourgeAndKithkinMourncallerTest extends CardTestPlayerBa
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Elvish Archers", 1);
 
@@ -90,7 +88,6 @@ public class KardurDoomscourgeAndKithkinMourncallerTest extends CardTestPlayerBa
         
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Elvish Archers", 1);
         assertGraveyardCount(playerA, "Pearled Unicorn", 1);

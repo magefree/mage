@@ -138,12 +138,14 @@ public class ElendaTheDuskRoseTest extends CardTestPlayerBase {
         // When Elenda dies, create X 1/1 white Vampire creature tokens with lifelink, where X is Elenda's power.
         addCard(Zone.HAND, playerA, "Elenda, the Dusk Rose", 1); // {2}{W}{B}   1/1
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Elenda, the Dusk Rose");
-
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Sweltering Suns");
-
+        setChoice(playerA, "Whenever a creature is put");
+        setChoice(playerA, "Whenever a creature is put");
+        setChoice(playerA, "When ");
         setChoice(playerA, true); // use Angelic Renewal on Elenda, the Dusk Rose
-        setChoice(playerA, false); // use Angelic Renewal on Silvercoat Lion
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();

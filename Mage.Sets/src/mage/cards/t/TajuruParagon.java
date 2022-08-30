@@ -47,7 +47,7 @@ public final class TajuruParagon extends CardImpl {
         // When Tajuru Paragon enters the battlefield, if it was kicked, reveal the top six cards of your library. You may put a card that shares a creature type with it from among them into your hand. Put the rest on the bottom of your library in a random order.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new TajuruParagonEffect()),
-                KickedCondition.instance, "When {this} enters the battlefield, " +
+                KickedCondition.ONCE, "When {this} enters the battlefield, " +
                 "if it was kicked, reveal the top six cards of your library. " +
                 "You may put a card that shares a creature type with it from among them into your hand. " +
                 "Put the rest on the bottom of your library in a random order."

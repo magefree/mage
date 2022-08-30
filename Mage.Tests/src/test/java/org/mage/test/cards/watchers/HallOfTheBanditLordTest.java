@@ -32,7 +32,6 @@ public class HallOfTheBanditLordTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         this.assertAbility(playerA, "Goblin Roughrider", HasteAbility.getInstance(), true);
     }

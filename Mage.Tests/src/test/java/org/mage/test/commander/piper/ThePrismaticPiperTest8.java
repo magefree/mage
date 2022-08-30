@@ -29,13 +29,12 @@ public class ThePrismaticPiperTest8 extends ThePrismaticPiperBaseTest {
         setChoice(playerA, true); // Companion
         addCard(Zone.BATTLEFIELD, playerA, "Island", 8);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, piper);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, piper, true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Companion");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertColor(playerA, piper, "G", true);
         assertHandCount(playerA, "Keruga, the Macrosage", 1);

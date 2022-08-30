@@ -46,7 +46,6 @@ public class SparkDoubleTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Abbey Griffin", 2);
 
@@ -72,7 +71,6 @@ public class SparkDoubleTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Ajani, the Greathearted", 2);
 
@@ -95,7 +93,6 @@ public class SparkDoubleTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Abbey Griffin", 2);
 
@@ -123,7 +120,6 @@ public class SparkDoubleTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Gideon, Ally of Zendikar", 2);
 
@@ -151,7 +147,6 @@ public class SparkDoubleTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Gideon Blackblade", 2);
 
@@ -202,7 +197,6 @@ public class SparkDoubleTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -239,7 +233,6 @@ public class SparkDoubleTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -281,7 +274,6 @@ public class SparkDoubleTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
 }

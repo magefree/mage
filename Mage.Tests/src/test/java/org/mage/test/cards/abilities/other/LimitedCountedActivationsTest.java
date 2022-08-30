@@ -103,7 +103,7 @@ public class LimitedCountedActivationsTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.UPKEEP, playerA, "{R}: ");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Terror", "Dragon Whelp");
+        castSpell(1, PhaseStep.UPKEEP, playerB, "Terror", "Dragon Whelp");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reanimate", "Dragon Whelp");
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Unnatural Speed", "Dragon Whelp");
 
@@ -149,9 +149,11 @@ public class LimitedCountedActivationsTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.UPKEEP, playerA, "{R}: ");
         activateAbility(1, PhaseStep.UPKEEP, playerA, "{R}: ");
         activateAbility(1, PhaseStep.UPKEEP, playerA, "{R}: ");
+        waitStackResolved(1, PhaseStep.UPKEEP);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Terror", "Dragon Whelp");
+        castSpell(1, PhaseStep.UPKEEP, playerB, "Terror", "Dragon Whelp");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reanimate", "Dragon Whelp");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Unnatural Speed", "Dragon Whelp");
 
         activateAbility(1, PhaseStep.DECLARE_ATTACKERS, playerA, "{R}: ");

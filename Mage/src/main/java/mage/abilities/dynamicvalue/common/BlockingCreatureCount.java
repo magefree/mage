@@ -1,4 +1,3 @@
-
 package mage.abilities.dynamicvalue.common;
 
 import mage.abilities.Ability;
@@ -7,30 +6,32 @@ import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 
+import java.util.UUID;
+
 /**
- * @author Markedagain
+ * @author awjackson
  */
-public enum BlockedCreatureCount implements DynamicValue {
-    ALL("each creature blocking it", false),
-    BEYOND_FIRST("each creature blocking it beyond the first", true);
+public enum BlockingCreatureCount implements DynamicValue {
+    SOURCE("creature blocking it"),
+    TARGET("creature blocking it"),
+    BEYOND_FIRST("creature blocking it beyond the first");
 
     private final String message;
-    private final boolean beyondTheFirst;
 
-    BlockedCreatureCount(String message, boolean beyondTheFirst) {
+    BlockingCreatureCount(String message) {
         this.message = message;
-        this.beyondTheFirst = beyondTheFirst;
     }
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        UUID attackerId = (this == TARGET ? effect.getTargetPointer().getFirst(game, sourceAbility) : sourceAbility.getSourceId());
         for (CombatGroup combatGroup : game.getCombat().getGroups()) {
-            if (!combatGroup.getAttackers().contains(sourceAbility.getSourceId())) {
+            if (!combatGroup.getAttackers().contains(attackerId)) {
                 continue;
             }
             int blockers = combatGroup.getBlockers().size();
-            if (beyondTheFirst) {
-                blockers = blockers > 0 ? blockers - 1 : 0;
+            if (this == BEYOND_FIRST) {
+                blockers = Math.max(blockers - 1, 0);
             }
             return blockers;
         }
@@ -38,7 +39,7 @@ public enum BlockedCreatureCount implements DynamicValue {
     }
 
     @Override
-    public BlockedCreatureCount copy() {
+    public BlockingCreatureCount copy() {
         return this;
     }
 
@@ -49,6 +50,6 @@ public enum BlockedCreatureCount implements DynamicValue {
 
     @Override
     public String toString() {
-        return "X";
+        return "1";
     }
 }

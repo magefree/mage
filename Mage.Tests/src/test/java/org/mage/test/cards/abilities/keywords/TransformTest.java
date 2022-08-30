@@ -1,5 +1,6 @@
 package org.mage.test.cards.abilities.keywords;
 
+import mage.cards.s.SpringOfEternalPeace;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -28,10 +29,11 @@ public class TransformTest extends CardTestPlayerBase {
         // {G}{G}, Sacrifice Rootrunner: Put target land on top of its owner's library.
         addCard(Zone.BATTLEFIELD, playerB, "Rootrunner"); // {2}{G}{G}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nissa, Vastwood Seer");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nissa, Vastwood Seer", true);
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest");
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "{G}{G}", "Swamp");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "+1: Reveal");
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -167,13 +169,13 @@ public class TransformTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 9);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Startled Awake", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}{U}{U}");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, 13);
         assertGraveyardCount(playerA, "Startled Awake", 0);
@@ -190,6 +192,7 @@ public class TransformTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Maskwood Nexus");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Startled Awake", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}{U}{U}");
 
@@ -198,7 +201,6 @@ public class TransformTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, 13);
         assertGraveyardCount(playerA, "Startled Awake", 0);
@@ -308,7 +310,6 @@ public class TransformTest extends CardTestPlayerBase {
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
@@ -399,8 +400,8 @@ public class TransformTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Huntmaster of the Fells");
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Huntmaster of the Fells", true);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion", true);
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
         setStopAt(4, PhaseStep.PRECOMBAT_MAIN);
         execute();
@@ -489,7 +490,6 @@ public class TransformTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Delver of Secrets", 1);
         assertPermanentCount(playerA, "Insectile Aberration", 0);
