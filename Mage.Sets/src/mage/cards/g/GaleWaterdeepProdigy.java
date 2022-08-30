@@ -25,23 +25,10 @@ import mage.watchers.common.CastFromHandWatcher;
 
 import java.util.UUID;
 
-import static mage.cards.g.GaleWaterdeepProdigy.INSTANT_FILTER;
-import static mage.cards.g.GaleWaterdeepProdigy.SORCERY_FILTER;
-
 /**
  * @author Rjayz
  */
 public final class GaleWaterdeepProdigy extends CardImpl {
-
-    static final FilterCard SORCERY_FILTER = new FilterCard();
-    static final FilterCard INSTANT_FILTER = new FilterCard();
-
-    static {
-        SORCERY_FILTER.add(CardType.SORCERY.getPredicate());
-        SORCERY_FILTER.setMessage("a sorcery card in your graveyard");
-        INSTANT_FILTER.add(CardType.INSTANT.getPredicate());
-        INSTANT_FILTER.setMessage("an instant card in your graveyard");
-    }
 
     public GaleWaterdeepProdigy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
@@ -55,9 +42,7 @@ public final class GaleWaterdeepProdigy extends CardImpl {
         // Whenever you cast an instant or sorcery spell from your hand,
         // you may cast up to one of the other type from your graveyard.
         // If a spell cast from your graveyard this way would be put into your graveyard, exile it instead.
-        this.addAbility(
-                new GaleWaterdeepProdigyTriggeredAbility(),
-                new CastFromHandWatcher());
+        this.addAbility(new GaleWaterdeepProdigyTriggeredAbility());
 
         // Choose a Background
         this.addAbility(ChooseABackgroundAbility.getInstance());
@@ -75,10 +60,19 @@ public final class GaleWaterdeepProdigy extends CardImpl {
 
 class GaleWaterdeepProdigyTriggeredAbility extends SpellCastControllerTriggeredAbility {
 
+    private static final FilterCard SORCERY_FILTER = new FilterCard("a sorcery card in your graveyard");
+    private static final FilterCard INSTANT_FILTER = new FilterCard("an instant card in your graveyard");
+
+    static {
+        SORCERY_FILTER.add(CardType.SORCERY.getPredicate());
+        INSTANT_FILTER.add(CardType.INSTANT.getPredicate());
+    }
+
     public GaleWaterdeepProdigyTriggeredAbility() {
         super(new GaleWaterdeepProdigyEffect(),
                 new FilterInstantOrSorcerySpell("an instant or sorcery spell from your hand"),
                 false);
+        addWatcher(new CastFromHandWatcher());
     }
 
     public GaleWaterdeepProdigyTriggeredAbility(GaleWaterdeepProdigyTriggeredAbility ability) {
