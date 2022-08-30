@@ -6,7 +6,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.ChooseABackgroundAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
@@ -14,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.FilterSpell;
 import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -27,10 +25,23 @@ import mage.watchers.common.CastFromHandWatcher;
 
 import java.util.UUID;
 
+import static mage.cards.g.GaleWaterdeepProdigy.INSTANT_FILTER;
+import static mage.cards.g.GaleWaterdeepProdigy.SORCERY_FILTER;
+
 /**
  * @author Rjayz
  */
 public final class GaleWaterdeepProdigy extends CardImpl {
+
+    static final FilterCard SORCERY_FILTER = new FilterCard();
+    static final FilterCard INSTANT_FILTER = new FilterCard();
+
+    static {
+        SORCERY_FILTER.add(CardType.SORCERY.getPredicate());
+        SORCERY_FILTER.setMessage("a sorcery card in your graveyard");
+        INSTANT_FILTER.add(CardType.INSTANT.getPredicate());
+        INSTANT_FILTER.setMessage("an instant card in your graveyard");
+    }
 
     public GaleWaterdeepProdigy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
@@ -45,9 +56,7 @@ public final class GaleWaterdeepProdigy extends CardImpl {
         // you may cast up to one of the other type from your graveyard.
         // If a spell cast from your graveyard this way would be put into your graveyard, exile it instead.
         this.addAbility(
-                new GaleWaterdeepProdigyTriggeredAbility(new GaleWaterdeepProdigyEffect(),
-                        new FilterInstantOrSorcerySpell("an instant or sorcery spell from your hand"),
-                        false),
+                new GaleWaterdeepProdigyTriggeredAbility(),
                 new CastFromHandWatcher());
 
         // Choose a Background
@@ -66,11 +75,13 @@ public final class GaleWaterdeepProdigy extends CardImpl {
 
 class GaleWaterdeepProdigyTriggeredAbility extends SpellCastControllerTriggeredAbility {
 
-    public GaleWaterdeepProdigyTriggeredAbility(Effect effect, FilterSpell filter, boolean optional) {
-        super(effect, filter, optional);
+    public GaleWaterdeepProdigyTriggeredAbility() {
+        super(new GaleWaterdeepProdigyEffect(),
+                new FilterInstantOrSorcerySpell("an instant or sorcery spell from your hand"),
+                false);
     }
 
-    public GaleWaterdeepProdigyTriggeredAbility(mage.cards.g.GaleWaterdeepProdigyTriggeredAbility ability) {
+    public GaleWaterdeepProdigyTriggeredAbility(GaleWaterdeepProdigyTriggeredAbility ability) {
         super(ability);
     }
 
@@ -90,13 +101,11 @@ class GaleWaterdeepProdigyTriggeredAbility extends SpellCastControllerTriggeredA
             return false;
         }
 
-        FilterCard filterCard = new FilterCard();
-        if (spell.getCardType(game).contains(CardType.SORCERY)) {
-            filterCard.setMessage("an instant card");
-            filterCard.add(CardType.INSTANT.getPredicate());
+        FilterCard filterCard;
+        if (spell.isSorcery()) {
+            filterCard = INSTANT_FILTER;
         } else {
-            filterCard.setMessage("a sorcery card");
-            filterCard.add(CardType.SORCERY.getPredicate());
+            filterCard = SORCERY_FILTER;
         }
         this.getTargets().clear();
         this.getTargets().add(new TargetCardInYourGraveyard(filterCard));
@@ -104,8 +113,8 @@ class GaleWaterdeepProdigyTriggeredAbility extends SpellCastControllerTriggeredA
     }
 
     @Override
-    public mage.cards.g.GaleWaterdeepProdigyTriggeredAbility copy() {
-        return new mage.cards.g.GaleWaterdeepProdigyTriggeredAbility(this);
+    public GaleWaterdeepProdigyTriggeredAbility copy() {
+        return new GaleWaterdeepProdigyTriggeredAbility(this);
     }
 }
 
@@ -117,13 +126,13 @@ class GaleWaterdeepProdigyEffect extends OneShotEffect {
                 "If a spell cast from your graveyard this way would be put into your graveyard, exile it instead.";
     }
 
-    private GaleWaterdeepProdigyEffect(final mage.cards.g.GaleWaterdeepProdigyEffect effect) {
+    private GaleWaterdeepProdigyEffect(final GaleWaterdeepProdigyEffect effect) {
         super(effect);
     }
 
     @Override
-    public mage.cards.g.GaleWaterdeepProdigyEffect copy() {
-        return new mage.cards.g.GaleWaterdeepProdigyEffect(this);
+    public GaleWaterdeepProdigyEffect copy() {
+        return new GaleWaterdeepProdigyEffect(this);
     }
 
     @Override
@@ -139,7 +148,7 @@ class GaleWaterdeepProdigyEffect extends OneShotEffect {
             controller.cast(controller.chooseAbilityForCast(card, game, false),
                     game, false, new ApprovingObject(source, game));
             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-            ContinuousEffect effect = new mage.cards.g.GaleWaterdeepProdigyReplacementEffect(card.getId());
+            ContinuousEffect effect = new GaleWaterdeepProdigyReplacementEffect(card.getId());
             effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
             game.addEffect(effect, source);
         }
@@ -157,14 +166,14 @@ class GaleWaterdeepProdigyReplacementEffect extends ReplacementEffectImpl {
         staticText = "If a spell cast from your graveyard this way would be put into your graveyard, exile it instead.";
     }
 
-    private GaleWaterdeepProdigyReplacementEffect(final mage.cards.g.GaleWaterdeepProdigyReplacementEffect effect) {
+    private GaleWaterdeepProdigyReplacementEffect(final GaleWaterdeepProdigyReplacementEffect effect) {
         super(effect);
         this.cardId = effect.cardId;
     }
 
     @Override
-    public mage.cards.g.GaleWaterdeepProdigyReplacementEffect copy() {
-        return new mage.cards.g.GaleWaterdeepProdigyReplacementEffect(this);
+    public GaleWaterdeepProdigyReplacementEffect copy() {
+        return new GaleWaterdeepProdigyReplacementEffect(this);
     }
 
     @Override
