@@ -247,6 +247,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Volshe Tideturner", 77, Rarity.COMMON, mage.cards.v.VolsheTideturner.class));
         cards.add(new SetCardInfo("Walking Bulwark", 241, Rarity.UNCOMMON, mage.cards.w.WalkingBulwark.class));
         cards.add(new SetCardInfo("Warhost's Frenzy", 151, Rarity.UNCOMMON, mage.cards.w.WarhostsFrenzy.class));
+        cards.add(new SetCardInfo("Weatherlight Compleated", 242, Rarity.MYTHIC, mage.cards.w.WeatherlightCompleated.class));
         cards.add(new SetCardInfo("Wingmantle Chaplain", 39, Rarity.UNCOMMON, mage.cards.w.WingmantleChaplain.class));
         cards.add(new SetCardInfo("Wooded Ridgeline", 260, Rarity.COMMON, mage.cards.w.WoodedRidgeline.class));
         cards.add(new SetCardInfo("Writhing Necromass", 115, Rarity.COMMON, mage.cards.w.WrithingNecromass.class));
