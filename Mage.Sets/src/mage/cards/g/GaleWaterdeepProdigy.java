@@ -115,7 +115,7 @@ class GaleWaterdeepProdigyTriggeredAbility extends SpellCastControllerTriggeredA
 class GaleWaterdeepProdigyEffect extends OneShotEffect {
 
     GaleWaterdeepProdigyEffect() {
-        super(Outcome.Neutral);
+        super(Outcome.PutCardInPlay);
         this.staticText = "you may cast up to one of the other type from your graveyard. " +
                 "If a spell cast from your graveyard this way would be put into your graveyard, exile it instead.";
     }
