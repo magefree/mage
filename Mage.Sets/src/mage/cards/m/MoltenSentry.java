@@ -76,13 +76,11 @@ class MoltenSentryEffect extends OneShotEffect {
             power = 5;
             toughness = 2;
             gainedAbility = HasteAbility.getInstance();
-            game.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield), source);
         } else {
             game.informPlayers("Tails: " + permanent.getLogName() + " enters the battlefield as a 2/5 creature with defender");
             power = 2;
             toughness = 5;
             gainedAbility = DefenderAbility.getInstance();
-            game.addEffect(new GainAbilitySourceEffect(DefenderAbility.getInstance(), Duration.WhileOnBattlefield), source);
         }
         game.addEffect(new SetBasePowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield, true), source);
         game.addEffect(new GainAbilitySourceEffect(gainedAbility, Duration.WhileOnBattlefield), source);
