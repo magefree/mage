@@ -41,6 +41,10 @@ public interface Token extends MageObject {
 
     int getTokenType();
 
+    void setPower(int power);
+
+    void setToughness(int toughness);
+
     void setTokenType(int tokenType);
 
     String getOriginalCardNumber();

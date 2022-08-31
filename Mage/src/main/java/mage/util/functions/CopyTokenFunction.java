@@ -90,8 +90,8 @@ public class CopyTokenFunction implements Function<Token, Card> {
             target.addAbility(ability);
         }
 
-        target.getPower().setModifiedBaseValue(sourceObj.getPower().getBaseValue());
-        target.getToughness().setModifiedBaseValue(sourceObj.getToughness().getBaseValue());
+        target.setPower(sourceObj.getPower().getBaseValue());
+        target.setToughness(sourceObj.getToughness().getBaseValue());
         target.setStartingLoyalty(sourceObj.getStartingLoyalty());
 
         return target;

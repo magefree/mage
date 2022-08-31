@@ -1,5 +1,6 @@
 package mage.game.permanent.token;
 
+import mage.MageInt;
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.abilities.Ability;
@@ -371,6 +372,16 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
             }
         }
         game.getState().applyEffects(game); // Needed to do it here without LKIReset i.e. do get SwordOfTheMeekTest running correctly.
+    }
+
+    @Override
+    public void setPower(int power) {
+        this.power = new MageInt(power);
+    }
+
+    @Override
+    public void setToughness(int toughness) {
+        this.toughness = new MageInt(toughness);
     }
 
     @Override
