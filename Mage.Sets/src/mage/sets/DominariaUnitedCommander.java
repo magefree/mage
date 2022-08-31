@@ -67,6 +67,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Explosive Vegetation", 132, Rarity.UNCOMMON, mage.cards.e.ExplosiveVegetation.class));
         cards.add(new SetCardInfo("Faeburrow Elder", 149, Rarity.RARE, mage.cards.f.FaeburrowElder.class));
         cards.add(new SetCardInfo("Faithless Looting", 122, Rarity.COMMON, mage.cards.f.FaithlessLooting.class));
+        cards.add(new SetCardInfo("Fallaji Wayfarer", 11, Rarity.RARE, mage.cards.f.FallajiWayfarer.class));
         cards.add(new SetCardInfo("Farseek", 133, Rarity.COMMON, mage.cards.f.Farseek.class));
         cards.add(new SetCardInfo("Fellwar Stone", 182, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
         cards.add(new SetCardInfo("Flood Plain", 210, Rarity.UNCOMMON, mage.cards.f.FloodPlain.class));
