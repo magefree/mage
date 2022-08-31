@@ -36,16 +36,13 @@ public class MageInt implements Serializable, Copyable<MageInt> {
     protected String cardValue;
 
     public MageInt(int value) {
-        this.baseValue = value;
-        this.modifiedBaseValue = baseValue;
-        this.boostedValue = baseValue;
-        this.cardValue = Integer.toString(value);
+        this(value, Integer.toString(value));
     }
 
     public MageInt(int baseValue, String cardValue) {
         this.baseValue = baseValue;
-        this.modifiedBaseValue = baseValue;
-        this.boostedValue = baseValue;
+        this.modifiedBaseValue = this.baseValue;
+        this.boostedValue = this.baseValue;
         this.cardValue = cardValue;
     }
 
