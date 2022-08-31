@@ -59,6 +59,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Drana, Liberator of Malakir", 111, Rarity.MYTHIC, mage.cards.d.DranaLiberatorOfMalakir.class));
         cards.add(new SetCardInfo("Duneblast", 148, Rarity.RARE, mage.cards.d.Duneblast.class));
         cards.add(new SetCardInfo("Echoing Truth", 109, Rarity.COMMON, mage.cards.e.EchoingTruth.class));
+        cards.add(new SetCardInfo("Emperor Mihail II", 23, Rarity.RARE, mage.cards.e.EmperorMihailII.class));
         cards.add(new SetCardInfo("Etali, Primal Storm", 121, Rarity.RARE, mage.cards.e.EtaliPrimalStorm.class));
         cards.add(new SetCardInfo("Evolving Wilds", 208, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Exotic Orchard", 209, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
