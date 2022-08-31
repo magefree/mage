@@ -112,8 +112,8 @@ class MarathWillOfTheWildCreateTokenEffect extends OneShotEffect {
         if (player != null) {
             int amount = ManacostVariableValue.REGULAR.calculate(game, source, this);
             Token token = new MarathWillOfTheWildElementalToken();
-            token.getPower().setModifiedBaseValue(amount);
-            token.getToughness().setModifiedBaseValue(amount);
+            token.setPower(amount);
+            token.setToughness(amount);
             token.putOntoBattlefield(1, game, source, source.getControllerId());
             return true;
         }

@@ -224,11 +224,11 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         }
         if (tokenPower != Integer.MIN_VALUE) {
             token.removePTCDA();
-            token.getPower().setModifiedBaseValue(tokenPower);
+            token.setPower(tokenPower);
         }
         if (tokenToughness != Integer.MIN_VALUE) {
             token.removePTCDA();
-            token.getToughness().setModifiedBaseValue(tokenToughness);
+            token.setToughness(tokenToughness);
         }
         if (onlySubType != null) {
             token.removeAllCreatureTypes();
