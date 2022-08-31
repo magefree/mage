@@ -33,6 +33,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Atla Palani, Nest Tender", 142, Rarity.RARE, mage.cards.a.AtlaPalaniNestTender.class));
         cards.add(new SetCardInfo("Bad River", 197, Rarity.UNCOMMON, mage.cards.b.BadRiver.class));
         cards.add(new SetCardInfo("Baleful Strix", 143, Rarity.RARE, mage.cards.b.BalefulStrix.class));
+        cards.add(new SetCardInfo("Baru, Wurmspeaker", 26, Rarity.RARE, mage.cards.b.BaruWurmspeaker.class));
         cards.add(new SetCardInfo("Battlefield Forge", 198, Rarity.RARE, mage.cards.b.BattlefieldForge.class));
         cards.add(new SetCardInfo("Beast Within", 129, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
         cards.add(new SetCardInfo("Bedevil", 144, Rarity.RARE, mage.cards.b.Bedevil.class));
