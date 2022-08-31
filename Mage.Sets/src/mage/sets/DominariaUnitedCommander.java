@@ -133,6 +133,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Reliquary Tower", 227, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("Rienne, Angel of Rebirth", 166, Rarity.MYTHIC, mage.cards.r.RienneAngelOfRebirth.class));
         cards.add(new SetCardInfo("Rocky Tar Pit", 228, Rarity.UNCOMMON, mage.cards.r.RockyTarPit.class));
+        cards.add(new SetCardInfo("Rosnakht, Heir of Rohgahh", 25, Rarity.RARE, mage.cards.r.RosnakhtHeirOfRohgahh.class));
         cards.add(new SetCardInfo("Sandsteppe Citadel", 229, Rarity.UNCOMMON, mage.cards.s.SandsteppeCitadel.class));
         cards.add(new SetCardInfo("Savage Lands", 230, Rarity.UNCOMMON, mage.cards.s.SavageLands.class));
         cards.add(new SetCardInfo("Search for Tomorrow", 137, Rarity.COMMON, mage.cards.s.SearchForTomorrow.class));
