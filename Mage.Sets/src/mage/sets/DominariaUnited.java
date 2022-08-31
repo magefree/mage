@@ -143,6 +143,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Love Song of Night and Day", 25, Rarity.UNCOMMON, mage.cards.l.LoveSongOfNightAndDay.class));
         cards.add(new SetCardInfo("Magnigoth Sentry", 172, Rarity.COMMON, mage.cards.m.MagnigothSentry.class));
         cards.add(new SetCardInfo("Meria's Outrider", 138, Rarity.COMMON, mage.cards.m.MeriasOutrider.class));
+        cards.add(new SetCardInfo("Meria, Scholar of Antiquity", 206, Rarity.RARE, mage.cards.m.MeriaScholarOfAntiquity.class));
         cards.add(new SetCardInfo("Mesa Cavalier", 26, Rarity.COMMON, mage.cards.m.MesaCavalier.class));
         cards.add(new SetCardInfo("Meteorite", 235, Rarity.COMMON, mage.cards.m.Meteorite.class));
         cards.add(new SetCardInfo("Micromancer", 57, Rarity.UNCOMMON, mage.cards.m.Micromancer.class));
