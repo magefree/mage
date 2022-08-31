@@ -140,6 +140,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Strike", 137, Rarity.COMMON, mage.cards.l.LightningStrike.class));
         cards.add(new SetCardInfo("Liliana of the Veil", 97, Rarity.MYTHIC, mage.cards.l.LilianaOfTheVeil.class));
         cards.add(new SetCardInfo("Linebreaker Baloth", 168, Rarity.UNCOMMON, mage.cards.l.LinebreakerBaloth.class));
+        cards.add(new SetCardInfo("Llanowar Greenwidow", 169, Rarity.RARE, mage.cards.l.LlanowarGreenwidow.class));
         cards.add(new SetCardInfo("Llanowar Loamspeaker", 170, Rarity.RARE, mage.cards.l.LlanowarLoamspeaker.class));
         cards.add(new SetCardInfo("Llanowar Stalker", 171, Rarity.COMMON, mage.cards.l.LlanowarStalker.class));
         cards.add(new SetCardInfo("Love Song of Night and Day", 25, Rarity.UNCOMMON, mage.cards.l.LoveSongOfNightAndDay.class));
