@@ -56,7 +56,7 @@ public final class TatyovaStewardOfTides extends CardImpl {
                 new EntersBattlefieldControlledTriggeredAbility(new BecomesCreatureTargetEffect(
                         new CreatureToken(
                                 3, 3, "3/3 Elemental creature with haste", SubType.ELEMENTAL
-                        ).withAbility(HasteAbility.getInstance()), false, true, Duration.EndOfTurn
+                        ).withAbility(HasteAbility.getInstance()), false, true, Duration.Custom
                 ), StaticFilters.FILTER_LAND_A), condition, "Whenever a land enters the battlefield " +
                 "under your control, if you control seven or more lands, up to one target land you control " +
                 "becomes a 3/3 Elemental creature with haste. It's still a land."
