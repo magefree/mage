@@ -13,45 +13,48 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class SetPowerToughnessEnchantedEffect extends ContinuousEffectImpl {
+public class SetBasePowerToughnessEnchantedEffect extends ContinuousEffectImpl {
 
     private final int power;
     private final int toughness;
 
-    public SetPowerToughnessEnchantedEffect() {
+    public SetBasePowerToughnessEnchantedEffect() {
         this(0, 2);
     }
 
-    public SetPowerToughnessEnchantedEffect(int power, int toughness) {
+    public SetBasePowerToughnessEnchantedEffect(int power, int toughness) {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
         staticText = "Enchanted creature has base power and toughness " + power + "/" + toughness;
         this.power = power;
         this.toughness = toughness;
     }
 
-    public SetPowerToughnessEnchantedEffect(final SetPowerToughnessEnchantedEffect effect) {
+    public SetBasePowerToughnessEnchantedEffect(final SetBasePowerToughnessEnchantedEffect effect) {
         super(effect);
         this.power = effect.power;
         this.toughness = effect.toughness;
     }
 
     @Override
-    public SetPowerToughnessEnchantedEffect copy() {
-        return new SetPowerToughnessEnchantedEffect(this);
+    public SetBasePowerToughnessEnchantedEffect copy() {
+        return new SetBasePowerToughnessEnchantedEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
-            Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
-            if (enchanted != null) {
-                enchanted.getPower().setValue(power);
-                enchanted.getToughness().setValue(toughness);
-            }
-            return true;
+        if (enchantment == null || enchantment.getAttachedTo() == null) {
+            return false;
         }
-        return false;
+
+        Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
+        if (enchanted == null) {
+            return false;
+        }
+
+        enchanted.getPower().setModifiedBaseValue(power);
+        enchanted.getToughness().setModifiedBaseValue(toughness);
+        return true;
     }
 
 }

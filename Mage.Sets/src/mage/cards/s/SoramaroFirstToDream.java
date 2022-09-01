@@ -11,7 +11,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -40,7 +40,7 @@ public final class SoramaroFirstToDream extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Soramaro, First to Dream's power and toughness are each equal to the number of cards in your hand.
          DynamicValue xValue= CardsInControllerHandCount.instance;
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(xValue, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue, Duration.EndOfGame)));
 
         // {4}, Return a land you control to its owner's hand: Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,

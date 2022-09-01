@@ -587,8 +587,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
         if (this.transformed) {
             Card orgCard = this.getMainCard();
-            this.getPower().modifyBaseValue(orgCard.getPower().getValue());
-            this.getToughness().modifyBaseValue(orgCard.getToughness().getValue());
+            this.getPower().setModifiedBaseValue(orgCard.getPower().getValue());
+            this.getToughness().setModifiedBaseValue(orgCard.getToughness().getValue());
         }
         game.informPlayers(this.getLogName() + " transforms into " + this.getOtherFace().getLogName()
                 + CardUtil.getSourceLogName(game, source, this.getId()));
@@ -1298,12 +1298,12 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public void addPower(int power) {
-        this.power.boostValue(power);
+        this.power.increaseBoostedValue(power);
     }
 
     @Override
     public void addToughness(int toughness) {
-        this.toughness.boostValue(toughness);
+        this.toughness.increaseBoostedValue(toughness);
     }
 
     /**

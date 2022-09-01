@@ -75,19 +75,21 @@ class AnimateArtifactContinuousEffect extends ContinuousEffectImpl {
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         // Not sure, if this is layerwise handled absolutely correctly
         Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null) {
-            Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
-            if (permanent != null && !permanent.isCreature(game)) {
-                if (sublayer == SubLayer.NA) {
-                    permanent.addCardType(game, CardType.CREATURE);
-                    permanent.getPower().setValue(permanent.getManaValue());
-                    permanent.getToughness().setValue(permanent.getManaValue());
-                }
-            }
-            return true;
+        if (enchantment == null) {
+            return false;
+        }
+        Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
+        if (permanent == null || permanent.isCreature(game)) {
+            return false;
+        }
+        if (sublayer != SubLayer.NA) {
+            return false;
         }
 
-        return false;
+        permanent.addCardType(game, CardType.CREATURE);
+        permanent.getPower().setModifiedBaseValue(permanent.getManaValue());
+        permanent.getToughness().setModifiedBaseValue(permanent.getManaValue());
+        return true;
     }
 
     @Override

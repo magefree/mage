@@ -3,7 +3,7 @@ package mage.cards.r;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.AddCardSubtypeAllEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessAllEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -26,7 +26,7 @@ public final class RaisedByGiants extends CardImpl {
         this.subtype.add(SubType.BACKGROUND);
 
         // Commander creatures you own have base power and toughness 10/10 and are Giants in addition to their other types.
-        Ability ability = new SimpleStaticAbility(new SetPowerToughnessAllEffect(
+        Ability ability = new SimpleStaticAbility(new SetBasePowerToughnessAllEffect(
                 10, 10, Duration.WhileOnBattlefield,
                 StaticFilters.FILTER_CREATURES_OWNED_COMMANDER, true
         ));

@@ -8,7 +8,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
 import mage.abilities.dynamicvalue.common.SourcePermanentToughnessValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessAllEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -50,7 +50,7 @@ public final class TanazirQuandrix extends CardImpl {
         this.addAbility(ability);
 
         // Whenever Tanazir Quandrix attacks, you may have the base power and toughness of other creatures you control become equal to Tanazir Quandrix's power and toughness until end of turn.
-        this.addAbility(new AttacksTriggeredAbility(new SetPowerToughnessAllEffect(
+        this.addAbility(new AttacksTriggeredAbility(new SetBasePowerToughnessAllEffect(
                 xValue, SourcePermanentToughnessValue.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_CONTROLLED_CREATURE, true
         ).setText("have the base power and toughness of other creatures you control " +

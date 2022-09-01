@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,7 +39,7 @@ public final class QueenAllenalOfRuadach extends CardImpl {
         // Queen Allenal of Ruadach's power and toughness are each equal to the number of creatures you control.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
-                new SetPowerToughnessSourceEffect(count, Duration.EndOfGame)
+                new SetBasePowerToughnessSourceEffect(count, Duration.EndOfGame)
         ));
 
         // If one or more creature tokens would be created under your control, those tokens plus a 1/1 white Soldier creature token are created instead.

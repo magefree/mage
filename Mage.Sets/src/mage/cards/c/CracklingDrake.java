@@ -5,7 +5,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.InstantSorceryExileGraveyardCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.FlyingAbility;
@@ -40,7 +40,7 @@ public final class CracklingDrake extends CardImpl {
         // Crackling Drake's power is equal to the total number of instant and sorcery cards you own in exile and in your graveyard.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
-                new SetPowerSourceEffect(
+                new SetBasePowerSourceEffect(
                         InstantSorceryExileGraveyardCount.instance, Duration.EndOfGame
                 ).setText("{this}'s power is equal to the total number "
                         + "of instant and sorcery cards you own "

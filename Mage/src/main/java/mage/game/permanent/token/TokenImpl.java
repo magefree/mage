@@ -1,5 +1,6 @@
 package mage.game.permanent.token;
 
+import mage.MageInt;
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.abilities.Ability;
@@ -63,12 +64,6 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     public TokenImpl(String name, String description) {
         this.name = name;
         this.description = description;
-    }
-
-    public TokenImpl(String name, String description, int power, int toughness) {
-        this(name, description);
-        this.power.modifyBaseValue(power);
-        this.toughness.modifyBaseValue(toughness);
     }
 
     public TokenImpl(final TokenImpl token) {
@@ -381,12 +376,12 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
 
     @Override
     public void setPower(int power) {
-        this.power.setValue(power);
+        this.power = new MageInt(power);
     }
 
     @Override
     public void setToughness(int toughness) {
-        this.toughness.setValue(toughness);
+        this.toughness = new MageInt(toughness);
     }
 
     @Override

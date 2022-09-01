@@ -92,8 +92,8 @@ class WitnessProtectionEffect extends ContinuousEffectImpl {
                 return true;
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
-                    permanent.getPower().setValue(1);
-                    permanent.getToughness().setValue(1);
+                    permanent.getPower().setModifiedBaseValue(1);
+                    permanent.getToughness().setModifiedBaseValue(1);
                 }
         }
         return true;

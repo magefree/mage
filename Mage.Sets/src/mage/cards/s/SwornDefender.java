@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -78,7 +78,7 @@ class SwornDefenderEffect extends OneShotEffect {
         if (controller != null && targetPermanent != null) {
             int newPower = CardUtil.overflowDec(targetPermanent.getToughness().getValue(), 1);
             int newToughness = CardUtil.overflowInc(targetPermanent.getPower().getValue(), 1);
-            game.addEffect(new SetPowerToughnessSourceEffect(newPower, newToughness, Duration.EndOfTurn, SubLayer.SetPT_7b), source);
+            game.addEffect(new SetBasePowerToughnessSourceEffect(newPower, newToughness, Duration.EndOfTurn, SubLayer.SetPT_7b), source);
             return true;
         }
         return false;

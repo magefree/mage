@@ -89,8 +89,8 @@ class LiegeOfTheTangleEffect extends ContinuousEffectImpl {
                     break;
                 case PTChangingEffects_7:
                     if (sublayer == SubLayer.SetPT_7b) {
-                        perm.getPower().setValue(8);
-                        perm.getToughness().setValue(8);
+                        perm.getPower().setModifiedBaseValue(8);
+                        perm.getToughness().setModifiedBaseValue(8);
                     }
                     break;
             }

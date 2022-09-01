@@ -7,7 +7,7 @@ import mage.abilities.common.PutIntoGraveFromAnywhereSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.ControllerLifeCount;
 import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -29,7 +29,7 @@ public final class SerraAvatar extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Serra Avatar's power and toughness are each equal to your life total.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(ControllerLifeCount.instance, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(ControllerLifeCount.instance, Duration.EndOfGame)));
         
         // When Serra Avatar is put into a graveyard from anywhere, shuffle it into its owner's library.
         this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new ShuffleIntoLibrarySourceEffect()));
