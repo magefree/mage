@@ -14,6 +14,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.predicate.mageobject.PermanentPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -27,6 +28,7 @@ public final class DefilerOfFlesh extends CardImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
+        filter.add(PermanentPredicate.instance);
     }
 
     public DefilerOfFlesh(UUID ownerId, CardSetInfo setInfo) {

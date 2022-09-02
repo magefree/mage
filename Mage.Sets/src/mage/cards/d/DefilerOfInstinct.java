@@ -13,6 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.predicate.mageobject.PermanentPredicate;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
@@ -26,6 +27,7 @@ public final class DefilerOfInstinct extends CardImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));
+        filter.add(PermanentPredicate.instance);
     }
 
     public DefilerOfInstinct(UUID ownerId, CardSetInfo setInfo) {

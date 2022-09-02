@@ -12,6 +12,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.predicate.mageobject.PermanentPredicate;
 
 import java.util.UUID;
 
@@ -24,6 +25,7 @@ public final class DefilerOfDreams extends CardImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
+        filter.add(PermanentPredicate.instance);
     }
 
     public DefilerOfDreams(UUID ownerId, CardSetInfo setInfo) {

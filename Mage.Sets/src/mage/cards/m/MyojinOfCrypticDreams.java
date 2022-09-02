@@ -16,9 +16,7 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicate;
-import mage.game.Game;
-import mage.game.stack.StackObject;
+import mage.filter.predicate.mageobject.PermanentPredicate;
 import mage.target.TargetSpell;
 import mage.watchers.common.CastFromHandWatcher;
 
@@ -30,9 +28,10 @@ import java.util.UUID;
 public class MyojinOfCrypticDreams extends CardImpl {
 
     private static final FilterSpell permanentSpellFilter = new FilterSpell("permanent spell you control");
+
     static {
         permanentSpellFilter.add(TargetController.YOU.getControllerPredicate());
-        permanentSpellFilter.add(MyojinOfCrypticDreamsPredicate.instance);
+        permanentSpellFilter.add(PermanentPredicate.instance);
     }
 
     public MyojinOfCrypticDreams(UUID ownderId, CardSetInfo setInfo) {
@@ -63,17 +62,12 @@ public class MyojinOfCrypticDreams extends CardImpl {
         this.addAbility(ability);
     }
 
-    private MyojinOfCrypticDreams(final MyojinOfCrypticDreams card) { super(card); }
+    private MyojinOfCrypticDreams(final MyojinOfCrypticDreams card) {
+        super(card);
+    }
 
     @Override
-    public MyojinOfCrypticDreams copy() { return new MyojinOfCrypticDreams(this); }
-}
-
-enum MyojinOfCrypticDreamsPredicate implements Predicate<StackObject> {
-    instance;
-
-    @Override
-    public boolean apply(StackObject input, Game game) {
-        return input.isPermanent(game);
+    public MyojinOfCrypticDreams copy() {
+        return new MyojinOfCrypticDreams(this);
     }
 }

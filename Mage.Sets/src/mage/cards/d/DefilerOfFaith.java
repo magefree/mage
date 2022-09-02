@@ -12,6 +12,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.predicate.mageobject.PermanentPredicate;
 import mage.game.permanent.token.SoldierToken;
 
 import java.util.UUID;
@@ -25,6 +26,7 @@ public final class DefilerOfFaith extends CardImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
+        filter.add(PermanentPredicate.instance);
     }
 
     public DefilerOfFaith(UUID ownerId, CardSetInfo setInfo) {

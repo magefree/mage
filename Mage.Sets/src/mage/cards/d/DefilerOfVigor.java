@@ -14,6 +14,7 @@ import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.predicate.mageobject.PermanentPredicate;
 
 import java.util.UUID;
 
@@ -26,6 +27,7 @@ public final class DefilerOfVigor extends CardImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
+        filter.add(PermanentPredicate.instance);
     }
 
     public DefilerOfVigor(UUID ownerId, CardSetInfo setInfo) {
