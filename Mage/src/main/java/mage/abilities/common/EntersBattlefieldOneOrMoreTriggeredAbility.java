@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.MageItem;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.TargetController;
@@ -8,7 +9,11 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeGroupEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.Objects;
+import java.util.stream.Stream;
 
 /**
  * "Whenever one or more {filter} enter the battlefield under {target controller} control,
@@ -48,12 +53,24 @@ public class EntersBattlefieldOneOrMoreTriggeredAbility extends TriggeredAbility
 
         switch (this.targetController) {
             case YOU:
-                return controller.getId().equals(zEvent.getPlayerId());
+                if (!controller.getId().equals(zEvent.getPlayerId())) {
+                    return false;
+                }
+                break;
             case OPPONENT:
-                return controller.hasOpponent(zEvent.getPlayerId(), game);
+                if (!controller.hasOpponent(zEvent.getPlayerId(), game)) {
+                    return false;
+                }
+                break;
         }
 
-        return false;
+        return Stream.concat(
+                zEvent.getTokens().stream(),
+                zEvent.getCards().stream()
+                        .map(MageItem::getId)
+                        .map(game::getPermanent)
+                        .filter(Objects::nonNull)
+        ).anyMatch(permanent -> filterPermanent.match(permanent, this.controllerId, this, game));
     }
 
     @Override

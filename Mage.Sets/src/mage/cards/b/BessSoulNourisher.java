@@ -11,6 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.*;
 
@@ -49,7 +50,7 @@ public class BessSoulNourisher extends CardImpl {
         // +X/+X until end of turn, where X is the number of +1/+1 counters on Bess.
         DynamicValue xValue = new CountersSourceCount(CounterType.P1P1);
         this.addAbility(new AttacksTriggeredAbility(
-                new BoostControlledEffect(xValue, xValue, Duration.EndOfTurn),
+                new BoostControlledEffect(xValue, xValue, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, true),
                 false,
                 "whenever Bess attacks, each other creature you control with base power and toughness 1/1 " +
                         "gets +X/+X until end of turn, where X is the number of +1/+1 counters on Bess")
