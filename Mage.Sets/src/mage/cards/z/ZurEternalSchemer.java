@@ -108,8 +108,8 @@ class ZurEternalSchemerEffect extends ContinuousEffectImpl {
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
                     int cmc = enchantment.getManaValue();
-                    enchantment.getPower().modifyBaseValue(cmc);
-                    enchantment.getToughness().modifyBaseValue(cmc);
+                    enchantment.getPower().setModifiedBaseValue(cmc);
+                    enchantment.getToughness().setModifiedBaseValue(cmc);
                 }
         }
         return true;
