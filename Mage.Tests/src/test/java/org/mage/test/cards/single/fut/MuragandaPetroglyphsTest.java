@@ -170,6 +170,7 @@ public class MuragandaPetroglyphsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Dehydration");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rancor", "Grizzly Bears");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dehydration", "Runeclaw Bear");
 

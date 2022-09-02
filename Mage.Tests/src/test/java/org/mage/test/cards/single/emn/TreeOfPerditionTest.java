@@ -18,9 +18,10 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class TreeOfPerditionTest extends CardTestPlayerBase {
     
     /**
-     * Reported bug: Tree of Perdition retains toughness change after being bounced and replayed
-     * Exchanged toughness with opponent's life to become an 0/20, got bounced,
-     * and when replayed it was still 0/20. It should be a new object and enter as an 0/13.
+     * Reported bug: https://github.com/magefree/mage/issues/2101
+     *      Tree of Perdition retains toughness change after being bounced and replayed
+     *      Exchanged toughness with opponent's life to become an 0/20, got bounced,
+     *      and when replayed it was still 0/20. It should be a new object and enter as an 0/13.
     */
     @Test
     public void testTreeOfPerditionBouncedAndReplayed() {
@@ -45,8 +46,9 @@ public class TreeOfPerditionTest extends CardTestPlayerBase {
     }
     
    /**
-    * Reported bug: Tree of Perdition is gaining both power and toughness equal to opponent's life total
-    * instead of just toughness equal to it.
+    * Reported bug:
+    *       Tree of Perdition is gaining both power and toughness equal to opponent's life total
+    *       instead of just toughness equal to it.
     */
     @Test
     public void testTreeOfPerditionOnlyGainsToughnessEqualToLife() {

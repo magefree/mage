@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -35,7 +35,7 @@ public final class ShamblingSuit extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Shambling Suit's power is equal to the number of artifacts and/or enchantments you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerSourceEffect(xValue, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(xValue, Duration.EndOfGame)));
     }
 
     private ShamblingSuit(final ShamblingSuit card) {

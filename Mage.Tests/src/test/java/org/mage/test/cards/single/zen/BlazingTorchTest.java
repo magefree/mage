@@ -44,11 +44,12 @@ public class BlazingTorchTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, masterwork);
         addCard(Zone.BATTLEFIELD, playerB, torch);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, masterwork);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, masterwork, true);
         setChoice(playerA, true); // use copy
         setChoice(playerA, torch);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", lion);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T},", playerB);
 
         setStrictChooseMode(true);

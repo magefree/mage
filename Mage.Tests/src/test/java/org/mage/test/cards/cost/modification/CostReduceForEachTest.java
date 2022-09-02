@@ -90,9 +90,8 @@ public class CostReduceForEachTest extends CardTestPlayerBaseWithAIHelps {
         checkPlayableAbility("no cost reduction 1", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Khalni Hydra", false);
 
         // prepare creatures for reduce
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears");
-        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears", true);
         checkPlayableAbility("no cost reduction 2", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Khalni Hydra", false);
 
         // can cast on next turn
@@ -120,14 +119,12 @@ public class CostReduceForEachTest extends CardTestPlayerBaseWithAIHelps {
 
         // prepare creatures for reduce
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}", 4);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears");
-        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
         checkPlayableAbility("no cost reduction 2", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Torgaar, Famine Incarnate", false);
 
         // can cast on next turn
-        checkPlayableAbility("must reduce", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Torgaar, Famine Incarnate", true);
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Torgaar, Famine Incarnate");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Torgaar, Famine Incarnate", true);
         setChoice(playerA, "X=2"); // two creatures sacrifice
         setChoice(playerA, "Balduvian Bears");
         setChoice(playerA, "Balduvian Bears");

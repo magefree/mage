@@ -10,7 +10,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DoUnlessControllerPaysEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.effects.common.continuous.SetPowerEnchantedEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -44,7 +44,7 @@ public final class Withercrown extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature has base power 0 and has “At the beginning of your upkeep, you lose 1 life unless you sacrifice this creature."
-        Ability abilityTest = new SimpleStaticAbility(new SetPowerEnchantedEffect(0));
+        Ability abilityTest = new SimpleStaticAbility(new SetBasePowerEnchantedEffect(0));
         Effect effect2 = new DoUnlessControllerPaysEffect(new LoseLifeSourceControllerEffect(1),
                 new SacrificeSourceCost(), rule);
         effect2.setText("you lose 1 life unless you sacrifice this creature.");

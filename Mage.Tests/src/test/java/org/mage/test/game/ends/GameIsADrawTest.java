@@ -24,11 +24,11 @@ public class GameIsADrawTest extends CardTestPlayerBase {
         // Flame Rift deals 4 damage to each player.
         addCard(Zone.HAND, playerB, "Flame Rift", 2); // Sorcery
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flame Rift");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flame Rift");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flame Rift", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flame Rift", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flame Rift");
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Flame Rift");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Flame Rift", true);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Flame Rift");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);

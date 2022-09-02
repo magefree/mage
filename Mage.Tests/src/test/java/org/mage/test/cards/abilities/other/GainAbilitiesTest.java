@@ -26,6 +26,7 @@ public class GainAbilitiesTest extends CardTestPlayerBase {
 
         // attach all
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "@attach.1", "@bear");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "@attach.2", "@bear");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkAbility("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "@bear", VigilanceAbility.class, true);
@@ -50,9 +51,8 @@ public class GainAbilitiesTest extends CardTestPlayerBase {
 
         // attach all
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "@attach.1", "@bear");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "@attach.2", "@bear");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        //checkAbility("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "@bear", VigilanceAbility.class, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "@attach.2", "@bear");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

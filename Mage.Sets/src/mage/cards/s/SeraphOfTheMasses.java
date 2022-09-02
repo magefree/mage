@@ -3,7 +3,7 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.hint.common.CreaturesYouControlHint;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -33,7 +33,7 @@ public final class SeraphOfTheMasses extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Seraph of the Masses's power and toughness are each equal to the number of creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(CreaturesYouControlCount.instance, Duration.EndOfGame))
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(CreaturesYouControlCount.instance, Duration.EndOfGame))
                 .addHint(CreaturesYouControlHint.instance));
     }
 

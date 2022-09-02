@@ -16,7 +16,7 @@ public class SplinterTwinTest extends CardTestPlayerBase {
     public void testCopyCreature() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
         // Enchant creature
-        // Enchanted creature has "{T}: Create a tokenthat's a copy of this creature onto the battlefield. That token has haste. Exile it at the beginning of the next end step."
+        // Enchanted creature has "{T}: Create a token that's a copy of this creature onto the battlefield. That token has haste. Exile it at the beginning of the next end step."
         addCard(Zone.HAND, playerA, "Splinter Twin"); // {2}{R}{R}
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
 
@@ -24,8 +24,9 @@ public class SplinterTwinTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Lightning Bolt");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Splinter Twin", "Silvercoat Lion");
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Create a token");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
 
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Create a token");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Silvercoat Lion", "{T}: Create a token");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -39,5 +40,4 @@ public class SplinterTwinTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
     }
-
 }

@@ -17,10 +17,10 @@ public class ValkiGodOfLiesTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
         addCard(Zone.LIBRARY, playerB, "Ephemerate");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tibalt, Cosmic Impostor");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tibalt, Cosmic Impostor", true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: Exile the top card of each player's library.");
-        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Plains");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ephemerate", "Grizzly Bears");
+        playLand(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Plains");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Ephemerate", "Grizzly Bears");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

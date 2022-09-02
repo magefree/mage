@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -36,7 +36,7 @@ public final class Magnivore extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // Magnivore's power and toughness are each equal to the number of sorcery cards in all graveyards.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInAllGraveyardsCount(filter), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new CardsInAllGraveyardsCount(filter), Duration.EndOfGame)));
 
 
     }

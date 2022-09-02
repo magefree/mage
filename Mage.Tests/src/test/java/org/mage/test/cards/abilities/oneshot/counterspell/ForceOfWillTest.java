@@ -47,7 +47,7 @@ public class ForceOfWillTest extends CardTestPlayerBase {
     }
     
     /**
-     * Test that Force of Will can'be played with alternate casting costs
+     * Test that Force of Will can't be played with alternate casting costs
      * if no blue card is in hand and not enough mana available
      */
     @Test
@@ -55,7 +55,7 @@ public class ForceOfWillTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Thoughtseize");
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
 
-        // No Red cards in hand
+        // No other Blue cards in hand
         addCard(Zone.HAND, playerB, "Force of Will");
         addCard(Zone.HAND, playerB, "Fireball", 2);
 
@@ -75,15 +75,9 @@ public class ForceOfWillTest extends CardTestPlayerBase {
             execute();
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
-            if (!e.getMessage().contains("Can't find available command - activate:Cast Force of Will$target=Thoughtseize")) {
-                Assert.fail("must throw error about bad targets, but got:\n" + e.getMessage());
+            if (!e.getMessage().contains("Cast Force of Will$target=Thoughtseize")) {
+                Assert.fail("must throw error about not being able to cast Force of Will, but got:\n" + e.getMessage());
             }
         }
-
-        assertLife(playerA, 18);
-        assertLife(playerB, 20); // losing 1 from Force of Will
-
-        assertHandCount(playerB, 2);      // 1 Fireball 1 Force of Will
-        assertGraveyardCount(playerB, 1); // 1 Fireball discarded because of Thoughseize
     }
 }

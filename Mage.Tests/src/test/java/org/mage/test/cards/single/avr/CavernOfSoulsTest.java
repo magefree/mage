@@ -51,7 +51,7 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
         try {
             execute();
         } catch (Throwable e) {
-            if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
+            if (!e.getMessage().contains("Cast Abuna Acolyte")) {
                 Assert.fail("Should have had error playerA having too many actions, but got:\n" + e.getMessage());
             }
         }

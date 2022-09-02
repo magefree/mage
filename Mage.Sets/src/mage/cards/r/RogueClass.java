@@ -16,6 +16,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
@@ -183,9 +184,12 @@ class RogueClassPlayEffect extends AsThoughEffectImpl {
         objectId = theCard.getMainCard().getId(); // for split cards
         
         UUID exileZoneId = CardUtil.getExileZoneId(game, sourceObject.getId(), sourceObject.getZoneChangeCounter(game));
+        ExileZone exileZone = game.getExile().getExileZone(exileZoneId);
+        if (exileZone == null) {
+            return false;
+        }
         // this check happens while the chosen card is in the exile zone
-        if (game.getExile().getExileZone(exileZoneId).contains(objectId)
-                && affectedControllerId.equals(source.getControllerId())) {
+        if (exileZone.contains(objectId) && affectedControllerId.equals(source.getControllerId())) {
             Card card = game.getCard(objectId);
             return card != null;
         }

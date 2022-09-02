@@ -60,7 +60,7 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Trusted Forcemage", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -188,6 +188,7 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Act of Treason", "Trusted Forcemage");
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Elite Vanguard");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
@@ -216,6 +217,7 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Act of Treason", "Trusted Forcemage");
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Elite Vanguard");
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN); // Effect of "Act of Treason" will end here
@@ -261,6 +263,7 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Blinkmoth Nexus", 1);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: ");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -302,6 +305,7 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Blinkmoth Nexus", 1);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: ");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
 
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
@@ -330,8 +334,8 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Elite Vanguard");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Elite Vanguard");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Phantasmal Bear");
 
         setStopAt(1, PhaseStep.END_TURN);

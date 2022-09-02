@@ -102,6 +102,7 @@ Future Sight|FutureSight|
 Game Day|GameDay|
 Game Night|GameNight|
 Game Night 2019|GameNight2019|
+Game Night 2022|GameNight2022|
 Gatecrash|Gatecrash|
 Global Series: Jiang Yanggu & Mu Yanling|GlobalSeriesJiangYangguAndMuYanling|
 Grand Prix|GrandPrixPromos|

@@ -3,14 +3,13 @@ package mage.cards.m;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessAllEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessAllEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TimingRule;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -64,7 +63,7 @@ class MassDiminishEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
         filter.add(new ControllerIdPredicate(source.getFirstTarget()));
-        game.addEffect(new SetPowerToughnessAllEffect(
+        game.addEffect(new SetBasePowerToughnessAllEffect(
                 1, 1, Duration.UntilYourNextTurn, filter, true
         ), source);
         return true;

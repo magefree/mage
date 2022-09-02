@@ -78,8 +78,8 @@ class WerewolfPackLeaderEffect extends ContinuousEffectImpl {
                 return true;
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
-                    permanent.getPower().setValue(5);
-                    permanent.getToughness().setValue(3);
+                    permanent.getPower().setModifiedBaseValue(5);
+                    permanent.getToughness().setModifiedBaseValue(3);
                     return true;
                 }
         }

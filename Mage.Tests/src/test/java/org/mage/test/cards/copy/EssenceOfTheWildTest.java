@@ -102,7 +102,7 @@ public class EssenceOfTheWildTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
 
         // apply -1/-1 effect (+2: Put a -1/-1 counter on up to one target creature.)
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "+2:", "Essence of the Wild");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2:", "Essence of the Wild");
 
         // copy
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Silvercoat Lion");

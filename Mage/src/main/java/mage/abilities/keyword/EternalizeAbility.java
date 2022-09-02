@@ -97,8 +97,8 @@ class EternalizeEffect extends OneShotEffect {
         token.addSubType(SubType.ZOMBIE);
         token.getManaCost().clear();
         token.removePTCDA();
-        token.getPower().modifyBaseValue(4);
-        token.getToughness().modifyBaseValue(4);
+        token.setPower(4);
+        token.setToughness(4);
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ETERNALIZED_CREATURE, token.getId(), source, controller.getId()));
         token.putOntoBattlefield(1, game, source, controller.getId(), false, false, null);
         // Probably it makes sense to remove also the Eternalize ability (it's not shown on the token cards).

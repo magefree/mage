@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.abilities.keyword.ShadowAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -41,7 +41,7 @@ public final class DauthiWarlord extends CardImpl {
         this.addAbility(ShadowAbility.getInstance());
         
         // Dauthi Warlord's power is equal to the number of creatures with shadow on the battlefield.
-        Effect effect = new SetPowerSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame);
+        Effect effect = new SetBasePowerSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame);
         this.addAbility(new SimpleStaticAbility(Zone.ALL, effect));
     }
 

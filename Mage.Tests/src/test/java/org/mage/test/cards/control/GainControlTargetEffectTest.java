@@ -62,7 +62,7 @@ public class GainControlTargetEffectTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, {T}: Gain control of target creature with power less than or equal to the number of Islands you control for as long as {this} remains tapped.", "Glen Elendra Archmage");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Strike", playerA);
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{U}, Sacrifice {this}: Counter target noncreature spell.", "Lightning Strike");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{U}, Sacrifice {this}: Counter target noncreature spell.", "Lightning Strike", "Lightning Strike");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -117,7 +117,7 @@ public class GainControlTargetEffectTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
         addCard(Zone.HAND, playerB, "Silvercoat Lion", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Steel Golem");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Steel Golem", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Donate", playerB);
         addTarget(playerA, "Steel Golem");
 

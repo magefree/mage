@@ -16,13 +16,17 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class LayerTests extends CardTestPlayerBase {
 
+    /**
+     * Conspiracy -> Opalescence -> Enchanted Evening
+     *      Conspiracy is dependent on Opalescence
+     *      Opalescence is dependent on Enchanted Evening
+     *
+     * So, the effects should be applied as follows:
+     *      Enchanted Evening -> Opalescence -> Conspiracy
+     */
     @Test
     public void testMultipleLayeredDependency() {
-        //Conspiracy->Opalescence->Enchanted Evening
-        //Conspiracy is dependent on Opalescence
-        //Opalescence is dependent on Enchanted Evening
-        //So, the effects should be applied as follows:
-        //Enchanted Evening->Opalescence->Conspiracy
+
 
         addCard(Zone.HAND, playerA, "Conspiracy"); // creatures get chosen subtype
         addCard(Zone.HAND, playerA, "Opalescence"); // enchantments become creatures P/T equal to CMC
@@ -33,9 +37,9 @@ public class LayerTests extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
         addCard(Zone.BATTLEFIELD, playerA, "Glorious Anthem", 1); // keep lands alive // all creatures +1/+1
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Conspiracy");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Conspiracy", true);
         setChoice(playerA, "Advisor");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Opalescence");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Opalescence", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Enchanted Evening");
 
         setStrictChooseMode(true);
@@ -49,18 +53,15 @@ public class LayerTests extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Reported bug:
+     *      This came up in a recent EDH game and we had no idea how to progress.
+     *      Player A cast a Humility, then a March of the Machines, and finally a Mycosynth Lattice.
+     *      Does the game get stuck in an endless loop of each card gaining and losing its respective creature-ness and abilities?
+     *      Answer: No, they all die
+     */
     @Test
     public void testMycosynthLatticeAndMarchOfTheMachinesAndHumility() {
-        // example from Reddit
-        /*
-        This came up in a recent EDH game and we had no idea how to progress.
-        Player A cast a Humility, then a March of the Machines, and finally 
-        a Mycosynth Lattice.
-        Does the game get stuck in an endless loop of each card gaining and 
-        losing its respective creature-ness and abilities?
-        Answer: No, they all die
-         */
-
         addCard(Zone.HAND, playerA, "Mycosynth Lattice"); // all permanents are artifacts
         addCard(Zone.HAND, playerA, "March of the Machines"); // artifacts become creatures
         addCard(Zone.HAND, playerA, "Humility"); // all creatures lose abilities and P/T is 1/1
@@ -69,8 +70,8 @@ public class LayerTests extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 10);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 10);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Humility");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "March of the Machines");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Humility", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "March of the Machines", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mycosynth Lattice");
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
@@ -81,7 +82,6 @@ public class LayerTests extends CardTestPlayerBase {
         assertPermanentCount(playerA, "March of the Machines", 0);
         assertPermanentCount(playerA, "Mycosynth Lattice", 0);
         assertPermanentCount(playerA, "Island", 0);
-
     }
 
     @Test
@@ -151,7 +151,7 @@ public class LayerTests extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Animate Land", "Urborg, Tomb of Yawgmoth");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ovinize", "Urborg, Tomb of Yawgmoth");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Ovinize", "Urborg, Tomb of Yawgmoth");
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 

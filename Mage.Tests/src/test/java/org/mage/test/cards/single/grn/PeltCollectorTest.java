@@ -35,7 +35,7 @@ public class PeltCollectorTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, collector, 1);// Creature {G}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, collector);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, collector, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lion);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -76,6 +76,7 @@ public class PeltCollectorTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, trostani);
 
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, collector);
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, lion);
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);

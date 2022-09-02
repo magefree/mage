@@ -23,7 +23,7 @@ public class AlchemistsRefugeTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Elite Vanguard");
 
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{G}{U}, {T}:");
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Elite Vanguard");
+        castSpell(2, PhaseStep.BEGIN_COMBAT, playerA, "Elite Vanguard");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();

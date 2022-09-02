@@ -36,12 +36,9 @@ public class CantCastTest extends CardTestPlayerBase {
         try {
             execute();
 
-            assertHandCount(playerA, "Jayemdae Tome", 1);
-            assertPermanentCount(playerA, "Jayemdae Tome", 0);
-
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
-            if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
+            if (!e.getMessage().contains("Cast Jayemdae Tome")) {
                 Assert.fail("must not have throw error about bad targets, but got:\n" + e.getMessage());
             }
         }
@@ -73,7 +70,7 @@ public class CantCastTest extends CardTestPlayerBase {
 
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
-            if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
+            if (!e.getMessage().contains("Cast Blaze$targetPlayer=PlayerA")) {
                 Assert.fail("must not have throw error about bad targets, but got:\n" + e.getMessage());
             }
         }
@@ -135,7 +132,7 @@ public class CantCastTest extends CardTestPlayerBase {
         try {
             execute();
         } catch (Throwable e) {
-            if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
+            if (!e.getMessage().contains("Cast Pine Walker")) {
                 Assert.fail("must not have throw error about bad targets, but got:\n" + e.getMessage());
             }
         }
@@ -163,7 +160,7 @@ public class CantCastTest extends CardTestPlayerBase {
         try {
             execute();
         } catch (Throwable e) {
-            if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
+            if (!e.getMessage().contains("Cast Mox Opal")) {
                 Assert.fail("must not have throw error about bad targets, but got:\n" + e.getMessage());
             }
         }
@@ -241,7 +238,7 @@ public class CantCastTest extends CardTestPlayerBase {
 
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
-            if (!e.getMessage().contains("Player PlayerB must have 0 actions but found 1")) {
+            if (!e.getMessage().contains("Cast Abrupt Decay$target=Ethersworn Canonist")) {
                 Assert.fail("must not have throw error about bad targets, but got:\n" + e.getMessage());
             }
         }

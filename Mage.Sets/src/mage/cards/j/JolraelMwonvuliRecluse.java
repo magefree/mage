@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessAllEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -36,7 +36,7 @@ public final class JolraelMwonvuliRecluse extends CardImpl {
         this.addAbility(new DrawSecondCardTriggeredAbility(new CreateTokenEffect(new GreenCat2Token()), false));
 
         // {4}{G}{G}: Until end of turn, creatures you control have base power and toughness X/X, where X is the number of cards in your hand.
-        this.addAbility(new SimpleActivatedAbility(new SetPowerToughnessAllEffect(
+        this.addAbility(new SimpleActivatedAbility(new SetBasePowerToughnessAllEffect(
                 CardsInControllerHandCount.instance, CardsInControllerHandCount.instance,
                 Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES, true
         ).setText("until end of turn, creatures you control have base power and toughness X/X, " +

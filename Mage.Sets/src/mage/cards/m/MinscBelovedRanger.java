@@ -8,7 +8,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.AddCardSubTypeTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -73,7 +73,7 @@ class MinscBelovedRangerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int xValue = source.getManaCostsToPay().getX();
-        game.addEffect(new SetPowerToughnessTargetEffect(xValue, xValue, Duration.EndOfTurn), source);
+        game.addEffect(new SetBasePowerToughnessTargetEffect(xValue, xValue, Duration.EndOfTurn), source);
         game.addEffect(new AddCardSubTypeTargetEffect(SubType.GIANT, Duration.EndOfTurn), source);
         return true;
     }

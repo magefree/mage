@@ -8,7 +8,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -33,7 +33,7 @@ public final class RiptideMangler extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 
-        // {1}{U}: Change Riptide Mangler's base power to target creature's power.
+        // {1}{U}:  Change Riptide Mangler’s base power to target creature’s power.
         Ability ability = new SimpleActivatedAbility(new RiptideManglerEffect(), new ManaCostsImpl<>("{1}{U}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -71,7 +71,7 @@ class RiptideManglerEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        game.addEffect(new SetPowerSourceEffect(StaticValue.get(permanent.getPower().getValue()), Duration.WhileOnBattlefield, SubLayer.SetPT_7b), source);
+        game.addEffect(new SetBasePowerToughnessSourceEffect(StaticValue.get(permanent.getPower().getValue()), null, Duration.WhileOnBattlefield, SubLayer.SetPT_7b, true), source);
         return true;
     }
 }

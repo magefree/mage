@@ -10,7 +10,7 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -94,26 +94,31 @@ class DracoplasmEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         Player controller = game.getPlayer(source.getControllerId());
-        if (creature != null && controller != null) {
-            Target target = new TargetControlledPermanent(0, Integer.MAX_VALUE, filter, true);
-            if (!target.canChoose(source.getControllerId(), source, game)) {
-                return false;
-            }
-            controller.chooseTarget(Outcome.Detriment, target, source, game);
-            if (!target.getTargets().isEmpty()) {
-                int power = 0;
-                int toughness = 0;
-                for (UUID targetId : target.getTargets()) {
-                    Permanent targetCreature = game.getPermanent(targetId);
-                    if (targetCreature != null && targetCreature.sacrifice(source, game)) {
-                        power = CardUtil.overflowInc(power, targetCreature.getPower().getValue());
-                        toughness = CardUtil.overflowInc(toughness, targetCreature.getToughness().getValue());
-                    }
-                }
-                ContinuousEffect effect = new SetPowerToughnessSourceEffect(power, toughness, Duration.Custom, SubLayer.SetPT_7b);
-                game.addEffect(effect, source);
+        if (creature == null || controller == null) {
+            return false;
+        }
+
+        Target target = new TargetControlledPermanent(0, Integer.MAX_VALUE, filter, true);
+        if (!target.canChoose(source.getControllerId(), source, game)) {
+            return false;
+        }
+
+        controller.chooseTarget(Outcome.Detriment, target, source, game);
+        if (target.getTargets().isEmpty()) {
+            return false;
+        }
+
+        int power = 0;
+        int toughness = 0;
+        for (UUID targetId : target.getTargets()) {
+            Permanent targetCreature = game.getPermanent(targetId);
+            if (targetCreature != null && targetCreature.sacrifice(source, game)) {
+                power = CardUtil.overflowInc(power, targetCreature.getPower().getValue());
+                toughness = CardUtil.overflowInc(toughness, targetCreature.getToughness().getValue());
             }
         }
-        return false;
+        ContinuousEffect effect = new SetBasePowerToughnessSourceEffect(power, toughness, Duration.Custom, SubLayer.SetPT_7b);
+        game.addEffect(effect, source);
+        return true;
     }
 }

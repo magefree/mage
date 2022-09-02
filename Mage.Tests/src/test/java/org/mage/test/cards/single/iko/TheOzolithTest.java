@@ -149,8 +149,8 @@ public class TheOzolithTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, BRANCHING_EVOLUTION);
         addCard(Zone.HAND, playerA, PUNCTURE_BLAST);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, FERTILID);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, BRANCHING_EVOLUTION);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, FERTILID, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, BRANCHING_EVOLUTION ,true);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, PUNCTURE_BLAST, FERTILID);
 
         setStopAt(1, PhaseStep.END_TURN);

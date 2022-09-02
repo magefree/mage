@@ -25,6 +25,7 @@ public class JumpStartTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1); // 2/2
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Direct Current", "Silvercoat Lion");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Direct Current with jump-start", playerB);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -52,6 +53,7 @@ public class JumpStartTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Direct Current", "Silvercoat Lion");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Direct Current with jump-start", playerB);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Counterspell", "Direct Current");
 
@@ -86,6 +88,7 @@ public class JumpStartTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1); // 2/2
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Direct Current", "Silvercoat Lion");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Experimental Frenzy");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Direct Current with jump-start", playerB);

@@ -5,7 +5,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.ScavengeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -40,7 +40,7 @@ public final class BoneyardMycodrax extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Boneyard Mycodrax's power and toughness are each equal to the number of other creature cards in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(xValue, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue, Duration.EndOfGame)));
 
         // Scavenge {4}{B}
         this.addAbility(new ScavengeAbility(new ManaCostsImpl<>("{4}{B}")));

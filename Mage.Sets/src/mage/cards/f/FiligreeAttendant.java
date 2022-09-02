@@ -3,7 +3,7 @@ package mage.cards.f;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.ArtifactYouControlCount;
-import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,7 +27,7 @@ public final class FiligreeAttendant extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Filigree Attendant's power is equal to the number of artifacts you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerSourceEffect(
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(
                 ArtifactYouControlCount.instance, Duration.EndOfGame, SubLayer.CharacteristicDefining_7a
         ).setText("{this}'s power is equal to the number of artifacts you control")));
     }

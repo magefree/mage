@@ -36,7 +36,7 @@ public class RepeatedReverberationTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, ajani);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, repeatedReverb);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, repeatedReverb, true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: You gain 2 life");
 
         setStrictChooseMode(true);
@@ -96,8 +96,9 @@ public class RepeatedReverberationTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, repeatedReverb);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, repeatedReverb, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, soulFeast);
+
         addTarget(playerA, playerB);
         setChoice(playerA, false); //Choose new targets?
         setChoice(playerA, false); //Choose new targets?

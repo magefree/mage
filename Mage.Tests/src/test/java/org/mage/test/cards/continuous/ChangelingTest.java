@@ -77,7 +77,7 @@ public class ChangelingTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, woodlandChangeling, 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 10);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, mimic);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, mimic, true);
         setChoice(playerA, "Sliver");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, woodlandChangeling);

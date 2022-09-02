@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
@@ -33,7 +33,7 @@ public final class BeanstalkGiant extends AdventureCard {
         this.toughness = new MageInt(0);
 
         // Beanstalk Giant's power and toughness are each equal to the number of lands you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(xValue, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue, Duration.EndOfGame)));
 
         // Fertile Footsteps
         // Search your library for a basic land card, put it onto the battlefield, then shuffle your library.
