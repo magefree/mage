@@ -882,7 +882,7 @@ public class NewTournamentDialog extends MageDialog {
 //        this.spnNumPlayers.setModel(new SpinnerNumberModel(gameType.getMinPlayers(), gameType.getMinPlayers(), gameType.getMaxPlayers(), 1));
 //        this.spnNumPlayers.setEnabled(gameType.getMinPlayers() != gameType.getMaxPlayers());
 //        if (oldValue >= gameType.getMinPlayers() && oldValue <= gameType.getMaxPlayers()){
-//            this.spnNumPlayers.setValue(oldValue);
+//            this.spnNumPlayers.setBoostedValue(oldValue);
 //        }
         // this.cbAttackOption.setEnabled(gameType.isUseAttackOption());
         // this.cbRange.setEnabled(gameType.isUseRange());

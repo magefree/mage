@@ -10,7 +10,7 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.AddCardSubTypeSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -42,8 +42,8 @@ public final class WardenOfTheFirstTree extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new AddCardSubTypeSourceEffect(
                 Duration.Custom, SubType.HUMAN, SubType.WARRIOR
         ).setText("{this} becomes a Human Warrior"), new ManaCostsImpl<>("{1}{W/B}"));
-        ability.addEffect(new SetPowerToughnessSourceEffect(
-                3, 3, Duration.Custom, SubLayer.SetPT_7b
+        ability.addEffect(new SetBasePowerToughnessSourceEffect(
+                3, 3, Duration.Custom, SubLayer.SetPT_7b, true
         ).setText("with base power and toughness 3/3"));
         this.addAbility(ability);
 

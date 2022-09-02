@@ -64,8 +64,8 @@ public class TransformAbility extends SimpleStaticAbility {
             // source != null -- from apply effect
             permanent.addAbility(ability, source == null ? permanent.getId() : source.getSourceId(), game);
         }
-        permanent.getPower().modifyBaseValue(sourceCard.getPower().getValue());
-        permanent.getToughness().modifyBaseValue(sourceCard.getToughness().getValue());
+        permanent.getPower().setModifiedBaseValue(sourceCard.getPower().getValue());
+        permanent.getToughness().setModifiedBaseValue(sourceCard.getToughness().getValue());
         permanent.setStartingLoyalty(sourceCard.getStartingLoyalty());
     }
 
@@ -88,8 +88,8 @@ public class TransformAbility extends SimpleStaticAbility {
         for (Ability ability : otherSide.getAbilities()) {
             game.getState().addOtherAbility(newCard, ability);
         }
-        newCard.getPower().modifyBaseValue(otherSide.getPower().getValue());
-        newCard.getToughness().modifyBaseValue(otherSide.getToughness().getValue());
+        newCard.getPower().setModifiedBaseValue(otherSide.getPower().getValue());
+        newCard.getToughness().setModifiedBaseValue(otherSide.getToughness().getValue());
 
         return newCard;
     }

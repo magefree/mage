@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -27,7 +27,7 @@ public final class SylvanYeti extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Sylvan Yeti's power is equal to the number of cards in your hand.
-        Effect effect = new SetPowerSourceEffect(CardsInControllerHandCount.instance, Duration.EndOfGame);
+        Effect effect = new SetBasePowerSourceEffect(CardsInControllerHandCount.instance, Duration.EndOfGame);
         this.addAbility(new SimpleStaticAbility(Zone.ALL, effect));
     }
 

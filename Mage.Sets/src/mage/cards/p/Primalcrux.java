@@ -5,7 +5,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ChromaCount;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -31,7 +31,7 @@ public final class Primalcrux extends CardImpl {
 
         // Chroma - Primalcrux's power and toughness are each equal to the number of green mana symbols in the mana costs of permanents you control.
         DynamicValue xValue = new ChromaCount(ManaType.GREEN);
-        Effect effect = new SetPowerToughnessSourceEffect(xValue, Duration.WhileOnBattlefield);
+        Effect effect = new SetBasePowerToughnessSourceEffect(xValue, Duration.WhileOnBattlefield);
         effect.setText("<i>Chroma</i> &mdash; Primalcrux's power and toughness are each equal to the number of green mana symbols in the mana costs of permanents you control.");
         this.addAbility(new SimpleStaticAbility(Zone.ALL, effect)
                 .addHint(new ValueHint("Green mana symbols in your permanents", xValue))

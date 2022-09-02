@@ -31,7 +31,7 @@ public class SwitchPowerToughnessSourceEffect extends ContinuousEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        super.init(source, game); //To change body of generated methods, choose Tools | Templates.
+        super.init(source, game); // To change body of generated methods, choose Tools | Templates.
         if (duration.isOnlyValidIfNoZoneChange()) {
             // If source permanent is no longer onto battlefield discard the effect
             if (source.getSourcePermanentIfItStillExists(game) == null) {
@@ -43,17 +43,14 @@ public class SwitchPowerToughnessSourceEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
-        if (sourcePermanent != null) {
-            int power = sourcePermanent.getPower().getValue();
-            sourcePermanent.getPower().setValue(sourcePermanent.getToughness().getValue());
-            sourcePermanent.getToughness().setValue(power);
-            return true;
-        } else {
+        if (sourcePermanent == null) {
             if (duration.isOnlyValidIfNoZoneChange()) {
                 discard();
             }
+            return false;
         }
-        return false;
-    }
 
+        sourcePermanent.switchPowerToughness();
+        return true;
+    }
 }

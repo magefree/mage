@@ -127,8 +127,8 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
 
                 case PTChangingEffects_7:
                     if (sublayer == SubLayer.SetPT_7b) { //  CDA can only define a characteristic of either the card or token it comes from.
-                        permanent.getToughness().setValue(token.getToughness().getValue());
-                        permanent.getPower().setValue(token.getPower().getValue());
+                        permanent.getToughness().setModifiedBaseValue(token.getToughness().getValue());
+                        permanent.getPower().setModifiedBaseValue(token.getPower().getValue());
                     }
             }
             result = true;

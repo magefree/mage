@@ -75,17 +75,18 @@ class DaxosSpiritSetPTEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent != null && new MageObjectReference(source.getSourceObject(game), game).refersTo(permanent, game)) {
-                int amount = controller.getCounters().getCount(CounterType.EXPERIENCE);
-                permanent.getPower().setValue(amount);
-                permanent.getToughness().setValue(amount);
-                return true;
-            } else {
-                discard();
-            }
+        if (controller == null) {
+            return false;
         }
-        return false;
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent == null || !new MageObjectReference(source.getSourceObject(game), game).refersTo(permanent, game)) {
+            discard();
+            return false;
+        }
+
+        int amount = controller.getCounters().getCount(CounterType.EXPERIENCE);
+        permanent.getPower().setModifiedBaseValue(amount);
+        permanent.getToughness().setModifiedBaseValue(amount);
+        return true;
     }
 }

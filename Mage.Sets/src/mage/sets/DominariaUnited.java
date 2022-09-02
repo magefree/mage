@@ -40,6 +40,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Artillery Blast", 6, Rarity.COMMON, mage.cards.a.ArtilleryBlast.class));
         cards.add(new SetCardInfo("Astor, Bearer of Blades", 194, Rarity.RARE, mage.cards.a.AstorBearerOfBlades.class));
         cards.add(new SetCardInfo("Automatic Librarian", 229, Rarity.COMMON, mage.cards.a.AutomaticLibrarian.class));
+        cards.add(new SetCardInfo("Baird, Argivian Recruiter", 195, Rarity.UNCOMMON, mage.cards.b.BairdArgivianRecruiter.class));
         cards.add(new SetCardInfo("Balduvian Atrocity", 79, Rarity.UNCOMMON, mage.cards.b.BalduvianAtrocity.class));
         cards.add(new SetCardInfo("Balduvian Berserker", 116, Rarity.UNCOMMON, mage.cards.b.BalduvianBerserker.class));
         cards.add(new SetCardInfo("Balmor, Battlemage Captain", 196, Rarity.UNCOMMON, mage.cards.b.BalmorBattlemageCaptain.class));

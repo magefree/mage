@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.util.functions.CopyApplier;
 
 /**
@@ -47,8 +46,8 @@ class QuicksilverGargantuanCopyApplier extends CopyApplier {
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
         blueprint.removePTCDA();
-        blueprint.getPower().modifyBaseValue(7);
-        blueprint.getToughness().modifyBaseValue(7);
+        blueprint.getPower().setModifiedBaseValue(7);
+        blueprint.getToughness().setModifiedBaseValue(7);
         return true;
     }
 }

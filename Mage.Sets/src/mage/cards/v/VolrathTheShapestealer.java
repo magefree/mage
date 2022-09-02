@@ -122,8 +122,8 @@ class VolrathTheShapestealerCopyApplier extends CopyApplier {
         ability.addTarget(new TargetPermanent(VolrathTheShapestealer.filter));
         blueprint.getAbilities().add(ability);
         blueprint.removePTCDA();
-        blueprint.getPower().modifyBaseValue(7);
-        blueprint.getToughness().modifyBaseValue(5);
+        blueprint.getPower().setModifiedBaseValue(7);
+        blueprint.getToughness().setModifiedBaseValue(5);
         return true;
     }
 }

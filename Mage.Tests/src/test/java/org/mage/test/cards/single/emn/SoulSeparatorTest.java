@@ -48,8 +48,9 @@ public class SoulSeparatorTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Sylvan Advocate", 1, 1);
     }
 
-    // Reported bug: Exiled Tree of Perdition with Soul Separator
-    // The token copy when activated reduced the opponent's life total to 13 (tree toughness) instead of 1 (1/1 token)
+    // Reported bug: https://github.com/magefree/mage/issues/2174
+    //      Exiled Tree of Perdition with Soul Separator
+    //      The token copy when activated reduced the opponent's life total to 13 (tree toughness) instead of 1 (1/1 token)
     @Test
     public void testExileTreeOfPerdition() {
         // Soul Separator {3} Artifact

@@ -6,7 +6,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.ArtifactYouControlCount;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.CardImpl;
@@ -44,7 +44,7 @@ public final class BronzeGuardian extends CardImpl {
         )));
 
         // Bronze Guardian's power is equal to the number of artifacts you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerSourceEffect(
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(
                 ArtifactYouControlCount.instance, Duration.EndOfGame
         )));
     }

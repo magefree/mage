@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.common.DealsDamageGainLifeSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -35,7 +35,7 @@ public final class DoubtlessOne extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Doubtless One's power and toughness are each equal to the number of Clerics on the battlefield.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
         
         // Whenever Doubtless One deals damage, you gain that much life.
         this.addAbility(new DealsDamageGainLifeSourceTriggeredAbility());

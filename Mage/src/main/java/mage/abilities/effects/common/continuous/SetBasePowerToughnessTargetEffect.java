@@ -19,30 +19,30 @@ import java.util.UUID;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class SetPowerToughnessTargetEffect extends ContinuousEffectImpl {
+public class SetBasePowerToughnessTargetEffect extends ContinuousEffectImpl {
 
     private DynamicValue power;
     private DynamicValue toughness;
 
-    public SetPowerToughnessTargetEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
+    public SetBasePowerToughnessTargetEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
     }
 
-    public SetPowerToughnessTargetEffect(int power, int toughness, Duration duration) {
+    public SetBasePowerToughnessTargetEffect(int power, int toughness, Duration duration) {
         this(StaticValue.get(power), StaticValue.get(toughness), duration);
     }
 
-    public SetPowerToughnessTargetEffect(final SetPowerToughnessTargetEffect effect) {
+    public SetBasePowerToughnessTargetEffect(final SetBasePowerToughnessTargetEffect effect) {
         super(effect);
         this.power = effect.power;
         this.toughness = effect.toughness;
     }
 
     @Override
-    public SetPowerToughnessTargetEffect copy() {
-        return new SetPowerToughnessTargetEffect(this);
+    public SetBasePowerToughnessTargetEffect copy() {
+        return new SetBasePowerToughnessTargetEffect(this);
     }
 
     @Override
@@ -50,15 +50,16 @@ public class SetPowerToughnessTargetEffect extends ContinuousEffectImpl {
         boolean result = false;
         for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
             Permanent target = game.getPermanent(targetId);
-            if (target != null) {
-                if (power != null) {
-                    target.getPower().setValue(power.calculate(game, source, this));
-                }
-                if (toughness != null) {
-                    target.getToughness().setValue(toughness.calculate(game, source, this));
-                }
-                result = true;
+            if (target == null) {
+                continue;
             }
+            if (power != null) {
+                target.getPower().setModifiedBaseValue(power.calculate(game, source, this));
+            }
+            if (toughness != null) {
+                target.getToughness().setModifiedBaseValue(toughness.calculate(game, source, this));
+            }
+            result = true;
         }
         return result;
     }
@@ -92,6 +93,4 @@ public class SetPowerToughnessTargetEffect extends ContinuousEffectImpl {
         }
         return sb.toString();
     }
-
-
 }
