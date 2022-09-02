@@ -66,6 +66,6 @@ enum BairdArgivianRecruiterPredicate implements Predicate<MageObject> {
     @Override
     public boolean apply(MageObject input, Game game) {
         MageInt power = input.getPower();
-        return power.getValue() > power.getBaseValueModified();
+        return power.getValue() > power.getModifiedBaseValue();
     }
 }
