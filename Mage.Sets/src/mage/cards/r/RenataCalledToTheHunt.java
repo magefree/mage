@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -33,7 +33,7 @@ public final class RenataCalledToTheHunt extends CardImpl {
         // Renata's power is equal to your devotion to green.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
-                new SetPowerSourceEffect(DevotionCount.G, Duration.EndOfGame)
+                new SetBasePowerSourceEffect(DevotionCount.G, Duration.EndOfGame)
                         .setText("{this}'s power is equal to your devotion to green")
         ).addHint(DevotionCount.G.getHint()));
 

@@ -8,7 +8,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.CrewAbility;
@@ -82,7 +82,7 @@ public final class UnlicensedHearse extends CardImpl {
         this.addAbility(
                 new SimpleStaticAbility(
                         Zone.ALL,
-                        new SetPowerToughnessSourceEffect(UnlicensedHearseValue.instance, Duration.EndOfGame)
+                        new SetBasePowerToughnessSourceEffect(UnlicensedHearseValue.instance, Duration.EndOfGame)
                 ).addHint(hint)
         );
 

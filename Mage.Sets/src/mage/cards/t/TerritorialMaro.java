@@ -5,7 +5,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.DomainValue;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.hint.common.DomainHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +29,7 @@ public final class TerritorialMaro extends CardImpl {
 
         // Domain — Territorial Maro's power and toughness are each equal to twice the number of basic land types among lands you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetPowerToughnessSourceEffect(xValue, Duration.EndOfGame)
+                Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue, Duration.EndOfGame)
                 .setText("{this}'s power and toughness are each equal to twice the number of basic land types among lands you control")
         ).setAbilityWord(AbilityWord.DOMAIN).addHint(DomainHint.instance));
     }

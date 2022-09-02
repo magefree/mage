@@ -41,7 +41,6 @@ public final class Frogify extends CardImpl {
                 Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.ALL, Outcome.Detriment
         );
         this.addAbility(new SimpleStaticAbility(effect));
-
     }
 
     private Frogify(final Frogify card) {

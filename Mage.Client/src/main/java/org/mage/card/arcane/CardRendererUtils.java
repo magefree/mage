@@ -244,7 +244,7 @@ public final class CardRendererUtils {
         // boost colorizing
         if (value != null) {
             int current = value.getValue();
-            int origin = value.getBaseValueModified();
+            int origin = value.getModifiedBaseValue();
             if (origin != 0) {
                 if (current < origin) {
                     return textLight ? CARD_TEXT_COLOR_BAD_LIGHT : CARD_TEXT_COLOR_BAD_DARK;

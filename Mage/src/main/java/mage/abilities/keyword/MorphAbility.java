@@ -134,8 +134,8 @@ public class MorphAbility extends AlternativeSourceCostsImpl {
     }
 
     public static void setPermanentToFaceDownCreature(MageObject mageObject, Game game) {
-        mageObject.getPower().modifyBaseValue(2);
-        mageObject.getToughness().modifyBaseValue(2);
+        mageObject.getPower().setModifiedBaseValue(2);
+        mageObject.getToughness().setModifiedBaseValue(2);
         mageObject.getAbilities().clear();
         mageObject.getColor(game).setColor(new ObjectColor());
         mageObject.setName("");

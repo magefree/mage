@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -31,7 +31,8 @@ public final class TrenchGorger extends CardImpl {
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
-        // When Trench Gorger enters the battlefield, you may search your library for any number of land cards, exile them, then shuffle your library. If you do, Trench Gorger's power and toughness each become equal to the number of cards exiled this way.
+        // When Trench Gorger enters the battlefield, you may search your library for any number of land cards, exile them, then shuffle your library.
+        // If you do, Trench Gorger's power and toughness each become equal to the number of cards exiled this way.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new TrenchGorgerEffect(), true));
 
     }
@@ -66,21 +67,26 @@ class TrenchGorgerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            TargetCardInLibrary target = new TargetCardInLibrary(0, Integer.MAX_VALUE, new FilterLandCard("any number of land cards"));
-            target.choose(outcome, controller.getId(), controller.getId(), source, game);
-            int count = 0;
-            for (UUID cardId : target.getTargets()) {
-                Card card = game.getCard(cardId);
-                if (card != null) {
-                    controller.moveCardToExileWithInfo(card, null, "", source, game, Zone.LIBRARY, true);
-                    count++;
-                }
-            }
-            controller.shuffleLibrary(source, game);
-            game.addEffect(new SetPowerToughnessSourceEffect(count, count, Duration.EndOfGame, SubLayer.SetPT_7b), source);
-            return true;
+        if (controller == null) {
+            return false;
         }
-        return false;
+
+        TargetCardInLibrary target = new TargetCardInLibrary(0, Integer.MAX_VALUE, new FilterLandCard("any number of land cards"));
+        boolean searched = target.choose(outcome, controller.getId(), controller.getId(), source, game);
+        if (!searched) {
+            return false;
+        }
+
+        int count = 0;
+        for (UUID cardId : target.getTargets()) {
+            Card card = game.getCard(cardId);
+            if (card != null) {
+                controller.moveCardToExileWithInfo(card, null, "", source, game, Zone.LIBRARY, true);
+                count++;
+            }
+        }
+        controller.shuffleLibrary(source, game);
+        game.addEffect(new SetBasePowerToughnessSourceEffect(count, count, Duration.WhileOnBattlefield, SubLayer.SetPT_7b, true), source);
+        return true;
     }
 }

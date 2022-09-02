@@ -9,7 +9,7 @@ import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.KickerAbility;
@@ -57,7 +57,7 @@ public final class MonstrousWarLeech extends CardImpl {
         // Monstrous War-Leech's power and toughness are each equal to the highest mana value among cards in your graveyard.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
-                new SetPowerToughnessSourceEffect(
+                new SetBasePowerToughnessSourceEffect(
                         MonstrousWarLeechValue.instance, Duration.EndOfGame
                 )
         ));

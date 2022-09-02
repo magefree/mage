@@ -9,7 +9,7 @@ import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PartyCount;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.abilities.hint.common.PartyCountHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -35,7 +35,7 @@ public final class ArchpriestOfIona extends CardImpl {
         // Archpriest of Iona's power is equal to the number of creatures in your party.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
-                new SetPowerSourceEffect(
+                new SetBasePowerSourceEffect(
                         PartyCount.instance, Duration.EndOfGame
                 ).setText("{this}'s power is equal to the number of creatures in your party. " + PartyCount.getReminder())
         ).addHint(PartyCountHint.instance));

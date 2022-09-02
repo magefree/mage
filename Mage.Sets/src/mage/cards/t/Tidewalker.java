@@ -7,7 +7,7 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.VanishingSacrificeAbility;
 import mage.abilities.keyword.VanishingUpkeepAbility;
@@ -44,7 +44,7 @@ public final class Tidewalker extends CardImpl {
         this.addAbility(new VanishingUpkeepAbility(0));
         this.addAbility(new VanishingSacrificeAbility());
         // Tidewalker's power and toughness are each equal to the number of time counters on it.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CountersSourceCount(CounterType.TIME), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new CountersSourceCount(CounterType.TIME), Duration.EndOfGame)));
     }
 
     private Tidewalker(final Tidewalker card) {
