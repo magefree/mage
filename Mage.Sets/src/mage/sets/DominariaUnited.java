@@ -171,6 +171,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prayer of Binding", 28, Rarity.UNCOMMON, mage.cards.p.PrayerOfBinding.class));
         cards.add(new SetCardInfo("Protect the Negotiators", 62, Rarity.UNCOMMON, mage.cards.p.ProtectTheNegotiators.class));
+        cards.add(new SetCardInfo("Quirion Beastcaller", 175, Rarity.RARE, mage.cards.q.QuirionBeastcaller.class));
         cards.add(new SetCardInfo("Queen Allenal of Ruadach", 210, Rarity.UNCOMMON, mage.cards.q.QueenAllenalOfRuadach.class));
         cards.add(new SetCardInfo("Radha's Firebrand", 141, Rarity.RARE, mage.cards.r.RadhasFirebrand.class));
         cards.add(new SetCardInfo("Radha, Coalition Warlord", 211, Rarity.UNCOMMON, mage.cards.r.RadhaCoalitionWarlord.class));
