@@ -39,7 +39,6 @@ public class CardUtilTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.DECLARE_ATTACKERS);
         execute();
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, akoumWarrior, 1);
     }
 
@@ -66,7 +65,6 @@ public class CardUtilTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.DECLARE_ATTACKERS);
         execute();
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, birgi, 1);
         assertPermanentCount(playerA, harnfel, 1);
     }
@@ -91,7 +89,6 @@ public class CardUtilTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.DECLARE_ATTACKERS);
         execute();
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, akoumWarrior, 1);
         assertPermanentCount(playerA, "Cragcrown Pathway", 1);
     }

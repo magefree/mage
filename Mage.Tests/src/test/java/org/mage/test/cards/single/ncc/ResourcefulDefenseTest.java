@@ -38,12 +38,11 @@ public class ResourcefulDefenseTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, steelbaneHydra);
         setChoice(playerA, "X=1");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lightningBolt, steelbaneHydra);
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, lightningBolt, steelbaneHydra);
         addTarget(playerA, everflowingChalice);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
         assertCounterCount(everflowingChalice, CounterType.P1P1, 1);
     }
 
@@ -64,7 +63,6 @@ public class ResourcefulDefenseTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
         assertCounterCount(vividCreek, CounterType.CHARGE, 0);
         assertCounterCount(everflowingChalice, CounterType.CHARGE, 2);
     }
@@ -86,7 +84,6 @@ public class ResourcefulDefenseTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
         assertCounterCount(vividCreek, CounterType.CHARGE, 1);
         assertCounterCount(everflowingChalice, CounterType.CHARGE, 1);
     }
@@ -123,7 +120,6 @@ public class ResourcefulDefenseTest extends CardTestPlayerBase {
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
         assertCounterCount(vividCreek, CounterType.CHARGE, 2);
         assertCounterCount(vividCreek, CounterType.P1P1, 1);
         assertGraveyardCount(playerA, steelbaneHydra, 1);
@@ -156,7 +152,6 @@ public class ResourcefulDefenseTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
         assertCounterCount(vividCreek, CounterType.CHARGE, 0);
         assertCounterCount(everflowingChalice, CounterType.CHARGE, 2);
         assertCounterCount(everflowingChalice, CounterType.P1P1, 1);

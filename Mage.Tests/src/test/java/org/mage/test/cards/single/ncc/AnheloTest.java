@@ -55,7 +55,6 @@ public class AnheloTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
         assertLife(playerB, 20 - 2*3 - 3);
         assertPermanentCount(playerA, aetherwindBasker, 1);
     }
@@ -76,7 +75,6 @@ public class AnheloTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, solRing, 1);
         assertPermanentCount(playerA, aetherwindBasker, 1);
     }
@@ -100,7 +98,6 @@ public class AnheloTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, aetherwindBasker, 0);
     }
 
@@ -120,7 +117,6 @@ public class AnheloTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, aetherwindBasker, 1);
         assertPermanentCount(playerA, flamescrollCelebrant, 1);
     }
@@ -145,7 +141,6 @@ public class AnheloTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
         assertLife(playerB, 20 - 2*3 - 3);
         assertPermanentCount(playerA, aetherwindBasker, 1);
     }
@@ -176,7 +171,6 @@ public class AnheloTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
         assertHandCount(playerA, 3);
         assertPermanentCount(playerA, aetherwindBasker, 0);
     }
@@ -198,7 +192,6 @@ public class AnheloTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
         assertLife(playerA, 20 - 3 - 3);
         assertPermanentCount(playerB, aetherwindBasker, 2);
     }

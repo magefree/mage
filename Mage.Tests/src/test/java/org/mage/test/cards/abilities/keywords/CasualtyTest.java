@@ -43,9 +43,9 @@ public class CasualtyTest extends CardTestPlayerBase {
         addTarget(playerA, "Desert");
         addTarget(playerA, "Desert");
 
-        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
+        assertHandCount(playerA, "Desert", 2);
         assertGraveyardCount(playerA, aetherwindBasker, 1);
     }
 
@@ -69,9 +69,10 @@ public class CasualtyTest extends CardTestPlayerBase {
         addTarget(playerA, "Desert");
         addTarget(playerA, "Desert");
 
-        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
+
+        assertHandCount(playerA, "Desert", 2);
         assertGraveyardCount(playerA, aetherwindBasker, 1);
         assertPermanentCount(playerA, aetherwindBasker, 1);
     }
@@ -94,7 +95,6 @@ public class CasualtyTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertGraveyardCount(playerA, aetherwindBasker, 1);
         assertPermanentCount(playerA, obNixilisTheAdversary, 2);  // 2 were created, but the token died when using its -7 ability
 
@@ -103,7 +103,6 @@ public class CasualtyTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, obNixilisTheAdversary, 1);
         assertLife(playerA, 20 - 7);
         assertHandCount(playerA, 7);

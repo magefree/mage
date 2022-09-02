@@ -36,7 +36,6 @@ public class ShieldBrokerTest extends CardTestCommander4Players {
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(rograkh, CounterType.SHIELD, 1);
         assertPermanentCount(playerA, rograkh, 1);
@@ -46,7 +45,6 @@ public class ShieldBrokerTest extends CardTestCommander4Players {
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertCounterCount(rograkh, CounterType.SHIELD, 0);
         assertPermanentCount(playerA, rograkh, 0);
         assertPermanentCount(playerD, rograkh, 1);
@@ -68,7 +66,6 @@ public class ShieldBrokerTest extends CardTestCommander4Players {
 
         setStopAt(5, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertCounterCount(rograkh, CounterType.SHIELD, 0);
         assertPermanentCount(playerA, rograkh, 0);
         assertPermanentCount(playerD, rograkh, 1);

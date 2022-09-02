@@ -33,7 +33,6 @@ public class WeatheredSentinelsTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         try {
             execute();
-            assertAllCommandsUsed();
         } catch (Throwable e) {
             if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
                 Assert.fail("Should have had error about playerA not being able to attack, but got:\n" + e.getMessage());
@@ -58,7 +57,6 @@ public class WeatheredSentinelsTest extends CardTestPlayerBase {
         // Check that Weathered Sentinels has a +3/+3 and indestructible
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertAbility(playerA, weatheredSentinels, IndestructibleAbility.getInstance(), true);
         assertPowerToughness(playerA, weatheredSentinels, 5, 8);
@@ -66,6 +64,5 @@ public class WeatheredSentinelsTest extends CardTestPlayerBase {
         // Check that Weathered Sentinels lost the abilities next turn
         setStopAt(4, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
     }
 }

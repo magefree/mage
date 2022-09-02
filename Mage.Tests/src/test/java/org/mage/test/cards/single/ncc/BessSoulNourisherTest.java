@@ -38,7 +38,6 @@ public class BessSoulNourisherTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, "Soldier Token", 3);
         assertCounterCount(playerA, bessSoulNourisher, CounterType.P1P1, 1); // Should only get one +1/+1 since all soldiers tokens enter at once
     }

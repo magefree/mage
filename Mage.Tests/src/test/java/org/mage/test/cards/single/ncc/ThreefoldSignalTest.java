@@ -40,7 +40,6 @@ public class ThreefoldSignalTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, esperSojourners, 2);
     }
 
@@ -59,7 +58,6 @@ public class ThreefoldSignalTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
         assertLife(playerB, 17);
     }
 
@@ -81,7 +79,6 @@ public class ThreefoldSignalTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, atogatog, 1);
     }
 
@@ -102,7 +99,6 @@ public class ThreefoldSignalTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
         assertPermanentCount(playerB, esperSojourners, 1);
     }
 }

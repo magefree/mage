@@ -44,7 +44,6 @@ public class MariTheKillingQuillTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount(playerA, 0);
         assertGraveyardCount(playerA, automation, 1);
@@ -73,7 +72,6 @@ public class MariTheKillingQuillTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 1);
         assertPermanentCount(playerA, "Treasure Token", 2);

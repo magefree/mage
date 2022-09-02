@@ -37,7 +37,6 @@ public class DjinnIlluminatusTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertLife(playerB, 14);
     }
 
@@ -58,7 +57,6 @@ public class DjinnIlluminatusTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertLife(playerB, 14);
     }
 
@@ -76,7 +74,6 @@ public class DjinnIlluminatusTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertLife(playerA, 17);
     }
 }

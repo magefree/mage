@@ -43,7 +43,6 @@ public class SinisterConciergeTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount(playerA, sinisterConcierge, 1);
         assertCounterOnExiledCardCount(sinisterConcierge, CounterType.TIME, 3);

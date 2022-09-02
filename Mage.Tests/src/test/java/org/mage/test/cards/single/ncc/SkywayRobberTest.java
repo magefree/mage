@@ -36,7 +36,6 @@ public class SkywayRobberTest extends CardTestPlayerBase {
 
         setStopAt(3, PhaseStep.END_COMBAT);
         execute();
-        assertAllCommandsUsed();
         assertExileCount(playerA, "Mountain", 5);
         assertLife(playerB, 17);
     }
@@ -57,7 +56,6 @@ public class SkywayRobberTest extends CardTestPlayerBase {
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
         assertExileCount(playerA, "Mountain", 4);
         assertPermanentCount(playerA, "Sol Ring", 1);
         assertLife(playerB, 17);

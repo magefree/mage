@@ -44,7 +44,6 @@ public class PutCardFromOneOfTwoZonesOntoBattlefieldEffectTest extends CardTestP
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     /**
@@ -61,7 +60,6 @@ public class PutCardFromOneOfTwoZonesOntoBattlefieldEffectTest extends CardTestP
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, vorpal, 1);
     }
@@ -80,7 +78,6 @@ public class PutCardFromOneOfTwoZonesOntoBattlefieldEffectTest extends CardTestP
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, vorpal, 1);
     }
@@ -101,7 +98,6 @@ public class PutCardFromOneOfTwoZonesOntoBattlefieldEffectTest extends CardTestP
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, vorpal, 1);
     }
@@ -123,14 +119,13 @@ public class PutCardFromOneOfTwoZonesOntoBattlefieldEffectTest extends CardTestP
         setStrictChooseMode(true);
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mountain");
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-5");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "-5");
         setChoice(playerA, swift);
         setChoice(playerA, "Yes"); // Say yes to Swift Warkite's ETB (no further choice needed since there are no possible options
 
         setStopAt(1, PhaseStep.END_TURN);
 
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, nissa, 1);
         assertPermanentCount(playerA, swift, 1);
@@ -154,12 +149,11 @@ public class PutCardFromOneOfTwoZonesOntoBattlefieldEffectTest extends CardTestP
         setStrictChooseMode(true);
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mountain");
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-5");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "-5");
 
         setStopAt(1, PhaseStep.END_TURN);
 
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, nissa, 1);
     }
@@ -185,7 +179,6 @@ public class PutCardFromOneOfTwoZonesOntoBattlefieldEffectTest extends CardTestP
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, sliver, 1);
         assertAbility(playerA, sliver, HasteAbility.getInstance(), true);
@@ -193,7 +186,6 @@ public class PutCardFromOneOfTwoZonesOntoBattlefieldEffectTest extends CardTestP
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
 
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, sliver, 1);
     }
