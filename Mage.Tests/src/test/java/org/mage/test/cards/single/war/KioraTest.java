@@ -30,6 +30,7 @@ public class KioraTest extends CardTestPlayerBase {
         
         // cast a spell to tap the only land
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Giant Growth", "Bronze Sable");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         
         // untap that only land
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-1: Untap target permanent", "Forest");

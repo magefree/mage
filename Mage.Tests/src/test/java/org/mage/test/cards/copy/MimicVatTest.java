@@ -40,7 +40,7 @@ public class MimicVatTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
 
         // clone the opponent's creature
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone", true);
         setChoice(playerA, true); // use clone on etb
         setChoice(playerA, "Silvercoat Lion");
 
@@ -77,7 +77,7 @@ public class MimicVatTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phyrexian Metamorph");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phyrexian Metamorph", true);
         setChoice(playerA, true);
         setChoice(playerA, "Silvercoat Lion");
 

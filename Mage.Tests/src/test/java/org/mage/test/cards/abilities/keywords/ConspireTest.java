@@ -196,7 +196,7 @@ public class ConspireTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Sakashima the Impostor");
         addCard(Zone.HAND, playerA, "Lightning Bolt");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wort, the Raidmother"); // {4}{R/G}{R/G}
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wort, the Raidmother", true); // {4}{R/G}{R/G}
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sakashima the Impostor"); // {2}{U}{U}
         setChoice(playerA, "Wort, the Raidmother");
 
@@ -223,7 +223,7 @@ public class ConspireTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Sakashima the Impostor");
         addCard(Zone.HAND, playerA, "Lightning Bolt");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wort, the Raidmother"); // {4}{R/G}{R/G}
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wort, the Raidmother", true); // {4}{R/G}{R/G}
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sakashima the Impostor"); // {2}{U}{U}
         setChoice(playerA, "Wort, the Raidmother");
 

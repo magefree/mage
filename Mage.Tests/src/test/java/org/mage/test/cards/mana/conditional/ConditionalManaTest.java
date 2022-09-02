@@ -91,7 +91,7 @@ public class ConditionalManaTest extends CardTestPlayerBase {
     }
 
     /**
-     * I wasunable to use "Rosheen Meanderer" ability to pay for "Candelabra of
+     * I was unable to use "Rosheen Meanderer" ability to pay for "Candelabra of
      * Tawnos" ability even thought it has "X" on its cost
      */
     @Test
@@ -107,7 +107,7 @@ public class ConditionalManaTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Snapping Drake");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Snapping Drake", true);
         activateManaAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{T}: Add {C}{C}{C}{C}");
 
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{X}, {T}: Untap");
@@ -116,6 +116,7 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         addTarget(playerB, "Island");
         addTarget(playerB, "Island");
         addTarget(playerB, "Island");
+        waitStackResolved(2, PhaseStep.POSTCOMBAT_MAIN);
 
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Snapping Drake");
 

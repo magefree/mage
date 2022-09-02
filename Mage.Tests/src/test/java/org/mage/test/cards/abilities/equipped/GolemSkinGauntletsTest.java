@@ -27,6 +27,7 @@ public class GolemSkinGauntletsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {4}", "Elite Vanguard");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {2}", "Elite Vanguard");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

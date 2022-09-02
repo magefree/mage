@@ -13,7 +13,10 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class LilianaDefiantNecromancerTest extends CardTestPlayerBase {
 
-    // Reported bug: -X allowing returning creatures with higher CMC than counters removed
+    /**
+     * Reported bug:
+     *      -X allowing returning creatures with higher CMC than counters removed
+     */
     @Test
     public void testMinusAbilityShouldNotReturnHigherCmcCreature() {
         addCard(Zone.BATTLEFIELD, playerA, "Hill Giant", 1); // {3}{R} 3/3
@@ -43,7 +46,7 @@ public class LilianaDefiantNecromancerTest extends CardTestPlayerBase {
 
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
-            if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
+            if (!e.getMessage().contains("-X:$target=Hill Giant")) {
                 Assert.fail("Should have thrown error about cannot attack, but got:\n" + e.getMessage());
             }
         }

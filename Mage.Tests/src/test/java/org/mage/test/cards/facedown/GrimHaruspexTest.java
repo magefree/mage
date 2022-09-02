@@ -16,7 +16,7 @@ public class GrimHaruspexTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Grim Haruspex");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 7);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grim Haruspex");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grim Haruspex", true);
         setChoice(playerA, true); // cast it face down as 2/2 creature
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wrath of God");
 

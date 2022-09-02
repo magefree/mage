@@ -57,7 +57,7 @@ public class TestAPITest extends CardTestPlayerBase {
         try {
             execute();
         } catch (Throwable e) {
-            if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
+            if (!e.getMessage().contains("Can't find ability to activate command: Cast Shock$target=Grizzly Bears$!spellOnStack=Last Breath")) {
                 Assert.fail("Should have had error about playerA having too many actions, but got:\n" + e.getMessage());
             }
         }

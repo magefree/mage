@@ -23,7 +23,7 @@ public final class VodaSeaScavenger extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
         this.subtype.add(SubType.MERFOLK);
-        this.subtype.add(SubType.WIZARD);
+        this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

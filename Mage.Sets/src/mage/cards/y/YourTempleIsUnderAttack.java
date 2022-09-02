@@ -31,7 +31,7 @@ public final class YourTempleIsUnderAttack extends CardImpl {
 
         // • Strike a Deal — You and target opponent each draw two cards.
         this.getSpellAbility().addMode(new Mode(
-                new DrawCardSourceControllerEffect(1).setText("you")
+                new DrawCardSourceControllerEffect(2).setText("you")
         ).addEffect(new DrawCardTargetEffect(2)
                 .setText("and target opponent each draw two cards")
         ).withFlavorWord("Strike a Deal"));

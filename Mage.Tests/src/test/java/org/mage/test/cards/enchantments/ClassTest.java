@@ -62,6 +62,7 @@ public class ClassTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, merfolk);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{U}");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}{U}");
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
@@ -88,7 +89,9 @@ public class ClassTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, forest, 2);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{G}");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, forest);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, forest);
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -108,8 +111,11 @@ public class ClassTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, wastes);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{G}");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, forest);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, wastes);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}{G}");
         addTarget(playerA, wastes);
 

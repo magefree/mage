@@ -364,7 +364,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         // Creature - 3/3 Swampwalk
         addCard(Zone.HAND, playerA, "Bog Wraith", 1); // Creature {3}{B} (3/3)
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Omniscience");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Omniscience", true);
         setChoice(playerA, true); // Pay alternative costs? ({W}{U}{B}{R}{G})   
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bog Wraith");

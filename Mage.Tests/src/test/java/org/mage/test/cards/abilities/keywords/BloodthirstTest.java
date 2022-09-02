@@ -48,7 +48,8 @@ public class BloodthirstTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Lightning Bolt");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bloodlord of Vaasgoth");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bloodlord of Vaasgoth", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Barony Vampire");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

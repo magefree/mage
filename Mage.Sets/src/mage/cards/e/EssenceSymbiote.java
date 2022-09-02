@@ -95,7 +95,7 @@ class EssenceSymbioteTriggeredAbility extends TriggeredAbilityImpl {
                     && controller.getId().equals(sourcePermanent.getControllerId())
                     && this.isControlledBy(controller.getId())) {
                 for (Effect effect : this.getEffects()) {
-                    effect.setValue("targetId", targetPermanent.getId());
+                    effect.setBoostedValue("targetId", targetPermanent.getId());
                     effect.setTargetPointer(new FixedTarget(targetPermanent.getId(), targetPermanent.getZoneChangeCounter(game)));
                 }
                 return true;

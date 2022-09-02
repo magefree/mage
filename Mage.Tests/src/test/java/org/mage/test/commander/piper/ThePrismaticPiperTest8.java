@@ -31,7 +31,7 @@ public class ThePrismaticPiperTest8 extends ThePrismaticPiperBaseTest {
         setChoice(playerA, true); // Companion
         addCard(Zone.BATTLEFIELD, playerA, "Island", 8);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, piper);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, piper, true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Companion");
 
         setStrictChooseMode(true);

@@ -1,7 +1,9 @@
 package org.mage.test.cards.conditional;
 
+import com.sun.org.apache.bcel.internal.generic.POP;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.HasteAbility;
+import mage.constants.ManaType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -112,7 +114,7 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Jaded Sell-Sword");
         addCard(Zone.HAND, playerA, "Strike It Rich", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Strike It Rich");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Strike It Rich", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Jaded Sell-Sword");
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -175,7 +177,7 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Pyretic Ritual");
         addCard(Zone.HAND, playerA, "Gray Ogre");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pyretic Ritual");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pyretic Ritual", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gray Ogre");
 
         setStrictChooseMode(true);
@@ -200,6 +202,7 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, {T}:");
         setChoice(playerA, true);
         setChoice(playerA, true);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gray Ogre");
 
         setStrictChooseMode(true);
@@ -222,9 +225,9 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gray Ogre");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mana Drain", "Gray Ogre");
 
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);  // Let the Mana Drain delayed triggered ability resolve
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Sliver Construct");
 
-        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -251,6 +254,7 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
         setChoice(playerA, true);
         addTarget(playerA, "Gray Ogre");
 
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);  // Let the Mana Drain delayed triggered ability resolve
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Sliver Construct");
 
         setStrictChooseMode(true);

@@ -58,6 +58,7 @@ public class ThousandYearStormTest extends CardTestPlayerBase {
 
         // bolt stack before
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         // storm
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thousand-Year Storm");
 

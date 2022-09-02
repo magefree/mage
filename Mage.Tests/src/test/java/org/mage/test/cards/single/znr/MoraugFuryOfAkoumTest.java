@@ -109,6 +109,7 @@ public class MoraugFuryOfAkoumTest extends CardTestPlayerBase {
         attackWithAttackers(); // 9 damage
 
         playLand(1, PhaseStep.POSTCOMBAT_MAIN, playerA, mountain);
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);
         playLand(1, PhaseStep.POSTCOMBAT_MAIN, playerA, mountain);
 
         attackWithAttackers(); // 12 damage

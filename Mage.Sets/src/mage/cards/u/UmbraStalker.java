@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.hint.ValueHint;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -33,9 +33,9 @@ public final class UmbraStalker extends CardImpl {
 
         // Chroma - Umbra Stalker's power and toughness are each equal to the number of black mana symbols in the mana costs of cards in your graveyard.
         DynamicValue xValue = new ChromaUmbraStalkerCount();
-        Effect effect = new SetPowerToughnessSourceEffect(xValue, Duration.WhileOnBattlefield);
+        Effect effect = new SetBasePowerToughnessSourceEffect(xValue, Duration.EndOfGame);
         effect.setText("<i>Chroma</i> &mdash; Umbra Stalker's power and toughness are each equal to the number of black mana symbols in the mana costs of cards in your graveyard.");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect)
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, effect)
                 .addHint(new ValueHint("Black mana symbols in your graveyard's permanents", xValue))
         );
     }

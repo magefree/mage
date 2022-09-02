@@ -73,6 +73,7 @@ import java.io.InputStream;
 import java.net.SocketException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.*;
 import java.util.concurrent.Executors;
@@ -192,8 +193,19 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
      * Creates new form MageFrame
      */
     public MageFrame() throws MageException {
-        System.setProperty("javax.net.ssl.trustStore", System.getProperty("user.dir") + "/src/main/resources/cacerts".replace('/', File.separatorChar));
-        System.setProperty("javax.net.ssl.trustStorePassword","changeit");
+        File cacertsFile = new File(System.getProperty("user.dir") + "/release/cacerts").getAbsoluteFile();
+        if (!cacertsFile.exists()) { // When running from the jar file the contents of the /release folder will have been expanded into the home folder as part of packaging
+            cacertsFile = new File(System.getProperty("user.dir") + "/cacerts").getAbsoluteFile();
+        }
+        if (cacertsFile.exists()) {
+            LOGGER.info("Custom (or bundled) Java certificate file (cacerts) file found");
+            String cacertsPath = cacertsFile.getPath();
+            System.setProperty("javax.net.ssl.trustStore", cacertsPath);
+            System.setProperty("javax.net.ssl.trustStorePassword", "changeit");
+        } else {
+            LOGGER.info("custom Java certificate file not found at: " + cacertsFile.getAbsolutePath());
+        }
+
         setWindowTitle();
 
         EDTExceptionHandler.registerExceptionHandler();

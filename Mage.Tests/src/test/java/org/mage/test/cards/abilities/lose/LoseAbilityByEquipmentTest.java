@@ -27,7 +27,7 @@ public class LoseAbilityByEquipmentTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Cobbled Wings"); // gives Flying
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Magebane Armor");
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cobbled Wings");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cobbled Wings", true);
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {1}", "Silvercoat Lion"); // give Flying
         activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Equip {2}", "Silvercoat Lion"); // lose Flying
 

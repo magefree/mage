@@ -96,9 +96,7 @@ public class BlitzTest extends CardTestPlayerBase {
         } catch (AssertionError e) {
             Assert.assertEquals(
                     "Shouldn't be able to cast normally from graveyard",
-                    "Missing CAST/ACTIVATE def for turn 1, step PRECOMBAT_MAIN, PlayerA\n" +
-                            "Can't find available command - activate:Cast Tenacious Underdog " +
-                            "(use checkPlayableAbility for \"non available\" checks)", e.getMessage()
+                    "Can't find ability to activate command: Cast Tenacious Underdog", e.getMessage()
             );
         }
 

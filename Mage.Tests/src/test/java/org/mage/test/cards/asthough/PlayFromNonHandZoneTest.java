@@ -46,7 +46,7 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBaseWithAIHelps {
         try {
             execute();
         } catch (Throwable e) {
-            if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
+            if (!e.getMessage().contains("Cast Worldheart Phoenix")) {
                 Assert.fail("Must have thrown error about not being able to cast Worldheart Phoenix, but got:\n" + e.getMessage());
             }
         }
@@ -102,8 +102,8 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBaseWithAIHelps {
         checkPlayableAbility("Can't cast Silvercoat", 2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Cast Silvercoat", false);
 
         // CAN cast from exile
-        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Abzan Banner");
-        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Dragon Grip", "Narset, Enlightened Master");
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Abzan Banner", true);
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Dragon Grip", "Narset, Enlightened Master", true);
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Peach Garden Oath");
 
         setStopAt(2, PhaseStep.END_TURN);
@@ -245,9 +245,10 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBaseWithAIHelps {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{W}{U}{B}{R}{G}: Exile");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mountain");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Karn's Temporal Sundering");
         addTarget(playerA, playerA);
         addTarget(playerA, "Silvercoat Lion");
@@ -291,9 +292,11 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBaseWithAIHelps {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{W}{U}{B}{R}{G}: Exile");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mountain");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Karn's Temporal Sundering");
         addTarget(playerA, playerA);
         addTarget(playerA, "Golos, Tireless Pilgrim"); // Return to hand
@@ -341,7 +344,7 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBaseWithAIHelps {
 
         attack(2, playerB, "Fallen Shinobi");
 
-        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Tormenting Voice");
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Tormenting Voice", true);
         setChoice(playerB, "Pillarfield Ox"); // Discord for Tormenting Voice
 
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Demon of Catastrophes");
@@ -391,7 +394,7 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBaseWithAIHelps {
 
         attack(2, playerB, "Fallen Shinobi");
 
-        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Angelic Purge");
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Angelic Purge", true);
         setChoice(playerB, "Silvercoat Lion"); // Sacrifice for Purge
         addTarget(playerB, "Amulet of Kroog"); // Exile with Purge
 
@@ -451,7 +454,7 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBaseWithAIHelps {
 
         // cast purge from exile
         checkPlayableAbility("after exile - can play purge", 2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Cast Angelic Purge", true);
-        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Angelic Purge");
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Angelic Purge", true);
         setChoice(playerB, "Silvercoat Lion"); // sacrifice cost
         addTarget(playerB, "Amulet of Kroog"); // exile target
 

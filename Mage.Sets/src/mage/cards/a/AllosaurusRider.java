@@ -10,7 +10,7 @@ import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.IntPlusDynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -47,7 +47,7 @@ public final class AllosaurusRider extends CardImpl {
 
         // Allosaurus Rider's power and toughness are each equal to 1 plus the number of lands you control.
         DynamicValue onePlusControlledLands = new IntPlusDynamicValue(1, new PermanentsOnBattlefieldCount(new FilterControlledLandPermanent("lands you control")));
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(onePlusControlledLands, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(onePlusControlledLands, Duration.EndOfGame)));
 
     }
 

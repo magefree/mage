@@ -191,6 +191,7 @@ public class InfectTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Corrupted Conscience", "Phyrexian Obliterator");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Enslave", "Phyrexian Obliterator");
 
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);

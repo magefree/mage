@@ -33,7 +33,7 @@ public class DependentEffectsTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Opalescence");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Opalescence",true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Enchanted Evening");
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

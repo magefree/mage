@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -42,7 +42,7 @@ public final class AnaxHardenedInTheForge extends CardImpl {
         // Anax's power is equal to your devotion to red.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
-                new SetPowerSourceEffect(DevotionCount.R, Duration.EndOfGame)
+                new SetBasePowerSourceEffect(DevotionCount.R, Duration.EndOfGame)
                         .setText("{this}'s power is equal to your devotion to red")
         ).addHint(DevotionCount.R.getHint()));
 

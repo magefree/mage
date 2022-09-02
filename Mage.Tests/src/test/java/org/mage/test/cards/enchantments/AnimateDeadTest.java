@@ -88,6 +88,7 @@ public class AnimateDeadTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Animate Dead", "Eternal Witness");
         setChoice(playerA, "Yes");
         addTarget(playerA, "Silvercoat Lion");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Eternal Witness");
 

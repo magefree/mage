@@ -69,7 +69,7 @@ public class ChorusOfTheConclaveTest extends CardTestPlayerBase {
         // Creature spells you cast cost {1} less to cast for each creature you control with a +1/+1 counter on it.        
         addCard(Zone.HAND, playerA, "Hamza, Guardian of Arashin"); // {4}{G}{W}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin Roughrider");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin Roughrider", true);
         setChoice(playerA, true);
         setChoice(playerA, "X=1");
 
@@ -78,6 +78,7 @@ public class ChorusOfTheConclaveTest extends CardTestPlayerBase {
         setChoice(playerA, "X=1");
         
         playLand(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Mountain");
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Akki Drillmaster");
         setChoice(playerA, true);
         setChoice(playerA, "X=1");

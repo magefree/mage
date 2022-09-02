@@ -9,7 +9,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ChooseOpponentEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -42,7 +42,7 @@ public final class EntropicSpecter extends CardImpl {
         // Entropic Specter's power and toughness are each equal to the number of cards in the chosen player's hand.
         this.addAbility(new SimpleStaticAbility(Zone.ALL,
                 // back to the graveyard or if the chosen player left the gane it's again a 0/0
-                new SetPowerToughnessSourceEffect(CardsInTargetPlayerHandCount.instance, Duration.WhileOnBattlefield, SubLayer.CharacteristicDefining_7a)));
+                new SetBasePowerToughnessSourceEffect(CardsInTargetPlayerHandCount.instance, Duration.WhileOnBattlefield, SubLayer.CharacteristicDefining_7a)));
 
         // Whenever Entropic Specter deals damage to a player, that player discards a card.
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1, false), false, true));

@@ -75,6 +75,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
 
         for (int i = 0; i < 12; i++) {
             activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Level up {1}");
+            waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         }
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image");
@@ -110,11 +111,10 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Phantasmal Image", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Illusionary Servant");
 
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image", true);
         setChoice(playerA, "Illusionary Servant");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
         setChoice(playerA, "Illusionary Servant-M10");
-
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

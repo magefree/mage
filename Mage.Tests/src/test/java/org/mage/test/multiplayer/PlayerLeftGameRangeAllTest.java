@@ -260,8 +260,9 @@ public class PlayerLeftGameRangeAllTest extends CardTestMultiPlayerBase {
         addCard(Zone.BATTLEFIELD, playerD, "Plains", 4);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curse of Vengeance", playerD);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, "Silvercoat Lion");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, "Silvercoat Lion", true);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, "Silvercoat Lion");
 
         castSpell(2, PhaseStep.BEGIN_COMBAT, playerC, "Lightning Bolt", playerD);

@@ -70,6 +70,7 @@ public class SpendManaAsThoughItWereManaOfAnyColorTest extends CardTestPlayerBas
         addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
 
         castSpell(1, PhaseStep.UPKEEP, playerB, "Lightning Bolt", "Silvercoat Lion");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Darksteel Forge");
 

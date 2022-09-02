@@ -19,8 +19,8 @@ public class SoulWardenTest extends CardTestPlayerBase {
      */
     @Test
     public void testDisabledEffectOnChangeZone() {
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);        
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);        
+        // Can't use basic lands since AI may tap them incorrectly when paying for generic mana costs
+        addCard(Zone.BATTLEFIELD, playerA, "Plateau", 6);
         addCard(Zone.BATTLEFIELD, playerA, "Soul Warden", 1);
         addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
         addCard(Zone.HAND, playerA, "Elite Vanguard", 2);

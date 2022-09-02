@@ -265,14 +265,15 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         execute();
     }
 
+    /**
+     * Reported bug: https://github.com/magefree/mage/issues/5121
+     *      Exiling your commander from your graveyard should give you the option to put it in command zone
+     *      We were playing in a restarted-by-Karn game (if that mattered), and a player who exiled their
+     *      commander from graveyard via Delve was not given the opportunity to place it in the command zone.
+     *      Instead, it went directly to the exiled zone.
+     */
     @Test
     public void test_ExileWithDelvePayAndReturn() {
-        // https://github.com/magefree/mage/issues/5121
-        // Exiling your commander from your graveyard should give you the option to put it in command zone
-        // We were playing in a restarted-by-Karn game (if that mattered), and a player who exiled their
-        // commander from graveyard via Delve was not given the opportunity to place it in the command zone.
-        // Instead, it went directly to the exiled zone.
-
         // disable auto-payment for delve test
         disableManaAutoPayment(playerA);
 
@@ -298,6 +299,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Balduvian Bears");
         setChoice(playerA, "Red"); // pay
         setChoice(playerA, false); // leave in graveyard
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // use commander as delve pay
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 5);

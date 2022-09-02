@@ -108,8 +108,8 @@ enum DonalHeraldOfWingsApplier implements StackObjectCopyApplier {
     @Override
     public void modifySpell(StackObject copiedSpell, Game game) {
         copiedSpell.addSubType(SubType.SPIRIT);
-        copiedSpell.getPower().modifyBaseValue(1);
-        copiedSpell.getToughness().modifyBaseValue(1);
+        copiedSpell.getPower().setModifiedBaseValue(1);
+        copiedSpell.getToughness().setModifiedBaseValue(1);
     }
 
     @Override

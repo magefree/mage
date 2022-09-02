@@ -70,7 +70,7 @@ public class PhyrexianManaTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);
 
         setChoice(playerA, true); //yes to pay 2 life to cast Crypt Ghast
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crypt Ghast"); //3 mana used, 2 life paid (18 life total)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crypt Ghast", true); //3 mana used, 2 life paid (18 life total)
         setChoice(playerA, true); //yes to pay 2 life to cast Banehound
         setChoice(playerA, true); //yes to Extort
         setChoice(playerA, true); //yes to pay 2 life to Extort

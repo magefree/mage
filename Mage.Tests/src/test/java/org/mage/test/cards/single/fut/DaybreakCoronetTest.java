@@ -41,6 +41,7 @@ public class DaybreakCoronetTest extends CardTestPlayerBase {
 
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Holy Strength", "Silvercoat Lion");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Daybreak Coronet", "Silvercoat Lion");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -65,6 +66,7 @@ public class DaybreakCoronetTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Demystify");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Holy Strength", "Silvercoat Lion");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Daybreak Coronet", "Silvercoat Lion");
         
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Demystify", "Holy Strength");

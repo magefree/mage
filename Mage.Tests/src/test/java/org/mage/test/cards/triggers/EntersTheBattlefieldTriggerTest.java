@@ -87,6 +87,7 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Terror", 1); // {1}{B}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scion of Vitu-Ghazi");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Terror", "Scion of Vitu-Ghazi");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Reanimate", "Scion of Vitu-Ghazi");
 
@@ -225,7 +226,9 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
 
     }
 
-    // Test another zombie trigger
+    /**
+     * Test another zombie trigger
+     */
     @Test
     public void testNoxiousGhoul2() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 8);
@@ -246,6 +249,7 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Noxious Ghoul");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Ego Erasure", "targetPlayer=PlayerA", "Whenever");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scathe Zombies");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
 
@@ -261,7 +265,9 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
     }
 
-    // Test copy of Noxious Ghoul
+    /**
+     * Test copy of Noxious Ghoul
+     */
     @Test
     public void testCopyNoxiousGhoul() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);

@@ -169,8 +169,9 @@ public class LazavDimirMastermindTest extends CardTestPlayerBase {
         skipInitShuffling();
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player mills a card.", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Tribute to Hunger");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Tribute to Hunger");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Reanimate", "Lazav, Dimir Mastermind");
 
@@ -213,7 +214,7 @@ public class LazavDimirMastermindTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player mills a card.", playerB);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rest in Peace");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Rest in Peace");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

@@ -176,7 +176,7 @@ public class GontiLordOfLuxuryEffectTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gonti, Lord of Luxury");
         // Player B is autochosen since only option
         setChoice(playerA, "Ob Nixilis Reignited");
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Ob Nixilis Reignited");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Ob Nixilis Reignited", true);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "-3:", "Dross Crocodile");
 
         attack(2, playerB, "Dross Crocodile", "Ob Nixilis Reignited");
@@ -197,6 +197,5 @@ public class GontiLordOfLuxuryEffectTest extends CardTestPlayerBase {
 
         assertHandCount(playerB, "Ob Nixilis Reignited", 0);
         assertPermanentCount(playerB, "Ob Nixilis Reignited", 1);
-
     }
 }

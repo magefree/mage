@@ -78,8 +78,8 @@ public class PlayerDiedStackTargetHandlingTest extends CardTestMultiPlayerBase {
         // Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
         addCard(Zone.HAND, playerA, "Tendrils of Agony", 1); // Sorcery {2}{B}{B}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tendrils of Agony", playerD);
         addTarget(playerA, playerD);
         addTarget(playerA, playerD);
@@ -92,6 +92,5 @@ public class PlayerDiedStackTargetHandlingTest extends CardTestMultiPlayerBase {
         Assert.assertTrue("Active player has to be player C", currentGame.getActivePlayerId().equals(playerC.getId()));
 
         assertLife(playerA, 7);
-
     }
 }

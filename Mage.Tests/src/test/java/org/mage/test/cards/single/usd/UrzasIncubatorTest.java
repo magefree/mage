@@ -29,8 +29,8 @@ public class UrzasIncubatorTest extends CardTestPlayerBase {
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Urza's Incubator"); // taps 3 plains
         setChoice(playerA, "Eldrazi");
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Eldrazi Displacer"); // taps last plains
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Eldrazi Mimic"); // both mimics should be free
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Eldrazi Displacer", true); // taps last plains
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Eldrazi Mimic", true); // both mimics should be free
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Eldrazi Mimic");
         setStopAt(1, PhaseStep.END_TURN);
         execute();

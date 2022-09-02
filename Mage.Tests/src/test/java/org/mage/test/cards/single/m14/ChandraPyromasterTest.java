@@ -22,6 +22,7 @@ public class ChandraPyromasterTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "0: Exile the top card of your library. You may play it this turn.");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mizzium Mortars", "Silvercoat Lion");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -61,7 +62,7 @@ public class ChandraPyromasterTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void testAbility2CastCardFromExileWithOverlaod() {
+    public void testAbility2CastCardFromExileWithOverload() {
 
         addCard(Zone.BATTLEFIELD, playerA, "Chandra, Pyromaster");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
@@ -72,6 +73,7 @@ public class ChandraPyromasterTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 2);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "0: Exile the top card of your library. You may play it this turn.");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mizzium Mortars with overload");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -84,7 +86,5 @@ public class ChandraPyromasterTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerB, "Silvercoat Lion", 0);
         assertGraveyardCount(playerB, "Silvercoat Lion", 2);
-
     }
-
 }

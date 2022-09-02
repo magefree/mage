@@ -37,12 +37,12 @@ public class CommanderColorChangeTest extends CardTestCommanderDuelBase {
         addCard(Zone.BATTLEFIELD, playerA, "Kraken's Eye", 1);
         
         
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Painter's Servant");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Painter's Servant", true);
         setChoice(playerA, "Blue");
         
         // When a player casts a spell or a creature attacks, exile Norin the Wary. 
         // Return it to the battlefield under its owner's control at the beginning of the next end step.
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Norin the Wary");       
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Norin the Wary", true);
         setChoice(playerA, true); //  Whenever a player casts a blue spell, you may gain 1 life. Choices: Yes - No
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -51,11 +51,11 @@ public class CommanderColorChangeTest extends CardTestCommanderDuelBase {
         assertPermanentCount(playerA, "Norin the Wary", 1);
         
         Permanent norin = getPermanent("Norin the Wary", playerA);
-        Assert.assertEquals(true, norin.getColor(currentGame).isBlue());
-        Assert.assertEquals(true, norin.getColor(currentGame).isRed());
+        Assert.assertTrue(norin.getColor(currentGame).isBlue());
+        Assert.assertTrue(norin.getColor(currentGame).isRed());
         
         Permanent kraken = getPermanent("Kraken's Eye", playerA);
-        Assert.assertEquals(true, kraken.getColor(currentGame).isBlue());
+        Assert.assertTrue(kraken.getColor(currentGame).isBlue());
         
         assertLife(playerA, 41);
         assertLife(playerB, 40);
@@ -91,12 +91,12 @@ public class CommanderColorChangeTest extends CardTestCommanderDuelBase {
         addCard(Zone.HAND, playerB, "Altar's Light", 1); // Instant {2}{W}{W}
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 4);        
         
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Painter's Servant");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Painter's Servant", true);
         setChoice(playerA, "Blue");
         
         // When a player casts a spell or a creature attacks, exile Norin the Wary. 
         // Return it to the battlefield under its owner's control at the beginning of the next end step.
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Norin the Wary");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Norin the Wary", true);
         setChoice(playerA, true); //  Whenever a player casts a blue spell, you may gain 1 life. Choices: Yes - No
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Altar's Light", "Painter's Servant", "Norin the Wary");
         setChoice(playerA, true); //  Whenever a player casts a blue spell, you may gain 1 life. Choices: Yes - No

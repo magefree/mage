@@ -119,8 +119,8 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
 
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
-                    permanent.getPower().setValue(token.getPower().getValue());
-                    permanent.getToughness().setValue(token.getToughness().getValue());
+                    permanent.getPower().setModifiedBaseValue(token.getPower().getValue());
+                    permanent.getToughness().setModifiedBaseValue(token.getToughness().getValue());
                 }
                 break;
         }

@@ -66,33 +66,33 @@ class LifeAndLimbEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-                switch (layer) {
-                    case TypeChangingEffects_4:
-                        permanent.addCardType(game, CardType.CREATURE);
-                        permanent.addCardType(game, CardType.LAND);
-                        permanent.addSubType(game, SubType.SAPROLING);
-                        // land abilities are intrinsic, so add them here, not in layer 6
-                        permanent.addSubType(game, SubType.FOREST);
-                        if (!permanent.getAbilities(game).containsClass(GreenManaAbility.class)) {
-                            permanent.addAbility(new GreenManaAbility(), source.getSourceId(), game);
-                        }
-                        break;
-                    case ColorChangingEffects_5:
-                        permanent.getColor(game).setColor(ObjectColor.GREEN);
-                        break;
-                    case PTChangingEffects_7:
-                        if (sublayer == SubLayer.SetPT_7b) {
-                            permanent.getPower().setValue(1);
-                            permanent.getToughness().setValue(1);
-                        }
-                        break;
-                }
-            }
-            return true;
+        if (player == null) {
+            return false;
         }
-        return false;
+        for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
+            switch (layer) {
+                case TypeChangingEffects_4:
+                    permanent.addCardType(game, CardType.CREATURE);
+                    permanent.addCardType(game, CardType.LAND);
+                    permanent.addSubType(game, SubType.SAPROLING);
+                    // land abilities are intrinsic, so add them here, not in layer 6
+                    permanent.addSubType(game, SubType.FOREST);
+                    if (!permanent.getAbilities(game).containsClass(GreenManaAbility.class)) {
+                        permanent.addAbility(new GreenManaAbility(), source.getSourceId(), game);
+                    }
+                    break;
+                case ColorChangingEffects_5:
+                    permanent.getColor(game).setColor(ObjectColor.GREEN);
+                    break;
+                case PTChangingEffects_7:
+                    if (sublayer == SubLayer.SetPT_7b) {
+                        permanent.getPower().setModifiedBaseValue(1);
+                        permanent.getToughness().setModifiedBaseValue(1);
+                    }
+                    break;
+            }
+        }
+        return true;
     }
 
     @Override

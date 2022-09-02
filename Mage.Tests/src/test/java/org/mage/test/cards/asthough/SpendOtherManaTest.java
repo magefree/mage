@@ -98,7 +98,7 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
         // -7: You gain X life and draw X cards, where X is the number of lands you control.
         addCard(Zone.LIBRARY, playerA, "Nissa, Voice of Zendikar"); // {1}{G}{G}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dark Petition");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dark Petition", true);
         addTarget(playerA, "Nissa, Voice of Zendikar");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nissa, Voice of Zendikar");
