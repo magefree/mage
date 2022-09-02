@@ -12,9 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.filter.predicate.mageobject.ToughnessPredicate;
+import mage.filter.predicate.mageobject.*;
 
 import java.util.UUID;
 
@@ -27,8 +25,8 @@ public class BessSoulNourisher extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, 1));
-        filter.add(new ToughnessPredicate(ComparisonType.EQUAL_TO, 1));
+        filter.add(new BasePowerPredicate(ComparisonType.EQUAL_TO, 1));
+        filter.add(new BaseToughnessPredicate(ComparisonType.EQUAL_TO, 1));
     }
 
     public BessSoulNourisher(UUID ownerId, CardSetInfo setInfo) {
