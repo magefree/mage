@@ -10,6 +10,7 @@ import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.*;
 import mage.filter.predicate.other.AnotherTargetPredicate;
+import mage.filter.predicate.permanent.AttachedOrShareCreatureTypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 
@@ -890,6 +891,13 @@ public final class StaticFilters {
     static {
         FILTER_CREATURE_TOKENS.add(TokenPredicate.TRUE);
         FILTER_CREATURE_TOKENS.setLockedFilter(true);
+    }
+
+    public static final FilterCreaturePermanent FILTER_CREATURE_ENCHANTED_AND_SHARE_TYPE = new FilterCreaturePermanent("enchanted creature and other creatures that share a creature type with it");
+
+    static {
+        FILTER_CREATURE_ENCHANTED_AND_SHARE_TYPE.add(AttachedOrShareCreatureTypePredicate.instance);
+        FILTER_CREATURE_ENCHANTED_AND_SHARE_TYPE.setLockedFilter(true);
     }
 
     public static final FilterAttackingCreature FILTER_ATTACKING_CREATURE = new FilterAttackingCreature();
