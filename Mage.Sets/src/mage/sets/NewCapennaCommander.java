@@ -161,6 +161,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Grixis Panorama", 407, Rarity.COMMON, mage.cards.g.GrixisPanorama.class));
         cards.add(new SetCardInfo("Harmonize", 295, Rarity.UNCOMMON, mage.cards.h.Harmonize.class));
         cards.add(new SetCardInfo("Hex", 252, Rarity.RARE, mage.cards.h.Hex.class));
+        cards.add(new SetCardInfo("Henzie \"Toolbox\" Torre", 2, Rarity.MYTHIC, mage.cards.h.HenzieToolboxTorre.class));
         cards.add(new SetCardInfo("Hoofprints of the Stag", 203, Rarity.RARE, mage.cards.h.HoofprintsOfTheStag.class));
         cards.add(new SetCardInfo("Identity Thief", 224, Rarity.RARE, mage.cards.i.IdentityThief.class));
         cards.add(new SetCardInfo("Idol of Oblivion", 368, Rarity.RARE, mage.cards.i.IdolOfOblivion.class));
