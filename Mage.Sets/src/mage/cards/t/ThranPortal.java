@@ -78,7 +78,7 @@ class ThranPortalManaAbilityContinousEffect extends ContinuousEffectImpl {
 
     public ThranPortalManaAbilityContinousEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
-        staticText = "mana abilities of Thran Portal cost an additional 1 life to activate";
+        staticText = "mana abilities of {this} cost an additional 1 life to activate";
     }
 
     public ThranPortalManaAbilityContinousEffect(final ThranPortalManaAbilityContinousEffect effect) {
@@ -138,7 +138,7 @@ class ThranPortalAdditionalCostEffect extends CostModificationEffectImpl {
 
     ThranPortalAdditionalCostEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
-        this.staticText = "mana abilities of Thran Portal cost an additional 1 life to activate";
+        this.staticText = "mana abilities of {this} cost an additional 1 life to activate";
     }
 
     private ThranPortalAdditionalCostEffect(final ThranPortalAdditionalCostEffect effect) {
