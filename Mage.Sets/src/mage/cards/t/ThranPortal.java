@@ -9,10 +9,12 @@ import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.ChooseBasicLandTypeEffect;
 import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.effects.common.continuous.AddChosenSubtypeEffect;
+import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.common.enterAttribute.EnterAttributeAddChosenSubtypeEffect;
 import mage.abilities.mana.*;
 import mage.cards.CardImpl;
@@ -50,6 +52,7 @@ public class ThranPortal extends CardImpl {
 
         // Mana abilities of Thran Portal cost an additional 1 life to activate.
         // This also adds the mana ability
+        this.addAbility(new SimpleStaticAbility(new ThranPortalAdditionalCostEffect()));
         this.addAbility(new SimpleStaticAbility(new ThranPortalManaAbilityContinousEffect()));
     }
 
@@ -71,13 +74,7 @@ class ThranPortalManaAbilityContinousEffect extends ContinuousEffectImpl {
         put(SubType.SWAMP, new BlackManaAbility());
         put(SubType.MOUNTAIN, new RedManaAbility());
         put(SubType.FOREST, new GreenManaAbility());
-
     }};
-    static {
-        for (BasicManaAbility manaAbility : abilityMap.values()) {
-            manaAbility.addCost(new PayLifeCost(1));
-        }
-    }
 
     public ThranPortalManaAbilityContinousEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
@@ -134,5 +131,37 @@ class ThranPortalManaAbilityContinousEffect extends ContinuousEffectImpl {
         }
 
         return true;
+    }
+}
+
+class ThranPortalAdditionalCostEffect extends CostModificationEffectImpl {
+
+    ThranPortalAdditionalCostEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
+        this.staticText = "mana abilities of Thran Portal cost an additional 1 life to activate";
+    }
+
+    private ThranPortalAdditionalCostEffect(final ThranPortalAdditionalCostEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public ThranPortalAdditionalCostEffect copy() {
+        return new ThranPortalAdditionalCostEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source, Ability abilityToModify) {
+        abilityToModify.addCost(new PayLifeCost(1));
+        return true;
+    }
+
+    @Override
+    public boolean applies(Ability abilityToModify, Ability source, Game game) {
+        if (!abilityToModify.getSourceId().equals(source.getSourceId())) {
+            return false;
+        }
+
+        return abilityToModify instanceof ManaAbility;
     }
 }

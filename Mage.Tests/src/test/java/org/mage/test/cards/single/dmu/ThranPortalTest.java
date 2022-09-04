@@ -22,7 +22,7 @@ public class ThranPortalTest extends CardTestPlayerBase {
     private static final String thranPortal = "Thran Portal";
 
     /**
-     * Test that it comes in untapped tapping for mana deals damage.
+     * Test that tapping it for mana deals damage.
      * Also tests that it comes in untapped if you control 2 of fewer lands.
      */
     @Test
@@ -73,6 +73,55 @@ public class ThranPortalTest extends CardTestPlayerBase {
         execute();
         assertTapped(thranPortal, true);
         assertLife(playerB, 20 - 3);
+    }
+
+    /**
+     * Test that the mana ability gained from Chromatic Lantern also costs 1 life.
+     */
+    @Test
+    public void chromaticLanternCostInteraction() {
+        // Lands you control have “{T}: Add one mana of any color.”
+        addCard(Zone.BATTLEFIELD, playerA, "Chromatic Lantern");
+        addCard(Zone.HAND, playerA, thranPortal);
+        addCard(Zone.HAND, playerA, "Academy Loremaster");  // {U}{U}
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, thranPortal);
+        setChoice(playerA, "Thran");
+        setChoice(playerA, "Mountain"); // Set mountain so that it must use the ability given by chromatic lantern to get the {U}
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Academy Loremaster");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 19); // Should have lost life from tapping Thran Portal to use the ability chromatic lantern gave it
+        assertPermanentCount(playerA, "Academy Loremaster" , 1);
+    }
+
+
+    /**
+     * Tests that Manascape Refractor copies the Thran Portal's mana abilities, but not the additional 1 life cost.
+     */
+    @Test
+    public void manascapeRefractorInteraction() {
+        addCard(Zone.HAND, playerA, thranPortal);
+        addCard(Zone.HAND, playerA, "Academy Loremaster");  // {U}{U}
+        // Manascape Refractor enters the battlefield tapped.
+        // Manascape Refractor has all activated abilities of all lands on the battlefield.
+        // You may spend mana as though it were mana of any color to pay the activation costs of Manascape Refractor’s abilities.
+        addCard(Zone.BATTLEFIELD, playerA, "Manascape Refractor");
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, thranPortal);
+        setChoice(playerA, "Thran");
+        setChoice(playerA, "Island"); // Both Thran portal and Manascape will not tap for blue
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Academy Loremaster");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20 - 1); // Lost one life for Thran portal BUT NOT for Manascape Refractor
+        assertPermanentCount(playerA, "Academy Loremaster" , 1);
     }
 
 }
