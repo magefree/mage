@@ -6,6 +6,7 @@ import mage.cards.Card;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.Targets;
 
 import java.util.*;
 
@@ -113,5 +114,10 @@ public class SecondTargetPointer extends TargetPointerImpl {
             return permanent;
         }
         return null;
+    }
+
+    @Override
+    public String describeTargets(Targets targets, String defaultDescription) {
+        return targets.size() < 2 ? defaultDescription : targets.get(1).getDescription();
     }
 }

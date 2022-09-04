@@ -3,6 +3,7 @@ package mage.target.targetpointer;
 import mage.abilities.Ability;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.Targets;
 import mage.util.Copyable;
 
 import java.io.Serializable;
@@ -36,6 +37,16 @@ public interface TargetPointer extends Serializable, Copyable<TargetPointer> {
      * @return permanent
      */
     Permanent getFirstTargetPermanentOrLKI(Game game, Ability source);
+
+    /**
+     * Returns description of targets for ability text
+     *
+     * @param targets
+     * @param defaultText
+     */
+    default String describeTargets(Targets targets, String defaultDescription) {
+        return defaultDescription;
+    }
 
     /**
      * Store text to target pointer (usefull to keep data for specific trigger, e.g. selected target name for rules)

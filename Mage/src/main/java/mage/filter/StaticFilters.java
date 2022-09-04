@@ -438,6 +438,13 @@ public final class StaticFilters {
         FILTER_OPPONENTS_PERMANENT.setLockedFilter(true);
     }
 
+    public static final FilterNonlandPermanent FILTER_OPPONENTS_PERMANENT_NON_LAND = new FilterNonlandPermanent("nonland permanent an opponent controls");
+
+    static {
+        FILTER_OPPONENTS_PERMANENT_NON_LAND.add(TargetController.OPPONENT.getControllerPredicate());
+        FILTER_OPPONENTS_PERMANENT_NON_LAND.setLockedFilter(true);
+    }
+
     public static final FilterCreaturePermanent FILTER_OPPONENTS_PERMANENT_CREATURE = new FilterOpponentsCreaturePermanent();
 
     static {

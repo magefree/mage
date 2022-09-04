@@ -28,7 +28,7 @@ public final class GraspOfFate extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");
 
         // When Grasp of Fate enters the battlefield, for each opponent, exile up to one target nonland permanent that player controls until Grasp of Fate leaves the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect("")
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect()
                 .setTargetPointer(new EachTargetPointer())
                 .setText("for each opponent, exile up to one target nonland permanent that player controls until {this} leaves the battlefield")
         );

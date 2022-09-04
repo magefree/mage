@@ -63,11 +63,7 @@ public final class AngelOfCondemnation extends CardImpl {
         this.addAbility(ability);
 
         // {2}{W}, {T}, Exert Angel of Condemnation: Exile another target creature until Angel of Condemnation leaves the battlefield.
-        ability = new SimpleActivatedAbility(
-                new ExileUntilSourceLeavesEffect("")
-                        .setText("Exile another target creature until {this} leaves the battlefield"),
-                new ManaCostsImpl<>("{2}{W}")
-        );
+        ability = new SimpleActivatedAbility(new ExileUntilSourceLeavesEffect(), new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExertSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
