@@ -179,6 +179,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Radiant Grove", 253, Rarity.COMMON, mage.cards.r.RadiantGrove.class));
         cards.add(new SetCardInfo("Raff, Weatherlight Stalwart", 212, Rarity.UNCOMMON, mage.cards.r.RaffWeatherlightStalwart.class));
         cards.add(new SetCardInfo("Ragefire Hellkite", 285, Rarity.RARE, mage.cards.r.RagefireHellkite.class));
+        cards.add(new SetCardInfo("Ratadrabik of Urborg", 213, Rarity.RARE, mage.cards.r.RatadrabikOfUrborg.class));
         cards.add(new SetCardInfo("Relic of Legends", 236, Rarity.UNCOMMON, mage.cards.r.RelicOfLegends.class));
         cards.add(new SetCardInfo("Resolute Reinforcements", 29, Rarity.UNCOMMON, mage.cards.r.ResoluteReinforcements.class));
         cards.add(new SetCardInfo("Rith, Liberated Primeval", 214, Rarity.MYTHIC, mage.cards.r.RithLiberatedPrimeval.class));
