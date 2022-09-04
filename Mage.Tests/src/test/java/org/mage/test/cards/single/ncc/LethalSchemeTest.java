@@ -19,14 +19,14 @@ public class LethalSchemeTest extends CardTestPlayerBase {
      * Convoke
      * Destroy target creature or planeswalker. Each creature that convoked Lethal Scheme connives.
      */
-    private String scheme = "Lethal Scheme";
+    private static final String scheme = "Lethal Scheme";
 
-    private String vanguard = "Elite Vanguard"; // vanilla 2/1
-    private String bear = "Grizzly Bears"; // vanilla 2/2
-    private String ogre = "Gray Ogre"; // vanilla 2/2
-    private String mino = "Felhide Minotaur"; // vanilla 2/3
+    private static final String vanguard = "Elite Vanguard"; // vanilla 2/1
+    private static final String bear = "Grizzly Bears"; // vanilla 2/2
+    private static final String ogre = "Gray Ogre"; // vanilla 2/2
+    private static final String mino = "Felhide Minotaur"; // vanilla 2/3
 
-    private String blade = "Doom Blade"; // instant {1}{B} destroy target non-black creature.
+    private static final String blade = "Doom Blade"; // instant {1}{B} destroy target non-black creature.
     /*
      * Act of Aggression {3}{R/P}{R/P}
      * Instant
@@ -34,11 +34,11 @@ public class LethalSchemeTest extends CardTestPlayerBase {
      * Gain control of target creature an opponent controls until end of turn.
      * Untap that creature. It gains haste until end of turn.
      */
-    private String aggression = "Act of Aggression";
+    private static final String aggression = "Act of Aggression";
 
-    private String swamp = "Swamp";
-    private String island = "Island";
-    private String mountain = "Mountain";
+    private static final String swamp = "Swamp";
+    private static final String island = "Island";
+    private static final String mountain = "Mountain";
 
     @Test
     public void LethalSchemeNoConvoke() {
@@ -58,7 +58,6 @@ public class LethalSchemeTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, 0);
         assertGraveyardCount(playerA, 1);
@@ -97,7 +96,6 @@ public class LethalSchemeTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, 0);
         assertHandCount(playerA, 1);
@@ -144,7 +142,6 @@ public class LethalSchemeTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, 0);
 
@@ -191,7 +188,6 @@ public class LethalSchemeTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, 0);
 
@@ -237,7 +233,6 @@ public class LethalSchemeTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, 0);
 
@@ -291,7 +286,6 @@ public class LethalSchemeTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, 0);
 
@@ -349,7 +343,6 @@ public class LethalSchemeTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, 0);
 
@@ -426,7 +419,6 @@ public class LethalSchemeTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, 2); // Lethal Scheme + Doom Blade
         assertGraveyardCount(playerB, 3); // Act of Aggression + Elite Vanguard + Island
@@ -486,7 +478,6 @@ public class LethalSchemeTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, 3); // Grizzly Bears + Lethal Scheme + Gray Ogre
 
