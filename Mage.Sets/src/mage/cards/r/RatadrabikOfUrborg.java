@@ -6,15 +6,15 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.constants.*;
 import mage.abilities.keyword.VigilanceAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
@@ -51,7 +51,7 @@ public final class RatadrabikOfUrborg extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new GenericManaCost(2), false));
 
         // Other zombies you control have vigilance.
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
