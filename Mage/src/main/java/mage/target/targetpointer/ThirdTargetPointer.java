@@ -124,4 +124,9 @@ public class ThirdTargetPointer extends TargetPointerImpl {
     public String describeTargets(Targets targets, String defaultDescription) {
         return targets.size() < 3 ? defaultDescription : targets.get(2).getDescription();
     }
+
+    @Override
+    public boolean isPlural(Targets targets) {
+        return targets.size() > 2 && targets.get(2).getMaxNumberOfTargets() > 1;
+    }
 }

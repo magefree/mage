@@ -7,6 +7,10 @@ import mage.game.permanent.Permanent;
 
 import java.util.UUID;
 
+/**
+ *
+ * @author awjackson
+ */
 public enum AttachedOrShareCreatureTypePredicate implements ObjectSourcePlayerPredicate<Permanent> {
     instance;
 

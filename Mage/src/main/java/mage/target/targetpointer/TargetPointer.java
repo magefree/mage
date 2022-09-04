@@ -39,13 +39,18 @@ public interface TargetPointer extends Serializable, Copyable<TargetPointer> {
     Permanent getFirstTargetPermanentOrLKI(Game game, Ability source);
 
     /**
-     * Returns description of targets for ability text
+     * Describes the appropriate subset of targets for ability text.
      *
      * @param targets
      * @param defaultText
+     * @return
      */
     default String describeTargets(Targets targets, String defaultDescription) {
         return defaultDescription;
+    }
+
+    default boolean isPlural(Targets targets) {
+        return false;
     }
 
     /**

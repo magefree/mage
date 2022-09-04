@@ -120,4 +120,9 @@ public class SecondTargetPointer extends TargetPointerImpl {
     public String describeTargets(Targets targets, String defaultDescription) {
         return targets.size() < 2 ? defaultDescription : targets.get(1).getDescription();
     }
+
+    @Override
+    public boolean isPlural(Targets targets) {
+        return targets.size() > 1 && targets.get(1).getMaxNumberOfTargets() > 1;
+    }
 }

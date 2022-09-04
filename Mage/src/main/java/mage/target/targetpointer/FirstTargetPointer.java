@@ -123,4 +123,9 @@ public class FirstTargetPointer extends TargetPointerImpl {
     public String describeTargets(Targets targets, String defaultDescription) {
         return targets.isEmpty() ? defaultDescription : targets.get(0).getDescription();
     }
+
+    @Override
+    public boolean isPlural(Targets targets) {
+        return !targets.isEmpty() && targets.get(0).getMaxNumberOfTargets() > 1;
+    }
 }
