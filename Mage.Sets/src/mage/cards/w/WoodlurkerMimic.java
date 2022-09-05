@@ -7,7 +7,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.WitherAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -44,7 +44,7 @@ public final class WoodlurkerMimic extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever you cast a spell that's both black and green, Woodlurker Mimic has base power and toughness 4/5 until end of turn and gains wither until end of turn.
-        Ability ability = new SpellCastControllerTriggeredAbility(new SetPowerToughnessSourceEffect(4, 5, Duration.EndOfTurn, SubLayer.SetPT_7b), filter, false, rule);
+        Ability ability = new SpellCastControllerTriggeredAbility(new SetBasePowerToughnessSourceEffect(4, 5, Duration.EndOfTurn, SubLayer.SetPT_7b, true), filter, false, rule);
         ability.addEffect(new GainAbilitySourceEffect(WitherAbility.getInstance(), Duration.EndOfTurn, false, true));
         this.addAbility(ability);
 

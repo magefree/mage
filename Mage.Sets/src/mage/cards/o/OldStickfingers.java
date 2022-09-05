@@ -7,7 +7,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.StaticFilters;
@@ -34,7 +34,7 @@ public final class OldStickfingers extends CardImpl {
 
         // Old Stickfingers' power and toughness are equal to the number of creature cards in your graveyard.
         DynamicValue value = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURES);
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(value, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(value, Duration.EndOfGame)));
     }
 
     private OldStickfingers(final OldStickfingers card) {

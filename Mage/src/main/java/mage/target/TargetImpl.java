@@ -98,6 +98,24 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
+    public String getDescription() {
+        // target description for ability text
+        StringBuilder sb = new StringBuilder();
+        if (getNumberOfTargets() != 1 || getMaxNumberOfTargets() != 1) {
+            if (getNumberOfTargets() < getMaxNumberOfTargets() && getMaxNumberOfTargets() != Integer.MAX_VALUE) {
+                sb.append("up to ");
+            }
+            sb.append(CardUtil.numberToText(getMaxNumberOfTargets()));
+            sb.append(' ');
+        }
+        if (!isNotTarget() && !getTargetName().contains("target")) {
+            sb.append("target ");
+        }
+        sb.append(getTargetName());
+        return sb.toString();
+    }
+
+    @Override
     public String getMessage() {
         // UI choose message
         String suffix = "";

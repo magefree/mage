@@ -4,6 +4,8 @@ package mage.game.permanent.token;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
@@ -21,11 +23,13 @@ public final class KaroxBladewingDragonToken extends TokenImpl {
     }
 
     public KaroxBladewingDragonToken() {
-        super("Karox Bladewing Token", "legendary 4/4 red Dragon creature token with flying", 4, 4);
+        super("Karox Bladewing Token", "legendary 4/4 red Dragon creature token with flying");
 
         availableImageSetCodes = tokenImageSets;
         this.setOriginalExpansionSetCode("DOM");
 
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
         this.addSuperType(SuperType.LEGENDARY);
         this.cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.DRAGON);

@@ -3,7 +3,7 @@ package mage.cards.b;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.CostAdjuster;
-import mage.abilities.effects.common.continuous.SetPowerToughnessEnchantedEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessEnchantedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +29,7 @@ public final class BeltOfGiantStrength extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has base power and toughness 10/10.
-        this.addAbility(new SimpleStaticAbility(new SetPowerToughnessEnchantedEffect(10, 10)
+        this.addAbility(new SimpleStaticAbility(new SetBasePowerToughnessEnchantedEffect(10, 10)
                 .setText("equipped creature has base power and toughness 10/10")));
 
         // Equip {10}. This ability costs {X} less to activate where X is the power of the creature it targets.

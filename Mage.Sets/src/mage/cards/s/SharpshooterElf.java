@@ -8,7 +8,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
@@ -51,7 +51,7 @@ public final class SharpshooterElf extends CardImpl {
 
         // Sharpshooter Elf's power is equal to the number of creatures you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetPowerSourceEffect(CreaturesYouControlCount.instance, Duration.EndOfGame)
+                Zone.ALL, new SetBasePowerSourceEffect(CreaturesYouControlCount.instance, Duration.EndOfGame)
         ));
 
         // When Sharpshooter Elf enters the battlefield, it deals damage equal to its power to target creature with flying an opponent controls.

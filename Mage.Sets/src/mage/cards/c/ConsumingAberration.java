@@ -9,7 +9,7 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -34,7 +34,7 @@ public final class ConsumingAberration extends CardImpl {
         this.toughness = new MageInt(0);
 
         //Consuming Aberration's power and toughness are each equal to the number of cards in your opponents' graveyards.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInOpponentsGraveyardsCount(), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new CardsInOpponentsGraveyardsCount(), Duration.EndOfGame)));
         //Whenever you cast a spell, each opponent reveals cards from the top of their library until they reveal a land card, then puts those cards into their graveyard.
         this.addAbility(new SpellCastControllerTriggeredAbility(new ConsumingAberrationEffect(), false));
     }

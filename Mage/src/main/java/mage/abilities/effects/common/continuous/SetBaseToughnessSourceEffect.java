@@ -12,30 +12,31 @@ import mage.constants.SubLayer;
 import mage.game.Game;
 
 /**
+ *  RENAME
  * @author Backfir3, noxx
  */
-public class SetToughnessSourceEffect extends ContinuousEffectImpl {
+public class SetBaseToughnessSourceEffect extends ContinuousEffectImpl {
 
     private final DynamicValue amount;
 
-    public SetToughnessSourceEffect(DynamicValue amount, Duration duration) {
+    public SetBaseToughnessSourceEffect(DynamicValue amount, Duration duration) {
         this(amount, duration, SubLayer.CharacteristicDefining_7a);
     }
 
-    public SetToughnessSourceEffect(DynamicValue amount, Duration duration, SubLayer subLayer) {
+    public SetBaseToughnessSourceEffect(DynamicValue amount, Duration duration, SubLayer subLayer) {
         super(duration, Layer.PTChangingEffects_7, subLayer, Outcome.BoostCreature);
         this.amount = amount;
         staticText = "{this}'s toughness is equal to the number of " + amount.getMessage();
     }
 
-    public SetToughnessSourceEffect(final SetToughnessSourceEffect effect) {
+    public SetBaseToughnessSourceEffect(final SetBaseToughnessSourceEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }
 
     @Override
-    public SetToughnessSourceEffect copy() {
-        return new SetToughnessSourceEffect(this);
+    public SetBaseToughnessSourceEffect copy() {
+        return new SetBaseToughnessSourceEffect(this);
     }
 
     @Override
@@ -43,7 +44,7 @@ public class SetToughnessSourceEffect extends ContinuousEffectImpl {
         MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             int value = amount.calculate(game, source, this);
-            mageObject.getToughness().setValue(value);
+            mageObject.getToughness().setModifiedBaseValue(value);
             return true;
         } else {
             if (duration == Duration.Custom) {

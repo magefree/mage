@@ -33,6 +33,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Atla Palani, Nest Tender", 142, Rarity.RARE, mage.cards.a.AtlaPalaniNestTender.class));
         cards.add(new SetCardInfo("Bad River", 197, Rarity.UNCOMMON, mage.cards.b.BadRiver.class));
         cards.add(new SetCardInfo("Baleful Strix", 143, Rarity.RARE, mage.cards.b.BalefulStrix.class));
+        cards.add(new SetCardInfo("Baru, Wurmspeaker", 26, Rarity.RARE, mage.cards.b.BaruWurmspeaker.class));
         cards.add(new SetCardInfo("Battlefield Forge", 198, Rarity.RARE, mage.cards.b.BattlefieldForge.class));
         cards.add(new SetCardInfo("Beast Within", 129, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
         cards.add(new SetCardInfo("Bedevil", 144, Rarity.RARE, mage.cards.b.Bedevil.class));
@@ -58,6 +59,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Drana, Liberator of Malakir", 111, Rarity.MYTHIC, mage.cards.d.DranaLiberatorOfMalakir.class));
         cards.add(new SetCardInfo("Duneblast", 148, Rarity.RARE, mage.cards.d.Duneblast.class));
         cards.add(new SetCardInfo("Echoing Truth", 109, Rarity.COMMON, mage.cards.e.EchoingTruth.class));
+        cards.add(new SetCardInfo("Emperor Mihail II", 23, Rarity.RARE, mage.cards.e.EmperorMihailII.class));
         cards.add(new SetCardInfo("Etali, Primal Storm", 121, Rarity.RARE, mage.cards.e.EtaliPrimalStorm.class));
         cards.add(new SetCardInfo("Evolving Wilds", 208, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Exotic Orchard", 209, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
@@ -65,6 +67,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Explosive Vegetation", 132, Rarity.UNCOMMON, mage.cards.e.ExplosiveVegetation.class));
         cards.add(new SetCardInfo("Faeburrow Elder", 149, Rarity.RARE, mage.cards.f.FaeburrowElder.class));
         cards.add(new SetCardInfo("Faithless Looting", 122, Rarity.COMMON, mage.cards.f.FaithlessLooting.class));
+        cards.add(new SetCardInfo("Fallaji Wayfarer", 11, Rarity.RARE, mage.cards.f.FallajiWayfarer.class));
         cards.add(new SetCardInfo("Farseek", 133, Rarity.COMMON, mage.cards.f.Farseek.class));
         cards.add(new SetCardInfo("Fellwar Stone", 182, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
         cards.add(new SetCardInfo("Flood Plain", 210, Rarity.UNCOMMON, mage.cards.f.FloodPlain.class));
@@ -130,6 +133,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Reliquary Tower", 227, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("Rienne, Angel of Rebirth", 166, Rarity.MYTHIC, mage.cards.r.RienneAngelOfRebirth.class));
         cards.add(new SetCardInfo("Rocky Tar Pit", 228, Rarity.UNCOMMON, mage.cards.r.RockyTarPit.class));
+        cards.add(new SetCardInfo("Rosnakht, Heir of Rohgahh", 25, Rarity.RARE, mage.cards.r.RosnakhtHeirOfRohgahh.class));
         cards.add(new SetCardInfo("Sandsteppe Citadel", 229, Rarity.UNCOMMON, mage.cards.s.SandsteppeCitadel.class));
         cards.add(new SetCardInfo("Savage Lands", 230, Rarity.UNCOMMON, mage.cards.s.SavageLands.class));
         cards.add(new SetCardInfo("Search for Tomorrow", 137, Rarity.COMMON, mage.cards.s.SearchForTomorrow.class));

@@ -8,7 +8,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,13 +35,12 @@ public final class Creeperhulk extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // {1}{G}: Until end of turn, target creature you control has base power and toughness 5/5 and gains trample.
-        Effect effect = new SetPowerToughnessTargetEffect(5,5, Duration.EndOfTurn);
+        Effect effect = new SetBasePowerToughnessTargetEffect(5,5, Duration.EndOfTurn);
         effect.setText("Until end of turn, target creature you control has base power and toughness 5/5");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{G}"));
         ability.addTarget(new TargetControlledCreaturePermanent());
         ability.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, "and gains Trample"));
         this.addAbility(ability);
-
     }
 
     private Creeperhulk(final Creeperhulk card) {

@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.IntPlusDynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -44,7 +44,7 @@ public final class AysenCrusader extends CardImpl {
 
         // Aysen Crusader's power and toughness are each equal to 2 plus the number of Soldiers and Warriors you control.
         DynamicValue value = new IntPlusDynamicValue(2, new PermanentsOnBattlefieldCount(filter));
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(value, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(value, Duration.EndOfGame)));
     }
 
     private AysenCrusader(final AysenCrusader card) {

@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.continuous.SetToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBaseToughnessSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
@@ -38,7 +38,7 @@ public final class TraprootKami extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
         this.addAbility(ReachAbility.getInstance());
         // Traproot Kami's toughness is equal to the number of Forests on the battlefield.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBaseToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
     }
 
     private TraprootKami(final TraprootKami card) {

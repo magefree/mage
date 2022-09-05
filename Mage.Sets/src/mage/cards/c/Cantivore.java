@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -40,7 +40,7 @@ public final class Cantivore extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
         // Cantivore's power and toughness are each equal to the number of enchantment cards in all graveyards.
         DynamicValue value = (new CardsInAllGraveyardsCount(filter));
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(value , Duration.EndOfGame))); 
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(value , Duration.EndOfGame)));
     }
 
     private Cantivore(final Cantivore card) {

@@ -29,18 +29,12 @@ public class ExileTargetEffect extends OneShotEffect {
     private final Zone onlyFromZone;
     private String exileZone = null;
     private UUID exileId = null;
-    protected boolean multitargetHandling;
     private boolean toSourceExileZone = false; // exile the targets to a source object specific exile zone (takes care of zone change counter)
     private boolean withName = true;
 
     public ExileTargetEffect(String effectText) {
-        this(effectText, false);
-    }
-
-    public ExileTargetEffect(String effectText, boolean multitargetHandling) {
         this();
         this.staticText = effectText;
-        this.multitargetHandling = multitargetHandling;
     }
 
     /**
@@ -56,15 +50,10 @@ public class ExileTargetEffect extends OneShotEffect {
     }
 
     public ExileTargetEffect(UUID exileId, String exileZone, Zone onlyFromZone) {
-        this(exileId, exileZone, onlyFromZone, false);
-    }
-
-    public ExileTargetEffect(UUID exileId, String exileZone, Zone onlyFromZone, boolean multitargetHandling) {
         super(Outcome.Exile);
         this.exileZone = exileZone;
         this.exileId = exileId;
         this.onlyFromZone = onlyFromZone;
-        this.multitargetHandling = multitargetHandling;
     }
 
     public ExileTargetEffect(final ExileTargetEffect effect) {
@@ -72,7 +61,6 @@ public class ExileTargetEffect extends OneShotEffect {
         this.exileZone = effect.exileZone;
         this.exileId = effect.exileId;
         this.onlyFromZone = effect.onlyFromZone;
-        this.multitargetHandling = effect.multitargetHandling;
         this.toSourceExileZone = effect.toSourceExileZone;
         this.withName = effect.withName;
     }
@@ -96,65 +84,29 @@ public class ExileTargetEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Set<Card> toExile = new LinkedHashSet<>();
-            if (multitargetHandling
-                    && targetPointer instanceof FirstTargetPointer
-                    && (source.getTargets().size() > 1
-                    || (source.getTargets().size() > 0
-                    && source.getTargets().get(0).getTargets().size() > 1))) {
-                for (Target target : source.getTargets()) {
-                    for (UUID targetId : target.getTargets()) {
-                        Permanent permanent = game.getPermanent(targetId);
-                        if (permanent != null
-                                && permanent.isPhasedIn()) {
-                            Zone currentZone = game.getState().getZone(permanent.getId());
-                            if (currentZone != Zone.EXILED
-                                    && (onlyFromZone == null
-                                    || onlyFromZone == Zone.BATTLEFIELD)) {
-                                toExile.add(permanent);
-                            }
-                        } else {
-                            Card card = game.getCard(targetId);
-                            if (card != null) {
-                                Zone currentZone = game.getState().getZone(card.getId());
-                                if (currentZone != Zone.EXILED
-                                        && (onlyFromZone == null
-                                        || onlyFromZone == currentZone)) {
-                                    toExile.add(card);
-                                }
-                            } else {
-                                StackObject stackObject = game.getStack().getStackObject(targetId);
-                                if (stackObject instanceof Spell) {
-                                    toExile.add((Spell) stackObject);
-                                }
-                            }
-                        }
+            for (UUID targetId : getTargetPointer().getTargets(game, source)) {
+                Permanent permanent = game.getPermanent(targetId);
+                if (permanent != null
+                        && permanent.isPhasedIn()) {
+                    Zone currentZone = game.getState().getZone(permanent.getId());
+                    if (currentZone != Zone.EXILED
+                            && (onlyFromZone == null
+                            || onlyFromZone == Zone.BATTLEFIELD)) {
+                        toExile.add(permanent);
                     }
-                }
-            } else {
-                for (UUID targetId : getTargetPointer().getTargets(game, source)) {
-                    Permanent permanent = game.getPermanent(targetId);
-                    if (permanent != null
-                            && permanent.isPhasedIn()) {
-                        Zone currentZone = game.getState().getZone(permanent.getId());
+                } else {
+                    Card card = game.getCard(targetId);
+                    if (card != null) {
+                        Zone currentZone = game.getState().getZone(card.getId());
                         if (currentZone != Zone.EXILED
                                 && (onlyFromZone == null
-                                || onlyFromZone == Zone.BATTLEFIELD)) {
-                            toExile.add(permanent);
+                                || onlyFromZone == currentZone)) {
+                            toExile.add(card);
                         }
                     } else {
-                        Card card = game.getCard(targetId);
-                        if (card != null) {
-                            Zone currentZone = game.getState().getZone(card.getId());
-                            if (currentZone != Zone.EXILED
-                                    && (onlyFromZone == null
-                                    || onlyFromZone == currentZone)) {
-                                toExile.add(card);
-                            }
-                        } else {
-                            StackObject stackObject = game.getStack().getStackObject(targetId);
-                            if (stackObject instanceof Spell) {
-                                toExile.add((Spell) stackObject);
-                            }
+                        StackObject stackObject = game.getStack().getStackObject(targetId);
+                        if (stackObject instanceof Spell) {
+                            toExile.add((Spell) stackObject);
                         }
                     }
                 }

@@ -412,4 +412,11 @@ public interface Permanent extends Card, Controllable {
         }
         return getAttachedTo().equals(otherId);
     }
+
+    default void switchPowerToughness() {
+        // This is supposed to use boosted value since its switching the final values
+        int power = this.getPower().getValue();
+        this.getPower().setBoostedValue(this.getToughness().getValue());
+        this.getToughness().setBoostedValue(power);
+    }
 }

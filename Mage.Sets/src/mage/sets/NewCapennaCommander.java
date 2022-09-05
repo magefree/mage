@@ -184,6 +184,8 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Kros, Defense Contractor", 7, Rarity.MYTHIC, mage.cards.k.KrosDefenseContractor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kros, Defense Contractor", 105, Rarity.MYTHIC, mage.cards.k.KrosDefenseContractor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Leafkin Druid", 299, Rarity.COMMON, mage.cards.l.LeafkinDruid.class));
+        cards.add(new SetCardInfo("Lethal Scheme", 36, Rarity.RARE, mage.cards.l.LethalScheme.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lethal Scheme", 137, Rarity.RARE, mage.cards.l.LethalScheme.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Life Insurance", 74, Rarity.RARE, mage.cards.l.LifeInsurance.class));
         cards.add(new SetCardInfo("Life of the Party", 48, Rarity.RARE, mage.cards.l.LifeOfTheParty.class));
         cards.add(new SetCardInfo("Life's Legacy", 300, Rarity.RARE, mage.cards.l.LifesLegacy.class));

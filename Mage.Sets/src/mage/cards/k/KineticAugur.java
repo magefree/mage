@@ -5,7 +5,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
-import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.abilities.effects.common.discard.DiscardAndDrawThatManyEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -39,7 +39,7 @@ public final class KineticAugur extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Kinetic Augur's power is equal to the number of instant and sorcery cards in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerSourceEffect(xValue, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(xValue, Duration.EndOfGame)));
 
         // When Kinetic Augur enters the battlefield, discard up to two cards, then draw that many cards.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscardAndDrawThatManyEffect(2)));

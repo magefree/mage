@@ -776,27 +776,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         Assert.assertEquals("Life amounts are not equal for player " + player.getName(), life, actual);
     }
 
-    /**
-     * Assert creature's power and toughness by card name.
-     * <p/>
-     * Throws {@link AssertionError} in the following cases: 1. no such player
-     * 2. no such creature under player's control 3. depending on comparison
-     * scope: 3a. any: no creature under player's control with the specified p\t
-     * params 3b. all: there is at least one creature with the cardName with the
-     * different p\t params
-     *
-     * @param player    {@link Player} to get creatures for comparison.
-     * @param cardName  Card name to compare with.
-     * @param power     Expected power to compare with.
-     * @param toughness Expected toughness to compare with.
-     * @param scope     {@link mage.filter.Filter.ComparisonScope} Use ANY, if
-     *                  you want "at least one creature with given name should
-     *                  have specified p\t" Use ALL, if you want "all creature
-     *                  with given name should have specified p\t"
-     */
     @Override
-    public void assertPowerToughness(Player player, String cardName, int power, int toughness, Filter.ComparisonScope scope)
-            throws AssertionError {
+    public void assertPowerToughness(Player player, String cardName, int powerNeeded, int toughnessNeeded, Filter.ComparisonScope scope, boolean checkBaseValues) throws AssertionError {
         //Assert.assertNotEquals("", cardName);
         int count = 0;
         int fit = 0;
@@ -804,22 +785,26 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         int foundToughness = 0;
         int found = 0;
         for (Permanent permanent : currentGame.getBattlefield().getAllPermanents()) {
-            if (isObjectHaveTargetNameOrAlias(player, permanent, cardName) && permanent.getControllerId().equals(player.getId())) {
-                count++;
-                if (scope == Filter.ComparisonScope.All) {
-                    Assert.assertEquals("Power is not the same (" + power + " vs. " + permanent.getPower().getValue() + ')',
-                            power, permanent.getPower().getValue());
-                    Assert.assertEquals("Toughness is not the same (" + toughness + " vs. " + permanent.getToughness().getValue() + ')',
-                            toughness, permanent.getToughness().getValue());
-                } else if (scope == Filter.ComparisonScope.Any) {
-                    if (power == permanent.getPower().getValue() && toughness == permanent.getToughness().getValue()) {
-                        fit++;
-                        break;
-                    }
-                    found++;
-                    foundPower = permanent.getPower().getValue();
-                    foundToughness = permanent.getToughness().getValue();
+            if (!isObjectHaveTargetNameOrAlias(player, permanent, cardName) || !permanent.getControllerId().equals(player.getId())) {
+                continue;
+            }
+            int powerFound      = checkBaseValues ? permanent.getPower().getModifiedBaseValue()     : permanent.getPower().getValue();
+            int toughnessFound  = checkBaseValues ? permanent.getToughness().getModifiedBaseValue() : permanent.getToughness().getValue();
+
+            count++;
+            if (scope == Filter.ComparisonScope.All) {
+                Assert.assertEquals((checkBaseValues ? "Base power" : "Power") + " is not the same (" + powerNeeded + " vs. " + powerFound + ')',
+                        powerNeeded, powerFound);
+                Assert.assertEquals((checkBaseValues ? "Base toughness" : "Toughness") + " is not the same (" + toughnessNeeded + " vs. " + toughnessFound + ')',
+                        toughnessNeeded, toughnessFound);
+            } else if (scope == Filter.ComparisonScope.Any) {
+                if (powerNeeded == powerFound && toughnessNeeded == toughnessFound) {
+                    fit++;
+                    break;
                 }
+                found++;
+                foundPower = powerFound;
+                foundToughness = toughnessFound;
             }
         }
 
@@ -827,23 +812,24 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 + ", cardName=" + cardName, count > 0);
 
         if (scope == Filter.ComparisonScope.Any) {
-            assertTrue("There is no such creature under player's control with specified p/t of " + power + '/' + toughness + ", player=" + player.getName()
+            assertTrue("There is no such creature under player's control with specified" + (checkBaseValues ? " base " : ' ') + "p/t of " + powerNeeded + '/' + toughnessNeeded + ", player=" + player.getName()
                     + ", cardName=" + cardName + " (found similar: " + found + ", one of them: power=" + foundPower + " toughness=" + foundToughness + ')', fit > 0);
         }
     }
 
-    /**
-     * See
-     * {@link #assertPowerToughness(mage.players.Player, String, int, int, mage.filter.Filter.ComparisonScope)}
-     *
-     * @param player
-     * @param cardName
-     * @param power
-     * @param toughness
-     */
-    public void assertPowerToughness(Player player, String cardName, int power, int toughness) {
-        assertPowerToughness(player, cardName, power, toughness, Filter.ComparisonScope.Any);
+    public void assertPowerToughness(Player player, String cardName, int power, int toughness, Filter.ComparisonScope scope) {
+        assertPowerToughness(player, cardName, power, toughness, scope, false);
     }
+
+    public void assertPowerToughness(Player player, String cardName, int powerNeeded, int toughnessNeeded) {
+        assertPowerToughness(player, cardName, powerNeeded, toughnessNeeded, Filter.ComparisonScope.Any, false);
+    }
+
+    public void assertBasePowerToughness(Player player, String cardName, int powerNeeded, int toughnessNeeded) {
+        assertPowerToughness(player, cardName, powerNeeded, toughnessNeeded, Filter.ComparisonScope.Any, true);
+    }
+
+
 
     /**
      * {@inheritDoc}

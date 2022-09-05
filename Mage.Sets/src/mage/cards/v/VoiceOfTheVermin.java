@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -38,7 +38,7 @@ public final class VoiceOfTheVermin extends CardImpl {
 
         // Whenever Voice of the Vermin attacks, target creature you control has base power and toughness 4/4 until end of turn.
         Ability ability = new AttacksTriggeredAbility(
-                new SetPowerToughnessTargetEffect(4, 4, Duration.EndOfTurn)
+                new SetBasePowerToughnessTargetEffect(4, 4, Duration.EndOfTurn)
         );
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
