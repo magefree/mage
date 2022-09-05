@@ -160,6 +160,9 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Nael, Avizoa Aeronaut", 207, Rarity.UNCOMMON, mage.cards.n.NaelAvizoaAeronaut.class));
         cards.add(new SetCardInfo("Najal, the Storm Runner", 208, Rarity.UNCOMMON, mage.cards.n.NajalTheStormRunner.class));
         cards.add(new SetCardInfo("Negate", 58, Rarity.COMMON, mage.cards.n.Negate.class));
+        cards.add(new SetCardInfo("Nemata, Primeval Warden", 209, Rarity.RARE, mage.cards.n.NemataPrimevalWarden.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nemata, Primeval Warden", 308, Rarity.RARE, mage.cards.n.NemataPrimevalWarden.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nemata, Primeval Warden", 349, Rarity.RARE, mage.cards.n.NemataPrimevalWarden.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nishoba Brawler", 174, Rarity.UNCOMMON, mage.cards.n.NishobaBrawler.class));
         cards.add(new SetCardInfo("Phoenix Chick", 140, Rarity.UNCOMMON, mage.cards.p.PhoenixChick.class));
         cards.add(new SetCardInfo("Phyrexian Espionage", 60, Rarity.COMMON, mage.cards.p.PhyrexianEspionage.class));
