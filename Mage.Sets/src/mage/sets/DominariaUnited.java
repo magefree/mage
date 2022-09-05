@@ -33,6 +33,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Aether Channeler", 42, Rarity.RARE, mage.cards.a.AetherChanneler.class));
         cards.add(new SetCardInfo("Aggressive Sabotage", 78, Rarity.COMMON, mage.cards.a.AggressiveSabotage.class));
         cards.add(new SetCardInfo("Ajani, Sleeper Agent", 192, Rarity.MYTHIC, mage.cards.a.AjaniSleeperAgent.class));
+        cards.add(new SetCardInfo("Anointed Peacekeeper", 2, Rarity.RARE, mage.cards.a.AnointedPeacekeeper.class));
         cards.add(new SetCardInfo("Archangel of Wrath", 3, Rarity.RARE, mage.cards.a.ArchangelOfWrath.class));
         cards.add(new SetCardInfo("Argivian Cavalier", 4, Rarity.COMMON, mage.cards.a.ArgivianCavalier.class));
         cards.add(new SetCardInfo("Argivian Phalanx", 5, Rarity.COMMON, mage.cards.a.ArgivianPhalanx.class));
