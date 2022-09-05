@@ -53,7 +53,7 @@ public class NemataPrimevalWarden extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(2, 2, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{G}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, filter, false)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
         this.addAbility(ability);
 
         // {1}{B}, Sacrifice 2 Saprolings: Draw a card.
