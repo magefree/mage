@@ -230,6 +230,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Tatyova, Steward of Tides", 222, Rarity.UNCOMMON, mage.cards.t.TatyovaStewardOfTides.class));
         cards.add(new SetCardInfo("Tear Asunder", 183, Rarity.UNCOMMON, mage.cards.t.TearAsunder.class));
         cards.add(new SetCardInfo("Temporal Firestorm", 147, Rarity.RARE, mage.cards.t.TemporalFirestorm.class));
+        cards.add(new SetCardInfo("Temporary Lockdown", 36, Rarity.RARE, mage.cards.t.TemporaryLockdown.class));
         cards.add(new SetCardInfo("Territorial Maro", 184, Rarity.UNCOMMON, mage.cards.t.TerritorialMaro.class));
         cards.add(new SetCardInfo("The Cruelty of Gix", 87, Rarity.RARE, mage.cards.t.TheCrueltyOfGix.class));
         cards.add(new SetCardInfo("The Elder Dragon War", 121, Rarity.RARE, mage.cards.t.TheElderDragonWar.class));
