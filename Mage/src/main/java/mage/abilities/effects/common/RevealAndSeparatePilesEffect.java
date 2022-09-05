@@ -2,7 +2,6 @@ package mage.abilities.effects.common;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
@@ -50,6 +49,7 @@ public class RevealAndSeparatePilesEffect extends OneShotEffect {
         this.playerWhoChooses = playerWhoChooses;
         this.targetZone = targetZone;
         this.anyOrder = anyOrder;
+        this.staticText = this.generateText();
     }
 
     private RevealAndSeparatePilesEffect(final RevealAndSeparatePilesEffect effect) {
@@ -142,11 +142,7 @@ public class RevealAndSeparatePilesEffect extends OneShotEffect {
         return true;
     }
 
-    @Override
-    public String getText(Mode mode) {
-        if (staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
+    private String generateText() {
         StringBuilder sb = new StringBuilder("reveal the top ");
         if (amount instanceof StaticValue) {
             sb.append(CardUtil.numberToText(((StaticValue) amount).getValue()));
