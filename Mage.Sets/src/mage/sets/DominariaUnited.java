@@ -269,6 +269,8 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Yavimaya Steelcrusher", 152, Rarity.COMMON, mage.cards.y.YavimayaSteelcrusher.class));
         cards.add(new SetCardInfo("Yotia Declares War", 153, Rarity.UNCOMMON, mage.cards.y.YotiaDeclaresWar.class));
         cards.add(new SetCardInfo("Zar Ojanen, Scion of Efrava", 227, Rarity.UNCOMMON, mage.cards.z.ZarOjanenScionOfEfrava.class));
+        cards.add(new SetCardInfo("Zur, Eternal Schemer", 228, Rarity.MYTHIC, mage.cards.z.ZurEternalSchemer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Zur, Eternal Schemer", 327, Rarity.MYTHIC, mage.cards.z.ZurEternalSchemer.class, NON_FULL_USE_VARIOUS));
     }
 
 //    @Override

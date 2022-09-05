@@ -1,5 +1,5 @@
 
-package org.mage.test.cards.single.usd;
+package org.mage.test.cards.single.uds;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
