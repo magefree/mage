@@ -767,11 +767,11 @@ public class ManaTest {
 
     /**
      * Mana.needed is used by the AI to know how much mana it needs in order to be able to play a card.
+     *
+     * TODO: How should generic and any be handled?
      */
     @Test
-    public void should() {
-        // TODO: How does it handle generic and any.
-        //       How *should* it handle them?
+    public void manaNeededWorks() {
         testManaNeeded(
                 new Mana(ManaType.COLORLESS, 1), // Available
                 new Mana(ManaType.COLORLESS, 2), // Cost
