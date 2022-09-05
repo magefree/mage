@@ -1,4 +1,4 @@
-package org.mage.test.cards.continuous;
+package org.mage.test.cards.single.uds;
 
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
