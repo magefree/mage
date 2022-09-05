@@ -1240,7 +1240,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      *
      * Examples:
      *      {1}{W}{R} and {G}{W}{R} -> {G}{W}{R}
-     *      {G}{W}{R} and {G}{W}{R} -> {G}{W}{R}
+     *      {G}{W}{R} and {G}{W}{R} -> null
      *      {G}{W}{B} and {G}{W}{R} -> null
      *      {C}       and {ANY}     -> null
      *
@@ -1269,7 +1269,10 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
 
         Mana moreMana;
         Mana lessMana;
-        if (mana2.any > mana1.any || mana2.countColored() > mana1.countColored() || mana2.count() > mana1.count()) {
+        if (mana2.any > mana1.any
+                || mana2.countColored() > mana1.countColored()
+                || mana2.count() > mana1.count()
+                || mana2.colorless > mana1.colorless) {
             moreMana = mana2;
             lessMana = mana1;
         } else {
