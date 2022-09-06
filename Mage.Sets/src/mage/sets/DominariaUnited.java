@@ -218,6 +218,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Sphinx of Clear Skies", 67, Rarity.MYTHIC, mage.cards.s.SphinxOfClearSkies.class));
         cards.add(new SetCardInfo("Splatter Goblin", 109, Rarity.COMMON, mage.cards.s.SplatterGoblin.class));
         cards.add(new SetCardInfo("Sprouting Goblin", 145, Rarity.UNCOMMON, mage.cards.s.SproutingGoblin.class));
+        cards.add(new SetCardInfo("Squee, Dubious Monarch", 146, Rarity.RARE, mage.cards.s.SqueeDubiousMonarch.class));
         cards.add(new SetCardInfo("Stall for Time", 34, Rarity.COMMON, mage.cards.s.StallForTime.class));
         cards.add(new SetCardInfo("Stenn, Paranoid Partisan", 221, Rarity.RARE, mage.cards.s.StennParanoidPartisan.class));
         cards.add(new SetCardInfo("Strength of the Coalition", 180, Rarity.UNCOMMON, mage.cards.s.StrengthOfTheCoalition.class));
