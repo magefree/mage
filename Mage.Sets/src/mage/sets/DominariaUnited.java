@@ -202,6 +202,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Shadow Prophecy", 105, Rarity.COMMON, mage.cards.s.ShadowProphecy.class));
         cards.add(new SetCardInfo("Shadow-Rite Priest", 106, Rarity.RARE, mage.cards.s.ShadowRitePriest.class));
         cards.add(new SetCardInfo("Shalai's Acolyte", 33, Rarity.UNCOMMON, mage.cards.s.ShalaisAcolyte.class));
+        cards.add(new SetCardInfo("Shanna, Purifying Blade", 218, Rarity.MYTHIC, mage.cards.s.ShannaPurifyingBlade.class));
         cards.add(new SetCardInfo("Sheoldred's Restoration", 108, Rarity.UNCOMMON, mage.cards.s.SheoldredsRestoration.class));
         cards.add(new SetCardInfo("Sheoldred, the Apocalypse", 107, Rarity.MYTHIC, mage.cards.s.SheoldredTheApocalypse.class));
         cards.add(new SetCardInfo("Shield-Wall Sentinel", 238, Rarity.COMMON, mage.cards.s.ShieldWallSentinel.class));

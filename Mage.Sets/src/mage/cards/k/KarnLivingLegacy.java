@@ -74,7 +74,7 @@ class KarnLivingLegacyEffect extends OneShotEffect {
             return false;
         }
         int amount = ManaUtil.playerPaysXGenericMana(
-                true, "Karn, Living Legacy", player, source, game
+                false, "Karn, Living Legacy", player, source, game
         );
         if (amount < 1) {
             return false;
