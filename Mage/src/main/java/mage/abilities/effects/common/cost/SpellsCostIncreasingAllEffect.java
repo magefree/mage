@@ -126,12 +126,12 @@ public class SpellsCostIncreasingAllEffect extends CostModificationEffectImpl {
             Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
             if (spell != null) {
                 // real cast with put on stack
-                return this.filter.match(spell, game);
+                return this.filter.match(spell, sourceController.getId(), source, game);
             } else {
                 // get playable and other staff without put on stack
                 // used at least for flashback ability because Flashback ability doesn't use stack
                 Card sourceCard = ((SpellAbility) abilityToModify).getCharacteristics(game);
-                return this.filter.match(sourceCard, game);
+                return this.filter.match(sourceCard, sourceController.getId(), source, game);
             }
         }
         return false;
