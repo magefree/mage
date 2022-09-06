@@ -223,6 +223,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Smash to Dust", 144, Rarity.COMMON, mage.cards.s.SmashToDust.class));
         cards.add(new SetCardInfo("Snarespinner", 179, Rarity.COMMON, mage.cards.s.Snarespinner.class));
         cards.add(new SetCardInfo("Soaring Drake", 66, Rarity.COMMON, mage.cards.s.SoaringDrake.class));
+        cards.add(new SetCardInfo("Sol'Kanar the Tainted", 219, Rarity.MYTHIC, mage.cards.s.SolKanarTheTainted.class));
         cards.add(new SetCardInfo("Soul of Windgrace", 220, Rarity.MYTHIC, mage.cards.s.SoulOfWindgrace.class));
         cards.add(new SetCardInfo("Sphinx of Clear Skies", 67, Rarity.MYTHIC, mage.cards.s.SphinxOfClearSkies.class));
         cards.add(new SetCardInfo("Splatter Goblin", 109, Rarity.COMMON, mage.cards.s.SplatterGoblin.class));
