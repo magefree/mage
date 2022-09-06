@@ -1,8 +1,15 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
+import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.constants.SuperType;
+
+import java.util.List;
 
 /**
  * @author TheElk801
@@ -19,12 +26,13 @@ public final class DominariaUnited extends ExpansionSet {
         super("Dominaria United", "DMU", ExpansionSet.buildDate(2022, 11, 9), SetType.EXPANSION);
         this.blockName = "Dominaria United";
         this.hasBoosters = true;
-        this.hasBasicLands = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
-        this.ratioBoosterMythic = 7;
+        this.ratioBoosterMythic = 8;        // non-legendary creature: 46 rare, 13 mythic
+        this.ratioBoosterSpecialRare = 4;
+        this.ratioBoosterSpecialMythic = 5; // legendary creature: 14 rare, 7 mythic
         this.maxCardNumberInBooster = 281;
 
         cards.add(new SetCardInfo("Academy Loremaster", 40, Rarity.RARE, mage.cards.a.AcademyLoremaster.class));
@@ -283,6 +291,18 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Zar Ojanen, Scion of Efrava", 227, Rarity.UNCOMMON, mage.cards.z.ZarOjanenScionOfEfrava.class));
         cards.add(new SetCardInfo("Zur, Eternal Schemer", 228, Rarity.MYTHIC, mage.cards.z.ZurEternalSchemer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zur, Eternal Schemer", 327, Rarity.MYTHIC, mage.cards.z.ZurEternalSchemer.class, NON_FULL_USE_VARIOUS));
+    }
+
+    @Override
+    protected List<CardInfo> findSpecialCardsByRarity(Rarity rarity) {
+        List<CardInfo> cardInfos = super.findSpecialCardsByRarity(rarity);
+        cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria()
+                .setCodes(this.code)
+                .rarities(rarity)
+                .supertypes(SuperType.LEGENDARY)
+                .types(CardType.CREATURE)
+                .maxCardNumber(maxCardNumberInBooster)));
+        return cardInfos;
     }
 
 //    @Override
