@@ -16,6 +16,9 @@ import mage.game.permanent.token.ZombieKnightToken;
 
 import java.util.UUID;
 
+/**
+ * @author PurpleCrowbar
+ */
 public class BladewingDeathlessTyrant extends CardImpl {
 
     public BladewingDeathlessTyrant(UUID ownerId, CardSetInfo setInfo) {
