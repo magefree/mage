@@ -42,9 +42,7 @@ public class ParnesseTheSubtleBrush extends CardImpl {
 
         // Whenever you copy a spell, up to one target opponent may also copy that spell.
         // They may choose new targets for that copy.
-        Ability ability = new ParnesseTheSubtleBrushCopySpellTriggeredAbility();
-        ability.addTarget(new TargetOpponent(0, 1, false));
-        this.addAbility(ability);
+        this.addAbility(new ParnesseTheSubtleBrushCopySpellTriggeredAbility());
     }
 
     private ParnesseTheSubtleBrush(final ParnesseTheSubtleBrush card) {
@@ -91,6 +89,7 @@ class ParnesseTheSubtleBrushCopySpellTriggeredAbility extends TriggeredAbilityIm
 
     ParnesseTheSubtleBrushCopySpellTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ParnesseTheSubtleBrushCopySpellOpponentEffect(), true);
+        this.getTargets().add(new TargetOpponent(0, 1, false));
     }
 
     private ParnesseTheSubtleBrushCopySpellTriggeredAbility(final ParnesseTheSubtleBrushCopySpellTriggeredAbility ability) {
