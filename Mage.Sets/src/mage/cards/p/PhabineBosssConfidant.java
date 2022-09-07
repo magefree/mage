@@ -20,6 +20,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.CitizenGreenWhiteToken;
+import mage.game.permanent.token.Token;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -97,8 +98,8 @@ class PhabineBosssConfidantParleyEffect extends OneShotEffect {
 
         int parleyCount = ParleyCount.getInstance().calculate(game, source, this);
         if (parleyCount > 0) {
-            Effect createTokenEffect = new CreateTokenEffect(new CitizenGreenWhiteToken(), parleyCount);
-            createTokenEffect.apply(game, source);
+            Token citizenToken = new CitizenGreenWhiteToken();
+            citizenToken.putOntoBattlefield(parleyCount, game, source, source.getControllerId(), false, false);
 
             Effect boostEffect = new BoostControlledEffect(parleyCount, parleyCount, Duration.EndOfTurn);
             boostEffect.apply(game, source);
