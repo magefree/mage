@@ -7,7 +7,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.ParleyCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -15,7 +14,6 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -96,12 +94,23 @@ class PhabineBosssConfidantParleyEffect extends OneShotEffect {
             return false;
         }
 
-        int parleyCount = ParleyCount.getInstance().calculate(game, source, this);
-        if (parleyCount > 0) {
-            Token citizenToken = new CitizenGreenWhiteToken();
-            citizenToken.putOntoBattlefield(parleyCount, game, source, source.getControllerId(), false, false);
+        int landCount = ParleyCount.getInstance().calculate(game, source, this);
+        int nonEmptyLibraries = 0;
+        for (UUID playerID : game.getState().getPlayersInRange(controller.getId(), game)) {
+            Player player = game.getPlayer(playerID);
+            if (player != null && player.getLibrary().size() != 0) {
+                nonEmptyLibraries++;
+            }
+        }
+        int nonLandCount = nonEmptyLibraries - landCount;
 
-            Effect boostEffect = new BoostControlledEffect(parleyCount, parleyCount, Duration.EndOfTurn);
+        if (landCount > 0) {
+            Token citizenToken = new CitizenGreenWhiteToken();
+            citizenToken.putOntoBattlefield(landCount, game, source, source.getControllerId(), false, false);
+        }
+
+        if (nonLandCount > 0) {
+            Effect boostEffect = new BoostControlledEffect(nonLandCount, nonLandCount, Duration.EndOfTurn);
             boostEffect.apply(game, source);
         }
 
