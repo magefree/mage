@@ -19,7 +19,7 @@ import java.util.UUID;
 /**
  * @author PurpleCrowbar
  */
-public class BladewingDeathlessTyrant extends CardImpl {
+public final class BladewingDeathlessTyrant extends CardImpl {
 
     public BladewingDeathlessTyrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{R}");
