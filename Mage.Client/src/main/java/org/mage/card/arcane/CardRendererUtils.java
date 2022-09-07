@@ -245,14 +245,12 @@ public final class CardRendererUtils {
         if (value != null) {
             int current = value.getValue();
             int origin = value.getModifiedBaseValue();
-            if (origin != 0) {
-                if (current < origin) {
-                    return textLight ? CARD_TEXT_COLOR_BAD_LIGHT : CARD_TEXT_COLOR_BAD_DARK;
-                } else if (current > origin) {
-                    return textLight ? CARD_TEXT_COLOR_GOOD_LIGHT : CARD_TEXT_COLOR_GOOD_DARK;
-                } else {
-                    return defaultColor;
-                }
+            if (current < origin) {
+                return textLight ? CARD_TEXT_COLOR_BAD_LIGHT : CARD_TEXT_COLOR_BAD_DARK;
+            } else if (current > origin) {
+                return textLight ? CARD_TEXT_COLOR_GOOD_LIGHT : CARD_TEXT_COLOR_GOOD_DARK;
+            } else {
+                return defaultColor;
             }
         }
 
