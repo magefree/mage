@@ -10,6 +10,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,21 +47,8 @@ public class AddCounterChoiceSourceEffect extends OneShotEffect {
                         " counter or a " + this.counterTypes.get(1) + " counter on it";
                 break;
             default:
-                StringBuilder stringBuilder = new StringBuilder("with your choice of a ");
-
-                for (int i = 0; i < this.counterTypes.size(); i ++) {
-                    // Add an "or " before the last counter
-                    if (i == this.counterTypes.size() - 1) {
-                        stringBuilder.append("or ");
-                    }
-                    stringBuilder.append(this.counterTypes.get(i));
-                    // Don't add a ", " after the last counter
-                    if (i < this.counterTypes.size() - 1) {
-                        stringBuilder.append(", ");
-                    }
-                }
-                stringBuilder.append(" counter on it");
-                this.staticText = stringBuilder.toString();
+                List<String> strings = this.counterTypes.stream().map(CounterType::toString).collect(Collectors.toList());
+                this.staticText = CardUtil.concatWithOr(strings);
                 break;
         }
     }
