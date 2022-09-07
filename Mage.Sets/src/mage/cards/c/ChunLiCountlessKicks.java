@@ -75,8 +75,8 @@ class ChunLiCountlessKicksExileEffect extends OneShotEffect {
 
     ChunLiCountlessKicksExileEffect() {
         super(Outcome.Benefit);
-        staticText = "exile up to X target instant cards from your graveyard, " +
-                "where X is the number of times {this} was kicked. Put a kick counter on each of them";
+        staticText = "exile up to X target instant cards from your graveyard, "
+                + "where X is the number of times {this} was kicked. Put a kick counter on each of them";
     }
 
     private ChunLiCountlessKicksExileEffect(final ChunLiCountlessKicksExileEffect effect) {
@@ -119,8 +119,8 @@ class ChunLiCountlessKicksCastEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
         Cards cards = new CardsImpl(game.getExile().getAllCards(game, source.getControllerId()));
@@ -135,21 +135,30 @@ class ChunLiCountlessKicksCastEffect extends OneShotEffect {
             game.getState().setZone(copiedCard.getId(), Zone.EXILED);
             copies.add(copiedCard);
         }
-        for (Card copiedCard : copies.getCards(game)) {
-            if (!player.chooseUse(outcome, "Cast the copied card?", source, game)) {
-                continue;
+        // simple way to choose the spells to cast; if you have a better tech, implement it!
+        boolean keepGoing = true;
+        Cards alreadyCast = new CardsImpl();
+        while (keepGoing) {
+            for (Card copiedCard : copies.getCards(game)) {
+                if (alreadyCast.getCards(game).contains(copiedCard)
+                        || !controller.chooseUse(outcome, "Cast the copied card? " + copiedCard.getIdName(), source, game)) {
+                    continue;
+                }
+                alreadyCast.add(copiedCard);
+                if (copiedCard.getSpellAbility() != null) {
+                    game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);
+                    controller.cast(
+                            controller.chooseAbilityForCast(copiedCard, game, false),
+                            game, false, new ApprovingObject(source, game)
+                    );
+                    game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), null);
+                } else {
+                    Logger.getLogger(ChunLiCountlessKicksCastEffect.class).error("Chun Li, Countless Kicks: "
+                            + "spell ability == null " + copiedCard.getName());
+                }
             }
-            if (copiedCard.getSpellAbility() != null) {
-                game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);
-                player.cast(
-                        player.chooseAbilityForCast(copiedCard, game, false),
-                        game, false, new ApprovingObject(source, game)
-                );
-                game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), null);
-            } else {
-                Logger.getLogger(ChunLiCountlessKicksCastEffect.class).error("Chun Li, Countless Kicks: "
-                        + "spell ability == null " + copiedCard.getName());
-            }
+            // TODO: AI is one and done so improve this
+            keepGoing = controller.chooseUse(Outcome.Detriment, "Do you wish to continue casting? ", source, game);
         }
         return true;
     }
