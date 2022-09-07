@@ -9,6 +9,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DiscardCardControllerTriggeredAbility;
 import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,6 +26,8 @@ import java.util.UUID;
  */
 public class OskarRubbishReclaimer extends CardImpl {
 
+    private static final ValueHint hint = new ValueHint("Number of different mana values in your graveyard", OskarRubbishReclaimerValue.instance);
+
     public OskarRubbishReclaimer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
 
@@ -35,7 +38,7 @@ public class OskarRubbishReclaimer extends CardImpl {
 
         // This spell costs {1} less to cast for each different mana value among cards in your graveyard.
         Effect spellReductionEffect = new SpellCostReductionForEachSourceEffect(1, OskarRubbishReclaimerValue.instance);
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, spellReductionEffect));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, spellReductionEffect).addHint(hint));
 
         // Whenever you discard a nonland card, you may cast it from your graveyard.
         // Optinal part is handled by the effect
