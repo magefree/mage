@@ -7,7 +7,7 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.TargetControlledDealsDamageAnyTargetEffect;
+import mage.abilities.effects.common.DamageWithPowerFromOneToAnotherTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
@@ -58,7 +58,7 @@ public class SyrixCarrierOfTheFlame extends CardImpl {
         // At the beginning of each end step, if a creature card left your graveyard this turn,
         // target Phoenix you control deals damage equal to its power to any target.
         BeginningOfEndStepTriggeredAbility ability = new BeginningOfEndStepTriggeredAbility(
-                new TargetControlledDealsDamageAnyTargetEffect(description),
+                new DamageWithPowerFromOneToAnotherTargetEffect(),
                 TargetController.EACH_PLAYER,
                 SyrixCarrierOfTheFlameCondition.instance,
                 false
