@@ -2,7 +2,6 @@ package org.mage.test.cards.single._40k;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -17,10 +16,10 @@ public class AbaddonTheDespoilerTest extends CardTestPlayerBase {
     /**
      * Reported bug: https://github.com/magefree/mage/issues/9490
      */
-    @Ignore
     @Test
     public void cascadeWorks() {
         String lightningBolt = "Lightning Bolt";
+        addCard(Zone.BATTLEFIELD, playerA, abaddonTheDespoiler);
         addCard(Zone.HAND, playerA, lightningBolt, 2);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
         addCard(Zone.LIBRARY, playerA, "Crimson Kobolds"); // {0}
@@ -31,6 +30,7 @@ public class AbaddonTheDespoilerTest extends CardTestPlayerBase {
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lightningBolt, playerB);
+        setChoice(playerA, true); // Cast with Cascade
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
