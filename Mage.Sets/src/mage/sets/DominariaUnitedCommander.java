@@ -39,6 +39,8 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Bedevil", 144, Rarity.RARE, mage.cards.b.Bedevil.class));
         cards.add(new SetCardInfo("Bell Borca, Spectral Sergeant", 145, Rarity.RARE, mage.cards.b.BellBorcaSpectralSergeant.class));
         cards.add(new SetCardInfo("Blackblade Reforged", 178, Rarity.RARE, mage.cards.b.BlackbladeReforged.class));
+        cards.add(new SetCardInfo("Bladewing, Deathless Tyrant", 9, Rarity.RARE, mage.cards.b.BladewingDeathlessTyrant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bladewing, Deathless Tyrant", 85, Rarity.RARE, mage.cards.b.BladewingDeathlessTyrant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bojuka Bog", 199, Rarity.COMMON, mage.cards.b.BojukaBog.class));
         cards.add(new SetCardInfo("Bontu's Monument", 179, Rarity.UNCOMMON, mage.cards.b.BontusMonument.class));
         cards.add(new SetCardInfo("Boros Garrison", 200, Rarity.UNCOMMON, mage.cards.b.BorosGarrison.class));
