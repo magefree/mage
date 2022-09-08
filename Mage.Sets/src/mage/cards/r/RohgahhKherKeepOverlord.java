@@ -20,7 +20,7 @@ import java.util.UUID;
 /**
  * @author PurpleCrowbar
  */
-public class RohgahhKherKeepOverlord extends CardImpl {
+public final class RohgahhKherKeepOverlord extends CardImpl {
 
     private static final FilterCreaturePermanent controlledKoboldsFilter = new FilterCreaturePermanent(SubType.KOBOLD, "Kobolds");
     private static final FilterSpell koboldSpellFilter = new FilterSpell("a Kobold spell");
