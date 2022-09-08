@@ -10,7 +10,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
-import mage.util.CardUtil;
 
 /**
  * @author TheElk801
@@ -39,7 +38,7 @@ public class AttacksAloneControlledTriggeredAbility extends TriggeredAbilityImpl
         setTriggerPhrase("Whenever " + CardUtil.addArticle(filter.getMessage()) + " attacks alone, ");
     }
 
-    private AttacksAloneControlledTriggeredAbility(final AttacksAloneControlledTriggeredAbility ability) {
+    protected AttacksAloneControlledTriggeredAbility(final AttacksAloneControlledTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.setTargetPointer = ability.setTargetPointer;
@@ -52,7 +51,7 @@ public class AttacksAloneControlledTriggeredAbility extends TriggeredAbilityImpl
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARED_ATTACKERS;
+        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED;
     }
 
     @Override
@@ -60,7 +59,7 @@ public class AttacksAloneControlledTriggeredAbility extends TriggeredAbilityImpl
         if (!game.getCombat().attacksAlone()) {
             return false;
         }
-        Permanent permanent = game.getPermanent(game.getCombat().getAttackers().get(0));
+        Permanent permanent = game.getPermanent(event.getSourceId());
         if (permanent == null || !filter.match(permanent, getControllerId(), this, game)) {
             return false;
         }

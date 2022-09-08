@@ -115,16 +115,16 @@ public class Combat implements Serializable, Copyable<Combat> {
         return defenders;
     }
 
-    public List<UUID> getAttackers() {
-        List<UUID> attackers = new ArrayList<>();
+    public Set<UUID> getAttackers() {
+        Set<UUID> attackers = new HashSet<>();
         for (CombatGroup group : groups) {
             attackers.addAll(group.attackers);
         }
         return attackers;
     }
 
-    public List<UUID> getBlockers() {
-        List<UUID> blockers = new ArrayList<>();
+    public Set<UUID> getBlockers() {
+        Set<UUID> blockers = new HashSet<>();
         for (CombatGroup group : groups) {
             blockers.addAll(group.blockers);
         }
@@ -1160,14 +1160,13 @@ public class Combat implements Serializable, Copyable<Combat> {
                                     Set<UUID> blockedSet = mustBeBlockedByAtLeastX.get(blockedAttackerId);
                                     Set<UUID> toBlockSet = mustBeBlockedByAtLeastX.get(toBeBlockedCreatureId);
                                     if (toBlockSet == null) {
-                                        // This should never happen. 
+                                        // This should never happen.
                                         return null;
                                     } else if (toBlockSet.containsAll(blockedSet)) {
-                                        // the creature already blocks alone a creature that has to be blocked by at least one 
-                                        // and has more possible blockers, so this is ok 
+                                        // the creature already blocks alone a creature that has to be blocked by at least one
+                                        // and has more possible blockers, so this is ok
                                         return null;
                                     }
-
                                 }
                                 // TODO: Check if the attacker is already blocked by another creature
                                 // and despite there is need that this attacker blocks this attacker also
