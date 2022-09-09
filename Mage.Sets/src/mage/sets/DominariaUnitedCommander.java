@@ -124,6 +124,8 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Nethroi, Apex of Death", 163, Rarity.MYTHIC, mage.cards.n.NethroiApexOfDeath.class));
         cards.add(new SetCardInfo("Night's Whisper", 115, Rarity.COMMON, mage.cards.n.NightsWhisper.class));
         cards.add(new SetCardInfo("Nomad Outpost", 222, Rarity.UNCOMMON, mage.cards.n.NomadOutpost.class));
+        cards.add(new SetCardInfo("Obsidian Obelisk", 18, Rarity.RARE, mage.cards.o.ObsidianObelisk.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Obsidian Obelisk", 94, Rarity.RARE, mage.cards.o.ObsidianObelisk.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("O-Kagachi, Vengeful Kami", 164, Rarity.MYTHIC, mage.cards.o.OKagachiVengefulKami.class));
         cards.add(new SetCardInfo("Odric, Lunarch Marshal", 103, Rarity.RARE, mage.cards.o.OdricLunarchMarshal.class));
         cards.add(new SetCardInfo("Oketra's Monument", 188, Rarity.UNCOMMON, mage.cards.o.OketrasMonument.class));
