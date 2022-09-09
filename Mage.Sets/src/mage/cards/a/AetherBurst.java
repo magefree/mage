@@ -27,7 +27,7 @@ public final class AetherBurst extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Return up to X target creatures to their owners' hands, where X is one plus the number of cards named Aether Burst in all graveyards as you cast Aether Burst.
-        this.getSpellAbility().addEffect(new DynamicReturnToHandTargetEffect());
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect().setText("Return up to X target creatures to their owners' hands, where X is one plus the number of cards named Aether Burst in all graveyards as you cast Aether Burst"));
         this.getSpellAbility().addTarget(new DynamicTargetCreaturePermanent());
         this.getSpellAbility().setTargetAdjuster(AetherBurstAdjuster.instance);
     }
@@ -88,31 +88,6 @@ class DynamicTargetCreaturePermanent extends TargetPermanent {
     @Override
     public DynamicTargetCreaturePermanent copy() {
         return new DynamicTargetCreaturePermanent(this);
-    }
-
-}
-
-/**
- * We extend ReturnToHandTargetEffect class just to override the rules.
- */
-class DynamicReturnToHandTargetEffect extends ReturnToHandTargetEffect {
-
-    public DynamicReturnToHandTargetEffect() {
-        super();
-    }
-
-    public DynamicReturnToHandTargetEffect(final DynamicReturnToHandTargetEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DynamicReturnToHandTargetEffect copy() {
-        return new DynamicReturnToHandTargetEffect(this);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Return up to X target creatures to their owners' hands, where X is one plus the number of cards named Aether Burst in all graveyards as you cast Aether Burst";
     }
 
 }

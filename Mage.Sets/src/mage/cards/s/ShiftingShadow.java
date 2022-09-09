@@ -90,18 +90,18 @@ class ShiftingShadowGainEffect extends ContinuousEffectImpl {
 class ShiftingShadowEffect extends OneShotEffect {
 
     private final MageObjectReference mor;
-    private final String name;
 
     ShiftingShadowEffect(Permanent permanent, Game game) {
         super(Outcome.Benefit);
         this.mor = new MageObjectReference(permanent, game);
-        this.name = permanent.getName();
+        this.staticText = "destroy this creature. Reveal cards from the top of your library until you reveal a creature card. " +
+                "Put that card onto the battlefield and attach " + permanent.getName() + " to it, then put all other cards " +
+                "revealed this way on the bottom of your library in a random order.";
     }
 
     private ShiftingShadowEffect(final ShiftingShadowEffect effect) {
         super(effect);
         this.mor = effect.mor;
-        this.name = effect.name;
     }
 
     @Override
@@ -146,12 +146,5 @@ class ShiftingShadowEffect extends OneShotEffect {
         cards.retainZone(Zone.LIBRARY, game);
         player.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "destroy this creature. Reveal cards from the top of your library until you reveal a creature card. " +
-                "Put that card onto the battlefield and attach " + name + " to it, then put all other cards " +
-                "revealed this way on the bottom of your library in a random order.";
     }
 }

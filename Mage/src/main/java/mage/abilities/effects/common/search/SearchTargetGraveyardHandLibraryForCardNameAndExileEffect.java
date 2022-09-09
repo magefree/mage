@@ -38,6 +38,7 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
         this.searchWhatText = searchWhatText;
         this.searchForText = searchForText;
         this.graveyardExileOptional = graveyardExileOptional;
+        this.staticText = "search " + searchWhatText + " graveyard, hand, and library for " + searchForText + " and exile them. Then that player shuffles";
     }
 
     public SearchTargetGraveyardHandLibraryForCardNameAndExileEffect(final SearchTargetGraveyardHandLibraryForCardNameAndExileEffect effect) {
@@ -97,18 +98,5 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
         }
 
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        if (staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
-        StringBuilder sb = new StringBuilder();
-        sb.append("search ").append(this.searchWhatText);
-        sb.append(" graveyard, hand, and library for ");
-        sb.append(this.searchForText);
-        sb.append(" and exile them. Then that player shuffles");
-        return sb.toString();
     }
 }

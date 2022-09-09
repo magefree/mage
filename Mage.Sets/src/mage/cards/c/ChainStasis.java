@@ -49,6 +49,7 @@ class ChainStasisEffect extends OneShotEffect {
 
     public ChainStasisEffect() {
         super(Outcome.Benefit);
+        this.staticText = "You may tap or untap target creature. Then that creature's controller may pay {2}{U}. If the player does, they may copy this spell and may choose a new target for that copy";
     }
 
     public ChainStasisEffect(final ChainStasisEffect effect) {
@@ -90,11 +91,4 @@ class ChainStasisEffect extends OneShotEffect {
 
         return false;
     }
-
-    @Override
-    public String getText(Mode mode
-    ) {
-        return "You may tap or untap target creature. Then that creature's controller may pay {2}{U}. If the player does, they may copy this spell and may choose a new target for that copy";
-    }
-
 }

@@ -45,7 +45,7 @@ public final class CloakingDevice extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedAttachedEffect(AttachmentType.AURA)));
 
         // Whenever enchanted creature attacks, defending player loses 1 life.
-        this.addAbility(new AttacksAttachedTriggeredAbility(new CloakingDeviceLoseLifeDefendingPlayerEffect(1, true), AttachmentType.AURA, false));
+        this.addAbility(new AttacksAttachedTriggeredAbility(new CloakingDeviceLoseLifeDefendingPlayerEffect(), AttachmentType.AURA, false));
 
     }
 
@@ -61,29 +61,13 @@ public final class CloakingDevice extends CardImpl {
 
 class CloakingDeviceLoseLifeDefendingPlayerEffect extends OneShotEffect {
 
-    private DynamicValue amount;
-    private boolean attackerIsSource;
-
-    /**
-     *
-     * @param amount
-     * @param attackerIsSource true if the source.getSourceId() contains the
-     * attacker false if attacker has to be taken from targetPointer
-     */
-    public CloakingDeviceLoseLifeDefendingPlayerEffect(int amount, boolean attackerIsSource) {
-        this(StaticValue.get(amount), attackerIsSource);
-    }
-
-    public CloakingDeviceLoseLifeDefendingPlayerEffect(DynamicValue amount, boolean attackerIsSource) {
+    public CloakingDeviceLoseLifeDefendingPlayerEffect() {
         super(Outcome.Damage);
-        this.amount = amount;
-        this.attackerIsSource = attackerIsSource;
+        this.staticText = "defending player loses 1 life";
     }
 
     public CloakingDeviceLoseLifeDefendingPlayerEffect(final CloakingDeviceLoseLifeDefendingPlayerEffect effect) {
         super(effect);
-        this.amount = effect.amount.copy();
-        this.attackerIsSource = effect.attackerIsSource;
     }
 
     @Override
@@ -102,15 +86,9 @@ class CloakingDeviceLoseLifeDefendingPlayerEffect extends OneShotEffect {
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Player defender = game.getPlayer(game.getCombat().getDefendingPlayerId(enchantment.getAttachedTo(), game));
             if (defender != null) {
-                defender.loseLife(amount.calculate(game, source, this), game, source, false);
+                defender.loseLife(1, game, source, false);
             }
         }
         return true;
     }
-
-    @Override
-    public String getText(Mode mode) {
-        return "defending player loses " + amount + " life";
-    }
-
 }

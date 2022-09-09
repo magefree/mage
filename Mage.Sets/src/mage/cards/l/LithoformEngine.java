@@ -95,6 +95,7 @@ class LithoformEngineEffect extends OneShotEffect {
 
     public LithoformEngineEffect() {
         super(Outcome.Copy);
+        this.staticText = "Copy target activated or triggered ability you control. You may choose new targets for the copy";
     }
 
     public LithoformEngineEffect(final LithoformEngineEffect effect) {
@@ -119,10 +120,5 @@ class LithoformEngineEffect extends OneShotEffect {
     @Override
     public LithoformEngineEffect copy() {
         return new LithoformEngineEffect(this);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Copy target activated or triggered ability you control. You may choose new targets for the copy";
     }
 }

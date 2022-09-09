@@ -98,6 +98,7 @@ class GoblinFestivalGainControlEffect extends ContinuousEffectImpl {
     public GoblinFestivalGainControlEffect(Duration duration, UUID controller) {
         super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.controller = controller;
+        this.staticText = "That player gains control of {this}";
     }
 
     public GoblinFestivalGainControlEffect(final GoblinFestivalGainControlEffect effect) {
@@ -120,10 +121,5 @@ class GoblinFestivalGainControlEffect extends ContinuousEffectImpl {
             return permanent.changeControllerId(controller, game, source);
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "That player gains control of {this}";
     }
 }

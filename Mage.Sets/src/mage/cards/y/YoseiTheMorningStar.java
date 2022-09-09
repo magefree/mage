@@ -126,5 +126,4 @@ class YoseiTheMorningStarTapEffect extends OneShotEffect {
     public String getText(Mode mode) {
         return staticText;
     }
-
 }

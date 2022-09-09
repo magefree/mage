@@ -89,6 +89,7 @@ class CrownOfEmpiresControlEffect extends ContinuousEffectImpl {
 
     public CrownOfEmpiresControlEffect() {
         super(Duration.EndOfGame, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
+        this.staticText = "Gain control of {this}";
     }
 
     public CrownOfEmpiresControlEffect(final CrownOfEmpiresControlEffect effect) {
@@ -108,10 +109,5 @@ class CrownOfEmpiresControlEffect extends ContinuousEffectImpl {
             return permanent.changeControllerId(controllerId, game, source);
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Gain control of {this}";
     }
 }
