@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -7,14 +6,11 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.MulticoloredPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -32,7 +28,7 @@ public final class RenderSilent extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{U}{U}");
 
         // Counter target spell. Its controller can't cast spells this turn.
-        this.getSpellAbility().addEffect(new CounterTargetEffect());
+        this.getSpellAbility().addEffect(new RenderSilentCounterEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new RenderSilentEffect());
     }
@@ -45,6 +41,38 @@ public final class RenderSilent extends CardImpl {
     public RenderSilent copy() {
         return new RenderSilent(this);
     }
+}
+
+class RenderSilentCounterEffect extends OneShotEffect {
+
+    public RenderSilentCounterEffect() {
+        super(Outcome.Detriment);
+    }
+
+    public RenderSilentCounterEffect(final RenderSilentCounterEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public RenderSilentCounterEffect copy() {
+        return new RenderSilentCounterEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Spell spell = game.getStack().getSpell(source.getFirstTarget());
+        if (spell != null) {
+            source.getEffects().get(1).setTargetPointer(new FixedTarget(spell.getControllerId()));
+            return game.getStack().counter(source.getFirstTarget(), source, game);
+        }
+        return false;
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        return "Counter target " + mode.getTargets().get(0).getTargetName();
+    }
+
 }
 
 class RenderSilentEffect extends ContinuousRuleModifyingEffectImpl {
