@@ -165,6 +165,8 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Terramorphic Expanse", 239, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("Teshar, Ancestor's Apostle", 105, Rarity.RARE, mage.cards.t.TesharAncestorsApostle.class));
         cards.add(new SetCardInfo("The Circle of Loyalty", 98, Rarity.MYTHIC, mage.cards.t.TheCircleOfLoyalty.class));
+        cards.add(new SetCardInfo("The Mana Rig", 28, Rarity.MYTHIC, mage.cards.t.TheManaRig.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Mana Rig", 80, Rarity.MYTHIC, mage.cards.t.TheManaRig.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thrill of Possibility", 127, Rarity.COMMON, mage.cards.t.ThrillOfPossibility.class));
         cards.add(new SetCardInfo("Time Wipe", 173, Rarity.RARE, mage.cards.t.TimeWipe.class));
         cards.add(new SetCardInfo("Transguild Courier", 194, Rarity.UNCOMMON, mage.cards.t.TransguildCourier.class));
