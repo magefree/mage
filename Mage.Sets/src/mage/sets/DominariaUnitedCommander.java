@@ -82,6 +82,8 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Generous Gift", 100, Rarity.UNCOMMON, mage.cards.g.GenerousGift.class));
         cards.add(new SetCardInfo("Glint-Eye Nephilim", 152, Rarity.RARE, mage.cards.g.GlintEyeNephilim.class));
         cards.add(new SetCardInfo("Grasslands", 214, Rarity.UNCOMMON, mage.cards.g.Grasslands.class));
+        cards.add(new SetCardInfo("Greensleeves, Maro-Sorcerer", 27, Rarity.MYTHIC, mage.cards.g.GreensleevesMaroSorcerer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Greensleeves, Maro-Sorcerer", 77, Rarity.MYTHIC, mage.cards.g.GreensleevesMaroSorcerer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Growth Spiral", 153, Rarity.COMMON, mage.cards.g.GrowthSpiral.class));
         cards.add(new SetCardInfo("Hazoret's Monument", 183, Rarity.UNCOMMON, mage.cards.h.HazoretsMonument.class));
         cards.add(new SetCardInfo("Hedron Archive", 184, Rarity.UNCOMMON, mage.cards.h.HedronArchive.class));
