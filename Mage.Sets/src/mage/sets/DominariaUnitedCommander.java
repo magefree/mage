@@ -107,6 +107,8 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Lavalanche", 157, Rarity.RARE, mage.cards.l.Lavalanche.class));
         cards.add(new SetCardInfo("Maelstrom Archangel", 158, Rarity.MYTHIC, mage.cards.m.MaelstromArchangel.class));
         cards.add(new SetCardInfo("Maelstrom Nexus", 159, Rarity.MYTHIC, mage.cards.m.MaelstromNexus.class));
+        cards.add(new SetCardInfo("Mana Cannons", 7, Rarity.RARE, mage.cards.m.ManaCannons.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mana Cannons", 83, Rarity.RARE, mage.cards.m.ManaCannons.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Merciless Eviction", 160, Rarity.RARE, mage.cards.m.MercilessEviction.class));
         cards.add(new SetCardInfo("Migration Path", 135, Rarity.UNCOMMON, mage.cards.m.MigrationPath.class));
         cards.add(new SetCardInfo("Mikokoro, Center of the Sea", 217, Rarity.RARE, mage.cards.m.MikokoroCenterOfTheSea.class));
