@@ -121,8 +121,8 @@ class SorrowsPathSwitchBlockersEffect extends OneShotEffect {
                 // not blocking (since they're removed from combat) to blocking. It doesn't matter if those abilities triggered when those creatures blocked the first time. Abilities 
                 // that trigger whenever one of the attacking creatures becomes blocked will not trigger again, because they never stopped being blocked creatures. Abilities that 
                 // trigger whenever a creature blocks one of the attacking creatures will trigger again, though; those kinds of abilities trigger once for each creature that blocks.
-                reassignBlocker(blocker1, attackers2, game);
-                reassignBlocker(blocker2, attackers1, game);
+                reassignBlocker(blocker1, attackers2, game, source);
+                reassignBlocker(blocker2, attackers1, game, source);
                 Set<MageObjectReference> morSet = new HashSet<>();
                 attackers1
                         .stream()
@@ -171,17 +171,17 @@ class SorrowsPathSwitchBlockersEffect extends OneShotEffect {
         return true;
     }
 
-    private void reassignBlocker(Permanent blocker, Set<Permanent> attackers, Game game) {
+    private void reassignBlocker(Permanent blocker, Set<Permanent> attackers, Game game, Ability source) {
         for (Permanent attacker : attackers) {
             CombatGroup group = game.getCombat().findGroup(attacker.getId());
             if (group != null) {
                 group.addBlockerToGroup(blocker.getId(), blocker.getControllerId(), game);
                 game.getCombat().addBlockingGroup(blocker.getId(), attacker.getId(), blocker.getControllerId(), game);
-                // TODO: find an alternate event solution for multi-blockers (as per issue #4285), this will work fine for single blocker creatures though
                 game.fireEvent(new BlockerDeclaredEvent(attacker.getId(), blocker.getId(), blocker.getControllerId()));
                 group.pickBlockerOrder(attacker.getControllerId(), game);
             }
         }
+        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKS, blocker.getId(), source, null));
         CombatGroup blockGroup = findBlockingGroup(blocker, game); // a new blockingGroup is formed, so it's necessary to find it again
         if (blockGroup != null) {
             blockGroup.pickAttackerOrder(blocker.getControllerId(), game);

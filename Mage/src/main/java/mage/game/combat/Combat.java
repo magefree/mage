@@ -704,6 +704,9 @@ public class Combat implements Serializable, Copyable<Combat> {
         for (CombatGroup group : groups) {
             group.acceptBlockers(game);
         }
+        for (UUID blockerId : getBlockers()) {
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKS, blockerId, null));
+        }
     }
 
     public void resumeSelectBlockers(Game game) {
