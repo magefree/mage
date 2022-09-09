@@ -269,6 +269,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Tribute to Urborg", 113, Rarity.COMMON, mage.cards.t.TributeToUrborg.class));
         cards.add(new SetCardInfo("Tura Kennerud, Skyknight", 224, Rarity.UNCOMMON, mage.cards.t.TuraKennerudSkyknight.class));
         cards.add(new SetCardInfo("Twinferno", 149, Rarity.UNCOMMON, mage.cards.t.Twinferno.class));
+        cards.add(new SetCardInfo("Tyrannical Pitlord", 284, Rarity.RARE, mage.cards.t.TyrannicalPitlord.class));
         cards.add(new SetCardInfo("Urborg Lhurgoyf", 186, Rarity.RARE, mage.cards.u.UrborgLhurgoyf.class));
         cards.add(new SetCardInfo("Urborg Repossession", 114, Rarity.COMMON, mage.cards.u.UrborgRepossession.class));
         cards.add(new SetCardInfo("Urza Assembles the Titans", 37, Rarity.RARE, mage.cards.u.UrzaAssemblesTheTitans.class));
