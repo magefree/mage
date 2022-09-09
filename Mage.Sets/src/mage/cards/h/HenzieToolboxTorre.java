@@ -1,6 +1,7 @@
 package mage.cards.h;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -10,9 +11,10 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreatureSpell;
+import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -56,10 +58,12 @@ public class HenzieToolboxTorre extends CardImpl {
     }
 }
 
+// Must use custom effect rather than GainAbilitySpellsEffect since the BlitzAbility requires the card object passed to the initializer
 class HenzieToolboxTorreGainBlitzEffect extends ContinuousEffectImpl {
 
-    private static final FilterCreatureSpell filter = new FilterCreatureSpell();
+    private static final FilterObject<MageObject> filter = new FilterObject<>("creature spell you cast with mana value 4 or greater");
     static {
+        filter.add(CardType.CREATURE.getPredicate());
         filter.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 3));
     }
 
@@ -79,20 +83,46 @@ class HenzieToolboxTorreGainBlitzEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (controller == null || permanent == null) {
             return false;
         }
 
         boolean applied = false;
 
-        for (StackObject stackObject : game.getStack()) {
-            if (!(stackObject.isCopy()
-                    || !stackObject.isControlledBy(source.getControllerId())
-                    || !filter.match(stackObject, controller.getId(), source, game))) {
-                continue;
+        // TODO: This is not correct yet. Need to account for opponent's cards that you exile and can then play
+        //       e.g. Gonti, Lord of Luxury
+        for (Card card : game.getExile().getAllCards(game)) {
+            if (card.isOwnedBy(source.getControllerId()) && filter.match(card, game)) {
+                game.getState().addOtherAbility(card, new BlitzAbility(card, card.getManaCost().getMana().toString()));
+                applied = true;
             }
-            Card card = ((Spell) stackObject).getCard();
-            game.getState().addOtherAbility(card, new BlitzAbility(card, card.getMana().toString()));
+        }
+        for (Card card : controller.getLibrary().getCards(game)) {
+            if (filter.match(card, game)) {
+                game.getState().addOtherAbility(card, new BlitzAbility(card, card.getManaCost().getMana().toString()));
+                applied = true;
+            }
+        }
+        for (Card card : controller.getHand().getCards(game)) {
+            if (filter.match(card, game)) {
+                game.getState().addOtherAbility(card, new BlitzAbility(card, card.getManaCost().getMana().toString()));
+                applied = true;
+            }
+        }
+        for (Card card : controller.getGraveyard().getCards(game)) {
+            if (filter.match(card, game)) {
+                game.getState().addOtherAbility(card, new BlitzAbility(card, card.getManaCost().getMana().toString()));
+                applied = true;
+            }
+        }
+
+        // workaround to gain cost reduction abilities to commanders before cast (make it playable)
+        for (Card card : game.getCommanderCardsFromCommandZone(controller, CommanderCardType.ANY)) {
+            if (filter.match(card, game)) {
+                game.getState().addOtherAbility(card, new BlitzAbility(card, card.getManaCost().getMana().toString()));
+                applied = true;
+            }
         }
 
         return applied;
