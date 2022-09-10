@@ -346,6 +346,15 @@ public enum ImageManagerImpl implements ImageManager {
     }
 
     @Override
+    public Image getSkipEachEndStepButtonImage() {
+        if (imageSkipUntilEachEndStepButton == null) {
+            imageSkipUntilEachEndStepButton = getBufferedImageFromResource(
+                    PreferencesDialog.getCurrentTheme().getButtonPath("skip_to_each_end.png"));
+        }
+        return imageSkipUntilEachEndStepButton;
+    }
+
+    @Override
     public Image getSkipYourNextTurnButtonImage() {
         if (imageSkipYourNextTurnButton == null) {
             imageSkipYourNextTurnButton = getBufferedImageFromResource(
@@ -471,6 +480,7 @@ public enum ImageManagerImpl implements ImageManager {
     private static BufferedImage imageSkipToMainButton;
     private static BufferedImage imageSkipStackButton;
     private static BufferedImage imageSkipUntilEndStepBeforeYourTurnButton;
+    private static BufferedImage imageSkipUntilEachEndStepButton;
     private static BufferedImage imageSkipYourNextTurnButton;
     private static BufferedImage imageToggleRecordMacroButton;
 

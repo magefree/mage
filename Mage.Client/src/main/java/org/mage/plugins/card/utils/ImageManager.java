@@ -75,6 +75,8 @@ public interface ImageManager {
 
     Image getSkipEndStepBeforeYourTurnButtonImage();
 
+    Image getSkipEachEndStepButtonImage();
+
     Image getSkipYourNextTurnButtonImage();
 
     Image getToggleRecordMacroButtonImage();

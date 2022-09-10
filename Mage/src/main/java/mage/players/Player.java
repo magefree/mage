@@ -229,6 +229,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean getPassedUntilEndStepBeforeMyTurn();
 
+    boolean getPassedUntilEachEndStep();
+
     boolean getPassedAllTurns();
 
     AbilityType getJustActivatedType();

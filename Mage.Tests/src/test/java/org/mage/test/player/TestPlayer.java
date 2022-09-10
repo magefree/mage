@@ -3887,7 +3887,7 @@ public class TestPlayer implements Player {
     public boolean getPassedUntilEndOfTurn() {
         return computerPlayer.getPassedUntilEndOfTurn();
     }
-
+    
     @Override
     public boolean getPassedTurn() {
         return computerPlayer.getPassedTurn();
@@ -3901,6 +3901,11 @@ public class TestPlayer implements Player {
     @Override
     public boolean getPassedUntilEndStepBeforeMyTurn() {
         return computerPlayer.getPassedUntilEndStepBeforeMyTurn();
+    }
+    
+    @Override
+    public boolean getPassedUntilEachEndStep() {
+        return computerPlayer.getPassedUntilEachEndStep();
     }
 
     @Override

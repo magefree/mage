@@ -129,6 +129,10 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                     }
                     break;
                 }
+                case "F1": {
+                    SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_EACH_END_STEP, gameId, null);
+                    break;
+                }
                 case "F3": {
                     SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, gameId, null);
                     break;
@@ -190,6 +194,15 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
         String tooltipText = "<html>This skip actions stops if something goes to <br><b>stack</b> and if <b>attackers</b> or <b>blocker</b> have to be <b>declared</b>.";
         String everythingTooltipText = "<html>This skip actions stops if <b>attackers</b> or <b>blocker</b> have to be <b>declared</b>, but not if something goes to the <b>stack</b>.";
+        
+        menuItem = new JMenuItem("<html><b>F1</b> - Everything until each end step");
+        menuItem.setActionCommand("F1");
+        menuItem.setToolTipText(everythingTooltipText);
+        menuItem.setMnemonic(KeyEvent.VK_Z);
+        skipMenu.add(menuItem);
+        menuItem.addActionListener(skipListener);
+
+
         menuItem = new JMenuItem("<html><b>F4</b> - Phases until next turn");
         menuItem.setActionCommand("F4");
         menuItem.setToolTipText(tooltipText);

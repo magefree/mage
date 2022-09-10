@@ -355,6 +355,11 @@ public class PlayerStub implements Player {
     public boolean getPassedUntilEndStepBeforeMyTurn() {
         return false;
     }
+    
+    @Override
+    public boolean getPassedUntilEachEndStep() {
+        return false;
+    }
 
     @Override
     public AbilityType getJustActivatedType() {

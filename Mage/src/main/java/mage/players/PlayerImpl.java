@@ -100,6 +100,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected ManaPool manaPool;
     // priority control
     protected boolean passed; // player passed priority
+    protected boolean passedUntilEachEndStep; // F1
     protected boolean passedTurn; // F4
     protected boolean passedTurnSkipStack; // F6 // TODO: research
     protected boolean passedUntilEndOfTurn; // F5
@@ -271,6 +272,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.passedUntilStackResolved = player.passedUntilStackResolved;
         this.dateLastAddedToStack = player.dateLastAddedToStack;
         this.passedUntilEndStepBeforeMyTurn = player.passedUntilEndStepBeforeMyTurn;
+        this.passedUntilEachEndStep = player.passedUntilEachEndStep;
         this.skippedAtLeastOnce = player.skippedAtLeastOnce;
         this.passedAllTurns = player.passedAllTurns;
         this.justActivatedType = player.justActivatedType;
@@ -438,6 +440,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.passedUntilStackResolved = false;
         this.dateLastAddedToStack = null;
         this.passedUntilEndStepBeforeMyTurn = false;
+        this.passedUntilEachEndStep = false;
         this.skippedAtLeastOnce = false;
         this.passedAllTurns = false;
         this.justActivatedType = null;
@@ -2393,6 +2396,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.passedUntilStackResolved = false;
         this.dateLastAddedToStack = null;
         this.passedUntilEndStepBeforeMyTurn = false;
+        this.passedUntilEachEndStep = false;
         this.skippedAtLeastOnce = false;
         this.passedAllTurns = false;
         this.justActivatedType = null;
@@ -2471,6 +2475,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             case PASS_PRIORITY_UNTIL_END_STEP_BEFORE_MY_NEXT_TURN: //F11
                 resetPlayerPassedActions();
                 passedUntilEndStepBeforeMyTurn = true;
+                this.skip();
+                break;
+            case PASS_PRIORITY_UNTIL_EACH_END_STEP: //F1
+                resetPlayerPassedActions();
+                passedUntilEachEndStep = true;
                 this.skip();
                 break;
             case PASS_PRIORITY_CANCEL_ALL_ACTIONS:
@@ -4421,6 +4430,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     public void becomesActivePlayer() {
         this.passedAllTurns = false;
         this.passedUntilEndStepBeforeMyTurn = false;
+        this.passedUntilEachEndStep = false;
         this.turns++;
     }
 
@@ -4940,6 +4950,11 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public boolean getPassedUntilEndStepBeforeMyTurn() {
         return passedUntilEndStepBeforeMyTurn;
+    }
+    
+    @Override
+    public boolean getPassedUntilEachEndStep() {
+        return passedUntilEachEndStep;
     }
 
     @Override

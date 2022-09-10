@@ -373,7 +373,7 @@ public final class GamePanel extends javax.swing.JPanel {
         // the stack takes up a portion of the possible space (GUISizeHelper.stackWidth)
 
         int newStackWidth = pnlHelperHandButtonsStackArea.getWidth() * GUISizeHelper.stackWidth / 100;
-        newStackWidth = Math.max(410, newStackWidth);
+        newStackWidth = Math.max(475, newStackWidth);
         Dimension newDimension = new Dimension(
                 pnlHelperHandButtonsStackArea.getWidth() - newStackWidth,
                 MageActionCallback.getHandOrStackMargins(Zone.HAND).getHeight() + GUISizeHelper.handCardDimension.height + GUISizeHelper.scrollBarSize
@@ -484,6 +484,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.gameChatPanel.setGameData(gameId, bigCard);
         this.userChatPanel.setGameData(gameId, bigCard);
 
+        this.btnSkipToEachEndStep.setVisible(true);
         this.btnSkipToNextTurn.setVisible(true);
         this.btnSkipToEndTurn.setVisible(true);
         this.btnSkipToNextMain.setVisible(true);
@@ -518,6 +519,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.btnCancelSkip.setVisible(false);
         this.btnToggleMacro.setVisible(false);
 
+        this.btnSkipToEachEndStep.setVisible(false);
         this.btnSkipToNextTurn.setVisible(false);
         this.btnSkipToEndTurn.setVisible(false);
         this.btnSkipToNextMain.setVisible(false);
@@ -1018,6 +1020,7 @@ public final class GamePanel extends javax.swing.JPanel {
         private final skipButton allTurns;
         private final skipButton untilStackResolved;
         private final skipButton untilUntilEndStepBeforeMyTurn;
+        private final skipButton untilEachEndStep;
 
         skipButtonsList() {
             this.turn = new skipButton("Skip to next turn", "", "", KEY_CONTROL_NEXT_TURN);
@@ -1025,7 +1028,8 @@ public final class GamePanel extends javax.swing.JPanel {
             this.untilNextMain = new skipButton("Skip to [EXTRA_TRUE / EXTRA_FALSE] MAIN step", "opponent", "next", KEY_CONTROL_MAIN_STEP);
             this.allTurns = new skipButton("Skip to YOUR turn", "", "", KEY_CONTROL_YOUR_TURN);
             this.untilStackResolved = new skipButton("Skip until stack is resolved [EXTRA_TRUE]", "", "or stop on new objects added", KEY_CONTROL_SKIP_STACK);
-            this.untilUntilEndStepBeforeMyTurn = new skipButton("Skip to END OF TURN before YOUR", "", "", KEY_CONTROL_PRIOR_END);
+            this.untilUntilEndStepBeforeMyTurn = new skipButton("Skip to end of turn before yours", "", "", KEY_CONTROL_PRIOR_END);
+            this.untilEachEndStep = new skipButton("Skip to each end of turn", "", "", KEY_CONTROL_EVERY_END);
         }
 
         private void updateExtraMode(PlayerView player) {
@@ -1035,6 +1039,7 @@ public final class GamePanel extends javax.swing.JPanel {
             this.allTurns.setExtraMode(false); // not used
             this.untilStackResolved.setExtraMode(player.getUserData().getUserSkipPrioritySteps().isStopOnStackNewObjects());
             this.untilUntilEndStepBeforeMyTurn.setExtraMode(false); // not used
+            this.untilEachEndStep.setExtraMode(false); // not used
         }
 
         private void updatePressState(PlayerView player) {
@@ -1044,6 +1049,7 @@ public final class GamePanel extends javax.swing.JPanel {
             this.allTurns.setPressState(player.isPassedAllTurns());
             this.untilStackResolved.setPressState(player.isPassedUntilStackResolved());
             this.untilUntilEndStepBeforeMyTurn.setPressState(player.isPassedUntilEndStepBeforeMyTurn());
+            this.untilEachEndStep.setPressState(player.isPassedUntilEachEndStep());
         }
 
         public void updateFromPlayer(PlayerView player) {
@@ -1065,6 +1071,8 @@ public final class GamePanel extends javax.swing.JPanel {
                     return this.untilStackResolved;
                 case KEY_CONTROL_PRIOR_END:
                     return this.untilUntilEndStepBeforeMyTurn;
+                case KEY_CONTROL_EVERY_END:
+                    return this.untilEachEndStep;
                 default:
                     logger.error("Unknown hotkey name " + hotkey);
                     return null;
@@ -1089,6 +1097,7 @@ public final class GamePanel extends javax.swing.JPanel {
             this.allTurns.setPressState(false);
             this.untilStackResolved.setPressState(false);
             this.untilUntilEndStepBeforeMyTurn.setPressState(false);
+            this.untilEachEndStep.setPressState(false);
 
             if (!hotkey.isEmpty()) {
                 skipButton butt = findButton(hotkey);
@@ -1099,6 +1108,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private void updateSkipButtons() {
         // hints
+        btnSkipToEachEndStep.setToolTipText(skipButtons.untilEachEndStep.getTooltip());
         btnSkipToNextTurn.setToolTipText(skipButtons.turn.getTooltip());
         btnSkipToEndTurn.setToolTipText(skipButtons.untilEndOfTurn.getTooltip());
         btnSkipToNextMain.setToolTipText(skipButtons.untilNextMain.getTooltip());
@@ -1107,6 +1117,7 @@ public final class GamePanel extends javax.swing.JPanel {
         btnSkipToEndStepBeforeYourTurn.setToolTipText(skipButtons.untilUntilEndStepBeforeMyTurn.getTooltip());
 
         // border
+        btnSkipToEachEndStep.setBorder(skipButtons.untilEachEndStep.getBorder());
         btnSkipToNextTurn.setBorder(skipButtons.turn.getBorder());
         btnSkipToEndTurn.setBorder(skipButtons.untilEndOfTurn.getBorder());
         btnSkipToNextMain.setBorder(skipButtons.untilNextMain.getBorder());
@@ -1872,6 +1883,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
         btnToggleMacro = new KeyboundButton(KEY_CONTROL_TOGGLE_MACRO, displayButtonText);
         btnCancelSkip = new KeyboundButton(KEY_CONTROL_CANCEL_SKIP, displayButtonText); // F3
+        btnSkipToEachEndStep = new KeyboundButton(KEY_CONTROL_EVERY_END, displayButtonText); // F1
         btnSkipToNextTurn = new KeyboundButton(KEY_CONTROL_NEXT_TURN, displayButtonText); // F4
         btnSkipToEndTurn = new KeyboundButton(KEY_CONTROL_END_STEP, displayButtonText); // F5
         btnSkipToNextMain = new KeyboundButton(KEY_CONTROL_MAIN_STEP, displayButtonText); // F7
@@ -1906,7 +1918,7 @@ public final class GamePanel extends javax.swing.JPanel {
         handCards = new HashMap<>();
 
         pnlShortCuts.setOpaque(false);
-        pnlShortCuts.setPreferredSize(new Dimension(410, 72));
+        pnlShortCuts.setPreferredSize(new Dimension(475, 72));
 
         stackObjects = new mage.client.cards.Cards();
 
@@ -2108,6 +2120,27 @@ public final class GamePanel extends javax.swing.JPanel {
                 btnSkipToEndStepBeforeYourTurnActionPerformed(actionEvent);
             }
         });
+
+        btnSkipToEachEndStep.setContentAreaFilled(false);
+        btnSkipToEachEndStep.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
+        btnSkipToEachEndStep.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipEachEndStepButtonImage()));
+        btnSkipToEachEndStep.setToolTipText("dynamic");
+        btnSkipToEachEndStep.setFocusable(false);
+        btnSkipToEachEndStep.addMouseListener(new FirstButtonMousePressedAction(e ->
+                btnSkipToEachEndStepActionPerformed(null)));
+
+
+        KeyStroke ks1 = getCachedKeystroke(KEY_CONTROL_EVERY_END);
+        this.getInputMap(c).put(ks11, "F1_PRESS");
+        this.getActionMap().put("F1_PRESS", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (isUserImputActive()) return;
+                btnSkipToEachEndStepActionPerformed(actionEvent);
+            }
+        });
+
+
 
         btnSkipStack.setContentAreaFilled(false);
         btnSkipStack.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
@@ -2323,6 +2356,7 @@ public final class GamePanel extends javax.swing.JPanel {
         pnlShortCuts.setLayout(gl_pnlShortCuts);
         gl_pnlShortCuts.setHorizontalGroup(gl_pnlShortCuts.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                 .addGroup(gl_pnlShortCuts.createSequentialGroup()
+                        .addComponent(btnSkipToEachEndStep)
                         .addComponent(btnSkipToNextTurn)
                         .addComponent(btnSkipToEndTurn)
                         .addComponent(btnSkipToNextMain)
@@ -2358,6 +2392,7 @@ public final class GamePanel extends javax.swing.JPanel {
                         .addComponent(pnlReplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(gl_pnlShortCuts.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(btnSkipToEachEndStep)
                                 .addComponent(btnSkipToNextTurn)
                                 .addComponent(btnSkipToEndTurn)
                                 .addComponent(btnSkipToNextMain)
@@ -2438,8 +2473,8 @@ public final class GamePanel extends javax.swing.JPanel {
                                                         .addComponent(handContainer, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 )
                                                 .addGroup(gl_helperHandButtonsStackArea.createParallelGroup(Alignment.LEADING)
-                                                        .addComponent(pnlShortCuts, 410, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(stackObjects, 410, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(pnlShortCuts, 475, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(stackObjects, 475, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
                                                 )
                                         )
                                         .addGap(0)
@@ -2530,6 +2565,9 @@ public final class GamePanel extends javax.swing.JPanel {
         }
         for (MouseListener ml : this.btnSkipToEndStepBeforeYourTurn.getMouseListeners()) {
             this.btnSkipToEndStepBeforeYourTurn.removeMouseListener(ml);
+        }
+        for (MouseListener ml : this.btnSkipToEachEndStep.getMouseListeners()) {
+            this.btnSkipToEachEndStep.removeMouseListener(ml);
         }
         for (MouseListener ml : this.btnSkipToEndTurn.getMouseListeners()) {
             this.btnSkipToEndTurn.removeMouseListener(ml);
@@ -2681,6 +2719,14 @@ public final class GamePanel extends javax.swing.JPanel {
     private void btnSkipToEndStepBeforeYourTurnActionPerformed(java.awt.event.ActionEvent evt) {
         SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_END_STEP_BEFORE_MY_NEXT_TURN, gameId, null);
         skipButtons.activateSkipButton(KEY_CONTROL_PRIOR_END);
+
+        AudioManager.playOnSkipButton();
+        updateSkipButtons();
+    }
+
+    private void btnSkipToEachEndStepActionPerformed(java.awt.event.ActionEvent evt) {
+        SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_EACH_END_STEP, gameId, null);
+        skipButtons.activateSkipButton(KEY_CONTROL_EVERY_END);
 
         AudioManager.playOnSkipButton();
         updateSkipButtons();
@@ -2949,6 +2995,7 @@ public final class GamePanel extends javax.swing.JPanel {
     //    private JPanel cancelSkipPanel;
     private KeyboundButton btnToggleMacro;
     private KeyboundButton btnCancelSkip;
+    private KeyboundButton btnSkipToEachEndStep; // F1
     private KeyboundButton btnSkipToNextTurn; // F4
     private KeyboundButton btnSkipToEndTurn; // F5
     private KeyboundButton btnSkipToNextMain; // F7

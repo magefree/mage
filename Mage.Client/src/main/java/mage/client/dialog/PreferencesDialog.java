@@ -301,6 +301,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_CONTROL_YOUR_TURN = "controlYourTurn";
     public static final String KEY_CONTROL_SKIP_STACK = "controlSkipStack";
     public static final String KEY_CONTROL_PRIOR_END = "controlPriorEnd";
+    public static final String KEY_CONTROL_EVERY_END = "controlEveryEnd";
 
     public static final String KEY_AVATAR = "selectedId";
 
@@ -325,9 +326,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private static int selectedAvatarId;
 
     private static ThemeType currentTheme = null;
-    
+
     private static boolean ignoreGUISizeSliderStateChangedEvent = false;
-    
+
     public static ThemeType getCurrentTheme() {
         if (currentTheme == null) {
             currentTheme = ThemeType.valueByName(getCachedValue(KEY_THEME, "Default"));
@@ -600,6 +601,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         labelYourTurn = new javax.swing.JLabel();
         lebelSkip = new javax.swing.JLabel();
         labelPriorEnd = new javax.swing.JLabel();
+        labelEveryEnd = new javax.swing.JLabel();
         labelCancel = new javax.swing.JLabel();
         keyCancelSkip = new KeyBindButton(this, KEY_CONTROL_CANCEL_SKIP);
         keyNextTurn = new KeyBindButton(this, KEY_CONTROL_NEXT_TURN);
@@ -608,6 +610,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         keyYourTurn = new KeyBindButton(this, KEY_CONTROL_YOUR_TURN);
         keySkipStack = new KeyBindButton(this, KEY_CONTROL_SKIP_STACK);
         keyPriorEnd = new KeyBindButton(this, KEY_CONTROL_PRIOR_END);
+        keyEveryEnd = new KeyBindButton(this, KEY_CONTROL_EVERY_END);
         keySkipStep = new KeyBindButton(this, KEY_CONTROL_SKIP_STEP);
         labelSkipStep = new javax.swing.JLabel();
         keyConfirm = new KeyBindButton(this, KEY_CONTROL_CONFIRM);
@@ -2648,6 +2651,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         labelPriorEnd.setText("Prior End:");
 
+        labelEveryEnd.setText("Each End:");
+
         labelCancel.setText("Cancel Skip:");
 
         keyCancelSkip.setText("keyBindButton1");
@@ -2663,6 +2668,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         keySkipStack.setText("keyBindButton1");
 
         keyPriorEnd.setText("keyBindButton1");
+
+        keyEveryEnd.setText("keyBindButton1");
 
         keySkipStep.setText("keyBindButton1");
 
@@ -2707,6 +2714,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                             .add(labelYourTurn)
                             .add(lebelSkip)
                             .add(labelPriorEnd)
+                            .add(labelEveryEnd)
                             .add(labelSkipStep)
                             .add(labelConfirm)
                             .add(labelToggleRecordMacro)
@@ -2720,6 +2728,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                             .add(keyYourTurn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(keyMainStep, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(keyPriorEnd, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(keyEveryEnd, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(keySkipStep, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(keyEndStep, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(keyToggleRecordMacro, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -2734,6 +2743,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                     .add(tabControlsLayout.createSequentialGroup()
+                        .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(labelEveryEnd)
+                            .add(keyEveryEnd, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                         .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                             .add(labelConfirm)
                             .add(keyConfirm, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
@@ -3017,6 +3030,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.keyYourTurn);
         save(prefs, dialog.keySkipStack);
         save(prefs, dialog.keyPriorEnd);
+        save(prefs, dialog.keyEveryEnd);
         save(prefs, dialog.keyToggleRecordMacro);
         save(prefs, dialog.keySwitchChat);
 
@@ -3045,7 +3059,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     private void saveGUISize() {
         Preferences prefs = MageFrame.getPreferences();
-        
+
         // GUI Size
         save(prefs, dialog.sliderFontSize, KEY_GUI_TABLE_FONT_SIZE, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.sliderChatFontSize, KEY_GUI_CHAT_FONT_SIZE, "true", "false", UPDATE_CACHE_POLICY);
@@ -3064,7 +3078,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         // do as worker job
         GUISizeHelper.changeGUISize();
     }
-    
+
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         dialog.setVisible(false);
     }//GEN-LAST:event_exitButtonActionPerformed
@@ -3648,6 +3662,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.keyYourTurn);
         load(prefs, dialog.keySkipStack);
         load(prefs, dialog.keyPriorEnd);
+        load(prefs, dialog.keyEveryEnd);
         load(prefs, dialog.keyToggleRecordMacro);
         load(prefs, dialog.keySwitchChat);
     }
@@ -3915,6 +3930,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 return KeyEvent.VK_F10;
             case KEY_CONTROL_PRIOR_END:
                 return KeyEvent.VK_F11;
+            case KEY_CONTROL_EVERY_END:
+                return KeyEvent.VK_F1;
             case KEY_CONTROL_SWITCH_CHAT:
                 return KeyEvent.VK_F12;
             default:
@@ -4078,6 +4095,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 keyMainStep,
                 keyNextTurn,
                 keyPriorEnd,
+                keyEveryEnd,
                 keySkipStack,
                 keySkipStep,
                 keyYourTurn,
@@ -4200,6 +4218,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private mage.client.components.KeyBindButton keyMainStep;
     private mage.client.components.KeyBindButton keyNextTurn;
     private mage.client.components.KeyBindButton keyPriorEnd;
+    private mage.client.components.KeyBindButton keyEveryEnd;
     private mage.client.components.KeyBindButton keySkipStack;
     private mage.client.components.KeyBindButton keySkipStep;
     private mage.client.components.KeyBindButton keySwitchChat;
@@ -4223,6 +4242,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel labelNumberOfDownloadThreads;
     private javax.swing.JLabel labelPreferredImageLanguage;
     private javax.swing.JLabel labelPriorEnd;
+    private javax.swing.JLabel labelEveryEnd;
     private javax.swing.JLabel labelSkipStep;
     private javax.swing.JLabel labelStackWidth;
     private javax.swing.JLabel labelSwitchChat;

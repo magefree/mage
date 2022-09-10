@@ -1051,6 +1051,21 @@ public class HumanPlayer extends PlayerImpl {
                         }
                     }
                 }
+                if (passedUntilEachEndStep) {
+                    if (game.getTurn().getStepType() != PhaseStep.END_TURN) {
+                        // other step
+                        if (passWithManaPoolCheck(game)) {
+                            return false;
+                        }
+                    } else {
+                        // end step - check if your turn coming up
+                        PlayerList playerList = game.getState().getPlayerList(playerId);
+                        if (playerList.getPrevious().equals(game.getActivePlayerId())) {
+                            // stop stopping
+                            passedUntilEachEndStep = false;
+                        }
+                    }
+                }
 
                 if (game.getStack().isEmpty()) {
                     // empty stack
@@ -1568,6 +1583,7 @@ public class HumanPlayer extends PlayerImpl {
             // - other: on disabled option skipped
             if (passedAllTurns
                     || passedUntilEndStepBeforeMyTurn
+                    || passedUntilEachEndStep
                     || (!getControllingPlayersUserData(game)
                     .getUserSkipPrioritySteps()
                     .isStopOnDeclareAttackers()
@@ -1817,6 +1833,7 @@ public class HumanPlayer extends PlayerImpl {
         // as opposed to declare attacker - it can be skipped by ANY skip button TODO: make same for declare attackers and rework skip buttons (normal and forced)
         boolean skipButtonActivated = passedAllTurns
                 || passedUntilEndStepBeforeMyTurn
+                || passedUntilEachEndStep
                 || passedTurn
                 || passedUntilEndOfTurn
                 || passedUntilNextMain;
