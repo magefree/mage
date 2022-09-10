@@ -130,6 +130,8 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Odric, Lunarch Marshal", 103, Rarity.RARE, mage.cards.o.OdricLunarchMarshal.class));
         cards.add(new SetCardInfo("Oketra's Monument", 188, Rarity.UNCOMMON, mage.cards.o.OketrasMonument.class));
         cards.add(new SetCardInfo("Opulent Palace", 223, Rarity.UNCOMMON, mage.cards.o.OpulentPalace.class));
+        cards.add(new SetCardInfo("Orca, Siege Demon", 37, Rarity.RARE, mage.cards.o.OrcaSiegeDemon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Orca, Siege Demon", 59, Rarity.RARE, mage.cards.o.OrcaSiegeDemon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Orzhov Basilica", 224, Rarity.UNCOMMON, mage.cards.o.OrzhovBasilica.class));
         cards.add(new SetCardInfo("Painful Truths", 116, Rarity.RARE, mage.cards.p.PainfulTruths.class));
         cards.add(new SetCardInfo("Path to Exile", 104, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
