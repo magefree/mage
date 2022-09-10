@@ -14,6 +14,7 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -81,7 +82,7 @@ class InSearchOfGreatnessEffect extends OneShotEffect {
                 .filter(permanent -> !sourceRef.refersTo(permanent, game))
                 .mapToInt(MageObject::getManaValue)
                 .sum();
-        FilterCard filter = new FilterCard();
+        FilterCard filter = new FilterPermanentCard();
         filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, manaValue + 1));
         return CardUtil.castSpellWithAttributesForFree(
                 controller, source, game, new CardsImpl(controller.getHand()), filter
