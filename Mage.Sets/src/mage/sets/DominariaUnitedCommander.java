@@ -126,8 +126,10 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Nomad Outpost", 222, Rarity.UNCOMMON, mage.cards.n.NomadOutpost.class));
         cards.add(new SetCardInfo("Obsidian Obelisk", 18, Rarity.RARE, mage.cards.o.ObsidianObelisk.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Obsidian Obelisk", 94, Rarity.RARE, mage.cards.o.ObsidianObelisk.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("O-Kagachi, Vengeful Kami", 164, Rarity.MYTHIC, mage.cards.o.OKagachiVengefulKami.class));
         cards.add(new SetCardInfo("Odric, Lunarch Marshal", 103, Rarity.RARE, mage.cards.o.OdricLunarchMarshal.class));
+        cards.add(new SetCardInfo("Ohabi Caleria", 36, Rarity.RARE, mage.cards.o.OhabiCaleria.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ohabi Caleria", 58, Rarity.RARE, mage.cards.o.OhabiCaleria.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("O-Kagachi, Vengeful Kami", 164, Rarity.MYTHIC, mage.cards.o.OKagachiVengefulKami.class));
         cards.add(new SetCardInfo("Oketra's Monument", 188, Rarity.UNCOMMON, mage.cards.o.OketrasMonument.class));
         cards.add(new SetCardInfo("Opulent Palace", 223, Rarity.UNCOMMON, mage.cards.o.OpulentPalace.class));
         cards.add(new SetCardInfo("Orca, Siege Demon", 37, Rarity.RARE, mage.cards.o.OrcaSiegeDemon.class, NON_FULL_USE_VARIOUS));
