@@ -21,12 +21,6 @@ import java.util.UUID;
  */
 public final class Hexdrinker extends LevelerCard {
 
-    private static final FilterCard filter = new FilterCard("instants");
-
-    static {
-        filter.add(CardType.INSTANT.getPredicate());
-    }
-
     public Hexdrinker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
 
@@ -45,7 +39,7 @@ public final class Hexdrinker extends LevelerCard {
         // Protection from everything
         this.addAbilities(LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(
-                        3, 7, new AbilitiesImpl(new ProtectionAbility(filter)), 4, 4
+                        3, 7, new AbilitiesImpl(ProtectionAbility.from(CardType.INSTANT)), 4, 4
                 ),
                 new LevelerCardBuilder.LevelAbility(
                         8, -1, new AbilitiesImpl(new HexdrinkerProtectionAbility()), 6, 6

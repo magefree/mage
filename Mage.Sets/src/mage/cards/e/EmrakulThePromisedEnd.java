@@ -14,7 +14,6 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
@@ -26,12 +25,6 @@ import java.util.UUID;
  * @author emerald000
  */
 public final class EmrakulThePromisedEnd extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("instants");
-
-    static {
-        filter.add(CardType.INSTANT.getPredicate());
-    }
 
     public EmrakulThePromisedEnd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{13}");
@@ -60,7 +53,7 @@ public final class EmrakulThePromisedEnd extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Protection from instants
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(CardType.INSTANT));
     }
 
     private EmrakulThePromisedEnd(final EmrakulThePromisedEnd card) {

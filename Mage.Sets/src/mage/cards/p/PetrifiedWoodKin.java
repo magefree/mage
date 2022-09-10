@@ -17,7 +17,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -28,12 +27,6 @@ import mage.watchers.common.DamageDoneWatcher;
  * @author TheElk801
  */
 public final class PetrifiedWoodKin extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("instants");
-
-    static {
-        filter.add(CardType.INSTANT.getPredicate());
-    }
 
     public PetrifiedWoodKin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{G}");
@@ -55,7 +48,7 @@ public final class PetrifiedWoodKin extends CardImpl {
         ), new DamageDoneWatcher());
 
         // Protection from instants
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(CardType.INSTANT));
     }
 
     private PetrifiedWoodKin(final PetrifiedWoodKin card) {

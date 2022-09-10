@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -9,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterEnchantmentCard;
 
 /**
  *
@@ -27,7 +25,7 @@ public final class AzoriusFirstWing extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // protection from enchantments
-        this.addAbility(new ProtectionAbility(new FilterEnchantmentCard("enchantments")));
+        this.addAbility(ProtectionAbility.from(CardType.ENCHANTMENT));
     }
 
     private AzoriusFirstWing(final AzoriusFirstWing card) {

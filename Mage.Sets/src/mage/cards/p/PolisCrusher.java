@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -28,12 +27,6 @@ import mage.target.TargetPermanent;
  */
 public final class PolisCrusher extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("enchantments");
-
-    static {
-        filter.add(CardType.ENCHANTMENT.getPredicate());
-    }
-
     public PolisCrusher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
         this.subtype.add(SubType.CYCLOPS);
@@ -45,7 +38,7 @@ public final class PolisCrusher extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // protection from enchantments
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(CardType.ENCHANTMENT));
 
         // {4}{R}{G}: Monstrosity 3.
         this.addAbility(new MonstrosityAbility("{4}{R}{G}", 3));

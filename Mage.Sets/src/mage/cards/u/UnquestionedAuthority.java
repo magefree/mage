@@ -1,4 +1,3 @@
-
 package mage.cards.u;
 
 import java.util.UUID;
@@ -12,12 +11,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
+import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -41,8 +35,9 @@ public final class UnquestionedAuthority extends CardImpl {
         // When Unquestioned Authority enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
         // Enchanted creature has protection from creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new GainAbilityAttachedEffect(new ProtectionAbility(FILTER_PERMANENT_CREATURES), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(
+                ProtectionAbility.from(CardType.CREATURE), AttachmentType.AURA
+        )));
     }
 
     private UnquestionedAuthority(final UnquestionedAuthority card) {

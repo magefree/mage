@@ -4,6 +4,7 @@ import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.StaticAbility;
 import mage.cards.Card;
+import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.*;
 import mage.filter.predicate.Predicates;
@@ -48,6 +49,13 @@ public class ProtectionAbility extends StaticAbility {
         this.doesntRemoveControlled = ability.doesntRemoveControlled;
         this.fromColor = ability.fromColor;
         this.auraIdNotToBeRemoved = ability.auraIdNotToBeRemoved;
+    }
+
+    public static ProtectionAbility from(CardType cardtype) {
+        FilterObject filter = new FilterObject(cardtype.getPlural());
+        filter.add(cardtype.getPredicate());
+        ProtectionAbility ability = new ProtectionAbility(filter);
+        return ability;
     }
 
     public static ProtectionAbility from(ObjectColor color) {
