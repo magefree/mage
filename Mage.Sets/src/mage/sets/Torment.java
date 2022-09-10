@@ -47,6 +47,8 @@ public final class Torment extends ExpansionSet {
         cards.add(new SetCardInfo("Cabal Ritual", 51, Rarity.COMMON, mage.cards.c.CabalRitual.class));
         cards.add(new SetCardInfo("Cabal Surgeon", 52, Rarity.COMMON, mage.cards.c.CabalSurgeon.class));
         cards.add(new SetCardInfo("Cabal Torturer", 53, Rarity.COMMON, mage.cards.c.CabalTorturer.class));
+        cards.add(new SetCardInfo("Carrion Rats", 54, Rarity.COMMON, mage.cards.c.CarrionRats.class));
+        cards.add(new SetCardInfo("Carrion Wurm", 55, Rarity.UNCOMMON, mage.cards.c.CarrionWurm.class));
         cards.add(new SetCardInfo("Centaur Chieftain", 122, Rarity.UNCOMMON, mage.cards.c.CentaurChieftain.class));
         cards.add(new SetCardInfo("Centaur Veteran", 123, Rarity.COMMON, mage.cards.c.CentaurVeteran.class));
         cards.add(new SetCardInfo("Cephalid Aristocrat", 27, Rarity.COMMON, mage.cards.c.CephalidAristocrat.class));

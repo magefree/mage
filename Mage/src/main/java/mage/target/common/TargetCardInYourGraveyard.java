@@ -21,11 +21,15 @@ import mage.target.TargetCard;
 public class TargetCardInYourGraveyard extends TargetCard {
 
     public TargetCardInYourGraveyard() {
-        this(1, 1, StaticFilters.FILTER_CARD_FROM_YOUR_GRAVEYARD);
+        this(1);
+    }
+
+    public TargetCardInYourGraveyard(int numTargets) {
+        this(numTargets, numTargets);
     }
 
     public TargetCardInYourGraveyard(FilterCard filter) {
-        this(1, 1, filter);
+        this(1, filter);
     }
 
     public TargetCardInYourGraveyard(int numTargets, FilterCard filter) {
