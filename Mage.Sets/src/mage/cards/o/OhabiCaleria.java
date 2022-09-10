@@ -1,24 +1,17 @@
 package mage.cards.o;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DealsDamageToACreatureAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.UntapAllDuringEachOtherPlayersUntapStepEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.constants.*;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -27,11 +20,8 @@ import java.util.UUID;
  */
 public final class OhabiCaleria extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Archers you control");
-
-    static {
-        filter.add(SubType.ARCHER.getPredicate());
-    }
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.ARCHER, "Archers you control");
+    private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent(SubType.ARCHER, "an Archer you control");
 
     public OhabiCaleria(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
@@ -48,9 +38,9 @@ public final class OhabiCaleria extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UntapAllDuringEachOtherPlayersUntapStepEffect(filter)));
 
         // Whenever an Archer you control deals damage to a creature, you may pay {2}. If you do, draw a card.
-        this.addAbility(new OhabiCaleriaTriggeredAbility(new DoIfCostPaid(
+        this.addAbility(new DealsDamageToACreatureAllTriggeredAbility(new DoIfCostPaid(
                 new DrawCardSourceControllerEffect(1), new GenericManaCost(2)
-        )));
+        ), false, filter2, SetTargetPointer.PERMANENT, false));
     }
 
     private OhabiCaleria(final OhabiCaleria card) {
@@ -60,43 +50,5 @@ public final class OhabiCaleria extends CardImpl {
     @Override
     public OhabiCaleria copy() {
         return new OhabiCaleria(this);
-    }
-}
-
-class OhabiCaleriaTriggeredAbility extends TriggeredAbilityImpl {
-
-    public OhabiCaleriaTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect);
-        setTriggerPhrase("Whenever an Archer you control deals damage to a creature, ");
-    }
-
-    public OhabiCaleriaTriggeredAbility(final OhabiCaleriaTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public OhabiCaleriaTriggeredAbility copy() {
-        return new OhabiCaleriaTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent creature = game.getPermanent(event.getSourceId());
-        Permanent damagedCreature = game.getPermanent(event.getTargetId());
-        if (creature != null && damagedCreature != null
-                && creature.isCreature(game)
-                && creature.hasSubtype(SubType.ARCHER, game)
-                && creature.isControlledBy(controllerId)) {
-            this.getEffects().get(0).setValue("damageAmount", event.getAmount());
-            this.getEffects().get(0).setValue("controller", damagedCreature.getControllerId());
-            this.getEffects().get(0).setValue("source", event.getSourceId());
-            return true;
-        }
-        return false;
     }
 }
