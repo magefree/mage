@@ -19,13 +19,12 @@ public final class CatWarriorToken extends TokenImpl {
     static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("PLC", "C17", "C18"));
+        tokenImageSets.addAll(Arrays.asList("C17", "C18"));
     }
 
     public CatWarriorToken() {
         super("Cat Warrior Token", "2/2 green Cat Warrior creature token with forestwalk");
         availableImageSetCodes = tokenImageSets;
-        this.setOriginalExpansionSetCode("PLC");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.color.setGreen(true);
