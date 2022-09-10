@@ -40,7 +40,7 @@ public final class OhabiCaleria extends CardImpl {
         // Whenever an Archer you control deals damage to a creature, you may pay {2}. If you do, draw a card.
         this.addAbility(new DealsDamageToACreatureAllTriggeredAbility(new DoIfCostPaid(
                 new DrawCardSourceControllerEffect(1), new GenericManaCost(2)
-        ), false, filter2, SetTargetPointer.PERMANENT, false));
+        ), false, filter2, SetTargetPointer.NONE, false));
     }
 
     private OhabiCaleria(final OhabiCaleria card) {
