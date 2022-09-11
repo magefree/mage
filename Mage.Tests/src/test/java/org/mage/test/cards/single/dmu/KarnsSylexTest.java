@@ -31,6 +31,7 @@ public class KarnsSylexTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
+        assertLife(playerA, 20);
     }
 
     /**
@@ -50,6 +51,8 @@ public class KarnsSylexTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
     }
 
     /**
@@ -71,6 +74,6 @@ public class KarnsSylexTest extends CardTestPlayerBase {
         execute();
         assertLife(playerA, 20 - 1);
         assertLife(playerB, 20 - 3);
-        assertGraveyardCount(playerB, "Lightning Bolt", 1);
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
     }
 }
