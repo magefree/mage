@@ -82,6 +82,7 @@ class RobaranMercenariesEffect extends ContinuousEffectImpl {
                 .filter(ability -> ability.getAbilityType() == AbilityType.ACTIVATED
                         || ability.getAbilityType() == AbilityType.MANA)
                 .collect(Collectors.toList())) {
+            // optimization to disallow the adding of duplicate, unnecessary basic mana abilities
             if (!(ability instanceof BasicManaAbility)
                     || perm.getAbilities(game)
                     .stream()
