@@ -150,9 +150,11 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Read the Bones", 117, Rarity.COMMON, mage.cards.r.ReadTheBones.class));
         cards.add(new SetCardInfo("Reliquary Tower", 227, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("Rienne, Angel of Rebirth", 166, Rarity.MYTHIC, mage.cards.r.RienneAngelOfRebirth.class));
+        cards.add(new SetCardInfo("Robaran Mercenaries", 22, Rarity.RARE, mage.cards.r.RobaranMercenaries.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Robaran Mercenaries", 72, Rarity.RARE, mage.cards.r.RobaranMercenaries.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rocky Tar Pit", 228, Rarity.UNCOMMON, mage.cards.r.RockyTarPit.class));
         cards.add(new SetCardInfo("Rohgahh, Kher Keep Overlord", 41, Rarity.RARE, mage.cards.r.RohgahhKherKeepOverlord.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rohgahh, Kher Keep Overlord", 63, Rarity.RARE, mage.cards.r.RohgahhKherKeepOverlord.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Rocky Tar Pit", 228, Rarity.UNCOMMON, mage.cards.r.RockyTarPit.class));
         cards.add(new SetCardInfo("Rosnakht, Heir of Rohgahh", 25, Rarity.RARE, mage.cards.r.RosnakhtHeirOfRohgahh.class));
         cards.add(new SetCardInfo("Sandsteppe Citadel", 229, Rarity.UNCOMMON, mage.cards.s.SandsteppeCitadel.class));
         cards.add(new SetCardInfo("Savage Lands", 230, Rarity.UNCOMMON, mage.cards.s.SavageLands.class));
