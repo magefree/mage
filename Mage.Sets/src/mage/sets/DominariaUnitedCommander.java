@@ -117,6 +117,8 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Migration Path", 135, Rarity.UNCOMMON, mage.cards.m.MigrationPath.class));
         cards.add(new SetCardInfo("Mikokoro, Center of the Sea", 217, Rarity.RARE, mage.cards.m.MikokoroCenterOfTheSea.class));
         cards.add(new SetCardInfo("Mobilized District", 218, Rarity.RARE, mage.cards.m.MobilizedDistrict.class));
+        cards.add(new SetCardInfo("Moira, Urborg Haunt", 6, Rarity.RARE, mage.cards.m.MoiraUrborgHaunt.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Moira, Urborg Haunt", 82, Rarity.RARE, mage.cards.m.MoiraUrborgHaunt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mortify", 161, Rarity.UNCOMMON, mage.cards.m.Mortify.class));
         cards.add(new SetCardInfo("Mountain Valley", 219, Rarity.UNCOMMON, mage.cards.m.MountainValley.class));
         cards.add(new SetCardInfo("Murmuring Bosk", 220, Rarity.RARE, mage.cards.m.MurmuringBosk.class));
