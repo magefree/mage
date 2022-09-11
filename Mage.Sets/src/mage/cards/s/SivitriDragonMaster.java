@@ -5,7 +5,7 @@ import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
-import mage.abilities.effects.common.combat.CantAttackYouUnlessPayLifeAllEffect;
+import mage.abilities.effects.common.combat.CantAttackYouUnlessPayAllEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -42,7 +42,7 @@ public final class SivitriDragonMaster extends CardImpl {
 
         // +1: Until your next turn, creatures can’t attack you or planeswalkers you
         // control unless their controller pays 2 life for each of those creatures.
-        ContinuousEffect effect = new CantAttackYouUnlessPayLifeAllEffect(
+        ContinuousEffect effect = new CantAttackYouUnlessPayAllEffect(
                 new PayLifeCost(2), true
         );
         effect.setDuration(Duration.UntilYourNextTurn);

@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.common.combat.CantAttackYouUnlessPayManaAllEffect;
+import mage.abilities.effects.common.combat.CantAttackYouUnlessPayAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -27,7 +27,7 @@ public final class ForbiddingSpirit extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Forbidding Spirit enters the battlefield, until your next turn, creatures can't attack you or a planeswalker you control unless their controller pays {2} for each of those creatures.
-        ContinuousEffect effect = new CantAttackYouUnlessPayManaAllEffect(
+        ContinuousEffect effect = new CantAttackYouUnlessPayAllEffect(
                 new ManaCostsImpl<>("{2}"), true
         );
         effect.setDuration(Duration.UntilYourNextTurn);
