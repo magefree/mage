@@ -6048,6 +6048,7 @@
                                   <Component id="labelYourTurn" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lebelSkip" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="labelPriorEnd" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelEveryEnd" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="labelSkipStep" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="labelConfirm" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="labelToggleRecordMacro" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -6062,6 +6063,7 @@
                                   <Component id="keyYourTurn" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                                   <Component id="keyMainStep" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                                   <Component id="keyPriorEnd" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="keyEveryEnd" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                                   <Component id="keySkipStep" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                                   <Component id="keyEndStep" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                                   <Component id="keyToggleRecordMacro" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
@@ -6127,6 +6129,11 @@
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="labelEveryEnd" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="keyEveryEnd" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="labelToggleRecordMacro" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="keyToggleRecordMacro" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -6174,6 +6181,11 @@
             <Component class="javax.swing.JLabel" name="labelPriorEnd">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Prior End:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelEveryEnd">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Every End:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="labelCancel">
@@ -6235,6 +6247,14 @@
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_PRIOR_END)"/>
+              </AuxValues>
+            </Component>
+            <Component class="mage.client.components.KeyBindButton" name="keyEveryEnd">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="keyBindButton1"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_EVERY_END)"/>
               </AuxValues>
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keySkipStep">
