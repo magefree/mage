@@ -81,7 +81,8 @@ class InSearchOfGreatnessEffect extends OneShotEffect {
                 .filter(Objects::nonNull)
                 .filter(permanent -> !sourceRef.refersTo(permanent, game))
                 .mapToInt(MageObject::getManaValue)
-                .sum();
+                .max()
+                .orElse(0);
         FilterCard filter = new FilterPermanentCard();
         filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, manaValue + 1));
         return CardUtil.castSpellWithAttributesForFree(
