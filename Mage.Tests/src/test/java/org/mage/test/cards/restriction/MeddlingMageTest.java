@@ -56,6 +56,7 @@ public class MeddlingMageTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}, {T}:");
         setChoice(playerA, true); // create copy
         setChoice(playerA, true); // cast copy
+        addTarget(playerA, "Meddling Mage");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

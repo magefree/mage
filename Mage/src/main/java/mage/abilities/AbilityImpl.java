@@ -309,15 +309,6 @@ public abstract class AbilityImpl implements Ability {
         VariableManaCost variableManaCost = handleManaXCosts(game, noMana, controller);
         String announceString = handleOtherXCosts(game, controller);
 
-        // For effects from cards like Void Winnower x costs have to be set
-        if (this.getAbilityType() == AbilityType.SPELL) {
-            GameEvent castEvent = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL_LATE, this.getId(), this, getControllerId());
-            castEvent.setZone(game.getState().getZone(CardUtil.getMainCardId(game, sourceId)));
-            if (game.replaceEvent(castEvent, this)) {
-                return false;
-            }
-        }
-
         handlePhyrexianManaCosts(game, controller);
 
         /* 20130201 - 601.2b
@@ -375,6 +366,15 @@ public abstract class AbilityImpl implements Ability {
                 }
             }
         } // end modes
+
+        // For effects like Timely Ward, targets have to be chosen before checking if allowed to cast
+        if (this.getAbilityType() == AbilityType.SPELL) {
+            GameEvent castEvent = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL_LATE, this.getId(), this, getControllerId());
+            castEvent.setZone(game.getState().getZone(CardUtil.getMainCardId(game, sourceId)));
+            if (game.replaceEvent(castEvent, this)) {
+                return false;
+            }
+        }
 
         // this is a hack to prevent mana abilities with mana costs from causing endless loops - pay other costs first
         if (this instanceof ActivatedManaAbilityImpl && !costs.pay(this, game, this, controllerId, noMana, null)) {
