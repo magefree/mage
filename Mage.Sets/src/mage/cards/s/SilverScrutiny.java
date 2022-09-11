@@ -53,7 +53,7 @@ class SilverScrutinySpellAbility extends SpellAbility {
 
     public SilverScrutinySpellAbility(Card card) {
         super(card.getManaCost(), card.getName());
-        this.addEffect(new InfoEffect("You mast cast {this} as though it had flash if X is 3 or less.<br>"));
+        this.addEffect(new InfoEffect("You may cast {this} as though it had flash if X is 3 or less.<br>"));
         this.addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.REGULAR));
         this.addWatcher(new SilverScrutinyWatcher());
     }
