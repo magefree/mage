@@ -1,36 +1,24 @@
 package mage.cards.k;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.ExileSourceCost;
-import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.costs.mana.VariableManaCost;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DestroyAllEffect;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.targetadjustment.TargetAdjuster;
 
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -44,7 +32,7 @@ public class KarnsSylex extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // Players can’t pay life to cast spells or to activate abilities that aren’t mana abilities.
-        this.addAbility(new SimpleStaticAbility(new KarnsSylexCantPayLifeEffect()));
+        this.addAbility(new SimpleStaticAbility(new KarnsSylexEffect()));
 
         // {X}, {T}, Exile Karn’s Sylex: Destroy each nonland permanent with mana value X or less. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(new KarnsSylexDestroyEffect(), new ManaCostsImpl<>("{X}"));
@@ -63,42 +51,30 @@ public class KarnsSylex extends CardImpl {
     }
 }
 
-class KarnsSylexCantPayLifeEffect extends ContinuousRuleModifyingEffectImpl {
+class KarnsSylexEffect extends ContinuousEffectImpl {
 
-    KarnsSylexCantPayLifeEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "players can’t pay life to cast spells or to activate abilities that aren’t mana abilities";
+    public KarnsSylexEffect() {
+        super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
+        staticText = "Players can't pay life or sacrifice creatures to cast spells";
     }
 
-    private KarnsSylexCantPayLifeEffect(final KarnsSylexCantPayLifeEffect effect) {
+    public KarnsSylexEffect(final KarnsSylexEffect effect) {
         super(effect);
     }
 
     @Override
-    public KarnsSylexCantPayLifeEffect copy() {
-        return new KarnsSylexCantPayLifeEffect(this);
+    public KarnsSylexEffect copy() {
+        return new KarnsSylexEffect(this);
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        MageObject object = game.getObject(event.getSourceId());
-        if (event.getType() == GameEvent.EventType.CAST_SPELL) {
-            if (object == null) {
-                return false;
-            }
-//            return object != null && ((CardImpl) object).getManaCost().stream().anyMatch(manaCost -> manaCost.i)
-        } else if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
-            Optional<Ability> abilityOptional = game.getAbility(event.getTargetId(), event.getSourceId());
-            if (!abilityOptional.isPresent()) {
-                return false;
-            }
-            Ability ability = abilityOptional.get();
-            boolean lifeCost = ability.getCosts().stream().anyMatch(cost -> cost instanceof PayLifeCost);
-            return lifeCost && !(ability instanceof ActivatedManaAbilityImpl);
-        } else {
-            return false;
+    public boolean apply(Game game, Ability source) {
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            Player player = game.getPlayer(playerId);
+            player.setPayLifeCostLevel(Player.PayLifeCostLevel.onlyManaAbilities);
+            player.setCanPaySacrificeCostFilter(new FilterCreaturePermanent());
         }
-        return false;
+        return true;
     }
 }
 

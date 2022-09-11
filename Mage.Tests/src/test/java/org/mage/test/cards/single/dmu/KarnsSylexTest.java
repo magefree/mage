@@ -47,12 +47,10 @@ public class KarnsSylexTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerA, "Lightning Bolt");
 
         skipInitShuffling();
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        checkPlayableAbility("Can't pay life to cast", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", false);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertLife(playerA, 20);
-        assertLife(playerB, 20);
     }
 
     /**
