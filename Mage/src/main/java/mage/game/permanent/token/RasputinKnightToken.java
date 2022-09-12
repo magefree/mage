@@ -6,6 +6,9 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+/**
+ * @author PurpleCrowbar
+ */
 public final class RasputinKnightToken extends TokenImpl {
 
     public RasputinKnightToken() {
