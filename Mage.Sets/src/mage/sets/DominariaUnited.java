@@ -115,6 +115,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Ghitu Amplifier", 127, Rarity.COMMON, mage.cards.g.GhituAmplifier.class));
         cards.add(new SetCardInfo("Gibbering Barricade", 95, Rarity.COMMON, mage.cards.g.GibberingBarricade.class));
         cards.add(new SetCardInfo("Goblin Picker", 128, Rarity.COMMON, mage.cards.g.GoblinPicker.class));
+        cards.add(new SetCardInfo("Golden Argosy", 230, Rarity.RARE, mage.cards.g.GoldenArgosy.class));
         cards.add(new SetCardInfo("Griffin Protector", 18, Rarity.COMMON, mage.cards.g.GriffinProtector.class));
         cards.add(new SetCardInfo("Guardian of New Benalia", 19, Rarity.RARE, mage.cards.g.GuardianOfNewBenalia.class));
         cards.add(new SetCardInfo("Hammerhand", 129, Rarity.COMMON, mage.cards.h.Hammerhand.class));
