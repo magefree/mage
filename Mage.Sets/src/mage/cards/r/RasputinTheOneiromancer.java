@@ -5,14 +5,16 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.dynamicvalue.common.OpponentsCount;
+import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,7 +26,6 @@ import mage.game.Game;
 import mage.game.permanent.token.GoblinToken;
 import mage.game.permanent.token.RasputinKnightToken;
 import mage.game.permanent.token.Token;
-import mage.players.Player;
 
 import java.util.UUID;
 
@@ -51,7 +52,12 @@ public final class RasputinTheOneiromancer extends CardImpl {
         this.addAbility(ability);
 
         // {T}, Remove one or more dream counters from Rasputin: Add that much {C}.
-        Ability ability2 = new SimpleActivatedAbility(new RasputinAddManaEffect(), new TapSourceCost());
+        Ability ability2 = new DynamicManaAbility(
+                Mana.ColorlessMana(1),
+                RemovedCountersForCostValue.instance,
+                new TapSourceCost(),
+                "Add that much {C}",
+                true, new CountersSourceCount(CounterType.DREAM));
         ability2.addCost(new RemoveVariableCountersSourceCost(CounterType.DREAM.createInstance(), 1,
                 "Remove one or more dream counters from {this}"));
         this.addAbility(ability2);
@@ -94,40 +100,6 @@ class RasputinCreateGoblinsEffect extends OneShotEffect {
             Token token = new GoblinToken();
             token.putOntoBattlefield(1, game, source, opponentId);
         }
-        return true;
-    }
-}
-
-class RasputinAddManaEffect extends OneShotEffect {
-
-    public RasputinAddManaEffect() {
-        super(Outcome.PutManaInPool);
-        staticText = "Add that much {C}.";
-    }
-
-    public RasputinAddManaEffect(final RasputinAddManaEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RasputinAddManaEffect copy() {
-        return new RasputinAddManaEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        int xValue = 0;
-        for (Cost cost : source.getCosts()) {
-            if (cost instanceof RemoveVariableCountersSourceCost) {
-                xValue = ((RemoveVariableCountersSourceCost) cost).getAmount();
-                break;
-            }
-        }
-        player.getManaPool().addMana(Mana.ColorlessMana(xValue), game, source);
         return true;
     }
 }
