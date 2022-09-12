@@ -101,11 +101,19 @@ public abstract class TargetImpl implements Target {
     public String getDescription() {
         // target description for ability text
         StringBuilder sb = new StringBuilder();
-        if (getNumberOfTargets() != 1 || getMaxNumberOfTargets() != 1) {
-            if (getNumberOfTargets() < getMaxNumberOfTargets() && getMaxNumberOfTargets() != Integer.MAX_VALUE) {
-                sb.append("up to ");
+        int min = getMinNumberOfTargets();
+        int max = getMaxNumberOfTargets();
+        if (min != 1 || max != 1) {
+            if (min < max && max != Integer.MAX_VALUE) {
+                if (min == 1 && max == 2) {
+                    sb.append("one or ");
+                } else if (min == 1 && max == 3) {
+                    sb.append("one, two, or ");
+                } else {
+                    sb.append("up to ");
+                }
             }
-            sb.append(CardUtil.numberToText(getMaxNumberOfTargets()));
+            sb.append(CardUtil.numberToText(max));
             sb.append(' ');
         }
         if (!isNotTarget() && !getTargetName().contains("target")) {
