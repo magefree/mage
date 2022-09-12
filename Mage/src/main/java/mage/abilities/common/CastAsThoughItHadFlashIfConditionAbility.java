@@ -11,6 +11,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
+ * Implements:
+ * You may cast {this} as though it had flash if [condition that depends on X value, targets, etc.]
  *
  * @author awjackson
  */
@@ -20,7 +22,7 @@ public class CastAsThoughItHadFlashIfConditionAbility extends SimpleStaticAbilit
 
     public CastAsThoughItHadFlashIfConditionAbility(Condition condition, String rule) {
         super(Zone.ALL, new CastAsThoughItHadFlashSourceEffect(Duration.EndOfGame));
-        this.addEffect(new CastAsThoughItHadFlashIfConditionEffect(condition));
+        this.addEffect(new CantFlashUnlessConditionEffect(condition));
         this.setRuleAtTheTop(true);
         this.rule = rule;
     }
@@ -41,23 +43,23 @@ public class CastAsThoughItHadFlashIfConditionAbility extends SimpleStaticAbilit
     }
 }
 
-class CastAsThoughItHadFlashIfConditionEffect extends ContinuousRuleModifyingEffectImpl {
+class CantFlashUnlessConditionEffect extends ContinuousRuleModifyingEffectImpl {
 
     private final Condition condition;
 
-    public CastAsThoughItHadFlashIfConditionEffect(Condition condition) {
+    public CantFlashUnlessConditionEffect(Condition condition) {
         super(Duration.EndOfGame, Outcome.Neutral);
         this.condition = condition;
     }
 
-    private CastAsThoughItHadFlashIfConditionEffect(final CastAsThoughItHadFlashIfConditionEffect effect) {
+    private CantFlashUnlessConditionEffect(final CantFlashUnlessConditionEffect effect) {
         super(effect);
         this.condition = effect.condition;
     }
 
     @Override
-    public CastAsThoughItHadFlashIfConditionEffect copy() {
-        return new CastAsThoughItHadFlashIfConditionEffect(this);
+    public CantFlashUnlessConditionEffect copy() {
+        return new CantFlashUnlessConditionEffect(this);
     }
 
     @Override
@@ -70,10 +72,16 @@ class CastAsThoughItHadFlashIfConditionEffect extends ContinuousRuleModifyingEff
         if (!event.getSourceId().equals(source.getSourceId())) {
             return false;
         }
+        // the condition can't be evaluated until the spell is on the stack
+        if (game.inCheckPlayableState()) {
+            return false;
+        }
+        // ignore if casting as a sorcery
         if (game.isMainPhase() && game.isActivePlayer(event.getPlayerId()) && game.getStack().size() == 1) {
             return false;
         }
-        if (game.inCheckPlayableState()) {
+        // TODO: this is a hack and doesn't handle all other ways a spell could be cast as though it had flash
+        if (Boolean.TRUE.equals(game.getState().getValue("PlayFromNotOwnHandZone" + source.getSourceId()))) {
             return false;
         }
         return !condition.apply(game, source);
