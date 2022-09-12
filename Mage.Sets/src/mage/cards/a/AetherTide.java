@@ -12,12 +12,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsAdjuster;
 
 /**
  *
@@ -34,10 +33,11 @@ public final class AetherTide extends CardImpl {
         this.addAbility(ability);
 
         // Return X target creatures to their owners' hands.
-        Effect effect = new ReturnToHandTargetEffect(true);
+        Effect effect = new ReturnToHandTargetEffect();
         effect.setText("Return X target creatures to their owners' hands");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().setTargetAdjuster(AetherTideTargetAdjuster.instance);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().setTargetAdjuster(XTargetsAdjuster.instance);
         this.getSpellAbility().setCostAdjuster(AetherTideCostAdjuster.instance);
 
     }
@@ -52,17 +52,6 @@ public final class AetherTide extends CardImpl {
     }
 }
 
-enum AetherTideTargetAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        int xValue = ability.getManaCostsToPay().getX();
-        ability.addTarget(new TargetCreaturePermanent(xValue, xValue, new FilterCreaturePermanent(), false));
-    }
-}
-
 enum AetherTideCostAdjuster implements CostAdjuster {
     instance;
 
@@ -70,7 +59,7 @@ enum AetherTideCostAdjuster implements CostAdjuster {
     public void adjustCosts(Ability ability, Game game) {
         int xValue = ability.getManaCostsToPay().getX();
         if (xValue > 0) {
-            ability.addCost(new DiscardTargetCost(new TargetCardInHand(xValue, xValue, new FilterCreatureCard("creature cards"))));
+            ability.addCost(new DiscardTargetCost(new TargetCardInHand(xValue, xValue, StaticFilters.FILTER_CARD_CREATURES)));
         }
     }
 }
