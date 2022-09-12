@@ -21,7 +21,6 @@ import mage.filter.common.FilterNonlandPermanent;
 import mage.game.permanent.token.TreasureToken;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
-import java.util.UUID;
 /**
  * @author Draya
  */
@@ -91,8 +90,8 @@ class DihadaFilterEffect extends OneShotEffect {
         super(Outcome.PutCardInHand);
         staticText = "Reveal the top four cards of your library. Put any "
                 + "number of legendary cards from among them "
-                + "into your hand and the rest into your graveyard. ";
-                + "Create a treasure token for each card put into 
+                + "into your hand and the rest into your graveyard. "
+                + "Create a treasure token for each card put into "
                 + "your graveyard this way..";
     }
 
