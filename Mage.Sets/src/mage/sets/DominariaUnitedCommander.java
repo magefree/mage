@@ -161,9 +161,12 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Search for Tomorrow", 137, Rarity.COMMON, mage.cards.s.SearchForTomorrow.class));
         cards.add(new SetCardInfo("Seaside Citadel", 231, Rarity.UNCOMMON, mage.cards.s.SeasideCitadel.class));
         cards.add(new SetCardInfo("Selvala, Explorer Returned", 167, Rarity.RARE, mage.cards.s.SelvalaExplorerReturned.class));
-        cards.add(new SetCardInfo("Shanid, Sleepers' Scourge", 4, Rarity.MYTHIC, mage.cards.s.ShanidSleepersScourge.class));
+        cards.add(new SetCardInfo("Shanid, Sleepers' Scourge", 4, Rarity.MYTHIC, mage.cards.s.ShanidSleepersScourge.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shanid, Sleepers' Scourge", 79, Rarity.MYTHIC, mage.cards.s.ShanidSleepersScourge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shivan Gorge", 232, Rarity.RARE, mage.cards.s.ShivanGorge.class));
         cards.add(new SetCardInfo("Shizo, Death's Storehouse", 233, Rarity.RARE, mage.cards.s.ShizoDeathsStorehouse.class));
+        cards.add(new SetCardInfo("Sivitri, Dragon Master", 43, Rarity.MYTHIC, mage.cards.s.SivitriDragonMaster.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sivitri, Dragon Master", 65, Rarity.MYTHIC, mage.cards.s.SivitriDragonMaster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Smoldering Marsh", 234, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
         cards.add(new SetCardInfo("Sol Ring", 190, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 191, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
