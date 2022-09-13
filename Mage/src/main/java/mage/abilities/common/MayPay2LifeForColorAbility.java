@@ -6,6 +6,8 @@ import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.Card;
@@ -50,16 +52,19 @@ public class MayPay2LifeForColorAbility extends StaticAbility {
 
 class MayPay2LifeEffect extends CostModificationEffectImpl {
 
-    private final String color;
+    private final ObjectColor color;
+    private final ManaCosts<ManaCost> manaCost;
 
     MayPay2LifeEffect(String color) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        this.color = color;
+        this.color = new ObjectColor(color);
+        this.manaCost = new ManaCostsImpl<>("{" + color + "}");
     }
 
     private MayPay2LifeEffect(final MayPay2LifeEffect effect) {
         super(effect);
         this.color = effect.color;
+        this.manaCost = effect.manaCost;
     }
 
     @Override
@@ -74,7 +79,7 @@ class MayPay2LifeEffect extends CostModificationEffectImpl {
         if (cost.canPay(abilityToModify, source, source.getControllerId(), game)
                 && player.chooseUse(outcome, "Pay 2 life to reduce the cost by {" + color + "}?", source, game)) {
             if (cost.pay(abilityToModify, game, source, source.getControllerId(), true)) {
-                CardUtil.reduceCost((SpellAbility) abilityToModify, new ManaCostsImpl<>("{" + color + "}"));
+                CardUtil.reduceCost((SpellAbility) abilityToModify, manaCost);
             }
         }
         return true;
@@ -87,6 +92,6 @@ class MayPay2LifeEffect extends CostModificationEffectImpl {
             return false;
         }
         Card spellCard = ((SpellAbility) abilityToModify).getCharacteristics(game);
-        return spellCard.isPermanent(game) && spellCard.getColor(game).toString().contains(color);
+        return spellCard.isPermanent(game) && spellCard.getColor(game).contains(color);
     }
 }
