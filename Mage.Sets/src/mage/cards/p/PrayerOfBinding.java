@@ -12,21 +12,14 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterNonlandPermanent;
-import mage.target.common.TargetNonlandPermanent;
+import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 
 /**
  *
  * @author weirddan455
  */
 public final class PrayerOfBinding extends CardImpl {
-
-    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public PrayerOfBinding(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
@@ -35,11 +28,10 @@ public final class PrayerOfBinding extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // When Prayer of Binding enters the battlefield, exile up to one target nonland permanent an opponent controls until Prayer of Binding leaves the battlefield. You gain 2 life.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect("nonland permanent")
-                .setText("exile up to one target nonland permanent an opponent controls until {this} leaves the battlefield"));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         ability.addEffect(new GainLifeEffect(2));
-        ability.addTarget(new TargetNonlandPermanent(0, 1, filter, false));
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_OPPONENTS_PERMANENT_NON_LAND));
         this.addAbility(ability);
     }
 

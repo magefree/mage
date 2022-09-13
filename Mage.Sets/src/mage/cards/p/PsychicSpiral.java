@@ -21,8 +21,8 @@ public final class PsychicSpiral extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{U}");
 
         // Shuffle all cards from your graveyard into your library. Target player puts that many cards from the top of their library into their graveyard.
-        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new PsychicSpiralEffect());
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     private PsychicSpiral(final PsychicSpiral card) {

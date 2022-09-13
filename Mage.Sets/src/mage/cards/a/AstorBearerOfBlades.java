@@ -63,7 +63,7 @@ public final class AstorBearerOfBlades extends CardImpl {
         // Vehicles you control have crew 1.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new CrewAbility(1), Duration.WhileOnBattlefield, filter2
-        )));
+        ).setText("vehicles you control have crew 1")));
     }
 
     private AstorBearerOfBlades(final AstorBearerOfBlades card) {

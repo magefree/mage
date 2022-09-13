@@ -86,8 +86,11 @@ public final class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Cover of Darkness", 133, Rarity.RARE, mage.cards.c.CoverOfDarkness.class));
         cards.add(new SetCardInfo("Crafty Pathmage", 77, Rarity.COMMON, mage.cards.c.CraftyPathmage.class));
         cards.add(new SetCardInfo("Crowd Favorites", 15, Rarity.UNCOMMON, mage.cards.c.CrowdFavorites.class));
+        cards.add(new SetCardInfo("Crown of Ascension", 78, Rarity.COMMON, mage.cards.c.CrownOfAscension.class));
         cards.add(new SetCardInfo("Crown of Awe", 16, Rarity.COMMON, mage.cards.c.CrownOfAwe.class));
         cards.add(new SetCardInfo("Crown of Fury", 196, Rarity.COMMON, mage.cards.c.CrownOfFury.class));
+        cards.add(new SetCardInfo("Crown of Suspicion", 134, Rarity.COMMON, mage.cards.c.CrownOfSuspicion.class));
+        cards.add(new SetCardInfo("Crown of Vigor", 253, Rarity.COMMON, mage.cards.c.CrownOfVigor.class));
         cards.add(new SetCardInfo("Crude Rampart", 17, Rarity.UNCOMMON, mage.cards.c.CrudeRampart.class));
         cards.add(new SetCardInfo("Cruel Revival", 135, Rarity.COMMON, mage.cards.c.CruelRevival.class));
         cards.add(new SetCardInfo("Cryptic Gateway", 306, Rarity.RARE, mage.cards.c.CrypticGateway.class));

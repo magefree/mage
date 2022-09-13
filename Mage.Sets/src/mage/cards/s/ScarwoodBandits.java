@@ -148,9 +148,6 @@ class DoUnlessAnyOpponentPaysEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        if (!staticText.isEmpty()) {
-            return staticText;
-        }
         String effectsText = executingEffects.getText(mode);
         return effectsText.substring(0, effectsText.length() - 1) + " unless any opponent pays " + cost.getText();
     }

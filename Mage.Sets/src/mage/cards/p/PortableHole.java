@@ -34,11 +34,7 @@ public final class PortableHole extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{W}");
 
         // When Portable Hole enters the battlefield, exile target nonland permanent an opponent controls with mana value 2 or less until Portable Hole leaves the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(
-                new ExileUntilSourceLeavesEffect("")
-                        .setText("exile target nonland permanent an opponent controls with mana value 2 " +
-                                "or less until {this} leaves the battlefield")
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
         ability.addTarget(new TargetPermanent(filter));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);

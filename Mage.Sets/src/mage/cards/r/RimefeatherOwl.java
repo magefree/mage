@@ -88,6 +88,7 @@ class RimefeatherOwlEffect extends ContinuousEffectImpl {
     public RimefeatherOwlEffect(Duration duration, FilterPermanent filter) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Detriment);
         this.filter = filter;
+        this.staticText = "Permanents with ice counters on them are snow.";
     }
 
     public RimefeatherOwlEffect(final RimefeatherOwlEffect effect) {
@@ -107,10 +108,5 @@ class RimefeatherOwlEffect extends ContinuousEffectImpl {
 
         }
         return true;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Permanents with ice counters on them are snow.";
     }
 }

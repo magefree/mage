@@ -42,6 +42,7 @@ public class EmbalmTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, aSanctions);
         addTarget(playerA, yOx);
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -81,10 +82,12 @@ public class EmbalmTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, aSanctions);
         addTarget(playerA, yOx);
+        setChoice(playerA, true);
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, dBlade);
         addTarget(playerB, aSanctions);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Embalm");
         addTarget(playerA, wKnight);
+        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -126,11 +129,13 @@ public class EmbalmTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, aSanctions);
         addTarget(playerA, yOx);
+        setChoice(playerA, true);
 
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, dBlade, aSanctions);
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Embalm");
         addTarget(playerA, wKnight);
+        setChoice(playerA, true);
 
         castSpell(1, PhaseStep.END_TURN, playerB, dBlade, aSanctions);
 

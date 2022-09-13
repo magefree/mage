@@ -1,10 +1,12 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.Target;
 import mage.util.CardUtil;
 
 /**
@@ -13,9 +15,8 @@ import mage.util.CardUtil;
  */
 public class ExileUntilSourceLeavesEffect extends OneShotEffect {
 
-    public ExileUntilSourceLeavesEffect(String targetName) {
+    public ExileUntilSourceLeavesEffect() {
         super(Outcome.Removal);
-        this.staticText = "exile target " + targetName + " an opponent controls until {this} leaves the battlefield";
     }
 
     public ExileUntilSourceLeavesEffect(final ExileUntilSourceLeavesEffect effect) {
@@ -29,13 +30,10 @@ public class ExileUntilSourceLeavesEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) {
-            return false;
-        }
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+
         // If Banishing Light leaves the battlefield before its triggered ability resolves, the target permanent won't be exiled.
-        // (2021-03-19)
-        if (game.getPermanent(source.getSourceId()) == null) {
+        if (permanent == null) {
             return false;
         }
 
@@ -44,5 +42,13 @@ public class ExileUntilSourceLeavesEffect extends OneShotEffect {
             effect.setTargetPointer(targetPointer);
         }
         return effect.apply(game, source);
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        return "exile " + getTargetPointer().describeTargets(mode.getTargets(), "that creature") + " until {this} leaves the battlefield";
     }
 }

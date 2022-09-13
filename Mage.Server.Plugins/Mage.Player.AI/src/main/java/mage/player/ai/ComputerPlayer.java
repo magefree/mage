@@ -2815,7 +2815,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         log.debug(sb.toString());
     }
 
-    private void playRemoval(List<UUID> creatures, Game game) {
+    private void playRemoval(Set<UUID> creatures, Game game) {
         for (UUID creatureId : creatures) {
             for (Card card : this.playableInstant) {
                 if (card.getSpellAbility().canActivate(playerId, game).canActivate()) {
@@ -2833,7 +2833,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
     }
 
-    private void playDamage(List<UUID> creatures, Game game) {
+    private void playDamage(Set<UUID> creatures, Game game) {
         for (UUID creatureId : creatures) {
             Permanent creature = game.getPermanent(creatureId);
             for (Card card : this.playableInstant) {

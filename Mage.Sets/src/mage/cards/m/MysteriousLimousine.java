@@ -68,7 +68,7 @@ public final class MysteriousLimousine extends CardImpl {
 class MysteriousLimousineEffect extends OneShotEffect {
 
     MysteriousLimousineEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Exile);
         staticText = "exile up to one other target creature until {this} leaves the battlefield. " +
                 "If a creature is put into exile this way, return each other card exiled " +
                 "with {this} to the battlefield under its owner's control";
@@ -87,7 +87,7 @@ class MysteriousLimousineEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (player == null || permanent == null) {
+        if (player == null || permanent == null || source.getSourcePermanentIfItStillExists(game) == null) {
             return false;
         }
         UUID exileId = CardUtil.getExileZoneId(game, source);

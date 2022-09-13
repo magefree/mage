@@ -198,6 +198,7 @@ public enum SubType {
     IMP("Imp", SubTypeSet.CreatureType),
     INCARNATION("Incarnation", SubTypeSet.CreatureType),
     INKLING("Inkling", SubTypeSet.CreatureType),
+    INQUISITOR("Inquisitor", SubTypeSet.CreatureType),
     INSECT("Insect", SubTypeSet.CreatureType),
     ITHORIAN("Ithorian", SubTypeSet.CreatureType, true), // Star Wars
     // J
@@ -254,6 +255,7 @@ public enum SubType {
     NAGA("Naga", SubTypeSet.CreatureType),
     NAUTILUS("Nautilus", SubTypeSet.CreatureType),
     NAUTOLAN("Nautolan", SubTypeSet.CreatureType, true), // Star Wars
+    NECRON("Necron", SubTypeSet.CreatureType),
     NEIMOIDIAN("Neimoidian", SubTypeSet.CreatureType, true), // Star Wars
     NEPHILIM("Nephilim", SubTypeSet.CreatureType),
     NIGHTMARE("Nightmare", SubTypeSet.CreatureType),
@@ -370,6 +372,7 @@ public enum SubType {
     TROOPER("Trooper", SubTypeSet.CreatureType, true), // Star Wars
     TRILOBITE("Trilobite", SubTypeSet.CreatureType),
     TWILEK("Twi'lek", SubTypeSet.CreatureType, true), // Star Wars
+    TYRANID("Tyranid", SubTypeSet.CreatureType),
     // U
     UGNAUGHT("Ugnaught", SubTypeSet.CreatureType, true),
     UNICORN("Unicorn", SubTypeSet.CreatureType),
@@ -458,6 +461,7 @@ public enum SubType {
     SARKHAN("Sarkhan", SubTypeSet.PlaneswalkerType),
     SERRA("Serra", SubTypeSet.PlaneswalkerType),
     SIDIOUS("Sidious", SubTypeSet.PlaneswalkerType, true), // Star Wars
+    SIVITRI("Sivitri", SubTypeSet.PlaneswalkerType),
     SORIN("Sorin", SubTypeSet.PlaneswalkerType),
     SZAT("Szat", SubTypeSet.PlaneswalkerType),
     TAMIYO("Tamiyo", SubTypeSet.PlaneswalkerType),

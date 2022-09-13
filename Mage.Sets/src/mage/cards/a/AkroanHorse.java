@@ -95,6 +95,7 @@ class AkroanHorseGainControlEffect extends ContinuousEffectImpl {
     public AkroanHorseGainControlEffect(Duration duration, UUID controller) {
         super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.controller = controller;
+        this.staticText = "Gain control of Akroan Horse";
     }
 
     public AkroanHorseGainControlEffect(final AkroanHorseGainControlEffect effect) {
@@ -121,11 +122,6 @@ class AkroanHorseGainControlEffect extends ContinuousEffectImpl {
 
         return permanent.changeControllerId(controller, game, source);
 
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Gain control of Akroan Horse";
     }
 }
 

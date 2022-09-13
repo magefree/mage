@@ -69,6 +69,7 @@ class DimirCharmEffect extends OneShotEffect {
 
     public DimirCharmEffect() {
         super(Outcome.Benefit);
+        this.staticText = "look at the top three cards of target player's library, then put one back and the rest into that player's graveyard";
     }
 
     public DimirCharmEffect(final DimirCharmEffect effect) {
@@ -99,10 +100,5 @@ class DimirCharmEffect extends OneShotEffect {
     @Override
     public DimirCharmEffect copy() {
         return new DimirCharmEffect(this);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "look at the top three cards of target player's library, then put one back and the rest into that player's graveyard";
     }
 }

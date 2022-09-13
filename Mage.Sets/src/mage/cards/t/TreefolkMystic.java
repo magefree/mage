@@ -47,6 +47,7 @@ class TreefolkMysticEffect extends OneShotEffect {
 
     public TreefolkMysticEffect() {
         super(Outcome.DestroyPermanent);
+        this.staticText = "destroy all Auras attached to that creature";
     }
 
     public TreefolkMysticEffect(final TreefolkMysticEffect effect) {
@@ -73,10 +74,4 @@ class TreefolkMysticEffect extends OneShotEffect {
         }
         return false;
     }
-
-    @Override
-    public String getText(Mode mode) {
-        return "destroy all Auras attached to that creature";
-    }
-
 }

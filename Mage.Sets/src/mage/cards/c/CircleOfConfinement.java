@@ -42,11 +42,7 @@ public final class CircleOfConfinement extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
         // When Circle of Confinement enters the battlefield, exile target creature an opponent controls with mana value 3 or less until Circle of Confinement leaves the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(
-                new ExileUntilSourceLeavesEffect("")
-                        .setText("exile target creature an opponent controls with mana value 3 " +
-                                "or less until {this} leaves the battlefield")
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
         ability.addTarget(new TargetPermanent(filter));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);

@@ -46,24 +46,7 @@ public class ReturnFromGraveyardToHandTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        Target target = mode.getTargets().get(0);
-        sb.append("return ");
-        if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
-            sb.append("up to ");
-            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
-        } else if (target.getMaxNumberOfTargets() > 1) {
-            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
-        }
-        if (!target.getTargetName().startsWith("another")) {
-            sb.append("target ");
-        }
-        sb.append(target.getTargetName());
-        if (!target.getTargetName().endsWith("graveyard")) {
-            sb.append(" from your graveyard");
-        }
-        sb.append(" to your hand");
-        return sb.toString();
+        String targetDescription = getTargetPointer().describeTargets(mode.getTargets(), "");
+        return "return " + targetDescription + (targetDescription.contains("graveyard") ? " to your hand" : " from your graveyard to your hand");
     }
-
 }

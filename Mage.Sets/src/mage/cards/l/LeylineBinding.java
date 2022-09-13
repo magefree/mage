@@ -16,8 +16,7 @@ import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterNonlandPermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -26,13 +25,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class LeylineBinding extends CardImpl {
-
-    private static final FilterPermanent filter
-            = new FilterNonlandPermanent("nonland permanent an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public LeylineBinding(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{W}");
@@ -46,8 +38,8 @@ public final class LeylineBinding extends CardImpl {
         ).setAbilityWord(AbilityWord.DOMAIN).addHint(DomainHint.instance));
 
         // When Leyline Binding enters the battlefield, exile target nonland permanent an opponent controls until Leyline Binding leaves the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect(filter.getMessage()));
-        ability.addTarget(new TargetPermanent(filter));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_NON_LAND));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);
     }

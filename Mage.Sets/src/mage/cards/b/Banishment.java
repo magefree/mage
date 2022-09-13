@@ -78,7 +78,7 @@ class BanishmentEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         Permanent targeted = game.getPermanent(source.getFirstTarget());
 
         if (permanent == null || controller == null || targeted == null) {
@@ -103,5 +103,4 @@ class BanishmentEffect extends OneShotEffect {
     public BanishmentEffect copy() {
         return new BanishmentEffect(this);
     }
-
 }

@@ -12,9 +12,10 @@ import mage.abilities.keyword.RenownAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.target.common.TargetNonlandPermanent;
+import mage.target.TargetPermanent;
 
 /**
  *
@@ -22,7 +23,7 @@ import mage.target.common.TargetNonlandPermanent;
  */
 public final class ConstableOfTheRealm extends CardImpl {
 
-    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("other nonland permanent");
+    private static final FilterPermanent filter = new FilterNonlandPermanent("other target nonland permanent");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -40,10 +41,8 @@ public final class ConstableOfTheRealm extends CardImpl {
         this.addAbility(new RenownAbility(2));
 
         // Whenever one or more +1/+1 counters are put on Constable of the Realm, exile up to one other target nonland permanent until Constable of the Realm leaves the battlefield.
-        Ability ability = new OneOrMoreCountersAddedTriggeredAbility(new ExileUntilSourceLeavesEffect("").setText(
-                "exile up to one other target nonland permanent until {this} leaves the battlefield"
-        ));
-        ability.addTarget(new TargetNonlandPermanent(0, 1, filter, false));
+        Ability ability = new OneOrMoreCountersAddedTriggeredAbility(new ExileUntilSourceLeavesEffect());
+        ability.addTarget(new TargetPermanent(0, 1, filter));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);
     }
