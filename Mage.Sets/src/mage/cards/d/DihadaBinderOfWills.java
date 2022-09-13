@@ -152,9 +152,7 @@ class DihadaControlEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         boolean applied = false;
 
-        private static final FilterPermanent controlfilter
-            = new FilterNonlandPermanent("nonland permanents");
-
+        FilterPermanent controlfilter = new FilterNonlandPermanent("nonland permanents");
         List<Permanent> dihadaperms = game.getBattlefield().getAllActivePermanents(controlfilter, game);
         for (Permanent dihadaperm : dihadaperms) {
             ContinuousEffect effect = new DihadaControlAllEffect(source.getControllerId());
