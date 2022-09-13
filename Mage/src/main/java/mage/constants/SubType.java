@@ -255,6 +255,7 @@ public enum SubType {
     NAGA("Naga", SubTypeSet.CreatureType),
     NAUTILUS("Nautilus", SubTypeSet.CreatureType),
     NAUTOLAN("Nautolan", SubTypeSet.CreatureType, true), // Star Wars
+    NECRON("Necron", SubTypeSet.CreatureType),
     NEIMOIDIAN("Neimoidian", SubTypeSet.CreatureType, true), // Star Wars
     NEPHILIM("Nephilim", SubTypeSet.CreatureType),
     NIGHTMARE("Nightmare", SubTypeSet.CreatureType),
