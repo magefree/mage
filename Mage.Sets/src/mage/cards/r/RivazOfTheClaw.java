@@ -44,7 +44,7 @@ public final class RivazOfTheClaw extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // {T}: Add two mana in any combination of colors. Spend this mana only to cast Dragon creature spells.
         this.addAbility(new ConditionalAnyColorManaAbility(2, new ConditionalSpellManaBuilder(filter)));
