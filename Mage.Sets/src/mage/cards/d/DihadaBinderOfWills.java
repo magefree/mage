@@ -26,7 +26,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class DihadaBinderOfWills extends CardImpl {
 
-    private static final FilterCard legendarycreaturefilter = new FilterCreatureCard("legendary creature card");
+    private static final FilterCard legendarycreaturefilter = new FilterCreaturePermanent("legendary creature");
 
     static {
         legendarycreaturefilter.add(SuperType.LEGENDARY.getPredicate());
