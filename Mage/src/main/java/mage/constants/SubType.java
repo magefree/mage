@@ -371,6 +371,7 @@ public enum SubType {
     TROOPER("Trooper", SubTypeSet.CreatureType, true), // Star Wars
     TRILOBITE("Trilobite", SubTypeSet.CreatureType),
     TWILEK("Twi'lek", SubTypeSet.CreatureType, true), // Star Wars
+    TYRANID("Tyranid", SubTypeSet.CreatureType),
     // U
     UGNAUGHT("Ugnaught", SubTypeSet.CreatureType, true),
     UNICORN("Unicorn", SubTypeSet.CreatureType),
