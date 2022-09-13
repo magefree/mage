@@ -92,7 +92,7 @@ class DihadaFilterEffect extends OneShotEffect {
                 + "number of legendary cards from among them "
                 + "into your hand and the rest into your graveyard. "
                 + "Create a treasure token for each card put into "
-                + "your graveyard this way..";
+                + "your graveyard this way.";
     }
 
     public DihadaFilterEffect(final DihadaFilterEffect effect) {
@@ -119,7 +119,9 @@ class DihadaFilterEffect extends OneShotEffect {
             controller.moveCards(cards, Zone.GRAVEYARD, source, game);
 
             //Make Treasure
-            new TreasureToken().putOntoBattlefield(cards.size(), game, source, source.getControllerId());
+            if (cards.size() != 0) {
+                new TreasureToken().putOntoBattlefield(cards.size(), game, source, source.getControllerId());
+            }
         }
         return true;
     }
@@ -154,11 +156,7 @@ class DihadaControlEffect extends OneShotEffect {
         boolean applied = false;
 
         private static final FilterPermanent controlfilter
-            = new FilterNonlandPermanent("nonland permanents your opponents control");
-
-        static {
-            controlfilter.add(TargetController.OPPONENT.getControllerPredicate());
-        }
+            = new FilterNonlandPermanent("nonland permanents");
 
         List<Permanent> dihadaperms = game.getBattlefield().getAllActivePermanents(controlfilter, game);
         for (Permanent dihadaperm : dihadaperms) {

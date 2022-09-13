@@ -57,6 +57,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Crystal Quarry", 206, Rarity.RARE, mage.cards.c.CrystalQuarry.class));
         cards.add(new SetCardInfo("Cultivate", 130, Rarity.UNCOMMON, mage.cards.c.Cultivate.class));
         cards.add(new SetCardInfo("Day of Destiny", 99, Rarity.RARE, mage.cards.d.DayOfDestiny.class));
+        cards.add(new SetCardInfo("Dihada, Binder of Wills", 1, Rarity.MYTHIC, mage.cards.d.DihadaBinderOfWills.class));
         cards.add(new SetCardInfo("Dragonskull Summit", 207, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
         cards.add(new SetCardInfo("Drana, Liberator of Malakir", 111, Rarity.MYTHIC, mage.cards.d.DranaLiberatorOfMalakir.class));
         cards.add(new SetCardInfo("Duneblast", 148, Rarity.RARE, mage.cards.d.Duneblast.class));
