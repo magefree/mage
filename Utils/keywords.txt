@@ -91,6 +91,7 @@ Plainswalk|new|
 Poisonous|number|
 Provoke|new|
 Prowess|new|
+Ravenous|new|
 Reach|instance|
 Rebound|new|
 Reconfigure|manaString|
