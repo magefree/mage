@@ -74,10 +74,11 @@ class MayPay2LifeEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player player = game.getPlayer(abilityToModify.getControllerId());
         Cost cost = new PayLifeCost(2);
         if (cost.canPay(abilityToModify, source, source.getControllerId(), game)
-                && player.chooseUse(outcome, "Pay 2 life to reduce the cost by {" + color + "}?", source, game)) {
+                && (game.inCheckPlayableState()
+                || player.chooseUse(outcome, "Pay 2 life to reduce the cost by {" + color + "}?", source, game))) {
             if (cost.pay(abilityToModify, game, source, source.getControllerId(), true)) {
                 CardUtil.reduceCost((SpellAbility) abilityToModify, manaCost);
             }
