@@ -134,9 +134,6 @@ class DihadaFilterEffect extends OneShotEffect {
 
 class DihadaControlEffect extends OneShotEffect {
 
-    ComparisonType type = null;
-    int power = 0;
-
     public DihadaControlEffect() {
         super(Outcome.GainControl);
         this.staticText = "Gain control of all nonland permanents until end of turn. Untap them. They gain haste until end of turn";
