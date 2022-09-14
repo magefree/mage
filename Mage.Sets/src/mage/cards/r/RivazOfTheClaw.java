@@ -23,15 +23,15 @@ import mage.filter.predicate.card.CastFromZonePredicate;
  */
 public final class RivazOfTheClaw extends CardImpl {
 
-    private static final FilterCreatureSpell filter = new FilterCreatureSpell("Dragon creature spells");
-    private static final FilterCreatureCard filter2 = new FilterCreatureCard();
-    private static final FilterCreatureSpell filter3 = new FilterCreatureSpell("a Dragon creature spell from your graveyard");
+    private static final FilterCreatureSpell manaAbilityFilter = new FilterCreatureSpell("Dragon creature spells");
+    private static final FilterCreatureCard staticAbilityFilter = new FilterCreatureCard();
+    private static final FilterCreatureSpell spellCastFilter = new FilterCreatureSpell("a Dragon creature spell from your graveyard");
 
     static {
-        filter.add(SubType.DRAGON.getPredicate());
-        filter2.add(SubType.DRAGON.getPredicate());
-        filter3.add(SubType.DRAGON.getPredicate());
-        filter3.add(new CastFromZonePredicate(Zone.GRAVEYARD));
+        manaAbilityFilter.add(SubType.DRAGON.getPredicate());
+        staticAbilityFilter.add(SubType.DRAGON.getPredicate());
+        spellCastFilter.add(SubType.DRAGON.getPredicate());
+        spellCastFilter.add(new CastFromZonePredicate(Zone.GRAVEYARD));
     }
 
     public RivazOfTheClaw(UUID ownerId, CardSetInfo setInfo) {
@@ -47,10 +47,10 @@ public final class RivazOfTheClaw extends CardImpl {
         this.addAbility(new MenaceAbility(false));
 
         // {T}: Add two mana in any combination of colors. Spend this mana only to cast Dragon creature spells.
-        this.addAbility(new ConditionalAnyColorManaAbility(2, new ConditionalSpellManaBuilder(filter)));
+        this.addAbility(new ConditionalAnyColorManaAbility(2, new ConditionalSpellManaBuilder(manaAbilityFilter)));
 
         // Once during each of your turns, you may cast a Dragon creature spell from your graveyard.
-        this.addAbility(new CastFromGraveyardOnceStaticAbility(filter2, "Once during each of your turns, you may cast a Dragon creature spell from your graveyard"));
+        this.addAbility(new CastFromGraveyardOnceStaticAbility(staticAbilityFilter, "Once during each of your turns, you may cast a Dragon creature spell from your graveyard"));
 
         // Whenever you cast a Dragon creature spell from your graveyard, it gains "When this creature dies, exile it."
         this.addAbility(new SpellCastControllerTriggeredAbility(
@@ -61,7 +61,7 @@ public final class RivazOfTheClaw extends CardImpl {
                         "it gains \"When this creature dies, exile it.\"",
                         true
                 ),
-                filter3, false, true, true
+                spellCastFilter, false, true, true
         ));
     }
 
