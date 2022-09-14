@@ -20,5 +20,5 @@ public interface StackObjectCopyApplier extends Serializable {
      * @param copyNumber current number of copy, starts with 1
      * @return
      */
-    MageObjectReferencePredicate getNextNewTargetType(int copyNumber);
+    MageObjectReferencePredicate getNextNewTargetType();
 }

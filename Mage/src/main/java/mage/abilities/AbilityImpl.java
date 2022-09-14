@@ -309,15 +309,6 @@ public abstract class AbilityImpl implements Ability {
         VariableManaCost variableManaCost = handleManaXCosts(game, noMana, controller);
         String announceString = handleOtherXCosts(game, controller);
 
-        // For effects from cards like Void Winnower x costs have to be set
-        if (this.getAbilityType() == AbilityType.SPELL) {
-            GameEvent castEvent = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL_LATE, this.getId(), this, getControllerId());
-            castEvent.setZone(game.getState().getZone(CardUtil.getMainCardId(game, sourceId)));
-            if (game.replaceEvent(castEvent, this)) {
-                return false;
-            }
-        }
-
         handlePhyrexianManaCosts(game, controller);
 
         /* 20130201 - 601.2b
@@ -343,7 +334,7 @@ public abstract class AbilityImpl implements Ability {
         for (UUID modeId : this.getModes().getSelectedModes()) {
             this.getModes().setActiveMode(modeId);
 
-            //20121001 - 601.2c
+            // 20121001 - 601.2c
             // 601.2c The player announces their choice of an appropriate player, object, or zone for
             // each target the spell requires. A spell may require some targets only if an alternative or
             // additional cost (such as a buyback or kicker cost), or a particular mode, was chosen for it;
@@ -375,6 +366,18 @@ public abstract class AbilityImpl implements Ability {
                 }
             }
         } // end modes
+
+        // 20220908 - 601.2e
+        // 601.2e The game checks to see if the proposed spell can legally be cast. If the proposed spell
+        // is illegal, the game returns to the moment before the casting of that spell was proposed
+        // (see rule 727, "Handling Illegal Actions").
+        if (this.getAbilityType() == AbilityType.SPELL) {
+            GameEvent castEvent = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL_LATE, this.getId(), this, getControllerId());
+            castEvent.setZone(game.getState().getZone(CardUtil.getMainCardId(game, sourceId)));
+            if (game.replaceEvent(castEvent, this)) {
+                return false;
+            }
+        }
 
         // this is a hack to prevent mana abilities with mana costs from causing endless loops - pay other costs first
         if (this instanceof ActivatedManaAbilityImpl && !costs.pay(this, game, this, controllerId, noMana, null)) {
@@ -437,7 +440,7 @@ public abstract class AbilityImpl implements Ability {
                 case MADNESS:
                 case DISTURB:
                     // from Snapcaster Mage:
-                    // If you cast a spell from a graveyard using its flashback ability, you can’t pay other alternative costs
+                    // If you cast a spell from a graveyard using its flashback ability, you can't pay other alternative costs
                     // (such as that of Foil). (2018-12-07)
                     canUseAlternativeCost = false;
                     // You may pay any optional additional costs the spell has, such as kicker costs. You must pay any
@@ -570,10 +573,10 @@ public abstract class AbilityImpl implements Ability {
     protected VariableManaCost handleManaXCosts(Game game, boolean noMana, Player controller) {
         // 20210723 - 601.2b
         // If the spell has alternative or additional costs that will
-        // be paid as it’s being cast such as buyback or kicker costs (see rules 118.8 and 118.9),
+        // be paid as it's being cast such as buyback or kicker costs (see rules 118.8 and 118.9),
         // the player announces their intentions to pay any or all of those costs (see rule 601.2f).
-        // A player can’t apply two alternative methods of casting or two alternative costs to a
-        // single spell. If the spell has a variable cost that will be paid as it’s being cast
+        // A player can't apply two alternative methods of casting or two alternative costs to a
+        // single spell. If the spell has a variable cost that will be paid as it's being cast
         // (such as an {X} in its mana cost; see rule 107.3), the player announces the value of that
         // variable. If the value of that variable is defined in the text of the spell by a choice
         // that player would make later in the announcement or resolution of the spell, that player
