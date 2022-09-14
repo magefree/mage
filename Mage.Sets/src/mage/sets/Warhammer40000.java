@@ -34,6 +34,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Cultivate", 211, Rarity.COMMON, mage.cards.c.Cultivate.class));
         cards.add(new SetCardInfo("Death's Presence", 212, Rarity.RARE, mage.cards.d.DeathsPresence.class));
         cards.add(new SetCardInfo("Deathleaper, Terror Weapon", 115, Rarity.RARE, mage.cards.d.DeathleaperTerrorWeapon.class));
+        cards.add(new SetCardInfo("Exocrine", 76, Rarity.RARE, mage.cards.e.Exocrine.class));
         cards.add(new SetCardInfo("Exotic Orchard", 278, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Explore", 213, Rarity.COMMON, mage.cards.e.Explore.class));
         cards.add(new SetCardInfo("Fabricate", 181, Rarity.RARE, mage.cards.f.Fabricate.class));
