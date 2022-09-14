@@ -88,7 +88,7 @@ public abstract class StackObjectImpl implements StackObject {
 
             newTargetTypes = new HashMap<>();
             for (int i = 0; i < amount; i++) {
-                MageObjectReferencePredicate newTargetType = applier.getNextNewTargetType(i + 1);
+                MageObjectReferencePredicate newTargetType = applier.getNextNewTargetType();
                 if (newTargetType == null) {
                     currentAnyTargetNumber++;
                     String message = "Any target";
