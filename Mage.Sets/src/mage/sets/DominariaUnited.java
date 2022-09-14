@@ -88,6 +88,11 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Cut Down", 89, Rarity.UNCOMMON, mage.cards.c.CutDown.class));
         cards.add(new SetCardInfo("Danitha, Benalia's Hope", 15, Rarity.RARE, mage.cards.d.DanithaBenaliasHope.class));
         cards.add(new SetCardInfo("Deathbloom Gardener", 159, Rarity.COMMON, mage.cards.d.DeathbloomGardener.class));
+        cards.add(new SetCardInfo("Defiler of Dreams", 46, Rarity.RARE, mage.cards.d.DefilerOfDreams.class));
+        cards.add(new SetCardInfo("Defiler of Faith", 16, Rarity.RARE, mage.cards.d.DefilerOfFaith.class));
+        cards.add(new SetCardInfo("Defiler of Flesh", 90, Rarity.RARE, mage.cards.d.DefilerOfFlesh.class));
+        cards.add(new SetCardInfo("Defiler of Instinct", 119, Rarity.RARE, mage.cards.d.DefilerOfInstinct.class));
+        cards.add(new SetCardInfo("Defiler of Vigor", 160, Rarity.RARE, mage.cards.d.DefilerOfVigor.class));
         cards.add(new SetCardInfo("Destroy Evil", 17, Rarity.COMMON, mage.cards.d.DestroyEvil.class));
         cards.add(new SetCardInfo("Djinn of the Fountain", 47, Rarity.UNCOMMON, mage.cards.d.DjinnOfTheFountain.class));
         cards.add(new SetCardInfo("Drag to the Bottom", 91, Rarity.RARE, mage.cards.d.DragToTheBottom.class));
