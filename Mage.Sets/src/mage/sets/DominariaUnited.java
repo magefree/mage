@@ -223,6 +223,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Shivan Devastator", 143, Rarity.MYTHIC, mage.cards.s.ShivanDevastator.class));
         cards.add(new SetCardInfo("Shivan Reef", 255, Rarity.RARE, mage.cards.s.ShivanReef.class));
         cards.add(new SetCardInfo("Shore Up", 64, Rarity.COMMON, mage.cards.s.ShoreUp.class));
+        cards.add(new SetCardInfo("Silver Scrutiny", 65, Rarity.RARE, mage.cards.s.SilverScrutiny.class));
         cards.add(new SetCardInfo("Silverback Elder", 177, Rarity.MYTHIC, mage.cards.s.SilverbackElder.class));
         cards.add(new SetCardInfo("Slimefoot's Survey", 178, Rarity.UNCOMMON, mage.cards.s.SlimefootsSurvey.class));
         cards.add(new SetCardInfo("Smash to Dust", 144, Rarity.COMMON, mage.cards.s.SmashToDust.class));
