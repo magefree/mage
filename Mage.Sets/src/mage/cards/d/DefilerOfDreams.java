@@ -40,7 +40,7 @@ public final class DefilerOfDreams extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // As an additional cost to cast blue permanent spells, you may pay 2 life. Those spells cost {U} less to cast if you paid life this way. This effect reduces only the amount of blue mana you pay.
-        this.addAbility(new MayPay2LifeForColorAbility("U"));
+        this.addAbility(new MayPay2LifeForColorAbility(ObjectColor.BLUE));
 
         // Whenever you cast a blue permanent spell, draw a card.
         this.addAbility(new SpellCastControllerTriggeredAbility(

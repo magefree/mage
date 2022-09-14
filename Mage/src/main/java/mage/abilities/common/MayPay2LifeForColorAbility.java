@@ -26,9 +26,9 @@ public class MayPay2LifeForColorAbility extends StaticAbility {
 
     private final ObjectColor color;
 
-    public MayPay2LifeForColorAbility(String color) {
+    public MayPay2LifeForColorAbility(ObjectColor color) {
         super(Zone.BATTLEFIELD, new MayPay2LifeEffect(color));
-        this.color = new ObjectColor(color);
+        this.color = color;
     }
 
     private MayPay2LifeForColorAbility(final MayPay2LifeForColorAbility ability) {
@@ -55,9 +55,9 @@ class MayPay2LifeEffect extends CostModificationEffectImpl {
     private final ObjectColor color;
     private final ManaCosts<ManaCost> manaCost;
 
-    MayPay2LifeEffect(String color) {
+    MayPay2LifeEffect(ObjectColor color) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        this.color = new ObjectColor(color);
+        this.color = color;
         this.manaCost = new ManaCostsImpl<>("{" + color + "}");
     }
 

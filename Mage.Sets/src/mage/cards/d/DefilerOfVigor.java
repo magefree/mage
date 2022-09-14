@@ -42,7 +42,7 @@ public final class DefilerOfVigor extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // As an additional cost to cast green permanent spells, you may pay 2 life. Those spells cost {G} less to cast if you paid life this way. This effect reduces only the amount of green mana you pay.
-        this.addAbility(new MayPay2LifeForColorAbility("G"));
+        this.addAbility(new MayPay2LifeForColorAbility(ObjectColor.GREEN));
 
         // Whenever you cast a green permanent spell, put a +1/+1 counter on each creature you control.
         this.addAbility(new SpellCastControllerTriggeredAbility(

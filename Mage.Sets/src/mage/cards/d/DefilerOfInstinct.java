@@ -42,7 +42,7 @@ public final class DefilerOfInstinct extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // As an additional cost to cast red permanent spells, you may pay 2 life. Those spells cost {R} less to cast if you paid life this way. This effect reduces only the amount of red mana you pay.
-        this.addAbility(new MayPay2LifeForColorAbility("R"));
+        this.addAbility(new MayPay2LifeForColorAbility(ObjectColor.RED));
 
         // Whenever you cast a red permanent spell, Defiler of Instinct deals 1 damage to any target.
         Ability ability = new SpellCastControllerTriggeredAbility(

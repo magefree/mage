@@ -43,7 +43,7 @@ public final class DefilerOfFlesh extends CardImpl {
         this.addAbility(new MenaceAbility(false));
 
         // As an additional cost to cast black permanent spells, you may pay 2 life. Those spells cost {B} less to cast if you paid life this way. This effect reduces only the amount of black mana you pay.
-        this.addAbility(new MayPay2LifeForColorAbility("B"));
+        this.addAbility(new MayPay2LifeForColorAbility(ObjectColor.BLACK));
 
         // Whenever you cast a black permanent spell, target creature you control gets +1/+1 and gains menace until end of turn.
         Ability ability = new SpellCastControllerTriggeredAbility(

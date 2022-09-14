@@ -41,7 +41,7 @@ public final class DefilerOfFaith extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // As an additional cost to cast white permanent spells, you may pay 2 life. Those spells cost {W} less to cast if you paid life this way. This effect reduces only the amount of white mana you pay.
-        this.addAbility(new MayPay2LifeForColorAbility("W"));
+        this.addAbility(new MayPay2LifeForColorAbility(ObjectColor.WHITE));
 
         // Whenever you cast a white permanent spell, create a 1/1 white Soldier creature token.
         this.addAbility(new SpellCastControllerTriggeredAbility(
