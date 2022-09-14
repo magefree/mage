@@ -23,7 +23,7 @@ import mage.target.Target;
 import mage.util.TargetAddress;
 import mage.util.functions.StackObjectCopyApplier;
 
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author TheElk801
@@ -97,10 +97,10 @@ class IvyGleefulSpellthiefEffect extends OneShotEffect {
 
     private static final class IvyGleefulSpellthiefApplier implements StackObjectCopyApplier {
 
-        private final MageObjectReferencePredicate morPredicate;
+        private final Iterator<MageObjectReferencePredicate> predicate;
 
         IvyGleefulSpellthiefApplier(Permanent permanent, Game game) {
-            this.morPredicate = new MageObjectReferencePredicate(permanent, game);
+            this.predicate = Arrays.asList(new MageObjectReferencePredicate(permanent, game)).iterator();
         }
 
         @Override
@@ -109,7 +109,10 @@ class IvyGleefulSpellthiefEffect extends OneShotEffect {
 
         @Override
         public MageObjectReferencePredicate getNextNewTargetType() {
-            return morPredicate;
+            if (predicate.hasNext()) {
+                return predicate.next();
+            }
+            return null;
         }
     }
 
