@@ -80,7 +80,7 @@ class MayPay2LifeEffect extends CostModificationEffectImpl {
                 && (game.inCheckPlayableState()
                 || (player.chooseUse(outcome, "Pay 2 life to reduce the cost by {" + color + "}?", source, game)
                 && cost.pay(abilityToModify, game, source, source.getControllerId(), true)))) {
-            CardUtil.reduceCost((SpellAbility) abilityToModify, manaCost);
+            CardUtil.adjustCost((SpellAbility) abilityToModify, manaCost, false);
         }
         return true;
     }
