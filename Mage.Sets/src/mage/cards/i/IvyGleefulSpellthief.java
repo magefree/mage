@@ -109,7 +109,7 @@ class IvyGleefulSpellthiefEffect extends OneShotEffect {
 
         @Override
         public MageObjectReferencePredicate getNextNewTargetType(int copyNumber) {
-            return copyNumber == 0 ? morPredicate : null;
+            return morPredicate;
         }
     }
 

@@ -194,12 +194,10 @@ class BeamsplitterMagePredicate implements Predicate<Permanent> {
 
 class BeamsplitterMageApplier implements StackObjectCopyApplier {
 
-    private final Iterator<MageObjectReferencePredicate> predicate;
+    private final MageObjectReferencePredicate morPredicate;
 
     BeamsplitterMageApplier(Permanent permanent, Game game) {
-        this.predicate = Arrays.asList(new MageObjectReferencePredicate(
-                new MageObjectReference(permanent, game)
-        )).iterator();
+        this.morPredicate = new MageObjectReferencePredicate(permanent, game);
     }
 
     @Override
@@ -208,9 +206,6 @@ class BeamsplitterMageApplier implements StackObjectCopyApplier {
 
     @Override
     public MageObjectReferencePredicate getNextNewTargetType(int copyNumber) {
-        if (predicate.hasNext()) {
-            return predicate.next();
-        }
-        return null;
+        return morPredicate;
     }
 }
