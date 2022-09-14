@@ -24,6 +24,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Abundance", 210, Rarity.RARE, mage.cards.a.Abundance.class));
         cards.add(new SetCardInfo("Aetherize", 191, Rarity.UNCOMMON, mage.cards.a.Aetherize.class));
         cards.add(new SetCardInfo("Arcane Signet", 227, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
+        cards.add(new SetCardInfo("Atalan Jackal", 105, Rarity.RARE, mage.cards.a.AtalanJackal.class));
         cards.add(new SetCardInfo("Be'lakor, the Dark Master", 6, Rarity.MYTHIC, mage.cards.b.BelakorTheDarkMaster.class));
         cards.add(new SetCardInfo("Bred for the Hunt", 222, Rarity.UNCOMMON, mage.cards.b.BredForTheHunt.class));
         cards.add(new SetCardInfo("Broodlord", 89, Rarity.RARE, mage.cards.b.Broodlord.class));
