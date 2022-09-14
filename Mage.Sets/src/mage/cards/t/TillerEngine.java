@@ -9,9 +9,8 @@ import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPermanent;
 
@@ -22,12 +21,10 @@ import java.util.UUID;
  */
 public final class TillerEngine extends CardImpl {
 
-    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("a land");
-    private static final FilterPermanent filter2 = new FilterNonlandPermanent("nonland permanent an opponent controls");
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent();
 
     static {
         filter.add(TappedPredicate.TAPPED);
-        filter2.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public TillerEngine(UUID ownerId, CardSetInfo setInfo) {
@@ -45,7 +42,7 @@ public final class TillerEngine extends CardImpl {
 
         // • Tap target nonland permanent an opponent controls.
         Mode mode = new Mode(new TapTargetEffect());
-        mode.addTarget(new TargetPermanent(filter2));
+        mode.addTarget(new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_NON_LAND));
         ability.addMode(mode);
         this.addAbility(ability);
     }
