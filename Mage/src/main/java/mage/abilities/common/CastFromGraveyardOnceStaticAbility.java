@@ -16,6 +16,13 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * Once during each of your turns, you may cast... from your graveyard
+ *
+ * See Lurrus of the Dream Den and Rivaz of the Claw
+ *
+ * @author weirddan455
+ */
 public class CastFromGraveyardOnceStaticAbility extends SimpleStaticAbility {
 
     public CastFromGraveyardOnceStaticAbility(FilterCard filter, String text) {
