@@ -25,7 +25,7 @@ import java.util.UUID;
 public final class OldOneEye extends CardImpl {
 
     public OldOneEye(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}");
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.TYRANID);
