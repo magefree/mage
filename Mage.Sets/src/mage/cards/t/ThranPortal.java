@@ -9,7 +9,6 @@ import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.ChooseBasicLandTypeEffect;
 import mage.abilities.effects.common.TapSourceEffect;
@@ -52,8 +51,9 @@ public class ThranPortal extends CardImpl {
 
         // Mana abilities of Thran Portal cost an additional 1 life to activate.
         // This also adds the mana ability
-        this.addAbility(new SimpleStaticAbility(new ThranPortalAdditionalCostEffect()));
-        this.addAbility(new SimpleStaticAbility(new ThranPortalManaAbilityContinousEffect()));
+        Ability ability = new SimpleStaticAbility(new ThranPortalAdditionalCostEffect());
+        ability.addEffect(new ThranPortalManaAbilityContinousEffect());
+        this.addAbility(ability);
     }
 
     private ThranPortal(final ThranPortal card) {
@@ -138,7 +138,6 @@ class ThranPortalAdditionalCostEffect extends CostModificationEffectImpl {
 
     ThranPortalAdditionalCostEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
-        this.staticText = "mana abilities of {this} cost an additional 1 life to activate";
     }
 
     private ThranPortalAdditionalCostEffect(final ThranPortalAdditionalCostEffect effect) {

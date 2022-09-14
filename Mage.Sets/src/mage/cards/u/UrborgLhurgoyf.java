@@ -1,16 +1,13 @@
 package mage.cards.u;
 
 import mage.MageInt;
-import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.AdditiveDynamicValue;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
+import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -18,8 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.players.Player;
 
 import java.util.UUID;
 
@@ -28,7 +23,7 @@ import java.util.UUID;
  */
 public final class UrborgLhurgoyf extends CardImpl {
 
-    private static final DynamicValue powerValue = new CardsInAllGraveyardsCount(StaticFilters.FILTER_CARD_CREATURE);
+    private static final DynamicValue powerValue = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE);
     private static final DynamicValue toughnessValue = new AdditiveDynamicValue(powerValue, StaticValue.get(1));
 
     public UrborgLhurgoyf(UUID ownerId, CardSetInfo setInfo) {
@@ -54,7 +49,7 @@ public final class UrborgLhurgoyf extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
                 new SetBasePowerToughnessSourceEffect(powerValue, toughnessValue, Duration.EndOfGame, SubLayer.CharacteristicDefining_7a, false)
-                        .setText("{this}'s power is equal to the number of creature cards in all graveyards and its toughness is equal to that number plus 1")
+                        .setText("{this}'s power is equal to the number of creature cards in your graveyard and its toughness is equal to that number plus 1")
         ));
     }
 

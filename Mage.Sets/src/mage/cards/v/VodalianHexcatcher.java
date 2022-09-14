@@ -27,7 +27,7 @@ import java.util.UUID;
 public final class VodalianHexcatcher extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.MERFOLK, "Merfolk");
-    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent(SubType.MERFOLK);
+    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent(SubType.MERFOLK, "Merfolk");
 
     public VodalianHexcatcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
