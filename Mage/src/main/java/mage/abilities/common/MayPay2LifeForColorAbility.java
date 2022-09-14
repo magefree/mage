@@ -24,16 +24,16 @@ import mage.util.CardUtil;
  */
 public class MayPay2LifeForColorAbility extends StaticAbility {
 
-    private final ObjectColor color;
+    private final String rule;
 
     public MayPay2LifeForColorAbility(ObjectColor color) {
         super(Zone.BATTLEFIELD, new MayPay2LifeEffect(color));
-        this.color = color;
+        this.rule = makeRule(color);
     }
 
     private MayPay2LifeForColorAbility(final MayPay2LifeForColorAbility ability) {
         super(ability);
-        this.color = ability.color;
+        this.rule = ability.rule;
     }
 
     @Override
@@ -43,6 +43,10 @@ public class MayPay2LifeForColorAbility extends StaticAbility {
 
     @Override
     public String getRule() {
+        return rule;
+    }
+
+    private static String makeRule(ObjectColor color) {
         return "As an additional cost to cast " + color.getDescription() +
                 " permanent spells, you may pay 2 life. Those spells cost {" + color +
                 "} less to cast if you paid life this way. This effect reduces only " +
@@ -76,10 +80,13 @@ class MayPay2LifeEffect extends CostModificationEffectImpl {
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         Player player = game.getPlayer(abilityToModify.getControllerId());
         Cost cost = new PayLifeCost(2);
-        if (cost.canPay(abilityToModify, source, source.getControllerId(), game)
-                && (game.inCheckPlayableState()
-                || (player.chooseUse(outcome, "Pay 2 life to reduce the cost by {" + color + "}?", source, game)
-                && cost.pay(abilityToModify, game, source, source.getControllerId(), true)))) {
+        if (!cost.canPay(abilityToModify, source, source.getControllerId(), game)) {
+            return true;
+        }
+        if (game.inCheckPlayableState() || (
+                player.chooseUse(outcome, "Pay 2 life to reduce the cost by {" + color + "}?", source, game)
+                        && cost.pay(abilityToModify, game, source, source.getControllerId(), true)
+        )) {
             CardUtil.adjustCost((SpellAbility) abilityToModify, manaCost, false);
         }
         return true;
