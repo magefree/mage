@@ -14,7 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.TyranidToken;
+import mage.game.permanent.token.Tyranid55Token;
 import mage.target.common.TargetCardInHand;
 
 import java.util.UUID;
@@ -42,7 +42,7 @@ public final class OldOneEye extends CardImpl {
         )));
 
         // When Old One Eye enters the battlefield, create a 5/5 green Tyranid creature token.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TyranidToken())));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new Tyranid55Token())));
 
         // Fast Healing -- At the beginning of your precombat main phase, you may discard two cards. If you do, return Old One Eye from your graveyard to your hand.
         this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(

@@ -104,6 +104,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of Mystery", 299, Rarity.RARE, mage.cards.t.TempleOfMystery.class));
         cards.add(new SetCardInfo("Temple of the False God", 300, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 301, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
+        cards.add(new SetCardInfo("Tervigon", 100, Rarity.RARE, mage.cards.t.Tervigon.class));
         cards.add(new SetCardInfo("The Swarmlord", 4, Rarity.MYTHIC, mage.cards.t.TheSwarmlord.class));
         cards.add(new SetCardInfo("Thornwood Falls", 302, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
         cards.add(new SetCardInfo("Trygon Prime", 143, Rarity.UNCOMMON, mage.cards.t.TrygonPrime.class));
