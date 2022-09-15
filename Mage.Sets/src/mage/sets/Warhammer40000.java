@@ -72,6 +72,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 308, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kill! Maim! Burn!", 128, Rarity.RARE, mage.cards.k.KillMaimBurn.class));
         cards.add(new SetCardInfo("Let the Galaxy Burn", 81, Rarity.RARE, mage.cards.l.LetTheGalaxyBurn.class));
+        cards.add(new SetCardInfo("Lord of Change", 24, Rarity.RARE, mage.cards.l.LordOfChange.class));
         cards.add(new SetCardInfo("Molten Slagheap", 284, Rarity.UNCOMMON, mage.cards.m.MoltenSlagheap.class));
         cards.add(new SetCardInfo("Mountain", 315, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("New Horizons", 218, Rarity.COMMON, mage.cards.n.NewHorizons.class));
