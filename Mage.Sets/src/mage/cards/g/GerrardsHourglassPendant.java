@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.card.PutIntoGraveFromBattlefieldThisTurnPredicate;
 import mage.game.Game;
@@ -95,11 +94,15 @@ class GerrardsHourglassPendantSkipExtraTurnsEffect extends ReplacementEffectImpl
 
 class GerrardsHourglassPendantReanimateEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterPermanentCard();
+    private static final FilterCard filter = new FilterCard();
 
     static {
         filter.add(PutIntoGraveFromBattlefieldThisTurnPredicate.instance);
-        filter.add(Predicates.not(CardType.PLANESWALKER.getPredicate()));
+        filter.add(Predicates.or(
+            CardType.ARTIFACT.getPredicate(),
+            CardType.CREATURE.getPredicate(),
+            CardType.ENCHANTMENT.getPredicate(),
+            CardType.LAND.getPredicate()));
     }
 
     GerrardsHourglassPendantReanimateEffect() {
