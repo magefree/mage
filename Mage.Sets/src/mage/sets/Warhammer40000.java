@@ -63,6 +63,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Game Trail", 282, Rarity.RARE, mage.cards.g.GameTrail.class));
         cards.add(new SetCardInfo("Hardened Scales", 215, Rarity.RARE, mage.cards.h.HardenedScales.class));
         cards.add(new SetCardInfo("Harrow", 216, Rarity.COMMON, mage.cards.h.Harrow.class));
+        cards.add(new SetCardInfo("Herald of Slaanesh", 77, Rarity.UNCOMMON, mage.cards.h.HeraldOfSlaanesh.class));
         cards.add(new SetCardInfo("Herald's Horn", 241, Rarity.UNCOMMON, mage.cards.h.HeraldsHorn.class));
         cards.add(new SetCardInfo("Heralds of Tzeentch", 23, Rarity.UNCOMMON, mage.cards.h.HeraldsOfTzeentch.class));
         cards.add(new SetCardInfo("Hormagaunt Horde", 93, Rarity.RARE, mage.cards.h.HormagauntHorde.class));
