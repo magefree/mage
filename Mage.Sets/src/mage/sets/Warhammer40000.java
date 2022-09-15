@@ -61,6 +61,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Opal Palace", 286, Rarity.COMMON, mage.cards.o.OpalPalace.class));
         cards.add(new SetCardInfo("Overgrowth", 219, Rarity.COMMON, mage.cards.o.Overgrowth.class));
         cards.add(new SetCardInfo("Path of Ancestry", 287, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
+        cards.add(new SetCardInfo("Purestrain Genestealer", 97, Rarity.UNCOMMON, mage.cards.p.PurestrainGenestealer.class));
         cards.add(new SetCardInfo("Rampant Growth", 220, Rarity.COMMON, mage.cards.r.RampantGrowth.class));
         cards.add(new SetCardInfo("Rugged Highlands", 292, Rarity.COMMON, mage.cards.r.RuggedHighlands.class));
         cards.add(new SetCardInfo("Screamer-Killer", 84, Rarity.RARE, mage.cards.s.ScreamerKiller.class));
