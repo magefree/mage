@@ -63,6 +63,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Forgotten Cave", 280, Rarity.COMMON, mage.cards.f.ForgottenCave.class));
         cards.add(new SetCardInfo("Frontier Bivouac", 281, Rarity.UNCOMMON, mage.cards.f.FrontierBivouac.class));
         cards.add(new SetCardInfo("Game Trail", 282, Rarity.RARE, mage.cards.g.GameTrail.class));
+        cards.add(new SetCardInfo("Gargoyle Flock", 123, Rarity.RARE, mage.cards.g.GargoyleFlock.class));
         cards.add(new SetCardInfo("Goliath Truck", 158, Rarity.UNCOMMON, mage.cards.g.GoliathTruck.class));
         cards.add(new SetCardInfo("Hardened Scales", 215, Rarity.RARE, mage.cards.h.HardenedScales.class));
         cards.add(new SetCardInfo("Harrow", 216, Rarity.COMMON, mage.cards.h.Harrow.class));
