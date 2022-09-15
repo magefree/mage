@@ -110,6 +110,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Tyranid Prime", 145, Rarity.RARE, mage.cards.t.TyranidPrime.class));
         cards.add(new SetCardInfo("Tyrant Guard", 103, Rarity.RARE, mage.cards.t.TyrantGuard.class));
         cards.add(new SetCardInfo("Unclaimed Territory", 304, Rarity.UNCOMMON, mage.cards.u.UnclaimedTerritory.class));
+        cards.add(new SetCardInfo("Venomcrawler", 68, Rarity.RARE, mage.cards.v.Venomcrawler.class));
         cards.add(new SetCardInfo("Venomthrope", 147, Rarity.UNCOMMON, mage.cards.v.Venomthrope.class));
         cards.add(new SetCardInfo("Warstorm Surge", 209, Rarity.RARE, mage.cards.w.WarstormSurge.class));
         cards.add(new SetCardInfo("Wayfarer's Bauble", 261, Rarity.COMMON, mage.cards.w.WayfarersBauble.class));
