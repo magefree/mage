@@ -34,7 +34,7 @@ public class MasterChef extends CardImpl{
         // and “Other creatures you control enter the battlefield with an additional +1/+1 counter on them.”
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
             new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()).setText("with and additional +1/+1 counter on it")
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()).setText("with an additional +1/+1 counter on it")
             ), Duration.WhileOnBattlefield, StaticFilters.FILTER_CREATURES_OWNED_COMMANDER, "Commander creatures")));
             
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
