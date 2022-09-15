@@ -53,6 +53,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Deny Reality", 223, Rarity.COMMON, mage.cards.d.DenyReality.class));
         cards.add(new SetCardInfo("Dismal Backwater", 276, Rarity.COMMON, mage.cards.d.DismalBackwater.class));
         cards.add(new SetCardInfo("Evolving Wilds", 277, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
+        cards.add(new SetCardInfo("Exalted Flamer of Tzeentch", 119, Rarity.RARE, mage.cards.e.ExaltedFlamerOfTzeentch.class));
         cards.add(new SetCardInfo("Exocrine", 76, Rarity.RARE, mage.cards.e.Exocrine.class));
         cards.add(new SetCardInfo("Exotic Orchard", 278, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Explore", 213, Rarity.COMMON, mage.cards.e.Explore.class));
