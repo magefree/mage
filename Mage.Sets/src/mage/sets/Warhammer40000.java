@@ -94,6 +94,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Let the Galaxy Burn", 81, Rarity.RARE, mage.cards.l.LetTheGalaxyBurn.class));
         cards.add(new SetCardInfo("Lictor", 94, Rarity.RARE, mage.cards.l.Lictor.class));
         cards.add(new SetCardInfo("Living Death", 202, Rarity.RARE, mage.cards.l.LivingDeath.class));
+        cards.add(new SetCardInfo("Lokhust Heavy Destroyer", 38, Rarity.RARE, mage.cards.l.LokhustHeavyDestroyer.class));
         cards.add(new SetCardInfo("Lord of Change", 24, Rarity.RARE, mage.cards.l.LordOfChange.class));
         cards.add(new SetCardInfo("Mind Stone", 245, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Molten Slagheap", 284, Rarity.UNCOMMON, mage.cards.m.MoltenSlagheap.class));
