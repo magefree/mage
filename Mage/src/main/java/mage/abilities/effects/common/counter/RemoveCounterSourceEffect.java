@@ -35,9 +35,6 @@ public class RemoveCounterSourceEffect extends OneShotEffect {
             int toRemove = Math.min(counter.getCount(), permanent.getCounters(game).getCount(counter.getName()));
             if (toRemove > 0) {
                 permanent.removeCounters(counter.getName(), toRemove, source, game);
-                if (!game.isSimulation()) {
-                    game.informPlayers("Removed " + toRemove + ' ' + counter.getName() + " counter from " + permanent.getLogName());
-                }
             }
             return true;
         }
@@ -47,11 +44,6 @@ public class RemoveCounterSourceEffect extends OneShotEffect {
                 int toRemove = Math.min(counter.getCount(), card.getCounters(game).getCount(counter.getName()));
                 if (toRemove > 0) {
                     card.removeCounters(counter.getName(), toRemove, source, game);
-                    if (!game.isSimulation()) {
-                        game.informPlayers("Removed " + toRemove + ' ' + counter.getName()
-                                + " counter from " + card.getLogName()
-                                + " (" + card.getCounters(game).getCount(counter.getName()) + " left)");
-                    }
                 }
                 return true;
             }

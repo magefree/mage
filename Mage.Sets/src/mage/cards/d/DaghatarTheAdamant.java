@@ -1,9 +1,7 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -22,7 +20,6 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -82,19 +79,14 @@ class MoveCounterFromTargetToTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source);
-        if (sourceObject != null && controller != null) {
-            Permanent fromPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (fromPermanent != null && fromPermanent.getCounters(game).getCount(CounterType.P1P1) > 0) {
-                Permanent toPermanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-                if (toPermanent != null) {
-                    fromPermanent.removeCounters(CounterType.P1P1.createInstance(), source, game);
-                    toPermanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
-                    game.informPlayers(sourceObject.getLogName() + ": Moved a +1/+1 counter from " + fromPermanent.getLogName() +" to " + toPermanent.getLogName());
-                }
+        Permanent fromPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (fromPermanent != null && fromPermanent.getCounters(game).getCount(CounterType.P1P1) > 0) {
+            Permanent toPermanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
+            if (toPermanent != null) {
+                fromPermanent.removeCounters(CounterType.P1P1.createInstance(), source, game);
+                toPermanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
+                return true;
             }
-            return true;
         }
         return false;
     }

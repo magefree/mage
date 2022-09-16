@@ -71,7 +71,6 @@ class RiotReplacementEffect extends ReplacementEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (creature != null && controller != null) {
             if (controller.chooseUse(outcome, "Have " + creature.getLogName() + " enter the battlefield with a +1/+1 counter on it or with haste?", null, "+1/+1 counter", "Haste", source, game)) {
-                game.informPlayers(controller.getLogName() + " choose to put a +1/+1 counter on " + creature.getName());
                 creature.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game, event.getAppliedEffects());
             } else {
                 game.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.Custom), source);

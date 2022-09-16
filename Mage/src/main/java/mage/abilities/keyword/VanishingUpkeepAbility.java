@@ -67,7 +67,6 @@ class VanishingEffect extends OneShotEffect {
             int amount = p.getCounters(game).getCount(CounterType.TIME);
             if (amount > 0) {
                 p.removeCounters(CounterType.TIME.createInstance(), source, game);
-                game.informPlayers("Removed a time counter from " + p.getLogName() + " (" + amount + " left)");
             }
             return true;
         }

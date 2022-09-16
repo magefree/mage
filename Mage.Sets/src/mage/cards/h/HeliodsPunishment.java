@@ -118,9 +118,6 @@ class HeliodsPunishmentEffect extends OneShotEffect {
         if (sourceEnchantment != null) {
             if (sourceEnchantment.getCounters(game).getCount(CounterType.TASK) > 0) {
                 sourceEnchantment.removeCounters(CounterType.TASK.createInstance(1), source, game);
-                if (!game.isSimulation()) {
-                    game.informPlayers("Removed a task counter from " + sourceEnchantment.getLogName());
-                }
             }
             if (sourceEnchantment.getCounters(game).getCount(CounterType.TASK) == 0) {
                 sourceEnchantment.destroy(source, game, false);

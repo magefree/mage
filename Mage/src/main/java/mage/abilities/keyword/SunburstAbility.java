@@ -11,7 +11,6 @@ import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,12 +74,6 @@ class SunburstEffect extends OneShotEffect {
                 }
                 List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects"); // the basic event is the EntersBattlefieldEvent, so use already applied replacement effects from that event
                 permanent.addCounters(counter, source.getControllerId(), source, game, appliedEffects);
-                if (!game.isSimulation()) {
-                    Player player = game.getPlayer(source.getControllerId());
-                    if (player != null) {
-                        game.informPlayers(player.getLogName() + " puts " + counter.getCount() + ' ' + counter.getName() + " counter on " + permanent.getName());
-                    }
-                }
             }
         }
         return true;

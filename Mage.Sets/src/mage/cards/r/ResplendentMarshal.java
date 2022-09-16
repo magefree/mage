@@ -2,7 +2,6 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldOrDiesSourceTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
@@ -22,7 +21,6 @@ import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -88,22 +86,16 @@ class ResplendentMarshalEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source);
         Card exiledCard = game.getCard(targetPointer.getFirst(game, source));
-        if (controller != null && sourceObject != null && exiledCard != null) {
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                    StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, source.getControllerId(), source, game)) {
-                if (permanent.shareCreatureTypes(game, exiledCard)) {
-                    permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
-                    if (!game.isSimulation()) {
-                        game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName()
-                                + " puts a +1/+1 counter on " + permanent.getLogName());
-                    }
-                }
-            }
-            return true;
+        if (exiledCard == null) {
+            return false;
         }
-        return false;
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(
+                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, source.getControllerId(), source, game)) {
+            if (permanent.shareCreatureTypes(game, exiledCard)) {
+                permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
+            }
+        }
+        return true;
     }
 }

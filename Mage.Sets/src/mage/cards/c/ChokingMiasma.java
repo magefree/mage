@@ -2,7 +2,6 @@ package mage.cards.c;
 
 import java.util.UUID;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.effects.OneShotEffect;
@@ -84,18 +83,6 @@ class ChokingMiasmaEffect extends OneShotEffect {
             return false;
         }
         permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
-        if (!game.isSimulation()) {
-            StringBuilder sb = new StringBuilder();
-            MageObject sourceObject = game.getObject(source);
-            if (sourceObject != null) {
-                sb.append(sourceObject.getLogName());
-                sb.append(": ");
-            }
-            sb.append(controller.getLogName());
-            sb.append(" put a +1/+1 counter on ");
-            sb.append(permanent.getLogName());
-            game.informPlayers(sb.toString());
-        }
         return true;
     }
 }

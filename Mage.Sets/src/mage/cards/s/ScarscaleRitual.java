@@ -73,7 +73,6 @@ class ScarscaleRitualCost extends CostImpl {
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
                 permanent.addCounters(CounterType.M1M1.createInstance(), controllerId, ability, game);
-                game.informPlayers(controller.getLogName() + " puts a -1/-1 counter on " + permanent.getLogName());
                 this.paid = true;
             }
 
