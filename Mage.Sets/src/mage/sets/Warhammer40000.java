@@ -118,6 +118,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Royal Warden", 52, Rarity.RARE, mage.cards.r.RoyalWarden.class));
         cards.add(new SetCardInfo("Rugged Highlands", 292, Rarity.COMMON, mage.cards.r.RuggedHighlands.class));
         cards.add(new SetCardInfo("Screamer-Killer", 84, Rarity.RARE, mage.cards.s.ScreamerKiller.class));
+        cards.add(new SetCardInfo("Skorpekh Destroyer", 57, Rarity.UNCOMMON, mage.cards.s.SkorpekhDestroyer.class));
         cards.add(new SetCardInfo("Skorpekh Lord", 58, Rarity.RARE, mage.cards.s.SkorpekhLord.class));
         cards.add(new SetCardInfo("Sol Ring", 249, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Starstorm", 208, Rarity.RARE, mage.cards.s.Starstorm.class));
