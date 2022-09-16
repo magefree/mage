@@ -39,6 +39,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Bred for the Hunt", 222, Rarity.UNCOMMON, mage.cards.b.BredForTheHunt.class));
         cards.add(new SetCardInfo("Broodlord", 89, Rarity.RARE, mage.cards.b.Broodlord.class));
         cards.add(new SetCardInfo("Caged Sun", 231, Rarity.RARE, mage.cards.c.CagedSun.class));
+        cards.add(new SetCardInfo("Canoptek Spyder", 151, Rarity.RARE, mage.cards.c.CanoptekSpyder.class));
         cards.add(new SetCardInfo("Cave of Temptation", 267, Rarity.COMMON, mage.cards.c.CaveOfTemptation.class));
         cards.add(new SetCardInfo("Chaos Defiler", 110, Rarity.RARE, mage.cards.c.ChaosDefiler.class));
         cards.add(new SetCardInfo("Chaos Warp", 205, Rarity.RARE, mage.cards.c.ChaosWarp.class));
