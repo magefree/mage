@@ -69,6 +69,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Explore", 213, Rarity.COMMON, mage.cards.e.Explore.class));
         cards.add(new SetCardInfo("Fabricate", 181, Rarity.RARE, mage.cards.f.Fabricate.class));
         cards.add(new SetCardInfo("Farseek", 214, Rarity.COMMON, mage.cards.f.Farseek.class));
+        cards.add(new SetCardInfo("Flayed One", 34, Rarity.UNCOMMON, mage.cards.f.FlayedOne.class));
         cards.add(new SetCardInfo("Forest", 317, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forgotten Cave", 280, Rarity.COMMON, mage.cards.f.ForgottenCave.class));
         cards.add(new SetCardInfo("Frontier Bivouac", 281, Rarity.UNCOMMON, mage.cards.f.FrontierBivouac.class));
