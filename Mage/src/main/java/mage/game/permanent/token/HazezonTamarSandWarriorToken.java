@@ -12,7 +12,7 @@ import mage.constants.SubType;
 public final class HazezonTamarSandWarriorToken extends TokenImpl {
 
     public HazezonTamarSandWarriorToken() {
-        super("Sand Warrior Token", "1/1 Sand Warrior creature tokens that are red, green, and white");
+        super("Sand Warrior Token", "1/1 red, green, and white Sand Warrior creature tokens");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         color.setGreen(true);
