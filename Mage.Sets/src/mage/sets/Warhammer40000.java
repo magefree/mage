@@ -99,6 +99,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Mutilate", 203, Rarity.RARE, mage.cards.m.Mutilate.class));
         cards.add(new SetCardInfo("Mystic Forge", 246, Rarity.RARE, mage.cards.m.MysticForge.class));
         cards.add(new SetCardInfo("New Horizons", 218, Rarity.COMMON, mage.cards.n.NewHorizons.class));
+        cards.add(new SetCardInfo("Night Scythe", 162, Rarity.UNCOMMON, mage.cards.n.NightScythe.class));
         cards.add(new SetCardInfo("Noise Marine", 82, Rarity.UNCOMMON, mage.cards.n.NoiseMarine.class));
         cards.add(new SetCardInfo("Old One Eye", 96, Rarity.RARE, mage.cards.o.OldOneEye.class));
         cards.add(new SetCardInfo("Opal Palace", 286, Rarity.COMMON, mage.cards.o.OpalPalace.class));
