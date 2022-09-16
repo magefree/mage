@@ -207,6 +207,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Relic of Legends", 236, Rarity.UNCOMMON, mage.cards.r.RelicOfLegends.class));
         cards.add(new SetCardInfo("Resolute Reinforcements", 29, Rarity.UNCOMMON, mage.cards.r.ResoluteReinforcements.class));
         cards.add(new SetCardInfo("Rith, Liberated Primeval", 214, Rarity.MYTHIC, mage.cards.r.RithLiberatedPrimeval.class));
+        cards.add(new SetCardInfo("Rivaz of the Claw", 215, Rarity.RARE, mage.cards.r.RivazOfTheClaw.class));
         cards.add(new SetCardInfo("Rona's Vortex", 63, Rarity.UNCOMMON, mage.cards.r.RonasVortex.class));
         cards.add(new SetCardInfo("Rona, Sheoldred's Faithful", 216, Rarity.UNCOMMON, mage.cards.r.RonaSheoldredsFaithful.class));
         cards.add(new SetCardInfo("Rulik Mons, Warren Chief", 217, Rarity.UNCOMMON, mage.cards.r.RulikMonsWarrenChief.class));
