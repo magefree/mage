@@ -21,6 +21,7 @@ public final class Warhammer40000 extends ExpansionSet {
         this.hasBoosters = false;
 
         cards.add(new SetCardInfo("Abaddon the Despoiler", 2, Rarity.MYTHIC, mage.cards.a.AbaddonTheDespoiler.class));
+        cards.add(new SetCardInfo("Aberrant", 86, Rarity.UNCOMMON, mage.cards.a.Aberrant.class));
         cards.add(new SetCardInfo("Abundance", 210, Rarity.RARE, mage.cards.a.Abundance.class));
         cards.add(new SetCardInfo("Aetherize", 191, Rarity.UNCOMMON, mage.cards.a.Aetherize.class));
         cards.add(new SetCardInfo("Arcane Signet", 227, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
