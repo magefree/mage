@@ -2,6 +2,7 @@ package org.mage.test.cards.single.ncc;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -172,5 +173,56 @@ public class ThreefoldSignalTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Bird Token", 4 + 4);
         assertHandCount(playerA, 4 + (4+4));
+    }
+
+    /**
+     * Test that casting a split card with fuse triggers if both halves together have 3 colors
+     */
+    @Test
+    public void fusedSplitCardTriggers2() {
+        // {3}{B}{G} / {R}{G}
+        // Flesh: Exile target creature card from a graveyard.
+        //        Put X +1/+1 counters on target creature, where X is the power of the card you exiled.
+        // Blood: Target creature you control deals damage equal to its power to any target.
+        // Fuse
+        String fleshBlood = "Flesh // Blood";
+        addCard(Zone.HAND, playerA, fleshBlood);
+
+        addCard(Zone.BATTLEFIELD, playerA, threefoldSignal);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1+3 + 3); // For red + generic costs and to have enough for replicate
+
+        // All are 2/2
+        String lion = "Silvercoat Lion";
+        addCard(Zone.BATTLEFIELD, playerA, lion);
+        String griffin = "Abbey Griffin";
+        addCard(Zone.GRAVEYARD, playerA, griffin);
+        String centaur = "Accursed Centaur";
+        addCard(Zone.GRAVEYARD, playerA, centaur);
+
+        setStrictChooseMode(true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "fused Flesh // Blood");
+        setChoice(playerA, "Yes"); // Pay replicate once
+        setChoice(playerA, "No"); // Don't pay replicate twice
+        // Flesh
+        addTarget(playerA, griffin);
+        addTarget(playerA, lion);
+        // Blood
+        addTarget(playerA, lion);
+        addTarget(playerA, playerB);
+        // Copy of Flesh
+        // TODO: Currently not given option to change targets
+        // Copy of Blood
+        setChoice(playerA, "No"); // Don't change target from lion
+        setChoice(playerA, "No"); // Don't change target from PlayerB
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertCounterCount(lion, CounterType.P1P1, 4); // 2 from the copy and two from the original cast
+        assertLife(playerB, 20 - (2+2) - (2+2+2));
+        assertExileCount(playerA, lion, 1);
+        assertExileCount(playerA, griffin, 1);
     }
 }
