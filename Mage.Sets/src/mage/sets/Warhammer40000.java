@@ -157,6 +157,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Scoured Barrens", 293, Rarity.COMMON, mage.cards.s.ScouredBarrens.class));
         cards.add(new SetCardInfo("Screamer-Killer", 84, Rarity.RARE, mage.cards.s.ScreamerKiller.class));
         cards.add(new SetCardInfo("Sculpting Steel", 247, Rarity.RARE, mage.cards.s.SculptingSteel.class));
+        cards.add(new SetCardInfo("Sicarian Infiltrator", 25, Rarity.UNCOMMON, mage.cards.s.SicarianInfiltrator.class));
         cards.add(new SetCardInfo("Sister Repentia", 142, Rarity.RARE, mage.cards.s.SisterRepentia.class));
         cards.add(new SetCardInfo("Skorpekh Destroyer", 57, Rarity.UNCOMMON, mage.cards.s.SkorpekhDestroyer.class));
         cards.add(new SetCardInfo("Skorpekh Lord", 58, Rarity.RARE, mage.cards.s.SkorpekhLord.class));
