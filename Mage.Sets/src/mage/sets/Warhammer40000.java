@@ -189,6 +189,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Tyranid Invasion", 102, Rarity.UNCOMMON, mage.cards.t.TyranidInvasion.class));
         cards.add(new SetCardInfo("Tyranid Prime", 145, Rarity.RARE, mage.cards.t.TyranidPrime.class));
         cards.add(new SetCardInfo("Tyrant Guard", 103, Rarity.RARE, mage.cards.t.TyrantGuard.class));
+        cards.add(new SetCardInfo("Ultramarines Honour Guard", 18, Rarity.RARE, mage.cards.u.UltramarinesHonourGuard.class));
         cards.add(new SetCardInfo("Unclaimed Territory", 304, Rarity.UNCOMMON, mage.cards.u.UnclaimedTerritory.class));
         cards.add(new SetCardInfo("Unstable Obelisk", 260, Rarity.COMMON, mage.cards.u.UnstableObelisk.class));
         cards.add(new SetCardInfo("Utter End", 226, Rarity.RARE, mage.cards.u.UtterEnd.class));
