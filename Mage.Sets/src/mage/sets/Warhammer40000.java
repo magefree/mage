@@ -4,10 +4,15 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author TheElk801
  */
 public final class Warhammer40000 extends ExpansionSet {
+
+    private static final List<String> unfinished = Arrays.asList("Vanguard Suppressor");
 
     private static final Warhammer40000 instance = new Warhammer40000();
 
@@ -146,6 +151,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Tyranid Prime", 145, Rarity.RARE, mage.cards.t.TyranidPrime.class));
         cards.add(new SetCardInfo("Tyrant Guard", 103, Rarity.RARE, mage.cards.t.TyrantGuard.class));
         cards.add(new SetCardInfo("Unclaimed Territory", 304, Rarity.UNCOMMON, mage.cards.u.UnclaimedTerritory.class));
+        cards.add(new SetCardInfo("Vanguard Suppressor", 27, Rarity.RARE, mage.cards.v.VanguardSuppressor.class));
         cards.add(new SetCardInfo("Venomcrawler", 68, Rarity.RARE, mage.cards.v.Venomcrawler.class));
         cards.add(new SetCardInfo("Venomthrope", 147, Rarity.UNCOMMON, mage.cards.v.Venomthrope.class));
         cards.add(new SetCardInfo("Warstorm Surge", 209, Rarity.RARE, mage.cards.w.WarstormSurge.class));
@@ -153,5 +159,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Winged Hive Tyrant", 148, Rarity.RARE, mage.cards.w.WingedHiveTyrant.class));
         cards.add(new SetCardInfo("Worn Powerstone", 263, Rarity.UNCOMMON, mage.cards.w.WornPowerstone.class));
         cards.add(new SetCardInfo("Zoanthrope", 149, Rarity.RARE, mage.cards.z.Zoanthrope.class));
+
+        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is implemented
     }
 }
