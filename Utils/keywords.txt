@@ -105,7 +105,7 @@ Soulbond|new|
 Soulshift|number|
 Skulk|new|
 Spectacle|card, cost|
-Squad|cost|
+Squad|new|
 Storm|new|
 Sunburst|new|
 Suspend|number, cost, card|
