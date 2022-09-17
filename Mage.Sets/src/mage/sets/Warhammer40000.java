@@ -87,6 +87,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Farseek", 214, Rarity.COMMON, mage.cards.f.Farseek.class));
         cards.add(new SetCardInfo("Fell the Mighty", 186, Rarity.RARE, mage.cards.f.FellTheMighty.class));
         cards.add(new SetCardInfo("Flayed One", 34, Rarity.UNCOMMON, mage.cards.f.FlayedOne.class));
+        cards.add(new SetCardInfo("For the Emperor!", 12, Rarity.RARE, mage.cards.f.ForTheEmperor.class));
         cards.add(new SetCardInfo("Foreboding Ruins", 279, Rarity.RARE, mage.cards.f.ForebodingRuins.class));
         cards.add(new SetCardInfo("Forest", 317, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forgotten Cave", 280, Rarity.COMMON, mage.cards.f.ForgottenCave.class));
