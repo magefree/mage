@@ -129,6 +129,32 @@ public class CardRepositoryTest {
     }
 
     /**
+     * Reported bug: https://github.com/magefree/mage/issues/9533
+     *
+     * Each half of a split card displays the combined information of both halves in the deck editor.
+     *
+     * `findCards`'s `returnSplitCardHalf` parameter should handle this issue
+     */
+    @Test
+    public void splitCardInfoIsntDoubled() {
+        // Consecrate   // Consume
+        // {1}{W/B}     // {2}{W}{B}
+        List<CardInfo> fullCard1 = CardRepository.instance.findCards("Consecrate", 1, false);
+        assert fullCard1.get(0).isSplitCard();
+        assert fullCard1.get(0).getName().equals("Consecrate // Consume");
+        List<CardInfo> fullCard2 = CardRepository.instance.findCards("Consume", 1, false);
+        assert fullCard2.get(0).isSplitCard();
+        assert fullCard2.get(0).getName().equals("Consecrate // Consume");
+
+        List<CardInfo> splitHalfCardLeft  = CardRepository.instance.findCards("Consecrate", 1, true);
+        assert splitHalfCardLeft.get(0).isSplitCardHalf();
+        assert splitHalfCardLeft.get(0).getName().equals("Consecrate");
+        List<CardInfo> splitHalfCardRight = CardRepository.instance.findCards("Consume", 1, true);
+        assert splitHalfCardRight.get(0).isSplitCardHalf();
+        assert splitHalfCardRight.get(0).getName().equals("Consume");
+    }
+
+    /**
      * Checks if the card with name cardName can be found when searched for
      * using the case sensitive approach.
      *
