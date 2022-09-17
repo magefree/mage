@@ -101,4 +101,76 @@ public class ThreefoldSignalTest extends CardTestPlayerBase {
         execute();
         assertPermanentCount(playerB, esperSojourners, 1);
     }
+
+    /**
+     * Check that casting one half of a split card doesn't trigger it even if the whole split card has 3 colors.
+     * Relevant ruling:
+     *      709.3a Only the chosen half is evaluated to see if it can be cast.
+     *             Only that half is considered to be put onto the stack.
+     *      709.3b While on the stack, only the characteristics of the half being cast exist.
+     *             The other half’s characteristics are treated as though they didn’t exist.
+     */
+    @Test
+    public void oneHalfOfSplitCardDoesntTrigger() {
+        // {G}{U} / {4}{W}{U}
+        // Beck: Whenever a creature enters the battlefield this turn, you may draw a card.
+        // Call: Create four 1/1 white Bird creature tokens with flying.
+        // Fuse
+        String beckCall = "Beck // Call";
+        addCard(Zone.HAND, playerA, beckCall);
+
+        addCard(Zone.BATTLEFIELD, playerA, threefoldSignal);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4 + 3); // For generic costs and to have enough for replicate
+
+        setStrictChooseMode(true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Call");
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Bird Token", 4);
+    }
+
+    /**
+     * Test that casting a split card with fuse triggers if both halves together have 3 colors
+     */
+    @Test
+    public void fusedSplitCardTriggers() {
+        // {G}{U} / {4}{W}{U}
+        // Beck: Whenever a creature enters the battlefield this turn, you may draw a card.
+        // Call: Create four 1/1 white Bird creature tokens with flying.
+        // Fuse
+        String beckCall = "Beck // Call";
+        addCard(Zone.HAND, playerA, beckCall);
+
+        addCard(Zone.BATTLEFIELD, playerA, threefoldSignal);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4 + 3); // For generic costs and to have enough for replicate
+
+        setStrictChooseMode(true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "fused Beck // Call");
+        setChoice(playerA, "Yes"); // Pay replicate once
+        setChoice(playerA, "No"); // Don't pay replicate twice
+
+        // Copy resolves, first Beck then call
+        setChoice(playerA, "Whenever", 3); // 4 triggers total, pick order for 3 and the 4th is auto-chosen
+        setChoice(playerA, "Yes", 4); // Draw cards 4 times
+
+        // Original resolves
+        // There will be 8 ETB triggers. 4 creatures enter but there are 2 instances of Beck that were cast
+        setChoice(playerA, "Whenever", 7); // 8 triggers total, pick order for 7 and the 8th is auto-chosen
+        setChoice(playerA, "Yes", 8); // Draw cards 8 times
+
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Bird Token", 4 + 4);
+        assertHandCount(playerA, 4 + (4+4));
+    }
 }
