@@ -73,7 +73,7 @@ Madness|cost|
 Melee|new|
 Menace|new|
 Mentor|new|
-Miracle|cost|
+Miracle|manaString|
 Modular|card, number|
 Mountaincycling|cost|
 Mountainwalk|new|
