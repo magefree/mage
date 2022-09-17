@@ -24,9 +24,9 @@ import org.mage.test.serverside.base.CardTestCommander4Players;
 public class HenzieToolboxTorreTest extends CardTestCommander4Players {
 
     private static final String henzieToolboxTorre = "Henzie \"Toolbox\" Torre";
-    // 0/6
-    // {4}
-    private static final String amaranthineWall = "Amaranthine Wall";
+    // 2/4
+    // {2}{R}{R}{R}
+    private static final String aerathiBerserker = "Aerathi Berserker";
     private static final String commandTower = "Command Tower";
     private static final String withBlitz = " with Blitz";
 
@@ -53,14 +53,14 @@ public class HenzieToolboxTorreTest extends CardTestCommander4Players {
     @Test
     public void gainsBlitz() {
         addCard(Zone.BATTLEFIELD, playerA, henzieToolboxTorre);
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
-        addCard(Zone.HAND, playerA, amaranthineWall);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.HAND, playerA, aerathiBerserker);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, amaranthineWall + withBlitz, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, aerathiBerserker + withBlitz, true);
 
         execute();
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
-        assertBlitzed(amaranthineWall, true);
+        assertBlitzed(aerathiBerserker, true);
     }
 
     /**
@@ -71,13 +71,13 @@ public class HenzieToolboxTorreTest extends CardTestCommander4Players {
     public void commanderCastDiscount() {
         addCard(Zone.COMMAND, playerA, henzieToolboxTorre);
         addCard(Zone.BATTLEFIELD, playerA, commandTower, 3+3);
-        addCard(Zone.HAND, playerA, amaranthineWall);
+        addCard(Zone.HAND, playerA, aerathiBerserker);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, henzieToolboxTorre, true);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, amaranthineWall + withBlitz);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, aerathiBerserker + withBlitz);
 
         execute();
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
-        assertBlitzed(amaranthineWall, true);
+        assertBlitzed(aerathiBerserker, true);
     }
 }
