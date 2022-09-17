@@ -50,6 +50,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Chaos Warp", 205, Rarity.RARE, mage.cards.c.ChaosWarp.class));
         cards.add(new SetCardInfo("Choked Estuary", 268, Rarity.RARE, mage.cards.c.ChokedEstuary.class));
         cards.add(new SetCardInfo("Chromatic Lantern", 232, Rarity.RARE, mage.cards.c.ChromaticLantern.class));
+        cards.add(new SetCardInfo("Chronomancer", 32, Rarity.RARE, mage.cards.c.Chronomancer.class));
         cards.add(new SetCardInfo("Cinder Glade", 269, Rarity.RARE, mage.cards.c.CinderGlade.class));
         cards.add(new SetCardInfo("Command Tower", 270, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Sphere", 235, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
