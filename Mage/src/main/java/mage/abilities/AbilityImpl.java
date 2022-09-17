@@ -253,14 +253,6 @@ public abstract class AbilityImpl implements Ability {
         }
         setSourcePermanentTransformCount(game);
 
-        /* 20130201 - 601.2b
-         * If the player wishes to splice any cards onto the spell (see rule 702.45), he
-         * or she reveals those cards in their hand.
-         */
-        if (this.abilityType == AbilityType.SPELL) {
-            game.getContinuousEffects().applySpliceEffects(this, game);
-        }
-
         // if ability can be cast for no mana, clear the mana costs now, because additional mana costs must be paid.
         // For Flashback ability can be set X before, so the X costs have to be restored for the flashbacked ability
         if (noMana) {
@@ -277,12 +269,24 @@ public abstract class AbilityImpl implements Ability {
             }
         }
 
+        // fused or spliced spells contain multiple abilities (e.g. fused, left, right)
+        // optional costs and cost modification must be applied only to the first/main ability
+        boolean isMainPartAbility = !CardUtil.isFusedPartAbility(this, game);
+
+        /* 20220908 - 601.2b
+         * If the player wishes to splice any cards onto the spell (see rule 702.45), they
+         * reveal those cards in their hand.
+         */
+        if (isMainPartAbility && this.abilityType == AbilityType.SPELL) {
+            game.getContinuousEffects().applySpliceEffects(this, game);
+        }
+
         // 20130201 - 601.2b
         // If the spell has alternative or additional costs that will be paid as it's being cast such
         // as buyback, kicker, or convoke costs (see rules 117.8 and 117.9), the player announces his
         // or her intentions to pay any or all of those costs (see rule 601.2e).
         // A player can't apply two alternative methods of casting or two alternative costs to a single spell.
-        if (!activateAlternateOrAdditionalCosts(sourceObject, noMana, controller, game)) {
+        if (isMainPartAbility && !activateAlternateOrAdditionalCosts(sourceObject, noMana, controller, game)) {
             if (getAbilityType() == AbilityType.SPELL
                     && ((SpellAbility) this).getSpellAbilityType() == SpellAbilityType.FACE_DOWN_CREATURE) {
                 return false;
@@ -385,12 +389,8 @@ public abstract class AbilityImpl implements Ability {
             return false;
         }
 
-        // fused spell contains 3 abilities (fused, left, right)
-        // fused cost added to fused ability, so no need cost modification for other parts
-        boolean needCostModification = !CardUtil.isFusedPartAbility(this, game);
-
         //20101001 - 601.2e
-        if (needCostModification) {
+        if (isMainPartAbility) {
             adjustCosts(game); // still needed for CostAdjuster objects (to handle some types of dynamic costs)
             game.getContinuousEffects().costModification(this, game);
         }

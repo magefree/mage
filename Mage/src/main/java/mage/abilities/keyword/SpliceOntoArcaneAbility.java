@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import java.util.Iterator;
@@ -9,6 +8,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.SpliceCardEffectImpl;
 import mage.cards.Card;
@@ -147,7 +147,12 @@ class SpliceOntoArcaneEffect extends SpliceCardEffectImpl {
                 splicedAbility.setSourceId(abilityToModify.getSourceId());
                 spell.addSpellAbility(splicedAbility);
                 for (Iterator it = ((SpliceOntoArcaneAbility) source).getSpliceCosts().iterator(); it.hasNext();) {
-                    spell.getSpellAbility().getCosts().add(((Cost) it.next()).copy());
+                    Cost cost = (Cost) it.next();
+                    if (cost instanceof ManaCost) {
+                        spell.getSpellAbility().getManaCostsToPay().add((ManaCost) cost.copy());
+                    } else {
+                        spell.getSpellAbility().getCosts().add(cost.copy());
+                    }
                 }
             }
             return true;
