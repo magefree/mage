@@ -205,6 +205,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Wayfarer's Bauble", 261, Rarity.COMMON, mage.cards.w.WayfarersBauble.class));
         cards.add(new SetCardInfo("Winged Hive Tyrant", 148, Rarity.RARE, mage.cards.w.WingedHiveTyrant.class));
         cards.add(new SetCardInfo("Worn Powerstone", 263, Rarity.UNCOMMON, mage.cards.w.WornPowerstone.class));
+        cards.add(new SetCardInfo("Zephyrim", 20, Rarity.RARE, mage.cards.z.Zephyrim.class));
         cards.add(new SetCardInfo("Zoanthrope", 149, Rarity.RARE, mage.cards.z.Zoanthrope.class));
 
         cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is implemented
