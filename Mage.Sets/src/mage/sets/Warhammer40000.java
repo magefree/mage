@@ -103,6 +103,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Go for the Throat", 201, Rarity.COMMON, mage.cards.g.GoForTheThroat.class));
         cards.add(new SetCardInfo("Goliath Truck", 158, Rarity.UNCOMMON, mage.cards.g.GoliathTruck.class));
         cards.add(new SetCardInfo("Great Unclean One", 35, Rarity.RARE, mage.cards.g.GreatUncleanOne.class));
+        cards.add(new SetCardInfo("Grey Knight Paragon", 13, Rarity.UNCOMMON, mage.cards.g.GreyKnightParagon.class));
         cards.add(new SetCardInfo("Hardened Scales", 215, Rarity.RARE, mage.cards.h.HardenedScales.class));
         cards.add(new SetCardInfo("Harrow", 216, Rarity.COMMON, mage.cards.h.Harrow.class));
         cards.add(new SetCardInfo("Hedron Archive", 240, Rarity.UNCOMMON, mage.cards.h.HedronArchive.class));
