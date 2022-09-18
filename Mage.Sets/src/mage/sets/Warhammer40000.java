@@ -80,6 +80,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Dread Return", 200, Rarity.UNCOMMON, mage.cards.d.DreadReturn.class));
         cards.add(new SetCardInfo("Endless Atlas", 237, Rarity.RARE, mage.cards.e.EndlessAtlas.class));
         cards.add(new SetCardInfo("Entrapment Maneuver", 185, Rarity.RARE, mage.cards.e.EntrapmentManeuver.class));
+        cards.add(new SetCardInfo("Epistolary Librarian", 118, Rarity.RARE, mage.cards.e.EpistolaryLibrarian.class));
         cards.add(new SetCardInfo("Everflowing Chalice", 238, Rarity.RARE, mage.cards.e.EverflowingChalice.class));
         cards.add(new SetCardInfo("Evolving Wilds", 277, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Exalted Flamer of Tzeentch", 119, Rarity.RARE, mage.cards.e.ExaltedFlamerOfTzeentch.class));
