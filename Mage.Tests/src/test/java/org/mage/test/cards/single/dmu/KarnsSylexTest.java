@@ -28,18 +28,10 @@ public class KarnsSylexTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, karnsSylex);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, tezzeretsGambit);
+        checkPlayableAbility("Can't pay life to cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + tezzeretsGambit, false);
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
-        try {
-            execute();
-
-            Assert.fail("must throw exception on execute");
-        } catch (Throwable e) {
-            if (!e.getMessage().contains("Can't find ability to activate command: Cast Tezzeret's Gambit")) {
-                Assert.fail("Should have thrown error about not being able to cast Tezzeret's Gambit, but got:\n" + e.getMessage());
-            }
-        }
+        execute();
 
         assertLife(playerA, 20);
     }
