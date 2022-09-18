@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.AsThoughEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.BlitzAbility;
@@ -21,6 +22,8 @@ import mage.players.Player;
 import mage.util.CardUtil;
 import mage.watchers.common.CommanderPlaysCountWatcher;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -92,6 +95,14 @@ class HenzieToolboxTorreGainBlitzEffect extends ContinuousEffectImpl {
 
         // TODO: This is not correct yet. Need to account for opponent's cards that you exile and can then play
         //       e.g. Gonti, Lord of Luxury
+        //       This will need https://github.com/magefree/mage/issues/9521 completed before being able to implemente correctly
+//        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+//            for (Card card : game.getExile().getAllCards(game, playerId)) {
+//                if (filter.match(card, game)) {
+//                    game.getContinuousEffects().getApplicableAsThoughEffects(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, game);
+//                }
+//            }
+//        }
         for (Card card : game.getExile().getAllCards(game)) {
             if (card.isOwnedBy(source.getControllerId()) && filter.match(card, game)) {
                 game.getState().addOtherAbility(card, new BlitzAbility(card, card.getManaCost().getMana().toString()));
