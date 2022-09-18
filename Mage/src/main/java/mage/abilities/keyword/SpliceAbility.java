@@ -1,5 +1,6 @@
 package mage.abilities.keyword;
 
+import java.util.Iterator;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -9,61 +10,59 @@ import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.SpliceCardEffectImpl;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.SpliceCardEffect;
 import mage.cards.Card;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SpellAbilityType;
-import mage.constants.Zone;
+import mage.constants.*;
+import mage.filter.FilterObject;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
 
-import java.util.Iterator;
-
 /**
  * 702.45. Splice
- * <p>
+ *
  * 702.45a Splice is a static ability that functions while a card is in your
  * hand. "Splice onto [subtype] [cost]" means "You may reveal this card from
  * your hand as you cast a [subtype] spell. If you do, copy this card's text box
  * onto that spell and pay [cost] as an additional cost to cast that spell."
  * Paying a card's splice cost follows the rules for paying additional costs in
  * rules 601.2b and 601.2e-g.
- * <p>
+ *
  * Example: Since the card with splice remains in the player's hand, it can
  * later be cast normally or spliced onto another spell. It can even be
  * discarded to pay a "discard a card" cost of the spell it's spliced onto.
- * <p>
+ *
  * 702.45b You can't choose to use a splice ability if you can't make the
  * required choices (targets, etc.) for that card's instructions. You can't
  * splice any one card onto the same spell more than once. If you're splicing
  * more than one card onto a spell, reveal them all at once and choose the order
  * in which their instructions will be followed. The instructions on the main
  * spell have to be followed first.
- * <p>
+ *
  * 702.45c The spell has the characteristics of the main spell, plus the text
  * boxes of each of the spliced cards. The spell doesn't gain any other
  * characteristics (name, mana cost, color, supertypes, card types, subtypes,
  * etc.) of the spliced cards. Text copied onto the spell that refers to a card
  * by name refers to the spell on the stack, not the card from which the text
  * was copied.
- * <p>
+ *
  * Example: Glacial Ray is a red card with splice onto Arcane that reads,
  * "Glacial Ray deals 2 damage to any target." Suppose Glacial Ray is spliced
  * onto Reach Through Mists, a blue spell. The spell is still blue, and Reach
  * Through Mists deals the damage. This means that the ability can target a
  * creature with protection from red and deal 2 damage to that creature.
- * <p>
+ *
  * 702.45d Choose targets for the added text normally (see rule 601.2c). Note
  * that a spell with one or more targets will be countered if all of its targets
  * are illegal on resolution.
- * <p>
+ *
  * 702.45e The spell loses any splice changes once it leaves the stack (for
  * example, when it's countered, it's exiled, or it resolves).
- * <p>
+ *
  * Rulings
- * <p>
+ *
  * You must reveal all of the cards you intend to splice at the same time. Each
  * individual card can only be spliced once onto a spell. If you have more than
  * one card with the same name in your hand, you may splice both of them onto
@@ -79,64 +78,87 @@ import java.util.Iterator;
  * when the spell resolves. A spell is countered on resolution only if *all* of
  * its targets are illegal (or the spell is countered by an effect).
  *
- * @author LevelX2
+ * @author LevelX2, awjackson
  */
-public class SpliceOntoInstantOrSorceryAbility extends SimpleStaticAbility {
+public class SpliceAbility extends SimpleStaticAbility {
 
-    private static final String KEYWORD_TEXT = "Splice onto instant or sorcery";
-    private Costs<Cost> spliceCosts = new CostsImpl<>();
-    private boolean nonManaCosts = false;
+    public static final FilterObject ARCANE = new FilterObject("Arcane");
+    public static final FilterObject INSTANT_OR_SORCERY = new FilterObject("instant or sorcery");
 
-    public SpliceOntoInstantOrSorceryAbility(String manaString) {
-        super(Zone.HAND, new SpliceOntoInstantOrSorceryEffect());
+    static {
+        ARCANE.add(SubType.ARCANE.getPredicate());
+        ARCANE.setLockedFilter(true);
+        INSTANT_OR_SORCERY.add(Predicates.or(
+                CardType.INSTANT.getPredicate(),
+                CardType.SORCERY.getPredicate()
+        ));
+        INSTANT_OR_SORCERY.setLockedFilter(true);
+    }
+
+    private final Costs<Cost> spliceCosts = new CostsImpl<>();
+    private final String rule;
+
+    public SpliceAbility(FilterObject filter, String manaString) {
+        super(Zone.HAND, new SpliceCardEffectImpl(filter));
         spliceCosts.add(new ManaCostsImpl<>(manaString));
+        rule = "Splice onto " + filter.getMessage() + ' ' + spliceCosts.getText() + getReminder(filter);
     }
 
-    public SpliceOntoInstantOrSorceryAbility(Cost cost) {
-        super(Zone.HAND, new SpliceOntoInstantOrSorceryEffect());
+    public SpliceAbility(FilterObject filter, Cost cost) {
+        super(Zone.HAND, new SpliceCardEffectImpl(filter));
         spliceCosts.add(cost);
-        nonManaCosts = true;
+        rule = "Splice onto " + filter.getMessage() + "&mdash;" + spliceCosts.getText() + '.' + getReminder(filter);
     }
 
-    private SpliceOntoInstantOrSorceryAbility(final SpliceOntoInstantOrSorceryAbility ability) {
+    private SpliceAbility(final SpliceAbility ability) {
         super(ability);
-        this.spliceCosts = ability.spliceCosts.copy();
-        this.nonManaCosts = ability.nonManaCosts;
+        this.spliceCosts.addAll(ability.spliceCosts);
+        this.rule = ability.rule;
     }
 
     @Override
     public SimpleStaticAbility copy() {
-        return new SpliceOntoInstantOrSorceryAbility(this);
+        return new SpliceAbility(this);
     }
 
-    Costs getSpliceCosts() {
+    public Costs getSpliceCosts() {
         return spliceCosts;
+    }
+
+    private static String getReminder(FilterObject filter) {
+        return " <i>(As you cast an " + filter.getMessage() + " spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)</i>";
     }
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(KEYWORD_TEXT).append(nonManaCosts ? "&mdash;" : " ");
-        sb.append(spliceCosts.getText()).append(nonManaCosts ? ". " : " ");
-        sb.append("<i>(As you cast an instant or sorcery spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)</i>");
-        return sb.toString();
+        return rule;
     }
 }
 
-class SpliceOntoInstantOrSorceryEffect extends SpliceCardEffectImpl {
+class SpliceCardEffectImpl extends ContinuousEffectImpl implements SpliceCardEffect {
 
-    SpliceOntoInstantOrSorceryEffect() {
+    private final FilterObject filter;
+
+    public SpliceCardEffectImpl(FilterObject filter) {
         super(Duration.WhileOnBattlefield, Outcome.Copy);
-        staticText = "Splice onto Instant or Sorcery";
+        this.effectType = EffectType.SPLICE;
+        this.filter = filter;
+        staticText = "Splice onto " + filter;
     }
 
-    private SpliceOntoInstantOrSorceryEffect(final SpliceOntoInstantOrSorceryEffect effect) {
+    private SpliceCardEffectImpl(final SpliceCardEffectImpl effect) {
         super(effect);
+        this.filter = effect.filter;
     }
 
     @Override
-    public SpliceOntoInstantOrSorceryEffect copy() {
-        return new SpliceOntoInstantOrSorceryEffect(this);
+    public SpliceCardEffectImpl copy() {
+        return new SpliceCardEffectImpl(this);
+    }
+
+    @Override
+    public final boolean apply(Game game, Ability source) {
+        return false;
     }
 
     @Override
@@ -150,7 +172,7 @@ class SpliceOntoInstantOrSorceryEffect extends SpliceCardEffectImpl {
                 splicedAbility.setSpellAbilityType(SpellAbilityType.SPLICE);
                 splicedAbility.setSourceId(abilityToModify.getSourceId());
                 spell.addSpellAbility(splicedAbility);
-                for (Iterator it = ((SpliceOntoInstantOrSorceryAbility) source).getSpliceCosts().iterator(); it.hasNext(); ) {
+                for (Iterator it = ((SpliceAbility) source).getSpliceCosts().iterator(); it.hasNext();) {
                     Cost cost = (Cost) it.next();
                     if (cost instanceof ManaCost) {
                         spell.getSpellAbility().getManaCostsToPay().add((ManaCost) cost.copy());
@@ -167,7 +189,7 @@ class SpliceOntoInstantOrSorceryEffect extends SpliceCardEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         MageObject object = game.getObject(abilityToModify.getSourceId());
-        if (object != null && object.isInstantOrSorcery(game)) {
+        if (object != null && filter.match(object, game)) {
             return spliceSpellCanBeActivated(source, game);
         }
         return false;
