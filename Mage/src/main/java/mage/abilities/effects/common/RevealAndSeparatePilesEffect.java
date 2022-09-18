@@ -117,10 +117,10 @@ public class RevealAndSeparatePilesEffect extends OneShotEffect {
         pile2.addAll(cards.getCards(game));
 
         Player choosingPlayer = this.getExecutingPlayer(controller, game, source, playerWhoChooses, "choose the piles");
-        boolean choice = choosingPlayer.choosePile(outcome, "Choose a pile to put into " + targetZone + ".", pile1, pile2, game);
+        boolean choice = choosingPlayer.choosePile(outcome, "Choose a pile to put into hand.", pile1, pile2, game);
 
-        Zone pile1Zone = choice ? targetZone : Zone.HAND;
-        Zone pile2Zone = choice ? Zone.HAND : targetZone;
+        Zone pile1Zone = choice ? Zone.HAND : targetZone;
+        Zone pile2Zone = choice ? targetZone : Zone.HAND;
 
         game.informPlayers("Pile 1, going to " + pile1Zone + ": " + (pile1.isEmpty() ? " (none)" : pile1.stream().map(MageObject::getName).collect(Collectors.joining(", "))));
         cards.clear();
