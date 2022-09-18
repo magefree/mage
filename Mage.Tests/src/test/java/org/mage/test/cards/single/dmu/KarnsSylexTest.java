@@ -2,6 +2,7 @@ package org.mage.test.cards.single.dmu;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -30,7 +31,16 @@ public class KarnsSylexTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, tezzeretsGambit);
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
-        execute();
+        try {
+            execute();
+
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Can't find ability to activate command: Cast Tezzeret's Gambit")) {
+                Assert.fail("Should have thrown error about not being able to cast Tezzeret's Gambit, but got:\n" + e.getMessage());
+            }
+        }
+
         assertLife(playerA, 20);
     }
 
