@@ -87,6 +87,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Exocrine", 76, Rarity.RARE, mage.cards.e.Exocrine.class));
         cards.add(new SetCardInfo("Exotic Orchard", 278, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Explore", 213, Rarity.COMMON, mage.cards.e.Explore.class));
+        cards.add(new SetCardInfo("Exterminatus", 120, Rarity.RARE, mage.cards.e.Exterminatus.class));
         cards.add(new SetCardInfo("Fabricate", 181, Rarity.RARE, mage.cards.f.Fabricate.class));
         cards.add(new SetCardInfo("Farseek", 214, Rarity.COMMON, mage.cards.f.Farseek.class));
         cards.add(new SetCardInfo("Fell the Mighty", 186, Rarity.RARE, mage.cards.f.FellTheMighty.class));
