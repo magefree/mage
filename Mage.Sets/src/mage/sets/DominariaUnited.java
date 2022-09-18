@@ -150,6 +150,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Joint Exploration", 56, Rarity.UNCOMMON, mage.cards.j.JointExploration.class));
         cards.add(new SetCardInfo("Juniper Order Rootweaver", 22, Rarity.COMMON, mage.cards.j.JuniperOrderRootweaver.class));
         cards.add(new SetCardInfo("Karn, Living Legacy", 1, Rarity.MYTHIC, mage.cards.k.KarnLivingLegacy.class));
+        cards.add(new SetCardInfo("Karn's Sylex", 234, Rarity.MYTHIC, mage.cards.k.KarnsSylex.class));
         cards.add(new SetCardInfo("Karplusan Forest", 250, Rarity.RARE, mage.cards.k.KarplusanForest.class));
         cards.add(new SetCardInfo("Keldon Flamesage", 135, Rarity.RARE, mage.cards.k.KeldonFlamesage.class));
         cards.add(new SetCardInfo("Keldon Strike Team", 136, Rarity.COMMON, mage.cards.k.KeldonStrikeTeam.class));

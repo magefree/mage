@@ -83,6 +83,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     private transient ManaCost currentUnpaidMana;
 
+    // For stopping infinite loops when trying to pay Phyrexian mana when the player can't spend life and no other sources are available
+    private transient boolean alreadyTryingToPayPhyrexian;
+
     public ComputerPlayer(String name, RangeOfInfluence range) {
         super(name, range);
         human = false;
@@ -1664,9 +1667,16 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
         }
 
+        if (alreadyTryingToPayPhyrexian) {
+            return false;
+        }
+
         // pay phyrexian life costs
         if (cost.isPhyrexian()) {
-            return cost.pay(ability, game, ability, playerId, false, null) || approvingObject != null;
+            alreadyTryingToPayPhyrexian = true;
+            boolean paidPhyrexian = cost.pay(ability, game, ability, playerId, false, null) || approvingObject != null;
+            alreadyTryingToPayPhyrexian = false;
+            return paidPhyrexian;
         }
 
         // pay special mana like convoke cost (tap for pay)
