@@ -195,6 +195,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Their Name Is Death", 62, Rarity.RARE, mage.cards.t.TheirNameIsDeath.class));
         cards.add(new SetCardInfo("Thornwood Falls", 302, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
         cards.add(new SetCardInfo("Thought Vessel", 259, Rarity.COMMON, mage.cards.t.ThoughtVessel.class));
+        cards.add(new SetCardInfo("Thunderhawk Gunship", 167, Rarity.RARE, mage.cards.t.ThunderhawkGunship.class));
         cards.add(new SetCardInfo("Thunderwolf Cavalry", 16, Rarity.UNCOMMON, mage.cards.t.ThunderwolfCavalry.class));
         cards.add(new SetCardInfo("Tranquil Cove", 303, Rarity.COMMON, mage.cards.t.TranquilCove.class));
         cards.add(new SetCardInfo("Trygon Prime", 143, Rarity.UNCOMMON, mage.cards.t.TrygonPrime.class));
