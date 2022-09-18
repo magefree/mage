@@ -36,8 +36,8 @@ public class ThreefoldSignalTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, esperSojourners);
-        setChoice(playerA, "Yes");
-        setChoice(playerA, "No");
+        setChoice(playerA, true);
+        setChoice(playerA, false);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -155,17 +155,17 @@ public class ThreefoldSignalTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "fused Beck // Call");
-        setChoice(playerA, "Yes"); // Pay replicate once
-        setChoice(playerA, "No"); // Don't pay replicate twice
+        setChoice(playerA, true); // Pay replicate once
+        setChoice(playerA, false); // Don't pay replicate twice
 
         // Copy resolves, first Beck then call
         setChoice(playerA, "Whenever", 3); // 4 triggers total, pick order for 3 and the 4th is auto-chosen
-        setChoice(playerA, "Yes", 4); // Draw cards 4 times
+        setChoice(playerA, true, 4); // Draw cards 4 times
 
         // Original resolves
         // There will be 8 ETB triggers. 4 creatures enter but there are 2 instances of Beck that were cast
         setChoice(playerA, "Whenever", 7); // 8 triggers total, pick order for 7 and the 8th is auto-chosen
-        setChoice(playerA, "Yes", 8); // Draw cards 8 times
+        setChoice(playerA, true, 8); // Draw cards 8 times
 
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
@@ -203,8 +203,8 @@ public class ThreefoldSignalTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "fused Flesh // Blood");
-        setChoice(playerA, "Yes"); // Pay replicate once
-        setChoice(playerA, "No"); // Don't pay replicate twice
+        setChoice(playerA, true); // Pay replicate once
+        setChoice(playerA, false); // Don't pay replicate twice
         // Flesh
         addTarget(playerA, griffin);
         addTarget(playerA, lion);
@@ -214,8 +214,8 @@ public class ThreefoldSignalTest extends CardTestPlayerBase {
         // Copy of Flesh
         // TODO: Currently not given option to change targets
         // Copy of Blood
-        setChoice(playerA, "No"); // Don't change target from lion
-        setChoice(playerA, "No"); // Don't change target from PlayerB
+        setChoice(playerA, false); // Don't change target from lion
+        setChoice(playerA, false); // Don't change target from PlayerB
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
