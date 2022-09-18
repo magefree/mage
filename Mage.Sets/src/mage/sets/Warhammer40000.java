@@ -210,6 +210,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Vault of Whispers", 305, Rarity.COMMON, mage.cards.v.VaultOfWhispers.class));
         cards.add(new SetCardInfo("Venomcrawler", 68, Rarity.RARE, mage.cards.v.Venomcrawler.class));
         cards.add(new SetCardInfo("Venomthrope", 147, Rarity.UNCOMMON, mage.cards.v.Venomthrope.class));
+        cards.add(new SetCardInfo("Vexilus Praetor", 19, Rarity.RARE, mage.cards.v.VexilusPraetor.class));
         cards.add(new SetCardInfo("Warstorm Surge", 209, Rarity.RARE, mage.cards.w.WarstormSurge.class));
         cards.add(new SetCardInfo("Wayfarer's Bauble", 261, Rarity.COMMON, mage.cards.w.WayfarersBauble.class));
         cards.add(new SetCardInfo("Winged Hive Tyrant", 148, Rarity.RARE, mage.cards.w.WingedHiveTyrant.class));
