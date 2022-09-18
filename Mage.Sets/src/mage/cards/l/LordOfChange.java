@@ -29,7 +29,7 @@ public final class LordOfChange extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Ward {3}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{3}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{3}"), false));
 
         // Architect of Deception -- When Lord of Change enters the battlefield, draw three cards.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(3)).withFlavorWord("Architect of Deception"));
