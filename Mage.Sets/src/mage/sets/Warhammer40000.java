@@ -45,6 +45,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Blight Grenade", 31, Rarity.RARE, mage.cards.b.BlightGrenade.class));
         cards.add(new SetCardInfo("Blood for the Blood God!", 108, Rarity.RARE, mage.cards.b.BloodForTheBloodGod.class));
         cards.add(new SetCardInfo("Bloodcrusher of Khorne", 72, Rarity.UNCOMMON, mage.cards.b.BloodcrusherOfKhorne.class));
+        cards.add(new SetCardInfo("Bone Sabres", 88, Rarity.RARE, mage.cards.b.BoneSabres.class));
         cards.add(new SetCardInfo("Brainstorm", 192, Rarity.COMMON, mage.cards.b.Brainstorm.class));
         cards.add(new SetCardInfo("Bred for the Hunt", 222, Rarity.UNCOMMON, mage.cards.b.BredForTheHunt.class));
         cards.add(new SetCardInfo("Broodlord", 89, Rarity.RARE, mage.cards.b.Broodlord.class));
