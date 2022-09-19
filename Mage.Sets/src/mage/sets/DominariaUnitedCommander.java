@@ -192,6 +192,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("The Reaver Cleaver", 84, Rarity.RARE, mage.cards.t.TheReaverCleaver.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thrill of Possibility", 127, Rarity.COMMON, mage.cards.t.ThrillOfPossibility.class));
         cards.add(new SetCardInfo("Time Wipe", 173, Rarity.RARE, mage.cards.t.TimeWipe.class));
+        cards.add(new SetCardInfo("Tobias, Doomed Conqueror", 45, Rarity.UNCOMMON, mage.cards.t.TobiasDoomedConqueror.class));
         cards.add(new SetCardInfo("Transguild Courier", 194, Rarity.UNCOMMON, mage.cards.t.TransguildCourier.class));
         cards.add(new SetCardInfo("Traxos, Scourge of Kroog", 195, Rarity.RARE, mage.cards.t.TraxosScourgeOfKroog.class));
         cards.add(new SetCardInfo("Two-Headed Hellkite", 14, Rarity.RARE, mage.cards.t.TwoHeadedHellkite.class));
