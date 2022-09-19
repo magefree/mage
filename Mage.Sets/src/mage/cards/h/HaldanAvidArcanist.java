@@ -63,11 +63,6 @@ class HaldanAvidArcanistCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public HaldanAvidArcanistCastFromExileEffect copy() {
         return new HaldanAvidArcanistCastFromExileEffect(this);
     }
@@ -93,11 +88,6 @@ class HaldanAvidArcanistSpendAnyManaEffect extends AsThoughEffectImpl implements
 
     private HaldanAvidArcanistSpendAnyManaEffect(final HaldanAvidArcanistSpendAnyManaEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

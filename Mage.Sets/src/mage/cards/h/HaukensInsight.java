@@ -117,11 +117,6 @@ class HaukensInsightLookEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         UUID cardId = getTargetPointer().getFirst(game, source);
         if (cardId == null) {
@@ -146,11 +141,6 @@ class HaukensInsightPlayEffect extends AsThoughEffectImpl {
     @Override
     public HaukensInsightPlayEffect copy() {
         return new HaukensInsightPlayEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

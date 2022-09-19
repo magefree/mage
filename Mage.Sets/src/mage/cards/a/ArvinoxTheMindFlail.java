@@ -127,11 +127,6 @@ class ArvinoxTheMindFlailCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public ArvinoxTheMindFlailCastFromExileEffect copy() {
         return new ArvinoxTheMindFlailCastFromExileEffect(this);
     }
@@ -170,11 +165,6 @@ class ArvinoxTheMindFlailSpendAnyManaEffect extends AsThoughEffectImpl implement
 
     private ArvinoxTheMindFlailSpendAnyManaEffect(final ArvinoxTheMindFlailSpendAnyManaEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -219,11 +209,6 @@ class ArvinoxTheMindFlailLookEffect extends AsThoughEffectImpl {
     private ArvinoxTheMindFlailLookEffect(final ArvinoxTheMindFlailLookEffect effect) {
         super(effect);
         this.authorizedPlayerId = effect.authorizedPlayerId;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

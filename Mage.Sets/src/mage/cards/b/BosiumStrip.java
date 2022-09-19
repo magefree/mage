@@ -62,11 +62,6 @@ class BosiumStripCastFromGraveyardEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public BosiumStripCastFromGraveyardEffect copy() {
         return new BosiumStripCastFromGraveyardEffect(this);
     }

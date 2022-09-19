@@ -49,11 +49,6 @@ class DeadfallEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public DeadfallEffect copy() {
         return new DeadfallEffect(this);
     }

@@ -66,11 +66,6 @@ class VizierOfTheMenagerieManaEffect extends AsThoughEffectImpl implements AsTho
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public VizierOfTheMenagerieManaEffect copy() {
         return new VizierOfTheMenagerieManaEffect(this);
     }

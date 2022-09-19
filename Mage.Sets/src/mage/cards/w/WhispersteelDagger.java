@@ -71,11 +71,6 @@ class WhispersteelDaggerCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public WhispersteelDaggerCastFromExileEffect copy() {
         return new WhispersteelDaggerCastFromExileEffect(this);
     }
@@ -119,11 +114,6 @@ class WhispersteelDaggerSpendAnyManaEffect extends AsThoughEffectImpl implements
 
     private WhispersteelDaggerSpendAnyManaEffect(final WhispersteelDaggerSpendAnyManaEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

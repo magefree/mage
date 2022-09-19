@@ -118,11 +118,6 @@ class CemeteryIlluminatorPlayTopEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         // Same checks as in PlayTheTopCardEffect
         // Once per turn clause checked by Watcher same as Lurrus of the Dream Den

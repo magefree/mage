@@ -103,11 +103,6 @@ class SparkOfCreativityPlayEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public SparkOfCreativityPlayEffect copy() {
         return new SparkOfCreativityPlayEffect(this);
     }

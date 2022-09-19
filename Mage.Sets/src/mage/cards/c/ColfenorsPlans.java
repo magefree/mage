@@ -105,11 +105,6 @@ class ColfenorsPlansPlayCardEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public ColfenorsPlansPlayCardEffect copy() {
         return new ColfenorsPlansPlayCardEffect(this);
     }
@@ -133,11 +128,6 @@ class ColfenorsPlansLookAtCardEffect extends AsThoughEffectImpl {
 
     public ColfenorsPlansLookAtCardEffect(final ColfenorsPlansLookAtCardEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

@@ -95,11 +95,6 @@ class HedonistsTrovePlayLandEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public HedonistsTrovePlayLandEffect copy() {
         return new HedonistsTrovePlayLandEffect(this);
     }
@@ -130,11 +125,6 @@ class HedonistsTroveCastNonlandCardsEffect extends AsThoughEffectImpl {
 
     private HedonistsTroveCastNonlandCardsEffect(final HedonistsTroveCastNonlandCardsEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

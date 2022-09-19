@@ -82,11 +82,6 @@ class FalcoSparaPactweaverEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public FalcoSparaPactweaverEffect copy() {
         return new FalcoSparaPactweaverEffect(this);
     }

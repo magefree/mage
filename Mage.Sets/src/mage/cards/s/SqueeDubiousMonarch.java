@@ -84,11 +84,6 @@ class SqueeDubiousMonarchEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         if (!source.getSourceId().equals(objectId)
                 || !source.isControlledBy(affectedControllerId)

@@ -95,11 +95,6 @@ class RuxaPatientProfessorEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public RuxaPatientProfessorEffect copy() {
         return new RuxaPatientProfessorEffect(this);
     }

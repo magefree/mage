@@ -131,11 +131,6 @@ class RogueClassLookEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public RogueClassLookEffect copy() {
         return new RogueClassLookEffect(this);
     }
@@ -162,11 +157,6 @@ class RogueClassPlayEffect extends AsThoughEffectImpl {
 
     private RogueClassPlayEffect(final RogueClassPlayEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -206,11 +196,6 @@ class RogueClassManaEffect extends AsThoughEffectImpl implements AsThoughManaEff
 
     private RogueClassManaEffect(final RogueClassManaEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

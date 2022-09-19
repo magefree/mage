@@ -198,11 +198,6 @@ class ShareTheSpoilsPlayExiledCardEffect extends AsThoughEffectImpl {
     public ShareTheSpoilsPlayExiledCardEffect copy() {
         return new ShareTheSpoilsPlayExiledCardEffect(this);
     }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
 }
 
 //-- Spend mana as any color --//
@@ -214,11 +209,6 @@ class ShareTheSpoilsSpendAnyManaEffect extends AsThoughEffectImpl implements AsT
 
     private ShareTheSpoilsSpendAnyManaEffect(final ShareTheSpoilsSpendAnyManaEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

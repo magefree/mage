@@ -54,11 +54,6 @@ class UrDragoEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public UrDragoEffect copy() {
         return new UrDragoEffect(this);
     }

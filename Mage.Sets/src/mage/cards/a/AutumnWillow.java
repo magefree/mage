@@ -59,11 +59,6 @@ class AutumnWillowEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public AutumnWillowEffect copy() {
         return new AutumnWillowEffect(this);
     }

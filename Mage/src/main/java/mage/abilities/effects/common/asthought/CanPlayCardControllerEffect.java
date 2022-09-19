@@ -47,11 +47,6 @@ public class CanPlayCardControllerEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public CanPlayCardControllerEffect copy() {
         return new CanPlayCardControllerEffect(this);
     }

@@ -65,11 +65,6 @@ class SilasRennSeekerAdeptPlayEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public SilasRennSeekerAdeptPlayEffect copy() {
         return new SilasRennSeekerAdeptPlayEffect(this);
     }

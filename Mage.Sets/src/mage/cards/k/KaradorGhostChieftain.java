@@ -107,11 +107,6 @@ class KaradorGhostChieftainCastFromGraveyardEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public KaradorGhostChieftainCastFromGraveyardEffect copy() {
         return new KaradorGhostChieftainCastFromGraveyardEffect(this);
     }

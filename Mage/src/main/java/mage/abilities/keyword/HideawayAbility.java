@@ -121,11 +121,6 @@ class HideawayLookAtFaceDownCardEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public HideawayLookAtFaceDownCardEffect copy() {
         return new HideawayLookAtFaceDownCardEffect(this);
     }

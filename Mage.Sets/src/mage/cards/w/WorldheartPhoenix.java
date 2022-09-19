@@ -69,11 +69,6 @@ public final class WorldheartPhoenix extends CardImpl {
         }
 
         @Override
-        public boolean apply(Game game, Ability source) {
-            return true;
-        }
-
-        @Override
         public WorldheartPhoenixPlayEffect copy() {
             return new WorldheartPhoenixPlayEffect(this);
         }

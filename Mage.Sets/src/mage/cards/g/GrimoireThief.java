@@ -128,11 +128,6 @@ class GrimoireThiefLookEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public GrimoireThiefLookEffect copy() {
         return new GrimoireThiefLookEffect(this);
     }

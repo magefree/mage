@@ -139,9 +139,6 @@ class PredatorsHourPlayFromExileEffect extends AsThoughEffectImpl {
     private PredatorsHourPlayFromExileEffect(final PredatorsHourPlayFromExileEffect effect) { super(effect); }
 
     @Override
-    public boolean apply(Game game, Ability source) { return true; }
-
-    @Override
     public PredatorsHourPlayFromExileEffect copy() { return new PredatorsHourPlayFromExileEffect(this); }
 
     @Override
@@ -174,9 +171,6 @@ class PredatorsHourSpendAnyManaEffect extends AsThoughEffectImpl implements AsTh
     }
 
     private PredatorsHourSpendAnyManaEffect(final PredatorsHourSpendAnyManaEffect effect) { super(effect); }
-
-    @Override
-    public boolean apply(Game game, Ability source) { return true; }
 
     @Override
     public PredatorsHourSpendAnyManaEffect copy() { return new PredatorsHourSpendAnyManaEffect(this); }
@@ -220,9 +214,6 @@ class PredatorsHourLookEffect extends AsThoughEffectImpl {
         super(effect);
         this.authorizedPlayerId = effect.authorizedPlayerId;
     }
-
-    @Override
-    public boolean apply(Game game, Ability source) { return true; }
 
     @Override
     public PredatorsHourLookEffect copy() { return new PredatorsHourLookEffect(this); }

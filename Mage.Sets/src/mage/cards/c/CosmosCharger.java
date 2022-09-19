@@ -95,11 +95,6 @@ class CosmosChargerAllowForetellAnytime extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public CosmosChargerAllowForetellAnytime copy() {
         return new CosmosChargerAllowForetellAnytime(this);
     }

@@ -63,11 +63,6 @@ class StreetSavvyEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public StreetSavvyEffect copy() {
         return new StreetSavvyEffect(this);
     }

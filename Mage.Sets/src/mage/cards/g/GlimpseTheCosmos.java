@@ -70,11 +70,6 @@ class GlimpseTheCosmosPlayEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public GlimpseTheCosmosPlayEffect copy() {
         return new GlimpseTheCosmosPlayEffect(this);
     }

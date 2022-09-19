@@ -105,11 +105,6 @@ class PlaneswalkersMischiefCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public PlaneswalkersMischiefCastFromExileEffect copy() {
         return new PlaneswalkersMischiefCastFromExileEffect(this);
     }

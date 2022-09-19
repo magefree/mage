@@ -111,11 +111,6 @@ class CunningAbductionSpendAnyManaEffect extends AsThoughEffectImpl implements A
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public CunningAbductionSpendAnyManaEffect copy() {
         return new CunningAbductionSpendAnyManaEffect(this);
     }

@@ -108,11 +108,6 @@ class KheruMindEaterEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public KheruMindEaterEffect copy() {
         return new KheruMindEaterEffect(this);
     }
@@ -137,11 +132,6 @@ class KheruMindEaterLookAtCardEffect extends AsThoughEffectImpl {
 
     public KheruMindEaterLookAtCardEffect(final KheruMindEaterLookAtCardEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

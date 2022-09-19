@@ -40,11 +40,6 @@ public class CastAsThoughItHadFlashAllEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public CastAsThoughItHadFlashAllEffect copy() {
         return new CastAsThoughItHadFlashAllEffect(this);
     }

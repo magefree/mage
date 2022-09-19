@@ -68,11 +68,6 @@ class HaakonStromgaldScourgePlayEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public HaakonStromgaldScourgePlayEffect copy() {
         return new HaakonStromgaldScourgePlayEffect(this);
     }
@@ -138,11 +133,6 @@ class HaakonPlayKnightsFromGraveyardEffect extends AsThoughEffectImpl {
 
     public HaakonPlayKnightsFromGraveyardEffect(final HaakonPlayKnightsFromGraveyardEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

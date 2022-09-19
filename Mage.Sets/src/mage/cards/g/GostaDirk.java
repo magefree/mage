@@ -55,11 +55,6 @@ class GostaDirkEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public GostaDirkEffect copy() {
         return new GostaDirkEffect(this);
     }

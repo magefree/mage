@@ -42,11 +42,6 @@ public class YouMaySpendManaAsAnyColorToCastTargetEffect extends AsThoughEffectI
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public YouMaySpendManaAsAnyColorToCastTargetEffect copy() {
         return new YouMaySpendManaAsAnyColorToCastTargetEffect(this);
     }

@@ -80,11 +80,6 @@ class DemonicEmbracePlayEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public DemonicEmbracePlayEffect copy() {
         return new DemonicEmbracePlayEffect(this);
     }

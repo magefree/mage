@@ -109,11 +109,6 @@ class PraetorsGraspPlayEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public PraetorsGraspPlayEffect copy() {
         return new PraetorsGraspPlayEffect(this);
     }
@@ -153,11 +148,6 @@ class PraetorsGraspRevealEffect extends AsThoughEffectImpl {
     public PraetorsGraspRevealEffect(final PraetorsGraspRevealEffect effect) {
         super(effect);
         this.cardId = effect.cardId;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

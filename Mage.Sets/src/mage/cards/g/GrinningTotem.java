@@ -122,11 +122,6 @@ class GrinningTotemMayPlayEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         return source.isControlledBy(affectedControllerId)
                 && sourceId.equals(getTargetPointer().getFirst(game, source));

@@ -67,11 +67,6 @@ class TeferiMasterOfTimeActivationEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public TeferiMasterOfTimeActivationEffect copy() {
         return new TeferiMasterOfTimeActivationEffect(this);
     }

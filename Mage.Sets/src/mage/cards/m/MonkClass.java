@@ -149,9 +149,4 @@ class MonkClassCastEffect extends AsThoughEffectImpl {
     public MonkClassCastEffect copy() {
         return new MonkClassCastEffect(this);
     }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
 }

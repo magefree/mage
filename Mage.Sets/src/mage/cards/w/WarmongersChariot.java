@@ -56,11 +56,6 @@ class WarmongersChariotEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public WarmongersChariotEffect copy() {
         return new WarmongersChariotEffect(this);
     }

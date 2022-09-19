@@ -127,11 +127,6 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public AminatousAuguryCastFromExileEffect copy() {
         return new AminatousAuguryCastFromExileEffect(this);
     }

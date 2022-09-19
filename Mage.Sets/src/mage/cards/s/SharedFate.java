@@ -105,11 +105,6 @@ class SharedFatePlayEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public SharedFatePlayEffect copy() {
         return new SharedFatePlayEffect(this);
     }
@@ -135,11 +130,6 @@ class SharedFateLookEffect extends AsThoughEffectImpl {
 
     public SharedFateLookEffect(final SharedFateLookEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

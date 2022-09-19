@@ -65,11 +65,6 @@ class ScourgeOfNelTothPlayEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public ScourgeOfNelTothPlayEffect copy() {
         return new ScourgeOfNelTothPlayEffect(this);
     }

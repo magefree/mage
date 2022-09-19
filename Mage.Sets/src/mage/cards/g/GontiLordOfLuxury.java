@@ -136,11 +136,6 @@ class GontiLordOfLuxuryCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public GontiLordOfLuxuryCastFromExileEffect copy() {
         return new GontiLordOfLuxuryCastFromExileEffect(this);
     }
@@ -177,11 +172,6 @@ class GontiLordOfLuxurySpendAnyManaEffect extends AsThoughEffectImpl implements 
 
     private GontiLordOfLuxurySpendAnyManaEffect(final GontiLordOfLuxurySpendAnyManaEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -226,11 +216,6 @@ class GontiLordOfLuxuryLookEffect extends AsThoughEffectImpl {
     private GontiLordOfLuxuryLookEffect(final GontiLordOfLuxuryLookEffect effect) {
         super(effect);
         this.authorizedPlayerId = effect.authorizedPlayerId;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

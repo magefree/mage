@@ -287,11 +287,6 @@ class TheOmenkeelPlayFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public TheOmenkeelPlayFromExileEffect copy() {
         return new TheOmenkeelPlayFromExileEffect(this);
     }

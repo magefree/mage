@@ -110,11 +110,6 @@ class IntetTheDreamerAsThoughEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public IntetTheDreamerAsThoughEffect copy() {
         return new IntetTheDreamerAsThoughEffect(this);
     }
@@ -167,11 +162,6 @@ class IntetTheDreamerLookEffect extends AsThoughEffectImpl {
 
     public IntetTheDreamerLookEffect(final IntetTheDreamerLookEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

@@ -59,11 +59,6 @@ class MisthollowGriffinPlayEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public MisthollowGriffinPlayEffect copy() {
         return new MisthollowGriffinPlayEffect(this);
     }

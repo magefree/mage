@@ -45,6 +45,12 @@ public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements
         return applies(objectId, source, playerId, game);
     }
 
+    // TODO: Is the override in ConditionalAsThoughEffect needed?
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
     @Override
     public AsThoughEffectType getAsThoughEffectType() {
         return type;

@@ -84,11 +84,6 @@ class SkyclaveShadeEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public SkyclaveShadeEffect copy() {
         return new SkyclaveShadeEffect(this);
     }
