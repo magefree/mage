@@ -3,11 +3,11 @@ package mage.cards.u;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.AdditiveDynamicValue;
+import mage.abilities.dynamicvalue.IntPlusDynamicValue;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -24,7 +24,8 @@ import java.util.UUID;
 public final class UrborgLhurgoyf extends CardImpl {
 
     private static final DynamicValue powerValue = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE);
-    private static final DynamicValue toughnessValue = new AdditiveDynamicValue(powerValue, StaticValue.get(1));
+    private static final DynamicValue toughnessValue = new IntPlusDynamicValue(1, powerValue);
+    private static final DynamicValue millValue = new MultipliedValue(MultikickerCount.instance, 3);
 
     public UrborgLhurgoyf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
@@ -40,7 +41,7 @@ public final class UrborgLhurgoyf extends CardImpl {
 
         // As Urborg Lhurgoyf enters the battlefield, mill three cards for each time it was kicked.
         this.addAbility(new EntersBattlefieldAbility(
-                new MillCardsControllerEffect(MultikickerCount.instance), null,
+                new MillCardsControllerEffect(millValue), null,
                 "As {this} enters the battlefield, " +
                         "mill three cards for each time it was kicked.", ""
         ));
