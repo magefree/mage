@@ -80,13 +80,13 @@ class ScoutsWarningAsThoughEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (watcher.isScoutsWarningSpellActive(source.getSourceId(), zoneChangeCounter)) {
-            Card card = game.getCard(sourceId);
-            if (card != null && card.isCreature(game) && source.isControlledBy(affectedControllerId)) {
-                return true;
-            }
+        if (!watcher.isScoutsWarningSpellActive(source.getSourceId(), zoneChangeCounter)) {
+            return false;
         }
-        return false;
+        Card card = game.getCard(sourceId);
+        return card != null
+                && card.isCreature(game)
+                && source.isControlledBy(affectedControllerId);
     }
 
 }

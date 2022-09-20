@@ -150,7 +150,9 @@ class PredatorsHourPlayFromExileEffect extends AsThoughEffectImpl {
             return false;
         }
         Card theCard = game.getCard(objectId);
-        if (theCard == null ) { return false; }
+        if (theCard == null ) {
+            return false;
+        }
 
         // for split cards
         objectId = theCard.getMainCard().getId();
@@ -223,7 +225,9 @@ class PredatorsHourLookEffect extends AsThoughEffectImpl {
         UUID cardId = getTargetPointer().getFirst(game, source);
 
         // card is no longer in the origin zone, effect can be discarded
-        if (cardId == null) { this.discard(); }
+        if (cardId == null) {
+            this.discard();
+        }
 
         return affectedControllerId.equals(authorizedPlayerId) && objectId.equals(cardId);
     }
