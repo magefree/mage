@@ -80,14 +80,11 @@ class MoveCounterFromTargetToTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent fromPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (fromPermanent != null && fromPermanent.getCounters(game).getCount(CounterType.P1P1) > 0) {
-            Permanent toPermanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-            if (toPermanent != null) {
-                fromPermanent.removeCounters(CounterType.P1P1.createInstance(), source, game);
-                toPermanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
-                return true;
-            }
+        Permanent toPermanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
+        if (fromPermanent == null || toPermanent == null || fromPermanent.getCounters(game).getCount(CounterType.P1P1) < 1) {
+            return false;
         }
-        return false;
+        fromPermanent.removeCounters(CounterType.P1P1.createInstance(), source, game);
+        return toPermanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
     }
 }

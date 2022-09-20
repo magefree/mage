@@ -2258,9 +2258,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 );
                 addedAllEvent.setFlag(addingAllEvent.getFlag());
                 game.fireEvent(addedAllEvent);
-                if (!game.isSimulation()) {
-                    game.informPlayers(CardUtil.getAddRemoveCountersLogMessage(game, source, playerAddingCounters, finalAmount, counter.getName(), this.getLogName(), false));
-                }
+                CardUtil.informPlayersCounterMessage(game, source, playerAddingCounters, finalAmount, counter.getName(), this.getLogName(), false);
             }
         } else {
             returnCode = false;
@@ -2287,9 +2285,9 @@ public abstract class PlayerImpl implements Player, Serializable {
         event.setData(name);
         event.setAmount(finalAmount);
         game.fireEvent(event);
-        if (finalAmount > 0 && !game.isSimulation()) {
+        if (finalAmount > 0) {
             UUID playerRemovingCounters = source == null ? null : source.getControllerId();
-            game.informPlayers(CardUtil.getAddRemoveCountersLogMessage(game, source, playerRemovingCounters, finalAmount, name, this.getLogName(), true));
+            CardUtil.informPlayersCounterMessage(game, source, playerRemovingCounters, finalAmount, name, this.getLogName(), true);
         }
     }
 

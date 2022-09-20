@@ -753,8 +753,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 GameEvent addedAllEvent = GameEvent.getEvent(GameEvent.EventType.COUNTERS_ADDED, objectId, source, playerAddingCounters, counter.getName(), amount);
                 addedAllEvent.setFlag(isEffectFlag);
                 game.fireEvent(addedAllEvent);
-                if (informPlayers && !game.isSimulation()) {
-                    game.informPlayers(CardUtil.getAddRemoveCountersLogMessage(game, source, playerAddingCounters, finalAmount, counter.getName(), this.getLogName(), false));
+                if (informPlayers) {
+                    CardUtil.informPlayersCounterMessage(game, source, playerAddingCounters, finalAmount, counter.getName(), this.getLogName(), false);
                 }
             }
         } else {
@@ -787,9 +787,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         event.setData(name);
         event.setAmount(finalAmount);
         game.fireEvent(event);
-        if (finalAmount > 0 && !game.isSimulation()) {
+        if (finalAmount > 0) {
             UUID playerRemovingCounter = source == null ? null : source.getControllerId();
-            game.informPlayers(CardUtil.getAddRemoveCountersLogMessage(game, source, playerRemovingCounter, finalAmount, name, this.getLogName(), true));
+            CardUtil.informPlayersCounterMessage(game, source, playerRemovingCounter, finalAmount, name, this.getLogName(), true);
         }
     }
 

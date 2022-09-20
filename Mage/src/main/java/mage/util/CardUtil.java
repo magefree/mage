@@ -1626,7 +1626,7 @@ public final class CardUtil {
         }
     }
 
-    public static String getAddRemoveCountersLogMessage(Game game, Ability source, UUID playerId, int numCounters, String counterName, String targetName, boolean remove) {
+    public static void informPlayersCounterMessage(Game game, Ability source, UUID playerId, int numCounters, String counterName, String targetName, boolean remove) {
         StringBuilder sb = new StringBuilder();
         MageObject sourceObject = game.getObject(source);
         if (sourceObject != null) {
@@ -1654,6 +1654,6 @@ public final class CardUtil {
             sb.append(" counters on ");
         }
         sb.append(targetName);
-        return sb.toString();
+        game.informPlayers(sb.toString());
     }
 }
