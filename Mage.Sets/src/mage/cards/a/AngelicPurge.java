@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -35,7 +34,7 @@ public final class AngelicPurge extends CardImpl {
 
         // Exile target artifact, creature, or enchantment.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter).withChooseHint("to exile"));
     }
 
     private AngelicPurge(final AngelicPurge card) {
