@@ -84,8 +84,12 @@ public class Spell extends StackObjectImpl implements Card {
         this.ability = ability;
         this.ability.setControllerId(controllerId);
         if (ability.getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
-            spellAbilities.add(((SplitCard) affectedCard).getLeftHalfCard().getSpellAbility().copy());
-            spellAbilities.add(((SplitCard) affectedCard).getRightHalfCard().getSpellAbility().copy());
+            SpellAbility left = ((SplitCard) affectedCard).getLeftHalfCard().getSpellAbility().copy();
+            SpellAbility right = ((SplitCard) affectedCard).getRightHalfCard().getSpellAbility().copy();
+            left.setSourceId(ability.getSourceId());
+            right.setSourceId(ability.getSourceId());
+            spellAbilities.add(left);
+            spellAbilities.add(right);
         } else {
             spellAbilities.add(ability);
         }
