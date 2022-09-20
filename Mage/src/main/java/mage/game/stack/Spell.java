@@ -44,7 +44,6 @@ public class Spell extends StackObjectImpl implements Card {
     private static final Logger logger = Logger.getLogger(Spell.class);
 
     private final List<SpellAbility> spellAbilities = new ArrayList<>();
-    private final List<Card> spellCards = new ArrayList<>();
 
     private final Card card;
     private final ObjectColor color;
@@ -85,12 +84,9 @@ public class Spell extends StackObjectImpl implements Card {
         this.ability = ability;
         this.ability.setControllerId(controllerId);
         if (ability.getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
-            spellCards.add(((SplitCard) affectedCard).getLeftHalfCard());
             spellAbilities.add(((SplitCard) affectedCard).getLeftHalfCard().getSpellAbility().copy());
-            spellCards.add(((SplitCard) affectedCard).getRightHalfCard());
             spellAbilities.add(((SplitCard) affectedCard).getRightHalfCard().getSpellAbility().copy());
         } else {
-            spellCards.add(affectedCard);
             spellAbilities.add(ability);
         }
         this.controllerId = controllerId;
@@ -104,19 +100,12 @@ public class Spell extends StackObjectImpl implements Card {
         for (SpellAbility spellAbility : spell.spellAbilities) {
             this.spellAbilities.add(spellAbility.copy());
         }
-        for (Card spellCard : spell.spellCards) {
-            this.spellCards.add(spellCard.copy());
-        }
         if (spell.spellAbilities.get(0).equals(spell.ability)) {
             this.ability = this.spellAbilities.get(0);
         } else {
             this.ability = spell.ability.copy();
         }
-        if (spell.spellCards.get(0).equals(spell.card)) {
-            this.card = spellCards.get(0);
-        } else {
-            this.card = spell.card.copy();
-        }
+        this.card = spell.card.copy();
 
         this.fromZone = spell.fromZone;
         this.color = spell.color.copy();
