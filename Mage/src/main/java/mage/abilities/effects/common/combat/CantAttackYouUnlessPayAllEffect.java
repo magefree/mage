@@ -2,7 +2,7 @@
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.Cost;
 import mage.abilities.effects.PayCostToAttackBlockEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -14,32 +14,32 @@ import mage.game.permanent.Permanent;
 /**
  * @author LevelX2
  */
-public class CantAttackYouUnlessPayManaAllEffect extends PayCostToAttackBlockEffectImpl {
+public class CantAttackYouUnlessPayAllEffect extends PayCostToAttackBlockEffectImpl {
 
     private final FilterCreaturePermanent filterCreaturePermanent;
     private final boolean payAlsoForAttackingPlaneswalker;
 
-    public CantAttackYouUnlessPayManaAllEffect(ManaCosts manaCosts) {
-        this(manaCosts, false);
+    public CantAttackYouUnlessPayAllEffect(Cost cost) {
+        this(cost, false);
     }
 
-    public CantAttackYouUnlessPayManaAllEffect(ManaCosts manaCosts, boolean payAlsoForAttackingPlaneswalker) {
-        this(manaCosts, payAlsoForAttackingPlaneswalker, null);
+    public CantAttackYouUnlessPayAllEffect(Cost cost, boolean payAlsoForAttackingPlaneswalker) {
+        this(cost, payAlsoForAttackingPlaneswalker, null);
     }
 
-    public CantAttackYouUnlessPayManaAllEffect(ManaCosts manaCosts, boolean payAlsoForAttackingPlaneswalker, FilterCreaturePermanent filter) {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment, RestrictType.ATTACK, manaCosts);
+    public CantAttackYouUnlessPayAllEffect(Cost cost, boolean payAlsoForAttackingPlaneswalker, FilterCreaturePermanent filter) {
+        super(Duration.WhileOnBattlefield, Outcome.Detriment, RestrictType.ATTACK, cost);
         this.payAlsoForAttackingPlaneswalker = payAlsoForAttackingPlaneswalker;
         this.filterCreaturePermanent = filter;
         staticText = (filterCreaturePermanent == null ? "Creatures" : filterCreaturePermanent.getMessage())
                 + " can't attack you "
                 + (payAlsoForAttackingPlaneswalker ? "or a planeswalker you control " : "")
                 + "unless their controller pays "
-                + (manaCosts == null ? "" : manaCosts.getText())
+                + (cost == null ? "" : cost.getText())
                 + " for each creature they control that's attacking you";
     }
 
-    public CantAttackYouUnlessPayManaAllEffect(final CantAttackYouUnlessPayManaAllEffect effect) {
+    public CantAttackYouUnlessPayAllEffect(final CantAttackYouUnlessPayAllEffect effect) {
         super(effect);
         this.payAlsoForAttackingPlaneswalker = effect.payAlsoForAttackingPlaneswalker;
         this.filterCreaturePermanent = effect.filterCreaturePermanent;
@@ -71,7 +71,7 @@ public class CantAttackYouUnlessPayManaAllEffect extends PayCostToAttackBlockEff
     }
 
     @Override
-    public CantAttackYouUnlessPayManaAllEffect copy() {
-        return new CantAttackYouUnlessPayManaAllEffect(this);
+    public CantAttackYouUnlessPayAllEffect copy() {
+        return new CantAttackYouUnlessPayAllEffect(this);
     }
 }

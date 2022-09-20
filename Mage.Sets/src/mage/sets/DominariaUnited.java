@@ -88,6 +88,11 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Cut Down", 89, Rarity.UNCOMMON, mage.cards.c.CutDown.class));
         cards.add(new SetCardInfo("Danitha, Benalia's Hope", 15, Rarity.RARE, mage.cards.d.DanithaBenaliasHope.class));
         cards.add(new SetCardInfo("Deathbloom Gardener", 159, Rarity.COMMON, mage.cards.d.DeathbloomGardener.class));
+        cards.add(new SetCardInfo("Defiler of Dreams", 46, Rarity.RARE, mage.cards.d.DefilerOfDreams.class));
+        cards.add(new SetCardInfo("Defiler of Faith", 16, Rarity.RARE, mage.cards.d.DefilerOfFaith.class));
+        cards.add(new SetCardInfo("Defiler of Flesh", 90, Rarity.RARE, mage.cards.d.DefilerOfFlesh.class));
+        cards.add(new SetCardInfo("Defiler of Instinct", 119, Rarity.RARE, mage.cards.d.DefilerOfInstinct.class));
+        cards.add(new SetCardInfo("Defiler of Vigor", 160, Rarity.RARE, mage.cards.d.DefilerOfVigor.class));
         cards.add(new SetCardInfo("Destroy Evil", 17, Rarity.COMMON, mage.cards.d.DestroyEvil.class));
         cards.add(new SetCardInfo("Djinn of the Fountain", 47, Rarity.UNCOMMON, mage.cards.d.DjinnOfTheFountain.class));
         cards.add(new SetCardInfo("Drag to the Bottom", 91, Rarity.RARE, mage.cards.d.DragToTheBottom.class));
@@ -111,10 +116,12 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Frostfist Strider", 51, Rarity.UNCOMMON, mage.cards.f.FrostfistStrider.class));
         cards.add(new SetCardInfo("Furious Bellow", 126, Rarity.COMMON, mage.cards.f.FuriousBellow.class));
         cards.add(new SetCardInfo("Gaea's Might", 164, Rarity.COMMON, mage.cards.g.GaeasMight.class));
+        cards.add(new SetCardInfo("Garna, Bloodfist of Keld", 200, Rarity.UNCOMMON, mage.cards.g.GarnaBloodfistOfKeld.class));
         cards.add(new SetCardInfo("Geothermal Bog", 247, Rarity.COMMON, mage.cards.g.GeothermalBog.class));
         cards.add(new SetCardInfo("Ghitu Amplifier", 127, Rarity.COMMON, mage.cards.g.GhituAmplifier.class));
         cards.add(new SetCardInfo("Gibbering Barricade", 95, Rarity.COMMON, mage.cards.g.GibberingBarricade.class));
         cards.add(new SetCardInfo("Goblin Picker", 128, Rarity.COMMON, mage.cards.g.GoblinPicker.class));
+        cards.add(new SetCardInfo("Golden Argosy", 230, Rarity.RARE, mage.cards.g.GoldenArgosy.class));
         cards.add(new SetCardInfo("Griffin Protector", 18, Rarity.COMMON, mage.cards.g.GriffinProtector.class));
         cards.add(new SetCardInfo("Guardian of New Benalia", 19, Rarity.RARE, mage.cards.g.GuardianOfNewBenalia.class));
         cards.add(new SetCardInfo("Hammerhand", 129, Rarity.COMMON, mage.cards.h.Hammerhand.class));
@@ -143,6 +150,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Joint Exploration", 56, Rarity.UNCOMMON, mage.cards.j.JointExploration.class));
         cards.add(new SetCardInfo("Juniper Order Rootweaver", 22, Rarity.COMMON, mage.cards.j.JuniperOrderRootweaver.class));
         cards.add(new SetCardInfo("Karn, Living Legacy", 1, Rarity.MYTHIC, mage.cards.k.KarnLivingLegacy.class));
+        cards.add(new SetCardInfo("Karn's Sylex", 234, Rarity.MYTHIC, mage.cards.k.KarnsSylex.class));
         cards.add(new SetCardInfo("Karplusan Forest", 250, Rarity.RARE, mage.cards.k.KarplusanForest.class));
         cards.add(new SetCardInfo("Keldon Flamesage", 135, Rarity.RARE, mage.cards.k.KeldonFlamesage.class));
         cards.add(new SetCardInfo("Keldon Strike Team", 136, Rarity.COMMON, mage.cards.k.KeldonStrikeTeam.class));
@@ -200,6 +208,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Relic of Legends", 236, Rarity.UNCOMMON, mage.cards.r.RelicOfLegends.class));
         cards.add(new SetCardInfo("Resolute Reinforcements", 29, Rarity.UNCOMMON, mage.cards.r.ResoluteReinforcements.class));
         cards.add(new SetCardInfo("Rith, Liberated Primeval", 214, Rarity.MYTHIC, mage.cards.r.RithLiberatedPrimeval.class));
+        cards.add(new SetCardInfo("Rivaz of the Claw", 215, Rarity.RARE, mage.cards.r.RivazOfTheClaw.class));
         cards.add(new SetCardInfo("Rona's Vortex", 63, Rarity.UNCOMMON, mage.cards.r.RonasVortex.class));
         cards.add(new SetCardInfo("Rona, Sheoldred's Faithful", 216, Rarity.UNCOMMON, mage.cards.r.RonaSheoldredsFaithful.class));
         cards.add(new SetCardInfo("Rulik Mons, Warren Chief", 217, Rarity.UNCOMMON, mage.cards.r.RulikMonsWarrenChief.class));
@@ -221,6 +230,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Shivan Devastator", 143, Rarity.MYTHIC, mage.cards.s.ShivanDevastator.class));
         cards.add(new SetCardInfo("Shivan Reef", 255, Rarity.RARE, mage.cards.s.ShivanReef.class));
         cards.add(new SetCardInfo("Shore Up", 64, Rarity.COMMON, mage.cards.s.ShoreUp.class));
+        cards.add(new SetCardInfo("Silver Scrutiny", 65, Rarity.RARE, mage.cards.s.SilverScrutiny.class));
         cards.add(new SetCardInfo("Silverback Elder", 177, Rarity.MYTHIC, mage.cards.s.SilverbackElder.class));
         cards.add(new SetCardInfo("Slimefoot's Survey", 178, Rarity.UNCOMMON, mage.cards.s.SlimefootsSurvey.class));
         cards.add(new SetCardInfo("Smash to Dust", 144, Rarity.COMMON, mage.cards.s.SmashToDust.class));
@@ -269,6 +279,7 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Tribute to Urborg", 113, Rarity.COMMON, mage.cards.t.TributeToUrborg.class));
         cards.add(new SetCardInfo("Tura Kennerud, Skyknight", 224, Rarity.UNCOMMON, mage.cards.t.TuraKennerudSkyknight.class));
         cards.add(new SetCardInfo("Twinferno", 149, Rarity.UNCOMMON, mage.cards.t.Twinferno.class));
+        cards.add(new SetCardInfo("Tyrannical Pitlord", 284, Rarity.RARE, mage.cards.t.TyrannicalPitlord.class));
         cards.add(new SetCardInfo("Urborg Lhurgoyf", 186, Rarity.RARE, mage.cards.u.UrborgLhurgoyf.class));
         cards.add(new SetCardInfo("Urborg Repossession", 114, Rarity.COMMON, mage.cards.u.UrborgRepossession.class));
         cards.add(new SetCardInfo("Urza Assembles the Titans", 37, Rarity.RARE, mage.cards.u.UrzaAssemblesTheTitans.class));

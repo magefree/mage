@@ -16,11 +16,10 @@ import mage.constants.TargetController;
 import mage.filter.FilterSpell;
 import mage.filter.FilterStackObject;
 import mage.filter.common.FilterInstantOrSorcerySpell;
-import mage.filter.predicate.Predicate;
+import mage.filter.predicate.mageobject.PermanentPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetSpell;
 import mage.target.common.TargetActivatedOrTriggeredAbility;
@@ -43,7 +42,7 @@ public final class LithoformEngine extends CardImpl {
         filter.add(TargetController.YOU.getControllerPredicate());
         filter2.add(TargetController.YOU.getControllerPredicate());
         filter3.add(TargetController.YOU.getControllerPredicate());
-        filter3.add(LithoformEnginePredicate.instance);
+        filter3.add(PermanentPredicate.instance);
     }
 
     public LithoformEngine(UUID ownerId, CardSetInfo setInfo) {
@@ -79,15 +78,6 @@ public final class LithoformEngine extends CardImpl {
     @Override
     public LithoformEngine copy() {
         return new LithoformEngine(this);
-    }
-}
-
-enum LithoformEnginePredicate implements Predicate<StackObject> {
-    instance;
-
-    @Override
-    public boolean apply(StackObject input, Game game) {
-        return input.isPermanent(game);
     }
 }
 

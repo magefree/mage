@@ -18,7 +18,6 @@ import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetAttackingCreature;
 import mage.target.targetpointer.FixedTarget;
@@ -34,14 +33,14 @@ public final class KamizObscuraOculus extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}{B}");
 
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.CEPHALID);
-        this.subtype.add(SubType.ROGUE);
+        this.subtype.add(SubType.CEPHALID, SubType.ROGUE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
         // Whenever you attack, target attacking creature can't be blocked this turn. It connives. Then choose another attacking creature with lesser power. That creature gains double strike until end of turn.
         Ability ability = new AttacksWithCreaturesTriggeredAbility(new CantBeBlockedTargetEffect(), 1);
-        ability.addEffect(new KamizObscuraOculusEffect());
+        ability.addEffect(new KamizConniveEffect());
+        ability.addEffect(new KamizDoubleStrikeEffect().concatBy("Then"));
         ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability);
     }
@@ -56,43 +55,63 @@ public final class KamizObscuraOculus extends CardImpl {
     }
 }
 
-class KamizObscuraOculusEffect extends OneShotEffect {
+class KamizConniveEffect extends OneShotEffect {
 
-    KamizObscuraOculusEffect() {
+    KamizConniveEffect() {
         super(Outcome.Benefit);
-        staticText = "It connives. Then choose another attacking creature with lesser power. " +
-                "That creature gains double strike until end of turn";
+        staticText = "it connives";
     }
 
-    private KamizObscuraOculusEffect(final KamizObscuraOculusEffect effect) {
+    private KamizConniveEffect(final KamizConniveEffect effect) {
         super(effect);
     }
 
     @Override
-    public KamizObscuraOculusEffect copy() {
-        return new KamizObscuraOculusEffect(this);
+    public KamizConniveEffect copy() {
+        return new KamizConniveEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (player == null || permanent == null) {
+        return permanent != null && ConniveSourceEffect.connive(permanent, 1, source, game);
+    }
+}
+
+class KamizDoubleStrikeEffect extends OneShotEffect {
+
+    KamizDoubleStrikeEffect() {
+        super(Outcome.AddAbility);
+        staticText = "choose another attacking creature with lesser power. " +
+                "That creature gains double strike until end of turn";
+    }
+
+    private KamizDoubleStrikeEffect(final KamizDoubleStrikeEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public KamizDoubleStrikeEffect copy() {
+        return new KamizDoubleStrikeEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (permanent == null) {
             return false;
         }
-        ConniveSourceEffect.connive(permanent, 1, source, game);
         FilterPermanent filter = new FilterAttackingCreature("another attacking creature with lesser power");
         filter.add(Predicates.not(new PermanentIdPredicate(permanent.getId())));
         filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, permanent.getPower().getValue()));
-        if (!game.getBattlefield().contains(filter, source, game, 1)) {
-            return true;
-        }
         TargetPermanent target = new TargetPermanent(filter);
         target.setNotTarget(true);
-        player.choose(outcome, target, source, game);
-        game.addEffect(new GainAbilityTargetEffect(
-                DoubleStrikeAbility.getInstance(), Duration.EndOfTurn
-        ).setTargetPointer(new FixedTarget(target.getFirstTarget(), game)), source);
+        if (target.choose(outcome, source.getControllerId(), source.getSourceId(), source, game)) {
+            game.addEffect(
+                    new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance())
+                    .setTargetPointer(new FixedTarget(target.getFirstTarget(), game))
+                    , source);
+        }
         return true;
     }
 }

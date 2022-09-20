@@ -1,8 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.discard.DiscardHandAllEffect;
@@ -11,14 +8,15 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class ReforgeTheSoul extends CardImpl {
 
     public ReforgeTheSoul(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
 
         // Each player discards their hand, then draws seven cards.
         this.getSpellAbility().addEffect(new DiscardHandAllEffect());
@@ -27,7 +25,7 @@ public final class ReforgeTheSoul extends CardImpl {
         this.getSpellAbility().addEffect(effect);
 
         // Miracle {1}{R}
-        this.addAbility(new MiracleAbility(this, new ManaCostsImpl<>("{1}{R}")));
+        this.addAbility(new MiracleAbility("{1}{R}"));
     }
 
     private ReforgeTheSoul(final ReforgeTheSoul card) {

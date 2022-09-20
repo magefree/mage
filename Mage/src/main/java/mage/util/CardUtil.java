@@ -911,26 +911,21 @@ public final class CardUtil {
         return Outcome.BoostCreature;
     }
 
-    public static boolean isSpliceAbility(Ability ability, Game game) {
-        if (ability instanceof SpellAbility) {
-            return ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLICE;
-        }
-        return false;
-    }
-
     public static boolean isFusedPartAbility(Ability ability, Game game) {
         // TODO: does it work fine with copies of spells on stack?
-        if (ability instanceof SpellAbility) {
-            Spell mainSpell = game.getSpell(ability.getId());
-            if (mainSpell == null) {
-                return true;
-            } else {
-                SpellAbility mainSpellAbility = mainSpell.getSpellAbility();
-                return mainSpellAbility.getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED
-                        && !ability.equals(mainSpellAbility);
-            }
+        if (!(ability instanceof SpellAbility)) {
+            return false;
         }
-        return false;
+        if (((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLICE) {
+            return true;
+        }
+        Spell mainSpell = game.getSpell(ability.getId());
+        if (mainSpell == null) {
+            return true;
+        }
+        SpellAbility mainSpellAbility = mainSpell.getSpellAbility();
+        return mainSpellAbility.getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED
+                && !ability.equals(mainSpellAbility);
     }
 
     public static Abilities<Ability> getAbilities(MageObject object, Game game) {

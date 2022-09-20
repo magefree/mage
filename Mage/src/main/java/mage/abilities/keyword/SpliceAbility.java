@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import java.util.Iterator;
@@ -9,10 +8,14 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.SpliceCardEffectImpl;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.SpliceCardEffect;
 import mage.cards.Card;
 import mage.constants.*;
+import mage.filter.FilterObject;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -75,64 +78,87 @@ import mage.players.Player;
  * when the spell resolves. A spell is countered on resolution only if *all* of
  * its targets are illegal (or the spell is countered by an effect).
  *
- * @author LevelX2
+ * @author LevelX2, awjackson
  */
-public class SpliceOntoArcaneAbility extends SimpleStaticAbility {
+public class SpliceAbility extends SimpleStaticAbility {
 
-    private static final String KEYWORD_TEXT = "Splice onto Arcane";
-    private Costs<Cost> spliceCosts = new CostsImpl<>();
-    private boolean nonManaCosts = false;
+    public static final FilterObject ARCANE = new FilterObject("Arcane");
+    public static final FilterObject INSTANT_OR_SORCERY = new FilterObject("instant or sorcery");
 
-    public SpliceOntoArcaneAbility(String manaString) {
-        super(Zone.HAND, new SpliceOntoArcaneEffect());
+    static {
+        ARCANE.add(SubType.ARCANE.getPredicate());
+        ARCANE.setLockedFilter(true);
+        INSTANT_OR_SORCERY.add(Predicates.or(
+                CardType.INSTANT.getPredicate(),
+                CardType.SORCERY.getPredicate()
+        ));
+        INSTANT_OR_SORCERY.setLockedFilter(true);
+    }
+
+    private final Costs<Cost> spliceCosts = new CostsImpl<>();
+    private final String rule;
+
+    public SpliceAbility(FilterObject filter, String manaString) {
+        super(Zone.HAND, new SpliceCardEffectImpl(filter));
         spliceCosts.add(new ManaCostsImpl<>(manaString));
+        rule = "Splice onto " + filter.getMessage() + ' ' + spliceCosts.getText() + getReminder(filter);
     }
 
-    public SpliceOntoArcaneAbility(Cost cost) {
-        super(Zone.HAND, new SpliceOntoArcaneEffect());
+    public SpliceAbility(FilterObject filter, Cost cost) {
+        super(Zone.HAND, new SpliceCardEffectImpl(filter));
         spliceCosts.add(cost);
-        nonManaCosts = true;
+        rule = "Splice onto " + filter.getMessage() + "&mdash;" + spliceCosts.getText() + '.' + getReminder(filter);
     }
 
-    public SpliceOntoArcaneAbility(final SpliceOntoArcaneAbility ability) {
+    private SpliceAbility(final SpliceAbility ability) {
         super(ability);
-        this.spliceCosts = ability.spliceCosts.copy();
-        this.nonManaCosts = ability.nonManaCosts;
+        this.spliceCosts.addAll(ability.spliceCosts);
+        this.rule = ability.rule;
     }
 
     @Override
     public SimpleStaticAbility copy() {
-        return new SpliceOntoArcaneAbility(this);
+        return new SpliceAbility(this);
     }
 
     public Costs getSpliceCosts() {
         return spliceCosts;
     }
 
+    private static String getReminder(FilterObject filter) {
+        return " <i>(As you cast an " + filter.getMessage() + " spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)</i>";
+    }
+
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(KEYWORD_TEXT).append(nonManaCosts ? "&mdash;" : " ");
-        sb.append(spliceCosts.getText()).append(nonManaCosts ? ". " : " ");
-        sb.append("<i>(As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)</i>");
-        return sb.toString();
+        return rule;
     }
 }
 
-class SpliceOntoArcaneEffect extends SpliceCardEffectImpl {
+class SpliceCardEffectImpl extends ContinuousEffectImpl implements SpliceCardEffect {
 
-    public SpliceOntoArcaneEffect() {
+    private final FilterObject filter;
+
+    public SpliceCardEffectImpl(FilterObject filter) {
         super(Duration.WhileOnBattlefield, Outcome.Copy);
-        staticText = "Splice onto Arcane";
+        this.effectType = EffectType.SPLICE;
+        this.filter = filter;
+        staticText = "Splice onto " + filter;
     }
 
-    public SpliceOntoArcaneEffect(final SpliceOntoArcaneEffect effect) {
+    private SpliceCardEffectImpl(final SpliceCardEffectImpl effect) {
         super(effect);
+        this.filter = effect.filter;
     }
 
     @Override
-    public SpliceOntoArcaneEffect copy() {
-        return new SpliceOntoArcaneEffect(this);
+    public SpliceCardEffectImpl copy() {
+        return new SpliceCardEffectImpl(this);
+    }
+
+    @Override
+    public final boolean apply(Game game, Ability source) {
+        return false;
     }
 
     @Override
@@ -146,8 +172,13 @@ class SpliceOntoArcaneEffect extends SpliceCardEffectImpl {
                 splicedAbility.setSpellAbilityType(SpellAbilityType.SPLICE);
                 splicedAbility.setSourceId(abilityToModify.getSourceId());
                 spell.addSpellAbility(splicedAbility);
-                for (Iterator it = ((SpliceOntoArcaneAbility) source).getSpliceCosts().iterator(); it.hasNext();) {
-                    spell.getSpellAbility().getCosts().add(((Cost) it.next()).copy());
+                for (Iterator it = ((SpliceAbility) source).getSpliceCosts().iterator(); it.hasNext();) {
+                    Cost cost = (Cost) it.next();
+                    if (cost instanceof ManaCost) {
+                        spell.getSpellAbility().getManaCostsToPay().add((ManaCost) cost.copy());
+                    } else {
+                        spell.getSpellAbility().getCosts().add(cost.copy());
+                    }
                 }
             }
             return true;
@@ -158,7 +189,7 @@ class SpliceOntoArcaneEffect extends SpliceCardEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         MageObject object = game.getObject(abilityToModify.getSourceId());
-        if (object != null && object.hasSubtype(SubType.ARCANE, game)) {
+        if (object != null && filter.match(object, game)) {
             return spliceSpellCanBeActivated(source, game);
         }
         return false;

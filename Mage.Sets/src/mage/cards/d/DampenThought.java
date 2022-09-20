@@ -1,9 +1,8 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
-import mage.abilities.keyword.SpliceOntoArcaneAbility;
+import mage.abilities.effects.common.MillCardsTargetEffect;
+import mage.abilities.keyword.SpliceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -21,11 +20,11 @@ public final class DampenThought extends CardImpl {
         this.subtype.add(SubType.ARCANE);
 
 
-        // Target player puts the top four cards of their library into their graveyard.
-        this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(4));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        // Target player mills 4 cards.
+        this.getSpellAbility().addEffect(new MillCardsTargetEffect(4));
+        this.getSpellAbility().addTarget(new TargetPlayer().withChooseHint("mills 4 cards"));
         // Splice onto Arcane {1}{U}
-        this.addAbility(new SpliceOntoArcaneAbility("{1}{U}"));
+        this.addAbility(new SpliceAbility(SpliceAbility.ARCANE, "{1}{U}"));
     }
 
     private DampenThought(final DampenThought card) {

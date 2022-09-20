@@ -38,7 +38,7 @@ public final class StallForTime extends CardImpl {
         ));
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private StallForTime(final StallForTime card) {

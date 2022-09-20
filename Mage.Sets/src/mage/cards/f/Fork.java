@@ -80,7 +80,7 @@ enum ForkApplier implements StackObjectCopyApplier {
     }
 
     @Override
-    public MageObjectReferencePredicate getNextNewTargetType(int copyNumber) {
+    public MageObjectReferencePredicate getNextNewTargetType() {
         return null;
     }
 }

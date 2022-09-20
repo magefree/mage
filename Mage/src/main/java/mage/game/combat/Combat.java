@@ -1447,7 +1447,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
     }
 
-    public boolean removePlaneswalkerFromCombat(UUID planeswalkerId, Game game, boolean withInfo) {
+    public boolean removePlaneswalkerFromCombat(UUID planeswalkerId, Game game) {
         boolean result = false;
         for (CombatGroup group : groups) {
             if (group.getDefenderId() != null && group.getDefenderId().equals(planeswalkerId)) {
@@ -1458,13 +1458,14 @@ public class Combat implements Serializable, Copyable<Combat> {
         return result;
     }
 
-    public boolean removeFromCombat(UUID creatureId, Game game, boolean withInfo) {
+    public boolean removeFromCombat(UUID creatureId, Game game, boolean withEvent) {
         boolean result = false;
         Permanent creature = game.getPermanent(creatureId);
         if (creature != null) {
-            creature.setAttacking(false);
-            creature.setBlocking(0);
-            creature.setRemovedFromCombat(true);
+            if (withEvent) {
+                creature.setAttacking(false);
+                creature.setBlocking(0);
+            }
             for (CombatGroup group : groups) {
                 for (UUID attackerId : group.attackers) {
                     Permanent attacker = game.getPermanent(attackerId);
@@ -1479,7 +1480,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             }
             creature.clearBandedCards();
             blockingGroups.remove(creatureId);
-            if (result && withInfo) {
+            if (result && withEvent) {
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.REMOVED_FROM_COMBAT, creatureId, null, null));
                 game.informPlayers(creature.getLogName() + " removed from combat");
             }
@@ -1506,10 +1507,6 @@ public class Combat implements Serializable, Copyable<Combat> {
                     creature.clearBandedCards();
                 }
             }
-        }
-        // reset the removeFromCombat flag on all creatures on the battlefield
-        for (Permanent creaturePermanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, game)) {
-            creaturePermanent.setRemovedFromCombat(false);
         }
         clear();
     }

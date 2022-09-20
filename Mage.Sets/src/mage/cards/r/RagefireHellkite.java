@@ -34,7 +34,7 @@ public final class RagefireHellkite extends CardImpl {
         // Whenever Ragefire Hellkite attacks, you may sacrifice another creature. If you do, Ragefire Hellkite gains double strike until end of turn.
         this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(
                 new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn),
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)
         )));
     }
 

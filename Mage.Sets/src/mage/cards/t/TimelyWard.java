@@ -1,12 +1,11 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
+import mage.abilities.common.CastAsThoughItHadFlashIfConditionAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceTargetsPermanentCondition;
-import mage.abilities.decorator.ConditionalAsThoughEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.IndestructibleAbility;
@@ -39,9 +38,9 @@ public final class TimelyWard extends CardImpl {
         this.subtype.add(SubType.AURA);
 
         // You may cast this spell as though it had flash if it targets a commander.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new ConditionalAsThoughEffect(
-                new CastAsThoughItHadFlashSourceEffect(Duration.EndOfGame), condition
-        ).setText("you may cast this spell as though it had flash if it targets a commander")));
+        this.addAbility(new CastAsThoughItHadFlashIfConditionAbility(condition,
+                "You may cast this spell as though it had flash if it targets a commander."
+        ));
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

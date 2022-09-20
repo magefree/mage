@@ -31,7 +31,9 @@ public final class KarnLivingLegacy extends CardImpl {
         this.setStartingLoyalty(4);
 
         // +1: Create a tapped Powerstone token.
-        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new PowerstoneToken()), 1));
+        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(
+                new PowerstoneToken(), 1, true, false
+        ), 1));
 
         // -1: Pay any amount of mana. Look at that many cards from the top of your library, then put one of those cards into your hand and rest on the bottom of your library in a random order.
         this.addAbility(new LoyaltyAbility(new KarnLivingLegacyEffect(), -1));
@@ -55,7 +57,7 @@ class KarnLivingLegacyEffect extends OneShotEffect {
     KarnLivingLegacyEffect() {
         super(Outcome.Benefit);
         staticText = "pay any amount of mana. Look at that many cards from the top of your library, " +
-                "then put one of those cards into your hand and rest on the bottom of your library in a random order";
+                "then put one of those cards into your hand and the rest on the bottom of your library in a random order";
     }
 
     private KarnLivingLegacyEffect(final KarnLivingLegacyEffect effect) {

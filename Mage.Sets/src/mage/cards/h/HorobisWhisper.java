@@ -4,7 +4,7 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.keyword.SpliceOntoArcaneAbility;
+import mage.abilities.keyword.SpliceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -36,10 +36,10 @@ public final class HorobisWhisper extends CardImpl {
         // If you control a Swamp, destroy target nonblack creature.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DestroyTargetEffect(), 
                 new PermanentsOnTheBattlefieldCondition(filterCondition),"If you control a Swamp, destroy target nonblack creature"));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK).withChooseHint("destroy if you control a Swamp"));
 
         // Splice onto Arcane-Exile four cards from your graveyard.
-        this.addAbility(new SpliceOntoArcaneAbility(new ExileFromGraveCost(new TargetCardInYourGraveyard(4,4, new FilterCard("cards")))));
+        this.addAbility(new SpliceAbility(SpliceAbility.ARCANE, new ExileFromGraveCost(new TargetCardInYourGraveyard(4,4, new FilterCard("cards")))));
 
     }
 

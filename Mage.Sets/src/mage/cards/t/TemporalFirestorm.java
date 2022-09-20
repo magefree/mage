@@ -39,7 +39,7 @@ public final class TemporalFirestorm extends CardImpl {
         // Temporal Firestorm deals 5 damage to each creature and each planeswalker.
         this.getSpellAbility().addEffect(new DamageAllEffect(
                 5, StaticFilters.FILTER_PERMANENT_CREATURE_OR_PLANESWALKER
-        ).setText("{this} deals 5 damage to each creature and each planeswalker"));
+        ).setText("{this} deals 5 damage to each creature and each planeswalker").concatBy("<br>"));
     }
 
     private TemporalFirestorm(final TemporalFirestorm card) {

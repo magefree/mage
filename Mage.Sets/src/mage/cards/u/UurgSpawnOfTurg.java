@@ -27,7 +27,7 @@ import java.util.UUID;
  */
 public final class UurgSpawnOfTurg extends CardImpl {
 
-    private static final DynamicValue xValue = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_LAND);
+    private static final DynamicValue xValue = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_LANDS);
 
     public UurgSpawnOfTurg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}{G}");

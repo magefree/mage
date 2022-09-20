@@ -28,7 +28,7 @@ public final class SelectiveSnare extends CardImpl {
 
         // Return X target creatures of the creature type of your choice to their owner's hand.
         this.getSpellAbility().addEffect(
-                new ReturnToHandTargetEffect(true)
+                new ReturnToHandTargetEffect()
                         .setText("Return X target creatures of "
                                 + "the creature type of your choice "
                                 + "to their owner's hand")
