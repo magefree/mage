@@ -186,6 +186,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Terminate", 172, Rarity.COMMON, mage.cards.t.Terminate.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 239, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("Teshar, Ancestor's Apostle", 105, Rarity.RARE, mage.cards.t.TesharAncestorsApostle.class));
+        cards.add(new SetCardInfo("Tetsuo, Imperial Champion", 44, Rarity.MYTHIC, mage.cards.t.TetsuoImperialChampion.class));
         cards.add(new SetCardInfo("The Circle of Loyalty", 98, Rarity.MYTHIC, mage.cards.t.TheCircleOfLoyalty.class));
         cards.add(new SetCardInfo("The Ever-Changing 'Dane", 30, Rarity.RARE, mage.cards.t.TheEverChangingDane.class));
         cards.add(new SetCardInfo("The Mana Rig", 28, Rarity.MYTHIC, mage.cards.t.TheManaRig.class, NON_FULL_USE_VARIOUS));
