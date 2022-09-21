@@ -16,7 +16,7 @@ public class DamageWithPowerFromOneToAnotherTargetEffect extends OneShotEffect {
     String firstTargetName;
 
     public DamageWithPowerFromOneToAnotherTargetEffect() {
-        this((String) null);
+        this("");
     }
 
     public DamageWithPowerFromOneToAnotherTargetEffect(String firstTargetName) {
@@ -64,6 +64,6 @@ public class DamageWithPowerFromOneToAnotherTargetEffect extends OneShotEffect {
             throw new IllegalStateException("It must have two targets, but found " + mode.getTargets().size());
         }
 
-        return mode.getTargets().get(0).getDescription() + " deals damage equal to its power to " + mode.getTargets().get(1).getDescription();
+        return (firstTargetName.isEmpty() ? mode.getTargets().get(0).getDescription() : firstTargetName) + " deals damage equal to its power to " + mode.getTargets().get(1).getDescription();
     }
 }
