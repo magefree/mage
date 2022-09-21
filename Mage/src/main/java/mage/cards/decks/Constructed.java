@@ -89,6 +89,20 @@ public class Constructed extends DeckValidator {
         banned.add("Jihad");
         banned.add("Pradesh Gypsies");
         banned.add("Stone-Throwing Devils");
+
+        // Acorn stamp cards are banned
+        banned.add("Angelic Harold");
+        banned.add("Animate Object");
+        banned.add("Assembled Ensemble");
+        banned.add("Far Out");
+        banned.add("Killer Cosplay");
+        banned.add("The Superlatorium (A)");
+        banned.add("The Superlatorium (C)");
+        banned.add("The Superlatorium (D)");
+        banned.add("The Superlatorium (E)");
+        banned.add("The Superlatorium (F)");
+        banned.add("Vorthos, Steward of Myth");
+        banned.add("Water Gun Balloon Game");
     }
 
     public List<String> getSetCodes() {
