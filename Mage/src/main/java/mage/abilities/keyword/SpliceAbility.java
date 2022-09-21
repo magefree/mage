@@ -1,7 +1,6 @@
 package mage.abilities.keyword;
 
 import java.util.Iterator;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -188,23 +187,13 @@ class SpliceCardEffectImpl extends ContinuousEffectImpl implements SpliceCardEff
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        MageObject object = game.getObject(abilityToModify.getSourceId());
-        if (object != null && filter.match(object, game)) {
-            return spliceSpellCanBeActivated(source, game);
+        if (!filter.match(game.getObject(abilityToModify.getSourceId()), game)) {
+            return false;
         }
-        return false;
-    }
-
-    private boolean spliceSpellCanBeActivated(Ability source, Game game) {
-        // check if spell can be activated (protection problem not solved because effect will be used from the base spell?)
         Card card = game.getCard(source.getSourceId());
-        if (card != null) {
-            if (card.getManaCost().isEmpty()) { // e.g. Evermind
-                return card.getSpellAbility().spellCanBeActivatedRegularlyNow(source.getControllerId(), game);
-            } else {
-                return card.getSpellAbility().canActivate(source.getControllerId(), game).canActivate();
-            }
+        if (card == null) {
+            return false;
         }
-        return false;
+        return card.getSpellAbility().canSpliceOnto(abilityToModify, game);
     }
 }
