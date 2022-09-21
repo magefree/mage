@@ -66,6 +66,10 @@ public class Spell extends StackObjectImpl implements Card {
     private ActivationManaAbilityStep currentActivatingManaAbilitiesStep = ActivationManaAbilityStep.BEFORE;
 
     public Spell(Card card, SpellAbility ability, UUID controllerId, Zone fromZone, Game game) {
+        this(card, ability, controllerId, fromZone, game, false);
+    }
+
+    private Spell(Card card, SpellAbility ability, UUID controllerId, Zone fromZone, Game game, boolean isCopy) {
         Card affectedCard = card;
 
         // TODO: must be removed after transform cards (one side) migrated to MDF engine (multiple sides)
@@ -84,12 +88,15 @@ public class Spell extends StackObjectImpl implements Card {
         this.ability = ability;
         this.ability.setControllerId(controllerId);
         if (ability.getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
-            SpellAbility left = ((SplitCard) affectedCard).getLeftHalfCard().getSpellAbility().copy();
-            SpellAbility right = ((SplitCard) affectedCard).getRightHalfCard().getSpellAbility().copy();
-            left.setSourceId(ability.getSourceId());
-            right.setSourceId(ability.getSourceId());
-            spellAbilities.add(left);
-            spellAbilities.add(right);
+            // if this spell is going to be a copy, these abilities will be copied in copySpell
+            if (!isCopy) {
+                SpellAbility left = ((SplitCard) affectedCard).getLeftHalfCard().getSpellAbility().copy();
+                SpellAbility right = ((SplitCard) affectedCard).getRightHalfCard().getSpellAbility().copy();
+                left.setSourceId(ability.getSourceId());
+                right.setSourceId(ability.getSourceId());
+                spellAbilities.add(left);
+                spellAbilities.add(right);
+            }
         } else {
             spellAbilities.add(ability);
         }
@@ -800,15 +807,17 @@ public class Spell extends StackObjectImpl implements Card {
         Card copiedPart = (Card) mapOldToNew.get(this.card.getId());
 
         // copy spell
-        Spell spellCopy = new Spell(copiedPart, this.ability.copySpell(this.card, copiedPart), this.controllerId, this.fromZone, game);
-        boolean firstDone = false;
+        Spell spellCopy = new Spell(copiedPart, this.ability.copySpell(this.card, copiedPart), this.controllerId, this.fromZone, game, true);
+        UUID copiedSourceId = spellCopy.ability.getSourceId();
+        boolean skipFirst = (this.ability.getSpellAbilityType() != SpellAbilityType.SPLIT_FUSED);
         for (SpellAbility spellAbility : this.getSpellAbilities()) {
-            if (!firstDone) {
-                firstDone = true;
+            if (skipFirst) {
+                skipFirst = false;
                 continue;
             }
             SpellAbility newAbility = spellAbility.copy(); // e.g. spliced spell
             newAbility.newId();
+            newAbility.setSourceId(copiedSourceId);
             spellCopy.addSpellAbility(newAbility);
         }
         spellCopy.setCopy(true, this);
