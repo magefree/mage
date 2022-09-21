@@ -64,10 +64,6 @@ public class DamageWithPowerFromOneToAnotherTargetEffect extends OneShotEffect {
             throw new IllegalStateException("It must have two targets, but found " + mode.getTargets().size());
         }
 
-        String targetName = mode.getTargets().get(1).getTargetName();
-        // Target creature you control deals damage equal to its power to target creature you don't control
-        String sb = (this.firstTargetName != null ? this.firstTargetName : "Target " + mode.getTargets().get(0).getTargetName()) +
-                " deals damage equal to its power to " + (targetName.contains("other") ? "" : "target ") + targetName;
-        return sb;
+        return mode.getTargets().get(0).getDescription() + " deals damage equal to its power to " + mode.getTargets().get(1).getDescription();
     }
 }
