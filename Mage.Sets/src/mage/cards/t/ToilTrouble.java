@@ -20,7 +20,7 @@ public final class ToilTrouble extends SplitCard {
 
         // Toil
         // Target player draws two cards and loses 2 life.
-        getLeftHalfCard().getSpellAbility().addTarget(new TargetPlayer());
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetPlayer().withChooseHint("to draw two cards and lose 2 life"));
         getLeftHalfCard().getSpellAbility().addEffect(new DrawCardTargetEffect(2));
         getLeftHalfCard().getSpellAbility().addEffect(new LoseLifeTargetEffect(2));
 
@@ -29,7 +29,7 @@ public final class ToilTrouble extends SplitCard {
         Effect effect = new DamageTargetEffect(CardsInTargetHandCount.instance);
         effect.setText("Trouble deals damage to target player equal to the number of cards in that player's hand");
         getRightHalfCard().getSpellAbility().addEffect(effect);
-        getRightHalfCard().getSpellAbility().addTarget(new TargetPlayer());
+        getRightHalfCard().getSpellAbility().addTarget(new TargetPlayer().withChooseHint("to deal damage to"));
 
     }
 
