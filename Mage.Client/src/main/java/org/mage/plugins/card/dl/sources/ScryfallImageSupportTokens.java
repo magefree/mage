@@ -1744,6 +1744,22 @@ public class ScryfallImageSupportTokens {
             put ("CC2/Snake", "https://api.scryfall.com/cards/cc2/9/en?format=image&face=front");
             put ("CC2/Zombie", "https://api.scryfall.com/cards/cc2/9/en?format=image&face=back");
 
+            // DMU
+            put ("DMU/Emblem Ajani, Sleeper Agent", "https://api.scryfall.com/cards/tdmu/25/en?format=image");
+            put ("DMU/Beast", "https://api.scryfall.com/cards/tdmu/16/en?format=image");
+            put ("DMU/Bird/1", "https://api.scryfall.com/cards/tdmu/6/en?format=image");
+            put ("DMU/Bird/2", "https://api.scryfall.com/cards/tdmu/2/en?format=image");
+            put ("DMU/Dragon", "https://api.scryfall.com/cards/tdmu/10/en?format=image");
+            put ("DMU/Elemental", "https://api.scryfall.com/cards/tdmu/11/en?format=image");
+            put ("DMU/Goblin", "https://api.scryfall.com/cards/tdmu/12/en?format=image");
+            put ("DMU/Emblem Jaya, Fiery Negotiator", "https://api.scryfall.com/cards/tdmu/26/en?format=image");
+            put ("DMU/Monk", "https://api.scryfall.com/cards/tdmu/14/en?format=image");
+            put ("DMU/Ornithopter", "https://api.scryfall.com/cards/tdmu/22/en?format=image");
+            put ("DMU/Phyrexian", "https://api.scryfall.com/cards/tdmu/8/en?format=image");
+            put ("DMU/Powerstone", "https://api.scryfall.com/cards/tdmu/23/en?format=image");
+            put ("DMU/Saproling", "https://api.scryfall.com/cards/tdmu/18/en?format=image");
+            put ("DMU/Soldier", "https://api.scryfall.com/cards/tdmu/4/en?format=image");
+
 
             // generate supported sets
             supportedSets.clear();

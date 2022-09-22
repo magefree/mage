@@ -135,6 +135,8 @@
 |Generate|EMBLEM:NEO|Kaito Shizuki||Emblem Kaito|KaitoShizukiEmblem|
 |Generate|EMBLEM:NEO|Tezzeret, Betrayer of Flesh||Emblem Tezzeret|TezzeretBetrayerOfFleshEmblem|
 |Generate|EMBLEM:2X2|Wrenn and Six||Emblem Wrenn|WrennAndSixEmblem|
+|Generate|EMBLEM:DMU|Ajani, Sleeper Agent||Emblem Ajani|AjaniSleeperAgentEmblem|
+|Generate|EMBLEM:DMU|Jaya, Fiery Negotiator||Emblem Jaya|JayaFieryNegotiatorEmblem|
 
 # Planes
 |Generate|PLANE:PCA|Plane - Academy at Tolaria West|||AcademyAtTolariaWestPlane|
@@ -1865,3 +1867,17 @@
 # CC2
 |Generate|TOK:CC2|Snake|||OphiomancerSnakeToken|
 |Generate|TOK:CC2|Zombie|||ZombieToken|
+
+# DMU
+|Generate|TOK:DMU|Beast|||BeastToken|
+|Generate|TOK:DMU|Bird|1||BlackBirdToken|
+|Generate|TOK:DMU|Bird|2||BirdToken|
+|Generate|TOK:DMU|Dragon|||DragonToken|
+|Generate|TOK:DMU|Elemental|||Elemental21TrampleHasteToken|
+|Generate|TOK:DMU|Goblin|||GoblinToken|
+|Generate|TOK:DMU|Monk|||MonkRedToken|
+|Generate|TOK:DMU|Ornithopter|||OrnithopterToken|
+|Generate|TOK:DMU|Phyrexian|||PhyrexianToken|
+|Generate|TOK:DMU|Powerstone|||PowerstoneToken|
+|Generate|TOK:DMU|Saproling|||SaprolingToken|
+|Generate|TOK:DMU|Soldier|||SoldierToken|
