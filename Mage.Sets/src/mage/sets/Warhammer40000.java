@@ -135,6 +135,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Molten Slagheap", 284, Rarity.UNCOMMON, mage.cards.m.MoltenSlagheap.class));
         cards.add(new SetCardInfo("Mortify", 225, Rarity.UNCOMMON, mage.cards.m.Mortify.class));
         cards.add(new SetCardInfo("Mountain", 315, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mutalith Vortex Beast", 134, Rarity.RARE, mage.cards.m.MutalithVortexBeast.class));
         cards.add(new SetCardInfo("Mutilate", 203, Rarity.RARE, mage.cards.m.Mutilate.class));
         cards.add(new SetCardInfo("Myriad Landscape", 285, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
         cards.add(new SetCardInfo("Mystic Forge", 246, Rarity.RARE, mage.cards.m.MysticForge.class));
