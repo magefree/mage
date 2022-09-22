@@ -5,6 +5,9 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+/**
+ * @author PurpleCrowbar
+ */
 public final class XiraBlackInsectToken extends TokenImpl {
 
     public XiraBlackInsectToken() {
