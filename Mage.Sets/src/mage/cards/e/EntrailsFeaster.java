@@ -77,7 +77,6 @@ class EntrailsFeasterEffect extends OneShotEffect {
                         controller.moveCardsToExile(cardChosen, source, game, true, null, "");
                         if (sourceObject != null) {
                             sourceObject.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
-                            game.informPlayers(controller.getLogName() + " puts a +1/+1 counter on " + sourceObject.getLogName());
                         }
                     }
                 } else if (sourceObject != null) {

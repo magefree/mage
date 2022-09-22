@@ -1,8 +1,6 @@
-
 package mage.cards.n;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -18,7 +16,6 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
@@ -66,17 +63,11 @@ class NovijenHeartOfProgressEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source);
-        if (controller != null && sourceObject != null) {
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
-                if (permanent.getTurnsOnBattlefield() == 0) {
-                    permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
-                    game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts a +1/+1 counter on " + permanent.getLogName());
-                }
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
+            if (permanent.getTurnsOnBattlefield() == 0) {
+                permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
             }
-            return true;
         }
-        return false;
+        return true;
     }
 }

@@ -1,6 +1,5 @@
 package mage.abilities.effects.common.counter;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -55,46 +54,38 @@ public class AddCountersTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source);
-        if (controller != null && sourceObject != null && counter != null) {
-            int affectedTargets = 0;
-            for (UUID uuid : targetPointer.getTargets(game, source)) {
-                Counter newCounter = counter.copy();
-                int calculated = amount.calculate(game, source, this); // 0 -- you must use default couner
-                if (calculated < 0) {
-                    continue;
-                } else if (calculated == 0) {
-                    // use original counter
-                } else {
-                    // increase to calculated value
-                    newCounter.remove(newCounter.getCount());
-                    newCounter.add(calculated);
-                }
-
-                Permanent permanent = game.getPermanent(uuid);
-                Player player = game.getPlayer(uuid);
-                Card card = game.getCard(targetPointer.getFirst(game, source));
-                if (permanent != null) {
-                    permanent.addCounters(newCounter, source.getControllerId(), source, game);
-                    affectedTargets++;
-                    game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
-                            + newCounter.getCount() + ' ' + newCounter.getName().toLowerCase(Locale.ENGLISH) + " counters on " + permanent.getLogName());
-                } else if (player != null) {
-                    player.addCounters(newCounter, source.getControllerId(), source, game);
-                    affectedTargets++;
-                    game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
-                            + newCounter.getCount() + ' ' + newCounter.getName().toLowerCase(Locale.ENGLISH) + " counters on " + player.getLogName());
-                } else if (card != null) {
-                    card.addCounters(newCounter, source.getControllerId(), source, game);
-                    affectedTargets++;
-                    game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
-                            + newCounter.getCount() + ' ' + newCounter.getName().toLowerCase(Locale.ENGLISH) + " counters on " + card.getLogName());
-                }
-            }
-            return affectedTargets > 0;
+        if (counter == null) {
+            return false;
         }
-        return false;
+        int affectedTargets = 0;
+        for (UUID uuid : targetPointer.getTargets(game, source)) {
+            Counter newCounter = counter.copy();
+            int calculated = amount.calculate(game, source, this); // 0 -- you must use default couner
+            if (calculated < 0) {
+                continue;
+            } else if (calculated == 0) {
+                // use original counter
+            } else {
+                // increase to calculated value
+                newCounter.remove(newCounter.getCount());
+                newCounter.add(calculated);
+            }
+
+            Permanent permanent = game.getPermanent(uuid);
+            Player player = game.getPlayer(uuid);
+            Card card = game.getCard(targetPointer.getFirst(game, source));
+            if (permanent != null) {
+                permanent.addCounters(newCounter, source.getControllerId(), source, game);
+                affectedTargets++;
+            } else if (player != null) {
+                player.addCounters(newCounter, source.getControllerId(), source, game);
+                affectedTargets++;
+            } else if (card != null) {
+                card.addCounters(newCounter, source.getControllerId(), source, game);
+                affectedTargets++;
+            }
+        }
+        return affectedTargets > 0;
     }
 
     @Override

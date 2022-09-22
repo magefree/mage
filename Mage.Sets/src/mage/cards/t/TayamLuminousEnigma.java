@@ -123,12 +123,6 @@ class TayamLuminousEnigmaCost extends RemoveCounterCost {
                         if (counterName != null) {
                             permanent.removeCounters(counterName, 1, source, game);
                             target.clearChosen();
-                            if (!game.isSimulation()) {
-                                game.informPlayers(new StringBuilder(controller.getLogName())
-                                        .append(" removes a ")
-                                        .append(counterName).append(" counter from ")
-                                        .append(permanent.getName()).toString());
-                            }
                             countersRemoved++;
                             if (countersRemoved == countersToRemove) {
                                 paid = true;

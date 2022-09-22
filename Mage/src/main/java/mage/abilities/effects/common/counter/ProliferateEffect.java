@@ -61,12 +61,6 @@ public class ProliferateEffect extends OneShotEffect {
                         newCounter = new Counter(counter.getName());
                         permanent.addCounters(newCounter, source.getControllerId(), source, game);
                     }
-                    if (newCounter != null) {
-                        game.informPlayers(permanent.getName()
-                                + " had 1 "
-                                + newCounter.getName()
-                                + " counter added to it.");
-                    }
                 }
             } else {
                 Player player = game.getPlayer(chosen);
@@ -75,12 +69,6 @@ public class ProliferateEffect extends OneShotEffect {
                         for (Counter counter : player.getCounters().values()) {
                             newCounter = new Counter(counter.getName());
                             player.addCounters(newCounter, source.getControllerId(), source, game);
-                        }
-                        if (newCounter != null) {
-                            game.informPlayers(player.getLogName()
-                                    + " had 1 "
-                                    + newCounter.getName()
-                                    + " counter added to them.");
                         }
                     }
                 }

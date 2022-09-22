@@ -1620,4 +1620,35 @@ public final class CardUtil {
                 return "" + startingLoyalty;
         }
     }
+
+    public static void informPlayersCounterMessage(Game game, Ability source, UUID playerId, int numCounters, String counterName, String targetName, boolean remove) {
+        StringBuilder sb = new StringBuilder();
+        MageObject sourceObject = game.getObject(source);
+        if (sourceObject != null) {
+            sb.append(sourceObject.getLogName());
+            sb.append(": ");
+        }
+        Player addingPlayer = game.getPlayer(playerId);
+        if (addingPlayer != null) {
+            sb.append(addingPlayer.getLogName());
+        } else {
+            sb.append("Player");
+        }
+        if (remove) {
+            sb.append(" removes ");
+        } else {
+            sb.append(" puts ");
+        }
+        if (numCounters == 1) {
+            sb.append(CardUtil.addArticle(counterName));
+            sb.append(" counter on ");
+        } else {
+            sb.append(numCounters);
+            sb.append(' ');
+            sb.append(counterName);
+            sb.append(" counters on ");
+        }
+        sb.append(targetName);
+        game.informPlayers(sb.toString());
+    }
 }

@@ -2258,6 +2258,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 );
                 addedAllEvent.setFlag(addingAllEvent.getFlag());
                 game.fireEvent(addedAllEvent);
+                CardUtil.informPlayersCounterMessage(game, source, playerAddingCounters, finalAmount, counter.getName(), this.getLogName(), false);
             }
         } else {
             returnCode = false;
@@ -2284,6 +2285,10 @@ public abstract class PlayerImpl implements Player, Serializable {
         event.setData(name);
         event.setAmount(finalAmount);
         game.fireEvent(event);
+        if (finalAmount > 0) {
+            UUID playerRemovingCounters = source == null ? null : source.getControllerId();
+            CardUtil.informPlayersCounterMessage(game, source, playerRemovingCounters, finalAmount, name, this.getLogName(), true);
+        }
     }
 
     protected boolean canDamage(MageObject source, Game game) {

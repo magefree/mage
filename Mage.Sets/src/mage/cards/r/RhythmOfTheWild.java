@@ -109,7 +109,6 @@ class RhythmOfTheWildEffect extends ReplacementEffectImpl {
                 outcome, "Have " + creature.getLogName() + " enter the battlefield with a +1/+1 counter on it or with haste?",
                 null, "+1/+1 counter", "Haste", source, game
         )) {
-            game.informPlayers(player.getLogName() + " choose to put a +1/+1 counter on " + creature.getName());
             creature.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game, event.getAppliedEffects());
         } else {
             ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);

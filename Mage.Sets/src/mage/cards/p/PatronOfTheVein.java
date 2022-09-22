@@ -2,7 +2,6 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -137,7 +136,6 @@ class PatronOfTheVeinExileCreatureEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        MageObject sourceObject = source.getSourceObject(game);
         Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
 
         if (card != null) {
@@ -148,7 +146,6 @@ class PatronOfTheVeinExileCreatureEffect extends OneShotEffect {
 
         for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
             permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
-            game.informPlayers(sourceObject.getName() + ": Put a +1/+1 counter on " + permanent.getLogName());
         }
         return true;
 

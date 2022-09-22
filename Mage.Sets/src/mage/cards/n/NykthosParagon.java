@@ -13,8 +13,6 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -63,9 +61,8 @@ class NykthosParagonEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
         Integer life = (Integer) this.getValue("gainedLife");
-        if (controller == null || life == null || life < 1) {
+        if (life == null || life < 1) {
             return false;
         }
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
@@ -75,11 +72,6 @@ class NykthosParagonEffect extends OneShotEffect {
             permanent.addCounters(
                     CounterType.P1P1.createInstance(life),
                     source.getControllerId(), source, game
-            );
-            game.informPlayers(
-                    CardUtil.getSourceLogName(game, source) + ": " +
-                            controller.getLogName() + " puts " + life +
-                            " +1/+1 counters on " + permanent.getLogName()
             );
         }
         return true;

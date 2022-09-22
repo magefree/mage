@@ -707,7 +707,13 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         return addCounters(counter, playerAddingCounters, source, game, appliedEffects, isEffect, Integer.MAX_VALUE);
     }
 
+    @Override
     public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect, int maxCounters) {
+        return addCounters(counter, playerAddingCounters, source, game, appliedEffects, isEffect, maxCounters, true);
+    }
+
+    @Override
+    public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect, int maxCounters, boolean informPlayers) {
         if (this instanceof Permanent) {
             if (!((Permanent) this).isPhasedIn()) {
                 return false;
@@ -747,6 +753,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 GameEvent addedAllEvent = GameEvent.getEvent(GameEvent.EventType.COUNTERS_ADDED, objectId, source, playerAddingCounters, counter.getName(), amount);
                 addedAllEvent.setFlag(isEffectFlag);
                 game.fireEvent(addedAllEvent);
+                if (informPlayers) {
+                    CardUtil.informPlayersCounterMessage(game, source, playerAddingCounters, finalAmount, counter.getName(), this.getLogName(), false);
+                }
             }
         } else {
             returnCode = false;
@@ -778,6 +787,10 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         event.setData(name);
         event.setAmount(finalAmount);
         game.fireEvent(event);
+        if (finalAmount > 0) {
+            UUID playerRemovingCounter = source == null ? null : source.getControllerId();
+            CardUtil.informPlayersCounterMessage(game, source, playerRemovingCounter, finalAmount, name, this.getLogName(), true);
+        }
     }
 
     @Override

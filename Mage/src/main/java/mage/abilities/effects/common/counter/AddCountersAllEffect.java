@@ -1,7 +1,5 @@
-
 package mage.abilities.effects.common.counter;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
@@ -10,7 +8,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.Locale;
@@ -38,21 +35,13 @@ public class AddCountersAllEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source);
-        if (controller != null && sourceObject != null) {
-            if (counter != null) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-                    permanent.addCounters(counter.copy(), source.getControllerId(), source, game);
-                    if (!game.isSimulation()) {
-                        game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts " + counter.getCount() + ' ' + counter.getName().toLowerCase(Locale.ENGLISH)
-                                + " counter on " + permanent.getLogName());
-                    }
-                }
-            }
-            return true;
+        if (counter == null) {
+            return false;
         }
-        return false;
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
+            permanent.addCounters(counter.copy(), source.getControllerId(), source, game);
+        }
+        return true;
     }
 
     private void setText() {

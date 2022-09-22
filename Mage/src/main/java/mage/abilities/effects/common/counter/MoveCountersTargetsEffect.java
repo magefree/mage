@@ -43,9 +43,6 @@ public class MoveCountersTargetsEffect extends OneShotEffect {
         if (removeTargetCreature != null && addTargetCreature != null && removeTargetCreature.getCounters(game).getCount(counterType) >= amount) {
             removeTargetCreature.removeCounters(counterType.createInstance(amount), source, game);
             addTargetCreature.addCounters(counterType.createInstance(amount), source.getControllerId(), source, game);
-            if (!game.isSimulation()) {
-                game.informPlayers("Moved " + amount + ' ' + counterType.getName() + " counter" + (amount > 1 ? "s" : "") + " from " + removeTargetCreature.getLogName() + " to " + addTargetCreature.getLogName());
-            }
             return true;
         }
         return false;

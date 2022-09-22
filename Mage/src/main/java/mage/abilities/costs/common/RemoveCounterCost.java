@@ -100,12 +100,6 @@ public class RemoveCounterCost extends CostImpl {
                                 }
                                 permanent.removeCounters(counterName, numberOfCountersSelected, source, game);
                                 countersRemoved += numberOfCountersSelected;
-                                if (!game.isSimulation()) {
-                                    game.informPlayers(new StringBuilder(controller.getLogName())
-                                            .append(" removes ").append(numberOfCountersSelected == 1 ? "a" : numberOfCountersSelected).append(' ')
-                                            .append(counterName).append(numberOfCountersSelected == 1 ? " counter from " : " counters from ")
-                                            .append(permanent.getName()).toString());
-                                }
                                 if (countersRemoved == countersToRemove) {
                                     this.paid = true;
                                     break;

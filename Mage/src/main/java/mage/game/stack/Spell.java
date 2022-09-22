@@ -1030,6 +1030,11 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
+    public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect, int maxCounters, boolean informPlayers) {
+        return card.addCounters(counter, playerAddingCounters, source, game, appliedEffects, isEffect, maxCounters, informPlayers);
+    }
+
+    @Override
     public void removeCounters(String name, int amount, Ability source, Game game) {
         card.removeCounters(name, amount, source, game);
     }

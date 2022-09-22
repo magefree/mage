@@ -2,7 +2,6 @@ package mage.cards.t;
 
 import java.util.UUID;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -72,18 +71,11 @@ class TurfWarCounterEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source);
-        if (controller == null || sourceObject == null) {
-            return false;
-        }
         boolean success = false;
         for (Target target : source.getTargets()) {
             for (UUID uuid : target.getTargets()) {
                 Permanent permanent = game.getPermanent(uuid);
                 if (permanent != null && permanent.addCounters(CounterType.CONTESTED.createInstance(), source, game)) {
-                    game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName()
-                            + " puts a contested counter on " + permanent.getLogName());
                     success = true;
                 }
             }
