@@ -91,17 +91,22 @@ public class Constructed extends DeckValidator {
         banned.add("Stone-Throwing Devils");
 
         // Acorn stamp cards are banned
+        banned.add("A Real Handful");
         banned.add("Angelic Harold");
         banned.add("Animate Object");
         banned.add("Assembled Ensemble");
         banned.add("Bar Entry");
         banned.add("Centrifuge");
+        banned.add("Cover the Spot");
         banned.add("D00-DL, Caricaturist");
         banned.add("Dart Throw");
         banned.add("Devil K. Nevil");
         banned.add("Far Out");
+        banned.add("Gallery of Legends");
         banned.add("Get Your Head in the Game");
+        banned.add("Gift Shop");
         banned.add("Goblin Blastronauts");
+        banned.add("Gray Merchant of Alphabet");
         banned.add("Greatest Show in the Multiverse");
         banned.add("How Is This a Par Three?!");
         banned.add("Ignacio of Myra's Marvels");
@@ -109,12 +114,17 @@ public class Constructed extends DeckValidator {
         banned.add("Juggletron");
         banned.add("Killer Cosplay");
         banned.add("Meet and Greet \"Sisay\"");
+        banned.add("Memory Test");
         banned.add("Nearby Planet");
         banned.add("Omniclown Colossus");
+        banned.add("Opening Ceremony");
         banned.add("Rock Star");
+        banned.add("Squirrel Stack");
         banned.add("Surprise Party");
         banned.add("The Big Top");
         banned.add("The Superlatorium");
+        banned.add("Ticking Mime Bomb");
+        banned.add("Truss, Chief Engineer");
         banned.add("Vorthos, Steward of Myth");
         banned.add("Water Gun Balloon Game");
     }
