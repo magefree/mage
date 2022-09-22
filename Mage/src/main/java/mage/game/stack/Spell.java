@@ -809,6 +809,16 @@ public class Spell extends StackObjectImpl implements Card {
         // copy spell
         Spell spellCopy = new Spell(copiedPart, this.ability.copySpell(this.card, copiedPart), this.controllerId, this.fromZone, game, true);
         UUID copiedSourceId = spellCopy.ability.getSourceId();
+
+        // non-fused spell:
+        //    spellAbilities.get(0) is alias (NOT copy) of this.ability
+        //    spellAbilities.get(1) is first spliced card (if any)
+        // fused spell:
+        //    spellAbilities.get(0) is left half
+        //    spellAbilities.get(1) is right half
+        //    spellAbilities.get(2) is first spliced card (if any)
+        // for non-fused spell, main spellAbility was already added in constructor and must not be copied again
+        // for fused spell, all of spellAbilities must be copied here
         boolean skipFirst = (this.ability.getSpellAbilityType() != SpellAbilityType.SPLIT_FUSED);
         for (SpellAbility spellAbility : this.getSpellAbilities()) {
             if (skipFirst) {
