@@ -97,6 +97,8 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Illuna, Apex of Wishes", 154, Rarity.MYTHIC, mage.cards.i.IllunaApexOfWishes.class));
         cards.add(new SetCardInfo("Iridian Maelstrom", 12, Rarity.RARE, mage.cards.i.IridianMaelstrom.class));
         cards.add(new SetCardInfo("Jazal Goldmane", 102, Rarity.MYTHIC, mage.cards.j.JazalGoldmane.class));
+        cards.add(new SetCardInfo("Jared Carthalion", 2, Rarity.MYTHIC, mage.cards.j.JaredCarthalion.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jared Carthalion", 50, Rarity.MYTHIC, mage.cards.j.JaredCarthalion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jedit Ojanen, Mercenary", 34, Rarity.MYTHIC, mage.cards.j.JeditOjanenMercenary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jedit Ojanen, Mercenary", 56, Rarity.MYTHIC, mage.cards.j.JeditOjanenMercenary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jenson Carthalion, Druid Exile", 3, Rarity.MYTHIC, mage.cards.j.JensonCarthalionDruidExile.class));
