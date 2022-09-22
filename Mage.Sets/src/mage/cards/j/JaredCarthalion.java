@@ -89,9 +89,8 @@ class JaredCarthalionBoostEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (UUID targetId : getTargetPointer().getTargets(game, source)) {
             Permanent creature = game.getPermanent(targetId);
-            if (creature != null) {
-                Counter counter;
-                counter = CounterType.P1P1.createInstance(creature.getColor().getColorCount());
+            if (creature != null && creature.getColor().getColorCount() != 0) {
+                Counter counter = CounterType.P1P1.createInstance(creature.getColor().getColorCount());
                 creature.addCounters(counter, source, game);
             }
         }
@@ -119,15 +118,13 @@ class JaredCarthalionUltimateEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Card card = game.getCard(targetPointer.getFirst(game, source));
-            if (card != null) {
-                if (controller.moveCards(card, Zone.HAND, source, game)
-                        && card.getColor().getColorCount() == 5) {
-                    controller.drawCards(1, source, game);
-                    new TreasureToken().putOntoBattlefield(2, game, source);
-                    return true;
-                }
+        Card card = game.getCard(targetPointer.getFirst(game, source));
+        if (controller != null && card != null) {
+            if (controller.moveCards(card, Zone.HAND, source, game)
+                    && card.getColor().getColorCount() == 5) {
+                controller.drawCards(1, source, game);
+                new TreasureToken().putOntoBattlefield(2, game, source);
+                return true;
             }
         }
         return false;
