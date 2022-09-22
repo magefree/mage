@@ -29,4 +29,13 @@ public final class RasputinKnightToken extends TokenImpl {
     public RasputinKnightToken copy() {
         return new RasputinKnightToken(this);
     }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("DMC")) {
+            setTokenType(2);
+        }
+    }
 }

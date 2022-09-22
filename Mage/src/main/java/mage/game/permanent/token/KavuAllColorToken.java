@@ -24,8 +24,8 @@ public final class KavuAllColorToken extends TokenImpl {
         color.setGreen(true);
         power = new MageInt(3);
         toughness = new MageInt(3);
-        this.addAbility(TrampleAbility.getInstance());
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("This creature is all colors")));
+        this.addAbility(TrampleAbility.getInstance());
         setOriginalExpansionSetCode("DMC");
     }
 

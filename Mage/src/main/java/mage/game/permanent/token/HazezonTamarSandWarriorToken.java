@@ -21,6 +21,7 @@ public final class HazezonTamarSandWarriorToken extends TokenImpl {
         subtype.add(SubType.WARRIOR);
         power = new MageInt(1);
         toughness = new MageInt(1);
+        setOriginalExpansionSetCode("DMC");
     }
 
     public HazezonTamarSandWarriorToken(final HazezonTamarSandWarriorToken token) {

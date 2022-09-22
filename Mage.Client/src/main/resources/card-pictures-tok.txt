@@ -1881,3 +1881,29 @@
 |Generate|TOK:DMU|Powerstone|||PowerstoneToken|
 |Generate|TOK:DMU|Saproling|||SaprolingToken|
 |Generate|TOK:DMU|Soldier|||SoldierToken|
+
+# DMC
+|Generate|TOK:DMC|Angel|||AngelVigilanceToken|
+|Generate|TOK:DMC|Badger|||BadgerToken|
+|Generate|TOK:DMC|Bear|||BearToken|
+|Generate|TOK:DMC|Cat Warrior|||CatWarriorToken|
+|Generate|TOK:DMC|Egg|||AtlaPalaniToken|
+|Generate|TOK:DMC|Elephant|||ElephantToken|
+|Generate|TOK:DMC|Griffin|||GriffinToken|
+|Generate|TOK:DMC|Human|||HumanToken|
+|Generate|TOK:DMC|Hydra|||ZaxaraTheExemplaryHydraToken|
+|Generate|TOK:DMC|Insect|||XiraBlackInsectToken|
+|Generate|TOK:DMC|Kavu|||KavuAllColorToken|
+|Generate|TOK:DMC|Knight|1||KnightToken|
+|Generate|TOK:DMC|Knight|2||RasputinKnightToken|
+|Generate|TOK:DMC|Kobolds of Kher Keep|||KherKeepKoboldToken|
+|Generate|TOK:DMC|Merfolk|||MerfolkToken|
+|Generate|TOK:DMC|Ragavan|||RagavanToken|
+|Generate|TOK:DMC|Sand Warrior|||HazezonTamarSandWarriorToken|
+|Generate|TOK:DMC|Snake|||SnakeToken|
+|Generate|TOK:DMC|Stangg Twin|||StanggTwinToken|
+|Generate|TOK:DMC|Treasure|||TreasureToken|
+|Generate|TOK:DMC|Warrior|||WarriorVigilantToken|
+|Generate|TOK:DMC|Wurm|||Wurm44Token|
+|Generate|TOK:DMC|Zombie|||ZombieToken|
+|Generate|TOK:DMC|Zombie Knight|||ZombieKnightToken|

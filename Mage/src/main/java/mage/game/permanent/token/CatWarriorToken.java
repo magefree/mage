@@ -19,7 +19,7 @@ public final class CatWarriorToken extends TokenImpl {
     static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("C17", "C18"));
+        tokenImageSets.addAll(Arrays.asList("C17", "C18", "DMC"));
     }
 
     public CatWarriorToken() {

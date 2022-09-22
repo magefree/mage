@@ -1760,6 +1760,31 @@ public class ScryfallImageSupportTokens {
             put ("DMU/Saproling", "https://api.scryfall.com/cards/tdmu/18/en?format=image");
             put ("DMU/Soldier", "https://api.scryfall.com/cards/tdmu/4/en?format=image");
 
+            // DMC
+            put ("DMC/Angel", "https://api.scryfall.com/cards/tdmu/1/en?format=image");
+            put ("DMC/Badger", "https://api.scryfall.com/cards/tdmu/15/en?format=image");
+            put ("DMC/Bear", "https://api.scryfall.com/cards/tdmc/7/en?format=image");
+            put ("DMC/Cat Warrior", "https://api.scryfall.com/cards/tdmu/17/en?format=image");
+            put ("DMC/Egg", "https://api.scryfall.com/cards/tdmc/8/en?format=image");
+            put ("DMC/Elephant", "https://api.scryfall.com/cards/tdmc/9/en?format=image");
+            put ("DMC/Griffin", "https://api.scryfall.com/cards/tdmc/1/en?format=image");
+            put ("DMC/Human", "https://api.scryfall.com/cards/tdmc/2/en?format=image");
+            put ("DMC/Hydra", "https://api.scryfall.com/cards/tdmc/10/en?format=image");
+            put ("DMC/Insect", "https://api.scryfall.com/cards/tdmu/7/en?format=image");
+            put ("DMC/Kavu", "https://api.scryfall.com/cards/tdmc/12/en?format=image");
+            put ("DMC/Knight/1", "https://api.scryfall.com/cards/tdmc/3/en?format=image");
+            put ("DMC/Knight/2", "https://api.scryfall.com/cards/tdmu/3/en?format=image");
+            put ("DMC/Kobolds of Kher Keep", "https://api.scryfall.com/cards/tdmu/13/en?format=image");
+            put ("DMC/Merfolk", "https://api.scryfall.com/cards/tdmu/5/en?format=image");
+            put ("DMC/Ragavan", "https://api.scryfall.com/cards/tdmc/6/en?format=image");
+            put ("DMC/Sand Warrior", "https://api.scryfall.com/cards/tdmu/20/en?format=image");
+            put ("DMC/Snake", "https://api.scryfall.com/cards/tdmc/11/en?format=image");
+            put ("DMC/Stangg Twin", "https://api.scryfall.com/cards/tdmu/21/en?format=image");
+            put ("DMC/Treasure", "https://api.scryfall.com/cards/tdmu/24/en?format=image");
+            put ("DMC/Warrior", "https://api.scryfall.com/cards/tdmc/4/en?format=image");
+            put ("DMC/Wurm", "https://api.scryfall.com/cards/tdmu/19/en?format=image");
+            put ("DMC/Zombie", "https://api.scryfall.com/cards/tdmu/9/en?format=image");
+            put ("DMC/Zombie Knight", "https://api.scryfall.com/cards/tdmc/5/en?format=image");
 
             // generate supported sets
             supportedSets.clear();
