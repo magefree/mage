@@ -197,9 +197,9 @@ public class ThreefoldSignalTest extends CardTestPlayerBase {
         String lion = "Silvercoat Lion";
         addCard(Zone.BATTLEFIELD, playerA, lion);
         String griffin = "Abbey Griffin";
-        addCard(Zone.GRAVEYARD, playerA, griffin);
+        addCard(Zone.GRAVEYARD, playerA, griffin); // Exile with original cast
         String centaur = "Accursed Centaur";
-        addCard(Zone.GRAVEYARD, playerA, centaur);
+        addCard(Zone.GRAVEYARD, playerA, centaur); // Exile with copy
 
         setStrictChooseMode(true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "fused Flesh // Blood");
@@ -212,7 +212,9 @@ public class ThreefoldSignalTest extends CardTestPlayerBase {
         addTarget(playerA, lion);
         addTarget(playerA, playerB);
         // Copy of Flesh
-        // TODO: Currently not given option to change targets
+        setChoice(playerA, true); // Change the exile card from the Griffin
+        addTarget(playerA, centaur);
+        setChoice(playerA, false); // Don't change target from the lion
         // Copy of Blood
         setChoice(playerA, false); // Don't change target from lion
         setChoice(playerA, false); // Don't change target from PlayerB
@@ -222,7 +224,7 @@ public class ThreefoldSignalTest extends CardTestPlayerBase {
 
         assertCounterCount(lion, CounterType.P1P1, 4); // 2 from the copy and two from the original cast
         assertLife(playerB, 20 - (2+2) - (2+2+2));
-        assertExileCount(playerA, lion, 1);
         assertExileCount(playerA, griffin, 1);
+        assertExileCount(playerA, centaur, 1);
     }
 }
