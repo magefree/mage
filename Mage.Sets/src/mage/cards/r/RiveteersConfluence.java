@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public class RiveteersConfluence extends CardImpl {
 
-    private static final FilterPermanent damageFilter = new FilterCreatureOrPlaneswalkerPermanent("creature and planeswalker you don’t control");
+    private static final FilterPermanent damageFilter = new FilterCreatureOrPlaneswalkerPermanent("creature and planeswalker you don't control");
 
     static {
         damageFilter.add(TargetController.NOT_YOU.getControllerPredicate());
