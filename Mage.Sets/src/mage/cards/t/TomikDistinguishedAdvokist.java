@@ -25,7 +25,6 @@ public final class TomikDistinguishedAdvokist extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.ADVISOR);
-        this.subtype.add();
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
