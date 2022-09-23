@@ -17,7 +17,6 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -60,7 +59,7 @@ class ParnesseTheSubtleBrushCopySpellOpponentEffect extends OneShotEffect {
     ParnesseTheSubtleBrushCopySpellOpponentEffect() {
         super(Outcome.Detriment);
         this.staticText = "up to one target opponent may also copy that spell. " +
-                          "They may choose new targets for that copy";
+                "They may choose new targets for that copy";
     }
 
     ParnesseTheSubtleBrushCopySpellOpponentEffect(final ParnesseTheSubtleBrushCopySpellOpponentEffect effect) {
@@ -88,8 +87,9 @@ class ParnesseTheSubtleBrushCopySpellOpponentEffect extends OneShotEffect {
 class ParnesseTheSubtleBrushCopySpellTriggeredAbility extends TriggeredAbilityImpl {
 
     ParnesseTheSubtleBrushCopySpellTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ParnesseTheSubtleBrushCopySpellOpponentEffect(), true);
+        super(Zone.BATTLEFIELD, new ParnesseTheSubtleBrushCopySpellOpponentEffect(), false);
         this.getTargets().add(new TargetOpponent(0, 1, false));
+        setTriggerPhrase("Whenever you copy a spell, ");
     }
 
     private ParnesseTheSubtleBrushCopySpellTriggeredAbility(final ParnesseTheSubtleBrushCopySpellTriggeredAbility ability) {

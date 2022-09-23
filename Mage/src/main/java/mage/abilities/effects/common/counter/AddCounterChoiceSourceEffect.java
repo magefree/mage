@@ -25,7 +25,7 @@ public class AddCounterChoiceSourceEffect extends OneShotEffect {
 
     private final List<CounterType> counterTypes;
 
-    public AddCounterChoiceSourceEffect(CounterType ... counterTypes) {
+    public AddCounterChoiceSourceEffect(CounterType... counterTypes) {
         super(Outcome.Benefit);
         this.counterTypes = Arrays.stream(counterTypes).collect(Collectors.toList());
         this.createStaticText();
@@ -48,7 +48,7 @@ public class AddCounterChoiceSourceEffect extends OneShotEffect {
                 break;
             default:
                 List<String> strings = this.counterTypes.stream().map(CounterType::toString).collect(Collectors.toList());
-                this.staticText = CardUtil.concatWithOr(strings);
+                this.staticText = "with your choice of a " + CardUtil.concatWithOr(strings) + " counter on it";
                 break;
         }
     }

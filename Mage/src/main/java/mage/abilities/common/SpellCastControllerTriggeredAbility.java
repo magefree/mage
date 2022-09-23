@@ -36,6 +36,7 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
     public SpellCastControllerTriggeredAbility(Effect effect, FilterSpell filter, boolean optional, Zone fromZone) {
         this(effect, filter, optional, false);
         this.fromZone = fromZone;
+        makeTriggerPhrase();
     }
 
     public SpellCastControllerTriggeredAbility(Effect effect, FilterSpell filter, boolean optional, String rule) {
@@ -56,7 +57,7 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
         this.filter = filter;
         this.rememberSource = rememberSource;
         this.rememberSourceAsCard = rememberSourceAsCard;
-        setTriggerPhrase("Whenever you cast " + filter.getMessage() + (fromZone != Zone.ALL ? "from your " + fromZone.toString().toLowerCase() : "") + ", ");
+        makeTriggerPhrase();
     }
 
     public SpellCastControllerTriggeredAbility(final SpellCastControllerTriggeredAbility ability) {
@@ -99,5 +100,9 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public SpellCastControllerTriggeredAbility copy() {
         return new SpellCastControllerTriggeredAbility(this);
+    }
+
+    private void makeTriggerPhrase() {
+        setTriggerPhrase("Whenever you cast " + filter.getMessage() + (fromZone != Zone.ALL ? " from your " + fromZone.toString().toLowerCase() : "") + ", ");
     }
 }

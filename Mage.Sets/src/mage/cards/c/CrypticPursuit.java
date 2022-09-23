@@ -18,8 +18,6 @@ import mage.filter.predicate.card.FaceDownPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -28,7 +26,8 @@ import java.util.UUID;
  */
 public class CrypticPursuit extends CardImpl {
 
-    private static final FilterPermanent filterFaceDownPermanent = new FilterControlledCreaturePermanent("a face-down creature");
+    private static final FilterPermanent filterFaceDownPermanent = new FilterControlledCreaturePermanent("a face-down creature you control");
+
     static {
         filterFaceDownPermanent.add(FaceDownPredicate.instance);
     }
@@ -70,7 +69,7 @@ class CrypticPursuitExileAndPlayEffect extends OneShotEffect {
     CrypticPursuitExileAndPlayEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile it if it's an instant or sorcery card. " +
-                          "You may cast that card until the end of your next turn.";
+                "You may cast that card until the end of your next turn.";
     }
 
     @Override

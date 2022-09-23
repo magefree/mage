@@ -24,6 +24,7 @@ public class CasualtyAbility extends StaticAbility implements OptionalAdditional
 
     private static final String keywordText = "Casualty";
     private final String promptString;
+    private final String rule;
 
     protected OptionalAdditionalCost additionalCost;
 
@@ -39,9 +40,10 @@ public class CasualtyAbility extends StaticAbility implements OptionalAdditional
         super(Zone.STACK, null);
         String reminderText = "As you cast this spell, you may sacrifice a creature with power " +
                 number + " or greater. When you do, copy this spell.";
-        this.promptString = "Sacrifice a creature with power " + number + " or greater?";
         this.additionalCost = new OptionalAdditionalCostImpl(keywordText, reminderText, new SacrificeTargetCost(makeFilter(number)));
         this.additionalCost.setRepeatable(false);
+        this.promptString = "Sacrifice a creature with power " + number + " or greater?";
+        this.rule = additionalCost.getName() + ' ' + number + ' ' + additionalCost.getReminderText();
         this.setRuleAtTheTop(true);
     }
 
@@ -49,6 +51,7 @@ public class CasualtyAbility extends StaticAbility implements OptionalAdditional
         super(ability);
         this.additionalCost = ability.additionalCost;
         this.promptString = ability.promptString;
+        this.rule = ability.rule;
     }
 
     public void resetCasualty() {
@@ -91,5 +94,10 @@ public class CasualtyAbility extends StaticAbility implements OptionalAdditional
     @Override
     public String getCastMessageSuffix() {
         return additionalCost == null ? "" : additionalCost.getCastSuffixMessage(0);
+    }
+
+    @Override
+    public String getRule() {
+        return rule;
     }
 }

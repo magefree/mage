@@ -28,7 +28,7 @@ import java.util.UUID;
  */
 public class PhabineBosssConfidant extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Creature tokens you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Creature tokens");
     static {
         filter.add(TokenPredicate.TRUE);
     }

@@ -7,7 +7,6 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.TreasureSpentToCastCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
@@ -16,15 +15,18 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.TreasureToken;
 import mage.players.Player;
+import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
 import mage.watchers.common.CreatedTokenWatcher;
-import mage.watchers.common.ManaPaidSourceWatcher;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -54,10 +56,7 @@ public class VaziKeenNegotiator extends CardImpl {
         // if mana from a Treasure was spent to cast it or activate it,
         // put a +1/+1 counter on target creature,
         // then draw a card.
-        Ability castAbility = new VaziKeenNegotiatorOpponentCastsOrActivatesTriggeredAbility();
-        castAbility.addTarget(new TargetOpponent());
-        castAbility.addEffect(new DrawCardSourceControllerEffect(1));
-        this.addAbility(castAbility);
+        this.addAbility(new VaziKeenNegotiatorOpponentCastsOrActivatesTriggeredAbility());
     }
 
     private VaziKeenNegotiator(final VaziKeenNegotiator card) {
@@ -74,6 +73,8 @@ class VaziKeenNegotiatorOpponentCastsOrActivatesTriggeredAbility extends Trigger
 
     VaziKeenNegotiatorOpponentCastsOrActivatesTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
+        addTarget(new TargetCreaturePermanent());
+        addEffect(new DrawCardSourceControllerEffect(1).concatBy(", then"));
         setTriggerPhrase("Whenever an opponent casts a spell or activates an ability, if mana from a Treasure was spent to cast it or activate it, ");
     }
 

@@ -63,8 +63,8 @@ class NextOfKinDiesEffect extends OneShotEffect {
 
     NextOfKinDiesEffect() {
         super(Outcome.Benefit);
-        this.staticText = "you may put a creature card you own with lesser mana value from your hand or from the command zone onto the battlefield." +
-                "If you do, return Next of Kin to the battlefield attached to that creature at the beginning of the next end step.";
+        this.staticText = "you may put a creature card you own with lesser mana value from your hand or from the command zone onto the battlefield. " +
+                "If you do, return {this} to the battlefield attached to that creature at the beginning of the next end step.";
     }
 
     private NextOfKinDiesEffect(final NextOfKinDiesEffect effect) {

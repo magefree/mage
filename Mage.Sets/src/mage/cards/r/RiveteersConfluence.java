@@ -1,7 +1,10 @@
 package mage.cards.r;
 
 import mage.abilities.Mode;
-import mage.abilities.effects.common.*;
+import mage.abilities.effects.common.DamageAllEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
+import mage.abilities.effects.common.PutCardFromOneOfTwoZonesOntoBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -17,7 +20,7 @@ import java.util.UUID;
  */
 public class RiveteersConfluence extends CardImpl {
 
-    private static final FilterPermanent damageFilter = new FilterCreatureOrPlaneswalkerPermanent();
+    private static final FilterPermanent damageFilter = new FilterCreatureOrPlaneswalkerPermanent("creature and planeswalker you don’t control");
 
     static {
         damageFilter.add(TargetController.NOT_YOU.getControllerPredicate());

@@ -63,7 +63,7 @@ class MasterOfCeremoniesChoiceEffect extends OneShotEffect {
         super(Outcome.Benefit);
         this.staticText = "each opponent chooses money, friends, or secrets. " +
                           "For each player who chose money, you and that player each create a Treasure token. " +
-                          "For each player who chose friends, you and that player each create a 1/1 green and white Citizen creature token.  " +
+                          "For each player who chose friends, you and that player each create a 1/1 green and white Citizen creature token. " +
                           "For each player who chose secrets, you and that player each draw a card.";
     }
 
