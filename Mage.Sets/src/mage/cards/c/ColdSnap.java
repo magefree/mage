@@ -50,15 +50,11 @@ class ColdSnapDamageTargetEffect extends OneShotEffect {
 
     public ColdSnapDamageTargetEffect() {
         super(Outcome.Damage);
+        this.staticText = "{this} deals damage to that player equal to the number of snow lands they control";
     }
 
     public ColdSnapDamageTargetEffect(ColdSnapDamageTargetEffect copy) {
         super(copy);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "{this} deals damage to that player equal to the number of snow lands they control";
     }
 
     @Override

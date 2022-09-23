@@ -4,22 +4,18 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.RevealAndSeparatePilesEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.*;
 import mage.constants.*;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
-import java.util.ArrayList;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -39,7 +35,9 @@ public final class JaceArchitectOfThought extends CardImpl {
 
         // -2: Reveal the top three cards of your library. An opponent separates those cards into two piles. 
         // Put one pile into your hand and the other on the bottom of your library in any order.
-        this.addAbility(new LoyaltyAbility(new JaceArchitectOfThoughtEffect2(), -2));
+        this.addAbility(new LoyaltyAbility(new RevealAndSeparatePilesEffect(
+                3, TargetController.OPPONENT, TargetController.YOU, Zone.LIBRARY
+        ), -2));
 
         // -8: For each player, search that player's library for a nonland card and exile it, 
         // then that player shuffles their library. You may cast those cards without paying their mana costs.
@@ -125,79 +123,6 @@ class JaceArchitectOfThoughtDelayedTriggeredAbility extends DelayedTriggeredAbil
     @Override
     public String getRule() {
         return "Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.";
-    }
-}
-
-class JaceArchitectOfThoughtEffect2 extends OneShotEffect {
-
-    public JaceArchitectOfThoughtEffect2() {
-        super(Outcome.DrawCard);
-        this.staticText = "Reveal the top three cards of your library. An opponent separates those cards "
-                + "into two piles. Put one pile into your hand and the other on the bottom of your library in any order";
-    }
-
-    public JaceArchitectOfThoughtEffect2(final JaceArchitectOfThoughtEffect2 effect) {
-        super(effect);
-    }
-
-    @Override
-    public JaceArchitectOfThoughtEffect2 copy() {
-        return new JaceArchitectOfThoughtEffect2(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-
-        Cards allCards = new CardsImpl(player.getLibrary().getTopCards(game, 3));
-        player.revealCards(source, allCards, game);
-        Set<UUID> opponents = game.getOpponents(source.getControllerId());
-        if (!opponents.isEmpty()) {
-            Player opponent = null;
-            if (opponents.size() > 1) {
-                TargetOpponent targetOpponent = new TargetOpponent();
-                if (player.chooseTarget(Outcome.Neutral, targetOpponent, source, game)) {
-                    opponent = game.getPlayer(targetOpponent.getFirstTarget());
-                }
-            }
-            if (opponent == null) {
-                opponent = game.getPlayer(opponents.iterator().next());
-            }
-            TargetCard target = new TargetCard(0, allCards.size(), Zone.LIBRARY, new FilterCard("cards to put in the first pile"));
-            target.setNotTarget(true);
-            opponent.choose(Outcome.Neutral, allCards, target, game);
-            Cards pile1 = new CardsImpl(target.getTargets());
-            Cards pile2 = new CardsImpl(allCards);
-            pile2.removeAll(pile1);
-            player.revealCards(source, "Pile 1", pile1, game);
-            player.revealCards(source, "Pile 2", pile2, game);
-
-            postPileToLog("Pile 1", pile1.getCards(game), game);
-            postPileToLog("Pile 2", pile2.getCards(game), game);
-
-            boolean pileChoice = player.choosePile(Outcome.Neutral, "Choose a pile to to put into your hand.",
-                    new ArrayList<>(pile1.getCards(game)),
-                    new ArrayList<>(pile2.getCards(game)), game);
-            game.informPlayers(player.getLogName() + " chose pile" + (pileChoice ? "1" : "2"));
-            player.moveCards(pileChoice ? pile1 : pile2, Zone.HAND, source, game);
-            player.putCardsOnBottomOfLibrary(pileChoice ? pile2 : pile1, game, source, true);
-            return true;
-        }
-        return false;
-    }
-
-    private void postPileToLog(String pileName, Set<Card> cards, Game game) {
-        StringBuilder message = new StringBuilder(pileName).append(": ");
-        cards.forEach((card) -> {
-            message.append(card.getName()).append(' ');
-        });
-        if (cards.isEmpty()) {
-            message.append(" (empty)");
-        }
-        game.informPlayers(message.toString());
     }
 }
 

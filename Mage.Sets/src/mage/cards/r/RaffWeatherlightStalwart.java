@@ -48,7 +48,9 @@ public final class RaffWeatherlightStalwart extends CardImpl {
 
         // {3}{W}{W}: Creatures you control get +1/+1 and gain vigilance until end of turn.
         Ability ability = new SimpleActivatedAbility(
-                new BoostControlledEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{3}{W}{W}")
+                new BoostControlledEffect(1, 1, Duration.EndOfTurn)
+                        .setText("creatures you control get +1/+1"),
+                new ManaCostsImpl<>("{3}{W}{W}")
         );
         ability.addEffect(new GainAbilityControlledEffect(
                 VigilanceAbility.getInstance(), Duration.EndOfTurn,

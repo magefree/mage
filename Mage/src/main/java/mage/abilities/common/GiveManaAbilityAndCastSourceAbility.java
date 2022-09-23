@@ -81,6 +81,14 @@ class GainManaAbilitiesWhileExiledEffect extends ContinuousEffectImpl {
     GainManaAbilitiesWhileExiledEffect(String colors) {
         super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.colors = colors;
+        this.staticText =
+                "target land gains \"{T}: Add " +
+                CardUtil.concatWithOr(
+                        Arrays.stream(colors.split(""))
+                                .map(s -> '{' + s + '}')
+                                .collect(Collectors.toList())
+                ) +
+                "\" until {this} is cast from exile";
     }
 
     private GainManaAbilitiesWhileExiledEffect(final GainManaAbilitiesWhileExiledEffect effect) {
@@ -128,17 +136,6 @@ class GainManaAbilitiesWhileExiledEffect extends ContinuousEffectImpl {
             permanent.addAbility(ability, source.getSourceId(), game);
         }
         return true;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "target land gains \"{T}: Add " +
-                CardUtil.concatWithOr(
-                        Arrays.stream(colors.split(""))
-                                .map(s -> '{' + s + '}')
-                                .collect(Collectors.toList())
-                ) +
-                "\" until {this} is cast from exile";
     }
 }
 

@@ -63,6 +63,7 @@ class JovensFerretsEffect extends OneShotEffect {
 
     public JovensFerretsEffect() {
         super(Outcome.Benefit);
+        this.staticText = "tap all creatures that blocked {this} this turn. They don't untap during their controller's next untap step.";
     }
 
     public JovensFerretsEffect(final JovensFerretsEffect effect) {
@@ -99,10 +100,5 @@ class JovensFerretsEffect extends OneShotEffect {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "tap all creatures that blocked {this} this turn. They don't untap during their controller's next untap step.";
     }
 }

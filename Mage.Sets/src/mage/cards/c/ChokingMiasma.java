@@ -35,7 +35,7 @@ public final class ChokingMiasma extends CardImpl {
         this.getSpellAbility().addEffect(new ChokingMiasmaEffect());
 
         // All creatures get -2/-2 until end of turn.
-        this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Duration.EndOfTurn).concatBy("<br>"));
     }
 
     private ChokingMiasma(final ChokingMiasma card) {

@@ -254,10 +254,6 @@ public interface Permanent extends Card, Controllable {
 
     int getMaxBlockedBy();
 
-    boolean isRemovedFromCombat();
-
-    void setRemovedFromCombat(boolean removedFromCombat);
-
     /**
      * Sets the maximum number of blockers the creature can be blocked by.
      * Default = 0 which means there is no restriction in the number of
@@ -297,9 +293,17 @@ public interface Permanent extends Card, Controllable {
      */
     boolean canUseActivatedAbilities(Game game);
 
+    /**
+     * Removes this permanent from combat
+     *
+     * @param game
+     * @param withEvent true if removed from combat by an effect (default)
+     *                  false if removed because it left the battlefield
+     * @return true if permanent was attacking or blocking
+     */
     boolean removeFromCombat(Game game);
 
-    boolean removeFromCombat(Game game, boolean withInfo);
+    boolean removeFromCombat(Game game, boolean withEvent);
 
     boolean isDeathtouched();
 

@@ -655,6 +655,9 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 blockerList.remove(blockerId);
             }
         }
+        if (!game.isSimulation() && blockerOrder.size() > 1) {
+            logDamageAssignmentOrder("Creatures blocking ", attackers, blockerOrder, game);
+        }
     }
 
     public void pickAttackerOrder(UUID playerId, Game game) {
@@ -681,6 +684,37 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 attackerList.remove(attackerId);
             }
         }
+        if (!game.isSimulation() && attackerOrder.size() > 1) {
+            logDamageAssignmentOrder("Creatures blocked by ", blockers, attackerOrder, game);
+        }
+    }
+
+    private void logDamageAssignmentOrder(String prefix, List<UUID> assignedFor, List<UUID> assignedOrder, Game game) {
+        StringBuilder sb = new StringBuilder(prefix);
+        boolean first = true;
+        for (UUID id : assignedFor) {
+            Permanent perm = game.getPermanent(id);
+            if (perm != null) {
+                if (!first) {
+                    sb.append(", ");
+                }
+                sb.append(perm.getLogName());
+                first = false;
+            }
+        }
+        sb.append(" are ordered: ");
+        first = true;
+        for (UUID id : assignedOrder) {
+            Permanent perm = game.getPermanent(id);
+            if (perm != null) {
+                if (!first) {
+                    sb.append(", ");
+                }
+                sb.append(perm.getLogName());
+                first = false;
+            }
+        }
+        game.informPlayers(sb.toString());
     }
 
     public int totalAttackerDamage(Game game) {

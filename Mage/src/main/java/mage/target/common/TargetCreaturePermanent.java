@@ -13,7 +13,7 @@ import mage.target.TargetPermanent;
 public class TargetCreaturePermanent extends TargetPermanent {
 
     public TargetCreaturePermanent() {
-        this(1, 1, FILTER_PERMANENT_CREATURE, false);
+        this(1);
     }
 
     public TargetCreaturePermanent(FilterCreaturePermanent filter) {
@@ -21,11 +21,11 @@ public class TargetCreaturePermanent extends TargetPermanent {
     }
 
     public TargetCreaturePermanent(int numTargets) {
-        this(numTargets, numTargets, StaticFilters.FILTER_PERMANENT_CREATURE, false);
+        this(numTargets, numTargets);
     }
 
     public TargetCreaturePermanent(int minNumTargets, int maxNumTargets) {
-        this(minNumTargets, maxNumTargets, StaticFilters.FILTER_PERMANENT_CREATURE, false);
+        this(minNumTargets, maxNumTargets, maxNumTargets > 1 ? StaticFilters.FILTER_PERMANENT_CREATURES : StaticFilters.FILTER_PERMANENT_CREATURE, false);
     }
 
     public TargetCreaturePermanent(int minNumTargets, int maxNumTargets, FilterCreaturePermanent filter, boolean notTarget) {

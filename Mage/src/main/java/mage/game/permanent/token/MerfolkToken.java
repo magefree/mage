@@ -21,7 +21,7 @@ public final class MerfolkToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("ZEN");
+        availableImageSetCodes = Arrays.asList("ZEN", "DMC");
     }
 
     public MerfolkToken(final MerfolkToken token) {

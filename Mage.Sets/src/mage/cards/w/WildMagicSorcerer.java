@@ -70,23 +70,24 @@ class WildMagicSorcererGainCascadeFirstSpellCastFromExileEffect extends Continuo
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for (StackObject stackObject : game.getStack()) {
-                // only spells cast, so no copies of spells
-                if ((stackObject instanceof Spell)
-                        && !stackObject.isCopy()
-                        && stackObject.isControlledBy(source.getControllerId())) {
-                    Spell spell = (Spell) stackObject;
-                    WildMagicSorcererWatcher watcher = game.getState().getWatcher(WildMagicSorcererWatcher.class);
-                    if (watcher != null
-                            && FirstSpellCastFromExileEachTurnCondition.instance.apply(game, source)) {
-                        game.getState().addOtherAbility(spell.getCard(), cascadeAbility);
-                    }
+        WildMagicSorcererWatcher watcher = game.getState().getWatcher(WildMagicSorcererWatcher.class);
+        if (controller == null || watcher == null) {
+            return false;
+        }
+
+        for (StackObject stackObject : game.getStack()) {
+            // only spells cast, so no copies of spells
+            if ((stackObject instanceof Spell)
+                    && !stackObject.isCopy()
+                    && stackObject.isControlledBy(source.getControllerId())) {
+                Spell spell = (Spell) stackObject;
+
+                if (FirstSpellCastFromExileEachTurnCondition.instance.apply(game, source)) {
+                    game.getState().addOtherAbility(spell.getCard(), cascadeAbility);
                 }
             }
-            return true;
         }
-        return false;
+        return true;
     }
 }
 
@@ -100,8 +101,7 @@ enum FirstSpellCastFromExileEachTurnCondition implements Condition {
         }
         WildMagicSorcererWatcher watcher = game.getState().getWatcher(WildMagicSorcererWatcher.class);
         StackObject so = game.getStack().getFirst();
-        return so != null
-                && watcher != null
+        return watcher != null
                 && WildMagicSorcererWatcher.checkSpell(so, game);
     }
 }

@@ -46,6 +46,7 @@ class SetSupertypeAllEffect extends ContinuousEffectImpl {
 
     public SetSupertypeAllEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Detriment);
+        this.staticText = "All nonland permanents are legendary";
     }
 
     public SetSupertypeAllEffect(final SetSupertypeAllEffect effect) {
@@ -63,10 +64,5 @@ class SetSupertypeAllEffect extends ContinuousEffectImpl {
             permanent.addSuperType(SuperType.LEGENDARY);
         }
         return true;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "All nonland permanents are legendary";
     }
 }

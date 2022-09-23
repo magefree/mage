@@ -21,7 +21,7 @@ public final class AtlaPalaniToken extends TokenImpl {
         toughness = new MageInt(1);
         addAbility(DefenderAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("C19","2X2");
+        availableImageSetCodes = Arrays.asList("C19", "2X2", "DMC");
     }
 
     private AtlaPalaniToken(final AtlaPalaniToken token) {

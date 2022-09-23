@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.combat.CantAttackYouUnlessPayManaAllEffect;
+import mage.abilities.effects.common.combat.CantAttackYouUnlessPayAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
@@ -33,7 +33,7 @@ public final class ArchonOfAbsolution extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
 
         // Creatures can't attack you or a planeswalker you control unless their controller pays {1} for each of those creatures.
-        this.addAbility(new SimpleStaticAbility(new CantAttackYouUnlessPayManaAllEffect(
+        this.addAbility(new SimpleStaticAbility(new CantAttackYouUnlessPayAllEffect(
                 new ManaCostsImpl<>("{1}"), true
         ).setText("creatures can't attack you or planeswalkers you control " +
                 "unless their controller pays {1} for each of those creatures")));

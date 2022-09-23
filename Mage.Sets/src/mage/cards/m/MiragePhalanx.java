@@ -29,8 +29,8 @@ public class MiragePhalanx extends CardImpl {
                     "except it has haste and loses soulbond. " +
                     "Exile it at end of combat.\"";
 
-    public MiragePhalanx(UUID ownderId, CardSetInfo setInfo) {
-        super(ownderId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
+    public MiragePhalanx(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
 
         this.addSubType(SubType.HUMAN);
         this.addSubType(SubType.SOLDIER);

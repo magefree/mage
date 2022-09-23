@@ -23,8 +23,8 @@ public class MastersRebuke extends CardImpl {
         filter.add(TargetController.NOT_YOU.getControllerPredicate());
     }
 
-    public MastersRebuke(UUID ownderId, CardSetInfo setInfo) {
-        super(ownderId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
+    public MastersRebuke(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
 
         // Target creature you control deals damage equal to its power to target creature or planeswalker you don’t control.
         this.getSpellAbility().addEffect(new DamageWithPowerFromOneToAnotherTargetEffect());

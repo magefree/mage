@@ -1,8 +1,7 @@
-
 package mage.cards.p;
 
 import mage.abilities.effects.common.MayTapOrUntapTargetEffect;
-import mage.abilities.keyword.SpliceOntoArcaneAbility;
+import mage.abilities.keyword.SpliceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,9 +23,9 @@ public final class PsychicPuppetry extends CardImpl {
 
         // You may tap or untap target permanent.
         this.getSpellAbility().addEffect(new MayTapOrUntapTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent());
+        this.getSpellAbility().addTarget(new TargetPermanent().withChooseHint("tap or untap"));
         // Splice onto Arcane {U}
-        this.addAbility(new SpliceOntoArcaneAbility("{U}"));
+        this.addAbility(new SpliceAbility(SpliceAbility.ARCANE, "{U}"));
     }
 
     private PsychicPuppetry(final PsychicPuppetry card) {

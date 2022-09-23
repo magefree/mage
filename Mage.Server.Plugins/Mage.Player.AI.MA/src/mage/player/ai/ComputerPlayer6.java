@@ -844,7 +844,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
     }
 
     private List<Permanent> getAttackers(Game game) {
-        List<UUID> attackersUUID = game.getCombat().getAttackers();
+        Set<UUID> attackersUUID = game.getCombat().getAttackers();
         if (attackersUUID.isEmpty()) {
             return null;
         }

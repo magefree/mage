@@ -10,10 +10,7 @@ import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -33,7 +30,7 @@ public final class TwoHandedAxe extends AdventureCard {
 
         // Whenever equipped creature attacks, double its power until end of turn.
         this.addAbility(new AttacksAttachedTriggeredAbility(
-                new TwoHandedAxeEffect(), AttachmentType.EQUIPMENT, false, true
+                new TwoHandedAxeEffect(), AttachmentType.EQUIPMENT, false, SetTargetPointer.PERMANENT
         ));
 
         // Equip {1}{R}

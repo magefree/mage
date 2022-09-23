@@ -16,8 +16,9 @@ public final class Unfinity extends ExpansionSet {
     }
 
     private Unfinity() {
-        super("Unfinity", "UNF", ExpansionSet.buildDate(2022, 4, 1), SetType.JOKESET); // TODO: some of these cards are legacy legal
+        super("Unfinity", "UNF", ExpansionSet.buildDate(2022, 4, 1), SetType.SUPPLEMENTAL);
         this.hasBasicLands = true;
+        this.hasBoosters = false; // not likely to be able to drafts at any point
 
         cards.add(new SetCardInfo("Blood Crypt", 279, Rarity.RARE, mage.cards.b.BloodCrypt.class));
         cards.add(new SetCardInfo("Breeding Pool", 286, Rarity.RARE, mage.cards.b.BreedingPool.class));

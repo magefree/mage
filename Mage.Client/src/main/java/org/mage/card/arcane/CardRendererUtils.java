@@ -243,16 +243,14 @@ public final class CardRendererUtils {
 
         // boost colorizing
         if (value != null) {
-            int current = value.getValue();
-            int origin = value.getModifiedBaseValue();
-            if (origin != 0) {
-                if (current < origin) {
-                    return textLight ? CARD_TEXT_COLOR_BAD_LIGHT : CARD_TEXT_COLOR_BAD_DARK;
-                } else if (current > origin) {
-                    return textLight ? CARD_TEXT_COLOR_GOOD_LIGHT : CARD_TEXT_COLOR_GOOD_DARK;
-                } else {
-                    return defaultColor;
-                }
+            int currentValue = value.getValue();
+            int baseValue = value.getModifiedBaseValue();
+            if (currentValue < baseValue) {
+                return textLight ? CARD_TEXT_COLOR_BAD_LIGHT : CARD_TEXT_COLOR_BAD_DARK;
+            } else if (currentValue > baseValue) {
+                return textLight ? CARD_TEXT_COLOR_GOOD_LIGHT : CARD_TEXT_COLOR_GOOD_DARK;
+            } else {
+                return defaultColor;
             }
         }
 

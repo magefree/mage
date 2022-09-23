@@ -298,6 +298,7 @@ public class GameEvent implements Serializable {
          */
         BLOCKER_DECLARED,
         CREATURE_BLOCKED,
+        CREATURE_BLOCKS,
         BATCH_BLOCK_NONCOMBAT,
         UNBLOCKED_ATTACKER,
         SEARCH_LIBRARY, LIBRARY_SEARCHED,

@@ -28,8 +28,8 @@ import java.util.*;
  * @author Alex-Vasile
  */
 public class MasterOfCeremonies extends CardImpl {
-    public MasterOfCeremonies(UUID ownderId, CardSetInfo setInfo) {
-        super(ownderId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
+    public MasterOfCeremonies(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
 
         this.subtype.add(SubType.RHINO);
         this.subtype.add(SubType.DRUID);
