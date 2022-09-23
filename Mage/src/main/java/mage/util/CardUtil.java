@@ -9,6 +9,8 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.condition.Condition;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.Costs;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -61,7 +63,7 @@ public final class CardUtil {
 
     public static final List<String> RULES_ERROR_INFO = ImmutableList.of("Exception occurred in rules generation");
 
-    private static final String SOURCE_EXILE_ZONE_TEXT = "SourceExileZone";
+    public static final String SOURCE_EXILE_ZONE_TEXT = "SourceExileZone";
 
     static final String[] numberStrings = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
             "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"};
@@ -1330,6 +1332,103 @@ public final class CardUtil {
                 break;
             }
         }
+    }
+
+    public static void castSingle(Player player, Ability source, Game game, Card card) {
+        castSingle(player, source, game, card, null);
+    }
+
+    public static void castSingle(Player player, Ability source, Game game, Card card, ManaCostsImpl<ManaCost> manaCost) {
+        // handle split-cards
+        if (card instanceof SplitCard) {
+            SplitCardHalf leftHalfCard = ((SplitCard) card).getLeftHalfCard();
+            SplitCardHalf rightHalfCard = ((SplitCard) card).getRightHalfCard();
+            if (manaCost != null) {
+                // get additional cost if any
+                Costs<Cost> additionalCostsLeft = leftHalfCard.getSpellAbility().getCosts();
+                Costs<Cost> additionalCostsRight = rightHalfCard.getSpellAbility().getCosts();
+                // set alternative cost and any additional cost
+                player.setCastSourceIdWithAlternateMana(leftHalfCard.getId(), manaCost, additionalCostsLeft);
+                player.setCastSourceIdWithAlternateMana(rightHalfCard.getId(), manaCost, additionalCostsRight);
+            }
+            // allow the card to be cast
+            game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), Boolean.TRUE);
+            game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), Boolean.TRUE);
+        }
+
+        // handle MDFC
+        if (card instanceof ModalDoubleFacesCard) {
+            ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
+            ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
+            if (manaCost != null) {
+                // some MDFC cards are lands.  IE: sea gate restoration
+                if (!leftHalfCard.isLand(game)) {
+                    // get additional cost if any
+                    Costs<Cost> additionalCostsMDFCLeft = leftHalfCard.getSpellAbility().getCosts();
+                    // set alternative cost and any additional cost
+                    player.setCastSourceIdWithAlternateMana(leftHalfCard.getId(), manaCost, additionalCostsMDFCLeft);
+                }
+                if (!rightHalfCard.isLand(game)) {
+                    // get additional cost if any
+                    Costs<Cost> additionalCostsMDFCRight = rightHalfCard.getSpellAbility().getCosts();
+                    // set alternative cost and any additional cost
+                    player.setCastSourceIdWithAlternateMana(rightHalfCard.getId(), manaCost, additionalCostsMDFCRight);
+                }
+            }
+            // allow the card to be cast
+            game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), Boolean.TRUE);
+            game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), Boolean.TRUE);
+        }
+
+        // handle adventure cards
+        if (card instanceof AdventureCard) {
+            Card creatureCard = card.getMainCard();
+            Card spellCard = ((AdventureCard) card).getSpellCard();
+            if (manaCost != null) {
+                // get additional cost if any
+                Costs<Cost> additionalCostsCreature = creatureCard.getSpellAbility().getCosts();
+                Costs<Cost> additionalCostsSpellCard = spellCard.getSpellAbility().getCosts();
+                // set alternative cost and any additional cost
+                player.setCastSourceIdWithAlternateMana(creatureCard.getId(), manaCost, additionalCostsCreature);
+                player.setCastSourceIdWithAlternateMana(spellCard.getId(), manaCost, additionalCostsSpellCard);
+            }
+            // allow the card to be cast
+            game.getState().setValue("PlayFromNotOwnHandZone" + creatureCard.getId(), Boolean.TRUE);
+            game.getState().setValue("PlayFromNotOwnHandZone" + spellCard.getId(), Boolean.TRUE);
+        }
+
+        // normal card
+        if (manaCost != null) {
+            // get additional cost if any
+            Costs<Cost> additionalCostsNormalCard = card.getSpellAbility().getCosts();
+            player.setCastSourceIdWithAlternateMana(card.getMainCard().getId(), manaCost, additionalCostsNormalCard);
+        }
+
+        // cast it
+        player.cast(player.chooseAbilityForCast(card.getMainCard(), game, false),
+                game, false, new ApprovingObject(source, game));
+
+        // turn off effect after cast on every possible card-face
+        if (card instanceof SplitCard) {
+            SplitCardHalf leftHalfCard = ((SplitCard) card).getLeftHalfCard();
+            SplitCardHalf rightHalfCard = ((SplitCard) card).getRightHalfCard();
+            game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), null);
+            game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), null);
+        }
+        if (card instanceof ModalDoubleFacesCard) {
+            ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
+            ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
+            game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), null);
+            game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), null);
+        }
+        if (card instanceof AdventureCard) {
+            Card creatureCard = card.getMainCard();
+            Card spellCard = ((AdventureCard) card).getSpellCard();
+            game.getState().setValue("PlayFromNotOwnHandZone" + creatureCard.getId(), null);
+            game.getState().setValue("PlayFromNotOwnHandZone" + spellCard.getId(), null);
+        }
+        // turn off effect on a normal card
+        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
     }
 
     /**

@@ -26,7 +26,7 @@ public final class DigUpTheBody extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}");
 
         // Casualty 1
-        this.addAbility(new CasualtyAbility(this, 1));
+        this.addAbility(new CasualtyAbility(1));
 
         // Mill two cards, then return a creature card from your graveyard to your hand.
         this.getSpellAbility().addEffect(new DigUpTheBodyEffect());

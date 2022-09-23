@@ -20,8 +20,10 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
 
     // The source SPELL that triggered the ability will be set as target to effect
     protected boolean rememberSource;
-    // Use it if you want remember CARD instead spell
+    // Use it if you want to remember CARD instead spell
     protected boolean rememberSourceAsCard;
+    // Trigger only for spells cast from this zone. Default is from any zone.
+    private Zone fromZone = Zone.ALL;
 
     public SpellCastControllerTriggeredAbility(Effect effect, boolean optional) {
         this(Zone.BATTLEFIELD, effect, StaticFilters.FILTER_SPELL_A, optional, false);
@@ -29,6 +31,11 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
 
     public SpellCastControllerTriggeredAbility(Effect effect, FilterSpell filter, boolean optional) {
         this(effect, filter, optional, false);
+    }
+
+    public SpellCastControllerTriggeredAbility(Effect effect, FilterSpell filter, boolean optional, Zone fromZone) {
+        this(effect, filter, optional, false);
+        this.fromZone = fromZone;
     }
 
     public SpellCastControllerTriggeredAbility(Effect effect, FilterSpell filter, boolean optional, String rule) {
@@ -49,7 +56,7 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
         this.filter = filter;
         this.rememberSource = rememberSource;
         this.rememberSourceAsCard = rememberSourceAsCard;
-        setTriggerPhrase("Whenever you cast " + filter.getMessage() + ", ");
+        setTriggerPhrase("Whenever you cast " + filter.getMessage() + (fromZone != Zone.ALL ? "from your " + fromZone.toString().toLowerCase() : "") + ", ");
     }
 
     public SpellCastControllerTriggeredAbility(final SpellCastControllerTriggeredAbility ability) {
@@ -58,6 +65,7 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
         this.rule = ability.rule;
         this.rememberSource = ability.rememberSource;
         this.rememberSourceAsCard = ability.rememberSourceAsCard;
+        this.fromZone = ability.fromZone;
     }
 
     @Override
@@ -67,22 +75,20 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId().equals(this.getControllerId())) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (filter.match(spell, getControllerId(), this, game)) {
-                this.getEffects().setValue("spellCast", spell);
-                if (rememberSource) {
-                    if (rememberSourceAsCard) {
-                        this.getEffects().setTargetPointer(new FixedTarget(spell.getCard().getId(), game));
-                    } else {
-                        this.getEffects().setTargetPointer(new FixedTarget(spell.getId(), game));
-                    }
-
-                }
-                return true;
-            }
+        if (!event.getPlayerId().equals(this.getControllerId())) {
+            return false;
         }
-        return false;
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        if (spell == null
+                || !filter.match(spell, getControllerId(), this, game)
+                || !(fromZone == Zone.ALL || fromZone == spell.getFromZone())) {
+            return false;
+        }
+        this.getEffects().setValue("spellCast", spell);
+        if (rememberSource) {
+            this.getEffects().setTargetPointer(new FixedTarget(rememberSourceAsCard ? spell.getCard().getId() : spell.getId(), game));
+        }
+        return true;
     }
 
     @Override

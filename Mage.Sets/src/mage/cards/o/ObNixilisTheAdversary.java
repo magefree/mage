@@ -69,6 +69,7 @@ public final class ObNixilisTheAdversary extends CardImpl {
     }
 }
 
+// TODO: Would be nice to refactor into Casualty ability so this doesn't have a custom implementation to maintain
 class ObNixilisTheAdversaryCasualtyAbility extends StaticAbility {
 
     public ObNixilisTheAdversaryCasualtyAbility(Card card) {
