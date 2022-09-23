@@ -24,6 +24,7 @@ import java.util.UUID;
 public interface AsThoughEffect extends ContinuousEffect {
 
     // TODO: sourceId appears to have been renamed to objectId
+    // TODO: Change order of game and playerId to match other function
     /**
      * WARNING: DO NOT CHANGE STATE IN THIS FUNCTION. (other than discard the effect)
      * If your implementation requires that the state of the game be changed, any information stored, or the player asked
@@ -66,6 +67,7 @@ public interface AsThoughEffect extends ContinuousEffect {
      */
     boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game);
 
+    // TODO: Change order of game and playerId to match other function
     /**
      * Called after {@link AsThoughEffect#applies(UUID, Ability, Ability, Game, UUID)} has been called and returned true.
      * Put any code that requires changing of state, storing of information, or asking the player for input in this method.

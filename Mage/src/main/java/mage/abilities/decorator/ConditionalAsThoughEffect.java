@@ -68,6 +68,7 @@ public class ConditionalAsThoughEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID sourceId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
         boolean conditionStateTmp = condition.apply(game, source);
+        // TODO: I don't think this works properly. If I copy the effect, then the calls to discard() won't work
         if (conditionStateTmp) {
             AsThoughEffect effectCopy = effect.copy();
             effectCopy.setTargetPointer(this.targetPointer);
