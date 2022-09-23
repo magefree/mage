@@ -107,6 +107,14 @@ class BolassCitadelPlayTheTopCardEffect extends AsThoughEffectImpl {
             return false;
         }
 
+        return true;
+    }
+
+    @Override
+    public boolean apply(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        Card cardToCheck = game.getCard(objectId);
+        Player player = game.getPlayer(cardToCheck.getOwnerId());
+
         // allows to play/cast with alternative life cost
         if (!cardToCheck.isLand(game)) {
             PayLifeCost lifeCost = new PayLifeCost(cardToCheck.getSpellAbility().getManaCosts().manaValue());

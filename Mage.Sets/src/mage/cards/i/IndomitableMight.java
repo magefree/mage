@@ -78,8 +78,16 @@ class IndomitableMightEffect extends AsThoughEffectImpl {
             return false;
         }
         Player controller = game.getPlayer(permanent.getControllerId());
-        return controller != null
-                && controller.chooseUse(Outcome.Damage, "Have " + permanent.getLogName()
+        return controller != null;
+    }
+
+    @Override
+    public boolean apply(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        Permanent sourcePermanent = source.getSourcePermanentOrLKI(game);
+        Permanent permanent = game.getPermanent(sourcePermanent.getAttachedTo());
+        Player controller = game.getPlayer(permanent.getControllerId());
+
+        return controller.chooseUse(Outcome.Damage, "Have " + permanent.getLogName()
                 + " assign damage as though it weren't blocked?", source, game);
     }
 

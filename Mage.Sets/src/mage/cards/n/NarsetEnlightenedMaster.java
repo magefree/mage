@@ -109,13 +109,15 @@ class NarsetEnlightenedMasterCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (objectId.equals(getTargetPointer().getFirst(game, source))
-                && affectedControllerId.equals(source.getControllerId())) {
-            Player player = game.getPlayer(affectedControllerId);
-            if (player != null) {
-                return allowCardToPlayWithoutMana(objectId, source, affectedControllerId, game);
-            }
-        }
-        return false;
+        Player player = game.getPlayer(affectedControllerId);
+
+        return objectId.equals(getTargetPointer().getFirst(game, source))
+                && affectedControllerId.equals(source.getControllerId())
+                && player != null;
+    }
+
+    @Override
+    public boolean apply(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        return allowCardToPlayWithoutMana(objectId, source, affectedControllerId, game);
     }
 }

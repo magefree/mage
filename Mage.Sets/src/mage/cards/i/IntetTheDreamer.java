@@ -73,23 +73,22 @@ class IntetTheDreamerExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Card card = controller.getLibrary().getFromTop(game);
-            MageObject sourceObject = source.getSourceObject(game);
-            if (card != null && sourceObject != null) {
-                card.setFaceDown(true, game);
-                controller.moveCardsToExile(card, source, game, false,
-                        CardUtil.getExileZoneId(game, source.getSourceId(), sourceObject.getZoneChangeCounter(game)), // sourceObject must be used due to source not working correctly
-                        sourceObject.getIdName() + " (" + sourceObject.getZoneChangeCounter(game) + ")");
-                card.setFaceDown(true, game);
-                IntetTheDreamerAsThoughEffect effect = new IntetTheDreamerAsThoughEffect();
-                effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
-                game.getState().addEffect(effect, source);
-                game.getState().setValue("Exiled_IntetTheDreamer" + card.getId(), Boolean.TRUE); // TODO This value will never be removed
-                return true;
-            }
+        Card card = controller.getLibrary().getFromTop(game);
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller == null || card == null || sourceObject == null) {
+            return false;
         }
-        return false;
+
+        card.setFaceDown(true, game);
+        controller.moveCardsToExile(card, source, game, false,
+                CardUtil.getExileZoneId(game, source.getSourceId(), sourceObject.getZoneChangeCounter(game)), // sourceObject must be used due to source not working correctly
+                sourceObject.getIdName() + " (" + sourceObject.getZoneChangeCounter(game) + ")");
+        card.setFaceDown(true, game);
+        IntetTheDreamerAsThoughEffect effect = new IntetTheDreamerAsThoughEffect();
+        effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
+        game.getState().addEffect(effect, source);
+        game.getState().setValue("Exiled_IntetTheDreamer" + card.getId(), Boolean.TRUE); // TODO This value will never be removed
+        return true;
     }
 
     @Override
@@ -131,25 +130,30 @@ class IntetTheDreamerAsThoughEffect extends AsThoughEffectImpl {
         // split cards, etc
         objectId = card.getMainCard().getId();
 
-        if (objectId.equals(targetId)
-                && affectedControllerId.equals(source.getControllerId())) {
-            Card exiledCard = game.getCard(objectId);
-            if (exiledCard == null) {
-                this.discard();
-                return false;
-            }
+        if (!objectId.equals(targetId)
+                || !affectedControllerId.equals(source.getControllerId())) {
+            return false;
+        }
 
-            // cast without mana
-            allowCardToPlayWithoutMana(objectId, source, affectedControllerId, game);
+        Card exiledCard = game.getCard(objectId);
+        if (exiledCard == null) {
+            this.discard();
+            return false;
+        }
 
-            // while Intet remains on battlefield
-            if(!(new SourceRemainsInZoneCondition(Zone.BATTLEFIELD).apply(game, source))) {
-                this.discard();
-                return false;
-            }
+        // while Intet remains on battlefield
+        if (!(new SourceRemainsInZoneCondition(Zone.BATTLEFIELD).apply(game, source))) {
+            this.discard();
+            return false;
+        } else {
             return true;
         }
-        return false;
+    }
+
+    @Override
+    public boolean apply(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        // cast without mana
+        return allowCardToPlayWithoutMana(objectId, source, affectedControllerId, game);
     }
 }
 
@@ -171,22 +175,23 @@ class IntetTheDreamerLookEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (affectedControllerId.equals(source.getControllerId())) {
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
-                Card card = game.getCard(objectId);
-                if (card != null) {
-                    if (card.isFaceDown(game)
-                            && game.getExile().containsId(card.getId(), game)
-                            && Boolean.TRUE.equals(game.getState().getValue("Exiled_IntetTheDreamer" + card.getId()))) {
-                        return true;
-                    } else {
-                        this.discard();
-                        game.getState().setValue("Exiled_IntetTheDreamer" + card.getId(), null);
-                    }
-                }
-            }
+        Player controller = game.getPlayer(source.getControllerId());
+        Card card = game.getCard(objectId);
+        if (!affectedControllerId.equals(source.getControllerId())
+                || controller == null
+                || card == null) {
+            return false;
         }
-        return false;
+        if (card.isFaceDown(game)
+                && game.getExile().containsId(card.getId(), game)
+                && Boolean.TRUE.equals(game.getState().getValue("Exiled_IntetTheDreamer" + card.getId()))) {
+            return true;
+        } else {
+            this.discard();
+            // TODO: I don't know how to deal with this change of state. It will only happen if applies return false
+            //       Yet *another* function to call afterwards??
+            game.getState().setValue("Exiled_IntetTheDreamer" + card.getId(), null);
+            return false;
+        }
     }
 }

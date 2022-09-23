@@ -68,20 +68,22 @@ class BosiumStripCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (!(source instanceof FlashbackAbility)
-                && affectedControllerId.equals(source.getControllerId())) {
-            Player player = game.getPlayer(affectedControllerId);
-            Card card = game.getCard(objectId);
-            if (card != null
-                    && player != null
-                    && card.equals(player.getGraveyard().getTopCard(game))
-                    && StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY.match(card, game)
-                    && game.getState().getZone(objectId) == Zone.GRAVEYARD) {
-                game.getState().setValue("BosiumStrip", card);
-                return true;
-            }
-        }
-        return false;
+        Player player = game.getPlayer(affectedControllerId);
+        Card card = game.getCard(objectId);
+
+        return !(source instanceof FlashbackAbility)
+                && affectedControllerId.equals(source.getControllerId())
+                && card != null
+                && player != null
+                && card.equals(player.getGraveyard().getTopCard(game))
+                && StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY.match(card, game)
+                && game.getState().getZone(objectId) == Zone.GRAVEYARD;
+    }
+
+    @Override
+    public boolean apply(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        game.getState().setValue("BosiumStrip", game.getCard(objectId));
+        return true;
     }
 }
 

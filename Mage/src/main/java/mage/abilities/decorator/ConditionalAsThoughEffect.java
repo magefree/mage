@@ -67,28 +67,62 @@ public class ConditionalAsThoughEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
-        conditionState = condition.apply(game, source);
-        if (conditionState) {
-            effect.setTargetPointer(this.targetPointer);
-            return effect.applies(sourceId, affectedAbility, source, game, playerId);
+        boolean conditionStateTmp = condition.apply(game, source);
+        if (conditionStateTmp) {
+            AsThoughEffect effectCopy = effect.copy();
+            effectCopy.setTargetPointer(this.targetPointer);
+            return effectCopy.applies(sourceId, affectedAbility, source, game, playerId);
         } else if (otherwiseEffect != null) {
-            otherwiseEffect.setTargetPointer(this.targetPointer);
-            return otherwiseEffect.applies(sourceId, affectedAbility, source, game, playerId);
+            AsThoughEffect otherwiseEffectCopy = otherwiseEffect.copy();
+            otherwiseEffectCopy.setTargetPointer(this.targetPointer);
+            return otherwiseEffectCopy.applies(sourceId, affectedAbility, source, game, playerId);
+        } else {
+            return false;
         }
-        return false;
     }
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        boolean conditionStateTmp = condition.apply(game, source);
+        if (conditionStateTmp) {
+            AsThoughEffect effectCopy = effect.copy();
+            effectCopy.setTargetPointer(this.targetPointer);
+            return effectCopy.applies(sourceId, source, affectedControllerId, game);
+        } else if (otherwiseEffect != null) {
+            AsThoughEffect otherwiseEffectCopy = otherwiseEffect.copy();
+            otherwiseEffectCopy.setTargetPointer(this.targetPointer);
+            return otherwiseEffectCopy.applies(sourceId, source, affectedControllerId, game);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean apply(UUID sourceId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
         conditionState = condition.apply(game, source);
         if (conditionState) {
             effect.setTargetPointer(this.targetPointer);
-            return effect.applies(sourceId, source, affectedControllerId, game);
+            return effect.apply(sourceId, affectedAbility, source, game, playerId);
         } else if (otherwiseEffect != null) {
             otherwiseEffect.setTargetPointer(this.targetPointer);
-            return otherwiseEffect.applies(sourceId, source, affectedControllerId, game);
+            return otherwiseEffect.apply(sourceId, affectedAbility, source, game, playerId);
+        } else {
+            return false;
         }
-        return false;
+    }
+
+    @Override
+    public boolean apply(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        conditionState = condition.apply(game, source);
+        if (conditionState) {
+            effect.setTargetPointer(this.targetPointer);
+            return effect.apply(sourceId, source, affectedControllerId, game);
+        } else if (otherwiseEffect != null) {
+            otherwiseEffect.setTargetPointer(this.targetPointer);
+            return otherwiseEffect.apply(sourceId, source, affectedControllerId, game);
+        } else {
+            return false;
+        }
     }
 
     @Override

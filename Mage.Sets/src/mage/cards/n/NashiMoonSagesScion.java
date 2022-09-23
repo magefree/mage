@@ -180,21 +180,29 @@ class NashiMoonSagesScionPlayEffect extends CanPlayCardControllerEffect {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (!super.applies(objectId, source, affectedControllerId, game)
-                || !NashiMoonSagesScionWatcher.checkCard(game, source, mor)) {
-            return false;
-        }
+        Player controller = game.getPlayer(source.getControllerId());
         Card cardToCheck = mor.getCard(game);
+
+        return controller != null
+                && cardToCheck != null
+                && NashiMoonSagesScionWatcher.checkCard(game, source, mor)
+                && super.applies(objectId, source, affectedControllerId, game);
+    }
+
+    @Override
+    public boolean apply(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Card cardToCheck = mor.getCard(game);
+
         if (cardToCheck.isLand(game)) {
             return true;
+        } else {
+            PayLifeCost lifeCost = new PayLifeCost(cardToCheck.getSpellAbility().getManaCosts().manaValue());
+            Costs<Cost> newCosts = new CostsImpl<>();
+            newCosts.add(lifeCost);
+            newCosts.addAll(cardToCheck.getSpellAbility().getCosts());
+            controller.setCastSourceIdWithAlternateMana(cardToCheck.getId(), null, newCosts);
+            return true;
         }
-        // allows to play/cast with alternative life cost
-        Player controller = game.getPlayer(source.getControllerId());
-        PayLifeCost lifeCost = new PayLifeCost(cardToCheck.getSpellAbility().getManaCosts().manaValue());
-        Costs<Cost> newCosts = new CostsImpl<>();
-        newCosts.add(lifeCost);
-        newCosts.addAll(cardToCheck.getSpellAbility().getCosts());
-        controller.setCastSourceIdWithAlternateMana(cardToCheck.getId(), null, newCosts);
-        return true;
     }
 }

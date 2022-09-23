@@ -113,10 +113,14 @@ class XandersPactCastEffect extends CanPlayCardControllerEffect {
             return false;
         }
         Card cardToCheck = game.getCard(objectId);
-        if (cardToCheck.isLand(game)) {
-            return false;
-        }
+        return cardToCheck != null && !cardToCheck.isLand(game);
+    }
+
+    @Override
+    public boolean apply(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        Card cardToCheck = game.getCard(objectId);
         Player controller = game.getPlayer(source.getControllerId());
+
         Costs<Cost> newCosts = new CostsImpl<>();
         newCosts.add(new PayLifeCost(cardToCheck.getManaValue()));
         newCosts.addAll(cardToCheck.getSpellAbility().getCosts());

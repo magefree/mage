@@ -99,11 +99,15 @@ class FalcoSparaPactweaverEffect extends AsThoughEffectImpl {
             return false;
         }
         Card topCard = player.getLibrary().getFromTop(game);
-        if (topCard == null
-                || !topCard.getId().equals(cardToCheck.getMainCard().getId())
-                || cardToCheck.isLand(game)) {
-            return false;
-        }
+        return topCard != null
+                && topCard.getId().equals(cardToCheck.getMainCard().getId())
+                && !cardToCheck.isLand(game);
+    }
+
+    @Override
+    public boolean apply(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        Card cardToCheck = game.getCard(objectId);
+        Player player = game.getPlayer(cardToCheck.getOwnerId());
 
         Costs<Cost> newCosts = new CostsImpl<>();
         newCosts.add(new RemoveCounterCost(new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent(), true)));

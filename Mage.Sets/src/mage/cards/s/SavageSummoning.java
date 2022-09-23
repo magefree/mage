@@ -89,21 +89,23 @@ class SavageSummoningAsThoughEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (watcher.isSavageSummoningSpellActive()) {
-            MageObject mageObject = game.getBaseObject(objectId);
-            if (mageObject instanceof Commander) {
-                Commander commander = (Commander) mageObject;
-                if (commander.isCreature(game) && commander.isControlledBy(source.getControllerId())) {
-                    return true;
-                }
-            } else if (mageObject instanceof Card) {
-                Card card = (Card) mageObject;
-                if (card.isCreature(game) && card.isOwnedBy(source.getControllerId())) {
-                    return true;
-                }
-            }
+        if (!watcher.isSavageSummoningSpellActive()) {
+            return false;
         }
-        return false;
+        MageObject mageObject = game.getBaseObject(objectId);
+        if (mageObject == null || !mageObject.isCreature(game)){
+            return false;
+        }
+
+        if (mageObject instanceof Commander) {
+            Commander commander = (Commander) mageObject;
+            return commander.isControlledBy(source.getControllerId());
+        } else if (mageObject instanceof Card) {
+            Card card = (Card) mageObject;
+            return card.isOwnedBy(source.getControllerId());
+        } else {
+            return false;
+        }
     }
 
 }

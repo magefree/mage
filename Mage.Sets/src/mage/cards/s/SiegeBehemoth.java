@@ -60,15 +60,23 @@ class SiegeBehemothEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
-        if (sourcePermanent != null && sourcePermanent.isAttacking()){
-            Player controller = game.getPlayer(source.getControllerId());
-            Permanent otherCreature = game.getPermanent(sourceId);
-            if (controller != null && otherCreature != null && otherCreature.isControlledBy(controller.getId())){
-                return controller.chooseUse(Outcome.Damage, "Have " + otherCreature.getLogName() + " assign damage as though it weren't blocked?", source, game);
-            }
-        }
-        return false;
+        Permanent otherCreature = game.getPermanent(sourceId);
+
+        return controller != null
+                && sourcePermanent != null
+                && otherCreature != null
+                && sourcePermanent.isAttacking()
+                && otherCreature.isControlledBy(controller.getId());
+    }
+
+    @Override
+    public boolean apply(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent otherCreature = game.getPermanent(sourceId);
+
+        return controller.chooseUse(Outcome.Damage, "Have " + otherCreature.getLogName() + " assign damage as though it weren't blocked?", source, game);
     }
 
     @Override

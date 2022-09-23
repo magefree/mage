@@ -130,9 +130,14 @@ public class PlayFromNotOwnHandZoneTargetEffect extends AsThoughEffectImpl {
             return false;
         }
 
+        return true;
+    }
+
+    @Override
+    public boolean apply(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
         // OK, allow to play
         if (withoutMana) {
-            allowCardToPlayWithoutMana(objectId, source, playerId, game);
+            return allowCardToPlayWithoutMana(objectId, source, playerId, game);
         }
         return true;
     }

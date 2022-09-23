@@ -183,14 +183,20 @@ class IdolOfEnduranceCastFromExileEffect extends AsThoughEffectImpl {
         if (!IdolOfEnduranceWatcher.checkPermission(affectedControllerId, source, game)) {
             return false;
         }
+
         ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
         if (exileZone == null || !exileZone.contains(sourceId)) {
             return false;
         }
+
         Card card = game.getCard(sourceId);
-        if (card == null || !card.isCreature(game) || card.isLand(game)) {
-            return false;
-        }
+        return card != null
+                && card.isCreature(game)
+                && card.isLand(game);
+    }
+
+    @Override
+    public boolean apply(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         return allowCardToPlayWithoutMana(sourceId, source, affectedControllerId, game);
     }
 }

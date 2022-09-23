@@ -46,6 +46,10 @@ public interface AsThoughEffect extends ContinuousEffect {
     boolean applies(UUID sourceId, Ability affectedAbility, Ability source, Game game, UUID playerId);
 
     /**
+     * TODO Need refactoring
+     *      - SpendManaAsAnyColorToCastTopOfLibraryTargetEffect
+     */
+    /**
      * WARNING: DO NOT CHANGE STATE IN THIS FUNCTION. (other than discard the effect)
      * If your implementation requires that the state of the game be changed, any information stored, or the player asked
      * a question, you must do all of that in the `.apply()` functions from this class.

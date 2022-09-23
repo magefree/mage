@@ -89,8 +89,15 @@ class RuxaPatientProfessorEffect extends AsThoughEffectImpl {
         return controller != null
                 && permanent != null
                 && permanent.isControlledBy(controller.getId())
-                && NoAbilityPredicate.instance.apply(permanent, game)
-                && controller.chooseUse(Outcome.Damage, "Have " + permanent.getLogName()
+                && NoAbilityPredicate.instance.apply(permanent, game);
+    }
+
+    @Override
+    public boolean apply(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent permanent = game.getPermanent(sourceId);
+
+        return controller.chooseUse(Outcome.Damage, "Have " + permanent.getLogName()
                 + " assign damage as though it weren't blocked?", source, game);
     }
 

@@ -148,16 +148,20 @@ class DemilichPlayEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (source.getSourceId().equals(objectId) && source.isControlledBy(affectedControllerId)
-                && game.getState().getZone(objectId) == Zone.GRAVEYARD) {
-            Player controller = game.getPlayer(affectedControllerId);
-            if (controller != null) {
-                Costs<Cost> costs = new CostsImpl<>();
-                costs.add(new ExileFromGraveCost(new TargetCardInYourGraveyard(4, StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD)));
-                controller.setCastSourceIdWithAlternateMana(objectId, new ManaCostsImpl<>("{U}{U}{U}{U}"), costs);
-                return true;
-            }
-        }
-        return false;
+        Player controller = game.getPlayer(affectedControllerId);
+        return controller != null
+                && source.getSourceId().equals(objectId)
+                && source.isControlledBy(affectedControllerId)
+                && game.getState().getZone(objectId) == Zone.GRAVEYARD;
+    }
+
+    @Override
+    public boolean apply(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        Player controller = game.getPlayer(affectedControllerId);
+
+        Costs<Cost> costs = new CostsImpl<>();
+        costs.add(new ExileFromGraveCost(new TargetCardInYourGraveyard(4, StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD)));
+        controller.setCastSourceIdWithAlternateMana(objectId, new ManaCostsImpl<>("{U}{U}{U}{U}"), costs);
+        return true;
     }
 }

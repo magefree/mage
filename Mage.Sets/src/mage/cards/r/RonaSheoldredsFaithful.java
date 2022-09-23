@@ -74,15 +74,18 @@ class RonaSheoldredsFaithfulEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (!source.getSourceId().equals(objectId)
-                || !source.isControlledBy(affectedControllerId)
-                || game.getState().getZone(objectId) != Zone.GRAVEYARD) {
-            return false;
-        }
         Player controller = game.getPlayer(affectedControllerId);
-        if (controller == null) {
-            return false;
-        }
+
+        return controller != null
+                && source.getSourceId().equals(objectId)
+                && source.isControlledBy(affectedControllerId)
+                && game.getState().getZone(objectId) == Zone.GRAVEYARD;
+    }
+
+    @Override
+    public boolean apply(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        Player controller = game.getPlayer(affectedControllerId);
+
         Costs<Cost> costs = new CostsImpl<>();
         costs.add(new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS)));
         controller.setCastSourceIdWithAlternateMana(objectId, new ManaCostsImpl<>("{1}{U}{B}{B}"), costs);

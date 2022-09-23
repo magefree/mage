@@ -134,31 +134,32 @@ class GrimoireThiefLookEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (affectedControllerId.equals(source.getControllerId())
-                && game.getState().getZone(objectId) == Zone.EXILED) {
-            Player controller = game.getPlayer(source.getControllerId());
-            MageObject sourceObject = source.getSourceObject(game);
-            if (controller != null
-                    && sourceObject != null) {
-                Card card = game.getCard(objectId);
-                if (card != null
-                        && card.isFaceDown(game)) {
-                    Set<UUID> exileZones = (Set<UUID>) game.getState().
-                            getValue(GrimoireThief.VALUE_PREFIX + source.getSourceId().toString());
-                    if (exileZones != null) {
-                        for (ExileZone exileZone : game.getExile().getExileZones()) {
-                            if (exileZone.contains(objectId)) {
-                                if (!exileZones.contains(exileZone.getId())) {
-                                    return false;
-                                }
-                            }
-                        }
-                        return true;
-                    }
-                }
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller == null
+                || sourceObject == null
+                || !affectedControllerId.equals(source.getControllerId())
+                || game.getState().getZone(objectId) != Zone.EXILED) {
+            return false;
+        }
+
+        Card card = game.getCard(objectId);
+        if (card == null || !card.isFaceDown(game)) {
+            return false;
+        }
+
+        Set<UUID> exileZones = (Set<UUID>) game.getState().
+                getValue(GrimoireThief.VALUE_PREFIX + source.getSourceId().toString());
+        if (exileZones == null) {
+            return false;
+        }
+
+        for (ExileZone exileZone : game.getExile().getExileZones()) {
+            if (exileZone.contains(objectId) && !exileZones.contains(exileZone.getId())) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 }
 

@@ -137,19 +137,16 @@ class ColfenorsPlansLookAtCardEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (affectedControllerId.equals(source.getControllerId())) {
-            Card card = game.getCard(objectId);
-            if (card != null) {
-                MageObject sourceObject = game.getObject(source);
-                if (sourceObject == null) {
-                    return false;
-                }
-                UUID exileId = CardUtil.getCardExileZoneId(game, source);
-                ExileZone exile = game.getExile().getExileZone(exileId);
-                return exile != null && exile.contains(objectId);
-            }
-        }
-        return false;
+        Card card = game.getCard(objectId);
+        MageObject sourceObject = game.getObject(source);
+        UUID exileId = CardUtil.getCardExileZoneId(game, source);
+        ExileZone exile = game.getExile().getExileZone(exileId);
+
+        return affectedControllerId.equals(source.getControllerId())
+                && card != null
+                && sourceObject != null
+                && exile != null
+                && exile.contains(objectId);
     }
 
 }

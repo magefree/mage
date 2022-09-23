@@ -76,17 +76,18 @@ class GlimpseTheCosmosPlayEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (sourceId.equals(source.getSourceId())
-                && source.isControlledBy(affectedControllerId)) {
-            if (game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
-                Player controller = game.getPlayer(affectedControllerId);
-                if (controller != null) {
-                    controller.setCastSourceIdWithAlternateMana(sourceId, new ManaCostsImpl<>("{U}"), null);
-                    return true;
-                }
-            }
-        }
-        return false;
+        Player controller = game.getPlayer(affectedControllerId);
+        return sourceId.equals(source.getSourceId())
+                && source.isControlledBy(affectedControllerId)
+                && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD
+                && controller != null;
+    }
+
+    @Override
+    public boolean apply(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        Player controller = game.getPlayer(affectedControllerId);
+        controller.setCastSourceIdWithAlternateMana(sourceId, new ManaCostsImpl<>("{U}"), null);
+        return true;
     }
 }
 
