@@ -192,7 +192,7 @@ class IdolOfEnduranceCastFromExileEffect extends AsThoughEffectImpl {
         Card card = game.getCard(sourceId);
         return card != null
                 && card.isCreature(game)
-                && card.isLand(game);
+                && !card.isLand(game);
     }
 
     @Override
