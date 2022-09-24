@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.Counter;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -30,6 +29,14 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class FelisaFangOfSilverquill extends CardImpl {
+
+    private static final FilterPermanent filter
+            = new FilterControlledCreaturePermanent("a nontoken creature you control");
+
+    static {
+        filter.add(TokenPredicate.FALSE);
+        filter.add(CounterAnyPredicate.instance);
+    }
 
     private static final String rule = "if it had counters on it, " +
             "create X tapped 2/1 white and black Inkling creature tokens with flying, " +
@@ -53,7 +60,7 @@ public final class FelisaFangOfSilverquill extends CardImpl {
         // Whenever a nontoken creature you control dies, if it had counters on it, create X tapped 2/1 white and black Inkling creature tokens with flying, where X is the number of counters it had on it.
         this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(
                 new InklingToken(), FelisaFangOfSilverquillValue.instance, true, false
-        ).setText(rule), false, StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN));
+        ).setText(rule), false, filter));
     }
 
     private FelisaFangOfSilverquill(final FelisaFangOfSilverquill card) {
