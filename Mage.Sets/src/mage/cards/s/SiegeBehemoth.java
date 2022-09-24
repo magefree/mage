@@ -73,6 +73,11 @@ class SiegeBehemothEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean apply(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        // Don't ask for player input when in checkPlayable state
+        if (game.inCheckPlayableState()) {
+            return true;
+        }
+
         Player controller = game.getPlayer(source.getControllerId());
         Permanent otherCreature = game.getPermanent(sourceId);
 

@@ -83,6 +83,11 @@ class IndomitableMightEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean apply(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        // Assume the option that will let the player
+        if (game.inCheckPlayableState()) {
+            return true;
+        }
+
         Permanent sourcePermanent = source.getSourcePermanentOrLKI(game);
         Permanent permanent = game.getPermanent(sourcePermanent.getAttachedTo());
         Player controller = game.getPlayer(permanent.getControllerId());

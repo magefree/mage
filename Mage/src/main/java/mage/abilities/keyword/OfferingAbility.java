@@ -182,6 +182,11 @@ class OfferingAsThoughEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean apply(UUID sourceId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
+        // Don't ask for player input when in checkPlayable state
+        if (game.inCheckPlayableState()) {
+            return true;
+        }
+
         Card spellToCast = game.getCard(source.getSourceId());
         Card card = game.getCard(sourceId);
         Player player = game.getPlayer(source.getControllerId());
