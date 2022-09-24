@@ -17,6 +17,7 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 
@@ -65,15 +66,8 @@ public final class DecayingSoil extends CardImpl {
 
 class DecayingSoilTriggeredAbility extends DiesCreatureTriggeredAbility {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent();
-
-    static {
-        filter.add(TargetController.YOU.getOwnerPredicate());
-        filter.add(TokenPredicate.FALSE);
-    }
-
     DecayingSoilTriggeredAbility() {
-        super(new DoIfCostPaid(new ReturnFromGraveyardToHandTargetEffect(), new GenericManaCost(1)), false, filter, true);
+        super(new DoIfCostPaid(new ReturnFromGraveyardToHandTargetEffect(), new GenericManaCost(1)), false, StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN, true);
     }
 
     private DecayingSoilTriggeredAbility(DecayingSoilTriggeredAbility ability) {

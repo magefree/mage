@@ -11,6 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -26,12 +27,6 @@ import mage.players.Player;
  */
 public final class MagusOfTheBridge extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a nontoken creature");
-
-    static {
-        filter.add(TokenPredicate.FALSE);
-    }
-
     public MagusOfTheBridge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}{B}");
 
@@ -42,7 +37,7 @@ public final class MagusOfTheBridge extends CardImpl {
 
         // Whenever a nontoken creature is put into your graveyard from the battlefield, create a 2/2 black Zombie creature token.
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(
-                new CreateTokenEffect(new ZombieToken()), false, filter, false, true
+                new CreateTokenEffect(new ZombieToken()), false, StaticFilters.FILTER_CREATURE_NON_TOKEN, false, true
         ));
 
         // When a creature is put into an opponent's graveyard from the battlefield, exile Magus of the Bridge.
