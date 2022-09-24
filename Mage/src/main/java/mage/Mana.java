@@ -1236,9 +1236,14 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
 
     /**
      * Returns the mana that is more colored or has a greater amount but does
-     * not contain one less mana in any color but generic.
+     * not contain one less mana in any type but generic.
+     * <p>
+     * See tests ManaTest.moreValuableManaTest for several examples
      *
      * Examples:
+     *      {1}       and {R}       -> {R}
+     *      {2}       and {1}{W}    -> {1}{W}
+     *      {3}       and {1}{W}    -> {1}{W}
      *      {1}{W}{R} and {G}{W}{R} -> {G}{W}{R}
      *      {G}{W}{R} and {G}{W}{R} -> null
      *      {G}{W}{B} and {G}{W}{R} -> null
@@ -1267,13 +1272,16 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             }
         }
 
+        // Set one mana as moreMana and one as lessMana.
         Mana moreMana;
         Mana lessMana;
         if (mana2.any > mana1.any
+                || mana2.colorless > mana1.colorless
                 || mana2.countColored() > mana1.countColored()
-                || mana2.count() > mana1.count()
-                || mana2.colorless > mana1.colorless) {
-            moreMana = mana2;
+                || (mana2.countColored() == mana1.countColored()
+                        && mana2.colorless == mana1.colorless
+                        && mana2.count() > mana1.count())) {
+            moreMana = mana2; // 3C becomes this one
             lessMana = mana1;
         } else {
             moreMana = mana1;
