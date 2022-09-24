@@ -5,7 +5,6 @@ import mage.MageObjectImpl;
 import mage.Mana;
 import mage.abilities.*;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.HasSubtypesSourceEffect;
 import mage.abilities.keyword.*;
 import mage.abilities.mana.ActivatedManaAbilityImpl;

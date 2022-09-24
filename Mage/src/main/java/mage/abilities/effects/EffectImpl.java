@@ -2,13 +2,11 @@ package mage.abilities.effects;
 
 import mage.abilities.MageSingleton;
 import mage.abilities.Mode;
-import mage.abilities.condition.Condition;
 import mage.constants.EffectType;
 import mage.constants.Outcome;
 import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.TargetPointer;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;

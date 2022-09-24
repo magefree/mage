@@ -9,7 +9,6 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.hint.HintUtils;
-import mage.abilities.keyword.SunburstAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.*;
