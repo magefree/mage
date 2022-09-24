@@ -7,7 +7,7 @@ import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -32,7 +32,7 @@ public final class BodyOfKnowledge extends CardImpl {
         // Body of Knowledge's power and toughness are each equal to the number of cards in your hand.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
-                new SetPowerToughnessSourceEffect(
+                new SetBasePowerToughnessSourceEffect(
                         CardsInControllerHandCount.instance, Duration.EndOfGame
                 )
         ));

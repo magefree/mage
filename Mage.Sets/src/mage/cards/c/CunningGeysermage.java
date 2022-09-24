@@ -43,7 +43,7 @@ public final class CunningGeysermage extends CardImpl {
         // When Cunning Geysermage enters the battlefield, if it was kicked, return up to one other target creature to its owner's hand.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()),
-                KickedCondition.instance, "When {this} enters the battlefield, " +
+                KickedCondition.ONCE, "When {this} enters the battlefield, " +
                 "if it was kicked, return up to one other target creature to its owner's hand."
         );
         ability.addTarget(new TargetPermanent(0, 1, filter, false));

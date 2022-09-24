@@ -58,6 +58,7 @@ class CanalCourierTriggeredAbility extends TriggeredAbilityImpl {
 
     public CanalCourierTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
+        setTriggerPhrase("Whenever {this} and another creature attack different players, ");
     }
 
     public CanalCourierTriggeredAbility(final CanalCourierTriggeredAbility ability) {
@@ -96,10 +97,4 @@ class CanalCourierTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} and another creature attack different players, " ;
-    }
-
 }

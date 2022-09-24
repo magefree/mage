@@ -60,6 +60,7 @@ class MavrenFeinDuskApostleTriggeredAbility extends TriggeredAbilityImpl {
 
     public MavrenFeinDuskApostleTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new IxalanVampireToken()), false);
+        setTriggerPhrase("Whenever one or more nontoken Vampires you control attack, ");
     }
 
     public MavrenFeinDuskApostleTriggeredAbility(final MavrenFeinDuskApostleTriggeredAbility ability) {
@@ -85,10 +86,5 @@ class MavrenFeinDuskApostleTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever one or more nontoken Vampires you control attack, " ;
     }
 }

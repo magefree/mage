@@ -53,6 +53,7 @@ class CaptainRipleyVanceTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
         addEffect(new DamageTargetEffect(new SourcePermanentPowerCount()).setText("it deals damage equal to its power to any target").concatBy(", then"));
         addTarget(new TargetAnyTarget());
+        setTriggerPhrase("Whenever you cast your third spell each turn, ");
     }
 
     private CaptainRipleyVanceTriggeredAbility(final CaptainRipleyVanceTriggeredAbility ability) {
@@ -76,10 +77,5 @@ class CaptainRipleyVanceTriggeredAbility extends TriggeredAbilityImpl {
             return watcher != null && watcher.getSpellsCastThisTurn(this.getControllerId()).size() == 3;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you cast your third spell each turn, " ;
     }
 }

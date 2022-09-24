@@ -44,8 +44,7 @@ public class AeonEngineTest extends CardTestMultiPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
-        
+
         //check if aeon engine is tapped
         assertTapped("Aeon Engine", true);
     
@@ -80,8 +79,7 @@ public class AeonEngineTest extends CardTestMultiPlayerBase {
         setStrictChooseMode(true);
         setStopAt(6, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
-        
+
         //check if aeon engine has been exiled
         assertExileCount(playerA, "Aeon Engine", 1);
                 
@@ -125,8 +123,7 @@ public class AeonEngineTest extends CardTestMultiPlayerBase {
         setStrictChooseMode(true);
         setStopAt(9, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
-        
+
         //check if aeon engine's have been exiled
         assertExileCount(playerA, "Aeon Engine", 1);
         assertExileCount(playerD, "Aeon Engine", 1);

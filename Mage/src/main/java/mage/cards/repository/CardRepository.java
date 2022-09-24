@@ -12,7 +12,6 @@ import com.j256.ormlite.table.TableUtils;
 import mage.constants.CardType;
 import mage.constants.SetType;
 import mage.constants.SuperType;
-import mage.game.events.Listener;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
@@ -37,15 +36,12 @@ public enum CardRepository {
     private static final long CARD_CONTENT_VERSION = 241;
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;
-    private final RepositoryEventSource eventSource = new RepositoryEventSource();
 
+    // sets with exclusively snow basics
     public static final Set<String> snowLandSetCodes = new HashSet<>(Arrays.asList(
             "CSP",
             "MH1",
-            "SLD",
-            "ME2",
-            "ICE",
-            "KHM"
+            "ME2"
     ));
 
     CardRepository() {
@@ -65,14 +61,9 @@ public enum CardRepository {
 
             TableUtils.createTableIfNotExists(connectionSource, CardInfo.class);
             cardDao = DaoManager.createDao(connectionSource, CardInfo.class);
-            eventSource.fireRepositoryDbLoaded();
         } catch (SQLException ex) {
             Logger.getLogger(CardRepository.class).error("Error creating card repository - ", ex);
         }
-    }
-
-    public void subscribe(Listener<RepositoryEvent> listener) {
-        eventSource.addListener(listener);
     }
 
     public void saveCards(final List<CardInfo> newCards, long newContentVersion) {
@@ -99,7 +90,6 @@ public enum CardRepository {
             });
 
             setContentVersion(newContentVersion);
-            eventSource.fireRepositoryDbUpdated();
         } catch (Exception ex) {
             //
         }
@@ -399,14 +389,17 @@ public enum CardRepository {
      * Function to find a card by name from a specific set.
      * Used for building cubes, packs, and for ensuring that dual faces and split cards have sides/halves from the same set.
      *
-     * @param name      name of the card, or side of the card, to find
-     * @param expansion the set name from which to find the card
+     * @param name                  name of the card, or side of the card, to find
+     * @param expansion             the set name from which to find the card
+     * @param returnSplitCardHalf   whether to return a half of a split card or the corresponding full card.
+     *                              Want this `false` when user is searching by either names in a split card so that
+     *                              the full card can be found by either name.
      * @return
      */
-    public CardInfo findCardWPreferredSet(String name, String expansion) {
+    public CardInfo findCardWPreferredSet(String name, String expansion, boolean returnSplitCardHalf) {
         List<CardInfo> cards;
 
-        cards = findCards(name);
+        cards = findCards(name, 0, returnSplitCardHalf);
 
         if (!cards.isEmpty()) {
             for (CardInfo cardinfo : cards) {
@@ -416,6 +409,10 @@ public enum CardRepository {
             }
         }
         return findPreferredCoreExpansionCard(name);
+    }
+
+    public CardInfo findCardWPreferredSet(String name, String expansion) {
+        return findCardWPreferredSet(name, expansion, false);
     }
 
     public List<CardInfo> findCards(String name) {
@@ -434,12 +431,16 @@ public enum CardRepository {
      *      ALL the others MUST be queried for by the first half of their full name (i.e. "A" from "A // B")
      *      when querying by "name".
      *
-     * @param name              the name of the card to search for
-     * @param limitByMaxAmount  return max amount of different cards (if 0 then return card from all sets)
-     * @return                  A list of the reprints of the card if it was found (up to limitByMaxAmount number), or
-     *                          an empty list if the card was not found.
+     * @param name                  the name of the card to search for
+     * @param limitByMaxAmount      return max amount of different cards (if 0 then return card from all sets)
+     * @param returnSplitCardHalf   whether to return a half of a split card or the corresponding full card.
+     *                              Want this `false` when user is searching by either names in a split card so that
+     *                              the full card can be found by either name.
+     *                              Want this `true` when the client is searching for info on both halves to display it.
+     * @return                      a list of the reprints of the card if it was found (up to limitByMaxAmount number),
+     *                              or an empty list if the card was not found.
      */
-    public List<CardInfo> findCards(String name, long limitByMaxAmount) {
+    public List<CardInfo> findCards(String name, long limitByMaxAmount, boolean returnSplitCardHalf) {
         List<CardInfo> results;
         QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
         if (limitByMaxAmount > 0) {
@@ -477,8 +478,8 @@ public enum CardRepository {
                     // Check that a full card was found and not a SplitCardHalf
                     // Can be caused by searching for "Fire" instead of "Fire // Ice"
                     CardInfo firstCardInfo = results.get(0);
-                    if (firstCardInfo.isSplitCardHalf()) {
-                        // Find the main card by it's setCode and CardNumber
+                    if (firstCardInfo.isSplitCardHalf() && !returnSplitCardHalf) {
+                        // Find the main card by its setCode and CardNumber
                         queryBuilder.where()
                                 .eq("setCode", new SelectArg(firstCardInfo.setCode)).and()
                                 .eq("cardNumber", new SelectArg(firstCardInfo.cardNumber));
@@ -506,6 +507,10 @@ public enum CardRepository {
         }
 
         return Collections.emptyList();
+    }
+
+    public List<CardInfo> findCards(String name, long limitByMaxAmount) {
+        return findCards(name, limitByMaxAmount, false);
     }
 
     public List<CardInfo> findCardsByClass(String canonicalClassName) {

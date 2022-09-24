@@ -1,24 +1,19 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAttachedTriggeredAbility;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author jeffwadsworth
+ * @author awjackson
  */
 public final class MageSlayer extends CardImpl {
 
@@ -26,11 +21,13 @@ public final class MageSlayer extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{R}{G}");
         this.subtype.add(SubType.EQUIPMENT);
 
-        // Whenever equipped creature attacks, it deals damage equal to its power to defending player.
-        this.addAbility(new AttacksAttachedTriggeredAbility(new MageSlayerEffect(), false));
+        // Whenever equipped creature attacks, it deals damage equal to its power to the player or planeswalker it's attacking
+        this.addAbility(new AttacksAttachedTriggeredAbility(
+                new MageSlayerEffect(), AttachmentType.EQUIPMENT, false, SetTargetPointer.PERMANENT
+        ));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(3), new TargetControlledCreaturePermanent(), false));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private MageSlayer(final MageSlayer card) {
@@ -61,18 +58,19 @@ class MageSlayerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment != null && equipment.getAttachedTo() != null) {
-            int power = game.getPermanent(equipment.getAttachedTo()).getPower().getValue();
-            UUID defenderId = game.getCombat().getDefenderId(equipment.getAttachedTo());
-            if (power > 0 && defenderId != null) {
-                UUID sourceId = (UUID) this.getValue("sourceId");
-                if (sourceId != null) {
-                    game.damagePlayerOrPlaneswalker(defenderId, power, source.getSourceId(), source, game, false, true);
-                }
-            }
-            return true;
+        Permanent attacker = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
+        if (attacker == null) {
+            return false;
         }
-        return false;
+        game.damagePlayerOrPlaneswalker(
+                game.getCombat().getDefenderId(attacker.getId()),
+                attacker.getPower().getValue(),
+                attacker.getId(),
+                source,
+                game,
+                false,
+                true
+        );
+        return true;
     }
 }

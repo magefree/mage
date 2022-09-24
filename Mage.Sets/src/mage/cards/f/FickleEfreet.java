@@ -99,6 +99,7 @@ class FickleEfreetGainControlEffect extends ContinuousEffectImpl {
     public FickleEfreetGainControlEffect(Duration duration, UUID controller) {
         super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.controller = controller;
+        this.staticText = "That player gains control of {this}";
     }
 
     public FickleEfreetGainControlEffect(final FickleEfreetGainControlEffect effect) {
@@ -121,10 +122,5 @@ class FickleEfreetGainControlEffect extends ContinuousEffectImpl {
             return permanent.changeControllerId(controller, game, source);
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "That player gains control of {this}";
     }
 }

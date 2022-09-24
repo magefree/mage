@@ -41,6 +41,7 @@ class LurkingJackalsStateTriggeredAbility extends StateTriggeredAbility {
 
     public LurkingJackalsStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new LurkingJackalsToken(), "", Duration.Custom, true, false));
+        setTriggerPhrase("When an opponent has 10 or less life, if {this} is an enchantment, ");
     }
 
     public LurkingJackalsStateTriggeredAbility(final LurkingJackalsStateTriggeredAbility ability) {
@@ -97,12 +98,6 @@ class LurkingJackalsStateTriggeredAbility extends StateTriggeredAbility {
     public void counter(Game game) {
         game.getState().setValue(this.getSourceId().toString() + "triggered", Boolean.FALSE);
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When an opponent has 10 or less life, if {this} is an enchantment, " ;
-    }
-
 }
 
 class LurkingJackalsToken extends TokenImpl {

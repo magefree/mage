@@ -58,6 +58,7 @@ public class ChildOfAlaraTest extends CardTestPlayerBase {
             castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, tamiyo);
             castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, oRing);
             addTarget(playerB, tamiyo);
+            waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
             castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, dDemolition, childAlara);
             
             setStopAt(2, PhaseStep.BEGIN_COMBAT);

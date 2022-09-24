@@ -33,7 +33,7 @@ public class PreventAttachedEffectTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Temporal Isolation", "Kaervek the Merciless");
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Silvercoat Lion");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Silvercoat Lion", true);
         addTarget(playerA, playerB);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Pillarfield Ox");
         addTarget(playerA, "Silvercoat Lion");

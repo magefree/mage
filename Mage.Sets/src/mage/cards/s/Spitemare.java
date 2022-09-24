@@ -52,6 +52,7 @@ class SpitemareTriggeredAbility extends TriggeredAbilityImpl {
 
     public SpitemareTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SpitemareEffect());
+        setTriggerPhrase("Whenever {this} is dealt damage, ");
     }
 
     public SpitemareTriggeredAbility(final SpitemareTriggeredAbility effect) {
@@ -75,11 +76,6 @@ class SpitemareTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} is dealt damage, ";
     }
 }
 

@@ -24,8 +24,6 @@ public class GaeasGradleTest extends CardTestPlayerBase {
         checkManaPool("gaeas cradle ",1, PhaseStep.PRECOMBAT_MAIN, playerA, "G", 2);
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        
-        assertAllCommandsUsed();
 
     }
 }

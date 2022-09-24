@@ -57,6 +57,7 @@ class GontisMachinationsTriggeredAbility extends TriggeredAbilityImpl {
 
     public GontisMachinationsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GetEnergyCountersControllerEffect(1), false);
+        setTriggerPhrase("Whenever you lose life for the first time each turn, ");
     }
 
     public GontisMachinationsTriggeredAbility(final GontisMachinationsTriggeredAbility ability) {
@@ -84,11 +85,6 @@ class GontisMachinationsTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public GontisMachinationsTriggeredAbility copy() {
         return new GontisMachinationsTriggeredAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you lose life for the first time each turn, " ;
     }
 }
 

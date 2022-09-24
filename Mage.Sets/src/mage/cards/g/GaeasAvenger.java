@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.IntPlusDynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -37,7 +37,7 @@ public final class GaeasAvenger extends CardImpl {
 
         // Gaea's Avenger's power and toughness are each equal to 1 plus the number of artifacts your opponents control.
         
-        SetPowerToughnessSourceEffect effect = new SetPowerToughnessSourceEffect(new IntPlusDynamicValue(1, new PermanentsOnBattlefieldCount(filter)), Duration.EndOfGame);
+        SetBasePowerToughnessSourceEffect effect = new SetBasePowerToughnessSourceEffect(new IntPlusDynamicValue(1, new PermanentsOnBattlefieldCount(filter)), Duration.EndOfGame);
         this.addAbility(new SimpleStaticAbility(Zone.ALL, effect));
     }
 

@@ -74,7 +74,7 @@ public final class FlamescrollCelebrant extends ModalDoubleFacesCard {
 class FlamescrollCelebrantTriggeredAbility extends TriggeredAbilityImpl {
 
     FlamescrollCelebrantTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(StaticValue.get(2), true, "that player", true));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(StaticValue.get(1), true, "that player", true));
     }
 
     private FlamescrollCelebrantTriggeredAbility(final FlamescrollCelebrantTriggeredAbility ability) {
@@ -114,7 +114,7 @@ class FlamescrollCelebrantTriggeredAbility extends TriggeredAbilityImpl {
 class RevelInSilenceEffect extends ContinuousRuleModifyingEffectImpl {
 
     RevelInSilenceEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Your opponents can't cast spells or activate planeswalkers' loyalty abilities this turn.";
     }
 

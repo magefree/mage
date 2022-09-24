@@ -21,7 +21,6 @@ public class CrashThroughTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertAbility(playerA, "Grizzly Bears", TrampleAbility.getInstance(), true);
         assertAbility(playerB, "Scryb Sprites", TrampleAbility.getInstance(), false);
         assertHandCount(playerA, 1);

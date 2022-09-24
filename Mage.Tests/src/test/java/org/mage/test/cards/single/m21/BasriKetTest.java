@@ -23,7 +23,6 @@ public class BasriKetTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, "Grizzly Bears", CounterType.P1P1, 1);
         assertAbility(playerA, "Grizzly Bears", IndestructibleAbility.getInstance(), true);
@@ -40,7 +39,6 @@ public class BasriKetTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 17);
         assertPermanentCount(playerA, "Soldier Token", 1);
@@ -67,7 +65,6 @@ public class BasriKetTest extends CardTestPlayerBase {
         setStopAt(7, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 14);
         assertPermanentCount(playerA, "Soldier Token", 1);

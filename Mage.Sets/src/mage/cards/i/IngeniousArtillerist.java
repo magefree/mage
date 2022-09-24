@@ -63,7 +63,8 @@ class IngeniousArtilleristTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
-        if (zEvent.getToZone() != Zone.BATTLEFIELD) {
+        if (zEvent.getToZone() != Zone.BATTLEFIELD
+                || !this.controllerId.equals(event.getPlayerId())) {
             return false;
         }
         int artifacts = Stream.concat(

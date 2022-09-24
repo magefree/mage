@@ -14,6 +14,7 @@ public class OpponentSacrificesPermanentTriggeredAbility extends TriggeredAbilit
 
     public OpponentSacrificesPermanentTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        setTriggerPhrase("Whenever an opponent sacrifices a nontoken permanent, ");
     }
 
     public OpponentSacrificesPermanentTriggeredAbility(final OpponentSacrificesPermanentTriggeredAbility ability) {
@@ -37,11 +38,6 @@ public class OpponentSacrificesPermanentTriggeredAbility extends TriggeredAbilit
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever an opponent sacrifices a nontoken permanent, " ;
     }
 
     @Override

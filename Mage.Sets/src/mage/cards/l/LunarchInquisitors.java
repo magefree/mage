@@ -40,8 +40,7 @@ public final class LunarchInquisitors extends CardImpl {
         this.nightCard = true;
 
         // When this creature transforms into Lunarch Inquisitors, you may exile another target creature until Lunarch Inquisitors leaves the battlefield.
-        Ability ability = new TransformIntoSourceTriggeredAbility(new ExileUntilSourceLeavesEffect("")
-                .setText("exile another target creature until {this} leaves the battlefield"), true);
+        Ability ability = new TransformIntoSourceTriggeredAbility(new ExileUntilSourceLeavesEffect(), true);
         ability.addTarget(new TargetPermanent(filter));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);

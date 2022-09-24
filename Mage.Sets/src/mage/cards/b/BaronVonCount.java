@@ -104,6 +104,7 @@ class BaronVonCountTriggeredAbility extends TriggeredAbilityImpl {
 
     public BaronVonCountTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BaronVonCountMoveDoomCounterEffect());
+        setTriggerPhrase("Whenever you cast a spell with the indicated numeral in its mana cost, text box, power, or toughness, ");
     }
 
     public BaronVonCountTriggeredAbility(final BaronVonCountTriggeredAbility abiltity) {
@@ -149,11 +150,6 @@ class BaronVonCountTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you cast a spell with the indicated numeral in its mana cost, text box, power, or toughness, " ;
     }
 }
 
@@ -203,6 +199,7 @@ class BaronVonCountSecondTriggeredAbility extends TriggeredAbilityImpl {
     public BaronVonCountSecondTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BaronVonCountDestroyPlayerEffect());
         this.addTarget(new TargetPlayer());
+        setTriggerPhrase("When the doom counter moves from \"1,\" ");
     }
 
     public BaronVonCountSecondTriggeredAbility(BaronVonCountSecondTriggeredAbility ability) {
@@ -222,11 +219,6 @@ class BaronVonCountSecondTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public BaronVonCountSecondTriggeredAbility copy() {
         return new BaronVonCountSecondTriggeredAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When the doom counter moves from \"1,\" " ;
     }
 }
 

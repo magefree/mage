@@ -25,18 +25,18 @@ public class SplitSecondTest extends CardTestPlayerBase {
         // TODO: Needed, see https://github.com/magefree/mage/issues/8973
         try {
             execute();
-            assertAllCommandsUsed();
 
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
-            if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
+            if (!e.getMessage().contains("Cast Counterspell$target=Sudden Shock")) {
                 Assert.fail("Should have thrown error about trying to use Counterspell, but got:\n" + e.getMessage());
             }
         }
 
-        assertHandCount(playerA, "Counterspell", 1);
-        assertGraveyardCount(playerA, "Sudden Shock", 1);
-        assertLife(playerB, 20 - 2);
+        // TODO: Re-enable when checkPlayableAbility can be used instead of try-catch
+//        assertHandCount(playerA, "Counterspell", 1);
+//        assertGraveyardCount(playerA, "Sudden Shock", 1);
+//        assertLife(playerB, 20 - 2);
     }
 
     @Test
@@ -55,7 +55,6 @@ public class SplitSecondTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 2 - 2);
         assertPermanentCount(playerA, "Raging Goblin", 1);

@@ -41,6 +41,7 @@ public class BlocksOrBecomesBlockedSourceTriggeredAbility extends TriggeredAbili
         this.filter = filter;
         this.rule = rule;
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever {this} blocks or becomes blocked" + (setTargetPointer ? " by a " + filter.getMessage() : "") + ", ");
     }
 
     public BlocksOrBecomesBlockedSourceTriggeredAbility(final BlocksOrBecomesBlockedSourceTriggeredAbility ability) {
@@ -48,7 +49,6 @@ public class BlocksOrBecomesBlockedSourceTriggeredAbility extends TriggeredAbili
         this.filter = ability.filter;
         this.rule = ability.rule;
         this.setTargetPointer = ability.setTargetPointer;
-
     }
 
     @Override
@@ -81,15 +81,7 @@ public class BlocksOrBecomesBlockedSourceTriggeredAbility extends TriggeredAbili
 
     @Override
     public String getRule() {
-        if (rule != null) {
-            return rule;
-        }
-        return super.getRule();
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} blocks or becomes blocked" + (setTargetPointer ? " by a " + filter.getMessage() : "") + ", ";
+        return rule != null ? rule : super.getRule();
     }
 
     @Override

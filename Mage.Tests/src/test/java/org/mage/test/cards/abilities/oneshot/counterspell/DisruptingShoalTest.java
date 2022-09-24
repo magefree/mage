@@ -37,7 +37,6 @@ public class DisruptingShoalTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Disrupting Shoal", 1);
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
@@ -60,7 +59,6 @@ public class DisruptingShoalTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Disrupting Shoal", 1);
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
@@ -103,7 +101,6 @@ public class DisruptingShoalTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
@@ -145,7 +142,6 @@ public class DisruptingShoalTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount(playerB, 1); // Far // Away should be exiled as part of Disrupting alternative cost
         assertGraveyardCount(playerB, "Disrupting Shoal", 1);
@@ -177,7 +173,6 @@ public class DisruptingShoalTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount(playerB, 1); // Far // Away should be exiled as part of Disrupting alternative cost
         assertGraveyardCount(playerB, "Disrupting Shoal", 1);
@@ -209,7 +204,6 @@ public class DisruptingShoalTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount(playerB, 1); // Far // Away should be exiled as part of Disrupting alternative cost
         assertGraveyardCount(playerB, "Disrupting Shoal", 1);

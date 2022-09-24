@@ -1,4 +1,3 @@
-
 package mage.abilities.dynamicvalue.common;
 
 import java.util.List;
@@ -16,18 +15,18 @@ import mage.game.permanent.Permanent;
  */
 public class AuraAttachedCount implements DynamicValue {
 
-    private Integer amount;
+    private final int multiplier;
 
     public AuraAttachedCount() {
         this(1);
     }
 
-    public AuraAttachedCount(Integer amount) {
-        this.amount = amount;
+    public AuraAttachedCount(int multiplier) {
+        this.multiplier = multiplier;
     }
 
     public AuraAttachedCount(final AuraAttachedCount dynamicValue) {
-        this.amount = dynamicValue.amount;
+        this.multiplier = dynamicValue.multiplier;
     }
 
     @Override
@@ -44,7 +43,7 @@ public class AuraAttachedCount implements DynamicValue {
             }
 
         }
-        return amount * count;
+        return multiplier * count;
     }
 
     @Override
@@ -54,14 +53,16 @@ public class AuraAttachedCount implements DynamicValue {
 
     @Override
     public String toString() {
-        if (amount != null) {
-            return amount.toString();
-        }
-        return "";
+        return Integer.toString(multiplier);
     }
 
     @Override
     public String getMessage() {
         return "Aura attached to it";
+    }
+
+    @Override
+    public int getSign() {
+        return multiplier;
     }
 }

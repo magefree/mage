@@ -35,6 +35,7 @@ public class CastSecondSpellTriggeredAbility extends TriggeredAbilityImpl {
             this.addHint(hint);
         }
         this.targetController = targetController;
+        setTriggerPhrase(generateTriggerPhrase());
     }
 
     private CastSecondSpellTriggeredAbility(final CastSecondSpellTriggeredAbility ability) {
@@ -77,8 +78,7 @@ public class CastSecondSpellTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    @Override
-    public String getTriggerPhrase() {
+    private String generateTriggerPhrase() {
         switch (targetController) {
             case YOU:
                 return "Whenever you cast your second spell each turn, ";

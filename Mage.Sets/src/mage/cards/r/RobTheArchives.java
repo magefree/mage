@@ -17,7 +17,7 @@ public final class RobTheArchives extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}");
 
         // Casualty 1
-        this.addAbility(new CasualtyAbility(this, 1));
+        this.addAbility(new CasualtyAbility(1));
 
         // Exile the top two cards of your library. You may play those cards this turn.
         this.getSpellAbility().addEffect(new ExileTopXMayPlayUntilEndOfTurnEffect(2, false));

@@ -47,7 +47,7 @@ public class AtTheBeginOfMainPhaseDelayedTriggeredAbility extends DelayedTrigger
         super(effect, phaseSelection.duration, true, optional);
         this.targetController = targetController;
         this.phaseSelection = phaseSelection;
-
+        setTriggerPhrase(generateTriggerPhrase());
     }
 
     public AtTheBeginOfMainPhaseDelayedTriggeredAbility(final AtTheBeginOfMainPhaseDelayedTriggeredAbility ability) {
@@ -73,23 +73,18 @@ public class AtTheBeginOfMainPhaseDelayedTriggeredAbility extends DelayedTrigger
                 return true;
             case YOU:
                 return event.getPlayerId().equals(this.controllerId);
-
             case OPPONENT:
-                if (game.getPlayer(this.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
-                    return true;
-                }
-                break;
-
+                return game.getPlayer(this.getControllerId()).hasOpponent(event.getPlayerId(), game);
             case CONTROLLER_ATTACHED_TO:
                 Permanent attachment = game.getPermanent(sourceId);
-                if (attachment != null && attachment.getAttachedTo() != null) {
-                    Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
-                    if (attachedTo != null && attachedTo.isControlledBy(event.getPlayerId())) {
-                        return true;
-                    }
+                if (attachment == null || attachment.getAttachedTo() == null) {
+                    return false;
                 }
+                Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
+                return attachedTo != null && attachedTo.isControlledBy(event.getPlayerId());
+            default:
+                return false;
         }
-        return false;
     }
 
     private boolean checkPhase(EventType eventType) {
@@ -106,8 +101,7 @@ public class AtTheBeginOfMainPhaseDelayedTriggeredAbility extends DelayedTrigger
         }
     }
 
-    @Override
-    public String getTriggerPhrase() {
+    private String generateTriggerPhrase() {
         switch (targetController) {
             case YOU:
                 return "At the beginning of your " + phaseSelection + ", ";

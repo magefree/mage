@@ -542,9 +542,14 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 
     @Override
     public ManaOptions getOptions() {
+        return getOptions(true);
+    }
+
+    @Override
+    public ManaOptions getOptions(boolean canPayLifeCost) {
         ManaOptions options = new ManaOptions();
         for (ManaCost cost : this) {
-            options.addMana(cost.getOptions());
+            options.addMana(cost.getOptions(canPayLifeCost));
         }
         return options;
     }

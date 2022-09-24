@@ -47,6 +47,7 @@ class HighPriestOfPenanceTriggeredAbility extends TriggeredAbilityImpl {
     public HighPriestOfPenanceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), true);
         this.addTarget(new TargetNonlandPermanent());
+        setTriggerPhrase("Whenever {this} is dealt damage, ");
     }
 
     public HighPriestOfPenanceTriggeredAbility(final HighPriestOfPenanceTriggeredAbility ability) {
@@ -67,10 +68,4 @@ class HighPriestOfPenanceTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getTargetId().equals(this.sourceId);
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} is dealt damage, " ;
-    }
-
 }

@@ -52,6 +52,7 @@ class TaskMageAssemblyStateTriggeredAbility extends StateTriggeredAbility {
 
     public TaskMageAssemblyStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
+        setTriggerPhrase("When there are no creatures on the battlefield, ");
     }
 
     public TaskMageAssemblyStateTriggeredAbility(final TaskMageAssemblyStateTriggeredAbility ability) {
@@ -67,10 +68,4 @@ class TaskMageAssemblyStateTriggeredAbility extends StateTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         return game.getBattlefield().count(new FilterCreaturePermanent(), this.getControllerId(), this, game) == 0;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When there are no creatures on the battlefield, " ;
-    }
-
 }

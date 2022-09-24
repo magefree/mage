@@ -13,6 +13,7 @@ public class EntersBattlefieldUntappedTriggeredAbility extends EntersBattlefield
     public EntersBattlefieldUntappedTriggeredAbility(Effect effect, boolean optional) {
         super(effect, optional);
         this.ignoreRulesGeneration = true;
+        setTriggerPhrase("When {this} enters the battlefield untapped, ");
     }
 
     private EntersBattlefieldUntappedTriggeredAbility(final EntersBattlefieldUntappedTriggeredAbility ability) {
@@ -31,10 +32,5 @@ public class EntersBattlefieldUntappedTriggeredAbility extends EntersBattlefield
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
         return permanent != null && !permanent.isTapped();
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When {this} enters the battlefield untapped, " ;
     }
 }

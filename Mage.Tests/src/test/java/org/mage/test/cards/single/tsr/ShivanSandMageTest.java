@@ -27,7 +27,6 @@ public class ShivanSandMageTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Shivan Sand-Mage", 1);
     }
@@ -47,7 +46,6 @@ public class ShivanSandMageTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Shivan Sand-Mage", 1);
     }
@@ -80,7 +78,6 @@ public class ShivanSandMageTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Shivan Sand-Mage", 1);
     }
@@ -114,7 +111,6 @@ public class ShivanSandMageTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Shivan Sand-Mage", 1);
     }

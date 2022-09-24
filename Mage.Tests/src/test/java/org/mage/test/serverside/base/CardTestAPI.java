@@ -117,24 +117,28 @@ public interface CardTestAPI {
     void assertLife(Player player, int life) throws AssertionError;
 
     /**
+     *
      * Assert creature's power and toughness by card name.
      * <p/>
-     * Throws {@link AssertionError} in the following cases: 1. no such player
-     * 2. no such creature under player's control 3. depending on comparison
-     * scope: 3a. any: no creature under player's control with the specified p\t
-     * params 3b. all: there is at least one creature with the cardName with the
-     * different p\t params
+     * Throws {@link AssertionError} in the following cases:
+     * 1. no such player
+     * 2. no such creature under player's control
+     * 3. depending on comparison scope:
+     *      3a. any: no creature under player's control with the specified p\t params
+     *      3b. all: there is at least one creature with the cardName with the different p\t params
      *
-     * @param player {@link Player} to get creatures for comparison.
-     * @param cardName Card name to compare with.
-     * @param power Expected power to compare with.
+     * @param player    {@link Player} to get creatures for comparison.
+     * @param cardName  Card name to compare with.
+     * @param power     Expected power to compare with.
      * @param toughness Expected toughness to compare with.
-     * @param scope {@link Filter.ComparisonScope} Use ANY, if you want "at
-     * least one creature with given name should have specified p\t" Use ALL, if
-     * you want "all creature with gived name should have specified p\t"
+     * @param scope     {@link mage.filter.Filter.ComparisonScope} Use ANY, if
+     *                  you want "at least one creature with given name should
+     *                  have specified p\t" Use ALL, if you want "all creature
+     *                  with given name should have specified p\t"
+     * @param base      If true, the comparison looks that base power and toughness of the creature.
+     *                  If false, the comparison looks at the final values.
      */
-    void assertPowerToughness(Player player, String cardName, int power, int toughness, Filter.ComparisonScope scope)
-            throws AssertionError;
+    public void assertPowerToughness(Player player, String cardName, int powerNeeded, int toughnessNeeded, Filter.ComparisonScope scope, boolean checkBaseValues) throws AssertionError;
 
     /**
      * Assert creature's abilities.

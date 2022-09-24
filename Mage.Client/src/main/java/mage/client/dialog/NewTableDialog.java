@@ -20,7 +20,6 @@ import mage.view.TableView;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -278,7 +277,7 @@ public class NewTableDialog extends MageDialog {
         lblMinimumRating.setToolTipText("Players with rating less than this value can't join this table");
 
         chkRated.setText("Rated game");
-        chkRated.setToolTipText("Indicates if matche will be rated");
+        chkRated.setToolTipText("Indicates if match will be rated");
 
         btnSettingsLoad.setText("Load...");
         btnSettingsLoad.setToolTipText("Load settings");

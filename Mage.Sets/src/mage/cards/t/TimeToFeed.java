@@ -85,11 +85,12 @@ class TimeToFeedTextEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        if (creature != null) {
-            DelayedTriggeredAbility ability = new TimeToFeedDiesTriggeredAbility(creature.getId(), creature.getZoneChangeCounter(game));
-            new CreateDelayedTriggeredAbilityEffect(ability, false).apply(game, source);
+        if (creature == null) {
+            return false;
         }
 
+        DelayedTriggeredAbility ability = new TimeToFeedDiesTriggeredAbility(creature.getId(), creature.getZoneChangeCounter(game));
+        new CreateDelayedTriggeredAbilityEffect(ability, false).apply(game, source);
         return true;
     }
 }
@@ -103,6 +104,7 @@ class TimeToFeedDiesTriggeredAbility extends DelayedTriggeredAbility {
         super(new GainLifeEffect(3), Duration.EndOfTurn, false);
         this.watchedCreatureId = watchedCreatureId;
         this.zoneChangeCounter = zoneChangeCounter;
+        setTriggerPhrase("When that creature dies this turn, ");
     }
 
     public TimeToFeedDiesTriggeredAbility(final TimeToFeedDiesTriggeredAbility ability) {
@@ -123,19 +125,10 @@ class TimeToFeedDiesTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (((ZoneChangeEvent) event).isDiesEvent()) {
-            if (event.getTargetId().equals(watchedCreatureId)) {
-                Permanent creature = (Permanent) game.getLastKnownInformation(watchedCreatureId, Zone.BATTLEFIELD);
-                if (creature.getZoneChangeCounter(game) == this.zoneChangeCounter) {
-                    return true;
-                }
-            }
+        if (!((ZoneChangeEvent) event).isDiesEvent() || !event.getTargetId().equals(watchedCreatureId)) {
+            return false;
         }
-        return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When that creature dies this turn, " ;
+        Permanent creature = (Permanent) game.getLastKnownInformation(watchedCreatureId, Zone.BATTLEFIELD);
+        return creature.getZoneChangeCounter(game) == this.zoneChangeCounter;
     }
 }

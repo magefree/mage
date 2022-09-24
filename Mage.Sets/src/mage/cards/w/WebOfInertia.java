@@ -44,7 +44,7 @@ class WebOfInertiaEffect extends OneShotEffect {
 
     public WebOfInertiaEffect() {
         super(Outcome.Detriment);
-        staticText = "that player may exile a card from their graveyard. If the player doesn't, creatures they control can't attack you this turn";
+        this.staticText = "that player may exile a card from their graveyard. If the player doesn't, creatures they control can't attack you this turn";
     }
 
     public WebOfInertiaEffect(final WebOfInertiaEffect effect) {
@@ -73,15 +73,9 @@ class WebOfInertiaEffect extends OneShotEffect {
     }
 
     @Override
-    public String getText(Mode mode) {
-        return staticText;
-    }
-
-    @Override
     public WebOfInertiaEffect copy() {
         return new WebOfInertiaEffect(this);
     }
-
 }
 
 class WebOfInertiaRestrictionEffect extends RestrictionEffect {
@@ -109,11 +103,6 @@ class WebOfInertiaRestrictionEffect extends RestrictionEffect {
             return true;
         }
         return !defenderId.equals(source.getControllerId());
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return staticText;
     }
 
     @Override

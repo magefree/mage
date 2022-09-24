@@ -15,7 +15,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
@@ -71,11 +70,23 @@ enum LordXanderTheCollectorEffectType {
 }
 
 class LordXanderTheCollectorEffect extends OneShotEffect {
+
     private final LordXanderTheCollectorEffectType effectType;
 
     LordXanderTheCollectorEffect(LordXanderTheCollectorEffectType LordXanderTheCollectorEffectType) {
         super(Outcome.Benefit);
         this.effectType = LordXanderTheCollectorEffectType;
+        switch (effectType) {
+            case DISCARD:
+                this.staticText = "target opponent discards half the cards in their hand, rounded down";
+                break;
+            case MILL:
+                this.staticText = "defending player mills half their library, rounded down";
+                break;
+            case SACRIFICE:
+                this.staticText = "target opponent sacrifices half the nonland permanents they control, rounded down";
+                break;
+        }
     }
 
     private LordXanderTheCollectorEffect(final LordXanderTheCollectorEffect effect) {
@@ -111,17 +122,16 @@ class LordXanderTheCollectorEffect extends OneShotEffect {
                 player.millCards(count / 2, source, game);
                 return true;
             case SACRIFICE:
-                count = game.getBattlefield().count(
-                        StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND, player.getId(), source, game
-                );
+                count = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND, player.getId(), game).size();
                 if (count < 2) {
                     return false;
                 }
-                TargetPermanent target = new TargetControlledPermanent(
+                TargetPermanent target = new TargetPermanent(
                         count / 2, StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND
                 );
                 target.setNotTarget(true);
                 target.withChooseHint("sacrifice");
+                target.setRequired(true);
                 player.choose(outcome, target, source, game);
                 for (UUID permanentId : target.getTargets()) {
                     Permanent permanent = game.getPermanent(permanentId);
@@ -132,18 +142,5 @@ class LordXanderTheCollectorEffect extends OneShotEffect {
                 return true;
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        switch (effectType) {
-            case DISCARD:
-                return "target opponent discards half the cards in their hand, rounded down";
-            case MILL:
-                return "defending player mills half their library, rounded down";
-            case SACRIFICE:
-                return "target opponent sacrifices half the nonland permanents they control, rounded down";
-        }
-        return "";
     }
 }

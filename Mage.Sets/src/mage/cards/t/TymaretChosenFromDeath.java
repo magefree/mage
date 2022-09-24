@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBaseToughnessSourceEffect;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.StaticFilters;
@@ -35,7 +35,7 @@ public final class TymaretChosenFromDeath extends CardImpl {
 
         // Tymaret's toughness is equal to your devotion to black.
         this.addAbility(new SimpleStaticAbility(
-                        Zone.ALL, new SetToughnessSourceEffect(DevotionCount.B, Duration.EndOfGame)
+                        Zone.ALL, new SetBaseToughnessSourceEffect(DevotionCount.B, Duration.EndOfGame)
                         .setText("{this}'s toughness is equal to your devotion to black")
                 ).addHint(DevotionCount.B.getHint())
         );

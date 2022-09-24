@@ -53,6 +53,7 @@ class DeadIronSledgeTriggeredAbility extends TriggeredAbilityImpl {
 
     public DeadIronSledgeTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever equipped creature blocks or becomes blocked by a creature, ");
     }
 
     public DeadIronSledgeTriggeredAbility(final DeadIronSledgeTriggeredAbility ability) {
@@ -87,11 +88,6 @@ class DeadIronSledgeTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever equipped creature blocks or becomes blocked by a creature, " ;
     }
 
     @Override

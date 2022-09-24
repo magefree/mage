@@ -88,6 +88,8 @@ public interface Target extends Serializable {
 
     void updateTarget(UUID targetId, Game game);
 
+    String getDescription();
+
     String getMessage();
 
     String getTargetName();

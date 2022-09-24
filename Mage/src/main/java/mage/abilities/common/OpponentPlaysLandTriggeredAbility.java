@@ -14,6 +14,7 @@ public class OpponentPlaysLandTriggeredAbility extends TriggeredAbilityImpl {
 
     public OpponentPlaysLandTriggeredAbility(Zone zone, Effect effect, Boolean optional) {
         super(zone, effect, optional);
+        setTriggerPhrase("Whenever an opponent plays a land, ");
     }
 
     public OpponentPlaysLandTriggeredAbility(OpponentPlaysLandTriggeredAbility ability) {
@@ -34,10 +35,5 @@ public class OpponentPlaysLandTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public OpponentPlaysLandTriggeredAbility copy() {
         return new OpponentPlaysLandTriggeredAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever an opponent plays a land, ";
     }
 }

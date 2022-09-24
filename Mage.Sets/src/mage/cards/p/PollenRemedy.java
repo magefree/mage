@@ -34,7 +34,7 @@ public final class PollenRemedy extends CardImpl {
         // Prevent the next 3 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose.
         // If Pollen Remedy was kicked, prevent the next 6 damage this way instead.
         Effect effect = new ConditionalReplacementEffect(new PreventDamageToTargetMultiAmountEffect(Duration.EndOfTurn, 6),
-                KickedCondition.instance, new PreventDamageToTargetMultiAmountEffect(Duration.EndOfTurn, 3));
+                KickedCondition.ONCE, new PreventDamageToTargetMultiAmountEffect(Duration.EndOfTurn, 3));
         effect.setText("Prevent the next 3 damage that would be dealt this turn to any number of targets, divided as you choose. If this spell was kicked, prevent the next 6 damage this way instead.");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().setTargetAdjuster(PollenRemedyAdjuster.instance);
@@ -55,6 +55,6 @@ enum PollenRemedyAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        ability.addTarget(new TargetAnyTargetAmount(KickedCondition.instance.apply(game, ability) ? 6 : 3));
+        ability.addTarget(new TargetAnyTargetAmount(KickedCondition.ONCE.apply(game, ability) ? 6 : 3));
     }
 }

@@ -23,6 +23,7 @@ public final class CorpseweftZombieToken extends TokenImpl {
         color.setBlack(true);
         this.power = new MageInt(power);
         this.toughness = new MageInt(toughness);
+        setOriginalExpansionSetCode("DTK");
     }
 
     public CorpseweftZombieToken(final CorpseweftZombieToken token) {

@@ -32,8 +32,6 @@ public class FerventChampionTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-        
         assertPowerToughness(playerA, "Fervent Champion", 3,3);
     }
 }

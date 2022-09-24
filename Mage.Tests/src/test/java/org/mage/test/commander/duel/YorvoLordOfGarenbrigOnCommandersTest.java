@@ -34,7 +34,6 @@ public class YorvoLordOfGarenbrigOnCommandersTest extends CardTestCommanderDuelB
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -77,6 +76,5 @@ public class YorvoLordOfGarenbrigOnCommandersTest extends CardTestCommanderDuelB
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 }

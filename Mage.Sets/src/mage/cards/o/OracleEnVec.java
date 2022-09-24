@@ -163,6 +163,7 @@ class OracleEnVecCantAttackRestrictionEffect extends RestrictionEffect {
 
     OracleEnVecCantAttackRestrictionEffect() {
         super(Duration.Custom);
+        this.staticText = "{this} can't attack.";
     }
 
     OracleEnVecCantAttackRestrictionEffect(final OracleEnVecCantAttackRestrictionEffect effect) {
@@ -200,11 +201,6 @@ class OracleEnVecCantAttackRestrictionEffect extends RestrictionEffect {
     public boolean isInactive(Ability source, Game game) {
         return game.getPhase().getType() == TurnPhase.END && this.isYourNextTurn(game);
     }
-
-    @Override
-    public String getText(Mode mode) {
-        return "{this} can't attack.";
-    }
 }
 
 class OracleEnVecDelayedTriggeredAbility extends DelayedTriggeredAbility {
@@ -214,6 +210,7 @@ class OracleEnVecDelayedTriggeredAbility extends DelayedTriggeredAbility {
     OracleEnVecDelayedTriggeredAbility(int startingTurn, List<UUID> chosenCreatures) {
         super(new OracleEnVecDestroyEffect(chosenCreatures), Duration.EndOfGame, true);
         this.startingTurn = startingTurn;
+        setTriggerPhrase("At the beginning of that turn's end step, ");
     }
 
     OracleEnVecDelayedTriggeredAbility(final OracleEnVecDelayedTriggeredAbility ability) {
@@ -234,11 +231,6 @@ class OracleEnVecDelayedTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public OracleEnVecDelayedTriggeredAbility copy() {
         return new OracleEnVecDelayedTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "At the beginning of that turn's end step, destroy each of the chosen creatures that didn't attack.";
     }
 }
 

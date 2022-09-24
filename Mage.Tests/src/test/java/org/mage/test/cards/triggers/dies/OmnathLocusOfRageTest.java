@@ -35,7 +35,6 @@ public class OmnathLocusOfRageTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Diabolic Edict", 1);
         assertGraveyardCount(playerA, "Omnath, Locus of Rage", 1);
@@ -64,7 +63,6 @@ public class OmnathLocusOfRageTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertGraveyardCount(playerB, "Blastfire Bolt", 1);
@@ -92,7 +90,6 @@ public class OmnathLocusOfRageTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
         assertGraveyardCount(playerB, "Doom Blade", 1);

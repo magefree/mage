@@ -75,7 +75,7 @@ class CollectiveVoyageEffect extends OneShotEffect {
             }
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
-                if (player != null) {
+                if (player != null && xSum != 0) {
                     TargetCardInLibrary target = new TargetCardInLibrary(0, xSum, StaticFilters.FILTER_CARD_BASIC_LAND);
                     if (player.searchLibrary(target, source, game)) {
                         toBattlefield.addAll(new CardsImpl(target.getTargets()).getCards(game));

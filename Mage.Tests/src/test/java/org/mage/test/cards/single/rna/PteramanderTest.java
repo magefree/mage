@@ -19,7 +19,6 @@ public class PteramanderTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Pteramander", 5, 5);
     }
@@ -34,7 +33,6 @@ public class PteramanderTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Pteramander", 5, 5);
     }

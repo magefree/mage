@@ -106,6 +106,7 @@ class NarsetTranscendentTriggeredAbility extends DelayedTriggeredAbility {
 
     public NarsetTranscendentTriggeredAbility() {
         super(new NarsetTranscendentGainReboundEffect(), Duration.EndOfTurn, true);
+        setTriggerPhrase("When you cast your next instant or sorcery spell from your hand this turn, ");
     }
 
     private NarsetTranscendentTriggeredAbility(final NarsetTranscendentTriggeredAbility ability) {
@@ -137,11 +138,6 @@ class NarsetTranscendentTriggeredAbility extends DelayedTriggeredAbility {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When you cast your next instant or sorcery spell from your hand this turn, " ;
     }
 }
 

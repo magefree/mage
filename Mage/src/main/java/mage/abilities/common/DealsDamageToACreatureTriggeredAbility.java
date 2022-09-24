@@ -30,6 +30,7 @@ public class DealsDamageToACreatureTriggeredAbility extends TriggeredAbilityImpl
         this.combatOnly = combatOnly;
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever {this} deals " + (combatOnly ? "combat " : "") + "damage to " + filter.getMessage() + ", ");
     }
 
     public DealsDamageToACreatureTriggeredAbility(final DealsDamageToACreatureTriggeredAbility ability) {
@@ -66,10 +67,5 @@ public class DealsDamageToACreatureTriggeredAbility extends TriggeredAbilityImpl
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} deals " + (combatOnly ? "combat " : "") + "damage to " + filter.getMessage() + ", ";
     }
 }

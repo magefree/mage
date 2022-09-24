@@ -31,7 +31,6 @@ public class PyromancersGauntletTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 15); // Bolt 3 + 2
@@ -66,7 +65,6 @@ public class PyromancersGauntletTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
 
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 13); // Attack from Horde 3 + Dmage 2+2 from planeswalker
         assertLife(playerB, 18); // Damage from planeswalker 2
@@ -105,7 +103,6 @@ public class PyromancersGauntletTest extends CardTestPlayerBase {
         setStopAt(4, PhaseStep.BEGIN_COMBAT);
 
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 15); // Attack from Horde 3 + Dmage 2 from planeswalker
         assertLife(playerB, 18); // Damage from planeswalker 2

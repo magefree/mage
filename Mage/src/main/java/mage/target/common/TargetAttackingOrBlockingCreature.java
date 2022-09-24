@@ -1,25 +1,24 @@
 package mage.target.common;
 
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.target.TargetPermanent;
 
 /**
  *
- * @author nantuko
+ * @author awjackson
  */
 public class TargetAttackingOrBlockingCreature extends TargetPermanent {
 
     public TargetAttackingOrBlockingCreature() {
-        this(1, 1, StaticFilters.FILTER_ATTACKING_OR_BLOCKING_CREATURE, false);
+        this(1);
     }
 
     public TargetAttackingOrBlockingCreature(int numTargets) {
-        this(numTargets, numTargets, StaticFilters.FILTER_ATTACKING_OR_BLOCKING_CREATURE, false);
+        this(numTargets, numTargets);
     }
 
-    public TargetAttackingOrBlockingCreature(int minNumTargets, int maxNumTargets, FilterAttackingOrBlockingCreature filter, boolean notTarget) {
-        super(minNumTargets, maxNumTargets, filter, notTarget);
+    public TargetAttackingOrBlockingCreature(int minNumTargets, int maxNumTargets) {
+        super(minNumTargets, maxNumTargets, maxNumTargets > 1 ? StaticFilters.FILTER_ATTACKING_OR_BLOCKING_CREATURES : StaticFilters.FILTER_ATTACKING_OR_BLOCKING_CREATURE);
     }
 
     public TargetAttackingOrBlockingCreature(final TargetAttackingOrBlockingCreature target) {
@@ -30,5 +29,4 @@ public class TargetAttackingOrBlockingCreature extends TargetPermanent {
     public TargetAttackingOrBlockingCreature copy() {
         return new TargetAttackingOrBlockingCreature(this);
     }
-
 }

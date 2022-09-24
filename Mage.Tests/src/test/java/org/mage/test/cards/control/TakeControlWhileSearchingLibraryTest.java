@@ -42,7 +42,6 @@ public class TakeControlWhileSearchingLibraryTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -87,7 +86,6 @@ public class TakeControlWhileSearchingLibraryTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -128,7 +126,6 @@ public class TakeControlWhileSearchingLibraryTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -183,7 +180,6 @@ public class TakeControlWhileSearchingLibraryTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -210,7 +206,6 @@ public class TakeControlWhileSearchingLibraryTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -246,7 +241,6 @@ public class TakeControlWhileSearchingLibraryTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, "Balduvian Bears", 1);
     }

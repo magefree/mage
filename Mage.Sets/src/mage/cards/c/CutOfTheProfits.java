@@ -19,7 +19,7 @@ public final class CutOfTheProfits extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
 
         // Casualty 3
-        this.addAbility(new CasualtyAbility(this, 3));
+        this.addAbility(new CasualtyAbility(3));
 
         // You draw X cards and you lose X life.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.REGULAR, "you"));

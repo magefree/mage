@@ -32,7 +32,6 @@ public class EmergentSequenceTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertType("Swamp", CardType.CREATURE, true);
         assertCounterCount(playerA, "Swamp", CounterType.P1P1, 1);
@@ -63,7 +62,6 @@ public class EmergentSequenceTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Island", 1);
         assertType("Swamp", CardType.CREATURE, true);

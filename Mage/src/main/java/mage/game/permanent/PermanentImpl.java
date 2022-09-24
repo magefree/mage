@@ -90,7 +90,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected int minBlockedBy = 1;
     // maximal number of creatures the creature can be blocked by  0 = no restriction
     protected int maxBlockedBy = 0;
-    protected boolean removedFromCombat;
     protected boolean deathtouched;
 
     protected Map<String, List<UUID>> connectedCards = new HashMap<>();
@@ -587,8 +586,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
         if (this.transformed) {
             Card orgCard = this.getMainCard();
-            this.getPower().modifyBaseValue(orgCard.getPower().getValue());
-            this.getToughness().modifyBaseValue(orgCard.getToughness().getValue());
+            this.getPower().setModifiedBaseValue(orgCard.getPower().getValue());
+            this.getToughness().setModifiedBaseValue(orgCard.getToughness().getValue());
         }
         game.informPlayers(this.getLogName() + " transforms into " + this.getOtherFace().getLogName()
                 + CardUtil.getSourceLogName(game, source, this.getId()));
@@ -718,11 +717,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public int getMaxBlockedBy() {
         return maxBlockedBy;
-    }
-
-    @Override
-    public boolean isRemovedFromCombat() {
-        return removedFromCombat;
     }
 
     @Override
@@ -1298,12 +1292,12 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public void addPower(int power) {
-        this.power.boostValue(power);
+        this.power.increaseBoostedValue(power);
     }
 
     @Override
     public void addToughness(int toughness) {
-        this.toughness.boostValue(toughness);
+        this.toughness.increaseBoostedValue(toughness);
     }
 
     /**
@@ -1477,20 +1471,15 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean removeFromCombat(Game game, boolean withInfo) {
+    public boolean removeFromCombat(Game game, boolean withEvent) {
         if (this.isAttacking() || this.blocking > 0) {
-            return game.getCombat().removeFromCombat(objectId, game, withInfo);
+            return game.getCombat().removeFromCombat(objectId, game, withEvent);
         } else if (this.isPlaneswalker(game)) {
             if (game.getCombat().getDefenders().contains(getId())) {
-                game.getCombat().removePlaneswalkerFromCombat(objectId, game, withInfo);
+                game.getCombat().removePlaneswalkerFromCombat(objectId, game);
             }
         }
         return false;
-    }
-
-    @Override
-    public void setRemovedFromCombat(boolean removedFromCombat) {
-        this.removedFromCombat = removedFromCombat;
     }
 
     @Override

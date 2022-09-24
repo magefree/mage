@@ -63,6 +63,7 @@ class MagusOfTheBridgeTriggeredAbility extends TriggeredAbilityImpl {
 
     public MagusOfTheBridgeTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ExileSourceEffect());
+        setTriggerPhrase("When a creature is put into an opponent's graveyard from the battlefield, ");
     }
 
     private MagusOfTheBridgeTriggeredAbility(final MagusOfTheBridgeTriggeredAbility ability) {
@@ -89,10 +90,5 @@ class MagusOfTheBridgeTriggeredAbility extends TriggeredAbilityImpl {
                     && permanent.isCreature(game) && controller.hasOpponent(permanent.getOwnerId(), game);
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When a creature is put into an opponent's graveyard from the battlefield, " ;
     }
 }

@@ -57,6 +57,7 @@ class GuardianOfTazeemTriggeredAbility extends TriggeredAbilityImpl {
     public GuardianOfTazeemTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TapTargetEffect(), false);
         addEffect(new GuardianOfTazeemEffect());
+        setTriggerPhrase("<i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, " );
     }
 
     public GuardianOfTazeemTriggeredAbility(final GuardianOfTazeemTriggeredAbility ability) {
@@ -87,11 +88,6 @@ class GuardianOfTazeemTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "<i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, " ;
     }
 }
 

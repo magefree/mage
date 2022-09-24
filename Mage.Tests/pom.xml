@@ -52,16 +52,19 @@
             <artifactId>mage-game-freeforall</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-impl</artifactId>
-            <version>3.0.2</version>
         </dependency>
         <dependency>
             <!-- server xml config needs optional dependency for jaxb-impl -->
             <groupId>org.glassfish.jaxb</groupId>
-            <artifactId>jaxb-runtime</artifactId>
-            <version>3.0.2</version>
+            <artifactId>jaxb-core</artifactId>
         </dependency>
         <dependency>
             <groupId>net.java.truevfs</groupId>

@@ -64,6 +64,7 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         this.controlledText = controlledText;
         this.setTargetPointer = setTargetPointer;
         this.thisOrAnother = thisOrAnother;
+        setTriggerPhrase(generateTriggerPhrase());
     }
 
     public EntersBattlefieldAllTriggeredAbility(final EntersBattlefieldAllTriggeredAbility ability) {
@@ -111,8 +112,7 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         return super.getRule();
     }
 
-    @Override
-    public String getTriggerPhrase() {
+    private String generateTriggerPhrase() {
         StringBuilder sb = new StringBuilder("Whenever ");
         if (thisOrAnother) {
             sb.append("{this} or another ");

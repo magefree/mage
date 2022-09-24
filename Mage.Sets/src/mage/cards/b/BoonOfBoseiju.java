@@ -54,7 +54,7 @@ enum BoonOfBoseijuValue implements DynamicValue {
         return game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT,
                 sourceAbility.getControllerId(), sourceAbility, game
-        ).stream().mapToInt(MageObject::getManaValue).sum();
+        ).stream().mapToInt(MageObject::getManaValue).max().orElse(0);
     }
 
     @Override

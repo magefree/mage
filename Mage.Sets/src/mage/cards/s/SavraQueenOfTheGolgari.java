@@ -60,6 +60,7 @@ class SavraSacrificeBlackCreatureAbility extends TriggeredAbilityImpl {
     public SavraSacrificeBlackCreatureAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new SavraSacrificeEffect(), new PayLifeCost(2)));
         this.setLeavesTheBattlefieldTrigger(true);
+        setTriggerPhrase("Whenever you sacrifice a black creature, ");
     }
 
     public SavraSacrificeBlackCreatureAbility(final SavraSacrificeBlackCreatureAbility ability) {
@@ -81,11 +82,6 @@ class SavraSacrificeBlackCreatureAbility extends TriggeredAbilityImpl {
         return event.getPlayerId().equals(this.getControllerId())
                 && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).isCreature(game)
                 && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).getColor(game).isBlack();
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you sacrifice a black creature, " ;
     }
 }
 
@@ -137,6 +133,7 @@ class SavraSacrificeGreenCreatureAbility extends TriggeredAbilityImpl {
 
     public SavraSacrificeGreenCreatureAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(2));
+        setTriggerPhrase("Whenever you sacrifice a green creature, ");
     }
 
     public SavraSacrificeGreenCreatureAbility(final SavraSacrificeGreenCreatureAbility ability) {
@@ -158,10 +155,5 @@ class SavraSacrificeGreenCreatureAbility extends TriggeredAbilityImpl {
         return event.getPlayerId().equals(this.getControllerId())
                 && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).isCreature(game)
                 && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).getColor(game).isGreen();
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you sacrifice a green creature, " ;
     }
 }

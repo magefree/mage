@@ -99,6 +99,7 @@ class AdarkarValkyrieDelayedTriggeredAbility extends DelayedTriggeredAbility {
     public AdarkarValkyrieDelayedTriggeredAbility(MageObjectReference mor) {
         super(new ReturnToBattlefieldUnderYourControlTargetEffect(), Duration.EndOfTurn);
         this.mor = mor;
+        setTriggerPhrase("When target creature other than {this} dies this turn, " );
     }
 
     public AdarkarValkyrieDelayedTriggeredAbility(final AdarkarValkyrieDelayedTriggeredAbility ability) {
@@ -129,10 +130,5 @@ class AdarkarValkyrieDelayedTriggeredAbility extends DelayedTriggeredAbility {
         getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
 
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When target creature other than {this} dies this turn, " ;
     }
 }

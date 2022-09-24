@@ -6,6 +6,8 @@ import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
+import java.util.Arrays;
+
 /**
  *
  * @author TheElk801
@@ -21,6 +23,8 @@ public final class BirdIllusionToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
+
+        availableImageSetCodes = Arrays.asList("GRN", "C20");
     }
 
     public BirdIllusionToken(final BirdIllusionToken token) {

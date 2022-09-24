@@ -54,6 +54,7 @@ class GoblinArchaeologistEffect extends OneShotEffect {
 
     public GoblinArchaeologistEffect() {
         super(Outcome.DestroyPermanent);
+        this.staticText = "Flip a coin. If you win the flip, destroy target artifact and untap {this}. If you lose the flip, sacrifice {this}";
     }
 
     public GoblinArchaeologistEffect(final GoblinArchaeologistEffect ability) {
@@ -81,9 +82,4 @@ class GoblinArchaeologistEffect extends OneShotEffect {
        }
        return false;
    }
-    
-    @Override
-    public String getText(Mode mode) {
-        return "Flip a coin. If you win the flip, destroy target artifact and untap {this}. If you lose the flip, sacrifice {this}";
-    }
 }

@@ -27,6 +27,7 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
         super(zone, effect, isOptional);
         this.targetController = targetController;
         this.interveningIfClauseCondition = interveningIfClauseCondition;
+        setTriggerPhrase(generateTriggerPhrase());
     }
 
     public BeginningOfEndStepTriggeredAbility(final BeginningOfEndStepTriggeredAbility ability) {
@@ -103,8 +104,7 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
         return true;
     }
 
-    @Override
-    public String getTriggerPhrase() {
+    private String generateTriggerPhrase() {
         switch (targetController) {
             case YOU:
                 return "At the beginning of your end step, " + generateConditionString();
@@ -134,7 +134,7 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
         }
         String clauseText = interveningIfClauseCondition.toString();
         if (clauseText.startsWith("if")) {
-            //Fixes punctuation on multiple sentence if-then construction
+            // Fixes punctuation on multiple sentence if-then construction
             // see -- Colfenor's Urn
             if (clauseText.endsWith(".")) {
                 return clauseText + " ";

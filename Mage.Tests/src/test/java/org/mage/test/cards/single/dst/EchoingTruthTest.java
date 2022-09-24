@@ -25,6 +25,7 @@ public class EchoingTruthTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Echoing Truth");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spectral Procession");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Echoing Truth", "Spirit Token");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

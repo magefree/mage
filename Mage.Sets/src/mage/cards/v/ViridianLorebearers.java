@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import java.util.UUID;
@@ -7,8 +6,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -32,18 +31,17 @@ public final class ViridianLorebearers extends CardImpl {
         filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter, null);
+
     public ViridianLorebearers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.subtype.add(SubType.ELF);
-        this.subtype.add(SubType.SHAMAN);
+        this.subtype.add(SubType.ELF, SubType.SHAMAN);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
         // {3}{G}, {tap}: Target creature gets +X/+X until end of turn, where X is the number of artifacts your opponents control.
-        Effect effect = new BoostTargetEffect(new PermanentsOnBattlefieldCount(filter), new PermanentsOnBattlefieldCount(filter), Duration.EndOfTurn, true);
-        effect.setText("Target creature gets +X/+X until end of turn, where X is the number of artifacts your opponents control");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{3}{G}"));
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn), new ManaCostsImpl<>("{3}{G}"));
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

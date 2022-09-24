@@ -54,7 +54,9 @@ public final class SaprolingToken extends TokenImpl {
                 "PCA",
                 "GK1",
                 "GK2",
-                "CLB"
+                "CLB",
+                "2X2",
+                "DMU"
         ));
     }
 

@@ -133,6 +133,7 @@ public class EndTurnEffectTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Disenchant"); //Instant {1}{W}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sundial of the Infinite");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Disenchant", "Sundial of the Infinite");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1},", TestPlayer.NO_TARGET, "Disenchant");
@@ -146,6 +147,5 @@ public class EndTurnEffectTest extends CardTestPlayerBase {
 
         assertHandCount(playerA, 7); // Discard to maximum hand size
         assertHandCount(playerB, 1); // 1 card drawn at start of 2nd turn
-
     }
 }

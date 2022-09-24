@@ -33,13 +33,14 @@ public class BecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
 
     public BecomesTargetTriggeredAbility(Effect effect, FilterStackObject filter, SetTargetPointer setTargetPointer, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
-        this.filter = filter.copy();
+        this.filter = filter;
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("When {this} becomes the target of " + filter.getMessage() + ", ");
     }
 
     public BecomesTargetTriggeredAbility(final BecomesTargetTriggeredAbility ability) {
         super(ability);
-        this.filter = ability.filter.copy();
+        this.filter = ability.filter;
         this.setTargetPointer = ability.setTargetPointer;
     }
 
@@ -75,10 +76,5 @@ public class BecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
                 break;
         }
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When {this} becomes the target of " + filter.getMessage() + ", " ;
     }
 }

@@ -42,15 +42,11 @@ class AncientRunesDamageTargetEffect extends OneShotEffect {
 
     public AncientRunesDamageTargetEffect() {
         super(Outcome.Damage);
+        this.staticText = "{this} deals damage to that player equal to the number of artifacts they control";
     }
 
     public AncientRunesDamageTargetEffect(AncientRunesDamageTargetEffect copy) {
         super(copy);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "{this} deals damage to that player equal to the number of artifacts they control";
     }
 
     @Override

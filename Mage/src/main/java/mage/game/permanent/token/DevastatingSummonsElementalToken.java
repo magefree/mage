@@ -15,6 +15,7 @@ public final class DevastatingSummonsElementalToken extends TokenImpl {
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.ELEMENTAL);
+        setOriginalExpansionSetCode("ROE");
     }
 
     public DevastatingSummonsElementalToken(final DevastatingSummonsElementalToken token) {

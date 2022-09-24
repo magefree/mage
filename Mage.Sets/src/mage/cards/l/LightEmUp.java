@@ -18,7 +18,7 @@ public final class LightEmUp extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}");
 
         // Casualty 2
-        this.addAbility(new CasualtyAbility(this, 2));
+        this.addAbility(new CasualtyAbility(2));
 
         // Light 'Em Up deals 2 damage to target creature or planeswalker.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));

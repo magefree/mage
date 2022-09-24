@@ -88,6 +88,7 @@ class HammerJammerTriggeredAbility extends TriggeredAbilityImpl {
 
     public HammerJammerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new HammerJammerEffect(), false);
+        setTriggerPhrase("Whenever you roll a die, ");
     }
 
     public HammerJammerTriggeredAbility(final HammerJammerTriggeredAbility ability) {
@@ -114,11 +115,6 @@ class HammerJammerTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you roll a die, " ;
     }
 }
 

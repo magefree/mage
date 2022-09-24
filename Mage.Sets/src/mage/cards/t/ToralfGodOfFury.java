@@ -116,10 +116,11 @@ class ToralfGodOfFuryTriggeredAbility extends TriggeredAbilityImpl {
         }
         this.getEffects().clear();
         this.getTargets().clear();
-        this.addEffect(new DamageTargetEffect(dEvent.getExcess()));
+        int excessDamage = dEvent.getExcess();
+        this.addEffect(new DamageTargetEffect(excessDamage));
         FilterCreaturePlayerOrPlaneswalker filter = new FilterCreaturePlayerOrPlaneswalker();
         filter.getPermanentFilter().add(Predicates.not(new MageObjectReferencePredicate(new MageObjectReference(event.getTargetId(), game))));
-        this.addTarget(new TargetAnyTarget(filter));
+        this.addTarget(new TargetAnyTarget(filter).withChooseHint(Integer.toString(excessDamage) + " damage"));
         return true;
     }
 

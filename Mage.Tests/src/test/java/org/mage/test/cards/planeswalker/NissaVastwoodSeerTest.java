@@ -47,7 +47,7 @@ Later I used her -2 to kill her, which (after putting another spell on the stack
         // -7: Untap up to six target lands. They become 6/6 Elemental creatures. They're still lands.        
         addCard(Zone.HAND, playerA, "Nissa, Vastwood Seer");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nissa, Vastwood Seer");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nissa, Vastwood Seer", true);
         setChoice(playerA, true);
         addTarget(playerA, "Forest");
         

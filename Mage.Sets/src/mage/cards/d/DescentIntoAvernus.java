@@ -4,7 +4,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -15,6 +17,7 @@ import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.token.TreasureToken;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -78,7 +81,9 @@ class DescentIntoAvernusEffect extends OneShotEffect {
             return false;
         }
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            new TreasureToken().putOntoBattlefield(count, game, source);
+            Effect effect = new CreateTokenTargetEffect(new TreasureToken(), count);
+            effect.setTargetPointer(new FixedTarget(playerId));
+            effect.apply(game, source);
         }
         return true;
     }

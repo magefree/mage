@@ -45,6 +45,7 @@ class ScryTriggeredAbility extends TriggeredAbilityImpl {
     public ScryTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new DamageTargetEffect(2), new GenericManaCost(2)), false);
         this.addTarget(new TargetAnyTarget());
+        setTriggerPhrase("Whenever you scry, ");
     }
 
     public ScryTriggeredAbility(final ScryTriggeredAbility ability) {
@@ -64,10 +65,5 @@ class ScryTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(this.getControllerId());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you scry, " ;
     }
 }

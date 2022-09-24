@@ -49,11 +49,10 @@ public final class TreacherousPitDweller extends CardImpl {
 
 class TreacherousPitDwellerTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String ruleText = "When {this} enters the battlefield from a graveyard, ";
-
     public TreacherousPitDwellerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TreacherousPitDwellerEffect(), false);
         addTarget(new TargetOpponent());
+        setTriggerPhrase("When {this} enters the battlefield from a graveyard, ");
     }
 
     public TreacherousPitDwellerTriggeredAbility(final TreacherousPitDwellerTriggeredAbility ability) {
@@ -74,12 +73,6 @@ class TreacherousPitDwellerTriggeredAbility extends TriggeredAbilityImpl {
     public TreacherousPitDwellerTriggeredAbility copy() {
         return new TreacherousPitDwellerTriggeredAbility(this);
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return ruleText ;
-    }
-
 }
 
 class TreacherousPitDwellerEffect extends ContinuousEffectImpl {

@@ -59,8 +59,7 @@ public final class VishKalBloodArbiter extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(
                 VishKalBloodArbiterDynamicValue.instance,
                 VishKalBloodArbiterDynamicValue.instance,
-                Duration.EndOfTurn, true
-        ).setText("target creature gets -1/-1 until end of turn for each +1/+1 counter removed this way"), new RemoveAllCountersSourceCost(CounterType.P1P1));
+                Duration.EndOfTurn), new RemoveAllCountersSourceCost(CounterType.P1P1));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -96,11 +95,16 @@ enum VishKalBloodArbiterDynamicValue implements DynamicValue {
 
     @Override
     public String toString() {
-        return "1";
+        return "-1";
     }
 
     @Override
     public String getMessage() {
-        return "the number of +1/+1 counters removed this way";
+        return "+1/+1 counter removed this way";
+    }
+
+    @Override
+    public int getSign() {
+        return -1;
     }
 }

@@ -17,7 +17,6 @@ public class FieryEmancipationTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", playerB);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertLife(playerB, 14);
     }
 
@@ -32,7 +31,6 @@ public class FieryEmancipationTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", "Basri Ket");
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertGraveyardCount(playerB, "Basri Ket", 1);
     }
 }

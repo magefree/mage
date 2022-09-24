@@ -18,7 +18,6 @@ public class DaybreakChargerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Daybreak Charger", 5, 1);
     }

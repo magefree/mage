@@ -450,13 +450,13 @@ public final class ManaUtil {
 
     /**
      * Converts a collection of mana symbols into a single condensed string e.g:
-     *      {1}{1}{1}{1}{1}{W}   = {5}{W}
-     *      {2}{B}{2}{B}{2}{B}   = {6}{B}{B}{B}
-     *      {1}{2}{R}{U}{1}{1}   = {5}{R}{U}
-     *      {B}{G}{R}            = {B}{G}{R}
+     * {1}{1}{1}{1}{1}{W}   = {5}{W}
+     * {2}{B}{2}{B}{2}{B}   = {6}{B}{B}{B}
+     * {1}{2}{R}{U}{1}{1}   = {5}{R}{U}
+     * {B}{G}{R}            = {B}{G}{R}
      *
-     * @param rawCost   the uncondensed version of the mana String.
-     * @return          the condensed version of the mana String.
+     * @param rawCost the uncondensed version of the mana String.
+     * @return the condensed version of the mana String.
      */
     public static String condenseManaCostString(String rawCost) {
         int total = 0;
@@ -674,6 +674,10 @@ public final class ManaUtil {
     }
 
     public static int playerPaysXGenericMana(boolean payAsX, String restoreContextName, Player player, Ability source, Game game) {
+        return playerPaysXGenericMana(payAsX, restoreContextName, player, source, game, Integer.MAX_VALUE);
+    }
+
+    public static int playerPaysXGenericMana(boolean payAsX, String restoreContextName, Player player, Ability source, Game game, int maxValue) {
         // payAsX - if your cost is X value (some mana can be used for X cost only)
         // false: "you may pay any amount of mana"
         // true: "counter that spell unless that player pays {X}"
@@ -684,7 +688,7 @@ public final class ManaUtil {
             int bookmark = game.bookmarkState();
             player.resetStoredBookmark(game);
 
-            wantToPay = player.announceXMana(0, Integer.MAX_VALUE, "How much mana will you pay?", game, source);
+            wantToPay = player.announceXMana(0, maxValue, "Choose how much mana to pay", game, source);
             if (wantToPay > 0) {
                 Cost cost = ManaUtil.createManaCost(wantToPay, payAsX);
                 payed = cost.pay(source, game, source, player.getId(), false, null);

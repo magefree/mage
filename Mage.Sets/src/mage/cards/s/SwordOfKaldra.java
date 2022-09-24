@@ -48,6 +48,7 @@ class SwordOfKaldraTriggeredAbility extends TriggeredAbilityImpl {
 
     public SwordOfKaldraTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ExileTargetEffect("exile that creature. (Exile it only if it's still on the battlefield.)"), false);
+        setTriggerPhrase("Whenever equipped creature deals damage to a creature, ");
     }
 
     public SwordOfKaldraTriggeredAbility(final SwordOfKaldraTriggeredAbility ability) {
@@ -75,10 +76,4 @@ class SwordOfKaldraTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever equipped creature deals damage to a creature, ";
-    }
-
 }

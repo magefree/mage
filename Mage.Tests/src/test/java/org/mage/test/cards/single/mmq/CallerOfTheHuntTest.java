@@ -29,7 +29,6 @@ public class CallerOfTheHuntTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Caller of the Hunt", 1);
         assertPowerToughness(playerA, "Caller of the Hunt", 3, 3); // +3 boost
@@ -52,7 +51,6 @@ public class CallerOfTheHuntTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Caller of the Hunt", 1);
         assertPowerToughness(playerA, "Caller of the Hunt", 3, 3); // +3 boost

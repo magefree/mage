@@ -60,6 +60,7 @@ class TirelessTrackerTriggeredAbility extends TriggeredAbilityImpl {
     public TirelessTrackerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
         setLeavesTheBattlefieldTrigger(true);
+        setTriggerPhrase("Whenever you sacrifice a Clue, ");
     }
 
     public TirelessTrackerTriggeredAbility(final TirelessTrackerTriggeredAbility ability) {
@@ -80,10 +81,5 @@ class TirelessTrackerTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(this.getControllerId())
                 && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).hasSubtype(SubType.CLUE, game);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you sacrifice a Clue, " ;
     }
 }

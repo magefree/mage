@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -10,6 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetLandPermanent;
+import mage.target.targetpointer.EachTargetPointer;
 
 /**
  *
@@ -23,9 +23,7 @@ public final class Fumarole extends CardImpl {
         // As an additional cost to cast Fumarole, pay 3 life.
         this.getSpellAbility().addCost(new PayLifeCost(3));
         // Destroy target creature and target land.
-        Effect effect = new DestroyTargetEffect(false, true);
-        effect.setText("Destroy target creature and target land");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new DestroyTargetEffect().setTargetPointer(new EachTargetPointer()));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }

@@ -24,7 +24,6 @@ public class BolassCitadelTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
         assertHandCount(playerA, 0);
         assertPermanentCount(playerA, "Eager Cadet", 1);
         assertGraveyardCount(playerA, 0);
@@ -51,7 +50,6 @@ public class BolassCitadelTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
         assertHandCount(playerA, 0);
         assertPermanentCount(playerA, "Food Token", 1);
         assertExileCount(playerA, "Curious Pair", 1);
@@ -72,7 +70,6 @@ public class BolassCitadelTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Fellwar Stone", 1);
         assertLife(playerA, 20 - 2);
@@ -94,7 +91,6 @@ public class BolassCitadelTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Archfiend of Ifnir", 1);
         assertLife(playerA, 20 - 5);
@@ -123,7 +119,6 @@ public class BolassCitadelTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Giant Killer", 1);
         assertGraveyardCount(playerA, "Ferocious Zheng", 1);
@@ -157,6 +152,5 @@ public class BolassCitadelTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 }

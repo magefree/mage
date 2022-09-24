@@ -77,7 +77,7 @@ class MindleechMassEffect extends OneShotEffect {
         controller.lookAtCards(opponent.getName(), opponent.getHand(), game);
         return CardUtil.castSpellWithAttributesForFree(
                 controller, source, game, new CardsImpl(opponent.getHand()),
-                StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY
+                StaticFilters.FILTER_CARD_NON_LAND
         );
     }
 }

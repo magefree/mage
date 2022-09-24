@@ -24,7 +24,7 @@ public final class SpiritWhiteToken extends TokenImpl {
 
         availableImageSetCodes = Arrays.asList("AVR", "C14", "CNS", "DDC", "DDK", "FRF", "ISD", "KTK", "M15", "MM2", "SHM",
                 "SOI", "EMA", "C16", "MM3", "CMA", "E01", "RAV", "EMN", "M20", "C19", "C20", "CMR", "KHM",
-                "MID", "VOW", "UMA", "BBD", "IMA", "CM2", "MD1", "DVD", "DDQ", "CN2", "A25", "GK2");
+                "MID", "VOW", "UMA", "BBD", "IMA", "CM2", "MD1", "DVD", "DDQ", "CN2", "A25", "GK2", "2X2");
     }
 
     @Override
@@ -43,6 +43,9 @@ public final class SpiritWhiteToken extends TokenImpl {
             setTokenType(1);
         }
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("A25")) {
+            setTokenType(2);
+        }
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("2X2")) {
             setTokenType(2);
         }
     }

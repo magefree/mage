@@ -128,8 +128,8 @@ class OlagLudevicsHubrisCopyApplier extends CopyApplier {
         blueprint.addSubType(SubType.ZOMBIE);
         blueprint.getColor().setBlue(true);
         blueprint.getColor().setBlack(true);
-        blueprint.getPower().modifyBaseValue(4);
-        blueprint.getToughness().modifyBaseValue(4);
+        blueprint.getPower().setModifiedBaseValue(4);
+        blueprint.getToughness().setModifiedBaseValue(4);
         return true;
     }
 }

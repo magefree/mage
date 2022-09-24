@@ -26,7 +26,6 @@ public class SaviorOfOllenbockTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount(playerA, lion, 1);
     }
@@ -44,7 +43,6 @@ public class SaviorOfOllenbockTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount(playerA, bear, 1);
     }
@@ -65,7 +63,6 @@ public class SaviorOfOllenbockTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, savior, 0);
         assertPermanentCount(playerA, lion, 1);
@@ -89,7 +86,6 @@ public class SaviorOfOllenbockTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, savior, 0);
         assertPermanentCount(playerA, lion, 1);

@@ -29,7 +29,6 @@ public class ChaosWandTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20 + 3); // +3 from blood
         assertLife(playerB, 20 - 3); // -3 from blood

@@ -10,6 +10,7 @@ import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.*;
 import mage.filter.predicate.other.AnotherTargetPredicate;
+import mage.filter.predicate.permanent.AttachedOrShareCreatureTypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 
@@ -437,6 +438,13 @@ public final class StaticFilters {
         FILTER_OPPONENTS_PERMANENT.setLockedFilter(true);
     }
 
+    public static final FilterNonlandPermanent FILTER_OPPONENTS_PERMANENT_NON_LAND = new FilterNonlandPermanent("nonland permanent an opponent controls");
+
+    static {
+        FILTER_OPPONENTS_PERMANENT_NON_LAND.add(TargetController.OPPONENT.getControllerPredicate());
+        FILTER_OPPONENTS_PERMANENT_NON_LAND.setLockedFilter(true);
+    }
+
     public static final FilterCreaturePermanent FILTER_OPPONENTS_PERMANENT_CREATURE = new FilterOpponentsCreaturePermanent();
 
     static {
@@ -675,7 +683,7 @@ public final class StaticFilters {
         FILTER_PERMANENT_ALL_SLIVERS.setLockedFilter(true);
     }
 
-    public static final FilterControlledPermanent FILTER_CONTROLLED_SAMURAI_OR_WARRIOR = new FilterControlledPermanent("a Samurai or Warrior you control");
+    public static final FilterControlledPermanent FILTER_CONTROLLED_SAMURAI_OR_WARRIOR = new FilterControlledPermanent("Samurai or Warrior you control");
 
     static {
         FILTER_CONTROLLED_SAMURAI_OR_WARRIOR.add(Predicates.or(
@@ -842,6 +850,21 @@ public final class StaticFilters {
         FILTER_CREATURE_TOKEN.setLockedFilter(true);
     }
 
+    public static final FilterCreaturePermanent FILTER_CONTROLLED_CREATURE_NON_TOKEN = new FilterCreaturePermanent("a nontoken creature you control");
+
+    static {
+        FILTER_CONTROLLED_CREATURE_NON_TOKEN.add(TargetController.YOU.getControllerPredicate());
+        FILTER_CONTROLLED_CREATURE_NON_TOKEN.add(TokenPredicate.FALSE);
+        FILTER_CONTROLLED_CREATURE_NON_TOKEN.setLockedFilter(true);
+    }
+
+    public static final FilterCreaturePermanent FILTER_CREATURE_NON_TOKEN = new FilterCreaturePermanent("a nontoken creature");
+
+    static {
+        FILTER_CREATURE_NON_TOKEN.add(TokenPredicate.FALSE);
+        FILTER_CREATURE_NON_TOKEN.setLockedFilter(true);
+    }
+
     public static final FilterControlledCreaturePermanent FILTER_A_CONTROLLED_CREATURE_P1P1 = new FilterControlledCreaturePermanent("a creature you control with a +1/+1 counter on it");
 
     static {
@@ -890,6 +913,13 @@ public final class StaticFilters {
     static {
         FILTER_CREATURE_TOKENS.add(TokenPredicate.TRUE);
         FILTER_CREATURE_TOKENS.setLockedFilter(true);
+    }
+
+    public static final FilterCreaturePermanent FILTER_CREATURE_ENCHANTED_AND_SHARE_TYPE = new FilterCreaturePermanent("enchanted creature and other creatures that share a creature type with it");
+
+    static {
+        FILTER_CREATURE_ENCHANTED_AND_SHARE_TYPE.add(AttachedOrShareCreatureTypePredicate.instance);
+        FILTER_CREATURE_ENCHANTED_AND_SHARE_TYPE.setLockedFilter(true);
     }
 
     public static final FilterAttackingCreature FILTER_ATTACKING_CREATURE = new FilterAttackingCreature();

@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -36,7 +36,7 @@ public final class DoomedArtisanToken extends TokenImpl {
         toughness = new MageInt(0);
 
         // This creature's power and toughness are each equal to the number of Sculpturess you control.
-        this.addAbility(new SimpleStaticAbility(new SetPowerToughnessSourceEffect(xValue, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(new SetBasePowerToughnessSourceEffect(xValue, Duration.EndOfGame)));
     }
 
     private DoomedArtisanToken(final DoomedArtisanToken token) {

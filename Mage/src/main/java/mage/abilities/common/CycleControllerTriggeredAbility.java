@@ -27,6 +27,7 @@ public class CycleControllerTriggeredAbility extends TriggeredAbilityImpl {
     public CycleControllerTriggeredAbility(Effect effect, boolean optional, boolean excludeSource) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.excludeSource = excludeSource;
+        setTriggerPhrase("Whenever you cycle " + (excludeSource ? "another" : "a") + " card, ");
     }
 
     private CycleControllerTriggeredAbility(final CycleControllerTriggeredAbility ability) {
@@ -49,11 +50,6 @@ public class CycleControllerTriggeredAbility extends TriggeredAbilityImpl {
         StackObject item = game.getState().getStack().getFirst();
         return item instanceof StackAbility
                 && item.getStackAbility() instanceof CyclingAbility;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you cycle " + (excludeSource ? "another" : "a") + " card, " ;
     }
 
     @Override

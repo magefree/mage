@@ -89,7 +89,6 @@ class TheWretchedEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent theWretched = source.getSourcePermanentIfItStillExists(game);
         if (theWretched == null
-                || theWretched.isRemovedFromCombat()
                 || !theWretched.isAttacking()
                 || !source.isControlledBy(theWretched.getControllerId())) {
             return false;

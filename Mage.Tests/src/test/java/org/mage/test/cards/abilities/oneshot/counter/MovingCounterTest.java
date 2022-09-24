@@ -102,7 +102,7 @@ public class MovingCounterTest extends CardTestPlayerBase {
         attack(3, playerA, "Leech Bonder");
 
         activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "{U},", "Leech Bonder");
-        addTarget(playerA, "Ley Druid");
+        // Ley Druid auto-chosen since only target
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();
@@ -111,6 +111,5 @@ public class MovingCounterTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Ley Druid", 1);
         assertPowerToughness(playerA, "Leech Bonder", 2, 2);
-
     }
 }

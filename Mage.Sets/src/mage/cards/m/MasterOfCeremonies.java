@@ -28,8 +28,8 @@ import java.util.*;
  * @author Alex-Vasile
  */
 public class MasterOfCeremonies extends CardImpl {
-    public MasterOfCeremonies(UUID ownderId, CardSetInfo setInfo) {
-        super(ownderId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
+    public MasterOfCeremonies(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
 
         this.subtype.add(SubType.RHINO);
         this.subtype.add(SubType.DRUID);
@@ -63,7 +63,7 @@ class MasterOfCeremoniesChoiceEffect extends OneShotEffect {
         super(Outcome.Benefit);
         this.staticText = "each opponent chooses money, friends, or secrets. " +
                           "For each player who chose money, you and that player each create a Treasure token. " +
-                          "For each player who chose friends, you and that player each create a 1/1 green and white Citizen creature token.  " +
+                          "For each player who chose friends, you and that player each create a 1/1 green and white Citizen creature token. " +
                           "For each player who chose secrets, you and that player each draw a card.";
     }
 
@@ -114,15 +114,17 @@ class MasterOfCeremoniesChoiceEffect extends OneShotEffect {
             Token treasureOpponent = new TreasureToken();
             treasureOpponent.putOntoBattlefield(1, game, source, opponentId);
         }
+        game.applyEffects();
 
         // Friends - You and that player each create a 1/1 green and white Citizen creature token.
         for (UUID opponentId : friendChoosers) {
             Token citizenOwner = new CitizenGreenWhiteToken();
-            citizenOwner.putOntoBattlefield(1, game, source, opponentId);
+            citizenOwner.putOntoBattlefield(1, game, source, controller.getId());
 
             Token citizenOpponent = new CitizenGreenWhiteToken();
             citizenOpponent.putOntoBattlefield(1, game, source, opponentId);
         }
+        game.applyEffects();
 
         // Secrets - You and that player each draw a card.
         for (UUID opponentId : secretsChoosers) {
