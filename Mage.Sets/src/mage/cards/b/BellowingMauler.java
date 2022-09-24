@@ -68,7 +68,7 @@ class BellowingMaulerEffect extends OneShotEffect {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 boolean sacrificed = false;
-                TargetPermanent target = new TargetPermanent(1, 1, StaticFilters.FILTER_CREATURE_NON_TOKEN, true);
+                TargetPermanent target = new TargetPermanent(1, 1, StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN, true);
                 if (target.canChoose(playerId, source, game)
                         && player.chooseUse(Outcome.Sacrifice, "Sacrifice a nontoken creature or lose 4 life?", null, "Sacrifice", "Lose 4 life", source, game)) {
                     player.chooseTarget(Outcome.Sacrifice, target, source, game);
