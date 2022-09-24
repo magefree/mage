@@ -50,6 +50,7 @@ public class VaziKeenNegotiator extends CardImpl {
         // {T}: Target opponent creates X Treasure tokens, where X is the number of Treasure tokens you created this turn.
         Ability tapAbility = new SimpleActivatedAbility(new CreateTokenTargetEffect(new TreasureToken(), VaziKeenNegotiatorNumberOfTokensCreated.instance), new TapSourceCost());
         tapAbility.addTarget(new TargetOpponent());
+        tapAbility.addWatcher(new CreatedTokenWatcher());
         this.addAbility(tapAbility);
 
         // Whenever an opponent casts a spell or activates an ability,
@@ -113,7 +114,7 @@ enum VaziKeenNegotiatorNumberOfTokensCreated implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return CreatedTokenWatcher.getTypeCreatedCountByPlayer(sourceAbility.getControllerId(), TreasureToken.class, game);
+        return CreatedTokenWatcher.getTypeCreatedCountByPlayer(sourceAbility.getControllerId(), SubType.TREASURE, game);
     }
 
     @Override
