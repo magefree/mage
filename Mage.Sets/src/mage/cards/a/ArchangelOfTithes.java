@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.combat.CantAttackYouUnlessPayManaAllEffect;
+import mage.abilities.effects.common.combat.CantAttackYouUnlessPayAllEffect;
 import mage.abilities.effects.common.combat.CantBlockUnlessPayManaAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -50,7 +50,7 @@ public final class ArchangelOfTithes extends CardImpl {
     }
 }
 
-class ArchangelOfTithesPayManaToAttackAllEffect extends CantAttackYouUnlessPayManaAllEffect {
+class ArchangelOfTithesPayManaToAttackAllEffect extends CantAttackYouUnlessPayAllEffect {
 
     ArchangelOfTithesPayManaToAttackAllEffect() {
         super(new ManaCostsImpl<>("{1}"), true);

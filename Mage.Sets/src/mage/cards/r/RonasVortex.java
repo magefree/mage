@@ -37,7 +37,7 @@ public final class RonasVortex extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new PutOnLibraryTargetEffect(false), new ReturnToHandTargetEffect(),
                 KickedCondition.ONCE, "return target creature or planeswalker you don't control to its owner's " +
-                "hand. If this spell was kicked, put that permanent on the bottom of its owner's library instaed"
+                "hand. If this spell was kicked, put that permanent on the bottom of its owner's library instead"
         ));
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }

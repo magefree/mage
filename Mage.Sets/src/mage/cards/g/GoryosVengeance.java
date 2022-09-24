@@ -9,7 +9,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.SpliceOntoArcaneAbility;
+import mage.abilities.keyword.SpliceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -41,10 +41,10 @@ public final class GoryosVengeance extends CardImpl {
 
         // Return target legendary creature card from your graveyard to the battlefield. That creature gains haste. Exile it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new GoryosVengeanceEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter).withChooseHint("return to battlefield"));
 
         // Splice onto Arcane {2}{B}
-        this.addAbility(new SpliceOntoArcaneAbility("{2}{B}"));
+        this.addAbility(new SpliceAbility(SpliceAbility.ARCANE, "{2}{B}"));
     }
 
     private GoryosVengeance(final GoryosVengeance card) {

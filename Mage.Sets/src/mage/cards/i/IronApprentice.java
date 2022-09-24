@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.SourceHasCountersCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -40,7 +39,7 @@ public final class IronApprentice extends CardImpl {
 
         // When Iron Apprentice dies, if it had counters on it, put those counters on target creature you control.
         Ability ability = new ConditionalTriggeredAbility(
-                new DiesSourceTriggeredAbility(new IronApprenticeEffect()), IronApprenticeCondition.instance,
+                new DiesSourceTriggeredAbility(new IronApprenticeEffect()), SourceHasCountersCondition.instance,
                 "When {this} dies, if it had counters on it, put those counters on target creature you control."
         );
         ability.addTarget(new TargetControlledCreaturePermanent());
@@ -54,21 +53,6 @@ public final class IronApprentice extends CardImpl {
     @Override
     public IronApprentice copy() {
         return new IronApprentice(this);
-    }
-}
-
-enum IronApprenticeCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = source.getSourcePermanentOrLKI(game);
-        return permanent != null && permanent
-                .getCounters(game)
-                .values()
-                .stream()
-                .mapToInt(Counter::getCount)
-                .anyMatch(x -> x > 0);
     }
 }
 
@@ -98,7 +82,6 @@ class IronApprenticeEffect extends OneShotEffect {
                 .getCounters(game)
                 .copy()
                 .values()
-                .stream()
                 .forEach(counter -> creature.addCounters(counter, source, game));
         return true;
     }

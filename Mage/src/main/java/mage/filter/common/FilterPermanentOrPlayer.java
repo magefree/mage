@@ -47,11 +47,6 @@ public class FilterPermanentOrPlayer extends FilterImpl<MageItem> implements Fil
         return true;
     }
 
-    public void add(ObjectSourcePlayerPredicate predicate) {
-        playerFilter.add((Predicate<? super Player>) predicate);
-        permanentFilter.add((Predicate<? super Permanent>) predicate);
-    }
-
     @Override
     public boolean match(MageItem o, Game game) {
         if (super.match(o, game)) {

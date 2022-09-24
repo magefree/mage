@@ -60,6 +60,7 @@ class CounterSourceEffect extends OneShotEffect {
 
     public CounterSourceEffect() {
         super(Outcome.Detriment);
+        this.staticText = "counter it unless you sacrifice a land";
     }
 
     public CounterSourceEffect(final CounterSourceEffect effect) {
@@ -95,14 +96,6 @@ class CounterSourceEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        if (staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
-        return "counter it unless you sacrifice a land";
     }
 }
 

@@ -129,29 +129,6 @@ public class ExileTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        if (mode.getTargets().isEmpty()) {
-            sb.append("exile that permanent"); // this will be used if the target is set by target pointer and staticText not set.
-        } else {
-            Target target;
-            if (targetPointer instanceof SecondTargetPointer && mode.getTargets().size() > 1) {
-                target = mode.getTargets().get(1);
-            } else {
-                target = mode.getTargets().get(0);
-            }
-            if (target.getNumberOfTargets() == 1) {
-                String targetName = target.getTargetName();
-                sb.append("exile ");
-                if (!targetName.startsWith("another")) {
-                    sb.append("target ");
-                }
-                sb.append(targetName);
-            } else if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
-                sb.append("exile up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName());
-            } else {
-                sb.append("exile ").append(CardUtil.numberToText(target.getNumberOfTargets())).append(" target ").append(target.getTargetName());
-            }
-        }
-        return sb.toString();
+        return "exile " + getTargetPointer().describeTargets(mode.getTargets(), "that permanent");
     }
 }

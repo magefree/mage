@@ -49,13 +49,13 @@ public class MockSplitCard extends SplitCard {
             this.addAbility(textAbilityFromString(ruleText));
         }
 
-        CardInfo leftHalf = CardRepository.instance.findCardWPreferredSet(getLeftHalfName(card), card.getSetCode());
+        CardInfo leftHalf = CardRepository.instance.findCardWPreferredSet(getLeftHalfName(card), card.getSetCode(), true);
         if (leftHalf != null) {
             this.leftHalfCard = new MockSplitCardHalf(leftHalf);
             ((SplitCardHalf) this.leftHalfCard).setParentCard(this);
         }
 
-        CardInfo rightHalf = CardRepository.instance.findCardWPreferredSet(getRightHalfName(card), card.getSetCode());
+        CardInfo rightHalf = CardRepository.instance.findCardWPreferredSet(getRightHalfName(card), card.getSetCode(), true);
         if (rightHalf != null) {
             this.rightHalfCard = new MockSplitCardHalf(rightHalf);
             ((SplitCardHalf) this.rightHalfCard).setParentCard(this);

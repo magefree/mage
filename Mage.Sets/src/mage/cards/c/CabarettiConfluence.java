@@ -53,7 +53,7 @@ public final class CabarettiConfluence extends CardImpl {
         // • Creatures target player controls gets +1/+1 and gain first strike until end of turn.
         this.getSpellAbility().addMode(new Mode(new BoostAllEffect(
                 1, 1, Duration.EndOfTurn, filter, false
-        ).setText("creatures target player controls gets +1/+1")).addEffect(new GainAbilityAllEffect(
+        ).setText("creatures target player controls get +1/+1")).addEffect(new GainAbilityAllEffect(
                 FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filter
         ).setText("and gain first strike until end of turn")));
     }

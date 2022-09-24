@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
-import mage.abilities.keyword.SpliceOntoArcaneAbility;
+import mage.abilities.keyword.SpliceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -30,9 +30,9 @@ public final class CandlesGlow extends CardImpl {
 
         // Prevent the next 3 damage that would be dealt to any target this turn. You gain life equal to the damage prevented this way.
         this.getSpellAbility().addEffect(new CandlesGlowPreventDamageTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().addTarget(new TargetAnyTarget().withChooseHint("prevent 3 damage"));
         // Splice onto Arcane {1}{W}
-        this.addAbility(new SpliceOntoArcaneAbility("{1}{W}"));
+        this.addAbility(new SpliceAbility(SpliceAbility.ARCANE, "{1}{W}"));
     }
 
     private CandlesGlow(final CandlesGlow card) {

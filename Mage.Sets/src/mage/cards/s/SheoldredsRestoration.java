@@ -41,7 +41,7 @@ public final class SheoldredsRestoration extends CardImpl {
         ));
 
         // Exile Sheoldred's Restoration.
-        this.getSpellAbility().addEffect(new ExileSpellEffect());
+        this.getSpellAbility().addEffect(new ExileSpellEffect().concatBy("<br>"));
     }
 
     private SheoldredsRestoration(final SheoldredsRestoration card) {

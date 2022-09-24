@@ -3,7 +3,7 @@ package mage.abilities.effects.keyword;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.AsThoughEffectType;
@@ -41,13 +41,13 @@ public class EchoEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         if (cost == null) {
-            cost = new ManaCostsImpl<>(Integer.toString(amount.calculate(game, source, this)));
+            cost = new GenericManaCost(amount.calculate(game, source, this));
         }
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null
                 && source.getSourceObjectIfItStillExists(game) != null) {
             if (game.getContinuousEffects().asThough(source.getSourceId(), AsThoughEffectType.PAY_0_ECHO, source, source.getControllerId(), game) != null) {
-                Cost altCost = new ManaCostsImpl<>("{0}");
+                Cost altCost = new GenericManaCost(0);
                 if (controller.chooseUse(Outcome.Benefit, "Pay {0} instead of the echo cost?", source, game)) {
                     altCost.clearPaid();
                     if (altCost.pay(source, game, source, source.getControllerId(), false, null)) {

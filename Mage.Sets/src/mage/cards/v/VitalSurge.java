@@ -1,8 +1,7 @@
-
 package mage.cards.v;
 
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.keyword.SpliceOntoArcaneAbility;
+import mage.abilities.keyword.SpliceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,7 +23,7 @@ public final class VitalSurge extends CardImpl {
         // You gain 3 life.
         this.getSpellAbility().addEffect(new GainLifeEffect(3));
         // Splice onto Arcane {1}{G}
-        this.addAbility(new SpliceOntoArcaneAbility("{1}{G}"));
+        this.addAbility(new SpliceAbility(SpliceAbility.ARCANE, "{1}{G}"));
     }
 
     private VitalSurge(final VitalSurge card) {

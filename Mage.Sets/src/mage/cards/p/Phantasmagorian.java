@@ -56,6 +56,7 @@ class CounterSourceEffect extends OneShotEffect {
 
     public CounterSourceEffect() {
         super(Outcome.AIDontUseIt);
+        this.staticText = "any player may discard three cards. If a player does, counter {this}";
     }
 
     public CounterSourceEffect(final CounterSourceEffect effect) {
@@ -90,13 +91,5 @@ class CounterSourceEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        if (staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
-        return "any player may discard three cards. If a player does, counter {this}";
     }
 }

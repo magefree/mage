@@ -3,6 +3,7 @@ package mage.abilities.effects.common.continuous;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.Mode;
+import mage.abilities.condition.Condition;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -24,6 +25,7 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
     protected UUID controllingPlayerId;
     private boolean fixedControl;
     private boolean firstControlChange = true;
+    private final Condition condition;
 
     public GainControlTargetEffect(Duration duration) {
         this(duration, false, null);
@@ -48,15 +50,21 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
     }
 
     public GainControlTargetEffect(Duration duration, boolean fixedControl, UUID controllingPlayerId) {
+        this(duration, fixedControl, controllingPlayerId, null);
+    }
+
+    public GainControlTargetEffect(Duration duration, boolean fixedControl, UUID controllingPlayerId, Condition condition) {
         super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.controllingPlayerId = controllingPlayerId;
         this.fixedControl = fixedControl;
+        this.condition = condition;
     }
 
     public GainControlTargetEffect(final GainControlTargetEffect effect) {
         super(effect);
         this.controllingPlayerId = effect.controllingPlayerId;
         this.fixedControl = effect.fixedControl;
+        this.condition = effect.condition;
     }
 
     @Override
@@ -104,6 +112,9 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
                 // If it was not possible to get control of target permanent by the activated ability the first time it took place
                 // the effect failed (e.g. because of Guardian Beast) and must be discarded
                 // This does not handle correctly multiple targets at once
+                discard();
+            }
+            if (condition != null && !condition.apply(game, source)) {
                 discard();
             }
         }

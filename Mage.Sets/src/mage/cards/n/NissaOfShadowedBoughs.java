@@ -3,29 +3,26 @@ package mage.cards.n;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.LandfallAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PutCardFromOneOfTwoZonesOntoBattlefieldEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.MenaceAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
+import mage.filter.predicate.card.CardManaCostLessThanControlledLandCountPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.custom.CreatureToken;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
 
@@ -35,6 +32,11 @@ import static mage.constants.Outcome.Benefit;
  * @author TheElk801
  */
 public final class NissaOfShadowedBoughs extends CardImpl {
+
+    private static final FilterCard filter = new FilterCard("card with mana value less than or equal to the number of lands you control");
+    static {
+        filter.add(CardManaCostLessThanControlledLandCountPredicate.getInstance());
+    }
 
     public NissaOfShadowedBoughs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{B}{G}");
@@ -52,8 +54,13 @@ public final class NissaOfShadowedBoughs extends CardImpl {
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));
         this.addAbility(ability);
 
-        // −5: You may put a creature card with converted mana cost less than or equal to the number of lands you control onto the battlefield from your hand or graveyard with two +1/+1 counters on it.
-        this.addAbility(new LoyaltyAbility(new NissaOfShadowedBoughsCreatureEffect(), -5));
+        // −5: You may put a creature card with mana value less than or equal to the number of lands you control onto the battlefield from your hand or graveyard with two +1/+1 counters on it.
+        Effect putCardEffect = new PutCardFromOneOfTwoZonesOntoBattlefieldEffect(filter, false, new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)));
+        putCardEffect.setText("You may put a creature card with mana value less than or equal to " +
+                "the number of lands you control onto the battlefield from your hand or graveyard " +
+                "with two +1/+1 counters on it.");
+        this.addAbility(new LoyaltyAbility(putCardEffect,-5)
+        );
     }
 
     private NissaOfShadowedBoughs(final NissaOfShadowedBoughs card) {
@@ -96,64 +103,6 @@ class NissaOfShadowedBoughsLandEffect extends OneShotEffect {
                         .withAbility(new MenaceAbility()),
                 false, true, Duration.EndOfTurn
         ), source);
-        return true;
-    }
-}
-
-class NissaOfShadowedBoughsCreatureEffect extends OneShotEffect {
-
-    NissaOfShadowedBoughsCreatureEffect() {
-        super(Outcome.Benefit);
-        staticText = "You may put a creature card with mana value less than or equal to " +
-                "the number of lands you control onto the battlefield from your hand or graveyard " +
-                "with two +1/+1 counters on it.";
-    }
-
-    private NissaOfShadowedBoughsCreatureEffect(final NissaOfShadowedBoughsCreatureEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public NissaOfShadowedBoughsCreatureEffect copy() {
-        return new NissaOfShadowedBoughsCreatureEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        int lands = game.getBattlefield().count(
-                StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
-                source.getControllerId(), source, game
-        );
-        FilterCard filter = new FilterCreatureCard("creature card with mana value " + lands + " or less");
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, lands + 1));
-        int inHand = player.getHand().count(filter, game);
-        int inGrave = player.getGraveyard().count(filter, game);
-        if (inHand < 1 && inGrave < 1) {
-            return false;
-        }
-        TargetCard target;
-        if (inHand < 1 || (inGrave > 0 && !player.chooseUse(
-                outcome, "Put a creature card from your hand or graveyard onto the battlefield?",
-                null, "Hand", "Graveyard", source, game
-        ))) {
-            target = new TargetCardInYourGraveyard(0, 1, filter, true);
-        } else {
-            target = new TargetCardInHand(filter);
-        }
-        player.choose(outcome, target, source, game);
-        Card card = game.getCard(target.getFirstTarget());
-        if (card == null) {
-            return false;
-        }
-        player.moveCards(card, Zone.BATTLEFIELD, source, game);
-        Permanent permanent = game.getPermanent(card.getId());
-        if (permanent != null) {
-            permanent.addCounters(CounterType.P1P1.createInstance(2), source.getControllerId(), source, game);
-        }
         return true;
     }
 }

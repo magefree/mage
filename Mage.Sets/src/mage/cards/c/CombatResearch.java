@@ -47,7 +47,7 @@ public final class CombatResearch extends CardImpl {
         // Enchanted creature has "Whenever this creature deals combat damage to a player, draw a card."
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(
                 new DealsCombatDamageToAPlayerTriggeredAbility(
-                        new DrawCardSourceControllerEffect(1), true
+                        new DrawCardSourceControllerEffect(1), false
                 ), AttachmentType.AURA
         )));
 

@@ -18,7 +18,7 @@ public final class ALittleChat extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Casualty 1
-        this.addAbility(new CasualtyAbility(this, 1));
+        this.addAbility(new CasualtyAbility(1));
 
         // Look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(2, 1, PutCards.HAND, PutCards.BOTTOM_ANY));

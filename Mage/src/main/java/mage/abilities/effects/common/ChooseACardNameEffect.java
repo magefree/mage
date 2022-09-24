@@ -11,6 +11,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 
 import java.util.Set;
@@ -86,20 +87,47 @@ public class ChooseACardNameEffect extends OneShotEffect {
     }
 
     private final TypeOfName typeOfName;
+    private final boolean lookAtOpponentHand;
 
     public ChooseACardNameEffect(TypeOfName typeOfName) {
+        this(typeOfName, false);
+    }
+
+    public ChooseACardNameEffect(TypeOfName typeOfName, boolean lookAtOpponentHand) {
         super(Outcome.Detriment);
         this.typeOfName = typeOfName;
-        staticText = "choose " + CardUtil.addArticle(typeOfName.description);
+        this.lookAtOpponentHand = lookAtOpponentHand;
+        if (lookAtOpponentHand) {
+            staticText = "look at an opponent's hand, then choose any " + typeOfName.description;
+        } else {
+            staticText = "choose " + CardUtil.addArticle(typeOfName.description);
+        }
     }
 
     public ChooseACardNameEffect(final ChooseACardNameEffect effect) {
         super(effect);
         this.typeOfName = effect.typeOfName;
+        this.lookAtOpponentHand = effect.lookAtOpponentHand;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
+        if (lookAtOpponentHand) {
+            Player player = game.getPlayer(source.getControllerId());
+            if (player != null) {
+                TargetOpponent target = new TargetOpponent(true);
+                if (player.choose(Outcome.Benefit, target, source, game)) {
+                    Player opponent = game.getPlayer(target.getFirstTarget());
+                    if (opponent != null) {
+                        MageObject sourceObject = game.getObject(source);
+                        player.lookAtCards(sourceObject != null ? sourceObject.getIdName() : null, opponent.getHand(), game);
+                        player.chooseUse(Outcome.Benefit, "Press Ok to name a card",
+                                "You won't be able to resize the window showing opponents hand once you do",
+                                "Ok", "", source, game);
+                    }
+                }
+            }
+        }
         return typeOfName.getChoice(game, source) != null;
     }
 

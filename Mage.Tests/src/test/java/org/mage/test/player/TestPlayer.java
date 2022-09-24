@@ -3679,13 +3679,13 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean getCanPayLifeCost() {
-        return computerPlayer.getCanPayLifeCost();
+    public PayLifeCostLevel getPayLifeCostLevel() {
+        return computerPlayer.getPayLifeCostLevel();
     }
 
     @Override
-    public void setCanPayLifeCost(boolean canPayLifeCost) {
-        computerPlayer.setCanPayLifeCost(canPayLifeCost);
+    public void setPayLifeCostLevel(PayLifeCostLevel payLifeCostLevel) {
+        computerPlayer.setPayLifeCostLevel(payLifeCostLevel);
     }
 
     @Override

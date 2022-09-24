@@ -8,14 +8,13 @@ import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.PutCardFromOneOfTwoZonesOntoBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
@@ -25,8 +24,6 @@ import mage.game.permanent.token.NahiriTheLithomancerEquipmentToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -34,6 +31,12 @@ import mage.target.common.TargetControlledPermanent;
  * @author emerald000
  */
 public final class NahiriTheLithomancer extends CardImpl {
+
+    private static final FilterCard filter = new FilterCard("an Equipment");
+
+    static {
+        filter.add(SubType.EQUIPMENT.getPredicate());
+    }
 
     public NahiriTheLithomancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{W}");
@@ -46,7 +49,7 @@ public final class NahiriTheLithomancer extends CardImpl {
         this.addAbility(new LoyaltyAbility(new NahiriTheLithomancerFirstAbilityEffect(), 2));
 
         // -2: You may put an Equipment card from your hand or graveyard onto the battlefield.
-        this.addAbility(new LoyaltyAbility(new NahiriTheLithomancerSecondAbilityEffect(), -2));
+        this.addAbility(new LoyaltyAbility(new PutCardFromOneOfTwoZonesOntoBattlefieldEffect(filter), -2));
 
         // -10: Create a colorless Equipment artifact token named Stoneforged Blade. It has indestructible, "Equipped creature gets +5/+5 and has double strike," and equip {0}.
         Effect effect = new CreateTokenEffect(new NahiriTheLithomancerEquipmentToken());
@@ -118,53 +121,6 @@ class NahiriTheLithomancerFirstAbilityEffect extends OneShotEffect {
             }
             return true;
 
-        }
-        return false;
-    }
-}
-
-class NahiriTheLithomancerSecondAbilityEffect extends OneShotEffect {
-
-    private static final FilterCard filter = new FilterCard("an Equipment");
-
-    static {
-        filter.add(SubType.EQUIPMENT.getPredicate());
-    }
-
-    NahiriTheLithomancerSecondAbilityEffect() {
-        super(Outcome.PutCardInPlay);
-        this.staticText = "You may put an Equipment card from your hand or graveyard onto the battlefield";
-    }
-
-    NahiriTheLithomancerSecondAbilityEffect(final NahiriTheLithomancerSecondAbilityEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public NahiriTheLithomancerSecondAbilityEffect copy() {
-        return new NahiriTheLithomancerSecondAbilityEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            if (controller.chooseUse(Outcome.PutCardInPlay, "Put an Equipment from hand? (No = from graveyard)", source, game)) {
-                Target target = new TargetCardInHand(0, 1, filter);
-                controller.choose(outcome, target, source, game);
-                Card card = controller.getHand().get(target.getFirstTarget(), game);
-                if (card != null) {
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                }
-            } else {
-                Target target = new TargetCardInYourGraveyard(0, 1, filter);
-                target.choose(Outcome.PutCardInPlay, source.getControllerId(), source.getSourceId(), source, game);
-                Card card = controller.getGraveyard().get(target.getFirstTarget(), game);
-                if (card != null) {
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                }
-            }
-            return true;
         }
         return false;
     }

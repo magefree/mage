@@ -27,7 +27,7 @@ import java.util.UUID;
 /**
  * @author PurpleCrowbar
  */
-public class NemataPrimevalWarden extends CardImpl {
+public final class NemataPrimevalWarden extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Saproling");
 

@@ -1,10 +1,9 @@
-
 package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.keyword.SpliceOntoArcaneAbility;
+import mage.abilities.keyword.SpliceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -28,9 +27,9 @@ public final class Overblaze extends CardImpl {
 
         // Each time target permanent would deal damage to a creature or player this turn, it deals double that damage to that creature or player instead.
         this.getSpellAbility().addEffect(new OverblazeEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent());
+        this.getSpellAbility().addTarget(new TargetPermanent().withChooseHint("deals double damage"));
         // Splice onto Arcane {2}{R}{R}
-        this.addAbility(new SpliceOntoArcaneAbility("{2}{R}{R}"));
+        this.addAbility(new SpliceAbility(SpliceAbility.ARCANE, "{2}{R}{R}"));
     }
 
     private Overblaze(final Overblaze card) {

@@ -298,9 +298,10 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                     game.addSimultaneousEvent(new CreatedTokenEvent(source, (PermanentToken) permanent));
                 }
 
-                // handle auras coming into the battlefield
-                // code refactored from CopyPermanentEffect
-                if (permanent.getSubtype().contains(SubType.AURA)) {
+                // if token was created (not a spell copy) handle auras coming into the battlefield
+                // code blindly copied from CopyPermanentEffect
+                // TODO: clean this up -- half the comments make no sense in the context of creating a token
+                if (created && permanent.getSubtype().contains(SubType.AURA)) {
                     Outcome auraOutcome = Outcome.BoostCreature;
                     Target auraTarget = null;
 
