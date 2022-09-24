@@ -20,6 +20,7 @@ public final class Unfinity extends ExpansionSet {
         this.hasBasicLands = true;
         this.hasBoosters = false; // not likely to be able to drafts at any point
 
+        cards.add(new SetCardInfo("Attempted Murder", 66, Rarity.UNCOMMON, mage.cards.a.AttemptedMurder.class));
         cards.add(new SetCardInfo("Blood Crypt", 279, Rarity.RARE, mage.cards.b.BloodCrypt.class));
         cards.add(new SetCardInfo("Breeding Pool", 286, Rarity.RARE, mage.cards.b.BreedingPool.class));
         cards.add(new SetCardInfo("Clown Car", 186, Rarity.RARE, mage.cards.c.ClownCar.class));
