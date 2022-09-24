@@ -10,6 +10,7 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -47,12 +48,6 @@ public final class BellowingMauler extends CardImpl {
 
 class BellowingMaulerEffect extends OneShotEffect {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("nontoken creature");
-
-    static {
-        filter.add(TokenPredicate.FALSE);
-    }
-
     public BellowingMaulerEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "each player loses 4 life unless they sacrifice a nontoken creature";
@@ -73,7 +68,7 @@ class BellowingMaulerEffect extends OneShotEffect {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 boolean sacrificed = false;
-                TargetPermanent target = new TargetPermanent(1, 1, filter, true);
+                TargetPermanent target = new TargetPermanent(1, 1, StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN, true);
                 if (target.canChoose(playerId, source, game)
                         && player.chooseUse(Outcome.Sacrifice, "Sacrifice a nontoken creature or lose 4 life?", null, "Sacrifice", "Lose 4 life", source, game)) {
                     player.chooseTarget(Outcome.Sacrifice, target, source, game);
