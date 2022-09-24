@@ -861,11 +861,6 @@ public class ManaTest {
         }
 
         // 6. Greater amount of mana but no less of any kind other than generic
-        Mana mana1 = new ManaCostsImpl<>("{3}").getMana();
-        Mana mana2 = new ManaCostsImpl<>("{1}{W}").getMana();
-        assertEquals(mana2, Mana.getMoreValuableMana(mana1, mana2));
-        assertEquals(mana2, Mana.getMoreValuableMana(mana2, mana1));
-
         final List<Mana> nonAnyManas = Arrays.asList(whiteMana, blueMana, blackMana, redMana, greenMana, colorlessMana, genericMana);
         Mana manaBase = new ManaCostsImpl<>("{1}{W}{U}{B}{R}{G}{C}").getMana();
         Mana manaToCompare = manaBase.copy();
