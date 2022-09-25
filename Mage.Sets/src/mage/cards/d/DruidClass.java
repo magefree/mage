@@ -10,7 +10,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.continuous.GainClassAbilitySourceEffect;
 import mage.abilities.effects.common.continuous.PlayAdditionalLandsControllerEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.ClassLevelAbility;
 import mage.abilities.keyword.ClassReminderAbility;
 import mage.abilities.keyword.HasteAbility;
@@ -82,7 +82,7 @@ class DruidClassToken extends TokenImpl {
         this.toughness = new MageInt(0);
 
         this.addAbility(HasteAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(new SetPowerToughnessSourceEffect(
+        this.addAbility(new SimpleStaticAbility(new SetBasePowerToughnessSourceEffect(
                 LandsYouControlCount.instance, Duration.EndOfGame, SubLayer.SetPT_7b
         ).setText("this creature's power and toughness are each equal to the number of lands you control")));
     }

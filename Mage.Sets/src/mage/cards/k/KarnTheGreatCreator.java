@@ -125,8 +125,8 @@ class KarnTheGreatCreatorAnimateEffect extends ContinuousEffectImpl {
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
                     int cmc = artifact.getManaValue();
-                    artifact.getPower().setValue(cmc);
-                    artifact.getToughness().setValue(cmc);
+                    artifact.getPower().setModifiedBaseValue(cmc);
+                    artifact.getToughness().setModifiedBaseValue(cmc);
                 }
         }
         return true;

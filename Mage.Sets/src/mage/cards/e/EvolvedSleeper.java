@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.AddCardSubTypeSourceEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -33,8 +33,8 @@ public final class EvolvedSleeper extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new AddCardSubTypeSourceEffect(
                 Duration.Custom, SubType.HUMAN, SubType.CLERIC
         ).setText("{this} becomes a Human Cleric"), new ManaCostsImpl<>("{B}"));
-        ability.addEffect(new SetPowerToughnessSourceEffect(
-                2, 2, Duration.Custom, SubLayer.SetPT_7b
+        ability.addEffect(new SetBasePowerToughnessSourceEffect(
+                2, 2, Duration.Custom, SubLayer.SetPT_7b, true
         ).setText("with base power and toughness 2/2"));
         this.addAbility(ability);
 
@@ -86,8 +86,8 @@ class EvolvedSleeperClericEffect extends OneShotEffect {
         game.addEffect(new AddCardSubTypeSourceEffect(
                 Duration.Custom, SubType.PHYREXIAN, SubType.HUMAN, SubType.CLERIC
         ), source);
-        game.addEffect(new SetPowerToughnessSourceEffect(
-                3, 3, Duration.Custom, SubLayer.SetPT_7b
+        game.addEffect(new SetBasePowerToughnessSourceEffect(
+                3, 3, Duration.Custom, SubLayer.SetPT_7b, true
         ), source);
         return true;
     }

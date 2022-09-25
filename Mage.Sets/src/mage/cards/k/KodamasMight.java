@@ -1,9 +1,8 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.keyword.SpliceOntoArcaneAbility;
+import mage.abilities.keyword.SpliceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,9 +23,9 @@ public final class KodamasMight extends CardImpl {
 
         // Target creature gets +2/+2 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(2,2, Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent().withChooseHint("gets +2/+2"));
         // Splice onto Arcane {G}
-        this.addAbility(new SpliceOntoArcaneAbility("{G}"));
+        this.addAbility(new SpliceAbility(SpliceAbility.ARCANE, "{G}"));
     }
 
     private KodamasMight(final KodamasMight card) {

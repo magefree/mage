@@ -28,14 +28,15 @@ public class IdentityThiefTest extends CardTestPlayerBase {
         //   Return the exiled card to the battlefield under its owner's control at the beginning of the next end step.
         addCard(Zone.BATTLEFIELD, playerB, "Identity Thief"); // {2}{U}{U}
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Molten Sentry");
         setFlipCoinResult(playerA, true);
 
         attack(2, playerB, "Identity Thief");
-        setChoice(playerB, true);
         addTarget(playerB, "Molten Sentry");
+        setChoice(playerB, true);
 
-        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
@@ -57,21 +58,29 @@ public class IdentityThiefTest extends CardTestPlayerBase {
         //   Return the exiled card to the battlefield under its owner's control at the beginning of the next end step.
         addCard(Zone.BATTLEFIELD, playerB, "Identity Thief"); // {2}{U}{U}
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Primal Clay");
+        setChoice(playerA, "a 3/3 artifact creature");
 
         attack(2, playerB, "Identity Thief");
+        setChoice(playerB, "Yes");
         addTarget(playerB, "Primal Clay");
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertExileCount(playerA, 1);
-        assertExileCount("Primal Clay", 1);
+        assertExileCount(playerA, "Primal Clay", 1);
 
         assertPermanentCount(playerB, "Identity Thief", 0);
         assertPermanentCount(playerB, "Primal Clay", 1);
+        assertPowerToughness(playerB, "Primal Clay", 3, 3);
     }
 
+    /**
+     * Reported bug: https://github.com/magefree/mage/issues/2131
+     *      If I copy a creature with a +1/+1 counter on it, it copies the counter as well as the other stats. This should not be the case.
+     */
     @Test
     public void testShouldNotCopyP1P1Counters() {
         addCard(Zone.BATTLEFIELD, playerA, "Sylvan Advocate", 1); // {1}{G} 2/3 vigilance
@@ -99,6 +108,6 @@ public class IdentityThiefTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Identity Thief", 0);
         assertPermanentCount(playerB, "Sylvan Advocate", 1);
         assertCounterCount(playerB, "Sylvan Advocate", CounterType.P1P1, 0);
-        assertPowerToughness(playerB, "Sylvan Advocate", 2, 3); // finds it with 3 power 4 toughness
+        assertPowerToughness(playerB, "Sylvan Advocate", 2, 3);
     }
 }

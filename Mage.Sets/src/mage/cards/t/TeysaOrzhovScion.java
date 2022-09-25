@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public final class TeysaOrzhovScion extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filterWhite = new FilterControlledCreaturePermanent("three white creatures");
+    private static final FilterControlledCreaturePermanent filterWhite = new FilterControlledCreaturePermanent("white creatures");
     private static final FilterCreaturePermanent filterBlack = new FilterCreaturePermanent("another black creature you control");
 
     static {
@@ -46,8 +46,8 @@ public final class TeysaOrzhovScion extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Sacrifice three white creatures: Exile target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent(3, 3, filterWhite, true)));
-        ability.addTarget(new TargetCreaturePermanent());
+        Ability ability = new SimpleActivatedAbility(new ExileTargetEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent(3, 3, filterWhite, true)));
+        ability.addTarget(new TargetCreaturePermanent().withChooseHint("to exile"));
         this.addAbility(ability);
 
         // Whenever another black creature you control dies, create a 1/1 white Spirit creature token with flying.

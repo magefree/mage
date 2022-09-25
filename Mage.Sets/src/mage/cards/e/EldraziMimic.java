@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -71,15 +71,14 @@ class EldraziMimicEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
-            if (permanent != null) {
-                ContinuousEffect effect = new SetPowerToughnessTargetEffect(permanent.getPower().getValue(), permanent.getToughness().getValue(), Duration.EndOfTurn);
-                effect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
-                game.addEffect(effect, source);
-                return true;
-            }
+        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
+        if (controller == null || permanent == null) {
+            return false;
         }
-        return false;
+
+        ContinuousEffect effect = new SetBasePowerToughnessTargetEffect(permanent.getPower().getValue(), permanent.getToughness().getValue(), Duration.EndOfTurn);
+        effect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
+        game.addEffect(effect, source);
+        return true;
     }
 }

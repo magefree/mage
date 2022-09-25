@@ -62,6 +62,7 @@ class DuplicantExileTargetEffect extends OneShotEffect {
 
     public DuplicantExileTargetEffect() {
         super(Outcome.Exile);
+        this.staticText = "you may exile target nontoken creature";
     }
 
     public DuplicantExileTargetEffect(final DuplicantExileTargetEffect effect) {
@@ -86,11 +87,6 @@ class DuplicantExileTargetEffect extends OneShotEffect {
         }
 
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "you may exile target nontoken creature";
     }
 }
 
@@ -133,8 +129,8 @@ class DuplicantContinuousEffect extends ContinuousEffectImpl {
                 break;
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
-                    permanent.getPower().setValue(card.getPower().getValue());
-                    permanent.getToughness().setValue(card.getToughness().getValue());
+                    permanent.getPower().setModifiedBaseValue(card.getPower().getValue());
+                    permanent.getToughness().setModifiedBaseValue(card.getToughness().getValue());
                 }
         }
         return true;

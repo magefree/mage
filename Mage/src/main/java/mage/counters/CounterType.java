@@ -141,6 +141,7 @@ public enum CounterType {
     PETAL("petal"),
     PETRIFICATION("petrification"),
     PHYLACTERY("phylactery"),
+    PHYRESIS("phyresis"),
     PIN("pin"),
     PLAGUE("plague"),
     PLOT("plot"),

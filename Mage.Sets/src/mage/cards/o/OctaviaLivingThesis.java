@@ -8,7 +8,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
@@ -52,7 +52,7 @@ public final class OctaviaLivingThesis extends CardImpl {
 
         // Magecraft — Whenever you cast an instant or sorcery spell, target creature has base power and toughness 8/8 until end of turn.
         Ability ability = new MagecraftAbility(
-                new SetPowerToughnessTargetEffect(8, 8, Duration.EndOfTurn)
+                new SetBasePowerToughnessTargetEffect(8, 8, Duration.EndOfTurn)
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

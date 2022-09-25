@@ -2,6 +2,7 @@ package mage.cards.f;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageWithPowerFromOneToAnotherTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
@@ -14,7 +15,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -29,16 +29,16 @@ public final class FleshBlood extends SplitCard {
 
         // Flesh
         // Exile target creature card from a graveyard. Put X +1/+1 counters on target creature, where X is the power of the card you exiled.
-        Target target = new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE);
-        getLeftHalfCard().getSpellAbility().addTarget(target);
-        getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
         getLeftHalfCard().getSpellAbility().addEffect(new FleshEffect());
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE).withChooseHint("to exile"));
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent().withChooseHint("to put X +1/+1 counters on"));
+
 
         // Blood
         // Target creature you control deals damage equal to its power to any target.
-        getRightHalfCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        getRightHalfCard().getSpellAbility().addTarget(new TargetAnyTarget());
-        getRightHalfCard().getSpellAbility().addEffect(new BloodEffect());
+        getRightHalfCard().getSpellAbility().addEffect(new DamageWithPowerFromOneToAnotherTargetEffect());
+        getRightHalfCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent().withChooseHint("to deal damage equal to its power"));
+        getRightHalfCard().getSpellAbility().addTarget(new TargetAnyTarget().withChooseHint("to deal damage to"));
     }
 
     private FleshBlood(final FleshBlood card) {
@@ -83,44 +83,6 @@ class FleshEffect extends OneShotEffect {
     @Override
     public FleshEffect copy() {
         return new FleshEffect(this);
-    }
-
-}
-
-class BloodEffect extends OneShotEffect {
-
-    public BloodEffect() {
-        super(Outcome.Damage);
-        staticText = "Target creature you control deals damage equal to its power to any target";
-    }
-
-    public BloodEffect(final BloodEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getFirstTarget());
-        if (sourcePermanent == null) {
-            sourcePermanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
-        }
-
-        Permanent targetCreature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if (sourcePermanent != null && targetCreature != null) {
-            targetCreature.damage(sourcePermanent.getPower().getValue(), sourcePermanent.getId(), source, game, false, true);
-            return true;
-        }
-        Player targetPlayer = game.getPlayer(source.getTargets().get(1).getFirstTarget());
-        if (sourcePermanent != null && targetPlayer != null) {
-            targetPlayer.damage(sourcePermanent.getPower().getValue(), sourcePermanent.getId(), source, game);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public BloodEffect copy() {
-        return new BloodEffect(this);
     }
 
 }

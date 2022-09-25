@@ -81,27 +81,29 @@ class OverwhelmingSplendorLoseAbilitiesEffect extends ContinuousEffectImpl {
         if (enchantment == null) {
             // It was not blinked, use the standard method
             enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+            if (enchantment == null) {
+                return false;
+            }
         }
-        if (enchantment == null) {
+
+        Player player = game.getPlayer(enchantment.getAttachedTo());
+        if (player == null) {
             return false;
         }
-        Player player = game.getPlayer(enchantment.getAttachedTo());
-        if (player != null) {
-            for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game)) {
-                switch (layer) {
-                    case AbilityAddingRemovingEffects_6:
-                        permanent.removeAllAbilities(source.getSourceId(), game);
-                        break;
-                    case PTChangingEffects_7:
-                        if (sublayer == SubLayer.SetPT_7b) {
-                            permanent.getPower().setValue(1);
-                            permanent.getToughness().setValue(1);
-                        }
-                }
+
+        for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game)) {
+            switch (layer) {
+                case AbilityAddingRemovingEffects_6:
+                    permanent.removeAllAbilities(source.getSourceId(), game);
+                    break;
+                case PTChangingEffects_7:
+                    if (sublayer == SubLayer.SetPT_7b) {
+                        permanent.getPower().setModifiedBaseValue(1);
+                        permanent.getToughness().setModifiedBaseValue(1);
+                    }
             }
-            return true;
         }
-        return false;
+        return true;
     }
 
     @Override
@@ -148,20 +150,18 @@ class OverwhelmingSplendorCantActivateEffect extends ContinuousRuleModifyingEffe
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
-            Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-            if (enchantment == null) {
-                return false;
-            }
-            if (event.getPlayerId().equals(enchantment.getAttachedTo())) {
-                Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
-                if (ability.isPresent()
-                        && !(ability.get() instanceof ActivatedManaAbilityImpl)
-                        && !(ability.get() instanceof LoyaltyAbility)) {
-                    return true;
-                }
-            }
+        if (event.getType() != GameEvent.EventType.ACTIVATE_ABILITY) {
+            return false;
         }
-        return false;
+
+        Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (enchantment == null || !event.getPlayerId().equals(enchantment.getAttachedTo())) {
+            return false;
+        }
+
+        Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
+        return ability.isPresent()
+                && !(ability.get() instanceof ActivatedManaAbilityImpl)
+                && !(ability.get() instanceof LoyaltyAbility);
     }
 }

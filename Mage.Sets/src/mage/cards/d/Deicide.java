@@ -43,6 +43,7 @@ class DeicideExileEffect extends SearchTargetGraveyardHandLibraryForCardNameAndE
 
     DeicideExileEffect() {
         super(true, "its controller's", "any number of cards with the same name as that card");
+        this.staticText = "Exile target enchantment. If the exiled card is a God card, " + this.staticText;
     }
 
     private DeicideExileEffect(final DeicideExileEffect effect) {
@@ -76,10 +77,5 @@ class DeicideExileEffect extends SearchTargetGraveyardHandLibraryForCardNameAndE
     @Override
     public DeicideExileEffect copy() {
         return new DeicideExileEffect(this);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Exile target enchantment. If the exiled card is a God card, " + super.getText(mode);
     }
 }

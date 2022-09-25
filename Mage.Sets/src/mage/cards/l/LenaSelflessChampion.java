@@ -19,6 +19,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -33,13 +34,6 @@ import mage.game.permanent.token.SoldierToken;
  */
 public final class LenaSelflessChampion extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter
-            = new FilterControlledCreaturePermanent("nontoken creature you control");
-
-    static {
-        filter.add(TokenPredicate.FALSE);
-    }
-
     public LenaSelflessChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
 
@@ -53,7 +47,7 @@ public final class LenaSelflessChampion extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new CreateTokenEffect(
                         new SoldierToken(),
-                        new PermanentsOnBattlefieldCount(filter)
+                        new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN)
                 ).setText("create a 1/1 white Soldier creature token "
                         + "for each nontoken creature you control")
         ));

@@ -10,7 +10,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.hint.Hint;
 import mage.cards.CardSetInfo;
@@ -86,7 +86,7 @@ public final class RowanScholarOfSparks extends ModalDoubleFacesCard {
         ));
 
         // +1: Up to one target creature has base power and toughness 0/2 until your next turn.
-        ability = new LoyaltyAbility(new SetPowerToughnessTargetEffect(
+        ability = new LoyaltyAbility(new SetBasePowerToughnessTargetEffect(
                 0, 2, Duration.UntilYourNextTurn
         ), 1);
         ability.addTarget(new TargetCreaturePermanent(0, 1));

@@ -1,17 +1,16 @@
 package mage.cards.p;
 
-import java.util.UUID;
-
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class Pilfer extends CardImpl {
@@ -23,7 +22,7 @@ public final class Pilfer extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(
                 StaticFilters.FILTER_CARD_NON_LAND, TargetController.ANY
         ));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
     private Pilfer(final Pilfer card) {

@@ -27,7 +27,7 @@ public final class TearAsunder extends CardImpl {
         this.addAbility(new KickerAbility("{1}{B}"));
 
         // Exile target artifact or enchantment. If this spell was kicked, exile target nonland permanent instead.
-        this.getSpellAbility().addEffect(new ExileTargetEffect());
+        this.getSpellAbility().addEffect(new ExileTargetEffect().setText("Exile target artifact or enchantment. If this spell was kicked, exile target nonland permanent instead."));
         this.getSpellAbility().setTargetAdjuster(TearAsunderAdjuster.instance);
     }
 

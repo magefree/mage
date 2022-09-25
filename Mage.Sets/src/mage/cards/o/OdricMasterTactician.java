@@ -49,6 +49,7 @@ class OdricMasterTacticianTriggeredAbility extends TriggeredAbilityImpl {
     public OdricMasterTacticianTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ChooseBlockersEffect(Duration.EndOfCombat));
         this.addWatcher(new ControlCombatRedundancyWatcher());
+        setTriggerPhrase("Whenever {this} and at least three other creatures attack, ");
     }
 
     public OdricMasterTacticianTriggeredAbility(final OdricMasterTacticianTriggeredAbility ability) {

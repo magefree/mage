@@ -19,6 +19,7 @@ public class CantBeRegeneratedSourceEffect extends ContinuousRuleModifyingEffect
 
     public CantBeRegeneratedSourceEffect(Duration duration) {
         super(duration, Outcome.Benefit, false, false);
+        this.staticText = buildStaticText();
     }
 
     public CantBeRegeneratedSourceEffect(final CantBeRegeneratedSourceEffect effect) {
@@ -56,8 +57,7 @@ public class CantBeRegeneratedSourceEffect extends ContinuousRuleModifyingEffect
         return Objects.equals(source.getSourceId(), event.getTargetId());
     }
 
-    @Override
-    public String getText(Mode mode) {
+    private String buildStaticText() {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }

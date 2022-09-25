@@ -3,8 +3,11 @@ package mage.abilities.common;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpellAbility;
+import mage.abilities.TriggeredAbility;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.EscapeAbility;
 import mage.constants.AbilityType;
 import mage.constants.Outcome;
@@ -23,22 +26,22 @@ import java.util.UUID;
 public class EscapesWithAbility extends EntersBattlefieldAbility {
 
     private final int counters;
-    private final DelayedTriggeredAbility delayedTriggeredAbility;
+    private final TriggeredAbility triggeredAbility;
 
     public EscapesWithAbility(int counters) {
         this(counters, null);
     }
 
-    public EscapesWithAbility(int counters, DelayedTriggeredAbility delayedTriggeredAbility) {
-        super(new EscapesWithEffect(counters, delayedTriggeredAbility), false);
+    public EscapesWithAbility(int counters, TriggeredAbility triggeredAbility) {
+        super(new EscapesWithEffect(counters, triggeredAbility), false);
         this.counters = counters;
-        this.delayedTriggeredAbility = delayedTriggeredAbility;
+        this.triggeredAbility = triggeredAbility;
     }
 
     private EscapesWithAbility(final EscapesWithAbility ability) {
         super(ability);
         this.counters = ability.counters;
-        this.delayedTriggeredAbility = ability.delayedTriggeredAbility;
+        this.triggeredAbility = ability.triggeredAbility;
     }
 
     @Override
@@ -48,27 +51,42 @@ public class EscapesWithAbility extends EntersBattlefieldAbility {
 
     @Override
     public String getRule() {
-        return "{this} escapes with " + CardUtil.numberToText(counters, "a")
-                + " +1/+1 counter" + (counters > 1 ? 's' : "") + " on it."
-                + (this.delayedTriggeredAbility != null ? " " + this.delayedTriggeredAbility.getRule() : "");
+        StringBuilder sb = new StringBuilder("{this} escapes with ");
+        if (counters > 0) {
+            sb.append(CardUtil.numberToText(counters, "a"));
+            sb.append(" +1/+1 counter");
+            sb.append((counters > 1 ? 's' : ""));
+            sb.append(" on it.");
+        }
+
+        if (triggeredAbility == null) {
+            // Do nothing
+        } else if (triggeredAbility instanceof DelayedTriggeredAbility) {
+            sb.append(this.triggeredAbility.getRule());
+        } else {
+            sb.append("\"");
+            sb.append(this.triggeredAbility.getRule());
+            sb.append("\"");
+        }
+        return sb.toString();
     }
 }
 
 class EscapesWithEffect extends OneShotEffect {
 
     private final int counter;
-    private final DelayedTriggeredAbility delayedTriggeredAbility;
+    private final TriggeredAbility triggeredAbility;
 
-    EscapesWithEffect(int counter, DelayedTriggeredAbility delayedTriggeredAbility) {
+    EscapesWithEffect(int counter, TriggeredAbility triggeredAbility) {
         super(Outcome.BoostCreature);
         this.counter = counter;
-        this.delayedTriggeredAbility = delayedTriggeredAbility;
+        this.triggeredAbility = triggeredAbility;
     }
 
     private EscapesWithEffect(final EscapesWithEffect effect) {
         super(effect);
         this.counter = effect.counter;
-        this.delayedTriggeredAbility = (effect.delayedTriggeredAbility == null ? null : effect.delayedTriggeredAbility.copy());
+        this.triggeredAbility = (effect.triggeredAbility == null ? null : effect.triggeredAbility.copy());
     }
 
     @Override
@@ -80,16 +98,26 @@ class EscapesWithEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
+
         SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
         if (!(spellAbility instanceof EscapeAbility)
                 || !spellAbility.getSourceId().equals(source.getSourceId())
                 || permanent.getZoneChangeCounter(game) != spellAbility.getSourceObjectZoneChangeCounter()) {
             return false;
         }
-        List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
-        permanent.addCounters(CounterType.P1P1.createInstance(counter), source.getControllerId(), source, game, appliedEffects);
-        if (this.delayedTriggeredAbility != null) {
-            game.addDelayedTriggeredAbility(this.delayedTriggeredAbility, source);
+
+        if (counter > 0) {
+            List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
+            permanent.addCounters(CounterType.P1P1.createInstance(counter), source.getControllerId(), source, game, appliedEffects);
+        }
+
+        if (this.triggeredAbility != null) {
+            if (triggeredAbility instanceof DelayedTriggeredAbility) {
+                game.addDelayedTriggeredAbility((DelayedTriggeredAbility) this.triggeredAbility, source);
+            } else {
+                ContinuousEffect gainsAbilityEffect = new GainAbilitySourceEffect(triggeredAbility);
+                game.addEffect(gainsAbilityEffect, source);
+            }
         }
         return true;
     }

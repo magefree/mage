@@ -89,6 +89,7 @@ class ActOfAuthorityGainControlEffect extends ContinuousEffectImpl {
     public ActOfAuthorityGainControlEffect(Duration duration, UUID controller) {
         super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.controller = controller;
+        this.staticText = "Gain control of {this}";
     }
 
     private ActOfAuthorityGainControlEffect(final ActOfAuthorityGainControlEffect effect) {
@@ -113,10 +114,5 @@ class ActOfAuthorityGainControlEffect extends ContinuousEffectImpl {
         if (permanent == null) { return false; }
 
         return permanent.changeControllerId(controller, game, source);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Gain control of {this}";
     }
 }

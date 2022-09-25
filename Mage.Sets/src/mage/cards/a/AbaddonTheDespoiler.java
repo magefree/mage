@@ -1,6 +1,7 @@
 package mage.cards.a;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -60,7 +61,7 @@ public final class AbaddonTheDespoiler extends CardImpl {
                 MyTurnCondition.instance, "during your turn, spells you cast from " +
                 "your hand with mana value X or less have cascade, where X is the " +
                 "total amount of life your opponents have lost this turn"
-        )));
+        )).addHint(hint));
     }
 
     private AbaddonTheDespoiler(final AbaddonTheDespoiler card) {
@@ -73,14 +74,18 @@ public final class AbaddonTheDespoiler extends CardImpl {
     }
 }
 
-enum AbaddonTheDespoilerPredicate implements Predicate<StackObject> {
+enum AbaddonTheDespoilerPredicate implements Predicate<MageObject> {
     instance;
 
     @Override
-    public boolean apply(StackObject input, Game game) {
-        return input.getManaValue() <= game
+    public boolean apply(MageObject input, Game game) {
+        if (!(input instanceof StackObject)) {
+            return false;
+        }
+        StackObject stackObject = (StackObject) input;
+        return stackObject.getManaValue() <= game
                 .getState()
                 .getWatcher(PlayerLostLifeWatcher.class)
-                .getAllOppLifeLost(input.getControllerId(), game);
+                .getAllOppLifeLost(stackObject.getControllerId(), game);
     }
 }

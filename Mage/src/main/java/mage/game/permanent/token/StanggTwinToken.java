@@ -26,7 +26,7 @@ public final class StanggTwinToken extends TokenImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
-        availableImageSetCodes = Arrays.asList("A25");
+        availableImageSetCodes = Arrays.asList("A25", "DMC");
     }
 
     public StanggTwinToken(final StanggTwinToken token) {

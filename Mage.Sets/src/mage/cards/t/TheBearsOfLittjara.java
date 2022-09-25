@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -45,7 +45,7 @@ public final class TheBearsOfLittjara extends CardImpl {
         // II — Any number of target Shapeshifter creatures you control have base power and toughness 4/4.
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_II, SagaChapter.CHAPTER_II,
-                new SetPowerToughnessTargetEffect(4, 4, Duration.Custom),
+                new SetBasePowerToughnessTargetEffect(4, 4, Duration.Custom),
                 new TargetPermanent(0, Integer.MAX_VALUE, filter, false)
         );
 

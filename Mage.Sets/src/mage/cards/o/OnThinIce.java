@@ -45,7 +45,7 @@ public final class OnThinIce extends CardImpl {
         this.addAbility(ability);
 
         // When On Thin Ice enters the battlefield, exile target creature an opponent controls until On Thin Ice leaves the battlefield.
-        ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect("creature"));
+        ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);

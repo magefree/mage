@@ -4,10 +4,10 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
+import mage.abilities.common.BlocksOrBlockedByCreatureSourceTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -37,7 +37,7 @@ public final class ShapeStealer extends CardImpl {
         // each one in succession. The first trigger put on the stack will be the last to resolve,
         // so that will set Shape Stealer's final power and toughness.
         // Whenever Shape Stealer blocks or becomes blocked by a creature, change Shape Stealer's base power and toughness to that creature's power and toughness until end of turn.
-        this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(new ShapeStealerEffect(), false));
+        this.addAbility(new BlocksOrBlockedByCreatureSourceTriggeredAbility(new ShapeStealerEffect()));
     }
 
     private ShapeStealer(final ShapeStealer card) {
@@ -69,14 +69,13 @@ class ShapeStealerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
-            if (permanent != null) {
-                ContinuousEffect effect = new SetPowerToughnessSourceEffect(permanent.getPower().getValue(), permanent.getToughness().getValue(), Duration.EndOfTurn, SubLayer.SetPT_7b);
-                game.addEffect(effect, source);
-                return true;
-            }
+        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
+        if (controller == null || permanent == null) {
+            return false;
         }
-        return false;
+
+        ContinuousEffect effect = new SetBasePowerToughnessSourceEffect(permanent.getPower().getValue(), permanent.getToughness().getValue(), Duration.EndOfTurn, SubLayer.SetPT_7b, true);
+        game.addEffect(effect, source);
+        return true;
     }
 }
