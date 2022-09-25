@@ -225,7 +225,7 @@ public abstract class DraftImpl implements Draft {
         synchronized (this) {
             while (!donePicking()) {
                 try {
-                    this.wait(3000);
+                    this.wait();
                 } catch (InterruptedException ex) {
                 }
             }
