@@ -31,7 +31,6 @@ import java.util.*;
 public class ManaOptions extends LinkedHashSet<Mana> {
 
     private static final Logger logger = Logger.getLogger(ManaOptions.class);
-    private static final ManaValueComparator comperator = new ManaValueComparator();
 
     public ManaOptions() {
     }
@@ -430,11 +429,6 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                 }
             } while (repeatable && newCombinations && currentManaCopy.includesMana(payCombination));
         }
-
-        if (this.size() > 1000) {
-            this.removeFullyIncludedVariations();
-        }
-
         return oldManaWasReplaced;
     }
 
@@ -522,86 +516,44 @@ public class ManaOptions extends LinkedHashSet<Mana> {
     }
 
     /**
-     * Remove fully included variations. If both {R} and {R}{W} are in this, then {R} will be removed.
-     * <p>
-     * Overview:
-     * 1. Create list copy of the internal set.
-     * 2. Sort using {@link ManaValueComparator} from most valuable to least valuable
-     * 3. Iterate using a double for loop over the sorted list.
-     *      1. Outer loop starts at the beginning and is the value used for comparison.
-     *      2. Inner loop starts at the next entry and compares with the value from the outer loop.
-     *          - The result is guaranteed to either be the outer value or null.
-     *          - It cannot be the inner value since the inner value is less valuable (it has been sorted as such)
-     *          - A value of null means that the two values are not comparable. The other option, them being equal,
-     *            is not possible since the values in the list were obtained from a set, which guarantees no duplicates.
-     *          1. If the comparison does NOT return null, then the outer value is more valuable. The inner value is
-     *             removed from the list, and the next inner value is compared.
-     *          2. If the comparison returns null, then the outer value is not comparable to the inner value, nor to
-     *             any other inner value after it.
-     *             Break out of the inner loop, and change the index of the outer loop to point to last value of
-     *             the inner loop.
+     * Remove fully included variations.
+     * E.g. If both {R} and {R}{W} are in this, then {R} will be removed.
      */
     public void removeFullyIncludedVariations() {
-        // Convert to list and sort
-        List<Mana> list = new ArrayList<>(this);
-        list.sort(ManaOptions.comperator);
+        List<Mana> that = new ArrayList<>(this);
+        Set<String> list = new HashSet<>();
 
-        Mana manaI;
-        Mana manaJ;
-        int i = 0;
-        while (i < list.size()) {
-            manaI = list.get(i);
-            int j = i+1;
-            while (j < list.size()) {
-                manaJ = list.get(j);
-                // j is not incremented at any point on purpose
-                if (manaI.isMoreValuableThan(manaJ)) {
-                    // removing and item from the list is the same as incrementing
-                    list.remove(j);
-                    this.remove(manaJ);
-                } else {
-                    // If the outer mana (manaI) is not more valuable, then it means that further values are no longer comparable
+        for (int i = this.size() - 1; i >= 0; i--) {
+            String s;
+            if (that.get(i) instanceof ConditionalMana) {
+                s = that.get(i).toString() + ((ConditionalMana) that.get(i)).getConditionString();
+            } else {
+                s = that.get(i).toString();
+            }
+            if (s.isEmpty()) {
+                this.remove(i);
+            } else if (list.contains(s)) {
+                // remove duplicated
+                this.remove(i);
+            } else {
+                list.add(s);
+            }
+        }
+
+        // Remove fully included variations
+        for (int i = this.size() - 1; i >= 0; i--) {
+            for (int ii = 0; ii < i; ii++) {
+                Mana moreValuable = Mana.getMoreValuableMana(that.get(i), that.get(ii));
+                if (moreValuable != null) {
+                    that.get(ii).setToMana(moreValuable);
+                    that.remove(i);
                     break;
                 }
             }
-            i = j;
         }
 
-//        List<Mana> that = new ArrayList<>(this);
-//        Set<String> list = new HashSet<>();
-//
-//        for (int i = this.size() - 1; i >= 0; i--) {
-//            String s;
-//            if (that.get(i) instanceof ConditionalMana) {
-//                s = that.get(i).toString() + ((ConditionalMana) that.get(i)).getConditionString();
-//            } else {
-//                s = that.get(i).toString();
-//            }
-//            if (s.isEmpty()) {
-//                this.remove(i);
-//            } else if (list.contains(s)) {
-//                // remove duplicated
-//                this.remove(i);
-//            } else {
-//                list.add(s);
-//            }
-//        }
-//
-//        // Remove fully included variations
-//        // TODO: research too many manas and freeze (put 1 card to slow down, put 3 cards to freeze here)
-//        //  battlefield:Human:Cascading Cataracts:1
-//        for (int i = this.size() - 1; i >= 0; i--) {
-//            for (int ii = 0; ii < i; ii++) {
-//                Mana moreValuable = Mana.getMoreValuableMana(that.get(i), that.get(ii));
-//                if (moreValuable != null) {
-//                    that.get(ii).setToMana(moreValuable);
-//                    that.remove(i);
-//                    break;
-//                }
-//            }
-//        }
-//
-//        this.retainAll(that);
+        this.clear();
+        this.addAll(that);
     }
 
     /**
