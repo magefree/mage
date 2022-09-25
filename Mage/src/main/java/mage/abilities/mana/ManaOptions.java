@@ -31,6 +31,7 @@ import java.util.*;
 public class ManaOptions extends LinkedHashSet<Mana> {
 
     private static final Logger logger = Logger.getLogger(ManaOptions.class);
+    private static final ManaValueComparator comperator = new ManaValueComparator();
 
     public ManaOptions() {
     }
@@ -430,6 +431,10 @@ public class ManaOptions extends LinkedHashSet<Mana> {
             } while (repeatable && newCombinations && currentManaCopy.includesMana(payCombination));
         }
 
+        if (this.size() > 1000) {
+            this.removeFullyIncludedVariations();
+        }
+
         return oldManaWasReplaced;
     }
 
@@ -517,48 +522,70 @@ public class ManaOptions extends LinkedHashSet<Mana> {
     }
 
     /**
-     * Remove fully included variations.
-     * If both {R} and {R}{W} are in this, then {R} will be removed.
+     * Remove fully included variations. If both {R} and {R}{W} are in this, then {R} will be removed.
+     * <p>
+     * Overview:
+     * 1. Create list copy of the internal set.
+     * 2. Sort using {@link ManaValueComparator} from most valuable to least valuable
+     * 3. Iterate using a double for loop over the sorted list.
+     *      1. Outer loop starts at the beginning and is the value used for comparison.
+     *      2. Inner loop starts at the next entry and compares with the value from the outer loop.
+     *          - The result is guaranteed to either be the outer value or null.
+     *          - It cannot be the inner value since the inner value is less valuable (it has been sorted as such)
+     *          - A value of null means that the two values are not comparable. The other option, them being equal,
+     *            is not possible since the values in the list were obtained from a set, which guarantees no duplicates.
+     *          1. If the comparison does NOT return null, then the outer value is more valuable. The inner value is
+     *             removed from the list, and the next inner value is compared.
+     *          2. If the comparison returns null, then the outer value is not comparable to the inner value, nor to
+     *             any other inner value after it.
+     *             Break out of the inner loop, and change the index of the outer loop to point to last value of
+     *             the inner loop.
      */
     public void removeFullyIncludedVariations() {
-        List<Mana> valuableManas = new ArrayList<>(this.size());
+        // Convert to list and sort
+        List<Mana> list = new ArrayList<>(this);
+        list.sort(ManaOptions.comperator);
 
-        Mana testMana;
-        Mana childMana;
-        Mana moreValuableMana;
-
-        for (Iterator<Mana> itr = this.iterator(); itr.hasNext(); ) {
-            testMana = itr.next();
-
-            // If first iteration, add the Mana to valuableMana in order bootstrap
-            // This is done in here rather than above in order to make use of the already created iterator
-            if (valuableManas.isEmpty()) {
-                valuableManas.add(testMana);
-                continue;
-            }
-
-            boolean needToAddMana = true; // True if testMana is not comparable to any of the other mana.
-            for (Mana valuableMana : valuableManas) {
-                moreValuableMana = Mana.getMoreValuableMana(testMana, valuableMana);
-
-                if (moreValuableMana == testMana) { // testMana is greater
-                    // Replace the childMana with testMana
-                    // This way we don't have to remove an already added mana
-                    valuableMana.setToMana(testMana);
-                    itr.remove();
-                    needToAddMana = false;
-                    break;
-                } else if (moreValuableMana == valuableMana) { // testMana is smaller than an already seen and kept mana, delete test mana.
-                    itr.remove();
-                    needToAddMana = false;
+        Mana manaI;
+        Mana manaJ;
+        int i = 0;
+        while (i < list.size()) {
+            manaI = list.get(i);
+            int j = i+1;
+            while (j < list.size()) {
+                manaJ = list.get(j);
+                // j is not incremented at any point on purpose
+                if (manaI.isMoreValuableThan(manaJ)) {
+                    // removing and item from the list is the same as incrementing
+                    list.remove(j);
+                    this.remove(manaJ);
+                } else {
+                    // If the outer mana (manaI) is not more valuable, then it means that further values are no longer comparable
                     break;
                 }
             }
-
-            if (needToAddMana) {
-                valuableManas.add(testMana);
-            }
+            i = j;
         }
+
+// TODO: Original
+
+//        Mana manaII;
+//
+//        for (i = m.size() - 1; i >= 0; i--) {
+//            manaI = m.get(i);
+//            for (int ii = 0; ii < i; ii++) {
+//                manaII = m.get(ii);
+//                Mana moreValuable = Mana.getMoreValuableMana(manaI, manaII);
+//                if (moreValuable != null) {
+//                    if (this.contains(manaI)) {
+//                        manaII.setToMana(moreValuable);
+//                        this.remove(manaI);
+//                        m.remove(i);
+//                        break;
+//                    }
+//                }
+//            }
+//        }
     }
 
     /**
@@ -628,4 +655,58 @@ public class ManaOptions extends LinkedHashSet<Mana> {
        }
        return null; // Not sure how we'd ever get here, but leave just in case since IDE complains.
     }
+}
+
+/**
+ * from: https://stackoverflow.com/a/35000727/7983747
+ * @author Gili Tzabari
+ */
+final class Comparators
+{
+    /**
+     * Verify that a comparator is transitive.
+     *
+     * @param <T>        the type being compared
+     * @param comparator the comparator to test
+     * @param elements   the elements to test against
+     * @throws AssertionError if the comparator is not transitive
+     */
+    public static <T> void verifyTransitivity(Comparator<T> comparator, Collection<T> elements) {
+        for (T first: elements) {
+            for (T second: elements) {
+                int result1 = comparator.compare(first, second);
+                int result2 = comparator.compare(second, first);
+                if (result1 != -result2 && !(result1 == 0 && result1 == result2)) {
+                    // Uncomment the following line to step through the failed case
+                    comparator.compare(first, second);
+                    comparator.compare(second, first);
+                    throw new AssertionError("compare(" + first + ", " + second + ") == " + result1 +
+                            " but swapping the parameters returns " + result2);
+                }
+            }
+        }
+        for (T first: elements) {
+            for (T second: elements) {
+                int firstGreaterThanSecond = comparator.compare(first, second);
+                if (firstGreaterThanSecond <= 0)
+                    continue;
+                for (T third: elements) {
+                    int secondGreaterThanThird = comparator.compare(second, third);
+                    if (secondGreaterThanThird <= 0)
+                        continue;
+                    int firstGreaterThanThird = comparator.compare(first, third);
+                    if (firstGreaterThanThird <= 0) {
+                        // Uncomment the following line to step through the failed case
+                        comparator.compare(first, second);
+                        comparator.compare(second, third);
+                        comparator.compare(first, third);
+                        throw new AssertionError("compare(" + first + ", " + second + ") > 0, " +
+                                "compare(" + second + ", " + third + ") > 0, but compare(" + first + ", " + third + ") == " +
+                                firstGreaterThanThird);
+                    }
+                }
+            }
+        }
+    }
+    private Comparators() {}
 }
