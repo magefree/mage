@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class FallajiWayfarer extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("multicolored spells you cast");
+    private static final FilterCard filter = new FilterCard("multicolored spells");
 
     static {
         filter.add(MulticoloredPredicate.instance);

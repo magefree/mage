@@ -10,6 +10,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetOpponent;
 
@@ -68,7 +69,7 @@ class SplitTheSpoilsEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(cards, Zone.EXILED, source, game);
-        TargetCard target = new TargetCardInYourGraveyard(0, 5);
+        TargetCard target = new TargetCardInExile(0, 5, StaticFilters.FILTER_CARD, null);
         target.withChooseHint("To put in pile 1").setNotTarget(true);
         player.choose(outcome, cards, target, game);
         List<Card> pile1 = new ArrayList<>();
@@ -82,6 +83,7 @@ class SplitTheSpoilsEffect extends OneShotEffect {
         pile2.addAll(cards.getCards(game));
         TargetOpponent targetOpponent = new TargetOpponent();
         targetOpponent.setNotTarget(true);
+        player.choose(outcome, targetOpponent, source, game);
         if (game.getPlayer(targetOpponent.getFirstTarget()).choosePile(
                 outcome, "Choose a pile to go to hand (the other goes to graveyard)", pile1, pile2, game
         )) {

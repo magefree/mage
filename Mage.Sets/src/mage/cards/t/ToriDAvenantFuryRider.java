@@ -58,7 +58,7 @@ public final class ToriDAvenantFuryRider extends CardImpl {
         // Untap each other white attacking creature you control.
         Ability ability = new AttacksTriggeredAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn, filter, true));
         ability.addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, filter2, true));
-        ability.addEffect(new UntapAllControllerEffect(filter3, "untap each other white attacking creature you control", false));
+        ability.addEffect(new UntapAllControllerEffect(filter3, "Untap each other white attacking creature you control", false));
         this.addAbility(ability);
     }
 

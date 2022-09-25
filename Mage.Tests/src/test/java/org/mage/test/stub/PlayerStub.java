@@ -183,13 +183,12 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public void setCanPayLifeCost(boolean canPayLifeCost) {
-
+    public void setPayLifeCostLevel(PayLifeCostLevel playLifeCostLevel) {
     }
 
     @Override
-    public boolean getCanPayLifeCost() {
-        return false;
+    public PayLifeCostLevel getPayLifeCostLevel() {
+        return PayLifeCostLevel.none;
     }
 
     @Override

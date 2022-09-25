@@ -38,7 +38,7 @@ public final class HauntingFigment extends CardImpl {
         // Haunting Figment can't be blocked as long as you've cast an instant or sorcery spell this turn.
         this.addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
                 new CantBeBlockedSourceEffect(Duration.WhileOnBattlefield), HauntingFigmentCondition.instance,
-                "can't be blocked as long as you've cast an instant or sorcery spell this turn"
+                "{this} can't be blocked as long as you've cast an instant or sorcery spell this turn"
         )), new SpellsCastWatcher());
     }
 

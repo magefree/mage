@@ -54,6 +54,7 @@ class FruitOfTheFirstTreeEffect extends OneShotEffect {
 
     public FruitOfTheFirstTreeEffect() {
         super(Outcome.Benefit);
+        this.staticText = "you gain X life and draw X cards, where X is its toughness";
     }
 
     public FruitOfTheFirstTreeEffect(FruitOfTheFirstTreeEffect copy) {
@@ -76,10 +77,4 @@ class FruitOfTheFirstTreeEffect extends OneShotEffect {
         }
         return false;
     }
-
-    @Override
-    public String getText(Mode mode) {
-        return "you gain X life and draw X cards, where X is its toughness";
-    }
-
 }

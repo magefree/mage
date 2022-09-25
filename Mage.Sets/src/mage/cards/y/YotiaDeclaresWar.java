@@ -52,7 +52,7 @@ public final class YotiaDeclaresWar extends CardImpl {
                 this, SagaChapter.CHAPTER_III, SagaChapter.CHAPTER_III,
                 new Effects(
                         new AddCardTypeTargetEffect(Duration.EndOfTurn, CardType.ARTIFACT, CardType.CREATURE)
-                                .setText("p to one target artifact you control becomes an artifact creature"),
+                                .setText("up to one target artifact you control becomes an artifact creature"),
                         new SetBasePowerToughnessTargetEffect(5, 5, Duration.EndOfTurn)
                                 .setText("with base power and toughness 4/4 until end of turn")
                 ), new TargetPermanent(0, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT)

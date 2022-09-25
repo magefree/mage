@@ -18,8 +18,7 @@ public final class Wurm44Token extends TokenImpl {
         subtype.add(SubType.WURM);
         power = new MageInt(4);
         toughness = new MageInt(4);
-
-        availableImageSetCodes = Arrays.asList("DMU");
+        setOriginalExpansionSetCode("DMC");
     }
 
     public Wurm44Token(final Wurm44Token token) {

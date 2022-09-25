@@ -93,7 +93,7 @@ public class ConvokeAbility extends SimpleStaticAbility implements AlternateMana
 
     @Override
     public String getRule() {
-        return "Convoke <i>(Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)</i>";
+        return "convoke <i>(Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)</i>";
     }
 
     @Override

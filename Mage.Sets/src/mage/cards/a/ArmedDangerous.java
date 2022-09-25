@@ -22,13 +22,12 @@ public final class ArmedDangerous extends SplitCard {
         // Target creature gets +1/+1 and gains double strike until end of turn.
         getLeftHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn));
         getLeftHalfCard().getSpellAbility().addEffect(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
-        getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent().withChooseHint("+1/+1 and double strike"));
 
         // Dangerous
         // All creatures able to block target creature this turn do so.
         getRightHalfCard().getSpellAbility().addEffect(new MustBeBlockedByAllTargetEffect(Duration.EndOfTurn));
-        getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
-
+        getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent().withChooseHint("all creatures block"));
     }
 
     private ArmedDangerous(final ArmedDangerous card) {

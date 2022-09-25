@@ -62,6 +62,7 @@ class DuplicantExileTargetEffect extends OneShotEffect {
 
     public DuplicantExileTargetEffect() {
         super(Outcome.Exile);
+        this.staticText = "you may exile target nontoken creature";
     }
 
     public DuplicantExileTargetEffect(final DuplicantExileTargetEffect effect) {
@@ -86,11 +87,6 @@ class DuplicantExileTargetEffect extends OneShotEffect {
         }
 
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "you may exile target nontoken creature";
     }
 }
 

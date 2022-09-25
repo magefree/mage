@@ -5,8 +5,6 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CommanderCastCountValue;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.abilities.hint.Hint;
-import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -23,15 +21,11 @@ import java.util.UUID;
  */
 public final class FontOfMagic extends CardImpl {
 
-    private static final Hint hint = new ValueHint(
-            "Commanders cast from command zone", CommanderCastCountValue.instance
-    );
-
     public FontOfMagic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
 
         // Instant and sorcery spells you cast cost {1} less to cast for each time you've cast a commander from the command zone this game.
-        this.addAbility(new SimpleStaticAbility(new FontOfMagicEffect()).addHint(hint));
+        this.addAbility(new SimpleStaticAbility(new FontOfMagicEffect()).addHint(CommanderCastCountValue.getHint()));
     }
 
     private FontOfMagic(final FontOfMagic card) {

@@ -19,6 +19,7 @@ public final class Elemental21TrampleHasteToken extends TokenImpl {
         subtype.add(SubType.ELEMENTAL);
         power = new MageInt(2);
         toughness = new MageInt(1);
+        setOriginalExpansionSetCode("DMU");
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
     }

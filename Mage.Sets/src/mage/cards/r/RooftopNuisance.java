@@ -20,7 +20,7 @@ public final class RooftopNuisance extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");
 
         // Casualty 1
-        this.addAbility(new CasualtyAbility(this, 1));
+        this.addAbility(new CasualtyAbility(1));
 
         // Tap target creature. It doesn't untap during its controller's next untap step.
         this.getSpellAbility().addEffect(new TapTargetEffect());

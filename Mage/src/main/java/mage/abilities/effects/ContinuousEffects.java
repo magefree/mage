@@ -765,15 +765,6 @@ public class ContinuousEffects implements Serializable {
     public void applySpliceEffects(Ability abilityToModify, Game game) {
         // add effects from splice card to spell ability on activate/cast
 
-        // splice spell - spell can't be spliced again
-        if (CardUtil.isSpliceAbility(abilityToModify, game)) {
-            return;
-        }
-        // fused spell - can be spliced only to main fused ability, not to parts
-        if (CardUtil.isFusedPartAbility(abilityToModify, game)) {
-            return;
-        }
-
         List<SpliceCardEffect> spliceEffects = getApplicableSpliceCardEffects(game, abilityToModify.getControllerId());
         // get the applyable splice abilities
         List<Ability> spliceAbilities = new ArrayList<>();

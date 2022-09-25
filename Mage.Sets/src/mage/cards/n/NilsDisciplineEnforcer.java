@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.combat.CantAttackYouUnlessPayManaAllEffect;
+import mage.abilities.effects.common.combat.CantAttackYouUnlessPayAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -108,7 +108,7 @@ class NilsDisciplineEnforcerCountersEffect extends OneShotEffect {
     }
 }
 
-class NilsDisciplineEnforcerEffect extends CantAttackYouUnlessPayManaAllEffect {
+class NilsDisciplineEnforcerEffect extends CantAttackYouUnlessPayAllEffect {
 
     NilsDisciplineEnforcerEffect() {
         super(null, true);

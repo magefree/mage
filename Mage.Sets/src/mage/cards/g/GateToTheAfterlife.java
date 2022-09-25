@@ -35,18 +35,11 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class GateToTheAfterlife extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a nontoken creature you control");
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(TokenPredicate.FALSE);
-    }
-
     public GateToTheAfterlife(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Whenever a nontoken creature you control dies, you gain 1 life. Then you may draw a card. If you do, discard a card.
-        Ability ability = new DiesCreatureTriggeredAbility(new GainLifeEffect(1), false, filter, false);
+        Ability ability = new DiesCreatureTriggeredAbility(new GainLifeEffect(1), false, StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN, false);
         Effect effect = new DrawDiscardControllerEffect(1, 1, true);
         effect.setText("Then you may draw a card. If you do, discard a card");
         ability.addEffect(effect);

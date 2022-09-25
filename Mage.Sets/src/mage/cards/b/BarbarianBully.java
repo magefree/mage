@@ -77,7 +77,7 @@ class BarbarianBullyEffect extends OneShotEffect {
             }
         }
         if (!costPaid) {
-            return new BoostSourceEffect(2, 2, Duration.EndOfTurn).apply(game, source);
+            game.addEffect(new BoostSourceEffect(2, 2, Duration.EndOfTurn), source);
         }
         return true;
     }

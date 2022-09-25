@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -11,6 +10,7 @@ import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.targetpointer.EachTargetPointer;
 
 /**
  *
@@ -30,9 +30,7 @@ public final class AetherTradewinds extends CardImpl {
         // Return target permanent you control and target permanent you don't control to their owners' hands.
         this.getSpellAbility().addTarget(new TargetControlledPermanent());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
-        Effect effect = new ReturnToHandTargetEffect(true);
-        effect.setText("Return target permanent you control and target permanent you don't control to their owners' hands");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect().setTargetPointer(new EachTargetPointer()));
     }
 
     private AetherTradewinds(final AetherTradewinds card) {

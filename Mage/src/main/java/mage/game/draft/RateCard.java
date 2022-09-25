@@ -141,14 +141,6 @@ public final class RateCard {
             // found removal
             return 1;
         }
-        //static List<Effect> removalEffects =[BoostTargetEffect,BoostEnchantedEffect]
-        if (effect instanceof BoostTargetEffect || effect instanceof BoostEnchantedEffect) {
-            String text = effect.getText(null);
-            if (text.contains("/-")) {
-                // toughness reducer, aka removal
-                return 1;
-            }
-        }
         if (effect instanceof FightTargetsEffect
                 || effect instanceof DamageWithPowerFromOneToAnotherTargetEffect
                 || effect instanceof DamageWithPowerFromSourceToAnotherTargetEffect) {

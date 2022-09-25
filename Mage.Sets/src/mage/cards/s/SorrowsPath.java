@@ -112,10 +112,8 @@ class SorrowsPathSwitchBlockersEffect extends OneShotEffect {
                 // 10/1/2009: When the first ability resolves, if all the creatures that one of the targeted creatures was blocking have left combat, then the other targeted creature 
                 // is considered to be able to block all creatures the first creature is blocking. If the ability has its full effect, the second creature will be removed from combat 
                 // but not returned to combat; it doesn't block anything.
-                game.getCombat().removeFromCombat(blocker1.getId(), game, false);
-                game.getCombat().removeFromCombat(blocker2.getId(), game, false);
-                blocker1.setRemovedFromCombat(attackers2.isEmpty());
-                blocker2.setRemovedFromCombat(attackers1.isEmpty());
+                blocker1.removeFromCombat(game);
+                blocker2.removeFromCombat(game);
 
                 // 10/1/2009: Abilities that trigger whenever one of the targeted creatures blocks will trigger when the first ability resolves, because those creatures will change from 
                 // not blocking (since they're removed from combat) to blocking. It doesn't matter if those abilities triggered when those creatures blocked the first time. Abilities 

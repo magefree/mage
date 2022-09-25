@@ -21,13 +21,6 @@ import java.util.UUID;
  */
 public final class AbzanAscendancy extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a nontoken creature you control");
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(TokenPredicate.FALSE);
-    }
-
     public AbzanAscendancy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}{B}{G}");
 
@@ -35,7 +28,7 @@ public final class AbzanAscendancy extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE), false));
 
         // Whenever a nontoken creature you control dies, create a 1/1 white Spirit creature token with flying.
-        this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken()), false, filter));
+        this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken()), false, StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN));
 
     }
 

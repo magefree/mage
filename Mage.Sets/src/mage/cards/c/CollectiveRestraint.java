@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.DomainValue;
-import mage.abilities.effects.common.combat.CantAttackYouUnlessPayManaAllEffect;
+import mage.abilities.effects.common.combat.CantAttackYouUnlessPayAllEffect;
 import mage.abilities.hint.common.DomainHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -43,7 +43,7 @@ public final class CollectiveRestraint extends CardImpl {
     }
 }
 
-class CollectiveRestraintPayManaToAttackAllEffect extends CantAttackYouUnlessPayManaAllEffect {
+class CollectiveRestraintPayManaToAttackAllEffect extends CantAttackYouUnlessPayAllEffect {
 
     CollectiveRestraintPayManaToAttackAllEffect() {
         super(null, false);
