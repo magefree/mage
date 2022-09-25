@@ -2,7 +2,7 @@ package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
+import mage.abilities.common.BlocksOrBlockedByCreatureSourceTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
@@ -24,9 +24,7 @@ public final class OrneryGoblin extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Ornery Goblin blocks or becomes blocked by a creature, Ornery Goblin deals 1 damage to that creature.
-        this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(
-                new DamageTargetEffect(1, true, "that creature"), false
-        ));
+        this.addAbility(new BlocksOrBlockedByCreatureSourceTriggeredAbility(new DamageTargetEffect(1, true, "that creature")));
     }
 
     private OrneryGoblin(final OrneryGoblin card) {

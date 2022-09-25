@@ -1,9 +1,8 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
+import mage.abilities.common.BlocksOrBlockedSourceTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +23,7 @@ public final class GoblinEliteInfantry extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(-1, -1, Duration.EndOfTurn), false));
+        this.addAbility(new BlocksOrBlockedSourceTriggeredAbility(new BoostSourceEffect(-1, -1, Duration.EndOfTurn, "it")));
     }
 
     private GoblinEliteInfantry(final GoblinEliteInfantry card) {
