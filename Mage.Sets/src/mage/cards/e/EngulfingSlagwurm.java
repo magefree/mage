@@ -4,7 +4,7 @@ package mage.cards.e;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
+import mage.abilities.common.BlocksOrBlockedByCreatureSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
@@ -30,7 +30,7 @@ public final class EngulfingSlagwurm extends CardImpl {
         this.toughness = new MageInt(7);
 
         // Whenever Engulfing Slagwurm blocks or becomes blocked by a creature, destroy that creature. You gain life equal to that creature's toughness.
-        Ability ability = new BlocksOrBecomesBlockedSourceTriggeredAbility(new DestroyTargetEffect(), false);
+        Ability ability = new BlocksOrBlockedByCreatureSourceTriggeredAbility(new DestroyTargetEffect());
         ability.addEffect(new EngulfingSlagwurmEffect());
         this.addAbility(ability);
     }

@@ -3,7 +3,7 @@ package mage.cards.s;
 import java.util.UUID;
 
 import mage.MageInt;
-import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
+import mage.abilities.common.BlocksOrBlockedByCreatureSourceTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -26,10 +26,9 @@ public final class SawtoothOgre extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Sawtooth Ogre blocks or becomes blocked by a creature, Sawtooth Ogre deals 1 damage to that creature at end of combat.
-        Effect effect = new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(
-                new DamageTargetEffect(1)), true)
-                .setText("{this} deals 1 damage to that creature at end of combat");
-        this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(effect, false));
+        Effect effect = new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new DamageTargetEffect(1)), true);
+        effect.setText("{this} deals 1 damage to that creature at end of combat");
+        this.addAbility(new BlocksOrBlockedByCreatureSourceTriggeredAbility(effect));
     }
 
     private SawtoothOgre(final SawtoothOgre card) {

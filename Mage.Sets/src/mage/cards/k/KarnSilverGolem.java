@@ -1,10 +1,9 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
+import mage.abilities.common.BlocksOrBlockedSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -38,7 +37,7 @@ public final class KarnSilverGolem extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Karn, Silver Golem blocks or becomes blocked, it gets -4/+4 until end of turn.
-        this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(-4, +4, Duration.EndOfTurn), false));
+        this.addAbility(new BlocksOrBlockedSourceTriggeredAbility(new BoostSourceEffect(-4, +4, Duration.EndOfTurn, "it")));
         
         // {1}: Target noncreature artifact becomes an artifact creature with power and toughness each equal to its converted mana cost until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KarnSilverGolemEffect(), new ManaCostsImpl<>("{1}"));

@@ -1,27 +1,22 @@
 package mage.cards.f;
 
 import java.util.UUID;
-import mage.constants.SubType;
-import mage.target.common.TargetCreaturePermanent;
-import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BlocksOrBlockedAttachedTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.counter.AddCountersAttachedEffect;
-import mage.constants.Outcome;
-import mage.target.TargetPermanent;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author TheElk801
+ * @author awjackson
  */
 public final class Ferocity extends CardImpl {
 
@@ -34,11 +29,13 @@ public final class Ferocity extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Whenever enchanted creature blocks or becomes blocked, you may put a +1/+1 counter on it.
-        this.addAbility(new FerocityTriggeredAbility());
+        this.addAbility(new BlocksOrBlockedAttachedTriggeredAbility(
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance()).setText("put a +1/+1 counter on it"),
+                true
+        ));
     }
 
     private Ferocity(final Ferocity card) {
@@ -48,49 +45,5 @@ public final class Ferocity extends CardImpl {
     @Override
     public Ferocity copy() {
         return new Ferocity(this);
-    }
-}
-
-class FerocityTriggeredAbility extends TriggeredAbilityImpl {
-
-    public FerocityTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersAttachedEffect(CounterType.P1P1.createInstance(), "it"), true);
-    }
-
-    public FerocityTriggeredAbility(final FerocityTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.BLOCKER_DECLARED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent aura = game.getPermanent(sourceId);
-        if (aura == null || aura.getAttachedTo() == null) {
-            return false;
-        }
-        if (event.getSourceId().equals(aura.getAttachedTo())) {
-            Permanent blocks = game.getPermanent(event.getTargetId());
-            return blocks != null;
-        }
-        if (event.getTargetId().equals(aura.getAttachedTo())) {
-            Permanent blockedBy = game.getPermanent(event.getSourceId());
-            return blockedBy != null;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever enchanted creature blocks or becomes blocked, "
-                + "you may put a +1/+1 counter on it";
-    }
-
-    @Override
-    public FerocityTriggeredAbility copy() {
-        return new FerocityTriggeredAbility(this);
     }
 }
