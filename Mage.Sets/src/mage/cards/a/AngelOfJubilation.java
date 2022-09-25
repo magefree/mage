@@ -75,7 +75,7 @@ class AngelOfJubilationEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
-            player.setCanPayLifeCost(false);
+            player.setPayLifeCostLevel(Player.PayLifeCostLevel.nonSpellnonActivatedAbilities);
             player.setCanPaySacrificeCostFilter(new FilterCreaturePermanent());
         }
         return true;

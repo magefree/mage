@@ -13,15 +13,13 @@ import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SharesCardTypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -85,20 +83,10 @@ enum ConfusionInTheRanksAdjuster implements TargetAdjuster {
             return;
         }
         ability.getTargets().clear();
-        FilterPermanent filterTarget = new FilterPermanent();
-        String message = "";
+        SharesCardTypePredicate predicate = new SharesCardTypePredicate(enteringPermanent.getCardType(game));
+        FilterPermanent filterTarget = new FilterPermanent(predicate.toString() + " you don't control");
+        filterTarget.add(predicate);
         filterTarget.add(Predicates.not(new ControllerIdPredicate(enteringPermanent.getControllerId())));
-        Set<CardType.CardTypePredicate> cardTypesPredicates = new HashSet<>(1);
-        for (CardType cardTypeEntering : enteringPermanent.getCardType(game)) {
-            cardTypesPredicates.add(cardTypeEntering.getPredicate());
-            if (!message.isEmpty()) {
-                message += "or ";
-            }
-            message += cardTypeEntering.toString().toLowerCase(Locale.ENGLISH) + ' ';
-        }
-        filterTarget.add(Predicates.or(cardTypesPredicates));
-        message += "you don't control";
-        filterTarget.setMessage(message);
         TargetPermanent target = new TargetPermanent(filterTarget);
         target.setTargetController(enteringPermanent.getControllerId());
         ability.getTargets().add(target);

@@ -46,6 +46,7 @@ public class ReturnToBattlefieldUnderOwnerControlTargetEffect extends OneShotEff
         updateText();
     }
 
+    // TODO: This does not generate correct text, the ", then" should be from .concatBy, see Angelic Renewal for a card with incorrect text
     private void updateText() {
         this.staticText = ", then return " + this.returnName
                 + " to the battlefield" + (tapped ? " tapped" : "")

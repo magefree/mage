@@ -22,7 +22,6 @@ public class FlipCoinTest extends CardTestPlayerBase {
         //setStrictChooseMode(true); // normal play without errors
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test(expected = AssertionError.class)
@@ -37,7 +36,6 @@ public class FlipCoinTest extends CardTestPlayerBase {
         setStrictChooseMode(true); // no coinresult in choices, so it must fail
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -62,7 +60,6 @@ public class FlipCoinTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(9, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Wirefly", 5);
     }

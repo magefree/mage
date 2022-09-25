@@ -25,7 +25,6 @@ public class OathOfKayaTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerB, "Liliana, Dreadhorde General", CounterType.LOYALTY, 6);
         assertLife(playerA, 20);
@@ -47,7 +46,6 @@ public class OathOfKayaTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerB, "Liliana, Dreadhorde General", CounterType.LOYALTY, 6 - 2 * 2);
         assertLife(playerA, 20 - 2);
@@ -70,7 +68,6 @@ public class OathOfKayaTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerB, "Liliana, Dreadhorde General", CounterType.LOYALTY, 6 - 2);
         assertCounterCount(playerB, "Vivien, Champion of the Wilds", CounterType.LOYALTY, 4 - 2);

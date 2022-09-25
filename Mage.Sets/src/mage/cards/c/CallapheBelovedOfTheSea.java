@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.abilities.effects.common.cost.SpellsCostModificationThatTargetSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -41,7 +41,7 @@ public final class CallapheBelovedOfTheSea extends CardImpl {
 
         // Callaphe's power is equal to your to devotion to blue.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetPowerSourceEffect(DevotionCount.U, Duration.EndOfGame)
+                Zone.ALL, new SetBasePowerSourceEffect(DevotionCount.U, Duration.EndOfGame)
                 .setText("{this}'s power is equal to your devotion to blue")
         ).addHint(DevotionCount.U.getHint()));
 

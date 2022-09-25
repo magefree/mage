@@ -1,11 +1,12 @@
 package org.mage.test.cards.conditional;
 
+import com.sun.org.apache.bcel.internal.generic.POP;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.HasteAbility;
+import mage.constants.ManaType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -26,7 +27,7 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Abzan Banner");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tin Street Hooligan");
-        addTarget(playerA, "Abzan Banner");
+        // Abzan Banner is auto-chosen since only possible target
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -103,7 +104,6 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped("Silvercoat Lion", true);
     }
@@ -114,12 +114,11 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Jaded Sell-Sword");
         addCard(Zone.HAND, playerA, "Strike It Rich", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Strike It Rich");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Strike It Rich", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Jaded Sell-Sword");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertAbility(playerA, "Jaded Sell-Sword", FirstStrikeAbility.getInstance(), true);
         assertAbility(playerA, "Jaded Sell-Sword", HasteAbility.getInstance(), true);
@@ -134,7 +133,6 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertAbility(playerA, "Jaded Sell-Sword", FirstStrikeAbility.getInstance(), false);
         assertAbility(playerA, "Jaded Sell-Sword", HasteAbility.getInstance(), false);
@@ -151,7 +149,6 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, "Verazol, the Split Current", CounterType.P1P1, 4);
         assertPowerToughness(playerA, "Verazol, the Split Current", 4, 4);
@@ -170,7 +167,6 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Kobolds of Kher Keep", 7);
     }
@@ -181,13 +177,12 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Pyretic Ritual");
         addCard(Zone.HAND, playerA, "Gray Ogre");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pyretic Ritual");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pyretic Ritual", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gray Ogre");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Pyretic Ritual", 1);
         assertPermanentCount(playerA, "Gray Ogre", 1);
@@ -207,12 +202,12 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, {T}:");
         setChoice(playerA, true);
         setChoice(playerA, true);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gray Ogre");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped("Isochron Scepter", true);
         assertExileCount(playerA, "Pyretic Ritual", 1);
@@ -230,12 +225,11 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gray Ogre");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mana Drain", "Gray Ogre");
 
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);  // Let the Mana Drain delayed triggered ability resolve
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Sliver Construct");
 
-        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Mana Drain", 1);
         assertGraveyardCount(playerA, "Gray Ogre", 1);
@@ -260,12 +254,12 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
         setChoice(playerA, true);
         addTarget(playerA, "Gray Ogre");
 
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);  // Let the Mana Drain delayed triggered ability resolve
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Sliver Construct");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped("Isochron Scepter", true);
         assertExileCount(playerA, "Mana Drain", 1);

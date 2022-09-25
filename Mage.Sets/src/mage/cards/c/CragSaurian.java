@@ -46,75 +46,71 @@ public final class CragSaurian extends CardImpl {
     public CragSaurian copy() {
         return new CragSaurian(this);
     }
+}
 
-    private static class CragSaurianEffect extends OneShotEffect {
+class CragSaurianEffect extends OneShotEffect {
 
-        public CragSaurianEffect() {
-            super(Outcome.GainControl);
-            this.staticText = "that source's controller gains control of {this}";
-        }
-
-        private CragSaurianEffect(CragSaurianEffect effect) {
-            super(effect);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Player controller = game.getPlayer(source.getControllerId());
-            Player newController = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-            if (newController != null && controller != null && !controller.equals(newController)) {
-                ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, newController.getId());
-                effect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
-                game.addEffect(effect, source);
-                return true;
-            }
-            return false;
-        }
-
-        @Override
-        public Effect copy() {
-            return new CragSaurianEffect(this);
-        }
+    public CragSaurianEffect() {
+        super(Outcome.GainControl);
+        this.staticText = "that source's controller gains control of {this}";
     }
 
-    class CragSaurianTriggeredAbility extends TriggeredAbilityImpl {
-    
-        CragSaurianTriggeredAbility() {
-            super(Zone.BATTLEFIELD, new CragSaurianEffect());
+    private CragSaurianEffect(CragSaurianEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Player newController = game.getPlayer(this.getTargetPointer().getFirst(game, source));
+        if (newController != null && controller != null && !controller.equals(newController)) {
+            ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, newController.getId());
+            effect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
+            game.addEffect(effect, source);
+            return true;
         }
-    
-        CragSaurianTriggeredAbility(final CragSaurianTriggeredAbility ability) {
-            super(ability);
-        }
-    
-        @Override
-        public CragSaurianTriggeredAbility copy() {
-            return new CragSaurianTriggeredAbility(this);
-        }
-    
-        @Override
-        public boolean checkEventType(GameEvent event, Game game) {
-            return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
-        }
-    
-        @Override
-        public boolean checkTrigger(GameEvent event, Game game) {
-            if (event.getTargetId().equals(this.sourceId)) {
-                UUID controller = game.getControllerId(event.getSourceId());
-                if (controller != null) {
-                    Player player = game.getPlayer(controller);
-                    if (player != null) {
-                        getEffects().get(0).setTargetPointer(new FixedTarget(player.getId()));
-                        return true;
-                    }
+        return false;
+    }
+
+    @Override
+    public Effect copy() {
+        return new CragSaurianEffect(this);
+    }
+}
+
+class CragSaurianTriggeredAbility extends TriggeredAbilityImpl {
+
+    CragSaurianTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new CragSaurianEffect());
+        setTriggerPhrase("Whenever a source deals damage to {this}, ");
+    }
+
+    CragSaurianTriggeredAbility(final CragSaurianTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public CragSaurianTriggeredAbility copy() {
+        return new CragSaurianTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getTargetId().equals(this.sourceId)) {
+            UUID controller = game.getControllerId(event.getSourceId());
+            if (controller != null) {
+                Player player = game.getPlayer(controller);
+                if (player != null) {
+                    getEffects().get(0).setTargetPointer(new FixedTarget(player.getId()));
+                    return true;
                 }
             }
-            return false;
         }
-    
-        @Override
-        public String getTriggerPhrase() {
-            return "Whenever a source deals damage to {this}, " ;
-        }
+        return false;
     }
 }

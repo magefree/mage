@@ -18,7 +18,6 @@ public class AcademyManufactorTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, "Plains", 1);
         assertPermanentCount(playerA, "Academy Manufactor", 1);
         assertPermanentCount(playerA, "Thraben Inspector", 1);
@@ -39,7 +38,6 @@ public class AcademyManufactorTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, "Plains", 1);
         assertPermanentCount(playerA, "Academy Manufactor", 2);
         assertPermanentCount(playerA, "Anointed Procession", 1);
@@ -60,7 +58,6 @@ public class AcademyManufactorTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, "Plains", 1);
         assertPermanentCount(playerA, "Academy Manufactor", 6);
         assertPermanentCount(playerA, "Thraben Inspector", 1);
@@ -82,7 +79,6 @@ public class AcademyManufactorTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, "Tundra", 5);
         assertPermanentCount(playerA, "Academy Manufactor", 2);
         // Gingerbrute token copy becomes a regular Food

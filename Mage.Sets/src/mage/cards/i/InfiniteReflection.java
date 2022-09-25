@@ -103,6 +103,7 @@ class InfiniteReflectionEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     public InfiniteReflectionEntersBattlefieldEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        this.staticText = "Nontoken creatures you control enter the battlefield as a copy of enchanted creature";
     }
 
     public InfiniteReflectionEntersBattlefieldEffect(InfiniteReflectionEntersBattlefieldEffect effect) {
@@ -133,11 +134,6 @@ class InfiniteReflectionEntersBattlefieldEffect extends ReplacementEffectImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Nontoken creatures you control enter the battlefield as a copy of enchanted creature";
     }
 
     @Override

@@ -51,7 +51,7 @@ public class HighestManaValueCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "the highest mana value among permanents you control";
+        return "the highest mana value among " + filter.getMessage() + " you control";
     }
 
     @Override

@@ -16,6 +16,7 @@ public class BecomesClassLevelTriggeredAbility extends TriggeredAbilityImpl {
     public BecomesClassLevelTriggeredAbility(Effect effect, int level) {
         super(Zone.BATTLEFIELD, effect);
         this.level = level;
+        setTriggerPhrase("When this Class becomes level " + level + ", " );
     }
 
     private BecomesClassLevelTriggeredAbility(final BecomesClassLevelTriggeredAbility ability) {
@@ -36,10 +37,5 @@ public class BecomesClassLevelTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public BecomesClassLevelTriggeredAbility copy() {
         return new BecomesClassLevelTriggeredAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When this Class becomes level " + level + ", " ;
     }
 }

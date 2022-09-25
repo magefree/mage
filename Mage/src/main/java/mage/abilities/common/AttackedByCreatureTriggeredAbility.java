@@ -42,6 +42,7 @@ public class AttackedByCreatureTriggeredAbility extends TriggeredAbilityImpl {
         super(zone, effect, optional);
         this.setTargetPointer = setTargetPointer;
         this.filter = filter;
+        setTriggerPhrase("Whenever " + filter.getMessage() + " attacks you, ");
     }
 
     public AttackedByCreatureTriggeredAbility(final AttackedByCreatureTriggeredAbility ability) {
@@ -79,10 +80,4 @@ public class AttackedByCreatureTriggeredAbility extends TriggeredAbilityImpl {
     public AttackedByCreatureTriggeredAbility copy() {
         return new AttackedByCreatureTriggeredAbility(this);
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever " + filter.getMessage() + " attacks you, " ;
-    }
-
 }

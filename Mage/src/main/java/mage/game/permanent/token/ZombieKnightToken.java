@@ -13,13 +13,12 @@ public final class ZombieKnightToken extends TokenImpl {
 
     static final private List<String> tokenImageSets = new ArrayList<>();
     static {
-        tokenImageSets.addAll(Arrays.asList("DOM"));
+        tokenImageSets.addAll(Arrays.asList("DOM", "DMC"));
     }
     
     public ZombieKnightToken(){
         super("Zombie Knight Token", "a 2/2 black Zombie Knight creature token with menace");
         availableImageSetCodes = tokenImageSets;
-        setOriginalExpansionSetCode("DOM");
         color.setBlack(true);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.ZOMBIE, SubType.KNIGHT);

@@ -149,6 +149,8 @@ public interface MageServer {
 
     void sendCardMark(UUID draftId, String sessionId, UUID cardId) throws MageException;
 
+    void setBoosterLoaded(UUID draftId, String sessionId) throws MageException;
+
     //challenge methods
     // void startChallenge(String sessionId, UUID roomId, UUID tableId, UUID challengeId) throws MageException;
     //replay methods

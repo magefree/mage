@@ -27,7 +27,7 @@ public class NephaliaAcademyTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Nephalia Academy", 1);
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Duress");
-        addTarget(playerA, playerB);
+        // playerB is auto-chosen since only possible target
         setChoice(playerA, "Giant Growth"); // choose to discard Giant Growth
         setChoice(playerB, true); // replacement effect, choose to reveal the card and place on top of library
         execute();
@@ -49,7 +49,7 @@ public class NephaliaAcademyTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Nephalia Academy", 1);
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Duress");
-        addTarget(playerA, playerB);
+        // playerB is auto-chosen since only possible target
         setChoice(playerA, "Giant Growth"); // choose to discard Giant Growth
         setChoice(playerB, false); // decline the replacement effect, allow the discard to happen
         execute();

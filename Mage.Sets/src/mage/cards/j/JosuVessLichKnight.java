@@ -35,7 +35,7 @@ public final class JosuVessLichKnight extends CardImpl {
 
         //When Josu Vess, Lich Knight enters the battlefield, if it was kicked, create eight 2/2 black Zombie Knight creature tokens with menace.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ZombieKnightToken(), 8));
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.instance,
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.ONCE,
                 "When {this} enters the battlefield, if it was kicked, create eight 2/2 black Zombie Knight creature tokens with menace."));
     }
 

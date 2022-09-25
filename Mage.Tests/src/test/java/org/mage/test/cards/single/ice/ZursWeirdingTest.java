@@ -21,7 +21,6 @@ public class ZursWeirdingTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20 - 2);
         assertGraveyardCount(playerB, 1);
@@ -37,7 +36,6 @@ public class ZursWeirdingTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertGraveyardCount(playerB, 0);

@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.common.ChooseABackgroundAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.FirstCombatPhaseCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.AdditionalCombatPhaseEffect;
 import mage.abilities.effects.common.UntapAllEffect;
@@ -32,11 +32,11 @@ public final class KarlachFuryOfAvernus extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 
-        // Whenever you attack, if its the first combat phase of the turn, untap all attacking creatures. They gain first strike until end of turn. After this phase, there is an additional combat phase.
+        // Whenever you attack, if it's the first combat phase of the turn, untap all attacking creatures. They gain first strike until end of turn. After this phase, there is an additional combat phase.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new AttacksWithCreaturesTriggeredAbility(
                         new UntapAllEffect(StaticFilters.FILTER_ATTACKING_CREATURES), 1
-                ), KarlachFuryOfAvernusCondition.instance, "Whenever you attack, if its the first " +
+                ), FirstCombatPhaseCondition.instance, "Whenever you attack, if it's the first " +
                 "combat phase of the turn, untap all attacking creatures. They gain first strike " +
                 "until end of turn. After this phase, there is an additional combat phase."
         );
@@ -58,14 +58,5 @@ public final class KarlachFuryOfAvernus extends CardImpl {
     @Override
     public KarlachFuryOfAvernus copy() {
         return new KarlachFuryOfAvernus(this);
-    }
-}
-
-enum KarlachFuryOfAvernusCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return game.getTurn().getPhase(TurnPhase.COMBAT).getCount() == 0;
     }
 }

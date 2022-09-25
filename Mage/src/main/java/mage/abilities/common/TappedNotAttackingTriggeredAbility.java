@@ -14,6 +14,8 @@ public class TappedNotAttackingTriggeredAbility extends TriggeredAbilityImpl {
 
     public TappedNotAttackingTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever a creature an opponent controls becomes tapped, " +
+                "if it isn't being declared as an attacker, ");
     }
 
     private TappedNotAttackingTriggeredAbility(final TappedNotAttackingTriggeredAbility ability) {
@@ -38,11 +40,5 @@ public class TappedNotAttackingTriggeredAbility extends TriggeredAbilityImpl {
         Permanent permanent = game.getPermanent(event.getTargetId());
         return permanent != null && permanent.isCreature(game)
                 && game.getOpponents(permanent.getControllerId()).contains(getControllerId());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature an opponent controls becomes tapped, " +
-                "if it isn't being declared as an attacker, ";
     }
 }

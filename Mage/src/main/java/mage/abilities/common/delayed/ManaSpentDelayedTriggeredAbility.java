@@ -24,6 +24,7 @@ public class ManaSpentDelayedTriggeredAbility extends DelayedTriggeredAbility {
     public ManaSpentDelayedTriggeredAbility(Effect effect, FilterSpell filter) {
         super(effect, Duration.Custom, true, false);
         this.filter = filter;
+        setTriggerPhrase("When you spend this mana to cast " + filter.getMessage() + ", ");
     }
 
     private ManaSpentDelayedTriggeredAbility(final ManaSpentDelayedTriggeredAbility ability) {
@@ -75,10 +76,5 @@ public class ManaSpentDelayedTriggeredAbility extends DelayedTriggeredAbility {
                 .stream()
                 .map(ManaPoolItem::getSourceId)
                 .noneMatch(getSourceId()::equals);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When you spend this mana to cast " + filter.getMessage() + ", ";
     }
 }

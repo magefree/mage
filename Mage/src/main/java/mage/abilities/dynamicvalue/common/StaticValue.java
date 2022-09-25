@@ -45,6 +45,11 @@ public class StaticValue implements DynamicValue {
         return "";
     }
 
+    @Override
+    public int getSign() {
+        return value;
+    }
+
     public int getValue() {
         return value;
     }

@@ -22,7 +22,6 @@ public class CaptureSphereTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(4, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped("Grizzly Bears", true);
     }

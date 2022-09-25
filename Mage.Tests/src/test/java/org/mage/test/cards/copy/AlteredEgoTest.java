@@ -28,7 +28,6 @@ public class AlteredEgoTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertPowerToughness(playerA, "Silvercoat Lion", 5, 5);
@@ -49,7 +48,6 @@ public class AlteredEgoTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Altered Ego", 0);
         assertGraveyardCount(playerA, "Altered Ego", 1);

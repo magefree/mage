@@ -1,10 +1,9 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
+import mage.abilities.common.BlocksOrBlockedSourceTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,7 +26,7 @@ public final class GoblinCadets extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Goblin Cadets blocks or becomes blocked, target opponent gains control of it.
-        Ability ability = new BlocksOrBecomesBlockedSourceTriggeredAbility(new GoblinCadetsChangeControlEffect(), false);
+        Ability ability = new BlocksOrBlockedSourceTriggeredAbility(new GoblinCadetsChangeControlEffect());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 
@@ -47,7 +46,7 @@ class GoblinCadetsChangeControlEffect extends ContinuousEffectImpl {
 
     public GoblinCadetsChangeControlEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
-        staticText = "target opponent gains control of {this}";
+        staticText = "target opponent gains control of it. <i>(This removes {this} from combat.)</i>";
     }
 
     public GoblinCadetsChangeControlEffect(final GoblinCadetsChangeControlEffect effect) {
@@ -69,5 +68,4 @@ class GoblinCadetsChangeControlEffect extends ContinuousEffectImpl {
         }
         return false;
     }
-
 }

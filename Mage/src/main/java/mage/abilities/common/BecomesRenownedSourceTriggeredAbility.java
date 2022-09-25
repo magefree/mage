@@ -16,6 +16,7 @@ public class BecomesRenownedSourceTriggeredAbility extends TriggeredAbilityImpl 
 
     public BecomesRenownedSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("When {this} becomes renowned, ");
     }
 
     public BecomesRenownedSourceTriggeredAbility(final BecomesRenownedSourceTriggeredAbility ability) {
@@ -44,10 +45,5 @@ public class BecomesRenownedSourceTriggeredAbility extends TriggeredAbilityImpl 
 
     public int getRenownValue() {
         return renownValue;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When {this} becomes renowned, " ;
     }
 }

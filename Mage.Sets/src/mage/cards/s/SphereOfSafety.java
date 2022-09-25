@@ -7,7 +7,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.combat.CantAttackYouUnlessPayManaAllEffect;
+import mage.abilities.effects.common.combat.CantAttackYouUnlessPayAllEffect;
 import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -48,7 +48,7 @@ public final class SphereOfSafety extends CardImpl {
 
 }
 
-class SphereOfSafetyPayManaToAttackAllEffect extends CantAttackYouUnlessPayManaAllEffect {
+class SphereOfSafetyPayManaToAttackAllEffect extends CantAttackYouUnlessPayAllEffect {
 
     SphereOfSafetyPayManaToAttackAllEffect() {
         super(null, true);

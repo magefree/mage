@@ -31,7 +31,6 @@ public class SupportTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Silvercoat Lion", 2 + 1, 2 + 1);
         assertPowerToughness(playerA, "Pillarfield Ox", 2 + 1, 4 + 1);

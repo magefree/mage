@@ -45,7 +45,6 @@ public class HideawayTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Shelldock Isle", 1);
         assertExileCount(playerA, "Silvercoat Lion", 1);
@@ -87,7 +86,6 @@ public class HideawayTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount("Dross Crocodile", 2);
         assertPermanentCount(playerA, "Mosswort Bridge", 1);
@@ -132,7 +130,6 @@ public class HideawayTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Ghost Quarter", 0);
         assertTapped("Windbrisk Heights", true);
@@ -191,7 +188,6 @@ public class HideawayTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Ghost Quarter", 1);
         assertTapped("Windbrisk Heights", true);
@@ -225,7 +221,6 @@ public class HideawayTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Ghost Quarter", 1);
         assertTapped("Windbrisk Heights", true);
@@ -265,7 +260,6 @@ public class HideawayTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertTappedCount("Island", true, 1);
         assertPermanentCount(playerA, sIsle, 1);

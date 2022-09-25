@@ -108,8 +108,8 @@ class SarkhanTheDragonspeakerEffect extends ContinuousEffectImpl {
                     break;
                 case PTChangingEffects_7:
                     if (sublayer == SubLayer.SetPT_7b) {
-                        permanent.getPower().setValue(4);
-                        permanent.getToughness().setValue(4);
+                        permanent.getPower().setModifiedBaseValue(4);
+                        permanent.getToughness().setModifiedBaseValue(4);
                     }
             }
             return true;

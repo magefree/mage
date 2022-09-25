@@ -28,7 +28,7 @@ public class BronzeBombshellTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Hero's Downfall"); // {1}{B}{B}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hero's Downfall", "Bronze Bombshell");
-        addTarget(playerA, playerB);
+        // playerB is autochosen since only possible target
 
         setStopAt(2, PhaseStep.UPKEEP);
         execute();
@@ -38,7 +38,5 @@ public class BronzeBombshellTest extends CardTestPlayerBase {
 
         assertLife(playerA, 20);
         assertLife(playerB, 13);
-
     }
-
 }

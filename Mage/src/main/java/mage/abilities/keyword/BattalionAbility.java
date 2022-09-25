@@ -18,13 +18,12 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX2
  */
-
-
 public class BattalionAbility extends TriggeredAbilityImpl {
 
     public BattalionAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
         this.setAbilityWord(AbilityWord.BATTALION);
+        setTriggerPhrase("Whenever {this} and at least two other creatures attack, ");
     }
 
     public BattalionAbility(final BattalionAbility ability) {
@@ -44,11 +43,6 @@ public class BattalionAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return game.getCombat().getAttackers().size() >= 3 && game.getCombat().getAttackers().contains(this.sourceId);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} and at least two other creatures attack, ";
     }
 }
 

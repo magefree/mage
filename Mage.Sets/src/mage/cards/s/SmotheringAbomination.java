@@ -60,6 +60,7 @@ class SmotheringAbominationTriggeredAbility extends TriggeredAbilityImpl {
     public SmotheringAbominationTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
         setLeavesTheBattlefieldTrigger(true);
+        setTriggerPhrase("Whenever you sacrifice a creature, ");
     }
 
     public SmotheringAbominationTriggeredAbility(final SmotheringAbominationTriggeredAbility ability) {
@@ -80,10 +81,5 @@ class SmotheringAbominationTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(this.getControllerId())
                 && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).isCreature(game);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you sacrifice a creature, " ;
     }
 }

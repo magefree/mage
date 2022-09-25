@@ -49,6 +49,7 @@ class ScryTriggeredAbility extends TriggeredAbilityImpl {
     public ScryTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BoostSourceEffect(2,0, Duration.EndOfTurn), false);
         this.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
+        setTriggerPhrase("Whenever you scry, ");
     }
 
     public ScryTriggeredAbility(final ScryTriggeredAbility ability) {
@@ -68,10 +69,5 @@ class ScryTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(this.getControllerId());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you scry, " ;
     }
 }

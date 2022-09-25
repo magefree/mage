@@ -20,6 +20,7 @@ public class DealsCombatDamageEquippedTriggeredAbility extends TriggeredAbilityI
 
     public DealsCombatDamageEquippedTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever equipped creature deals combat damage, ");
     }
 
     public DealsCombatDamageEquippedTriggeredAbility(final DealsCombatDamageEquippedTriggeredAbility ability) {
@@ -55,10 +56,5 @@ public class DealsCombatDamageEquippedTriggeredAbility extends TriggeredAbilityI
         }
         this.getEffects().setValue("damage", amount);
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever equipped creature deals combat damage, ";
     }
 }

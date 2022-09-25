@@ -35,6 +35,7 @@ public class BecomesTappedTriggeredAbility extends TriggeredAbilityImpl {
         super(zone, effect, optional);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever " + CardUtil.addArticle(filter.getMessage()) + " becomes tapped, ");
     }
 
     public BecomesTappedTriggeredAbility(final BecomesTappedTriggeredAbility ability) {
@@ -63,10 +64,5 @@ public class BecomesTappedTriggeredAbility extends TriggeredAbilityImpl {
             this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
         }
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever " + CardUtil.addArticle(filter.getMessage()) + " becomes tapped, ";
     }
 }

@@ -2,7 +2,7 @@ package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
+import mage.abilities.common.BlocksOrBlockedByCreatureSourceTriggeredAbility;
 import mage.abilities.effects.common.CantBeRegeneratedTargetEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
@@ -25,13 +25,10 @@ public final class LimDulsCohort extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Lim-Dûl's Cohort blocks or becomes blocked by a creature, that creature can't be regenerated this turn.
-        this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(
-                new CantBeRegeneratedTargetEffect(Duration.EndOfTurn),
-                new FilterCreaturePermanent(),
-                false,
-                "Whenever {this} blocks or becomes blocked by a creature, that creature can't be regenerated this turn.",
-                true));
-
+        this.addAbility(new BlocksOrBlockedByCreatureSourceTriggeredAbility(
+                new CantBeRegeneratedTargetEffect(Duration.EndOfTurn)
+                .setText("that creature can't be regenerated this turn")
+        ));
     }
 
     private LimDulsCohort(final LimDulsCohort card) {

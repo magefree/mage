@@ -28,7 +28,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertCommandZoneCount(playerA, "Balduvian Bears", 0);
         assertPermanentCount(playerA, "Balduvian Bears", 1);
@@ -64,7 +63,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertCommandZoneCount(playerA, "Balduvian Bears", 0);
         assertPermanentCount(playerA, "Balduvian Bears", 1);
@@ -83,7 +81,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertCommandZoneCount(playerA, "Academy Ruins", 0);
         assertPermanentCount(playerA, "Academy Ruins", 1);
@@ -122,7 +119,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStopAt(5, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertCommandZoneCount(playerA, "Academy Ruins", 0);
         assertPermanentCount(playerA, "Academy Ruins", 1);
@@ -156,7 +152,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -185,7 +180,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -226,7 +220,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(9, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -248,7 +241,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -271,17 +263,17 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
+    /**
+     * Reported bug: https://github.com/magefree/mage/issues/5121
+     *      Exiling your commander from your graveyard should give you the option to put it in command zone
+     *      We were playing in a restarted-by-Karn game (if that mattered), and a player who exiled their
+     *      commander from graveyard via Delve was not given the opportunity to place it in the command zone.
+     *      Instead, it went directly to the exiled zone.
+     */
     @Test
     public void test_ExileWithDelvePayAndReturn() {
-        // https://github.com/magefree/mage/issues/5121
-        // Exiling your commander from your graveyard should give you the option to put it in command zone
-        // We were playing in a restarted-by-Karn game (if that mattered), and a player who exiled their
-        // commander from graveyard via Delve was not given the opportunity to place it in the command zone.
-        // Instead, it went directly to the exiled zone.
-
         // disable auto-payment for delve test
         disableManaAutoPayment(playerA);
 
@@ -307,6 +299,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Balduvian Bears");
         setChoice(playerA, "Red"); // pay
         setChoice(playerA, false); // leave in graveyard
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // use commander as delve pay
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 5);
@@ -319,7 +312,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertCommandZoneCount(playerA, "Balduvian Bears", 1);
     }
@@ -375,7 +367,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(5, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -484,7 +475,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(13, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -540,7 +530,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(5, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -577,7 +566,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -606,7 +594,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20 + 3);
         assertPermanentCount(playerA, "Swamp", 1);
@@ -634,7 +621,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCommandZoneCount(playerA, "Balduvian Bears", 0);
         assertPermanentCount(playerA, "Balduvian Bears", 1);

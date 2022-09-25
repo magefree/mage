@@ -23,7 +23,6 @@ public class ExperimentalOverloadTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
         assertHandCount(playerA, "Shock",1);
 
     }

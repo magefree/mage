@@ -31,8 +31,6 @@ public class PalaceJailerTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-
         assertPermanentCount(playerA, "Palace Jailer", 1);
         assertExileCount(playerB, "Silvercoat Lion", 1);
 
@@ -80,8 +78,6 @@ public class PalaceJailerTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
-
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Palace Jailer", 1);
 

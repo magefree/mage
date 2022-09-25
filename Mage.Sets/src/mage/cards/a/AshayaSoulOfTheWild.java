@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.LandsYouControlCount;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -33,7 +33,7 @@ public final class AshayaSoulOfTheWild extends CardImpl {
 
         // Ashaya, Soul of the Wild’s power and toughness are each equal to the number of lands you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetPowerToughnessSourceEffect(LandsYouControlCount.instance, Duration.EndOfGame)
+                Zone.ALL, new SetBasePowerToughnessSourceEffect(LandsYouControlCount.instance, Duration.EndOfGame)
         ));
 
         // Nontoken creatures you control are Forest lands in addition to their other types. (They’re still affected by summoning sickness.)

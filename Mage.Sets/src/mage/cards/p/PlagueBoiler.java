@@ -88,6 +88,7 @@ class PlagueBoilerTriggeredAbility extends TriggeredAbilityImpl {
 
     public PlagueBoilerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PlagueBoilerSacrificeDestroyEffect(), false);
+        setTriggerPhrase("When {this} has three or more plague counters on it, ");
     }
 
     public PlagueBoilerTriggeredAbility(final PlagueBoilerTriggeredAbility ability) {
@@ -113,11 +114,6 @@ class PlagueBoilerTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When {this} has three or more plague counters on it, " ;
     }
 }
 

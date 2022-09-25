@@ -43,7 +43,7 @@ public class SerraAscendantTest extends CardTestPlayerBase {
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Wild Nacatl");
         
         playLand(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Plains");
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Martyr of Sands");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Martyr of Sands", true);
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}, You may reveal X white cards from your hand");
         setChoice(playerA, "Silvercoat Lion");
         setChoice(playerA, "Silvercoat Lion");

@@ -132,7 +132,7 @@ class NihiloorControlEffect extends OneShotEffect {
             );
             filter2.add(new NihiloorPredicate(permanent, playerId));
             ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
-                    new GainControlTargetEffect(Duration.Custom, true),
+                    new GainControlTargetEffect(Duration.WhileControlled, true),
                     false, "gain control of target creature that player controls with "
                     + "power less than or equal to the tapped creature's power for as long as you control {this}"
             );

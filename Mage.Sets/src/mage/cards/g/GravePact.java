@@ -46,6 +46,7 @@ class GravePactTriggeredAbility extends TriggeredAbilityImpl {
 
     public GravePactTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GravePactEffect());
+        setTriggerPhrase("Whenever a creature you control dies, ");
     }
 
     public GravePactTriggeredAbility(final GravePactTriggeredAbility ability) {
@@ -70,11 +71,6 @@ class GravePactTriggeredAbility extends TriggeredAbilityImpl {
             return permanent != null && permanent.isControlledBy(this.getControllerId()) && permanent.isCreature(game);
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature you control dies, " ;
     }
 }
 

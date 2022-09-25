@@ -39,12 +39,14 @@ public final class BasiliskGate extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(new BoostTargetEffect(
-                xValue, xValue, Duration.EndOfTurn, true
-        ), new GenericManaCost(2));
+        Ability ability = new ActivateAsSorceryActivatedAbility(
+                new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn),
+                new GenericManaCost(2)
+        );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability.addHint(hint));
+        ability.addHint(hint);
+        this.addAbility(ability);
     }
 
     private BasiliskGate(final BasiliskGate card) {

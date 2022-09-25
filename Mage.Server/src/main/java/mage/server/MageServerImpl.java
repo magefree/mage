@@ -736,6 +736,16 @@ public class MageServerImpl implements MageServer {
             });
         });
     }
+    
+    @Override
+    public void setBoosterLoaded(final UUID draftId, final String sessionId) throws MageException {
+        execute("setBoosterLoaded", sessionId, () -> {
+            managerFactory.sessionManager().getSession(sessionId).ifPresent(session -> {
+                UUID userId = session.getUserId();
+                managerFactory.draftManager().setBoosterLoaded(draftId, userId);
+            });
+        });
+    }
 
     @Override
     public void quitMatch(final UUID gameId, final String sessionId) throws MageException {

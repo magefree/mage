@@ -27,8 +27,8 @@ import java.util.UUID;
  */
 public final class ShareTheSpoils extends CardImpl {
 
-    public ShareTheSpoils(UUID ownderId, CardSetInfo setInfo) {
-        super(ownderId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
+    public ShareTheSpoils(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
 
         // When Share the Spoils enters the battlefield or an opponent loses the game,
         // exile the top card of each player’s library.exile the top card of each player’s library.
@@ -267,11 +267,11 @@ class ShareTheSpoilsExileCardWhenPlayACardAbility extends TriggeredAbilityImpl {
     ShareTheSpoilsExileCardWhenPlayACardAbility() {
         super(Zone.BATTLEFIELD, new ShareTheSpoilsExileSingleCardEffect());
         setRuleVisible(false);
+        setTriggerPhrase("When they do");
     }
 
     private ShareTheSpoilsExileCardWhenPlayACardAbility(final ShareTheSpoilsExileCardWhenPlayACardAbility ability) {
         super(ability);
-
         triggeringPlayerID = ability.triggeringPlayerID;
     }
 
@@ -288,11 +288,6 @@ class ShareTheSpoilsExileCardWhenPlayACardAbility extends TriggeredAbilityImpl {
     @Override
     public TriggeredAbility copy() {
         return new ShareTheSpoilsExileCardWhenPlayACardAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When they do";
     }
 
     @Override

@@ -19,7 +19,7 @@ public class ZaxaraTheExemplaryHydraToken extends TokenImpl {
         power = new MageInt(0);
         toughness = new MageInt(0);
 
-        availableImageSetCodes = Arrays.asList("C20");
+        availableImageSetCodes = Arrays.asList("C20", "DMC");
     }
 
     private ZaxaraTheExemplaryHydraToken(final ZaxaraTheExemplaryHydraToken token) {

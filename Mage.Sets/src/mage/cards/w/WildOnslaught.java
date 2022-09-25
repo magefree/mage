@@ -28,7 +28,7 @@ public final class WildOnslaught extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new AddCountersAllEffect(CounterType.P1P1.createInstance(2), StaticFilters.FILTER_CONTROLLED_CREATURE),
                 new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE),
-                KickedCondition.instance,
+                KickedCondition.ONCE,
                 "Put a +1/+1 counter on each creature you control. If this spell was kicked, put two +1/+1 counters on each creature you control instead."));
 
     }

@@ -52,7 +52,6 @@ public class LambholtPacifistTest extends CardTestPlayerBase {
 
         try {
             execute();
-            assertAllCommandsUsed();
         } catch (Throwable e) {
             if (!e.getMessage().contains("Player PlayerA must have 0 actions but found 1")) {
                 Assert.fail("Should have had error about not being able to attack, but got:\n" + e.getMessage());

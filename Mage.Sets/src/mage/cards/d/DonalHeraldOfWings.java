@@ -38,8 +38,8 @@ public class DonalHeraldOfWings extends CardImpl {
         filterSpell.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public DonalHeraldOfWings(UUID ownderId, CardSetInfo setInfo) {
-        super(ownderId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
+    public DonalHeraldOfWings(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
 
         this.addSuperType(SuperType.LEGENDARY);
 
@@ -108,12 +108,12 @@ enum DonalHeraldOfWingsApplier implements StackObjectCopyApplier {
     @Override
     public void modifySpell(StackObject copiedSpell, Game game) {
         copiedSpell.addSubType(SubType.SPIRIT);
-        copiedSpell.getPower().modifyBaseValue(1);
-        copiedSpell.getToughness().modifyBaseValue(1);
+        copiedSpell.getPower().setModifiedBaseValue(1);
+        copiedSpell.getToughness().setModifiedBaseValue(1);
     }
 
     @Override
-    public MageObjectReferencePredicate getNextNewTargetType(int copyNumber) {
+    public MageObjectReferencePredicate getNextNewTargetType() {
         return null;
     }
 }

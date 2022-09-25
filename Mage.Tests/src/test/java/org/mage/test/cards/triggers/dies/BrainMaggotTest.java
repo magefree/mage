@@ -28,7 +28,6 @@ public class BrainMaggotTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Brain Maggot", 1);
         assertExileCount("Bloodflow Connoisseur", 1);
@@ -59,7 +58,6 @@ public class BrainMaggotTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Brain Maggot", 1);
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
@@ -84,7 +82,6 @@ public class BrainMaggotTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.DECLARE_ATTACKERS);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Mesmeric Fiend", 1);
         assertGraveyardCount(playerB, "Lightning Bolt", 1);

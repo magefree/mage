@@ -7,7 +7,7 @@ import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,8 +26,8 @@ public final class TestamentOfFaith extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
 
         // {X}: Testament of Faith becomes an X/X Wall creature with defender in addition to its other types until end of turn.
-        Ability ability = new SimpleActivatedAbility(new SetPowerToughnessSourceEffect(
-                ManacostVariableValue.REGULAR, Duration.EndOfTurn, SubLayer.SetPT_7b
+        Ability ability = new SimpleActivatedAbility(new SetBasePowerToughnessSourceEffect(
+                ManacostVariableValue.REGULAR, Duration.EndOfTurn, SubLayer.SetPT_7b, true
         ).setText("{this} becomes an X/X"), new VariableManaCost(VariableCostType.NORMAL));
         ability.addEffect(new TestamentOfFaithEffect());
         ability.addEffect(new GainAbilitySourceEffect(

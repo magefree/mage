@@ -33,15 +33,15 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
 public final class ThornmantleStriker extends CardImpl {
 
     private static final PermanentsOnBattlefieldCount elfCount
-            = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.ELF));
+            = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.ELF, "Elves you control"), null);
     private static final SignInversionDynamicValue negativeElfCount
             = new SignInversionDynamicValue(elfCount);
 
     public ThornmantleStriker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
 
-        this.subtype.add(SubType.ELF);
-        this.subtype.add(SubType.ROGUE);
+        this.subtype.add(SubType.ELF, SubType.ROGUE);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
@@ -51,8 +51,7 @@ public final class ThornmantleStriker extends CardImpl {
         ability.addTarget(new TargetPermanent());
 
         // • Target creature an opponent controls gets -X/-X until end of turn, where X is the number of Elves you control.
-        Mode mode = new Mode(new BoostTargetEffect(negativeElfCount, negativeElfCount, Duration.EndOfTurn, true
-        ).setText("Target creature an opponent controls gets -X/-X until end of turn, where X is the number of Elves you control"));
+        Mode mode = new Mode(new BoostTargetEffect(negativeElfCount, negativeElfCount, Duration.EndOfTurn));
         mode.addTarget(new TargetOpponentsCreaturePermanent());
 
         ability.addMode(mode);

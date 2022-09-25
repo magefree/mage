@@ -3,6 +3,7 @@ package mage.cards.b;
 import mage.abilities.Ability;
 import mage.abilities.costs.costadjusters.LegendaryCreatureCostAdjuster;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.ChannelAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.Card;
@@ -50,7 +51,8 @@ public final class BoseijuWhoEndures extends CardImpl {
         this.addAbility(new GreenManaAbility());
 
         // Channel — {1}{G}, Discard Boseiju, Who Endures: Destroy target artifact, enchantment, or nonbasic land an opponent controls. That player may search their library for a land card with a basic land type, put it onto the battlefield, then shuffle. This ability costs {1} less to activate for each legendary creature you control.
-        Ability ability = new ChannelAbility("{1}{G}", new BoseijuWhoEnduresEffect());
+        Ability ability = new ChannelAbility("{1}{G}", new DestroyTargetEffect());
+        ability.addEffect(new BoseijuWhoEnduresEffect());
         ability.addTarget(new TargetPermanent(filter));
         ability.setCostAdjuster(LegendaryCreatureCostAdjuster.instance);
         this.addAbility(ability.addHint(LegendaryCreatureCostAdjuster.getHint()));
@@ -82,8 +84,7 @@ class BoseijuWhoEnduresEffect extends OneShotEffect {
 
     BoseijuWhoEnduresEffect() {
         super(Outcome.Benefit);
-        staticText = "destroy target artifact, enchantment, or nonbasic land an opponent controls. " +
-                "That player may search their library for a land card with a basic land type, " +
+        staticText = "That player may search their library for a land card with a basic land type, " +
                 "put it onto the battlefield, then shuffle. " +
                 "This ability costs {1} less to activate for each legendary creature you control";
     }
@@ -99,13 +100,11 @@ class BoseijuWhoEnduresEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (controller == null || permanent == null) {
+        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
+        if (permanent == null) {
             return false;
         }
         Player player = game.getPlayer(permanent.getControllerId());
-        permanent.destroy(source, game);
         if (!player.chooseUse(Outcome.PutCardInPlay, "Search your library for a land card?", source, game)) {
             return true;
         }

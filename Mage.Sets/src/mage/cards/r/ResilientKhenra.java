@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -26,14 +25,13 @@ public final class ResilientKhenra extends CardImpl {
     public ResilientKhenra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
 
-        this.subtype.add(SubType.JACKAL);
-        this.subtype.add(SubType.WIZARD);
+        this.subtype.add(SubType.JACKAL, SubType.WIZARD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // When Resilient Khenra enters the battlefield, you may have target creature get +X/+X until end of turn, where X is Resilient Khenra's power.
-        DynamicValue xValue = new SourcePermanentPowerCount();
-        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn, true), true);
+        DynamicValue xValue = new SourcePermanentPowerCount(false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn), true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

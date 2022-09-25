@@ -8,7 +8,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -20,7 +20,6 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.SoldierToken;
 
 /**
@@ -43,7 +42,7 @@ public final class BenalishCommander extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Benalish Commander's power and toughness are each equal to the number of Soldiers you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
 
         // Suspend X-{X}{W}{W}. X can't be 0.
         this.addAbility(new SuspendAbility(Integer.MAX_VALUE, new ManaCostsImpl<>("{W}{W}"), this, true));
@@ -66,6 +65,7 @@ class BenalishCommanderTriggeredAbility extends TriggeredAbilityImpl {
 
     public BenalishCommanderTriggeredAbility() {
         super(Zone.EXILED, new CreateTokenEffect(new SoldierToken()), false);
+        setTriggerPhrase("Whenever a time counter is removed from {this} while it's exiled, ");
     }
 
     public BenalishCommanderTriggeredAbility(final BenalishCommanderTriggeredAbility ability) {
@@ -86,10 +86,4 @@ class BenalishCommanderTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getData().equals(CounterType.TIME.getName()) && event.getTargetId().equals(this.getSourceId());
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a time counter is removed from {this} while it's exiled, " ;
-    }
-
 }

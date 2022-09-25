@@ -40,8 +40,6 @@ public class OnceUponATimeTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
-
         assertGraveyardCount(playerA, "Once Upon a Time", 1);
         assertTappedCount("Forest", true, 2);
         assertHandCount(playerA, "Silvercoat Lion", 1);
@@ -77,8 +75,6 @@ public class OnceUponATimeTest extends CardTestPlayerBase {
         
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Once Upon a Time", 1);
         assertGraveyardCount(playerB, "Once Upon a Time", 1);

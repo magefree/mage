@@ -74,6 +74,7 @@ class TravelingPlagueTriggeredAbility extends TriggeredAbilityImpl {
 
     public TravelingPlagueTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TravelingPlagueEffect(), false);
+        setTriggerPhrase("When enchanted creature leaves the battlefield, ");
     }
 
     public TravelingPlagueTriggeredAbility(final TravelingPlagueTriggeredAbility ability) {
@@ -93,21 +94,19 @@ class TravelingPlagueTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-            Permanent enchantedCreature = game.getPermanentOrLKIBattlefield(event.getTargetId());
-            Permanent travelingPlague = game.getPermanentOrLKIBattlefield(sourceId);
-            if (enchantedCreature != null
-                    && enchantedCreature.getAttachments().contains(travelingPlague.getId())) {
-                game.getState().setValue("travelingPlague" + sourceId, enchantedCreature);
-                return true;
-            }
+        if (zEvent.getFromZone() != Zone.BATTLEFIELD) {
+            return false;
         }
-        return false;
-    }
 
-    @Override
-    public String getTriggerPhrase() {
-        return "When enchanted creature leaves the battlefield, " ;
+        Permanent enchantedCreature = game.getPermanentOrLKIBattlefield(event.getTargetId());
+        Permanent travelingPlague = game.getPermanentOrLKIBattlefield(sourceId);
+        if (enchantedCreature == null
+                || !enchantedCreature.getAttachments().contains(travelingPlague.getId())) {
+            return false;
+        }
+
+        game.getState().setValue("travelingPlague" + sourceId, enchantedCreature);
+        return true;
     }
 }
 

@@ -154,11 +154,10 @@ public class StackAbilityView extends CardView {
                         stackObjectTarget = (StackObject) mo;
                     }
                     if (stackObjectTarget != null) {
-                        this.rules.add("<span color='green'><i>Targeted ability related to this card: " + game.getCard(stackObjectTarget.getSourceId()).getIdName());
+                        this.rules.add("<span color='green'><i>Target on stack: " + stackObjectTarget.getIdName());
                     }
                 }
             }
-
         }
     }
 

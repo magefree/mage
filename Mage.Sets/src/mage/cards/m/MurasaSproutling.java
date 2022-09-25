@@ -42,7 +42,7 @@ public final class MurasaSproutling extends CardImpl {
         // When Murasa Sproutling enters the battlefield, if it was kicked, return target card with a kicker ability from your graveyard to your hand.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect()),
-                KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, " +
+                KickedCondition.ONCE, "When {this} enters the battlefield, if it was kicked, " +
                 "return target card with a kicker ability from your graveyard to your hand."
         );
         ability.addTarget(new TargetCardInYourGraveyard(filter));

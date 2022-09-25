@@ -27,7 +27,6 @@ public class BeamsplitterMageTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, bsm, 0);
         assertPermanentCount(playerA, lion, 0);
@@ -50,7 +49,6 @@ public class BeamsplitterMageTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, bsm, 5, 5);
         assertPowerToughness(playerA, lion, 5, 5);

@@ -132,6 +132,7 @@ class RoomTriggeredAbility extends TriggeredAbilityImpl {
             this.addEffect(effect);
         }
         this.setRuleVisible(false);
+        setTriggerPhrase("When you enter this room, ");
     }
 
     RoomTriggeredAbility(DungeonRoom room, final RoomTriggeredAbility ability) {
@@ -163,10 +164,5 @@ class RoomTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return super.getRule() + " <i>(" + room.getName() + ")</i>";
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When you enter this room, ";
     }
 }

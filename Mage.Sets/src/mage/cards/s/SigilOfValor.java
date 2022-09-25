@@ -1,8 +1,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.common.AttacksAloneAttachedTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -10,19 +9,15 @@ import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
 /**
- * @author LevelX2
+ * @author awjackson
  */
 public final class SigilOfValor extends CardImpl {
 
@@ -31,10 +26,13 @@ public final class SigilOfValor extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Whenever equipped creature attacks alone, it gets +1/+1 until end of turn for each other creature you control.
-        this.addAbility(new SigilOfValorTriggeredAbility(new SigilOfValorCount()));
+        this.addAbility(new AttacksAloneAttachedTriggeredAbility(
+                new BoostTargetEffect(SigilOfValorCount.instance, SigilOfValorCount.instance, Duration.EndOfTurn),
+                AttachmentType.EQUIPMENT, false, SetTargetPointer.PERMANENT
+        ));
 
         // Equip {1}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(1));
     }
 
     private SigilOfValor(final SigilOfValor card) {
@@ -47,81 +45,32 @@ public final class SigilOfValor extends CardImpl {
     }
 }
 
-class SigilOfValorTriggeredAbility extends TriggeredAbilityImpl {
-
-    public SigilOfValorTriggeredAbility(DynamicValue boostValue) {
-        super(Zone.BATTLEFIELD, new BoostTargetEffect(boostValue, boostValue, Duration.EndOfTurn));
-    }
-
-    public SigilOfValorTriggeredAbility(final SigilOfValorTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SigilOfValorTriggeredAbility copy() {
-        return new SigilOfValorTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARED_ATTACKERS;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.isActivePlayer(getControllerId())) {
-            if (game.getCombat().attacksAlone()) {
-                Permanent equipment = game.getPermanent(getSourceId());
-                UUID attackerId = game.getCombat().getAttackers().get(0);
-                if (equipment != null
-                        && equipment.isAttachedTo(attackerId)) {
-                    this.getEffects().get(0).setTargetPointer(new FixedTarget(attackerId, game));
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever equipped creature attacks alone, it gets +1/+1 until end of turn for each other creature you control.";
-    }
-
-}
-
-class SigilOfValorCount implements DynamicValue {
-
-    public SigilOfValorCount() {
-    }
-
-    public SigilOfValorCount(final SigilOfValorCount dynamicValue) {
-        super();
-    }
+enum SigilOfValorCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Permanent equipment = game.getPermanent(sourceAbility.getSourceId());
-        if (equipment != null && equipment.getAttachedTo() != null) {
-            FilterPermanent filterPermanent = new FilterControlledCreaturePermanent();
-            filterPermanent.add(Predicates.not(new CardIdPredicate(equipment.getAttachedTo())));
-            return game.getBattlefield().count(filterPermanent, sourceAbility.getControllerId(), sourceAbility, game);
+        UUID attackerId = effect.getTargetPointer().getFirst(game, sourceAbility);
+        if (attackerId != null) {
+            FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+            filter.add(Predicates.not(new CardIdPredicate(attackerId)));
+            return game.getBattlefield().count(filter, sourceAbility.getControllerId(), sourceAbility, game);
         }
         return 0;
     }
 
     @Override
     public DynamicValue copy() {
-        return new SigilOfValorCount(this);
+        return instance;
     }
 
     @Override
     public String toString() {
-        return "X";
+        return "1";
     }
 
     @Override
     public String getMessage() {
-        return "";
+        return "other creature you control";
     }
 }

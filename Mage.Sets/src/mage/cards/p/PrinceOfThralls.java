@@ -54,6 +54,7 @@ class PrinceOfThrallsTriggeredAbility extends TriggeredAbilityImpl {
 
     PrinceOfThrallsTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        setTriggerPhrase("Whenever a permanent an opponent controls is put into a graveyard, ");
     }
 
     PrinceOfThrallsTriggeredAbility(final PrinceOfThrallsTriggeredAbility ability) {
@@ -83,11 +84,6 @@ class PrinceOfThrallsTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a permanent an opponent controls is put into a graveyard, " ;
     }
 }
 

@@ -9,7 +9,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -43,7 +43,7 @@ public final class ScourgeOfTheSkyclaves extends CardImpl {
 
         // Scourge of the Skyclaves's power and toughness are each equal to 20 minus the highest life total among players.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetPowerToughnessSourceEffect(
+                Zone.ALL, new SetBasePowerToughnessSourceEffect(
                 ScourgeOfTheSkyclavesValue.instance, Duration.EndOfGame
         ).setText("{this}'s power and toughness are each equal to 20 minus the highest life total among players.")));
     }

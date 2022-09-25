@@ -29,9 +29,9 @@ public class WelcomeToTheFoldTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Jace, Vryn's Prodigy", 1); // 0/2
         addCard(Zone.BATTLEFIELD, playerB, "Elite Vanguard", 1); // 2/1
                 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Welcome to the Fold");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Welcome to the Fold", true);
         addTarget(playerA, "Arashin Cleric"); // does not gain control
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Welcome to the Fold");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Welcome to the Fold", true);
         addTarget(playerA, "Jace, Vryn's Prodigy"); // gains control
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Welcome to the Fold");
         addTarget(playerA, "Elite Vanguard"); // gains control

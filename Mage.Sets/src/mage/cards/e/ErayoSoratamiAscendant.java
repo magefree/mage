@@ -59,6 +59,7 @@ class ErayoSoratamiAscendantTriggeredAbility extends TriggeredAbilityImpl {
 
     public ErayoSoratamiAscendantTriggeredAbility() {
         super(Zone.BATTLEFIELD, getFlipEffect(), false);
+        setTriggerPhrase("Whenever the fourth spell of a turn is cast, ");
     }
 
     private static Effect getFlipEffect() {
@@ -80,11 +81,6 @@ class ErayoSoratamiAscendantTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
         return watcher != null && watcher.getAmountOfSpellsAllPlayersCastOnCurrentTurn() == 4;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever the fourth spell of a turn is cast, " ;
     }
 
     @Override
@@ -120,6 +116,7 @@ class ErayosEssenceTriggeredAbility extends TriggeredAbilityImpl {
 
     public ErayosEssenceTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        setTriggerPhrase("Whenever an opponent casts a spell for the first time each turn, ");
     }
 
     public ErayosEssenceTriggeredAbility(final ErayosEssenceTriggeredAbility ability) {
@@ -143,11 +140,6 @@ class ErayosEssenceTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever an opponent casts a spell for the first time each turn, " ;
     }
 
     @Override

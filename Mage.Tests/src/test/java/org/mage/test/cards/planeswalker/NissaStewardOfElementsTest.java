@@ -23,7 +23,6 @@ public class NissaStewardOfElementsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         if (xValue == 0) {
             assertGraveyardCount(playerA, nissa, 1);

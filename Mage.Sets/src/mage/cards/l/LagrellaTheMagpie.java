@@ -66,7 +66,7 @@ public final class LagrellaTheMagpie extends CardImpl {
 class LagrellaTheMagpieEffect extends OneShotEffect {
 
     LagrellaTheMagpieEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Exile);
         staticText = "exile any number of other target creatures controlled by different players " +
                 "until {this} leaves the battlefield. When an exiled card enters the battlefield " +
                 "under your control this way, put two +1/+1 counters on it";
@@ -84,11 +84,7 @@ class LagrellaTheMagpieEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        // Like other Banishing Light effects, no permanents get exiled if Lagrella is not in the battlefield when this ability resolves.
-        if (game.getPermanent(source.getSourceId()) == null) {
+        if (player == null || source.getSourcePermanentIfItStillExists(game) == null) {
             return false;
         }
 

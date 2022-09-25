@@ -19,6 +19,7 @@ public final class ConstructRedToken extends TokenImpl {
         power = new MageInt(3);
         toughness = new MageInt(1);
         addAbility(HasteAbility.getInstance());
+        setOriginalExpansionSetCode("NEO");
     }
 
     @Override

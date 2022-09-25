@@ -28,7 +28,7 @@ public class TuvasaTheSunlitTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Burgeoning", 1);
         addCard(Zone.HAND, playerA, "Ajani's Welcome", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Burgeoning");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Burgeoning", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ajani's Welcome");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

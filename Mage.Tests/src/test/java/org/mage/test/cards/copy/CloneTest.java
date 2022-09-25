@@ -221,7 +221,6 @@ public class CloneTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Adaptive Automaton", 1);
         Permanent original = getPermanent("Adaptive Automaton", playerA);
@@ -277,9 +276,8 @@ public class CloneTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
-        
+
         assertPermanentCount(playerA, "Terastodon", 0);
         
         assertPermanentCount(playerA, "Ixidron", 1);

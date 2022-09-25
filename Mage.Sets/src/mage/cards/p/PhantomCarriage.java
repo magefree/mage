@@ -65,7 +65,7 @@ class PhantomCarriageEffect extends SearchEffect {
     }
 
     public PhantomCarriageEffect() {
-        super(new TargetCardInLibrary(StaticFilters.FILTER_CARD_CREATURE), Outcome.Neutral);
+        super(new TargetCardInLibrary(filter), Outcome.Neutral);
         staticText = "search your library for a card with flashback or disturb, put it into your graveyard, then shuffle";
     }
 
@@ -80,6 +80,7 @@ class PhantomCarriageEffect extends SearchEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        // TODO: create common effect for this
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             if (controller.searchLibrary(target, source, game)) {

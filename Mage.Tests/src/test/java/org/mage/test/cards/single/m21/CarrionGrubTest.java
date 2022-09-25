@@ -20,7 +20,6 @@ public class CarrionGrubTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA , 4);
 
@@ -35,7 +34,6 @@ public class CarrionGrubTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Carrion Grub", 4, 5);
 

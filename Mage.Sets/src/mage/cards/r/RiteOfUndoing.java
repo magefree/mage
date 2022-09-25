@@ -8,6 +8,7 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.target.common.TargetNonlandPermanent;
+import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
 
@@ -31,8 +32,7 @@ public final class RiteOfUndoing extends CardImpl {
         this.addAbility(new DelveAbility());
 
         // Return target nonland permanent you control and target nonland permanent you don't control to their owners' hands.
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect(true)
-                .setText("return target nonland permanent you control and target nonland permanent you don't control to their owners' hands"));
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect().setTargetPointer(new EachTargetPointer()));
         this.getSpellAbility().addTarget(new TargetNonlandPermanent(filterControlled));
         this.getSpellAbility().addTarget(new TargetNonlandPermanent(filterNotControlled));
     }

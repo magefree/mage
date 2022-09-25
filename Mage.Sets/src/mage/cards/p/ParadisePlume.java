@@ -55,6 +55,7 @@ class ParadisePlumeSpellCastTriggeredAbility extends TriggeredAbilityImpl {
 
     public ParadisePlumeSpellCastTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);
+        setTriggerPhrase("Whenever a player casts a spell of the chosen color, ");
     }
 
     public ParadisePlumeSpellCastTriggeredAbility(final ParadisePlumeSpellCastTriggeredAbility ability) {
@@ -82,10 +83,5 @@ class ParadisePlumeSpellCastTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public ParadisePlumeSpellCastTriggeredAbility copy() {
         return new ParadisePlumeSpellCastTriggeredAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a player casts a spell of the chosen color, " ;
     }
 }

@@ -233,7 +233,6 @@ public class SuspendTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(7, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -268,7 +267,6 @@ public class SuspendTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(7, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -311,7 +309,6 @@ public class SuspendTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(7, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -345,7 +342,6 @@ public class SuspendTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount(playerB, "Mox Tantalite", 1); // suspended
     }

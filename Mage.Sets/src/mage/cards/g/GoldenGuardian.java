@@ -105,6 +105,7 @@ class GoldenGuardianDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     public GoldenGuardianDelayedTriggeredAbility() {
         super(new GoldenGuardianReturnTransformedEffect(), Duration.EndOfTurn);
+        setTriggerPhrase("When {this} dies this turn, ");
     }
 
     public GoldenGuardianDelayedTriggeredAbility(final GoldenGuardianDelayedTriggeredAbility ability) {
@@ -124,11 +125,6 @@ class GoldenGuardianDelayedTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return ((ZoneChangeEvent) event).isDiesEvent() && event.getTargetId().equals(getSourceId());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When {this} dies this turn, " ;
     }
 }
 

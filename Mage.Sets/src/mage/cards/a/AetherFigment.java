@@ -36,7 +36,7 @@ public final class AetherFigment extends CardImpl {
         // If Aether Figment was kicked, it enters the battlefield with two +1/+1 counters on it
         Ability ability = new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
-                KickedCondition.instance,
+                KickedCondition.ONCE,
                 "If {this} was kicked, it enters the battlefield with two +1/+1 counters on it.",
                 "");
         this.addAbility(ability);

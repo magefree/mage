@@ -42,11 +42,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
     }
 
     public GainAbilityTargetEffect(Ability ability, Duration duration, String rule, boolean useOnCard) {
-        this(ability, duration, rule, useOnCard, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA);
-    }
-
-    public GainAbilityTargetEffect(Ability ability, Duration duration, String rule, boolean useOnCard, Layer layer, SubLayer subLayer) {
-        super(duration, layer, subLayer, ability.getEffects().getOutcome(ability, Outcome.AddAbility));
+        super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, ability.getEffects().getOutcome(ability, Outcome.AddAbility));
         this.ability = ability;
         this.staticText = rule;
         this.useOnCard = useOnCard;
@@ -159,6 +155,8 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
                         // start waiting a spell's permanent (example: Tyvar Kell's emblem)
                         Permanent perm = game.getPermanent(mor.getSourceId());
                         if (perm != null) {
+                            perm.addAbility(ability, source.getSourceId(), game);
+                            affectedTargets++;
                             newWaitingPermanents.add(new MageObjectReference(perm, game));
                             this.waitingCardPermanent = false;
                         }
@@ -209,27 +207,8 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-
-        if (mode.getTargets().size() > 0) {
-            Target target = mode.getTargets().get(0);
-            if (target.getMaxNumberOfTargets() == Integer.MAX_VALUE) {
-                sb.append("any number of target ").append(target.getTargetName()).append(" gain ");
-            } else if (target.getMaxNumberOfTargets() > 1) {
-                if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
-                    sb.append("up to ");
-                }
-                sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName()).append(" gain ");
-            } else {
-                if (!target.getTargetName().toLowerCase(Locale.ENGLISH).startsWith("another")) {
-                    sb.append("target ");
-                }
-                sb.append(target.getTargetName()).append(" gains ");
-            }
-        } else {
-            sb.append("gains ");
-        }
-
+        StringBuilder sb = new StringBuilder(getTargetPointer().describeTargets(mode.getTargets(), ""));
+        sb.append(getTargetPointer().isPlural(mode.getTargets()) ? " gain " : " gains ");
         sb.append(ability.getRule());
         if (durationPhaseStep != null) {
             sb.append(" until your next ").append(durationPhaseStep.toString().toLowerCase(Locale.ENGLISH));

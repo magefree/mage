@@ -55,6 +55,7 @@ class ShahOfNaarIsleTriggeredAbility extends TriggeredAbilityImpl {
 
     public ShahOfNaarIsleTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ShahOfNaarIsleEffect(), false);
+        setTriggerPhrase("When {this}'s echo cost is paid, ");
     }
 
     public ShahOfNaarIsleTriggeredAbility(final ShahOfNaarIsleTriggeredAbility effect) {
@@ -74,11 +75,6 @@ class ShahOfNaarIsleTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public ShahOfNaarIsleTriggeredAbility copy() {
         return new ShahOfNaarIsleTriggeredAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When {this}'s echo cost is paid, " ;
     }
 }
 

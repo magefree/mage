@@ -15,7 +15,7 @@ import mage.game.permanent.Permanent;
 import mage.game.turn.Phase;
 import mage.game.turn.TurnMod;
 
-import java.util.List;
+import java.util.Set;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -62,7 +62,7 @@ class IllusionistsGambitRemoveFromCombatEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<UUID> attackers = game.getCombat().getAttackers();
+        Set<UUID> attackers = game.getCombat().getAttackers();
         for (UUID attackerId : attackers) {
             Permanent creature = game.getPermanent(attackerId);
             if (creature != null) {
@@ -85,10 +85,10 @@ class IllusionistsGambitRemoveFromCombatEffect extends OneShotEffect {
 
 class IllusionistsGambitRequirementEffect extends RequirementEffect {
 
-    private List attackers;
+    private Set<UUID> attackers;
     private Phase phase;
 
-    public IllusionistsGambitRequirementEffect(List attackers, Phase phase) {
+    public IllusionistsGambitRequirementEffect(Set<UUID> attackers, Phase phase) {
         super(Duration.Custom);
         this.attackers = attackers;
         this.phase = phase;
@@ -135,10 +135,10 @@ class IllusionistsGambitRequirementEffect extends RequirementEffect {
 
 class IllusionistsGambitRestrictionEffect extends RestrictionEffect {
 
-    private final List attackers;
+    private final Set<UUID> attackers;
     private final Phase phase;
 
-    public IllusionistsGambitRestrictionEffect(List attackers, Phase phase) {
+    public IllusionistsGambitRestrictionEffect(Set<UUID> attackers, Phase phase) {
         super(Duration.Custom, Outcome.Benefit);
         this.attackers = attackers;
         this.phase = phase;

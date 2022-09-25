@@ -11,10 +11,14 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 /**
  * @author TheElk801
@@ -25,7 +29,7 @@ public class IcingdeathFrostTongueToken extends TokenImpl {
             = new FilterCreaturePermanent("creature defending player controls");
 
     static {
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(IcingdeathFrostTonguePredicate.instance);
     }
 
     public IcingdeathFrostTongueToken() {
@@ -59,5 +63,23 @@ public class IcingdeathFrostTongueToken extends TokenImpl {
     @Override
     public IcingdeathFrostTongueToken copy() {
         return new IcingdeathFrostTongueToken(this);
+    }
+}
+
+enum IcingdeathFrostTonguePredicate implements ObjectSourcePlayerPredicate<Permanent> {
+    instance;
+
+    @Override
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
+        return Optional.ofNullable(input.getSource().getSourcePermanentOrLKI(game))
+                .map(Permanent::getAttachedTo)
+                .map(uuid -> game.getCombat().getDefendingPlayerId(uuid, game))
+                .map(input.getObject()::isControlledBy)
+                .orElse(false);
+    }
+
+    @Override
+    public String toString() {
+        return "";
     }
 }

@@ -17,14 +17,11 @@ import java.util.UUID;
  */
 public final class MightOfAlara extends CardImpl {
 
-
     public MightOfAlara(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");
 
         // Domain - Target creature gets +1/+1 until end of turn for each basic land type among lands you control.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(
-                DomainValue.REGULAR, DomainValue.REGULAR, Duration.EndOfTurn, true
-        ));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(DomainValue.REGULAR, DomainValue.REGULAR, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addHint(DomainHint.instance);
         this.getSpellAbility().setAbilityWord(AbilityWord.DOMAIN);

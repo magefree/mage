@@ -23,7 +23,6 @@ public class BasrisSolidarityTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, "Savannah Lions", CounterType.P1P1, 1);
         assertCounterCount(playerA, "Scryb Sprites", CounterType.P1P1, 1);

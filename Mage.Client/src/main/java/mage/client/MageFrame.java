@@ -67,11 +67,13 @@ import javax.swing.event.PopupMenuListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.SocketException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.*;
 import java.util.concurrent.Executors;
@@ -191,6 +193,19 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
      * Creates new form MageFrame
      */
     public MageFrame() throws MageException {
+        File cacertsFile = new File(System.getProperty("user.dir") + "/release/cacerts").getAbsoluteFile();
+        if (!cacertsFile.exists()) { // When running from the jar file the contents of the /release folder will have been expanded into the home folder as part of packaging
+            cacertsFile = new File(System.getProperty("user.dir") + "/cacerts").getAbsoluteFile();
+        }
+        if (cacertsFile.exists()) {
+            LOGGER.info("Custom (or bundled) Java certificate file (cacerts) file found");
+            String cacertsPath = cacertsFile.getPath();
+            System.setProperty("javax.net.ssl.trustStore", cacertsPath);
+            System.setProperty("javax.net.ssl.trustStorePassword", "changeit");
+        } else {
+            LOGGER.info("custom Java certificate file not found at: " + cacertsFile.getAbsolutePath());
+        }
+
         setWindowTitle();
 
         EDTExceptionHandler.registerExceptionHandler();
@@ -346,10 +361,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             setWindowTitle();
         });
 
-        if (SystemUtil.isMacOSX()) {
-            SystemUtil.enableMacOSFullScreenMode(this);
+        if (MacFullscreenUtil.isMacOSX()) {
+            MacFullscreenUtil.enableMacOSFullScreenMode(this);
             if (fullscreenMode) {
-                SystemUtil.toggleMacOSFullScreenMode(this);
+                MacFullscreenUtil.toggleMacOSFullScreenMode(this);
             }
         }
     }

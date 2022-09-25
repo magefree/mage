@@ -7,6 +7,7 @@ import mage.counters.CounterType;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
+
 import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
 
 /**
@@ -32,8 +33,6 @@ public class CrypticTrilobiteTest extends CardTestPlayerBase {
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Cryptic Trilobite", 1);
         
@@ -57,7 +56,7 @@ public class CrypticTrilobiteTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 10);
         
         
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cryptic Trilobite");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cryptic Trilobite", true);
         setChoice(playerA, "X=5");
         
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}:");
@@ -65,8 +64,6 @@ public class CrypticTrilobiteTest extends CardTestPlayerBase {
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Cryptic Trilobite", 1);
         assertCounterCount(playerA, "Cryptic Trilobite", CounterType.P1P1, 3);
@@ -101,8 +98,6 @@ public class CrypticTrilobiteTest extends CardTestPlayerBase {
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Cryptic Trilobite", 1);
         assertCounterCount(playerA, "Cryptic Trilobite", CounterType.P1P1, 5);                        

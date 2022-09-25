@@ -1,11 +1,10 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.SpliceOntoArcaneAbility;
+import mage.abilities.keyword.SpliceAbility;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -31,11 +30,11 @@ public final class Reweave extends CardImpl {
 
         // Target permanent's controller sacrifices it. If they do, that player reveals cards from the top of their library until they reveal a permanent card that shares a card type with the sacrificed permanent, puts that card onto the battlefield, then shuffles their library.
         this.getSpellAbility().addEffect(new ReweaveEffect());
-        Target target = new TargetPermanent();
+        Target target = new TargetPermanent().withChooseHint("Reweave");
         this.getSpellAbility().addTarget(target);
 
         // Splice onto Arcane {2}{U}{U}
-        this.addAbility(new SpliceOntoArcaneAbility("{2}{U}{U}"));
+        this.addAbility(new SpliceAbility(SpliceAbility.ARCANE, "{2}{U}{U}"));
     }
 
     private Reweave(final Reweave card) {

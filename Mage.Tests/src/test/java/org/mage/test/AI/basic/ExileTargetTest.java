@@ -31,7 +31,6 @@ public class ExileTargetTest extends CardTestCommander4Players {
         //setStrictChooseMode(true); // disable strict mode to activate AI for choosing
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerC, "Balduvian Bears", 0);
     }

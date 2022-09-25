@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.abilities.keyword.CrewAbility;
 import mage.abilities.keyword.ScavengeAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -39,7 +39,7 @@ public final class DodgyJalopy extends CardImpl {
 
         // Dodgy Jalopy's power is equal to the highest mana value among creatures you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetPowerSourceEffect(DodgyJalopyValue.instance, Duration.EndOfGame)
+                Zone.ALL, new SetBasePowerSourceEffect(DodgyJalopyValue.instance, Duration.EndOfGame)
         ));
 
         // Crew 3

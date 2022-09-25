@@ -64,6 +64,7 @@ class FaldornDreadWolfHeraldTriggeredAbility extends TriggeredAbilityImpl {
 
     FaldornDreadWolfHeraldTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new WolfToken()));
+        setTriggerPhrase("Whenever you cast a spell from exile or a land enters the battlefield under your control from exile, ");
     }
 
     private FaldornDreadWolfHeraldTriggeredAbility(final FaldornDreadWolfHeraldTriggeredAbility ability) {
@@ -98,10 +99,5 @@ class FaldornDreadWolfHeraldTriggeredAbility extends TriggeredAbilityImpl {
                         .equals(Zone.EXILED);
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you cast a spell from exile or a land enters the battlefield under your control from exile, ";
     }
 }

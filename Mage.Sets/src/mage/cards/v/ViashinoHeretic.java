@@ -54,6 +54,7 @@ class ViashinoHereticEffect extends OneShotEffect {
 
     public ViashinoHereticEffect() {
         super(Outcome.DestroyPermanent);
+        this.staticText = "Destroy target artifact. Viashino Heretic deals damage to that artifact's controller equal to the artifact's mana value";
     }
 
     public ViashinoHereticEffect(final ViashinoHereticEffect effect) {
@@ -79,10 +80,5 @@ class ViashinoHereticEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Destroy target artifact. Viashino Heretic deals damage to that artifact's controller equal to the artifact's mana value";
     }
 }

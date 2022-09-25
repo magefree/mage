@@ -65,7 +65,7 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
         // activate splice: yes -> card with splice ability -> new target for spliced ability
         setChoice(playerA, true);
         addTarget(playerA, "Torrent of Stone");
-        addTarget(playerA, "Silvercoat Lion"); // target for spliced ability: 4 damage
+        // Silvercoat Lion is auto-chosen is only possible target
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
