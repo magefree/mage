@@ -21,9 +21,7 @@ import mage.players.Player;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 import mage.util.CardUtil;
 
-import java.util.Iterator;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author TheElk801
@@ -89,8 +87,12 @@ class JayaFieryNegotiatorExileEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 2));
         Card card;
-        if (cards.size() < 2) {
+
+        if (cards.size() == 0) {
+            return false;
+        } else if (cards.size() == 1) {
             card = cards.getRandom(game);
+            player.moveCardsToExile(card, source, game, true, CardUtil.getExileZoneId(game, source), "Jaya, Fiery Negotiator");
         } else {
             Iterator<Card> iterator = cards.getCards(game).iterator();
             Card card1 = iterator.next();
@@ -99,6 +101,11 @@ class JayaFieryNegotiatorExileEffect extends OneShotEffect {
                     outcome, "Choose a card to play this turn", null,
                     card1.getName(), card2.getName(), source, game
             ) ? card1 : card2;
+
+            Set<Card> exileCards = new HashSet<>(2);
+            exileCards.add(card1);
+            exileCards.add(card2);
+            player.moveCardsToExile(exileCards, source, game, true, CardUtil.getExileZoneId(game, source), "Jaya, Fiery Negotiator");
         }
         if (card != null) {
             CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, false);

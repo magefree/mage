@@ -76,6 +76,17 @@ class LordXanderTheCollectorEffect extends OneShotEffect {
     LordXanderTheCollectorEffect(LordXanderTheCollectorEffectType LordXanderTheCollectorEffectType) {
         super(Outcome.Benefit);
         this.effectType = LordXanderTheCollectorEffectType;
+        switch (effectType) {
+            case DISCARD:
+                this.staticText = "target opponent discards half the cards in their hand, rounded down";
+                break;
+            case MILL:
+                this.staticText = "defending player mills half their library, rounded down";
+                break;
+            case SACRIFICE:
+                this.staticText = "target opponent sacrifices half the nonland permanents they control, rounded down";
+                break;
+        }
     }
 
     private LordXanderTheCollectorEffect(final LordXanderTheCollectorEffect effect) {
@@ -131,18 +142,5 @@ class LordXanderTheCollectorEffect extends OneShotEffect {
                 return true;
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        switch (effectType) {
-            case DISCARD:
-                return "target opponent discards half the cards in their hand, rounded down";
-            case MILL:
-                return "defending player mills half their library, rounded down";
-            case SACRIFICE:
-                return "target opponent sacrifices half the nonland permanents they control, rounded down";
-        }
-        return "";
     }
 }

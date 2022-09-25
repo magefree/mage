@@ -8,6 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.SaprolingToken;
@@ -18,18 +19,11 @@ import mage.game.permanent.token.SaprolingToken;
  */
 public final class GolgariGermination extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature you control");
-    
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(TokenPredicate.FALSE);
-    }    
-    
     public GolgariGermination(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{G}");
 
         // Whenever a nontoken creature you control dies, create a 1/1 green Saproling creature token.
-        this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new SaprolingToken()), false, filter));
+        this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new SaprolingToken()), false, StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN));
     }
 
     private GolgariGermination(final GolgariGermination card) {

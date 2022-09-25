@@ -52,7 +52,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -81,7 +80,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -105,7 +103,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -135,7 +132,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20 - 6); // creature life pay instead mana
     }
@@ -166,7 +162,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -195,7 +190,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -225,7 +219,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -252,7 +245,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         Assert.assertEquals(3, getHandCards(playerA).size());
 
@@ -286,7 +278,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         // possible bug: duplicated abilities list in main card
         Assert.assertEquals("must have only 2 play abilities", 2, playerA.getPlayable(currentGame, true).size());
@@ -329,7 +320,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Snapcaster Mage", 1);
     }
@@ -349,7 +339,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         Card card = currentGame.getState().getBattlefield().getAllPermanents()
                 .stream()
@@ -382,7 +371,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         Card card = currentGame.getState().getBattlefield().getAllPermanents()
@@ -422,7 +410,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         Card card = currentGame.getState().getExile().getAllCards(currentGame)
                 .stream()
@@ -474,7 +461,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -513,7 +499,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -553,7 +538,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -591,7 +575,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -629,7 +612,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -657,7 +639,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -678,7 +659,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Balduvian Bears", 2);
     }
@@ -712,7 +692,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(5, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Balduvian Bears", 2);
     }
@@ -752,7 +731,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Akoum Warrior", 1);
     }
@@ -773,7 +751,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20 + 2); // +2 from 1 etb trigger
     }
@@ -798,7 +775,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -829,7 +805,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Valki, God of Lies", 1);
     }
@@ -861,7 +836,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "The Omenkeel", 1);
     }
@@ -879,7 +853,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Valki, God of Lies", 1);
         assertPermanentCount(playerA, "Servo Token", 3);
@@ -898,7 +871,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "The Omenkeel", 1);
         assertPermanentCount(playerA, "Servo Token", 3);
@@ -928,7 +900,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -955,7 +926,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -978,7 +948,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -1004,7 +973,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Valki, God of Lies", 0);
         assertPermanentCount(playerA, "Birgi, God of Storytelling", 1);
@@ -1036,6 +1004,5 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 }

@@ -8,7 +8,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -45,7 +45,7 @@ public final class AbominableTreefolk extends CardImpl {
 
         // Abominable Treefolk's power and toughness are each equal to the number of snow permanents you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetPowerToughnessSourceEffect(xValue, Duration.EndOfGame)
+                Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue, Duration.EndOfGame)
         ));
 
         // When Abominable Treefolk enters the battlefield, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.

@@ -33,8 +33,7 @@ public final class BalduvianWarlord extends CardImpl {
 
     public BalduvianWarlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.BARBARIAN);
+        this.subtype.add(SubType.HUMAN, SubType.BARBARIAN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
@@ -152,6 +151,7 @@ class BalduvianWarlordUnblockEffect extends OneShotEffect {
                                 );
                             }
                             game.fireEvent(new BlockerDeclaredEvent(chosenPermanent.getId(), permanent.getId(), permanent.getControllerId()));
+                            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKS, permanent.getId(), source, null));
                         }
                         CombatGroup blockGroup = findBlockingGroup(permanent, game); // a new blockingGroup is formed, so it's necessary to find it again
                         if (blockGroup != null) {

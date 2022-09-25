@@ -30,7 +30,6 @@ public class ConniveTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Hypnotic Grifter", 1, 2); // Discarded a land card
         assertHandCount(playerA, 1); // 1 from drawing at start of turn
@@ -56,7 +55,6 @@ public class ConniveTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Hypnotic Grifter", 2, 3); // Discarded a non-land
         assertHandCount(playerA, 1); // 1 from drawing at start of turn
@@ -86,7 +84,6 @@ public class ConniveTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Hypnotic Grifter", 2, 3); // Discarded a non-land
         assertHandCount(playerA, 1); // 1 from drawing at start of turn
@@ -130,7 +127,6 @@ public class ConniveTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
 
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerB, "Crazed Goblin", 1, 1); // Discarded only lands
         assertGraveyardCount(playerB, "Plains", 3);
@@ -172,7 +168,6 @@ public class ConniveTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
 
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 1); // Drew a card at start of turn
         assertHandCount(playerB, "Sol Ring", 1); // Returned by Psychic Pickpocket's ability

@@ -33,7 +33,7 @@ public final class KavuAggressor extends CardImpl {
         this.addAbility(new CantBlockAbility());
         // If Kavu Aggressor was kicked, it enters the battlefield with a +1/+1 counter on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
-            KickedCondition.instance, "If {this} was kicked, it enters the battlefield with a +1/+1 counter on it.", ""));
+            KickedCondition.ONCE, "If {this} was kicked, it enters the battlefield with a +1/+1 counter on it.", ""));
     }
 
     private KavuAggressor(final KavuAggressor card) {

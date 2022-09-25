@@ -27,7 +27,6 @@ public class PowerWordKillTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
         assertGraveyardCount(playerB, "Grizzly Bears", 1);
     }
 

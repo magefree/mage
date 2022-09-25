@@ -118,8 +118,8 @@ class ShapeshifterContinuousEffect extends ContinuousEffectImpl {
         String lastChosen = (String) game.getState().getValue(source.getSourceId().toString() + "_Shapeshifter");
         if (permanent != null && lastChosen != null) {
             int lastChosenNumber = Integer.parseInt(lastChosen);
-            permanent.getPower().modifyBaseValue(lastChosenNumber);
-            permanent.getToughness().modifyBaseValue(7 - lastChosenNumber);
+            permanent.getPower().setModifiedBaseValue(lastChosenNumber);
+            permanent.getToughness().setModifiedBaseValue(7 - lastChosenNumber);
             return true;
         }
         return false;

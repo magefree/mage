@@ -1,6 +1,7 @@
 package mage.cards.m;
 
 import mage.abilities.Ability;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.RollDieWithResultTableEffect;
 import mage.abilities.effects.common.SacrificeEffect;
@@ -16,6 +17,7 @@ import mage.filter.predicate.permanent.GreatestPowerControlledPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -78,16 +80,19 @@ class MyrkulsEdictEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        TargetOpponent target = new TargetOpponent(true);
+        if (!target.choose(outcome, source.getControllerId(), source.getId(), source, game)) {
             return false;
         }
-        TargetOpponent target = new TargetOpponent();
-        target.setNotTarget(true);
-        player.choose(outcome, target, source, game);
-        return game.getPlayer(target.getFirstTarget()) != null
-                && new SacrificeEffect(
-                StaticFilters.FILTER_PERMANENT_CREATURE, 1, ""
-        ).apply(game, source);
+
+        Player opponent = game.getPlayer(target.getFirstTarget());
+        if (opponent == null) {
+            return false;
+        }
+
+        Effect sacrificeEffect = new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "");
+        sacrificeEffect.setTargetPointer(new FixedTarget(opponent.getId()));
+
+        return sacrificeEffect.apply(game, source);
     }
 }

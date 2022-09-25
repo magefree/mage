@@ -3,8 +3,8 @@ package mage.abilities.common;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -15,14 +15,14 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class BecomesBlockedAllTriggeredAbility extends TriggeredAbilityImpl {
 
-    private final FilterCreaturePermanent filter;
+    private final FilterPermanent filter;
     private final boolean setTargetPointer;
 
     public BecomesBlockedAllTriggeredAbility(Effect effect, boolean optional) {
         this(effect, optional, StaticFilters.FILTER_PERMANENT_A_CREATURE, false);
     }
 
-    public BecomesBlockedAllTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter, boolean setTargetPointer) {
+    public BecomesBlockedAllTriggeredAbility(Effect effect, boolean optional, FilterPermanent filter, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;

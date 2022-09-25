@@ -18,7 +18,6 @@ public class DecayedTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, "Falcon Abomination", 1);
         assertPermanentCount(playerA, "Zombie Token", 0);
     }
@@ -40,7 +39,6 @@ public class DecayedTest extends CardTestPlayerBase {
         setStopAt(5, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, "Gisa, Glorious Resurrector", 1);
         assertPermanentCount(playerA, "Grizzly Bears", 0);
         assertPermanentCount(playerB, "Grizzly Bears", 0);

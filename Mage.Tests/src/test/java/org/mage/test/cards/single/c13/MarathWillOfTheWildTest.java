@@ -73,6 +73,5 @@ public class MarathWillOfTheWildTest extends CardTestCommanderDuelBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
     }
 }

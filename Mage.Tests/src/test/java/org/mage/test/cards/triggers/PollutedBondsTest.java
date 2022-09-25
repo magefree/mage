@@ -16,7 +16,6 @@ public class PollutedBondsTest extends CardTestPlayerBase {
         playLand(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Forest");
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertLife(playerA, 22);
         assertLife(playerB, 18);
     }
@@ -28,7 +27,6 @@ public class PollutedBondsTest extends CardTestPlayerBase {
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest");
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertLife(playerA, 20);
         assertLife(playerB, 20);
     }

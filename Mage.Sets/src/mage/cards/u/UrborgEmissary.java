@@ -34,7 +34,7 @@ public final class UrborgEmissary extends CardImpl {
         // When Urborg Emissary enters the battlefield, if it was kicked, return target permanent to its owner's hand.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
         ability.addTarget(new TargetPermanent());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.instance,
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.ONCE,
             "When {this} enters the battlefield, if it was kicked, return target permanent to its owner's hand."));
     }
 

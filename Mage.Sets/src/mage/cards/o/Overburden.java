@@ -9,6 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -19,13 +20,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
  */
 public final class Overburden extends CardImpl {
 
-    private static final FilterCreaturePermanent ENTERS_BATTLEFIELD_FILTER = new FilterCreaturePermanent("a nontoken creature");
-
     private static final FilterControlledLandPermanent RETURN_FILTER = new FilterControlledLandPermanent("a land");
-
-    static {
-        ENTERS_BATTLEFIELD_FILTER.add(TokenPredicate.FALSE);
-    }
 
     public Overburden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
@@ -34,7 +29,7 @@ public final class Overburden extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new ReturnToHandChosenPermanentEffect(RETURN_FILTER),
-                ENTERS_BATTLEFIELD_FILTER,
+                StaticFilters.FILTER_CREATURE_NON_TOKEN,
                 false,
                 SetTargetPointer.PLAYER,
                 "Whenever a player puts a nontoken creature onto the battlefield,"

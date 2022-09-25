@@ -178,6 +178,7 @@ class FalseOrdersUnblockEffect extends OneShotEffect {
                 );
             }
             game.fireEvent(new BlockerDeclaredEvent(chosenPermanent.getId(), permanent.getId(), permanent.getControllerId()));
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKS, permanent.getId(), source, null));
         }
         CombatGroup blockGroup = findBlockingGroup(permanent, game); // a new blockingGroup is formed, so it's necessary to find it again
         if (blockGroup != null) {

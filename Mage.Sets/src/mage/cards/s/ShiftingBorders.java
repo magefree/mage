@@ -1,8 +1,7 @@
-
 package mage.cards.s;
 
 import mage.abilities.effects.common.continuous.ExchangeControlTargetEffect;
-import mage.abilities.keyword.SpliceOntoArcaneAbility;
+import mage.abilities.keyword.SpliceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,10 +23,10 @@ public final class ShiftingBorders extends CardImpl {
 
         // Exchange control of two target lands.
         this.getSpellAbility().addEffect(new ExchangeControlTargetEffect(Duration.EndOfGame, "Exchange control of two target lands"));
-        this.getSpellAbility().addTarget(new TargetLandPermanent(2));
+        this.getSpellAbility().addTarget(new TargetLandPermanent(2).withChooseHint("exchange control"));
 
         // Splice onto Arcane {3}{U}
-        this.addAbility(new SpliceOntoArcaneAbility("{3}{U}"));
+        this.addAbility(new SpliceAbility(SpliceAbility.ARCANE, "{3}{U}"));
     }
 
     private ShiftingBorders(final ShiftingBorders card) {

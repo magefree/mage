@@ -21,7 +21,6 @@ public class HorobiDeathsWailTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Animate Dead", "Horobi, Death's Wail");
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, "Horobi, Death's Wail", 1);
 
     }

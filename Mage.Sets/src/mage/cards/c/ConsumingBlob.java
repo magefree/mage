@@ -5,13 +5,18 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.AdditiveDynamicValue;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.ConsumingBlobOozeToken;
 
@@ -22,6 +27,9 @@ import java.util.UUID;
  */
 public final class ConsumingBlob extends CardImpl {
 
+    private static final DynamicValue powerValue = CardTypesInGraveyardCount.YOU;
+    private static final DynamicValue toughnessValue = new AdditiveDynamicValue(powerValue, StaticValue.get(1));
+
     public ConsumingBlob(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         
@@ -30,7 +38,11 @@ public final class ConsumingBlob extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Consuming Blob's power is equal to the number of card types among cards in your graveyard and its toughness is equal to that number plus 1.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new ConsumingBlobEffect()).addHint(CardTypesInGraveyardHint.YOU));
+        this.addAbility(new SimpleStaticAbility(
+                Zone.ALL,
+                new SetBasePowerToughnessSourceEffect(powerValue, toughnessValue, Duration.EndOfGame, SubLayer.CharacteristicDefining_7a, false)
+                        .setText("{this}'s power is equal to the number of creature cards in all graveyards and its toughness is equal to that number plus 1")
+        ));
 
         // At the beginning of your end step, create a green Ooze creature token with "This creature's power is equal to the number of card types among cards in your graveyard and its toughness is equal to that number plus 1".
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
@@ -45,34 +57,5 @@ public final class ConsumingBlob extends CardImpl {
     @Override
     public ConsumingBlob copy() {
         return new ConsumingBlob(this);
-    }
-}
-
-class ConsumingBlobEffect extends ContinuousEffectImpl {
-
-    public ConsumingBlobEffect() {
-        super(Duration.EndOfGame, Layer.PTChangingEffects_7, SubLayer.CharacteristicDefining_7a, Outcome.BoostCreature);
-        staticText = "{this}'s power is equal to the number of card types among cards in your graveyard and its toughness is equal to that number plus 1";
-    }
-
-    public ConsumingBlobEffect(final ConsumingBlobEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ConsumingBlobEffect copy() {
-        return new ConsumingBlobEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        MageObject target = source.getSourceObject(game);
-        if (target == null) {
-            return false;
-        }
-        int number = CardTypesInGraveyardCount.YOU.calculate(game, source, this);
-        target.getPower().setValue(number);
-        target.getToughness().setValue(number + 1);
-        return true;
     }
 }

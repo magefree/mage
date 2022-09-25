@@ -105,8 +105,8 @@ class ToxrillTheCorrosiveEffect extends ContinuousEffectImpl {
                 source.getControllerId(), source, game
         )) {
             int counter = permanent.getCounters(game).getCount(CounterType.SLIME);
-            permanent.getPower().boostValue(-counter);
-            permanent.getToughness().boostValue(-counter);
+            permanent.getPower().increaseBoostedValue(-counter);
+            permanent.getToughness().increaseBoostedValue(-counter);
         }
         return true;
     }

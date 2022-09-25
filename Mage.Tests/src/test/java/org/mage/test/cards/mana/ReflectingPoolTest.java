@@ -33,6 +33,8 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crumbling Vestige");
         setChoice(playerA, "Red");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

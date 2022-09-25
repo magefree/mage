@@ -182,7 +182,6 @@ public class DoublingSeasonTest extends CardTestPlayerBase {
 
         try {
             execute();
-            assertAllCommandsUsed();
 
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
@@ -235,7 +234,6 @@ public class DoublingSeasonTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, "Chandra, Fire Artisan", CounterType.LOYALTY, 4 + 1);
     }
@@ -250,7 +248,6 @@ public class DoublingSeasonTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, "Chandra, Fire Artisan", CounterType.LOYALTY, 4 + (1 + 1) * 2);
     }
@@ -271,8 +268,6 @@ public class DoublingSeasonTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Zombie Token", 2);
     }

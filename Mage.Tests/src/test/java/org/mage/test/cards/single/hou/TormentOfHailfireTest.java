@@ -74,8 +74,6 @@ public class TormentOfHailfireTest extends CardTestMultiPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-        
         assertGraveyardCount(playerA, "Torment of Hailfire", 1);
         
         assertLife(playerA, 20);

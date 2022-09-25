@@ -44,6 +44,7 @@ class SpellSyphonEffect extends OneShotEffect {
 
     public SpellSyphonEffect() {
         super(Outcome.Benefit);
+        this.staticText = "Counter target spell unless its controller pays {1} for each card in your hand";
     }
 
     public SpellSyphonEffect(final SpellSyphonEffect effect) {
@@ -76,10 +77,4 @@ class SpellSyphonEffect extends OneShotEffect {
         }
         return false;
     }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Counter target spell unless its controller pays {1} for each card in your hand";
-    }
-
 }

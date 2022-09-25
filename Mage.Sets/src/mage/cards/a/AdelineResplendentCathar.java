@@ -7,7 +7,7 @@ import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.abilities.hint.common.CreaturesYouControlHint;
 import mage.constants.*;
 import mage.abilities.keyword.VigilanceAbility;
@@ -35,7 +35,7 @@ public final class AdelineResplendentCathar extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Adeline, Resplendent Cathar's power is equal to the number of creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerSourceEffect(
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(
                 CreaturesYouControlCount.instance, Duration.EndOfGame)).addHint(CreaturesYouControlHint.instance)
         );
 

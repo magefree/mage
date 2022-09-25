@@ -15,8 +15,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterNonlandPermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 /**
@@ -24,12 +23,6 @@ import mage.target.TargetPermanent;
  * @author fireshoes
  */
 public final class AngelOfSanctions extends CardImpl {
-
-    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent();
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public AngelOfSanctions(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
@@ -42,8 +35,8 @@ public final class AngelOfSanctions extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Angel of Sanctions enters the battlefield, you may exile target nonland permanent an opponent controls until Angel of Sanctions leaves the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect(filter.getMessage()));
-        ability.addTarget(new TargetPermanent(filter));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect(), true);
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_NON_LAND));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);
 

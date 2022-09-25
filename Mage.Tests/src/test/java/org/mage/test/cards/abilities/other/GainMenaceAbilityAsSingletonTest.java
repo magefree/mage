@@ -49,7 +49,6 @@ public class GainMenaceAbilityAsSingletonTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         Permanent permanent = getPermanent("Minotaur", playerA);
         Assert.assertEquals("must have only 1 Menace instance", 1, permanent.getAbilities(currentGame).stream()

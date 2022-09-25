@@ -505,6 +505,7 @@ public class ScryfallImageSupportCards {
             add("VOC"); // Crimson Vow Commander
             add("Y22"); // Alchemy: Innistrad
             add("DBL"); // Innistrad: Double Feature
+            add("CC2"); // Commander Collection: Black
             add("NEO"); // Kamigawa: Neon Dynasty
             add("NEC"); // Neon Dynasty Commander
             add("SNC"); // Streets of New Capenna
@@ -515,6 +516,7 @@ public class ScryfallImageSupportCards {
             add("DMU"); // Dominaria United
             add("DMC"); // Dominaria United Commander
             add("40K"); // Warhammer 40,000
+            add("GN3"); // Game Night 2022
         }
     };
 

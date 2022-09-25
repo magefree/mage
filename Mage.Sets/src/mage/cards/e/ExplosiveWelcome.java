@@ -23,7 +23,8 @@ public final class ExplosiveWelcome extends CardImpl {
     private static final FilterCreaturePlayerOrPlaneswalker filter = new FilterCreaturePlayerOrPlaneswalker();
 
     static {
-        filter.add(new AnotherTargetPredicate(2));
+        filter.getPermanentFilter().add(new AnotherTargetPredicate(2));
+        filter.getPlayerFilter().add(new AnotherTargetPredicate(2));
     }
 
     public ExplosiveWelcome(UUID ownerId, CardSetInfo setInfo) {

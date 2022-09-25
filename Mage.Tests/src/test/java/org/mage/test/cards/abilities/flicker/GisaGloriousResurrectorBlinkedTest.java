@@ -29,7 +29,6 @@ public class GisaGloriousResurrectorBlinkedTest extends CardTestPlayerBase {
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         // should be under playerA control
         assertPermanentCount(playerA, "Memnite", 1);
@@ -53,7 +52,6 @@ public class GisaGloriousResurrectorBlinkedTest extends CardTestPlayerBase {
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         // exiled Memnite stays in exile zone
         assertPermanentCount(playerA, "Memnite", 0);

@@ -10,7 +10,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -45,7 +45,7 @@ public final class JaggedScarArchers extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Jagged-Scar Archers's power and toughness are each equal to the number of Elves you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(controlledElvesFilter), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(controlledElvesFilter), Duration.EndOfGame)));
         // {tap}: Jagged-Scar Archers deals damage equal to its power to target creature with flying.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new SourcePermanentPowerCount()).setText("{this} deals damage equal to its power to target creature with flying"), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(flyingCreatureFilter));

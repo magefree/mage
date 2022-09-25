@@ -18,7 +18,6 @@ public class ChandrasMagmuttTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 19);
     }
@@ -36,7 +35,6 @@ public class ChandrasMagmuttTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount("Basri Ket", CounterType.LOYALTY, 2);
     }

@@ -51,6 +51,6 @@ enum MagmaBurstAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        ability.addTarget(new TargetAnyTarget(KickedCondition.instance.apply(game, ability) ? 2 : 1));
+        ability.addTarget(new TargetAnyTarget(KickedCondition.ONCE.apply(game, ability) ? 2 : 1));
     }
 }

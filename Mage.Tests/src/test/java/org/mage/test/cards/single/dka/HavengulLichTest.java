@@ -27,7 +27,9 @@ public class HavengulLichTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Prodigal Pyromancer");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}", "Prodigal Pyromancer");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Prodigal Pyromancer");
+
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: {this} deals", playerB);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -71,6 +73,7 @@ public class HavengulLichTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Prodigal Pyromancer");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: You may", "Prodigal Pyromancer");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Prodigal Pyromancer");
 
         // Havengul Lich must lose the ability to tap (Prodigal Pyromancer still has summoning sickness)
@@ -110,8 +113,10 @@ public class HavengulLichTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Perilous Myr");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: You may", "Perilous Myr");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Perilous Myr");
         addTarget(playerA, playerB);
+
         execute();
 
         assertLife(playerA, 20);

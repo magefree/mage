@@ -51,7 +51,6 @@ public class JoleneThePlunderQueenTest extends CardTestCommander4Players {
         
         setStopAt(1, PhaseStep.DECLARE_BLOCKERS);
         execute();
-        assertAllCommandsUsed();
 
         // 1 attack trigger, +1 Treasure with the replacement effect.
         assertPermanentCount(playerA, "Treasure Token", 2);
@@ -76,7 +75,6 @@ public class JoleneThePlunderQueenTest extends CardTestCommander4Players {
         
         setStopAt(1, PhaseStep.DECLARE_BLOCKERS);
         execute();
-        assertAllCommandsUsed();
 
         // 1 attack trigger, not controlling Jolene so no replacement effect.
         assertPermanentCount(playerA, "Treasure Token", 1);
@@ -99,7 +97,6 @@ public class JoleneThePlunderQueenTest extends CardTestCommander4Players {
         
         setStopAt(1, PhaseStep.DECLARE_BLOCKERS);
         execute();
-        assertAllCommandsUsed();
 
         // no trigger, no token.
         assertPermanentCount(playerA, "Treasure Token", 0);
@@ -125,7 +122,6 @@ public class JoleneThePlunderQueenTest extends CardTestCommander4Players {
 
         setStopAt(1, PhaseStep.DECLARE_BLOCKERS);
         execute();
-        assertAllCommandsUsed();
 
         // 3 triggers (1 for each Jolene), +1 Treasure for each with the replacement effect.
         assertPermanentCount(playerA, "Treasure Token", 6);

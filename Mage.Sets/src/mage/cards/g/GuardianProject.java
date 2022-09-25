@@ -10,6 +10,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -50,14 +51,8 @@ public final class GuardianProject extends CardImpl {
 
 class GuardianProjectTriggeredAbility extends EntersBattlefieldAllTriggeredAbility {
 
-    public static final FilterPermanent filterNonTokenControlledCreature = new FilterControlledCreaturePermanent();
-
-    static {
-        filterNonTokenControlledCreature.add(TokenPredicate.FALSE);
-    }
-
     GuardianProjectTriggeredAbility() {
-        super(new GuardianProjectEffect(null), filterNonTokenControlledCreature);
+        super(new GuardianProjectEffect(null), StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN);
     }
 
     private GuardianProjectTriggeredAbility(final GuardianProjectTriggeredAbility ability) {

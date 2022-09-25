@@ -28,6 +28,7 @@ public class AngelsTombTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Llanowar Elves");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Unsummon", "Angel's Tomb");
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Angel's Tomb");
 
         setStopAt(1, PhaseStep.END_TURN);

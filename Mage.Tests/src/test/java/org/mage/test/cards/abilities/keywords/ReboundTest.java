@@ -64,7 +64,7 @@ public class ReboundTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Distortion Strike", "Memnite");
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
-        execute();assertAllCommandsUsed();
+        execute();
 
         //check exile and graveyard        
         assertPowerToughness(playerA, "Memnite", 2, 1);
@@ -133,7 +133,6 @@ public class ReboundTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         //check exile and graveyard        
         assertGraveyardCount(playerB, "Lightning Bolt", 1);

@@ -30,7 +30,6 @@ public class KarfellHarbingerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, "Augury Raven", 0);
     }
@@ -48,7 +47,6 @@ public class KarfellHarbingerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Obsessive Search", 1);
     }

@@ -55,8 +55,6 @@ public class AshenRiderTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-        
         assertPowerToughness(playerA, "Ashen Rider", 4,4);
         
         assertGraveyardCount(playerA, "Putrefy", 1);        

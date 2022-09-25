@@ -1,7 +1,5 @@
 package org.mage.test.cards.single.khc;
 
-import mage.abilities.keyword.ForecastAbility;
-import mage.cards.basiclands.Mountain;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
@@ -56,13 +54,11 @@ public class EtherealValkyrieTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertExileCount(playerA, alloyMyr, 1);
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell");
         execute();
-        assertAllCommandsUsed();
         assertExileCount(playerA, alloyMyr, 0);
         assertPermanentCount(playerA, alloyMyr, 1);
     }
@@ -85,14 +81,12 @@ public class EtherealValkyrieTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertExileCount(playerA, exoticOrchard, 1);
 
         checkPlayableAbility("Can't fortell land", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Foretell", false);
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
     }
 
     /**
@@ -114,7 +108,6 @@ public class EtherealValkyrieTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertExileCount(playerA, blightclimbPathway, 1);
         checkPlayableAbility("Can't fortell land", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Foretell", false);
     }
@@ -138,7 +131,6 @@ public class EtherealValkyrieTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertExileCount(playerA, akoumWarrior, 1);
 
         // TODO: Add functionality to test for this programmatically by changing assertAbilityCount
@@ -147,7 +139,6 @@ public class EtherealValkyrieTest extends CardTestPlayerBase {
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertExileCount(playerA, akoumWarrior, 0);
         assertPermanentCount(playerA, akoumWarrior, 1);
     }
@@ -157,34 +148,31 @@ public class EtherealValkyrieTest extends CardTestPlayerBase {
      */
     @Test
     public void testMDFCCreatureCreature() {
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 8);
+        addCard(Zone.BATTLEFIELD, playerA, "Tundra", 12);
         addCard(Zone.HAND, playerA, etherealValkyrie, 2);
 
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
         addCard(Zone.HAND, playerA, alrund);
 
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Zone.HAND, playerA, alrund);
 
         setStrictChooseMode(true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, etherealValkyrie);
         addTarget(playerA, alrund);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, etherealValkyrie);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, etherealValkyrie);
         addTarget(playerA, alrund);
 
-        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
         assertExileCount(playerA, alrund, 2);
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell {1}");
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell {U}");
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertExileCount(playerA, alrund, 0);
         assertPermanentCount(playerA, alrund, 1);
         assertPermanentCount(playerA, hakka, 1);
@@ -207,13 +195,11 @@ public class EtherealValkyrieTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertExileCount(playerA, ancestralVision, 1);
 
         checkPlayableAbility("Can't fortell suspend-only card", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Foretell", false);
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
     }
 }

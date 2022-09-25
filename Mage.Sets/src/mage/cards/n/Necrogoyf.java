@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
-import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
@@ -32,7 +32,7 @@ public final class Necrogoyf extends CardImpl {
 
         // Necrogoyf's power is equal to the number of creature cards in all graveyards.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetPowerSourceEffect(xValue, Duration.EndOfGame)
+                Zone.ALL, new SetBasePowerSourceEffect(xValue, Duration.EndOfGame)
         ));
 
         // At the beginning of each player's upkeep, that player discards a card.

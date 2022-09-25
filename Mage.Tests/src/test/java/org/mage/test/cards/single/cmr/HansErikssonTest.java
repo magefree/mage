@@ -30,7 +30,6 @@ public class HansErikssonTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 1);
         assertHandCount(playerA, "Swamp", 1);
@@ -55,7 +54,6 @@ public class HansErikssonTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 1 - 2); // damage from hans and bears
     }
@@ -80,7 +78,6 @@ public class HansErikssonTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 1); // damage from hans
         assertCounterCount(playerB, "Chandra, Flame's Fury", CounterType.LOYALTY, 4 - 2); // damage from bears

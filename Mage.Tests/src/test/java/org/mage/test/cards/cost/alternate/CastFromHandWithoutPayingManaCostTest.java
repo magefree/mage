@@ -3,7 +3,6 @@ package org.mage.test.cards.cost.alternate;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -227,9 +226,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-        
-        assertHandCount(playerA, "Silvercoat Lion", 1);        
+        assertHandCount(playerA, "Silvercoat Lion", 1);
         assertHandCount(playerB, 0);
 
         assertGraveyardCount(playerA, "Far // Away", 1);
@@ -301,7 +298,6 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Barbed Lightning", 1);
         assertGraveyardCount(playerB, "Bog Wraith", 1);
@@ -368,7 +364,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         // Creature - 3/3 Swampwalk
         addCard(Zone.HAND, playerA, "Bog Wraith", 1); // Creature {3}{B} (3/3)
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Omniscience");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Omniscience", true);
         setChoice(playerA, true); // Pay alternative costs? ({W}{U}{B}{R}{G})   
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bog Wraith");
@@ -379,8 +375,6 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-        
         assertPermanentCount(playerA, "Omniscience", 1);
         assertPermanentCount(playerA, "Bog Wraith", 1);
 

@@ -37,7 +37,6 @@ public class EonFrolickerTest extends CardTestPlayerBase {
         //setStrictChooseMode(true); // AI must choose target for fury (itself)
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Chandra's Fury", 1);
         assertLife(playerA, 20);

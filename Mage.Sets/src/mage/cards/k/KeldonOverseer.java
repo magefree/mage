@@ -44,7 +44,7 @@ public final class KeldonOverseer extends CardImpl {
         ability.addEffect(new UntapTargetEffect());
         ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.instance,
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.ONCE,
                 "When {this} enters the battlefield, if it was kicked, gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn."));
     }
 

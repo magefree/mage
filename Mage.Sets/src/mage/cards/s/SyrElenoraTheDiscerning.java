@@ -5,7 +5,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.abilities.effects.common.cost.SpellsCostModificationThatTargetSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,7 +30,7 @@ public final class SyrElenoraTheDiscerning extends CardImpl {
 
         // Syr Elenora the Discerning's power is equal to the number of cards in your hand.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetPowerSourceEffect(CardsInControllerHandCount.instance, Duration.EndOfGame)
+                Zone.ALL, new SetBasePowerSourceEffect(CardsInControllerHandCount.instance, Duration.EndOfGame)
         ));
 
         // When Syr Elenora enters the battlefield, draw a card.

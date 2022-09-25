@@ -49,7 +49,7 @@ public final class TourachDreadCantor extends CardImpl {
         // When Tourach enters the battelfield, if it was kicked, target opponent discards two cards at random.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(2, true)),
-                KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, " +
+                KickedCondition.ONCE, "When {this} enters the battlefield, if it was kicked, " +
                 "target opponent discards two cards at random."
         );
         ability.addTarget(new TargetOpponent());

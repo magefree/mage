@@ -64,7 +64,7 @@ public class CodespellClericTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, relic, 2);
         addCard(Zone.HAND, playerA, cleric);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, relic);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, relic, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, relic);
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, cleric);

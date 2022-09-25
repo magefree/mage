@@ -134,7 +134,7 @@ public class KikiJikiMirrorBreakerTest extends CardTestPlayerBase {
         // You may have Body Double enter the battlefield as a copy of any creature card in a graveyard.
         addCard(Zone.HAND, playerB, "Body Double", 1); // {4}{U}
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Body Double");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Body Double", true);
         setChoice(playerB, "Silvercoat Lion");
 
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}: Create a token that's a copy of target nonlegendary creature you control, except it has haste. Sacrifice it at the beginning of the next end step.");

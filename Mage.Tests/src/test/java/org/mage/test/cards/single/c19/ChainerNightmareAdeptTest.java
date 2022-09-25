@@ -24,6 +24,7 @@ public class ChainerNightmareAdeptTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, maaka, 2);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Discard");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, maaka);
 
         // Only one should be castable
@@ -52,7 +53,8 @@ public class ChainerNightmareAdeptTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Discard");
         setChoice(playerA, true);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, maaka);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, maaka, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, khenra);
 
         attack(1, playerA, maaka);

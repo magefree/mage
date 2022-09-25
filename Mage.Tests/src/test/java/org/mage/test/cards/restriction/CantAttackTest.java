@@ -38,7 +38,6 @@ public class CantAttackTest extends CardTestPlayerBase {
 
         try {
             execute();
-            assertAllCommandsUsed();
 
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
@@ -75,7 +74,6 @@ public class CantAttackTest extends CardTestPlayerBase {
 
         try {
             execute();
-            assertAllCommandsUsed();
 
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
@@ -106,7 +104,6 @@ public class CantAttackTest extends CardTestPlayerBase {
 
         try {
             execute();
-            assertAllCommandsUsed();
 
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
@@ -167,7 +164,6 @@ public class CantAttackTest extends CardTestPlayerBase {
 
         try {
             execute();
-            assertAllCommandsUsed();
 
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
@@ -231,7 +227,6 @@ public class CantAttackTest extends CardTestPlayerBase {
 
         try {
             execute();
-            assertAllCommandsUsed();
 
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
@@ -278,7 +273,6 @@ public class CantAttackTest extends CardTestPlayerBase {
 
         try {
             execute();
-            assertAllCommandsUsed();
 
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
@@ -465,7 +459,6 @@ public class CantAttackTest extends CardTestPlayerBase {
 
         try {
             execute();
-            assertAllCommandsUsed();
 
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
@@ -511,7 +504,6 @@ public class CantAttackTest extends CardTestPlayerBase {
 
         try {
             execute();
-            assertAllCommandsUsed();
 
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {

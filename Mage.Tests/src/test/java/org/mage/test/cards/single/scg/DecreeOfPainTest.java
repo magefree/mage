@@ -38,7 +38,6 @@ public class DecreeOfPainTest  extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Decree of Pain");
 
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Xyris, the Writhing Storm", 1);
         assertGraveyardCount(playerB, "Aven Envoy", 9);

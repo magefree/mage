@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -44,11 +44,10 @@ public final class MarshFlitter extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GoblinRogueToken(), 2), false));
 
         // Sacrifice a Goblin: Marsh Flitter has base power and toughness 3/3 until end of turn.
-        Effect effect = new SetPowerToughnessSourceEffect(3, 3, Duration.EndOfTurn, SubLayer.SetPT_7b);
+        Effect effect = new SetBasePowerToughnessSourceEffect(3, 3, Duration.EndOfTurn, SubLayer.SetPT_7b, true);
         effect.setText("{this} has base power and toughness 3/3 until end of turn");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
-
     }
 
     private MarshFlitter(final MarshFlitter card) {

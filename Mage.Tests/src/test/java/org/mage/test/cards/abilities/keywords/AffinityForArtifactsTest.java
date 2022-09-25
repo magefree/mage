@@ -24,7 +24,6 @@ public class AffinityForArtifactsTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Myr Enforcer", 4);
     }

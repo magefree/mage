@@ -63,11 +63,16 @@ public class SpreadingSeasTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 10);
         addCard(Zone.HAND, playerA, "Utopia Sprawl");
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Utopia Sprawl", "Forest");
         setChoice(playerA, "Green");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spreading Seas", "Forest");
+
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
+
         assertNotSubtype("Forest", SubType.FOREST);
     }
 
@@ -76,9 +81,12 @@ public class SpreadingSeasTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Spreading Seas", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Urza's Tower", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 10);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spreading Seas", "Urza's Tower");
+
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
+
         assertNotSubtype("Urza's Tower", SubType.URZAS);
         assertNotSubtype("Urza's Tower", SubType.TOWER);
     }

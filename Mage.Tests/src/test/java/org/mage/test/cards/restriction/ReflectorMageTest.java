@@ -31,7 +31,7 @@ public class ReflectorMageTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Bronze Sable", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reflector Mage");
-        addTarget(playerA, "Bronze Sable");
+        // Bronze Sable is auto-chosen since only option
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Bronze Sable");
 
@@ -48,7 +48,6 @@ public class ReflectorMageTest extends CardTestPlayerBase {
      */
     @Test
     public void testReflectorMageRestrictionEffect() {
-
         // {1}{W}{U} When Reflector Mage enters the battlefield, return target creature an opponent controls to its owner's hand. 
         // That creature's owner can't cast spells with the same name as that creature until your next turn.
         addCard(Zone.HAND, playerA, "Reflector Mage"); // 2/3   
@@ -59,7 +58,7 @@ public class ReflectorMageTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Bronze Sable", 1); // (2) 2/1
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reflector Mage");
-        addTarget(playerA, "Bronze Sable");
+        // Bronze Sable is auto-chosen since only option
 
         checkPlayableAbility("sable not available", 2, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Bronze", false);
         setStopAt(2, PhaseStep.END_TURN);

@@ -1,4 +1,3 @@
-
 package mage.abilities.dynamicvalue;
 
 import mage.abilities.Ability;
@@ -36,6 +35,9 @@ public class MultipliedValue implements DynamicValue {
 
     @Override
     public String toString() {
+        if (value.toString().equals("1")) {
+            return Integer.toString(multiplier);
+        }
         StringBuilder sb = new StringBuilder();
         if (multiplier == 2) {
             sb.append("twice ");

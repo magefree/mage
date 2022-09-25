@@ -32,8 +32,8 @@ public final class GhostlyCastigator extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // When Ghostly Castigator enters the battlefield, shuffle up to three target cards from your graveyard into your library.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ShuffleIntoLibraryTargetEffect());
+        // When Ghostly Castigator enters the battlefield, you may shuffle up to three target cards from your graveyard into your library.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ShuffleIntoLibraryTargetEffect(), true);
         ability.addTarget(new TargetCardInYourGraveyard(0, 3));
         this.addAbility(ability);
 

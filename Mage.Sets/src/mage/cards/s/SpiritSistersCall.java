@@ -1,9 +1,7 @@
 package mage.cards.s;
 
-import java.util.HashSet;
 import java.util.UUID;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -22,7 +20,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.Predicate;
+import mage.filter.predicate.mageobject.SharesCardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -85,8 +83,9 @@ class SpiritSistersCallDoIfEffect extends OneShotEffect {
         if (card == null || game.getState().getZone(targetId) != Zone.GRAVEYARD) {
             return false;
         }
-        FilterControlledPermanent filter = new FilterControlledPermanent("a permanent that shares a card type with the chosen card");
-        filter.add(new SpiritSistersCallPredicate(new HashSet<CardType>(card.getCardType(game))));
+        SharesCardTypePredicate predicate = new SharesCardTypePredicate(card.getCardType(game));
+        FilterControlledPermanent filter = new FilterControlledPermanent(predicate.toString());
+        filter.add(predicate);
         return new DoIfCostPaid(new SpiritSistersCallReturnToBattlefieldEffect(), new SacrificeTargetCost(filter)).apply(game, source);
     }
 }
@@ -158,24 +157,5 @@ class SpiritSistersCallReplacementEffect extends ReplacementEffectImpl {
         UUID targetId = zEvent.getTargetId();
         return targetId != null && targetId.equals(source.getSourceId())
                 && zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() != Zone.EXILED;
-    }
-}
-
-class SpiritSistersCallPredicate implements Predicate<MageObject> {
-
-    private final HashSet<CardType> cardTypes;
-
-    public SpiritSistersCallPredicate(HashSet<CardType> cardTypes) {
-        this.cardTypes = cardTypes;
-    }
-
-    @Override
-    public boolean apply(MageObject input, Game game) {
-        for (CardType type : input.getCardType(game)) {
-            if (cardTypes.contains(type)) {
-                return true;
-            }
-        }
-        return false;
     }
 }

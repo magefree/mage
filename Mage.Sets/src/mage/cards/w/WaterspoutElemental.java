@@ -42,7 +42,7 @@ public final class WaterspoutElemental extends CardImpl {
         // When Waterspout Elemental enters the battlefield, if it was kicked, return all other creatures to their owners' hands and you skip your next turn.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandFromBattlefieldAllEffect(filter));
         ability.addEffect(new SkipNextTurnSourceEffect());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.instance,
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.ONCE,
             "When {this} enters the battlefield, if it was kicked, return all other creatures to their owners' hands and you skip your next turn."));
     }
 

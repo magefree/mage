@@ -33,8 +33,7 @@ public class HexproofPlayerTest extends CardTestPlayerBase {
         
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
-        
+
         assertGraveyardCount(playerA, 0);
         
     }
@@ -52,8 +51,7 @@ public class HexproofPlayerTest extends CardTestPlayerBase {
         
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
-        
+
         assertGraveyardCount(playerA, 1);
         
     }
@@ -74,8 +72,7 @@ public class HexproofPlayerTest extends CardTestPlayerBase {
         
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
-        
+
         assertGraveyardCount(playerA, 1);  // the Veil of Summer card only, no discarded card
     }
     
@@ -95,8 +92,7 @@ public class HexproofPlayerTest extends CardTestPlayerBase {
         
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
-        
+
         assertGraveyardCount(playerA, 2);
     }
 }

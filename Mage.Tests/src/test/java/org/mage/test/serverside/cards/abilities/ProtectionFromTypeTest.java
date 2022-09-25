@@ -56,7 +56,6 @@ public class ProtectionFromTypeTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, Remove a charge counter from {this}, {T}: Put a -1/-1 counter on target creature.", "Coral Merfolk");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         // Coral Merfolk should be destroyed
         assertPermanentCount(playerB, "Coral Merfolk", 0);

@@ -10,7 +10,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.SpliceOntoArcaneAbility;
+import mage.abilities.keyword.SpliceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,7 +39,7 @@ public final class ThroughTheBreach extends CardImpl {
         // You may put a creature card from your hand onto the battlefield. That creature gains haste. Sacrifice that creature at the beginning of the next end step.
         this.getSpellAbility().addEffect(new ThroughTheBreachEffect());
         // Splice onto Arcane {2}{R}{R}
-        this.addAbility(new SpliceOntoArcaneAbility(new ManaCostsImpl<>("{2}{R}{R}")));
+        this.addAbility(new SpliceAbility(SpliceAbility.ARCANE, new ManaCostsImpl<>("{2}{R}{R}")));
     }
 
     private ThroughTheBreach(final ThroughTheBreach card) {

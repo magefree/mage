@@ -34,7 +34,7 @@ public final class AudaciousSwap extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");
 
         // Casualty 2
-        this.addAbility(new CasualtyAbility(this, 2));
+        this.addAbility(new CasualtyAbility(2));
 
         // The owner of target nonenchantment permanent shuffles it into their library, then exiles the top card of their library. If it's a land card, they put it onto the battlefield. Otherwise, they may cast it without paying its mana cost.
         this.getSpellAbility().addEffect(new AudaciousSwapEffect());

@@ -135,7 +135,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean isTestMode = false;
     protected boolean canGainLife = true;
     protected boolean canLoseLife = true;
-    protected boolean canPayLifeCost = true;
+    protected PayLifeCostLevel payLifeCostLevel = PayLifeCostLevel.allAbilities;
     protected boolean loseByZeroOrLessLife = true;
     protected boolean canPlayCardsFromGraveyard = true;
     protected boolean drawsOnOpponentsTurn = false;
@@ -248,7 +248,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.userData = player.userData;
         this.matchPlayer = player.matchPlayer;
 
-        this.canPayLifeCost = player.canPayLifeCost;
+        this.payLifeCostLevel = player.payLifeCostLevel;
         this.sacrificeCostFilter = player.sacrificeCostFilter;
         this.alternativeSourceCosts.addAll(player.alternativeSourceCosts);
         this.storedBookmark = player.storedBookmark;
@@ -344,7 +344,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         this.inRange.clear();
         this.inRange.addAll(player.getInRange());
-        this.canPayLifeCost = player.getCanPayLifeCost();
+        this.payLifeCostLevel = player.getPayLifeCostLevel();
         this.sacrificeCostFilter = player.getSacrificeCostFilter() != null
                 ? player.getSacrificeCostFilter().copy() : null;
         this.loseByZeroOrLessLife = player.canLoseByZeroOrLessLife();
@@ -469,7 +469,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.maxAttackedBy = Integer.MAX_VALUE;
         this.canGainLife = true;
         this.canLoseLife = true;
-        this.canPayLifeCost = true;
+        this.payLifeCostLevel = PayLifeCostLevel.allAbilities;
         this.sacrificeCostFilter = null;
         this.loseByZeroOrLessLife = true;
         this.canPlayCardsFromGraveyard = false;
@@ -4348,22 +4348,32 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean canPayLifeCost(Ability ability) {
-        if (!canPayLifeCost
-                && (AbilityType.ACTIVATED.equals(ability.getAbilityType())
-                || AbilityType.SPELL.equals(ability.getAbilityType()))) {
+        if (!isLifeTotalCanChange()) {
             return false;
         }
-        return isLifeTotalCanChange();
+
+        switch (payLifeCostLevel) {
+            case allAbilities:
+                return true;
+            case onlyManaAbilities:
+                return ability.getAbilityType() == AbilityType.MANA;
+            case nonSpellnonActivatedAbilities:
+                return ability.getAbilityType() != AbilityType.ACTIVATED && ability.getAbilityType() != AbilityType.SPELL;
+            case none:
+            default:
+                return false;
+        }
     }
 
     @Override
-    public boolean getCanPayLifeCost() {
-        return canPayLifeCost;
+    public PayLifeCostLevel getPayLifeCostLevel() {
+        return payLifeCostLevel;
     }
 
+
     @Override
-    public void setCanPayLifeCost(boolean canPayLifeCost) {
-        this.canPayLifeCost = canPayLifeCost;
+    public void setPayLifeCostLevel(PayLifeCostLevel payLifeCostLevel) {
+        this.payLifeCostLevel = payLifeCostLevel;
     }
 
     @Override

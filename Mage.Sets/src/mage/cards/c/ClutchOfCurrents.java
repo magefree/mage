@@ -19,7 +19,7 @@ public final class ClutchOfCurrents extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");
 
         // Return target creature to its owner's hand.
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect(false));
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Awaken 3—{4}{U}
