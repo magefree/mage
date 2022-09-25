@@ -1281,7 +1281,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
                 || (mana2.countColored() == mana1.countColored()
                         && mana2.colorless == mana1.colorless
                         && mana2.count() > mana1.count())) {
-            moreMana = mana2; // 3C becomes this one
+            moreMana = mana2;
             lessMana = mana1;
         } else {
             moreMana = mana1;
