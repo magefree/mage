@@ -567,25 +567,41 @@ public class ManaOptions extends LinkedHashSet<Mana> {
             i = j;
         }
 
-// TODO: Original
-
-//        Mana manaII;
+//        List<Mana> that = new ArrayList<>(this);
+//        Set<String> list = new HashSet<>();
 //
-//        for (i = m.size() - 1; i >= 0; i--) {
-//            manaI = m.get(i);
+//        for (int i = this.size() - 1; i >= 0; i--) {
+//            String s;
+//            if (that.get(i) instanceof ConditionalMana) {
+//                s = that.get(i).toString() + ((ConditionalMana) that.get(i)).getConditionString();
+//            } else {
+//                s = that.get(i).toString();
+//            }
+//            if (s.isEmpty()) {
+//                this.remove(i);
+//            } else if (list.contains(s)) {
+//                // remove duplicated
+//                this.remove(i);
+//            } else {
+//                list.add(s);
+//            }
+//        }
+//
+//        // Remove fully included variations
+//        // TODO: research too many manas and freeze (put 1 card to slow down, put 3 cards to freeze here)
+//        //  battlefield:Human:Cascading Cataracts:1
+//        for (int i = this.size() - 1; i >= 0; i--) {
 //            for (int ii = 0; ii < i; ii++) {
-//                manaII = m.get(ii);
-//                Mana moreValuable = Mana.getMoreValuableMana(manaI, manaII);
+//                Mana moreValuable = Mana.getMoreValuableMana(that.get(i), that.get(ii));
 //                if (moreValuable != null) {
-//                    if (this.contains(manaI)) {
-//                        manaII.setToMana(moreValuable);
-//                        this.remove(manaI);
-//                        m.remove(i);
-//                        break;
-//                    }
+//                    that.get(ii).setToMana(moreValuable);
+//                    that.remove(i);
+//                    break;
 //                }
 //            }
 //        }
+//
+//        this.retainAll(that);
     }
 
     /**
