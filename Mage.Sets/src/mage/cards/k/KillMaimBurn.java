@@ -21,6 +21,9 @@ public final class KillMaimBurn extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B}{R}");
 
         // Choose one or more --
+        this.getSpellAbility().getModes().setMinModes(1);
+        this.getSpellAbility().getModes().setMaxModes(3);
+
         // * Destroy target artifact.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
