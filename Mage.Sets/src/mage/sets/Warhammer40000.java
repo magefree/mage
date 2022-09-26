@@ -41,6 +41,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Be'lakor, the Dark Master", 6, Rarity.MYTHIC, mage.cards.b.BelakorTheDarkMaster.class));
         cards.add(new SetCardInfo("Beacon of Unrest", 194, Rarity.RARE, mage.cards.b.BeaconOfUnrest.class));
         cards.add(new SetCardInfo("Bile Blight", 195, Rarity.UNCOMMON, mage.cards.b.BileBlight.class));
+        cards.add(new SetCardInfo("Biotransference", 30, Rarity.RARE, mage.cards.b.Biotransference.class));
         cards.add(new SetCardInfo("Bituminous Blast", 221, Rarity.UNCOMMON, mage.cards.b.BituminousBlast.class));
         cards.add(new SetCardInfo("Blasphemous Act", 204, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
         cards.add(new SetCardInfo("Blight Grenade", 31, Rarity.RARE, mage.cards.b.BlightGrenade.class));
