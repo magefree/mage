@@ -699,7 +699,7 @@ public class MageServerImpl implements MageServer {
     }
     
     @Override
-    public void setBoosterLoaded(final UUID draftId, final String sessionId) throws MageException {
+    public void setBoosterLoaded(final UUID draftId, final String sessionId) {
         execute("setBoosterLoaded", sessionId, () -> {
             managerFactory.sessionManager().getSession(sessionId).ifPresent(session -> {
                 UUID userId = session.getUserId();

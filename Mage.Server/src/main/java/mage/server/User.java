@@ -329,8 +329,8 @@ public class User {
         Main.gameInformPersonal(sessionId, gameId, message);
     }
 
-    public void gameOver(UUID gameId, String message) {
-        Main.gameOver(sessionId, gameId, message);
+    public void gameOver(UUID gameId, GameView view, String message) {
+        Main.gameOver(sessionId, gameId, view, message);
     }
 
     public void gameError(UUID gameId, String message) {

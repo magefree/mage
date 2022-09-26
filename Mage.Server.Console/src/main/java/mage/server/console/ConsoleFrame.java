@@ -325,7 +325,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
     }
 
     @Override
-    public void gameOver(UUID gameId, String message) {
+    public void gameOver(UUID gameId, GameView gameView, String message) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

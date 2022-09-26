@@ -498,7 +498,7 @@ public class LoadTest {
         options.getPlayerTypes().add(playersType);
 
         Assert.assertTrue("Can't find game type on the server: " + TEST_AI_DECK_TYPE,
-                Arrays.asList(session.getDeckTypes()).contains(TEST_AI_DECK_TYPE));
+                Arrays.asList(session.getServerState().getDeckTypes()).contains(TEST_AI_DECK_TYPE));
         options.setDeckType(TEST_AI_DECK_TYPE);
         options.setLimited(false);
         options.setAttackOption(MultiplayerAttackOption.MULTIPLE);
@@ -837,7 +837,7 @@ public class LoadTest {
     }
 
     private GameTypeView prepareGameType(Session session) {
-        GameTypeView gameType = session.getGameTypes()
+        GameTypeView gameType = session.getServerState().getGameTypes()
                 .stream()
                 .filter(m -> m.getName().equals(TEST_AI_GAME_MODE))
                 .findFirst()

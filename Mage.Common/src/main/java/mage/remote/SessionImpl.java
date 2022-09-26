@@ -51,8 +51,8 @@ public class SessionImpl implements Session {
     private static final int IDLE_TIMEOUT = 60;
 
     private final MageClient client;
-    private final ClientMessageHandler clientMessageHandler;
-    private final ClientExceptionHandler exceptionHandler;
+    private ClientMessageHandler clientMessageHandler;
+    private ClientExceptionHandler exceptionHandler;
 
     private SslContext sslCtx;
     private Channel channel;
@@ -61,12 +61,9 @@ public class SessionImpl implements Session {
     private int port;
 
     private static final EventLoopGroup group = new NioEventLoopGroup();
-
+    
     public SessionImpl(MageClient client) {
         this.client = client;
-        clientMessageHandler = new ClientMessageHandler(client);
-
-        exceptionHandler = new ClientExceptionHandler(this);
     }
 
     @Override
@@ -121,7 +118,6 @@ public class SessionImpl implements Session {
         } catch (Exception ex) {
             logger.fatal("Error connecting", ex);
             client.inform("Error", "Error connecting", MessageType.ERROR);
-            disconnect(false);
         }
         return false;
     }
@@ -158,8 +154,10 @@ public class SessionImpl implements Session {
             } else {
                 sslCtx = null;
             }
+            
             clientMessageHandler = new ClientMessageHandler(client, false);
             exceptionHandler = new ClientExceptionHandler(this);
+            
             Bootstrap bootstrap = new Bootstrap();
             bootstrap.group(group)
                     .channel(NioSocketChannel.class)
@@ -176,10 +174,9 @@ public class SessionImpl implements Session {
             } else {
                 disconnect(false);
             }
-        } catch (SSLException | InterruptedException ex) {
+        } catch (Exception ex) {
             logger.fatal("Error connecting", ex);
             client.inform("Error", "Error connecting", MessageType.ERROR);
-            disconnect(false);
         }
         return false;
     }
@@ -363,6 +360,16 @@ public class SessionImpl implements Session {
             logger.error("Error marking card", ex);
         }
     }
+    
+
+    @Override
+    public void setBoosterLoaded(UUID draftId) {
+        try {
+            clientMessageHandler.setBoosterLoaded(draftId);
+        } catch (Exception ex) {
+            logger.error("Error marking card", ex);
+        }
+    }
 
     @Override
     public void joinChat(UUID chatId) {
@@ -443,20 +450,6 @@ public class SessionImpl implements Session {
             logger.error("Error creating table", ex);
         }
         return null;
-    }
-    
-    @Override
-    public boolean setBoosterLoaded(UUID draftId) {
-        try {
-            if (isConnected()) {
-                server.setBoosterLoaded(draftId, sessionId);
-            }
-        } catch (MageException ex) {
-            handleMageException(ex);
-        } catch (Throwable t) {
-            handleThrowable(t);
-        }
-        return false;
     }
 
     @Override

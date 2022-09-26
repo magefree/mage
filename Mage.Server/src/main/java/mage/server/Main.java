@@ -414,8 +414,8 @@ public final class Main {
         clientCallback.gameInformPersonal(sessionId, gameId, message);
     }
 
-    public static void gameOver(String sessionId, UUID gameId, String message) {
-        clientCallback.gameOver(sessionId, gameId, message);
+    public static void gameOver(String sessionId, UUID gameId, GameView view, String message) {
+        clientCallback.gameOver(sessionId, gameId, view, message);
     }
     
     public static void gameError(String sessionId, UUID gameId, String message) {

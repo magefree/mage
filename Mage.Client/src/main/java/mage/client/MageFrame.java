@@ -93,6 +93,7 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -1803,11 +1804,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     @Override
-    public void gameOver(final UUID gameId, final String message) {
+    public void gameOver(final UUID gameId, final GameView gameView, final String message) {
         SwingUtilities.invokeLater(() -> {
             GamePanel panel = MageFrame.getGame(gameId);
             if (panel != null) {
-                panel.endMessage(null,null,message);
+                panel.endMessage(gameView,null,message);
             }
         });
     }

@@ -72,7 +72,7 @@ public class GameSessionWatcher {
         if (!killed) {
             userManager.getUser(userId).ifPresent(user -> {
                 user.removeGameWatchInfo(game.getId());
-                user.gameOver(game.getId(), message);
+                user.gameOver(game.getId(), getGameView(), message);
             });
         }
     }

@@ -112,7 +112,10 @@ public interface Session {
     void updateDeck(UUID tableId, DeckCardLists deck);
 
     DraftPickView pickCard(UUID draftId, UUID cardId, Set<UUID> hiddenCards);
+    
     void markCard(UUID draftId, UUID cardId);
+    
+    void setBoosterLoaded(UUID draftId);
 
     /**
      * magenoxx:
