@@ -23,6 +23,8 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
 
     private static final Effects emptyEffects = new Effects();
 
+    private String ruleText = null;
+
     public ConditionalActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition) {
         super(zone, effect, cost);
         this.condition = condition;
@@ -31,24 +33,24 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
     public ConditionalActivatedAbility(Zone zone, Effect effect, ManaCosts cost, Condition condition, String rule) {
         super(zone, effect, cost);
         this.condition = condition;
-        this.staticText = rule;
+        this.ruleText = rule;
     }
 
     public ConditionalActivatedAbility(Zone zone, Effect effect, Costs<Cost> costs, Condition condition, String rule) {
         super(zone, effect, costs);
         this.condition = condition;
-        this.staticText = rule;
+        this.ruleText = rule;
     }
 
     public ConditionalActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition, String rule) {
         super(zone, effect, cost);
         this.condition = condition;
-        this.staticText = rule;
+        this.ruleText = rule;
     }
 
     public ConditionalActivatedAbility(final ConditionalActivatedAbility ability) {
         super(ability);
-        this.staticText = ability.staticText;
+        this.ruleText = ability.ruleText;
     }
 
     @Override
@@ -66,8 +68,8 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
 
     @Override
     public String getRule() {
-        if (staticText != null && !staticText.isEmpty()) {
-            return staticText;
+        if (ruleText != null && !ruleText.isEmpty()) {
+            return ruleText;
         }
         String conditionText = condition.toString();
         String additionalText = "if ";
@@ -76,8 +78,6 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
                 || conditionText.startsWith("if")) {
             additionalText = "";
         }
-        staticText = super.getRule() + " Activate only " + additionalText + condition.toString() + ".";
-
-        return staticText;
+        return super.getRule() + " Activate only " + additionalText + condition.toString() + ".";
     }
 }
