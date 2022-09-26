@@ -26,7 +26,6 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
     public ConditionalActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition) {
         super(zone, effect, cost);
         this.condition = condition;
-        this.staticText = makeRule();
     }
 
     public ConditionalActivatedAbility(Zone zone, Effect effect, ManaCosts cost, Condition condition, String rule) {
@@ -65,7 +64,11 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
         return new ConditionalActivatedAbility(this);
     }
 
-    public String makeRule() {
+    @Override
+    public String getRule() {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         String conditionText = condition.toString();
         String additionalText = "if ";
         if (conditionText.startsWith("during")
@@ -73,6 +76,8 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
                 || conditionText.startsWith("if")) {
             additionalText = "";
         }
-        return super.getRule() + " Activate only " + additionalText + condition.toString() + ".";
+        staticText = super.getRule() + " Activate only " + additionalText + condition.toString() + ".";
+
+        return staticText;
     }
 }
