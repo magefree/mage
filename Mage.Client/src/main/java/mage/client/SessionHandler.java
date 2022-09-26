@@ -273,6 +273,10 @@ public final class SessionHandler {
     public static void sendCardMark(UUID draftId, UUID id) {
         session.sendCardMark(draftId, id);
     }
+    
+    public static void setBoosterLoaded(UUID draftId) {
+        session.setBoosterLoaded(draftId);
+    }
 
     public static Optional<UUID> getRoomChatId(UUID roomId) {
         return session.getRoomChatId(roomId);

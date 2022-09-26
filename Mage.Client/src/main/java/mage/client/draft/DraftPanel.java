@@ -303,6 +303,8 @@
          if (timeout != 0) {
              countdown.start();
          }
+         
+         SessionHandler.setBoosterLoaded(draftId); // confirm to the server that the booster has been loaded
      }
 
      private void loadCardsToPickedCardsArea(SimpleCardsView pickedCards) {

@@ -1,10 +1,9 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
+import mage.abilities.common.BlocksOrBlockedByCreatureSourceTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -40,8 +39,7 @@ public final class GhostHounds extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Whenever Ghost Hounds blocks or becomes blocked by a white creature, Ghost Hounds gains first strike until end of turn.
-        this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), filter, false));
-
+        this.addAbility(new BlocksOrBlockedByCreatureSourceTriggeredAbility(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), filter));
     }
 
     private GhostHounds(final GhostHounds card) {

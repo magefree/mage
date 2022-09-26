@@ -952,12 +952,11 @@ public final class StaticFilters {
         FILTER_BLOCKING_CREATURES.setLockedFilter(true);
     }
 
-    public static final FilterPermanent FILTER_PERMANENT_AURA = new FilterPermanent();
+    public static final FilterPermanent FILTER_PERMANENT_AURAS = new FilterEnchantmentPermanent("Auras");
 
     static {
-        FILTER_PERMANENT_AURA.add(CardType.ENCHANTMENT.getPredicate());
-        FILTER_PERMANENT_AURA.add(SubType.AURA.getPredicate());
-        FILTER_PERMANENT_AURA.setLockedFilter(true);
+        FILTER_PERMANENT_AURAS.add(SubType.AURA.getPredicate());
+        FILTER_PERMANENT_AURAS.setLockedFilter(true);
     }
 
     public static final FilterPermanent FILTER_PERMANENT_EQUIPMENT = new FilterEquipmentPermanent();

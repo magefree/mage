@@ -49,6 +49,11 @@ public class DraftManagerImpl implements DraftManager {
     public void sendCardMark(UUID draftId, UUID userId, UUID cardId) {
         draftControllers.get(draftId).sendCardMark(userId, cardId);
     }
+    
+    @Override
+    public void setBoosterLoaded(UUID draftId, UUID userId) {
+        draftControllers.get(draftId).setBoosterLoaded(userId);
+    }
 
     @Override
     public void removeSession(UUID userId) {

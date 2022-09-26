@@ -2,14 +2,13 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
+import mage.abilities.common.BlocksOrBlockedByCreatureSourceTriggeredAbility;
 import mage.abilities.effects.common.PhaseOutSourceEffect;
 import mage.abilities.effects.common.PhaseOutTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -27,12 +26,8 @@ public final class DreamFighter extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Dream Fighter blocks or becomes blocked by a creature, Dream Fighter and that creature phase out.
-        Ability ability = new BlocksOrBecomesBlockedSourceTriggeredAbility(
-                new PhaseOutSourceEffect(), StaticFilters.FILTER_PERMANENT_CREATURE,
-                false, "Whenever {this} blocks or becomes blocked by a creature, " +
-                "{this} and that creature phase out.", true
-        );
-        ability.addEffect(new PhaseOutTargetEffect());
+        Ability ability = new BlocksOrBlockedByCreatureSourceTriggeredAbility(new PhaseOutSourceEffect().setText("{this}"));
+        ability.addEffect(new PhaseOutTargetEffect().setText("and that creature phase out"));
         this.addAbility(ability);
     }
 
