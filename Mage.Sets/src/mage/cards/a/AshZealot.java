@@ -59,6 +59,7 @@ class AshZealotTriggeredAbility extends TriggeredAbilityImpl {
 
     public AshZealotTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(3), false);
+        staticText = "Whenever a player casts a spell from a graveyard, {this} deals 3 damage to that player.";
     }
 
     public AshZealotTriggeredAbility(final AshZealotTriggeredAbility ability) {
@@ -87,10 +88,5 @@ class AshZealotTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a player casts a spell from a graveyard, {this} deals 3 damage to that player.";
     }
 }

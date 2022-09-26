@@ -17,6 +17,7 @@ public class PlayLandAbility extends ActivatedAbilityImpl {
         super(AbilityType.PLAY_LAND, Zone.HAND);
         this.usesStack = false;
         this.name = "Play " + cardName;
+        this.staticText = this.name;
     }
 
     public PlayLandAbility(PlayLandAbility ability) {
@@ -51,11 +52,6 @@ public class PlayLandAbility extends ActivatedAbilityImpl {
 
     @Override
     public String toString() {
-        return this.name;
-    }
-
-    @Override
-    public String getRule() {
         return this.name;
     }
 

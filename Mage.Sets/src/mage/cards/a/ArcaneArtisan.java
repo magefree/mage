@@ -131,6 +131,7 @@ class ArcaneArtisanLeavesBattlefieldTriggeredAbility extends ZoneChangeTriggered
                 new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ArcaneArtisanExileEffect())),
                 "", false
         );
+        staticText = "When {this} leaves the battlefield, exile all tokens created with it at the beginning of the next end step.";
     }
 
     public ArcaneArtisanLeavesBattlefieldTriggeredAbility(ArcaneArtisanLeavesBattlefieldTriggeredAbility ability) {
@@ -140,11 +141,6 @@ class ArcaneArtisanLeavesBattlefieldTriggeredAbility extends ZoneChangeTriggered
     @Override
     public ArcaneArtisanLeavesBattlefieldTriggeredAbility copy() {
         return new ArcaneArtisanLeavesBattlefieldTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "When {this} leaves the battlefield, exile all tokens created with it at the beginning of the next end step.";
     }
 }
 

@@ -23,34 +23,33 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
 
     private static final Effects emptyEffects = new Effects();
 
-    private String ruleText = null;
-
     public ConditionalActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition) {
         super(zone, effect, cost);
         this.condition = condition;
+        this.staticText = makeRule();
     }
 
     public ConditionalActivatedAbility(Zone zone, Effect effect, ManaCosts cost, Condition condition, String rule) {
         super(zone, effect, cost);
         this.condition = condition;
-        this.ruleText = rule;
+        this.staticText = rule;
     }
 
     public ConditionalActivatedAbility(Zone zone, Effect effect, Costs<Cost> costs, Condition condition, String rule) {
         super(zone, effect, costs);
         this.condition = condition;
-        this.ruleText = rule;
+        this.staticText = rule;
     }
 
     public ConditionalActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition, String rule) {
         super(zone, effect, cost);
         this.condition = condition;
-        this.ruleText = rule;
+        this.staticText = rule;
     }
 
     public ConditionalActivatedAbility(final ConditionalActivatedAbility ability) {
         super(ability);
-        this.ruleText = ability.ruleText;
+        this.staticText = ability.staticText;
     }
 
     @Override
@@ -66,11 +65,7 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
         return new ConditionalActivatedAbility(this);
     }
 
-    @Override
-    public String getRule() {
-        if (ruleText != null && !ruleText.isEmpty()) {
-            return ruleText;
-        }
+    public String makeRule() {
         String conditionText = condition.toString();
         String additionalText = "if ";
         if (conditionText.startsWith("during")

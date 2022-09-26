@@ -49,6 +49,7 @@ class ArmWithAetherTriggeredAbility extends TriggeredAbilityImpl {
 
     public ArmWithAetherTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), true);
+        staticText = "Whenever this creature deals damage to an opponent, you may return target creature that player controls to its owner's hand.";
     }
 
     public ArmWithAetherTriggeredAbility(final ArmWithAetherTriggeredAbility ability) {
@@ -77,10 +78,5 @@ class ArmWithAetherTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever this creature deals damage to an opponent, you may return target creature that player controls to its owner's hand.";
     }
 }

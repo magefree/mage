@@ -52,6 +52,7 @@ class AetherChargeTriggeredAbility extends TriggeredAbilityImpl {
 
     public AetherChargeTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AetherChargeEffect(), true); // is optional
+        this.staticText = "Whenever a Beast enters the battlefield under your control, you may have it deal 4 damage to target opponent or planeswalker.";
     }
 
     public AetherChargeTriggeredAbility(AetherChargeTriggeredAbility ability) {
@@ -73,11 +74,6 @@ class AetherChargeTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a Beast enters the battlefield under your control, you may have it deal 4 damage to target opponent or planeswalker.";
     }
 
     @Override

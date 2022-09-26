@@ -105,6 +105,7 @@ class AzraOddsmakerDelayedTriggeredAbility extends DelayedTriggeredAbility {
         super(new DrawCardSourceControllerEffect(2), Duration.EndOfTurn, false, false);
         this.mor = mor;
         this.creatureName = creatureName;
+        staticText = "Whenever " + creatureName + " deals combat damage to a player this turn, you draw two cards";
     }
 
     public AzraOddsmakerDelayedTriggeredAbility(final AzraOddsmakerDelayedTriggeredAbility ability) {
@@ -130,10 +131,5 @@ class AzraOddsmakerDelayedTriggeredAbility extends DelayedTriggeredAbility {
             return mor.refersTo(permanent, game);
         }
         return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever " + creatureName + " deals combat damage to a player this turn, you draw two cards";
     }
 }

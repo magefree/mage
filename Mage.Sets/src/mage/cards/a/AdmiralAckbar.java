@@ -63,6 +63,7 @@ class AdmiralAckbarTriggeredAbility extends TriggeredAbilityImpl {
 
     public AdmiralAckbarTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
+        this.staticText = "Whenever two or more Starship creatures you control attack, draw a card";
     }
 
     public AdmiralAckbarTriggeredAbility(final AdmiralAckbarTriggeredAbility ability) {
@@ -82,10 +83,5 @@ class AdmiralAckbarTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return game.getCombat().getAttackers().size() >= 2 && game.getCombat().getAttackingPlayerId().equals(getControllerId());
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever two or more Starship creatures you control attack, draw a card";
     }
 }

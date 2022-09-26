@@ -61,6 +61,7 @@ class AnjeFalkenrathTriggeredAbility extends TriggeredAbilityImpl {
 
     AnjeFalkenrathTriggeredAbility() {
         super(Zone.BATTLEFIELD, new UntapSourceEffect(), false);
+        staticText = "Whenever you discard a card, if it has madness, untap {this}.";
     }
 
     private AnjeFalkenrathTriggeredAbility(final AnjeFalkenrathTriggeredAbility ability) {
@@ -84,10 +85,5 @@ class AnjeFalkenrathTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         return card.getAbilities(game).containsClass(MadnessAbility.class);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you discard a card, if it has madness, untap {this}.";
     }
 }

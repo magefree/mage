@@ -54,6 +54,7 @@ class AbilityActivatedTriggeredAbility extends TriggeredAbilityImpl {
 
     AbilityActivatedTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageAttachedControllerEffect(2));
+        this.staticText = "Whenever enchanted artifact becomes tapped or a player activates an ability of enchanted artifact without {tap} in its activation cost, Artifact Possession deals 2 damage to that artifact's controller.";
     }
 
     AbilityActivatedTriggeredAbility(final AbilityActivatedTriggeredAbility ability) {
@@ -83,10 +84,5 @@ class AbilityActivatedTriggeredAbility extends TriggeredAbilityImpl {
 
         Permanent aura = game.getPermanent(this.getSourceId());
         return aura != null && aura.isAttachedTo(tappedPermanent);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever enchanted artifact becomes tapped or a player activates an ability of enchanted artifact without {tap} in its activation cost, Artifact Possession deals 2 damage to that artifact's controller.";
     }
 }

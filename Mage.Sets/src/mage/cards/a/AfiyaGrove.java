@@ -90,6 +90,7 @@ class AfiyaGroveNoCountersAbility extends StateTriggeredAbility {
 
     public AfiyaGroveNoCountersAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
+        this.staticText = "When {this} has no +1/+1 counters on it, sacrifice it.";
     }
 
     public AfiyaGroveNoCountersAbility(final AfiyaGroveNoCountersAbility ability) {
@@ -109,10 +110,4 @@ class AfiyaGroveNoCountersAbility extends StateTriggeredAbility {
         }
         return false;
     }
-
-    @Override
-    public String getRule() {
-        return "When {this} has no +1/+1 counters on it, sacrifice it.";
-    }
-
 }

@@ -55,6 +55,7 @@ class ArcbondDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     public ArcbondDelayedTriggeredAbility() {
         super(new ArcbondEffect(), Duration.EndOfTurn, false);
+        staticText = "Choose target creature. Whenever that creature is dealt damage this turn, it deals that much damage to each other creature and each player.";
     }
 
     public ArcbondDelayedTriggeredAbility(ArcbondDelayedTriggeredAbility ability) {
@@ -103,11 +104,6 @@ class ArcbondDelayedTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public ArcbondDelayedTriggeredAbility copy() {
         return new ArcbondDelayedTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Choose target creature. Whenever that creature is dealt damage this turn, it deals that much damage to each other creature and each player.";
     }
 }
 

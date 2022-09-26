@@ -49,6 +49,7 @@ class AvalancheTuskerAbility extends TriggeredAbilityImpl {
 
     public AvalancheTuskerAbility() {
         super(Zone.BATTLEFIELD, new MustBeBlockedByTargetSourceEffect(Duration.EndOfCombat), false);
+        staticText = "Whenever {this} attacks, target creature defending player controls blocks it this combat if able.";
     }
 
     public AvalancheTuskerAbility(final AvalancheTuskerAbility ability) {
@@ -73,11 +74,6 @@ class AvalancheTuskerAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} attacks, target creature defending player controls blocks it this combat if able.";
     }
 
     @Override

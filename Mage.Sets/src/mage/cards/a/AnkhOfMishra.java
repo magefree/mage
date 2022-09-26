@@ -44,6 +44,7 @@ class AnkhOfMishraAbility extends TriggeredAbilityImpl {
 
     public AnkhOfMishraAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2));
+        staticText = "Whenever a land enters the battlefield, {this} deals 2 damage to that land's controller.";
     }
 
     AnkhOfMishraAbility(final AnkhOfMishraAbility ability) {
@@ -73,10 +74,5 @@ class AnkhOfMishraAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a land enters the battlefield, {this} deals 2 damage to that land's controller.";
     }
 }

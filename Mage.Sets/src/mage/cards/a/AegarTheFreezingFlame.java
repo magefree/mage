@@ -48,6 +48,8 @@ class AegarTheFreezingFlameTriggeredAbility extends TriggeredAbilityImpl {
     AegarTheFreezingFlameTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
         this.addWatcher(new AegarTheFreezingFlameWatcher());
+        this.staticText = "Whenever a creature or planeswalker an opponent controls is dealt excess damage, " +
+                "if a Giant, Wizard, or spell you controlled dealt damage to it this turn, draw a card.";
     }
 
     private AegarTheFreezingFlameTriggeredAbility(final AegarTheFreezingFlameTriggeredAbility ability) {
@@ -73,12 +75,6 @@ class AegarTheFreezingFlameTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public AegarTheFreezingFlameTriggeredAbility copy() {
         return new AegarTheFreezingFlameTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a creature or planeswalker an opponent controls is dealt excess damage, " +
-                "if a Giant, Wizard, or spell you controlled dealt damage to it this turn, draw a card.";
     }
 }
 

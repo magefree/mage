@@ -63,6 +63,9 @@ class AjanisLastStandTriggeredAbility extends TriggeredAbilityImpl {
                 new CreateTokenEffect(new AvatarToken2()),
                 new SacrificeSourceCost()
         ), false);
+        this.staticText = "Whenever a creature or planeswalker you control dies, "
+                + "you may sacrifice {this}. "
+                + "If you do, create a 4/4 white Avatar creature token with flying.";
     }
 
     public AjanisLastStandTriggeredAbility(final AjanisLastStandTriggeredAbility ability) {
@@ -90,12 +93,5 @@ class AjanisLastStandTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a creature or planeswalker you control dies, "
-                + "you may sacrifice {this}. "
-                + "If you do, create a 4/4 white Avatar creature token with flying.";
     }
 }

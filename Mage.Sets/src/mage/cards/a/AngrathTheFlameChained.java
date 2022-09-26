@@ -132,6 +132,7 @@ class AngrathTheFlameChainedDelayedTriggeredAbility extends DelayedTriggeredAbil
 
     public AngrathTheFlameChainedDelayedTriggeredAbility(Effect effect) {
         super(effect, Duration.Custom);
+        staticText = "Sacrifice it at the beginning of the next end step if it has mana value 3 or less.";
     }
 
     public AngrathTheFlameChainedDelayedTriggeredAbility(final AngrathTheFlameChainedDelayedTriggeredAbility ability) {
@@ -154,10 +155,5 @@ class AngrathTheFlameChainedDelayedTriggeredAbility extends DelayedTriggeredAbil
     @Override
     public AngrathTheFlameChainedDelayedTriggeredAbility copy() {
         return new AngrathTheFlameChainedDelayedTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Sacrifice it at the beginning of the next end step if it has mana value 3 or less.";
     }
 }

@@ -46,6 +46,7 @@ class AlluringSuitorTriggeredAbility extends TriggeredAbilityImpl {
 
     AlluringSuitorTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TransformSourceEffect());
+        this.staticText = "When you attack with exactly two creatures, transform {this}.";
     }
 
     private AlluringSuitorTriggeredAbility(final AlluringSuitorTriggeredAbility ability) {
@@ -72,10 +73,5 @@ class AlluringSuitorTriggeredAbility extends TriggeredAbilityImpl {
                 .map(game::getPermanent)
                 .filter(permanent -> permanent.isCreature(game))
                 .count() == 2;
-    }
-
-    @Override
-    public String getRule() {
-        return "When you attack with exactly two creatures, transform {this}.";
     }
 }

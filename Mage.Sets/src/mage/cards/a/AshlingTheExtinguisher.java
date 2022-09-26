@@ -53,6 +53,7 @@ class AshlingTheExtinguisherTriggeredAbility extends TriggeredAbilityImpl {
     public AshlingTheExtinguisherTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeTargetEffect());
         this.addTarget(new TargetCreaturePermanent());
+        staticText = "Whenever {this} deals combat damage to a player, choose target creature that player controls. The player sacrifices that creature.";
     }
 
     public AshlingTheExtinguisherTriggeredAbility(final AshlingTheExtinguisherTriggeredAbility ability) {
@@ -84,10 +85,5 @@ class AshlingTheExtinguisherTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} deals combat damage to a player, choose target creature that player controls. The player sacrifices that creature.";
     }
 }

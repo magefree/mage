@@ -60,6 +60,8 @@ class ArchfiendOfSpiteAbility extends TriggeredAbilityImpl {
 
     ArchfiendOfSpiteAbility() {
         super(Zone.BATTLEFIELD, null, false);
+        staticText = "Whenever a source an opponent controls deals damage to {this}, " +
+                "that source's controller loses that much life unless they sacrifice that many permanents.";
     }
 
     private ArchfiendOfSpiteAbility(final ArchfiendOfSpiteAbility ability) {
@@ -89,12 +91,6 @@ class ArchfiendOfSpiteAbility extends TriggeredAbilityImpl {
         this.getEffects().clear();
         this.addEffect(new ArchfiendOfSpiteEffect(event.getAmount(), sourceControllerId));
         return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a source an opponent controls deals damage to {this}, " +
-                "that source's controller loses that much life unless they sacrifice that many permanents.";
     }
 }
 

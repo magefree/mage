@@ -62,74 +62,70 @@ public final class Aurification extends CardImpl {
     public Aurification copy() {
         return new Aurification(this);
     }
+}
 
-    public static class AddGoldCountersAbility extends TriggeredAbilityImpl {
+class AddGoldCountersAbility extends TriggeredAbilityImpl {
 
-        public AddGoldCountersAbility() {
-            super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.GOLD.createInstance()));
-        }
-
-        public AddGoldCountersAbility(final AddGoldCountersAbility ability) {
-            super(ability);
-        }
-
-        @Override
-        public AddGoldCountersAbility copy() {
-            return new AddGoldCountersAbility(this);
-        }
-
-        @Override
-        public boolean checkEventType(GameEvent event, Game game) {
-            return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-        }
-
-        @Override
-        public boolean checkTrigger(GameEvent event, Game game) {
-            if (event.getPlayerId().equals(this.getControllerId())) {
-                Permanent permanent = game.getPermanent(event.getSourceId());
-                if (permanent != null && permanent.isCreature(game)) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getSourceId(), game));
-                    }
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        @Override
-        public String getRule() {
-            return "Whenever a creature deals damage to you, put a gold counter on it.";
-        }
+    public AddGoldCountersAbility() {
+        super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.GOLD.createInstance()));
+        staticText = "Whenever a creature deals damage to you, put a gold counter on it.";
 
     }
 
-    public static class RemoveAllGoldCountersEffect extends OneShotEffect {
-        public RemoveAllGoldCountersEffect() {
-            super(Outcome.Neutral);
-            this.staticText = "remove all gold counters from all creatures";
-        }
+    private AddGoldCountersAbility(final AddGoldCountersAbility ability) {
+        super(ability);
+    }
 
-        public RemoveAllGoldCountersEffect(final RemoveAllGoldCountersEffect effect) {
-            super(effect);
-        }
+    @Override
+    public AddGoldCountersAbility copy() {
+        return new AddGoldCountersAbility(this);
+    }
 
-        @Override
-        public RemoveAllGoldCountersEffect copy() {
-            return new RemoveAllGoldCountersEffect(this);
-        }
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+    }
 
-        @Override
-        public boolean apply(Game game, Ability source) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(CardType.CREATURE, game)) {
-                if (permanent != null) {
-                    int numToRemove = permanent.getCounters(game).getCount(CounterType.GOLD);
-                    if (numToRemove > 0) {
-                        permanent.removeCounters(CounterType.GOLD.getName(), numToRemove, source, game);
-                    }
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getPlayerId().equals(this.getControllerId())) {
+            Permanent permanent = game.getPermanent(event.getSourceId());
+            if (permanent != null && permanent.isCreature(game)) {
+                for (Effect effect : this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(event.getSourceId(), game));
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+class RemoveAllGoldCountersEffect extends OneShotEffect {
+    public RemoveAllGoldCountersEffect() {
+        super(Outcome.Neutral);
+        this.staticText = "remove all gold counters from all creatures";
+    }
+
+    private RemoveAllGoldCountersEffect(final RemoveAllGoldCountersEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public RemoveAllGoldCountersEffect copy() {
+        return new RemoveAllGoldCountersEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(CardType.CREATURE, game)) {
+            if (permanent != null) {
+                int numToRemove = permanent.getCounters(game).getCount(CounterType.GOLD);
+                if (numToRemove > 0) {
+                    permanent.removeCounters(CounterType.GOLD.getName(), numToRemove, source, game);
                 }
             }
-            return true;
         }
+        return true;
     }
 }

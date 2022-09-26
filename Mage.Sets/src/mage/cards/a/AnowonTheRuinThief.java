@@ -63,6 +63,9 @@ class AnowonTheRuinThiefTriggeredAbility extends TriggeredAbilityImpl {
     AnowonTheRuinThiefTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AnowonTheRuinThiefEffect(), false);
         this.addWatcher(new AnowonTheRuinThiefWatcher());
+        staticText = "Whenever one or more Rogues you control deal combat damage to a player, " +
+                "that player mills a card for each 1 damage dealt to them. " +
+                "If the player mills at least one creature card this way, you draw a card.";
     }
 
     private AnowonTheRuinThiefTriggeredAbility(final AnowonTheRuinThiefTriggeredAbility ability) {
@@ -98,13 +101,6 @@ class AnowonTheRuinThiefTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever one or more Rogues you control deal combat damage to a player, " +
-                "that player mills a card for each 1 damage dealt to them. " +
-                "If the player mills at least one creature card this way, you draw a card.";
     }
 }
 

@@ -50,6 +50,7 @@ class AcquisitionOctopusTriggeredAbility extends TriggeredAbilityImpl {
 
     AcquisitionOctopusTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
+        this.staticText = "Whenever {this} or equipped creature deals combat damage to a player, draw a card.";
     }
 
     private AcquisitionOctopusTriggeredAbility(final AcquisitionOctopusTriggeredAbility ability) {
@@ -76,10 +77,5 @@ class AcquisitionOctopusTriggeredAbility extends TriggeredAbilityImpl {
         }
         Permanent permanent = getSourcePermanentOrLKI(game);
         return permanent != null && event.getSourceId().equals(permanent.getAttachedTo());
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} or equipped creature deals combat damage to a player, draw a card.";
     }
 }

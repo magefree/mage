@@ -60,6 +60,7 @@ class AvacynsCollarTriggeredAbility extends TriggeredAbilityImpl {
 
     public AvacynsCollarTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new SpiritWhiteToken()));
+        staticText = "Whenever equipped creature dies, if it was a Human, create a 1/1 white Spirit creature token with flying.";
     }
 
     public AvacynsCollarTriggeredAbility(final AvacynsCollarTriggeredAbility ability) {
@@ -85,10 +86,5 @@ class AvacynsCollarTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever equipped creature dies, if it was a Human, create a 1/1 white Spirit creature token with flying.";
     }
 }

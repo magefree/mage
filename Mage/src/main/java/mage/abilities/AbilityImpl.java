@@ -64,6 +64,7 @@ public abstract class AbilityImpl implements Ability {
     protected Modes modes; // access to it by GetModes only (it can be overridden by some abilities)
     protected Zone zone;
     protected String name;
+    protected String staticText = "";
     protected AbilityWord abilityWord;
     protected String flavorWord;
     protected boolean usesStack = true;
@@ -104,6 +105,7 @@ public abstract class AbilityImpl implements Ability {
         this.sourceId = ability.sourceId;
         this.zone = ability.zone;
         this.name = ability.name;
+        this.staticText = ability.staticText;
         this.usesStack = ability.usesStack;
         this.manaCosts = ability.manaCosts.copy();
         this.manaCostsToPay = ability.manaCostsToPay.copy();
@@ -785,6 +787,9 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public String getRule() {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         return getRule(false);
     }
 

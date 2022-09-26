@@ -65,6 +65,9 @@ class AnaxHardenedInTheForgeTriggeredAbility extends DiesThisOrAnotherCreatureTr
 
     AnaxHardenedInTheForgeTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter) {
         super(effect, optional, filter);
+        this.staticText = "Whenever {this} or another nontoken creature you control dies, "
+                + "create a 1/1 red Satyr creature token with \"This creature can't block.\" "
+                + "If the creature had power 4 or greater, create two of those tokens instead.";
     }
 
     private AnaxHardenedInTheForgeTriggeredAbility(final AnaxHardenedInTheForgeTriggeredAbility ability) {
@@ -85,12 +88,5 @@ class AnaxHardenedInTheForgeTriggeredAbility extends DiesThisOrAnotherCreatureTr
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} or another nontoken creature you control dies, "
-                + "create a 1/1 red Satyr creature token with \"This creature can't block.\" "
-                + "If the creature had power 4 or greater, create two of those tokens instead.";
     }
 }

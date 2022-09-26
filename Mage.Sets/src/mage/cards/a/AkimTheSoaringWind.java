@@ -102,6 +102,8 @@ class AkimTheSoaringTokenAbility extends TriggeredAbilityImpl {
 
     public AkimTheSoaringTokenAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new BirdToken(), 1), false);
+        this.staticText = "Whenever you create one or more tokens for the first time each turn, "
+                + "create a 1/1 white Bird creature token with flying.";
     }
 
     public AkimTheSoaringTokenAbility(final AkimTheSoaringTokenAbility ability) {
@@ -126,12 +128,6 @@ class AkimTheSoaringTokenAbility extends TriggeredAbilityImpl {
     @Override
     public TriggeredAbility copy() {
         return new AkimTheSoaringTokenAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you create one or more tokens for the first time each turn, "
-                + "create a 1/1 white Bird creature token with flying.";
     }
 }
 

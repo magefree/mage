@@ -41,6 +41,7 @@ class AngelicChorusTriggeredAbility extends TriggeredAbilityImpl {
 
     public AngelicChorusTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AngelicChorusEffect(), false);
+        staticText = "Whenever a creature enters the battlefield under your control, you gain life equal to its toughness.";
     }
 
     public AngelicChorusTriggeredAbility(AngelicChorusTriggeredAbility ability) {
@@ -62,11 +63,6 @@ class AngelicChorusTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a creature enters the battlefield under your control, you gain life equal to its toughness.";
     }
 
     @Override

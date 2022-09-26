@@ -81,6 +81,8 @@ class AthreosShroudVeiledTriggeredAbility extends TriggeredAbilityImpl {
 
     AthreosShroudVeiledTriggeredAbility() {
         super(Zone.BATTLEFIELD, null, false);
+        staticText = "Whenever a creature with a coin counter on it dies or is put into exile, "
+                + "return that card to the battlefield under your control.";
     }
 
     private AthreosShroudVeiledTriggeredAbility(final AthreosShroudVeiledTriggeredAbility ability) {
@@ -115,12 +117,6 @@ class AthreosShroudVeiledTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public AthreosShroudVeiledTriggeredAbility copy() {
         return new AthreosShroudVeiledTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a creature with a coin counter on it dies or is put into exile, "
-                + "return that card to the battlefield under your control.";
     }
 }
 

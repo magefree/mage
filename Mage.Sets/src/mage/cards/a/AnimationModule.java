@@ -61,6 +61,7 @@ class AnimationModuleTriggeredAbility extends TriggeredAbilityImpl {
 
     AnimationModuleTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new CreateTokenEffect(new ServoToken()), new GenericManaCost(1)), false);
+        staticText = "Whenever one or more +1/+1 counters are put on a permanent you control, you may pay {1}. If you do, create a 1/1 colorless Servo artifact creature token.";
     }
 
     AnimationModuleTriggeredAbility(final AnimationModuleTriggeredAbility ability) {
@@ -87,11 +88,6 @@ class AnimationModuleTriggeredAbility extends TriggeredAbilityImpl {
             return permanent != null && permanent.isControlledBy(this.getControllerId());
         }
         return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever one or more +1/+1 counters are put on a permanent you control, you may pay {1}. If you do, create a 1/1 colorless Servo artifact creature token.";
     }
 }
 

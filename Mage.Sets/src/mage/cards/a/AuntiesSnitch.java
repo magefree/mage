@@ -62,6 +62,7 @@ class AuntiesSnitchTriggeredAbility extends TriggeredAbilityImpl {
 
     public AuntiesSnitchTriggeredAbility() {
         super(Zone.GRAVEYARD, new ReturnToHandSourceEffect(), true);
+        staticText = "Whenever a Goblin or Rogue you control deals combat damage to a player, if {this} is in your graveyard, you may return {this} to your hand.";
     }
 
     public AuntiesSnitchTriggeredAbility(final AuntiesSnitchTriggeredAbility ability) {
@@ -83,10 +84,5 @@ class AuntiesSnitchTriggeredAbility extends TriggeredAbilityImpl {
         DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
         Permanent p = game.getPermanent(event.getSourceId());
         return damageEvent.isCombatDamage() && filter.match(p, getControllerId(), this, game);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a Goblin or Rogue you control deals combat damage to a player, if {this} is in your graveyard, you may return {this} to your hand.";
     }
 }

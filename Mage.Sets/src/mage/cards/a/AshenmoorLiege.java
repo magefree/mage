@@ -70,6 +70,7 @@ class AshenmoorLiegeTriggeredAbility extends TriggeredAbilityImpl {
 
     public AshenmoorLiegeTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(4), false);
+        staticText = "Whenever {this} becomes the target of a spell or ability an opponent controls, that player loses 4 life.";
     }
 
     public AshenmoorLiegeTriggeredAbility(final AshenmoorLiegeTriggeredAbility ability) {
@@ -94,10 +95,4 @@ class AshenmoorLiegeTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} becomes the target of a spell or ability an opponent controls, that player loses 4 life.";
-    }
-
 }

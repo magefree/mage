@@ -55,6 +55,7 @@ class AngelheartVialTriggeredAbility extends TriggeredAbilityImpl {
 
     public AngelheartVialTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AngelheartVialEffect(), true);
+        this.staticText = "Whenever you're dealt damage, you may put that many charge counters on {this}.";
     }
 
     public AngelheartVialTriggeredAbility(final AngelheartVialTriggeredAbility ability) {
@@ -78,11 +79,6 @@ class AngelheartVialTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you're dealt damage, you may put that many charge counters on {this}.";
     }
 }
 

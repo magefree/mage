@@ -22,7 +22,6 @@ public final class AetherSting extends CardImpl {
     public AetherSting(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");
 
-
         // Whenever an opponent casts a creature spell, Aether Sting deals 1 damage to that player.
         this.addAbility(new AetherStingTriggeredAbility());
     }
@@ -41,6 +40,7 @@ class AetherStingTriggeredAbility extends TriggeredAbilityImpl {
 
     public AetherStingTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1), false);
+        this.staticText = "Whenever an opponent casts a creature spell, {this} deals 1 damage to that player.";
     }
 
     public AetherStingTriggeredAbility(final AetherStingTriggeredAbility ability) {
@@ -67,10 +67,5 @@ class AetherStingTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever an opponent casts a creature spell, {this} deals 1 damage to that player.";
     }
 }

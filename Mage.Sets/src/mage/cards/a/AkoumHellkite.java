@@ -56,6 +56,8 @@ class AkoumHellkiteTriggeredAbility extends TriggeredAbilityImpl {
 
     public AkoumHellkiteTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AkoumHellkiteDamageEffect());
+        this.staticText = "<i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, " +
+                "{this} deals 1 damage to any target. If that land is a Mountain, {this} deals 2 damage instead.";
     }
 
     private AkoumHellkiteTriggeredAbility(final AkoumHellkiteTriggeredAbility ability) {
@@ -91,12 +93,6 @@ class AkoumHellkiteTriggeredAbility extends TriggeredAbilityImpl {
         }
         // The Hellkit somehow lost it's damage effect but not it's landfall ability
         return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "<i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, " +
-                "{this} deals 1 damage to any target. If that land is a Mountain, {this} deals 2 damage instead.";
     }
 }
 

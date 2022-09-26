@@ -65,6 +65,7 @@ class AkiriFearlessVoyagerTriggeredAbility extends TriggeredAbilityImpl {
 
     AkiriFearlessVoyagerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
+        this.staticText = "Whenever you attack a player with one or more equipped creatures, draw a card.";
     }
 
     private AkiriFearlessVoyagerTriggeredAbility(final AkiriFearlessVoyagerTriggeredAbility ability) {
@@ -93,11 +94,6 @@ class AkiriFearlessVoyagerTriggeredAbility extends TriggeredAbilityImpl {
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
                 .anyMatch(permanent -> permanent.hasSubtype(SubType.EQUIPMENT, game));
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you attack a player with one or more equipped creatures, draw a card.";
     }
 }
 

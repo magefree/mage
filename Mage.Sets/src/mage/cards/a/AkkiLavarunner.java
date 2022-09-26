@@ -56,6 +56,7 @@ class AkkiLavarunnerAbility extends TriggeredAbilityImpl {
 
     public AkkiLavarunnerAbility() {
         super(Zone.BATTLEFIELD, new FlipSourceEffect(new TokTokVolcanoBorn()));
+        this.staticText = "Whenever {this} deals damage to an opponent, flip it.";
     }
 
     public AkkiLavarunnerAbility(final AkkiLavarunnerAbility ability) {
@@ -76,11 +77,6 @@ class AkkiLavarunnerAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
         return damageEvent.isCombatDamage() && this.sourceId.equals(event.getSourceId());
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} deals damage to an opponent, flip it.";
     }
 }
 

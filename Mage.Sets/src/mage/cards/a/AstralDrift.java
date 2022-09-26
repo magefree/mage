@@ -55,6 +55,9 @@ class AstralDriftTriggeredAbility extends TriggeredAbilityImpl {
     AstralDriftTriggeredAbility() {
         super(Zone.ALL, new AstralDriftEffect(), true);
         this.addTarget(new TargetCreaturePermanent());
+        staticText = "Whenever you cycle {this} or cycle another card while {this} is on the battlefield, " +
+                "you may exile target creature. If you do, return that card to the battlefield " +
+                "under its owner's control at the beginning of the next end step.";
     }
 
     private AstralDriftTriggeredAbility(final AstralDriftTriggeredAbility effect) {
@@ -88,13 +91,6 @@ class AstralDriftTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public AstralDriftTriggeredAbility copy() {
         return new AstralDriftTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you cycle {this} or cycle another card while {this} is on the battlefield, " +
-                "you may exile target creature. If you do, return that card to the battlefield " +
-                "under its owner's control at the beginning of the next end step.";
     }
 }
 

@@ -50,6 +50,7 @@ class ArchivistOfOghmaTriggeredAbility extends TriggeredAbilityImpl {
     public ArchivistOfOghmaTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(1), false);
         this.addEffect(new DrawCardSourceControllerEffect(1));
+        staticText = "Whenever an opponent searches their library, you gain 1 life and draw a card.";
     }
 
     public ArchivistOfOghmaTriggeredAbility(final ArchivistOfOghmaTriggeredAbility ability) {
@@ -70,10 +71,5 @@ class ArchivistOfOghmaTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getTargetId().equals(event.getPlayerId())
                 && game.getOpponents(getControllerId()).contains(event.getTargetId());
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever an opponent searches their library, you gain 1 life and draw a card.";
     }
 }

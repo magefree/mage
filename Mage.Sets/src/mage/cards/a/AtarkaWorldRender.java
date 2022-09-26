@@ -62,6 +62,7 @@ class AtarkaWorldRenderEffect extends TriggeredAbilityImpl {
 
     public AtarkaWorldRenderEffect() {
         super(Zone.BATTLEFIELD, new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
+        staticText = "Whenever a Dragon you control attacks, it gains double strike until end of turn.";
     }
 
     public AtarkaWorldRenderEffect(final AtarkaWorldRenderEffect ability) {
@@ -90,10 +91,4 @@ class AtarkaWorldRenderEffect extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getRule() {
-        return "Whenever a Dragon you control attacks, it gains double strike until end of turn.";
-    }
-
 }
