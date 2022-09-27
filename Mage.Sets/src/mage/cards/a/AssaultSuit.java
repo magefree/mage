@@ -1,13 +1,10 @@
-
 package mage.cards.a;
 
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.Effect;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantAttackControllerAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
@@ -19,11 +16,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -36,23 +33,22 @@ public final class AssaultSuit extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +2/+2, has haste, can't attack you or a planeswalker you control, and can't be sacrificed.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2));
-        Effect effect = new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.EQUIPMENT);
-        effect.setText(", has haste");
-        ability.addEffect(effect);
-        effect = new CantAttackControllerAttachedEffect(AttachmentType.EQUIPMENT, true);
-        effect.setText(", can't attack you or planeswalkers you control");
-        ability.addEffect(effect);
-        effect = new AssaultSuitCantBeSacrificed();
-        effect.setText(", and can't be sacrificed");
-        ability.addEffect(effect);
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(2, 2));
+        ability.addEffect(new GainAbilityAttachedEffect(
+                HasteAbility.getInstance(), AttachmentType.EQUIPMENT
+        ).setText(", has haste"));
+        ability.addEffect(new CantAttackControllerAttachedEffect(AttachmentType.EQUIPMENT, true)
+                .setText(", can't attack you or planeswalkers you control"));
+        ability.addEffect(new AssaultSuitCantBeSacrificed());
         this.addAbility(ability);
 
         // At the beginning of each opponent's upkeep, you may have that player gain control of equipped creature until end of turn. If you do, untap it.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AssaultSuitGainControlEffect(), TargetController.OPPONENT, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new AssaultSuitGainControlEffect(), TargetController.OPPONENT, false
+        ));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.Detriment, new GenericManaCost(3), false));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private AssaultSuit(final AssaultSuit card) {
@@ -65,14 +61,14 @@ public final class AssaultSuit extends CardImpl {
     }
 }
 
-class AssaultSuitCantBeSacrificed extends ContinuousRuleModifyingEffectImpl {
+class AssaultSuitCantBeSacrificed extends ContinuousEffectImpl {
 
     public AssaultSuitCantBeSacrificed() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment, true, false);
-        staticText = "and can't be sacrificed";
+        super(Duration.WhileOnBattlefield, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
+        staticText = ", and can't be sacrificed";
     }
 
-    private AssaultSuitCantBeSacrificed(final AssaultSuitCantBeSacrificed effect) {
+    public AssaultSuitCantBeSacrificed(final AssaultSuitCantBeSacrificed effect) {
         super(effect);
     }
 
@@ -82,19 +78,12 @@ class AssaultSuitCantBeSacrificed extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        return "This creature can't be sacrificed.";
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SACRIFICE_PERMANENT;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
-        return equipment != null && equipment.isAttachedTo(event.getTargetId());
+    public boolean apply(Game game, Ability source) {
+        Optional.ofNullable(source.getSourcePermanentIfItStillExists(game))
+                .map(Permanent::getAttachedTo)
+                .map(game::getPermanent)
+                .ifPresent(permanent -> permanent.setCanBeSacrificed(false));
+        return true;
     }
 }
 
@@ -105,7 +94,7 @@ class AssaultSuitGainControlEffect extends OneShotEffect {
         this.staticText = "you may have that player gain control of equipped creature until end of turn. If you do, untap it";
     }
 
-    private AssaultSuitGainControlEffect(final AssaultSuitGainControlEffect effect) {
+    public AssaultSuitGainControlEffect(final AssaultSuitGainControlEffect effect) {
         super(effect);
     }
 
@@ -118,22 +107,24 @@ class AssaultSuitGainControlEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player activePlayer = game.getPlayer(game.getActivePlayerId());
-        Permanent equipment = game.getPermanent(source.getSourceId());
-        if (controller != null && activePlayer != null && equipment != null) {
-            if (equipment.getAttachedTo() != null) {
-                Permanent equippedCreature = game.getPermanent(equipment.getAttachedTo());
-                if (equippedCreature != null && controller.chooseUse(outcome,
-                        "Let have " + activePlayer.getLogName() + " gain control of " + equippedCreature.getLogName() + '?', source, game)) {
-                    equippedCreature.untap(game);
-                    ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfTurn, activePlayer.getId());
-                    effect.setTargetPointer(new FixedTarget(equipment.getAttachedTo(), game));
-                    game.addEffect(effect, source);
-                }
-            }
+        Permanent equipment = source.getSourcePermanentIfItStillExists(game);
+        if (controller == null || activePlayer == null || equipment == null) {
+            return false;
+        }
+        if (equipment.getAttachedTo() == null) {
             return true;
         }
+        Permanent equippedCreature = game.getPermanent(equipment.getAttachedTo());
+        if (equippedCreature == null || !controller.chooseUse(outcome,
+                "Have " + activePlayer.getLogName() + " gain control of " + equippedCreature.getLogName() + '?', source, game)) {
+            return true;
+        }
+        equippedCreature.untap(game);
+        ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfTurn, activePlayer.getId());
+        effect.setTargetPointer(new FixedTarget(equipment.getAttachedTo(), game));
+        game.addEffect(effect, source);
+        return true;
 
 
-        return false;
     }
 }
