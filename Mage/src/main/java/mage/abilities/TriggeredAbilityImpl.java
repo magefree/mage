@@ -175,6 +175,10 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
     @Override
     public String getRule() {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+
         StringBuilder sb = new StringBuilder();
         String prefix;
         if (abilityWord != null) {
