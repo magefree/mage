@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -28,7 +27,7 @@ public final class SkizzikSurger extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // Echo-Sacrifice two lands.
-        this.addAbility(new EchoAbility(new SacrificeTargetCost(2, 2, new FilterControlledLandPermanent("lands"), true)));
+        this.addAbility(new EchoAbility(new SacrificeTargetCost(2, 2, new FilterControlledLandPermanent("lands"))));
     }
 
     private SkizzikSurger(final SkizzikSurger card) {

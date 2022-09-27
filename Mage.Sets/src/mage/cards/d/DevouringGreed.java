@@ -15,7 +15,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -35,7 +34,7 @@ public final class DevouringGreed extends CardImpl {
 
 
         // As an additional cost to cast Devouring Greed, you may sacrifice any number of Spirits.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(0, Integer.MAX_VALUE, filter, true));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(0, Integer.MAX_VALUE, filter));
 
         // Target player loses 2 life plus 2 life for each Spirit sacrificed this way. You gain that much life.
         this.getSpellAbility().addEffect(new DevouringGreedEffect());

@@ -13,7 +13,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -32,7 +31,7 @@ public final class BloodBairn extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new BoostSourceEffect(2, 2, Duration.EndOfTurn),
-                new SacrificeTargetCost(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true)));
+                new SacrificeTargetCost(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
 
     }
 

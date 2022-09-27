@@ -17,7 +17,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.game.permanent.token.ThopterToken;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
@@ -45,7 +44,7 @@ public final class BreyaEtheriumShaper extends CardImpl {
                 Zone.BATTLEFIELD,
                 new DamageTargetEffect(3),
                 new GenericManaCost(2));
-        ability.addCost(new SacrificeTargetCost(2, 2, new FilterControlledArtifactPermanent("artifacts"), true));
+        ability.addCost(new SacrificeTargetCost(2, 2, new FilterControlledArtifactPermanent("artifacts")));
         ability.addTarget(new TargetPlayerOrPlaneswalker());
 
         // Target creature gets -4/-4 until end of turn.

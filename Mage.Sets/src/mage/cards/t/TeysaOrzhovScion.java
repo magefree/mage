@@ -16,7 +16,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.permanent.token.SpiritWhiteToken;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -46,7 +45,7 @@ public final class TeysaOrzhovScion extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Sacrifice three white creatures: Exile target creature.
-        Ability ability = new SimpleActivatedAbility(new ExileTargetEffect(), new SacrificeTargetCost(3, 3, filterWhite, true));
+        Ability ability = new SimpleActivatedAbility(new ExileTargetEffect(), new SacrificeTargetCost(3, 3, filterWhite));
         ability.addTarget(new TargetCreaturePermanent().withChooseHint("to exile"));
         this.addAbility(ability);
 

@@ -44,7 +44,6 @@ class BrutalSuppressionAdditionalCostEffect extends CostModificationEffectImpl {
 
     static {
         filter2.add(SubType.REBEL.getPredicate());
-        filter.add(TokenPredicate.FALSE);
     }
 
     BrutalSuppressionAdditionalCostEffect() {

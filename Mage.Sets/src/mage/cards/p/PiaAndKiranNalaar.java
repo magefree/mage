@@ -19,7 +19,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.game.permanent.token.ThopterColorlessToken;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetAnyTarget;
 
 /**
@@ -43,7 +42,7 @@ public final class PiaAndKiranNalaar extends CardImpl {
 
         // {2}{R}, Sacrifice an artifact: Pia and Kiran Nalaar deals 2 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl<>("{2}{R}"));
-        ability.addCost(new SacrificeTargetCost(1, 1, new FilterControlledArtifactPermanent("an artifact"), true));
+        ability.addCost(new SacrificeTargetCost(1, 1, new FilterControlledArtifactPermanent("an artifact")));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

@@ -17,7 +17,6 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -49,7 +48,7 @@ public final class KyscuDrake extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{G}")));
 
         // Sacrifice Kyscu Drake and a creature named Spitting Drake: Search your library for a card named Viashivan Dragon and put that card onto the battlefield. Then shuffle your library.
-        this.addAbility(new SimpleActivatedAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(1, 1, filter), false, true, Outcome.PutCardInPlay), new CompositeCost(new SacrificeSourceCost(), new SacrificeTargetCost(1, 1, filterSpitting, false)), "sacrifice {this} and a creature named Spitting Drake"));
+        this.addAbility(new SimpleActivatedAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(1, 1, filter), false, true, Outcome.PutCardInPlay), new CompositeCost(new SacrificeSourceCost(), new SacrificeTargetCost(1, 1, filterSpitting)), "sacrifice {this} and a creature named Spitting Drake"));
     }
 
     private KyscuDrake(final KyscuDrake card) {

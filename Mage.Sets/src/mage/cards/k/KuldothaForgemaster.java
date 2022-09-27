@@ -14,9 +14,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactCard;
-import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -35,7 +33,7 @@ public final class KuldothaForgemaster extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterArtifactCard())),
                 new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(3, 3, StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT, false));
+        ability.addCost(new SacrificeTargetCost(3, 3, StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT));
         this.addAbility(ability);
     }
 

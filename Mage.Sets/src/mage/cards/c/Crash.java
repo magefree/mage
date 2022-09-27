@@ -13,7 +13,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -34,7 +33,7 @@ public final class Crash extends CardImpl {
 
 
         // You may sacrifice a Mountain rather than pay Crash's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(1, 1, alternativeCostFilter, true)));
+        this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(1, 1, alternativeCostFilter)));
 
         // Destroy target artifact.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

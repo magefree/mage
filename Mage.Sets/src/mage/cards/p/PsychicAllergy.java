@@ -18,7 +18,6 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -45,7 +44,7 @@ public final class PsychicAllergy extends CardImpl {
         // At the beginning of your upkeep, destroy Psychic Allergy unless you sacrifice two Islands.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
                 new DoUnlessControllerPaysEffect(new DestroySourceEffect(),
-                        new SacrificeTargetCost(2, 2, filter, false)).setText("destroy {this} unless you sacrifice two Islands"),
+                        new SacrificeTargetCost(2, 2, filter)).setText("destroy {this} unless you sacrifice two Islands"),
                 TargetController.YOU,
                 false));
     }

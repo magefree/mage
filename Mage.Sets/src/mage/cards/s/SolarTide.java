@@ -13,7 +13,6 @@ import mage.constants.ComparisonType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -40,7 +39,7 @@ public final class SolarTide extends CardImpl {
         this.getSpellAbility().getModes().addMode(mode);
         
         // Entwine-Sacrifice two lands.
-        this.addAbility(new EntwineAbility(new SacrificeTargetCost(2, 2, new FilterControlledLandPermanent("two lands"), true)));
+        this.addAbility(new EntwineAbility(new SacrificeTargetCost(2, 2, new FilterControlledLandPermanent("two lands"))));
     }
 
     private SolarTide(final SolarTide card) {

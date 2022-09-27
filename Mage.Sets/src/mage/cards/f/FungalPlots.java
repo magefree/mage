@@ -18,7 +18,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.permanent.token.SaprolingToken;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -47,7 +46,7 @@ public final class FungalPlots extends CardImpl {
         SimpleActivatedAbility ability2 = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new GainLifeEffect(2),
-                new SacrificeTargetCost(2, 2, filter2, false)
+                new SacrificeTargetCost(2, 2, filter2)
         );
         ability2.addEffect(new DrawCardSourceControllerEffect(1).setText("and draw a card"));
         this.addAbility(ability2);

@@ -12,12 +12,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TimingRule;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ZombieMenaceToken;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -32,7 +30,7 @@ public final class CorpseCobble extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}{B}");
 
         // As an additional cost to cast this spell, sacrifice any number of creatures.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(0, Integer.MAX_VALUE, filter, true));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(0, Integer.MAX_VALUE, filter));
 
         // Create an X/X blue and black Zombie creature token with menace, where X is the total power of the sacrificed creatures.
         this.getSpellAbility().addEffect(new CorpseCobbleEffect());

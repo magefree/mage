@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -43,7 +42,7 @@ public final class ScavengerGrounds extends CardImpl {
                 new ExileGraveyardAllPlayersEffect(),
                 new ManaCostsImpl<>("{2}"));
         ability2.addCost(new TapSourceCost());
-        ability2.addCost(new SacrificeTargetCost(1, 1, filter, true));
+        ability2.addCost(new SacrificeTargetCost(1, 1, filter));
         this.addAbility(ability2);
     }
 

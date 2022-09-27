@@ -18,7 +18,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -46,7 +45,7 @@ public final class UktabiWildcats extends CardImpl {
         
         // {G}, Sacrifice a Forest: Regenerate Uktabi Wildcats.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new  RegenerateSourceEffect(), new ManaCostsImpl<>("{G}"));
-        ability.addCost(new SacrificeTargetCost(1, 1, sacrificeFilter, true));
+        ability.addCost(new SacrificeTargetCost(1, 1, sacrificeFilter));
         this.addAbility(ability);
     }
 

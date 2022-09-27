@@ -22,7 +22,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.permanent.token.SaprolingToken;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -55,7 +54,7 @@ public final class SavageThallid extends CardImpl {
         // Sacrifice a Saproling: Regenerate target Fungus.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
             new RegenerateTargetEffect(),
-            new SacrificeTargetCost(1,1, filter2, false));
+            new SacrificeTargetCost(1,1, filter2));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

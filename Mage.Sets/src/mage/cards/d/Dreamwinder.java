@@ -16,7 +16,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetLandPermanent;
 
 import java.util.UUID;
@@ -41,7 +40,7 @@ public final class Dreamwinder extends CardImpl {
         ability.addTarget(new TargetLandPermanent().withChooseHint("becomes an Island"));
         FilterControlledLandPermanent filter = new FilterControlledLandPermanent("an Island");
         filter.add(SubType.ISLAND.getPredicate());
-        ability.addCost(new SacrificeTargetCost(1, 1, filter, true));
+        ability.addCost(new SacrificeTargetCost(1, 1, filter));
         this.addAbility(ability);
     }   
     

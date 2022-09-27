@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.permanent.token.GoblinToken;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -30,7 +29,7 @@ public final class GoblinWarrens extends CardImpl {
 
         // {2}{R}, Sacrifice two Goblins: Create three 1/1 red Goblin creature tokens.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GoblinToken(), 3), new ManaCostsImpl<>("{2}{R}"));
-        ability.addCost(new SacrificeTargetCost(2, 2, filter, true));
+        ability.addCost(new SacrificeTargetCost(2, 2, filter));
         this.addAbility(ability);
     }
 

@@ -17,8 +17,6 @@ import mage.constants.Zone;
 import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.TreasureToken;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -49,7 +47,7 @@ public final class RuthlessKnave extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(1),
-                new SacrificeTargetCost(3, 3, filter, false)
+                new SacrificeTargetCost(3, 3, filter)
         ));
     }
 

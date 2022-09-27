@@ -18,7 +18,6 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -40,7 +39,7 @@ public final class VarolzTheScarStriped extends CardImpl {
 
         // Sacrifice another creature: Regenerate Varolz, the Scar-Striped.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(),
-                new SacrificeTargetCost(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true)));
+                new SacrificeTargetCost(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
     }
 
     private VarolzTheScarStriped(final VarolzTheScarStriped card) {

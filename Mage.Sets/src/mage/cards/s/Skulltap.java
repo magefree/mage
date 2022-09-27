@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -20,7 +19,7 @@ public final class Skulltap extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
         // As an additional cost to cast Skulltap, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(1, 1, StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT, true));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(1, 1, StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         // Draw two cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
     }

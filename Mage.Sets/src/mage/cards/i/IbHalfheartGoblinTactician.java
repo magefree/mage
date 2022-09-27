@@ -21,7 +21,6 @@ import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.GoblinToken;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -55,7 +54,7 @@ public final class IbHalfheartGoblinTactician extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new CreateTokenEffect(new GoblinToken(), 2),
-                new SacrificeTargetCost(2, 2, filter, true)));
+                new SacrificeTargetCost(2, 2, filter)));
 
     }
 

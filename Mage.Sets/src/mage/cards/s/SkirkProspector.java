@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -36,7 +35,7 @@ public final class SkirkProspector extends CardImpl {
 
         // Sacrifice a Goblin: Add {R}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(1), 
-                new SacrificeTargetCost(1,1,filter,true),
+                new SacrificeTargetCost(1,1,filter),
                 new PermanentsOnBattlefieldCount(filter)));
     }
 

@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -34,7 +33,7 @@ public final class RavenousBaloth extends CardImpl {
 
         // Sacrifice a Beast: You gain 4 life.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(4),
-                new SacrificeTargetCost(1,1,filter,true)));
+                new SacrificeTargetCost(1,1,filter)));
     }
 
     private RavenousBaloth(final RavenousBaloth card) {

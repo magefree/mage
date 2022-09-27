@@ -21,7 +21,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -51,7 +50,7 @@ public final class KnightOfTheReliquary extends CardImpl {
         TargetCardInLibrary target = new TargetCardInLibrary(new FilterLandCard());
         Costs<Cost> costs = new CostsImpl<>();
         costs.add(new TapSourceCost());
-        costs.add(new SacrificeTargetCost(1, 1, filter, false));
+        costs.add(new SacrificeTargetCost(1, 1, filter));
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay), costs));
     }
 

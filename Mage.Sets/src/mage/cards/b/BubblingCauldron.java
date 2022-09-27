@@ -18,7 +18,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -43,7 +42,7 @@ public final class BubblingCauldron extends CardImpl {
         // {1}, {T}, Sacrifice a creature named Festering Newt: Each opponent loses 4 life. You gain life equal to the life lost this way.
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BubblingCauldronEffect(), new ManaCostsImpl<>("{1}"));
         ability2.addCost(new TapSourceCost());
-        ability2.addCost(new SacrificeTargetCost(1, 1, filter, true));
+        ability2.addCost(new SacrificeTargetCost(1, 1, filter));
         this.addAbility(ability2);
     }
 

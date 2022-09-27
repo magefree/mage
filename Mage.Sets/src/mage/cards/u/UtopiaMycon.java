@@ -18,7 +18,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.permanent.token.SaprolingToken;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -47,7 +46,7 @@ public final class UtopiaMycon extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new RemoveCountersSourceCost(CounterType.SPORE.createInstance(3))));
 
         // Sacrifice a Saproling: Add one mana of any color.
-        Ability ability = new AnyColorManaAbility(new SacrificeTargetCost(1, 1, filter, false),
+        Ability ability = new AnyColorManaAbility(new SacrificeTargetCost(1, 1, filter),
             new PermanentsOnBattlefieldCount(filter), false);
         this.addAbility(ability);
     }

@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -39,7 +38,7 @@ public final class DefiantSalvager extends CardImpl {
 
         // Sacrifice an artifact or creature: Put a +1/+1 counter on Defiant Salvager. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                new SacrificeTargetCost(1, 1, filter, true));
+                new SacrificeTargetCost(1, 1, filter));
         this.addAbility(ability);
 
     }

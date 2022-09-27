@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetSpell;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetEnchantmentPermanent;
 
 /**
@@ -38,7 +37,7 @@ public final class TeferisCare extends CardImpl {
 
         // {W}, Sacrifice an enchantment: Destroy target enchantment.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{W}"));
-        ability.addCost(new SacrificeTargetCost(1, 1, filter, true));
+        ability.addCost(new SacrificeTargetCost(1, 1, filter));
         ability.addTarget(new TargetEnchantmentPermanent());
         this.addAbility(ability);
         // {3}{U}{U}: Counter target enchantment spell.

@@ -17,7 +17,6 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.permanent.token.SaprolingToken;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -45,7 +44,7 @@ public final class ThallidGerminator extends CardImpl {
         // Sacrifice a Saproling: Target creature gets +1/+1 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
                 new BoostTargetEffect(1,1, Duration.EndOfTurn), 
-                new SacrificeTargetCost(1,1, filter, false));
+                new SacrificeTargetCost(1,1, filter));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

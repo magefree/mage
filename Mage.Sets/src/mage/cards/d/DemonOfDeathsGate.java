@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -39,7 +38,7 @@ public final class DemonOfDeathsGate extends CardImpl {
         
         // You may pay 6 life and sacrifice three black creatures rather than pay Demon of Death's Gate's mana cost
         AlternativeCostSourceAbility alternateCosts = new AlternativeCostSourceAbility(new PayLifeCost(6));
-        alternateCosts.addCost(new SacrificeTargetCost(3, 3, filter, false));
+        alternateCosts.addCost(new SacrificeTargetCost(3, 3, filter));
         this.addAbility(alternateCosts);
 
         this.addAbility(FlyingAbility.getInstance());

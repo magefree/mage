@@ -22,7 +22,6 @@ import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.DroidToken;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -50,7 +49,7 @@ public final class NuteGunray extends CardImpl {
         // {1}{T}, Sacrifice a non-token artifact: Create a 1/1 colorless Battle Droid artifact creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DroidToken()), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(1, 1, filter, false));
+        ability.addCost(new SacrificeTargetCost(1, 1, filter));
         this.addAbility(ability);
     }
 

@@ -21,7 +21,6 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  * @author TheElk801
@@ -53,7 +52,7 @@ public final class PriestOfForgottenGods extends CardImpl {
                 new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "")
                         .setText("and sacrifice a creature")
         );
-        ability.addCost(new SacrificeTargetCost(2, 2, filter, true));
+        ability.addCost(new SacrificeTargetCost(2, 2, filter));
         ability.addEffect(new BasicManaEffect(Mana.BlackMana(2)).setText("You add {B}{B}"));
         ability.addEffect(new DrawCardSourceControllerEffect(1).setText("and draw a card"));
         ability.addTarget(new TargetPlayer(0, Integer.MAX_VALUE, false));

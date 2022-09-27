@@ -18,7 +18,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.SaprolingToken;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -47,7 +46,7 @@ public final class Mycologist extends CardImpl {
 
         // Sacrifice a Saproling: You gain 2 life.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2),
-            new SacrificeTargetCost(1, 1, filter, false)));
+            new SacrificeTargetCost(1, 1, filter)));
     }
 
     private Mycologist(final Mycologist card) {

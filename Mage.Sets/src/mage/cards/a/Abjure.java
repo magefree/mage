@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetSpell;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -29,7 +28,7 @@ public final class Abjure extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         // As an additional cost to cast Abjure, sacrifice a blue permanent.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(1,1,filter, true));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(1,1,filter));
         
         // Counter target spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

@@ -21,7 +21,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.permanent.token.SaprolingToken;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -49,7 +48,7 @@ public final class PsychotropeThallid extends CardImpl {
         // {1}, Sacrifice a Saproling: Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(1),
-                new SacrificeTargetCost(1,1, filter, false));
+                new SacrificeTargetCost(1,1, filter));
         ability.addCost(new GenericManaCost(1));
         this.addAbility(ability);
     }

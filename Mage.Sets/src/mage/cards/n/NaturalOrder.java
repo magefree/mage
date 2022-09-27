@@ -12,7 +12,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -33,7 +32,7 @@ public final class NaturalOrder extends CardImpl {
 
 
         // As an additional cost to cast Natural Order, sacrifice a green creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(1,1,filter, true));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(1,1,filter));
         // Search your library for a green creature card and put it onto the battlefield. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(1 , filterCard), false, true));
     }

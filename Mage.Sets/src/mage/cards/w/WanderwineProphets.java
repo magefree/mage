@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -39,7 +38,7 @@ public final class WanderwineProphets extends CardImpl {
         // Whenever Wanderwine Prophets deals combat damage to a player, you may sacrifice a Merfolk. If you do, take an extra turn after this one.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(
                 new AddExtraTurnControllerEffect(),
-                new SacrificeTargetCost(1, 1, filter, true)
+                new SacrificeTargetCost(1, 1, filter)
         ), false);
         this.addAbility(ability);
 

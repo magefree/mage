@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -34,7 +33,7 @@ public final class HandOfEmrakul extends CardImpl {
         this.toughness = new MageInt(7);
 
         // You may sacrifice four Eldrazi Spawn rather than pay Hand of Emrakul's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(4, 4, filter, true)));
+        this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(4, 4, filter)));
         // Annihilator 1
         this.addAbility(new AnnihilatorAbility(1));
     }

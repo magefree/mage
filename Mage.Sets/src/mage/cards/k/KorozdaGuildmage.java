@@ -20,7 +20,6 @@ import mage.constants.Duration;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.SaprolingToken;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -56,7 +55,7 @@ public final class KorozdaGuildmage extends CardImpl {
 
         // {2}{B}{G}, Sacrifice a nontoken creature: create X 1/1 green Saproling creature tokens, where X is the sacrificed creature's toughness.
         ability = new SimpleActivatedAbility(new CreateTokenEffect(new SaprolingToken(),SacrificeCostCreaturesToughness.instance),new ManaCostsImpl<>("{2}{B}{G}"));
-        ability.addCost(new SacrificeTargetCost(1,1,filter, true));
+        ability.addCost(new SacrificeTargetCost(1,1,filter));
         this.addAbility(ability);
         
     }

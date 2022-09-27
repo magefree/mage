@@ -16,7 +16,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -42,7 +41,7 @@ public final class Lifespinner extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)),
                 new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(3, 3, new FilterControlledCreaturePermanent(SubType.SPIRIT, "three Spirits"), false));
+        ability.addCost(new SacrificeTargetCost(3, 3, new FilterControlledCreaturePermanent(SubType.SPIRIT, "three Spirits")));
         this.addAbility(ability);
     }
 

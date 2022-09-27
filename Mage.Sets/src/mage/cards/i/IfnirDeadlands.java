@@ -18,7 +18,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
 /**
@@ -49,7 +48,7 @@ public final class IfnirDeadlands extends CardImpl {
         // {2}{B}{B}, {t}, Sacrifice a Desert: Put two -1/-1 counters on target creature an opponent controls. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.M1M1.createInstance(2)), new ManaCostsImpl<>("{2}{B}{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(1, 1, filter, true));
+        ability.addCost(new SacrificeTargetCost(1, 1, filter));
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);
         

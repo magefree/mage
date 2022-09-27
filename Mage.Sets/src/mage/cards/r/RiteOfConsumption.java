@@ -14,7 +14,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
@@ -27,7 +26,7 @@ public final class RiteOfConsumption extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // As an additional cost to cast Rite of Consumption, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(1, 1, StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT, false));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(1, 1, StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         // Rite of Consumption deals damage equal to the sacrificed creature's power to target player. You gain life equal to the damage dealt this way.
         this.getSpellAbility().addEffect(new RiteOfConsumptionEffect());
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());

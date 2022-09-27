@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -30,7 +29,7 @@ public final class CostlyPlunder extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");
 
         // As an additional cost to cast Costly Plunder, sacrifice an artifact or creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(1, 1, filter, true));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(1, 1, filter));
 
         // Draw two cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));

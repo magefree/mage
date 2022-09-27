@@ -18,7 +18,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -45,7 +44,7 @@ public final class Clickslither extends CardImpl {
         Effect effect = new BoostSourceEffect(2,2,Duration.EndOfTurn);
         effect.setText("{this} gets +2/+2");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, 
-                new SacrificeTargetCost(1,1,filter,true));
+                new SacrificeTargetCost(1,1,filter));
         effect = new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains trample until end of turn");
         ability.addEffect(effect);

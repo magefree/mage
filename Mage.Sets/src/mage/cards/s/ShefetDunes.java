@@ -18,7 +18,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -51,7 +50,7 @@ public final class ShefetDunes extends CardImpl {
                 new BoostControlledEffect(1, 1, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{2}{W}{W}"));
         ability2.addCost(new TapSourceCost());
-        ability2.addCost(new SacrificeTargetCost(1, 1, filterDesertPermanent, true));
+        ability2.addCost(new SacrificeTargetCost(1, 1, filterDesertPermanent));
         this.addAbility(ability2);
     }
 

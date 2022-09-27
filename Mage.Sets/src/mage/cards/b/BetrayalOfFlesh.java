@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -37,7 +36,7 @@ public final class BetrayalOfFlesh extends CardImpl {
         mode.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.getSpellAbility().getModes().addMode(mode);
         // Entwine-Sacrifice three lands.
-        this.addAbility(new EntwineAbility(new SacrificeTargetCost(3, 3, new FilterControlledLandPermanent("three lands"), true)));
+        this.addAbility(new EntwineAbility(new SacrificeTargetCost(3, 3, new FilterControlledLandPermanent("three lands"))));
     }
 
     private BetrayalOfFlesh(final BetrayalOfFlesh card) {

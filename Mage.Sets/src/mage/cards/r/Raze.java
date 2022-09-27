@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -22,7 +21,7 @@ public final class Raze extends CardImpl {
 
 
         // As an additional cost to cast Raze, sacrifice a land.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(1, 1, StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT, true));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(1, 1, StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT));
         // Destroy target land.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetLandPermanent());

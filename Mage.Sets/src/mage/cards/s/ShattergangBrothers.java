@@ -22,7 +22,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -47,13 +46,13 @@ public final class ShattergangBrothers extends CardImpl {
         // {2}{R}, Sacrifice an artifact: Each other player sacrifices an artifact.
         FilterControlledPermanent filter = new FilterControlledArtifactPermanent("an artifact");
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShattergangBrothersEffect(filter), new ManaCostsImpl<>("{2}{R}"));
-        ability.addCost(new SacrificeTargetCost(1, 1, filter, true));
+        ability.addCost(new SacrificeTargetCost(1, 1, filter));
         this.addAbility(ability);
         // {2}{G}, Sacrifice an enchantment: Each other player sacrifices an enchantment.
         filter = new FilterControlledPermanent("an enchantment");
         filter.add(CardType.ENCHANTMENT.getPredicate());
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShattergangBrothersEffect(filter), new ManaCostsImpl<>("{2}{G}"));
-        ability.addCost(new SacrificeTargetCost(1, 1, filter, true));
+        ability.addCost(new SacrificeTargetCost(1, 1, filter));
         this.addAbility(ability);
     }
 

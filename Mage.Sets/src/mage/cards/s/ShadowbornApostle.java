@@ -19,7 +19,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -47,7 +46,7 @@ public final class ShadowbornApostle extends CardImpl {
         // {B}, Sacrifice six creatures named Shadowborn Apostle: Search your library for a Demon creature and put it onto the battlefield. Then shuffle your library.
         Effect effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false, true);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{B}"));
-        ability.addCost(new SacrificeTargetCost(6,6,filterApostle, false));
+        ability.addCost(new SacrificeTargetCost(6,6,filterApostle));
         this.addAbility(ability);
     }
 

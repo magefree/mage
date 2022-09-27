@@ -22,7 +22,6 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -40,7 +39,7 @@ public final class OozeGarden extends CardImpl {
 
         // {1}{G}, Sacrifice a non-Ooze creature: Create an X/X green Ooze creature token, where X is the sacrificed creature's power. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new OozeGardenCreateTokenEffect(), new ManaCostsImpl<>("{1}{G}"));
-        ability.addCost(new SacrificeTargetCost(1, 1, filter, true));
+        ability.addCost(new SacrificeTargetCost(1, 1, filter));
         this.addAbility(ability);
     }
 

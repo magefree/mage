@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -29,7 +28,7 @@ public final class Pulverize extends CardImpl {
 
 
         // You may sacrifice two Mountains rather than pay Pulverize's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(2, 2, filter, true)));
+        this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(2, 2, filter)));
         
         // Destroy all artifacts.
         this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterArtifactPermanent()));

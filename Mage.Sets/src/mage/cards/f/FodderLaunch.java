@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -24,7 +23,7 @@ public final class FodderLaunch extends CardImpl {
         this.subtype.add(SubType.GOBLIN);
 
         //As an additional cost to cast Fodder Launch, sacrifice a Goblin.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(1, 1, new FilterControlledCreaturePermanent(SubType.GOBLIN, "a Goblin"), true));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(1, 1, new FilterControlledCreaturePermanent(SubType.GOBLIN, "a Goblin")));
 
         //Target creature gets -5/-5 until end of turn. Fodder Launch deals 5 damage to that creature's controller.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-5, -5, Duration.EndOfTurn));

@@ -20,7 +20,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.SaprolingToken;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -53,14 +52,14 @@ public final class NemataPrimevalWarden extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(2, 2, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{G}"));
-        ability.addCost(new SacrificeTargetCost(1, 1, filter, false));
+        ability.addCost(new SacrificeTargetCost(1, 1, filter));
         this.addAbility(ability);
 
         // {1}{B}, Sacrifice 2 Saprolings: Draw a card.
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(1),
                 new ManaCostsImpl<>("{1}{B}"));
-        ability2.addCost(new SacrificeTargetCost(2, 2, filter, false));
+        ability2.addCost(new SacrificeTargetCost(2, 2, filter));
         this.addAbility(ability2);
     }
 

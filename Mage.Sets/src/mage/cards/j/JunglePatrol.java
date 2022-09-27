@@ -22,7 +22,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.WoodToken;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -52,7 +51,7 @@ public final class JunglePatrol extends CardImpl {
         // Sacrifice a token named Wood: Add {R}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD,
                 new BasicManaEffect(Mana.RedMana(1), new PermanentsOnBattlefieldCount(filter)),
-                new SacrificeTargetCost(1, 1, filter, true)));
+                new SacrificeTargetCost(1, 1, filter)));
     }
 
     private JunglePatrol(final JunglePatrol card) {

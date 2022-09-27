@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -43,7 +42,7 @@ public final class CabalArchon extends CardImpl {
         Effect effect = new GainLifeEffect(2);
         effect.setText("and you gain 2 life");
         ability.addEffect(effect);
-        ability.addCost(new SacrificeTargetCost(1, 1, filter, false));
+        ability.addCost(new SacrificeTargetCost(1, 1, filter));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

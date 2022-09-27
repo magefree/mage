@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetLandPermanent;
 
 import java.util.UUID;
@@ -46,7 +45,7 @@ public final class KukemssaSerpent extends CardImpl {
 
         // {U}, Sacrifice an Island: Target land an opponent controls becomes an Island until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBasicLandTargetEffect(Duration.EndOfTurn, SubType.ISLAND), new ManaCostsImpl<>("{U}"));
-        ability.addCost(new SacrificeTargetCost(1, 1, filterControlledLand, true));
+        ability.addCost(new SacrificeTargetCost(1, 1, filterControlledLand));
         ability.addTarget(new TargetLandPermanent(filterOpponentLand));
         this.addAbility(ability);
 

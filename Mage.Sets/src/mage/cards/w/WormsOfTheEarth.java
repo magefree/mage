@@ -17,7 +17,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -129,7 +128,7 @@ class WormsOfTheEarthDestroyEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
-            Cost cost = new SacrificeTargetCost(2, 2, new FilterControlledLandPermanent("two lands"), false);
+            Cost cost = new SacrificeTargetCost(2, 2, new FilterControlledLandPermanent("two lands"));
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {

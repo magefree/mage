@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -38,7 +37,7 @@ public final class GoblinSledder extends CardImpl {
 
         // Sacrifice a Goblin: Target creature gets +1/+1 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1,1,Duration.EndOfTurn), 
-                new SacrificeTargetCost(1,1, filter, true));
+                new SacrificeTargetCost(1,1, filter));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

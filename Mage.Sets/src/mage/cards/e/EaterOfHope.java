@@ -18,7 +18,6 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -45,12 +44,12 @@ public final class EaterOfHope extends CardImpl {
 
         // {B}, Sacrifice another creature: Regenerate Eater of Hope.
         Ability regenAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}"));
-        regenAbility.addCost(new SacrificeTargetCost(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true));
+        regenAbility.addCost(new SacrificeTargetCost(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(regenAbility);
 
         // {2}{B}, Sacrifice two other creatures: Destroy target creature.
         Ability destroyAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{2}{B}"));
-        destroyAbility.addCost(new SacrificeTargetCost(2, 2, destroyFilter, true));
+        destroyAbility.addCost(new SacrificeTargetCost(2, 2, destroyFilter));
         destroyAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(destroyAbility);
     }

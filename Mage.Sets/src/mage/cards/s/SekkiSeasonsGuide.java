@@ -21,7 +21,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SpiritToken;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -53,7 +52,7 @@ public final class SekkiSeasonsGuide extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToBattlefieldEffect(),
-                new SacrificeTargetCost(8, 8, filter, true)));
+                new SacrificeTargetCost(8, 8, filter)));
     }
 
     private SekkiSeasonsGuide(final SekkiSeasonsGuide card) {

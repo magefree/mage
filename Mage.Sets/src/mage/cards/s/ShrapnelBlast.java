@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetAnyTarget;
 
 /**
@@ -25,7 +24,7 @@ public final class ShrapnelBlast extends CardImpl {
     public ShrapnelBlast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
-        this.getSpellAbility().addCost(new SacrificeTargetCost(1, 1, filter, true));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(1, 1, filter));
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }

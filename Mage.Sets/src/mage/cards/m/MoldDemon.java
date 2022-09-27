@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -34,7 +33,7 @@ public final class MoldDemon extends CardImpl {
 
         // When Mold Demon enters the battlefield, sacrifice it unless you sacrifice two Swamps.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(2, 2, filter, true))));
+                new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(2, 2, filter))));
     }
 
     private MoldDemon(final MoldDemon card) {

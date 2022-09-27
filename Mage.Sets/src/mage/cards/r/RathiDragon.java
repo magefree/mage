@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -37,7 +36,7 @@ public final class RathiDragon extends CardImpl {
         
         // When Rathi Dragon enters the battlefield, sacrifice it unless you sacrifice two Mountains.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(2, 2, filter, true))));
+                new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(2, 2, filter))));
     }
 
     private RathiDragon(final RathiDragon card) {

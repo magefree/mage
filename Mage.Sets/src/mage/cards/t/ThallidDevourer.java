@@ -16,7 +16,6 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.permanent.token.SaprolingToken;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -44,7 +43,7 @@ public final class ThallidDevourer extends CardImpl {
         // Sacrifice a Saproling: Thallid Devourer gets +1/+2 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, 
                 new BoostSourceEffect(1, 2, Duration.EndOfTurn), 
-                new SacrificeTargetCost(1,1, filter, false)));
+                new SacrificeTargetCost(1,1, filter)));
     }
 
     private ThallidDevourer(final ThallidDevourer card) {

@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -37,7 +36,7 @@ public final class GoblinTurncoat extends CardImpl {
 
 		// Sacrifice a Goblin: Regenerate Goblin Turncoat.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(),
-			new SacrificeTargetCost(1, 1, filter, false));
+			new SacrificeTargetCost(1, 1, filter));
         this.addAbility(ability);
     }
 
