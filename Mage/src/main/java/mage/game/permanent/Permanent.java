@@ -91,6 +91,10 @@ public interface Permanent extends Card, Controllable {
 
     Set<UUID> getGoadingPlayers();
 
+    void setCanBeSacrificed(boolean canBeSacrificed);
+
+    boolean canBeSacrificed();
+
     void setCardNumber(String cid);
 
     void setExpansionSetCode(String expansionSetCode);
