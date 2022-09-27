@@ -22,7 +22,7 @@ public final class ConstantMists extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
         // Buyback-Sacrifice a land.
-        this.addAbility(new BuybackAbility(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land")))));
+        this.addAbility(new BuybackAbility(new SacrificeTargetCost(new FilterControlledLandPermanent("a land"))));
         
         // Prevent all combat damage that would be dealt this turn.
         this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true));

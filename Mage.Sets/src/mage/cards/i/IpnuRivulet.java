@@ -48,7 +48,7 @@ public final class IpnuRivulet extends CardImpl {
         // {1}{U}, {t}, Sacrifice a Desert: Target player puts the top four cards of their library into their graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(4), new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
+        ability.addCost(new SacrificeTargetCost(1, 1, filter, true));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

@@ -66,7 +66,7 @@ public final class Asmoranomardicadaistinaculdacar extends CardImpl {
         // Sacrifice two Foods: Target creature deals 6 damage to itself.
         Ability ability = new SimpleActivatedAbility(
                 new AsmoranomardicadaistinaculdacarEffect(),
-                new SacrificeTargetCost(new TargetControlledPermanent(2, filter2))
+                new SacrificeTargetCost(2, filter2)
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

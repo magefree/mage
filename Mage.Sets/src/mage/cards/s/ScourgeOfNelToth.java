@@ -82,7 +82,7 @@ class ScourgeOfNelTothPlayEffect extends AsThoughEffectImpl {
                 if (player != null) {
                     // can sometimes be cast with base mana cost from grave????
                     Costs<Cost> costs = new CostsImpl<>();
-                    costs.add(new SacrificeTargetCost(new TargetControlledCreaturePermanent(2)));
+                    costs.add(new SacrificeTargetCost(2));
                     player.setCastSourceIdWithAlternateMana(sourceId, new ManaCostsImpl<>("{B}{B}"), costs);
                     return true;
                 }

@@ -29,7 +29,7 @@ public final class PhyrexianGhoul extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
+                new SacrificeTargetCost(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
     }
 
     private PhyrexianGhoul(final PhyrexianGhoul card) {

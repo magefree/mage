@@ -20,10 +20,17 @@ public class TargetSacrifice extends TargetPermanent {
 
     public TargetSacrifice(int minNumTargets, int maxNumTargets, FilterPermanent filter) {
         super(minNumTargets, maxNumTargets, makeFilter(filter), true);
+        this.setRequired(false);
+        this.setTargetName(this.targetName + " (to sacrifice)");
     }
 
-    private TargetSacrifice(final TargetSacrifice target) {
+    protected TargetSacrifice(final TargetSacrifice target) {
         super(target);
+    }
+
+    @Override
+    public TargetSacrifice copy() {
+        return new TargetSacrifice(this);
     }
 
     private static FilterPermanent makeFilter(FilterPermanent filter) {

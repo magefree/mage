@@ -39,7 +39,7 @@ public final class KrarkClanShaman extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filterTargetedCreatures), new SacrificeTargetCost(new TargetControlledPermanent(filterSacrificed))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filterTargetedCreatures), new SacrificeTargetCost(filterSacrificed)));
     }
 
     private KrarkClanShaman(final KrarkClanShaman card) {

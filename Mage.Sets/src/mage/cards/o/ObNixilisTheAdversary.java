@@ -1,8 +1,5 @@
 package mage.cards.o;
 
-import java.util.List;
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.StaticAbility;
@@ -15,9 +12,9 @@ import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.Card;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
@@ -27,11 +24,12 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetControlledPermanent;
 import mage.util.functions.StackObjectCopyApplier;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class ObNixilisTheAdversary extends CardImpl {
@@ -95,7 +93,7 @@ class ObNixilisTheAdversaryCasualtyAbility extends StaticAbility {
 class ObNixilisTheAdversaryCost extends SacrificeTargetCost {
 
     public ObNixilisTheAdversaryCost() {
-        super(new TargetControlledPermanent(0, 1, StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT, true));
+        super(0, 1, StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT);
         this.text = "";
     }
 

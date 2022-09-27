@@ -44,7 +44,7 @@ public final class ErtaiTheCorrupted extends CardImpl {
         // {U}, {tap}, Sacrifice a creature or enchantment: Counter target spell.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);
 }

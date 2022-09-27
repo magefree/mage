@@ -31,7 +31,7 @@ public final class DwarvenLandslide extends CardImpl {
         // Kicker-{2}{R}, Sacrifice a land.
         Costs<Cost> kickerCosts = new CostsImpl<>();
         kickerCosts.add(new ManaCostsImpl<>("{2}{R}"));
-        kickerCosts.add(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
+        kickerCosts.add(new SacrificeTargetCost(new FilterControlledLandPermanent("a land")));
         this.addAbility(new KickerAbility(kickerCosts));
 
         // Destroy target land. If Dwarven Landslide was kicked, destroy another target land.

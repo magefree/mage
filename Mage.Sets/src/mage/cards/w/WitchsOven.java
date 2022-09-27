@@ -16,7 +16,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.FoodToken;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -31,9 +30,7 @@ public final class WitchsOven extends CardImpl {
 
         // {T}, Sacrifice a creature: Create a Food token. If the sacrificed creature's toughness was 4 or greater, create two Food tokens instead.
         Ability ability = new SimpleActivatedAbility(new WitchsOvenEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(
-                new TargetControlledCreaturePermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
-        ));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         this.addAbility(ability);
     }
 

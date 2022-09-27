@@ -15,6 +15,7 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -22,7 +23,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 
@@ -64,9 +64,7 @@ public final class GiftOfDoom extends CardImpl {
         this.addAbility(ability2);
 
         // Morph—Sacrifice another creature.
-        this.addAbility(new MorphAbility(new SacrificeTargetCost(
-                new TargetControlledPermanent(filter)
-        )));
+        this.addAbility(new MorphAbility(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
 
         // As Gift of Doom is turned face up, you may attach it to a creature.
         Effect effect = new AsTurnedFaceUpEffect(new GiftOfDoomEffect(), true);

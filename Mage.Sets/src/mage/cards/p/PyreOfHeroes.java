@@ -22,7 +22,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -40,9 +39,7 @@ public final class PyreOfHeroes extends CardImpl {
                 Zone.BATTLEFIELD, new PyreOfHeroesEffect(), new GenericManaCost(2)
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(
-                StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
-        )));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         this.addAbility(ability);
     }
 

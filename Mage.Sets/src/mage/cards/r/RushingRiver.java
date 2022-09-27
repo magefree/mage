@@ -29,7 +29,7 @@ public final class RushingRiver extends CardImpl {
 
 
         // Kicker-Sacrifice a land.
-        this.addAbility(new KickerAbility(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land")))));
+        this.addAbility(new KickerAbility(new SacrificeTargetCost(new FilterControlledLandPermanent("a land"))));
 
         // Return target nonland permanent to its owner's hand. If Rushing River was kicked, return another target nonland permanent to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

@@ -23,7 +23,7 @@ public final class DispersingOrb extends CardImpl {
 
         // {3}{U}, Sacrifice a permanent: Return target permanent to its owner's hand.
         Ability ability = new SimpleActivatedAbility(new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{3}{U}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent()));
+        ability.addCost(new SacrificeTargetCost());
         ability.addTarget(new TargetPermanent().withChooseHint("return to hand"));
         this.addAbility(ability);
     }

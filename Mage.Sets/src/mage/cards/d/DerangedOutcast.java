@@ -36,7 +36,7 @@ public final class DerangedOutcast extends CardImpl {
 
         // {1}{G}, Sacrifice a Human: Put two +1/+1 counters on target creature.
         Ability ability = new SimpleActivatedAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)), new ManaCostsImpl<>("{1}{G}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         ability.addTarget(new TargetCreaturePermanent().withChooseHint("two +1/+1 counters"));
         this.addAbility(ability);
     }

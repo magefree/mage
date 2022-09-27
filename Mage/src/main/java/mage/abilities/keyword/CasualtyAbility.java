@@ -10,12 +10,12 @@ import mage.abilities.effects.common.CopySourceSpellEffect;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  * @author TheElk801, Alex-Vasile
@@ -28,12 +28,12 @@ public class CasualtyAbility extends StaticAbility implements OptionalAdditional
 
     protected OptionalAdditionalCost additionalCost;
 
-    private static TargetControlledPermanent makeFilter(int number) {
+    private static FilterPermanent makeFilter(int number) {
         FilterControlledPermanent filter = new FilterControlledCreaturePermanent(
                 "creature with power " + number + " or greater"
         );
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, number - 1));
-        return new TargetControlledPermanent(1, 1, filter, true);
+        return filter;
     }
 
     public CasualtyAbility(int number) {

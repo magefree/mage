@@ -22,7 +22,7 @@ public final class PhyrexianAltar extends CardImpl {
 
         // Sacrifice a creature: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility(
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)),
+                new SacrificeTargetCost(FILTER_CONTROLLED_CREATURE_SHORT_TEXT),
                 PermanentsYouControlCount.instance,
                 false
         ));

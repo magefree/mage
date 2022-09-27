@@ -41,7 +41,7 @@ public final class Sarcatog extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new BoostSourceEffect(1,1, Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("artifact")))));
+                new SacrificeTargetCost(new FilterControlledArtifactPermanent("artifact"))));
     }
 
     private Sarcatog(final Sarcatog card) {

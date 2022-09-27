@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import mage.MageInt;
@@ -17,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -52,9 +50,7 @@ public final class CoffinPuppets extends CardImpl {
         this.addAbility(new ActivateIfConditionActivatedAbility(
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToBattlefieldEffect(),
-                new SacrificeTargetCost(
-                        new TargetControlledPermanent(2, 2, filter2, true)
-                ), condition
+                new SacrificeTargetCost(2, filter), condition
         ));
     }
 

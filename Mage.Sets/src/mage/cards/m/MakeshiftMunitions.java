@@ -34,7 +34,7 @@ public final class MakeshiftMunitions extends CardImpl {
 
         // {1}, Sacrifice an artifact or creature: Makeshift Munitions deals 1 damage to any target.
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new GenericManaCost(1));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

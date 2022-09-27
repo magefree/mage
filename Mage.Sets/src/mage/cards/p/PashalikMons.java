@@ -59,7 +59,7 @@ public final class PashalikMons extends CardImpl {
         ability = new SimpleActivatedAbility(
                 new CreateTokenEffect(new GoblinToken(), 2), new ManaCostsImpl<>("{3}{R}")
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter2)));
+        ability.addCost(new SacrificeTargetCost(filter2));
         this.addAbility(ability);
     }
 

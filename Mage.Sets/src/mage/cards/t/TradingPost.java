@@ -50,13 +50,13 @@ public final class TradingPost extends CardImpl {
         Ability ability3 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), new GenericManaCost(1));
         ability3.addTarget(new TargetCardInGraveyard(new FilterArtifactCard("an artifact card in your graveyard")));
         ability3.addCost(new TapSourceCost());
-        ability3.addCost(new SacrificeTargetCost(new TargetControlledPermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability3.addCost(new SacrificeTargetCost(FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         this.addAbility(ability3);
 
         // {1}, {T}, Sacrifice an artifact: Draw a card.
         Ability ability4 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
         ability4.addCost(new TapSourceCost());
-        ability4.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))));
+        ability4.addCost(new SacrificeTargetCost(new FilterControlledArtifactPermanent("an artifact")));
         this.addAbility(ability4);
 
     }

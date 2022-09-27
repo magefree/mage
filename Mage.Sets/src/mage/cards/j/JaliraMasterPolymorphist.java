@@ -45,7 +45,7 @@ public final class JaliraMasterPolymorphist extends CardImpl {
         // Put that card onto the battlefield and the rest on the bottom of your library in a random order.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RevealCardsFromLibraryUntilEffect(filterCard, Zone.BATTLEFIELD, Zone.LIBRARY), new ManaCostsImpl<>("{2}{U}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true)));
+        ability.addCost(new SacrificeTargetCost(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true));
         this.addAbility(ability);
 
     }

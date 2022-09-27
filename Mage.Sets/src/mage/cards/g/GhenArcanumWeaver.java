@@ -45,7 +45,7 @@ public final class GhenArcanumWeaver extends CardImpl {
                 new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl<>("{R}{W}{B}")
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         ability.addTarget(new TargetCardInYourGraveyard(filter2));
         this.addAbility(ability);
     }

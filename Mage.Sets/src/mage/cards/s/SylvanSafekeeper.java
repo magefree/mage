@@ -35,7 +35,7 @@ public final class SylvanSafekeeper extends CardImpl {
         // Sacrifice a land: Target creature you control gains shroud until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
                 new GainAbilityTargetEffect(ShroudAbility.getInstance(), Duration.EndOfTurn), 
-                new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
+                new SacrificeTargetCost(new FilterControlledLandPermanent("a land")));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

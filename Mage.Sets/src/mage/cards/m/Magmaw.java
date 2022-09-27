@@ -37,7 +37,7 @@ public final class Magmaw extends CardImpl {
         this.toughness = new MageInt(4);
 
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new GenericManaCost(1));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

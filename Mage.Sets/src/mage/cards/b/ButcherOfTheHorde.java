@@ -1,9 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -24,10 +21,12 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class ButcherOfTheHorde extends CardImpl {
@@ -43,8 +42,7 @@ public final class ButcherOfTheHorde extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Sacrifice another creature: Butcher of the Horde gains your choice of vigilance, lifelink, or haste until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new ButcherOfTheHordeEffect(), new SacrificeTargetCost(
-                        new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false))));
+                new ButcherOfTheHordeEffect(), new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
     }
 
     private ButcherOfTheHorde(final ButcherOfTheHorde card) {

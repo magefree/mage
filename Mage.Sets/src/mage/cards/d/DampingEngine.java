@@ -149,7 +149,7 @@ class DampingEngineSpecialAction extends SpecialAction {
 
     DampingEngineSpecialAction() {
         super(Zone.BATTLEFIELD);
-        this.addCost(new SacrificeTargetCost(new TargetControlledPermanent(), true));
+        this.addCost(new SacrificeTargetCost());
         this.addEffect(new DampingEngineIgnoreEffect());
         this.setMayActivate(TargetController.ANY);
         this.setRuleVisible(false);

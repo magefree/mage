@@ -7,7 +7,6 @@ import mage.abilities.costs.VariableCostType;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  * @author LevelX2
@@ -56,8 +55,7 @@ public class SacrificeXTargetCost extends VariableCostImpl {
 
     @Override
     public Cost getFixedCostsFromAnnouncedValue(int xValue) {
-        TargetControlledPermanent target = new TargetControlledPermanent(xValue, xValue, filter, true);
-        return new SacrificeTargetCost(target);
+        return new SacrificeTargetCost(xValue, xValue, filter);
     }
 
     public Filter getFilter() {

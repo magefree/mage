@@ -21,7 +21,7 @@ public final class Reshape extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{U}{U}");
 
         // As an additional cost to cast Reshape, sacrifice an artifact.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, new FilterControlledArtifactPermanent("an artifact"), false)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(1, 1, new FilterControlledArtifactPermanent("an artifact"), false));
         
         // Search your library for an artifact card with converted mana cost X or less and put it onto the battlefield. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryWithLessCMCPutInPlayEffect(new FilterArtifactCard()));

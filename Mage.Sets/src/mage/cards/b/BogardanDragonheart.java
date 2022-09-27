@@ -43,7 +43,7 @@ public final class BogardanDragonheart extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
                 new BogardanDragonheartToken(), null, Duration.EndOfTurn, false,
                 false, null, null, false
-        ), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+        ), new SacrificeTargetCost(filter)));
     }
 
     private BogardanDragonheart(final BogardanDragonheart card) {

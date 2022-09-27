@@ -43,7 +43,7 @@ public final class SlingGangLieutenant extends CardImpl {
         // Sacrifice a Goblin: Target player loses 1 life and you gain 1 life.
         Ability ability = new SimpleActivatedAbility(
                 new LoseLifeTargetEffect(1),
-                new SacrificeTargetCost(new TargetControlledPermanent(filter))
+                new SacrificeTargetCost(filter)
         );
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         ability.addTarget(new TargetPlayer());

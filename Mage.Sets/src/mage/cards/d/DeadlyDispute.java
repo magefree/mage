@@ -29,7 +29,7 @@ public final class DeadlyDispute extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");
 
         // As an additional cost to cast this spell, sacrifice an artifact or creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(filter));
 
         // Draw two cards and create a Treasure token.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));

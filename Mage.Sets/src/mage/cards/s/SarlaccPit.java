@@ -41,7 +41,7 @@ public final class SarlaccPit extends CardImpl {
 
         // {R}{G}, Sacrifice a land: Monstrosity 1.
         Ability ability = new MonstrosityAbility("{R}{G}", 1);
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
+        ability.addCost(new SacrificeTargetCost(new FilterControlledLandPermanent("a land")));
         this.addAbility(ability);
 
         // When Sarlacc Pit becomes monstrous, it loses hexproof and gains first strike and deathtouch.

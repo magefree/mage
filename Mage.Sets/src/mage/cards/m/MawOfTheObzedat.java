@@ -34,7 +34,7 @@ public final class MawOfTheObzedat extends CardImpl {
 
         // Sacrifice a creature: Creatures you control get +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.EndOfTurn, filter, false),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
+                new SacrificeTargetCost(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
 
     }
 

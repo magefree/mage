@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -32,9 +31,7 @@ public final class LegionVanguard extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new ExploreSourceEffect(true, "{this}"), new GenericManaCost(1)
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
-        )));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability);
     }
 

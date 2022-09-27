@@ -36,7 +36,7 @@ public final class Sunstone extends CardImpl {
         Effect effect = new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true);
         effect.setText("Prevent all combat damage that would be dealt this turn");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }
 

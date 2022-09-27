@@ -55,7 +55,7 @@ public final class GluttonousTroll extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{G}")
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }
 

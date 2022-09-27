@@ -130,7 +130,7 @@ class RakdosRiteknifeEffect extends ContinuousEffectImpl {
                         .setTargetPointer(new FixedTarget(permanent, game)),
                 new TapSourceCost()
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability.addCost(new SacrificeTargetCost(FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         return ability;
     }
 }

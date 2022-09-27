@@ -10,7 +10,6 @@ import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 import mage.util.CardUtil;
 
@@ -26,9 +25,9 @@ public final class VoltageSurge extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
         // As an additional cost to cast this spell, you may sacrifice an artifact.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(
-                0, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN, true
-        )).setText("you may sacrifice an artifact"));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(
+                0, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN
+        ).setText("you may sacrifice an artifact"));
 
         // Voltage Surge deals 2 damage to target creature or planeswalker. If this spell's additional cost was paid, Voltage Surge deals 4 damage instead.
         this.getSpellAbility().addEffect(new VoltageSurgeEffect());

@@ -54,7 +54,7 @@ public final class GildedGoose extends CardImpl {
 
         // {T}, Sacrifice a Food: Add one mana of any color.
         ActivatedManaAbilityImpl ability1 = new AnyColorManaAbility(new TapSourceCost());
-        ability1.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability1.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability1);
     }
 

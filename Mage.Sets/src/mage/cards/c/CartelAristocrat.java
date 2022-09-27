@@ -33,7 +33,7 @@ public final class CartelAristocrat extends CardImpl {
         // Sacrifice another creature: Cartel Aristocrat gains protection from the color of your choice until end of turn.
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD, new GainProtectionFromColorSourceEffect(Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE))));
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
     }
 
     private CartelAristocrat(final CartelAristocrat card) {

@@ -44,7 +44,7 @@ public final class RhysTheExiled extends CardImpl {
 
         // {B}, Sacrifice an Elf: Regenerate Rhys the Exiled.
         Ability ability = new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }
 

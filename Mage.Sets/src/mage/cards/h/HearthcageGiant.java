@@ -47,7 +47,7 @@ public final class HearthcageGiant extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ElementalShamanToken(), 2), false));
 
         //Sacrifice an Elemental: Target Giant creature gets +3/+1 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(3, 1, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filterElemental)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(3, 1, Duration.EndOfTurn), new SacrificeTargetCost(filterElemental));
         ability.addTarget(new TargetCreaturePermanent(filterGiant));
         this.addAbility(ability);
     }

@@ -59,7 +59,7 @@ public final class FiendArtisan extends CardImpl {
                 Zone.BATTLEFIELD, new FiendArtisanEffect(), new ManaCostsImpl<>("{X}{B/G}")
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }
 

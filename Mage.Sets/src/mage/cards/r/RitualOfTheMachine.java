@@ -33,7 +33,7 @@ public final class RitualOfTheMachine extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
 
         // As an additional cost to cast Ritual of the Machine, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         // Gain control of target nonartifact, nonblack creature.
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfGame));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

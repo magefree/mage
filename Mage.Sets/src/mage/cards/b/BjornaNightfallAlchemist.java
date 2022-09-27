@@ -34,7 +34,7 @@ public final class BjornaNightfallAlchemist extends CardImpl {
 
         // {T}, Sacrifice an artifact: Lucas, the Sharpshooter deals 1 damage to target creature. Goad that creature.
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN));
         ability.addEffect(new GoadTargetEffect().setText("Goad that creature"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

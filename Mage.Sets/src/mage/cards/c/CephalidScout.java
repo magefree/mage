@@ -36,7 +36,7 @@ public final class CephalidScout extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // {2}{U}, Sacrifice a land: Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{2}{U}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT));
         this.addAbility(ability);
     }
 

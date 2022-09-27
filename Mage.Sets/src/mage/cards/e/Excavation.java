@@ -31,7 +31,7 @@ public final class Excavation extends CardImpl {
 
         // {1}, Sacrifice a land: Draw a card. Any player may activate this ability.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{1}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
+        ability.addCost(new SacrificeTargetCost(new FilterControlledLandPermanent("a land")));
         ability.setMayActivate(TargetController.ANY);
         this.addAbility(ability);
     }

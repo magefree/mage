@@ -1,10 +1,8 @@
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
-import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -12,27 +10,18 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.MenaceAbility;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class UndercityNecrolisk extends CardImpl {
-
-    private static final FilterControlledPermanent filter
-            = new FilterControlledCreaturePermanent("another creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public UndercityNecrolisk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
@@ -49,9 +38,7 @@ public final class UndercityNecrolisk extends CardImpl {
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
                 new GenericManaCost(1)
         );
-        ability.addCost(new SacrificeTargetCost(
-                new TargetControlledPermanent(filter)
-        ));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         // It gains menace until end of turn. Activate this ability only any time you could cast a sorcery.
         ability.addEffect(new GainAbilitySourceEffect(
                 new MenaceAbility(),
@@ -88,5 +75,7 @@ class SilencedActivateAsSorceryActivatedAbility extends ActivatedAbilityImpl {
     }
 
     @Override
-    public String getRule() { return super.getRule(); }
+    public String getRule() {
+        return super.getRule();
+    }
 }

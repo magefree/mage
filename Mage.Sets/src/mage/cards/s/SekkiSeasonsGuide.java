@@ -53,7 +53,7 @@ public final class SekkiSeasonsGuide extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToBattlefieldEffect(),
-                new SacrificeTargetCost(new TargetControlledPermanent(8, 8, filter, true))));
+                new SacrificeTargetCost(8, 8, filter, true)));
     }
 
     private SekkiSeasonsGuide(final SekkiSeasonsGuide card) {

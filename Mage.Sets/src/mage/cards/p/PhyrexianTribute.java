@@ -20,7 +20,7 @@ public final class PhyrexianTribute extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
         // As an additional cost to cast Phyrexian Tribute, sacrifice two creatures.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(2)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(2));
         // Destroy target artifact.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());

@@ -1,29 +1,22 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.AbilityType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author L_J
  */
 public final class BrutalSuppression extends CardImpl {
@@ -47,13 +40,9 @@ public final class BrutalSuppression extends CardImpl {
 
 class BrutalSuppressionAdditionalCostEffect extends CostModificationEffectImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a land");
-    static{
-        filter.add(CardType.LAND.getPredicate());
-    }
-
     private static final FilterPermanent filter2 = new FilterPermanent("nontoken Rebels");
-    static{
+
+    static {
         filter2.add(SubType.REBEL.getPredicate());
         filter.add(TokenPredicate.FALSE);
     }
@@ -69,9 +58,7 @@ class BrutalSuppressionAdditionalCostEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
-        target.setRequired(false);
-        abilityToModify.addCost(new SacrificeTargetCost(target));
+        abilityToModify.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT));
         return true;
     }
 

@@ -39,7 +39,7 @@ public final class Atogatog extends CardImpl {
         // Sacrifice an Atog creature: Atogatog gets +X/+X until end of turn, where X is the sacrificed creature's power.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(xValue, xValue,Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,new FilterControlledCreaturePermanent(SubType.ATOG, "an Atog creature"), false))));
+                new SacrificeTargetCost(1,1,new FilterControlledCreaturePermanent(SubType.ATOG, "an Atog creature"), false)));
         
     }
 

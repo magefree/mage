@@ -26,7 +26,7 @@ public final class ViciousOffering extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");
 
         // Kicker—Sacrifice a creature.
-        this.addAbility(new KickerAbility(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
+        this.addAbility(new KickerAbility(new SacrificeTargetCost(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
 
         // Target creature gets -2/-2 until end of turn. If this spell was kicked, that creature gets -5/-5 until end of turn instead.
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new BoostTargetEffect(-5, -5, Duration.EndOfTurn),

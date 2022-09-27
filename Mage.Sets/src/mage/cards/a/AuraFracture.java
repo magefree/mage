@@ -27,7 +27,7 @@ public final class AuraFracture extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD, 
                 new DestroyTargetEffect(), 
-                new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("land"))));
+                new SacrificeTargetCost(new FilterControlledLandPermanent("land")));
         ability.addTarget(new TargetEnchantmentPermanent());
         this.addAbility(ability);
     }

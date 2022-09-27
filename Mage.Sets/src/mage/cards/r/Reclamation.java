@@ -47,7 +47,7 @@ class ReclamationCostToAttackBlockEffect extends PayCostToAttackBlockEffectImpl 
 
     ReclamationCostToAttackBlockEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, RestrictType.ATTACK,
-                new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
+                new SacrificeTargetCost(new FilterControlledLandPermanent("a land")));
         staticText = "Black creatures can't attack unless their controller sacrifices a land <i>(This cost is paid as attackers are declared.)</i>";
     }
 

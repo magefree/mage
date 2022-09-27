@@ -30,7 +30,7 @@ public final class ThermalNavigator extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Sacrifice an artifact: Thermal Navigator gains flying until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact")))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new SacrificeTargetCost(new FilterControlledArtifactPermanent("an artifact"))));
     }
 
     private ThermalNavigator(final ThermalNavigator card) {

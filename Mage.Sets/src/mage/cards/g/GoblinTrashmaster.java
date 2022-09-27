@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -8,19 +7,19 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetArtifactPermanent;
-import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class GoblinTrashmaster extends CardImpl {
@@ -50,9 +49,7 @@ public final class GoblinTrashmaster extends CardImpl {
         // Sacrifice a Goblin: Destroy target artifact.
         Ability ability = new SimpleActivatedAbility(
                 new DestroyTargetEffect(),
-                new SacrificeTargetCost(
-                        new TargetControlledPermanent(filter2)
-                )
+                new SacrificeTargetCost(filter)
         );
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);

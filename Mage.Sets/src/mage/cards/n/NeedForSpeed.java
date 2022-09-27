@@ -31,7 +31,7 @@ public final class NeedForSpeed extends CardImpl {
         // Sacrifice a land: Target creature gains haste until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
                                                    new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), 
-                                                   new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledPermanent("land"))));
+                                                   new SacrificeTargetCost(new FilterControlledPermanent("land")));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

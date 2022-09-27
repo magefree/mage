@@ -32,7 +32,7 @@ public final class KazuulsFury extends ModalDoubleFacesCard {
         // Instant
 
         // As an additional cost to cast this spell, sacrifice a creature.
-        this.getLeftHalfCard().getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        this.getLeftHalfCard().getSpellAbility().addCost(new SacrificeTargetCost(FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
 
         // Kazuul's Fury deals damage equal to the sacrificed creatures power to any target.
         this.getLeftHalfCard().getSpellAbility().addEffect(new DamageTargetEffect(SacrificeCostCreaturesPower.instance)

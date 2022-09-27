@@ -36,7 +36,7 @@ public final class DwarvenWeaponsmith extends CardImpl {
         // {tap}, Sacrifice an artifact: Put a +1/+1 counter on target creature. Activate this ability only during your upkeep.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
             new TapSourceCost(), new IsStepCondition(PhaseStep.UPKEEP), null);
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))));
+        ability.addCost(new SacrificeTargetCost(new FilterControlledArtifactPermanent("an artifact")));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

@@ -38,7 +38,7 @@ public final class GruulGuildmage extends CardImpl {
 
         // {3}{R}, Sacrifice a land: Gruul Guildmage deals 2 damage to target player.
         Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl<>("{3}{R}"));
-        firstAbility.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        firstAbility.addCost(new SacrificeTargetCost(filter));
         firstAbility.addTarget(new TargetPlayerOrPlaneswalker(1));
         this.addAbility(firstAbility);
         // {3}{G}: Target creature gets +2/+2 until end of turn.

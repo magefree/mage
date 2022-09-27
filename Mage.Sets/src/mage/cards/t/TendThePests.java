@@ -8,7 +8,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.Pest11GainLifeToken;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -21,9 +20,7 @@ public final class TendThePests extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}{G}");
 
         // As an additional cost to cast this spell, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(
-                new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
-        ));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
 
         // Create X 1/1 black and green Pest creature tokens with "When this creature dies, you gain 1 life," where X is the sacrificed creature's power.
         this.getSpellAbility().addEffect(new CreateTokenEffect(

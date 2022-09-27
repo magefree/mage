@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -12,13 +11,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author cbt33
  */
 public final class SadisticHypnotist extends CardImpl {
@@ -32,8 +30,7 @@ public final class SadisticHypnotist extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Sacrifice a creature: Target player discards two cards. Activate this ability only any time you could cast a sorcery.
-        TargetControlledPermanent target = new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT);
-        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(2), new SacrificeTargetCost(target));
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(2), new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

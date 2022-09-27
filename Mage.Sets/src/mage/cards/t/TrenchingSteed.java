@@ -32,7 +32,7 @@ public final class TrenchingSteed extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD, 
                 new BoostSourceEffect(0, 3, Duration.EndOfTurn), 
-                new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("land")))));
+                new SacrificeTargetCost(new FilterControlledLandPermanent("land"))));
     }
 
     private TrenchingSteed(final TrenchingSteed card) {

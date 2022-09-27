@@ -29,7 +29,7 @@ public final class Artillerize extends CardImpl {
     public Artillerize(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");
 
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(filter));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
     }

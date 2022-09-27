@@ -29,7 +29,7 @@ public final class KuldothaFlamefiend extends CardImpl {
 
         // When Kuldotha Flamefiend enters the battlefield, you may sacrifice an artifact. If you do, Kuldotha Flamefiend deals 4 damage divided as you choose among any number of targets.
         EntersBattlefieldTriggeredAbility ability = 
-                new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(new DamageMultiEffect(4), new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN))), false);
+                new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(new DamageMultiEffect(4), new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN)), false);
         ability.addTarget(new TargetAnyTargetAmount(4));
         this.addAbility(ability);
     }

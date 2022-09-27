@@ -39,7 +39,7 @@ public final class SwordOfTheAges extends CardImpl {
         // {T}, Sacrifice Sword of the Ages and any number of creatures you control: Sword of the Ages deals X damage to any target, where X is the total power of the creatures sacrificed this way, then exile Sword of the Ages and those creature cards.
         Cost cost = new SacrificeSourceCost();
         cost.setText("Sacrifice {this} and any number of creatures you control");
-        Cost cost2 = new SacrificeTargetCost(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, new FilterControlledCreaturePermanent(), true));
+        Cost cost2 = new SacrificeTargetCost(0, Integer.MAX_VALUE, new FilterControlledCreaturePermanent(), true);
         cost2.setText("");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SwordOfTheAgesEffect(), new TapSourceCost());
         ability.addCost(cost);

@@ -51,7 +51,7 @@ public final class GhaveGuruOfSpores extends CardImpl {
 
         // {1}, Sacrifice a creature: Put a +1/+1 counter on target creature.
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new GenericManaCost(1));
-        ability2.addCost(new SacrificeTargetCost(new TargetControlledPermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability2.addCost(new SacrificeTargetCost(FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         ability2.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability2);
     }

@@ -20,7 +20,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -48,9 +47,7 @@ public final class YawgmothThranPhysician extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new AddCountersTargetEffect(CounterType.M1M1.createInstance()), new PayLifeCost(1)
         );
-        ability.addCost(new SacrificeTargetCost(
-                new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)
-        ));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);

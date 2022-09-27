@@ -150,7 +150,7 @@ class VolrathsCurseSpecialAction extends SpecialAction {
 
     public VolrathsCurseSpecialAction() {
         super(Zone.BATTLEFIELD);
-        this.addCost(new SacrificeTargetCost(new TargetControlledPermanent(), true));
+        this.addCost(new SacrificeTargetCost());
         this.addEffect(new VolrathsCurseIgnoreEffect(keyString));
         this.setMayActivate(TargetController.CONTROLLER_ATTACHED_TO);
     }

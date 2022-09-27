@@ -41,7 +41,7 @@ public final class GildedAssaultCart extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToHandEffect(),
-                new SacrificeTargetCost(new TargetControlledPermanent(2, filter))
+                new SacrificeTargetCost(2, filter)
         ));
     }
 

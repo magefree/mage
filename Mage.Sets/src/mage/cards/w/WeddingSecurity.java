@@ -40,7 +40,7 @@ public final class WeddingSecurity extends CardImpl {
         // Whenever Wedding Security attacks, you may sacrifice a Blood token. If you do, put a +1/+1 counter on Wedding Security and draw a card.
         this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                new SacrificeTargetCost(new TargetControlledPermanent(filter))
+                new SacrificeTargetCost(filter)
         ).addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"))));
     }
 

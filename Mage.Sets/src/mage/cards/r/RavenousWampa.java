@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesMonstrousSourceTriggeredAbility;
@@ -11,19 +10,19 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import static mage.cards.r.RavenousWampa.RAVENOUS_WAMPA_STATE_VALUE_KEY_PREFIX;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
+
+import static mage.cards.r.RavenousWampa.RAVENOUS_WAMPA_STATE_VALUE_KEY_PREFIX;
 
 /**
- *
  * @author Styxo
  */
 public final class RavenousWampa extends CardImpl {
@@ -38,7 +37,7 @@ public final class RavenousWampa extends CardImpl {
 
         // {2}{G}, Sacrifice another creature: Monstrosity 2.
         Ability ability = new MonstrosityAbility("{2}{G}", 2);
-        ability.addCost(new RavenousWampaSacrificeTargetCost(new TargetControlledCreaturePermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
+        ability.addCost(new RavenousWampaSacrificeTargetCost());
         this.addAbility(ability);
 
         // When Ravenous Wampa becomes monstrous, you gain life equal to the sacrificied creature's toughness.
@@ -88,11 +87,11 @@ class RavenousWampaEffect extends OneShotEffect {
 
 class RavenousWampaSacrificeTargetCost extends SacrificeTargetCost {
 
-    public RavenousWampaSacrificeTargetCost(TargetControlledPermanent target) {
-        super(target);
+    public RavenousWampaSacrificeTargetCost() {
+        super(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE);
     }
 
-    public RavenousWampaSacrificeTargetCost(RavenousWampaSacrificeTargetCost cost) {
+    private RavenousWampaSacrificeTargetCost(RavenousWampaSacrificeTargetCost cost) {
         super(cost);
     }
 

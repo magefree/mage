@@ -30,7 +30,7 @@ public final class FaithHealer extends CardImpl {
 
         // Sacrifice an enchantment: You gain life equal to the sacrificed enchantment's converted mana cost.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(new SacrificeCostConvertedMana("enchantment")),
-            new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledEnchantmentPermanent()))));
+            new SacrificeTargetCost(new FilterControlledEnchantmentPermanent())));
     }
 
     private FaithHealer(final FaithHealer card) {

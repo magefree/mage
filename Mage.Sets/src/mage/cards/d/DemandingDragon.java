@@ -1,23 +1,22 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DoUnlessTargetPlayerOrTargetsControllerPaysEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class DemandingDragon extends CardImpl {
@@ -35,9 +34,7 @@ public final class DemandingDragon extends CardImpl {
         // When Demanding Dragon enters the battlefield, it deals 5 damage to target opponent unless that player sacrifices a creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(
                 new DamageTargetEffect(5),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(
-                        StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
-                ))
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
         ).setText("it deals 5 damage to target opponent unless that player sacrifices a creature"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

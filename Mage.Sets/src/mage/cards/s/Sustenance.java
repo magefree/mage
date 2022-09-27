@@ -27,7 +27,7 @@ public final class Sustenance extends CardImpl {
 
         // {1}, Sacrifice a land: Target creature gets +1/+1 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{1}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("land"))));
+        ability.addCost(new SacrificeTargetCost(new FilterControlledLandPermanent("land")));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

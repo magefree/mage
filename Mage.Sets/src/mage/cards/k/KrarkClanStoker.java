@@ -32,7 +32,7 @@ public final class KrarkClanStoker extends CardImpl {
 
         // {T}, Sacrifice an artifact: Add {R}{R}.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(2), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))));
+        ability.addCost(new SacrificeTargetCost(new FilterControlledArtifactPermanent("an artifact")));
         this.addAbility(ability);
     }
 

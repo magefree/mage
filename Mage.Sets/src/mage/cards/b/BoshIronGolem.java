@@ -42,7 +42,7 @@ public final class BoshIronGolem extends CardImpl {
         Effect effect = new DamageTargetEffect(new SacrificeCostConvertedMana("artifact"));
         effect.setText("{this} deals damage equal to the sacrificed artifact's mana value to any target");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{3}{R}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))));
+        ability.addCost(new SacrificeTargetCost(new FilterControlledArtifactPermanent("an artifact")));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

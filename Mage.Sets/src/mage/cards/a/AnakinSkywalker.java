@@ -45,7 +45,7 @@ public final class AnakinSkywalker extends CardImpl {
 
         // Sacrifice another creature: Target creature gets -1/-1 until end of turn. Activate this ability only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-1, -1, Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

@@ -12,9 +12,9 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -70,7 +70,7 @@ class PillarTombsOfAkuEffect extends OneShotEffect {
             return false;
         }
         if (activePlayer.chooseUse(Outcome.Sacrifice, "Sacrifice a creature?", source, game)) {
-            Cost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent());
+            Cost cost = new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT);
             if (cost.canPay(source, source, activePlayer.getId(), game)
                     && cost.pay(source, game, source, activePlayer.getId(), true)) {
                 return true;

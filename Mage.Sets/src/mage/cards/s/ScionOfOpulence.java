@@ -52,7 +52,7 @@ public final class ScionOfOpulence extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new ExileTopXMayPlayUntilEndOfTurnEffect(1), new ManaCostsImpl<>("{R}")
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, filter2)));
+        ability.addCost(new SacrificeTargetCost(2, filter2));
         this.addAbility(ability);
     }
 

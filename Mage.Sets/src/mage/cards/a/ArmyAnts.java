@@ -33,7 +33,7 @@ public final class ArmyAnts extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DestroyTargetEffect(),
                 new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT));
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
     }

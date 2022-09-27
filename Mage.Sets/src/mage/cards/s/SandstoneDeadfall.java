@@ -26,7 +26,7 @@ public final class SandstoneDeadfall extends CardImpl {
 
         // {tap}, Sacrifice two lands and Sandstone Deadfall: Destroy target attacking creature.
         Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("lands"), true)));
+        ability.addCost(new SacrificeTargetCost(2, 2, new FilterControlledLandPermanent("lands"), true));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability);

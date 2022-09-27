@@ -48,7 +48,7 @@ public final class SlobadGoblinTinkerer extends CardImpl {
         Effect effect = new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("Target artifact is indestructible this turn");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                effect, new SacrificeTargetCost(new TargetControlledPermanent(filterControlled)));
+                effect, new SacrificeTargetCost(filterControlled));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

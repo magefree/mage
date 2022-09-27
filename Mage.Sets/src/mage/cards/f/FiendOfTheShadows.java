@@ -43,7 +43,7 @@ public final class FiendOfTheShadows extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new FiendOfTheShadowsEffect(), false, true));
 
         // Sacrifice a Human: Regenerate Fiend of the Shadows.
-        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new SacrificeTargetCost(filter)));
     }
 
     private FiendOfTheShadows(final FiendOfTheShadows card) {

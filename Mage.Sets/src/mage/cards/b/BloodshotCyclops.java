@@ -35,7 +35,7 @@ public final class BloodshotCyclops extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DamageTargetEffect(SacrificeCostCreaturesPower.instance),
                 new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability.addCost(new SacrificeTargetCost(FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

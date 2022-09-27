@@ -31,7 +31,7 @@ public final class OrcishMechanics extends CardImpl {
 
         // {tap}, Sacrifice an artifact: Orcish Mechanics deals 2 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))));
+        ability.addCost(new SacrificeTargetCost(new FilterControlledArtifactPermanent("an artifact")));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

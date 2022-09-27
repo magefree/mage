@@ -34,7 +34,7 @@ public final class MarshLurker extends CardImpl {
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FearAbility.getInstance(), Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FearAbility.getInstance(), Duration.EndOfTurn), new SacrificeTargetCost(filter)));
     }
 
     private MarshLurker(final MarshLurker card) {

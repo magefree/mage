@@ -38,7 +38,7 @@ public final class Hecatomb extends CardImpl {
 
 
         // When Hecatomb enters the battlefield, sacrifice Hecatomb unless you sacrifice four creatures.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledCreaturePermanent(4))), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(4))), false);
         
         // Tap an untapped Swamp you control: Hecatomb deals 1 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, true)));

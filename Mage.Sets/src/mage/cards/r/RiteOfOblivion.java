@@ -30,7 +30,7 @@ public final class RiteOfOblivion extends CardImpl {
         
 
         // As an additional cost to cast this spell, sacrifice a nonland permanent.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(filter));
 
         // Exile target nonland permanent
         this.getSpellAbility().addEffect(new ExileTargetEffect());

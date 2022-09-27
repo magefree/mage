@@ -37,7 +37,7 @@ public final class SavvyHunter extends CardImpl {
         // Sacrifice two Foods: Draw a card.
         this.addAbility(new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(1),
-                new SacrificeTargetCost(new TargetControlledPermanent(2, filter))
+                new SacrificeTargetCost(2, filter)
         ));
     }
 

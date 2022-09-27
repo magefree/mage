@@ -25,7 +25,7 @@ public final class LifesLegacy extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
 
         // As an additional cost to cast Life's Legacy, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         // Draw cards equal to the sacrificed creature's power.
         this.getSpellAbility().addEffect(new LifesLegacyEffect());
 

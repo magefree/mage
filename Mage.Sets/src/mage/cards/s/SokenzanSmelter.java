@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.ConstructRedToken;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -36,9 +35,7 @@ public final class SokenzanSmelter extends CardImpl {
                 new CreateTokenEffect(new ConstructRedToken()),
                 new CompositeCost(
                         new GenericManaCost(1),
-                        new SacrificeTargetCost(new TargetControlledPermanent(
-                                StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN
-                        )), "pay {1} and sacrifice an artifact"
+                        new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN), "pay {1} and sacrifice an artifact"
                 )
         ), TargetController.YOU, false));
     }

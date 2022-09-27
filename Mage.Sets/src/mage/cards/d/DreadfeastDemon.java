@@ -14,7 +14,6 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -43,9 +42,7 @@ public final class DreadfeastDemon extends CardImpl {
         // At the beginning of your end step, sacrifice a non-Demon creature. If you do, create a token that's a copy of Dreadfeast Demon.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DoIfCostPaid(
                 new CreateTokenCopySourceEffect(),
-                new SacrificeTargetCost(
-                        new TargetControlledPermanent(filter)
-                ), null, false
+                new SacrificeTargetCost(filter), null, false
         ), TargetController.YOU, false));
     }
 

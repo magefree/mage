@@ -6,10 +6,11 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.constants.AbilityType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 import mage.util.CardUtil;
 
 import java.util.ArrayList;
@@ -23,23 +24,24 @@ public class SacrificeTargetCost extends CostImpl {
 
     private final List<Permanent> permanents = new ArrayList<>();
 
-    public SacrificeTargetCost(FilterControlledPermanent filter) {
-        this(new TargetControlledPermanent(filter));
+    public SacrificeTargetCost(FilterPermanent filter) {
+        this(1, filter);
     }
 
-    public SacrificeTargetCost(TargetControlledPermanent target) {
+    public SacrificeTargetCost(int numTargets, FilterPermanent filter) {
+        this(numTargets, numTargets, filter);
+    }
+
+    public SacrificeTargetCost(int minNumTargets, int maxNumTargets, FilterPermanent filter) {
+        this(new TargetSacrifice(minNumTargets, maxNumTargets, filter));
+    }
+
+    public SacrificeTargetCost(TargetSacrifice target) {
         this.addTarget(target);
-        target.setNotTarget(true); // sacrifice is never targeted
-        target.setRequired(false); // can be canceled
         this.text = "sacrifice " + makeText(target);
-        target.setTargetName(target.getTargetName() + " (to sacrifice)");
     }
 
-    public SacrificeTargetCost(TargetControlledPermanent target, boolean noText) {
-        this.addTarget(target);
-    }
-
-    public SacrificeTargetCost(SacrificeTargetCost cost) {
+    protected SacrificeTargetCost(final SacrificeTargetCost cost) {
         super(cost);
         for (Permanent permanent : cost.permanents) {
             this.permanents.add(permanent.copy());
@@ -107,7 +109,7 @@ public class SacrificeTargetCost extends CostImpl {
         return permanents;
     }
 
-    private static final String makeText(TargetControlledPermanent target) {
+    private static final String makeText(TargetSacrifice target) {
         if (target.getMinNumberOfTargets() != target.getMaxNumberOfTargets()) {
             return target.getTargetName();
         }

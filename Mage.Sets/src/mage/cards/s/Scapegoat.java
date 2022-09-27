@@ -22,7 +22,7 @@ public final class Scapegoat extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");
 
         // As an additional cost to cast Scapegoat, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
 
         // Return any number of target creatures you control to their owner's hand.
         Effect effect = new ReturnToHandTargetEffect();

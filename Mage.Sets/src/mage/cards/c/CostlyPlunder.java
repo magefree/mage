@@ -30,7 +30,7 @@ public final class CostlyPlunder extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");
 
         // As an additional cost to cast Costly Plunder, sacrifice an artifact or creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(1, 1, filter, true));
 
         // Draw two cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));

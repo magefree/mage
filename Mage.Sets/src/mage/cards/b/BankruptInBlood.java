@@ -18,7 +18,7 @@ public final class BankruptInBlood extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // As an additional cost to cast this spell, sacrifice two creatures.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(2)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(2));
 
         // Draw three cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));

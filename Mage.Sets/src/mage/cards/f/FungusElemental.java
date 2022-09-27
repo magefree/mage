@@ -46,7 +46,7 @@ public final class FungusElemental extends CardImpl {
                 new ManaCostsImpl<>("{G}"),
                 FungusElementalCondition.instance
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }
 

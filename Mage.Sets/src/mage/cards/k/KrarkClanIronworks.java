@@ -26,7 +26,7 @@ public final class KrarkClanIronworks extends CardImpl {
 
         // Sacrifice an artifact: Add {C}{C}.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), 
-                new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))),
+                new SacrificeTargetCost(new FilterControlledArtifactPermanent("an artifact")),
                 new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT));
         this.addAbility(ability);
 

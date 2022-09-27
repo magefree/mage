@@ -51,7 +51,7 @@ public final class KykarWindsFury extends CardImpl {
         // Sacrifice a Spirit: Add {R}.
         this.addAbility(new SimpleManaAbility(
                 Zone.BATTLEFIELD, new BasicManaEffect(Mana.RedMana(1), new PermanentsOnBattlefieldCount(filter)),
-                new SacrificeTargetCost(new TargetControlledPermanent(filter))
+                new SacrificeTargetCost(filter)
         ));
     }
 

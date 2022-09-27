@@ -23,7 +23,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -64,9 +63,7 @@ public final class ErebosBleakHearted extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new BoostTargetEffect(-2, -1), new ManaCostsImpl<>("{1}{B}")
         );
-        ability.addCost(new SacrificeTargetCost(
-                new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)
-        ));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

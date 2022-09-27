@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 /**
  * @author TheElk801
  */
-public class TargetControlledCreatureEachColor extends TargetControlledPermanent {
+public class TargetControlledCreatureEachColor extends TargetSacrifice {
 
     private final ColorAssignment colorAssigner;
 

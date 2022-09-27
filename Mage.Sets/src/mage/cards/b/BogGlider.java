@@ -48,7 +48,7 @@ public final class BogGlider extends CardImpl {
 
         // {T}, Sacrifice a land: Search your library for a Mercenary permanent card with converted mana cost 2 or less and put it onto the battlefield. Then shuffle your library.
 	Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(landFilter)));
+        ability.addCost(new SacrificeTargetCost(landFilter));
 	this.addAbility(ability);
     }
 

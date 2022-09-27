@@ -22,7 +22,7 @@ public final class Tinker extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");
 
         // As an additional cost to cast Tinker, sacrifice an artifact.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new FilterControlledArtifactPermanent("an artifact")));
 
         // Search your library for an artifact card and put that card onto the battlefield. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterArtifactCard("an artifact card"))));

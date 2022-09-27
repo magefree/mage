@@ -1,7 +1,5 @@
 package mage.cards.g;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
@@ -16,11 +14,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.AngelWarriorVigilanceToken;
-import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author weirddan455
  */
 public final class GreatHallOfStarnheim extends CardImpl {
@@ -44,7 +43,7 @@ public final class GreatHallOfStarnheim extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        Cost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent());
+        Cost cost = new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT);
         cost.setText("and a creature you control");
         ability.addCost(cost);
         this.addAbility(ability);

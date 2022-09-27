@@ -13,7 +13,6 @@ import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -26,9 +25,7 @@ public final class GaeasBalance extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
         // As an additional cost to cast Gaea's Balance, sacrifice five lands.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(
-                new TargetControlledPermanent(5, StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT)
-        ));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(5, StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT));
 
         // Search your library for a land card of each basic land type and put them onto the battlefield. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new GaeasBalanceTarget()));

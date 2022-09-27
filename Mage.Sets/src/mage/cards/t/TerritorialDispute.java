@@ -31,7 +31,7 @@ public final class TerritorialDispute extends CardImpl {
 
         // At the beginning of your upkeep, sacrifice Territorial Dispute unless you sacrifice a land.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, 
-                new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land")))),
+                new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new FilterControlledLandPermanent("a land"))),
                 TargetController.YOU, 
                 false));
         

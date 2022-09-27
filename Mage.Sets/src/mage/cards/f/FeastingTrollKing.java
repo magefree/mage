@@ -56,7 +56,7 @@ public final class FeastingTrollKing extends CardImpl {
         this.addAbility(new ActivateIfConditionActivatedAbility(
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToBattlefieldEffect(false, false),
-                new SacrificeTargetCost(new TargetControlledPermanent(3, filter)),
+                new SacrificeTargetCost(3, filter),
                 MyTurnCondition.instance
         ).addHint(MyTurnHint.instance));
     }

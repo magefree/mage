@@ -17,7 +17,6 @@ import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -45,9 +44,7 @@ public final class DreamshaperShaman extends CardImpl {
                 new RevealCardsFromLibraryUntilEffect(filter, Zone.BATTLEFIELD, Zone.LIBRARY),
                 new CompositeCost(
                         new ManaCostsImpl<>("{2}{R}"),
-                        new SacrificeTargetCost(new TargetControlledPermanent(
-                                StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND
-                        )), "pay {2}{R} and sacrifice a nonland permanent"
+                        new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND), "pay {2}{R} and sacrifice a nonland permanent"
                 )
         ), TargetController.YOU, false));
     }

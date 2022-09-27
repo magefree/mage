@@ -38,7 +38,7 @@ public final class ReaperOfFlightMoonsilver extends CardImpl {
         // Activate this ability only if there are four or more card types among cards in your graveyard.
         this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(2, 1, Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)),
+                new SacrificeTargetCost(FILTER_CONTROLLED_CREATURE_SHORT_TEXT),
                 DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; Sacrifice another creature: Reaper of Flight Moonsilver gets +2/+1 until end of turn. "
                         + "Activate only if there are four or more card types among cards in your graveyard.")

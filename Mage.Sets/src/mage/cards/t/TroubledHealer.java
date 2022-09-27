@@ -34,7 +34,7 @@ public final class TroubledHealer extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD, 
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, 2),
-                new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("land"))));
+                new SacrificeTargetCost(new FilterControlledLandPermanent("land")));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

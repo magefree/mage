@@ -167,6 +167,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.renowned = permanent.renowned;
         this.classLevel = permanent.classLevel;
         this.goadingPlayers.addAll(permanent.goadingPlayers);
+        this.canBeSacrificed = permanent.canBeSacrificed;
         this.pairedPermanent = permanent.pairedPermanent;
         this.bandedCards.addAll(permanent.bandedCards);
         this.timesLoyaltyUsed = permanent.timesLoyaltyUsed;

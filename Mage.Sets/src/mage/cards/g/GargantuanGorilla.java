@@ -20,7 +20,6 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -86,8 +85,7 @@ class GargantuanGorillaSacrificeEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
-            TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
-            SacrificeTargetCost cost = new SacrificeTargetCost(target);
+            SacrificeTargetCost cost = new SacrificeTargetCost(filter);
             if (!controller.chooseUse(Outcome.Benefit, "Sacrifice a Forest?", source, game)
                     || !cost.canPay(source, source, source.getControllerId(), game)
                     || !cost.pay(source, game, source, source.getControllerId(), true)) {

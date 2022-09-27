@@ -29,7 +29,7 @@ public final class Thunderclap extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
         // You may sacrifice a Mountain rather than pay Thunderclap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(filter)));
 
         // Thunderclap deals 3 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));

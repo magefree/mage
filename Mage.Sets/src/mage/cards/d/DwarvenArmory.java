@@ -33,7 +33,7 @@ public final class DwarvenArmory extends CardImpl {
                 new ManaCostsImpl<>("{2}"),
                 new IsStepCondition(PhaseStep.UPKEEP, false),
                 null);
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

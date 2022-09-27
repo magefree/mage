@@ -29,7 +29,7 @@ public final class TrashForTreasure extends CardImpl {
     public TrashForTreasure(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filterPermanent)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(filterPermanent));
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filterCard));
     }

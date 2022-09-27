@@ -39,7 +39,7 @@ public final class BloodmistInfiltrator extends CardImpl {
         // Whenever Bloodmist Infiltrator attacks, you may sacrifice another creature. If you do, Bloodmist Infiltrator can't be blocked this turn.
         this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(
                 new CantBeBlockedSourceEffect(Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledPermanent(filter))
+                new SacrificeTargetCost(filter)
         ), false));
     }
 

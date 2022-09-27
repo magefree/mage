@@ -76,7 +76,7 @@ class UnnaturalHungerEffect extends OneShotEffect {
             if (attachedTo != null) {
                 FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
                 filter.add(Predicates.not(new PermanentIdPredicate(aura.getAttachedTo())));  // not attached permanent
-                Cost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter));
+                Cost cost = new SacrificeTargetCost(filter);
                 Player enchantedCreatureController = game.getPlayer(attachedTo.getControllerId());
                 if (enchantedCreatureController != null
                         && cost.canPay(source, source, enchantedCreatureController.getId(), game)

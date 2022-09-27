@@ -15,7 +15,6 @@ import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
 import mage.util.CardUtil;
 
 import java.util.Collection;
@@ -38,9 +37,9 @@ public final class BabaLysagaNightWitch extends CardImpl {
 
         // {T}, Sacrifice up to three permanents: If there were three or more card types among the sacrificed permanents, each opponent loses 3 life, you gain 3 life, and you draw three cards.
         Ability ability = new SimpleActivatedAbility(new BabaLysagaNightWitchEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(
-                0, 3, StaticFilters.FILTER_CONTROLLED_PERMANENTS, true
-        )));
+        ability.addCost(new SacrificeTargetCost(
+                0, 3, StaticFilters.FILTER_CONTROLLED_PERMANENTS
+        ));
         this.addAbility(ability);
     }
 

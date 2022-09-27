@@ -21,7 +21,7 @@ public final class IncendiarySabotage extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}{R}");
 
         // As an additional cost to cast Incendiary Sabotage, sacrifice an artifact.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new FilterControlledArtifactPermanent("an artifact")));
         
         // Incendiary Sabotage deals 3 damage to each creature.
         this.getSpellAbility().addEffect(new DamageAllEffect(3, new FilterCreaturePermanent()));

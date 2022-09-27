@@ -14,14 +14,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -84,11 +82,7 @@ class MinionLeshracEffect extends OneShotEffect {
         Permanent minionLeshrac = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null
                 && minionLeshrac != null) {
-            FilterControlledPermanent filterCreature = new FilterControlledPermanent();
-            filterCreature.add(CardType.CREATURE.getPredicate());
-            filterCreature.add(AnotherPredicate.instance);
-            TargetControlledPermanent target = new TargetControlledPermanent(filterCreature);
-            SacrificeTargetCost cost = new SacrificeTargetCost(target);
+            SacrificeTargetCost cost = new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE);
             if (controller.chooseUse(Outcome.AIDontUseIt, "Sacrifice another creature to prevent the damage?", source, game)
                     && cost.canPay(source, source, source.getControllerId(), game)
                     && cost.pay(source, game, source, source.getControllerId(), true)) {

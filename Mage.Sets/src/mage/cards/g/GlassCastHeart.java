@@ -21,7 +21,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.BloodToken;
 import mage.game.permanent.token.EdgarMarkovsCoffinVampireToken;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -60,9 +59,8 @@ public final class GlassCastHeart extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addCost(new CompositeCost(
                 new SacrificeSourceCost(),
-                new SacrificeTargetCost(
-                        new TargetControlledPermanent(13, filter2)
-                ), "sacrifice {this} and thirteen Blood tokens"
+                new SacrificeTargetCost(13, filter2),
+                "sacrifice {this} and thirteen Blood tokens"
         ));
         ability.addEffect(new GainLifeEffect(13).concatBy("and"));
         this.addAbility(ability);

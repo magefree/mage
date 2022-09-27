@@ -32,7 +32,7 @@ public final class DownhillCharge extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
         // You may sacrifice a Mountain rather than pay Downhill Charge's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(filter)));
 
         // Target creature gets +X/+0 until end of turn, where X is the number of Mountains you control.
         this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, StaticValue.get(0), Duration.EndOfTurn));

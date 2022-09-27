@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -28,10 +27,9 @@ public final class BayouGroff extends CardImpl {
 
         // As an additional cost to cast this spell, sacrifice a creature or pay {3}.
         this.getSpellAbility().addCost(new OrCost(
-                "sacrifice a creature or pay {3}", new SacrificeTargetCost(new TargetControlledPermanent(
-                        StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
-                )), new GenericManaCost(3)
-        ));
+                "sacrifice a creature or pay {3}", new SacrificeTargetCost(
+                StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
+        ), new GenericManaCost(3)));
     }
 
     private BayouGroff(final BayouGroff card) {

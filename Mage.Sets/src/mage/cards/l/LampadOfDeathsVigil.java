@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -31,9 +30,7 @@ public final class LampadOfDeathsVigil extends CardImpl {
         // {1}, Sacrifice a creature: Each opponent loses 1 life and you gain 1 life.
         Ability ability = new SimpleActivatedAbility(new LoseLifeOpponentsEffect(1), new GenericManaCost(1));
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
-        ability.addCost(new SacrificeTargetCost(
-                new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
-        ));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         this.addAbility(ability);
     }
 

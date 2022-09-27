@@ -59,7 +59,7 @@ public final class AyaraFirstOfLocthwain extends CardImpl {
 
         // {T}, Sacrifice another black creature: Draw a card.
         ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter2)));
+        ability.addCost(new SacrificeTargetCost(filter2));
         this.addAbility(ability);
     }
 

@@ -45,7 +45,7 @@ public final class DeathmarkPrelate extends CardImpl {
         // {2}{B}, {tap}, Sacrifice a Zombie: Destroy target non-Zombie creature. It can't be regenerated. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(true), new ManaCostsImpl<>("{2}{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter1)));
+        ability.addCost(new SacrificeTargetCost(filter1));
         ability.addTarget(new TargetCreaturePermanent(filter2));
         this.addAbility(ability);
     }

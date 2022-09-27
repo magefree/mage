@@ -59,7 +59,7 @@ public final class CavalierOfNight extends CardImpl {
         );
         triggeredAbility.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoWhenCostPaid(
-                triggeredAbility, new SacrificeTargetCost(new TargetControlledPermanent(filter)),
+                triggeredAbility, new SacrificeTargetCost(filter),
                 "Sacrifice a creature?"
         )));
 

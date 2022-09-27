@@ -29,7 +29,7 @@ public final class DustBowl extends CardImpl {
         // {3}, {tap}, Sacrifice a land: Destroy target nonbasic land.
         Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
+        ability.addCost(new SacrificeTargetCost(new FilterControlledLandPermanent("a land")));
         ability.addTarget(new TargetNonBasicLandPermanent().withChooseHint("to destroy"));
         this.addAbility(ability);
     }

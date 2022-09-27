@@ -30,7 +30,7 @@ public final class AngelicPurge extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");
 
         // As an additional cost to cast Angelic Purge, sacrifice a permanent.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledPermanent("a permanent"))));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new FilterControlledPermanent("a permanent")));
 
         // Exile target artifact, creature, or enchantment.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

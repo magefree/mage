@@ -49,13 +49,13 @@ public final class LochmereSerpent extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new CantBeBlockedSourceEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{U}")
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter1)));
+        ability.addCost(new SacrificeTargetCost(filter1));
         this.addAbility(ability);
 
         // {B}, Sacrifice a Swamp: You gain 1 life and draw a card.
         ability = new SimpleActivatedAbility(new GainLifeEffect(1), new ManaCostsImpl<>("{B}"));
         ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter2)));
+        ability.addCost(new SacrificeTargetCost(filter2));
         this.addAbility(ability);
 
         // {U}{B}: Exile five target cards from an opponent's graveyard. Return Lochmere Serpent from your graveyard to your hand. Activate this ability only any time you could cast a sorcery.

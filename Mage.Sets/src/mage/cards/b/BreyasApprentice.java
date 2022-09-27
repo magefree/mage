@@ -20,7 +20,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.ThopterColorlessToken;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -45,9 +44,7 @@ public final class BreyasApprentice extends CardImpl {
         // {T}, Sacrifice an artifact: Choose one —
         // • Exile the top card of your library. Until the end of your next turn, you may play that card.
         Ability ability = new SimpleActivatedAbility(new BreyasApprenticeEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(
-                StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN
-        )));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN));
 
         // • Target creature gets +2/+0 until end of turn.
         Mode mode = new Mode(new BoostTargetEffect(2, 0, Duration.EndOfTurn));

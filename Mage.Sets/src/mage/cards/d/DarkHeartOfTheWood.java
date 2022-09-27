@@ -30,7 +30,7 @@ public final class DarkHeartOfTheWood extends CardImpl {
 
 
         // Sacrifice a Forest: You gain 3 life.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(3), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(3), new SacrificeTargetCost(filter)));
     }
 
     private DarkHeartOfTheWood(final DarkHeartOfTheWood card) {

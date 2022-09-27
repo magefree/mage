@@ -31,7 +31,7 @@ public final class Heartfire extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
         // As an additional cost to cast this spell, sacrifice a creature or planeswalker.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(filter));
 
         // Heartfire deals 4 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));

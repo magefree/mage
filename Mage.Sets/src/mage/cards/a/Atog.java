@@ -27,7 +27,7 @@ public final class Atog extends CardImpl {
         this.toughness = new MageInt(2);
         this.addAbility(new SimpleActivatedAbility(
                 new BoostSourceEffect(2, 2, Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN))
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN)
         ));
     }
 

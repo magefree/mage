@@ -106,7 +106,7 @@ class PossessedPortalEffect extends OneShotEffect {
                 discardCost.pay(source, game, source, playerId, true, null);
             }
             else {
-                Cost sacrificeCost = new SacrificeTargetCost(new TargetControlledPermanent());
+                Cost sacrificeCost = new SacrificeTargetCost();
                 sacrificeCost.pay(source, game, source, playerId, true, null);
             }
         }

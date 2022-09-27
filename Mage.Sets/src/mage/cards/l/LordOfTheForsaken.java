@@ -23,7 +23,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -49,9 +48,7 @@ public final class LordOfTheForsaken extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new MillCardsTargetEffect(3), new ManaCostsImpl<>("{B}")
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
-        )));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 

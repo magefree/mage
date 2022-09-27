@@ -31,7 +31,7 @@ public final class ElvenPalisade extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
 
         // Sacrifice a Forest: Target attacking creature gets -3/-0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(-3, 0, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(-3, 0, Duration.EndOfTurn), new SacrificeTargetCost(filter));
         ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability);
     }

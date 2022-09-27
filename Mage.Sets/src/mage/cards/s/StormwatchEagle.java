@@ -33,7 +33,7 @@ public final class StormwatchEagle extends CardImpl {
         // Sacrifice a land: Return Stormwatch Eagle to its owner's hand.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, 
                 new ReturnToHandSourceEffect(), 
-                new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land")))));
+                new SacrificeTargetCost(new FilterControlledLandPermanent("a land"))));
     }
 
     private StormwatchEagle(final StormwatchEagle card) {

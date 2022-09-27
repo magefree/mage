@@ -39,7 +39,7 @@ public final class OrcishVandal extends CardImpl {
         // {t}, Sacrifice an artifact: Orcish Vandal deals 2 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }
 

@@ -50,7 +50,7 @@ public final class RavenousSquirrel extends CardImpl {
         // {1}{B}{G}, Sacrifice an artifact or creature: You gain 1 life and draw a card.
         Ability ability = new SimpleActivatedAbility(new GainLifeEffect(1), new ManaCostsImpl<>("{1}{B}{G}"));
         ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }
 

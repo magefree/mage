@@ -35,7 +35,7 @@ public final class Megatog extends CardImpl {
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, 3, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, 3, Duration.EndOfTurn), new SacrificeTargetCost(filter));
         ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
         this.addAbility(ability);
     }

@@ -11,10 +11,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetAnyTargetAmount;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 
 import java.util.UUID;
@@ -28,8 +27,7 @@ public final class PollenRemedy extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");
 
         // Kicker-Sacrifice a land.
-        this.addAbility(new KickerAbility(new SacrificeTargetCost(new TargetControlledPermanent(1, 1,
-                new FilterControlledLandPermanent("a land"), true))));
+        this.addAbility(new KickerAbility(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT)));
 
         // Prevent the next 3 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose.
         // If Pollen Remedy was kicked, prevent the next 6 damage this way instead.

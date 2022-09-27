@@ -21,7 +21,7 @@ public final class BoneSplinters extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
 
         // As an additional cost to cast Bone Splinters, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         // Destroy target creature.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent().withChooseHint("to destroy"));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

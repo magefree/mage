@@ -30,7 +30,7 @@ public final class MorbidCuriosity extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");
 
         // As an additional cost to cast Morbid Curiosity, sacrifice an artifact or creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(filter));
 
         // Draw cards equal to the converted mana cost of the sacrificed permanent.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(

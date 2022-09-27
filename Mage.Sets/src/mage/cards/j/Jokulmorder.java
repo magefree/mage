@@ -44,7 +44,7 @@ public final class Jokulmorder extends CardImpl {
 
         // When Jokulmorder enters the battlefield, sacrifice it unless you sacrifice five lands.
         Effect effect = new SacrificeSourceUnlessPaysEffect(
-                new SacrificeTargetCost(new TargetControlledPermanent(5, 5, new FilterControlledLandPermanent("five lands"), true)));
+                new SacrificeTargetCost(5, 5, new FilterControlledLandPermanent("five lands"), true));
         effect.setText("sacrifice it unless you sacrifice five lands");
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
 

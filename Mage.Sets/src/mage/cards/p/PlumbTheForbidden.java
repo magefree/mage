@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -45,7 +44,7 @@ public final class PlumbTheForbidden extends CardImpl {
 class PlumbTheForbiddenCost extends SacrificeTargetCost {
 
     PlumbTheForbiddenCost() {
-        super(new TargetControlledPermanent(0, Integer.MAX_VALUE, StaticFilters.FILTER_CONTROLLED_CREATURES, true));
+        super(0, Integer.MAX_VALUE, StaticFilters.FILTER_CONTROLLED_CREATURES);
         this.text = "you may sacrifice one or more creatures. When you do, " +
                 "copy this spell for each creature sacrificed this way";
     }

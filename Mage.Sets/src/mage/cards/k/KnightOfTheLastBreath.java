@@ -45,7 +45,7 @@ public final class KnightOfTheLastBreath extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new CreateTokenEffect(new WhiteBlackSpiritToken()), new GenericManaCost(3)
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
 
         // Afterlife 3

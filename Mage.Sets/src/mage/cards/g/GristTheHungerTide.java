@@ -24,7 +24,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.IzoniInsectToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 
 import java.util.Arrays;
@@ -58,9 +57,7 @@ public final class GristTheHungerTide extends CardImpl {
         ability.addTarget(new TargetCreatureOrPlaneswalker());
         this.addAbility(new LoyaltyAbility(new DoWhenCostPaid(
                 ability,
-                new SacrificeTargetCost(new TargetControlledPermanent(
-                        StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
-                )), "Sacrifice a creature?"
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT), "Sacrifice a creature?"
         ), -2));
 
         // −5: Each opponent loses life equal to the number of creature cards in your graveyard.

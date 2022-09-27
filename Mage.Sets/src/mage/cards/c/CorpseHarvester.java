@@ -39,7 +39,7 @@ public final class CorpseHarvester extends CardImpl {
                 new CorpseHarvesterTarget(), true
         ), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability.addCost(new SacrificeTargetCost(FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         this.addAbility(ability);
     }
 

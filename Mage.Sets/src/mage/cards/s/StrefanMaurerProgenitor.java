@@ -78,12 +78,8 @@ public class StrefanMaurerProgenitor extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(
                 new DoIfCostPaid(
                         new StrefanMaurerProgenitorPlayVampireEffect(),
-                        new SacrificeTargetCost(new TargetControlledPermanent(
-                                2,
-                                2,
-                                bloodTokenFilter,
-                                true)
-                        )),
+                        new SacrificeTargetCost(2, bloodTokenFilter)
+                ),
                 false
                 )
         );

@@ -51,7 +51,7 @@ public final class KnightOfTheReliquary extends CardImpl {
         TargetCardInLibrary target = new TargetCardInLibrary(new FilterLandCard());
         Costs<Cost> costs = new CostsImpl<>();
         costs.add(new TapSourceCost());
-        costs.add(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, false)));
+        costs.add(new SacrificeTargetCost(1, 1, filter, false));
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay), costs));
     }
 

@@ -33,7 +33,7 @@ public final class RustMonster extends CardImpl {
         // Sacrifice an artifact: Rust Monster gets +2/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
                 new BoostSourceEffect(2, 0, Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN))
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN)
         ));
     }
 

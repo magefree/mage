@@ -21,7 +21,7 @@ public final class CullingTheWeak extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");
 
         // As an additional cost to cast Culling the Weak, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
 
         // Add {B}{B}{B}{B}.
         this.getSpellAbility().addEffect(new BasicManaEffect(Mana.BlackMana(4)));

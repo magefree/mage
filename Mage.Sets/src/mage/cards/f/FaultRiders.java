@@ -37,7 +37,7 @@ public final class FaultRiders extends CardImpl {
         effect.setText("{this} gets +2/+0");
         Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, 
                 effect, 
-                new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
+                new SacrificeTargetCost(new FilterControlledLandPermanent("a land")));
         effect = new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains first strike until end of turn");
         ability.addEffect(effect);

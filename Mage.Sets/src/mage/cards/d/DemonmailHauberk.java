@@ -31,7 +31,7 @@ public final class DemonmailHauberk extends CardImpl {
         // Equip - Sacrifice a creature.
         this.addAbility(new EquipAbility(
                 Outcome.AddAbility,
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)),
+                new SacrificeTargetCost(FILTER_CONTROLLED_CREATURE_SHORT_TEXT),
                 false));
     }
 

@@ -26,7 +26,7 @@ public final class DemonOfCatastrophes extends CardImpl {
         this.toughness = new MageInt(6);
 
         // As an additional cost to cast this spell, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

@@ -39,7 +39,7 @@ public final class DefiantSalvager extends CardImpl {
 
         // Sacrifice an artifact or creature: Put a +1/+1 counter on Defiant Salvager. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
+                new SacrificeTargetCost(1, 1, filter, true));
         this.addAbility(ability);
 
     }

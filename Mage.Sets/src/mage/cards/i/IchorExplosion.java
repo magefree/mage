@@ -25,7 +25,7 @@ public final class IchorExplosion extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{B}{B}");
 
         // As an additional cost to cast Ichor Explosion, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
 
         // All creatures get -X/-X until end of turn, where X is the sacrificed creature's power.
         this.getSpellAbility().addEffect(new BoostAllEffect(xValue, xValue, Duration.EndOfTurn));

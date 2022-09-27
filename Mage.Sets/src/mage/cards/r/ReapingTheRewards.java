@@ -21,7 +21,7 @@ public final class ReapingTheRewards extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");
 
         // Buyback-Sacrifice a land.
-        this.addAbility(new BuybackAbility(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land")))));
+        this.addAbility(new BuybackAbility(new SacrificeTargetCost(new FilterControlledLandPermanent("a land"))));
 
         // You gain 2 life.
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
