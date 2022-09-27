@@ -202,4 +202,19 @@ public class AnimateDeadTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Animate Dead", 1);
         assertPermanentCount(playerA, "Dragonlord Atarka", 1);
     }
+
+    @Test
+    public void testAnimateMDFC() {
+        addCard(Zone.GRAVEYARD, playerA, "Blackbloom Rogue");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.HAND, playerA, "Animate Dead");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Animate Dead", "Blackbloom Rogue");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPowerToughness(playerA, "Blackbloom Rogue", 1, 3);
+        assertPermanentCount(playerA, "Animate Dead", 1);
+    }
 }
