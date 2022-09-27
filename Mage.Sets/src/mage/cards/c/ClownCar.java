@@ -34,7 +34,7 @@ public final class ClownCar extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // When Clown Car enters the battlefield, roll X sx-sided dice. For each odd result, create a 1/1 white Clown Robot artifact creature token. For each even result, put a +1/+1 on Clown Car.
+        // When Clown Car enters the battlefield, roll X six-sided dice. For each odd result, create a 1/1 white Clown Robot artifact creature token. For each even result, put a +1/+1 on Clown Car.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ClownCarEffect()));
 
         // Crew 2
@@ -55,7 +55,7 @@ class ClownCarEffect extends OneShotEffect {
 
     ClownCarEffect() {
         super(Outcome.Benefit);
-        staticText = "roll X sx-sided dice. For each odd result, " +
+        staticText = "roll X six-sided dice. For each odd result, " +
                 "create a 1/1 white Clown Robot artifact creature token. " +
                 "For each even result, put a +1/+1 on {this}";
     }
