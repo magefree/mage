@@ -34,6 +34,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Signet", 227, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Arco-Flagellant", 29, Rarity.RARE, mage.cards.a.ArcoFlagellant.class));
         cards.add(new SetCardInfo("Ash Barrens", 265, Rarity.COMMON, mage.cards.a.AshBarrens.class));
+        cards.add(new SetCardInfo("Assault Intercessor", 104, Rarity.RARE, mage.cards.a.AssaultIntercessor.class));
         cards.add(new SetCardInfo("Assault Suit", 230, Rarity.UNCOMMON, mage.cards.a.AssaultSuit.class));
         cards.add(new SetCardInfo("Atalan Jackal", 105, Rarity.RARE, mage.cards.a.AtalanJackal.class));
         cards.add(new SetCardInfo("Barren Moor", 266, Rarity.UNCOMMON, mage.cards.b.BarrenMoor.class));
