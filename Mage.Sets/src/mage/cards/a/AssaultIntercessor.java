@@ -37,7 +37,7 @@ public final class AssaultIntercessor extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Chainsword -- Whenever a creature an opponent controls dies, that player loses 2 life.
         this.addAbility(new DiesCreatureTriggeredAbility(
