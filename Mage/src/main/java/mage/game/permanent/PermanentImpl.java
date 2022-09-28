@@ -213,7 +213,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.maxBlockedBy = 0;
         this.copy = false;
         this.goadingPlayers.clear();
-        this.canBeSacrificed = false;
+        this.canBeSacrificed = true;
     }
 
     @Override
