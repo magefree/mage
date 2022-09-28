@@ -6,12 +6,11 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetSacrifice;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -21,8 +20,8 @@ import java.util.UUID;
  */
 public class SacrificeEffect extends OneShotEffect {
 
-    private FilterPermanent filter;
-    private String preText;
+    private final FilterPermanent filter;
+    private final String preText;
     private DynamicValue count;
 
     public SacrificeEffect(FilterPermanent filter, int count, String preText) {
@@ -49,26 +48,26 @@ public class SacrificeEffect extends OneShotEffect {
         boolean applied = false;
         for (UUID playerId : targetPointer.getTargets(game, source)) {
             Player player = game.getPlayer(playerId);
-            if (player != null) {
-                FilterPermanent newFilter = filter.copy(); // filter can be static, so it's important to copy here
-                newFilter.add(new ControllerIdPredicate(player.getId()));
-                int amount = count.calculate(game, source, this);
-                int realCount = game.getBattlefield().countAll(newFilter, player.getId(), game);
-                amount = Math.min(amount, realCount);
-                Target target = new TargetPermanent(amount, amount, newFilter, true);
-                if (amount > 0 && target.canChoose(player.getId(), source, game)) {
-                    while (!target.isChosen()
-                            && target.canChoose(player.getId(), source, game)
-                            && player.canRespond()) {
-                        player.chooseTarget(Outcome.Sacrifice, target, source, game);
-                    }
-                    for (int idx = 0; idx < target.getTargets().size(); idx++) {
-                        Permanent permanent = game.getPermanent(target.getTargets().get(idx));
-                        if (permanent != null
-                                && permanent.sacrifice(source, game)) {
-                            applied = true;
-                        }
-                    }
+            if (player == null) {
+                continue;
+            }
+            int amount = Math.min(
+                    count.calculate(game, source, this),
+                    game.getBattlefield().countAll(filter, player.getId(), game)
+            );
+            Target target = new TargetSacrifice(amount, filter);
+            if (amount < 1 || !target.canChoose(player.getId(), source, game)) {
+                continue;
+            }
+            while (!target.isChosen()
+                    && target.canChoose(player.getId(), source, game)
+                    && player.canRespond()) {
+                player.chooseTarget(Outcome.Sacrifice, target, source, game);
+            }
+            for (UUID targetId : target.getTargets()) {
+                Permanent permanent = game.getPermanent(targetId);
+                if (permanent != null && permanent.sacrifice(source, game)) {
+                    applied = true;
                 }
             }
         }

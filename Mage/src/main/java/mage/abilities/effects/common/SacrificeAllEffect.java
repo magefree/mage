@@ -9,11 +9,12 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetSacrifice;
 import mage.util.CardUtil;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -52,23 +53,23 @@ public class SacrificeAllEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        int amount = this.amount.calculate(game, source, this);
+        if (amount < 1) {
             return false;
         }
-
-        List<UUID> perms = new ArrayList<>();
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+        Set<UUID> perms = new HashSet<>();
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
-            if (player != null) {
-                int numTargets = Math.min(amount.calculate(game, source, this), game.getBattlefield().countAll(filter, player.getId(), game));
-                TargetControlledPermanent target = new TargetControlledPermanent(numTargets, numTargets, filter, true);
-                if (target.canChoose(player.getId(), source, game)) {
-                    while (!target.isChosen() && player.canRespond()) {
-                        player.choose(Outcome.Sacrifice, target, source, game);
-                    }
-                    perms.addAll(target.getTargets());
-                }
+            if (player == null) {
+                continue;
+            }
+            int numTargets = Math.min(amount, game.getBattlefield().countAll(filter, player.getId(), game));
+            if (numTargets < 1) {
+            }
+            TargetPermanent target = new TargetSacrifice(numTargets, filter);
+            if (target.canChoose(player.getId(), source, game)) {
+                player.chooseTarget(Outcome.Sacrifice, target, source, game);
+                perms.addAll(target.getTargets());
             }
         }
         for (UUID permID : perms) {

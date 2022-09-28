@@ -12,10 +12,11 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetSacrifice;
 import mage.util.CardUtil;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -56,18 +57,23 @@ public class SacrificeOpponentsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<UUID> perms = new ArrayList<>();
+        int amount = this.amount.calculate(game, source, this);
+        if (amount < 1) {
+            return false;
+        }
+        Set<UUID> perms = new HashSet<>();
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
             Player player = game.getPlayer(playerId);
-            if (player != null) {
-                int numTargets = Math.min(amount.calculate(game, source, this), game.getBattlefield().countAll(filter, player.getId(), game));
-                if (numTargets > 0) {
-                    TargetPermanent target = new TargetPermanent(numTargets, numTargets, filter, true);
-                    if (target.canChoose(player.getId(), source, game)) {
-                        player.chooseTarget(Outcome.Sacrifice, target, source, game);
-                        perms.addAll(target.getTargets());
-                    }
-                }
+            if (player == null) {
+                continue;
+            }
+            int numTargets = Math.min(amount, game.getBattlefield().countAll(filter, player.getId(), game));
+            if (numTargets < 1) {
+            }
+            TargetPermanent target = new TargetSacrifice(numTargets, filter);
+            if (target.canChoose(player.getId(), source, game)) {
+                player.chooseTarget(Outcome.Sacrifice, target, source, game);
+                perms.addAll(target.getTargets());
             }
         }
         for (UUID permID : perms) {
