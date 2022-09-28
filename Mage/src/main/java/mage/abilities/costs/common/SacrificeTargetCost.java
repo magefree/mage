@@ -7,6 +7,7 @@ import mage.abilities.costs.CostImpl;
 import mage.constants.AbilityType;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
@@ -23,6 +24,10 @@ import java.util.UUID;
 public class SacrificeTargetCost extends CostImpl {
 
     private final List<Permanent> permanents = new ArrayList<>();
+
+    public SacrificeTargetCost() {
+        this(StaticFilters.FILTER_PERMANENT_A);
+    }
 
     public SacrificeTargetCost(FilterPermanent filter) {
         this(1, filter);
