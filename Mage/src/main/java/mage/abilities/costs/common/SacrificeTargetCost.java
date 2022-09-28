@@ -42,7 +42,9 @@ public class SacrificeTargetCost extends CostImpl {
 
     public SacrificeTargetCost(TargetSacrifice target) {
         this.addTarget(target);
+        target.setRequired(false);
         this.text = "sacrifice " + makeText(target);
+        target.setTargetName(target.getTargetName() + " (to sacrifice)");
     }
 
     protected SacrificeTargetCost(final SacrificeTargetCost cost) {

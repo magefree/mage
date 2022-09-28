@@ -9,7 +9,6 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetSacrifice;
 import mage.util.CardUtil;
 
@@ -55,15 +54,11 @@ public class SacrificeEffect extends OneShotEffect {
                     count.calculate(game, source, this),
                     game.getBattlefield().countAll(filter, player.getId(), game)
             );
-            Target target = new TargetSacrifice(amount, filter);
+            TargetSacrifice target = new TargetSacrifice(amount, filter);
             if (amount < 1 || !target.canChoose(player.getId(), source, game)) {
                 continue;
             }
-            while (!target.isChosen()
-                    && target.canChoose(player.getId(), source, game)
-                    && player.canRespond()) {
-                player.chooseTarget(Outcome.Sacrifice, target, source, game);
-            }
+            player.choose(Outcome.Sacrifice, target, source, game);
             for (UUID targetId : target.getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null && permanent.sacrifice(source, game)) {
