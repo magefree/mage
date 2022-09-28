@@ -16,6 +16,7 @@ import org.mage.plugins.card.images.ImageCache;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -25,94 +26,67 @@ import java.util.concurrent.TimeUnit;
  */
 public class CardPanelRenderModeMTGO extends CardPanel {
 
-    private static boolean cardViewEquals(CardView a, CardView b) {
+    // Map of generated images
+    private final static Cache<ImageKey, BufferedImage> IMAGE_CACHE = CacheBuilder
+            .newBuilder()
+            .maximumSize(3000)
+            .expireAfterAccess(60, TimeUnit.MINUTES)
+            .softValues()
+            .build();
+
+    // The art image for the card, loaded in from the disk
+    private BufferedImage artImage;
+
+    // The faceart image for the card, loaded in from the disk (based on artid from mtgo)
+    private BufferedImage faceArtImage;
+
+    // Factory to generate card appropriate views
+    private final CardRendererFactory cardRendererFactory = new CardRendererFactory();
+
+    // The rendered card image, with or without the art image loaded yet
+    // = null while invalid
+    private BufferedImage cardImage;
+    private CardRenderer cardRenderer;
+
+    private int updateArtImageStamp;
+
+    private static boolean cardViewEquals(CardView a, CardView b) { // TODO: This belongs in CardView
         if (a == b) {
             return true;
         }
-        if (a.getClass() != b.getClass()) {
+        if (a == null || b == null || a.getClass() != b.getClass()) {
             return false;
         }
-        if (!a.getDisplayName().equals(b.getDisplayName())) {
+
+        if (!(a.getDisplayName().equals(b.getDisplayName()) // TODO: Original code not checking everything. Why is it only checking these values?
+                && a.getPower().equals(b.getPower())
+                && a.getToughness().equals(b.getToughness())
+                && a.getLoyalty().equals(b.getLoyalty())
+                && 0 == a.getColor().compareTo(b.getColor())
+                && a.getCardTypes().equals(b.getCardTypes())
+                && a.getSubTypes().equals(b.getSubTypes())
+                && a.getSuperTypes().equals(b.getSuperTypes())
+                && a.getManaCostStr().equals(b.getManaCostStr())
+                && a.getRules().equals(b.getRules())
+                && Objects.equals(a.getRarity(), b.getRarity())
+                && Objects.equals(a.getCardNumber(), b.getCardNumber())
+                && Objects.equals(a.getExpansionSetCode(), b.getExpansionSetCode())
+                && a.getFrameStyle() == b.getFrameStyle()
+                && Objects.equals(a.getCounters(), b.getCounters())
+                && a.isFaceDown() == b.isFaceDown())) {
             return false;
         }
-        if (!a.getPower().equals(b.getPower())) {
-            return false;
+
+        if (!(a instanceof PermanentView)) {
+            return true;
         }
-        if (!a.getToughness().equals(b.getToughness())) {
-            return false;
-        }
-        if (!a.getLoyalty().equals(b.getLoyalty())) {
-            return false;
-        }
-        if (0 != a.getColor().compareTo(b.getColor())) {
-            return false;
-        }
-        if (!a.getCardTypes().equals(b.getCardTypes())) {
-            return false;
-        }
-        if (!a.getSubTypes().equals(b.getSubTypes())) {
-            return false;
-        }
-        if (!a.getSuperTypes().equals(b.getSuperTypes())) {
-            return false;
-        }
-        if (!a.getManaCostStr().equals(b.getManaCostStr())) {
-            return false;
-        }
-        if (!a.getRules().equals(b.getRules())) {
-            return false;
-        }
-        if (a.getRarity() == null || b.getRarity() == null) {
-            return false;
-        }
-        if (a.getRarity() != b.getRarity()) {
-            return false;
-        }
-        if (a.getCardNumber() != null && !a.getCardNumber().equals(b.getCardNumber())) {
-            return false;
-        }
-        // Expansion set code, with null checking:
-        // TODO: The null checks should not be necessary, but thanks to Issue #2260
-        // some tokens / commandobjects will be missing expansion set codes.
-        String expA = a.getExpansionSetCode();
-        if (expA == null) {
-            expA = "";
-        }
-        String expB = b.getExpansionSetCode();
-        if (expB == null) {
-            expB = "";
-        }
-        if (!expA.equals(expB)) {
-            return false;
-        }
-        if (a.getFrameStyle() != b.getFrameStyle()) {
-            return false;
-        }
-        if (a.getCounters() == null) {
-            if (b.getCounters() != null) {
-                return false;
-            }
-        } else if (!a.getCounters().equals(b.getCounters())) {
-            return false;
-        }
-        if (a.isFaceDown() != b.isFaceDown()) {
-            return false;
-        }
-        if ((a instanceof PermanentView)) {
-            PermanentView aa = (PermanentView) a;
-            PermanentView bb = (PermanentView) b;
-            if (aa.hasSummoningSickness() != bb.hasSummoningSickness()) {
-                // Note: b must be a permanentview too as we aleady checked that classes
-                // are the same for a and b
-                return false;
-            }
-            return aa.getDamage() == bb.getDamage();
-        }
-        return true;
+        PermanentView aa = (PermanentView) a;
+        PermanentView bb = (PermanentView) b;
+        return aa.hasSummoningSickness() == bb.hasSummoningSickness()
+                && aa.getDamage() == bb.getDamage();
     }
 
-    static class ImageKey {
-
+    private static class ImageKey {
         final BufferedImage artImage;
         final int width;
         final int height;
@@ -133,7 +107,7 @@ public class CardPanelRenderModeMTGO extends CardPanel {
             this.hashCode = hashCodeImpl();
         }
 
-        private int hashCodeImpl() {
+        private int hashCodeImpl() { // TODO: Why is this using a string builder???
             StringBuilder sb = new StringBuilder();
             sb.append((char) (artImage != null ? 1 : 0));
             sb.append((char) width);
@@ -185,59 +159,22 @@ public class CardPanelRenderModeMTGO extends CardPanel {
 
         @Override
         public boolean equals(Object object) {
-            // Initial checks
             if (this == object) {
                 return true;
             }
-            if (object == null) {
+            if (object == null || this.getClass() != object.getClass()) {
                 return false;
             }
-            if (!(object instanceof ImageKey)) {
-                return false;
-            }
-            final ImageKey other = (ImageKey) object;
+            final ImageKey that = (ImageKey) object;
 
-            // Compare
-            if ((artImage == null) == (other.artImage != null)) {
-                return false;
-            }
-            if (width != other.width) {
-                return false;
-            }
-            if (height != other.height) {
-                return false;
-            }
-            if (isChoosable != other.isChoosable) {
-                return false;
-            }
-            if (isSelected != other.isSelected) {
-                return false;
-            }
-            return cardViewEquals(view, other.view);
+            return (artImage == null) == (that.artImage == null)
+                    && this.width == that.width
+                    && this.height == that.height
+                    && this.isChoosable == that.isChoosable
+                    && this.isSelected == that.isSelected
+                    && cardViewEquals(this.view, that.view);
         }
     }
-
-    // Map of generated images
-    private final static Cache<ImageKey, BufferedImage> IMAGE_CACHE = CacheBuilder
-            .newBuilder()
-            .maximumSize(3000)
-            .expireAfterAccess(60, TimeUnit.MINUTES)
-            .softValues()
-            .build();
-
-    // The art image for the card, loaded in from the disk
-    private BufferedImage artImage;
-
-    // The faceart image for the card, loaded in from the disk (based on artid from mtgo)
-    private BufferedImage faceArtImage;
-
-    // Factory to generate card appropriate views
-    private final CardRendererFactory cardRendererFactory = new CardRendererFactory();
-
-    // The rendered card image, with or without the art image loaded yet
-    // = null while invalid
-    private BufferedImage cardImage;
-    private CardRenderer cardRenderer;
 
     public CardPanelRenderModeMTGO(CardView newGameCard, UUID gameId, final boolean loadImage, ActionCallback callback,
                                    final boolean foil, Dimension dimension, boolean needFullPermanentRender) {
@@ -252,16 +189,14 @@ public class CardPanelRenderModeMTGO extends CardPanel {
     }
 
     @Override
-    public void transferResources(CardPanel panel) {
-        if (panel instanceof CardPanelRenderModeMTGO) {
-            CardPanelRenderModeMTGO impl = (CardPanelRenderModeMTGO) panel;
-
-            // Use the art image and current rendered image from the card
-            artImage = impl.artImage;
-            cardRenderer.setArtImage(artImage);
-            faceArtImage = impl.faceArtImage;
-            cardRenderer.setFaceArtImage(faceArtImage);
-            cardImage = impl.cardImage;
+    public Image getImage() {
+        if (artImage == null) {
+            return null;
+        }
+        if (getGameCard().isFaceDown()) {
+            return getFaceDownImage();
+        } else {
+            return ImageCache.getImageOriginal(getGameCard());
         }
     }
 
@@ -288,38 +223,72 @@ public class CardPanelRenderModeMTGO extends CardPanel {
         g.drawImage(cardImage, cardOffsetX, cardOffsetY, null);
     }
 
-    /**
-     * Render the card to a new BufferedImage at it's current dimensions
-     *
-     * @return image
-     */
-    private BufferedImage renderCard() {
-        int cardWidth = getCardWidth();
-        int cardHeight = getCardHeight();
+    @Override
+    public void setCardBounds(int x, int y, int cardWidth, int cardHeight) {
+        int oldCardWidth = getCardWidth();
+        int oldCardHeight = getCardHeight();
 
-        // Create image to render to
-        BufferedImage image
-                = GraphicsUtilities.createCompatibleTranslucentImage(cardWidth, cardHeight);
-        Graphics2D g2d = image.createGraphics();
+        super.setCardBounds(x, y, cardWidth, cardHeight);
 
-        // Render with Antialialsing
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-
-        // Draw card itself
-        cardRenderer.draw(g2d, getAttributes(), image);
-
-        // Done
-        g2d.dispose();
-        return image;
+        // Rerender if card size changed
+        if (getCardWidth() != oldCardWidth || getCardHeight() != oldCardHeight) {
+            cardImage = null;
+        }
     }
 
-    private CardPanelAttributes getAttributes() {
-        return new CardPanelAttributes(getCardWidth(), getCardHeight(), isChoosable(), isSelected(), isTransformed());
+    @Override
+    public void setChoosable(boolean choosable) {
+        if (choosable != isChoosable()) {
+            super.setChoosable(choosable);
+            // Invalidate our render and trigger a repaint
+            cardImage = null;
+            repaint();
+        }
     }
 
-    private int updateArtImageStamp;
+    @Override
+    public void setSelected(boolean selected) {
+        if (selected != isSelected()) {
+            super.setSelected(selected);
+            // Invalidate our render and trigger a repaint
+            cardImage = null;
+            repaint();
+        }
+    }
+
+    @Override
+    public void showCardTitle() {
+        // Nothing to do, rendered cards always have a title
+    }
+
+    @Override
+    public void transferResources(CardPanel panel) {
+        if (panel instanceof CardPanelRenderModeMTGO) {
+            CardPanelRenderModeMTGO impl = (CardPanelRenderModeMTGO) panel;
+
+            // Use the art image and current rendered image from the card
+            artImage = impl.artImage;
+            cardRenderer.setArtImage(artImage);
+            faceArtImage = impl.faceArtImage;
+            cardRenderer.setFaceArtImage(faceArtImage);
+            cardImage = impl.cardImage;
+        }
+    }
+
+    @Override
+    public void update(CardView card) {
+        // Update super
+        super.update(card);
+
+        // Update renderer
+        cardImage = null;
+        cardRenderer = cardRendererFactory.create(getGameCard());
+        cardRenderer.setArtImage(artImage);
+        cardRenderer.setFaceArtImage(faceArtImage);
+
+        // Repaint
+        repaint();
+    }
 
     @Override
     public void updateArtImage() {
@@ -379,32 +348,8 @@ public class CardPanelRenderModeMTGO extends CardPanel {
         }
     }
 
-    @Override
-    public void update(CardView card) {
-        // Update super
-        super.update(card);
-
-        // Update renderer
-        cardImage = null;
-        cardRenderer = cardRendererFactory.create(getGameCard());
-        cardRenderer.setArtImage(artImage);
-        cardRenderer.setFaceArtImage(faceArtImage);
-
-        // Repaint
-        repaint();
-    }
-
-    @Override
-    public void setCardBounds(int x, int y, int cardWidth, int cardHeight) {
-        int oldCardWidth = getCardWidth();
-        int oldCardHeight = getCardHeight();
-
-        super.setCardBounds(x, y, cardWidth, cardHeight);
-
-        // Rerender if card size changed
-        if (getCardWidth() != oldCardWidth || getCardHeight() != oldCardHeight) {
-            cardImage = null;
-        }
+    private CardPanelAttributes getAttributes() {
+        return new CardPanelAttributes(getCardWidth(), getCardHeight(), isChoosable(), isSelected(), isTransformed());
     }
 
     private BufferedImage getFaceDownImage() {
@@ -422,40 +367,30 @@ public class CardPanelRenderModeMTGO extends CardPanel {
         }
     }
 
-    @Override
-    public void setSelected(boolean selected) {
-        if (selected != isSelected()) {
-            super.setSelected(selected);
-            // Invalidate our render and trigger a repaint
-            cardImage = null;
-            repaint();
-        }
-    }
+    /**
+     * Render the card to a new BufferedImage at it's current dimensions
+     *
+     * @return image
+     */
+    private BufferedImage renderCard() {
+        int cardWidth = getCardWidth();
+        int cardHeight = getCardHeight();
 
-    @Override
-    public void setChoosable(boolean choosable) {
-        if (choosable != isChoosable()) {
-            super.setChoosable(choosable);
-            // Invalidate our render and trigger a repaint
-            cardImage = null;
-            repaint();
-        }
-    }
+        // Create image to render to
+        BufferedImage image
+                = GraphicsUtilities.createCompatibleTranslucentImage(cardWidth, cardHeight);
+        Graphics2D g2d = image.createGraphics();
 
-    @Override
-    public Image getImage() {
-        if (artImage != null) {
-            if (getGameCard().isFaceDown()) {
-                return getFaceDownImage();
-            } else {
-                return ImageCache.getImageOriginal(getGameCard());
-            }
-        }
-        return null;
-    }
+        // Render with Antialialsing
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 
-    @Override
-    public void showCardTitle() {
-        // Nothing to do, rendered cards always have a title
+        // Draw card itself
+        cardRenderer.draw(g2d, getAttributes(), image);
+
+        // Done
+        g2d.dispose();
+        return image;
     }
 }

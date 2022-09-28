@@ -39,6 +39,8 @@ public interface GamePlay {
 
     boolean updateDeck(UUID tableId, DeckCardLists deck);
 
+    boolean setBoosterLoaded(UUID draftId);
+    
     DraftPickView sendCardPick(UUID draftId, UUID cardId, Set<UUID> hiddenCards);
     DraftPickView sendCardMark(UUID draftId, UUID cardId);
 

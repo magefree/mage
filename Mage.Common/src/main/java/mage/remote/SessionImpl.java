@@ -987,6 +987,20 @@ public class SessionImpl implements Session {
         }
         return null;
     }
+    
+    @Override
+    public boolean setBoosterLoaded(UUID draftId) {
+        try {
+            if (isConnected()) {
+                server.setBoosterLoaded(draftId, sessionId);
+            }
+        } catch (MageException ex) {
+            handleMageException(ex);
+        } catch (Throwable t) {
+            handleThrowable(t);
+        }
+        return false;
+    }
 
     @Override
     public boolean joinChat(UUID chatId) {

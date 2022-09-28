@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -27,7 +28,7 @@ public final class KarnLivingLegacyEmblem extends Emblem {
         this.setName("Emblem Karn");
         this.setExpansionSetCodeForImage("DMU");
         Ability ability = new SimpleActivatedAbility(
-                new DamageTargetEffect(1, "this emblem"),
+                Zone.COMMAND, new DamageTargetEffect(1, "this emblem"),
                 new TapTargetCost(new TargetControlledPermanent(filter))
         );
         ability.addTarget(new TargetAnyTarget());
