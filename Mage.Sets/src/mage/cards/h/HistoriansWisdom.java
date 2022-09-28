@@ -43,7 +43,7 @@ public final class HistoriansWisdom extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // When Historian's Wisdom enters the battlefield, if enchanted permanent is a creature with the greatest power among creatures on the battlefield, draw a card.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(

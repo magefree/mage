@@ -39,7 +39,7 @@ public final class Sunbond extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);        
         // Enchanted creature has "Whenever you gain life, put that many +1/+1 counters on this creature."
         Effect effect = new GainAbilityAttachedEffect(new GainLifeControllerTriggeredAbility(new SunbondEffect(), false, true), AttachmentType.AURA, Duration.WhileOnBattlefield);

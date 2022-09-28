@@ -36,7 +36,7 @@ public final class SoulTithe extends CardImpl {
         TargetPermanent auraTarget = new TargetNonlandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // At the beginning of the upkeep of enchanted permanent's controller,

@@ -47,7 +47,7 @@ public final class TwistedEmbrace extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // When Twisted Embrace enters the battlefield, destroy target creature or planeswalker an opponent controls.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());

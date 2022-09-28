@@ -44,7 +44,7 @@ public final class TamiyosCompleation extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.LoseAbility));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // When Tamiyo's Compleation enters the battlefield, tap enchanted permanent. If it's an Equipment, unattach it.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new TamiyosCompleationTapEffect()));

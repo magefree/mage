@@ -42,7 +42,7 @@ public final class DanceOfTheDead extends CardImpl {
         TargetCardInGraveyard auraTarget = new TargetCardInGraveyard(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.PutCreatureInPlay));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // When Dance of the Dead enters the battlefield, if it's on the battlefield, it loses "enchant creature
         // card in a graveyard" and gains "enchant creature put onto the battlefield with Dance of the Dead."

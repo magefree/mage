@@ -36,7 +36,7 @@ public final class PendrellFlux extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature has "At the beginning of your upkeep, sacrifice this creature unless you pay its mana cost."
         ability = new BeginningOfUpkeepTriggeredAbility(new PendrellFluxEffect(), TargetController.YOU, false);

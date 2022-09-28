@@ -29,7 +29,7 @@ public final class Ferocity extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Whenever enchanted creature blocks or becomes blocked, you may put a +1/+1 counter on it.
         this.addAbility(new BlocksOrBlockedAttachedTriggeredAbility(

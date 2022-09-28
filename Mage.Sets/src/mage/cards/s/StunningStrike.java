@@ -52,7 +52,7 @@ public final class StunningStrike extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // When Stunning Strike enters the battlefield, tap enchanted creature and remove it from combat.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new StunningStrikeEffect()));

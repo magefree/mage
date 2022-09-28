@@ -30,7 +30,7 @@ public final class GiftOfTheWoods extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.getSpellAbility().addTarget(auraTarget);
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Whenever enchanted creature blocks or becomes blocked, it gets +0/+3 until end of turn and you gain 1 life.
         Ability ability = new BlocksOrBlockedAttachedTriggeredAbility(new BoostTargetEffect(0, 3).setText("it gets +0/+3 until end of turn"));

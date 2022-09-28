@@ -36,7 +36,7 @@ public final class CruelReality extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Damage));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         //At the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker. If the player can't, they lose 5 life.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CruelRealityEffect(), TargetController.ENCHANTED, false));

@@ -37,7 +37,7 @@ public final class HotSprings extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent(new FilterControlledLandPermanent());
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted land has "{tap}: Prevent the next 1 damage that would be dealt to any target this turn."
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());

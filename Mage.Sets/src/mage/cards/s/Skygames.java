@@ -33,7 +33,7 @@ public final class Skygames extends CardImpl {
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         
         // Enchanted land has "{tap}: Target creature gains flying until end of turn. Activate this ability only any time you could cast a sorcery."
