@@ -44,6 +44,10 @@ public final class DanceOfTheDead extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.PutCreatureInPlay));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
+        // When Dance of the Dead enters the battlefield, if it's on the battlefield, it loses "enchant creature
+        // card in a graveyard" and gains "enchant creature put onto the battlefield with Dance of the Dead."
+        // Put enchanted creature card onto the battlefield tapped under your control and attach Dance of the Dead
+        // to it. When Dance of the Dead leaves the battlefield, that creature's controller sacrifices it.
         this.addAbility(new AnimateDeadTriggeredAbility(false, true));
 
         // Enchanted creature gets +1/+1 and doesn't untap during its controller's untap step.

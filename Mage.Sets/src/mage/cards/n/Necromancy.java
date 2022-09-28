@@ -20,15 +20,20 @@ import java.util.UUID;
  */
 public final class Necromancy extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("creature card in a graveyard");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("creature card from a graveyard");
 
     public Necromancy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 
-        // You may cast Necromancy as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.
+        // You may cast Necromancy as though it had flash. If you cast it any time a sorcery couldn't have been cast,
+        // the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new CastAsThoughItHadFlashSourceEffect(Duration.EndOfGame)));
         this.addAbility(new SacrificeIfCastAtInstantTimeTriggeredAbility());
 
+        // When Necromancy enters the battlefield, if it's on the battlefield, it becomes an Aura with
+        // "enchant creature put onto the battlefield with Necromancy." Put target creature card from
+        // a graveyard onto the battlefield under your control and attach Necromancy to it. When Necromancy
+        // leaves the battlefield, that creature's controller sacrifices it.
         Ability ability = new AnimateDeadTriggeredAbility(true);
         ability.addTarget(new TargetCardInGraveyard(filter));
         this.addAbility(ability);

@@ -217,4 +217,67 @@ public class AnimateDeadTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Blackbloom Rogue", 1, 3);
         assertPermanentCount(playerA, "Animate Dead", 1);
     }
+
+    /**
+     * Flickering Animate Dead, resolving enters trigger first
+     * https://github.com/magefree/mage/issues/5250
+     */
+    @Test
+    public void testFlickerAnimateDeadEnterTriggerFirst() {
+        addCard(Zone.GRAVEYARD, playerA, "Silvercoat Lion");
+        addCard(Zone.GRAVEYARD, playerA, "Walking Corpse");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.HAND, playerA, "Animate Dead");
+        addCard(Zone.HAND, playerA, "Flicker of Fate");
+
+        setStrictChooseMode(true);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Animate Dead", "Silvercoat Lion");
+
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Flicker of Fate", "Animate Dead");
+        setChoice(playerA, "Walking Corpse");     // card to attach reentering aura to
+        setChoice(playerA, "When {this} leaves"); // resolve leaves trigger last
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Animate Dead", 1);
+        assertPermanentCount(playerA, "Walking Corpse", 1);
+        assertPermanentCount(playerA, "Silvercoat Lion", 0);
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
+        assertGraveyardCount(playerA, "Walking Corpse", 0);
+        assertGraveyardCount(playerA, "Flicker of Fate", 1);
+    }
+
+    /**
+     * Flickering Animate Dead, resolving leaves trigger first
+     */
+    @Test
+    public void testFlickerAnimateDeadLeaveTriggerFirst() {
+        addCard(Zone.GRAVEYARD, playerA, "Silvercoat Lion");
+        addCard(Zone.GRAVEYARD, playerA, "Walking Corpse");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.HAND, playerA, "Animate Dead");
+        addCard(Zone.HAND, playerA, "Flicker of Fate");
+
+        setStrictChooseMode(true);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Animate Dead", "Silvercoat Lion");
+
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Flicker of Fate", "Animate Dead");
+        setChoice(playerA, "Walking Corpse");     // card to attach reentering aura to
+        setChoice(playerA, "When {this} enters"); // resolve enters trigger last
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Animate Dead", 1);
+        assertPermanentCount(playerA, "Walking Corpse", 1);
+        assertPermanentCount(playerA, "Silvercoat Lion", 0);
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
+        assertGraveyardCount(playerA, "Walking Corpse", 0);
+        assertGraveyardCount(playerA, "Flicker of Fate", 1);
+    }
 }

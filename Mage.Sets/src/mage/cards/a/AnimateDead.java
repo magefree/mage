@@ -31,6 +31,10 @@ public final class AnimateDead extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.PutCreatureInPlay));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
+        // When Animate Dead enters the battlefield, if it's on the battlefield, it loses "enchant creature
+        // card in a graveyard" and gains "enchant creature put onto the battlefield with Animate Dead."
+        // Return enchanted creature card to the battlefield under your control and attach Animate Dead
+        // to it. When Animate Dead leaves the battlefield, that creature's controller sacrifices it.
         this.addAbility(new AnimateDeadTriggeredAbility());
 
         // Enchanted creature gets -1/-0.
