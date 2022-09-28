@@ -10,7 +10,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetSacrifice;
 import mage.util.CardUtil;
 
@@ -90,7 +89,7 @@ public class SacrificeTargetCost extends CostImpl {
 
         int validTargets = 0;
         int neededtargets = targets.get(0).getNumberOfTargets();
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(((TargetControlledPermanent) targets.get(0)).getFilter(), controllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(((TargetSacrifice) targets.get(0)).getFilter(), controllerId, game)) {
             if (game.getPlayer(activator).canPaySacrificeCost(permanent, source, controllerId, game)) {
                 validTargets++;
                 if (validTargets >= neededtargets) {
