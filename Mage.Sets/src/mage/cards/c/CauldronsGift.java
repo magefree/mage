@@ -1,6 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.AdamantCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -26,7 +27,6 @@ public final class CauldronsGift extends CardImpl {
 
     public CauldronsGift(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}");
-        this.setCaresAboutManaColorManualOverride(true);
 
         // Adamant — If at least three black mana was spent to cast this spell, put the top four cards of your library into your graveyard.
         // You may choose a creature card in your graveyard. If you do, return it to the battlefield with an additional +1/+1 counter on it.
@@ -88,5 +88,10 @@ class CauldronsGiftEffect extends OneShotEffect {
             permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
         }
         return true;
+    }
+
+    @Override
+    public Condition getCondition() {
+        return AdamantCondition.BLACK;
     }
 }

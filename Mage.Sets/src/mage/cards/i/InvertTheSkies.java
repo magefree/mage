@@ -35,7 +35,6 @@ public final class InvertTheSkies extends CardImpl {
 
     public InvertTheSkies(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{G/U}");
-        this.setCaresAboutManaColorManualOverride(true);
 
         // Creatures your opponents control lose flying until end of turn if {G} was spent to cast Invert the Skies, and creatures you control gain flying until end of turn if {U} was spent to cast it.
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(

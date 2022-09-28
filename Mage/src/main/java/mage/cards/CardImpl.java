@@ -51,9 +51,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected boolean usesVariousArt = false;
     protected boolean morphCard;
     protected List<UUID> attachments = new ArrayList<>();
-    // True if the card has effects which care about the color of mana spent on it (e.g. Sunburst).
-    // This value is used for any cards which have custom ability/effects since these cannot be automatically found.
-    protected boolean caresAboutManaColorManualOverride;
 
     public CardImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs) {
         this(ownerId, setInfo, cardTypes, costs, SpellAbilityType.BASE);
@@ -131,7 +128,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         flipCardName = card.flipCardName;
         usesVariousArt = card.usesVariousArt;
         morphCard = card.morphCard;
-        caresAboutManaColorManualOverride = card.caresAboutManaColorManualOverride;
 
         this.attachments.addAll(card.attachments);
     }
@@ -917,11 +913,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
      * @return Whether the given spell cares about the mana color used to pay for it.
      */
     public boolean caresAboutManaColor(Game game) {
-        // Card which has been manually set as caring about mana color.
-        if (caresAboutManaColorManualOverride) {
-            return true;
-        }
-
         // SunburstAbility
         if (abilities.containsClass(SunburstAbility.class)) {
             return true;
@@ -939,16 +930,5 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
         // Only way to get here is if none of the effects on the card care about mana color.
         return false;
-    }
-
-    /**
-     * Manually set if a card cares about the mana color.
-     * MUST be used for cards that implement custom abilities/effects that care about mana color (e.g. Cankerous Thirst)
-     * Does not have to be used for cards that use common abilities/effects (e.g. Ogre Savant).
-     *
-     * @param caresAboutManaColorManualOverride boolean indicating if the card's effects care about the color of the spent mana
-     */
-    public void setCaresAboutManaColorManualOverride(boolean caresAboutManaColorManualOverride) {
-        this.caresAboutManaColorManualOverride = caresAboutManaColorManualOverride;
     }
 }

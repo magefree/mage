@@ -2,6 +2,7 @@ package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.InfoEffect;
@@ -28,7 +29,6 @@ public final class VigorMortis extends CardImpl {
 
     public VigorMortis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.setCaresAboutManaColorManualOverride(true);
 
         // Return target creature card from your graveyard to the battlefield. If {G} was spent to cast Vigor Mortis, that creature enters the battlefield with an additional +1/+1 counter on it.
         this.getSpellAbility().addEffect(new VigorMortisReplacementEffect()); // has to be added before the moving effect
@@ -49,6 +49,8 @@ public final class VigorMortis extends CardImpl {
 
 class VigorMortisReplacementEffect extends ReplacementEffectImpl {
 
+    private static final Condition condition = new ManaWasSpentCondition(ColoredManaSymbol.G);
+
     VigorMortisReplacementEffect() {
         super(Duration.EndOfStep, Outcome.BoostCreature);
     }
@@ -65,7 +67,7 @@ class VigorMortisReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
-            return new ManaWasSpentCondition(ColoredManaSymbol.G).apply(game, source);
+            return condition.apply(game, source);
         }
         return false;
     }
@@ -88,5 +90,10 @@ class VigorMortisReplacementEffect extends ReplacementEffectImpl {
     @Override
     public VigorMortisReplacementEffect copy() {
         return new VigorMortisReplacementEffect(this);
+    }
+
+    @Override
+    public Condition getCondition() {
+        return condition;
     }
 }

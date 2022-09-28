@@ -1,6 +1,7 @@
 package mage.cards.o;
 
 import mage.abilities.Ability;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.AdamantCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
@@ -22,7 +23,6 @@ public final class OnceAndFuture extends CardImpl {
 
     public OnceAndFuture(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.setCaresAboutManaColorManualOverride(true);
 
         // Return target card from your graveyard to your hand. Put up to one other target card from your graveyard on top of your library. Exile Once and Future.
         // Adamant — If at least three green mana was spent to cast this spell, instead return those cards to your hand and exile Once and Future.
@@ -96,5 +96,10 @@ class OnceAndFutureEffect extends OneShotEffect {
         player.putInHand(card1, game);
         player.putCardsOnTopOfLibrary(new CardsImpl(card2), game, source, false);
         return new ExileSpellEffect().apply(game, source);
+    }
+
+    @Override
+    public Condition getCondition() {
+        return AdamantCondition.GREEN;
     }
 }

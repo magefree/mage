@@ -29,7 +29,6 @@ public class MythosOfSnapdax extends CardImpl {
 
     public MythosOfSnapdax(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
-        this.setCaresAboutManaColorManualOverride(true);
 
         // Each player chooses an artifact, a creature, an enchantment, and a planeswalker from among the nonland permanents they control, then sacrifices the rest. If {B}{R} was spent to cast this spell, you choose the permanents for each player instead.
         this.getSpellAbility().addEffect(new MythosOfSnapdaxEffect());
@@ -121,5 +120,10 @@ class MythosOfSnapdaxEffect extends OneShotEffect {
             permanent.sacrifice(source, game);
         }
         return true;
+    }
+
+    @Override
+    public Condition getCondition() {
+        return condition;
     }
 }

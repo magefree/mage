@@ -2,6 +2,8 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.condition.CompoundCondition;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -29,7 +31,6 @@ public final class CankerousThirst extends CardImpl {
 
     public CankerousThirst(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B/G}");
-        this.setCaresAboutManaColorManualOverride(true);
 
         // If {B} was spent to cast Cankerous Thirst, you may have target creature get -3/-3 until end of turn. If {G} was spent to cast Cankerous Thirst, you may have target creature get +3/+3 until end of turn.
         this.getSpellAbility().addEffect(new CankerousThirstEffect());
@@ -50,6 +51,12 @@ public final class CankerousThirst extends CardImpl {
 }
 
 class CankerousThirstEffect extends OneShotEffect {
+
+    // Only used for getCondition
+    private static final Condition condition = new CompoundCondition(
+            new ManaWasSpentCondition(ColoredManaSymbol.B),
+            new ManaWasSpentCondition(ColoredManaSymbol.G)
+    );
 
     public CankerousThirstEffect() {
         super(Outcome.Benefit);
@@ -88,5 +95,10 @@ class CankerousThirstEffect extends OneShotEffect {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public Condition getCondition() {
+        return condition;
     }
 }

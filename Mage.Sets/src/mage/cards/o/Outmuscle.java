@@ -1,6 +1,7 @@
 package mage.cards.o;
 
 import mage.abilities.Ability;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.AdamantCondition;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -28,7 +29,6 @@ public final class Outmuscle extends CardImpl {
 
     public Outmuscle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
-        this.setCaresAboutManaColorManualOverride(true);
 
         // Put a +1/+1 counter on target creature you control, then it fights target creature you don't control.
         // Adamant — If at least three green mana was spent to cast this spell, the creature you control gains indestructible until end of turn.
@@ -85,5 +85,10 @@ class OutmuscleEffect extends OneShotEffect {
         }
         game.getState().processAction(game);
         return creature.fight(permanent, source, game);
+    }
+
+    @Override
+    public Condition getCondition() {
+        return AdamantCondition.GREEN;
     }
 }
