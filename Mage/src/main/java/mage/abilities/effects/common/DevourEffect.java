@@ -15,7 +15,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -75,8 +75,7 @@ public class DevourEffect extends ReplacementEffectImpl {
         if (creature == null || controller == null) {
             return false;
         }
-        Target target = new TargetControlledPermanent(1, Integer.MAX_VALUE, devourFactor.getFilter(), true);
-        target.setRequired(false);
+        Target target = new TargetSacrifice(1, Integer.MAX_VALUE, devourFactor.getFilter());
         if (!target.canChoose(source.getControllerId(), source, game)) {
             return false;
         }

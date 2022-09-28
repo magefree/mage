@@ -3519,7 +3519,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @param ability       The ability to pay for.
      * @param availableMana The available mana.
      * @param game          The game to calculate this for.
-     * @return              Boolean. True if the minimum can be paid, false otherwise.
+     * @return Boolean. True if the minimum can be paid, false otherwise.
      */
     protected boolean canPayMinimumManaCost(ActivatedAbility ability, ManaOptions availableMana, Game game) {
         ManaOptions abilityOptions = ability.getMinimumCostToActivate(playerId, game); // All possible combinations of mana costs
@@ -3620,7 +3620,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @param availableMana The mana available for payments.
      * @param ability       The ability to play it by.
      * @param game          The game to check for.
-     * @return              Boolean, true if the card can be played by *any* of the available alternative costs, false otherwise.
+     * @return Boolean, true if the card can be played by *any* of the available alternative costs, false otherwise.
      */
     protected boolean canPlayCardByAlternateCost(Card sourceObject, ManaOptions availableMana, Ability ability, Game game) {
         // TODO: Why is the "sourceObject instanceof Permanent" in there?
@@ -4378,7 +4378,8 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean canPaySacrificeCost(Permanent permanent, Ability source, UUID controllerId, Game game) {
-        return sacrificeCostFilter == null || !sacrificeCostFilter.match(permanent, controllerId, source, game);
+        return permanent.canBeSacrificed()
+                && (sacrificeCostFilter == null || !sacrificeCostFilter.match(permanent, controllerId, source, game));
     }
 
     @Override
