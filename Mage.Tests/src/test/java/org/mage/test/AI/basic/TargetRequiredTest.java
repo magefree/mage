@@ -24,7 +24,7 @@ public class TargetRequiredTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Redcap Melee", "Silvercoat Lion");
-        addTarget(playerA, "Mountain");
+        setChoice(playerA, "Mountain");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

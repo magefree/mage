@@ -29,7 +29,7 @@ public class OmnathLocusOfRageTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Diabolic Edict");
         addTarget(playerB, playerA);
-        addTarget(playerA, "Omnath, Locus of Rage"); // sacrifice target
+        setChoice(playerA, "Omnath, Locus of Rage"); // sacrifice target
         addTarget(playerA, playerB); // target for dies trigger with damage
 
         setStrictChooseMode(true);
