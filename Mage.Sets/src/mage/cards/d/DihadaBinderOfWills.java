@@ -1,33 +1,37 @@
 package mage.cards.d;
 
-import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
+import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
+import mage.abilities.effects.common.RevealLibraryPickControllerEffect;
+import mage.abilities.effects.common.UntapAllEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.GainControlAllEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.VigilanceAbility;
-import mage.cards.Card;
+import mage.cards.Cards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.common.FilterNonlandPermanent;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.game.Game;
 import mage.game.permanent.token.TreasureToken;
+import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
+
 /**
- * @author Draya
+ * @author Draya, awjackson
  */
 public final class DihadaBinderOfWills extends CardImpl {
 
-    private static final FilterCard legendarycreaturefilter = new FilterCreaturePermanent("legendary creature");
+    private static final FilterCreaturePermanent legendarycreaturefilter = new FilterCreaturePermanent("legendary creature");
 
     static {
         legendarycreaturefilter.add(SuperType.LEGENDARY.getPredicate());
@@ -41,7 +45,6 @@ public DihadaBinderOfWills(UUID ownerId, CardSetInfo setInfo) {
         this.setStartingLoyalty(5);
 
         // +2: Up to one target legendary creature gains vigilance, lifelink, and indestructible until your next turn.
-
         Ability ability = new LoyaltyAbility(new GainAbilityTargetEffect(
                 VigilanceAbility.getInstance(), Duration.UntilYourNextTurn
         ).setText("Up to one target legendary creature gains vigilance"), 2);
@@ -54,15 +57,20 @@ public DihadaBinderOfWills(UUID ownerId, CardSetInfo setInfo) {
         ability.addTarget(new TargetCreaturePermanent(0, 1, legendarycreaturefilter, false));
         this.addAbility(ability);
 
-
-        // -3: Reveal the top four cards of your library. Put any number of legendary cards from among them into your hand and the rest into your graveyard. Create a Treasure token for each card put into your graveyard this way.
-        effect = new DihadaFilterEffect();
-        ability = new LoyaltyAbility(effect, -3);
-        this.addAbility(ability);
+        // -3: Reveal the top four cards of your library.
+        // Put any number of legendary cards from among them into your hand and the rest into your graveyard.
+        // Create a Treasure token for each card put into your graveyard this way.
+        this.addAbility(new LoyaltyAbility(new DihadaFilterEffect(), -3));
 
         // -11: Gain control of all nonland permanents until end of turn. Untap them. They gain haste until end of turn.
-        effect = new DihadaControlEffect();
-        ability = new LoyaltyAbility(effect, -11);
+        ability = new LoyaltyAbility(new GainControlAllEffect(Duration.EndOfTurn, StaticFilters.FILTER_PERMANENTS_NON_LAND), -11);
+        ability.addEffect(new UntapAllEffect(StaticFilters.FILTER_PERMANENTS_NON_LAND).setText("untap them"));
+        ability.addEffect(new GainAbilityAllEffect(
+                HasteAbility.getInstance(),
+                Duration.EndOfTurn,
+                StaticFilters.FILTER_PERMANENTS_NON_LAND,
+                "they gain haste until end of turn"
+        ));
         this.addAbility(ability);
         
         // Dihada, Binder of Wills can be your commander.
@@ -79,127 +87,37 @@ public DihadaBinderOfWills(UUID ownerId, CardSetInfo setInfo) {
     }
 }
 
-class DihadaFilterEffect extends OneShotEffect {
+class DihadaFilterEffect extends RevealLibraryPickControllerEffect {
 
-    private static final FilterCard legendaryfilter = new FilterCard("legendary card");
+    private static final FilterCard legendaryfilter = new FilterCard("legendary cards");
 
     static {
         legendaryfilter.add(SuperType.LEGENDARY.getPredicate());
     }
 
     public DihadaFilterEffect() {
-        super(Outcome.PutCardInHand);
-        staticText = "Reveal the top four cards of your library. Put any "
-                + "number of legendary cards from among them "
-                + "into your hand and the rest into your graveyard. "
-                + "Create a treasure token for each card put into "
-                + "your graveyard this way.";
+        super(4, Integer.MAX_VALUE, legendaryfilter, PutCards.HAND, PutCards.GRAVEYARD, false);
+        staticText = "Reveal the top four cards of your library. " +
+                "Put any number of legendary cards from among them into your hand and the rest into your graveyard. " +
+                "Create a Treasure token for each card put into your graveyard this way";
     }
 
-    public DihadaFilterEffect(final DihadaFilterEffect effect) {
+    private DihadaFilterEffect(final DihadaFilterEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source);
-        if (controller == null || sourceObject == null) {
-            return false;
-        }
-        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 4));
-        if (!cards.isEmpty()) {
-            controller.revealCards(sourceObject.getIdName(), cards, game);
-
-            TargetCard target1 = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, legendaryfilter);
-            target1.setNotTarget(true);
-            controller.choose(Outcome.PutCardInHand, cards, target1, game);
-            Cards toHand = new CardsImpl(target1.getTargets());
-            cards.removeAll(toHand);
-            controller.moveCards(toHand.getCards(game), Zone.HAND, source, game);
-            controller.moveCards(cards, Zone.GRAVEYARD, source, game);
-
-            //Make Treasure
-            if (cards.size() != 0) {
-                new TreasureToken().putOntoBattlefield(cards.size(), game, source, source.getControllerId());
-            }
-        }
-        return true;
     }
 
     @Override
     public DihadaFilterEffect copy() {
         return new DihadaFilterEffect(this);
     }
-}
-
-class DihadaControlEffect extends OneShotEffect {
-
-    public DihadaControlEffect() {
-        super(Outcome.GainControl);
-        this.staticText = "Gain control of all nonland permanents until end of turn. Untap them. They gain haste until end of turn";
-    }
-
-    public DihadaControlEffect(final DihadaControlEffect effect) {
-        super(effect);
-    }
 
     @Override
-    public DihadaControlEffect copy() {
-        return new DihadaControlEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        boolean applied = false;
-
-        FilterPermanent controlfilter = new FilterNonlandPermanent("nonland permanents");
-        List<Permanent> dihadaperms = game.getBattlefield().getAllActivePermanents(controlfilter, game);
-        for (Permanent dihadaperm : dihadaperms) {
-            ContinuousEffect effect = new DihadaControlAllEffect(source.getControllerId());
-            effect.setTargetPointer(new FixedTarget(dihadaperm.getId(), game));
-            game.addEffect(effect, source);
-            applied = true;
+    protected boolean actionWithPickedCards(Game game, Ability source, Player player, Cards pickedCards, Cards otherCards) {
+        super.actionWithPickedCards(game, source, player, pickedCards, otherCards);
+        otherCards.retainZone(Zone.GRAVEYARD, game);
+        if (!otherCards.isEmpty()) {
+            new TreasureToken().putOntoBattlefield(otherCards.size(), game, source, player.getId());
         }
-        for (Permanent dihadaperm : dihadaperms) {
-            dihadaperm.untap(game);
-            applied = true;
-        }
-        for (Permanent dihadaperm : dihadaperms) {
-            ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-            effect.setTargetPointer(new FixedTarget(dihadaperm.getId(), game));
-            game.addEffect(effect, source);
-            applied = true;
-        }
-        return applied;
-    }
-}
-
-class DihadaControlAllEffect extends ContinuousEffectImpl {
-
-    private final UUID controllerId;
-
-    public DihadaControlAllEffect(UUID controllerId) {
-        super(Duration.EndOfTurn, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
-        this.controllerId = controllerId;
-    }
-
-    public DihadaControlAllEffect(final DihadaControlAllEffect effect) {
-        super(effect);
-        this.controllerId = effect.controllerId;
-    }
-
-    @Override
-    public DihadaControlAllEffect copy() {
-        return new DihadaControlAllEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent dihadaperm = game.getPermanent(targetPointer.getFirst(game, source));
-        if (dihadaperm != null && controllerId != null) {
-            return dihadaperm.changeControllerId(controllerId, game, source);
-        }
-        return false;
+        return true;
     }
 }
