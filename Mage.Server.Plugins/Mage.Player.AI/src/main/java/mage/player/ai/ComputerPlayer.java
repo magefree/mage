@@ -192,9 +192,10 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return false;
         }
 
-        if (target.getOriginalTarget() instanceof TargetControlledPermanent) {
+        if (target.getOriginalTarget() instanceof TargetControlledPermanent
+                || target.getOriginalTarget() instanceof TargetSacrifice) {
             List<Permanent> targets;
-            TargetControlledPermanent origTarget = (TargetControlledPermanent) target.getOriginalTarget();
+            TargetPermanent origTarget = (TargetPermanent) target.getOriginalTarget();
             targets = threats(abilityControllerId, source, origTarget.getFilter(), game, target.getTargets());
             if (!outcome.isGood()) {
                 Collections.reverse(targets);
@@ -689,8 +690,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return false;
         }
 
-        if (target.getOriginalTarget() instanceof TargetControlledPermanent) {
-            TargetControlledPermanent origTarget = (TargetControlledPermanent) target.getOriginalTarget();
+        if (target.getOriginalTarget() instanceof TargetControlledPermanent
+                || target.getOriginalTarget() instanceof TargetSacrifice) {
+            TargetPermanent origTarget = (TargetPermanent) target.getOriginalTarget();
             List<Permanent> targets;
             targets = threats(abilityControllerId, source, origTarget.getFilter(), game, target.getTargets());
             if (!outcome.isGood()) {

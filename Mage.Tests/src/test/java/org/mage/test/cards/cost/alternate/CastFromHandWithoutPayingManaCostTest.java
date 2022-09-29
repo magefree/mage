@@ -27,7 +27,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
     /**
      * Omniscience only lets you cast spells for free from your hand.
      * Haakon lets you cast knights from your graveyard.
-     *
+     * <p>
      * If you control both, you must still pay costs to cast knights from your graveyard.
      */
     @Test
@@ -196,14 +196,14 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
     /**
      * Omniscience is not allowing me to cast spells for free. I'm playing a
      * Commander game against the Computer, if that helps.
-     *
+     * <p>
      * Edit: It's not letting me cast fused spells for free. Others seems to be
      * working.
      */
     @Test
     public void testCastingFusedSpell() {
         setStrictChooseMode(true);
-        
+
         addCard(Zone.BATTLEFIELD, playerA, "Omniscience");
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
 
@@ -221,7 +221,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         setChoice(playerA, true); // Cast without paying its mana cost?
         addTarget(playerA, "Silvercoat Lion");
         addTarget(playerA, playerB);
-        playerB.addTarget("Pillarfield Ox");
+        setChoice(playerB, "Pillarfield Ox");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -234,7 +234,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Pillarfield Ox", 0);
         assertGraveyardCount(playerB, "Pillarfield Ox", 1);
     }
-    
+
 
     /**
      * Omniscience only lets you cast spells from your hand without paying their mana costs.
@@ -312,11 +312,11 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
      * If a spell has an unpayable cost (e.g. Ancestral Vision, which has no mana cost),
      * Omniscience should allow you to cast that spell without paying its mana cost.
      * In the case of Ancestral Vision, for example, Xmage only gives you the option to suspend Ancestral Vision.
-     *
+     * <p>
      * 118.6a   If an unpayable cost is increased by an effect or an additional cost is imposed,
-     *          the cost is still unpayable.
-     *          If an alternative cost is applied to an unpayable cost, including an effect that allows a player
-     *          to cast a spell without paying its mana cost, the alternative cost may be paid.
+     * the cost is still unpayable.
+     * If an alternative cost is applied to an unpayable cost, including an effect that allows a player
+     * to cast a spell without paying its mana cost, the alternative cost may be paid.
      */
     @Test
     public void testCastingUnpayableCost() {
@@ -343,30 +343,30 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
 
     // Not sure what the exact interaction is, but when Omniscience is on the field with Jodah, 
     // if you say "no" to the Jodah cast option to get to the Omniscience option, then the game will initiate a rollback.     
-    
+
     @Test
     public void test_OmniscienceAndJodah() {
         setStrictChooseMode(true);
-       
+
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
-        
+
         // Flying
         // You may pay WUBRG rather than pay the mana cost for spells that you cast.        
         addCard(Zone.BATTLEFIELD, playerA, "Jodah, Archmage Eternal"); // Creature {1}{U}{R}{W} (4/3)
 
         // You may cast nonland cards from your hand without paying their mana costs.
         addCard(Zone.HAND, playerA, "Omniscience"); // Enchantment {7}{U}{U}{U}
-        
+
         // Creature - 3/3 Swampwalk
         addCard(Zone.HAND, playerA, "Bog Wraith", 1); // Creature {3}{B} (3/3)
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Omniscience", true);
         setChoice(playerA, true); // Pay alternative costs? ({W}{U}{B}{R}{G})   
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bog Wraith");
         // The order of the two alternate casting abilities is not fixed, so it's not clear which ability is asked for first
         setChoice(playerA, false); // Pay alternative costs? ({W}{U}{B}{R}{G})   
