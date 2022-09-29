@@ -1,4 +1,4 @@
-package mage.cards.s;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -9,10 +9,11 @@ import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
-import mage.abilities.keyword.BushidoAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -20,54 +21,54 @@ import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author LevelX2
+ * @author awjackson
  */
-public final class SokenzanRenegade extends CardImpl {
+public final class ThoughtboundPrimoc extends CardImpl {
 
-    public SokenzanRenegade(UUID ownerId, CardSetInfo setInfo) {
+    public ThoughtboundPrimoc(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.subtype.add(SubType.OGRE, SubType.SAMURAI, SubType.MERCENARY);
+        this.subtype.add(SubType.BIRD, SubType.BEAST);
 
-        this.power = new MageInt(3);
+        this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Bushido 1
-        this.addAbility(new BushidoAbility(1));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
 
-        // At the beginning of your upkeep, if a player has more cards in hand than each other player,
-        // the player who has the most cards in hand gains control of Sokenzan Renegade.
+        // At the beginning of your upkeep, if a player controls more Wizards than each other player,
+        // the player who controls the most Wizards gains control of Thoughtbound Primoc.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SokenzanRenegadeEffect(), TargetController.YOU, false),
-                OnePlayerHasTheMostCards.instance,
-                "At the beginning of your upkeep, if a player has more cards in hand than each other player, the player who has the most cards in hand gains control of {this}"
+                new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ThoughtboundPrimocEffect(), TargetController.YOU, false),
+                OnePlayerHasTheMostWizards.instance,
+                "At the beginning of your upkeep, if a player controls more Wizards than each other player, the player who controls the most Wizards gains control of {this}"
         ));
 
     }
 
-    private SokenzanRenegade(final SokenzanRenegade card) {
+    private ThoughtboundPrimoc(final ThoughtboundPrimoc card) {
         super(card);
     }
 
     @Override
-    public SokenzanRenegade copy() {
-        return new SokenzanRenegade(this);
+    public ThoughtboundPrimoc copy() {
+        return new ThoughtboundPrimoc(this);
     }
 }
 
-class SokenzanRenegadeEffect extends OneShotEffect {
+class ThoughtboundPrimocEffect extends OneShotEffect {
 
-    public SokenzanRenegadeEffect() {
+    public ThoughtboundPrimocEffect() {
         super(Outcome.GainControl);
-        this.staticText = "the player who has the most cards in hand gains control of {this}";
+        this.staticText = "the player who controls the most Wizards gains control of {this}";
     }
 
-    public SokenzanRenegadeEffect(final SokenzanRenegadeEffect effect) {
+    public ThoughtboundPrimocEffect(final ThoughtboundPrimocEffect effect) {
         super(effect);
     }
 
     @Override
-    public SokenzanRenegadeEffect copy() {
-        return new SokenzanRenegadeEffect(this);
+    public ThoughtboundPrimocEffect copy() {
+        return new ThoughtboundPrimocEffect(this);
     }
 
     @Override
@@ -76,7 +77,7 @@ class SokenzanRenegadeEffect extends OneShotEffect {
         if (sourcePermanent == null) {
             return false;
         }
-        Player newController = OnePlayerHasTheMostCards.getPlayerWithMostCards(game, source);
+        Player newController = OnePlayerHasTheMostWizards.getPlayerWithMostWizards(game, source);
         if (newController != null) {
             ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame, newController.getId());
             effect.setTargetPointer(new FixedTarget(sourcePermanent, game));
@@ -89,26 +90,27 @@ class SokenzanRenegadeEffect extends OneShotEffect {
     }
 }
 
-enum OnePlayerHasTheMostCards implements Condition {
-
+enum OnePlayerHasTheMostWizards implements Condition {
     instance;
+
+    private static final FilterPermanent filter = new FilterPermanent(SubType.WIZARD, "Wizards");
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return getPlayerWithMostCards(game, source) != null;
+        return getPlayerWithMostWizards(game, source) != null;
     }
 
-    public static Player getPlayerWithMostCards(Game game, Ability source) {
+    public static Player getPlayerWithMostWizards(Game game, Ability source) {
         int max = Integer.MIN_VALUE;
         Player playerWithMost = null;
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                int cards = player.getHand().size();
-                if (cards > max) {
-                    max = cards;
+                int wizards = game.getBattlefield().countAll(filter, playerId, game);
+                if (wizards > max) {
+                    max = wizards;
                     playerWithMost = player;
-                } else if (cards == max) {
+                } else if (wizards == max) {
                     playerWithMost = null;
                 }
             }
@@ -118,6 +120,6 @@ enum OnePlayerHasTheMostCards implements Condition {
 
     @Override
     public String toString() {
-        return "a player has more cards in hand than each other player";
+        return "a player controls more Wizards than each other player";
     }
 }
