@@ -38,7 +38,7 @@ public final class GhituAmplifier extends CardImpl {
         // When Ghitu Amplifier enters the battlefield, if it was kicked, return target creature an opponent controls to its owner's hand.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()),
-                KickedCondition.TWICE, "When {this} enters the battlefield, " +
+                KickedCondition.ONCE, "When {this} enters the battlefield, " +
                 "if it was kicked, return target creature an opponent controls to its owner's hand."
         );
         ability.addTarget(new TargetOpponentsCreaturePermanent());
