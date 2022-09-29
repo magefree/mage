@@ -38,7 +38,7 @@ public final class CurseOfVengeance extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Whenever enchanted player casts a spell, put a spite counter on Curse of Vengeance.
         this.addAbility(new CurseOfVengeanceTriggeredAbility());

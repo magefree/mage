@@ -56,7 +56,7 @@ public final class KrovikanPlague extends CardImpl {
         TargetPermanent auraTarget = new TargetControlledCreaturePermanent(filterNonWall);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When Krovikan Plague enters the battlefield, draw a card at the beginning of the next turn's upkeep.

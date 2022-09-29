@@ -29,7 +29,7 @@ public final class CrownOfVigor extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature gets +1/+1.
         this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(1, 1)));

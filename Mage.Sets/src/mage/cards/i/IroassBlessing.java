@@ -41,7 +41,7 @@ public final class IroassBlessing extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When Iroas's Blessing enters the battlefield, it deals 4 damage to target creature or planeswalker an opponent controls.

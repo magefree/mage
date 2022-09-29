@@ -38,7 +38,7 @@ public final class BestialFury extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability enchantAbility = new EnchantAbility(auraTarget.getTargetName());
+        Ability enchantAbility = new EnchantAbility(auraTarget);
         this.addAbility(enchantAbility);
         
         // When Bestial Fury enters the battlefield, draw a card at the beginning of the next turn's upkeep.

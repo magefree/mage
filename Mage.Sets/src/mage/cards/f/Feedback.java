@@ -30,7 +30,7 @@ public final class Feedback extends CardImpl {
         TargetPermanent auraTarget = new TargetEnchantmentPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // At the beginning of the upkeep of enchanted enchantment's controller, Feedback deals 1 damage to that player.
         Effect effect = new DamageTargetEffect(1);

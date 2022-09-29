@@ -100,7 +100,7 @@ class AnimateDeadReplaceAbilityEffect extends ContinuousEffectImpl implements So
         FilterCreaturePermanent filter = new FilterCreaturePermanent("creature put onto the battlefield with {this}");
         filter.add(new AnimateDeadPredicate(source.getSourceId()));
         newTarget = new TargetCreaturePermanent(filter);
-        newAbility = new EnchantAbility(newTarget.getTargetName());
+        newAbility = new EnchantAbility(newTarget);
     }
 
     @Override

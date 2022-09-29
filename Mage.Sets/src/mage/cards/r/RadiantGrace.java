@@ -37,7 +37,7 @@ public final class RadiantGrace extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature gets +1/+0 and has vigilance.
         Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(1, 0));

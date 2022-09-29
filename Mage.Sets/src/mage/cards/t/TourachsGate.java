@@ -71,7 +71,7 @@ public final class TourachsGate extends CardImpl {
         TargetPermanent auraTarget = new TargetControlledPermanent(filterLand);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Sacrifice a Thrull: Put three time counters on Tourach's Gate.

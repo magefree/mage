@@ -36,7 +36,7 @@ public final class PublicEnemy extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // All creatures attack enchanted creature's controller each combat if able.
         this.addAbility(new SimpleStaticAbility(new PublicEnemyEffect()));
