@@ -213,6 +213,7 @@ Super Series|SuperSeries|
 Tempest|Tempest|
 Tempest Remastered|TempestRemastered|
 Tenth Edition|TenthEdition|
+The Brothers' War|TheBrothersWar|
 The Dark|TheDark|
 Theros|Theros|
 Theros Beyond Death|TherosBeyondDeath|
