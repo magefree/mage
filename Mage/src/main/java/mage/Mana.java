@@ -319,7 +319,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     /**
-     * Increases this mana by onw of the passed in ManaType.
+     * Increases this mana by one of the passed in ManaType.
      *
      * @param manaType the type of mana to increase by one.
      */
@@ -337,7 +337,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     /**
-     * Helper function for increase and decrease to now have their code duplicated.
+     * Helper function for increase and decrease to not have the code duplicated.
      * @param manaType
      * @param increase
      */
