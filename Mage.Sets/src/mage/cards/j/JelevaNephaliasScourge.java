@@ -84,22 +84,24 @@ class JelevaNephaliasScourgeEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         JelevaNephaliasWatcher watcher = game.getState().getWatcher(JelevaNephaliasWatcher.class);
-        if (controller != null
-                && permanent != null
-                && watcher != null) {
-            int xValue = watcher.getManaSpentToCastLastTime(permanent.getId(), permanent.getZoneChangeCounter(game) - 1);
-            if (xValue > 0) {
-                for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                    Player player = game.getPlayer(playerId);
-                    if (player != null) {
-                        player.moveCardsToExile(player.getLibrary().getTopCards(game, xValue),
-                                source, game, true, CardUtil.getCardExileZoneId(game, source), permanent.getIdName());
-                    }
-                }
-            }
-            return true;
+        if (controller == null || permanent == null || watcher == null) {
+            return false;
         }
-        return false;
+
+        int xValue = watcher.getManaSpentToCastLastTime(permanent.getId(), permanent.getZoneChangeCounter(game) - 1);
+        if (xValue == 0) {
+            return false;
+        }
+
+        boolean succeeded = false;
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                succeeded |= player.moveCardsToExile(player.getLibrary().getTopCards(game, xValue),
+                        source, game, true, CardUtil.getCardExileZoneId(game, source), permanent.getIdName());
+            }
+        }
+        return succeeded;
     }
 }
 
@@ -144,17 +146,16 @@ class JelevaNephaliasWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        // Watcher saves all casts becaus of possible Clone cards that copy Jeleva
-        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            if (!game.getStack().isEmpty()) {
-                for (StackObject stackObject : game.getStack()) {
-                    if (stackObject instanceof Spell) {
-                        Spell spell = (Spell) stackObject;
-                        manaSpendToCast.putIfAbsent(spell.getSourceId().toString()
-                                        + spell.getCard().getZoneChangeCounter(game),
-                                spell.getSpellAbility().getManaCostsToPay().manaValue());
-                    }
-                }
+        // Watcher saves all casts because of possible Clone cards that copy Jeleva
+        if (event.getType() != GameEvent.EventType.SPELL_CAST || game.getStack().isEmpty()) {
+            return;
+        }
+        for (StackObject stackObject : game.getStack()) {
+            if (stackObject instanceof Spell) {
+                Spell spell = (Spell) stackObject;
+                manaSpendToCast.putIfAbsent(
+                        spell.getSourceId().toString() + spell.getCard().getZoneChangeCounter(game),
+                        spell.getSpellAbility().getManaCostsToPay().manaValue());
             }
         }
     }
