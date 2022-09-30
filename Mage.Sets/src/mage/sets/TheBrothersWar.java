@@ -16,7 +16,7 @@ public final class TheBrothersWar extends ExpansionSet {
     }
 
     private TheBrothersWar() {
-        super("The Brothers' War", "BRO", ExpansionSet.buildDate(2022, 11, 9), SetType.EXPANSION);
+        super("The Brothers' War", "BRO", ExpansionSet.buildDate(2022, 11, 18), SetType.EXPANSION);
         this.blockName = "The Brothers' War";
         this.hasBoosters = false; // temporary
 

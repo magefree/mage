@@ -214,6 +214,7 @@ Tempest|Tempest|
 Tempest Remastered|TempestRemastered|
 Tenth Edition|TenthEdition|
 The Brothers' War|TheBrothersWar|
+The Brothers' War Commander|TheBrothersWarCommander|
 The Dark|TheDark|
 Theros|Theros|
 Theros Beyond Death|TherosBeyondDeath|
