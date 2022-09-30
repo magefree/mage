@@ -25,5 +25,6 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Reliquary Tower", 196, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("Skullclamp", 159, Rarity.UNCOMMON, mage.cards.s.Skullclamp.class));
         cards.add(new SetCardInfo("Sol Ring", 160, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
+        cards.add(new SetCardInfo("Urza, Chief Artificer", 2, Rarity.MYTHIC, mage.cards.u.UrzaChiefArtificer.class));
     }
 }
