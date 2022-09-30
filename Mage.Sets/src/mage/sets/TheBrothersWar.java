@@ -27,6 +27,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 278, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Recruitment Officer", 23, Rarity.UNCOMMON, mage.cards.r.RecruitmentOfficer.class));
         cards.add(new SetCardInfo("Swamp", 282, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("The Mightstone and Weakstone", 238, Rarity.RARE, mage.cards.t.TheMightstoneAndWeakstone.class));
     }
 
 //    @Override
