@@ -21,6 +21,7 @@ public final class TheBrothersWarCommander extends ExpansionSet {
 
         cards.add(new SetCardInfo("Baleful Strix", 120, Rarity.RARE, mage.cards.b.BalefulStrix.class));
         cards.add(new SetCardInfo("Command Tower", 178, Rarity.COMMON, mage.cards.c.CommandTower.class));
+        cards.add(new SetCardInfo("Mishra, Eminent One", 1, Rarity.MYTHIC, mage.cards.m.MishraEminentOne.class));
         cards.add(new SetCardInfo("Preordain", 92, Rarity.COMMON, mage.cards.p.Preordain.class));
         cards.add(new SetCardInfo("Reliquary Tower", 196, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("Skullclamp", 159, Rarity.UNCOMMON, mage.cards.s.Skullclamp.class));
