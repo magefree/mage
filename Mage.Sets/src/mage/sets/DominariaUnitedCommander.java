@@ -152,6 +152,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Path to Exile", 104, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
         cards.add(new SetCardInfo("Path to the World Tree", 136, Rarity.UNCOMMON, mage.cards.p.PathToTheWorldTree.class));
         cards.add(new SetCardInfo("Prairie Stream", 225, Rarity.RARE, mage.cards.p.PrairieStream.class));
+        cards.add(new SetCardInfo("Primeval Spawn", 13, Rarity.RARE, mage.cards.p.PrimevalSpawn.class));
         cards.add(new SetCardInfo("Primevals' Glorious Rebirth", 165, Rarity.RARE, mage.cards.p.PrimevalsGloriousRebirth.class));
         cards.add(new SetCardInfo("Prophetic Prism", 189, Rarity.COMMON, mage.cards.p.PropheticPrism.class));
         cards.add(new SetCardInfo("Radiant Flames", 126, Rarity.RARE, mage.cards.r.RadiantFlames.class));
