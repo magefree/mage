@@ -222,6 +222,7 @@ Throne of Eldraine|ThroneOfEldraine|
 Time Spiral|TimeSpiral|
 Time Spiral "Timeshifted"|TimeSpiralTimeshifted|
 Torment|Torment|
+Transformers|Transformers|
 Ugin's Fate|UginsFate|
 Unglued|Unglued|
 Unhinged|Unhinged|
