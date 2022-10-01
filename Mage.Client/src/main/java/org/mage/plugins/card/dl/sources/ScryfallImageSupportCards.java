@@ -516,7 +516,11 @@ public class ScryfallImageSupportCards {
             add("DMU"); // Dominaria United
             add("DMC"); // Dominaria United Commander
             add("40K"); // Warhammer 40,000
+            add("UNF"); // Unfinity
             add("GN3"); // Game Night 2022
+            add("BRO"); // The Brothers' War
+            add("BRC"); // The Brothers' War Commander
+            add("BOT"); // Transformers
         }
     };
 
