@@ -153,7 +153,6 @@ public class Constructed extends DeckValidator {
         banned.add("Leading Performance");
         banned.add("Lila, Hospitality Hostess");
         banned.add("Log Flume");
-        banned.add("Magar of the Magic Strings");
         banned.add("Main Event Horizon");
         banned.add("Meet and Greet \"Sisay\"");
         banned.add("Memory Test");
