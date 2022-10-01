@@ -214,6 +214,8 @@ public interface Permanent extends Card, Controllable {
 
     void removeAbilities(List<Ability> abilitiesToRemove, UUID sourceId, Game game);
 
+    void incrementLoyaltyActivationsAvailable();
+
     void addLoyaltyUsed();
 
     boolean canLoyaltyBeUsed(Game game);
