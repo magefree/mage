@@ -200,6 +200,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("The Ever-Changing 'Dane", 30, Rarity.RARE, mage.cards.t.TheEverChangingDane.class));
         cards.add(new SetCardInfo("The Mana Rig", 28, Rarity.MYTHIC, mage.cards.t.TheManaRig.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Mana Rig", 80, Rarity.MYTHIC, mage.cards.t.TheManaRig.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Peregrine Dynamo", 19, Rarity.RARE, mage.cards.t.ThePeregrineDynamo.class));
         cards.add(new SetCardInfo("The Reaver Cleaver", 8, Rarity.RARE, mage.cards.t.TheReaverCleaver.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Reaver Cleaver", 84, Rarity.RARE, mage.cards.t.TheReaverCleaver.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thrill of Possibility", 127, Rarity.COMMON, mage.cards.t.ThrillOfPossibility.class));
