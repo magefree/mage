@@ -2013,9 +2013,7 @@ public class TestPlayer implements Player {
             if (choice.setChoiceByAnswers(choices, true)) {
                 return true;
             }
-            // TODO: enable fail checks and fix tests
-            //Assert.fail("Wrong choice");
-            LOGGER.warn("Wrong choice");
+            Assert.fail("Wrong choice");
         }
 
         String choicesInfo;
@@ -2046,10 +2044,7 @@ public class TestPlayer implements Player {
                 }
                 index++;
             }
-
-            // TODO: enable fail checks and fix tests
-            //Assert.fail("wrong choice");
-            LOGGER.warn("Wrong choice");
+            Assert.fail("wrong choice");
         }
 
         this.chooseStrictModeFailed("choice", game, String.join("\n", rEffects.values()));
@@ -2256,12 +2251,9 @@ public class TestPlayer implements Player {
                 }
             }
 
-            // TODO: enable fail checks and fix tests
-            /*
             if (!target.getTargetName().equals("starting player")) {
                 Assert.fail("Wrong choice");
             }
-             */
         }
 
         this.chooseStrictModeFailed("choice", game, getInfo(game.getObject(source)) + ";\n" + getInfo(target));
@@ -2662,9 +2654,7 @@ public class TestPlayer implements Player {
                     return ability;
                 }
             }
-            // TODO: enable fail checks and fix tests
-            //Assert.fail("Wrong choice");
-            LOGGER.warn("Wrong choice");
+            Assert.fail("Wrong choice");
         }
 
         this.chooseStrictModeFailed("choice", game,
@@ -2693,9 +2683,7 @@ public class TestPlayer implements Player {
                 choices.remove(0);
                 return true;
             }
-            // TODO: enable fail checks and fix tests
-            //Assert.fail("Wrong choice");
-            LOGGER.warn("Wrong choice");
+            Assert.fail("Wrong choice");
         }
 
         this.chooseStrictModeFailed("choice", game, getInfo(source, game)
@@ -4015,9 +4003,7 @@ public class TestPlayer implements Player {
                     return true;
                 }
             }
-            // TODO: enable fail checks and fix tests
-            //Assert.fail("Wrong choice");
-            LOGGER.warn("Wrong choice");
+            Assert.fail("Wrong choice");
         }
 
         this.chooseStrictModeFailed("choice", game, getInfo(target));
@@ -4387,10 +4373,7 @@ public class TestPlayer implements Player {
                     return ability;
                 }
             }
-
-            // TODO: enable fail checks and fix tests
-            //Assert.fail("Wrong choice");
-            LOGGER.warn("Wrong choice");
+            Assert.fail("Wrong choice");
         }
 
         String allInfo = useable.values().stream().map(Object::toString).collect(Collectors.joining("\n"));
