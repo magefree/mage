@@ -21,6 +21,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
 
         cards.add(new SetCardInfo("Abundant Growth", 128, Rarity.COMMON, mage.cards.a.AbundantGrowth.class));
         cards.add(new SetCardInfo("Abzan Charm", 138, Rarity.UNCOMMON, mage.cards.a.AbzanCharm.class));
+        cards.add(new SetCardInfo("Activated Sleeper", 24, Rarity.RARE, mage.cards.a.ActivatedSleeper.class));
         cards.add(new SetCardInfo("Adriana, Captain of the Guard", 139, Rarity.RARE, mage.cards.a.AdrianaCaptainOfTheGuard.class));
         cards.add(new SetCardInfo("Alesha, Who Smiles at Death", 118, Rarity.RARE, mage.cards.a.AleshaWhoSmilesAtDeath.class));
         cards.add(new SetCardInfo("Ambition's Cost", 110, Rarity.UNCOMMON, mage.cards.a.AmbitionsCost.class));
