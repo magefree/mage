@@ -51,6 +51,8 @@ public final class UrzaPlaneswalker extends MeldCard {
 
         this.setStartingLoyalty(7);
 
+        this.color.setWhite(true);
+        this.color.setBlue(true);
         this.nightCard = true;
 
         // You may activate the loyalty abilities of Urza, Planeswalker twice each turn rather than only once.
