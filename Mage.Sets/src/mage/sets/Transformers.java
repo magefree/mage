@@ -21,5 +21,7 @@ public final class Transformers extends ExpansionSet {
 
         cards.add(new SetCardInfo("Goldbug, Humanity's Ally", 11, Rarity.MYTHIC, mage.cards.g.GoldbugHumanitysAlly.class));
         cards.add(new SetCardInfo("Goldbug, Scrappy Scout", 11, Rarity.MYTHIC, mage.cards.g.GoldbugScrappyScout.class));
+        cards.add(new SetCardInfo("Ultra Magnus, Armored Carrier", 15, Rarity.MYTHIC, mage.cards.u.UltraMagnusArmoredCarrier.class));
+        cards.add(new SetCardInfo("Ultra Magnus, Tactician", 15, Rarity.MYTHIC, mage.cards.u.UltraMagnusTactician.class));
     }
 }
