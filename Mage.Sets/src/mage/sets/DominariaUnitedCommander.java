@@ -32,6 +32,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Arvad the Cursed", 141, Rarity.UNCOMMON, mage.cards.a.ArvadTheCursed.class));
         cards.add(new SetCardInfo("Ashling the Pilgrim", 119, Rarity.RARE, mage.cards.a.AshlingThePilgrim.class));
         cards.add(new SetCardInfo("Atla Palani, Nest Tender", 142, Rarity.RARE, mage.cards.a.AtlaPalaniNestTender.class));
+        cards.add(new SetCardInfo("Ayesha Tanaka, Armorer", 29, Rarity.RARE, mage.cards.a.AyeshaTanakaArmorer.class));
         cards.add(new SetCardInfo("Bad River", 197, Rarity.UNCOMMON, mage.cards.b.BadRiver.class));
         cards.add(new SetCardInfo("Baleful Strix", 143, Rarity.RARE, mage.cards.b.BalefulStrix.class));
         cards.add(new SetCardInfo("Baru, Wurmspeaker", 26, Rarity.RARE, mage.cards.b.BaruWurmspeaker.class));
