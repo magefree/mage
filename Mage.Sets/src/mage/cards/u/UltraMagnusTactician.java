@@ -42,7 +42,7 @@ public final class UltraMagnusTactician extends CardImpl {
         this.addAbility(new MoreThanMeetsTheEyeAbility(this, "{2}{R}{G}{W}"));
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // Whenever Ultra Magnus attacks, you may put an artifact creature card from your hand onto the battlefield tapped and attacking. If you do, convert Ultra Magnus at end of combat.
         this.addAbility(new AttacksTriggeredAbility(new UltraMagnusTacticianEffect()));
