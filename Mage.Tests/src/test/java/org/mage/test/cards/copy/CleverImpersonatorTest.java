@@ -185,19 +185,16 @@ public class CleverImpersonatorTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, impersonator);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
-
-        setStrictChooseMode(true);
+        addCard(Zone.BATTLEFIELD, playerA, "Maze of Ith",2,  true);
 
         // TODO: Something is broken with this test. Both of these choices should be using addTarget.
         //       The second one uses setChoice for some reason
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, dReflection); // enchant a forest
-        addTarget(playerA, "Forest");
-        setChoice(playerA, "Blue");
-        setChoice(playerA, "Blue");
+        addTarget(playerA, "Maze of Ith");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, impersonator);
         setChoice(playerA, true); // Use Clever Impersonator's ability
         setChoice(playerA, dReflection); // have Impersonator enter as copy of Dawn's Reflection
-        setChoice(playerA, "Island");
+        setChoice(playerA, "Maze of Ith");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
