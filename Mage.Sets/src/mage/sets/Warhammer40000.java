@@ -43,6 +43,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Beacon of Unrest", 194, Rarity.RARE, mage.cards.b.BeaconOfUnrest.class));
         cards.add(new SetCardInfo("Bile Blight", 195, Rarity.UNCOMMON, mage.cards.b.BileBlight.class));
         cards.add(new SetCardInfo("Biotransference", 30, Rarity.RARE, mage.cards.b.Biotransference.class));
+        cards.add(new SetCardInfo("Birth of the Imperium", 107, Rarity.RARE, mage.cards.b.BirthOfTheImperium.class));
         cards.add(new SetCardInfo("Bituminous Blast", 221, Rarity.UNCOMMON, mage.cards.b.BituminousBlast.class));
         cards.add(new SetCardInfo("Blasphemous Act", 204, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
         cards.add(new SetCardInfo("Blight Grenade", 31, Rarity.RARE, mage.cards.b.BlightGrenade.class));
@@ -55,8 +56,10 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Caged Sun", 231, Rarity.RARE, mage.cards.c.CagedSun.class));
         cards.add(new SetCardInfo("Canoptek Scarab Swarm", 150, Rarity.RARE, mage.cards.c.CanoptekScarabSwarm.class));
         cards.add(new SetCardInfo("Canoptek Spyder", 151, Rarity.RARE, mage.cards.c.CanoptekSpyder.class));
+        cards.add(new SetCardInfo("Canoptek Tomb Sentinel", 152, Rarity.RARE, mage.cards.c.CanoptekTombSentinel.class));
         cards.add(new SetCardInfo("Cave of Temptation", 267, Rarity.COMMON, mage.cards.c.CaveOfTemptation.class));
         cards.add(new SetCardInfo("Chaos Defiler", 110, Rarity.RARE, mage.cards.c.ChaosDefiler.class));
+        cards.add(new SetCardInfo("Chaos Terminator Lord", 74, Rarity.UNCOMMON, mage.cards.c.ChaosTerminatorLord.class));
         cards.add(new SetCardInfo("Chaos Warp", 205, Rarity.RARE, mage.cards.c.ChaosWarp.class));
         cards.add(new SetCardInfo("Choked Estuary", 268, Rarity.RARE, mage.cards.c.ChokedEstuary.class));
         cards.add(new SetCardInfo("Chromatic Lantern", 232, Rarity.RARE, mage.cards.c.ChromaticLantern.class));
@@ -65,6 +68,8 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Collective Effort", 183, Rarity.RARE, mage.cards.c.CollectiveEffort.class));
         cards.add(new SetCardInfo("Command Tower", 270, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Sphere", 233, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
+        cards.add(new SetCardInfo("Commissar Severina Raine", 112, Rarity.RARE, mage.cards.c.CommissarSeverinaRaine.class));
+        cards.add(new SetCardInfo("Company Commander", 113, Rarity.RARE, mage.cards.c.CompanyCommander.class));
         cards.add(new SetCardInfo("Cranial Plating", 236, Rarity.UNCOMMON, mage.cards.c.CranialPlating.class));
         cards.add(new SetCardInfo("Crumbling Necropolis", 273, Rarity.UNCOMMON, mage.cards.c.CrumblingNecropolis.class));
         cards.add(new SetCardInfo("Cryptothrall", 155, Rarity.RARE, mage.cards.c.Cryptothrall.class));
@@ -206,6 +211,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Thunderhawk Gunship", 167, Rarity.RARE, mage.cards.t.ThunderhawkGunship.class));
         cards.add(new SetCardInfo("Thunderwolf Cavalry", 16, Rarity.UNCOMMON, mage.cards.t.ThunderwolfCavalry.class));
         cards.add(new SetCardInfo("Tranquil Cove", 303, Rarity.COMMON, mage.cards.t.TranquilCove.class));
+        cards.add(new SetCardInfo("Triarch Praetorian", 66, Rarity.UNCOMMON, mage.cards.t.TriarchPraetorian.class));
         cards.add(new SetCardInfo("Trygon Prime", 143, Rarity.UNCOMMON, mage.cards.t.TrygonPrime.class));
         cards.add(new SetCardInfo("Tyranid Invasion", 102, Rarity.UNCOMMON, mage.cards.t.TyranidInvasion.class));
         cards.add(new SetCardInfo("Tyranid Prime", 145, Rarity.RARE, mage.cards.t.TyranidPrime.class));

@@ -16,11 +16,12 @@ public final class DominariaUnitedCommander extends ExpansionSet {
     }
 
     private DominariaUnitedCommander() {
-        super("Dominaria United Commander", "DMC", ExpansionSet.buildDate(2022, 11, 9), SetType.SUPPLEMENTAL);
+        super("Dominaria United Commander", "DMC", ExpansionSet.buildDate(2022, 9, 9), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Abundant Growth", 128, Rarity.COMMON, mage.cards.a.AbundantGrowth.class));
         cards.add(new SetCardInfo("Abzan Charm", 138, Rarity.UNCOMMON, mage.cards.a.AbzanCharm.class));
+        cards.add(new SetCardInfo("Activated Sleeper", 24, Rarity.RARE, mage.cards.a.ActivatedSleeper.class));
         cards.add(new SetCardInfo("Adriana, Captain of the Guard", 139, Rarity.RARE, mage.cards.a.AdrianaCaptainOfTheGuard.class));
         cards.add(new SetCardInfo("Alesha, Who Smiles at Death", 118, Rarity.RARE, mage.cards.a.AleshaWhoSmilesAtDeath.class));
         cards.add(new SetCardInfo("Ambition's Cost", 110, Rarity.UNCOMMON, mage.cards.a.AmbitionsCost.class));
@@ -31,6 +32,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Arvad the Cursed", 141, Rarity.UNCOMMON, mage.cards.a.ArvadTheCursed.class));
         cards.add(new SetCardInfo("Ashling the Pilgrim", 119, Rarity.RARE, mage.cards.a.AshlingThePilgrim.class));
         cards.add(new SetCardInfo("Atla Palani, Nest Tender", 142, Rarity.RARE, mage.cards.a.AtlaPalaniNestTender.class));
+        cards.add(new SetCardInfo("Ayesha Tanaka, Armorer", 29, Rarity.RARE, mage.cards.a.AyeshaTanakaArmorer.class));
         cards.add(new SetCardInfo("Bad River", 197, Rarity.UNCOMMON, mage.cards.b.BadRiver.class));
         cards.add(new SetCardInfo("Baleful Strix", 143, Rarity.RARE, mage.cards.b.BalefulStrix.class));
         cards.add(new SetCardInfo("Baru, Wurmspeaker", 26, Rarity.RARE, mage.cards.b.BaruWurmspeaker.class));
@@ -152,6 +154,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Path to Exile", 104, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
         cards.add(new SetCardInfo("Path to the World Tree", 136, Rarity.UNCOMMON, mage.cards.p.PathToTheWorldTree.class));
         cards.add(new SetCardInfo("Prairie Stream", 225, Rarity.RARE, mage.cards.p.PrairieStream.class));
+        cards.add(new SetCardInfo("Primeval Spawn", 13, Rarity.RARE, mage.cards.p.PrimevalSpawn.class));
         cards.add(new SetCardInfo("Primevals' Glorious Rebirth", 165, Rarity.RARE, mage.cards.p.PrimevalsGloriousRebirth.class));
         cards.add(new SetCardInfo("Prophetic Prism", 189, Rarity.COMMON, mage.cards.p.PropheticPrism.class));
         cards.add(new SetCardInfo("Radiant Flames", 126, Rarity.RARE, mage.cards.r.RadiantFlames.class));
@@ -197,8 +200,10 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Tetsuo, Imperial Champion", 44, Rarity.MYTHIC, mage.cards.t.TetsuoImperialChampion.class));
         cards.add(new SetCardInfo("The Circle of Loyalty", 98, Rarity.MYTHIC, mage.cards.t.TheCircleOfLoyalty.class));
         cards.add(new SetCardInfo("The Ever-Changing 'Dane", 30, Rarity.RARE, mage.cards.t.TheEverChangingDane.class));
+        cards.add(new SetCardInfo("The Lady of Otaria", 35, Rarity.MYTHIC, mage.cards.t.TheLadyOfOtaria.class));
         cards.add(new SetCardInfo("The Mana Rig", 28, Rarity.MYTHIC, mage.cards.t.TheManaRig.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Mana Rig", 80, Rarity.MYTHIC, mage.cards.t.TheManaRig.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Peregrine Dynamo", 19, Rarity.RARE, mage.cards.t.ThePeregrineDynamo.class));
         cards.add(new SetCardInfo("The Reaver Cleaver", 8, Rarity.RARE, mage.cards.t.TheReaverCleaver.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Reaver Cleaver", 84, Rarity.RARE, mage.cards.t.TheReaverCleaver.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thrill of Possibility", 127, Rarity.COMMON, mage.cards.t.ThrillOfPossibility.class));

@@ -210,12 +210,15 @@ Stronghold|STH|
 Super Series|SUS|
 Theros|THS|
 Theros Beyond Death|THB|
+The Brothers' War|BRO|
+The Brothers' War Commander|BRC|
 Tempest|TMP|
 Throne of Eldraine|ELD|
 Torment|TOR|
 Tempest Remastered|TPR|
 Time Spiral "Timeshifted"|TSB|
 Time Spiral|TSP|
+Transformers|BOT|
 Urza's Destiny|UDS|
 Ugin's Fate|UGIN|
 Unglued|UGL|

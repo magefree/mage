@@ -12,6 +12,7 @@ import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.ManaCondition;
 import mage.cards.Card;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.command.Commander;
 import mage.game.stack.Spell;
@@ -29,9 +30,10 @@ public final class PowerstoneToken extends TokenImpl {
     public PowerstoneToken() {
         super("Powerstone Token", "Powerstone token");
         cardType.add(CardType.ARTIFACT);
+        subtype.add(SubType.POWERSTONE);
 
         // {T}: Add {C}. This mana can't be spent to cast a nonartifact spell.
-        this.addAbility(new ConditionalColorlessManaAbility(1, new PowerstoneTokenManaBuilder()));
+        this.addAbility(new ConditionalColorlessManaAbility(1, makeBuilder()));
 
         availableImageSetCodes = Arrays.asList("DMU");
     }
@@ -42,6 +44,10 @@ public final class PowerstoneToken extends TokenImpl {
 
     public PowerstoneToken copy() {
         return new PowerstoneToken(this);
+    }
+
+    public static PowerstoneTokenManaBuilder makeBuilder() {
+        return new PowerstoneTokenManaBuilder();
     }
 }
 
