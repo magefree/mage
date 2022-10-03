@@ -69,6 +69,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Command Tower", 270, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Sphere", 233, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
         cards.add(new SetCardInfo("Commissar Severina Raine", 112, Rarity.RARE, mage.cards.c.CommissarSeverinaRaine.class));
+        cards.add(new SetCardInfo("Company Commander", 113, Rarity.RARE, mage.cards.c.CompanyCommander.class));
         cards.add(new SetCardInfo("Cranial Plating", 236, Rarity.UNCOMMON, mage.cards.c.CranialPlating.class));
         cards.add(new SetCardInfo("Crumbling Necropolis", 273, Rarity.UNCOMMON, mage.cards.c.CrumblingNecropolis.class));
         cards.add(new SetCardInfo("Cryptothrall", 155, Rarity.RARE, mage.cards.c.Cryptothrall.class));
