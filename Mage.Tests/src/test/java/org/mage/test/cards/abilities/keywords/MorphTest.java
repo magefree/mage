@@ -282,6 +282,7 @@ public class MorphTest extends CardTestPlayerBase {
         setChoice(playerA, true); // cast it face down as 2/2 creature
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}{G}{U}: Turn this face-down permanent face up.");
         castSpell(5, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
+        setChoice(playerA, true); // Use Clone's ability
         setChoice(playerA, "Sagu Mauler");
 
         setStopAt(5, PhaseStep.END_COMBAT);

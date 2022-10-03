@@ -32,6 +32,7 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
         // activate splice: yes -> card with splice ability -> new target for spliced ability
         setChoice(playerA, true);
         addTarget(playerA, "Through the Breach");
+        setChoice(playerA, true); // Choose to use Through the Breach's ability
         setChoice(playerA, "Silvercoat Lion"); // target for spliced ability: put from hand to battlefield
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -103,8 +104,11 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nourishing Shoal");
         // activate splice: yes -> card with splice ability -> new target for spliced ability
-        setChoice(playerA, true);
+        setChoice(playerA, true); // Choose to splice
         addTarget(playerA, "Through the Breach");
+        setChoice(playerA, true); // Choose to pay alternative cost
+        setChoice(playerA, "Giant Growth"); // Green card to exile
+        setChoice(playerA, true); // Choose to use Through the Breach's ability
         setChoice(playerA, "Silvercoat Lion"); // target for spliced ability: put from hand to battlefield
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -117,8 +121,7 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Through the Breach", 1);
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertAbility(playerA, "Silvercoat Lion", HasteAbility.getInstance(), true);
-
-        Assert.assertEquals("All available mana has to be used", "[]", playerA.getManaAvailable(currentGame).toString());
+        Assert.assertEquals("All available mana has to be used", 0, playerA.getManaAvailable(currentGame).size());
     }
 
     /**

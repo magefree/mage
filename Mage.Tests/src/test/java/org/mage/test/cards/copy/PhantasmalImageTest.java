@@ -112,8 +112,11 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Illusionary Servant");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image", true);
+        setChoice(playerA, true); // Use Phantasmal Image's ability
         setChoice(playerA, "Illusionary Servant");
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
+        setChoice(playerA, true); // Use Phantasmal Image's ability
         setChoice(playerA, "Illusionary Servant-M10");
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -211,10 +214,13 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         // When you control no permanents of the chosen color, sacrifice Lurebound Scarecrow.
         addCard(Zone.HAND, playerA, "Lurebound Scarecrow");
 
-        setChoice(playerA, "Green");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lurebound Scarecrow");
-        setChoice(playerA, "Red");
+        setChoice(playerA, "Green");
+
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Phantasmal Image");
+        setChoice(playerA, true); // Use Phantasmal Image's ability
+        setChoice(playerA, "Lurebound Scarecrow");
+        setChoice(playerA, "Red");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -235,10 +241,13 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Phantasmal Image");
         addCard(Zone.HAND, playerA, "Lurebound Scarecrow");
 
-        setChoice(playerA, "Green");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lurebound Scarecrow");
-        setChoice(playerA, "Red");
+        setChoice(playerA, "Green");
+
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Phantasmal Image");
+        setChoice(playerA, true); // Use Phantasmal Image's ability
+        setChoice(playerA, "Lurebound Scarecrow");
+        setChoice(playerA, "Red");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -288,6 +297,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         setChoice(playerA, "X=0");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image");
+        setChoice(playerB, true); // Use Phantasmal Image's ability
         setChoice(playerB, "Steel Hellkite");
 
         attack(4, playerB, "Steel Hellkite");
@@ -330,8 +340,9 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Phantasmal Image");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image"); // not targeted
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Veil of Secrecy", "Frost Titan"); // so it's no longer targetable
+        setChoice(playerB, true); // Use Phantasmal Image's ability
         setChoice(playerB, "Frost Titan");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Veil of Secrecy", "Frost Titan"); // so it's no longer targetable
 
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Terror", "Frost Titan"); // of player Bs Phantasmal Image copying Frost Titan
         // should be countered if not paying {2}
@@ -366,6 +377,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Phantasmal Image");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image"); // not targeted
+        setChoice(playerB, true); // Use Phantasmal Image's ability
         setChoice(playerB, "Wurmcoil Engine");
 
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Public Execution", "Wurmcoil Engine"); // of player Bs Phantasmal Image copying Frost Titan
@@ -404,6 +416,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Phantasmal Image");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image"); // not targeted
+        setChoice(playerB, true); // Use Phantasmal Image's ability
         setChoice(playerB, "Thalakos Seer");
 
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Public Execution", "Thalakos Seer");
@@ -474,9 +487,11 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Kitchen Finks");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image"); // not targeted
+        setChoice(playerB, true); // Use Phantasmal Image's ability
         setChoice(playerB, "Kitchen Finks");
 
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Public Execution", "Kitchen Finks");
+        setChoice(playerB, true); // Use Phantasmal Image's ability
         setChoice(playerB, "Kitchen Finks");
 
         setStopAt(2, PhaseStep.END_TURN);
@@ -515,9 +530,11 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Butcher Ghoul");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image"); // not targeted
+        setChoice(playerB, true); // Use Phantasmal Image's ability
         setChoice(playerB, "Butcher Ghoul");
 
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Public Execution", "Butcher Ghoul");
+        setChoice(playerB, true); // Use Phantasmal Image's ability
         setChoice(playerB, "Butcher Ghoul");
 
         setStopAt(2, PhaseStep.END_TURN);
@@ -559,6 +576,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Phantasmal Image");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image"); // not targeted
+        setChoice(playerA, true); // Use Phantasmal Image's ability
         setChoice(playerA, "Wurmcoil Engine");
 
         attack(2, playerB, "Wurmcoil Engine");
@@ -591,6 +609,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Phantasmal Image");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image"); // not targeted
+        setChoice(playerA, true); // Use Phantasmal Image's ability
         setChoice(playerA, "Voice of Resurgence");
 
         attack(2, playerB, "Voice of Resurgence");
@@ -615,11 +634,12 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Zone.HAND, playerA, "Phantasmal Image");
 
-        setChoice(playerB, "X=1");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{X}");
+        setChoice(playerB, "X=1");
 
-        setChoice(playerA, "Chimeric Staff");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Phantasmal Image");
+        setChoice(playerA, true); // Use Phantasmal Image's ability
+        setChoice(playerA, "Chimeric Staff");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -646,8 +666,9 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Karn's Touch", "Cloak and Dagger");
 
-        setChoice(playerA, "Cloak and Dagger");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Phantasmal Image");
+        setChoice(playerA, true); // Use Phantasmal Image's ability
+        setChoice(playerA, "Cloak and Dagger");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

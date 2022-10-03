@@ -121,6 +121,7 @@ public class CloneTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Nightmare", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
+        setChoice(playerA, true); // Use Clone's ability
         setChoice(playerA, "Nightmare");
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, "Ranger's Guile", "Nightmare");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Disperse", "Nightmare");
@@ -170,11 +171,13 @@ public class CloneTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Phyrexian Vault", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
+        setChoice(playerA, true); // Use Clone's ability
         setChoice(playerA, "Silvercoat Lion");
 
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}");
 
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Vesuvan Doppelganger");
+        setChoice(playerA, true); // Use Vesuvan Doppelganger's ability
         setChoice(playerA, "Silvercoat Lion");
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);

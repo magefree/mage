@@ -60,8 +60,10 @@ public class CloudshiftTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Cloudshift");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
+        setChoice(playerA, true); // Use Clone's ability
         setChoice(playerA, "Knight of Meadowgrain");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cloudshift", "Knight of Meadowgrain"); // clone has name of copied permanent
+        setChoice(playerA, true); // Use Clone's ability
         setChoice(playerA, "Heirs of Stromkirk");
 
         setStopAt(1, PhaseStep.END_TURN);

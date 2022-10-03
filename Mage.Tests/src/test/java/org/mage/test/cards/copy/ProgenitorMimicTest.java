@@ -96,12 +96,14 @@ public class ProgenitorMimicTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Forest", 3);
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Progenitor Mimic");
+        setChoice(playerB, true); // Choose to use Progenitor Mimic's ability
         setChoice(playerB, "Runeclaw Bear");
 
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Narrow Escape", "Runeclaw Bear");
 
         // Begin of upkeep 1 token added
         castSpell(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Progenitor Mimic");
+        setChoice(playerB, true); // Choose to use Progenitor Mimic's ability
         setChoice(playerB, "Runeclaw Bear");
 
         // Begin of upkeep 3 tokens added
@@ -164,6 +166,7 @@ public class ProgenitorMimicTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Bloodrage Vampire", 1); // 3/1
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Progenitor Mimic");
+        setChoice(playerB, true); // Choose to use Progenitor Mimic's ability
         setChoice(playerB, "Captivating Vampire");
 
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Tap five untapped Vampire", "Captivating Vampire[only copy]");
@@ -205,6 +208,7 @@ public class ProgenitorMimicTest extends CardTestPlayerBase {
         skipInitShuffling();
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Deadbridge Chant");
+        setChoice(playerA, true); // Choose to use Progenitor Mimic's ability
         setChoice(playerA, "Silvercoat Lion"); // Copied by Progenitor Mimic returned by Deadbridge Chant on upkeep of turn 3
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);

@@ -22,8 +22,14 @@ public class TokenLimitTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, secure);
         setChoice(playerA, "X=16");
+        setChoice(playerA, "Anointed Procession");  // Choose ordering of Annointed procession
+        setChoice(playerA, "Anointed Procession");
+        setChoice(playerA, "Anointed Procession");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, secure);
         setChoice(playerA, "X=16");
+        setChoice(playerA, "Anointed Procession");
+        setChoice(playerA, "Anointed Procession");
+        setChoice(playerA, "Anointed Procession");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

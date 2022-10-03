@@ -102,6 +102,7 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
         // oath A triggers for A and activates
         // oath B triggers for A and activates
         // 1
+        setChoice(playerA, "At the");
         addTarget(playerA, playerB); // who control more lands
         setChoice(playerA, true); // search library
         addTarget(playerA, "Plains"); // card from library

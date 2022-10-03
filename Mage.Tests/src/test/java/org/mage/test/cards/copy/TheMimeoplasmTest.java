@@ -42,10 +42,12 @@ public class TheMimeoplasmTest extends CardTestPlayerBase {
 
 
         castSpell(1,PhaseStep.PRECOMBAT_MAIN, playerA, "The Mimeoplasm", true);
+        setChoice(playerA, true); // Choose to exile cards with The Mimeoplasm's ability
         setChoice(playerA, "Aven Riftwatcher");
         setChoice(playerA, "Silvercoat Lion");
 
         castSpell(1,PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
+        setChoice(playerA, true); // Choose to use Clone's ability
         setChoice(playerA, "Aven Riftwatcher");
         
         

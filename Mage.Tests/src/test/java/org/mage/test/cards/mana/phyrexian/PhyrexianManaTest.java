@@ -13,20 +13,21 @@ public class PhyrexianManaTest extends CardTestPlayerBase {
 
     @Test
     public void testNoManaToCast() {
-        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
         addCard(Zone.HAND, playerA, "Apostle's Blessing");
 
-        setChoice(playerA, "Black");
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Apostle's Blessing", "Elite Vanguard");
+        setChoice(playerA, true); // Pay 2 life to cast
+        setChoice(playerA, "Black");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        int life = playerA.getLife();
-        int hand = playerA.getHand().size();
-        // can be played only through life pay
-        Assert.assertTrue(life == 20 && hand == 1 || life == 18 && hand == 0);
+        assertLife(playerA, 18);
+        assertGraveyardCount(playerA, "Apostle's Blessing", 1);
     }
     
     @Test
@@ -69,12 +70,15 @@ public class PhyrexianManaTest extends CardTestPlayerBase {
         
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);
 
-        setChoice(playerA, true); //yes to pay 2 life to cast Crypt Ghast
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crypt Ghast", true); //3 mana used, 2 life paid (18 life total)
-        setChoice(playerA, true); //yes to pay 2 life to cast Banehound
-        setChoice(playerA, true); //yes to Extort
-        setChoice(playerA, true); //yes to pay 2 life to Extort
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Banehound"); //0 mana used, 4 life paid, 1 life gained (15 life total)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crypt Ghast", true); // 3 mana used, 2 life paid (18 life total)
+        setChoice(playerA, true); // Yes to pay 2 life to cast Crypt Ghast
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Banehound"); // 0 mana used, 4 life paid, 1 life gained (15 life total)
+        setChoice(playerA, true); // Yes to pay 2 life to cast Banehound
+        setChoice(playerA, "Extort"); // Put the extort trigger on the stack first (order doesn't matter)
+        setChoice(playerA, true); // Yes to Extort
+        setChoice(playerA, true); // Yes to pay 2 life to Extort
+
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 

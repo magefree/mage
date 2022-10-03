@@ -18,8 +18,9 @@ public class GainProtectionTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Apostle's Blessing");
         addCard(Zone.HAND, playerA, "Titanic Growth");
 
-        setChoice(playerA, "Green");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Apostle's Blessing", "Elite Vanguard");
+        setChoice(playerA, false); // Don't pay life for the phyrexian mana
+        setChoice(playerA, "Green");
         checkPlayableAbility("Can't cast Titanic", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Titanic", false);
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -38,8 +39,9 @@ public class GainProtectionTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Apostle's Blessing");
         addCard(Zone.HAND, playerA, "Titanic Growth");
 
-        setChoice(playerA, "Black");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Apostle's Blessing", "Elite Vanguard");
+        setChoice(playerA, false); // Don't pay life for the phyrexian mana
+        setChoice(playerA, "Black");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Titanic Growth", "Elite Vanguard");
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -58,8 +60,9 @@ public class GainProtectionTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Apostle's Blessing");
         addCard(Zone.HAND, playerA, "Titanic Growth");
 
-        setChoice(playerA, "Artifacts");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Apostle's Blessing", "Elite Vanguard");
+        setChoice(playerA, false); // Don't pay life for the phyrexian mana
+        setChoice(playerA, "Artifacts");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Titanic Growth", "Elite Vanguard");
 
         setStopAt(1, PhaseStep.END_TURN);

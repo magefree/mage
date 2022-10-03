@@ -61,6 +61,7 @@ public class CryptoplasmTest extends CardTestPlayerBase {
         addTarget(playerB, "Sigiled Paladin[only copy]");
 
         // turn 4 - ignore crypto ask for new copy
+        setChoice(playerB, "At the beginning"); // Order triggers (order is irrelevant)
         setChoice(playerB, false);
 
         setStopAt(4, PhaseStep.END_TURN);

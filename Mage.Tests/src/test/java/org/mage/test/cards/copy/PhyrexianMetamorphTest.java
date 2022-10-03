@@ -21,7 +21,7 @@ public class PhyrexianMetamorphTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Phyrexian Metamorph"); // {3}{U/P}
         addCard(Zone.HAND, playerA, "Cloudshift");
 
-        //Flying
+        // Flying
         // Vanishing 3 (This permanent enters the battlefield with three time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)
         // When Aven Riftwatcher enters the battlefield or leaves the battlefield, you gain 2 life.
         addCard(Zone.BATTLEFIELD, playerB, "Aven Riftwatcher");  // 2/3
@@ -30,9 +30,12 @@ public class PhyrexianMetamorphTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Ponyback Brigade");  // 2/2
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phyrexian Metamorph");
+        setChoice(playerA, true); // Don't pay for the phyrexian mana with life
+        setChoice(playerA, true); // Choose to use Phyrexian Methamorph's ability
         setChoice(playerA, "Aven Riftwatcher");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cloudshift", "Aven Riftwatcher");
+        setChoice(playerA, true); // Choose to use Phyrexian Methamorph's ability
         setChoice(playerA, "Ponyback Brigade");
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -74,10 +77,13 @@ public class PhyrexianMetamorphTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Ponyback Brigade");  // 2/2
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phyrexian Metamorph");
+        setChoice(playerA, true); // Don't pay for the phyrexian mana with life
+        setChoice(playerA, true); // Choose to use Phyrexian Methamorph's ability
         setChoice(playerA, "Maelstrom Wanderer");
 
         attack(3, playerA, "Brago, King Eternal");
         addTarget(playerA, "Maelstrom Wanderer");
+        setChoice(playerA, true); // Choose to use Phyrexian Methamorph's ability
         setChoice(playerA, "Ponyback Brigade");
 
         setStopAt(3, PhaseStep.END_COMBAT);
@@ -110,6 +116,8 @@ public class PhyrexianMetamorphTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Harmonic Sliver"); // 2/4
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phyrexian Metamorph");
+        setChoice(playerA, false); // Don't pay for the phyrexian mana with life
+        setChoice(playerA, true); // Choose to use Phyrexian Methamorph's ability
         setChoice(playerA, "Harmonic Sliver");
         addTarget(playerA, "Alloy Myr");
         addTarget(playerA, "Kitesail");

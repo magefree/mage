@@ -232,6 +232,7 @@ public class TransformTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lambholt Pacifist");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Clone");
+        setChoice(playerB, true); // Choose to use Clone's ability
         setChoice(playerB, "Lambholt Pacifist");
 
         setStopAt(4, PhaseStep.PRECOMBAT_MAIN);

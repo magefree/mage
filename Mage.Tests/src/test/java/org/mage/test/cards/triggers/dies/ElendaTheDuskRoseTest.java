@@ -81,8 +81,6 @@ public class ElendaTheDuskRoseTest extends CardTestPlayerBase {
 
     @Test
     public void testKillAndReanimate() {
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1); /// 2/2
         // Whenever a creature is put into your graveyard from the battlefield, you may sacrifice Angelic Renewal. If you do, return that card to the battlefield.
         addCard(Zone.BATTLEFIELD, playerA, "Angelic Renewal", 1);
@@ -93,14 +91,14 @@ public class ElendaTheDuskRoseTest extends CardTestPlayerBase {
         // Lifelink
         // Whenever another creature dies, put a +1/+1 counter on Elenda, The Dusk Rose.
         // When Elenda dies, create X 1/1 white Vampire creature tokens with lifelink, where X is Elenda's power.
-        addCard(Zone.HAND, playerA, "Elenda, the Dusk Rose", 1); // {2}{W}{B}   1/1
-
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Elenda, the Dusk Rose");
+        addCard(Zone.BATTLEFIELD, playerA, "Elenda, the Dusk Rose", 1); // {2}{W}{B}   1/1
 
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Silvercoat Lion");
+        setChoice(playerA, "Whenever a"); // Angelic Renewal on the stack first
+        setChoice(playerA, false); // Do not use Angelic Renewal on Silvercoat Lion
 
         castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Elenda, the Dusk Rose");
-        setChoice(playerA, false); // use Angelic Renewal on Silvercoat Lion
+        setChoice(playerA, "Whenever a"); // Angelic Renewal on the stack first
         setChoice(playerA, true); // use Angelic Renewal on Elenda, the Dusk Rose
 
         setStopAt(3, PhaseStep.END_TURN);

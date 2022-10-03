@@ -57,6 +57,11 @@ public class ResourcefulDefenseTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, everflowingChalice);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}{W}: ");
+        setChoice(playerA, "White");
+        setChoice(playerA, "White");
+        setChoice(playerA, "White");
+        setChoice(playerA, "White");
+        setChoice(playerA, "White");
         addTarget(playerA, vividCreek);
         addTarget(playerA, everflowingChalice);
         setChoiceAmount(playerA, 2);
@@ -78,6 +83,11 @@ public class ResourcefulDefenseTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, everflowingChalice);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}{W}: ");
+        setChoice(playerA, "White");
+        setChoice(playerA, "White");
+        setChoice(playerA, "White");
+        setChoice(playerA, "White");
+        setChoice(playerA, "White");
         addTarget(playerA, vividCreek);
         addTarget(playerA, everflowingChalice);
         setChoiceAmount(playerA, 1);
@@ -104,17 +114,30 @@ public class ResourcefulDefenseTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, steelbaneHydra);
         setChoice(playerA, "X=1");
+        setChoice(playerA, "Green");
+        setChoice(playerA, "Green");
+        setChoice(playerA, "Green");
 
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}{W}: ");
         addTarget(playerA, vividCreek);
         addTarget(playerA, steelbaneHydra);
+        setChoice(playerA, "Green");
+        setChoice(playerA, "Green");
+        setChoice(playerA, "Green");
+        setChoice(playerA, "Green");
+        setChoice(playerA, "White");
         setChoiceAmount(playerA, 2);
 
         waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}{W}: ");
         addTarget(playerA, steelbaneHydra);
         addTarget(playerA, vividCreek);
+        setChoice(playerA, "Green");
+        setChoice(playerA, "Green");
+        setChoice(playerA, "Green");
+        setChoice(playerA, "Green");
+        setChoice(playerA, "White");
         setChoiceAmount(playerA, 2);
         setChoiceAmount(playerA, 1);
 
@@ -139,9 +162,17 @@ public class ResourcefulDefenseTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, steelbaneHydra);
         setChoice(playerA, "X=1");
+        setChoice(playerA, "Green");
+        setChoice(playerA, "Green");
+        setChoice(playerA, "Green");
 
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}{W}: ");
+        setChoice(playerA, "White");
+        setChoice(playerA, "White");
+        setChoice(playerA, "White");
+        setChoice(playerA, "White");
+        setChoice(playerA, "White");
         addTarget(playerA, vividCreek);
         addTarget(playerA, steelbaneHydra);
         setChoiceAmount(playerA, 2);

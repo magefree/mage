@@ -44,6 +44,7 @@ public class UginTest extends CardTestPlayerBase {
         block(3, playerB, "Ashaya, the Awoken World", "Silvercoat Lion");
 
         activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "-X: Exile each permanent with mana value X or less that's one or more colors");
+        setChoice(playerA, true); // Put a quest counter on Quest for the Gravelord
         setChoice(playerA, "X=3");
 
         setStopAt(3, PhaseStep.END_TURN);

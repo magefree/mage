@@ -58,6 +58,8 @@ public class KarmicJusticeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Planar Cleansing");
+        setChoice(playerA, "Whenever"); // Order triggers on stack
+        setChoice(playerA, "Whenever"); // Order triggers on stack
         setChoice(playerA, true);
         addTarget(playerA, "Plains");
         setChoice(playerA, true);

@@ -14,11 +14,9 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
 
     /**
      * Enduring Renewal doesn't return creatures to hand put into graveyard from
-     * the battlefield It happened with Enduring Renewal in the battlefield
-     * while feeding Ornithopter to Grinding Station
+     * the battlefield.
+     * It happened with Enduring Renewal in the battlefield while feeding Ornithopter to Grinding Station
      */
-    
-    /*  jeffwadsworth:  I tested this scenario in the game and it worked perfectly.  The test suite is not reliable in this case.
     @Test
     public void testEnduringRenewal() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
@@ -42,9 +40,8 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, 3);
         assertHandCount(playerA, "Ornithopter", 1);
-
     }
-*/
+
     @Test
     public void testStormfrontRidersTriggerForToken() {
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 2);
@@ -63,9 +60,9 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Stormfront Riders", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lab Rats");
-        setChoice(playerA, false);
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Boomerang", "Rat Token");
+        setChoice(playerA, "Whenever ");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -77,7 +74,5 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Soldier Token", 3);
         assertPermanentCount(playerA, "Rat Token", 0);
-
     }
-
 }
