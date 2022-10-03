@@ -27,7 +27,6 @@ public final class DryadsCaress extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{G}{G}");
 
         // You gain 1 life for each creature on the battlefield. 
-        
         this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)));
 
         //If {W} was spent to cast Dryad's Caress, untap all creatures you control.

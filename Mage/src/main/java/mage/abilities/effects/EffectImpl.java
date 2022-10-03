@@ -125,4 +125,5 @@ public abstract class EffectImpl implements Effect {
     public String getConcatPrefix() {
         return this.concatPrefix;
     }
+
 }

@@ -1,6 +1,7 @@
 package mage.cards.o;
 
 import mage.abilities.Ability;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.AdamantCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
@@ -95,5 +96,10 @@ class OnceAndFutureEffect extends OneShotEffect {
         player.putInHand(card1, game);
         player.putCardsOnTopOfLibrary(new CardsImpl(card2), game, source, false);
         return new ExileSpellEffect().apply(game, source);
+    }
+
+    @Override
+    public Condition getCondition() {
+        return AdamantCondition.GREEN;
     }
 }

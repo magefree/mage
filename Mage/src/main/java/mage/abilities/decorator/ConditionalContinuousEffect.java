@@ -195,6 +195,6 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
 
     @Override
     public Condition getCondition() {
-        return condition;
+        return condition == null ? baseCondition : condition;
     }
 }

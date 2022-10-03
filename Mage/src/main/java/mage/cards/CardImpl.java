@@ -6,8 +6,7 @@ import mage.Mana;
 import mage.abilities.*;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.HasSubtypesSourceEffect;
-import mage.abilities.keyword.ChangelingAbility;
-import mage.abilities.keyword.FlashbackAbility;
+import mage.abilities.keyword.*;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.repository.PluginClassloaderRegistery;
 import mage.constants.*;
@@ -30,7 +29,6 @@ import org.apache.log4j.Logger;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
-import mage.abilities.keyword.ReconfigureAbility;
 
 public abstract class CardImpl extends MageObjectImpl implements Card {
 
@@ -901,5 +899,36 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         // changeling (any subtype)
         return subType.getSubTypeSet() == SubTypeSet.CreatureType
                 && this.getAbilities().containsClass(ChangelingAbility.class);
+    }
+
+    /**
+     * This is used for disabling auto-payments for any any cards which care about the color
+     * of the mana used to cast it beyond color requirements. E.g. Sunburst, Adamant, Flamespout.
+     * <p>
+     * This is <b>not</b> about which colors are in the mana costs.
+     * <p>
+     * E.g. "Pentad Prism" {2} will return true since it has Sunburst, but "Abbey Griffin" {3}{W} will
+     * return false since the mana spent on the generic cost has no impact on the card.
+     *
+     * @return Whether the given spell cares about the mana color used to pay for it.
+     */
+    public boolean caresAboutManaColor(Game game) {
+        // SunburstAbility
+        if (abilities.containsClass(SunburstAbility.class)) {
+            return true;
+        }
+
+        // Look at each individual ability
+        //      ConditionalInterveningIfTriggeredAbility (e.g. Ogre Savant)
+        //      Spellability with ManaWasSpentCondition (e.g. Firespout)
+        //      Modular (only Arcbound Wanderer)
+        for (Ability ability : getAbilities(game)) {
+            if (((AbilityImpl) ability).caresAboutManaColor()) {
+                return true;
+            }
+        }
+
+        // Only way to get here is if none of the effects on the card care about mana color.
+        return false;
     }
 }

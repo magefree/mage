@@ -25,4 +25,8 @@ public interface Condition extends Serializable {
     default String getManaText() {
         return "{" + this.getClass().getSimpleName() + "}";
     }
+
+    default boolean caresAboutManaColor() {
+        return false;
+    }
 }

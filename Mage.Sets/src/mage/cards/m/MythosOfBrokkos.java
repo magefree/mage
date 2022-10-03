@@ -88,4 +88,9 @@ class MythosOfBrokkosEffect extends OneShotEffect {
         Cards cards = new CardsImpl(targetCard.getTargets());
         return player.moveCards(cards, Zone.HAND, source, game);
     }
+
+    @Override
+    public Condition getCondition() {
+        return condition;
+    }
 }
