@@ -1536,7 +1536,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     if (!unpaid.getMana().includesMana(mana)) {
                         continue ManaAbility;
                     }
-                    colored += CardUtil.overflowInc(colored, mana.countColored());
+                    colored = CardUtil.overflowInc(colored, mana.countColored());
                 }
                 if (colored > 1 && (cost instanceof ColoredManaCost)) {
                     for (Mana netMana : manaAbility.getNetMana(game)) {
