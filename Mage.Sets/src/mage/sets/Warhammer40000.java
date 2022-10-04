@@ -81,6 +81,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Death's Presence", 212, Rarity.RARE, mage.cards.d.DeathsPresence.class));
         cards.add(new SetCardInfo("Deathleaper, Terror Weapon", 115, Rarity.RARE, mage.cards.d.DeathleaperTerrorWeapon.class));
         cards.add(new SetCardInfo("Decree of Pain", 198, Rarity.RARE, mage.cards.d.DecreeOfPain.class));
+        cards.add(new SetCardInfo("Defenders of Humanity", 11, Rarity.RARE, mage.cards.d.DefendersOfHumanity.class));
         cards.add(new SetCardInfo("Defile", 199, Rarity.UNCOMMON, mage.cards.d.Defile.class));
         cards.add(new SetCardInfo("Deny Reality", 223, Rarity.COMMON, mage.cards.d.DenyReality.class));
         cards.add(new SetCardInfo("Deploy to the Front", 184, Rarity.RARE, mage.cards.d.DeployToTheFront.class));
