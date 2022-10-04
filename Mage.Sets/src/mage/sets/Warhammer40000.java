@@ -139,6 +139,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Lychguard", 39, Rarity.RARE, mage.cards.l.Lychguard.class));
         cards.add(new SetCardInfo("Martial Coup", 189, Rarity.RARE, mage.cards.m.MartialCoup.class));
         cards.add(new SetCardInfo("Mask of Memory", 243, Rarity.UNCOMMON, mage.cards.m.MaskOfMemory.class));
+        cards.add(new SetCardInfo("Mawloc", 133, Rarity.RARE, mage.cards.m.Mawloc.class));
         cards.add(new SetCardInfo("Memorial to Glory", 283, Rarity.UNCOMMON, mage.cards.m.MemorialToGlory.class));
         cards.add(new SetCardInfo("Mind Stone", 244, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Molten Slagheap", 284, Rarity.UNCOMMON, mage.cards.m.MoltenSlagheap.class));
