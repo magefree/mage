@@ -94,7 +94,7 @@ class HedronAlignmentEffect extends OneShotEffect {
                 return true;
             }
             Cards cardsToCheck = new CardsImpl();
-            cardsToCheck.addAll(game.getExile().getAllCards(game));
+            cardsToCheck.addAllCards(game.getExile().getAllCards(game));
             if (cardsToCheck.count(filterCard, controller.getId(), source, game) == 0) {
                 return true;
             }

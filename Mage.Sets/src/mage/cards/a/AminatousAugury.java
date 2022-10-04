@@ -1,7 +1,6 @@
 package mage.cards.a;
 
 import java.util.EnumSet;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
@@ -88,7 +87,7 @@ class AminatousAuguryEffect extends OneShotEffect {
         if (auguryExileZone == null) { return true; }
 
         Cards cardsToCast = new CardsImpl();
-        cardsToCast.addAll(auguryExileZone.getCards(game));
+        cardsToCast.addAllCards(auguryExileZone.getCards(game));
 
         // put a land card from among them onto the battlefield
         TargetCard target = new TargetCard(Zone.EXILED, StaticFilters.FILTER_CARD_LAND_A);

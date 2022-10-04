@@ -462,7 +462,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 mustAttack = true;
                 // Filter out the planeswalkers
                 defendersForcedToAttack.addAll(defenders.stream().map(game::getPlayer).filter(Objects::nonNull).map(Player::getId).collect(Collectors.toSet()));
-//                defendersForcedToAttack.addAll(defenders);
+//                defendersForcedToAttack.addAllCards(defenders);
             }
             if (!mustAttack) {
                 continue;

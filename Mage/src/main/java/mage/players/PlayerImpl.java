@@ -5022,7 +5022,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         game.informPlayers(getLogName() + " scries " + event.getAmount() + CardUtil.getSourceLogName(game, source));
         Cards cards = new CardsImpl();
-        cards.addAll(getLibrary().getTopCards(game, event.getAmount()));
+        cards.addAllCards(getLibrary().getTopCards(game, event.getAmount()));
         if (!cards.isEmpty()) {
             TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY,
                     new FilterCard("card" + (cards.size() == 1 ? "" : "s")
@@ -5044,7 +5044,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         game.informPlayers(getLogName() + " surveils " + event.getAmount() + CardUtil.getSourceLogName(game, source));
         Cards cards = new CardsImpl();
-        cards.addAll(getLibrary().getTopCards(game, event.getAmount()));
+        cards.addAllCards(getLibrary().getTopCards(game, event.getAmount()));
         if (!cards.isEmpty()) {
             TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY,
                     new FilterCard("cards to PUT into your GRAVEYARD (Surveil)"));

@@ -188,7 +188,7 @@ class GrimoireThiefCounterspellEffect extends OneShotEffect {
         if (exileZones != null && sourceObject != null) {
             for (ExileZone exileZone : game.getExile().getExileZones()) {
                 if (!exileZone.isEmpty()) {
-                    cards.addAll(exileZone.getCards(game));
+                    cards.addAllCards(exileZone.getCards(game));
                 }
             }
             // set face up first

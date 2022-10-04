@@ -70,7 +70,7 @@ public class LookLibraryTopCardTargetPlayerEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source);
         if (player != null && targetPlayer != null && sourceObject != null) {
             Cards cards = new CardsImpl();
-            cards.addAll(targetPlayer.getLibrary().getTopCards(game, amount));
+            cards.addAllCards(targetPlayer.getLibrary().getTopCards(game, amount));
             player.lookAtCards(sourceObject.getIdName(), cards, game);
             if (putToGraveyard) {
                 for (Card card : cards.getCards(game)) {

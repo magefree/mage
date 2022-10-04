@@ -76,7 +76,7 @@ class MineMineMineDrawEffect extends OneShotEffect {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 CardsImpl libraryCards = new CardsImpl();
-                libraryCards.addAll(player.getLibrary().getCards(game));
+                libraryCards.addAllCards(player.getLibrary().getCards(game));
                 player.moveCards(libraryCards, Zone.HAND, source, game);
             }
         }

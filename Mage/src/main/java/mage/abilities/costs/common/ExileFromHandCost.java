@@ -63,7 +63,7 @@ public class ExileFromHandCost extends CostImpl {
                 this.cards.add(card);
             }
             Cards cardsToExile = new CardsImpl();
-            cardsToExile.addAll(cards);
+            cardsToExile.addAllCards(cards);
             player.moveCards(cardsToExile, Zone.EXILED, ability, game);
             paid = true;
             if (setXFromCMC) {

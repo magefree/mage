@@ -38,12 +38,7 @@ public interface Cards extends Set<UUID>, Serializable {
      */
     boolean remove(Card card);
 
-    // TODO: Not used?
-    void setOwner(UUID ownerId, Game game);
-
-    void addAll(List<? extends Card> createCards);
-
-    void addAll(Set<? extends Card> createCards);
+    void addAllCards(Collection<? extends Card> createCards);
 
     Set<Card> getCards(Game game);
 

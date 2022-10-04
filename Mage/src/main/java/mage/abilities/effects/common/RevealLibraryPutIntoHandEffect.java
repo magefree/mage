@@ -66,7 +66,7 @@ public class RevealLibraryPutIntoHandEffect extends OneShotEffect {
         }
 
         CardsImpl cards = new CardsImpl();
-        cards.addAll(controller.getLibrary().getTopCards(game, amountCards.calculate(game, source, this)));
+        cards.addAllCards(controller.getLibrary().getTopCards(game, amountCards.calculate(game, source, this)));
         controller.revealCards(sourceObject.getIdName(), cards, game);
 
         Set<Card> cardsList = cards.getCards(game);

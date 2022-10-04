@@ -82,7 +82,7 @@ class MnemonicBetrayalExileEffect extends OneShotEffect {
                 .filter(Objects::nonNull)
                 .map(Player::getGraveyard)
                 .map(g -> g.getCards(game))
-                .forEach(cards::addAll);
+                .forEach(cards::addAllCards);
         controller.moveCardsToExile(
                 cards.getCards(game), source, game, true,
                 source.getSourceId(), CardUtil.getSourceName(game, source)

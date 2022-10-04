@@ -77,7 +77,7 @@ class ElvishSoultillerEffect extends OneShotEffect {
                 Cards cardsToLibrary = new CardsImpl();
                 FilterCreatureCard filter = new FilterCreatureCard();
                 filter.add(SubType.byDescription(typeChoice.getChoice()).getPredicate());
-                cardsToLibrary.addAll(controller.getGraveyard().getCards(filter, source.getControllerId(), source, game));
+                cardsToLibrary.addAllCards(controller.getGraveyard().getCards(filter, source.getControllerId(), source, game));
                 controller.putCardsOnTopOfLibrary(cardsToLibrary, game, source, false);
                 controller.shuffleLibrary(source, game);
                 return true;

@@ -76,7 +76,7 @@ class OonaQueenOfTheFaeEffect extends OneShotEffect {
         }
         int cardsWithColor = 0;
         Cards cardsToExile = new CardsImpl();
-        cardsToExile.addAll(opponent.getLibrary().getTopCards(game, source.getManaCostsToPay().getX()));
+        cardsToExile.addAllCards(opponent.getLibrary().getTopCards(game, source.getManaCostsToPay().getX()));
 
         for (Card card : cardsToExile.getCards(game)) {
             if (card != null && card.getColor(game).contains(choice.getColor())) {

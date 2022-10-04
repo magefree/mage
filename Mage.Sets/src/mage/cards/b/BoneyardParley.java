@@ -113,11 +113,11 @@ class BoneyardParleyEffect extends OneShotEffect {
 //                        Cards toGraveyard = new CardsImpl();
 //
 //                        if (pile1Zone == Zone.BATTLEFIELD) {
-//                            toBattlefield.addAll(pile1);
-//                            toGraveyard.addAll(pile2);
+//                            toBattlefield.addAllCards(pile1);
+//                            toGraveyard.addAllCards(pile2);
 //                        } else {
-//                            toBattlefield.addAll(pile2);
-//                            toGraveyard.addAll(pile1);
+//                            toBattlefield.addAllCards(pile2);
+//                            toGraveyard.addAllCards(pile1);
 //                        }
                         player.moveCards(pile1Set, pile1Zone, source, game, false, false, false, null);
                         player.moveCards(pile2Set, pile2Zone, source, game, false, false, false, null);

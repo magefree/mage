@@ -65,7 +65,7 @@ class BrilliantUltimatumEffect extends OneShotEffect {
         }
 
         Cards pile2 = new CardsImpl();
-        pile2.addAll(controller.getLibrary().getTopCards(game, 5));
+        pile2.addAllCards(controller.getLibrary().getTopCards(game, 5));
         controller.moveCardsToExile(pile2.getCards(game), source, game, true, source.getSourceId(), sourceObject.getIdName());
 
         TargetOpponent targetOpponent = new TargetOpponent(true);
