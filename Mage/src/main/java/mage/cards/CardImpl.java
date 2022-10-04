@@ -6,7 +6,10 @@ import mage.Mana;
 import mage.abilities.*;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.HasSubtypesSourceEffect;
-import mage.abilities.keyword.*;
+import mage.abilities.keyword.ChangelingAbility;
+import mage.abilities.keyword.FlashbackAbility;
+import mage.abilities.keyword.ReconfigureAbility;
+import mage.abilities.keyword.SunburstAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.repository.PluginClassloaderRegistery;
 import mage.constants.*;
@@ -42,7 +45,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected String tokenSetCode;
     protected String tokenDescriptor;
     protected Rarity rarity;
-    protected Class<?> secondSideCardClazz;
+    protected Class<? extends Card> secondSideCardClazz;
+    protected Class<? extends Card> meldsWithClazz;
     protected Card secondSideCard;
     protected boolean nightCard;
     protected SpellAbility spellAbility;
@@ -122,6 +126,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         secondSideCardClazz = card.secondSideCardClazz;
         secondSideCard = null; // will be set on first getSecondCardFace call if card has one
         nightCard = card.nightCard;
+        meldsWithClazz = card.meldsWithClazz;
 
         spellAbility = null; // will be set on first getSpellAbility call if card has one
         flipCard = card.flipCard;
@@ -641,6 +646,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             throw new IllegalArgumentException("Wrong code usage. getSecondFaceSpellAbility can only be used for double faced card (main side).");
         }
         return secondFace.getSpellAbility();
+    }
+
+    @Override
+    public boolean meldsWith(Card card) {
+        return this.meldsWithClazz != null && this.meldsWithClazz.isInstance(card.getMainCard());
     }
 
     @Override
