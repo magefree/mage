@@ -137,6 +137,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Lokhust Heavy Destroyer", 38, Rarity.RARE, mage.cards.l.LokhustHeavyDestroyer.class));
         cards.add(new SetCardInfo("Lord of Change", 24, Rarity.RARE, mage.cards.l.LordOfChange.class));
         cards.add(new SetCardInfo("Lychguard", 39, Rarity.RARE, mage.cards.l.Lychguard.class));
+        cards.add(new SetCardInfo("Malanthrope", 132, Rarity.RARE, mage.cards.m.Malanthrope.class));
         cards.add(new SetCardInfo("Martial Coup", 189, Rarity.RARE, mage.cards.m.MartialCoup.class));
         cards.add(new SetCardInfo("Mask of Memory", 243, Rarity.UNCOMMON, mage.cards.m.MaskOfMemory.class));
         cards.add(new SetCardInfo("Mawloc", 133, Rarity.RARE, mage.cards.m.Mawloc.class));
