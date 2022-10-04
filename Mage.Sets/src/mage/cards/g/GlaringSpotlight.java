@@ -70,11 +70,6 @@ class GlaringSpotlightEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public GlaringSpotlightEffect copy() {
         return new GlaringSpotlightEffect(this);
     }

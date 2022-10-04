@@ -123,11 +123,6 @@ class EvelynTheCovetousCastEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         if (!source.isControlledBy(affectedControllerId) || EvelynTheCovetousWatcher.checkUsed(source, game)) {
             return false;
@@ -148,11 +143,6 @@ class EvelynTheCovetousManaEffect extends AsThoughEffectImpl implements AsThough
 
     private EvelynTheCovetousManaEffect(final EvelynTheCovetousManaEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

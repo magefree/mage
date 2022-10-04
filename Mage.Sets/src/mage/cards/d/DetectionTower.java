@@ -62,11 +62,6 @@ class DetectionTowerEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public DetectionTowerEffect copy() {
         return new DetectionTowerEffect(this);
     }

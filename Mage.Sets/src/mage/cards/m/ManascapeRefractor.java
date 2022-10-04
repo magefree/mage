@@ -114,11 +114,6 @@ class ManascapeRefractorSpendAnyManaEffect extends AsThoughEffectImpl implements
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public ManascapeRefractorSpendAnyManaEffect copy() {
         return new ManascapeRefractorSpendAnyManaEffect(this);
     }

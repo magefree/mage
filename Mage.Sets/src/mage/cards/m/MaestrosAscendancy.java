@@ -59,31 +59,30 @@ class MaestrosAscendancyCastEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public MaestrosAscendancyCastEffect copy() {
         return new MaestrosAscendancyCastEffect(this);
     }
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (!source.isControlledBy(affectedControllerId)
-                || !game.isActivePlayer(affectedControllerId)) {
-            return false;
-        }
         Card card = game.getCard(objectId);
         Player player = game.getPlayer(affectedControllerId);
-        if (card == null
-                || player == null
-                || !card.isOwnedBy(affectedControllerId)
-                || !card.isInstantOrSorcery(game)
-                || !game.getState().getZone(objectId).match(Zone.GRAVEYARD)
-                || !MaestrosAscendancyWatcher.checkPlayer(source, game)) {
-            return false;
-        }
+
+        return source.isControlledBy(affectedControllerId)
+                && game.isActivePlayer(affectedControllerId)
+                && card != null
+                && player != null
+                && card.isOwnedBy(affectedControllerId)
+                && card.isInstantOrSorcery(game)
+                && game.getState().getZone(objectId).match(Zone.GRAVEYARD)
+                && MaestrosAscendancyWatcher.checkPlayer(source, game);
+    }
+
+    @Override
+    public boolean apply(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        Card card = game.getCard(objectId);
+        Player player = game.getPlayer(affectedControllerId);
+
         Costs<Cost> newCosts = new CostsImpl<>();
         newCosts.addAll(card.getSpellAbility().getCosts());
         newCosts.add(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));

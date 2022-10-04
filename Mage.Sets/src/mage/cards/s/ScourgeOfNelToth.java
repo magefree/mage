@@ -65,30 +65,28 @@ class ScourgeOfNelTothPlayEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public ScourgeOfNelTothPlayEffect copy() {
         return new ScourgeOfNelTothPlayEffect(this);
     }
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (sourceId.equals(source.getSourceId()) && source.isControlledBy(affectedControllerId)) {
-            if (game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
-                Player player = game.getPlayer(affectedControllerId);
-                if (player != null) {
-                    // can sometimes be cast with base mana cost from grave????
-                    Costs<Cost> costs = new CostsImpl<>();
-                    costs.add(new SacrificeTargetCost(new TargetControlledCreaturePermanent(2)));
-                    player.setCastSourceIdWithAlternateMana(sourceId, new ManaCostsImpl<>("{B}{B}"), costs);
-                    return true;
-                }
-            }
-        }
-        return false;
+        Player player = game.getPlayer(affectedControllerId);
+
+        return player != null
+                && sourceId.equals(source.getSourceId())
+                && source.isControlledBy(affectedControllerId)
+                && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD;
+    }
+
+    @Override
+    public boolean apply(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        Player player = game.getPlayer(affectedControllerId);
+
+        Costs<Cost> costs = new CostsImpl<>();
+        costs.add(new SacrificeTargetCost(new TargetControlledCreaturePermanent(2)));
+        player.setCastSourceIdWithAlternateMana(sourceId, new ManaCostsImpl<>("{B}{B}"), costs);
+        return true;
     }
 
 }

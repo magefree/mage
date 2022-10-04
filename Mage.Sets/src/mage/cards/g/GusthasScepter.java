@@ -142,11 +142,6 @@ class GusthasScepterLookAtCardEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public GusthasScepterLookAtCardEffect copy() {
         return new GusthasScepterLookAtCardEffect(this);
     }

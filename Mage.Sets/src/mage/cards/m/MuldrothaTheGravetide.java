@@ -25,6 +25,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
+import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -73,11 +74,6 @@ class MuldrothaTheGravetideCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     public MuldrothaTheGravetideCastFromGraveyardEffect(final MuldrothaTheGravetideCastFromGraveyardEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -145,54 +141,63 @@ class MuldrothaTheGravetideWatcher extends Watcher {
     }
 
     private void addPermanentTypes(GameEvent event, Card mageObject, Game game) {
-        if (mageObject != null 
-                && event.getAdditionalReference() != null 
-                && MageIdentifier.MuldrothaTheGravetideWatcher.equals(event.getAdditionalReference().getApprovingAbility().getIdentifier())) {
-            UUID playerId = null;
-            if (mageObject instanceof Spell) {
-                playerId = ((Spell) mageObject).getControllerId();
-            } else if (mageObject instanceof Permanent) {
-                playerId = ((Permanent) mageObject).getControllerId();
+        if (mageObject == null
+                || event.getAdditionalReference() == null
+                || !MageIdentifier.MuldrothaTheGravetideWatcher.equals(event.getAdditionalReference().getApprovingAbility().getIdentifier())) {
+            return;
+        }
+
+        // TODO: double check logic here
+        UUID playerId;
+        if (mageObject instanceof Spell || mageObject instanceof Permanent) {
+            playerId = ((Controllable) mageObject).getControllerId();
+            if (playerId == null) {
+                return;
             }
-            if (playerId != null) {
-                Set<CardType> permanentTypes = sourcePlayedPermanentTypes.get(event.getAdditionalReference().getApprovingMageObjectReference());
-                if (permanentTypes == null) {
-                    permanentTypes = EnumSet.noneOf(CardType.class);
-                    sourcePlayedPermanentTypes.put(event.getAdditionalReference().getApprovingMageObjectReference(), permanentTypes);
+        } else {
+            return;
+        }
+
+        Set<CardType> permanentTypes = sourcePlayedPermanentTypes.get(event.getAdditionalReference().getApprovingMageObjectReference());
+        if (permanentTypes == null) {
+            permanentTypes = EnumSet.noneOf(CardType.class);
+            sourcePlayedPermanentTypes.put(event.getAdditionalReference().getApprovingMageObjectReference(), permanentTypes);
+        }
+
+        Set<CardType> typesNotCast = EnumSet.noneOf(CardType.class);
+        for (CardType cardType : mageObject.getCardType(game)) {
+            if (cardType.isPermanentType() && !permanentTypes.contains(cardType)) {
+                typesNotCast.add(cardType);
+            }
+        }
+
+        if (typesNotCast.size() <= 1) {
+            permanentTypes.addAll(typesNotCast);
+            return;
+        } else {
+            Player player = game.getPlayer(playerId);
+            if (player == null) {
+                return;
+            }
+
+            Choice typeChoice = new ChoiceImpl(true);
+            typeChoice.setMessage("Choose permanent type you consume for casting from graveyard.");
+            typesNotCast.forEach(cardType ->  typeChoice.getChoices().add(cardType.toString()));
+            if (!player.choose(Outcome.Detriment, typeChoice, game)) {
+                return;
+            }
+
+            String typeName = typeChoice.getChoice();
+            CardType chosenType = null;
+            for (CardType cardType : CardType.values()) {
+                if (cardType.toString().equals(typeName)) {
+                    chosenType = cardType;
+                    break;
                 }
-                Set<CardType> typesNotCast = EnumSet.noneOf(CardType.class);
-                for (CardType cardType : mageObject.getCardType(game)) {
-                    if (cardType.isPermanentType()) {
-                        if (!permanentTypes.contains(cardType)) {
-                            typesNotCast.add(cardType);
-                        }
-                    }
-                }
-                if (typesNotCast.size() <= 1) {
-                    permanentTypes.addAll(typesNotCast);
-                } else {
-                    Player player = game.getPlayer(playerId);
-                    if (player != null) {
-                        Choice typeChoice = new ChoiceImpl(true);
-                        typeChoice.setMessage("Choose permanent type you consume for casting from graveyard.");
-                        for (CardType cardType : typesNotCast) {
-                            typeChoice.getChoices().add(cardType.toString());
-                        }
-                        if (player.choose(Outcome.Detriment, typeChoice, game)) {
-                            String typeName = typeChoice.getChoice();
-                            CardType chosenType = null;
-                            for (CardType cardType : CardType.values()) {
-                                if (cardType.toString().equals(typeName)) {
-                                    chosenType = cardType;
-                                    break;
-                                }
-                            }
-                            if (chosenType != null) {
-                                permanentTypes.add(chosenType);
-                            }
-                        }
-                    }
-                }
+            }
+
+            if (chosenType != null) {
+                permanentTypes.add(chosenType);
             }
         }
     }

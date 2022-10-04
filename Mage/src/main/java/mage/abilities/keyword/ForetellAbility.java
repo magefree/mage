@@ -161,11 +161,6 @@ public class ForetellAbility extends SpecialAction {
         }
 
         @Override
-        public boolean apply(Game game, Ability source) {
-            return true;
-        }
-
-        @Override
         public ForetellLookAtCardEffect copy() {
             return new ForetellLookAtCardEffect(this);
         }

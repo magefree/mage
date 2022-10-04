@@ -110,11 +110,6 @@ class LukkaCoppercoatOutcastCastEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         return game.getBattlefield().countAll(filter, affectedControllerId, game) > 0
                 && source.isControlledBy(affectedControllerId)

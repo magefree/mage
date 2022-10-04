@@ -110,11 +110,6 @@ class DraugrNecromancerCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public DraugrNecromancerCastFromExileEffect copy() {
         return new DraugrNecromancerCastFromExileEffect(this);
     }
@@ -144,11 +139,6 @@ class DraugrNecromancerSpendAnyManaEffect extends AsThoughEffectImpl implements 
 
     private DraugrNecromancerSpendAnyManaEffect(final DraugrNecromancerSpendAnyManaEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

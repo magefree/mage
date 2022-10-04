@@ -76,11 +76,6 @@ public class PlayTheTopCardEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public PlayTheTopCardEffect copy() {
         return new PlayTheTopCardEffect(this);
     }

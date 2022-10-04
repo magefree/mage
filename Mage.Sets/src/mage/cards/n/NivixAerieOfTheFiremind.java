@@ -101,11 +101,6 @@ class NivixAerieOfTheFiremindCanCastEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public NivixAerieOfTheFiremindCanCastEffect copy() {
         return new NivixAerieOfTheFiremindCanCastEffect(this);
     }

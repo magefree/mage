@@ -139,9 +139,6 @@ class PredatorsHourPlayFromExileEffect extends AsThoughEffectImpl {
     private PredatorsHourPlayFromExileEffect(final PredatorsHourPlayFromExileEffect effect) { super(effect); }
 
     @Override
-    public boolean apply(Game game, Ability source) { return true; }
-
-    @Override
     public PredatorsHourPlayFromExileEffect copy() { return new PredatorsHourPlayFromExileEffect(this); }
 
     @Override
@@ -153,7 +150,9 @@ class PredatorsHourPlayFromExileEffect extends AsThoughEffectImpl {
             return false;
         }
         Card theCard = game.getCard(objectId);
-        if (theCard == null ) { return false; }
+        if (theCard == null ) {
+            return false;
+        }
 
         // for split cards
         objectId = theCard.getMainCard().getId();
@@ -174,9 +173,6 @@ class PredatorsHourSpendAnyManaEffect extends AsThoughEffectImpl implements AsTh
     }
 
     private PredatorsHourSpendAnyManaEffect(final PredatorsHourSpendAnyManaEffect effect) { super(effect); }
-
-    @Override
-    public boolean apply(Game game, Ability source) { return true; }
 
     @Override
     public PredatorsHourSpendAnyManaEffect copy() { return new PredatorsHourSpendAnyManaEffect(this); }
@@ -222,9 +218,6 @@ class PredatorsHourLookEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) { return true; }
-
-    @Override
     public PredatorsHourLookEffect copy() { return new PredatorsHourLookEffect(this); }
 
     @Override
@@ -232,7 +225,9 @@ class PredatorsHourLookEffect extends AsThoughEffectImpl {
         UUID cardId = getTargetPointer().getFirst(game, source);
 
         // card is no longer in the origin zone, effect can be discarded
-        if (cardId == null) { this.discard(); }
+        if (cardId == null) {
+            this.discard();
+        }
 
         return affectedControllerId.equals(authorizedPlayerId) && objectId.equals(cardId);
     }

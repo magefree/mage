@@ -117,11 +117,6 @@ class HaukensInsightLookEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         UUID cardId = getTargetPointer().getFirst(game, source);
         if (cardId == null) {
@@ -149,26 +144,29 @@ class HaukensInsightPlayEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        HaukensInsightWatcher watcher = game.getState().getWatcher(HaukensInsightWatcher.class);
+        Permanent sourceObject = game.getPermanent(source.getSourceId());
+
+        if (!affectedControllerId.equals(source.getControllerId())
+                || !game.isActivePlayer(source.getControllerId())
+                || controller == null
+                || sourceObject == null
+                || watcher == null
+                || watcher.isAbilityUsed(new MageObjectReference(sourceObject, game))) {
+            return false;
+        }
+
+        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()));
+        ExileZone exileZone = game.getExile().getExileZone(exileId);
+        return exileZone != null && exileZone.contains(CardUtil.getMainCardId(game, objectId));
+
     }
 
     @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (affectedControllerId.equals(source.getControllerId()) && game.isActivePlayer(source.getControllerId())) {
-            Player controller = game.getPlayer(source.getControllerId());
-            HaukensInsightWatcher watcher = game.getState().getWatcher(HaukensInsightWatcher.class);
-            Permanent sourceObject = game.getPermanent(source.getSourceId());
-            if (controller != null && watcher != null && sourceObject != null && !watcher.isAbilityUsed(new MageObjectReference(sourceObject, game))) {
-                UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()));
-                ExileZone exileZone = game.getExile().getExileZone(exileId);
-                if (exileZone != null && exileZone.contains(CardUtil.getMainCardId(game, objectId))) {
-                    allowCardToPlayWithoutMana(objectId, source, affectedControllerId, game);
-                    return true;
-                }
-            }
-        }
-        return false;
+    public boolean apply(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        return allowCardToPlayWithoutMana(objectId, source, affectedControllerId, game);
     }
 }
 

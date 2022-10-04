@@ -66,11 +66,6 @@ class GisaAndGeralfCastFromGraveyardEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public GisaAndGeralfCastFromGraveyardEffect copy() {
         return new GisaAndGeralfCastFromGraveyardEffect(this);
     }

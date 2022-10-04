@@ -130,11 +130,6 @@ class SiphonInsightCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public SiphonInsightCastFromExileEffect copy() {
         return new SiphonInsightCastFromExileEffect(this);
     }
@@ -171,11 +166,6 @@ class SiphonInsightSpendAnyManaEffect extends AsThoughEffectImpl implements AsTh
 
     private SiphonInsightSpendAnyManaEffect(final SiphonInsightSpendAnyManaEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -220,11 +210,6 @@ class SiphonInsightLookEffect extends AsThoughEffectImpl {
     private SiphonInsightLookEffect(final SiphonInsightLookEffect effect) {
         super(effect);
         this.authorizedPlayerId = effect.authorizedPlayerId;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

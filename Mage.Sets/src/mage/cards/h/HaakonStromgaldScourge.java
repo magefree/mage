@@ -68,11 +68,6 @@ class HaakonStromgaldScourgePlayEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public HaakonStromgaldScourgePlayEffect copy() {
         return new HaakonStromgaldScourgePlayEffect(this);
     }
@@ -141,27 +136,21 @@ class HaakonPlayKnightsFromGraveyardEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public HaakonPlayKnightsFromGraveyardEffect copy() {
         return new HaakonPlayKnightsFromGraveyardEffect(this);
     }
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {       
-        if (affectedControllerId.equals(source.getControllerId())) {
-            Card knightToCast = game.getCard(objectId);
-            if (knightToCast != null
-                    && knightToCast.hasSubtype(SubType.KNIGHT, game)
-                    && knightToCast.isOwnedBy(source.getControllerId())
-                    && game.getState().getZone(objectId) == Zone.GRAVEYARD) {
-                return true;
-            }
+        if (!affectedControllerId.equals(source.getControllerId())) {
+            return false;
         }
-        return false;
+
+        Card knightToCast = game.getCard(objectId);
+        return knightToCast != null
+                && knightToCast.hasSubtype(SubType.KNIGHT, game)
+                && knightToCast.isOwnedBy(source.getControllerId())
+                && game.getState().getZone(objectId) == Zone.GRAVEYARD;
     }
 }
 

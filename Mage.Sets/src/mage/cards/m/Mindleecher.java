@@ -114,11 +114,6 @@ class MindleecherCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public MindleecherCastFromExileEffect copy() {
         return new MindleecherCastFromExileEffect(this);
     }
@@ -149,11 +144,6 @@ class MindleecherLookEffect extends AsThoughEffectImpl {
     private MindleecherLookEffect(final MindleecherLookEffect effect) {
         super(effect);
         this.authorizedPlayerId = effect.authorizedPlayerId;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

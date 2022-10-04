@@ -206,11 +206,6 @@ class UginTheIneffableLookAtFaceDownEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public UginTheIneffableLookAtFaceDownEffect copy() {
         return new UginTheIneffableLookAtFaceDownEffect(this);
     }

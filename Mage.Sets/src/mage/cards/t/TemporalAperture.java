@@ -102,32 +102,26 @@ class TemporalApertureTopCardCastEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public TemporalApertureTopCardCastEffect copy() {
         return new TemporalApertureTopCardCastEffect(this);
     }
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (affectedControllerId.equals(source.getControllerId())) {
-            Card objectCard = game.getCard(objectId);
-            if (objectCard != null) {
-                Player controller = game.getPlayer(affectedControllerId);
-                if (controller != null
-                        && game.getState().getZone(objectId) == Zone.LIBRARY) {
-                    if (controller.getLibrary().getFromTop(game).equals(card)) {
-                        if (objectCard == card && (objectCard.getSpellAbility() != null || objectCard.isLand(game))) { // only if castable or land
-                            allowCardToPlayWithoutMana(objectId, source, affectedControllerId, game);
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-        return false;
+        Card objectCard = game.getCard(objectId);
+        Player controller = game.getPlayer(affectedControllerId);
+
+        return controller != null
+                && objectCard != null
+                && affectedControllerId.equals(source.getControllerId())
+                && game.getState().getZone(objectId) == Zone.LIBRARY
+                && controller.getLibrary().getFromTop(game).equals(card)
+                && objectCard == card
+                && (objectCard.getSpellAbility() != null || objectCard.isLand(game));
+    }
+
+    @Override
+    public boolean apply(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        return allowCardToPlayWithoutMana(objectId, source, affectedControllerId, game);
     }
 }

@@ -68,11 +68,6 @@ class RepairCastFromGraveyardEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public RepairCastFromGraveyardEffect copy() {
         return new RepairCastFromGraveyardEffect(this);
     }

@@ -46,6 +46,7 @@ class PredatoryFocusEffect extends AsThoughEffectImpl {
 
     public PredatoryFocusEffect(PredatoryFocusEffect effect) {
         super(effect);
+        this.choseUse = effect.choseUse;
     }
 
     @Override
@@ -62,11 +63,6 @@ class PredatoryFocusEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         return choseUse && affectedControllerId.equals(source.getControllerId());
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

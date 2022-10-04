@@ -108,11 +108,6 @@ class NightveilSpecterEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public NightveilSpecterEffect copy() {
         return new NightveilSpecterEffect(this);
     }

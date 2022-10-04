@@ -58,11 +58,6 @@ class LordMagnusFirstEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public LordMagnusFirstEffect copy() {
         return new LordMagnusFirstEffect(this);
     }
@@ -82,11 +77,6 @@ class LordMagnusSecondEffect extends AsThoughEffectImpl {
 
     public LordMagnusSecondEffect(final LordMagnusSecondEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

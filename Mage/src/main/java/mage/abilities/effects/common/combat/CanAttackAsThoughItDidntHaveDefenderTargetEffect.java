@@ -26,11 +26,6 @@ public class CanAttackAsThoughItDidntHaveDefenderTargetEffect extends AsThoughEf
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public CanAttackAsThoughItDidntHaveDefenderTargetEffect copy() {
         return new CanAttackAsThoughItDidntHaveDefenderTargetEffect(this);
     }

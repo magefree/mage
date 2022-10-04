@@ -78,11 +78,6 @@ class BolassCitadelPlayTheTopCardEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public BolassCitadelPlayTheTopCardEffect copy() {
         return new BolassCitadelPlayTheTopCardEffect(this);
     }
@@ -111,6 +106,14 @@ class BolassCitadelPlayTheTopCardEffect extends AsThoughEffectImpl {
         if (topCard == null || !topCard.getId().equals(cardToCheck.getMainCard().getId())) {
             return false;
         }
+
+        return true;
+    }
+
+    @Override
+    public boolean apply(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        Card cardToCheck = game.getCard(objectId);
+        Player player = game.getPlayer(cardToCheck.getOwnerId());
 
         // allows to play/cast with alternative life cost
         if (!cardToCheck.isLand(game)) {

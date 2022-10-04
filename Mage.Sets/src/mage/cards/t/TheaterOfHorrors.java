@@ -104,11 +104,6 @@ class TheaterOfHorrorsCastEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public TheaterOfHorrorsCastEffect copy() {
         return new TheaterOfHorrorsCastEffect(this);
     }
@@ -119,17 +114,16 @@ class TheaterOfHorrorsCastEffect extends AsThoughEffectImpl {
         if (theCard == null) {
             return false;
         }
+
         objectId = theCard.getMainCard().getId(); // for split cards and mdfc
         PlayerLostLifeWatcher watcher = game.getState().getWatcher(PlayerLostLifeWatcher.class);
-        if (watcher != null
+        ExileZone zone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
+        return watcher != null
                 && game.isActivePlayer(source.getControllerId())
                 && watcher.getAllOppLifeLost(source.getControllerId(), game) > 0
                 && affectedControllerId.equals(source.getControllerId())
-                && game.getState().getZone(objectId) == Zone.EXILED) {
-            ExileZone zone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
-            return zone != null
-                    && zone.contains(objectId);
-        }
-        return false;
+                && game.getState().getZone(objectId) == Zone.EXILED
+                && zone != null
+                && zone.contains(objectId);
     }
 }

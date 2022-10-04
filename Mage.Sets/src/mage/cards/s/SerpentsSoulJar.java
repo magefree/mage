@@ -102,11 +102,6 @@ class SerpentsSoulJarCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public SerpentsSoulJarCastFromExileEffect copy() {
         return new SerpentsSoulJarCastFromExileEffect(this);
     }

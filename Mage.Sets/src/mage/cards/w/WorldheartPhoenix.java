@@ -69,28 +69,26 @@ public final class WorldheartPhoenix extends CardImpl {
         }
 
         @Override
-        public boolean apply(Game game, Ability source) {
-            return true;
-        }
-
-        @Override
         public WorldheartPhoenixPlayEffect copy() {
             return new WorldheartPhoenixPlayEffect(this);
         }
 
         @Override
         public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-            if (sourceId.equals(source.getSourceId()) && source.isControlledBy(affectedControllerId)) {
-                if (game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
-                    Player player = game.getPlayer(affectedControllerId);
-                    if (player != null) {
-                        // can sometimes be cast with base mana cost from grave????
-                        player.setCastSourceIdWithAlternateMana(sourceId, new ManaCostsImpl<>("{W}{U}{B}{R}{G}"), null);
-                        return true;
-                    }
-                }
-            }
-            return false;
+            Player player = game.getPlayer(affectedControllerId);
+            return player != null
+                    && sourceId.equals(source.getSourceId())
+                    && source.isControlledBy(affectedControllerId)
+                    && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD;
+
+        }
+
+        @Override
+        public boolean apply(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+            Player player = game.getPlayer(affectedControllerId);
+            player.setCastSourceIdWithAlternateMana(sourceId, new ManaCostsImpl<>("{W}{U}{B}{R}{G}"), null);
+
+            return true;
         }
 
     }

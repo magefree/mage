@@ -108,11 +108,6 @@ class EliteSpellbinderCastEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public EliteSpellbinderCastEffect copy() {
         return new EliteSpellbinderCastEffect(this);
     }

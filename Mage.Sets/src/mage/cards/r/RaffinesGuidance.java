@@ -66,21 +66,20 @@ class RafinnesGuidancePlayEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (sourceId.equals(source.getSourceId()) && source.isControlledBy(affectedControllerId)) {
-            if (game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
-                Player player = game.getPlayer(affectedControllerId);
-                if (player != null) {
-                    Costs<Cost> costs = new CostsImpl<>();
-                    player.setCastSourceIdWithAlternateMana(sourceId, new ManaCostsImpl<>("{2}{W}"), costs);
-                    return true;
-                }
-            }
-        }
-        return false;
+        Player player = game.getPlayer(affectedControllerId);
+
+        return player != null
+                && sourceId.equals(source.getSourceId())
+                && source.isControlledBy(affectedControllerId)
+                && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean apply(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        Player player = game.getPlayer(affectedControllerId);
+
+        Costs<Cost> costs = new CostsImpl<>();
+        player.setCastSourceIdWithAlternateMana(sourceId, new ManaCostsImpl<>("{2}{W}"), costs);
         return true;
     }
 

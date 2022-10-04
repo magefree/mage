@@ -80,29 +80,27 @@ class DemonicEmbracePlayEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public DemonicEmbracePlayEffect copy() {
         return new DemonicEmbracePlayEffect(this);
     }
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (sourceId.equals(source.getSourceId()) && source.isControlledBy(affectedControllerId)) {
-            if (game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
-                Player player = game.getPlayer(affectedControllerId);
-                if (player != null) {
-                    Costs<Cost> costs = new CostsImpl<>();
-                    costs.add(new PayLifeCost(3));
-                    costs.add(new DiscardCardCost());
-                    player.setCastSourceIdWithAlternateMana(sourceId, new ManaCostsImpl<>("{1}{B}{B}"), costs);
-                    return true;
-                }
-            }
-        }
-        return false;
+        Player player = game.getPlayer(affectedControllerId);
+        return player != null
+                && sourceId.equals(source.getSourceId())
+                && source.isControlledBy(affectedControllerId)
+                && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD;
+    }
+
+    @Override
+    public boolean apply(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        Player player = game.getPlayer(affectedControllerId);
+
+        Costs<Cost> costs = new CostsImpl<>();
+        costs.add(new PayLifeCost(3));
+        costs.add(new DiscardCardCost());
+        player.setCastSourceIdWithAlternateMana(sourceId, new ManaCostsImpl<>("{1}{B}{B}"), costs);
+        return true;
     }
 }

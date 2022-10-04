@@ -131,11 +131,6 @@ class ThreeWishesLookAtCardEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public ThreeWishesLookAtCardEffect copy() {
         return new ThreeWishesLookAtCardEffect(this);
     }
@@ -168,11 +163,6 @@ class ThreeWishesPlayFromExileEffect extends AsThoughEffectImpl {
 
     ThreeWishesPlayFromExileEffect(final ThreeWishesPlayFromExileEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

@@ -107,34 +107,26 @@ class KaradorGhostChieftainCastFromGraveyardEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public KaradorGhostChieftainCastFromGraveyardEffect copy() {
         return new KaradorGhostChieftainCastFromGraveyardEffect(this);
     }
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (source.isControlledBy(affectedControllerId)
-                && Zone.GRAVEYARD.equals(game.getState().getZone(objectId))) {
-            Card objectCard = game.getCard(objectId);
-            Permanent sourceObject = game.getPermanent(source.getSourceId()); // needs to be onto the battlefield
-            if (objectCard != null
-                    && sourceObject != null
-                    && objectCard.isOwnedBy(source.getControllerId())
-                    && objectCard.isCreature(game)
-                    && objectCard.getSpellAbility() != null
-                    && objectCard.getSpellAbility().spellCanBeActivatedRegularlyNow(affectedControllerId, game)) {
-                KaradorGhostChieftainWatcher watcher
-                        = game.getState().getWatcher(KaradorGhostChieftainWatcher.class);
-                return watcher != null
-                        && !watcher.isAbilityUsed(new MageObjectReference(sourceObject, game));
-            }
-        }
-        return false;
+        Card objectCard = game.getCard(objectId);
+        Permanent sourceObject = game.getPermanent(source.getSourceId()); // needs to be onto the battlefield
+        KaradorGhostChieftainWatcher watcher = game.getState().getWatcher(KaradorGhostChieftainWatcher.class);
+
+        return source.isControlledBy(affectedControllerId)
+                && Zone.GRAVEYARD.equals(game.getState().getZone(objectId))
+                && objectCard != null
+                && sourceObject != null
+                && objectCard.isOwnedBy(source.getControllerId())
+                && objectCard.isCreature(game)
+                && objectCard.getSpellAbility() != null
+                && objectCard.getSpellAbility().spellCanBeActivatedRegularlyNow(affectedControllerId, game)
+                && watcher != null
+                && !watcher.isAbilityUsed(new MageObjectReference(sourceObject, game));
     }
 }
 

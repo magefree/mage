@@ -73,11 +73,6 @@ class ChromaticOrreryEffect extends AsThoughEffectImpl implements AsThoughManaEf
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
         return mana.getFirstAvailable();
     }

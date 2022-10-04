@@ -127,11 +127,6 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public AminatousAuguryCastFromExileEffect copy() {
         return new AminatousAuguryCastFromExileEffect(this);
     }
@@ -139,9 +134,26 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         Player player = game.getPlayer(affectedControllerId);
-        if (player == null) { return false; }
+        if (player == null) {
+            return false;
+        }
 
-        if (!affectedControllerId.equals(source.getControllerId())) { return false; }
+        if (!affectedControllerId.equals(source.getControllerId())) {
+            return false;
+        }
+
+        if (objectId == null || !objectId.equals(getTargetPointer().getFirst(game, source))) {
+            return false;
+        }
+
+        if (game.getState().getZone(objectId) != Zone.EXILED) {
+            return false;
+        }
+
+        Card card = game.getCard(objectId);
+        if (card == null) {
+            return false;
+        }
 
         EnumSet<CardType> usedCardTypes;
         if (game.getState().getValue(source.getSourceId().toString() + "cardTypes") == null) {
@@ -150,14 +162,6 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
         } else {
             usedCardTypes = (EnumSet<CardType>) game.getState().getValue(source.getSourceId().toString() + "cardTypes");
         }
-
-        if (objectId == null || !objectId.equals(getTargetPointer().getFirst(game, source))) { return false; }
-
-        if (game.getState().getZone(objectId) != Zone.EXILED) { return false; }
-
-        Card card = game.getCard(objectId);
-        if (card == null) { return false; }
-
         // Figure out which of the current card's types have not been cast before
         EnumSet<CardType> unusedCardTypes = EnumSet.noneOf(CardType.class);
         for (CardType cardT : card.getCardType(game)) {
@@ -167,7 +171,31 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
         }
 
         // The current card has only card types that have been cast before, so it can't be cast
-        if (unusedCardTypes.isEmpty()) { return false; }
+        if (unusedCardTypes.isEmpty()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean apply(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        Player player = game.getPlayer(affectedControllerId);
+        Card card = game.getCard(objectId);
+
+        EnumSet<CardType> usedCardTypes;
+        if (game.getState().getValue(source.getSourceId().toString() + "cardTypes") == null) {
+            // The effect has not been applied fully yet, so there are no previously cast times
+            usedCardTypes = EnumSet.noneOf(CardType.class);
+        } else {
+            usedCardTypes = (EnumSet<CardType>) game.getState().getValue(source.getSourceId().toString() + "cardTypes");
+        }
+        EnumSet<CardType> unusedCardTypes = EnumSet.noneOf(CardType.class);
+        for (CardType cardT : card.getCardType(game)) {
+            if (!usedCardTypes.contains(cardT)) {
+                unusedCardTypes.add(cardT);
+            }
+        }
 
         // some actions may not be done while the game only checks if a card can be cast
         if (!game.inCheckPlayableState()) {

@@ -69,11 +69,6 @@ class OathOfNissaSpendAnyManaEffect extends AsThoughEffectImpl implements AsThou
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public OathOfNissaSpendAnyManaEffect copy() {
         return new OathOfNissaSpendAnyManaEffect(this);
     }

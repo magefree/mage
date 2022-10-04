@@ -524,96 +524,95 @@ public class ContinuousEffects implements Serializable {
         }
 
         List<AsThoughEffect> asThoughEffectsList = getApplicableAsThoughEffects(type, game);
-        if (!asThoughEffectsList.isEmpty()) {
-            MageObject objectToCheck;
-            if (affectedAbility != null) {
-                objectToCheck = affectedAbility.getSourceObject(game);
-            } else {
-                objectToCheck = game.getCard(objectId);
-            }
+        if (asThoughEffectsList.isEmpty()) {
+            return null;
+        }
+        MageObject objectToCheck;
+        if (affectedAbility != null) {
+            objectToCheck = affectedAbility.getSourceObject(game);
+        } else {
+            objectToCheck = game.getCard(objectId);
+        }
 
-            UUID idToCheck;
-            if (!type.needPlayCardAbility() && objectToCheck instanceof SplitCardHalf) {
-                // each split side uses own characteristics to check for playing, all other cases must use main card
-                // rules:
-                // 708.4. In every zone except the stack, the characteristics of a split card are those of its two halves combined.
-                idToCheck = ((SplitCardHalf) objectToCheck).getMainCard().getId();
-            } else if (!type.needPlayCardAbility() && objectToCheck instanceof AdventureCardSpell) {
-                // adventure spell uses alternative characteristics for spell/stack, all other cases must use main card
-                idToCheck = ((AdventureCardSpell) objectToCheck).getMainCard().getId();
-            } else if (!type.needPlayCardAbility() && objectToCheck instanceof ModalDoubleFacesCardHalf) {
-                // each mdf side uses own characteristics to check for playing, all other cases must use main card
-                // rules:
-                // "If an effect allows you to play a land or cast a spell from among a group of cards,
-                // you may play or cast a modal double-faced card with any face that fits the criteria
-                // of that effect. For example, if Sejiri Shelter / Sejiri Glacier is in your graveyard
-                // and an effect allows you to play lands from your graveyard, you could play Sejiri Glacier.
-                // That effect doesn't allow you to cast Sejiri Shelter."
-                idToCheck = ((ModalDoubleFacesCardHalf) objectToCheck).getMainCard().getId();
-            } else {
-                idToCheck = objectId;
-            }
+        UUID idToCheck;
+        if (!type.needPlayCardAbility() && objectToCheck instanceof SplitCardHalf) {
+            // each split side uses own characteristics to check for playing, all other cases must use main card
+            // rules:
+            // 708.4. In every zone except the stack, the characteristics of a split card are those of its two halves combined.
+            idToCheck = ((SplitCardHalf) objectToCheck).getMainCard().getId();
+        } else if (!type.needPlayCardAbility() && objectToCheck instanceof AdventureCardSpell) {
+            // adventure spell uses alternative characteristics for spell/stack, all other cases must use main card
+            idToCheck = ((AdventureCardSpell) objectToCheck).getMainCard().getId();
+        } else if (!type.needPlayCardAbility() && objectToCheck instanceof ModalDoubleFacesCardHalf) {
+            // each mdf side uses own characteristics to check for playing, all other cases must use main card
+            // rules:
+            // "If an effect allows you to play a land or cast a spell from among a group of cards,
+            // you may play or cast a modal double-faced card with any face that fits the criteria
+            // of that effect. For example, if Sejiri Shelter / Sejiri Glacier is in your graveyard
+            // and an effect allows you to play lands from your graveyard, you could play Sejiri Glacier.
+            // That effect doesn't allow you to cast Sejiri Shelter."
+            idToCheck = ((ModalDoubleFacesCardHalf) objectToCheck).getMainCard().getId();
+        } else {
+            idToCheck = objectId;
+        }
 
-            Set<ApprovingObject> possibleApprovingObjects = new HashSet<>();
-            for (AsThoughEffect effect : asThoughEffectsList) {
-                Set<Ability> abilities = asThoughEffectsMap.get(type).getAbility(effect.getId());
-                for (Ability ability : abilities) {
-                    if (affectedAbility == null) {
-                        // applies to full object (one effect can be used in multiple abilities)
-                        if (effect.applies(idToCheck, ability, controllerId, game)) {
-                            if (effect.isConsumable() && !game.inCheckPlayableState()) {
-                                possibleApprovingObjects.add(new ApprovingObject(ability, game));
-                            } else {
-                                return new ApprovingObject(ability, game);
-                            }
-                        }
+        Set<ApprovingObject> possibleApprovingObjects = new HashSet<>();
+        for (AsThoughEffect effect : asThoughEffectsList) {
+            for (Ability ability : asThoughEffectsMap.get(type).getAbility(effect.getId())) {
+                if (affectedAbility != null
+                        && (type.needPlayCardAbility() && !affectedAbility.getAbilityType().isPlayCardAbility())) {
+                    continue;
+                }
+
+                boolean effectAppliesTrue = (affectedAbility == null)
+                        ? effect.applies(idToCheck, ability, controllerId, game)
+                        : effect.applies(idToCheck, affectedAbility, ability, game, controllerId);
+                boolean effectApplyTrue;
+                if (effectAppliesTrue) {
+                    effectApplyTrue = (affectedAbility == null)
+                        ? effect.apply(idToCheck, ability, controllerId, game)
+                        : effect.apply(idToCheck, affectedAbility, ability, game, controllerId);
+                } else {
+                    effectApplyTrue = false;
+                }
+
+                if (effectAppliesTrue && effectApplyTrue) {
+                    if (effect.isConsumable() && !game.inCheckPlayableState()) {
+                        possibleApprovingObjects.add(new ApprovingObject(ability, game));
                     } else {
-                        // applies to one affected ability
-
-                        // filter play abilities (no need to check it in every effect's code)
-                        if (type.needPlayCardAbility() && !affectedAbility.getAbilityType().isPlayCardAbility()) {
-                            continue;
-                        }
-
-                        if (effect.applies(idToCheck, affectedAbility, ability, game, controllerId)) {
-                            if (effect.isConsumable() && !game.inCheckPlayableState()) {
-                                possibleApprovingObjects.add(new ApprovingObject(ability, game));
-                            } else {
-                                return new ApprovingObject(ability, game);
-                            }
-                        }
+                        // Apply any change of state portions of the effect.
+                        return new ApprovingObject(ability, game);
                     }
                 }
             }
+        }
 
-            if (possibleApprovingObjects.size() == 1) {
-                return possibleApprovingObjects.iterator().next();
-            } else if (possibleApprovingObjects.size() > 1) {
-                // Select the ability that you use to permit the action                
-                Map<String, String> keyChoices = new HashMap<>();
-                for (ApprovingObject approvingObject : possibleApprovingObjects) {
-                    MageObject mageObject = game.getObject(approvingObject.getApprovingAbility().getSourceId());
-                    String choiceKey = approvingObject.getApprovingAbility().getId().toString();
-                    String choiceValue;
-                    if (mageObject == null) {
-                        choiceValue = approvingObject.getApprovingAbility().getRule();
-                    } else {
-                        choiceValue = mageObject.getIdName() + ": " + approvingObject.getApprovingAbility().getRule(mageObject.getName());
-                    }
-                    keyChoices.put(choiceKey, choiceValue);
+        if (possibleApprovingObjects.size() == 1) {
+            return possibleApprovingObjects.iterator().next();
+        } else if (possibleApprovingObjects.size() > 1) {
+            // Select the ability that you use to permit the action
+            Map<String, String> keyChoices = new HashMap<>();
+            for (ApprovingObject approvingObject : possibleApprovingObjects) {
+                MageObject mageObject = game.getObject(approvingObject.getApprovingAbility().getSourceId());
+                String choiceKey = approvingObject.getApprovingAbility().getId().toString();
+                String choiceValue;
+                if (mageObject == null) {
+                    choiceValue = approvingObject.getApprovingAbility().getRule();
+                } else {
+                    choiceValue = mageObject.getIdName() + ": " + approvingObject.getApprovingAbility().getRule(mageObject.getName());
                 }
-                Choice choicePermitting = new ChoiceImpl(true);
-                choicePermitting.setMessage("Choose the permitting object");
-                choicePermitting.setKeyChoices(keyChoices);
-                Player player = game.getPlayer(controllerId);
-                player.choose(Outcome.Detriment, choicePermitting, game);
-                for (ApprovingObject approvingObject : possibleApprovingObjects) {
-                    if (approvingObject.getApprovingAbility().getId().toString().equals(choicePermitting.getChoiceKey())) {
-                        return approvingObject;
-                    }
+                keyChoices.put(choiceKey, choiceValue);
+            }
+            Choice choicePermitting = new ChoiceImpl(true);
+            choicePermitting.setMessage("Choose the permitting object");
+            choicePermitting.setKeyChoices(keyChoices);
+            Player player = game.getPlayer(controllerId);
+            player.choose(Outcome.Detriment, choicePermitting, game);
+            for (ApprovingObject approvingObject : possibleApprovingObjects) {
+                if (approvingObject.getApprovingAbility().getId().toString().equals(choicePermitting.getChoiceKey())) {
+                    return approvingObject;
                 }
             }
-
         }
         return null;
     }
@@ -637,26 +636,45 @@ public class ContinuousEffects implements Serializable {
      */
     public ManaType asThoughMana(ManaType manaType, ManaPoolItem mana, UUID objectId, Ability affectedAbility, UUID controllerId, Game game) {
         // First check existing only effects
-        List<AsThoughEffect> asThoughEffectsList = getApplicableAsThoughEffects(AsThoughEffectType.SPEND_ONLY_MANA, game);
-        for (AsThoughEffect effect : asThoughEffectsList) {
-            Set<Ability> abilities = asThoughEffectsMap.get(AsThoughEffectType.SPEND_ONLY_MANA).getAbility(effect.getId());
-            for (Ability ability : abilities) {
-                if ((affectedAbility == null && effect.applies(objectId, ability, controllerId, game))
-                        || effect.applies(objectId, affectedAbility, ability, game, controllerId)) {
-                    if (((AsThoughManaEffect) effect).getAsThoughManaType(manaType, mana, controllerId, ability, game) == null) {
+        for (AsThoughManaEffect effect : (List<AsThoughManaEffect>)(Object) getApplicableAsThoughEffects(AsThoughEffectType.SPEND_ONLY_MANA, game)) {
+            for (Ability ability : asThoughEffectsMap.get(AsThoughEffectType.SPEND_ONLY_MANA).getAbility(effect.getId())) {
+                boolean effectAppliesTrue = (affectedAbility == null)
+                        ? effect.applies(objectId, ability, controllerId, game)
+                        : effect.applies(objectId, affectedAbility, ability, game, controllerId);
+                boolean effectApplyTrue;
+                if (effectAppliesTrue) {
+                    effectApplyTrue = (affectedAbility == null)
+                            ? effect.apply(objectId, ability, controllerId, game)
+                            : effect.apply(objectId, affectedAbility, ability, game, controllerId);
+                } else {
+                    effectApplyTrue = false;
+                }
+
+                if (effectAppliesTrue && effectApplyTrue) {
+                    if (effect.getAsThoughManaType(manaType, mana, controllerId, ability, game) == null) {
                         return null;
                     }
                 }
             }
         }
+
         // then check effects that allow to use other mana types to pay the current mana type to pay
-        asThoughEffectsList = getApplicableAsThoughEffects(AsThoughEffectType.SPEND_OTHER_MANA, game);
-        for (AsThoughEffect effect : asThoughEffectsList) {
-            Set<Ability> abilities = asThoughEffectsMap.get(AsThoughEffectType.SPEND_OTHER_MANA).getAbility(effect.getId());
-            for (Ability ability : abilities) {
-                if ((affectedAbility == null && effect.applies(objectId, ability, controllerId, game))
-                        || effect.applies(objectId, affectedAbility, ability, game, controllerId)) {
-                    ManaType usableManaType = ((AsThoughManaEffect) effect).getAsThoughManaType(manaType, mana, controllerId, ability, game);
+        for (AsThoughManaEffect effect : (List<AsThoughManaEffect>)(Object) getApplicableAsThoughEffects(AsThoughEffectType.SPEND_OTHER_MANA, game)) {
+            for (Ability ability : asThoughEffectsMap.get(AsThoughEffectType.SPEND_OTHER_MANA).getAbility(effect.getId())) {
+                boolean effectAppliesTrue = (affectedAbility == null)
+                        ? effect.applies(objectId, ability, controllerId, game)
+                        : effect.applies(objectId, affectedAbility, ability, game, controllerId);
+                boolean effectApplyTrue;
+                if (effectAppliesTrue) {
+                    effectApplyTrue = (affectedAbility == null)
+                            ? effect.apply(objectId, ability, controllerId, game)
+                            : effect.apply(objectId, affectedAbility, ability, game, controllerId);
+                } else {
+                    effectApplyTrue = false;
+                }
+
+                if (effectAppliesTrue && effectApplyTrue) {
+                    ManaType usableManaType = effect.getAsThoughManaType(manaType, mana, controllerId, ability, game);
                     if (usableManaType != null) {
                         return usableManaType;
                     }

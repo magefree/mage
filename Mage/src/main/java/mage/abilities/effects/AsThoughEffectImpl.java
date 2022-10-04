@@ -45,6 +45,25 @@ public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements
         return applies(objectId, source, playerId, game);
     }
 
+    // TODO: Is the override in ConditionalAsThoughEffect needed?
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public boolean apply(UUID sourceId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
+        // Default implementation will simply check the whole card, just like `.applies()`.
+        return apply(sourceId, source, playerId, game);
+    }
+
+    @Override
+    public boolean apply(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        // Overriding and returning true since most effects will not need to change state.
+        // This will cut down on the boilerplate code.
+        return true;
+    }
+
     @Override
     public AsThoughEffectType getAsThoughEffectType() {
         return type;

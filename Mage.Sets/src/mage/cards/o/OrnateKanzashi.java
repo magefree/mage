@@ -102,11 +102,6 @@ class OrnateKanzashiCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public OrnateKanzashiCastFromExileEffect copy() {
         return new OrnateKanzashiCastFromExileEffect(this);
     }

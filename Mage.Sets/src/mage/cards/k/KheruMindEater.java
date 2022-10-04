@@ -108,11 +108,6 @@ class KheruMindEaterEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public KheruMindEaterEffect copy() {
         return new KheruMindEaterEffect(this);
     }
@@ -120,11 +115,13 @@ class KheruMindEaterEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         Card card = game.getCard(objectId);
-        if (affectedControllerId.equals(source.getControllerId()) && card != null && game.getState().getZone(card.getId()) == Zone.EXILED) {
-            ExileZone zone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
-            return zone != null && zone.contains(card.getId());
-        }
-        return false;
+        ExileZone zone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
+
+        return affectedControllerId.equals(source.getControllerId())
+                && card != null
+                && game.getState().getZone(card.getId()) == Zone.EXILED
+                && zone != null
+                && zone.contains(card.getId());
     }
 }
 
@@ -140,30 +137,21 @@ class KheruMindEaterLookAtCardEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public KheruMindEaterLookAtCardEffect copy() {
         return new KheruMindEaterLookAtCardEffect(this);
     }
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (affectedControllerId.equals(source.getControllerId())) {
-            Card card = game.getCard(objectId);
-            if (card != null) {
-                MageObject sourceObject = game.getObject(source);
-                if (sourceObject == null) {
-                    return false;
-                }
-                UUID exileId = CardUtil.getCardExileZoneId(game, source);
-                ExileZone exile = game.getExile().getExileZone(exileId);
-                return exile != null && exile.contains(objectId);
-            }
-        }
-        return false;
-    }
+        Card card = game.getCard(objectId);
+        MageObject sourceObject = game.getObject(source);
+        UUID exileId = CardUtil.getCardExileZoneId(game, source);
+        ExileZone exile = game.getExile().getExileZone(exileId);
 
+        return affectedControllerId.equals(source.getControllerId())
+                && card != null
+                && sourceObject != null
+                && exile != null
+                && exile.contains(objectId);
+    }
 }

@@ -105,27 +105,24 @@ class PlaneswalkersMischiefCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public PlaneswalkersMischiefCastFromExileEffect copy() {
         return new PlaneswalkersMischiefCastFromExileEffect(this);
     }
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (targetPointer.getTargets(game, source).contains(objectId)
-                && game.getState().getZone(objectId) == Zone.EXILED) {
-            Player player = game.getPlayer(source.getControllerId());
-            Card card = game.getCard(objectId);
-            if (player != null
-                    && card != null) {
-                return allowCardToPlayWithoutMana(objectId, source, affectedControllerId, game);
-            }
-        }
-        return false;
+        Player player = game.getPlayer(source.getControllerId());
+        Card card = game.getCard(objectId);
+
+        return player != null
+                && card != null
+                && targetPointer.getTargets(game, source).contains(objectId)
+                && game.getState().getZone(objectId) == Zone.EXILED;
+    }
+
+    @Override
+    public boolean apply(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        return allowCardToPlayWithoutMana(objectId, source, affectedControllerId, game);
     }
 }
 

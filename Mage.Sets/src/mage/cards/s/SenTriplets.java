@@ -137,11 +137,6 @@ class SenTripletsPlayFromOpponentsHandEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public SenTripletsPlayFromOpponentsHandEffect copy() {
         return new SenTripletsPlayFromOpponentsHandEffect(this);
     }

@@ -69,11 +69,6 @@ class AetherWebEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public AetherWebEffect copy() {
         return new AetherWebEffect(this);
     }

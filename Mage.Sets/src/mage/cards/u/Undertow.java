@@ -49,11 +49,6 @@ class UndertowEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public UndertowEffect copy() {
         return new UndertowEffect(this);
     }

@@ -86,29 +86,25 @@ class RonaDiscipleOfGixPlayNonLandEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public RonaDiscipleOfGixPlayNonLandEffect copy() {
         return new RonaDiscipleOfGixPlayNonLandEffect(this);
     }
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (affectedControllerId.equals(source.getControllerId())) {
-            Card card = game.getCard(objectId);
-            MageObject sourceObject = game.getObject(source);
-            if (card != null && !card.isLand(game) && sourceObject != null) {
-                UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), sourceObject.getZoneChangeCounter(game));
-                if (exileId != null) {
-                    ExileZone exileZone = game.getState().getExile().getExileZone(exileId);
-                    return exileZone != null && exileZone.contains(objectId);
-                }
-            }
+        Card card = game.getCard(objectId);
+        MageObject sourceObject = game.getObject(source);
+
+        if (!affectedControllerId.equals(source.getControllerId())
+                || card == null
+                || card.isLand(game)
+                || sourceObject == null) {
+            return false;
         }
-        return false;
+
+        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), sourceObject.getZoneChangeCounter(game));
+        ExileZone exileZone = game.getState().getExile().getExileZone(exileId);
+        return exileZone != null && exileZone.contains(objectId);
     }
 }
 

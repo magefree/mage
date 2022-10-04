@@ -28,11 +28,6 @@ public class ActivateAbilitiesAnyTimeYouCouldCastInstantEffect extends AsThoughE
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public ActivateAbilitiesAnyTimeYouCouldCastInstantEffect copy() {
         return new ActivateAbilitiesAnyTimeYouCouldCastInstantEffect(this);
     }

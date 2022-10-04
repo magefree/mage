@@ -117,11 +117,6 @@ class DeadMansChestCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public DeadMansChestCastFromExileEffect copy() {
         return new DeadMansChestCastFromExileEffect(this);
     }
@@ -149,11 +144,6 @@ class DeadMansChestSpendManaEffect extends AsThoughEffectImpl implements AsThoug
 
     public DeadMansChestSpendManaEffect(final DeadMansChestSpendManaEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

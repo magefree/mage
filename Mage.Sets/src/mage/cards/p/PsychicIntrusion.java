@@ -133,11 +133,6 @@ class PsychicIntrusionCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public PsychicIntrusionCastFromExileEffect copy() {
         return new PsychicIntrusionCastFromExileEffect(this);
     }
@@ -166,11 +161,6 @@ class PsychicIntrusionSpendAnyManaEffect extends AsThoughEffectImpl implements A
 
     public PsychicIntrusionSpendAnyManaEffect(final PsychicIntrusionSpendAnyManaEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

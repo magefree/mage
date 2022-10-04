@@ -54,11 +54,6 @@ class FrenziedSaddlebruteEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public FrenziedSaddlebruteEffect copy() {
         return new FrenziedSaddlebruteEffect(this);
     }

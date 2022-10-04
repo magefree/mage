@@ -208,11 +208,6 @@ class SchemingFenceManaEffect extends AsThoughEffectImpl implements AsThoughMana
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public SchemingFenceManaEffect copy() {
         return new SchemingFenceManaEffect(this);
     }

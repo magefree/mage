@@ -104,11 +104,6 @@ class LilianaUntouchedByDeathGraveyardEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public LilianaUntouchedByDeathGraveyardEffect copy() {
         return new LilianaUntouchedByDeathGraveyardEffect(this);
     }

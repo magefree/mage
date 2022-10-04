@@ -131,11 +131,6 @@ class OfferingAsThoughEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public OfferingAsThoughEffect copy() {
         return new OfferingAsThoughEffect(this);
     }
@@ -147,61 +142,81 @@ class OfferingAsThoughEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
-        if (sourceId.equals(source.getSourceId())) {
-            Card card = game.getCard(sourceId);
-            if (card == null || !card.isOwnedBy(source.getControllerId())) {
+        if (!sourceId.equals(source.getSourceId())) {
+            return false;
+        }
+
+        Card card = game.getCard(sourceId);
+        Player player = game.getPlayer(source.getControllerId());
+        if (card == null || player == null || !card.isOwnedBy(source.getControllerId())) {
+            return false;
+        }
+        // because can activate is always called twice, result from first call will be used
+        Object object = game.getState().getValue("offering_" + card.getId());
+        if (object != null && object.equals(true)) {
+            Object alreadyConfirmed = game.getState().getValue("offering_ok_" + card.getId());
+            game.getState().setValue("offering_" + card.getId(), null);
+            game.getState().setValue("offering_ok_" + card.getId(), null);
+            return alreadyConfirmed != null;
+        } else {
+            // first call -> remove previous Ids
+            game.getState().setValue("offering_Id_" + card.getId(), null);
+        }
+
+        if (game.getBattlefield().count(((OfferingAbility) source).getFilter(), source.getControllerId(), source, game) == 0) {
+            return false;
+        }
+
+        if (game.inCheckPlayableState()) {
+            return true;
+        }
+
+        Card spellToCast = game.getCard(source.getSourceId());
+        if (spellToCast == null) {
+            return false;
+        }
+
+        // Assume the player chooses to use the ability
+        return true;
+    }
+
+    @Override
+    public boolean apply(UUID sourceId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
+        // Don't ask for player input when in checkPlayable state
+        if (game.inCheckPlayableState()) {
+            return true;
+        }
+
+        Card spellToCast = game.getCard(source.getSourceId());
+        Card card = game.getCard(sourceId);
+        Player player = game.getPlayer(source.getControllerId());
+        FilterControlledCreaturePermanent filter = ((OfferingAbility) source).getFilter();
+
+        if (!player.chooseUse(Outcome.Benefit, "Offer a " + filter.getMessage() + " to cast " + spellToCast.getName() + '?', source, game)) {
+            game.getState().setValue("offering_" + card.getId(), true);
+            return false;
+        } else {
+            Target target = new TargetControlledCreaturePermanent(1, 1, filter, true);
+            player.chooseTarget(Outcome.Sacrifice, target, source, game);
+            if (!target.isChosen()) {
                 return false;
             }
-            // because can activate is always called twice, result from first call will be used
-            Object object = game.getState().getValue("offering_" + card.getId());
-            if (object != null && object.equals(true)) {
-                Object alreadyConfirmed = game.getState().getValue("offering_ok_" + card.getId());
-                game.getState().setValue("offering_" + card.getId(), null);
-                game.getState().setValue("offering_ok_" + card.getId(), null);
-                return alreadyConfirmed != null;
-            } else {
-                // first call -> remove previous Ids
-                game.getState().setValue("offering_Id_" + card.getId(), null);
+            game.getState().setValue("offering_" + card.getId(), true);
+            Permanent offer = game.getPermanent(target.getFirstTarget());
+            if (offer == null) {
+                return false;
             }
-
-            if (game.getBattlefield().count(((OfferingAbility) source).getFilter(), source.getControllerId(), source, game) > 0) {
-
-                if (game.inCheckPlayableState()) {
-                    return true;
-                }
-                FilterControlledCreaturePermanent filter = ((OfferingAbility) source).getFilter();
-                Card spellToCast = game.getCard(source.getSourceId());
-                if (spellToCast == null) {
-                    return false;
-                }
-                Player player = game.getPlayer(source.getControllerId());
-                if (player != null
-                        && player.chooseUse(Outcome.Benefit, "Offer a " + filter.getMessage() + " to cast " + spellToCast.getName() + '?', source, game)) {
-                    Target target = new TargetControlledCreaturePermanent(1, 1, filter, true);
-                    player.chooseTarget(Outcome.Sacrifice, target, source, game);
-                    if (!target.isChosen()) {
-                        return false;
-                    }
-                    game.getState().setValue("offering_" + card.getId(), true);
-                    Permanent offer = game.getPermanent(target.getFirstTarget());
-                    if (offer != null) {
-                        UUID activationId = UUID.randomUUID();
-                        OfferingCostReductionEffect effect = new OfferingCostReductionEffect(activationId);
-                        effect.setTargetPointer(new FixedTarget(offer, game));
-                        game.addEffect(effect, source);
-                        game.getState().setValue("offering_ok_" + card.getId(), true);
-                        game.getState().setValue("offering_Id_" + card.getId(), activationId);
-                        game.informPlayers(player.getLogName() + " announces to offer "
-                                + offer.getLogName() + " to cast "
-                                + GameLog.getColoredObjectName(spellToCast));// No id name to prevent to offer hand card knowledge after cancel casting
-                        return true;
-                    }
-                } else {
-                    game.getState().setValue("offering_" + card.getId(), true);
-                }
-            }
+            UUID activationId = UUID.randomUUID();
+            OfferingCostReductionEffect effect = new OfferingCostReductionEffect(activationId);
+            effect.setTargetPointer(new FixedTarget(offer, game));
+            game.addEffect(effect, source);
+            game.getState().setValue("offering_ok_" + card.getId(), true);
+            game.getState().setValue("offering_Id_" + card.getId(), activationId);
+            game.informPlayers(player.getLogName() + " announces to offer "
+                    + offer.getLogName() + " to cast "
+                    + GameLog.getColoredObjectName(spellToCast));// No id name to prevent to offer hand card knowledge after cancel casting
+            return true;
         }
-        return false;
     }
 }
 

@@ -106,25 +106,17 @@ class CastFromNonHandZoneTargetEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public CastFromNonHandZoneTargetEffect copy() {
         return new CastFromNonHandZoneTargetEffect(this);
     }
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (getTargetPointer().getTargets(game, source).contains(objectId)
-                && source.isControlledBy(affectedControllerId)) {
-            Card card = game.getCard(objectId);
-            if (card != null) {
-                return true;
-            }
-        }
-        return false;
+        Card card = game.getCard(objectId);
+
+        return getTargetPointer().getTargets(game, source).contains(objectId)
+                && source.isControlledBy(affectedControllerId)
+                && card != null;
     }
 }
 

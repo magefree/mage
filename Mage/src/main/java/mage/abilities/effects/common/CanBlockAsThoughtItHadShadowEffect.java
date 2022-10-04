@@ -21,11 +21,6 @@ public class CanBlockAsThoughtItHadShadowEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public CanBlockAsThoughtItHadShadowEffect copy() {
         return new CanBlockAsThoughtItHadShadowEffect(this);
     }

@@ -148,11 +148,6 @@ class VivienChampionOfTheWildsLookEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public VivienChampionOfTheWildsLookEffect copy() {
         return new VivienChampionOfTheWildsLookEffect(this);
     }
@@ -180,11 +175,6 @@ class VivienChampionOfTheWildsCastFromExileEffect extends AsThoughEffectImpl {
     private VivienChampionOfTheWildsCastFromExileEffect(final VivienChampionOfTheWildsCastFromExileEffect effect) {
         super(effect);
         this.authorizedPlayerId = effect.authorizedPlayerId;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

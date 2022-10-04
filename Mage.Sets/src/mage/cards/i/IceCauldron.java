@@ -126,11 +126,6 @@ class IceCauldronCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public IceCauldronCastFromExileEffect copy() {
         return new IceCauldronCastFromExileEffect(this);
     }

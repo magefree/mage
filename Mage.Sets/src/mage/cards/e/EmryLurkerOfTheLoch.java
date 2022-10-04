@@ -72,11 +72,6 @@ class EmryLurkerOfTheLochPlayEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public EmryLurkerOfTheLochPlayEffect copy() {
         return new EmryLurkerOfTheLochPlayEffect(this);
     }

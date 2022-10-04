@@ -59,11 +59,6 @@ class OathswornVampirePlayEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public OathswornVampirePlayEffect copy() {
         return new OathswornVampirePlayEffect(this);
     }

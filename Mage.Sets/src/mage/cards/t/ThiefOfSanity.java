@@ -136,11 +136,6 @@ class ThiefOfSanityCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public ThiefOfSanityCastFromExileEffect copy() {
         return new ThiefOfSanityCastFromExileEffect(this);
     }
@@ -184,11 +179,6 @@ class ThiefOfSanitySpendAnyManaEffect extends AsThoughEffectImpl implements AsTh
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public ThiefOfSanitySpendAnyManaEffect copy() {
         return new ThiefOfSanitySpendAnyManaEffect(this);
     }
@@ -226,11 +216,6 @@ class ThiefOfSanityLookEffect extends AsThoughEffectImpl {
     private ThiefOfSanityLookEffect(final ThiefOfSanityLookEffect effect) {
         super(effect);
         this.authorizedPlayerId = effect.authorizedPlayerId;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

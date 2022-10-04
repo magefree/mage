@@ -188,11 +188,6 @@ class CelestialDawnSpendAnyManaEffect extends AsThoughEffectImpl implements AsTh
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public CelestialDawnSpendAnyManaEffect copy() {
         return new CelestialDawnSpendAnyManaEffect(this);
     }
@@ -220,11 +215,6 @@ class CelestialDawnSpendColorlessManaEffect extends AsThoughEffectImpl implement
 
     public CelestialDawnSpendColorlessManaEffect(final CelestialDawnSpendColorlessManaEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

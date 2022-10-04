@@ -136,20 +136,16 @@ class GrolnokTheOmnivorePlayEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (affectedControllerId.equals(source.getControllerId())) {
-            Card card = game.getCard(objectId);
-            if (card != null) {
-                Card mainCard = card.getMainCard();
-                return game.getState().getZone(mainCard.getId()).equals(Zone.EXILED) && mainCard.isOwnedBy(source.getControllerId())
-                        && mainCard.getCounters(game).containsKey(CounterType.CROAK);
-            }
+        Card card = game.getCard(objectId);
+
+        if (!affectedControllerId.equals(source.getControllerId()) || card == null) {
+            return false;
         }
-        return false;
+
+        Card mainCard = card.getMainCard();
+        return game.getState().getZone(mainCard.getId()).equals(Zone.EXILED)
+                && mainCard.isOwnedBy(source.getControllerId())
+                && mainCard.getCounters(game).containsKey(CounterType.CROAK);
     }
 }
