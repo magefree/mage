@@ -12,6 +12,7 @@ import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -48,6 +49,11 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
         leftHalfCard.setParentCard(this);
         this.rightHalfCard = rightHalfCard;
         rightHalfCard.setParentCard(this);
+    }
+
+    @Override
+    public List<SubCard> getSubCards() {
+        return (List<SubCard>) Arrays.asList((SubCard) leftHalfCard, (SubCard) rightHalfCard);
     }
 
     public SplitCardHalf getLeftHalfCard() {

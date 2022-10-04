@@ -2,15 +2,12 @@ package mage.abilities.effects;
 
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
-import mage.cards.Card;
-import mage.cards.ModalDoubleFacesCard;
-import mage.cards.SplitCard;
+import mage.cards.*;
 import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
 import java.util.UUID;
-import mage.cards.AdventureCard;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -84,34 +81,26 @@ public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements
      */
     protected boolean allowCardToPlayWithoutMana(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         Player player = game.getPlayer(affectedControllerId);
-        Card card = game.getCard(objectId);
-        if (card == null || player == null) {
+        if (player == null) {
             return false;
         }
-        if (!card.isLand(game)) {
-            if (card instanceof SplitCard) {
-                Card leftCard = ((SplitCard) card).getLeftHalfCard();
-                player.setCastSourceIdWithAlternateMana(leftCard.getId(), null, leftCard.getSpellAbility().getCosts());
-                Card rightCard = ((SplitCard) card).getRightHalfCard();
-                player.setCastSourceIdWithAlternateMana(rightCard.getId(), null, rightCard.getSpellAbility().getCosts());
-            } else if (card instanceof ModalDoubleFacesCard) {
-                Card leftCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
-                Card rightCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
-                // some MDFC's are land.  IE: sea gate restoration
-                if (!leftCard.isLand(game)) {
-                    player.setCastSourceIdWithAlternateMana(leftCard.getId(), null, leftCard.getSpellAbility().getCosts());
-                }
-                if (!rightCard.isLand(game)) {
-                    player.setCastSourceIdWithAlternateMana(rightCard.getId(), null, rightCard.getSpellAbility().getCosts());
-                }
-            } else if (card instanceof AdventureCard) {
-                Card creatureCard = card.getMainCard();
-                Card spellCard = ((AdventureCard) card).getSpellCard();
-                player.setCastSourceIdWithAlternateMana(creatureCard.getId(), null, creatureCard.getSpellAbility().getCosts());
-                player.setCastSourceIdWithAlternateMana(spellCard.getId(), null, spellCard.getSpellAbility().getCosts());
-            }
-            player.setCastSourceIdWithAlternateMana(objectId, null, card.getSpellAbility().getCosts());
+        if (game.getCard(objectId) == null) {
+            return false;
         }
+        Card card = game.getCard(objectId).getMainCard();
+        if (card.isLand(game)) {
+            return true;
+        }
+        // Set the main card (and the creature part of Adventure cards)
+        player.setCastSourceIdWithAlternateMana(card.getId(), null, card.getSpellAbility().getCosts());
+
+        // Set the sub cards
+        for (SubCard subcard : card.getSubCards()) {
+            if (!subcard.isLand(game)) {
+                player.setCastSourceIdWithAlternateMana(subcard.getId(), null, subcard.getSpellAbility().getCosts());
+            }
+        }
+
         return true;
     }
 

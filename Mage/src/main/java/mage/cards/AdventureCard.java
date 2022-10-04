@@ -10,6 +10,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -46,6 +47,11 @@ public abstract class AdventureCard extends CardImpl {
     public void assignNewId() {
         super.assignNewId();
         spellCard.assignNewId();
+    }
+
+    @Override
+    public List<SubCard> getSubCards() {
+        return Arrays.asList(spellCard);
     }
 
     @Override

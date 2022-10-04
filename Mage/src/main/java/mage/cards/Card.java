@@ -18,6 +18,7 @@ import mage.game.permanent.Permanent;
 import mage.util.ManaUtil;
 import mage.watchers.common.CommanderPlaysCountWatcher;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -215,4 +216,8 @@ public interface Card extends MageObject {
      * @return
      */
     boolean hasSubTypeForDeckbuilding(SubType subType);
+
+    default List<SubCard> getSubCards() {
+        return new ArrayList<>();
+    }
 }

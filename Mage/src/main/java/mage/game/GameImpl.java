@@ -317,28 +317,9 @@ public abstract class GameImpl implements Game {
             addCardToState(card);
 
             // parts
-            if (card instanceof SplitCard) {
-                // left
-                Card leftCard = ((SplitCard) card).getLeftHalfCard();
-                leftCard.setOwnerId(ownerId);
-                addCardToState(leftCard);
-                // right
-                Card rightCard = ((SplitCard) card).getRightHalfCard();
-                rightCard.setOwnerId(ownerId);
-                addCardToState(rightCard);
-            } else if (card instanceof ModalDoubleFacesCard) {
-                // left
-                Card leftCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
-                leftCard.setOwnerId(ownerId);
-                addCardToState(leftCard);
-                // right
-                Card rightCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
-                rightCard.setOwnerId(ownerId);
-                addCardToState(rightCard);
-            } else if (card instanceof AdventureCard) {
-                Card spellCard = ((AdventureCard) card).getSpellCard();
-                spellCard.setOwnerId(ownerId);
-                addCardToState(spellCard);
+            for (SubCard subCard: card.getSubCards()) {
+                subCard.setOwnerId(ownerId);
+                addCardToState(subCard);
             }
         }
     }

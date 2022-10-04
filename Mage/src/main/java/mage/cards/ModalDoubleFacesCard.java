@@ -15,9 +15,7 @@ import mage.game.events.ZoneChangeEvent;
 import mage.util.CardUtil;
 import mage.util.SubTypes;
 
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author JayDi85
@@ -44,6 +42,11 @@ public abstract class ModalDoubleFacesCard extends CardImpl implements CardWithH
         ((ModalDoubleFacesCardHalf) leftHalfCard).setParentCard(this);
         this.rightHalfCard = card.rightHalfCard.copy();
         ((ModalDoubleFacesCardHalf) rightHalfCard).setParentCard(this);
+    }
+
+    @Override
+    public List<SubCard> getSubCards() {
+        return (List<SubCard>) Arrays.asList((SubCard) leftHalfCard, (SubCard) rightHalfCard);
     }
 
     public ModalDoubleFacesCardHalf getLeftHalfCard() {
