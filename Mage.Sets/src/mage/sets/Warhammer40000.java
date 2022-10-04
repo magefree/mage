@@ -125,6 +125,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Icon of Ancestry", 242, Rarity.RARE, mage.cards.i.IconOfAncestry.class));
         cards.add(new SetCardInfo("Imotekh the Stormlord", 5, Rarity.MYTHIC, mage.cards.i.ImotekhTheStormlord.class));
         cards.add(new SetCardInfo("Inquisitor Greyfax", 3, Rarity.MYTHIC, mage.cards.i.InquisitorGreyfax.class));
+        cards.add(new SetCardInfo("Inquisitorial Rosette", 159, Rarity.RARE, mage.cards.i.InquisitorialRosette.class));
         cards.add(new SetCardInfo("Inspiring Call", 217, Rarity.UNCOMMON, mage.cards.i.InspiringCall.class));
         cards.add(new SetCardInfo("Island", 307, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kill! Maim! Burn!", 128, Rarity.RARE, mage.cards.k.KillMaimBurn.class));
