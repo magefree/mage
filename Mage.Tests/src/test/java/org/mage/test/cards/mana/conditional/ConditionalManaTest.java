@@ -1,5 +1,8 @@
 package org.mage.test.cards.mana.conditional;
 
+import mage.ConditionalMana;
+import mage.Mana;
+import mage.abilities.condition.common.AdamantCondition;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.mana.ManaOptions;
 import mage.constants.PhaseStep;
@@ -9,7 +12,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
-import static org.mage.test.utils.ManaOptionsTestUtils.assertDuplicatedManaOptions;
 import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
 
 /**
@@ -330,7 +332,6 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        assertDuplicatedManaOptions(manaOptions);
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
         assertManaOptions("{R}{R}", manaOptions);
     }
@@ -384,6 +385,36 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         assertManaOptions("{C}{C}{R}[{TitansNestManaCondition}]", manaOptions);        
         assertManaOptions("{C}{C}{C}{C}{R}[{RosheenMeandererManaCondition}]", manaOptions);        
         assertManaOptions("{C}{C}{C}{C}{C}{C}{R}[{RosheenMeandererManaCondition}{TitansNestManaCondition}]", manaOptions);        
+    }
+
+    @Test
+    public void testConditionalManaDeduplication() {
+        ManaOptions manaOptions = new ManaOptions();
+
+        ConditionalMana originalMana = new ConditionalMana(Mana.GreenMana(1));
+
+        ConditionalMana mana2 = originalMana.copy();
+        mana2.addCondition(AdamantCondition.WHITE);
+
+        ConditionalMana mana3 = originalMana.copy();
+        mana3.addCondition(AdamantCondition.BLUE);
+        ConditionalMana mana3Copy = originalMana.copy();
+        mana3Copy.addCondition(AdamantCondition.BLUE);
+        mana3Copy.add(Mana.GreenMana(1));
+
+        ConditionalMana mana4 = originalMana.copy();
+        mana4.addCondition(AdamantCondition.BLACK);
+        ConditionalMana mana4Copy = originalMana.copy();
+        mana4Copy.addCondition(AdamantCondition.BLACK);
+
+        manaOptions.add(originalMana);
+        manaOptions.add(mana2);
+        manaOptions.add(mana3);
+        manaOptions.add(mana3Copy); // Added, and should remain since different amount of Green mana
+        manaOptions.add(mana4);
+        manaOptions.add(mana4Copy); // Adding it to make sure it gets removed
+
+        Assert.assertEquals("Incorrect number of mana", 5, manaOptions.size());
     }
 
 }

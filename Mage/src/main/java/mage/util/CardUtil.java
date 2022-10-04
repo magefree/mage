@@ -176,7 +176,7 @@ public final class CardUtil {
                 }
 
                 // ignore unknown mana
-                if (manaCost.getOptions().size() == 0) {
+                if (manaCost.getOptions().isEmpty()) {
                     continue;
                 }
 
@@ -186,7 +186,7 @@ public final class CardUtil {
                 }
 
                 // generic mana reduce
-                Mana mana = manaCost.getOptions().get(0);
+                Mana mana = manaCost.getOptions().getAtIndex(0);
                 int colorless = mana != null ? mana.getGeneric() : 0;
                 if (restToReduce != 0 && colorless > 0) {
                     if ((colorless - restToReduce) > 0) {
@@ -219,7 +219,7 @@ public final class CardUtil {
                 if (manaCost instanceof MonoHybridManaCost) {
                     // current implemention supports reduce from left to right hybrid cost without cost parts announce
                     MonoHybridManaCost mono = (MonoHybridManaCost) manaCost;
-                    int colorless = mono.getOptions().get(1).getGeneric();
+                    int colorless = mono.getOptions().getAtIndex(1).getGeneric();
                     if (restToReduce != 0 && colorless > 0) {
                         if ((colorless - restToReduce) > 0) {
                             // partly reduce
@@ -254,7 +254,7 @@ public final class CardUtil {
                 // add to existing cost
                 if (reduceCount != 0 && manaCost instanceof GenericManaCost) {
                     GenericManaCost gen = (GenericManaCost) manaCost;
-                    changedCost.put(manaCost, new GenericManaCost(gen.getOptions().get(0).getGeneric() + -reduceCount));
+                    changedCost.put(manaCost, new GenericManaCost(gen.getOptions().getAtIndex(0).getGeneric() + -reduceCount));
                     reduceCount = 0;
                     added = true;
                 } else {
@@ -708,9 +708,9 @@ public final class CardUtil {
     }
 
     private static int overflowResult(long value) {
-        if (value > Integer.MAX_VALUE) {
+        if (value >= Integer.MAX_VALUE) {
             return Integer.MAX_VALUE;
-        } else if (value < Integer.MIN_VALUE) {
+        } else if (value <= Integer.MIN_VALUE) {
             return Integer.MIN_VALUE;
         } else {
             return (int) value;
