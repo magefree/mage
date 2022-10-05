@@ -59,6 +59,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Canoptek Scarab Swarm", 150, Rarity.RARE, mage.cards.c.CanoptekScarabSwarm.class));
         cards.add(new SetCardInfo("Canoptek Spyder", 151, Rarity.RARE, mage.cards.c.CanoptekSpyder.class));
         cards.add(new SetCardInfo("Canoptek Tomb Sentinel", 152, Rarity.RARE, mage.cards.c.CanoptekTombSentinel.class));
+        cards.add(new SetCardInfo("Canoptek Wraith", 153, Rarity.RARE, mage.cards.c.CanoptekWraith.class));
         cards.add(new SetCardInfo("Cave of Temptation", 267, Rarity.COMMON, mage.cards.c.CaveOfTemptation.class));
         cards.add(new SetCardInfo("Celestine, the Living Saint", 10, Rarity.RARE, mage.cards.c.CelestineTheLivingSaint.class));
         cards.add(new SetCardInfo("Chaos Defiler", 110, Rarity.RARE, mage.cards.c.ChaosDefiler.class));
