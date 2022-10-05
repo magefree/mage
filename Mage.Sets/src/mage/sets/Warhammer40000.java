@@ -30,6 +30,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Abundance", 210, Rarity.RARE, mage.cards.a.Abundance.class));
         cards.add(new SetCardInfo("Acolyte Hybrid", 70, Rarity.UNCOMMON, mage.cards.a.AcolyteHybrid.class));
         cards.add(new SetCardInfo("Aetherize", 191, Rarity.UNCOMMON, mage.cards.a.Aetherize.class));
+        cards.add(new SetCardInfo("And They Shall Know No Fear", 9, Rarity.UNCOMMON, mage.cards.a.AndTheyShallKnowNoFear.class));
         cards.add(new SetCardInfo("Arcane Sanctum", 264, Rarity.UNCOMMON, mage.cards.a.ArcaneSanctum.class));
         cards.add(new SetCardInfo("Arcane Signet", 227, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Arco-Flagellant", 29, Rarity.RARE, mage.cards.a.ArcoFlagellant.class));
