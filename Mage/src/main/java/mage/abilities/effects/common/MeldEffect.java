@@ -61,7 +61,6 @@ public class MeldEffect extends OneShotEffect {
         FilterPermanent filter = new FilterControlledPermanent("permanent named " + meldWithName);
         filter.add(new NamePredicate(meldWithName));
         filter.add(TargetController.YOU.getOwnerPredicate());
-        Permanent meldWith;
         if (!game.getBattlefield().contains(filter, source, game, 1)) {
             return false;
         }
