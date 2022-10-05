@@ -66,6 +66,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Chromatic Lantern", 232, Rarity.RARE, mage.cards.c.ChromaticLantern.class));
         cards.add(new SetCardInfo("Chronomancer", 32, Rarity.RARE, mage.cards.c.Chronomancer.class));
         cards.add(new SetCardInfo("Cinder Glade", 269, Rarity.RARE, mage.cards.c.CinderGlade.class));
+        cards.add(new SetCardInfo("Clamavus", 90, Rarity.RARE, mage.cards.c.Clamavus.class));
         cards.add(new SetCardInfo("Collective Effort", 183, Rarity.RARE, mage.cards.c.CollectiveEffort.class));
         cards.add(new SetCardInfo("Command Tower", 270, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Sphere", 233, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
