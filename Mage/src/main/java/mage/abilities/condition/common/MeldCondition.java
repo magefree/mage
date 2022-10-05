@@ -7,6 +7,7 @@ import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
@@ -18,12 +19,17 @@ public class MeldCondition implements Condition {
 
     private final String message;
     private final FilterPermanent filter;
+    private final boolean attacking;
 
     public MeldCondition(String meldWithName) {
         this(meldWithName, CardType.CREATURE);
     }
 
     public MeldCondition(String meldWithName, CardType cardType) {
+        this(meldWithName, cardType, false);
+    }
+
+    public MeldCondition(String meldWithName, CardType cardType, boolean attacking) {
         this.message = "you both own and control {this} and "
                 + CardUtil.addArticle(cardType.toString().toLowerCase())
                 + " named " + meldWithName;
@@ -31,6 +37,10 @@ public class MeldCondition implements Condition {
         this.filter.add(TargetController.YOU.getOwnerPredicate());
         this.filter.add(cardType.getPredicate());
         this.filter.add(new NamePredicate(meldWithName));
+        if (attacking) {
+            this.filter.add(AttackingPredicate.instance);
+        }
+        this.attacking = attacking;
     }
 
     @Override
@@ -39,6 +49,7 @@ public class MeldCondition implements Condition {
         return sourcePermanent != null
                 && sourcePermanent.isControlledBy(source.getControllerId())
                 && sourcePermanent.isOwnedBy(source.getControllerId())
+                && (!attacking || sourcePermanent.isAttacking())
                 && game.getBattlefield().contains(filter, source, game, 1);
     }
 

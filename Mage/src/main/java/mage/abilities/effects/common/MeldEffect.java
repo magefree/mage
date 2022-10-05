@@ -15,6 +15,7 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -29,17 +30,24 @@ public class MeldEffect extends OneShotEffect {
 
     private final String meldWithName;
     private final String meldIntoName;
+    private final boolean attacking;
 
     public MeldEffect(String meldWithName, String meldIntoName) {
+        this(meldWithName, meldIntoName, false);
+    }
+
+    public MeldEffect(String meldWithName, String meldIntoName, boolean attacking) {
         super(Outcome.Benefit);
         this.meldWithName = meldWithName;
         this.meldIntoName = meldIntoName;
+        this.attacking = attacking;
     }
 
     public MeldEffect(final MeldEffect effect) {
         super(effect);
         this.meldWithName = effect.meldWithName;
         this.meldIntoName = effect.meldIntoName;
+        this.attacking = effect.attacking;
     }
 
     @Override
@@ -54,6 +62,7 @@ public class MeldEffect extends OneShotEffect {
         if (controller == null
                 || sourcePermanent == null
                 || !sourcePermanent.isControlledBy(controller.getId())
+                || (attacking && !sourcePermanent.isAttacking())
                 || !sourcePermanent.isOwnedBy(controller.getId())) {
             return false;
         }
@@ -61,6 +70,9 @@ public class MeldEffect extends OneShotEffect {
         FilterPermanent filter = new FilterControlledPermanent("permanent named " + meldWithName);
         filter.add(new NamePredicate(meldWithName));
         filter.add(TargetController.YOU.getOwnerPredicate());
+        if (attacking) {
+            filter.add(AttackingPredicate.instance);
+        }
         if (!game.getBattlefield().contains(filter, source, game, 1)) {
             return false;
         }
@@ -101,7 +113,10 @@ public class MeldEffect extends OneShotEffect {
         game.addMeldCard(meldCard.getId(), meldCard);
         game.getState().addCard(meldCard);
         meldCard.setZone(Zone.EXILED, game);
-        controller.moveCards(meldCard, Zone.BATTLEFIELD, source, game);
+        controller.moveCards(meldCard, Zone.BATTLEFIELD, source, game, attacking, false, false, null);
+        if (attacking) {
+            game.getCombat().addAttackingCreature(meldCard.getId(), game);
+        }
         return true;
     }
 }
