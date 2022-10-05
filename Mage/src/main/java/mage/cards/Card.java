@@ -76,7 +76,9 @@ public interface Card extends MageObject {
 
     boolean isNightCard();
 
-    boolean meldsWith(Card card);
+    default boolean meldsWith(Card card) {
+        return false;
+    }
 
     void assignNewId();
 

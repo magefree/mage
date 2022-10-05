@@ -779,11 +779,6 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
-    public boolean meldsWith(Card card) {
-        return false;
-    }
-
-    @Override
     public Spell copy() {
         return new Spell(this);
     }
