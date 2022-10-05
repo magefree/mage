@@ -88,6 +88,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Deploy to the Front", 184, Rarity.RARE, mage.cards.d.DeployToTheFront.class));
         cards.add(new SetCardInfo("Desert of the Glorified", 275, Rarity.COMMON, mage.cards.d.DesertOfTheGlorified.class));
         cards.add(new SetCardInfo("Dismal Backwater", 276, Rarity.COMMON, mage.cards.d.DismalBackwater.class));
+        cards.add(new SetCardInfo("Drach'Nyen", 117, Rarity.RARE, mage.cards.d.DrachNyen.class));
         cards.add(new SetCardInfo("Dread Return", 200, Rarity.UNCOMMON, mage.cards.d.DreadReturn.class));
         cards.add(new SetCardInfo("Endless Atlas", 237, Rarity.RARE, mage.cards.e.EndlessAtlas.class));
         cards.add(new SetCardInfo("Entrapment Maneuver", 185, Rarity.RARE, mage.cards.e.EntrapmentManeuver.class));
