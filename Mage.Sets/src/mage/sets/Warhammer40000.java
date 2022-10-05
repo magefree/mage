@@ -182,6 +182,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Rugged Highlands", 292, Rarity.COMMON, mage.cards.r.RuggedHighlands.class));
         cards.add(new SetCardInfo("Sanguinary Priest", 53, Rarity.UNCOMMON, mage.cards.s.SanguinaryPriest.class));
         cards.add(new SetCardInfo("Sautekh Immortal", 54, Rarity.UNCOMMON, mage.cards.s.SautekhImmortal.class));
+        cards.add(new SetCardInfo("Sceptre of Eternal Glory", 166, Rarity.RARE, mage.cards.s.SceptreOfEternalGlory.class));
         cards.add(new SetCardInfo("Scoured Barrens", 293, Rarity.COMMON, mage.cards.s.ScouredBarrens.class));
         cards.add(new SetCardInfo("Screamer-Killer", 84, Rarity.RARE, mage.cards.s.ScreamerKiller.class));
         cards.add(new SetCardInfo("Sculpting Steel", 247, Rarity.RARE, mage.cards.s.SculptingSteel.class));
