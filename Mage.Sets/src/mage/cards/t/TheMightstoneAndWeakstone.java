@@ -30,6 +30,8 @@ public final class TheMightstoneAndWeakstone extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.POWERSTONE);
 
+        this.meldsWithClazz = mage.cards.u.UrzaLordProtector.class;
+
         // When The Mightstone and Weakstone enters the battlefield, choose one --
         // * Draw two cards.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1));

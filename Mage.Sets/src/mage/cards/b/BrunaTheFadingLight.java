@@ -42,6 +42,7 @@ public final class BrunaTheFadingLight extends CardImpl {
         this.subtype.add(SubType.ANGEL, SubType.HORROR);
         this.power = new MageInt(5);
         this.toughness = new MageInt(7);
+        this.meldsWithClazz = mage.cards.g.GiselaTheBrokenBlade.class;
 
         // When you cast Bruna, the Fading Light, you may return target Angel or Human creature card from your graveyard to the battlefield.
         Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
