@@ -88,6 +88,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Defenders of Humanity", 11, Rarity.RARE, mage.cards.d.DefendersOfHumanity.class));
         cards.add(new SetCardInfo("Defile", 199, Rarity.UNCOMMON, mage.cards.d.Defile.class));
         cards.add(new SetCardInfo("Deny Reality", 223, Rarity.COMMON, mage.cards.d.DenyReality.class));
+        cards.add(new SetCardInfo("Deny the Witch", 116, Rarity.UNCOMMON, mage.cards.d.DenyTheWitch.class));
         cards.add(new SetCardInfo("Deploy to the Front", 184, Rarity.RARE, mage.cards.d.DeployToTheFront.class));
         cards.add(new SetCardInfo("Desert of the Glorified", 275, Rarity.COMMON, mage.cards.d.DesertOfTheGlorified.class));
         cards.add(new SetCardInfo("Dismal Backwater", 276, Rarity.COMMON, mage.cards.d.DismalBackwater.class));
