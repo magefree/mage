@@ -159,6 +159,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Prophetic Prism", 189, Rarity.COMMON, mage.cards.p.PropheticPrism.class));
         cards.add(new SetCardInfo("Radiant Flames", 126, Rarity.RARE, mage.cards.r.RadiantFlames.class));
         cards.add(new SetCardInfo("Rakdos Carnarium", 226, Rarity.UNCOMMON, mage.cards.r.RakdosCarnarium.class));
+        cards.add(new SetCardInfo("Ramirez DePietro, Pillager", 38, Rarity.UNCOMMON, mage.cards.r.RamirezDePietroPillager.class));
         cards.add(new SetCardInfo("Ramses, Assassin Lord", 39, Rarity.RARE, mage.cards.r.RamsesAssassinLord.class));
         cards.add(new SetCardInfo("Rasputin, the Oneiromancer", 40, Rarity.RARE, mage.cards.r.RasputinTheOneiromancer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rasputin, the Oneiromancer", 62, Rarity.RARE, mage.cards.r.RasputinTheOneiromancer.class, NON_FULL_USE_VARIOUS));
