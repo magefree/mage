@@ -57,6 +57,7 @@ public class EntersBattlefieldFromGraveyardTriggeredAbility extends TriggeredAbi
                 break;
             case ANY:
                 sb.append("a");
+                break;
             default:
                 throw new UnsupportedOperationException("TargetController " + targetController + "not supported");
         }
