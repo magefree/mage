@@ -282,9 +282,9 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
         // can contain multiple costs from multikicker ability
         // must be additional cost type
         if (cost instanceof ManaCostsImpl) {
-            ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
+            ability.addManaCostsToPay((ManaCostsImpl) cost.copy());
         } else {
-            ability.getCosts().add(cost.copy());
+            ability.addCost(cost.copy());
         }
     }
 

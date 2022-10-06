@@ -9,6 +9,7 @@ import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
@@ -78,8 +79,10 @@ enum VoodooDollAdjuster implements CostAdjuster {
         Permanent sourcePermanent = game.getPermanent(ability.getSourceId());
         if (sourcePermanent != null) {
             int pin = sourcePermanent.getCounters(game).getCount(CounterType.PIN);
-            ability.getManaCostsToPay().clear();
-            ability.getManaCostsToPay().add(0, new GenericManaCost(pin * 2));
+            ManaCosts manaCostsToPay = ability.getManaCostsToPay();
+            ability.clearManaCostsToPay();
+            ability.addManaCostsToPay(new GenericManaCost(new GenericManaCost(pin * 2)));
+            ability.addManaCostsToPay(manaCostsToPay);
         }
     }
 }

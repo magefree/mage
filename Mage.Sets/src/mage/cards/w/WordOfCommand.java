@@ -118,8 +118,8 @@ class WordOfCommandEffect extends OneShotEffect {
                         && !targetPlayer.playCard(card, game, false, new ApprovingObject(source, game))) {
                     SpellAbility spellAbility = card.getSpellAbility();
                     if (spellAbility != null) {
-                        spellAbility.getManaCostsToPay().clear();
-                        spellAbility.getManaCostsToPay().addAll(spellAbility.getManaCosts());
+                        spellAbility.clearManaCostsToPay();
+                        spellAbility.addManaCostsToPay(spellAbility.getManaCosts());
                         ((ManaCostsImpl) spellAbility.getManaCostsToPay()).forceManaRollback(game, manaPool); // force rollback if card was deemed playable
                         canPlay = checkPlayability(card, targetPlayer, game, source);
                     } else {

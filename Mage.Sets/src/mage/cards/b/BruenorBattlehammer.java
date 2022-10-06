@@ -122,8 +122,8 @@ class BruenorBattlehammerCostEffect extends CostModificationEffectImpl {
         }
 
         if (applyReduce) {
-            abilityToModify.getCosts().clear();
-            abilityToModify.getManaCostsToPay().clear();
+            abilityToModify.clearCosts();
+            abilityToModify.clearManaCostsToPay();
             return true;
         }
 

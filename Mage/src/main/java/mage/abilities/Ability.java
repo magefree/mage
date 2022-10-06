@@ -103,6 +103,28 @@ public interface Ability extends Controllable, Serializable {
     void setSourceId(UUID sourceID);
 
     /**
+     * If statements are needed. both methods will return a static object if there is no associated cost.
+     * Without the if statement there will likely be concurrent modification issues.
+     */
+    default void clearCosts() {
+        if (!getCosts().isEmpty()) {
+            getCosts().clear();
+        }
+    }
+
+    default void clearManaCosts() {
+        if (!getManaCosts().isEmpty()) {
+            getManaCosts().clear();
+        }
+    }
+
+    default void clearManaCostsToPay() {
+        if (!getManaCostsToPay().isEmpty()) {
+            getManaCostsToPay().clear();
+        }
+    }
+
+    /**
      * Gets all {@link Costs} associated with this ability.
      *
      * @return All {@link Costs} associated with this ability.
@@ -150,6 +172,8 @@ public interface Ability extends Controllable, Serializable {
      * @param cost The {@link ManaCost} to add.
      */
     void addManaCost(ManaCost cost);
+
+    void addManaCostsToPay(ManaCost manaCost);
 
     /**
      * Retrieves the effects that are put into the place by the resolution of

@@ -147,7 +147,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
             }
 
             // can pay all costs and choose targets
-            if (costs.canPay(this, this, playerId, game)) {
+            if (getCosts().canPay(this, this, playerId, game)) {
                 if (getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
                     SplitCard splitCard = (SplitCard) game.getCard(getSourceId());
                     if (splitCard != null) {
@@ -178,12 +178,6 @@ public class SpellAbility extends ActivatedAbilityImpl {
             return new StringBuilder(super.getRule(all)).append(name).toString();
         }
         return super.getRule(false);
-    }
-
-    public void clear() {
-        getTargets().clearChosen();
-        this.manaCosts.clearPaid();
-        this.costs.clearPaid();
     }
 
     public String getName() {

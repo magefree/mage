@@ -174,9 +174,9 @@ class SpliceCardEffectImpl extends ContinuousEffectImpl implements SpliceCardEff
                 for (Iterator it = ((SpliceAbility) source).getSpliceCosts().iterator(); it.hasNext();) {
                     Cost cost = (Cost) it.next();
                     if (cost instanceof ManaCost) {
-                        spell.getSpellAbility().getManaCostsToPay().add((ManaCost) cost.copy());
+                        spell.getSpellAbility().addManaCostsToPay((ManaCost) cost.copy());
                     } else {
-                        spell.getSpellAbility().getCosts().add(cost.copy());
+                        spell.getSpellAbility().addCost(cost.copy());
                     }
                 }
             }

@@ -2,7 +2,6 @@ package mage.abilities;
 
 import mage.MageIdentifier;
 import mage.MageObject;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.*;
 import mage.abilities.costs.common.PayLifeCost;
@@ -19,7 +18,6 @@ import mage.abilities.hint.Hint;
 import mage.abilities.icon.CardIcon;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
-import mage.cards.SplitCard;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.command.Dungeon;
@@ -52,14 +50,17 @@ public abstract class AbilityImpl implements Ability {
     private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(100);
     private static final List<Ability> emptyAbilities = new ArrayList<>();
 
+    private static final Costs<Cost> emptyCosts = new CostsImpl<>();
+    private static final ManaCosts<ManaCost> emptyManaCosts = new ManaCostsImpl<>();
+
     protected UUID id;
     protected UUID originalId;
     protected AbilityType abilityType;
     protected UUID controllerId;
     protected UUID sourceId;
-    protected ManaCosts<ManaCost> manaCosts;
-    protected ManaCosts<ManaCost> manaCostsToPay;
-    protected Costs<Cost> costs;
+    private ManaCosts<ManaCost> manaCosts = null; // Lazily instantiated inside
+    private ManaCosts<ManaCost> manaCostsToPay = null; // Lazily instantiated
+    private Costs<Cost> costs = null; // Lazily instantiated
     protected Modes modes; // access to it by GetModes only (it can be overridden by some abilities)
     protected Zone zone;
     protected String name;
@@ -89,9 +90,6 @@ public abstract class AbilityImpl implements Ability {
         this.originalId = id;
         this.abilityType = abilityType;
         this.zone = zone;
-        this.manaCosts = new ManaCostsImpl<>();
-        this.manaCostsToPay = new ManaCostsImpl<>();
-        this.costs = new CostsImpl<>();
         this.modes = new Modes();
     }
 
@@ -104,9 +102,9 @@ public abstract class AbilityImpl implements Ability {
         this.zone = ability.zone;
         this.name = ability.name;
         this.usesStack = ability.usesStack;
-        this.manaCosts = ability.manaCosts.copy();
-        this.manaCostsToPay = ability.manaCostsToPay.copy();
-        this.costs = ability.costs.copy();
+        this.manaCosts = ability.manaCosts == null ? null : ability.manaCosts.copy();
+        this.manaCostsToPay = ability.manaCostsToPay == null ? null : ability.manaCostsToPay.copy();
+        this.costs = ability.costs == null ? null : ability.costs.copy();
         for (Watcher watcher : ability.getWatchers()) {
             watchers.add(watcher.copy());
         }
@@ -257,14 +255,14 @@ public abstract class AbilityImpl implements Ability {
         if (noMana) {
             if (!this.getManaCostsToPay().getVariableCosts().isEmpty()) {
                 int xValue = this.getManaCostsToPay().getX();
-                this.getManaCostsToPay().clear();
+                this.clearManaCostsToPay();
                 VariableManaCost xCosts = new VariableManaCost(VariableCostType.ADDITIONAL);
                 // no x events - rules from Unbound Flourishing:
                 // - Spells with additional costs that include X won't be affected by Unbound Flourishing. X must be in the spell's mana cost.
                 xCosts.setAmount(xValue, xValue, false);
-                this.getManaCostsToPay().add(xCosts);
+                addManaCostsToPay(xCosts);
             } else {
-                this.getManaCostsToPay().clear();
+                this.clearManaCostsToPay();
             }
         }
 
@@ -383,7 +381,7 @@ public abstract class AbilityImpl implements Ability {
         }
 
         // this is a hack to prevent mana abilities with mana costs from causing endless loops - pay other costs first
-        if (this instanceof ActivatedManaAbilityImpl && !costs.pay(this, game, this, controllerId, noMana, null)) {
+        if (this instanceof ActivatedManaAbilityImpl && !getCosts().pay(this, game, this, controllerId, noMana, null)) {
             logger.debug("activate mana ability failed - non mana costs");
             return false;
         }
@@ -400,12 +398,12 @@ public abstract class AbilityImpl implements Ability {
         }
 
         //20100716 - 601.2f  (noMana is not used here, because mana costs were cleared for this ability before adding additional costs and applying cost modification effects)
-        if (!manaCostsToPay.pay(this, game, this, activatorId, false, null)) {
+        if (!getManaCostsToPay().pay(this, game, this, activatorId, false, null)) {
             return false; // cancel during mana payment
         }
 
         //20100716 - 601.2g
-        if (!costs.pay(this, game, this, activatorId, noMana, null)) {
+        if (!getCosts().pay(this, game, this, activatorId, noMana, null)) {
             logger.debug("activate failed - non mana costs");
             return false;
         }
@@ -512,13 +510,11 @@ public abstract class AbilityImpl implements Ability {
      */
     protected String handleOtherXCosts(Game game, Player controller) {
         StringBuilder announceString = new StringBuilder();
-        for (VariableCost variableCost : this.costs.getVariableCosts()) {
+        for (VariableCost variableCost : this.getCosts().getVariableCosts()) {
             if (!(variableCost instanceof VariableManaCost) && !((Cost) variableCost).isPaid()) {
                 int xValue = variableCost.announceXValue(this, game);
                 Cost fixedCost = variableCost.getFixedCostsFromAnnouncedValue(xValue);
-                if (fixedCost != null) {
-                    costs.add(fixedCost);
-                }
+                addCost(fixedCost);
                 // set the xcosts to paid
                 // no x events - rules from Unbound Flourishing:
                 // - Spells with additional costs that include X won't be affected by Unbound Flourishing. X must be in the spell's mana cost.
@@ -537,7 +533,7 @@ public abstract class AbilityImpl implements Ability {
      * life or the corresponding colored mana cost for each of those symbols.
      */
     private void handlePhyrexianManaCosts(Game game, Player controller) {
-        Iterator<ManaCost> costIterator = manaCostsToPay.iterator();
+        Iterator<ManaCost> costIterator = getManaCostsToPay().iterator();
         while (costIterator.hasNext()) {
             ManaCost cost = costIterator.next();
 
@@ -548,8 +544,8 @@ public abstract class AbilityImpl implements Ability {
             if (payLifeCost.canPay(this, this, controller.getId(), game)
                     && controller.chooseUse(Outcome.LoseLife, "Pay 2 life instead of " + cost.getText().replace("/P", "") + '?', this, game)) {
                 costIterator.remove();
-                costs.add(payLifeCost);
-                manaCostsToPay.incrPhyrexianPaid();
+                addCost(payLifeCost);
+                getManaCostsToPay().incrPhyrexianPaid();
             }
         }
     }
@@ -583,7 +579,7 @@ public abstract class AbilityImpl implements Ability {
 
         // TODO: Handle announcing other variable costs here like: RemoveVariableCountersSourceCost
         VariableManaCost variableManaCost = null;
-        for (ManaCost cost : manaCostsToPay) {
+        for (ManaCost cost : getManaCostsToPay()) {
             if (cost instanceof VariableManaCost) {
                 if (variableManaCost == null) {
                     variableManaCost = (VariableManaCost) cost;
@@ -628,8 +624,8 @@ public abstract class AbilityImpl implements Ability {
                             manaString.append('{').append(manaSymbol).append('}');
                         }
                     }
-                    manaCostsToPay.add(new ManaCostsImpl<>(manaString.toString()));
-                    manaCostsToPay.setX(xValue * xValueMultiplier, amountMana);
+                    addManaCostsToPay(new ManaCostsImpl<>(manaString.toString()));
+                    getManaCostsToPay().setX(xValue * xValueMultiplier, amountMana);
                 }
                 variableManaCost.setPaid();
             }
@@ -692,12 +688,12 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public Costs<Cost> getCosts() {
-        return costs;
+        return costs != null ? costs : emptyCosts;
     }
 
     @Override
     public ManaCosts<ManaCost> getManaCosts() {
-        return manaCosts;
+        return manaCosts != null ? manaCosts : emptyManaCosts;
     }
 
     /**
@@ -709,7 +705,7 @@ public abstract class AbilityImpl implements Ability {
      */
     @Override
     public ManaCosts<ManaCost> getManaCostsToPay() {
-        return manaCostsToPay;
+        return manaCostsToPay != null ? manaCostsToPay : emptyManaCosts;
     }
 
     @Override
@@ -791,14 +787,14 @@ public abstract class AbilityImpl implements Ability {
     public String getRule(boolean all) {
         StringBuilder sbRule = threadLocalBuilder.get();
         if (all || this.abilityType != AbilityType.SPELL) { // TODO: Why the override for non-spells?
-            if (!manaCosts.isEmpty()) {
-                sbRule.append(manaCosts.getText());
+            if (!getManaCosts().isEmpty()) {
+                sbRule.append(getManaCosts().getText());
             }
-            if (!costs.isEmpty()) {
+            if (!getCosts().isEmpty()) {
                 if (sbRule.length() > 0) {
                     sbRule.append(", ");
                 }
-                sbRule.append(costs.getText());
+                sbRule.append(getCosts().getText());
             }
             if (sbRule.length() > 0) {
                 sbRule.append(": ");
@@ -869,19 +865,46 @@ public abstract class AbilityImpl implements Ability {
         } else {
             // as single cost
             if (cost instanceof ManaCost) {
-                this.addManaCost((ManaCost) cost);
+                addManaCost((ManaCost) cost);
             } else {
-                this.costs.add(cost);
+                if (costs == null) {
+                    costs = new CostsImpl<>();
+                }
+                costs.add(cost);
             }
         }
     }
 
     @Override
-    public void addManaCost(ManaCost cost) {
-        if (cost != null) {
-            this.manaCosts.add(cost);
-            this.manaCostsToPay.add(cost);
+    public void addManaCostsToPay(ManaCost manaCost) {
+        if (manaCost == null) {
+            return;
         }
+        if (manaCostsToPay == null) {
+            manaCostsToPay = new ManaCostsImpl<>();
+        }
+        if (manaCost instanceof ManaCosts) {
+            manaCostsToPay.addAll((ManaCosts) manaCost);
+        } else {
+            manaCostsToPay.add(manaCost);
+        }
+    }
+
+    @Override
+    public void addManaCost(ManaCost manaCost) {
+        if (manaCost == null) {
+            return;
+        }
+
+        if (manaCosts == null) {
+            manaCosts = new ManaCostsImpl<>();
+        }
+        if (manaCostsToPay == null) {
+            manaCostsToPay = new ManaCostsImpl<>();
+        }
+
+        manaCosts.add(manaCost);
+        manaCostsToPay.add(manaCost);
     }
 
     @Override

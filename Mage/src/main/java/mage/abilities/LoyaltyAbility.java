@@ -70,7 +70,7 @@ public class LoyaltyAbility extends ActivatedAbilityImpl {
 
         // cost modification support only 1 cost item
         int staticCount = 0;
-        for (Cost cost : costs) {
+        for (Cost cost : getCosts()) {
             if (cost instanceof PayLoyaltyCost) {
                 // static cost
                 PayLoyaltyCost staticCost = (PayLoyaltyCost) cost;

@@ -119,7 +119,7 @@ public class SimulatedPlayer extends ComputerPlayer {
         }
         for (int i = start; i < numAvailable; i++) {
             Ability newAbility = ability.copy();
-            newAbility.getManaCostsToPay().add(new GenericManaCost(i));
+            newAbility.addManaCostsToPay(new GenericManaCost(i));
             allActions.add(newAbility);
         }
     }

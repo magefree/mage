@@ -66,7 +66,7 @@ enum BargainingTableAdjuster implements CostAdjuster {
                 handSize = player.getHand().size();
             }
         }
-        ability.getManaCostsToPay().clear();
-        ability.getManaCostsToPay().add(new GenericManaCost(handSize));
+        ability.clearManaCostsToPay();
+        ability.addManaCostsToPay(new GenericManaCost(handSize));
     }
 }

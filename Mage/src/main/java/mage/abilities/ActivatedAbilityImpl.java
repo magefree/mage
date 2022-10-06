@@ -190,7 +190,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         }
 
         // targets and costs check
-        if (!costs.canPay(this, this, playerId, game)
+        if (!getCosts().canPay(this, this, playerId, game)
                 || !canChooseTarget(game, playerId)) {
             return ActivationStatus.getFalse();
         }
