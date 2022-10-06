@@ -8,9 +8,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-import java.util.Set;
-import java.util.UUID;
-
 /**
  * @author LevelX2
  */
@@ -33,23 +30,9 @@ public class EnchantedPlayerAttackedTriggeredAbility extends TriggeredAbilityImp
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enchantment = game.getPermanentOrLKIBattlefield(getSourceId());
-        Player controller = game.getPlayer(getControllerId());
-        Player attacker = game.getPlayer(game.getCombat().getAttackingPlayerId());
-        if (controller == null || attacker == null || enchantment == null) {
-            return false;
-        }
-
-        Player enchantedPlayer = game.getPlayer(enchantment.getAttachedTo());
-        if (enchantedPlayer == null) {
-            return false;
-        }
-
-        Set<UUID> opponentIds = game.getOpponents(controller.getId());
-        if (!opponentIds.contains(attacker.getId()) || !opponentIds.contains(enchantedPlayer.getId())) {
-            return false;
-        }
-
-        return game.getCombat().getPlayerDefenders(game, false).contains(enchantment.getAttachedTo());
+        return enchantment != null
+                && game.getState().getPlayersInRange(getControllerId(), game).contains(game.getCombat().getAttackingPlayerId())
+                && game.getCombat().getPlayerDefenders(game, false).contains(enchantment.getAttachedTo());
     }
 
     @Override
