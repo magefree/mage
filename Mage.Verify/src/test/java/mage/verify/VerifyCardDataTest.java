@@ -95,6 +95,7 @@ public class VerifyCardDataTest {
 
         // color
         skipListCreate(SKIP_LIST_COLOR);
+        skipListAddName(SKIP_LIST_COLOR, "BRO", "Mishra, Lost to Phyrexia"); // temporary
 
         // cost
         skipListCreate(SKIP_LIST_COST);
