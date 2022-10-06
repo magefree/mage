@@ -213,6 +213,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Tiller Engine", 96, Rarity.RARE, mage.cards.t.TillerEngine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Time Wipe", 173, Rarity.RARE, mage.cards.t.TimeWipe.class));
         cards.add(new SetCardInfo("Tobias, Doomed Conqueror", 45, Rarity.UNCOMMON, mage.cards.t.TobiasDoomedConqueror.class));
+        cards.add(new SetCardInfo("Tor Wauki the Younger", 46, Rarity.UNCOMMON, mage.cards.t.TorWaukiTheYounger.class));
         cards.add(new SetCardInfo("Torsten, Founder of Benalia", 47, Rarity.MYTHIC, mage.cards.t.TorstenFounderOfBenalia.class));
         cards.add(new SetCardInfo("Transguild Courier", 194, Rarity.UNCOMMON, mage.cards.t.TransguildCourier.class));
         cards.add(new SetCardInfo("Traxos, Scourge of Kroog", 195, Rarity.RARE, mage.cards.t.TraxosScourgeOfKroog.class));
