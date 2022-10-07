@@ -75,7 +75,7 @@ class GhyrsonStarnKelermorphTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getAmount() == 1
                 && isControlledBy(game.getControllerId(event.getSourceId()))
-                && event.getSourceId().equals(getSourceId())) {
+                && !event.getSourceId().equals(getSourceId())) {
             this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
             return true;
         }
