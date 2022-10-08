@@ -55,9 +55,9 @@ public abstract class AbilityImpl implements Ability {
     protected AbilityType abilityType;
     protected UUID controllerId;
     protected UUID sourceId;
-    private ManaCosts<ManaCost> manaCosts = null; // Lazily instantiated inside
-    private ManaCosts<ManaCost> manaCostsToPay = null; // Lazily instantiated
-    private Costs<Cost> costs = null; // Lazily instantiated
+    private ManaCosts<ManaCost> manaCosts;
+    private ManaCosts<ManaCost> manaCostsToPay;
+    private Costs<Cost> costs;
     protected Modes modes; // access to it by GetModes only (it can be overridden by some abilities)
     protected Zone zone;
     protected String name;
