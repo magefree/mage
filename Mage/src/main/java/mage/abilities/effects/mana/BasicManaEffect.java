@@ -11,7 +11,7 @@ import mage.game.Game;
 
 public class BasicManaEffect extends ManaEffect {
 
-    protected Mana manaTemplate;
+    private Mana manaTemplate;
     private final DynamicValue netAmount;
 
     public BasicManaEffect(Mana mana) {
@@ -39,7 +39,7 @@ public class BasicManaEffect extends ManaEffect {
 
     public BasicManaEffect(final BasicManaEffect effect) {
         super(effect);
-        this.manaTemplate = effect.manaTemplate.copy();
+        this.manaTemplate = effect.manaTemplate;
         this.netAmount = effect.netAmount;
 
     }
