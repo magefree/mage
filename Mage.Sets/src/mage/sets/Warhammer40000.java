@@ -229,6 +229,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Termagant Swarm", 99, Rarity.RARE, mage.cards.t.TermagantSwarm.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 301, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("Tervigon", 100, Rarity.RARE, mage.cards.t.Tervigon.class));
+        cards.add(new SetCardInfo("The Flesh Is Weak", 122, Rarity.RARE, mage.cards.t.TheFleshIsWeak.class));
         cards.add(new SetCardInfo("The Swarmlord", 4, Rarity.MYTHIC, mage.cards.t.TheSwarmlord.class));
         cards.add(new SetCardInfo("Their Name Is Death", 62, Rarity.RARE, mage.cards.t.TheirNameIsDeath.class));
         cards.add(new SetCardInfo("Their Number Is Legion", 63, Rarity.RARE, mage.cards.t.TheirNumberIsLegion.class));
