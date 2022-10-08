@@ -142,6 +142,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Keeper of Secrets", 78, Rarity.RARE, mage.cards.k.KeeperOfSecrets.class));
         cards.add(new SetCardInfo("Kill! Maim! Burn!", 128, Rarity.RARE, mage.cards.k.KillMaimBurn.class));
         cards.add(new SetCardInfo("Knight Paladin", 160, Rarity.RARE, mage.cards.k.KnightPaladin.class));
+        cards.add(new SetCardInfo("Knight Rampager", 80, Rarity.RARE, mage.cards.k.KnightRampager.class));
         cards.add(new SetCardInfo("Launch the Fleet", 188, Rarity.RARE, mage.cards.l.LaunchTheFleet.class));
         cards.add(new SetCardInfo("Let the Galaxy Burn", 81, Rarity.RARE, mage.cards.l.LetTheGalaxyBurn.class));
         cards.add(new SetCardInfo("Lictor", 94, Rarity.RARE, mage.cards.l.Lictor.class));
