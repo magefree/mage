@@ -50,9 +50,6 @@ public abstract class AbilityImpl implements Ability {
     private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(100);
     private static final List<Ability> emptyAbilities = new ArrayList<>();
 
-    private static final Costs<Cost> emptyCosts = new CostsImpl<>();
-    private static final ManaCosts<ManaCost> emptyManaCosts = new ManaCostsImpl<>();
-
     protected UUID id;
     protected UUID originalId;
     protected AbilityType abilityType;
@@ -90,6 +87,9 @@ public abstract class AbilityImpl implements Ability {
         this.originalId = id;
         this.abilityType = abilityType;
         this.zone = zone;
+        this.manaCosts = new ManaCostsImpl<>();
+        this.manaCostsToPay = new ManaCostsImpl<>();
+        this.costs = new CostsImpl<>();
         this.modes = new Modes();
     }
 
@@ -102,9 +102,9 @@ public abstract class AbilityImpl implements Ability {
         this.zone = ability.zone;
         this.name = ability.name;
         this.usesStack = ability.usesStack;
-        this.manaCosts = ability.manaCosts == null ? null : ability.manaCosts.copy();
-        this.manaCostsToPay = ability.manaCostsToPay == null ? null : ability.manaCostsToPay.copy();
-        this.costs = ability.costs == null ? null : ability.costs.copy();
+        this.manaCosts = ability.manaCosts.copy();
+        this.manaCostsToPay = ability.manaCostsToPay.copy();
+        this.costs = ability.costs.copy();
         for (Watcher watcher : ability.getWatchers()) {
             watchers.add(watcher.copy());
         }
@@ -688,12 +688,12 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public Costs<Cost> getCosts() {
-        return costs != null ? costs : emptyCosts;
+        return costs;
     }
 
     @Override
     public ManaCosts<ManaCost> getManaCosts() {
-        return manaCosts != null ? manaCosts : emptyManaCosts;
+        return manaCosts;
     }
 
     /**
@@ -705,7 +705,7 @@ public abstract class AbilityImpl implements Ability {
      */
     @Override
     public ManaCosts<ManaCost> getManaCostsToPay() {
-        return manaCostsToPay != null ? manaCostsToPay : emptyManaCosts;
+        return manaCostsToPay;
     }
 
     @Override

@@ -102,26 +102,16 @@ public interface Ability extends Controllable, Serializable {
      */
     void setSourceId(UUID sourceID);
 
-    /**
-     * If statements are needed. both methods will return a static object if there is no associated cost.
-     * Without the if statement there will likely be concurrent modification issues.
-     */
     default void clearCosts() {
-        if (!getCosts().isEmpty()) {
-            getCosts().clear();
-        }
+        getCosts().clear();
     }
 
     default void clearManaCosts() {
-        if (!getManaCosts().isEmpty()) {
-            getManaCosts().clear();
-        }
+        getManaCosts().clear();
     }
 
     default void clearManaCostsToPay() {
-        if (!getManaCostsToPay().isEmpty()) {
-            getManaCostsToPay().clear();
-        }
+        getManaCostsToPay().clear();
     }
 
     /**
