@@ -152,6 +152,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Magnus the Red", 131, Rarity.RARE, mage.cards.m.MagnusTheRed.class));
         cards.add(new SetCardInfo("Malanthrope", 132, Rarity.RARE, mage.cards.m.Malanthrope.class));
         cards.add(new SetCardInfo("Mandate of Abaddon", 40, Rarity.RARE, mage.cards.m.MandateOfAbaddon.class));
+        cards.add(new SetCardInfo("Marneus Calgar", 8, Rarity.MYTHIC, mage.cards.m.MarneusCalgar.class));
         cards.add(new SetCardInfo("Martial Coup", 189, Rarity.RARE, mage.cards.m.MartialCoup.class));
         cards.add(new SetCardInfo("Mask of Memory", 243, Rarity.UNCOMMON, mage.cards.m.MaskOfMemory.class));
         cards.add(new SetCardInfo("Mawloc", 133, Rarity.RARE, mage.cards.m.Mawloc.class));
