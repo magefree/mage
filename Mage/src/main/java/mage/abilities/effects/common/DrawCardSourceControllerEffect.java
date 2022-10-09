@@ -17,7 +17,6 @@ import mage.util.CardUtil;
 public class DrawCardSourceControllerEffect extends OneShotEffect {
 
     protected DynamicValue amount;
-    protected String whoDrawCard = "";
 
     public DrawCardSourceControllerEffect(int amount) {
         this(amount, "");
@@ -34,13 +33,12 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
     public DrawCardSourceControllerEffect(DynamicValue amount, String whoDrawCard) {
         super(Outcome.DrawCard);
         this.amount = amount.copy();
-        this.whoDrawCard = whoDrawCard;
+        createStaticText(whoDrawCard);
     }
 
     public DrawCardSourceControllerEffect(final DrawCardSourceControllerEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
-        this.whoDrawCard = effect.whoDrawCard;
     }
 
     @Override
@@ -59,28 +57,17 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
         return false;
     }
 
-    @Override
-    public String getText(Mode mode) {
-        if (staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
-        StringBuilder sb = new StringBuilder();
-        boolean oneCard = (amount instanceof StaticValue
-                && amount.calculate(null, null, this) == 1)
-                || amount instanceof PermanentsOnBattlefieldCount
-                || amount.toString().equals("1")
-                || amount.toString().equals("a");
-        sb.append(whoDrawCard.isEmpty() ? "" : whoDrawCard
-                + " ").append("draw ").append(oneCard ? "a"
-                : CardUtil.numberToText(amount.toString())).append(" card");
-        if (!oneCard) {
-            sb.append('s');
-        }
+    private void createStaticText(String whoDrawCard) {
+        StringBuilder sb = new StringBuilder(whoDrawCard);
+        sb.append(whoDrawCard.isEmpty() ? "draw " : " draw ");
+        String value = amount.toString();
+        sb.append(CardUtil.numberToText(value, "a"));
+        sb.append(value.equals("1") ? " card" : " cards");
         String message = amount.getMessage();
         if (!message.isEmpty()) {
-            sb.append(" for each ");
+            sb.append(value.equals("X") ? ", where X is " : " for each ");
+            sb.append(message);
         }
-        sb.append(message);
-        return sb.toString();
+        staticText = sb.toString();
     }
 }

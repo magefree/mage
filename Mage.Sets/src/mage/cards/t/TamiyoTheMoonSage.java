@@ -82,7 +82,7 @@ class TappedCreaturesControlledByTargetCount implements DynamicValue {
 
     @Override
     public String toString() {
-        return "a";
+        return "1";
     }
 
     @Override

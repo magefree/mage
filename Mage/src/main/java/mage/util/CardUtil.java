@@ -546,8 +546,7 @@ public final class CardUtil {
     }
 
     public static boolean checkNumeric(String s) {
-        return s.chars().allMatch(Character::isDigit);
-
+        return !s.isEmpty() && s.chars().allMatch(Character::isDigit);
     }
 
     /**
