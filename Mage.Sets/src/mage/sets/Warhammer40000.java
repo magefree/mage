@@ -174,6 +174,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Nurgle's Rot", 45, Rarity.UNCOMMON, mage.cards.n.NurglesRot.class));
         cards.add(new SetCardInfo("Old One Eye", 96, Rarity.RARE, mage.cards.o.OldOneEye.class));
         cards.add(new SetCardInfo("Opal Palace", 286, Rarity.COMMON, mage.cards.o.OpalPalace.class));
+        cards.add(new SetCardInfo("Out of the Tombs", 46, Rarity.RARE, mage.cards.o.OutOfTheTombs.class));
         cards.add(new SetCardInfo("Overgrowth", 219, Rarity.COMMON, mage.cards.o.Overgrowth.class));
         cards.add(new SetCardInfo("Past in Flames", 206, Rarity.MYTHIC, mage.cards.p.PastInFlames.class));
         cards.add(new SetCardInfo("Path of Ancestry", 287, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
