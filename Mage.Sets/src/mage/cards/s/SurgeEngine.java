@@ -102,7 +102,7 @@ class SurgeEngineAbility extends ActivatedAbilityImpl {
 
     SurgeEngineAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(3), new ManaCostsImpl<>("{4}{U}{U}"));
-        this.condition = staticCondition;
+        setCondition(staticCondition);
     }
 
     private SurgeEngineAbility(final SurgeEngineAbility ability) {

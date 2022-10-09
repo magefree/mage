@@ -15,22 +15,22 @@ public class LoyaltyAbility extends ActivatedAbilityImpl {
 
     public LoyaltyAbility(Effect effect, int loyalty) {
         super(Zone.BATTLEFIELD, effect, new PayLoyaltyCost(loyalty));
-        this.timing = TimingRule.SORCERY;
+        setTiming(TimingRule.SORCERY);
     }
 
     public LoyaltyAbility(Effects effects, int loyalty) {
         super(Zone.BATTLEFIELD, effects, new PayLoyaltyCost(loyalty));
-        this.timing = TimingRule.SORCERY;
+        setTiming(TimingRule.SORCERY);
     }
 
     public LoyaltyAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, new PayVariableLoyaltyCost());
-        this.timing = TimingRule.SORCERY;
+        setTiming(TimingRule.SORCERY);
     }
 
     public LoyaltyAbility(Effects effects) {
         super(Zone.BATTLEFIELD, effects, new PayVariableLoyaltyCost());
-        this.timing = TimingRule.SORCERY;
+        setTiming(TimingRule.SORCERY);
     }
 
     public LoyaltyAbility(LoyaltyAbility ability) {

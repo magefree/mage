@@ -75,7 +75,7 @@ class GroundlingPouncerAbility extends LimitedTimesPerTurnActivatedAbility {
 
     public GroundlingPouncerAbility(Zone zone, Effect effect, Cost cost, Condition condition, String rule) {
         super(zone, effect, cost);
-        this.condition = condition;
+        setCondition(condition);
         this.ruleText = rule;
     }
 
@@ -86,7 +86,7 @@ class GroundlingPouncerAbility extends LimitedTimesPerTurnActivatedAbility {
 
     @Override
     public Effects getEffects(Game game, EffectType effectType) {
-        if (!condition.apply(game, this)) {
+        if (!getCondition().apply(game, this)) {
             return emptyEffects;
         }
         return super.getEffects(game, effectType);

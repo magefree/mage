@@ -30,7 +30,7 @@ public class EmbalmAbility extends ActivatedAbilityImpl {
         super(Zone.GRAVEYARD, new EmbalmEffect(), cost);
         addCost(new ExileSourceFromGraveCost());
         this.rule = setRule(cost, card);
-        this.timing = TimingRule.SORCERY;
+        this.setTiming(TimingRule.SORCERY);
     }
 
     public EmbalmAbility(final EmbalmAbility ability) {

@@ -16,7 +16,7 @@ public class ActivateAsSorceryManaAbility extends SimpleManaAbility {
 
     public ActivateAsSorceryManaAbility(Zone zone, Mana mana, Cost cost) {
         super(zone, mana, cost);
-        timing = TimingRule.SORCERY;
+        this.setTiming(TimingRule.SORCERY);
     }
 
     public ActivateAsSorceryManaAbility(final ActivateAsSorceryManaAbility ability) {

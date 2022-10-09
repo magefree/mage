@@ -75,7 +75,7 @@ public final class UndercityNecrolisk extends CardImpl {
 class SilencedActivateAsSorceryActivatedAbility extends ActivatedAbilityImpl {
     SilencedActivateAsSorceryActivatedAbility(Zone zone, Effect effect, Cost cost) {
         super(zone, effect, cost);
-        timing = TimingRule.SORCERY;
+        this.setTiming(TimingRule.SORCERY);
     }
 
     private SilencedActivateAsSorceryActivatedAbility(final SilencedActivateAsSorceryActivatedAbility ability) {

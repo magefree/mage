@@ -19,7 +19,7 @@ public class OutlastAbility extends ActivatedAbilityImpl {
     public OutlastAbility(Cost cost) {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), cost);
         this.addCost(new TapSourceCost());
-        this.timing = TimingRule.SORCERY;
+        this.setTiming(TimingRule.SORCERY);
     }
 
     public OutlastAbility(final OutlastAbility ability) {

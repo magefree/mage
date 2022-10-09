@@ -43,7 +43,7 @@ public class FlashbackAbility extends SpellAbility {
         this.setAdditionalCostsRuleVisible(false);
         this.name = "Flashback " + cost.getText();
         this.addCost(cost);
-        this.timing = card.isSorcery() ? TimingRule.SORCERY : TimingRule.INSTANT;
+        this.setTiming(card.isSorcery() ? TimingRule.SORCERY : TimingRule.INSTANT);
     }
 
     public FlashbackAbility(final FlashbackAbility ability) {

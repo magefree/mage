@@ -18,7 +18,7 @@ public class ChannelAbility extends ActivatedAbilityImpl {
     public ChannelAbility(String manaString, Effect effect, TimingRule timing) {
         super(Zone.HAND, effect, new ManaCostsImpl<>(manaString));
         this.addCost(new DiscardSourceCost());
-        this.timing = timing;
+        this.setTiming(timing);
         this.setAbilityWord(AbilityWord.CHANNEL);
     }
 
@@ -33,7 +33,7 @@ public class ChannelAbility extends ActivatedAbilityImpl {
 
     @Override
     public String getRule() {
-        if (this.timing == TimingRule.SORCERY) {
+        if (this.getTiming() == TimingRule.SORCERY) {
             return super.getRule() + " Activate only as a sorcery.";
         }
         return super.getRule();

@@ -34,7 +34,7 @@ public class UnearthAbility extends ActivatedAbilityImpl {
 
     public UnearthAbility(ManaCosts costs) {
         super(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(false, true, true), costs);
-        this.timing = TimingRule.SORCERY;
+        this.setTiming(TimingRule.SORCERY);
         this.addEffect(new CreateDelayedTriggeredAbilityEffect(new UnearthDelayedTriggeredAbility()));
         this.addEffect(new UnearthLeavesBattlefieldEffect());
     }

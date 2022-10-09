@@ -30,8 +30,8 @@ public class ForecastAbility extends ActivatedAbilityImpl {
 
     public ForecastAbility(Effect effect, Cost cost) {
         super(Zone.HAND, effect, cost);
-        this.maxActivationsPerTurn = 1;
-        this.condition = upkeepCondition;
+        setMaxActivationsPerTurn(1);
+        setCondition(upkeepCondition);
         this.addCost(new RevealSourceFromYourHandCost());
     }
 

@@ -26,19 +26,19 @@ public class ConditionalGainActivatedAbility extends ActivatedAbilityImpl {
 
     public ConditionalGainActivatedAbility(Zone zone, Effect effect, ManaCosts cost, Condition condition, String rule) {
         super(zone, effect, cost);
-        this.condition = condition;
+        setCondition(condition);
         this.staticText = rule;
     }
 
     public ConditionalGainActivatedAbility(Zone zone, Effect effect, Costs costs, Condition condition, String rule) {
         super(zone, effect, costs);
-        this.condition = condition;
+        setCondition(condition);
         this.staticText = rule;
     }
 
     public ConditionalGainActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition, String rule) {
         super(zone, effect, cost);
-        this.condition = condition;
+        setCondition(condition);
         this.staticText = rule;
     }
 
@@ -49,7 +49,7 @@ public class ConditionalGainActivatedAbility extends ActivatedAbilityImpl {
 
     @Override
     public Effects getEffects(Game game, EffectType effectType) {
-        if (!condition.apply(game, this)) {
+        if (!getCondition().apply(game, this)) {
             return emptyEffects;
         }
         return super.getEffects(game, effectType);
@@ -57,7 +57,7 @@ public class ConditionalGainActivatedAbility extends ActivatedAbilityImpl {
 
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
-        if (!condition.apply(game, this)) {
+        if (!getCondition().apply(game, this)) {
             return ActivationStatus.getFalse();
         }
         return super.canActivate(playerId, game);

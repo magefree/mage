@@ -17,7 +17,7 @@ public class LevelUpAbility extends ActivatedAbilityImpl {
 
     public LevelUpAbility(ManaCosts costs) {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.LEVEL.createInstance()), costs);
-        this.timing = TimingRule.SORCERY;
+        this.setTiming(TimingRule.SORCERY);
     }
 
     public LevelUpAbility(final LevelUpAbility ability) {

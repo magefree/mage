@@ -17,7 +17,7 @@ public class CleaveAbility extends SpellAbility {
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
         this.addEffect(effect);
         this.setRuleAtTheTop(true);
-        this.timing = (card.isSorcery(null) ? TimingRule.SORCERY : TimingRule.INSTANT);
+        setTiming(card.isSorcery(null) ? TimingRule.SORCERY : TimingRule.INSTANT);
     }
 
     public CleaveAbility(final CleaveAbility ability) {

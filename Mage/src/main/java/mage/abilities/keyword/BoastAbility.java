@@ -27,9 +27,9 @@ public class BoastAbility extends ActivatedAbilityImpl {
 
     public BoastAbility(Effect effect, Cost cost) {
         super(Zone.BATTLEFIELD, effect, cost);
-        this.maxActivationsPerTurn = 1;
+        setMaxActivationsPerTurn(1);
         this.addWatcher(new AttackedThisTurnWatcher());
-        this.condition = BoastCondition.instance;
+        setCondition(BoastCondition.instance);
         this.addHint(BoastHint.instance);
     }
 

@@ -15,7 +15,7 @@ import mage.constants.TargetController;
 public class ActivateOnlyByOpponentActivatedAbility extends ActivatedAbilityImpl {
     public ActivateOnlyByOpponentActivatedAbility(Zone zone, Effect effect, Cost cost) {
         super(zone, effect, cost);
-        mayActivate = TargetController.OPPONENT;
+        setMayActivate(TargetController.OPPONENT);
     }
 
     public ActivateOnlyByOpponentActivatedAbility(final ActivateOnlyByOpponentActivatedAbility ability) {

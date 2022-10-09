@@ -29,7 +29,7 @@ public class FortifyAbility extends ActivatedAbilityImpl {
     public FortifyAbility(Outcome outcome, Cost cost, Target target) {
         super(Zone.BATTLEFIELD, new AttachEffect(outcome, "Fortify"), cost);
         this.addTarget(target);
-        this.timing = TimingRule.SORCERY;
+        this.setTiming(TimingRule.SORCERY);
     }
 
     public FortifyAbility(final FortifyAbility ability) {

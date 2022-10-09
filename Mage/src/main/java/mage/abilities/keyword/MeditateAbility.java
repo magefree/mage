@@ -23,7 +23,7 @@ public class MeditateAbility extends ActivatedAbilityImpl {
 
     public MeditateAbility(Cost cost) {
         super(Zone.BATTLEFIELD, new ReturnToHandEffect(), cost);
-        this.timing = TimingRule.SORCERY;
+        this.setTiming(TimingRule.SORCERY);
     }
 
     public MeditateAbility(final MeditateAbility ability) {

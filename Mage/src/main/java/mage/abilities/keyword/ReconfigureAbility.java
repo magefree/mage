@@ -22,7 +22,7 @@ public class ReconfigureAbility extends ActivatedAbilityImpl {
     public ReconfigureAbility(String manaString) {
         super(Zone.BATTLEFIELD, new AttachEffect(Outcome.BoostCreature), new ManaCostsImpl<>(manaString));
         this.manaString = manaString;
-        this.timing = TimingRule.SORCERY;
+        this.setTiming(TimingRule.SORCERY);
         this.addTarget(new TargetControlledCreaturePermanent());
         this.addSubAbility(new ReconfigureUnattachAbility(manaString));
         Ability ability = new SimpleStaticAbility(new ReconfigureTypeEffect());
@@ -53,8 +53,8 @@ class ReconfigureUnattachAbility extends ActivatedAbilityImpl {
 
     protected ReconfigureUnattachAbility(String manaString) {
         super(Zone.BATTLEFIELD, new ReconfigureUnattachEffect(), new ManaCostsImpl<>(manaString));
-        this.condition = ReconfigureUnattachAbility::checkForCreature;
-        this.timing = TimingRule.SORCERY;
+        setCondition(ReconfigureUnattachAbility::checkForCreature);
+        this.setTiming(TimingRule.SORCERY);
         this.setRuleVisible(false);
     }
 

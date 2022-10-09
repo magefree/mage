@@ -84,7 +84,7 @@ public class BestowAbility extends SpellAbility {
         super(new ManaCostsImpl<>(manaString), card.getName() + " using bestow");
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
         this.spellAbilityCastMode = SpellAbilityCastMode.BESTOW;
-        this.timing = TimingRule.SORCERY;
+        setTiming(TimingRule.SORCERY);
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.addTarget(auraTarget);
         this.addEffect(new AttachEffect(Outcome.BoostCreature));

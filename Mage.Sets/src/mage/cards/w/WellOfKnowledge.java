@@ -41,17 +41,17 @@ class WellOfKnowledgeConditionalActivatedAbility extends ActivatedAbilityImpl {
 
     public WellOfKnowledgeConditionalActivatedAbility() {
         super(Zone.BATTLEFIELD, new WellOfKnowledgeEffect(), new GenericManaCost(2));
-        condition = new IsStepCondition(PhaseStep.DRAW, false);
+        setCondition(new IsStepCondition(PhaseStep.DRAW, false));
     }
 
     public WellOfKnowledgeConditionalActivatedAbility(final WellOfKnowledgeConditionalActivatedAbility ability) {
         super(ability);
-        this.condition = ability.condition;
+        setCondition(ability.getCondition());
     }
 
     @Override
     public Effects getEffects(Game game, EffectType effectType) {
-        if (!condition.apply(game, this)) {
+        if (!getCondition().apply(game, this)) {
             return new Effects();
         }
         return super.getEffects(game, effectType);
@@ -59,10 +59,10 @@ class WellOfKnowledgeConditionalActivatedAbility extends ActivatedAbilityImpl {
 
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
-        if (condition.apply(game, this)
+        if (getCondition().apply(game, this)
                 && costs.canPay(this, this, playerId, game)
                 && game.isActivePlayer(playerId)) {
-            this.activatorId = playerId;
+            setActivatorId(playerId);
             return ActivationStatus.getTrue(this, game);
         }
         return ActivationStatus.getFalse();

@@ -43,7 +43,7 @@ public class BlitzAbility extends SpellAbility {
         ability.setRuleVisible(false);
         addSubAbility(ability);
         this.ruleAdditionalCostsVisible = false;
-        this.timing = TimingRule.SORCERY;
+        setTiming(TimingRule.SORCERY);
     }
 
     private BlitzAbility(final BlitzAbility ability) {

@@ -16,7 +16,7 @@ public class ActivateIfConditionActivatedAbility extends ActivatedAbilityImpl {
 
     public ActivateIfConditionActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition) {
         super(zone, effect, cost);
-        this.condition = condition;
+        setCondition(condition);
     }
 
     public ActivateIfConditionActivatedAbility(ActivateIfConditionActivatedAbility ability) {
@@ -31,17 +31,17 @@ public class ActivateIfConditionActivatedAbility extends ActivatedAbilityImpl {
     @Override
     public String getRule() {
         StringBuilder sb = new StringBuilder(super.getRule());
-        if (condition instanceof InvertCondition) {
+        if (getCondition() instanceof InvertCondition) {
             sb.append(" You can't activate this ability ");
         } else {
             sb.append(" Activate only ");
         }
-        if (!condition.toString().startsWith("during")
-                && !condition.toString().startsWith("before")
-                && !condition.toString().startsWith("if")) {
+        if (!getCondition().toString().startsWith("during")
+                && !getCondition().toString().startsWith("before")
+                && !getCondition().toString().startsWith("if")) {
             sb.append("if ");
         }
-        sb.append(condition.toString()).append('.');
+        sb.append(getCondition().toString()).append('.');
 
         return sb.toString();
     }

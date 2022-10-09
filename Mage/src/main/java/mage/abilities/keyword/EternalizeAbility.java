@@ -34,7 +34,7 @@ public class EternalizeAbility extends ActivatedAbilityImpl {
         super(Zone.GRAVEYARD, new EternalizeEffect(), cost);
         addCost(new ExileSourceFromGraveCost());
         this.rule = rule;
-        this.timing = TimingRule.SORCERY;
+        this.setTiming(TimingRule.SORCERY);
     }
 
     public EternalizeAbility(final EternalizeAbility ability) {

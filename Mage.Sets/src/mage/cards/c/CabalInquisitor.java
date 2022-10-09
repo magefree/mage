@@ -61,8 +61,8 @@ class ActivateAsSorceryConditionalActivatedAbility extends ActivatedAbilityImpl 
 
     public ActivateAsSorceryConditionalActivatedAbility(Zone zone, Effect effect, ManaCosts cost, Condition condition) {
         super(zone, effect, cost);
-        this.condition = condition;
-        timing = TimingRule.SORCERY;
+        setCondition(condition);
+        this.setTiming(TimingRule.SORCERY);
     }
 
     public ActivateAsSorceryConditionalActivatedAbility(final ActivateAsSorceryConditionalActivatedAbility ability) {
@@ -71,7 +71,7 @@ class ActivateAsSorceryConditionalActivatedAbility extends ActivatedAbilityImpl 
 
     @Override
     public Effects getEffects(Game game, EffectType effectType) {
-        if (!condition.apply(game, this)) {
+        if (!getCondition().apply(game, this)) {
             return emptyEffects;
         }
         return super.getEffects(game, effectType);

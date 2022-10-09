@@ -15,7 +15,7 @@ public class ActivateAsSorceryActivatedAbility extends ActivatedAbilityImpl {
 
     public ActivateAsSorceryActivatedAbility(Zone zone, Effect effect, Cost cost) {
         super(zone, effect, cost);
-        timing = TimingRule.SORCERY;
+        setTiming(TimingRule.SORCERY);
     }
 
     public ActivateAsSorceryActivatedAbility(final ActivateAsSorceryActivatedAbility ability) {
@@ -29,7 +29,7 @@ public class ActivateAsSorceryActivatedAbility extends ActivatedAbilityImpl {
 
     @Override
     public String getRule() {
-        if (mayActivate == TargetController.OPPONENT) {
+        if (getMayActivate() == TargetController.OPPONENT) {
             return super.getRule() + " Only your opponents may activate this ability and only as a sorcery.";
         }
         return super.getRule() + " Activate only as a sorcery.";

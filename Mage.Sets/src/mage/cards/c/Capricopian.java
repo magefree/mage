@@ -61,7 +61,7 @@ class CapricopianActivatedAbility extends ActivatedAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new GenericManaCost(2));
         this.addEffect(new CapricopianEffect());
         this.setMayActivate(TargetController.ANY);
-        this.condition = new IsStepCondition(PhaseStep.DECLARE_ATTACKERS);
+        setCondition(new IsStepCondition(PhaseStep.DECLARE_ATTACKERS));
     }
 
     private CapricopianActivatedAbility(final CapricopianActivatedAbility ability) {

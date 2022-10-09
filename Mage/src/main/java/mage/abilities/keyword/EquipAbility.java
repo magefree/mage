@@ -41,7 +41,7 @@ public class EquipAbility extends ActivatedAbilityImpl {
     public EquipAbility(Outcome outcome, Cost cost, Target target, boolean showAbilityHint) {
         super(Zone.BATTLEFIELD, new AttachEffect(outcome, "Equip"), cost);
         this.addTarget(target);
-        this.timing = TimingRule.SORCERY;
+        this.setTiming(TimingRule.SORCERY);
         this.showAbilityHint = showAbilityHint;
     }
 

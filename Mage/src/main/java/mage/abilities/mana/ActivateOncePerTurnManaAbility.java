@@ -17,13 +17,13 @@ public class ActivateOncePerTurnManaAbility extends ActivatedManaAbilityImpl {
     public ActivateOncePerTurnManaAbility(Zone zone, BasicManaEffect effect, Cost cost) {
         super(zone, effect, cost);
         this.netMana.add(effect.getManaTemplate());
-        this.maxActivationsPerTurn = 1;
+        setMaxActivationsPerTurn(1);
     }
 
     public ActivateOncePerTurnManaAbility(Zone zone, AddManaOfAnyColorEffect effect, Cost cost) {
         super(zone, effect, cost);
         this.netMana.add(new Mana(0, 0, 0, 0, 0, 0, effect.getAmount(), 0));
-        this.maxActivationsPerTurn = 1;
+        setMaxActivationsPerTurn(1);
     }
 
     public ActivateOncePerTurnManaAbility(ActivateOncePerTurnManaAbility ability) {

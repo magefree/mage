@@ -11,7 +11,7 @@ public class MutateAbility extends SpellAbility {
     public MutateAbility(Card card, String manaString) {
         super(new ManaCostsImpl<>(manaString), card.getName() + " using mutate");
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
-        this.timing = TimingRule.SORCERY;
+        this.setTiming(TimingRule.SORCERY);
         // TODO: Implement this
     }
 

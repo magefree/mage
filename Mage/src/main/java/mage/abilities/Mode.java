@@ -13,10 +13,10 @@ import java.util.UUID;
  */
 public class Mode implements Serializable {
 
-    protected UUID id;
-    protected final Targets targets;
-    protected final Effects effects;
-    protected String flavorWord;
+    private UUID id;
+    private final Targets targets;
+    private final Effects effects;
+    private String flavorWord;
 
     public Mode(Effect effect) {
         this.id = UUID.randomUUID();

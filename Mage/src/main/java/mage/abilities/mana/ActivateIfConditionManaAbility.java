@@ -13,13 +13,13 @@ public class ActivateIfConditionManaAbility extends ActivatedManaAbilityImpl {
     public ActivateIfConditionManaAbility(Zone zone, BasicManaEffect effect, Cost cost, Condition condition) {
         super(zone, effect, cost);
         this.netMana.add(effect.getManaTemplate());
-        this.condition = condition;
+        setCondition(condition);
     }
 
     public ActivateIfConditionManaAbility(Zone zone, AddConditionalColorlessManaEffect effect, Cost cost, Condition condition) {
         super(zone, effect, cost);
         this.netMana.add(effect.getMana());
-        this.condition = condition;
+        setCondition(condition);
     }
 
     public ActivateIfConditionManaAbility(ActivateIfConditionManaAbility ability) {
@@ -33,7 +33,7 @@ public class ActivateIfConditionManaAbility extends ActivatedManaAbilityImpl {
 
     @Override
     public String getRule() {
-        return super.getRule() + " Activate only if " + condition.toString() + '.';
+        return super.getRule() + " Activate only if " + getCondition().toString() + '.';
     }
 
     @Override

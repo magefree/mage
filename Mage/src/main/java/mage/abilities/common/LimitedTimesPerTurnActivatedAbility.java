@@ -25,14 +25,14 @@ public class LimitedTimesPerTurnActivatedAbility extends ActivatedAbilityImpl {
     // TODO: add card hint about times activated, see https://github.com/magefree/mage/issues/5497
     public LimitedTimesPerTurnActivatedAbility(Zone zone, Effect effect, Cost cost, int maxActivationsPerTurn, Condition condition) {
         super(zone, effect, cost);
-        this.maxActivationsPerTurn = maxActivationsPerTurn;
-        this.condition = condition;
+        setMaxActivationsPerTurn(maxActivationsPerTurn);
+        setCondition(condition);
     }
 
     public LimitedTimesPerTurnActivatedAbility(final LimitedTimesPerTurnActivatedAbility ability) {
         super(ability);
-        this.maxActivationsPerTurn = ability.maxActivationsPerTurn;
-        this.condition = ability.condition;
+        setMaxActivationsPerTurn(ability.maxActivationsPerTurn);
+        setCondition(ability.getCondition());
     }
 
     @Override
@@ -43,8 +43,8 @@ public class LimitedTimesPerTurnActivatedAbility extends ActivatedAbilityImpl {
     @Override
     public String getRule() {
         StringBuilder sb = new StringBuilder(super.getRule()).append(" Activate ");
-        if (condition != null) {
-            String message = condition.toString();
+        if (getCondition() != null) {
+            String message = getCondition().toString();
             sb.append("only ").append(message.startsWith("if ") || message.startsWith("during") ? message : "if " + message).append(" and ");
         }
         if (getTiming() == TimingRule.SORCERY) {

@@ -27,20 +27,41 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 
     protected static class ActivationInfo {
 
-        public int turnNum;
-        public int activationCounter;
+        private int turnNum;
+
+        private int activationCounter;
 
         public ActivationInfo(int turnNum, int activationCounter) {
+            setTurnNum(turnNum);
+            setActivationCounter(activationCounter);
+        }
+
+        public void setTurnNum(int turnNum) {
             this.turnNum = turnNum;
+        }
+
+        public int getTurnNum() {
+            return turnNum;
+        }
+
+        public int getActivationCounter() {
+            return activationCounter;
+        }
+
+        public void setActivationCounter(int activationCounter) {
             this.activationCounter = activationCounter;
+        }
+
+        public void incrementActivationCounter() {
+            setActivationCounter(getActivationCounter()+1);
         }
     }
 
     protected int maxActivationsPerTurn = Integer.MAX_VALUE;
-    protected Condition condition;
-    protected TimingRule timing = TimingRule.INSTANT;
-    protected TargetController mayActivate = TargetController.YOU;
-    protected UUID activatorId;
+    private Condition condition;
+    private TimingRule timing = TimingRule.INSTANT;
+    private TargetController mayActivate = TargetController.YOU;
+    private UUID activatorId;
 
     protected ActivatedAbilityImpl(AbilityType abilityType, Zone zone) {
         super(abilityType, zone);
@@ -48,11 +69,11 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 
     public ActivatedAbilityImpl(final ActivatedAbilityImpl ability) {
         super(ability);
-        timing = ability.timing;
-        mayActivate = ability.mayActivate;
-        activatorId = ability.activatorId;
-        maxActivationsPerTurn = ability.maxActivationsPerTurn;
-        condition = ability.condition;
+        setTiming(ability.getTiming());
+        setMayActivate(ability.getMayActivate());
+        setActivatorId(ability.getActivatorId());
+        setMaxActivationsPerTurn(ability.maxActivationsPerTurn);
+        setCondition(ability.getCondition());
     }
 
     public ActivatedAbilityImpl(Zone zone) {
@@ -165,8 +186,8 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     public ActivationStatus canActivate(UUID playerId, Game game) {
         //20091005 - 602.2
         if (!(hasMoreActivationsThisTurn(game)
-                && (condition == null
-                || condition.apply(game, this)))) {
+                && (getCondition() == null
+                || getCondition().apply(game, this)))) {
             return ActivationStatus.getFalse();
         }
 
@@ -184,7 +205,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
                         controllerId,
                         game);
         asInstant = approvingObject != null;
-        asInstant |= (timing == TimingRule.INSTANT);
+        asInstant |= (getTiming() == TimingRule.INSTANT);
         if (!asInstant && !game.canPlaySorcery(playerId)) {
             return ActivationStatus.getFalse();
         }
@@ -200,7 +221,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         //  (it can be called from any place by any player or card).
         //  game.inCheckPlayableState() can't be a help here cause some cards checking activating status,
         //  activatorId must be removed
-        this.activatorId = playerId;
+        setActivatorId(playerId);
         return new ActivationStatus(true, approvingObject);
     }
 
@@ -223,6 +244,9 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         }
         return false;
     }
+    public TargetController getMayActivate() {
+        return mayActivate;
+    }
 
     @Override
     public void setMayActivate(TargetController mayActivate) {
@@ -231,6 +255,18 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 
     public UUID getActivatorId() {
         return this.activatorId;
+    }
+
+    public void setActivatorId(UUID activatorId) {
+        this.activatorId = activatorId;
+    }
+
+    public Condition getCondition() {
+        return condition;
+    }
+
+    public void setCondition(Condition condition) {
+        this.condition = condition;
     }
 
     public TimingRule getTiming() {
@@ -248,8 +284,8 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         }
         ActivationInfo activationInfo = getActivationInfo(game);
         return activationInfo == null
-                || activationInfo.turnNum != game.getTurnNum()
-                || activationInfo.activationCounter < getMaxActivationsPerTurn(game);
+                || activationInfo.getTurnNum() != game.getTurnNum()
+                || activationInfo.getActivationCounter() < getMaxActivationsPerTurn(game);
     }
 
     @Override
@@ -260,11 +296,11 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         ActivationInfo activationInfo = getActivationInfo(game);
         if (activationInfo == null) {
             activationInfo = new ActivationInfo(game.getTurnNum(), 1);
-        } else if (activationInfo.turnNum != game.getTurnNum()) {
-            activationInfo.turnNum = game.getTurnNum();
-            activationInfo.activationCounter = 1;
+        } else if (activationInfo.getTurnNum() != game.getTurnNum()) {
+            activationInfo.setTurnNum(game.getTurnNum());
+            activationInfo.setActivationCounter(1);
         } else {
-            activationInfo.activationCounter++;
+            activationInfo.incrementActivationCounter();
         }
         setActivationInfo(activationInfo, game);
         return true;
@@ -293,8 +329,8 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 
     protected void setActivationInfo(ActivationInfo activationInfo, Game game) {
         game.getState().setValue(CardUtil
-                .getCardZoneString("activationsTurn" + originalId, sourceId, game), activationInfo.turnNum);
+                .getCardZoneString("activationsTurn" + originalId, sourceId, game), activationInfo.getTurnNum());
         game.getState().setValue(CardUtil
-                .getCardZoneString("activationsCount" + originalId, sourceId, game), activationInfo.activationCounter);
+                .getCardZoneString("activationsCount" + originalId, sourceId, game), activationInfo.getActivationCounter());
     }
 }

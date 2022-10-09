@@ -36,7 +36,7 @@ public class EncoreAbility extends ActivatedAbilityImpl {
     public EncoreAbility(Cost cost) {
         super(Zone.GRAVEYARD, new EncoreEffect(), cost);
         this.addCost(new ExileSourceFromGraveCost());
-        this.timing = TimingRule.SORCERY;
+        this.setTiming(TimingRule.SORCERY);
         this.rule = setRule(cost);
     }
 

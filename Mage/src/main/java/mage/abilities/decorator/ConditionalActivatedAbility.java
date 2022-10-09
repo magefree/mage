@@ -27,24 +27,24 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
 
     public ConditionalActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition) {
         super(zone, effect, cost);
-        this.condition = condition;
+        setCondition(condition);
     }
 
     public ConditionalActivatedAbility(Zone zone, Effect effect, ManaCosts cost, Condition condition, String rule) {
         super(zone, effect, cost);
-        this.condition = condition;
+        setCondition(condition);
         this.ruleText = rule;
     }
 
     public ConditionalActivatedAbility(Zone zone, Effect effect, Costs<Cost> costs, Condition condition, String rule) {
         super(zone, effect, costs);
-        this.condition = condition;
+        setCondition(condition);
         this.ruleText = rule;
     }
 
     public ConditionalActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition, String rule) {
         super(zone, effect, cost);
-        this.condition = condition;
+        setCondition(condition);
         this.ruleText = rule;
     }
 
@@ -55,7 +55,7 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
 
     @Override
     public Effects getEffects(Game game, EffectType effectType) {
-        if (!condition.apply(game, this)) {
+        if (!getCondition().apply(game, this)) {
             return emptyEffects;
         }
         return super.getEffects(game, effectType);
@@ -71,13 +71,13 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
         if (ruleText != null && !ruleText.isEmpty()) {
             return ruleText;
         }
-        String conditionText = condition.toString();
+        String conditionText = getCondition().toString();
         String additionalText = "if ";
         if (conditionText.startsWith("during")
                 || conditionText.startsWith("before")
                 || conditionText.startsWith("if")) {
             additionalText = "";
         }
-        return super.getRule() + " Activate only " + additionalText + condition.toString() + ".";
+        return super.getRule() + " Activate only " + additionalText + getCondition().toString() + ".";
     }
 }
