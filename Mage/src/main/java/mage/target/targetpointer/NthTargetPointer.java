@@ -19,7 +19,7 @@ public abstract class NthTargetPointer extends TargetPointerImpl {
     private static final List<UUID> emptyTargets = Collections.unmodifiableList(new ArrayList<>(0));
 
     private Map<UUID, Integer> zoneChangeCounter;
-    private int targetNumber;
+    private final int targetNumber;
 
     public NthTargetPointer(int targetNumber) {
         super();
@@ -66,6 +66,7 @@ public abstract class NthTargetPointer extends TargetPointerImpl {
             if (card != null
                     && getZoneChangeCounter().containsKey(targetId)
             && card.getZoneChangeCounter(game) != getZoneChangeCounter().get(targetId)) {
+                // But no longer if new permanent is already on the battlefield
                 Permanent permanent = game.getPermanentOrLKIBattlefield(targetId);
                 if (permanent == null || permanent.getZoneChangeCounter(game) != getZoneChangeCounter().get(targetId)) {
                     continue;
@@ -88,7 +89,13 @@ public abstract class NthTargetPointer extends TargetPointerImpl {
             Card card = game.getCard(targetId);
             if (card != null && getZoneChangeCounter().containsKey(targetId)
                     && card.getZoneChangeCounter(game) != getZoneChangeCounter().get(targetId)) {
-                return null;
+
+                // Because if dies trigger has to trigger as permanent has already moved zone, we have to check if target was on the battlefield immed. before
+                // but no longer if new permanent is already on the battlefield
+                Permanent permanent = game.getPermanentOrLKIBattlefield(targetId);
+                if (permanent == null || permanent.getZoneChangeCounter(game) != zoneChangeCounter.get(targetId)) {
+                    return null;
+                }
             }
         }
         return targetId;
