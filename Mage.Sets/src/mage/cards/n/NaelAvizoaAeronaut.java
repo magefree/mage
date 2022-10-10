@@ -7,10 +7,9 @@ import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.abilities.hint.common.DomainHint;
-import mage.constants.*;
 import mage.abilities.keyword.FlyingAbility;
+import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.game.Game;
@@ -26,8 +25,7 @@ public final class NaelAvizoaAeronaut extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
 
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.ELF);
-        this.subtype.add(SubType.SCOUT);
+        this.subtype.add(SubType.ELF, SubType.SCOUT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
@@ -37,11 +35,7 @@ public final class NaelAvizoaAeronaut extends CardImpl {
         // Domain -- Whenever Nael, Avizoa Aeronaut deals combat damage to a player, look at the top X cards of your library, where X is the number of basic land types among lands you control.
         // Put up to one of them on top of your library and the rest on the bottom in a random order. Then if there are five basic land types among lands you control, draw a card.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
-                new LookLibraryAndPickControllerEffect(
-                        DomainValue.REGULAR, 1,
-                        LookLibraryControllerEffect.PutCards.TOP_ANY, LookLibraryControllerEffect.PutCards.BOTTOM_RANDOM,
-                        true
-                ),
+                new LookLibraryAndPickControllerEffect(DomainValue.REGULAR, 1, PutCards.TOP_ANY, PutCards.BOTTOM_RANDOM, true),
                 false
         );
         ability.addEffect(new NaelAvizoaAeronautEffect());

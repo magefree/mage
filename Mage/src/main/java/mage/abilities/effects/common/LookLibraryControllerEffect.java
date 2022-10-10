@@ -9,6 +9,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
+import mage.constants.PutCards;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -19,44 +20,6 @@ import mage.util.CardUtil;
  * @author LevelX, awjackson
  */
 public class LookLibraryControllerEffect extends OneShotEffect {
-
-    public enum PutCards {
-        HAND(Outcome.DrawCard, Zone.HAND, "into your hand"),
-        GRAVEYARD(Outcome.Discard, Zone.GRAVEYARD, "into your graveyard"),
-        BATTLEFIELD(Outcome.PutCardInPlay, Zone.BATTLEFIELD, "onto the battlefield"),
-        BATTLEFIELD_TAPPED(Outcome.PutCardInPlay, Zone.BATTLEFIELD, "onto the battlefield tapped"),
-        TOP_ANY(Outcome.Benefit, Zone.LIBRARY, "on top of your library", " in any order"),
-        BOTTOM_ANY(Outcome.Benefit, Zone.LIBRARY, "on the bottom of your library", " in any order"),
-        BOTTOM_RANDOM(Outcome.Benefit, Zone.LIBRARY, "on the bottom of your library", " in a random order");
-
-        private final Outcome outcome;
-        private final Zone zone;
-        private final String message;
-        private final String order;
-
-        PutCards(Outcome outcome, Zone zone, String message) {
-            this(outcome, zone, message, "");
-        }
-
-        PutCards(Outcome outcome, Zone zone, String message, String order) {
-            this.outcome = outcome;
-            this.zone = zone;
-            this.message = message;
-            this.order = order;
-        }
-
-        public Outcome getOutcome() {
-            return outcome;
-        }
-
-        public Zone getZone() {
-            return zone;
-        }
-
-        public String getMessage(boolean withOrder) {
-            return withOrder ? message + order : message;
-        }
-    }
 
     protected DynamicValue numberOfCards;
     protected PutCards putLookedCards;
@@ -167,7 +130,7 @@ public class LookLibraryControllerEffect extends OneShotEffect {
             sb.append(middleText);
         } else if (!oneCard) {
             sb.append(", then put them ");
-            sb.append(putLookedCards == PutCards.TOP_ANY ? "back in any order" : putLookedCards.getMessage(true));
+            sb.append(putLookedCards == PutCards.TOP_ANY ? "back in any order" : putLookedCards.getMessage(false, true));
         }
         return sb.toString();
     }

@@ -4,11 +4,11 @@ import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.abilities.effects.common.RevealLibraryPickControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.PutCards;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
@@ -35,16 +35,13 @@ public final class TorstenFounderOfBenalia extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{W}");
 
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.SOLDIER);
+        this.subtype.add(SubType.HUMAN, SubType.SOLDIER);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 
         // When Torsten, Founder of Benalia enters the battlefield, reveal the top seven cards of your library. Put any number of creature and/or land cards from among them into your hand and the rest on the bottom of your library in a random order.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new RevealLibraryPickControllerEffect(
-                7, Integer.MAX_VALUE, filter,
-                LookLibraryControllerEffect.PutCards.HAND,
-                LookLibraryControllerEffect.PutCards.BOTTOM_RANDOM, false
+                7, Integer.MAX_VALUE, filter, PutCards.HAND, PutCards.BOTTOM_RANDOM, false
         )));
 
         // When Torsten dies, create seven 1/1 white Soldier creature tokens.

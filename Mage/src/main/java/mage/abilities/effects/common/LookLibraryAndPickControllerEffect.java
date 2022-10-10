@@ -35,6 +35,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.PutCards;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
@@ -157,12 +158,12 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
             sb.append(plural ? "them" : "it");
         }
         sb.append(" ");
-        sb.append(putPickedCards.getMessage(plural));
+        sb.append(putPickedCards.getMessage(false, plural));
         return sb.append("?").toString();
     }
 
     protected String getChooseHint() {
-        return "to put " + putPickedCards.getMessage(numberToPick > 1);
+        return "to put " + putPickedCards.getMessage(false, numberToPick > 1);
     }
 
     @Override
@@ -201,7 +202,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
             sb.append("and put ");
             sb.append(plural ? "them " : "it ");
         }
-        sb.append(putPickedCards.getMessage(plural));
+        sb.append(putPickedCards.getMessage(false, plural));
 
         plural = optional
                 || upTo
@@ -218,7 +219,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
         if (putPickedCards == PutCards.GRAVEYARD && putLookedCards == PutCards.TOP_ANY) {
             sb.append("back ");
         }
-        sb.append(putLookedCards.getMessage(plural));
+        sb.append(putLookedCards.getMessage(false, plural));
 
         // get text frame from super class and inject action text
         return setText(mode, sb.toString());
