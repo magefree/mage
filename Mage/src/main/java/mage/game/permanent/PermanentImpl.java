@@ -467,7 +467,14 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public void incrementLoyaltyActivationsAvailable() {
-        this.loyaltyActivationsAvailable++;
+        this.incrementLoyaltyActivationsAvailable(Integer.MAX_VALUE);
+    }
+
+    @Override
+    public void incrementLoyaltyActivationsAvailable(int max) {
+        if (this.loyaltyActivationsAvailable < max) {
+            this.loyaltyActivationsAvailable++;
+        }
     }
 
     @Override
@@ -479,7 +486,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public boolean canLoyaltyBeUsed(Game game) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
-            return Math.max(controller.getLoyaltyUsePerTurn(), loyaltyActivationsAvailable) > timesLoyaltyUsed;
+            return loyaltyActivationsAvailable > timesLoyaltyUsed;
         }
         return false;
     }
