@@ -25,7 +25,7 @@ import java.util.UUID;
  */
 public abstract class ActivatedAbilityImpl extends AbilityImpl implements ActivatedAbility {
 
-    protected static class ActivationInfo {
+    private static class ActivationInfo {
 
         private int turnNum;
 
@@ -244,37 +244,37 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         }
         return false;
     }
-    public TargetController getMayActivate() {
+    public final TargetController getMayActivate() {
         return mayActivate;
     }
 
     @Override
-    public void setMayActivate(TargetController mayActivate) {
+    public final void setMayActivate(TargetController mayActivate) {
         this.mayActivate = mayActivate;
     }
 
-    public UUID getActivatorId() {
+    public final UUID getActivatorId() {
         return this.activatorId;
     }
 
-    public void setActivatorId(UUID activatorId) {
+    public final void setActivatorId(UUID activatorId) {
         this.activatorId = activatorId;
     }
 
-    public Condition getCondition() {
+    public final Condition getCondition() {
         return condition;
     }
 
-    public void setCondition(Condition condition) {
+    public final void setCondition(Condition condition) {
         this.condition = condition;
     }
 
-    public TimingRule getTiming() {
+    public final TimingRule getTiming() {
         return timing;
     }
 
     @Override
-    public void setTiming(TimingRule timing) {
+    public final void setTiming(TimingRule timing) {
         this.timing = timing;
     }
 
@@ -307,7 +307,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     }
 
     @Override
-    public void setMaxActivationsPerTurn(int maxActivationsPerTurn) {
+    public final void setMaxActivationsPerTurn(int maxActivationsPerTurn) {
         this.maxActivationsPerTurn = maxActivationsPerTurn;
     }
 
