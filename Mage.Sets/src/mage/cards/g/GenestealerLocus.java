@@ -1,20 +1,16 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttackedByCreatureTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -29,10 +25,9 @@ public final class GenestealerLocus extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Neurotraumal Rod — Whenever a creature attacks you, it gets -1/-0 until end of turn.
-        Ability ability = new AttackedByCreatureTriggeredAbility(Zone.BATTLEFIELD,
+        this.addAbility(new AttackedByCreatureTriggeredAbility(
                 new BoostTargetEffect(-1, 0, Duration.EndOfTurn), false, SetTargetPointer.PERMANENT)
-                .withFlavorWord("Neurotraumal Rod");
-        addAbility(ability);
+                .withFlavorWord("Neurotraumal Rod"));
 
         // Whenever a creature attacks one of your opponents, it gets +0/+1 until end of turn.
         this.addAbility(new GenestealerLocusTriggeredAbility());
@@ -65,15 +60,9 @@ class GenestealerLocusTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Player defender = game.getPlayer(event.getTargetId());
-        if (defender != null) {
-            Set<UUID> opponents = game.getOpponents(this.getControllerId());
-            if (opponents != null && opponents.contains(defender.getId())) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getSourceId(), game));
-                }
-                return true;
-            }
+        if (game.getOpponents(this.getControllerId()).contains(event.getTargetId())) {
+            this.getEffects().setTargetPointer(new FixedTarget(event.getSourceId(), game));
+            return true;
         }
         return false;
     }
