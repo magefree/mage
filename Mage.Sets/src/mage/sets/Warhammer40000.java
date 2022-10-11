@@ -224,6 +224,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Talisman of Indulgence", 257, Rarity.UNCOMMON, mage.cards.t.TalismanOfIndulgence.class));
         cards.add(new SetCardInfo("Talisman of Progress", 258, Rarity.UNCOMMON, mage.cards.t.TalismanOfProgress.class));
         cards.add(new SetCardInfo("Tallyman of Nurgle", 60, Rarity.RARE, mage.cards.t.TallymanOfNurgle.class));
+        cards.add(new SetCardInfo("Technomancer", 61, Rarity.RARE, mage.cards.t.Technomancer.class));
         cards.add(new SetCardInfo("Temple of Abandon", 297, Rarity.RARE, mage.cards.t.TempleOfAbandon.class));
         cards.add(new SetCardInfo("Temple of Epiphany", 298, Rarity.RARE, mage.cards.t.TempleOfEpiphany.class));
         cards.add(new SetCardInfo("Temple of Mystery", 299, Rarity.RARE, mage.cards.t.TempleOfMystery.class));
