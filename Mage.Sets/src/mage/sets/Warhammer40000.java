@@ -244,6 +244,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Tomb Blade", 64, Rarity.RARE, mage.cards.t.TombBlade.class));
         cards.add(new SetCardInfo("Tomb Fortress", 168, Rarity.RARE, mage.cards.t.TombFortress.class));
         cards.add(new SetCardInfo("Tranquil Cove", 303, Rarity.COMMON, mage.cards.t.TranquilCove.class));
+        cards.add(new SetCardInfo("Trazyn the Infinite", 65, Rarity.RARE, mage.cards.t.TrazynTheInfinite.class));
         cards.add(new SetCardInfo("Triarch Praetorian", 66, Rarity.UNCOMMON, mage.cards.t.TriarchPraetorian.class));
         cards.add(new SetCardInfo("Trygon Prime", 143, Rarity.UNCOMMON, mage.cards.t.TrygonPrime.class));
         cards.add(new SetCardInfo("Tyranid Invasion", 102, Rarity.UNCOMMON, mage.cards.t.TyranidInvasion.class));
