@@ -3,8 +3,7 @@ package mage.game.stack;
 import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.constants.Zone;
-import mage.constants.ZoneDetail;
+import mage.constants.PutCards;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Controllable;
@@ -25,7 +24,7 @@ public interface StackObject extends MageObject, Controllable {
      */
     void counter(Ability source, Game game);
 
-    void counter(Ability source, Game game, Zone zone, boolean owner, ZoneDetail zoneDetail);
+    void counter(Ability source, Game game, PutCards zone);
 
     Ability getStackAbility();
 
