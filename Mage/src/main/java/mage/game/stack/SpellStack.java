@@ -62,7 +62,7 @@ public class SpellStack extends ArrayDeque<StackObject> {
         return counter(objectId, source, game, PutCards.GRAVEYARD);
     }
 
-    public boolean counter(UUID objectId, Ability source, Game game, PutCards zone) {
+    public boolean counter(UUID objectId, Ability source, Game game, PutCards putCard) {
         StackObject stackObject = getStackObject(objectId);
         MageObject sourceObject = game.getObject(source);
         if (stackObject != null && sourceObject != null) {
@@ -82,7 +82,7 @@ public class SpellStack extends ArrayDeque<StackObject> {
                 if (!(stackObject instanceof Spell)) { // spells are removed from stack by the card movement
                     this.remove(stackObject, game);
                 }
-                stackObject.counter(source, game, zone);
+                stackObject.counter(source, game, putCard);
                 if (!game.isSimulation()) {
                     game.informPlayers(counteredObjectName + " is countered by " + sourceObject.getLogName());
                 }

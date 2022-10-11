@@ -24,7 +24,7 @@ public interface StackObject extends MageObject, Controllable {
      */
     void counter(Ability source, Game game);
 
-    void counter(Ability source, Game game, PutCards zone);
+    void counter(Ability source, Game game, PutCards putCard);
 
     Ability getStackAbility();
 
