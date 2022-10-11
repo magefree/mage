@@ -115,6 +115,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Frontier Bivouac", 281, Rarity.UNCOMMON, mage.cards.f.FrontierBivouac.class));
         cards.add(new SetCardInfo("Game Trail", 282, Rarity.RARE, mage.cards.g.GameTrail.class));
         cards.add(new SetCardInfo("Gargoyle Flock", 123, Rarity.RARE, mage.cards.g.GargoyleFlock.class));
+        cards.add(new SetCardInfo("Genestealer Locus", 21, Rarity.UNCOMMON, mage.cards.g.GenestealerLocus.class));
         cards.add(new SetCardInfo("Ghost Ark", 156, Rarity.RARE, mage.cards.g.GhostArk.class));
         cards.add(new SetCardInfo("Ghyrson Starn, Kelermorph", 124, Rarity.RARE, mage.cards.g.GhyrsonStarnKelermorph.class));
         cards.add(new SetCardInfo("Gilded Lotus", 239, Rarity.RARE, mage.cards.g.GildedLotus.class));
