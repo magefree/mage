@@ -125,6 +125,7 @@ public enum CounterType {
     MIRE("mire"),
     MUSIC("music"),
     MUSTER("muster"),
+    NECRODERMIS("necrodermis"),
     NET("net"),
     NIGHT("night"),
     OMEN("omen"),
