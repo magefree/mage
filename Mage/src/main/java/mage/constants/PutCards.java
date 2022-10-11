@@ -74,6 +74,7 @@ public enum PutCards {
             case BATTLEFIELD_TAPPED:
                 return player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
             default:
+                // HAND, GRAVEYARD, BATTLEFIELD, EXILED don't need unique method call
                 return player.moveCards(card, zone, source, game);
         }
     }
@@ -91,6 +92,7 @@ public enum PutCards {
             case BATTLEFIELD_TAPPED:
                 return player.moveCards(cards.getCards(game), Zone.BATTLEFIELD, source, game, true, false, false, null);
             default:
+                // HAND, GRAVEYARD, BATTLEFIELD, EXILED don't need unique method call
                 return player.moveCards(cards, zone, source, game);
         }
     }
