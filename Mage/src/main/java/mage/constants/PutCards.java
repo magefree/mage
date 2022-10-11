@@ -73,9 +73,13 @@ public enum PutCards {
                 return player.putCardsOnBottomOfLibrary(new CardsImpl(card), game, source, false);
             case BATTLEFIELD_TAPPED:
                 return player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
+            case BATTLEFIELD:
+            case EXILED:
+            case HAND:
+            case GRAVEYARD:
+                return player.moveCards(card, this.zone, source, game);
             default:
-                // HAND, GRAVEYARD, BATTLEFIELD, EXILED don't need unique method call
-                return player.moveCards(card, zone, source, game);
+                throw new UnsupportedOperationException("Missing case for " + this.name() + "in PutCards.moveCard");
         }
     }
 
@@ -91,9 +95,13 @@ public enum PutCards {
                 return player.putCardsOnBottomOfLibrary(cards, game, source, false);
             case BATTLEFIELD_TAPPED:
                 return player.moveCards(cards.getCards(game), Zone.BATTLEFIELD, source, game, true, false, false, null);
+            case BATTLEFIELD:
+            case EXILED:
+            case HAND:
+            case GRAVEYARD:
+                return player.moveCards(cards, this.zone, source, game);
             default:
-                // HAND, GRAVEYARD, BATTLEFIELD, EXILED don't need unique method call
-                return player.moveCards(cards, zone, source, game);
+                throw new UnsupportedOperationException("Missing case for " + this.name() + "in PutCards.moveCards");
         }
     }
 }
