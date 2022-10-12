@@ -161,6 +161,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Memorial to Glory", 283, Rarity.UNCOMMON, mage.cards.m.MemorialToGlory.class));
         cards.add(new SetCardInfo("Mind Stone", 244, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Molten Slagheap", 284, Rarity.UNCOMMON, mage.cards.m.MoltenSlagheap.class));
+        cards.add(new SetCardInfo("Mortarion, Daemon Primarch", 41, Rarity.RARE, mage.cards.m.MortarionDaemonPrimarch.class));
         cards.add(new SetCardInfo("Mortify", 225, Rarity.UNCOMMON, mage.cards.m.Mortify.class));
         cards.add(new SetCardInfo("Mountain", 315, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mutalith Vortex Beast", 134, Rarity.RARE, mage.cards.m.MutalithVortexBeast.class));
