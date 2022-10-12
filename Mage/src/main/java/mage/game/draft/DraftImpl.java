@@ -233,7 +233,7 @@ public abstract class DraftImpl implements Draft {
                 }
             }
         }
-        //cancelBoosterLoadingHandle();
+        cancelBoosterLoadingHandle();
         cardNum++;
         return true;
     }
