@@ -190,6 +190,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Purestrain Genestealer", 97, Rarity.UNCOMMON, mage.cards.p.PurestrainGenestealer.class));
         cards.add(new SetCardInfo("Rampant Growth", 220, Rarity.COMMON, mage.cards.r.RampantGrowth.class));
         cards.add(new SetCardInfo("Ravener", 138, Rarity.RARE, mage.cards.r.Ravener.class));
+        cards.add(new SetCardInfo("Reaver Titan", 163, Rarity.RARE, mage.cards.r.ReaverTitan.class));
         cards.add(new SetCardInfo("Reconnaissance Mission", 193, Rarity.UNCOMMON, mage.cards.r.ReconnaissanceMission.class));
         cards.add(new SetCardInfo("Reliquary Tower", 291, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("Reverberate", 207, Rarity.RARE, mage.cards.r.Reverberate.class));
