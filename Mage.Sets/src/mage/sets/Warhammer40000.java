@@ -202,6 +202,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Screamer-Killer", 84, Rarity.RARE, mage.cards.s.ScreamerKiller.class));
         cards.add(new SetCardInfo("Sculpting Steel", 247, Rarity.RARE, mage.cards.s.SculptingSteel.class));
         cards.add(new SetCardInfo("Shard of the Nightbringer", 55, Rarity.RARE, mage.cards.s.ShardOfTheNightbringer.class));
+        cards.add(new SetCardInfo("Shard of the Void Dragon", 56, Rarity.RARE, mage.cards.s.ShardOfTheVoidDragon.class));
         cards.add(new SetCardInfo("Sicarian Infiltrator", 25, Rarity.UNCOMMON, mage.cards.s.SicarianInfiltrator.class));
         cards.add(new SetCardInfo("Sister Hospitaller", 141, Rarity.RARE, mage.cards.s.SisterHospitaller.class));
         cards.add(new SetCardInfo("Sister Repentia", 142, Rarity.RARE, mage.cards.s.SisterRepentia.class));
