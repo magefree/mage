@@ -8,6 +8,7 @@ import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
 import mage.players.Player;
 import mage.players.PlayerList;
+import org.apache.log4j.Logger;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -19,6 +20,8 @@ import java.util.concurrent.TimeUnit;
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class DraftImpl implements Draft {
+
+    protected static final Logger logger = Logger.getLogger(DraftImpl.class);
 
     protected final UUID id;
     protected final Map<UUID, DraftPlayer> players = new LinkedHashMap<>();
@@ -225,11 +228,12 @@ public abstract class DraftImpl implements Draft {
         synchronized (this) {
             while (!donePicking()) {
                 try {
-                    this.wait();
+                    this.wait(); // maybe 3000, or interval * 1000
                 } catch (InterruptedException ex) {
                 }
             }
         }
+        //cancelBoosterLoadingHandle();
         cardNum++;
         return true;
     }
@@ -245,6 +249,7 @@ public abstract class DraftImpl implements Draft {
                     boosterLoadingCounter++;
                 }
             } catch (Exception ex) {
+                logger.fatal("Fatal boosterLoadingHandle error in draft " + id + " pack " + boosterNum + " pick " + cardNum, ex);
             }
         }, 0, BOOSTER_LOADING_INTERVAL, TimeUnit.SECONDS);
     }
