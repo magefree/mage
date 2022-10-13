@@ -19,6 +19,8 @@ public final class Transformers extends ExpansionSet {
         super("Transformers", "BOT", ExpansionSet.buildDate(2022, 11, 18), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
 
+        cards.add(new SetCardInfo("Flamewar, Brash Veteran", 10, Rarity.MYTHIC, mage.cards.f.FlamewarBrashVeteran.class));
+        cards.add(new SetCardInfo("Flamewar, Streetwise Operative", 10, Rarity.MYTHIC, mage.cards.f.FlamewarStreetwiseOperative.class));
         cards.add(new SetCardInfo("Goldbug, Humanity's Ally", 11, Rarity.MYTHIC, mage.cards.g.GoldbugHumanitysAlly.class));
         cards.add(new SetCardInfo("Goldbug, Scrappy Scout", 11, Rarity.MYTHIC, mage.cards.g.GoldbugScrappyScout.class));
         cards.add(new SetCardInfo("Ultra Magnus, Armored Carrier", 15, Rarity.MYTHIC, mage.cards.u.UltraMagnusArmoredCarrier.class));

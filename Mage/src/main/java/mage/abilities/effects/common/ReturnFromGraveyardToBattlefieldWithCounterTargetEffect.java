@@ -100,7 +100,7 @@ class AddCounterTargetReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getTargetId().equals(getTargetPointer().getFirst(game, source));
+        return getTargetPointer().getTargets(game, source).contains(event.getTargetId());
     }
 
     @Override

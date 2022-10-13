@@ -276,16 +276,6 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public int getLoyaltyUsePerTurn() {
-        return 0;
-    }
-
-    @Override
-    public void setLoyaltyUsePerTurn(int loyaltyUsePerTurn) {
-
-    }
-
-    @Override
     public int getMaxHandSize() {
         return 0;
     }

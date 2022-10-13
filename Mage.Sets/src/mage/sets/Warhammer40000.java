@@ -115,6 +115,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Frontier Bivouac", 281, Rarity.UNCOMMON, mage.cards.f.FrontierBivouac.class));
         cards.add(new SetCardInfo("Game Trail", 282, Rarity.RARE, mage.cards.g.GameTrail.class));
         cards.add(new SetCardInfo("Gargoyle Flock", 123, Rarity.RARE, mage.cards.g.GargoyleFlock.class));
+        cards.add(new SetCardInfo("Genestealer Locus", 21, Rarity.UNCOMMON, mage.cards.g.GenestealerLocus.class));
         cards.add(new SetCardInfo("Ghost Ark", 156, Rarity.RARE, mage.cards.g.GhostArk.class));
         cards.add(new SetCardInfo("Ghyrson Starn, Kelermorph", 124, Rarity.RARE, mage.cards.g.GhyrsonStarnKelermorph.class));
         cards.add(new SetCardInfo("Gilded Lotus", 239, Rarity.RARE, mage.cards.g.GildedLotus.class));
@@ -160,6 +161,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Memorial to Glory", 283, Rarity.UNCOMMON, mage.cards.m.MemorialToGlory.class));
         cards.add(new SetCardInfo("Mind Stone", 244, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Molten Slagheap", 284, Rarity.UNCOMMON, mage.cards.m.MoltenSlagheap.class));
+        cards.add(new SetCardInfo("Mortarion, Daemon Primarch", 41, Rarity.RARE, mage.cards.m.MortarionDaemonPrimarch.class));
         cards.add(new SetCardInfo("Mortify", 225, Rarity.UNCOMMON, mage.cards.m.Mortify.class));
         cards.add(new SetCardInfo("Mountain", 315, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mutalith Vortex Beast", 134, Rarity.RARE, mage.cards.m.MutalithVortexBeast.class));
@@ -174,6 +176,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Nurgle's Rot", 45, Rarity.UNCOMMON, mage.cards.n.NurglesRot.class));
         cards.add(new SetCardInfo("Old One Eye", 96, Rarity.RARE, mage.cards.o.OldOneEye.class));
         cards.add(new SetCardInfo("Opal Palace", 286, Rarity.COMMON, mage.cards.o.OpalPalace.class));
+        cards.add(new SetCardInfo("Out of the Tombs", 46, Rarity.RARE, mage.cards.o.OutOfTheTombs.class));
         cards.add(new SetCardInfo("Overgrowth", 219, Rarity.COMMON, mage.cards.o.Overgrowth.class));
         cards.add(new SetCardInfo("Past in Flames", 206, Rarity.MYTHIC, mage.cards.p.PastInFlames.class));
         cards.add(new SetCardInfo("Path of Ancestry", 287, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
@@ -184,9 +187,11 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Prairie Stream", 290, Rarity.RARE, mage.cards.p.PrairieStream.class));
         cards.add(new SetCardInfo("Primaris Chaplain", 137, Rarity.UNCOMMON, mage.cards.p.PrimarisChaplain.class));
         cards.add(new SetCardInfo("Primaris Eliminator", 50, Rarity.RARE, mage.cards.p.PrimarisEliminator.class));
+        cards.add(new SetCardInfo("Psychomancer", 51, Rarity.UNCOMMON, mage.cards.p.Psychomancer.class));
         cards.add(new SetCardInfo("Purestrain Genestealer", 97, Rarity.UNCOMMON, mage.cards.p.PurestrainGenestealer.class));
         cards.add(new SetCardInfo("Rampant Growth", 220, Rarity.COMMON, mage.cards.r.RampantGrowth.class));
         cards.add(new SetCardInfo("Ravener", 138, Rarity.RARE, mage.cards.r.Ravener.class));
+        cards.add(new SetCardInfo("Reaver Titan", 163, Rarity.RARE, mage.cards.r.ReaverTitan.class));
         cards.add(new SetCardInfo("Reconnaissance Mission", 193, Rarity.UNCOMMON, mage.cards.r.ReconnaissanceMission.class));
         cards.add(new SetCardInfo("Reliquary Tower", 291, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("Reverberate", 207, Rarity.RARE, mage.cards.r.Reverberate.class));
@@ -198,6 +203,8 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Scoured Barrens", 293, Rarity.COMMON, mage.cards.s.ScouredBarrens.class));
         cards.add(new SetCardInfo("Screamer-Killer", 84, Rarity.RARE, mage.cards.s.ScreamerKiller.class));
         cards.add(new SetCardInfo("Sculpting Steel", 247, Rarity.RARE, mage.cards.s.SculptingSteel.class));
+        cards.add(new SetCardInfo("Shard of the Nightbringer", 55, Rarity.RARE, mage.cards.s.ShardOfTheNightbringer.class));
+        cards.add(new SetCardInfo("Shard of the Void Dragon", 56, Rarity.RARE, mage.cards.s.ShardOfTheVoidDragon.class));
         cards.add(new SetCardInfo("Sicarian Infiltrator", 25, Rarity.UNCOMMON, mage.cards.s.SicarianInfiltrator.class));
         cards.add(new SetCardInfo("Sister Hospitaller", 141, Rarity.RARE, mage.cards.s.SisterHospitaller.class));
         cards.add(new SetCardInfo("Sister Repentia", 142, Rarity.RARE, mage.cards.s.SisterRepentia.class));
@@ -222,6 +229,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Talisman of Indulgence", 257, Rarity.UNCOMMON, mage.cards.t.TalismanOfIndulgence.class));
         cards.add(new SetCardInfo("Talisman of Progress", 258, Rarity.UNCOMMON, mage.cards.t.TalismanOfProgress.class));
         cards.add(new SetCardInfo("Tallyman of Nurgle", 60, Rarity.RARE, mage.cards.t.TallymanOfNurgle.class));
+        cards.add(new SetCardInfo("Technomancer", 61, Rarity.RARE, mage.cards.t.Technomancer.class));
         cards.add(new SetCardInfo("Temple of Abandon", 297, Rarity.RARE, mage.cards.t.TempleOfAbandon.class));
         cards.add(new SetCardInfo("Temple of Epiphany", 298, Rarity.RARE, mage.cards.t.TempleOfEpiphany.class));
         cards.add(new SetCardInfo("Temple of Mystery", 299, Rarity.RARE, mage.cards.t.TempleOfMystery.class));
@@ -229,8 +237,10 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Termagant Swarm", 99, Rarity.RARE, mage.cards.t.TermagantSwarm.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 301, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("Tervigon", 100, Rarity.RARE, mage.cards.t.Tervigon.class));
+        cards.add(new SetCardInfo("The First Tyrannic War", 121, Rarity.RARE, mage.cards.t.TheFirstTyrannicWar.class));
         cards.add(new SetCardInfo("The Flesh Is Weak", 122, Rarity.RARE, mage.cards.t.TheFleshIsWeak.class));
         cards.add(new SetCardInfo("The Swarmlord", 4, Rarity.MYTHIC, mage.cards.t.TheSwarmlord.class));
+        cards.add(new SetCardInfo("The War in Heaven", 69, Rarity.RARE, mage.cards.t.TheWarInHeaven.class));
         cards.add(new SetCardInfo("Their Name Is Death", 62, Rarity.RARE, mage.cards.t.TheirNameIsDeath.class));
         cards.add(new SetCardInfo("Their Number Is Legion", 63, Rarity.RARE, mage.cards.t.TheirNumberIsLegion.class));
         cards.add(new SetCardInfo("Thornwood Falls", 302, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
@@ -240,6 +250,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Tomb Blade", 64, Rarity.RARE, mage.cards.t.TombBlade.class));
         cards.add(new SetCardInfo("Tomb Fortress", 168, Rarity.RARE, mage.cards.t.TombFortress.class));
         cards.add(new SetCardInfo("Tranquil Cove", 303, Rarity.COMMON, mage.cards.t.TranquilCove.class));
+        cards.add(new SetCardInfo("Trazyn the Infinite", 65, Rarity.RARE, mage.cards.t.TrazynTheInfinite.class));
         cards.add(new SetCardInfo("Triarch Praetorian", 66, Rarity.UNCOMMON, mage.cards.t.TriarchPraetorian.class));
         cards.add(new SetCardInfo("Trygon Prime", 143, Rarity.UNCOMMON, mage.cards.t.TrygonPrime.class));
         cards.add(new SetCardInfo("Tyranid Invasion", 102, Rarity.UNCOMMON, mage.cards.t.TyranidInvasion.class));

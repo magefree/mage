@@ -5,7 +5,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.TapForManaAllTriggeredManaAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.mana.AddManaOfAnyTypeProducedEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

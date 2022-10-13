@@ -9,12 +9,7 @@ import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffec
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.constants.ZoneDetail;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
@@ -68,7 +63,7 @@ class SpelljackEffect extends OneShotEffect {
         if (controller != null) {
             UUID targetId = targetPointer.getFirst(game, source);
             StackObject stackObject = game.getStack().getStackObject(targetId);
-            if (stackObject != null && game.getStack().counter(targetId, source, game, Zone.EXILED, false, ZoneDetail.NONE)) {
+            if (stackObject != null && game.getStack().counter(targetId, source, game, PutCards.EXILED)) {
                 Card card = ((Spell) stackObject).getCard();
                 if (card != null) {
                     ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, TargetController.YOU, Duration.Custom, true);

@@ -3353,16 +3353,6 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public int getLoyaltyUsePerTurn() {
-        return computerPlayer.getLoyaltyUsePerTurn();
-    }
-
-    @Override
-    public void setLoyaltyUsePerTurn(int loyaltyUsePerTurn) {
-        computerPlayer.setLoyaltyUsePerTurn(loyaltyUsePerTurn);
-    }
-
-    @Override
     public int getMaxHandSize() {
         return computerPlayer.getMaxHandSize();
     }

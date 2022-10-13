@@ -104,12 +104,12 @@ public class StackAbility extends StackObjectImpl implements Ability {
 
     @Override
     public void counter(Ability source, Game game) {
-        // zone, owner, top ignored
-        this.counter(source, game, Zone.GRAVEYARD, true, ZoneDetail.TOP);
+        // zone ignored
+        this.counter(source, game, PutCards.GRAVEYARD);
     }
 
     @Override
-    public void counter(Ability source, Game game, Zone zone, boolean owner, ZoneDetail zoneDetail) {
+    public void counter(Ability source, Game game, PutCards zone) {
         //20100716 - 603.8
         if (ability instanceof StateTriggeredAbility) {
             ((StateTriggeredAbility) ability).counter(game);
