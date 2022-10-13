@@ -69,11 +69,11 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 
     public ActivatedAbilityImpl(final ActivatedAbilityImpl ability) {
         super(ability);
-        setTiming(ability.getTiming());
-        setMayActivate(ability.getMayActivate());
-        setActivatorId(ability.getActivatorId());
-        setMaxActivationsPerTurn(ability.maxActivationsPerTurn);
-        setCondition(ability.getCondition());
+        this.timing = ability.timing;
+        this.mayActivate = ability.mayActivate;
+        this.activatorId = ability.activatorId;
+        this.maxActivationsPerTurn = ability.maxActivationsPerTurn;
+        this.condition = ability.condition;
     }
 
     public ActivatedAbilityImpl(Zone zone) {
