@@ -47,6 +47,7 @@ public final class TheFirstTyrannicWar extends CardImpl {
                 this, SagaChapter.CHAPTER_II, SagaChapter.CHAPTER_III,
                 new TheFirstTyrannicWarSecondEffect(), new TargetControlledCreaturePermanent()
         );
+        this.addAbility(sagaAbility);
     }
 
     private TheFirstTyrannicWar(final TheFirstTyrannicWar card) {
