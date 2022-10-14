@@ -99,6 +99,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Hero's Blade", 186, Rarity.UNCOMMON, mage.cards.h.HerosBlade.class));
         cards.add(new SetCardInfo("Hero's Downfall", 112, Rarity.UNCOMMON, mage.cards.h.HerosDownfall.class));
         cards.add(new SetCardInfo("Heroes' Podium", 185, Rarity.RARE, mage.cards.h.HeroesPodium.class));
+        cards.add(new SetCardInfo("Historian's Boon", 21, Rarity.RARE, mage.cards.h.HistoriansBoon.class));
         cards.add(new SetCardInfo("Honor-Worn Shaku", 187, Rarity.UNCOMMON, mage.cards.h.HonorWornShaku.class));
         cards.add(new SetCardInfo("Illuna, Apex of Wishes", 154, Rarity.MYTHIC, mage.cards.i.IllunaApexOfWishes.class));
         cards.add(new SetCardInfo("Iridian Maelstrom", 12, Rarity.RARE, mage.cards.i.IridianMaelstrom.class));
