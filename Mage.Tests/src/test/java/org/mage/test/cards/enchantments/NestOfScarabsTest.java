@@ -180,7 +180,6 @@ public class NestOfScarabsTest extends CardTestPlayerBase {
     }
 
     /*
-    
     Reported bug: Nest of Scarabs not triggering off wither damage dealt by creatures such as Sickle Ripper
      */
     @Test
@@ -203,5 +202,49 @@ public class NestOfScarabsTest extends CardTestPlayerBase {
         assertPowerToughness(playerB, wOmens, -2, 2); // 0/4 with two -1/-1 counters
         assertCounterCount(playerB, wOmens, CounterType.M1M1, 2);
         assertPermanentCount(playerA, "Insect Token", 2);
+    }
+
+    /*
+    https://github.com/magefree/mage/issues/9649
+     */
+    @Test
+    public void scarabs_ETBWithCountersTriggers() {
+
+        String hatchling = "Noxious Hatchling"; // ETB with four -1/-1 counters
+
+        addCard(Zone.BATTLEFIELD, playerA, nestScarabs);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        addCard(Zone.HAND, playerA, hatchling);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, hatchling);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, nestScarabs, 1);
+        assertPermanentCount(playerA, hatchling, 1);
+        assertPermanentCount(playerA, "Insect Token", 4);
+    }
+
+    @Test
+    public void scarabs_OpponentETBWithCountersNoTriggers() {
+
+        String hatchling = "Noxious Hatchling"; // ETB with four -1/-1 counters
+
+        addCard(Zone.BATTLEFIELD, playerB, nestScarabs);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        addCard(Zone.HAND, playerA, hatchling);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, hatchling);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerB, nestScarabs, 1);
+        assertPermanentCount(playerA, hatchling, 1);
+        assertPermanentCount(playerA, "Insect Token", 0);
+        assertPermanentCount(playerB, "Insect Token", 0);
     }
 }

@@ -870,10 +870,10 @@ public final class CardUtil {
         String p = power.toString();
         String t = toughness.toString();
         if (!p.startsWith("-")) {
-            p = (t.startsWith("-") && p.equals("0") ? "-" : "+") + p;
+            p = t.startsWith("-") && p.equals("0") ? "-0" : "+" + p;
         }
         if (!t.startsWith("-")) {
-            t = (p.startsWith("-") && t.equals("0") ? "-" : "+") + t;
+            t = p.startsWith("-") && t.equals("0") ? "-0" : "+" + t;
         }
         return p + "/" + t;
     }
@@ -889,7 +889,7 @@ public final class CardUtil {
         if (duration != Duration.EndOfGame) {
             String d = duration.toString();
             if (!d.isEmpty()) {
-                sb.append(" ").append(d);
+                sb.append(' ').append(d);
             }
         }
         String message = power.getMessage();
@@ -910,6 +910,21 @@ public final class CardUtil {
             return Outcome.UnboostCreature;
         }
         return Outcome.BoostCreature;
+    }
+
+    public static String getAddRemoveCountersText(DynamicValue amount, Counter counter, String description, boolean add) {
+        StringBuilder sb = new StringBuilder(add ? "put " : "remove ");
+        boolean xValue = amount.toString().equals("X");
+        if (xValue) {
+            sb.append("X ").append(counter.getName()).append(" counters");
+        } else {
+            sb.append(counter.getDescription());
+        }
+        sb.append(add ? " on " : " from ").append(description);
+        if (!amount.getMessage().isEmpty()) {
+            sb.append(xValue ? ", where X is " : " for each ").append(amount.getMessage());
+        }
+        return sb.toString();
     }
 
     public static boolean isFusedPartAbility(Ability ability, Game game) {
