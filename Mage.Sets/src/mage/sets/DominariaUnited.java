@@ -422,6 +422,9 @@ public final class DominariaUnited extends ExpansionSet {
         cards.add(new SetCardInfo("Tori D'Avenant, Fury Rider", 363, Rarity.UNCOMMON, mage.cards.t.ToriDAvenantFuryRider.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Toxic Abomination", 112, Rarity.COMMON, mage.cards.t.ToxicAbomination.class));
         cards.add(new SetCardInfo("Tribute to Urborg", 113, Rarity.COMMON, mage.cards.t.TributeToUrborg.class));
+        cards.add(new SetCardInfo("Tura Kennerud, Skyknight", 224, Rarity.COMMON, mage.cards.t.TuraKennerudSkyknight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tura Kennerud, Skyknight", 323, Rarity.COMMON, mage.cards.t.TuraKennerudSkyknight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tura Kennerud, Skyknight", 364, Rarity.COMMON, mage.cards.t.TuraKennerudSkyknight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Twinferno", 149, Rarity.UNCOMMON, mage.cards.t.Twinferno.class));
         cards.add(new SetCardInfo("Tyrannical Pitlord", 284, Rarity.RARE, mage.cards.t.TyrannicalPitlord.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tyrannical Pitlord", 425, Rarity.RARE, mage.cards.t.TyrannicalPitlord.class, NON_FULL_USE_VARIOUS));
