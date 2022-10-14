@@ -72,7 +72,7 @@ class AndTheyShallKnowNoFearEffect extends OneShotEffect {
         }
         Choice choice = new ChoiceCreatureType(sourceObject);
         player.choose(outcome, choice, game);
-        SubType subType = SubType.fromString(choice.getChoice());
+        SubType subType = SubType.byDescription(choice.getChoice());
         if (subType == null) {
             return false;
         }
