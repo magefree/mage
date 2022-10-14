@@ -64,13 +64,18 @@ class TheLostAndTheDamnedTriggeredAbility extends TriggeredAbilityImpl {
         switch (event.getType()) {
             case ENTERS_THE_BATTLEFIELD:
                 EntersTheBattlefieldEvent eEvent = (EntersTheBattlefieldEvent) event;
-                return !eEvent.getFromZone().match(Zone.HAND) && eEvent.getTarget().isLand(game);
+                return (!eEvent.getFromZone().match(Zone.HAND) || !(eEvent.getTarget().getOwnerId() == this.controllerId)) // if it's someone else's land, you can't have played it from your hand. This handles playing lands from opponent's hands.
+                        && eEvent.getTarget().isLand(game);
             case SPELL_CAST:
-                return !Optional
+                return (!Optional
                         .ofNullable(game.getSpell(event.getTargetId()))
                         .map(Spell::getFromZone)
                         .orElse(Zone.ALL)
-                        .equals(Zone.HAND);
+                        .equals(Zone.HAND) || !Optional
+                        .ofNullable(game.getSpell(event.getTargetId()))
+                        .map(Spell::getOwnerId)
+                        .orElse(this.controllerId)
+                        .equals(this.controllerId)); // if it's someone else's spell, it can't have been in your hand. This handles playing spells from opponent's hands.
         }
         return false;
     }
