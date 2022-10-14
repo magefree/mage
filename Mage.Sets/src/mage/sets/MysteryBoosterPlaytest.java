@@ -1,20 +1,8 @@
 package mage.sets;
 
-import mage.cards.Card;
 import mage.cards.ExpansionSet;
-import mage.cards.repository.CardCriteria;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
-import mage.util.RandomUtil;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import static java.util.Arrays.asList;
 
 /**
  * https://mtg.fandom.com/wiki/Mystery_Booster/Test_cards
@@ -31,7 +19,7 @@ public class MysteryBoosterPlaytest extends ExpansionSet {
     }
 
     private MysteryBoosterPlaytest() {
-        super("Mystery Booster Playtest", "CMB1", ExpansionSet.buildDate(2019, 11, 7), SetType.SUPPLEMENTAL);
+        super("Mystery Booster Playtest", "CMB1", ExpansionSet.buildDate(2019, 11, 7), SetType.JOKESET);
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
