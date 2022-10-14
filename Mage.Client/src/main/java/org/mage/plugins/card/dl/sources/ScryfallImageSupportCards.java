@@ -447,7 +447,7 @@ public class ScryfallImageSupportCards {
             add("PELD"); // Throne of Eldraine Promos
             add("ELD"); // Throne of Eldraine
             //add("PTG"); // Ponies: The Galloping
-            //add("CMB1"); // Mystery Booster Playtest Cards
+            add("CMB1"); // Mystery Booster Playtest Cards
             add("MB1"); // Mystery Booster
             add("GN2"); // Game Night 2019
             add("HA1"); // Historic Anthology 1
