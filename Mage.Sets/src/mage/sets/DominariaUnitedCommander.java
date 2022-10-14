@@ -225,6 +225,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Urza's Ruinous Blast", 107, Rarity.RARE, mage.cards.u.UrzasRuinousBlast.class));
         cards.add(new SetCardInfo("Verrak, Warped Sengir", 16, Rarity.RARE, mage.cards.v.VerrakWarpedSengir.class));
         cards.add(new SetCardInfo("Wear // Tear", 174, Rarity.UNCOMMON, mage.cards.w.WearTear.class));
+        cards.add(new SetCardInfo("Xira, the Golden Sting", 48, Rarity.RARE, mage.cards.x.XiraTheGoldenSting.class));
         cards.add(new SetCardInfo("Xyris, the Writhing Storm", 175, Rarity.MYTHIC, mage.cards.x.XyrisTheWrithingStorm.class));
         cards.add(new SetCardInfo("Zaxara, the Exemplary", 176, Rarity.MYTHIC, mage.cards.z.ZaxaraTheExemplary.class));
         cards.add(new SetCardInfo("Zeriam, Golden Wind", 5, Rarity.RARE, mage.cards.z.ZeriamGoldenWind.class));
