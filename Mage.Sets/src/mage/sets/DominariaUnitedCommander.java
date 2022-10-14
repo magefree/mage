@@ -46,6 +46,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Bojuka Bog", 199, Rarity.COMMON, mage.cards.b.BojukaBog.class));
         cards.add(new SetCardInfo("Bontu's Monument", 179, Rarity.UNCOMMON, mage.cards.b.BontusMonument.class));
         cards.add(new SetCardInfo("Boros Garrison", 200, Rarity.UNCOMMON, mage.cards.b.BorosGarrison.class));
+        cards.add(new SetCardInfo("Cadric, Soul Kindler", 10, Rarity.RARE, mage.cards.c.CadricSoulKindler.class));
         cards.add(new SetCardInfo("Canopy Vista", 201, Rarity.RARE, mage.cards.c.CanopyVista.class));
         cards.add(new SetCardInfo("Captain Lannery Storm", 120, Rarity.RARE, mage.cards.c.CaptainLanneryStorm.class));
         cards.add(new SetCardInfo("Cascading Cataracts", 202, Rarity.RARE, mage.cards.c.CascadingCataracts.class));
