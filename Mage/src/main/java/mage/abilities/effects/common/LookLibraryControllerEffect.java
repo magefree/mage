@@ -82,22 +82,7 @@ public class LookLibraryControllerEffect extends OneShotEffect {
     }
 
     protected boolean actionWithLookedCards(Game game, Ability source, Player player, Cards cards) {
-        return moveCards(game, source, player, cards, putLookedCards);
-    }
-
-    protected static boolean moveCards(Game game, Ability source, Player player, Cards cards, PutCards putCards) {
-        switch (putCards) {
-            case TOP_ANY:
-                return player.putCardsOnTopOfLibrary(cards, game, source, true);
-            case BOTTOM_ANY:
-                return player.putCardsOnBottomOfLibrary(cards, game, source, true);
-            case BOTTOM_RANDOM:
-                return player.putCardsOnBottomOfLibrary(cards, game, source, false);
-            case BATTLEFIELD_TAPPED:
-                return player.moveCards(cards.getCards(game), Zone.BATTLEFIELD, source, game, true, false, false, null);
-            default:
-                return player.moveCards(cards, putCards.getZone(), source, game);
-        }
+        return putLookedCards.moveCards(player, cards, source, game);
     }
 
     @Override

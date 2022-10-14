@@ -109,7 +109,7 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public void counter(Ability source, Game game, PutCards zone) {
+    public void counter(Ability source, Game game, PutCards putCard) {
         //20100716 - 603.8
         if (ability instanceof StateTriggeredAbility) {
             ((StateTriggeredAbility) ability).counter(game);

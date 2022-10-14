@@ -417,7 +417,7 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
-    public void counter(Ability source, Game game, PutCards zone) {
+    public void counter(Ability source, Game game, PutCards putCard) {
         // source can be null for fizzled spells, don't use that code in your ZONE_CHANGE watchers/triggers:
         // event.getSourceId().equals
         // TODO: fizzled spells are no longer considered "countered" as of current rules; may need refactor
@@ -429,30 +429,7 @@ public class Spell extends StackObjectImpl implements Card {
         }
         Player player = game.getPlayer(source == null ? getControllerId() : source.getControllerId());
         if (player != null) {
-            switch (zone) {
-                case TOP_OR_BOTTOM:
-                    if (player.chooseUse(Outcome.Detriment,
-                            "Put the countered spell on the top or bottom of its owner's library?",
-                            null, "Top", "Bottom", source, game
-                    )) {
-                        player.putCardsOnTopOfLibrary(new CardsImpl(card), game, source, false);
-                    } else {
-                        player.putCardsOnBottomOfLibrary(new CardsImpl(card), game, source, false);
-                    }
-                    break;
-                case TOP_ANY:
-                    player.putCardsOnTopOfLibrary(new CardsImpl(card), game, source, false);
-                    break;
-                case BOTTOM_ANY:
-                case BOTTOM_RANDOM:
-                    player.putCardsOnBottomOfLibrary(new CardsImpl(card), game, source, false);
-                    break;
-                case BATTLEFIELD_TAPPED:
-                    player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
-                    break;
-                default:
-                    player.moveCards(card, zone.getZone(), source, game);
-            }
+            putCard.moveCard(player, card, source, game, "countered spell");
         }
     }
 

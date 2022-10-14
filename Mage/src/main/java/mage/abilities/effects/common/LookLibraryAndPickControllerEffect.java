@@ -144,8 +144,8 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
     }
 
     protected boolean actionWithPickedCards(Game game, Ability source, Player player, Cards pickedCards, Cards otherCards) {
-        boolean result = moveCards(game, source, player, pickedCards, putPickedCards);
-        result |= moveCards(game, source, player, otherCards, putLookedCards);
+        boolean result = putPickedCards.moveCards(player, pickedCards, source, game);
+        result |= putLookedCards.moveCards(player, otherCards, source, game);
         return result;
     }
 

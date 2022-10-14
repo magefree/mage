@@ -1,5 +1,12 @@
 package mage.constants;
 
+import mage.abilities.Ability;
+import mage.cards.Card;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.game.Game;
+import mage.players.Player;
+
 /**
  *
  * @author awjackson
@@ -45,5 +52,56 @@ public enum PutCards {
     public String getMessage(boolean owner, boolean withOrder) {
         String message = owner ? messageOwner : messageYour;
         return withOrder ? message + order : message;
+    }
+
+    public boolean moveCard(Player player, Card card, Ability source, Game game, String description) {
+        switch (this) {
+            case TOP_OR_BOTTOM:
+                if (player.chooseUse(Outcome.Neutral,
+                        "Put the " + description + " on the top or bottom of its owner's library?",
+                        null, "Top", "Bottom", source, game
+                )) {
+                    return player.putCardsOnTopOfLibrary(new CardsImpl(card), game, source, true);
+                } else {
+                    return player.putCardsOnBottomOfLibrary(new CardsImpl(card), game, source, true);
+                }
+            case TOP_ANY:
+                return player.putCardsOnTopOfLibrary(new CardsImpl(card), game, source, true);
+            case BOTTOM_ANY:
+                return player.putCardsOnBottomOfLibrary(new CardsImpl(card), game, source, true);
+            case BOTTOM_RANDOM:
+                return player.putCardsOnBottomOfLibrary(new CardsImpl(card), game, source, false);
+            case BATTLEFIELD_TAPPED:
+                return player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
+            case BATTLEFIELD:
+            case EXILED:
+            case HAND:
+            case GRAVEYARD:
+                return player.moveCards(card, this.zone, source, game);
+            default:
+                throw new UnsupportedOperationException("Missing case for " + this.name() + "in PutCards.moveCard");
+        }
+    }
+
+    public boolean moveCards(Player player, Cards cards, Ability source, Game game) {
+        switch (this) {
+            case TOP_OR_BOTTOM:
+                throw new UnsupportedOperationException("PutCards.TOP_OR_BOTTOM does not support moving multiple cards");
+            case TOP_ANY:
+                return player.putCardsOnTopOfLibrary(cards, game, source, true);
+            case BOTTOM_ANY:
+                return player.putCardsOnBottomOfLibrary(cards, game, source, true);
+            case BOTTOM_RANDOM:
+                return player.putCardsOnBottomOfLibrary(cards, game, source, false);
+            case BATTLEFIELD_TAPPED:
+                return player.moveCards(cards.getCards(game), Zone.BATTLEFIELD, source, game, true, false, false, null);
+            case BATTLEFIELD:
+            case EXILED:
+            case HAND:
+            case GRAVEYARD:
+                return player.moveCards(cards, this.zone, source, game);
+            default:
+                throw new UnsupportedOperationException("Missing case for " + this.name() + "in PutCards.moveCards");
+        }
     }
 }
