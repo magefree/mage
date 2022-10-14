@@ -188,6 +188,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Smoldering Marsh", 234, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
         cards.add(new SetCardInfo("Sol Ring", 190, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 191, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
+        cards.add(new SetCardInfo("Stangg, Echo Warrior", 42, Rarity.RARE, mage.cards.s.StanggEchoWarrior.class));
         cards.add(new SetCardInfo("Sultai Charm", 168, Rarity.UNCOMMON, mage.cards.s.SultaiCharm.class));
         cards.add(new SetCardInfo("Sunken Hollow", 235, Rarity.RARE, mage.cards.s.SunkenHollow.class));
         cards.add(new SetCardInfo("Surrak Dragonclaw", 169, Rarity.MYTHIC, mage.cards.s.SurrakDragonclaw.class));
