@@ -21,6 +21,9 @@ import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
 
+/**
+ * @author PurpleCrowbar
+ */
 public final class Helbrute extends CardImpl {
 
     public Helbrute(UUID ownerId, CardSetInfo setInfo) {
