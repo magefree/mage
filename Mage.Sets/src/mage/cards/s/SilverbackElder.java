@@ -8,11 +8,11 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.PutCards;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
@@ -25,8 +25,7 @@ public final class SilverbackElder extends CardImpl {
     public SilverbackElder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}{G}");
 
-        this.subtype.add(SubType.APE);
-        this.subtype.add(SubType.SHAMAN);
+        this.subtype.add(SubType.APE, SubType.SHAMAN);
         this.power = new MageInt(5);
         this.toughness = new MageInt(7);
 
@@ -37,8 +36,7 @@ public final class SilverbackElder extends CardImpl {
 
         // * Look at the top five cards of your library. You may put a land card from among them onto the battlefield tapped. Put the rest on the bottom of your library in a random order.
         ability.addMode(new Mode(new LookLibraryAndPickControllerEffect(
-                5, 1, StaticFilters.FILTER_CARD_LAND,
-                LookLibraryControllerEffect.PutCards.BATTLEFIELD_TAPPED, LookLibraryControllerEffect.PutCards.BOTTOM_RANDOM
+                5, 1, StaticFilters.FILTER_CARD_LAND, PutCards.BATTLEFIELD_TAPPED, PutCards.BOTTOM_RANDOM
         )));
 
         // * You gain 4 life.

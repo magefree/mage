@@ -58,17 +58,17 @@ public final class UrzaPlaneswalker extends MeldCard {
         this.addAbility(new SimpleStaticAbility(new UrzaPlaneswalkerEffect()));
 
         // +2: Artifact, instant, and sorcery spells you cast this turn cost {2} less to cast. You gain 2 life.
-        Ability ability = new LoyaltyAbility(new SpellsCostReductionControllerEffect(filter, 1)
+        Ability ability = new LoyaltyAbility(new SpellsCostReductionControllerEffect(filter, 2)
                 .setDuration(Duration.EndOfTurn)
                 .setText("artifact, instant, and sorcery spells you cast this turn cost {2} less to cast"), 2);
         ability.addEffect(new GainLifeEffect(2));
         this.addAbility(ability);
 
         // +1: Draw two cards, then discard a card.
-        this.addAbility(new LoyaltyAbility(new DrawDiscardTargetEffect(2, 1), 1));
+        this.addAbility(new LoyaltyAbility(new DrawDiscardControllerEffect(2, 1), 1));
 
         // 0: Create two 1/1 colorless Soldier artifact creature tokens.
-        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new SoldierArtifactToken()), 0));
+        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new SoldierArtifactToken(), 2), 0));
 
         // -3: Exile target nonland permanent.
         ability = new LoyaltyAbility(new ExileTargetEffect(), -3);

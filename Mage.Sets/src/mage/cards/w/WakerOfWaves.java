@@ -7,7 +7,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.DiscardSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

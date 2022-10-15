@@ -1,11 +1,11 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.RevealLibraryPickControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.PutCards;
 import mage.filter.StaticFilters;
 
 /**

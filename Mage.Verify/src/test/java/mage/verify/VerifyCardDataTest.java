@@ -1321,15 +1321,16 @@ public class VerifyCardDataTest {
             return;
         }
 
-        Collection<String> expected = ref.subtypes;
+        List<String> expected = new ArrayList<>(ref.subtypes);
 
         // fix names (e.g. Urza’s to Urza's)
-        if (expected != null && expected.contains("Urza’s")) {
-            expected = new ArrayList<>(expected);
-            for (ListIterator<String> it = ((List<String>) expected).listIterator(); it.hasNext(); ) {
-                if (it.next().equals("Urza’s")) {
+        for (ListIterator<String> it = expected.listIterator(); it.hasNext(); ) {
+            switch (it.next()) {
+                case "Urza’s":
                     it.set("Urza's");
-                }
+                    break;
+                case "C’tan":
+                    it.set("C'tan");
             }
         }
 
@@ -1339,11 +1340,9 @@ public class VerifyCardDataTest {
                 .stream()
                 .map(SubType::toString)
                 .collect(Collectors.toSet());
-        actual.removeIf(subtypesToIgnore::contains);
 
-        if (expected != null) {
-            expected.removeIf(subtypesToIgnore::contains);
-        }
+        actual.removeIf(subtypesToIgnore::contains);
+        expected.removeIf(subtypesToIgnore::contains);
 
         for (SubType subType : card.getSubtype()) {
             if (!subType.isCustomSet() && !subType.canGain(card)) {

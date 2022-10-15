@@ -12,7 +12,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.PutCards;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetSpell;
@@ -29,7 +29,7 @@ public final class DeviousCoverUp extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
 
         // Counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
-        this.getSpellAbility().addEffect(new CounterTargetWithReplacementEffect(Zone.EXILED));
+        this.getSpellAbility().addEffect(new CounterTargetWithReplacementEffect(PutCards.EXILED));
         this.getSpellAbility().addTarget(new TargetSpell());
 
         // You may shuffle up to four target cards from your graveyard into your library.

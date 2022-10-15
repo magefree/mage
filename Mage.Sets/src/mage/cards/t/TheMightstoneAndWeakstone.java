@@ -34,7 +34,7 @@ public final class TheMightstoneAndWeakstone extends CardImpl {
 
         // When The Mightstone and Weakstone enters the battlefield, choose one --
         // * Draw two cards.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(2));
 
         // * Target creature gets -5/-5 until end of turn.
         ability.addMode(new Mode(new BoostTargetEffect(-5, -5)).addTarget(new TargetCreaturePermanent()));

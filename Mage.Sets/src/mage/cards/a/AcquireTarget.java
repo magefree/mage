@@ -32,7 +32,7 @@ public final class AcquireTarget extends CardImpl {
 
         // Put a bounty counter on up to one target creature an opponent controls.
         effect = new AddCountersTargetEffect(CounterType.BOUNTY.createInstance());
-        effect.setTargetPointer(SecondTargetPointer.getInstance());
+        effect.setTargetPointer(new SecondTargetPointer());
         effect.setText("Put a bounty counter on up to one target creature an opponent controls.");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent(0, 1));

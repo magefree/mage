@@ -31,7 +31,6 @@ public class EnchantedPlayerAttackedTriggeredAbility extends TriggeredAbilityImp
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enchantment = game.getPermanentOrLKIBattlefield(getSourceId());
         return enchantment != null
-                && game.getState().getPlayersInRange(getControllerId(), game).contains(game.getCombat().getAttackingPlayerId())
                 && game.getCombat().getPlayerDefenders(game, false).contains(enchantment.getAttachedTo());
     }
 

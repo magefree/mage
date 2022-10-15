@@ -61,6 +61,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Aven Mindcensor", 688, Rarity.UNCOMMON, mage.cards.a.AvenMindcensor.class));
         cards.add(new SetCardInfo("Avenging Hunter", 215, Rarity.COMMON, mage.cards.a.AvengingHunter.class));
         cards.add(new SetCardInfo("Baba Lysaga, Night Witch", 266, Rarity.RARE, mage.cards.b.BabaLysagaNightWitch.class));
+        cards.add(new SetCardInfo("Baeloth Barrityl, Entertainer", 655, Rarity.MYTHIC, mage.cards.b.BaelothBarritylEntertainer.class));
         cards.add(new SetCardInfo("Bag of Holding", 299, Rarity.UNCOMMON, mage.cards.b.BagOfHolding.class));
         cards.add(new SetCardInfo("Baldur's Gate", 345, Rarity.RARE, mage.cards.b.BaldursGate.class));
         cards.add(new SetCardInfo("Balor", 162, Rarity.MYTHIC, mage.cards.b.Balor.class));

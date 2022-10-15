@@ -9,7 +9,7 @@ import mage.abilities.hint.common.NotMyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
+import mage.constants.PutCards;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterOwnedCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -40,7 +40,7 @@ public final class ForceOfNegation extends CardImpl {
         ).addHint(NotMyTurnHint.instance));
 
         // Counter target noncreature spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
-        this.getSpellAbility().addEffect(new CounterTargetWithReplacementEffect(Zone.EXILED));
+        this.getSpellAbility().addEffect(new CounterTargetWithReplacementEffect(PutCards.EXILED));
         this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_NON_CREATURE));
     }
 

@@ -1,7 +1,7 @@
 package mage.cards.u;
 
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.MeldCondition;
@@ -52,7 +52,7 @@ public final class UrzaLordProtector extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
 
         // {7}: If you both own and control Urza, Lord Protector and an artifact named The Mightstone and Weakstone, exile them, then meld them into Urza, Planeswalker. Activate only as a sorcery.
-        this.addAbility(new SimpleActivatedAbility(new ConditionalOneShotEffect(
+        this.addAbility(new ActivateAsSorceryActivatedAbility(new ConditionalOneShotEffect(
                 new MeldEffect("The Mightstone and Weakstone", "Urza, Planeswalker"),
                 condition, "If you both own and control {this} and an artifact named " +
                 "The Mightstone and Weakstone, exile them, then meld them into Urza, Planeswalker"

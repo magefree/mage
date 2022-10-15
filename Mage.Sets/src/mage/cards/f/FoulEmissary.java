@@ -4,14 +4,13 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SacrificeSourceTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.keyword.EmergeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.PutCards;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -27,8 +26,7 @@ public final class FoulEmissary extends CardImpl {
 
     public FoulEmissary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.HORROR);
+        this.subtype.add(SubType.HUMAN, SubType.HORROR);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
@@ -37,7 +35,7 @@ public final class FoulEmissary extends CardImpl {
                 4, 1, StaticFilters.FILTER_CARD_CREATURE_A, PutCards.HAND, PutCards.BOTTOM_ANY)));
 
         // When you sacrifice Foul Emissary while casting a spell with emerge, create a 3/2 colorless Eldrazi Horror creature token.
-        this.addAbility(new FoulEmissaryTriggeredAbility(new CreateTokenEffect(new EldraziHorrorToken()), false));
+        this.addAbility(new FoulEmissaryTriggeredAbility());
     }
 
     private FoulEmissary(final FoulEmissary card) {
@@ -52,8 +50,9 @@ public final class FoulEmissary extends CardImpl {
 
 class FoulEmissaryTriggeredAbility extends SacrificeSourceTriggeredAbility {
 
-    public FoulEmissaryTriggeredAbility(Effect effect, boolean optional) {
-        super(effect, optional);
+    public FoulEmissaryTriggeredAbility() {
+        super(new CreateTokenEffect(new EldraziHorrorToken()), false);
+        setTriggerPhrase("When you sacrifice {this} while casting a spell with emerge, ");
     }
 
     public FoulEmissaryTriggeredAbility(final FoulEmissaryTriggeredAbility ability) {
@@ -72,10 +71,5 @@ class FoulEmissaryTriggeredAbility extends SacrificeSourceTriggeredAbility {
     @Override
     public FoulEmissaryTriggeredAbility copy() {
         return new FoulEmissaryTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "When you sacrifice {this} while casting a spell with emerge, create a 3/2 colorless Eldrazi Horror creature token.";
     }
 }

@@ -51,9 +51,9 @@ public interface Player extends MageItem, Copyable<Player> {
      * Enum used to indicate what each player is allowed to spend life on.
      * By default it is set to `allAbilities`, but can be changed by effects.
      * E.g. Angel of Jubilation sets it to `nonSpellnonActivatedAbilities`,
-     *      and Karn's Sylex sets it to `onlyManaAbilities`.
-     *
-     *
+     * and Karn's Sylex sets it to `onlyManaAbilities`.
+     * <p>
+     * <p>
      * Default is PayLifeCostLevel.allAbilities.
      */
     enum PayLifeCostLevel {
@@ -214,10 +214,6 @@ public interface Player extends MageItem, Copyable<Player> {
     int getLandsPerTurn();
 
     void setLandsPerTurn(int landsPerTurn);
-
-    int getLoyaltyUsePerTurn();
-
-    void setLoyaltyUsePerTurn(int loyaltyUsePerTurn);
 
     int getMaxHandSize();
 

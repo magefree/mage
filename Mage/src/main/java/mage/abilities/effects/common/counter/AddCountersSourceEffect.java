@@ -8,7 +8,6 @@ import mage.cards.Card;
 import mage.constants.AbilityType;
 import mage.constants.Outcome;
 import mage.counters.Counter;
-import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -16,7 +15,6 @@ import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.UUID;
 
 /**
@@ -54,7 +52,7 @@ public class AddCountersSourceEffect extends OneShotEffect {
         this.informPlayers = informPlayers;
         this.amount = amount;
         this.putOnCard = putOnCard;
-        setText();
+        staticText = CardUtil.getAddRemoveCountersText(amount, counter, "{this}", true);
     }
 
     public AddCountersSourceEffect(final AddCountersSourceEffect effect) {
@@ -95,7 +93,7 @@ public class AddCountersSourceEffect extends OneShotEffect {
             if (informPlayers && !game.isSimulation()) {
                 Player player = game.getPlayer(source.getControllerId());
                 if (player != null) {
-                    game.informPlayers(player.getLogName() + " puts " + newCounter.getCount() + ' ' + newCounter.getName().toLowerCase(Locale.ENGLISH) + " counter on " + card.getLogName());
+                    game.informPlayers(player.getLogName() + " puts " + newCounter.getCount() + ' ' + newCounter.getName() + " counter on " + card.getLogName());
                 }
             }
             return true;
@@ -124,7 +122,7 @@ public class AddCountersSourceEffect extends OneShotEffect {
                         int amountAdded = permanent.getCounters(game).getCount(newCounter.getName()) - before;
                         Player player = game.getPlayer(source.getControllerId());
                         if (player != null) {
-                            game.informPlayers(player.getLogName() + " puts " + amountAdded + ' ' + newCounter.getName().toLowerCase(Locale.ENGLISH) + " counter on " + permanent.getLogName());
+                            game.informPlayers(player.getLogName() + " puts " + amountAdded + ' ' + newCounter.getName() + " counter on " + permanent.getLogName());
                         }
                     }
                 }
@@ -133,32 +131,8 @@ public class AddCountersSourceEffect extends OneShotEffect {
         return true;
     }
 
-    private void setText() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("put ");
-        boolean plural = true;
-        if (counter.getCount() > 1) {
-            sb.append(CardUtil.numberToText(counter.getCount())).append(' ');
-        } else if (amount.toString().equals("X") && amount.getMessage().isEmpty()) {
-            sb.append("X ");
-        } else {
-            sb.append(CounterType.findArticle(counter.getName())).append(' ');
-            plural = false;
-        }
-        sb.append(counter.getName().toLowerCase(Locale.ENGLISH)).append(" counter");
-        if (plural) {
-            sb.append('s');
-        }
-        sb.append(" on {this}");
-        if (!amount.getMessage().isEmpty()) {
-            sb.append(" for each ").append(amount.getMessage());
-        }
-        staticText = sb.toString();
-    }
-
     @Override
     public AddCountersSourceEffect copy() {
         return new AddCountersSourceEffect(this);
     }
-
 }
