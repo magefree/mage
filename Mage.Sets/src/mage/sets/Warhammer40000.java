@@ -79,6 +79,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Crumbling Necropolis", 273, Rarity.UNCOMMON, mage.cards.c.CrumblingNecropolis.class));
         cards.add(new SetCardInfo("Cryptothrall", 155, Rarity.RARE, mage.cards.c.Cryptothrall.class));
         cards.add(new SetCardInfo("Cultivate", 211, Rarity.COMMON, mage.cards.c.Cultivate.class));
+        cards.add(new SetCardInfo("Cybernetica Datasmith", 114, Rarity.RARE, mage.cards.c.CyberneticaDatasmith.class));
         cards.add(new SetCardInfo("Dark Ritual", 196, Rarity.COMMON, mage.cards.d.DarkRitual.class));
         cards.add(new SetCardInfo("Darkness", 197, Rarity.COMMON, mage.cards.d.Darkness.class));
         cards.add(new SetCardInfo("Darkwater Catacombs", 274, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
