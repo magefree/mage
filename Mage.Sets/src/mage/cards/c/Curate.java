@@ -1,11 +1,10 @@
 package mage.cards.c;
 
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.keyword.SurveilEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.PutCards;
 
 import java.util.UUID;
 
@@ -18,7 +17,7 @@ public final class Curate extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Look at the top two cards of your library. Put any number of them into your graveyard and the rest back on top of your library in any order.
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(2, Integer.MAX_VALUE, PutCards.GRAVEYARD, PutCards.TOP_ANY));
+        this.getSpellAbility().addEffect(new SurveilEffect(2));
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
