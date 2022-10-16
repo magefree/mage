@@ -16,6 +16,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -35,6 +36,7 @@ public final class CadricSoulKindler extends CardImpl {
 
     static {
         filter.add(TokenPredicate.FALSE);
+        filter.add(AnotherPredicate.instance);
         filter.add(SuperType.LEGENDARY.getPredicate());
     }
 
@@ -52,7 +54,7 @@ public final class CadricSoulKindler extends CardImpl {
 
         // Whenever another nontoken legendary permanent enters the battlefield under your control, you may pay {1}. If you do, create a token that's a copy of it. That token gains haste. Sacrifice it at the beginning of the next end step.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                new DoIfCostPaid(new CadricSoulKindlerLegendEffect(), new GenericManaCost(1)), filter
+                new DoIfCostPaid(new CadricSoulKindlerTokenEffect(), new GenericManaCost(1)), filter
         ));
     }
 
@@ -92,24 +94,23 @@ class CadricSoulKindlerLegendEffect extends ContinuousRuleModifyingEffectImpl {
         Permanent permanent = game.getPermanent(event.getTargetId());
         return permanent instanceof PermanentToken && permanent.isControlledBy(source.getControllerId());
     }
-
 }
 
-class CadricSoulKindlerEffect extends OneShotEffect {
+class CadricSoulKindlerTokenEffect extends OneShotEffect {
 
-    CadricSoulKindlerEffect() {
+    CadricSoulKindlerTokenEffect() {
         super(Outcome.Benefit);
         staticText = "create a token that's a copy of it. " +
                 "That token gains haste. Sacrifice it at the beginning of the next end step";
     }
 
-    private CadricSoulKindlerEffect(final CadricSoulKindlerEffect effect) {
+    private CadricSoulKindlerTokenEffect(final CadricSoulKindlerTokenEffect effect) {
         super(effect);
     }
 
     @Override
-    public CadricSoulKindlerEffect copy() {
-        return new CadricSoulKindlerEffect(this);
+    public CadricSoulKindlerTokenEffect copy() {
+        return new CadricSoulKindlerTokenEffect(this);
     }
 
     @Override
