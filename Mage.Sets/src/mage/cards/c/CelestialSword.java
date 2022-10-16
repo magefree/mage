@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -14,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -27,10 +25,13 @@ public final class CelestialSword extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
         // {3}, {tap}: Target creature you control gets +3/+3 until end of turn. Its controller sacrifices it at the beginning of the next end step.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(3, 3, Duration.EndOfTurn), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(3, 3, Duration.EndOfTurn), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SacrificeTargetEffect())));
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
+                new SacrificeTargetEffect("its controller sacrifices it")
+                )
+        ).setText("its controller sacrifices it at the beginning of the next end step"));
         this.addAbility(ability);
     }
 
