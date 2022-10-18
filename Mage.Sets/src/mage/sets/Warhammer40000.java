@@ -177,6 +177,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("New Horizons", 218, Rarity.COMMON, mage.cards.n.NewHorizons.class));
         cards.add(new SetCardInfo("Night Scythe", 162, Rarity.UNCOMMON, mage.cards.n.NightScythe.class));
         cards.add(new SetCardInfo("Noise Marine", 82, Rarity.UNCOMMON, mage.cards.n.NoiseMarine.class));
+        cards.add(new SetCardInfo("Nurgle's Conscription", 44, Rarity.RARE, mage.cards.n.NurglesConscription.class));
         cards.add(new SetCardInfo("Nurgle's Rot", 45, Rarity.UNCOMMON, mage.cards.n.NurglesRot.class));
         cards.add(new SetCardInfo("Old One Eye", 96, Rarity.RARE, mage.cards.o.OldOneEye.class));
         cards.add(new SetCardInfo("Opal Palace", 286, Rarity.COMMON, mage.cards.o.OpalPalace.class));
