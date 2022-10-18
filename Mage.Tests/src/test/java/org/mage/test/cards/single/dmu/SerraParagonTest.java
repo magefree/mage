@@ -47,6 +47,7 @@ public class SerraParagonTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         try {
             execute();
+            Assert.fail("Two lands were played");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Can't find ability to activate command: Play Swamp")) {
                 Assert.fail("Should have had error about not being able to play land, but got:\n" + e.getMessage());
