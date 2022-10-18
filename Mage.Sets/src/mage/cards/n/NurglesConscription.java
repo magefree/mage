@@ -32,7 +32,7 @@ public final class NurglesConscription extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{B}");
 
         // Put target creature card from an opponent's graveyard onto the battlefield tapped under your control, then exile that player's graveyard.
-        this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect(true));
         this.getSpellAbility().addEffect(new NurglesConscriptionEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(filter));
     }
