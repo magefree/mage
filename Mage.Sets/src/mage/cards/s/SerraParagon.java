@@ -86,6 +86,7 @@ class SerraParagonPlayEffect extends AsThoughEffectImpl {
                 && source.isControlledBy(affectedControllerId)
                 && game.isActivePlayer(affectedControllerId)
                 && !SerraParagonWatcher.checkPlayer(source, game)
+                && card.isPermanent(game)
                 && (card.isLand(game) || card.getManaValue() <= 3)
                 && Zone.GRAVEYARD.match(game.getState().getZone(card.getId()));
     }
@@ -136,7 +137,8 @@ class SerraParagonTriggeredAbility extends TriggeredAbilityImpl {
 class SerraParagonGainEffect extends ContinuousEffectImpl {
 
     private final MageObjectReference mor;
-    private final Ability ability = new DiesSourceTriggeredAbility(new ExileSourceEffect().setText("exile it")).setTriggerPhrase("When this permanent is put into a graveyard from the battlefield, ");
+    private final Ability ability = new DiesSourceTriggeredAbility(new ExileSourceEffect().setText("exile it"))
+            .setTriggerPhrase("When this permanent is put into a graveyard from the battlefield, ");
 
     {
         ability.addEffect(new GainLifeEffect(2).concatBy("and"));
@@ -191,7 +193,9 @@ class SerraParagonWatcher extends Watcher {
                 || event.getType() == GameEvent.EventType.LAND_PLAYED)
                 && event.hasApprovingIdentifier(MageIdentifier.SerraParagonWatcher)) {
             map.computeIfAbsent(
-                    event.getAdditionalReference().getApprovingMageObjectReference(), x -> new HashSet<>()
+                    event.getAdditionalReference()
+                            .getApprovingMageObjectReference(),
+                    x -> new HashSet<>()
             ).add(event.getPlayerId());
         }
     }
@@ -207,7 +211,7 @@ class SerraParagonWatcher extends Watcher {
                 .getState()
                 .getWatcher(SerraParagonWatcher.class)
                 .map
-                .getOrDefault(new MageObjectReference(source), Collections.emptySet())
+                .getOrDefault(new MageObjectReference(source.getSourceId(), game), Collections.emptySet())
                 .contains(source.getControllerId());
     }
 }
