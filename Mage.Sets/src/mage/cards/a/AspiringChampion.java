@@ -30,7 +30,7 @@ public final class AspiringChampion extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Ruinous Ascension -- When Aspiring Champion deals combat damage to a player, sacrifice it. If you do, reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield, then shuffle the rest into your library. If that creature is a Demon, it deals damage equal to its power to each opponent.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
