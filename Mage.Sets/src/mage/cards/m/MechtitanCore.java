@@ -30,7 +30,6 @@ import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
