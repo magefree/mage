@@ -9,12 +9,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.permanent.token.AstartesWarriorToken;
 import mage.players.Player;
 import mage.util.ManaUtil;
 import mage.watchers.common.PlayerLostLifeWatcher;
 
 import java.util.UUID;
+import mage.game.permanent.token.BlackAstartesWarriorToken;
 
 /**
  * @author TheElk801
@@ -79,6 +79,6 @@ class MortarionDaemonPrimarchEffect extends OneShotEffect {
         int manaPaid = ManaUtil.playerPaysXGenericMana(
                 true, "Mortarion, Daemon Primarch", player, source, game, lifeLost
         );
-        return manaPaid > 0 && new AstartesWarriorToken().putOntoBattlefield(manaPaid, game, source);
+        return manaPaid > 0 && new BlackAstartesWarriorToken().putOntoBattlefield(manaPaid, game, source);
     }
 }

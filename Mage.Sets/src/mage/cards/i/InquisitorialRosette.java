@@ -12,9 +12,9 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.AstartesWarriorToken;
 
 import java.util.UUID;
+import mage.game.permanent.token.WhiteAstartesWarriorToken;
 
 /**
  * @author TheElk801
@@ -28,7 +28,7 @@ public final class InquisitorialRosette extends CardImpl {
 
         // Inquisition Agents -- Whenever equipped creature attacks, create a 2/2 white Astartes Warrior creature token with vigilance that's attacking. Then attacking creatures gain menace until end of turn.
         Ability ability = new AttacksAttachedTriggeredAbility(
-                new CreateTokenEffect(new AstartesWarriorToken(), 1, false, true)
+                new CreateTokenEffect(new WhiteAstartesWarriorToken(), 1, false, true)
         );
         ability.addEffect(new GainAbilityAllEffect(
                 new MenaceAbility(false), Duration.EndOfTurn,

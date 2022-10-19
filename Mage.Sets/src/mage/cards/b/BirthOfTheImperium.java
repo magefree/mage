@@ -16,12 +16,12 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Controllable;
 import mage.game.Game;
-import mage.game.permanent.token.AstartesWarriorToken;
 
 import java.util.Map;
 import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import mage.game.permanent.token.WhiteAstartesWarriorToken;
 
 /**
  * @author TheElk801
@@ -39,7 +39,7 @@ public final class BirthOfTheImperium extends CardImpl {
         // I -- Create a 2/2 white Astartes Warrior creature token with vigilance for each opponent you have.
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_I,
-                new CreateTokenEffect(new AstartesWarriorToken(), OpponentsCount.instance)
+                new CreateTokenEffect(new WhiteAstartesWarriorToken(), OpponentsCount.instance)
                         .setText("create a 2/2 white Astartes Warrior creature " +
                                 "token with vigilance for each opponent you have")
         );
