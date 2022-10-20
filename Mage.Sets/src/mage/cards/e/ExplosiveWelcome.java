@@ -1,6 +1,7 @@
 package mage.cards.e;
 
 import mage.Mana;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.cards.CardImpl;
@@ -31,9 +32,9 @@ public final class ExplosiveWelcome extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{7}{R}");
 
         // Explosive Welcome deals 5 damage to any target and 3 damage to any other target. Add {R}{R}{R}.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(5, true, "", true));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(StaticValue.get(5), true, "", true));
         this.getSpellAbility().addEffect(
-                new DamageTargetEffect(3, true, "", true)
+                new DamageTargetEffect(StaticValue.get(5), true, "", true)
                         .setTargetPointer(new SecondTargetPointer())
                         .setText("and 3 damage to any other target.")
         );
