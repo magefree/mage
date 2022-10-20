@@ -40,7 +40,7 @@ public final class BarroomBrawl extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
 
         // Target creature you control fights target creature the opponent to your left controls. Then that player may copy this spell and may choose new targets for the copy.
-        this.getSpellAbility().addEffect(new FightTargetsEffect());
+        this.getSpellAbility().addEffect(new FightTargetsEffect(false));
         this.getSpellAbility().addEffect(new BarroomBrawlEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
