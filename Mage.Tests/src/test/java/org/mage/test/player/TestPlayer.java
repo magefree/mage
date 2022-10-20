@@ -2949,11 +2949,6 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean putInHand(Card card, Game game) {
-        return computerPlayer.putInHand(card, game);
-    }
-
-    @Override
     public boolean removeFromHand(Card card, Game game) {
         return computerPlayer.removeFromHand(card, game);
     }

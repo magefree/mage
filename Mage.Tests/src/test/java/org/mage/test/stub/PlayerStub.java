@@ -551,11 +551,6 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean putInHand(Card card, Game game) {
-        return false;
-    }
-
-    @Override
     public boolean removeFromHand(Card card, Game game) {
         return false;
     }
