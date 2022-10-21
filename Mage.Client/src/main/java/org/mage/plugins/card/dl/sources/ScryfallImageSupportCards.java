@@ -521,6 +521,7 @@ public class ScryfallImageSupportCards {
             add("BRO"); // The Brothers' War
             add("BRC"); // The Brothers' War Commander
             add("BOT"); // Transformers
+            add("J22"); // Jumpstart 2022
         }
     };
 
