@@ -20,6 +20,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         this.blockName = "Jumpstart";
         this.hasBasicLands = false;
 
+        cards.add(new SetCardInfo("Ardoz, Cobbler of War", 29, Rarity.RARE, mage.cards.a.ArdozCobblerOfWar.class));
         cards.add(new SetCardInfo("Coldsteel Heart", 94, Rarity.UNCOMMON, mage.cards.c.ColdsteelHeart.class));
         cards.add(new SetCardInfo("Kiki-Jiki, Mirror Breaker", 79, Rarity.MYTHIC, mage.cards.k.KikiJikiMirrorBreaker.class));
     }
