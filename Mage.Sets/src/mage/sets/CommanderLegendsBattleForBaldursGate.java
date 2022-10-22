@@ -468,6 +468,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Pull from Tomorrow", 731, Rarity.RARE, mage.cards.p.PullFromTomorrow.class));
         cards.add(new SetCardInfo("Puppeteer Clique", 769, Rarity.RARE, mage.cards.p.PuppeteerClique.class));
         cards.add(new SetCardInfo("Pursued Whale", 732, Rarity.RARE, mage.cards.p.PursuedWhale.class));
+        cards.add(new SetCardInfo("Raggadragga, Goreguts Boss", 291, Rarity.RARE, mage.cards.r.RaggadraggaGoregutsBoss.class));
         cards.add(new SetCardInfo("Raging Ravine", 910, Rarity.RARE, mage.cards.r.RagingRavine.class));
         cards.add(new SetCardInfo("Raised by Giants", 250, Rarity.RARE, mage.cards.r.RaisedByGiants.class));
         cards.add(new SetCardInfo("Raphael, Fiendish Savior", 292, Rarity.RARE, mage.cards.r.RaphaelFiendishSavior.class));
