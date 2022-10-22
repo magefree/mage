@@ -65,6 +65,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Cave of Temptation", 267, Rarity.COMMON, mage.cards.c.CaveOfTemptation.class));
         cards.add(new SetCardInfo("Celestine, the Living Saint", 10, Rarity.RARE, mage.cards.c.CelestineTheLivingSaint.class));
         cards.add(new SetCardInfo("Chaos Defiler", 110, Rarity.RARE, mage.cards.c.ChaosDefiler.class));
+        cards.add(new SetCardInfo("Chaos Mutation", 111, Rarity.RARE, mage.cards.c.ChaosMutation.class));
         cards.add(new SetCardInfo("Chaos Terminator Lord", 74, Rarity.UNCOMMON, mage.cards.c.ChaosTerminatorLord.class));
         cards.add(new SetCardInfo("Chaos Warp", 205, Rarity.RARE, mage.cards.c.ChaosWarp.class));
         cards.add(new SetCardInfo("Choked Estuary", 268, Rarity.RARE, mage.cards.c.ChokedEstuary.class));
