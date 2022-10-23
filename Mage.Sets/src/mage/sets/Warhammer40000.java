@@ -142,6 +142,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Hour of Reckoning", 187, Rarity.RARE, mage.cards.h.HourOfReckoning.class));
         cards.add(new SetCardInfo("Hull Breach", 224, Rarity.UNCOMMON, mage.cards.h.HullBreach.class));
         cards.add(new SetCardInfo("Icon of Ancestry", 242, Rarity.RARE, mage.cards.i.IconOfAncestry.class));
+        cards.add(new SetCardInfo("Illuminor Szeras", 37, Rarity.RARE, mage.cards.i.IlluminorSzeras.class));
         cards.add(new SetCardInfo("Imotekh the Stormlord", 5, Rarity.MYTHIC, mage.cards.i.ImotekhTheStormlord.class));
         cards.add(new SetCardInfo("Inquisitor Greyfax", 3, Rarity.MYTHIC, mage.cards.i.InquisitorGreyfax.class));
         cards.add(new SetCardInfo("Inquisitorial Rosette", 159, Rarity.RARE, mage.cards.i.InquisitorialRosette.class));
