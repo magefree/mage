@@ -207,6 +207,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Reaver Titan", 163, Rarity.RARE, mage.cards.r.ReaverTitan.class));
         cards.add(new SetCardInfo("Reconnaissance Mission", 193, Rarity.UNCOMMON, mage.cards.r.ReconnaissanceMission.class));
         cards.add(new SetCardInfo("Reliquary Tower", 291, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
+        cards.add(new SetCardInfo("Resurrection Orb", 165, Rarity.RARE, mage.cards.r.ResurrectionOrb.class));
         cards.add(new SetCardInfo("Reverberate", 207, Rarity.RARE, mage.cards.r.Reverberate.class));
         cards.add(new SetCardInfo("Royal Warden", 52, Rarity.RARE, mage.cards.r.RoyalWarden.class));
         cards.add(new SetCardInfo("Rugged Highlands", 292, Rarity.COMMON, mage.cards.r.RuggedHighlands.class));
