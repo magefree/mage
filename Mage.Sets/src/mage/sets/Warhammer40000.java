@@ -194,6 +194,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Plasmancer", 48, Rarity.UNCOMMON, mage.cards.p.Plasmancer.class));
         cards.add(new SetCardInfo("Polluted Mire", 288, Rarity.COMMON, mage.cards.p.PollutedMire.class));
         cards.add(new SetCardInfo("Port Town", 289, Rarity.RARE, mage.cards.p.PortTown.class));
+        cards.add(new SetCardInfo("Poxwalkers", 49, Rarity.RARE, mage.cards.p.Poxwalkers.class));
         cards.add(new SetCardInfo("Prairie Stream", 290, Rarity.RARE, mage.cards.p.PrairieStream.class));
         cards.add(new SetCardInfo("Primaris Chaplain", 137, Rarity.UNCOMMON, mage.cards.p.PrimarisChaplain.class));
         cards.add(new SetCardInfo("Primaris Eliminator", 50, Rarity.RARE, mage.cards.p.PrimarisEliminator.class));
