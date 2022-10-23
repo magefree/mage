@@ -19,10 +19,8 @@ import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
-import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 
 /**
@@ -32,13 +30,11 @@ import mage.target.common.TargetCreatureOrPlaneswalker;
 public final class GeyadroneDihada extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("permanents with corruption counters on them");
-    private static final FilterCreatureOrPlaneswalkerPermanent filter2 = new FilterCreatureOrPlaneswalkerPermanent("other creature or planeswalker");
-    private static final FilterPermanent filter3 = new FilterPermanent("each permanent with a corruption counter on it");
+    private static final FilterPermanent filter2 = new FilterCreatureOrPlaneswalkerPermanent("other creature or planeswalker");
 
     static {
-        filter.add(CorruptionCounterPredicate.instance);
+        filter.add(CounterType.CORRUPTION.getPredicate());
         filter2.add(AnotherPredicate.instance);
-        filter3.add(CorruptionCounterPredicate.instance);
     }
 
     public GeyadroneDihada(UUID ownerId, CardSetInfo setInfo) {
@@ -56,7 +52,7 @@ public final class GeyadroneDihada extends CardImpl {
         ability.addEffect(new GainLifeEffect(2).concatBy("and"));
         ability.addEffect(new AddCountersTargetEffect(CounterType.CORRUPTION.createInstance(), Outcome.Detriment)
                 .setText("Put a corruption counter on up to one other target creature or planeswalker"));
-        ability.addTarget(new TargetCreatureOrPlaneswalker(0, 1, filter2, false));
+        ability.addTarget(new TargetPermanent(0, 1, filter2));
         this.addAbility(ability);
 
         // −3: Gain control of target creature or planeswalker until end of tun. Untap it and put a corruption counter on it. It gains haste until end of turn.
@@ -68,7 +64,10 @@ public final class GeyadroneDihada extends CardImpl {
         this.addAbility(ability);
 
         // −7: Gain control of each permanent with a corruption counter on it.
-        this.addAbility(new LoyaltyAbility(new GainControlAllEffect(Duration.Custom, filter3), -7));
+        this.addAbility(new LoyaltyAbility(
+                new GainControlAllEffect(Duration.Custom, filter).setText("gain control of each permanent with a corruption counter on it"),
+                -7
+        ));
     }
 
     private GeyadroneDihada(final GeyadroneDihada card) {
@@ -78,14 +77,5 @@ public final class GeyadroneDihada extends CardImpl {
     @Override
     public GeyadroneDihada copy() {
         return new GeyadroneDihada(this);
-    }
-}
-
-enum CorruptionCounterPredicate implements Predicate<Permanent> {
-    instance;
-
-    @Override
-    public boolean apply(Permanent input, Game game) {
-        return input.getCounters(game).getCount(CounterType.CORRUPTION) > 0;
     }
 }

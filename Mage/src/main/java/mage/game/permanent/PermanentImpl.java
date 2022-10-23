@@ -102,6 +102,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected List<MarkedDamageInfo> markedDamage;
     protected int markedLifelink;
     protected int timesLoyaltyUsed = 0;
+    protected int loyaltyActivationsAvailable = 1;
     protected int transformCount = 0;
     protected Map<String, String> info;
     protected int createOrder;
@@ -169,6 +170,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.pairedPermanent = permanent.pairedPermanent;
         this.bandedCards.addAll(permanent.bandedCards);
         this.timesLoyaltyUsed = permanent.timesLoyaltyUsed;
+        this.loyaltyActivationsAvailable = permanent.loyaltyActivationsAvailable;
         this.transformCount = permanent.transformCount;
 
         this.morphed = permanent.morphed;
@@ -211,6 +213,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.maxBlockedBy = 0;
         this.copy = false;
         this.goadingPlayers.clear();
+        this.loyaltyActivationsAvailable = 1;
     }
 
     @Override
@@ -463,6 +466,18 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public void incrementLoyaltyActivationsAvailable() {
+        this.incrementLoyaltyActivationsAvailable(Integer.MAX_VALUE);
+    }
+
+    @Override
+    public void incrementLoyaltyActivationsAvailable(int max) {
+        if (this.loyaltyActivationsAvailable < max) {
+            this.loyaltyActivationsAvailable++;
+        }
+    }
+
+    @Override
     public void addLoyaltyUsed() {
         this.timesLoyaltyUsed++;
     }
@@ -471,7 +486,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public boolean canLoyaltyBeUsed(Game game) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
-            return controller.getLoyaltyUsePerTurn() > timesLoyaltyUsed;
+            return loyaltyActivationsAvailable > timesLoyaltyUsed;
         }
         return false;
     }

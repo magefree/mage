@@ -1,6 +1,6 @@
 package mage.cards.t;
 
-import mage.abilities.effects.common.PreventAllDamageByAllObjectsEffect;
+import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -18,7 +18,7 @@ public final class ThwartTheEnemy extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");
 
         // Prevent all damage that would be dealt this turn by creatures your opponents control.
-        this.getSpellAbility().addEffect(new PreventAllDamageByAllObjectsEffect(
+        this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(
                 StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES, Duration.EndOfTurn, false
         ));
     }

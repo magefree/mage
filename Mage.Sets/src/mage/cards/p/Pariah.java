@@ -35,7 +35,7 @@ public final class Pariah extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
         
         // All damage that would be dealt to you is dealt to enchanted creature instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PariahEffect()));

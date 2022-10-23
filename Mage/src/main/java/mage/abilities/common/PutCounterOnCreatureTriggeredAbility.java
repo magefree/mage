@@ -74,6 +74,9 @@ public class PutCounterOnCreatureTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
+        if (permanent == null) {
+            permanent = game.getPermanentEntering(event.getTargetId());
+        }
         if (permanent == null || !filter.match(permanent, controllerId, this, game)) {
             return false;
         }

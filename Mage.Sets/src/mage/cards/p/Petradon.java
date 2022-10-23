@@ -34,7 +34,7 @@ public final class Petradon extends CardImpl {
 
         // When Petradon enters the battlefield, exile two target lands.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect(), false);
-        ability.addTarget(new TargetLandPermanent(2, 2, StaticFilters.FILTER_LANDS, false));
+        ability.addTarget(new TargetLandPermanent(2));
         this.addAbility(ability);
 
         // When Petradon leaves the battlefield, return the exiled cards to the battlefield under their owners' control.

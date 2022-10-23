@@ -1,5 +1,6 @@
 package mage.abilities.effects.common;
 
+import mage.constants.PutCards;
 import mage.filter.FilterCard;
 
 /**

@@ -42,7 +42,7 @@ public final class Cocoon extends CardImpl {
         TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // When Cocoon enters the battlefield, tap enchanted creature and put three pupa counters on Cocoon.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect());

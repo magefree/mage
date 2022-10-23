@@ -36,7 +36,7 @@ public final class SkyboonEvangelist extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // FLying
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
 
         // When Skyboon Evangelist enters the battlefield, support 6.

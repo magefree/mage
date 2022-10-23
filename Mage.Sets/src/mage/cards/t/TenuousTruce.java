@@ -29,10 +29,10 @@ public class TenuousTruce extends CardImpl {
         this.addSubType(SubType.AURA);
 
         // Enchant opponent
-        TargetPlayer targetOpponent = new TargetOpponent();
-        this.getSpellAbility().addTarget(targetOpponent);
+        TargetPlayer auraTarget = new TargetOpponent();
+        this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.DrawCard));
-        this.addAbility(new EnchantAbility(targetOpponent.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // At the beginning of enchanted opponent’s end step, you and that player each draw a card.
         Ability drawAbility = new BeginningOfEndStepTriggeredAbility(

@@ -10,13 +10,9 @@ import mage.abilities.costs.Cost;
 import mage.abilities.mana.ConditionalColorlessManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.ManaCondition;
-import mage.cards.Card;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.Game;
-import mage.game.command.Commander;
-import mage.game.stack.Spell;
-import mage.game.stack.StackAbility;
-import mage.game.stack.StackObject;
 
 import java.util.Arrays;
 import java.util.UUID;
@@ -29,9 +25,10 @@ public final class PowerstoneToken extends TokenImpl {
     public PowerstoneToken() {
         super("Powerstone Token", "Powerstone token");
         cardType.add(CardType.ARTIFACT);
+        subtype.add(SubType.POWERSTONE);
 
         // {T}: Add {C}. This mana can't be spent to cast a nonartifact spell.
-        this.addAbility(new ConditionalColorlessManaAbility(1, new PowerstoneTokenManaBuilder()));
+        this.addAbility(new ConditionalColorlessManaAbility(1, makeBuilder()));
 
         availableImageSetCodes = Arrays.asList("DMU");
     }
@@ -42,6 +39,10 @@ public final class PowerstoneToken extends TokenImpl {
 
     public PowerstoneToken copy() {
         return new PowerstoneToken(this);
+    }
+
+    public static PowerstoneTokenManaBuilder makeBuilder() {
+        return new PowerstoneTokenManaBuilder();
     }
 }
 
@@ -76,31 +77,13 @@ class PowerstoneTokenManaCondition extends ManaCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         if (!(source instanceof SpellAbility)) {
-            return false;
+            return true;
         }
         MageObject object = game.getObject(source);
-        if (object instanceof StackObject) {
-            return object instanceof StackAbility || !object.isArtifact(game);
+        if (object != null && object.isArtifact(game)) {
+            return true;
         }
-        if (!game.inCheckPlayableState()) {
-            return false;
-        }
-        Spell spell;
-        if (object instanceof Card) {
-            spell = new Spell(
-                    (Card) object, (SpellAbility) source, source.getControllerId(),
-                    game.getState().getZone(source.getSourceId()), game
-            );
-        } else if (object instanceof Commander) {
-            spell = new Spell(
-                    ((Commander) object).getSourceObject(),
-                    (SpellAbility) source, source.getControllerId(),
-                    game.getState().getZone(source.getSourceId()), game
-            );
-        } else {
-            spell = null;
-        }
-        return spell == null || spell.isArtifact(game);
+        return false;
     }
 
     @Override

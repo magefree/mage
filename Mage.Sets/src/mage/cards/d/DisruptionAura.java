@@ -35,7 +35,7 @@ public final class DisruptionAura extends CardImpl {
         TargetPermanent auraTarget = new TargetArtifactPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted artifact has "At the beginning of your upkeep, sacrifice this artifact unless you pay its mana cost."
         ability = new BeginningOfUpkeepTriggeredAbility(new DisruptionAuraEffect(), TargetController.YOU, false);

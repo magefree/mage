@@ -12,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -33,7 +34,7 @@ public final class BogBadger extends CardImpl {
         // When Bog Badger enters the battlefield, if it was kicked, creatures you control gain menace until end of turn.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new GainAbilityControlledEffect(
-                        new MenaceAbility(false), Duration.EndOfTurn
+                        new MenaceAbility(false), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES
                 )), KickedCondition.ONCE, "When {this} enters the battlefield, " +
                 "if it was kicked, creatures you control gain menace until end of turn. " +
                 "<i>(A creature with menace can't be blocked except by two or more creatures.)</i>"

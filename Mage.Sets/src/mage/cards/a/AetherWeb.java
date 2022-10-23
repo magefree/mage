@@ -36,7 +36,7 @@ public final class AetherWeb extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature gets +1/+1, has reach, and can block creatures with shadow as though they didn't have shadow.
         Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(1, 1));

@@ -36,7 +36,7 @@ public final class GenjuOfTheCedars extends CardImpl {
         TargetPermanent auraTarget = new TargetLandPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.PutCreatureInPlay));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // {2}: Enchanted Forest becomes a 4/4 green Spirit creature until end of turn. It's still a land.

@@ -43,7 +43,7 @@ public final class PledgeOfLoyalty extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature has protection from the colors of permanents you control. This effect doesn't remove Pledge of Loyalty.
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(

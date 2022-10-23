@@ -70,7 +70,7 @@ public class MariTheKillingQuill extends CardImpl {
         Ability dealsDamageAbility = new DealsCombatDamageToAPlayerTriggeredAbility(new MariTheKillingQuillDealsDamageEffect(), false, true);
         Effect drawAndTreasureEffect = new GainAbilityControlledEffect(dealsDamageAbility, Duration.WhileOnBattlefield, filter);
         drawAndTreasureEffect.setText(
-                "\"Whenever this creature deals combat damage to a player, you may remove a hit counter from a card taht player owns in exile. " +
+                "\"Whenever this creature deals combat damage to a player, you may remove a hit counter from a card that player owns in exile. " +
                 "If you do, draw a card and create two Treasure tokens.\"");
         drawAndTreasureEffect.concatBy("and");
 

@@ -13,10 +13,8 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
 import mage.util.CardUtil;
 
-import java.util.Locale;
 import java.util.UUID;
 
 /**
@@ -79,17 +77,17 @@ public class AddCountersTargetEffect extends OneShotEffect {
                     permanent.addCounters(newCounter, source.getControllerId(), source, game);
                     affectedTargets++;
                     game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
-                            + newCounter.getCount() + ' ' + newCounter.getName().toLowerCase(Locale.ENGLISH) + " counters on " + permanent.getLogName());
+                            + newCounter.getCount() + ' ' + newCounter.getName() + " counters on " + permanent.getLogName());
                 } else if (player != null) {
                     player.addCounters(newCounter, source.getControllerId(), source, game);
                     affectedTargets++;
                     game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
-                            + newCounter.getCount() + ' ' + newCounter.getName().toLowerCase(Locale.ENGLISH) + " counters on " + player.getLogName());
+                            + newCounter.getCount() + ' ' + newCounter.getName() + " counters on " + player.getLogName());
                 } else if (card != null) {
                     card.addCounters(newCounter, source.getControllerId(), source, game);
                     affectedTargets++;
                     game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
-                            + newCounter.getCount() + ' ' + newCounter.getName().toLowerCase(Locale.ENGLISH) + " counters on " + card.getLogName());
+                            + newCounter.getCount() + ' ' + newCounter.getName() + " counters on " + card.getLogName());
                 }
             }
             return affectedTargets > 0;
@@ -102,51 +100,11 @@ public class AddCountersTargetEffect extends OneShotEffect {
         if (!staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        sb.append("put ");
-        String counterName = counter.getName().toLowerCase(Locale.ENGLISH);
-        if (counter.getCount() > 1) {
-            sb.append(CardUtil.numberToText(counter.getCount())).append(' ');
-        } else {
-            sb.append(CounterType.findArticle(counterName)).append(' ');
-        }
-        sb.append(counterName).append(" counter");
-        if (counter.getCount() > 1) {
-            sb.append('s');
-        }
-        sb.append(" on ");
-
-        Target target = mode.getTargets().getEffectTarget(this.targetPointer);
-        if (target != null) {
-            if (target.getNumberOfTargets() == 0) {
-                if (target.getMaxNumberOfTargets() > 1) {
-                    sb.append("each of ");
-                }
-                sb.append("up to ");
-            }
-
-            if (target.getMaxNumberOfTargets() > 1 || target.getNumberOfTargets() == 0) {
-                sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets()))
-                        .append(" target ").append(target.getTargetName());
-            } else {
-                if (!target.getTargetName().startsWith("another")) {
-                    sb.append("target ");
-                }
-                sb.append(target.getTargetName());
-            }
-        } else {
-            sb.append("that creature");
-        }
-
-        if (!amount.getMessage().isEmpty()) {
-            sb.append(" for each ").append(amount.getMessage());
-        }
-        return sb.toString();
+        return CardUtil.getAddRemoveCountersText(amount, counter, getTargetPointer().describeTargets(mode.getTargets(), "that creature"), true);
     }
 
     @Override
     public AddCountersTargetEffect copy() {
         return new AddCountersTargetEffect(this);
     }
-
 }

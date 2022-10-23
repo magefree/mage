@@ -121,4 +121,9 @@ class MythosOfSnapdaxEffect extends OneShotEffect {
         }
         return true;
     }
+
+    @Override
+    public Condition getCondition() {
+        return condition;
+    }
 }

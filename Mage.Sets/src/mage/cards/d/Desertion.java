@@ -1,38 +1,30 @@
 package mage.cards.d;
 
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.CounterTargetEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.PutCards;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
+import mage.game.stack.StackObject;
 import mage.target.TargetSpell;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
- * @author Quercitron
+ * @author awjackson
  */
 public final class Desertion extends CardImpl {
 
     public Desertion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
 
-        // Counter target spell.
-        this.getSpellAbility().addEffect(new CounterTargetEffect());
+        // Counter target spell. If an artifact or creature spell is countered this way,
+        // put that card onto the battlefield under your control instead of into its owner's graveyard.
+        this.getSpellAbility().addEffect(new DesertionEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
-
-        // If an artifact or creature spell is countered this way, put that card onto the battlefield under your control instead of into its owner's graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.STACK, new DesertionReplacementEffect()));
     }
 
     private Desertion(final Desertion card) {
@@ -45,48 +37,30 @@ public final class Desertion extends CardImpl {
     }
 }
 
-class DesertionReplacementEffect extends ReplacementEffectImpl {
+class DesertionEffect extends OneShotEffect {
 
-    DesertionReplacementEffect() {
-        super(Duration.WhileOnStack, Outcome.PutCardInPlay);
-        staticText = "If an artifact or creature spell is countered this way, put that card onto the battlefield under your control instead of into its owner's graveyard";
+    public DesertionEffect() {
+        super(Outcome.Detriment);
+        staticText = "counter target spell. If an artifact or creature spell is countered this way, put that card onto the battlefield under your control instead of into its owner's graveyard";
     }
 
-    private DesertionReplacementEffect(final DesertionReplacementEffect effect) {
+    private DesertionEffect(final DesertionEffect effect) {
         super(effect);
     }
 
     @Override
-    public DesertionReplacementEffect copy() {
-        return new DesertionReplacementEffect(this);
+    public DesertionEffect copy() {
+        return new DesertionEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ZoneChangeEvent zce = (ZoneChangeEvent) event;
-        zce.setToZone(Zone.BATTLEFIELD);
-        zce.setPlayerId(source.getControllerId());
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!Objects.equals(event.getSourceId(), source.getSourceId())
-                || !(((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD)) {
+        StackObject spell = game.getStack().getStackObject(targetPointer.getFirst(game, source));
+        if (spell == null) {
             return false;
         }
-        MageObject mageObject = game.getObject(event.getTargetId());
-        return mageObject != null
-                && (mageObject.isArtifact(game) || mageObject.isCreature(game));
+        return game.getStack().counter(spell.getId(), source, game,
+                spell.isArtifact() || spell.isCreature() ? PutCards.BATTLEFIELD : PutCards.GRAVEYARD
+        );
     }
 }

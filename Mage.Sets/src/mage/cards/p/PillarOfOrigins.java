@@ -1,6 +1,7 @@
 
 package mage.cards.p;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageObject;
@@ -72,6 +73,21 @@ class PillarOfOriginsManaBuilder extends ConditionalManaBuilder {
     public String getRule() {
         return "Spend this mana only to cast a creature spell of the chosen type";
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), this.creatureType);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) {
+            return false;
+        }
+
+        return this.creatureType == ((PillarOfOriginsManaBuilder) obj).creatureType;
+    }
+
 }
 
 class PillarOfOriginsConditionalMana extends ConditionalMana {

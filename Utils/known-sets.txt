@@ -129,6 +129,7 @@ Judge Promo|JudgePromo|
 Judgment|Judgment|
 Jumpstart|Jumpstart|
 Jumpstart: Historic Horizons|JumpstartHistoricHorizons|
+Jumpstart 2022|Jumpstart2022|
 Kaladesh|Kaladesh|
 Kaldheim|Kaldheim|
 Kaldheim Commander|KaldheimCommander|
@@ -213,6 +214,8 @@ Super Series|SuperSeries|
 Tempest|Tempest|
 Tempest Remastered|TempestRemastered|
 Tenth Edition|TenthEdition|
+The Brothers' War|TheBrothersWar|
+The Brothers' War Commander|TheBrothersWarCommander|
 The Dark|TheDark|
 Theros|Theros|
 Theros Beyond Death|TherosBeyondDeath|
@@ -220,6 +223,7 @@ Throne of Eldraine|ThroneOfEldraine|
 Time Spiral|TimeSpiral|
 Time Spiral "Timeshifted"|TimeSpiralTimeshifted|
 Torment|Torment|
+Transformers|Transformers|
 Ugin's Fate|UginsFate|
 Unglued|Unglued|
 Unhinged|Unhinged|

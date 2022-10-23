@@ -81,7 +81,7 @@ public class TargetOfOpponentsSpellOrAbilityTriggeredAbility extends TriggeredAb
 
         // Add target for effects which need it (e.g. the counter effect from AmuletOfSafekeeping)
         this.getEffects().setTargetPointer(new FixedTarget(event.getSourceId(), game));
-        return false;
+        return true;
     }
 
     @Override

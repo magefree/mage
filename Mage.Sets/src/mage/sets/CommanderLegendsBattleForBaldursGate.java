@@ -61,13 +61,16 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Aven Mindcensor", 688, Rarity.UNCOMMON, mage.cards.a.AvenMindcensor.class));
         cards.add(new SetCardInfo("Avenging Hunter", 215, Rarity.COMMON, mage.cards.a.AvengingHunter.class));
         cards.add(new SetCardInfo("Baba Lysaga, Night Witch", 266, Rarity.RARE, mage.cards.b.BabaLysagaNightWitch.class));
+        cards.add(new SetCardInfo("Baeloth Barrityl, Entertainer", 655, Rarity.MYTHIC, mage.cards.b.BaelothBarritylEntertainer.class));
         cards.add(new SetCardInfo("Bag of Holding", 299, Rarity.UNCOMMON, mage.cards.b.BagOfHolding.class));
         cards.add(new SetCardInfo("Baldur's Gate", 345, Rarity.RARE, mage.cards.b.BaldursGate.class));
         cards.add(new SetCardInfo("Balor", 162, Rarity.MYTHIC, mage.cards.b.Balor.class));
         cards.add(new SetCardInfo("Band Together", 216, Rarity.COMMON, mage.cards.b.BandTogether.class));
         cards.add(new SetCardInfo("Bane's Contingency", 57, Rarity.UNCOMMON, mage.cards.b.BanesContingency.class));
         cards.add(new SetCardInfo("Bane's Invoker", 7, Rarity.COMMON, mage.cards.b.BanesInvoker.class));
+        cards.add(new SetCardInfo("Bane, Lord of Darkness", 267, Rarity.RARE, mage.cards.b.BaneLordOfDarkness.class));
         cards.add(new SetCardInfo("Banishment", 8, Rarity.UNCOMMON, mage.cards.b.Banishment.class));
+        cards.add(new SetCardInfo("Barroom Brawl", 217, Rarity.RARE, mage.cards.b.BarroomBrawl.class));
         cards.add(new SetCardInfo("Basilisk Collar", 300, Rarity.RARE, mage.cards.b.BasiliskCollar.class));
         cards.add(new SetCardInfo("Basilisk Gate", 346, Rarity.COMMON, mage.cards.b.BasiliskGate.class));
         cards.add(new SetCardInfo("Battle Angels of Tyr", 9, Rarity.MYTHIC, mage.cards.b.BattleAngelsOfTyr.class));
@@ -240,6 +243,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Fire Diamond", 313, Rarity.COMMON, mage.cards.f.FireDiamond.class));
         cards.add(new SetCardInfo("Fireball", 175, Rarity.UNCOMMON, mage.cards.f.Fireball.class));
         cards.add(new SetCardInfo("Firja's Retribution", 846, Rarity.RARE, mage.cards.f.FirjasRetribution.class));
+        cards.add(new SetCardInfo("Firkraag, Cunning Instigator", 648, Rarity.MYTHIC, mage.cards.f.FirkraagCunningInstigator.class));
         cards.add(new SetCardInfo("Flaming Fist Officer", 19, Rarity.COMMON, mage.cards.f.FlamingFistOfficer.class));
         cards.add(new SetCardInfo("Flaming Fist", 18, Rarity.COMMON, mage.cards.f.FlamingFist.class));
         cards.add(new SetCardInfo("Folk Hero", 650, Rarity.MYTHIC, mage.cards.f.FolkHero.class));
@@ -465,10 +469,12 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Pull from Tomorrow", 731, Rarity.RARE, mage.cards.p.PullFromTomorrow.class));
         cards.add(new SetCardInfo("Puppeteer Clique", 769, Rarity.RARE, mage.cards.p.PuppeteerClique.class));
         cards.add(new SetCardInfo("Pursued Whale", 732, Rarity.RARE, mage.cards.p.PursuedWhale.class));
+        cards.add(new SetCardInfo("Raggadragga, Goreguts Boss", 291, Rarity.RARE, mage.cards.r.RaggadraggaGoregutsBoss.class));
         cards.add(new SetCardInfo("Raging Ravine", 910, Rarity.RARE, mage.cards.r.RagingRavine.class));
         cards.add(new SetCardInfo("Raised by Giants", 250, Rarity.RARE, mage.cards.r.RaisedByGiants.class));
         cards.add(new SetCardInfo("Raphael, Fiendish Savior", 292, Rarity.RARE, mage.cards.r.RaphaelFiendishSavior.class));
         cards.add(new SetCardInfo("Rasaad yn Bashir", 37, Rarity.UNCOMMON, mage.cards.r.RasaadYnBashir.class));
+        cards.add(new SetCardInfo("Ravenloft Adventurer", 142, Rarity.RARE, mage.cards.r.RavenloftAdventurer.class));
         cards.add(new SetCardInfo("Ravenous Chupacabra", 770, Rarity.UNCOMMON, mage.cards.r.RavenousChupacabra.class));
         cards.add(new SetCardInfo("Reckless Barbarian", 193, Rarity.COMMON, mage.cards.r.RecklessBarbarian.class));
         cards.add(new SetCardInfo("Recruitment Drive", 38, Rarity.COMMON, mage.cards.r.RecruitmentDrive.class));

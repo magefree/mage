@@ -36,7 +36,7 @@ public final class CurseOfVerbosity extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Whenever enchanted player is attacked, draw a card. Each opponent attacking that player does the same.
         this.addAbility(new EnchantedPlayerAttackedTriggeredAbility(new CurseOfVerbosityEffect()));

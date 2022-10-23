@@ -36,7 +36,7 @@ public final class CallToTheKindred extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // At the beginning of your upkeep, you may look at the top five cards of your library.
         // If you do, you may put a creature card that shares a creature type with enchanted creature from among them onto the battlefield,

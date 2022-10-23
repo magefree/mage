@@ -39,7 +39,7 @@ public final class BelakorTheDarkMaster extends CardImpl {
     private static final FilterPermanent filter2 = new FilterControlledPermanent(SubType.DEMON, "another Demon");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter2.add(AnotherPredicate.instance);
     }
 
     public BelakorTheDarkMaster(UUID ownerId, CardSetInfo setInfo) {

@@ -60,7 +60,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODE = "DMC"; // check all abilities and output cards with wrong abilities texts;
+    private static final String FULL_ABILITIES_CHECK_SET_CODE = "NCC"; // check all abilities and output cards with wrong abilities texts;
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
     private static final boolean ONLY_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
@@ -95,6 +95,7 @@ public class VerifyCardDataTest {
 
         // color
         skipListCreate(SKIP_LIST_COLOR);
+        skipListAddName(SKIP_LIST_COLOR, "BRO", "Mishra, Lost to Phyrexia"); // temporary
 
         // cost
         skipListCreate(SKIP_LIST_COST);
@@ -1320,15 +1321,16 @@ public class VerifyCardDataTest {
             return;
         }
 
-        Collection<String> expected = ref.subtypes;
+        List<String> expected = new ArrayList<>(ref.subtypes);
 
         // fix names (e.g. Urza’s to Urza's)
-        if (expected != null && expected.contains("Urza’s")) {
-            expected = new ArrayList<>(expected);
-            for (ListIterator<String> it = ((List<String>) expected).listIterator(); it.hasNext(); ) {
-                if (it.next().equals("Urza’s")) {
+        for (ListIterator<String> it = expected.listIterator(); it.hasNext(); ) {
+            switch (it.next()) {
+                case "Urza’s":
                     it.set("Urza's");
-                }
+                    break;
+                case "C’tan":
+                    it.set("C'tan");
             }
         }
 
@@ -1338,11 +1340,9 @@ public class VerifyCardDataTest {
                 .stream()
                 .map(SubType::toString)
                 .collect(Collectors.toSet());
-        actual.removeIf(subtypesToIgnore::contains);
 
-        if (expected != null) {
-            expected.removeIf(subtypesToIgnore::contains);
-        }
+        actual.removeIf(subtypesToIgnore::contains);
+        expected.removeIf(subtypesToIgnore::contains);
 
         for (SubType subType : card.getSubtype()) {
             if (!subType.isCustomSet() && !subType.canGain(card)) {

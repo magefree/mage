@@ -23,7 +23,6 @@ public final class RepelIntruders extends CardImpl {
     public RepelIntruders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W/U}");
 
-
         // Create two 1/1 white Kithkin Soldier creature tokens if {W} was spent to cast Repel Intruders. Counter up to one target creature spell if {U} was spent to cast Repel Intruders.
         TargetSpell target = new TargetSpell(0, 1, new FilterCreatureSpell());
         target.setRequired(false);

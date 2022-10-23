@@ -19,7 +19,7 @@ import mage.filter.StaticFilters;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetCardInYourGraveyard;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -45,7 +45,7 @@ public final class IzzetChemister extends CardImpl {
                 new ExileTargetEffect().setToSourceExileZone(true), new ManaCostsImpl<>("{R}")
         );
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD));
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD));
         this.addAbility(ability);
 
         // {1}{R}, {T}: Sacrifice Izzet Chemister: Cast any number of cards exiled with Izzet Chemister without paying their mana costs.

@@ -15,6 +15,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -32,12 +33,10 @@ public final class SpiritBonds extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("non-Spirit creature you control");
     private static final FilterControlledPermanent filterSpirit = new FilterControlledPermanent("Spirit");
-    private static final FilterControlledCreaturePermanent filterNontoken = new FilterControlledCreaturePermanent("nontoken creature");
 
     static {
         filter.add(Predicates.not(SubType.SPIRIT.getPredicate()));
         filterSpirit.add(SubType.SPIRIT.getPredicate());
-        filterNontoken.add(TokenPredicate.FALSE);
     }
 
     public SpiritBonds(UUID ownerId, CardSetInfo setInfo) {
@@ -45,7 +44,7 @@ public final class SpiritBonds extends CardImpl {
 
 
         // Whenever a nontoken creature enters the battlefield under your control, you may pay {W}. If you do, but a 1/1 white Spirit creature token with flying into play.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DoIfCostPaid(new CreateTokenEffect(new SpiritWhiteToken()), new ManaCostsImpl<>("{W}")), filterNontoken, false));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DoIfCostPaid(new CreateTokenEffect(new SpiritWhiteToken()), new ManaCostsImpl<>("{W}")), StaticFilters.FILTER_CREATURE_NON_TOKEN, false));
 
         // {1}{W}, Sacrifice a Spirit: Target non-Spirit creature you control gains indestructible until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,

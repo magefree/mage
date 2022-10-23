@@ -87,12 +87,6 @@ class MirrorBoxLegendEffect extends ContinuousRuleModifyingEffectImpl {
 
 class MirrorBoxBoostEffect extends ContinuousEffectImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
-
-    static {
-        filter.add(TokenPredicate.FALSE);
-    }
-
     public MirrorBoxBoostEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         this.staticText = "each nontoken creature you control gets +1/+1 for " +
@@ -115,7 +109,7 @@ class MirrorBoxBoostEffect extends ContinuousEffectImpl {
                 source.getControllerId(), source, game
         );
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                filter, source.getControllerId(), source, game
+                StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN, source.getControllerId(), source, game
         )) {
             int amount = getAmount(permanents, permanent, game);
             permanent.addPower(amount);

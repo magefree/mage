@@ -85,13 +85,13 @@ class KeldonFlamesageEffect extends OneShotEffect {
         );
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, power + 1));
         TargetCard target = new TargetCardInLibrary(0, 1, filter);
-        player.choose(outcome, target, source, game);
+        player.choose(outcome, cards, target, game);
         Card card = cards.get(target.getFirstTarget(), game);
         if (card != null) {
             player.moveCards(card, Zone.EXILED, source, game);
         }
         cards.retainZone(Zone.LIBRARY, game);
-        player.putCardsOnBottomOfLibrary(card, game, source, false);
+        player.putCardsOnBottomOfLibrary(cards, game, source, false);
         CardUtil.castSpellWithAttributesForFree(player, source, game, card);
         return true;
     }

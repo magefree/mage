@@ -83,10 +83,10 @@ class ZaxaraTheExemplaryHydraTokenAbility extends TriggeredAbilityImpl {
         }
         Spell spell = game.getStack().getSpell(event.getTargetId());
         if (spell == null || !spell.getSpellAbility().getManaCostsToPay().containsX()) {
-            game.getState().setValue(this.getSourceId() + ZaxaraTheExemplary.needPrefix, spell);
-            return true;
+            return false;
         }
-        return false;
+        game.getState().setValue(this.getSourceId() + ZaxaraTheExemplary.needPrefix, spell);
+        return true;
     }
 
     @Override

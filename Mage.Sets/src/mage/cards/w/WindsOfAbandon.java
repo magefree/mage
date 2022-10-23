@@ -19,7 +19,6 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -81,10 +80,7 @@ class WindsOfAbandonEffect extends OneShotEffect {
         if (!controller.moveCards(permanent, Zone.EXILED, source, game)) {
             return true;
         }
-
-        if (!player.chooseUse(Outcome.PutCardInPlay, "Search your library for a basic land card?", source, game)) {
-            return true;
-        }
+        game.getState().processAction(game);
         TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
         if (player.searchLibrary(target, source, game)) {
             Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
@@ -121,39 +117,30 @@ class WindsOfAbandonOverloadEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Map<UUID, Integer> playerMap = new HashMap<>();
+        Map<UUID, Integer> playerAmount = new HashMap<>();
         CardsImpl cards = new CardsImpl();
         for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, source.getControllerId(), source, game)) {
-            int count = playerMap.getOrDefault(permanent.getControllerId(), 0);
-            playerMap.put(permanent.getControllerId(), count + 1);
+            playerAmount.merge(permanent.getControllerId(), 1, Integer::sum);
             cards.add(permanent);
         }
         if (!controller.moveCards(cards, Zone.EXILED, source, game)) {
             return true;
         }
-
-        for (UUID playerId : game.getOpponents(source.getControllerId())) {
-            Player player = game.getPlayer(playerId);
-            int count = playerMap.getOrDefault(playerId, 0);
-            if (player == null || count == 0) {
+        game.getState().processAction(game);
+        for (Map.Entry<UUID, Integer> entry : playerAmount.entrySet()) {
+            Player player = game.getPlayer(entry.getKey());
+            if (player == null) {
                 continue;
             }
-            TargetCardInLibrary target = new TargetCardInLibrary(0, count, StaticFilters.FILTER_CARD_BASIC_LAND);
-            boolean moved = false;
+            TargetCardInLibrary target = new TargetCardInLibrary(0, entry.getValue(),
+                    entry.getValue() > 1 ? StaticFilters.FILTER_CARD_BASIC_LANDS : StaticFilters.FILTER_CARD_BASIC_LAND);
             if (player.searchLibrary(target, source, game)) {
-                List<UUID> targets = target.getTargets();
-                for (UUID targetId : targets) {
-                    Card card = player.getLibrary().getCard(targetId, game);
-                    if (card != null) {
-                        if (player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null)) {
-                            moved = true;
-                        }
-                    }
+                if (!target.getTargets().isEmpty()) {
+                    player.moveCards(new CardsImpl(target.getTargets()).getCards(game),
+                            Zone.BATTLEFIELD, source, game, true, false, false, null);
                 }
             }
-            if (moved) {
-                player.shuffleLibrary(source, game);
-            }
+            player.shuffleLibrary(source, game);
         }
         return true;
     }

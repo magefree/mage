@@ -32,6 +32,9 @@ public class BlockingOrBlockedWatcher extends Watcher {
                 blockerMap.clear();
                 return;
             case REMOVED_FROM_COMBAT:
+                // remove attacker
+                blockerMap.remove(new MageObjectReference(event.getTargetId(), game));
+                // remove blocker
                 blockerMap
                         .values()
                         .stream()

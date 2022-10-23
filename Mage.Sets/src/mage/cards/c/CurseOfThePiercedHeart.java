@@ -33,10 +33,10 @@ public final class CurseOfThePiercedHeart extends CardImpl {
         this.subtype.add(SubType.AURA, SubType.CURSE);
 
         // Enchant player
-        TargetPlayer target = new TargetPlayer();
-        this.getSpellAbility().addTarget(target);
+        TargetPlayer auraTarget = new TargetPlayer();
+        this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(target.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // At the beginning of enchanted player's upkeep, Curse of the Pierced Heart deals 1 damage to that player.
