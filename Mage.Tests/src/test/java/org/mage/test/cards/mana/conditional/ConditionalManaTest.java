@@ -380,8 +380,8 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         Assert.assertEquals("mana variations don't fit", 4, manaOptions.size());
         assertManaOptions("{R}", manaOptions);
         assertManaOptions("{C}{C}{C}{R}[{TitansNestManaCondition}]", manaOptions);
-        assertManaOptions("{C}{C}{C}{C}{R}[{RosheenMeandererManaCondition}]", manaOptions);
-        assertManaOptions("{C}{C}{C}{C}{C}{C}{C}{R}[{RosheenMeandererManaCondition}{TitansNestManaCondition}]", manaOptions);
+        assertManaOptions("{C}{C}{C}{C}{R}[{XCostManaCondition}]", manaOptions);
+        assertManaOptions("{C}{C}{C}{C}{C}{C}{C}{R}[{XCostManaCondition}{TitansNestManaCondition}]", manaOptions);
     }
 
     @Test

@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.GenericManaCost;;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.WardAbility;
@@ -35,7 +35,7 @@ public final class TyranidHarridan extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Ward {4}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{4}")));
+        this.addAbility(new WardAbility(new GenericManaCost(4), false));
 
         // Shrieking Gargoyles -- Whenever Tyranid Harridan or another Tyranid you control deals combat damage to a player, create a 1/1 blue Tyranid Gargoyle creature token with flying.
         this.addAbility(new TyranidHarridanTriggeredAbility());
