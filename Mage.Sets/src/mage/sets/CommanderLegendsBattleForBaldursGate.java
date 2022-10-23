@@ -243,6 +243,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Fire Diamond", 313, Rarity.COMMON, mage.cards.f.FireDiamond.class));
         cards.add(new SetCardInfo("Fireball", 175, Rarity.UNCOMMON, mage.cards.f.Fireball.class));
         cards.add(new SetCardInfo("Firja's Retribution", 846, Rarity.RARE, mage.cards.f.FirjasRetribution.class));
+        cards.add(new SetCardInfo("Firkraag, Cunning Instigator", 648, Rarity.MYTHIC, mage.cards.f.FirkraagCunningInstigator.class));
         cards.add(new SetCardInfo("Flaming Fist Officer", 19, Rarity.COMMON, mage.cards.f.FlamingFistOfficer.class));
         cards.add(new SetCardInfo("Flaming Fist", 18, Rarity.COMMON, mage.cards.f.FlamingFist.class));
         cards.add(new SetCardInfo("Folk Hero", 650, Rarity.MYTHIC, mage.cards.f.FolkHero.class));
