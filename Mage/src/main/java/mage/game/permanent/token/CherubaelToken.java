@@ -6,6 +6,9 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 
+/**
+ * @author PurpleCrowbar
+ */
 public final class CherubaelToken extends TokenImpl {
 
     public CherubaelToken() {
