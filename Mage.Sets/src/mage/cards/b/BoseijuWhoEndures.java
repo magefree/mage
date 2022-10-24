@@ -2,11 +2,11 @@ package mage.cards.b;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.costadjusters.LegendaryCreatureCostAdjuster;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayTargetControllerEffect;
 import mage.abilities.keyword.ChannelAbility;
 import mage.abilities.mana.GreenManaAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -14,9 +14,6 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.Predicates;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
 
@@ -27,18 +24,26 @@ import java.util.UUID;
  */
 public final class BoseijuWhoEndures extends CardImpl {
 
-    private static final FilterPermanent filter
+    private static final FilterPermanent filterDestroy
             = new FilterPermanent("artifact, enchantment, or nonbasic land an opponent controls");
+    private static final FilterCard filterSearch = new FilterLandCard("land card with a basic land type");
 
     static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-        filter.add(Predicates.or(
+        filterDestroy.add(TargetController.OPPONENT.getControllerPredicate());
+        filterDestroy.add(Predicates.or(
                 CardType.ARTIFACT.getPredicate(),
                 CardType.ENCHANTMENT.getPredicate(),
                 Predicates.and(
                         Predicates.not(SuperType.BASIC.getPredicate()),
                         CardType.LAND.getPredicate()
                 )
+        ));
+        filterSearch.add(Predicates.or(
+                SubType.PLAINS.getPredicate(),
+                SubType.ISLAND.getPredicate(),
+                SubType.SWAMP.getPredicate(),
+                SubType.MOUNTAIN.getPredicate(),
+                SubType.FOREST.getPredicate()
         ));
     }
 
@@ -50,10 +55,17 @@ public final class BoseijuWhoEndures extends CardImpl {
         // {T}: Add {G}.
         this.addAbility(new GreenManaAbility());
 
-        // Channel — {1}{G}, Discard Boseiju, Who Endures: Destroy target artifact, enchantment, or nonbasic land an opponent controls. That player may search their library for a land card with a basic land type, put it onto the battlefield, then shuffle. This ability costs {1} less to activate for each legendary creature you control.
+        // Channel — {1}{G}, Discard Boseiju, Who Endures: Destroy target artifact, enchantment, or nonbasic land an opponent controls.
+        // That player may search their library for a land card with a basic land type, put it onto the battlefield, then shuffle.
+        // This ability costs {1} less to activate for each legendary creature you control.
         Ability ability = new ChannelAbility("{1}{G}", new DestroyTargetEffect());
-        ability.addEffect(new BoseijuWhoEnduresEffect());
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addEffect(new SearchLibraryPutInPlayTargetControllerEffect(
+                new TargetCardInLibrary(filterSearch), false, Outcome.PutLandInPlay, "that player"
+        ));
+        ability.addEffect(new InfoEffect(
+                "This ability costs {1} less to activate for each legendary creature you control"
+        ));
+        ability.addTarget(new TargetPermanent(filterDestroy));
         ability.setCostAdjuster(LegendaryCreatureCostAdjuster.instance);
         this.addAbility(ability.addHint(LegendaryCreatureCostAdjuster.getHint()));
     }
@@ -65,56 +77,5 @@ public final class BoseijuWhoEndures extends CardImpl {
     @Override
     public BoseijuWhoEndures copy() {
         return new BoseijuWhoEndures(this);
-    }
-}
-
-class BoseijuWhoEnduresEffect extends OneShotEffect {
-
-    private static final FilterCard filter = new FilterLandCard("land card with a basic land type");
-
-    static {
-        filter.add(Predicates.or(
-                SubType.PLAINS.getPredicate(),
-                SubType.ISLAND.getPredicate(),
-                SubType.SWAMP.getPredicate(),
-                SubType.MOUNTAIN.getPredicate(),
-                SubType.FOREST.getPredicate()
-        ));
-    }
-
-    BoseijuWhoEnduresEffect() {
-        super(Outcome.Benefit);
-        staticText = "That player may search their library for a land card with a basic land type, " +
-                "put it onto the battlefield, then shuffle. " +
-                "This ability costs {1} less to activate for each legendary creature you control";
-    }
-
-    private BoseijuWhoEnduresEffect(final BoseijuWhoEnduresEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BoseijuWhoEnduresEffect copy() {
-        return new BoseijuWhoEnduresEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
-        if (permanent == null) {
-            return false;
-        }
-        Player player = game.getPlayer(permanent.getControllerId());
-        if (!player.chooseUse(Outcome.PutCardInPlay, "Search your library for a land card?", source, game)) {
-            return true;
-        }
-        TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        player.searchLibrary(target, source, game);
-        Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
-        if (card != null) {
-            player.moveCards(card, Zone.BATTLEFIELD, source, game);
-        }
-        player.shuffleLibrary(source, game);
-        return true;
     }
 }

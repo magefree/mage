@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SetTargetPointer;
-import mage.constants.Zone;
 
 /**
  *
@@ -24,8 +23,7 @@ public final class BriarPatch extends CardImpl {
 
         // Whenever a creature attacks you, it gets -1/-0 until end of turn.
         Effect effect = new BoostTargetEffect(-1, 0, Duration.EndOfTurn);
-        effect.setText("it gets -1/-0");
-        Ability ability = new AttackedByCreatureTriggeredAbility(Zone.BATTLEFIELD, effect, false, SetTargetPointer.PERMANENT);
+        Ability ability = new AttackedByCreatureTriggeredAbility(effect, false, SetTargetPointer.PERMANENT);
         addAbility(ability);
     }
 

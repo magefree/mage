@@ -30,7 +30,7 @@ public final class SpitefulShadows extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Whenever enchanted creature is dealt damage, it deals that much damage to its controller.
         this.addAbility(new DealtDamageAttachedTriggeredAbility(Zone.BATTLEFIELD, new SpitefulShadowsEffect(),

@@ -33,7 +33,7 @@ public final class DetentionVortex extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent(StaticFilters.FILTER_PERMANENT_NON_LAND);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted permanent can't attack or block, and its activated abilities can't be activated.
         this.addAbility(new SimpleStaticAbility(new CantBlockAttackActivateAttachedEffect("permanent")));

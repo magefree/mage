@@ -15,6 +15,7 @@ import mage.game.command.Commander;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -37,6 +38,20 @@ public class ConditionalSpellManaBuilder extends ConditionalManaBuilder {
     @Override
     public String getRule() {
         return "Spend this mana only to cast " + filter.getMessage() + '.';
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), this.filter);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) {
+            return false;
+        }
+
+        return Objects.equals(this.filter, ((ConditionalSpellManaBuilder) obj).filter);
     }
 }
 

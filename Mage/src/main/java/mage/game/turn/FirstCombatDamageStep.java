@@ -59,6 +59,8 @@ public class FirstCombatDamageStep extends Step {
         for (CombatGroup group : game.getCombat().getBlockingGroups()) {
             group.applyDamage(game);
         }
+        // Must fire damage batch events now, before SBA (https://github.com/magefree/mage/issues/9129)
+        game.getState().handleSimultaneousEvent(game);
     }
 
     public boolean getFirst() {

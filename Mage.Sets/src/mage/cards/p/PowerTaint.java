@@ -35,7 +35,7 @@ public final class PowerTaint extends CardImpl {
         TargetPermanent auraTarget = new TargetEnchantmentPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // At the beginning of the upkeep of enchanted enchantment's controller, that player loses 2 life unless they pay {2}.

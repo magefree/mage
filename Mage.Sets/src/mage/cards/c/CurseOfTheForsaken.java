@@ -35,7 +35,7 @@ public final class CurseOfTheForsaken extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Whenever a creature attacks enchanted player, its controller gains 1 life.
         this.addAbility(new CurseOfTheForsakenTriggeredAbility());

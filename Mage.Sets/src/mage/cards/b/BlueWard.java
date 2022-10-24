@@ -30,7 +30,7 @@ public final class BlueWard extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Protect));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature has protection from blue. This effect doesn't remove Blue Ward.
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(

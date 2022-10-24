@@ -31,7 +31,7 @@ public final class CrownOfAwe extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature has protection from black and from red.
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(

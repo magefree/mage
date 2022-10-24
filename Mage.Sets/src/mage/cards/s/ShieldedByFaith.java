@@ -36,7 +36,7 @@ public final class ShieldedByFaith extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
         
         // Enchanted creature has indestructible.
         Effect effect = new GainAbilityAttachedEffect(IndestructibleAbility.getInstance(), 

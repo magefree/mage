@@ -49,7 +49,7 @@ public final class CurseOfHospitality extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Creatures attacking enchanted player have trample.
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(

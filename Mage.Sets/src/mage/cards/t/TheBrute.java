@@ -32,7 +32,7 @@ public final class TheBrute extends CardImpl {
         TargetCreaturePermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        EnchantAbility ability = new EnchantAbility(auraTarget.getTargetName());
+        EnchantAbility ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+0.

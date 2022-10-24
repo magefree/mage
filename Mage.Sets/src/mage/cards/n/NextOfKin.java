@@ -42,7 +42,7 @@ public class NextOfKin extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // When enchanted creature dies, you may put a creature card you own with lesser mana value from your hand or from the command zone onto the battlefield.
         // If you do, return Next of Kin to the battlefield attached to that creature at the beginning of the next end step.

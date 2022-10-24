@@ -68,4 +68,9 @@ class MythosOfNethroiEffect extends OneShotEffect {
         }
         return permanent.destroy(source, game, false);
     }
+
+    @Override
+    public Condition getCondition() {
+        return condition;
+    }
 }

@@ -33,7 +33,7 @@ public final class SoulKiss extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // {B}, Pay 1 life: Enchanted creature gets +2/+2 until end of turn. Activate this ability no more than three times each turn.
         ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.EndOfTurn),

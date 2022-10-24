@@ -68,6 +68,7 @@ Jump-start|card|
 Kicker|manaString|
 Level up|cost|
 Lifelink|instance|
+Living metal|new|
 Living weapon|new|
 Madness|cost|
 Melee|new|
@@ -77,6 +78,7 @@ Miracle|manaString|
 Modular|card, number|
 Mountaincycling|cost|
 Mountainwalk|new|
+More Than Meets The Eye|card, manaString|
 Morph|cost|
 Mutate|card, manaString|
 Myriad|new|

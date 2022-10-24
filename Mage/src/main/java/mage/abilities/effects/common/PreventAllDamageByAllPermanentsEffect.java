@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -17,7 +16,7 @@ import mage.game.permanent.Permanent;
  */
 public class PreventAllDamageByAllPermanentsEffect extends PreventionEffectImpl {
 
-    private FilterPermanent filter;
+    protected final FilterPermanent filter;
 
     public PreventAllDamageByAllPermanentsEffect(Duration duration) {
         this(null, duration, false);
@@ -30,13 +29,12 @@ public class PreventAllDamageByAllPermanentsEffect extends PreventionEffectImpl 
     public PreventAllDamageByAllPermanentsEffect(FilterPermanent filter, Duration duration, boolean onlyCombat) {
         super(duration, Integer.MAX_VALUE, onlyCombat);
         this.filter = filter;
+        setText();
     }
 
     public PreventAllDamageByAllPermanentsEffect(final PreventAllDamageByAllPermanentsEffect effect) {
         super(effect);
-        if (effect.filter != null) {
-            this.filter = effect.filter.copy();
-        }
+        this.filter = effect.filter;
     }
 
     @Override
@@ -61,11 +59,7 @@ public class PreventAllDamageByAllPermanentsEffect extends PreventionEffectImpl 
         return false;
     }
 
-    @Override
-    public String getText(Mode mode) {
-        if (staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
+    private void setText() {
         StringBuilder sb = new StringBuilder("prevent all ");
         if (onlyCombat) {
             sb.append("combat ");
@@ -78,6 +72,6 @@ public class PreventAllDamageByAllPermanentsEffect extends PreventionEffectImpl 
             sb.append(" by ");
             sb.append(filter.getMessage());
         }
-        return sb.toString();
+        staticText = sb.toString();
     }
 }

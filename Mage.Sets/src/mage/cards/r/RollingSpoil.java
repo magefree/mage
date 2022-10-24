@@ -22,7 +22,6 @@ public final class RollingSpoil extends CardImpl {
     public RollingSpoil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}");
 
-        
         // Destroy target land.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetLandPermanent());

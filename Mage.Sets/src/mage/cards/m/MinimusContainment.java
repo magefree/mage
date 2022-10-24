@@ -32,7 +32,7 @@ public final class MinimusContainment extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent(StaticFilters.FILTER_PERMANENT_NON_LAND);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted permanent is a Treasure artifact with "{T}, Sacrifice this artifact: Add one mana of any color," and it loses all other abilities.

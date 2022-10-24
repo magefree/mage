@@ -2,10 +2,10 @@ package mage.cards.l;
 
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.PutCards;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;

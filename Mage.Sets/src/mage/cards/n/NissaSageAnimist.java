@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.*;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.NissaSageAnimistToken;
@@ -47,7 +46,7 @@ public final class NissaSageAnimist extends CardImpl {
 
         // -7: Untap up to six target lands. They become 6/6 Elemental creatures. They're still lands.
         Ability ability = new LoyaltyAbility(new UntapTargetEffect(), -7);
-        ability.addTarget(new TargetLandPermanent(0, 6, StaticFilters.FILTER_LAND, false));
+        ability.addTarget(new TargetLandPermanent(0, 6));
         ability.addEffect(new NissaSageAnimistMinusAnimateEffect());
         this.addAbility(ability);
     }

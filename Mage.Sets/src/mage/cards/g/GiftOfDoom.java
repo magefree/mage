@@ -51,7 +51,7 @@ public final class GiftOfDoom extends CardImpl {
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         this.getSpellAbility().setTargetAdjuster(GiftOfDoomAdjuster.instance);  // to remove the target set if Morph casting cost is paid
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature has deathtouch and indestructible.

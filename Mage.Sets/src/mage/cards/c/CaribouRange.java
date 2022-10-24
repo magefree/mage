@@ -45,7 +45,7 @@ public final class CaribouRange extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent(new FilterControlledLandPermanent());
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted land has "{W}{W}, {T}: Create a 0/1 white Caribou creature token."
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CaribouToken()), new ManaCostsImpl<>("{W}{W}"));

@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
@@ -15,7 +14,6 @@ import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandPermanent;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -41,7 +39,7 @@ public final class KrosanRestorer extends CardImpl {
                 new UntapTargetEffect(),
                 new TapSourceCost(),
                 new CardsInControllerGraveyardCondition(7));
-        ability.addTarget(new TargetLandPermanent(0, 3, new FilterLandPermanent(), false));
+        ability.addTarget(new TargetLandPermanent(0, 3));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);
     }

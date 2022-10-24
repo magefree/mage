@@ -35,7 +35,7 @@ public final class ScourgeOfTheNobilis extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // As long as enchanted creature is red, it gets +1/+1 and has "{RW}: This creature gets +1/+0 until end of turn."

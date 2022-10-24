@@ -128,6 +128,7 @@ Judge Promo|JR|
 Judgment|JUD|
 Jumpstart|JMP|
 Jumpstart: Historic Horizons|J21|
+Jumpstart 2022|J22|
 Kaladesh|KLD|
 Kaldheim|KHM|
 Kaldheim Commander|KHC|
@@ -210,12 +211,15 @@ Stronghold|STH|
 Super Series|SUS|
 Theros|THS|
 Theros Beyond Death|THB|
+The Brothers' War|BRO|
+The Brothers' War Commander|BRC|
 Tempest|TMP|
 Throne of Eldraine|ELD|
 Torment|TOR|
 Tempest Remastered|TPR|
 Time Spiral "Timeshifted"|TSB|
 Time Spiral|TSP|
+Transformers|BOT|
 Urza's Destiny|UDS|
 Ugin's Fate|UGIN|
 Unglued|UGL|

@@ -94,7 +94,6 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected Counters counters;
     protected int landsPlayed;
     protected int landsPerTurn = 1;
-    protected int loyaltyUsePerTurn = 1;
     protected int maxHandSize = 7;
     protected int maxAttackedBy = Integer.MAX_VALUE;
     protected ManaPool manaPool;
@@ -225,7 +224,6 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         this.landsPlayed = player.landsPlayed;
         this.landsPerTurn = player.landsPerTurn;
-        this.loyaltyUsePerTurn = player.loyaltyUsePerTurn;
         this.maxHandSize = player.maxHandSize;
         this.maxAttackedBy = player.maxAttackedBy;
         this.manaPool = player.manaPool.copy();
@@ -326,7 +324,6 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         this.landsPlayed = player.getLandsPlayed();
         this.landsPerTurn = player.getLandsPerTurn();
-        this.loyaltyUsePerTurn = player.getLoyaltyUsePerTurn();
         this.maxHandSize = player.getMaxHandSize();
         this.maxAttackedBy = player.getMaxAttackedBy();
         this.manaPool = player.getManaPool().copy();
@@ -464,7 +461,6 @@ public abstract class PlayerImpl implements Player, Serializable {
     public void reset() {
         this.abilities.clear();
         this.landsPerTurn = 1;
-        this.loyaltyUsePerTurn = 1;
         this.maxHandSize = 7;
         this.maxAttackedBy = Integer.MAX_VALUE;
         this.canGainLife = true;
@@ -698,26 +694,6 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
             discard(hand.size() - this.maxHandSize, false, false, null, game);
         }
-    }
-
-    /**
-     * Don't use this in normal card code, it's for more internal use. Always
-     * use the [Player].moveCards methods if possible for card movement of card
-     * code.
-     *
-     * @param card
-     * @param game
-     * @return
-     */
-    @Override
-    public boolean putInHand(Card card, Game game) {
-        if (card.isOwnedBy(playerId)) {
-            card.setZone(Zone.HAND, game);
-            this.hand.add(card);
-        } else {
-            return game.getPlayer(card.getOwnerId()).putInHand(card, game);
-        }
-        return true;
     }
 
     @Override
@@ -2318,16 +2294,6 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public int getLoyaltyUsePerTurn() {
-        return this.loyaltyUsePerTurn;
-    }
-
-    @Override
-    public void setLoyaltyUsePerTurn(int loyaltyUsePerTurn) {
-        this.loyaltyUsePerTurn = loyaltyUsePerTurn;
-    }
-
-    @Override
     public int getMaxHandSize() {
         return maxHandSize;
     }
@@ -3352,7 +3318,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                     if (used) {
                         iterator.remove();
-                        availableMana.removeDuplicated();
                         anAbilityWasUsed = true;
                     }
                 }
@@ -3363,9 +3328,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
         }
 
-        // remove duplicated variants (see ManaOptionsTest for info - when that rises)
-        availableMana.removeDuplicated();
-
+        availableMana.removeFullyIncludedVariations();
+        availableMana.remove(new Mana()); // Remove any empty mana that was left over from the way the code is written
         game.setCheckPlayableState(oldState);
         return availableMana;
     }
@@ -5032,7 +4996,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                             + " to PUT on the BOTTOM of your library (Scry)"));
             chooseTarget(Outcome.Benefit, cards, target, source, game);
             putCardsOnBottomOfLibrary(new CardsImpl(target.getTargets()), game, source, true);
-            cards.removeAll(target.getTargets());
+            cards.removeIf(target.getTargets()::contains);
             putCardsOnTopOfLibrary(cards, game, source, true);
         }
         game.fireEvent(new GameEvent(GameEvent.EventType.SCRIED, getId(), source, getId(), event.getAmount(), true));
@@ -5050,10 +5014,11 @@ public abstract class PlayerImpl implements Player, Serializable {
         cards.addAll(getLibrary().getTopCards(game, event.getAmount()));
         if (!cards.isEmpty()) {
             TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY,
-                    new FilterCard("cards to PUT into your GRAVEYARD (Surveil)"));
+                    new FilterCard("card " + (cards.size() == 1 ? "" : "s")
+                            + " to PUT into your GRAVEYARD (Surveil)"));
             chooseTarget(Outcome.Benefit, cards, target, source, game);
             moveCards(new CardsImpl(target.getTargets()), Zone.GRAVEYARD, source, game);
-            cards.removeAll(target.getTargets());
+            cards.removeIf(target.getTargets()::contains);
             putCardsOnTopOfLibrary(cards, game, source, true);
         }
         game.fireEvent(new GameEvent(GameEvent.EventType.SURVEILED, getId(), source, getId(), event.getAmount(), true));

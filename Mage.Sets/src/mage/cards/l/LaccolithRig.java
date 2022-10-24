@@ -30,7 +30,7 @@ public final class LaccolithRig extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Whenever enchanted creature becomes blocked, you may have it deal damage equal to its power to target creature.
         // If you do, the first creature assigns no combat damage this turn.

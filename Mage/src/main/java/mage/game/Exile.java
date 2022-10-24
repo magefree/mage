@@ -86,7 +86,7 @@ public class Exile implements Serializable, Copyable<Exile> {
         List<Card> res = new ArrayList<>();
         for (ExileZone exile : exileZones.values()) {
             for (Card card : exile.getCards(game)) {
-                if (fromPlayerId == null || card.getOwnerId().equals(fromPlayerId)) {
+                if (fromPlayerId == null || card.isOwnedBy(fromPlayerId)) {
                     res.add(card);
                 }
             }

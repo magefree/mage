@@ -3,11 +3,11 @@ package mage.cards.t;
 import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.PutCards;
 import mage.constants.SubType;
 
 import java.util.UUID;
@@ -20,8 +20,7 @@ public final class TalasLookout extends CardImpl {
     public TalasLookout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.PIRATE);
+        this.subtype.add(SubType.HUMAN, SubType.PIRATE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
@@ -30,9 +29,7 @@ public final class TalasLookout extends CardImpl {
 
         // When Talas Lookout dies, look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.
         this.addAbility(new DiesSourceTriggeredAbility(new LookLibraryAndPickControllerEffect(
-                2, 1,
-                LookLibraryControllerEffect.PutCards.HAND,
-                LookLibraryControllerEffect.PutCards.GRAVEYARD
+                2, 1, PutCards.HAND, PutCards.GRAVEYARD
         )));
     }
 

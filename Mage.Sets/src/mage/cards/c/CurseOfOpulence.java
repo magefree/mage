@@ -37,7 +37,7 @@ public final class CurseOfOpulence extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Whenever enchanted player is attacked, create a colorless artifact token named Gold.
         // It has "sacrifice this artifact: Add one mana of any color." Each opponent attacking that player does the same.

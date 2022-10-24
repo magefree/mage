@@ -1,9 +1,6 @@
 package mage.cards.s;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -82,8 +79,8 @@ class SquanderedResourcesEffect extends ManaEffect {
                 }
                 allPossibleMana.addMana(currentPossibleMana);
             }
-            allPossibleMana.removeDuplicated();
-            return allPossibleMana.stream().collect(Collectors.toList());
+            allPossibleMana.removeFullyIncludedVariations();
+            return new ArrayList<>(allPossibleMana);
         }
         return ManaType.getManaListFromManaTypes(getManaTypesFromSacrificedPermanent(game, source), false);
     }

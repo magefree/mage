@@ -124,12 +124,11 @@ class LicidContinuousEffect extends ContinuousEffectImpl {
                     }
                     licid.removeAbilities(toRemove, source.getSourceId(), game);
 
-                    Ability ability = new EnchantAbility("creature");
+                    Target target = new TargetCreaturePermanent();
+                    Ability ability = new EnchantAbility(target);
                     ability.setRuleAtTheTop(true);
                     licid.addAbility(ability, source.getSourceId(), game);
                     licid.getSpellAbility().getTargets().clear();
-                    Target target = new TargetCreaturePermanent();
-                    target.addTarget(this.getTargetPointer().getFirst(game, source), source, game);
                     licid.getSpellAbility().getTargets().add(target);
             }
             return true;

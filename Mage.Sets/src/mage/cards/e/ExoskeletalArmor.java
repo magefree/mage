@@ -33,7 +33,7 @@ public final class ExoskeletalArmor extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature gets +X/+X, where X is the number of creature cards in all graveyards.
         CardsInAllGraveyardsCount count = new CardsInAllGraveyardsCount(StaticFilters.FILTER_CARD_CREATURES);

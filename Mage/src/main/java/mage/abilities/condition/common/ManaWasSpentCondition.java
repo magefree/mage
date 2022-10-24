@@ -45,4 +45,8 @@ public class ManaWasSpentCondition implements Condition {
         return "{" + coloredManaSymbol.toString() + "} was spent to cast it";
     }
 
+    @Override
+    public boolean caresAboutManaColor() {
+        return true;
+    }
 }

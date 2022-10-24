@@ -30,7 +30,7 @@ public final class Blessing extends CardImpl {
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         // {W}: Enchanted creature gets +1/+1 until end of turn.
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostEnchantedEffect(1, 1, Duration.EndOfTurn),

@@ -34,7 +34,7 @@ public final class FatalMutation extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // When enchanted creature is turned face up, destroy it. It can't be regenerated.
         this.addAbility(new FatalMutationAbility(new DestroyAttachedToEffect("it", true)));

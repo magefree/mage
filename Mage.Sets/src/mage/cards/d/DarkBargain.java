@@ -3,10 +3,10 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.PutCards;
 
 /**
  *
