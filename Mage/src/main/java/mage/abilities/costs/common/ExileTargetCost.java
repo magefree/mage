@@ -26,8 +26,9 @@ public class ExileTargetCost extends CostImpl {
     List<Permanent> permanents = new ArrayList<>();
 
     public ExileTargetCost(TargetControlledPermanent target) {
+        target.setNotTarget(true);
         this.addTarget(target);
-        this.text = "Exile " + target.getTargetName();
+        this.text = "exile " + target.getTargetName();
     }
 
     public ExileTargetCost(TargetControlledPermanent target, boolean noText) {
@@ -61,7 +62,7 @@ public class ExileTargetCost extends CostImpl {
             // so return state here is not important because the user indended to exile the target anyway
         }
         player.moveCardsToExile(
-                cards.getCards(game), source, game, false,
+                cards.getCards(game), source, game, true,
                 CardUtil.getExileZoneId(game, source),
                 CardUtil.getSourceName(game, source)
         );
