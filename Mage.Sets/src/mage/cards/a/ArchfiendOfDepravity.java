@@ -1,9 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -15,20 +11,22 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.TargetPermanent;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class ArchfiendOfDepravity extends CardImpl {
 
     public ArchfiendOfDepravity(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.subtype.add(SubType.DEMON);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
@@ -37,7 +35,9 @@ public final class ArchfiendOfDepravity extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of each opponent's end step, that player chooses up to two creatures they control, then sacrifices the rest.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new ArchfiendOfDepravityEffect(), TargetController.OPPONENT, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                new ArchfiendOfDepravityEffect(), TargetController.OPPONENT, false
+        ));
     }
 
     private ArchfiendOfDepravity(final ArchfiendOfDepravity card) {
@@ -69,21 +69,20 @@ class ArchfiendOfDepravityEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (opponent != null) {
-            List<Permanent> creaturesToSacrifice = new ArrayList<>();
-            TargetControlledPermanent target = new TargetControlledPermanent(0, 2, new FilterControlledCreaturePermanent("creatures to keep"), true);
-            if (opponent.chooseTarget(outcome, target, source, game)) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), opponent.getId(), source, game)) {
-                    if (permanent != null && !target.getTargets().contains(permanent.getId())) {
-                        creaturesToSacrifice.add(permanent);
-                    }
-                }
-            }
-            for (Permanent creature : creaturesToSacrifice) {
-                creature.sacrifice(source, game);
-            }
-            return true;
+        if (opponent == null) {
+            return false;
         }
-        return false;
+        TargetPermanent target = new TargetPermanent(
+                0, 2, StaticFilters.FILTER_CONTROLLED_CREATURE, true
+        );
+        opponent.choose(outcome, target, source, game);
+        List<Permanent> permanents = game
+                .getBattlefield()
+                .getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, opponent.getId(), source, game);
+        permanents.removeIf(permanent -> target.getTargets().contains(permanent.getId()));
+        for (Permanent creature : permanents) {
+            creature.sacrifice(source, game);
+        }
+        return true;
     }
 }

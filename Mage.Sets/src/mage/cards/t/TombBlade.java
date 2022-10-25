@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -82,7 +81,7 @@ class TombBladeEffect extends OneShotEffect {
                 StaticFilters.FILTER_CONTROLLED_CREATURE,
                 player.getId(), source, game
         );
-        Cost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent());
+        Cost cost = new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE);
         if (cost.canPay(source, source, player.getId(), game)
                 && player.chooseUse(outcome, "Sacrifice a creature?",
                 "If you don't you lose " + creatureCount + " life",

@@ -6,6 +6,8 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CompletedDungeonCondition;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
@@ -16,12 +18,10 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.watchers.common.CompletedDungeonWatcher;
 
 import java.util.UUID;
@@ -101,11 +101,10 @@ class AcererakTheArchlichEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-            TargetPermanent target = new TargetControlledCreaturePermanent(0, 1);
-            target.setNotTarget(true);
-            player.choose(Outcome.Sacrifice, target, source, game);
-            Permanent permanent = game.getPermanent(target.getFirstTarget());
-            if (permanent != null && permanent.sacrifice(source, game)) {
+            Cost cost = new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE);
+            if (cost.canPay(source, source, playerId, game)
+                    && player.chooseUse(outcome, "Sacrifice a creature?", source, game)
+                    && cost.pay(source, game, source, playerId, true)) {
                 tokens--;
             }
         }
