@@ -522,6 +522,7 @@ public class ScryfallImageSupportCards {
             add("BRC"); // The Brothers' War Commander
             add("BOT"); // Transformers
             add("J22"); // Jumpstart 2022
+            add("SLC"); // Secret Lair 30th Anniversary Countdown Kit
         }
     };
 
