@@ -12,6 +12,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -52,6 +53,12 @@ public final class Malanthrope extends CardImpl {
 
 class MalanthropeEffect extends OneShotEffect {
 
+    private static final FilterCard filter = new FilterCard();
+
+    static {
+        filter.add(CardType.CREATURE.getPredicate());
+    }
+
     MalanthropeEffect() {
         super(Outcome.Benefit);
         staticText = "exile target player's graveyard. Put a +1/+1 counter " +
@@ -73,7 +80,7 @@ class MalanthropeEffect extends OneShotEffect {
         if (player == null || player.getGraveyard().isEmpty()) {
             return false;
         }
-        int count = player.getGraveyard().size();
+        int count = player.getGraveyard().count(filter, game);
         player.moveCards(player.getGraveyard(), Zone.EXILED, source, game);
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
