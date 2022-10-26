@@ -1,7 +1,6 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -25,6 +24,9 @@ import mage.game.permanent.token.EldraziSliverToken;
 import java.util.Arrays;
 import java.util.UUID;
 
+/**
+ * @author Grath
+ */
 public final class SlivdraziMonstrosity extends CardImpl {
 
     private static final FilterCreaturePermanent eldrazi_you_control = new FilterCreaturePermanent("Eldrazi you control");
@@ -73,8 +75,6 @@ public final class SlivdraziMonstrosity extends CardImpl {
 class SlivdraziMonstrosityEffect extends ContinuousEffectImpl {
 
     private static final FilterPermanent filter = new FilterPermanent(SubType.SLIVER, "Slivers");
-
-    private static ObjectColor colorless = new ObjectColor();
 
     public SlivdraziMonstrosityEffect() {
         super(Duration.WhileOnBattlefield, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Benefit);

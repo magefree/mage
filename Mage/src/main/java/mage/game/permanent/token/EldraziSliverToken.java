@@ -8,11 +8,6 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.util.RandomUtil;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public final class EldraziSliverToken extends TokenImpl {
 
@@ -23,7 +18,7 @@ public final class EldraziSliverToken extends TokenImpl {
         subtype.add(SubType.SLIVER);
         power = new MageInt(1);
         toughness = new MageInt(1);
-        addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GenericMana(1), new SacrificeSourceCost()));
+        addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), new SacrificeSourceCost()));
     }
 
     public EldraziSliverToken(final EldraziSliverToken token) {
