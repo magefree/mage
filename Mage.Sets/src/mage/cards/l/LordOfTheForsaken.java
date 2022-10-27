@@ -2,8 +2,10 @@ package mage.cards.l;
 
 import mage.ConditionalMana;
 import mage.MageInt;
+import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.PayLifeCost;
@@ -98,15 +100,17 @@ enum LordOfTheForsakenManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (game == null || !game.inCheckPlayableState()
-                || !source.isControlledBy(game.getOwnerId(source.getSourceId()))) {
+        if (!(source instanceof SpellAbility)) {
             return false;
         }
-        if (game.getCard(source.getSourceId()) != null
-                && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
-            return true;
+        MageObject object = game.getObject(source);
+        if (!source.isControlledBy(game.getOwnerId(object))) {
+            return false;
         }
-        Spell spell = game.getSpell(source.getSourceId());
-        return spell != null && spell.getFromZone() == Zone.GRAVEYARD;
+        if (object instanceof Spell) {
+            return ((Spell) object).getFromZone() == Zone.GRAVEYARD;
+        }
+        // checking mana without real cast
+        return game.inCheckPlayableState() && game.getState().getZone(object.getId()) == Zone.GRAVEYARD;
     }
 }
