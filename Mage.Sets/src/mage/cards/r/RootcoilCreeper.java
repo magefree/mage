@@ -117,6 +117,6 @@ enum RootcoilCreeperManaCondition implements Condition {
             return ((Spell) object).getFromZone() == Zone.GRAVEYARD;
         }
         // checking mana without real cast
-        return game.inCheckPlayableState() && game.getState().getZone(object.getId()) == Zone.GRAVEYARD;
+        return game.inCheckPlayableState() && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD;
     }
 }
