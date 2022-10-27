@@ -1,7 +1,7 @@
 package mage.cards.u;
 
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.IntPlusDynamicValue;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -40,11 +40,7 @@ public final class UrborgLhurgoyf extends CardImpl {
         this.addAbility(kickerAbility);
 
         // As Urborg Lhurgoyf enters the battlefield, mill three cards for each time it was kicked.
-        this.addAbility(new EntersBattlefieldAbility(
-                new MillCardsControllerEffect(millValue), null,
-                "As {this} enters the battlefield, " +
-                        "mill three cards for each time it was kicked.", ""
-        ));
+        this.addAbility(new AsEntersBattlefieldAbility(new MillCardsControllerEffect(millValue)));
 
         // Urborg Lhurgoyf's power is equal to the number of creature cards in your graveyard and its toughness is equal to that number plus 1.
         this.addAbility(new SimpleStaticAbility(

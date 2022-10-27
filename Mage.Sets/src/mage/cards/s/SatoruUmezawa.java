@@ -6,7 +6,6 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;

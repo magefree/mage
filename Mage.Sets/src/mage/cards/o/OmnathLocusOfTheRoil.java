@@ -2,8 +2,8 @@ package mage.cards.o;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.LandfallAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -56,9 +56,7 @@ public final class OmnathLocusOfTheRoil extends CardImpl {
         this.addAbility(ability);
 
         // Whenever a land enters the battlefield under your control, put a +1/+1 counter on target Elemental you control. If you control eight or more lands, draw a card.
-        ability = new EntersBattlefieldControlledTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), StaticFilters.FILTER_LAND_A
-        );
+        ability = new LandfallAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         ability.addEffect(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1), condition,
                 "If you control eight or more lands, draw a card."

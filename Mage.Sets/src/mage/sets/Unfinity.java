@@ -26,7 +26,9 @@ public final class Unfinity extends ExpansionSet {
         cards.add(new SetCardInfo("Breeding Pool", 286, Rarity.RARE, mage.cards.b.BreedingPool.class));
         cards.add(new SetCardInfo("Circuits Act", 103, Rarity.COMMON, mage.cards.c.CircuitsAct.class));
         cards.add(new SetCardInfo("Clown Car", 186, Rarity.RARE, mage.cards.c.ClownCar.class));
+        cards.add(new SetCardInfo("Clowning Around", 6, Rarity.COMMON, mage.cards.c.ClowningAround.class));
         cards.add(new SetCardInfo("Dissatisfied Customer", 72, Rarity.COMMON, mage.cards.d.DissatisfiedCustomer.class));
+        cards.add(new SetCardInfo("Embiggen", 137, Rarity.COMMON, mage.cards.e.Embiggen.class));
         cards.add(new SetCardInfo("Forest", 239, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Godless Shrine", 282, Rarity.RARE, mage.cards.g.GodlessShrine.class));
         cards.add(new SetCardInfo("Hallowed Fountain", 277, Rarity.RARE, mage.cards.h.HallowedFountain.class));
@@ -37,6 +39,7 @@ public final class Unfinity extends ExpansionSet {
         cards.add(new SetCardInfo("Non-Human Cannonball", 115, Rarity.COMMON, mage.cards.n.NonHumanCannonball.class));
         cards.add(new SetCardInfo("One-Clown Band", 117, Rarity.COMMON, mage.cards.o.OneClownBand.class));
         cards.add(new SetCardInfo("Overgrown Tomb", 284, Rarity.RARE, mage.cards.o.OvergrownTomb.class));
+        cards.add(new SetCardInfo("Pair o' Dice Lost", 149, Rarity.UNCOMMON, mage.cards.p.PairODiceLost.class));
         cards.add(new SetCardInfo("Plains", 235, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Sacred Foundry", 285, Rarity.RARE, mage.cards.s.SacredFoundry.class));
         cards.add(new SetCardInfo("Saw in Half", 88, Rarity.RARE, mage.cards.s.SawInHalf.class));

@@ -90,18 +90,15 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         }
         this.getEffects().setValue("permanentEnteringBattlefield", permanent);
         this.getEffects().setValue("permanentEnteringControllerId", permanent.getControllerId());
-        if (setTargetPointer == SetTargetPointer.NONE) {
-            return true;
-        }
         switch (setTargetPointer) {
             case PLAYER:
                 this.getEffects().setTargetPointer(new FixedTarget(permanent.getControllerId()));
-                break;
+                return true;
             case PERMANENT:
                 this.getEffects().setTargetPointer(new FixedTarget(permanent, game));
-                break;
+            default:
+                return true;
         }
-        return true;
     }
 
     @Override

@@ -8,6 +8,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.HasSubtypesSourceEffect;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.keyword.FlashbackAbility;
+import mage.abilities.keyword.ReconfigureAbility;
+import mage.abilities.keyword.SunburstAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.repository.PluginClassloaderRegistery;
 import mage.constants.*;
@@ -30,7 +32,6 @@ import org.apache.log4j.Logger;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
-import mage.abilities.keyword.ReconfigureAbility;
 
 public abstract class CardImpl extends MageObjectImpl implements Card {
 
@@ -44,7 +45,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected String tokenSetCode;
     protected String tokenDescriptor;
     protected Rarity rarity;
-    protected Class<?> secondSideCardClazz;
+    protected Class<? extends Card> secondSideCardClazz;
+    protected Class<? extends Card> meldsWithClazz;
     protected Card secondSideCard;
     protected boolean nightCard;
     protected SpellAbility spellAbility;
@@ -124,6 +126,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         secondSideCardClazz = card.secondSideCardClazz;
         secondSideCard = null; // will be set on first getSecondCardFace call if card has one
         nightCard = card.nightCard;
+        meldsWithClazz = card.meldsWithClazz;
 
         spellAbility = null; // will be set on first getSpellAbility call if card has one
         flipCard = card.flipCard;
@@ -646,6 +649,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
+    public boolean meldsWith(Card card) {
+        return this.meldsWithClazz != null && this.meldsWithClazz.isInstance(card.getMainCard());
+    }
+
+    @Override
     public boolean isNightCard() {
         return this.nightCard;
     }
@@ -901,5 +909,36 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         // changeling (any subtype)
         return subType.getSubTypeSet() == SubTypeSet.CreatureType
                 && this.getAbilities().containsClass(ChangelingAbility.class);
+    }
+
+    /**
+     * This is used for disabling auto-payments for any any cards which care about the color
+     * of the mana used to cast it beyond color requirements. E.g. Sunburst, Adamant, Flamespout.
+     * <p>
+     * This is <b>not</b> about which colors are in the mana costs.
+     * <p>
+     * E.g. "Pentad Prism" {2} will return true since it has Sunburst, but "Abbey Griffin" {3}{W} will
+     * return false since the mana spent on the generic cost has no impact on the card.
+     *
+     * @return Whether the given spell cares about the mana color used to pay for it.
+     */
+    public boolean caresAboutManaColor(Game game) {
+        // SunburstAbility
+        if (abilities.containsClass(SunburstAbility.class)) {
+            return true;
+        }
+
+        // Look at each individual ability
+        //      ConditionalInterveningIfTriggeredAbility (e.g. Ogre Savant)
+        //      Spellability with ManaWasSpentCondition (e.g. Firespout)
+        //      Modular (only Arcbound Wanderer)
+        for (Ability ability : getAbilities(game)) {
+            if (((AbilityImpl) ability).caresAboutManaColor()) {
+                return true;
+            }
+        }
+
+        // Only way to get here is if none of the effects on the card care about mana color.
+        return false;
     }
 }

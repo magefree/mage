@@ -413,47 +413,23 @@ public class Spell extends StackObjectImpl implements Card {
 
     @Override
     public void counter(Ability source, Game game) {
-        this.counter(source, game, Zone.GRAVEYARD, false, ZoneDetail.NONE);
+        this.counter(source, game, PutCards.GRAVEYARD);
     }
 
     @Override
-    public void counter(Ability source, Game game, Zone zone, boolean owner, ZoneDetail zoneDetail) {
+    public void counter(Ability source, Game game, PutCards putCard) {
         // source can be null for fizzled spells, don't use that code in your ZONE_CHANGE watchers/triggers:
         // event.getSourceId().equals
-        // TODO: so later it must be replaced to another technics with non null source
-        UUID counteringSourceId = (source == null ? null : source.getSourceId());
+        // TODO: fizzled spells are no longer considered "countered" as of current rules; may need refactor
         this.countered = true;
-        if (!isCopy()) {
-            Player player = game.getPlayer(game.getControllerId(counteringSourceId));
-            if (player == null) {
-                player = game.getPlayer(getControllerId());
-            }
-            if (player != null) {
-                Ability counteringAbility = null;
-                MageObject counteringObject = game.getObject(counteringSourceId);
-                if (counteringObject instanceof StackObject) {
-                    counteringAbility = ((StackObject) counteringObject).getStackAbility();
-                }
-                if (zone == Zone.LIBRARY) {
-                    if (zoneDetail == ZoneDetail.CHOOSE) {
-                        if (player.chooseUse(Outcome.Detriment, "Move countered spell to the top of the library? (otherwise it goes to the bottom)", counteringAbility, game)) {
-                            zoneDetail = ZoneDetail.TOP;
-                        } else {
-                            zoneDetail = ZoneDetail.BOTTOM;
-                        }
-                    }
-                    if (zoneDetail == ZoneDetail.TOP) {
-                        player.putCardsOnTopOfLibrary(new CardsImpl(card), game, counteringAbility, false);
-                    } else {
-                        player.putCardsOnBottomOfLibrary(new CardsImpl(card), game, counteringAbility, false);
-                    }
-                } else {
-                    player.moveCards(card, zone, counteringAbility, game, false, false, owner, null);
-                }
-            }
-        } else {
+        if (isCopy()) {
             // copied spell, only remove from stack
             game.getStack().remove(this, game);
+            return;
+        }
+        Player player = game.getPlayer(source == null ? getControllerId() : source.getControllerId());
+        if (player != null) {
+            putCard.moveCard(player, card, source, game, "countered spell");
         }
     }
 

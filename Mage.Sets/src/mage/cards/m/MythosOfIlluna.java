@@ -86,6 +86,11 @@ class MythosOfIllunaEffect extends OneShotEffect {
         }
         return effect.apply(game, source);
     }
+
+    @Override
+    public Condition getCondition() {
+        return condition;
+    }
 }
 
 enum MythosOfIllunaCondition implements Condition {

@@ -3,7 +3,7 @@ package mage.cards.d;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesClassLevelTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.LandfallAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.LandsYouControlCount;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -40,9 +40,7 @@ public final class DruidClass extends CardImpl {
         this.addAbility(new ClassReminderAbility());
 
         // Whenever a land enters the battlefield under your control, you gain 1 life.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                new GainLifeEffect(1), StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT
-        ));
+        this.addAbility(new LandfallAbility(new GainLifeEffect(1)));
 
         // {2}{G}: Level 2
         this.addAbility(new ClassLevelAbility(2, "{2}{G}"));

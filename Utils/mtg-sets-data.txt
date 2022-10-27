@@ -128,6 +128,7 @@ Judge Promo|JR|
 Judgment|JUD|
 Jumpstart|JMP|
 Jumpstart: Historic Horizons|J21|
+Jumpstart 2022|J22|
 Kaladesh|KLD|
 Kaldheim|KHM|
 Kaldheim Commander|KHC|

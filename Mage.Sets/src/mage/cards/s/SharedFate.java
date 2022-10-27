@@ -14,6 +14,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.players.PlayerList;
 import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 
@@ -63,22 +64,44 @@ class SharedFateReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Player playerToDraw = game.getPlayer(event.getPlayerId());
-        if (playerToDraw != null && sourcePermanent != null) {
-            TargetOpponent target = new TargetOpponent(true);
-            if (playerToDraw.choose(Outcome.DrawCard, target, source, game)) {
-                Player chosenPlayer = game.getPlayer(target.getFirstTarget());
-                if (chosenPlayer != null) {
-                    Card card = chosenPlayer.getLibrary().getFromTop(game);
-                    if (card != null) {
-                        playerToDraw.moveCardsToExile(
-                                card, source, game, false,
-                                CardUtil.getExileZoneId(source.getSourceId().toString() + sourcePermanent.getZoneChangeCounter(game) + playerToDraw.getId().toString(), game),
-                                sourcePermanent.getIdName() + "-" + sourcePermanent.getZoneChangeCounter(game) + " (" + playerToDraw.getName() + ')');
-                        card.setFaceDown(true, game);
-                    }
-                }
-            }
+        Player controller = game.getPlayer(source.getControllerId());
+        PlayerList playersInRange = game.getState().getPlayersInRange(source.getControllerId(), game);
+        if (sourcePermanent == null || playerToDraw == null || controller == null
+                || !playersInRange.contains(playerToDraw.getId())) {
+            return false;
         }
+
+        TargetOpponent target = new TargetOpponent(true);
+        if (!playerToDraw.choose(Outcome.DrawCard, target, source, game)) {
+            return false;
+        }
+
+        Player chosenPlayer = game.getPlayer(target.getFirstTarget());
+        if (chosenPlayer == null) {
+            return false;
+        }
+
+        if (!playersInRange.contains(chosenPlayer.getId())) {
+            game.informPlayers(
+                    "Nothing exiled. "  + playerToDraw.getLogName()
+                    + " chose to exile from " + chosenPlayer.getLogName() + "'s library. "
+                    + "That player is outside of " + controller.getLogName() + "'s range of influence."
+            );
+            return false;
+        }
+
+        game.informPlayers(playerToDraw.getLogName() + " chose to exile from " + chosenPlayer.getLogName() + "' library.");
+
+        Card card = chosenPlayer.getLibrary().getFromTop(game);
+        if (card == null) {
+            return false;
+        }
+
+        playerToDraw.moveCardsToExile(
+                card, source, game, false,
+                CardUtil.getExileZoneId(source.getSourceId().toString() + sourcePermanent.getZoneChangeCounter(game) + playerToDraw.getId().toString(), game),
+                sourcePermanent.getIdName() + "-" + sourcePermanent.getZoneChangeCounter(game) + " (" + playerToDraw.getName() + ')');
+        card.setFaceDown(true, game);
         return true;
     }
 

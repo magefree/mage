@@ -11,6 +11,7 @@ import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetE
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
@@ -112,21 +113,13 @@ class OathOfTeferiLoyaltyEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            controller.setLoyaltyUsePerTurn(Math.max(2, controller.getLoyaltyUsePerTurn()));
+    public boolean apply(Game game, Ability source) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(
+                StaticFilters.FILTER_CONTROLLED_PERMANENT_PLANESWALKER,
+                source.getControllerId(), source, game
+        )) {
+            permanent.incrementLoyaltyActivationsAvailable(2);
         }
         return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
     }
 }

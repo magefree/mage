@@ -6,7 +6,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CovenCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.hint.common.CovenHint;
 import mage.abilities.keyword.FlyingAbility;

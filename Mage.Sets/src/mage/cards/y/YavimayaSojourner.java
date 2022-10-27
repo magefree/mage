@@ -29,6 +29,7 @@ public final class YavimayaSojourner extends CardImpl {
         // Domain - This spell costs {1} less to cast for each basic land type among lands you control.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new SpellCostReductionSourceEffect(DomainValue.REGULAR)
+                .setText("This spell costs {1} less to cast for each basic land type among lands you control")
         ).setAbilityWord(AbilityWord.DOMAIN).addHint(DomainHint.instance));
     }
 

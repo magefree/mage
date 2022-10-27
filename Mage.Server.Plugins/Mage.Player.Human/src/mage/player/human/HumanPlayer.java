@@ -465,9 +465,20 @@ public class HumanPlayer extends PlayerImpl {
             return true;
         }
 
-        if (Outcome.PutManaInPool == outcome) {
-            if (currentlyUnpaidMana != null
-                    && ManaUtil.tryToAutoSelectAManaColor(choice, currentlyUnpaidMana)) {
+        // Try to autopay for mana
+        if (Outcome.PutManaInPool == outcome && currentlyUnpaidMana != null) {
+            // Check check if the spell being paid for cares about the color of mana being paid
+            // See: https://github.com/magefree/mage/issues/9070
+            boolean caresAboutManaColor = false;
+            if (!game.getStack().isEmpty() && game.getStack().getFirst() instanceof Spell) {
+                Spell spellBeingCast = (Spell) game.getStack().getFirst();
+                if (!spellBeingCast.isResolving() && spellBeingCast.getControllerId().equals(this.getId())) {
+                    CardImpl card = (CardImpl) game.getCard(spellBeingCast.getSourceId());
+                    caresAboutManaColor = card.caresAboutManaColor(game);
+                }
+            }
+
+            if (!caresAboutManaColor && ManaUtil.tryToAutoSelectAManaColor(choice, currentlyUnpaidMana)) {
                 return true;
             }
         }
@@ -1537,7 +1548,18 @@ public class HumanPlayer extends PlayerImpl {
         if (zone != null) {
             LinkedHashMap<UUID, ActivatedManaAbilityImpl> useableAbilities = getUseableManaAbilities(object, zone, game);
             if (!useableAbilities.isEmpty()) {
-                useableAbilities = ManaUtil.tryToAutoPay(unpaid, useableAbilities); // eliminates other abilities if one fits perfectly
+                // Added to ensure that mana is not being autopaid for spells that care about the color of mana being paid
+                // See https://github.com/magefree/mage/issues/9070
+                boolean caresAboutManaColor = false;
+                if (abilityToCast.getAbilityType() == AbilityType.SPELL) {
+                    CardImpl card = (CardImpl) game.getCard(abilityToCast.getSourceId());
+                    caresAboutManaColor = card.caresAboutManaColor(game);
+                }
+
+                // Don't auto-pay if the spell cares about the color
+                if (!caresAboutManaColor) {
+                    useableAbilities = ManaUtil.tryToAutoPay(unpaid, useableAbilities); // eliminates other abilities if one fits perfectly
+                }
                 currentlyUnpaidMana = unpaid;
                 activateAbility(useableAbilities, object, game);
                 currentlyUnpaidMana = null;

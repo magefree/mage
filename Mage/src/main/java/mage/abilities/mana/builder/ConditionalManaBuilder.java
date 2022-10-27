@@ -6,6 +6,8 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.game.Game;
 
+import java.util.Objects;
+
 /**
  * @author noxx
  */
@@ -19,4 +21,22 @@ public abstract class ConditionalManaBuilder implements Builder<ConditionalMana>
     }
 
     public abstract String getRule();
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+
+        return Objects.equals(this.mana, ((ConditionalManaBuilder) obj).mana);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mana);
+    }
 }

@@ -1,7 +1,7 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.LandfallAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.LandsYouControlCount;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.game.permanent.token.BadgerToken;
 
@@ -45,10 +44,7 @@ public final class GreensleevesMaroSorcerer extends CardImpl {
         ));
 
         // Whenever a land enters the battlefield under your control, create a 3/3 green Badger creature token.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                Zone.BATTLEFIELD, new CreateTokenEffect(new BadgerToken()),
-                StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT, false
-        ));
+        this.addAbility(new LandfallAbility(new CreateTokenEffect(new BadgerToken())));
     }
 
     private GreensleevesMaroSorcerer(final GreensleevesMaroSorcerer card) {

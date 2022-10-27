@@ -7,16 +7,12 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 
 /**
  *

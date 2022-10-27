@@ -1,5 +1,6 @@
 package mage.cards.k;
 
+import java.util.Objects;
 import java.util.UUID;
 
 import mage.ConditionalMana;
@@ -16,7 +17,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.VigilanceAbility;
@@ -124,6 +124,20 @@ class TheRinghartCrestManaBuilder extends ConditionalManaBuilder {
     @Override
     public String getRule() {
         return "Spend this mana only to cast a creature spell of the chosen type or a legendary creature spell";
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), this.creatureType);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) {
+            return false;
+        }
+
+        return this.creatureType == ((TheRinghartCrestManaBuilder) obj).creatureType;
     }
 }
 

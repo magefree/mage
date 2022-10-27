@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -14,8 +13,9 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.token.RedHumanToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class HanweirGarrison extends CardImpl {
@@ -26,6 +26,7 @@ public final class HanweirGarrison extends CardImpl {
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
+        this.meldsWithClazz = mage.cards.h.HanweirBattlements.class;
 
         // Whenever Hanweir Garrison attacks, create two 1/1 red Human creature tokens tapped and attacking.
         this.addAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new RedHumanToken(), 2, true, true), false));

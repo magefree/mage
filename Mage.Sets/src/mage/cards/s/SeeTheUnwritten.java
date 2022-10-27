@@ -2,13 +2,13 @@ package mage.cards.s;
 
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.RevealLibraryPickControllerEffect;
 import mage.abilities.hint.common.FerociousHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.PutCards;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;

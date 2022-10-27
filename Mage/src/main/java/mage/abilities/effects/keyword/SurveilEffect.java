@@ -8,22 +8,28 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- *
  * @author TheElk801
  */
 public class SurveilEffect extends OneShotEffect {
 
-    protected int surveilNumber;
+    protected final int surveilNumber;
+    protected final boolean showEffectHint;
 
-    public SurveilEffect(int scryNumber) {
+    public SurveilEffect(int surveilNumber) {
+        this(surveilNumber, true);
+    }
+
+    public SurveilEffect(int surveilNumber, boolean showEffectHint) {
         super(Outcome.Benefit);
-        this.surveilNumber = scryNumber;
+        this.surveilNumber = surveilNumber;
+        this.showEffectHint = showEffectHint;
         this.setText();
     }
 
     public SurveilEffect(final SurveilEffect effect) {
         super(effect);
         this.surveilNumber = effect.surveilNumber;
+        this.showEffectHint = effect.showEffectHint;
     }
 
     @Override
@@ -42,6 +48,10 @@ public class SurveilEffect extends OneShotEffect {
 
     private void setText() {
         StringBuilder sb = new StringBuilder("surveil ").append(surveilNumber);
+        if (!showEffectHint) {
+            staticText = sb.toString();
+            return;
+        }
         if (surveilNumber == 1) {
             sb.append(". <i>(Look at the top card of your library. You may put that card into your graveyard.)</i>");
         } else {

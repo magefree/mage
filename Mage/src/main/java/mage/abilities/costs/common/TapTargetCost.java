@@ -37,7 +37,7 @@ public class TapTargetCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         List<Permanent> permanents = new ArrayList<>();
-        if (target.choose(Outcome.Tap, controllerId, source.getSourceId(), source, game)) {
+        if (target.getMaxNumberOfTargets() > 0 && target.choose(Outcome.Tap, controllerId, source.getSourceId(), source, game)) {
             for (UUID targetId : target.getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent == null) {
@@ -46,6 +46,9 @@ public class TapTargetCost extends CostImpl {
                 paid |= permanent.tap(source, game);
                 permanents.add(permanent);
             }
+        }
+        if (target.getNumberOfTargets() == 0) {
+            paid = true; // e.g. Aryel with X = 0
         }
         source.getEffects().setValue("tappedPermanents", permanents);
         return paid;
@@ -64,5 +67,4 @@ public class TapTargetCost extends CostImpl {
     public TapTargetCost copy() {
         return new TapTargetCost(this);
     }
-
 }

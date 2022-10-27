@@ -447,7 +447,7 @@ public class ScryfallImageSupportCards {
             add("PELD"); // Throne of Eldraine Promos
             add("ELD"); // Throne of Eldraine
             //add("PTG"); // Ponies: The Galloping
-            //add("CMB1"); // Mystery Booster Playtest Cards
+            add("CMB1"); // Mystery Booster Playtest Cards
             add("MB1"); // Mystery Booster
             add("GN2"); // Game Night 2019
             add("HA1"); // Historic Anthology 1
@@ -516,7 +516,13 @@ public class ScryfallImageSupportCards {
             add("DMU"); // Dominaria United
             add("DMC"); // Dominaria United Commander
             add("40K"); // Warhammer 40,000
+            add("UNF"); // Unfinity
             add("GN3"); // Game Night 2022
+            add("BRO"); // The Brothers' War
+            add("BRC"); // The Brothers' War Commander
+            add("BOT"); // Transformers
+            add("J22"); // Jumpstart 2022
+            add("SLC"); // Secret Lair 30th Anniversary Countdown Kit
         }
     };
 

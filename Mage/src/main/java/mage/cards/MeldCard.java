@@ -25,6 +25,7 @@ public abstract class MeldCard extends CardImpl {
     public MeldCard(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs) {
         super(ownerId, setInfo, cardTypes, costs);
         halves = new CardsImpl();
+        this.nightCard = true;
     }
 
     public MeldCard(final MeldCard card) {
@@ -104,6 +105,11 @@ public abstract class MeldCard extends CardImpl {
             return (this.topHalfCard != null ? this.topHalfCard.getManaValue() : 0)
                     + (this.bottomHalfCard != null ? this.bottomHalfCard.getManaValue() : 0);
         }
+    }
+
+    @Override
+    public boolean isTransformable() {
+        return false;
     }
 
     @Override

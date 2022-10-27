@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.LandfallAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.effects.RequirementEffect;
@@ -43,9 +43,7 @@ public final class TrenchBehemoth extends CardImpl {
         this.addAbility(ability);
 
         // Whenever a land enters the battlefield under your control, target creature an opponent controls attacks during its controller's next combat phase if able.
-        ability = new EntersBattlefieldControlledTriggeredAbility(
-                new TrenchBehemothEffect(), StaticFilters.FILTER_LAND_A
-        );
+        ability = new LandfallAbility(new TrenchBehemothEffect());
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);
     }

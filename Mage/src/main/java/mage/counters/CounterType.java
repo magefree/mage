@@ -5,6 +5,9 @@ import mage.cards.Card;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Enum for counters, names and instances.
  *
@@ -96,6 +99,7 @@ public enum CounterType {
     INDESTRUCTIBLE("indestructible"),
     INFECTION("infection"),
     INGENUITY("ingenuity"),
+    INTEL("intel"),
     INTERVENTION("intervention"),
     INVITATION("invitation"),
     ISOLATION("isolation"),
@@ -125,6 +129,7 @@ public enum CounterType {
     MIRE("mire"),
     MUSIC("music"),
     MUSTER("muster"),
+    NECRODERMIS("necrodermis"),
     NET("net"),
     NIGHT("night"),
     OMEN("omen"),
@@ -202,6 +207,14 @@ public enum CounterType {
     private final String name;
     private final String article;
     private final CounterPredicate predicate;
+
+    private static final Map<String, CounterType> counterNameMap = new HashMap<>();
+
+    static {
+        for (CounterType counter : CounterType.values()) {
+            counterNameMap.put(counter.name, counter);
+        }
+    }
 
     CounterType(String name) {
         this(name, "aeiou".contains("" + name.charAt(0)) ? "an" : "a");
@@ -299,12 +312,7 @@ public enum CounterType {
     }
 
     public static CounterType findByName(String name) {
-        for (CounterType counterType : values()) {
-            if (counterType.getName().equals(name)) {
-                return counterType;
-            }
-        }
-        return null;
+        return counterNameMap.get(name);
     }
 
     public static String findArticle(String name) {

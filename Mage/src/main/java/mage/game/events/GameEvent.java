@@ -65,7 +65,8 @@ public class GameEvent implements Serializable {
         //player events
         /* ZONE_CHANGE
          targetId    id of the zone changing object
-         sourceId    sourceId of the ability with the object moving effect (WARNING, can be null if it move of fizzled spells)
+         sourceId    sourceId of the ability with the object moving effect
+                     WARNING: can be null if moved by game rules (e.g. draw in draw step, discard in cleanup step, fizzled spell)
          playerId    controller of the moved object
          amount      not used for this event
          flag        not used for this event

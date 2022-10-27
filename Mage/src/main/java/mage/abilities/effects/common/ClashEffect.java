@@ -139,7 +139,7 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
                 game.informPlayer(controller, "You won the clash!");
             } else if (cmcController < cmcOpponent) {
                 message.append(opponent.getLogName()).append(" won the clash");
-                game.informPlayer(controller, opponent.getLogName() + " won the clash!");
+                game.informPlayer(controller, opponent.getName() + " won the clash!");
             } else {
                 message.append(" no winner ");
             }
@@ -177,11 +177,7 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
         ));
 
         // set opponent to DoIfClashWonEffect
-        for (Effect effect : source.getEffects()) {
-            if (effect instanceof DoIfClashWonEffect) {
-                effect.setValue("clashOpponent", opponent);
-            }
-        }
+        source.getEffects().setValue("clashOpponent", opponent);
         return cmcController > cmcOpponent;
     }
 }

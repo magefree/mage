@@ -8,7 +8,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
@@ -18,6 +17,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.PutCards;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 

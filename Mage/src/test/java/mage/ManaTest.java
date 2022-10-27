@@ -2,6 +2,7 @@ package mage;
 
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCostImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
@@ -11,6 +12,9 @@ import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -767,11 +771,11 @@ public class ManaTest {
 
     /**
      * Mana.needed is used by the AI to know how much mana it needs in order to be able to play a card.
+     *
+     * TODO: How should generic and any be handled?
      */
     @Test
-    public void should() {
-        // TODO: How does it handle generic and any.
-        //       How *should* it handle them?
+    public void manaNeededWorks() {
         testManaNeeded(
                 new Mana(ManaType.COLORLESS, 1), // Available
                 new Mana(ManaType.COLORLESS, 2), // Cost
@@ -792,6 +796,99 @@ public class ManaTest {
                 new Mana(2, 0, 0, 0, 0, 2, 0, 0), // Cost
                 new Mana(2, 0, 0, 0, 0, 2, 0, 0)  // Needed
         );
+    }
+
+    /**
+     * Test that {@link Mana#getMoreValuableMana(Mana, Mana)} works as intended.
+     * All calls to getMoreValuableMana are run twice, with the second time having the inputs flipped to make sure the same result is given.
+     */
+    @Test
+    public void moreValuableManaTest() {
+        final Mana anyMana        = Mana.AnyMana(1);
+        final Mana genericMana    = Mana.GenericMana(1);
+        final Mana colorlessMana  = Mana.ColorlessMana(1);
+
+        final Mana whiteMana      = Mana.WhiteMana(1);
+        final Mana blueMana       = Mana.BlueMana(1);
+        final Mana blackMana      = Mana.BlackMana(1);
+        final Mana redMana        = Mana.RedMana(1);
+        final Mana greenMana      = Mana.GreenMana(1);
+
+        final List<Mana> coloredManas = Arrays.asList(whiteMana, blueMana, blackMana, redMana, greenMana);
+
+        // 1. A color of WUBURG is not more valuable than any other
+        for (Mana coloredMana1 : coloredManas) {
+            for (Mana coloredMana2 : coloredManas) {
+                assertNull(coloredMana1 + " and " + coloredMana2 + " should not be comparable.", Mana.getMoreValuableMana(coloredMana1, coloredMana2));
+                assertNull(coloredMana1 + " and " + coloredMana2 + " should not be comparable.", Mana.getMoreValuableMana(coloredMana2, coloredMana1));
+            }
+        }
+
+        // 2. Generic is less valuable than any other type of mana
+        final List<Mana> nonGenericManas = Arrays.asList(whiteMana, blueMana, blackMana, redMana, greenMana, colorlessMana);
+        for (Mana coloredMana : nonGenericManas) {
+            assertEquals(coloredMana, Mana.getMoreValuableMana(coloredMana, genericMana));
+            assertEquals(coloredMana, Mana.getMoreValuableMana(genericMana, coloredMana));
+        }
+        assertEquals(anyMana, Mana.getMoreValuableMana(genericMana, anyMana));
+        assertEquals(anyMana, Mana.getMoreValuableMana(anyMana, genericMana));
+
+        // 3. ANY mana is more valuable than generic or a specific color
+        for (Mana coloredMana : coloredManas) {
+            assertEquals(anyMana, Mana.getMoreValuableMana(coloredMana, anyMana));
+            assertEquals(anyMana, Mana.getMoreValuableMana(anyMana, coloredMana));
+        }
+
+        // 4. Colorless mana is not comparable with colored mana or ANY mana
+        for (Mana coloredMana : coloredManas) {
+            assertNull(Mana.getMoreValuableMana(colorlessMana, coloredMana));
+            assertNull(Mana.getMoreValuableMana(coloredMana, colorlessMana));
+        }
+        assertNull(Mana.getMoreValuableMana(anyMana, colorlessMana));
+        assertNull(Mana.getMoreValuableMana(colorlessMana, anyMana));
+
+        // 5. Mana is more valuable if it has more of any type of mana but not less of any type (other than generic)
+        final List<Mana> allManas = Arrays.asList(whiteMana, blueMana, blackMana, redMana, greenMana, colorlessMana, genericMana, anyMana);
+        for (Mana specificMana : nonGenericManas) {
+            for (Mana toAddMana : allManas) {
+                Mana manaToCompare = specificMana.copy();
+                manaToCompare.add(toAddMana);
+                manaToCompare.add(toAddMana);
+
+                assertEquals(manaToCompare, Mana.getMoreValuableMana(specificMana, manaToCompare));
+                assertEquals(manaToCompare, Mana.getMoreValuableMana(manaToCompare, specificMana));
+            }
+        }
+
+        // 6. Greater amount of mana but no less of any kind other than generic
+        final List<Mana> nonAnyManas = Arrays.asList(whiteMana, blueMana, blackMana, redMana, greenMana, colorlessMana, genericMana);
+        Mana manaBase = new ManaCostsImpl<>("{1}{W}{U}{B}{R}{G}{C}").getMana();
+        Mana manaToCompare = manaBase.copy();
+
+        // To avoid the copying that goes with it, manaToCompare is edited in place and always
+        // reset back to its base state at the end of each outer loop.
+        for (Mana manaToAddTwice : nonAnyManas) {
+            manaToCompare.add(manaToAddTwice);
+            manaToCompare.add(manaToAddTwice);
+            for (Mana manaToSubtract : nonAnyManas) {
+                manaToCompare.subtract(manaToSubtract);
+
+                if (manaToSubtract == genericMana || manaToSubtract == manaToAddTwice) {
+                    assertEquals(manaToCompare, Mana.getMoreValuableMana(manaBase, manaToCompare));
+                    assertEquals(manaToCompare, Mana.getMoreValuableMana(manaToCompare, manaBase));
+                } else if (manaToAddTwice == genericMana ){
+                    assertEquals(manaBase, Mana.getMoreValuableMana(manaBase, manaToCompare));
+                    assertEquals(manaBase, Mana.getMoreValuableMana(manaToCompare, manaBase));
+                } else {
+                    assertNull(Mana.getMoreValuableMana(manaBase, manaToCompare));
+                    assertNull(Mana.getMoreValuableMana(manaToCompare, manaBase));
+                }
+
+                manaToCompare.add(manaToSubtract);
+            }
+            manaToCompare.subtract(manaToAddTwice);
+            manaToCompare.subtract(manaToAddTwice);
+        }
     }
 
     /**

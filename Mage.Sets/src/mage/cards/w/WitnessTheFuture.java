@@ -3,11 +3,11 @@ package mage.cards.w;
 import java.util.UUID;
 
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.TargetPlayerShufflesTargetCardsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.PutCards;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInTargetPlayersGraveyard;
 

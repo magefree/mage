@@ -9,16 +9,13 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
-import mage.cards.Card;
+import mage.abilities.effects.keyword.SurveilEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.players.Player;
 
 import java.util.UUID;
 
@@ -43,7 +40,7 @@ public final class UurgSpawnOfTurg extends CardImpl {
 
         // At the beginning of your upkeep, look at the top card of your library. You may put that card into your graveyard.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new UurgSpawnOfTurgEffect(), TargetController.YOU, false
+                new SurveilEffect(1), TargetController.YOU, false
         ));
 
         // {B}{G}, Sacrifice a land: You gain 2 life.
@@ -59,39 +56,5 @@ public final class UurgSpawnOfTurg extends CardImpl {
     @Override
     public UurgSpawnOfTurg copy() {
         return new UurgSpawnOfTurg(this);
-    }
-}
-
-class UurgSpawnOfTurgEffect extends OneShotEffect {
-
-    UurgSpawnOfTurgEffect() {
-        super(Outcome.Benefit);
-        staticText = "look at the top card of your library. You may put that card into your graveyard";
-    }
-
-    private UurgSpawnOfTurgEffect(final UurgSpawnOfTurgEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public UurgSpawnOfTurgEffect copy() {
-        return new UurgSpawnOfTurgEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        Card topCard = controller.getLibrary().getFromTop(game);
-        if (topCard == null) {
-            return false;
-        }
-        controller.lookAtCards("Top card of your library", topCard, game);
-        if (controller.chooseUse(Outcome.AIDontUseIt, "Put the top card of your library into your graveyard?", source, game)) {
-            controller.moveCards(topCard, Zone.GRAVEYARD, source, game);
-        }
-        return true;
     }
 }

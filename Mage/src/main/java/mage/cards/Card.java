@@ -76,6 +76,10 @@ public interface Card extends MageObject {
 
     boolean isNightCard();
 
+    default boolean meldsWith(Card card) {
+        return false;
+    }
+
     void assignNewId();
 
     void addInfo(String key, String value, Game game);
