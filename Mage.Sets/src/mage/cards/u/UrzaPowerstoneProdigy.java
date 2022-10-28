@@ -47,9 +47,9 @@ public final class UrzaPowerstoneProdigy extends CardImpl {
         this.addAbility(ability);
 
         // Whenever you discard one or more artifact cards, create a tapped Powerstone token. This ability triggers only once each turn.
-        this.addAbility(new DiscardCardControllerTriggeredAbility(new CreateTokenEffect(
-                new PowerstoneToken(), 1, true, false
-        ), false, filter).setTriggersOnce(true));
+        this.addAbility(new DiscardCardControllerTriggeredAbility(
+                new CreateTokenEffect(new PowerstoneToken(), 1, true), false, filter
+        ).setTriggersOnce(true));
     }
 
     private UrzaPowerstoneProdigy(final UrzaPowerstoneProdigy card) {
