@@ -106,6 +106,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected int transformCount = 0;
     protected Map<String, String> info;
     protected int createOrder;
+    protected boolean legendRuleApplies = true;
 
     private static final List<UUID> emptyList = Collections.unmodifiableList(new ArrayList<UUID>());
 
@@ -171,6 +172,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.bandedCards.addAll(permanent.bandedCards);
         this.timesLoyaltyUsed = permanent.timesLoyaltyUsed;
         this.loyaltyActivationsAvailable = permanent.loyaltyActivationsAvailable;
+        this.legendRuleApplies = permanent.legendRuleApplies;
         this.transformCount = permanent.transformCount;
 
         this.morphed = permanent.morphed;
@@ -214,6 +216,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.copy = false;
         this.goadingPlayers.clear();
         this.loyaltyActivationsAvailable = 1;
+        this.legendRuleApplies = true;
     }
 
     @Override
@@ -489,6 +492,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             return loyaltyActivationsAvailable > timesLoyaltyUsed;
         }
         return false;
+    }
+
+    @Override
+    public void setLegendRuleApplies(boolean legendRuleApplies) {
+        this.legendRuleApplies = legendRuleApplies;
+    }
+
+    @Override
+    public boolean legendRuleApplies() {
+        return this.legendRuleApplies;
     }
 
     @Override
