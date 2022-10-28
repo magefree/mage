@@ -138,6 +138,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Herald's Horn", 241, Rarity.UNCOMMON, mage.cards.h.HeraldsHorn.class));
         cards.add(new SetCardInfo("Heralds of Tzeentch", 23, Rarity.UNCOMMON, mage.cards.h.HeraldsOfTzeentch.class));
         cards.add(new SetCardInfo("Hexmark Destroyer", 36, Rarity.UNCOMMON, mage.cards.h.HexmarkDestroyer.class));
+        cards.add(new SetCardInfo("Hierophant Bio-Titan", 92, Rarity.RARE, mage.cards.h.HierophantBioTitan.class));
         cards.add(new SetCardInfo("Hormagaunt Horde", 93, Rarity.RARE, mage.cards.h.HormagauntHorde.class));
         cards.add(new SetCardInfo("Hour of Reckoning", 187, Rarity.RARE, mage.cards.h.HourOfReckoning.class));
         cards.add(new SetCardInfo("Hull Breach", 224, Rarity.UNCOMMON, mage.cards.h.HullBreach.class));
