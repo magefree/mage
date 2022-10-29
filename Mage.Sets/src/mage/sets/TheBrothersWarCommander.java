@@ -76,6 +76,7 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Hedron Archive", 142, Rarity.UNCOMMON, mage.cards.h.HedronArchive.class));
         cards.add(new SetCardInfo("Hellkite Igniter", 117, Rarity.RARE, mage.cards.h.HellkiteIgniter.class));
         cards.add(new SetCardInfo("Herald of Anguish", 108, Rarity.MYTHIC, mage.cards.h.HeraldOfAnguish.class));
+        cards.add(new SetCardInfo("Hexavus", 14, Rarity.RARE, mage.cards.h.Hexavus.class));
         cards.add(new SetCardInfo("Ichor Wellspring", 143, Rarity.UNCOMMON, mage.cards.i.IchorWellspring.class));
         cards.add(new SetCardInfo("Idol of Oblivion", 144, Rarity.RARE, mage.cards.i.IdolOfOblivion.class));
         cards.add(new SetCardInfo("Indomitable Archangel", 72, Rarity.MYTHIC, mage.cards.i.IndomitableArchangel.class));
