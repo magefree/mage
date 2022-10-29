@@ -52,7 +52,7 @@ public final class HierophantBioTitan extends CardImpl {
         // Vigilance, reach, ward {2}
         this.addAbility(VigilanceAbility.getInstance());
         this.addAbility(ReachAbility.getInstance());
-        this.addAbility(new WardAbility(new GenericManaCost(2)));
+        this.addAbility(new WardAbility(new GenericManaCost(2), false));
 
         // Titanic — Hierophant Bio-Titan can't be blocked by creatures with power 2 or less.
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)).withFlavorWord("Titanic"));
