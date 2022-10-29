@@ -45,7 +45,7 @@ public final class TriarchStalker extends CardImpl {
         ).withFlavorWord("Targeting Relay"));
 
         // Creatures attacking the last chosen player have menace.
-        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(new MenaceAbility(), Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(new MenaceAbility(false), Duration.WhileOnBattlefield, filter)));
     }
 
     private TriarchStalker(final TriarchStalker card) {
