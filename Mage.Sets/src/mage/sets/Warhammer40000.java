@@ -192,6 +192,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Past in Flames", 206, Rarity.MYTHIC, mage.cards.p.PastInFlames.class));
         cards.add(new SetCardInfo("Path of Ancestry", 287, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Pink Horror", 136, Rarity.RARE, mage.cards.p.PinkHorror.class));
+        cards.add(new SetCardInfo("Plague Drone", 47, Rarity.RARE, mage.cards.p.PlagueDrone.class));
         cards.add(new SetCardInfo("Plains", 306, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plasmancer", 48, Rarity.UNCOMMON, mage.cards.p.Plasmancer.class));
         cards.add(new SetCardInfo("Polluted Mire", 288, Rarity.COMMON, mage.cards.p.PollutedMire.class));
