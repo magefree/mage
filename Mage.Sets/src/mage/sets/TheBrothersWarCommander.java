@@ -35,6 +35,7 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Bedevil", 121, Rarity.RARE, mage.cards.b.Bedevil.class));
         cards.add(new SetCardInfo("Bident of Thassa", 80, Rarity.RARE, mage.cards.b.BidentOfThassa.class));
         cards.add(new SetCardInfo("Blasphemous Act", 113, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
+        cards.add(new SetCardInfo("Blast-Furnace Hellkite", 12, Rarity.RARE, mage.cards.b.BlastFurnaceHellkite.class));
         cards.add(new SetCardInfo("Bojuka Bog", 176, Rarity.COMMON, mage.cards.b.BojukaBog.class));
         cards.add(new SetCardInfo("Bronze Guardian", 70, Rarity.RARE, mage.cards.b.BronzeGuardian.class));
         cards.add(new SetCardInfo("Brudiclad, Telchor Engineer", 122, Rarity.RARE, mage.cards.b.BrudicladTelchorEngineer.class));
