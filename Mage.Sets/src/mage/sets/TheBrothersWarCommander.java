@@ -17,7 +17,6 @@ public final class TheBrothersWarCommander extends ExpansionSet {
 
     private TheBrothersWarCommander() {
         super("The Brothers' War Commander", "BRC", ExpansionSet.buildDate(2022, 11, 18), SetType.SUPPLEMENTAL);
-        this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Abrade", 111, Rarity.UNCOMMON, mage.cards.a.Abrade.class));
         cards.add(new SetCardInfo("Alela, Artful Provocateur", 119, Rarity.MYTHIC, mage.cards.a.AlelaArtfulProvocateur.class));
