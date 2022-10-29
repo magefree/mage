@@ -153,6 +153,7 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Terramorphic Expanse", 210, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("Teshar, Ancestor's Apostle", 77, Rarity.RARE, mage.cards.t.TesharAncestorsApostle.class));
         cards.add(new SetCardInfo("Thirst for Knowledge", 96, Rarity.UNCOMMON, mage.cards.t.ThirstForKnowledge.class));
+        cards.add(new SetCardInfo("Thopter Shop", 19, Rarity.RARE, mage.cards.t.ThopterShop.class));
         cards.add(new SetCardInfo("Thopter Spy Network", 97, Rarity.RARE, mage.cards.t.ThopterSpyNetwork.class));
         cards.add(new SetCardInfo("Thought Monitor", 98, Rarity.RARE, mage.cards.t.ThoughtMonitor.class));
         cards.add(new SetCardInfo("Thought Vessel", 167, Rarity.UNCOMMON, mage.cards.t.ThoughtVessel.class));
