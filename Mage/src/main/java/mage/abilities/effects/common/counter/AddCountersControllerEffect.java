@@ -1,11 +1,9 @@
-
 package mage.abilities.effects.common.counter;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.counters.Counter;
-import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -30,7 +28,7 @@ public class AddCountersControllerEffect extends OneShotEffect {
         super(Outcome.Benefit);
         this.counter = counter.copy();
         this.enchantedEquipped = enchantedEquipped;
-        setText();
+        staticText = "its controller gets " + counter.getDescription();
     }
 
     public AddCountersControllerEffect(final AddCountersControllerEffect effect) {
@@ -64,16 +62,6 @@ public class AddCountersControllerEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-
-    private void setText() {
-        if (counter.getCount() > 1) {
-            StringBuilder sb = new StringBuilder();
-            sb.append("its controller gets ").append(Integer.toString(counter.getCount())).append(' ').append(counter.getName()).append(" counters");
-            staticText = sb.toString();
-        } else {
-            staticText = "its controller gets " + CounterType.findArticle(counter.getName()) + " " + counter.getName() + " counter";
-        }
     }
 
     @Override

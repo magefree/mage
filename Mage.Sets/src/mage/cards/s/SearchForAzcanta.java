@@ -1,25 +1,21 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
-
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.effects.keyword.SurveilEffect;
 import mage.abilities.keyword.TransformAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -34,9 +30,13 @@ public final class SearchForAzcanta extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
 
         // At the beginning of your upkeep, look at the top card of your library. You may put it into your graveyard. Then if you have seven or more cards in your graveyard, you may transform Search for Azcanta.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SearchForAzcantaLookLibraryEffect(), TargetController.YOU, false);
-        this.addAbility(ability);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(
+                new SurveilEffect(1, false),
+                TargetController.YOU, false
+        );
+        ability.addEffect(new SearchForAzcantaEffect());
         this.addAbility(new TransformAbility());
+        this.addAbility(ability);
     }
 
     private SearchForAzcanta(final SearchForAzcanta card) {
@@ -49,42 +49,30 @@ public final class SearchForAzcanta extends CardImpl {
     }
 }
 
-class SearchForAzcantaLookLibraryEffect extends OneShotEffect {
+class SearchForAzcantaEffect extends OneShotEffect {
 
-    public SearchForAzcantaLookLibraryEffect() {
+    public SearchForAzcantaEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "look at the top card of your library. You may put that card into your graveyard. "
-                + "Then if you have seven or more cards in your graveyard, you may transform {this}.";
+        this.staticText = "Then if you have seven or more cards in your graveyard, you may transform {this}.";
     }
 
-    public SearchForAzcantaLookLibraryEffect(final SearchForAzcantaLookLibraryEffect effect) {
+    public SearchForAzcantaEffect(final SearchForAzcantaEffect effect) {
         super(effect);
     }
 
     @Override
-    public SearchForAzcantaLookLibraryEffect copy() {
-        return new SearchForAzcantaLookLibraryEffect(this);
+    public SearchForAzcantaEffect copy() {
+        return new SearchForAzcantaEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null) {
-            if (controller.getLibrary().hasCards()) {
-                Card card = controller.getLibrary().getFromTop(game);
-                if (card != null) {
-                    controller.lookAtCards(sourceObject.getIdName(), new CardsImpl(card), game);
-                    if (controller.chooseUse(Outcome.Neutral, "Put that card into your graveyard?", source, game)) {
-                        controller.moveCards(card, Zone.GRAVEYARD, source, game);
-                    }
-                    if (controller.getGraveyard().size() > 6 && controller.chooseUse(Outcome.Neutral, "Transform " + sourceObject.getLogName() + "?", source, game)) {
-                        new TransformSourceEffect().apply(game, source);
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        return controller != null
+                && permanent != null
+                && controller.getGraveyard().size() >= 7
+                && controller.chooseUse(outcome, "Transform " + permanent.getName() + '?', source, game)
+                && permanent.transform(source, game);
     }
 }

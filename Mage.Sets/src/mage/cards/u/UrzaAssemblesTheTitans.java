@@ -1,24 +1,25 @@
 package mage.cards.u;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.cards.Card;
-import mage.cards.CardsImpl;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
+import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterPlaneswalkerCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class UrzaAssemblesTheTitans extends CardImpl {
@@ -110,11 +111,12 @@ class UrzaAssemblesTheTitansLoyaltyEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(
+                StaticFilters.FILTER_CONTROLLED_PERMANENT_PLANESWALKER,
+                source.getControllerId(), source, game
+        )) {
+            permanent.incrementLoyaltyActivationsAvailable(2);
         }
-        controller.setLoyaltyUsePerTurn(Math.max(2, controller.getLoyaltyUsePerTurn()));
         return true;
     }
 }

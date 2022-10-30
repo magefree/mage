@@ -1,5 +1,3 @@
-
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -16,9 +14,8 @@ public class PreventAllDamageToSourceEffect extends PreventionEffectImpl {
 
     public PreventAllDamageToSourceEffect(Duration duration) {
         super(duration, Integer.MAX_VALUE, false);
-        //Some durations have no text
-        if ( duration.toString().length()>0){
-            staticText = "Prevent all damage that would be dealt to {this} " + duration.toString();
+        if (duration == Duration.EndOfTurn) {
+            staticText = "Prevent all damage that would be dealt to {this} this turn";
         } else {
             staticText = "Prevent all damage that would be dealt to {this}";
         }
@@ -35,12 +32,6 @@ public class PreventAllDamageToSourceEffect extends PreventionEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game)) {
-            if (event.getTargetId().equals(source.getSourceId())) {
-                return true;
-            }
-        }
-        return false;
+        return super.applies(event, source, game) && event.getTargetId().equals(source.getSourceId());
     }
-
 }

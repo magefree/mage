@@ -1,9 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -16,30 +12,36 @@ import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
-import mage.players.Player;
 import mage.watchers.Watcher;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class TheChainVeil extends CardImpl {
 
     public TheChainVeil(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
         addSuperType(SuperType.LEGENDARY);
 
         // At the beginning of your end step, if you didn't activate a loyalty ability of a planeswalker this turn, you lose 2 life.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new LoseLifeSourceControllerEffect(2), TargetController.YOU, TheChainVeilCondition.instance, false), new ActivatedLoyaltyAbilityWatcher());
+                new LoseLifeSourceControllerEffect(2), TargetController.YOU,
+                TheChainVeilCondition.instance, false
+        ), new ActivatedLoyaltyAbilityWatcher());
 
         // {4}, {T}: For each planeswalker you control, you may activate one of its loyalty abilities once this turn as though none of its loyalty abilities had been activated this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new TheChainVeilIncreaseLoyaltyUseEffect(),
-                new ManaCostsImpl<>("{4}"));
+        Ability ability = new SimpleActivatedAbility(
+                new TheChainVeilIncreaseLoyaltyUseEffect(), new ManaCostsImpl<>("{4}")
+        );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
@@ -65,13 +67,14 @@ class ActivatedLoyaltyAbilityWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY) {
-            StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
-            if (stackObject != null
-                    && stackObject.getStackAbility() != null
-                    && stackObject.getStackAbility() instanceof LoyaltyAbility) {
-                playerIds.add(stackObject.getControllerId());
-            }
+        if (event.getType() != GameEvent.EventType.ACTIVATED_ABILITY) {
+            return;
+        }
+        StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
+        if (stackObject != null
+                && stackObject.getStackAbility() != null
+                && stackObject.getStackAbility() instanceof LoyaltyAbility) {
+            playerIds.add(stackObject.getControllerId());
         }
     }
 
@@ -103,9 +106,11 @@ class TheChainVeilIncreaseLoyaltyUseEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            controller.setLoyaltyUsePerTurn(controller.getLoyaltyUsePerTurn() + 1);
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(
+                StaticFilters.FILTER_CONTROLLED_PERMANENT_PLANESWALKER,
+                source.getControllerId(), source, game
+        )) {
+            permanent.incrementLoyaltyActivationsAvailable();
         }
         return true;
     }
@@ -122,26 +127,16 @@ class TheChainVeilIncreaseLoyaltyUseEffect extends ContinuousEffectImpl {
 }
 
 enum TheChainVeilCondition implements Condition {
-
     instance;
-
-
 
     @Override
     public boolean apply(Game game, Ability source) {
         ActivatedLoyaltyAbilityWatcher watcher = game.getState().getWatcher(ActivatedLoyaltyAbilityWatcher.class);
-        if (watcher != null) {
-            if (!watcher.activatedLoyaltyAbility(source.getControllerId())) {
-                return true;
-            }
-        }
-
-        return false;
+        return watcher != null && !watcher.activatedLoyaltyAbility(source.getControllerId());
     }
 
     @Override
     public String toString() {
         return "if you didn't activate a loyalty ability of a planeswalker this turn";
     }
-
 }

@@ -14,7 +14,6 @@ public final class AkroanSoldierToken extends TokenImpl {
 
     public AkroanSoldierToken() {
         super("Soldier Token", "1/1 red Soldier creature token with haste");
-        setTokenType(3);
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.SOLDIER);

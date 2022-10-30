@@ -116,6 +116,7 @@ public enum SubType {
     CRAB("Crab", SubTypeSet.CreatureType),
     CROCODILE("Crocodile", SubTypeSet.CreatureType),
     CROLUTE("Crolute", SubTypeSet.CreatureType, true), // Star Wars
+    CTAN("C'tan", SubTypeSet.CreatureType),
     CUSTODES("Custodes", SubTypeSet.CreatureType),
     CYBORG("Cyborg", SubTypeSet.CreatureType, true), // Star Wars
     CYCLOPS("Cyclops", SubTypeSet.CreatureType),

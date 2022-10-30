@@ -119,7 +119,11 @@ public abstract class TargetImpl implements Target {
         if (!isNotTarget() && !getTargetName().contains("target")) {
             sb.append("target ");
         }
-        sb.append(getTargetName());
+        if (isNotTarget() && min == 1 && max == 1) {
+            sb.append(CardUtil.addArticle(getTargetName()));
+        } else {
+            sb.append(getTargetName());
+        }
         return sb.toString();
     }
 

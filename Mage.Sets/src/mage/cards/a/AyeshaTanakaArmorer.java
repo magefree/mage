@@ -8,15 +8,11 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactCard;
@@ -53,16 +49,15 @@ public final class AyeshaTanakaArmorer extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{U}");
 
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.ARTIFICER);
+        this.subtype.add(SubType.HUMAN, SubType.ARTIFICER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        // Whenever Ayesha Tanaka, Armorer attacks, look at the top four cards of your library. You may put any number of artifact cards with mana value less than or equal to Ayesha's power from among them onto the battlefield tapped. Put the rest on the bottom of your library in a random order.
+        // Whenever Ayesha Tanaka, Armorer attacks, look at the top four cards of your library.
+        // You may put any number of artifact cards with mana value less than or equal to Ayesha's power
+        // from among them onto the battlefield tapped. Put the rest on the bottom of your library in a random order.
         this.addAbility(new AttacksTriggeredAbility(new LookLibraryAndPickControllerEffect(
-                4, Integer.MAX_VALUE, filter,
-                LookLibraryControllerEffect.PutCards.BATTLEFIELD_TAPPED,
-                LookLibraryControllerEffect.PutCards.BOTTOM_RANDOM
+                4, Integer.MAX_VALUE, filter, PutCards.BATTLEFIELD_TAPPED, PutCards.BOTTOM_RANDOM
         )));
 
         // Ayesha can't be blocked as long as defending player controls three or more artifacts.

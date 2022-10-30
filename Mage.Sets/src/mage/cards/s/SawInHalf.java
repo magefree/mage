@@ -64,6 +64,7 @@ class SawInHalfEffect extends OneShotEffect {
                 || game.getState().getZone(permanent.getId()) != Zone.GRAVEYARD) {
             return false;
         }
+        game.getState().processAction(game);
         return new CreateTokenCopyTargetEffect(
                 permanent.getControllerId(), null, false, 2, false, false, null,
                 divide(permanent.getPower()), divide(permanent.getToughness()), false

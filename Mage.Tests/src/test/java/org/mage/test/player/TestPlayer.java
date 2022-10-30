@@ -2949,11 +2949,6 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean putInHand(Card card, Game game) {
-        return computerPlayer.putInHand(card, game);
-    }
-
-    @Override
     public boolean removeFromHand(Card card, Game game) {
         return computerPlayer.removeFromHand(card, game);
     }
@@ -3350,16 +3345,6 @@ public class TestPlayer implements Player {
     @Override
     public void setLandsPerTurn(int landsPerTurn) {
         computerPlayer.setLandsPerTurn(landsPerTurn);
-    }
-
-    @Override
-    public int getLoyaltyUsePerTurn() {
-        return computerPlayer.getLoyaltyUsePerTurn();
-    }
-
-    @Override
-    public void setLoyaltyUsePerTurn(int loyaltyUsePerTurn) {
-        computerPlayer.setLoyaltyUsePerTurn(loyaltyUsePerTurn);
     }
 
     @Override

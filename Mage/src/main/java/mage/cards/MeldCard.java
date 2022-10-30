@@ -108,6 +108,11 @@ public abstract class MeldCard extends CardImpl {
     }
 
     @Override
+    public boolean isTransformable() {
+        return false;
+    }
+
+    @Override
     public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects) {
         if (this.isMelded(game)) {
             return super.addCounters(counter, playerAddingCounters, source, game, appliedEffects);

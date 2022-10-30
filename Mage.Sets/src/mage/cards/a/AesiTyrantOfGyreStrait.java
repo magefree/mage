@@ -1,14 +1,16 @@
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.LandfallAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.PlayAdditionalLandsControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.StaticFilters;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 
 import java.util.UUID;
 
@@ -31,10 +33,7 @@ public final class AesiTyrantOfGyreStrait extends CardImpl {
         ));
 
         // Whenever a land enters the battlefield under your control, you may draw a card.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),
-                StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT, true
-        ));
+        this.addAbility(new LandfallAbility(new DrawCardSourceControllerEffect(1), true));
     }
 
     private AesiTyrantOfGyreStrait(final AesiTyrantOfGyreStrait card) {

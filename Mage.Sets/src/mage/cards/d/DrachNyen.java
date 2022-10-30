@@ -70,7 +70,10 @@ enum DrachNyenValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, sourceAbility));
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(
+                game, sourceAbility.getSourceId(),
+                game.getState().getZoneChangeCounter(sourceAbility.getSourceId())
+        ));
         if (exileZone == null || exileZone.isEmpty()) {
             return 0;
         }

@@ -139,6 +139,11 @@ public class SagaAbility extends SimpleStaticAbility {
     public static boolean isChapterAbility(TriggeredAbility ability) {
         return ability instanceof ChapterTriggeredAbility;
     }
+
+    public static boolean isFinalAbility(Ability ability, int maxChapter) {
+        return ability instanceof ChapterTriggeredAbility
+                && ((ChapterTriggeredAbility) ability).getChapterFrom().getNumber() == maxChapter;
+    }
 }
 
 class SagaLoreCountersEffect extends OneShotEffect {

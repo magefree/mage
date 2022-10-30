@@ -88,7 +88,6 @@ public class GameState implements Serializable, Copyable<GameState> {
     private int stepNum = 0;
     private UUID turnId = null;
     private boolean extraTurn = false;
-    private boolean legendaryRuleActive = true;
     private boolean gameOver;
     private boolean paused;
     private ContinuousEffects effects;
@@ -159,7 +158,6 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.turnNum = state.turnNum;
         this.stepNum = state.stepNum;
         this.extraTurn = state.extraTurn;
-        this.legendaryRuleActive = state.legendaryRuleActive;
         this.effects = state.effects.copy();
         for (TriggeredAbility trigger : state.triggered) {
             this.triggered.add(trigger.copy());
@@ -227,7 +225,6 @@ public class GameState implements Serializable, Copyable<GameState> {
         turnNum = 1;
         stepNum = 0;
         extraTurn = false;
-        legendaryRuleActive = true;
         gameOver = false;
         specialActions.clear();
         cardState.clear();
@@ -264,7 +261,6 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.turnNum = state.turnNum;
         this.stepNum = state.stepNum;
         this.extraTurn = state.extraTurn;
-        this.legendaryRuleActive = state.legendaryRuleActive;
         this.effects = state.effects;
         this.triggered = state.triggered;
         this.triggers = state.triggers;
@@ -1224,7 +1220,6 @@ public class GameState implements Serializable, Copyable<GameState> {
         // All gained abilities have to be removed to prevent adding it multiple times
         triggers.removeAllGainedAbilities();
         getContinuousEffects().removeAllTemporaryEffects();
-        this.setLegendaryRuleActive(true);
         for (CardState state : cardState.values()) {
             state.clearAbilities();
         }
@@ -1242,14 +1237,6 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public boolean isPaused() {
         return this.paused;
-    }
-
-    public boolean isLegendaryRuleActive() {
-        return legendaryRuleActive;
-    }
-
-    public void setLegendaryRuleActive(boolean legendaryRuleActive) {
-        this.legendaryRuleActive = legendaryRuleActive;
     }
 
     /**
@@ -1447,21 +1434,22 @@ public class GameState implements Serializable, Copyable<GameState> {
     boolean isDaytime() {
         return isDaytime;
     }
-    
+
     @Override
     public String toString() {
         return CardUtil.getTurnInfo(this);
     }
 
-    public boolean setReverseTurnOrder(boolean reverse){
-        if(this.reverseTurnOrder&&reverse){
+    public boolean setReverseTurnOrder(boolean reverse) {
+        if (this.reverseTurnOrder && reverse) {
             this.reverseTurnOrder = false;
         } else {
             this.reverseTurnOrder = reverse;
         }
         return this.reverseTurnOrder;
     }
-    public boolean getReverseTurnOrder(){
+
+    public boolean getReverseTurnOrder() {
         return this.reverseTurnOrder;
     }
 }

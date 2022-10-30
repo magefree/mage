@@ -39,7 +39,7 @@ public final class RamsesAssassinLord extends CardImpl {
 
         // Other Assassins you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(
-                1, 1, Duration.WhileOnBattlefield, filter, false
+                1, 1, Duration.WhileOnBattlefield, filter, true
         )));
 
         // Whenever a player loses the game, if they were attacked this turn by an Assassin you controlled, you win the game.

@@ -96,7 +96,7 @@ class ChandrasRegulatorEffect extends OneShotEffect {
         if (!cost.pay(source, game, source, source.getControllerId(), false, null)) {
             return true;
         }
-        StackAbility ability = (StackAbility) getValue("stackAbility");
+        StackAbility ability = (StackAbility) getValue("stackObject");
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (ability == null || controller == null || sourcePermanent == null) {

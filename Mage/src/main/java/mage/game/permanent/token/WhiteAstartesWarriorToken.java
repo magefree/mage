@@ -10,9 +10,9 @@ import java.util.Arrays;
 /**
  * @author TheElk801
  */
-public final class AstartesWarriorToken extends TokenImpl {
+public final class WhiteAstartesWarriorToken extends TokenImpl {
 
-    public AstartesWarriorToken() {
+    public WhiteAstartesWarriorToken() {
         super("Astartes Warrior Token", "2/2 white Astartes Warrior creature tokens with vigilance");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
@@ -25,12 +25,12 @@ public final class AstartesWarriorToken extends TokenImpl {
         availableImageSetCodes.addAll(Arrays.asList("40K"));
     }
 
-    public AstartesWarriorToken(final AstartesWarriorToken token) {
+    public WhiteAstartesWarriorToken(final WhiteAstartesWarriorToken token) {
         super(token);
     }
 
     @Override
-    public AstartesWarriorToken copy() {
-        return new AstartesWarriorToken(this);
+    public WhiteAstartesWarriorToken copy() {
+        return new WhiteAstartesWarriorToken(this);
     }
 }

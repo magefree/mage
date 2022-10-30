@@ -3,7 +3,7 @@ package mage.cards.v;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.effects.common.CopyStackAbilityEffect;
+import mage.abilities.effects.common.CopyStackObjectEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -96,8 +96,8 @@ class VerrakWarpedSengirTriggeredAbility extends TriggeredAbilityImpl {
         ).mapToInt(PayLifeCost::getLifePaid).sum();
         if (lifePaid > 0) {
             this.getEffects().clear();
-            this.addEffect(new DoIfCostPaid(new CopyStackAbilityEffect(), new PayLifeCost(lifePaid)));
-            this.getEffects().setValue("stackAbility", stackAbility);
+            this.addEffect(new DoIfCostPaid(new CopyStackObjectEffect(), new PayLifeCost(lifePaid)));
+            this.getEffects().setValue("stackObject", stackAbility);
             return true;
         }
         return false;

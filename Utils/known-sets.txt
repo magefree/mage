@@ -129,6 +129,7 @@ Judge Promo|JudgePromo|
 Judgment|Judgment|
 Jumpstart|Jumpstart|
 Jumpstart: Historic Horizons|JumpstartHistoricHorizons|
+Jumpstart 2022|Jumpstart2022|
 Kaladesh|Kaladesh|
 Kaldheim|Kaldheim|
 Kaldheim Commander|KaldheimCommander|

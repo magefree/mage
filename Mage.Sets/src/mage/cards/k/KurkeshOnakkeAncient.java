@@ -3,7 +3,7 @@ package mage.cards.k;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.CopyStackAbilityEffect;
+import mage.abilities.effects.common.CopyStackObjectEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
@@ -50,7 +50,7 @@ public final class KurkeshOnakkeAncient extends CardImpl {
 class KurkeshOnakkeAncientTriggeredAbility extends TriggeredAbilityImpl {
 
     KurkeshOnakkeAncientTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DoIfCostPaid(new CopyStackAbilityEffect(), new GenericManaCost(1)));
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(new CopyStackObjectEffect(), new GenericManaCost(1)));
         setTriggerPhrase("Whenever you activate an ability of an artifact, if it isn't a mana ability");
     }
 
@@ -81,7 +81,7 @@ class KurkeshOnakkeAncientTriggeredAbility extends TriggeredAbilityImpl {
         if (stackAbility == null || stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl) {
             return false;
         }
-        this.getEffects().setValue("stackAbility", stackAbility);
+        this.getEffects().setValue("stackObject", stackAbility);
         return true;
     }
 }

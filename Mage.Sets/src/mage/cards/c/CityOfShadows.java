@@ -28,12 +28,12 @@ public final class CityOfShadows extends CardImpl {
 
         // {T}, Exile a creature you control: Put a storage counter on City of Shadows.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new TapSourceCost());
-        ability.addCost(new ExileTargetCost(new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_A_CREATURE, true)));
+        ability.addCost(new ExileTargetCost(new TargetControlledCreaturePermanent(StaticFilters.FILTER_CONTROLLED_A_CREATURE)));
         this.addAbility(ability);
 
-        // {T}: Add X mana of {C}, where X is the number of storage counters on City of Shadows.
+        // {T}: Add {C} for each storage counter on City of Shadows.
         ability = new DynamicManaAbility(Mana.ColorlessMana(1), new CountersSourceCount(CounterType.STORAGE),
-                "Add X mana of {C}, where X is the number of storage counters on {this}");
+                "Add {C} for each storage counter on {this}");
         this.addAbility(ability);
     }
 

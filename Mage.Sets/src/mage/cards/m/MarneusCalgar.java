@@ -17,10 +17,10 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeGroupEvent;
 import mage.game.permanent.PermanentImpl;
-import mage.game.permanent.token.AstartesWarriorToken;
 
 import java.util.Objects;
 import java.util.UUID;
+import mage.game.permanent.token.WhiteAstartesWarriorToken;
 
 /**
  * @author PurpleCrowbar
@@ -43,7 +43,7 @@ public final class MarneusCalgar extends CardImpl {
 
         // Chapter Master — {6}: Create two 2/2 white Astartes Warrior creature tokens with vigilance.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new CreateTokenEffect(new AstartesWarriorToken(), 2),
+                new CreateTokenEffect(new WhiteAstartesWarriorToken(), 2),
                 new ManaCostsImpl<>("{6}")
         ).withFlavorWord("Chapter Master"));
     }
@@ -81,11 +81,11 @@ class MarneusCalgarTriggeredAbility extends TriggeredAbilityImpl {
         return Zone.BATTLEFIELD == zEvent.getToZone()
                 && zEvent.getTokens() != null
                 && zEvent
-                .getTokens()
-                .stream()
-                .filter(Objects::nonNull)
-                .map(PermanentImpl::getControllerId)
-                .anyMatch(this::isControlledBy);
+                        .getTokens()
+                        .stream()
+                        .filter(Objects::nonNull)
+                        .map(PermanentImpl::getControllerId)
+                        .anyMatch(this::isControlledBy);
     }
 
     @Override

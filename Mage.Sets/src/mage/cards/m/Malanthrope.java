@@ -12,6 +12,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -73,7 +74,7 @@ class MalanthropeEffect extends OneShotEffect {
         if (player == null || player.getGraveyard().isEmpty()) {
             return false;
         }
-        int count = player.getGraveyard().size();
+        int count = player.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game);
         player.moveCards(player.getGraveyard(), Zone.EXILED, source, game);
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {

@@ -13,7 +13,6 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -33,7 +32,7 @@ public final class OakhameAdversary extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
-    private static final Condition condition = new OpponentControlsPermanentCondition(filter, ComparisonType.MORE_THAN, 0);
+    private static final Condition condition = new OpponentControlsPermanentCondition(filter);
 
     public OakhameAdversary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");

@@ -44,7 +44,7 @@ public final class ScreamingSwarm extends CardImpl {
         Ability ability = new AttacksWithCreaturesTriggeredAbility(
                 new MillCardsTargetEffect(ScreamingSwarmValue.instance)
                         .setText("target player mills that many cards"),
-                0
+                1
         ).setTriggerPhrase("Whenever you attack with one or more creatures, ");
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
