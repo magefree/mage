@@ -31,6 +31,7 @@ public class DraftSession {
     protected final Draft draft;
     protected boolean killed = false;
     protected UUID markedCard;
+    protected int timeoutCardNum; // the pick number for which the current timeout has been set up
 
     private ScheduledFuture<?> futureTimeout;
     protected final ScheduledExecutorService timeoutExecutor;
@@ -80,6 +81,7 @@ public class DraftSession {
     public void pickCard(int timeout) {
         if (!killed) {
             setupTimeout(timeout);
+            timeoutCardNum = draft.getCardNum();
             managerFactory.userManager()
                     .getUser(userId)
                     .ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_PICK, draft.getId(),
@@ -94,8 +96,10 @@ public class DraftSession {
             futureTimeout = timeoutExecutor.schedule(
                     () -> {
                         try {
-                            managerFactory.draftManager().timeout(draft.getId(), userId);
-                            setupTimeout(3); // The timeout keeps happening every 3 seconds until it's canceled to make sure that the draft moves onto the next pick
+                            if (timeoutCardNum == draft.getCardNum()) {
+                                managerFactory.draftManager().timeout(draft.getId(), userId);
+                                setupTimeout(3); // The timeout keeps happening every 3 seconds to make sure that the draft moves onto the next pick
+                            }
                         } catch (Exception e) {
                             logger.fatal("DraftSession error - userId " + userId + " draftId " + draft.getId(), e);
                         }
