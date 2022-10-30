@@ -303,7 +303,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                         if (!entry.getKey().canUseActivatedAbilities(this, ability, game, false)) {
                             restrictHints.add(HintUtils.prepareText("Can't use activated abilities" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
                         }
-                        if (!entry.getKey().canTransform(this, ability, game, false)) {
+                        if (!entry.getKey().canTransform(game, false)) {
                             restrictHints.add(HintUtils.prepareText("Can't transform" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
                         }
                     }
@@ -599,6 +599,15 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 || this.getAbilities().containsClass(NightboundAbility.class);
     }
 
+    private boolean checkTransformRestrictionEffects(Game game) {
+        for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
+            if (!entry.getKey().canTransform(game, true)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     private Card getOtherFace() {
         return transformed ? this.getMainCard() : this.getMainCard().getSecondCardFace();
     }
@@ -608,6 +617,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (!this.isTransformable()
                 || (!ignoreDayNight && this.checkDayNightBound())
                 || this.getOtherFace().isInstantOrSorcery()
+                || !this.checkTransformRestrictionEffects(game)
                 || (source != null && !source.checkTransformCount(this, game))
                 || this.replaceEvent(EventType.TRANSFORM, game)) {
             return false;
