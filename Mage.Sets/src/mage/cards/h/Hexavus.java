@@ -16,6 +16,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -28,9 +29,11 @@ import java.util.UUID;
 public final class Hexavus extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature you control");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("another target creature");
 
     static {
         filter.add(AnotherPredicate.instance);
+        filter2.add(AnotherPredicate.instance);
     }
 
     public Hexavus(UUID ownerId, CardSetInfo setInfo) {
@@ -52,7 +55,7 @@ public final class Hexavus extends CardImpl {
                 new AddCountersTargetEffect(CounterType.FLYING.createInstance()), new GenericManaCost(1)
         );
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(filter2));
         this.addAbility(ability);
 
         // {1}, Remove a counter from another creature you control: Put a +1/+1 counter on Hexavus.
