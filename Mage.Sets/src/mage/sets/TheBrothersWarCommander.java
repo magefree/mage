@@ -152,6 +152,7 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of Epiphany", 207, Rarity.RARE, mage.cards.t.TempleOfEpiphany.class));
         cards.add(new SetCardInfo("Temple of Malice", 208, Rarity.RARE, mage.cards.t.TempleOfMalice.class));
         cards.add(new SetCardInfo("Temple of Silence", 209, Rarity.RARE, mage.cards.t.TempleOfSilence.class));
+        cards.add(new SetCardInfo("Terisiare's Devastation", 9, Rarity.RARE, mage.cards.t.TerisiaresDevastation.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 210, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("Teshar, Ancestor's Apostle", 77, Rarity.RARE, mage.cards.t.TesharAncestorsApostle.class));
         cards.add(new SetCardInfo("Thirst for Knowledge", 96, Rarity.UNCOMMON, mage.cards.t.ThirstForKnowledge.class));
