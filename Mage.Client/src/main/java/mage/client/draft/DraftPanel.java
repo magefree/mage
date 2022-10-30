@@ -304,7 +304,9 @@
              countdown.start();
          }
          
-         SessionHandler.setBoosterLoaded(draftId); // confirm to the server that the booster has been loaded
+         if (!draftBooster.isEmptyGrid()) {
+            SessionHandler.setBoosterLoaded(draftId); // confirm to the server that the booster has been successfully loaded
+         }
      }
 
      private void loadCardsToPickedCardsArea(SimpleCardsView pickedCards) {
