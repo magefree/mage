@@ -43,8 +43,6 @@ public interface Permanent extends Card, Controllable {
 
     boolean isFlipped();
 
-    boolean unflip(Game game);
-
     boolean flip(Game game);
 
     boolean transform(Ability source, Game game);

@@ -566,18 +566,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean unflip(Game game) {
-        if (flipped) {
-            if (!replaceEvent(EventType.UNFLIP, game)) {
-                this.flipped = false;
-                fireEvent(EventType.UNFLIPPED, game);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
     public boolean flip(Game game) {
         if (!flipped) {
             if (!replaceEvent(EventType.FLIP, game)) {
@@ -618,8 +606,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 || (!ignoreDayNight && this.checkDayNightBound())
                 || this.getOtherFace().isInstantOrSorcery()
                 || !this.checkTransformRestrictionEffects(game)
-                || (source != null && !source.checkTransformCount(this, game))
-                || this.replaceEvent(EventType.TRANSFORM, game)) {
+                || (source != null && !source.checkTransformCount(this, game))) {
             return false;
         }
         if (this.transformed) {
