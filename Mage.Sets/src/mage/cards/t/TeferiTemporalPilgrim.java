@@ -88,19 +88,22 @@ class TeferiTemporalPilgrimEffect extends OneShotEffect {
         Permanent toHand = game.getPermanent(target.getFirstTarget());
         if (toHand != null) {
             opponent.moveCards(toHand, Zone.HAND, source, game);
+            game.getState().processAction(game);
         }
         HashSet<Permanent> toLibrary = new HashSet<>(game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_NON_LAND, opponent.getId(), game));
         if (toLibrary.isEmpty()) {
             return true;
         }
-        HashSet<Player> owners = new HashSet<>();
+        HashSet<UUID> ownerIds = new HashSet<>();
         for (Permanent permanent : toLibrary) {
-            owners.add(game.getPlayer(permanent.getOwnerId()));
+            ownerIds.add(permanent.getOwnerId());
         }
-        owners.remove(null);
         opponent.moveCards(toLibrary, Zone.LIBRARY, source, game);
-        for (Player owner : owners) {
-            owner.shuffleLibrary(source, game);
+        for (UUID ownerId : ownerIds) {
+            Player owner = game.getPlayer(ownerId);
+            if (owner != null) {
+                owner.shuffleLibrary(source, game);
+            }
         }
         return true;
     }
