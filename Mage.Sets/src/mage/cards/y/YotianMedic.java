@@ -15,7 +15,7 @@ import java.util.UUID;
 public final class YotianMedic extends CardImpl {
 
     public YotianMedic(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE, CardType.CREATURE}, "{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
 
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
