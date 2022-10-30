@@ -35,6 +35,7 @@ public class CastCardFromGraveyardThenExileItEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
+        card = card.getMainCard();
         ContinuousEffect effect = new CastCardFromGraveyardEffect();
         effect.setTargetPointer(new FixedTarget(card, game));
         game.addEffect(effect, source);
@@ -67,7 +68,9 @@ class CastCardFromGraveyardEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return objectId.equals(this.getTargetPointer().getFirst(game, source))
+        Card card = game.getCard(objectId);
+        return card != null
+                && card.getMainCard().getId().equals(this.getTargetPointer().getFirst(game, source))
                 && affectedControllerId.equals(source.getControllerId());
     }
 }
