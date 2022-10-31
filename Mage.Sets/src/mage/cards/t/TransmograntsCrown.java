@@ -41,7 +41,7 @@ public final class TransmograntsCrown extends CardImpl {
                         "{2} or {B}",
                         new GenericManaCost(2),
                         new ManaCostsImpl<>("{B}")
-                )
+                ), false
         ));
     }
 
