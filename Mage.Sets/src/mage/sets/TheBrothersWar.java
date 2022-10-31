@@ -42,6 +42,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Go for the Throat", 102, Rarity.UNCOMMON, mage.cards.g.GoForTheThroat.class));
         cards.add(new SetCardInfo("Hall of Tagsin", 263, Rarity.RARE, mage.cards.h.HallOfTagsin.class));
         cards.add(new SetCardInfo("Harbin, Vanguard Aviator", 212, Rarity.RARE, mage.cards.h.HarbinVanguardAviator.class));
+        cards.add(new SetCardInfo("Hurkyl's Final Meditation", 52, Rarity.RARE, mage.cards.h.HurkylsFinalMeditation.class));
         cards.add(new SetCardInfo("Hurkyl, Master Wizard", 51, Rarity.RARE, mage.cards.h.HurkylMasterWizard.class));
         cards.add(new SetCardInfo("Island", 280, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Llanowar Wastes", 264, Rarity.RARE, mage.cards.l.LlanowarWastes.class));
