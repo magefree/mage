@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class TheBrothersWar extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Arcane Proxy", "Depth Charge Colossus", "Phyrexian Fleshgorger", "Rust Goliath", "Skitterbeam Battalion");
+    private static final List<String> unfinished = Arrays.asList("Arcane Proxy", "Combat Thresher", "Depth Charge Colossus", "Fallaji Dragon Engine", "Phyrexian Fleshgorger", "Rust Goliath", "Skitterbeam Battalion");
 
     private static final TheBrothersWar instance = new TheBrothersWar();
 
@@ -31,10 +31,14 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Ashnod's Harvester", 117, Rarity.UNCOMMON, mage.cards.a.AshnodsHarvester.class));
         cards.add(new SetCardInfo("Battlefield Forge", 257, Rarity.RARE, mage.cards.b.BattlefieldForge.class));
         cards.add(new SetCardInfo("Bitter Reunion", 127, Rarity.COMMON, mage.cards.b.BitterReunion.class));
+        cards.add(new SetCardInfo("Blanchwood Armor", 171, Rarity.UNCOMMON, mage.cards.b.BlanchwoodArmor.class));
         cards.add(new SetCardInfo("Blast Zone", 258, Rarity.RARE, mage.cards.b.BlastZone.class));
         cards.add(new SetCardInfo("Brushland", 259, Rarity.RARE, mage.cards.b.Brushland.class));
         cards.add(new SetCardInfo("Clay Revenant", 118, Rarity.COMMON, mage.cards.c.ClayRevenant.class));
+        cards.add(new SetCardInfo("Corrupt", 88, Rarity.UNCOMMON, mage.cards.c.Corrupt.class));
         cards.add(new SetCardInfo("Depth Charge Colossus", 78, Rarity.COMMON, mage.cards.d.DepthChargeColossus.class));
+        cards.add(new SetCardInfo("Disenchant", 6, Rarity.COMMON, mage.cards.d.Disenchant.class));
+        cards.add(new SetCardInfo("Disfigure", 91, Rarity.COMMON, mage.cards.d.Disfigure.class));
         cards.add(new SetCardInfo("Drafna, Founder of Lat-Nam", 47, Rarity.RARE, mage.cards.d.DrafnaFounderOfLatNam.class));
         cards.add(new SetCardInfo("Fade from History", 177, Rarity.RARE, mage.cards.f.FadeFromHistory.class));
         cards.add(new SetCardInfo("Feldon, Ronom Excavator", 135, Rarity.RARE, mage.cards.f.FeldonRonomExcavator.class));
