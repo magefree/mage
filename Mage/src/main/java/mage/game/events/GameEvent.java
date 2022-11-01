@@ -342,8 +342,7 @@ public class GameEvent implements Serializable {
          */
         UNTAP, UNTAPPED,
         FLIP, FLIPPED,
-        UNFLIP, UNFLIPPED,
-        TRANSFORM, TRANSFORMING, TRANSFORMED,
+        TRANSFORMING, TRANSFORMED,
         ADAPT,
         BECOMES_MONSTROUS,
         /* BECOMES_EXERTED

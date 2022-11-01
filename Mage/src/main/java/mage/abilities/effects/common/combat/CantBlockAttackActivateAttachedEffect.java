@@ -26,11 +26,7 @@ public class CantBlockAttackActivateAttachedEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
-            return permanent.getId().equals(enchantment.getAttachedTo());
-        }
-        return false;
+        return permanent.getAttachments().contains(source.getSourceId());
     }
 
     @Override

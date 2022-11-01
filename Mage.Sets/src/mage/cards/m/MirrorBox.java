@@ -3,18 +3,14 @@ package mage.cards.m;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.common.ruleModifying.LegendRuleDoesntApplyEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
@@ -36,7 +32,9 @@ public final class MirrorBox extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // The "legend rule" doesn't apply to permanents you control.
-        this.addAbility(new SimpleStaticAbility(new MirrorBoxLegendEffect()));
+        this.addAbility(new SimpleStaticAbility(new LegendRuleDoesntApplyEffect(
+                StaticFilters.FILTER_CONTROLLED_PERMANENTS
+        )));
 
         // Each legendary creature you control gets +1/+1.
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(
@@ -54,34 +52,6 @@ public final class MirrorBox extends CardImpl {
     @Override
     public MirrorBox copy() {
         return new MirrorBox(this);
-    }
-}
-
-class MirrorBoxLegendEffect extends ContinuousRuleModifyingEffectImpl {
-
-    MirrorBoxLegendEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment, false, false);
-        staticText = "the \"legend rule\" doesn't apply to permanents you control";
-    }
-
-    private MirrorBoxLegendEffect(final MirrorBoxLegendEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MirrorBoxLegendEffect copy() {
-        return new MirrorBoxLegendEffect(this);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DESTROY_PERMANENT_BY_LEGENDARY_RULE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(event.getTargetId());
-        return permanent != null && permanent.isControlledBy(source.getControllerId());
     }
 }
 

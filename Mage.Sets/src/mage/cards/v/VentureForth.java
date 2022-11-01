@@ -14,7 +14,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -32,7 +31,6 @@ public final class VentureForth extends CardImpl {
         this.getSpellAbility().addEffect(new AddCountersSourceEffect(
                 CounterType.TIME.createInstance(), StaticValue.get(3), false, true
         ).setText("with three time counters on it"));
-        this.getSpellAbility().addTarget(new TargetPermanent());
 
         // Suspend 3—{1}{G}
         this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{1}{G}"), this));

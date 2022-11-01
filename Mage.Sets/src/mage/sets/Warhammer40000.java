@@ -122,6 +122,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Game Trail", 282, Rarity.RARE, mage.cards.g.GameTrail.class));
         cards.add(new SetCardInfo("Gargoyle Flock", 123, Rarity.RARE, mage.cards.g.GargoyleFlock.class));
         cards.add(new SetCardInfo("Genestealer Locus", 21, Rarity.UNCOMMON, mage.cards.g.GenestealerLocus.class));
+        cards.add(new SetCardInfo("Genestealer Patriarch", 22, Rarity.RARE, mage.cards.g.GenestealerPatriarch.class));
         cards.add(new SetCardInfo("Ghost Ark", 156, Rarity.RARE, mage.cards.g.GhostArk.class));
         cards.add(new SetCardInfo("Ghyrson Starn, Kelermorph", 124, Rarity.RARE, mage.cards.g.GhyrsonStarnKelermorph.class));
         cards.add(new SetCardInfo("Gilded Lotus", 239, Rarity.RARE, mage.cards.g.GildedLotus.class));
@@ -138,6 +139,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Herald's Horn", 241, Rarity.UNCOMMON, mage.cards.h.HeraldsHorn.class));
         cards.add(new SetCardInfo("Heralds of Tzeentch", 23, Rarity.UNCOMMON, mage.cards.h.HeraldsOfTzeentch.class));
         cards.add(new SetCardInfo("Hexmark Destroyer", 36, Rarity.UNCOMMON, mage.cards.h.HexmarkDestroyer.class));
+        cards.add(new SetCardInfo("Hierophant Bio-Titan", 92, Rarity.RARE, mage.cards.h.HierophantBioTitan.class));
         cards.add(new SetCardInfo("Hormagaunt Horde", 93, Rarity.RARE, mage.cards.h.HormagauntHorde.class));
         cards.add(new SetCardInfo("Hour of Reckoning", 187, Rarity.RARE, mage.cards.h.HourOfReckoning.class));
         cards.add(new SetCardInfo("Hull Breach", 224, Rarity.UNCOMMON, mage.cards.h.HullBreach.class));
@@ -192,6 +194,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Past in Flames", 206, Rarity.MYTHIC, mage.cards.p.PastInFlames.class));
         cards.add(new SetCardInfo("Path of Ancestry", 287, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Pink Horror", 136, Rarity.RARE, mage.cards.p.PinkHorror.class));
+        cards.add(new SetCardInfo("Plague Drone", 47, Rarity.RARE, mage.cards.p.PlagueDrone.class));
         cards.add(new SetCardInfo("Plains", 306, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plasmancer", 48, Rarity.UNCOMMON, mage.cards.p.Plasmancer.class));
         cards.add(new SetCardInfo("Polluted Mire", 288, Rarity.COMMON, mage.cards.p.PollutedMire.class));
@@ -270,6 +273,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Tranquil Cove", 303, Rarity.COMMON, mage.cards.t.TranquilCove.class));
         cards.add(new SetCardInfo("Trazyn the Infinite", 65, Rarity.RARE, mage.cards.t.TrazynTheInfinite.class));
         cards.add(new SetCardInfo("Triarch Praetorian", 66, Rarity.UNCOMMON, mage.cards.t.TriarchPraetorian.class));
+        cards.add(new SetCardInfo("Triarch Stalker", 67, Rarity.RARE, mage.cards.t.TriarchStalker.class));
         cards.add(new SetCardInfo("Trygon Prime", 143, Rarity.UNCOMMON, mage.cards.t.TrygonPrime.class));
         cards.add(new SetCardInfo("Tyranid Harridan", 144, Rarity.RARE, mage.cards.t.TyranidHarridan.class));
         cards.add(new SetCardInfo("Tyranid Invasion", 102, Rarity.UNCOMMON, mage.cards.t.TyranidInvasion.class));

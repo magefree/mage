@@ -131,7 +131,7 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
                 + conspireCost.getText(false) + " ?", ability, game)) {
             return;
         }
-        ability.getEffects().setValue("ConspireActivation" + conspireId + addedById, true);
+        ability.getAllEffects().setValue("ConspireActivation" + conspireId + addedById, true);
         for (Iterator<Cost> it = ((Costs<Cost>) conspireCost).iterator(); it.hasNext(); ) {
             Cost cost = (Cost) it.next();
             if (cost instanceof ManaCostsImpl) {
@@ -193,7 +193,7 @@ class ConspireTriggeredAbility extends CastSourceTriggeredAbility {
         return spell != null
                 && spell
                 .getSpellAbility()
-                .getEffects()
+                .getAllEffects()
                 .stream()
                 .map(effect -> effect.getValue("ConspireActivation" + conspireId + addedById))
                 .anyMatch(Objects::nonNull);
