@@ -1,19 +1,19 @@
-
 package mage.cards.b;
 
 import mage.abilities.Ability;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.Effect;
+import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.CantAttackBlockTransformAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -43,10 +43,8 @@ public final class BoundByMoonsilver extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
-        // Enchanted permanent can't attack, block, or transform.
-        Effect effect = new CantAttackBlockTransformAttachedEffect();
-        effect.setText("Enchanted creature can't attack, block, or transform.");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        // Enchanted creature can't attack, block, or transform.
+        this.addAbility(new SimpleStaticAbility(new BoundByMoonsilverEffect()));
 
         // Sacrifice another permanent: Attach Bound by Moonsilver to target creature. Activate this ability only any time you could cast a sorcery and only once each turn.
         LimitedTimesPerTurnActivatedAbility limitedAbility = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "Attach {this} to target creature"),
@@ -63,5 +61,42 @@ public final class BoundByMoonsilver extends CardImpl {
     @Override
     public BoundByMoonsilver copy() {
         return new BoundByMoonsilver(this);
+    }
+}
+
+class BoundByMoonsilverEffect extends RestrictionEffect {
+
+    public BoundByMoonsilverEffect() {
+        super(Duration.WhileOnBattlefield);
+        staticText = "enchanted creature can't attack, block, or transform";
+    }
+
+    private BoundByMoonsilverEffect(final BoundByMoonsilverEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public BoundByMoonsilverEffect copy() {
+        return new BoundByMoonsilverEffect(this);
+    }
+
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return permanent.getAttachments().contains(source.getSourceId());
+    }
+
+    @Override
+    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
+        return false;
+    }
+
+    @Override
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        return false;
+    }
+
+    @Override
+    public boolean canTransform(Game game, boolean canUseChooseDialogs) {
+        return false;
     }
 }

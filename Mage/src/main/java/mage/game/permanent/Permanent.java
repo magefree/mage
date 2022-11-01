@@ -43,8 +43,6 @@ public interface Permanent extends Card, Controllable {
 
     boolean isFlipped();
 
-    boolean unflip(Game game);
-
     boolean flip(Game game);
 
     boolean transform(Ability source, Game game);
@@ -221,6 +219,10 @@ public interface Permanent extends Card, Controllable {
     void addLoyaltyUsed();
 
     boolean canLoyaltyBeUsed(Game game);
+
+    void setLegendRuleApplies(boolean legendRuleApplies);
+
+    boolean legendRuleApplies();
 
     void resetControl();
 

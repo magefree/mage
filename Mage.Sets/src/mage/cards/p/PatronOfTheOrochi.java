@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -13,11 +11,14 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 
 /**
@@ -25,8 +26,10 @@ import mage.players.Player;
  */
 public final class PatronOfTheOrochi extends CardImpl {
 
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.SNAKE, "Snake");
+
     public PatronOfTheOrochi(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
 
@@ -36,11 +39,11 @@ public final class PatronOfTheOrochi extends CardImpl {
         // Snake offering (You may cast this card any time you could cast an instant 
         // by sacrificing a Snake and paying the difference in mana costs between this 
         // and the sacrificed Snake. Mana cost includes color.)
-        this.addAbility(new OfferingAbility(SubType.SNAKE));
+        this.addAbility(new OfferingAbility(filter));
 
         // {T}: Untap all Forests and all green creatures. Activate this ability only once each turn.
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new PatronOfTheOrochiEffect(), new TapSourceCost()));
-        
+
     }
 
     private PatronOfTheOrochi(final PatronOfTheOrochi card) {
@@ -56,11 +59,12 @@ public final class PatronOfTheOrochi extends CardImpl {
 class PatronOfTheOrochiEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterPermanent();
+
     static {
-        filter.add(Predicates.or( SubType.FOREST.getPredicate(),
-                                  Predicates.and(CardType.CREATURE.getPredicate(),
-                                                 new ColorPredicate(ObjectColor.GREEN))
-                ));
+        filter.add(Predicates.or(SubType.FOREST.getPredicate(),
+                Predicates.and(CardType.CREATURE.getPredicate(),
+                        new ColorPredicate(ObjectColor.GREEN))
+        ));
     }
 
     public PatronOfTheOrochiEffect() {
@@ -76,7 +80,7 @@ class PatronOfTheOrochiEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 permanent.untap(game);
             }
             return true;
@@ -88,5 +92,4 @@ class PatronOfTheOrochiEffect extends OneShotEffect {
     public PatronOfTheOrochiEffect copy() {
         return new PatronOfTheOrochiEffect(this);
     }
-
 }

@@ -3,7 +3,7 @@ package org.mage.test.clientside.bdd;
 import org.junit.Assert;
 import org.mage.test.clientside.base.Command;
 
-import static org.hamcrest.CoreMatchers.is;
+import static junit.framework.TestCase.*;
 
 /**
  * Asserts expecting exception.
@@ -15,7 +15,7 @@ public class Expect {
         try {
             command.execute();
         } catch (Throwable e) {
-            Assert.assertThat(t.getName(), is(e.getClass().getName()));
+            assertEquals(e.getClass().getName(), t.getName())
             return;
         }
         throw new AssertionError("Expected exception wasn't thrown: " + t.getName());

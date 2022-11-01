@@ -19,7 +19,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.util.CardUtil;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -103,6 +102,7 @@ class SurgeEngineAbility extends ActivatedAbilityImpl {
     SurgeEngineAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(3), new ManaCostsImpl<>("{4}{U}{U}"));
         this.condition = staticCondition;
+        this.maxActivationsPerGame = 1;
     }
 
     private SurgeEngineAbility(final SurgeEngineAbility ability) {
@@ -112,24 +112,6 @@ class SurgeEngineAbility extends ActivatedAbilityImpl {
     @Override
     public SurgeEngineAbility copy() {
         return new SurgeEngineAbility(this);
-    }
-
-    @Override
-    public boolean activate(Game game, boolean noMana) {
-        if (!super.activate(game, noMana)) {
-            return false;
-        }
-        game.getState().setValue(CardUtil.getCardZoneString("activationsAny" + originalId, sourceId, game), true);
-        return true;
-    }
-
-    @Override
-    protected boolean hasMoreActivationsThisTurn(Game game) {
-        if (!super.hasMoreActivationsThisTurn(game)) {
-            return false;
-        }
-        Object value = game.getState().getValue(CardUtil.getCardZoneString("activationsAny" + originalId, sourceId, game));
-        return value == null || ((Boolean) value) == false;
     }
 
     @Override

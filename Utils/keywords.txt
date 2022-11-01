@@ -91,6 +91,7 @@ Phasing|instance|
 Plainscycling|cost|
 Plainswalk|new|
 Poisonous|number|
+Prototype|card, manaString|
 Provoke|new|
 Prowess|new|
 Ravenous|new|
