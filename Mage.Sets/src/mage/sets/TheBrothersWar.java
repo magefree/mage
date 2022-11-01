@@ -41,9 +41,11 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Combat Thresher", 35, Rarity.UNCOMMON, mage.cards.c.CombatThresher.class));
         cards.add(new SetCardInfo("Corrupt", 88, Rarity.UNCOMMON, mage.cards.c.Corrupt.class));
         cards.add(new SetCardInfo("Depth Charge Colossus", 78, Rarity.COMMON, mage.cards.d.DepthChargeColossus.class));
+        cards.add(new SetCardInfo("Diabolic Intent", 89, Rarity.RARE, mage.cards.d.DiabolicIntent.class));
         cards.add(new SetCardInfo("Disenchant", 6, Rarity.COMMON, mage.cards.d.Disenchant.class));
         cards.add(new SetCardInfo("Disfigure", 91, Rarity.COMMON, mage.cards.d.Disfigure.class));
         cards.add(new SetCardInfo("Drafna, Founder of Lat-Nam", 47, Rarity.RARE, mage.cards.d.DrafnaFounderOfLatNam.class));
+        cards.add(new SetCardInfo("Epic Confrontation", 176, Rarity.COMMON, mage.cards.e.EpicConfrontation.class));
         cards.add(new SetCardInfo("Fade from History", 177, Rarity.RARE, mage.cards.f.FadeFromHistory.class));
         cards.add(new SetCardInfo("Fallaji Dragon Engine", 159, Rarity.UNCOMMON, mage.cards.f.FallajiDragonEngine.class));
         cards.add(new SetCardInfo("Feldon, Ronom Excavator", 135, Rarity.RARE, mage.cards.f.FeldonRonomExcavator.class));
@@ -71,7 +73,9 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Mishra, Tamer of Mak Fawa", 217, Rarity.RARE, mage.cards.m.MishraTamerOfMakFawa.class));
         cards.add(new SetCardInfo("Monastery Swiftspear", 144, Rarity.UNCOMMON, mage.cards.m.MonasterySwiftspear.class));
         cards.add(new SetCardInfo("Mountain", 284, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Obstinate Baloth", 187, Rarity.UNCOMMON, mage.cards.o.ObstinateBaloth.class));
         cards.add(new SetCardInfo("Overwhelming Remorse", 110, Rarity.COMMON, mage.cards.o.OverwhelmingRemorse.class));
+        cards.add(new SetCardInfo("Painful Quandary", 111, Rarity.RARE, mage.cards.p.PainfulQuandary.class));
         cards.add(new SetCardInfo("Phyrexian Dragon Engine", "163a", Rarity.RARE, mage.cards.p.PhyrexianDragonEngine.class));
         cards.add(new SetCardInfo("Phyrexian Fleshgorger", 121, Rarity.MYTHIC, mage.cards.p.PhyrexianFleshgorger.class));
         cards.add(new SetCardInfo("Plains", 278, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
