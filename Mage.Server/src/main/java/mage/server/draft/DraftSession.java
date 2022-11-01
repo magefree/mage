@@ -98,7 +98,7 @@ public class DraftSession {
                         try {
                             if (timeoutCardNum == draft.getCardNum()) {
                                 managerFactory.draftManager().timeout(draft.getId(), userId);
-                                setupTimeout(3); // The timeout keeps happening every 3 seconds to make sure that the draft moves onto the next pick
+                                setupTimeout(2); // The timeout keeps happening every 2 seconds to make sure that the draft moves onto the next pick
                             }
                         } catch (Exception e) {
                             logger.fatal("DraftSession error - userId " + userId + " draftId " + draft.getId(), e);
