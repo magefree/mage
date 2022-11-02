@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class TheBrothersWar extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Arcane Proxy", "Combat Thresher", "Depth Charge Colossus", "Fallaji Dragon Engine", "Phyrexian Fleshgorger", "Rust Goliath", "Skitterbeam Battalion");
+    private static final List<String> unfinished = Arrays.asList("Arcane Proxy", "Autonomous Assembler", "Combat Thresher", "Depth Charge Colossus", "Fallaji Dragon Engine", "Phyrexian Fleshgorger", "Rust Goliath", "Skitterbeam Battalion");
 
     private static final TheBrothersWar instance = new TheBrothersWar();
 
@@ -51,6 +51,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Fallaji Chaindancer", 134, Rarity.COMMON, mage.cards.f.FallajiChaindancer.class));
         cards.add(new SetCardInfo("Fallaji Dragon Engine", 159, Rarity.UNCOMMON, mage.cards.f.FallajiDragonEngine.class));
         cards.add(new SetCardInfo("Fallaji Excavation", 178, Rarity.UNCOMMON, mage.cards.f.FallajiExcavation.class));
+        cards.add(new SetCardInfo("Fauna Shaman", 179, Rarity.RARE, mage.cards.f.FaunaShaman.class));
         cards.add(new SetCardInfo("Feldon, Ronom Excavator", 135, Rarity.RARE, mage.cards.f.FeldonRonomExcavator.class));
         cards.add(new SetCardInfo("Flow of Knowledge", 49, Rarity.UNCOMMON, mage.cards.f.FlowOfKnowledge.class));
         cards.add(new SetCardInfo("Forest", 286, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
@@ -107,7 +108,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("The Stasis Coffin", 245, Rarity.RARE, mage.cards.t.TheStasisCoffin.class));
         cards.add(new SetCardInfo("Third Path Iconoclast", 223, Rarity.UNCOMMON, mage.cards.t.ThirdPathIconoclast.class));
         cards.add(new SetCardInfo("Third Path Savant", 67, Rarity.COMMON, mage.cards.t.ThirdPathSavant.class));
-        cards.add(new SetCardInfo("Thopter Architect", 29, Rarity.COMMON, mage.cards.t.ThopterArchitect.class));
+        cards.add(new SetCardInfo("Thopter Architect", 29, Rarity.UNCOMMON, mage.cards.t.ThopterArchitect.class));
         cards.add(new SetCardInfo("Thopter Mechanic", 68, Rarity.UNCOMMON, mage.cards.t.ThopterMechanic.class));
         cards.add(new SetCardInfo("Thran Spider", 254, Rarity.RARE, mage.cards.t.ThranSpider.class));
         cards.add(new SetCardInfo("Titania, Gaea Incarnate", "256b", Rarity.MYTHIC, mage.cards.t.TitaniaGaeaIncarnate.class));
