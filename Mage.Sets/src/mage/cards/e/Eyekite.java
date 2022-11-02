@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.dynamicvalue.common.CardsDrawnThisTurnDynamicValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -36,7 +37,7 @@ public final class Eyekite extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(2, 0, Duration.WhileOnBattlefield),
                 EyekiteCondition.instance, "{this} gets +2/+0 as long as you've drawn two or more cards this turn."
-        )));
+        )).addHint(CardsDrawnThisTurnDynamicValue.getHint()));
     }
 
     private Eyekite(final Eyekite card) {
