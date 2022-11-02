@@ -25,6 +25,7 @@ public final class TheBrothersWar extends ExpansionSet {
         this.blockName = "The Brothers' War";
         this.hasBoosters = false; // temporary
 
+        cards.add(new SetCardInfo("Ambush Paratrooper", 3, Rarity.COMMON, mage.cards.a.AmbushParatrooper.class));
         cards.add(new SetCardInfo("Arbalest Engineers", 206, Rarity.UNCOMMON, mage.cards.a.ArbalestEngineers.class));
         cards.add(new SetCardInfo("Arcane Proxy", 75, Rarity.MYTHIC, mage.cards.a.ArcaneProxy.class));
         cards.add(new SetCardInfo("Argoth, Sanctum of Nature", "256a", Rarity.RARE, mage.cards.a.ArgothSanctumOfNature.class));
