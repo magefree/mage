@@ -62,6 +62,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Gaea's Courser", 181, Rarity.UNCOMMON, mage.cards.g.GaeasCourser.class));
         cards.add(new SetCardInfo("Giant Growth", 183, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
         cards.add(new SetCardInfo("Gix's Caress", 96, Rarity.COMMON, mage.cards.g.GixsCaress.class));
+        cards.add(new SetCardInfo("Gixian Puppeteer", 99, Rarity.RARE, mage.cards.g.GixianPuppeteer.class));
         cards.add(new SetCardInfo("Gnawing Vermin", 101, Rarity.UNCOMMON, mage.cards.g.GnawingVermin.class));
         cards.add(new SetCardInfo("Go for the Throat", 102, Rarity.UNCOMMON, mage.cards.g.GoForTheThroat.class));
         cards.add(new SetCardInfo("Goblin Firebomb", 235, Rarity.COMMON, mage.cards.g.GoblinFirebomb.class));
