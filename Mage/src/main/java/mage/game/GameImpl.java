@@ -1985,10 +1985,7 @@ public abstract class GameImpl implements Game {
             newAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(source.getSourceId()));
             newAbility.setSourcePermanentTransformCount(this);
         }
-        newAbility.initOnAdding(this);
-        // ability.init is called as the ability triggeres not now.
-        // If a FixedTarget pointer is already set from the effect setting up this delayed ability
-        // it has to be already initialized so it won't be overwitten as the ability triggers
+        newAbility.init(this);
         getState().addDelayedTriggeredAbility(newAbility);
         return newAbility.getId();
     }
