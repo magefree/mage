@@ -37,10 +37,10 @@ public final class Moonhold extends CardImpl {
         effect2.setText("and can't cast creature spells this turn if {W} was spent to cast this spell.");
         this.getSpellAbility().addEffect(new ConditionalContinuousRuleModifyingEffect(
                 effect,
-                new LockedInCondition(new ManaWasSpentCondition(ColoredManaSymbol.R))));
+                new LockedInCondition(ManaWasSpentCondition.RED)));
         this.getSpellAbility().addEffect(new ConditionalContinuousRuleModifyingEffect(
                 effect2,
-                new LockedInCondition(new ManaWasSpentCondition(ColoredManaSymbol.W))));
+                new LockedInCondition(ManaWasSpentCondition.WHITE)));
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new InfoEffect(" <i>(Do both if {R}{W} was spent.)</i>"));
     }

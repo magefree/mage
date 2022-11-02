@@ -41,10 +41,10 @@ public final class TorrentOfSouls extends CardImpl {
         Target targetPlayer = new TargetPlayer();
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new ReturnToBattlefieldUnderYourControlTargetEffect(),
-                new ManaWasSpentCondition(ColoredManaSymbol.B), "Return up to one target creature card from your graveyard to the battlefield if {B} was spent to cast this spell"));
+                ManaWasSpentCondition.BLACK, "Return up to one target creature card from your graveyard to the battlefield if {B} was spent to cast this spell"));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new TorrentOfSoulsEffect(),
-                new ManaWasSpentCondition(ColoredManaSymbol.R), "Creatures target player controls get +2/+0 and gain haste until end of turn if {R} was spent to cast this spell"));
+                ManaWasSpentCondition.RED, "Creatures target player controls get +2/+0 and gain haste until end of turn if {R} was spent to cast this spell"));
 
         this.getSpellAbility().addTarget(targetCreature);
         this.getSpellAbility().addTarget(targetPlayer);

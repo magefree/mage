@@ -31,7 +31,7 @@ public final class OgreSavant extends CardImpl {
         //When Ogre Savant enters the battlefield, if {U} was spent to cast Ogre Savant, return target creature to its owner’s hand.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(),false);
         ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new ManaWasSpentCondition(ColoredManaSymbol.U),
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, ManaWasSpentCondition.BLUE,
                 "if {U} was spent to cast this spell, return target creature to its owner's hand."));
     }
 
