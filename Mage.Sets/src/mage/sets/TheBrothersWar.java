@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class TheBrothersWar extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Arcane Proxy", "Autonomous Assembler", "Combat Thresher", "Depth Charge Colossus", "Fallaji Dragon Engine", "Phyrexian Fleshgorger", "Rust Goliath", "Skitterbeam Battalion");
+    private static final List<String> unfinished = Arrays.asList("Arcane Proxy", "Autonomous Assembler", "Combat Thresher", "Depth Charge Colossus", "Fallaji Dragon Engine", "Iron-Craw Crusher", "Phyrexian Fleshgorger", "Rust Goliath", "Skitterbeam Battalion");
 
     private static final TheBrothersWar instance = new TheBrothersWar();
 
