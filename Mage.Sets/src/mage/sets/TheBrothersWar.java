@@ -106,6 +106,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Siege Veteran", 25, Rarity.RARE, mage.cards.s.SiegeVeteran.class));
         cards.add(new SetCardInfo("Simian Simulacrum", 205, Rarity.RARE, mage.cards.s.SimianSimulacrum.class));
         cards.add(new SetCardInfo("Skitterbeam Battalion", 165, Rarity.MYTHIC, mage.cards.s.SkitterbeamBattalion.class));
+        cards.add(new SetCardInfo("Skystrike Officer", 62, Rarity.RARE, mage.cards.s.SkystrikeOfficer.class));
         cards.add(new SetCardInfo("Splitting the Powerstone", 63, Rarity.UNCOMMON, mage.cards.s.SplittingThePowerstone.class));
         cards.add(new SetCardInfo("Stern Lesson", 64, Rarity.COMMON, mage.cards.s.SternLesson.class));
         cards.add(new SetCardInfo("Su-Chi Cave Guard", 249, Rarity.UNCOMMON, mage.cards.s.SuChiCaveGuard.class));
