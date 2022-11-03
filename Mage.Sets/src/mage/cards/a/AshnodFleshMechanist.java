@@ -16,9 +16,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.permanent.token.AshnodZombieToken;
 import mage.game.permanent.token.PowerstoneToken;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -30,13 +27,6 @@ import java.util.UUID;
  * @author PurpleCrowbar
  */
 public final class AshnodFleshMechanist extends CardImpl {
-
-    private static final FilterControlledPermanent filter
-            = new FilterControlledCreaturePermanent("another creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public AshnodFleshMechanist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
@@ -53,7 +43,7 @@ public final class AshnodFleshMechanist extends CardImpl {
                 new DoIfCostPaid(
                         new CreateTokenEffect(
                                 new PowerstoneToken(), 1, true, false
-                        ), new SacrificeTargetCost(new TargetControlledPermanent(filter))
+                        ), new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE))
                 ), false
         ));
 
