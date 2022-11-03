@@ -1,15 +1,12 @@
 package mage.cards.r;
 
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CantBeCounteredSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -26,11 +23,7 @@ public final class RazeToTheGround extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");
 
         // This spell can't be countered.
-        Effect effect = new CantBeCounteredSourceEffect();
-        effect.setText("this spell can't be countered");
-        Ability ability = new SimpleStaticAbility(Zone.STACK, effect);
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
+        this.addAbility(new CantBeCounteredSourceAbility());
 
         // Destroy target artifact. If its mana value was 1 or less, draw a card.
         this.getSpellAbility().addEffect(new RazeToTheGroundEffect());
