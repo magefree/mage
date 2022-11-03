@@ -140,6 +140,8 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Terisian Mindbreaker", 83, Rarity.RARE, mage.cards.t.TerisianMindbreaker.class));
         cards.add(new SetCardInfo("The Mightstone and Weakstone", "238a", Rarity.RARE, mage.cards.t.TheMightstoneAndWeakstone.class));
         cards.add(new SetCardInfo("The Stasis Coffin", 245, Rarity.RARE, mage.cards.t.TheStasisCoffin.class));
+        cards.add(new SetCardInfo("The Stone Brain", 247, Rarity.RARE, mage.cards.t.TheStoneBrain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Stone Brain", 367, Rarity.RARE, mage.cards.t.TheStoneBrain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Third Path Iconoclast", 223, Rarity.UNCOMMON, mage.cards.t.ThirdPathIconoclast.class));
         cards.add(new SetCardInfo("Third Path Savant", 67, Rarity.COMMON, mage.cards.t.ThirdPathSavant.class));
         cards.add(new SetCardInfo("Thopter Architect", 29, Rarity.UNCOMMON, mage.cards.t.ThopterArchitect.class));
