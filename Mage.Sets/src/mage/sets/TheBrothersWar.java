@@ -76,6 +76,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Hajar, Loyal Bodyguard", 211, Rarity.RARE, mage.cards.h.HajarLoyalBodyguard.class));
         cards.add(new SetCardInfo("Hall of Tagsin", 263, Rarity.RARE, mage.cards.h.HallOfTagsin.class));
         cards.add(new SetCardInfo("Harbin, Vanguard Aviator", 212, Rarity.RARE, mage.cards.h.HarbinVanguardAviator.class));
+        cards.add(new SetCardInfo("Haywire Mite", 199, Rarity.UNCOMMON, mage.cards.h.HaywireMite.class));
         cards.add(new SetCardInfo("Heavyweight Demolisher", 160, Rarity.UNCOMMON, mage.cards.h.HeavyweightDemolisher.class));
         cards.add(new SetCardInfo("Hurkyl's Final Meditation", 52, Rarity.RARE, mage.cards.h.HurkylsFinalMeditation.class));
         cards.add(new SetCardInfo("Hurkyl, Master Wizard", 51, Rarity.RARE, mage.cards.h.HurkylMasterWizard.class));
