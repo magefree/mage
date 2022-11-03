@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class TheBrothersWar extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Arcane Proxy", "Autonomous Assembler", "Combat Thresher", "Depth Charge Colossus", "Fallaji Dragon Engine", "Iron-Craw Crusher", "Phyrexian Fleshgorger", "Rust Goliath", "Skitterbeam Battalion", "Steel Seraph");
+    private static final List<String> unfinished = Arrays.asList("Arcane Proxy", "Autonomous Assembler", "Combat Thresher", "Depth Charge Colossus", "Fallaji Dragon Engine", "Iron-Craw Crusher", "Phyrexian Fleshgorger", "Rootwire Amalgam", "Rust Goliath", "Skitterbeam Battalion", "Steel Seraph");
 
     private static final TheBrothersWar instance = new TheBrothersWar();
 
@@ -31,13 +31,13 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Argivian Avenger", 232, Rarity.UNCOMMON, mage.cards.a.ArgivianAvenger.class));
         cards.add(new SetCardInfo("Argoth, Sanctum of Nature", "256a", Rarity.RARE, mage.cards.a.ArgothSanctumOfNature.class));
         cards.add(new SetCardInfo("Argothian Opportunist", 167, Rarity.COMMON, mage.cards.a.ArgothianOpportunist.class));
-        cards.add(new SetCardInfo("Ashnod, Flesh Mechanist", 84, Rarity.RARE, mage.cards.a.AshnodFleshMechanist.class));
         cards.add(new SetCardInfo("Ashnod's Harvester", 117, Rarity.UNCOMMON, mage.cards.a.AshnodsHarvester.class));
+        cards.add(new SetCardInfo("Ashnod, Flesh Mechanist", 84, Rarity.RARE, mage.cards.a.AshnodFleshMechanist.class));
         cards.add(new SetCardInfo("Audacity", 169, Rarity.UNCOMMON, mage.cards.a.Audacity.class));
         cards.add(new SetCardInfo("Autonomous Assembler", 34, Rarity.RARE, mage.cards.a.AutonomousAssembler.class));
         cards.add(new SetCardInfo("Battlefield Forge", 257, Rarity.RARE, mage.cards.b.BattlefieldForge.class));
         cards.add(new SetCardInfo("Bitter Reunion", 127, Rarity.COMMON, mage.cards.b.BitterReunion.class));
-        cards.add(new SetCardInfo("Bladecoil Serpent", 22, Rarity.MYTHIC, mage.cards.b.BladecoilSerpent.class));
+        cards.add(new SetCardInfo("Bladecoil Serpent", 229, Rarity.MYTHIC, mage.cards.b.BladecoilSerpent.class));
         cards.add(new SetCardInfo("Blanchwood Armor", 171, Rarity.UNCOMMON, mage.cards.b.BlanchwoodArmor.class));
         cards.add(new SetCardInfo("Blast Zone", 258, Rarity.RARE, mage.cards.b.BlastZone.class));
         cards.add(new SetCardInfo("Brotherhood's End", 128, Rarity.RARE, mage.cards.b.BrotherhoodsEnd.class));
