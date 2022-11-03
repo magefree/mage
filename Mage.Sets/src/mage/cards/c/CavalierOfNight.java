@@ -16,11 +16,9 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
-import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
@@ -32,14 +30,11 @@ import java.util.UUID;
  */
 public final class CavalierOfNight extends CardImpl {
 
-    private static final FilterControlledPermanent filter
-            = new FilterControlledCreaturePermanent("another creature");
-    private static final FilterCard filter2
+    private static final FilterCard filter
             = new FilterCreatureCard("creature card with mana value 3 or less from your graveyard");
 
     static {
-        filter.add(AnotherPredicate.instance);
-        filter2.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public CavalierOfNight(UUID ownerId, CardSetInfo setInfo) {
@@ -59,13 +54,13 @@ public final class CavalierOfNight extends CardImpl {
         );
         triggeredAbility.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoWhenCostPaid(
-                triggeredAbility, new SacrificeTargetCost(new TargetControlledPermanent(filter)),
+                triggeredAbility, new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)),
                 "Sacrifice a creature?"
         )));
 
         // When Cavalier of Night dies, return target creature card with converted mana cost 3 or less from your graveyard to the battlefield.
         Ability ability = new DiesSourceTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect());
-        ability.addTarget(new TargetCardInYourGraveyard(filter2));
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }
 
