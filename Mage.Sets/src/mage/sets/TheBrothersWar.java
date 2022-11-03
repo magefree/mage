@@ -53,6 +53,8 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Disciples of Gix", 90, Rarity.UNCOMMON, mage.cards.d.DisciplesOfGix.class));
         cards.add(new SetCardInfo("Disenchant", 6, Rarity.COMMON, mage.cards.d.Disenchant.class));
         cards.add(new SetCardInfo("Disfigure", 91, Rarity.COMMON, mage.cards.d.Disfigure.class));
+        cards.add(new SetCardInfo("Draconic Destiny", 130, Rarity.MYTHIC, mage.cards.d.DraconicDestiny.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Draconic Destiny", 336, Rarity.MYTHIC, mage.cards.d.DraconicDestiny.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Drafna, Founder of Lat-Nam", 47, Rarity.RARE, mage.cards.d.DrafnaFounderOfLatNam.class));
         cards.add(new SetCardInfo("Epic Confrontation", 176, Rarity.COMMON, mage.cards.e.EpicConfrontation.class));
         cards.add(new SetCardInfo("Evangel of Synthesis", 209, Rarity.UNCOMMON, mage.cards.e.EvangelOfSynthesis.class));
