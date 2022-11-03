@@ -85,6 +85,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Hurkyl, Master Wizard", 51, Rarity.RARE, mage.cards.h.HurkylMasterWizard.class));
         cards.add(new SetCardInfo("In the Trenches", 8, Rarity.MYTHIC, mage.cards.i.InTheTrenches.class));
         cards.add(new SetCardInfo("Island", 270, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kayla's Command", 9, Rarity.RARE, mage.cards.k.KaylasCommand.class));
         cards.add(new SetCardInfo("Keeper of the Cadence", 54, Rarity.UNCOMMON, mage.cards.k.KeeperOfTheCadence.class));
         cards.add(new SetCardInfo("Lat-Nam Adept", 56, Rarity.COMMON, mage.cards.l.LatNamAdept.class));
         cards.add(new SetCardInfo("Llanowar Wastes", 264, Rarity.RARE, mage.cards.l.LlanowarWastes.class));
