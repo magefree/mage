@@ -19,7 +19,7 @@ import java.util.UUID;
 public final class FogOfWar extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 3 or less");
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creatures on the battlefield");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature on the battlefield");
 
     static {
         filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 4));
@@ -30,7 +30,8 @@ public final class FogOfWar extends CardImpl {
 
         // You gain 1 life for each creature on the battlefield.
         // Prevent all combat damage that would be dealt this turn by creatures with power 3 or less.
-        this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter2)));
+        this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter2))
+                .setText("You gain 1 life for each creature on the battlefield."));
         this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(filter, Duration.EndOfTurn, true));
     }
 
