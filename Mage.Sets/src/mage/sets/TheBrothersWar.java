@@ -72,6 +72,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Gix's Command", 97, Rarity.RARE, mage.cards.g.GixsCommand.class));
         cards.add(new SetCardInfo("Gixian Puppeteer", 99, Rarity.RARE, mage.cards.g.GixianPuppeteer.class));
         cards.add(new SetCardInfo("Gnawing Vermin", 101, Rarity.UNCOMMON, mage.cards.g.GnawingVermin.class));
+        cards.add(new SetCardInfo("Goblin Blast-Runner", 137, Rarity.COMMON, mage.cards.g.GoblinBlastRunner.class));
         cards.add(new SetCardInfo("Go for the Throat", 102, Rarity.UNCOMMON, mage.cards.g.GoForTheThroat.class));
         cards.add(new SetCardInfo("Goblin Firebomb", 235, Rarity.COMMON, mage.cards.g.GoblinFirebomb.class));
         cards.add(new SetCardInfo("Great Desert Prospector", 7, Rarity.UNCOMMON, mage.cards.g.GreatDesertProspector.class));
