@@ -109,6 +109,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Phyrexian Fleshgorger", 121, Rarity.MYTHIC, mage.cards.p.PhyrexianFleshgorger.class));
         cards.add(new SetCardInfo("Plains", 268, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Platoon Dispenser", 36, Rarity.MYTHIC, mage.cards.p.PlatoonDispenser.class));
+        cards.add(new SetCardInfo("Power Plant Worker", 241, Rarity.COMMON, mage.cards.p.PowerPlantWorker.class));
         cards.add(new SetCardInfo("Powerstone Engineer", 20, Rarity.COMMON, mage.cards.p.PowerstoneEngineer.class));
         cards.add(new SetCardInfo("Powerstone Fracture", 112, Rarity.COMMON, mage.cards.p.PowerstoneFracture.class));
         cards.add(new SetCardInfo("Queen Kayla bin-Kroog", 218, Rarity.RARE, mage.cards.q.QueenKaylaBinKroog.class));
