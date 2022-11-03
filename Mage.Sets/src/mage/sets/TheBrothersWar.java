@@ -64,6 +64,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Fauna Shaman", 179, Rarity.RARE, mage.cards.f.FaunaShaman.class));
         cards.add(new SetCardInfo("Feldon, Ronom Excavator", 135, Rarity.RARE, mage.cards.f.FeldonRonomExcavator.class));
         cards.add(new SetCardInfo("Flow of Knowledge", 49, Rarity.UNCOMMON, mage.cards.f.FlowOfKnowledge.class));
+        cards.add(new SetCardInfo("Fog of War", 180, Rarity.COMMON, mage.cards.f.FogOfWar.class));
         cards.add(new SetCardInfo("Forest", 276, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forging the Anchor", 50, Rarity.UNCOMMON, mage.cards.f.ForgingTheAnchor.class));
         cards.add(new SetCardInfo("Gaea's Courser", 181, Rarity.UNCOMMON, mage.cards.g.GaeasCourser.class));

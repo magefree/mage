@@ -18,7 +18,7 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class BluntTheAssault extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature on the battlefield");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures on the battlefield");
 
     public BluntTheAssault (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
