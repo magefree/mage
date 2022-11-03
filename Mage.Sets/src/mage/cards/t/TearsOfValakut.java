@@ -28,7 +28,7 @@ public final class TearsOfValakut extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
         // This spell can't be countered.
-        this.addAbility(new CantBeCounteredSourceAbility());
+        this.addAbility(new CantBeCounteredSourceAbility().setRuleAtTheTop(true));
 
         // Tears of Valakut deals 5 damage to target creature with flying.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));

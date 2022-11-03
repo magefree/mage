@@ -24,7 +24,7 @@ public final class UrzasRage extends CardImpl {
         this.addAbility(new KickerAbility("{8}{R}"));
 
         // This spell can't be countered.
-        this.addAbility(new CantBeCounteredSourceAbility());
+        this.addAbility(new CantBeCounteredSourceAbility().setRuleAtTheTop(true));
 
         // Urza's Rage deals 3 damage to any target. If Urza's Rage was kicked, instead it deals 10 damage to that creature or player and the damage can't be prevented.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(

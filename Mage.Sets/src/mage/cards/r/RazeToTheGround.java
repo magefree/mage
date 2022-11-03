@@ -23,7 +23,7 @@ public final class RazeToTheGround extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");
 
         // This spell can't be countered.
-        this.addAbility(new CantBeCounteredSourceAbility());
+        this.addAbility(new CantBeCounteredSourceAbility().setRuleAtTheTop(true));
 
         // Destroy target artifact. If its mana value was 1 or less, draw a card.
         this.getSpellAbility().addEffect(new RazeToTheGroundEffect());

@@ -28,7 +28,7 @@ public final class AbruptDecay extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{G}");
 
         // This spell can't be countered.
-        this.addAbility(new CantBeCounteredSourceAbility());
+        this.addAbility(new CantBeCounteredSourceAbility().setRuleAtTheTop(true));
 
         // Destroy target nonland permanent with converted mana cost 3 or less.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
