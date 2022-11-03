@@ -8,7 +8,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.SacrificeOpponentsEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,9 +22,11 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.permanent.GreatestPowerControlledPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -52,10 +53,7 @@ public final class GixsCommand extends CardImpl {
         this.getSpellAbility().getModes().setMaxModes(2);
 
         // * Put two +1/+1 counter on up to one creature. It gains lifelink until end of turn.
-        this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(LifelinkAbility.getInstance())
-                .setText("It gains lifelink until end of turn"));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
+        this.getSpellAbility().addEffect(new GixsCommandCounterEffect());
 
         // * Destroy each creature with power 2 or less.
         this.getSpellAbility().addMode(new Mode(new DestroyAllEffect(filter).setText("Destroy each creature with power 2 or less")));
@@ -74,6 +72,43 @@ public final class GixsCommand extends CardImpl {
     @Override
     public GixsCommand copy() {
         return new GixsCommand(this);
+    }
+}
+
+class GixsCommandCounterEffect extends OneShotEffect {
+
+    public GixsCommandCounterEffect() {
+        super(Outcome.BoostCreature);
+        this.staticText = "Put two +1/+1 counter on up to one creature. It gains lifelink until end of turn.";
+    }
+
+    private GixsCommandCounterEffect(final GixsCommandCounterEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public GixsCommandCounterEffect copy() {
+        return new GixsCommandCounterEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        TargetCreaturePermanent target = new TargetCreaturePermanent(0, 1);
+        target.setNotTarget(true);
+        controller.chooseTarget(outcome, target, source, game);
+        Permanent permanent = game.getPermanent(target.getFirstTarget());
+        if (permanent == null) {
+            return false;
+        }
+        permanent.addCounters(CounterType.P1P1.createInstance(2), source, game);
+        GainAbilityTargetEffect effect = new GainAbilityTargetEffect(LifelinkAbility.getInstance());
+        effect.setTargetPointer(new FixedTarget(permanent, game));
+        game.addEffect(effect, source);
+        return true;
     }
 }
 
