@@ -26,6 +26,7 @@ public final class TheBrothersWar extends ExpansionSet {
         this.hasBoosters = false; // temporary
 
         cards.add(new SetCardInfo("Aeronaut Cavalry", 1, Rarity.COMMON, mage.cards.a.AeronautCavalry.class));
+        cards.add(new SetCardInfo("Air Marshal", 43, Rarity.COMMON, mage.cards.a.AirMarshal.class));
         cards.add(new SetCardInfo("Alloy Animist", 166, Rarity.UNCOMMON, mage.cards.a.AlloyAnimist.class));
         cards.add(new SetCardInfo("Ambush Paratrooper", 3, Rarity.COMMON, mage.cards.a.AmbushParatrooper.class));
         cards.add(new SetCardInfo("Arbalest Engineers", 206, Rarity.UNCOMMON, mage.cards.a.ArbalestEngineers.class));
