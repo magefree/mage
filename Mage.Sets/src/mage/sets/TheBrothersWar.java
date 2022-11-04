@@ -160,6 +160,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Sardian Cliffstomper", 151, Rarity.UNCOMMON, mage.cards.s.SardianCliffstomper.class));
         cards.add(new SetCardInfo("Sarinth Greatwurm", 220, Rarity.MYTHIC, mage.cards.s.SarinthGreatwurm.class));
         cards.add(new SetCardInfo("Sarinth Steelseeker", 189, Rarity.UNCOMMON, mage.cards.s.SarinthSteelseeker.class));
+        cards.add(new SetCardInfo("Scatter Ray", 61, Rarity.COMMON, mage.cards.s.ScatterRay.class));
         cards.add(new SetCardInfo("Scrapwork Cohort", 37, Rarity.COMMON, mage.cards.s.ScrapworkCohort.class));
         cards.add(new SetCardInfo("Scrapwork Mutt", 164, Rarity.COMMON, mage.cards.s.ScrapworkMutt.class));
         cards.add(new SetCardInfo("Scrapwork Rager", 123, Rarity.COMMON, mage.cards.s.ScrapworkRager.class));
