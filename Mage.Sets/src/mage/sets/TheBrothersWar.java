@@ -93,6 +93,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Kayla's Command", 9, Rarity.RARE, mage.cards.k.KaylasCommand.class));
         cards.add(new SetCardInfo("Keeper of the Cadence", 54, Rarity.UNCOMMON, mage.cards.k.KeeperOfTheCadence.class));
         cards.add(new SetCardInfo("Lat-Nam Adept", 56, Rarity.COMMON, mage.cards.l.LatNamAdept.class));
+        cards.add(new SetCardInfo("Levitating Statue", 236, Rarity.UNCOMMON, mage.cards.l.LevitatingStatue.class));
         cards.add(new SetCardInfo("Llanowar Wastes", 264, Rarity.RARE, mage.cards.l.LlanowarWastes.class));
         cards.add(new SetCardInfo("Loran of the Third Path", 12, Rarity.RARE, mage.cards.l.LoranOfTheThirdPath.class));
         cards.add(new SetCardInfo("Loran, Disciple of History", 13, Rarity.UNCOMMON, mage.cards.l.LoranDiscipleOfHistory.class));
