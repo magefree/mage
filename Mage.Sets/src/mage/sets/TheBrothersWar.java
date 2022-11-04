@@ -147,6 +147,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Scrapwork Cohort", 37, Rarity.COMMON, mage.cards.s.ScrapworkCohort.class));
         cards.add(new SetCardInfo("Scrapwork Mutt", 164, Rarity.COMMON, mage.cards.s.ScrapworkMutt.class));
         cards.add(new SetCardInfo("Scrapwork Rager", 123, Rarity.COMMON, mage.cards.s.ScrapworkRager.class));
+        cards.add(new SetCardInfo("Shoot Down", 190, Rarity.COMMON, mage.cards.s.ShootDown.class));
         cards.add(new SetCardInfo("Sibling Rivalry", 152, Rarity.COMMON, mage.cards.s.SiblingRivalry.class));
         cards.add(new SetCardInfo("Siege Veteran", 25, Rarity.RARE, mage.cards.s.SiegeVeteran.class));
         cards.add(new SetCardInfo("Simian Simulacrum", 205, Rarity.RARE, mage.cards.s.SimianSimulacrum.class));
