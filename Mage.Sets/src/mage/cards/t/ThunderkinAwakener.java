@@ -8,7 +8,7 @@ import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbil
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.InfoEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
@@ -105,7 +105,7 @@ class ThunderkinAwakenerEffect extends OneShotEffect {
         if (controller != null && creatureCard != null) {
 
             // Return that card to the battlefield tapped and attacking
-            Effect effect = new ReturnToBattlefieldUnderYourControlTargetEffect(false, true, true);
+            Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect(true, true);
             effect.setTargetPointer(new FixedTarget(creatureCard.getId()));
             effect.apply(game, source);
 

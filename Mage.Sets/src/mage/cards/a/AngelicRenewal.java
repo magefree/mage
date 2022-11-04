@@ -3,7 +3,7 @@ package mage.cards.a;
 import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -21,7 +21,7 @@ public final class AngelicRenewal extends CardImpl {
 
         // Whenever a creature is put into your graveyard from the battlefield, you may sacrifice Angelic Renewal. If you do, return that card to the battlefield.
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new DoIfCostPaid(
-                new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false), new SacrificeSourceCost()), false,
+                new ReturnFromGraveyardToBattlefieldTargetEffect().setText("return that card to the battlefield"), new SacrificeSourceCost()), false,
                 StaticFilters.FILTER_PERMANENT_A_CREATURE, true, true));
     }
 

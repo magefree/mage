@@ -59,7 +59,7 @@ public final class ThassaDeepDwelling extends CardImpl {
                 new ExileTargetForSourceEffect(),
                 TargetController.YOU, false
         );
-        ability.addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect());
+        ability.addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect().concatBy(", then"));
         ability.addTarget(new TargetPermanent(
                 0, 1, filterOther, false
         ));
