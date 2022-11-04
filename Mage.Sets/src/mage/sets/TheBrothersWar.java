@@ -34,6 +34,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Argoth, Sanctum of Nature", "256a", Rarity.RARE, mage.cards.a.ArgothSanctumOfNature.class));
         cards.add(new SetCardInfo("Argothian Opportunist", 167, Rarity.COMMON, mage.cards.a.ArgothianOpportunist.class));
         cards.add(new SetCardInfo("Argothian Sprite", 168, Rarity.COMMON, mage.cards.a.ArgothianSprite.class));
+        cards.add(new SetCardInfo("Artificer's Dragon", 291, Rarity.RARE, mage.cards.a.ArtificersDragon.class));
         cards.add(new SetCardInfo("Ashnod's Harvester", 117, Rarity.UNCOMMON, mage.cards.a.AshnodsHarvester.class));
         cards.add(new SetCardInfo("Ashnod, Flesh Mechanist", 84, Rarity.RARE, mage.cards.a.AshnodFleshMechanist.class));
         cards.add(new SetCardInfo("Audacity", 169, Rarity.UNCOMMON, mage.cards.a.Audacity.class));
