@@ -158,6 +158,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Tawnos, the Toymaker", 222, Rarity.RARE, mage.cards.t.TawnosTheToymaker.class));
         cards.add(new SetCardInfo("Teferi, Temporal Pilgrim", 66, Rarity.MYTHIC, mage.cards.t.TeferiTemporalPilgrim.class));
         cards.add(new SetCardInfo("Terisian Mindbreaker", 83, Rarity.RARE, mage.cards.t.TerisianMindbreaker.class));
+        cards.add(new SetCardInfo("Terror Ballista", 290, Rarity.RARE, mage.cards.t.TerrorBallista.class));
         cards.add(new SetCardInfo("The Mightstone and Weakstone", "238a", Rarity.RARE, mage.cards.t.TheMightstoneAndWeakstone.class));
         cards.add(new SetCardInfo("The Stasis Coffin", 245, Rarity.RARE, mage.cards.t.TheStasisCoffin.class));
         cards.add(new SetCardInfo("Third Path Iconoclast", 223, Rarity.UNCOMMON, mage.cards.t.ThirdPathIconoclast.class));
