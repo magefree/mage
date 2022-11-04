@@ -29,7 +29,8 @@ public final class Malfunction extends CardImpl {
     static {
         filter.add(Predicates.or(
                 CardType.ARTIFACT.getPredicate(),
-                CardType.CREATURE.getPredicate()));
+                CardType.CREATURE.getPredicate()
+        ));
     }
 
     public Malfunction(UUID ownerId, CardSetInfo setInfo) {
@@ -44,7 +45,7 @@ public final class Malfunction extends CardImpl {
         this.addAbility(ability);
 
         // When Malfunction enters the battlefield, tap enchanted permanent.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect().setText("tap enchanted permanent")));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect("permanent")));
 
         // Enchanted permanent doesn't untap during its controller's untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect("permanent")));
