@@ -100,7 +100,7 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Muzzio, Visionary Architect", 89, Rarity.MYTHIC, mage.cards.m.MuzzioVisionaryArchitect.class));
         cards.add(new SetCardInfo("Mycosynth Wellspring", 150, Rarity.COMMON, mage.cards.m.MycosynthWellspring.class));
         cards.add(new SetCardInfo("Myr Battlesphere", 151, Rarity.RARE, mage.cards.m.MyrBattlesphere.class));
-        cards.add(new SetCardInfo("Myriad Landscape", 192, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
+        cards.add(new SetCardInfo("Myriad Landscape", 190, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
         cards.add(new SetCardInfo("Nihil Spellbomb", 152, Rarity.COMMON, mage.cards.n.NihilSpellbomb.class));
         cards.add(new SetCardInfo("Noxious Gearhulk", 110, Rarity.MYTHIC, mage.cards.n.NoxiousGearhulk.class));
         cards.add(new SetCardInfo("Oblivion Stone", 153, Rarity.RARE, mage.cards.o.OblivionStone.class));
@@ -109,6 +109,7 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Orzhov Basilica", 191, Rarity.UNCOMMON, mage.cards.o.OrzhovBasilica.class));
         cards.add(new SetCardInfo("Orzhov Signet", 154, Rarity.COMMON, mage.cards.o.OrzhovSignet.class));
         cards.add(new SetCardInfo("Padeem, Consul of Innovation", 91, Rarity.RARE, mage.cards.p.PadeemConsulOfInnovation.class));
+        cards.add(new SetCardInfo("Path of Ancestry", 192, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Phyrexian Rebirth", 74, Rarity.RARE, mage.cards.p.PhyrexianRebirth.class));
         cards.add(new SetCardInfo("Plains", 29, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prairie Stream", 193, Rarity.RARE, mage.cards.p.PrairieStream.class));
