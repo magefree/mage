@@ -76,8 +76,7 @@ class UnmooredEgoEffect extends OneShotEffect {
                 int cardsCount = (cardName.isEmpty() ? 0 : targetPlayer.getGraveyard().count(filter, game));
                 if (cardsCount > 0) {
                     filter.setMessage("card named " + cardName + " in the graveyard of " + targetPlayer.getName());
-                    TargetCard target = new TargetCard(Math.min(cardsCount, numberOfCardsStillToRemove),
-                            Math.min(cardsCount, numberOfCardsStillToRemove), Zone.GRAVEYARD, filter);
+                    TargetCard target = new TargetCard(0, Math.min(cardsCount, numberOfCardsStillToRemove), Zone.GRAVEYARD, filter);
                     if (controller.choose(Outcome.Exile, targetPlayer.getGraveyard(), target, game)) {
                         numberOfCardsStillToRemove -= target.getTargets().size();
                         controller.moveCards(new CardsImpl(target.getTargets()), Zone.EXILED, source, game);
@@ -85,27 +84,23 @@ class UnmooredEgoEffect extends OneShotEffect {
                 }
 
                 // cards in Hand
-                if (numberOfCardsStillToRemove > 0) {
-                    cardsCount = (cardName.isEmpty() ? 0 : targetPlayer.getHand().count(filter, game));
-                    filter.setMessage("card named " + cardName + " in the hand of " + targetPlayer.getName());
-                    TargetCard target = new TargetCard(0, Math.min(cardsCount, numberOfCardsStillToRemove), Zone.HAND, filter);
-                    if (controller.choose(Outcome.Exile, targetPlayer.getHand(), target, game)) {
-                        numberOfCardsExiledFromHand = target.getTargets().size();
-                        numberOfCardsStillToRemove -= target.getTargets().size();
-                        controller.moveCards(new CardsImpl(target.getTargets()), Zone.EXILED, source, game);
-                    }
+                cardsCount = (cardName.isEmpty() ? 0 : targetPlayer.getHand().count(filter, game));
+                filter.setMessage("card named " + cardName + " in the hand of " + targetPlayer.getName());
+                TargetCard target = new TargetCard(0, Math.min(cardsCount, numberOfCardsStillToRemove), Zone.HAND, filter);
+                if (controller.choose(Outcome.Exile, targetPlayer.getHand(), target, game)) {
+                    numberOfCardsExiledFromHand = target.getTargets().size();
+                    numberOfCardsStillToRemove -= target.getTargets().size();
+                    controller.moveCards(new CardsImpl(target.getTargets()), Zone.EXILED, source, game);
                 }
 
                 // cards in Library
-                if (numberOfCardsStillToRemove > 0) {
-                    Cards cardsInLibrary = new CardsImpl();
-                    cardsInLibrary.addAll(targetPlayer.getLibrary().getCards(game));
-                    cardsCount = (cardName.isEmpty() ? 0 : cardsInLibrary.count(filter, game));
-                    filter.setMessage("card named " + cardName + " in the library of " + targetPlayer.getLogName());
-                    TargetCardInLibrary targetLib = new TargetCardInLibrary(0, Math.min(cardsCount, numberOfCardsStillToRemove), filter);
-                    if (controller.choose(Outcome.Exile, cardsInLibrary, targetLib, game)) {
-                        controller.moveCards(new CardsImpl(targetLib.getTargets()), Zone.EXILED, source, game);
-                    }
+                Cards cardsInLibrary = new CardsImpl();
+                cardsInLibrary.addAll(targetPlayer.getLibrary().getCards(game));
+                cardsCount = (cardName.isEmpty() ? 0 : cardsInLibrary.count(filter, game));
+                filter.setMessage("card named " + cardName + " in the library of " + targetPlayer.getLogName());
+                TargetCardInLibrary targetLib = new TargetCardInLibrary(0, Math.min(cardsCount, numberOfCardsStillToRemove), filter);
+                if (controller.choose(Outcome.Exile, cardsInLibrary, targetLib, game)) {
+                    controller.moveCards(new CardsImpl(targetLib.getTargets()), Zone.EXILED, source, game);
                 }
                 targetPlayer.shuffleLibrary(source, game);
 
@@ -114,10 +109,8 @@ class UnmooredEgoEffect extends OneShotEffect {
                     targetPlayer.drawCards(numberOfCardsExiledFromHand, source, game);
                 }
             }
-
             return true;
         }
-
         return false;
     }
 
