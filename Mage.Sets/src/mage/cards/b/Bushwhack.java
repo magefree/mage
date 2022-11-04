@@ -28,7 +28,7 @@ public final class Bushwhack extends CardImpl {
         ));
 
         // * Target creature you control fights target creature you don't control.
-        this.getSpellAbility().addMode(new Mode(new FightTargetsEffect())
+        this.getSpellAbility().addMode(new Mode(new FightTargetsEffect(false))
                 .addTarget(new TargetControlledCreaturePermanent())
                 .addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL)));
     }
