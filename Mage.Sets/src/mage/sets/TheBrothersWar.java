@@ -161,6 +161,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Static Net", 27, Rarity.UNCOMMON, mage.cards.s.StaticNet.class));
         cards.add(new SetCardInfo("Stern Lesson", 64, Rarity.COMMON, mage.cards.s.SternLesson.class));
         cards.add(new SetCardInfo("Su-Chi Cave Guard", 249, Rarity.UNCOMMON, mage.cards.s.SuChiCaveGuard.class));
+        cards.add(new SetCardInfo("Supply Drop", 250, Rarity.COMMON, mage.cards.s.SupplyDrop.class));
         cards.add(new SetCardInfo("Surge Engine", 81, Rarity.MYTHIC, mage.cards.s.SurgeEngine.class));
         cards.add(new SetCardInfo("Survivor of Korlis", 28, Rarity.COMMON, mage.cards.s.SurvivorOfKorlis.class));
         cards.add(new SetCardInfo("Swamp", 272, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
