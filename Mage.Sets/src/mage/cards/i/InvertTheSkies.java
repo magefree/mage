@@ -39,12 +39,12 @@ public final class InvertTheSkies extends CardImpl {
         // Creatures your opponents control lose flying until end of turn if {G} was spent to cast Invert the Skies, and creatures you control gain flying until end of turn if {U} was spent to cast it.
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new LoseAbilityAllEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, filter),
-                new LockedInCondition(new ManaWasSpentCondition(ColoredManaSymbol.G)),
+                new LockedInCondition(ManaWasSpentCondition.GREEN),
                 "Creatures your opponents control lose flying until end of turn if {G} was spent to cast this spell,"));
 
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn),
-                new LockedInCondition(new ManaWasSpentCondition(ColoredManaSymbol.U)),
+                new LockedInCondition(ManaWasSpentCondition.BLUE),
                 "and creatures you control gain flying until end of turn if {U} was spent to cast this spell"));
 
         this.getSpellAbility().addEffect(new InfoEffect("<i>(Do both if {G}{U} was spent.)</i>"));

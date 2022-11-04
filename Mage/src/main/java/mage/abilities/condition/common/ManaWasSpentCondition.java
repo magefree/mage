@@ -1,5 +1,3 @@
-
-
 package mage.abilities.condition.common;
 
 import mage.Mana;
@@ -15,13 +13,16 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  *
  * @author LevelX2
  */
-
-
-public class ManaWasSpentCondition implements Condition {
+public enum ManaWasSpentCondition implements Condition {
+    WHITE(ColoredManaSymbol.W),
+    BLUE(ColoredManaSymbol.U),
+    BLACK(ColoredManaSymbol.B),
+    RED(ColoredManaSymbol.R),
+    GREEN(ColoredManaSymbol.G);
 
     protected ColoredManaSymbol coloredManaSymbol;
 
-    public ManaWasSpentCondition(ColoredManaSymbol coloredManaSymbol) {
+    ManaWasSpentCondition(ColoredManaSymbol coloredManaSymbol) {
         this.coloredManaSymbol = coloredManaSymbol;
     }
 

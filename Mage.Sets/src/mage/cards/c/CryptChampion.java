@@ -48,7 +48,7 @@ public final class CryptChampion extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CryptChampionEffect()));
 
         // When Crypt Champion enters the battlefield, sacrifice it unless {R} was spent to cast it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.R)), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(ManaWasSpentCondition.RED), false));
     }
 
     private CryptChampion(final CryptChampion card) {

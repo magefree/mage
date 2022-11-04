@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.watchers.common.CardsDrawnThisTurnWatcher;
 
 import java.util.UUID;
 
@@ -30,10 +29,10 @@ public final class KydeleChosenOfKruphix extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {T}: Add {C} for each card you've drawn this turn.
-        DynamicManaAbility ability = new DynamicManaAbility(
-                Mana.ColorlessMana(1), CardsDrawnThisTurnDynamicValue.instance, 
-                new TapSourceCost(), null, false, CardsDrawnThisTurnDynamicValue.instance);
-        this.addAbility(ability);
+        this.addAbility(new DynamicManaAbility(
+                Mana.ColorlessMana(1), CardsDrawnThisTurnDynamicValue.instance,
+                new TapSourceCost(), null, false, CardsDrawnThisTurnDynamicValue.instance
+        ).addHint(CardsDrawnThisTurnDynamicValue.getHint()));
 
         // Partner
         this.addAbility(PartnerAbility.getInstance());
