@@ -17,7 +17,7 @@ import java.util.UUID;
 public final class ReconstructedThopter extends CardImpl {
 
     public ReconstructedThopter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
 
         this.subtype.add(SubType.THOPTER);
         this.power = new MageInt(2);

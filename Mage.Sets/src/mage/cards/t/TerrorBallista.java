@@ -31,7 +31,7 @@ public final class TerrorBallista extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // When Terror Ballista attacks, you may sacrifice another creature. When you do, destroy target creature an opponent controls.
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(new DestroyTargetEffect(), false);
