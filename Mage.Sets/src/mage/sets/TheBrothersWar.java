@@ -199,6 +199,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Yotian Frontliner", 42, Rarity.UNCOMMON, mage.cards.y.YotianFrontliner.class));
         cards.add(new SetCardInfo("Yotian Medic", 33, Rarity.COMMON, mage.cards.y.YotianMedic.class));
         cards.add(new SetCardInfo("Yotian Tactician", 228, Rarity.UNCOMMON, mage.cards.y.YotianTactician.class));
+        cards.add(new SetCardInfo("Zephyr Sentinel", 74, Rarity.UNCOMMON, mage.cards.z.ZephyrSentinel.class));
 
         cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is implemented
     }
