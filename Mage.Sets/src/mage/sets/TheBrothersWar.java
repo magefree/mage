@@ -61,6 +61,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Conscripted Infantry", 129, Rarity.COMMON, mage.cards.c.ConscriptedInfantry.class));
         cards.add(new SetCardInfo("Corrupt", 88, Rarity.UNCOMMON, mage.cards.c.Corrupt.class));
         cards.add(new SetCardInfo("Curate", 44, Rarity.COMMON, mage.cards.c.Curate.class));
+        cards.add(new SetCardInfo("Deadly Riposte", 5, Rarity.COMMON, mage.cards.d.DeadlyRiposte.class));
         cards.add(new SetCardInfo("Defabricate", 45, Rarity.UNCOMMON, mage.cards.d.Defabricate.class));
         cards.add(new SetCardInfo("Depth Charge Colossus", 78, Rarity.COMMON, mage.cards.d.DepthChargeColossus.class));
         cards.add(new SetCardInfo("Diabolic Intent", 89, Rarity.RARE, mage.cards.d.DiabolicIntent.class));
