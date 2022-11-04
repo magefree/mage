@@ -175,6 +175,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Urza, Prince of Kroog", 226, Rarity.RARE, mage.cards.u.UrzaPrinceOfKroog.class));
         cards.add(new SetCardInfo("Yotian Dissident", 227, Rarity.UNCOMMON, mage.cards.y.YotianDissident.class));
         cards.add(new SetCardInfo("Yotian Medic", 33, Rarity.COMMON, mage.cards.y.YotianMedic.class));
+        cards.add(new SetCardInfo("Yotian Tactician", 228, Rarity.UNCOMMON, mage.cards.y.YotianTactician.class));
 
         cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is implemented
     }
