@@ -101,6 +101,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Mass Production", 15, Rarity.UNCOMMON, mage.cards.m.MassProduction.class));
         cards.add(new SetCardInfo("Mine Worker", 239, Rarity.COMMON, mage.cards.m.MineWorker.class));
         cards.add(new SetCardInfo("Mishra's Command", 141, Rarity.RARE, mage.cards.m.MishrasCommand.class));
+        cards.add(new SetCardInfo("Mishra's Domination", 142, Rarity.COMMON, mage.cards.m.MishrasDomination.class));
         cards.add(new SetCardInfo("Mishra's Foundry", 265, Rarity.RARE, mage.cards.m.MishrasFoundry.class));
         cards.add(new SetCardInfo("Mishra's Juggernaut", 161, Rarity.COMMON, mage.cards.m.MishrasJuggernaut.class));
         cards.add(new SetCardInfo("Mishra's Onslaught", 143, Rarity.COMMON, mage.cards.m.MishrasOnslaught.class));
