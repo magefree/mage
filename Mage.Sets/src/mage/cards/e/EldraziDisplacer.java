@@ -40,8 +40,7 @@ public final class EldraziDisplacer extends CardImpl {
 
         // {2}{C}: Exile another target creature, then return it to the battlefield tapped under its owner's control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetForSourceEffect(), new ManaCostsImpl<>("{2}{C}"));
-        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(true, false)
-                .withReturnNames("it", "its owner's"));
+        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(true, false, "it").concatBy(", then"));
         ability.addTarget(new TargetCreaturePermanent(FILTER));
         this.addAbility(ability);
     }

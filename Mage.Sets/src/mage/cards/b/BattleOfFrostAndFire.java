@@ -52,7 +52,7 @@ public final class BattleOfFrostAndFire extends CardImpl {
 
         // III — Whenever you cast a spell with converted mana cost 5 or greater this turn, draw two cards, then discard a card.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new CreateDelayedTriggeredAbilityEffect(
-                new BattleOfFrostAndFireTriggeredAbility(), false, false
+                new BattleOfFrostAndFireTriggeredAbility(), false
         ));
         this.addAbility(sagaAbility);
     }

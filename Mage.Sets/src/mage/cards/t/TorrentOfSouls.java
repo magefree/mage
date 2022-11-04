@@ -8,7 +8,7 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.InfoEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -18,7 +18,7 @@ import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -37,17 +37,15 @@ public final class TorrentOfSouls extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B/R}");
 
         // Return up to one target creature card from your graveyard to the battlefield if {B} was spent to cast Torrent of Souls. Creatures target player controls get +2/+0 and gain haste until end of turn if {R} was spent to cast Torrent of Souls.
-        Target targetCreature = new TargetCardInYourGraveyard(0, 1, new FilterCreatureCard("target creature card in your graveyard"));
-        Target targetPlayer = new TargetPlayer();
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new ReturnToBattlefieldUnderYourControlTargetEffect(),
+                new ReturnFromGraveyardToBattlefieldTargetEffect(),
                 ManaWasSpentCondition.BLACK, "Return up to one target creature card from your graveyard to the battlefield if {B} was spent to cast this spell"));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new TorrentOfSoulsEffect(),
                 ManaWasSpentCondition.RED, "Creatures target player controls get +2/+0 and gain haste until end of turn if {R} was spent to cast this spell"));
 
-        this.getSpellAbility().addTarget(targetCreature);
-        this.getSpellAbility().addTarget(targetPlayer);
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 1, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+        this.getSpellAbility().addTarget(new TargetPlayer());
 
         this.getSpellAbility().addEffect(new InfoEffect("<i>(Do both if {B}{R} was spent.)</i>"));
 
