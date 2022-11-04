@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class TheBrothersWar extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Arcane Proxy", "Autonomous Assembler", "Combat Thresher", "Depth Charge Colossus", "Fallaji Dragon Engine", "Hulking Metamorph", "Iron-Craw Crusher", "Phyrexian Fleshgorger", "Rootwire Amalgam", "Rust Goliath", "Skitterbeam Battalion", "Spotter Thopter", "Steel Seraph", "Woodcaller Automaton");
+    private static final List<String> unfinished = Arrays.asList("Arcane Proxy", "Autonomous Assembler", "Blitz Automaton", "Boulderbranch Golem", "Combat Thresher", "Cradle Clearcutter", "Depth Charge Colossus", "Fallaji Dragon Engine", "Goring Warplow", "Hulking Metamorph", "Iron-Craw Crusher", "Phyrexian Fleshgorger", "Rootwire Amalgam", "Rust Goliath", "Skitterbeam Battalion", "Spotter Thopter", "Steel Seraph", "Woodcaller Automaton");
 
     private static final TheBrothersWar instance = new TheBrothersWar();
 
@@ -54,6 +54,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Combat Courier", 77, Rarity.COMMON, mage.cards.c.CombatCourier.class));
         cards.add(new SetCardInfo("Combat Thresher", 35, Rarity.UNCOMMON, mage.cards.c.CombatThresher.class));
         cards.add(new SetCardInfo("Corrupt", 88, Rarity.UNCOMMON, mage.cards.c.Corrupt.class));
+        cards.add(new SetCardInfo("Curate", 44, Rarity.COMMON, mage.cards.c.Curate.class));
         cards.add(new SetCardInfo("Defabricate", 45, Rarity.UNCOMMON, mage.cards.d.Defabricate.class));
         cards.add(new SetCardInfo("Depth Charge Colossus", 78, Rarity.COMMON, mage.cards.d.DepthChargeColossus.class));
         cards.add(new SetCardInfo("Diabolic Intent", 89, Rarity.RARE, mage.cards.d.DiabolicIntent.class));
@@ -64,6 +65,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Drafna, Founder of Lat-Nam", 47, Rarity.RARE, mage.cards.d.DrafnaFounderOfLatNam.class));
         cards.add(new SetCardInfo("Epic Confrontation", 176, Rarity.COMMON, mage.cards.e.EpicConfrontation.class));
         cards.add(new SetCardInfo("Evangel of Synthesis", 209, Rarity.UNCOMMON, mage.cards.e.EvangelOfSynthesis.class));
+        cards.add(new SetCardInfo("Evolving Wilds", 261, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Excavation Explosion", 132, Rarity.COMMON, mage.cards.e.ExcavationExplosion.class));
         cards.add(new SetCardInfo("Fade from History", 177, Rarity.RARE, mage.cards.f.FadeFromHistory.class));
         cards.add(new SetCardInfo("Fallaji Chaindancer", 134, Rarity.COMMON, mage.cards.f.FallajiChaindancer.class));
