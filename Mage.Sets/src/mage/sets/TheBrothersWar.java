@@ -57,6 +57,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Bitter Reunion", 127, Rarity.COMMON, mage.cards.b.BitterReunion.class));
         cards.add(new SetCardInfo("Bladecoil Serpent", 229, Rarity.MYTHIC, mage.cards.b.BladecoilSerpent.class));
         cards.add(new SetCardInfo("Blanchwood Armor", 171, Rarity.UNCOMMON, mage.cards.b.BlanchwoodArmor.class));
+        cards.add(new SetCardInfo("Blanchwood Prowler", 172, Rarity.COMMON, mage.cards.b.BlanchwoodProwler.class));
         cards.add(new SetCardInfo("Blast Zone", 258, Rarity.RARE, mage.cards.b.BlastZone.class));
         cards.add(new SetCardInfo("Blitz Automaton", 158, Rarity.COMMON, mage.cards.b.BlitzAutomaton.class));
         cards.add(new SetCardInfo("Boulderbranch Golem", 197, Rarity.COMMON, mage.cards.b.BoulderbranchGolem.class));
