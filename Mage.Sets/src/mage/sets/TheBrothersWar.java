@@ -51,6 +51,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Audacity", 169, Rarity.UNCOMMON, mage.cards.a.Audacity.class));
         cards.add(new SetCardInfo("Autonomous Assembler", 34, Rarity.RARE, mage.cards.a.AutonomousAssembler.class));
         cards.add(new SetCardInfo("Awaken the Woods", 170, Rarity.MYTHIC, mage.cards.a.AwakenTheWoods.class));
+        cards.add(new SetCardInfo("Battery Bearer", 207, Rarity.UNCOMMON, mage.cards.b.BatteryBearer.class));
         cards.add(new SetCardInfo("Battlefield Butcher", 86, Rarity.UNCOMMON, mage.cards.b.BattlefieldButcher.class));
         cards.add(new SetCardInfo("Battlefield Forge", 257, Rarity.RARE, mage.cards.b.BattlefieldForge.class));
         cards.add(new SetCardInfo("Bitter Reunion", 127, Rarity.COMMON, mage.cards.b.BitterReunion.class));
