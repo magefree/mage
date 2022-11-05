@@ -106,6 +106,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Hurkyl's Final Meditation", 52, Rarity.RARE, mage.cards.h.HurkylsFinalMeditation.class));
         cards.add(new SetCardInfo("Hurkyl, Master Wizard", 51, Rarity.RARE, mage.cards.h.HurkylMasterWizard.class));
         cards.add(new SetCardInfo("In the Trenches", 8, Rarity.MYTHIC, mage.cards.i.InTheTrenches.class));
+        cards.add(new SetCardInfo("Involuntary Cooldown", 53, Rarity.UNCOMMON, mage.cards.i.InvoluntaryCooldown.class));
         cards.add(new SetCardInfo("Island", 270, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Junkyard Genius", 214, Rarity.UNCOMMON, mage.cards.j.JunkyardGenius.class));
         cards.add(new SetCardInfo("Kayla's Command", 9, Rarity.RARE, mage.cards.k.KaylasCommand.class));
