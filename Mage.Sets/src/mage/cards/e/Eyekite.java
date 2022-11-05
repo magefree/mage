@@ -1,9 +1,8 @@
 package mage.cards.e;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.DrewTwoOrMoreCardsCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.dynamicvalue.common.CardsDrawnThisTurnDynamicValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -13,8 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.game.Game;
-import mage.watchers.common.CardsDrawnThisTurnWatcher;
 
 import java.util.UUID;
 
@@ -36,7 +33,7 @@ public final class Eyekite extends CardImpl {
         // Eyekite gets +2/+0 as long as you've drawn two or more cards this turn.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(2, 0, Duration.WhileOnBattlefield),
-                EyekiteCondition.instance, "{this} gets +2/+0 as long as you've drawn two or more cards this turn."
+                DrewTwoOrMoreCardsCondition.instance, "{this} gets +2/+0 as long as you've drawn two or more cards this turn."
         )).addHint(CardsDrawnThisTurnDynamicValue.getHint()));
     }
 
@@ -47,15 +44,5 @@ public final class Eyekite extends CardImpl {
     @Override
     public Eyekite copy() {
         return new Eyekite(this);
-    }
-}
-
-enum EyekiteCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        CardsDrawnThisTurnWatcher watcher = game.getState().getWatcher(CardsDrawnThisTurnWatcher.class);
-        return watcher != null && watcher.getCardsDrawnThisTurn(source.getControllerId()) > 1;
     }
 }
