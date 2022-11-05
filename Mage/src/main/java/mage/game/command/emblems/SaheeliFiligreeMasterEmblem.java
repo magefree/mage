@@ -14,7 +14,7 @@ import mage.game.command.Emblem;
  */
 public final class SaheeliFiligreeMasterEmblem extends Emblem {
 
-    //
+    // −4: You get an emblem with "Artifact creatures you control get +1/+1" and "Artifact spells you cast cost {1} less to cast."
     public SaheeliFiligreeMasterEmblem() {
         this.setName("Emblem Saheeli");
         this.setExpansionSetCodeForImage("BRO");
