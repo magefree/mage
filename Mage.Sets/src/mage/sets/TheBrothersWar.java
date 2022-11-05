@@ -95,6 +95,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Evolving Wilds", 261, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Excavation Explosion", 132, Rarity.COMMON, mage.cards.e.ExcavationExplosion.class));
         cards.add(new SetCardInfo("Fade from History", 177, Rarity.RARE, mage.cards.f.FadeFromHistory.class));
+        cards.add(new SetCardInfo("Fallaji Archaeologist", 48, Rarity.COMMON, mage.cards.f.FallajiArchaeologist.class));
         cards.add(new SetCardInfo("Fallaji Chaindancer", 134, Rarity.COMMON, mage.cards.f.FallajiChaindancer.class));
         cards.add(new SetCardInfo("Fallaji Dragon Engine", 159, Rarity.UNCOMMON, mage.cards.f.FallajiDragonEngine.class));
         cards.add(new SetCardInfo("Fallaji Excavation", 178, Rarity.UNCOMMON, mage.cards.f.FallajiExcavation.class));
