@@ -190,6 +190,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Surge Engine", 81, Rarity.MYTHIC, mage.cards.s.SurgeEngine.class));
         cards.add(new SetCardInfo("Survivor of Korlis", 28, Rarity.COMMON, mage.cards.s.SurvivorOfKorlis.class));
         cards.add(new SetCardInfo("Swamp", 272, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swiftgear Drake", 251, Rarity.COMMON, mage.cards.s.SwiftgearDrake.class));
         cards.add(new SetCardInfo("Symmetry Matrix", 252, Rarity.UNCOMMON, mage.cards.s.SymmetryMatrix.class));
         cards.add(new SetCardInfo("Tawnos, the Toymaker", 222, Rarity.RARE, mage.cards.t.TawnosTheToymaker.class));
         cards.add(new SetCardInfo("Teething Wurmlet", 192, Rarity.RARE, mage.cards.t.TeethingWurmlet.class));
