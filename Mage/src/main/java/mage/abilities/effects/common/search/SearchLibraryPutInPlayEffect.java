@@ -19,6 +19,7 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect {
 
     protected boolean tapped;
     protected boolean forceShuffle;
+    protected boolean optional;
 
     public SearchLibraryPutInPlayEffect(TargetCardInLibrary target) {
         this(target, false, true, Outcome.PutCardInPlay);
@@ -37,10 +38,16 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect {
     }
 
     public SearchLibraryPutInPlayEffect(TargetCardInLibrary target, boolean tapped, boolean forceShuffle, Outcome outcome) {
+        this(target, tapped, forceShuffle, false, outcome);
+    }
+
+    public SearchLibraryPutInPlayEffect(TargetCardInLibrary target, boolean tapped, boolean forceShuffle, boolean optional, Outcome outcome) {
         super(target, outcome);
         this.tapped = tapped;
         this.forceShuffle = forceShuffle;
-        staticText = "search your library for "
+        this.optional = optional;
+        staticText = (optional ? "you may " : "")
+                + "search your library for "
                 + target.getDescription()
                 + (forceShuffle ? ", " : " and ")
                 + (target.getMaxNumberOfTargets() > 1 ? "put them onto the battlefield" : "put it onto the battlefield")
@@ -52,6 +59,7 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect {
         super(effect);
         this.tapped = effect.tapped;
         this.forceShuffle = effect.forceShuffle;
+        this.optional = effect.optional;
     }
 
     @Override
@@ -64,6 +72,9 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
             return false;
+        }
+        if (optional && !player.chooseUse(outcome, "Search your library for " + target.getDescription() + '?', source, game)) {
+            return true;
         }
         if (player.searchLibrary(target, source, game)) {
             if (!target.getTargets().isEmpty()) {
