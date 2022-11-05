@@ -13,6 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SetType;
 import mage.constants.SuperType;
 import mage.util.RandomUtil;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.io.File;
@@ -348,6 +349,8 @@ public enum CardRepository {
     public CardInfo findPreferredCoreExpansionCard(String name, String preferredSetCode) {
         List<CardInfo> cards;
         cards = findCards(name);
+        logger.setLevel(Level.DEBUG);
+        logger.info(String.format("Found cards (%d): %s", cards.size(), cards));
 
         return findPreferredOrLatestCard(cards, preferredSetCode);
     }

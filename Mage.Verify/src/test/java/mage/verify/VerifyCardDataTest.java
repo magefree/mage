@@ -275,7 +275,7 @@ public class VerifyCardDataTest {
 
         printMessages(outputMessages);
         if (failed > 0) {
-            Assert.fail("found " + failed + " errors in cards verify (see errors list above)");
+            Assert.fail(String.format("found %d errors in %d cards verify (see errors list above)", failed, CardScanner.getAllCards().size()));
         }
     }
 
