@@ -4,8 +4,11 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.condition.Condition;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -57,8 +60,11 @@ public final class LiberatorUrzasBattlethopter extends CardImpl {
 
         // Whenever you cast a spell, if the amount of mana spent to cast that spell is greater
         // than Liberator, Urza's Battlethopter's power, put a +1/+1 counter on Liberator.
-        this.addAbility(new SpellCastControllerTriggeredAbility(
-                new LiberatorUrzasBattlethopterEffect(), StaticFilters.FILTER_SPELL_A, false, true
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
+                new SpellCastControllerTriggeredAbility(
+                        new AddCountersSourceEffect(CounterType.P1P1.createInstance()), StaticFilters.FILTER_SPELL_A, false, true
+                ), LiberatorUrzasBattlethopterCondition.instance, "Whenever you cast a spell, if the amount of mana spent to cast " +
+                "that spell is greater than {this}'s power, put a +1/+1 counter on {this}"
         ));
     }
 
@@ -72,21 +78,8 @@ public final class LiberatorUrzasBattlethopter extends CardImpl {
     }
 }
 
-class LiberatorUrzasBattlethopterEffect extends OneShotEffect {
-
-    LiberatorUrzasBattlethopterEffect() {
-        super(Outcome.BoostCreature);
-        staticText = "if the amount of mana spent to cast that spell is greater than {this}'s power, put a +1/+1 counter on {this}";
-    }
-
-    private LiberatorUrzasBattlethopterEffect(final LiberatorUrzasBattlethopterEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public LiberatorUrzasBattlethopterEffect copy() {
-        return new LiberatorUrzasBattlethopterEffect(this);
-    }
+enum LiberatorUrzasBattlethopterCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -94,12 +87,14 @@ class LiberatorUrzasBattlethopterEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        Spell spell = (Spell) getValue("spellCast");
-        if (spell != null) {
-            if (ManaPaidSourceWatcher.getTotalPaid(spell.getId(), game) > permanent.getPower().getValue()) {
-                permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
-            }
+        Effects effects = source.getEffects();
+        if (effects.isEmpty()) {
+            return false;
         }
-        return true;
+        Object spell = effects.get(0).getValue("spellCast");
+        if (spell instanceof Spell) {
+            return (ManaPaidSourceWatcher.getTotalPaid(((Spell) spell).getId(), game) > permanent.getPower().getValue());
+        }
+        return false;
     }
 }
