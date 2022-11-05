@@ -67,6 +67,7 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fact or Fiction", 84, Rarity.UNCOMMON, mage.cards.f.FactOrFiction.class));
         cards.add(new SetCardInfo("Fain, the Broker", 105, Rarity.RARE, mage.cards.f.FainTheBroker.class));
         cards.add(new SetCardInfo("Faithless Looting", 116, Rarity.COMMON, mage.cards.f.FaithlessLooting.class));
+        cards.add(new SetCardInfo("Farid, Enterprising Salvager", 13, Rarity.RARE, mage.cards.f.FaridEnterprisingSalvager.class));
         cards.add(new SetCardInfo("Feed the Swarm", 106, Rarity.COMMON, mage.cards.f.FeedTheSwarm.class));
         cards.add(new SetCardInfo("Fellwar Stone", 141, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
         cards.add(new SetCardInfo("Filigree Attendant", 85, Rarity.UNCOMMON, mage.cards.f.FiligreeAttendant.class));
