@@ -225,6 +225,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Thran Spider", 254, Rarity.RARE, mage.cards.t.ThranSpider.class));
         cards.add(new SetCardInfo("Thran Vigil", 114, Rarity.UNCOMMON, mage.cards.t.ThranVigil.class));
         cards.add(new SetCardInfo("Thraxodemon", 115, Rarity.COMMON, mage.cards.t.Thraxodemon.class));
+        cards.add(new SetCardInfo("Titania's Command", 194, Rarity.RARE, mage.cards.t.TitaniasCommand.class));
         cards.add(new SetCardInfo("Titania, Gaea Incarnate", "256b", Rarity.MYTHIC, mage.cards.t.TitaniaGaeaIncarnate.class));
         cards.add(new SetCardInfo("Titania, Voice of Gaea", 193, Rarity.MYTHIC, mage.cards.t.TitaniaVoiceOfGaea.class));
         cards.add(new SetCardInfo("Tocasia's Dig Site", 266, Rarity.COMMON, mage.cards.t.TocasiasDigSite.class));
