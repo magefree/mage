@@ -145,6 +145,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Obstinate Baloth", 187, Rarity.UNCOMMON, mage.cards.o.ObstinateBaloth.class));
         cards.add(new SetCardInfo("Overwhelming Remorse", 110, Rarity.COMMON, mage.cards.o.OverwhelmingRemorse.class));
         cards.add(new SetCardInfo("Painful Quandary", 111, Rarity.RARE, mage.cards.p.PainfulQuandary.class));
+        cards.add(new SetCardInfo("Penregon Strongbull", 147, Rarity.COMMON, mage.cards.p.PenregonStrongbull.class));
         cards.add(new SetCardInfo("Perennial Behemoth", 202, Rarity.RARE, mage.cards.p.PerennialBehemoth.class));
         cards.add(new SetCardInfo("Perimeter Patrol", 188, Rarity.COMMON, mage.cards.p.PerimeterPatrol.class));
         cards.add(new SetCardInfo("Phalanx Vanguard", 19, Rarity.COMMON, mage.cards.p.PhalanxVanguard.class));
