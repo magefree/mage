@@ -140,6 +140,7 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Sphinx's Revelation", 130, Rarity.MYTHIC, mage.cards.s.SphinxsRevelation.class));
         cards.add(new SetCardInfo("Spine of Ish Sah", 162, Rarity.RARE, mage.cards.s.SpineOfIshSah.class));
         cards.add(new SetCardInfo("Spire of Industry", 203, Rarity.RARE, mage.cards.s.SpireOfIndustry.class));
+        cards.add(new SetCardInfo("Staff of Titania", 27, Rarity.RARE, mage.cards.s.StaffOfTitania.class));
         cards.add(new SetCardInfo("Steel Hellkite", 163, Rarity.RARE, mage.cards.s.SteelHellkite.class));
         cards.add(new SetCardInfo("Steel Overseer", 164, Rarity.RARE, mage.cards.s.SteelOverseer.class));
         cards.add(new SetCardInfo("Strionic Resonator", 165, Rarity.RARE, mage.cards.s.StrionicResonator.class));
