@@ -104,6 +104,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 276, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forging the Anchor", 50, Rarity.UNCOMMON, mage.cards.f.ForgingTheAnchor.class));
         cards.add(new SetCardInfo("Gaea's Courser", 181, Rarity.UNCOMMON, mage.cards.g.GaeasCourser.class));
+        cards.add(new SetCardInfo("Gaea's Gift", 182, Rarity.COMMON, mage.cards.g.GaeasGift.class));
         cards.add(new SetCardInfo("Geology Enthusiast", 289, Rarity.RARE, mage.cards.g.GeologyEnthusiast.class));
         cards.add(new SetCardInfo("Giant Growth", 183, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
         cards.add(new SetCardInfo("Gix's Caress", 96, Rarity.COMMON, mage.cards.g.GixsCaress.class));
