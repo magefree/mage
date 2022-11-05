@@ -26,6 +26,7 @@ public final class TheBrothersWar extends ExpansionSet {
         this.hasBoosters = false; // temporary
 
         cards.add(new SetCardInfo("Aeronaut Cavalry", 1, Rarity.COMMON, mage.cards.a.AeronautCavalry.class));
+        cards.add(new SetCardInfo("Aeronaut's Wings", 231, Rarity.COMMON, mage.cards.a.AeronautsWings.class));
         cards.add(new SetCardInfo("Air Marshal", 43, Rarity.COMMON, mage.cards.a.AirMarshal.class));
         cards.add(new SetCardInfo("Alloy Animist", 166, Rarity.UNCOMMON, mage.cards.a.AlloyAnimist.class));
         cards.add(new SetCardInfo("Ambush Paratrooper", 3, Rarity.COMMON, mage.cards.a.AmbushParatrooper.class));
@@ -214,6 +215,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Tocasia's Welcome", 30, Rarity.RARE, mage.cards.t.TocasiasWelcome.class));
         cards.add(new SetCardInfo("Tomakul Honor Guard", 195, Rarity.COMMON, mage.cards.t.TomakulHonorGuard.class));
         cards.add(new SetCardInfo("Tower Worker", 255, Rarity.COMMON, mage.cards.t.TowerWorker.class));
+        cards.add(new SetCardInfo("Transmogrant Altar", 124, Rarity.UNCOMMON, mage.cards.t.TransmograntAltar.class));
         cards.add(new SetCardInfo("Transmogrant's Crown", 125, Rarity.RARE, mage.cards.t.TransmograntsCrown.class));
         cards.add(new SetCardInfo("Tyrant of Kher Ridges", 154, Rarity.RARE, mage.cards.t.TyrantOfKherRidges.class));
         cards.add(new SetCardInfo("Underground River", 267, Rarity.RARE, mage.cards.u.UndergroundRiver.class));
