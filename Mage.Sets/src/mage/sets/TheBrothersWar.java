@@ -78,6 +78,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Cradle Clearcutter", 198, Rarity.UNCOMMON, mage.cards.c.CradleClearcutter.class));
         cards.add(new SetCardInfo("Curate", 44, Rarity.COMMON, mage.cards.c.Curate.class));
         cards.add(new SetCardInfo("Deadly Riposte", 5, Rarity.COMMON, mage.cards.d.DeadlyRiposte.class));
+        cards.add(new SetCardInfo("Deathbloom Ritualist", 208, Rarity.RARE, mage.cards.d.DeathbloomRitualist.class));
         cards.add(new SetCardInfo("Defabricate", 45, Rarity.UNCOMMON, mage.cards.d.Defabricate.class));
         cards.add(new SetCardInfo("Demolition Field", 260, Rarity.UNCOMMON, mage.cards.d.DemolitionField.class));
         cards.add(new SetCardInfo("Depth Charge Colossus", 78, Rarity.COMMON, mage.cards.d.DepthChargeColossus.class));
