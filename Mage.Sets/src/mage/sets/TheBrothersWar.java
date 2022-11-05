@@ -59,6 +59,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Blanchwood Armor", 171, Rarity.UNCOMMON, mage.cards.b.BlanchwoodArmor.class));
         cards.add(new SetCardInfo("Blast Zone", 258, Rarity.RARE, mage.cards.b.BlastZone.class));
         cards.add(new SetCardInfo("Blitz Automaton", 158, Rarity.COMMON, mage.cards.b.BlitzAutomaton.class));
+        cards.add(new SetCardInfo("Boulderbranch Golem", 197, Rarity.COMMON, mage.cards.b.BoulderbranchGolem.class));
         cards.add(new SetCardInfo("Brotherhood's End", 128, Rarity.RARE, mage.cards.b.BrotherhoodsEnd.class));
         cards.add(new SetCardInfo("Brushland", 259, Rarity.RARE, mage.cards.b.Brushland.class));
         cards.add(new SetCardInfo("Burrowing Razormaw", 173, Rarity.COMMON, mage.cards.b.BurrowingRazormaw.class));
