@@ -68,6 +68,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Citanul Stalwart", 175, Rarity.COMMON, mage.cards.c.CitanulStalwart.class));
         cards.add(new SetCardInfo("Clay Champion", 230, Rarity.MYTHIC, mage.cards.c.ClayChampion.class));
         cards.add(new SetCardInfo("Clay Revenant", 118, Rarity.COMMON, mage.cards.c.ClayRevenant.class));
+        cards.add(new SetCardInfo("Coastal Bulwark", 76, Rarity.COMMON, mage.cards.c.CoastalBulwark.class));
         cards.add(new SetCardInfo("Combat Courier", 77, Rarity.COMMON, mage.cards.c.CombatCourier.class));
         cards.add(new SetCardInfo("Combat Thresher", 35, Rarity.UNCOMMON, mage.cards.c.CombatThresher.class));
         cards.add(new SetCardInfo("Conscripted Infantry", 129, Rarity.COMMON, mage.cards.c.ConscriptedInfantry.class));
