@@ -1,6 +1,5 @@
 package mage.cards.h;
 
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.common.SagaAbility;
@@ -19,6 +18,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.AngelVigilanceToken;
 import mage.game.permanent.token.SoldierToken;
+import mage.game.stack.StackObject;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -74,13 +74,15 @@ class HistoriansBoonTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ABILITY_TRIGGERED;
+        return event.getType() == GameEvent.EventType.TRIGGERED_ABILITY;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
         Permanent permanent = game.getPermanent(event.getSourceId());
-        if (permanent == null
+        if (stackObject == null
+                || permanent == null
                 || !permanent.isControlledBy(getControllerId())
                 || !permanent.hasSubtype(SubType.SAGA, game)) {
             return false;
@@ -90,8 +92,7 @@ class HistoriansBoonTriggeredAbility extends TriggeredAbilityImpl {
                 .map(SagaAbility::getMaxChapter)
                 .mapToInt(SagaChapter::getNumber)
                 .sum();
-        Ability ability = game.getAbility(event.getTargetId(), event.getSourceId()).orElse(null);
-        return SagaAbility.isFinalAbility(ability, maxChapter);
+        return SagaAbility.isFinalAbility(stackObject.getStackAbility(), maxChapter);
     }
 
     @Override

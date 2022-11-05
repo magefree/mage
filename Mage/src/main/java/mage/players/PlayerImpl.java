@@ -1524,12 +1524,6 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
         }
         restoreState(bookmark, triggeredAbility.getRule(), game); // why restore is needed here? (to remove the triggered ability from the stack because of no possible targets)
-        GameEvent event = new GameEvent(
-                GameEvent.EventType.ABILITY_TRIGGERED,
-                ability.getId(), ability, ability.getControllerId()
-        );
-        game.getState().setValue(event.getId().toString(), ability.getTriggerEvent());
-        game.fireEvent(event);
         return false;
     }
 
