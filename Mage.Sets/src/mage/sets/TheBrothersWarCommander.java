@@ -168,6 +168,7 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Traxos, Scourge of Kroog", 170, Rarity.RARE, mage.cards.t.TraxosScourgeOfKroog.class));
         cards.add(new SetCardInfo("Unbreakable Formation", 78, Rarity.RARE, mage.cards.u.UnbreakableFormation.class));
         cards.add(new SetCardInfo("Urza's Ruinous Blast", 79, Rarity.RARE, mage.cards.u.UrzasRuinousBlast.class));
+        cards.add(new SetCardInfo("Urza's Workshop", 28, Rarity.RARE, mage.cards.u.UrzasWorkshop.class));
         cards.add(new SetCardInfo("Urza, Chief Artificer", 2, Rarity.MYTHIC, mage.cards.u.UrzaChiefArtificer.class));
         cards.add(new SetCardInfo("Vault of Whispers", 211, Rarity.COMMON, mage.cards.v.VaultOfWhispers.class));
         cards.add(new SetCardInfo("Vedalken Humiliator", 100, Rarity.RARE, mage.cards.v.VedalkenHumiliator.class));
