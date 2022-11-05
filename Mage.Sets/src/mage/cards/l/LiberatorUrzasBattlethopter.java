@@ -96,8 +96,7 @@ class LiberatorUrzasBattlethopterEffect extends OneShotEffect {
         }
         Spell spell = (Spell) getValue("spellCast");
         if (spell != null) {
-            int totalPaid = ManaPaidSourceWatcher.getTotalPaid(spell.getId(), game);
-            if (totalPaid > permanent.getPower().getValue()) {
+            if (ManaPaidSourceWatcher.getTotalPaid(spell.getId(), game) > permanent.getPower().getValue()) {
                 permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
             }
         }
