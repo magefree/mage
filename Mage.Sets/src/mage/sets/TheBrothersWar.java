@@ -135,6 +135,8 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Koilos Roc", 55, Rarity.COMMON, mage.cards.k.KoilosRoc.class));
         cards.add(new SetCardInfo("Lat-Nam Adept", 56, Rarity.COMMON, mage.cards.l.LatNamAdept.class));
         cards.add(new SetCardInfo("Levitating Statue", 236, Rarity.UNCOMMON, mage.cards.l.LevitatingStatue.class));
+        cards.add(new SetCardInfo("Liberator, Urza's Battlethopter", 237, Rarity.RARE, mage.cards.l.LiberatorUrzasBattlethopter.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Liberator, Urza's Battlethopter", 364, Rarity.RARE, mage.cards.l.LiberatorUrzasBattlethopter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Llanowar Wastes", 264, Rarity.RARE, mage.cards.l.LlanowarWastes.class));
         cards.add(new SetCardInfo("Loran of the Third Path", 12, Rarity.RARE, mage.cards.l.LoranOfTheThirdPath.class));
         cards.add(new SetCardInfo("Loran's Escape", 14, Rarity.COMMON, mage.cards.l.LoransEscape.class));
