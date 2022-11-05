@@ -164,6 +164,7 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Thought Vessel", 167, Rarity.UNCOMMON, mage.cards.t.ThoughtVessel.class));
         cards.add(new SetCardInfo("Thoughtcast", 99, Rarity.COMMON, mage.cards.t.Thoughtcast.class));
         cards.add(new SetCardInfo("Thran Dynamo", 168, Rarity.UNCOMMON, mage.cards.t.ThranDynamo.class));
+        cards.add(new SetCardInfo("Titania, Nature's Force", 25, Rarity.MYTHIC, mage.cards.t.TitaniaNaturesForce.class));
         cards.add(new SetCardInfo("Trading Post", 169, Rarity.RARE, mage.cards.t.TradingPost.class));
         cards.add(new SetCardInfo("Traxos, Scourge of Kroog", 170, Rarity.RARE, mage.cards.t.TraxosScourgeOfKroog.class));
         cards.add(new SetCardInfo("Unbreakable Formation", 78, Rarity.RARE, mage.cards.u.UnbreakableFormation.class));
