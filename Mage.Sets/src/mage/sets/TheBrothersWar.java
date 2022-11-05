@@ -1,8 +1,10 @@
 package mage.sets;
 
+import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.util.RandomUtil;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,7 +25,14 @@ public final class TheBrothersWar extends ExpansionSet {
     private TheBrothersWar() {
         super("The Brothers' War", "BRO", ExpansionSet.buildDate(2022, 11, 18), SetType.EXPANSION);
         this.blockName = "The Brothers' War";
-        this.hasBoosters = false; // temporary
+        this.hasBoosters = true;
+        this.numBoosterLands = 1;
+        this.numBoosterCommon = 9;
+        this.numBoosterUncommon = 3;
+        this.numBoosterRare = 1;
+        this.numBoosterSpecial = 1;
+        this.ratioBoosterMythic = 7;
+        this.maxCardNumberInBooster = 287;
 
         cards.add(new SetCardInfo("Aeronaut Cavalry", 1, Rarity.COMMON, mage.cards.a.AeronautCavalry.class));
         cards.add(new SetCardInfo("Aeronaut's Wings", 231, Rarity.COMMON, mage.cards.a.AeronautsWings.class));
@@ -240,6 +249,22 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Zephyr Sentinel", 74, Rarity.UNCOMMON, mage.cards.z.ZephyrSentinel.class));
 
         cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is implemented
+    }
+
+    @Override
+    protected void addSpecialCards(List<Card> booster, int number) {
+        // number is here always 1
+        // Boosters have one card from BRR, odds are 2/3 for uncommon, 4/15 for rare, 1/15 for mythic
+        Rarity rarity;
+        int rarityKey = RandomUtil.nextInt(15);
+        if (rarityKey == 14) {
+            rarity = Rarity.MYTHIC;
+        } else if (rarityKey >= 10) {
+            rarity = Rarity.RARE;
+        } else {
+            rarity = Rarity.UNCOMMON;
+        }
+        addToBooster(booster, TheBrothersWarRetroArtifacts.getInstance().getCardsByRarity(rarity));
     }
 
 //    @Override
