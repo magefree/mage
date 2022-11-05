@@ -30,7 +30,7 @@ public final class HornedStoneseeker extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // When Horned Stoneseeker enters the battlefield, create a tapped Powerstone token.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new PowerstoneToken(), 1, true)));
