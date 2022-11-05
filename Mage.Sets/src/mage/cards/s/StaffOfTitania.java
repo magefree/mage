@@ -40,7 +40,7 @@ public final class StaffOfTitania extends CardImpl {
         this.addAbility(new AttacksAttachedTriggeredAbility(new CreateTokenEffect(new ForestDryadToken())));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private StaffOfTitania(final StaffOfTitania card) {
