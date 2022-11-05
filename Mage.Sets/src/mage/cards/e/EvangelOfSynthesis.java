@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.DrewTwoOrMoreCardsCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.dynamicvalue.common.CardsDrawnThisTurnDynamicValue;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
@@ -16,8 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.game.Game;
-import mage.watchers.common.CardsDrawnThisTurnWatcher;
 
 import java.util.UUID;
 
@@ -43,12 +41,12 @@ public final class EvangelOfSynthesis extends CardImpl {
         // As long as you've drawn two or more cards this turn, Evangel of Synthesis gets +1/+0 and has menace.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield),
-                EvangelOfSynthesisCondition.instance, "as long as you've drawn " +
+                DrewTwoOrMoreCardsCondition.instance, "as long as you've drawn " +
                 "two or more cards this turn, {this} gets +1/+0"
         ));
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(
                 new MenaceAbility(false), Duration.WhileOnBattlefield
-        ), EvangelOfSynthesisCondition.instance, "and has menace"));
+        ), DrewTwoOrMoreCardsCondition.instance, "and has menace"));
         this.addAbility(ability.addHint(CardsDrawnThisTurnDynamicValue.getHint()));
     }
 
@@ -59,15 +57,5 @@ public final class EvangelOfSynthesis extends CardImpl {
     @Override
     public EvangelOfSynthesis copy() {
         return new EvangelOfSynthesis(this);
-    }
-}
-
-enum EvangelOfSynthesisCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        CardsDrawnThisTurnWatcher watcher = game.getState().getWatcher(CardsDrawnThisTurnWatcher.class);
-        return watcher != null && watcher.getCardsDrawnThisTurn(source.getControllerId()) > 1;
     }
 }

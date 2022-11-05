@@ -233,6 +233,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Tower Worker", 255, Rarity.COMMON, mage.cards.t.TowerWorker.class));
         cards.add(new SetCardInfo("Transmogrant Altar", 124, Rarity.UNCOMMON, mage.cards.t.TransmograntAltar.class));
         cards.add(new SetCardInfo("Transmogrant's Crown", 125, Rarity.RARE, mage.cards.t.TransmograntsCrown.class));
+        cards.add(new SetCardInfo("Trench Stalker", 116, Rarity.COMMON, mage.cards.t.TrenchStalker.class));
         cards.add(new SetCardInfo("Tyrant of Kher Ridges", 154, Rarity.RARE, mage.cards.t.TyrantOfKherRidges.class));
         cards.add(new SetCardInfo("Underground River", 267, Rarity.RARE, mage.cards.u.UndergroundRiver.class));
         cards.add(new SetCardInfo("Union of the Third Path", 31, Rarity.COMMON, mage.cards.u.UnionOfTheThirdPath.class));
