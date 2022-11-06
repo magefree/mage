@@ -44,7 +44,7 @@ public final class TheRavensWarning extends CardImpl {
         // II — Whenever one or more creatures you control with flying deal combat damage to a player this turn,
         // look at that player's hand and draw a card.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_II, new CreateDelayedTriggeredAbilityEffect(
-                new TheRavensWarningTriggeredAbility(), false, false
+                new TheRavensWarningTriggeredAbility(), false
         ));
 
         // III — You may put a card you own from outside the game on top of your library.

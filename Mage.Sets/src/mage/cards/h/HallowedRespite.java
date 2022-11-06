@@ -38,7 +38,7 @@ public final class HallowedRespite extends CardImpl {
 
         // Exile target nonlegendary creature, then return it to the battlefield under its owner's control. If it entered under your control, put a +1/+1 counter on it. Otherwise, tap it.
         this.getSpellAbility().addEffect(new ExileTargetForSourceEffect());
-        this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false).setText(", then return it to the battlefield under its owner's control"));
+        this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false, "it").concatBy(", then"));
         this.getSpellAbility().addEffect(new HallowedRespiteEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
 

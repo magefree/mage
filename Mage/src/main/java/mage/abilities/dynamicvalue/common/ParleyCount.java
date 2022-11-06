@@ -16,6 +16,8 @@ import mage.players.Player;
 /**
  * Don't use this for continuous effects because it applies a reveal effect!
  *
+ * Calculate returns the number of nonland cards revealed.
+ *
  * @author LevelX2
  */
 public class ParleyCount implements DynamicValue, MageSingleton {

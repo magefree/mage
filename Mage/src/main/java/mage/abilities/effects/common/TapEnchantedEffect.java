@@ -7,14 +7,17 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX
  */
 public class TapEnchantedEffect extends OneShotEffect {
 
     public TapEnchantedEffect() {
+        this("creature");
+    }
+
+    public TapEnchantedEffect(String name) {
         super(Outcome.Tap);
-        staticText = "tap enchanted creature";
+        staticText = "tap enchanted " + name;
     }
 
     public TapEnchantedEffect(final TapEnchantedEffect effect) {

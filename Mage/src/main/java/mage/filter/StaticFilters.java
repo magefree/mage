@@ -224,6 +224,12 @@ public final class StaticFilters {
         FILTER_CARD_PERMANENT.setLockedFilter(true);
     }
 
+    public static final FilterPermanentCard FILTER_CARD_A_PERMANENT = new FilterPermanentCard("a permanent card");
+
+    static {
+        FILTER_CARD_A_PERMANENT.setLockedFilter(true);
+    }
+
     public static final FilterPermanent FILTER_PERMANENT = new FilterPermanent();
 
     static {
@@ -399,6 +405,17 @@ public final class StaticFilters {
     static {
         FILTER_CONTROLLED_ARTIFACT_OR_OTHER_CREATURE.add(AnotherCreatureOrAnArtifactPredicate.instance);
         FILTER_CONTROLLED_ARTIFACT_OR_OTHER_CREATURE.setLockedFilter(true);
+    }
+
+    public static final FilterControlledPermanent FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE = new FilterControlledPermanent("another creature or artifact");
+
+    static {
+        FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE.add(AnotherPredicate.instance);
+        FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE.add(Predicates.or(
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate()
+        ));
+        FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE.setLockedFilter(true);
     }
 
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_ENCHANTMENT = new FilterControlledEnchantmentPermanent();

@@ -12,8 +12,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -21,12 +20,6 @@ import mage.target.common.TargetControlledPermanent;
  * @author MajorLazar
  */
 public final class ApocalypseDemon extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public ApocalypseDemon(UUID ownerId, CardSetInfo cardSetInfo) {
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
@@ -39,7 +32,7 @@ public final class ApocalypseDemon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new CardsInControllerGraveyardCount(), Duration.EndOfGame)));
 
         // At the beginning of your upkeep, tap Apocalypse Demon unless you sacrifice another creature.
-        TapSourceUnlessPaysEffect tapEffect = new TapSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        TapSourceUnlessPaysEffect tapEffect = new TapSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
         tapEffect.setText("tap {this} unless you sacrifice another creature.");
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(tapEffect, TargetController.YOU, false));
     }

@@ -20,8 +20,6 @@ public class ReturnToBattlefieldUnderOwnerControlTargetEffect extends OneShotEff
 
     private boolean tapped;
     protected boolean returnFromExileZoneOnly;
-    private String returnName = "that card";
-    private String returnUnderControlName = "its owner's";
 
     /**
      * @param returnFromExileZoneOnly see https://github.com/magefree/mage/issues/5151
@@ -29,28 +27,20 @@ public class ReturnToBattlefieldUnderOwnerControlTargetEffect extends OneShotEff
      *                                return exiled card - true
      */
     public ReturnToBattlefieldUnderOwnerControlTargetEffect(boolean tapped, boolean returnFromExileZoneOnly) {
+        this(tapped, returnFromExileZoneOnly, "that card");
+    }
+
+    public ReturnToBattlefieldUnderOwnerControlTargetEffect(boolean tapped, boolean returnFromExileZoneOnly, String description) {
         super(Outcome.Benefit);
         this.tapped = tapped;
         this.returnFromExileZoneOnly = returnFromExileZoneOnly;
-
-        updateText();
+        staticText = "return " + description + " to the battlefield " + (tapped ? "tapped " : "") + "under its owner's control";
     }
 
     public ReturnToBattlefieldUnderOwnerControlTargetEffect(final ReturnToBattlefieldUnderOwnerControlTargetEffect effect) {
         super(effect);
         this.tapped = effect.tapped;
         this.returnFromExileZoneOnly = effect.returnFromExileZoneOnly;
-        this.returnName = effect.returnName;
-        this.returnUnderControlName = effect.returnUnderControlName;
-
-        updateText();
-    }
-
-    // TODO: This does not generate correct text, the ", then" should be from .concatBy, see Angelic Renewal for a card with incorrect text
-    private void updateText() {
-        this.staticText = ", then return " + this.returnName
-                + " to the battlefield" + (tapped ? " tapped" : "")
-                + " under " + this.returnUnderControlName + " control";
     }
 
     @Override
@@ -91,12 +81,5 @@ public class ReturnToBattlefieldUnderOwnerControlTargetEffect extends OneShotEff
             return true;
         }
         return false;
-    }
-
-    public ReturnToBattlefieldUnderOwnerControlTargetEffect withReturnNames(String returnName, String returnUnderControlName) {
-        this.returnName = returnName;
-        this.returnUnderControlName = returnUnderControlName;
-        updateText();
-        return this;
     }
 }

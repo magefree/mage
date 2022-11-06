@@ -28,7 +28,7 @@ public final class SoulCollector extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever a creature dealt damage by Soul Collector this turn dies, return that card to the battlefield under your control.
-        this.addAbility(new DealtDamageAndDiedTriggeredAbility(new ReturnToBattlefieldUnderYourControlTargetEffect().setText("return that card to the battlefield under your control")));
+        this.addAbility(new DealtDamageAndDiedTriggeredAbility(new ReturnToBattlefieldUnderYourControlTargetEffect()));
 
         // Morph {B}{B}{B}
         this.addAbility(new MorphAbility(new ManaCostsImpl<>("{B}{B}{B}")));

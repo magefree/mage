@@ -12,20 +12,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledPermanent;
 
 /**
  * @author noxx
  */
 public final class DemonlordOfAshmouth extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(" another creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public DemonlordOfAshmouth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
@@ -37,7 +30,11 @@ public final class DemonlordOfAshmouth extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Demonlord of Ashmouth enters the battlefield, exile it unless you sacrifice another creature.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ExileSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter)))));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new ExileSourceUnlessPaysEffect(
+                        new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE))
+                )
+        ));
 
         this.addAbility(new UndyingAbility());
     }
