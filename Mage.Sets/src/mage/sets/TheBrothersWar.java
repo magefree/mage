@@ -199,6 +199,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Repair and Recharge", 24, Rarity.UNCOMMON, mage.cards.r.RepairAndRecharge.class));
         cards.add(new SetCardInfo("Retrieval Agent", 60, Rarity.COMMON, mage.cards.r.RetrievalAgent.class));
         cards.add(new SetCardInfo("Roc Hunter", 150, Rarity.COMMON, mage.cards.r.RocHunter.class));
+        cards.add(new SetCardInfo("Rootwire Amalgam", 203, Rarity.MYTHIC, mage.cards.r.RootwireAmalgam.class));
         cards.add(new SetCardInfo("Rust Goliath", 204, Rarity.COMMON, mage.cards.r.RustGoliath.class));
         cards.add(new SetCardInfo("Saheeli, Filigree Master", 219, Rarity.MYTHIC, mage.cards.s.SaheeliFiligreeMaster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Saheeli, Filigree Master", 294, Rarity.MYTHIC, mage.cards.s.SaheeliFiligreeMaster.class, NON_FULL_USE_VARIOUS));
