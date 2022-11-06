@@ -73,6 +73,7 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fellwar Stone", 141, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
         cards.add(new SetCardInfo("Filigree Attendant", 85, Rarity.UNCOMMON, mage.cards.f.FiligreeAttendant.class));
         cards.add(new SetCardInfo("Geth, Lord of the Vault", 107, Rarity.MYTHIC, mage.cards.g.GethLordOfTheVault.class));
+        cards.add(new SetCardInfo("Glint Raker", 7, Rarity.RARE, mage.cards.g.GlintRaker.class));
         cards.add(new SetCardInfo("Goldmire Bridge", 186, Rarity.COMMON, mage.cards.g.GoldmireBridge.class));
         cards.add(new SetCardInfo("Great Furnace", 187, Rarity.COMMON, mage.cards.g.GreatFurnace.class));
         cards.add(new SetCardInfo("Hedron Archive", 142, Rarity.UNCOMMON, mage.cards.h.HedronArchive.class));
