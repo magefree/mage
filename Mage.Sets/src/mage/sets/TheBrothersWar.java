@@ -262,6 +262,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Urza, Powerstone Prodigy", 69, Rarity.UNCOMMON, mage.cards.u.UrzaPowerstoneProdigy.class));
         cards.add(new SetCardInfo("Urza, Prince of Kroog", 226, Rarity.RARE, mage.cards.u.UrzaPrinceOfKroog.class));
         cards.add(new SetCardInfo("Veteran's Powerblade", 41, Rarity.COMMON, mage.cards.v.VeteransPowerblade.class));
+        cards.add(new SetCardInfo("Visions of Phyrexia", 156, Rarity.RARE, mage.cards.v.VisionsOfPhyrexia.class));
         cards.add(new SetCardInfo("Warlord's Elite", 32, Rarity.COMMON, mage.cards.w.WarlordsElite.class));
         cards.add(new SetCardInfo("Wasteful Harvest", 196, Rarity.COMMON, mage.cards.w.WastefulHarvest.class));
         cards.add(new SetCardInfo("Weakstone's Subjugation", 72, Rarity.COMMON, mage.cards.w.WeakstonesSubjugation.class));
