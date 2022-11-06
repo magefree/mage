@@ -153,6 +153,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Loran's Escape", 14, Rarity.COMMON, mage.cards.l.LoransEscape.class));
         cards.add(new SetCardInfo("Loran, Disciple of History", 13, Rarity.UNCOMMON, mage.cards.l.LoranDiscipleOfHistory.class));
         cards.add(new SetCardInfo("Machine Over Matter", 57, Rarity.COMMON, mage.cards.m.MachineOverMatter.class));
+        cards.add(new SetCardInfo("Mask of the Jadecrafter", 201, Rarity.UNCOMMON, mage.cards.m.MaskOfTheJadecrafter.class));
         cards.add(new SetCardInfo("Mass Production", 15, Rarity.UNCOMMON, mage.cards.m.MassProduction.class));
         cards.add(new SetCardInfo("Mechanized Warfare", 139, Rarity.RARE, mage.cards.m.MechanizedWarfare.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mechanized Warfare", 338, Rarity.RARE, mage.cards.m.MechanizedWarfare.class, NON_FULL_USE_VARIOUS));
