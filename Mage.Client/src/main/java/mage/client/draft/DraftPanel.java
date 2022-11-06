@@ -305,7 +305,7 @@
          }
          
          if (!draftBooster.isEmptyGrid()) {
-            SessionHandler.setBoosterLoaded(draftId); // confirm to the server that the booster has been successfully loaded
+            SessionHandler.setBoosterLoaded(draftId); // confirm to the server that the booster has been successfully loaded, otherwise the server will re-send the booster
          }
      }
 
