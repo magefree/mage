@@ -66,6 +66,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Brushland", 259, Rarity.RARE, mage.cards.b.Brushland.class));
         cards.add(new SetCardInfo("Burrowing Razormaw", 173, Rarity.COMMON, mage.cards.b.BurrowingRazormaw.class));
         cards.add(new SetCardInfo("Bushwhack", 174, Rarity.UNCOMMON, mage.cards.b.Bushwhack.class));
+        cards.add(new SetCardInfo("Calamity's Wake", 4, Rarity.UNCOMMON, mage.cards.c.CalamitysWake.class));
         cards.add(new SetCardInfo("Carrion Locust", 87, Rarity.COMMON, mage.cards.c.CarrionLocust.class));
         cards.add(new SetCardInfo("Citanul Stalwart", 175, Rarity.COMMON, mage.cards.c.CitanulStalwart.class));
         cards.add(new SetCardInfo("Clay Champion", 230, Rarity.MYTHIC, mage.cards.c.ClayChampion.class));
