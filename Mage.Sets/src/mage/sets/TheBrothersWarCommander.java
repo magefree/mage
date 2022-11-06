@@ -149,6 +149,7 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 33, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swiftfoot Boots", 166, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 75, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
+        cards.add(new SetCardInfo("Tawnos, Solemn Survivor", 3, Rarity.MYTHIC, mage.cards.t.TawnosSolemnSurvivor.class));
         cards.add(new SetCardInfo("Tempered Steel", 76, Rarity.RARE, mage.cards.t.TemperedSteel.class));
         cards.add(new SetCardInfo("Temple of Deceit", 205, Rarity.RARE, mage.cards.t.TempleOfDeceit.class));
         cards.add(new SetCardInfo("Temple of Enlightenment", 206, Rarity.RARE, mage.cards.t.TempleOfEnlightenment.class));
