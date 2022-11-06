@@ -26,6 +26,7 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Signet", 132, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Armix, Filigree Thrasher", 103, Rarity.UNCOMMON, mage.cards.a.ArmixFiligreeThrasher.class));
         cards.add(new SetCardInfo("Ash Barrens", 174, Rarity.COMMON, mage.cards.a.AshBarrens.class));
+        cards.add(new SetCardInfo("Ashnod the Uncaring", 4, Rarity.MYTHIC, mage.cards.a.AshnodTheUncaring.class));
         cards.add(new SetCardInfo("Audacious Reshapers", 112, Rarity.RARE, mage.cards.a.AudaciousReshapers.class));
         cards.add(new SetCardInfo("Austere Command", 69, Rarity.RARE, mage.cards.a.AustereCommand.class));
         cards.add(new SetCardInfo("Azorius Chancery", 175, Rarity.UNCOMMON, mage.cards.a.AzoriusChancery.class));
