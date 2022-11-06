@@ -71,7 +71,6 @@ public class DraftSession {
 
     public void draftOver() {
         if (!killed) {
-            cancelTimeout();
             managerFactory.userManager()
                     .getUser(userId)
                     .ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_OVER, draft.getId())));
@@ -121,7 +120,6 @@ public class DraftSession {
     }
 
     public void setKilled() {
-        cancelTimeout();
         killed = true;
     }
 
