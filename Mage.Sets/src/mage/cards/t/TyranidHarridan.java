@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
-import mage.abilities.costs.mana.GenericManaCost;;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.WardAbility;
