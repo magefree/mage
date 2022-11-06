@@ -28,8 +28,8 @@ import static mage.constants.Outcome.Benefit;
 public final class MythosOfVadrok extends CardImpl {
 
     private static final Condition condition = new CompoundCondition(
-            new ManaWasSpentCondition(ColoredManaSymbol.W),
-            new ManaWasSpentCondition(ColoredManaSymbol.U)
+            ManaWasSpentCondition.WHITE,
+            ManaWasSpentCondition.BLUE
     );
 
     public MythosOfVadrok(UUID ownerId, CardSetInfo setInfo) {

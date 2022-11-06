@@ -46,8 +46,8 @@ public final class MythosOfBrokkos extends CardImpl {
 class MythosOfBrokkosEffect extends OneShotEffect {
 
     private static final Condition condition = new CompoundCondition(
-            new ManaWasSpentCondition(ColoredManaSymbol.U),
-            new ManaWasSpentCondition(ColoredManaSymbol.B)
+            ManaWasSpentCondition.BLUE,
+            ManaWasSpentCondition.BLACK
     );
     private static final FilterCard filter = new FilterPermanentCard("permanent cards");
 

@@ -67,6 +67,7 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fact or Fiction", 84, Rarity.UNCOMMON, mage.cards.f.FactOrFiction.class));
         cards.add(new SetCardInfo("Fain, the Broker", 105, Rarity.RARE, mage.cards.f.FainTheBroker.class));
         cards.add(new SetCardInfo("Faithless Looting", 116, Rarity.COMMON, mage.cards.f.FaithlessLooting.class));
+        cards.add(new SetCardInfo("Farid, Enterprising Salvager", 13, Rarity.RARE, mage.cards.f.FaridEnterprisingSalvager.class));
         cards.add(new SetCardInfo("Feed the Swarm", 106, Rarity.COMMON, mage.cards.f.FeedTheSwarm.class));
         cards.add(new SetCardInfo("Fellwar Stone", 141, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
         cards.add(new SetCardInfo("Filigree Attendant", 85, Rarity.UNCOMMON, mage.cards.f.FiligreeAttendant.class));
@@ -100,7 +101,7 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Muzzio, Visionary Architect", 89, Rarity.MYTHIC, mage.cards.m.MuzzioVisionaryArchitect.class));
         cards.add(new SetCardInfo("Mycosynth Wellspring", 150, Rarity.COMMON, mage.cards.m.MycosynthWellspring.class));
         cards.add(new SetCardInfo("Myr Battlesphere", 151, Rarity.RARE, mage.cards.m.MyrBattlesphere.class));
-        cards.add(new SetCardInfo("Myriad Landscape", 192, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
+        cards.add(new SetCardInfo("Myriad Landscape", 190, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
         cards.add(new SetCardInfo("Nihil Spellbomb", 152, Rarity.COMMON, mage.cards.n.NihilSpellbomb.class));
         cards.add(new SetCardInfo("Noxious Gearhulk", 110, Rarity.MYTHIC, mage.cards.n.NoxiousGearhulk.class));
         cards.add(new SetCardInfo("Oblivion Stone", 153, Rarity.RARE, mage.cards.o.OblivionStone.class));
@@ -109,6 +110,7 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Orzhov Basilica", 191, Rarity.UNCOMMON, mage.cards.o.OrzhovBasilica.class));
         cards.add(new SetCardInfo("Orzhov Signet", 154, Rarity.COMMON, mage.cards.o.OrzhovSignet.class));
         cards.add(new SetCardInfo("Padeem, Consul of Innovation", 91, Rarity.RARE, mage.cards.p.PadeemConsulOfInnovation.class));
+        cards.add(new SetCardInfo("Path of Ancestry", 192, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Phyrexian Rebirth", 74, Rarity.RARE, mage.cards.p.PhyrexianRebirth.class));
         cards.add(new SetCardInfo("Plains", 29, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prairie Stream", 193, Rarity.RARE, mage.cards.p.PrairieStream.class));
@@ -139,6 +141,7 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Sphinx's Revelation", 130, Rarity.MYTHIC, mage.cards.s.SphinxsRevelation.class));
         cards.add(new SetCardInfo("Spine of Ish Sah", 162, Rarity.RARE, mage.cards.s.SpineOfIshSah.class));
         cards.add(new SetCardInfo("Spire of Industry", 203, Rarity.RARE, mage.cards.s.SpireOfIndustry.class));
+        cards.add(new SetCardInfo("Staff of Titania", 27, Rarity.RARE, mage.cards.s.StaffOfTitania.class));
         cards.add(new SetCardInfo("Steel Hellkite", 163, Rarity.RARE, mage.cards.s.SteelHellkite.class));
         cards.add(new SetCardInfo("Steel Overseer", 164, Rarity.RARE, mage.cards.s.SteelOverseer.class));
         cards.add(new SetCardInfo("Strionic Resonator", 165, Rarity.RARE, mage.cards.s.StrionicResonator.class));
@@ -162,10 +165,12 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Thought Vessel", 167, Rarity.UNCOMMON, mage.cards.t.ThoughtVessel.class));
         cards.add(new SetCardInfo("Thoughtcast", 99, Rarity.COMMON, mage.cards.t.Thoughtcast.class));
         cards.add(new SetCardInfo("Thran Dynamo", 168, Rarity.UNCOMMON, mage.cards.t.ThranDynamo.class));
+        cards.add(new SetCardInfo("Titania, Nature's Force", 25, Rarity.MYTHIC, mage.cards.t.TitaniaNaturesForce.class));
         cards.add(new SetCardInfo("Trading Post", 169, Rarity.RARE, mage.cards.t.TradingPost.class));
         cards.add(new SetCardInfo("Traxos, Scourge of Kroog", 170, Rarity.RARE, mage.cards.t.TraxosScourgeOfKroog.class));
         cards.add(new SetCardInfo("Unbreakable Formation", 78, Rarity.RARE, mage.cards.u.UnbreakableFormation.class));
         cards.add(new SetCardInfo("Urza's Ruinous Blast", 79, Rarity.RARE, mage.cards.u.UrzasRuinousBlast.class));
+        cards.add(new SetCardInfo("Urza's Workshop", 28, Rarity.RARE, mage.cards.u.UrzasWorkshop.class));
         cards.add(new SetCardInfo("Urza, Chief Artificer", 2, Rarity.MYTHIC, mage.cards.u.UrzaChiefArtificer.class));
         cards.add(new SetCardInfo("Vault of Whispers", 211, Rarity.COMMON, mage.cards.v.VaultOfWhispers.class));
         cards.add(new SetCardInfo("Vedalken Humiliator", 100, Rarity.RARE, mage.cards.v.VedalkenHumiliator.class));

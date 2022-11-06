@@ -28,7 +28,7 @@ public class AddCountersControllerEffect extends OneShotEffect {
         super(Outcome.Benefit);
         this.counter = counter.copy();
         this.enchantedEquipped = enchantedEquipped;
-        staticText = "its controller gets " + counter.getDescription();
+        staticText = (enchantedEquipped ? "its controller gets " : "you get ") + counter.getDescription();
     }
 
     public AddCountersControllerEffect(final AddCountersControllerEffect effect) {

@@ -28,7 +28,7 @@ public final class WickerWarcrawler extends CardImpl {
         this.addAbility(new AttacksOrBlocksTriggeredAbility(
                 new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(
                         new AddCountersSourceEffect(CounterType.M1M1.createInstance(), true)
-                ), false, false).setText("put a -1/-1 counter on it at end of combat"), false
+                ), false).setText("put a -1/-1 counter on it at end of combat"), false
         ).setTriggerPhrase("Whenever {this} attacks or blocks, "));
     }
 

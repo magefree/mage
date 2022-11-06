@@ -65,7 +65,6 @@ class AstralSlideEffect extends OneShotEffect {
                 if (controller.moveCardsToExile(permanent, source, game, true, exileId, sourceObject.getIdName())) {
                     //create delayed triggered ability
                     Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);
-                    effect.setText("Return that card to the battlefield under its owner's control at the beginning of the next end step");
                     effect.setTargetPointer(new FixedTarget(permanent.getId(), game));
                     game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
                 }

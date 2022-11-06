@@ -17,8 +17,7 @@ public final class YotianMedic extends CardImpl {
     public YotianMedic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
 
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.SOLDIER);
+        this.subtype.add(SubType.HUMAN, SubType.CLERIC, SubType.SOLDIER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 

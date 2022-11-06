@@ -201,7 +201,6 @@ public class GameEvent implements Serializable {
          playerId    player that tries to use this ability
          */
         TRIGGERED_ABILITY,
-        ABILITY_TRIGGERED,
         RESOLVING_ABILITY,
         /* COPY_STACKOBJECT
          targetId    id of the spell/ability to copy

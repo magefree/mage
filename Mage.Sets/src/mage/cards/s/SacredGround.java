@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -39,7 +39,7 @@ public final class SacredGround extends CardImpl {
 class SacredGroundTriggeredAbility extends TriggeredAbilityImpl {
 
     SacredGroundTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ReturnToBattlefieldUnderYourControlTargetEffect());
+        super(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect());
     }
 
     SacredGroundTriggeredAbility(final SacredGroundTriggeredAbility ability) {
@@ -60,10 +60,10 @@ class SacredGroundTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(this.getControllerId()).contains(game.getControllerId(event.getSourceId()))) {
             ZoneChangeEvent zce = (ZoneChangeEvent) event;
-            if (Zone.BATTLEFIELD == zce.getFromZone() && Zone.GRAVEYARD == zce.getToZone()) {
+            if (zce.isDiesEvent()) {
                 Permanent targetPermanent = zce.getTarget();
-                if (targetPermanent.isLand(game) && targetPermanent.isControlledBy(getControllerId())) {
-                    getEffects().get(0).setTargetPointer(new FixedTarget(targetPermanent.getId(), game.getState().getZoneChangeCounter(targetPermanent.getId())));
+                if (targetPermanent.isLand(game) && targetPermanent.isOwnedBy(getControllerId())) {
+                    getEffects().get(0).setTargetPointer(new FixedTarget(targetPermanent, game));
                     return true;
                 }
             }

@@ -31,7 +31,7 @@ public final class SettleBeyondReality extends CardImpl {
 
         // • Exile target creature you control, then return it to the battlefield under its owner's control.
         Mode mode = new Mode(new ExileTargetForSourceEffect());
-        mode.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false));
+        mode.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false, "it").concatBy(", then"));
         mode.addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addMode(mode);
     }

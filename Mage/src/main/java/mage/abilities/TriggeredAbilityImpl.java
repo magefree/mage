@@ -54,6 +54,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         this.leavesTheBattlefieldTrigger = ability.leavesTheBattlefieldTrigger;
         this.triggersOnce = ability.triggersOnce;
         this.doOnlyOnce = ability.doOnlyOnce;
+        this.triggerEvent = ability.triggerEvent;
         this.triggerPhrase = ability.triggerPhrase;
     }
 

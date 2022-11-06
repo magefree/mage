@@ -47,8 +47,8 @@ public class MythosOfSnapdax extends CardImpl {
 class MythosOfSnapdaxEffect extends OneShotEffect {
 
     private static final Condition condition = new CompoundCondition(
-            new ManaWasSpentCondition(ColoredManaSymbol.R),
-            new ManaWasSpentCondition(ColoredManaSymbol.B)
+            ManaWasSpentCondition.RED,
+            ManaWasSpentCondition.BLACK
     );
     private static final List<CardType> cardTypes = Arrays.asList(
             CardType.ARTIFACT,

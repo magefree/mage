@@ -54,8 +54,8 @@ class CankerousThirstEffect extends OneShotEffect {
 
     // Only used for getCondition
     private static final Condition condition = new CompoundCondition(
-            new ManaWasSpentCondition(ColoredManaSymbol.B),
-            new ManaWasSpentCondition(ColoredManaSymbol.G)
+            ManaWasSpentCondition.BLACK,
+            ManaWasSpentCondition.RED
     );
 
     public CankerousThirstEffect() {
@@ -76,7 +76,7 @@ class CankerousThirstEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (new ManaWasSpentCondition(ColoredManaSymbol.B).apply(game, source)) {
+            if (ManaWasSpentCondition.BLACK.apply(game, source)) {
                 Permanent targetCreature1 = game.getPermanent(getTargetPointer().getFirst(game, source));
                 if (targetCreature1 != null && controller.chooseUse(Outcome.UnboostCreature, "Let " + targetCreature1.getIdName() + " get -3/-3 until end of turn?", source, game)) {
                     ContinuousEffect effect = new BoostTargetEffect(-3, -3, Duration.EndOfTurn);
@@ -84,7 +84,7 @@ class CankerousThirstEffect extends OneShotEffect {
                     game.addEffect(effect, source);
                 }
             }
-            if (new ManaWasSpentCondition(ColoredManaSymbol.G).apply(game, source)) {
+            if (ManaWasSpentCondition.GREEN.apply(game, source)) {
                 Permanent targetCreature2 = game.getPermanent(source.getTargets().get(1).getFirstTarget());
                 if (targetCreature2 != null && controller.chooseUse(Outcome.UnboostCreature, "Let " + targetCreature2.getIdName() + " get +3/+3 until end of turn?", source, game)) {
                     ContinuousEffect effect = new BoostTargetEffect(+3, +3, Duration.EndOfTurn);
