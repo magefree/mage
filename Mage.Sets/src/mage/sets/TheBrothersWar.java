@@ -255,6 +255,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Tocasia's Dig Site", 266, Rarity.COMMON, mage.cards.t.TocasiasDigSite.class));
         cards.add(new SetCardInfo("Tocasia's Onulet", 39, Rarity.COMMON, mage.cards.t.TocasiasOnulet.class));
         cards.add(new SetCardInfo("Tocasia's Welcome", 30, Rarity.RARE, mage.cards.t.TocasiasWelcome.class));
+        cards.add(new SetCardInfo("Tocasia, Dig Site Mentor", 224, Rarity.RARE, mage.cards.t.TocasiaDigSiteMentor.class));
         cards.add(new SetCardInfo("Tomakul Honor Guard", 195, Rarity.COMMON, mage.cards.t.TomakulHonorGuard.class));
         cards.add(new SetCardInfo("Tomakul Scrapsmith", 153, Rarity.COMMON, mage.cards.t.TomakulScrapsmith.class));
         cards.add(new SetCardInfo("Tower Worker", 255, Rarity.COMMON, mage.cards.t.TowerWorker.class));
