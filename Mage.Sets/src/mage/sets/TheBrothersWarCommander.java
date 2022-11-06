@@ -182,6 +182,7 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Wayfarer's Bauble", 171, Rarity.COMMON, mage.cards.w.WayfarersBauble.class));
         cards.add(new SetCardInfo("Whirler Rogue", 101, Rarity.UNCOMMON, mage.cards.w.WhirlerRogue.class));
         cards.add(new SetCardInfo("Wire Surgeons", 10, Rarity.RARE, mage.cards.w.WireSurgeons.class));
+        cards.add(new SetCardInfo("Wondrous Crucible", 20, Rarity.RARE, mage.cards.w.WondrousCrucible.class));
         cards.add(new SetCardInfo("Workshop Elders", 102, Rarity.RARE, mage.cards.w.WorkshopElders.class));
         cards.add(new SetCardInfo("Wreck Hunter", 11, Rarity.RARE, mage.cards.w.WreckHunter.class));
     }
