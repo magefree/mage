@@ -104,6 +104,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Fallaji Dragon Engine", 159, Rarity.UNCOMMON, mage.cards.f.FallajiDragonEngine.class));
         cards.add(new SetCardInfo("Fallaji Excavation", 178, Rarity.UNCOMMON, mage.cards.f.FallajiExcavation.class));
         cards.add(new SetCardInfo("Fallaji Vanguard", 210, Rarity.UNCOMMON, mage.cards.f.FallajiVanguard.class));
+        cards.add(new SetCardInfo("Fateful Handoff", 94, Rarity.RARE, mage.cards.f.FatefulHandoff.class));
         cards.add(new SetCardInfo("Fauna Shaman", 179, Rarity.RARE, mage.cards.f.FaunaShaman.class));
         cards.add(new SetCardInfo("Feldon, Ronom Excavator", 135, Rarity.RARE, mage.cards.f.FeldonRonomExcavator.class));
         cards.add(new SetCardInfo("Flow of Knowledge", 49, Rarity.UNCOMMON, mage.cards.f.FlowOfKnowledge.class));
