@@ -86,12 +86,12 @@ class InquisitorEisenhornReplacementEffect extends ReplacementEffectImpl {
             return false;
         }
 
-        // reveal
-        controller.setTopCardRevealed(true);
-
         if (topCard.isInstantOrSorcery(game)) {
             new CherubaelToken().putOntoBattlefield(1, game, source);
         }
+
+        // reveal
+        controller.setTopCardRevealed(true);
 
         return false;
     }
