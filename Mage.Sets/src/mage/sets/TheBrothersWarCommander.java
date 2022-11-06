@@ -136,6 +136,7 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Skullclamp", 159, Rarity.UNCOMMON, mage.cards.s.Skullclamp.class));
         cards.add(new SetCardInfo("Skycloud Expanse", 201, Rarity.RARE, mage.cards.s.SkycloudExpanse.class));
         cards.add(new SetCardInfo("Slobad, Goblin Tinkerer", 118, Rarity.RARE, mage.cards.s.SlobadGoblinTinkerer.class));
+        cards.add(new SetCardInfo("Smelting Vat", 18, Rarity.RARE, mage.cards.s.SmeltingVat.class));
         cards.add(new SetCardInfo("Smoldering Marsh", 202, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
         cards.add(new SetCardInfo("Sol Ring", 160, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 161, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
