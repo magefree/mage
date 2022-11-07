@@ -36,7 +36,7 @@ public final class ThranPowerSuit extends CardImpl {
         ));
         ability.addEffect(new GainAbilityAttachedEffect(new WardAbility(
                 new GenericManaCost(2), false
-        ), AttachmentType.EQUIPMENT).setText("and has ward {2}"));
+        ), AttachmentType.EQUIPMENT).setText("and has ward {2} <i>(Whenever equipped creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)</i>"));
         this.addAbility(ability);
 
         // Equip {2}
