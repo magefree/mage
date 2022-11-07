@@ -77,7 +77,7 @@ class TawnossTinkeringEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent == null || !permanent.isCreature(game)) {
+        if (permanent == null || permanent.isCreature(game)) {
             return false;
         }
         game.addEffect(new BecomesCreatureTargetEffect(
