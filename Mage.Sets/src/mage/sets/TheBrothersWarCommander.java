@@ -55,6 +55,7 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Digsite Engineer", 71, Rarity.RARE, mage.cards.d.DigsiteEngineer.class));
         cards.add(new SetCardInfo("Dimir Aqueduct", 182, Rarity.UNCOMMON, mage.cards.d.DimirAqueduct.class));
         cards.add(new SetCardInfo("Dimir Signet", 138, Rarity.COMMON, mage.cards.d.DimirSignet.class));
+        cards.add(new SetCardInfo("Disciple of Caelus Nin", 21, Rarity.RARE, mage.cards.d.DiscipleOfCaelusNin.class));
         cards.add(new SetCardInfo("Dreamstone Hedron", 139, Rarity.UNCOMMON, mage.cards.d.DreamstoneHedron.class));
         cards.add(new SetCardInfo("Drossforge Bridge", 183, Rarity.COMMON, mage.cards.d.DrossforgeBridge.class));
         cards.add(new SetCardInfo("Emry, Lurker of the Loch", 81, Rarity.RARE, mage.cards.e.EmryLurkerOfTheLoch.class));
