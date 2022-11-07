@@ -125,6 +125,7 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Reliquary Tower", 196, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("River of Tears", 197, Rarity.RARE, mage.cards.r.RiverOfTears.class));
         cards.add(new SetCardInfo("Sai, Master Thopterist", 93, Rarity.RARE, mage.cards.s.SaiMasterThopterist.class));
+        cards.add(new SetCardInfo("Sardian Avenger", 23, Rarity.RARE, mage.cards.s.SardianAvenger.class));
         cards.add(new SetCardInfo("Scavenged Brawler", 17, Rarity.RARE, mage.cards.s.ScavengedBrawler.class));
         cards.add(new SetCardInfo("Seat of the Synod", 198, Rarity.COMMON, mage.cards.s.SeatOfTheSynod.class));
         cards.add(new SetCardInfo("Servo Schematic", 158, Rarity.UNCOMMON, mage.cards.s.ServoSchematic.class));
