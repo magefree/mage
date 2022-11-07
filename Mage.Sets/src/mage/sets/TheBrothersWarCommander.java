@@ -89,6 +89,7 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Liquimetal Torque", 145, Rarity.UNCOMMON, mage.cards.l.LiquimetalTorque.class));
         cards.add(new SetCardInfo("Lithoform Engine", 146, Rarity.MYTHIC, mage.cards.l.LithoformEngine.class));
         cards.add(new SetCardInfo("Losheel, Clockwork Scholar", 73, Rarity.RARE, mage.cards.l.LosheelClockworkScholar.class));
+        cards.add(new SetCardInfo("Machine God's Effigy", 16, Rarity.RARE, mage.cards.m.MachineGodsEffigy.class));
         cards.add(new SetCardInfo("March of Progress", 8, Rarity.RARE, mage.cards.m.MarchOfProgress.class));
         cards.add(new SetCardInfo("Marionette Master", 109, Rarity.RARE, mage.cards.m.MarionetteMaster.class));
         cards.add(new SetCardInfo("Master Transmuter", 87, Rarity.RARE, mage.cards.m.MasterTransmuter.class));
