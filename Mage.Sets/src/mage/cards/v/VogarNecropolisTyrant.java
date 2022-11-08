@@ -32,7 +32,7 @@ public final class VogarNecropolisTyrant extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever another creature dies during your turn, put a +1/+1 counter on Vogar, Necropolis Tyrant.
         this.addAbility(new ConditionalTriggeredAbility(
