@@ -31,7 +31,7 @@ public final class SplittingThePowerstone extends CardImpl {
         this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN));
 
         // Create two tapped Powerstone tokens. If the sacrificed artifact was legendary, draw a card.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new PowerstoneToken(), 2, false));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new PowerstoneToken(), 2, true));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1), SplittingThePowerstoneCondition.instance,
                 "If the sacrificed artifact was legendary, draw a card"

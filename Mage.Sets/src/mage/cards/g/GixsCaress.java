@@ -27,7 +27,7 @@ public final class GixsCaress extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
 
         // Create a tapped Powerstone token.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new PowerstoneToken(), 1, true));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new PowerstoneToken(), 1, true).concatBy("<br>"));
     }
 
     private GixsCaress(final GixsCaress card) {

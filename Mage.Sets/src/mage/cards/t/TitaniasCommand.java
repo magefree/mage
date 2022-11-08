@@ -32,6 +32,9 @@ public final class TitaniasCommand extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}{G}");
 
         // Choose two --
+        this.getSpellAbility().getModes().setMinModes(2);
+        this.getSpellAbility().getModes().setMaxModes(2);
+
         // * Exile target player's graveyard. You gain 1 life for each card exiled this way.
         this.getSpellAbility().addEffect(new TitaniasCommandEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());

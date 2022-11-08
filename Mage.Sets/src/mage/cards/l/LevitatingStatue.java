@@ -37,8 +37,7 @@ public final class LevitatingStatue extends CardImpl {
         // {2}: Levitating Statue becomes a 1/1 Construct artifact creature until end of turn.
         this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
                 new CreatureToken(
-                        1, 1, "1/1 Construct artifact " +
-                        "creature until end of turn", SubType.CONSTRUCT
+                        1, 1, "1/1 Construct artifact creature", SubType.CONSTRUCT
                 ).withType(CardType.ARTIFACT), "", Duration.EndOfTurn
         ), new GenericManaCost(2)));
     }

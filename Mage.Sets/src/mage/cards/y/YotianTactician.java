@@ -28,7 +28,9 @@ public final class YotianTactician extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Other Soldiers you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn, filter)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(
+                1, 1, Duration.WhileOnBattlefield, filter, true
+        )));
     }
 
     private YotianTactician(final YotianTactician card) {

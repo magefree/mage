@@ -56,7 +56,7 @@ public final class HeroOfTheDunes extends CardImpl {
 
         // Creatures you control with mana value 3 or less get +1/+0.
         this.addAbility(new SimpleStaticAbility(new BoostAllEffect(
-                1, 0, Duration.EndOfTurn, filter2, false
+                1, 0, Duration.WhileOnBattlefield, filter2, false
         )));
     }
 

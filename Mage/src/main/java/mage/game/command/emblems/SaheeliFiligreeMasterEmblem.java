@@ -1,6 +1,5 @@
 package mage.game.command.emblems;
 
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
@@ -18,15 +17,18 @@ public final class SaheeliFiligreeMasterEmblem extends Emblem {
     public SaheeliFiligreeMasterEmblem() {
         this.setName("Emblem Saheeli");
         this.setExpansionSetCodeForImage("BRO");
-        Ability ability = new SimpleStaticAbility(
+        this.getAbilities().add(new SimpleStaticAbility(
                 Zone.COMMAND,
                 new BoostControlledEffect(
                         1, 1, Duration.EndOfGame,
                         StaticFilters.FILTER_PERMANENT_ARTIFACT_CREATURE
                 ).setText("Artifact creatures you control get +1/+1")
-        );
-        ability.addEffect(new SpellsCostReductionControllerEffect(StaticFilters.FILTER_CARD_ARTIFACT, 1)
-                .setText("Artifact spells you cast cost {1} less to cast"));
-        this.getAbilities().add(ability);
+        ));
+        this.getAbilities().add(new SimpleStaticAbility(
+                Zone.COMMAND,
+                new SpellsCostReductionControllerEffect(
+                        StaticFilters.FILTER_CARD_ARTIFACT, 1
+                ).setText("Artifact spells you cast cost {1} less to cast")
+        ));
     }
 }

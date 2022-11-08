@@ -24,9 +24,9 @@ public final class HurkylsFinalMeditation extends CardImpl {
     public HurkylsFinalMeditation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{U}{U}{U}");
 
-        // As long as its not your turn, this spell costs {3} more to cast.
+        // As long as it's not your turn, this spell costs {3} more to cast.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new InfoEffect("as long as its not your turn, this spell costs {3} more to cast")
+                Zone.ALL, new InfoEffect("as long as it's not your turn, this spell costs {3} more to cast")
         ));
         this.getSpellAbility().setCostAdjuster(HurkylsFinalMeditationAdjuster.instance);
 

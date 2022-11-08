@@ -34,7 +34,7 @@ public final class GaeasCourser extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new AttacksTriggeredAbility(new DrawCardSourceControllerEffect(1)),
                 condition,
-                "Whenever {this} attacks, if there are there or more creature cards in your graveyard, draw a card."
+                "Whenever {this} attacks, if there are three or more creature cards in your graveyard, draw a card."
         ));
     }
 

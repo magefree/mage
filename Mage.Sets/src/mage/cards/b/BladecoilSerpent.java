@@ -57,6 +57,7 @@ public final class BladecoilSerpent extends CardImpl {
         ability.addEffect(new ConditionalOneShotEffect(new AddContinuousEffectToGame(
                 new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn)
         ), BladecoilSerpentCondition.instance, "and haste until end of turn"));
+        this.addAbility(ability);
     }
 
     private BladecoilSerpent(final BladecoilSerpent card) {

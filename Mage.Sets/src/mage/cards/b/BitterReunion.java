@@ -34,7 +34,7 @@ public final class BitterReunion extends CardImpl {
         // {1}, Sacrifice Bitter Reunion: Creatures you control gain haste until end of turn.
         Ability ability = new SimpleActivatedAbility(new GainAbilityControlledEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn,
-                StaticFilters.FILTER_CONTROLLED_CREATURES
+                StaticFilters.FILTER_PERMANENT_CREATURES
         ), new GenericManaCost(1));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

@@ -43,7 +43,7 @@ public final class BatteryBearer extends CardImpl {
         // Creatures you control have "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell."
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new ConditionalColorlessManaAbility(1, PowerstoneToken.makeBuilder()),
-                Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE
+                Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES
         )));
 
         // Whenever you cast an artifact spell with mana value 6 or greater, draw a card.

@@ -11,7 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterArtifactCreaturePermanent;
 import mage.target.common.TargetNonlandPermanent;
 
 import java.util.UUID;
@@ -21,8 +21,9 @@ import java.util.UUID;
  */
 public final class MachineOverMatter extends CardImpl {
 
-    private static final Condition condition
-            = new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_PERMANENT_ARTIFACT_CREATURE);
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
+            new FilterArtifactCreaturePermanent("you control an artifact creature")
+    );
     private static final Hint hint = new ConditionHint(condition, "You control an artifact creature");
 
     public MachineOverMatter(UUID ownerId, CardSetInfo setInfo) {

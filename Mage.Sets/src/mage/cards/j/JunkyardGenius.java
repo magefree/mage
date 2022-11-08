@@ -52,6 +52,7 @@ public final class JunkyardGenius extends CardImpl {
                 HasteAbility.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_PERMANENT_CREATURES, true
         ).setText("and haste"));
+        this.addAbility(ability);
     }
 
     private JunkyardGenius(final JunkyardGenius card) {

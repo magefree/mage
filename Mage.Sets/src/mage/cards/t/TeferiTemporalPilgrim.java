@@ -44,7 +44,7 @@ public final class TeferiTemporalPilgrim extends CardImpl {
         // -2: Create a 2/2 blue Spirit creature token with vigilance and "Whenever you draw a card, put a +1/+1 counter on this creature."
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new SpiritTeferiToken()), -2));
 
-        // -12: Target opponent chooses a permanent they control and returns it to its owner's had. Then they shuffle each nonland permanent they control into its owner's library.
+        // -12: Target opponent chooses a permanent they control and returns it to its owner's hand. Then they shuffle each nonland permanent they control into its owner's library.
         Ability ability = new LoyaltyAbility(new TeferiTemporalPilgrimEffect(), -12);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
@@ -64,7 +64,7 @@ class TeferiTemporalPilgrimEffect extends OneShotEffect {
 
     public TeferiTemporalPilgrimEffect() {
         super(Outcome.Removal);
-        this.staticText = "Target opponent chooses a permanent they control and returns it to its owner's had. Then they shuffle each nonland permanent they control into its owner's library.";
+        this.staticText = "Target opponent chooses a permanent they control and returns it to its owner's hand. Then they shuffle each nonland permanent they control into its owner's library.";
     }
 
     private TeferiTemporalPilgrimEffect(final TeferiTemporalPilgrimEffect effect) {

@@ -17,7 +17,7 @@ public final class MassProduction extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{W}");
 
         // Create four 1/1 colorless Soldier artifact creature tokens.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new SoldierArtifactToken()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new SoldierArtifactToken(), 4));
     }
 
     private MassProduction(final MassProduction card) {

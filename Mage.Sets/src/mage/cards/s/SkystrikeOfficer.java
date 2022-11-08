@@ -24,7 +24,7 @@ import java.util.UUID;
 public final class SkystrikeOfficer extends CardImpl {
 
     private static final FilterControlledPermanent filter
-            = new FilterControlledPermanent(SubType.SOLDIER, "untapped Soldiers");
+            = new FilterControlledPermanent(SubType.SOLDIER, "untapped Soldiers you control");
 
     static {
         filter.add(TappedPredicate.UNTAPPED);

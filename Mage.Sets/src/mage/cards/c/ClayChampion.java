@@ -39,12 +39,12 @@ public final class ClayChampion extends CardImpl {
                 null, null, "with three +1/+1 counters on it for each {G}{G} spent to cast it"
         ));
 
-        // When Clay Champion enters the battlefield, choose up to two other creatures you control. For each {W}{W} spent to cast Clay Champion, put a +1/+1 counter on each of them.
+        // When Clay Champion enters the battlefield, choose up to two other target creatures you control. For each {W}{W} spent to cast Clay Champion, put a +1/+1 counter on each of them.
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new AddCountersTargetEffect(
                         CounterType.P1P1.createInstance(0),
                         EachTwoManaSpentToCastValue.WHITE
-                ).setText("choose up to two other creatures you control. " +
+                ).setText("choose up to two other target creatures you control. " +
                         "For each {W}{W} spent to cast {this}, put a +1/+1 counter on each of them")
         );
         ability.addTarget(new TargetPermanent(

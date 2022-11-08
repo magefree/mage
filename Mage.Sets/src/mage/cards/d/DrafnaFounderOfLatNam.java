@@ -49,7 +49,7 @@ public final class DrafnaFounderOfLatNam extends CardImpl {
         this.addAbility(ability);
 
         // {3}, {T}: Copy target artifact spell you control.
-        ability = new SimpleActivatedAbility(new CopyTargetSpellEffect(), new GenericManaCost(3));
+        ability = new SimpleActivatedAbility(new CopyTargetSpellEffect(false, false, false), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);

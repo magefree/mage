@@ -22,7 +22,7 @@ import java.util.UUID;
 public final class LoranDiscipleOfHistory extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("another legendary creature");
+            = new FilterControlledCreaturePermanent("legendary creature");
 
     static {
         filter.add(SuperType.LEGENDARY.getPredicate());

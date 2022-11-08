@@ -46,7 +46,7 @@ public final class TawnosTheToymaker extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Whenever you cast a Beast or Bird creature spell, you may copy it, except it's an artifact in addition to its other types.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new TawnosTheToymakerEffect(), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new TawnosTheToymakerEffect(), filter, true));
     }
 
     private TawnosTheToymaker(final TawnosTheToymaker card) {

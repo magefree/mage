@@ -5,7 +5,7 @@ import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.continuous.BoostEquippedEffect;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -37,7 +37,7 @@ public final class Audacity extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature gets +2/+0 and has trample.
-        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(2, 2));
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(2, 0));
         ability.addEffect(new GainAbilityAttachedEffect(
                 TrampleAbility.getInstance(), AttachmentType.EQUIPMENT
         ).setText("and has trample"));

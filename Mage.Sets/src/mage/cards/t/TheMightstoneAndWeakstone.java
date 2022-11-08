@@ -45,7 +45,7 @@ public final class TheMightstoneAndWeakstone extends CardImpl {
 
         // (Melds with Urza, Lord Protector)
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new InfoEffect("<i>(Melds with Urza, Lord Protector)</i>")
+                Zone.ALL, new InfoEffect("<i>(Melds with Urza, Lord Protector.)</i>")
         ));
     }
 

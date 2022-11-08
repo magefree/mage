@@ -36,11 +36,11 @@ public final class WeakstonesSubjugation extends CardImpl {
 
         // When Weakstone's Subjugation's enters the battlefield, you may pay {3}. If you do, tap enchanted permanent.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(
-                new TapEnchantedEffect("creature"), new GenericManaCost(3)
+                new TapEnchantedEffect("permanent"), new GenericManaCost(3)
         )));
 
         // Enchanted permanent doesn't untap during its controller's untap step.
-        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepEnchantedEffect("permanent")));
     }
 
     private WeakstonesSubjugation(final WeakstonesSubjugation card) {
