@@ -9,15 +9,15 @@ import mage.constants.SetType;
  *
  * @author TheElk801
  */
-public class GameNightFreeForAll extends ExpansionSet {
+public class GameNightFreeforAll extends ExpansionSet {
 
-    private static final GameNightFreeForAll instance = new GameNightFreeForAll();
+    private static final GameNightFreeforAll instance = new GameNightFreeforAll();
 
-    public static GameNightFreeForAll getInstance() {
+    public static GameNightFreeforAll getInstance() {
         return instance;
     }
 
-    private GameNightFreeForAll() {
+    private GameNightFreeforAll() {
         super("Game Night: Free-for-All", "GN3", ExpansionSet.buildDate(2022, 10, 14), SetType.SUPPLEMENTAL);
         this.hasBoosters = false;
 
