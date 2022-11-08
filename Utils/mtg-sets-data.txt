@@ -161,7 +161,7 @@ Masters Edition|MED|
 Game Day|MGDC|
 Game Night|GNT|
 Game Night 2019|GN2|
-Game Night 2022|GN3|
+Game Night Free-for-All|GN3|
 Mirage|MIR|
 Launch Party|MLP|
 Modern Horizons|MH1|

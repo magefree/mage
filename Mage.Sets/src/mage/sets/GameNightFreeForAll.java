@@ -97,6 +97,7 @@ public class GameNightFreeForAll extends ExpansionSet {
         cards.add(new SetCardInfo("Llanowar Tribe", 102, Rarity.UNCOMMON, mage.cards.l.LlanowarTribe.class));
         cards.add(new SetCardInfo("Lord of the Accursed", 55, Rarity.UNCOMMON, mage.cards.l.LordOfTheAccursed.class));
         cards.add(new SetCardInfo("Maalfeld Twins", 56, Rarity.COMMON, mage.cards.m.MaalfeldTwins.class));
+        cards.add(new SetCardInfo("Maeve, Insidious Singer", 2, Rarity.MYTHIC, mage.cards.m.MaeveInsidiousSinger.class));
         cards.add(new SetCardInfo("Mana Geyser", 84, Rarity.COMMON, mage.cards.m.ManaGeyser.class));
         cards.add(new SetCardInfo("Moan of the Unhallowed", 57, Rarity.COMMON, mage.cards.m.MoanOfTheUnhallowed.class));
         cards.add(new SetCardInfo("Moonsilver Spear", 118, Rarity.RARE, mage.cards.m.MoonsilverSpear.class));
