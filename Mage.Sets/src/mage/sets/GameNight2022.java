@@ -22,6 +22,7 @@ public class GameNight2022 extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false; //temporary
 
+        cards.add(new SetCardInfo("Nogi, Draco-Zealot", 4, Rarity.MYTHIC, mage.cards.n.NogiDracoZealot.class));
         cards.add(new SetCardInfo("Zamriel, Seraph of Steel", 1, Rarity.MYTHIC, mage.cards.z.ZamrielSeraphOfSteel.class));
     }
 }
