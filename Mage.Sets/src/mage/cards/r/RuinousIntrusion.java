@@ -70,7 +70,7 @@ class RuinousIntrusionEffect extends OneShotEffect {
         if (mv < 1) {
             return true;
         }
-        Permanent creature = game.getPermanent(source.getTargets().get(0).getFirstTarget());
+        Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (creature != null) {
             creature.addCounters(CounterType.P1P1.createInstance(mv), source, game);
         }
