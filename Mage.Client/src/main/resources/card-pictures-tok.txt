@@ -1907,3 +1907,15 @@
 |Generate|TOK:DMC|Wurm|||Wurm44Token|
 |Generate|TOK:DMC|Zombie|||ZombieToken|
 |Generate|TOK:DMC|Zombie Knight|||ZombieKnightToken|
+
+# GN3
+|Generate|TOK:GN3|Angel|||AngelToken|
+|Generate|TOK:GN3|Bird Illusion|||BirdIllusionToken|
+|Generate|TOK:GN3|Demon|||DemonToken|
+|Generate|TOK:GN3|Dragon|||DragonEggDragonToken|
+|Generate|TOK:GN3|Drake|||DrakeToken|
+|Generate|TOK:GN3|Elf Warrior|||ElfWarriorToken|
+|Generate|TOK:GN3|Human Soldier|||HumanSoldierToken|
+|Generate|TOK:GN3|Soldier|||SoldierToken|
+|Generate|TOK:GN3|Treasure|||TreasureToken|
+|Generate|TOK:GN3|Zombie|||ZombieToken|

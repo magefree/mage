@@ -1786,6 +1786,18 @@ public class ScryfallImageSupportTokens {
             put ("DMC/Zombie", "https://api.scryfall.com/cards/tdmu/9/en?format=image");
             put ("DMC/Zombie Knight", "https://api.scryfall.com/cards/tdmc/5/en?format=image");
 
+            // GN3
+            put ("GN3/Angel", "https://api.scryfall.com/cards/tgn3/1/en?format=image");
+            put ("GN3/Bird Illusion", "https://api.scryfall.com/cards/tgn3/4/en?format=image");
+            put ("GN3/Demon", "https://api.scryfall.com/cards/tgn3/6/en?format=image");
+            put ("GN3/Dragon", "https://api.scryfall.com/cards/tgn3/8/en?format=image");
+            put ("GN3/Drake", "https://api.scryfall.com/cards/tgn3/5/en?format=image");
+            put ("GN3/Elf Warrior", "https://api.scryfall.com/cards/tgn3/9/en?format=image");
+            put ("GN3/Human Soldier", "https://api.scryfall.com/cards/tgn3/2/en?format=image");
+            put ("GN3/Soldier", "https://api.scryfall.com/cards/tgn3/3/en?format=image");
+            put ("GN3/Treasure", "https://api.scryfall.com/cards/tgn3/10/en?format=image");
+            put ("GN3/Zombie", "https://api.scryfall.com/cards/tgn3/7/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

@@ -1,7 +1,6 @@
 package mage.game.permanent.token;
 
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
@@ -24,7 +23,7 @@ public final class DrakeToken extends TokenImpl {
 
         this.addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("AKH", "C15", "C19", "M13", "C20", "ZNR", "C21", "UMA", "NCC", "DDS", "2X2");
+        availableImageSetCodes = Arrays.asList("AKH", "C15", "C19", "M13", "C20", "ZNR", "C21", "UMA", "NCC", "DDS", "2X2", "GN3");
     }
 
     public DrakeToken(final DrakeToken token) {
