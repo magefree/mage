@@ -163,6 +163,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Mass Production", 15, Rarity.UNCOMMON, mage.cards.m.MassProduction.class));
         cards.add(new SetCardInfo("Mechanized Warfare", 139, Rarity.RARE, mage.cards.m.MechanizedWarfare.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mechanized Warfare", 338, Rarity.RARE, mage.cards.m.MechanizedWarfare.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Meticulous Excavation", 16, Rarity.UNCOMMON, mage.cards.m.MeticulousExcavation.class));
         cards.add(new SetCardInfo("Mightstone's Animation", 58, Rarity.COMMON, mage.cards.m.MightstonesAnimation.class));
         cards.add(new SetCardInfo("Military Discipline", 17, Rarity.COMMON, mage.cards.m.MilitaryDiscipline.class));
         cards.add(new SetCardInfo("Mine Worker", 239, Rarity.COMMON, mage.cards.m.MineWorker.class));
