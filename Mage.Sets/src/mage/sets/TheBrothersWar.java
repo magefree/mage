@@ -290,6 +290,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Weakstone's Subjugation", 72, Rarity.COMMON, mage.cards.w.WeakstonesSubjugation.class));
         cards.add(new SetCardInfo("Whirling Strike", 157, Rarity.COMMON, mage.cards.w.WhirlingStrike.class));
         cards.add(new SetCardInfo("Wing Commando", 73, Rarity.COMMON, mage.cards.w.WingCommando.class));
+        cards.add(new SetCardInfo("Woodcaller Automaton", 292, Rarity.RARE, mage.cards.w.WoodcallerAutomaton.class));
         cards.add(new SetCardInfo("Yotian Dissident", 227, Rarity.UNCOMMON, mage.cards.y.YotianDissident.class));
         cards.add(new SetCardInfo("Yotian Frontliner", 42, Rarity.UNCOMMON, mage.cards.y.YotianFrontliner.class));
         cards.add(new SetCardInfo("Yotian Medic", 33, Rarity.COMMON, mage.cards.y.YotianMedic.class));
