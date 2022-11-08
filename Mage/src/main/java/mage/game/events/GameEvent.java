@@ -305,7 +305,7 @@ public class GameEvent implements Serializable {
         SHUFFLE_LIBRARY, LIBRARY_SHUFFLED,
         ENCHANT_PLAYER, ENCHANTED_PLAYER,
         CAN_TAKE_MULLIGAN,
-        SCRY, SCRIED,
+        SCRY, SCRIED, SCRY_TO_BOTTOM,
         SURVEIL, SURVEILED,
         FATESEALED,
         FLIP_COIN, COIN_FLIPPED,
