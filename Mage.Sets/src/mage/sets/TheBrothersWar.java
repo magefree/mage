@@ -208,6 +208,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Queen Kayla bin-Kroog", 218, Rarity.RARE, mage.cards.q.QueenKaylaBinKroog.class));
         cards.add(new SetCardInfo("Ravenous Gigamole", 113, Rarity.COMMON, mage.cards.r.RavenousGigamole.class));
         cards.add(new SetCardInfo("Raze to the Ground", 149, Rarity.COMMON, mage.cards.r.RazeToTheGround.class));
+        cards.add(new SetCardInfo("Razorlash Transmogrant", 122, Rarity.RARE, mage.cards.r.RazorlashTransmogrant.class));
         cards.add(new SetCardInfo("Reconstructed Thopter", 242, Rarity.UNCOMMON, mage.cards.r.ReconstructedThopter.class));
         cards.add(new SetCardInfo("Recruitment Officer", 23, Rarity.UNCOMMON, mage.cards.r.RecruitmentOfficer.class));
         cards.add(new SetCardInfo("Repair and Recharge", 24, Rarity.UNCOMMON, mage.cards.r.RepairAndRecharge.class));
