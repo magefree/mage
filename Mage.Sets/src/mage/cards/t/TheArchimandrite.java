@@ -41,7 +41,7 @@ public final class TheArchimandrite extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledPermanent();
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent();
     private static final FilterControlledPermanent filter3
-            = new FilterControlledPermanent("Advisors, Artificers, and/or Monks you control");
+            = new FilterControlledPermanent("untapped Advisors, Artificers, and/or Monks you control");
     private static final Predicate<MageObject> predicate = Predicates.or(
             SubType.ADVISOR.getPredicate(),
             SubType.ARTIFICER.getPredicate(),

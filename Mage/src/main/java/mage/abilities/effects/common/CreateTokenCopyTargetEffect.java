@@ -307,6 +307,11 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         if (mode.getTargets().isEmpty()) {
             throw new UnsupportedOperationException("Using default rule generation of target effect without having a target object");
         }
+        if (mode.getTargets().get(0).getMinNumberOfTargets() == 0) {
+            sb.append("up to ");
+            sb.append(CardUtil.numberToText(mode.getTargets().get(0).getMaxNumberOfTargets()));
+            sb.append(' ');
+        }
         String targetName = mode.getTargets().get(0).getTargetName();
         if (!targetName.startsWith("another target")) {
             sb.append("target ");
