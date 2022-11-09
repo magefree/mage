@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
@@ -10,34 +9,30 @@ import mage.game.permanent.Permanent;
 /**
  * @author JRHerlehy Created on 4/8/17.
  */
-public class BecomesBlackZombieAdditionEffect extends ContinuousEffectImpl {
+public class AddCreatureTypeAdditionEffect extends ContinuousEffectImpl {
 
-    private boolean giveBlackColor = true;
+    private final SubType subType;
+    private final boolean giveBlackColor;
 
-    public BecomesBlackZombieAdditionEffect() {
+    public AddCreatureTypeAdditionEffect(SubType subType, boolean giveBlackColor) {
         super(Duration.Custom, Outcome.Neutral);
-        this.giveBlackColor = true;
-        updateText();
-    }
-
-    public BecomesBlackZombieAdditionEffect(boolean giveBlackColor) {
-        this();
+        this.subType = subType;
         this.giveBlackColor = giveBlackColor;
         updateText();
     }
 
-
-    public BecomesBlackZombieAdditionEffect(final BecomesBlackZombieAdditionEffect effect) {
+    public AddCreatureTypeAdditionEffect(final AddCreatureTypeAdditionEffect effect) {
         super(effect);
+        this.subType = effect.subType;
         this.giveBlackColor = effect.giveBlackColor;
         updateText();
     }
 
     private void updateText() {
         if (this.giveBlackColor) {
-            this.staticText = "That creature is a black Zombie in addition to its other colors and types";
+            this.staticText = "That creature is a black " + subType + " in addition to its other colors and types";
         } else {
-            this.staticText = "That creature is a Zombie in addition to its other types";
+            this.staticText = "That creature is a " + subType + " in addition to its other types";
         }
     }
 
@@ -57,22 +52,21 @@ public class BecomesBlackZombieAdditionEffect extends ContinuousEffectImpl {
                 creature = game.getPermanentEntering(source.getTargets().getFirstTarget());
             }
         }
-        if (creature != null) {
-            switch (layer) {
-                case TypeChangingEffects_4:
-                    creature.addSubType(game, SubType.ZOMBIE);
-                    break;
-                case ColorChangingEffects_5:
-                    if (this.giveBlackColor) {
-                        creature.getColor(game).setBlack(true);
-                    }
-                    break;
-            }
-            return true;
-        } else {
+        if (creature == null) {
             this.used = true;
+            return false;
         }
-        return false;
+        switch (layer) {
+            case TypeChangingEffects_4:
+                creature.addSubType(game, subType);
+                break;
+            case ColorChangingEffects_5:
+                if (this.giveBlackColor) {
+                    creature.getColor(game).setBlack(true);
+                }
+                break;
+        }
+        return true;
     }
 
     @Override
@@ -81,7 +75,7 @@ public class BecomesBlackZombieAdditionEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public BecomesBlackZombieAdditionEffect copy() {
-        return new BecomesBlackZombieAdditionEffect(this);
+    public AddCreatureTypeAdditionEffect copy() {
+        return new AddCreatureTypeAdditionEffect(this);
     }
 }
