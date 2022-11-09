@@ -16,12 +16,12 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Controllable;
 import mage.game.Game;
+import mage.game.permanent.token.WhiteAstartesWarriorToken;
 
 import java.util.Map;
 import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import mage.game.permanent.token.WhiteAstartesWarriorToken;
 
 /**
  * @author TheElk801
@@ -82,7 +82,7 @@ enum BirthOfTheImperiumValue implements DynamicValue {
                 .map(Controllable::getControllerId)
                 .collect(Collectors.toMap(Function.identity(), x -> 1, Integer::sum));
         int yourCreatures = map.getOrDefault(sourceAbility.getControllerId(), 0);
-        return yourCreatures > 0 ? game
+        return yourCreatures > 0 ? 2 * game
                 .getOpponents(sourceAbility.getControllerId())
                 .stream().mapToInt(uuid -> map.getOrDefault(uuid, 0))
                 .filter(x -> x < yourCreatures)
@@ -101,6 +101,6 @@ enum BirthOfTheImperiumValue implements DynamicValue {
 
     @Override
     public String toString() {
-        return "1";
+        return "two";
     }
 }

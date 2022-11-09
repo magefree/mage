@@ -35,7 +35,7 @@ public final class AspiringChampion extends CardImpl {
         // Ruinous Ascension -- When Aspiring Champion deals combat damage to a player, sacrifice it. If you do, reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield, then shuffle the rest into your library. If that creature is a Demon, it deals damage equal to its power to each opponent.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
                 new AspiringChampionEffect(), false
-        ).withFlavorWord("Ruinous Ascension"));
+        ).setTriggerPhrase("When {this} deals combat damage to a player, ").withFlavorWord("Ruinous Ascension"));
     }
 
     private AspiringChampion(final AspiringChampion card) {
