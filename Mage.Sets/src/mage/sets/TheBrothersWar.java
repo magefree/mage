@@ -230,6 +230,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Skitterbeam Battalion", 165, Rarity.MYTHIC, mage.cards.s.SkitterbeamBattalion.class));
         cards.add(new SetCardInfo("Skyfisher Spider", 221, Rarity.UNCOMMON, mage.cards.s.SkyfisherSpider.class));
         cards.add(new SetCardInfo("Skystrike Officer", 62, Rarity.RARE, mage.cards.s.SkystrikeOfficer.class));
+        cards.add(new SetCardInfo("Slagstone Refinery", 243, Rarity.UNCOMMON, mage.cards.s.SlagstoneRefinery.class));
         cards.add(new SetCardInfo("Spectrum Sentinel", 244, Rarity.UNCOMMON, mage.cards.s.SpectrumSentinel.class));
         cards.add(new SetCardInfo("Splitting the Powerstone", 63, Rarity.UNCOMMON, mage.cards.s.SplittingThePowerstone.class));
         cards.add(new SetCardInfo("Spotter Thopter", 80, Rarity.UNCOMMON, mage.cards.s.SpotterThopter.class));
