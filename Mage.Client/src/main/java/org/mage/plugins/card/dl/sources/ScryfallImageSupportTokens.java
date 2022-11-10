@@ -1798,6 +1798,25 @@ public class ScryfallImageSupportTokens {
             put ("GN3/Treasure", "https://api.scryfall.com/cards/tgn3/10/en?format=image");
             put ("GN3/Zombie", "https://api.scryfall.com/cards/tgn3/7/en?format=image");
 
+            // 40K
+            put ("40K/Astartes Warrior/1", "https://api.scryfall.com/cards/t40k/12/en?format=image");
+            put ("40K/Astartes Warrior/2", "https://api.scryfall.com/cards/t40k/1/en?format=image");
+            put ("40K/Blue Horror", "https://api.scryfall.com/cards/t40k/20/en?format=image");
+            put ("40K/Cherubael", "https://api.scryfall.com/cards/t40k/13/en?format=image");
+            put ("40K/Clue", "https://api.scryfall.com/cards/t40k/21/en?format=image");
+            put ("40K/Insect", "https://api.scryfall.com/cards/t40k/22/en?format=image");
+            put ("40K/Necron Warrior", "https://api.scryfall.com/cards/t40k/14/en?format=image");
+            put ("40K/Plaguebearer of Nurgle", "https://api.scryfall.com/cards/t40k/15/en?format=image");
+            put ("40K/Robot", "https://api.scryfall.com/cards/t40k/23/en?format=image");
+            put ("40K/Soldier/1", "https://api.scryfall.com/cards/t40k/2/en?format=image");
+            put ("40K/Soldier/2", "https://api.scryfall.com/cards/t40k/3/en?format=image");
+            put ("40K/Soldier/3", "https://api.scryfall.com/cards/t40k/4/en?format=image");
+            put ("40K/Spawn", "https://api.scryfall.com/cards/t40k/16/en?format=image");
+            put ("40K/Tyranid/1", "https://api.scryfall.com/cards/t40k/17/en?format=image");
+            put ("40K/Tyranid/2", "https://api.scryfall.com/cards/t40k/18/en?format=image");
+            put ("40K/Tyranid Gargoyle", "https://api.scryfall.com/cards/t40k/9/en?format=image");
+            put ("40K/Tyranid Warrior", "https://api.scryfall.com/cards/t40k/19/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

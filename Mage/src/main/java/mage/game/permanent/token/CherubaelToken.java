@@ -20,6 +20,8 @@ public final class CherubaelToken extends TokenImpl {
         power = new MageInt(4);
         toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
+
+        this.setExpansionSetCodeForImage("40K");
     }
 
     public CherubaelToken(final CherubaelToken token) {

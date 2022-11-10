@@ -1919,3 +1919,22 @@
 |Generate|TOK:GN3|Soldier|||SoldierToken|
 |Generate|TOK:GN3|Treasure|||TreasureToken|
 |Generate|TOK:GN3|Zombie|||ZombieToken|
+
+# 40K
+|Generate|TOK:40K|Astartes Warrior|1||BlackAstartesWarriorToken|
+|Generate|TOK:40K|Astartes Warrior|2||WhiteAstartesWarriorToken|
+|Generate|TOK:40K|Blue Horror|||BlueHorrorToken|
+|Generate|TOK:40K|Cherubael|||CherubaelToken|
+|Generate|TOK:40K|Clue|||ClueArtifactToken|
+|Generate|TOK:40K|Insect|||InsectColorlessToken|
+|Generate|TOK:40K|Necron Warrior|||NecronWarriorToken|
+|Generate|TOK:40K|Plaguebearer of Nurgle|||PlaguebearerOfNurgleToken|
+|Generate|TOK:40K|Robot|||RobotToken|
+|Generate|TOK:40K|Soldier|1||SoldierToken|
+|Generate|TOK:40K|Soldier|2||SoldierToken|
+|Generate|TOK:40K|Soldier|3||SoldierToken|
+|Generate|TOK:40K|Spawn|||SpawnToken|
+|Generate|TOK:40K|Tyranid|1||TyranidToken|
+|Generate|TOK:40K|Tyranid|2||Tyranid55Token|
+|Generate|TOK:40K|Tyranid Gargoyle|||TyranidGargoyleToken|
+|Generate|TOK:40K|Tyranid Warrior|||TyranidWarriorToken|
