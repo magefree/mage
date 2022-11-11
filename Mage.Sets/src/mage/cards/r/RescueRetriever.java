@@ -11,11 +11,8 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
-import mage.filter.common.FilterArtifactCreaturePermanent;
 import mage.filter.common.FilterAttackingCreature;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 
 /**
@@ -24,12 +21,10 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
  */
 public final class RescueRetriever extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other Soldier creature you control");
-    private static final FilterAttackingCreature filterAttacking = new FilterAttackingCreature("attacking soldiers you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.SOLDIER, "other Soldier you control");
+    private static final FilterAttackingCreature filterAttacking = new FilterAttackingCreature("attacking Soldiers you control");
 
     static {
-        filter.add(SubType.SOLDIER.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(AnotherPredicate.instance);
         filterAttacking.add(SubType.SOLDIER.getPredicate());
         filterAttacking.add(TargetController.YOU.getControllerPredicate());
@@ -52,7 +47,7 @@ public final class RescueRetriever extends CardImpl {
                 new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), false));
 
         // Prevent all damage that would be dealt to other attacking Soldiers you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToAllEffect(Duration.WhileOnBattlefield, filterAttacking)));
+        this.addAbility(new SimpleStaticAbility(new PreventAllDamageToAllEffect(Duration.WhileOnBattlefield, filterAttacking)));
     }
 
     private RescueRetriever(final RescueRetriever card) {
