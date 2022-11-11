@@ -83,6 +83,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     private transient ManaCost currentUnpaidMana;
 
+    // For stopping infinite loops when trying to pay Phyrexian mana when the player can't spend life and no other sources are available
+    private transient boolean alreadyTryingToPayPhyrexian;
+
     public ComputerPlayer(String name, RangeOfInfluence range) {
         super(name, range);
         human = false;
@@ -136,7 +139,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         // controller hints:
         // - target.getTargetController(), this.getId() -- player that must makes choices (must be same with this.getId)
         // - target.getAbilityController(), abilityControllerId -- affected player/controller for all actions/filters
-        // - affected controler can be different from target controller (another player makes choices for controller)
+        // - affected controller can be different from target controller (another player makes choices for controller)
         // sometimes a target selection can be made from a player that does not control the ability
         UUID abilityControllerId = playerId;
         if (target.getTargetController() != null
@@ -661,6 +664,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
         // TODO: implemented findBestPlayerTargets
         // TODO: add findBest*Targets for all target types
+        // TODO: Much of this code needs to be re-written to move code into Target.possibleTargets
+        //       A) Having it here makes this function ridiculously long
+        //       B) Each time a new target type is added, people must remember to add it here
         if (target.getOriginalTarget() instanceof TargetPermanent) {
 
             FilterPermanent filter = null;
@@ -1039,6 +1045,15 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     target.addTarget(pick.getId(), source, game);
                     stackObjects.remove(0);
                 }
+            }
+            return target.isChosen();
+        }
+
+        if (target.getOriginalTarget() instanceof TargetActivatedOrTriggeredAbility
+                || target.getOriginalTarget() instanceof TargetActivatedOrTriggeredAbilityOrLegendarySpell) {
+            Iterator<UUID> iterator = target.possibleTargets(source.getControllerId(), source, game).iterator();
+            while (!target.isChosen() && iterator.hasNext()) {
+                target.addTarget(iterator.next(), source, game);
             }
             return target.isChosen();
         }
@@ -1521,7 +1536,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     if (!unpaid.getMana().includesMana(mana)) {
                         continue ManaAbility;
                     }
-                    colored += mana.countColored();
+                    colored = CardUtil.overflowInc(colored, mana.countColored());
                 }
                 if (colored > 1 && (cost instanceof ColoredManaCost)) {
                     for (Mana netMana : manaAbility.getNetMana(game)) {
@@ -1652,9 +1667,16 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
         }
 
+        if (alreadyTryingToPayPhyrexian) {
+            return false;
+        }
+
         // pay phyrexian life costs
         if (cost.isPhyrexian()) {
-            return cost.pay(ability, game, ability, playerId, false, null) || approvingObject != null;
+            alreadyTryingToPayPhyrexian = true;
+            boolean paidPhyrexian = cost.pay(ability, game, ability, playerId, false, null) || approvingObject != null;
+            alreadyTryingToPayPhyrexian = false;
+            return paidPhyrexian;
         }
 
         // pay special mana like convoke cost (tap for pay)
@@ -1751,7 +1773,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                             a2Max = netMana.count();
                         }
                     }
-                    return a2Max - a1Max;
+                    return CardUtil.overflowDec(a2Max, a1Max);
                 }
             });
         }
@@ -2200,7 +2222,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (!landSets.isEmpty()) {
             criteria.setCodes(landSets.toArray(new String[landSets.size()]));
         }
-        criteria.rarities(Rarity.LAND).name(landName);
+        criteria.rarities(Rarity.LAND).nameExact(landName);
         List<CardInfo> cards = CardRepository.instance.findCards(criteria);
 
         if (cards.isEmpty()) {
@@ -2502,7 +2524,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     protected List<ColoredManaSymbol> chooseDeckColorsIfPossible() {
         if (pickedCards.size() > 2) {
             // sort by score and color mana symbol count in descending order
-            Collections.sort(pickedCards, new Comparator<PickedCard>() {
+            pickedCards.sort(new Comparator<PickedCard>() {
                 @Override
                 public int compare(PickedCard o1, PickedCard o2) {
                     if (o1.score.equals(o2.score)) {
@@ -2592,8 +2614,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     protected List<Permanent> getOpponentBlockers(UUID opponentId, Game game) {
         FilterCreatureForCombatBlock blockFilter = new FilterCreatureForCombatBlock();
-        List<Permanent> blockers = game.getBattlefield().getAllActivePermanents(blockFilter, opponentId, game);
-        return blockers;
+        return game.getBattlefield().getAllActivePermanents(blockFilter, opponentId, game);
     }
 
     protected CombatSimulator simulateAttack(Attackers attackers, List<Permanent> blockers, UUID opponentId, Game game) {
@@ -2804,7 +2825,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         log.debug(sb.toString());
     }
 
-    private void playRemoval(List<UUID> creatures, Game game) {
+    private void playRemoval(Set<UUID> creatures, Game game) {
         for (UUID creatureId : creatures) {
             for (Card card : this.playableInstant) {
                 if (card.getSpellAbility().canActivate(playerId, game).canActivate()) {
@@ -2822,7 +2843,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
     }
 
-    private void playDamage(List<UUID> creatures, Game game) {
+    private void playDamage(Set<UUID> creatures, Game game) {
         for (UUID creatureId : creatures) {
             Permanent creature = game.getPermanent(creatureId);
             for (Card card : this.playableInstant) {

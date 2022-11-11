@@ -33,7 +33,7 @@ public final class VampiresBite extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(3, 0, Duration.EndOfTurn));
         ContinuousEffect effect = new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn);
-        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(effect, new LockedInCondition(KickedCondition.instance), "if this spell was kicked, that creature gains lifelink until end of turn"));
+        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(effect, new LockedInCondition(KickedCondition.ONCE), "if this spell was kicked, that creature gains lifelink until end of turn"));
     }
 
     private VampiresBite(final VampiresBite card) {

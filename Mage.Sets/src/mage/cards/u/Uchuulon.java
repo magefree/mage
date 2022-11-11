@@ -8,7 +8,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.CreateTokenCopySourceEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -51,7 +51,7 @@ public final class Uchuulon extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Uchuulon's power is equal to the number of Crabs, Oozes, and/or Horrors you control.
-        this.addAbility(new SimpleStaticAbility(new SetPowerSourceEffect(xValue, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(new SetBasePowerSourceEffect(xValue, Duration.EndOfGame)));
 
         // Horrific Symbiosis — At the beginning of your end step, exile up to one target creature card from an opponent's graveyard. If you, create a token that's a copy of Uchuulon.
         Ability ability = new BeginningOfEndStepTriggeredAbility(

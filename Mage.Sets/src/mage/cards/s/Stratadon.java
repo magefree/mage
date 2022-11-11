@@ -3,22 +3,14 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DomainValue;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.abilities.hint.common.DomainHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.util.CardUtil;
+import mage.constants.*;
 
 /**
  *
@@ -32,8 +24,11 @@ public final class Stratadon extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
-        // Domain - Stratadon costs {1} less to cast for each basic land type among lands you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new StratadonCostReductionEffect()).addHint(DomainHint.instance));
+        // Domain -- This spell costs {1} less to cast for each basic land type among lands you control.
+        this.addAbility(new SimpleStaticAbility(
+                Zone.ALL, new SpellCostReductionSourceEffect(DomainValue.REGULAR)
+                .setText("This spell costs {1} less to cast for each basic land type among lands you control")
+        ).setAbilityWord(AbilityWord.DOMAIN).addHint(DomainHint.instance));
         // Trample
         this.addAbility(TrampleAbility.getInstance());
     }
@@ -45,33 +40,5 @@ public final class Stratadon extends CardImpl {
     @Override
     public Stratadon copy() {
         return new Stratadon(this);
-    }
-}
-
-class StratadonCostReductionEffect extends CostModificationEffectImpl {
-
-    public StratadonCostReductionEffect() {
-        super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "<i>Domain</i> &mdash; This spell costs {1} less to cast for each basic land type among lands you control.";
-    }
-
-    protected StratadonCostReductionEffect(final StratadonCostReductionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        CardUtil.reduceCost(abilityToModify, DomainValue.REGULAR.calculate(game, source, this));
-        return true;
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return abilityToModify.getSourceId().equals(source.getSourceId());
-    }
-
-    @Override
-    public StratadonCostReductionEffect copy() {
-        return new StratadonCostReductionEffect(this);
     }
 }

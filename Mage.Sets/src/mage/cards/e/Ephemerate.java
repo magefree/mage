@@ -21,7 +21,7 @@ public final class Ephemerate extends CardImpl {
         // Exile target creature you control, then return it to the battlefield under its owner's control.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addEffect(new ExileTargetForSourceEffect());
-        this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false).setText(", then return it to the battlefield under its owner's control"));
+        this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false, "it").concatBy(", then"));
 
         // Rebound
         this.addAbility(new ReboundAbility());

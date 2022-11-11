@@ -12,9 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.GoatToken;
 import mage.target.common.TargetControlledPermanent;
 
@@ -24,13 +22,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class WoeStrider extends CardImpl {
-
-    private static final FilterControlledPermanent filter
-            = new FilterControlledCreaturePermanent("another creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public WoeStrider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
@@ -44,7 +35,7 @@ public final class WoeStrider extends CardImpl {
 
         // Sacrifice another creature: Scry 1.
         this.addAbility(new SimpleActivatedAbility(
-                new ScryEffect(1, false), new SacrificeTargetCost(new TargetControlledPermanent(filter))
+                new ScryEffect(1, false), new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE))
         ));
 
         // Escape—{3}{B}{B}, Exile four other cards from your graveyard.

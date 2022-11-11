@@ -23,7 +23,7 @@ public final class EldraziScionToken extends TokenImpl {
     static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("BFZ", "OGW", "DDR"));
+        tokenImageSets.addAll(Arrays.asList("BFZ", "OGW", "DDR", "2X2"));
     }
 
     public EldraziScionToken() {
@@ -33,7 +33,7 @@ public final class EldraziScionToken extends TokenImpl {
         subtype.add(SubType.SCION);
         power = new MageInt(1);
         toughness = new MageInt(1);
-        addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GenericMana(1), new SacrificeSourceCost()));
+        addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), new SacrificeSourceCost()));
         availableImageSetCodes = tokenImageSets;
     }
 

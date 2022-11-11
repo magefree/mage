@@ -28,7 +28,7 @@ public final class ShamblingRemains extends CardImpl {
         // Shambling Remains can't block.
         this.addAbility(new CantBlockAbility());
         // Unearth {B}{R}
-        this.addAbility(new UnearthAbility(new ManaCostsImpl("{B}{R}")));
+        this.addAbility(new UnearthAbility(new ManaCostsImpl<>("{B}{R}")));
     }
 
     private ShamblingRemains(final ShamblingRemains card) {

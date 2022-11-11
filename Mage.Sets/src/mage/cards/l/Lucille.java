@@ -19,6 +19,7 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
+import mage.abilities.costs.mana.GenericManaCost;
 
 /**
  * @author TheElk801
@@ -42,7 +43,7 @@ public final class Lucille extends CardImpl {
         this.addAbility(new AttacksAttachedTriggeredAbility(new LucilleEffect()));
 
         // Equip {4}
-        this.addAbility(new EquipAbility(4, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4), new TargetControlledCreaturePermanent(), false));
     }
 
     private Lucille(final Lucille card) {

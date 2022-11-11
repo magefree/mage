@@ -30,14 +30,14 @@ public final class TurnBurn extends SplitCard {
         Effect effect = new BecomesCreatureTargetEffect(new WeirdToken(), true, false, Duration.EndOfTurn);
         effect.setText("Until end of turn, target creature loses all abilities and becomes a red Weird with base power and toughness 0/1");
         getLeftHalfCard().getSpellAbility().addEffect(effect);
-        getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent().withChooseHint("becomes a Weird"));
 
         // Burn
         // Burn deals 2 damage to any target.
         effect = new DamageTargetEffect(2);
         effect.setText("Burn deals 2 damage to any target");
         getRightHalfCard().getSpellAbility().addEffect(effect);
-        getRightHalfCard().getSpellAbility().addTarget(new TargetAnyTarget());
+        getRightHalfCard().getSpellAbility().addTarget(new TargetAnyTarget().withChooseHint("2 damage"));
 
     }
 

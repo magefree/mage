@@ -35,7 +35,7 @@ public final class SlingbowTrap extends CardImpl {
         this.subtype.add(SubType.TRAP);
 
         // If a black creature with flying is attacking, you may pay {G} rather than pay Slingbow Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{G}"), SlingbowTrapCondition.instance));
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{G}"), SlingbowTrapCondition.instance));
 
         // Destroy target attacking creature with flying.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

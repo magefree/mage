@@ -29,9 +29,9 @@ public class JaceTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-3: You may cast target instant", "Magmatic Insight");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Magmatic Insight");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Magmatic Insight");
 
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, "Jace, Telepath Unbound", 1);
@@ -134,6 +134,7 @@ public class JaceTest extends CardTestPlayerBase {
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}:");
         setChoice(playerA, "Swamp");
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "-3:");
         addTarget(playerA, ancestralVision);
 
@@ -167,7 +168,7 @@ public class JaceTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-8: You get an emblem");
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Perimeter Captain");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Perimeter Captain", true);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Perimeter Captain");
 
         setStopAt(2, PhaseStep.END_TURN);

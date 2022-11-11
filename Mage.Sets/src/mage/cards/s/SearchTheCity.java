@@ -86,7 +86,7 @@ class SearchTheCityTriggeredAbility extends TriggeredAbilityImpl {
 
     public SearchTheCityTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SearchTheCityExiledCardToHandEffect(), true);
-
+        setTriggerPhrase("Whenever you play a card with the same name as one of the exiled cards, " );
     }
 
     public SearchTheCityTriggeredAbility(final SearchTheCityTriggeredAbility ability) {
@@ -100,37 +100,34 @@ class SearchTheCityTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId().equals(this.getControllerId())) {
-            String cardName = "";
-            if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-                Spell spell = game.getStack().getSpell(event.getTargetId());
-                if (spell != null) {
-                    cardName = spell.getName();
-                }
-            }
-            if (event.getType() == GameEvent.EventType.LAND_PLAYED) {
-                Card card = game.getCard(event.getTargetId());
-                if (card != null) {
-                    cardName = card.getName();
-                }
-            }
-            if (!cardName.isEmpty()) {
-                ExileZone searchTheCityExileZone = game.getExile().getExileZone(this.getSourceId());
-                FilterCard filter = new FilterCard();
-                filter.add(new NamePredicate(cardName));
-
-                if (searchTheCityExileZone.count(filter, game) > 0) {
-                    this.getEffects().get(0).setValue("cardName", cardName);
-                    return true;
-                }
+        if (!event.getPlayerId().equals(this.getControllerId())) {
+            return false;
+        }
+        String cardName = "";
+        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (spell != null) {
+                cardName = spell.getName();
             }
         }
-        return false;
-    }
+        if (event.getType() == GameEvent.EventType.LAND_PLAYED) {
+            Card card = game.getCard(event.getTargetId());
+            if (card != null) {
+                cardName = card.getName();
+            }
+        }
+        if (cardName.isEmpty()) {
+            return false;
+        }
+        ExileZone searchTheCityExileZone = game.getExile().getExileZone(this.getSourceId());
+        FilterCard filter = new FilterCard();
+        filter.add(new NamePredicate(cardName));
 
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you play a card with the same name as one of the exiled cards, " ;
+        if (searchTheCityExileZone.count(filter, game) == 0) {
+            return false;
+        }
+        this.getEffects().get(0).setValue("cardName", cardName);
+        return true;
     }
 
     @Override

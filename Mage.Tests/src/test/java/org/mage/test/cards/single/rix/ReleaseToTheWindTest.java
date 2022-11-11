@@ -32,7 +32,6 @@ public class ReleaseToTheWindTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, "Grizzly Bears", 1);
     }
@@ -69,7 +68,6 @@ public class ReleaseToTheWindTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Akoum Warrior", 1);
     }

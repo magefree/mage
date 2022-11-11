@@ -19,7 +19,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.filter.predicate.permanent.ControllerControlsIslandPredicate;
 import mage.game.Game;
-import mage.target.common.TargetAttackingOrBlockingCreature;
+import mage.target.TargetPermanent;
 
 /**
  *
@@ -49,7 +49,7 @@ public final class DwarvenSeaClan extends CardImpl {
                 new TapSourceCost(),
                 BeforeEndCombatCondition.getInstance()
         );
-        ability.addTarget(new TargetAttackingOrBlockingCreature(1, 1, filter, false));
+        ability.addTarget(new TargetPermanent(filter));
         addAbility(ability);
     }
 

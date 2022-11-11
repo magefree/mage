@@ -36,7 +36,7 @@ public final class CurseOfChaos extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.DrawCard));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Whenever a player attacks enchanted player with one or more creatures, that attacking player may discard a card. If the player does, they draw a card.
         this.addAbility(new CurseOfChaosTriggeredAbility());
@@ -56,6 +56,7 @@ class CurseOfChaosTriggeredAbility extends TriggeredAbilityImpl {
 
     public CurseOfChaosTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CurseOfChaosEffect(), false); // false because handled in effect
+        setTriggerPhrase("Whenever a player attacks enchanted player with one or more creatures, ");
     }
 
     public CurseOfChaosTriggeredAbility(final CurseOfChaosTriggeredAbility ability) {
@@ -79,11 +80,6 @@ class CurseOfChaosTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a player attacks enchanted player with one or more creatures, " ;
     }
 
     @Override
@@ -114,6 +110,7 @@ class CurseOfChaosEffect extends OneShotEffect {
         Player attacker = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (attacker != null) {
             if (!attacker.getHand().isEmpty() && attacker.chooseUse(outcome, "Discard a card and draw a card?", source, game)) {
+                // TODO: This should check that a card was actually discarded
                 attacker.discard(1, false, false, source, game);
                 attacker.drawCards(1, source, game);
             }

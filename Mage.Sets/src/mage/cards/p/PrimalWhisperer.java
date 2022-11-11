@@ -40,7 +40,7 @@ public final class PrimalWhisperer extends CardImpl {
         PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(filter, 2);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield)));
         // Morph {3}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{G}")));
     }
 
     private PrimalWhisperer(final PrimalWhisperer card) {

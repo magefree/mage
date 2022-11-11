@@ -19,7 +19,6 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -39,7 +38,7 @@ public final class LivaanCultistOfTiamat extends CardImpl {
 
         // Whenever you cast a noncreature spell, target creature gets +X/+0 until end of turn, where X is that spell's mana value.
         Ability ability = new SpellCastControllerTriggeredAbility(new BoostTargetEffect(
-                LivaanCultistOfTiamatValue.instance, StaticValue.get(0), Duration.EndOfTurn, true
+                LivaanCultistOfTiamatValue.instance, StaticValue.get(0), Duration.EndOfTurn
         ), StaticFilters.FILTER_SPELL_A_NON_CREATURE, false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -63,8 +62,7 @@ enum LivaanCultistOfTiamatValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return Optional.of(effect.getValue("spellCast"))
-                .filter(Objects::nonNull)
+        return Optional.ofNullable(effect.getValue("spellCast"))
                 .map(Spell.class::cast)
                 .map(Spell::getManaValue)
                 .orElse(0);

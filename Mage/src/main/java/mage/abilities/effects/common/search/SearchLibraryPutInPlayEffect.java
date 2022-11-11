@@ -8,7 +8,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
-import mage.util.CardUtil;
 
 import java.util.List;
 import java.util.UUID;
@@ -20,6 +19,7 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect {
 
     protected boolean tapped;
     protected boolean forceShuffle;
+    protected boolean optional;
 
     public SearchLibraryPutInPlayEffect(TargetCardInLibrary target) {
         this(target, false, true, Outcome.PutCardInPlay);
@@ -38,16 +38,28 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect {
     }
 
     public SearchLibraryPutInPlayEffect(TargetCardInLibrary target, boolean tapped, boolean forceShuffle, Outcome outcome) {
+        this(target, tapped, forceShuffle, false, outcome);
+    }
+
+    public SearchLibraryPutInPlayEffect(TargetCardInLibrary target, boolean tapped, boolean forceShuffle, boolean optional, Outcome outcome) {
         super(target, outcome);
         this.tapped = tapped;
         this.forceShuffle = forceShuffle;
-        setText();
+        this.optional = optional;
+        staticText = (optional ? "you may " : "")
+                + "search your library for "
+                + target.getDescription()
+                + (forceShuffle ? ", " : " and ")
+                + (target.getMaxNumberOfTargets() > 1 ? "put them onto the battlefield" : "put it onto the battlefield")
+                + (tapped ? " tapped" : "")
+                + (forceShuffle ? ", then shuffle" : ". If you do, shuffle");
     }
 
     public SearchLibraryPutInPlayEffect(final SearchLibraryPutInPlayEffect effect) {
         super(effect);
         this.tapped = effect.tapped;
         this.forceShuffle = effect.forceShuffle;
+        this.optional = effect.optional;
     }
 
     @Override
@@ -61,6 +73,9 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect {
         if (player == null) {
             return false;
         }
+        if (optional && !player.chooseUse(outcome, "Search your library for " + target.getDescription() + '?', source, game)) {
+            return true;
+        }
         if (player.searchLibrary(target, source, game)) {
             if (!target.getTargets().isEmpty()) {
                 player.moveCards(new CardsImpl(target.getTargets()).getCards(game),
@@ -72,39 +87,10 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect {
         if (forceShuffle) {
             player.shuffleLibrary(source, game);
         }
-        return false;
-    }
-
-    private void setText() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("search your library for ");
-        if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
-            if (target.getMaxNumberOfTargets() == Integer.MAX_VALUE) {
-                sb.append("any number of ");
-            } else {
-                sb.append("up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
-            }
-            sb.append(target.getTargetName());
-            sb.append(forceShuffle ? ", " : " and ");
-            sb.append("put them onto the battlefield");
-        } else {
-            sb.append(CardUtil.addArticle(target.getTargetName()));
-            sb.append(forceShuffle ? ", " : " and ");
-            sb.append("put it onto the battlefield");
-        }
-        if (tapped) {
-            sb.append(" tapped");
-        }
-        if (forceShuffle) {
-            sb.append(", then shuffle");
-        } else {
-            sb.append(". If you do, shuffle");
-        }
-        staticText = sb.toString();
+        return true;
     }
 
     public List<UUID> getTargets() {
         return target.getTargets();
     }
-
 }

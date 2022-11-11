@@ -67,6 +67,7 @@ class VoltaicVisionaryTriggeredAbility extends TriggeredAbilityImpl {
     VoltaicVisionaryTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TransformSourceEffect());
         this.addWatcher(new VoltaicVisionaryWatcher());
+        setTriggerPhrase("When you play a card exiled with {this}, ");
     }
 
     private VoltaicVisionaryTriggeredAbility(final VoltaicVisionaryTriggeredAbility ability) {
@@ -94,11 +95,6 @@ class VoltaicVisionaryTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         return VoltaicVisionaryWatcher.checkCard(card, this, game);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When you play a card exiled with {this}, ";
     }
 }
 

@@ -37,7 +37,7 @@ public final class VastwoodSurge extends CardImpl {
                 new AddCountersAllEffect(
                         CounterType.P1P1.createInstance(2),
                         StaticFilters.FILTER_CONTROLLED_CREATURES
-                ), KickedCondition.instance, "If this spell was kicked, " +
+                ), KickedCondition.ONCE, "If this spell was kicked, " +
                 "put two +1/+1 counters on each creature you control."
         ));
     }

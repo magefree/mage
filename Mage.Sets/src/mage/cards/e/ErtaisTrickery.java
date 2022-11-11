@@ -55,7 +55,7 @@ class ErtaisTrickeryEffect extends CounterTargetEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Spell targetSpell = game.getStack().getSpell(source.getFirstTarget());
-        if(targetSpell != null && KickedCondition.instance.apply(game, targetSpell.getSpellAbility())) {
+        if(targetSpell != null && KickedCondition.ONCE.apply(game, targetSpell.getSpellAbility())) {
             return super.apply(game, source);
         }
         return false;

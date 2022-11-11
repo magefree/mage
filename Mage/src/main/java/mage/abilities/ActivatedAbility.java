@@ -1,6 +1,7 @@
 package mage.abilities;
 
 import mage.ApprovingObject;
+import mage.abilities.condition.Condition;
 import mage.abilities.mana.ManaOptions;
 import mage.constants.TargetController;
 import mage.constants.TimingRule;
@@ -83,4 +84,6 @@ public interface ActivatedAbility extends Ability {
     int getMaxActivationsPerTurn(Game game);
 
     public void setTiming(TimingRule timing);
+
+    public ActivatedAbility setCondition(Condition condition);
 }

@@ -46,6 +46,7 @@ class InvokePrejudiceTriggeredAbility extends TriggeredAbilityImpl {
 
     public InvokePrejudiceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new InvokePrejudiceEffect(), false);
+        setTriggerPhrase("Whenever an opponent casts a creature spell that doesn't share a color with a creature you control, ");
     }
 
     public InvokePrejudiceTriggeredAbility(final InvokePrejudiceTriggeredAbility ability) {
@@ -84,11 +85,6 @@ class InvokePrejudiceTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever an opponent casts a creature spell that doesn't share a color with a creature you control, " ;
     }
 }
 

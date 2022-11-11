@@ -35,7 +35,7 @@ public class FiendHunterTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Primeval Titan");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fiend Hunter");
-        addTarget(playerA, "Primeval Titan");
+        // Target autochosen since only one option
 
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
@@ -59,11 +59,11 @@ public class FiendHunterTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fiend Hunter");
-        addTarget(playerA, "Primeval Titan");
+        // addTarget(playerA, "Primeval Titan"); Autochosen, only option
 
         // When Restoration Angel enters the battlefield, you may exile target non-Angel creature you control, then return that card to the battlefield under your control
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Restoration Angel");
-        addTarget(playerA, "Fiend Hunter");
+        // addTarget(playerA, "Fiend Hunter"); Autochosen, only option
 
         setStopAt(4, PhaseStep.PRECOMBAT_MAIN);
         execute();

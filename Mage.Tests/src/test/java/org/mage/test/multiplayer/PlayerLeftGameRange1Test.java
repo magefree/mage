@@ -26,10 +26,10 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
         // Start Life = 2
         Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ONE, MulliganType.GAME_DEFAULT.getMulligan(0), 2);
         // Player order: A -> D -> C -> B
-        playerA = createPlayer(game, playerA, "PlayerA");
-        playerB = createPlayer(game, playerB, "PlayerB");
-        playerC = createPlayer(game, playerC, "PlayerC");
-        playerD = createPlayer(game, playerD, "PlayerD");
+        playerA = createPlayer(game, "PlayerA");
+        playerB = createPlayer(game, "PlayerB");
+        playerC = createPlayer(game, "PlayerC");
+        playerD = createPlayer(game, "PlayerD");
         return game;
     }
 
@@ -311,8 +311,6 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pithing Needle");
         setChoice(playerA, "Proteus Staff");
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerD, "{2}{U}", "Silvercoat Lion"); // not allowed
-
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerC, "{2}{U}", "Eager Cadet"); // allowed because Needle out of range
 
         // Concede the game
@@ -321,37 +319,17 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
         activateAbility(4, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}{U}", "Wall of Air"); // allowed because Needle lost game
 
         setStopAt(4, PhaseStep.POSTCOMBAT_MAIN);
-
-        try {
-            execute();
-            assertAllCommandsUsed();
-            Assert.fail("must throw exception on execute");
-        } catch (Throwable e) {
-            if (!e.getMessage().contains("Player PlayerD must have 0 actions but found 1")) {
-                Assert.fail("must throw error PlayerD canot acting, but got:\n" + e.getMessage());
-            }
-        }
+        execute();
 
         assertLife(playerA, 2);
         Assert.assertFalse("Player A is no longer in the game", playerA.isInGame());
 
         assertPermanentCount(playerA, 0);
 
-        Permanent staffPlayerD = getPermanent("Proteus Staff", playerD);
-        Assert.assertFalse("Staff of player D could not be used", staffPlayerD.isTapped());
-
         assertPermanentCount(playerD, "Eager Cadet", 0);
         assertPermanentCount(playerD, "Storm Crow", 1);
-
-        Permanent staffPlayerC = getPermanent("Proteus Staff", playerC);
-        Assert.assertTrue("Staff of player C could be used", staffPlayerC.isTapped());
-
         assertPermanentCount(playerC, "Wall of Air", 0);
         assertPermanentCount(playerC, "Wind Drake", 1);
-
-        Permanent staffPlayerB = getPermanent("Proteus Staff", playerB);
-        Assert.assertTrue("Staff of player B could be used", staffPlayerB.isTapped());
-
     }
 
     /**
@@ -386,8 +364,6 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-
-        assertAllCommandsUsed();
 
         assertLife(playerA, 2);
 

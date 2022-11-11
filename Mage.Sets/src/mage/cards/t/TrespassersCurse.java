@@ -36,7 +36,7 @@ public final class TrespassersCurse extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Whenever a creature enters the battlefield under enchanted player's control, that player loses 1 life and you gain 1 life.
@@ -57,6 +57,7 @@ class TrespassersCurseTriggeredAbility extends TriggeredAbilityImpl {
 
     public TrespassersCurseTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TrespassersCurseEffect(), false); // false because handled in effect
+        setTriggerPhrase("Whenever a creature enters the battlefield under enchanted player's control, ");
     }
 
     public TrespassersCurseTriggeredAbility(final TrespassersCurseTriggeredAbility ability) {
@@ -84,15 +85,9 @@ class TrespassersCurseTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature enters the battlefield under enchanted player's control, ";
-    }
-
-    @Override
     public TrespassersCurseTriggeredAbility copy() {
         return new TrespassersCurseTriggeredAbility(this);
     }
-
 }
 
 class TrespassersCurseEffect extends OneShotEffect {

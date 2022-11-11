@@ -54,7 +54,7 @@ public final class SethronHurloonGeneral extends CardImpl {
         // {2}{B/R}: Minotaurs you control get +1/+0 and gain menace and haste until end of turn.
         Ability ability = new SimpleActivatedAbility(new BoostControlledEffect(
                 1, 0, Duration.EndOfTurn, filter2
-        ).setText("Minotaurs you control get +1/+0"), new ManaCostsImpl("{2}{B/R}"));
+        ).setText("Minotaurs you control get +1/+0"), new ManaCostsImpl<>("{2}{B/R}"));
         ability.addEffect(new GainAbilityControlledEffect(
                 new MenaceAbility(), Duration.EndOfTurn, filter3
         ).setText("and gain menace"));

@@ -25,7 +25,6 @@ import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -45,7 +44,7 @@ public final class MockingDoppelganger extends CardImpl {
         @Override
         public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
             blueprint.getAbilities().add(new SimpleStaticAbility(new GoadAllEffect(
-                    Duration.WhileOnBattlefield, filter
+                    Duration.WhileOnBattlefield, filter, false
             ).setText("other creatures with the same name as this creature are goaded")));
             return true;
         }
@@ -87,8 +86,7 @@ enum MockingDoppelgangerPredicate implements ObjectSourcePlayerPredicate<Permane
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         return Optional
-                .of(input.getSource().getSourcePermanentIfItStillExists(game))
-                .filter(Objects::nonNull)
+                .ofNullable(input.getSource().getSourcePermanentIfItStillExists(game))
                 .map(permanent -> CardUtil.haveSameNames(permanent, input.getObject()))
                 .orElse(false);
     }

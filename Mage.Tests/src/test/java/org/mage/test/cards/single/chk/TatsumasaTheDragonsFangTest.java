@@ -26,7 +26,6 @@ public class TatsumasaTheDragonsFangTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, tatsumasa, 1);
         assertGraveyardCount(playerA, murder, 1);

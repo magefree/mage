@@ -10,7 +10,7 @@ import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.hint.common.CreaturesYouControlHint;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -53,7 +53,7 @@ public final class VeteranWarleader extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Veteran Warleader's power and toughness are each equal to the number of creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(
                 CreaturesYouControlCount.instance, Duration.EndOfGame))
                 .addHint(CreaturesYouControlHint.instance));
 

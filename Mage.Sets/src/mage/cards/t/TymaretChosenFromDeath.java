@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBaseToughnessSourceEffect;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.StaticFilters;
@@ -35,13 +35,13 @@ public final class TymaretChosenFromDeath extends CardImpl {
 
         // Tymaret's toughness is equal to your devotion to black.
         this.addAbility(new SimpleStaticAbility(
-                        Zone.ALL, new SetToughnessSourceEffect(DevotionCount.B, Duration.EndOfGame)
+                        Zone.ALL, new SetBaseToughnessSourceEffect(DevotionCount.B, Duration.EndOfGame)
                         .setText("{this}'s toughness is equal to your devotion to black")
                 ).addHint(DevotionCount.B.getHint())
         );
 
         // {1}{B}: Exile up to two target cards from graveyards. You gain 1 life for each creature card exiled this way.
-        Ability ability = new SimpleActivatedAbility(new TymaretChosenFromDeathEffect(), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(new TymaretChosenFromDeathEffect(), new ManaCostsImpl<>("{1}{B}"));
         ability.addTarget(new TargetCardInGraveyard(0, 2, StaticFilters.FILTER_CARD));
         this.addAbility(ability);
     }

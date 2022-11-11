@@ -48,20 +48,13 @@ public final class GrandMoffTarkin extends CardImpl {
 
 class GrandMoffTarkinTriggeredAbility extends TriggeredAbilityImpl {
 
-    protected String text;
-
     public GrandMoffTarkinTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
-    }
-
-    public GrandMoffTarkinTriggeredAbility(Effect effect, boolean optional, String text) {
-        super(Zone.BATTLEFIELD, effect, optional);
-        this.text = text;
+        setTriggerPhrase("At the beginning of each opponent's upkeep, ");
     }
 
     public GrandMoffTarkinTriggeredAbility(final GrandMoffTarkinTriggeredAbility ability) {
         super(ability);
-        this.text = ability.text;
     }
 
     @Override
@@ -83,11 +76,6 @@ class GrandMoffTarkinTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "At the beginning of each opponent's upkeep, ";
     }
 
     @Override

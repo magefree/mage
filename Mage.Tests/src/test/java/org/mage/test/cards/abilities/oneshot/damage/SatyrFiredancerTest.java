@@ -26,7 +26,7 @@ public class SatyrFiredancerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        addTarget(playerA, "Silvercoat Lion");
+        // Silvercoat Lion autochosen since only option
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -82,7 +82,7 @@ public class SatyrFiredancerTest extends CardTestPlayerBase {
 
     @Test
     public void testPriceOfProgressMultiplayer() throws GameException {
-        playerC = createPlayer(currentGame, playerC, "PlayerC");
+        playerC = createPlayer(currentGame, "PlayerC");
         addCard(Zone.BATTLEFIELD, playerA, "Satyr Firedancer", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
         // Price of Progress deals damage to each player equal to twice the number of nonbasic lands that player controls.

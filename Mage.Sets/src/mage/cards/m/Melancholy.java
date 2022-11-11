@@ -34,7 +34,7 @@ public final class Melancholy extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
         // When Melancholy enters the battlefield, tap enchanted creature.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect()));
         // Enchanted creature doesn't untap during its controller's untap step.

@@ -28,7 +28,7 @@ public final class PhobianPhantasm extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(FearAbility.getInstance());
         // Cumulative upkeep {B}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{B}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{B}")));
     }
 
     private PhobianPhantasm(final PhobianPhantasm card) {

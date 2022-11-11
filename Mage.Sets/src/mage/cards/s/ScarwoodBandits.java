@@ -50,7 +50,7 @@ public final class ScarwoodBandits extends CardImpl {
                                 new SourceRemainsInZoneCondition(Zone.BATTLEFIELD),
                                 "gain control of target artifact for as long as {this} remains on the battlefield"),
                         new GenericManaCost(2)),
-                new ManaCostsImpl("{2}{G}"));
+                new ManaCostsImpl<>("{2}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
@@ -148,9 +148,6 @@ class DoUnlessAnyOpponentPaysEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        if (!staticText.isEmpty()) {
-            return staticText;
-        }
         String effectsText = executingEffects.getText(mode);
         return effectsText.substring(0, effectsText.length() - 1) + " unless any opponent pays " + cost.getText();
     }

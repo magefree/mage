@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -30,8 +29,8 @@ public final class ElderOfLaurels extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {3}{G}: Target creature gets +X/+X until end of turn, where X is the number of creatures you control.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BoostTargetEffect(CreaturesYouControlCount.instance, CreaturesYouControlCount.instance, Duration.EndOfTurn, true),
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
+                new BoostTargetEffect(CreaturesYouControlCount.instance, CreaturesYouControlCount.instance, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{3}{G}"));
         ability.addTarget(new TargetCreaturePermanent());
         ability.addHint(CreaturesYouControlHint.instance);

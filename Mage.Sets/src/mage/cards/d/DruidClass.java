@@ -3,14 +3,14 @@ package mage.cards.d;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesClassLevelTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.LandfallAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.LandsYouControlCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.continuous.GainClassAbilitySourceEffect;
 import mage.abilities.effects.common.continuous.PlayAdditionalLandsControllerEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.ClassLevelAbility;
 import mage.abilities.keyword.ClassReminderAbility;
 import mage.abilities.keyword.HasteAbility;
@@ -40,9 +40,7 @@ public final class DruidClass extends CardImpl {
         this.addAbility(new ClassReminderAbility());
 
         // Whenever a land enters the battlefield under your control, you gain 1 life.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                new GainLifeEffect(1), StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT
-        ));
+        this.addAbility(new LandfallAbility(new GainLifeEffect(1)));
 
         // {2}{G}: Level 2
         this.addAbility(new ClassLevelAbility(2, "{2}{G}"));
@@ -82,7 +80,7 @@ class DruidClassToken extends TokenImpl {
         this.toughness = new MageInt(0);
 
         this.addAbility(HasteAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(new SetPowerToughnessSourceEffect(
+        this.addAbility(new SimpleStaticAbility(new SetBasePowerToughnessSourceEffect(
                 LandsYouControlCount.instance, Duration.EndOfGame, SubLayer.SetPT_7b
         ).setText("this creature's power and toughness are each equal to the number of lands you control")));
     }

@@ -37,7 +37,7 @@ public final class Plaxmanta extends CardImpl {
                 new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.EndOfTurn, FILTER_PERMANENT_CREATURES)));
 
         // When Plaxmanta enters the battlefield, sacrifice it unless {G} was spent to cast it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.G)), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(ManaWasSpentCondition.GREEN), false));
     }
 
     private Plaxmanta(final Plaxmanta card) {

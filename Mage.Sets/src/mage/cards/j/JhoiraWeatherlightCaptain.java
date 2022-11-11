@@ -1,6 +1,5 @@
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -9,9 +8,14 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.filter.FilterSpell;
 import mage.filter.common.FilterHistoricSpell;
 
+import java.util.UUID;
+
 public final class JhoiraWeatherlightCaptain extends CardImpl {
+
+    private static final FilterSpell filter = new FilterHistoricSpell();
 
     public JhoiraWeatherlightCaptain(UUID ownerId, CardSetInfo cardSetInfo) {
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{R}");
@@ -21,9 +25,11 @@ public final class JhoiraWeatherlightCaptain extends CardImpl {
         toughness = new MageInt(3);
 
         // Whenever you cast a historic spell, draw a card. <i>(Artifacts, legendaries, and Sagas are historic.)</i>
-        addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1)
-                .setText("draw a card. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"),
-                 new FilterHistoricSpell(), false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                new DrawCardSourceControllerEffect(1)
+                        .setText("draw a card. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"),
+                filter, false
+        ));
 
     }
 

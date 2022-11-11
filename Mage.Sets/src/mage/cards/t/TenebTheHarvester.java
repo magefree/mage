@@ -36,7 +36,7 @@ public final class TenebTheHarvester extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Teneb, the Harvester deals combat damage to a player, you may pay {2}{B}. If you do, put target creature card from a graveyard onto the battlefield under your control.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
-                new DoIfCostPaid(new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl("{2}{B}")), false);
+                new DoIfCostPaid(new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl<>("{2}{B}")), false);
         Target target = new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard"));
         ability.addTarget(target);
         this.addAbility(ability);

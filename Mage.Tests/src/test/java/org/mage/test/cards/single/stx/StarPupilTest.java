@@ -27,7 +27,6 @@ public class StarPupilTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(lion, CounterType.P1P1, 1);
     }

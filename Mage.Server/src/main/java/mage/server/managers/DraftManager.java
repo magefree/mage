@@ -19,6 +19,8 @@ public interface DraftManager {
     DraftPickView sendCardPick(UUID draftId, UUID userId, UUID cardId, Set<UUID> hiddenCards);
 
     void sendCardMark(UUID draftId, UUID userId, UUID cardId);
+    
+    void setBoosterLoaded(UUID draftId, UUID userId);
 
     void removeSession(UUID userId);
 

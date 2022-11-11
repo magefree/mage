@@ -26,15 +26,14 @@ public class TargetRestrictionsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Sejiri Merfolk");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Take into Custody", "Sejiri Merfolk");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dream Leash", "Sejiri Merfolk");
 
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
-        
-        assertAllCommandsUsed();
-        
+
         assertPermanentCount(playerA, "Dream Leash", 1);
         assertPermanentCount(playerA, "Sejiri Merfolk", 1);
         
@@ -60,18 +59,15 @@ public class TargetRestrictionsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Sejiri Merfolk");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Take into Custody", "Sejiri Merfolk");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dream Leash", "Sejiri Merfolk");
-        
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Ornamental Courage", "Sejiri Merfolk", "Dream Leash");
 
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
-        
-        assertAllCommandsUsed();
-        
-        
+
         assertGraveyardCount(playerA, "Take into Custody", 1);
         assertGraveyardCount(playerB, "Ornamental Courage", 1);
         assertPermanentCount(playerA, "Dream Leash", 1);

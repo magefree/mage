@@ -2,11 +2,10 @@ package mage.cards.s;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.keyword.ReplicateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -26,8 +25,8 @@ public final class StreamOfThought extends CardImpl {
     public StreamOfThought(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}");
 
-        // Target player puts the top four cards of their library into their graveyard. You shuffle up to four cards from your graveyard into your library.
-        this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(4));
+        // Target player mills four cards. You shuffle up to four cards from your graveyard into your library.
+        this.getSpellAbility().addEffect(new MillCardsTargetEffect(4));
         this.getSpellAbility().addEffect(new StreamOfThoughtEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
 
@@ -72,9 +71,7 @@ class StreamOfThoughtEffect extends OneShotEffect {
         if (!player.choose(outcome, player.getGraveyard(), target, game)) {
             return false;
         }
-        Cards cards = new CardsImpl(target.getTargets());
-        player.putCardsOnTopOfLibrary(cards, game, source, false);
-        player.shuffleLibrary(source, game);
+        player.shuffleCardsToLibrary(new CardsImpl(target.getTargets()), game, source);
         return true;
     }
 }

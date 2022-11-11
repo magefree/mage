@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.game.Game;
 import mage.watchers.common.BlockingOrBlockedWatcher;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -58,8 +57,7 @@ enum GuildswornProwlerCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         return Optional
-                .of(source.getSourcePermanentOrLKI(game))
-                .filter(Objects::nonNull)
+                .ofNullable(source.getSourcePermanentOrLKI(game))
                 .map(permanent -> !BlockingOrBlockedWatcher.check(permanent, game))
                 .orElse(false);
     }

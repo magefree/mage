@@ -24,6 +24,7 @@ import mage.game.events.DamagedPermanentBatchEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
@@ -33,7 +34,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
 public final class Fiendlash extends CardImpl {
 
     public Fiendlash(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[] { CardType.ARTIFACT }, "{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{R}");
 
         this.subtype.add(SubType.EQUIPMENT);
 
@@ -48,7 +49,7 @@ public final class Fiendlash extends CardImpl {
         this.addAbility(new FiendlashTriggeredAbility());
 
         // Equip {2}{R}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{2}{R}"), false));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{2}{R}"), new TargetControlledCreaturePermanent(), false));
     }
 
     private Fiendlash(final Fiendlash card) {
@@ -91,7 +92,7 @@ class FiendlashTriggeredAbility extends TriggeredAbilityImpl {
 
         UUID attachedCreature = equipment.getAttachedTo();
         if (attachedCreature == null) {
-                return false;
+            return false;
         }
 
         game.getState().setValue("Fiendlash" + equipment.getId(), attachedCreature);

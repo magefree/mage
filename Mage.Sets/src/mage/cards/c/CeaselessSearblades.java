@@ -31,7 +31,6 @@ public final class CeaselessSearblades extends CardImpl {
 
         // Whenever you activate an ability of an Elemental, Ceaseless Searblades gets +1/+0 until end of turn.
         this.addAbility(new CeaselessSearbladesTriggeredAbility());
-
     }
 
     private CeaselessSearblades(final CeaselessSearblades card) {
@@ -54,6 +53,7 @@ class CeaselessSearbladesTriggeredAbility extends TriggeredAbilityImpl {
 
     CeaselessSearbladesTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), false);
+        setTriggerPhrase("Whenever you activate an ability of an Elemental, ");
     }
 
     CeaselessSearbladesTriggeredAbility(final CeaselessSearbladesTriggeredAbility ability) {
@@ -82,10 +82,5 @@ class CeaselessSearbladesTriggeredAbility extends TriggeredAbilityImpl {
         return event.getPlayerId().equals(getControllerId())
                 && source != null
                 && filter.match(source, game);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you activate an ability of an Elemental, ";
     }
 }

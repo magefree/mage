@@ -53,6 +53,7 @@ class LootDisputeTriggeredAbility extends TriggeredAbilityImpl {
 
     LootDisputeTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new TreasureToken()));
+        setTriggerPhrase("Whenever you attack a player who has the initiative, ");
     }
 
     private LootDisputeTriggeredAbility(final LootDisputeTriggeredAbility ability) {
@@ -72,10 +73,5 @@ class LootDisputeTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return isControlledBy(event.getPlayerId()) && event.getTargetId().equals(game.getInitiativeId());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you attack a player who has the initiative, ";
     }
 }

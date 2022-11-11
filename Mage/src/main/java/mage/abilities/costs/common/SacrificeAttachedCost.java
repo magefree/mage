@@ -1,18 +1,18 @@
-
 package mage.abilities.costs.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
+import mage.abilities.costs.SacrificeCost;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J (based on BetaSteward_at_googlemail.com)
  */
-public class SacrificeAttachedCost extends CostImpl {
+public class SacrificeAttachedCost extends CostImpl implements SacrificeCost {
 
     public SacrificeAttachedCost() {
         this.text = "Sacrifice enchanted creature";

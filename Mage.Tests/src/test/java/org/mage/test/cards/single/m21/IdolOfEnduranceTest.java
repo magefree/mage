@@ -45,7 +45,6 @@ public class IdolOfEnduranceTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, sqr, 1);
     }
@@ -100,7 +99,6 @@ public class IdolOfEnduranceTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, sqr, 1);
         assertPermanentCount(playerA, idol, 0);
@@ -128,7 +126,6 @@ public class IdolOfEnduranceTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, bnyrdwrm, 1);
         assertPermanentCount(playerA, idol, 0);
@@ -163,7 +160,6 @@ public class IdolOfEnduranceTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, sqr, 1);
         assertPermanentCount(playerA, glrskr, 1);
@@ -194,7 +190,6 @@ public class IdolOfEnduranceTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, sqr, 1);
         assertPermanentCount(playerA, glrskr, 1);

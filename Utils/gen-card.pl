@@ -101,7 +101,7 @@ if (!exists $cards{$cardName}) {
     my $possible;
     foreach $possible (sort keys (%cards)) {
         if ($possible =~ m/$cardName/img && $cardName =~ m/..../) {
-            print ("Did you mean $possible ?\n");
+            print ("Did you mean $possible?\n");
         }
     }
     die "Card name doesn't exist: $cardName\n";
@@ -282,7 +282,7 @@ foreach my $ability (@abilities) {
                         }
                         $vars{'abilities'} .= "\n        this.getSpellAbility().addTarget(auraTarget);";
                         $vars{'abilities'} .= "\n        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));";
-                        $vars{'abilities'} .= "\n        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));";
+                        $vars{'abilities'} .= "\n        this.addAbility(new EnchantAbility(auraTarget));";
                         $vars{'abilitiesImports'} .= "\nimport mage.abilities.effects.common.AttachEffect;";
                         $vars{'abilitiesImports'} .= "\nimport mage.constants.Outcome;";
                         $vars{'abilitiesImports'} .= "\nimport mage.target.TargetPermanent;";

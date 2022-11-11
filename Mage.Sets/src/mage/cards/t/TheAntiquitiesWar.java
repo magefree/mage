@@ -6,16 +6,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SagaChapter;
-import mage.constants.SubLayer;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -98,8 +91,8 @@ class TheAntiquitiesWarEffect extends ContinuousEffectImpl {
                         break;
                     case PTChangingEffects_7:
                         if (sublayer == SubLayer.SetPT_7b) {
-                            permanent.getPower().setValue(5);
-                            permanent.getToughness().setValue(5);
+                            permanent.getPower().setModifiedBaseValue(5);
+                            permanent.getToughness().setModifiedBaseValue(5);
                         }
                 }
             }

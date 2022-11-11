@@ -6,7 +6,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -78,8 +78,8 @@ class MasterOfWindsEffect extends OneShotEffect {
                 Outcome.Neutral, "Have this creature become a 4/1 or a 1/4?",
                 null, "4/1", "1/4", source, game
         ) ? 4 : 1;
-        game.addEffect(new SetPowerToughnessSourceEffect(
-                power, 5 - power, Duration.EndOfTurn, SubLayer.SetPT_7b
+        game.addEffect(new SetBasePowerToughnessSourceEffect(
+                power, 5 - power, Duration.EndOfTurn, SubLayer.SetPT_7b, true
         ), source);
         return true;
     }

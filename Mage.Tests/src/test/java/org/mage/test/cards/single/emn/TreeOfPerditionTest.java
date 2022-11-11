@@ -18,9 +18,10 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class TreeOfPerditionTest extends CardTestPlayerBase {
     
     /**
-     * Reported bug: Tree of Perdition retains toughness change after being bounced and replayed
-     * Exchanged toughness with opponent's life to become an 0/20, got bounced,
-     * and when replayed it was still 0/20. It should be a new object and enter as an 0/13.
+     * Reported bug: https://github.com/magefree/mage/issues/2101
+     *      Tree of Perdition retains toughness change after being bounced and replayed
+     *      Exchanged toughness with opponent's life to become an 0/20, got bounced,
+     *      and when replayed it was still 0/20. It should be a new object and enter as an 0/13.
     */
     @Test
     public void testTreeOfPerditionBouncedAndReplayed() {
@@ -30,7 +31,7 @@ public class TreeOfPerditionTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD,playerB,"Island",1);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Exchange");
-        addTarget(playerA, playerB);
+        // Player B is auto-targeted since they're the only option
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Unsummon");
 
@@ -45,8 +46,9 @@ public class TreeOfPerditionTest extends CardTestPlayerBase {
     }
     
    /**
-    * Reported bug: Tree of Perdition is gaining both power and toughness equal to opponent's life total
-    * instead of just toughness equal to it.
+    * Reported bug:
+    *       Tree of Perdition is gaining both power and toughness equal to opponent's life total
+    *       instead of just toughness equal to it.
     */
     @Test
     public void testTreeOfPerditionOnlyGainsToughnessEqualToLife() {
@@ -54,7 +56,7 @@ public class TreeOfPerditionTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Exchange");
-        addTarget(playerA, playerB);
+        // Player B is auto-targeted since they're the only option
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

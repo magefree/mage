@@ -101,6 +101,7 @@ class ExtraplanarLensTriggeredAbility extends TriggeredManaAbility {
 
     public ExtraplanarLensTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddManaOfAnyTypeProducedEffect());
+        setTriggerPhrase("Whenever a land with the same name as the exiled card is tapped for mana, ");
     }
 
     public ExtraplanarLensTriggeredAbility(final ExtraplanarLensTriggeredAbility ability) {
@@ -135,11 +136,6 @@ class ExtraplanarLensTriggeredAbility extends TriggeredManaAbility {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a land with the same name as the exiled card is tapped for mana, " ;
     }
 
     @Override

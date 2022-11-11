@@ -102,6 +102,7 @@ class RiskyMoveTriggeredAbility extends TriggeredAbilityImpl {
 
     public RiskyMoveTriggeredAbility() {
         super(Zone.BATTLEFIELD, new RiskyMoveFlipCoinEffect(), false);
+        setTriggerPhrase("When you gain control of {this} from another player, ");
     }
 
     public RiskyMoveTriggeredAbility(final RiskyMoveTriggeredAbility ability) {
@@ -121,11 +122,6 @@ class RiskyMoveTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getTargetId().equals(sourceId);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When you gain control of {this} from another player, ";
     }
 }
 
@@ -189,6 +185,7 @@ class RiskyMoveCreatureGainControlEffect extends ContinuousEffectImpl {
     public RiskyMoveCreatureGainControlEffect(Duration duration, UUID controller) {
         super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.controller = controller;
+        this.staticText = "If you lose the flip, that opponent gains control of that creature";
     }
 
     public RiskyMoveCreatureGainControlEffect(final RiskyMoveCreatureGainControlEffect effect) {
@@ -211,10 +208,5 @@ class RiskyMoveCreatureGainControlEffect extends ContinuousEffectImpl {
             return permanent.changeControllerId(controller, game, source);
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "If you lose the flip, that opponent gains control of that creature";
     }
 }

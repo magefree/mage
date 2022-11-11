@@ -33,12 +33,12 @@ public final class ThornLieutenant extends CardImpl {
         this.addAbility(new BecomesTargetTriggeredAbility(
                 new CreateTokenEffect(new ElfWarriorToken()),
                 StaticFilters.FILTER_SPELL_OR_ABILITY_OPPONENTS
-        ));
+        ).setTriggerPhrase("Whenever {this} becomes the target of a spell or ability an opponent controls, "));
 
         // {5}{G}: Thorn Lieutenant gets +4/+4 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
                 new BoostSourceEffect(4, 4, Duration.EndOfTurn),
-                new ManaCostsImpl("{5}{G}")
+                new ManaCostsImpl<>("{5}{G}")
         ));
     }
 

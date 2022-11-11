@@ -52,6 +52,7 @@ class LastLaughStateTriggeredAbility extends StateTriggeredAbility {
 
     public LastLaughStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
+        setTriggerPhrase("When no creatures are on the battlefield, ");
     }
 
     public LastLaughStateTriggeredAbility(final LastLaughStateTriggeredAbility ability) {
@@ -67,10 +68,4 @@ class LastLaughStateTriggeredAbility extends StateTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         return game.getBattlefield().count(new FilterCreaturePermanent(), this.getControllerId(), this, game) == 0;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When no creatures are on the battlefield, " ;
-    }
-
 }

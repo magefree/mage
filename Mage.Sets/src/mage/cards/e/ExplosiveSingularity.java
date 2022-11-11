@@ -3,7 +3,6 @@ package mage.cards.e;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
@@ -11,13 +10,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
-import mage.target.common.TargetControlledPermanent;
 import mage.util.CardUtil;
 
-import java.util.List;
 import java.util.UUID;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.TapVariableTargetCost;
 
 /**
  * @author TheElk801
@@ -28,11 +26,9 @@ public final class ExplosiveSingularity extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{8}{R}{R}");
 
         // As an additional cost to cast this spell, you may tap any number of untapped creatures you control. This spell costs {1} less to cast for each creature tapped this way.
-        this.getSpellAbility().addCost(new TapTargetCost(new TargetControlledPermanent(
-                0, Integer.MAX_VALUE, StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURES, false
-        )).setText("you may tap any number of untapped creatures you control. " +
-                "This spell costs {1} less to cast for each creature tapped this way"));
-        Ability ability = new SimpleStaticAbility(Zone.ALL, new ExplosiveSingularityEffect());
+        this.getSpellAbility().addCost(new TapVariableTargetCost(StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURES).setText("you may tap any number of untapped creatures you control. "
+                + "This spell costs {1} less to cast for each creature tapped this way"));
+        Ability ability = new SimpleStaticAbility(Zone.ALL, new ExplosiveSingularityCostReductionEffect());
         ability.setRuleVisible(false);
         this.addAbility(ability);
 
@@ -51,13 +47,13 @@ public final class ExplosiveSingularity extends CardImpl {
     }
 }
 
-class ExplosiveSingularityEffect extends CostModificationEffectImpl {
+class ExplosiveSingularityCostReductionEffect extends CostModificationEffectImpl {
 
-    ExplosiveSingularityEffect() {
+    ExplosiveSingularityCostReductionEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
     }
 
-    private ExplosiveSingularityEffect(final ExplosiveSingularityEffect effect) {
+    private ExplosiveSingularityCostReductionEffect(final ExplosiveSingularityCostReductionEffect effect) {
         super(effect);
     }
 
@@ -65,15 +61,20 @@ class ExplosiveSingularityEffect extends CostModificationEffectImpl {
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         SpellAbility spellAbility = (SpellAbility) abilityToModify;
         int reduction;
-        if (game.inCheckPlayableState()) {
-            reduction = game.getBattlefield().count(
-                    StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURES,
-                    source.getControllerId(), source, game
-            );
-        } else {
-            reduction = ((List<Permanent>) spellAbility.getEffects().get(0).getValue("tappedPermanents")).size();
+        for (Cost cost : spellAbility.getCosts()) {
+            if (cost instanceof TapVariableTargetCost) {
+                if (game.inCheckPlayableState()) {
+                    // allows to cast in getPlayable
+                    reduction = ((TapVariableTargetCost) cost).getMaxValue(source, game);
+                    CardUtil.adjustCost(spellAbility, reduction);
+                } else {
+                    // real cast
+                    reduction = ((TapVariableTargetCost) cost).getAmount();
+                    CardUtil.adjustCost(spellAbility, reduction);
+                }
+                break;
+            }
         }
-        CardUtil.adjustCost(spellAbility, reduction);
         return true;
     }
 
@@ -84,7 +85,7 @@ class ExplosiveSingularityEffect extends CostModificationEffectImpl {
     }
 
     @Override
-    public ExplosiveSingularityEffect copy() {
-        return new ExplosiveSingularityEffect(this);
+    public ExplosiveSingularityCostReductionEffect copy() {
+        return new ExplosiveSingularityCostReductionEffect(this);
     }
 }

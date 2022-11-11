@@ -10,6 +10,7 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.util.RandomUtil;
@@ -18,13 +19,12 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
  */
 public final class VolosJournalToken extends TokenImpl {
-
-    private static final FilterCard filter = new FilterCard("spells");
 
     public VolosJournalToken() {
         super("Volo's Journal", "Volo's Journal, a legendary colorless artifact token with hexproof and \"Whenever you cast a creature spell, note one of its creature types that hasn't been noted for this artifact.\"");
@@ -46,12 +46,12 @@ public final class VolosJournalToken extends TokenImpl {
         return new VolosJournalToken(this);
     }
 
-    public static Set<String> getNotedTypes(Game game, Ability source) {
-        return getNotedTypes(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-    }
+    public static Set<String> getNotedTypes(Game game, Permanent permanent) {
+        if (permanent == null) {
+            return new HashSet<>();
+        }
 
-    public static Set<String> getNotedTypes(Game game, UUID sourceId, int zcc) {
-        String key = "notedTypes_" + sourceId + '_' + zcc;
+        String key = "notedTypes_" + permanent.getId() + '_' + permanent.getZoneChangeCounter(game);
         Object value = game.getState().getValue(key);
         if (value == null) {
             Set<String> types = new HashSet<>();
@@ -67,7 +67,8 @@ enum VolosJournalTokenHint implements Hint {
 
     @Override
     public String getText(Game game, Ability ability) {
-        Set<String> types = VolosJournalToken.getNotedTypes(game, ability);
+        Permanent permanent = game.getPermanent(ability.getSourceId());
+        Set<String> types = VolosJournalToken.getNotedTypes(game, permanent);
         int size = types.size();
         if (size > 0) {
             return "Creature types noted: " + size + " (" + String.join(", ", types) + ')';
@@ -99,31 +100,44 @@ class VolosJournalTokenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Set<String> types = VolosJournalToken.getNotedTypes(game, source);
         Spell spell = (Spell) getValue("spellCast");
         if (spell == null) {
             return false;
         }
+
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return true;
+        }
+
+        Permanent permanent = game.getPermanent(source.getSourceId());
+
+        Set<String> types = VolosJournalToken.getNotedTypes(game, permanent);
+
         ChoiceCreatureType choice = new ChoiceCreatureType();
-        choice.getChoices().removeIf(types::contains);
+
+        // By default ChoiceCreatureType pre-populates all creatures into choices
+        // Limit the available choices to those on the creature being cast
         if (!spell.isAllCreatureTypes(game)) {
-            spell.getSubtype(game)
+            choice.setChoices(
+                    spell.getSubtype(game)
                     .stream()
                     .filter(subType -> subType.getSubTypeSet() == SubTypeSet.CreatureType)
                     .map(SubType::getDescription)
-                    .forEach(s -> choice.getChoices().removeIf(s::equals));
+                    .collect(Collectors.toSet())
+            );
         }
+        // Remove from the possible choices the subtypes which have already been chosen.
+        choice.getChoices().removeIf(types::contains);
+
         switch (choice.getChoices().size()) {
             case 0:
                 return false;
             case 1:
-                types.add(RandomUtil.randomFromCollection(choice.getChoices()));
+                types.add(choice.getChoices().stream().findFirst().get());
                 return true;
         }
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
+
         player.choose(outcome, choice, game);
         types.add(choice.getChoice());
         return true;

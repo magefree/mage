@@ -12,6 +12,7 @@ public class DealsDamageToOneOrMoreCreaturesTriggeredAbility extends DealsDamage
 
     public DealsDamageToOneOrMoreCreaturesTriggeredAbility(Effect effect, boolean combatOnly, boolean optional, boolean setTargetPointer) {
         super(effect, combatOnly, optional, setTargetPointer);
+        setTriggerPhrase("Whenever {this} deals " + (combatOnly ? "combat " : "") + "damage to one or more creatures, ");
     }
 
     public DealsDamageToOneOrMoreCreaturesTriggeredAbility(DealsDamageToOneOrMoreCreaturesTriggeredAbility ability) {
@@ -45,5 +46,4 @@ public class DealsDamageToOneOrMoreCreaturesTriggeredAbility extends DealsDamage
     public DealsDamageToOneOrMoreCreaturesTriggeredAbility copy() {
         return new DealsDamageToOneOrMoreCreaturesTriggeredAbility(this);
     }
-
 }

@@ -22,6 +22,7 @@ public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
         if (enrage) {
             this.setAbilityWord(AbilityWord.ENRAGE);
         }
+        setTriggerPhrase("Whenever {this} is dealt damage, ");
     }
 
     public DealtDamageToSourceTriggeredAbility(final DealtDamageToSourceTriggeredAbility ability) {
@@ -52,10 +53,5 @@ public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
         }
         this.getEffects().setValue("damage", damage);
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} is dealt damage, ";
     }
 }

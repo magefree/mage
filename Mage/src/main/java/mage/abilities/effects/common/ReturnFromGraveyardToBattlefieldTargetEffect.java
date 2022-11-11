@@ -93,7 +93,11 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect 
                 }
                 sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
             }
-            sb.append("target ").append(mode.getTargets().get(0).getTargetName());
+            String targetName = mode.getTargets().get(0).getTargetName();
+            if (!targetName.contains("target ")) {
+                sb.append("target ");
+            }
+            sb.append(targetName);
         }
         sb.append(yourGrave ? " to" : " onto");
         sb.append(" the battlefield");

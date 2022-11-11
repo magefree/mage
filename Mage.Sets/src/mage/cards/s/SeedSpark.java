@@ -31,7 +31,7 @@ public final class SeedSpark extends CardImpl {
         //If {G} was spent to cast Seed Spark, create two 1/1 green Saproling creature tokens.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new CreateTokenEffect(new SaprolingToken(), 2), 
-                new ManaWasSpentCondition(ColoredManaSymbol.G), "If {G} was spent to cast this spell, create two 1/1 green Saproling creature tokens"));
+                ManaWasSpentCondition.GREEN, "If {G} was spent to cast this spell, create two 1/1 green Saproling creature tokens"));
     }
 
     private SeedSpark(final SeedSpark card) {

@@ -10,7 +10,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseExpansionSetEffect;
-import mage.abilities.effects.common.continuous.BecomesBlackZombieAdditionEffect;
+import mage.abilities.effects.common.continuous.AddCreatureTypeAdditionEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -18,6 +18,7 @@ import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -89,7 +90,7 @@ class SummonThePackEffect extends OneShotEffect {
                         if (c != null && c.isCreature(game)) {
                             message.append(c.getName()).append(" ");
                             message.append(" (creature card) ");
-                            ContinuousEffect effect2 = new BecomesBlackZombieAdditionEffect(false);
+                            ContinuousEffect effect2 = new AddCreatureTypeAdditionEffect(SubType.ZOMBIE, false);
                             effect2.setTargetPointer(new FixedTarget(c.getId()));
                             game.addEffect(effect2, source);
                             creatureCards.add(c);

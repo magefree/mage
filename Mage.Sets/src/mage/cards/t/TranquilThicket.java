@@ -24,7 +24,7 @@ public final class TranquilThicket extends CardImpl {
         // {tap}: Add {G}.
         this.addAbility(new GreenManaAbility());
         // Cycling {G}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{G}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{G}")));
     }
 
     private TranquilThicket(final TranquilThicket card) {

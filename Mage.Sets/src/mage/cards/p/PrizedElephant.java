@@ -47,7 +47,7 @@ public final class PrizedElephant extends CardImpl {
                 new PermanentsOnTheBattlefieldCondition(filter), rule)));
         
         // {G}: Prized Elephant gains trample until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{G}"));
         this.addAbility(ability);
     }
 

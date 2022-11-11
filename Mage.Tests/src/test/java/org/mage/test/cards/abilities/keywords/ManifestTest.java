@@ -33,7 +33,6 @@ public class ManifestTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         // no life gain
         assertLife(playerA, 20);
@@ -66,7 +65,6 @@ public class ManifestTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         // no life gain
         assertLife(playerA, 20);
@@ -102,7 +100,6 @@ public class ManifestTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         // no life gain
         assertLife(playerA, 20);
@@ -141,7 +138,6 @@ public class ManifestTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         // no life gain
         assertLife(playerA, 20);
@@ -178,7 +174,6 @@ public class ManifestTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         // no life gain
         assertLife(playerA, 20);
@@ -221,7 +216,6 @@ public class ManifestTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // no life gain
         assertLife(playerA, 20);
@@ -260,7 +254,6 @@ public class ManifestTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         // no life gain
         assertLife(playerA, 20);
@@ -303,7 +296,6 @@ public class ManifestTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // no life gain
         assertLife(playerA, 20);
@@ -342,7 +334,6 @@ public class ManifestTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // no life gain
         assertLife(playerA, 20);
@@ -383,7 +374,6 @@ public class ManifestTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // no life gain
         assertLife(playerA, 20);
@@ -419,7 +409,6 @@ public class ManifestTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // no life gain
         assertLife(playerA, 20);
@@ -468,7 +457,6 @@ public class ManifestTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // no life gain
         assertLife(playerA, 20);
@@ -520,9 +508,8 @@ public class ManifestTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
-        // no life gain
+      // no life gain
         assertLife(playerA, 20);
         assertLife(playerB, 20);
 

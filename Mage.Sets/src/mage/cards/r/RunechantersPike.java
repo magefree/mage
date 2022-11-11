@@ -18,6 +18,7 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author nantuko
@@ -46,7 +47,7 @@ public final class RunechantersPike extends CardImpl {
         this.addAbility(ability);
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private RunechantersPike(final RunechantersPike card) {

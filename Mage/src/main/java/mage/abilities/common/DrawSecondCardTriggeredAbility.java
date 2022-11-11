@@ -10,6 +10,7 @@ import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.players.Player;
 import mage.watchers.Watcher;
 
 import java.util.*;
@@ -29,10 +30,15 @@ public class DrawSecondCardTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public DrawSecondCardTriggeredAbility(Effect effect, boolean optional, TargetController targetController) {
-        super(Zone.BATTLEFIELD, effect, optional);
+        this(Zone.BATTLEFIELD, effect, optional, targetController);
+    }
+
+    public DrawSecondCardTriggeredAbility(Zone zone, Effect effect, boolean optional, TargetController targetController) {
+        super(zone, effect, optional);
         this.addWatcher(new DrawSecondCardWatcher());
         this.targetController = targetController;
         this.addHint(hint);
+        setTriggerPhrase(generateTriggerPhrase());
     }
 
     private DrawSecondCardTriggeredAbility(final DrawSecondCardTriggeredAbility ability) {
@@ -58,19 +64,26 @@ public class DrawSecondCardTriggeredAbility extends TriggeredAbilityImpl {
                     return false;
                 }
                 break;
+            case OPPONENT:
+                Player controller = game.getPlayer(controllerId);
+                if (controller == null || !controller.hasOpponent(event.getPlayerId(), game)) {
+                    return false;
+                }
+                break;
             default:
                 throw new IllegalArgumentException("TargetController " + targetController + " not supported");
         }
         return DrawSecondCardWatcher.checkEvent(event.getPlayerId(), event, game);
     }
 
-    @Override
-    public String getTriggerPhrase() {
+    public String generateTriggerPhrase() {
         switch (targetController) {
             case YOU:
                 return "Whenever you draw your second card each turn, ";
             case ACTIVE:
                 return "Whenever a player draws their second card during their turn, ";
+            case OPPONENT:
+                return "Whenever an opponent draws their second card each turn, ";
             default:
                 throw new IllegalArgumentException("TargetController " + targetController + " not supported");
         }

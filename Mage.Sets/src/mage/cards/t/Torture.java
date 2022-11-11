@@ -36,7 +36,7 @@ public final class Torture extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // {1}{B}: Put a -1/-1 counter on enchanted creature.
@@ -44,7 +44,7 @@ public final class Torture extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new AddCountersAttachedEffect(CounterType.M1M1.createInstance(),"enchanted creature"),
-                new ManaCostsImpl("{1}{B}")));
+                new ManaCostsImpl<>("{1}{B}")));
     }
 
     private Torture(final Torture card) {

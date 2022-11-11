@@ -21,7 +21,7 @@ import java.util.UUID;
 public final class NourishingShoal extends CardImpl {
 
     private static final FilterOwnedCard filter
-            = new FilterOwnedCard("a red card with mana value X from your hand");
+            = new FilterOwnedCard("a green card with mana value X from your hand");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.GREEN));

@@ -25,7 +25,7 @@ public class PanharmoniconTest extends CardTestPlayerBase {
         // When Devout Monk enters the battlefield, you gain 1 life.
         addCard(Zone.HAND, playerA, "Devout Monk");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Soul Warden");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Soul Warden", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Devout Monk"); // Life: 20 + 2*1 + 2*1 = 24
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
@@ -48,6 +48,7 @@ public class PanharmoniconTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Devout Monk");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Soul Warden");
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Devout Monk"); // Life: 20 + 1 + 1 = 22
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);

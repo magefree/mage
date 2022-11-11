@@ -37,7 +37,7 @@ public final class FlashConscription extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("That creature gains haste until end of turn"));
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new GainAbilityTargetEffect(new FlashConscriptionTriggeredAbility(), Duration.EndOfTurn),
-                new ManaWasSpentCondition(ColoredManaSymbol.W),
+                ManaWasSpentCondition.WHITE,
                 "If {W} was spent to cast this spell, the creature gains "
                 + "\"Whenever this creature deals combat damage, you gain that much life\" until end of turn"
         ));

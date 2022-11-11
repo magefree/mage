@@ -34,7 +34,7 @@ public final class StingingShot extends CardImpl {
         getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.M1M1.createInstance(3)));
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private StingingShot(final StingingShot card) {

@@ -10,6 +10,8 @@ import java.util.Collection;
 import java.util.Objects;
 
 /**
+ * Checks if a player control ANY (not just their own) commander.
+ *
  * @author TheElk801
  */
 public enum ControlACommanderCondition implements Condition {

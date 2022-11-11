@@ -35,6 +35,7 @@ import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -114,16 +115,16 @@ public class Combat implements Serializable, Copyable<Combat> {
         return defenders;
     }
 
-    public List<UUID> getAttackers() {
-        List<UUID> attackers = new ArrayList<>();
+    public Set<UUID> getAttackers() {
+        Set<UUID> attackers = new HashSet<>();
         for (CombatGroup group : groups) {
             attackers.addAll(group.attackers);
         }
         return attackers;
     }
 
-    public List<UUID> getBlockers() {
-        List<UUID> blockers = new ArrayList<>();
+    public Set<UUID> getBlockers() {
+        Set<UUID> blockers = new HashSet<>();
         for (CombatGroup group : groups) {
             blockers.addAll(group.blockers);
         }
@@ -459,7 +460,9 @@ public class Combat implements Serializable, Copyable<Combat> {
             } else {
                 // if creature is goaded then we start with assumption that it needs to attack any player
                 mustAttack = true;
-                defendersForcedToAttack.addAll(defenders);
+                // Filter out the planeswalkers
+                defendersForcedToAttack.addAll(defenders.stream().map(game::getPlayer).filter(Objects::nonNull).map(Player::getId).collect(Collectors.toSet()));
+//                defendersForcedToAttack.addAll(defenders);
             }
             if (!mustAttack) {
                 continue;
@@ -488,11 +491,9 @@ public class Combat implements Serializable, Copyable<Combat> {
                     break;
                 }
             }
-            // if creature can attack someone other than a player that goaded them
-            // then they attack one of those players, otherwise they attack any player
-            if (!defendersForcedToAttack.stream().allMatch(creature.getGoadingPlayers()::contains)) {
-                defendersForcedToAttack.removeAll(creature.getGoadingPlayers());
-            }
+            // Remove all the players which have goaded the attacker
+            defendersForcedToAttack.removeAll(creature.getGoadingPlayers());
+
             // force attack only if a defender can be attacked without paying a cost
             if (defendersCostlessAttackable.isEmpty()) {
                 continue;
@@ -702,6 +703,9 @@ public class Combat implements Serializable, Copyable<Combat> {
     public void acceptBlockers(Game game) {
         for (CombatGroup group : groups) {
             group.acceptBlockers(game);
+        }
+        for (UUID blockerId : getBlockers()) {
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKS, blockerId, null));
         }
     }
 
@@ -1159,14 +1163,13 @@ public class Combat implements Serializable, Copyable<Combat> {
                                     Set<UUID> blockedSet = mustBeBlockedByAtLeastX.get(blockedAttackerId);
                                     Set<UUID> toBlockSet = mustBeBlockedByAtLeastX.get(toBeBlockedCreatureId);
                                     if (toBlockSet == null) {
-                                        // This should never happen. 
+                                        // This should never happen.
                                         return null;
                                     } else if (toBlockSet.containsAll(blockedSet)) {
-                                        // the creature already blocks alone a creature that has to be blocked by at least one 
-                                        // and has more possible blockers, so this is ok 
+                                        // the creature already blocks alone a creature that has to be blocked by at least one
+                                        // and has more possible blockers, so this is ok
                                         return null;
                                     }
-
                                 }
                                 // TODO: Check if the attacker is already blocked by another creature
                                 // and despite there is need that this attacker blocks this attacker also
@@ -1444,7 +1447,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
     }
 
-    public boolean removePlaneswalkerFromCombat(UUID planeswalkerId, Game game, boolean withInfo) {
+    public boolean removePlaneswalkerFromCombat(UUID planeswalkerId, Game game) {
         boolean result = false;
         for (CombatGroup group : groups) {
             if (group.getDefenderId() != null && group.getDefenderId().equals(planeswalkerId)) {
@@ -1455,13 +1458,14 @@ public class Combat implements Serializable, Copyable<Combat> {
         return result;
     }
 
-    public boolean removeFromCombat(UUID creatureId, Game game, boolean withInfo) {
+    public boolean removeFromCombat(UUID creatureId, Game game, boolean withEvent) {
         boolean result = false;
         Permanent creature = game.getPermanent(creatureId);
         if (creature != null) {
-            creature.setAttacking(false);
-            creature.setBlocking(0);
-            creature.setRemovedFromCombat(true);
+            if (withEvent) {
+                creature.setAttacking(false);
+                creature.setBlocking(0);
+            }
             for (CombatGroup group : groups) {
                 for (UUID attackerId : group.attackers) {
                     Permanent attacker = game.getPermanent(attackerId);
@@ -1476,7 +1480,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             }
             creature.clearBandedCards();
             blockingGroups.remove(creatureId);
-            if (result && withInfo) {
+            if (result && withEvent) {
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.REMOVED_FROM_COMBAT, creatureId, null, null));
                 game.informPlayers(creature.getLogName() + " removed from combat");
             }
@@ -1503,10 +1507,6 @@ public class Combat implements Serializable, Copyable<Combat> {
                     creature.clearBandedCards();
                 }
             }
-        }
-        // reset the removeFromCombat flag on all creatures on the battlefield
-        for (Permanent creaturePermanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, game)) {
-            creaturePermanent.setRemovedFromCombat(false);
         }
         clear();
     }

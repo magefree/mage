@@ -37,7 +37,7 @@ public final class WeirdingWood extends CardImpl {
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // When Weirding Wood enters the battlefield, investigate.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new InvestigateEffect()));

@@ -31,7 +31,7 @@ public final class PatternOfRebirth extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When enchanted creature dies, that creature's controller may search their library for a creature card and put that card onto the battlefield. If that player does, they shuffle their library.

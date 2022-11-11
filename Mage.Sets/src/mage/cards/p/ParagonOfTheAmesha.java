@@ -36,7 +36,7 @@ public final class ParagonOfTheAmesha extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // {W}{U}{B}{R}{G}: Until end of turn, Paragon of the Amesha becomes an Angel, gets +3/+3, and gains flying and lifelink.
-        Ability ability = new SimpleActivatedAbility(new ParagonOfTheAmeshaEffect(), new ManaCostsImpl("{W}{U}{B}{R}{G}"));
+        Ability ability = new SimpleActivatedAbility(new ParagonOfTheAmeshaEffect(), new ManaCostsImpl<>("{W}{U}{B}{R}{G}"));
         Effect effect = new BoostSourceEffect(3, 3, Duration.EndOfTurn);
         effect.setText(", gets +3/+3");
         ability.addEffect(effect);

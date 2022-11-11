@@ -52,7 +52,6 @@ public class UbaMaskTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Grizzly Bears", 1);
     }
@@ -81,7 +80,6 @@ public class UbaMaskTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, "Valki, God of Lies", 1);
     }

@@ -17,7 +17,6 @@ public class ConspicuousSnoopTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertTopCardRevealed(playerA, true);
     }
@@ -44,7 +43,6 @@ public class ConspicuousSnoopTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Goblin Lackey", 1);
     }
@@ -65,7 +63,6 @@ public class ConspicuousSnoopTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         execute();
 
-        assertAllCommandsUsed();
         assertAbilityCount(playerA, "Conspicuous Snoop", ActivatedAbility.class, 3); // (2 X casts + gains flying )
     }
 }

@@ -69,6 +69,7 @@ class DiesWhileInGraveyardTriggeredAbility extends TriggeredAbilityImpl {
     public DiesWhileInGraveyardTriggeredAbility(Effect effect, FilterCreaturePermanent filter) {
         super(Zone.GRAVEYARD, effect, false);
         this.filter = filter;
+        setTriggerPhrase("Whenever " + filter.getMessage() + " dies while {this} is in your graveyard, ");
     }
 
     public DiesWhileInGraveyardTriggeredAbility(final DiesWhileInGraveyardTriggeredAbility ability) {
@@ -98,10 +99,5 @@ class DiesWhileInGraveyardTriggeredAbility extends TriggeredAbilityImpl {
         }
 
         return filter.match(zEvent.getTarget(), controllerId,this, game);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever " + filter.getMessage() + " dies while {this} is in your graveyard, " ;
     }
 }

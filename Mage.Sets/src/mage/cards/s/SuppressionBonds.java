@@ -31,7 +31,7 @@ public final class SuppressionBonds extends CardImpl {
         TargetPermanent auraTarget = new TargetNonlandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted permanent can't attack or block, and its activated abilities can't be actiated.

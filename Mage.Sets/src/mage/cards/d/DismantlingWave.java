@@ -15,6 +15,7 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -31,7 +32,8 @@ public final class DismantlingWave extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}");
 
         // For each opponent, destroy up to one target artifact or enchantment that player controls.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect(false, true)
+        this.getSpellAbility().addEffect(new DestroyTargetEffect()
+                .setTargetPointer(new EachTargetPointer())
                 .setText("For each opponent, destroy up to one target artifact or enchantment that player controls."));
         this.getSpellAbility().setTargetAdjuster(DismantlingWaveAdjuster.instance);
 

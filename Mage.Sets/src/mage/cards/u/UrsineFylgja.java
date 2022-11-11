@@ -40,7 +40,7 @@ public final class UrsineFylgja extends CardImpl {
             new RemoveCountersSourceCost(CounterType.HEALING.createInstance(1))));
         // {2}{W}: Put a healing counter on Ursine Fylgja.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.HEALING.createInstance(1)),
-            new ManaCostsImpl("{2}{W}")));
+            new ManaCostsImpl<>("{2}{W}")));
     }
 
     private UrsineFylgja(final UrsineFylgja card) {

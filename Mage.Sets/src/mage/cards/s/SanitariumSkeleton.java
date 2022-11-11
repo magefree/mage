@@ -25,7 +25,7 @@ public final class SanitariumSkeleton extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}{B}: Return Sanitarium Skeleton from your graveyard to your hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{2}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl<>("{2}{B}")));
     }
 
     private SanitariumSkeleton(final SanitariumSkeleton card) {

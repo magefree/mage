@@ -1,4 +1,3 @@
-
 package mage.abilities.dynamicvalue.common;
 
 import mage.abilities.Ability;
@@ -17,18 +16,18 @@ import java.util.UUID;
  */
 public class EquipmentAttachedCount implements DynamicValue {
 
-    private Integer amount;
+    private final int multiplier;
 
     public EquipmentAttachedCount() {
         this(1);
     }
 
-    public EquipmentAttachedCount(Integer amount) {
-        this.amount = amount;
+    public EquipmentAttachedCount(int multiplier) {
+        this.multiplier = multiplier;
     }
 
     public EquipmentAttachedCount(final EquipmentAttachedCount dynamicValue) {
-        this.amount = dynamicValue.amount;
+        this.multiplier = dynamicValue.multiplier;
     }
 
     @Override
@@ -44,7 +43,7 @@ public class EquipmentAttachedCount implements DynamicValue {
                 }
             }
         }
-        return amount * count;
+        return multiplier * count;
     }
 
     @Override
@@ -54,14 +53,16 @@ public class EquipmentAttachedCount implements DynamicValue {
 
     @Override
     public String toString() {
-        if (amount != null) {
-            return amount.toString();
-        }
-        return "";
+        return Integer.toString(multiplier);
     }
 
     @Override
     public String getMessage() {
         return "Equipment attached to it";
+    }
+
+    @Override
+    public int getSign() {
+        return multiplier;
     }
 }

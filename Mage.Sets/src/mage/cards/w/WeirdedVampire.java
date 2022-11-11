@@ -24,7 +24,7 @@ public final class WeirdedVampire extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Madness {2}{B}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{2}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{2}{B}")));
     }
 
     private WeirdedVampire(final WeirdedVampire card) {

@@ -9,12 +9,12 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.combat.CantBeBlockedAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.PutCards;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
@@ -48,7 +48,7 @@ public final class TezzeretsGatebreaker extends CardImpl {
                         StaticFilters.FILTER_CONTROLLED_CREATURES,
                         Duration.EndOfTurn
                 ),
-                new ManaCostsImpl("{5}{U}")
+                new ManaCostsImpl<>("{5}{U}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

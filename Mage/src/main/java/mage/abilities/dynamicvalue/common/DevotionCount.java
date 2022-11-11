@@ -41,11 +41,26 @@ public enum DevotionCount implements DynamicValue {
     GU(ColoredManaSymbol.G, ColoredManaSymbol.U);
 
     private final ArrayList<ColoredManaSymbol> devotionColors = new ArrayList<>();
+    private final String message;
+    private final String reminder;
     private final Hint hint;
 
     DevotionCount(ColoredManaSymbol... devotionColor) {
         this.devotionColors.addAll(Arrays.asList(devotionColor));
-        this.hint = new ValueHint(this.getMessage().replace("your d", "D"), this);
+        this.message = "your devotion to "
+                + String.join(" and ", devotionColors.stream()
+                        .map(ColoredManaSymbol::getColorName)
+                        .collect(Collectors.toList()));
+
+        this.reminder = "<i>(Each "
+                + String.join(" and ", devotionColors.stream()
+                        .map(s -> "{" + s + "}")
+                        .collect(Collectors.toList()))
+                + " in the mana costs of permanents you control counts toward "
+                + this.message
+                + ".)</i>";
+
+        this.hint = new ValueHint(this.message.replace("your d", "D"), this);
     }
 
     @Override
@@ -84,12 +99,11 @@ public enum DevotionCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "your devotion to " + String.join(
-                " and ",
-                devotionColors.stream()
-                        .map(ColoredManaSymbol::getColorName)
-                        .collect(Collectors.toList())
-        );
+        return message;
+    }
+
+    public String getReminder() {
+        return reminder;
     }
 
     public Hint getHint() {

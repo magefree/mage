@@ -41,7 +41,7 @@ public final class ThreadsOfDisloyalty extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // You control enchanted creature.

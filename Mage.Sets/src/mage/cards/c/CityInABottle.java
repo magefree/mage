@@ -158,7 +158,7 @@ class CityInABottleStateTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getBattlefield().contains(filter, this.getSourceId(), this.getControllerId(), this, game, 1);
+        return game.getBattlefield().contains(filter, this.getControllerId(), this, game, 1);
     }
 
     @Override

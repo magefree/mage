@@ -44,7 +44,6 @@ public class Spell extends StackObjectImpl implements Card {
     private static final Logger logger = Logger.getLogger(Spell.class);
 
     private final List<SpellAbility> spellAbilities = new ArrayList<>();
-    private final List<Card> spellCards = new ArrayList<>();
 
     private final Card card;
     private final ObjectColor color;
@@ -67,6 +66,10 @@ public class Spell extends StackObjectImpl implements Card {
     private ActivationManaAbilityStep currentActivatingManaAbilitiesStep = ActivationManaAbilityStep.BEFORE;
 
     public Spell(Card card, SpellAbility ability, UUID controllerId, Zone fromZone, Game game) {
+        this(card, ability, controllerId, fromZone, game, false);
+    }
+
+    private Spell(Card card, SpellAbility ability, UUID controllerId, Zone fromZone, Game game, boolean isCopy) {
         Card affectedCard = card;
 
         // TODO: must be removed after transform cards (one side) migrated to MDF engine (multiple sides)
@@ -85,12 +88,16 @@ public class Spell extends StackObjectImpl implements Card {
         this.ability = ability;
         this.ability.setControllerId(controllerId);
         if (ability.getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
-            spellCards.add(((SplitCard) affectedCard).getLeftHalfCard());
-            spellAbilities.add(((SplitCard) affectedCard).getLeftHalfCard().getSpellAbility().copy());
-            spellCards.add(((SplitCard) affectedCard).getRightHalfCard());
-            spellAbilities.add(((SplitCard) affectedCard).getRightHalfCard().getSpellAbility().copy());
+            // if this spell is going to be a copy, these abilities will be copied in copySpell
+            if (!isCopy) {
+                SpellAbility left = ((SplitCard) affectedCard).getLeftHalfCard().getSpellAbility().copy();
+                SpellAbility right = ((SplitCard) affectedCard).getRightHalfCard().getSpellAbility().copy();
+                left.setSourceId(ability.getSourceId());
+                right.setSourceId(ability.getSourceId());
+                spellAbilities.add(left);
+                spellAbilities.add(right);
+            }
         } else {
-            spellCards.add(affectedCard);
             spellAbilities.add(ability);
         }
         this.controllerId = controllerId;
@@ -104,19 +111,12 @@ public class Spell extends StackObjectImpl implements Card {
         for (SpellAbility spellAbility : spell.spellAbilities) {
             this.spellAbilities.add(spellAbility.copy());
         }
-        for (Card spellCard : spell.spellCards) {
-            this.spellCards.add(spellCard.copy());
-        }
         if (spell.spellAbilities.get(0).equals(spell.ability)) {
             this.ability = this.spellAbilities.get(0);
         } else {
             this.ability = spell.ability.copy();
         }
-        if (spell.spellCards.get(0).equals(spell.card)) {
-            this.card = spellCards.get(0);
-        } else {
-            this.card = spell.card.copy();
-        }
+        this.card = spell.card.copy();
 
         this.fromZone = spell.fromZone;
         this.color = spell.color.copy();
@@ -413,47 +413,23 @@ public class Spell extends StackObjectImpl implements Card {
 
     @Override
     public void counter(Ability source, Game game) {
-        this.counter(source, game, Zone.GRAVEYARD, false, ZoneDetail.NONE);
+        this.counter(source, game, PutCards.GRAVEYARD);
     }
 
     @Override
-    public void counter(Ability source, Game game, Zone zone, boolean owner, ZoneDetail zoneDetail) {
+    public void counter(Ability source, Game game, PutCards putCard) {
         // source can be null for fizzled spells, don't use that code in your ZONE_CHANGE watchers/triggers:
         // event.getSourceId().equals
-        // TODO: so later it must be replaced to another technics with non null source
-        UUID counteringSourceId = (source == null ? null : source.getSourceId());
+        // TODO: fizzled spells are no longer considered "countered" as of current rules; may need refactor
         this.countered = true;
-        if (!isCopy()) {
-            Player player = game.getPlayer(game.getControllerId(counteringSourceId));
-            if (player == null) {
-                player = game.getPlayer(getControllerId());
-            }
-            if (player != null) {
-                Ability counteringAbility = null;
-                MageObject counteringObject = game.getObject(counteringSourceId);
-                if (counteringObject instanceof StackObject) {
-                    counteringAbility = ((StackObject) counteringObject).getStackAbility();
-                }
-                if (zone == Zone.LIBRARY) {
-                    if (zoneDetail == ZoneDetail.CHOOSE) {
-                        if (player.chooseUse(Outcome.Detriment, "Move countered spell to the top of the library? (otherwise it goes to the bottom)", counteringAbility, game)) {
-                            zoneDetail = ZoneDetail.TOP;
-                        } else {
-                            zoneDetail = ZoneDetail.BOTTOM;
-                        }
-                    }
-                    if (zoneDetail == ZoneDetail.TOP) {
-                        player.putCardsOnTopOfLibrary(new CardsImpl(card), game, counteringAbility, false);
-                    } else {
-                        player.putCardsOnBottomOfLibrary(new CardsImpl(card), game, counteringAbility, false);
-                    }
-                } else {
-                    player.moveCards(card, zone, counteringAbility, game, false, false, owner, null);
-                }
-            }
-        } else {
+        if (isCopy()) {
             // copied spell, only remove from stack
             game.getStack().remove(this, game);
+            return;
+        }
+        Player player = game.getPlayer(source == null ? getControllerId() : source.getControllerId());
+        if (player != null) {
+            putCard.moveCard(player, card, source, game, "countered spell");
         }
     }
 
@@ -769,6 +745,11 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
+    public SpellAbility getSecondFaceSpellAbility() {
+        return null;
+    }
+
+    @Override
     public boolean isNightCard() {
         return false;
     }
@@ -802,15 +783,27 @@ public class Spell extends StackObjectImpl implements Card {
         Card copiedPart = (Card) mapOldToNew.get(this.card.getId());
 
         // copy spell
-        Spell spellCopy = new Spell(copiedPart, this.ability.copySpell(this.card, copiedPart), this.controllerId, this.fromZone, game);
-        boolean firstDone = false;
+        Spell spellCopy = new Spell(copiedPart, this.ability.copySpell(this.card, copiedPart), this.controllerId, this.fromZone, game, true);
+        UUID copiedSourceId = spellCopy.ability.getSourceId();
+
+        // non-fused spell:
+        //    this.spellAbilities.get(0) is alias (NOT copy) of this.ability
+        //    this.spellAbilities.get(1) is first spliced card (if any)
+        // fused spell:
+        //    this.spellAbilities.get(0) is left half
+        //    this.spellAbilities.get(1) is right half
+        //    this.spellAbilities.get(2) is first spliced card (if any)
+        // for non-fused spell, ability was already added to spellAbilities in constructor and must not be copied again
+        // for fused spell, all of spellAbilities must be copied here
+        boolean skipFirst = (this.ability.getSpellAbilityType() != SpellAbilityType.SPLIT_FUSED);
         for (SpellAbility spellAbility : this.getSpellAbilities()) {
-            if (!firstDone) {
-                firstDone = true;
+            if (skipFirst) {
+                skipFirst = false;
                 continue;
             }
             SpellAbility newAbility = spellAbility.copy(); // e.g. spliced spell
             newAbility.newId();
+            newAbility.setSourceId(copiedSourceId);
             spellCopy.addSpellAbility(newAbility);
         }
         spellCopy.setCopy(true, this);

@@ -18,6 +18,7 @@ import mage.game.Game;
 import mage.watchers.common.RevoltWatcher;
 
 import java.util.UUID;
+import mage.abilities.condition.InvertCondition;
 
 /**
  * @author TheElk801
@@ -38,7 +39,7 @@ public final class SarevokDeathbringer extends CardImpl {
         // At the beginning of each player's end step, if no permanents left the battlefield this turn, that player loses X life, where X is Sarevok's power.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new LoseLifeTargetEffect(xValue), TargetController.EACH_PLAYER,
-                SarevokDeathbringerCondition.instance, false
+                new InvertCondition(SarevokDeathbringerCondition.instance), false
         ), new RevoltWatcher());
 
         // Choose a Background

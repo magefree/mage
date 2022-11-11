@@ -17,6 +17,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -29,19 +30,13 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class FlameshadowConjuring extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filterNontoken = new FilterControlledCreaturePermanent("nontoken creature");
-
-    static {
-        filterNontoken.add(TokenPredicate.FALSE);
-    }
-
     public FlameshadowConjuring(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
 
         // Whenever a nontoken creature enters the battlefield under your control, you may pay {R}. If you do, create a token that's a copy of that creature. That token gains haste. Exile it at the beginning of the next end step.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DoIfCostPaid(
                 new FlameshadowConjuringEffect(), new ManaCostsImpl<>("{R}"), "Pay {R} to create a token that's a copy of that creature that entered the battlefield?"),
-                filterNontoken, false, SetTargetPointer.PERMANENT,
+                StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN, false, SetTargetPointer.PERMANENT,
                 "Whenever a nontoken creature enters the battlefield under your control, "
                 + "you may pay {R}. If you do, create a token that's a copy of that creature. "
                 + "That token gains haste. Exile it at the beginning of the next end step");

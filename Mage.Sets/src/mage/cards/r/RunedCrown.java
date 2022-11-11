@@ -22,6 +22,8 @@ import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -40,7 +42,7 @@ public final class RunedCrown extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 1)));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private RunedCrown(final RunedCrown card) {

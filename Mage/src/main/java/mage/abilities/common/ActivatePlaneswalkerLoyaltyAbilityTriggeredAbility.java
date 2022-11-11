@@ -17,6 +17,7 @@ public class ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility extends Triggere
     public ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility(Effect effect, SubType planeswalkerSubType) {
         super(Zone.BATTLEFIELD, effect, false);
         this.planeswalkerSubType = planeswalkerSubType;
+        setTriggerPhrase("Whenever you activate a loyalty ability of a " + planeswalkerSubType.getDescription() + " planeswalker, ");
     }
 
     private ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility(final ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility ability) {
@@ -48,14 +49,7 @@ public class ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility extends Triggere
                 || !permanent.hasSubtype(planeswalkerSubType, game)) {
             return false;
         }
-        this.getEffects().setValue("stackAbility", stackAbility);
+        this.getEffects().setValue("stackObject", stackAbility);
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you activate a loyalty ability of a "
-                + planeswalkerSubType.getDescription()
-                + " planeswalker, " ;
     }
 }

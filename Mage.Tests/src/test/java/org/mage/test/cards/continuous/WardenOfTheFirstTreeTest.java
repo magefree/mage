@@ -26,7 +26,7 @@ public class WardenOfTheFirstTreeTest extends CardTestPlayerBase {
         // {3}{W/B}{W/B}{W/B}: If Warden of the First Tree is a Spirit, put five +1/+1 counters on it.
         addCard(Zone.HAND, playerA, "Warden of the First Tree", 2); // {G}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Warden of the First Tree");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Warden of the First Tree", true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{W/B}:");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -48,7 +48,7 @@ public class WardenOfTheFirstTreeTest extends CardTestPlayerBase {
         // {3}{W/B}{W/B}{W/B}: If Warden of the First Tree is a Spirit, put five +1/+1 counters on it.
         addCard(Zone.HAND, playerA, "Warden of the First Tree", 2); // {G}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Warden of the First Tree");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Warden of the First Tree", true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{W/B}:");
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}{W/B}{W/B}:");
 
@@ -72,7 +72,7 @@ public class WardenOfTheFirstTreeTest extends CardTestPlayerBase {
         // {3}{W/B}{W/B}{W/B}: If Warden of the First Tree is a Spirit, put five +1/+1 counters on it.
         addCard(Zone.HAND, playerA, "Warden of the First Tree", 2); // {G}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Warden of the First Tree");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Warden of the First Tree", true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{W/B}:");
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}{W/B}{W/B}:");
 
@@ -104,7 +104,7 @@ public class WardenOfTheFirstTreeTest extends CardTestPlayerBase {
         // {3}{W/B}{W/B}{W/B}: If Warden of the First Tree is a Spirit, put five +1/+1 counters on it.
         addCard(Zone.HAND, playerA, "Warden of the First Tree", 2); // {G}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Warden of the First Tree");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Warden of the First Tree", true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{W/B}:");
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}{W/B}{W/B}:");
 

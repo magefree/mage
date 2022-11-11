@@ -46,8 +46,8 @@ public final class MythosOfBrokkos extends CardImpl {
 class MythosOfBrokkosEffect extends OneShotEffect {
 
     private static final Condition condition = new CompoundCondition(
-            new ManaWasSpentCondition(ColoredManaSymbol.U),
-            new ManaWasSpentCondition(ColoredManaSymbol.B)
+            ManaWasSpentCondition.BLUE,
+            ManaWasSpentCondition.BLACK
     );
     private static final FilterCard filter = new FilterPermanentCard("permanent cards");
 
@@ -87,5 +87,10 @@ class MythosOfBrokkosEffect extends OneShotEffect {
         player.choose(outcome, player.getGraveyard(), targetCard, game);
         Cards cards = new CardsImpl(targetCard.getTargets());
         return player.moveCards(cards, Zone.HAND, source, game);
+    }
+
+    @Override
+    public Condition getCondition() {
+        return condition;
     }
 }

@@ -32,7 +32,7 @@ public final class RepeatingBarrage extends CardImpl {
         // Raid — {3}{R}{R}: Return Repeating Barrage from your graveyard to your hand. Activate this ability only if you attacked this turn.
         Ability ability = new ConditionalActivatedAbility(Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToHandEffect(),
-                new ManaCostsImpl("{3}{R}{R}"),
+                new ManaCostsImpl<>("{3}{R}{R}"),
                 RaidCondition.instance);
         ability.setAbilityWord(AbilityWord.RAID);
         ability.addHint(RaidHint.instance);

@@ -64,7 +64,6 @@ public class ModalDoubleFacesCardsInCommanderTest extends CardTestCommanderDuelB
         setStrictChooseMode(true);
         setStopAt(5, PhaseStep.END_TURN);
         execute();  // possible bug: you can catch choose dialog for duplicated upkeep triggers
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -85,7 +84,6 @@ public class ModalDoubleFacesCardsInCommanderTest extends CardTestCommanderDuelB
         setStrictChooseMode(true);
         setStopAt(5, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
 }

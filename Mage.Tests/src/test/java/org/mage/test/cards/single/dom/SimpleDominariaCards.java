@@ -2,7 +2,6 @@ package org.mage.test.cards.single.dom;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -71,20 +70,12 @@ public class SimpleDominariaCards extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Avatar of Woe");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}");
-        addTarget(playerB, "Knight of Grace");
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
 
-        try {
-            execute();
-            Assert.fail("must throw exception on execute");
-        } catch (Throwable e) {
-            if (!e.getMessage().contains("setup good targets")) {
-                Assert.fail("must throw error about bad targets, but got:\n" + e.getMessage());
-            }
-        }
+        execute();
 
-        assertTapped("Avatar of Woe", false);
         assertGraveyardCount(playerA, "Knight of Grace", 0);
+        assertGraveyardCount(playerB, "Avatar of Woe", 1); // Autokills itself since its only valid target
     }
 
     @Test

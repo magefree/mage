@@ -30,7 +30,7 @@ public final class ExoticCurse extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Domain - Enchanted creature gets -1/-1 for each basic land type among lands you control.
         DynamicValue unboost = new SignInversionDynamicValue(DomainValue.REGULAR);

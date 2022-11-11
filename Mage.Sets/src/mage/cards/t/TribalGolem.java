@@ -75,7 +75,7 @@ public final class TribalGolem extends CardImpl {
                 new GainAbilitySourceEffect(new SimpleActivatedAbility(
                         Zone.BATTLEFIELD,
                         new RegenerateSourceEffect(),
-                        new ManaCostsImpl("{B}")
+                        new ManaCostsImpl<>("{B}")
                 )),
                 new PermanentsOnTheBattlefieldCondition(filter5),
                 ", and \"{B}: Regenerate {this}\" as long as you control a Zombie"

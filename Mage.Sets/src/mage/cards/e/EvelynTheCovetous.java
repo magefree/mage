@@ -16,6 +16,7 @@ import mage.filter.FilterPermanent;
 import mage.game.CardState;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -161,7 +162,7 @@ class EvelynTheCovetousManaEffect extends AsThoughEffectImpl implements AsThough
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (!source.isControlledBy(affectedControllerId) || !EvelynTheCovetousWatcher.checkUsed(source, game)) {
+        if (!source.isControlledBy(affectedControllerId) || EvelynTheCovetousWatcher.checkUsed(source, game)) {
             return false;
         }
         Card card = game.getCard(CardUtil.getMainCardId(game, sourceId));
@@ -199,7 +200,7 @@ class EvelynTheCovetousWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST
+        if ((event.getType() == GameEvent.EventType.SPELL_CAST || event.getType() == GameEvent.EventType.LAND_PLAYED)
                 && event.getAdditionalReference() != null) {
             usedMap.computeIfAbsent(
                     event.getAdditionalReference()
@@ -228,12 +229,16 @@ class EvelynTheCovetousWatcher extends Watcher {
     }
 
     static boolean checkUsed(Ability source, Game game) {
+        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        if (sourceObject == null) {
+            return true;
+        }
         return game
                 .getState()
                 .getWatcher(EvelynTheCovetousWatcher.class)
                 .usedMap
                 .getOrDefault(
-                        new MageObjectReference(source),
+                        new MageObjectReference(sourceObject, game),
                         Collections.emptySet()
                 ).contains(source.getControllerId());
     }

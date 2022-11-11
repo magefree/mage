@@ -1,4 +1,3 @@
-
 package mage.cards.n;
 
 import java.util.UUID;
@@ -19,13 +18,13 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class NightmarishEnd extends CardImpl {
 
+    private static final DynamicValue xValue = new SignInversionDynamicValue(CardsInControllerHandCount.instance);
+
     public NightmarishEnd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");
 
-
         // Target creature gets -X/-X until end of turn, where X is the number of cards in your hand.
-        DynamicValue xValue = new SignInversionDynamicValue(CardsInControllerHandCount.instance);
-        Effect effect = new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn, true);
+        Effect effect = new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn);
         effect.setText("Target creature gets -X/-X until end of turn, where X is the number of cards in your hand");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

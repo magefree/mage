@@ -31,7 +31,7 @@ public class ChronozoaTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chronozoa");
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Sacrifice a creature");
-        addTarget(playerA, "Viscera Seer");
+        setChoice(playerA, "Viscera Seer");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

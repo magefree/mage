@@ -1,8 +1,7 @@
-
 package mage.cards.s;
 
 import mage.abilities.effects.common.continuous.SwitchPowerToughnessTargetEffect;
-import mage.abilities.keyword.SpliceOntoArcaneAbility;
+import mage.abilities.keyword.SpliceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -25,9 +24,9 @@ public final class StrangeInversion extends CardImpl {
 
         // Switch target creature's power and toughness until end of turn.
         this.getSpellAbility().addEffect(new SwitchPowerToughnessTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent().withChooseHint("switch power and toughness"));
         // Splice onto Arcane {1}{R}
-        this.addAbility(new SpliceOntoArcaneAbility("{1}{R}"));
+        this.addAbility(new SpliceAbility(SpliceAbility.ARCANE, "{1}{R}"));
     }
 
     private StrangeInversion(final StrangeInversion card) {

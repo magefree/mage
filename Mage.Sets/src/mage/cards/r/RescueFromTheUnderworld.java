@@ -106,6 +106,7 @@ class RescueFromTheUnderworldCreateDelayedTriggeredAbilityEffect extends OneShot
     public RescueFromTheUnderworldCreateDelayedTriggeredAbilityEffect(DelayedTriggeredAbility ability) {
         super(ability.getEffects().getOutcome(ability));
         this.ability = ability;
+        this.staticText = "Return that card and the sacrificed card to the battlefield under your control at the beginning of your next upkeep";
     }
 
     public RescueFromTheUnderworldCreateDelayedTriggeredAbilityEffect(final RescueFromTheUnderworldCreateDelayedTriggeredAbilityEffect effect) {
@@ -140,12 +141,6 @@ class RescueFromTheUnderworldCreateDelayedTriggeredAbilityEffect extends OneShot
         game.addDelayedTriggeredAbility(delayedAbility, source);
         return true;
     }
-
-    @Override
-    public String getText(Mode mode) {
-        return ability.getRule();
-    }
-
 }
 
 class RescueFromTheUnderworldDelayedTriggeredAbility extends DelayedTriggeredAbility {

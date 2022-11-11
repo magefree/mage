@@ -51,7 +51,7 @@ public final class ArmixFiligreeThrasher extends CardImpl {
 
         // Whenever Armix, Filigree Thrasher attacks, you may discard a card. When you do, target creature defending player controls gets -X/-X until end of turn, where X is the number of artifacts you control plus the number of artifact cards in your graveyard.
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
-                new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn, true), false,
+                new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn), false,
                 "target creature defending player controls gets -X/-X until end of turn, " +
                 "where X is the number of artifacts you control plus the number of artifact cards in your graveyard"
         );

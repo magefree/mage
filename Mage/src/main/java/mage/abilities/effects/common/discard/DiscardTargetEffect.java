@@ -74,26 +74,19 @@ public class DiscardTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        if (mode.getTargets().isEmpty()) {
-            sb.append("that player");
-        } else {
-            sb.append("target ").append(mode.getTargets().get(0).getTargetName());
-        }
+        StringBuilder sb = new StringBuilder(getTargetPointer().describeTargets(mode.getTargets(), "that player"));
         sb.append(" discards ");
-        if (amount.toString().equals("1") || amount.toString().equals("a")) {
-            sb.append("a card");
-        } else {
-            sb.append(CardUtil.numberToText(amount.toString())).append(" cards");
-        }
+        String value = amount.toString();
+        sb.append(CardUtil.numberToText(value, "a"));
+        sb.append(value.equals("1") ? " card" : " cards");
         if (randomDiscard) {
             sb.append(" at random");
         }
         String message = amount.getMessage();
         if (!message.isEmpty()) {
-            sb.append(" for each ");
+            sb.append(value.equals("X") ? ", where X is " : " for each ");
+            sb.append(message);
         }
-        sb.append(message);
         return sb.toString();
     }
 }

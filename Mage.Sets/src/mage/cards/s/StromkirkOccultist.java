@@ -33,7 +33,7 @@ public final class StromkirkOccultist extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ExileTopXMayPlayUntilEndOfTurnEffect(1), false));
 
         // Madness {1}{R}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{1}{R}")));
     }
 
     private StromkirkOccultist(final StromkirkOccultist card) {

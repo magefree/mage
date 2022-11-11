@@ -21,7 +21,7 @@ public final class BoarToken extends TokenImpl {
         power = new MageInt(3);
         toughness = new MageInt(3);
 
-        availableImageSetCodes = Arrays.asList("PCA");
+        availableImageSetCodes = Arrays.asList("PCA", "2X2");
     }
 
     public BoarToken(final BoarToken token) {

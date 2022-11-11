@@ -52,7 +52,7 @@ public final class SkycatSovereign extends CardImpl {
 
         // {2}{W}{U}: Create a 1/1 white Cat Bird creature token with flying.
         this.addAbility(new SimpleActivatedAbility(
-                new CreateTokenEffect(new CatBirdToken()), new ManaCostsImpl("{2}{W}{U}")
+                new CreateTokenEffect(new CatBirdToken()), new ManaCostsImpl<>("{2}{W}{U}")
         ));
     }
 

@@ -31,7 +31,7 @@ public class InfiniteReflectionTest extends CardTestPlayerBase {
         // Nontoken creatures you control enter the battlefield as a copy of enchanted creature.
         addCard(Zone.HAND, playerA, "Infinite Reflection", 1); // {5}{U}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Infinite Reflection", "Silvercoat Lion");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Infinite Reflection", "Silvercoat Lion", true);
 //        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nantuko Husk");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reanimate", "Pillarfield Ox");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

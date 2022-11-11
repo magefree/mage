@@ -1,23 +1,23 @@
-
 package mage.abilities.costs.common;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
+import mage.abilities.costs.SacrificeCost;
 import mage.constants.AbilityType;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
-public class SacrificeAllCost extends CostImpl {
+public class SacrificeAllCost extends CostImpl implements SacrificeCost {
 
     private final FilterPermanent filter;
     private final List<Permanent> permanents = new ArrayList<>();

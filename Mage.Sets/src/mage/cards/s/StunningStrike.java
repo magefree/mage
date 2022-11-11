@@ -24,7 +24,6 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -53,7 +52,7 @@ public final class StunningStrike extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // When Stunning Strike enters the battlefield, tap enchanted creature and remove it from combat.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new StunningStrikeEffect()));
@@ -93,8 +92,7 @@ class StunningStrikeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Optional.of(source.getSourcePermanentOrLKI(game))
-                .filter(Objects::nonNull)
+        Optional.ofNullable(source.getSourcePermanentOrLKI(game))
                 .map(Permanent::getAttachedTo)
                 .map(game::getPermanent)
                 .ifPresent(permanent -> {

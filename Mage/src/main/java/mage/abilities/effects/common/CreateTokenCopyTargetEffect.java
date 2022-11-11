@@ -224,11 +224,11 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         }
         if (tokenPower != Integer.MIN_VALUE) {
             token.removePTCDA();
-            token.getPower().modifyBaseValue(tokenPower);
+            token.setPower(tokenPower);
         }
         if (tokenToughness != Integer.MIN_VALUE) {
             token.removePTCDA();
-            token.getToughness().modifyBaseValue(tokenToughness);
+            token.setToughness(tokenToughness);
         }
         if (onlySubType != null) {
             token.removeAllCreatureTypes();
@@ -306,6 +306,11 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         }
         if (mode.getTargets().isEmpty()) {
             throw new UnsupportedOperationException("Using default rule generation of target effect without having a target object");
+        }
+        if (mode.getTargets().get(0).getMinNumberOfTargets() == 0) {
+            sb.append("up to ");
+            sb.append(CardUtil.numberToText(mode.getTargets().get(0).getMaxNumberOfTargets()));
+            sb.append(' ');
         }
         String targetName = mode.getTargets().get(0).getTargetName();
         if (!targetName.startsWith("another target")) {

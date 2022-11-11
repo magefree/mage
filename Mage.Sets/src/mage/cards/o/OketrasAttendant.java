@@ -30,10 +30,10 @@ public final class OketrasAttendant extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
 
         // Embalm {3}{W}{W}
-        this.addAbility(new EmbalmAbility(new ManaCostsImpl("{3}{W}{W}"), this));
+        this.addAbility(new EmbalmAbility(new ManaCostsImpl<>("{3}{W}{W}"), this));
 
     }
 

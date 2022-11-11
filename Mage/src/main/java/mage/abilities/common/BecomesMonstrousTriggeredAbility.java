@@ -16,6 +16,7 @@ public class BecomesMonstrousTriggeredAbility extends TriggeredAbilityImpl {
 
     public BecomesMonstrousTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        setTriggerPhrase("Whenever a creature you control becomes monstrous, ");
     }
 
     public BecomesMonstrousTriggeredAbility(final BecomesMonstrousTriggeredAbility ability) {
@@ -41,10 +42,5 @@ public class BecomesMonstrousTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature you control becomes monstrous, " ;
     }
 }

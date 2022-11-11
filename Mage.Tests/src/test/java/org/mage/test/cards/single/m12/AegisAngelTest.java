@@ -27,7 +27,6 @@ public class AegisAngelTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertAbility(playerA, lion, IndestructibleAbility.getInstance(), true);
     }
@@ -44,13 +43,12 @@ public class AegisAngelTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertAbility(playerA, lion, IndestructibleAbility.getInstance(), true);
     }
 
     @Test
-    public void testAngelDiesBeforeEntering() {
+    public void testAngelDiesBeforeETBResolves() {
         addCard(Zone.BATTLEFIELD, playerA, "Scrubland", 9);
         addCard(Zone.BATTLEFIELD, playerA, lion);
         addCard(Zone.HAND, playerA, angel);
@@ -58,13 +56,12 @@ public class AegisAngelTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, angel);
         addTarget(playerA, lion);
-
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, murder, angel);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, murder, angel, "When ");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, angel, 1);
         assertGraveyardCount(playerA, murder, 1);
@@ -86,7 +83,6 @@ public class AegisAngelTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, angel, 1);
         assertGraveyardCount(playerA, murder, 1);
@@ -109,7 +105,6 @@ public class AegisAngelTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, act, 1);
         assertPermanentCount(playerB, angel, 1);

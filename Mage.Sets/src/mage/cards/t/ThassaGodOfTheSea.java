@@ -46,7 +46,7 @@ public final class ThassaGodOfTheSea extends CardImpl {
 
         // {1}{U}: Target creature you control can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(
-                new CantBeBlockedTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{U}")
+                new CantBeBlockedTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{1}{U}")
         );
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);

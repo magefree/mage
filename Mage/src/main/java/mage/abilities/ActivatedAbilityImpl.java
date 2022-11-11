@@ -14,6 +14,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.command.CommandObject;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -27,14 +28,17 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 
         public int turnNum;
         public int activationCounter;
+        public int totalActivations;
 
-        public ActivationInfo(int turnNum, int activationCounter) {
+        public ActivationInfo(int turnNum, int activationCounter, int totalActivations) {
             this.turnNum = turnNum;
             this.activationCounter = activationCounter;
+            this.totalActivations = totalActivations;
         }
     }
 
     protected int maxActivationsPerTurn = Integer.MAX_VALUE;
+    protected int maxActivationsPerGame = Integer.MAX_VALUE;
     protected Condition condition;
     protected TimingRule timing = TimingRule.INSTANT;
     protected TargetController mayActivate = TargetController.YOU;
@@ -50,6 +54,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         mayActivate = ability.mayActivate;
         activatorId = ability.activatorId;
         maxActivationsPerTurn = ability.maxActivationsPerTurn;
+        maxActivationsPerGame = ability.maxActivationsPerGame;
         condition = ability.condition;
     }
 
@@ -204,7 +209,9 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 
     @Override
     public ManaOptions getMinimumCostToActivate(UUID playerId, Game game) {
-        return getManaCostsToPay().getOptions();
+        Player player = game.getPlayer(playerId);
+
+        return getManaCostsToPay().getOptions(player.canPayLifeCost(this));
     }
 
     protected boolean controlsAbility(UUID playerId, Game game) {
@@ -239,12 +246,17 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     }
 
     protected boolean hasMoreActivationsThisTurn(Game game) {
-        if (getMaxActivationsPerTurn(game) == Integer.MAX_VALUE) {
+        if (getMaxActivationsPerTurn(game) == Integer.MAX_VALUE && maxActivationsPerGame == Integer.MAX_VALUE) {
             return true;
         }
         ActivationInfo activationInfo = getActivationInfo(game);
-        return activationInfo == null
-                || activationInfo.turnNum != game.getTurnNum()
+        if (activationInfo == null) {
+            return true;
+        }
+        if (activationInfo.totalActivations >= maxActivationsPerGame) {
+            return false;
+        }
+        return activationInfo.turnNum != game.getTurnNum()
                 || activationInfo.activationCounter < getMaxActivationsPerTurn(game);
     }
 
@@ -255,13 +267,14 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         }
         ActivationInfo activationInfo = getActivationInfo(game);
         if (activationInfo == null) {
-            activationInfo = new ActivationInfo(game.getTurnNum(), 1);
+            activationInfo = new ActivationInfo(game.getTurnNum(), 1, 0);
         } else if (activationInfo.turnNum != game.getTurnNum()) {
             activationInfo.turnNum = game.getTurnNum();
             activationInfo.activationCounter = 1;
         } else {
             activationInfo.activationCounter++;
         }
+        activationInfo.totalActivations++;
         setActivationInfo(activationInfo, game);
         return true;
     }
@@ -281,10 +294,12 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
                 .getValue(CardUtil.getCardZoneString("activationsTurn" + originalId, sourceId, game));
         Integer activationCount = (Integer) game.getState()
                 .getValue(CardUtil.getCardZoneString("activationsCount" + originalId, sourceId, game));
-        if (turnNum == null || activationCount == null) {
+        Integer totalActivations = (Integer) game.getState()
+                .getValue(CardUtil.getCardZoneString("totalActivations" + originalId, sourceId, game));
+        if (turnNum == null || activationCount == null || totalActivations == null) {
             return null;
         }
-        return new ActivationInfo(turnNum, activationCount);
+        return new ActivationInfo(turnNum, activationCount, totalActivations);
     }
 
     protected void setActivationInfo(ActivationInfo activationInfo, Game game) {
@@ -292,5 +307,13 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
                 .getCardZoneString("activationsTurn" + originalId, sourceId, game), activationInfo.turnNum);
         game.getState().setValue(CardUtil
                 .getCardZoneString("activationsCount" + originalId, sourceId, game), activationInfo.activationCounter);
+        game.getState().setValue(CardUtil
+                .getCardZoneString("totalActivations" + originalId, sourceId, game), activationInfo.totalActivations);
+    }
+
+    @Override
+    public ActivatedAbilityImpl setCondition(Condition condition) {
+        this.condition = condition;
+        return this;
     }
 }

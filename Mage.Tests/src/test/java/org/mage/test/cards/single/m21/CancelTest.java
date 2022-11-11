@@ -20,7 +20,6 @@ public class CancelTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Grizzly Bears", 1);
         assertGraveyardCount(playerA, "Cancel", 1);

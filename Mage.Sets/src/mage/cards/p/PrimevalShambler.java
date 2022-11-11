@@ -29,7 +29,7 @@ public final class PrimevalShambler extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {B}: Primeval Shambler gets +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{B}")));
     }
 
     private PrimevalShambler(final PrimevalShambler card) {

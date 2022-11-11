@@ -183,13 +183,12 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public void setCanPayLifeCost(boolean canPayLifeCost) {
-
+    public void setPayLifeCostLevel(PayLifeCostLevel playLifeCostLevel) {
     }
 
     @Override
-    public boolean getCanPayLifeCost() {
-        return false;
+    public PayLifeCostLevel getPayLifeCostLevel() {
+        return PayLifeCostLevel.none;
     }
 
     @Override
@@ -273,16 +272,6 @@ public class PlayerStub implements Player {
 
     @Override
     public void setLandsPerTurn(int landsPerTurn) {
-
-    }
-
-    @Override
-    public int getLoyaltyUsePerTurn() {
-        return 0;
-    }
-
-    @Override
-    public void setLoyaltyUsePerTurn(int loyaltyUsePerTurn) {
 
     }
 
@@ -558,11 +547,6 @@ public class PlayerStub implements Player {
 
     @Override
     public boolean cast(SpellAbility ability, Game game, boolean noMana, ApprovingObject approvingObject) {
-        return false;
-    }
-
-    @Override
-    public boolean putInHand(Card card, Game game) {
         return false;
     }
 
@@ -1428,6 +1412,11 @@ public class PlayerStub implements Player {
     @Override
     public FilterMana getPhyrexianColors() {
         return (new FilterMana());
+    }
+
+    @Override
+    public UserData getControllingPlayersUserData(Game game) {
+        return null;
     }
 
     @Override

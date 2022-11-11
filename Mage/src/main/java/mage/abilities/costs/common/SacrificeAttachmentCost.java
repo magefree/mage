@@ -2,6 +2,7 @@ package mage.abilities.costs.common;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.SacrificeCost;
 import mage.abilities.costs.UseAttachedCost;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -11,7 +12,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public class SacrificeAttachmentCost extends UseAttachedCost {
+public class SacrificeAttachmentCost extends UseAttachedCost implements SacrificeCost {
 
     public SacrificeAttachmentCost() {
         super();

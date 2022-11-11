@@ -1,22 +1,20 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.EntersBattlefieldFromGraveyardTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.UndyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  * @author noxx
@@ -34,7 +32,9 @@ public final class TreacherousPitDweller extends CardImpl {
         this.addAbility(new UndyingAbility());
 
         // When Treacherous Pit-Dweller enters the battlefield from a graveyard, target opponent gains control of it.
-        this.addAbility(new TreacherousPitDwellerTriggeredAbility());
+        Ability ability = new EntersBattlefieldFromGraveyardTriggeredAbility(new TreacherousPitDwellerEffect());
+        ability.addTarget(new TargetOpponent());
+        this.addAbility(ability);
     }
 
     private TreacherousPitDweller(final TreacherousPitDweller card) {
@@ -45,41 +45,6 @@ public final class TreacherousPitDweller extends CardImpl {
     public TreacherousPitDweller copy() {
         return new TreacherousPitDweller(this);
     }
-}
-
-class TreacherousPitDwellerTriggeredAbility extends TriggeredAbilityImpl {
-
-    private static final String ruleText = "When {this} enters the battlefield from a graveyard, ";
-
-    public TreacherousPitDwellerTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new TreacherousPitDwellerEffect(), false);
-        addTarget(new TargetOpponent());
-    }
-
-    public TreacherousPitDwellerTriggeredAbility(final TreacherousPitDwellerTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getTargetId().equals(getSourceId()) && ((EntersTheBattlefieldEvent) event).getFromZone() == Zone.GRAVEYARD;
-    }
-
-    @Override
-    public TreacherousPitDwellerTriggeredAbility copy() {
-        return new TreacherousPitDwellerTriggeredAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return ruleText ;
-    }
-
 }
 
 class TreacherousPitDwellerEffect extends ContinuousEffectImpl {

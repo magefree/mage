@@ -19,7 +19,7 @@ public final class BearToken extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(2);
 
-        availableImageSetCodes = Arrays.asList("C15", "JUD", "ODY", "VMA", "MH1", "ELD", "KHM");
+        availableImageSetCodes = Arrays.asList("C15", "JUD", "ODY", "VMA", "MH1", "ELD", "KHM", "DMC");
     }
 
     public BearToken(final BearToken token) {

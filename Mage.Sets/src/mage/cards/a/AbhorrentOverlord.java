@@ -35,7 +35,7 @@ public final class AbhorrentOverlord extends CardImpl {
 
         // When Abhorrent Overlord enters the battlefield, create a number of 1/1 black Harpy creature tokens with flying equal to your devotion to black.
         Effect effect = new CreateTokenEffect(new HarpyToken(), DevotionCount.B);
-        effect.setText("create a number of 1/1 black Harpy creature tokens with flying equal to your devotion to black. <i>(Each {B} in the mana costs of permanents you control counts toward your devotion to black.)</i>");
+        effect.setText("create a number of 1/1 black Harpy creature tokens with flying equal to your devotion to black. " + DevotionCount.B.getReminder());
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect).addHint(DevotionCount.B.getHint()));
 
         // At the beginning of your upkeep, sacrifice a creature.

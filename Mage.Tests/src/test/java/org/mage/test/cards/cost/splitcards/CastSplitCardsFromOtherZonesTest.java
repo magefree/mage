@@ -41,7 +41,6 @@ public class CastSplitCardsFromOtherZonesTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Mindclaw Shaman", 1);
         assertGraveyardCount(playerB, "Wear // Tear", 1);
@@ -73,7 +72,6 @@ public class CastSplitCardsFromOtherZonesTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Mindclaw Shaman", 1);
         assertGraveyardCount(playerB, "Wear // Tear", 1);
@@ -106,7 +104,6 @@ public class CastSplitCardsFromOtherZonesTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Mindclaw Shaman", 1);
         assertGraveyardCount(playerB, "Wear // Tear", 1);
@@ -140,7 +137,6 @@ public class CastSplitCardsFromOtherZonesTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 14);
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);

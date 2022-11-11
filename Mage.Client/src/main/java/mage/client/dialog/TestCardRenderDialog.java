@@ -110,7 +110,7 @@ public class TestCardRenderDialog extends MageDialog {
         this.removeDialog();
     }
 
-    private PermanentView createPermanentCard(Game game, UUID controllerId, String code, String cardNumber, int power, int toughness, int damage, boolean tapped, boolean transform, List<Ability> extraAbilities) {
+    private PermanentView createPermanentCard(Game game, UUID controllerId, String code, String cardNumber, int powerBoosted, int toughnessBoosted, int damage, boolean tapped, boolean transform, List<Ability> extraAbilities) {
         CardInfo cardInfo = CardRepository.instance.findCard(code, cardNumber);
         ExpansionInfo setInfo = ExpansionRepository.instance.getSetByCode(code);
         CardSetInfo testSet = new CardSetInfo(cardInfo.getName(), setInfo.getCode(), cardNumber, cardInfo.getRarity(),
@@ -133,8 +133,8 @@ public class TestCardRenderDialog extends MageDialog {
         }
 
         if (damage > 0) perm.damage(damage, controllerId, null, game);
-        if (power > 0) perm.getPower().setValue(power);
-        if (toughness > 0) perm.getToughness().setValue(toughness);
+        if (powerBoosted > 0) perm.getPower().setBoostedValue(powerBoosted);
+        if (toughnessBoosted > 0) perm.getToughness().setBoostedValue(toughnessBoosted);
         perm.removeSummoningSickness();
         perm.setTapped(tapped);
         PermanentView cardView = new PermanentView(perm, permCard, controllerId, game);

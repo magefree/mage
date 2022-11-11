@@ -34,6 +34,8 @@ public class ChandraDressedToKillEmblem extends Emblem {
         Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND, new ChandraDressedToKillEmblemEffect(), filter, false, true);
         ability.addTarget(new TargetAnyTarget());
         this.getAbilities().add(ability);
+
+        this.setExpansionSetCodeForImage("VOW");
     }
 }
 

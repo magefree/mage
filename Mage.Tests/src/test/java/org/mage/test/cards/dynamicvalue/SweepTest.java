@@ -25,6 +25,8 @@ public class SweepTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Raging Goblin");
         addCard(Zone.HAND, playerA, "Plow Through Reito");
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Plow Through Reito");
         addTarget(playerA, "Raging Goblin"); // target to boost
         addTarget(playerA, "Plains"); // targets to sweep
@@ -43,6 +45,8 @@ public class SweepTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Raging Goblin");
         addCard(Zone.HAND, playerA, "Plow Through Reito");
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Plow Through Reito");
         addTarget(playerA, "Raging Goblin"); // target to boost
         addTarget(playerA, "Plains^Plains"); // targets to sweep
@@ -60,6 +64,8 @@ public class SweepTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
         addCard(Zone.BATTLEFIELD, playerA, "Raging Goblin");
         addCard(Zone.HAND, playerA, "Plow Through Reito");
+
+        setStrictChooseMode(true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Plow Through Reito");
         addTarget(playerA, "Raging Goblin"); // target to boost
@@ -80,12 +86,11 @@ public class SweepTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Plow Through Reito");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Plow Through Reito");
-        addTarget(playerA, "Raging Goblin"); // target to boost
+        // addTarget(playerA, "Raging Goblin"); // Autochosen (target to boost)
         addTarget(playerA, TestPlayer.TARGET_SKIP); // targets to sweep (zero)
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Raging Goblin", 1);
         assertPermanentCount(playerA, "Plains", 5);

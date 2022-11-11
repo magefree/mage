@@ -30,7 +30,7 @@ public final class FlickerOfFate extends CardImpl {
 
         // Exile target creature or enchantment, then return it to the battlefield under its owner's control.
         this.getSpellAbility().addEffect(new ExileTargetForSourceEffect());
-        this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false));
+        this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false, "it").concatBy(", then"));
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 

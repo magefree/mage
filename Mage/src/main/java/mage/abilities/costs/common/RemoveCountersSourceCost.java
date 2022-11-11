@@ -11,7 +11,6 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.util.CardUtil;
 import mage.util.RandomUtil;
 
 import java.util.Iterator;
@@ -27,19 +26,15 @@ public class RemoveCountersSourceCost extends CostImpl {
     private final String name;
 
     public RemoveCountersSourceCost() {
-        this((Counter) null);
+        this.amount = 1;
+        this.name = "";
+        this.text = "remove a counter from {this}";
     }
 
     public RemoveCountersSourceCost(Counter counter) {
-        this.amount = counter != null ? counter.getCount() : 1;
-        this.name = counter != null ? counter.getName() : "";
-        this.text = new StringBuilder("remove ")
-                .append((amount == 1 ? CounterType.findArticle(name) : CardUtil.numberToText(amount)))
-                .append(name.isEmpty() ? "" : (' ' + name))
-                .append(" counter")
-                .append((amount != 1 ? "s" : ""))
-                .append(" from {this}").toString();
-
+        this.amount = counter.getCount();
+        this.name = counter.getName();
+        this.text = "remove " + counter.getDescription() + " from {this}";
     }
 
     private RemoveCountersSourceCost(RemoveCountersSourceCost cost) {

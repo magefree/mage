@@ -49,7 +49,7 @@ public class MockCard extends CardImpl {
 
         this.usesVariousArt = card.usesVariousArt();
 
-        //this.manaCost = new ManaCostsImpl(join(card.getManaCosts(CardInfo.ManaCostSide.ALL)));
+        //this.manaCost = new ManaCostsImpl<>(join(card.getManaCosts(CardInfo.ManaCostSide.ALL)));
         this.manaCostLeftStr = card.getManaCosts(CardInfo.ManaCostSide.LEFT);
         this.manaCostRightStr = card.getManaCosts(CardInfo.ManaCostSide.RIGHT);
         this.manaCostStr = card.getManaCosts(CardInfo.ManaCostSide.ALL);
@@ -63,8 +63,9 @@ public class MockCard extends CardImpl {
         this.flipCard = card.isFlipCard();
 
         this.nightCard = card.isNightCard();
+
         if (card.getSecondSideName() != null && !card.getSecondSideName().isEmpty()) {
-            this.secondSideCard = new MockCard(CardRepository.instance.findCardWPreferredSet(card.getSecondSideName(), card.getSetCode(), false));
+            this.secondSideCard = new MockCard(CardRepository.instance.findCardWPreferredSet(card.getSecondSideName(), card.getSetCode()));
         }
 
         if (card.isAdventureCard()) {

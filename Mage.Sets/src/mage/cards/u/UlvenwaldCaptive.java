@@ -38,7 +38,7 @@ public final class UlvenwaldCaptive extends CardImpl {
 
         // {5}{G}{G}: Transform Ulvenwald Captive.
         this.addAbility(new TransformAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new ManaCostsImpl("{5}{G}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new ManaCostsImpl<>("{5}{G}{G}")));
     }
 
     private UlvenwaldCaptive(final UlvenwaldCaptive card) {

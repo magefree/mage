@@ -34,7 +34,7 @@ public final class ThermalDetonator extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // {2}, Sacrifice Thermal Detonator: Thermal Detonator deals 2 damage to target creature without spaceflight or target player.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl<>("{2}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer(filter));
         this.addAbility(ability);

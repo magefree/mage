@@ -32,7 +32,7 @@ public final class StalkingBloodsucker extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {1}{B}, Discard a card: Stalking Bloodsucker gets +2/+2 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
     }

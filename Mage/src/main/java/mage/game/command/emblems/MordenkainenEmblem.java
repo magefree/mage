@@ -18,5 +18,7 @@ public final class MordenkainenEmblem extends Emblem {
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new MaximumHandSizeControllerEffect(
                 Integer.MAX_VALUE, Duration.WhileOnBattlefield, MaximumHandSizeControllerEffect.HandSizeModification.SET
         )));
+
+        this.setExpansionSetCodeForImage("AFR");
     }
 }

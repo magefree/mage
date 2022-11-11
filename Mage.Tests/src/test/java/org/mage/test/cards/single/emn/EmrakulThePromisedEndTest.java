@@ -20,14 +20,13 @@ public class EmrakulThePromisedEndTest extends CardTestPlayerBase {
         // After that turn, that player takes an extra turn.
         addCard(Zone.HAND, playerB, "Emrakul, the Promised End");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Teferi, Mage of Zhalfir");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Teferi, Mage of Zhalfir",  true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Emrakul, the Promised End");
         addTarget(playerB, playerA);
 
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertActivePlayer(playerB);
     }
@@ -38,14 +37,13 @@ public class EmrakulThePromisedEndTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Teferi, Mage of Zhalfir");
         addCard(Zone.HAND, playerB, "Emrakul, the Promised End");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Teferi, Mage of Zhalfir");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Teferi, Mage of Zhalfir", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Emrakul, the Promised End");
         addTarget(playerB, playerA);
 
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertActivePlayer(playerA);
     }
@@ -56,14 +54,13 @@ public class EmrakulThePromisedEndTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Teferi, Mage of Zhalfir");
         addCard(Zone.HAND, playerB, "Emrakul, the Promised End");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Teferi, Mage of Zhalfir");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Teferi, Mage of Zhalfir", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Emrakul, the Promised End");
         addTarget(playerB, playerA);
 
         setStrictChooseMode(true);
         setStopAt(4, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertActivePlayer(playerA);
     }
@@ -85,7 +82,6 @@ public class EmrakulThePromisedEndTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Emrakul, the Promised End", 1);
     }
@@ -112,7 +108,6 @@ public class EmrakulThePromisedEndTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Emrakul, the Promised End", 1);
     }

@@ -22,7 +22,7 @@ public final class BlackGreenWormToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("EVE", "MMA", "MM2", "C16", "C18");
+        availableImageSetCodes = Arrays.asList("EVE", "MMA", "MM2", "C16", "C18", "2X2");
     }
 
     public BlackGreenWormToken(final BlackGreenWormToken token) {

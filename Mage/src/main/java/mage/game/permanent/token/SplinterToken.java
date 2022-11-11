@@ -1,12 +1,12 @@
 
 package mage.game.permanent.token;
 
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.MageInt;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.abilities.keyword.FlyingAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -22,7 +22,7 @@ public final class SplinterToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{G}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{G}")));
     }
 
     public SplinterToken(final SplinterToken token) {

@@ -32,7 +32,7 @@ public final class ExtraArms extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Whenever enchanted creature attacks, it deals 2 damage to any target.
         ability = new AttacksAttachedTriggeredAbility(new DamageTargetEffect(2, "it"), AttachmentType.AURA, false);

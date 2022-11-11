@@ -10,7 +10,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.permanent.token.CitizenGreenWhiteToken;
 
@@ -22,7 +22,7 @@ import java.util.UUID;
 public final class CaldaiaGuardian extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterCreaturePermanent("creature you control with mana value 4 or greater");
+            = new FilterControlledCreaturePermanent("creature you control with mana value 4 or greater");
 
     static {
         filter.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 3));

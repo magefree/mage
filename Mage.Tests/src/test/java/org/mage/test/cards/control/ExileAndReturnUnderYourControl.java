@@ -91,7 +91,7 @@ public class ExileAndReturnUnderYourControl extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Master of Pearls");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Master of Pearls", true);
         setChoice(playerA, true); // cast it face down as 2/2 creature
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Villainous Wealth", playerB);

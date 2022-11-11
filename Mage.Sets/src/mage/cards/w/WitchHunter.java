@@ -37,7 +37,7 @@ public final class WitchHunter extends CardImpl {
         this.addAbility(damageAbility);
 
         // {1}{W}{W}, {tap}: Return target creature an opponent controls to its owner's hand.
-        Ability returnAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{1}{W}{W}"));
+        Ability returnAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{1}{W}{W}"));
         returnAbility.addCost(new TapSourceCost());
         TargetCreaturePermanent target = new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE);
         returnAbility.addTarget(target);

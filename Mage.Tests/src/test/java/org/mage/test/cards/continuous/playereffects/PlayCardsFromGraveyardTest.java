@@ -28,9 +28,10 @@ public class PlayCardsFromGraveyardTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain");
         addCard(Zone.HAND, playerB, "Lightning Bolt");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Yawgmoth's Will");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reviving Dose");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Yawgmoth's Will", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reviving Dose", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Silvercoat Lion");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

@@ -1,5 +1,3 @@
-
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -10,17 +8,16 @@ import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author LevelX2
  */
-
 public class DrawCardOpponentTriggeredAbility extends TriggeredAbilityImpl {
 
-    boolean setTargetPointer;
+    private final boolean setTargetPointer;
 
     public DrawCardOpponentTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever an opponent draws a card, ");
     }
 
     public DrawCardOpponentTriggeredAbility(final DrawCardOpponentTriggeredAbility ability) {
@@ -40,19 +37,12 @@ public class DrawCardOpponentTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getPlayer(this.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
-            if (setTargetPointer) {
-                for (Effect effect:this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                }
-            }
-            return true;
+        if (!game.getPlayer(this.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
+            return false;
         }
-        return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever an opponent draws a card, ";
+        if (setTargetPointer) {
+            this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
+        }
+        return true;
     }
 }

@@ -43,7 +43,7 @@ public final class SavaenElves extends CardImpl {
         // {G}{G}, {tap}: Destroy target Aura attached to a land.
         Effect effect = new DestroyTargetEffect();
         effect.setText("Destroy target Aura attached to a land");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{G}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{G}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

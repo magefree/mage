@@ -81,6 +81,8 @@ Dissension|DIS|
 Dark Ascension|DKA|
 Deckmasters|DKM|
 Dominaria|DOM|
+Dominaria United|DMU|
+Dominaria United Commander|DMC|
 From the Vault: Dragons|DRB|
 The Dark|DRK|
 Darksteel|DST|
@@ -126,6 +128,7 @@ Judge Promo|JR|
 Judgment|JUD|
 Jumpstart|JMP|
 Jumpstart: Historic Horizons|J21|
+Jumpstart 2022|J22|
 Kaladesh|KLD|
 Kaldheim|KHM|
 Kaldheim Commander|KHC|
@@ -158,6 +161,7 @@ Masters Edition|MED|
 Game Day|MGDC|
 Game Night|GNT|
 Game Night 2019|GN2|
+Game Night Free-for-All|GN3|
 Mirage|MIR|
 Launch Party|MLP|
 Modern Horizons|MH1|
@@ -207,12 +211,15 @@ Stronghold|STH|
 Super Series|SUS|
 Theros|THS|
 Theros Beyond Death|THB|
+The Brothers' War|BRO|
+The Brothers' War Commander|BRC|
 Tempest|TMP|
 Throne of Eldraine|ELD|
 Torment|TOR|
 Tempest Remastered|TPR|
 Time Spiral "Timeshifted"|TSB|
 Time Spiral|TSP|
+Transformers|BOT|
 Urza's Destiny|UDS|
 Ugin's Fate|UGIN|
 Unglued|UGL|

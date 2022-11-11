@@ -51,7 +51,7 @@ public final class Sunforger extends CardImpl {
         // instant card with converted mana cost 4 or less and cast that card 
         // without paying its mana cost. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new SunforgerEffect(), new ManaCostsImpl("{R}{W}"));
+                new SunforgerEffect(), new ManaCostsImpl<>("{R}{W}"));
         ability.addCost(new SunforgerUnattachCost(this.getName()));
         this.addAbility(ability);
 

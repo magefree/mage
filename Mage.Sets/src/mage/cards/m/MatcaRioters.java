@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.hint.common.DomainHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,7 +30,7 @@ public final class MatcaRioters extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Domain - Matca Rioters's power and toughness are each equal to the number of basic land types among lands you control.
-        Effect effect = new SetPowerToughnessSourceEffect(DomainValue.REGULAR, Duration.EndOfGame);
+        Effect effect = new SetBasePowerToughnessSourceEffect(DomainValue.REGULAR, Duration.EndOfGame);
         effect.setText("<i>Domain</i> &mdash; {this}'s power and toughness are each equal to the number of basic land types among lands you control.");
         this.addAbility(new SimpleStaticAbility(Zone.ALL, effect).addHint(DomainHint.instance));
     }

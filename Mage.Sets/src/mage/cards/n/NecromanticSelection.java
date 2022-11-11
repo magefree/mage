@@ -5,10 +5,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
-import mage.abilities.effects.common.continuous.BecomesBlackZombieAdditionEffect;
+import mage.abilities.effects.common.continuous.AddCreatureTypeAdditionEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
@@ -94,7 +95,7 @@ class NecromanticSelectionEffect extends OneShotEffect {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                    ContinuousEffect effect = new BecomesBlackZombieAdditionEffect();
+                    ContinuousEffect effect = new AddCreatureTypeAdditionEffect(SubType.ZOMBIE, true);
                     effect.setText("It's a black Zombie in addition to its other colors and types");
                     effect.setTargetPointer(new FixedTarget(card.getId(), game));
                     game.addEffect(effect, source);

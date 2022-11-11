@@ -3,7 +3,7 @@ package mage.cards.c;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessAllEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessAllEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.cards.AdventureCard;
@@ -32,7 +32,7 @@ public final class CandlekeepInspiration extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}");
 
         // Until end of turn, creatures you control have base power and toughness X/X, where X is the number of cards you own in exile and in your graveyard that are instant cards, are sorcery cards, and/or have an Adventure.
-        this.getSpellAbility().addEffect(new SetPowerToughnessAllEffect(
+        this.getSpellAbility().addEffect(new SetBasePowerToughnessAllEffect(
                 CandlekeepInspirationValue.instance, CandlekeepInspirationValue.instance,
                 Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURE, true
         ).setText("until end of turn, creatures you control have base power and toughness X/X, " +

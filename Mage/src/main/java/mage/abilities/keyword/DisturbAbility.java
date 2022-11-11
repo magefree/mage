@@ -30,14 +30,10 @@ public class DisturbAbility extends SpellAbility {
     private SpellAbility spellAbilityToResolve;
 
     public DisturbAbility(Card card, String manaCost) {
-        super(card.getSpellAbility());
+        super(card.getSecondFaceSpellAbility());
         this.newId();
 
-        // verify check
-        if (card.getSecondCardFace() == null || card.getSecondCardFace().getClass().equals(card.getClass())) {
-            throw new IllegalArgumentException("Wrong code usage. Disturb ability can be added to double faces card only (main side).");
-        }
-
+        // getSecondFaceSpellAbility() already verified that second face exists
         this.setCardName(card.getSecondCardFace().getName() + " with Disturb");
         this.zone = Zone.GRAVEYARD;
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
@@ -46,7 +42,7 @@ public class DisturbAbility extends SpellAbility {
         this.manaCost = manaCost;
         this.getManaCosts().clear();
         this.getManaCostsToPay().clear();
-        this.addManaCost(new ManaCostsImpl(manaCost));
+        this.addManaCost(new ManaCostsImpl<>(manaCost));
         this.addSubAbility(new TransformAbility());
     }
 

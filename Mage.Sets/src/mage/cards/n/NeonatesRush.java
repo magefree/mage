@@ -19,6 +19,7 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -43,6 +44,7 @@ public final class NeonatesRush extends CardImpl {
         // Neonate's Rush deals 1 damage to target creature and 1 damage to its controller. Draw a card.
         this.getSpellAbility().addEffect(new NeonatesRushEffect());
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     private NeonatesRush(final NeonatesRush card) {

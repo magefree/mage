@@ -25,7 +25,7 @@ public final class PactOfTheTitan extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GiantToken()));
 
         // At the beginning of your next upkeep, pay {4}{R}. If you don't, you lose the game.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new PactDelayedTriggeredAbility(new ManaCostsImpl("{4}{R}"))));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new PactDelayedTriggeredAbility(new ManaCostsImpl<>("{4}{R}"))));
     }
 
     private PactOfTheTitan(final PactOfTheTitan card) {

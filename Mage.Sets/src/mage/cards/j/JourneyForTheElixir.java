@@ -168,7 +168,7 @@ class JourneyForTheElixirGraveyardTarget extends TargetCardInYourGraveyard {
 
     private JourneyForTheElixirGraveyardTarget(final JourneyForTheElixirGraveyardTarget target) {
         super(target);
-        this.cards.addAll(cards);
+        this.cards.addAll(target.cards);
     }
 
     @Override

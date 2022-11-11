@@ -6,6 +6,14 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
+ * {@link mage.cards.s.SpellQueller Spell Queller}
+ * {1}{W}{U}
+ * Spirit
+ * Flash Flying
+ *
+ * When Spell Queller enters the battlefield, exile target spell with converted mana cost 4 or less.
+ * When Spell Queller leaves the battlefield, the exiled card's owner may cast that card without paying its mana cost.
+ * 2/3
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
@@ -13,10 +21,6 @@ public class SpellQuellerTest extends CardTestPlayerBase {
     
     @Test
     public void testExileSpellCMCFour() {
-        
-        // {1}{W}{U} Flash Flying 2/3 Spirit
-        // When Spell Queller enters the battlefield, exile target spell with converted mana cost 4 or less.
-        // When Spell Queller leaves the battlefield, the exiled card's owner may cast that card without paying its mana cost.
         addCard(Zone.HAND, playerB, "Spell Queller");
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
@@ -26,7 +30,7 @@ public class SpellQuellerTest extends CardTestPlayerBase {
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Languish");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Spell Queller");
-        addTarget(playerB, "Languish");
+        // Languish is auto-chosen since only possible target
                 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -37,10 +41,6 @@ public class SpellQuellerTest extends CardTestPlayerBase {
     
     @Test
     public void testAttemptExileSpellCMCFive() {
-        
-        // {1}{W}{U} Flash Flying 2/3 Spirit
-        // When Spell Queller enters the battlefield, exile target spell with converted mana cost 4 or less.
-        // When Spell Queller leaves the battlefield, the exiled card's owner may cast that card without paying its mana cost.
         addCard(Zone.HAND, playerB, "Spell Queller");
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
@@ -50,7 +50,7 @@ public class SpellQuellerTest extends CardTestPlayerBase {
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Battle Sliver");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Spell Queller");
-        addTarget(playerB, "Battle Sliver");
+        // Battle Sliver is auto-chosen since only possible target
                 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -62,10 +62,6 @@ public class SpellQuellerTest extends CardTestPlayerBase {
     
     @Test
     public void testExileSpellAndDiesAllowsFreeCast() {
-        
-        // {1}{W}{U} Flash Flying 2/3 Spirit
-        // When Spell Queller enters the battlefield, exile target spell with converted mana cost 4 or less.
-        // When Spell Queller leaves the battlefield, the exiled card's owner may cast that card without paying its mana cost.
         addCard(Zone.HAND, playerB, "Spell Queller");
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
@@ -74,14 +70,14 @@ public class SpellQuellerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Murder"); // {1}{B}{B} instant - destroy target creature
         addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Divination");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Spell Queller");
-        addTarget(playerB, "Divination");
+        // Divination is autochosen since only possible target
         
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Murder");
-        addTarget(playerA, "Spell Queller");
-        setChoice(playerB, true); // elect to cast exiled card (divination) for free
+        // Spell Queller is auto-chosen since only possible target
+        setChoice(playerA, "Yes"); // elect to cast exiled card (divination) for free
         
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -93,16 +89,15 @@ public class SpellQuellerTest extends CardTestPlayerBase {
         assertHandCount(playerA, 3); // card drawn on draw step + 2 from divination
     }
     
-    /*
-     Reported bug: "...Spell Queller exiled my Nissa, Vastwood Seeker. Next turn they processed Nissa with Wasteland Strangler and killed my Tireless Tracker. 
-    I then cast Quarantine Field, targeting Spell Queller and Wasteland Strangler. That's when the error message occurred. (fatal exception)"
-    */
+    /**
+     * Reported bug:
+     *      "...Spell Queller exiled my Nissa, Vastwood Seeker.
+     *      Next turn they processed Nissa with Wasteland Strangler and killed my Tireless Tracker.
+     *      I then cast Quarantine Field, targeting Spell Queller and Wasteland Strangler.
+     *      That's when the error message occurred. (fatal exception)"
+     */
     @Test
     public void testExiledSpellProcessedThenQuellerDies() {
-        
-        // {1}{W}{U} Flash Flying 2/3 Spirit
-        // When Spell Queller enters the battlefield, exile target spell with converted mana cost 4 or less.
-        // When Spell Queller leaves the battlefield, the exiled card's owner may cast that card without paying its mana cost.
         addCard(Zone.HAND, playerB, "Spell Queller");
         
         // {2}{B} 3/2 Eldrazi (devoid)
@@ -118,14 +113,16 @@ public class SpellQuellerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Sylvan Advocate"); // {1}{G} 2/3 vigilance
-        
+
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Centaur Courser");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Spell Queller");
         addTarget(playerB, "Centaur Courser"); // exiles courser
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Wasteland Strangler");
         setChoice(playerB, true);
-        setChoice(playerB, "Centaur Courser"); // put courser from exile into grave from ETB ability
+        addTarget(playerB, "Centaur Courser"); // put courser from exile into grave from ETB ability
         addTarget(playerB, "Sylvan Advocate"); // gives -3/-3 to Advocate 
         
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Wrath of God"); // kill queller and strangler
@@ -140,5 +137,4 @@ public class SpellQuellerTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Wasteland Strangler", 1);
         assertExileCount(playerA, 0);
     }
-    
 }

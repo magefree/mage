@@ -30,6 +30,15 @@ public final class Shapeshifter32Token extends TokenImpl {
         addAbility(new ChangelingAbility());
     }
 
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("CLB")) {
+            this.setTokenType(3);
+        }
+    }
+
     public Shapeshifter32Token(final Shapeshifter32Token token) {
         super(token);
     }

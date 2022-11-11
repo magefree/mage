@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
@@ -17,16 +16,17 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
-import mage.filter.common.FilterArtifactCard;
-import mage.filter.common.FilterControlledArtifactPermanent;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.GoatToken;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class TradingPost extends CardImpl {
@@ -48,7 +48,7 @@ public final class TradingPost extends CardImpl {
 
         // {1}, {T}, Sacrifice a creature: Return target artifact card from your graveyard to your hand.
         Ability ability3 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), new GenericManaCost(1));
-        ability3.addTarget(new TargetCardInGraveyard(new FilterArtifactCard("an artifact card in your graveyard")));
+        ability3.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD));
         ability3.addCost(new TapSourceCost());
         ability3.addCost(new SacrificeTargetCost(new TargetControlledPermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability3);
@@ -56,7 +56,7 @@ public final class TradingPost extends CardImpl {
         // {1}, {T}, Sacrifice an artifact: Draw a card.
         Ability ability4 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
         ability4.addCost(new TapSourceCost());
-        ability4.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))));
+        ability4.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN)));
         this.addAbility(ability4);
 
     }

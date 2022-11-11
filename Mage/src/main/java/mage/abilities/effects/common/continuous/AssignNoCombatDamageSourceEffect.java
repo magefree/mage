@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
@@ -16,21 +15,17 @@ import mage.game.events.GameEvent;
 
 public class AssignNoCombatDamageSourceEffect extends ReplacementEffectImpl {
 
-    private boolean partOfOptionalEffect;
-
     public AssignNoCombatDamageSourceEffect(Duration duration) {
         this(duration, false);
     }
 
     public AssignNoCombatDamageSourceEffect(Duration duration, boolean partOfOptionalEffect) {
         super(duration, Outcome.PreventDamage);
-        this.partOfOptionalEffect = partOfOptionalEffect;
-        staticText = setText();
+        staticText = setText(partOfOptionalEffect);
     }
 
     public AssignNoCombatDamageSourceEffect(final AssignNoCombatDamageSourceEffect effect) {
         super(effect);
-        this.partOfOptionalEffect = effect.partOfOptionalEffect;
     }
 
     @Override
@@ -65,12 +60,8 @@ public class AssignNoCombatDamageSourceEffect extends ReplacementEffectImpl {
         return event.getSourceId().equals(source.getSourceId()) && damageEvent.isCombatDamage();
     }
 
-    private String setText() {
-        String text = "";
-        if(partOfOptionalEffect) {
-            text = "If you do, ";
-        }
-        text += "{this} assigns no combat damage";
+    private String setText(boolean partOfOptionalEffect) {
+        String text = (partOfOptionalEffect ? "If you do, " : "") + "{this} assigns no combat damage";
         switch(duration) {
             case EndOfTurn:
                 text += " this turn";

@@ -21,6 +21,7 @@ import mage.constants.*;
 import mage.game.permanent.token.GiantWizardToken;
 
 import java.util.UUID;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author ciaccona007
@@ -51,7 +52,7 @@ public final class GiantsAmulet extends CardImpl {
         this.addAbility(ability);
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private GiantsAmulet(final GiantsAmulet card) {

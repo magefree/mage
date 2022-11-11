@@ -31,7 +31,7 @@ public final class SelesnyaEulogist extends CardImpl {
         // {2}{G}: Exile target creature card from a graveyard, then populate.
         Ability ability = new SimpleActivatedAbility(
                 new ExileTargetEffect().setText("exile target creature card from a graveyard,"),
-                new ManaCostsImpl("{2}{G}")
+                new ManaCostsImpl<>("{2}{G}")
         );
         ability.addEffect(new PopulateEffect("then"));
         ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE));

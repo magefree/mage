@@ -10,7 +10,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SharesCardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -112,24 +112,9 @@ class MartyrsBondEffect extends OneShotEffect {
             Permanent saccedPermanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null && saccedPermanent != null) {
-                FilterControlledPermanent filter = new FilterControlledPermanent();
-                String message = "permanent with type (";
-                boolean firstType = true;
-
-                List<CardType.CardTypePredicate> cardTypes = new ArrayList<>();
-
-                for (CardType type : saccedPermanent.getCardType(game)) {
-                    cardTypes.add(type.getPredicate());
-                    if (firstType) {
-                        message += type;
-                        firstType = false;
-                    } else {
-                        message += " or " + type;
-                    }
-                }
-                message += ") to sacrifice";
-                filter.add(Predicates.or(cardTypes));
-                filter.setMessage(message);
+                SharesCardTypePredicate predicate = new SharesCardTypePredicate(saccedPermanent.getCardType(game));
+                FilterControlledPermanent filter = new FilterControlledPermanent(predicate.toString());
+                filter.add(predicate);
 
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);

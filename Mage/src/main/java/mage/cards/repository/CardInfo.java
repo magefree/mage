@@ -34,12 +34,6 @@ public class CardInfo {
 
     @DatabaseField(indexName = "name_index")
     protected String name;
-    /**
-     * lower_name exists to speed up importing decks, specifically to provide an indexed column.
-     * H2 does not support expressions in indices, so we need a physical column.
-     */
-    @DatabaseField(indexName = "lower_name_index")
-    protected String lower_name;
     @DatabaseField(indexName = "setCode_cardNumber_index")
     protected String setCode;
     @DatabaseField(indexName = "setCode_cardNumber_index")
@@ -125,7 +119,6 @@ public class CardInfo {
 
     public CardInfo(Card card) {
         this.name = card.getName();
-        this.lower_name = name.toLowerCase(Locale.ENGLISH);
         this.cardNumber = card.getCardNumber();
         this.cardNumberAsInt = CardUtil.parseCardNumberAsInt(card.getCardNumber());
         this.setCode = card.getExpansionSetCode();

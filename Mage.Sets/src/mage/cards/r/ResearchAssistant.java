@@ -29,7 +29,7 @@ public final class ResearchAssistant extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {3}{U}, {T}: Draw a card, then discard a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new ManaCostsImpl("{3}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new ManaCostsImpl<>("{3}{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

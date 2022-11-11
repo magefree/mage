@@ -23,7 +23,7 @@ public final class Rebuild extends CardImpl {
         // Return all artifacts to their owners' hands.
         this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(new FilterArtifactPermanent("artifacts")));
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private Rebuild(final Rebuild card) {

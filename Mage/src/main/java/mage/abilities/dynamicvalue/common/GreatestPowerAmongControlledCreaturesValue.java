@@ -1,4 +1,3 @@
-
 package mage.abilities.dynamicvalue.common;
 
 import mage.MageInt;
@@ -17,7 +16,8 @@ import mage.game.Game;
 public enum GreatestPowerAmongControlledCreaturesValue implements DynamicValue {
     instance;
 
-    private static final Hint hint=new ValueHint("Greatest power among creatures you control",instance);
+    private static final Hint hint = new ValueHint("Greatest power among creatures you control", instance);
+
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         return game

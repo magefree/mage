@@ -49,7 +49,7 @@ public final class ShamanOfForgottenWays extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD, 
                 new ShamanOfForgottenWaysEffect(), 
-                new ManaCostsImpl("{9}{G}{G}"), 
+                new ManaCostsImpl<>("{9}{G}{G}"),
                 FormidableCondition.instance);
         ability.addCost(new TapSourceCost());
         ability.setAbilityWord(AbilityWord.FORMIDABLE);        

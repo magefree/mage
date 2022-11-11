@@ -29,7 +29,7 @@ public final class ClueArtifactToken extends TokenImpl {
         ability.addCost(cost);
         this.addAbility(ability);
 
-        availableImageSetCodes = Arrays.asList("C18", "SOI", "MH2", "AFC", "MID", "VOC", "SLD", "2XM", "NCC", "CLB");
+        availableImageSetCodes = Arrays.asList("C18", "SOI", "MH2", "AFC", "MID", "VOC", "SLD", "2XM", "NCC", "CLB", "40K");
     }
 
     @Override

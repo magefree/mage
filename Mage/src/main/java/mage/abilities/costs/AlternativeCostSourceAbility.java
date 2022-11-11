@@ -277,4 +277,8 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
         return alterCosts;
     }
 
+    public DynamicCost getDynamicCost() {
+        return dynamicCost;
+    }
+
 }

@@ -57,6 +57,7 @@ class SarkhansWhelpTriggeredAbility extends TriggeredAbilityImpl {
     public SarkhansWhelpTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1), false);
         this.addTarget(new TargetAnyTarget());
+        setTriggerPhrase("Whenever you activate an ability of a Sarkhan planeswalker, ");
     }
 
     public SarkhansWhelpTriggeredAbility(final SarkhansWhelpTriggeredAbility ability) {
@@ -79,10 +80,5 @@ class SarkhansWhelpTriggeredAbility extends TriggeredAbilityImpl {
         return event.getPlayerId().equals(getControllerId())
                 && source != null
                 && filter.match(source, game);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you activate an ability of a Sarkhan planeswalker, " ;
     }
 }

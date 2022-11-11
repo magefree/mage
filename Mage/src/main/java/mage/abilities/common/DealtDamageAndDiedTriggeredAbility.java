@@ -33,6 +33,7 @@ public class DealtDamageAndDiedTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.ALL, effect, optional);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever a " + filter.getMessage() + " dealt damage by {this} this turn dies, ");
     }
 
     public DealtDamageAndDiedTriggeredAbility(final DealtDamageAndDiedTriggeredAbility ability) {
@@ -75,10 +76,5 @@ public class DealtDamageAndDiedTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a " + filter.getMessage() + " dealt damage by {this} this turn dies, ";
     }
 }

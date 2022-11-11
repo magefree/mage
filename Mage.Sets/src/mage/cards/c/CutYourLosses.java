@@ -18,7 +18,7 @@ public final class CutYourLosses extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
 
         // Casualty 2
-        this.addAbility(new CasualtyAbility(this, 2));
+        this.addAbility(new CasualtyAbility(2));
 
         // Target player mills half their library, rounded down.
         this.getSpellAbility().addEffect(new MillHalfLibraryTargetEffect(false));

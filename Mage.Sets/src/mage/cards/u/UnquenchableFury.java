@@ -36,7 +36,7 @@ public final class UnquenchableFury extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature has "Whenever this creature attacks, it deals X damage to defending player, where X is the number of cards in their hand."
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(new AttacksTriggeredAbility(

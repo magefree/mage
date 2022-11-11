@@ -63,7 +63,7 @@ class ShellShieldEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         game.addEffect(new BoostTargetEffect(0, 3, Duration.EndOfTurn), source);
-        if (KickedCondition.instance.apply(game, source)) {
+        if (KickedCondition.ONCE.apply(game, source)) {
             game.addEffect(new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.EndOfTurn), source);
         }
         return true;

@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.LoseAllAbilitiesTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.abilities.effects.keyword.ConniveSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,7 +39,7 @@ public final class ObscuraConfluence extends CardImpl {
         // • Until end of turn, target creature loses all abilities and has base power and toughness 1/1.
         this.getSpellAbility().addEffect(new LoseAllAbilitiesTargetEffect(Duration.EndOfTurn)
                 .setText("until end of turn, target creature loses all abilities"));
-        this.getSpellAbility().addEffect(new SetPowerToughnessTargetEffect(1, 1, Duration.EndOfTurn)
+        this.getSpellAbility().addEffect(new SetBasePowerToughnessTargetEffect(1, 1, Duration.EndOfTurn)
                 .setText("and has base power and toughness 1/1"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 

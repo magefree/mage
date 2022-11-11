@@ -35,7 +35,7 @@ public final class Thunderwave extends CardImpl {
         effect.addTableEntry(10, 19, new ThunderwaveEffect());
 
         // 20 | Thunderwave deals 6 damage to each creature your opponents control.
-        effect.addTableEntry(20, 20, new DamageAllEffect(6, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
+        effect.addTableEntry(20, 20, new DamageAllEffect(6, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE).setText("{this} deals 6 damage to each creature your opponents control"));
 
         this.getSpellAbility().addEffect(effect);
     }
@@ -79,7 +79,7 @@ class ThunderwaveEffect extends OneShotEffect {
                 StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game
         )) {
             if (!permanent.getId().equals(target.getFirstTarget())) {
-                permanent.damage(6, source, game);
+                permanent.damage(3, source, game);
             }
         }
         return true;

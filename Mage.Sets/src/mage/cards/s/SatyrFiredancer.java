@@ -54,6 +54,7 @@ class SatyrFiredancerTriggeredAbility extends TriggeredAbilityImpl {
     public SatyrFiredancerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SatyrFiredancerDamageEffect(), false);
         targetAdjuster = SatyrFiredancerAdjuster.instance;
+        setTriggerPhrase("Whenever an instant or sorcery spell you control deals damage to an opponent, ");
     }
 
     public SatyrFiredancerTriggeredAbility(final SatyrFiredancerTriggeredAbility ability) {
@@ -92,11 +93,6 @@ class SatyrFiredancerTriggeredAbility extends TriggeredAbilityImpl {
             effect.setValue("damage", event.getAmount());
         }
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever an instant or sorcery spell you control deals damage to an opponent, " ;
     }
 }
 

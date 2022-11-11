@@ -17,6 +17,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -26,6 +28,7 @@ public final class DarettiScrapSavantEmblem extends Emblem {
 
     public DarettiScrapSavantEmblem() {
         setName("Emblem Daretti");
+        availableImageSetCodes = Arrays.asList("C14", "C16", "CM2");
 
         this.getAbilities().add(new DarettiScrapSavantTriggeredAbility());
     }
@@ -35,6 +38,7 @@ class DarettiScrapSavantTriggeredAbility extends TriggeredAbilityImpl {
 
     DarettiScrapSavantTriggeredAbility() {
         super(Zone.COMMAND, new DarettiScrapSavantEffect(), false);
+        setTriggerPhrase("Whenever an artifact is put into your graveyard from the battlefield, ");
     }
 
     DarettiScrapSavantTriggeredAbility(final DarettiScrapSavantTriggeredAbility ability) {
@@ -61,11 +65,6 @@ class DarettiScrapSavantTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever an artifact is put into your graveyard from the battlefield, " ;
     }
 }
 

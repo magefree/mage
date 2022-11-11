@@ -45,7 +45,7 @@ class MajesticGenesisEffect extends OneShotEffect {
 
     MajesticGenesisEffect() {
         super(Outcome.Benefit);
-        staticText = "reveal the top X cards of your library, where X is the highest mana value of a commander " +
+        staticText = "reveal the top X cards of your library, where X is the greatest mana value of a commander " +
                 "you own on the battlefield or in the command zone. You may put any number of a permanent cards " +
                 "from among them onto the battlefield. Put the rest on the bottom of your library in a random order";
     }

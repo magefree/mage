@@ -26,7 +26,6 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         setStrictChooseMode(true);
         execute();
 
-        assertAllCommandsUsed();
         assertExileCount(playerA, 1);
         assertExileCount(playerB, 1);
         assertExileCount(playerC, 1);
@@ -49,7 +48,6 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         setStrictChooseMode(true);
         execute();
 
-        assertAllCommandsUsed();
         assertExileCount(playerA, 1);
         assertExileCount(playerB, 1);
         assertExileCount(playerC, 1);
@@ -69,7 +67,6 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         setStrictChooseMode(true);
         execute();
 
-        assertAllCommandsUsed();
         assertExileCount(playerA, 1);
         assertExileCount(playerB, 1);
         assertExileCount(playerC, 1);
@@ -94,7 +91,6 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         setStrictChooseMode(true);
         execute();
 
-        assertAllCommandsUsed();
         assertExileCount(playerA, 0);
         assertExileCount(playerB, 1);
         assertExileCount(playerC, 1);
@@ -121,7 +117,6 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         setStrictChooseMode(true);
         execute();
 
-        assertAllCommandsUsed();
         assertExileCount(playerA, 0);
         assertExileCount(playerB, 1);
         assertExileCount(playerC, 1);
@@ -154,8 +149,6 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
 
         setStrictChooseMode(true);
         execute();
-
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Tana, the Bloodsower", 1);
 
@@ -195,8 +188,6 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         setStrictChooseMode(true);
         execute();
 
-        assertAllCommandsUsed();
-
         assertPermanentCount(playerA, "Exotic Orchard", 1);
 
         assertExileCount(playerA, "Exotic Orchard", 0);
@@ -235,8 +226,6 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
 
         setStrictChooseMode(true);
         execute();
-
-        assertAllCommandsUsed();
 
         assertExileCount(playerA, "Lightning Bolt", 1);
         assertExileCount(playerA, "Reliquary Tower", 0);
@@ -278,8 +267,6 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
 
         setStrictChooseMode(true);
         execute();
-
-        assertAllCommandsUsed();
 
         assertExileCount(playerA, "Exotic Orchard", 0);
         assertExileCount(playerA, "Lightning Bolt", 1);
@@ -335,8 +322,6 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
 
         setStrictChooseMode(true);
         execute();
-
-        assertAllCommandsUsed();
 
         // 1 exiled with Share the Spoils
         // 1 exiled Prosper (he only exiles one since we stop before the end step of playerA's second turn)
@@ -398,8 +383,6 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         setStrictChooseMode(true);
         execute();
 
-        assertAllCommandsUsed();
-
         assertPermanentCount(playerA, "Ardenvale Tactician", 1);
 
         assertExileCount(playerA, "Lovestruck Beast", 1);
@@ -456,8 +439,6 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         setStrictChooseMode(true);
         execute();
 
-        assertAllCommandsUsed();
-
         assertExileCount(playerA, "Aether Helix", 0);
         assertExileCount(playerA, "Exotic Orchard", 1);
 
@@ -511,8 +492,6 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         setStrictChooseMode(true);
         execute();
 
-        assertAllCommandsUsed();
-
         assertExileCount(playerA, "Aether Helix", 0);
         assertExileCount(playerA, "Exotic Orchard", 1);
 
@@ -522,5 +501,44 @@ public class ShareTheSpoilsTest extends CardTestCommander4Players {
         assertExileCount(playerD, 2);
 
         assertGraveyardCount(playerA, 1);
+    }
+
+    /**
+     * When a card exiled by Share the Spoils is played, another card is exiled.
+     * Check that this newly exiled card is correctly taken from the deck of the player who played the card,
+     * AND NOT from the controller of Share the Spoils.
+     *
+     * For https://github.com/magefree/mage/issues/9046
+     */
+    @Test
+    public void checkExileFromCorrectDeck() {
+        addCard(Zone.HAND, playerA, shareTheSpoils);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 8);
+
+        // 3rd from the top, exiled when card is played with Share the Spoils
+        addCard(Zone.LIBRARY, playerA, "Lightning Bolt", 1); // {R}
+        // 2nd from the top, exile when Share the Spoils is cast
+        addCard(Zone.LIBRARY, playerA, "Exotic Orchard");
+        // Topmost, draw at beginning of turn
+        addCard(Zone.LIBRARY, playerA, "Reliquary Tower");
+
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, shareTheSpoils);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        playLand(2, PhaseStep.PRECOMBAT_MAIN, playerD, "Exotic Orchard");
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN, playerD);
+
+        setStopAt(2, PhaseStep.END_TURN);
+
+        setStrictChooseMode(true);
+        execute();
+
+        assertPermanentCount(playerD, "Exotic Orchard",1);
+
+        assertExileCount(playerA, 0); // playerA's Exotic Orchard was played by playerD
+        assertExileCount(playerB, 1);
+        assertExileCount(playerC, 1);
+        assertExileCount(playerD, 2); // 2nd card exiled when they played the Exotic Orchard
     }
 }

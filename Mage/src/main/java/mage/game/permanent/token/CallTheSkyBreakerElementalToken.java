@@ -23,7 +23,7 @@ public final class CallTheSkyBreakerElementalToken extends TokenImpl {
 
         this.addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("C15", "CMD", "EMA", "EVE", "C21", "NCC");
+        availableImageSetCodes = Arrays.asList("C15", "EMA", "EVE", "C21", "NCC");
     }
 
     @Override

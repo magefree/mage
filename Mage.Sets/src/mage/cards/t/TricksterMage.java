@@ -41,7 +41,7 @@ public final class TricksterMage extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {U}, {tap}, Discard a card: You may tap or untap target artifact, creature, or land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MayTapOrUntapTargetEffect(), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MayTapOrUntapTargetEffect(), new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetPermanent(filter));

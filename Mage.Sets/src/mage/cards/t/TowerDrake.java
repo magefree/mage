@@ -32,7 +32,7 @@ public final class TowerDrake extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {W}: Tower Drake gets +0/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl("{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{W}")));
     }
 
     private TowerDrake(final TowerDrake card) {

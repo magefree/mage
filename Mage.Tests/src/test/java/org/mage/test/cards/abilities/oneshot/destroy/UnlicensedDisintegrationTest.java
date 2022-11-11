@@ -43,8 +43,7 @@ public class UnlicensedDisintegrationTest extends CardTestPlayerBase{
         
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
-        
+
         assertLife(playerA, 20);
         assertGraveyardCount(playerA, "Unlicensed Disintegration", 1);
         assertLife(playerB, 17);
@@ -69,8 +68,7 @@ public class UnlicensedDisintegrationTest extends CardTestPlayerBase{
         
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
-        
+
         assertLife(playerA, 20);
         assertGraveyardCount(playerA, "Unlicensed Disintegration", 1);
         
@@ -93,8 +91,7 @@ public class UnlicensedDisintegrationTest extends CardTestPlayerBase{
         
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
-        
+
         assertLife(playerA, 20);
         assertGraveyardCount(playerA, "Unlicensed Disintegration", 1);
         assertLife(playerB, 20);
@@ -116,8 +113,7 @@ public class UnlicensedDisintegrationTest extends CardTestPlayerBase{
         
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
-        
+
         assertLife(playerA, 20);
         assertGraveyardCount(playerA, "Unlicensed Disintegration", 1);
         

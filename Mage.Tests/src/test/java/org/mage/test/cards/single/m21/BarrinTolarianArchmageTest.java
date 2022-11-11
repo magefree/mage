@@ -23,7 +23,6 @@ public class BarrinTolarianArchmageTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // At the beginning of your end step, if a permanent was put into your hand from the battlefield this turn, draw a card.
         assertHandCount(playerA, 2);
@@ -43,7 +42,6 @@ public class BarrinTolarianArchmageTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // At the beginning of your end step, if a permanent was put into your hand from the battlefield this turn, draw a card.
         assertHandCount(playerA, 2);
@@ -63,7 +61,6 @@ public class BarrinTolarianArchmageTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // At the beginning of your end step, if a permanent was put into your hand from the battlefield this turn, draw a card.
         assertHandCount(playerA, 0);

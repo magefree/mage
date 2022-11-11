@@ -99,7 +99,6 @@ public class ReplicateTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 3); // 1 + 2 replicates
     }
@@ -124,7 +123,6 @@ public class ReplicateTest extends CardTestPlayerBase {
         //setStrictChooseMode(true); - AI must choice
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 3); // 1 + 2 replicates
     }

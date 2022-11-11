@@ -22,7 +22,7 @@ public final class RunAwayTogether extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Choose two target creatures controlled by different players. Return those creatures to their owners' hands.
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect(true)
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect()
                 .setText("Choose two target creatures controlled by different players. " +
                         "Return those creatures to their owners' hands.")
         );

@@ -46,9 +46,19 @@ class DustOfMomentsEffect extends OneShotEffect {
     private static final FilterPermanentOrSuspendedCard filter = new FilterPermanentOrSuspendedCard();
     private final boolean remove;
 
+    static {
+        filter.getPermanentFilter().add(CounterType.TIME.getPredicate());
+    }
+
     DustOfMomentsEffect(boolean remove) {
         super(Outcome.Benefit);
         this.remove = remove;
+        this.staticText = (remove ? "remove" : "put") +
+                " two time counters " +
+                (remove ? "from" : "on") +
+                " each permanent" +
+                (remove ? "" : "with a time counter on it") +
+                " and each suspended card";
     }
 
     private DustOfMomentsEffect(final DustOfMomentsEffect effect) {
@@ -81,18 +91,5 @@ class DustOfMomentsEffect extends OneShotEffect {
             }
         }
         return true;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        StringBuilder sb = new StringBuilder(remove ? "remove" : "put");
-        sb.append(" two time counters ");
-        sb.append(remove ? "from" : "on");
-        sb.append(" each permanent");
-        if (!remove) {
-            sb.append("with a time counter on it");
-        }
-        sb.append(" and each suspended card");
-        return sb.toString();
     }
 }

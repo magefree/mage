@@ -41,7 +41,6 @@ public class CurseOfShallowGravesTest extends CardTestPlayerBase {
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20 - 2 - 2);
@@ -70,7 +69,6 @@ public class CurseOfShallowGravesTest extends CardTestPlayerBase {
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20 - 2);

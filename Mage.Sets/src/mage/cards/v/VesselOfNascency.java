@@ -5,11 +5,11 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.RevealLibraryPickControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.PutCards;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 
@@ -37,7 +37,7 @@ public final class VesselOfNascency extends CardImpl {
         // planeswalker card from among them into your hand. Put the rest into your graveyard.
         Ability ability = new SimpleActivatedAbility(
                 new RevealLibraryPickControllerEffect(4, 1, filter, PutCards.HAND, PutCards.GRAVEYARD),
-                new ManaCostsImpl("{1}{G}"));
+                new ManaCostsImpl<>("{1}{G}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

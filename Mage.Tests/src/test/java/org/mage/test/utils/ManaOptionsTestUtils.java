@@ -1,7 +1,11 @@
 package org.mage.test.utils;
 
 import mage.Mana;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.mana.ManaOptions;
+import mage.util.ManaUtil;
 import org.junit.Assert;
 
 import java.util.HashSet;
@@ -19,8 +23,8 @@ public class ManaOptionsTestUtils {
     //mana info
     //logger.info(playerA.getManaPool().getMana().toString());
     //logger.info(playerA.getManaAvailable(currentGame).toString());
-    public static boolean manaOptionsContain(ManaOptions list, String searchMana) {
-        for (Mana mana : list) {
+    public static boolean manaOptionsContain(String searchMana, ManaOptions manaOptions) {
+        for (Mana mana : manaOptions) {
             if (mana instanceof ConditionalMana) {
                 if ((mana.toString() + ((ConditionalMana)mana).getConditionString()).equals(searchMana)) {
                     return true;
@@ -34,21 +38,9 @@ public class ManaOptionsTestUtils {
         return false;
     }
 
-    public static void assertManaOptions(String searchMana, ManaOptions manaList) {
-        if (!manaOptionsContain(manaList, searchMana)) {
-            Assert.fail("Can't find " + searchMana + " in " + manaList.toString());
-        }
-    }
-
-    public static void assertDuplicatedManaOptions(ManaOptions manaList) {
-        Set<String> list = new HashSet<>();
-        for (Mana mana : manaList) {
-            String s = mana.toString();
-            if (list.contains(s)) {
-                Assert.fail("Found duplicated mana option " + s + " in " + manaList.toString());
-            } else {
-                list.add(s);
-            }
+    public static void assertManaOptions(String searchMana, ManaOptions manaOptions) {
+        if (!manaOptionsContain(searchMana, manaOptions)) {
+            Assert.fail("Can't find " + searchMana + " in " + manaOptions.toString());
         }
     }
 }

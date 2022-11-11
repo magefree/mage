@@ -48,7 +48,7 @@ public final class VizierOfTumblingSands extends CardImpl {
         this.addAbility(ability);
 
         // Cycling {1}{U}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{U}")));
 
         // When you cycle Vizier of Tumbling Sands, untap target permanent.
         ability = new CycleTriggeredAbility(new UntapTargetEffect());

@@ -95,7 +95,6 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Angel of Jubilation", 0);
         assertPermanentCount(playerB, "Food Chain", 0);
@@ -215,8 +214,6 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
-
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
         
@@ -232,7 +229,6 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
      * life (as Griselbrand’s activated ability does) or sacrifice a creature
      * (as Fling does), that spell or ability can’t be cast or activated.
      */
-    
     @Test
     public void testGriselbrandCantPay() {
         setStrictChooseMode(true);
@@ -247,8 +243,5 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-
-        assertAllCommandsUsed();
-
-    }    
+    }
 }

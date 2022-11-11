@@ -78,6 +78,7 @@ public class ReturnToHandSourceEffect extends OneShotEffect {
                 }
                 break;
             case GRAVEYARD:
+            case EXILED:
                 Card card = (Card) mageObject;
                 return !fromBattlefieldOnly && controller.moveCards(card, Zone.HAND, source, game);
             case STACK:

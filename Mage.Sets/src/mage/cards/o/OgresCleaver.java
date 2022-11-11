@@ -13,6 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -28,7 +29,7 @@ public final class OgresCleaver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(5, 0)));
 
         // Equip {5}
-        this.addAbility(new EquipAbility(5, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(5), new TargetControlledCreaturePermanent(), false));
     }
 
     public OgresCleaver (final OgresCleaver card) {

@@ -2,6 +2,7 @@
 package mage.game.command.emblems;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,6 +35,8 @@ public final class DackFaydenEmblem extends Emblem {
     public DackFaydenEmblem() {
         this.setName("Emblem Dack");
         this.getAbilities().add(new DackFaydenEmblemTriggeredAbility());
+
+        availableImageSetCodes = Arrays.asList("CNS", "EMA", "MED");
     }
 }
 

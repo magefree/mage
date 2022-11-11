@@ -447,7 +447,7 @@ public class ScryfallImageSupportCards {
             add("PELD"); // Throne of Eldraine Promos
             add("ELD"); // Throne of Eldraine
             //add("PTG"); // Ponies: The Galloping
-            //add("CMB1"); // Mystery Booster Playtest Cards
+            add("CMB1"); // Mystery Booster Playtest Cards
             add("MB1"); // Mystery Booster
             add("GN2"); // Game Night 2019
             add("HA1"); // Historic Anthology 1
@@ -505,13 +505,24 @@ public class ScryfallImageSupportCards {
             add("VOC"); // Crimson Vow Commander
             add("Y22"); // Alchemy: Innistrad
             add("DBL"); // Innistrad: Double Feature
+            add("CC2"); // Commander Collection: Black
             add("NEO"); // Kamigawa: Neon Dynasty
             add("NEC"); // Neon Dynasty Commander
             add("SNC"); // Streets of New Capenna
             add("NCC"); // New Capenna Commander
             add("SLX"); // Universes Within
             add("CLB"); // Commander Legends: Battle for Baldur's Gate
+            add("2X2"); // Double Masters 2022
+            add("DMU"); // Dominaria United
+            add("DMC"); // Dominaria United Commander
             add("40K"); // Warhammer 40,000
+            add("UNF"); // Unfinity
+            add("GN3"); // Game Night 2022
+            add("BRO"); // The Brothers' War
+            add("BRC"); // The Brothers' War Commander
+            add("BOT"); // Transformers
+            add("J22"); // Jumpstart 2022
+            add("SLC"); // Secret Lair 30th Anniversary Countdown Kit
         }
     };
 

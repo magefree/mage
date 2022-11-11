@@ -90,7 +90,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected int minBlockedBy = 1;
     // maximal number of creatures the creature can be blocked by  0 = no restriction
     protected int maxBlockedBy = 0;
-    protected boolean removedFromCombat;
     protected boolean deathtouched;
 
     protected Map<String, List<UUID>> connectedCards = new HashMap<>();
@@ -103,9 +102,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected List<MarkedDamageInfo> markedDamage;
     protected int markedLifelink;
     protected int timesLoyaltyUsed = 0;
+    protected int loyaltyActivationsAvailable = 1;
     protected int transformCount = 0;
     protected Map<String, String> info;
     protected int createOrder;
+    protected boolean legendRuleApplies = true;
 
     private static final List<UUID> emptyList = Collections.unmodifiableList(new ArrayList<UUID>());
 
@@ -170,6 +171,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.pairedPermanent = permanent.pairedPermanent;
         this.bandedCards.addAll(permanent.bandedCards);
         this.timesLoyaltyUsed = permanent.timesLoyaltyUsed;
+        this.loyaltyActivationsAvailable = permanent.loyaltyActivationsAvailable;
+        this.legendRuleApplies = permanent.legendRuleApplies;
         this.transformCount = permanent.transformCount;
 
         this.morphed = permanent.morphed;
@@ -212,6 +215,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.maxBlockedBy = 0;
         this.copy = false;
         this.goadingPlayers.clear();
+        this.loyaltyActivationsAvailable = 1;
+        this.legendRuleApplies = true;
     }
 
     @Override
@@ -298,7 +303,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                         if (!entry.getKey().canUseActivatedAbilities(this, ability, game, false)) {
                             restrictHints.add(HintUtils.prepareText("Can't use activated abilities" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
                         }
-                        if (!entry.getKey().canTransform(this, ability, game, false)) {
+                        if (!entry.getKey().canTransform(game, false)) {
                             restrictHints.add(HintUtils.prepareText("Can't transform" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
                         }
                     }
@@ -464,6 +469,18 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public void incrementLoyaltyActivationsAvailable() {
+        this.incrementLoyaltyActivationsAvailable(Integer.MAX_VALUE);
+    }
+
+    @Override
+    public void incrementLoyaltyActivationsAvailable(int max) {
+        if (this.loyaltyActivationsAvailable < max) {
+            this.loyaltyActivationsAvailable++;
+        }
+    }
+
+    @Override
     public void addLoyaltyUsed() {
         this.timesLoyaltyUsed++;
     }
@@ -472,9 +489,19 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public boolean canLoyaltyBeUsed(Game game) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
-            return controller.getLoyaltyUsePerTurn() > timesLoyaltyUsed;
+            return loyaltyActivationsAvailable > timesLoyaltyUsed;
         }
         return false;
+    }
+
+    @Override
+    public void setLegendRuleApplies(boolean legendRuleApplies) {
+        this.legendRuleApplies = legendRuleApplies;
+    }
+
+    @Override
+    public boolean legendRuleApplies() {
+        return this.legendRuleApplies;
     }
 
     @Override
@@ -539,18 +566,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean unflip(Game game) {
-        if (flipped) {
-            if (!replaceEvent(EventType.UNFLIP, game)) {
-                this.flipped = false;
-                fireEvent(EventType.UNFLIPPED, game);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
     public boolean flip(Game game) {
         if (!flipped) {
             if (!replaceEvent(EventType.FLIP, game)) {
@@ -572,6 +587,15 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 || this.getAbilities().containsClass(NightboundAbility.class);
     }
 
+    private boolean checkTransformRestrictionEffects(Game game) {
+        for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
+            if (!entry.getKey().canTransform(game, true)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     private Card getOtherFace() {
         return transformed ? this.getMainCard() : this.getMainCard().getSecondCardFace();
     }
@@ -581,14 +605,14 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (!this.isTransformable()
                 || (!ignoreDayNight && this.checkDayNightBound())
                 || this.getOtherFace().isInstantOrSorcery()
-                || (source != null && !source.checkTransformCount(this, game))
-                || this.replaceEvent(EventType.TRANSFORM, game)) {
+                || !this.checkTransformRestrictionEffects(game)
+                || (source != null && !source.checkTransformCount(this, game))) {
             return false;
         }
         if (this.transformed) {
             Card orgCard = this.getMainCard();
-            this.getPower().modifyBaseValue(orgCard.getPower().getValue());
-            this.getToughness().modifyBaseValue(orgCard.getToughness().getValue());
+            this.getPower().setModifiedBaseValue(orgCard.getPower().getValue());
+            this.getToughness().setModifiedBaseValue(orgCard.getToughness().getValue());
         }
         game.informPlayers(this.getLogName() + " transforms into " + this.getOtherFace().getLogName()
                 + CardUtil.getSourceLogName(game, source, this.getId()));
@@ -721,11 +745,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean isRemovedFromCombat() {
-        return removedFromCombat;
-    }
-
-    @Override
     public UUID getControllerId() {
         return this.controllerId;
     }
@@ -743,7 +762,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             return false;
         }
 
-        // For each control change compared to last controler send a GAIN_CONTROL replace event to be able to prevent the gain control (e.g. Guardian Beast)
+        // For each control change compared to last controller send a GAIN_CONTROL replace event to be able to prevent the gain control (e.g. Guardian Beast)
         if (beforeResetControllerId != newControllerId) {
             GameEvent gainControlEvent = GameEvent.getEvent(GameEvent.EventType.GAIN_CONTROL, this.getId(), null, newControllerId);
             if (game.replaceEvent(gainControlEvent)) {
@@ -1298,12 +1317,12 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public void addPower(int power) {
-        this.power.boostValue(power);
+        this.power.increaseBoostedValue(power);
     }
 
     @Override
     public void addToughness(int toughness) {
-        this.toughness.boostValue(toughness);
+        this.toughness.increaseBoostedValue(toughness);
     }
 
     /**
@@ -1477,20 +1496,15 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean removeFromCombat(Game game, boolean withInfo) {
+    public boolean removeFromCombat(Game game, boolean withEvent) {
         if (this.isAttacking() || this.blocking > 0) {
-            return game.getCombat().removeFromCombat(objectId, game, withInfo);
+            return game.getCombat().removeFromCombat(objectId, game, withEvent);
         } else if (this.isPlaneswalker(game)) {
             if (game.getCombat().getDefenders().contains(getId())) {
-                game.getCombat().removePlaneswalkerFromCombat(objectId, game, withInfo);
+                game.getCombat().removePlaneswalkerFromCombat(objectId, game);
             }
         }
         return false;
-    }
-
-    @Override
-    public void setRemovedFromCombat(boolean removedFromCombat) {
-        this.removedFromCombat = removedFromCombat;
     }
 
     @Override

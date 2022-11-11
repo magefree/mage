@@ -17,6 +17,9 @@ import mage.constants.SubType;
 import mage.game.Game;
 
 import java.util.UUID;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.constants.Outcome;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -34,7 +37,7 @@ public final class TrickstersTalisman extends CardImpl {
         this.addAbility(ability.withFlavorWord("Invoke Duplicity"));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private TrickstersTalisman(final TrickstersTalisman card) {

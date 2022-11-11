@@ -6,7 +6,6 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -58,6 +57,7 @@ class SatoruUmezawaTriggeredAbility extends TriggeredAbilityImpl {
     SatoruUmezawaTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LookLibraryAndPickControllerEffect(3, 1, PutCards.HAND, PutCards.BOTTOM_ANY));
         this.setTriggersOnce(true);
+        setTriggerPhrase("Whenever you activate a ninjutsu ability, ");
     }
 
     private SatoruUmezawaTriggeredAbility(final SatoruUmezawaTriggeredAbility ability) {
@@ -81,11 +81,6 @@ class SatoruUmezawaTriggeredAbility extends TriggeredAbilityImpl {
         }
         StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getTargetId());
         return stackAbility.getStackAbility() instanceof NinjutsuAbility;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you activate a ninjutsu ability, ";
     }
 }
 

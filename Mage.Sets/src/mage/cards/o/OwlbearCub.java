@@ -52,6 +52,7 @@ class OwlbearCubTriggeredAbility extends TriggeredAbilityImpl {
     OwlbearCubTriggeredAbility() {
         super(Zone.BATTLEFIELD, new OwlbearCubEffect());
         this.withFlavorWord("Mama's Coming");
+        setTriggerPhrase("Whenever Owlbear Cub attacks a player who controls eight or more lands, ");
     }
 
     private OwlbearCubTriggeredAbility(final OwlbearCubTriggeredAbility ability) {
@@ -82,11 +83,6 @@ class OwlbearCubTriggeredAbility extends TriggeredAbilityImpl {
         }
         this.getEffects().setTargetPointer(new FixedTarget(player.getId()));
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever Owlbear Cub attacks a player who controls eight or more lands, ";
     }
 }
 

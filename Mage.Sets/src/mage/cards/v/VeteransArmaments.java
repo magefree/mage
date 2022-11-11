@@ -18,6 +18,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -46,7 +47,7 @@ public final class VeteransArmaments extends CardImpl {
                 filter, true, SetTargetPointer.PERMANENT, null));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2, false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private VeteransArmaments(final VeteransArmaments card) {

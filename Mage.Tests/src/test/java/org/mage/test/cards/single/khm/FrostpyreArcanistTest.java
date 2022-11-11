@@ -36,7 +36,6 @@ public class FrostpyreArcanistTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLibraryCount(playerA, bolt, 0);
         assertHandCount(playerA, bolt, 1);

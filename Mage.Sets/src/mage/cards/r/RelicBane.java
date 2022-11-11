@@ -33,7 +33,7 @@ public final class RelicBane extends CardImpl {
         TargetPermanent auraTarget = new TargetArtifactPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
         // Enchanted artifact has "At the beginning of your upkeep, you lose 2 life."
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(
             new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(2),

@@ -58,6 +58,7 @@ class BloodstoneGoblinTriggeredAbility extends TriggeredAbilityImpl {
                         Duration.EndOfTurn
                 ).setText("and gains menace until end of turn. "
                         + "<i>(It can't be blocked except by two or more creatures.)</i>"));
+        setTriggerPhrase("Whenever you cast a spell, if that spell was kicked, ");
     }
 
     BloodstoneGoblinTriggeredAbility(final BloodstoneGoblinTriggeredAbility ability) {
@@ -78,10 +79,5 @@ class BloodstoneGoblinTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return KickerAbility.getSpellKickedCount(game, event.getTargetId()) > 0;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you cast a spell, if that spell was kicked, ";
     }
 }

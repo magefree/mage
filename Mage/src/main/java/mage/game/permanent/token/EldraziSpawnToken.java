@@ -26,7 +26,7 @@ public final class EldraziSpawnToken extends TokenImpl {
         toughness = new MageInt(1);
         addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), new SacrificeSourceCost()));
 
-        availableImageSetCodes = Arrays.asList("C17", "CMD", "DDP", "MM2", "PC2", "ROE", "MIC", "2XM", "NCC", "PCA");
+        availableImageSetCodes = Arrays.asList("C17", "DDP", "MM2", "PC2", "ROE", "MIC", "2XM", "NCC", "PCA");
     }
 
     @Override
