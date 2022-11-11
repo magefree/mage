@@ -94,6 +94,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Draconic Destiny", 130, Rarity.MYTHIC, mage.cards.d.DraconicDestiny.class));
         cards.add(new SetCardInfo("Drafna, Founder of Lat-Nam", 47, Rarity.RARE, mage.cards.d.DrafnaFounderOfLatNam.class));
         cards.add(new SetCardInfo("Dreams of Steel and Oil", 92, Rarity.UNCOMMON, mage.cards.d.DreamsOfSteelAndOil.class));
+        cards.add(new SetCardInfo("Dredging Claw", 119, Rarity.COMMON, mage.cards.d.DredgingClaw.class));
         cards.add(new SetCardInfo("Dwarven Forge-Chanter", 131, Rarity.COMMON, mage.cards.d.DwarvenForgeChanter.class));
         cards.add(new SetCardInfo("Emergency Weld", 93, Rarity.COMMON, mage.cards.e.EmergencyWeld.class));
         cards.add(new SetCardInfo("Energy Refractor", 234, Rarity.COMMON, mage.cards.e.EnergyRefractor.class));
