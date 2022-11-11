@@ -46,6 +46,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Argoth, Sanctum of Nature", "256a", Rarity.RARE, mage.cards.a.ArgothSanctumOfNature.class));
         cards.add(new SetCardInfo("Argothian Opportunist", 167, Rarity.COMMON, mage.cards.a.ArgothianOpportunist.class));
         cards.add(new SetCardInfo("Argothian Sprite", 168, Rarity.COMMON, mage.cards.a.ArgothianSprite.class));
+        cards.add(new SetCardInfo("Arms Race", 126, Rarity.UNCOMMON, mage.cards.a.ArmsRace.class));
         cards.add(new SetCardInfo("Artificer's Dragon", 291, Rarity.RARE, mage.cards.a.ArtificersDragon.class));
         cards.add(new SetCardInfo("Ashnod's Harvester", 117, Rarity.UNCOMMON, mage.cards.a.AshnodsHarvester.class));
         cards.add(new SetCardInfo("Ashnod's Intervention", 85, Rarity.COMMON, mage.cards.a.AshnodsIntervention.class));
@@ -186,6 +187,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Moment of Defiance", 108, Rarity.COMMON, mage.cards.m.MomentOfDefiance.class));
         cards.add(new SetCardInfo("Monastery Swiftspear", 144, Rarity.UNCOMMON, mage.cards.m.MonasterySwiftspear.class));
         cards.add(new SetCardInfo("Mountain", 274, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Myrel, Shield of Argive", 18, Rarity.MYTHIC, mage.cards.m.MyrelShieldOfArgive.class));
         cards.add(new SetCardInfo("No One Left Behind", 109, Rarity.UNCOMMON, mage.cards.n.NoOneLeftBehind.class));
         cards.add(new SetCardInfo("Obliterating Bolt", 145, Rarity.UNCOMMON, mage.cards.o.ObliteratingBolt.class));
         cards.add(new SetCardInfo("Obstinate Baloth", 187, Rarity.UNCOMMON, mage.cards.o.ObstinateBaloth.class));
