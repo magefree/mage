@@ -215,6 +215,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Reconstructed Thopter", 242, Rarity.UNCOMMON, mage.cards.r.ReconstructedThopter.class));
         cards.add(new SetCardInfo("Recruitment Officer", 23, Rarity.UNCOMMON, mage.cards.r.RecruitmentOfficer.class));
         cards.add(new SetCardInfo("Repair and Recharge", 24, Rarity.UNCOMMON, mage.cards.r.RepairAndRecharge.class));
+        cards.add(new SetCardInfo("Rescue Retriever", 288, Rarity.RARE, mage.cards.r.RescueRetriever.class));
         cards.add(new SetCardInfo("Retrieval Agent", 60, Rarity.COMMON, mage.cards.r.RetrievalAgent.class));
         cards.add(new SetCardInfo("Roc Hunter", 150, Rarity.COMMON, mage.cards.r.RocHunter.class));
         cards.add(new SetCardInfo("Rootwire Amalgam", 203, Rarity.MYTHIC, mage.cards.r.RootwireAmalgam.class));
