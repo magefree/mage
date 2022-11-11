@@ -15,6 +15,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
@@ -62,13 +63,16 @@ public class PutCardIntoPlayWithHasteAndSacrificeEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
-        Permanent permanent = game.getPermanent(card.getId());
+        Permanent permanent = game.getPermanent(CardUtil.getDefaultCardSideForBattlefield(game, card).getId());
         if (permanent == null) {
             return false;
         }
-        game.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), duration), source);
+        game.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), duration)
+                .setTargetPointer(new FixedTarget(permanent, game)), source);
         game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
-                new SacrificeTargetEffect("sacrifice it"), TargetController.ANY
+                new SacrificeTargetEffect("sacrifice it")
+                        .setTargetPointer(new FixedTarget(permanent, game)),
+                TargetController.ANY
         ), source);
         return true;
     }
