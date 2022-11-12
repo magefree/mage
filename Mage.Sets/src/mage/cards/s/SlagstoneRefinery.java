@@ -62,7 +62,7 @@ class SlagstoneRefineryTriggeredAbility extends TriggeredAbilityImpl {
         return zEvent.getFromZone().match(Zone.BATTLEFIELD)
                 && (zEvent.getToZone().match(Zone.GRAVEYARD) || zEvent.getToZone().match(Zone.EXILED))
                 && zEvent.getTargetId().equals(getSourceId())
-                || (zEvent.getTarget().isArtifact(game) && (zEvent.getTarget() instanceof PermanentToken));
+                || (zEvent.getTarget().isArtifact(game) && !(zEvent.getTarget() instanceof PermanentToken));
     }
 
     @Override
