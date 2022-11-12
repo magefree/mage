@@ -176,7 +176,8 @@ class LyndeCheerfulTormentorAttachCurseEffect extends OneShotEffect {
                             controller.removeAttachment(curse, source, game);
                             opponent.addAttachment(curse.getId(), source, game);
 
-							game.informPlayers(curse.getLogName() + " is now attached to " + opponent.getLogName() + ".");
+                            game.informPlayers(
+                                    curse.getLogName() + " is now attached to " + opponent.getLogName() + ".");
                             controller.drawCards(2, source, game);
                             return true;
                         }
