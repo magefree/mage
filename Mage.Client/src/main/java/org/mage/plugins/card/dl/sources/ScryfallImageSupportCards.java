@@ -520,6 +520,7 @@ public class ScryfallImageSupportCards {
             add("GN3"); // Game Night 2022
             add("BRO"); // The Brothers' War
             add("BRC"); // The Brothers' War Commander
+            add("BRR"); // The Brothers' War Retro Artifacts
             add("BOT"); // Transformers
             add("J22"); // Jumpstart 2022
             add("SLC"); // Secret Lair 30th Anniversary Countdown Kit
