@@ -9,6 +9,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.PowerstoneToken;
 
@@ -59,10 +60,25 @@ class SlagstoneRefineryTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return zEvent.getFromZone().match(Zone.BATTLEFIELD)
-                && (zEvent.getToZone().match(Zone.GRAVEYARD) || zEvent.getToZone().match(Zone.EXILED))
-                && zEvent.getTargetId().equals(getSourceId())
-                || (zEvent.getTarget().isArtifact(game) && !(zEvent.getTarget() instanceof PermanentToken));
+
+        // Filters events for battlefield => graveyard or exile => graveyard.
+        if (zEvent.getFromZone() == Zone.BATTLEFIELD && (zEvent.getToZone().match(Zone.GRAVEYARD) || zEvent.getToZone().match(Zone.EXILED))) {
+            if(zEvent.getTargetId().equals(getSourceId())) return true; // {this}
+            else {                                                                                  // another
+                UUID targetId = zEvent.getTargetId();
+                Permanent permanent = game.getPermanent(targetId);
+                if (permanent == null) {
+                    permanent = (Permanent) game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
+                }
+
+                // filters for 'another nontoken artifact you control'
+                return zEvent.getTarget().isArtifact(game)                                          // artifact
+                        && !(zEvent.getTarget() instanceof PermanentToken)                          // nontoken
+                        && (permanent != null && permanent.getControllerId() == getControllerId()); // you control
+            }
+        }
+
+        return false;
     }
 
     @Override
