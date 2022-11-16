@@ -2,9 +2,10 @@ package mage.server.managers;
 
 import mage.game.Game;
 import mage.server.ChatSession;
-import mage.server.DisconnectReason;
+import mage.remote.DisconnectReason;
 import mage.server.exceptions.UserNotFoundException;
 import mage.view.ChatMessage;
+import mage.server.User;
 
 import java.util.List;
 import java.util.UUID;
@@ -20,7 +21,7 @@ public interface ChatManager {
 
     void destroyChatSession(UUID chatId);
 
-    void broadcast(UUID chatId, String userName, String message, ChatMessage.MessageColor color, boolean withTime, Game game, ChatMessage.MessageType messageType, ChatMessage.SoundToPlay soundToPlay);
+    void broadcast(UUID chatId, User user, String message, ChatMessage.MessageColor color, boolean withTime, Game game, ChatMessage.MessageType messageType, ChatMessage.SoundToPlay soundToPlay);
 
     void broadcast(UUID userId, String message, ChatMessage.MessageColor color) throws UserNotFoundException;
 

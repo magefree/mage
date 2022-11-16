@@ -194,7 +194,7 @@ public class RegisterUserDialog extends MageDialog {
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         if (!Arrays.equals(this.txtPassword.getPassword(), this.txtPasswordConfirmation.getPassword())) {
-            MageFrame.getInstance().showError("Passwords don't match.");
+            MageFrame.getInstance().showErrorDialog(null,"Passwords don't match.");
             return;
         }
         connection = new Connection();
@@ -236,7 +236,7 @@ public class RegisterUserDialog extends MageDialog {
 
                     String message = "Registration succeeded";
                     lblStatus.setText(message);
-                    MageFrame.getInstance().showMessage(message);
+                    MageFrame.getInstance().showMessage(null, message);
                     hideDialog();
                 } else {
                     lblStatus.setText("Could not register");
@@ -249,7 +249,6 @@ public class RegisterUserDialog extends MageDialog {
             } catch (TimeoutException ex) {
                 logger.fatal("Registration timeout: ", ex);
             } finally {
-                MageFrame.stopConnecting();
                 btnRegister.setEnabled(true);
             }
         }

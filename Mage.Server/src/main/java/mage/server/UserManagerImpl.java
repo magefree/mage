@@ -6,6 +6,7 @@ import mage.server.managers.ManagerFactory;
 import mage.server.record.UserStats;
 import mage.server.record.UserStatsRepository;
 import mage.view.UserView;
+import mage.remote.DisconnectReason;
 import org.apache.log4j.Logger;
 
 import java.util.*;
@@ -46,8 +47,7 @@ public class UserManagerImpl implements UserManager {
 
     public void init() {
         USER_EXECUTOR = managerFactory.threadExecutor().getCallExecutor();
-        expireExecutor.scheduleAtFixedRate(this::checkExpired, 60, 60, TimeUnit.SECONDS);
-
+        
         userListExecutor.scheduleAtFixedRate(this::updateUserInfoList, 4, 4, TimeUnit.SECONDS);
     }
 
@@ -186,72 +186,7 @@ public class UserManagerImpl implements UserManager {
         return false;
     }
 
-    /**
-     * Is the connection lost for more than 3 minutes, the user will be set to
-     * offline status. The user will be removed in validity check after 8
-     * minutes of no activities
-     */
-    private void checkExpired() {
-        try {
-            Calendar calendarInform = Calendar.getInstance();
-            calendarInform.add(Calendar.SECOND, -1 * SERVER_TIMEOUTS_USER_INFORM_OPPONENTS_ABOUT_DISCONNECT_AFTER_SECS);
-            Calendar calendarExp = Calendar.getInstance();
-            calendarExp.add(Calendar.SECOND, -1 * SERVER_TIMEOUTS_USER_DISCONNECT_FROM_SERVER_AFTER_SECS);
-            Calendar calendarRemove = Calendar.getInstance();
-            calendarRemove.add(Calendar.SECOND, -1 * SERVER_TIMEOUTS_USER_REMOVE_FROM_SERVER_AFTER_SECS);
-            List<User> toRemove = new ArrayList<>();
-            logger.debug("Start Check Expired");
-            List<User> userList = new ArrayList<>();
-            final Lock r = lock.readLock();
-            r.lock();
-            try {
-                userList.addAll(users.values());
-            } finally {
-                r.unlock();
-            }
-            for (User user : userList) {
-                try {
-                    if (user.getUserState() != UserState.Offline
-                            && user.isExpired(calendarInform.getTime())) {
-                        long secsInfo = (Calendar.getInstance().getTimeInMillis() - user.getLastActivity().getTime()) / 1000;
-                        informUserOpponents(user.getId(), user.getName() + " got connection problem for " + secsInfo + " secs");
-                    }
-
-                    if (user.getUserState() == UserState.Offline) {
-                        if (user.isExpired(calendarRemove.getTime())) {
-                            // removes from users list
-                            toRemove.add(user);
-                        }
-                    } else {
-                        if (user.isExpired(calendarExp.getTime())) {
-                            // set disconnected status and removes from all activities (tourney/tables/games/drafts/chats)
-                            if (user.getUserState() == UserState.Connected) {
-                                user.lostConnection();
-                                disconnect(user.getId(), DisconnectReason.BecameInactive);
-                            }
-                            removeUserFromAllTablesAndChat(user.getId(), DisconnectReason.SessionExpired);
-                            user.setUserState(UserState.Offline);
-                        }
-                    }
-                } catch (Exception ex) {
-                    handleException(ex);
-                }
-            }
-            logger.debug("Users to remove " + toRemove.size());
-            final Lock w = lock.readLock();
-            w.lock();
-            try {
-                for (User user : toRemove) {
-                    users.remove(user.getId());
-                }
-            } finally {
-                w.unlock();
-            }
-            logger.debug("End Check Expired");
-        } catch (Exception ex) {
-            handleException(ex);
-        }
-    }
+    
 
     /**
      * This method recreated the user list that will be send to all clients

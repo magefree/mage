@@ -265,7 +265,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             boolean manaPoolAutomaticRestricted = ((JCheckBoxMenuItem) e.getSource()).getState();
             PreferencesDialog.saveValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, manaPoolAutomaticRestricted ? "true" : "false");
             gamePanel.setMenuStates(manaPoolMenuItem1.getState(), manaPoolAutomaticRestricted, useFirstManaAbilityItem.getState(), holdPriorityMenuItem.getState());
-            SessionHandler.sendPlayerAction(manaPoolAutomaticRestricted ? PlayerAction.MANA_AUTO_PAYMENT_RESTRICTED_ON : PlayerAction.MANA_AUTO_PAYMENT_RESTRICTED_OFF, gameId, null);
+            SessionHandler.sendPlayerAction(manaPoolAutomaticRestricted ? PlayerAction.MANA_AUTO_PAYMENT_RESTRICTED_ON: PlayerAction.MANA_AUTO_PAYMENT_RESTRICTED_OFF, gameId, null);
         });
 
         useFirstManaAbilityItem = new JCheckBoxMenuItem("Use first mana ability when tapping lands", false);
@@ -383,16 +383,16 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         popupMenu.add(concedeMenu);
 
         ActionListener concedeListener = e -> {
-            switch (e.getActionCommand()) {
-                case "Game": {
+                switch (e.getActionCommand()) {
+                    case "Game": {
                     UserRequestMessage message = new UserRequestMessage("Confirm concede game", "Are you sure you want to concede the game?");
                     message.setButton1("No", null);
                     message.setButton2("Yes", PlayerAction.CLIENT_CONCEDE_GAME);
                     message.setGameId(gameId);
                     MageFrame.getInstance().showUserRequestDialog(message);
-                    break;
-                }
-                case "Match": {
+                        break;
+                    }
+                    case "Match": {
                     UserRequestMessage message = new UserRequestMessage("Confirm concede match", "Are you sure you want to concede the complete match?");
                     message.setButton1("No", null);
                     message.setButton2("Yes", PlayerAction.CLIENT_CONCEDE_MATCH);

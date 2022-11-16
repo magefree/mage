@@ -4,8 +4,7 @@
     <!--
     Official guide to setup public server and NAT: https://www.slightlymagic.net/forum/viewtopic.php?f=70&t=15898
 
-    serverAddress       - ip or domain of the XMage server. Set it to "0.0.0.0" for local host or to the IP the server should use
-                          Public server should be accessable to all clients by it's name (example: xmage.mydomain.com)
+    serverName          - name of the XMage server
     port                - the port the primary server socket is bound to
     secondaryBindPort   - the port to which the secondary server socket is to be bound. if "-1" is set , an arbitrary port is selected.
     backlogSize         - the preferred number of unaccepted incoming connections allowed at a given time. The actual number may be greater
@@ -23,6 +22,7 @@
     userNamePattern     - pattern for user name validity check
     maxAiOpponents      - number of allowed AI opponents on the server
     saveGameActivated   - allow game save and replay options (not working correctly yet)
+    useSSL              - if set to "true" then SSL encryption will be used - will not provide trust verification
 
     authenticationActivated - "true" = user have to register to signon "false" = user need not to register
     * mail configs only needed if authentication is activated:
@@ -36,8 +36,7 @@
     mailPassword        - passworf of the used user to send the mail
     mailFromAddress     - sender address
     -->
-    <server serverAddress="0.0.0.0"
-            serverName="mage-server"
+    <server serverName="mage-server"
             port="17171"
             secondaryBindPort="17179"
             backlogSize="200"
@@ -54,6 +53,7 @@
             maxPasswordLength="100"
             maxAiOpponents="15"
             saveGameActivated="false"
+            useSSL="false"
             authenticationActivated="false"
             googleAccount=""
             mailgunApiKey=""

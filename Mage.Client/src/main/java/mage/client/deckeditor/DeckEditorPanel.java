@@ -21,7 +21,6 @@ import mage.client.util.Listener;
 import mage.client.util.audio.AudioManager;
 import mage.components.CardInfoPane;
 import mage.game.GameException;
-import mage.remote.Session;
 import mage.util.DeckUtil;
 import mage.view.CardView;
 import mage.view.SimpleCardView;
@@ -238,7 +237,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 if (timeout != 0) {
                     countdown.start();
                     if (updateDeckTask == null || updateDeckTask.isDone()) {
-                        updateDeckTask = new UpdateDeckTask(SessionHandler.getSession(), tableId, deck);
+                        updateDeckTask = new UpdateDeckTask(tableId, deck);
                         updateDeckTask.execute();
                     }
                 }
@@ -255,7 +254,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 this.btnExit.setVisible(true);
                 this.btnImport.setVisible(true);
                 this.btnGenDeck.setVisible(true);
-                if (!SessionHandler.isTestMode()) {
+                if (SessionHandler.isConnected() && !SessionHandler.isTestMode()) {
                     this.btnLoad.setVisible(true);
                 }
                 this.deckArea.showSideboard(true);
@@ -1597,12 +1596,10 @@ class ImportFilter extends FileFilter {
 class UpdateDeckTask extends SwingWorker<Void, Void> {
 
     private static final Logger logger = Logger.getLogger(UpdateDeckTask.class);
-    private final Session session;
     private final UUID tableId;
     private final Deck deck;
 
-    UpdateDeckTask(Session session, UUID tableId, Deck deck) {
-        this.session = session;
+    UpdateDeckTask(UUID tableId, Deck deck) {
         this.tableId = tableId;
         this.deck = deck;
     }

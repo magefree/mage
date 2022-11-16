@@ -22,7 +22,7 @@ public class ReplayManagerImpl implements ReplayManager {
     public void replayGame(UUID gameId, UUID userId) {
         ReplaySession replaySession = new ReplaySession(managerFactory, gameId, userId);
         replaySessions.put(gameId.toString() + userId.toString(), replaySession);
-        managerFactory.userManager().getUser(userId).ifPresent(user -> user.ccReplayGame(gameId));
+        managerFactory.userManager().getUser(userId).ifPresent(user -> user.replayGame(gameId));
     }
 
     @Override

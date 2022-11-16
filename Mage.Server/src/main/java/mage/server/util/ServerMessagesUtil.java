@@ -33,7 +33,7 @@ public enum ServerMessagesUtil {
     private final ReadWriteLock lock = new ReentrantReadWriteLock();
     private static boolean ignore = false;
 
-    private static long startDate;
+    private static long startDate = System.currentTimeMillis();
     private static final AtomicInteger gamesStarted = new AtomicInteger(0);
     private static final AtomicInteger gamesEnded = new AtomicInteger(0);
     private static final AtomicInteger tournamentsStarted = new AtomicInteger(0);
@@ -77,18 +77,18 @@ public enum ServerMessagesUtil {
         }
 
         InputStream is = null;
-        File file = new File(SERVER_MSG_TXT_FILE);
-        if (!file.exists() || !file.canRead()) {
+            File file = new File(SERVER_MSG_TXT_FILE);
+            if (!file.exists() || !file.canRead()) {
             LOGGER.warn("Couldn't find server messages file using path: " + file.getAbsolutePath());
-        } else {
-            try {
-                is = new FileInputStream(file);
+            } else {
+                try {
+                    is = new FileInputStream(file);
                 ignore = false;
-            } catch (Exception f) {
+                } catch (Exception f) {
                 LOGGER.error(f, f);
-                ignore = true;
+                    ignore = true;
+                }
             }
-        }
 
         if (is == null) {
             return Collections.emptyList();
@@ -96,7 +96,7 @@ public enum ServerMessagesUtil {
 
         List<String> newMessages = new ArrayList<>();
         try (Scanner scanner = new Scanner(is)) {
-            while (scanner.hasNextLine()) {
+        while (scanner.hasNextLine()) {
                 String message = scanner.nextLine().trim();
                 if (message.startsWith("//") || message.isEmpty()) {
                     continue;
@@ -129,10 +129,6 @@ public enum ServerMessagesUtil {
         String statistics = "Disconnects: " + lostConnection.get() + ", avg/hour: " + lostConnection.get() * 60 / minutes
                 + "; Reconnects: " + reconnects.get() + ", avg/hour: " + reconnects.get() * 60 / minutes;
         return statistics;
-    }
-
-    public void setStartDate(long milliseconds) {
-        startDate = milliseconds;
     }
 
     public void incGamesStarted() {

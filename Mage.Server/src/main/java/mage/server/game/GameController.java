@@ -124,11 +124,11 @@ public class GameController implements GameCallback {
                                 updateGame();
                                 break;
                             case INFO:
-                                managerFactory.chatManager().broadcast(chatId, "", event.getMessage(), MessageColor.BLACK, true, event.getGame(), MessageType.GAME, null);
+                                managerFactory.chatManager().broadcast(chatId, null, event.getMessage(), MessageColor.BLACK, true, event.getGame(), MessageType.GAME, null);
                                 logger.trace(game.getId() + " " + event.getMessage());
                                 break;
                             case STATUS:
-                                managerFactory.chatManager().broadcast(chatId, "", event.getMessage(), MessageColor.ORANGE, event.getWithTime(), event.getWithTurnInfo() ? event.getGame() : null, MessageType.GAME, null);
+                                managerFactory.chatManager().broadcast(chatId, null, event.getMessage(), MessageColor.ORANGE, event.getWithTime(), event.getWithTurnInfo() ? event.getGame() : null, MessageType.GAME, null);
                                 logger.trace(game.getId() + " " + event.getMessage());
                                 break;
                             case ERROR:
@@ -307,7 +307,7 @@ public class GameController implements GameCallback {
         }
         user.get().addGame(playerId, gameSession);
         logger.debug("Player " + player.getName() + ' ' + playerId + " has " + joinType + " gameId: " + game.getId());
-        managerFactory.chatManager().broadcast(chatId, "", game.getPlayer(playerId).getLogName() + " has " + joinType + " the game", MessageColor.ORANGE, true, game, MessageType.GAME, null);
+        managerFactory.chatManager().broadcast(chatId, null, game.getPlayer(playerId).getLogName() + " has " + joinType + " the game", MessageColor.ORANGE, true, game, MessageType.GAME, null);
         checkStart();
     }
 
@@ -355,7 +355,7 @@ public class GameController implements GameCallback {
                             if (session != null) {
                                 problemPlayerFixes = "re-send start game event";
                                 logger.warn("Send forced game start event for player " + player.getName() + " in gameId: " + game.getId());
-                                user.ccGameStarted(session.getGameId(), player.getId());
+                                user.gameStarted(session.getGameId(), player.getId());
                                 session.init();
                                 managerFactory.gameManager().sendPlayerString(session.getGameId(), user.getId(), "");
                             } else {
@@ -369,7 +369,7 @@ public class GameController implements GameCallback {
                             player.leave();
                         }
 
-                        managerFactory.chatManager().broadcast(chatId, player.getName(), user.getPingInfo()
+                        managerFactory.chatManager().broadcast(chatId, user, user.getPingInfo()
                                         + " is forced to join the game (waiting ends after "
                                         + GAME_TIMEOUTS_CANCEL_PLAYER_GAME_JOINING_AFTER_INACTIVE_SECS
                                         + " secs, applied fixes: " + problemPlayerFixes + ")",
@@ -424,37 +424,26 @@ public class GameController implements GameCallback {
         return true;
     }
 
-    public boolean watch(UUID userId) {
-        if (userPlayerMap.containsKey(userId)) {
+    public GameView watch(UUID userId) {
+        if (userPlayerMap.get(userId) != null) {
             // You can't watch a game if you already a player in it
-            return false;
+            return null;
         }
-        if (watchers.containsKey(userId)) {
+        if (watchers.get(userId) != null) {
             // You can't watch a game if you already watch it
-            return false;
+            return null;
         }
-        if (!isAllowedToWatch(userId)) {
-            // Dont want people on our ignore list to stalk us
-            managerFactory.userManager().getUser(userId).ifPresent(user -> {
-                user.showUserMessage("Not allowed", "You are banned from watching this game");
-                managerFactory.chatManager().broadcast(chatId, user.getName(), " tried to join, but is banned", MessageColor.BLUE, true, game, ChatMessage.MessageType.STATUS, null);
-            });
-            return false;
-        }
-        managerFactory.userManager().getUser(userId).ifPresent(user -> {
-            GameSessionWatcher gameWatcher = new GameSessionWatcher(managerFactory.userManager(), userId, game, false);
-            final Lock w = gameWatchersLock.writeLock();
-            w.lock();
-            try {
-                watchers.put(userId, gameWatcher);
-            } finally {
-                w.unlock();
-            }
+        
+        Optional<User> user = managerFactory.userManager().getUser(userId);
+        if (user.isPresent()) {
+            GameSessionWatcher gameWatcher = new GameSessionWatcher(managerFactory.userManager(),userId, game, false);
+            watchers.put(userId, gameWatcher);
             gameWatcher.init();
-            user.addGameWatchInfo(game.getId());
-            managerFactory.chatManager().broadcast(chatId, user.getName(), " has started watching", MessageColor.BLUE, true, game, ChatMessage.MessageType.STATUS, null);
-        });
-        return true;
+            user.get().addGameWatchInfo(game.getId());
+            managerFactory.chatManager().broadcast(chatId, user.get(), " has started watching", MessageColor.BLUE, true, game, ChatMessage.MessageType.STATUS, null);
+            return watchers.get(userId).getGameView();
+        }
+        return null;
     }
 
     public void stopWatching(UUID userId) {
@@ -466,7 +455,7 @@ public class GameController implements GameCallback {
             w.unlock();
         }
         managerFactory.userManager().getUser(userId).ifPresent(user -> {
-            managerFactory.chatManager().broadcast(chatId, user.getName(), " has stopped watching", MessageColor.BLUE, true, game, ChatMessage.MessageType.STATUS, null);
+            managerFactory.chatManager().broadcast(chatId, user, " has stopped watching", MessageColor.BLUE, true, game, ChatMessage.MessageType.STATUS, null);
         });
     }
 
@@ -675,7 +664,7 @@ public class GameController implements GameCallback {
                     if (p.getPlayer().getId().equals(playerId)) {
                         Optional<User> u = managerFactory.userManager().getUser(userId);
                         if (u.isPresent() && p.getDeck() != null) {
-                            u.get().ccViewLimitedDeck(p.getDeck(), tableId, requestsOpen, true);
+                            u.get().viewLimitedDeck(p.getDeck(), tableId, requestsOpen, true);
                         }
                     }
                 }
@@ -689,7 +678,7 @@ public class GameController implements GameCallback {
             for (MatchPlayer p : managerFactory.tableManager().getTable(tableId).getMatch().getPlayers()) {
                 if (p.getPlayer().getId().equals(playerId)) {
                     Optional<User> u = managerFactory.userManager().getUser(userId);
-                    u.ifPresent(user -> user.ccViewSideboard(tableId, game.getId(), targetPlayerId));
+                    u.ifPresent(user -> user.viewSideboard(game.getId(), targetPlayerId));
                 }
             }
         }
@@ -729,7 +718,7 @@ public class GameController implements GameCallback {
             String sb = player.getLogName()
                     + " has timed out (player had priority and was not active for "
                     + managerFactory.configSettings().getMaxSecondsIdle() + " seconds ) - Auto concede.";
-            managerFactory.chatManager().broadcast(chatId, "", sb, MessageColor.BLACK, true, game, MessageType.STATUS, null);
+            managerFactory.chatManager().broadcast(chatId, null, sb, MessageColor.BLACK, true, game, MessageType.STATUS, null);
             game.idleTimeout(playerId);
         }
     }

@@ -1305,7 +1305,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 filterCards();
             }
         } else {
-            MageFrame.getInstance().showMessage("An expansion set must be selected to be able to generate a booster.");
+            MageFrame.getInstance().showMessage(null,"An expansion set must be selected to be able to generate a booster.");
         }
     }//GEN-LAST:event_btnBoosterActionPerformed
 
@@ -1338,7 +1338,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         if (currentView.cardsSize() > CardGrid.MAX_IMAGES) {
             jToggleCardView.setSelected(false);
             jToggleListView.setSelected(true);
-            MageFrame.getInstance().showMessage("The card view can't be used for more than " + CardGrid.MAX_IMAGES + " cards.");
+            MageFrame.getInstance().showMessage(null,"The card view can't be used for more than " + CardGrid.MAX_IMAGES + " cards.");
         } else {
             if (!(currentView instanceof CardGrid)) {
                 toggleViewMode();

@@ -19,6 +19,7 @@
             saveGameActivated="false"
             authenticationActivated="false"
             googleAccount=""
+            useSSL="true"
     />
     <playerTypes>
         <playerType name="Human" jar="Mage.Player.Human.jar" className="mage.player.human.HumanPlayer"/>

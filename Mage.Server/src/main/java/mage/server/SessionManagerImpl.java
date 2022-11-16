@@ -1,11 +1,11 @@
 package mage.server;
 
-import mage.MageException;
 import mage.players.net.UserData;
 import mage.server.managers.SessionManager;
 import mage.server.managers.ManagerFactory;
+import mage.remote.Connection;
+import mage.remote.DisconnectReason;
 import org.apache.log4j.Logger;
-import org.jboss.remoting.callback.InvokerCallbackHandler;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;
@@ -42,48 +42,38 @@ public class SessionManagerImpl implements SessionManager {
     }
 
     @Override
-    public void createSession(String sessionId, InvokerCallbackHandler callbackHandler) {
-        Session session = new Session(managerFactory, sessionId, callbackHandler);
+    public String registerUser(String sessionId, Connection connection, String host) {
+        Session session = new Session(managerFactory,sessionId);
         sessions.put(sessionId, session);
-    }
-
-    @Override
-    public boolean registerUser(String sessionId, String userName, String password, String email) throws MageException {
-        Session session = sessions.get(sessionId);
-        if (session == null) {
-            logger.error(userName + " tried to register with no sessionId");
-            return false;
-        }
-        String returnMessage = session.registerUser(userName, password, email);
+        session.setHost(host);
+        String returnMessage = session.registerUser(connection);
         if (returnMessage != null) {
-            logger.debug(userName + " not registered: " + returnMessage);
-            return false;
+            logger.debug(connection.getUsername() + " not registered: " + returnMessage);
+            return returnMessage;
         }
-        logger.info(userName + " registered");
+        logger.info(connection.getUsername() + " registered");
         logger.debug("- userId:    " + session.getUserId());
         logger.debug("- sessionId: " + sessionId);
         logger.debug("- host:      " + session.getHost());
-        return true;
+        return null;
     }
 
     @Override
-    public boolean connectUser(String sessionId, String userName, String password, String userIdStr) throws MageException {
-        Session session = sessions.get(sessionId);
-        if (session != null) {
-            String returnMessage = session.connectUser(userName, password);
-            if (returnMessage == null) {
-                logger.info(userName + " connected to server");
-                logger.debug("- userId:    " + session.getUserId());
-                logger.debug("- sessionId: " + sessionId);
-                logger.debug("- host:      " + session.getHost());
-                return true;
-            } else {
-                logger.debug(userName + " not connected: " + returnMessage);
-            }
+    public String connectUser(String sessionId, Connection connection, String host) {
+        Session session = new Session(managerFactory,sessionId);
+        sessions.put(sessionId, session);
+        session.setHost(host);
+        String returnMessage = session.connectUser(connection.getUsername(), connection.getPassword());
+        if (returnMessage == null) {
+            logger.info(connection.getUsername() + " connected to server");
+            logger.debug("- userId:    " + session.getUserId());
+            logger.debug("- sessionId: " + sessionId);
+            logger.debug("- host:      " + session.getHost());
+            return null;
         } else {
-            logger.error(userName + " tried to connect with no sessionId");
+            logger.debug(connection.getUsername() + " not connected: " + returnMessage);
+            return returnMessage;
         }
-        return false;
     }
 
     @Override
@@ -98,9 +88,9 @@ public class SessionManagerImpl implements SessionManager {
     }
 
     @Override
-    public boolean setUserData(String userName, String sessionId, UserData userData, String clientVersion, String userIdStr) throws MageException {
+    public boolean setUserData(String sessionId, UserData userData, String clientVersion, String userIdStr) {
         return getSession(sessionId)
-                .map(session -> session.setUserData(userName, userData, clientVersion, userIdStr))
+                .map(session -> session.setUserData(managerFactory.userManager().getUser(session.getUserId()).get(), userData, clientVersion, userIdStr))
                 .orElse(false);
 
     }
@@ -218,6 +208,5 @@ public class SessionManagerImpl implements SessionManager {
             logger.error("Following error message is not delivered because session " + sessionId + " is not found: " + message);
             return;
         }
-        session.sendErrorMessageToClient(message);
     }
 }

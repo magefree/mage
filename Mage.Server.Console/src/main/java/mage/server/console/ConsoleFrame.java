@@ -1,16 +1,33 @@
 package mage.server.console;
 
-import mage.interfaces.MageClient;
-import mage.interfaces.callback.ClientCallback;
+import mage.remote.interfaces.MageClient;
 import mage.remote.Connection;
 import mage.remote.Session;
 import mage.remote.SessionImpl;
 import mage.utils.MageVersion;
+import mage.choices.Choice;
+import mage.interfaces.ServerState;
+import mage.view.AbilityPickerView;
+import mage.view.CardsView;
+import mage.view.ChatMessage;
+import mage.view.DeckView;
+import mage.view.DraftPickView;
+import mage.view.DraftView;
+import mage.view.GameClientMessage;
+import mage.view.GameEndView;
+import mage.view.GameView;
+import mage.view.UserRequestMessage;
+import mage.remote.messages.MessageType;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -41,7 +58,6 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
         return prefs;
     }
 
-    @Override
     public MageVersion getVersion() {
         return version;
     }
@@ -67,11 +83,11 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
             logger.fatal("", ex);
         }
 
-        pingTaskExecutor.scheduleAtFixedRate(() -> session.ping(), 20, 20, TimeUnit.SECONDS);
+        pingTaskExecutor.scheduleAtFixedRate(() -> session.ping(new Connection()), 20, 20, TimeUnit.SECONDS);
     }
 
     public boolean connect(Connection connection) {
-        if (session.connect(connection)) {
+        if (session.connect(connection,getVersion())) {
             this.consolePanel1.start();
             return true;
         }
@@ -224,7 +240,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
-    @Override
+    
     public void showMessage(final String message) {
         if (SwingUtilities.isEventDispatchThread()) {
             JOptionPane.showMessageDialog(this, message);
@@ -233,7 +249,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
-    @Override
+    
     public void showError(final String message) {
         if (SwingUtilities.isEventDispatchThread()) {
             JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
@@ -242,10 +258,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
-    @Override
-    public void processCallback(ClientCallback callback) {
-    }
-
+    
     public void exitApp() {
         if (session.isConnected()) {
             if (JOptionPane.showConfirmDialog(this, "You are currently connected.  Are you sure you want to disconnect?", "Confirm disconnect", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
@@ -259,5 +272,205 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
         }
         dispose();
         System.exit(0);
+    }
+
+    @Override
+    public void inform(String title, String message, MessageType type) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void receiveChatMessage(UUID chatId, ChatMessage message) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void clientRegistered(ServerState state) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public ServerState getServerState() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void joinedTable(UUID roomId, UUID tableId, UUID chatId, boolean owner, boolean tournament) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void gameStarted(UUID gameId, UUID playerId) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void initGame(UUID gameId, GameView gameView) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void gameUpdate(UUID gameId, GameView gameView) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void gameInform(UUID gameId, GameClientMessage message) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void gameInformPersonal(UUID gameId, GameClientMessage message) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void gameOver(UUID gameId, GameView gameView, String message) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void gameError(UUID gameId, String message) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void gameAsk(UUID gameId, GameView gameView, String question, Map<String, Serializable> options) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void gameTarget(UUID gameId, GameView gameView, String question, CardsView cardView, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void gameChooseAbility(UUID gameId, GameView gameView, AbilityPickerView abilities) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void gameChoosePile(UUID gameId, GameView gameView, String message, CardsView pile1, CardsView pile2) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void gameChooseChoice(UUID gameId, GameView gameView, Choice choice) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void gamePlayMana(UUID gameId, GameView gameView, String message, Map<String, Serializable> options) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void gamePlayXMana(UUID gameId, GameView gameView, String message) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void gameSelectAmount(UUID gameId, GameView gameView, String message, int min, int max) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void gameMultiAmount(UUID gameId, GameView gameView, Map<String, Serializable> option, List<String> messages, int min, int max) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void gameSelect(UUID gameId, GameView gameView, String message, Map<String, Serializable> options) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void gameEndInfo(UUID gameId, GameEndView view) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void userRequestDialog(UUID gameId, UserRequestMessage userRequestMessage) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void sideboard(UUID tableId, DeckView deck, int time, boolean limited) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void viewLimitedDeck(UUID tableId, DeckView deck, int time, boolean limited) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void viewSideboard(UUID gameId, UUID targetPlayerId) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void construct(UUID tableId, DeckView deck, int time) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void startDraft(UUID draftId, UUID playerId) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void draftInit(UUID draftId, DraftPickView draftPickView) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void draftUpdate(UUID draftId, DraftView draftView) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void draftPick(UUID draftId, DraftPickView draftPickView) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void draftOver(UUID draftId) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void showTournament(UUID tournamentId) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void tournamentStarted(UUID tournamentId) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void watchGame(UUID gameId, UUID chatId, GameView game) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void replayGame(UUID gameId) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void replayInit(UUID gameId, GameView gameView) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void replayDone(UUID gameId, String result) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void replayUpdate(UUID gameId, GameView gameView) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

@@ -708,7 +708,7 @@ public class NewTournamentDialog extends MageDialog {
             if (player.getPlayerType().getSelectedItem() != PlayerType.HUMAN) {
                 if (!player.joinTournamentTable(roomId, table.getTableId(), DeckImporter.importDeckFromFile(this.player1Panel.getDeckFile(), true))) {
                     // error message must be send by sever
-                    SessionHandler.removeTable(roomId, table.getTableId());
+                    SessionHandler.removeTable(roomId);
                     table = null;
                     return;
                 }
@@ -729,7 +729,7 @@ public class NewTournamentDialog extends MageDialog {
         }
 
         JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining tournament.", "Error", JOptionPane.ERROR_MESSAGE);
-        SessionHandler.removeTable(roomId, table.getTableId());
+        SessionHandler.removeTable(roomId);
         table = null;
     }//GEN-LAST:event_btnOkActionPerformed
 
@@ -1317,7 +1317,7 @@ public class NewTournamentDialog extends MageDialog {
             tOptions.getMatchOptions().setLimited(tOptions.getMatchOptions().getDeckType().startsWith("Limited"));
         }
 
-        String serverAddress = SessionHandler.getSession().getServerHostname().orElse("");
+        String serverAddress = SessionHandler.getServerHostname().orElse("");
         tOptions.getMatchOptions().setBannedUsers(IgnoreList.getIgnoredUsers(serverAddress));
 
         tOptions.getMatchOptions().setMatchTimeLimit((MatchTimeLimit) this.cbTimeLimit.getSelectedItem());

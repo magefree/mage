@@ -10,12 +10,12 @@
                 <xs:element ref="gameTypes"/>
                 <xs:element ref="tournamentTypes"/>
                 <xs:element ref="draftCubes"/>
-                <xs:element ref="deckTypes"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-
-    <xs:element name="server">
+				<xs:element ref="deckTypes"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+    
+	<xs:element name="server">
         <xs:complexType>
             <xs:attribute name="serverAddress" type="xs:string" use="required"/>
             <xs:attribute name="serverName" type="xs:string" use="required"/>
@@ -44,6 +44,7 @@
             <xs:attribute name="mailUser" type="xs:string" use="optional"/>
             <xs:attribute name="mailPassword" type="xs:string" use="optional"/>
             <xs:attribute name="mailFromAddress" type="xs:string" use="optional"/>
+            <xs:attribute name="useSSL" type="xs:boolean" use="optional"/>
         </xs:complexType>
     </xs:element>
 

@@ -1,6 +1,7 @@
 
 package mage.remote;
 
+import java.io.Serializable;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.InterfaceAddress;
@@ -13,7 +14,7 @@ import mage.players.net.UserData;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Connection {
+public class Connection implements Serializable {
 
     private String host;
     private int port;
@@ -31,6 +32,7 @@ public class Connection {
     private boolean forceDBComparison;
     private String userIdStr;
     private int socketWriteTimeout;
+    private boolean ssl;
 
     private UserData userData;
 
@@ -271,5 +273,13 @@ public class Connection {
 
     public int getSocketWriteTimeout() {
         return socketWriteTimeout;
+    }
+    
+    public boolean isSSL() {
+        return this.ssl;
+    }
+
+    public void setSSL(boolean ssl) {
+        this.ssl = ssl;
     }
 }

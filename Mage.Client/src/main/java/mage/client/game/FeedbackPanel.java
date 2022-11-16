@@ -66,23 +66,14 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }
 
     public void prepareFeedback(FeedbackMode mode, String message, boolean special, Map<String, Serializable> options,
-                                int messageId, boolean gameNeedUserFeedback, TurnPhase gameTurnPhase) {
-        synchronized (this) {
-            if (messageId < this.lastMessageId) {
-                // if too many warning messages here then look at GAME_REDRAW_GUI event logic
-                LOGGER.warn("catch un-synced message from later source (possible reason: connection or performance problems): " + messageId + ", text=" + message);
-                return;
-            }
-            this.lastMessageId = messageId;
-            this.lastOptions = options;
-            this.mode = mode;
-        }
-
+                                boolean gameNeedUserFeedback, TurnPhase gameTurnPhase) {
+        
+        this.mode = mode;
         this.helper.setBasicMessage(message);
         this.helper.setOriginalId(null); // reference to the feedback causing ability
         String lblText = addAdditionalText(message, options);
         this.helper.setTextArea(lblText);
-
+        
 
         switch (this.mode) {
             case INFORM:

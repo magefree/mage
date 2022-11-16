@@ -3,8 +3,6 @@ package mage.client.chat;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.util.IgnoreList;
-import mage.interfaces.callback.ClientCallback;
-import mage.interfaces.callback.ClientCallbackMethod;
 import mage.view.ChatMessage;
 
 import java.util.*;
@@ -37,7 +35,7 @@ public final class LocalCommands {
             return false;
         }
 
-        final String serverAddress = SessionHandler.getSession().getServerHostname().orElse("");
+        final String serverAddress = SessionHandler.getServerHostname().orElse("");
         Optional<String> response = Optional.empty();
 
         String command = st.nextToken();
@@ -67,8 +65,6 @@ public final class LocalCommands {
 
     private static void displayLocalCommandResponse(UUID chatId, String response) {
         final String text = new StringBuilder().append("<font color=yellow>").append(response).append("</font>").toString();
-        ClientCallback chatMessage = new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId,
-                new ChatMessage("", text, new Date(), null, ChatMessage.MessageColor.BLUE));
-        MageFrame.getInstance().processCallback(chatMessage);
+        MageFrame.getInstance().receiveChatMessage(chatId,new ChatMessage("", text, new Date(), null, ChatMessage.MessageColor.BLUE));
     }
 }

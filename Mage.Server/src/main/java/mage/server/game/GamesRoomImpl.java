@@ -1,9 +1,7 @@
 package mage.server.game;
 
-import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.constants.TableState;
-import mage.game.GameException;
 import mage.game.Table;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
@@ -13,6 +11,7 @@ import mage.server.User;
 import mage.server.managers.ManagerFactory;
 import mage.view.MatchView;
 import mage.view.RoomUsersView;
+import mage.view.RoomView;
 import mage.view.TableView;
 import mage.view.UsersView;
 import org.apache.log4j.Logger;
@@ -23,6 +22,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+import mage.game.GameException;
+import mage.server.Session;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -33,11 +36,12 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 
     private static final ScheduledExecutorService UPDATE_EXECUTOR = Executors.newSingleThreadScheduledExecutor();
     private static List<TableView> tableView = new ArrayList<>();
-    private static List<MatchView> matchView = new ArrayList<>();
-    private static List<RoomUsersView> roomUsersView = new ArrayList<>();
+    private RoomView roomView;
 
+    private final ReadWriteLock lock = new ReentrantReadWriteLock();
     private final ManagerFactory managerFactory;
     private final ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<>();
+    private String pingInfo = "";
 
     public GamesRoomImpl(ManagerFactory managerFactory) {
         super(managerFactory.chatManager());
@@ -52,21 +56,21 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         }, 2, 2, TimeUnit.SECONDS);
     }
 
-    @Override
-    public List<TableView> getTables() {
-        return tableView;
-    }
-
     private void update() {
         List<Table> allTables = new ArrayList<>(tables.values());
         allTables.sort(new TableListSorter());
-        List<MatchView> matchList = new ArrayList<>();
-        List<TableView> tableList = new ArrayList<>();
+        ArrayList<TableView> tableList = new ArrayList<>();
+        ArrayList<MatchView> matchView = new ArrayList<>();
         for (Table table : allTables) {
             if (table.getState() != TableState.FINISHED) {
                 tableList.add(new TableView(table));
-            } else if (matchList.size() < 50) {
-                matchList.add(new MatchView(table));
+            }
+            else if (matchView.size() < 50) { 
+                 if (table.isTournament()) {
+                    matchView.add(new MatchView(table));
+                 } else {
+                     matchView.add(new MatchView(table));
+                 }
             } else {
                 // more since 50 matches finished since this match so removeUserFromAllTablesAndChat it
                 if (table.isTournament()) {
@@ -76,51 +80,54 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
             }
         }
         tableView = tableList;
-        matchView = matchList;
         List<UsersView> users = new ArrayList<>();
         for (User user : managerFactory.userManager().getUsers()) {
-            if (user.getUserState() != User.UserState.Offline && !user.getName().equals("Admin")) {
-                try {
-                    users.add(new UsersView(user.getUserData().getFlagName(), user.getName(),
-                            user.getMatchHistory(), user.getMatchQuitRatio(), user.getTourneyHistory(),
-                            user.getTourneyQuitRatio(), user.getGameInfo(), user.getPingInfo(),
-                            user.getUserData().getGeneralRating(), user.getUserData().getConstructedRating(),
-                            user.getUserData().getLimitedRating()));
-                } catch (Exception ex) {
-                    LOGGER.fatal("User update exception: " + user.getName() + " - " + ex.toString(), ex);
-                    users.add(new UsersView(
-                            (user.getUserData() != null && user.getUserData().getFlagName() != null) ? user.getUserData().getFlagName() : "world",
-                            user.getName() != null ? user.getName() : "<no name>",
-                            user.getMatchHistory() != null ? user.getMatchHistory() : "<no match history>",
-                            user.getMatchQuitRatio(),
-                            user.getTourneyHistory() != null ? user.getTourneyHistory() : "<no tourney history>",
-                            user.getTourneyQuitRatio(),
-                            "[exception]",
-                            user.getPingInfo() != null ? user.getPingInfo() : "<no ping>",
-                            user.getUserData() != null ? user.getUserData().getGeneralRating() : 0,
-                            user.getUserData() != null ? user.getUserData().getConstructedRating() : 0,
-                            user.getUserData() != null ? user.getUserData().getLimitedRating() : 0));
+            managerFactory.sessionManager().getSession(user.getSessionId()).ifPresent(session -> {
+                String pingInfo;
+                pingInfo = session == null ? "<no ping>" : session.getPingInfo();
+                if (user.getUserState() != User.UserState.Offline && !user.getName().equals("Admin")) {
+                    try {
+                        users.add(new UsersView(user.getUserData().getFlagName(), user.getName(),
+                                user.getMatchHistory(), user.getMatchQuitRatio(), user.getTourneyHistory(),
+                                user.getTourneyQuitRatio(), user.getGameInfo(), pingInfo,
+                                user.getUserData().getGeneralRating(), user.getUserData().getConstructedRating(),
+                                user.getUserData().getLimitedRating()));
+                    } catch (Exception ex) {
+                        LOGGER.fatal("User update exception: " + user.getName() + " - " + ex.toString(), ex);
+                        users.add(new UsersView(
+                                (user.getUserData() != null && user.getUserData().getFlagName() != null) ? user.getUserData().getFlagName() : "world",
+                                user.getName() != null ? user.getName() : "<no name>",
+                                user.getMatchHistory() != null ? user.getMatchHistory() : "<no match history>",
+                                user.getMatchQuitRatio(),
+                                user.getTourneyHistory() != null ? user.getTourneyHistory() : "<no tourney history>",
+                                user.getTourneyQuitRatio(),
+                                "[exception]",
+                                pingInfo,
+                                user.getUserData() != null ? user.getUserData().getGeneralRating() : 0,
+                                user.getUserData() != null ? user.getUserData().getConstructedRating() : 0,
+                                user.getUserData() != null ? user.getUserData().getLimitedRating() : 0));
+                    }
                 }
-            }
+            });
         }
 
         users.sort((one, two) -> one.getUserName().compareToIgnoreCase(two.getUserName()));
         List<RoomUsersView> roomUserInfo = new ArrayList<>();
-        roomUserInfo.add(new RoomUsersView(users,
+        RoomUsersView roomUsersView = new RoomUsersView(users,
                 managerFactory.gameManager().getNumberActiveGames(),
                 managerFactory.threadExecutor().getActiveThreads(managerFactory.threadExecutor().getGameExecutor()),
                 managerFactory.configSettings().getMaxGameThreads()
-        ));
-        roomUsersView = roomUserInfo;
+        );
+        lock.writeLock().lock();
+        try {
+            roomView = new RoomView(roomUsersView, tableList, matchView);
+        } finally {
+            lock.writeLock().unlock();
+        }
     }
 
     @Override
-    public List<MatchView> getFinished() {
-        return matchView;
-    }
-
-    @Override
-    public boolean joinTable(UUID userId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws MageException {
+    public boolean joinTable(UUID userId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) {
         if (tables.containsKey(tableId)) {
             return managerFactory.tableManager().joinTable(userId, tableId, name, playerType, skill, deckList, password);
         } else {
@@ -136,7 +143,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     }
 
     @Override
-    public boolean joinTournamentTable(UUID userId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws GameException {
+    public boolean joinTournamentTable(UUID userId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password){
         if (tables.containsKey(tableId)) {
             return managerFactory.tableManager().joinTournament(userId, tableId, name, playerType, skill, deckList, password);
         } else {
@@ -182,13 +189,27 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     }
 
     @Override
-    public boolean watchTable(UUID userId, UUID tableId) throws MageException {
-        return managerFactory.tableManager().watchTable(userId, tableId);
+    public void watchTable(UUID userId, UUID tableId) {
+        managerFactory.tableManager().watchTable(userId, tableId);
     }
-
+    
     @Override
-    public List<RoomUsersView> getRoomUsersInfo() {
-        return roomUsersView;
+    public RoomView getRoomView() {
+        lock.readLock().lock();
+        try {
+            return roomView;
+        } finally {
+            lock.readLock().unlock();
+        }
+    }
+    
+    public String getPingInfo() {
+        return pingInfo;
+    }
+    
+    @Override
+    public List<TableView> getTables() {
+        return tableView;
     }
 
 }

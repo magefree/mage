@@ -2,8 +2,8 @@ package mage.server.util;
 
 import mage.server.util.config.Config;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.Unmarshaller;
 import java.io.File;
 
 public class ConfigFactory {

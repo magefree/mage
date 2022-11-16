@@ -1,6 +1,5 @@
 package mage.server;
 
-import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.constants.TableState;
 import mage.game.Game;
@@ -157,7 +156,7 @@ public class TableManagerImpl implements TableManager {
     }
 
     @Override
-    public boolean joinTable(UUID userId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws MageException {
+    public boolean joinTable(UUID userId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) {
         if (controllers.containsKey(tableId)) {
             return controllers.get(tableId).joinTable(userId, name, playerType, skill, deckList, password);
         }
@@ -165,7 +164,7 @@ public class TableManagerImpl implements TableManager {
     }
 
     @Override
-    public boolean joinTournament(UUID userId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws GameException {
+    public boolean joinTournament(UUID userId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password)  {
         if (controllers.containsKey(tableId)) {
             return controllers.get(tableId).joinTournament(userId, name, playerType, skill, deckList, password);
         }
@@ -173,7 +172,7 @@ public class TableManagerImpl implements TableManager {
     }
 
     @Override
-    public boolean submitDeck(UUID userId, UUID tableId, DeckCardLists deckList) throws MageException {
+    public boolean submitDeck(UUID userId, UUID tableId, DeckCardLists deckList)  {
         if (controllers.containsKey(tableId)) {
             return controllers.get(tableId).submitDeck(userId, deckList);
         }
@@ -187,7 +186,7 @@ public class TableManagerImpl implements TableManager {
     }
 
     @Override
-    public void updateDeck(UUID userId, UUID tableId, DeckCardLists deckList) throws MageException {
+    public void updateDeck(UUID userId, UUID tableId, DeckCardLists deckList)  {
         if (controllers.containsKey(tableId)) {
             controllers.get(tableId).updateDeck(userId, deckList);
         }
@@ -303,11 +302,10 @@ public class TableManagerImpl implements TableManager {
     }
 
     @Override
-    public boolean watchTable(UUID userId, UUID tableId) {
+    public void watchTable(UUID userId, UUID tableId) {
         if (controllers.containsKey(tableId)) {
-            return controllers.get(tableId).watchTable(userId);
+            controllers.get(tableId).watchTable(userId);
         }
-        return false;
     }
 
     @Override

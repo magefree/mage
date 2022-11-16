@@ -331,7 +331,7 @@
          long durationMinute = ((Number) spinnerMuteDurationMinutes.getValue()).longValue();
          if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to mute user: " + userName + " for " + durationMinute + " minutes?", "WARNING",
                  JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-             ConsoleFrame.getSession().muteUserChat(userName, durationMinute);
+             ConsoleFrame.getSession().muteUser(userName, durationMinute);
          }
      }//GEN-LAST:event_btnMuteUserActionPerformed
 

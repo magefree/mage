@@ -1,5 +1,18 @@
 package mage.server;
 
+import mage.view.AbilityPickerView;
+import mage.view.CardsView;
+import mage.view.ChatMessage;
+import mage.view.DeckView;
+import mage.view.DraftPickView;
+import mage.view.DraftView;
+import mage.view.GameClientMessage;
+import mage.view.GameEndView;
+import mage.view.GameView;
+import mage.view.UserRequestMessage;
+import mage.remote.ClientCallback;
+import mage.remote.ClientCallbackImpl;
+import mage.remote.messages.MessageType;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.DeckValidatorFactory;
@@ -9,12 +22,11 @@ import mage.cards.repository.RepositoryUtil;
 import mage.game.draft.RateCard;
 import mage.game.match.MatchType;
 import mage.game.tournament.TournamentType;
-import mage.interfaces.MageServer;
+import mage.remote.interfaces.MageServer;
 import mage.remote.Connection;
 import mage.server.draft.CubeFactory;
 import mage.server.game.GameFactory;
 import mage.server.game.PlayerFactory;
-import mage.server.managers.ConfigSettings;
 import mage.server.managers.ManagerFactory;
 import mage.server.record.UserStatsRepository;
 import mage.server.tournament.TournamentFactory;
@@ -23,24 +35,17 @@ import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
-import org.jboss.remoting.*;
-import org.jboss.remoting.callback.InvokerCallbackHandler;
-import org.jboss.remoting.callback.ServerInvokerCallbackHandler;
-import org.jboss.remoting.transport.Connector;
-import org.jboss.remoting.transport.bisocket.BisocketServerInvoker;
-import org.jboss.remoting.transport.socket.SocketWrapper;
-import org.jboss.remoting.transporter.TransporterClient;
-import org.jboss.remoting.transporter.TransporterServer;
-import org.w3c.dom.Element;
 
-import javax.management.MBeanServer;
 import java.io.File;
 import java.io.IOException;
-import java.net.InetAddress;
+import java.io.Serializable;
+import java.net.BindException;
 import java.net.MalformedURLException;
 import java.nio.charset.Charset;
 import java.nio.file.Paths;
+import java.security.SecureRandom;
 import java.util.*;
+import mage.choices.Choice;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -63,9 +68,13 @@ public final class Main {
     private static final File pluginFolder = new File("plugins");
     private static final File extensionFolder = new File("extensions");
     private static final String defaultConfigPath = Paths.get("config", "config.xml").toString();
+    private static final int PING_CYCLES = 10;
+    private static final SecureRandom RANDOM = new SecureRandom();
 
     public static final PluginClassLoader classLoader = new PluginClassLoader();
-    private static TransporterServer server;
+    private static ClientCallback clientCallback;
+    private static MageServer server;
+    private static ManagerFactory managerFactory;
 
     // special test mode:
     // - fast game buttons;
@@ -76,7 +85,7 @@ public final class Main {
     private static boolean testMode;
 
     private static boolean fastDbMode;
-
+            
     /**
      * @param args the command line arguments
      */
@@ -250,191 +259,22 @@ public final class Main {
         Connection connection = new Connection("&maxPoolSize=" + config.getMaxPoolSize());
         connection.setHost(config.getServerAddress());
         connection.setPort(config.getPort());
-        final ManagerFactory managerFactory = new MainManagerFactory(config);
         try {
-            // Parameter: serializationtype => jboss
-            InvokerLocator serverLocator = new InvokerLocator(connection.getURI());
-            if (!isAlreadyRunning(config, serverLocator)) {
-                server = new MageTransporterServer(managerFactory, serverLocator, new MageServerImpl(managerFactory, adminPassword, testMode), MageServer.class.getName(), new MageServerInvocationHandler(managerFactory));
-                server.start();
-                logger.info("Started MAGE server - listening on " + connection.toString());
+            managerFactory = new MainManagerFactory(config);
+            server = new MageServerImpl(managerFactory, adminPassword, testMode);
+            clientCallback = new ClientCallbackImpl(server);
+            clientCallback.start(config.getPort(), config.isUseSSL());
+            logger.info("Started MAGE server - listening on " + connection.toString());
 
-                if (testMode) {
-                    logger.info("MAGE server running in test mode");
-                }
-                initStatistics();
-            } else {
-                logger.fatal("Unable to start MAGE server - another server is already started");
+            if (testMode) {
+                logger.info("MAGE server running in test mode");
             }
+        } catch (BindException ex) {
+            logger.fatal("Failed to start server - " + config.getServerName() + " : check that another server is not already running", ex);
         } catch (Exception ex) {
             logger.fatal("Failed to start server - " + connection.toString(), ex);
         }
-    }
-
-    static void initStatistics() {
-        ServerMessagesUtil.instance.setStartDate(System.currentTimeMillis());
-    }
-
-    static boolean isAlreadyRunning(ConfigSettings config, InvokerLocator serverLocator) {
-        Map<String, String> metadata = new HashMap<>();
-        metadata.put(SocketWrapper.WRITE_TIMEOUT, String.valueOf(config.getSocketWriteTimeout()));
-        metadata.put("generalizeSocketException", "true");
-        try {
-            MageServer testServer = (MageServer) TransporterClient.createTransporterClient(serverLocator.getLocatorURI(), MageServer.class, metadata);
-            if (testServer != null) {
-                testServer.getServerState();
-                return true;
-            }
-        } catch (Throwable t) {
-            // assume server is not running
-        }
-        return false;
-    }
-
-    static class ClientConnectionListener implements ConnectionListener {
-
-        private final ManagerFactory managerFactory;
-
-        public ClientConnectionListener(ManagerFactory managerFactory) {
-            this.managerFactory = managerFactory;
-        }
-
-        @Override
-        public void handleConnectionException(Throwable throwable, Client client) {
-            String sessionId = client.getSessionId();
-            Optional<Session> session = managerFactory.sessionManager().getSession(sessionId);
-            if (!session.isPresent()) {
-                logger.trace("Session not found : " + sessionId);
-            } else {
-                UUID userId = session.get().getUserId();
-                StringBuilder sessionInfo = new StringBuilder();
-                Optional<User> user = managerFactory.userManager().getUser(userId);
-                if (user.isPresent()) {
-                    sessionInfo.append(user.get().getName()).append(" [").append(user.get().getGameInfo()).append(']');
-                } else {
-                    sessionInfo.append("[user missing] ");
-                }
-                sessionInfo.append(" at ").append(session.get().getHost()).append(" sessionId: ").append(session.get().getId());
-                if (throwable instanceof ClientDisconnectedException) {
-                    // Seems like the random diconnects from public server land here and should not be handled as explicit disconnects
-                    // So it should be possible to reconnect to server and continue games if DisconnectReason is set to LostConnection
-                    //managerFactory.sessionManager().disconnect(client.getSessionId(), DisconnectReason.Disconnected);
-                    managerFactory.sessionManager().disconnect(client.getSessionId(), DisconnectReason.LostConnection);
-                    logger.info("CLIENT DISCONNECTED - " + sessionInfo);
-                    logger.debug("Stack Trace", throwable);
-                } else {
-                    managerFactory.sessionManager().disconnect(client.getSessionId(), DisconnectReason.LostConnection);
-                    logger.info("LOST CONNECTION - " + sessionInfo);
-                    if (logger.isDebugEnabled()) {
-                        if (throwable == null) {
-                            logger.debug("- cause: Lease expired");
-                        } else {
-                            logger.debug(" - cause: " + Session.getBasicCause(throwable).toString());
-                        }
-                    }
-                }
-
-            }
-
-        }
-    }
-
-    static class MageTransporterServer extends TransporterServer {
-
-        protected Connector connector;
-
-        public MageTransporterServer(ManagerFactory managerFactory, InvokerLocator locator, Object target, String subsystem, MageServerInvocationHandler serverInvocationHandler) throws Exception {
-            super(locator, target, subsystem);
-            connector.addInvocationHandler("callback", serverInvocationHandler);
-            connector.setLeasePeriod(managerFactory.configSettings().getLeasePeriod());
-            connector.addConnectionListener(new ClientConnectionListener(managerFactory));
-        }
-
-        public Connector getConnector() throws Exception {
-            return connector;
-        }
-
-        @Override
-        protected Connector getConnector(InvokerLocator locator, Map config, Element xmlConfig) throws Exception {
-            Connector c = super.getConnector(locator, config, xmlConfig);
-            this.connector = c;
-            return c;
-        }
-    }
-
-    static class MageServerInvocationHandler implements ServerInvocationHandler {
-
-        private final ManagerFactory managerFactory;
-
-        public MageServerInvocationHandler(ManagerFactory managerFactory) {
-            this.managerFactory = managerFactory;
-        }
-
-        @Override
-        public void setMBeanServer(MBeanServer server) {
-            /**
-             * An MBean is a managed Java object, similar to a JavaBeans
-             * component, that follows the design patterns set forth in the JMX
-             * specification. An MBean can represent a device, an application,
-             * or any resource that needs to be managed. MBeans expose a
-             * management interface that consists of the following:
-             *
-             * A set of readable or writable attributes, or both. A set of
-             * invokable operations. A self-description.
-             *
-             */
-            if (server != null) {
-                logger.info("Default domain: " + server.getDefaultDomain());
-            }
-        }
-
-        @Override
-        public void setInvoker(ServerInvoker invoker) {
-            ((BisocketServerInvoker) invoker).setSecondaryBindPort(managerFactory.configSettings().getSecondaryBindPort());
-            ((BisocketServerInvoker) invoker).setBacklog(managerFactory.configSettings().getBacklogSize());
-            ((BisocketServerInvoker) invoker).setNumAcceptThreads(managerFactory.configSettings().getNumAcceptThreads());
-        }
-
-        @Override
-        public void addListener(InvokerCallbackHandler callbackHandler) {
-            // Called for every client connecting to the server
-            ServerInvokerCallbackHandler handler = (ServerInvokerCallbackHandler) callbackHandler;
-            try {
-                String sessionId = handler.getClientSessionId();
-                managerFactory.sessionManager().createSession(sessionId, callbackHandler);
-            } catch (Throwable ex) {
-                logger.fatal("", ex);
-            }
-        }
-
-        @Override
-        public Object invoke(final InvocationRequest invocation) throws Throwable {
-            // Called for every client connecting to the server (after add Listener)
-            String sessionId = invocation.getSessionId();
-            Map map = invocation.getRequestPayload();
-            String host;
-            if (map != null) {
-                InetAddress clientAddress = (InetAddress) invocation.getRequestPayload().get(Remoting.CLIENT_ADDRESS);
-                host = clientAddress.getHostAddress();
-            } else {
-                host = "localhost";
-            }
-            Optional<Session> session = managerFactory.sessionManager().getSession(sessionId);
-            if (!session.isPresent()) {
-                logger.error("Session not found : " + sessionId);
-            } else {
-                session.get().setHost(host);
-            }
-            return null;
-        }
-
-        @Override
-        public void removeListener(InvokerCallbackHandler callbackHandler) {
-            ServerInvokerCallbackHandler handler = (ServerInvokerCallbackHandler) callbackHandler;
-            String sessionId = handler.getClientSessionId();
-            managerFactory.sessionManager().disconnect(sessionId, DisconnectReason.Disconnected);
-        }
-
+        
     }
 
     private static Class<?> loadPlugin(Plugin plugin) {
@@ -496,5 +336,165 @@ public final class Main {
 
     public static boolean isTestMode() {
         return testMode;
+    }
+    
+    public static void sendChatMessage(String sessionId, UUID chatId, ChatMessage message) {
+        clientCallback.sendChatMessage(sessionId, chatId, message);
+    }
+        
+    public static void joinedTable(String sessionId, UUID roomId, UUID tableId, UUID chatId, boolean owner, boolean tournament) {
+        clientCallback.joinedTable(sessionId, roomId, tableId, chatId, owner, tournament);
+    }
+    
+    public static void gameStarted(String sessionId, UUID gameId, UUID playerId) {
+        clientCallback.gameStarted(sessionId, gameId, playerId);
+    }
+
+    public static void initGame(String sessionId, UUID gameId, GameView gameView) {
+        clientCallback.initGame(sessionId, gameId, gameView);
+    }
+
+    public static void gameAsk(String sessionId, UUID gameId, GameView gameView, String question, Map<String, Serializable> options) {
+        clientCallback.gameAsk(sessionId, gameId, gameView, question, options);
+    }
+    
+    public static void gameTarget(String sessionId, UUID gameId, GameView gameView, String question, CardsView cardView, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
+        clientCallback.gameTarget(sessionId, gameId, gameView, question, cardView, targets, required, options);
+    }
+
+    public static void gameSelect(String sessionId, UUID gameId, GameView gameView, String message, Map<String, Serializable> options) {
+        clientCallback.gameSelect(sessionId, gameId, gameView, message, options);
+    }
+
+    public static void gameChooseAbility(String sessionId, UUID gameId, GameView gameView, AbilityPickerView abilities) {
+        clientCallback.gameChooseAbility(sessionId, gameId, gameView, abilities);
+    }
+    
+    public static void gameChoosePile(String sessionId, UUID gameId, GameView gameView, String message, CardsView pile1, CardsView pile2) {
+        clientCallback.gameChoosePile(sessionId, gameId, gameView, message, pile1, pile2);
+    }
+
+    public static void gameChooseChoice(String sessionId, UUID gameId, GameView gameView, Choice choice) {
+        clientCallback.gameChooseChoice(sessionId, gameId, gameView, choice);
+    }
+
+    public static void gamePlayMana(String sessionId, UUID gameId, GameView gameView, String message, Map<String, Serializable> options) {
+        clientCallback.gamePlayMana(sessionId, gameId, gameView, message, options);
+    }
+    
+    public static void gamePlayXMana(String sessionId, UUID gameId, GameView gameView, String message) {
+        clientCallback.gamePlayXMana(sessionId, gameId, gameView, message);
+    }
+
+    public static void gameSelectAmount(String sessionId, UUID gameId, GameView gameView, String message, int min, int max) {
+        clientCallback.gameSelectAmount(sessionId, gameId, gameView, message, min, max);
+    }
+    
+    public static void gameMultiAmount(String sessionId, UUID gameId,GameView gameView, Map<String, Serializable> option, List<String> messages, int min, int max) {
+        clientCallback.gameMultiAmount(sessionId, gameId, gameView, option, messages, min, max);
+    }
+
+    public static void endGameInfo(String sessionId, UUID gameId, GameEndView view) {
+        clientCallback.endGameInfo(sessionId, gameId, view);
+    }
+
+    public static void userRequestDialog(String sessionId, UUID gameId, UserRequestMessage userRequestMessage) {
+        clientCallback.userRequestDialog(sessionId, gameId, userRequestMessage);
+    }
+    
+    public static void gameUpdate(String sessionId, UUID gameId, GameView view) {
+        clientCallback.gameUpdate(sessionId, gameId, view);
+    }
+
+    public static void gameInform(String sessionId, UUID gameId, GameClientMessage message) {
+        clientCallback.gameInform(sessionId, gameId, message);
+    }
+
+    public static void gameInformPersonal(String sessionId, UUID gameId, GameClientMessage message) {
+        clientCallback.gameInformPersonal(sessionId, gameId, message);
+    }
+
+    public static void gameOver(String sessionId, UUID gameId, GameView view, String message) {
+        clientCallback.gameOver(sessionId, gameId, view, message);
+    }
+    
+    public static void gameError(String sessionId, UUID gameId, String message) {
+        clientCallback.gameError(sessionId, gameId, message);
+    }
+    
+    public static void sideboard(String sessionId, UUID tableId, DeckView deck, int time, boolean limited) {
+        clientCallback.sideboard(sessionId, tableId, deck, time, limited);
+    }
+    
+    public static void viewLimitedDeck(String sessionId, UUID tableId, DeckView deck, int time, boolean limited) {
+        clientCallback.viewLimitedDeck(sessionId, tableId, deck, time, limited);
+    }
+    
+    public static void viewSideboard(String sessionId, UUID gameId, UUID targetPlayerId) {
+        clientCallback.viewSideboard(sessionId, gameId, targetPlayerId);
+    }
+
+    public static void construct(String sessionId, UUID tableId, DeckView deck, int time) {
+        clientCallback.construct(sessionId, tableId, deck, time);
+    }
+
+    public static void tournamentStarted(String sessionId, UUID tournamentId, UUID playerId) {
+        clientCallback.tournamentStarted(sessionId, tournamentId, playerId);
+    }
+
+    public static void showTournament(String sessionId, UUID tournamentId) {
+        clientCallback.showTournament(sessionId, tournamentId);
+    }
+    
+    public static void startDraft(String sessionId, UUID draftId, UUID playerId) {
+        clientCallback.startDraft(sessionId, draftId, playerId);
+    }
+
+    public static void draftInit(String sessionId, UUID draftId, DraftPickView draftPickView) {
+        clientCallback.draftInit(sessionId, draftId, draftPickView);
+    }
+
+    public static void draftUpdate(String sessionId, UUID draftId, DraftView draftView) {
+        clientCallback.draftUpdate(sessionId, draftId, draftView);
+    }
+
+    public static void draftOver(String sessionId, UUID draftId) {
+        clientCallback.draftOver(sessionId, draftId);
+    }
+
+    public static void draftPick(String sessionId, UUID draftId, DraftPickView draftPickView) {
+        clientCallback.draftPick(sessionId, draftId, draftPickView);
+    }
+    
+    public static void informClient(String sessionId, String title, String message, MessageType type) {
+        clientCallback.informClient(sessionId, title, message, type);
+    }
+
+    public static void watchGame(String sessionId, UUID gameId, UUID chatId, GameView game) {
+        clientCallback.watchGame(sessionId, gameId, chatId, game);
+    }
+    
+    public static void replayGame(String sessionId, UUID gameId) {
+        clientCallback.replayGame(sessionId, gameId);
+    }
+    
+    public static void replayInit(String sessionId, UUID gameId, GameView gameView) {
+        clientCallback.replayInit(sessionId, gameId, gameView);
+    }
+
+    public static void replayDone(String sessionId, UUID gameId, String result) {
+        clientCallback.replayDone(sessionId, gameId, result);
+    }
+
+    public static void replayUpdate(String sessionId, UUID gameId, GameView gameView) {
+        clientCallback.replayUpdate(sessionId, gameId, gameView);
+    }
+    
+    public static ClientCallback getClientCallback(){
+        return clientCallback;
+    }
+    
+    public static MageServer getServer() {
+        return server;
     }
 }

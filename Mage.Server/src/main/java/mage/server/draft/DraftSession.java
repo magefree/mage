@@ -1,11 +1,8 @@
 package mage.server.draft;
 
 import mage.game.draft.Draft;
-import mage.interfaces.callback.ClientCallback;
-import mage.interfaces.callback.ClientCallbackMethod;
 import mage.server.User;
 import mage.server.managers.ManagerFactory;
-import mage.view.DraftClientMessage;
 import mage.view.DraftPickView;
 import mage.view.DraftView;
 import org.apache.log4j.Logger;
@@ -50,8 +47,7 @@ public class DraftSession {
             if (user.isPresent()) {
                 if (futureTimeout != null && !futureTimeout.isDone()) {
                     int remaining = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
-                    user.get().fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_INIT, draft.getId(),
-                            new DraftClientMessage(getDraftView(), getDraftPickView(remaining))));
+                    user.get().draftInit(draft.getId(), getDraftPickView(remaining));
                 }
                 return true;
             }
@@ -61,29 +57,20 @@ public class DraftSession {
 
     public void update() {
         if (!killed) {
-            managerFactory.userManager()
-                    .getUser(userId).
-                    ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_UPDATE, draft.getId(),
-                            new DraftClientMessage(getDraftView(), null))));
+            managerFactory.userManager().getUser(userId).ifPresent(user -> user.draftUpdate(draft.getId(), getDraftView()));
         }
     }
 
     public void draftOver() {
         if (!killed) {
-            managerFactory.userManager()
-                    .getUser(userId)
-                    .ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_OVER, draft.getId())));
+            managerFactory.userManager().getUser(userId).ifPresent(user -> user.draftOver(draft.getId()));
         }
     }
 
     public void pickCard(int timeout) {
         if (!killed) {
             setupTimeout(timeout);
-            managerFactory.userManager()
-                    .getUser(userId)
-                    .ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_PICK, draft.getId(),
-                            new DraftClientMessage(getDraftView(), getDraftPickView(timeout)))));
-
+            managerFactory.userManager().getUser(userId).ifPresent(user -> user.draftPick(draft.getId(), getDraftPickView(timeout)));
         }
     }
 

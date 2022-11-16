@@ -1,7 +1,7 @@
 package mage.server.managers;
 
 import mage.server.AuthorizedUser;
-import mage.server.DisconnectReason;
+import mage.remote.DisconnectReason;
 import mage.server.User;
 import mage.view.UserView;
 

@@ -1,13 +1,14 @@
 package mage.server;
 
+import mage.remote.DisconnectReason;
+import mage.remote.messages.MessageType;
 import mage.cards.decks.Deck;
+import mage.choices.Choice;
 import mage.constants.ManaType;
 import mage.constants.TableState;
 import mage.game.Table;
 import mage.game.result.ResultProtos;
 import mage.game.tournament.TournamentPlayer;
-import mage.interfaces.callback.ClientCallback;
-import mage.interfaces.callback.ClientCallbackMethod;
 import mage.players.net.UserData;
 import mage.server.draft.DraftSession;
 import mage.server.game.GameSessionPlayer;
@@ -20,13 +21,23 @@ import mage.server.tournament.TournamentController;
 import mage.server.tournament.TournamentSession;
 import mage.server.util.ServerMessagesUtil;
 import mage.server.util.SystemUtil;
-import mage.view.TableClientMessage;
+import mage.view.AbilityPickerView;
+import mage.view.CardsView;
+import mage.view.ChatMessage;
+import mage.view.DeckView;
+import mage.view.DraftPickView;
+import mage.view.DraftView;
+import mage.view.GameClientMessage;
+import mage.view.GameEndView;
+import mage.view.GameView;
+import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
 
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
+import java.io.Serializable;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -34,6 +45,16 @@ import java.util.concurrent.TimeUnit;
 public class User {
 
     private static final Logger logger = Logger.getLogger(User.class);
+
+    public void updateLastActivity(String pingInfo) {
+        if (pingInfo != null) {
+            this.pingInfo = pingInfo;
+        }
+        lastActivity = new Date();
+        if (userState == UserState.Disconnected) { // this can happen if user reconnects very fast after disconnect
+            setUserState(UserState.Connected);
+        }
+    }
 
     public enum UserState {
         Created, // Used if user is created an not connected to the session
@@ -57,7 +78,7 @@ public class User {
     private final List<UUID> watchedGames;
     private String sessionId;
     private String pingInfo = "";
-    private Date lastActivity;
+    private Date disconnectionTime;
     private UserState userState;
     private UserData userData;
     private UserStats userStats;
@@ -67,6 +88,7 @@ public class User {
     private final AuthorizedUser authorizedUser;
     private String clientVersion;
     private String userIdStr;
+    private Date lastActivity;
 
     public User(ManagerFactory managerFactory, String userName, String host, AuthorizedUser authorizedUser) {
         this.managerFactory = managerFactory;
@@ -192,16 +214,24 @@ public class User {
         return userState == UserState.Connected;
     }
 
-    public String getDisconnectDuration() {
-        //long secondsDisconnected = getSecondsDisconnected();
-        //int minutes = (int) secondsDisconnected / 60;
-        //int seconds = (int) secondsDisconnected % 60;
-        //return Integer.toString(minutes) + ':' + (seconds > 9 ? seconds : '0' + Integer.toString(seconds));
-        return getSecondsDisconnected() + " secs";
+    private String getDisconnectDuration() {
+        long secondsDisconnected = getSecondsDisconnected();
+        long secondsLeft;
+        String sign = "";
+        if (secondsDisconnected > (3 * 60)) {
+            sign = "-";
+            secondsLeft = secondsDisconnected - (3 * 60);
+        } else {
+            secondsLeft = (3 * 60) - secondsDisconnected;
+        }
+
+        int minutes = (int) secondsLeft / 60;
+        int seconds = (int) secondsLeft % 60;
+        return new StringBuilder(sign).append(Integer.toString(minutes)).append(":").append(seconds > 9 ? seconds : "0" + Integer.toString(seconds)).toString();
     }
 
     public long getSecondsDisconnected() {
-        return SystemUtil.getDateDiff(lastActivity, new Date(), TimeUnit.SECONDS);
+        return SystemUtil.getDateDiff(disconnectionTime, new Date(), TimeUnit.SECONDS);
     }
 
     public Date getConnectionTime() {
@@ -226,69 +256,164 @@ public class User {
         return " (online: " + connTime + "; seen: " + lastSecs + " sec ago)";
     }
 
-    public void fireCallback(final ClientCallback call) {
-        if (isConnected()) {
-            managerFactory.sessionManager().getSession(sessionId).ifPresent(session
-                    -> session.fireCallback(call)
-            );
-        }
+
+    public void joinedTable(final UUID roomId, final UUID tableId, final UUID chatId, boolean owner, boolean tournament) {
+        Main.joinedTable(sessionId, roomId, tableId, chatId, owner, tournament);
     }
 
-    public void ccJoinedTable(final UUID roomId, final UUID tableId, boolean isTournament) {
-        fireCallback(new ClientCallback(ClientCallbackMethod.JOINED_TABLE, tableId, new TableClientMessage(roomId, tableId, isTournament)));
+    public void gameStarted(final UUID gameId, final UUID playerId) {
+        Main.gameStarted(sessionId, gameId, playerId);
     }
 
-    public void ccGameStarted(final UUID gameId, final UUID playerId) {
-        fireCallback(new ClientCallback(ClientCallbackMethod.START_GAME, gameId, new TableClientMessage(gameId, playerId)));
+    public void initGame(UUID gameId, GameView gameView) {
+        Main.initGame(sessionId, gameId, gameView);
     }
 
-    public void ccDraftStarted(final UUID draftId, final UUID playerId) {
-        fireCallback(new ClientCallback(ClientCallbackMethod.START_DRAFT, draftId, new TableClientMessage(draftId, playerId)));
+    public void gameAsk(UUID gameId, GameView gameView, String question, Map<String, Serializable> options) {
+        Main.gameAsk(sessionId, gameId, gameView, question, options);
     }
 
-    public void ccTournamentStarted(final UUID tournamentId, final UUID playerId) {
-        fireCallback(new ClientCallback(ClientCallbackMethod.START_TOURNAMENT, tournamentId, new TableClientMessage(tournamentId, playerId)));
+    public void gameTarget(UUID gameId, GameView gameView, String question, CardsView cardView, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
+        Main.gameTarget(sessionId, gameId, gameView, question, cardView, targets, required, options);
     }
 
-    public void ccSideboard(final Deck deck, final UUID tableId, final int time, boolean limited) {
-        fireCallback(new ClientCallback(ClientCallbackMethod.SIDEBOARD, tableId, new TableClientMessage(deck, tableId, time, limited)));
+    public void gameSelect(UUID gameId, GameView gameView, String message, Map<String, Serializable> options) {
+        Main.gameSelect(sessionId, gameId, gameView, message, options);
+    }
+
+    public void gameChooseAbility(UUID gameId, GameView gameView, AbilityPickerView abilities) {
+        Main.gameChooseAbility(sessionId, gameId, gameView, abilities);
+    }
+
+    public void gameChoosePile(UUID gameId, GameView gameView, String message, CardsView pile1, CardsView pile2) {
+        Main.gameChoosePile(sessionId, gameId, gameView, message, pile1, pile2);
+    }
+
+    public void gameChooseChoice(UUID gameId, GameView gameView, Choice choice) {
+        Main.gameChooseChoice(sessionId, gameId, gameView, choice);
+    }
+
+    public void gamePlayMana(UUID gameId, GameView gameView, String message, Map<String, Serializable> options) {
+        Main.gamePlayMana(sessionId, gameId, gameView, message, options);
+    }
+
+    public void gamePlayXMana(UUID gameId, GameView gameView, String message) {
+        Main.gamePlayXMana(sessionId, gameId, gameView, message);
+    }
+
+    public void gameSelectAmount(UUID gameId, GameView gameView, String message, int min, int max) {
+        Main.gameSelectAmount(sessionId, gameId, gameView, message, min, max);
+    }
+    
+    public void gameMultiAmount(UUID gameId, GameView gameView, Map<String, Serializable> option, List<String> messages, int min, int max) {
+        Main.gameMultiAmount(sessionId, gameId, gameView, option, messages, min, max);
+    }
+
+    public void endGameInfo(UUID gameId, GameEndView view) {
+        Main.endGameInfo(sessionId, gameId, view);
+    }
+    
+    public void userRequestDialog (UUID gameId, UserRequestMessage userRequestMessage) {
+        Main.userRequestDialog(sessionId, gameId, userRequestMessage);
+    }
+
+    public void gameUpdate(UUID gameId, GameView view) {
+        Main.gameUpdate(sessionId, gameId, view);
+    }
+
+    public void gameInform(UUID gameId, GameClientMessage message) {
+        Main.gameInform(sessionId, gameId, message);
+    }
+
+    public void gameInformPersonal(UUID gameId, GameClientMessage message) {
+        Main.gameInformPersonal(sessionId, gameId, message);
+    }
+
+    public void gameOver(UUID gameId, GameView view, String message) {
+        Main.gameOver(sessionId, gameId, view, message);
+    }
+
+    public void gameError(UUID gameId, String message) {
+        Main.gameError(sessionId, gameId, message);
+    }
+
+    public void sideboard(final Deck deck, final UUID tableId, final int time, boolean limited) {
+        Main.sideboard(sessionId, tableId, new DeckView(deck), time, limited);
         sideboarding.put(tableId, deck);
     }
-
-    public void ccViewLimitedDeck(final Deck deck, final UUID tableId, final int time, boolean limited) {
-        fireCallback(new ClientCallback(ClientCallbackMethod.VIEW_LIMITED_DECK, tableId, new TableClientMessage(deck, tableId, time, limited)));
+    
+    public void viewLimitedDeck(final Deck deck, final UUID tableId, final int time, boolean limited) {
+        Main.viewLimitedDeck(sessionId, tableId, new DeckView(deck), time, limited);
+    }
+    
+    public void viewSideboard(final UUID gameId, final UUID targetPlayerId) {
+        Main.viewSideboard(sessionId, gameId, targetPlayerId);
     }
 
-    public void ccViewSideboard(final UUID tableId, final UUID gameId, final UUID targetPlayerId) {
-        fireCallback(new ClientCallback(ClientCallbackMethod.VIEW_SIDEBOARD, tableId, new TableClientMessage(gameId, targetPlayerId)));
+    public void construct(final Deck deck, final UUID tableId, final int time) {
+        Main.construct(sessionId, tableId, new DeckView(deck), time);
     }
 
-    public void ccConstruct(final Deck deck, final UUID tableId, final int time) {
-        fireCallback(new ClientCallback(ClientCallbackMethod.CONSTRUCT, tableId, new TableClientMessage(deck, tableId, time)));
+    public void tournamentStarted(final UUID tournamentId, final UUID playerId) {
+        Main.tournamentStarted(sessionId, tournamentId, playerId);
     }
 
-    public void ccShowTournament(final UUID tournamentId) {
-        fireCallback(new ClientCallback(ClientCallbackMethod.SHOW_TOURNAMENT, tournamentId));
+    public void showTournament(final UUID tournamentId) {
+        Main.showTournament(sessionId, tournamentId);
     }
 
-    public void ccShowGameEndDialog(final UUID gameId) {
-        fireCallback(new ClientCallback(ClientCallbackMethod.SHOW_GAME_END_DIALOG, gameId));
+    public void draftStarted(final UUID draftId, final UUID playerId) {
+        Main.startDraft(sessionId, draftId, playerId);
     }
 
-    public void showUserMessage(final String titel, String message) {
-        List<String> messageData = new LinkedList<>();
-        messageData.add(titel);
-        messageData.add(message);
-        fireCallback(new ClientCallback(ClientCallbackMethod.SHOW_USERMESSAGE, null, messageData));
+    public void draftInit(UUID draftId, DraftPickView view) {
+        Main.draftInit(sessionId, draftId, view);
     }
 
-    public boolean ccWatchGame(final UUID gameId) {
-        fireCallback(new ClientCallback(ClientCallbackMethod.WATCHGAME, gameId));
-        return true;
+    public void draftUpdate(UUID draftId, DraftView draftView) {
+        Main.draftUpdate(sessionId, draftId, draftView);
     }
 
-    public void ccReplayGame(final UUID gameId) {
-        fireCallback(new ClientCallback(ClientCallbackMethod.REPLAY_GAME, gameId));
+    public void draftOver(UUID draftId) {
+        Main.draftOver(sessionId, draftId);
+    }
+
+    public void draftPick(UUID draftId, DraftPickView view) {
+        Main.draftPick(sessionId, draftId, view);
+    }
+
+    public void chatMessage(UUID chatId, ChatMessage chatMessage) {
+        Main.sendChatMessage(sessionId, chatId, chatMessage);
+    }
+
+    public void showUserMessage(final String title,  String message) {
+        Main.informClient(sessionId, title, message, MessageType.INFORMATION);
+    }
+
+    public void showUserError(final String title,  String message) {
+        Main.informClient(sessionId, title, message, MessageType.ERROR);
+    }
+
+    public void watchGame(final UUID gameId, UUID chatId) {
+        GameView game = managerFactory.gameManager().watchGame(gameId, userId);
+        if (game != null)
+            Main.watchGame(sessionId, gameId, chatId, game);
+    }
+
+    public void replayGame(final UUID gameId) {
+        Main.replayGame(sessionId, gameId);
+    }
+
+    public void replayInit(UUID gameId, GameView gameView) {
+        Main.replayInit(sessionId, gameId, gameView);
+    }
+
+    public void replayDone(UUID gameId, String result) {
+        Main.replayDone(sessionId, gameId, result);
+    }
+
+    public void replayUpdate(UUID gameId, GameView gameView) {
+        Main.replayUpdate(sessionId, gameId, gameView);
     }
 
     public void sendPlayerUUID(final UUID gameId, final UUID data) {
@@ -316,49 +441,30 @@ public class User {
         managerFactory.gameManager().sendPlayerInteger(gameId, userId, data);
     }
 
-    public void updateLastActivity(String pingInfo) {
-        if (pingInfo != null) {
-            this.pingInfo = pingInfo;
-        }
-        lastActivity = new Date();
-        if (userState == UserState.Disconnected) { // this can happen if user reconnects very fast after disconnect
-            setUserState(UserState.Connected);
-        }
-    }
-
-    public boolean isExpired(Date expired) {
-        if (lastActivity.before(expired)) {
-            logger.trace(userName + " is expired!");
-            return true;
-        }
-        logger.trace("isExpired: User " + userName + " lastActivity: " + lastActivity + " expired: " + expired);
-        return false;
-
-    }
-
     private void reconnect() {
         logger.trace(userName + " started reconnect");
         for (Entry<UUID, Table> entry : tables.entrySet()) {
-            ccJoinedTable(entry.getValue().getRoomId(), entry.getValue().getId(), entry.getValue().isTournament());
+            Table t = entry.getValue();
+            joinedTable(t.getRoomId(), t.getId(), managerFactory.tableManager().getChatId(t.getId()).get(), managerFactory.tableManager().isTableOwner(t.getId(), userId), t.isTournament());
         }
         for (Iterator<Entry<UUID, UUID>> iterator = userTournaments.entrySet().iterator(); iterator.hasNext(); ) {
             Entry<UUID, UUID> next = iterator.next();
             Optional<TournamentController> tournamentController = managerFactory.tournamentManager().getTournamentController(next.getValue());
             if (tournamentController.isPresent()) {
-                ccTournamentStarted(next.getValue(), next.getKey());
+                tournamentStarted(next.getValue(), next.getKey());
                 tournamentController.get().rejoin(next.getKey());
             } else {
                 iterator.remove(); // tournament has ended meanwhile
             }
         }
         for (Entry<UUID, GameSessionPlayer> entry : gameSessions.entrySet()) {
-            ccGameStarted(entry.getValue().getGameId(), entry.getKey());
+            gameStarted(entry.getValue().getGameId(), entry.getKey());
             entry.getValue().init();
             managerFactory.gameManager().sendPlayerString(entry.getValue().getGameId(), userId, "");
         }
 
         for (Entry<UUID, DraftSession> entry : draftSessions.entrySet()) {
-            ccDraftStarted(entry.getValue().getDraftId(), entry.getKey());
+            draftStarted(entry.getValue().getDraftId(), entry.getKey());
             entry.getValue().init();
             entry.getValue().update();
         }
@@ -369,7 +475,7 @@ public class User {
         for (Entry<UUID, Deck> entry : sideboarding.entrySet()) {
             Optional<TableController> controller = managerFactory.tableManager().getController(entry.getKey());
             if (controller.isPresent()) {
-                ccSideboard(entry.getValue(), entry.getKey(), controller.get().getRemainingTime(), controller.get().getOptions().isLimited());
+                sideboard(entry.getValue(), entry.getKey(), controller.get().getRemainingTime(), controller.get().getOptions().isLimited());
             } else {
                 // Table is missing after connection was lost during sideboard.
                 // Means other players were removed or conceded the game?

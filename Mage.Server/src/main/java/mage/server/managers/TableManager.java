@@ -1,6 +1,5 @@
 package mage.server.managers;
 
-import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
 import mage.game.Table;
@@ -34,13 +33,13 @@ public interface TableManager {
 
     Optional<TableController> getController(UUID tableId);
 
-    boolean joinTable(UUID userId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws MageException;
+    boolean joinTable(UUID userId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password);
 
-    boolean joinTournament(UUID userId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws GameException;
+    boolean joinTournament(UUID userId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) ;
 
-    boolean submitDeck(UUID userId, UUID tableId, DeckCardLists deckList) throws MageException;
+    boolean submitDeck(UUID userId, UUID tableId, DeckCardLists deckList);
 
-    void updateDeck(UUID userId, UUID tableId, DeckCardLists deckList) throws MageException;
+    void updateDeck(UUID userId, UUID tableId, DeckCardLists deckList);
 
     // removeUserFromAllTablesAndChat user from all tournament sub tables
     void userQuitTournamentSubTables(UUID userId);
@@ -64,7 +63,7 @@ public interface TableManager {
 
     void startDraft(UUID tableId, Draft draft);
 
-    boolean watchTable(UUID userId, UUID tableId);
+    void watchTable(UUID userId, UUID tableId);
 
     void endGame(UUID tableId);
 

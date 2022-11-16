@@ -4,7 +4,6 @@ import mage.cards.decks.importer.DeckImporter;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.players.PlayerType;
-import mage.remote.Session;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
@@ -118,13 +117,12 @@ public class JoinTableDialog extends MageDialog {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-        Session session = SessionHandler.getSession();
         try {
             PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PASSWORD_JOIN, txtPassword.getText());
             if (isTournament) {
-                joined = session.joinTournamentTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), PlayerType.HUMAN, 1, DeckImporter.importDeckFromFile(this.newPlayerPanel.getDeckFile(), true), this.txtPassword.getText());
+                joined = SessionHandler.joinTournamentTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), PlayerType.HUMAN, 1, DeckImporter.importDeckFromFile(this.newPlayerPanel.getDeckFile(), true), this.txtPassword.getText());
             } else {
-                joined = session.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), PlayerType.HUMAN, 1, DeckImporter.importDeckFromFile(this.newPlayerPanel.getDeckFile(), true), this.txtPassword.getText());
+                joined = SessionHandler.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), PlayerType.HUMAN, 1, DeckImporter.importDeckFromFile(this.newPlayerPanel.getDeckFile(), true), this.txtPassword.getText());
             }
 
         } catch (Exception ex) {

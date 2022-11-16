@@ -153,9 +153,9 @@ public class Table implements Serializable {
         return this.isTournament;
     }
 
-    public UUID joinTable(Player player, Seat seat) throws GameException {
+    public UUID joinTable(Player player, Seat seat)  {
         if (seat.getPlayer() != null) {
-            throw new GameException("Seat is occupied.");
+            return null;
         }
         seat.setPlayer(player);
         if (isReady()) {

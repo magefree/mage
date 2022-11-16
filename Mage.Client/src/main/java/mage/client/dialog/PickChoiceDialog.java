@@ -38,13 +38,12 @@ public class PickChoiceDialog extends MageDialog {
     final private static String HTML_HEADERS_TEMPLATE = "<html><div style='text-align: center;'>%s</div></html>";
 
     public void showDialog(Choice choice, String startSelectionValue) {
-        showDialog(choice, startSelectionValue, null, null, null);
+        showDialog(choice, startSelectionValue, null, null);
     }
 
-    public void showDialog(Choice choice, String startSelectionValue, UUID objectId, MageDialogState mageDialogState, BigCard bigCard) {
+    public void showDialog(Choice choice, String startSelectionValue, MageDialogState mageDialogState, BigCard bigCard) {
         this.choice = choice;
         this.bigCard = bigCard;
-        this.gameId = objectId;
 
         setLabelText(this.labelMessage, choice.getMessage());
         setLabelText(this.labelSubMessage, choice.getSubMessage());
@@ -230,10 +229,10 @@ public class PickChoiceDialog extends MageDialog {
                     String cardName = item.getValue();
 
                     if (choice.getHintType() == ChoiceHintType.CARD) {
-                        cardInfo.init(cardName, this.bigCard, this.gameId);
+                        cardInfo.init(cardName, this.bigCard, null);
                     } else if (choice.getHintType() == ChoiceHintType.CARD_DUNGEON) {
                         CardView cardView = new CardView(new DungeonView(Dungeon.createDungeon(cardName)));
-                        cardInfo.init(cardView, this.bigCard, this.gameId);
+                        cardInfo.init(cardView, this.bigCard, null);
                     }
 
                     cardInfo.onMouseEntered(MouseInfo.getPointerInfo().getLocation());

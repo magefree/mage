@@ -2,8 +2,6 @@ package mage.server.game;
 
 import mage.game.Game;
 import mage.game.GameState;
-import mage.interfaces.callback.ClientCallback;
-import mage.interfaces.callback.ClientCallbackMethod;
 import mage.server.managers.ManagerFactory;
 import mage.view.GameView;
 
@@ -27,7 +25,7 @@ public class ReplaySession implements GameCallback {
     public void replay() {
         replay.start();
         managerFactory.userManager().getUser(userId).ifPresent(user ->
-                user.fireCallback(new ClientCallback(ClientCallbackMethod.REPLAY_INIT, replay.getGame().getId(), new GameView(replay.next(), replay.getGame(), null, null))));
+                user.replayInit(replay.getGame().getId(), new GameView(replay.next(), replay.getGame(), null, null)));
 
     }
 
@@ -53,7 +51,7 @@ public class ReplaySession implements GameCallback {
     @Override
     public void gameResult(final String result) {
         managerFactory.userManager().getUser(userId).ifPresent(user ->
-                user.fireCallback(new ClientCallback(ClientCallbackMethod.REPLAY_DONE, replay.getGame().getId(), result)));
+                user.replayDone(replay.getGame().getId(), result));
 
         managerFactory.replayManager().endReplay(replay.getGame().getId(), userId);
     }
@@ -63,7 +61,7 @@ public class ReplaySession implements GameCallback {
             gameResult("game ended");
         } else {
             managerFactory.userManager().getUser(userId).ifPresent(user ->
-                    user.fireCallback(new ClientCallback(ClientCallbackMethod.REPLAY_UPDATE, replay.getGame().getId(), new GameView(state, game, null, null))));
+                    user.replayUpdate(replay.getGame().getId(), new GameView(state, game, null, null)));
 
         }
     }

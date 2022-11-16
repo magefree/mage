@@ -26,23 +26,13 @@
             <artifactId>jspf-core</artifactId>
             <version>0.9.1</version>            
         </dependency>
-
+        
         <dependency>
-            <groupId>org.jboss.remoting</groupId>
-            <artifactId>jboss-remoting</artifactId>
-            <version>2.5.4.SP5</version>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.1.74.Final</version>
         </dependency>
-        <dependency>
-            <groupId>org.jboss</groupId>
-            <artifactId>jboss-common-core</artifactId>
-            <version>2.5.0.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>jboss</groupId>
-            <artifactId>jboss-serialization</artifactId>
-            <version>4.2.2.GA</version>
-        </dependency>
-
+        
         <dependency>
             <groupId>concurrent</groupId>
             <artifactId>concurrent</artifactId>

@@ -1,11 +1,11 @@
 package mage.utils;
 
-import mage.view.TableView;
+import java.util.UUID;
 
 /**
  * Used to write less code for ActionWithResult anonymous classes with UUID return type.
  *
  * @author noxx
  */
-public abstract class ActionWithUUIDResult extends ActionWithNullNegativeResult<TableView> {
+public abstract class ActionWithUUIDResult extends ActionWithNullNegativeResult<UUID> {
 }

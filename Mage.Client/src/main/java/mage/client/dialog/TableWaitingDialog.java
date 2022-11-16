@@ -24,7 +24,6 @@ import mage.client.util.gui.TableUtil;
 import mage.client.util.gui.countryBox.CountryCellRenderer;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.players.PlayerType;
-import mage.remote.Session;
 import mage.view.SeatView;
 import mage.view.TableView;
 
@@ -120,17 +119,17 @@ public class TableWaitingDialog extends MageDialog {
         }
     }
 
-    public void showDialog(UUID roomId, UUID tableId, boolean isTournament) {
+    public void showDialog(UUID roomId, UUID tableId, UUID chatId, boolean owner, boolean isTournament) {
         Rectangle currentBounds = MageFrame.getDesktop().getBounds();
-        Optional<UUID> chatId = SessionHandler.getTableChatId(tableId);
         String tournamentChatDivider = PreferencesDialog.getCachedValue(KEY_TABLES_DIVIDER_LOCATION_4, null);
-        updateTask = new UpdateSeatsTask(SessionHandler.getSession(), roomId, tableId, this);
+        updateTask = new UpdateSeatsTask(roomId, tableId, this);
 
         this.roomId = roomId;
         this.tableId = tableId;
         this.isTournament = isTournament;
 
-        if (SessionHandler.isTableOwner(roomId, tableId)) {
+        updateTask = new UpdateSeatsTask(roomId, tableId, this);
+        if (owner) {
             this.btnStart.setVisible(true);
             this.btnMoveDown.setVisible(true);
             this.btnMoveUp.setVisible(true);
@@ -140,8 +139,8 @@ public class TableWaitingDialog extends MageDialog {
             this.btnMoveUp.setVisible(false);
         }
 
-        if (chatId.isPresent()) {
-            this.chatPanel.connect(chatId.get());
+        if (chatId!=null) {
+            this.chatPanel.connect(chatId);
             updateTask.execute();
             this.setModal(false);
             this.setLocation(100, 100);
@@ -379,7 +378,6 @@ class TableWaitModel extends AbstractTableModel {
 
 class UpdateSeatsTask extends SwingWorker<Void, TableView> {
 
-    private final Session session;
     private final UUID roomId;
     private final UUID tableId;
     private final TableWaitingDialog dialog;
@@ -387,8 +385,7 @@ class UpdateSeatsTask extends SwingWorker<Void, TableView> {
 
     private static final Logger logger = Logger.getLogger(TableWaitingDialog.class);
 
-    UpdateSeatsTask(Session session, UUID roomId, UUID tableId, TableWaitingDialog dialog) {
-        this.session = session;
+    UpdateSeatsTask(UUID roomId, UUID tableId, TableWaitingDialog dialog) {
         this.roomId = roomId;
         this.tableId = tableId;
         this.dialog = dialog;

@@ -19,7 +19,6 @@
  import javax.swing.Timer;
  import javax.swing.*;
  import java.awt.*;
- import java.awt.dnd.DragSourceEvent;
  import java.awt.event.ActionEvent;
  import java.awt.event.ActionListener;
  import java.awt.event.KeyEvent;
@@ -133,9 +132,8 @@
      public synchronized void showDraft(UUID draftId) {
          this.draftId = draftId;
          MageFrame.addDraft(draftId, this);
-         if (!SessionHandler.joinDraft(draftId)) {
-             hideDraft();
-         }
+         SessionHandler.joinDraft(draftId);
+         hideDraft();
 
          if (isLogging()) {
              SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
@@ -275,7 +273,7 @@
                  if (event.getEventType() == ClientEventType.DRAFT_PICK_CARD) {
                      // PICK card
                      SimpleCardView source = (SimpleCardView) event.getSource();
-                     DraftPickView view = SessionHandler.sendCardPick(draftId, source.getId(), cardsHidden);
+                     DraftPickView view = SessionHandler.pickCard(draftId, source.getId(), cardsHidden);
                      if (view != null) {
                          loadCardsToPickedCardsArea(view.getPicks());
                          draftBooster.loadBooster(EMPTY_VIEW, bigCard);
@@ -285,7 +283,7 @@
                  } else if (event.getEventType() == ClientEventType.DRAFT_MARK_CARD) {
                      // MARK card
                      SimpleCardView source = (SimpleCardView) event.getSource();
-                     SessionHandler.sendCardMark(draftId, source.getId());
+                     SessionHandler.markCard(draftId, source.getId());
                  }
              };
              this.draftBooster.addCardEventListener(this.pickingCardsListener);

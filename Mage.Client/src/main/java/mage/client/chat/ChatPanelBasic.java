@@ -4,7 +4,9 @@ import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.cards.BigCard;
 import mage.client.dialog.PreferencesDialog;
+import mage.client.util.audio.AudioManager;
 import mage.client.util.GUISizeHelper;
+import mage.client.util.IgnoreList;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
 import org.mage.card.arcane.ManaSymbols;
@@ -18,6 +20,7 @@ import java.util.Locale;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import mage.view.ChatMessage;
 
 /**
  * @author BetaSteward_at_googlemail.com, nantuko
@@ -152,16 +155,40 @@ public class ChatPanelBasic extends javax.swing.JPanel {
 
     public void connect(UUID chatId) {
         this.chatId = chatId;
-        if (SessionHandler.joinChat(chatId)) {
-            MageFrame.addChat(chatId, this);
-        }
+        SessionHandler.joinChat(chatId);
+        MageFrame.addChat(chatId, this);
     }
 
     public void disconnect() {
-        if (SessionHandler.getSession() != null) {
+        if (chatId != null && parentChatRef == null && SessionHandler.isConnected()) {
             SessionHandler.leaveChat(chatId);
             MageFrame.removeChat(chatId);
         }
+    }
+    
+    public void receiveMessage(ChatMessage message) {
+        // play the to the message connected sound
+        if (message.getSoundToPlay() != null) {
+            switch (message.getSoundToPlay()) {
+                case PlayerLeft:
+                    AudioManager.playPlayerLeft();
+                    break;
+                case PlayerQuitTournament:
+                    AudioManager.playPlayerQuitTournament();
+                    break;
+                case PlayerSubmittedDeck:
+                    AudioManager.playPlayerSubmittedDeck();
+                    break;
+                case PlayerWhispered:
+                    AudioManager.playPlayerWhispered();
+                    break;
+            }
+        }
+        // send start message to chat if not done yet
+        if (!isStartMessageDone()) {
+            createChatStartMessage();
+        }
+        receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), message.getTurnInfo(), message.getMessageType(), message.getColor());
     }
 
     Pattern profanityPattern = Pattern.compile(".*(1ab1a|1d1ot|13p3r|13sb1ans|13sbo|13s13|13sb1an|13sbo|13sy|1nbr3d|1nc3st|1njun|1ub3|\\Wbj|\\Wcum|\\Wdum|\\Wfag|\\Wfap|\\W[sf]uk|\\Wj1s|\\Wp3do|\\Wp33|\\Wpoo\\W|\\Wt1t|aho13|an1ngu|ana1|anus|ar3o1a|ar3o13|ary1an|axyx|axyxhat|axyxho13|axyxmast3r|axyxmunch|axyxw1p3|b1atch|b1gt1t|b1mbo|b1ow|b1tch|ba1s|bab3|bang|barf|bastard|bawdy|b3an3r|b3ard3dc1am|b3ast1a1ty|b3atch|b3at3r|b3av3r|b3otch|b3yotch|bo1nk|bod1y|bon3d|bon3r|bon3|bob|bot13|boty|bow31|br3ast|bug3r|bukak3|bung|busty|buxyx|c1t|caca|cahon3|cam31to3|carp3tmunch3r|cawk|c3rv1x|ch1nc|ch1nk|chod3|co1ta1|cockb1ock|cockho1st3r|cocknock3r|cocksmok3r|cocksuck3r|cock|condom|corksuck3r|crabs|cums1ut|cumshot|cumsta1n|cnt|cun1ngus|cuntfac3|cunthunt3r|cunt|d1ck|d1k3|d1do|d1mw1t|d1ng13|d1psh1p|dago|dam1t|damn1t|damn3d|damn|dawg13sty13|dog13sty13|dogysty13|dong|dop3y|douch3|drunk|dumb|dumas|dum|dumbas|dumy|dyk3|3jacu1at3|3n1arg3m3nt|3r3ct1on|3r3ct|3rot1c|3xtacy|3xtasy|f.ck|f1osy|f1st3d|f1st1ng|f1sty|fa1gt|fa1g|fack|fag1t|fag3d|fagot|fag|[sf]cuk|f31at1o|f31at3|f31ch1ng|f31ch3r|f31ch|f31tch3r|f31tch|foad|fobar|fond13|for3sk1n|fu.k|fudg3pack3r|[sf]uk|g1ans|g1go1o|ganja|ghay|gh3y|go1d3nshow3r|gonad|gok|gr1ngo|h1t13r|handjob|hardon|hokah|hok3r|homo|honky|hor|hotch|hot3r|horny|hump1ng|hump3d|hump|hym3n|j1sm|j1s3d|j1sm|j1s|jackas|jackho13|jackof|j3rk3d|j3rkof|j3rk|junk13|junky|k1an|k1k3|k1nky|knob3nd|kyk3|mams|masa|mast3rba|masturba|max1|m3ns3s|m3nstruat|m[sf]uck1ng|mofo|moron|moth3rf|mthrf|muf|n1ger|n1ga|n1mrod|n1ny|n1p13|nak3d|napa1m|napy|nas1|n3gro|noky|nympho|op1at3|op1um|ora1y|ora1|org13s|organ|orgasm|orgy|ovary|ovum|p1owb1t3r|p1mp|p1nko|p1s3d|p1sof|p1s|pak1|pant13|panty|past13|pasty|p3ck3r|p3doph1|p3p3|p3n1a1|p3n13|p3n1s|p3n3trat1on|p3n3trat3|p3rv3rs1on|p3yot3|pha1c|phuck|po1ack|po1ock|pontang|pop|pr1ck|pr1g|pron|pub1|pub3|punkas|punky|pus1|pusy|puto|qu1cky|qu1ck13|qu1m|qu3af|qu3ro|qu3rs|qu3r|r1mjob|r1tard|racy|rap1st|rap3d|rap3r|rap3|raunch|r31ch|r3cta1|r3ctum|r3ctus|r3tard|r3tar|rtard|rumpram3r|rump|s1av3|s13as|s1ut|sack|sad1s|scag|sch1ong|sch1so|scr3w|scrog|scrot|scrud|scum|s3aman|s3am3n|s3duc3|s3m3n|s3xua1|sh1t|skag|skank|sm3gma|smut|sn1p3r|snatch|sodom|sp1ck|sp1c|sp1k|sp3rm|spunk|st3amy|stfu|ston3d|str1p|strok3|stup1d|suck|sumofab1atch|t1nk13|t1t[sf]uck|tampon|tard|t3abag1ng|t3at|t3st1|t3st3|t3urd|thrust|tramp|trans|trashy|twat|ug1y|unw3d|ur1n3a|ut3rus|vag1na|vu1gar|vu1va|w1g3r|wang|wank3r|wank|w31n3r|w31rdo|w3dg13|w3n13|w3tback|w3w3|wh1t3y|wh1s|whor3).*");
@@ -214,7 +241,7 @@ public class ChatPanelBasic extends javax.swing.JPanel {
      * @param messageType
      * @param color       Preferred color. Not used.
      */
-    public void receiveMessage(String username, String message, Date time, String turnInfo, MessageType messageType, MessageColor color) {
+    protected void receiveMessage(String username, String message, Date time, String turnInfo, MessageType messageType, MessageColor color) {
         StringBuilder text = new StringBuilder();
         if (time != null) {
             text.append(getColoredText(TIMESTAMP_COLOR, timeFormatter.format(time) + getTurnInfoPart(turnInfo) + ": "));
@@ -281,6 +308,76 @@ public class ChatPanelBasic extends javax.swing.JPanel {
         } else if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_USE_PROFANITY_FILTER, "0").equals("2")) {
             text.append(getColoredText(textColor, ManaSymbols.replaceSymbolsWithHTML("<font color=black size=-2>" + username + ": Profanity detected.  To make it less strict, type: </font> <font color=green size=-2>/w " + SessionHandler.getUserName() + " profanity 1</font>", ManaSymbols.Type.CHAT)));
             this.txtConversation.append(text.toString());
+        }
+    }
+    
+    private void createChatStartMessage() {
+        setStartMessageDone(true);
+        switch (getChatType()) {
+            case GAME:
+                receiveMessage("", new StringBuilder()
+                                .append("HOTKEYS:")
+                                .append("<br/>Turn mousewheel up (ALT-e) - enlarge image of card the mousepointer hovers over")
+                                .append("<br/>Turn mousewheel down (ALT-s) - enlarge original/alternate image of card the mousepointer hovers over")
+                                .append("<br/><b>")
+                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_CONFIRM)))
+                                .append("</b> - Confirm \"Ok\", \"Yes\" or \"Done\" button")
+                                .append("<br/><b>")
+                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_NEXT_TURN)))
+                                .append("</b> - Skip current turn but stop on declare attackers/blockers and something on the stack")
+                                .append("<br/><b>")
+                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_END_STEP)))
+                                .append("</b> - Skip to next end step but stop on declare attackers/blockers and something on the stack")
+                                .append("<br/><b>")
+                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_SKIP_STEP)))
+                                .append("</b> - Skip current turn but stop on declare attackers/blockers")
+                                .append("<br/><b>")
+                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_MAIN_STEP)))
+                                .append("</b> - Skip to next main phase but stop on declare attackers/blockers and something on the stack")
+                                .append("<br/><b>")
+                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_YOUR_TURN)))
+                                .append("</b> - Skip everything until your next turn")
+                                .append("<br/><b>")
+                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_PRIOR_END)))
+                                .append("</b> - Skip everything until the end step just prior to your turn")
+                                .append("<br/><b>")
+                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_CANCEL_SKIP)))
+                                .append("</b> - Undo F4/F5/F7/F9/F11")
+                                .append("<br/><b>")
+                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_SWITCH_CHAT)))
+                                .append("</b> - Switch in/out to chat text field")
+                                /*
+                                .append("<br/><b>")
+                                .append(KeyEvent.getKeyText(PreferencesDialog.getCurrentControlKey(PreferencesDialog.KEY_CONTROL_TOGGLE_MACRO)))
+                                .append("</b> - Toggle recording a sequence of actions to repeat. Will not pause if interrupted and can fail if a selected card changes such as when scrying top card to bottom.")
+                                .append("<br/><b>").append(System.getProperty("os.name").contains("Mac OS X") ? "Cmd" : "Ctrl").append(" + click</b> - Hold priority while casting a spell or activating an ability")
+                                 */
+                                .append("<br/>")
+                                .append("<br/>")
+                                .append("CHAT COMMANDS:")
+                                .append("<br/>").append("<b>/h username </b> - show player's stats (history)")
+                                .append("<br/>").append("<b>/w username message</b> - send private message to player (whisper)")
+                                .append("<br/>").append("<b>/pings</b> - show players and watchers ping")
+                                .append("<br/>").append("<b>/fix</b> - fix freezed game")
+                                .toString(),
+                        null, null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
+                break;
+            case TOURNAMENT:
+                receiveMessage("", "On this panel you can see the players, their state and the results of the games of the tournament. Also you can chat with the competitors of the tournament.",
+                        null, null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
+                break;
+            case TABLES:
+                String serverAddress = SessionHandler.getServerHostname().orElse("");
+                receiveMessage("", new StringBuilder("Download card images by using the \"Images\" main menu.")
+                                .append("<br/>Download icons and symbols by using the \"Symbols\" main menu.")
+                                .append("<br/>\\list - show a list of available chat commands.")
+                                .append("<br/>").append(IgnoreList.usage(serverAddress))
+                                .append("<br/>Type <font color=green>\\w yourUserName profanity 0 (or 1 or 2)</font> to turn off/on the profanity filter").toString(),
+                        null, null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
+                break;
+            default:
+                break;
+
         }
     }
 

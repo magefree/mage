@@ -9,6 +9,7 @@ import mage.view.TournamentTypeView;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -25,10 +26,13 @@ public class ServerState implements Serializable {
     private final MageVersion version;
     private final long cardsContentVersion;
     private final long expansionsContentVersion;
+    private final boolean valid;
+    private final UUID mainRoomId;
 
     public ServerState(List<GameTypeView> gameTypes, List<TournamentTypeView> tournamentTypes,
                        PlayerType[] playerTypes, String[] deckTypes, String[] draftCubes, boolean testMode,
-                       MageVersion version, long cardsContentVersion, long expansionsContentVersion) {
+                       MageVersion version, long cardsContentVersion, long expansionsContentVersion,
+                       UUID mainRoomId) {
         this.gameTypes = gameTypes;
         this.tournamentTypes = tournamentTypes;
         this.playerTypes = playerTypes;
@@ -38,9 +42,11 @@ public class ServerState implements Serializable {
         this.version = version;
         this.cardsContentVersion = cardsContentVersion;
         this.expansionsContentVersion = expansionsContentVersion;
+        this.valid = true;
+        this.mainRoomId = mainRoomId;
 
     }
-
+    
     public List<GameTypeView> getGameTypes() {
         return gameTypes;
     }
@@ -82,5 +88,12 @@ public class ServerState implements Serializable {
     public long getExpansionsContentVersion() {
         return expansionsContentVersion;
     }
-
+    
+    public boolean isValid() {
+        return valid;
+    }
+    
+    public UUID getMainRoomId() {
+        return mainRoomId;
+    }
 }

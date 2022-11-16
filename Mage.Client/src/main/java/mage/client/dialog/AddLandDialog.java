@@ -1,6 +1,5 @@
 package mage.client.dialog;
 
-import mage.Mana;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
 import mage.cards.decks.Deck;
@@ -191,7 +190,7 @@ public class AddLandDialog extends MageDialog {
         }
 
         if (foundNoneAfter >= 1000 && useFullArt) {
-            MageFrame.getInstance().showMessage("Unable to add enough " + landName + "s.  You encountered an error in adding chosen lands.  Unable to find enough full art lands in the set " + landSetName + ".");
+            MageFrame.getInstance().showMessage(null, "Unable to add enough " + landName + "s.  You encountered an error in adding chosen lands.  Unable to find enough full art lands in the set " + landSetName + ".");
         }
     }
 
