@@ -16,7 +16,7 @@ import mage.game.permanent.token.PowerstoneToken;
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author TheElk801, Susucre
  */
 public final class SlagstoneRefinery extends CardImpl {
 
@@ -61,20 +61,14 @@ class SlagstoneRefineryTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
 
-        // Filters events for battlefield => graveyard or exile => graveyard.
-        if (zEvent.getFromZone() == Zone.BATTLEFIELD && (zEvent.getToZone().match(Zone.GRAVEYARD) || zEvent.getToZone().match(Zone.EXILED))) {
-            if(zEvent.getTargetId().equals(getSourceId())) return true; // {this}
-            else {                                                                                  // another
-                UUID targetId = zEvent.getTargetId();
-                Permanent permanent = game.getPermanent(targetId);
-                if (permanent == null) {
-                    permanent = (Permanent) game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
-                }
-
-                // filters for 'another nontoken artifact you control'
-                return zEvent.getTarget().isArtifact(game)                                          // artifact
-                        && !(zEvent.getTarget() instanceof PermanentToken)                          // nontoken
-                        && (permanent != null && permanent.getControllerId() == getControllerId()); // you control
+        // Filters ZC events for only battlefield => graveyard or battlefield => exile.
+        if (zEvent.getFromZone() == Zone.BATTLEFIELD && (zEvent.getToZone() == Zone.GRAVEYARD || zEvent.getToZone() == Zone.EXILED)) {
+            if(zEvent.getTargetId().equals(getSourceId())) {                             // {this}
+                return true;
+            } else {                                                                     // another
+                return zEvent.getTarget().isArtifact(game)                               // artifact
+                    && !(zEvent.getTarget() instanceof PermanentToken)                   // nontoken
+                    && (zEvent.getTarget().getControllerId().equals(getControllerId())); // you control
             }
         }
 
