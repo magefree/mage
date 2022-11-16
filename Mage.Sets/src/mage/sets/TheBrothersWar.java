@@ -135,6 +135,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Great Desert Prospector", 7, Rarity.UNCOMMON, mage.cards.g.GreatDesertProspector.class));
         cards.add(new SetCardInfo("Gruesome Realization", 103, Rarity.UNCOMMON, mage.cards.g.GruesomeRealization.class));
         cards.add(new SetCardInfo("Gurgling Anointer", 104, Rarity.UNCOMMON, mage.cards.g.GurglingAnointer.class));
+        cards.add(new SetCardInfo("Gwenna, Eyes of Gaea", 185, Rarity.RARE, mage.cards.g.GwennaEyesOfGaea.class));
         cards.add(new SetCardInfo("Hajar, Loyal Bodyguard", 211, Rarity.RARE, mage.cards.h.HajarLoyalBodyguard.class));
         cards.add(new SetCardInfo("Hall of Tagsin", 263, Rarity.RARE, mage.cards.h.HallOfTagsin.class));
         cards.add(new SetCardInfo("Harbin, Vanguard Aviator", 212, Rarity.RARE, mage.cards.h.HarbinVanguardAviator.class));
