@@ -1817,6 +1817,20 @@ public class ScryfallImageSupportTokens {
             put ("40K/Tyranid Gargoyle", "https://api.scryfall.com/cards/t40k/9/en?format=image");
             put ("40K/Tyranid Warrior", "https://api.scryfall.com/cards/t40k/19/en?format=image");
 
+            // BRO
+            put ("BRO/Bear", "https://api.scryfall.com/cards/tbro/2/en?format=image");
+            put ("BRO/Construct/1", "https://api.scryfall.com/cards/tbro/5/en?format=image");
+            put ("BRO/Construct/2", "https://api.scryfall.com/cards/tbro/4/en?format=image");
+            put ("BRO/Forest Dryad", "https://api.scryfall.com/cards/tbro/3/en?format=image");
+            put ("BRO/Golem", "https://api.scryfall.com/cards/tbro/6/en?format=image");
+            put ("BRO/Powerstone", "https://api.scryfall.com/cards/tbro/7/en?format=image");
+            put ("BRO/Emblem Saheeli, Filigree Master", "https://api.scryfall.com/cards/tbro/12/en?format=image");
+            put ("BRO/Soldier/1", "https://api.scryfall.com/cards/tbro/8/en?format=image");
+            put ("BRO/Soldier/2", "https://api.scryfall.com/cards/tbro/9/en?format=image");
+            put ("BRO/Spirit", "https://api.scryfall.com/cards/tbro/1/en?format=image");
+            put ("BRO/Thopter", "https://api.scryfall.com/cards/tbro/10/en?format=image");
+            put ("BRO/Zombie", "https://api.scryfall.com/cards/tbro/11/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
