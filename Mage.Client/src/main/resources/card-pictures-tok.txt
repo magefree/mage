@@ -1952,3 +1952,17 @@
 |Generate|TOK:BRO|Spirit|||SpiritTeferiToken|
 |Generate|TOK:BRO|Thopter|||ThopterColorlessToken|
 |Generate|TOK:BRO|Zombie|||AshnodZombieToken|
+
+# BRC
+|Generate|TOK:BRC|Construct|||ConstructToken|
+|Generate|TOK:BRC|Eldrazi|||EldraziToken|
+|Generate|TOK:BRC|Elemental|||TitaniaProtectorOfArgothElementalToken|
+|Generate|TOK:BRC|Faerie|||FaerieToken|
+|Generate|TOK:BRC|Goat|||GoatToken|
+|Generate|TOK:BRC|Inkling|||InklingToken|
+|Generate|TOK:BRC|Myr|||MyrToken|
+|Generate|TOK:BRC|Phyrexian Horror|||PhyrexianRebirthHorrorToken|
+|Generate|TOK:BRC|Phyrexian Myr|||BrudicladTelchorMyrToken|
+|Generate|TOK:BRC|Scrap|||ScrapToken|
+|Generate|TOK:BRC|Servo|||ServoToken|
+|Generate|TOK:BRC|Thopter|||ThopterToken|

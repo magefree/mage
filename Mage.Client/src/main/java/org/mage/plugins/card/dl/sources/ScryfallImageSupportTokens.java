@@ -1831,6 +1831,20 @@ public class ScryfallImageSupportTokens {
             put ("BRO/Thopter", "https://api.scryfall.com/cards/tbro/10/en?format=image");
             put ("BRO/Zombie", "https://api.scryfall.com/cards/tbro/11/en?format=image");
 
+            // BRC
+            put ("BRC/Construct", "https://api.scryfall.com/cards/tbrc/8/en?format=image");
+            put ("BRC/Eldrazi", "https://api.scryfall.com/cards/tbrc/2/en?format=image");
+            put ("BRC/Elemental", "https://api.scryfall.com/cards/tbrc/14/en?format=image");
+            put ("BRC/Faerie", "https://api.scryfall.com/cards/tbrc/4/en?format=image");
+            put ("BRC/Goat", "https://api.scryfall.com/cards/tbrc/3/en?format=image");
+            put ("BRC/Inkling", "https://api.scryfall.com/cards/tbrc/7/en?format=image");
+            put ("BRC/Myr", "https://api.scryfall.com/cards/tbrc/10/en?format=image");
+            put ("BRC/Phyrexian Horror", "https://api.scryfall.com/cards/tbrc/11/en?format=image");
+            put ("BRC/Phyrexian Myr", "https://api.scryfall.com/cards/tbrc/5/en?format=image");
+            put ("BRC/Scrap", "https://api.scryfall.com/cards/tbrc/12/en?format=image");
+            put ("BRC/Servo", "https://api.scryfall.com/cards/tbrc/13/en?format=image");
+            put ("BRC/Thopter", "https://api.scryfall.com/cards/tbrc/6/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

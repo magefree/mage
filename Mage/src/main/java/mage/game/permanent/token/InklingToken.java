@@ -23,7 +23,7 @@ public final class InklingToken extends TokenImpl {
 
         addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("STX", "CLB");
+        availableImageSetCodes = Arrays.asList("STX", "CLB", "BRC");
     }
 
     private InklingToken(final InklingToken token) {
