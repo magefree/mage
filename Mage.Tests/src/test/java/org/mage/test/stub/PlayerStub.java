@@ -1424,4 +1424,8 @@ public class PlayerStub implements Player {
         return card.getSpellAbility();
     }
 
+    @Override
+    public ActivatedAbility chooseLandOrSpellAbility(Card card, Game game, boolean noMana) {
+        return card.getSpellAbility();
+    }
 }
