@@ -1,6 +1,8 @@
 package mage.abilities.effects;
 
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -12,7 +14,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class CreateTokenCopySourceEffect extends OneShotEffect {
 
-    private final int number;
+    private final DynamicValue amount;
     private final boolean tapped;
 
     public CreateTokenCopySourceEffect() {
@@ -20,19 +22,23 @@ public class CreateTokenCopySourceEffect extends OneShotEffect {
     }
 
     public CreateTokenCopySourceEffect(int copies) {
-        this(copies, false);
+        this(StaticValue.get(copies), false);
     }
 
-    public CreateTokenCopySourceEffect(int copies, boolean tapped) {
+    public CreateTokenCopySourceEffect(int copies, boolean tapped) { this(StaticValue.get(copies), tapped); }
+
+    public CreateTokenCopySourceEffect(DynamicValue amount) { this(amount, false); }
+
+    public CreateTokenCopySourceEffect(DynamicValue amount, boolean tapped) {
         super(Outcome.PutCreatureInPlay);
-        this.number = copies;
+        this.amount = amount.copy();
         this.tapped = tapped;
         staticText = "create a " + (tapped ? "tapped " : "") + "token that's a copy of {this}";
     }
 
     public CreateTokenCopySourceEffect(final CreateTokenCopySourceEffect effect) {
         super(effect);
-        this.number = effect.number;
+        this.amount = effect.amount.copy();
         this.tapped = effect.tapped;
     }
 
@@ -42,8 +48,9 @@ public class CreateTokenCopySourceEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
+        int value = amount.calculate(game, source, this);
         CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(
-                source.getControllerId(), null, false, number, tapped, false
+                source.getControllerId(), null, false, value, tapped, false
         );
         effect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
         return effect.apply(game, source);
