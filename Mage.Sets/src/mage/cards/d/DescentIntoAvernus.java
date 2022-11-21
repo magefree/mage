@@ -4,9 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenTargetEffect;
+import mage.abilities.effects.common.CreateTokenAllEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -15,11 +13,8 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.game.Game;
 import mage.game.permanent.token.TreasureToken;
-import mage.target.targetpointer.FixedTarget;
 
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -37,7 +32,9 @@ public final class DescentIntoAvernus extends CardImpl {
                 new AddCountersSourceEffect(CounterType.DESCENT.createInstance(2)),
                 TargetController.YOU, false
         );
-        ability.addEffect(new DescentIntoAvernusEffect());
+        ability.addEffect(new CreateTokenAllEffect(
+                new TreasureToken(), xValue, TargetController.EACH_PLAYER
+        ).setText("then each player creates X Treasure tokens"));
         ability.addEffect(new DamagePlayersEffect(
                 Outcome.Damage, xValue, TargetController.ANY
         ).setText("and {this} deals X damage to each player, where X is the number of descent counters on {this}"));
@@ -51,40 +48,5 @@ public final class DescentIntoAvernus extends CardImpl {
     @Override
     public DescentIntoAvernus copy() {
         return new DescentIntoAvernus(this);
-    }
-}
-
-class DescentIntoAvernusEffect extends OneShotEffect {
-
-    DescentIntoAvernusEffect() {
-        super(Outcome.Benefit);
-        staticText = "Then each player creates X Treasure tokens";
-    }
-
-    private DescentIntoAvernusEffect(final DescentIntoAvernusEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DescentIntoAvernusEffect copy() {
-        return new DescentIntoAvernusEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int count = Optional
-                .ofNullable(source.getSourcePermanentOrLKI(game))
-                .map(permanent -> permanent.getCounters(game))
-                .map(counters -> counters.getCount(CounterType.DESCENT))
-                .orElse(0);
-        if (count < 1) {
-            return false;
-        }
-        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Effect effect = new CreateTokenTargetEffect(new TreasureToken(), count);
-            effect.setTargetPointer(new FixedTarget(playerId));
-            effect.apply(game, source);
-        }
-        return true;
     }
 }
