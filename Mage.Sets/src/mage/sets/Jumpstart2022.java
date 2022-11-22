@@ -34,6 +34,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Demon of Catastrophes", 397, Rarity.RARE, mage.cards.d.DemonOfCatastrophes.class));
         cards.add(new SetCardInfo("Diabolic Edict", 67, Rarity.COMMON, mage.cards.d.DiabolicEdict.class));
         cards.add(new SetCardInfo("Dread Presence", 403, Rarity.RARE, mage.cards.d.DreadPresence.class));
+        cards.add(new SetCardInfo("Dutiful Replicator", 48, Rarity.COMMON, mage.cards.d.DutifulReplicator.class));
         cards.add(new SetCardInfo("Elvish Rejuvenator", 88, Rarity.COMMON, mage.cards.e.ElvishRejuvenator.class));
         cards.add(new SetCardInfo("Eviscerate", 412, Rarity.COMMON, mage.cards.e.Eviscerate.class));
         cards.add(new SetCardInfo("Feast of Blood", 118, Rarity.UNCOMMON, mage.cards.f.FeastOfBlood.class));
