@@ -24,7 +24,7 @@ public final class TreasureToken extends TokenImpl {
 
         // {T}, Sacrifice this artifact: Add one mana of any color.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
+        ability.addCost(new SacrificeSourceCost().setText("sacrifice this artifact"));
         this.addAbility(ability);
 
         availableImageSetCodes = Arrays.asList("XLN", "RNA", "M20", "C19", "C20",
