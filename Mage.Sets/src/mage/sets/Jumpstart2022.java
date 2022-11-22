@@ -63,6 +63,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Spectral Sailor", 64, Rarity.UNCOMMON, mage.cards.s.SpectralSailor.class));
         cards.add(new SetCardInfo("Spellstutter Sprite", 65, Rarity.COMMON, mage.cards.s.SpellstutterSprite.class));
         cards.add(new SetCardInfo("Thrashing Brontodon", 92, Rarity.UNCOMMON, mage.cards.t.ThrashingBrontodon.class));
+        cards.add(new SetCardInfo("Towering Gibbon", 46, Rarity.UNCOMMON, mage.cards.t.ToweringGibbon.class));
         cards.add(new SetCardInfo("Trove Warden", 259, Rarity.RARE, mage.cards.t.TroveWarden.class));
         cards.add(new SetCardInfo("Typhoid Rats", 468, Rarity.COMMON, mage.cards.t.TyphoidRats.class));
         cards.add(new SetCardInfo("Uktabi Orangutan", 133, Rarity.UNCOMMON, mage.cards.u.UktabiOrangutan.class));
