@@ -50,6 +50,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("King of the Pride", 57, Rarity.UNCOMMON, mage.cards.k.KingOfThePride.class));
         cards.add(new SetCardInfo("Kothophed, Soul Hoarder", 431, Rarity.RARE, mage.cards.k.KothophedSoulHoarder.class));
         cards.add(new SetCardInfo("Leonin Warleader", 208, Rarity.RARE, mage.cards.l.LeoninWarleader.class));
+        cards.add(new SetCardInfo("Lita, Mechanical Engineer", 6, Rarity.MYTHIC, mage.cards.l.LitaMechanicalEngineer.class));
         cards.add(new SetCardInfo("Magnifying Glass", 95, Rarity.UNCOMMON, mage.cards.m.MagnifyingGlass.class));
         cards.add(new SetCardInfo("Merfolk Pupil", 15, Rarity.COMMON, mage.cards.m.MerfolkPupil.class));
         cards.add(new SetCardInfo("Mirror Image", 62, Rarity.UNCOMMON, mage.cards.m.MirrorImage.class));
