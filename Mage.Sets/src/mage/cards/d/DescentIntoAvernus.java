@@ -34,7 +34,7 @@ public final class DescentIntoAvernus extends CardImpl {
         );
         ability.addEffect(new CreateTokenAllEffect(
                 new TreasureToken(), xValue, TargetController.EACH_PLAYER
-        ).setText("then each player creates X Treasure tokens"));
+        ).setText("Then each player creates X Treasure tokens"));
         ability.addEffect(new DamagePlayersEffect(
                 Outcome.Damage, xValue, TargetController.ANY
         ).setText("and {this} deals X damage to each player, where X is the number of descent counters on {this}"));
