@@ -67,6 +67,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Rodolf Duskbringer", 25, Rarity.RARE, mage.cards.r.RodolfDuskbringer.class));
         cards.add(new SetCardInfo("Seizan, Perverter of Truth", 463, Rarity.RARE, mage.cards.s.SeizanPerverterOfTruth.class));
         cards.add(new SetCardInfo("Sinuous Vermin", 465, Rarity.COMMON, mage.cards.s.SinuousVermin.class));
+        cards.add(new SetCardInfo("Soul Read", 17, Rarity.COMMON, mage.cards.s.SoulRead.class));
         cards.add(new SetCardInfo("Spectral Hunt-Caller", 45, Rarity.COMMON, mage.cards.s.SpectralHuntCaller.class));
         cards.add(new SetCardInfo("Spectral Sailor", 64, Rarity.UNCOMMON, mage.cards.s.SpectralSailor.class));
         cards.add(new SetCardInfo("Spellstutter Sprite", 65, Rarity.COMMON, mage.cards.s.SpellstutterSprite.class));
