@@ -4,20 +4,20 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -28,11 +28,6 @@ import java.util.UUID;
 public final class AshcoatOfTheShadowSwarm extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.RAT, "Rats");
-    private static final FilterCreatureCard filter2 = new FilterCreatureCard("Rat creature cards");
-
-    static {
-        filter2.add(SubType.ZOMBIE.getPredicate());
-    }
 
     public AshcoatOfTheShadowSwarm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
@@ -50,11 +45,9 @@ public final class AshcoatOfTheShadowSwarm extends CardImpl {
 
         // At the beginning of your end step, you may mill four cards. If you do,
         // return up to two Rat creature cards from your graveyard to your hand.
-        Ability ability = new BeginningOfEndStepTriggeredAbility(new DoIfCostPaid(
-                new ReturnFromGraveyardToHandTargetEffect(),
-                new AshcoatCost()
-        ), TargetController.YOU, false);
-        ability.addTarget(new TargetCardInYourGraveyard(0, 2, filter2));
+        Ability ability =  new BeginningOfEndStepTriggeredAbility(new MillCardsControllerEffect(4),
+                TargetController.YOU, true);
+        ability.addEffect(new AshcoatEffect());
         this.addAbility(ability);
     }
 
@@ -68,34 +61,37 @@ public final class AshcoatOfTheShadowSwarm extends CardImpl {
     }
 }
 
-class AshcoatCost extends CostImpl {
+class AshcoatEffect extends OneShotEffect {
 
-    public AshcoatCost() {
-        this.text = "mill four cards";
+    private static final FilterCreatureCard filter = new FilterCreatureCard("Rat creature cards");
+
+    static {
+        filter.add(SubType.ZOMBIE.getPredicate());
     }
 
-    public AshcoatCost(AshcoatCost cost) {
-        super(cost);
+    AshcoatEffect() {
+        super(Outcome.ReturnToHand);
+        staticText = "If you do, return up to two Rat creature cards from your graveyard to your hand.";
+    }
+
+    private AshcoatEffect(final AshcoatEffect effect) {
+        super(effect);
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        Player player = game.getPlayer(controllerId);
-        if (player != null) {
-            player.millCards(4, source, game);
-            paid = true;
-            return true;
+    public AshcoatEffect copy() {
+        return new AshcoatEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
         }
-        return false;
-    }
-
-    @Override
-    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return game.getPlayer(controllerId) != null;
-    }
-
-    @Override
-    public AshcoatCost copy() {
-        return new AshcoatCost(this);
+        TargetCard target = new TargetCardInYourGraveyard(0, 2, filter, true);
+        player.choose(outcome, target, source, game);
+        player.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
+        return true;
     }
 }
