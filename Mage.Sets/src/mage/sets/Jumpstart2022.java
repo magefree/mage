@@ -25,6 +25,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Ardoz, Cobbler of War", 29, Rarity.RARE, mage.cards.a.ArdozCobblerOfWar.class));
         cards.add(new SetCardInfo("Arlinn, Voice of the Pack", 85, Rarity.UNCOMMON, mage.cards.a.ArlinnVoiceOfThePack.class));
         cards.add(new SetCardInfo("Arrest", 52, Rarity.UNCOMMON, mage.cards.a.Arrest.class));
+        cards.add(new SetCardInfo("Ashcoat of the Shadow Swarm", 19, Rarity.MYTHIC, mage.cards.a.AshcoatOfTheShadowSwarm.class));
         cards.add(new SetCardInfo("Balan, Wandering Knight", 53, Rarity.RARE, mage.cards.b.BalanWanderingKnight.class));
         cards.add(new SetCardInfo("Biblioplex Kraken", 10, Rarity.UNCOMMON, mage.cards.b.BiblioplexKraken.class));
         cards.add(new SetCardInfo("Blood Artist", 117, Rarity.UNCOMMON, mage.cards.b.BloodArtist.class));
