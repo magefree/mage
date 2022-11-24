@@ -29,6 +29,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Blood Artist", 117, Rarity.UNCOMMON, mage.cards.b.BloodArtist.class));
         cards.add(new SetCardInfo("Burglar Rat", 384, Rarity.COMMON, mage.cards.b.BurglarRat.class));
         cards.add(new SetCardInfo("Chittering Rats", 387, Rarity.COMMON, mage.cards.c.ChitteringRats.class));
+        cards.add(new SetCardInfo("Coalborn Entity", 32, Rarity.UNCOMMON, mage.cards.c.CoalbornEntity.class));
         cards.add(new SetCardInfo("Coldsteel Heart", 94, Rarity.UNCOMMON, mage.cards.c.ColdsteelHeart.class));
         cards.add(new SetCardInfo("Conductor of Cacophony", 20, Rarity.UNCOMMON, mage.cards.c.ConductorOfCacophony.class));
         cards.add(new SetCardInfo("Crypt Rats", 392, Rarity.UNCOMMON, mage.cards.c.CryptRats.class));
