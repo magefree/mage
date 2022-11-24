@@ -35,6 +35,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Coldsteel Heart", 94, Rarity.UNCOMMON, mage.cards.c.ColdsteelHeart.class));
         cards.add(new SetCardInfo("Conductor of Cacophony", 20, Rarity.UNCOMMON, mage.cards.c.ConductorOfCacophony.class));
         cards.add(new SetCardInfo("Crypt Rats", 392, Rarity.UNCOMMON, mage.cards.c.CryptRats.class));
+        cards.add(new SetCardInfo("Daring Piracy", 33, Rarity.UNCOMMON, mage.cards.d.DaringPiracy.class));
         cards.add(new SetCardInfo("Deadly Plot", 22, Rarity.UNCOMMON, mage.cards.d.DeadlyPlot.class));
         cards.add(new SetCardInfo("Demon of Catastrophes", 397, Rarity.RARE, mage.cards.d.DemonOfCatastrophes.class));
         cards.add(new SetCardInfo("Diabolic Edict", 67, Rarity.COMMON, mage.cards.d.DiabolicEdict.class));
