@@ -63,6 +63,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Oathsworn Vampire", 70, Rarity.UNCOMMON, mage.cards.o.OathswornVampire.class));
         cards.add(new SetCardInfo("Ogre Slumlord", 71, Rarity.RARE, mage.cards.o.OgreSlumlord.class));
         cards.add(new SetCardInfo("Peacewalker Colossus", 96, Rarity.RARE, mage.cards.p.PeacewalkerColossus.class));
+        cards.add(new SetCardInfo("Plundering Predator", 37, Rarity.COMMON, mage.cards.p.PlunderingPredator.class));
         cards.add(new SetCardInfo("Primeval Herald", 42, Rarity.UNCOMMON, mage.cards.p.PrimevalHerald.class));
         cards.add(new SetCardInfo("Regal Caracal", 232, Rarity.RARE, mage.cards.r.RegalCaracal.class));
         cards.add(new SetCardInfo("Renegade Demon", 126, Rarity.COMMON, mage.cards.r.RenegadeDemon.class));
