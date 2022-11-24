@@ -66,7 +66,7 @@ class AshcoatEffect extends OneShotEffect {
     private static final FilterCreatureCard filter = new FilterCreatureCard("Rat creature cards");
 
     static {
-        filter.add(SubType.ZOMBIE.getPredicate());
+        filter.add(SubType.RAT.getPredicate());
     }
 
     AshcoatEffect() {
