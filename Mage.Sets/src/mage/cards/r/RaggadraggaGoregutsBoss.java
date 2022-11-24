@@ -67,6 +67,7 @@ public final class RaggadraggaGoregutsBoss extends CardImpl {
         ability.addEffect(new GainAbilityTargetEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn
         ).setText("and gains trample until end of turn"));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
