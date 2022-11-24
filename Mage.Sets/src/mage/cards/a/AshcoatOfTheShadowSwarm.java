@@ -9,6 +9,8 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
@@ -27,7 +29,15 @@ import java.util.UUID;
  */
 public final class AshcoatOfTheShadowSwarm extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.RAT, "Rats");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.RAT, "Rats you control");
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter, null);
+    private static final Hint hint = new ValueHint(
+            "Number of Rats you control", xValue
+    );
+
+    static {
+        filter.add(TargetController.YOU.getControllerPredicate());
+    }
 
     public AshcoatOfTheShadowSwarm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
@@ -38,10 +48,9 @@ public final class AshcoatOfTheShadowSwarm extends CardImpl {
 
         // Whenever Ashcoat of the Shadow Swarm attacks or blocks, other Rats you control
         // get +X/+X until end of turn, where X is the number of Rats you control.
-        DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new BoostControlledEffect(
                 xValue, xValue, Duration.EndOfTurn, filter, true
-        ).setText("other Rats you control get +X/+X until end of turn, where X is the number of Rats you control"), false));
+        ), false).addHint(hint));
 
         // At the beginning of your end step, you may mill four cards. If you do,
         // return up to two Rat creature cards from your graveyard to your hand.
