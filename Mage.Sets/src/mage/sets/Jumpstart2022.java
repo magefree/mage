@@ -47,6 +47,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Felidar Retreat", 184, Rarity.RARE, mage.cards.f.FelidarRetreat.class));
         cards.add(new SetCardInfo("Festering Evil", 119, Rarity.UNCOMMON, mage.cards.f.FesteringEvil.class));
         cards.add(new SetCardInfo("Flicker of Fate", 56, Rarity.COMMON, mage.cards.f.FlickerOfFate.class));
+        cards.add(new SetCardInfo("Giant Ladybug", 39, Rarity.COMMON, mage.cards.g.GiantLadybug.class));
         cards.add(new SetCardInfo("Infernal Idol", 49, Rarity.COMMON, mage.cards.i.InfernalIdol.class));
         cards.add(new SetCardInfo("Isu the Abominable", 12, Rarity.MYTHIC, mage.cards.i.IsuTheAbominable.class));
         cards.add(new SetCardInfo("Karn Liberated", 97, Rarity.MYTHIC, mage.cards.k.KarnLiberated.class));
