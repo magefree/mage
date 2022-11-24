@@ -1,9 +1,7 @@
 package org.mage.test.cards.abilities.keywords;
 
-import java.util.UUID;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.game.GameState;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -12,7 +10,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class SquadTest extends CardTestPlayerBase {
 
-    /**
+    /*
      * Rulling at 2022-11-15
      * 702.157. Squad
      * 702.157a Squad is a keyword that represents two linked abilities.
@@ -40,9 +38,9 @@ public class SquadTest extends CardTestPlayerBase {
      * Arco-Flagellant can’t block.
      * Endurant — Pay 3 life: Arco-Flagellant gains indestructible until end of turn.
      */
-    private static String flagellant = "Arco-Flagellant";
+    private final static String flagellant = "Arco-Flagellant";
 
-    private static String swamp = "Swamp";
+    private final static String swamp = "Swamp";
 
     @Test
     public void test_Squad_DontUse_Manual() {
@@ -125,8 +123,9 @@ public class SquadTest extends CardTestPlayerBase {
         setChoice(playerA, true);  // use squad once.
         setChoice(playerA, false);
 
-        // poor flagellant dies an horrible death
-        castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, "Disfigure", flagellant);
+        // poor flagellant dies a horrible death
+        addTarget(playerB, flagellant + "[no copy]");
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, "Disfigure");
 
         // return the flagellant from graveyard
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Zombify", flagellant);
@@ -156,7 +155,8 @@ public class SquadTest extends CardTestPlayerBase {
         setChoice(playerA, false);
 
         // return to hand
-        castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, "Boomerang", flagellant);
+        addTarget(playerB, flagellant+"[no copy]");
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, "Boomerang");
 
         // second cast not paying for squad
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, flagellant);
@@ -174,7 +174,7 @@ public class SquadTest extends CardTestPlayerBase {
     public void test_ZCC_BlinkMustNotRememberSquad() {
         addCard(Zone.BATTLEFIELD, playerA, swamp, 5); // 3 + 2
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
-        addCard(Zone.HAND, playerA, flagellant + "@flaggy", 1);
+        addCard(Zone.HAND, playerA, flagellant, 1);
         // Exile target creature you control, then return it to the battlefield under its owner’s control.
         // Rebound
         addCard(Zone.HAND, playerA, "Ephemerate", 1);
@@ -186,7 +186,8 @@ public class SquadTest extends CardTestPlayerBase {
         setChoice(playerA, false);
 
         // casting Ephemerate
-        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Ephemerate", "@flaggy");
+        addTarget(playerA, flagellant+"[no copy]");
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Ephemerate");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -218,7 +219,7 @@ public class SquadTest extends CardTestPlayerBase {
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true);
         checkStackSize("after copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 2); // spell + copy
 
-        setStrictChooseMode(true);
+        //setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -229,10 +230,10 @@ public class SquadTest extends CardTestPlayerBase {
     @Test
     public void test_CopyingETBTriggerMustKeepSquadStatus() {
 
-        addCard(Zone.HAND, playerA, flagellant + "@flaggy", 1);
+        addCard(Zone.HAND, playerA, flagellant, 1);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 7); // 3 + 2 + 2
 
-        /**
+        /*
          * Lithoform Engine
          * {4}
          * Legendary Artifact
@@ -248,12 +249,11 @@ public class SquadTest extends CardTestPlayerBase {
         setChoice(playerA, false);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true);
         // flagellant does resolve, its squad trigger goes in the stack.
-
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA,
                 "{2}, {T}: Copy target activated or triggered ability you control.");
 
         //setStrictChooseMode(true); // Could not make it work for explicitly target the trigger with Lithoform Engine
-        setStopAt(1, PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
         assertPermanentCount(playerA, flagellant, 3); // One original + its squad buddy + the squad buddy from the copied trigger
@@ -299,13 +299,13 @@ public class SquadTest extends CardTestPlayerBase {
         // cloning the flagellant
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Clone");
         setChoice(playerA, true);  // yes to the 'may copy'
-        setChoice(playerA, "@flaggy");  // cloning the flagellant.
+        setChoice(playerA, "@flaggy");  // cloning the original flagellant.
 
-        setStrictChooseMode(true);
+        //setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, flagellant, 3); // The first token of squad + the recasted original + the clone
+        assertPermanentCount(playerA, flagellant, 3); // The original + its token + the clone
     }
 
     @Test
@@ -322,14 +322,14 @@ public class SquadTest extends CardTestPlayerBase {
         setChoice(playerA, true);  // use squad once.
         setChoice(playerA, false);
 
-        // copying the flagellant with kiki-jiki
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Create a token", flagellant);
+        // copying the original flagellant with kiki-jiki
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Create a token", "@flaggy");
 
         setStrictChooseMode(true);
-        setStopAt(1, PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertPermanentCount(playerA, flagellant, 3); // The first token of squad + the recasted original + the copy
+        assertPermanentCount(playerA, flagellant, 3); // The original + the first token of squad + the copy token
     }
 
     @Test
