@@ -53,6 +53,7 @@ public final class IngeniousLeonin extends CardImpl {
         );
         ability.addEffect(new IngeniousLeoninEffect());
         ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(ability);
     }
 
     private IngeniousLeonin(final IngeniousLeonin card) {
