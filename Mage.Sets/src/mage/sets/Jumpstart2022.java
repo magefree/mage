@@ -362,6 +362,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Infantry Veteran", 198, Rarity.COMMON, mage.cards.i.InfantryVeteran.class));
         cards.add(new SetCardInfo("Infernal Idol", 49, Rarity.COMMON, mage.cards.i.InfernalIdol.class));
         cards.add(new SetCardInfo("Infiltration Lens", 777, Rarity.UNCOMMON, mage.cards.i.InfiltrationLens.class));
+        cards.add(new SetCardInfo("Ingenious Leonin", 5, Rarity.UNCOMMON, mage.cards.i.IngeniousLeonin.class));
         cards.add(new SetCardInfo("Inner Demon", 428, Rarity.UNCOMMON, mage.cards.i.InnerDemon.class));
         cards.add(new SetCardInfo("Inspiring Cleric", 199, Rarity.UNCOMMON, mage.cards.i.InspiringCleric.class));
         cards.add(new SetCardInfo("Inspiring Overseer", 200, Rarity.COMMON, mage.cards.i.InspiringOverseer.class));
