@@ -510,6 +510,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Ordeal of Purphoros", 577, Rarity.UNCOMMON, mage.cards.o.OrdealOfPurphoros.class));
         cards.add(new SetCardInfo("Order of the Golden Cricket", 223, Rarity.COMMON, mage.cards.o.OrderOfTheGoldenCricket.class));
         cards.add(new SetCardInfo("Ornery Dilophosaur", 700, Rarity.COMMON, mage.cards.o.OrneryDilophosaur.class));
+        cards.add(new SetCardInfo("Ossuary Rats", 24, Rarity.COMMON, mage.cards.o.OssuaryRats.class));
         cards.add(new SetCardInfo("Outnumber", 578, Rarity.COMMON, mage.cards.o.Outnumber.class));
         cards.add(new SetCardInfo("Overcome", 701, Rarity.UNCOMMON, mage.cards.o.Overcome.class));
         cards.add(new SetCardInfo("Overgrowth", 702, Rarity.COMMON, mage.cards.o.Overgrowth.class));
