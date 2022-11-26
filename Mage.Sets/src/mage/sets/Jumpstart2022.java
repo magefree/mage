@@ -707,6 +707,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Teferi's Protege", 359, Rarity.COMMON, mage.cards.t.TeferisProtege.class));
         cards.add(new SetCardInfo("Teferi's Puzzle Box", 801, Rarity.RARE, mage.cards.t.TeferisPuzzleBox.class));
         cards.add(new SetCardInfo("Tempered Veteran", 254, Rarity.UNCOMMON, mage.cards.t.TemperedVeteran.class));
+        cards.add(new SetCardInfo("Termination Facilitator", 28, Rarity.RARE, mage.cards.t.TerminationFacilitator.class));
         cards.add(new SetCardInfo("Tezzeret, Artifice Master", 360, Rarity.MYTHIC, mage.cards.t.TezzeretArtificeMaster.class));
         cards.add(new SetCardInfo("Thaumaturge's Familiar", 802, Rarity.COMMON, mage.cards.t.ThaumaturgesFamiliar.class));
         cards.add(new SetCardInfo("The Circle of Loyalty", 166, Rarity.MYTHIC, mage.cards.t.TheCircleOfLoyalty.class));
