@@ -335,6 +335,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Heirloom Blade", 775, Rarity.UNCOMMON, mage.cards.h.HeirloomBlade.class));
         cards.add(new SetCardInfo("Hero's Blade", 776, Rarity.UNCOMMON, mage.cards.h.HerosBlade.class));
         cards.add(new SetCardInfo("Hieroglyphic Illumination", 307, Rarity.COMMON, mage.cards.h.HieroglyphicIllumination.class));
+        cards.add(new SetCardInfo("Hold for Questioning", 11, Rarity.UNCOMMON, mage.cards.h.HoldForQuestioning.class));
         cards.add(new SetCardInfo("Hooded Assassin", 426, Rarity.COMMON, mage.cards.h.HoodedAssassin.class));
         cards.add(new SetCardInfo("Hooting Mandrills", 671, Rarity.COMMON, mage.cards.h.HootingMandrills.class));
         cards.add(new SetCardInfo("Hordeling Outburst", 552, Rarity.UNCOMMON, mage.cards.h.HordelingOutburst.class));
