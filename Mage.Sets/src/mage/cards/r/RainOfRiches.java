@@ -90,7 +90,7 @@ class RainOfRichesGainsCascadeEffect extends ContinuousEffectImpl {
                     && stackObject.isControlledBy(source.getControllerId())) {
                 Spell spell = (Spell) stackObject;
 
-				if (FirstSpellCastWithTreasureCondition.instance.apply(game, source)) {
+                if (FirstSpellCastWithTreasureCondition.instance.apply(game, source)) {
                     game.getState().addOtherAbility(spell.getCard(), cascadeAbility);
                     return true;  // TODO: I think this should return here as soon as it finds the first one.
                                   //       If it should, change WildMageSorcerer to also return early.
@@ -130,39 +130,39 @@ class RainOfRichesWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-		if (event.getType() != GameEvent.EventType.MANA_PAID) {
+        if (event.getType() != GameEvent.EventType.MANA_PAID) {
             return;
         }
-		ManaPaidEvent manaEvent = (ManaPaidEvent) event;
+        ManaPaidEvent manaEvent = (ManaPaidEvent) event;
 
-		if (!manaEvent.getSourceObject().hasSubtype(SubType.TREASURE, game)) {
-			return;
-		}
+        if (!manaEvent.getSourceObject().hasSubtype(SubType.TREASURE, game)) {
+            return;
+        }
 
-		Optional<Ability> opt = game.getAbility(manaEvent.getTargetId(), manaEvent.getSourcePaidId());
+        Optional<Ability> opt = game.getAbility(manaEvent.getTargetId(), manaEvent.getSourcePaidId());
 
-		if (!opt.isPresent()) {
-			return;
-		}
+        if (!opt.isPresent()) {
+            return;
+        }
 
-		Ability ability = opt.get();
+        Ability ability = opt.get();
 
-		if (!(ability instanceof SpellAbility)) {
-			return;
-		}
+        if (!(ability instanceof SpellAbility)) {
+            return;
+        }
 
-		// Spell spell = game.getSpell(event.getSourceId());
-		// if (spell == null) {
-		// return;
-		// }
-		// int manaPaid = ManaPaidSourceWatcher.getTreasurePaid(spell.getId(), game);
-		// if (manaPaid < 1) {
-		// return;
-		// }
+        // Spell spell = game.getSpell(event.getSourceId());
+        // if (spell == null) {
+        // return;
+        // }
+        // int manaPaid = ManaPaidSourceWatcher.getTreasurePaid(spell.getId(), game);
+        // if (manaPaid < 1) {
+        // return;
+        // }
 
-		playerMap.computeIfAbsent(event.getPlayerId(),
-				x -> new MageObjectReference(((Spell) ((SpellAbility) ability).getSourceObject(game)).getMainCard(),
-						game));
+        playerMap.computeIfAbsent(event.getPlayerId(),
+                x -> new MageObjectReference(((Spell) ((SpellAbility) ability).getSourceObject(game)).getMainCard(),
+                        game));
     }
 
     @Override
