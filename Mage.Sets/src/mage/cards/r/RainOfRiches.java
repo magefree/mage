@@ -151,15 +151,6 @@ class RainOfRichesWatcher extends Watcher {
             return;
         }
 
-        // Spell spell = game.getSpell(event.getSourceId());
-        // if (spell == null) {
-        // return;
-        // }
-        // int manaPaid = ManaPaidSourceWatcher.getTreasurePaid(spell.getId(), game);
-        // if (manaPaid < 1) {
-        // return;
-        // }
-
         playerMap.computeIfAbsent(event.getPlayerId(),
                 x -> new MageObjectReference(((Spell) ((SpellAbility) ability).getSourceObject(game)).getMainCard(),
                         game));
