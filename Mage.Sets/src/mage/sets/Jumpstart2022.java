@@ -651,7 +651,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Sling-Gang Lieutenant", 469, Rarity.UNCOMMON, mage.cards.s.SlingGangLieutenant.class));
         cards.add(new SetCardInfo("Smoldering Efreet", 600, Rarity.COMMON, mage.cards.s.SmolderingEfreet.class));
         cards.add(new SetCardInfo("Snapping Gnarlid", 730, Rarity.COMMON, mage.cards.s.SnappingGnarlid.class));
-        cards.add(new SetCardInfo("Snow-Covered Island", 833, Rarity.COMMON, mage.cards.s.SnowCoveredIsland.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Snow-Covered Island", 833, Rarity.LAND, mage.cards.s.SnowCoveredIsland.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("So Tiny", 349, Rarity.COMMON, mage.cards.s.SoTiny.class));
         cards.add(new SetCardInfo("Sokenzan Smelter", 601, Rarity.UNCOMMON, mage.cards.s.SokenzanSmelter.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 797, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
