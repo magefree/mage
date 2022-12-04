@@ -48,6 +48,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected Class<? extends Card> secondSideCardClazz;
     protected Class<? extends Card> meldsWithClazz;
     protected Card secondSideCard;
+    //protected Card[] secondSideCards;
     protected boolean nightCard;
     protected SpellAbility spellAbility;
     protected boolean flipCard;
@@ -125,6 +126,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
         secondSideCardClazz = card.secondSideCardClazz;
         secondSideCard = null; // will be set on first getSecondCardFace call if card has one
+        //secondSideCards = new Card[0];
         nightCard = card.nightCard;
         meldsWithClazz = card.meldsWithClazz;
 
@@ -619,15 +621,24 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public final Card getSecondCardFace() {
+        /*
+        Card secondSideCard = null;
+        if (secondSideCards.length > 0) {
+            for (Card i : secondSideCards) {
+                if (i.getCardNumber() == cardNumber) {
+                    secondSideCard = i;
+                    break;
+                }
+            }
+        }*/
         // init second side card on first call
         if (secondSideCardClazz == null && secondSideCard == null) {
             return null;
         }
-
         if (secondSideCard != null) {
+            logger.info("When it's not null, secondSideCardNumber is " + secondSideCard.getCardNumber());
             return secondSideCard;
         }
-
         // must be non strict search in any sets, not one set
         // example: if set contains only one card side
         // method used in cards database creating, so can't use repository here
@@ -635,7 +646,18 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         if (info == null) {
             return null;
         }
-        secondSideCard = createCard(secondSideCardClazz, new CardSetInfo(info.getName(), expansionSetCode, info.getCardNumber(), info.getRarity(), info.getGraphicInfo()));
+        String secondSideCardNumber;
+        if (usesVariousArt) {
+            secondSideCardNumber = cardNumber;
+        } else {
+            secondSideCardNumber = info.getCardNumber();
+        }
+        logger.info("Before creation secondSideCardNumber of " + info.getName() + " is " + secondSideCardNumber + " and before the fix it would be " + info.getCardNumber());
+        secondSideCard = createCard(secondSideCardClazz, new CardSetInfo(info.getName(), expansionSetCode, secondSideCardNumber, info.getRarity(), info.getGraphicInfo()));
+        logger.info("After creation secondSideCard " + info.getName() + " cardNumber is " + secondSideCard.getCardNumber());
+        //secondSideCards = Arrays.copyOf(secondSideCards, secondSideCards.length + 1);
+        //secondSideCards[secondSideCards.length] = secondSideCard;
+        //logger.info("After adding " + info.getName() + " to secondSideCards the array's length is " + secondSideCards.length);
         return secondSideCard;
     }
 

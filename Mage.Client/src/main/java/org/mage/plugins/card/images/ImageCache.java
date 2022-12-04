@@ -589,6 +589,7 @@ public final class ImageCache {
             return getThumbnail(card);
         }
         String key = getKey(card, card.getName(), Integer.toString(width));
+        LOGGER.info("key for " + card.getName() + " is " + key);
         BufferedImage original = getImage(key);
         if (original == null) {
             LOGGER.debug(key + " not found");
