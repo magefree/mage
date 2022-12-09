@@ -51,5 +51,8 @@ public final class TreasureToken extends TokenImpl {
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("SNC")) {
             this.setTokenType(RandomUtil.nextInt(5) + 1);
         }
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("MH2")) {
+            this.setTokenType(RandomUtil.nextInt(2) + 1);
+        }
     }
 }
