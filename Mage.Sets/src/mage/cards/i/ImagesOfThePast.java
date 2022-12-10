@@ -33,7 +33,7 @@ import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author Styxo
+ * @author Styxo, Merlingilb
  */
 public final class ImagesOfThePast extends CardImpl {
 
