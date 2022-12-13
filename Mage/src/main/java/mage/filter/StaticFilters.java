@@ -442,6 +442,12 @@ public final class StaticFilters {
         FILTER_CONTROLLED_PERMANENT_LANDS.setLockedFilter(true);
     }
 
+    public static final FilterPermanent FILTER_CONTROLLED_PERMANENT_CREATURE_OR_PLANESWALKER = new FilterControlledCreatureOrPlaneswalkerPermanent("creature or planeswalker you control");
+
+    static {
+        FILTER_CONTROLLED_PERMANENT_CREATURE_OR_PLANESWALKER.setLockedFilter(true);
+    }
+
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_PLANESWALKER = new FilterControlledPlaneswalkerPermanent("planeswalker you control");
 
     static {
