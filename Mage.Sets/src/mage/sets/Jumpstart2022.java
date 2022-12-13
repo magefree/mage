@@ -467,6 +467,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Mire Triton", 443, Rarity.UNCOMMON, mage.cards.m.MireTriton.class));
         cards.add(new SetCardInfo("Mirror Image", 62, Rarity.UNCOMMON, mage.cards.m.MirrorImage.class));
         cards.add(new SetCardInfo("Mishra's Factory", 816, Rarity.UNCOMMON, mage.cards.m.MishrasFactory.class));
+        cards.add(new SetCardInfo("Mistwalker", 323, Rarity.COMMON, mage.cards.m.Mistwalker.class));
         cards.add(new SetCardInfo("Moldgraf Millipede", 691, Rarity.COMMON, mage.cards.m.MoldgrafMillipede.class));
         cards.add(new SetCardInfo("Moment of Craving", 444, Rarity.COMMON, mage.cards.m.MomentOfCraving.class));
         cards.add(new SetCardInfo("Moment of Triumph", 218, Rarity.COMMON, mage.cards.m.MomentOfTriumph.class));
@@ -633,6 +634,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Servant of the Scale", 727, Rarity.COMMON, mage.cards.s.ServantOfTheScale.class));
         cards.add(new SetCardInfo("Settle Beyond Reality", 242, Rarity.COMMON, mage.cards.s.SettleBeyondReality.class));
         cards.add(new SetCardInfo("Shadowborn Demon", 464, Rarity.MYTHIC, mage.cards.s.ShadowbornDemon.class));
+        cards.add(new SetCardInfo("Shambling Ghoul", 465, Rarity.COMMON, mage.cards.s.ShamblingGhoul.class));
         cards.add(new SetCardInfo("Shambling Suit", 796, Rarity.UNCOMMON, mage.cards.s.ShamblingSuit.class));
         cards.add(new SetCardInfo("Shaper Apprentice", 346, Rarity.COMMON, mage.cards.s.ShaperApprentice.class));
         cards.add(new SetCardInfo("Shimmer Dragon", 347, Rarity.RARE, mage.cards.s.ShimmerDragon.class));
@@ -642,7 +644,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Sigil of the Empty Throne", 244, Rarity.RARE, mage.cards.s.SigilOfTheEmptyThrone.class));
         cards.add(new SetCardInfo("Silverback Shaman", 728, Rarity.COMMON, mage.cards.s.SilverbackShaman.class));
         cards.add(new SetCardInfo("Simian Brawler", 729, Rarity.COMMON, mage.cards.s.SimianBrawler.class));
-        cards.add(new SetCardInfo("Sinuous Vermin", 465, Rarity.COMMON, mage.cards.s.SinuousVermin.class));
+        cards.add(new SetCardInfo("Sinuous Vermin", 466, Rarity.COMMON, mage.cards.s.SinuousVermin.class));
         cards.add(new SetCardInfo("Skilled Animator", 348, Rarity.UNCOMMON, mage.cards.s.SkilledAnimator.class));
         cards.add(new SetCardInfo("Skirsdag High Priest", 467, Rarity.RARE, mage.cards.s.SkirsdagHighPriest.class));
         cards.add(new SetCardInfo("Skirsdag Supplicant", 468, Rarity.COMMON, mage.cards.s.SkirsdagSupplicant.class));
