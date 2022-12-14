@@ -1,6 +1,7 @@
 package mage.cards.a;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.IndestructibleAbility;
@@ -49,6 +50,7 @@ public final class AJedisFervor extends CardImpl {
 class AJedisFervorEffect extends OneShotEffect {
     public AJedisFervorEffect() {
         super(Outcome.Sacrifice);
+        staticText = "If an opponent cast a black spell this turn, that player sacrifices a creature or planeswalker.";
     }
 
     public AJedisFervorEffect(final AJedisFervorEffect effect) {
