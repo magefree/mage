@@ -20,6 +20,9 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * @author Merlingilb
+ */
 public class BenSolo extends CardImpl {
     public BenSolo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R/W}{W}");
@@ -36,7 +39,7 @@ public class BenSolo extends CardImpl {
         this.addAbility(new BenSoloTriggeredAbility());
     }
 
-    public BenSolo(CardImpl card) {
+    public BenSolo(final BenSolo card) {
         super(card);
     }
 
