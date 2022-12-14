@@ -57,6 +57,7 @@ public enum SubType {
     ALLY("Ally", SubTypeSet.CreatureType),
     ANGEL("Angel", SubTypeSet.CreatureType),
     ANTELOPE("Antelope", SubTypeSet.CreatureType),
+    ANZELLAN("Anzellan", SubTypeSet.CreatureType, true), // Star Wars
     AQUALISH("Aqualish", SubTypeSet.CreatureType, true), // Star Wars
     APE("Ape", SubTypeSet.CreatureType),
     ARCONA("Arcona", SubTypeSet.CreatureType, true),
