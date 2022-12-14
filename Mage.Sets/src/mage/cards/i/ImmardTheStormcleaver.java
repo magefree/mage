@@ -1,4 +1,4 @@
-package mage.cards.g;
+package mage.cards.i;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -25,9 +25,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class GuileSonicSoldier extends CardImpl {
+public final class ImmardTheStormcleaver extends CardImpl {
 
-    public GuileSonicSoldier(UUID ownerId, CardSetInfo setInfo) {
+    public ImmardTheStormcleaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}{W}");
 
         this.addSuperType(SuperType.LEGENDARY);
@@ -39,36 +39,36 @@ public final class GuileSonicSoldier extends CardImpl {
         // Whenever Guile, Sonic Soldier enters the battlefield or attacks, put a charge counter on him or remove one from him. When you remove a counter this way, choose one—
         // • Sonic Boom—Guile, Sonic Soldier deals 4 damage to any target.
         // • Flash Kick—Guile, Sonic Soldier gains lifelink and indestructible until end of turn.
-        this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new GuileSonicSoldierEffect()));
+        this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new ImmardTheStormcleaverEffect()));
     }
 
-    private GuileSonicSoldier(final GuileSonicSoldier card) {
+    private ImmardTheStormcleaver(final ImmardTheStormcleaver card) {
         super(card);
     }
 
     @Override
-    public GuileSonicSoldier copy() {
-        return new GuileSonicSoldier(this);
+    public ImmardTheStormcleaver copy() {
+        return new ImmardTheStormcleaver(this);
     }
 }
 
-class GuileSonicSoldierEffect extends OneShotEffect {
+class ImmardTheStormcleaverEffect extends OneShotEffect {
 
     private final ReflexiveTriggeredAbility ability = makeAbility();
 
-    GuileSonicSoldierEffect() {
+    ImmardTheStormcleaverEffect() {
         super(Outcome.Benefit);
         staticText = "put a charge counter on him or remove one from him. When you remove a counter this way, "
                 + CardUtil.getTextWithFirstCharLowerCase(ability.getRule());
     }
 
-    private GuileSonicSoldierEffect(final GuileSonicSoldierEffect effect) {
+    private ImmardTheStormcleaverEffect(final ImmardTheStormcleaverEffect effect) {
         super(effect);
     }
 
     @Override
-    public GuileSonicSoldierEffect copy() {
-        return new GuileSonicSoldierEffect(this);
+    public ImmardTheStormcleaverEffect copy() {
+        return new ImmardTheStormcleaverEffect(this);
     }
 
     @Override

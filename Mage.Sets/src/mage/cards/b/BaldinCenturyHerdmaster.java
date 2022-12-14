@@ -1,4 +1,4 @@
-package mage.cards.e;
+package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -6,7 +6,10 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.ChooseOpponentEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.ruleModifying.CombatDamageByToughnessEffect;
 import mage.cards.CardImpl;
@@ -16,16 +19,21 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
+import mage.game.Game;
+import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 /**
  * @author TheElk801
  */
-public final class EHondaSumoChampion extends CardImpl {
+public final class BaldinCenturyHerdmaster extends CardImpl {
 
-    public EHondaSumoChampion(UUID ownerId, CardSetInfo setInfo) {
+    public BaldinCenturyHerdmaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
 
         this.addSuperType(SuperType.LEGENDARY);
@@ -43,18 +51,48 @@ public final class EHondaSumoChampion extends CardImpl {
 
         // Hundred Hand Slap—Whenever E. Honda, Sumo Champion attacks, up to one hundred target creatures each get +0/+X until end of turn, where X is the number of cards in your hand.
         Ability ability = new AttacksTriggeredAbility(new BoostTargetEffect(
-                StaticValue.get(0), CardsInTargetPlayerHandCount.instance, Duration.EndOfTurn
+                StaticValue.get(0), BaldinCenturyHerdmasterValue.instance, Duration.EndOfTurn
         ).setText("up to one hundred target creatures each get +0/+X until end of turn, where X is the number of cards in your hand"));
         ability.addTarget(new TargetCreaturePermanent(0, 100));
         this.addAbility(ability.withFlavorWord("Hundred Hand Slap"));
     }
 
-    private EHondaSumoChampion(final EHondaSumoChampion card) {
+    private BaldinCenturyHerdmaster(final BaldinCenturyHerdmaster card) {
         super(card);
     }
 
     @Override
-    public EHondaSumoChampion copy() {
-        return new EHondaSumoChampion(this);
+    public BaldinCenturyHerdmaster copy() {
+        return new BaldinCenturyHerdmaster(this);
+    }
+}
+
+enum BaldinCenturyHerdmasterValue implements DynamicValue {
+    instance;
+
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        return Optional.ofNullable(game.getPlayer(
+                (UUID) game.getState().getValue(sourceAbility.getSourceId() + ChooseOpponentEffect.VALUE_KEY)
+        ))
+                .filter(Objects::nonNull)
+                .map(Player::getHand)
+                .map(Set::size)
+                .orElse(0);
+    }
+
+    @Override
+    public BaldinCenturyHerdmasterValue copy() {
+        return this;
+    }
+
+    @Override
+    public String getMessage() {
+        return "";
+    }
+
+    @Override
+    public String toString() {
+        return "1";
     }
 }
