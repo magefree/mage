@@ -53,7 +53,7 @@ public class Droidsmith extends CardImpl {
     }
 
     @Override
-    public Card copy() {
+    public Droidsmith copy() {
         return new Droidsmith(this);
     }
 }
