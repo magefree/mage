@@ -17,6 +17,9 @@ import mage.filter.FilterCard;
 
 import java.util.UUID;
 
+/**
+ * @author Merlingilb
+ */
 public class GeneralOrgana extends CardImpl {
     public GeneralOrgana(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}");
