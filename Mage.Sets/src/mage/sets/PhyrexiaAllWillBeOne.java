@@ -21,6 +21,12 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         this.hasBoosters = false; // temporary
 
         cards.add(new SetCardInfo("Blue Sun's Twilight", 43, Rarity.RARE, mage.cards.b.BlueSunsTwilight.class));
+        cards.add(new SetCardInfo("Elesh Norn, Mother of Machines", 10, Rarity.MYTHIC, mage.cards.e.EleshNornMotherOfMachines.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Elesh Norn, Mother of Machines", 298, Rarity.MYTHIC, mage.cards.e.EleshNornMotherOfMachines.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Elesh Norn, Mother of Machines", 345, Rarity.MYTHIC, mage.cards.e.EleshNornMotherOfMachines.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Elesh Norn, Mother of Machines", 414, Rarity.MYTHIC, mage.cards.e.EleshNornMotherOfMachines.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Elesh Norn, Mother of Machines", 415, Rarity.MYTHIC, mage.cards.e.EleshNornMotherOfMachines.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Elesh Norn, Mother of Machines", 416, Rarity.MYTHIC, mage.cards.e.EleshNornMotherOfMachines.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 276, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 273, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
