@@ -34,7 +34,7 @@ public class ForceLift extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 
-    public ForceLift(ForceLift card) {
+    public ForceLift(final ForceLift card) {
         super(card);
     }
 

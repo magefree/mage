@@ -32,7 +32,7 @@ public class HoldCaptive extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new CantBlockAttackActivateAttachedEffect()));
     }
 
-    public HoldCaptive(HoldCaptive card) {
+    public HoldCaptive(final HoldCaptive card) {
         super(card);
     }
 

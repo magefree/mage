@@ -17,7 +17,7 @@ public class FestivalOfTheAncestors extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public FestivalOfTheAncestors(FestivalOfTheAncestors card) {
+    public FestivalOfTheAncestors(final FestivalOfTheAncestors card) {
         super(card);
     }
 
