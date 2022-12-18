@@ -135,6 +135,12 @@ public class Session {
         if (userName.length() > config.getMaxUserNameLength()) {
             return "User name may not be longer than " + config.getMaxUserNameLength() + " characters";
         }
+        if (userName.length() <= 3) {
+            return "User name is too short (3 characters or fewer)";
+        }
+        if (userName.length() >= 500) {
+            return "User name is too long (500 characters or more)";
+        }
 
         Pattern invalidUserNamePattern = Pattern.compile(managerFactory.configSettings().getInvalidUserNamePattern(), Pattern.CASE_INSENSITIVE);
         Matcher m = invalidUserNamePattern.matcher(userName);
@@ -183,7 +189,12 @@ public class Session {
     }
 
     public String connectUser(String userName, String password) throws MageException {
-        String returnMessage = connectUserHandling(userName, password);
+        String returnMessage = validateUserName(userName);
+        if (returnMessage != null) {
+            sendErrorMessageToClient(returnMessage);
+            return returnMessage;
+        }
+        returnMessage = connectUserHandling(userName, password);
         if (returnMessage != null) {
             sendErrorMessageToClient(returnMessage);
         }
