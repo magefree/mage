@@ -230,7 +230,7 @@ public enum GrabbagImageSource implements CardImageSource {
         singleLinks.put("SWS/Mountain-c", "wqXTdsC.jpg");
         singleLinks.put("SWS/Mountain-d", "9oBNCHk.jpg");
         singleLinks.put("SWS/N-1 Starfighter", "UH3qd7x.jpg");
-        singleLinks.put("SWS/Nebulon-B Frigate", "IwEpVkz.jpg");
+        singleLinks.put("SWS/Nebulon-B Frigate", "F0yIR08.jpg");
         singleLinks.put("SWS/Neophyte Hateflayer", "Has2AIW.jpg");
         singleLinks.put("SWS/Nerf Herder", "VUX0LHV.jpg");
         singleLinks.put("SWS/Nexu Stalker", "E1xxHe1.jpg");
@@ -522,7 +522,7 @@ public enum GrabbagImageSource implements CardImageSource {
         if (!httpImageUrl.startsWith("/MTG")) {
             try {
                 TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException ex) {
+            } catch (InterruptedException ignored) {
             }
         }
     }

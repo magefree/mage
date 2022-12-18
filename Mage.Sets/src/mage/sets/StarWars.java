@@ -356,7 +356,7 @@ public final class StarWars extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", "260b", Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
         cards.add(new SetCardInfo("Swamp", "260c", Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
         cards.add(new SetCardInfo("Swamp", "260d", Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Swamp", 734, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Swamp", "734e", Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
         cards.add(new SetCardInfo("Swarm the Skies", 92, Rarity.COMMON, mage.cards.s.SwarmTheSkies.class));
         cards.add(new SetCardInfo("Syndicate Enforcer", 124, Rarity.COMMON, mage.cards.s.SyndicateEnforcerSWS.class));
         cards.add(new SetCardInfo("Tank Droid", 218, Rarity.RARE, mage.cards.t.TankDroid.class));
