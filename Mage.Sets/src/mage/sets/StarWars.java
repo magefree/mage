@@ -392,7 +392,7 @@ public final class StarWars extends ExpansionSet {
         cards.add(new SetCardInfo("Vapor Snag", 62, Rarity.COMMON, mage.cards.v.VaporSnag.class));
         cards.add(new SetCardInfo("Vexis", 719, Rarity.UNCOMMON, mage.cards.v.Vexis.class));
         cards.add(new SetCardInfo("Vulptex", 519, Rarity.COMMON, mage.cards.v.Vulptex.class));
-        cards.add(new SetCardInfo("War Room", 716, Rarity.RARE, mage.cards.w.WarRoomStarWars.class));
+        cards.add(new SetCardInfo("War Room (Star Wars)", 716, Rarity.RARE, mage.cards.w.WarRoomStarWars.class));
         cards.add(new SetCardInfo("Weequay Beastmaster", 127, Rarity.UNCOMMON, mage.cards.w.WeequayBeastmaster.class));
         cards.add(new SetCardInfo("Wild Holocron", 238, Rarity.COMMON, mage.cards.w.WildHolocron.class));
         cards.add(new SetCardInfo("Wisdom of the Jedi", 221, Rarity.UNCOMMON, mage.cards.w.WisdomOfTheJedi.class));
