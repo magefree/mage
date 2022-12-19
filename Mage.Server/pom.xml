@@ -228,7 +228,7 @@
         <dependency>
             <groupId>com.google.apis</groupId>
             <artifactId>google-api-services-gmail</artifactId>
-            <version>v1-rev20210614-1.32.1</version>
+            <version>v1-rev20221212-2.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.google.oauth-client</groupId>
