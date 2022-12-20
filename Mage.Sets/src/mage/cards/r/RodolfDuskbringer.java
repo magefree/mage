@@ -93,6 +93,6 @@ enum RodolfDuskbringerPredicate implements Predicate<Card> {
                 .getState()
                 .getWatcher(PlayerGainedLifeWatcher.class)
                 .getLifeGained(input.getOwnerId())
-                <= input.getManaValue();
+                >= input.getManaValue();
     }
 }
