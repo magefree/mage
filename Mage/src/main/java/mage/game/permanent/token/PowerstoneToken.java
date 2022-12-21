@@ -30,7 +30,7 @@ public final class PowerstoneToken extends TokenImpl {
         // {T}: Add {C}. This mana can't be spent to cast a nonartifact spell.
         this.addAbility(new ConditionalColorlessManaAbility(1, makeBuilder()));
 
-        availableImageSetCodes = Arrays.asList("DMU");
+        availableImageSetCodes = Arrays.asList("DMU", "BRO");
     }
 
     public PowerstoneToken(final PowerstoneToken token) {

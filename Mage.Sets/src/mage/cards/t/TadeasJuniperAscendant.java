@@ -1,4 +1,4 @@
-package mage.cards.d;
+package mage.cards.t;
 
 import mage.MageInt;
 import mage.MageObjectReference;
@@ -33,7 +33,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class DhalsimPliablePacifist extends CardImpl {
+public final class TadeasJuniperAscendant extends CardImpl {
 
     private static final Condition condition = new InvertCondition(SourceAttackingCondition.instance);
     private static final FilterControlledCreaturePermanent filter
@@ -43,7 +43,7 @@ public final class DhalsimPliablePacifist extends CardImpl {
         filter.add(new AbilityPredicate(ReachAbility.class));
     }
 
-    public DhalsimPliablePacifist(UUID ownerId, CardSetInfo setInfo) {
+    public TadeasJuniperAscendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");
 
         this.addSuperType(SuperType.LEGENDARY);
@@ -63,37 +63,37 @@ public final class DhalsimPliablePacifist extends CardImpl {
 
         // Whenever a creature you control with reach attacks, untap it and it can't be blocked by creatures with greater power this combat.
         this.addAbility(new AttacksCreatureYouControlTriggeredAbility(
-                new DhalsimPliablePacifistEffect(), false, filter, true
+                new TadeasJuniperAscendantEffect(), false, filter, true
         ));
 
         // Fierce Punch—Whenever one or more creatures you control deal combat damage to a player, draw a card.
-        this.addAbility(new DhalsimPliablePacifistTriggeredAbility());
+        this.addAbility(new TadeasJuniperAscendantTriggeredAbility());
     }
 
-    private DhalsimPliablePacifist(final DhalsimPliablePacifist card) {
+    private TadeasJuniperAscendant(final TadeasJuniperAscendant card) {
         super(card);
     }
 
     @Override
-    public DhalsimPliablePacifist copy() {
-        return new DhalsimPliablePacifist(this);
+    public TadeasJuniperAscendant copy() {
+        return new TadeasJuniperAscendant(this);
     }
 }
 
-class DhalsimPliablePacifistEffect extends OneShotEffect {
+class TadeasJuniperAscendantEffect extends OneShotEffect {
 
-    DhalsimPliablePacifistEffect() {
+    TadeasJuniperAscendantEffect() {
         super(Outcome.Benefit);
         staticText = "untap it and it can't be blocked by creatures with greater power this combat";
     }
 
-    private DhalsimPliablePacifistEffect(final DhalsimPliablePacifistEffect effect) {
+    private TadeasJuniperAscendantEffect(final TadeasJuniperAscendantEffect effect) {
         super(effect);
     }
 
     @Override
-    public DhalsimPliablePacifistEffect copy() {
-        return new DhalsimPliablePacifistEffect(this);
+    public TadeasJuniperAscendantEffect copy() {
+        return new TadeasJuniperAscendantEffect(this);
     }
 
     @Override
@@ -103,28 +103,28 @@ class DhalsimPliablePacifistEffect extends OneShotEffect {
             return false;
         }
         permanent.untap(game);
-        game.addEffect(new DhalsimPliablePacifistBlockEffect(permanent, game), source);
+        game.addEffect(new TadeasJuniperAscendantBlockEffect(permanent, game), source);
         return true;
     }
 }
 
-class DhalsimPliablePacifistBlockEffect extends RestrictionEffect {
+class TadeasJuniperAscendantBlockEffect extends RestrictionEffect {
 
     private final MageObjectReference mor;
 
-    DhalsimPliablePacifistBlockEffect(Permanent permanent, Game game) {
+    TadeasJuniperAscendantBlockEffect(Permanent permanent, Game game) {
         super(Duration.EndOfTurn);
         this.mor = new MageObjectReference(permanent, game);
     }
 
-    private DhalsimPliablePacifistBlockEffect(final DhalsimPliablePacifistBlockEffect effect) {
+    private TadeasJuniperAscendantBlockEffect(final TadeasJuniperAscendantBlockEffect effect) {
         super(effect);
         this.mor = effect.mor;
     }
 
     @Override
-    public DhalsimPliablePacifistBlockEffect copy() {
-        return new DhalsimPliablePacifistBlockEffect(this);
+    public TadeasJuniperAscendantBlockEffect copy() {
+        return new TadeasJuniperAscendantBlockEffect(this);
     }
 
     @Override
@@ -143,23 +143,23 @@ class DhalsimPliablePacifistBlockEffect extends RestrictionEffect {
     }
 }
 
-class DhalsimPliablePacifistTriggeredAbility extends TriggeredAbilityImpl {
+class TadeasJuniperAscendantTriggeredAbility extends TriggeredAbilityImpl {
 
     private final Set<UUID> damagedPlayerIds = new HashSet<>();
 
-    DhalsimPliablePacifistTriggeredAbility() {
+    TadeasJuniperAscendantTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
         this.withFlavorWord("Fierce Punch");
         setTriggerPhrase("Whenever one or more creatures you control deal combat damage to a player, ");
     }
 
-    private DhalsimPliablePacifistTriggeredAbility(final DhalsimPliablePacifistTriggeredAbility ability) {
+    private TadeasJuniperAscendantTriggeredAbility(final TadeasJuniperAscendantTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public DhalsimPliablePacifistTriggeredAbility copy() {
-        return new DhalsimPliablePacifistTriggeredAbility(this);
+    public TadeasJuniperAscendantTriggeredAbility copy() {
+        return new TadeasJuniperAscendantTriggeredAbility(this);
     }
 
     @Override

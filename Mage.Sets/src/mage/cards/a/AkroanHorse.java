@@ -1,15 +1,13 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateTokenAllEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -17,14 +15,14 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SoldierToken;
-import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class AkroanHorse extends CardImpl {
@@ -39,10 +37,15 @@ public final class AkroanHorse extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // When Akroan Horse enters the battlefield, an opponent gains control of it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new AkroanHorseChangeControlEffect(), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new AkroanHorseChangeControlEffect(), false
+        ));
 
         // At the beginning of your upkeep, each opponent create a 1/1 white Soldier creature token.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AkroanHorseCreateTokenEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new CreateTokenAllEffect(new SoldierToken(), TargetController.OPPONENT),
+                TargetController.YOU, false
+        ));
     }
 
     private AkroanHorse(final AkroanHorse card) {
@@ -73,18 +76,17 @@ class AkroanHorseChangeControlEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
         Target target = new TargetOpponent();
         target.setNotTarget(true);
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            if (controller.chooseTarget(outcome, target, source, game)) {
-                ContinuousEffect effect = new AkroanHorseGainControlEffect(Duration.Custom, target.getFirstTarget());
-                effect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
-                game.addEffect(effect, source);
-                return true;
-            }
-        }
-        return false;
+        controller.chooseTarget(outcome, target, source, game);
+        ContinuousEffect effect = new AkroanHorseGainControlEffect(Duration.Custom, target.getFirstTarget());
+        effect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
+        game.addEffect(effect, source);
+        return true;
     }
 }
 
@@ -111,42 +113,14 @@ class AkroanHorseGainControlEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent;
-
         if (targetPointer == null) {
             permanent = game.getPermanent(source.getFirstTarget());
         } else {
             permanent = game.getPermanent(targetPointer.getFirst(game, source));
         }
-
-        if (permanent == null) { return false; }
-
-        return permanent.changeControllerId(controller, game, source);
-
-    }
-}
-
-class AkroanHorseCreateTokenEffect extends OneShotEffect {
-
-    public AkroanHorseCreateTokenEffect() {
-        super(Outcome.Detriment);
-        this.staticText = "each opponent creates a 1/1 white Soldier creature token";
-    }
-
-    private AkroanHorseCreateTokenEffect(final AkroanHorseCreateTokenEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AkroanHorseCreateTokenEffect copy() {
-        return new AkroanHorseCreateTokenEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-            Token token = new SoldierToken();
-            token.putOntoBattlefield(1, game, source, opponentId);
+        if (permanent == null) {
+            return false;
         }
-        return true;
+        return permanent.changeControllerId(controller, game, source);
     }
 }

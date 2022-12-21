@@ -21,7 +21,7 @@ public final class FaerieToken extends TokenImpl {
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("ELD", "NCC");
+        availableImageSetCodes = Arrays.asList("ELD", "NCC", "BRC");
     }
 
     public FaerieToken(final FaerieToken token) {

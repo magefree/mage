@@ -1,4 +1,4 @@
-package mage.cards.b;
+package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -23,9 +23,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class BlankaFerociousFriend extends CardImpl {
+public final class TheHowlingAbomination extends CardImpl {
 
-    public BlankaFerociousFriend(UUID ownerId, CardSetInfo setInfo) {
+    public TheHowlingAbomination(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{G}");
 
         this.addSuperType(SuperType.LEGENDARY);
@@ -40,7 +40,7 @@ public final class BlankaFerociousFriend extends CardImpl {
 
         // Rolling Attack—Blanka, Ferocious Friend has trample as long as you've cast three or more spells this turn.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(TrampleAbility.getInstance()), BlankaFerociousFriendCondition.instance,
+                new GainAbilitySourceEffect(TrampleAbility.getInstance()), TheHowlingAbominationCondition.instance,
                 "{this} has trample as long as you've cast three or more spells this turn"
         )).withFlavorWord("Rolling Attack"));
 
@@ -53,17 +53,17 @@ public final class BlankaFerociousFriend extends CardImpl {
         this.addAbility(ability.withFlavorWord("Electric Thunder"));
     }
 
-    private BlankaFerociousFriend(final BlankaFerociousFriend card) {
+    private TheHowlingAbomination(final TheHowlingAbomination card) {
         super(card);
     }
 
     @Override
-    public BlankaFerociousFriend copy() {
-        return new BlankaFerociousFriend(this);
+    public TheHowlingAbomination copy() {
+        return new TheHowlingAbomination(this);
     }
 }
 
-enum BlankaFerociousFriendCondition implements Condition {
+enum TheHowlingAbominationCondition implements Condition {
     instance;
 
     @Override

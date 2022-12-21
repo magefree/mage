@@ -1,6 +1,7 @@
 package mage.game.permanent.token;
 
 import mage.MageInt;
+import mage.abilities.mana.GreenManaAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -19,6 +20,9 @@ public final class ForestDryadToken extends TokenImpl {
         subtype.add(SubType.FOREST, SubType.DRYAD);
         power = new MageInt(1);
         toughness = new MageInt(1);
+
+        // <i>(This creature is affected by summoning sickness, and it has “{T}: Add {G}.”)</i>
+        this.addAbility(new GreenManaAbility());
 
         availableImageSetCodes = Arrays.asList("BRO");
     }

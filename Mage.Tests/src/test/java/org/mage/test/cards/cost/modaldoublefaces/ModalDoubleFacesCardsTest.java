@@ -992,7 +992,6 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
 
         // move
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}:");
-        setChoice(playerA, true); // yes, activate
         setChoice(playerA, "Akoum Warrior");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkPermanentCount("after move", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 1);

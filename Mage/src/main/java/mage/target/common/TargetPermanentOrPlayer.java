@@ -23,11 +23,15 @@ public class TargetPermanentOrPlayer extends TargetImpl {
     protected FilterPermanentOrPlayer filter;
 
     public TargetPermanentOrPlayer() {
-        this(1, 1);
+        this(1);
     }
 
     public TargetPermanentOrPlayer(int numTargets) {
         this(numTargets, numTargets);
+    }
+
+    public TargetPermanentOrPlayer(FilterPermanentOrPlayer filter) {
+        this(1, 1, filter, false);
     }
 
     public TargetPermanentOrPlayer(int minNumTargets, int maxNumTargets) {

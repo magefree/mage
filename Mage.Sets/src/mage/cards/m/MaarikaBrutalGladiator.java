@@ -1,4 +1,4 @@
-package mage.cards.z;
+package mage.cards.m;
 
 import mage.MageInt;
 import mage.MageObjectReference;
@@ -33,15 +33,15 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class ZangiefTheRedCyclone extends CardImpl {
+public final class MaarikaBrutalGladiator extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
 
     static {
-        filter.add(ZangiefTheRedCycloneWatcher::checkPermanent);
+        filter.add(MaarikaBrutalGladiatorWatcher::checkPermanent);
     }
 
-    public ZangiefTheRedCyclone(UUID ownerId, CardSetInfo setInfo) {
+    public MaarikaBrutalGladiator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}{G}");
 
         this.addSuperType(SuperType.LEGENDARY);
@@ -61,21 +61,21 @@ public final class ZangiefTheRedCyclone extends CardImpl {
 
         // Spinning Piledriver—Whenever Zangief deals damage to a creature, if that creature was dealt excess damage this turn, that creature's controller sacrifices a noncreature, nonland permanent.
         this.addAbility(new DealsDamageToACreatureTriggeredAbility(
-                new ZangiefTheRedCycloneEffect(), false, false, true, filter
-        ).withFlavorWord("Spinning Piledriver"), new ZangiefTheRedCycloneWatcher());
+                new MaarikaBrutalGladiatorEffect(), false, false, true, filter
+        ).withFlavorWord("Spinning Piledriver"), new MaarikaBrutalGladiatorWatcher());
     }
 
-    private ZangiefTheRedCyclone(final ZangiefTheRedCyclone card) {
+    private MaarikaBrutalGladiator(final MaarikaBrutalGladiator card) {
         super(card);
     }
 
     @Override
-    public ZangiefTheRedCyclone copy() {
-        return new ZangiefTheRedCyclone(this);
+    public MaarikaBrutalGladiator copy() {
+        return new MaarikaBrutalGladiator(this);
     }
 }
 
-class ZangiefTheRedCycloneEffect extends OneShotEffect {
+class MaarikaBrutalGladiatorEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterNonlandPermanent("noncreature, nonland permanent");
 
@@ -83,19 +83,19 @@ class ZangiefTheRedCycloneEffect extends OneShotEffect {
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
-    ZangiefTheRedCycloneEffect() {
+    MaarikaBrutalGladiatorEffect() {
         super(Outcome.Benefit);
         staticText = "if that creature was dealt excess damage this turn, " +
                 "that creature's controller sacrifices a noncreature, nonland permanent";
     }
 
-    private ZangiefTheRedCycloneEffect(final ZangiefTheRedCycloneEffect effect) {
+    private MaarikaBrutalGladiatorEffect(final MaarikaBrutalGladiatorEffect effect) {
         super(effect);
     }
 
     @Override
-    public ZangiefTheRedCycloneEffect copy() {
-        return new ZangiefTheRedCycloneEffect(this);
+    public MaarikaBrutalGladiatorEffect copy() {
+        return new MaarikaBrutalGladiatorEffect(this);
     }
 
     @Override
@@ -110,11 +110,11 @@ class ZangiefTheRedCycloneEffect extends OneShotEffect {
     }
 }
 
-class ZangiefTheRedCycloneWatcher extends Watcher {
+class MaarikaBrutalGladiatorWatcher extends Watcher {
 
     private final Set<MageObjectReference> morSet = new HashSet<>();
 
-    ZangiefTheRedCycloneWatcher() {
+    MaarikaBrutalGladiatorWatcher() {
         super(WatcherScope.GAME);
     }
 
@@ -135,7 +135,7 @@ class ZangiefTheRedCycloneWatcher extends Watcher {
     static boolean checkPermanent(Permanent input, Game game) {
         return game
                 .getState()
-                .getWatcher(ZangiefTheRedCycloneWatcher.class)
+                .getWatcher(MaarikaBrutalGladiatorWatcher.class)
                 .morSet
                 .stream()
                 .anyMatch(mor -> mor.refersTo(input, game));

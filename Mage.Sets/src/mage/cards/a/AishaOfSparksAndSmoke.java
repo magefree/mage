@@ -1,4 +1,4 @@
-package mage.cards.k;
+package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -24,9 +24,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class KenBurningBrawler extends CardImpl {
+public final class AishaOfSparksAndSmoke extends CardImpl {
 
-    public KenBurningBrawler(UUID ownerId, CardSetInfo setInfo) {
+    public AishaOfSparksAndSmoke(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
 
         this.addSuperType(SuperType.LEGENDARY);
@@ -45,35 +45,35 @@ public final class KenBurningBrawler extends CardImpl {
 
         // Shoryuken—Whenever Ken deals combat damage, you may cast a sorcery spell from your hand with mana value less than or equal to that damage without paying its mana cost.
         this.addAbility(new DealsCombatDamageTriggeredAbility(
-                new KenBurningBrawlerEffect(), false
+                new AishaOfSparksAndSmokeEffect(), false
         ).withFlavorWord("Shoryuken"));
     }
 
-    private KenBurningBrawler(final KenBurningBrawler card) {
+    private AishaOfSparksAndSmoke(final AishaOfSparksAndSmoke card) {
         super(card);
     }
 
     @Override
-    public KenBurningBrawler copy() {
-        return new KenBurningBrawler(this);
+    public AishaOfSparksAndSmoke copy() {
+        return new AishaOfSparksAndSmoke(this);
     }
 }
 
-class KenBurningBrawlerEffect extends OneShotEffect {
+class AishaOfSparksAndSmokeEffect extends OneShotEffect {
 
-    KenBurningBrawlerEffect() {
+    AishaOfSparksAndSmokeEffect() {
         super(Outcome.Benefit);
         staticText = "you may cast a sorcery spell from your hand with mana value " +
                 "less than or equal to that damage without paying its mana cost";
     }
 
-    private KenBurningBrawlerEffect(final KenBurningBrawlerEffect effect) {
+    private AishaOfSparksAndSmokeEffect(final AishaOfSparksAndSmokeEffect effect) {
         super(effect);
     }
 
     @Override
-    public KenBurningBrawlerEffect copy() {
-        return new KenBurningBrawlerEffect(this);
+    public AishaOfSparksAndSmokeEffect copy() {
+        return new AishaOfSparksAndSmokeEffect(this);
     }
 
     @Override

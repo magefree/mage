@@ -1,4 +1,4 @@
-package mage.cards.r;
+package mage.cards.v;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -24,9 +24,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class RyuWorldWarrior extends CardImpl {
+public final class VikyaScorchingStalwart extends CardImpl {
 
-    public RyuWorldWarrior(UUID ownerId, CardSetInfo setInfo) {
+    public VikyaScorchingStalwart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
 
         this.addSuperType(SuperType.LEGENDARY);
@@ -39,38 +39,38 @@ public final class RyuWorldWarrior extends CardImpl {
         this.addAbility(new TrainingAbility());
 
         // Hadoken—{4}{R}, {Q}, Discard a card: Ryu, World Warrior deals damage equal to his power to any target. If excess damage was dealt to a creature this way, draw a card.
-        Ability ability = new SimpleActivatedAbility(new RyuWorldWarriorEffect(), new ManaCostsImpl<>("{4}{R}"));
+        Ability ability = new SimpleActivatedAbility(new VikyaScorchingStalwartEffect(), new ManaCostsImpl<>("{4}{R}"));
         ability.addCost(new UntapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability.withFlavorWord("Hadoken"));
     }
 
-    private RyuWorldWarrior(final RyuWorldWarrior card) {
+    private VikyaScorchingStalwart(final VikyaScorchingStalwart card) {
         super(card);
     }
 
     @Override
-    public RyuWorldWarrior copy() {
-        return new RyuWorldWarrior(this);
+    public VikyaScorchingStalwart copy() {
+        return new VikyaScorchingStalwart(this);
     }
 }
 
-class RyuWorldWarriorEffect extends OneShotEffect {
+class VikyaScorchingStalwartEffect extends OneShotEffect {
 
-    RyuWorldWarriorEffect() {
+    VikyaScorchingStalwartEffect() {
         super(Outcome.Benefit);
         staticText = "{this} deals damage equal to his power to any target. " +
                 "If excess damage was dealt to a creature this way, draw a card";
     }
 
-    private RyuWorldWarriorEffect(final RyuWorldWarriorEffect effect) {
+    private VikyaScorchingStalwartEffect(final VikyaScorchingStalwartEffect effect) {
         super(effect);
     }
 
     @Override
-    public RyuWorldWarriorEffect copy() {
-        return new RyuWorldWarriorEffect(this);
+    public VikyaScorchingStalwartEffect copy() {
+        return new VikyaScorchingStalwartEffect(this);
     }
 
     @Override

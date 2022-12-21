@@ -1,4 +1,4 @@
-package mage.cards.c;
+package mage.cards.z;
 
 import mage.ApprovingObject;
 import mage.MageInt;
@@ -23,9 +23,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class ChunLiCountlessKicks extends CardImpl {
+public final class ZethiArcaneBlademaster extends CardImpl {
 
-    public ChunLiCountlessKicks(UUID ownerId, CardSetInfo setInfo) {
+    public ZethiArcaneBlademaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
 
         this.addSuperType(SuperType.LEGENDARY);
@@ -38,24 +38,24 @@ public final class ChunLiCountlessKicks extends CardImpl {
         this.addAbility(new MultikickerAbility("{W/U}"));
 
         // When Chun-Li enters the battlefield, exile up to X target instant cards from your graveyard, where X is the number of times Chun-Li was kicked. Put a kick counter on each of them.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ChunLiCountlessKicksExileEffect())
-                .setTargetAdjuster(ChunLiCountlessKicksAdjuster.instance));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ZethiArcaneBlademasterExileEffect())
+                .setTargetAdjuster(ZethiArcaneBlademasterAdjuster.instance));
 
         // Lightning Kick—Whenever Chun-Li attacks, copy each exiled card you own with a kick counter on it. You may cast the copies.
-        this.addAbility(new AttacksTriggeredAbility(new ChunLiCountlessKicksCastEffect()).withFlavorWord("Lightning Kick"));
+        this.addAbility(new AttacksTriggeredAbility(new ZethiArcaneBlademasterCastEffect()).withFlavorWord("Lightning Kick"));
     }
 
-    private ChunLiCountlessKicks(final ChunLiCountlessKicks card) {
+    private ZethiArcaneBlademaster(final ZethiArcaneBlademaster card) {
         super(card);
     }
 
     @Override
-    public ChunLiCountlessKicks copy() {
-        return new ChunLiCountlessKicks(this);
+    public ZethiArcaneBlademaster copy() {
+        return new ZethiArcaneBlademaster(this);
     }
 }
 
-enum ChunLiCountlessKicksAdjuster implements TargetAdjuster {
+enum ZethiArcaneBlademasterAdjuster implements TargetAdjuster {
     instance;
     private static final FilterCard filter = new FilterCard("instant cards from your graveyard");
 
@@ -71,21 +71,21 @@ enum ChunLiCountlessKicksAdjuster implements TargetAdjuster {
     }
 }
 
-class ChunLiCountlessKicksExileEffect extends OneShotEffect {
+class ZethiArcaneBlademasterExileEffect extends OneShotEffect {
 
-    ChunLiCountlessKicksExileEffect() {
+    ZethiArcaneBlademasterExileEffect() {
         super(Outcome.Benefit);
         staticText = "exile up to X target instant cards from your graveyard, "
                 + "where X is the number of times {this} was kicked. Put a kick counter on each of them";
     }
 
-    private ChunLiCountlessKicksExileEffect(final ChunLiCountlessKicksExileEffect effect) {
+    private ZethiArcaneBlademasterExileEffect(final ZethiArcaneBlademasterExileEffect effect) {
         super(effect);
     }
 
     @Override
-    public ChunLiCountlessKicksExileEffect copy() {
-        return new ChunLiCountlessKicksExileEffect(this);
+    public ZethiArcaneBlademasterExileEffect copy() {
+        return new ZethiArcaneBlademasterExileEffect(this);
     }
 
     @Override
@@ -101,20 +101,20 @@ class ChunLiCountlessKicksExileEffect extends OneShotEffect {
     }
 }
 
-class ChunLiCountlessKicksCastEffect extends OneShotEffect {
+class ZethiArcaneBlademasterCastEffect extends OneShotEffect {
 
-    ChunLiCountlessKicksCastEffect() {
+    ZethiArcaneBlademasterCastEffect() {
         super(Outcome.Benefit);
         staticText = "copy each exiled card you own with a kick counter on it. You may cast the copies";
     }
 
-    private ChunLiCountlessKicksCastEffect(final ChunLiCountlessKicksCastEffect effect) {
+    private ZethiArcaneBlademasterCastEffect(final ZethiArcaneBlademasterCastEffect effect) {
         super(effect);
     }
 
     @Override
-    public ChunLiCountlessKicksCastEffect copy() {
-        return new ChunLiCountlessKicksCastEffect(this);
+    public ZethiArcaneBlademasterCastEffect copy() {
+        return new ZethiArcaneBlademasterCastEffect(this);
     }
 
     @Override
@@ -153,7 +153,7 @@ class ChunLiCountlessKicksCastEffect extends OneShotEffect {
                     );
                     game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), null);
                 } else {
-                    Logger.getLogger(ChunLiCountlessKicksCastEffect.class).error("Chun Li, Countless Kicks: "
+                    Logger.getLogger(ZethiArcaneBlademasterCastEffect.class).error("Chun Li, Countless Kicks: "
                             + "spell ability == null " + copiedCard.getName());
                 }
             }

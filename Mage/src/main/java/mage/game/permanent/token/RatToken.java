@@ -19,7 +19,7 @@ public final class RatToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("C17", "CHK", "GTC", "SHM", "ELD", "ZNC", "AFC");
+        availableImageSetCodes = Arrays.asList("GTC", "SHM", "ELD", "ZNC", "AFC");
     }
 
     public RatToken(final RatToken token) {

@@ -1,7 +1,5 @@
 package mage.abilities.keyword;
 
-import java.util.*;
-
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -11,17 +9,17 @@ import mage.constants.Duration;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.watchers.Watcher;
 
+import java.util.*;
+
 /**
- *
  * @author emerald000
  */
 public class MeleeAbility extends AttacksTriggeredAbility {
 
     public MeleeAbility() {
-        super(new BoostSourceEffect(new MeleeDynamicValue(), new MeleeDynamicValue(), Duration.EndOfTurn), false);
+        super(new BoostSourceEffect(MeleeDynamicValue.instance, MeleeDynamicValue.instance, Duration.EndOfTurn), false);
         this.addWatcher(new MeleeWatcher());
     }
 
@@ -42,7 +40,7 @@ public class MeleeAbility extends AttacksTriggeredAbility {
 
 class MeleeWatcher extends Watcher {
 
-    private Map<UUID, Set<UUID>> playersAttacked = new HashMap<>(0);
+    private final Map<UUID, Set<UUID>> playersAttacked = new HashMap<>(0);
 
     public MeleeWatcher() {
         super(WatcherScope.GAME);
@@ -50,55 +48,41 @@ class MeleeWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.BEGIN_COMBAT_STEP_PRE) {
-            this.playersAttacked.clear();
-        }
-        else if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
-            Set<UUID> attackedPlayers = this.playersAttacked.getOrDefault(event.getPlayerId(), new HashSet<>(1));
-            attackedPlayers.add(event.getTargetId());
-            this.playersAttacked.put(event.getPlayerId(), attackedPlayers);
+        switch (event.getType()) {
+            case BEGIN_COMBAT_STEP_PRE:
+                this.playersAttacked.clear();
+                return;
+            case ATTACKER_DECLARED:
+                if (game.getPlayer(event.getTargetId()) == null) {
+                    return;
+                }
+                this.playersAttacked
+                        .computeIfAbsent(event.getPlayerId(), x -> new HashSet<>())
+                        .add(event.getTargetId());
         }
     }
 
-    public int getNumberOfAttackedPlayers(UUID attackerId) {
-        if (this.playersAttacked.get(attackerId) != null) {
-            return this.playersAttacked.get(attackerId).size();
-        }
-        return 0;
+    public static int getNumberOfAttackedPlayers(UUID attackerId, Game game) {
+        return game
+                .getState()
+                .getWatcher(MeleeWatcher.class)
+                .playersAttacked
+                .getOrDefault(attackerId, Collections.emptySet())
+                .size();
     }
 }
 
-class MeleeDynamicValue implements DynamicValue {
-
-    private boolean valueChecked;
-    private int lockedInValue;
-
-    public MeleeDynamicValue() {
-        super();
-    }
-
-    protected MeleeDynamicValue(final MeleeDynamicValue dynamicValue) {
-        super();
-        valueChecked = dynamicValue.valueChecked;
-        lockedInValue = dynamicValue.lockedInValue;
-    }
+enum MeleeDynamicValue implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        MeleeWatcher watcher = game.getState().getWatcher(MeleeWatcher.class);
-        if (watcher != null) {
-            if (!valueChecked) {
-                this.lockedInValue = watcher.getNumberOfAttackedPlayers(sourceAbility.getControllerId());
-                valueChecked = true;
-            }
-            return this.lockedInValue;
-        }
-        return 0;
+        return MeleeWatcher.getNumberOfAttackedPlayers(sourceAbility.getSourceId(), game);
     }
 
     @Override
     public MeleeDynamicValue copy() {
-        return new MeleeDynamicValue(this);
+        return this;
     }
 
     @Override
