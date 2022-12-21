@@ -25,9 +25,9 @@ public interface Card extends MageObject {
 
     UUID getOwnerId();
 
-    String getCardNumber();
-    
     void setCardNumber(String cardNumber);
+    
+    String getCardNumber();
 
     Rarity getRarity(); // null for tokens
 
