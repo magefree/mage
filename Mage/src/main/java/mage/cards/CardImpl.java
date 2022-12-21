@@ -198,7 +198,12 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public UUID getOwnerId() {
         return ownerId;
     }
-
+    
+    @Override
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+    
     @Override
     public String getCardNumber() {
         return cardNumber;
@@ -622,6 +627,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         // init second side card on first call
         if (secondSideCardClazz == null && secondSideCard == null) {
             return null;
+        }
+        
+        // fix second side to match the cardnumber of the front side if the card has art variants
+        if (secondSideCard != null && usesVariousArt && !cardNumber.equals(secondSideCard.getCardNumber())) {
+            secondSideCard.setCardNumber(cardNumber);
         }
 
         if (secondSideCard != null) {
