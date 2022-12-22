@@ -869,6 +869,11 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
+    public void setCardNumber(String cardNumber) {
+        card.setCardNumber(cardNumber);
+    }
+
+    @Override
     public String getCardNumber() {
         return card.getCardNumber();
     }
