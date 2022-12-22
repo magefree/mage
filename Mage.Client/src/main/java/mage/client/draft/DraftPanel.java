@@ -526,6 +526,7 @@
          draftLeftPane.setVerifyInputWhenFocusTarget(false);
 
          btnQuitTournament.setText("Quit Tournament");
+         btnQuitTournament.setFocusable(false);
          btnQuitTournament.addActionListener(evt -> btnQuitTournamentActionPerformed(evt));
 
          lblPack1.setText("Pack 1:");
