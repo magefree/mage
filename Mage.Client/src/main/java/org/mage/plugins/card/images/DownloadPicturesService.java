@@ -454,17 +454,19 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         if (card.getSecondSideName() == null || card.getSecondSideName().trim().isEmpty()) {
                             throw new IllegalStateException("Second side card can't have empty name.");
                         }
-
-                        if (card.usesVariousArt()) { // if the card has variant art it's also new enough for the front & back to have the same card number
-                            url = new CardDownloadData(card.getSecondSideName(), card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, "", "", false, card.isDoubleFaced(), true);
-                        } else { // the card either uses the old numbering where the front/back numbers differ, or it's new but has no variant art, so we find the only existing backside art using secondSideCard.getCardNumber()
+                        
+                        // if the card has variant art it's also new enough for the front & back to have the same card number
+                        // if no variants, we'll get the second side from the card repository
+                        String secondSideCardNumber = card.getCardNumber();
+                        if (!card.usesVariousArt()) {
                             CardInfo secondSideCard = CardRepository.instance.findCardWPreferredSet(card.getSecondSideName(), card.getSetCode());
                             if (secondSideCard == null) {
                                 throw new IllegalStateException("Can''t find second side card in database: " + card.getSecondSideName());
                             }
-                            url = new CardDownloadData(card.getSecondSideName(), card.getSetCode(), secondSideCard.getCardNumber(), card.usesVariousArt(), 0, "", "", false, card.isDoubleFaced(), true);
+                            secondSideCardNumber = secondSideCard.getCardNumber();
                         }
                         
+                        url = new CardDownloadData(card.getSecondSideName(), card.getSetCode(), secondSideCardNumber, card.usesVariousArt(), 0, "", "", false, card.isDoubleFaced(), true);                 
                         url.setType2(isType2);
                         allCardsUrls.add(url);
                     }
