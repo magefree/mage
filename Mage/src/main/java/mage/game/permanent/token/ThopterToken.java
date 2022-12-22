@@ -24,7 +24,7 @@ public final class ThopterToken extends TokenImpl {
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("ALA", "C16", "C18", "2XM");
+        availableImageSetCodes = Arrays.asList("ALA", "C16", "C18", "2XM", "BRC");
     }
 
     @Override

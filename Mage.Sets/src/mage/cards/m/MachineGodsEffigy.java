@@ -9,6 +9,7 @@ import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubTypeSet;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -53,8 +54,8 @@ class MachineGodsEffigyApplier extends CopyApplier {
 
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID targetObjectId) {
-        blueprint.retainAllArtifactSubTypes(null);
-        blueprint.removeAllCardTypes(game);
+        blueprint.getSubtype().removeIf(subType -> subType.getSubTypeSet() != SubTypeSet.ArtifactType);
+        blueprint.removeAllCardTypes();
         blueprint.addCardType(CardType.ARTIFACT);
         blueprint.getAbilities().add(new BlueManaAbility());
         return true;

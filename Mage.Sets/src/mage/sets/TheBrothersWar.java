@@ -46,6 +46,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Argoth, Sanctum of Nature", "256a", Rarity.RARE, mage.cards.a.ArgothSanctumOfNature.class));
         cards.add(new SetCardInfo("Argothian Opportunist", 167, Rarity.COMMON, mage.cards.a.ArgothianOpportunist.class));
         cards.add(new SetCardInfo("Argothian Sprite", 168, Rarity.COMMON, mage.cards.a.ArgothianSprite.class));
+        cards.add(new SetCardInfo("Arms Race", 126, Rarity.UNCOMMON, mage.cards.a.ArmsRace.class));
         cards.add(new SetCardInfo("Artificer's Dragon", 291, Rarity.RARE, mage.cards.a.ArtificersDragon.class));
         cards.add(new SetCardInfo("Ashnod's Harvester", 117, Rarity.UNCOMMON, mage.cards.a.AshnodsHarvester.class));
         cards.add(new SetCardInfo("Ashnod's Intervention", 85, Rarity.COMMON, mage.cards.a.AshnodsIntervention.class));
@@ -93,6 +94,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Draconic Destiny", 130, Rarity.MYTHIC, mage.cards.d.DraconicDestiny.class));
         cards.add(new SetCardInfo("Drafna, Founder of Lat-Nam", 47, Rarity.RARE, mage.cards.d.DrafnaFounderOfLatNam.class));
         cards.add(new SetCardInfo("Dreams of Steel and Oil", 92, Rarity.UNCOMMON, mage.cards.d.DreamsOfSteelAndOil.class));
+        cards.add(new SetCardInfo("Dredging Claw", 119, Rarity.COMMON, mage.cards.d.DredgingClaw.class));
         cards.add(new SetCardInfo("Dwarven Forge-Chanter", 131, Rarity.COMMON, mage.cards.d.DwarvenForgeChanter.class));
         cards.add(new SetCardInfo("Emergency Weld", 93, Rarity.COMMON, mage.cards.e.EmergencyWeld.class));
         cards.add(new SetCardInfo("Energy Refractor", 234, Rarity.COMMON, mage.cards.e.EnergyRefractor.class));
@@ -133,6 +135,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Great Desert Prospector", 7, Rarity.UNCOMMON, mage.cards.g.GreatDesertProspector.class));
         cards.add(new SetCardInfo("Gruesome Realization", 103, Rarity.UNCOMMON, mage.cards.g.GruesomeRealization.class));
         cards.add(new SetCardInfo("Gurgling Anointer", 104, Rarity.UNCOMMON, mage.cards.g.GurglingAnointer.class));
+        cards.add(new SetCardInfo("Gwenna, Eyes of Gaea", 185, Rarity.RARE, mage.cards.g.GwennaEyesOfGaea.class));
         cards.add(new SetCardInfo("Hajar, Loyal Bodyguard", 211, Rarity.RARE, mage.cards.h.HajarLoyalBodyguard.class));
         cards.add(new SetCardInfo("Hall of Tagsin", 263, Rarity.RARE, mage.cards.h.HallOfTagsin.class));
         cards.add(new SetCardInfo("Harbin, Vanguard Aviator", 212, Rarity.RARE, mage.cards.h.HarbinVanguardAviator.class));
@@ -186,6 +189,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Moment of Defiance", 108, Rarity.COMMON, mage.cards.m.MomentOfDefiance.class));
         cards.add(new SetCardInfo("Monastery Swiftspear", 144, Rarity.UNCOMMON, mage.cards.m.MonasterySwiftspear.class));
         cards.add(new SetCardInfo("Mountain", 274, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Myrel, Shield of Argive", 18, Rarity.MYTHIC, mage.cards.m.MyrelShieldOfArgive.class));
         cards.add(new SetCardInfo("No One Left Behind", 109, Rarity.UNCOMMON, mage.cards.n.NoOneLeftBehind.class));
         cards.add(new SetCardInfo("Obliterating Bolt", 145, Rarity.UNCOMMON, mage.cards.o.ObliteratingBolt.class));
         cards.add(new SetCardInfo("Obstinate Baloth", 187, Rarity.UNCOMMON, mage.cards.o.ObstinateBaloth.class));
@@ -213,6 +217,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Reconstructed Thopter", 242, Rarity.UNCOMMON, mage.cards.r.ReconstructedThopter.class));
         cards.add(new SetCardInfo("Recruitment Officer", 23, Rarity.UNCOMMON, mage.cards.r.RecruitmentOfficer.class));
         cards.add(new SetCardInfo("Repair and Recharge", 24, Rarity.UNCOMMON, mage.cards.r.RepairAndRecharge.class));
+        cards.add(new SetCardInfo("Rescue Retriever", 288, Rarity.RARE, mage.cards.r.RescueRetriever.class));
         cards.add(new SetCardInfo("Retrieval Agent", 60, Rarity.COMMON, mage.cards.r.RetrievalAgent.class));
         cards.add(new SetCardInfo("Roc Hunter", 150, Rarity.COMMON, mage.cards.r.RocHunter.class));
         cards.add(new SetCardInfo("Rootwire Amalgam", 203, Rarity.MYTHIC, mage.cards.r.RootwireAmalgam.class));
@@ -234,6 +239,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Skyfisher Spider", 221, Rarity.UNCOMMON, mage.cards.s.SkyfisherSpider.class));
         cards.add(new SetCardInfo("Skystrike Officer", 62, Rarity.RARE, mage.cards.s.SkystrikeOfficer.class));
         cards.add(new SetCardInfo("Slagstone Refinery", 243, Rarity.UNCOMMON, mage.cards.s.SlagstoneRefinery.class));
+        cards.add(new SetCardInfo("Soul Partition", 26, Rarity.RARE, mage.cards.s.SoulPartition.class));
         cards.add(new SetCardInfo("Spectrum Sentinel", 244, Rarity.UNCOMMON, mage.cards.s.SpectrumSentinel.class));
         cards.add(new SetCardInfo("Splitting the Powerstone", 63, Rarity.UNCOMMON, mage.cards.s.SplittingThePowerstone.class));
         cards.add(new SetCardInfo("Spotter Thopter", 80, Rarity.UNCOMMON, mage.cards.s.SpotterThopter.class));

@@ -112,7 +112,6 @@ public class AmplifyTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Through the Breach");
-        setChoice(playerA, true);  // Put a creature into play with Through the Breach?
         setChoice(playerA, "Kilnmouth Dragon");
         //setChoice(playerA, true);  // no reveal request cause no cards to show
         //addTarget(playerA, "Kilnmouth Dragon");

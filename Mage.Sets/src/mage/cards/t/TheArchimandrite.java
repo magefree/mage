@@ -10,8 +10,8 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.dynamicvalue.AdditiveDynamicValue;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
-import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -26,6 +26,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
+import mage.game.Game;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -76,7 +77,7 @@ public final class TheArchimandrite extends CardImpl {
                 VigilanceAbility.getInstance(), Duration.EndOfTurn, filter
         ).setText("each Advisor, Artificer, and Monk you control gains vigilance"));
         ability.addEffect(new BoostControlledEffect(
-                SavedDamageValue.MANY, StaticValue.get(0), Duration.EndOfTurn,
+                TheArchimandriteValue.instance, StaticValue.get(0), Duration.EndOfTurn,
                 filter2, false, true
         ).setText("and gets +X/+0 until end of turn, where X is the amount of life you gained"));
         this.addAbility(ability);
@@ -95,5 +96,29 @@ public final class TheArchimandrite extends CardImpl {
     @Override
     public TheArchimandrite copy() {
         return new TheArchimandrite(this);
+    }
+}
+
+enum TheArchimandriteValue implements DynamicValue {
+    instance;
+
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        return (Integer) effect.getValue("gainedLife");
+    }
+
+    @Override
+    public TheArchimandriteValue copy() {
+        return this;
+    }
+
+    @Override
+    public String getMessage() {
+        return "";
+    }
+
+    @Override
+    public String toString() {
+        return "X";
     }
 }

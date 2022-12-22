@@ -39,7 +39,7 @@ public final class VisionsOfPhyrexia extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new CreateTokenEffect(new PowerstoneToken(), 1, true),
                 TargetController.YOU, VisionsOfPhyrexiaCondition.instance, false
-        ), new VisionsOfPhyrexiaConditionWatcher());
+        ), new VisionsOfPhyrexiaWatcher());
     }
 
     private VisionsOfPhyrexia(final VisionsOfPhyrexia card) {
@@ -57,7 +57,7 @@ enum VisionsOfPhyrexiaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return !VisionsOfPhyrexiaConditionWatcher.checkPlayer(game, source);
+        return !VisionsOfPhyrexiaWatcher.checkPlayer(game, source);
     }
 
     @Override
@@ -66,11 +66,11 @@ enum VisionsOfPhyrexiaCondition implements Condition {
     }
 }
 
-class VisionsOfPhyrexiaConditionWatcher extends Watcher {
+class VisionsOfPhyrexiaWatcher extends Watcher {
 
     private final Set<UUID> playerSet = new HashSet<>();
 
-    VisionsOfPhyrexiaConditionWatcher() {
+    VisionsOfPhyrexiaWatcher() {
         super(WatcherScope.GAME);
     }
 
@@ -99,8 +99,8 @@ class VisionsOfPhyrexiaConditionWatcher extends Watcher {
     static boolean checkPlayer(Game game, Ability source) {
         return game
                 .getState()
-                .getWatcher(VisionsOfPhyrexiaConditionWatcher.class)
+                .getWatcher(VisionsOfPhyrexiaWatcher.class)
                 .playerSet
-                .add(source.getControllerId());
+                .contains(source.getControllerId());
     }
 }

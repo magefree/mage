@@ -176,6 +176,7 @@ Ninth Edition|NinthEdition|
 Oath of the Gatewatch|OathOfTheGatewatch|
 Odyssey|Odyssey|
 Onslaught|Onslaught|
+Phyrexia: All Will Be One|PhyrexiaAllWillBeOne|
 Planar Chaos|PlanarChaos|
 Planechase|Planechase|
 Planechase 2012 Edition|Planechase2012Edition|
