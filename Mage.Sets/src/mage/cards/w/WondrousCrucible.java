@@ -11,10 +11,7 @@ import mage.abilities.keyword.WardAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
@@ -81,11 +78,15 @@ class WondrousCrucibleEffect extends OneShotEffect {
         if (card == null) {
             return true;
         }
+        player.moveCards(card, Zone.EXILED, source, game);
         Card copiedCard = game.copyCard(card, source, player.getId());
+        if (!player.chooseUse(outcome, "Cast copy of " + card.getName() + " without paying its mana cost?", source, game)) {
+            return true;
+        }
         game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);
         player.cast(
-                player.chooseAbilityForCast(copiedCard, game, false),
-                game, false, new ApprovingObject(source, game)
+                player.chooseAbilityForCast(copiedCard, game, true),
+                game, true, new ApprovingObject(source, game)
         );
         game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), null);
         return true;
