@@ -1,5 +1,6 @@
 package mage.cards.t;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -157,8 +158,11 @@ class TheTemporalAnchorPlayEffect extends AsThoughEffectImpl {
             return false;
         }
         UUID mainId = card.getMainCard().getId(); // for split cards
+        MageObject sourceObject = source.getSourceObject(game);
 
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(
+                game, sourceObject.getId(), sourceObject.getZoneChangeCounter(game)
+        ));
         return exileZone != null
                 && exileZone.contains(mainId)
                 && game.getCard(mainId) != null;
