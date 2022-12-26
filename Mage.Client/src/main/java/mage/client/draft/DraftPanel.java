@@ -526,6 +526,7 @@
          draftLeftPane.setVerifyInputWhenFocusTarget(false);
 
          btnQuitTournament.setText("Quit Tournament");
+         btnQuitTournament.setFocusable(false);
          btnQuitTournament.addActionListener(evt -> btnQuitTournamentActionPerformed(evt));
 
          lblPack1.setText("Pack 1:");
@@ -825,8 +826,8 @@
 
      private void btnQuitTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitTournamentActionPerformed
          UserRequestMessage message = new UserRequestMessage("Confirm quit tournament", "Are you sure you want to quit the draft tournament?");
-         message.setButton1("Yes", PlayerAction.CLIENT_QUIT_DRAFT_TOURNAMENT);
-         message.setButton2("No", null);
+         message.setButton1("No", null);
+         message.setButton2("Yes", PlayerAction.CLIENT_QUIT_DRAFT_TOURNAMENT);
          message.setTournamentId(draftId);
          MageFrame.getInstance().showUserRequestDialog(message);
      }//GEN-LAST:event_btnQuitTournamentActionPerformed
