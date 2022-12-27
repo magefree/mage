@@ -38,7 +38,7 @@ public class BlitzAbility extends SpellAbility {
         );
         ability.addEffect(new GainAbilitySourceEffect(new DiesSourceTriggeredAbility(
                 new DrawCardSourceControllerEffect(1)
-        ).setTriggerPhrase("When this creature dies, ")));
+        ).setTriggerPhrase("When this creature dies, "), Duration.EndOfTurn));
         ability.addEffect(new BlitzAddDelayedTriggeredAbilityEffect());
         ability.setRuleVisible(false);
         addSubAbility(ability);
@@ -80,6 +80,11 @@ public class BlitzAbility extends SpellAbility {
         if (!super.activate(game, noMana)) {
             return false;
         }
+        setBlitzActivationValueKey(game);
+        return true;
+    }
+
+    public void setBlitzActivationValueKey(Game game) {
         Object obj = game.getState().getValue(BLITZ_ACTIVATION_VALUE_KEY + getSourceId());
         List<Integer> blitzActivations;
         if (obj != null) {
@@ -89,7 +94,6 @@ public class BlitzAbility extends SpellAbility {
             game.getState().setValue(BLITZ_ACTIVATION_VALUE_KEY + getSourceId(), blitzActivations);
         }
         blitzActivations.add(game.getState().getZoneChangeCounter(getSourceId()));
-        return true;
     }
 }
 

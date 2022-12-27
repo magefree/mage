@@ -1,8 +1,15 @@
 package mage.abilities.common;
 
 import mage.abilities.SpellAbility;
+import mage.abilities.keyword.BlitzAbility;
+import mage.abilities.keyword.DashAbility;
 import mage.cards.Card;
 import mage.constants.Zone;
+import mage.game.Game;
+import mage.util.CardUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Plopman, JayDi85
@@ -33,6 +40,20 @@ public class CastCommanderAbility extends SpellAbility {
     @Override
     public String getRule() {
         return ruleText;
+    }
+
+    @Override
+    public boolean activate(Game game, boolean noMana) {
+        // added this to CastCommanderAbility to support commanders with blitz ability
+        if (!super.activate(game, noMana)) {
+            return false;
+        }
+        Card card = game.getCard(this.sourceId);
+        if (card != null) {
+             CardUtil.castStream(card.getAbilities(game).stream(), BlitzAbility.class)
+                     .forEach(blitzAbility -> blitzAbility.setBlitzActivationValueKey(game));
+        }
+        return true;
     }
 
 }
