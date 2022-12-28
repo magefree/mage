@@ -80,7 +80,7 @@ enum SurgeEngineCondition implements Condition {
         return Optional
                 .ofNullable(source.getSourcePermanentIfItStillExists(game))
                 .filter(Objects::nonNull)
-                .map(permanent -> permanent.hasAbility(DefenderAbility.getInstance(), game))
+                .map(permanent -> !permanent.hasAbility(DefenderAbility.getInstance(), game))
                 .orElse(false);
     }
 
