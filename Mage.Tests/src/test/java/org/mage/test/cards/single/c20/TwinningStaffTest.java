@@ -93,11 +93,13 @@ public class TwinningStaffTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, staff);
         addCard(Zone.HAND, playerA, "Lightning Bolt", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "LightningBolt", playerB);
+        castSpell(1, PhaseStep.UPKEEP, playerA, "Lightning Bolt", playerB);
         checkLife("before", 1, PhaseStep.PRECOMBAT_MAIN, playerB, 20 - 3);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "LightningBolt", playerB);
-        setChoice(playerA, false); // change target for copy 1
-        checkLife("copy", 1, PhaseStep.END_COMBAT, playerB, 20 - 3 - 3 * 2);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        setStrictChooseMode(false);
+        checkLife("copy", 1, PhaseStep.END_COMBAT, playerB, 20 - 3 - 3 * 3);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
     }
 }
