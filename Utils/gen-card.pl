@@ -254,22 +254,22 @@ foreach my $ability (@abilities) {
                         $ability =~ m/(\b\d+?\b)/g;
                         $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability(this, ' . $1 . '));';
                     } elsif ($keywords{$kw} eq 'cost') {
-                        $ability =~ m/({.*})/g;
+                        $ability =~ m/(\{.*\})/g;
                         $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability(new ManaCostsImpl<>("' . fixCost($1) . '")));';
                         $vars{'abilitiesImports'} .= "\nimport mage.abilities.costs.mana.ManaCostsImpl;";
                     } elsif ($keywords{$kw} eq 'card, manaString') {
-                        $ability =~ m/({.*})/g;
+                        $ability =~ m/(\{.*\})/g;
                         $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability(this, "' . fixCost($1) . '"));';
                     } elsif ($keywords{$kw} eq 'card, cost') {
-                        $ability =~ m/({.*})/g;
+                        $ability =~ m/(\{.*\})/g;
                         $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability(this, new ManaCostsImpl<>("' . fixCost($1) . '")));';
                         $vars{'abilitiesImports'} .= "\nimport mage.abilities.costs.mana.ManaCostsImpl;";
                     } elsif ($keywords{$kw} eq 'number, cost, card') {
-                        $ability =~ m/({.*})/g;
+                        $ability =~ m/(\{.*\})/g;
                         $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability(_, new ManaCostsImpl<>("' . fixCost($1) . '"), this));';
                         $vars{'abilitiesImports'} .= "\nimport mage.abilities.costs.mana.ManaCostsImpl;";
                     } elsif ($keywords{$kw} eq 'cost, card') {
-                        $ability =~ m/({.*})/g;
+                        $ability =~ m/(\{.*\})/g;
                         $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability(new ManaCostsImpl<>("' . fixCost($1) . '"), this));';
                         $vars{'abilitiesImports'} .= "\nimport mage.abilities.costs.mana.ManaCostsImpl;";
                     } elsif ($keywords{$kw} eq 'type') {
@@ -287,7 +287,7 @@ foreach my $ability (@abilities) {
                         $vars{'abilitiesImports'} .= "\nimport mage.constants.Outcome;";
                         $vars{'abilitiesImports'} .= "\nimport mage.target.TargetPermanent;";
                     } elsif ($keywords{$kw} eq 'manaString') {
-                        $ability =~ m/({.*})/g;
+                        $ability =~ m/(\{.*\})/g;
                         $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability("' . fixCost($1) . '"));';
                     }
                     $vars{'abilitiesImports'} .= "\nimport mage.abilities.keyword." . $kw . "Ability;";
