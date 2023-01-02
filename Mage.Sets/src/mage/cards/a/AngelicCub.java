@@ -1,43 +1,35 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.SourceHasAnyCountersCondition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
-import mage.abilities.condition.common.SourceHasCountersCondition;
-import mage.abilities.condition.common.SourceMatchesFilterCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.constants.Duration;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.NumberOfTimesPermanentTargetedATurnWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author AustinYQM
  */
 public final class AngelicCub extends CardImpl {
 
     public AngelicCub(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        
+
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(1);
@@ -95,5 +87,4 @@ class AngelicCubAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever {this} becomes the target of a spell or ability for the first time each turn, put a +1/+1 counter on it.";
     }
-
 }
