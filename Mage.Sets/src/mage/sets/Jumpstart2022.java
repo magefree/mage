@@ -40,6 +40,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Ancient Craving", 376, Rarity.UNCOMMON, mage.cards.a.AncientCraving.class));
         cards.add(new SetCardInfo("Ancient Stirrings", 628, Rarity.COMMON, mage.cards.a.AncientStirrings.class));
         cards.add(new SetCardInfo("Angel of Flight Alabaster", 144, Rarity.RARE, mage.cards.a.AngelOfFlightAlabaster.class));
+        cards.add(new SetCardInfo("Angelic Cub", 2, Rarity.UNCOMMON, mage.cards.a.AngelicCub.class));
         cards.add(new SetCardInfo("Angelic Edict", 145, Rarity.COMMON, mage.cards.a.AngelicEdict.class));
         cards.add(new SetCardInfo("Angelic Page", 146, Rarity.COMMON, mage.cards.a.AngelicPage.class));
         cards.add(new SetCardInfo("Angelic Protector", 147, Rarity.UNCOMMON, mage.cards.a.AngelicProtector.class));
