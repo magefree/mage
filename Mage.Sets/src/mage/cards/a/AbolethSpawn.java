@@ -1,38 +1,26 @@
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.abilities.Abilities;
-import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.EffectImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CopyStackObjectEffect;
-import mage.abilities.effects.common.ruleModifying.PlayLandsFromGraveyardControllerEffect;
-import mage.abilities.keyword.ReachAbility;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.WardAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.NumberOfTriggersEvent;
-import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author Rowan-Gudmundsson
  */
 public final class AbolethSpawn extends CardImpl {
 
@@ -45,9 +33,10 @@ public final class AbolethSpawn extends CardImpl {
     this.power = new MageInt(2);
     this.toughness = new MageInt(3);
 
-    // Reach
+    // Flash
     this.addAbility(FlashAbility.getInstance());
-    this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+    // Ward {2}
+    this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
     // Whenever a creature entering the battlefield under an opponent’s control
     // causes a triggered ability of that creature to trigger, you may copy that
