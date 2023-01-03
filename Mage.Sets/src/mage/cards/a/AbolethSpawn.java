@@ -105,6 +105,6 @@ class AbolethSpawnTriggeredAbility extends TriggeredAbilityImpl {
 
   @Override
   public String getRule() {
-    return "Whenever a creature entering the battlefield under an opponent’s control causes a triggered ability of that creature to trigger, you may copy that ability. You may choose new targets for the copy.";
+    return "Whenever a creature entering the battlefield under an opponent's control causes a triggered ability of that creature to trigger, you may copy that ability. You may choose new targets for the copy.";
   }
 }
