@@ -18,6 +18,7 @@ import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
+import mage.util.ExileUtil;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -29,11 +30,14 @@ import java.util.UUID;
 public final class EerieInterlude extends CardImpl {
 
     public EerieInterlude(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");
+        super(ownerId, setInfo, new CardType[] { CardType.INSTANT }, "{2}{W}");
 
-        // Exile any number of target creatures you control. Return those cards to the battlefield under their owner's control at the beginning of the next end step.
+        // Exile any number of target creatures you control. Return those cards to the
+        // battlefield under their owner's control at the beginning of the next end
+        // step.
         this.getSpellAbility().addEffect(new EerieInterludeEffect());
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, new FilterControlledCreaturePermanent(), false));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE,
+                new FilterControlledCreaturePermanent(), false));
 
     }
 
@@ -70,28 +74,16 @@ class EerieInterludeEffect extends OneShotEffect {
                     toExile.add(targetCreature);
                 }
             }
-            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(),
+                    source.getSourceObjectZoneChangeCounter());
             controller.moveCardsToExile(toExile, source, game, true, exileId, sourceObject.getIdName());
 
-            Cards cardsToReturn = new CardsImpl();
-            for (Card exiled : toExile) {
-                if (exiled instanceof PermanentMeld) {
-                    MeldCard meldCard = (MeldCard) ((PermanentCard) exiled).getCard();
-                    Card topCard = meldCard.getTopHalfCard();
-                    Card bottomCard = meldCard.getBottomHalfCard();
-                    if (topCard.getZoneChangeCounter(game) == meldCard.getTopLastZoneChangeCounter()) {
-                        cardsToReturn.add(topCard);
-                    }
-                    if (bottomCard.getZoneChangeCounter(game) == meldCard.getBottomLastZoneChangeCounter()) {
-                        cardsToReturn.add(bottomCard);
-                    }
-                } else if (exiled.getZoneChangeCounter(game) == game.getState().getZoneChangeCounter(exiled.getId()) - 1) {
-                    cardsToReturn.add(exiled);
-                }
-            }
+            Cards cardsToReturn = ExileUtil.returnCardsFromExile(toExile, game);
+
             Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);
             effect.setTargetPointer(new FixedTargets(cardsToReturn, game));
-            AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
+            AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
+                    effect);
             game.addDelayedTriggeredAbility(delayedAbility, source);
             return true;
         }
