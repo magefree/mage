@@ -344,6 +344,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Lae'zel, Vlaakith's Champion", 29, Rarity.RARE,
                 mage.cards.l.LaezelVlaakithsChampion.class));
         cards.add(new SetCardInfo("Laelia, the Blade Reforged", 801, Rarity.RARE,
+                mage.cards.l.LaeliaTheBladeReforged.class));
         cards.add(new SetCardInfo("Lantern of Revealing", 318, Rarity.COMMON, mage.cards.l.LanternOfRevealing.class));
         cards.add(new SetCardInfo("Lapis Orb of Dragonkind", 82, Rarity.COMMON, mage.cards.l.LapisOrbOfDragonkind.class));
         cards.add(new SetCardInfo("Legion Loyalty", 31, Rarity.MYTHIC, mage.cards.l.LegionLoyalty.class));
