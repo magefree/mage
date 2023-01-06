@@ -12,6 +12,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
+import mage.watchers.common.AbilityResolvedWatcher;
 
 import java.util.UUID;
 
@@ -34,7 +35,7 @@ public final class SizzlingSoloist extends CardImpl {
                 Outcome.Benefit, 2, new SizzlingSoloistEffect()
         ));
         ability.addTarget(new TargetOpponentsCreaturePermanent());
-        this.addAbility(ability);
+        this.addAbility(ability, new AbilityResolvedWatcher());
     }
 
     private SizzlingSoloist(final SizzlingSoloist card) {
