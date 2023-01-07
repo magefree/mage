@@ -18,7 +18,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -46,7 +46,7 @@ public final class AscentOfTheWorthy extends CardImpl {
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_III, SagaChapter.CHAPTER_III,
                 new AscentOfTheWorthyReturnEffect(),
-                new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD)
+                new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD)
         );
 
         this.addAbility(sagaAbility);
