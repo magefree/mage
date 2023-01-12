@@ -18,7 +18,7 @@ public class CountryComboBox extends JComboBox {
         {"Afghanistan", "af"},
         {"Agender","agender"},
         {"Åland Islands", "ax"},
-        {"Aromantic" , "ar" },
+        {"Aromantic" , "aro"},
         {"Asexual", "asexual"},
         {"Albania", "al"},
         {"Algeria", "dz"},
