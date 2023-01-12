@@ -150,7 +150,7 @@ public class CountryComboBox extends JComboBox {
         {"Lebanon", "lb"},
         {"Lesbian","lesbian"},
         {"Lesotho", "ls"},
-        {"LGBT+","lgbt"},
+        {"LGBT","lgbt"},
         {"Liberia", "lr"},
         {"Libya", "ly"},
         {"Liechtenstein", "li"},
