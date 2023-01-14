@@ -53,6 +53,7 @@ Flying|instance|
 Forestcycling|cost|
 Forestwalk|new|
 Foretell|card, manaString|
+For Mirrodin!|new|
 Friends forever|instance|
 Haste|instance|
 Hexproof|instance|
