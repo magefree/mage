@@ -43,7 +43,7 @@ public final class DragonwingGlider extends CardImpl {
         this.addAbility(ability);
 
         // Equip {3}{R}{R}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{3}{R}{R}")));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{3}{R}{R}"), false));
     }
 
     private DragonwingGlider(final DragonwingGlider card) {
