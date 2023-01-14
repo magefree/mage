@@ -20,7 +20,7 @@ public final class ArmsRace extends CardImpl {
 
         // {3}{R}: You may put an artifact card from your hand onto the battlefield. It gains haste. Sacrifice it at the beginning of the next end step.
         this.addAbility(new SimpleActivatedAbility(
-                new PutCardIntoPlayWithHasteAndSacrificeEffect(StaticFilters.FILTER_CARD_ARTIFACT), new ManaCostsImpl<>("{R}")
+                new PutCardIntoPlayWithHasteAndSacrificeEffect(StaticFilters.FILTER_CARD_ARTIFACT), new ManaCostsImpl<>("{3}{R}")
         ));
     }
 

@@ -46,7 +46,7 @@ public final class GlissaTheTraitor extends CardImpl {
 
         // Whenever a creature an opponent controls dies, you may return target artifact card from your graveyard to your hand.
         Ability ability = new DiesCreatureTriggeredAbility(
-                new ReturnFromGraveyardToHandTargetEffect(), false,
+                new ReturnFromGraveyardToHandTargetEffect(), true,
                 StaticFilters.FILTER_OPPONENTS_PERMANENT_A_CREATURE
         );
         ability.addTarget(new TargetCardInYourGraveyard(filter));
