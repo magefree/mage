@@ -2178,6 +2178,13 @@ public abstract class PlayerImpl implements Player, Serializable {
                 player.gainLife(actualDamage, game, source);
             }
         }
+        if (combatDamage && sourceAbilities != null && sourceAbilities.containsClass(ToxicAbility.class)) {
+            int counters = CardUtil
+                    .castStream(sourceAbilities.stream(), ToxicAbility.class)
+                    .mapToInt(ToxicAbility::getAmount)
+                    .sum();
+            addCounters(CounterType.POISON.createInstance(counters), sourceControllerId, source, game);
+        }
         // Unstable ability - Earl of Squirrel
         if (sourceAbilities != null && sourceAbilities.containsKey(SquirrellinkAbility.getInstance().getId())) {
             Player player = game.getPlayer(sourceControllerId);

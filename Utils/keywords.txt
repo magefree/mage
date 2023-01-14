@@ -116,6 +116,7 @@ Suspend|number, cost, card|
 Swampcycling|cost|
 Swampwalk|new|
 Totem armor|new|
+Toxic|number|
 Training|new|
 Trample|instance|
 Tribute|number|
