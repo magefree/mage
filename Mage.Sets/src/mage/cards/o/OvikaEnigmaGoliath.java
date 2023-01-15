@@ -48,7 +48,7 @@ public final class OvikaEnigmaGoliath extends CardImpl {
         // Ward--{3}, Pay 3 life.
         this.addAbility(new WardAbility(new CompositeCost(
                 new GenericManaCost(2), new PayLifeCost(3), "{3}, Pay 3 life"
-        )));
+        ), false));
 
         // Whenever you cast a noncreature spell, create X 1/1 red Phyrexian Goblin creature tokens, where X is the mana value of that spell. They gain haste until end of turn.
         this.addAbility(new SpellCastControllerTriggeredAbility(
