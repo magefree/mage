@@ -852,7 +852,7 @@
 |Generate|TOK:NEM|Saproling|1||SaprolingBurstToken|
 |Generate|TOK:NEM|Saproling|2||SaprolingToken|
 |Generate|TOK:NPH|Beast|||BeastToken|
-|Generate|TOK:NPH|Phyrexian Goblin|||PhyrexianGoblinToken|
+|Generate|TOK:NPH|Phyrexian Goblin|||PhyrexianGoblinHasteToken|
 |Generate|TOK:NPH|Phyrexian Golem|||PhyrexianGolemToken|
 |Generate|TOK:NPH|Phyrexian Myr|||PhyrexianMyrToken|
 |Generate|TOK:ODY|Bear|||BearToken|
