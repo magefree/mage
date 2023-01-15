@@ -21,6 +21,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         this.hasBoosters = false; // temporary
 
         cards.add(new SetCardInfo("Argentum Masticore", 222, Rarity.RARE, mage.cards.a.ArgentumMasticore.class));
+        cards.add(new SetCardInfo("Black Sun's Twilight", 84, Rarity.RARE, mage.cards.b.BlackSunsTwilight.class));
         cards.add(new SetCardInfo("Blackcleave Cliffs", 248, Rarity.RARE, mage.cards.b.BlackcleaveCliffs.class));
         cards.add(new SetCardInfo("Bloated Contaminator", 159, Rarity.RARE, mage.cards.b.BloatedContaminator.class));
         cards.add(new SetCardInfo("Blue Sun's Twilight", 43, Rarity.RARE, mage.cards.b.BlueSunsTwilight.class));
