@@ -6,6 +6,7 @@ import mage.constants.Outcome;
 import mage.counters.Counter;
 import mage.filter.common.FilterPermanentOrPlayerWithCounter;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
@@ -86,6 +87,10 @@ public class ProliferateEffect extends OneShotEffect {
                 }
             }
         }
+        game.fireEvent(GameEvent.getEvent(
+                GameEvent.EventType.PROLIFERATED,
+                controller.getId(), source, controller.getId()
+        ));
         return true;
     }
 
