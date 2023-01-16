@@ -8,8 +8,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -17,12 +15,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.permanent.token.PhyrexianHorrorToken;
+import mage.game.permanent.token.PhyrexianHorrorRedToken;
 import mage.game.permanent.token.Token;
-import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.FixedTargets;
 
 /**
@@ -77,7 +73,7 @@ class UrabrasksForgeEffect extends OneShotEffect {
                 .map(permanent -> permanent.getCounters(game))
                 .map(counters -> counters.getCount(CounterType.OIL))
                 .orElse(0);
-        Token token = new PhyrexianHorrorToken(amount);
+        Token token = new PhyrexianHorrorRedToken(amount);
         token.putOntoBattlefield(1, game, source);
         game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
                 new SacrificeTargetEffect().setText("sacrifice it")
