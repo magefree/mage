@@ -11,10 +11,7 @@ import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldWithC
 import mage.abilities.hint.Hint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
@@ -44,7 +41,7 @@ public final class RazorlashTransmogrant extends CardImpl {
 
         // {4}{B}{B}: Return Razorlash Transmogrant from your graveyard to the battlefield with a +1/+1 counter on it. This ability costs {4} less to activate if an opponent controls four or more nonbasic lands.
         Ability ability = new SimpleActivatedAbility(
-                new ReturnSourceFromGraveyardToBattlefieldWithCounterEffect(
+                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldWithCounterEffect(
                         CounterType.P1P1.createInstance(), false
                 ), new ManaCostsImpl<>("{4}{B}{B}")
         );
