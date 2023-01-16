@@ -92,7 +92,8 @@ class KarnLivingLegacyEffect extends OneShotEffect {
             player.moveCards(card, Zone.HAND, source, game);
         }
         cards.retainZone(Zone.LIBRARY, game);
-        player.putCardsOnBottomOfLibrary(card, game, source, false);
+        cards.remove(card);
+        player.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;
     }
 }
