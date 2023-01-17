@@ -56,6 +56,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 274, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tablet of Compleation", 245, Rarity.RARE, mage.cards.t.TabletOfCompleation.class));
         cards.add(new SetCardInfo("The Monumental Facade", 255, Rarity.RARE, mage.cards.t.TheMonumentalFacade.class));
+        cards.add(new SetCardInfo("Thrun, Breaker of Silence", 186, Rarity.RARE, mage.cards.t.ThrunBreakerOfSilence.class));
         cards.add(new SetCardInfo("Tyvar, Jubilant Brawler", 218, Rarity.RARE, mage.cards.t.TyvarJubilantBrawler.class));
         cards.add(new SetCardInfo("Unctus Grand Metatect", 75, Rarity.RARE, mage.cards.u.UnctusGrandMetatect.class));
         cards.add(new SetCardInfo("Urabrask's Forge", 153, Rarity.RARE, mage.cards.u.UrabrasksForge.class));
