@@ -741,6 +741,15 @@ public final class StaticFilters {
         FILTER_SPELL_OR_ABILITY_OPPONENTS.setLockedFilter(true);
     }
 
+    public static final FilterStackObject FILTER_SPELL_OR_ABILITY_OPPONENTS_NON_GREEN = new FilterStackObject("a nongreen spell or ability an opponent controls");
+
+    static {
+        FILTER_SPELL_OR_ABILITY_OPPONENTS_NON_GREEN.add(Predicates.not(new ColorPredicate(ObjectColor.GREEN)));
+        FILTER_SPELL_OR_ABILITY_OPPONENTS_NON_GREEN.add(TargetController.OPPONENT.getControllerPredicate());
+        FILTER_SPELL_OR_ABILITY_OPPONENTS_NON_GREEN.setLockedFilter(true);
+
+    }
+
     public static final FilterStackObject FILTER_SPELL_OR_ABILITY = new FilterStackObject();
 
     static {
