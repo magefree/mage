@@ -12,6 +12,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.decorator.ConditionalGainActivatedAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
@@ -67,12 +68,12 @@ public final class TheSeedcore extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }*/
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new ConditionalGainActivatedAbility(Zone.BATTLEFIELD,
                 new BoostTargetEffect(2, 1, Duration.EndOfTurn),
-                new GenericManaCost(0),
-                CorruptedCondition.instance, "Activate only if an opponent has three or more poison counters.").setAbilityWord(AbilityWord.CORRUPTED).addHint(CorruptedCondition.getHint());
+                new TapSourceCost(),
+                CorruptedCondition.instance,
+                "Activate only if an opponent has three or more poison counters.").setAbilityWord(AbilityWord.CORRUPTED).addHint(CorruptedCondition.getHint());
         ability.addTarget(new TargetCreaturePermanent(filter));
-        ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
 
