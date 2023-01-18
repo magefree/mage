@@ -74,7 +74,7 @@ public final class TheSeedcore extends CardImpl {
                 new TapSourceCost(),
                 CorruptedCondition.instance,
                 "Activate only if an opponent has three or more poison counters.").setAbilityWord(AbilityWord.CORRUPTED).addHint(CorruptedCondition.getHint());
-        //ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 
