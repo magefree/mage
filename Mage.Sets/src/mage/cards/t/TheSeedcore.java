@@ -68,12 +68,13 @@ public final class TheSeedcore extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }*/
-        Ability ability = new ConditionalGainActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new ConditionalActivatedAbility(
+                Zone.BATTLEFIELD,
                 new BoostTargetEffect(2, 1, Duration.EndOfTurn),
                 new TapSourceCost(),
                 CorruptedCondition.instance,
                 "Activate only if an opponent has three or more poison counters.").setAbilityWord(AbilityWord.CORRUPTED).addHint(CorruptedCondition.getHint());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        //ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 
