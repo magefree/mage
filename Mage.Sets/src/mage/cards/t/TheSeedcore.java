@@ -4,19 +4,11 @@ import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CorruptedCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.decorator.ConditionalGainActivatedAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
@@ -24,15 +16,12 @@ import mage.abilities.mana.conditional.CreatureCastManaCondition;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -58,22 +47,12 @@ public final class TheSeedcore extends CardImpl {
         // {T}: Add one mana of any color. Spend this mana only to cast Phyrexian creature spells.
         this.addAbility(new ConditionalAnyColorManaAbility(new TapSourceCost(), 1, new TheSeedcoreManaBuilder(), true));
         // Corrupted -- {T}: Target 1/1 creature gets +2/+1 until end of turn. Activate only if an opponent has three or more poison counters.
-       /* Effect effect = new BoostTargetEffect(2,1,Duration.EndOfTurn);
-        Ability ability = new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD,
-                effect,
-                new TapSourceCost(),
-                new TheSeedcoreManaCondition()
-                );
-        ability.addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(ability);
-    }*/
         Ability ability = new ConditionalActivatedAbility(
                 Zone.BATTLEFIELD,
                 new BoostTargetEffect(2, 1, Duration.EndOfTurn),
                 new TapSourceCost(),
                 CorruptedCondition.instance,
-                "Activate only if an opponent has three or more poison counters.").setAbilityWord(AbilityWord.CORRUPTED).addHint(CorruptedCondition.getHint());
+                "{T}: Target 1/1 creature gets +2/+1 until end of turn. Activate only if an opponent has three or more poison counters.").setAbilityWord(AbilityWord.CORRUPTED).addHint(CorruptedCondition.getHint());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
@@ -125,24 +104,3 @@ class TheSeedcoreManaCondition extends CreatureCastManaCondition {
     }
 }
 
-class TheSeedcoreCondition implements Condition {
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Set<UUID> opponents = game.getOpponents(source.getControllerId());
-        for (UUID opponentUuid : opponents) {
-            Player opponent = game.getPlayer(opponentUuid);
-            if (opponent != null
-                    && opponent.isInGame()
-                    && opponent.getCounters().getCount(CounterType.POISON) >= 3) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "An opponent has three or more poison counters.";
-    }
-}
