@@ -73,7 +73,7 @@ public final class TheSeedcore extends CardImpl {
                 new BoostTargetEffect(2, 1, Duration.EndOfTurn),
                 new TapSourceCost(),
                 CorruptedCondition.instance,
-                "Activate only if an opponent has three or more poison counters.").setAbilityWord(AbilityWord.CORRUPTED).addHint(CorruptedCondition.getHint());
+                "Activate only if an opponent has three or more poison counters.").addHint(CorruptedCondition.getHint());
         //ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
