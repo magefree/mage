@@ -177,6 +177,7 @@ Oath of the Gatewatch|OathOfTheGatewatch|
 Odyssey|Odyssey|
 Onslaught|Onslaught|
 Phyrexia: All Will Be One|PhyrexiaAllWillBeOne|
+Phyrexia: All Will Be One Commander|PhyrexiaAllWillBeOneCommander|
 Planar Chaos|PlanarChaos|
 Planechase|Planechase|
 Planechase 2012 Edition|Planechase2012Edition|

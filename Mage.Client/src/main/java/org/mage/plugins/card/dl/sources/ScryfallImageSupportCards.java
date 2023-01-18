@@ -525,6 +525,7 @@ public class ScryfallImageSupportCards {
             add("J22"); // Jumpstart 2022
             add("SLC"); // Secret Lair 30th Anniversary Countdown Kit
             add("ONE"); // Phyrexia: All Will Be One
+            add("ONC"); // Phyrexia: All Will Be One Commander
         }
     };
 
