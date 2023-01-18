@@ -106,8 +106,7 @@ class TheSeedcoreManaCondition extends CreatureCastManaCondition {
     }
 }
 
-enum TheSeedcoreCondition implements Condition {
-    instance;
+class TheSeedcoreCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -121,5 +120,10 @@ enum TheSeedcoreCondition implements Condition {
             }
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "An opponent has three or more poison counters.";
     }
 }
