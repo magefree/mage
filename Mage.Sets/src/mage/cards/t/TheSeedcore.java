@@ -22,6 +22,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.Set;
 import java.util.UUID;
@@ -54,6 +55,7 @@ public final class TheSeedcore extends CardImpl {
                 new TapSourceCost(),
                 new TheSeedcoreManaCondition()
                 );
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 
