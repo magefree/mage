@@ -3,7 +3,6 @@ package mage.game.permanent.token;
 import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.util.RandomUtil;
 
 import java.util.Arrays;
 
@@ -41,6 +40,9 @@ public final class MetallurgicSummoningsConstructToken extends TokenImpl {
 
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("KLD")) {
             setTokenType(2);
+        }
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C21")) {
+            setTokenType(1);
         }
     }
 }
