@@ -28,7 +28,7 @@ public final class GlisteningSphere extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // When Glistening Sphere enters the battlefield, proliferate.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ProliferateEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ProliferateEffect(false)));
 
         // {T}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
