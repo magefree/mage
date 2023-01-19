@@ -21,6 +21,6 @@ public final class AlchemyStreetsOfNewCappenaRebalanced extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("A-Buy your Silence", 6, Rarity.COMMON, mage.cards.b.BuyYourSilenceAlchemy.class));
+        cards.add(new SetCardInfo("A-Buy your Silence", "A-6", Rarity.COMMON, mage.cards.b.BuyYourSilenceAlchemy.class));
     }
 }
