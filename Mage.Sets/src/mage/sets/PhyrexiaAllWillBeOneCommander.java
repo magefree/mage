@@ -18,5 +18,7 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
     private PhyrexiaAllWillBeOneCommander() {
         super("Phyrexia: All Will Be One Commander", "ONC", ExpansionSet.buildDate(2023, 1, 10), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
+
+        cards.add(new SetCardInfo("Glistening Sphere", 20, Rarity.RARE, mage.cards.g.GlisteningSphere.class));
     }
 }
