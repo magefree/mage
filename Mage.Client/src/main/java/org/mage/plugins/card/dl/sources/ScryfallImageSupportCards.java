@@ -510,6 +510,7 @@ public class ScryfallImageSupportCards {
             add("NEC"); // Neon Dynasty Commander
             add("SNC"); // Streets of New Capenna
             add("NCC"); // New Capenna Commander
+            add("ASNC"); //Alchemy Streets of New Cappena Rebalanced
             add("SLX"); // Universes Within
             add("CLB"); // Commander Legends: Battle for Baldur's Gate
             add("2X2"); // Double Masters 2022
@@ -981,6 +982,8 @@ public class ScryfallImageSupportCards {
             put("SLD/Propaganda/381b", "https://c1.scryfall.com/file/scryfall-cards/large/back/3/e/3e3f0bcd-0796-494d-bf51-94b33c1671e9.jpg");
             put("SLD/Stitch in Time/382", "https://api.scryfall.com/cards/sld/382/");
             put("SLD/Stitch in Time/382b", "https://c1.scryfall.com/file/scryfall-cards/large/back/0/8/087c3a0d-c710-4451-989e-596b55352184.jpg");
+            //Rebalanced streets of new cappena draft cards
+            put("SNC/Buy Your Silence/A-6","https://api.scryfall.com/cards/snc/A-6/");
         }
     };
 
