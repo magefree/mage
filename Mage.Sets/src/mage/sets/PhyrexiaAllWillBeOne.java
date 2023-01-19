@@ -66,6 +66,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Serum Sovereign", 405, Rarity.RARE, mage.cards.s.SerumSovereign.class));
         cards.add(new SetCardInfo("Skrelv's Hive", 34, Rarity.RARE, mage.cards.s.SkrelvsHive.class));
         cards.add(new SetCardInfo("Swamp", 274, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swooping Lookout", 35, Rarity.UNCOMMON, mage.cards.s.SwoopingLookout.class));
         cards.add(new SetCardInfo("Tablet of Compleation", 245, Rarity.RARE, mage.cards.t.TabletOfCompleation.class));
         cards.add(new SetCardInfo("The Monumental Facade", 255, Rarity.RARE, mage.cards.t.TheMonumentalFacade.class));
         cards.add(new SetCardInfo("The Seedcore", 259, Rarity.RARE, mage.cards.t.TheSeedcore.class));
