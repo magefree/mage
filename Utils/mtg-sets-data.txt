@@ -9,6 +9,7 @@ Seventh Edition|7ED|
 Eighth Edition|8ED|
 Ninth Edition|9ED|
 Alchemy: Innistrad|Y22|
+Alchemy: Streets of New Cappena Rebalanced|ASNC|
 Adventures in the Forgotten Realms|AFR|
 Forgotten Realms Commander|AFC|
 Aether Revolt|AER|
