@@ -45,7 +45,7 @@ public final class StaffOfCompleation extends CardImpl {
         this.addAbility(ability);
 
         // {T}, Pay 3 life: Proliferate.
-        ability = new SimpleActivatedAbility(new ProliferateEffect(), new TapSourceCost());
+        ability = new SimpleActivatedAbility(new ProliferateEffect(false), new TapSourceCost());
         ability.addCost(new PayLifeCost(3));
         this.addAbility(ability);
 
