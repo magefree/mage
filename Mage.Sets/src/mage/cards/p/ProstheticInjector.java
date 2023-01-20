@@ -33,7 +33,7 @@ public final class ProstheticInjector extends CardImpl {
         ).setText("and has toxic 1"));
 
         // Equip {1}
-        this.addAbility(new EquipAbility(1));
+        this.addAbility(new EquipAbility(1, false));
     }
 
     private ProstheticInjector(final ProstheticInjector card) {

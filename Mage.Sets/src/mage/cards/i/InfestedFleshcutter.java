@@ -32,7 +32,7 @@ public final class InfestedFleshcutter extends CardImpl {
         this.addAbility(new AttacksAttachedTriggeredAbility(new CreateTokenEffect(new PhyrexianMiteToken())));
 
         // Equip {2}{W}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{2}{W}")));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{2}{W}"), false));
     }
 
     private InfestedFleshcutter(final InfestedFleshcutter card) {

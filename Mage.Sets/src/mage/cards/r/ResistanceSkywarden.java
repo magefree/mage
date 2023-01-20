@@ -24,7 +24,7 @@ public final class ResistanceSkywarden extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Reach
         this.addAbility(ReachAbility.getInstance());
