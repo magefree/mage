@@ -32,7 +32,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author Grath
  */
 public final class NobleHeritage extends CardImpl {
 
