@@ -87,6 +87,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("The Seedcore", 259, Rarity.RARE, mage.cards.t.TheSeedcore.class));
         cards.add(new SetCardInfo("Thrun, Breaker of Silence", 186, Rarity.RARE, mage.cards.t.ThrunBreakerOfSilence.class));
         cards.add(new SetCardInfo("Tyrranax Rex", 189, Rarity.MYTHIC, mage.cards.t.TyrranaxRex.class));
+        cards.add(new SetCardInfo("Tyvar's Stand", 190, Rarity.UNCOMMON, mage.cards.t.TyvarsStand.class));
         cards.add(new SetCardInfo("Tyvar, Jubilant Brawler", 218, Rarity.RARE, mage.cards.t.TyvarJubilantBrawler.class));
         cards.add(new SetCardInfo("Unctus, Grand Metatect", 75, Rarity.RARE, mage.cards.u.UnctusGrandMetatect.class));
         cards.add(new SetCardInfo("Unnatural Restoration", 191, Rarity.UNCOMMON, mage.cards.u.UnnaturalRestoration.class));
