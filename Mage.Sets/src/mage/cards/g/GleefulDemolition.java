@@ -61,6 +61,7 @@ class GleefulDemolitionEffect extends DestroyTargetEffect {
     public boolean apply(Game game, Ability source){
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game,source));
+        permanent.destroy(source,boolean,false);
         if (
                 permanent == null || player == null) {
             return false;
