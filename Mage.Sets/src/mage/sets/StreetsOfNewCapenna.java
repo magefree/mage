@@ -34,6 +34,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         this.ratioBoosterMythic = 7;
         this.maxCardNumberInBooster = 281;
 
+        cards.add(new SetCardInfo("A-Celebrity Fencer", "A-7", Rarity.COMMON, mage.cards.c.CelebrityFencerAlchemy.class));
         cards.add(new SetCardInfo("A Little Chat", 47, Rarity.UNCOMMON, mage.cards.a.ALittleChat.class));
         cards.add(new SetCardInfo("All-Seeing Arbiter", 286, Rarity.MYTHIC, mage.cards.a.AllSeeingArbiter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("All-Seeing Arbiter", 34, Rarity.MYTHIC, mage.cards.a.AllSeeingArbiter.class, NON_FULL_USE_VARIOUS));
