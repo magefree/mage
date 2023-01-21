@@ -41,7 +41,7 @@ public final class HexgoldSlash extends CardImpl {
 class HexgoldSlashEffect extends OneShotEffect{
     public HexgoldSlashEffect(){
         super(Outcome.Damage);
-        staticText = "{this} deals 2 damage to target creature. If that creature has toxic, {this} deals 4 damage instead}";
+        staticText = "{this} deals 2 damage to target creature. If that creature has toxic, {this} deals 4 damage instead";
     }
 
     public HexgoldSlashEffect(final HexgoldSlashEffect effect){
@@ -57,8 +57,8 @@ class HexgoldSlashEffect extends OneShotEffect{
     public boolean apply(Game game, Ability source){
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null){
-            if (permanent.getAbilities().(ToxicAbility.getInstance())) {
-                permanent.damage(2,source,game);
+            if (permanent.getAbilities(game).containsClass(ToxicAbility.class)) {
+                permanent.damage(4,source,game);
             }
             else{
                 permanent.damage(2,source,game);
