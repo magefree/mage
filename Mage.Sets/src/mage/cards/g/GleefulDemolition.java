@@ -31,7 +31,7 @@ public final class GleefulDemolition extends CardImpl {
         // Destroy target artifact. If you controlled that artifact, creature three 1/1 red Phyrexian Goblin creature tokens.
         this.getSpellAbility().addTarget(new TargetPermanent());
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        //this.getSpellAbility().addEffect(new GleefulDemolitionEffect());
+        this.getSpellAbility().addEffect(new GleefulDemolitionEffect());
     }
 
     private GleefulDemolition(final GleefulDemolition card) {
