@@ -1,14 +1,7 @@
 package mage.cards.h;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.dynamicvalue.IntPlusDynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.keyword.InfectAbility;
 import mage.abilities.keyword.ToxicAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -17,6 +10,8 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
