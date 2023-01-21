@@ -1,6 +1,5 @@
 package mage.cards.n;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -9,19 +8,17 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControllerEffect;
 import mage.abilities.keyword.ProtectionAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
+import mage.filter.FilterPlayer;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.other.PlayerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -149,57 +146,15 @@ class NobleHeritageEffect extends OneShotEffect {
             }
             for (UUID playerId : players) {
                 if (!Objects.equals(playerId, source.getControllerId())) {
+                    FilterPlayer filter = new FilterPlayer();
+                    filter.add(new PlayerIdPredicate(playerId));
                     game.addEffect(new GainAbilityControllerEffect(
-                            new NobleHeritageProtectionAbility(playerId), Duration.UntilYourNextTurn
+                            new ProtectionAbility(filter), Duration.UntilYourNextTurn
                     ), source);
                 }
             }
             return true;
         }
         return false;
-    }
-}
-
-class NobleHeritageProtectionAbility extends ProtectionAbility {
-
-    private final UUID playerId;
-
-    public NobleHeritageProtectionAbility(UUID playerId) {
-        super(new FilterCard());
-        this.playerId = playerId;
-    }
-
-    public NobleHeritageProtectionAbility(final NobleHeritageProtectionAbility ability) {
-        super(ability);
-        this.playerId = ability.playerId;
-    }
-
-    @Override
-    public NobleHeritageProtectionAbility copy() {
-        return new NobleHeritageProtectionAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "{this} has protection from the chosen player.";
-    }
-
-    @Override
-    public boolean canTarget(MageObject source, Game game) {
-        if (playerId != null && source != null) {
-            if (source instanceof Permanent) {
-                return !((Permanent) source).isControlledBy(playerId);
-            }
-            if (source instanceof Spell) {
-                return !((Spell) source).isControlledBy(playerId);
-            }
-            if (source instanceof StackObject) {
-                return !((StackObject) source).isControlledBy(playerId);
-            }
-            if (source instanceof Card) { // e.g. for Vengeful Pharaoh
-                return !((Card) source).isOwnedBy(playerId);
-            }
-        }
-        return true;
     }
 }
