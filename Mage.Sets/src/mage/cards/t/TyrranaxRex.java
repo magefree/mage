@@ -34,7 +34,7 @@ public final class TyrranaxRex extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Ward {4}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{4}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{4}"), false));
 
         // Haste
         this.addAbility(HasteAbility.getInstance());

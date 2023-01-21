@@ -4,6 +4,7 @@ import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
 import mage.abilities.icon.abilities.InfectAbilityIcon;
 import mage.constants.Zone;
+import mage.util.CardUtil;
 
 import java.io.ObjectStreamException;
 
@@ -26,7 +27,8 @@ public class ToxicAbility extends StaticAbility {
 
     @Override
     public String getRule() {
-        return "toxic " + amount + " <i>(Players dealt combat damage by this creature also get a poison counter.)</i>";
+        return "toxic " + amount + " <i>(Players dealt combat damage by this creature also get " +
+                CardUtil.numberToText(amount, "a") + " poison counter" + (amount > 1 ? "s" : "") + ".)</i>";
     }
 
     @Override
