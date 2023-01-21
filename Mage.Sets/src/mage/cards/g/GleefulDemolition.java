@@ -43,7 +43,7 @@ public final class GleefulDemolition extends CardImpl {
 
 class GleefulDemolitionEffect extends DestroyTargetEffect {
     GleefulDemolitionEffect(){
-        ;
+
         staticText = "destroy target artifact. " +
                 "if you controlled that artifact, create three 1/1 red Phyrexian Goblin creature tokens";
     }
@@ -61,7 +61,7 @@ class GleefulDemolitionEffect extends DestroyTargetEffect {
     public boolean apply(Game game, Ability source){
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game,source));
-        permanent.destroy(source,boolean,false);
+
         if (
                 permanent == null || player == null) {
             return false;
@@ -72,6 +72,6 @@ class GleefulDemolitionEffect extends DestroyTargetEffect {
             token.putOntoBattlefield(3,game,source);
 
         }
-        return true;
+        return super.apply(game,source);
     }
 }
