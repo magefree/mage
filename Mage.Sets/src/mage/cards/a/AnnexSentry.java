@@ -12,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
@@ -25,13 +26,14 @@ import java.util.UUID;
  */
 public final class AnnexSentry extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("Artifact or creature with cmc 3 or less");
+    private static final FilterPermanent filter = new FilterPermanent("artifact or creature an opponent controls with cmc 3 or less");
 
     static {
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN,4));
         filter.add(Predicates.or
                 (CardType.ARTIFACT.getPredicate(),
                 CardType.CREATURE.getPredicate()));
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public AnnexSentry(UUID ownerId, CardSetInfo setInfo) {
