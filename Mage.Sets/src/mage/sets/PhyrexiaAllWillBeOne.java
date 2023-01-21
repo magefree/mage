@@ -20,6 +20,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         this.blockName = "Phyrexia: All Will Be One";
         this.hasBoosters = false; // temporary
 
+        cards.add(new SetCardInfo("Annex Sentry", 2, Rarity.UNCOMMON, mage.cards.a.AnnexSentry.class));
         cards.add(new SetCardInfo("Anoint with Affliction", 81, Rarity.COMMON, mage.cards.a.AnointWithAffliction.class));
         cards.add(new SetCardInfo("Apostle of Invasion", 3, Rarity.UNCOMMON, mage.cards.a.ApostleOfInvasion.class));
         cards.add(new SetCardInfo("Archfiend of the Dross", 82, Rarity.RARE, mage.cards.a.ArchfiendOfTheDross.class));
