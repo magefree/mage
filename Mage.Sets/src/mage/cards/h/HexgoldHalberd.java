@@ -46,7 +46,7 @@ public final class HexgoldHalberd extends CardImpl {
         this.addAbility(ability.addHint(MyTurnHint.instance));
 
         // Equip {2}{R}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{2}{R}")));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{2}{R}"), false));
     }
 
     private HexgoldHalberd(final HexgoldHalberd card) {
