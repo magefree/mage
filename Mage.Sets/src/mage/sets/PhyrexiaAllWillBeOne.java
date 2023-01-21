@@ -63,6 +63,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Minor Misstep", 64, Rarity.UNCOMMON, mage.cards.m.MinorMisstep.class));
         cards.add(new SetCardInfo("Mirran Safehouse", 232, Rarity.RARE, mage.cards.m.MirranSafehouse.class));
         cards.add(new SetCardInfo("Mirrex", 254, Rarity.RARE, mage.cards.m.Mirrex.class));
+        cards.add(new SetCardInfo("Mite Overseer", 404, Rarity.RARE, mage.cards.m.MiteOverseer.class));
         cards.add(new SetCardInfo("Mondrak, Glory Dominus", 23, Rarity.MYTHIC, mage.cards.m.MondrakGloryDominus.class));
         cards.add(new SetCardInfo("Monument to Perfection", 233, Rarity.RARE, mage.cards.m.MonumentToPerfection.class));
         cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
