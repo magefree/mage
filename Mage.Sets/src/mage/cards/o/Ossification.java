@@ -31,7 +31,7 @@ public final class Ossification extends CardImpl {
         filter.add(SuperType.BASIC.getPredicate());
     }
 
-    private static final FilterPermanent filter2 = new FilterPermanent("creature or planeswalker your opponent controls");
+    private static final FilterPermanent filter2 = new FilterPermanent("creature or planeswalker an opponent controls");
     static{
         filter2.add(Predicates.or(
                 CardType.PLANESWALKER.getPredicate(),
