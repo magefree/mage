@@ -78,6 +78,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Resistance Reunited", 31, Rarity.UNCOMMON, mage.cards.r.ResistanceReunited.class));
         cards.add(new SetCardInfo("Resistance Skywarden", 146, Rarity.UNCOMMON, mage.cards.r.ResistanceSkywarden.class));
         cards.add(new SetCardInfo("Sawblade Scamp", 147, Rarity.COMMON, mage.cards.s.SawbladeScamp.class));
+        cards.add(new SetCardInfo("Scheming Aspirant", 107, Rarity.UNCOMMON, mage.cards.s.SchemingAspirant.class));
         cards.add(new SetCardInfo("Seachrome Coast", 258, Rarity.RARE, mage.cards.s.SeachromeCoast.class));
         cards.add(new SetCardInfo("Serum Sovereign", 405, Rarity.RARE, mage.cards.s.SerumSovereign.class));
         cards.add(new SetCardInfo("Sheoldred's Edict", 108, Rarity.UNCOMMON, mage.cards.s.SheoldredsEdict.class));
