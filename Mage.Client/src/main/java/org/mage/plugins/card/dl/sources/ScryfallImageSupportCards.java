@@ -984,7 +984,9 @@ public class ScryfallImageSupportCards {
             put("SLD/Stitch in Time/382b", "https://c1.scryfall.com/file/scryfall-cards/large/back/0/8/087c3a0d-c710-4451-989e-596b55352184.jpg");
             //Rebalanced streets of new cappena draft cards
             put("SNC/A-Buy Your Silence/A-6","https://api.scryfall.com/cards/snc/A-6/");
+            put("SNC/A-Case the Joint/A-37","https://api.scryfall.com/cards/snc/A-37/");
             put("SNC/A-Celebrity Fencer/A-7","https://api.scryfall.com/cards/snc/A-7/");
+            put("SNC/A-Speakeasy Server/A-32","https://api.scryfall.com/cards/snc/A-32/");
             
         }
     };
