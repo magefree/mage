@@ -71,11 +71,12 @@ class GleefulDemolitionEffect extends OneShotEffect {
             return false;
         }
         boolean isMine = permanent.isControlledBy(source.getControllerId());
+        permanent.destroy(source, game, false);
         if (isMine) {
             Token token = new PhyrexianGoblinToken();
             token.putOntoBattlefield(3,game,source);
 
         }
-        return super.apply(game,source);
+        return true;
     }
 }
