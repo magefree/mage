@@ -9,6 +9,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -47,7 +48,7 @@ public final class GleefulDemolition extends CardImpl {
 
 class GleefulDemolitionEffect extends OneShotEffect {
     GleefulDemolitionEffect(){
-        super(outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "destroy target artifact. " +
                 "if you controlled that artifact, create three 1/1 red Phyrexian Goblin creature tokens";
     }
