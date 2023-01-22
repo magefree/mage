@@ -987,6 +987,8 @@ public class ScryfallImageSupportCards {
             put("SNC/A-Case the Joint/A-37","https://api.scryfall.com/cards/snc/A-37/");
             put("SNC/A-Celebrity Fencer/A-7","https://api.scryfall.com/cards/snc/A-7/");
             put("SNC/A-Deal Gone Bad/A-74","https://api.scryfall.com/cards/snc/A-74/");
+            put("SNC/A-Demon's Due/A-75","https://api.scryfall.com/cards/snc/A-75/");
+            put("SNC/A-Graveyard Shift/A-81","https://api.scryfall.com/cards/snc/A-81/");
             put("SNC/A-Psionic Snoop/A-53","https://api.scryfall.com/cards/snc/A-53/");
             put("SNC/A-Public Enemy/A-55","https://api.scryfall.com/cards/snc/A-55/");
             put("SNC/A-Sewer Crocodile/A-60","https://api.scryfall.com/cards/snc/A-60/");

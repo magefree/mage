@@ -38,6 +38,8 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("A-Case the Joint", "A-37", Rarity.COMMON, mage.cards.c.CaseTheJointAlchemy.class)); 
         cards.add(new SetCardInfo("A-Celebrity Fencer", "A-7", Rarity.COMMON, mage.cards.c.CelebrityFencerAlchemy.class));
         cards.add(new SetCardInfo("A-Deal Gone Bad", "A-74", Rarity.COMMON, mage.cards.d.DealGoneBadAlchemy.class));
+        cards.add(new SetCardInfo("A-Demon's Due", "A-75", Rarity.COMMON, mage.cards.d.DemonsDueAlchemy.class));
+        cards.add(new SetCardInfo("A-Graveyard Shift", "A-81", Rarity.UNCOMMON, mage.cards.d.DemonsDueAlchemy.class));
         cards.add(new SetCardInfo("A-Psionic Snoop", "A-53", Rarity.COMMON, mage.cards.p.PsionicSnoopAlchemy.class));
         cards.add(new SetCardInfo("A-Public Enemy", "A-55", Rarity.UNCOMMON, mage.cards.p.PublicEnemyAlchemy.class));
         cards.add(new SetCardInfo("A-Sewer Crocodile", "A-57", Rarity.COMMON, mage.cards.s.SewerCrocodileAlchemy.class));
