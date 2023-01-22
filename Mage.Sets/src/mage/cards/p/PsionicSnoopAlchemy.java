@@ -13,16 +13,17 @@ import java.util.UUID;
 
 /**
  * @author TheElk801
+ * @author chesse20
  */
-public final class PsionicSnoop extends CardImpl {
+public final class PsionicSnoopAlchemy extends CardImpl {
 
-    public PsionicSnoop(UUID ownerId, CardSetInfo setInfo) {
+    public PsionicSnoopAlchemy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(0);
-        this.toughness = new MageInt(3);
+        this.toughness = new MageInt(4); //buffed toughness
 
         // Flash
         this.addAbility(FlashAbility.getInstance());
@@ -31,7 +32,7 @@ public final class PsionicSnoop extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ConniveSourceEffect()));
     }
 
-    private PsionicSnoop(final PsionicSnoopAlchemy card) {
+    private PsionicSnoopAlchemy(final PsionicSnoopAlchemy card) {
         super(card);
     }
 

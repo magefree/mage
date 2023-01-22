@@ -23,7 +23,7 @@ public final class CaseTheJointAlchemy extends CardImpl {
     public CaseTheJointAlchemy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{U}");
 
-        // Draw two cards, then look at the top card of each player's library.
+        // Draw three cards, then look at the top card of each player's library.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
         this.getSpellAbility().addEffect(new CaseTheJointAlchemyEffect());
     }

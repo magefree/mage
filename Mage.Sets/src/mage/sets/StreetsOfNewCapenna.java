@@ -35,8 +35,9 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         this.maxCardNumberInBooster = 281;
 
         cards.add(new SetCardInfo("A-Buy your Silence", "A-6", Rarity.COMMON, mage.cards.b.BuyYourSilenceAlchemy.class));
-        cards.add(new SetCardInfo("A-Case the Joint", "A-7", Rarity.COMMON, mage.cards.c.CaseTheJointAlchemy.class)); 
+        cards.add(new SetCardInfo("A-Case the Joint", "A-37", Rarity.COMMON, mage.cards.c.CaseTheJointAlchemy.class)); 
         cards.add(new SetCardInfo("A-Celebrity Fencer", "A-7", Rarity.COMMON, mage.cards.c.CelebrityFencerAlchemy.class));
+        cards.add(new SetCardInfo("A-Psionic Snoop", "A-53", Rarity.COMMON, mage.cards.p.PsionicSnoopAlchemy.class));
         cards.add(new SetCardInfo("A-Speakeasy Server", "A-32", Rarity.COMMON, mage.cards.s.SpeakeasyServerAlchemy.class));
         cards.add(new SetCardInfo("A Little Chat", 47, Rarity.UNCOMMON, mage.cards.a.ALittleChat.class));
         cards.add(new SetCardInfo("All-Seeing Arbiter", 286, Rarity.MYTHIC, mage.cards.a.AllSeeingArbiter.class, NON_FULL_USE_VARIOUS));
@@ -338,7 +339,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Prizefight", 154, Rarity.COMMON, mage.cards.p.Prizefight.class));
         cards.add(new SetCardInfo("Professional Face-Breaker", 116, Rarity.RARE, mage.cards.p.ProfessionalFaceBreaker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Professional Face-Breaker", 426, Rarity.RARE, mage.cards.p.ProfessionalFaceBreaker.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Psionic Snoop", 53, Rarity.COMMON, mage.cards.p.PsionicSnoop.class));
+        cards.add(new SetCardInfo("Psionic Snoop", 53, Rarity.COMMON, mage.cards.p.PsionicSnoopAlchemy.class));
         cards.add(new SetCardInfo("Psychic Pickpocket", 54, Rarity.UNCOMMON, mage.cards.p.PsychicPickpocket.class));
         cards.add(new SetCardInfo("Public Enemy", 55, Rarity.UNCOMMON, mage.cards.p.PublicEnemy.class));
         cards.add(new SetCardInfo("Pugnacious Pugilist", 117, Rarity.UNCOMMON, mage.cards.p.PugnaciousPugilist.class));

@@ -986,6 +986,7 @@ public class ScryfallImageSupportCards {
             put("SNC/A-Buy Your Silence/A-6","https://api.scryfall.com/cards/snc/A-6/");
             put("SNC/A-Case the Joint/A-37","https://api.scryfall.com/cards/snc/A-37/");
             put("SNC/A-Celebrity Fencer/A-7","https://api.scryfall.com/cards/snc/A-7/");
+            put("SNC/A-Psionic Snoop /A-53","https://api.scryfall.com/cards/snc/A-53/");
             put("SNC/A-Speakeasy Server/A-32","https://api.scryfall.com/cards/snc/A-32/");
             
         }
