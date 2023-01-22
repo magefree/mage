@@ -44,6 +44,7 @@ public final class JaceThePerfectedMind extends CardImpl {
         // -2: Target player mills three cards. Then if a graveyard has twenty or more cards in it, you draw three cards. Otherwise, you draw a card.
         Effect effect2 = new JaceThePerfectedMindEffect();
         Ability ability2 = new LoyaltyAbility(new JaceThePerfectedMindEffect(), -2);
+        ability2.addTarget(new TargetPlayer());
         this.addAbility(ability2);
         // -X: Target player mills three times X cards.
         Ability ability3 = new LoyaltyAbility(new MillCardsTargetEffect(new MultipliedValue(GetXLoyaltyValue.instance, 3)));
