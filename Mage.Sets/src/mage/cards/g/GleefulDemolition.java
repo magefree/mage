@@ -45,9 +45,9 @@ public final class GleefulDemolition extends CardImpl {
     }
 }
 
-class GleefulDemolitionEffect extends DestroyTargetEffect {
+class GleefulDemolitionEffect extends OneShotEffect {
     GleefulDemolitionEffect(){
-
+        super(outcome.Benefit);
         staticText = "destroy target artifact. " +
                 "if you controlled that artifact, create three 1/1 red Phyrexian Goblin creature tokens";
     }
