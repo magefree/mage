@@ -35,6 +35,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Blue Sun's Twilight", 43, Rarity.RARE, mage.cards.b.BlueSunsTwilight.class));
         cards.add(new SetCardInfo("Bonepicker Skirge", 86, Rarity.COMMON, mage.cards.b.BonepickerSkirge.class));
         cards.add(new SetCardInfo("Cacophony Scamp", 124, Rarity.UNCOMMON, mage.cards.c.CacophonyScamp.class));
+        cards.add(new SetCardInfo("Chittering Skitterling", 87, Rarity.COMMON, mage.cards.c.ChitteringSkitterling.class));
         cards.add(new SetCardInfo("Copperline Gorge", 249, Rarity.RARE, mage.cards.c.CopperlineGorge.class));
         cards.add(new SetCardInfo("Darkslick Shores", 372, Rarity.RARE, mage.cards.d.DarkslickShores.class));
         cards.add(new SetCardInfo("Dragonwing Glider", 126, Rarity.RARE, mage.cards.d.DragonwingGlider.class));
