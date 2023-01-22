@@ -106,6 +106,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Surgical Skullbomb", 243, Rarity.COMMON, mage.cards.s.SurgicalSkullbomb.class));
         cards.add(new SetCardInfo("Swamp", 274, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swooping Lookout", 35, Rarity.UNCOMMON, mage.cards.s.SwoopingLookout.class));
+        cards.add(new SetCardInfo("Sword of Forge and Frontier", 244, Rarity.MYTHIC, mage.cards.s.SwordOfForgeAndFrontier.class));
         cards.add(new SetCardInfo("Tablet of Compleation", 245, Rarity.RARE, mage.cards.t.TabletOfCompleation.class));
         cards.add(new SetCardInfo("Tamiyo's Immobilizer", 69, Rarity.UNCOMMON, mage.cards.t.TamiyosImmobilizer.class));
         cards.add(new SetCardInfo("The Filigree Sylex", 227, Rarity.RARE, mage.cards.t.TheFiligreeSylex.class));
