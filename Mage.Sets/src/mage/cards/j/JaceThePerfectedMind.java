@@ -91,6 +91,6 @@ class JaceThePerfectedMindEffect extends OneShotEffect{
 
     @Override
     public JaceThePerfectedMindEffect copy() {
-        return new JaceThePerfectedMindEffect();
+        return new JaceThePerfectedMindEffect(this);
     }
 }
