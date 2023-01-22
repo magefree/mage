@@ -37,7 +37,10 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("A-Buy your Silence", "A-6", Rarity.COMMON, mage.cards.b.BuyYourSilenceAlchemy.class));
         cards.add(new SetCardInfo("A-Case the Joint", "A-37", Rarity.COMMON, mage.cards.c.CaseTheJointAlchemy.class)); 
         cards.add(new SetCardInfo("A-Celebrity Fencer", "A-7", Rarity.COMMON, mage.cards.c.CelebrityFencerAlchemy.class));
+        cards.add(new SetCardInfo("A-Deal Gone Bad", "A-74", Rarity.COMMON, mage.cards.d.DealGoneBadAlchemy.class));
         cards.add(new SetCardInfo("A-Psionic Snoop", "A-53", Rarity.COMMON, mage.cards.p.PsionicSnoopAlchemy.class));
+        cards.add(new SetCardInfo("A-Public Enemy", "A-55", Rarity.UNCOMMON, mage.cards.p.PublicEnemyAlchemy.class));
+        cards.add(new SetCardInfo("A-Sewer Crocodile", "A-57", Rarity.COMMON, mage.cards.s.SewerCrocodileAlchemy.class));
         cards.add(new SetCardInfo("A-Speakeasy Server", "A-32", Rarity.COMMON, mage.cards.s.SpeakeasyServerAlchemy.class));
         cards.add(new SetCardInfo("A Little Chat", 47, Rarity.UNCOMMON, mage.cards.a.ALittleChat.class));
         cards.add(new SetCardInfo("All-Seeing Arbiter", 286, Rarity.MYTHIC, mage.cards.a.AllSeeingArbiter.class, NON_FULL_USE_VARIOUS));
@@ -404,7 +407,7 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("Scuttling Butler", 244, Rarity.UNCOMMON, mage.cards.s.ScuttlingButler.class));
         cards.add(new SetCardInfo("Security Bypass", 59, Rarity.COMMON, mage.cards.s.SecurityBypass.class));
         cards.add(new SetCardInfo("Security Rhox", 220, Rarity.UNCOMMON, mage.cards.s.SecurityRhox.class));
-        cards.add(new SetCardInfo("Sewer Crocodile", 60, Rarity.COMMON, mage.cards.s.SewerCrocodile.class));
+        cards.add(new SetCardInfo("Sewer Crocodile", 60, Rarity.COMMON, mage.cards.s.SewerCrocodileAlchemy.class));
         cards.add(new SetCardInfo("Shadow of Mortality", 287, Rarity.RARE, mage.cards.s.ShadowOfMortality.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shadow of Mortality", 94, Rarity.RARE, mage.cards.s.ShadowOfMortality.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shakedown Heavy", 421, Rarity.RARE, mage.cards.s.ShakedownHeavy.class, NON_FULL_USE_VARIOUS));

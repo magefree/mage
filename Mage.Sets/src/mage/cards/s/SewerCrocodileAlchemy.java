@@ -22,14 +22,14 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class SewerCrocodile extends CardImpl {
+public final class SewerCrocodileAlchemy extends CardImpl {
 
-    public SewerCrocodile(UUID ownerId, CardSetInfo setInfo) {
+    public SewerCrocodileAlchemy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}");
 
         this.subtype.add(SubType.CROCODILE);
         this.power = new MageInt(4);
-        this.toughness = new MageInt(6);
+        this.toughness = new MageInt(7);
 
         // {3}{U}: Sewer Crocodile can't be blocked this turn. This ability costs {3} less to activate if there are five or more mana values among cards in your graveyard.
         Ability ability = new SimpleActivatedAbility(
@@ -37,11 +37,11 @@ public final class SewerCrocodile extends CardImpl {
         );
         ability.addEffect(new InfoEffect("This ability costs {3} less to activate " +
                 "if there are five or more mana values among cards in your graveyard"));
-        ability.setCostAdjuster(SewerCrocodileAdjuster.instance);
+        ability.setCostAdjuster(SewerCrocodileAlchemyAdjuster.instance);
         this.addAbility(ability.addHint(DifferentManaValuesInGraveHint.instance));
     }
 
-    private SewerCrocodile(final SewerCrocodileAlchemy card) {
+    private SewerCrocodileAlchemy(final SewerCrocodileAlchemy card) {
         super(card);
     }
 
@@ -51,7 +51,7 @@ public final class SewerCrocodile extends CardImpl {
     }
 }
 
-enum SewerCrocodileAdjuster implements CostAdjuster {
+enum SewerCrocodileAlchemyAdjuster implements CostAdjuster {
     instance;
 
     @Override
