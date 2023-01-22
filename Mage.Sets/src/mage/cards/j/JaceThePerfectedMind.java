@@ -37,7 +37,7 @@ public final class JaceThePerfectedMind extends CardImpl {
 
         // +1: Until your next turn, up to one target creature gets -3/-0.
         Effect effect1 = new BoostTargetEffect(-3,0, Duration.UntilYourNextTurn);
-        effect1.setText("Until your next turn, up to one target creature gets -3/-0 v1");
+        effect1.setText("Until your next turn, up to one target creature gets -3/-0");
         Ability ability1 = new LoyaltyAbility(effect1, 1);
         ability1.addTarget(new TargetCreaturePermanent(0,1));
         this.addAbility(ability1);
@@ -47,7 +47,8 @@ public final class JaceThePerfectedMind extends CardImpl {
         ability2.addTarget(new TargetPlayer());
         this.addAbility(ability2);
         // -X: Target player mills three times X cards.
-        Ability ability3 = new LoyaltyAbility(new MillCardsTargetEffect(new MultipliedValue(GetXLoyaltyValue.instance, 3)));
+        Ability ability3 = new LoyaltyAbility(new MillCardsTargetEffect(new MultipliedValue
+                (GetXLoyaltyValue.instance, 3)).setText("Target player mills three times X cards."));
         ability3.addTarget(new TargetPlayer());
         this.addAbility(ability3);
     }
@@ -65,7 +66,8 @@ public final class JaceThePerfectedMind extends CardImpl {
 class JaceThePerfectedMindEffect extends OneShotEffect{
     public JaceThePerfectedMindEffect(){
         super(Outcome.DrawCard);
-        staticText = "Target player mills three cards. Then if a graveyard has twenty or more cards in it, you draw three cards. Otherwise, you draw a card.";
+        staticText = "Target player mills three cards. Then if a graveyard has twenty or more cards in it, you draw " +
+                "three cards. Otherwise, you draw a card.";
     }
 
     public JaceThePerfectedMindEffect(JaceThePerfectedMindEffect effect){
