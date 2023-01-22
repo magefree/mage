@@ -37,7 +37,7 @@ public final class JaceThePerfectedMind extends CardImpl {
 
         // +1: Until your next turn, up to one target creature gets -3/-0.
         Effect effect1 = new BoostTargetEffect(-3,0, Duration.UntilYourNextTurn);
-        effect1.setText("Until your next turn, up to one target creature gets -3/-0");
+        effect1.setText("Until your next turn, up to one target creature gets -3/-0 v1");
         Ability ability1 = new LoyaltyAbility(effect1, 1);
         ability1.addTarget(new TargetCreaturePermanent(0,1));
         this.addAbility(ability1);
