@@ -1,7 +1,5 @@
 package mage.cards.j;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.dynamicvalue.MultipliedValue;
@@ -10,15 +8,16 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.constants.*;
 import mage.abilities.keyword.CompleatedAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -71,6 +70,11 @@ class JaceThePerfectedMindEffect extends OneShotEffect{
     }
 
     @Override
+    public JaceThePerfectedMindEffect copy() {
+        return new JaceThePerfectedMindEffect(this);
+    }
+
+    @Override
     public boolean apply(Game game, Ability source){
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         Player sourcePlayer = game.getPlayer(source.getControllerId());
@@ -89,8 +93,5 @@ class JaceThePerfectedMindEffect extends OneShotEffect{
         return true;
     }
 
-    @Override
-    public JaceThePerfectedMindEffect copy() {
-        return new JaceThePerfectedMindEffect(this);
-    }
+
 }
