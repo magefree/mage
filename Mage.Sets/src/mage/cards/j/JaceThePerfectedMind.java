@@ -1,12 +1,24 @@
 package mage.cards.j;
 
 import java.util.UUID;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+
+import mage.abilities.Ability;
+import mage.abilities.LoyaltyAbility;
+import mage.abilities.dynamicvalue.MultipliedValue;
+import mage.abilities.dynamicvalue.common.GetXLoyaltyValue;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.constants.*;
 import mage.abilities.keyword.CompleatedAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.target.TargetPlayer;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -25,8 +37,17 @@ public final class JaceThePerfectedMind extends CardImpl {
         this.addAbility(CompleatedAbility.getInstance());
 
         // +1: Until your next turn, up to one target creature gets -3/-0.
+        Effect effect1 = new BoostTargetEffect(-3,0, Duration.UntilYourNextTurn);
+        effect1.setText("Until your next turn, up to one target creature gets -3/-0");
+        Ability ability1 = new LoyaltyAbility(effect1, 1);
+        ability1.addTarget(new TargetCreaturePermanent(0,1));
+        this.addAbility(ability1);
         // -2: Target player mills three cards. Then if a graveyard has twenty or more cards in it, you draw three cards. Otherwise, you draw a card.
+        this.addAbility(new LoyaltyAbility(new JaceThePerfectedMindEffect(),-2));
         // -X: Target player mills three times X cards.
+        Ability ability3 = new LoyaltyAbility(new MillCardsTargetEffect(new MultipliedValue(GetXLoyaltyValue.instance, 3)));
+        ability3.addTarget(new TargetPlayer());
+        this.addAbility(ability3);
     }
 
     private JaceThePerfectedMind(final JaceThePerfectedMind card) {
@@ -36,5 +57,40 @@ public final class JaceThePerfectedMind extends CardImpl {
     @Override
     public JaceThePerfectedMind copy() {
         return new JaceThePerfectedMind(this);
+    }
+}
+
+class JaceThePerfectedMindEffect extends OneShotEffect{
+    public JaceThePerfectedMindEffect(){
+        super(Outcome.DrawCard);
+        staticText = "Target player mills three cards. Then if a graveyard has twenty or more cards in it, you draw three cards. Otherwise, you draw a card.";
+    }
+
+    public JaceThePerfectedMindEffect(JaceThePerfectedMindEffect effect){
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source){
+        Player targetPlayer = game.getPlayer(source.getFirstTarget());
+        Player sourcePlayer = game.getPlayer(source.getControllerId());
+        int x = 1;
+        targetPlayer.millCards(3,source,game);
+        for (UUID playerId: game.getState().getPlayersInRange(sourcePlayer.getId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                if (player.getGraveyard().size() >= 20) {
+                    x = 3;
+                    break;
+                }
+            }
+        }
+        sourcePlayer.drawCards(x, source, game);
+        return true;
+    }
+
+    @Override
+    public JaceThePerfectedMindEffect copy() {
+        return new JaceThePerfectedMindEffect();
     }
 }
