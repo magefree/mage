@@ -115,6 +115,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Tyvar, Jubilant Brawler", 218, Rarity.RARE, mage.cards.t.TyvarJubilantBrawler.class));
         cards.add(new SetCardInfo("Unctus, Grand Metatect", 75, Rarity.RARE, mage.cards.u.UnctusGrandMetatect.class));
         cards.add(new SetCardInfo("Unnatural Restoration", 191, Rarity.UNCOMMON, mage.cards.u.UnnaturalRestoration.class));
+        cards.add(new SetCardInfo("Urabrask's Anointer", 152, Rarity.UNCOMMON, mage.cards.u.UrabrasksAnointer.class));
         cards.add(new SetCardInfo("Urabrask's Forge", 153, Rarity.RARE, mage.cards.u.UrabrasksForge.class));
         cards.add(new SetCardInfo("Venerated Rotpriest", 192, Rarity.RARE, mage.cards.v.VeneratedRotpriest.class));
         cards.add(new SetCardInfo("Venser, Corpse Puppet", 219, Rarity.RARE, mage.cards.v.VenserCorpsePuppet.class));
