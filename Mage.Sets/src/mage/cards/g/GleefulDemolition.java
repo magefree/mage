@@ -1,11 +1,7 @@
 package mage.cards.g;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -17,7 +13,8 @@ import mage.game.permanent.token.PhyrexianGoblinToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetArtifactPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +29,7 @@ public final class GleefulDemolition extends CardImpl {
         // Destroy target artifact. If you controlled that artifact, creature three 1/1 red Phyrexian Goblin creature tokens.
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT));
         this.getSpellAbility().addEffect(new GleefulDemolitionEffect());
-        //this.getSpellAbility().addEffect(new DestroyTargetEffect());
+
 
     }
 
