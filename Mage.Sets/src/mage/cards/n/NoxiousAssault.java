@@ -7,6 +7,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.effects.common.counter.AddPoisonCounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -46,8 +47,7 @@ public final class NoxiousAssault extends CardImpl {
 
 class NoxiousAssaultDelayedTriggerAbility extends DelayedTriggeredAbility {
     NoxiousAssaultDelayedTriggerAbility() {
-        super(new AddCountersTargetEffect(CounterType.POISON.createInstance(),
-                Outcome.Detriment),Duration.EndOfTurn,false);
+        super(new AddPoisonCounterTargetEffect(1),Duration.EndOfTurn,false);
     }
 
     private NoxiousAssaultDelayedTriggerAbility(final NoxiousAssaultDelayedTriggerAbility ability){
