@@ -46,7 +46,7 @@ public final class NoxiousAssault extends CardImpl {
 
 class NoxiousAssaultDelayedTriggerAbility extends DelayedTriggeredAbility {
     NoxiousAssaultDelayedTriggerAbility() {
-        super(new AddCountersTargetEffect(CounterType.POISON.createInstance(1),
+        super(new AddCountersTargetEffect(CounterType.POISON.createInstance(),
                 Outcome.Detriment),Duration.EndOfTurn,false);
     }
 
