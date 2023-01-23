@@ -63,10 +63,10 @@ class NoxiousAssaultDelayedTriggerAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent == null) {
-            return false;
+            getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getControllerId()));
+            return true;
         }
-        getEffects().setTargetPointer(new FixedTarget(permanent.getControllerId()));
-        return true;
+        return false;
     }
 
     @Override
