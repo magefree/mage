@@ -35,8 +35,8 @@ public final class SwordOfForgeAndFrontier extends CardImpl {
                 "and has protection from red and from green"));
         this.addAbility(ability);
         // Whenever equipped creature deals combat damage to a player, exile the top two cards of your library. You may play those cards this turn. You may play an additional land this turn.
-        Ability ability2 = new DealsDamageToAPlayerAttachedTriggeredAbility(new PlayAdditionalLandsControllerEffect(1, Duration.EndOfTurn),"equipped creature", false);
-        ability2.addEffect(new ExileTopXMayPlayUntilEndOfTurnEffect(2));
+        Ability ability2 = new DealsDamageToAPlayerAttachedTriggeredAbility(new ExileTopXMayPlayUntilEndOfTurnEffect(2),"equipped creature", false);
+        ability2.addEffect(new PlayAdditionalLandsControllerEffect(1, Duration.EndOfTurn));
         this.addAbility(ability2);
 
         // Equip {2}
