@@ -91,6 +91,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 272, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Planar Disruption", 28, Rarity.COMMON, mage.cards.p.PlanarDisruption.class));
         cards.add(new SetCardInfo("Prosthetic Injector", 239, Rarity.UNCOMMON, mage.cards.p.ProstheticInjector.class));
+        cards.add(new SetCardInfo("Quicksilver Fisher", 66, Rarity.COMMON, mage.cards.q.QuicksilverFisher.class));
         cards.add(new SetCardInfo("Razorverge Thicket", 257, Rarity.RARE, mage.cards.r.RazorvergeThicket.class));
         cards.add(new SetCardInfo("Resistance Reunited", 31, Rarity.UNCOMMON, mage.cards.r.ResistanceReunited.class));
         cards.add(new SetCardInfo("Resistance Skywarden", 146, Rarity.UNCOMMON, mage.cards.r.ResistanceSkywarden.class));
