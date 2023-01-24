@@ -1,24 +1,20 @@
 package mage.cards.n;
 
-import java.util.UUID;
-
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.effects.common.counter.AddPoisonCounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
