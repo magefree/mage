@@ -67,7 +67,7 @@ class NoxiousAssaultDelayedTriggerAbility extends DelayedTriggeredAbility {
         if (permanent == null){
             return false;
         }
-        getEffects().setTargetPointer(new FixedTarget(permanent.getControllerId()));
+        player.addCounters(CounterType.POISON.createInstance(1),permanent.getControllerId(),this,game);
         return true;
     }
 
