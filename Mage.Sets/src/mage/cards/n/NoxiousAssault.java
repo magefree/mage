@@ -48,7 +48,7 @@ public final class NoxiousAssault extends CardImpl {
 
 class NoxiousAssaultDelayedTriggerAbility extends DelayedTriggeredAbility {
     NoxiousAssaultDelayedTriggerAbility() {
-        super(new AddPoisonCounterTargetEffect(1),Duration.EndOfTurn,false);
+        super(new AddPoisonCounterTargetEffect(1),Duration.EndOfTurn,false,false);
     }
 
     private NoxiousAssaultDelayedTriggerAbility(final NoxiousAssaultDelayedTriggerAbility ability){
@@ -64,6 +64,9 @@ class NoxiousAssaultDelayedTriggerAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         Player player = game.getPlayer(permanent.getControllerId());
+        if (permanent == null){
+            return false;
+        }
         getEffects().setTargetPointer(new FixedTarget(permanent.getControllerId()));
         return true;
     }
