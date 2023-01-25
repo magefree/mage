@@ -40,7 +40,7 @@ public final class Cankerbloom extends CardImpl {
         ability.addMode(new Mode(new DestroyTargetEffect()).addTarget(new TargetEnchantmentPermanent()));
 
         // * Proliferate.
-        ability.addMode(new Mode(new ProliferateEffect(false)));
+        ability.addMode(new Mode(new ProliferateEffect()));
         this.addAbility(ability);
     }
 
