@@ -26,7 +26,7 @@ import java.util.UUID;
 
 /**
  *
- * @author TheElk801
+ * @author Grath
  */
 public final class BenevolentHydra extends CardImpl {
 
