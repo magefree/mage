@@ -74,6 +74,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Basri's Acolyte", 154, Rarity.COMMON, mage.cards.b.BasrisAcolyte.class));
         cards.add(new SetCardInfo("Battle Squadron", 497, Rarity.UNCOMMON, mage.cards.b.BattleSquadron.class));
         cards.add(new SetCardInfo("Benalish Honor Guard", 155, Rarity.COMMON, mage.cards.b.BenalishHonorGuard.class));
+        cards.add(new SetCardInfo("Benevolent Hydra", 38, Rarity.RARE, mage.cards.b.BenevolentHydra.class));
         cards.add(new SetCardInfo("Berg Strider", 277, Rarity.COMMON, mage.cards.b.BergStrider.class));
         cards.add(new SetCardInfo("Biblioplex Kraken", 10, Rarity.UNCOMMON, mage.cards.b.BiblioplexKraken.class));
         cards.add(new SetCardInfo("Big Score", 498, Rarity.COMMON, mage.cards.b.BigScore.class));
