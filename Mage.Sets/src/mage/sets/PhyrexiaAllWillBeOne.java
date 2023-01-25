@@ -138,6 +138,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Urabrask's Forge", 153, Rarity.RARE, mage.cards.u.UrabrasksForge.class));
         cards.add(new SetCardInfo("Vanish into Eternity", 36, Rarity.COMMON, mage.cards.v.VanishIntoEternity.class));
         cards.add(new SetCardInfo("Venerated Rotpriest", 192, Rarity.RARE, mage.cards.v.VeneratedRotpriest.class));
+        cards.add(new SetCardInfo("Venomous Brutalizer", 193, Rarity.UNCOMMON, mage.cards.v.VenomousBrutalizer.class));
         cards.add(new SetCardInfo("Venser, Corpse Puppet", 219, Rarity.RARE, mage.cards.v.VenserCorpsePuppet.class));
         cards.add(new SetCardInfo("Vindictive Flamestoker", 154, Rarity.RARE, mage.cards.v.VindictiveFlamestoker.class));
         cards.add(new SetCardInfo("Volt Charge", 155, Rarity.COMMON, mage.cards.v.VoltCharge.class));
