@@ -54,7 +54,7 @@ public final class KalemneDiscipleOfIroas extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Whenever you cast a creature spell with converted mana cost 5 or greater, you get an experience counter.
-        Effect effect = new AddCountersControllerEffect(CounterType.EXPERIENCE.createInstance(1), false);
+        Effect effect = new AddCountersControllerEffect(CounterType.EXPERIENCE.createInstance(1));
         effect.setText("you get an experience counter");
         Ability ability = new SpellCastControllerTriggeredAbility(effect, filterSpell, false);
         this.addAbility(ability);

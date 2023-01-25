@@ -44,7 +44,7 @@ public final class MizzixOfTheIzmagnus extends CardImpl {
 
         // Whenever you cast an instant or sorcery spell with converted mana cost greater than the number of experience counters you have, you get an experience counter.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new AddCountersControllerEffect(CounterType.EXPERIENCE.createInstance(1), false), filter, false));
+                new AddCountersControllerEffect(CounterType.EXPERIENCE.createInstance(1)), filter, false));
 
         // Instant and sorcery spells you cast cost {1} less to cast for each experience counter you have.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MizzixOfTheIzmagnusCostReductionEffect()));

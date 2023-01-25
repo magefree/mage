@@ -16,19 +16,14 @@ import java.util.UUID;
 public class AddCountersControllerEffect extends OneShotEffect {
 
     private Counter counter;
-    private final boolean enchantedEquipped;
 
     /**
-     * @param counter           Counter to add. Includes type and amount.
-     * @param enchantedEquipped If true, not source controller will get the
-     *                          counter, but the permanent's controller that the source permanent
-     *                          enchants or equippes.
+     * @param counter Counter to add. Includes type and amount.
      */
-    public AddCountersControllerEffect(Counter counter, boolean enchantedEquipped) {
+    public AddCountersControllerEffect(Counter counter) {
         super(Outcome.Benefit);
         this.counter = counter.copy();
-        this.enchantedEquipped = enchantedEquipped;
-        staticText = (enchantedEquipped ? "its controller gets " : "you get ") + counter.getDescription();
+        staticText = "you get" + counter.getDescription();
     }
 
     public AddCountersControllerEffect(final AddCountersControllerEffect effect) {
@@ -36,27 +31,11 @@ public class AddCountersControllerEffect extends OneShotEffect {
         if (effect.counter != null) {
             this.counter = effect.counter.copy();
         }
-        this.enchantedEquipped = effect.enchantedEquipped;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID uuid = source.getControllerId();
-        if (this.enchantedEquipped) {
-            Permanent enchantment = game.getPermanent(source.getSourceId());
-            if (enchantment != null && enchantment.getAttachedTo() != null) {
-                UUID eUuid = enchantment.getAttachedTo();
-                Permanent permanent = game.getPermanent(eUuid);
-                if (permanent != null) {
-                    uuid = permanent.getControllerId();
-                } else {
-                    return false;
-                }
-            } else {
-                return false;
-            }
-        }
-        Player player = game.getPlayer(uuid);
+        Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             player.addCounters(counter, source.getControllerId(), source, game);
             return true;

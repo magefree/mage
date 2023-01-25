@@ -1,23 +1,24 @@
-
 package mage.cards.i;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.counter.AddPoisonCounterAllEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author Loki
  */
 public final class IchorRats extends CardImpl {
@@ -30,7 +31,9 @@ public final class IchorRats extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.addAbility(InfectAbility.getInstance());
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new IchorRatsEffect(), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new AddPoisonCounterAllEffect(TargetController.EACH_PLAYER), false
+        ));
     }
 
     private IchorRats(final IchorRats card) {
@@ -40,35 +43,6 @@ public final class IchorRats extends CardImpl {
     @Override
     public IchorRats copy() {
         return new IchorRats(this);
-    }
-
-}
-
-class IchorRatsEffect extends OneShotEffect {
-
-    public IchorRatsEffect() {
-        super(Outcome.Damage);
-        staticText = "each player gets a poison counter";
-    }
-
-    public IchorRatsEffect(final IchorRatsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID playerId : game.getState().getPlayerList(source.getControllerId())) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                player.addCounters(CounterType.POISON.createInstance(), source.getControllerId(), source, game);
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public IchorRatsEffect copy() {
-        return new IchorRatsEffect(this);
     }
 
 }

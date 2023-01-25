@@ -38,7 +38,7 @@ public final class DaxosTheReturned extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever you cast an enchantment spell, you get an experience counter.
-        Effect effect = new AddCountersControllerEffect(CounterType.EXPERIENCE.createInstance(1), false);
+        Effect effect = new AddCountersControllerEffect(CounterType.EXPERIENCE.createInstance(1));
         effect.setText("you get an experience counter");
         Ability ability = new SpellCastControllerTriggeredAbility(effect, filter, false);
         this.addAbility(ability);

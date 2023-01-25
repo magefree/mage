@@ -53,7 +53,7 @@ public final class KelsienThePlague extends CardImpl {
         // {T}: Kelsien deals 1 damage to target creature you don't control. When that creature dies this turn, you get an experience counter.
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new WhenTargetDiesDelayedTriggeredAbility(
-                new AddCountersControllerEffect(CounterType.EXPERIENCE.createInstance(), false)
+                new AddCountersControllerEffect(CounterType.EXPERIENCE.createInstance())
         )));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(ability);

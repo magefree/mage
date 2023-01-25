@@ -47,7 +47,7 @@ public final class EzuriClawOfProgress extends CardImpl {
 
         // Whenever a creature with power 2 or less enters the battlefield under your control, you get an experience counter.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new AddCountersControllerEffect(
-                CounterType.EXPERIENCE.createInstance(1), false), filter, false, rule, true));
+                CounterType.EXPERIENCE.createInstance(1)), filter, false, rule, true));
 
         // At the beginning of combat on your turn, put X +1/+1 counters on another target creature you control, where X is the number of experience counters you have.
         Ability ability = new BeginningOfCombatTriggeredAbility(new EzuriClawOfProgressEffect(), TargetController.YOU, false);

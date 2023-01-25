@@ -43,7 +43,7 @@ public final class MerenOfClanNelToth extends CardImpl {
 
         // Whenever another creature you control dies, you get an experience counter.
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersControllerEffect(
-                CounterType.EXPERIENCE.createInstance(1), false
+                CounterType.EXPERIENCE.createInstance(1)
         ).setText("you get an experience counter"), false, filter));
 
         // At the beginning of your end step, choose target creature card in your graveyard. 
