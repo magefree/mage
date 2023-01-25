@@ -37,8 +37,8 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Blue Sun's Twilight", 43, Rarity.RARE, mage.cards.b.BlueSunsTwilight.class));
         cards.add(new SetCardInfo("Bonepicker Skirge", 86, Rarity.COMMON, mage.cards.b.BonepickerSkirge.class));
         cards.add(new SetCardInfo("Cacophony Scamp", 124, Rarity.UNCOMMON, mage.cards.c.CacophonyScamp.class));
-        cards.add(new SetCardInfo("Cankerbloom", 294, Rarity.UNCOMMON, mage.cards.c.Cankerbloom.class));
-        cards.add(new SetCardInfo("Chittering Skitterling", 87, Rarity.COMMON, mage.cards.c.ChitteringSkitterling.class));
+        cards.add(new SetCardInfo("Cankerbloom", 161, Rarity.UNCOMMON, mage.cards.c.Cankerbloom.class));
+        cards.add(new SetCardInfo("Chittering Skitterling", 87, Rarity.UNCOMMON, mage.cards.c.ChitteringSkitterling.class));
         cards.add(new SetCardInfo("Copperline Gorge", 249, Rarity.RARE, mage.cards.c.CopperlineGorge.class));
         cards.add(new SetCardInfo("Darkslick Shores", 372, Rarity.RARE, mage.cards.d.DarkslickShores.class));
         cards.add(new SetCardInfo("Dragonwing Glider", 126, Rarity.RARE, mage.cards.d.DragonwingGlider.class));
@@ -117,6 +117,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("The Filigree Sylex", 227, Rarity.RARE, mage.cards.t.TheFiligreeSylex.class));
         cards.add(new SetCardInfo("The Monumental Facade", 255, Rarity.RARE, mage.cards.t.TheMonumentalFacade.class));
         cards.add(new SetCardInfo("The Seedcore", 259, Rarity.RARE, mage.cards.t.TheSeedcore.class));
+        cards.add(new SetCardInfo("Thrummingbird", 72, Rarity.UNCOMMON, mage.cards.t.Thrummingbird.class));
         cards.add(new SetCardInfo("Thrun, Breaker of Silence", 186, Rarity.RARE, mage.cards.t.ThrunBreakerOfSilence.class));
         cards.add(new SetCardInfo("Transplant Theorist", 73, Rarity.UNCOMMON, mage.cards.t.TransplantTheorist.class));
         cards.add(new SetCardInfo("Tyrranax Rex", 189, Rarity.MYTHIC, mage.cards.t.TyrranaxRex.class));
