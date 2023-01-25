@@ -117,6 +117,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Tainted Observer", 217, Rarity.UNCOMMON, mage.cards.t.TaintedObserver.class));
         cards.add(new SetCardInfo("Tamiyo's Immobilizer", 69, Rarity.UNCOMMON, mage.cards.t.TamiyosImmobilizer.class));
         cards.add(new SetCardInfo("Tamiyo's Logbook", 70, Rarity.UNCOMMON, mage.cards.t.TamiyosLogbook.class));
+        cards.add(new SetCardInfo("The Fair Basilica", 252, Rarity.COMMON, mage.cards.t.TheFairBasilica.class));
         cards.add(new SetCardInfo("The Filigree Sylex", 227, Rarity.RARE, mage.cards.t.TheFiligreeSylex.class));
         cards.add(new SetCardInfo("The Monumental Facade", 255, Rarity.RARE, mage.cards.t.TheMonumentalFacade.class));
         cards.add(new SetCardInfo("The Seedcore", 259, Rarity.RARE, mage.cards.t.TheSeedcore.class));
