@@ -92,6 +92,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Paladin of Predation", 178, Rarity.UNCOMMON, mage.cards.p.PaladinOfPredation.class));
         cards.add(new SetCardInfo("Phyrexian Arena", 104, Rarity.RARE, mage.cards.p.PhyrexianArena.class));
         cards.add(new SetCardInfo("Phyrexian Obliterator", 105, Rarity.MYTHIC, mage.cards.p.PhyrexianObliterator.class));
+        cards.add(new SetCardInfo("Plague Nurse", 179, Rarity.COMMON, mage.cards.p.PlagueNurse.class));
         cards.add(new SetCardInfo("Plains", 272, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Planar Disruption", 28, Rarity.COMMON, mage.cards.p.PlanarDisruption.class));
         cards.add(new SetCardInfo("Prosthetic Injector", 239, Rarity.UNCOMMON, mage.cards.p.ProstheticInjector.class));
