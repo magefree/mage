@@ -38,7 +38,7 @@ public final class SylvokBattleChair extends CardImpl {
         this.addAbility(ability);
 
         // Equip {5}{G}{G}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{5}{G}{G}")));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{5}{G}{G}"), false));
     }
 
     private SylvokBattleChair(final SylvokBattleChair card) {

@@ -47,7 +47,7 @@ public final class HexgoldHoverwings extends CardImpl {
         )));
 
         // Equip {2}{W}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{2}{W}")));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{2}{W}"), false));
     }
 
     private HexgoldHoverwings(final HexgoldHoverwings card) {

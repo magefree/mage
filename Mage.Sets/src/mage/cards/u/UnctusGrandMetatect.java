@@ -1,7 +1,5 @@
 package mage.cards.u;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -13,10 +11,9 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.TrampleAbility;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
@@ -24,6 +21,8 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -37,7 +36,7 @@ public final class UnctusGrandMetatect extends CardImpl {
     }
 
     public UnctusGrandMetatect(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{U}{U}");
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
