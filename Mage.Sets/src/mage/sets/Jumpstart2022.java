@@ -369,6 +369,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Inner Demon", 428, Rarity.UNCOMMON, mage.cards.i.InnerDemon.class));
         cards.add(new SetCardInfo("Inspiring Cleric", 199, Rarity.UNCOMMON, mage.cards.i.InspiringCleric.class));
         cards.add(new SetCardInfo("Inspiring Overseer", 200, Rarity.COMMON, mage.cards.i.InspiringOverseer.class));
+        cards.add(new SetCardInfo("Instruments of War", 50, Rarity.UNCOMMON, mage.cards.i.InstrumentsOfWar.class));
         cards.add(new SetCardInfo("Interpret the Signs", 309, Rarity.UNCOMMON, mage.cards.i.InterpretTheSigns.class));
         cards.add(new SetCardInfo("Irencrag Pyromancer", 559, Rarity.RARE, mage.cards.i.IrencragPyromancer.class));
         cards.add(new SetCardInfo("Iridescent Hornbeetle", 678, Rarity.UNCOMMON, mage.cards.i.IridescentHornbeetle.class));
