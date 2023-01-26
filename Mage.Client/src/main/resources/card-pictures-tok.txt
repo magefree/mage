@@ -237,12 +237,6 @@
 |Generate|TOK:ALL|Soldier|||SoldierToken|
 |Generate|TOK:ALL|Starfish|||StarfishToken|
 |Generate|TOK:ALL|Zombie|||ZombieToken|
-|Generate|TOK:APC|Angel|||HauntedAngelToken|
-|Generate|TOK:APC|Cat|||PenumbraBobcatToken|
-|Generate|TOK:APC|Goblin Soldier|||GoblinSoldierToken|
-|Generate|TOK:APC|Kavu|||PenumbraKavuToken|
-|Generate|TOK:APC|Saproling|||SaprolingToken|
-|Generate|TOK:APC|Wurm|||PenumbraWurmToken|
 |Generate|TOK:ARB|Bird Soldier|||BirdSoldierToken|
 |Generate|TOK:ARB|Dragon|||DragonBroodmotherDragonToken|
 |Generate|TOK:ARB|Lizard|||LizardToken|
