@@ -1,40 +1,38 @@
-
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.counter.AddCountersControllerEffect;
+import mage.abilities.effects.common.counter.AddCountersPlayersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class EzuriClawOfProgress extends CardImpl {
 
-    final private static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+    final private static FilterControlledCreaturePermanent filter
+            = new FilterControlledCreaturePermanent("a creature with power 2 or less");
     final private static FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent();
 
     static {
         filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
         filter2.add(AnotherPredicate.instance);
     }
-
-    private static final String rule = "Whenever a creature with power 2 or less enters the battlefield under your control, you get an experience counter.";
 
     public EzuriClawOfProgress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
@@ -46,8 +44,9 @@ public final class EzuriClawOfProgress extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever a creature with power 2 or less enters the battlefield under your control, you get an experience counter.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new AddCountersControllerEffect(
-                CounterType.EXPERIENCE.createInstance(1)), filter, false, rule, true));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new AddCountersPlayersEffect(
+                CounterType.EXPERIENCE.createInstance(), TargetController.YOU
+        ), filter));
 
         // At the beginning of combat on your turn, put X +1/+1 counters on another target creature you control, where X is the number of experience counters you have.
         Ability ability = new BeginningOfCombatTriggeredAbility(new EzuriClawOfProgressEffect(), TargetController.YOU, false);

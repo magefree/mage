@@ -1,24 +1,17 @@
 package mage.cards.p;
 
-import java.util.UUID;
-
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.OnEventTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.counter.AddPoisonCounterAllEffect;
+import mage.abilities.effects.common.counter.AddCountersPlayersEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.events.GameEvent.EventType;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author Viserion
@@ -34,7 +27,9 @@ public final class PhyrexianVatmother extends CardImpl {
         this.toughness = new MageInt(5);
         this.addAbility(InfectAbility.getInstance());
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new AddPoisonCounterAllEffect(TargetController.YOU), TargetController.YOU, false
+                new AddCountersPlayersEffect(
+                        CounterType.POISON.createInstance(), TargetController.YOU
+                ), TargetController.YOU, false
         ));
     }
 

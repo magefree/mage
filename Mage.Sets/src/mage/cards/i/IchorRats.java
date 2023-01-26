@@ -1,22 +1,17 @@
 package mage.cards.i;
 
-import java.util.UUID;
-
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.counter.AddPoisonCounterAllEffect;
+import mage.abilities.effects.common.counter.AddCountersPlayersEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -31,9 +26,9 @@ public final class IchorRats extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.addAbility(InfectAbility.getInstance());
-        this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new AddPoisonCounterAllEffect(TargetController.EACH_PLAYER), false
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersPlayersEffect(
+                CounterType.POISON.createInstance(), TargetController.EACH_PLAYER
+        ), false));
     }
 
     private IchorRats(final IchorRats card) {

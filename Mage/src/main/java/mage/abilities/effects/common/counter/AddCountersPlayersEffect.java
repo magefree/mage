@@ -1,46 +1,40 @@
 package mage.abilities.effects.common.counter;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.counters.CounterType;
+import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.util.CardUtil;
 
 import java.util.*;
 
 /**
  * @author TheElk801
  */
-public class AddPoisonCounterAllEffect extends OneShotEffect {
+public class AddCountersPlayersEffect extends OneShotEffect {
 
-    private final int amount;
+    private final Counter counter;
     private final TargetController targetController;
 
-    public AddPoisonCounterAllEffect(TargetController targetController) {
-        this(1, targetController);
-    }
-
-    public AddPoisonCounterAllEffect(int amount, TargetController targetController) {
+    public AddCountersPlayersEffect(Counter counter, TargetController targetController) {
         super(Outcome.Benefit);
-        this.amount = amount;
+        this.counter = counter;
         this.targetController = targetController;
         staticText = makeText();
     }
 
-    private AddPoisonCounterAllEffect(final AddPoisonCounterAllEffect effect) {
+    private AddCountersPlayersEffect(final AddCountersPlayersEffect effect) {
         super(effect);
-        this.amount = effect.amount;
+        this.counter = effect.counter;
         this.targetController = effect.targetController;
     }
 
     @Override
-    public AddPoisonCounterAllEffect copy() {
-        return new AddPoisonCounterAllEffect(this);
+    public AddCountersPlayersEffect copy() {
+        return new AddCountersPlayersEffect(this);
     }
 
     private Collection<UUID> getPlayers(Game game, Ability source) {
@@ -71,7 +65,7 @@ public class AddPoisonCounterAllEffect extends OneShotEffect {
         for (UUID playerId : getPlayers(game, source)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                player.addCounters(CounterType.POISON.createInstance(amount), source.getControllerId(), source, game);
+                player.addCounters(counter, source.getControllerId(), source, game);
             }
         }
         return true;
@@ -96,10 +90,8 @@ public class AddPoisonCounterAllEffect extends OneShotEffect {
             default:
                 throw new UnsupportedOperationException(targetController + " not supported");
         }
-        sb.append(' ' + CardUtil.numberToText(amount, "a") + " poison counter");
-        if (amount > 1) {
-            sb.append('s');
-        }
+        sb.append(' ');
+        sb.append(counter.getDescription());
         return sb.toString();
     }
 }
