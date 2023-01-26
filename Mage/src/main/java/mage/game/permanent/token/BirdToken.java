@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.util.RandomUtil;
 
 import java.util.Arrays;
 
@@ -24,7 +23,7 @@ public final class BirdToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
 
         availableImageSetCodes = Arrays.asList("BNG", "CSP", "JUD", "MM3", "RTR", "VMA", "ZEN",
-                "MH1", "C16", "C20", "M21", "ZNC", "KHC", "MH2", "IMA", "CM2", "DMU");
+                "MH1", "C16", "C20", "M21", "ZNC", "KHC", "MH2", "IMA", "CM2", "DMU", "DMR");
     }
 
     public BirdToken(final BirdToken token) {

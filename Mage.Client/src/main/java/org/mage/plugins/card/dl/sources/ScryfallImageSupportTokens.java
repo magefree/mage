@@ -1845,6 +1845,22 @@ public class ScryfallImageSupportTokens {
             put ("BRC/Servo", "https://api.scryfall.com/cards/tbrc/13/en?format=image");
             put ("BRC/Thopter", "https://api.scryfall.com/cards/tbrc/6/en?format=image");
 
+            // DMR
+            put ("DMR/Bird", "https://api.scryfall.com/cards/tdmr/1/en?format=image");
+            put ("DMR/Cat/1", "https://api.scryfall.com/cards/tdmr/3/en?format=image");
+            put ("DMR/Cat/2", "https://api.scryfall.com/cards/tdmr/8/en?format=image");
+            put ("DMR/Construct", "https://api.scryfall.com/cards/tdmr/14/en?format=image");
+            put ("DMR/Elemental", "https://api.scryfall.com/cards/tdmr/6/en?format=image");
+            put ("DMR/ELephant", "https://api.scryfall.com/cards/tdmr/9/en?format=image");
+            put ("DMR/Goblin", "https://api.scryfall.com/cards/tdmr/7/en?format=image");
+            put ("DMR/Griffin", "https://api.scryfall.com/cards/tdmr/2/en?format=image");
+            put ("DMR/Insect", "https://api.scryfall.com/cards/tdmr/10/en?format=image");
+            put ("DMR/Marit Lage", "https://api.scryfall.com/cards/tdmr/4/en?format=image");
+            put ("DMR/Saproling", "https://api.scryfall.com/cards/tdmr/11/en?format=image");
+            put ("DMR/Sheep", "https://api.scryfall.com/cards/tdmr/12/en?format=image");
+            put ("DMR/Squirrel", "https://api.scryfall.com/cards/tdmr/13/en?format=image");
+            put ("DMR/Zombie", "https://api.scryfall.com/cards/tdmr/5/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
