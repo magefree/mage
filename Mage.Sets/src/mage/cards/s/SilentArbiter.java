@@ -92,7 +92,16 @@ class SilentArbiterBlockRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return game.getCombat().getBlockers().isEmpty();
+    public boolean canBlock(Permanent attacker, Permanent newBlocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        if (attacker == null) {
+            return true;
+        }
+        for (UUID creatureId : game.getCombat().getBlockers()) {
+            Permanent existingBlocker = game.getPermanent(creatureId);
+            if (game.getPlayer(existingBlocker.getControllerId()).hasOpponent(attacker.getControllerId(), game) && existingBlocker.isControlledBy(newBlocker.getControllerId())) {
+                return false;
+            }
+        }
+        return true;
     }
 }
