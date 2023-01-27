@@ -102,7 +102,7 @@ class KenessosPriestOfThassaActivatedEffect extends OneShotEffect {
     }
     public KenessosPriestOfThassaActivatedEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "Look at the top card of your library. If it’s a Kraken, Leviathan, Octopus, or Serpent " +
+        this.staticText = "Look at the top card of your library. If it's a Kraken, Leviathan, Octopus, or Serpent " +
                 "creature card, you may put it onto the battlefield. If you don’t put the card onto the battlefield, " +
                 "you may put it on the bottom of your library.";
     }
