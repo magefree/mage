@@ -104,6 +104,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Migloz, Maze Crusher", 210, Rarity.RARE, mage.cards.m.MiglozMazeCrusher.class));
         cards.add(new SetCardInfo("Mindsplice Apparatus", 63, Rarity.RARE, mage.cards.m.MindspliceApparatus.class));
         cards.add(new SetCardInfo("Minor Misstep", 64, Rarity.UNCOMMON, mage.cards.m.MinorMisstep.class));
+        cards.add(new SetCardInfo("Mirran Bardiche", 22, Rarity.COMMON, mage.cards.m.MirranBardiche.class));
         cards.add(new SetCardInfo("Mirran Safehouse", 232, Rarity.RARE, mage.cards.m.MirranSafehouse.class));
         cards.add(new SetCardInfo("Mirrex", 254, Rarity.RARE, mage.cards.m.Mirrex.class));
         cards.add(new SetCardInfo("Mite Overseer", 404, Rarity.RARE, mage.cards.m.MiteOverseer.class));
