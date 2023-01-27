@@ -65,6 +65,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Experimental Augury", 49, Rarity.COMMON, mage.cards.e.ExperimentalAugury.class));
         cards.add(new SetCardInfo("Ezuri, Stalker of Spheres", 201, Rarity.RARE, mage.cards.e.EzuriStalkerOfSpheres.class));
         cards.add(new SetCardInfo("Feed the Infection", 93, Rarity.UNCOMMON, mage.cards.f.FeedTheInfection.class));
+        cards.add(new SetCardInfo("Flensing Raptor", 12, Rarity.COMMON, mage.cards.f.FlensingRaptor.class));
         cards.add(new SetCardInfo("Forest", 276, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Furnace Skullbomb", 228, Rarity.COMMON, mage.cards.f.FurnaceSkullbomb.class));
         cards.add(new SetCardInfo("Gitaxian Anatomist", 52, Rarity.COMMON, mage.cards.g.GitaxianAnatomist.class));
