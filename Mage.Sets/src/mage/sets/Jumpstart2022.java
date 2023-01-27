@@ -153,7 +153,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Crashing Tide", 283, Rarity.COMMON, mage.cards.c.CrashingTide.class));
         cards.add(new SetCardInfo("Crawling Sensation", 642, Rarity.UNCOMMON, mage.cards.c.CrawlingSensation.class));
         cards.add(new SetCardInfo("Creeperhulk", 643, Rarity.RARE, mage.cards.c.Creeperhulk.class));
-        cards.add(new SetCardInfo("Creeping Bloodsucker", 121, Rarity.COMMON, mage.cards.c.CreepingBloodsucker.class));
+        cards.add(new SetCardInfo("Creeping Bloodsucker", 21, Rarity.COMMON, mage.cards.c.CreepingBloodsucker.class));
         cards.add(new SetCardInfo("Crippling Chill", 284, Rarity.COMMON, mage.cards.c.CripplingChill.class));
         cards.add(new SetCardInfo("Crow of Dark Tidings", 390, Rarity.COMMON, mage.cards.c.CrowOfDarkTidings.class));
         cards.add(new SetCardInfo("Cruel Sadist", 391, Rarity.RARE, mage.cards.c.CruelSadist.class));
