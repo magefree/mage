@@ -49,6 +49,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Chimney Rabble", 126, Rarity.COMMON, mage.cards.c.ChimneyRabble.class));
         cards.add(new SetCardInfo("Chittering Skitterling", 87, Rarity.UNCOMMON, mage.cards.c.ChitteringSkitterling.class));
         cards.add(new SetCardInfo("Chrome Prowler", 45, Rarity.COMMON, mage.cards.c.ChromeProwler.class));
+        cards.add(new SetCardInfo("Copper Longlegs", 165, Rarity.COMMON, mage.cards.c.CopperLonglegs.class));
         cards.add(new SetCardInfo("Copperline Gorge", 249, Rarity.RARE, mage.cards.c.CopperlineGorge.class));
         cards.add(new SetCardInfo("Crawling Chorus", 8, Rarity.COMMON, mage.cards.c.CrawlingChorus.class));
         cards.add(new SetCardInfo("Cutthroat Centurion", 89, Rarity.COMMON, mage.cards.c.CutthroatCenturion.class));
