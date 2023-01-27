@@ -24,7 +24,7 @@ public final class SheoldredsHeadcleaver extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Toxic 2
         this.addAbility(new ToxicAbility(2));
