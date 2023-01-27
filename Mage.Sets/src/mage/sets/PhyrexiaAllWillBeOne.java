@@ -28,6 +28,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Archfiend of the Dross", 82, Rarity.RARE, mage.cards.a.ArchfiendOfTheDross.class));
         cards.add(new SetCardInfo("Argentum Masticore", 222, Rarity.RARE, mage.cards.a.ArgentumMasticore.class));
         cards.add(new SetCardInfo("Armored Scrapgorger", 158, Rarity.UNCOMMON, mage.cards.a.ArmoredScrapgorger.class));
+        cards.add(new SetCardInfo("Aspirant's Ascent", 40, Rarity.COMMON, mage.cards.a.AspirantsAscent.class));
         cards.add(new SetCardInfo("Atraxa, Grand Unifier", 196, Rarity.MYTHIC, mage.cards.a.AtraxaGrandUnifier.class));
         cards.add(new SetCardInfo("Barbed Batterfist", 121, Rarity.COMMON, mage.cards.b.BarbedBatterfist.class));
         cards.add(new SetCardInfo("Basilica Shepherd", 4, Rarity.COMMON, mage.cards.b.BasilicaShepherd.class));
