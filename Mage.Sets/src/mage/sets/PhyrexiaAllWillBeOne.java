@@ -43,8 +43,8 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Chittering Skitterling", 87, Rarity.UNCOMMON, mage.cards.c.ChitteringSkitterling.class));
         cards.add(new SetCardInfo("Copperline Gorge", 249, Rarity.RARE, mage.cards.c.CopperlineGorge.class));
         cards.add(new SetCardInfo("Crawling Chorus", 8, Rarity.COMMON, mage.cards.c.CrawlingChorus.class));
-        cards.add(new SetCardInfo("Darkslick Shores", 372, Rarity.RARE, mage.cards.d.DarkslickShores.class));
-        cards.add(new SetCardInfo("Dragonwing Glider", 126, Rarity.RARE, mage.cards.d.DragonwingGlider.class));
+        cards.add(new SetCardInfo("Darkslick Shores", 250, Rarity.RARE, mage.cards.d.DarkslickShores.class));
+        cards.add(new SetCardInfo("Dragonwing Glider", 128, Rarity.RARE, mage.cards.d.DragonwingGlider.class));
         cards.add(new SetCardInfo("Dross Skullbomb", 225, Rarity.COMMON, mage.cards.d.DrossSkullbomb.class));
         cards.add(new SetCardInfo("Drown in Ichor", 91, Rarity.UNCOMMON, mage.cards.d.DrownInIchor.class));
         cards.add(new SetCardInfo("Duress", 92, Rarity.COMMON, mage.cards.d.Duress.class));
@@ -100,6 +100,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Plague Nurse", 179, Rarity.COMMON, mage.cards.p.PlagueNurse.class));
         cards.add(new SetCardInfo("Plains", 272, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Planar Disruption", 28, Rarity.COMMON, mage.cards.p.PlanarDisruption.class));
+        cards.add(new SetCardInfo("Prophetic Prism", 238, Rarity.COMMON, mage.cards.p.PropheticPrism.class));
         cards.add(new SetCardInfo("Prosthetic Injector", 239, Rarity.UNCOMMON, mage.cards.p.ProstheticInjector.class));
         cards.add(new SetCardInfo("Quicksilver Fisher", 66, Rarity.COMMON, mage.cards.q.QuicksilverFisher.class));
         cards.add(new SetCardInfo("Razorverge Thicket", 257, Rarity.RARE, mage.cards.r.RazorvergeThicket.class));
@@ -123,6 +124,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Tainted Observer", 217, Rarity.UNCOMMON, mage.cards.t.TaintedObserver.class));
         cards.add(new SetCardInfo("Tamiyo's Immobilizer", 69, Rarity.UNCOMMON, mage.cards.t.TamiyosImmobilizer.class));
         cards.add(new SetCardInfo("Tamiyo's Logbook", 70, Rarity.UNCOMMON, mage.cards.t.TamiyosLogbook.class));
+        cards.add(new SetCardInfo("Terramorphic Expanse", 261, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("The Autonomous Furnace", 247, Rarity.COMMON, mage.cards.t.TheAutonomousFurnace.class));
         cards.add(new SetCardInfo("The Dross Pits", 251, Rarity.COMMON, mage.cards.t.TheDrossPits.class));
         cards.add(new SetCardInfo("The Fair Basilica", 252, Rarity.COMMON, mage.cards.t.TheFairBasilica.class));
@@ -131,8 +133,10 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("The Monumental Facade", 255, Rarity.RARE, mage.cards.t.TheMonumentalFacade.class));
         cards.add(new SetCardInfo("The Seedcore", 259, Rarity.RARE, mage.cards.t.TheSeedcore.class));
         cards.add(new SetCardInfo("The Surgical Bay", 260, Rarity.COMMON, mage.cards.t.TheSurgicalBay.class));
+        cards.add(new SetCardInfo("Thrill of Possibility", 151, Rarity.COMMON, mage.cards.t.ThrillOfPossibility.class));
         cards.add(new SetCardInfo("Thrummingbird", 72, Rarity.UNCOMMON, mage.cards.t.Thrummingbird.class));
         cards.add(new SetCardInfo("Thrun, Breaker of Silence", 186, Rarity.RARE, mage.cards.t.ThrunBreakerOfSilence.class));
+        cards.add(new SetCardInfo("Titanic Growth", 187, Rarity.COMMON, mage.cards.t.TitanicGrowth.class));
         cards.add(new SetCardInfo("Transplant Theorist", 73, Rarity.UNCOMMON, mage.cards.t.TransplantTheorist.class));
         cards.add(new SetCardInfo("Tyrranax Rex", 189, Rarity.MYTHIC, mage.cards.t.TyrranaxRex.class));
         cards.add(new SetCardInfo("Tyvar's Stand", 190, Rarity.UNCOMMON, mage.cards.t.TyvarsStand.class));
