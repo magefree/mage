@@ -45,6 +45,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Branchblight Stalker", 160, Rarity.COMMON, mage.cards.b.BranchblightStalker.class));
         cards.add(new SetCardInfo("Cacophony Scamp", 124, Rarity.UNCOMMON, mage.cards.c.CacophonyScamp.class));
         cards.add(new SetCardInfo("Cankerbloom", 161, Rarity.UNCOMMON, mage.cards.c.Cankerbloom.class));
+        cards.add(new SetCardInfo("Cephalopod Sentry", 198, Rarity.UNCOMMON, mage.cards.c.CephalopodSentry.class));
         cards.add(new SetCardInfo("Chittering Skitterling", 87, Rarity.UNCOMMON, mage.cards.c.ChitteringSkitterling.class));
         cards.add(new SetCardInfo("Chrome Prowler", 45, Rarity.COMMON, mage.cards.c.ChromeProwler.class));
         cards.add(new SetCardInfo("Copperline Gorge", 249, Rarity.RARE, mage.cards.c.CopperlineGorge.class));
