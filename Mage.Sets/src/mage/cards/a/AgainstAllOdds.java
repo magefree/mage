@@ -27,8 +27,8 @@ import mage.target.common.TargetControlledPermanent;
  * @author AhmadYProjects
  */
 public final class AgainstAllOdds extends CardImpl {
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent();
-    private static final FilterCard filter2 = new FilterCard();
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("creature card with mana value 3 or less");
+    private static final FilterCard filter2 = new FilterCard("artifact or creature card with mana value 3 or less from your graveyard");
 
     static{
         filter.add(Predicates.or(
