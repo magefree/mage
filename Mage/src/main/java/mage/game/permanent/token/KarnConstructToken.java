@@ -29,7 +29,7 @@ public final class KarnConstructToken extends TokenImpl {
                         .setText("This creature gets +1/+1 for each artifact you control")
         ));
 
-        availableImageSetCodes = Arrays.asList("DOM", "MH1", "C21", "MH2", "MED", "BRO");
+        availableImageSetCodes = Arrays.asList("DOM", "MH1", "C21", "MH2", "MED", "BRO", "DMR");
     }
 
     public KarnConstructToken(final KarnConstructToken token) {

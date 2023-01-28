@@ -237,12 +237,6 @@
 |Generate|TOK:ALL|Soldier|||SoldierToken|
 |Generate|TOK:ALL|Starfish|||StarfishToken|
 |Generate|TOK:ALL|Zombie|||ZombieToken|
-|Generate|TOK:APC|Angel|||HauntedAngelToken|
-|Generate|TOK:APC|Cat|||PenumbraBobcatToken|
-|Generate|TOK:APC|Goblin Soldier|||GoblinSoldierToken|
-|Generate|TOK:APC|Kavu|||PenumbraKavuToken|
-|Generate|TOK:APC|Saproling|||SaprolingToken|
-|Generate|TOK:APC|Wurm|||PenumbraWurmToken|
 |Generate|TOK:ARB|Bird Soldier|||BirdSoldierToken|
 |Generate|TOK:ARB|Dragon|||DragonBroodmotherDragonToken|
 |Generate|TOK:ARB|Lizard|||LizardToken|
@@ -1966,3 +1960,19 @@
 |Generate|TOK:BRC|Scrap|||ScrapToken|
 |Generate|TOK:BRC|Servo|||ServoToken|
 |Generate|TOK:BRC|Thopter|||ThopterToken|
+
+# DMR
+|Generate|TOK:DMR|Bird|||BirdToken|
+|Generate|TOK:DMR|Cat|1||PenumbraBobcatToken|
+|Generate|TOK:DMR|Cat|2||GreenCat2Token|
+|Generate|TOK:DMR|Construct|||KarnConstructToken|
+|Generate|TOK:DMR|Elemental|||Elemental31TrampleHasteToken|
+|Generate|TOK:DMR|Elephant|||ElephantToken|
+|Generate|TOK:DMR|Goblin|||GoblinToken|
+|Generate|TOK:DMR|Griffin|||GriffinToken|
+|Generate|TOK:DMR|Insect|||InsectToken|
+|Generate|TOK:DMR|Marit Lage|||MaritLageToken|
+|Generate|TOK:DMR|Saproling|||SaprolingToken|
+|Generate|TOK:DMR|Sheep|||SheepToken|
+|Generate|TOK:DMR|Squirrel|||SquirrelToken|
+|Generate|TOK:DMR|Zombie|||ZombieToken|

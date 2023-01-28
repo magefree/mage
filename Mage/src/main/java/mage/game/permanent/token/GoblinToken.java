@@ -34,7 +34,7 @@ public final class GoblinToken extends TokenImpl {
                 "MMA", "M15", "C14", "KTK", "EVG", "DTK", "ORI", "DDG", "DDN",
                 "MM3", "EMA", "DOM", "RNA", "WAR", "MH1", "TSR", "MH2", "AFR",
                 "NEC", "M19", "CM2", "PCA", "DD1", "DDS", "DDT", "A25", "GRN",
-                "GK1", "DMU");
+                "GK1", "DMU", "DMR");
     }
 
     public GoblinToken(final GoblinToken token) {
