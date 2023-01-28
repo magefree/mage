@@ -24,6 +24,7 @@ public final class KarumonixTheRatKing extends CardImpl {
 
     static {
         filter.add(SubType.RAT.getPredicate());
+        filter2.add(SubType.RAT.getPredicate());
     }
 
     public KarumonixTheRatKing(UUID ownerId, CardSetInfo setInfo) {
