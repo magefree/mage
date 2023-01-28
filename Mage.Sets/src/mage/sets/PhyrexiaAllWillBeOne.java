@@ -82,6 +82,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Goliath Hatchery", 408, Rarity.RARE, mage.cards.g.GoliathHatchery.class));
         cards.add(new SetCardInfo("Graaz, Unstoppable Juggernaut", 229, Rarity.RARE, mage.cards.g.GraazUnstoppableJuggernaut.class));
         cards.add(new SetCardInfo("Gulping Scraptrap", 96, Rarity.COMMON, mage.cards.g.GulpingScraptrap.class));
+        cards.add(new SetCardInfo("Hazardous Blast", 135, Rarity.COMMON, mage.cards.h.HazardousBlast.class));
         cards.add(new SetCardInfo("Hexgold Halberd", 136, Rarity.UNCOMMON, mage.cards.h.HexgoldHalberd.class));
         cards.add(new SetCardInfo("Hexgold Hoverwings", 14, Rarity.UNCOMMON, mage.cards.h.HexgoldHoverwings.class));
         cards.add(new SetCardInfo("Hexgold Slash", 137, Rarity.COMMON, mage.cards.h.HexgoldSlash.class));
