@@ -88,6 +88,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Hexgold Slash", 137, Rarity.COMMON, mage.cards.h.HexgoldSlash.class));
         cards.add(new SetCardInfo("Ichorspit Basilisk", 170, Rarity.COMMON, mage.cards.i.IchorspitBasilisk.class));
         cards.add(new SetCardInfo("Incisor Glider", 15, Rarity.COMMON, mage.cards.i.IncisorGlider.class));
+        cards.add(new SetCardInfo("Indoctrination Attendant", 16, Rarity.COMMON, mage.cards.i.IndoctrinationAttendant.class));
         cards.add(new SetCardInfo("Infectious Bite", 172, Rarity.UNCOMMON, mage.cards.i.InfectiousBite.class));
         cards.add(new SetCardInfo("Infectious Inquiry", 97, Rarity.COMMON, mage.cards.i.InfectiousInquiry.class));
         cards.add(new SetCardInfo("Infested Fleshcutter", 17, Rarity.UNCOMMON, mage.cards.i.InfestedFleshcutter.class));
