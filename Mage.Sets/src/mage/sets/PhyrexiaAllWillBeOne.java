@@ -201,6 +201,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Vraan, Executioner Thane", 114, Rarity.RARE, mage.cards.v.VraanExecutionerThane.class));
         cards.add(new SetCardInfo("Vraska's Fall", 116, Rarity.COMMON, mage.cards.v.VraskasFall.class));
         cards.add(new SetCardInfo("Vulshok Splitter", 156, Rarity.COMMON, mage.cards.v.VulshokSplitter.class));
+        cards.add(new SetCardInfo("Whisper of the Dross", 117, Rarity.COMMON, mage.cards.w.WhisperOfTheDross.class));
         cards.add(new SetCardInfo("White Sun's Twilight", 38, Rarity.RARE, mage.cards.w.WhiteSunsTwilight.class));
     }
 
