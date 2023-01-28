@@ -170,6 +170,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Tainted Observer", 217, Rarity.UNCOMMON, mage.cards.t.TaintedObserver.class));
         cards.add(new SetCardInfo("Tamiyo's Immobilizer", 69, Rarity.UNCOMMON, mage.cards.t.TamiyosImmobilizer.class));
         cards.add(new SetCardInfo("Tamiyo's Logbook", 70, Rarity.UNCOMMON, mage.cards.t.TamiyosLogbook.class));
+        cards.add(new SetCardInfo("Tekuthal, Inquiry Dominus", 71, Rarity.MYTHIC, mage.cards.t.TekuthalInquiryDominus.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 261, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("Testament Bearer", 111, Rarity.COMMON, mage.cards.t.TestamentBearer.class));
         cards.add(new SetCardInfo("The Autonomous Furnace", 247, Rarity.COMMON, mage.cards.t.TheAutonomousFurnace.class));
