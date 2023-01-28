@@ -9,6 +9,8 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.common.FilterControlledArtifactPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCreatureOrPlaneswalker;
@@ -28,8 +30,10 @@ public final class AnnihilatingGlare extends CardImpl {
         
 
         // As an additional cost to cast this spell, pay {4} or sacrifice an artifact or creature.
-        this.getSpellAbility().addCost(new OrCost("pay {4} or sacrifice an artifact or creature",new GenericManaCost(4),
-                new SacrificeTargetCost(new FilterControlledPermanent(filter))));
+        this.getSpellAbility().addCost(new OrCost("pay {4} or sacrifice an artifact or creature",
+                new GenericManaCost(4),
+                new SacrificeTargetCost(new FilterControlledCreaturePermanent()),
+                new SacrificeTargetCost(new FilterControlledArtifactPermanent())));
         // Destroy target creature or planeswalker.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
