@@ -16,6 +16,7 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -82,7 +83,7 @@ class KenessosPriestOfThassaReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmountForCounters(event.getAmount() + 1, true);
+        event.setAmount(CardUtil.overflowInc(event.getAmount(), 1));
         return false;
     }
 }
