@@ -109,11 +109,7 @@ public class PermanentCard extends PermanentImpl {
         } else {
             // copy only own abilities; all dynamic added abilities must be added in the parent call
             this.abilities = card.getAbilities().copy();
-            // only set spellAbility to null if it has no targets IE: Dance of the Dead bug #7031
-            if (this.getSpellAbility() != null
-                    && this.getSpellAbility().getTargets().isEmpty()) {
-                this.spellAbility = null; // will be set on first getSpellAbility call if card has one.
-            }
+            this.spellAbility = null; // will be set on first getSpellAbility call if card has one.
         }
         this.abilities.setControllerId(this.controllerId);
         this.abilities.setSourceId(objectId);
