@@ -57,6 +57,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Darkslick Shores", 250, Rarity.RARE, mage.cards.d.DarkslickShores.class));
         cards.add(new SetCardInfo("Distorted Curiosity", 46, Rarity.UNCOMMON, mage.cards.d.DistortedCuriosity.class));
         cards.add(new SetCardInfo("Dragonwing Glider", 128, Rarity.RARE, mage.cards.d.DragonwingGlider.class));
+        cards.add(new SetCardInfo("Drivnod, Carnage Dominus", 90, Rarity.MYTHIC, mage.cards.d.DrivnodCarnageDominus.class));
         cards.add(new SetCardInfo("Dross Skullbomb", 225, Rarity.COMMON, mage.cards.d.DrossSkullbomb.class));
         cards.add(new SetCardInfo("Drown in Ichor", 91, Rarity.UNCOMMON, mage.cards.d.DrownInIchor.class));
         cards.add(new SetCardInfo("Duelist of Deep Faith", 9, Rarity.COMMON, mage.cards.d.DuelistOfDeepFaith.class));
