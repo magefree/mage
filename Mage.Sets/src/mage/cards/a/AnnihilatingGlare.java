@@ -1,7 +1,5 @@
 package mage.cards.a;
 
-import java.util.UUID;
-
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.OrCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -10,33 +8,28 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
+
+import java.util.UUID;
 
 /**
  *
  * @author AhmadYProjects
  */
 public final class AnnihilatingGlare extends CardImpl {
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("");
-    static{
-        filter.add(Predicates.or(CardType.CREATURE.getPredicate(),
-                CardType.ARTIFACT.getPredicate()));
-    }
+
     public AnnihilatingGlare(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
         
 
         // As an additional cost to cast this spell, pay {4} or sacrifice an artifact or creature.
         final Cost manaCost = new GenericManaCost(4);
-        final Cost sacrificeCost = new SacrificeTargetCost(new TargetControlledPermanent(filter));
+        final Cost sacrificeCost = new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE));
         this.getSpellAbility().addCost(new OrCost("pay {4} or sacrifice an artifact or creature",
-                sacrificeCost,
-                manaCost
+                manaCost,
+                sacrificeCost
         ));
         // Destroy target creature or planeswalker.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
