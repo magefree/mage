@@ -23,6 +23,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Adaptive Sporesinger", 157, Rarity.COMMON, mage.cards.a.AdaptiveSporesinger.class));
         cards.add(new SetCardInfo("Ambulatory Edifice", 79, Rarity.UNCOMMON, mage.cards.a.AmbulatoryEdifice.class));
         cards.add(new SetCardInfo("Annex Sentry", 2, Rarity.UNCOMMON, mage.cards.a.AnnexSentry.class));
+        cards.add(new SetCardInfo("Annihilating Glare", 80, Rarity.COMMON, mage.cards.a.AnnihilatingGlare.class));
         cards.add(new SetCardInfo("Anoint with Affliction", 81, Rarity.COMMON, mage.cards.a.AnointWithAffliction.class));
         cards.add(new SetCardInfo("Apostle of Invasion", 3, Rarity.UNCOMMON, mage.cards.a.ApostleOfInvasion.class));
         cards.add(new SetCardInfo("Archfiend of the Dross", 82, Rarity.RARE, mage.cards.a.ArchfiendOfTheDross.class));
