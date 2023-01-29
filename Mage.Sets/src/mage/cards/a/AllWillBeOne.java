@@ -38,29 +38,19 @@ public final class AllWillBeOne extends CardImpl {
     }
 }
 
-class AllWillBeOneFilter extends FilterCreaturePlayerOrPlaneswalker {
-
-    public AllWillBeOneFilter() {
-        super("target opponent, creature an opponent controls, or planeswalker an opponent controls");
-        this.permanentFilter.add(TargetController.NOT_YOU.getControllerPredicate());
-        this.playerFilter.add(TargetController.OPPONENT.getPlayerPredicate());
-    }
-
-    public AllWillBeOneFilter(final AllWillBeOneFilter filter) {
-        super(filter);
-    }
-
-    @Override
-    public AllWillBeOneFilter copy() {
-        return new AllWillBeOneFilter(this);
-    }
-}
-
 class AllWillBeOneTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final FilterCreaturePlayerOrPlaneswalker filter =
+            new FilterCreaturePlayerOrPlaneswalker("target opponent, creature an opponent controls, or planeswalker an opponent controls");
+
+    static {
+        filter.getPermanentFilter().add(TargetController.NOT_YOU.getControllerPredicate());
+        filter.getPlayerFilter().add(TargetController.OPPONENT.getPlayerPredicate());
+    }
 
     AllWillBeOneTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(SavedDamageValue.MUCH));
-        this.addTarget(new TargetAnyTarget(new AllWillBeOneFilter()));
+        this.addTarget(new TargetAnyTarget(filter));
     }
 
     private AllWillBeOneTriggeredAbility(final AllWillBeOneTriggeredAbility ability) {
@@ -74,7 +64,7 @@ class AllWillBeOneTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId() != getControllerId()) {
+        if (!isControlledBy(event.getPlayerId())) {
             return false;
         }
         getEffects().setValue("damage", event.getAmount());
