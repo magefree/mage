@@ -199,6 +199,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Titanic Growth", 187, Rarity.COMMON, mage.cards.t.TitanicGrowth.class));
         cards.add(new SetCardInfo("Transplant Theorist", 73, Rarity.UNCOMMON, mage.cards.t.TransplantTheorist.class));
         cards.add(new SetCardInfo("Trawler Drake", 74, Rarity.UNCOMMON, mage.cards.t.TrawlerDrake.class));
+        cards.add(new SetCardInfo("Tyrranax Atrocity", 188, Rarity.COMMON, mage.cards.t.TyrranaxAtrocity.class));
         cards.add(new SetCardInfo("Tyrranax Rex", 189, Rarity.MYTHIC, mage.cards.t.TyrranaxRex.class));
         cards.add(new SetCardInfo("Tyvar's Stand", 190, Rarity.UNCOMMON, mage.cards.t.TyvarsStand.class));
         cards.add(new SetCardInfo("Tyvar, Jubilant Brawler", 218, Rarity.RARE, mage.cards.t.TyvarJubilantBrawler.class));
