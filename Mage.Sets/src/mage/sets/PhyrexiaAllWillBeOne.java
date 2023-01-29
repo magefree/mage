@@ -193,6 +193,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("The Monumental Facade", 255, Rarity.RARE, mage.cards.t.TheMonumentalFacade.class));
         cards.add(new SetCardInfo("The Seedcore", 259, Rarity.RARE, mage.cards.t.TheSeedcore.class));
         cards.add(new SetCardInfo("The Surgical Bay", 260, Rarity.COMMON, mage.cards.t.TheSurgicalBay.class));
+        cards.add(new SetCardInfo("Thirsting Roots", 185, Rarity.COMMON, mage.cards.t.ThirstingRoots.class));
         cards.add(new SetCardInfo("Thrill of Possibility", 151, Rarity.COMMON, mage.cards.t.ThrillOfPossibility.class));
         cards.add(new SetCardInfo("Thrummingbird", 72, Rarity.UNCOMMON, mage.cards.t.Thrummingbird.class));
         cards.add(new SetCardInfo("Thrun, Breaker of Silence", 186, Rarity.RARE, mage.cards.t.ThrunBreakerOfSilence.class));
