@@ -73,6 +73,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Ezuri, Stalker of Spheres", 201, Rarity.RARE, mage.cards.e.EzuriStalkerOfSpheres.class));
         cards.add(new SetCardInfo("Feed the Infection", 93, Rarity.UNCOMMON, mage.cards.f.FeedTheInfection.class));
         cards.add(new SetCardInfo("Flensing Raptor", 12, Rarity.COMMON, mage.cards.f.FlensingRaptor.class));
+        cards.add(new SetCardInfo("Fleshless Gladiator", 94, Rarity.COMMON, mage.cards.f.FleshlessGladiator.class));
         cards.add(new SetCardInfo("Font of Progress", 51, Rarity.UNCOMMON, mage.cards.f.FontOfProgress.class));
         cards.add(new SetCardInfo("Forest", 276, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Free from Flesh", 131, Rarity.COMMON, mage.cards.f.FreeFromFlesh.class));
