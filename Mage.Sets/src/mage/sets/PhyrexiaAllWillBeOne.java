@@ -222,6 +222,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Venomous Brutalizer", 193, Rarity.UNCOMMON, mage.cards.v.VenomousBrutalizer.class));
         cards.add(new SetCardInfo("Venser, Corpse Puppet", 219, Rarity.RARE, mage.cards.v.VenserCorpsePuppet.class));
         cards.add(new SetCardInfo("Vindictive Flamestoker", 154, Rarity.RARE, mage.cards.v.VindictiveFlamestoker.class));
+        cards.add(new SetCardInfo("Vivisection Evangelist", 220, Rarity.UNCOMMON, mage.cards.v.VivisectionEvangelist.class));
         cards.add(new SetCardInfo("Vivisurgeon's Insight", 77, Rarity.COMMON, mage.cards.v.VivisurgeonsInsight.class));
         cards.add(new SetCardInfo("Voidwing Hybrid", 221, Rarity.UNCOMMON, mage.cards.v.VoidwingHybrid.class));
         cards.add(new SetCardInfo("Volt Charge", 155, Rarity.COMMON, mage.cards.v.VoltCharge.class));
