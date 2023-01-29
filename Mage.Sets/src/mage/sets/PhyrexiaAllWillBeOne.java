@@ -134,6 +134,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Myr Kinsmith", 236, Rarity.COMMON, mage.cards.m.MyrKinsmith.class));
         cards.add(new SetCardInfo("Necrogen Communion", 99, Rarity.UNCOMMON, mage.cards.n.NecrogenCommunion.class));
         cards.add(new SetCardInfo("Necrogen Rotpriest", 212, Rarity.UNCOMMON, mage.cards.n.NecrogenRotpriest.class));
+        cards.add(new SetCardInfo("Necrosquito", 100, Rarity.UNCOMMON, mage.cards.n.Necrosquito.class));
         cards.add(new SetCardInfo("Nimraiser Paladin", 101, Rarity.UNCOMMON, mage.cards.n.NimraiserPaladin.class));
         cards.add(new SetCardInfo("Nissa, Ascended Animist", 175, Rarity.MYTHIC, mage.cards.n.NissaAscendedAnimist.class));
         cards.add(new SetCardInfo("Norn's Wellspring", 24, Rarity.RARE, mage.cards.n.NornsWellspring.class));
