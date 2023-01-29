@@ -172,6 +172,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Slaughter Singer", 216, Rarity.UNCOMMON, mage.cards.s.SlaughterSinger.class));
         cards.add(new SetCardInfo("Solphim, Mayhem Dominus", 150, Rarity.MYTHIC, mage.cards.s.SolphimMayhemDominus.class));
         cards.add(new SetCardInfo("Staff of Compleation", 242, Rarity.MYTHIC, mage.cards.s.StaffOfCompleation.class));
+        cards.add(new SetCardInfo("Stinging Hivemaster", 110, Rarity.COMMON, mage.cards.s.StingingHivemaster.class));
         cards.add(new SetCardInfo("Surgical Skullbomb", 243, Rarity.COMMON, mage.cards.s.SurgicalSkullbomb.class));
         cards.add(new SetCardInfo("Swamp", 274, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swooping Lookout", 35, Rarity.UNCOMMON, mage.cards.s.SwoopingLookout.class));
