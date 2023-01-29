@@ -110,6 +110,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Kuldotha Cackler", 139, Rarity.COMMON, mage.cards.k.KuldothaCackler.class));
         cards.add(new SetCardInfo("Lattice-Blade Mantis", 173, Rarity.COMMON, mage.cards.l.LatticeBladeMantis.class));
         cards.add(new SetCardInfo("Leonin Lightbringer", 20, Rarity.COMMON, mage.cards.l.LeoninLightbringer.class));
+        cards.add(new SetCardInfo("Magmatic Sprinter", 140, Rarity.UNCOMMON, mage.cards.m.MagmaticSprinter.class));
         cards.add(new SetCardInfo("Malcator's Watcher", 58, Rarity.COMMON, mage.cards.m.MalcatorsWatcher.class));
         cards.add(new SetCardInfo("Malcator, Purity Overseer", 208, Rarity.RARE, mage.cards.m.MalcatorPurityOverseer.class));
         cards.add(new SetCardInfo("Mandible Justiciar", 21, Rarity.COMMON, mage.cards.m.MandibleJusticiar.class));
