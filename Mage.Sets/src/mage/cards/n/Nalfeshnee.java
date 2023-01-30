@@ -6,6 +6,7 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,6 +40,9 @@ public final class Nalfeshnee extends CardImpl {
         this.subtype.add(SubType.DEMON);
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
 
         // Whenever you cast a spell from exile, copy it. You may choose new targets for the copy. If it’s a permanent spell, the copy gains haste and “At the beginning of the end step, sacrifice this permanent.”
         this.addAbility(new SpellCastControllerTriggeredAbility(new NalfeshneeEffect(), filter, false));
