@@ -25,11 +25,9 @@ public final class AnnihilatingGlare extends CardImpl {
         
 
         // As an additional cost to cast this spell, pay {4} or sacrifice an artifact or creature.
-        final Cost manaCost = new GenericManaCost(4);
-        final Cost sacrificeCost = new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE));
         this.getSpellAbility().addCost(new OrCost("pay {4} or sacrifice an artifact or creature",
-                manaCost,
-                sacrificeCost
+                new GenericManaCost(4),
+                new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE))
         ));
         // Destroy target creature or planeswalker.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
