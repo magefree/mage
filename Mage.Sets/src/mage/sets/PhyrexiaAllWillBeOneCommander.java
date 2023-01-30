@@ -93,6 +93,7 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Midnight Haunting", 82, Rarity.UNCOMMON, mage.cards.m.MidnightHaunting.class));
         cards.add(new SetCardInfo("Mind Stone", 137, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Moldervine Reclamation", 121, Rarity.UNCOMMON, mage.cards.m.MoldervineReclamation.class));
+        cards.add(new SetCardInfo("Monumental Corruption", 24, Rarity.RARE, mage.cards.m.MonumentalCorruption.class));
         cards.add(new SetCardInfo("Mortify", 122, Rarity.UNCOMMON, mage.cards.m.Mortify.class));
         cards.add(new SetCardInfo("Mycosynth Fiend", 109, Rarity.UNCOMMON, mage.cards.m.MycosynthFiend.class));
         cards.add(new SetCardInfo("Myr Battlesphere", 138, Rarity.RARE, mage.cards.m.MyrBattlesphere.class));
