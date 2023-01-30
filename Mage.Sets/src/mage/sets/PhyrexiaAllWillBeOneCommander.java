@@ -119,6 +119,7 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Shineshadow Snarl", 164, Rarity.RARE, mage.cards.s.ShineshadowSnarl.class));
         cards.add(new SetCardInfo("Siege-Gang Commander", 103, Rarity.RARE, mage.cards.s.SiegeGangCommander.class));
         cards.add(new SetCardInfo("Silverwing Squadron", 88, Rarity.RARE, mage.cards.s.SilverwingSquadron.class));
+        cards.add(new SetCardInfo("Skyhunter Strike Force", 21, Rarity.RARE, mage.cards.s.SkyhunterStrikeForce.class));
         cards.add(new SetCardInfo("Slayers' Stronghold", 165, Rarity.RARE, mage.cards.s.SlayersStronghold.class));
         cards.add(new SetCardInfo("Sol Ring", 140, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 141, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
