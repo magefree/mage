@@ -38,6 +38,7 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Castle Embereth", 150, Rarity.RARE, mage.cards.c.CastleEmbereth.class));
         cards.add(new SetCardInfo("Chain Reaction", 97, Rarity.RARE, mage.cards.c.ChainReaction.class));
         cards.add(new SetCardInfo("Chromatic Lantern", 127, Rarity.RARE, mage.cards.c.ChromaticLantern.class));
+        cards.add(new SetCardInfo("Clever Concealment", 5, Rarity.RARE, mage.cards.c.CleverConcealment.class));
         cards.add(new SetCardInfo("Collective Effort", 61, Rarity.RARE, mage.cards.c.CollectiveEffort.class));
         cards.add(new SetCardInfo("Command Tower", 151, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Sphere", 128, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
