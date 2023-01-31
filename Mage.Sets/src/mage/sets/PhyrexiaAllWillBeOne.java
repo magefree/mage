@@ -93,6 +93,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Hexgold Halberd", 136, Rarity.UNCOMMON, mage.cards.h.HexgoldHalberd.class));
         cards.add(new SetCardInfo("Hexgold Hoverwings", 14, Rarity.UNCOMMON, mage.cards.h.HexgoldHoverwings.class));
         cards.add(new SetCardInfo("Hexgold Slash", 137, Rarity.COMMON, mage.cards.h.HexgoldSlash.class));
+        cards.add(new SetCardInfo("Ichorplate Golem", 230, Rarity.UNCOMMON, mage.cards.i.IchorplateGolem.class));
         cards.add(new SetCardInfo("Ichor Synthesizer", 55, Rarity.COMMON, mage.cards.i.IchorSynthesizer.class));
         cards.add(new SetCardInfo("Ichorspit Basilisk", 170, Rarity.COMMON, mage.cards.i.IchorspitBasilisk.class));
         cards.add(new SetCardInfo("Incisor Glider", 15, Rarity.COMMON, mage.cards.i.IncisorGlider.class));
