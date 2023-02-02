@@ -22,7 +22,7 @@ import java.util.UUID;
  * @author AhmadYProjects
  */
 public final class AgainstAllOdds extends CardImpl {
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("creature card with mana value 3 or less");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact or creature card you control");
     private static final FilterCard filter2 = new FilterCard("artifact or creature card with mana value 3 or less from your graveyard");
 
     static{
@@ -43,6 +43,8 @@ public final class AgainstAllOdds extends CardImpl {
         
 
         // Choose one or both --
+        this.getSpellAbility().getModes().setMinModes(1);
+        this.getSpellAbility().getModes().setMaxModes(2);
         // * Exile target artifact or creature you control, then return it to the battlefield under its owner's control.
         this.getSpellAbility().addTarget(new TargetControlledPermanent(filter));
         this.getSpellAbility().addEffect(new ExileTargetForSourceEffect());
