@@ -8,11 +8,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SetTargetPointer;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -45,6 +47,7 @@ public final class NoxiousAssault extends CardImpl {
 class NoxiousAssaultDelayedTriggerAbility extends DelayedTriggeredAbility {
     NoxiousAssaultDelayedTriggerAbility() {
         super(new AddPoisonCounterTargetEffect(1),Duration.EndOfTurn,false,false);
+
     }
 
     private NoxiousAssaultDelayedTriggerAbility(final NoxiousAssaultDelayedTriggerAbility ability){
@@ -59,22 +62,22 @@ class NoxiousAssaultDelayedTriggerAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        Player player = game.getPlayer(permanent.getControllerId());
         if (permanent == null){
             return false;
         }
-        player.addCounters(CounterType.POISON.createInstance(1),permanent.getControllerId(),this,game);
+        getEffects().setTargetPointer(new FixedTarget(permanent.getControllerId()));
+
         return true;
     }
 
     @Override
     public NoxiousAssaultDelayedTriggerAbility copy(){
-        return new NoxiousAssaultDelayedTriggerAbility();
+        return new NoxiousAssaultDelayedTriggerAbility(this);
     }
 
     @Override
     public String getRule(){
-        return "Whenever a creature blocks this turn, it's controller gets a poison counter.";
+        return "Whenever a creature blocks this turn, its controller gets a poison counter.";
     }
 
 }
