@@ -15,7 +15,6 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -90,6 +89,7 @@ class AtraxaGrandUnifierEffect extends OneShotEffect {
         TargetCard target = new AtraxaGrandUnifierTarget();
         player.choose(outcome, cards, target, game);
         Cards toHand = new CardsImpl(target.getTargets());
+        player.revealCards(source, toHand, game);
         player.moveCards(toHand, Zone.HAND, source, game);
         cards.retainZone(Zone.LIBRARY, game);
         player.putCardsOnBottomOfLibrary(cards, game, source, false);
