@@ -136,14 +136,18 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     PlayerList getPlayerList();
 
+    default Set<UUID> getOpponents(UUID playerId) {
+        return getOpponents(playerId, false);
+    }
+
     /**
-     * Returns a Set of opponents in range for the given playerId This return
-     * also a player, that has dies this turn.
+     * Returns a Set of opponents in range for the given playerId
      *
      * @param playerId
+     * @param excludeDeadPlayers Determines if players who have lost are excluded from the list
      * @return
      */
-    default Set<UUID> getOpponents(UUID playerId) {
+    default Set<UUID> getOpponents(UUID playerId, boolean excludeDeadPlayers) {
         Player player = getPlayer(playerId);
         if (player == null) {
             return new HashSet<>();
@@ -151,6 +155,7 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
         return player.getInRange().stream()
                 .filter(opponentId -> !opponentId.equals(playerId))
+                .filter(opponentId -> !excludeDeadPlayers || !getPlayer(opponentId).hasLost())
                 .collect(Collectors.toSet());
     }
 

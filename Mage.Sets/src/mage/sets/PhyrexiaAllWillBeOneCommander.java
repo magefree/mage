@@ -38,6 +38,7 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Castle Embereth", 150, Rarity.RARE, mage.cards.c.CastleEmbereth.class));
         cards.add(new SetCardInfo("Chain Reaction", 97, Rarity.RARE, mage.cards.c.ChainReaction.class));
         cards.add(new SetCardInfo("Chromatic Lantern", 127, Rarity.RARE, mage.cards.c.ChromaticLantern.class));
+        cards.add(new SetCardInfo("Clever Concealment", 5, Rarity.RARE, mage.cards.c.CleverConcealment.class));
         cards.add(new SetCardInfo("Collective Effort", 61, Rarity.RARE, mage.cards.c.CollectiveEffort.class));
         cards.add(new SetCardInfo("Command Tower", 151, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Sphere", 128, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
@@ -92,6 +93,7 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Midnight Haunting", 82, Rarity.UNCOMMON, mage.cards.m.MidnightHaunting.class));
         cards.add(new SetCardInfo("Mind Stone", 137, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Moldervine Reclamation", 121, Rarity.UNCOMMON, mage.cards.m.MoldervineReclamation.class));
+        cards.add(new SetCardInfo("Monumental Corruption", 24, Rarity.RARE, mage.cards.m.MonumentalCorruption.class));
         cards.add(new SetCardInfo("Mortify", 122, Rarity.UNCOMMON, mage.cards.m.Mortify.class));
         cards.add(new SetCardInfo("Mycosynth Fiend", 109, Rarity.UNCOMMON, mage.cards.m.MycosynthFiend.class));
         cards.add(new SetCardInfo("Myr Battlesphere", 138, Rarity.RARE, mage.cards.m.MyrBattlesphere.class));
@@ -117,6 +119,7 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Shineshadow Snarl", 164, Rarity.RARE, mage.cards.s.ShineshadowSnarl.class));
         cards.add(new SetCardInfo("Siege-Gang Commander", 103, Rarity.RARE, mage.cards.s.SiegeGangCommander.class));
         cards.add(new SetCardInfo("Silverwing Squadron", 88, Rarity.RARE, mage.cards.s.SilverwingSquadron.class));
+        cards.add(new SetCardInfo("Skyhunter Strike Force", 21, Rarity.RARE, mage.cards.s.SkyhunterStrikeForce.class));
         cards.add(new SetCardInfo("Slayers' Stronghold", 165, Rarity.RARE, mage.cards.s.SlayersStronghold.class));
         cards.add(new SetCardInfo("Sol Ring", 140, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 141, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));

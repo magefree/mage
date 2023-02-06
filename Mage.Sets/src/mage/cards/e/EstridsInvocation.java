@@ -89,7 +89,7 @@ class EstridsInvocationEffect extends OneShotEffect {
             return false;
         }
         Card card = permanent.getMainCard();
-        player.moveCards(card, Zone.EXILED, source, game);
+        player.moveCards(permanent, Zone.EXILED, source, game);
         player.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null);
         return true;
     }
