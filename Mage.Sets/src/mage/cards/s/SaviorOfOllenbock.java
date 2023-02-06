@@ -14,6 +14,8 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -58,12 +60,18 @@ public final class SaviorOfOllenbock extends CardImpl {
 
 class SaviorOfOllenbockTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other target creature");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
+
     SaviorOfOllenbockTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ExileTargetForSourceEffect());
         this.addTarget(new TargetCardInGraveyardBattlefieldOrStack(
                 0, 1,
                 StaticFilters.FILTER_CARD_CREATURE,
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
+                filter
         ));
     }
 
