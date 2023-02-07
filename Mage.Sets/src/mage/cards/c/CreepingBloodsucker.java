@@ -12,6 +12,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.game.Game;
+import mage.players.Player;
 
 import java.util.UUID;
 
@@ -45,7 +46,7 @@ public final class CreepingBloodsucker extends CardImpl {
 class CreepingBloodsuckerEffect extends OneShotEffect {
     public CreepingBloodsuckerEffect() {
         super(Outcome.Damage);
-        staticText = "{this} deals 1 damage to each other player. You gain life equal to the damage dealt this way";
+        staticText = "{this} deals 1 damage to each opponent. You gain life equal to the damage dealt this way";
     }
 
     public CreepingBloodsuckerEffect(final CreepingBloodsuckerEffect effect) {
@@ -55,8 +56,9 @@ class CreepingBloodsuckerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int damageDealt = 0;
+        Player player = game.getPlayer(source.getControllerId());
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            if (!playerId.equals(source.getControllerId())) {
+            if (player.hasOpponent(playerId, game)) {
                 damageDealt += game.getPlayer(playerId).damage(1, source.getSourceId(), source, game);
             }
         }

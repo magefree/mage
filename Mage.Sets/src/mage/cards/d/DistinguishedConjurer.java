@@ -14,6 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -24,8 +25,8 @@ import java.util.UUID;
  */
 public final class DistinguishedConjurer extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter
-            = new FilterControlledCreaturePermanent("another creature you control");
+    private static final FilterCreaturePermanent filter
+            = new FilterCreaturePermanent("another creature");
     private static final FilterControlledCreaturePermanent filter2
             = new FilterControlledCreaturePermanent("another target creature you control");
 
