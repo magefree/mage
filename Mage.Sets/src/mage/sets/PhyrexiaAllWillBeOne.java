@@ -102,6 +102,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Infectious Inquiry", 97, Rarity.COMMON, mage.cards.i.InfectiousInquiry.class));
         cards.add(new SetCardInfo("Infested Fleshcutter", 17, Rarity.UNCOMMON, mage.cards.i.InfestedFleshcutter.class));
         cards.add(new SetCardInfo("Island", 273, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jace, the Perfected Mind", 57, Rarity.MYTHIC, mage.cards.j.JaceThePerfectedMind.class));
         cards.add(new SetCardInfo("Jawbone Duelist", 18, Rarity.UNCOMMON, mage.cards.j.JawboneDuelist.class));
         cards.add(new SetCardInfo("Jor Kadeen, First Goldwarden", 203, Rarity.RARE, mage.cards.j.JorKadeenFirstGoldwarden.class));
         cards.add(new SetCardInfo("Karumonix, the Rat King", 98, Rarity.RARE, mage.cards.k.KarumonixTheRatKing.class));
