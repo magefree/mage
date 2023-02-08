@@ -62,7 +62,7 @@ class NalfeshneeEffect extends OneShotEffect {
 
     NalfeshneeEffect() {
         super(Outcome.Benefit);
-        staticText = "copy it, You may choose new targets for the copy. If it's a permanent spell, the copy gains haste and \"At the beginning of the end step, sacrifice this permanent.\"";
+        staticText = "copy it. You may choose new targets for the copy. If it's a permanent spell, the copy gains haste and \"At the beginning of the end step, sacrifice this permanent.\"";
     }
 
     private NalfeshneeEffect(final NalfeshneeEffect effect) {
