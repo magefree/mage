@@ -425,6 +425,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Nimblewright Schematic", 330, Rarity.COMMON, mage.cards.n.NimblewrightSchematic.class));
         cards.add(new SetCardInfo("Nine-Fingers Keene", 289, Rarity.RARE, mage.cards.n.NineFingersKeene.class));
         cards.add(new SetCardInfo("Niv-Mizzet, Parun", 851, Rarity.RARE, mage.cards.n.NivMizzetParun.class));
+        cards.add(new SetCardInfo("Noble Heritage", 35, Rarity.RARE, mage.cards.n.NobleHeritage.class));
         cards.add(new SetCardInfo("Noble's Purse", 331, Rarity.UNCOMMON, mage.cards.n.NoblesPurse.class));
         cards.add(new SetCardInfo("Nothic", 138, Rarity.UNCOMMON, mage.cards.n.Nothic.class));
         cards.add(new SetCardInfo("Oceanus Dragon", 87, Rarity.COMMON, mage.cards.o.OceanusDragon.class));
