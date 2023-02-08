@@ -98,7 +98,7 @@ class NobleHeritageTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When {this} enters the battlefield or at the beginning of your upkeep, each player may put two +1/+1 counters on a creature they control. For each opponent who does, you gain protection from that player until your next turn.";
+        return "When this creature enters the battlefield and at the beginning of your upkeep, each player may put two +1/+1 counters on a creature they control. For each opponent who does, you gain protection from that player until your next turn.";
     }
 }
 
