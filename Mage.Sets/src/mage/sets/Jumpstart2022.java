@@ -393,6 +393,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Karn Liberated", 97, Rarity.MYTHIC, mage.cards.k.KarnLiberated.class));
         cards.add(new SetCardInfo("Kasmina, Enigmatic Mentor", 60, Rarity.UNCOMMON, mage.cards.k.KasminaEnigmaticMentor.class));
         cards.add(new SetCardInfo("Keldon Raider", 563, Rarity.COMMON, mage.cards.k.KeldonRaider.class));
+        cards.add(new SetCardInfo("Kenessos, Priest of Thassa", 13, Rarity.RARE, mage.cards.k.KenessosPriestOfThassa.class));
         cards.add(new SetCardInfo("Kessig Cagebreakers", 681, Rarity.RARE, mage.cards.k.KessigCagebreakers.class));
         cards.add(new SetCardInfo("Khalni Heart Expedition", 90, Rarity.COMMON, mage.cards.k.KhalniHeartExpedition.class));
         cards.add(new SetCardInfo("Kibo, Uktabi Prince", 40, Rarity.MYTHIC, mage.cards.k.KiboUktabiPrince.class));
