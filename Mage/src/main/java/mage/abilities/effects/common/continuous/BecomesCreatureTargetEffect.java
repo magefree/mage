@@ -39,7 +39,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
 
     /**
      * @param token
-     * @param loseAllAbilities loses all subtypes, colors and abilities
+     * @param loseAllAbilities loses all creature subtypes, colors and abilities
      * @param stillALand add rule text, "it's still a land"
      * @param loseName permanent loses name and gets it from token
      * @param keepAbilities lose subtypes/colors, but keep abilities (example:
@@ -94,7 +94,10 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                     if (loseOtherCardTypes) {
                         permanent.removeAllCardTypes(game);
                     }
-                    if (loseAllAbilities || keepAbilities || removeSubtypes) {
+                    if (loseAllAbilities) {
+                        permanent.removeAllCreatureTypes(game);
+                    }
+                    if (keepAbilities || removeSubtypes) {
                         permanent.removeAllSubTypes(game);
                     }
                     for (CardType t : token.getCardType(game)) {
