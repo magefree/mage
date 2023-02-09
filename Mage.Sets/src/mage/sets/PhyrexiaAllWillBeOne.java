@@ -57,6 +57,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Copper Longlegs", 165, Rarity.COMMON, mage.cards.c.CopperLonglegs.class));
         cards.add(new SetCardInfo("Copperline Gorge", 249, Rarity.RARE, mage.cards.c.CopperlineGorge.class));
         cards.add(new SetCardInfo("Crawling Chorus", 8, Rarity.COMMON, mage.cards.c.CrawlingChorus.class));
+        cards.add(new SetCardInfo("Cruel Grimnarch", 88, Rarity.COMMON, mage.cards.c.CruelGrimnarch.class));
         cards.add(new SetCardInfo("Cutthroat Centurion", 89, Rarity.COMMON, mage.cards.c.CutthroatCenturion.class));
         cards.add(new SetCardInfo("Darkslick Shores", 250, Rarity.RARE, mage.cards.d.DarkslickShores.class));
         cards.add(new SetCardInfo("Distorted Curiosity", 46, Rarity.UNCOMMON, mage.cards.d.DistortedCuriosity.class));
@@ -93,6 +94,8 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Hexgold Halberd", 136, Rarity.UNCOMMON, mage.cards.h.HexgoldHalberd.class));
         cards.add(new SetCardInfo("Hexgold Hoverwings", 14, Rarity.UNCOMMON, mage.cards.h.HexgoldHoverwings.class));
         cards.add(new SetCardInfo("Hexgold Slash", 137, Rarity.COMMON, mage.cards.h.HexgoldSlash.class));
+        cards.add(new SetCardInfo("Ichormoon Gauntlet", 56, Rarity.MYTHIC, mage.cards.i.IchormoonGauntlet.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ichormoon Gauntlet", 348, Rarity.MYTHIC, mage.cards.i.IchormoonGauntlet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ichorplate Golem", 230, Rarity.UNCOMMON, mage.cards.i.IchorplateGolem.class));
         cards.add(new SetCardInfo("Ichor Synthesizer", 55, Rarity.COMMON, mage.cards.i.IchorSynthesizer.class));
         cards.add(new SetCardInfo("Ichorspit Basilisk", 170, Rarity.COMMON, mage.cards.i.IchorspitBasilisk.class));
@@ -103,6 +106,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Infectious Inquiry", 97, Rarity.COMMON, mage.cards.i.InfectiousInquiry.class));
         cards.add(new SetCardInfo("Infested Fleshcutter", 17, Rarity.UNCOMMON, mage.cards.i.InfestedFleshcutter.class));
         cards.add(new SetCardInfo("Island", 273, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jace, the Perfected Mind", 57, Rarity.MYTHIC, mage.cards.j.JaceThePerfectedMind.class));
         cards.add(new SetCardInfo("Jawbone Duelist", 18, Rarity.UNCOMMON, mage.cards.j.JawboneDuelist.class));
         cards.add(new SetCardInfo("Jor Kadeen, First Goldwarden", 203, Rarity.RARE, mage.cards.j.JorKadeenFirstGoldwarden.class));
         cards.add(new SetCardInfo("Karumonix, the Rat King", 98, Rarity.RARE, mage.cards.k.KarumonixTheRatKing.class));
@@ -229,6 +233,10 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Voidwing Hybrid", 221, Rarity.UNCOMMON, mage.cards.v.VoidwingHybrid.class));
         cards.add(new SetCardInfo("Volt Charge", 155, Rarity.COMMON, mage.cards.v.VoltCharge.class));
         cards.add(new SetCardInfo("Vraan, Executioner Thane", 114, Rarity.RARE, mage.cards.v.VraanExecutionerThane.class));
+        cards.add(new SetCardInfo("Vraska, Betrayal's Sting", 115, Rarity.MYTHIC, mage.cards.v.VraskaBetrayalsSting.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vraska, Betrayal's Sting", 361, Rarity.MYTHIC, mage.cards.v.VraskaBetrayalsSting.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vraska, Betrayal's Sting", 326, Rarity.MYTHIC, mage.cards.v.VraskaBetrayalsSting.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vraska, Betrayal's Sting", 337, Rarity.MYTHIC, mage.cards.v.VraskaBetrayalsSting.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vraska's Fall", 116, Rarity.COMMON, mage.cards.v.VraskasFall.class));
         cards.add(new SetCardInfo("Vulshok Splitter", 156, Rarity.COMMON, mage.cards.v.VulshokSplitter.class));
         cards.add(new SetCardInfo("Watchful Blisterzoa", 78, Rarity.UNCOMMON, mage.cards.w.WatchfulBlisterzoa.class));

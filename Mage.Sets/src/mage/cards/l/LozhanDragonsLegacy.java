@@ -54,7 +54,8 @@ public final class LozhanDragonsLegacy extends CardImpl {
 
         // Whenever you cast an Adventure spell or Dragon spell, Lozhan, Dragons' Legacy deals damage equal to that spell's mana value to any target that isn't a commander.
         Ability ability = new SpellCastControllerTriggeredAbility(
-                new DamageTargetEffect(LozhanDragonsLegacyValue.instance), filter, false
+                new DamageTargetEffect(LozhanDragonsLegacyValue.instance)
+                        .setText("{this} deals damage equal to that spell's mana value to any target that isn't a commander"), filter, false
         );
         ability.addTarget(new TargetAnyTarget(filter2));
         this.addAbility(ability);
