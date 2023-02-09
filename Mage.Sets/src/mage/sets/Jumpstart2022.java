@@ -819,6 +819,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Yidaro, Wandering Monster", 625, Rarity.RARE, mage.cards.y.YidaroWanderingMonster.class));
         cards.add(new SetCardInfo("Young Pyromancer", 626, Rarity.UNCOMMON, mage.cards.y.YoungPyromancer.class));
         cards.add(new SetCardInfo("Young Wolf", 746, Rarity.COMMON, mage.cards.y.YoungWolf.class));
+        cards.add(new SetCardInfo("Zask, Skittering Swarmlord", 47, Rarity.RARE, mage.cards.z.ZaskSkitteringSwarmlord.class));
         cards.add(new SetCardInfo("Zendikar's Roil", 747, Rarity.UNCOMMON, mage.cards.z.ZendikarsRoil.class));
     }
 }
