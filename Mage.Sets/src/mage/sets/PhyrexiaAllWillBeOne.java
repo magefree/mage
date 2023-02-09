@@ -230,6 +230,10 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Voidwing Hybrid", 221, Rarity.UNCOMMON, mage.cards.v.VoidwingHybrid.class));
         cards.add(new SetCardInfo("Volt Charge", 155, Rarity.COMMON, mage.cards.v.VoltCharge.class));
         cards.add(new SetCardInfo("Vraan, Executioner Thane", 114, Rarity.RARE, mage.cards.v.VraanExecutionerThane.class));
+        cards.add(new SetCardInfo("Vraska, Betrayal's Sting", 115, Rarity.MYTHIC, mage.cards.v.VraskaBetrayalsSting.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vraska, Betrayal's Sting", 361, Rarity.MYTHIC, mage.cards.v.VraskaBetrayalsSting.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vraska, Betrayal's Sting", 326, Rarity.MYTHIC, mage.cards.v.VraskaBetrayalsSting.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vraska, Betrayal's Sting", 337, Rarity.MYTHIC, mage.cards.v.VraskaBetrayalsSting.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vraska's Fall", 116, Rarity.COMMON, mage.cards.v.VraskasFall.class));
         cards.add(new SetCardInfo("Vulshok Splitter", 156, Rarity.COMMON, mage.cards.v.VulshokSplitter.class));
         cards.add(new SetCardInfo("Watchful Blisterzoa", 78, Rarity.UNCOMMON, mage.cards.w.WatchfulBlisterzoa.class));
