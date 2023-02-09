@@ -38,7 +38,7 @@ public final class VraskaBetrayalsSting extends CardImpl {
         // 0: You draw a card and you lose 1 life. Proliferate.
         Ability ability = new LoyaltyAbility(new DrawCardSourceControllerEffect(1).setText("You draw a card"), 0);
         ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
-        ability.addEffect(new ProliferateEffect());
+        ability.addEffect(new ProliferateEffect(false));
         this.addAbility(ability);
 
         // −2: Target creature becomes a Treasure artifact with "{T}, Sacrifice this artifact:
