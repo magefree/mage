@@ -654,6 +654,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Skilled Animator", 348, Rarity.UNCOMMON, mage.cards.s.SkilledAnimator.class));
         cards.add(new SetCardInfo("Skirsdag High Priest", 467, Rarity.RARE, mage.cards.s.SkirsdagHighPriest.class));
         cards.add(new SetCardInfo("Skirsdag Supplicant", 468, Rarity.COMMON, mage.cards.s.SkirsdagSupplicant.class));
+        cards.add(new SetCardInfo("Skullslither Worm", 26, Rarity.UNCOMMON, mage.cards.s.SkullslitherWorm.class));
         cards.add(new SetCardInfo("Skyhunter Patrol", 245, Rarity.COMMON, mage.cards.s.SkyhunterPatrol.class));
         cards.add(new SetCardInfo("Skyhunter Prowler", 246, Rarity.COMMON, mage.cards.s.SkyhunterProwler.class));
         cards.add(new SetCardInfo("Sling-Gang Lieutenant", 469, Rarity.UNCOMMON, mage.cards.s.SlingGangLieutenant.class));
