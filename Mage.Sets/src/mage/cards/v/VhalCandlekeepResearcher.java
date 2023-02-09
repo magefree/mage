@@ -40,7 +40,7 @@ public final class VhalCandlekeepResearcher extends CardImpl {
 
         // {T}: Add an amount of {C} equal to Vhal, Candlekeep Researcher’s toughness. This mana can’t be spent to cast spells from your hand.
         Ability ability = new ConditionalColorlessManaAbility(this.toughness.getValue(), new VhalCandlekeepResearcherManaBuilder());
-        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
 
         // Choose a Background
         this.addAbility(ChooseABackgroundAbility.getInstance());
@@ -84,7 +84,7 @@ enum VhalCandlekeepResearcherManaCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         if (!(source instanceof SpellAbility)) {
-            return false;
+            return true;
         }
         MageObject object = game.getObject(source);
         if (!source.isControlledBy(game.getOwnerId(object))) {
