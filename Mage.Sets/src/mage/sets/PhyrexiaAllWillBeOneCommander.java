@@ -113,6 +113,8 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Prava of the Steel Legion", 87, Rarity.UNCOMMON, mage.cards.p.PravaOfTheSteelLegion.class));
         cards.add(new SetCardInfo("Putrefy", 123, Rarity.UNCOMMON, mage.cards.p.Putrefy.class));
         cards.add(new SetCardInfo("Rip Apart", 124, Rarity.UNCOMMON, mage.cards.r.RipApart.class));
+        cards.add(new SetCardInfo("Roar of Resistance", 15, Rarity.RARE, mage.cards.r.RoarOfResistance.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Roar of Resistance", 53, Rarity.RARE, mage.cards.r.RoarOfResistance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sandsteppe Citadel", 162, Rarity.UNCOMMON, mage.cards.s.SandsteppeCitadel.class));
         cards.add(new SetCardInfo("Scavenging Ooze", 112, Rarity.RARE, mage.cards.s.ScavengingOoze.class));
         cards.add(new SetCardInfo("Secluded Steppe", 163, Rarity.UNCOMMON, mage.cards.s.SecludedSteppe.class));
