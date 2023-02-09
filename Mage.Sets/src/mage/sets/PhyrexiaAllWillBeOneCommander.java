@@ -135,6 +135,7 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of Triumph", 173, Rarity.RARE, mage.cards.t.TempleOfTriumph.class));
         cards.add(new SetCardInfo("Temple of the False God", 172, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
         cards.add(new SetCardInfo("Trailblazer's Boots", 144, Rarity.UNCOMMON, mage.cards.t.TrailblazersBoots.class));
+        cards.add(new SetCardInfo("Urtet, Remnant of Memnarch", 28, Rarity.MYTHIC, mage.cards.u.UrtetRemnantOfMemnarch.class));
         cards.add(new SetCardInfo("Viridian Corrupter", 113, Rarity.UNCOMMON, mage.cards.v.ViridianCorrupter.class));
         cards.add(new SetCardInfo("White Sun's Zenith", 90, Rarity.RARE, mage.cards.w.WhiteSunsZenith.class));
         cards.add(new SetCardInfo("Windborn Muse", 91, Rarity.RARE, mage.cards.w.WindbornMuse.class));
