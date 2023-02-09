@@ -28,15 +28,13 @@ import java.util.UUID;
 public final class ZaskSkitteringSwarmlord extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("lands and cast Insect spells");
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("another Insect you control");
-    private static final FilterCreaturePermanent filter3 = new FilterCreaturePermanent("Insect");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent(SubType.INSECT, "another Insect you control");
+    private static final FilterCreaturePermanent filter3 = new FilterCreaturePermanent(SubType.INSECT, "Insect");
 
     static {
         filter.add(Predicates.or(CardType.LAND.getPredicate(), SubType.INSECT.getPredicate()));
         filter2.add(AnotherPredicate.instance);
-        filter2.add(SubType.INSECT.getPredicate());
         filter2.add(TargetController.YOU.getControllerPredicate());
-        filter3.add(SubType.INSECT.getPredicate());
     }
 
     public ZaskSkitteringSwarmlord(UUID ownerId, CardSetInfo setInfo) {
