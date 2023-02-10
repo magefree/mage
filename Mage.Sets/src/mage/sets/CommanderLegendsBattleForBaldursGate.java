@@ -655,5 +655,6 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Zevlor, Elturel Exile", 296, Rarity.RARE, mage.cards.z.ZevlorElturelExile.class));
         cards.add(new SetCardInfo("Zhentarim Bandit", 158, Rarity.COMMON, mage.cards.z.ZhentarimBandit.class));
         cards.add(new SetCardInfo("Zulaport Cutthroat", 775, Rarity.UNCOMMON, mage.cards.z.ZulaportCutthroat.class));
+        cards.add(new SetCardInfo("Vhal, Candlekeep Researcher", 102, Rarity.UNCOMMON, mage.cards.v.VhalCandlekeepResearcher.class));
     }
 }
