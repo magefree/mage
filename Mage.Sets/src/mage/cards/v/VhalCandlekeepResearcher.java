@@ -65,7 +65,7 @@ class VhalCandlekeepResearcherManaBuilder extends ConditionalManaBuilder {
 
     @Override
     public String getRule() {
-        return "This mana can’t be spent to cast spells from your hand";
+        return "This mana can't be spent to cast spells from your hand";
     }
 }
 
@@ -73,7 +73,7 @@ class VhalCandlekeepResearcherConditionalMana extends ConditionalMana {
 
     VhalCandlekeepResearcherConditionalMana(Mana mana) {
         super(mana);
-        staticText = "This mana can’t be spent to cast spells from your hand";
+        staticText = "This mana can't be spent to cast spells from your hand";
         addCondition(VhalCandlekeepResearcherManaCondition.instance);
     }
 }
