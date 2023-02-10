@@ -114,6 +114,9 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Flow of Knowledge", 49, Rarity.UNCOMMON, mage.cards.f.FlowOfKnowledge.class));
         cards.add(new SetCardInfo("Fog of War", 180, Rarity.COMMON, mage.cards.f.FogOfWar.class));
         cards.add(new SetCardInfo("Forest", 276, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 277, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 286, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 287, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forging the Anchor", 50, Rarity.UNCOMMON, mage.cards.f.ForgingTheAnchor.class));
         cards.add(new SetCardInfo("Fortified Beachhead", 262, Rarity.RARE, mage.cards.f.FortifiedBeachhead.class));
         cards.add(new SetCardInfo("Gaea's Courser", 181, Rarity.UNCOMMON, mage.cards.g.GaeasCourser.class));
@@ -150,6 +153,9 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Involuntary Cooldown", 53, Rarity.UNCOMMON, mage.cards.i.InvoluntaryCooldown.class));
         cards.add(new SetCardInfo("Iron-Craw Crusher", 200, Rarity.UNCOMMON, mage.cards.i.IronCrawCrusher.class));
         cards.add(new SetCardInfo("Island", 270, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 271, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 280, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Island", 281, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Junkyard Genius", 214, Rarity.UNCOMMON, mage.cards.j.JunkyardGenius.class));
         cards.add(new SetCardInfo("Kayla's Command", 9, Rarity.RARE, mage.cards.k.KaylasCommand.class));
         cards.add(new SetCardInfo("Kayla's Reconstruction", 10, Rarity.RARE, mage.cards.k.KaylasReconstruction.class));
@@ -189,6 +195,9 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Moment of Defiance", 108, Rarity.COMMON, mage.cards.m.MomentOfDefiance.class));
         cards.add(new SetCardInfo("Monastery Swiftspear", 144, Rarity.UNCOMMON, mage.cards.m.MonasterySwiftspear.class));
         cards.add(new SetCardInfo("Mountain", 274, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 284, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 285, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Myrel, Shield of Argive", 18, Rarity.MYTHIC, mage.cards.m.MyrelShieldOfArgive.class));
         cards.add(new SetCardInfo("No One Left Behind", 109, Rarity.UNCOMMON, mage.cards.n.NoOneLeftBehind.class));
         cards.add(new SetCardInfo("Obliterating Bolt", 145, Rarity.UNCOMMON, mage.cards.o.ObliteratingBolt.class));
@@ -203,6 +212,9 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Phyrexian Dragon Engine", "163a", Rarity.RARE, mage.cards.p.PhyrexianDragonEngine.class));
         cards.add(new SetCardInfo("Phyrexian Fleshgorger", 121, Rarity.MYTHIC, mage.cards.p.PhyrexianFleshgorger.class));
         cards.add(new SetCardInfo("Plains", 268, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 269, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 278, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 279, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Platoon Dispenser", 36, Rarity.MYTHIC, mage.cards.p.PlatoonDispenser.class));
         cards.add(new SetCardInfo("Portal to Phyrexia", 240, Rarity.MYTHIC, mage.cards.p.PortalToPhyrexia.class));
         cards.add(new SetCardInfo("Power Plant Worker", 241, Rarity.COMMON, mage.cards.p.PowerPlantWorker.class));
@@ -253,6 +265,9 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Surge Engine", 81, Rarity.MYTHIC, mage.cards.s.SurgeEngine.class));
         cards.add(new SetCardInfo("Survivor of Korlis", 28, Rarity.COMMON, mage.cards.s.SurvivorOfKorlis.class));
         cards.add(new SetCardInfo("Swamp", 272, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 273, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 282, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 283, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swiftgear Drake", 251, Rarity.COMMON, mage.cards.s.SwiftgearDrake.class));
         cards.add(new SetCardInfo("Symmetry Matrix", 252, Rarity.UNCOMMON, mage.cards.s.SymmetryMatrix.class));
         cards.add(new SetCardInfo("Take Flight", 65, Rarity.UNCOMMON, mage.cards.t.TakeFlight.class));
