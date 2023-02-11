@@ -8,7 +8,6 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersPlayersEffect;
@@ -61,7 +60,7 @@ public final class OtharriSunsGlory extends CardImpl {
         // Then create a 2/2 red Rebel creature token that’s tapped and attacking for each experience counter you have.
         Ability ability = new AttacksTriggeredAbility(new AddCountersPlayersEffect(CounterType.EXPERIENCE.createInstance(), TargetController.YOU));
         DynamicValue value = new OtharriSunsGloryCount();
-        ability.addEffect(new CreateTokenEffect(new RebelRedToken(), value, true, true));
+        ability.addEffect(new CreateTokenEffect(new RebelRedToken(), value, true, true).concatBy("Then"));
         this.addAbility(ability);
 
         // {2}{R}{W}, Tap an untapped Rebel you control: Return Otharri from your graveyard to the battlefield tapped.
