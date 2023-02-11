@@ -179,6 +179,8 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Sheoldred's Headcleaver", 109, Rarity.COMMON, mage.cards.s.SheoldredsHeadcleaver.class));
         cards.add(new SetCardInfo("Shrapnel Slinger", 148, Rarity.COMMON, mage.cards.s.ShrapnelSlinger.class));
         cards.add(new SetCardInfo("Sinew Dancer", 32, Rarity.COMMON, mage.cards.s.SinewDancer.class));
+        cards.add(new SetCardInfo("Skrelv, Defector Mite", 33, Rarity.RARE, mage.cards.s.SkrelvDefectorMite.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Skrelv, Defector Mite", 301, Rarity.RARE, mage.cards.s.SkrelvDefectorMite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skrelv's Hive", 34, Rarity.RARE, mage.cards.s.SkrelvsHive.class));
         cards.add(new SetCardInfo("Skyscythe Engulfer", 183, Rarity.COMMON, mage.cards.s.SkyscytheEngulfer.class));
         cards.add(new SetCardInfo("Slaughter Singer", 216, Rarity.UNCOMMON, mage.cards.s.SlaughterSinger.class));
