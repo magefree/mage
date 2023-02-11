@@ -85,6 +85,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Gitaxian Anatomist", 52, Rarity.COMMON, mage.cards.g.GitaxianAnatomist.class));
         cards.add(new SetCardInfo("Gitaxian Raptor", 53, Rarity.COMMON, mage.cards.g.GitaxianRaptor.class));
         cards.add(new SetCardInfo("Gleeful Demolition", 134, Rarity.UNCOMMON, mage.cards.g.GleefulDemolition.class));
+        cards.add(new SetCardInfo("Glissa Sunslayer", 202, Rarity.RARE, mage.cards.g.GlissaSunslayer.class));
         cards.add(new SetCardInfo("Glistener Seer", 54, Rarity.COMMON, mage.cards.g.GlistenerSeer.class));
         cards.add(new SetCardInfo("Goldwarden's Helm", 13, Rarity.COMMON, mage.cards.g.GoldwardensHelm.class));
         cards.add(new SetCardInfo("Goliath Hatchery", 408, Rarity.RARE, mage.cards.g.GoliathHatchery.class));
