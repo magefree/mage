@@ -102,6 +102,7 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Night's Whisper", 94, Rarity.COMMON, mage.cards.n.NightsWhisper.class));
         cards.add(new SetCardInfo("Norn's Annex", 83, Rarity.RARE, mage.cards.n.NornsAnnex.class));
         cards.add(new SetCardInfo("Noxious Revival", 110, Rarity.UNCOMMON, mage.cards.n.NoxiousRevival.class));
+        cards.add(new SetCardInfo("Otharri, Suns' Glory", 3, Rarity.MYTHIC, mage.cards.o.OtharriSunsGlory.class));
         cards.add(new SetCardInfo("Painful Truths", 95, Rarity.RARE, mage.cards.p.PainfulTruths.class));
         cards.add(new SetCardInfo("Path of Ancestry", 161, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Path to Exile", 84, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
