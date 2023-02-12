@@ -72,6 +72,8 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Harmonious Archon", 74, Rarity.MYTHIC, mage.cards.h.HarmoniousArchon.class));
         cards.add(new SetCardInfo("Hate Mirage", 99, Rarity.UNCOMMON, mage.cards.h.HateMirage.class));
         cards.add(new SetCardInfo("Heroic Reinforcements", 118, Rarity.UNCOMMON, mage.cards.h.HeroicReinforcements.class));
+        cards.add(new SetCardInfo("Hexplate Wallbreaker", 14, Rarity.RARE, mage.cards.h.HexplateWallbreaker.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hexplate Wallbreaker", 52, Rarity.RARE, mage.cards.h.HexplateWallbreaker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hordeling Outburst", 100, Rarity.UNCOMMON, mage.cards.h.HordelingOutburst.class));
         cards.add(new SetCardInfo("Hour of Reckoning", 75, Rarity.RARE, mage.cards.h.HourOfReckoning.class));
         cards.add(new SetCardInfo("Ichor Rats", 93, Rarity.UNCOMMON, mage.cards.i.IchorRats.class));
