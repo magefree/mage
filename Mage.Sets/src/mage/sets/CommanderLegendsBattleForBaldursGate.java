@@ -382,6 +382,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Mind Stone", 325, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Mindblade Render", 762, Rarity.RARE, mage.cards.m.MindbladeRender.class));
         cards.add(new SetCardInfo("Mindcrank", 866, Rarity.UNCOMMON, mage.cards.m.Mindcrank.class));
+        cards.add(new SetCardInfo("Minthara, Merciless Soul", 286, Rarity.UNCOMMON, mage.cards.m.MintharaMercilessSoul.class));
         cards.add(new SetCardInfo("Minimus Containment", 34, Rarity.COMMON, mage.cards.m.MinimusContainment.class));
         cards.add(new SetCardInfo("Minsc & Boo, Timeless Heroes", 285, Rarity.MYTHIC, mage.cards.m.MinscBooTimelessHeroes.class));
         cards.add(new SetCardInfo("Mirror Entity", 701, Rarity.RARE, mage.cards.m.MirrorEntity.class));
