@@ -38,7 +38,7 @@ public final class MintharaMercilessSoul extends CardImpl {
 
         // Ward {X}, where X is the number of experience counters you have.
         DynamicValue value = new MintharaMercilessSoulCount();
-        Ability ability = new WardAbility(value, "the number of experience counters you have.");
+        Ability ability = new WardAbility(value, "the number of experience counters you have");
         this.addAbility(ability);
 
         // At the beginning of your end step, if a permanent you controlled left the battlefield this turn, you get an experience counter.

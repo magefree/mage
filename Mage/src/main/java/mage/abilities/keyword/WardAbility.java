@@ -109,19 +109,27 @@ public class WardAbility extends TriggeredAbilityImpl {
         } else {
             sb.append(" {X}");
             if (whereXIs != null) {
-                sb.append(" where X is ").append(whereXIs);
+                sb.append(", where X is ").append(whereXIs).append('.');
             }
         }
 
         if (showAbilityHint) {
             sb.append(" <i>(Whenever this creature becomes the target of a spell or ability an opponent controls, " +
                     "counter it unless that player ");
-            if (cost instanceof ManaCost) {
-                sb.append("pays ").append(cost.getText());
+            if (cost != null) {
+                if (cost instanceof ManaCost) {
+                    sb.append("pays ").append(cost.getText());
+                } else {
+                    sb.append(cost.getText().replace("pay ", "pays "));
+                }
+                sb.append(".)</i>");
             } else {
-                sb.append(cost.getText().replace("pay ", "pays "));
+                sb.append("pays {X}");
+                if (whereXIs != null) {
+                    sb.append(whereXIs);
+                }
+                sb.append(".)</i>");
             }
-            sb.append(".)</i>");
         }
 
         return sb.toString();
