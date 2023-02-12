@@ -84,6 +84,8 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Ixhel, Scion of Atraxa", 37, Rarity.MYTHIC, mage.cards.i.IxhelScionOfAtraxa.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jor Kadeen, the Prevailer", 119, Rarity.RARE, mage.cards.j.JorKadeenThePrevailer.class));
         cards.add(new SetCardInfo("Karn's Bastion", 156, Rarity.RARE, mage.cards.k.KarnsBastion.class));
+        cards.add(new SetCardInfo("Kemba's Banner", 7, Rarity.RARE, mage.cards.k.KembasBanner.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kemba's Banner", 45, Rarity.RARE, mage.cards.k.KembasBanner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kher Keep", 157, Rarity.RARE, mage.cards.k.KherKeep.class));
         cards.add(new SetCardInfo("Krosan Verge", 158, Rarity.UNCOMMON, mage.cards.k.KrosanVerge.class));
         cards.add(new SetCardInfo("Legion Warboss", 101, Rarity.RARE, mage.cards.l.LegionWarboss.class));
