@@ -62,6 +62,8 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Furycalm Snarl", 155, Rarity.RARE, mage.cards.f.FurycalmSnarl.class));
         cards.add(new SetCardInfo("Generous Gift", 70, Rarity.UNCOMMON, mage.cards.g.GenerousGift.class));
         cards.add(new SetCardInfo("Ghostly Prison", 71, Rarity.UNCOMMON, mage.cards.g.GhostlyPrison.class));
+        cards.add(new SetCardInfo("Glimmer Lens", 6, Rarity.RARE, mage.cards.g.GlimmerLens.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Glimmer Lens", 44, Rarity.RARE, mage.cards.g.GlimmerLens.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glistening Sphere", 20, Rarity.RARE, mage.cards.g.GlisteningSphere.class));
         cards.add(new SetCardInfo("Goldnight Commander", 72, Rarity.UNCOMMON, mage.cards.g.GoldnightCommander.class));
         cards.add(new SetCardInfo("Golgari Signet", 131, Rarity.UNCOMMON, mage.cards.g.GolgariSignet.class));
