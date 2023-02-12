@@ -48,7 +48,7 @@ public final class HexplateWallbreaker extends CardImpl {
         this.addAbility(ability);
 
         // Equip {3}{R}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{3}{R}")));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{3}{R}"), false));
     }
 
     private HexplateWallbreaker(final HexplateWallbreaker card) {

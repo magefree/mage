@@ -34,7 +34,7 @@ public final class GlimmerLens extends CardImpl {
         this.addAbility(new GlimmerLensTriggeredAbility());
 
         // Equip {1}{W}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{1}{W}")));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{1}{W}"), false));
     }
 
     private GlimmerLens(final GlimmerLens card) {
