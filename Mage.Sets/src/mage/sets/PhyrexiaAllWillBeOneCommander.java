@@ -61,6 +61,8 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fumigate", 69, Rarity.RARE, mage.cards.f.Fumigate.class));
         cards.add(new SetCardInfo("Furycalm Snarl", 155, Rarity.RARE, mage.cards.f.FurycalmSnarl.class));
         cards.add(new SetCardInfo("Generous Gift", 70, Rarity.UNCOMMON, mage.cards.g.GenerousGift.class));
+        cards.add(new SetCardInfo("Geth's Summons", 11, Rarity.RARE, mage.cards.g.GethsSummons.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Geth's Summons", 49, Rarity.RARE, mage.cards.g.GethsSummons.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ghostly Prison", 71, Rarity.UNCOMMON, mage.cards.g.GhostlyPrison.class));
         cards.add(new SetCardInfo("Glimmer Lens", 6, Rarity.RARE, mage.cards.g.GlimmerLens.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glimmer Lens", 44, Rarity.RARE, mage.cards.g.GlimmerLens.class, NON_FULL_USE_VARIOUS));
@@ -93,6 +95,8 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Legion Warboss", 101, Rarity.RARE, mage.cards.l.LegionWarboss.class));
         cards.add(new SetCardInfo("Loxodon Warhammer", 135, Rarity.RARE, mage.cards.l.LoxodonWarhammer.class));
         cards.add(new SetCardInfo("Loyal Apprentice", 102, Rarity.UNCOMMON, mage.cards.l.LoyalApprentice.class));
+        cards.add(new SetCardInfo("Lux Artillery", 27, Rarity.RARE, mage.cards.l.LuxArtillery.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lux Artillery", 41, Rarity.RARE, mage.cards.l.LuxArtillery.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mace of the Valiant", 78, Rarity.RARE, mage.cards.m.MaceOfTheValiant.class));
         cards.add(new SetCardInfo("Martial Coup", 79, Rarity.RARE, mage.cards.m.MartialCoup.class));
         cards.add(new SetCardInfo("Mask of Memory", 136, Rarity.UNCOMMON, mage.cards.m.MaskOfMemory.class));
