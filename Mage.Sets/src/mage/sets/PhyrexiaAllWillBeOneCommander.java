@@ -153,6 +153,8 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Tainted Field", 167, Rarity.UNCOMMON, mage.cards.t.TaintedField.class));
         cards.add(new SetCardInfo("Tainted Wood", 168, Rarity.UNCOMMON, mage.cards.t.TaintedWood.class));
         cards.add(new SetCardInfo("Talisman of Conviction", 143, Rarity.UNCOMMON, mage.cards.t.TalismanOfConviction.class));
+        cards.add(new SetCardInfo("Tangleweave Armor", 26, Rarity.RARE, mage.cards.t.TangleweaveArmor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tangleweave Armor", 36, Rarity.RARE, mage.cards.t.TangleweaveArmor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Temple of Malady", 169, Rarity.RARE, mage.cards.t.TempleOfMalady.class));
         cards.add(new SetCardInfo("Temple of Plenty", 170, Rarity.RARE, mage.cards.t.TempleOfPlenty.class));
         cards.add(new SetCardInfo("Temple of Silence", 171, Rarity.RARE, mage.cards.t.TempleOfSilence.class));
