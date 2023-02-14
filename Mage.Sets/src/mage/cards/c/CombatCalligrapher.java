@@ -82,8 +82,7 @@ class CombatCalligrapherTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Player attacker = game.getPlayer(event.getPlayerId());
         Player defender = game.getPlayer(event.getTargetId());
-        if (!game.getOpponents(getControllerId()).contains(attacker.getId())
-                || !game.getOpponents(getControllerId()).contains(defender.getId())) {
+        if (!game.getOpponents(getControllerId()).contains(defender.getId())) {
             return false;
         }
         getEffects().setValue("playerToAttack", defender.getId());
