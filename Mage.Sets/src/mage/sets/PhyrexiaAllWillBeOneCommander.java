@@ -122,6 +122,8 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Path of Ancestry", 161, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Path to Exile", 84, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
         cards.add(new SetCardInfo("Phantom General", 85, Rarity.UNCOMMON, mage.cards.p.PhantomGeneral.class));
+        cards.add(new SetCardInfo("Phyresis Outbreak", 12, Rarity.RARE, mage.cards.p.PhyresisOutbreak.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Phyresis Outbreak", 50, Rarity.RARE, mage.cards.p.PhyresisOutbreak.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Phyrexian Rebirth", 86, Rarity.RARE, mage.cards.p.PhyrexianRebirth.class));
         cards.add(new SetCardInfo("Phyrexian Swarmlord", 111, Rarity.RARE, mage.cards.p.PhyrexianSwarmlord.class));
         cards.add(new SetCardInfo("Plague Myr", 139, Rarity.UNCOMMON, mage.cards.p.PlagueMyr.class));
