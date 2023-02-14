@@ -43,6 +43,8 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Command Tower", 151, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Sphere", 128, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
         cards.add(new SetCardInfo("Contagion Clasp", 129, Rarity.UNCOMMON, mage.cards.c.ContagionClasp.class));
+        cards.add(new SetCardInfo("Contaminant Grafter", 17, Rarity.RARE, mage.cards.c.ContaminantGrafter.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Contaminant Grafter", 55, Rarity.RARE, mage.cards.c.ContaminantGrafter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Court of Grace", 62, Rarity.RARE, mage.cards.c.CourtOfGrace.class));
         cards.add(new SetCardInfo("Culling Ritual", 117, Rarity.RARE, mage.cards.c.CullingRitual.class));
         cards.add(new SetCardInfo("Cultivate", 107, Rarity.COMMON, mage.cards.c.Cultivate.class));
