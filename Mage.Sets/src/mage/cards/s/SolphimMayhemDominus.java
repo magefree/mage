@@ -59,8 +59,8 @@ class SolphimMayhemDominusEffect extends ReplacementEffectImpl {
 
     SolphimMayhemDominusEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "if a source you control would deal noncombat damage to a permanent or player, " +
-                "it deals double that damage that permanent or player instead";
+        staticText = "if a source you control would deal noncombat damage to an opponent or a permanent an opponent controls, " +
+                "it deals double that damage to that player or permanent instead";
     }
 
     SolphimMayhemDominusEffect(final SolphimMayhemDominusEffect effect) {
