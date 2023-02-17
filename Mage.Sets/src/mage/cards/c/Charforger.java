@@ -41,7 +41,8 @@ public class Charforger extends CardImpl {
         ));
 
         //Remove three oil counters from Charforger: Exile the top card of your library. You may play that card this turn.
-        this.addAbility(new SimpleActivatedAbility(new ExileTopXMayPlayUntilEndOfTurnEffect(1),
+        this.addAbility(new SimpleActivatedAbility(new ExileTopXMayPlayUntilEndOfTurnEffect(1)
+                .setText("Exile the top card of your library. You may play that card this turn"),
                 new RemoveCountersSourceCost(CounterType.OIL.createInstance(3))
         ));
     }
