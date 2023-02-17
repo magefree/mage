@@ -43,8 +43,10 @@ class ExpandTheSphereEffect extends LookLibraryControllerEffect {
     public ExpandTheSphereEffect() {
         super(6);
         staticText = "Look at the top six cards of your library. Put up to two land cards from among them onto the " +
-        "battlefield tapped and the rest on the bottom of your library in a random order. If you put fewer than two " +
-        "lands onto the battlefield this way, proliferate a number of times equal to the difference.";
+                "battlefield tapped and the rest on the bottom of your library in a random order. If you put fewer " +
+                "than two lands onto the battlefield this way, proliferate a number of times equal to the difference." +
+                "<i>(Choose any number of permanents and/or players, then give each another counter of each kind " +
+                "already there.)</i>";
     }
 
     private ExpandTheSphereEffect(final ExpandTheSphereEffect effect) {
