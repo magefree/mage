@@ -247,6 +247,13 @@ public class CardView extends SimpleCardView {
 
     private static String getCardTypeLine(Game game, Card card) {
         StringBuilder sbType = new StringBuilder();
+
+        if (!card.getSuperType(game).isEmpty()) {
+            sbType.append("- ");
+            for (SuperType superType : card.getSuperType(game)) {
+                sbType.append(superType).append(' ');
+            }
+        }
         for (SuperType superType : card.getSuperType()) {
             sbType.append(superType).append(' ');
         }
@@ -275,7 +282,6 @@ public class CardView extends SimpleCardView {
     public CardView(Card card, Game game, boolean controlled, boolean showFaceDownCard, boolean storeZone) {
         super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), card.getTokenSetCode(), game != null, card.getTokenDescriptor());
         this.originalCard = card;
-
         // no information available for face down cards as long it's not a controlled face down morph card
         // TODO: Better handle this in Framework (but currently I'm not sure how to do it there) LevelX2
         boolean showFaceUp = true;
@@ -470,7 +476,7 @@ public class CardView extends SimpleCardView {
         this.toughness = Integer.toString(card.getToughness().getValue());
         this.cardTypes = new ArrayList<>(card.getCardType(game));
         this.subTypes = new SubTypes(card.getSubtype(game));
-        this.superTypes = card.getSuperType();
+        this.superTypes = card.getSuperType(game).stream().collect(Collectors.toSet());;
         this.color = card.getColor(game).copy();
         this.flipCard = card.isFlipCard();
         this.faceDown = !showFaceUp;
@@ -611,7 +617,7 @@ public class CardView extends SimpleCardView {
         }
         this.cardTypes = new ArrayList<>(object.getCardType(game));
         this.subTypes = new SubTypes(object.getSubtype(game));
-        this.superTypes = object.getSuperType();
+        this.superTypes = object.getSuperType(game).stream().collect(Collectors.toSet());
         this.color = object.getColor(game).copy();
         this.manaCostLeftStr = String.join("", object.getManaCostSymbols());
         this.manaCostRightStr = "";
@@ -799,7 +805,7 @@ public class CardView extends SimpleCardView {
         this.startingLoyalty = "";
         this.cardTypes = new ArrayList<>(token.getCardType(game));
         this.subTypes = new SubTypes(token.getSubtype(game));
-        this.superTypes = token.getSuperType();
+        this.superTypes = token.getSuperType(game).stream().collect(Collectors.toSet());
         this.color = token.getColor(game).copy();
         this.frameColor = token.getFrameColor(game).copy();
         this.frameStyle = token.getFrameStyle();

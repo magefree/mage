@@ -64,6 +64,10 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
 
     Set<SuperType> getSuperType();
 
+    default Set<SuperType> getSuperType(Game game) {
+        return getSuperType();
+    }
+
     /**
      * For cards: return basic abilities (without dynamic added)
      * For permanents: return all abilities (dynamic ability inserts into permanent)

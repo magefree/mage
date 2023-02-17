@@ -19,6 +19,7 @@ public enum DependencyType {
     AddingAbility,
     AddingCreatureType,
     BecomeNonbasicLand,
+    BecomeBasicLand,
     BecomeForest,
     BecomeIsland,
     BecomeMountain,
