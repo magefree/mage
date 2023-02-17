@@ -79,6 +79,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Fleshless Gladiator", 94, Rarity.COMMON, mage.cards.f.FleshlessGladiator.class));
         cards.add(new SetCardInfo("Font of Progress", 51, Rarity.UNCOMMON, mage.cards.f.FontOfProgress.class));
         cards.add(new SetCardInfo("Forest", 276, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forgehammer Centurion", 130, Rarity.COMMON, mage.cards.f.ForgehammerCenturion.class));
         cards.add(new SetCardInfo("Free from Flesh", 131, Rarity.COMMON, mage.cards.f.FreeFromFlesh.class));
         cards.add(new SetCardInfo("Furnace Skullbomb", 228, Rarity.COMMON, mage.cards.f.FurnaceSkullbomb.class));
         cards.add(new SetCardInfo("Furnace Strider", 133, Rarity.COMMON, mage.cards.f.FurnaceStrider.class));
