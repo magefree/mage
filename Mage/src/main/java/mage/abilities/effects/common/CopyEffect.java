@@ -112,7 +112,7 @@ public class CopyEffect extends ContinuousEffectImpl {
         permanent.copySubTypesFrom(game, copyFromObject);
 
         permanent.getSuperType().clear();
-        for (SuperType type : copyFromObject.getSuperType()) {
+        for (SuperType type : copyFromObject.getSuperType(game)) {
             permanent.addSuperType(type);
         }
 

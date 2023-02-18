@@ -227,6 +227,10 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
         return getSuperType().contains(SuperType.LEGENDARY);
     }
 
+    default boolean isLegendary(Game game) {
+        return getSuperType(game).contains(SuperType.LEGENDARY);
+    }
+
     default boolean isSnow() {
         return getSuperType().contains(SuperType.SNOW);
     }

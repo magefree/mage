@@ -247,13 +247,6 @@ public class CardView extends SimpleCardView {
 
     private static String getCardTypeLine(Game game, Card card) {
         StringBuilder sbType = new StringBuilder();
-
-        if (!card.getSuperType(game).isEmpty()) {
-            sbType.append("- ");
-            for (SuperType superType : card.getSuperType(game)) {
-                sbType.append(superType).append(' ');
-            }
-        }
         for (SuperType superType : card.getSuperType()) {
             sbType.append(superType).append(' ');
         }
