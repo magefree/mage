@@ -21,12 +21,6 @@ import java.util.UUID;
 
 public class FurnacePunisher extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent();
-
-    static {
-        filter.add(SuperType.BASIC.getPredicate());
-    }
-
     public FurnacePunisher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.addSubType(SubType.PHYREXIAN);
@@ -42,7 +36,7 @@ public class FurnacePunisher extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new FurnacePunisherEffect(),
                 TargetController.EACH_PLAYER,
                 false
-        ));
+        ).setTriggerPhrase("At the beginning of each player's upkeep, "));
     }
 
     private FurnacePunisher(final FurnacePunisher card) {
