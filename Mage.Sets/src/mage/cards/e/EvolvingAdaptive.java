@@ -1,24 +1,23 @@
 package mage.cards.e;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.*;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 import java.util.UUID;
@@ -52,7 +51,10 @@ public class EvolvingAdaptive extends CardImpl {
 
         //Whenever another creature enters the battlefield under your control, if that creature has greater power or
         //toughness than Evolving Adaptive, put an oil counter on Evolving Adaptive.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new EvolvingAdaptiveEffect(), filter));
+        this.addAbility(new EvolvingAdaptiveTriggeredAbility(new AddCountersSourceEffect(CounterType.OIL.createInstance())
+                .setText("if that creature has greater power or toughness than Evolving Adaptive, put an oil counter " +
+                        "on Evolving Adaptive.")
+                , filter, this.objectId));
     }
 
     private EvolvingAdaptive(final EvolvingAdaptive card) {
@@ -65,36 +67,29 @@ public class EvolvingAdaptive extends CardImpl {
     }
 }
 
-class EvolvingAdaptiveEffect extends OneShotEffect {
-    public EvolvingAdaptiveEffect(){
-        super(Outcome.Benefit);
-        staticText = "if that creature has greater power or toughness than {this}, put an oil counter on {this}.";
-    }
+class EvolvingAdaptiveTriggeredAbility extends EntersBattlefieldControlledTriggeredAbility {
 
-    public EvolvingAdaptiveEffect(final EvolvingAdaptiveEffect effect){
-        super(effect);
-    }
+    UUID permanentID;
 
-    @Override
-    public EvolvingAdaptiveEffect copy(){
-        return new EvolvingAdaptiveEffect(this);
+    public EvolvingAdaptiveTriggeredAbility(Effect effect, FilterPermanent filter, UUID permanentID) {
+        super(effect, filter);
+        this.permanentID = permanentID;
     }
 
     @Override
-    public boolean apply(Game game, Ability source){
-        Object enteringObject = getValue("permanentEnteringBattlefield");
-        if (!(enteringObject instanceof Permanent)) {
-            return false;
-        }
-        Permanent enteringCreature = (Permanent) enteringObject;
-        Permanent permanent = game.getPermanent(source.getSourceId());
+    public boolean checkTrigger(GameEvent event, Game game) {
+        Permanent enteringCreature = game.getPermanent(event.getSourceId());
+        Permanent permanent = game.getPermanent(permanentID);
         if (permanent != null){
-            if (enteringCreature.getPower().getValue() > permanent.getPower().getValue() ||
-                    enteringCreature.getToughness().getValue() > permanent.getToughness().getValue()) {
-                permanent.addCounters(CounterType.OIL.createInstance(), source, game);
+            if (!(enteringCreature.getPower().getValue() > permanent.getPower().getValue()) &&
+                    !(enteringCreature.getToughness().getValue() > permanent.getToughness().getValue())) {
+                return false;
             }
-            return true;
         }
-        return false;
+        return super.checkTrigger(event, game);
+    }
+
+    public EvolvingAdaptiveTriggeredAbility(final EntersBattlefieldControlledTriggeredAbility ability) {
+        super(ability);
     }
 }
