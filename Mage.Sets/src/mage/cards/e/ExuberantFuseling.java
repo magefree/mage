@@ -6,6 +6,7 @@ import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -37,7 +38,8 @@ public class ExuberantFuseling extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         //Exuberant Fuseling gets +1/+0 for each oil counter on it.
-        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(oilCounters, oilCounters, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(oilCounters, StaticValue.get(0),
+                Duration.WhileOnBattlefield).setText("{this} gets +1/+0 for each oil counter on it")));
 
         //When Exuberant Fuseling enters the battlefield and whenever another creature or artifact you control is put
         //into a graveyard from the battlefield, put an oil counter on Exuberant Fuseling.
