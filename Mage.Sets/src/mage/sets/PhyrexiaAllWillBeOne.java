@@ -163,6 +163,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 272, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Planar Disruption", 28, Rarity.COMMON, mage.cards.p.PlanarDisruption.class));
         cards.add(new SetCardInfo("Plated Onslaught", 29, Rarity.UNCOMMON, mage.cards.p.PlatedOnslaught.class));
+        cards.add(new SetCardInfo("Porcelain Zealot", 30, Rarity.UNCOMMON, mage.cards.p.PorcelainZealot.class));
         cards.add(new SetCardInfo("Predation Steward", 180, Rarity.COMMON, mage.cards.p.PredationSteward.class));
         cards.add(new SetCardInfo("Prologue to Phyresis", 65, Rarity.COMMON, mage.cards.p.PrologueToPhyresis.class));
         cards.add(new SetCardInfo("Prophetic Prism", 238, Rarity.COMMON, mage.cards.p.PropheticPrism.class));
