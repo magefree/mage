@@ -2,10 +2,15 @@ package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
+import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.DoWhenCostPaid;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -36,12 +41,13 @@ public class ForgehammerCenturion extends CardImpl {
 
         //Whenever Forgehammer Centurion attacks, you may remove two oil counters from it. When you do, target creature
         //can’t block this turn.
-        AttacksTriggeredAbility attacksTriggeredAbility = new AttacksTriggeredAbility(new DoIfCostPaid(
-                new CantBlockTargetEffect(Duration.EndOfTurn),
-                new RemoveCountersSourceCost(CounterType.OIL.createInstance(2))
-        ));
-        attacksTriggeredAbility.addTarget(new TargetCreaturePermanent());
-        this.addAbility(attacksTriggeredAbility);
+        ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
+                new CantBlockTargetEffect(Duration.EndOfTurn), false
+        );
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(new AttacksTriggeredAbility(new DoWhenCostPaid(ability,
+                new RemoveCountersSourceCost(CounterType.OIL.createInstance(2)), "Remove 2 oil counters?"
+        )));
     }
 
     private ForgehammerCenturion(final ForgehammerCenturion card) {
