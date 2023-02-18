@@ -83,7 +83,7 @@ public abstract class AbstractCommander extends Constructed {
             return false;
         }
         if (commander1.getAbilities().containsClass(ChooseABackgroundAbility.class) == commander2.hasSubTypeForDeckbuilding(SubType.BACKGROUND)
-                || commander2.getAbilities().containsClass(ChooseABackgroundAbility.class) == commander1.hasSubTypeForDeckbuilding(SubType.BACKGROUND)) {
+                && commander2.getAbilities().containsClass(ChooseABackgroundAbility.class) == commander1.hasSubTypeForDeckbuilding(SubType.BACKGROUND)) {
             return true;
         }
         if (commander1.hasSubTypeForDeckbuilding(SubType.BACKGROUND)) {
@@ -999,13 +999,7 @@ public abstract class AbstractCommander extends Constructed {
         if (edhPowerLevel >= 100) {
             edhPowerLevel = 99;
         }
-        if (color != null) {
-            edhPowerLevel += (color.isWhite() ? 10000000 : 0);
-            edhPowerLevel += (color.isBlue() ? 1000000 : 0);
-            edhPowerLevel += (color.isBlack() ? 100000 : 0);
-            edhPowerLevel += (color.isRed() ? 10000 : 0);
-            edhPowerLevel += (color.isGreen() ? 1000 : 0);
-        }
+
         return edhPowerLevel;
     }
 }
