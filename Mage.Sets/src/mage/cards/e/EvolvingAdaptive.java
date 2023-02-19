@@ -24,12 +24,6 @@ import java.util.UUID;
 
 public class EvolvingAdaptive extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("another creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
     private static final DynamicValue oilCounters = new CountersSourceCount(CounterType.OIL);
 
     public EvolvingAdaptive(UUID ownerId, CardSetInfo setInfo) {
@@ -54,7 +48,7 @@ public class EvolvingAdaptive extends CardImpl {
         this.addAbility(new EvolvingAdaptiveTriggeredAbility(new AddCountersSourceEffect(CounterType.OIL.createInstance())
                 .setText("if that creature has greater power or toughness than Evolving Adaptive, put an oil counter " +
                         "on Evolving Adaptive.")
-                , filter, this.objectId));
+        ));
     }
 
     private EvolvingAdaptive(final EvolvingAdaptive card) {
@@ -69,17 +63,20 @@ public class EvolvingAdaptive extends CardImpl {
 
 class EvolvingAdaptiveTriggeredAbility extends EntersBattlefieldControlledTriggeredAbility {
 
-    UUID permanentID;
+    private static final FilterPermanent filter = new FilterCreaturePermanent("another creature");
 
-    public EvolvingAdaptiveTriggeredAbility(Effect effect, FilterPermanent filter, UUID permanentID) {
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
+
+    public EvolvingAdaptiveTriggeredAbility(Effect effect) {
         super(effect, filter);
-        this.permanentID = permanentID;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enteringCreature = game.getPermanent(event.getSourceId());
-        Permanent permanent = game.getPermanent(permanentID);
+        Permanent permanent = getSourcePermanentIfItStillExists(game);
         if (permanent != null){
             if (!(enteringCreature.getPower().getValue() > permanent.getPower().getValue()) &&
                     !(enteringCreature.getToughness().getValue() > permanent.getToughness().getValue())) {
@@ -91,5 +88,10 @@ class EvolvingAdaptiveTriggeredAbility extends EntersBattlefieldControlledTrigge
 
     public EvolvingAdaptiveTriggeredAbility(final EntersBattlefieldControlledTriggeredAbility ability) {
         super(ability);
+    }
+
+    @Override
+    public EvolvingAdaptiveTriggeredAbility copy() {
+        return new EvolvingAdaptiveTriggeredAbility(this);
     }
 }
