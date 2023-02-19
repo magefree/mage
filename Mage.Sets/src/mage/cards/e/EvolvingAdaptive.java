@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.common.*;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -45,10 +44,7 @@ public class EvolvingAdaptive extends CardImpl {
 
         //Whenever another creature enters the battlefield under your control, if that creature has greater power or
         //toughness than Evolving Adaptive, put an oil counter on Evolving Adaptive.
-        this.addAbility(new EvolvingAdaptiveTriggeredAbility(new AddCountersSourceEffect(CounterType.OIL.createInstance())
-                .setText("if that creature has greater power or toughness than Evolving Adaptive, put an oil counter " +
-                        "on Evolving Adaptive.")
-        ));
+        this.addAbility(new EvolvingAdaptiveTriggeredAbility());
     }
 
     private EvolvingAdaptive(final EvolvingAdaptive card) {
@@ -69,8 +65,14 @@ class EvolvingAdaptiveTriggeredAbility extends EntersBattlefieldControlledTrigge
         filter.add(AnotherPredicate.instance);
     }
 
-    public EvolvingAdaptiveTriggeredAbility(Effect effect) {
-        super(effect, filter);
+    public EvolvingAdaptiveTriggeredAbility() {
+        super(new AddCountersSourceEffect(CounterType.OIL.createInstance()), filter);
+        this.setTriggerPhrase("Whenever another creature enters the battlefield under your " +
+                "control, if that creature has greater power or toughness than {this}, ");
+    }
+
+    public EvolvingAdaptiveTriggeredAbility(final EntersBattlefieldControlledTriggeredAbility ability) {
+        super(ability);
     }
 
     @Override
@@ -84,10 +86,6 @@ class EvolvingAdaptiveTriggeredAbility extends EntersBattlefieldControlledTrigge
             }
         }
         return super.checkTrigger(event, game);
-    }
-
-    public EvolvingAdaptiveTriggeredAbility(final EntersBattlefieldControlledTriggeredAbility ability) {
-        super(ability);
     }
 
     @Override
