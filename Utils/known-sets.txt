@@ -160,6 +160,7 @@ Masters Edition III|MastersEditionIII|
 Masters Edition IV|MastersEditionIV|
 Masters 25|Masters25|
 Media Inserts|MediaInserts|
+March of the Machine|MarchOfTheMachine
 Mercadian Masques|MercadianMasques|
 Mirage|Mirage|
 Mirrodin|Mirrodin|

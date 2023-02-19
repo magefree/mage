@@ -153,6 +153,7 @@ Masters 25|A25|
 Magic: The Gathering-Commander|CMD|
 Magic: The Gathering-Conspiracy|CNS|
 Media Inserts|MBP|
+March of the Machine|MOM|
 Mirrodin Besieged|MBS|
 Masters Edition II|ME2|
 Masters Edition III|ME3|

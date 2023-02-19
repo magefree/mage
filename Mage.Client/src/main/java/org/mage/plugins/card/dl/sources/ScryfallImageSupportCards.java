@@ -527,6 +527,7 @@ public class ScryfallImageSupportCards {
             add("DMR"); // Dominaria Remastered
             add("ONE"); // Phyrexia: All Will Be One
             add("ONC"); // Phyrexia: All Will Be One Commander
+            add("MOM"); // March of the Machine
         }
     };
 
