@@ -50,14 +50,14 @@ public final class KaitoDancingShadow extends CardImpl {
         this.addAbility(ability);
 
         // +1: Up to one target creature can't attack or block until your next turn.
-        Ability KaitoCantAttackOrBlockAbility = new LoyaltyAbility(new CantAttackTargetEffect(Duration.UntilYourNextTurn).setText("Up to one target creature can’t attack "), 1);
+        Ability KaitoCantAttackOrBlockAbility = new LoyaltyAbility(new CantAttackTargetEffect(Duration.UntilYourNextTurn).setText("Up to one target creature can't attack "), 1);
         KaitoCantAttackOrBlockAbility.addEffect(new CantBlockTargetEffect(Duration.UntilYourNextTurn).setText("or block until your next turn"));
         KaitoCantAttackOrBlockAbility.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(KaitoCantAttackOrBlockAbility);
 
         // 0: Draw a card.
         this.addAbility(new LoyaltyAbility(new DrawCardSourceControllerEffect(1), 0));
-        
+
         // -2: Create a 2/2 colorless Drone artifact creature token with deathtouch and "When this creature leaves the battlefield, each opponent loses 2 life and you gain 2 life."
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new DroneToken()), -2));
     }
