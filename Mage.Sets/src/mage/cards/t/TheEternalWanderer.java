@@ -61,7 +61,7 @@ public final class TheEternalWanderer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TheEternalWandererAttackRestrictionEffect()));
 
 
-        // +1: Exile up to one target artifact or creature. Return that card to the battlefield under its owner's control at the beginning of that player's next end step.
+        // +1: Exile up to one target artifact or creature. Return that card to the battlefield under its owner's control at the beginning of that player's next end step. 
 
         Ability ability = new LoyaltyAbility(new TheEternalWandererExileEffect(), 1);
         ability.addTarget(new TargetPermanent(0, 1, filter));
