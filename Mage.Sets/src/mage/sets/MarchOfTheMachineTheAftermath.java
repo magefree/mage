@@ -17,6 +17,7 @@ public final class MarchOfTheMachineTheAftermath extends ExpansionSet {
     private MarchOfTheMachineTheAftermath() {
         super("March of the Machine: The Aftermath", "MAT", ExpansionSet.buildDate(2023, 5, 12), SetType.SUPPLEMENTAL_STANDARD_LEGAL);
         this.blockName = "March of the Machine";
+        this.hasBasicLands = false;
         this.hasBoosters = false; // temporary
     }
 }

@@ -18,6 +18,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
     private MarchOfTheMachine() {
         super("March of the Machine", "MOM", ExpansionSet.buildDate(2023, 4, 21), SetType.EXPANSION);
         this.blockName = "March of the Machine";
+        this.hasBasicLands = false; // temporary
         this.hasBoosters = false; // temporary
 
         cards.add(new SetCardInfo("Bloodfell Caves", 267, Rarity.COMMON, mage.cards.b.BloodfellCaves.class));
