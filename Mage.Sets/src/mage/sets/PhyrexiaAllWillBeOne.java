@@ -32,6 +32,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Argentum Masticore", 222, Rarity.RARE, mage.cards.a.ArgentumMasticore.class));
         cards.add(new SetCardInfo("Armored Scrapgorger", 158, Rarity.UNCOMMON, mage.cards.a.ArmoredScrapgorger.class));
         cards.add(new SetCardInfo("Aspirant's Ascent", 40, Rarity.COMMON, mage.cards.a.AspirantsAscent.class));
+        cards.add(new SetCardInfo("Atmosphere Surgeon", 41, Rarity.UNCOMMON, mage.cards.a.AtmosphereSurgeon.class));
         cards.add(new SetCardInfo("Atraxa's Skitterfang", 223, Rarity.UNCOMMON, mage.cards.a.AtraxasSkitterfang.class));
         cards.add(new SetCardInfo("Atraxa, Grand Unifier", 196, Rarity.MYTHIC, mage.cards.a.AtraxaGrandUnifier.class));
         cards.add(new SetCardInfo("Axiom Engraver", 120, Rarity.COMMON, mage.cards.a.AxiomEngraver.class));
@@ -51,9 +52,11 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Cacophony Scamp", 124, Rarity.UNCOMMON, mage.cards.c.CacophonyScamp.class));
         cards.add(new SetCardInfo("Cankerbloom", 161, Rarity.UNCOMMON, mage.cards.c.Cankerbloom.class));
         cards.add(new SetCardInfo("Cephalopod Sentry", 198, Rarity.UNCOMMON, mage.cards.c.CephalopodSentry.class));
+        cards.add(new SetCardInfo("Charforger", 199, Rarity.UNCOMMON, mage.cards.c.Charforger.class));
         cards.add(new SetCardInfo("Chimney Rabble", 126, Rarity.COMMON, mage.cards.c.ChimneyRabble.class));
         cards.add(new SetCardInfo("Chittering Skitterling", 87, Rarity.UNCOMMON, mage.cards.c.ChitteringSkitterling.class));
         cards.add(new SetCardInfo("Chrome Prowler", 45, Rarity.COMMON, mage.cards.c.ChromeProwler.class));
+        cards.add(new SetCardInfo("Compleat Devotion", 7, Rarity.COMMON, mage.cards.c.CompleatDevotion.class));
         cards.add(new SetCardInfo("Copper Longlegs", 165, Rarity.COMMON, mage.cards.c.CopperLonglegs.class));
         cards.add(new SetCardInfo("Copperline Gorge", 249, Rarity.RARE, mage.cards.c.CopperlineGorge.class));
         cards.add(new SetCardInfo("Crawling Chorus", 8, Rarity.COMMON, mage.cards.c.CrawlingChorus.class));
@@ -80,7 +83,9 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Fleshless Gladiator", 94, Rarity.COMMON, mage.cards.f.FleshlessGladiator.class));
         cards.add(new SetCardInfo("Font of Progress", 51, Rarity.UNCOMMON, mage.cards.f.FontOfProgress.class));
         cards.add(new SetCardInfo("Forest", 276, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forgehammer Centurion", 130, Rarity.COMMON, mage.cards.f.ForgehammerCenturion.class));
         cards.add(new SetCardInfo("Free from Flesh", 131, Rarity.COMMON, mage.cards.f.FreeFromFlesh.class));
+        cards.add(new SetCardInfo("Furnace Punisher", 132, Rarity.UNCOMMON, mage.cards.f.FurnacePunisher.class));
         cards.add(new SetCardInfo("Furnace Skullbomb", 228, Rarity.COMMON, mage.cards.f.FurnaceSkullbomb.class));
         cards.add(new SetCardInfo("Furnace Strider", 133, Rarity.COMMON, mage.cards.f.FurnaceStrider.class));
         cards.add(new SetCardInfo("Gitaxian Anatomist", 52, Rarity.COMMON, mage.cards.g.GitaxianAnatomist.class));
@@ -161,6 +166,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 272, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Planar Disruption", 28, Rarity.COMMON, mage.cards.p.PlanarDisruption.class));
         cards.add(new SetCardInfo("Plated Onslaught", 29, Rarity.UNCOMMON, mage.cards.p.PlatedOnslaught.class));
+        cards.add(new SetCardInfo("Porcelain Zealot", 30, Rarity.UNCOMMON, mage.cards.p.PorcelainZealot.class));
         cards.add(new SetCardInfo("Predation Steward", 180, Rarity.COMMON, mage.cards.p.PredationSteward.class));
         cards.add(new SetCardInfo("Prologue to Phyresis", 65, Rarity.COMMON, mage.cards.p.PrologueToPhyresis.class));
         cards.add(new SetCardInfo("Prophetic Prism", 238, Rarity.COMMON, mage.cards.p.PropheticPrism.class));
