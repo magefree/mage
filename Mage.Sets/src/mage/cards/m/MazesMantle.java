@@ -5,6 +5,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.AttachedToMatchesFilterCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -40,10 +41,10 @@ public class MazesMantle extends CardImpl {
         //When Maze’s Mantle enters the battlefield, if enchanted creature has toxic, that creature gains hexproof until end of turn.
         FilterPermanent filter = new FilterPermanent("if enchanted creature has toxic");
         filter.add(new AbilityPredicate(ToxicAbility.class));
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalContinuousEffect(
-                new GainAbilityAttachedEffect(HexproofAbility.getInstance(), AttachmentType.AURA, Duration.EndOfTurn),
-                new AttachedToMatchesFilterCondition(filter),
-                "if enchanted creature has toxic, that creature gains hexproof until end of turn.")
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
+                new GainAbilityAttachedEffect(HexproofAbility.getInstance(), AttachmentType.AURA, Duration.EndOfTurn)),
+                new AttachedToMatchesFilterCondition(filter), "When {this} enters the battlefield, " +
+                "if enchanted creature has toxic, that creature gains hexproof until end of turn."
         ));
 
         //Enchanted creature gets +2/+2.
