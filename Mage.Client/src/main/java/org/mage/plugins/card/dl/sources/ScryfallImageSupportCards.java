@@ -529,6 +529,7 @@ public class ScryfallImageSupportCards {
             add("ONC"); // Phyrexia: All Will Be One Commander
             add("MOM"); // March of the Machine
             add("MOC"); // March of the Machine Commander
+            add("MAT"); // March of the Machine: The Aftermath
         }
     };
 
