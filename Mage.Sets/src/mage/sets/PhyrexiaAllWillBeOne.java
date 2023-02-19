@@ -75,6 +75,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Encroaching Mycosynth", 47, Rarity.RARE, mage.cards.e.EncroachingMycosynth.class));
         cards.add(new SetCardInfo("Escaped Experiment", 48, Rarity.COMMON, mage.cards.e.EscapedExperiment.class));
         cards.add(new SetCardInfo("Evolved Spinoderm", 166, Rarity.RARE, mage.cards.e.EvolvedSpinoderm.class));
+        cards.add(new SetCardInfo("Expand the Sphere", 168, Rarity.UNCOMMON, mage.cards.e.ExpandTheSphere.class));
         cards.add(new SetCardInfo("Experimental Augury", 49, Rarity.COMMON, mage.cards.e.ExperimentalAugury.class));
         cards.add(new SetCardInfo("Exuberant Fuseling", 129, Rarity.COMMON, mage.cards.e.ExuberantFuseling.class));
         cards.add(new SetCardInfo("Eye of Malcator", 50, Rarity.COMMON, mage.cards.e.EyeOfMalcator.class));
