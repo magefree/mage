@@ -154,6 +154,7 @@ Magic: The Gathering-Commander|CMD|
 Magic: The Gathering-Conspiracy|CNS|
 Media Inserts|MBP|
 March of the Machine|MOM|
+March of the Machine Commander|MOC|
 Mirrodin Besieged|MBS|
 Masters Edition II|ME2|
 Masters Edition III|ME3|

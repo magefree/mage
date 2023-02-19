@@ -161,6 +161,7 @@ Masters Edition IV|MastersEditionIV|
 Masters 25|Masters25|
 Media Inserts|MediaInserts|
 March of the Machine|MarchOfTheMachine
+March of the Machine Commander|MarchOfTheMachineCommander
 Mercadian Masques|MercadianMasques|
 Mirage|Mirage|
 Mirrodin|Mirrodin|
