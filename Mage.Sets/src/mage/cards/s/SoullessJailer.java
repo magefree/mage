@@ -43,7 +43,7 @@ class SoullessJailerEnterEffect extends ContinuousRuleModifyingEffectImpl {
 
     SoullessJailerEnterEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "permanent cards in graveyards can’t enter the battlefield";
+        staticText = "permanent cards in graveyards can't enter the battlefield";
     }
 
     private SoullessJailerEnterEffect(final SoullessJailerEnterEffect effect) {
@@ -76,7 +76,7 @@ class SoullessJailerCastEffect extends ContinuousRuleModifyingEffectImpl {
 
     SoullessJailerCastEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "players can’t cast noncreature spells from graveyards or exile";
+        staticText = "players can't cast noncreature spells from graveyards or exile";
     }
 
     private SoullessJailerCastEffect(final SoullessJailerCastEffect effect) {
