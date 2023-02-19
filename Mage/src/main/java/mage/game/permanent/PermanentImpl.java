@@ -481,6 +481,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public void setLoyaltyActivationsAvailable(int loyaltyActivationsAvailable) {
+        this.loyaltyActivationsAvailable = loyaltyActivationsAvailable;
+    }
+
+    @Override
     public void addLoyaltyUsed() {
         this.timesLoyaltyUsed++;
     }
