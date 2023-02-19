@@ -41,8 +41,9 @@ public class GethThaneOfContracts extends CardImpl {
         Ability ability = new ActivateAsSorceryActivatedAbility(
                 new ReturnFromGraveyardToBattlefieldTargetEffect(false, false)
                         .setText("Return target creature card from your graveyard to the battlefield."),
-                new CompositeCost(new ManaCostsImpl<>("{1}{B}{B}"), new TapSourceCost(), "{1}{B}{B}, {T}")
+                new ManaCostsImpl<>("{1}{B}{B}")
         );
+        ability.addCost(new TapSourceCost());
         ability.addEffect(new GainAbilityTargetEffect(
                 new SimpleStaticAbility(new GethThaneOfContractsReplacementEffect()),
                 Duration.Custom
