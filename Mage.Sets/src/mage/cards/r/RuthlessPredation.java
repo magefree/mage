@@ -16,7 +16,7 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author anonymous
+ * @author @stwalsh4118
  */
 public final class RuthlessPredation extends CardImpl {
 
