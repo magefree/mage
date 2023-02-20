@@ -48,7 +48,7 @@ class BringTheEndingCounterEffect extends OneShotEffect {
 
     public BringTheEndingCounterEffect() {
         super(Outcome.Benefit);
-        staticText = "Counter target spell unless its controller pays {2}." + "\n" + AbilityWord.CORRUPTED.formatWord() + "Counter that spell instead if its controller has three or more poison counters.";
+        staticText = "Counter target spell unless its controller pays {2}.<br>" + AbilityWord.CORRUPTED.formatWord() + "Counter that spell instead if its controller has three or more poison counters.";
     }
 
     public BringTheEndingCounterEffect(final BringTheEndingCounterEffect effect) {
