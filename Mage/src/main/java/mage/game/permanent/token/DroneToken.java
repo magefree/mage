@@ -2,7 +2,7 @@ package mage.game.permanent.token;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesSourceTriggeredAbility;
+import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.keyword.DeathtouchAbility;
@@ -23,7 +23,7 @@ public class DroneToken extends TokenImpl {
         toughness = new MageInt(2);
         addAbility(DeathtouchAbility.getInstance());
 
-        Ability ability = new DiesSourceTriggeredAbility(new LoseLifeOpponentsEffect(2));
+        Ability ability = new LeavesBattlefieldTriggeredAbility(new LoseLifeOpponentsEffect(2), false).setTriggerPhrase("When this creature leaves the battlefield, ");
         ability.addEffect(new GainLifeEffect(2).concatBy("and"));
         addAbility(ability);
 

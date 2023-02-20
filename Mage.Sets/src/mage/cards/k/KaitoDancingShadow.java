@@ -282,13 +282,7 @@ class KaitoDancingShadowIncreaseLoyaltyUseEffect extends ContinuousEffectImpl {
             StaticFilters.FILTER_CONTROLLED_PERMANENT_PLANESWALKER,
             source.getControllerId(), source, game
         )) {
-            System.out.println("PERMANENT");
-            System.out.println(permanent);
-            System.out.println(permanent.getId());
-            System.out.println(source.getSourceId());
-
             permanent.setLoyaltyActivationsAvailable(2);
-            System.out.println(permanent.canLoyaltyBeUsed(game));
         }
 
         return true;
