@@ -22,7 +22,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.target.TargetPermanent;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.constants.Outcome;
@@ -94,7 +94,7 @@ class TheEternalWandererExileEffect extends OneShotEffect {
 
     public TheEternalWandererExileEffect() {
         super(Outcome.Detriment);
-        staticText = "exile up to one target artifact or creature. If you do, return that card to the battlefield under its owner's control at the beginning of the next end step";
+        staticText = "exile up to one target artifact or creature. If you do, return that card to the battlefield under its owner's control at the beginning of that player's next end step";
     }
 
     public TheEternalWandererExileEffect(final TheEternalWandererExileEffect effect) {
@@ -114,7 +114,7 @@ class TheEternalWandererExileEffect extends OneShotEffect {
                     //create delayed triggered ability
                     Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);
                     effect.setTargetPointer(new FixedTarget(permanent.getId(), game));
-                    game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
+                    game.addDelayedTriggeredAbility(new AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility(effect, permanent.getOwnerId()), source);
                 }
             }
             return true;
