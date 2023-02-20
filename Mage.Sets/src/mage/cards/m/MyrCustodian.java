@@ -24,7 +24,7 @@ public class MyrCustodian extends CardImpl {
 
         //When Myr Custodian enters the battlefield, scry 2. Then each opponent may scry 1.
         EntersBattlefieldTriggeredAbility entersBattlefieldTriggeredAbility =
-                new EntersBattlefieldTriggeredAbility(new ScryEffect(2));
+                new EntersBattlefieldTriggeredAbility(new ScryEffect(2,false));
         entersBattlefieldTriggeredAbility.addEffect(new MyrCustodianScryEffect());
         this.addAbility(entersBattlefieldTriggeredAbility);
     }
