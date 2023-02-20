@@ -3,8 +3,11 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAttachToTarget;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.cards.CardImpl;
@@ -17,6 +20,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.StanggTwinToken;
 import mage.game.permanent.token.Token;
+import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.FixedTargets;
 
 import java.util.List;
@@ -110,7 +114,7 @@ class StanggEchoWarriorEffect extends OneShotEffect {
                 CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect();
                 effect.setSavedPermanent(attachment);
                 effect.apply(game, source);
-                effect.getAddedPermanents().stream().map(t -> permanent.addAttachment(t.getId(), source, game));
+                effect.getAddedPermanents().forEach(t -> permanent.addAttachment(t.getId(), source, game));
                 toSacrifice.addAll(effect.getAddedPermanents());
             }
         }
