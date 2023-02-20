@@ -19,7 +19,7 @@ import mage.constants.Outcome;
 
 /**
  *
- * @author anonymous
+ * @author @stwalsh4118
  */
 public final class BladeholdWarWhip extends CardImpl {
 
