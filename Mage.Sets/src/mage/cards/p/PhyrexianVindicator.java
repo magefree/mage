@@ -52,8 +52,8 @@ class PhyrexianVindicatorEffect extends ReplacementEffectImpl {
 
     public PhyrexianVindicatorEffect() {
         super(Duration.WhileOnBattlefield, Outcome.PreventDamage);
-        staticText = "If damage would be dealt to Phyrexian Vindicator, prevent that damage. When damage is prevented " +
-                "this way, Phyrexian Vindicator deals that much damage to any other target.";
+        staticText = "If damage would be dealt to {this}, prevent that damage. When damage is prevented this way, " +
+                "{this} deals that much damage to any other target.";
     }
 
     private PhyrexianVindicatorEffect(final PhyrexianVindicatorEffect effect) {
