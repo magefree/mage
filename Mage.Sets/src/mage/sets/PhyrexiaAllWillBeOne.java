@@ -217,6 +217,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Testament Bearer", 111, Rarity.COMMON, mage.cards.t.TestamentBearer.class));
         cards.add(new SetCardInfo("The Autonomous Furnace", 247, Rarity.COMMON, mage.cards.t.TheAutonomousFurnace.class));
         cards.add(new SetCardInfo("The Dross Pits", 251, Rarity.COMMON, mage.cards.t.TheDrossPits.class));
+        cards.add(new SetCardInfo("The Eternal Wanderer", 11, Rarity.RARE, mage.cards.t.TheEternalWanderer.class));
         cards.add(new SetCardInfo("The Fair Basilica", 252, Rarity.COMMON, mage.cards.t.TheFairBasilica.class));
         cards.add(new SetCardInfo("The Filigree Sylex", 227, Rarity.RARE, mage.cards.t.TheFiligreeSylex.class));
         cards.add(new SetCardInfo("The Hunter Maze", 253, Rarity.COMMON, mage.cards.t.TheHunterMaze.class));
