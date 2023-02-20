@@ -57,27 +57,18 @@ public final class TheEternalWanderer extends CardImpl {
         this.setStartingLoyalty(5);
 
         // No more than one creature can attack The Eternal Wanderer each combat.
-
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TheEternalWandererAttackRestrictionEffect()));
 
-
-        // +1: Exile up to one target artifact or creature. Return that card to the battlefield under its owner's control at the beginning of that player's next end step. 
-
+        // +1: Exile up to one target artifact or creature. Return that card to the battlefield under its owner's control at the beginning of that player's next end step.
         Ability ability = new LoyaltyAbility(new TheEternalWandererExileEffect(), 1);
         ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability);
 
-
-
         // 0: Create a 2/2 white Samurai creature token with double strike.
-
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new DoublestrikeSamuraiToken()), 0));
 
-
         // -4: For each player, choose a creature that player controls. Each player sacrifices all creatures they control not chosen this way.
-
         this.addAbility(new LoyaltyAbility(new TheEternalWandererSacrificeEffect(), -4));
-
     }
 
     private TheEternalWanderer(final TheEternalWanderer card) {
@@ -94,7 +85,8 @@ class TheEternalWandererExileEffect extends OneShotEffect {
 
     public TheEternalWandererExileEffect() {
         super(Outcome.Detriment);
-        staticText = "exile up to one target artifact or creature. If you do, return that card to the battlefield under its owner's control at the beginning of that player's next end step";
+        staticText = "Exile up to one target artifact or creature. Return that card to the battlefield " +
+                "under its owner's control at the beginning of that player's next end step.";
     }
 
     public TheEternalWandererExileEffect(final TheEternalWandererExileEffect effect) {
@@ -184,7 +176,7 @@ class TheEternalWandererSacrificeEffect extends OneShotEffect {
     public TheEternalWandererSacrificeEffect copy() {
         return new TheEternalWandererSacrificeEffect(this);
     }
-};
+}
 
 class TheEternalWandererAttackRestrictionEffect extends RestrictionEffect {
 
@@ -228,4 +220,4 @@ class TheEternalWandererAttackRestrictionEffect extends RestrictionEffect {
         }
         return true;
     }
-};
+}
