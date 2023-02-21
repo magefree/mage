@@ -25,7 +25,9 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Blossoming Sands", 268, Rarity.COMMON, mage.cards.b.BlossomingSands.class));
         cards.add(new SetCardInfo("Dismal Backwater", 269, Rarity.COMMON, mage.cards.d.DismalBackwater.class));
         cards.add(new SetCardInfo("Jungle Hollow", 270, Rarity.COMMON, mage.cards.j.JungleHollow.class));
-        cards.add(new SetCardInfo("Omnath, Locus of All", 249, Rarity.RARE, mage.cards.o.OmnathLocusOfAll.class));
+        cards.add(new SetCardInfo("Omnath, Locus of All", 249, Rarity.RARE, mage.cards.o.OmnathLocusOfAll.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Omnath, Locus of All", 313, Rarity.RARE, mage.cards.o.OmnathLocusOfAll.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Omnath, Locus of All", 387, Rarity.RARE, mage.cards.o.OmnathLocusOfAll.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rugged Highlands", 271, Rarity.COMMON, mage.cards.r.RuggedHighlands.class));
         cards.add(new SetCardInfo("Scoured Barrens", 272, Rarity.COMMON, mage.cards.s.ScouredBarrens.class));
         cards.add(new SetCardInfo("Swiftwater Cliffs", 273, Rarity.MYTHIC, mage.cards.s.SwiftwaterCliffs.class));
