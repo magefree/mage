@@ -271,6 +271,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Whisper of the Dross", 117, Rarity.COMMON, mage.cards.w.WhisperOfTheDross.class));
         cards.add(new SetCardInfo("White Sun's Twilight", 38, Rarity.RARE, mage.cards.w.WhiteSunsTwilight.class));
         cards.add(new SetCardInfo("Zealot's Conviction", 39, Rarity.COMMON, mage.cards.z.ZealotsConviction.class));
+        cards.add(new SetCardInfo("Zenith Chronicler", 246, Rarity.RARE, mage.cards.z.ZenithChronicler.class));
         cards.add(new SetCardInfo("Zopandrel, Hunger Dominus", 195, Rarity.MYTHIC, mage.cards.z.ZopandrelHungerDominus.class));
     }
 
