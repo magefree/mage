@@ -28,7 +28,8 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Rugged Highlands", 271, Rarity.COMMON, mage.cards.r.RuggedHighlands.class));
         cards.add(new SetCardInfo("Scoured Barrens", 272, Rarity.COMMON, mage.cards.s.ScouredBarrens.class));
         cards.add(new SetCardInfo("Swiftwater Cliffs", 273, Rarity.MYTHIC, mage.cards.s.SwiftwaterCliffs.class));
-        cards.add(new SetCardInfo("Thalia and The Gitrog Monster", 255, Rarity.MYTHIC, mage.cards.t.ThaliaAndTheGitrogMonster.class));
+        cards.add(new SetCardInfo("Thalia and The Gitrog Monster", 255, Rarity.MYTHIC, mage.cards.t.ThaliaAndTheGitrogMonster.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thalia and The Gitrog Monster", 316, Rarity.MYTHIC, mage.cards.t.ThaliaAndTheGitrogMonster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thornwood Falls", 274, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
         cards.add(new SetCardInfo("Tranquil Cove", 275, Rarity.COMMON, mage.cards.t.TranquilCove.class));
         cards.add(new SetCardInfo("Wind-Scarred Crag", 276, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
