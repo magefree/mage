@@ -99,7 +99,6 @@ class RunadiBehemothCallerTriggeredAbility extends TriggeredAbilityImpl {
             if (spell != null && spell.isCreature()) {
                 int manaValue = spell.getManaValue();
                 if (manaValue >= 5) {
-                    // spell.addAbilityForCopy(new EntersBattlefieldAbility(new AddCountersSourceEffect()));
                     this.addEffect(new RunadiBehemothCallerCounterEffect(spell.getSourceId()));
                     return true;
                 }
