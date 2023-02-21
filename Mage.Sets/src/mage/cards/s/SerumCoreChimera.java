@@ -52,7 +52,6 @@ public class SerumCoreChimera extends CardImpl {
                 new DiscardCardCost(StaticFilters.FILTER_CARD_A_NON_LAND), "Discard nonland card?")
                 .setText("Then you may discard a nonland card. When you discard a card this way, Serum-Core Chimera " +
                 "deals 3 damage to target creature or planeswalker."));
-        activateAsSorceryActivatedAbility.addTarget(new TargetCreatureOrPlaneswalker());
         this.addAbility(activateAsSorceryActivatedAbility);
     }
 
