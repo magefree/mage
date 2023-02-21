@@ -43,6 +43,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Black Sun's Twilight", 84, Rarity.RARE, mage.cards.b.BlackSunsTwilight.class));
         cards.add(new SetCardInfo("Blackcleave Cliffs", 248, Rarity.RARE, mage.cards.b.BlackcleaveCliffs.class));
         cards.add(new SetCardInfo("Bladed Ambassador", 5, Rarity.UNCOMMON, mage.cards.b.BladedAmbassador.class));
+        cards.add(new SetCardInfo("Bladehold War-Whip", 197, Rarity.UNCOMMON, mage.cards.b.BladeholdWarWhip.class));
         cards.add(new SetCardInfo("Blazing Crescendo", 123, Rarity.COMMON, mage.cards.b.BlazingCrescendo.class));
         cards.add(new SetCardInfo("Blightbelly Rat", 85, Rarity.COMMON, mage.cards.b.BlightbellyRat.class));
         cards.add(new SetCardInfo("Bloated Contaminator", 159, Rarity.RARE, mage.cards.b.BloatedContaminator.class));
