@@ -81,7 +81,7 @@ class OmnathLocusOfAllCardEffect extends OneShotEffect {
         super(Outcome.Benefit);
         this.staticText = "look at the top card of your library. You may reveal that card if it has three or more " +
                 "colored mana symbols in its mana cost. If you do, add three mana in any combination of colors and " +
-                "put it into your hand. If you don’t reveal it, put it into your hand.";
+                "put it into your hand. If you don't reveal it, put it into your hand.";
     }
 
     public OmnathLocusOfAllCardEffect(final OmnathLocusOfAllCardEffect effect) {
