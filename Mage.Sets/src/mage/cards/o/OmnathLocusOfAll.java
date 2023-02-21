@@ -76,7 +76,6 @@ class OmnathLocusOfAllManaEffect extends ContinuousEffectImpl {
 }
 
 class OmnathLocusOfAllCardEffect extends OneShotEffect {
-
     public OmnathLocusOfAllCardEffect() {
         super(Outcome.Benefit);
         this.staticText = "look at the top card of your library. You may reveal that card if it has three or more " +
