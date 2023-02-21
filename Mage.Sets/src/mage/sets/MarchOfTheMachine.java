@@ -24,10 +24,16 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodfell Caves", 267, Rarity.COMMON, mage.cards.b.BloodfellCaves.class));
         cards.add(new SetCardInfo("Blossoming Sands", 268, Rarity.COMMON, mage.cards.b.BlossomingSands.class));
         cards.add(new SetCardInfo("Dismal Backwater", 269, Rarity.COMMON, mage.cards.d.DismalBackwater.class));
+        cards.add(new SetCardInfo("Jin-Gitaxias", 65, Rarity.MYTHIC, mage.cards.j.JinGitaxias.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jin-Gitaxias", 294, Rarity.MYTHIC, mage.cards.j.JinGitaxias.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jin-Gitaxias", 339, Rarity.MYTHIC, mage.cards.j.JinGitaxias.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jungle Hollow", 270, Rarity.COMMON, mage.cards.j.JungleHollow.class));
         cards.add(new SetCardInfo("Rugged Highlands", 271, Rarity.COMMON, mage.cards.r.RuggedHighlands.class));
         cards.add(new SetCardInfo("Scoured Barrens", 272, Rarity.COMMON, mage.cards.s.ScouredBarrens.class));
         cards.add(new SetCardInfo("Swiftwater Cliffs", 273, Rarity.MYTHIC, mage.cards.s.SwiftwaterCliffs.class));
+        cards.add(new SetCardInfo("The Great Synthesis", 65, Rarity.MYTHIC, mage.cards.t.TheGreatSynthesis.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Great Synthesis", 294, Rarity.MYTHIC, mage.cards.t.TheGreatSynthesis.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Great Synthesis", 339, Rarity.MYTHIC, mage.cards.t.TheGreatSynthesis.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thornwood Falls", 274, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
         cards.add(new SetCardInfo("Tranquil Cove", 275, Rarity.COMMON, mage.cards.t.TranquilCove.class));
         cards.add(new SetCardInfo("Wind-Scarred Crag", 276, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
