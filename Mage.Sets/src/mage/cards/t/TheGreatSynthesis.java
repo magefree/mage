@@ -35,7 +35,7 @@ public class TheGreatSynthesis extends CardImpl {
         this.color.setBlue(true);
 
         //(As this Saga enters and after your draw step, add a lore counter.)
-        SagaAbility sagaAbility = new SagaAbility(this);
+        SagaAbility sagaAbility = new SagaAbility(this, false);
 
         //I — Draw cards equal to the number of cards in your hand. You have no maximum hand size for as long as you
         //control The Great Synthesis.
