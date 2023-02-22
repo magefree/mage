@@ -1861,6 +1861,20 @@ public class ScryfallImageSupportTokens {
             put ("DMR/Squirrel", "https://api.scryfall.com/cards/tdmr/13/en?format=image");
             put ("DMR/Zombie", "https://api.scryfall.com/cards/tdmr/5/en?format=image");
 
+            // ONE
+            put ("ONE/Cat", "https://api.scryfall.com/cards/tone/1/en?format=image");
+            put ("ONE/Samurai", "https://api.scryfall.com/cards/tone/2/en?format=image");
+            put ("ONE/Phyrexian Goblin", "https://api.scryfall.com/cards/tone/3/en?format=image");
+            put ("ONE/Phyrexian Horror/1", "https://api.scryfall.com/cards/tone/4/en?format=image");
+            put ("ONE/Rebel", "https://api.scryfall.com/cards/tone/5/en?format=image");
+            put ("ONE/Phyrexian Beast", "https://api.scryfall.com/cards/tone/6/en?format=image");
+            put ("ONE/Phyrexian Horror/2", "https://api.scryfall.com/cards/tone/7/en?format=image");
+            put ("ONE/Drone", "https://api.scryfall.com/cards/tone/8/en?format=image");
+            put ("ONE/The Hollow Sentinel", "https://api.scryfall.com/cards/tone/9/en?format=image");
+            put ("ONE/Phyrexian Golem", "https://api.scryfall.com/cards/tone/10/en?format=image");
+            put ("ONE/Phyrexian Mite/1", "https://api.scryfall.com/cards/tone/11/en?format=image");
+            put ("ONE/Phyrexian Mite/2", "https://api.scryfall.com/cards/tone/12/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

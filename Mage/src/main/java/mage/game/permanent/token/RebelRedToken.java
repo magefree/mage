@@ -4,6 +4,9 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 /**
  * @author TheElk801
  */
@@ -16,6 +19,8 @@ public final class RebelRedToken extends TokenImpl {
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.REBEL);
+
+        availableImageSetCodes = Collections.singletonList("ONE");
     }
 
     public RebelRedToken(final RebelRedToken token) {

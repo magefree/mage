@@ -9,6 +9,8 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Collections;
+
 /**
  * @author @stwalsh4118
  */
@@ -27,6 +29,7 @@ public class DroneToken extends TokenImpl {
         ability.addEffect(new GainLifeEffect(2).concatBy("and"));
         addAbility(ability);
 
+        availableImageSetCodes.add("ONE");
     }
 
     private DroneToken(final DroneToken token) {

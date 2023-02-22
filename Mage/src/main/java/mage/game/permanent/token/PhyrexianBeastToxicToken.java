@@ -6,6 +6,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * @author TheElk801
@@ -13,7 +14,12 @@ import java.util.Arrays;
 public final class PhyrexianBeastToxicToken extends TokenImpl {
 
     public PhyrexianBeastToxicToken() {
-        super("Phyrexian Golem Token", "3/3 green Phyrexian Beast creature token with toxic 1");
+        this(false);
+    }
+
+    public PhyrexianBeastToxicToken(boolean showHint) {
+        super("Phyrexian Beast Token", "3/3 green Phyrexian Beast creature token with toxic 1" +
+                (showHint ? " <i>(Players dealt combat damage by it also get a poison counter.)</i>" : ""));
         color.setGreen(true);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.PHYREXIAN);
@@ -23,7 +29,7 @@ public final class PhyrexianBeastToxicToken extends TokenImpl {
 
         addAbility(new ToxicAbility(1));
 
-        availableImageSetCodes = Arrays.asList("ONE");
+        availableImageSetCodes = Collections.singletonList("ONE");
     }
 
     public PhyrexianBeastToxicToken(final PhyrexianBeastToxicToken token) {
