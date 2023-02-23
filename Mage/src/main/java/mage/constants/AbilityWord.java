@@ -52,7 +52,8 @@ public enum AbilityWord {
     TEMPTING_OFFER("Tempting offer"),
     THRESHOLD("Threshold"),
     UNDERGROWTH("Undergrowth"),
-    WILL_OF_THE_COUNCIL("Will of the council");
+    WILL_OF_THE_COUNCIL("Will of the council"),
+    GIFT_OF_CHAOS("Gift of Chaos");
 
     private final String text;
 
