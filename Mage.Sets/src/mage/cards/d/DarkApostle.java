@@ -70,7 +70,7 @@ class DarkApostleEffect extends ContinuousEffectImpl {
     private final Ability cascadeAbility = new CascadeAbility();
 
     DarkApostleEffect() {
-        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "the next noncreature spell you cast this turn has cascade";
     }
 
