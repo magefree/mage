@@ -2,6 +2,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.Mana;
+import mage.ObjectColor;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
 import mage.abilities.keyword.PrototypeAbility;
@@ -28,7 +29,7 @@ public final class CradleClearcutter extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Prototype {2}{G} - 1/3
-        this.addAbility(new PrototypeAbility(this, "{2}{G}", 1, 3));
+        this.addAbility(new PrototypeAbility(this, "{2}{G}", ObjectColor.GREEN, 1, 3));
 
         // {T}: Add an amount of {G} equal to Cradle Clearcutter's power.
         this.addAbility(new DynamicManaAbility(

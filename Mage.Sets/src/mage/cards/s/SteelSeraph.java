@@ -1,6 +1,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -38,7 +39,7 @@ public final class SteelSeraph extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Prototype {1}{W}{W} -- 3/3
-        this.addAbility(new PrototypeAbility(this, "{1}{W}{W}", 3, 3));
+        this.addAbility(new PrototypeAbility(this, "{1}{W}{W}", ObjectColor.WHITE,3, 3));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

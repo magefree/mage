@@ -263,12 +263,13 @@ public class SpellAbility extends ActivatedAbilityImpl {
     }
 
     private void setSpellName() {
+        String adjective = "";
         switch (spellAbilityType) {
             case SPLIT_FUSED:
                 this.name = "Cast fused " + cardName;
                 break;
             default:
-                this.name = "Cast " + cardName + (this.spellAbilityCastMode != SpellAbilityCastMode.NORMAL ? " using " + spellAbilityCastMode.toString() : "");
+                this.name = "Cast " + adjective + cardName + (this.spellAbilityCastMode != SpellAbilityCastMode.NORMAL ? " using " + spellAbilityCastMode.toString() : "");
         }
     }
 

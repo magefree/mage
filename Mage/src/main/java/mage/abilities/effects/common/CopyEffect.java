@@ -139,6 +139,7 @@ public class CopyEffect extends ContinuousEffectImpl {
             permanent.setSecondCardFace(targetPermanent.getSecondCardFace());
             permanent.setFlipCard(targetPermanent.isFlipCard());
             permanent.setFlipCardName(targetPermanent.getFlipCardName());
+            permanent.setPrototyped(targetPermanent.isPrototyped());
         }
 
         // to get the image of the copied permanent copy number und expansionCode

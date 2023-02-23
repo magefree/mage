@@ -3,6 +3,7 @@ package mage.cards.a;
 import mage.ApprovingObject;
 import mage.MageInt;
 import mage.MageObject;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
@@ -48,7 +49,7 @@ public final class ArcaneProxy extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Prototype {1}{U}{U} -- 2/1
-        this.addAbility(new PrototypeAbility(this, "{1}{U}{U}", 2, 1));
+        this.addAbility(new PrototypeAbility(this, "{1}{U}{U}", ObjectColor.BLUE,2, 1));
 
         // When Arcane Proxy enters the battlefield, if you cast it, exile target instant or sorcery card with mana value less than or equal to Arcane Proxy's power from your graveyard. Copy that card. You may cast the copy without paying its mana cost.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(

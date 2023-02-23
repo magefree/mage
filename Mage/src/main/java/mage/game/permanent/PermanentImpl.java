@@ -107,6 +107,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected Map<String, String> info;
     protected int createOrder;
     protected boolean legendRuleApplies = true;
+    protected boolean prototyped;
 
     private static final List<UUID> emptyList = Collections.unmodifiableList(new ArrayList<UUID>());
 
@@ -178,6 +179,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.morphed = permanent.morphed;
         this.manifested = permanent.manifested;
         this.createOrder = permanent.createOrder;
+        this.prototyped = permanent.prototyped;
     }
 
     @Override
@@ -1570,6 +1572,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public boolean isPrototyped() {
+        return this.prototyped;
+    }
+
+    @Override
     public void setMonstrous(boolean value) {
         this.monstrous = value;
     }
@@ -1710,6 +1717,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public void setSecondCardFace(Card card) {
         this.secondSideCard = card;
+    }
+
+    public void setPrototyped(boolean prototyped) {
+        this.prototyped = prototyped;
     }
 
     @Override

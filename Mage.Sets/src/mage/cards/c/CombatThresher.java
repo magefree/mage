@@ -1,6 +1,7 @@
 package mage.cards.c;
 
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
@@ -25,7 +26,7 @@ public final class CombatThresher extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Prototype {2}{W} -- 1/1
-        this.addAbility(new PrototypeAbility(this, "{2}{W}", 1, 1));
+        this.addAbility(new PrototypeAbility(this, "{2}{W}", ObjectColor.WHITE,1, 1));
 
         // Double strike
         this.addAbility(DoubleStrikeAbility.getInstance());

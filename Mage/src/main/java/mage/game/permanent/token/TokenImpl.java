@@ -10,6 +10,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.Card;
 import mage.constants.Outcome;
+import mage.constants.SpellAbilityType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -298,6 +299,11 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                     game.addSimultaneousEvent(new CreatedTokenEvent(source, (PermanentToken) permanent));
                 }
 
+                // prototyped spell tokens make prototyped permanent tokens on resolution.
+                if(source instanceof SpellAbility && ((SpellAbility) source).getSpellAbilityType() == SpellAbilityType.PROTOTYPE) {
+                    permanent.setPrototyped(true);
+                }
+
                 // if token was created (not a spell copy) handle auras coming into the battlefield
                 // code blindly copied from CopyPermanentEffect
                 // TODO: clean this up -- half the comments make no sense in the context of creating a token
@@ -310,13 +316,14 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                         if (!(ability instanceof SpellAbility)) {
                             continue;
                         }
+
                         auraOutcome = ability.getEffects().getOutcome(ability);
                         for (Effect effect : ability.getEffects()) {
-                            if (!(effect instanceof AttachEffect)) {
+                            if ((effect instanceof AttachEffect)) {
                                 continue;
                             }
-                            if (permanent.getSpellAbility().getTargets().size() > 0) {
-                                auraTarget = permanent.getSpellAbility().getTargets().get(0);
+                            if (!(effect instanceof AttachEffect)) {
+                                continue;
                             }
                         }
                     }

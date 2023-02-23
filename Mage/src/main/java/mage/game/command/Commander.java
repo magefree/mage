@@ -50,6 +50,7 @@ public class Commander implements CommandObject {
                     case MODAL_LEFT:
                     case MODAL_RIGHT:
                     case ADVENTURE_SPELL:
+                    case PROTOTYPE:
                         // can be used from command zone
                         if (canUseAbilityFromCommandZone(spellAbility)) {
                             abilities.add(new CastCommanderAbility(card, spellAbility));
@@ -246,6 +247,11 @@ public class Commander implements CommandObject {
     @Override
     public ManaCosts<ManaCost> getManaCost() {
         return sourceObject.getManaCost();
+    }
+
+    @Override
+    public void setManaCost(ManaCosts<ManaCost> costs) {
+        throw new UnsupportedOperationException("Unsupported operation");
     }
 
     @Override
