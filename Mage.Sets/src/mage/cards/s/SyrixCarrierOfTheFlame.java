@@ -6,6 +6,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.SourceInGraveyardCondition;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageWithPowerFromOneToAnotherTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -24,8 +26,11 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetAnyTarget;
 import mage.watchers.Watcher;
+import mage.watchers.common.CardsLeftGraveyardWatcher;
+import mage.watchers.common.CardsPutIntoGraveyardWatcher;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -59,23 +64,23 @@ public class SyrixCarrierOfTheFlame extends CardImpl {
         // target Phoenix you control deals damage equal to its power to any target.
         BeginningOfEndStepTriggeredAbility ability = new BeginningOfEndStepTriggeredAbility(
                 new DamageWithPowerFromOneToAnotherTargetEffect(),
-                TargetController.EACH_PLAYER,
+                TargetController.ANY,
                 SyrixCarrierOfTheFlameCondition.instance,
                 false
         );
         ability.addTarget(new TargetPermanent(phoenixFilter));
         ability.addTarget(new TargetAnyTarget());
-        ability.addWatcher(new SyrixCarrierOfTheFlameWatcher());
+        ability.addWatcher(new CardsLeftGraveyardWatcher());
         this.addAbility(ability);
 
         // Whenever another Phoenix you control dies, you may cast Syrix, Carrier of the Flame from your graveyard.
-        this.addAbility(new DiesCreatureTriggeredAbility(
-                Zone.GRAVEYARD,
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new DiesCreatureTriggeredAbility(
+                Zone.ALL,
                 new SyrixCarrierOfTheFlameCastEffect(),
-                true,
+                false,
                 anotherPhoenixFilter,
-                false)
-        );
+                false
+        ), SourceInGraveyardCondition.instance, ""));
     }
 
     private SyrixCarrierOfTheFlame(final SyrixCarrierOfTheFlame card) {
@@ -137,52 +142,16 @@ enum SyrixCarrierOfTheFlameCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        SyrixCarrierOfTheFlameWatcher watcher = game.getState().getWatcher(SyrixCarrierOfTheFlameWatcher.class);
-        return watcher != null && watcher.hadACreatureLeave(source.getControllerId());
+        CardsLeftGraveyardWatcher cardsLeftGraveyardWatcher = game.getState().getWatcher(CardsLeftGraveyardWatcher.class);
+        return cardsLeftGraveyardWatcher != null &&
+                cardsLeftGraveyardWatcher
+                        .getCardsThatLeftGraveyard(source.getControllerId(), game)
+                        .stream()
+                        .anyMatch(card -> card.isCreature(game));
     }
 
     @Override
     public String toString() {
         return string;
-    }
-}
-
-/**
- * Creature card left your graveyard this turn
- */
-class SyrixCarrierOfTheFlameWatcher extends Watcher {
-
-    // Player IDs who had a creature card leave their graveyard
-    private final Set<UUID> creatureCardLeftPlayerIds = new HashSet<>();
-
-    SyrixCarrierOfTheFlameWatcher() {
-        super(WatcherScope.GAME);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (!(event.getType() == GameEvent.EventType.ZONE_CHANGE && event instanceof ZoneChangeEvent)) {
-            return;
-        }
-        ZoneChangeEvent zoneChangeEvent = (ZoneChangeEvent) event;
-
-        if (zoneChangeEvent.getFromZone() != Zone.GRAVEYARD) {
-            return;
-        }
-
-        Card card = zoneChangeEvent.getTarget();
-        if (card != null && card.isCreature(game)) {
-            creatureCardLeftPlayerIds.add(card.getOwnerId());
-        }
-    }
-
-    public boolean hadACreatureLeave(UUID playerId) {
-        return creatureCardLeftPlayerIds.contains(playerId);
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        creatureCardLeftPlayerIds.clear();
     }
 }
