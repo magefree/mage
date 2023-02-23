@@ -232,6 +232,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Skorpekh Lord", 58, Rarity.RARE, mage.cards.s.SkorpekhLord.class));
         cards.add(new SetCardInfo("Skullclamp", 248, Rarity.UNCOMMON, mage.cards.s.Skullclamp.class));
         cards.add(new SetCardInfo("Skycloud Expanse", 294, Rarity.RARE, mage.cards.s.SkycloudExpanse.class));
+        cards.add(new SetCardInfo("Sloppity Bilepiper", 59, Rarity.RARE, mage.cards.s.SloppityBilepiper.class));
         cards.add(new SetCardInfo("Sol Ring", 249, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Space Marine Devastator", 14, Rarity.RARE, mage.cards.s.SpaceMarineDevastator.class));
         cards.add(new SetCardInfo("Space Marine Scout", 15, Rarity.UNCOMMON, mage.cards.s.SpaceMarineScout.class));
