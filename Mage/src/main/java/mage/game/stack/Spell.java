@@ -129,6 +129,7 @@ public class Spell extends StackObjectImpl implements Card {
         this.card = spell.card.copy();
 
         this.fromZone = spell.fromZone;
+        this.manaCost = spell.getManaCost().copy();
         this.color = spell.color.copy();
         this.frameColor = spell.color.copy();
         this.frameStyle = spell.frameStyle;

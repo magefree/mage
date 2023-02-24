@@ -319,11 +319,11 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
 
                         auraOutcome = ability.getEffects().getOutcome(ability);
                         for (Effect effect : ability.getEffects()) {
-                            if ((effect instanceof AttachEffect)) {
-                                continue;
-                            }
                             if (!(effect instanceof AttachEffect)) {
                                 continue;
+                            }
+                            if (permanent.getSpellAbility().getTargets().size() > 0) {
+                                auraTarget = permanent.getSpellAbility().getTargets().get(0);
                             }
                         }
                     }
