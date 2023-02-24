@@ -13,6 +13,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.Tyranid55Token;
 import mage.target.common.TargetCardInHand;
@@ -49,7 +50,7 @@ public final class OldOneEye extends CardImpl {
                 Zone.GRAVEYARD,
                 new DoIfCostPaid(
                         new ReturnSourceFromGraveyardToHandEffect(),
-                        new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS))
+                        new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("two cards")))
                 ), TargetController.YOU, false, false
         ).withFlavorWord("Fast Healing"));
     }
