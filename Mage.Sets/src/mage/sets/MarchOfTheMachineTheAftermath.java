@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
@@ -19,5 +20,8 @@ public final class MarchOfTheMachineTheAftermath extends ExpansionSet {
         this.blockName = "March of the Machine";
         this.hasBasicLands = false;
         this.hasBoosters = false; // temporary
+
+        cards.add(new SetCardInfo("The Kenriths' Royal Funeral", 34, Rarity.RARE, mage.cards.t.TheKenrithsRoyalFuneral.class));
+
     }
 }
