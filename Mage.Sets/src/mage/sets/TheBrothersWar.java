@@ -26,8 +26,8 @@ public final class TheBrothersWar extends ExpansionSet {
         super("The Brothers' War", "BRO", ExpansionSet.buildDate(2022, 11, 18), SetType.EXPANSION);
         this.blockName = "The Brothers' War";
         this.hasBoosters = true;
-        this.numBoosterLands = 1;
-        this.numBoosterCommon = 9;
+        this.numBoosterLands = 0;
+        this.numBoosterCommon = 10; // TODO: someone can make it so 1/4 of the time a common is replaced by a basic land in the future if they want to
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.numBoosterSpecial = 1;
