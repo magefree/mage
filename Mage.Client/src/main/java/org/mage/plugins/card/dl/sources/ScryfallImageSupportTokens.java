@@ -1876,6 +1876,30 @@ public class ScryfallImageSupportTokens {
             put ("ONE/Samurai", "https://api.scryfall.com/cards/tone/2/en?format=image");
             put ("ONE/The Hollow Sentinel", "https://api.scryfall.com/cards/tone/9/en?format=image");
 
+            // ONC
+            put ("ONC/Angel/1", "https://api.scryfall.com/cards/tonc/2/en?format=image");
+            put ("ONC/Angel/2", "https://api.scryfall.com/cards/tonc/3/en?format=image");
+            put ("ONC/Beast", "https://api.scryfall.com/cards/tonc/13/en?format=image");
+            put ("ONC/Bird", "https://api.scryfall.com/cards/tonc/4/en?format=image");
+            put ("ONC/Dragon", "https://api.scryfall.com/cards/tonc/10/en?format=image");
+            put ("ONC/Eldrazi", "https://api.scryfall.com/cards/tonc/1/en?format=image");
+            put ("ONC/Elephant", "https://api.scryfall.com/cards/tonc/14/en?format=image");
+            put ("ONC/Goblin", "https://api.scryfall.com/cards/tonc/11/en?format=image");
+            put ("ONC/Golem", "https://api.scryfall.com/cards/tonc/18/en?format=image");
+            put ("ONC/Human", "https://api.scryfall.com/cards/tonc/5/en?format=image");
+            put ("ONC/Human Soldier", "https://api.scryfall.com/cards/tonc/6/en?format=image");
+            put ("ONC/Kobolds of Kher Keep", "https://api.scryfall.com/cards/tonc/12/en?format=image");
+            put ("ONC/Myr", "https://api.scryfall.com/cards/tonc/19/en?format=image");
+            put ("ONC/Phyrexian Germ", "https://api.scryfall.com/cards/tonc/23/en?format=image");
+            put ("ONC/Phyrexian Horror", "https://api.scryfall.com/cards/tonc/20/en?format=image");
+            put ("ONC/Phyrexian Insect", "https://api.scryfall.com/cards/tonc/15/en?format=image");
+            put ("ONC/Phyrexian Wurm", "https://api.scryfall.com/cards/tonc/16/en?format=image");
+            put ("ONC/Soldier/1", "https://api.scryfall.com/cards/tonc/7/en?format=image");
+            put ("ONC/Soldier/2", "https://api.scryfall.com/cards/tonc/8/en?format=image");
+            put ("ONC/Soldier/3", "https://api.scryfall.com/cards/tonc/17/en?format=image");
+            put ("ONC/Spirit", "https://api.scryfall.com/cards/tonc/9/en?format=image");
+            put ("ONC/Thopter", "https://api.scryfall.com/cards/tonc/21/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

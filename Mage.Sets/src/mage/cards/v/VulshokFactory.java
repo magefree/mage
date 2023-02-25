@@ -15,10 +15,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.HasteAbility;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.token.GolemXXToken;
+import mage.game.permanent.token.HasteGolemToken;
 import mage.game.permanent.token.Token;
 
 /**
@@ -79,8 +78,7 @@ class VulshokFactoryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Token token = new GolemXXToken(xValue.calculate(game, source, this));
-        token.addAbility(HasteAbility.getInstance());
+        Token token = new HasteGolemToken(xValue.calculate(game, source, this));
         return token.putOntoBattlefield(1, game, source);
     }
 }

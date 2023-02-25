@@ -1992,5 +1992,31 @@
 |Generate|TOK:ONE|Samurai|||DoublestrikeSamuraiToken|
 |Generate|TOK:ONE|The Hollow Sentinel|||TheHollowSentinelToken|
 
+# ONC
+|Generate|TOK:ONC|Angel|1||AngelToken|
+|Generate|TOK:ONC|Angel|2||AngelVigilanceToken|
+|Generate|TOK:ONC|Beast|||BeastToken|
+|Generate|TOK:ONC|Bird|||BirdToken|
+|Generate|TOK:ONC|Dragon|||DragonToken2|
+|Generate|TOK:ONC|Eldrazi|||EldraziToken|
+|Generate|TOK:ONC|Elephant|||ElephantToken|
+|Generate|TOK:ONC|Goblin|||GoblinToken|
+|Generate|TOK:ONC|Golem|||HasteGolemToken|
+|Generate|TOK:ONC|Human|||HumanToken|
+|Generate|TOK:ONC|Human Soldier|||HumanSoldierToken|
+|Generate|TOK:ONC|Kobolds of Kher Keep|||KherKeepKoboldToken|
+|Generate|TOK:ONC|Myr|||MyrToken|
+|Generate|TOK:ONC|Phyrexian Germ|||PhyrexianGermToken|
+|Generate|TOK:ONC|Phyrexian Horror|||PhyrexianRebirthHorrorToken|
+|Generate|TOK:ONC|Phyrexian Insect|||InsectInfectToken|
+|Generate|TOK:ONC|Phyrexian Wurm|||PhyrexianWurmToken|
+|Generate|TOK:ONC|Soldier|1||SoldierToken|
+|Generate|TOK:ONC|Soldier|2||SoldierVigilanceToken|
+|Generate|TOK:ONC|Soldier|3||SoldierTokenWithHaste|
+|Generate|TOK:ONC|Spirit|||SpiritWhiteToken|
+|Generate|TOK:ONC|Thopter|||ThopterColorlessToken|
+
+
+
 
 
