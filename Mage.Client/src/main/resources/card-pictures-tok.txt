@@ -138,6 +138,7 @@
 |Generate|EMBLEM:DMU|Ajani, Sleeper Agent||Emblem Ajani|AjaniSleeperAgentEmblem|
 |Generate|EMBLEM:DMU|Jaya, Fiery Negotiator||Emblem Jaya|JayaFieryNegotiatorEmblem|
 |Generate|EMBLEM:BRO|Saheeli, Filigree Master||Emblem Saheeli|SaheeliFiligreeMasterEmblem|
+|Generate|EMBLEM:ONE|Koth, Fire of Resistance||Emblem Koth|KothFireOfResistanceEmblem|
 
 # Planes
 |Generate|PLANE:PCA|Plane - Academy at Tolaria West|||AcademyAtTolariaWestPlane|
@@ -1976,3 +1977,20 @@
 |Generate|TOK:DMR|Sheep|||SheepToken|
 |Generate|TOK:DMR|Squirrel|||SquirrelToken|
 |Generate|TOK:DMR|Zombie|||ZombieToken|
+
+# ONE
+|Generate|TOK:ONE|Cat|||CatToken|
+|Generate|TOK:ONE|Drone|||DroneToken|
+|Generate|TOK:ONE|Phyrexian Beast|||PhyrexianBeastToxicToken|
+|Generate|TOK:ONE|Phyrexian Goblin|||PhyrexianGoblinToken|
+|Generate|TOK:ONE|Phyrexian Golem|||PhyrexianGolemToken|
+|Generate|TOK:ONE|Phyrexian Horror|1||PhyrexianHorrorGreenToken|
+|Generate|TOK:ONE|Phyrexian Horror|2||PhyrexianHorrorRedToken|
+|Generate|TOK:ONE|Phyrexian Mite|1||PhyrexianMiteToken|
+|Generate|TOK:ONE|Phyrexian Mite|2||PhyrexianMiteToken|
+|Generate|TOK:ONE|Rebel|||RebelRedToken|
+|Generate|TOK:ONE|Samurai|||DoublestrikeSamuraiToken|
+|Generate|TOK:ONE|The Hollow Sentinel|||TheHollowSentinelToken|
+
+
+
