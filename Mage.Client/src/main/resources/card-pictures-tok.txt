@@ -2015,8 +2015,3 @@
 |Generate|TOK:ONC|Soldier|3||SoldierTokenWithHaste|
 |Generate|TOK:ONC|Spirit|||SpiritWhiteToken|
 |Generate|TOK:ONC|Thopter|||ThopterColorlessToken|
-
-
-
-
-

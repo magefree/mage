@@ -17,7 +17,7 @@ public final class HasteGolemToken extends TokenImpl {
     }
 
     public HasteGolemToken(int xValue) {
-        super("Golem Token", "X/X colorless Golem artifact creature token");
+        super("Golem Token", "X/X colorless Golem artifact creature token with haste");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.GOLEM);
