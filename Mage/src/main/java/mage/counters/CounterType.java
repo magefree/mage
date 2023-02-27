@@ -177,6 +177,7 @@ public enum CounterType {
     SPORE("spore"),
     STASH("stash"),
     STORAGE("storage"),
+    STORY("story"),
     STRIFE("strife"),
     STUDY("study"),
     STUN("stun"),
