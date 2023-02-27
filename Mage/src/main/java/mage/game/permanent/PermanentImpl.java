@@ -844,11 +844,12 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public void unattach(Game game) {
         this.attachedTo = null;
-        this.addInfo("attachedToCard", null, game);
+        this.addInfo("attachedTo", null, game);
     }
 
     @Override
     public void attachTo(UUID attachToObjectId, Ability source, Game game) {
+        // 701.3a - Permanents can be attached to an object or player
         if (this.attachedTo != null && !Objects.equals(this.attachedTo, attachToObjectId)) {
             Permanent attachedToUntilNowObject = game.getPermanent(this.attachedTo);
             if (attachedToUntilNowObject != null) {
@@ -857,6 +858,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 Card attachedToUntilNowCard = game.getCard(this.attachedTo);
                 if (attachedToUntilNowCard != null) {
                     attachedToUntilNowCard.removeAttachment(this.objectId, source, game);
+                } else {
+                    Player attachedToUntilNowPlayer = game.getPlayer(this.attachedTo);
+                    if (attachedToUntilNowPlayer != null) {
+                        attachedToUntilNowPlayer.removeAttachment(this, source, game);
+                    }
                 }
             }
 
@@ -875,15 +881,29 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 }
             }
         }
-        if (getSpellAbility() == null) {
-            // Can happen e.g. for Token Equipments like Stoneforged Blade
-            return;
-        }
-        if (!getSpellAbility().getTargets().isEmpty() && (getSpellAbility().getTargets().get(0) instanceof TargetCard)) {
-            Card attachedToCard = game.getCard(this.getAttachedTo());
-            if (attachedToCard != null) {
-                // Because cards are not on the battlefield, the relation has to be shown in the card tooltip (e.g. the enchanted card in graveyard)
-                this.addInfo("attachedToCard", CardUtil.addToolTipMarkTags("Enchanted card: " + attachedToCard.getIdName()), game);
+
+        // Reset "attached to" tooltip before potentially adding it
+        this.addInfo("attachedTo", null, game);
+        if (this.attachedTo != null) {
+            Permanent attachedToPerm = game.getPermanent(this.getAttachedTo());
+            // If what this permanent is attached to isn't also a permenent, such as a
+            // player or card in graveyard, it is important to mention what it is attached
+            // to in the tooltip. The rules let you attach a permanent to any kind of object
+            // or player, although currently the only objects it's possible to attach a
+            // permanent to are another permanent or a card. But to help future-proof this,
+            // we'll generalise to objects.
+            if (attachedToPerm == null) {
+                MageObject attachedToObject = game.getObject(this.getAttachedTo());
+                if (attachedToObject != null) {
+                    this.addInfo("attachedTo",
+                            CardUtil.addToolTipMarkTags("Attached to: " + attachedToObject.getIdName()), game);
+                } else {
+                    Player attachedToPlayer = game.getPlayer(this.getAttachedTo());
+                    if (attachedToPlayer != null) {
+                        this.addInfo("attachedTo",
+                                CardUtil.addToolTipMarkTags("Attached to: " + attachedToPlayer.getName()), game);
+                    }
+                }
             }
         }
     }
