@@ -53,6 +53,7 @@ Flying|instance|
 Forestcycling|cost|
 Forestwalk|new|
 Foretell|card, manaString|
+For Mirrodin!|new|
 Friends forever|instance|
 Haste|instance|
 Hexproof|instance|
@@ -115,6 +116,7 @@ Suspend|number, cost, card|
 Swampcycling|cost|
 Swampwalk|new|
 Totem armor|new|
+Toxic|number|
 Training|new|
 Trample|instance|
 Tribute|number|

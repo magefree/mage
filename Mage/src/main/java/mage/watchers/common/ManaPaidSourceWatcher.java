@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Default watcher, no needs to add it to ability
+ * Default watcher, no need to add it to ability
  *
  * @author TheElk801
  */
@@ -113,7 +113,9 @@ public class ManaPaidSourceWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         switch (event.getType()) {
             case ZONE_CHANGE:
-                if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
+                if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD
+                        // Bug #9943 Memory Deluge cast from graveyard during the same turn
+                        || ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
                     manaMap.remove(event.getTargetId());
                 }
                 return;

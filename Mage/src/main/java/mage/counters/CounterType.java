@@ -132,6 +132,7 @@ public enum CounterType {
     NECRODERMIS("necrodermis"),
     NET("net"),
     NIGHT("night"),
+    OIL("oil"),
     OMEN("omen"),
     ORE("ore"),
     P0P1(new BoostCounter(0, 1).name),

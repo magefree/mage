@@ -18,6 +18,9 @@ public final class PenumbraBobcatToken extends TokenImpl {
         subtype.add(SubType.CAT);
         power = new MageInt(2);
         toughness = new MageInt(1);
+
+        setOriginalExpansionSetCode("DMR");
+        setTokenType(1);
     }
 
     public PenumbraBobcatToken(final PenumbraBobcatToken token) {

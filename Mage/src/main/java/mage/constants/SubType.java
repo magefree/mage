@@ -25,6 +25,7 @@ public enum SubType {
     GATE("Gate", SubTypeSet.NonBasicLandType),
     LAIR("Lair", SubTypeSet.NonBasicLandType),
     LOCUS("Locus", SubTypeSet.NonBasicLandType),
+    SPHERE("Sphere", SubTypeSet.NonBasicLandType),
     URZAS("Urza's", SubTypeSet.NonBasicLandType),
     MINE("Mine", SubTypeSet.NonBasicLandType),
     POWER_PLANT("Power-Plant", SubTypeSet.NonBasicLandType),
@@ -246,6 +247,7 @@ public enum SubType {
     MINION("Minion", SubTypeSet.CreatureType),
     MINOTAUR("Minotaur", SubTypeSet.CreatureType),
     MIRIALAN("Mirialan", SubTypeSet.CreatureType, true), // Star Wars
+    MITE("Mite", SubTypeSet.CreatureType),
     MOLE("Mole", SubTypeSet.CreatureType),
     MONGER("Monger", SubTypeSet.CreatureType),
     MONGOOSE("Mongoose", SubTypeSet.CreatureType),

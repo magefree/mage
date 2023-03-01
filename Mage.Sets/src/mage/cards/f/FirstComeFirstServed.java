@@ -49,6 +49,8 @@ public final class FirstComeFirstServed extends CardImpl {
 }
 
 class FirstComeFirstServedPredicate implements Predicate<Permanent> {
+
+    private static final Pattern partNumberPattern = Pattern.compile("\\d+");
     
     @Override
     public boolean apply(Permanent input, Game game) {
@@ -67,8 +69,11 @@ class FirstComeFirstServedPredicate implements Predicate<Permanent> {
     
     public int parseCardNumber(Permanent input) {
         String str = input.getCardNumber();
-        Matcher matcher = Pattern.compile("\\d+").matcher(str);
-        matcher.find();
-        return Integer.parseInt(matcher.group());
+        Matcher matcher = partNumberPattern.matcher(str);
+        if (matcher.find()) {
+            return Integer.parseInt(matcher.group());
+        } else {
+            throw new IllegalStateException("Unknown card number format [" + input.getCardNumber() + "] for permanent " + input.getName());
+        }
     }
 }

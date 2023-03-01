@@ -86,6 +86,14 @@ public class VerifyCardDataTest {
             "plainswalk", "islandwalk", "swampwalk", "mountainwalk", "forestwalk", "myriad"
     );
 
+    private static final List<String> doubleNumbers = new ArrayList<>();
+    {
+        for (int i = 1; i <= 9; i++) {
+            String s = CardUtil.numberToText(i).toLowerCase(Locale.ENGLISH);
+            doubleNumbers.add(s + " " + s);
+        }
+    }
+
     static {
         // skip lists for checks (example: unstable cards with same name may have different stats)
         // can be full set ignore list or set + cardname
@@ -1256,7 +1264,7 @@ public class VerifyCardDataTest {
         if (ref != null) {
             checkAll(card, ref, cardIndex);
         } else {
-            warn(card, "Missing card reference");
+            warn(card, "Can't find card in mtgjson to verify");
         }
     }
 
@@ -1419,9 +1427,21 @@ public class VerifyCardDataTest {
             fail(card, "abilities", "the back face of a double-faced card should be nightCard = true");
         }
 
+        // special check: duplicated numbers in ability text (wrong target/filter usage)
+        // example: You may exile __two two__ blue cards
+        // possible fixes:
+        //  - remove numbers from filter's text
+        //  - use target.getDescription() in ability instead target.getTargetName()
+        for (String rule : card.getRules()) {
+            for (String doubleNumber : doubleNumbers) {
+                if (rule.contains(doubleNumber)) {
+                    fail(card, "abilities", "duplicated numbers: " + rule);
+                }
+            }
+        }
+
         // special check: missing or wrong ability/effect hints
         Map<Class, String> hints = new HashMap<>();
-
         hints.put(FightTargetsEffect.class, "Each deals damage equal to its power to the other");
         hints.put(MenaceAbility.class, "can't be blocked except by two or more");
         hints.put(ScryEffect.class, "Look at the top card of your library. You may put that card on the bottom of your library");

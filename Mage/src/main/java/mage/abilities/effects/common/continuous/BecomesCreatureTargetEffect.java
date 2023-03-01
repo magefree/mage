@@ -23,6 +23,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
     protected boolean loseName;
     protected boolean keepAbilities;
     protected boolean removeSubtypes = false;
+    protected boolean loseOtherCardTypes;
 
     public BecomesCreatureTargetEffect(Token token, boolean loseAllAbilities, boolean stillALand, Duration duration) {
         this(token, loseAllAbilities, stillALand, duration, false);
@@ -32,23 +33,29 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
         this(token, loseAllAbilities, stillALand, duration, loseName, false);
     }
 
+    public BecomesCreatureTargetEffect(Token token, boolean loseAllAbilities, boolean stillALand, Duration duration, boolean loseName, boolean keepAbilities) {
+        this(token, loseAllAbilities, stillALand, duration, loseName, keepAbilities, false);
+    }
+
     /**
      * @param token
-     * @param loseAllAbilities loses all subtypes, colors and abilities
+     * @param loseAllAbilities loses all creature subtypes, colors and abilities
      * @param stillALand add rule text, "it's still a land"
-     * @param loseName permanent lose name and get's it from token
-     * @param keepAbilities lose types/colors, but keep abilities (example:
+     * @param loseName permanent loses name and gets it from token
+     * @param keepAbilities lose subtypes/colors, but keep abilities (example:
      * Scale Up)
      * @param duration
+     * @param loseOtherCardTypes permanent loses other (original) card types, exclusively obtains card types of token
      */
     public BecomesCreatureTargetEffect(Token token, boolean loseAllAbilities, boolean stillALand, Duration duration, boolean loseName,
-            boolean keepAbilities) {
+            boolean keepAbilities, boolean loseOtherCardTypes) {
         super(duration, Outcome.BecomeCreature);
         this.token = token;
         this.loseAllAbilities = loseAllAbilities;
         this.addStillALandText = stillALand;
         this.loseName = loseName;
         this.keepAbilities = keepAbilities;
+        this.loseOtherCardTypes = loseOtherCardTypes;
         this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
@@ -59,6 +66,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
         this.addStillALandText = effect.addStillALandText;
         this.loseName = effect.loseName;
         this.keepAbilities = effect.keepAbilities;
+        this.loseOtherCardTypes = effect.loseOtherCardTypes;
         this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
@@ -83,11 +91,17 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                     break;
 
                 case TypeChangingEffects_4:
+                    if (loseOtherCardTypes) {
+                        permanent.removeAllCardTypes(game);
+                    }
+                    if (loseAllAbilities) {
+                        permanent.removeAllCreatureTypes(game);
+                    }
+                    if (keepAbilities || removeSubtypes) {
+                        permanent.removeAllSubTypes(game);
+                    }
                     for (CardType t : token.getCardType(game)) {
                         permanent.addCardType(game, t);
-                    }
-                    if (loseAllAbilities || removeSubtypes) {
-                        permanent.removeAllCreatureTypes(game);
                     }
                     permanent.copySubTypesFrom(game, token);
 

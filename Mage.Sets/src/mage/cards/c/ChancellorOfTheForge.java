@@ -16,7 +16,7 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.token.PhyrexianGoblinToken;
+import mage.game.permanent.token.PhyrexianGoblinHasteToken;
 
 import java.util.UUID;
 
@@ -45,7 +45,7 @@ public final class ChancellorOfTheForge extends CardImpl {
 
         // When Chancellor of the Forge enters the battlefield, create X 1/1 red Goblin creature tokens with haste, where X is the number of creatures you control.
         DynamicValue value = new PermanentsOnBattlefieldCount(filter);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new PhyrexianGoblinToken(), value), false)
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new PhyrexianGoblinHasteToken(), value), false)
                 .addHint(CreaturesYouControlHint.instance));
     }
 
@@ -62,7 +62,7 @@ public final class ChancellorOfTheForge extends CardImpl {
 class ChancellorOfTheForgeDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     ChancellorOfTheForgeDelayedTriggeredAbility() {
-        super(new CreateTokenEffect(new PhyrexianGoblinToken()));
+        super(new CreateTokenEffect(new PhyrexianGoblinHasteToken()));
     }
 
     ChancellorOfTheForgeDelayedTriggeredAbility(ChancellorOfTheForgeDelayedTriggeredAbility ability) {

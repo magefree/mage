@@ -160,6 +160,9 @@ Masters Edition III|MastersEditionIII|
 Masters Edition IV|MastersEditionIV|
 Masters 25|Masters25|
 Media Inserts|MediaInserts|
+March of the Machine|MarchOfTheMachine
+March of the Machine Commander|MarchOfTheMachineCommander
+March of the Machine: The Aftermath|MarchOfTheMachineTheAftermath
 Mercadian Masques|MercadianMasques|
 Mirage|Mirage|
 Mirrodin|Mirrodin|
@@ -177,6 +180,7 @@ Oath of the Gatewatch|OathOfTheGatewatch|
 Odyssey|Odyssey|
 Onslaught|Onslaught|
 Phyrexia: All Will Be One|PhyrexiaAllWillBeOne|
+Phyrexia: All Will Be One Commander|PhyrexiaAllWillBeOneCommander|
 Planar Chaos|PlanarChaos|
 Planechase|Planechase|
 Planechase 2012 Edition|Planechase2012Edition|

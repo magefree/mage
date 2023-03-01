@@ -45,7 +45,7 @@ public final class FlamewarStreetwiseOperative extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // Whenever Flamewar deals combat damage to a player, exile that many cards from the top of your library face down. Put an intel counter on each of them. Convert Flamewar.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new FlamewarBrashVeteranEffect(), false);
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new FlamewarStreetwiseOperativeEffect(), false);
         ability.addEffect(new TransformSourceEffect().setText("convert {this}"));
         this.addAbility(ability);
     }

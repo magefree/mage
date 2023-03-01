@@ -35,7 +35,7 @@ public final class TorpidMoloch extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD, 
                 new LoseAbilitySourceEffect(DefenderAbility.getInstance(), Duration.EndOfTurn), 
-                new SacrificeTargetCost(new TargetControlledPermanent(3, 3, new FilterControlledLandPermanent("three lands"), true))));
+                new SacrificeTargetCost(new TargetControlledPermanent(3, 3, new FilterControlledLandPermanent("lands"), true))));
     }
 
     private TorpidMoloch(final TorpidMoloch card) {

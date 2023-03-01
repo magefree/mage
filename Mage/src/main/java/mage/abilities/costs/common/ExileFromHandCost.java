@@ -37,7 +37,7 @@ public class ExileFromHandCost extends CostImpl {
      */
     public ExileFromHandCost(TargetCardInHand target, boolean setXFromCMC) {
         this.addTarget(target);
-        this.text = "exile " + target.getTargetName();
+        this.text = "exile " + target.getDescription();
         this.setXFromCMC = setXFromCMC;
     }
 

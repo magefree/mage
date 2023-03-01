@@ -407,7 +407,15 @@ public final class StaticFilters {
         FILTER_CONTROLLED_ARTIFACT_OR_OTHER_CREATURE.setLockedFilter(true);
     }
 
-    public static final FilterControlledPermanent FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE = new FilterControlledPermanent("another creature or artifact");
+    public static final FilterControlledPermanent FILTER_CONTROLLED_ANOTHER_ARTIFACT = new FilterControlledPermanent("another artifact you control");
+
+    static {
+        FILTER_CONTROLLED_ANOTHER_ARTIFACT.add(AnotherPredicate.instance);
+        FILTER_CONTROLLED_ANOTHER_ARTIFACT.add(CardType.ARTIFACT.getPredicate());
+        FILTER_CONTROLLED_ANOTHER_ARTIFACT.setLockedFilter(true);
+    }
+
+    public static final FilterControlledPermanent FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE = new FilterControlledPermanent("another creature or artifact you control");
 
     static {
         FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE.add(AnotherPredicate.instance);
@@ -739,6 +747,15 @@ public final class StaticFilters {
     static {
         FILTER_SPELL_OR_ABILITY_OPPONENTS.add(TargetController.OPPONENT.getControllerPredicate());
         FILTER_SPELL_OR_ABILITY_OPPONENTS.setLockedFilter(true);
+    }
+
+    public static final FilterStackObject FILTER_SPELL_OR_ABILITY_OPPONENTS_NON_GREEN = new FilterStackObject("a nongreen spell or ability an opponent controls");
+
+    static {
+        FILTER_SPELL_OR_ABILITY_OPPONENTS_NON_GREEN.add(Predicates.not(new ColorPredicate(ObjectColor.GREEN)));
+        FILTER_SPELL_OR_ABILITY_OPPONENTS_NON_GREEN.add(TargetController.OPPONENT.getControllerPredicate());
+        FILTER_SPELL_OR_ABILITY_OPPONENTS_NON_GREEN.setLockedFilter(true);
+
     }
 
     public static final FilterStackObject FILTER_SPELL_OR_ABILITY = new FilterStackObject();

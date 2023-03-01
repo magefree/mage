@@ -524,7 +524,12 @@ public class ScryfallImageSupportCards {
             add("BOT"); // Transformers
             add("J22"); // Jumpstart 2022
             add("SLC"); // Secret Lair 30th Anniversary Countdown Kit
+            add("DMR"); // Dominaria Remastered
             add("ONE"); // Phyrexia: All Will Be One
+            add("ONC"); // Phyrexia: All Will Be One Commander
+            add("MOM"); // March of the Machine
+            add("MOC"); // March of the Machine Commander
+            add("MAT"); // March of the Machine: The Aftermath
         }
     };
 

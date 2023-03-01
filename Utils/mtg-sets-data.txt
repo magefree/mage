@@ -153,6 +153,9 @@ Masters 25|A25|
 Magic: The Gathering-Commander|CMD|
 Magic: The Gathering-Conspiracy|CNS|
 Media Inserts|MBP|
+March of the Machine|MOM|
+March of the Machine Commander|MOC|
+March of the Machine: The Aftermath|MAT|
 Mirrodin Besieged|MBS|
 Masters Edition II|ME2|
 Masters Edition III|ME3|
@@ -181,6 +184,7 @@ Oath of the Gatewatch|OGW|
 Onslaught|ONS|
 Magic Origins|ORI|
 Phyrexia: All Will Be One|ONE|
+Phyrexia: All Will Be One Commander|ONC|
 Portal Second Age|P02|
 Planechase 2012 Edition|PC2|
 Planechase Anthology|PCA|

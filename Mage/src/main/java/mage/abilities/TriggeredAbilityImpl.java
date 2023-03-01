@@ -111,12 +111,12 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     @Override
     public boolean checkUsedAlready(Game game) {
         if (!doOnlyOnce) {
-            return true;
+            return false;
         }
         Integer lastTurnUsed = (Integer) game.getState().getValue(
                 CardUtil.getCardZoneString("lastTurnUsed" + originalId, sourceId, game)
         );
-        return lastTurnUsed == null || lastTurnUsed != game.getTurnNum();
+        return lastTurnUsed != null && lastTurnUsed == game.getTurnNum();
     }
 
     public TriggeredAbility setDoOnlyOnce(boolean doOnlyOnce) {
@@ -139,6 +139,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             MageObject object = game.getObject(getSourceId());
             Player player = game.getPlayer(this.getControllerId());
             if (player == null || object == null
+                    || (doOnlyOnce && checkUsedAlready(game))
                     || !player.chooseUse(
                     getEffects().getOutcome(this),
                     this.getRule(object.getLogName()), this, game
