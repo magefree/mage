@@ -18,8 +18,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
-import mage.game.permanent.PermanentCard;
-import mage.game.permanent.PermanentMeld;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTargets;
@@ -36,7 +34,7 @@ import java.util.stream.Collectors;
 public final class YorionSkyNomad extends CardImpl {
 
     public YorionSkyNomad(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[] { CardType.CREATURE }, "{3}{W/U}{W/U}");
+        super(ownerId, setInfo, new CardType[] {CardType.CREATURE}, "{3}{W/U}{W/U}");
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.BIRD);
@@ -44,16 +42,14 @@ public final class YorionSkyNomad extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 
-        // Companion — Your starting deck contains at least twenty cards more than the
-        // minimum deck size.
+        // Companion — Your starting deck contains at least twenty cards more than the minimum deck size.
         this.addAbility(new CompanionAbility(YorionSkyNomadCompanionCondition.instance));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // When Yorion enters the battlefield, exile any number of other nonland
-        // permanents you own and control. Return those cards to the battlefield at the
-        // beginning of the next end step.
+        // When Yorion enters the battlefield, exile any number of other nonland permanents you own
+        // and control. Return those cards to the battlefield at the beginning of the next end step.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new YorionSkyNomadEffect()));
     }
 
@@ -83,8 +79,7 @@ enum YorionSkyNomadCompanionCondition implements CompanionCondition {
 
 class YorionSkyNomadEffect extends OneShotEffect {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent(
-            "other nonland permanents you own and control");
+    private static final FilterPermanent filter = new FilterControlledPermanent("other nonland permanents you own and control");
 
     static {
         filter.add(Predicates.not(CardType.LAND.getPredicate()));
@@ -124,8 +119,7 @@ class YorionSkyNomadEffect extends OneShotEffect {
 
         Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);
         effect.setTargetPointer(new FixedTargets(cardsToReturn, game));
-        AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
-                effect);
+        AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
         game.addDelayedTriggeredAbility(delayedAbility, source);
         return true;
     }

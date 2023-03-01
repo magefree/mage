@@ -12,8 +12,6 @@ import mage.constants.Outcome;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentCard;
-import mage.game.permanent.PermanentMeld;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTargets;
@@ -30,15 +28,12 @@ import java.util.UUID;
 public final class EerieInterlude extends CardImpl {
 
     public EerieInterlude(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[] { CardType.INSTANT }, "{2}{W}");
+        super(ownerId, setInfo, new CardType[] {CardType.INSTANT}, "{2}{W}");
 
         // Exile any number of target creatures you control. Return those cards to the
-        // battlefield under their owner's control at the beginning of the next end
-        // step.
+        // battlefield under their owner's control at the beginning of the next end step.
         this.getSpellAbility().addEffect(new EerieInterludeEffect());
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE,
-                new FilterControlledCreaturePermanent(), false));
-
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, new FilterControlledCreaturePermanent(), false));
     }
 
     private EerieInterlude(final EerieInterlude card) {
@@ -74,16 +69,14 @@ class EerieInterludeEffect extends OneShotEffect {
                     toExile.add(targetCreature);
                 }
             }
-            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(),
-                    source.getSourceObjectZoneChangeCounter());
+            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
             controller.moveCardsToExile(toExile, source, game, true, exileId, sourceObject.getIdName());
 
             Cards cardsToReturn = ExileUtil.returnCardsFromExile(toExile, game);
 
             Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);
             effect.setTargetPointer(new FixedTargets(cardsToReturn, game));
-            AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
-                    effect);
+            AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
             game.addDelayedTriggeredAbility(delayedAbility, source);
             return true;
         }
