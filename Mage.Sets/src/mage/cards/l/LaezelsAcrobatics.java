@@ -50,7 +50,7 @@ public final class LaezelsAcrobatics extends CardImpl {
 class LaezelsAcrobaticsEffect extends RollDieWithResultTableEffect {
 
   LaezelsAcrobaticsEffect() {
-    super(20, "Exile all nontoken creatures you control, then roll a d20.");
+    super(20, "Exile all nontoken creatures you control, then roll a d20");
     this.addTableEntry(
         1, 9,
         new InfoEffect("Return those cards to the battlefield under their owner's control at the " +
