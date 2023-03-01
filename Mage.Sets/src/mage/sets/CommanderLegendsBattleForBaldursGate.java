@@ -169,6 +169,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Deadly Dispute", 124, Rarity.COMMON, mage.cards.d.DeadlyDispute.class));
         cards.add(new SetCardInfo("Death Kiss", 675, Rarity.RARE, mage.cards.d.DeathKiss.class));
         cards.add(new SetCardInfo("Decanter of Endless Water", 309, Rarity.COMMON, mage.cards.d.DecanterOfEndlessWater.class));
+        cards.add(new SetCardInfo("Deep Gnome Terramancer", 658, Rarity.RARE, mage.cards.d.DeepGnomeTerramancer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Deep Gnome Terramancer", 607, Rarity.RARE, mage.cards.d.DeepGnomeTerramancer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Delayed Blast Fireball", 676, Rarity.RARE, mage.cards.d.DelayedBlastFireball.class));
         cards.add(new SetCardInfo("Demon Bolt", 787, Rarity.COMMON, mage.cards.d.DemonBolt.class));
         cards.add(new SetCardInfo("Descent into Avernus", 169, Rarity.RARE, mage.cards.d.DescentIntoAvernus.class));
