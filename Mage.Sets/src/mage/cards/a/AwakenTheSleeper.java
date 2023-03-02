@@ -14,6 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -68,8 +69,8 @@ class AwakenTheSleeperEffect extends OneShotEffect {
         if (player == null || targetCreature == null) {
             return false;
         }
-        if (targetCreature.getAttachments().size() > 0) {
-            if (player.chooseUse(Outcome.DestroyPermanent, "Destroy all equipped enchantments?", source, game)) {
+        if (targetCreature.getAttachments().stream().anyMatch(uuid -> game.getPermanent(uuid).hasSubtype(SubType.EQUIPMENT, game))) {
+            if (player.chooseUse(Outcome.DestroyPermanent, "Destroy all Equipment attached to that creature?", source, game)) {
                 DestroyAllAttachedToTargetEffect destroyAllAttachedToTargetEffect =
                         new DestroyAllAttachedToTargetEffect(StaticFilters.FILTER_PERMANENT_EQUIPMENT,
                                 "Destroy all Equipment attached to that creature.");
