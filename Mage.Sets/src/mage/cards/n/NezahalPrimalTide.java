@@ -22,6 +22,7 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCardInHand;
 
@@ -59,7 +60,7 @@ public final class NezahalPrimalTide extends CardImpl {
 
         // Discard three cards: Exile Nezahal. Return it to the battlefield tapped under its owner's control at the beginning of the next end step.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(true),
-                new DiscardTargetCost(new TargetCardInHand(3, new FilterCard("three cards")))));
+                new DiscardTargetCost(new TargetCardInHand(3, StaticFilters.FILTER_CARD_CARDS))));
 
     }
 

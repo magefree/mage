@@ -87,7 +87,7 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect 
             if (target.getMaxNumberOfTargets() == Integer.MAX_VALUE
                     && target.getMinNumberOfTargets() == 0) {
                 sb.append("any number of ");
-            } else if (target.getMaxNumberOfTargets() > 1) {
+            } else {
                 if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
                     sb.append("up to ");
                 }

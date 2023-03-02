@@ -8,6 +8,7 @@ import mage.abilities.costs.common.RemoveCounterCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -28,7 +29,7 @@ import java.util.UUID;
 public final class TekuthalInquiryDominus extends CardImpl {
 
     private static final FilterControlledPermanent filter
-            = new FilterControlledPermanent("other artifacts, creatures, and planeswalkers");
+            = new FilterControlledPermanent("other artifacts, creatures, and planeswalkers you control");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -48,6 +49,9 @@ public final class TekuthalInquiryDominus extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+
         // If you would proliferate, proliferate twice instead.
         this.addAbility(new SimpleStaticAbility(new TekuthalInquiryDominusEffect()));
 
@@ -56,7 +60,7 @@ public final class TekuthalInquiryDominus extends CardImpl {
         ability.addCost(new RemoveCounterCost(new TargetPermanent(
                 0, Integer.MAX_VALUE,
                 filter
-        ), null, 3));
+        ), null, 3).setText("Remove three counters from among " + filter.getMessage()));
         this.addAbility(ability);
     }
 

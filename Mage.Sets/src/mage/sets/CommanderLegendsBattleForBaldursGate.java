@@ -169,6 +169,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Deadly Dispute", 124, Rarity.COMMON, mage.cards.d.DeadlyDispute.class));
         cards.add(new SetCardInfo("Death Kiss", 675, Rarity.RARE, mage.cards.d.DeathKiss.class));
         cards.add(new SetCardInfo("Decanter of Endless Water", 309, Rarity.COMMON, mage.cards.d.DecanterOfEndlessWater.class));
+        cards.add(new SetCardInfo("Deep Gnome Terramancer", 658, Rarity.RARE, mage.cards.d.DeepGnomeTerramancer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Deep Gnome Terramancer", 607, Rarity.RARE, mage.cards.d.DeepGnomeTerramancer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Delayed Blast Fireball", 676, Rarity.RARE, mage.cards.d.DelayedBlastFireball.class));
         cards.add(new SetCardInfo("Demon Bolt", 787, Rarity.COMMON, mage.cards.d.DemonBolt.class));
         cards.add(new SetCardInfo("Descent into Avernus", 169, Rarity.RARE, mage.cards.d.DescentIntoAvernus.class));
@@ -339,6 +341,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Kindred Discovery", 81, Rarity.RARE, mage.cards.k.KindredDiscovery.class));
         cards.add(new SetCardInfo("Kodama's Reach", 826, Rarity.COMMON, mage.cards.k.KodamasReach.class));
         cards.add(new SetCardInfo("Korlessa, Scale Singer", 280, Rarity.UNCOMMON, mage.cards.k.KorlessaScaleSinger.class));
+        cards.add(new SetCardInfo("Lae'zel's Acrobatics", 30, Rarity.RARE, mage.cards.l.LaezelsAcrobatics.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lae'zel's Acrobatics", 556, Rarity.RARE, mage.cards.l.LaezelsAcrobatics.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lae'zel, Vlaakith's Champion", 29, Rarity.RARE, mage.cards.l.LaezelVlaakithsChampion.class));
         cards.add(new SetCardInfo("Laelia, the Blade Reforged", 801, Rarity.RARE, mage.cards.l.LaeliaTheBladeReforged.class));
         cards.add(new SetCardInfo("Lantern of Revealing", 318, Rarity.COMMON, mage.cards.l.LanternOfRevealing.class));
@@ -384,6 +388,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Mindcrank", 866, Rarity.UNCOMMON, mage.cards.m.Mindcrank.class));
         cards.add(new SetCardInfo("Minimus Containment", 34, Rarity.COMMON, mage.cards.m.MinimusContainment.class));
         cards.add(new SetCardInfo("Minsc & Boo, Timeless Heroes", 285, Rarity.MYTHIC, mage.cards.m.MinscBooTimelessHeroes.class));
+        cards.add(new SetCardInfo("Minthara, Merciless Soul", 286, Rarity.UNCOMMON, mage.cards.m.MintharaMercilessSoul.class));
         cards.add(new SetCardInfo("Mirror Entity", 701, Rarity.RARE, mage.cards.m.MirrorEntity.class));
         cards.add(new SetCardInfo("Mizzium Mortars", 803, Rarity.RARE, mage.cards.m.MizziumMortars.class));
         cards.add(new SetCardInfo("Mocking Doppelganger", 667, Rarity.RARE, mage.cards.m.MockingDoppelganger.class));
@@ -408,6 +413,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Myrkul, Lord of Bones", 287, Rarity.RARE, mage.cards.m.MyrkulLordOfBones.class));
         cards.add(new SetCardInfo("Mystery Key", 85, Rarity.UNCOMMON, mage.cards.m.MysteryKey.class));
         cards.add(new SetCardInfo("Nalia de'Arnise", 649, Rarity.MYTHIC, mage.cards.n.NaliaDeArnise.class));
+        cards.add(new SetCardInfo("Nalfeshnee", 678, Rarity.RARE, mage.cards.n.Nalfeshnee.class));
         cards.add(new SetCardInfo("Natural Reclamation", 829, Rarity.COMMON, mage.cards.n.NaturalReclamation.class));
         cards.add(new SetCardInfo("Nature's Lore", 244, Rarity.COMMON, mage.cards.n.NaturesLore.class));
         cards.add(new SetCardInfo("Nautiloid Ship", 328, Rarity.MYTHIC, mage.cards.n.NautiloidShip.class));
@@ -424,6 +430,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Nimblewright Schematic", 330, Rarity.COMMON, mage.cards.n.NimblewrightSchematic.class));
         cards.add(new SetCardInfo("Nine-Fingers Keene", 289, Rarity.RARE, mage.cards.n.NineFingersKeene.class));
         cards.add(new SetCardInfo("Niv-Mizzet, Parun", 851, Rarity.RARE, mage.cards.n.NivMizzetParun.class));
+        cards.add(new SetCardInfo("Noble Heritage", 35, Rarity.RARE, mage.cards.n.NobleHeritage.class));
         cards.add(new SetCardInfo("Noble's Purse", 331, Rarity.UNCOMMON, mage.cards.n.NoblesPurse.class));
         cards.add(new SetCardInfo("Nothic", 138, Rarity.UNCOMMON, mage.cards.n.Nothic.class));
         cards.add(new SetCardInfo("Oceanus Dragon", 87, Rarity.COMMON, mage.cards.o.OceanusDragon.class));
@@ -653,5 +660,6 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Zevlor, Elturel Exile", 296, Rarity.RARE, mage.cards.z.ZevlorElturelExile.class));
         cards.add(new SetCardInfo("Zhentarim Bandit", 158, Rarity.COMMON, mage.cards.z.ZhentarimBandit.class));
         cards.add(new SetCardInfo("Zulaport Cutthroat", 775, Rarity.UNCOMMON, mage.cards.z.ZulaportCutthroat.class));
+        cards.add(new SetCardInfo("Vhal, Candlekeep Researcher", 102, Rarity.UNCOMMON, mage.cards.v.VhalCandlekeepResearcher.class));
     }
 }

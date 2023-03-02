@@ -85,7 +85,7 @@ public enum ScryfallImageSource implements CardImageSource {
                     alternativeUrl = link + defaultCode + "?format=image";
                     // workaround to use cards without english images (some promos or special cards)
                     if (Objects.equals(baseUrl, alternativeUrl) && baseUrl.endsWith("/en?format=image")) {
-                        alternativeUrl = alternativeUrl.replace("/en?format=image", "/?format=image");
+                        alternativeUrl = alternativeUrl.replace("/en?format=image", "?format=image");
                     }
                 } else {
                     // image

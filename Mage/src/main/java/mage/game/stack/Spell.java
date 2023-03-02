@@ -660,6 +660,11 @@ public class Spell extends StackObjectImpl implements Card {
         throw new UnsupportedOperationException("Not supported.");
     }
 
+    // To add abilities to permanent spell copies in a StackObjectCopyApplier which will persist into the resulting token.
+    public void addAbilityForCopy(Ability ability) {
+        card.addAbility(ability);
+    }
+
     @Override
     public SpellAbility getSpellAbility() {
         return ability;
