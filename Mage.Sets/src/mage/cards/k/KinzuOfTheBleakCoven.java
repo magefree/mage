@@ -72,8 +72,8 @@ class KinzuOfTheBleakCovenEffect extends OneShotEffect {
 
     KinzuOfTheBleakCovenEffect() {
         super(Outcome.Benefit);
-        staticText = "create a token that’s a copy of that creature" +
-                ", except it’s 1/1 and has toxic 1.";
+        staticText = "create a token that's a copy of that creature" +
+                ", except it's 1/1 and has toxic 1.";
     }
 
     private KinzuOfTheBleakCovenEffect(final mage.cards.k.KinzuOfTheBleakCovenEffect effect) {
