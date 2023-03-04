@@ -7,6 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MonstrousCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
@@ -33,7 +34,7 @@ public final class RidingRonto extends CardImpl {
 
         // As long as Riding Ronto is monstrous, it has vigilance
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-                new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield),
+                new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield),
                 MonstrousCondition.instance,
                 "As long as Riding Ronto is monstrous, it has vigilance")
         ));
