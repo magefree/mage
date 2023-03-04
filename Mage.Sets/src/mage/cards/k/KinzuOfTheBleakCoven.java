@@ -92,6 +92,7 @@ class KinzuOfTheBleakCovenEffect extends OneShotEffect {
         if (player == null || card == null) {
             return false;
         }
+        //Can move to exile here - checked earlier if target is still legal
         player.moveCards(card, Zone.EXILED, source, game);
         return new CreateTokenCopyTargetEffect().setSavedPermanent(
                 new PermanentCard(card, source.getControllerId(), game)
@@ -128,7 +129,6 @@ class KinzuOfTheBleakCovenCost extends CostImpl {
             //Need to be able to Exile the Card as it is part of the cost. Can't pay if the target is not legal.
             return false;
         }
-        System.out.println(text);
         return game.getPlayer(controllerId).getLife() >= lifeToPayAmount || lifeToPayAmount == 0;
     }
 
