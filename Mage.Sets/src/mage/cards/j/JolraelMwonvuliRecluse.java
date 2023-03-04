@@ -1,7 +1,7 @@
 package mage.cards.j;
 
 import mage.MageInt;
-import mage.abilities.common.DrawSecondCardTriggeredAbility;
+import mage.abilities.common.DrawCardTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
@@ -33,7 +33,7 @@ public final class JolraelMwonvuliRecluse extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever you draw your second card each turn, create a 2/2 green Cat creature token.
-        this.addAbility(new DrawSecondCardTriggeredAbility(new CreateTokenEffect(new GreenCat2Token()), false));
+        this.addAbility(new DrawCardTriggeredAbility(new CreateTokenEffect(new GreenCat2Token()), false, 2));
 
         // {4}{G}{G}: Until end of turn, creatures you control have base power and toughness X/X, where X is the number of cards in your hand.
         this.addAbility(new SimpleActivatedAbility(new SetBasePowerToughnessAllEffect(
