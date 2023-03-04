@@ -58,6 +58,7 @@ public enum SubType {
     ALLY("Ally", SubTypeSet.CreatureType),
     ANGEL("Angel", SubTypeSet.CreatureType),
     ANTELOPE("Antelope", SubTypeSet.CreatureType),
+    ANZELLAN("Anzellan", SubTypeSet.CreatureType, true), // Star Wars
     AQUALISH("Aqualish", SubTypeSet.CreatureType, true), // Star Wars
     APE("Ape", SubTypeSet.CreatureType),
     ARCONA("Arcona", SubTypeSet.CreatureType, true),
@@ -465,6 +466,7 @@ public enum SubType {
     OBI_WAN("Obi-Wan", SubTypeSet.PlaneswalkerType, true), // Star Wars
     OKO("Oko", SubTypeSet.PlaneswalkerType),
     RAL("Ral", SubTypeSet.PlaneswalkerType),
+    REY("Rey", SubTypeSet.PlaneswalkerType, true),  // Star Wars,
     ROWAN("Rowan", SubTypeSet.PlaneswalkerType),
     SAHEELI("Saheeli", SubTypeSet.PlaneswalkerType),
     SAMUT("Samut", SubTypeSet.PlaneswalkerType),
