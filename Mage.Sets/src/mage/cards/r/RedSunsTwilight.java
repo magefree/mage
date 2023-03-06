@@ -26,7 +26,7 @@ public class RedSunsTwilight extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}{R}");
 
         // Destroy up to X target artifacts.
-        // If X is 5 or more, for each artifact destroyed this way, create a token that’s a copy of it.
+        // If X is 5 or more, for each artifact destroyed this way, create a token that's a copy of it.
         // Those tokens gain haste. Exile them at the beginning of the next end step.
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
         this.getSpellAbility().setTargetAdjuster(RedSunsTwilightAdjuster.instance);
