@@ -1,8 +1,11 @@
 package mage.cards.r;
 
 import mage.abilities.Ability;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -12,6 +15,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetpointer.FixedTargets;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,6 +100,7 @@ class RedSunsTwilightEffect extends OneShotEffect {
             return true;
         }
         // If x >= 5 create copies of each artifact destroyed with {this} until EOT
+        List<Permanent> tokens = new ArrayList<>();
         for(Permanent destoyedArtifact : destroyedArtifacts) {
             // Copies gain haste
             CreateTokenCopyTargetEffect effect
@@ -103,9 +108,16 @@ class RedSunsTwilightEffect extends OneShotEffect {
             effect.setUseLKI(true);
             effect.setSavedPermanent(destoyedArtifact);
             effect.apply(game, source);
-            // Exile them at the beginning of the next end step
-            effect.exileTokensCreatedAtNextEndStep(game, source);
+            // Collect created Tokens
+            tokens.add(effect.getAddedPermanents().get(0));
         }
+
+        // Exile them at the beginning of the next end step
+        Effect exileEffect = new ExileTargetEffect();
+        exileEffect.setTargetPointer(new FixedTargets(tokens, game));
+        exileEffect.setText("exile tokens created with {this}");
+        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
+
         return true;
     }
 }
