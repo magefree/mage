@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.condition.common.TargetPermanentIsEquippedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DestroyAllAttachedToTargetEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
@@ -15,14 +14,14 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class AwakenTheSleeper extends CardImpl {
     public AwakenTheSleeper(UUID ownerId, CardSetInfo setInfo) {
@@ -71,11 +70,12 @@ class AwakenTheSleeperEffect extends OneShotEffect {
         }
         if (targetCreature.getAttachments().stream().anyMatch(uuid -> game.getPermanent(uuid).hasSubtype(SubType.EQUIPMENT, game))) {
             if (player.chooseUse(Outcome.DestroyPermanent, "Destroy all Equipment attached to that creature?", source, game)) {
-                DestroyAllAttachedToTargetEffect destroyAllAttachedToTargetEffect =
-                        new DestroyAllAttachedToTargetEffect(StaticFilters.FILTER_PERMANENT_EQUIPMENT,
-                                "Destroy all Equipment attached to that creature.");
-                destroyAllAttachedToTargetEffect.setTargetPointer(new FixedTarget(targetCreature.getId()));
-                destroyAllAttachedToTargetEffect.apply(game, source);
+                Set<UUID> equipments = targetCreature.getAttachments()
+                        .stream()
+                        .filter(uuid -> game.getPermanent(uuid).hasSubtype(SubType.EQUIPMENT, game))
+                        .collect(Collectors.toSet());
+                equipments.forEach(uuid -> game.getPermanent(uuid).destroy(source, game));
+                return true;
             }
         }
         return false;
