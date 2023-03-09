@@ -117,6 +117,9 @@ public enum CardRepository {
         if (card.getFlipCardName() != null && !card.getFlipCardName().isEmpty()) {
             namesList.add(card.getFlipCardName());
         }
+        if (card.getMeldsToCardName() != null && !card.getMeldsToCardName().isEmpty()) {
+            namesList.add(card.getMeldsToCardName());
+        }
     }
 
     public static Boolean haveSnowLands(String setCode) {
@@ -527,6 +530,8 @@ public enum CardRepository {
     /**
      * Warning, don't use db functions in card's code - it generates heavy db loading in AI simulations. If you
      * need that feature then check for simulation mode. See https://github.com/magefree/mage/issues/7014
+     *
+     * Ignoring night cards by default
      *
      * @param criteria
      * @return
