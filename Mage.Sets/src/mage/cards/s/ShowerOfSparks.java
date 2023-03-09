@@ -21,7 +21,7 @@ public final class ShowerOfSparks extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
         // Shower of Sparks deals 1 damage to target creature and 1 damage to target player.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(1).setText("deals 1 damage to target creature and 1 damage to target player");
+        this.getSpellAbility().addEffect(new DamageTargetEffect(1)); 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         //** doing it the way below this causes the ability to trigger twice making it do 2 damage to player and 2 damage to target creature                                    
@@ -30,7 +30,7 @@ public final class ShowerOfSparks extends CardImpl {
         //effect.setText("and 1 damage to target player");
         //this.getSpellAbility().addEffect(effect); **//
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
-        
+        //setText("deals 1 damage to target creature and 1 damage to target player") (not sure where to put this)
     }
 
     private ShowerOfSparks(final ShowerOfSparks card) {
