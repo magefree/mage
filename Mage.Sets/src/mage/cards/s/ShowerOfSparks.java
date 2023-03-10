@@ -1,15 +1,12 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
-import mage.target.targetpointer.SecondTargetPointer;
 
 /**
  *
@@ -21,11 +18,9 @@ public final class ShowerOfSparks extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
         
         // Shower of sparks deals 1 damage to target creature and 1 damage to target player.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(1, true, "to target creature and 1 damage to target player or planeswalker")); //code modified from punish the enemy
-        target = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(target);
-        Target target = new TargetPlayerOrPlaneswalker();
-        this.getSpellAbility().addTarget(target);
+        this.getSpellAbility().addEffect(new DamageTargetEffect(1, true, "target creature and 1 damage to target player or planeswalker"));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
     }
 
     private ShowerOfSparks(final ShowerOfSparks card) {
