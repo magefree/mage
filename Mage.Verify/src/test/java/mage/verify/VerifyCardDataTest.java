@@ -942,6 +942,7 @@ public class VerifyCardDataTest {
             }
 
             boolean containsDoubleSideCards = false;
+            Map<String, String> cardNumbers = new HashMap<>();
             for (ExpansionSet.SetCardInfo cardInfo : set.getSetCardInfo()) {
                 Card card = CardImpl.createCard(cardInfo.getCardClass(), new CardSetInfo(cardInfo.getName(), set.getCode(),
                         cardInfo.getCardNumber(), cardInfo.getRarity(), cardInfo.getGraphicInfo()));
@@ -973,7 +974,20 @@ public class VerifyCardDataTest {
                             + " - " + card.getName() + " - " + card.getCardNumber()
                             + " - " + card.getSecondCardFace().getName() + " - " + card.getSecondCardFace().getCardNumber());
                 }
-                 */
+                //*/
+
+                // CHECK: set contains both card sides
+                // related to second side cards usage
+                /*
+                String existedCardName = cardNumbers.getOrDefault(card.getCardNumber(), null);
+                if (existedCardName != null && !existedCardName.equals(card.getName())) {
+                    String info = card.isNightCard() ? existedCardName + " -> " + card.getName() : card.getName() + " -> " + existedCardName;
+                    errorsList.add("Error: set contains both card sides instead main only: "
+                            + set.getCode() + " - " + set.getName() + " - " + info + " - " + card.getCardNumber());
+                } else {
+                    cardNumbers.put(card.getCardNumber(), card.getName());
+                }
+                //*/
             }
 
             // CHECK: double side cards must be in boosters

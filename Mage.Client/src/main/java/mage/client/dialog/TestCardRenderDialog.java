@@ -316,7 +316,7 @@ public class TestCardRenderDialog extends MageDialog {
         //cardViews.add(createHandCard(game, playerYou.getId(), "ZNR", "134")); // Akoum Warrior
         //*/
 
-        // test meld cards in hands and battlefield
+        /*// test meld cards in hands and battlefield
         cardViews.add(createHandCard(game, playerYou.getId(), "EMN", "204")); // Hanweir Battlements
         cardViews.add(createHandCard(game, playerYou.getId(), "EMN", "130a")); // Hanweir Garrison
         cardViews.add(createHandCard(game, playerYou.getId(), "EMN", "130b")); // Hanweir, the Writhing Township
@@ -325,7 +325,16 @@ public class TestCardRenderDialog extends MageDialog {
         cardViews.add(createPermanentCard(game, playerYou.getId(), "EMN", "130b", 1, 1, 0, false, false, null)); // Hanweir, the Writhing Township
         //*/
 
-        /* //test card icons
+        // test variant double faced cards (main and second sides must be same pair)
+        cardViews.add(createHandCard(game, playerYou.getId(), "VOW", "65")); // Jacob Hauken, Inspector
+        cardViews.add(createHandCard(game, playerYou.getId(), "VOW", "320")); // Jacob Hauken, Inspector
+        cardViews.add(createHandCard(game, playerYou.getId(), "VOW", "332")); // Jacob Hauken, Inspector
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "VOW", "65", 1, 1, 0, false, false, null)); // Jacob Hauken, Inspector
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "VOW", "320", 1, 1, 0, false, false, null)); // Jacob Hauken, Inspector
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "VOW", "332", 1, 1, 0, false, false, null)); // Jacob Hauken, Inspector
+        //*/
+
+        /*//test card icons
         cardViews.add(createHandCard(game, playerYou.getId(), "POR", "169")); // Grizzly Bears
         cardViews.add(createHandCard(game, playerYou.getId(), "DKA", "140")); // Huntmaster of the Fells, transforms
         cardViews.add(createPermanentCard(game, playerYou.getId(), "DKA", "140", 3, 3, 1, false, true, additionalIcons)); // Huntmaster of the Fells, transforms

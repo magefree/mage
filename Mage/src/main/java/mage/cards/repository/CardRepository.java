@@ -287,6 +287,10 @@ public enum CardRepository {
                 queryBuilder.limit(1L).where()
                         .eq("setCode", new SelectArg(setCode))
                         .and().eq("cardNumber", new SelectArg(cardNumber));
+
+                // some double faced cards can use second side card with same number as main side
+                // (example: vow - 65 - Jacob Hauken, Inspector), so make priority for main side first
+                queryBuilder.orderBy("nightCard", true);
             }
             List<CardInfo> result = cardDao.query(queryBuilder.prepare());
             if (!result.isEmpty()) {
