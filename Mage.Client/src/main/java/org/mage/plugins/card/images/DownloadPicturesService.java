@@ -456,7 +456,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                             throw new IllegalStateException("Second side card can't have empty name.");
                         }
 
-                        CardInfo secondSideCard = CardRepository.instance.findCardWPreferredSet(card.getSecondSideName(), card.getSetCode());
+                        CardInfo secondSideCard = CardRepository.instance.findCardWithPreferredSetAndNumber(card.getSecondSideName(), card.getSetCode(), card.getCardNumber());
                         if (secondSideCard == null) {
                             throw new IllegalStateException("Can''t find second side card in database: " + card.getSecondSideName());
                         }
@@ -490,7 +490,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                             throw new IllegalStateException("MeldsToCardName can't be empty in " + card.getName());
                         }
 
-                        CardInfo meldsToCard = CardRepository.instance.findCardWPreferredSet(card.getMeldsToCardName(), card.getSetCode());
+                        CardInfo meldsToCard = CardRepository.instance.findCardWithPreferredSetAndNumber(card.getMeldsToCardName(), card.getSetCode(), card.getCardNumber());
                         if (meldsToCard == null) {
                             throw new IllegalStateException("Can''t find meldsToCard in database: " + card.getMeldsToCardName());
                         }

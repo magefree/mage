@@ -326,12 +326,13 @@ public class TestCardRenderDialog extends MageDialog {
         //*/
 
         // test variant double faced cards (main and second sides must be same pair)
-        cardViews.add(createHandCard(game, playerYou.getId(), "VOW", "65")); // Jacob Hauken, Inspector
-        cardViews.add(createHandCard(game, playerYou.getId(), "VOW", "320")); // Jacob Hauken, Inspector
-        cardViews.add(createHandCard(game, playerYou.getId(), "VOW", "332")); // Jacob Hauken, Inspector
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "VOW", "65", 1, 1, 0, false, false, null)); // Jacob Hauken, Inspector
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "VOW", "320", 1, 1, 0, false, false, null)); // Jacob Hauken, Inspector
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "VOW", "332", 1, 1, 0, false, false, null)); // Jacob Hauken, Inspector
+        // Jacob Hauken, Inspector -> Hauken's Insight
+        cardViews.add(createHandCard(game, playerYou.getId(), "VOW", "65"));
+        cardViews.add(createHandCard(game, playerYou.getId(), "VOW", "320"));
+        cardViews.add(createHandCard(game, playerYou.getId(), "VOW", "332"));
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "VOW", "65", 1, 1, 0, false, false, null));
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "VOW", "320", 1, 1, 0, false, false, null));
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "VOW", "332", 1, 1, 0, false, false, null));
         //*/
 
         /*//test card icons

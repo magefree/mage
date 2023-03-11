@@ -643,7 +643,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         // must be non strict search in any sets, not one set
         // example: if set contains only one card side
         // method used in cards database creating, so can't use repository here
-        ExpansionSet.SetCardInfo info = Sets.findCardByClass(cardClazz, expansionSetCode);
+        ExpansionSet.SetCardInfo info = Sets.findCardByClass(cardClazz, expansionSetCode, cardNumber);
         if (info == null) {
             return null;
         }

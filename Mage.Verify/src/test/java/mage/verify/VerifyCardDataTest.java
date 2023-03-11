@@ -1968,7 +1968,7 @@ public class VerifyCardDataTest {
                 // same find code as original cube
                 CardInfo cardInfo;
                 if (!cardId.getExtension().isEmpty()) {
-                    cardInfo = CardRepository.instance.findCardWPreferredSet(cardId.getName(), cardId.getExtension());
+                    cardInfo = CardRepository.instance.findCardWithPreferredSetAndNumber(cardId.getName(), cardId.getExtension(), null);
                 } else {
                     cardInfo = CardRepository.instance.findPreferredCoreExpansionCard(cardId.getName());
                 }

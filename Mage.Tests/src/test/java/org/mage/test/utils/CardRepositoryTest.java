@@ -180,7 +180,7 @@ public class CardRepositoryTest {
      * so search result must return main side first
      */
     @Test
-    public void test_SearchSetWithSecondSides() {
+    public void test_SearchSecondSides_FindCard() {
         // XLN - Ixalan - Arguel's Blood Fast -> Temple of Aclazotz - 90
         Assert.assertEquals("Arguel's Blood Fast", CardRepository.instance.findCard("XLN", "90").getName());
         Assert.assertEquals("Arguel's Blood Fast", CardRepository.instance.findCard("XLN", "90", true).getName());
@@ -190,5 +190,19 @@ public class CardRepositoryTest {
         Assert.assertEquals("Jacob Hauken, Inspector", CardRepository.instance.findCard("VOW", "320").getName());
         Assert.assertEquals("Jacob Hauken, Inspector", CardRepository.instance.findCard("VOW", "320", true).getName());
         Assert.assertEquals("Jacob Hauken, Inspector", CardRepository.instance.findCard("VOW", "320", false).getName());
+    }
+
+    @Test
+    public void test_SearchSecondSides_FindCardWithPreferredSetAndNumber() {
+        // VOW - Innistrad: Crimson Vow - Jacob Hauken, Inspector -> Hauken's Insight - 65
+        // VOW - Innistrad: Crimson Vow - Jacob Hauken, Inspector -> Hauken's Insight - 320
+        // VOW - Innistrad: Crimson Vow - Jacob Hauken, Inspector -> Hauken's Insight - 332
+        Assert.assertEquals("65", CardRepository.instance.findCardWithPreferredSetAndNumber("Jacob Hauken, Inspector", "VOW", "65").getCardNumber());
+        Assert.assertEquals("320", CardRepository.instance.findCardWithPreferredSetAndNumber("Jacob Hauken, Inspector", "VOW", "320").getCardNumber());
+        Assert.assertEquals("332", CardRepository.instance.findCardWithPreferredSetAndNumber("Jacob Hauken, Inspector", "VOW", "332").getCardNumber());
+
+        Assert.assertEquals("65", CardRepository.instance.findCardWithPreferredSetAndNumber("Hauken's Insight", "VOW", "65").getCardNumber());
+        Assert.assertEquals("320", CardRepository.instance.findCardWithPreferredSetAndNumber("Hauken's Insight", "VOW", "320").getCardNumber());
+        Assert.assertEquals("332", CardRepository.instance.findCardWithPreferredSetAndNumber("Hauken's Insight", "VOW", "332").getCardNumber());
     }
 }
