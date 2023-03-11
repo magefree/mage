@@ -34,6 +34,15 @@
     </dependencySets>
     <fileSets>
         <fileSet>
+            <filtered>true</filtered>
+            <directory>../</directory>
+            <includes>
+                <include>readme.md</include>
+                <include>LICENSE.txt</include>
+            </includes>
+            <outputDirectory>/</outputDirectory>
+        </fileSet>
+        <fileSet>
             <filtered>false</filtered>
             <directory>release/</directory>
             <excludes>
