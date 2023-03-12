@@ -22,7 +22,7 @@ public class FreeformUnlimitedCommander extends GameCommanderImpl {
 
     @Override
     protected void init(UUID choosingPlayerId) {
-        if (numPlayers > 2) {
+        if (state.getPlayerList().size() > 2) {
             startingPlayerSkipsDraw = false;
         }
         super.init(choosingPlayerId); 
