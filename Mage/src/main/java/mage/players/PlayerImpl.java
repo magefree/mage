@@ -4643,6 +4643,15 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public boolean moveCardsToHandWithInfo(Cards cards, Ability source, Game game, boolean withName) {
+        Player player = this;
+        for (Card card : cards.getCards(game)) {
+            player.moveCardToHandWithInfo(card, source, game, withName);
+        }
+        return true;
+    }
+
+    @Override
     public boolean moveCardToHandWithInfo(Card card, Ability source, Game game, boolean withName) {
         boolean result = false;
         Zone fromZone = game.getState().getZone(card.getId());
