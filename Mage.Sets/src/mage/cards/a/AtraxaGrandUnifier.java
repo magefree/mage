@@ -89,8 +89,7 @@ class AtraxaGrandUnifierEffect extends OneShotEffect {
         TargetCard target = new AtraxaGrandUnifierTarget();
         player.choose(outcome, cards, target, game);
         Cards toHand = new CardsImpl(target.getTargets());
-        player.revealCards(source, toHand, game);
-        player.moveCards(toHand, Zone.HAND, source, game);
+        player.moveCardsToHandWithInfo(toHand, source, game, true);
         cards.retainZone(Zone.LIBRARY, game);
         player.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;

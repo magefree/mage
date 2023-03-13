@@ -71,7 +71,7 @@ public class PermanentCard extends PermanentImpl {
         if (card instanceof LevelerCard) {
             maxLevelCounters = ((LevelerCard) card).getMaxLevelCounters();
         }
-        if (isTransformable()) {
+        if (card.isTransformable()) {
             if (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId()) != null
                     || NightboundAbility.checkCard(this, game)) {
                 game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId(), null);
@@ -132,6 +132,9 @@ public class PermanentCard extends PermanentImpl {
 
         if (card.getSecondCardFace() != null) {
             this.secondSideCardClazz = card.getSecondCardFace().getClass();
+        }
+        if (card.getMeldsToCard() != null) {
+            this.meldsToClazz = card.getMeldsToCard().getClass();
         }
         this.nightCard = card.isNightCard();
         this.flipCard = card.isFlipCard();

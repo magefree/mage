@@ -449,18 +449,24 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                     // main side
                     allCardsUrls.add(url);
 
-                    // second side (xmage's set doesn't have info about it, so generate it here)
+                    // second side
+                    // xmage doesn't search night cards by default, so add it and other types manually
                     if (card.isDoubleFaced()) {
                         if (card.getSecondSideName() == null || card.getSecondSideName().trim().isEmpty()) {
                             throw new IllegalStateException("Second side card can't have empty name.");
                         }
 
-                        CardInfo secondSideCard = CardRepository.instance.findCardWPreferredSet(card.getSecondSideName(), card.getSetCode());
+                        CardInfo secondSideCard = CardRepository.instance.findCardWithPreferredSetAndNumber(card.getSecondSideName(), card.getSetCode(), card.getCardNumber());
                         if (secondSideCard == null) {
                             throw new IllegalStateException("Can''t find second side card in database: " + card.getSecondSideName());
                         }
 
-                        url = new CardDownloadData(card.getSecondSideName(), card.getSetCode(), secondSideCard.getCardNumber(), card.usesVariousArt(), 0, "", "", false, card.isDoubleFaced(), true);
+                        url = new CardDownloadData(
+                                card.getSecondSideName(),
+                                card.getSetCode(),
+                                secondSideCard.getCardNumber(),
+                                card.usesVariousArt(),
+                                0, "", "", false, card.isDoubleFaced(), true);
                         url.setType2(isType2);
                         allCardsUrls.add(url);
                     }
@@ -478,6 +484,26 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         cardDownloadData.setFlippedSide(true);
                         cardDownloadData.setType2(isType2);
                         allCardsUrls.add(cardDownloadData);
+                    }
+                    if (card.getMeldsToCardName() != null) {
+                        if (card.getMeldsToCardName().trim().isEmpty()) {
+                            throw new IllegalStateException("MeldsToCardName can't be empty in " + card.getName());
+                        }
+
+                        CardInfo meldsToCard = CardRepository.instance.findCardWithPreferredSetAndNumber(card.getMeldsToCardName(), card.getSetCode(), card.getCardNumber());
+                        if (meldsToCard == null) {
+                            throw new IllegalStateException("Can''t find meldsToCard in database: " + card.getMeldsToCardName());
+                        }
+
+                        // meld cards are normal cards from the set, so no needs to set two faces/sides here
+                        url = new CardDownloadData(
+                                card.getMeldsToCardName(),
+                                card.getSetCode(),
+                                meldsToCard.getCardNumber(),
+                                card.usesVariousArt(),
+                                0, "", "", false, false, false);
+                        url.setType2(isType2);
+                        allCardsUrls.add(url);
                     }
                     if (card.isModalDoubleFacesCard()) {
                         if (card.getModalDoubleFacesSecondSideName() == null || card.getModalDoubleFacesSecondSideName().trim().isEmpty()) {
