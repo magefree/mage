@@ -45,6 +45,8 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Bladed Ambassador", 5, Rarity.UNCOMMON, mage.cards.b.BladedAmbassador.class));
         cards.add(new SetCardInfo("Bladegraft Aspirant", 122, Rarity.COMMON, mage.cards.b.BladegraftAspirant.class));
         cards.add(new SetCardInfo("Bladehold War-Whip", 197, Rarity.UNCOMMON, mage.cards.b.BladeholdWarWhip.class));
+        cards.add(new SetCardInfo("Blade of Shared Souls", 42, Rarity.RARE, mage.cards.b.BladeOfSharedSouls.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Blade of Shared Souls", 378, Rarity.RARE, mage.cards.b.BladeOfSharedSouls.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blazing Crescendo", 123, Rarity.COMMON, mage.cards.b.BlazingCrescendo.class));
         cards.add(new SetCardInfo("Blightbelly Rat", 85, Rarity.COMMON, mage.cards.b.BlightbellyRat.class));
         cards.add(new SetCardInfo("Bloated Contaminator", 159, Rarity.RARE, mage.cards.b.BloatedContaminator.class));
