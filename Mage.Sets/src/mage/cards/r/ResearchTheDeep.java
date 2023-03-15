@@ -2,8 +2,10 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.abilities.effects.common.ClashWinReturnToHandSpellEffect;
+
+import mage.abilities.effects.common.DoIfClashWonEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.ReturnToHandSpellEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -20,7 +22,7 @@ public final class ResearchTheDeep extends CardImpl {
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
         // Clash with an opponent. If you win, return Research the Deep to its owner's hand.
-        this.getSpellAbility().addEffect(ClashWinReturnToHandSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new DoIfClashWonEffect(ReturnToHandSpellEffect.getInstance()));
     }
 
     private ResearchTheDeep(final ResearchTheDeep card) {

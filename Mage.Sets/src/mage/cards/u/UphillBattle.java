@@ -16,7 +16,7 @@ import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
-import mage.watchers.common.CreatureWasCastWatcher;
+import mage.watchers.common.PermanentWasCastWatcher;
 
 /**
  *
@@ -29,7 +29,7 @@ public final class UphillBattle extends CardImpl {
 
         // Creatures played by your opponents enter the battlefield tapped.
         Ability tapAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new UphillBattleTapEffect());
-        tapAbility.addWatcher(new CreatureWasCastWatcher());
+        tapAbility.addWatcher(new PermanentWasCastWatcher());
         tapAbility.addWatcher(new PlayCreatureLandWatcher());
         addAbility(tapAbility);
     }
@@ -97,11 +97,11 @@ class UphillBattleTapEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
-        CreatureWasCastWatcher creatureSpellWatcher = game.getState().getWatcher(CreatureWasCastWatcher.class);
+        PermanentWasCastWatcher creatureSpellWatcher = game.getState().getWatcher(PermanentWasCastWatcher.class);
         PlayCreatureLandWatcher landWatcher = game.getState().getWatcher(PlayCreatureLandWatcher.class);
 
         if (target != null
-                && ((creatureSpellWatcher != null && creatureSpellWatcher.wasCreatureCastThisTurn(target.getId()))
+                && ((creatureSpellWatcher != null && creatureSpellWatcher.wasPermanentCastThisTurn(target.getId()))
                 || (landWatcher != null && landWatcher.wasLandPlayed(target.getId())))) {
             target.setTapped(true);
         }

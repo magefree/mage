@@ -93,7 +93,7 @@ public class CardInfo {
     protected boolean flipCard;
     @DatabaseField
     protected boolean doubleFaced;
-    @DatabaseField(indexName = "name_index")
+    @DatabaseField(indexName = "nightCard_index")
     protected boolean nightCard;
     @DatabaseField
     protected String flipCardName;
@@ -107,6 +107,8 @@ public class CardInfo {
     protected boolean modalDoubleFacesCard;
     @DatabaseField
     protected String modalDoubleFacesSecondSideName;
+    @DatabaseField
+    protected String meldsToCardName;
 
     // if you add new field with card side name then update CardRepository.addNewNames too
 
@@ -133,6 +135,11 @@ public class CardInfo {
 
         this.flipCard = card.isFlipCard();
         this.flipCardName = card.getFlipCardName();
+
+        Card meldToCard = card.getMeldsToCard();
+        if (meldToCard != null) {
+            this.meldsToCardName = meldToCard.getName();
+        }
 
         this.doubleFaced = card.isTransformable() && card.getSecondCardFace() != null;
         this.nightCard = card.isNightCard();
@@ -435,6 +442,10 @@ public class CardInfo {
 
     public String getFlipCardName() {
         return flipCardName;
+    }
+
+    public String getMeldsToCardName() {
+        return meldsToCardName;
     }
 
     public boolean isDoubleFaced() {

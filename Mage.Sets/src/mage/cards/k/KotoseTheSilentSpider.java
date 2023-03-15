@@ -166,7 +166,7 @@ class KotoseTheSilentSpiderWatcher extends Watcher {
             morMap.values()
                     .stream()
                     .flatMap(Collection::stream)
-                    .map(set -> set.removeIf(mor -> !mor.zoneCounterIsCurrent(game)));
+                    .forEach(set -> set.removeIf(mor -> !mor.zoneCounterIsCurrent(game)));
             morMap.values().removeIf(Set::isEmpty);
             return;
         }

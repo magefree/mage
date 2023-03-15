@@ -14,7 +14,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
-import mage.watchers.common.CreatureWasCastWatcher;
+import mage.watchers.common.PermanentWasCastWatcher;
 
 import java.util.UUID;
 
@@ -34,7 +34,8 @@ public final class ContainmentPriest extends CardImpl {
         // Flash
         this.addAbility(FlashAbility.getInstance());
         // If a nontoken creature would enter the battlefield and it wasn't cast, exile it instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ContainmentPriestReplacementEffect()), new CreatureWasCastWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ContainmentPriestReplacementEffect()),
+                new PermanentWasCastWatcher());
     }
 
     private ContainmentPriest(final ContainmentPriest card) {
@@ -96,8 +97,8 @@ class ContainmentPriestReplacementEffect extends ReplacementEffectImpl {
                 card = card.getSecondCardFace();
             }
             if (card != null && card.isCreature(game)) { // TODO: Bestow Card cast as Enchantment probably not handled correctly
-                CreatureWasCastWatcher watcher = game.getState().getWatcher(CreatureWasCastWatcher.class);
-                return watcher != null && !watcher.wasCreatureCastThisTurn(event.getTargetId());
+                PermanentWasCastWatcher watcher = game.getState().getWatcher(PermanentWasCastWatcher.class);
+                return watcher != null && !watcher.wasPermanentCastThisTurn(event.getTargetId());
             }
         }
         return false;

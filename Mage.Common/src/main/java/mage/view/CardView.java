@@ -519,6 +519,13 @@ public class CardView extends SimpleCardView {
             this.alternateName = mdfCard.getRightHalfCard().getName();
         }
 
+        Card meldsToCard = card.getMeldsToCard();
+        if (meldsToCard != null) {
+            this.transformable = true; // enable GUI day/night button
+            this.secondCardFace = new CardView(meldsToCard, game);
+            this.alternateName = meldsToCard.getName();
+        }
+
         if (card instanceof Spell) {
             this.mageObjectType = MageObjectType.SPELL;
             Spell spell = (Spell) card;

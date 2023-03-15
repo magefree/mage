@@ -909,6 +909,17 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean moveCardToHandWithInfo(Card card, Ability source, Game game, boolean withName);
 
     /**
+     * Iterates through a set of cards and runs moveCardToHandWithInfo on each item
+     *
+     * @param cards
+     * @param source
+     * @param game
+     * @param withName show the card names in the log
+     * @return
+     */
+    boolean moveCardsToHandWithInfo(Cards cards, Ability source, Game game, boolean withName);
+
+    /**
      * Uses card.moveToExile and posts a inform message about moving the card to
      * exile into the game log. Don't use this in replacement effects, because
      * list of applied effects is not saved

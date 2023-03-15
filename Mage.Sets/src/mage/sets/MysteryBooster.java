@@ -3482,7 +3482,7 @@ public class MysteryBooster extends ExpansionSet {
     private void populateSlot(int slotNumber, List<String> cardNames) {
         final List<CardInfo> cardInfoList = this.possibleCardsPerBoosterSlot.get(slotNumber);
         for (String name : cardNames) {
-            final CardInfo cardWithGivenName = CardRepository.instance.findCardWPreferredSet(name, this.code);
+            final CardInfo cardWithGivenName = CardRepository.instance.findCardWithPreferredSetAndNumber(name, this.code, null);
             cardInfoList.add(cardWithGivenName);
         }
     }
