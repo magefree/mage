@@ -54,6 +54,10 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Bring the Ending", 44, Rarity.COMMON, mage.cards.b.BringTheEnding.class));
         cards.add(new SetCardInfo("Cacophony Scamp", 124, Rarity.UNCOMMON, mage.cards.c.CacophonyScamp.class));
         cards.add(new SetCardInfo("Cankerbloom", 161, Rarity.UNCOMMON, mage.cards.c.Cankerbloom.class));
+        cards.add(new SetCardInfo("Capricious Hellraiser", 125, Rarity.MYTHIC, mage.cards.c.CapriciousHellraiser.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Capricious Hellraiser", 310, Rarity.MYTHIC, mage.cards.c.CapriciousHellraiser.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Capricious Hellraiser", 353, Rarity.MYTHIC, mage.cards.c.CapriciousHellraiser.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Capricious Hellraiser", 444, Rarity.MYTHIC, mage.cards.c.CapriciousHellraiser.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cephalopod Sentry", 198, Rarity.UNCOMMON, mage.cards.c.CephalopodSentry.class));
         cards.add(new SetCardInfo("Charforger", 199, Rarity.UNCOMMON, mage.cards.c.Charforger.class));
         cards.add(new SetCardInfo("Chimney Rabble", 126, Rarity.COMMON, mage.cards.c.ChimneyRabble.class));
