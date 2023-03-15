@@ -199,15 +199,23 @@ public class Sets extends HashMap<String, ExpansionSet> {
         return null;
     }
 
-    public static ExpansionSet.SetCardInfo findCardByClass(Class<?> clazz, String preferredSetCode) {
+    public static ExpansionSet.SetCardInfo findCardByClass(Class<?> clazz, String preferredSetCode, String preferredCardNumber) {
         ExpansionSet.SetCardInfo info = null;
         if (instance.containsKey(preferredSetCode)) {
-            info = instance.get(preferredSetCode).findCardInfoByClass(clazz).stream().findFirst().orElse(null);
+            info = instance.get(preferredSetCode).findCardInfoByClass(clazz)
+                    .stream()
+                    .filter(card -> preferredCardNumber == null || card.getCardNumber().equals(preferredCardNumber))
+                    .findFirst()
+                    .orElse(null);
         }
 
         if (info == null) {
             for (Map.Entry<String, ExpansionSet> entry : instance.entrySet()) {
-                info = entry.getValue().findCardInfoByClass(clazz).stream().findFirst().orElse(null);
+                info = entry.getValue().findCardInfoByClass(clazz)
+                        .stream()
+                        .filter(card -> preferredCardNumber == null || card.getCardNumber().equals(preferredCardNumber))
+                        .findFirst()
+                        .orElse(null);
                 if (info != null) {
                     break;
                 }

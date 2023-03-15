@@ -28,6 +28,15 @@ public final class PhyrexianHorrorRedToken extends TokenImpl {
         availableImageSetCodes = Arrays.asList("ONE");
     }
 
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("ONE")) {
+            setTokenType(2);
+        }
+    }
+
     public PhyrexianHorrorRedToken(final PhyrexianHorrorRedToken token) {
         super(token);
     }

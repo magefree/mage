@@ -88,10 +88,16 @@ public interface Target extends Serializable {
 
     void updateTarget(UUID targetId, Game game);
 
+    /**
+     * @return full description with target name, amount, etc (uses in abilities/rules/cost)
+     */
     String getDescription();
 
     String getMessage();
 
+    /**
+     * @return single target name
+     */
     String getTargetName();
 
     void setTargetName(String name);

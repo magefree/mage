@@ -80,6 +80,14 @@ public interface Card extends MageObject {
         return false;
     }
 
+    default Class<? extends Card> getMeldsToClazz() {
+        return null;
+    }
+
+    default Card getMeldsToCard() {
+        return null;
+    }
+
     void assignNewId();
 
     void addInfo(String key, String value, Game game);

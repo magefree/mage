@@ -40,7 +40,7 @@ public class MockSplitCard extends SplitCard {
         this.nightCard = card.isNightCard();
 
         if (card.getSecondSideName() != null && !card.getSecondSideName().isEmpty()) {
-            this.secondSideCard = new MockCard(CardRepository.instance.findCardWPreferredSet(card.getSecondSideName(), card.getSetCode()));
+            this.secondSideCard = new MockCard(CardRepository.instance.findCardWithPreferredSetAndNumber(card.getSecondSideName(), card.getSetCode(), card.getCardNumber()));
         }
 
         this.flipCardName = card.getFlipCardName();
@@ -49,13 +49,13 @@ public class MockSplitCard extends SplitCard {
             this.addAbility(textAbilityFromString(ruleText));
         }
 
-        CardInfo leftHalf = CardRepository.instance.findCardWPreferredSet(getLeftHalfName(card), card.getSetCode(), true);
+        CardInfo leftHalf = CardRepository.instance.findCardWithPreferredSetAndNumber(getLeftHalfName(card), card.getSetCode(), card.getCardNumber(), true);
         if (leftHalf != null) {
             this.leftHalfCard = new MockSplitCardHalf(leftHalf);
             ((SplitCardHalf) this.leftHalfCard).setParentCard(this);
         }
 
-        CardInfo rightHalf = CardRepository.instance.findCardWPreferredSet(getRightHalfName(card), card.getSetCode(), true);
+        CardInfo rightHalf = CardRepository.instance.findCardWithPreferredSetAndNumber(getRightHalfName(card), card.getSetCode(), card.getCardNumber(), true);
         if (rightHalf != null) {
             this.rightHalfCard = new MockSplitCardHalf(rightHalf);
             ((SplitCardHalf) this.rightHalfCard).setParentCard(this);

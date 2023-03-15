@@ -672,7 +672,7 @@ public class MageActionCallback implements ActionCallback {
                     popupContainer.setVisible(true);
 
                     // popup hint mode
-                    Image image = null;
+                    Image image = cardPanel.getImage();
                     CardView displayCard = cardPanel.getOriginal();
                     switch (enlargeMode) {
                         case COPY:
@@ -696,12 +696,9 @@ public class MageActionCallback implements ActionCallback {
                         default:
                             break;
                     }
-                    if (image == null) {
-                        image = cardPanel.getImage();
-                    }
+
                     // shows the card in the popup Container
                     displayCardInfo(displayCard, image, (BigCard) cardPreviewPane);
-
                 } else {
                     logger.warn("No Card preview Pane in Mage Frame defined. Card: " + cardView.getName());
                 }

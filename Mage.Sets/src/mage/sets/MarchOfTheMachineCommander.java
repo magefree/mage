@@ -15,7 +15,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
     }
 
     private MarchOfTheMachineCommander() {
-        super("March of the Machine Commander", "ONC", ExpansionSet.buildDate(2023, 4, 21), SetType.SUPPLEMENTAL);
+        super("March of the Machine Commander", "MOC", ExpansionSet.buildDate(2023, 4, 21), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
     }
 }

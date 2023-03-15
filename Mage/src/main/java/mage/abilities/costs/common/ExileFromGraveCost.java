@@ -60,7 +60,7 @@ public class ExileFromGraveCost extends CostImpl {
     public ExileFromGraveCost(TargetCardInASingleGraveyard target) {
         target.setNotTarget(true);
         this.addTarget(target);
-        this.text = "exile " + target.getTargetName();
+        this.text = "exile " + target.getDescription();
     }
 
     public ExileFromGraveCost(TargetCardInYourGraveyard target, boolean setTargetPointer) {

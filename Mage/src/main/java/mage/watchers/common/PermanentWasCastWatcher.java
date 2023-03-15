@@ -17,11 +17,11 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class CreatureWasCastWatcher extends Watcher {
+public class PermanentWasCastWatcher extends Watcher {
 
-    private final Set<UUID> creaturesCasted = new HashSet<>();
+    private final Set<UUID> permanentsCasted = new HashSet<>();
 
-    public CreatureWasCastWatcher() {
+    public PermanentWasCastWatcher() {
         super(WatcherScope.GAME);
     }
 
@@ -31,27 +31,27 @@ public class CreatureWasCastWatcher extends Watcher {
             Spell spell = (Spell) game.getObject(event.getTargetId());
             if (spell != null) {
                 Card card = game.getCard(spell.getSourceId());
-                if (card != null && card.isCreature(game)) {
-                    creaturesCasted.add(card.getId());
+                if (card != null && card.isPermanent(game)) {
+                    permanentsCasted.add(card.getId());
                 }
             }
         }
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE
                 && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
             Card card = game.getCard(event.getTargetId());
-            if (card != null && card.isCreature(game)) {
-                creaturesCasted.remove(card.getId());
+            if (card != null && card.isPermanent(game)) {
+                permanentsCasted.remove(card.getId());
             }
         }
     }
 
-    public boolean wasCreatureCastThisTurn(UUID creatureSourceId) {
-        return creaturesCasted.contains(creatureSourceId);
+    public boolean wasPermanentCastThisTurn(UUID permanentSourceId) {
+        return permanentsCasted.contains(permanentSourceId);
     }
 
     @Override
     public void reset() {
         super.reset();
-        creaturesCasted.clear();
+        permanentsCasted.clear();
     }
 }
