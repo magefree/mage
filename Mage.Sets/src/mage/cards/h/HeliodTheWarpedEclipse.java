@@ -34,6 +34,7 @@ public class HeliodTheWarpedEclipse extends CardImpl {
         this.addSubType(SubType.GOD);
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
+        this.nightCard = true;
 
         //You may cast spells as though they had flash.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(
