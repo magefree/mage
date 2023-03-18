@@ -67,7 +67,7 @@ public final class TriumphOfSaintKatherine extends CardImpl {
 class TriumphOfSaintKatherineCost extends CostImpl {
     
     private final int amount = 6;
-    private static ExileZone exileZone;
+    private static UUID exileId;
     
     public TriumphOfSaintKatherineCost() {
         this.text = "exile it and the top six cards of your library in a face-down pile";
@@ -77,8 +77,8 @@ class TriumphOfSaintKatherineCost extends CostImpl {
         super(cost);
     }
     
-    public static ExileZone getExileZone() {
-        return exileZone;
+    public static UUID getExileId() {
+        return exileId;
     }
 
     @Override
@@ -90,13 +90,13 @@ class TriumphOfSaintKatherineCost extends CostImpl {
         Card card = game.getCard(source.getSourceId());
         if (card != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
             Set<Card> exiledCards = new HashSet<>();
-            UUID exileId = UUID.randomUUID();
+            exileId = UUID.randomUUID();
             exiledCards.add(card);
             for (Card libraryCard : controller.getLibrary().getTopCards(game, amount)) {
                 exiledCards.add(libraryCard);
             }
             controller.moveCardsToExile(exiledCards, source, game, false, exileId, "");
-            exileZone = game.getExile().getExileZone(exileId);
+            ExileZone exileZone = game.getExile().getExileZone(exileId);
             if (exileZone != null) {
                 for (Card exiledCard : exileZone.getCards(game)) {
                     if (exiledCard != null) {
@@ -147,7 +147,7 @@ class TriumphOfSaintKatherineEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Cards cardsToLibrary = new CardsImpl();
-            ExileZone exileZone = TriumphOfSaintKatherineCost.getExileZone();
+            ExileZone exileZone = game.getExile().getExileZone(TriumphOfSaintKatherineCost.getExileId());
             if (exileZone != null) {
                 for (Card card : exileZone.getCards(game)) {
                     if (card != null) {
