@@ -88,24 +88,28 @@ class TriumphOfSaintKatherineCost extends CostImpl {
             return paid;
         }
         Card card = game.getCard(source.getSourceId());
-        if (card != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
-            Set<Card> exiledCards = new HashSet<>();
-            exileId = UUID.randomUUID();
-            exiledCards.add(card);
-            for (Card libraryCard : controller.getLibrary().getTopCards(game, amount)) {
-                exiledCards.add(libraryCard);
-            }
-            controller.moveCardsToExile(exiledCards, source, game, false, exileId, "");
-            ExileZone exileZone = game.getExile().getExileZone(exileId);
-            if (exileZone != null) {
-                for (Card exiledCard : exileZone.getCards(game)) {
-                    if (exiledCard != null) {
-                        exiledCard.setFaceDown(true, game);
-                    }
+        if (card == null) {
+            return paid;
+        }
+        if (game.getState().getZone(source.getSourceId()) != Zone.GRAVEYARD) {
+            return paid;
+        }
+        Set<Card> exiledCards = new HashSet<>();
+        exileId = UUID.randomUUID();
+        exiledCards.add(card);
+        for (Card libraryCard : controller.getLibrary().getTopCards(game, amount)) {
+            exiledCards.add(libraryCard);
+        }
+        controller.moveCardsToExile(exiledCards, source, game, false, exileId, "");
+        ExileZone exileZone = game.getExile().getExileZone(exileId);
+        if (exileZone != null) {
+            for (Card exiledCard : exileZone.getCards(game)) {
+                if (exiledCard != null) {
+                    exiledCard.setFaceDown(true, game);
                 }
             }
-            paid = true;
         }
+        paid = true;
         return paid;
     }
 
@@ -145,18 +149,18 @@ class TriumphOfSaintKatherineEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Cards cardsToLibrary = new CardsImpl();
-            ExileZone exileZone = game.getExile().getExileZone(TriumphOfSaintKatherineCost.getExileId());
-            if (exileZone != null) {
-                for (Card card : exileZone.getCards(game)) {
-                    if (card != null) {
-                        cardsToLibrary.add(card);
-                    }
+        if (controller == null) {
+            return false;
+        }
+        Cards cardsToLibrary = new CardsImpl();
+        ExileZone exileZone = game.getExile().getExileZone(TriumphOfSaintKatherineCost.getExileId());
+        if (exileZone != null) {
+            for (Card card : exileZone.getCards(game)) {
+                if (card != null) {
+                    cardsToLibrary.add(card);
                 }
             }
-            return controller.putCardsOnTopOfLibrary(cardsToLibrary, game, source, false);
         }
-        return false;
+        return controller.putCardsOnTopOfLibrary(cardsToLibrary, game, source, false);
     }
 }
