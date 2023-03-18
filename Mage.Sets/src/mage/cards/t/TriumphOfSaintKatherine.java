@@ -97,8 +97,12 @@ class TriumphOfSaintKatherineCost extends CostImpl {
             }
             controller.moveCardsToExile(exiledCards, source, game, false, exileId, "");
             exileZone = game.getExile().getExileZone(exileId);
-            for (Card exiledCard : exileZone.getCards(game)) {
-                card.setFaceDown(true, game);
+            if (exileZone != null) {
+                for (Card exiledCard : exileZone.getCards(game)) {
+                    if (exiledCard != null) {
+                        exiledCard.setFaceDown(true, game);
+                    }
+                }
             }
             paid = true;
         }
@@ -143,8 +147,13 @@ class TriumphOfSaintKatherineEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Cards cardsToLibrary = new CardsImpl();
-            for (Card card : TriumphOfSaintKatherineCost.getExileZone().getCards(game)) {
-                cardsToLibrary.add(card);
+            ExileZone exileZone = TriumphOfSaintKatherineCost.getExileZone();
+            if (exileZone != null) {
+                for (Card card : exileZone.getCards(game)) {
+                    if (card != null) {
+                        cardsToLibrary.add(card);
+                    }
+                }
             }
             return controller.putCardsOnTopOfLibrary(cardsToLibrary, game, source, false);
         }
