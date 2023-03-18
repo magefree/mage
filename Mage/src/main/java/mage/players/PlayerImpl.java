@@ -4786,7 +4786,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         sb.append(" of ").append(player.getLogName()).append("'s library");
                     }
                 }
-                sb.append(CardUtil.getSourceLogName(game, source, card.getId()));
+                sb.append(CardUtil.getSourceLogName(game, source));
                 game.informPlayers(sb.toString());
             }
             result = true;
