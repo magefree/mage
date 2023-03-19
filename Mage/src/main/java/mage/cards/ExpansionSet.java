@@ -144,6 +144,7 @@ public abstract class ExpansionSet implements Serializable {
 
     protected final EnumMap<Rarity, List<CardInfo>> savedCards = new EnumMap<>(Rarity.class);
     protected final EnumMap<Rarity, List<CardInfo>> savedSpecialCards = new EnumMap<>(Rarity.class);
+    protected Map<String, List<CardInfo>> savedReprints = null;
     protected final Map<String, CardInfo> inBoosterMap = new HashMap<>();
 
     public ExpansionSet(String name, String code, Date releaseDate, SetType setType) {
@@ -223,15 +224,18 @@ public abstract class ExpansionSet implements Serializable {
     }
 
     protected void addToBooster(List<Card> booster, List<CardInfo> cards) {
-        if (!cards.isEmpty()) {
-            CardInfo cardInfo = cards.remove(RandomUtil.nextInt(cards.size()));
-            if (cardInfo != null) {
-                Card card = cardInfo.getCard();
-                if (card != null) {
-                    booster.add(card);
-                }
-            }
+        if (cards.isEmpty()) {
+            return;
         }
+
+        CardInfo cardInfo = cards.remove(RandomUtil.nextInt(cards.size()));
+        Card card = cardInfo.getCard();
+        if (card == null) {
+            // card with error
+            return;
+        }
+
+        booster.add(card);
     }
 
     public BoosterCollator createCollator() {
@@ -247,13 +251,13 @@ public abstract class ExpansionSet implements Serializable {
         for (int i = 0; i < 100; i++) {//don't want to somehow loop forever
             List<Card> booster = tryBooster();
             if (boosterIsValid(booster)) {
-                return booster;
+                return addReprints(booster);
             }
         }
 
         // return random booster if can't do valid
         logger.error(String.format("Can't generate valid booster for set [%s - %s]", this.getCode(), this.getName()));
-        return tryBooster();
+        return addReprints(tryBooster());
     }
 
     private List<Card> createBoosterUsingCollator(BoosterCollator collator) {
@@ -280,10 +284,10 @@ public abstract class ExpansionSet implements Serializable {
         if (!hasBasicLands && parentSet != null) {
             String parentCode = parentSet.code;
             CardRepository
-                .instance
-                .findCards(new CardCriteria().setCodes(parentCode).rarities(Rarity.LAND))
-                .stream()
-                .forEach(cardInfo -> inBoosterMap.put(parentCode + "_" + cardInfo.getCardNumber(), cardInfo));
+                    .instance
+                    .findCards(new CardCriteria().setCodes(parentCode).rarities(Rarity.LAND))
+                    .stream()
+                    .forEach(cardInfo -> inBoosterMap.put(parentCode + "_" + cardInfo.getCardNumber(), cardInfo));
         }
     }
 
@@ -384,7 +388,16 @@ public abstract class ExpansionSet implements Serializable {
         return ratioBoosterSpecialMythic > 0 && ratioBoosterSpecialMythic * RandomUtil.nextDouble() <= 1;
     }
 
-    public List<Card> tryBooster() {
+    /**
+     * Generates a single booster by rarity ratio in sets without custom collator
+     */
+    protected List<Card> tryBooster() {
+        // Booster generating proccess must use:
+        //  * unique cards list for ratio calculation (see removeReprints)
+        //  * reprints for final result (see addReprints)
+        //
+        // BUT there is possible a card's duplication, see https://www.mtgsalvation.com/forums/magic-fundamentals/magic-general/554944-do-booster-packs-ever-contain-two-of-the-same-card
+
         List<Card> booster = new ArrayList<>();
         if (!hasBoosters) {
             return booster;
@@ -491,10 +504,75 @@ public abstract class ExpansionSet implements Serializable {
         return hasBasicLands;
     }
 
+    /**
+     * Keep only unique cards for booster generation and card ratio calculation
+     *
+     * @param list all cards list
+     */
+    private List<CardInfo> removeReprints(List<CardInfo> list) {
+        Map<String, CardInfo> usedNames = new HashMap<>();
+        List<CardInfo> filteredList = new ArrayList<>();
+        list.forEach(card -> {
+            CardInfo foundCard = usedNames.getOrDefault(card.getName(), null);
+            if (foundCard == null) {
+                usedNames.put(card.getName(), card);
+                filteredList.add(card);
+            }
+        });
+        return filteredList;
+    }
+
+    /**
+     * Fill booster with reprints, used for non collator generation
+     *
+     * @param booster booster's cards
+     * @return
+     */
+    private List<Card> addReprints(List<Card> booster) {
+        if (booster.stream().noneMatch(Card::getUsesVariousArt)) {
+            return new ArrayList<>(booster);
+        }
+
+        // generate possible reprints
+        if (this.savedReprints == null) {
+            this.savedReprints = new HashMap<>();
+            List<String> needSets = new ArrayList<>();
+            needSets.add(this.code);
+            if (this.parentSet != null) {
+                needSets.add(this.parentSet.code);
+            }
+            List<CardInfo> cardInfos = CardRepository.instance.findCards(new CardCriteria()
+                    .setCodes(needSets)
+                    .variousArt(true)
+                    .maxCardNumber(maxCardNumberInBooster) // ignore bonus/extra reprints
+            );
+            cardInfos.forEach(card -> {
+                this.savedReprints.putIfAbsent(card.getName(), new ArrayList<>());
+                this.savedReprints.get(card.getName()).add(card);
+            });
+        }
+
+        // replace normal cards by random reprints
+        List<Card> finalBooster = new ArrayList<>();
+        booster.forEach(card -> {
+            List<CardInfo> reprints = this.savedReprints.getOrDefault(card.getName(), null);
+            if (reprints != null && reprints.size() > 1) {
+                Card newCard = reprints.get(RandomUtil.nextInt(reprints.size())).getCard();
+                if (newCard != null) {
+                    finalBooster.add(newCard);
+                    return;
+                }
+            }
+            finalBooster.add(card);
+        });
+
+        return finalBooster;
+    }
+
     public final synchronized List<CardInfo> getCardsByRarity(Rarity rarity) {
         List<CardInfo> savedCardInfos = savedCards.get(rarity);
         if (savedCardInfos == null) {
-            savedCardInfos = findCardsByRarity(rarity);
+            savedCardInfos = removeReprints(findCardsByRarity(rarity));
             savedCards.put(rarity, savedCardInfos);
         }
         // Return a copy of the saved cards information, as not to let modify the original.
@@ -504,7 +582,7 @@ public abstract class ExpansionSet implements Serializable {
     public final synchronized List<CardInfo> getSpecialCardsByRarity(Rarity rarity) {
         List<CardInfo> savedCardInfos = savedSpecialCards.get(rarity);
         if (savedCardInfos == null) {
-            savedCardInfos = findSpecialCardsByRarity(rarity);
+            savedCardInfos = removeReprints(findSpecialCardsByRarity(rarity));
             savedSpecialCards.put(rarity, savedCardInfos);
         }
         // Return a copy of the saved cards information, as not to let modify the original.
@@ -524,7 +602,7 @@ public abstract class ExpansionSet implements Serializable {
 
         cardInfos.removeIf(next -> (
                 next.getCardNumber().contains("*")
-                || next.getCardNumber().contains("+")));
+                        || next.getCardNumber().contains("+")));
 
         // special slot cards must not also appear in regular slots of their rarity
         // special land slot cards must not appear in regular common slots either
@@ -540,11 +618,11 @@ public abstract class ExpansionSet implements Serializable {
      * "Special cards" are cards that have common/uncommon/rare/mythic rarities
      * but can only appear in a specific slot in boosters. Examples are DFCs in
      * Innistrad sets and common nonbasic lands in many post-2018 sets.
-     *
+     * <p>
      * Note that Rarity.SPECIAL and Rarity.BONUS cards are not normally treated
      * as "special cards" because by default boosters don't even have slots for
      * those rarities.
-     *
+     * <p>
      * Also note that getCardsByRarity calls getSpecialCardsByRarity to exclude
      * special cards from non-special booster slots, so sets that override this
      * method must not call getCardsByRarity in it or infinite recursion will occur.
@@ -572,7 +650,7 @@ public abstract class ExpansionSet implements Serializable {
 
         cardInfos.removeIf(next -> (
                 next.getCardNumber().contains("*")
-                || next.getCardNumber().contains("+")));
+                        || next.getCardNumber().contains("+")));
 
         return cardInfos;
     }

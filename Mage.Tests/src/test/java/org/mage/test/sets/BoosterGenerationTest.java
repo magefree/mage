@@ -12,6 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SubType;
 import mage.sets.*;
+import mage.util.CardUtil;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -247,6 +248,42 @@ public class BoosterGenerationTest extends MageTestBase {
             List<Card> booster = Battlebond.getInstance().createBooster();
             assertTrue("battlebond's booster must contain 1 land", booster.stream().anyMatch(card -> card.isBasic() && card.isLand(currentGame)));
         }
+    }
+
+    @Test
+    public void testFallenEmpires_BoosterMustUseVariousArtsButUnique() {
+        // Related issue: https://github.com/magefree/mage/issues/7333
+        // Actual for default boosters without collation
+        Set<String> cardNumberPosfixes = new HashSet<>();
+        for (int i = 0; i < 10; i++) {
+            List<Card> booster = FallenEmpires.getInstance().createBooster();
+
+            // must have single version of the card for booster generation
+            Map<String, Long> stats = FallenEmpires.getInstance().getCardsByRarity(Rarity.COMMON)
+                    .stream()
+                    .collect(Collectors.groupingBy(CardInfo::getName, Collectors.counting()));
+            String multipleCopies = stats.entrySet()
+                    .stream()
+                    .filter(data -> data.getValue() > 1)
+                    .map(Map.Entry::getKey)
+                    .collect(Collectors.joining(", "));
+            assertTrue("booster generation must use cards with various arts as one card: " + multipleCopies, multipleCopies.isEmpty());
+
+            // must have all reprints
+            booster.forEach(card -> {
+                // 123c -> c
+                String postfix = card.getCardNumber().replace(String.valueOf(CardUtil.parseCardNumberAsInt(card.getCardNumber())), "");
+                if (!postfix.isEmpty()) {
+                    cardNumberPosfixes.add(postfix);
+                }
+            });
+        }
+        assertTrue("booster must use cards with various arts",
+                cardNumberPosfixes.contains("a")
+                        && cardNumberPosfixes.contains("b")
+                        && cardNumberPosfixes.contains("c")
+                        && cardNumberPosfixes.contains("d")
+        );
     }
 
     @Test
@@ -514,7 +551,7 @@ public class BoosterGenerationTest extends MageTestBase {
     @Ignore // debug only: collect info about cards in boosters, see https://github.com/magefree/mage/issues/8081
     @Test
     public void test_CollectBoosterStats() {
-        ExpansionSet setToAnalyse = Innistrad.getInstance();
+        ExpansionSet setToAnalyse = FallenEmpires.getInstance();
         int openBoosters = 1000;
 
         Map<String, Integer> resRatio = new HashMap<>();
