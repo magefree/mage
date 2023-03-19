@@ -250,7 +250,11 @@ public enum ScryfallImageSource implements CardImageSource {
 
     private void updatePrepareStats(DownloadServiceInfo service, int need, int current) {
         synchronized (service.getSync()) {
-            service.updateProgressMessage(String.format("Preparing download list... %d of %d", current, need));
+            service.updateProgressMessage(
+                    String.format("Preparing download list... %d of %d", current, need),
+                    current,
+                    need
+            );
         }
     }
 

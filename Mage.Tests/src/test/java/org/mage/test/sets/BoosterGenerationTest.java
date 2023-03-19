@@ -254,7 +254,7 @@ public class BoosterGenerationTest extends MageTestBase {
     public void testFallenEmpires_BoosterMustUseVariousArtsButUnique() {
         // Related issue: https://github.com/magefree/mage/issues/7333
         // Actual for default boosters without collation
-        Set<String> cardNumberPosfixes = new HashSet<>();
+        Set<String> cardNumberPostfixes = new HashSet<>();
         for (int i = 0; i < 10; i++) {
             List<Card> booster = FallenEmpires.getInstance().createBooster();
 
@@ -274,15 +274,15 @@ public class BoosterGenerationTest extends MageTestBase {
                 // 123c -> c
                 String postfix = card.getCardNumber().replace(String.valueOf(CardUtil.parseCardNumberAsInt(card.getCardNumber())), "");
                 if (!postfix.isEmpty()) {
-                    cardNumberPosfixes.add(postfix);
+                    cardNumberPostfixes.add(postfix);
                 }
             });
         }
         assertTrue("booster must use cards with various arts",
-                cardNumberPosfixes.contains("a")
-                        && cardNumberPosfixes.contains("b")
-                        && cardNumberPosfixes.contains("c")
-                        && cardNumberPosfixes.contains("d")
+                cardNumberPostfixes.contains("a")
+                        && cardNumberPostfixes.contains("b")
+                        && cardNumberPostfixes.contains("c")
+                        && cardNumberPostfixes.contains("d")
         );
     }
 
