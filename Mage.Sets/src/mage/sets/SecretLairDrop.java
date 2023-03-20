@@ -20,6 +20,11 @@ public class SecretLairDrop extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = true;
 
+        // warning
+        // set uses faked double faced cards (example: Zndrsplt, Eye of Wisdom),
+        // so it must be split to two different cards (one card for one side, another card for another side),
+        // also must add second side to directDownloadLinks in scryfall
+
         cards.add(new SetCardInfo("Demonlord Belzenlok", "159*", Rarity.MYTHIC, mage.cards.d.DemonlordBelzenlok.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Griselbrand", "160*", Rarity.MYTHIC, mage.cards.g.Griselbrand.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kothophed, Soul Hoarder", "162*", Rarity.RARE, mage.cards.k.KothophedSoulHoarder.class, NON_FULL_USE_VARIOUS));
