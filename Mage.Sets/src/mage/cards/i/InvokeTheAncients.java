@@ -15,10 +15,7 @@ import mage.game.permanent.token.SpiritGreenToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 
-import java.util.Arrays;
-import java.util.Locale;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -46,9 +43,9 @@ public final class InvokeTheAncients extends CardImpl {
 class InvokeTheAncientsEffect extends OneShotEffect {
 
     private static final Token token = new SpiritGreenToken();
-    private static final Set<String> choices = Arrays.asList(
+    private static final Set<String> choices = new HashSet<>(Arrays.asList(
             "Vigilance", "Reach", "Trample"
-    ).stream().collect(Collectors.toSet());
+    ));
 
     InvokeTheAncientsEffect() {
         super(Outcome.Benefit);

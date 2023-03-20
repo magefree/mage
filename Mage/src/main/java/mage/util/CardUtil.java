@@ -1733,4 +1733,12 @@ public final class CardUtil {
                 return "" + startingLoyalty;
         }
     }
+
+    public static void checkSetParamForSerializationCompatibility(Set<String> data) {
+        // HashMap uses inner class for Keys without serialization support,
+        // so you can't use it for client-server data
+        if (data != null && data.getClass().getName().endsWith("$KeySet")) {
+            throw new IllegalArgumentException("Can't use KeySet as param, use new HashSet<>(data.keySet()) instead");
+        }
+    }
 }
