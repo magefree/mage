@@ -192,7 +192,7 @@ public class SerializationTest extends CardTestPlayerBase {
         Choice choice = new ChoiceImpl(true);
         choice.setMessage("Choose an ability");
 
-        choice.setChoices(new HashSet<>(abilityMap.keySet()));
+        choice.setChoices(new LinkedHashSet<>(abilityMap.keySet()));
 
         Object compressed = CompressUtil.compress(choice);
         Assert.assertTrue("Must be zip", compressed instanceof ZippedObjectImpl);

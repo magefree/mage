@@ -338,7 +338,7 @@ public class ContinuousEffects implements Serializable {
      * event
      */
     private Map<ReplacementEffect, Set<Ability>> getApplicableReplacementEffects(GameEvent event, Game game) {
-        Map<ReplacementEffect, Set<Ability>> replaceEffects = new HashMap<>();
+        Map<ReplacementEffect, Set<Ability>> replaceEffects = new LinkedHashMap<>();
         if (auraReplacementEffect.checksEventType(event, game) && auraReplacementEffect.applies(event, null, game)) {
             replaceEffects.put(auraReplacementEffect, null);
         }

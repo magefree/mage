@@ -20,6 +20,7 @@ import mage.target.common.TargetPermanentOrSuspendedCard;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -71,7 +72,7 @@ class ClockspinningAddOrRemoveCounterEffect extends OneShotEffect {
             String counterName = null;
             if (permanent.getCounters(game).size() > 1) {
                 Choice choice = new ChoiceImpl(true);
-                Set<String> choices = new HashSet<>(2);
+                Set<String> choices = new LinkedHashSet<>();
                 for (Counter counter : permanent.getCounters(game).values()) {
                     if (permanent.getCounters(game).getCount(counter.getName()) > 0) {
                         choices.add(counter.getName());
@@ -103,7 +104,7 @@ class ClockspinningAddOrRemoveCounterEffect extends OneShotEffect {
             String counterName = null;
             if (card.getCounters(game).size() > 1) {
                 Choice choice = new ChoiceImpl(true);
-                Set<String> choices = new HashSet<>();
+                Set<String> choices = new LinkedHashSet<>();
                 for (Counter counter : card.getCounters(game).values()) {
                     if (card.getCounters(game).getCount(counter.getName()) > 0) {
                         choices.add(counter.getName());

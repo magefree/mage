@@ -43,7 +43,7 @@ public final class InvokeTheAncients extends CardImpl {
 class InvokeTheAncientsEffect extends OneShotEffect {
 
     private static final Token token = new SpiritGreenToken();
-    private static final Set<String> choices = new HashSet<>(Arrays.asList(
+    private static final Set<String> choices = new LinkedHashSet<>(Arrays.asList(
             "Vigilance", "Reach", "Trample"
     ));
 

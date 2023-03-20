@@ -74,7 +74,7 @@ public final class VivienMonstersAdvocate extends CardImpl {
 class VivienMonstersAdvocateTokenEffect extends OneShotEffect {
 
     private static final Token token = new BeastToken();
-    private static final Set<String> choices = new HashSet<>(Arrays.asList(
+    private static final Set<String> choices = new LinkedHashSet<>(Arrays.asList(
             "Vigilance", "Reach", "Trample"
     ));
 
