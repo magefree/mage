@@ -199,6 +199,13 @@ public class Sets extends HashMap<String, ExpansionSet> {
         return null;
     }
 
+    public static ExpansionSet findSetByName(String setName) {
+        return instance.values().stream()
+                .filter(expansionSet -> expansionSet.getName().equals(setName))
+                .findFirst()
+                .orElse(null);
+    }
+
     public static ExpansionSet.SetCardInfo findCardByClass(Class<?> clazz, String preferredSetCode, String preferredCardNumber) {
         ExpansionSet.SetCardInfo info = null;
         if (instance.containsKey(preferredSetCode)) {

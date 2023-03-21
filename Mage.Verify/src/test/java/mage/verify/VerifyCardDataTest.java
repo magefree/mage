@@ -15,6 +15,7 @@ import mage.abilities.keyword.*;
 import mage.cards.*;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.DeckImporter;
+import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.CardScanner;
@@ -87,6 +88,7 @@ public class VerifyCardDataTest {
     );
 
     private static final List<String> doubleNumbers = new ArrayList<>();
+
     {
         for (int i = 1; i <= 9; i++) {
             String s = CardUtil.numberToText(i).toLowerCase(Locale.ENGLISH);
@@ -386,7 +388,7 @@ public class VerifyCardDataTest {
 
             cardsList.forEach((cardName, amount) -> {
                 if (amount != 2) {
-                    String error = "Error: found non duplicated rare card -"
+                    String error = "Error: non duplicated rare card -"
                             + " set (" + set.getCode() + " - " + set.getName() + ")"
                             + " card (" + cardName + ")";
                     doubleErrors.add(error);
@@ -423,7 +425,7 @@ public class VerifyCardDataTest {
                                 && !checkCard.getName().equals("Everythingamajig")
                                 && !checkCard.getName().equals("Garbage Elemental")
                                 && !checkCard.getName().equals("Very Cryptic Command")) {
-                            errorsList.add("Error: found wrong class in set " + set.getCode() + " - " + checkCard.getName() + " (" + currentClass + " <> " + needClass + ")");
+                            errorsList.add("Error: wrong class in set " + set.getCode() + " - " + checkCard.getName() + " (" + currentClass + " <> " + needClass + ")");
                         }
                     }
                 } else {
@@ -607,6 +609,12 @@ public class VerifyCardDataTest {
         Collection<ExpansionSet> xmageSets = Sets.getInstance().values();
         Set<String> foundedJsonCards = new HashSet<>();
 
+        // fast check instead card's db search (only main side card)
+        Set<String> implementedIndex = new HashSet<>();
+        CardRepository.instance.findCards(new CardCriteria()).forEach(card -> {
+            implementedIndex.add(card.getName());
+        });
+
         // CHECK: wrong card numbers
         for (ExpansionSet set : xmageSets) {
             if (skipListHaveName(SKIP_LIST_WRONG_CARD_NUMBERS, set.getCode())) {
@@ -617,7 +625,7 @@ public class VerifyCardDataTest {
                 MtgJsonCard jsonCard = MtgJsonService.cardFromSet(set.getCode(), card.getName(), card.getCardNumber());
                 if (jsonCard == null) {
                     // see convertMtgJsonToXmageCardNumber for card number convert notation
-                    errorsList.add("Error: unknown card number or set, use standard number notations: "
+                    errorsList.add("Error: unknown mtgjson's card number or set, use standard number notations: "
                             + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                     continue;
                 }
@@ -657,18 +665,26 @@ public class VerifyCardDataTest {
 
             ExpansionSet xmageSet = Sets.findSet(jsonSet.code);
             if (xmageSet == null) {
-                warningsList.add("Warning: found un-implemented set from mtgjson database: " + jsonSet.code + " - " + jsonSet.name + " - " + jsonSet.releaseDate);
+                ExpansionSet sameSet = Sets.findSetByName(jsonSet.name);
+                if (sameSet != null) {
+                    warningsList.add("Warning: implemented set with different set code: "
+                            + jsonSet.code + " - " + jsonSet.name + " - " + jsonSet.releaseDate
+                            + " (xmage's set under code: " + sameSet.getCode() + ")"
+                    );
+                } else {
+                    warningsList.add("Warning: un-implemented set from mtgjson: " + jsonSet.code + " - " + jsonSet.name + " - " + jsonSet.releaseDate);
+                }
                 continue;
             }
 
             for (MtgJsonCard jsonCard : jsonSet.cards) {
                 String code = jsonSet.code + " - " + jsonCard.getRealCardName() + " - " + jsonCard.number;
                 if (!foundedJsonCards.contains(code)) {
-                    if (CardRepository.instance.findCard(jsonCard.getRealCardName()) == null) {
-                        // ignore non-implemented cards
-                        continue;
+                    if (!implementedIndex.contains(jsonCard.getRealCardName())) {
+                        warningsList.add("Warning: un-implemented card from mtgjson: " + jsonSet.code + " - " + jsonCard.getRealCardName() + " - " + jsonCard.number);
+                    } else {
+                        errorsList.add("Error: missing card from xmage's set: " + jsonSet.code + " - " + jsonCard.getRealCardName() + " - " + jsonCard.number);
                     }
-                    errorsList.add("Error: missing card from xmage's set: " + jsonSet.code + " - " + jsonCard.getRealCardName() + " - " + jsonCard.number);
                 }
             }
         }
@@ -874,11 +890,11 @@ public class VerifyCardDataTest {
                     .sorted().collect(Collectors.joining(", "));
 
             if (needLand && !foundLand) {
-                errorsList.add("Error: found set with wrong hasBasicLands - it's true, but haven't land cards: " + set.getCode() + " in " + set.getClass().getName());
+                errorsList.add("Error: set with wrong hasBasicLands - it's true, but haven't land cards: " + set.getCode() + " in " + set.getClass().getName());
             }
 
             if (!needLand && foundLand) {
-                errorsList.add("Error: found set with wrong hasBasicLands - it's false, but have land cards: " + set.getCode() + " in " + set.getClass().getName() + ", lands: " + landNames);
+                errorsList.add("Error: set with wrong hasBasicLands - it's false, but have land cards: " + set.getCode() + " in " + set.getClass().getName() + ", lands: " + landNames);
             }
 
             // TODO: add test to check num cards (hasBasicLands and numLand > 0)
@@ -899,7 +915,7 @@ public class VerifyCardDataTest {
                 }
             }
             if (needSnow != (haveSnow && !haveNonSnow)) {
-                errorsList.add("Error: found incorrect snow land info in set " + set.getCode() + ": "
+                errorsList.add("Error: incorrect snow land info in set " + set.getCode() + ": "
                         + ((haveSnow && !haveNonSnow) ? "set has exclusively snow basics" : "set doesn't have exclusively snow basics")
                         + ", but xmage thinks that it " + (needSnow ? "does" : "doesn't"));
             }
@@ -934,7 +950,7 @@ public class VerifyCardDataTest {
                 boolean cardHaveVariousSetting = card.getGraphicInfo() != null && card.getGraphicInfo().getUsesVariousArt();
 
                 if (cardHaveDoubleName && !cardHaveVariousSetting) {
-                    errorsList.add("Error: founded double card names, but UsesVariousArt = false (missing NON_FULL_USE_VARIOUS, etc): "
+                    errorsList.add("Error: double faced card, but UsesVariousArt = false (missing NON_FULL_USE_VARIOUS, etc): "
                             + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
             }
@@ -967,9 +983,15 @@ public class VerifyCardDataTest {
                 // https://github.com/magefree/mage/issues/6300
                 card.getMana();
 
-                // CHECK: non ascii symbols in card numbers
+                // CHECK: non ascii symbols in card name and number
                 if (!CharMatcher.ascii().matchesAllOf(card.getName()) || !CharMatcher.ascii().matchesAllOf(card.getCardNumber())) {
                     errorsList.add("Error: card name or number contains non-ascii symbols: " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+                }
+
+                // CHECK: card number must start with 09-aZ symbols (wrong symbol example: *123)
+                // if you found card with number like *123 then report it to scryfall to fix to 123*
+                if (!Character.isLetterOrDigit(card.getCardNumber().charAt(0))) {
+                    errorsList.add("Error: card number must start with digit: " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
 
                 // CHECK: second side cards in one set
