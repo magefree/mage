@@ -30,6 +30,7 @@ Born of the Gods|BNG|
 Betrayers of Kamigawa|BOK|
 Battle Royale Box Set|BRB|
 Beatdown Box Set|BTD|
+Commander|CMD|
 Commander 2013 Edition|C13|
 Commander 2014 Edition|C14|
 Commander 2015 Edition|C15|
@@ -39,15 +40,15 @@ Commander 2018 Edition|C18|
 Commander 2019 Edition|C19|
 Commander 2020 Edition|C20|
 Commander 2021 Edition|C21|
-Commander Legends|CMR|
-Commander Legends: Battle for Baldur's Gate|CLB|
-Champions of Kamigawa|CHK|
-Chronicles|CHR|
-Clash Pack|CLASH|
 Commander Anthology|CMA|
 Commander Anthology 2018|CM2|
+Commander Legends|CMR|
+Commander Legends: Battle for Baldur's Gate|CLB|
+Commander Masters|CMM|
+Champions of Kamigawa|CHK|
 Commander's Arsenal|CM1|
-Commander|CMD|
+Chronicles|CHR|
+Clash Pack|CLASH|
 Conspiracy|CNS|
 Conspiracy: Take the Crown|CN2|
 Conflux|CON|

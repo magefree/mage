@@ -32,10 +32,11 @@ Commander 2018|Commander2018Edition|
 Commander 2019|Commander2019Edition|
 Commander 2020|Commander2020Edition|
 Commander 2021|Commander2021Edition|
-Commander Legends|CommanderLegends|
-Commander Legends: Battle for Baldur's Gate|CommanderLegendsBattleForBaldursGate|
 Commander Anthology|CommanderAnthology|
 Commander Anthology 2018|CommanderAnthology2018|
+Commander Legends|CommanderLegends|
+Commander Legends: Battle for Baldur's Gate|CommanderLegendsBattleForBaldursGate|
+Commander Masters|CommanderMasters|
 Commander's Arsenal|CommandersArsenal|
 Conflux|Conflux|
 Conspiracy: Take the Crown|ConspiracyTakeTheCrown|
