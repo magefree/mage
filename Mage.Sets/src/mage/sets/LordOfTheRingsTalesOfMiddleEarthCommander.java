@@ -16,7 +16,7 @@ public final class LordOfTheRingsTalesOfMiddleEarthCommander extends ExpansionSe
         super("Lord of the Rings: Tales of Middle-Earth Commander", "LTC", ExpansionSet.buildDate(2023, 6, 23), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Bridge of Khazad-dûm", 350, Rarity.MYTHIC, mage.cards.e.EnsnaringBridge.class));
+        cards.add(new SetCardInfo("Bridge of Khazad-dum", 350, Rarity.MYTHIC, mage.cards.e.EnsnaringBridge.class));
         cards.add(new SetCardInfo("Sol Ring", 284, Rarity.UNCOMMON, mage.cards.s.SolRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sol Ring", 408, Rarity.MYTHIC, mage.cards.s.SolRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sol Ring", 409, Rarity.MYTHIC, mage.cards.s.SolRing.class, NON_FULL_USE_VARIOUS));
