@@ -62,10 +62,11 @@ public class VerifyCardDataTest {
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
     private static final String FULL_ABILITIES_CHECK_SET_CODE = "40K"; // check all abilities and output cards with wrong abilities texts;
-    private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
-    private static final boolean ONLY_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
+    private static final boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
-    private static final Set<String> checkedNames = new HashSet<>();
+    private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
+
+    private static final Set<String> checkedNames = new HashSet<>(); // skip already checked cards
     private static final HashMap<String, Set<String>> skipCheckLists = new HashMap<>();
     private static final Set<String> subtypesToIgnore = new HashSet<>();
     private static final String SKIP_LIST_PT = "PT";
@@ -631,7 +632,7 @@ public class VerifyCardDataTest {
                 }
 
                 // index for missing cards
-                String code = MtgJsonService.xMageToMtgJsonCodes.getOrDefault(set.getCode(), set.getCode()) + " - " + jsonCard.getRealCardName() + " - " + jsonCard.number;
+                String code = MtgJsonService.xMageToMtgJsonCodes.getOrDefault(set.getCode(), set.getCode()) + " - " + jsonCard.getNameAsFull() + " - " + jsonCard.number;
                 foundedJsonCards.add(code);
 
                 // CHECK: only lands can use full art in current version;
@@ -678,12 +679,12 @@ public class VerifyCardDataTest {
             }
 
             for (MtgJsonCard jsonCard : jsonSet.cards) {
-                String code = jsonSet.code + " - " + jsonCard.getRealCardName() + " - " + jsonCard.number;
+                String code = jsonSet.code + " - " + jsonCard.getNameAsFull() + " - " + jsonCard.number;
                 if (!foundedJsonCards.contains(code)) {
-                    if (!implementedIndex.contains(jsonCard.getRealCardName())) {
-                        warningsList.add("Warning: un-implemented card from mtgjson: " + jsonSet.code + " - " + jsonCard.getRealCardName() + " - " + jsonCard.number);
+                    if (!implementedIndex.contains(jsonCard.getNameAsFull())) {
+                        warningsList.add("Warning: un-implemented card from mtgjson: " + jsonSet.code + " - " + jsonCard.getNameAsFull() + " - " + jsonCard.number);
                     } else {
-                        errorsList.add("Error: missing card from xmage's set: " + jsonSet.code + " - " + jsonCard.getRealCardName() + " - " + jsonCard.number);
+                        errorsList.add("Error: missing card from xmage's set: " + jsonSet.code + " - " + jsonCard.getNameAsFull() + " - " + jsonCard.number);
                     }
                 }
             }
@@ -1314,19 +1315,20 @@ public class VerifyCardDataTest {
         return options != null && options.contains(value);
     }
 
-    private static boolean checkName(MtgJsonCard ref) {
-        if (!ONLY_TEXT) {
+    private static boolean wasCheckedByAbilityText(MtgJsonCard ref) {
+        // ignore already checkd cards, so no bloated logs from duplicated cards
+        if (!CHECK_ONLY_ABILITIES_TEXT) {
             return true;
         }
-        if (checkedNames.contains(ref.getRealCardName())) {
+        if (checkedNames.contains(ref.getNameAsFace())) {
             return false;
         }
-        checkedNames.add(ref.getRealCardName());
+        checkedNames.add(ref.getNameAsFace());
         return true;
     }
 
     private void checkAll(Card card, MtgJsonCard ref, int cardIndex) {
-        if (!ONLY_TEXT) {
+        if (!CHECK_ONLY_ABILITIES_TEXT) {
             checkCost(card, ref);
             checkPT(card, ref);
             checkSubtypes(card, ref);
@@ -1679,7 +1681,7 @@ public class VerifyCardDataTest {
 
     private void checkWrongAbilitiesText(Card card, MtgJsonCard ref, int cardIndex) {
         // checks missing or wrong text
-        if (!card.getExpansionSetCode().equals(FULL_ABILITIES_CHECK_SET_CODE) || !checkName(ref)) {
+        if (!card.getExpansionSetCode().equals(FULL_ABILITIES_CHECK_SET_CODE) || !wasCheckedByAbilityText(ref)) {
             return;
         }
 
@@ -1782,7 +1784,7 @@ public class VerifyCardDataTest {
 
             if (!isAbilityFounded && cardRules[i].length() > 0) {
                 isFine = false;
-                if (!ONLY_TEXT) {
+                if (!CHECK_ONLY_ABILITIES_TEXT) {
                     warn(card, "card ability can't be found in ref [" + card.getName() + ": " + cardRules[i] + "]");
                 }
                 cardRules[i] = "- " + cardRules[i];

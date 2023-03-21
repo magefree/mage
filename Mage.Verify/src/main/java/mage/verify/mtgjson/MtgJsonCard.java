@@ -33,7 +33,26 @@ public final class MtgJsonCard {
     public boolean isFullArt;
     public List<String> printings; // set codes with that card
 
-    public String getRealCardName() {
+    @Override
+    public String toString() {
+        return number + " - " + this.getNameAsFull()
+                + (this.getNameAsFull().equals(this.getNameAsFace()) ? "" : String.format(" (face: %s)", this.getNameAsFace()));
+    }
+
+    /**
+     *
+     * @return single side name like Ice from Fire // Ice
+     */
+    public String getNameAsFace() {
+        // return single side name
+        return faceName != null ? faceName : (asciiName != null ? asciiName : name);
+    }
+
+    /**
+     *
+     * @return full card name like Fire // Ice
+     */
+    public String getNameAsFull() {
         // xmage split a double faced card to two different cards, but mtgjson/scryfall uses full name,
         // so use faceName property for full name searching
         if ("transform".equals(layout)
@@ -42,7 +61,7 @@ public final class MtgJsonCard {
                 || "modal_dfc".equals(layout)
                 || "reversible_card".equals(layout) // reversible_card - example: Zndrsplt, Eye of Wisdom
                 || "meld".equals(layout)) { // meld - mtgjson uses composite names for meld cards, but scryfall uses simple face names
-            return faceName;
+            return getNameAsFace();
         }
 
         return asciiName != null ? asciiName : name;
