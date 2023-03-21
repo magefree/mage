@@ -28,7 +28,7 @@ public class ContagiousVorrac extends CardImpl {
 
         //When Contagious Vorrac enters the battlefield, look at the top four cards of your library. You may reveal a
         //land card from among them and put it into your hand. Put the rest on the bottom of your library in a random
-        //order. If you didn’t put a card into your hand this way, proliferate.
+        //order. If you didn't put a card into your hand this way, proliferate.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ContagiousVorracEffect()));
     }
 
@@ -46,7 +46,7 @@ class ContagiousVorracEffect extends LookLibraryControllerEffect {
     public ContagiousVorracEffect() {
         super(4);
         staticText = "look at the top four cards of your library. You may reveal a land card from among them and put " +
-                "it into your hand. Put the rest on the bottom of your library in a random order. If you didn’t put " +
+                "it into your hand. Put the rest on the bottom of your library in a random order. If you didn't put " +
                 "a card into your hand this way, proliferate. <i>(Choose any number of permanents and/or players, " +
                 "then give each another counter of each kind already there.)</i>";
     }
