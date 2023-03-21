@@ -530,6 +530,7 @@ public class ScryfallImageSupportCards {
             add("MOM"); // March of the Machine
             add("MOC"); // March of the Machine Commander
             add("MAT"); // March of the Machine: The Aftermath
+            add("LTR"); // Lord of the Rings: Tales of Middle-Earth
         }
     };
 
