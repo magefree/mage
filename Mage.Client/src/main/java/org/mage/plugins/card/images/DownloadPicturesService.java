@@ -904,9 +904,14 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         // check result
                         if (responseCode != 200) {
                             // show errors only on full fail (all urls were not work)
-                            errorsList.add("Image download for " + card.getName()
-                                    + (!card.getDownloadName().equals(card.getName()) ? " downloadname: " + card.getDownloadName() : "")
-                                    + " (" + card.getSet() + ") failed - responseCode: " + responseCode + " url: " + url.toString());
+                            String info = String.format("Image download failed for %s - %s%s, http code: %d, url: %s",
+                                    card.getSet(),
+                                    card.getName(),
+                                    (card.getDownloadName().equals(card.getName()) ? "" : ", cardDownloadName: " + card.getDownloadName()),
+                                    responseCode,
+                                    url
+                            );
+                            errorsList.add(info);
 
                             if (logger.isDebugEnabled()) {
                                 // Shows the returned html from the request to the web server
