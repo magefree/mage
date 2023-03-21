@@ -13,7 +13,7 @@ public final class LordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
     }
 
     private LordOfTheRingsTalesOfMiddleEarth() {
-        super("Lord of the Rings: Tales of Middle-Earth", "LTR", ExpansionSet.buildDate(2023, 6, 23), SetType.EXPANSION);
+        super("Lord of the Rings: Tales of Middle-Earth", "LTR", ExpansionSet.buildDate(2023, 6, 23), SetType.SUPPLEMENTAL);
         this.blockName = "Lord of the Rings: Tales of Middle-Earth";
         this.hasBasicLands = true;
         this.hasBoosters = false; // temporary
@@ -22,7 +22,7 @@ public final class LordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 281, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", 274, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", 275, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Lórien Brooch", 398, Rarity.RARE, mage.cards.t.TrailblazersBoots.class));
+        cards.add(new SetCardInfo("Lorien Brooch", 398, Rarity.RARE, mage.cards.t.TrailblazersBoots.class));
         cards.add(new SetCardInfo("Mountain", 278, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 279, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 272, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
