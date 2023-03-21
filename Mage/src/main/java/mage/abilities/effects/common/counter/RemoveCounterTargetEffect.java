@@ -13,6 +13,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -69,7 +70,7 @@ public class RemoveCounterTargetEffect extends OneShotEffect {
             String counterName = null;
             if (permanent.getCounters(game).size() > 1) {
                 Choice choice = new ChoiceImpl(true);
-                Set<String> choices = new HashSet<>();
+                Set<String> choices = new LinkedHashSet<>();
                 for (Counter counterOnPermanent : permanent.getCounters(game).values()) {
                     if (permanent.getCounters(game).getCount(counterOnPermanent.getName()) > 0) {
                         choices.add(counterOnPermanent.getName());

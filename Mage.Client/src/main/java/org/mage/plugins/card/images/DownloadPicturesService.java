@@ -260,7 +260,16 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
     @Override
     public void updateProgressMessage(String text) {
+        updateProgressMessage(text, 0, 0);
+    }
+
+    @Override
+    public void updateProgressMessage(String text, int progressCurrent, int progressNeed) {
         this.uiDialog.getProgressBar().setString(text);
+
+        // set values to 0 to disable progress bar
+        this.uiDialog.getProgressBar().setMaximum(progressNeed);
+        this.uiDialog.getProgressBar().setValue(progressCurrent);
     }
 
     @Override
@@ -409,7 +418,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         ? "%d of %d (%d cards/%d tokens) image downloads finished! Please close!"
                         : "%d of %d (%d cards/%d tokens) image downloads finished! Please wait! [%.1f Mb]",
                 0, imageSum, cardCount, tokenCount, mb
-        ));
+        ), 0, imageSum);
     }
 
     private static String createDownloadName(CardInfo card) {
@@ -989,7 +998,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             // downloading
             float mb = ((needDownloadCount - lastCardIndex) * selectedSource.getAverageSize()) / 1024;
             updateProgressMessage(String.format("%d of %d image downloads finished! Please wait! [%.1f Mb]",
-                    lastCardIndex, needDownloadCount, mb));
+                    lastCardIndex, needDownloadCount, mb), lastCardIndex, needDownloadCount);
         } else {
             // finished
             List<CardDownloadData> downloadedCards = Collections.synchronizedList(new ArrayList<>());

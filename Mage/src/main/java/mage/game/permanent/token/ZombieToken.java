@@ -53,6 +53,9 @@ public final class ZombieToken extends TokenImpl {
         if (getOriginalExpansionSetCode().equals("C19")) {
             this.setTokenType(RandomUtil.nextInt(2) + 1);
         }
+        if (getOriginalExpansionSetCode().equals("MIC")) {
+            this.setTokenType(1);
+        }
     }
 
     public ZombieToken(final ZombieToken token) {

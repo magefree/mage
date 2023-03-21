@@ -34,18 +34,17 @@ public final class MtgJsonCard {
     public List<String> printings; // set codes with that card
 
     public String getRealCardName() {
-        // double faces cards must be split in different cards in xmage (so use faceName instead name)
-        // for card searching
+        // xmage split a double faced card to two different cards, but mtgjson/scryfall uses full name,
+        // so use faceName property for full name searching
         if ("transform".equals(layout)
                 || "flip".equals(layout)
                 || "adventure".equals(layout)
                 || "modal_dfc".equals(layout)
-                || "reversible_card".equals(layout) // example: Zndrsplt, Eye of Wisdom
-                || "split".equals(layout)
-                || "aftermath".equals(layout)
-                || "meld".equals(layout)) { // mtgjson uses composite names for meld cards, but scryfall uses simple face names
+                || "reversible_card".equals(layout) // reversible_card - example: Zndrsplt, Eye of Wisdom
+                || "meld".equals(layout)) { // meld - mtgjson uses composite names for meld cards, but scryfall uses simple face names
             return faceName;
         }
+
         return asciiName != null ? asciiName : name;
     }
 }
