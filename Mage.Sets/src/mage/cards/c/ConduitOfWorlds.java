@@ -13,9 +13,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterNonlandCard;
 import mage.filter.common.FilterNonlandPermanentCard;
-import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -31,8 +29,8 @@ public class ConduitOfWorlds extends CardImpl {
         //You may play lands from your graveyard.
         this.addAbility(new SimpleStaticAbility(new PlayLandsFromGraveyardControllerEffect()));
 
-        //{T}: Choose target nonland permanent card in your graveyard. If you haven’t cast a spell this turn, you may
-        //cast that card. If you do, you can’t cast additional spells this turn. Activate only as a sorcery.
+        //{T}: Choose target nonland permanent card in your graveyard. If you haven't cast a spell this turn, you may
+        //cast that card. If you do, you can't cast additional spells this turn. Activate only as a sorcery.
         ActivateAsSorceryConduitOfWorldsActivatedAbility activateAsSorceryConduitOfWorldsActivatedAbility =
                 new ActivateAsSorceryConduitOfWorldsActivatedAbility(Zone.BATTLEFIELD, new ConduitOfWorldsEffect(),
                         new TapSourceCost(), new ConduitOfWorldsCondition());
@@ -127,8 +125,8 @@ class ActivateAsSorceryConduitOfWorldsActivatedAbility extends ActivatedAbilityI
 
     @Override
     public String getRule() {
-        return super.getRule() + "Choose target nonland permanent card in your graveyard. If you haven’t cast a " +
-                "spell this turn, you may cast that card. If you do, you can’t cast additional spells this turn. " +
+        return super.getRule() + "Choose target nonland permanent card in your graveyard. If you haven't cast a " +
+                "spell this turn, you may cast that card. If you do, you can't cast additional spells this turn. " +
                 "Activate only as a sorcery.";
     }
 }
@@ -137,7 +135,7 @@ class ConduitOfWorldsReplacementEffect extends ContinuousRuleModifyingEffectImpl
 
     public ConduitOfWorldsReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
-        staticText = "If you do, you can’t cast additional spells this turn.";
+        staticText = "If you do, you can't cast additional spells this turn.";
     }
 
     private ConduitOfWorldsReplacementEffect(final ConduitOfWorldsReplacementEffect effect) {
