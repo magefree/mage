@@ -19,18 +19,18 @@ public class CombatDamageByToughnessEffect extends ContinuousEffectImpl {
 
     private final FilterCreaturePermanent filter;
     private final boolean onlyControlled;
-    private final Duration duration;
+    //private final Duration duration;
 
     public CombatDamageByToughnessEffect(FilterCreaturePermanent filter, boolean onlyControlled) {
         super(Duration.WhileOnBattlefield, Layer.RulesEffects, SubLayer.NA, Outcome.Detriment);
-        this.duration = duration; = Duration.WhileOnBattlefield;
+        //this.duration = duration; = Duration.WhileOnBattlefield;
         this.filter = filter;
         this.onlyControlled = onlyControlled;
     }
      
     public CombatDamageByToughnessEffect(FilterCreaturePermanent filter, boolean onlyControlled, Duration duration) {
-        super(Duration.WhileOnBattlefield, Layer.RulesEffects, SubLayer.NA, Outcome.Detriment);
-        this.duration = duration;
+        super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Detriment);
+        //this.duration = duration;
         this.filter = filter;
         this.onlyControlled = onlyControlled;
     }
@@ -57,7 +57,7 @@ public class CombatDamageByToughnessEffect extends ContinuousEffectImpl {
         } else {
             filterPermanent = filter;
         }
-        source.duration = duration; //set to the default or the custom duration
+        //source.duration = duration; //set to the default or the custom duration
         game.getCombat().setUseToughnessForDamage(true);
         game.getCombat().addUseToughnessForDamageFilter(filterPermanent);
         return true;
