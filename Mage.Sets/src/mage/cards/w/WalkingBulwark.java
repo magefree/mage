@@ -92,7 +92,7 @@ class WalkingBulwarkEffect extends OneShotEffect {
         game.addEffect(new CanAttackAsThoughItDidntHaveDefenderTargetEffect(Duration.EndOfTurn), source);
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
         filter.add(new MageObjectReferencePredicate(permanent, game));
-        game.addEffect(new CombatDamageByToughnessEffect(filter, false), source);
+        game.addEffect(new CombatDamageByToughnessEffect(filter, false, Duration.EndOfTurn), source);
         return true;
     }
 }

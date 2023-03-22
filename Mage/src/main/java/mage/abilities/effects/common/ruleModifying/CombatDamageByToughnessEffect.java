@@ -25,6 +25,13 @@ public class CombatDamageByToughnessEffect extends ContinuousEffectImpl {
         this.filter = filter;
         this.onlyControlled = onlyControlled;
     }
+    public CombatDamageByToughnessEffect(FilterCreaturePermanent filter, boolean onlyControlled, Duration durationOfEffect) {
+        super(Layer.RulesEffects, SubLayer.NA, Outcome.Detriment);
+        this.duration = durationOfEffect;
+        this.filter = filter;
+        this.onlyControlled = onlyControlled;
+    }
+
 
     private CombatDamageByToughnessEffect(final CombatDamageByToughnessEffect effect) {
         super(effect);
