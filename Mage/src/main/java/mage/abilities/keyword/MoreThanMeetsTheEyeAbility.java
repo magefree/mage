@@ -22,7 +22,7 @@ public class MoreThanMeetsTheEyeAbility extends SpellAbility {
         this.newId();
 
         // getSecondFaceSpellAbility() already verified that second face exists
-        this.setCardName(card.getSecondCardFace().getName());
+        this.setCardName(card.getSecondCardFace().getName() + " with More Than Meets the Eye");
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
         this.spellAbilityCastMode = SpellAbilityCastMode.TRANSFORMED;
 
