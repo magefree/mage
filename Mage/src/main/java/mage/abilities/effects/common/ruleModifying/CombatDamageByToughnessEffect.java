@@ -57,7 +57,7 @@ public class CombatDamageByToughnessEffect extends ContinuousEffectImpl {
         } else {
             filterPermanent = filter;
         }
-        source.duration = this.duration; //set to the default or the custom duration
+        source.duration = duration; //set to the default or the custom duration
         game.getCombat().setUseToughnessForDamage(true);
         game.getCombat().addUseToughnessForDamageFilter(filterPermanent);
         return true;
