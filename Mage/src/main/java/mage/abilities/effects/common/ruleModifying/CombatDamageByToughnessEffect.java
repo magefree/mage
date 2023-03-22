@@ -47,7 +47,6 @@ public class CombatDamageByToughnessEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // Change the rule
         FilterCreaturePermanent filterPermanent;
         if (onlyControlled) {
             filterPermanent = filter.copy();
@@ -55,7 +54,6 @@ public class CombatDamageByToughnessEffect extends ContinuousEffectImpl {
         } else {
             filterPermanent = filter;
         }
-        //source.duration = duration; //set to the default or the custom duration
         game.getCombat().setUseToughnessForDamage(true);
         game.getCombat().addUseToughnessForDamageFilter(filterPermanent);
         return true;
