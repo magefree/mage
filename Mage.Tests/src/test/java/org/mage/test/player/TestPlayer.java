@@ -620,6 +620,9 @@ public class TestPlayer implements Player {
                             groupsForTargetHandling = null;
                         }
                     }
+                    printStart("Available for " + this.getName());
+                    printAbilities(game, this.getPlayable(game, true));
+                    printEnd();
                     Assert.fail("Can't find ability to activate command: " + command);
                 } else if (action.getAction().startsWith(ACTIVATE_MANA)) {
                     String command = action.getAction();
@@ -669,6 +672,14 @@ public class TestPlayer implements Player {
                             }
                         }
                     }
+                    printStart("Available for " + this.getName());
+                    printAbilities(game, this.getPlayable(game, true));
+                    printEnd();
+                    // TODO: enable assert and rewrite failed activateManaAbility tests
+                    //  (must use checkAbility instead multiple mana calls)
+                    //Assert.fail("Can't find mana ability to activate command: " + command);
+                    new Exception("WARNING, test must be rewritten to use checkAbility instead multiple mana calls")
+                            .printStackTrace();
                 } else if (action.getAction().startsWith("addCounters:")) {
                     String command = action.getAction();
                     command = command.substring(command.indexOf("addCounters:") + 12);
@@ -1204,9 +1215,9 @@ public class TestPlayer implements Player {
                         + a.getSourceObject(game).getIdName() + " -> "
                         + (a.toString().startsWith("Cast ") ? "[" + a.getManaCostsToPay().getText() + "] -> " : "") // printed cost, not modified
                         + (a.toString().length() > 0
-                        ? a.toString().substring(0, Math.min(20, a.toString().length()))
+                        ? a.toString().substring(0, Math.min(40, a.toString().length())) + "..."
                         : a.getClass().getSimpleName())
-                        + "..."))
+                ))
                 .sorted()
                 .collect(Collectors.toList());
 
