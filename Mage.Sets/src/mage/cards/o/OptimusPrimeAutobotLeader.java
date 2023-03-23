@@ -1,10 +1,8 @@
 package mage.cards.o;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.keyword.BolsterEffect;
@@ -35,7 +33,9 @@ public final class OptimusPrimeAutobotLeader extends CardImpl {
         this.subtype.add(SubType.VEHICLE);
         this.power = new MageInt(6);
         this.toughness = new MageInt(8);
-        this.color.setBlack(true);
+        this.color.setWhite(true);
+        this.color.setBlue(true);
+        this.color.setRed(true);
         this.nightCard = true;
 
         // Living metal

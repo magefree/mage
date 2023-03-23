@@ -30,7 +30,9 @@ public final class Transformers extends ExpansionSet {
         cards.add(new SetCardInfo("Jetfire, Air Guardian", 3, Rarity.MYTHIC, mage.cards.j.JetfireAirGuardian.class));
         cards.add(new SetCardInfo("Jetfire, Ingenious Scientist", 3, Rarity.MYTHIC, mage.cards.j.JetfireIngeniousScientist.class));
         cards.add(new SetCardInfo("Optimus Prime, Hero", 13, Rarity.MYTHIC, mage.cards.o.OptimusPrimeHero.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Optimus Prime, Hero", 27, Rarity.MYTHIC, mage.cards.o.OptimusPrimeHero.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Optimus Prime, Autobot Leader", 13, Rarity.MYTHIC, mage.cards.o.OptimusPrimeAutobotLeader.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Optimus Prime, Autobot Leader", 27, Rarity.MYTHIC, mage.cards.o.OptimusPrimeAutobotLeader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ratchet, Field Medic", 2, Rarity.MYTHIC, mage.cards.r.RatchetFieldMedic.class));
         cards.add(new SetCardInfo("Ratchet, Rescue Racer", 2, Rarity.MYTHIC, mage.cards.r.RatchetRescueRacer.class));
         cards.add(new SetCardInfo("Ultra Magnus, Armored Carrier", 15, Rarity.MYTHIC, mage.cards.u.UltraMagnusArmoredCarrier.class));
