@@ -5,10 +5,12 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.keyword.BolsterEffect;
 import mage.abilities.keyword.LivingMetalAbility;
 import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -52,6 +54,9 @@ public final class OptimusPrimeAutobotLeader extends CardImpl {
 
         // When that creature deals combat damage to a player this turn, convert Optimus Prime.
         this.addAbility(new AutobotLeaderConvertTriggeredAbility());
+
+        // Transform Ability
+        this.addAbility(new TransformAbility());
     }
 
     private OptimusPrimeAutobotLeader(final OptimusPrimeAutobotLeader card) {
@@ -65,8 +70,6 @@ public final class OptimusPrimeAutobotLeader extends CardImpl {
 }
 
 class AutobotLeaderAddTrampleTriggeredAbility extends TriggeredAbilityImpl {
-
-    private final Set<UUID> triggeringCreatures = new HashSet<>();
 
     public AutobotLeaderAddTrampleTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
@@ -91,18 +94,13 @@ class AutobotLeaderAddTrampleTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.COUNTER_ADDED) {
             Permanent creature = game.getPermanent(event.getTargetId());
-            if (creature != null && creature.isControlledBy(getControllerId()) && !triggeringCreatures.contains(creature.getId())) {
+            if (creature != null && creature.isControlledBy(getControllerId())) {
                 OptimusPrimeAutobotLeaderWatcher watcher = game.getState().getWatcher(OptimusPrimeAutobotLeaderWatcher.class);
                 if (watcher != null && watcher.getModifiedCreatures().contains(creature.getId())) {
                     getEffects().setTargetPointer(new FixedTargets(creature.getId()));
-                    triggeringCreatures.add(creature.getId());
                     return true;
                 }
             }
-        }
-
-        if (event.getType() == GameEvent.EventType.END_COMBAT_STEP) {
-            triggeringCreatures.clear();
         }
 
         return false;
@@ -117,7 +115,7 @@ class AutobotLeaderAddTrampleTriggeredAbility extends TriggeredAbilityImpl {
 class AutobotLeaderConvertTriggeredAbility extends TriggeredAbilityImpl {
 
     public AutobotLeaderConvertTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AutobotLeaderConvertEffect());
+        super(Zone.BATTLEFIELD, new TransformSourceEffect());
         this.optional = false;
     }
 
@@ -146,35 +144,13 @@ class AutobotLeaderConvertTriggeredAbility extends TriggeredAbilityImpl {
                 }
             }
         }
+
         return false;
     }
 
     @Override
     public String getRule() {
         return "When that creature deals combat damage to a player this turn, convert Optimus Prime.";
-    }
-}
-
-class AutobotLeaderConvertEffect extends OneShotEffect {
-    AutobotLeaderConvertEffect() {
-        super(Outcome.Transform);
-        this.staticText = "";
-    }
-
-    private AutobotLeaderConvertEffect(final AutobotLeaderConvertEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AutobotLeaderConvertEffect copy() {
-        return new AutobotLeaderConvertEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        permanent.transform(source, game);
-        return true;
     }
 }
 
@@ -190,7 +166,7 @@ class OptimusPrimeAutobotLeaderWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.END_TURN_STEP) {
             reset();
-            modifiedCreatures.clear();
+            return;
         }
 
         if (event.getType() != GameEvent.EventType.COUNTER_ADDED) {
@@ -198,18 +174,24 @@ class OptimusPrimeAutobotLeaderWatcher extends Watcher {
         }
 
         Card source = game.getCard(event.getSourceId());
-        Card targetCreature = game.getCard(event.getTargetId());
+        Card targetCard = game.getCard(event.getTargetId());
 
-        if (targetCreature == null || source.getSecondCardFace() == null) {
+        if (targetCard == null || source.getSecondCardFace() == null) {
             return;
         }
 
-        if (targetCreature.isCreature(game) && source.getName().contains("Optimus Prime")) {
+        if (targetCard.isCreature(game) && source.getName().equals("Optimus Prime, Hero")) {
             Permanent permanent = game.getPermanent(source.getId());
-            if (permanent.isTransformed() && permanent.isControlledBy(getControllerId())) {
-                modifiedCreatures.add(targetCreature.getId());
+            if (permanent.isTransformed() && permanent.isControlledBy(targetCard.getOwnerId())) {
+                modifiedCreatures.add(targetCard.getId());
             }
         }
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        modifiedCreatures.clear();
     }
 
     public List<UUID> getModifiedCreatures() {

@@ -7,7 +7,6 @@ import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.keyword.BolsterEffect;
 import mage.abilities.keyword.MoreThanMeetsTheEyeAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,7 +38,6 @@ public final class OptimusPrimeHero extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new BolsterEffect(1), TargetController.ANY, false));
 
         // When Optimus Prime dies, return it to the battlefield converted under its owner’s control.
-        this.addAbility(new TransformAbility());
         this.addAbility(new DiesSourceTriggeredAbility(new OptimusPrimeHeroEffect()).setTriggerPhrase("When Optimus Prime dies, "));
     }
 
@@ -78,8 +76,14 @@ class OptimusPrimeHeroEffect extends OneShotEffect {
             return false;
         }
 
-        game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
         controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+
+        game.getState().processAction(game);
+
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent.isTransformable() && !permanent.isTransformed()) {
+            permanent.transform(source, game);
+        }
 
         return true;
     }
