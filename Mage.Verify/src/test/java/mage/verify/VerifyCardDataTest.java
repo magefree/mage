@@ -964,6 +964,12 @@ public class VerifyCardDataTest {
                 cardNames.add(cardInfo.getName());
             }
 
+            // CHECK: set code must be compatible with tests commands format
+            // how-to fix: increase lookup lenth
+            if (set.getCode().length() + 1 > CardUtil.TESTS_SET_CODE_LOOKUP_LENGTH) {
+                errorsList.add("Error: set code too big for test commads lookup: " + set.getCode() + ", lookup length: " + CardUtil.TESTS_SET_CODE_LOOKUP_LENGTH);
+            }
+
             boolean containsDoubleSideCards = false;
             Map<String, String> cardNumbers = new HashMap<>();
             for (ExpansionSet.SetCardInfo cardInfo : set.getSetCardInfo()) {
@@ -987,6 +993,12 @@ public class VerifyCardDataTest {
                 // CHECK: non ascii symbols in card name and number
                 if (!CharMatcher.ascii().matchesAllOf(card.getName()) || !CharMatcher.ascii().matchesAllOf(card.getCardNumber())) {
                     errorsList.add("Error: card name or number contains non-ascii symbols: " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+                }
+
+                // CHECK: card name must not contain : symbol due set:name commands format in test engine
+                // (if it exists then decrease TESTS_SET_CODE_LOOKUP_LENGTH)
+                if (CardUtil.substring(card.getName(), CardUtil.TESTS_SET_CODE_LOOKUP_LENGTH).contains(":")) {
+                    errorsList.add("Error: card name can't contain : symbol: " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
 
                 // CHECK: card number must start with 09-aZ symbols (wrong symbol example: *123)

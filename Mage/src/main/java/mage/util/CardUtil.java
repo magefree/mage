@@ -77,6 +77,8 @@ public final class CardUtil {
             "put", "return", "exile", "discard", "sacrifice", "remove", "tap", "reveal", "pay"
     );
 
+    public static final int TESTS_SET_CODE_LOOKUP_LENGTH = 10; // search set code in commands like "set:card_name"
+
     /**
      * Increase spell or ability cost to be paid.
      *
@@ -1740,5 +1742,19 @@ public final class CardUtil {
         if (data != null && data.getClass().getName().endsWith("$KeySet")) {
             throw new IllegalArgumentException("Can't use KeySet as param, use new LinkedHashSet<>(data.keySet()) instead");
         }
+    }
+
+    /**
+     * Don't raise exception, so must be used instead standard substring calls all the time
+     *
+     * @param str
+     * @param maxLength
+     * @return
+     */
+    public static String substring(String str, int maxLength) {
+        if (str == null || str.isEmpty()) {
+            return str;
+        }
+        return str.substring(0, Math.min(str.length(), maxLength));
     }
 }
