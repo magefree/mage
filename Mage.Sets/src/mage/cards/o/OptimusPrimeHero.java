@@ -79,17 +79,8 @@ class OptimusPrimeHeroEffect extends OneShotEffect {
         }
 
         game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
-
         controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-
         game.getState().processAction(game);
-
-        /*
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent.isTransformable() && !permanent.isTransformed()) {
-            permanent.transform(source, game);
-        }
-        */
 
         return true;
     }
