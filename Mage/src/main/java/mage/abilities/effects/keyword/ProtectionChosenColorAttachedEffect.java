@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.keyword;
 
 import mage.ObjectColor;
@@ -9,8 +8,6 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.filter.FilterObject;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -53,9 +50,7 @@ public class ProtectionChosenColorAttachedEffect extends ContinuousEffectImpl {
             ObjectColor color = (ObjectColor) game.getState().getValue(attachement.getId() + "_color");
             if (color != null && (protectionAbility == null || !color.equals(chosenColor))) {
                 chosenColor = color;
-                FilterObject protectionFilter = new FilterObject(chosenColor.getDescription());
-                protectionFilter.add(new ColorPredicate(chosenColor));
-                protectionAbility = new ProtectionAbility(protectionFilter);
+                protectionAbility = ProtectionAbility.from(color);
                 if (notRemoveItself) {
                     protectionAbility.setAuraIdNotToBeRemoved(source.getSourceId());
                 }

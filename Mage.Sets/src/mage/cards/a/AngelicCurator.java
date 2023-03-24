@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -9,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterArtifactCard;
 
 /**
  *
@@ -27,7 +25,7 @@ public final class AngelicCurator extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         // Protection from artifacts
-        this.addAbility(new ProtectionAbility(new FilterArtifactCard("artifacts")));
+        this.addAbility(ProtectionAbility.from(CardType.ARTIFACT));
     }
 
     private AngelicCurator(final AngelicCurator card) {

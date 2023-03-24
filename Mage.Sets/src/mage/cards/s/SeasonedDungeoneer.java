@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterAttackingCreature;
-import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
 import mage.target.TargetPermanent;
 
@@ -26,13 +25,11 @@ import java.util.UUID;
  */
 public final class SeasonedDungeoneer extends CardImpl {
 
-    private static final FilterCard filter
-            = new FilterCreatureCard("creatures");
-    private static final FilterPermanent filter2
+    private static final FilterPermanent filter
             = new FilterAttackingCreature("attacking Cleric, Rogue, Warrior, or Wizard");
 
     static {
-        filter2.add(Predicates.or(
+        filter.add(Predicates.or(
                 SubType.CLERIC.getPredicate(),
                 SubType.ROGUE.getPredicate(),
                 SubType.WARRIOR.getPredicate(),
@@ -53,10 +50,10 @@ public final class SeasonedDungeoneer extends CardImpl {
 
         // Whenever you attack, target attacking Cleric, Rogue, Warrior, or Wizard gains protection from creatures until end of turn. It explores.
         Ability ability = new AttacksWithCreaturesTriggeredAbility(
-                new GainAbilityTargetEffect(new ProtectionAbility(filter)), 1
+                new GainAbilityTargetEffect(ProtectionAbility.from(CardType.CREATURE)), 1
         );
         ability.addEffect(new ExploreTargetEffect().setText("It explores"));
-        ability.addTarget(new TargetPermanent(filter2));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

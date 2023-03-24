@@ -12,28 +12,30 @@ import java.util.List;
  * @author North
  */
 public enum CardType {
-    ARTIFACT("Artifact", true, true),
-    CONSPIRACY("Conspiracy", false, false),
-    CREATURE("Creature", true, true),
-    DUNGEON("Dungeon", false, false),
-    ENCHANTMENT("Enchantment", true, true),
-    INSTANT("Instant", false, true),
-    LAND("Land", true, true),
-    PHENOMENON("Phenomenon", false, false),
-    PLANE("Plane", false, false),
-    PLANESWALKER("Planeswalker", true, true),
-    SCHEME("Scheme", false, false),
-    SORCERY("Sorcery", false, true),
-    TRIBAL("Tribal", false, false),
-    VANGUARD("Vanguard", false, false);
+    ARTIFACT("Artifact", "artifacts", true, true),
+    CONSPIRACY("Conspiracy", "conspiracies", false, false),
+    CREATURE("Creature", "creatures", true, true),
+    DUNGEON("Dungeon", "dungeons", false, false),
+    ENCHANTMENT("Enchantment", "enchantments", true, true),
+    INSTANT("Instant", "instants", false, true),
+    LAND("Land", "lands", true, true),
+    PHENOMENON("Phenomenon", "phenomena", false, false),
+    PLANE("Plane", "planes", false, false),
+    PLANESWALKER("Planeswalker", "planeswalkers", true, true),
+    SCHEME("Scheme", "schemes", false, false),
+    SORCERY("Sorcery", "sorceries", false, true),
+    TRIBAL("Tribal", "tribal", false, false),
+    VANGUARD("Vanguard", "vanguards", false, false);
 
     private final String text;
+    private final String plural;
     private final boolean permanentType;
     private final boolean includeInSearch; // types that can be searched/filtered by Deck Editor
     private final CardTypePredicate predicate;
 
-    CardType(String text, boolean permanentType, boolean includeInSearch) {
+    CardType(String text, String plural, boolean permanentType, boolean includeInSearch) {
         this.text = text;
+        this.plural = plural;
         this.permanentType = permanentType;
         this.includeInSearch = includeInSearch;
         this.predicate = new CardTypePredicate(this);
@@ -42,6 +44,10 @@ public enum CardType {
     @Override
     public String toString() {
         return text;
+    }
+
+    public String getPlural() {
+        return plural;
     }
 
     public static CardType fromString(String value) {

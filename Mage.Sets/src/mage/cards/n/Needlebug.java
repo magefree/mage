@@ -1,4 +1,3 @@
-
 package mage.cards.n;
 
 import java.util.UUID;
@@ -9,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterArtifactCard;
 
 /**
  *
@@ -26,7 +24,7 @@ public final class Needlebug extends CardImpl {
 
         this.addAbility(FlashAbility.getInstance());
         // Protection from artifacts
-        this.addAbility(new ProtectionAbility(new FilterArtifactCard("artifacts")));
+        this.addAbility(ProtectionAbility.from(CardType.ARTIFACT));
     }
 
     private Needlebug(final Needlebug card) {

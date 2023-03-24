@@ -18,7 +18,6 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
 
     protected Ability ability;
     protected AttachmentType attachmentType;
-    protected boolean independentEffect;
     protected String targetObjectName;
     protected boolean doesntRemoveItself = false;
 
@@ -39,16 +38,6 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
         this.targetObjectName = targetObjectName;
         this.ability = ability;
         this.attachmentType = attachmentType;
-        switch (duration) {
-            case WhileOnBattlefield:
-            case WhileInGraveyard:
-            case WhileOnStack:
-                independentEffect = false;
-                break;
-            default:
-                // such effects exist independent from the enchantment that created the effect
-                independentEffect = true;
-        }
 
         if (rule != null) {
             this.staticText = rule;
@@ -62,7 +51,6 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
         this.ability = effect.ability.copy();
         ability.newId(); // This is needed if the effect is copied e.g. by a clone so the ability can be added multiple times to permanents
         this.attachmentType = effect.attachmentType;
-        this.independentEffect = effect.independentEffect;
         this.targetObjectName = effect.targetObjectName;
         this.doesntRemoveItself = effect.doesntRemoveItself;
     }

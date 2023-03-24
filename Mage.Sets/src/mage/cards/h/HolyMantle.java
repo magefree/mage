@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -11,13 +10,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
+import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -40,8 +33,13 @@ public final class HolyMantle extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+2 and has protection from creatures.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
-        ability.addEffect(new GainAbilityAttachedEffect(new ProtectionAbility(FILTER_PERMANENT_CREATURES), AttachmentType.AURA, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(2, 2));
+        ability.addEffect(new GainAbilityAttachedEffect(
+                ProtectionAbility.from(CardType.CREATURE),
+                AttachmentType.AURA,
+                Duration.WhileOnBattlefield,
+                "and has protection from creatures"
+        ));
         this.addAbility(ability);
     }
 

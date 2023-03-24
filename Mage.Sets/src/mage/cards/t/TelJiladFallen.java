@@ -1,5 +1,3 @@
-
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -10,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterArtifactCard;
 
 /**
  *
@@ -26,8 +23,9 @@ public final class TelJiladFallen extends CardImpl {
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
+
+        this.addAbility(ProtectionAbility.from(CardType.ARTIFACT));
         this.addAbility(InfectAbility.getInstance());
-        this.addAbility(new ProtectionAbility(new FilterArtifactCard("artifacts")));
     }
 
     public TelJiladFallen (final TelJiladFallen card) {

@@ -16,6 +16,7 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetEnchantmentPermanent;
 
 import java.util.UUID;
 
@@ -36,18 +37,16 @@ public final class TattooWard extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature gets +1/+1 and has protection from enchantments. This effect doesn't remove Tattoo Ward.
-        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(
-                1, 1, Duration.WhileOnBattlefield
-        ));
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(1, 1));
         ability.addEffect(new GainAbilityAttachedEffect(
-                new ProtectionAbility(StaticFilters.FILTER_PERMANENT_ENCHANTMENTS),
+                ProtectionAbility.from(CardType.ENCHANTMENT),
                 AttachmentType.AURA, Duration.WhileOnBattlefield
         ).setDoesntRemoveItself(true));
         this.addAbility(ability);
 
         // Sacrifice Tattoo Ward: Destroy target enchantment.
         ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new SacrificeSourceCost());
-        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ENCHANTMENT));
+        ability.addTarget(new TargetEnchantmentPermanent());
         this.addAbility(ability);
 
     }

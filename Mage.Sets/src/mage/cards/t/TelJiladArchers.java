@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -9,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterArtifactCard;
 
 /**
  *
@@ -25,7 +23,7 @@ public final class TelJiladArchers extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Protection from artifacts; reach
-        this.addAbility(new ProtectionAbility(new FilterArtifactCard("artifacts")));
+        this.addAbility(ProtectionAbility.from(CardType.ARTIFACT));
         this.addAbility(ReachAbility.getInstance());
         
     }
