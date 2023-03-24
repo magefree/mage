@@ -135,6 +135,7 @@ public class KikiJikiMirrorBreakerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Body Double", 1); // {4}{U}
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Body Double", true);
+        setChoice(playerB, true); // Choose to use Body Double's ability
         setChoice(playerB, "Silvercoat Lion");
 
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}: Create a token that's a copy of target nonlegendary creature you control, except it has haste. Sacrifice it at the beginning of the next end step.");

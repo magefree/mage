@@ -21,9 +21,12 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Clever Impersonator", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Soul Warden");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Clever Impersonator");
+        setChoice(playerB, true); // Choose to use Clever Impersonator's ability
         setChoice(playerB, "Silvercoat Lion");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
@@ -295,6 +298,7 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
          */
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Clone");
+        setChoice(playerA, true); // Choose to use Clone's ability
         setChoice(playerA, "Noxious Ghoul");
         /*
          * playerA's Carnivorous Plant will get -1/-1 from Clone -> 2/3

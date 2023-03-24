@@ -74,6 +74,7 @@ public class IsochronScepterTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Lightning Bolt");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Isochron Scepter");
+        setChoice(playerA, true); // Choose to imprint
         setChoice(playerA, "Lightning Bolt");
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}, {T}:");
@@ -112,6 +113,7 @@ public class IsochronScepterTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Isochron Scepter");
+        setChoice(playerA, true); // Choose to imprint
         setChoice(playerA, "Angel's Grace");
 
         attack(2, playerB, "Dross Crocodile");
@@ -160,6 +162,7 @@ public class IsochronScepterTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Silvercoat Lion", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Isochron Scepter");
+        setChoice(playerA, true); // Choose to imprint
         setChoice(playerA, "Silence");
 
         activateAbility(2, PhaseStep.UPKEEP, playerA, "{2}, {T}:");

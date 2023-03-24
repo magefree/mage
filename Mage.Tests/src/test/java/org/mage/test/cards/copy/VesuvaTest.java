@@ -37,6 +37,7 @@ public class VesuvaTest extends CardTestPlayerBase {
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Glimmerpost");
         playLand(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Glimmerpost");
         playLand(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Vesuva");
+        setChoice(playerA, true); // Choose to use Vesuva's ability
         setChoice(playerA, "Glimmerpost");
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
@@ -60,6 +61,7 @@ public class VesuvaTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Vesuva", 1);
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Vesuva");
+        setChoice(playerA, true); // Choose to use Vesuva's ability
         setChoice(playerA, "Dark Depths");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

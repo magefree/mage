@@ -127,7 +127,9 @@ public class TheOzolithTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, FULLY_GROWN, FERTILID);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, MURDER, FERTILID);
+        setChoice(playerA, "Whenever"); // Order Ozolith triggers (it doesn't matter)
 
+        setChoice(playerA, "At the "); // Order triggered abilities (order does not matter)
         setChoice(playerA, true, 2); // Move counters at beginning of combat
 
         setStopAt(1, PhaseStep.END_TURN);

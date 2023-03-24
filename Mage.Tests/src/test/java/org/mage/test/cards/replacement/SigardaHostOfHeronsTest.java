@@ -97,10 +97,11 @@ public class SigardaHostOfHeronsTest extends CardTestPlayerBase {
         // Each opponent may return a creature card from their graveyard to the battlefield.
         // For each player who does, return a creature card from your graveyard to the battlefield.
         addCard(Zone.HAND, playerB, "Tempt with Immortality"); // sorcery {4}{B}
-        
+
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Tempt with Immortality");
-        setChoice(playerB, "Merciless Executioner");        
-        setChoice(playerA, "Sigarda, Host of Herons");
+        addTarget(playerB, "Merciless Executioner");
+        addTarget(playerA, "Sigarda, Host of Herons");
+        setChoice(playerA, true); // Choose to use Tempt with Immoratality's ability
         
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -109,5 +110,4 @@ public class SigardaHostOfHeronsTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Sigarda, Host of Herons", 0);
         assertGraveyardCount(playerB, "Merciless Executioner", 1);    
     }
-
 }

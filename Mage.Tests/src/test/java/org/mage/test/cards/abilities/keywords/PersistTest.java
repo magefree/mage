@@ -177,6 +177,7 @@ public class PersistTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clever Impersonator");
+        setChoice(playerA, true); // Choose to use Clever Impersonator's ability
         setChoice(playerA, "Glen Elendra Archmage");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Supreme Verdict");

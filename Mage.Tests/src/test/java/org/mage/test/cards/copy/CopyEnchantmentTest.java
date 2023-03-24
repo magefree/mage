@@ -23,6 +23,7 @@ public class CopyEnchantmentTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Crucible of Fire", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Copy Enchantment");
+        setChoice(playerA, true);
         setChoice(playerA, "Crucible of Fire");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

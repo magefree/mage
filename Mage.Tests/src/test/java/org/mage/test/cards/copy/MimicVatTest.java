@@ -78,10 +78,12 @@ public class MimicVatTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phyrexian Metamorph", true);
-        setChoice(playerA, true);
+        setChoice(playerA, false); // Don't pay life for the Phyrexian mana
+        setChoice(playerA, true); // Choose to use Phyrexian Metamorph's ablity
         setChoice(playerA, "Silvercoat Lion");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, {T}, Sacrifice a creature");
+        setChoice(playerA, "Silvercoat Lion");
         setChoice(playerA, true);
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}: Create a token that's a copy of a card exiled with ");

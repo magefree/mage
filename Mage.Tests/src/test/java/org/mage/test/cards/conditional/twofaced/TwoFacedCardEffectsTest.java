@@ -110,7 +110,7 @@ public class TwoFacedCardEffectsTest extends CardTestPlayerBase {
 
         // copy already transformed
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Clone");
-        playerB.addChoice("Howlpack Alpha");
+        setChoice(playerB, true); // Choose to use Clone's ability
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();

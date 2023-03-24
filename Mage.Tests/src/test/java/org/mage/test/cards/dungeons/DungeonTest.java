@@ -384,9 +384,11 @@ public class DungeonTest extends CardTestPlayerBase {
         setChoice(playerA, LOST_MINE_OF_PHANDELVER);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, "When you"); // Put triggers on stack, order doesn't matter
         setChoice(playerA, true); // Goblin Lair
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}:");
+        setChoice(playerA, "When you"); // Put triggers on stack, order doesn't matter
         setChoice(playerA, false); // Dark Pool
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);

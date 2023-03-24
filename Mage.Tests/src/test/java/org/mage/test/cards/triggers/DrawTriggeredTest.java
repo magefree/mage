@@ -66,9 +66,7 @@ public class DrawTriggeredTest extends CardTestPlayerBase {
     }
 
     /**
-     * two consecrated sphinxes do not work properly, only gives one player
-     * additional draw
-     *
+     * Two consecrated sphinxes do not work properly, only gives one player additional draw.
      */
     @Test
     public void TwoConsecratedSphinxDifferentPlayers() {
@@ -80,18 +78,27 @@ public class DrawTriggeredTest extends CardTestPlayerBase {
         // Whenever an opponent draws a card, you may draw two cards.
         addCard(Zone.BATTLEFIELD, playerB, "Consecrated Sphinx", 1);
 
-        setChoice(playerA, true);
-        setChoice(playerA, false);
-        setChoice(playerA, false);
+        setStrictChooseMode(true);
+        // Turn 2 upkeep
+        // In responce to B' draw for turn
+        setChoice(playerA, true); // Use your Sphinx's ability in responce to Player B's draw
 
-        setChoice(playerB, true);
-        setChoice(playerB, false);
+        // In response to A's Sphinx resolving (1 of the two triggers for B)
+        setChoice(playerB, "Whenever"); // Order triggers for player B triggering off of PLayer A drawing (irrelevant order)
+        setChoice(playerB, true);  // Drawing based on the first trigger
+
+        // In response to B's Sphinx resolving (Both of A's triggers, B still has one on the stack)
+        setChoice(playerA, "Whenever"); // Order triggers for player A triggering off of PLayer B drawing (irrelevant order)
+        setChoice(playerA, false); // Choose not to activate Sphinx
+        setChoice(playerA, false); // Choose not to activate Sphinx
+
+        // Resolve the final trigger for B
+        setChoice(playerB, false); // CHoose not to activate Spinx
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
         assertHandCount(playerB, 3); // 1 from start of turn 1 and 4 from Opponents draw of 2 cards
         assertHandCount(playerA, 2); // 2 from Sphinx triggered by the normal draw
-
     }
 
     @Test

@@ -2024,9 +2024,17 @@ public class TestPlayer implements Player {
             if (choice.setChoiceByAnswers(choices, true)) {
                 return true;
             }
-            // TODO: enable fail checks and fix tests
-            //Assert.fail("Wrong choice");
-            LOGGER.warn("Wrong choice");
+            StringBuilder sb = new StringBuilder(
+                    "Wrong choice. Asked to \"" + choice.getMessage() + "\"\n"
+                    + "Provided choice: " + choices.get(0) + "\n"
+            );
+            sb.append("Possible choices are:\n");
+            int i = 1;
+            for (String possibleChoice : choice.getChoices()) {
+                sb.append("\t" + i++ + ". " + possibleChoice + "\n");
+            }
+
+            Assert.fail(sb.toString());
         }
 
         String choicesInfo;
@@ -2057,10 +2065,14 @@ public class TestPlayer implements Player {
                 }
                 index++;
             }
-
-            // TODO: enable fail checks and fix tests
-            //Assert.fail("wrong choice");
-            LOGGER.warn("Wrong choice");
+            StringBuilder sb = new StringBuilder("Wrong choice for ordering replacement effects.\n");
+            sb.append("Provided choice: " + choices.get(0) + ".\n");
+            sb.append("Valid choices\n");
+            List<String> replacementEffects = new ArrayList<>(rEffects.values());
+            for (int i = 0; i < replacementEffects.size(); i++) {
+                sb.append("\t" + (i+1) + ". " + replacementEffects.get(i) + "\n");
+            }
+            Assert.fail(sb.toString());
         }
 
         this.chooseStrictModeFailed("choice", game, String.join("\n", rEffects.values()));
@@ -2267,12 +2279,12 @@ public class TestPlayer implements Player {
                 }
             }
 
-            // TODO: enable fail checks and fix tests
-            /*
             if (!target.getTargetName().equals("starting player")) {
-                Assert.fail("Wrong choice");
+                Assert.fail(
+                        "Wrong choice for: " + getInfo(target) + "\n"
+                        + "Provided choice: " + choices.get(0)
+                        );
             }
-             */
         }
 
         this.chooseStrictModeFailed("choice", game, getInfo(game.getObject(source)) + ";\n" + getInfo(target));
@@ -2673,9 +2685,13 @@ public class TestPlayer implements Player {
                     return ability;
                 }
             }
-            // TODO: enable fail checks and fix tests
-            //Assert.fail("Wrong choice");
-            LOGGER.warn("Wrong choice");
+            StringBuilder sb = new StringBuilder("Wrong choice for ordering triggered abilities.\n");
+            sb.append("Provided choice: " + choices.get(0) + ".\n");
+            sb.append("Valid choices\n");
+            for (int i = 0; i < abilities.size(); i++) {
+                sb.append("\t" + (i+1) + ". " + abilities.get(i) + "\n");
+            }
+            Assert.fail(sb.toString());
         }
 
         this.chooseStrictModeFailed("choice", game,
@@ -2696,17 +2712,13 @@ public class TestPlayer implements Player {
         }
         assertAliasSupportInChoices(false);
         if (!choices.isEmpty()) {
-            if (choices.get(0).equals("No")) {
-                choices.remove(0);
-                return false;
+            if (choices.get(0).equals("Yes") || choices.get(0).equals("No")) {
+                return choices.remove(0).equals("Yes");
             }
-            if (choices.get(0).equals("Yes")) {
-                choices.remove(0);
-                return true;
-            }
-            // TODO: enable fail checks and fix tests
-            //Assert.fail("Wrong choice");
-            LOGGER.warn("Wrong choice");
+            Assert.fail(
+                    "Wrong choice for choosing to use " + message + "\n"
+                    + "Provided choice: " + choices.get(0)
+            );
         }
 
         this.chooseStrictModeFailed("choice", game, getInfo(source, game)
@@ -4016,9 +4028,7 @@ public class TestPlayer implements Player {
                     return true;
                 }
             }
-            // TODO: enable fail checks and fix tests
-            //Assert.fail("Wrong choice");
-            LOGGER.warn("Wrong choice");
+            Assert.fail("Wrong choice: choose target");
         }
 
         this.chooseStrictModeFailed("choice", game, getInfo(target));
@@ -4388,10 +4398,7 @@ public class TestPlayer implements Player {
                     return ability;
                 }
             }
-
-            // TODO: enable fail checks and fix tests
-            //Assert.fail("Wrong choice");
-            LOGGER.warn("Wrong choice");
+            Assert.fail("Wrong choice: ability");
         }
 
         String allInfo = useable.values().stream().map(Object::toString).collect(Collectors.joining("\n"));

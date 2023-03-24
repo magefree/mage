@@ -74,6 +74,9 @@ public class VorinclexVoiceOfHungerTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerB, "Silvercoat Lion", 2);
 
+        setChoice(playerB, true); // Put Gemstone Caverns from the hand to the battlefield
+        setChoice(playerB, "Silvercoat Lion");
+
         activateManaAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}: Add");
         setChoice(playerB, "White");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Silvercoat Lion");
@@ -85,7 +88,6 @@ public class VorinclexVoiceOfHungerTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
         assertExileCount("Silvercoat Lion", 1);
         assertTapped("Gemstone Caverns", true);
-
     }
 
     @Test
@@ -102,6 +104,9 @@ public class VorinclexVoiceOfHungerTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerB, "Silvercoat Lion", 2);
 
+        setChoice(playerB, true); // Put Gemstone Caverns from the hand to the battlefield
+        setChoice(playerB, "Silvercoat Lion");
+
         activateManaAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}: Add");
         setChoice(playerB, "White");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Vorinclex, Voice of Hunger");
@@ -112,6 +117,5 @@ public class VorinclexVoiceOfHungerTest extends CardTestPlayerBase {
         assertCounterCount("Gemstone Caverns", CounterType.LUCK, 1);
         assertPermanentCount(playerB, "Vorinclex, Voice of Hunger", 1);
         assertTapped("Gemstone Caverns", true);
-
     }
 }

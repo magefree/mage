@@ -34,8 +34,9 @@ public class CleverImpersonatorTest extends CardTestPlayerBase {
         addTarget(playerA, "Silvercoat Lion");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Clever Impersonator");
-        setChoice(playerB, "Gilded Drake"); // copy the drake
-        addTarget(playerB, "Pillarfield Ox"); // exchange control with Ox
+//        setChoice(playerA, true); // Use Clever Impersonator's ability
+//        setChoice(playerB, "Gilded Drake"); // copy the drake
+//        addTarget(playerB, "Pillarfield Ox"); // exchange control with Ox
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -104,7 +105,9 @@ public class CleverImpersonatorTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Liliana, Defiant Necromancer", 1);
 
         attack(1, playerA, "Alesha, Who Smiles at Death");
+        setChoice(playerA, true);  // Choose to pay for Alesha's triggered ability
         // addTarget(playerA, "Clever Impersonator"); (Autochosen, only target)
+        setChoice(playerA, true); // Use Clever Impersonator's ability
         setChoice(playerA, "Liliana, Defiant Necromancer");
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "+2: Each player discards a card");
@@ -143,10 +146,12 @@ public class CleverImpersonatorTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clever Impersonator");
+        setChoice(playerA, true); // Use Clever Impersonator's ability
         setChoice(playerA, "Jace, Vryn's Prodigy");
         setChoice(playerA, "Jace, Vryn's Prodigy[only copy]"); // keep the copied Jace
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card");
+        setChoice(playerA, true); // Use Clever Impersonator's ability
         setChoice(playerA, "Pillarfield Ox");
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
@@ -180,10 +185,16 @@ public class CleverImpersonatorTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, impersonator);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Maze of Ith",2,  true);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, dReflection, "Forest"); // enchant a forest
+        // TODO: Something is broken with this test. Both of these choices should be using addTarget.
+        //       The second one uses setChoice for some reason
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, dReflection); // enchant a forest
+        addTarget(playerA, "Maze of Ith");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, impersonator);
+        setChoice(playerA, true); // Use Clever Impersonator's ability
         setChoice(playerA, dReflection); // have Impersonator enter as copy of Dawn's Reflection
+        setChoice(playerA, "Maze of Ith");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

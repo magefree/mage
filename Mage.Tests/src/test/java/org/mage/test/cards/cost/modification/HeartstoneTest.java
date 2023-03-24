@@ -29,6 +29,8 @@ public class HeartstoneTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{U}", "Lightning Bolt", "Lightning Bolt");
+        setChoice(playerA, "Sigil Tracer"); // Cost for copy ability
+        setChoice(playerA, "Fugitive Wizard"); // Cost for copy ability
         setChoice(playerA, true);
         addTarget(playerA, playerB);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

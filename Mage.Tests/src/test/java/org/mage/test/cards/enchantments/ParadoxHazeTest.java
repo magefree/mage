@@ -51,6 +51,7 @@ public class ParadoxHazeTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Paradox Haze", playerA);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Copy Enchantment", true);
+        setChoice(playerA, true); // Chose to use Copy Enchantment's ability
         setChoice(playerA, "Paradox Haze");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Verdant Force");
 

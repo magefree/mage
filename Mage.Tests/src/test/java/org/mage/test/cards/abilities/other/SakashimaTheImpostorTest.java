@@ -23,6 +23,7 @@ public class SakashimaTheImpostorTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Sakashima the Impostor", 4);
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Sakashima the Impostor");
+        setChoice(playerB, true);
         setChoice(playerB, "Spellstutter Sprite");
 
         setStopAt(4, PhaseStep.END_TURN);
@@ -56,6 +57,7 @@ public class SakashimaTheImpostorTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Sakashima the Impostor", 4);
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Sakashima the Impostor");
+        setChoice(playerB, true);
         setChoice(playerB, "Pawn of Ulamog");
 
         attack(4, playerB, "Sakashima the Impostor");

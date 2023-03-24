@@ -74,12 +74,15 @@ public class SacrificeLandTest extends CardTestPlayerBase {
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, soldeviExcavations);
         setChoice(playerA, "Yes");
+        setChoice(playerA, "Island");
 
         playLand(3, PhaseStep.PRECOMBAT_MAIN, playerA, heartofYavimaya);
         setChoice(playerA, "Yes");
+        setChoice(playerA, "Forest");
 
         playLand(5, PhaseStep.PRECOMBAT_MAIN, playerA, lakeOfTheDead);
         setChoice(playerA, "Yes");
+        setChoice(playerA, "Swamp");
 
         setStopAt(5, PhaseStep.PRECOMBAT_MAIN);
         execute();

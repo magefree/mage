@@ -58,10 +58,11 @@ public class CircleOfAfflictionTest extends CardTestPlayerBase {
 
         attack(2, playerB, "Silvercoat Lion");
         attack(2, playerB, "Silvercoat Lion");
-        addTarget(playerA, playerB);
+        setChoice(playerA, "Whenever"); // Set ordering of triggers on stack
         setChoice(playerA, true);
         addTarget(playerA, playerB);
         setChoice(playerA, true);
+        addTarget(playerA, playerB);
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -87,20 +88,21 @@ public class CircleOfAfflictionTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Circle of Affliction");
         setChoice(playerA, "Red");
         
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Lava Spike", playerA);        
-        addTarget(playerA, playerB);
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Lava Spike", playerA);
         setChoice(playerA, true);
+        addTarget(playerA, playerB);
 
         attack(2, playerB, "Hill Giant");
         attack(2, playerB, "Hill Giant");
-        addTarget(playerA, playerB);
+        setChoice(playerA, "Whenever"); // Set ordering of triggers on stack
         setChoice(playerA, true);
         addTarget(playerA, playerB);
         setChoice(playerA, true);
-        
+        addTarget(playerA, playerB);
+
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lava Spike", playerA);
-        addTarget(playerA, playerB);
         setChoice(playerA, true);
+        addTarget(playerA, playerB);
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
