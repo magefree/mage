@@ -622,7 +622,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             Assert.fail("Can't add card " + cardName + " - alias " + aliasName + " already exists for " + player.getName());
         }
 
-        // set code for
+        // set code for card
         String setCode = "";
         String setLookup = CardUtil.substring(cardName, CardUtil.TESTS_SET_CODE_LOOKUP_LENGTH);
         if (setLookup.contains(":")) {

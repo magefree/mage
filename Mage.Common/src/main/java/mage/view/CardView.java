@@ -273,7 +273,7 @@ public class CardView extends SimpleCardView {
      * @param storeZone        if true the card zone will be set in the zone attribute.
      */
     public CardView(Card card, Game game, boolean controlled, boolean showFaceDownCard, boolean storeZone) {
-        super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), card.getTokenSetCode(), game != null, card.getTokenDescriptor());
+        super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), game != null);
         this.originalCard = card;
 
         // no information available for face down cards as long it's not a controlled face down morph card
@@ -487,7 +487,6 @@ public class CardView extends SimpleCardView {
             } else {
                 // a created token
                 this.expansionSetCode = card.getExpansionSetCode();
-                this.tokenDescriptor = card.getTokenDescriptor();
             }
             //
             // set code and card number for token copies to get the image
@@ -600,7 +599,7 @@ public class CardView extends SimpleCardView {
     }
 
     public CardView(MageObject object, Game game) {
-        super(object.getId(), "", "0", false, "", true, "");
+        super(object.getId(), "", "0", false, true);
         this.originalCard = null;
 
         this.name = object.getName();
@@ -674,7 +673,7 @@ public class CardView extends SimpleCardView {
     }
 
     protected CardView() {
-        super(null, "", "0", false, "", true, "");
+        super(null, "", "0", false, true);
     }
 
     public CardView(EmblemView emblem) {
@@ -739,7 +738,7 @@ public class CardView extends SimpleCardView {
     }
 
     public CardView(boolean empty) {
-        super(null, "", "0", false, "", "");
+        super(null, "", "0", false);
         if (!empty) {
             throw new IllegalArgumentException("Not supported.");
         }
@@ -793,9 +792,10 @@ public class CardView extends SimpleCardView {
     }
 
     CardView(Token token, Game game) {
-        super(token.getId(), "", "0", false, "", "");
+        super(token.getId(), "", "0", false);
         this.isToken = true;
         this.id = token.getId();
+        this.expansionSetCode = token.getOriginalExpansionSetCode();
         this.name = token.getName();
         this.displayName = token.getName();
         this.displayFullName = token.getName();
@@ -814,8 +814,6 @@ public class CardView extends SimpleCardView {
         this.manaCostRightStr = "";
         this.rarity = Rarity.SPECIAL;
         this.type = token.getTokenType();
-        this.tokenDescriptor = token.getTokenDescriptor();
-        this.tokenSetCode = token.getOriginalExpansionSetCode();
     }
 
     protected final void addTargets(Targets targets, Effects effects, Ability source, Game game) {

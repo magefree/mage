@@ -42,8 +42,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected UUID ownerId;
     protected String cardNumber;
     protected String expansionSetCode;
-    protected String tokenSetCode;
-    protected String tokenDescriptor;
     protected Rarity rarity;
     protected Class<? extends Card> secondSideCardClazz;
     protected Class<? extends Card> meldsWithClazz;
@@ -121,8 +119,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         ownerId = card.ownerId;
         cardNumber = card.cardNumber;
         expansionSetCode = card.expansionSetCode;
-        tokenSetCode = card.tokenSetCode;
-        tokenDescriptor = card.tokenDescriptor;
         rarity = card.rarity;
 
         secondSideCardClazz = card.secondSideCardClazz;
@@ -376,16 +372,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public String getExpansionSetCode() {
         return expansionSetCode;
-    }
-
-    @Override
-    public String getTokenSetCode() {
-        return tokenSetCode;
-    }
-
-    @Override
-    public String getTokenDescriptor() {
-        return tokenDescriptor;
     }
 
     @Override
