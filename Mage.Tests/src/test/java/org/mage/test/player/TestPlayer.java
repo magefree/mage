@@ -4425,8 +4425,6 @@ public class TestPlayer implements Player {
     private void assertWrongChoiceUsage(String choice) {
         // TODO: enable fail checks and fix tests, it's a part of setStrictChooseMode's implementation to all tests
         //Assert.fail("Wrong choice command: " + choice);
-
         LOGGER.warn("Wrong choice command: " + choice);
-        new Exception("WARNING, test must be fixed to use correct choice commands instead [" + choice + "]").printStackTrace();
     }
 }
