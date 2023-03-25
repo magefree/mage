@@ -30,7 +30,7 @@ public final class DiregrafRebirth extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new SpellCostReductionSourceEffect(CreaturesDiedThisTurnCount.instance)
                 .setText("this spell costs {1} less to cast for each creature that died this turn")
-        ).addHint(CreaturesDiedThisTurnHint.instance).setRuleAtTheTop(true), new CreaturesDiedWatcher());
+        ).addHint(CreaturesDiedThisTurnHint.instance).setRuleAtTheTop(true));
 
         // Return target creature card from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
