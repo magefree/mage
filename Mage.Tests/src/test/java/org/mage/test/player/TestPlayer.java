@@ -2014,9 +2014,10 @@ public class TestPlayer implements Player {
         assertAliasSupportInChoices(false);
 
         if (!choices.isEmpty()) {
+            String possibleChoice = choices.get(0);
 
             // skip choices
-            if (choices.get(0).equals(CHOICE_SKIP)) {
+            if (possibleChoice.equals(CHOICE_SKIP)) {
                 choices.remove(0);
                 return true;
             }
@@ -2024,9 +2025,8 @@ public class TestPlayer implements Player {
             if (choice.setChoiceByAnswers(choices, true)) {
                 return true;
             }
-            // TODO: enable fail checks and fix tests
-            //Assert.fail("Wrong choice");
-            LOGGER.warn("Wrong choice");
+
+            assertWrongChoiceUsage(possibleChoice);
         }
 
         String choicesInfo;
@@ -2058,9 +2058,7 @@ public class TestPlayer implements Player {
                 index++;
             }
 
-            // TODO: enable fail checks and fix tests
-            //Assert.fail("wrong choice");
-            LOGGER.warn("Wrong choice");
+            assertWrongChoiceUsage(choice);
         }
 
         this.chooseStrictModeFailed("choice", game, String.join("\n", rEffects.values()));
@@ -2268,11 +2266,9 @@ public class TestPlayer implements Player {
             }
 
             // TODO: enable fail checks and fix tests
-            /*
             if (!target.getTargetName().equals("starting player")) {
-                Assert.fail("Wrong choice");
+                assertWrongChoiceUsage(choices.size() > 0 ? choices.get(0) : "empty list");
             }
-             */
         }
 
         this.chooseStrictModeFailed("choice", game, getInfo(game.getObject(source)) + ";\n" + getInfo(target));
@@ -2667,15 +2663,16 @@ public class TestPlayer implements Player {
     public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
         assertAliasSupportInChoices(false);
         if (!choices.isEmpty()) {
+            String choice = choices.get(0);
+
             for (TriggeredAbility ability : abilities) {
-                if (ability.toString().startsWith(choices.get(0))) {
+                if (ability.toString().startsWith(choice)) {
                     choices.remove(0);
                     return ability;
                 }
             }
-            // TODO: enable fail checks and fix tests
-            //Assert.fail("Wrong choice");
-            LOGGER.warn("Wrong choice");
+
+            assertWrongChoiceUsage(choice);
         }
 
         this.chooseStrictModeFailed("choice", game,
@@ -2696,17 +2693,18 @@ public class TestPlayer implements Player {
         }
         assertAliasSupportInChoices(false);
         if (!choices.isEmpty()) {
-            if (choices.get(0).equals("No")) {
+            String choice = choices.get(0);
+
+            if (choice.equals("No")) {
                 choices.remove(0);
                 return false;
             }
-            if (choices.get(0).equals("Yes")) {
+            if (choice.equals("Yes")) {
                 choices.remove(0);
                 return true;
             }
-            // TODO: enable fail checks and fix tests
-            //Assert.fail("Wrong choice");
-            LOGGER.warn("Wrong choice");
+
+            assertWrongChoiceUsage(choice);
         }
 
         this.chooseStrictModeFailed("choice", game, getInfo(source, game)
@@ -4016,9 +4014,8 @@ public class TestPlayer implements Player {
                     return true;
                 }
             }
-            // TODO: enable fail checks and fix tests
-            //Assert.fail("Wrong choice");
-            LOGGER.warn("Wrong choice");
+
+            assertWrongChoiceUsage(choices.size() > 0 ? choices.get(0) : "empty list");
         }
 
         this.chooseStrictModeFailed("choice", game, getInfo(target));
@@ -4382,16 +4379,15 @@ public class TestPlayer implements Player {
         }
 
         if (!choices.isEmpty()) {
+            String choice = choices.get(0);
             for (SpellAbility ability : useable.values()) {
-                if (ability.toString().startsWith(choices.get(0))) {
+                if (ability.toString().startsWith(choice)) {
                     choices.remove(0);
                     return ability;
                 }
             }
 
-            // TODO: enable fail checks and fix tests
-            //Assert.fail("Wrong choice");
-            LOGGER.warn("Wrong choice");
+            assertWrongChoiceUsage(choice);
         }
 
         String allInfo = useable.values().stream().map(Object::toString).collect(Collectors.joining("\n"));
@@ -4424,5 +4420,13 @@ public class TestPlayer implements Player {
 
         // non-strict mode allows computer assisted choices (for old tests compatibility only)
         return !this.strictChooseMode;
+    }
+
+    private void assertWrongChoiceUsage(String choice) {
+        // TODO: enable fail checks and fix tests, it's a part of setStrictChooseMode's implementation to all tests
+        //Assert.fail("Wrong choice command: " + choice);
+
+        LOGGER.warn("Wrong choice command: " + choice);
+        new Exception("WARNING, test must be fixed to use correct choice commands instead [" + choice + "]").printStackTrace();
     }
 }
