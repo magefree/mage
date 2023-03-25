@@ -7,6 +7,8 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
 import mage.cards.*;
+import mage.constants.PhaseStep;
+import mage.constants.TurnPhase;
 import mage.constants.Zone;
 import mage.designations.Designation;
 import mage.filter.common.FilterCreaturePermanent;
@@ -22,6 +24,8 @@ import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
 import mage.game.stack.SpellStack;
 import mage.game.stack.StackObject;
+import mage.game.turn.Phase;
+import mage.game.turn.Step;
 import mage.game.turn.Turn;
 import mage.game.turn.TurnMods;
 import mage.players.Player;
@@ -570,6 +574,19 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public Turn getTurn() {
         return turn;
+    }
+
+    public PhaseStep getTurnStepType() {
+        Turn turn = this.getTurn();
+        Phase phase = turn != null ? turn.getPhase() : null;
+        Step step = phase != null ? phase.getStep() : null;
+        return step != null ? step.getType() : null;
+    }
+
+    public TurnPhase getTurnPhaseType() {
+        Turn turn = this.getTurn();
+        Phase phase = turn != null ? turn.getPhase() : null;
+        return phase != null ? phase.getType() : null;
     }
 
     public Combat getCombat() {
