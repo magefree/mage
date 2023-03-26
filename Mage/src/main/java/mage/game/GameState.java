@@ -812,16 +812,19 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public void addSimultaneousDamage(DamagedEvent damagedEvent, Game game) {
+        // combine damages per type (player or permanent)
         boolean flag = false;
         for (GameEvent event : simultaneousEvents) {
             if ((event instanceof DamagedBatchEvent)
                     && ((DamagedBatchEvent) event).getDamageClazz().isInstance(damagedEvent)) {
+                // old batch
                 ((DamagedBatchEvent) event).addEvent(damagedEvent);
                 flag = true;
                 break;
             }
         }
         if (!flag) {
+            // new batch
             addSimultaneousEvent(DamagedBatchEvent.makeEvent(damagedEvent), game);
         }
     }

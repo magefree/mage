@@ -81,7 +81,7 @@ class OliviasAttendantsTriggeredAbility extends TriggeredAbilityImpl {
         int amount = ((DamagedBatchEvent) event)
                 .getEvents()
                 .stream()
-                .filter(e -> e.getSourceId().equals(getSourceId()))
+                .filter(e -> e.getAttackerId().equals(this.getSourceId()))
                 .mapToInt(GameEvent::getAmount)
                 .sum();
         if (amount < 1) {
