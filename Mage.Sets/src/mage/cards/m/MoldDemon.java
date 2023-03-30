@@ -19,7 +19,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class MoldDemon extends CardImpl {
     
-    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("two Swamps");
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Swamps");
     
     static{
         filter.add(SubType.SWAMP.getPredicate());

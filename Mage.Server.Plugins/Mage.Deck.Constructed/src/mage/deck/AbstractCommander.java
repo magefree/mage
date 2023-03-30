@@ -83,7 +83,7 @@ public abstract class AbstractCommander extends Constructed {
             return false;
         }
         if (commander1.getAbilities().containsClass(ChooseABackgroundAbility.class) == commander2.hasSubTypeForDeckbuilding(SubType.BACKGROUND)
-                || commander2.getAbilities().containsClass(ChooseABackgroundAbility.class) == commander1.hasSubTypeForDeckbuilding(SubType.BACKGROUND)) {
+                && commander2.getAbilities().containsClass(ChooseABackgroundAbility.class) == commander1.hasSubTypeForDeckbuilding(SubType.BACKGROUND)) {
             return true;
         }
         if (commander1.hasSubTypeForDeckbuilding(SubType.BACKGROUND)) {

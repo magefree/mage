@@ -12,6 +12,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacesCardHalf;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.AsThoughEffectType;
@@ -98,7 +100,7 @@ class AminatousAuguryEffect extends OneShotEffect {
         // put a land card from among them onto the battlefield
         TargetCard target = new TargetCard(Zone.EXILED, StaticFilters.FILTER_CARD_LAND_A);
 
-        if (cardsToCast.count(StaticFilters.FILTER_CARD_LAND, game) > 0)  {
+        if (cardsToCast.count(StaticFilters.FILTER_CARD_LAND, game) > 0) {
             if (controller.chooseUse(Outcome.PutLandInPlay, "Put a land from among the exiled cards into play?", source, game)) {
                 if (controller.choose(Outcome.PutLandInPlay, cardsToCast, target, game)) {
                     Card card = cardsToCast.get(target.getFirstTarget(), game);
@@ -110,12 +112,25 @@ class AminatousAuguryEffect extends OneShotEffect {
             }
         }
 
-        for (Card card : cardsToCast.getCards(StaticFilters.FILTER_CARD_NON_LAND, game)) {
-            AminatousAuguryCastFromExileEffect effect = new AminatousAuguryCastFromExileEffect();
-            effect.setTargetPointer(new FixedTarget(card, game));
-            game.addEffect(effect, source);
+        // TODO staticFilters must be configured to check the main card face (Ex: MDFC card like Sea Gate Restoration does not count as a land if face up)
+        for (Card card : cardsToCast.getCards(game)) {
+            // ex: Sea Gate Restoration bug #9956
+            if (card instanceof ModalDoubleFacesCard) {
+                ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
+                if (leftHalfCard != null
+                        && !leftHalfCard.isLand(game)) {
+                    AminatousAuguryCastFromExileEffect effect = new AminatousAuguryCastFromExileEffect();
+                    effect.setTargetPointer(new FixedTarget(leftHalfCard, game));
+                    game.addEffect(effect, source);
+                }
+                continue;
+            }
+            if (!card.isLand(game)) {
+                AminatousAuguryCastFromExileEffect effect = new AminatousAuguryCastFromExileEffect();
+                effect.setTargetPointer(new FixedTarget(card, game));
+                game.addEffect(effect, source);
+            }
         }
-        // TODO: I think this should be returning true
         return true;
     }
 }

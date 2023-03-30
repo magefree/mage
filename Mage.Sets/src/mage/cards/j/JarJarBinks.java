@@ -75,7 +75,7 @@ class JarJarBinksEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent jarJar = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent jarJar = source.getSourcePermanentIfItStillExists(game);
         Player player = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null && jarJar != null && opponent != null) {

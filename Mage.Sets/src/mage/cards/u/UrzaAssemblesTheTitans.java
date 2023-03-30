@@ -115,7 +115,7 @@ class UrzaAssemblesTheTitansLoyaltyEffect extends ContinuousEffectImpl {
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_PLANESWALKER,
                 source.getControllerId(), source, game
         )) {
-            permanent.incrementLoyaltyActivationsAvailable(2);
+            permanent.setLoyaltyActivationsAvailable(2);
         }
         return true;
     }

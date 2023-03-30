@@ -21,7 +21,7 @@ import mage.target.common.TargetAnyTarget;
  */
 public final class SoulSpike extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("two black cards");
+    private static final FilterCard filter = new FilterCard("black cards");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));

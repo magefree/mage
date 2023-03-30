@@ -14,6 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
@@ -30,8 +31,6 @@ import java.util.UUID;
  */
 public final class PlagueReaver extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("two cards");
-
     public PlagueReaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
 
@@ -46,7 +45,7 @@ public final class PlagueReaver extends CardImpl {
 
         // Discard two cards, Sacrifice Plague Reaver: Choose target opponent. Return Plague Reaver to the battlefield under that player's control at the beginning of their next upkeep.
         Ability ability = new SimpleActivatedAbility(
-                new PlagueReaverTriggerEffect(), new DiscardTargetCost(new TargetCardInHand(2, filter))
+                new PlagueReaverTriggerEffect(), new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS))
         );
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

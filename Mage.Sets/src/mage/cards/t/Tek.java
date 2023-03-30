@@ -37,7 +37,7 @@ public final class Tek extends CardImpl {
         filterPlains.add(SubType.PLAINS.getPredicate());
         filterIsland.add(SubType.ISLAND.getPredicate());
         filterSwamp.add(SubType.SWAMP.getPredicate());
-        filterMountain.add(SubType.MERCENARY.getPredicate());
+        filterMountain.add(SubType.MOUNTAIN.getPredicate());
         filterForest.add(SubType.FOREST.getPredicate());
     }
 

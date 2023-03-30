@@ -78,7 +78,7 @@ class ShamelessCharlatanEffect extends OneShotEffect {
         if (sourcePermanent == null || copyFromPermanent == null) {
             return false;
         }
-        game.copyPermanent(Duration.EndOfTurn, copyFromPermanent, sourcePermanent.getId(), source, new EmptyCopyApplier());
+        game.copyPermanent(Duration.WhileOnBattlefield, copyFromPermanent, sourcePermanent.getId(), source, new EmptyCopyApplier());
         return true;
     }
 }

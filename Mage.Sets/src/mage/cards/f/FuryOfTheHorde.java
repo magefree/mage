@@ -21,7 +21,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  */
 public final class FuryOfTheHorde extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("two red cards");
+    private static final FilterCard filter = new FilterCard("red cards");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));

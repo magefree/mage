@@ -39,7 +39,7 @@ public class AttacksOpponentWithMostLifeTriggeredAbility extends TriggeredAbilit
         Player defender = game.getPlayer(game.getCombat().getDefenderId(getSourceId()));
         return defender != null
                 && game
-                .getOpponents(getControllerId())
+                .getOpponents(getControllerId(), true)
                 .stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)

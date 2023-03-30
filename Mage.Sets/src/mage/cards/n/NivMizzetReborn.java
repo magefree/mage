@@ -86,10 +86,7 @@ class NivMizzetRebornEffect extends OneShotEffect {
         TargetCard target = new NivMizzetRebornTarget();
         player.choose(outcome, cards, target, game);
         Cards toHand = new CardsImpl(target.getTargets());
-        player.moveCards(toHand, Zone.HAND, source, game);
-        game.informPlayers(player.getLogName() + " moves " + CardUtil.concatWithAnd(
-                toHand.getCards(game).stream().map(MageObject::getName).collect(Collectors.toList())
-        ) + " to hand");
+        player.moveCardsToHandWithInfo(toHand, source, game, true);
         cards.retainZone(Zone.LIBRARY, game);
         player.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;

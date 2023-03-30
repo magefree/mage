@@ -34,18 +34,15 @@ import mage.util.SubTypes;
 import mage.util.functions.StackObjectCopyApplier;
 import mage.watchers.Watcher;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class StackAbility extends StackObjectImpl implements Ability {
 
-    private static final List<CardType> emptyCardType = new ArrayList<>();
-    private static final List<String> emptyString = new ArrayList<>();
+    private static final List<CardType> emptyCardType = Collections.unmodifiableList(new ArrayList<>());
+    private static final List<String> emptyString = Collections.unmodifiableList(new ArrayList<>());
     private static final ObjectColor emptyColor = new ObjectColor();
     private static final ManaCosts<ManaCost> emptyCost = new ManaCostsImpl<>();
     private static final Costs<Cost> emptyCosts = new CostsImpl<>();

@@ -216,6 +216,8 @@ public interface Permanent extends Card, Controllable {
 
     void incrementLoyaltyActivationsAvailable(int max);
 
+    void setLoyaltyActivationsAvailable(int loyaltyActivationsAvailable);
+
     void addLoyaltyUsed();
 
     boolean canLoyaltyBeUsed(Game game);

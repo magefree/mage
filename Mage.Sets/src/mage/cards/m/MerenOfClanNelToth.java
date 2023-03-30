@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.counter.AddCountersControllerEffect;
+import mage.abilities.effects.common.counter.AddCountersPlayersEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -42,9 +42,9 @@ public final class MerenOfClanNelToth extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever another creature you control dies, you get an experience counter.
-        this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersControllerEffect(
-                CounterType.EXPERIENCE.createInstance(1), false
-        ).setText("you get an experience counter"), false, filter));
+        this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersPlayersEffect(
+                CounterType.EXPERIENCE.createInstance(), TargetController.YOU
+        ), false, filter));
 
         // At the beginning of your end step, choose target creature card in your graveyard. 
         // If that card's converted mana cost is less than or equal to the number of experience counters you have, return it to the battlefield. Otherwise, put it into your hand.

@@ -125,7 +125,7 @@ enum HakimLoreweaverCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (PhaseStep.UPKEEP != game.getStep().getType()
+        if (PhaseStep.UPKEEP != game.getTurnStepType()
                 || !game.isActivePlayer(source.getControllerId())) {
             return false;
         }

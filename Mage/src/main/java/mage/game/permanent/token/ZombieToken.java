@@ -33,7 +33,8 @@ public final class ZombieToken extends TokenImpl {
                 "MIC", "VOW", "UMA", "NCC",
                 "MED", "BBD", "M19", "CM2",
                 "PCA", "AVR", "DDQ", "CN2",
-                "2X2", "CC2", "DMC", "GN3");
+                "2X2", "CC2", "DMC", "GN3",
+                "DMR");
     }
 
     @Override
@@ -51,6 +52,12 @@ public final class ZombieToken extends TokenImpl {
         }
         if (getOriginalExpansionSetCode().equals("C19")) {
             this.setTokenType(RandomUtil.nextInt(2) + 1);
+        }
+        if (getOriginalExpansionSetCode().equals("MIC")) {
+            this.setTokenType(1);
+        }
+        if (getOriginalExpansionSetCode().equals("VOW")) {
+            this.setTokenType(1);
         }
     }
 

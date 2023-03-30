@@ -69,7 +69,7 @@ class HandToHandEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getPhase().getType() == TurnPhase.COMBAT) {
+        if (game.getTurnPhaseType() == TurnPhase.COMBAT) {
             MageObject object = game.getObject(event.getSourceId());
             if (event.getType() == GameEvent.EventType.CAST_SPELL) {
                 if (object != null && object.isInstant(game)) {
