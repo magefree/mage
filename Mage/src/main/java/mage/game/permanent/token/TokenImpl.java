@@ -85,12 +85,6 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         this.tokenDescriptor = tokenDescriptor();
     }
 
-    @Override
-    public String getTokenDescriptor() {
-        this.tokenDescriptor = tokenDescriptor();
-        return tokenDescriptor;
-    }
-
     private String tokenDescriptor() {
         String strName = this.name.replaceAll("[^a-zA-Z0-9]", "");
         String strColor = this.color.toString().replaceAll("[^a-zA-Z0-9]", "");

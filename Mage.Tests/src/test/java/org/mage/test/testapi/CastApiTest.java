@@ -10,7 +10,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 /**
  * @author noxx
  */
-public class TestAPITest extends CardTestPlayerBase {
+public class CastApiTest extends CardTestPlayerBase {
 
     /**
      * Tests that it is possible to cast two instants in a row.

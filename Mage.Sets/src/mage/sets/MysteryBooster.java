@@ -3515,6 +3515,7 @@ public class MysteryBooster extends ExpansionSet {
 
     @Override
     public List<Card> create15CardBooster() {
+        // ignore special partner generation for 15 booster
         return this.createBooster();
     }
 }

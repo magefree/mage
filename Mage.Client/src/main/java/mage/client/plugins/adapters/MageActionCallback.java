@@ -677,7 +677,7 @@ public class MageActionCallback implements ActionCallback {
                     switch (enlargeMode) {
                         case COPY:
                             if (cardView instanceof PermanentView) {
-                                image = ImageCache.getImageOriginal(((PermanentView) cardView).getOriginal());
+                                image = ImageCache.getImageOriginal(((PermanentView) cardView).getOriginal()).getImage();
                             }
                             break;
                         case ALTERNATE:
@@ -686,9 +686,9 @@ public class MageActionCallback implements ActionCallback {
                                         && !cardView.isFlipCard()
                                         && !cardView.canTransform()
                                         && ((PermanentView) cardView).isCopy()) {
-                                    image = ImageCache.getImageOriginal(((PermanentView) cardView).getOriginal());
+                                    image = ImageCache.getImageOriginal(((PermanentView) cardView).getOriginal()).getImage();
                                 } else {
-                                    image = ImageCache.getImageOriginalAlternateName(cardView);
+                                    image = ImageCache.getImageOriginalAlternateName(cardView).getImage();
                                     displayCard = displayCard.getSecondCardFace();
                                 }
                             }

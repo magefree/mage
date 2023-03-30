@@ -29,6 +29,7 @@ public class CardCriteria {
     private final List<SuperType> notSupertypes;
     private final List<SubType> subtypes;
     private final List<Rarity> rarities;
+    private Boolean variousArt;
     private Boolean doubleFaced;
     private Boolean modalDoubleFaced;
     private boolean nightCard;
@@ -98,6 +99,11 @@ public class CardCriteria {
         return this;
     }
 
+    public CardCriteria variousArt(boolean variousArt) {
+        this.variousArt = variousArt;
+        return this;
+    }
+
     public CardCriteria doubleFaced(boolean doubleFaced) {
         this.doubleFaced = doubleFaced;
         return this;
@@ -144,7 +150,11 @@ public class CardCriteria {
     }
 
     public CardCriteria setCodes(String... setCodes) {
-        this.setCodes.addAll(Arrays.asList(setCodes));
+        return setCodes(Arrays.asList(setCodes));
+    }
+
+    public CardCriteria setCodes(List<String> setCodes) {
+        this.setCodes.addAll(setCodes);
         return this;
     }
 
@@ -220,6 +230,11 @@ public class CardCriteria {
         }
         if (rules != null) {
             where.like("rules", new SelectArg('%' + rules + '%'));
+            clausesCount++;
+        }
+
+        if (variousArt != null) {
+            where.eq("variousArt", variousArt);
             clausesCount++;
         }
 
@@ -424,6 +439,10 @@ public class CardCriteria {
 
     public List<Rarity> getRarities() {
         return rarities;
+    }
+
+    public Boolean getVariousArt() {
+        return variousArt;
     }
 
     public Boolean getDoubleFaced() {

@@ -48,7 +48,7 @@ public class DealsCombatDamageEquippedTriggeredAbility extends TriggeredAbilityI
                 .getEvents()
                 .stream()
                 .filter(DamagedEvent::isCombatDamage)
-                .filter(e -> e.getSourceId().equals(sourcePermanent.getAttachedTo()))
+                .filter(e -> e.getAttackerId().equals(sourcePermanent.getAttachedTo()))
                 .mapToInt(GameEvent::getAmount)
                 .sum();
         if (amount < 1) {

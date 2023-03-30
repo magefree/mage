@@ -1,4 +1,3 @@
-
 package org.mage.test.testapi;
 
 import junit.framework.TestCase;
@@ -11,10 +10,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 /**
+ * Tests the expected errors for illegal attacks/blocks or other moves when writing tests for players
+ *
  * @author Simown
  */
-// Tests the expected errors for illegal attacks/blocks or other moves when writing tests for players
-public class TestPlayerExpectedErrorsTest extends CardTestPlayerBase {
+
+public class PlayerExpectedErrorsApiTest extends CardTestPlayerBase {
 
     @Test
     public void blockerNotFoundTest() {
@@ -113,7 +114,7 @@ public class TestPlayerExpectedErrorsTest extends CardTestPlayerBase {
         try {
             execute();
             fail("Expected exception not thrown");
-        } catch(UnsupportedOperationException ue) {
+        } catch (UnsupportedOperationException ue) {
             TestCase.assertEquals("PlayerA can't block on turn 1 as it is their turn", ue.getMessage());
         }
     }
@@ -132,7 +133,7 @@ public class TestPlayerExpectedErrorsTest extends CardTestPlayerBase {
 
         try {
             execute();
-        } catch(UnsupportedOperationException ue) {
+        } catch (UnsupportedOperationException ue) {
             TestCase.assertEquals("PlayerB can't block on turn 6 as it is their turn", ue.getMessage());
         }
     }
@@ -147,7 +148,7 @@ public class TestPlayerExpectedErrorsTest extends CardTestPlayerBase {
 
         try {
             execute();
-        } catch(UnsupportedOperationException ue) {
+        } catch (UnsupportedOperationException ue) {
             TestCase.assertEquals("PlayerA can't attack on turn 2 as it is not their turn", ue.getMessage());
         }
 
@@ -163,7 +164,7 @@ public class TestPlayerExpectedErrorsTest extends CardTestPlayerBase {
 
         try {
             execute();
-        } catch(UnsupportedOperationException ue) {
+        } catch (UnsupportedOperationException ue) {
             TestCase.assertEquals("PlayerB can't attack on turn 1 as it is not their turn", ue.getMessage());
         }
 
@@ -188,7 +189,7 @@ public class TestPlayerExpectedErrorsTest extends CardTestPlayerBase {
         try {
             execute();
             fail("Expected exception not thrown");
-        } catch(UnsupportedOperationException ue) {
+        } catch (UnsupportedOperationException ue) {
             TestCase.assertEquals("Nemesis of Mortals cannot block Leafcrown Dryad it is already blocking the maximum amount of creatures.", ue.getMessage());
         }
     }
@@ -215,11 +216,11 @@ public class TestPlayerExpectedErrorsTest extends CardTestPlayerBase {
 
     @Test
     public void minimumBlockNotReachedTest() {
-    	/* Underworld Cerberus {3}{B}{3} 6/6
-    	*  Underworld Cerberus can't be blocked except by three or more creatures.
-    	*  Cards in graveyards can't be the targets of spells or abilities.
-    	*  When Underworld Cerberus dies, exile it and each player returns all creature cards from their graveyard to their hand.
-    	*/
+        /* Underworld Cerberus {3}{B}{3} 6/6
+         *  Underworld Cerberus can't be blocked except by three or more creatures.
+         *  Cards in graveyards can't be the targets of spells or abilities.
+         *  When Underworld Cerberus dies, exile it and each player returns all creature cards from their graveyard to their hand.
+         */
         addCard(Zone.BATTLEFIELD, playerA, "Underworld Cerberus");
         addCard(Zone.BATTLEFIELD, playerB, "Memnite", 2); // 1/1
 
@@ -232,7 +233,7 @@ public class TestPlayerExpectedErrorsTest extends CardTestPlayerBase {
         try {
             execute();
             fail("Expected exception not thrown");
-        } catch(UnsupportedOperationException e) {
+        } catch (UnsupportedOperationException e) {
             assertEquals("Underworld Cerberus is blocked by 2 creature(s). It has to be blocked by 3 or more.", e.getMessage());
         }
     }

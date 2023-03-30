@@ -710,6 +710,6 @@ public class CardPluginImpl implements CardPlugin {
 
     @Override
     public BufferedImage getOriginalImage(CardView card) {
-        return ImageCache.getImageOriginal(card);
+        return ImageCache.getImageOriginal(card).getImage();
     }
 }
