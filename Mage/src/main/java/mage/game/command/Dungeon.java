@@ -318,6 +318,14 @@ public class Dungeon implements CommandObject {
     }
 
     @Override
+    public int getStartingDefense() {
+    }
+
+    @Override
+    public void setStartingDefense(int startingDefense) {
+    }
+
+    @Override
     public UUID getId() {
         return this.id;
     }

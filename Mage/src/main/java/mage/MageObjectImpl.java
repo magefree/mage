@@ -40,6 +40,7 @@ public abstract class MageObjectImpl implements MageObject {
     protected MageInt power;
     protected MageInt toughness;
     protected int startingLoyalty = -1; // -2 means X, -1 means none, 0 and up is normal
+    protected int startingDefense = -1; // -2 means X, -1 means none, 0 and up is normal
     protected boolean copy;
     protected MageObject copyFrom; // copied card INFO (used to call original adjusters)
 
@@ -174,6 +175,16 @@ public abstract class MageObjectImpl implements MageObject {
     @Override
     public void setStartingLoyalty(int startingLoyalty) {
         this.startingLoyalty = startingLoyalty;
+    }
+
+    @Override
+    public int getStartingDefense() {
+        return startingDefense;
+    }
+
+    @Override
+    public void setStartingDefense(int startingDefense) {
+        this.startingDefense = startingDefense;
     }
 
     @Override

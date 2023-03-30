@@ -116,6 +116,10 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
 
     void setStartingLoyalty(int startingLoyalty);
 
+    int getStartingDefense();
+
+    void setStartingDefense(int startingDefense);
+
     // memory object copy (not mtg)
     @Override
     MageObject copy();

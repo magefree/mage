@@ -62,6 +62,7 @@ public class Spell extends StackObjectImpl implements Card {
     private boolean resolving = false;
     private UUID commandedBy = null; // for Word of Command
     private int startingLoyalty;
+    private int startingDefense;
 
     private ActivationManaAbilityStep currentActivatingManaAbilitiesStep = ActivationManaAbilityStep.BEFORE;
 
@@ -639,6 +640,16 @@ public class Spell extends StackObjectImpl implements Card {
     @Override
     public void setStartingLoyalty(int startingLoyalty) {
         this.startingLoyalty = startingLoyalty;
+    }
+
+    @Override
+    public int getStartingDefense() {
+        return startingDefense;
+    }
+
+    @Override
+    public void setStartingDefense(int startingDefense) {
+        this.startingDefense = startingDefense;
     }
 
     @Override

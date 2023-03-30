@@ -84,7 +84,7 @@ public class Emblem implements CommandObject {
             }
             if (!availableImageSetCodes.isEmpty()) {
                 if (expansionSetCodeForImage.equals("") || !availableImageSetCodes.contains(expansionSetCodeForImage)) {
-                        expansionSetCodeForImage = availableImageSetCodes.get(RandomUtil.nextInt(availableImageSetCodes.size()));
+                    expansionSetCodeForImage = availableImageSetCodes.get(RandomUtil.nextInt(availableImageSetCodes.size()));
                 }
             }
         }
@@ -231,6 +231,15 @@ public class Emblem implements CommandObject {
 
     @Override
     public void setStartingLoyalty(int startingLoyalty) {
+    }
+
+    @Override
+    public int getStartingDefense() {
+        return 0;
+    }
+
+    @Override
+    public void setStartingDefense(int startingDefense) {
     }
 
     @Override
