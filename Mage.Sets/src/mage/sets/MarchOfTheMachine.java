@@ -24,6 +24,8 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodfell Caves", 267, Rarity.COMMON, mage.cards.b.BloodfellCaves.class));
         cards.add(new SetCardInfo("Blossoming Sands", 268, Rarity.COMMON, mage.cards.b.BlossomingSands.class));
         cards.add(new SetCardInfo("Dismal Backwater", 269, Rarity.COMMON, mage.cards.d.DismalBackwater.class));
+        cards.add(new SetCardInfo("Faerie Mastermind", 58, Rarity.RARE, mage.cards.f.FaerieMastermind.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Faerie Mastermind", 352, Rarity.RARE, mage.cards.f.FaerieMastermind.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Heliod, the Radiant Dawn", 17, Rarity.RARE, mage.cards.h.HeliodTheRadiantDawn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Heliod, the Radiant Dawn", 293, Rarity.RARE, mage.cards.h.HeliodTheRadiantDawn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Heliod, the Warped Eclipse", 17, Rarity.RARE, mage.cards.h.HeliodTheWarpedEclipse.class, NON_FULL_USE_VARIOUS));
