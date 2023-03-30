@@ -1299,6 +1299,7 @@ public abstract class GameImpl implements Game {
         newWatchers.add(new BlockingOrBlockedWatcher());
         newWatchers.add(new EndStepCountWatcher());
         newWatchers.add(new CommanderPlaysCountWatcher()); // commander plays count uses in non commander games by some cards
+        newWatchers.add(new CreaturesDiedWatcher());
 
         // runtime check - allows only GAME scope (one watcher per game)
         newWatchers.forEach(watcher -> {
@@ -2147,7 +2148,7 @@ public abstract class GameImpl implements Game {
             for (Card card : commanders) {
                 Zone currentZone = this.getState().getZone(card.getId());
                 String currentZoneInfo = (currentZone == null ? "(error)" : "(" + currentZone.name() + ")");
-                if (player.chooseUse(Outcome.Benefit, "Move " + card.getIdName()
+                if (player.chooseUse(Outcome.Benefit, "Move " + card.getLogName()
                                 + " to the command zone or leave it in current zone " + currentZoneInfo + "?", "You can only make this choice once per object",
                         "Move to command", "Leave in current zone " + currentZoneInfo, null, this)) {
                     toMove.add(card);
@@ -2883,6 +2884,16 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
+    public PhaseStep getTurnStepType() {
+        return state.getTurnStepType();
+    }
+
+    @Override
+    public TurnPhase getTurnPhaseType() {
+        return state.getTurnPhaseType();
+    }
+
+    @Override
     public Phase getPhase() {
         return state.getTurn().getPhase();
     }
@@ -2919,7 +2930,7 @@ public abstract class GameImpl implements Game {
 
     @Override
     public boolean isMainPhase() {
-        return state.getTurn().getStepType() == PhaseStep.PRECOMBAT_MAIN || state.getTurn().getStepType() == PhaseStep.POSTCOMBAT_MAIN;
+        return state.getTurnStepType() == PhaseStep.PRECOMBAT_MAIN || state.getTurnStepType() == PhaseStep.POSTCOMBAT_MAIN;
     }
 
     @Override

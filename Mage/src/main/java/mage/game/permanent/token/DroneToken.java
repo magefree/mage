@@ -27,6 +27,8 @@ public class DroneToken extends TokenImpl {
         ability.addEffect(new GainLifeEffect(2).concatBy("and"));
         addAbility(ability);
 
+        setOriginalExpansionSetCode("ONE");
+
     }
 
     private DroneToken(final DroneToken token) {

@@ -56,7 +56,7 @@ public class PickChoiceDialog extends MageDialog {
         cbSpecial.setToolTipText(choice.getSpecialHint());
 
         // 2 modes: string or key-values
-        // sore data in allItems for inremental filtering
+        // store data in allItems for inremental filtering
         // http://logicbig.com/tutorials/core-java-tutorial/swing/list-filter/
         this.allItems.clear();
         if (choice.isKeyChoice()) {

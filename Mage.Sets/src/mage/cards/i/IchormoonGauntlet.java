@@ -23,6 +23,7 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -96,7 +97,7 @@ class IchormoonGauntletEffect extends OneShotEffect {
             }
         } else {
             Choice choice = new ChoiceImpl(true);
-            Set<String> choices = new HashSet<>(permanent.getCounters(game).size());
+            Set<String> choices = new LinkedHashSet<>();
             for (Counter counter : permanent.getCounters(game).values()) {
                 choices.add(counter.getName());
             }

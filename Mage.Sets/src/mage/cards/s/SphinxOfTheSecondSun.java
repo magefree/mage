@@ -64,7 +64,7 @@ class SphinxOfTheSecondSunEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TurnPhase turnPhase = game.getPhase().getType();
+        TurnPhase turnPhase = game.getTurnPhaseType();
         for (TurnMod turnMod : game.getState().getTurnMods()) {
             if ("sphinxSecondSun".equals(turnMod.getNote())
                     && turnMod.getPlayerId().equals(source.getControllerId())

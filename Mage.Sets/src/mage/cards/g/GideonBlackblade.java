@@ -32,6 +32,7 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetNonlandPermanent;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -111,7 +112,7 @@ class GideonBlackbladeToken extends TokenImpl {
 }
 
 class GideonBlackbladeEffect extends OneShotEffect {
-    private static final Set<String> choices = new HashSet();
+    private static final Set<String> choices = new LinkedHashSet<>();
 
     static {
         choices.add("Vigilance");

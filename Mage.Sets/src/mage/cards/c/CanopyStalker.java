@@ -35,7 +35,7 @@ public final class CanopyStalker extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(
                 new GainLifeEffect(CreaturesDiedThisTurnCount.instance)
                         .setText("you gain 1 life for each creature that died this turn")
-        ).addHint(CreaturesDiedThisTurnHint.instance), new CreaturesDiedWatcher());
+        ).addHint(CreaturesDiedThisTurnHint.instance));
     }
 
     private CanopyStalker(final CanopyStalker card) {

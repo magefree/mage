@@ -81,7 +81,7 @@ class MagmasaurEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourceObject = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
         if (sourceObject != null && controller != null) {
             if (controller.chooseUse(outcome, "Remove a +1/+1 counter from " + sourceObject.getLogName() + '?', source, game)) {
                 sourceObject.removeCounters(CounterType.P1P1.getName(), 1, source, game);

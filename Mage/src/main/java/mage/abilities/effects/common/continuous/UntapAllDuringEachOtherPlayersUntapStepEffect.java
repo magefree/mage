@@ -33,7 +33,7 @@ public class UntapAllDuringEachOtherPlayersUntapStepEffect extends ContinuousEff
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        if (layer == Layer.RulesEffects && game.getStep().getType() == PhaseStep.UNTAP && !source.isControlledBy(game.getActivePlayerId())) {
+        if (layer == Layer.RulesEffects && game.getTurnStepType() == PhaseStep.UNTAP && !source.isControlledBy(game.getActivePlayerId())) {
             Integer appliedTurn = (Integer) game.getState().getValue(source.getSourceId() + "appliedTurn");
             if (appliedTurn == null) {
                 appliedTurn = 0;

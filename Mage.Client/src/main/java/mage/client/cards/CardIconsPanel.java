@@ -293,7 +293,11 @@ public class CardIconsPanel extends JPanel {
         //BufferedImage iconImage = ImageManagerImpl.instance.getCardIcon(icon.getIconType().getResourceName(), this.halfSize * 2);
 
         // cached call
-        BufferedImage iconImageCached = ImageCache.getCardIconImage(icon.getIconType().getResourceName(), this.halfSize * 2, color.toString());
+        BufferedImage iconImageCached = ImageCache.getCardIconImage(
+                icon.getIconType().getResourceName(),
+                this.halfSize * 2,
+                color.toString()
+        ).getImage();
 
         if (iconImageCached != null && this.font != null) {
             BufferedImage iconImageWithText = ImageManagerImpl.deepCopy(iconImageCached); // must copy cached value before modify

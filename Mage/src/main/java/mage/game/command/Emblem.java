@@ -22,19 +22,16 @@ import mage.util.GameLog;
 import mage.util.RandomUtil;
 import mage.util.SubTypes;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author nantuko
  */
 public class Emblem implements CommandObject {
 
-    private static List<CardType> emptySet = new ArrayList<>();
-    private static ObjectColor emptyColor = new ObjectColor();
-    private static ManaCosts emptyCost = new ManaCostsImpl<>();
+    private static final List<CardType> emptyList = Collections.unmodifiableList(new ArrayList<>());
+    private static final ObjectColor emptyColor = new ObjectColor();
+    private static final ManaCosts emptyCost = new ManaCostsImpl<>();
 
     private String name = "";
     private UUID id;
@@ -159,7 +156,7 @@ public class Emblem implements CommandObject {
 
     @Override
     public List<CardType> getCardType(Game game) {
-        return emptySet;
+        return emptyList;
     }
 
     @Override

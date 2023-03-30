@@ -44,7 +44,7 @@ public final class BontuTheGlorified extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // Bontu the Glorified can't attack or block unless a creature died under your control this turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BontuTheGlorifiedRestrictionEffect()), new CreaturesDiedWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BontuTheGlorifiedRestrictionEffect()));
 
         // {1}{B}, Sacrifice another creature: Scry 1.  Each opponent loses 1 life and you gain 1 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1, false), new ManaCostsImpl<>("{1}{B}"));

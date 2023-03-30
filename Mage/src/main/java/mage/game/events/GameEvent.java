@@ -112,7 +112,12 @@ public class GameEvent implements Serializable {
          flag        true = comabat damage - other damage = false
          */
         DAMAGED_PLAYER,
+
+        /* DAMAGED_PLAYER_BATCH
+         combines all player damaged events in one single event
+         */
         DAMAGED_PLAYER_BATCH,
+
         /* DAMAGE_CAUSES_LIFE_LOSS,
          targetId    the id of the damaged player
          sourceId    sourceId of the ability which caused the damage, can be null for default events like combat
@@ -387,9 +392,15 @@ public class GameEvent implements Serializable {
          flag        not used for this event
          */
         OPTION_USED,
+
         DAMAGE_PERMANENT,
         DAMAGED_PERMANENT,
+
+        /*  DAMAGED_PERMANENT_BATCH
+         combine all permanent damage events to single event
+         */
         DAMAGED_PERMANENT_BATCH,
+
         DESTROY_PERMANENT,
         /* DESTROY_PERMANENT_BY_LEGENDARY_RULE
          targetId    id of the permanent to destroy

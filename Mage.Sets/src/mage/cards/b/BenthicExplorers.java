@@ -71,7 +71,7 @@ class BenthicExplorersCost extends CostImpl {
 
     public BenthicExplorersCost(TargetLandPermanent target) {
         this.target = target;
-        this.text = "Untap " + CardUtil.numberToText(target.getMaxNumberOfTargets(), "") + ' ' + target.getTargetName();
+        this.text = "Untap " + target.getDescription();
     }
 
     public BenthicExplorersCost(final BenthicExplorersCost cost) {
