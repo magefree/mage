@@ -24,6 +24,10 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodfell Caves", 267, Rarity.COMMON, mage.cards.b.BloodfellCaves.class));
         cards.add(new SetCardInfo("Blossoming Sands", 268, Rarity.COMMON, mage.cards.b.BlossomingSands.class));
         cards.add(new SetCardInfo("Dismal Backwater", 269, Rarity.COMMON, mage.cards.d.DismalBackwater.class));
+        cards.add(new SetCardInfo("Heliod, the Radiant Dawn", 17, Rarity.RARE, mage.cards.h.HeliodTheRadiantDawn.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Heliod, the Radiant Dawn", 293, Rarity.RARE, mage.cards.h.HeliodTheRadiantDawn.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Heliod, the Warped Eclipse", 17, Rarity.RARE, mage.cards.h.HeliodTheWarpedEclipse.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Heliod, the Warped Eclipse", 293, Rarity.RARE, mage.cards.h.HeliodTheWarpedEclipse.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fairgrounds Trumpeter", 335, Rarity.COMMON, mage.cards.f.FairgroundsTrumpeter.class));
         cards.add(new SetCardInfo("Forest", 281, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 278, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
