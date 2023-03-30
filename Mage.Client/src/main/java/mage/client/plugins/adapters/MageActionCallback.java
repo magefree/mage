@@ -672,12 +672,12 @@ public class MageActionCallback implements ActionCallback {
                     popupContainer.setVisible(true);
 
                     // popup hint mode
-                    Image image = null;
+                    Image image = cardPanel.getImage();
                     CardView displayCard = cardPanel.getOriginal();
                     switch (enlargeMode) {
                         case COPY:
                             if (cardView instanceof PermanentView) {
-                                image = ImageCache.getImageOriginal(((PermanentView) cardView).getOriginal());
+                                image = ImageCache.getImageOriginal(((PermanentView) cardView).getOriginal()).getImage();
                             }
                             break;
                         case ALTERNATE:
@@ -686,9 +686,9 @@ public class MageActionCallback implements ActionCallback {
                                         && !cardView.isFlipCard()
                                         && !cardView.canTransform()
                                         && ((PermanentView) cardView).isCopy()) {
-                                    image = ImageCache.getImageOriginal(((PermanentView) cardView).getOriginal());
+                                    image = ImageCache.getImageOriginal(((PermanentView) cardView).getOriginal()).getImage();
                                 } else {
-                                    image = ImageCache.getImageOriginalAlternateName(cardView);
+                                    image = ImageCache.getImageOriginalAlternateName(cardView).getImage();
                                     displayCard = displayCard.getSecondCardFace();
                                 }
                             }
@@ -696,12 +696,9 @@ public class MageActionCallback implements ActionCallback {
                         default:
                             break;
                     }
-                    if (image == null) {
-                        image = cardPanel.getImage();
-                    }
+
                     // shows the card in the popup Container
                     displayCardInfo(displayCard, image, (BigCard) cardPreviewPane);
-
                 } else {
                     logger.warn("No Card preview Pane in Mage Frame defined. Card: " + cardView.getName());
                 }

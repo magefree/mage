@@ -96,7 +96,7 @@ class GarthOneEyeEffect extends OneShotEffect {
             return false;
         }
         Set<String> alreadyChosen = getAlreadyChosen(game, source);
-        Set<String> choices = new HashSet<>(names);
+        Set<String> choices = new LinkedHashSet<>(names);
         choices.removeAll(alreadyChosen);
         String chosen;
         switch (choices.size()) {

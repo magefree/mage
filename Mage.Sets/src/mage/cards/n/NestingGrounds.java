@@ -25,6 +25,7 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -93,7 +94,7 @@ class NestingGroundsEffect extends OneShotEffect {
             return false;
         }
 
-        Set<String> possibleChoices = new HashSet<>(fromPermanent.getCounters(game).keySet());
+        Set<String> possibleChoices = new LinkedHashSet<>(fromPermanent.getCounters(game).keySet());
         if (possibleChoices.size() == 0) {
             return false;
         }

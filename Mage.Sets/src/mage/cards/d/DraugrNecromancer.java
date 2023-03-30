@@ -77,6 +77,7 @@ class DraugrNecromancerReplacementEffect extends ReplacementEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null
                 || permanent == null
+                || (permanent instanceof PermanentToken)
                 || !controller.hasOpponent(permanent.getControllerId(), game)) {
             return false;
         }

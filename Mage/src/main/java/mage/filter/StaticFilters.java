@@ -450,6 +450,12 @@ public final class StaticFilters {
         FILTER_CONTROLLED_PERMANENT_LANDS.setLockedFilter(true);
     }
 
+    public static final FilterPermanent FILTER_CONTROLLED_PERMANENT_CREATURE_OR_PLANESWALKER = new FilterControlledCreatureOrPlaneswalkerPermanent("creature or planeswalker you control");
+
+    static {
+        FILTER_CONTROLLED_PERMANENT_CREATURE_OR_PLANESWALKER.setLockedFilter(true);
+    }
+
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_PLANESWALKER = new FilterControlledPlaneswalkerPermanent("planeswalker you control");
 
     static {
@@ -468,6 +474,12 @@ public final class StaticFilters {
     static {
         FILTER_OPPONENTS_PERMANENT_NON_LAND.add(TargetController.OPPONENT.getControllerPredicate());
         FILTER_OPPONENTS_PERMANENT_NON_LAND.setLockedFilter(true);
+    }
+
+    public static final FilterNoncreaturePermanent FILTER_PERMANENT_NON_CREATURE = new FilterNoncreaturePermanent();
+
+    static {
+        FILTER_PERMANENT_NON_CREATURE.setLockedFilter(true);
     }
 
     public static final FilterCreaturePermanent FILTER_OPPONENTS_PERMANENT_CREATURE = new FilterOpponentsCreaturePermanent();
@@ -782,21 +794,21 @@ public final class StaticFilters {
         FILTER_SPELL_CREATURE.setLockedFilter(true);
     }
 
-    public static final FilterSpell FILTER_SPELL_NON_CREATURE = (FilterSpell) new FilterSpell("noncreature spell");
+    public static final FilterSpell FILTER_SPELL_NON_CREATURE = new FilterSpell("noncreature spell");
 
     static {
         FILTER_SPELL_NON_CREATURE.add(Predicates.not(CardType.CREATURE.getPredicate()));
         FILTER_SPELL_NON_CREATURE.setLockedFilter(true);
     }
 
-    public static final FilterSpell FILTER_SPELLS_NON_CREATURE = (FilterSpell) new FilterSpell("noncreature spells");
+    public static final FilterSpell FILTER_SPELLS_NON_CREATURE = new FilterSpell("noncreature spells");
 
     static {
         FILTER_SPELLS_NON_CREATURE.add(Predicates.not(CardType.CREATURE.getPredicate()));
         FILTER_SPELLS_NON_CREATURE.setLockedFilter(true);
     }
 
-    public static final FilterSpell FILTER_SPELL_A_NON_CREATURE = (FilterSpell) new FilterSpell("a noncreature spell");
+    public static final FilterSpell FILTER_SPELL_A_NON_CREATURE = new FilterSpell("a noncreature spell");
 
     static {
         FILTER_SPELL_A_NON_CREATURE.add(Predicates.not(CardType.CREATURE.getPredicate()));

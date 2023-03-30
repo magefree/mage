@@ -20,7 +20,7 @@ public final class PhyrexianGolemToken extends TokenImpl {
         power = new MageInt(3);
         toughness = new MageInt(3);
 
-        availableImageSetCodes = Arrays.asList("MM2", "NPH", "SOM", "MH1", "M20", "CMR", "MM3", "2X2");
+        availableImageSetCodes = Arrays.asList("MM2", "NPH", "SOM", "MH1", "M20", "CMR", "MM3", "2X2", "ONE");
     }
 
     public PhyrexianGolemToken(final PhyrexianGolemToken token) {

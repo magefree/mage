@@ -73,7 +73,7 @@ class ZursWeirdingReplacementEffect extends ReplacementEffectImpl {
             return false;
         }
         // Reveals it instead
-        player.revealCards(sourceObject.getIdName() + " next draw of " + player.getName() + " (" + game.getTurnNum() + '|' + game.getPhase().getType() + ')', new CardsImpl(card), game);
+        player.revealCards(sourceObject.getIdName() + " next draw of " + player.getName() + " (" + game.getTurnNum() + '|' + game.getTurnPhaseType() + ')', new CardsImpl(card), game);
 
         // Then any other player may pay 2 life. If a player does, put that card into its owner's graveyard
         String message = "Pay 2 life to put " + card.getLogName() + " into " + player.getLogName() + " graveyard?";

@@ -17,7 +17,7 @@ public enum BeforeBlockersAreDeclaredCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game.getStep().getType().isBefore(PhaseStep.DECLARE_BLOCKERS);
+        return game.getTurnStepType().isBefore(PhaseStep.DECLARE_BLOCKERS);
     }
 
     @Override

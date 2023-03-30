@@ -1851,7 +1851,7 @@ public class ScryfallImageSupportTokens {
             put ("DMR/Cat/2", "https://api.scryfall.com/cards/tdmr/8/en?format=image");
             put ("DMR/Construct", "https://api.scryfall.com/cards/tdmr/14/en?format=image");
             put ("DMR/Elemental", "https://api.scryfall.com/cards/tdmr/6/en?format=image");
-            put ("DMR/ELephant", "https://api.scryfall.com/cards/tdmr/9/en?format=image");
+            put ("DMR/Elephant", "https://api.scryfall.com/cards/tdmr/9/en?format=image");
             put ("DMR/Goblin", "https://api.scryfall.com/cards/tdmr/7/en?format=image");
             put ("DMR/Griffin", "https://api.scryfall.com/cards/tdmr/2/en?format=image");
             put ("DMR/Insect", "https://api.scryfall.com/cards/tdmr/10/en?format=image");
@@ -1860,6 +1860,45 @@ public class ScryfallImageSupportTokens {
             put ("DMR/Sheep", "https://api.scryfall.com/cards/tdmr/12/en?format=image");
             put ("DMR/Squirrel", "https://api.scryfall.com/cards/tdmr/13/en?format=image");
             put ("DMR/Zombie", "https://api.scryfall.com/cards/tdmr/5/en?format=image");
+
+            // ONE
+            put ("ONE/Cat", "https://api.scryfall.com/cards/tone/1/en?format=image");
+            put ("ONE/Drone", "https://api.scryfall.com/cards/tone/8/en?format=image");
+            put ("ONE/Emblem Koth, Fire of Resistance", "https://api.scryfall.com/cards/tone/13/en?format=image");
+            put ("ONE/Phyrexian Beast", "https://api.scryfall.com/cards/tone/6/en?format=image");
+            put ("ONE/Phyrexian Goblin", "https://api.scryfall.com/cards/tone/3/en?format=image");
+            put ("ONE/Phyrexian Golem", "https://api.scryfall.com/cards/tone/10/en?format=image");
+            put ("ONE/Phyrexian Horror/1", "https://api.scryfall.com/cards/tone/7/en?format=image");
+            put ("ONE/Phyrexian Horror/2", "https://api.scryfall.com/cards/tone/4/en?format=image");
+            put ("ONE/Phyrexian Mite/1", "https://api.scryfall.com/cards/tone/11/en?format=image");
+            put ("ONE/Phyrexian Mite/2", "https://api.scryfall.com/cards/tone/12/en?format=image");
+            put ("ONE/Rebel", "https://api.scryfall.com/cards/tone/5/en?format=image");
+            put ("ONE/Samurai", "https://api.scryfall.com/cards/tone/2/en?format=image");
+            put ("ONE/The Hollow Sentinel", "https://api.scryfall.com/cards/tone/9/en?format=image");
+
+            // ONC
+            put ("ONC/Angel/1", "https://api.scryfall.com/cards/tonc/2/en?format=image");
+            put ("ONC/Angel/2", "https://api.scryfall.com/cards/tonc/3/en?format=image");
+            put ("ONC/Beast", "https://api.scryfall.com/cards/tonc/13/en?format=image");
+            put ("ONC/Bird", "https://api.scryfall.com/cards/tonc/4/en?format=image");
+            put ("ONC/Dragon", "https://api.scryfall.com/cards/tonc/10/en?format=image");
+            put ("ONC/Eldrazi", "https://api.scryfall.com/cards/tonc/1/en?format=image");
+            put ("ONC/Elephant", "https://api.scryfall.com/cards/tonc/14/en?format=image");
+            put ("ONC/Goblin", "https://api.scryfall.com/cards/tonc/11/en?format=image");
+            put ("ONC/Golem", "https://api.scryfall.com/cards/tonc/18/en?format=image");
+            put ("ONC/Human", "https://api.scryfall.com/cards/tonc/5/en?format=image");
+            put ("ONC/Human Soldier", "https://api.scryfall.com/cards/tonc/6/en?format=image");
+            put ("ONC/Kobolds of Kher Keep", "https://api.scryfall.com/cards/tonc/12/en?format=image");
+            put ("ONC/Myr", "https://api.scryfall.com/cards/tonc/19/en?format=image");
+            put ("ONC/Phyrexian Germ", "https://api.scryfall.com/cards/tonc/23/en?format=image");
+            put ("ONC/Phyrexian Horror", "https://api.scryfall.com/cards/tonc/20/en?format=image");
+            put ("ONC/Phyrexian Insect", "https://api.scryfall.com/cards/tonc/15/en?format=image");
+            put ("ONC/Phyrexian Wurm", "https://api.scryfall.com/cards/tonc/16/en?format=image");
+            put ("ONC/Soldier/1", "https://api.scryfall.com/cards/tonc/7/en?format=image");
+            put ("ONC/Soldier/2", "https://api.scryfall.com/cards/tonc/8/en?format=image");
+            put ("ONC/Soldier/3", "https://api.scryfall.com/cards/tonc/17/en?format=image");
+            put ("ONC/Spirit", "https://api.scryfall.com/cards/tonc/9/en?format=image");
+            put ("ONC/Thopter", "https://api.scryfall.com/cards/tonc/21/en?format=image");
 
             // generate supported sets
             supportedSets.clear();

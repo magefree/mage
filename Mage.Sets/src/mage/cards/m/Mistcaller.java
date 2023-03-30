@@ -14,7 +14,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
-import mage.watchers.common.CreatureWasCastWatcher;
+import mage.watchers.common.PermanentWasCastWatcher;
 
 import java.util.UUID;
 
@@ -35,7 +35,7 @@ public final class Mistcaller extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 new ContainmentPriestReplacementEffect(),
                 new SacrificeSourceCost()
-        ), new CreatureWasCastWatcher());
+        ), new PermanentWasCastWatcher());
     }
 
     private Mistcaller(final Mistcaller card) {
@@ -98,8 +98,8 @@ class ContainmentPriestReplacementEffect extends ReplacementEffectImpl {
                     card = card.getSecondCardFace();
                 }
                 if (card != null && card.isCreature(game)) { // TODO: Bestow Card cast as Enchantment probably not handled correctly
-                    CreatureWasCastWatcher watcher = game.getState().getWatcher(CreatureWasCastWatcher.class);
-                    return watcher != null && !watcher.wasCreatureCastThisTurn(event.getTargetId());
+                    PermanentWasCastWatcher watcher = game.getState().getWatcher(PermanentWasCastWatcher.class);
+                    return watcher != null && !watcher.wasPermanentCastThisTurn(event.getTargetId());
                 }
             }
         }

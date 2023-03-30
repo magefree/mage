@@ -2,6 +2,7 @@
 package mage.cards.j;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
@@ -53,7 +54,7 @@ public final class JodahsAvenger extends CardImpl {
 
 class JodahsAvengerEffect extends ContinuousEffectImpl {
 
-    private static final Set<String> choices = new HashSet<>();
+    private static final Set<String> choices = new LinkedHashSet<>();
     private Ability gainedAbility;
 
     static {

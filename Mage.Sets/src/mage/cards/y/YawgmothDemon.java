@@ -76,7 +76,7 @@ class YawgmothDemonEffect extends OneShotEffect {
                 }
             }
             if (!artifactSacrificed) {
-                Permanent sourceObject = (Permanent) source.getSourceObjectIfItStillExists(game);
+                Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
                 if (sourceObject != null) {
                     sourceObject.tap(source, game);
                     controller.damage(2, source.getSourceId(), source, game);

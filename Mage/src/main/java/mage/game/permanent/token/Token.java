@@ -17,8 +17,6 @@ public interface Token extends MageObject {
     @Override
     Token copy();
 
-    String getTokenDescriptor();
-
     String getDescription();
 
     List<UUID> getLastAddedTokenIds();

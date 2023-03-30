@@ -31,7 +31,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class DarkSupplicant extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("three Clerics you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Clerics you control");
 
     static {
         filter.add(SubType.CLERIC.getPredicate());

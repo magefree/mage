@@ -31,7 +31,9 @@ public final class PhyrexianDragonEngine extends CardImpl {
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
+
         this.meldsWithClazz = mage.cards.m.MishraClaimedByGix.class;
+        this.meldsToClazz = mage.cards.m.MishraLostToPhyrexia.class;
 
         // Double strike
         this.addAbility(DoubleStrikeAbility.getInstance());

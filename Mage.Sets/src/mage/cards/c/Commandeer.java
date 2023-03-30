@@ -26,7 +26,7 @@ import mage.target.common.TargetCardInHand;
  */
 public final class Commandeer extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("two blue cards");
+    private static final FilterCard filter = new FilterCard("blue cards");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
