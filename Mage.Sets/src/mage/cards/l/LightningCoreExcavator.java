@@ -11,9 +11,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import java.util.UUID;
-import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -33,7 +33,7 @@ public final class LightningCoreExcavator extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetAnyTarget(new FilterCreaturePlayerOrPlaneswalker("any target")));
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 

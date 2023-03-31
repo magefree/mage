@@ -11,13 +11,14 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
+import mage.filter.common.FilterAnyTarget;
+import mage.filter.common.FilterPermanentOrPlayer;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetPermanentOrPlayer;
 
 import java.util.UUID;
 
@@ -52,8 +53,8 @@ public final class WrathfulRedDragon extends CardImpl {
 
 class WrathfulRedDragonTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final FilterCreaturePlayerOrPlaneswalker filter
-            = new FilterCreaturePlayerOrPlaneswalker("any target that isn't a Dragon");
+    private static final FilterPermanentOrPlayer filter
+            = new FilterAnyTarget("any target that isn't a Dragon");
 
     static {
         filter.getPermanentFilter().add(Predicates.not(SubType.DRAGON.getPredicate()));
@@ -61,7 +62,7 @@ class WrathfulRedDragonTriggeredAbility extends TriggeredAbilityImpl {
 
     WrathfulRedDragonTriggeredAbility() {
         super(Zone.BATTLEFIELD, new WrathfulRedDragonEffect());
-        this.addTarget(new TargetAnyTarget(filter));
+        this.addTarget(new TargetPermanentOrPlayer(filter));
     }
 
     private WrathfulRedDragonTriggeredAbility(final WrathfulRedDragonTriggeredAbility ability) {

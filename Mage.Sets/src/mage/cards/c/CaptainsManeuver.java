@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
@@ -11,34 +9,36 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
+import mage.filter.common.FilterPermanentOrPlayer;
 import mage.filter.predicate.other.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetPermanentOrPlayer;
+
+import java.util.UUID;
 
 /**
- *
  * @author sprangg
  */
 public final class CaptainsManeuver extends CardImpl {
+
+    private static final FilterPermanentOrPlayer filter
+            = new FilterCreaturePlayerOrPlaneswalker("creature, planeswalker or player (damage is redirected from)");
+    private static final FilterPermanentOrPlayer filter2
+            = new FilterCreaturePlayerOrPlaneswalker("another creature, planeswalker or player (damage is redirected to)");
+
+    static {
+        filter2.getPlayerFilter().add(new AnotherTargetPredicate(2));
+        filter2.getPermanentFilter().add(new AnotherTargetPredicate(2));
+    }
 
     public CaptainsManeuver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{R}{W}");
 
         //The next X damage that would be dealt to target creature, planeswalker, or player this turn is dealt to another target creature, planeswalker, or player instead.
         this.getSpellAbility().addEffect(new CaptainsManeuverEffect());
-
-        FilterCreaturePlayerOrPlaneswalker filter = new FilterCreaturePlayerOrPlaneswalker("creature, planeswalker or player (damage is redirected from)");        
-        TargetAnyTarget target = new TargetAnyTarget(filter);
-        target.setTargetTag(1);
-        this.getSpellAbility().addTarget(target);
- 
-        FilterCreaturePlayerOrPlaneswalker filter2 = new FilterCreaturePlayerOrPlaneswalker("another creature, planeswalker or player (damage is redirected to)");     
-        filter2.getPlayerFilter().add(new AnotherTargetPredicate(2));
-        filter2.getPermanentFilter().add(new AnotherTargetPredicate(2));
-        TargetAnyTarget target2 = new TargetAnyTarget(filter2);
-        target2.setTargetTag(2);
-        this.getSpellAbility().addTarget(target2);
+        this.getSpellAbility().addTarget(new TargetPermanentOrPlayer(filter).setTargetTag(1));
+        this.getSpellAbility().addTarget(new TargetPermanentOrPlayer(filter2).setTargetTag(2));
     }
 
     private CaptainsManeuver(final CaptainsManeuver card) {

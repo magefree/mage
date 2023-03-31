@@ -3,15 +3,16 @@ package mage.target.common;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
+import mage.filter.common.FilterAnyTarget;
+import mage.filter.common.FilterPermanentOrPlayer;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class TargetAnyTargetAmount extends TargetPermanentOrPlayerAmount {
 
-    private static final FilterCreaturePlayerOrPlaneswalker defaultFilter
-            = new FilterCreaturePlayerOrPlaneswalker("targets");
+    private static final FilterPermanentOrPlayer defaultFilter
+            = new FilterAnyTarget("targets");
 
     public TargetAnyTargetAmount(int amount) {
         this(amount, 0);
