@@ -143,9 +143,9 @@ class KingNarfisBetrayalSecondEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ExileZone zone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
-        if (zone != null) {
-            for (Card card : zone.getCards(game)) {
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
+        if (exileZone != null) {
+            for (Card card : exileZone.getCards(game)) {
                 CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, true);
             }
         }

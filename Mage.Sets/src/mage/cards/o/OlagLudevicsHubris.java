@@ -9,6 +9,7 @@ import mage.abilities.effects.common.CopyEffect;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.StaticFilters;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -67,11 +68,17 @@ class OlagLudevicsHubrisEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Cards cards = new CardsImpl(game.getExile().getExileZone(CardUtil.getExileZoneId(game, source)));
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+        if (exileZone == null) {
+            return false;
+        }
+
+        Cards cards = new CardsImpl(exileZone);
         cards.removeIf(uuid -> !game.getCard(uuid).isCreature(game));
         if (cards.isEmpty()) {
             return false;
         }
+
         Card copyFromCard = getCard(cards, source, game);
         if (copyFromCard == null) {
             return false;
