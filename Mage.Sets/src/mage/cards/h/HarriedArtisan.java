@@ -1,7 +1,7 @@
 package mage.cards.h;
 
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -32,7 +32,7 @@ public final class HarriedArtisan extends CardImpl {
 
         // {3}{W/P}: Transform Harried Artisan. Activate only as a sorcery.
         this.addAbility(new TransformAbility());
-        this.addAbility(new SimpleActivatedAbility(new TransformSourceEffect(), new ManaCostsImpl<>("{3}{W/P}")));
+        this.addAbility(new ActivateAsSorceryActivatedAbility(new TransformSourceEffect(), new ManaCostsImpl<>("{3}{W/P}")));
     }
 
     private HarriedArtisan(final HarriedArtisan card) {
