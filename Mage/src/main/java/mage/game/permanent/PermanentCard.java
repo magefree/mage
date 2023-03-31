@@ -62,6 +62,7 @@ public class PermanentCard extends PermanentImpl {
         power = card.getPower().copy();
         toughness = card.getToughness().copy();
         startingLoyalty = card.getStartingLoyalty();
+        startingDefense = card.getStartingDefense();
         copyFromCard(card, game);
         // if temporary added abilities to the spell/card exist, you need to add it to the permanent derived from that card
         Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(card.getId());

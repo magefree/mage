@@ -33,7 +33,6 @@ import mage.game.permanent.token.SquirrelToken;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
@@ -482,7 +481,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public void setLoyaltyActivationsAvailable(int setActivations) {
-        if(this.loyaltyActivationsAvailable < setActivations) {
+        if (this.loyaltyActivationsAvailable < setActivations) {
             this.loyaltyActivationsAvailable = setActivations;
         }
     }
@@ -991,6 +990,15 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 removeCounters(CounterType.LOYALTY.getName(), countersToRemove, source, game);
             }
         }
+        if (this.isBattle(game)) {
+            int defense = getCounters(game).getCount(CounterType.DEFENSE);
+            int countersToRemove = Math.min(actualDamage, defense);
+            if (attacker != null && markDamage) {
+                markDamage(CounterType.DEFENSE.createInstance(countersToRemove), attacker, false);
+            } else {
+                removeCounters(CounterType.DEFENSE.getName(), countersToRemove, source, game);
+            }
+        }
         DamagedEvent damagedEvent = new DamagedPermanentEvent(this.getId(), attackerId, this.getControllerId(), actualDamage, combat);
         damagedEvent.setExcess(actualDamage - lethal);
         game.fireEvent(damagedEvent);
@@ -1134,6 +1142,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (this.isPlaneswalker(game)) {
             lethal = Math.min(lethal, this.getCounters(game).getCount(CounterType.LOYALTY));
         }
+        if (this.isBattle(game)) {
+            lethal = Math.min(lethal, this.getCounters(game).getCount(CounterType.DEFENSE));
+        }
         return lethal;
     }
 
@@ -1194,6 +1205,17 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             }
             if (countersToAdd > 0) {
                 this.addCounters(CounterType.LOYALTY.createInstance(countersToAdd), source, game);
+            }
+        }
+        if (this.isBattle(game)) {
+            int defense;
+            if (this.getStartingDefense() == -2) {
+                defense = source.getManaCostsToPay().getX();
+            } else {
+                defense = this.getStartingDefense();
+            }
+            if (defense > 0) {
+                this.addCounters(CounterType.DEFENSE.createInstance(defense), source, game);
             }
         }
         if (!fireEvent) {

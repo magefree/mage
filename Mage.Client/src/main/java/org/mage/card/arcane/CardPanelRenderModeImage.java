@@ -803,10 +803,14 @@ public class CardPanelRenderModeImage extends CardPanel {
             ptText1.setText(getGameCard().getPower());
             ptText2.setText("/");
             ptText3.setText(CardRendererUtils.getCardLifeWithDamage(getGameCard()));
-        } else if (card.isPlanesWalker()) {
+        } else if (card.isPlaneswalker()) {
             ptText1.setText("");
             ptText2.setText("");
             ptText3.setText(getGameCard().getLoyalty());
+        } else if (card.isBattle()) {
+            ptText1.setText("");
+            ptText2.setText("");
+            ptText3.setText(getGameCard().getDefense());
         } else {
             ptText1.setText("");
             ptText2.setText("");

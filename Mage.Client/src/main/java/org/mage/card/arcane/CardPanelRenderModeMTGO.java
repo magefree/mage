@@ -62,6 +62,7 @@ public class CardPanelRenderModeMTGO extends CardPanel {
                 && a.getPower().equals(b.getPower())
                 && a.getToughness().equals(b.getToughness())
                 && a.getLoyalty().equals(b.getLoyalty())
+                && a.getDefense().equals(b.getDefense())
                 && 0 == a.getColor().compareTo(b.getColor())
                 && a.getCardTypes().equals(b.getCardTypes())
                 && a.getSubTypes().equals(b.getSubTypes())
@@ -128,6 +129,7 @@ public class CardPanelRenderModeMTGO extends CardPanel {
             sb.append(this.view.getPower());
             sb.append(this.view.getToughness());
             sb.append(this.view.getLoyalty());
+            sb.append(this.view.getDefense());
             sb.append(this.view.getColor().toString());
             sb.append(this.view.getType());
             sb.append(this.view.getExpansionSetCode());

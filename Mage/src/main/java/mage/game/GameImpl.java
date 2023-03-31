@@ -675,8 +675,8 @@ public abstract class GameImpl implements Game {
                 spell = (Spell) obj;
             } else if (obj != null) {
                 logger.error(String.format(
-                        "getSpellOrLKIStack got non-spell id %s correlating to non-spell object %s.",
-                        obj.getClass().getName(), obj.getName()),
+                                "getSpellOrLKIStack got non-spell id %s correlating to non-spell object %s.",
+                                obj.getClass().getName(), obj.getName()),
                         new Throwable()
                 );
             }

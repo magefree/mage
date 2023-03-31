@@ -88,6 +88,7 @@ public class PermanentToken extends PermanentImpl {
         this.supertype.addAll(token.getSuperType());
         this.subtype.copyFrom(token.getSubtype(game));
         this.startingLoyalty = token.getStartingLoyalty();
+        this.startingDefense = token.getStartingDefense();
         // workaround for entersTheBattlefield replacement effects
         if (this.abilities.containsClass(ChangelingAbility.class)) {
             this.subtype.setIsAllCreatureTypes(true);

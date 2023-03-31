@@ -70,6 +70,7 @@ public abstract class MageObjectImpl implements MageObject {
         power = object.power.copy();
         toughness = object.toughness.copy();
         startingLoyalty = object.startingLoyalty;
+        startingDefense = object.startingDefense;
         abilities = object.abilities.copy();
         this.cardType.addAll(object.cardType);
         this.subtype.copyFrom(object.subtype);

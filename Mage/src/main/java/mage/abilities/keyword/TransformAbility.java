@@ -67,6 +67,7 @@ public class TransformAbility extends SimpleStaticAbility {
         permanent.getPower().setModifiedBaseValue(sourceCard.getPower().getValue());
         permanent.getToughness().setModifiedBaseValue(sourceCard.getToughness().getValue());
         permanent.setStartingLoyalty(sourceCard.getStartingLoyalty());
+        permanent.setStartingDefense(sourceCard.getStartingDefense());
     }
 
     public static Card transformCardSpellStatic(Card mainSide, Card otherSide, Game game) {

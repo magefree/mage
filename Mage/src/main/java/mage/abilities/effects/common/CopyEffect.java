@@ -133,6 +133,7 @@ public class CopyEffect extends ContinuousEffectImpl {
         permanent.getPower().setModifiedBaseValue(copyFromObject.getPower().getModifiedBaseValue());
         permanent.getToughness().setModifiedBaseValue(copyFromObject.getToughness().getModifiedBaseValue());
         permanent.setStartingLoyalty(copyFromObject.getStartingLoyalty());
+        permanent.setStartingDefense(copyFromObject.getStartingDefense());
         if (copyFromObject instanceof Permanent) {
             Permanent targetPermanent = (Permanent) copyFromObject;
             permanent.setTransformed(targetPermanent.isTransformed());
