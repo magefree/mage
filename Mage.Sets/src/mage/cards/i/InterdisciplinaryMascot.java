@@ -31,7 +31,7 @@ public final class InterdisciplinaryMascot extends CardImpl {
         this.addAbility(new ConvokeAbility());
 
         // Ward {3}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{3}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{3}"), false));
 
         // When Interdisciplinary Mascot enters the battlefield, look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library in a random order.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(
