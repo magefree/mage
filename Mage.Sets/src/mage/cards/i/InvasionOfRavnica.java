@@ -5,6 +5,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -45,6 +46,7 @@ public final class InvasionOfRavnica extends CardImpl {
         )));
 
         // When Invasion of Ravnica enters the battlefield, exile target nonland permanent an opponent controls that isn't exactly two colors.
+        this.addAbility(new TransformAbility());
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetEffect());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

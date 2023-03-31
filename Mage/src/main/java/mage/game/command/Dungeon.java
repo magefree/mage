@@ -319,6 +319,7 @@ public class Dungeon implements CommandObject {
 
     @Override
     public int getStartingDefense() {
+        return 0;
     }
 
     @Override
