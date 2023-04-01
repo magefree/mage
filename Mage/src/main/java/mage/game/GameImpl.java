@@ -1409,7 +1409,7 @@ public abstract class GameImpl implements Game {
                         if (card != null) {
                             return String.format("Face down card reveal: %s had %s",
                                     (player == null ? "Unknown" : player.getLogName()),
-                                    permanent.getLogName());
+                                    card.getLogName());
                         } else {
                             return null;
                         }
