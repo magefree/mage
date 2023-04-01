@@ -4,7 +4,7 @@ import mage.cards.Card;
 
 import java.util.Set;
 
-public class DeckBuildUtils {
+public final class DeckBuildUtils {
 
     public static int[] landCountSuggestion(int deckSize, Set<Card> deckList) {
         /*
@@ -24,24 +24,27 @@ public class DeckBuildUtils {
                 }
             }
             int total = white + blue + black + red + green;
-            if (total > 0) {
-                plains = Math.round(landsNeeded * ((float) white / (float) total));
-                total -= white;
-                landsNeeded -= plains;
-
-                islands = Math.round(landsNeeded * ((float) blue / (float) total));
-                total -= blue;
-                landsNeeded -= islands;
-
-                swamps = Math.round(landsNeeded * ((float) black / (float) total));
-                total -= black;
-                landsNeeded -= swamps;
-
-                mountains = Math.round(landsNeeded * ((float) red / (float) total));
-                landsNeeded -= mountains;
-
-                forests = landsNeeded;
+            // If no colored mana symbols, distribute evenly
+            if (total == 0) {
+                total = 5; white = 1; blue = 1; black = 1; red = 1;
             }
+
+            plains = Math.round(landsNeeded * ((float) white / (float) total));
+            total -= white;
+            landsNeeded -= plains;
+
+            islands = Math.round(landsNeeded * ((float) blue / (float) total));
+            total -= blue;
+            landsNeeded -= islands;
+
+            swamps = Math.round(landsNeeded * ((float) black / (float) total));
+            total -= black;
+            landsNeeded -= swamps;
+
+            mountains = Math.round(landsNeeded * ((float) red / (float) total));
+            landsNeeded -= mountains;
+
+            forests = landsNeeded;
         }
         return new int[] {plains, islands, swamps, mountains, forests};
     }
