@@ -211,12 +211,20 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
         return getCardType(game).contains(CardType.TRIBAL);
     }
 
+    default boolean isBattle() {
+        return isBattle(null);
+    }
+
+    default boolean isBattle(Game game) {
+        return getCardType(game).contains(CardType.BATTLE);
+    }
+
     default boolean isPermanent() {
-        return isCreature() || isArtifact() || isPlaneswalker() || isEnchantment() || isLand();
+        return isCreature() || isArtifact() || isPlaneswalker() || isEnchantment() || isLand() || isBattle();
     }
 
     default boolean isPermanent(Game game) {
-        return isCreature(game) || isArtifact(game) || isPlaneswalker(game) || isEnchantment(game) || isLand(game);
+        return isCreature(game) || isArtifact(game) || isPlaneswalker(game) || isEnchantment(game) || isLand(game) || isBattle(game);
     }
 
     default boolean isLegendary() {
