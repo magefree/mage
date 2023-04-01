@@ -30,6 +30,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Change the Equation", 50, Rarity.UNCOMMON, mage.cards.c.ChangeTheEquation.class));
         cards.add(new SetCardInfo("Chrome Host Hulk", 188, Rarity.UNCOMMON, mage.cards.c.ChromeHostHulk.class));
         cards.add(new SetCardInfo("City on Fire", 135, Rarity.RARE, mage.cards.c.CityOnFire.class));
+        cards.add(new SetCardInfo("Copper Host Crusher", 181, Rarity.UNCOMMON, mage.cards.c.CopperHostCrusher.class));
         cards.add(new SetCardInfo("Cragsmasher Yeti", 333, Rarity.COMMON, mage.cards.c.CragsmasherYeti.class));
         cards.add(new SetCardInfo("Deadly Derision", 99, Rarity.COMMON, mage.cards.d.DeadlyDerision.class));
         cards.add(new SetCardInfo("Dismal Backwater", 269, Rarity.COMMON, mage.cards.d.DismalBackwater.class));
