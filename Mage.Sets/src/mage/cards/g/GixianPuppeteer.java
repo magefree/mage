@@ -4,7 +4,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.common.DrawSecondCardTriggeredAbility;
+import mage.abilities.common.DrawCardTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
@@ -41,7 +41,7 @@ public final class GixianPuppeteer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you draw your second card each turn, each opponent loses 2 life and you gain 2 life.
-        Ability ability = new DrawSecondCardTriggeredAbility(new LoseLifeOpponentsEffect(2), false);
+        Ability ability = new DrawCardTriggeredAbility(new LoseLifeOpponentsEffect(2), false, 2);
         ability.addEffect(new GainLifeEffect(2).concatBy("and"));
         this.addAbility(ability);
 

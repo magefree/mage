@@ -1,7 +1,7 @@
 package mage.cards.f;
 
 import mage.MageInt;
-import mage.abilities.common.DrawSecondCardTriggeredAbility;
+import mage.abilities.common.DrawCardTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -33,8 +33,8 @@ public final class FaerieVandal extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever you draw your second card each turn, put a +1/+1 counter on Faerie Vandal.
-        this.addAbility(new DrawSecondCardTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false
+        this.addAbility(new DrawCardTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, 2
         ));
     }
 
