@@ -9,11 +9,14 @@ public final class DeckBuildUtils {
     public static int[] landCountSuggestion(int deckSize, Set<Card> deckList) {
         /*
         Returns the number of basic lands suggested to complete a deck
+        as an array of five ints: plains, islands, swamps, mountains, forests
+        Total number of lands always sufficient to reach deckSize
          */
         int plains = 0, islands = 0, swamps = 0, mountains = 0, forests = 0;
         int landsNeeded = deckSize - deckList.size();
         if (landsNeeded > 0) {
             int white = 0, blue = 0, black = 0, red = 0, green = 0;
+            // Rudimentary algorithm that simply counts number of cards with each mana symbol
             for (Card cd : deckList) {
                 for (String s : cd.getManaCostSymbols()) {
                     if (s.contains("W")) white++;
