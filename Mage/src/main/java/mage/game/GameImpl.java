@@ -675,8 +675,8 @@ public abstract class GameImpl implements Game {
                 spell = (Spell) obj;
             } else if (obj != null) {
                 logger.error(String.format(
-                        "getSpellOrLKIStack got non-spell id %s correlating to non-spell object %s.",
-                        obj.getClass().getName(), obj.getName()),
+                                "getSpellOrLKIStack got non-spell id %s correlating to non-spell object %s.",
+                                obj.getClass().getName(), obj.getName()),
                         new Throwable()
                 );
             }
@@ -1398,6 +1398,27 @@ public abstract class GameImpl implements Game {
             logger.debug("END of gameId: " + this.getId());
             endTime = new Date();
             state.endGame();
+
+            // inform players about face down cards
+            state.getBattlefield().getAllPermanents()
+                    .stream()
+                    .filter(permanent -> permanent.isFaceDown(this))
+                    .map(permanent -> {
+                        Player player = this.getPlayer(permanent.getControllerId());
+                        Card card = permanent.getMainCard();
+                        if (card != null) {
+                            return String.format("Face down card reveal: %s had %s",
+                                    (player == null ? "Unknown" : player.getLogName()),
+                                    permanent.getLogName());
+                        } else {
+                            return null;
+                        }
+                    })
+                    .filter(Objects::nonNull)
+                    .sorted()
+                    .forEach(this::informPlayers);
+
+            // cancel all player dialogs/feedbacks
             for (Player player : state.getPlayers().values()) {
                 player.abort();
             }

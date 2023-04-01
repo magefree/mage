@@ -26,7 +26,7 @@ public class PermanentView extends CardView {
     private final boolean summoningSickness;
     private final int damage;
     private List<UUID> attachments;
-    private final CardView original; // original card before transforms and modifications
+    private final CardView original; // original card before transforms and modifications (null for opponents face down cards)
     private final boolean copy;
     private final String nameOwner; // only filled if != controller
     private final boolean controlled;
@@ -51,13 +51,17 @@ public class PermanentView extends CardView {
             attachments.addAll(permanent.getAttachments());
         }
         this.attachedTo = permanent.getAttachedTo();
+
+        // show face down cards to all players at the game end
+        boolean showFaceDownInfo = controlled || game.hasEnded();
+
         if (isToken()) {
             original = new CardView(((PermanentToken) permanent).getToken().copy(), (Game) null);
             original.expansionSetCode = permanent.getExpansionSetCode();
             expansionSetCode = permanent.getExpansionSetCode();
         } else {
-            if (card != null) {
-                // original may not be face down
+            if (card != null && showFaceDownInfo) {
+                // face down card must be hidden from opponent, but shown on game end for all
                 original = new CardView(card.copy(), (Game) null);
             } else {
                 original = null;
@@ -71,10 +75,7 @@ public class PermanentView extends CardView {
             if (permanent.isCopy() && permanent.isFlipCard()) {
                 this.alternateName = permanent.getFlipCardName();
             } else {
-                if (controlled // controller may always know
-                        || (!morphed && !manifested)) { // others don't know for morph or transformed cards
-                    this.alternateName = original.getName();
-                }
+                this.alternateName = original.getName();
             }
         }
         if (permanent.getOwnerId() != null && !permanent.getOwnerId().equals(permanent.getControllerId())) {
@@ -88,8 +89,9 @@ public class PermanentView extends CardView {
             this.nameOwner = "";
         }
 
+        // add info for face down permanents
         if (permanent.isFaceDown(game) && card != null) {
-            if (controlled) {
+            if (showFaceDownInfo) {
                 // must be a morphed or manifested card
                 for (Ability permanentAbility : permanent.getAbilities(game)) {
                     if (permanentAbility.getWorksFaceDown()) {
