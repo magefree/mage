@@ -23,6 +23,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import mage.util.RandomUtil;
 
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -125,7 +126,7 @@ class ContractualSafeguardSecondEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        Set<String> counterTypes = permanent.getCounters(game).keySet();
+        Set<String> counterTypes = new LinkedHashSet<>(permanent.getCounters(game).keySet());
         String chosenType;
         switch (counterTypes.size()) {
             case 0:
