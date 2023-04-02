@@ -4,10 +4,15 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author TheElk801
  */
 public final class MarchOfTheMachine extends ExpansionSet {
+
+    private static final List<String> unfinished = Arrays.asList("Chrome Host Seedshark", "Elesh Norn", "The Argent Etchings", "Essence of Orthodoxy", "Gift of Completion", "Glissa, Herald of Predation", "Injector Crocodile", "Merciless Repurposing", "Norn's Inquisitor", "Sculpted Perfection", "Sunfall", "Tiller of Flesh", "Traumatic Revelation");
 
     private static final MarchOfTheMachine instance = new MarchOfTheMachine();
 
@@ -89,6 +94,8 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Yargle and Multani", 256, Rarity.RARE, mage.cards.y.YargleAndMultani.class));
         cards.add(new SetCardInfo("Zephyr Winder", 328, Rarity.COMMON, mage.cards.z.ZephyrWinder.class));
         cards.add(new SetCardInfo("Zhalfirin Lancer", 45, Rarity.UNCOMMON, mage.cards.z.ZhalfirinLancer.class));
+
+        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is implemented
     }
 
 //    @Override
