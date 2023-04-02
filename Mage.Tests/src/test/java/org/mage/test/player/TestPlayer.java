@@ -2322,8 +2322,7 @@ public class TestPlayer implements Player {
             if (target.getOriginalTarget() instanceof TargetPlayer
                     || target.getOriginalTarget() instanceof TargetAnyTarget
                     || target.getOriginalTarget() instanceof TargetCreatureOrPlayer
-                    || target.getOriginalTarget() instanceof TargetPermanentOrPlayer
-                    || target.getOriginalTarget() instanceof TargetDefender) {
+                    || target.getOriginalTarget() instanceof TargetPermanentOrPlayer) {
                 for (String targetDefinition : targets) {
                     if (!targetDefinition.startsWith("targetPlayer=")) {
                         continue;
@@ -2346,7 +2345,6 @@ public class TestPlayer implements Player {
                     || (target.getOriginalTarget() instanceof TargetPermanentOrPlayer)
                     || (target.getOriginalTarget() instanceof TargetAnyTarget)
                     || (target.getOriginalTarget() instanceof TargetCreatureOrPlayer)
-                    || (target.getOriginalTarget() instanceof TargetDefender)
                     || (target.getOriginalTarget() instanceof TargetPermanentOrSuspendedCard)) {
                 for (String targetDefinition : targets) {
                     if (targetDefinition.startsWith("targetPlayer=")) {
@@ -2375,9 +2373,6 @@ public class TestPlayer implements Player {
                         }
                         if (filter instanceof FilterPermanentOrPlayer) {
                             filter = ((FilterPermanentOrPlayer) filter).getPermanentFilter();
-                        }
-                        if (filter instanceof FilterPlaneswalkerOrPlayer) {
-                            filter = ((FilterPlaneswalkerOrPlayer) filter).getFilterPermanent();
                         }
                         if (filter instanceof FilterPermanentOrSuspendedCard) {
                             filter = ((FilterPermanentOrSuspendedCard) filter).getPermanentFilter();

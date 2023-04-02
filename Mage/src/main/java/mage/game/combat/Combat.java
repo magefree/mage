@@ -231,7 +231,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             addAttackerToCombat(creatureId, possibleDefenders.iterator().next(), game);
             return true;
         } else {
-            TargetDefender target = new TargetDefender(possibleDefenders, creatureId);
+            TargetDefender target = new TargetDefender(possibleDefenders);
             target.setNotTarget(true);
             target.setRequired(true);
             player.chooseTarget(Outcome.Damage, target, null, game);
@@ -357,8 +357,8 @@ public class Combat implements Serializable, Copyable<Combat> {
             if (game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, attackingPlayerId, attackingPlayerId))
                     || (!canBand && !canBandWithOther)
                     || !player.chooseUse(Outcome.Benefit,
-                            (isBanded ? "Band " + attacker.getLogName()
-                                    + " with another " : "Form a band with " + attacker.getLogName() + " and an ")
+                    (isBanded ? "Band " + attacker.getLogName()
+                            + " with another " : "Form a band with " + attacker.getLogName() + " and an ")
                             + "attacking creature?", null, game)) {
                 break;
             }
@@ -511,9 +511,9 @@ public class Combat implements Serializable, Copyable<Combat> {
                 player.declareAttacker(creature.getId(), defendersToChooseFrom.iterator().next(), game, false);
                 continue;
             }
-            TargetDefender target = new TargetDefender(defendersToChooseFrom, creature.getId());
+            TargetDefender target = new TargetDefender(defendersToChooseFrom);
             target.setRequired(true);
-            target.setTargetName("planeswalker or player for " + creature.getLogName() + " to attack (must attack effect)");
+            target.setTargetName("permanent or player for " + creature.getLogName() + " to attack (must attack effect)");
             if (player.chooseTarget(Outcome.Damage, target, null, game)) {
                 player.declareAttacker(creature.getId(), target.getFirstTarget(), game, false);
             }
@@ -595,7 +595,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      * Handle the blocker selection process
      *
      * @param blockController player that controls how to block, if null the
-     * defender is the controller
+     *                        defender is the controller
      * @param game
      */
     public void selectBlockers(Player blockController, Ability source, Game game) {
@@ -1413,7 +1413,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      * @param playerId
      * @param game
      * @param solveBanding check whether also add creatures banded with
-     * attackerId
+     *                     attackerId
      */
     public void addBlockingGroup(UUID blockerId, UUID attackerId, UUID playerId, Game game, boolean solveBanding) {
         Permanent blocker = game.getPermanent(blockerId);
