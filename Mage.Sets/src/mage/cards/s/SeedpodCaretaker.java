@@ -51,6 +51,7 @@ public final class SeedpodCaretaker extends CardImpl {
 
         // * Transform target Incubator token you control.
         ability.addMode(new Mode(new SeedpodCaretakerEffect()).addTarget(new TargetPermanent(filter)));
+        this.addAbility(ability);
     }
 
     private SeedpodCaretaker(final SeedpodCaretaker card) {
