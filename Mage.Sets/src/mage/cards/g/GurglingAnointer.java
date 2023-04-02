@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.common.DrawSecondCardTriggeredAbility;
+import mage.abilities.common.DrawCardTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -52,7 +52,7 @@ public final class GurglingAnointer extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever you draw your second card each turn, put a +1/+1 counter on Gurgling Anointer.
-        this.addAbility(new DrawSecondCardTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
+        this.addAbility(new DrawCardTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, 2));
 
         // When Gurgling Anointer dies, return another target creature card with mana value less than or equal to Gurgling Anointer's power from your graveyard to the battlefield.
         Ability ability = new DiesSourceTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect());

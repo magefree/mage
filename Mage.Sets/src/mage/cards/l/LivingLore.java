@@ -156,11 +156,11 @@ class LivingLoreCastEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source, -2));
-        return controller != null
-                && exileZone != null
-                && !exileZone.isEmpty()
-                && CardUtil.castSpellWithAttributesForFree(
-                controller, source, game, new CardsImpl(exileZone), StaticFilters.FILTER_CARD
-        );
+        if (controller == null || exileZone == null || exileZone.isEmpty()) {
+            return false;
+        }
+
+        return CardUtil.castSpellWithAttributesForFree(controller, source, game,
+                new CardsImpl(exileZone), StaticFilters.FILTER_CARD);
     }
 }
