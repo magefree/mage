@@ -61,7 +61,7 @@ class HiddenPredatorsStateTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return !game.getBattlefield().getAllActivePermanents(filter, game).isEmpty();
+        return !game.getBattlefield().getActivePermanents(filter, game.getControllerId(getSourceId()), game).isEmpty();
     }
 
     @Override
