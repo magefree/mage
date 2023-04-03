@@ -2,10 +2,9 @@ package mage.cards.i;
 
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.SiegeInfoAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -26,10 +25,7 @@ public final class InvasionOfDominaria extends CardImpl {
         this.secondSideCardClazz = mage.cards.s.SerraFaithkeeper.class;
 
         // (As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)
-        this.addAbility(new SimpleStaticAbility(new InfoEffect(
-                "<i>(As a Siege enters, choose an opponent to protect it. " +
-                        "You and others can attack it. When it's defeated, exile it, then cast it transformed.)</i>"
-        )));
+        this.addAbility(new SiegeInfoAbility());
 
         // When Invasion of Dominaria enters the battlefield, you gain 4 life and draw a card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GainLifeEffect(4));
