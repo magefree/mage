@@ -28,7 +28,7 @@ public final class RefractionElemental extends CardImpl {
         this.nightCard = true;
 
         // Ward--Pay 2 life.
-        this.addAbility(new WardAbility(new PayLifeCost(2)));
+        this.addAbility(new WardAbility(new PayLifeCost(2), false));
 
         // Whenever you cast a spell, Refraction Elemental deals 3 damage to each opponent.
         this.addAbility(new SpellCastControllerTriggeredAbility(
