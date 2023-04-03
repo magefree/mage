@@ -1404,7 +1404,20 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public boolean canBeAttacked(UUID attackerId, UUID playerToAttack, Game game) {
+        if (isPlaneswalker(game)) {
+            return isControlledBy(playerToAttack);
+        }
+        // TODO: protector not yet implemented
+        return isBattle(game);
+    }
+
+    @Override
     public boolean canAttackInPrinciple(UUID defenderId, Game game) {
+        if (isBattle(game)) {
+            // battles can never attack
+            return false;
+        }
         ApprovingObject approvingObject = game.getContinuousEffects().asThough(
                 this.objectId, AsThoughEffectType.ATTACK_AS_HASTE, null, defenderId, game
         );

@@ -292,6 +292,8 @@ public interface Permanent extends Card, Controllable {
 
     boolean canBlockAny(Game game);
 
+    boolean canBeAttacked(UUID attackerId,UUID playerToAttack, Game game);
+
     /**
      * Checks by restriction effects if the permanent can use activated
      * abilities

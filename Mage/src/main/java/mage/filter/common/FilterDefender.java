@@ -4,6 +4,7 @@ import mage.constants.CardType;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.other.PlayerIdPredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.filter.predicate.permanent.PermanentIdPredicate;
 
 import java.util.Set;
 import java.util.UUID;
@@ -23,7 +24,7 @@ public class FilterDefender extends FilterPermanentOrPlayer {
         this.permanentFilter.add(Predicates.or(
                 defenders
                         .stream()
-                        .map(ControllerIdPredicate::new)
+                        .map(PermanentIdPredicate::new)
                         .collect(Collectors.toList())
         ));
         this.playerFilter.add(Predicates.or(

@@ -213,10 +213,12 @@ public class Combat implements Serializable, Copyable<Combat> {
         if (playerToAttack != null) {
             possibleDefenders = new HashSet<>();
             for (UUID objectId : defenders) {
-                Permanent planeswalker = game.getPermanent(objectId);
-                if (planeswalker != null && planeswalker.isControlledBy(playerToAttack)) {
+                if (playerToAttack.equals(objectId)) {
                     possibleDefenders.add(objectId);
-                } else if (playerToAttack.equals(objectId)) {
+                    continue;
+                }
+                Permanent permanent = game.getPermanent(objectId);
+                if (permanent != null && permanent.canBeAttacked(creatureId, playerToAttack, game)) {
                     possibleDefenders.add(objectId);
                 }
             }
@@ -232,7 +234,6 @@ public class Combat implements Serializable, Copyable<Combat> {
             return true;
         } else {
             TargetDefender target = new TargetDefender(possibleDefenders);
-            target.setNotTarget(true);
             target.setRequired(true);
             player.chooseTarget(Outcome.Damage, target, null, game);
             if (target.getFirstTarget() != null) {
@@ -1258,6 +1259,9 @@ public class Combat implements Serializable, Copyable<Combat> {
     public void setDefenders(Game game) {
         for (UUID playerId : getAttackablePlayers(game)) {
             addDefender(playerId, game);
+        }
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_BATTLE, attackingPlayerId, game)) {
+            defenders.add(permanent.getId());
         }
     }
 
