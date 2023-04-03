@@ -31,6 +31,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Archpriest of Shadows", 89, Rarity.RARE, mage.cards.a.ArchpriestOfShadows.class));
         cards.add(new SetCardInfo("Astral Wingspan", 48, Rarity.UNCOMMON, mage.cards.a.AstralWingspan.class));
         cards.add(new SetCardInfo("Bloodfell Caves", 267, Rarity.COMMON, mage.cards.b.BloodfellCaves.class));
+        cards.add(new SetCardInfo("Bloomwielder Dryads", 237, Rarity.UNCOMMON, mage.cards.b.BloomwielderDryads.class));
         cards.add(new SetCardInfo("Blossoming Sands", 268, Rarity.COMMON, mage.cards.b.BlossomingSands.class));
         cards.add(new SetCardInfo("Boon-Bringer Valkyrie", 9, Rarity.RARE, mage.cards.b.BoonBringerValkyrie.class));
         cards.add(new SetCardInfo("Borborygmos and Fblthp", 219, Rarity.MYTHIC, mage.cards.b.BorborygmosAndFblthp.class));
@@ -67,6 +68,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Invasion of Kamigawa", 62, Rarity.UNCOMMON, mage.cards.i.InvasionOfKamigawa.class));
         cards.add(new SetCardInfo("Invasion of Karsus", 146, Rarity.RARE, mage.cards.i.InvasionOfKarsus.class));
         cards.add(new SetCardInfo("Invasion of Lorwyn", 236, Rarity.UNCOMMON, mage.cards.i.InvasionOfLorwyn.class));
+        cards.add(new SetCardInfo("Invasion of Moag", 237, Rarity.UNCOMMON, mage.cards.i.InvasionOfMoag.class));
         cards.add(new SetCardInfo("Invasion of Ravnica", 1, Rarity.MYTHIC, mage.cards.i.InvasionOfRavnica.class));
         cards.add(new SetCardInfo("Invasion of Tolvada", 241, Rarity.RARE, mage.cards.i.InvasionOfTolvada.class));
         cards.add(new SetCardInfo("Island", 278, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
