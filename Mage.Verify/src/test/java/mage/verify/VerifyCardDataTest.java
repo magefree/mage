@@ -29,6 +29,7 @@ import mage.game.draft.DraftCube;
 import mage.game.draft.RateCard;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
+import mage.server.util.SystemUtil;
 import mage.sets.TherosBeyondDeath;
 import mage.util.CardUtil;
 import mage.verify.mtgjson.MtgJsonCard;
@@ -964,7 +965,7 @@ public class VerifyCardDataTest {
                 cardNames.add(cardInfo.getName());
             }
 
-            // CHECK: set code must be compatible with tests commands format
+            // CHECK: set code must be compatible with tests commands format like "SET-card"
             // how-to fix: increase lookup lenth
             if (set.getCode().length() + 1 > CardUtil.TESTS_SET_CODE_LOOKUP_LENGTH) {
                 errorsList.add("Error: set code too big for test commads lookup: " + set.getCode() + ", lookup length: " + CardUtil.TESTS_SET_CODE_LOOKUP_LENGTH);
@@ -995,10 +996,12 @@ public class VerifyCardDataTest {
                     errorsList.add("Error: card name or number contains non-ascii symbols: " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
 
-                // CHECK: card name must not contain : symbol due set:name commands format in test engine
-                // (if it exists then decrease TESTS_SET_CODE_LOOKUP_LENGTH)
-                if (CardUtil.substring(card.getName(), CardUtil.TESTS_SET_CODE_LOOKUP_LENGTH).contains(":")) {
-                    errorsList.add("Error: card name can't contain : symbol: " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+                // CHECK: set code and card name must be parseable for test and cheat commands XLN-Mountain
+                List<String> cardCommand = SystemUtil.parseSetAndCardNameCommand(set.getCode() + CardUtil.TESTS_SET_CODE_DELIMETER + card.getName());
+                if (!Objects.equals(set.getCode(), cardCommand.get(0))
+                        || !Objects.equals(card.getName(), cardCommand.get(1))) {
+                    // if you catch it then parser logic must be changed to support problem set-card combination
+                    errorsList.add("Error: card name can't be used in tests and cheats with set code: " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
 
                 // CHECK: card number must start with 09-aZ symbols (wrong symbol example: *123)

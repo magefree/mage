@@ -600,7 +600,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param gameZone {@link mage.constants.Zone} to add cards to.
      * @param player   {@link Player} to add cards for. Use either playerA or
      *                 playerB.
-     * @param cardName Card name or set:card
+     * @param cardName Card name or set-card
      * @param count    Amount of cards to be added.
      * @param tapped   In case gameZone is Battlefield, determines whether
      *                 permanent should be tapped. In case gameZone is other
@@ -624,11 +624,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
         // set code for card
         String setCode = "";
-        String setLookup = CardUtil.substring(cardName, CardUtil.TESTS_SET_CODE_LOOKUP_LENGTH);
-        if (setLookup.contains(":")) {
-            setCode = setLookup.substring(0, setLookup.indexOf(":"));
-            cardName = cardName.substring(setCode.length() + 1);
-        }
+        List<String> cardCommand = SystemUtil.parseSetAndCardNameCommand(cardName);
+        setCode = cardCommand.get(0);
+        cardName = cardCommand.get(1);
 
         CardInfo cardInfo;
         if (setCode.isEmpty()) {
