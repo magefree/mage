@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class FilterDefender extends FilterPermanentOrPlayer {
 
     public FilterDefender(Set<UUID> defenders) {
-        super("player, planeswalker, or battle");
+        super("player, planeswalker, or battle to attack");
         this.permanentFilter.add(Predicates.or(
                 CardType.PLANESWALKER.getPredicate(),
                 CardType.BATTLE.getPredicate()

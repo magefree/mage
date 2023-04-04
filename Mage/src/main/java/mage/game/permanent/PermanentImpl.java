@@ -21,6 +21,7 @@ import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.counters.Counters;
+import mage.filter.FilterOpponent;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.ZoneChangeInfo;
@@ -33,8 +34,10 @@ import mage.game.permanent.token.SquirrelToken;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
+import mage.target.TargetPlayer;
 import mage.util.CardUtil;
 import mage.util.GameLog;
+import mage.util.RandomUtil;
 import mage.util.ThreadLocalStringBuilder;
 import org.apache.log4j.Logger;
 
@@ -74,6 +77,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected final Set<UUID> goadingPlayers = new HashSet<>();
     protected UUID originalControllerId;
     protected UUID controllerId;
+    protected UUID protectorId = null;
     protected UUID beforeResetControllerId;
     protected int damage;
     protected boolean controlledFromStartOfControllerTurn;
@@ -173,6 +177,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.loyaltyActivationsAvailable = permanent.loyaltyActivationsAvailable;
         this.legendRuleApplies = permanent.legendRuleApplies;
         this.transformCount = permanent.transformCount;
+        this.protectorId = permanent.protectorId;
 
         this.morphed = permanent.morphed;
         this.manifested = permanent.manifested;
@@ -1217,6 +1222,18 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             if (defense > 0) {
                 this.addCounters(CounterType.DEFENSE.createInstance(defense), source, game);
             }
+            if (this.hasSubtype(SubType.SIEGE, game)) {
+                Set<UUID> opponents = game.getOpponents(getControllerId());
+                if (opponents.size() > 1) {
+                    TargetPlayer target = new TargetPlayer(new FilterOpponent("protector for " + getName()));
+                    target.setNotTarget(true);
+                    target.setRequired(true);
+                    game.getPlayer(getControllerId()).choose(Outcome.Neutral, target, source, game);
+                    this.setProtectorId(target.getFirstTarget(), game);
+                } else {
+                    this.setProtectorId(RandomUtil.randomFromCollection(opponents), game);
+                }
+            }
         }
         if (!fireEvent) {
             return false;
@@ -1408,8 +1425,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (isPlaneswalker(game)) {
             return isControlledBy(playerToAttack);
         }
-        // TODO: protector not yet implemented
-        return isBattle(game);
+        if (isBattle(game)) {
+            return isProtectedBy(playerToAttack);
+        }
+        return false;
     }
 
     @Override
@@ -1662,6 +1681,24 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public Set<UUID> getGoadingPlayers() {
         return goadingPlayers;
+    }
+
+    @Override
+    public void setProtectorId(UUID protectorId, Game game) {
+        String protectorName = game.getPlayer(protectorId).getLogName();
+        game.informPlayers(protectorName + " has been chosen to protect " + this.getLogName());
+        this.addInfo("protector", "Protected by " + protectorName, game);
+        this.protectorId = protectorId;
+    }
+
+    @Override
+    public UUID getProtectorId() {
+        return protectorId;
+    }
+
+    @Override
+    public boolean isProtectedBy(UUID playerId) {
+        return protectorId != null && protectorId.equals(playerId);
     }
 
     @Override

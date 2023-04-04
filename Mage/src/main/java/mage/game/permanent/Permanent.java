@@ -89,6 +89,12 @@ public interface Permanent extends Card, Controllable {
 
     Set<UUID> getGoadingPlayers();
 
+    void setProtectorId(UUID playerId, Game game);
+
+    UUID getProtectorId();
+
+    boolean isProtectedBy(UUID playerId);
+
     void setCardNumber(String cid);
 
     void setExpansionSetCode(String expansionSetCode);
@@ -292,7 +298,7 @@ public interface Permanent extends Card, Controllable {
 
     boolean canBlockAny(Game game);
 
-    boolean canBeAttacked(UUID attackerId,UUID playerToAttack, Game game);
+    boolean canBeAttacked(UUID attackerId, UUID playerToAttack, Game game);
 
     /**
      * Checks by restriction effects if the permanent can use activated
