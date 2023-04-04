@@ -80,6 +80,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Norn's Inquisitor", 29, Rarity.UNCOMMON, mage.cards.n.NornsInquisitor.class));
         cards.add(new SetCardInfo("Omen Hawker", 70, Rarity.UNCOMMON, mage.cards.o.OmenHawker.class));
         cards.add(new SetCardInfo("Oracle of Tragedy", 71, Rarity.UNCOMMON, mage.cards.o.OracleOfTragedy.class));
+        cards.add(new SetCardInfo("Phyrexian Awakening", 30, Rarity.UNCOMMON, mage.cards.p.PhyrexianAwakening.class));
         cards.add(new SetCardInfo("Phyrexian Gargantua", 121, Rarity.UNCOMMON, mage.cards.p.PhyrexianGargantua.class));
         cards.add(new SetCardInfo("Phyrexian Pegasus", 324, Rarity.COMMON, mage.cards.p.PhyrexianPegasus.class));
         cards.add(new SetCardInfo("Phyrexian Skyflayer", 143, Rarity.UNCOMMON, mage.cards.p.PhyrexianSkyflayer.class));
