@@ -36,7 +36,7 @@ public final class BeamtownBeatstick extends CardImpl {
         Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(2, 2));
         ability.addEffect(new GainAbilityAttachedEffect(
                 new MenaceAbility(), AttachmentType.EQUIPMENT
-        ).setText("and has menace"));
+        ).setText("and has menace. <i>(It can't be blocked except by two or more creatures.)</i>"));
         this.addAbility(ability);
 
         // Whenever equipped creature deals combat damage to a player or battle, create a Treasure token.
