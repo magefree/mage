@@ -31,6 +31,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Archpriest of Shadows", 89, Rarity.RARE, mage.cards.a.ArchpriestOfShadows.class));
         cards.add(new SetCardInfo("Astral Wingspan", 48, Rarity.UNCOMMON, mage.cards.a.AstralWingspan.class));
         cards.add(new SetCardInfo("Beamtown Beatstick", 131, Rarity.COMMON, mage.cards.b.BeamtownBeatstick.class));
+        cards.add(new SetCardInfo("Belenon War Anthem", 20, Rarity.UNCOMMON, mage.cards.b.BelenonWarAnthem.class));
         cards.add(new SetCardInfo("Bloodfell Caves", 267, Rarity.COMMON, mage.cards.b.BloodfellCaves.class));
         cards.add(new SetCardInfo("Bloomwielder Dryads", 237, Rarity.UNCOMMON, mage.cards.b.BloomwielderDryads.class));
         cards.add(new SetCardInfo("Blossoming Sands", 268, Rarity.COMMON, mage.cards.b.BlossomingSands.class));
@@ -67,6 +68,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Injector Crocodile", 329, Rarity.COMMON, mage.cards.i.InjectorCrocodile.class));
         cards.add(new SetCardInfo("Interdisciplinary Mascot", 326, Rarity.RARE, mage.cards.i.InterdisciplinaryMascot.class));
         cards.add(new SetCardInfo("Into the Fire", 144, Rarity.RARE, mage.cards.i.IntoTheFire.class));
+        cards.add(new SetCardInfo("Invasion of Belenon", 20, Rarity.UNCOMMON, mage.cards.i.InvasionOfBelenon.class));
         cards.add(new SetCardInfo("Invasion of Dominaria", 21, Rarity.UNCOMMON, mage.cards.i.InvasionOfDominaria.class));
         cards.add(new SetCardInfo("Invasion of Innistrad", 115, Rarity.MYTHIC, mage.cards.i.InvasionOfInnistrad.class));
         cards.add(new SetCardInfo("Invasion of Kaladesh", 234, Rarity.UNCOMMON, mage.cards.i.InvasionOfKaladesh.class));
