@@ -2,7 +2,7 @@ package mage.cards.i;
 
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SiegeInfoAbility;
+import mage.abilities.common.SiegeAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
@@ -26,7 +26,7 @@ public final class InvasionOfPyrulea extends CardImpl {
         this.secondSideCardClazz = mage.cards.g.GargantuanSlabhorn.class;
 
         // (As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)
-        this.addAbility(new SiegeInfoAbility());
+        this.addAbility(new SiegeAbility());
 
         // When Invasion of Pyrulea enters the battlefield, scry 3, then reveal the top card of your library. If it's a land or double-faced card, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new InvasionOfPyruleaEffect()));

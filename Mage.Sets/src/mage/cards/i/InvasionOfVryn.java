@@ -1,7 +1,7 @@
 package mage.cards.i;
 
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SiegeInfoAbility;
+import mage.abilities.common.SiegeAbility;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,7 +23,7 @@ public final class InvasionOfVryn extends CardImpl {
         this.secondSideCardClazz = mage.cards.o.OverloadedMageRing.class;
 
         // (As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)
-        this.addAbility(new SiegeInfoAbility());
+        this.addAbility(new SiegeAbility());
 
         // When Invasion of Vryn enters the battlefield, draw three cards, then discard a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawDiscardControllerEffect(3, 1)));

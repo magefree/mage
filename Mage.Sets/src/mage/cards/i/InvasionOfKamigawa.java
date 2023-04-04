@@ -2,7 +2,7 @@ package mage.cards.i;
 
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SiegeInfoAbility;
+import mage.abilities.common.SiegeAbility;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
@@ -28,7 +28,7 @@ public final class InvasionOfKamigawa extends CardImpl {
         this.secondSideCardClazz = mage.cards.r.RooftopSaboteurs.class;
 
         // (As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)
-        this.addAbility(new SiegeInfoAbility());
+        this.addAbility(new SiegeAbility());
 
         // When Invasion of Kamigawa enters the battlefield, tap target artifact or creature an opponent controls and put a stun counter on it.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect());

@@ -2,7 +2,7 @@ package mage.cards.i;
 
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SiegeInfoAbility;
+import mage.abilities.common.SiegeAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,7 +34,7 @@ public final class InvasionOfTolvada extends CardImpl {
         this.secondSideCardClazz = mage.cards.t.TheBrokenSky.class;
 
         // (As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)
-        this.addAbility(new SiegeInfoAbility());
+        this.addAbility(new SiegeAbility());
 
         // When Invasion of Tolvada enters the battlefield, return target nonbattle permanent card from your graveyard to the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect());

@@ -2,7 +2,7 @@ package mage.cards.i;
 
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SiegeInfoAbility;
+import mage.abilities.common.SiegeAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.*;
@@ -25,7 +25,7 @@ public final class InvasionOfKaldheim extends CardImpl {
         this.secondSideCardClazz = mage.cards.p.PyreOfTheWorldTree.class;
 
         // (As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)
-        this.addAbility(new SiegeInfoAbility());
+        this.addAbility(new SiegeAbility());
 
         // When Invasion of Kaldheim enters the battlefield, exile all cards from your hand, then draw that many cards. Until the end of your next turn, you may play cards exiled this way.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new InvasionOfKaldheimEffect()));
