@@ -103,7 +103,12 @@ class ThrunBreakerOfSilenceEffect extends ContinuousRuleModifyingEffectImpl {
         Card targetCard = game.getCard(event.getTargetId());
         StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
         if (targetCard != null && stackObject != null && targetCard.getId().equals(source.getSourceId())) {
-            if (!stackObject.getColor(game).isGreen()) {
+            if (stackObject instanceof Ability) {
+                if (!((Ability) stackObject).getSourceObject(game).getColor(game).isGreen()) {
+                    return (!stackObject.isControlledBy(source.getControllerId()));
+                }
+            }
+            else if (!stackObject.getColor(game).isGreen()) {
                 return (!stackObject.isControlledBy(source.getControllerId()));
             }
         }
