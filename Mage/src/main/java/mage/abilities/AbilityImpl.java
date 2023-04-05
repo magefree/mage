@@ -937,6 +937,21 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public void addMode(Mode mode) {
         getModes().addMode(mode);
+
+        // runtime check: modes must have good settings
+        int currentMin = getModes().getMinModes();
+        int currentMax = getModes().getMaxModes(null, null);
+        boolean isFine = true;
+        if (currentMin < 0 || currentMax < 0) {
+            isFine = false;
+        }
+        if (currentMin > 0 && currentMin > currentMax) {
+            isFine = false;
+        }
+        if (!isFine) {
+            throw new IllegalArgumentException(String.format("Wrong code usage: you must setup correct min and max modes (%d, %d) for %s",
+                    currentMin, currentMax, this));
+        }
     }
 
     @Override

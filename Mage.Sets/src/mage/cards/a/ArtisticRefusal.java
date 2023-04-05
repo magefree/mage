@@ -24,7 +24,7 @@ public final class ArtisticRefusal extends CardImpl {
 
         // Choose one or both --
         this.getSpellAbility().getModes().setMinModes(1);
-        this.getSpellAbility().getModes().setMinModes(2);
+        this.getSpellAbility().getModes().setMaxModes(2);
 
         // * Counter target spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
