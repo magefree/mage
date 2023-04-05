@@ -42,7 +42,7 @@ public final class VoldarenThrillseeker extends CardImpl {
         );
         ability.addCost(new SacrificeSourceCost().setText("sacrifice this creature"));
         ability.addTarget(new TargetAnyTarget());
-        this.addAbility(ability);
+        backupAbility.addAbility(ability);
     }
 
     private VoldarenThrillseeker(final VoldarenThrillseeker card) {
