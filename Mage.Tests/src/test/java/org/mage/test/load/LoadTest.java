@@ -127,19 +127,19 @@ public class LoadTest {
 
         // simple connection to server
         // monitor other players
-        LoadPlayer monitor = new LoadPlayer("mon");
+        LoadPlayer monitor = new LoadPlayer("mon", "mon");
         Assert.assertTrue(monitor.session.isConnected());
         int startUsersCount = monitor.getAllRoomUsers().size();
         int minimumSleepTime = 2000;
 
         // user 1
-        LoadPlayer player1 = new LoadPlayer("1");
+        LoadPlayer player1 = new LoadPlayer("1", "p1 ");
         Thread.sleep(minimumSleepTime);
         Assert.assertEquals("Can't see users count change 1", startUsersCount + 1, monitor.getAllRoomUsers().size());
         Assert.assertNotNull("Can't find user 1", monitor.findUser(player1.userName));
 
         // user 2
-        LoadPlayer player2 = new LoadPlayer("2");
+        LoadPlayer player2 = new LoadPlayer("2", "p2 ");
         Thread.sleep(minimumSleepTime);
         Assert.assertEquals("Can't see users count change 2", startUsersCount + 2, monitor.getAllRoomUsers().size());
         Assert.assertNotNull("Can't find user 2", monitor.findUser(player2.userName));
@@ -150,11 +150,11 @@ public class LoadTest {
     public void test_TwoUsersPlayGameUntilEnd() {
 
         // monitor other players
-        LoadPlayer monitor = new LoadPlayer("mon");
+        LoadPlayer monitor = new LoadPlayer("mon", "mon");
 
         // users
-        LoadPlayer player1 = new LoadPlayer("user1");
-        LoadPlayer player2 = new LoadPlayer("user2");
+        LoadPlayer player1 = new LoadPlayer("user1", "p1");
+        LoadPlayer player2 = new LoadPlayer("user2", "p2");
 
         // game by user 1
         GameTypeView gameType = prepareGameType(player1.session);
@@ -163,7 +163,7 @@ public class LoadTest {
         UUID tableId = game.getTableId();
         Assert.assertEquals(player1.userName, game.getControllerName());
 
-        DeckCardLists deckList = DeckTestUtils.buildRandomDeckAndInitCards("GR", true);
+        DeckCardLists deckList = loadGameDeck(1, "GR", true, TEST_AI_RANDOM_DECK_SETS);
         Optional<TableView> checkGame;
 
         /*
@@ -213,7 +213,7 @@ public class LoadTest {
         Assert.assertFalse("need allowed sets", deckAllowedSets.isEmpty());
 
         // monitor and game source
-        LoadPlayer monitor = new LoadPlayer("mon", true);
+        LoadPlayer monitor = new LoadPlayer("mon", true, gameName + ", mon");
 
         // game by monitor
         GameTypeView gameType = prepareGameType(monitor.session);
@@ -222,19 +222,8 @@ public class LoadTest {
         UUID tableId = game.getTableId();
 
         // deck load
-        DeckCardLists deckListRandom = DeckTestUtils.buildRandomDeckAndInitCards(deckColors, false, deckAllowedSets);
-        DeckCardLists deckList1 = deckListRandom;
-        DeckCardLists deckList2 = deckListRandom;
-        if (!TEST_AI_CUSTOM_DECK_PATH_1.isEmpty()) {
-            deckList1 = DeckImporter.importDeckFromFile(TEST_AI_CUSTOM_DECK_PATH_1, false);
-            Assert.assertFalse("Can't load custom deck 1 from " + TEST_AI_CUSTOM_DECK_PATH_1, deckList1.getCards().isEmpty());
-        }
-        if (!TEST_AI_CUSTOM_DECK_PATH_2.isEmpty()) {
-            deckList2 = DeckImporter.importDeckFromFile(TEST_AI_CUSTOM_DECK_PATH_2, false);
-            Assert.assertFalse("Can't load custom deck 2 from " + TEST_AI_CUSTOM_DECK_PATH_2, deckList2.getCards().isEmpty());
-        }
-
-        Optional<TableView> checkGame;
+        DeckCardLists deckList1 = loadGameDeck(1, deckColors, false, deckAllowedSets);
+        DeckCardLists deckList2 = loadGameDeck(2, deckColors, false, deckAllowedSets);
 
         // join AI
         Assert.assertTrue(monitor.session.joinTable(monitor.roomID, tableId, "ai_1", PlayerType.COMPUTER_MAD, 5, deckList1, ""));
@@ -249,13 +238,18 @@ public class LoadTest {
         while (true) {
             GameView gameView = monitor.client.getLastGameView();
 
-            checkGame = monitor.getTable(tableId);
-            TableState state = checkGame.get().getTableState();
+            TableView checkGame = monitor.getTable(tableId).orElse(null);
+            TableState state = (checkGame == null ? null : checkGame.getTableState());
 
-            logger.warn(checkGame.get().getTableName()
-                    + (gameView != null ? ", turn " + gameView.getTurn() + ", " + gameView.getStep().toString() : "")
-                    + (gameView != null ? ", active " + gameView.getActivePlayerName() : "")
-                    + ", " + state);
+            if (gameView != null && checkGame != null) {
+                logger.warn(checkGame.getTableName() + ": ---");
+                logger.warn(String.format("%s: turn %d, step %s, state %s",
+                        checkGame.getTableName(),
+                        gameView.getTurn(),
+                        gameView.getStep().toString(),
+                        state
+                ));
+            }
 
             if (state == TableState.FINISHED) {
                 gameResult.finish(gameView);
@@ -263,14 +257,27 @@ public class LoadTest {
             }
 
             if (!startToWatching && state == TableState.DUELING) {
-                Assert.assertTrue(monitor.session.watchGame(checkGame.get().getGames().iterator().next()));
+                Assert.assertTrue(monitor.session.watchGame(checkGame.getGames().iterator().next()));
                 startToWatching = true;
             }
 
-            if (gameView != null) {
-                for (PlayerView p : gameView.getPlayers()) {
-                    logger.info(p.getName() + " - Life=" + p.getLife() + "; Lib=" + p.getLibraryCount());
-                }
+            if (gameView != null && checkGame != null) {
+                gameView.getPlayers()
+                        .stream()
+                        .sorted(Comparator.comparing(PlayerView::getName))
+                        .forEach(p -> {
+                            String activeInfo = "";
+                            if (Objects.equals(gameView.getActivePlayerId(), p.getPlayerId())) {
+                                activeInfo = " (active)";
+                            }
+                            logger.info(String.format("%s, status: %s - Life=%d; Lib=%d;%s",
+                                    checkGame.getTableName(),
+                                    p.getName(),
+                                    p.getLife(),
+                                    p.getLibraryCount(),
+                                    activeInfo
+                            ));
+                        });
             }
 
             try {
@@ -284,16 +291,20 @@ public class LoadTest {
     @Test
     @Ignore
     public void test_TwoAIPlayGame_One() {
-        LoadTestGameResult gameResult = new LoadTestGameResult(0, "test game", 0);
+        LoadTestGameResultsList gameResults = new LoadTestGameResultsList();
+        LoadTestGameResult gameResult = gameResults.createGame(0, "test game", 0);
         playTwoAIGame("Single AI game", "WGUBR", TEST_AI_RANDOM_DECK_SETS, gameResult);
+
+        printGameResults(gameResults);
     }
 
     @Test
     @Ignore
     public void test_TwoAIPlayGame_Multiple() {
+        // play multiple games with CLIENT side code (catch every GameView changes from the server)
 
         int singleGameSID = 0; // set sid for same deck games, set 0 for random decks
-        int gamesAmount = 10; // games per run
+        int gamesAmount = 5; // games per run
 
         // save random seeds for repeated results (in decks generating)
         List<Integer> seedsList = new ArrayList<>();
@@ -317,11 +328,7 @@ public class LoadTest {
             playTwoAIGame(gameName, "WGUBR", TEST_AI_RANDOM_DECK_SETS, gameResult);
         }
 
-        // results
-        System.out.println();
-        gameResults.printResultHeader();
-        gameResults.printResultData();
-        gameResults.printResultTotal();
+        printGameResults(gameResults);
     }
 
     @Test
@@ -331,9 +338,9 @@ public class LoadTest {
 
         LoadGame game = new LoadGame(
                 "game",
-                "thread",
-                DeckTestUtils.buildRandomDeckAndInitCards("GR", true, ""),
-                DeckTestUtils.buildRandomDeckAndInitCards("GR", true, "")
+                "u",
+                loadGameDeck(1, "GR", true, TEST_AI_RANDOM_DECK_SETS),
+                loadGameDeck(2, "GR", true, TEST_AI_RANDOM_DECK_SETS)
         );
         game.gameStart();
 
@@ -355,9 +362,9 @@ public class LoadTest {
 
         LoadGame game = new LoadGame(
                 "game",
-                "thread",
-                DeckTestUtils.buildRandomDeckAndInitCards("GR", true, ""),
-                DeckTestUtils.buildRandomDeckAndInitCards("GR", true, "")
+                "u",
+                loadGameDeck(1, "GR", true, TEST_AI_RANDOM_DECK_SETS),
+                loadGameDeck(2, "GR", true, TEST_AI_RANDOM_DECK_SETS)
         );
         game.gameStart();
         game.gameEnd(true); // abort -- close client thread
@@ -371,9 +378,9 @@ public class LoadTest {
 
         LoadGame game = new LoadGame(
                 "game",
-                "thread",
-                DeckTestUtils.buildRandomDeckAndInitCards("GR", false, ""),
-                DeckTestUtils.buildRandomDeckAndInitCards("GR", false, "")
+                "u",
+                loadGameDeck(1, "GR", false, TEST_AI_RANDOM_DECK_SETS),
+                loadGameDeck(2, "GR", false, TEST_AI_RANDOM_DECK_SETS)
         );
 
         game.gameStart();
@@ -384,13 +391,13 @@ public class LoadTest {
     @Test
     @Ignore
     public void test_GameThreadWithConcede() {
-        // simple game thread with with concede
+        // simple game thread with concede
 
         LoadGame game = new LoadGame(
                 "game",
-                "thread",
-                DeckTestUtils.buildRandomDeckAndInitCards("GR", true, ""),
-                DeckTestUtils.buildRandomDeckAndInitCards("GR", true, "")
+                "u",
+                loadGameDeck(1, "GR", true, TEST_AI_RANDOM_DECK_SETS),
+                loadGameDeck(2, "GR", true, TEST_AI_RANDOM_DECK_SETS)
         );
         game.gameStart();
 
@@ -409,8 +416,10 @@ public class LoadTest {
     @Test
     @Ignore
     public void test_MultipleGames() {
-        // multiple games until finish
-        final int MAX_GAMES = 50; // games to run
+        // play multiple games with SERVER side only,
+        // all players on the server side, you don't get any GameView changes here
+
+        final int MAX_GAMES = 10; // games to run
         final boolean START_GAMES_AT_ONCE = true; // set true to run ALL games parallel (e.g. test max parallel limit)
 
         Instant startTime = Instant.now();
@@ -421,9 +430,9 @@ public class LoadTest {
         for (int i = 1; i <= MAX_GAMES; i++) {
             LoadGame game = new LoadGame(
                     "game" + i,
-                    "game" + i,
-                    DeckTestUtils.buildRandomDeckAndInitCards("GR", true, ""),
-                    DeckTestUtils.buildRandomDeckAndInitCards("GR", true, "")
+                    "u" + i,
+                    loadGameDeck(1, "GR", true, TEST_AI_RANDOM_DECK_SETS),
+                    loadGameDeck(2, "GR", true, TEST_AI_RANDOM_DECK_SETS)
             );
             gamesList.add(game);
 
@@ -528,14 +537,14 @@ public class LoadTest {
         DeckCardLists deckList;
         String lastGameResult = "";
 
-        public LoadPlayer(String userPrefix) {
-            this(userPrefix, false);
+        public LoadPlayer(String userPrefix, String logsPrefix) {
+            this(userPrefix, false, logsPrefix);
         }
 
-        public LoadPlayer(String userPrefix, boolean joinGameChat) {
+        public LoadPlayer(String userPrefix, boolean joinGameChat, String logsPrefix) {
             this.userName = TEST_USER_NAME_GLOBAL_PREFIX + userPrefix + "_" + RandomUtil.nextInt(10000);
             this.connection = createSimpleConnection(this.userName);
-            this.client = new SimpleMageClient(joinGameChat);
+            this.client = new SimpleMageClient(joinGameChat, logsPrefix);
             this.session = new SessionImpl(this.client);
 
             this.session.connect(this.connection);
@@ -617,18 +626,18 @@ public class LoadTest {
 
         public LoadGame(String gameName, String playerPrefix) {
             this(gameName, playerPrefix,
-                    DeckTestUtils.buildRandomDeckAndInitCards("GR", true, ""),
-                    DeckTestUtils.buildRandomDeckAndInitCards("GR", true, "")
+                    loadGameDeck(1, "GR", true, TEST_AI_RANDOM_DECK_SETS),
+                    loadGameDeck(2, "GR", true, TEST_AI_RANDOM_DECK_SETS)
             );
         }
 
         public LoadGame(String gameName, String playerPrefix, DeckCardLists deck1, DeckCardLists deck2) {
             this.gameName = gameName;
 
-            player1 = new LoadPlayer(playerPrefix + "_" + 1);
+            player1 = new LoadPlayer(playerPrefix + "_" + 1, playerPrefix + "_1");
             player1.setDeckList(deck1);
 
-            player2 = new LoadPlayer(playerPrefix + "_" + 2);
+            player2 = new LoadPlayer(playerPrefix + "_" + 2, playerPrefix + "_2");
             player2.setDeckList(deck2);
         }
 
@@ -719,7 +728,7 @@ public class LoadTest {
         }
     }
 
-    private class LoadTestGameResult {
+    private static class LoadTestGameResult {
         int index;
         String name;
         long randomSeed;
@@ -754,12 +763,12 @@ public class LoadTest {
             return this.finalGameView.getTurn();
         }
 
-        public int getDuration() {
-            return (int) ((this.timeEnded.getTime() - this.timeStarted.getTime()) / 1000);
+        public int getDurationMs() {
+            return (int) ((this.timeEnded.getTime() - this.timeStarted.getTime()));
         }
     }
 
-    private class LoadTestGameResultsList extends HashMap<Integer, LoadTestGameResult> {
+    private static class LoadTestGameResultsList extends HashMap<Integer, LoadTestGameResult> {
 
         private static final String tableFormatHeader = "|%-10s|%-15s|%-20s|%-10s|%-15s|%-15s|%-10s|%-20s|%n";
         private static final String tableFormatData = "|%-10s|%15s|%20s|%10s|%15s|%15s|%10s|%20s|%n";
@@ -799,8 +808,8 @@ public class LoadTest {
                     String.valueOf(gameResult.getTurn()), //"turn",
                     String.valueOf(gameResult.getLife1()), //"player 1",
                     String.valueOf(gameResult.getLife2()), //"player 2",
-                    String.valueOf(gameResult.getDuration()),// "time, sec",
-                    String.valueOf(gameResult.getDuration() / gameResult.getTurn()) //"per turn, sec"
+                    String.format("%.3f", (float) gameResult.getDurationMs() / 1000), //"time, sec",
+                    String.format("%.3f", ((float) gameResult.getDurationMs() / 1000) / gameResult.getTurn()) //"per turn, sec"
             );
             System.out.printf(tableFormatData, data.toArray());
         }
@@ -813,8 +822,8 @@ public class LoadTest {
                     String.valueOf(this.getAvgTurn()), // turn
                     String.valueOf(this.getAvgLife1()), // player 1
                     String.valueOf(this.getAvgLife2()), // player 2
-                    String.valueOf(this.getAvgDuration()), // time, sec
-                    String.valueOf(this.getAvgDurationPerTurn()) // time per turn, sec
+                    String.valueOf(String.format("%.3f", (float) this.getAvgDurationMs() / 1000)), // time, sec
+                    String.valueOf(String.format("%.3f", (float) this.getAvgDurationPerTurnMs() / 1000)) // time per turn, sec
             );
             System.out.printf(tableFormatData, data.toArray());
         }
@@ -831,12 +840,12 @@ public class LoadTest {
             return this.values().stream().mapToInt(LoadTestGameResult::getLife2).sum() / this.size();
         }
 
-        private int getAvgDuration() {
-            return this.values().stream().mapToInt(LoadTestGameResult::getDuration).sum() / this.size();
+        private int getAvgDurationMs() {
+            return this.values().stream().mapToInt(LoadTestGameResult::getDurationMs).sum() / this.size();
         }
 
-        private int getAvgDurationPerTurn() {
-            return getAvgDuration() / getAvgTurn();
+        private int getAvgDurationPerTurnMs() {
+            return getAvgDurationMs() / getAvgTurn();
         }
     }
 
@@ -848,5 +857,39 @@ public class LoadTest {
                 .orElse(null);
         Assert.assertNotNull("Can't find game type on the server: " + TEST_AI_GAME_MODE, gameType);
         return gameType;
+    }
+
+    private DeckCardLists loadGameDeck(int playerNumber, String deckColors, boolean onlyBasicLands, String allowedSets) {
+        // priority for custom deck file
+        DeckCardLists deckList = null;
+        switch (playerNumber) {
+            case 1:
+                if (!TEST_AI_CUSTOM_DECK_PATH_1.isEmpty()) {
+                    deckList = DeckImporter.importDeckFromFile(TEST_AI_CUSTOM_DECK_PATH_1, false);
+                    Assert.assertFalse("Can't load custom deck 1 from " + TEST_AI_CUSTOM_DECK_PATH_1, deckList.getCards().isEmpty());
+                }
+                break;
+            case 2:
+                if (!TEST_AI_CUSTOM_DECK_PATH_2.isEmpty()) {
+                    deckList = DeckImporter.importDeckFromFile(TEST_AI_CUSTOM_DECK_PATH_2, false);
+                    Assert.assertFalse("Can't load custom deck 2 from " + TEST_AI_CUSTOM_DECK_PATH_2, deckList.getCards().isEmpty());
+                }
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported player number " + playerNumber);
+        }
+
+        if (deckList == null) {
+            deckList = DeckTestUtils.buildRandomDeckAndInitCards(deckColors, onlyBasicLands, allowedSets);
+        }
+
+        return deckList;
+    }
+
+    private void printGameResults(LoadTestGameResultsList gameResults) {
+        System.out.println();
+        gameResults.printResultHeader();
+        gameResults.printResultData();
+        gameResults.printResultTotal();
     }
 }
