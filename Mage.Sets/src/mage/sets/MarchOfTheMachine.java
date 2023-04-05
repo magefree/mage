@@ -135,6 +135,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Tranquil Cove", 275, Rarity.COMMON, mage.cards.t.TranquilCove.class));
         cards.add(new SetCardInfo("Transcendent Message", 83, Rarity.RARE, mage.cards.t.TranscendentMessage.class));
         cards.add(new SetCardInfo("Voldaren Thrillseeker", 171, Rarity.RARE, mage.cards.v.VoldarenThrillseeker.class));
+        cards.add(new SetCardInfo("War Historian", 214, Rarity.COMMON, mage.cards.w.WarHistorian.class));
         cards.add(new SetCardInfo("Wind-Scarred Crag", 276, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
         cards.add(new SetCardInfo("Wrenn and Realmbreaker", 217, Rarity.MYTHIC, mage.cards.w.WrennAndRealmbreaker.class));
         cards.add(new SetCardInfo("Xerex Strobe-Knight", 85, Rarity.UNCOMMON, mage.cards.x.XerexStrobeKnight.class));
