@@ -23,7 +23,7 @@ import java.util.UUID;
 public final class PlacidRottentail extends CardImpl {
 
     public PlacidRottentail(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
 
         this.subtype.add(SubType.FUNGUS);
         this.subtype.add(SubType.RABBIT);
