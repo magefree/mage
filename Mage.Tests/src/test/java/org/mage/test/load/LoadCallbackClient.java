@@ -7,6 +7,7 @@ import mage.remote.Session;
 import mage.view.*;
 import org.apache.log4j.Logger;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -78,6 +79,12 @@ public class LoadCallbackClient implements CallbackClient {
                 GameClientMessage message = (GameClientMessage) callback.getData();
                 gameView = message.getGameView();
                 //log.info(getLogStartInfo() + "Inform: " + message.getMessage());
+                break;
+            }
+
+            case SHOW_USERMESSAGE: {
+                List<String> messageData = (List<String>) callback.getData();
+                log.info("Warning message: " + String.join(" - ", messageData));
                 break;
             }
 

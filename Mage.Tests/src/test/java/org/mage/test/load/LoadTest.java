@@ -43,7 +43,7 @@ public class LoadTest {
     private static final String TEST_SERVER = "localhost";
     private static final int TEST_PORT = 17171;
     private static final String TEST_PROXY_TYPE = "None";
-    private static final String TEST_USER_NAME = "user";
+    private static final String TEST_USER_NAME_GLOBAL_PREFIX = "t_";
     private static final String TEST_AI_GAME_MODE = "Freeform Commander Free For All";
     private static final String TEST_AI_DECK_TYPE = "Variant Magic - Freeform Commander";
     private static final String TEST_AI_RANDOM_DECK_SETS = "NEO"; // set for random generated decks (empty for all sets usage)
@@ -127,7 +127,7 @@ public class LoadTest {
 
         // simple connection to server
         // monitor other players
-        LoadPlayer monitor = new LoadPlayer("monitor");
+        LoadPlayer monitor = new LoadPlayer("mon");
         Assert.assertTrue(monitor.session.isConnected());
         int startUsersCount = monitor.getAllRoomUsers().size();
         int minimumSleepTime = 2000;
@@ -150,11 +150,11 @@ public class LoadTest {
     public void test_TwoUsersPlayGameUntilEnd() {
 
         // monitor other players
-        LoadPlayer monitor = new LoadPlayer("monitor");
+        LoadPlayer monitor = new LoadPlayer("mon");
 
         // users
-        LoadPlayer player1 = new LoadPlayer("1");
-        LoadPlayer player2 = new LoadPlayer("2");
+        LoadPlayer player1 = new LoadPlayer("user1");
+        LoadPlayer player2 = new LoadPlayer("user2");
 
         // game by user 1
         GameTypeView gameType = prepareGameType(player1.session);
@@ -213,7 +213,7 @@ public class LoadTest {
         Assert.assertFalse("need allowed sets", deckAllowedSets.isEmpty());
 
         // monitor and game source
-        LoadPlayer monitor = new LoadPlayer("monitor", true);
+        LoadPlayer monitor = new LoadPlayer("mon", true);
 
         // game by monitor
         GameTypeView gameType = prepareGameType(monitor.session);
@@ -533,7 +533,7 @@ public class LoadTest {
         }
 
         public LoadPlayer(String userPrefix, boolean joinGameChat) {
-            this.userName = TEST_USER_NAME + "_" + userPrefix + "_" + RandomUtil.nextInt(10000);
+            this.userName = TEST_USER_NAME_GLOBAL_PREFIX + userPrefix + "_" + RandomUtil.nextInt(10000);
             this.connection = createSimpleConnection(this.userName);
             this.client = new SimpleMageClient(joinGameChat);
             this.session = new SessionImpl(this.client);
@@ -541,6 +541,8 @@ public class LoadTest {
             this.session.connect(this.connection);
             this.client.setSession(this.session);
             this.roomID = this.session.getMainRoomId();
+
+            Assert.assertTrue("client must be connected to server", this.session.isServerReady());
         }
 
         public ArrayList<UsersView> getAllRoomUsers() {
