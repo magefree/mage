@@ -38,7 +38,7 @@ public final class KroxaAndKunoros extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
