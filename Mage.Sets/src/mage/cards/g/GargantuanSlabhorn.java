@@ -43,7 +43,7 @@ public final class GargantuanSlabhorn extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // Other transformed permanents you control have trample and ward {2}.
         Ability ability = new SimpleStaticAbility(new GainAbilityControlledEffect(
