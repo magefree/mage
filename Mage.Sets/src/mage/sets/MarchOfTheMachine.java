@@ -107,6 +107,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Pile On", 122, Rarity.RARE, mage.cards.p.PileOn.class));
         cards.add(new SetCardInfo("Placid Rottentail", 199, Rarity.COMMON, mage.cards.p.PlacidRottentail.class));
         cards.add(new SetCardInfo("Plains", 277, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Protocol Knight", 74, Rarity.COMMON, mage.cards.p.ProtocolKnight.class));
         cards.add(new SetCardInfo("Ral's Reinforcements", 158, Rarity.COMMON, mage.cards.r.RalsReinforcements.class));
         cards.add(new SetCardInfo("Ramosian Greatsword", 159, Rarity.UNCOMMON, mage.cards.r.RamosianGreatsword.class));
         cards.add(new SetCardInfo("Rampaging Geoderm", 251, Rarity.UNCOMMON, mage.cards.r.RampagingGeoderm.class));
