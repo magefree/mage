@@ -77,7 +77,8 @@ public final class CardUtil {
             "put", "return", "exile", "discard", "sacrifice", "remove", "tap", "reveal", "pay"
     );
 
-    public static final int TESTS_SET_CODE_LOOKUP_LENGTH = 10; // search set code in commands like "set:card_name"
+    public static final int TESTS_SET_CODE_LOOKUP_LENGTH = 6; // search set code in commands like "set_code-card_name"
+    public static final String TESTS_SET_CODE_DELIMETER = "-"; // delimeter for cheats and tests command "set_code-card_name"
 
     /**
      * Increase spell or ability cost to be paid.

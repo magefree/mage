@@ -15,7 +15,7 @@ public class TokenImagesTest extends CardTestPlayerBase {
     @Test
     public void test_TokenMustGetSameSetCodeAsSourceCard() {
         //{3}{W}, {T}, Sacrifice Memorial to Glory: Create two 1/1 white Soldier creature tokens.
-        addCard(Zone.BATTLEFIELD, playerA, "40K:Memorial to Glory");
+        addCard(Zone.BATTLEFIELD, playerA, "40K-Memorial to Glory");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}{W}, {T}, Sacrifice");

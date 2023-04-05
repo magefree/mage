@@ -32,7 +32,7 @@ public final class GitaxianSpellstalker extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // Prowess
         this.addAbility(new ProwessAbility());
