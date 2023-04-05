@@ -1465,6 +1465,11 @@ public class VerifyCardDataTest {
             fail(card, "abilities", "card is a Saga but is missing this.addAbility(SagaAbility)");
         }
 
+        // special check: backup ability should be set up correctly
+        if (card.getAbilities().containsClass(BackupAbility.class) && CardUtil.castStream(card.getAbilities().stream(), BackupAbility.class).noneMatch(BackupAbility::hasAbilities)) {
+            fail(card, "abilities", "card has backup but is missing this.addAbility(backupAbility)");
+        }
+
         // special check: Werewolves front ability should only be on front and vice versa
         if (card.getAbilities().containsClass(WerewolfFrontTriggeredAbility.class) && card.isNightCard()) {
             fail(card, "abilities", "card is a back face werewolf with a front face ability");

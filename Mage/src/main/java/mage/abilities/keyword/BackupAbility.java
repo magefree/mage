@@ -63,6 +63,10 @@ public class BackupAbility extends EntersBattlefieldTriggeredAbility {
         card.addAbility(ability);
         abilitiesToAdd.add(ability);
     }
+
+    public boolean hasAbilities() {
+        return !abilitiesToAdd.isEmpty();
+    }
 }
 
 class BackupEffect extends OneShotEffect {
