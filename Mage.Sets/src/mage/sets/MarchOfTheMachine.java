@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class MarchOfTheMachine extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Bloated Processor", "Chrome Host Seedshark", "Corruption of Towashi", "Elesh Norn", "The Argent Etchings", "Elvish Vatkeeper", "Essence of Orthodoxy", "Furnace Gremlin", "Gift of Compleation", "Glissa, Herald of Predation", "Glistening Dawn", "Injector Crocodile", "Merciless Repurposing", "Norn's Inquisitor", "Phyrexian Awakening", "Sculpted Perfection", "Sunfall", "Tiller of Flesh", "Traumatic Revelation");
+    private static final List<String> unfinished = Arrays.asList("Bloated Processor", "Chrome Host Seedshark", "Compleated Huntmaster", "Converter Beast", "Corruption of Towashi", "Elesh Norn", "The Argent Etchings", "Elvish Vatkeeper", "Essence of Orthodoxy", "Furnace Gremlin", "Gift of Compleation", "Glissa, Herald of Predation", "Glistening Dawn", "Injector Crocodile", "Marauding Dreadship", "Merciless Repurposing", "Norn's Inquisitor", "Phyrexian Awakening", "Progenitor Exarch", "Sculpted Perfection", "Sunfall", "Tiller of Flesh", "Traumatic Revelation");
 
     private static final MarchOfTheMachine instance = new MarchOfTheMachine();
 
