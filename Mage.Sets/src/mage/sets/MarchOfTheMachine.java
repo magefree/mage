@@ -64,6 +64,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Glissa, Herald of Predation", 226, Rarity.RARE, mage.cards.g.GlissaHeraldOfPredation.class));
         cards.add(new SetCardInfo("Glistening Dawn", 187, Rarity.RARE, mage.cards.g.GlisteningDawn.class));
         cards.add(new SetCardInfo("Glistening Deluge", 107, Rarity.UNCOMMON, mage.cards.g.GlisteningDeluge.class));
+        cards.add(new SetCardInfo("Gloomfang Mauler", 108, Rarity.COMMON, mage.cards.g.GloomfangMauler.class));
         cards.add(new SetCardInfo("Gnottvold Hermit", 188, Rarity.UNCOMMON, mage.cards.g.GnottvoldHermit.class));
         cards.add(new SetCardInfo("Harried Artisan", 143, Rarity.UNCOMMON, mage.cards.h.HarriedArtisan.class));
         cards.add(new SetCardInfo("Heliod, the Radiant Dawn", 17, Rarity.RARE, mage.cards.h.HeliodTheRadiantDawn.class));
