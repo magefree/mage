@@ -32,6 +32,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Archpriest of Shadows", 89, Rarity.RARE, mage.cards.a.ArchpriestOfShadows.class));
         cards.add(new SetCardInfo("Artistic Refusal", 46, Rarity.UNCOMMON, mage.cards.a.ArtisticRefusal.class));
         cards.add(new SetCardInfo("Astral Wingspan", 48, Rarity.UNCOMMON, mage.cards.a.AstralWingspan.class));
+        cards.add(new SetCardInfo("Atraxa's Fall", 176, Rarity.COMMON, mage.cards.a.AtraxasFall.class));
         cards.add(new SetCardInfo("Attentive Skywarden", 7, Rarity.COMMON, mage.cards.a.AttentiveSkywarden.class));
         cards.add(new SetCardInfo("Beamtown Beatstick", 131, Rarity.COMMON, mage.cards.b.BeamtownBeatstick.class));
         cards.add(new SetCardInfo("Bloodfell Caves", 267, Rarity.COMMON, mage.cards.b.BloodfellCaves.class));
