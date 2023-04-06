@@ -1457,11 +1457,11 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
     }
 
-    public boolean removePlaneswalkerFromCombat(UUID planeswalkerId, Game game) {
+    public boolean removeDefendingPermanentFromCombat(UUID permanentId, Game game) {
         boolean result = false;
         for (CombatGroup group : groups) {
-            if (group.getDefenderId() != null && group.getDefenderId().equals(planeswalkerId)) {
-                group.removeAttackedPlaneswalker(planeswalkerId);
+            if (group.getDefenderId() != null && group.getDefenderId().equals(permanentId)) {
+                group.removeAttackedPermanent(permanentId);
                 result = true;
             }
         }
@@ -1469,31 +1469,32 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     public boolean removeFromCombat(UUID creatureId, Game game, boolean withEvent) {
-        boolean result = false;
         Permanent creature = game.getPermanent(creatureId);
-        if (creature != null) {
-            if (withEvent) {
-                creature.setAttacking(false);
-                creature.setBlocking(0);
-            }
-            for (CombatGroup group : groups) {
-                for (UUID attackerId : group.attackers) {
-                    Permanent attacker = game.getPermanent(attackerId);
-                    if (attacker != null) {
-                        attacker.removeBandedCard(creatureId);
-                    }
+        if (creature == null) {
+            return false;
+        }
+        boolean result = false;
+        if (withEvent) {
+            creature.setAttacking(false);
+            creature.setBlocking(0);
+        }
+        for (CombatGroup group : groups) {
+            for (UUID attackerId : group.attackers) {
+                Permanent attacker = game.getPermanent(attackerId);
+                if (attacker != null) {
+                    attacker.removeBandedCard(creatureId);
                 }
-                result |= group.remove(creatureId);
             }
-            for (CombatGroup blockingGroup : getBlockingGroups()) {
-                result |= blockingGroup.remove(creatureId);
-            }
-            creature.clearBandedCards();
-            blockingGroups.remove(creatureId);
-            if (result && withEvent) {
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.REMOVED_FROM_COMBAT, creatureId, null, null));
-                game.informPlayers(creature.getLogName() + " removed from combat");
-            }
+            result |= group.remove(creatureId);
+        }
+        for (CombatGroup blockingGroup : getBlockingGroups()) {
+            result |= blockingGroup.remove(creatureId);
+        }
+        creature.clearBandedCards();
+        blockingGroups.remove(creatureId);
+        if (result && withEvent) {
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.REMOVED_FROM_COMBAT, creatureId, null, null));
+            game.informPlayers(creature.getLogName() + " removed from combat");
         }
         return result;
     }
@@ -1544,15 +1545,6 @@ public class Combat implements Serializable, Copyable<Combat> {
         return null;
     }
 
-    //    public int totalUnblockedDamage(Game game) {
-//        int total = 0;
-//        for (CombatGroup group : groups) {
-//            if (group.getBlockers().isEmpty()) {
-//                total += group.totalAttackerDamage(game);
-//            }
-//        }
-//        return total;
-//    }
     public boolean attacksAlone() {
         return (groups.size() == 1 && groups.get(0).getAttackers().size() == 1);
     }
@@ -1561,24 +1553,9 @@ public class Combat implements Serializable, Copyable<Combat> {
         return groups.isEmpty() || getAttackers().isEmpty();
     }
 
-    public boolean isAttacked(UUID defenderId, Game game) {
-        for (CombatGroup group : groups) {
-            if (group.getDefenderId().equals(defenderId)) {
-                return true;
-            }
-            if (group.defenderIsPlaneswalker) {
-                Permanent permanent = game.getPermanent(group.getDefenderId());
-                if (permanent.isControlledBy(defenderId)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
     public boolean isPlaneswalkerAttacked(UUID defenderId, Game game) {
         for (CombatGroup group : groups) {
-            if (group.defenderIsPlaneswalker) {
+            if (group.isDefenderIsPermanent()) {
                 Permanent permanent = game.getPermanent(group.getDefenderId());
                 if (permanent.isControlledBy(defenderId)) {
                     return true;
@@ -1593,14 +1570,12 @@ public class Combat implements Serializable, Copyable<Combat> {
      * @return uuid of defending player or planeswalker
      */
     public UUID getDefenderId(UUID attackerId) {
-        UUID defenderId = null;
-        for (CombatGroup group : groups) {
-            if (group.getAttackers().contains(attackerId)) {
-                defenderId = group.getDefenderId();
-                break;
-            }
-        }
-        return defenderId;
+        return groups
+                .stream()
+                .filter(group -> group.getAttackers().contains(attackerId))
+                .map(CombatGroup::getDefenderId)
+                .findFirst()
+                .orElse(null);
     }
 
     /**
@@ -1612,40 +1587,32 @@ public class Combat implements Serializable, Copyable<Combat> {
      * @return
      */
     public UUID getDefendingPlayerId(UUID attackingCreatureId, Game game) {
-        UUID defenderId = null;
-        for (CombatGroup group : groups) {
-            if (group.getAttackers().contains(attackingCreatureId)) {
-                defenderId = group.getDefenderId();
-                if (group.defenderIsPlaneswalker) {
-                    Permanent permanent = game.getPermanentOrLKIBattlefield(defenderId);
-                    if (permanent != null) {
-                        defenderId = permanent.getControllerId();
-                    } else {
-                        defenderId = null;
-                    }
-                }
-                break;
-            }
-        }
-        return defenderId;
+        return groups
+                .stream()
+                .filter(group -> group.getAttackers().contains(attackingCreatureId))
+                .map(CombatGroup::getDefendingPlayerId)
+                .findFirst()
+                .orElse(null);
     }
 
     public Set<UUID> getPlayerDefenders(Game game) {
         return getPlayerDefenders(game, true);
     }
 
-    public Set<UUID> getPlayerDefenders(Game game, boolean includePlaneswalkers) {
+    public Set<UUID> getPlayerDefenders(Game game, boolean includePermanents) {
         Set<UUID> playerDefenders = new HashSet<>();
         for (CombatGroup group : groups) {
-            if (group.defenderIsPlaneswalker && !includePlaneswalkers) {
+            if (group.isDefenderIsPermanent() && !includePermanents) {
                 continue;
             }
-            if (group.defenderIsPlaneswalker) {
+            if (group.isDefenderIsPermanent()) {
                 Permanent permanent = game.getPermanent(group.getDefenderId());
-                if (permanent != null) {
-                    playerDefenders.add(permanent.getControllerId());
-                } else {
+                if (permanent == null) {
                     playerDefenders.add(group.getDefendingPlayerId());
+                } else if (permanent.isPlaneswalker(game)) {
+                    playerDefenders.add(permanent.getControllerId());
+                } else if (permanent.isBattle(game)) {
+                    playerDefenders.add(permanent.getProtectorId());
                 }
             } else {
                 playerDefenders.add(group.getDefenderId());

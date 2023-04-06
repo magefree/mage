@@ -1582,7 +1582,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             return game.getCombat().removeFromCombat(objectId, game, withEvent);
         } else if (this.isPlaneswalker(game)) {
             if (game.getCombat().getDefenders().contains(getId())) {
-                game.getCombat().removePlaneswalkerFromCombat(objectId, game);
+                game.getCombat().removeDefendingPermanentFromCombat(objectId, game);
             }
         }
         return false;
