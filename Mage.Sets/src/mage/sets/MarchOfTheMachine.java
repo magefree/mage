@@ -98,6 +98,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Harried Artisan", 143, Rarity.UNCOMMON, mage.cards.h.HarriedArtisan.class));
         cards.add(new SetCardInfo("Heliod, the Radiant Dawn", 17, Rarity.RARE, mage.cards.h.HeliodTheRadiantDawn.class));
         cards.add(new SetCardInfo("Heliod, the Warped Eclipse", 17, Rarity.RARE, mage.cards.h.HeliodTheWarpedEclipse.class));
+        cards.add(new SetCardInfo("Herbology Instructor", 189, Rarity.UNCOMMON, mage.cards.h.HerbologyInstructor.class));
         cards.add(new SetCardInfo("Ichor Drinker", 111, Rarity.COMMON, mage.cards.i.IchorDrinker.class));
         cards.add(new SetCardInfo("Infected Defector", 18, Rarity.COMMON, mage.cards.i.InfectedDefector.class));
         cards.add(new SetCardInfo("Injector Crocodile", 329, Rarity.COMMON, mage.cards.i.InjectorCrocodile.class));
@@ -116,6 +117,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Kor Halberd", 27, Rarity.COMMON, mage.cards.k.KorHalberd.class));
         cards.add(new SetCardInfo("Kroxa and Kunoros", 245, Rarity.MYTHIC, mage.cards.k.KroxaAndKunoros.class));
         cards.add(new SetCardInfo("Lithomantic Barrage", 152, Rarity.UNCOMMON, mage.cards.l.LithomanticBarrage.class));
+        cards.add(new SetCardInfo("Malady Invoker", 189, Rarity.UNCOMMON, mage.cards.m.MaladyInvoker.class));
         cards.add(new SetCardInfo("Marauding Dreadship", 153, Rarity.COMMON, mage.cards.m.MaraudingDreadship.class));
         cards.add(new SetCardInfo("Marshal of Zhalfir", 246, Rarity.UNCOMMON, mage.cards.m.MarshalOfZhalfir.class));
         cards.add(new SetCardInfo("Meeting of Minds", 66, Rarity.COMMON, mage.cards.m.MeetingOfMinds.class));
