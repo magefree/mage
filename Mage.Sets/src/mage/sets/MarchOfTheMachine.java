@@ -138,6 +138,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Oracle of Tragedy", 71, Rarity.UNCOMMON, mage.cards.o.OracleOfTragedy.class));
         cards.add(new SetCardInfo("Overgrown Pest", 197, Rarity.COMMON, mage.cards.o.OvergrownPest.class));
         cards.add(new SetCardInfo("Ozolith, the Shattered Spire", 198, Rarity.RARE, mage.cards.o.OzolithTheShatteredSpire.class));
+        cards.add(new SetCardInfo("Phyrexian Archivist", 262, Rarity.COMMON, mage.cards.p.PhyrexianArchivist.class));
         cards.add(new SetCardInfo("Phyrexian Awakening", 30, Rarity.UNCOMMON, mage.cards.p.PhyrexianAwakening.class));
         cards.add(new SetCardInfo("Phyrexian Gargantua", 121, Rarity.UNCOMMON, mage.cards.p.PhyrexianGargantua.class));
         cards.add(new SetCardInfo("Phyrexian Pegasus", 324, Rarity.COMMON, mage.cards.p.PhyrexianPegasus.class));
