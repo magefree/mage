@@ -110,6 +110,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Joyful Stormsculptor", 243, Rarity.UNCOMMON, mage.cards.j.JoyfulStormsculptor.class));
         cards.add(new SetCardInfo("Jungle Hollow", 270, Rarity.COMMON, mage.cards.j.JungleHollow.class));
         cards.add(new SetCardInfo("Kami of Whispered Hopes", 196, Rarity.UNCOMMON, mage.cards.k.KamiOfWhisperedHopes.class));
+        cards.add(new SetCardInfo("Karsus Depthguard", 150, Rarity.COMMON, mage.cards.k.KarsusDepthguard.class));
         cards.add(new SetCardInfo("Khenra Spellspear", 151, Rarity.UNCOMMON, mage.cards.k.KhenraSpellspear.class));
         cards.add(new SetCardInfo("Kitesail", 261, Rarity.COMMON, mage.cards.k.Kitesail.class));
         cards.add(new SetCardInfo("Kithkin Billyrider", 24, Rarity.COMMON, mage.cards.k.KithkinBillyrider.class));
