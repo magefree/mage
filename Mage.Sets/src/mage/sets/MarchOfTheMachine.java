@@ -45,6 +45,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("City on Fire", 135, Rarity.RARE, mage.cards.c.CityOnFire.class));
         cards.add(new SetCardInfo("Collective Nightmare", 95, Rarity.UNCOMMON, mage.cards.c.CollectiveNightmare.class));
         cards.add(new SetCardInfo("Compleated Conjurer", 49, Rarity.UNCOMMON, mage.cards.c.CompleatedConjurer.class));
+        cards.add(new SetCardInfo("Consuming Aetherborn", 97, Rarity.COMMON, mage.cards.c.ConsumingAetherborn.class));
         cards.add(new SetCardInfo("Converter Beast", 180, Rarity.COMMON, mage.cards.c.ConverterBeast.class));
         cards.add(new SetCardInfo("Copper Host Crusher", 181, Rarity.UNCOMMON, mage.cards.c.CopperHostCrusher.class));
         cards.add(new SetCardInfo("Corrupted Conviction", 98, Rarity.COMMON, mage.cards.c.CorruptedConviction.class));
