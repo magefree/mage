@@ -40,6 +40,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Captive Weird", 49, Rarity.UNCOMMON, mage.cards.c.CaptiveWeird.class));
         cards.add(new SetCardInfo("Chandra, Hope's Beacon", 134, Rarity.MYTHIC, mage.cards.c.ChandraHopesBeacon.class));
         cards.add(new SetCardInfo("Change the Equation", 50, Rarity.UNCOMMON, mage.cards.c.ChangeTheEquation.class));
+        cards.add(new SetCardInfo("Chomping Kavu", 179, Rarity.COMMON, mage.cards.c.ChompingKavu.class));
         cards.add(new SetCardInfo("Chrome Host Hulk", 188, Rarity.UNCOMMON, mage.cards.c.ChromeHostHulk.class));
         cards.add(new SetCardInfo("Chrome Host Seedshark", 51, Rarity.RARE, mage.cards.c.ChromeHostSeedshark.class));
         cards.add(new SetCardInfo("City on Fire", 135, Rarity.RARE, mage.cards.c.CityOnFire.class));
