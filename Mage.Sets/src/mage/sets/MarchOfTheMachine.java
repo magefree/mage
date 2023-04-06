@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class MarchOfTheMachine extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Bloated Processor", "Chrome Host Seedshark", "Compleated Huntmaster", "Converter Beast", "Corruption of Towashi", "Elesh Norn", "The Argent Etchings", "Elvish Vatkeeper", "Essence of Orthodoxy", "Furnace Gremlin", "Gift of Compleation", "Glissa, Herald of Predation", "Glistening Dawn", "Ichor Drinker", "Injector Crocodile", "Marauding Dreadship", "Merciless Repurposing", "Norn's Inquisitor", "Phyrexian Awakening", "Progenitor Exarch", "Sculpted Perfection", "Sunfall", "Tiller of Flesh", "Traumatic Revelation");
+    private static final List<String> unfinished = Arrays.asList("Assimilate Essence", "Blighted Burgeoning", "Bloated Processor", "Chrome Host Seedshark", "Compleated Huntmaster", "Converter Beast", "Corruption of Towashi", "Elesh Norn", "The Argent Etchings", "Elvish Vatkeeper", "Essence of Orthodoxy", "Eyes of Gitaxias", "Furnace Gremlin", "Gift of Compleation", "Glissa, Herald of Predation", "Glistening Dawn", "Ichor Drinker", "Infected Defector", "Injector Crocodile", "Marauding Dreadship", "Merciless Repurposing", "Norn's Inquisitor", "Phyrexian Awakening", "Progenitor Exarch", "Sculpted Perfection", "Searing Barb", "Sunder the Gateway", "Sunfall", "Tangled Skyline", "Tiller of Flesh", "Traumatic Revelation");
 
     private static final MarchOfTheMachine instance = new MarchOfTheMachine();
 
@@ -75,6 +75,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Heliod, the Warped Eclipse", 17, Rarity.RARE, mage.cards.h.HeliodTheWarpedEclipse.class));
         cards.add(new SetCardInfo("Ichor Drinker", 111, Rarity.COMMON, mage.cards.i.IchorDrinker.class));
         cards.add(new SetCardInfo("Injector Crocodile", 329, Rarity.COMMON, mage.cards.i.InjectorCrocodile.class));
+        cards.add(new SetCardInfo("Inspired Charge", 19, Rarity.COMMON, mage.cards.i.InspiredCharge.class));
         cards.add(new SetCardInfo("Interdisciplinary Mascot", 326, Rarity.RARE, mage.cards.i.InterdisciplinaryMascot.class));
         cards.add(new SetCardInfo("Into the Fire", 144, Rarity.RARE, mage.cards.i.IntoTheFire.class));
         cards.add(new SetCardInfo("Island", 278, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
@@ -82,6 +83,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Jungle Hollow", 270, Rarity.COMMON, mage.cards.j.JungleHollow.class));
         cards.add(new SetCardInfo("Kami of Whispered Hopes", 196, Rarity.UNCOMMON, mage.cards.k.KamiOfWhisperedHopes.class));
         cards.add(new SetCardInfo("Khenra Spellspear", 151, Rarity.UNCOMMON, mage.cards.k.KhenraSpellspear.class));
+        cards.add(new SetCardInfo("Kitesail", 261, Rarity.COMMON, mage.cards.k.Kitesail.class));
         cards.add(new SetCardInfo("Kithkin Billyrider", 24, Rarity.COMMON, mage.cards.k.KithkinBillyrider.class));
         cards.add(new SetCardInfo("Knight of the New Coalition", 25, Rarity.COMMON, mage.cards.k.KnightOfTheNewCoalition.class));
         cards.add(new SetCardInfo("Kroxa and Kunoros", 245, Rarity.MYTHIC, mage.cards.k.KroxaAndKunoros.class));
@@ -122,6 +124,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Seraph of New Phyrexia", 36, Rarity.UNCOMMON, mage.cards.s.SeraphOfNewPhyrexia.class));
         cards.add(new SetCardInfo("Shatter the Source", 164, Rarity.COMMON, mage.cards.s.ShatterTheSource.class));
         cards.add(new SetCardInfo("Shivan Branch-Burner", 165, Rarity.UNCOMMON, mage.cards.s.ShivanBranchBurner.class));
+        cards.add(new SetCardInfo("Skittering Surveyor", 264, Rarity.COMMON, mage.cards.s.SkitteringSurveyor.class));
         cards.add(new SetCardInfo("Skyclave Aerialist", 78, Rarity.UNCOMMON, mage.cards.s.SkyclaveAerialist.class));
         cards.add(new SetCardInfo("Skyclave Invader", 78, Rarity.UNCOMMON, mage.cards.s.SkyclaveInvader.class));
         cards.add(new SetCardInfo("Stoke the Flames", 166, Rarity.UNCOMMON, mage.cards.s.StokeTheFlames.class));
@@ -136,6 +139,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Tiller of Flesh", 44, Rarity.UNCOMMON, mage.cards.t.TillerOfFlesh.class));
         cards.add(new SetCardInfo("Tranquil Cove", 275, Rarity.COMMON, mage.cards.t.TranquilCove.class));
         cards.add(new SetCardInfo("Transcendent Message", 83, Rarity.RARE, mage.cards.t.TranscendentMessage.class));
+        cards.add(new SetCardInfo("Vanquish the Weak", 129, Rarity.COMMON, mage.cards.v.VanquishTheWeak.class));
         cards.add(new SetCardInfo("Voldaren Thrillseeker", 171, Rarity.RARE, mage.cards.v.VoldarenThrillseeker.class));
         cards.add(new SetCardInfo("War Historian", 214, Rarity.COMMON, mage.cards.w.WarHistorian.class));
         cards.add(new SetCardInfo("Wind-Scarred Crag", 276, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
