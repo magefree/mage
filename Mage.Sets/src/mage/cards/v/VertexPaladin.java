@@ -28,6 +28,7 @@ public final class VertexPaladin extends CardImpl {
         this.toughness = new MageInt(0);
         this.color.setWhite(true);
         this.color.setBlue(true);
+        this.nightCard = true;
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
