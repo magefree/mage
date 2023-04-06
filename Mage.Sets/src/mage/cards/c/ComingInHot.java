@@ -26,7 +26,7 @@ public final class ComingInHot extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(
                 FirstStrikeAbility.getInstance(), Duration.EndOfTurn
         ).setText("and gains first strike until end of turn"));
-        this.getSpellAbility().addEffect(new ScryEffect(1));
+        this.getSpellAbility().addEffect(new ScryEffect(1, false));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

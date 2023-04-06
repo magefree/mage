@@ -31,7 +31,7 @@ public final class NezumiFreewheeler extends CardImpl {
         this.secondSideCardClazz = mage.cards.h.HideousFleshwheeler.class;
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // When Nezumi Freewheeler enters the battlefield, each player mills three cards.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new MillCardsEachPlayerEffect(3, TargetController.EACH_PLAYER)));
