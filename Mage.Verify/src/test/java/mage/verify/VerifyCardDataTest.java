@@ -1,6 +1,7 @@
 package mage.verify;
 
 import com.google.common.base.CharMatcher;
+import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -1150,15 +1151,27 @@ public class VerifyCardDataTest {
                 privateTokens.add(tokenClass);
             }
         }
+        // xmage sets
+        Set<String> allSetCodes = Sets.getInstance().values().stream().map(ExpansionSet::getCode).collect(Collectors.toSet());
+
 
         // tok file's data
         List<CardDownloadData> tokFileTokens = DownloadPicturesService.getTokenCardUrls();
         LinkedHashMap<String, String> tokDataClassesIndex = new LinkedHashMap<>();
         LinkedHashMap<String, String> tokDataNamesIndex = new LinkedHashMap<>();
+        LinkedHashMap<String, List<CardDownloadData>> tokDataTokensBySetIndex = new LinkedHashMap<>();
         for (CardDownloadData tokData : tokFileTokens) {
 
             String searchName;
             String setsList;
+
+            // by set
+            List<CardDownloadData> tokensInSet = tokDataTokensBySetIndex.getOrDefault(tokData.getSet(), null);
+            if (tokensInSet == null) {
+                tokensInSet = new ArrayList<>();
+                tokDataTokensBySetIndex.put(tokData.getSet(), tokensInSet);
+            }
+            tokensInSet.add(tokData);
 
             // by class
             searchName = tokData.getTokenClassName();
@@ -1179,7 +1192,7 @@ public class VerifyCardDataTest {
             tokDataNamesIndex.put(searchName, setsList);
         }
 
-        // 1. check token name convention
+        // CHECK: token's class name convention
         for (Class<? extends TokenImpl> tokenClass : tokenClassesList) {
             if (!tokenClass.getName().endsWith("Token")) {
                 String className = extractShortClass(tokenClass);
@@ -1187,7 +1200,7 @@ public class VerifyCardDataTest {
             }
         }
 
-        // 2. check store file for public
+        // CHECK: public class for downloadable tokens
         for (Class<? extends TokenImpl> tokenClass : publicTokens) {
             String fullClass = tokenClass.getName();
             if (!fullClass.startsWith("mage.game.permanent.token.")) {
@@ -1196,15 +1209,14 @@ public class VerifyCardDataTest {
             }
         }
 
-        // 3. check private tokens (they aren't need at all)
+        // CHECK: private class for inner tokens (no needs at all -- all private tokens must be replaced by CreatureToken)
         for (Class<? extends TokenImpl> tokenClass : privateTokens) {
             String className = extractShortClass(tokenClass);
             errorsList.add("Error: no needs in private tokens, replace it with CreatureToken: " + className + " from " + tokenClass.getName());
         }
 
-        // 4. all public tokens must have tok-data (private tokens uses for innner abilities -- no need images for it)
+        // CHECK: all public tokens must have tok-data (private tokens uses for innner abilities -- no need images for it)
         for (Class<? extends TokenImpl> tokenClass : publicTokens) {
-            String className = extractShortClass(tokenClass);
             Token token = (Token) createNewObject(tokenClass);
             if (token == null) {
                 errorsList.add("Error: token must have default constructor with zero params: " + tokenClass.getName());
@@ -1212,6 +1224,49 @@ public class VerifyCardDataTest {
                 errorsList.add("Error: can't find data in card-pictures-tok.txt for token: " + tokenClass.getName() + " -> " + token.getName());
             }
         }
+
+        // CHECK: wrong set codes in tok-data
+        tokDataTokensBySetIndex.forEach((setCode, setTokens) -> {
+            if (!allSetCodes.contains(setCode)) {
+                errorsList.add("error, card-pictures-tok.txt contains unknown set code: "
+                        + setCode + " - " + setTokens.stream().map(CardDownloadData::getName).collect(Collectors.joining(", ")));
+            }
+        });
+
+        // CHECK: find possible sets without tokens
+        List<Card> cardsList = new ArrayList<>(CardScanner.getAllCards());
+        Map<String, List<Card>> setsWithTokens = new HashMap<>();
+        for (Card card : cardsList) {
+            String allRules = String.join(" ", card.getRules()).toLowerCase(Locale.ENGLISH);
+            if ((allRules.contains("create") && allRules.contains("token"))
+                    || (allRules.contains("get") && allRules.contains("emblem"))) {
+                List<Card> sourceCards = setsWithTokens.getOrDefault(card.getExpansionSetCode(), null);
+                if (sourceCards == null) {
+                    sourceCards = new ArrayList<>();
+                    setsWithTokens.put(card.getExpansionSetCode(), sourceCards);
+                }
+                sourceCards.add(card);
+            }
+        }
+        // set uses tokens, but tok data miss it
+        setsWithTokens.forEach((setCode, sourceCards) -> {
+            if (!tokDataTokensBySetIndex.containsKey(setCode)) {
+                // it's not a problem -- just find set's cards without real tokens for image tests
+                // (most use cases: promo sets)
+                warningsList.add("info, set has cards with token abilities, but it haven't token data: "
+                        + setCode + " - " + sourceCards.stream().map(MageObject::getName).collect(Collectors.joining(", ")));
+            }
+        });
+        // tok data have tokens, but cards from set are miss
+        tokDataTokensBySetIndex.forEach((setCode, setTokens) -> {
+            if (!setsWithTokens.containsKey(setCode)) {
+                // possible reasons:
+                // - bad: outdated set code in tokens database (must use exists set codes, see additional check with token's codes)
+                // - ok: promo set contains additional tokens for main set -- it's ok and must be ignored (example: Saproling in E02)
+                warningsList.add("warning, tok data has set with tokens, but real set haven't cards with it: "
+                        + setCode + " - " + setTokens.stream().map(CardDownloadData::getName).collect(Collectors.joining(", ")));
+            }
+        });
 
         // TODO: all sets must have full tokens data in tok file (token in every set)
         // 1. Download scryfall tokens list: https://api.scryfall.com/cards/search?q=t:token
