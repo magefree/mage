@@ -536,7 +536,7 @@
 |Generate|TOK:DST|Beast|||BeastToken|
 |Generate|TOK:DST|Elemental|1||WandOfTheElementsFirstToken|
 |Generate|TOK:DST|Elemental|2||WandOfTheElementsSecondToken|
-|Generate|TOK:DST|InsectWirefly|||WireflyToken|
+|Generate|TOK:DST|Wirefly|||WireflyToken|
 |Generate|TOK:DST|Insect|||InsectToken|
 |Generate|TOK:DST|Myr|||MyrToken|
 |Generate|TOK:DST|Spawn|||SpawningPitToken|
