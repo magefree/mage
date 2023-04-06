@@ -13,6 +13,6 @@ public enum ProtectedByOpponentPredicate implements ObjectSourcePlayerPredicate<
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        return game.getOpponents(input.getSource().getControllerId()).contains(input.getObject().getProtectorId());
+        return game.getOpponents(input.getPlayerId()).contains(input.getObject().getProtectorId());
     }
 }

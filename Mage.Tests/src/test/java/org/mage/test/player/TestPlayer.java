@@ -1711,15 +1711,15 @@ public class TestPlayer implements Player {
                 String[] groups = command.split("\\$");
                 for (int i = 1; i < groups.length; i++) {
                     String group = groups[i];
-                    if (group.startsWith("planeswalker=")) {
-                        String planeswalkerName = group.substring(group.indexOf("planeswalker=") + 13);
-                        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_PLANESWALKER, game)) {
-                            if (hasObjectTargetNameOrAlias(permanent, planeswalkerName)) {
+                    if (group.startsWith("permanent=")) {
+                        String permanentName = group.substring(group.indexOf("permanent=") + 10);
+                        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT, game)) {
+                            if (hasObjectTargetNameOrAlias(permanent, permanentName)) {
                                 defenderId = permanent.getId();
+                                break;
                             }
                         }
-                    }
-                    if (group.startsWith("defendingPlayer=")) {
+                    } else if (group.startsWith("defendingPlayer=")) {
                         String defendingPlayerName = group.substring(group.indexOf("defendingPlayer=") + 16);
                         for (Player defendingPlayer : game.getPlayers().values()) {
                             if (defendingPlayer.getName().equals(defendingPlayerName)) {

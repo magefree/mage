@@ -1903,11 +1903,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         addPlayerAction(player, turnNum, PhaseStep.DECLARE_ATTACKERS, "attack:" + attacker + "$defendingPlayer=" + defendingPlayer.getName());
     }
 
-    public void attack(int turnNum, TestPlayer player, String attacker, String planeswalker) {
+    public void attack(int turnNum, TestPlayer player, String attacker, String permanent) {
         //Assert.assertNotEquals("", attacker);
         assertAliaseSupportInActivateCommand(attacker, false); // it uses old special notation like card_name:index
-        assertAliaseSupportInActivateCommand(planeswalker, false);
-        addPlayerAction(player, turnNum, PhaseStep.DECLARE_ATTACKERS, "attack:" + attacker + "$planeswalker=" + planeswalker);
+        assertAliaseSupportInActivateCommand(permanent, false);
+        addPlayerAction(player, turnNum, PhaseStep.DECLARE_ATTACKERS, "attack:" + attacker + "$permanent=" + permanent);
     }
 
     public void attackSkip(int turnNum, TestPlayer player) {

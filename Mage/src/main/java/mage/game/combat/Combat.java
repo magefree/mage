@@ -11,7 +11,9 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.keyword.special.JohanVigilanceAbility;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterBattlePermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureForCombatBlock;
 import mage.filter.common.FilterCreaturePermanent;
@@ -21,6 +23,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.AttackingSameNotBandedPredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
+import mage.filter.predicate.permanent.ProtectedByOpponentPredicate;
 import mage.game.Game;
 import mage.game.events.*;
 import mage.game.permanent.Permanent;
@@ -45,6 +48,12 @@ public class Combat implements Serializable, Copyable<Combat> {
     private static final Logger logger = Logger.getLogger(Combat.class);
 
     private static FilterCreatureForCombatBlock filterBlockers = new FilterCreatureForCombatBlock();
+    private static final FilterPermanent filterBattles = new FilterBattlePermanent();
+
+    static {
+        filterBattles.add(ProtectedByOpponentPredicate.instance);
+    }
+
     // There are effects that let creatures assigns combat damage equal to its toughness rather than its power
     private boolean useToughnessForDamage;
     private final List<FilterCreaturePermanent> useToughnessForDamageFilters = new ArrayList<>();
@@ -1260,7 +1269,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         for (UUID playerId : getAttackablePlayers(game)) {
             addDefender(playerId, game);
         }
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_BATTLE, attackingPlayerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filterBattles, attackingPlayerId, game)) {
             defenders.add(permanent.getId());
         }
     }
@@ -1355,7 +1364,17 @@ public class Combat implements Serializable, Copyable<Combat> {
         if (attacker == null) {
             return false;
         }
-        CombatGroup newGroup = new CombatGroup(defenderId, defender != null, defender != null ? defender.getControllerId() : defenderId);
+        UUID defendingPlayerId;
+        if (defender == null) {
+            defendingPlayerId = defenderId;
+        } else if (defender.isPlaneswalker(game)) {
+            defendingPlayerId = defender.getControllerId();
+        } else if (defender.isBattle(game)) {
+            defendingPlayerId = defender.getProtectorId();
+        } else {
+            defendingPlayerId = null;
+        }
+        CombatGroup newGroup = new CombatGroup(defenderId, defender != null, defendingPlayerId);
         newGroup.attackers.add(attackerId);
         attacker.setAttacking(true);
         groups.add(newGroup);
