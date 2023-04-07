@@ -147,7 +147,7 @@ class LostInThoughtSpecialAction extends SpecialAction {
 
     public LostInThoughtSpecialAction() {
         super(Zone.BATTLEFIELD);
-        this.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(3)));
+        this.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(3), ""));
         this.addEffect(new LostInThoughtIgnoreEffect());
         this.setMayActivate(TargetController.CONTROLLER_ATTACHED_TO);
     }
