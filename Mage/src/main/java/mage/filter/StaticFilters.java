@@ -763,6 +763,18 @@ public final class StaticFilters {
         FILTER_PERMANENT_PLANESWALKERS.setLockedFilter(true);
     }
 
+    public static final FilterBattlePermanent FILTER_PERMANENT_BATTLE = new FilterBattlePermanent();
+
+    static {
+        FILTER_PERMANENT_BATTLE.setLockedFilter(true);
+    }
+
+    public static final FilterBattlePermanent FILTER_PERMANENT_BATTLES = new FilterBattlePermanent("battles");
+
+    static {
+        FILTER_PERMANENT_BATTLES.setLockedFilter(true);
+    }
+
     public static final FilterNonlandPermanent FILTER_PERMANENT_NON_LAND = new FilterNonlandPermanent();
 
     static {
