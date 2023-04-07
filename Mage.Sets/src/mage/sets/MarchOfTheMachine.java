@@ -204,6 +204,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Transcendent Message", 83, Rarity.RARE, mage.cards.t.TranscendentMessage.class));
         cards.add(new SetCardInfo("Urn of Godfire", 266, Rarity.COMMON, mage.cards.u.UrnOfGodfire.class));
         cards.add(new SetCardInfo("Vanquish the Weak", 129, Rarity.COMMON, mage.cards.v.VanquishTheWeak.class));
+        cards.add(new SetCardInfo("Volcanic Spite", 170, Rarity.COMMON, mage.cards.v.VolcanicSpite.class));
         cards.add(new SetCardInfo("Voldaren Thrillseeker", 171, Rarity.RARE, mage.cards.v.VoldarenThrillseeker.class));
         cards.add(new SetCardInfo("War Historian", 214, Rarity.COMMON, mage.cards.w.WarHistorian.class));
         cards.add(new SetCardInfo("War-Trained Slasher", 172, Rarity.COMMON, mage.cards.w.WarTrainedSlasher.class));
