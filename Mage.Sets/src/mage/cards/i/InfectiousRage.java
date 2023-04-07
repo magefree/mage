@@ -86,16 +86,26 @@ class InfectiousRageReattachEffect extends OneShotEffect {
         }
 
         FilterPermanent filter = new FilterPermanent();
-        filter.add(new PermanentCanBeAttachedToPredicate(auraPermanent));
+        filter.add(new PermanentCanBeAttachedToPredicate(auraPermanent)); // Doesn't exclude creatures with protection abilities
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game);
 
         if (!permanents.isEmpty()) {
             Permanent creature = permanents.get(RandomUtil.nextInt(permanents.size()));
             if (creature != null) {
+                StringBuilder message = new StringBuilder(creature.getLogName());
+                message.append(" was randomly chosen from among: ");
+                for (Permanent p : permanents) {
+                    message.append(p.getLogName());
+                    message.append(", ");
+                }
+                game.informPlayers(message.substring(0, message.length() - 2));
                 game.getState().setValue("attachTo:" + auraCard.getId(), creature);
                 controller.moveCards(auraCard, Zone.BATTLEFIELD, source, game);
                 return creature.addAttachment(auraCard.getId(), source, game);
             }
+        }
+        else {
+            game.informPlayers("No valid creatures for " + auraPermanent.getLogName() + "to enchant.");
         }
 
         return false;
