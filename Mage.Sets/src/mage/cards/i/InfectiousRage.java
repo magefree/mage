@@ -78,22 +78,23 @@ class InfectiousRageReattachEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
 
-        Card aura = game.getCard(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null || aura == null) {
+        Card auraCard = game.getCard(source.getSourceId());
+        Permanent auraPermanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+        if (controller == null || auraCard == null || auraPermanent == null) {
             return false;
         }
 
         FilterPermanent filter = new FilterPermanent();
-        filter.add(new PermanentCanBeAttachedToPredicate((Permanent) aura));
+        filter.add(new PermanentCanBeAttachedToPredicate(auraPermanent));
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game);
 
         if (!permanents.isEmpty()) {
             Permanent creature = permanents.get(RandomUtil.nextInt(permanents.size()));
             if (creature != null) {
-                game.getState().setValue("attachTo:" + aura.getId(), creature);
-                controller.moveCards(aura, Zone.BATTLEFIELD, source, game);
-                return creature.addAttachment(aura.getId(), source, game);
+                game.getState().setValue("attachTo:" + auraCard.getId(), creature);
+                controller.moveCards(auraCard, Zone.BATTLEFIELD, source, game);
+                return creature.addAttachment(auraCard.getId(), source, game);
             }
         }
 
