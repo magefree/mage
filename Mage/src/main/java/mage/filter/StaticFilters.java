@@ -995,6 +995,12 @@ public final class StaticFilters {
         FILTER_ATTACKING_CREATURE.setLockedFilter(true);
     }
 
+    public static final FilterAttackingCreature FILTER_AN_ATTACKING_CREATURE = new FilterAttackingCreature("an attacking creature");
+
+    static {
+        FILTER_AN_ATTACKING_CREATURE.setLockedFilter(true);
+    }
+
     public static final FilterAttackingCreature FILTER_ATTACKING_CREATURES = new FilterAttackingCreature("attacking creatures");
 
     static {
