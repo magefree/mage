@@ -4,7 +4,7 @@ package mage.cards.p;
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ChooseColorEffect;
@@ -33,7 +33,7 @@ public final class PrismaticCircle extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")));
 
         // As Prismatic Circle enters the battlefield, choose a color.
-        this.addAbility(new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
 
         // {1}: The next time a source of your choice of the chosen color would deal damage to you this turn, prevent that damage.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PrismaticCircleEffect(), new ManaCostsImpl<>("{1}")));

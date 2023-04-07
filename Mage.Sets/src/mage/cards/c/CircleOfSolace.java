@@ -15,9 +15,9 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author xenohedron
  */
+
 public final class CircleOfSolace extends CardImpl {
 
     public CircleOfSolace(UUID ownerId, CardSetInfo setInfo) {
