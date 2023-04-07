@@ -56,7 +56,7 @@ class CircleOfSolaceEffect extends PreventionEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!this.used && super.applies(event, source, game)) {
-            if (event.getTargetId().equals(source.getControllerId())) {
+            if (event.getTargetId().equals(source.getControllerId()) && event.getAmount() > 0) {
                 SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
                 Permanent perm = game.getPermanent(event.getSourceId());
                 return perm.getCardType().contains(CardType.CREATURE) && perm.getSubtype().contains(subType);
