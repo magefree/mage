@@ -124,6 +124,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Inspired Charge", 19, Rarity.COMMON, mage.cards.i.InspiredCharge.class));
         cards.add(new SetCardInfo("Interdisciplinary Mascot", 326, Rarity.RARE, mage.cards.i.InterdisciplinaryMascot.class));
         cards.add(new SetCardInfo("Into the Fire", 144, Rarity.RARE, mage.cards.i.IntoTheFire.class));
+        cards.add(new SetCardInfo("Invasion of Amonkhet", 231, Rarity.UNCOMMON, mage.cards.i.InvasionOfAmonkhet.class));
         cards.add(new SetCardInfo("Invasion of Belenon", 20, Rarity.UNCOMMON, mage.cards.i.InvasionOfBelenon.class));
         cards.add(new SetCardInfo("Invasion of Dominaria", 21, Rarity.UNCOMMON, mage.cards.i.InvasionOfDominaria.class));
         cards.add(new SetCardInfo("Invasion of Innistrad", 115, Rarity.MYTHIC, mage.cards.i.InvasionOfInnistrad.class));
@@ -155,6 +156,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Kor Halberd", 27, Rarity.COMMON, mage.cards.k.KorHalberd.class));
         cards.add(new SetCardInfo("Kroxa and Kunoros", 245, Rarity.MYTHIC, mage.cards.k.KroxaAndKunoros.class));
         cards.add(new SetCardInfo("Kyren Flamewright", 147, Rarity.UNCOMMON, mage.cards.k.KyrenFlamewright.class));
+        cards.add(new SetCardInfo("Lazotep Convert", 231, Rarity.UNCOMMON, mage.cards.l.LazotepConvert.class));
         cards.add(new SetCardInfo("Leyline Surge", 193, Rarity.MYTHIC, mage.cards.l.LeylineSurge.class));
         cards.add(new SetCardInfo("Lithomantic Barrage", 152, Rarity.UNCOMMON, mage.cards.l.LithomanticBarrage.class));
         cards.add(new SetCardInfo("Malady Invoker", 189, Rarity.UNCOMMON, mage.cards.m.MaladyInvoker.class));

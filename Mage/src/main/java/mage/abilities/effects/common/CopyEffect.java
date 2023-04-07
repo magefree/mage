@@ -174,8 +174,9 @@ public class CopyEffect extends ContinuousEffectImpl {
         return applier;
     }
 
-    public void setApplier(CopyApplier applier) {
+    public CopyEffect setApplier(CopyApplier applier) {
         this.applier = applier;
+        return this;
     }
 
 }
