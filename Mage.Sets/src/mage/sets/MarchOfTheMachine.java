@@ -196,6 +196,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Tarkir Duneshaper", 43, Rarity.COMMON, mage.cards.t.TarkirDuneshaper.class));
         cards.add(new SetCardInfo("Tenured Oilcaster", 126, Rarity.COMMON, mage.cards.t.TenuredOilcaster.class));
         cards.add(new SetCardInfo("Thornwood Falls", 274, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
+        cards.add(new SetCardInfo("Thrashing Frontliner", 167, Rarity.COMMON, mage.cards.t.ThrashingFrontliner.class));
         cards.add(new SetCardInfo("Thunderhead Squadron", 81, Rarity.COMMON, mage.cards.t.ThunderheadSquadron.class));
         cards.add(new SetCardInfo("Tiller of Flesh", 44, Rarity.UNCOMMON, mage.cards.t.TillerOfFlesh.class));
         cards.add(new SetCardInfo("Timberland Ancient", 210, Rarity.COMMON, mage.cards.t.TimberlandAncient.class));
