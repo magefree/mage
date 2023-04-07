@@ -442,6 +442,17 @@ public final class StaticFilters {
         FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE.setLockedFilter(true);
     }
 
+    public static final FilterControlledPermanent FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE_SHORT_TEXT = new FilterControlledPermanent("another creature or artifact");
+
+    static {
+        FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE_SHORT_TEXT.add(AnotherPredicate.instance);
+        FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE_SHORT_TEXT.add(Predicates.or(
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate()
+        ));
+        FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE_SHORT_TEXT.setLockedFilter(true);
+    }
+
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_ENCHANTMENT = new FilterControlledEnchantmentPermanent();
 
     static {
@@ -1000,6 +1011,12 @@ public final class StaticFilters {
 
     static {
         FILTER_ATTACKING_CREATURE.setLockedFilter(true);
+    }
+
+    public static final FilterAttackingCreature FILTER_AN_ATTACKING_CREATURE = new FilterAttackingCreature("an attacking creature");
+
+    static {
+        FILTER_AN_ATTACKING_CREATURE.setLockedFilter(true);
     }
 
     public static final FilterAttackingCreature FILTER_ATTACKING_CREATURES = new FilterAttackingCreature("attacking creatures");
