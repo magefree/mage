@@ -86,7 +86,8 @@ class InfectiousRageReattachEffect extends OneShotEffect {
         }
 
         FilterPermanent filter = new FilterPermanent();
-        filter.add(new PermanentCanBeAttachedToPredicate(auraPermanent)); // Doesn't exclude creatures with protection abilities
+        filter.add(CardType.CREATURE.getPredicate());
+        filter.add(new PermanentCanBeAttachedToPredicate(auraPermanent)); // Doesn't yet exclude creatures with protection abilities
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game);
 
         if (!permanents.isEmpty()) {

@@ -23,6 +23,7 @@ public class PermanentCanBeAttachedToPredicate implements ObjectSourcePlayerPred
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
+        // TODO: Is it possible to add functionality to exclude objects the aura can't enchant (e.g. protection from)?
         Permanent potentialAttachment = input.getObject();
         for (TargetAddress addr : TargetAddress.walk(aura)) {
             Target target = addr.getTarget(aura);
