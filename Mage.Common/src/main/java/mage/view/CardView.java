@@ -388,11 +388,7 @@ public class CardView extends SimpleCardView {
         this.name = card.getImageName();
         this.displayName = card.getName();
         this.displayFullName = fullCardName;
-        if (game == null) {
-            this.rules = new ArrayList<>(card.getRules());
-        } else {
-            this.rules = new ArrayList<>(card.getRules(game));
-        }
+        this.rules = new ArrayList<>(card.getRules(game));
         this.manaValue = card.getManaValue();
 
         if (card instanceof Permanent) {
@@ -627,7 +623,7 @@ public class CardView extends SimpleCardView {
             PermanentToken permanentToken = (PermanentToken) object;
             this.rarity = Rarity.COMMON;
             this.expansionSetCode = permanentToken.getExpansionSetCode();
-            this.rules = new ArrayList<>(permanentToken.getRules());
+            this.rules = new ArrayList<>(permanentToken.getRules(game));
             this.type = permanentToken.getToken().getTokenType();
         } else if (object instanceof Emblem) {
             this.mageObjectType = MageObjectType.EMBLEM;
