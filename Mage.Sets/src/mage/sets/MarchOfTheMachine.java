@@ -95,6 +95,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Furnace Gremlin", 139, Rarity.UNCOMMON, mage.cards.f.FurnaceGremlin.class));
         cards.add(new SetCardInfo("Furnace Host Charger", 140, Rarity.COMMON, mage.cards.f.FurnaceHostCharger.class));
         cards.add(new SetCardInfo("Furnace Reins", 141, Rarity.UNCOMMON, mage.cards.f.FurnaceReins.class));
+        cards.add(new SetCardInfo("Furnace-Blessed Conqueror", 38, Rarity.UNCOMMON, mage.cards.f.FurnaceBlessedConqueror.class));
         cards.add(new SetCardInfo("Furtive Analyst", 59, Rarity.COMMON, mage.cards.f.FurtiveAnalyst.class));
         cards.add(new SetCardInfo("Gift of Compleation", 106, Rarity.UNCOMMON, mage.cards.g.GiftOfCompleation.class));
         cards.add(new SetCardInfo("Gitaxian Mindstinger", 88, Rarity.COMMON, mage.cards.g.GitaxianMindstinger.class));
@@ -205,6 +206,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Storm the Seedcore", 206, Rarity.UNCOMMON, mage.cards.s.StormTheSeedcore.class));
         cards.add(new SetCardInfo("Stormclaw Rager", 254, Rarity.UNCOMMON, mage.cards.s.StormclawRager.class));
         cards.add(new SetCardInfo("Streetwise Negotiator", 207, Rarity.UNCOMMON, mage.cards.s.StreetwiseNegotiator.class));
+        cards.add(new SetCardInfo("Sun-Blessed Guardian", 38, Rarity.UNCOMMON, mage.cards.s.SunBlessedGuardian.class));
         cards.add(new SetCardInfo("Sunder the Gateway", 39, Rarity.COMMON, mage.cards.s.SunderTheGateway.class));
         cards.add(new SetCardInfo("Sunfall", 40, Rarity.RARE, mage.cards.s.Sunfall.class));
         cards.add(new SetCardInfo("Swamp", 279, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
