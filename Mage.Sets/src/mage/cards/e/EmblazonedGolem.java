@@ -63,31 +63,25 @@ public final class EmblazonedGolem extends CardImpl {
 enum EmblazonedGolemKickerValue implements DynamicValue {
     instance;
     
-    private static final DynamicValue SunburstDynamicValue = SunburstCount.instance;
-    private static final DynamicValue KickerXDynamicValue = GetKickerXValue.instance;
-    
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int count = 0;
-        int costReduction = 0; // need to calculate cost reduction, because it goes towards Emblazoned Golem's X kicker
-        int sunburst = SunburstDynamicValue.calculate(game, sourceAbility, effect); // the amount of different colors spent on casting this
-        int kickerX = KickerXDynamicValue.calculate(game, sourceAbility, effect);
+        int sunburst = SunburstCount.instance.calculate(game, sourceAbility, effect); // the amount of different colors spent on casting this
+        int kickerX = GetKickerXValue.instance.calculate(game, sourceAbility, effect);
         
         Spell spell = game.getSpellOrLKIStack(sourceAbility.getSourceId());
         if (spell == null || spell.getSpellAbility() == null) {
-            return count;
+            return 0;
         }    
         
         Mana mana = spell.getSpellAbility().getManaCostsToPay().getUsedManaToPay();
-        costReduction = Math.max(0, 2 + kickerX - mana.count()); // if less than 2+X mana was paid for this spell, its cost was reduced
+        int costReduction = Math.max(0, 2 + kickerX - mana.count()); // if less than 2+X mana was paid for this spell, its cost was reduced
         
-        count = Math.min(sunburst + costReduction, kickerX); // the count is the sum of sunburst + cost reduction, but it can't be higher than the kicker's X value
-        return count;
+        return Math.min(sunburst + costReduction, kickerX); // the returned value is the sum of sunburst + cost reduction, but it can't be higher than the kicker's X value
     }
 
     @Override
     public EmblazonedGolemKickerValue copy() {
-        return EmblazonedGolemKickerValue.instance;
+        return this;
     }
     
     @Override
