@@ -74,7 +74,8 @@ class SiegeDefeatedTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When this Siege is defeated, exile it and cast it transformed without paying its mana cost.";
+        return "When the last defense counter is removed from this permanent, exile it, " +
+                "then you may cast it transformed without paying its mana cost.";
     }
 }
 
