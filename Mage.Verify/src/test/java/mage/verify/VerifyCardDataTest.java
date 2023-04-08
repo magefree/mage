@@ -877,8 +877,8 @@ public class VerifyCardDataTest {
 
         // CHECK: wrong basic lands settings (it's for lands search, not booster construct)
         for (ExpansionSet set : sets) {
-            Boolean needLand = set.hasBasicLands();
-            Boolean foundLand = false;
+            boolean needLand = set.hasBasicLands();
+            boolean foundLand = false;
             Map<String, Integer> foundLandsList = new HashMap<>();
             for (ExpansionSet.SetCardInfo card : set.getSetCardInfo()) {
                 if (isBasicLandName(card.getName())) {
@@ -921,6 +921,68 @@ public class VerifyCardDataTest {
                 errorsList.add("Error: incorrect snow land info in set " + set.getCode() + ": "
                         + ((haveSnow && !haveNonSnow) ? "set has exclusively snow basics" : "set doesn't have exclusively snow basics")
                         + ", but xmage thinks that it " + (needSnow ? "does" : "doesn't"));
+            }
+        }
+
+        // CHECK: wrong set name
+        for (ExpansionSet set : sets) {
+            if (true) continue; // TODO: enable after merge of 40k's cards pull requests (needs before set rename)
+            MtgJsonSet jsonSet = MtgJsonService.sets().getOrDefault(set.getCode().toUpperCase(Locale.ENGLISH), null);
+            if (jsonSet == null) {
+                // unofficial or inner set
+                continue;
+            }
+            if (!Objects.equals(set.getName(), jsonSet.name)) {
+                // how-to fix: rename xmage set to the json version or fix a set's code
+                // also don't forget to change names in mtg-cards-data.txt
+                errorsList.add(String.format("Error: wrong set name or set code: %s (mtgjson set for same code: %s)",
+                        set.getCode() + " - " + set.getName(),
+                        jsonSet.name
+                ));
+            }
+        }
+
+        // CHECK: parent and block info
+        for (ExpansionSet set : sets) {
+            if (true) continue; // TODO: comments it and run to find a problems
+            MtgJsonSet jsonSet = MtgJsonService.sets().getOrDefault(set.getCode().toUpperCase(Locale.ENGLISH), null);
+            if (jsonSet == null) {
+                continue;
+            }
+
+            // parent set
+            MtgJsonSet jsonParentSet = jsonSet.parentCode == null ? null : MtgJsonService.sets().getOrDefault(jsonSet.parentCode, null);
+            ExpansionSet mageParentSet = set.getParentSet();
+            String jsonParentCode = jsonParentSet == null ? "null" : jsonParentSet.code;
+            String mageParentCode = mageParentSet == null ? "null" : mageParentSet.getCode();
+
+            String needMageClass = "";
+            if (!jsonParentCode.equals("null")) {
+                needMageClass = sets
+                        .stream()
+                        .filter(exp -> exp.getCode().equals(jsonParentCode))
+                        .map(exp -> " - " + exp.getClass().getSimpleName() + ".getInstance()")
+                        .findFirst()
+                        .orElse("- error, can't find class");
+            }
+
+            if (!Objects.equals(jsonParentCode, mageParentCode)) {
+                errorsList.add(String.format("Error: set with wrong parentSet settings: %s (parentSet = %s, but must be %s%s)",
+                        set.getCode() + " - " + set.getName(),
+                        mageParentCode,
+                        jsonParentCode,
+                        needMageClass
+                ));
+            }
+
+            // block info
+            if (!Objects.equals(set.getBlockName(), jsonSet.block)) {
+                if (true) continue; // TODO: comments it and run to find a problems
+                errorsList.add(String.format("Error: set with wrong blockName settings: %s (blockName = %s, but must be %s)",
+                        set.getCode() + " - " + set.getName(),
+                        set.getBlockName(),
+                        jsonSet.block
+                ));
             }
         }
 
