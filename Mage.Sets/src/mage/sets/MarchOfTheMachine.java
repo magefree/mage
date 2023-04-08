@@ -106,6 +106,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Golden-Scale Aeronaut", 15, Rarity.COMMON, mage.cards.g.GoldenScaleAeronaut.class));
         cards.add(new SetCardInfo("Grafted Butcher", 109, Rarity.RARE, mage.cards.g.GraftedButcher.class));
         cards.add(new SetCardInfo("Halo Hopper", 260, Rarity.COMMON, mage.cards.h.HaloHopper.class));
+        cards.add(new SetCardInfo("Halo-Charged Skaab", 60, Rarity.COMMON, mage.cards.h.HaloChargedSkaab.class));
         cards.add(new SetCardInfo("Hangar Scrounger", 142, Rarity.COMMON, mage.cards.h.HangarScrounger.class));
         cards.add(new SetCardInfo("Harried Artisan", 143, Rarity.UNCOMMON, mage.cards.h.HarriedArtisan.class));
         cards.add(new SetCardInfo("Heliod, the Radiant Dawn", 17, Rarity.RARE, mage.cards.h.HeliodTheRadiantDawn.class));
