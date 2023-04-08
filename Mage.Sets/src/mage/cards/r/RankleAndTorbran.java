@@ -52,7 +52,7 @@ public final class RankleAndTorbran extends CardImpl {
                 new CreateTokenAllEffect(new TreasureToken(), TargetController.EACH_PLAYER), false
         ).setOrBattle(true);
         ability.getModes().setMinModes(0);
-        ability.getModes().setMinModes(3);
+        ability.getModes().setMaxModes(3);
 
         // * Each player sacrifices a creature.
         ability.addMode(new Mode(new SacrificeAllEffect(1, StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
@@ -75,7 +75,7 @@ public final class RankleAndTorbran extends CardImpl {
 class RankleAndTorbranEffect extends ReplacementEffectImpl {
 
     RankleAndTorbranEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "if a source would deal damage to a player or battle this turn, it deals that much damage plus 2 instead";
     }
 
