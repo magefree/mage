@@ -179,6 +179,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Scorn-Blade Berserker", 124, Rarity.UNCOMMON, mage.cards.s.ScornBladeBerserker.class));
         cards.add(new SetCardInfo("Scoured Barrens", 272, Rarity.COMMON, mage.cards.s.ScouredBarrens.class));
         cards.add(new SetCardInfo("Sculpted Perfection", 253, Rarity.UNCOMMON, mage.cards.s.SculptedPerfection.class));
+        cards.add(new SetCardInfo("Seal from Existence", 35, Rarity.UNCOMMON, mage.cards.s.SealFromExistence.class));
         cards.add(new SetCardInfo("Searing Barb", 163, Rarity.COMMON, mage.cards.s.SearingBarb.class));
         cards.add(new SetCardInfo("Seed of Hope", 204, Rarity.COMMON, mage.cards.s.SeedOfHope.class));
         cards.add(new SetCardInfo("Seedpod Caretaker", 325, Rarity.UNCOMMON, mage.cards.s.SeedpodCaretaker.class));
