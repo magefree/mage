@@ -201,7 +201,7 @@ public class ContinuousEffects implements Serializable {
         updateTimestamps(timestampGroupName, layerEffects);
         layerEffects.sort(Comparator.comparingLong(ContinuousEffect::getOrder));
         /* debug effects apply order:
-        if (game.getStep() != null) System.out.println("layr - " + game.getTurnNum() + "." + game.getStep().getType() + ": layers " + layerEffects.size()
+        if (game.getStep() != null) System.out.println("layr - " + game.getTurnNum() + "." + game.getTurnStepType() + ": layers " + layerEffects.size()
                 + " - " + layerEffects.stream().map(l -> l.getClass().getSimpleName()).collect(Collectors.joining(", "))
                 + " - " + callName);
         //*/

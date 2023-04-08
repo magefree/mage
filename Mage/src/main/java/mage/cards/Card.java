@@ -49,11 +49,6 @@ public interface Card extends MageObject {
     List<String> getRules(Game game);  // gets card rules + in game modifications
 
     String getExpansionSetCode();
-
-    String getTokenSetCode();
-
-    String getTokenDescriptor();
-
     void checkForCountersToAdd(Permanent permanent, Ability source, Game game);
 
     void setFaceDown(boolean value, Game game);

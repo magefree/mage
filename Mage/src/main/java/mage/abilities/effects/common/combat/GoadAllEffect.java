@@ -59,7 +59,8 @@ public class GoadAllEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         if (this.affectedObjectsSet) {
-            this.affectedObjectList.removeIf(mor -> !mor.zoneCounterIsCurrent(game));
+            this.affectedObjectList.removeIf(mor -> !mor.zoneCounterIsCurrent(game)
+                    || mor.getPermanent(game) == null);
             if (affectedObjectList.isEmpty()) {
                 discard();
                 return false;

@@ -3,7 +3,6 @@ package org.mage.card.arcane;
 import mage.MageInt;
 import mage.cards.MageCardLocation;
 import mage.cards.action.ActionCallback;
-import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.ImageCaches;
 import mage.client.util.ImageHelper;
@@ -19,6 +18,7 @@ import mage.view.PermanentView;
 import mage.view.StackAbilityView;
 import org.jdesktop.swingx.graphics.GraphicsUtilities;
 import org.mage.plugins.card.images.ImageCache;
+import org.mage.plugins.card.images.ImageCacheData;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 import javax.swing.*;
@@ -466,9 +466,9 @@ public class CardPanelRenderModeImage extends CardPanel {
     public Image getImage() {
         if (this.hasImage) {
             if (getGameCard().isFaceDown()) {
-                return getFaceDownImage();
+                return getFaceDownImage().getImage();
             } else {
-                return ImageCache.getImageOriginal(getGameCard());
+                return ImageCache.getImageOriginal(getGameCard()).getImage();
             }
         }
         return null;
@@ -629,27 +629,27 @@ public class CardPanelRenderModeImage extends CardPanel {
         setTappedAngle(isTapped() ? CardPanel.TAPPED_ANGLE : 0);
         setFlippedAngle(isFlipped() ? CardPanel.FLIPPED_ANGLE : 0);
 
-        //final CardView gameCard = this.gameCard;
         final int stamp = ++updateArtImageStamp;
 
         Util.threadPool.submit(() -> {
             try {
-                final BufferedImage srcImage;
+                final ImageCacheData data;
                 if (getGameCard().isFaceDown()) {
-                    srcImage = getFaceDownImage();
-                } else if (getCardWidth() > Constants.THUMBNAIL_SIZE_FULL.width) {
-                    srcImage = ImageCache.getImage(getGameCard(), getCardWidth(), getCardHeight());
+                    data = getFaceDownImage();
                 } else {
-                    srcImage = ImageCache.getThumbnail(getGameCard());
+                    data = ImageCache.getImage(getGameCard(), getCardWidth(), getCardHeight());
                 }
-                if (srcImage == null) {
-                    setFullPath(ImageCache.getFilePath(getGameCard(), getCardWidth()));
+
+                // show path on miss image
+                if (data.getImage() == null) {
+                    setFullPath(data.getPath());
                 }
+
                 UI.invokeLater(() -> {
                     if (stamp == updateArtImageStamp) {
-                        hasImage = srcImage != null;
+                        hasImage = data.getImage() != null;
                         setTitle(getGameCard());
-                        setImage(srcImage);
+                        setImage(data.getImage());
                     }
                 });
             } catch (Exception | Error e) {
@@ -658,7 +658,7 @@ public class CardPanelRenderModeImage extends CardPanel {
         });
     }
 
-    private BufferedImage getFaceDownImage() {
+    private ImageCacheData getFaceDownImage() {
         // TODO: add download default images
         if (isPermanent() && getGameCard() instanceof PermanentView) {
             if (((PermanentView) getGameCard()).isMorphed()) {

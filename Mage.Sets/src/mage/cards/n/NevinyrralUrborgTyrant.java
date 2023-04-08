@@ -42,7 +42,7 @@ public final class NevinyrralUrborgTyrant extends CardImpl {
         // When Nevinyrral, Urborg Tyrant enters the battlefield, create a tapped 2/2 black Zombie creature token for each creature that died this turn.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(
                 new ZombieToken(), CreaturesDiedThisTurnCount.instance, true, false
-        ).setText("create a tapped 2/2 black Zombie creature token for each creature that died this turn")).addHint(CreaturesDiedThisTurnHint.instance), new CreaturesDiedWatcher());
+        ).setText("create a tapped 2/2 black Zombie creature token for each creature that died this turn")).addHint(CreaturesDiedThisTurnHint.instance));
 
         // When Nevinyrral dies, you may pay {1}. When you do, destroy all artifacts, creatures, and enchantments.
         this.addAbility(new DiesSourceTriggeredAbility(

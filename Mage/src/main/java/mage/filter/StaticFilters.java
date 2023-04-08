@@ -400,6 +400,16 @@ public final class StaticFilters {
         FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE.setLockedFilter(true);
     }
 
+    public static final FilterControlledPermanent FILTER_CONTROLLED_ARTIFACT_OR_CREATURE_SHORT_TEXT = new FilterControlledPermanent("artifact or creature");
+
+    static {
+        FILTER_CONTROLLED_ARTIFACT_OR_CREATURE_SHORT_TEXT.add(Predicates.or(
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate()
+        ));
+        FILTER_CONTROLLED_ARTIFACT_OR_CREATURE_SHORT_TEXT.setLockedFilter(true);
+    }
+
     public static final FilterControlledPermanent FILTER_CONTROLLED_ARTIFACT_OR_OTHER_CREATURE = new FilterControlledPermanent("another creature or an artifact");
 
     static {
@@ -424,6 +434,17 @@ public final class StaticFilters {
                 CardType.CREATURE.getPredicate()
         ));
         FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE.setLockedFilter(true);
+    }
+
+    public static final FilterControlledPermanent FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE_SHORT_TEXT = new FilterControlledPermanent("another creature or artifact");
+
+    static {
+        FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE_SHORT_TEXT.add(AnotherPredicate.instance);
+        FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE_SHORT_TEXT.add(Predicates.or(
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate()
+        ));
+        FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE_SHORT_TEXT.setLockedFilter(true);
     }
 
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_ENCHANTMENT = new FilterControlledEnchantmentPermanent();
@@ -742,6 +763,18 @@ public final class StaticFilters {
         FILTER_PERMANENT_PLANESWALKERS.setLockedFilter(true);
     }
 
+    public static final FilterBattlePermanent FILTER_PERMANENT_BATTLE = new FilterBattlePermanent();
+
+    static {
+        FILTER_PERMANENT_BATTLE.setLockedFilter(true);
+    }
+
+    public static final FilterBattlePermanent FILTER_PERMANENT_BATTLES = new FilterBattlePermanent("battles");
+
+    static {
+        FILTER_PERMANENT_BATTLES.setLockedFilter(true);
+    }
+
     public static final FilterNonlandPermanent FILTER_PERMANENT_NON_LAND = new FilterNonlandPermanent();
 
     static {
@@ -972,6 +1005,12 @@ public final class StaticFilters {
 
     static {
         FILTER_ATTACKING_CREATURE.setLockedFilter(true);
+    }
+
+    public static final FilterAttackingCreature FILTER_AN_ATTACKING_CREATURE = new FilterAttackingCreature("an attacking creature");
+
+    static {
+        FILTER_AN_ATTACKING_CREATURE.setLockedFilter(true);
     }
 
     public static final FilterAttackingCreature FILTER_ATTACKING_CREATURES = new FilterAttackingCreature("attacking creatures");

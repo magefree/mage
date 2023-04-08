@@ -1,6 +1,7 @@
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -23,6 +24,10 @@ public class BoostAllOfChosenSubtypeEffect extends BoostAllEffect {
         super(power, toughness, duration, filter, excludeSource);
     }
 
+    public BoostAllOfChosenSubtypeEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
+        super(power, toughness, duration, filter, excludeSource);
+    }
+    
     public BoostAllOfChosenSubtypeEffect(final BoostAllOfChosenSubtypeEffect effect) {
         super(effect);
         this.subtype = effect.subtype;

@@ -14,7 +14,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 /**
  * @author JayDi85
  */
-public class TestAliases extends CardTestPlayerBase {
+public class AliasesApiTest extends CardTestPlayerBase {
 
     @Test
     public void test_NamesEquals() {

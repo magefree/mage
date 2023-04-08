@@ -2407,7 +2407,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             case PASS_PRIORITY_UNTIL_TURN_END_STEP: // F5
                 resetPlayerPassedActions();
                 passedUntilEndOfTurn = true;
-                skippedAtLeastOnce = PhaseStep.END_TURN != game.getTurn().getStepType();
+                skippedAtLeastOnce = PhaseStep.END_TURN != game.getTurnStepType();
                 this.skip();
                 break;
             case PASS_PRIORITY_UNTIL_NEXT_TURN: // F4
@@ -2423,8 +2423,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             case PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE: //F7
                 resetPlayerPassedActions();
                 passedUntilNextMain = true;
-                skippedAtLeastOnce = !(game.getTurn().getStepType() == PhaseStep.POSTCOMBAT_MAIN
-                        || game.getTurn().getStepType() == PhaseStep.PRECOMBAT_MAIN);
+                skippedAtLeastOnce = !(game.getTurnStepType() == PhaseStep.POSTCOMBAT_MAIN
+                        || game.getTurnStepType() == PhaseStep.PRECOMBAT_MAIN);
                 this.skip();
                 break;
             case PASS_PRIORITY_UNTIL_STACK_RESOLVED: // Default F10 - Skips until the current stack is resolved

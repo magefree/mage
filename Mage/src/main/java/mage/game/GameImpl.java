@@ -675,8 +675,8 @@ public abstract class GameImpl implements Game {
                 spell = (Spell) obj;
             } else if (obj != null) {
                 logger.error(String.format(
-                        "getSpellOrLKIStack got non-spell id %s correlating to non-spell object %s.",
-                        obj.getClass().getName(), obj.getName()),
+                                "getSpellOrLKIStack got non-spell id %s correlating to non-spell object %s.",
+                                obj.getClass().getName(), obj.getName()),
                         new Throwable()
                 );
             }
@@ -1299,6 +1299,7 @@ public abstract class GameImpl implements Game {
         newWatchers.add(new BlockingOrBlockedWatcher());
         newWatchers.add(new EndStepCountWatcher());
         newWatchers.add(new CommanderPlaysCountWatcher()); // commander plays count uses in non commander games by some cards
+        newWatchers.add(new CreaturesDiedWatcher());
 
         // runtime check - allows only GAME scope (one watcher per game)
         newWatchers.forEach(watcher -> {
@@ -1397,6 +1398,27 @@ public abstract class GameImpl implements Game {
             logger.debug("END of gameId: " + this.getId());
             endTime = new Date();
             state.endGame();
+
+            // inform players about face down cards
+            state.getBattlefield().getAllPermanents()
+                    .stream()
+                    .filter(permanent -> permanent.isFaceDown(this))
+                    .map(permanent -> {
+                        Player player = this.getPlayer(permanent.getControllerId());
+                        Card card = permanent.getMainCard();
+                        if (card != null) {
+                            return String.format("Face down card reveal: %s had %s",
+                                    (player == null ? "Unknown" : player.getLogName()),
+                                    card.getLogName());
+                        } else {
+                            return null;
+                        }
+                    })
+                    .filter(Objects::nonNull)
+                    .sorted()
+                    .forEach(this::informPlayers);
+
+            // cancel all player dialogs/feedbacks
             for (Player player : state.getPlayers().values()) {
                 player.abort();
             }
@@ -2883,6 +2905,16 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
+    public PhaseStep getTurnStepType() {
+        return state.getTurnStepType();
+    }
+
+    @Override
+    public TurnPhase getTurnPhaseType() {
+        return state.getTurnPhaseType();
+    }
+
+    @Override
     public Phase getPhase() {
         return state.getTurn().getPhase();
     }
@@ -2919,7 +2951,7 @@ public abstract class GameImpl implements Game {
 
     @Override
     public boolean isMainPhase() {
-        return state.getTurn().getStepType() == PhaseStep.PRECOMBAT_MAIN || state.getTurn().getStepType() == PhaseStep.POSTCOMBAT_MAIN;
+        return state.getTurnStepType() == PhaseStep.PRECOMBAT_MAIN || state.getTurnStepType() == PhaseStep.POSTCOMBAT_MAIN;
     }
 
     @Override

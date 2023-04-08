@@ -68,7 +68,7 @@ public class DontUntapInControllersNextUntapStepSourceEffect extends ContinuousR
             validForTurnNum = game.getTurnNum();
         }
         // skip untap action
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP
+        if (game.getTurnStepType() == PhaseStep.UNTAP
                 && event.getType() == GameEvent.EventType.UNTAP
                 && game.isActivePlayer(source.getControllerId())
                 && event.getTargetId().equals(source.getSourceId())) {

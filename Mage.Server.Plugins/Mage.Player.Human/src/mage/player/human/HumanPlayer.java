@@ -1022,7 +1022,7 @@ public class HumanPlayer extends PlayerImpl {
             boolean quickStop = false;
             if (isGameUnderControl()) { // TODO: remove to enable quick stop for controlling player
                 // if was attacked - always stop BEFORE blocker step (to cast extra spells)
-                if (game.getTurn().getStepType() == PhaseStep.DECLARE_ATTACKERS
+                if (game.getTurnStepType() == PhaseStep.DECLARE_ATTACKERS
                         && game.getCombat().getPlayerDefenders(game).contains(playerId)) {
                     FilterCreatureForCombatBlock filter = filterCreatureForCombatBlock.copy();
                     filter.add(new ControllerIdPredicate(playerId));
@@ -1044,7 +1044,7 @@ public class HumanPlayer extends PlayerImpl {
                 }
 
                 if (passedUntilEndStepBeforeMyTurn) {
-                    if (game.getTurn().getStepType() != PhaseStep.END_TURN) {
+                    if (game.getTurnStepType() != PhaseStep.END_TURN) {
                         // other step
                         if (passWithManaPoolCheck(game)) {
                             return false;
@@ -1080,8 +1080,8 @@ public class HumanPlayer extends PlayerImpl {
                     }
 
                     if (passedUntilNextMain) {
-                        if (game.getTurn().getStepType() == PhaseStep.POSTCOMBAT_MAIN
-                                || game.getTurn().getStepType() == PhaseStep.PRECOMBAT_MAIN) {
+                        if (game.getTurnStepType() == PhaseStep.POSTCOMBAT_MAIN
+                                || game.getTurnStepType() == PhaseStep.PRECOMBAT_MAIN) {
                             // it's main step
                             if (!skippedAtLeastOnce
                                     || (!playerId.equals(game.getActivePlayerId())
@@ -1103,7 +1103,7 @@ public class HumanPlayer extends PlayerImpl {
                     }
 
                     if (passedUntilEndOfTurn) {
-                        if (game.getTurn().getStepType() == PhaseStep.END_TURN) {
+                        if (game.getTurnStepType() == PhaseStep.END_TURN) {
                             // it's end of turn step
                             if (!skippedAtLeastOnce
                                     || (playerId.equals(game.getActivePlayerId())
@@ -1271,16 +1271,16 @@ public class HumanPlayer extends PlayerImpl {
         try {
 
             if (playerId.equals(game.getActivePlayerId())) {
-                return !controllingPlayer.getUserData().getUserSkipPrioritySteps().getYourTurn().isPhaseStepSet(game.getStep().getType());
+                return !controllingPlayer.getUserData().getUserSkipPrioritySteps().getYourTurn().isPhaseStepSet(game.getTurnStepType());
             } else {
-                return !controllingPlayer.getUserData().getUserSkipPrioritySteps().getOpponentTurn().isPhaseStepSet(game.getStep().getType());
+                return !controllingPlayer.getUserData().getUserSkipPrioritySteps().getOpponentTurn().isPhaseStepSet(game.getTurnStepType());
             }
         } catch (NullPointerException ex) {
             if (controllingPlayer.getUserData() != null) {
                 if (controllingPlayer.getUserData().getUserSkipPrioritySteps() != null) {
                     if (game.getStep() != null) {
-                        if (game.getStep().getType() == null) {
-                            logger.error("game.getStep().getType() == null");
+                        if (game.getTurnStepType() == null) {
+                            logger.error("game.getTurnStepType() == null");
                         }
                     } else {
                         logger.error("game.getStep() == null");
@@ -2659,7 +2659,7 @@ public class HumanPlayer extends PlayerImpl {
             }
             // TODO: chooseUse and other dialogs must be under controlling player
             if (!chooseUse(Outcome.Detriment, GameLog.getPlayerConfirmColoredText("You still have mana in your mana pool. Pass regardless?")
-                    + GameLog.getSmallSecondLineText(activePlayerText + " / " + game.getStep().getType().toString() + priorityPlayerText), null, game)) {
+                    + GameLog.getSmallSecondLineText(activePlayerText + " / " + game.getTurnStepType().toString() + priorityPlayerText), null, game)) {
                 sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, game, null);
                 return false;
             }
