@@ -221,6 +221,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("War Historian", 214, Rarity.COMMON, mage.cards.w.WarHistorian.class));
         cards.add(new SetCardInfo("War-Trained Slasher", 172, Rarity.COMMON, mage.cards.w.WarTrainedSlasher.class));
         cards.add(new SetCardInfo("Wary Thespian", 215, Rarity.COMMON, mage.cards.w.WaryThespian.class));
+        cards.add(new SetCardInfo("Wicked Slumber", 84, Rarity.UNCOMMON, mage.cards.w.WickedSlumber.class));
         cards.add(new SetCardInfo("Wildwood Escort", 216, Rarity.COMMON, mage.cards.w.WildwoodEscort.class));
         cards.add(new SetCardInfo("Wind-Scarred Crag", 276, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
         cards.add(new SetCardInfo("Wrenn and Realmbreaker", 217, Rarity.MYTHIC, mage.cards.w.WrennAndRealmbreaker.class));
