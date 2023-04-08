@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.common.DrawSecondCardTriggeredAbility;
+import mage.abilities.common.DrawCardTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -28,8 +28,8 @@ public final class ThopterMechanic extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever you draw your second card each turn, put a +1/+1 counter on Thopter Mechanic.
-        this.addAbility(new DrawSecondCardTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false
+        this.addAbility(new DrawCardTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, 2
         ));
 
         // When Thopter Mechanic dies, create a 1/1 colorless Thopter artifact creature token with flying.

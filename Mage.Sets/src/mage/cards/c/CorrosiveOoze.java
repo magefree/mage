@@ -153,7 +153,7 @@ class CorrosiveOozeCombatWatcher extends Watcher {
 
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
-                if (game.getTurn() != null && TurnPhase.COMBAT == game.getTurn().getPhaseType()) {
+                if (game.getTurn() != null && TurnPhase.COMBAT == game.getTurnPhaseType()) {
                     // Check if a previous blocked or blocked by creatures is leaving the battlefield
                     for (Map.Entry<MageObjectReference, Set<MageObjectReference>> entry : oozeBlocksOrBlocked.entrySet()) {
                         for (MageObjectReference mor : entry.getValue()) {

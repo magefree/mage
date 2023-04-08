@@ -8,7 +8,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 /**
  * @author JayDi85
  */
-public class WaitStackResolvedTest extends CardTestPlayerBase {
+public class WaitStackResolvedApiTest extends CardTestPlayerBase {
 
     @Test
     public void test_Spells() {

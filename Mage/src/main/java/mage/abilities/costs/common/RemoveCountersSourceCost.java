@@ -14,6 +14,7 @@ import mage.players.Player;
 import mage.util.RandomUtil;
 
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -58,7 +59,7 @@ public class RemoveCountersSourceCost extends CostImpl {
         }
         String toRemove;
         if (name.isEmpty()) {
-            Set<String> toChoose = permanent.getCounters(game).keySet();
+            Set<String> toChoose = new LinkedHashSet<>(permanent.getCounters(game).keySet());
             switch (toChoose.size()) {
                 case 0:
                     return paid;

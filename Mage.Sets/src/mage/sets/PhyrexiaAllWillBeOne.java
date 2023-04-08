@@ -161,6 +161,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Nimraiser Paladin", 101, Rarity.UNCOMMON, mage.cards.n.NimraiserPaladin.class));
         cards.add(new SetCardInfo("Nissa, Ascended Animist", 175, Rarity.MYTHIC, mage.cards.n.NissaAscendedAnimist.class));
         cards.add(new SetCardInfo("Norn's Wellspring", 24, Rarity.RARE, mage.cards.n.NornsWellspring.class));
+        cards.add(new SetCardInfo("Noxious Assault", 176, Rarity.UNCOMMON, mage.cards.n.NoxiousAssault.class));
         cards.add(new SetCardInfo("Offer Immortality", 102, Rarity.COMMON, mage.cards.o.OfferImmortality.class));
         cards.add(new SetCardInfo("Oil-Gorger Troll", 177, Rarity.COMMON, mage.cards.o.OilGorgerTroll.class));
         cards.add(new SetCardInfo("Orthodoxy Enforcer", 25, Rarity.COMMON, mage.cards.o.OrthodoxyEnforcer.class));

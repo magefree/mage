@@ -44,8 +44,7 @@ public final class KuonOgreAscendant extends CardImpl {
                 Zone.BATTLEFIELD,
                 new FlipSourceEffect(new KuonsEssenceToken()),
                 TargetController.ANY,
-                KuonOgreAscendantCondition.instance, false),
-                new CreaturesDiedWatcher());
+                KuonOgreAscendantCondition.instance, false));
     }
 
     private KuonOgreAscendant(final KuonOgreAscendant card) {
