@@ -78,7 +78,7 @@ enum EmblazonedGolemKickerValue implements DynamicValue {
             return count;
         }    
         
-        Mana mana = ((Spell) spell).getSpellAbility().getManaCostsToPay().getUsedManaToPay();
+        Mana mana = spell.getSpellAbility().getManaCostsToPay().getUsedManaToPay();
         costReduction = Math.max(0, 2 + kickerX - mana.count()); // if less than 2+X mana was paid for this spell, its cost was reduced
         
         count = Math.min(sunburst + costReduction, kickerX); // the count is the sum of sunburst + cost reduction, but it can't be higher than the kicker's X value
