@@ -114,6 +114,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Herbology Instructor", 189, Rarity.UNCOMMON, mage.cards.h.HerbologyInstructor.class));
         cards.add(new SetCardInfo("Hideous Fleshwheeler", 119, Rarity.UNCOMMON, mage.cards.h.HideousFleshwheeler.class));
         cards.add(new SetCardInfo("Ichor Drinker", 111, Rarity.COMMON, mage.cards.i.IchorDrinker.class));
+        cards.add(new SetCardInfo("Ichor Shade", 112, Rarity.COMMON, mage.cards.i.IchorShade.class));
         cards.add(new SetCardInfo("Infected Defector", 18, Rarity.COMMON, mage.cards.i.InfectedDefector.class));
         cards.add(new SetCardInfo("Injector Crocodile", 329, Rarity.COMMON, mage.cards.i.InjectorCrocodile.class));
         cards.add(new SetCardInfo("Inspired Charge", 19, Rarity.COMMON, mage.cards.i.InspiredCharge.class));
