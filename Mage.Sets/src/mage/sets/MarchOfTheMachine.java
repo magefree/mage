@@ -88,6 +88,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Fairgrounds Trumpeter", 335, Rarity.COMMON, mage.cards.f.FairgroundsTrumpeter.class));
         cards.add(new SetCardInfo("Fearless Skald", 138, Rarity.UNCOMMON, mage.cards.f.FearlessSkald.class));
         cards.add(new SetCardInfo("Final Flourish", 104, Rarity.COMMON, mage.cards.f.FinalFlourish.class));
+        cards.add(new SetCardInfo("Flitting Guerrilla", 105, Rarity.COMMON, mage.cards.f.FlittingGuerrilla.class));
         cards.add(new SetCardInfo("Flywheel Racer", 259, Rarity.COMMON, mage.cards.f.FlywheelRacer.class));
         cards.add(new SetCardInfo("Forest", 281, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Furnace Gremlin", 139, Rarity.UNCOMMON, mage.cards.f.FurnaceGremlin.class));
