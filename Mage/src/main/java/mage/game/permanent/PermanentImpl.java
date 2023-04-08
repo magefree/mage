@@ -1222,18 +1222,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             if (defense > 0) {
                 this.addCounters(CounterType.DEFENSE.createInstance(defense), source, game);
             }
-            if (this.hasSubtype(SubType.SIEGE, game)) {
-                Set<UUID> opponents = game.getOpponents(getControllerId());
-                if (opponents.size() > 1) {
-                    TargetPlayer target = new TargetPlayer(new FilterOpponent("protector for " + getName()));
-                    target.setNotTarget(true);
-                    target.setRequired(true);
-                    game.getPlayer(getControllerId()).choose(Outcome.Neutral, target, source, game);
-                    this.setProtectorId(target.getFirstTarget(), game);
-                } else {
-                    this.setProtectorId(RandomUtil.randomFromCollection(opponents), game);
-                }
-            }
+            this.chooseProtector(game, source);
         }
         if (!fireEvent) {
             return false;
@@ -1684,10 +1673,26 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public void setProtectorId(UUID protectorId, Game game) {
+    public void chooseProtector(Game game, Ability source) {
+        Set<UUID> opponents = game.getOpponents(this.getControllerId());
+        UUID protectorId;
+        if (opponents.size() > 1) {
+            TargetPlayer target = new TargetPlayer(new FilterOpponent("protector for " + getName()));
+            target.setNotTarget(true);
+            target.setRequired(true);
+            game.getPlayer(getControllerId()).choose(Outcome.Neutral, target, source, game);
+            protectorId = target.getFirstTarget();
+        } else {
+            protectorId = RandomUtil.randomFromCollection(opponents);
+        }
         String protectorName = game.getPlayer(protectorId).getLogName();
         game.informPlayers(protectorName + " has been chosen to protect " + this.getLogName());
         this.addInfo("protector", "Protected by " + protectorName, game);
+        this.setProtectorId(protectorId);
+    }
+
+    @Override
+    public void setProtectorId(UUID protectorId) {
         this.protectorId = protectorId;
     }
 

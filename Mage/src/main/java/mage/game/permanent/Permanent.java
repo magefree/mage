@@ -89,7 +89,9 @@ public interface Permanent extends Card, Controllable {
 
     Set<UUID> getGoadingPlayers();
 
-    void setProtectorId(UUID playerId, Game game);
+    void chooseProtector(Game game, Ability source);
+
+    void setProtectorId(UUID playerId);
 
     UUID getProtectorId();
 
