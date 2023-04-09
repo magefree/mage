@@ -32,7 +32,6 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Aftershock", 129, Rarity.COMMON, mage.cards.a.Aftershock.class));
         cards.add(new SetCardInfo("Ajani's Pridemate", 142, Rarity.UNCOMMON, mage.cards.a.AjanisPridemate.class));
         cards.add(new SetCardInfo("Ajani, Strength of the Pride", 141, Rarity.MYTHIC, mage.cards.a.AjaniStrengthOfThePride.class));
-        cards.add(new SetCardInfo("Alandra, Sky Dreamer", 9, Rarity.RARE, mage.cards.a.AlandraSkyDreamer.class));
         cards.add(new SetCardInfo("Alchemist's Vial", 753, Rarity.COMMON, mage.cards.a.AlchemistsVial.class));
         cards.add(new SetCardInfo("Alley Strangler", 375, Rarity.COMMON, mage.cards.a.AlleyStrangler.class));
         cards.add(new SetCardInfo("Alseid of Life's Bounty", 143, Rarity.UNCOMMON, mage.cards.a.AlseidOfLifesBounty.class));

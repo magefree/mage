@@ -124,12 +124,14 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Goro-Goro and Satoru", 445, Rarity.MYTHIC, mage.cards.g.GoroGoroAndSatoru.class));
         cards.add(new SetCardInfo("Graveshifter", 251, Rarity.UNCOMMON, mage.cards.g.Graveshifter.class));
         cards.add(new SetCardInfo("Gruul Signet", 358, Rarity.COMMON, mage.cards.g.GruulSignet.class));
+        cards.add(new SetCardInfo("Guardian Scalelord", 16, Rarity.RARE, mage.cards.g.GuardianScalelord.class));
         cards.add(new SetCardInfo("Gyre Sage", 300, Rarity.RARE, mage.cards.g.GyreSage.class));
         cards.add(new SetCardInfo("Haakon, Stromgald Scourge", 252, Rarity.RARE, mage.cards.h.HaakonStromgaldScourge.class));
         cards.add(new SetCardInfo("Hamza, Guardian of Arashin", 327, Rarity.UNCOMMON, mage.cards.h.HamzaGuardianOfArashin.class));
         cards.add(new SetCardInfo("Heaven // Earth", 328, Rarity.RARE, mage.cards.h.HeavenEarth.class));
         cards.add(new SetCardInfo("Hedron Archive", 359, Rarity.UNCOMMON, mage.cards.h.HedronArchive.class));
         cards.add(new SetCardInfo("Hellkite Igniter", 284, Rarity.RARE, mage.cards.h.HellkiteIgniter.class));
+        cards.add(new SetCardInfo("Herald of Hoofbeats", 22, Rarity.RARE, mage.cards.h.HeraldOfHoofbeats.class));
         cards.add(new SetCardInfo("Herald's Horn", 360, Rarity.UNCOMMON, mage.cards.h.HeraldsHorn.class));
         cards.add(new SetCardInfo("Hero of Bladehold", 188, Rarity.MYTHIC, mage.cards.h.HeroOfBladehold.class));
         cards.add(new SetCardInfo("High Sentinels of Arashin", 189, Rarity.RARE, mage.cards.h.HighSentinelsOfArashin.class));
@@ -150,6 +152,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Junk Winder", 225, Rarity.UNCOMMON, mage.cards.j.JunkWinder.class));
         cards.add(new SetCardInfo("Kalonian Hydra", 305, Rarity.MYTHIC, mage.cards.k.KalonianHydra.class));
         cards.add(new SetCardInfo("Karn's Bastion", 409, Rarity.RARE, mage.cards.k.KarnsBastion.class));
+        cards.add(new SetCardInfo("Kasla, the Broken Halo", 4, Rarity.MYTHIC, mage.cards.k.KaslaTheBrokenHalo.class));
         cards.add(new SetCardInfo("Keeper of the Accord", 191, Rarity.RARE, mage.cards.k.KeeperOfTheAccord.class));
         cards.add(new SetCardInfo("Keskit, the Flesh Sculptor", 254, Rarity.UNCOMMON, mage.cards.k.KeskitTheFleshSculptor.class));
         cards.add(new SetCardInfo("Kessig Wolf Run", 410, Rarity.RARE, mage.cards.k.KessigWolfRun.class));
@@ -240,6 +243,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Skullclamp", 379, Rarity.UNCOMMON, mage.cards.s.Skullclamp.class));
         cards.add(new SetCardInfo("Skyclave Relic", 380, Rarity.RARE, mage.cards.s.SkyclaveRelic.class));
         cards.add(new SetCardInfo("Skycloud Expanse", 425, Rarity.RARE, mage.cards.s.SkycloudExpanse.class));
+        cards.add(new SetCardInfo("Slimefoot and Squee", 447, Rarity.MYTHIC, mage.cards.s.SlimefootAndSquee.class));
         cards.add(new SetCardInfo("Slurrk, All-Ingesting", 312, Rarity.UNCOMMON, mage.cards.s.SlurrkAllIngesting.class));
         cards.add(new SetCardInfo("Smitten Swordmaster", 268, Rarity.COMMON, mage.cards.s.SmittenSwordmaster.class));
         cards.add(new SetCardInfo("Sol Ring", 381, Rarity.UNCOMMON, mage.cards.s.SolRing.class));

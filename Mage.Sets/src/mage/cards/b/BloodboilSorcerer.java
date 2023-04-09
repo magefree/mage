@@ -12,8 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -22,16 +21,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class BloodboilSorcerer extends CardImpl {
-
-    private static final FilterControlledPermanent filter
-            = new FilterControlledPermanent("an artifact or creature");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.ARTIFACT.getPredicate(),
-                CardType.CREATURE.getPredicate()
-        ));
-    }
 
     public BloodboilSorcerer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
@@ -46,7 +35,7 @@ public final class BloodboilSorcerer extends CardImpl {
 
         // Crown of Madness — {1}{R}, Sacrifice an artifact or creature: Goad target creature.
         Ability ability = new SimpleActivatedAbility(new GoadTargetEffect(), new ManaCostsImpl<>("{1}{R}"));
-        ability.addCost(new SacrificeTargetCost(filter));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ARTIFACT_OR_CREATURE_SHORT_TEXT));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability.withFlavorWord("Crown of Madness"));
     }

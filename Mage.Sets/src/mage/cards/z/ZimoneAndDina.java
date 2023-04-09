@@ -2,7 +2,7 @@ package mage.cards.z;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DrawCardTriggeredAbility;
+import mage.abilities.common.DrawSecondCardTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -36,7 +36,7 @@ public final class ZimoneAndDina extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever you draw your second card each turn, target opponent loses 2 life and you gain 2 life.
-        Ability ability = new DrawCardTriggeredAbility(new LoseLifeTargetEffect(2), false, 2);
+        Ability ability = new DrawSecondCardTriggeredAbility(new LoseLifeTargetEffect(2), false);
         ability.addEffect(new GainLifeEffect(2).concatBy("and"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
