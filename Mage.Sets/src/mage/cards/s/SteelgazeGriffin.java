@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.common.DrawCardTriggeredAbility;
+import mage.abilities.common.DrawSecondCardTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -28,7 +28,7 @@ public final class SteelgazeGriffin extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When you draw your second card each turn, Steelgaze Griffin gets +2/+0 until end of turn.
-        this.addAbility(new DrawCardTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), false, 2));
+        this.addAbility(new DrawSecondCardTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), false));
     }
 
     private SteelgazeGriffin(final SteelgazeGriffin card) {

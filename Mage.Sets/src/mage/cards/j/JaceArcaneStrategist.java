@@ -2,7 +2,7 @@ package mage.cards.j;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.DrawCardTriggeredAbility;
+import mage.abilities.common.DrawSecondCardTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedAllEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -31,8 +31,8 @@ public final class JaceArcaneStrategist extends CardImpl {
         this.setStartingLoyalty(4);
 
         // Whenever you draw your second card each turn, put a +1/+1 counter on target creature you control.
-        Ability ability = new DrawCardTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false, 2
+        Ability ability = new DrawSecondCardTriggeredAbility(
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false
         );
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);

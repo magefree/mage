@@ -18,36 +18,32 @@ import java.util.*;
 /**
  * @author TheElk801
  */
-public class DrawCardTriggeredAbility extends TriggeredAbilityImpl {
+public class DrawSecondCardTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final Hint hint = new ValueHint(
             "Cards drawn this turn", CardsDrawnThisTurnDynamicValue.instance
     );
     private final TargetController targetController;
-    private final DrawCardWatcher drawCardWatcher = new DrawCardWatcher();
-    private final Integer cardNumber;
 
-    public DrawCardTriggeredAbility(Effect effect, boolean optional, Integer cardNumber) {
-        this(effect, optional, TargetController.YOU, cardNumber);
+    public DrawSecondCardTriggeredAbility(Effect effect, boolean optional) {
+        this(effect, optional, TargetController.YOU);
     }
 
-    public DrawCardTriggeredAbility(Effect effect, boolean optional, TargetController targetController, Integer cardNumber) {
-        this(Zone.BATTLEFIELD, effect, optional, targetController, cardNumber);
+    public DrawSecondCardTriggeredAbility(Effect effect, boolean optional, TargetController targetController) {
+        this(Zone.BATTLEFIELD, effect, optional, targetController);
     }
 
-    public DrawCardTriggeredAbility(Zone zone, Effect effect, boolean optional, TargetController targetController, Integer cardNumber) {
+    public DrawSecondCardTriggeredAbility(Zone zone, Effect effect, boolean optional, TargetController targetController) {
         super(zone, effect, optional);
-        this.addWatcher(this.drawCardWatcher);
+        this.addWatcher(new DrawSecondCardWatcher());
         this.targetController = targetController;
-        this.cardNumber = cardNumber;
         this.addHint(hint);
         setTriggerPhrase(generateTriggerPhrase());
     }
 
-    private DrawCardTriggeredAbility(final DrawCardTriggeredAbility ability) {
+    private DrawSecondCardTriggeredAbility(final DrawSecondCardTriggeredAbility ability) {
         super(ability);
         this.targetController = ability.targetController;
-        this.cardNumber = ability.cardNumber;
     }
 
     @Override
@@ -77,7 +73,7 @@ public class DrawCardTriggeredAbility extends TriggeredAbilityImpl {
             default:
                 throw new IllegalArgumentException("TargetController " + targetController + " not supported");
         }
-        return drawCardWatcher.checkEvent(event.getPlayerId(), event, cardNumber);
+        return DrawSecondCardWatcher.checkEvent(event.getPlayerId(), event, game);
     }
 
     public String generateTriggerPhrase() {
@@ -94,16 +90,17 @@ public class DrawCardTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public DrawCardTriggeredAbility copy() {
-        return new DrawCardTriggeredAbility(this);
+    public DrawSecondCardTriggeredAbility copy() {
+        return new DrawSecondCardTriggeredAbility(this);
     }
 }
 
-class DrawCardWatcher extends Watcher {
+class DrawSecondCardWatcher extends Watcher {
 
-    private final Map<UUID, SortedSet<UUID>> drawMap = new HashMap<>();
+    private final Set<UUID> drewOnce = new HashSet<>();
+    private final Map<UUID, UUID> secondDrawMap = new HashMap<>();
 
-    DrawCardWatcher() {
+    DrawSecondCardWatcher() {
         super(WatcherScope.GAME);
     }
 
@@ -112,20 +109,21 @@ class DrawCardWatcher extends Watcher {
         if (event.getType() != GameEvent.EventType.DREW_CARD) {
             return;
         }
-        if (!drawMap.containsKey(event.getPlayerId())) {
-            drawMap.putIfAbsent(event.getPlayerId(), new TreeSet<>());
+        if (drewOnce.contains(event.getPlayerId())) {
+            secondDrawMap.putIfAbsent(event.getPlayerId(), event.getId());
+        } else {
+            drewOnce.add(event.getPlayerId());
         }
-        drawMap.get(event.getPlayerId()).add(event.getId());
     }
 
     @Override
     public void reset() {
         super.reset();
-        drawMap.clear();
+        drewOnce.clear();
+        secondDrawMap.clear();
     }
-    
-    public boolean checkEvent(UUID playerId, GameEvent event, Integer cardNumber) {
-        return this.drawMap.containsKey(playerId) && Objects.equals(this.drawMap.get(playerId).size(), cardNumber) && event.getId().equals(this.drawMap.get(playerId).last());
+
+    static boolean checkEvent(UUID playerId, GameEvent event, Game game) {
+        return event.getId().equals(game.getState().getWatcher(DrawSecondCardWatcher.class).secondDrawMap.getOrDefault(playerId, null));
     }
-    
 }

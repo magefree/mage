@@ -2,7 +2,7 @@ package mage.cards.j;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.DrawCardTriggeredAbility;
+import mage.abilities.common.DrawSecondCardTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;

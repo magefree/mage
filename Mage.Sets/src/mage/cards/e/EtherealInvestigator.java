@@ -1,7 +1,7 @@
 package mage.cards.e;
 
 import mage.MageInt;
-import mage.abilities.common.DrawCardTriggeredAbility;
+import mage.abilities.common.DrawSecondCardTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.OpponentsCount;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -34,8 +34,8 @@ public final class EtherealInvestigator extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new InvestigateEffect(OpponentsCount.instance)));
 
         // Whenever you draw your second card each turn, create a 1/1 white Spirit creature token with flying.
-        this.addAbility(new DrawCardTriggeredAbility(
-                new CreateTokenEffect(new SpiritWhiteToken()), false, 2
+        this.addAbility(new DrawSecondCardTriggeredAbility(
+                new CreateTokenEffect(new SpiritWhiteToken()), false
         ));
     }
 

@@ -1,7 +1,7 @@
 package mage.cards.m;
 
 import mage.abilities.Ability;
-import mage.abilities.common.DrawCardTriggeredAbility;
+import mage.abilities.common.DrawSecondCardTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
@@ -29,9 +29,9 @@ public final class MantleOfTides extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 2)));
 
         // Whenever you draw your second card each turn, attach Mantle of Tides to target creature you control.
-        Ability ability = new DrawCardTriggeredAbility(new AttachEffect(
+        Ability ability = new DrawSecondCardTriggeredAbility(new AttachEffect(
                 Outcome.Benefit, "attach {this} to target creature you control"
-        ), false, 2);
+        ), false);
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
 
