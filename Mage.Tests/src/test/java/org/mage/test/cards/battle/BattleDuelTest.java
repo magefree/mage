@@ -12,7 +12,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 /**
  * @author TheElk801
  */
-public class BattleTest extends CardTestPlayerBase {
+public class BattleDuelTest extends CardTestPlayerBase {
 
     private static final String belenon = "Invasion of Belenon";
     private static final String bear = "Grizzly Bears";
