@@ -1,5 +1,6 @@
 package mage.cards.l;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -18,6 +19,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlaneswalker;
+import mage.watchers.common.ConvokeWatcher;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -53,15 +55,9 @@ public final class LethalScheme extends CardImpl {
 // Based loosely on "Venerated Loxodon" and "Change of Plans"
 class LethalSchemeEffect extends OneShotEffect {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent();
-
-    static {
-        filter.add(ConvokedSourcePredicate.SPELL);
-    }
-
     public LethalSchemeEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Each creature that convoked Lethal Scheme connives.";
+        this.staticText = "Each creature that convoked {this} connives.";
     }
 
     public LethalSchemeEffect(final LethalSchemeEffect effect) {
@@ -76,9 +72,10 @@ class LethalSchemeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Set<AbstractMap.SimpleEntry<UUID, Permanent>> playerPermanentsPairs =
-                game.getBattlefield()
-                        .getActivePermanents(filter, source.getControllerId(), source, game)
+                ConvokeWatcher.getConvokingCreatures(new MageObjectReference(source),game)
                         .stream()
+                        .map(mor->mor.getPermanentOrLKIBattlefield(game))
+                        .filter(Objects::nonNull)
                         .map(permanent -> new AbstractMap.SimpleEntry<>(permanent.getControllerId(), permanent))
                         .collect(Collectors.toSet());
 

@@ -8,10 +8,7 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author LevelX2
@@ -44,7 +41,7 @@ public class ConvokeWatcher extends Watcher {
                 .getState()
                 .getWatcher(ConvokeWatcher.class)
                 .convokingCreatures
-                .get(mor);
+                .getOrDefault(mor, Collections.emptySet());
     }
 
     public static boolean checkConvoke(MageObjectReference mor, Permanent permanent, Game game) {
