@@ -63,6 +63,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Chant of Vitu-Ghazi", 177, Rarity.UNCOMMON, mage.cards.c.ChantOfVituGhazi.class));
         cards.add(new SetCardInfo("Chaos Warp", 273, Rarity.RARE, mage.cards.c.ChaosWarp.class));
         cards.add(new SetCardInfo("Chasm Skulker", 218, Rarity.RARE, mage.cards.c.ChasmSkulker.class));
+        cards.add(new SetCardInfo("Chivalric Alliance", 11, Rarity.RARE, mage.cards.c.ChivalricAlliance.class));
         cards.add(new SetCardInfo("Choked Estuary", 394, Rarity.RARE, mage.cards.c.ChokedEstuary.class));
         cards.add(new SetCardInfo("Cinder Glade", 395, Rarity.RARE, mage.cards.c.CinderGlade.class));
         cards.add(new SetCardInfo("Cloud of Faeries", 219, Rarity.COMMON, mage.cards.c.CloudOfFaeries.class));
