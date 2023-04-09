@@ -80,7 +80,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Oona, Queen of the Fae", 54, Rarity.MYTHIC, mage.cards.o.OonaQueenOfTheFae.class));
         cards.add(new SetCardInfo("Saskia the Unyielding", 55, Rarity.MYTHIC, mage.cards.s.SaskiaTheUnyielding.class));
         cards.add(new SetCardInfo("Arcbound Ravager", 56, Rarity.RARE, mage.cards.a.ArcboundRavager.class));
-        cards.add(new SetCardInfo("Darksteel Colossus", 57, Rarity.MYTHIC, mage.cards.d.DarksteelColossus.class));
+        cards.add(new SetCardInfo("Darksteel Colossus", 57, Rarity.MYTHIC, mage.cards.d.DarksteelColossus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Walking Ballista", 58, Rarity.RARE, mage.cards.w.WalkingBallista.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Squire", 59, Rarity.RARE, mage.cards.s.Squire.class));
         cards.add(new SetCardInfo("Storm Crow", 60, Rarity.RARE, mage.cards.s.StormCrow.class));
