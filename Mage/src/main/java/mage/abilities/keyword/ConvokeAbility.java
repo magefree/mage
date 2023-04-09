@@ -30,6 +30,7 @@ import mage.players.ManaPool;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.watchers.common.ConvokeWatcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,6 +80,7 @@ public class ConvokeAbility extends SimpleStaticAbility implements AlternateMana
     public ConvokeAbility() {
         super(Zone.ALL, null); // all AlternateManaPaymentAbility must use ALL zone to calculate playable abilities
         this.setRuleAtTheTop(true);
+        this.addWatcher(new ConvokeWatcher());
         this.addHint(new ValueHint("Untapped creatures you control", new PermanentsOnBattlefieldCount(filterUntapped)));
     }
 

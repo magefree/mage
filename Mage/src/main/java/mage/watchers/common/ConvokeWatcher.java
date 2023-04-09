@@ -16,11 +16,11 @@ import java.util.Set;
 /**
  * @author LevelX2
  */
-public class EachCreatureThatConvokedSourceWatcher extends Watcher {
+public class ConvokeWatcher extends Watcher {
 
     private final Map<MageObjectReference, Set<MageObjectReference>> convokingCreatures = new HashMap<>();
 
-    public EachCreatureThatConvokedSourceWatcher() {
+    public ConvokeWatcher() {
         super(WatcherScope.GAME);
     }
 
@@ -29,26 +29,28 @@ public class EachCreatureThatConvokedSourceWatcher extends Watcher {
         if (event.getType() != GameEvent.EventType.CONVOKED) {
             return;
         }
-
         Spell spell = game.getSpell(event.getSourceId());
         Permanent tappedCreature = game.getPermanentOrLKIBattlefield(event.getTargetId());
         if (spell == null || tappedCreature == null) {
             return;
         }
-
-        MageObjectReference convokedSpell = new MageObjectReference(spell.getSourceId(), game);
-        Set<MageObjectReference> creatures;
-        if (convokingCreatures.containsKey(convokedSpell)) {
-            creatures = convokingCreatures.get(convokedSpell);
-        } else {
-            creatures = new HashSet<>();
-            convokingCreatures.put(convokedSpell, creatures);
-        }
-        creatures.add(new MageObjectReference(tappedCreature, game));
+        convokingCreatures
+                .computeIfAbsent(new MageObjectReference(spell.getSourceId(), game), x -> new HashSet<>())
+                .add(new MageObjectReference(tappedCreature, game));
     }
 
-    public Set<MageObjectReference> getConvokingCreatures(MageObjectReference mor) {
-        return convokingCreatures.get(mor);
+    public static Set<MageObjectReference> getConvokingCreatures(MageObjectReference mor, Game game) {
+        return game
+                .getState()
+                .getWatcher(ConvokeWatcher.class)
+                .convokingCreatures
+                .get(mor);
+    }
+
+    public static boolean checkConvoke(MageObjectReference mor, Permanent permanent, Game game) {
+        return getConvokingCreatures(mor, game)
+                .stream()
+                .anyMatch(m -> m.refersTo(permanent, game));
     }
 
     @Override
