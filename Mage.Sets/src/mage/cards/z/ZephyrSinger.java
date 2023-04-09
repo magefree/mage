@@ -1,9 +1,11 @@
-package mage.cards.v;
+package mage.cards.z;
 
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.keyword.ConvokeAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -16,9 +18,9 @@ import mage.filter.predicate.permanent.ConvokedSourcePredicate;
 import java.util.UUID;
 
 /**
- * @author LevelX2
+ * @author TheElk801
  */
-public final class VeneratedLoxodon extends CardImpl {
+public final class ZephyrSinger extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("creature that convoked it");
 
@@ -26,29 +28,35 @@ public final class VeneratedLoxodon extends CardImpl {
         filter.add(ConvokedSourcePredicate.PERMANENT);
     }
 
-    public VeneratedLoxodon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");
+    public ZephyrSinger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
 
-        this.subtype.add(SubType.ELEPHANT);
-        this.subtype.add(SubType.CLERIC);
-        this.power = new MageInt(4);
+        this.subtype.add(SubType.SIREN);
+        this.subtype.add(SubType.PIRATE);
+        this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
         // Convoke
         this.addAbility(new ConvokeAbility());
 
-        // When Venerated Loxodon enters the battlefield, put a +1/+1 counter on each creature that convoked it.
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+
+        // Vigilance
+        this.addAbility(VigilanceAbility.getInstance());
+
+        // When Zephyr Singer enters the battlefield, put a flying counter on each creature that convoked it.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), false
+                new AddCountersAllEffect(CounterType.FLYING.createInstance(), filter)
         ));
     }
 
-    private VeneratedLoxodon(final VeneratedLoxodon card) {
+    private ZephyrSinger(final ZephyrSinger card) {
         super(card);
     }
 
     @Override
-    public VeneratedLoxodon copy() {
-        return new VeneratedLoxodon(this);
+    public ZephyrSinger copy() {
+        return new ZephyrSinger(this);
     }
 }
