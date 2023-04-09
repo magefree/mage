@@ -40,10 +40,10 @@ public final class ForgeNeverwinterCharlatan extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Ward--Sacrifice a creature.
-        this.addAbility(new WardAbility(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        this.addAbility(new WardAbility(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT), false));
 
         // Forge, Neverwinter Charlatan gets +2/+0 for each Treasure you control.
         this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(
