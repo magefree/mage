@@ -2,7 +2,7 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DrawCardTriggeredAbility;
+import mage.abilities.common.DrawSecondCardTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -27,9 +27,9 @@ public final class BloodhazeWolverine extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever you draw your second card each turn, Bloodhaze Wolverine gets +1/+1 and gains first strike until end of turn.
-        Ability ability = new DrawCardTriggeredAbility(new BoostSourceEffect(
+        Ability ability = new DrawSecondCardTriggeredAbility(new BoostSourceEffect(
                 1, 1, Duration.EndOfTurn
-        ).setText("{this} gets +1/+1"), false, 2);
+        ).setText("{this} gets +1/+1"), false);
         ability.addEffect(new GainAbilitySourceEffect(
                 FirstStrikeAbility.getInstance(), Duration.EndOfTurn
         ).setText("and gains first strike until end of turn"));

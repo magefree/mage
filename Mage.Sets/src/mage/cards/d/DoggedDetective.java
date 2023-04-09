@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DrawCardTriggeredAbility;
+import mage.abilities.common.DrawSecondCardTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.abilities.effects.keyword.SurveilEffect;
@@ -31,7 +31,7 @@ public final class DoggedDetective extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SurveilEffect(2)));
 
         // Whenever an opponent draws their second card each turn, you may return Dogged Detective from your graveyard to your hand.
-        this.addAbility(new DrawCardTriggeredAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), true, TargetController.OPPONENT, 2));
+        this.addAbility(new DrawSecondCardTriggeredAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), true, TargetController.OPPONENT));
     }
 
     private DoggedDetective(final DoggedDetective card) {
