@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,6 +26,9 @@ public final class AetherbladeAgent extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.secondSideCardClazz = mage.cards.g.GitaxianMindstinger.class;
+
+        // Deathtouch
+        this.addAbility(DeathtouchAbility.getInstance());
 
         // {4}{U/P}: Transform Aetherblade Agent. Activate only as a sorcery.
         this.addAbility(new TransformAbility());

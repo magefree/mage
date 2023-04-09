@@ -57,7 +57,7 @@ class FurnaceGremlinEffect extends OneShotEffect {
 
     FurnaceGremlinEffect() {
         super(Outcome.Benefit);
-        staticText = "incubate X, where X is {this}'s power";
+        staticText = "incubate X, where X is its power";
     }
 
     private FurnaceGremlinEffect(final FurnaceGremlinEffect effect) {
