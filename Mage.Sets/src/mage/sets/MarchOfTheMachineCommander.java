@@ -243,6 +243,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Skullclamp", 379, Rarity.UNCOMMON, mage.cards.s.Skullclamp.class));
         cards.add(new SetCardInfo("Skyclave Relic", 380, Rarity.RARE, mage.cards.s.SkyclaveRelic.class));
         cards.add(new SetCardInfo("Skycloud Expanse", 425, Rarity.RARE, mage.cards.s.SkycloudExpanse.class));
+        cards.add(new SetCardInfo("Slimefoot and Squee", 447, Rarity.MYTHIC, mage.cards.s.SlimefootAndSquee.class));
         cards.add(new SetCardInfo("Slurrk, All-Ingesting", 312, Rarity.UNCOMMON, mage.cards.s.SlurrkAllIngesting.class));
         cards.add(new SetCardInfo("Smitten Swordmaster", 268, Rarity.COMMON, mage.cards.s.SmittenSwordmaster.class));
         cards.add(new SetCardInfo("Sol Ring", 381, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
