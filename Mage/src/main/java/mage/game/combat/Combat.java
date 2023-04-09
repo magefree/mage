@@ -615,34 +615,35 @@ public class Combat implements Serializable, Copyable<Combat> {
         Player controller;
         for (UUID defenderId : getPlayerDefenders(game)) {
             Player defender = game.getPlayer(defenderId);
-            if (defender != null) {
-                boolean choose = true;
-                if (blockController == null) {
-                    controller = defender;
-                } else {
-                    controller = blockController;
+            if (defender == null) {
+                continue;
+            }
+            boolean choose = true;
+            if (blockController == null) {
+                controller = defender;
+            } else {
+                controller = blockController;
+            }
+            while (choose) {
+                controller.selectBlockers(source, game, defenderId);
+                if (game.isPaused() || game.checkIfGameIsOver() || game.executingRollback()) {
+                    return;
                 }
-                while (choose) {
-                    controller.selectBlockers(source, game, defenderId);
-                    if (game.isPaused() || game.checkIfGameIsOver() || game.executingRollback()) {
-                        return;
-                    }
-                    if (!game.getCombat().checkBlockRestrictions(defender, game)) {
-                        if (controller.isHuman()) { // only human player can decide to do the block in another way
-                            continue;
-                        }
-                    }
-                    choose = !game.getCombat().checkBlockRequirementsAfter(defender, controller, game);
-                    if (!choose) {
-                        choose = !game.getCombat().checkBlockRestrictionsAfter(defender, controller, game);
+                if (!game.getCombat().checkBlockRestrictions(defender, game)) {
+                    if (controller.isHuman()) { // only human player can decide to do the block in another way
+                        continue;
                     }
                 }
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defenderId, defenderId));
+                choose = !game.getCombat().checkBlockRequirementsAfter(defender, controller, game);
+                if (!choose) {
+                    choose = !game.getCombat().checkBlockRestrictionsAfter(defender, controller, game);
+                }
+            }
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defenderId, defenderId));
 
-                // add info about attacker blocked by blocker to the game log
-                if (!game.isSimulation()) {
-                    game.getCombat().logBlockerInfo(defender, game);
-                }
+            // add info about attacker blocked by blocker to the game log
+            if (!game.isSimulation()) {
+                game.getCombat().logBlockerInfo(defender, game);
             }
         }
         // tool to catch the bug about flyers blocked by non flyers or intimidate blocked by creatures with other colors

@@ -3,29 +3,12 @@ package org.mage.test.cards.battle;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
-import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  * @author TheElk801
  */
-public class BattleDuelTest extends CardTestPlayerBase {
-
-    private static final String belenon = "Invasion of Belenon";
-    private static final String bear = "Grizzly Bears";
-    private static final String confiscate = "Confiscate";
-
-    private void assertBattle(Player controller, Player protector, String name) {
-        assertPermanentCount(controller, name, 1);
-        Permanent permanent = getPermanent(name);
-        Assertions.assertTrue(
-                permanent.isProtectedBy(protector.getId()),
-                "Battle " + name + " should be protected by " + protector.getName()
-        );
-    }
+public class BattleDuelTest extends BattleBaseTest {
 
     @Test
     public void testRegularCastAndTrigger() {
@@ -34,6 +17,7 @@ public class BattleDuelTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, belenon);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -51,6 +35,7 @@ public class BattleDuelTest extends CardTestPlayerBase {
 
         attack(1, playerA, bear, belenon);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -59,6 +44,32 @@ public class BattleDuelTest extends CardTestPlayerBase {
         assertTapped(bear, true);
         assertLife(playerB, 20);
         assertCounterCount(belenon, CounterType.DEFENSE, 5 - 2);
+    }
+
+    @Test
+    public void testAttackBattleBlock() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Zone.BATTLEFIELD, playerA, bear);
+        addCard(Zone.BATTLEFIELD, playerB, bear);
+        addCard(Zone.HAND, playerA, belenon);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, belenon);
+
+        attack(1, playerA, bear, belenon);
+        block(1, playerB, bear, bear);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertBattle(playerA, playerB, belenon);
+        assertPermanentCount(playerA, "Knight Token", 1);
+        assertPermanentCount(playerA, bear, 0);
+        assertGraveyardCount(playerA, bear, 1);
+        assertPermanentCount(playerB, bear, 0);
+        assertGraveyardCount(playerB, bear, 1);
+        assertLife(playerB, 20);
+        assertCounterCount(belenon, CounterType.DEFENSE, 5);
     }
 
     @Test
@@ -71,6 +82,7 @@ public class BattleDuelTest extends CardTestPlayerBase {
 
         attack(2, playerB, bear, belenon);
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
@@ -92,6 +104,7 @@ public class BattleDuelTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, confiscate, belenon);
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
