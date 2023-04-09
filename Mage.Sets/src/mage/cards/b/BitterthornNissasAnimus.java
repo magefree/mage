@@ -39,7 +39,7 @@ public final class BitterthornNissasAnimus extends CardImpl {
         ), true));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private BitterthornNissasAnimus(final BitterthornNissasAnimus card) {
