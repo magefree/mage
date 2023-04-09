@@ -195,6 +195,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Myriad Landscape", 416, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
         cards.add(new SetCardInfo("Mystic Monastery", 417, Rarity.UNCOMMON, mage.cards.m.MysticMonastery.class));
         cards.add(new SetCardInfo("Nadir Kraken", 228, Rarity.RARE, mage.cards.n.NadirKraken.class));
+        cards.add(new SetCardInfo("Nesting Dovehawk", 17, Rarity.RARE, mage.cards.n.NestingDovehawk.class));
         cards.add(new SetCardInfo("Nettlecyst", 367, Rarity.RARE, mage.cards.n.Nettlecyst.class));
         cards.add(new SetCardInfo("Night's Whisper", 259, Rarity.COMMON, mage.cards.n.NightsWhisper.class));
         cards.add(new SetCardInfo("Noxious Gearhulk", 260, Rarity.MYTHIC, mage.cards.n.NoxiousGearhulk.class));
