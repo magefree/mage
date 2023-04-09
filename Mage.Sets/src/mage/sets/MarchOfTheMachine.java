@@ -31,6 +31,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Alabaster Host Intercessor", 3, Rarity.COMMON, mage.cards.a.AlabasterHostIntercessor.class));
         cards.add(new SetCardInfo("Alabaster Host Sanctifier", 4, Rarity.COMMON, mage.cards.a.AlabasterHostSanctifier.class));
         cards.add(new SetCardInfo("Ancient Imperiosaur", 174, Rarity.RARE, mage.cards.a.AncientImperiosaur.class));
+        cards.add(new SetCardInfo("Angelic Intervention", 5, Rarity.COMMON, mage.cards.a.AngelicIntervention.class));
         cards.add(new SetCardInfo("Arachnoid Adaptation", 175, Rarity.COMMON, mage.cards.a.ArachnoidAdaptation.class));
         cards.add(new SetCardInfo("Archangel Elspeth", 6, Rarity.MYTHIC, mage.cards.a.ArchangelElspeth.class));
         cards.add(new SetCardInfo("Archpriest of Shadows", 89, Rarity.RARE, mage.cards.a.ArchpriestOfShadows.class));
