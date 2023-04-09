@@ -206,6 +206,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Skittering Surveyor", 264, Rarity.COMMON, mage.cards.s.SkitteringSurveyor.class));
         cards.add(new SetCardInfo("Skyclave Aerialist", 78, Rarity.UNCOMMON, mage.cards.s.SkyclaveAerialist.class));
         cards.add(new SetCardInfo("Skyclave Invader", 78, Rarity.UNCOMMON, mage.cards.s.SkyclaveInvader.class));
+        cards.add(new SetCardInfo("Stasis Field", 79, Rarity.COMMON, mage.cards.s.StasisField.class));
         cards.add(new SetCardInfo("Stoke the Flames", 166, Rarity.UNCOMMON, mage.cards.s.StokeTheFlames.class));
         cards.add(new SetCardInfo("Storm the Seedcore", 206, Rarity.UNCOMMON, mage.cards.s.StormTheSeedcore.class));
         cards.add(new SetCardInfo("Stormclaw Rager", 254, Rarity.UNCOMMON, mage.cards.s.StormclawRager.class));
