@@ -136,6 +136,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Invasion of Amonkhet", 231, Rarity.UNCOMMON, mage.cards.i.InvasionOfAmonkhet.class));
         cards.add(new SetCardInfo("Invasion of Belenon", 20, Rarity.UNCOMMON, mage.cards.i.InvasionOfBelenon.class));
         cards.add(new SetCardInfo("Invasion of Dominaria", 21, Rarity.UNCOMMON, mage.cards.i.InvasionOfDominaria.class));
+        cards.add(new SetCardInfo("Invasion of Eldraine", 113, Rarity.UNCOMMON, mage.cards.i.InvasionOfEldraine.class));
         cards.add(new SetCardInfo("Invasion of Innistrad", 115, Rarity.MYTHIC, mage.cards.i.InvasionOfInnistrad.class));
         cards.add(new SetCardInfo("Invasion of Kaladesh", 234, Rarity.UNCOMMON, mage.cards.i.InvasionOfKaladesh.class));
         cards.add(new SetCardInfo("Invasion of Kaldheim", 145, Rarity.RARE, mage.cards.i.InvasionOfKaldheim.class));
@@ -203,6 +204,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Plated Kilnbeast", 178, Rarity.COMMON, mage.cards.p.PlatedKilnbeast.class));
         cards.add(new SetCardInfo("Portent Tracker", 201, Rarity.COMMON, mage.cards.p.PortentTracker.class));
         cards.add(new SetCardInfo("Preening Champion", 73, Rarity.COMMON, mage.cards.p.PreeningChampion.class));
+        cards.add(new SetCardInfo("Prickle Faeries", 113, Rarity.UNCOMMON, mage.cards.p.PrickleFaeries.class));
         cards.add(new SetCardInfo("Progenitor Exarch", 32, Rarity.RARE, mage.cards.p.ProgenitorExarch.class));
         cards.add(new SetCardInfo("Protocol Knight", 74, Rarity.COMMON, mage.cards.p.ProtocolKnight.class));
         cards.add(new SetCardInfo("Pyre of the World Tree", 145, Rarity.RARE, mage.cards.p.PyreOfTheWorldTree.class));
