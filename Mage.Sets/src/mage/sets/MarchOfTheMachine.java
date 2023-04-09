@@ -137,6 +137,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Invasion of Belenon", 20, Rarity.UNCOMMON, mage.cards.i.InvasionOfBelenon.class));
         cards.add(new SetCardInfo("Invasion of Dominaria", 21, Rarity.UNCOMMON, mage.cards.i.InvasionOfDominaria.class));
         cards.add(new SetCardInfo("Invasion of Eldraine", 113, Rarity.UNCOMMON, mage.cards.i.InvasionOfEldraine.class));
+        cards.add(new SetCardInfo("Invasion of Ergamon", 233, Rarity.UNCOMMON, mage.cards.i.InvasionOfErgamon.class));
         cards.add(new SetCardInfo("Invasion of Innistrad", 115, Rarity.MYTHIC, mage.cards.i.InvasionOfInnistrad.class));
         cards.add(new SetCardInfo("Invasion of Kaladesh", 234, Rarity.UNCOMMON, mage.cards.i.InvasionOfKaladesh.class));
         cards.add(new SetCardInfo("Invasion of Kaldheim", 145, Rarity.RARE, mage.cards.i.InvasionOfKaldheim.class));
@@ -262,6 +263,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Trailblazing Historian", 168, Rarity.COMMON, mage.cards.t.TrailblazingHistorian.class));
         cards.add(new SetCardInfo("Tranquil Cove", 275, Rarity.COMMON, mage.cards.t.TranquilCove.class));
         cards.add(new SetCardInfo("Transcendent Message", 83, Rarity.RARE, mage.cards.t.TranscendentMessage.class));
+        cards.add(new SetCardInfo("Truga Cliffcharger", 233, Rarity.UNCOMMON, mage.cards.t.TrugaCliffcharger.class));
         cards.add(new SetCardInfo("Unseal the Necropolis", 128, Rarity.COMMON, mage.cards.u.UnsealTheNecropolis.class));
         cards.add(new SetCardInfo("Urn of Godfire", 266, Rarity.COMMON, mage.cards.u.UrnOfGodfire.class));
         cards.add(new SetCardInfo("Vanquish the Weak", 129, Rarity.COMMON, mage.cards.v.VanquishTheWeak.class));
