@@ -124,6 +124,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Goro-Goro and Satoru", 445, Rarity.MYTHIC, mage.cards.g.GoroGoroAndSatoru.class));
         cards.add(new SetCardInfo("Graveshifter", 251, Rarity.UNCOMMON, mage.cards.g.Graveshifter.class));
         cards.add(new SetCardInfo("Gruul Signet", 358, Rarity.COMMON, mage.cards.g.GruulSignet.class));
+        cards.add(new SetCardInfo("Guardian Scalelord", 16, Rarity.RARE, mage.cards.g.GuardianScalelord.class));
         cards.add(new SetCardInfo("Gyre Sage", 300, Rarity.RARE, mage.cards.g.GyreSage.class));
         cards.add(new SetCardInfo("Haakon, Stromgald Scourge", 252, Rarity.RARE, mage.cards.h.HaakonStromgaldScourge.class));
         cards.add(new SetCardInfo("Hamza, Guardian of Arashin", 327, Rarity.UNCOMMON, mage.cards.h.HamzaGuardianOfArashin.class));
