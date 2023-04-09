@@ -78,6 +78,6 @@ class BloatedProcessorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentOrLKI(game);
-        return permanent != null && new IncubateEffect(permanent.getPower().getValue()).apply(game, source);
+        return permanent != null && IncubateEffect.doIncubate(permanent.getPower().getValue(), game, source);
     }
 }

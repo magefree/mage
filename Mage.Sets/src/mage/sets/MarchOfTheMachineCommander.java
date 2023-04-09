@@ -44,7 +44,10 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Austere Command", 172, Rarity.RARE, mage.cards.a.AustereCommand.class));
         cards.add(new SetCardInfo("Banisher Priest", 173, Rarity.UNCOMMON, mage.cards.b.BanisherPriest.class));
         cards.add(new SetCardInfo("Battle Screech", 174, Rarity.UNCOMMON, mage.cards.b.BattleScreech.class));
+        cards.add(new SetCardInfo("Begin the Invasion", 79, Rarity.MYTHIC, mage.cards.b.BeginTheInvasion.class));
+        cards.add(new SetCardInfo("Bitterthorn, Nissa's Animus", 45, Rarity.RARE, mage.cards.b.BitterthornNissasAnimus.class));
         cards.add(new SetCardInfo("Blade Splicer", 175, Rarity.RARE, mage.cards.b.BladeSplicer.class));
+        cards.add(new SetCardInfo("Blight Titan", 25, Rarity.RARE, mage.cards.b.BlightTitan.class));
         cards.add(new SetCardInfo("Bloodforged Battle-Axe", 349, Rarity.RARE, mage.cards.b.BloodforgedBattleAxe.class));
         cards.add(new SetCardInfo("Bloodline Pretender", 350, Rarity.UNCOMMON, mage.cards.b.BloodlinePretender.class));
         cards.add(new SetCardInfo("Bojuka Bog", 391, Rarity.COMMON, mage.cards.b.BojukaBog.class));
@@ -52,6 +55,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Brass's Bounty", 272, Rarity.RARE, mage.cards.b.BrasssBounty.class));
         cards.add(new SetCardInfo("Brawn", 292, Rarity.UNCOMMON, mage.cards.b.Brawn.class));
         cards.add(new SetCardInfo("Bretagard Stronghold", 392, Rarity.UNCOMMON, mage.cards.b.BretagardStronghold.class));
+        cards.add(new SetCardInfo("Bright-Palm, Soul Awakener", 1, Rarity.MYTHIC, mage.cards.b.BrightPalmSoulAwakener.class));
         cards.add(new SetCardInfo("Burnished Hart", 351, Rarity.UNCOMMON, mage.cards.b.BurnishedHart.class));
         cards.add(new SetCardInfo("Canopy Vista", 393, Rarity.RARE, mage.cards.c.CanopyVista.class));
         cards.add(new SetCardInfo("Cataclysmic Gearhulk", 176, Rarity.MYTHIC, mage.cards.c.CataclysmicGearhulk.class));
@@ -59,6 +63,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Chant of Vitu-Ghazi", 177, Rarity.UNCOMMON, mage.cards.c.ChantOfVituGhazi.class));
         cards.add(new SetCardInfo("Chaos Warp", 273, Rarity.RARE, mage.cards.c.ChaosWarp.class));
         cards.add(new SetCardInfo("Chasm Skulker", 218, Rarity.RARE, mage.cards.c.ChasmSkulker.class));
+        cards.add(new SetCardInfo("Chivalric Alliance", 11, Rarity.RARE, mage.cards.c.ChivalricAlliance.class));
         cards.add(new SetCardInfo("Choked Estuary", 394, Rarity.RARE, mage.cards.c.ChokedEstuary.class));
         cards.add(new SetCardInfo("Cinder Glade", 395, Rarity.RARE, mage.cards.c.CinderGlade.class));
         cards.add(new SetCardInfo("Cloud of Faeries", 219, Rarity.COMMON, mage.cards.c.CloudOfFaeries.class));
@@ -74,6 +79,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Cultivate", 295, Rarity.COMMON, mage.cards.c.Cultivate.class));
         cards.add(new SetCardInfo("Cultivator's Caravan", 354, Rarity.RARE, mage.cards.c.CultivatorsCaravan.class));
         cards.add(new SetCardInfo("Curse of Opulence", 274, Rarity.UNCOMMON, mage.cards.c.CurseOfOpulence.class));
+        cards.add(new SetCardInfo("Death-Greeter's Champion", 30, Rarity.RARE, mage.cards.d.DeathGreetersChampion.class));
         cards.add(new SetCardInfo("Despark", 322, Rarity.UNCOMMON, mage.cards.d.Despark.class));
         cards.add(new SetCardInfo("Devouring Light", 180, Rarity.UNCOMMON, mage.cards.d.DevouringLight.class));
         cards.add(new SetCardInfo("Distant Melody", 220, Rarity.COMMON, mage.cards.d.DistantMelody.class));
@@ -89,6 +95,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Ethersworn Adjudicator", 222, Rarity.MYTHIC, mage.cards.e.EtherswornAdjudicator.class));
         cards.add(new SetCardInfo("Everquill Phoenix", 275, Rarity.RARE, mage.cards.e.EverquillPhoenix.class));
         cards.add(new SetCardInfo("Evolving Wilds", 397, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
+        cards.add(new SetCardInfo("Excise the Imperfect", 14, Rarity.RARE, mage.cards.e.ExciseTheImperfect.class));
         cards.add(new SetCardInfo("Exotic Orchard", 398, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Falkenrath Exterminator", 276, Rarity.UNCOMMON, mage.cards.f.FalkenrathExterminator.class));
         cards.add(new SetCardInfo("Fallowsage", 223, Rarity.UNCOMMON, mage.cards.f.Fallowsage.class));
@@ -188,6 +195,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Myriad Landscape", 416, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
         cards.add(new SetCardInfo("Mystic Monastery", 417, Rarity.UNCOMMON, mage.cards.m.MysticMonastery.class));
         cards.add(new SetCardInfo("Nadir Kraken", 228, Rarity.RARE, mage.cards.n.NadirKraken.class));
+        cards.add(new SetCardInfo("Nesting Dovehawk", 17, Rarity.RARE, mage.cards.n.NestingDovehawk.class));
         cards.add(new SetCardInfo("Nettlecyst", 367, Rarity.RARE, mage.cards.n.Nettlecyst.class));
         cards.add(new SetCardInfo("Night's Whisper", 259, Rarity.COMMON, mage.cards.n.NightsWhisper.class));
         cards.add(new SetCardInfo("Noxious Gearhulk", 260, Rarity.MYTHIC, mage.cards.n.NoxiousGearhulk.class));
@@ -298,6 +306,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Victimize", 270, Rarity.UNCOMMON, mage.cards.v.Victimize.class));
         cards.add(new SetCardInfo("Village Bell-Ringer", 216, Rarity.COMMON, mage.cards.v.VillageBellRinger.class));
         cards.add(new SetCardInfo("Vineglimmer Snarl", 444, Rarity.RARE, mage.cards.v.VineglimmerSnarl.class));
+        cards.add(new SetCardInfo("Vodalian Wave-Knight", 43, Rarity.RARE, mage.cards.v.VodalianWaveKnight.class));
         cards.add(new SetCardInfo("Vona, Butcher of Magan", 342, Rarity.MYTHIC, mage.cards.v.VonaButcherOfMagan.class));
         cards.add(new SetCardInfo("Wayfarer's Bauble", 389, Rarity.COMMON, mage.cards.w.WayfarersBauble.class));
         cards.add(new SetCardInfo("Wear // Tear", 343, Rarity.UNCOMMON, mage.cards.w.WearTear.class));
