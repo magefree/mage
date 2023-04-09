@@ -47,6 +47,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Begin the Invasion", 79, Rarity.MYTHIC, mage.cards.b.BeginTheInvasion.class));
         cards.add(new SetCardInfo("Bitterthorn, Nissa's Animus", 45, Rarity.RARE, mage.cards.b.BitterthornNissasAnimus.class));
         cards.add(new SetCardInfo("Blade Splicer", 175, Rarity.RARE, mage.cards.b.BladeSplicer.class));
+        cards.add(new SetCardInfo("Blight Titan", 25, Rarity.RARE, mage.cards.b.BlightTitan.class));
         cards.add(new SetCardInfo("Bloodforged Battle-Axe", 349, Rarity.RARE, mage.cards.b.BloodforgedBattleAxe.class));
         cards.add(new SetCardInfo("Bloodline Pretender", 350, Rarity.UNCOMMON, mage.cards.b.BloodlinePretender.class));
         cards.add(new SetCardInfo("Bojuka Bog", 391, Rarity.COMMON, mage.cards.b.BojukaBog.class));

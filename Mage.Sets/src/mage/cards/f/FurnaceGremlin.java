@@ -77,6 +77,6 @@ class FurnaceGremlinEffect extends OneShotEffect {
                 .map(MageObject::getPower)
                 .map(MageInt::getValue)
                 .orElse(0);
-        return new IncubateEffect(power).apply(game, source);
+        return IncubateEffect.doIncubate(power, game, source);
     }
 }

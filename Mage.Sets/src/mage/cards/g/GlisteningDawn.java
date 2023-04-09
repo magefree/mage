@@ -58,8 +58,8 @@ class GlisteningDawnEffect extends OneShotEffect {
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
                 source.getControllerId(), source, game
         );
-        new IncubateEffect(lands).apply(game, source);
-        new IncubateEffect(lands).apply(game, source);
+        IncubateEffect.doIncubate(lands, game, source);
+        IncubateEffect.doIncubate(lands, game, source);
         return true;
     }
 }

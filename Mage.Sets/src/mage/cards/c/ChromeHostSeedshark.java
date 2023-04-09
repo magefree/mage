@@ -68,6 +68,6 @@ class ChromeHostSeedsharkEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = (Spell) getValue("spellCast");
-        return spell != null && new IncubateEffect(spell.getManaValue()).apply(game, source);
+        return spell != null && IncubateEffect.doIncubate(spell.getManaValue(), game, source);
     }
 }

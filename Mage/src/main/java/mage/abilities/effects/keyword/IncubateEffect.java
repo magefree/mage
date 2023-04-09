@@ -39,14 +39,21 @@ public class IncubateEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        return doIncubate(amount, game, source);
+    }
+
+    public static boolean doIncubate(int amount, Game game, Ability source) {
+        return doIncubate(amount, source.getControllerId(), game, source);
+    }
+
+    public static boolean doIncubate(int amount, UUID playerId, Game game, Ability source) {
         Token token = new IncubatorToken();
-        token.putOntoBattlefield(1, game, source);
+        token.putOntoBattlefield(1, game, source, playerId);
         for (UUID tokenId : token.getLastAddedTokenIds()) {
             Permanent permanent = game.getPermanent(tokenId);
-            if (permanent == null) {
-                continue;
+            if (permanent != null && amount > 0) {
+                permanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game);
             }
-            permanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game);
         }
         return true;
     }
