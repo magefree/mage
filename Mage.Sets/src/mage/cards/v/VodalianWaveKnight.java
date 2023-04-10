@@ -11,6 +11,7 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 
 import java.util.UUID;
 
@@ -23,6 +24,7 @@ public final class VodalianWaveKnight extends CardImpl {
             = new FilterControlledPermanent("other Merfolk and/or Knight you control");
 
     static {
+        filter.add(AnotherPredicate.instance);
         filter.add(Predicates.or(
                 SubType.MERFOLK.getPredicate(),
                 SubType.KNIGHT.getPredicate()
