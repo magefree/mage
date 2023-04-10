@@ -614,12 +614,17 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public final Card getSecondCardFace() {
         // init card side on first call
-        if (secondSideCardClazz == null && secondSideCard == null) {
+        if (secondSideCardClazz == null) {
             return null;
         }
 
         if (secondSideCard == null) {
             secondSideCard = initSecondSideCard(secondSideCardClazz);
+            if (secondSideCard != null && secondSideCard.getSpellAbility() != null) {
+                secondSideCard.getSpellAbility().setSourceId(this.getId());
+                secondSideCard.getSpellAbility().setSpellAbilityType(SpellAbilityType.BASE_ALTERNATE);
+                secondSideCard.getSpellAbility().setSpellAbilityCastMode(SpellAbilityCastMode.TRANSFORMED);
+            }
         }
 
         return secondSideCard;

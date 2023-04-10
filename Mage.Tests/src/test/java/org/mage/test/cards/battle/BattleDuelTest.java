@@ -111,4 +111,47 @@ public class BattleDuelTest extends BattleBaseTest {
         assertBattle(playerB, playerA, belenon);
         assertPermanentCount(playerA, "Knight Token", 1);
     }
+
+    @Test
+    public void testDefeated() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plateau", 3 + 6);
+        addCard(Zone.HAND, playerA, belenon);
+        addCard(Zone.HAND, playerA, impact);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, belenon);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, impact, belenon);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, belenon, 0);
+        assertPermanentCount(playerA, warAnthem, 1);
+        assertPermanentCount(playerA, "Knight Token", 1);
+        assertPowerToughness(playerA, "Knight Token", 2 + 1, 2 + 1);
+    }
+
+    @Test
+    public void testDefeatedStifle() {
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 2 + 6 + 1);
+        addCard(Zone.HAND, playerA, kaladesh);
+        addCard(Zone.HAND, playerA, impact);
+        addCard(Zone.HAND, playerA, stifle);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, kaladesh);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, impact, kaladesh);
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN, playerA, true);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, stifle, "stack ability");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, kaladesh, 0);
+        assertGraveyardCount(playerA, kaladesh, 1);
+        assertPermanentCount(playerA, "Thopter Token", 1);
+    }
 }

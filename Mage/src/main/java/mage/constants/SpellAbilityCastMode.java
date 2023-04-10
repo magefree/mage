@@ -13,7 +13,7 @@ public enum SpellAbilityCastMode {
     MADNESS("Madness"),
     FLASHBACK("Flashback"),
     BESTOW("Bestow"),
-    DISTURB("Disturb");
+    TRANSFORMED("Disturb");
 
     private final String text;
 

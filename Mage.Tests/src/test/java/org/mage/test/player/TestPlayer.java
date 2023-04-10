@@ -622,6 +622,7 @@ public class TestPlayer implements Player {
                     }
                     printStart("Available for " + this.getName());
                     printAbilities(game, this.getPlayable(game, true));
+                    game.getStack().stream().map(MageObject::getName).forEach(System.out::println);
                     printEnd();
                     Assert.fail("Can't find ability to activate command: " + command);
                 } else if (action.getAction().startsWith(ACTIVATE_MANA)) {
