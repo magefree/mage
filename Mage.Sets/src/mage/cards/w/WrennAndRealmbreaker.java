@@ -50,13 +50,13 @@ public final class WrennAndRealmbreaker extends CardImpl {
                 ).withAbility(VigilanceAbility.getInstance())
                         .withAbility(HexproofAbility.getInstance())
                         .withAbility(HasteAbility.getInstance()),
-                false, true, Duration.UntilYourNextEndStep
+                false, true, Duration.UntilYourNextTurn
         ), 1);
         ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));
         this.addAbility(ability);
 
         // -2: Mill three cards. You may put a permanent card from among the milled cards into your hand.
-        this.addAbility(new LoyaltyAbility(new MillThenPutInHandEffect(5, StaticFilters.FILTER_CARD_A_PERMANENT), -2));
+        this.addAbility(new LoyaltyAbility(new MillThenPutInHandEffect(3, StaticFilters.FILTER_CARD_A_PERMANENT), -2));
 
         // -7: You get an emblem with "You may play lands and cast permanent spells from your graveyard."
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new WrennAndRealmbreakerEmblem()), -7));

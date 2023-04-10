@@ -37,10 +37,12 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Archangel Elspeth", 6, Rarity.MYTHIC, mage.cards.a.ArchangelElspeth.class));
         cards.add(new SetCardInfo("Archpriest of Shadows", 89, Rarity.RARE, mage.cards.a.ArchpriestOfShadows.class));
         cards.add(new SetCardInfo("Artistic Refusal", 46, Rarity.UNCOMMON, mage.cards.a.ArtisticRefusal.class));
+        cards.add(new SetCardInfo("Assimilate Essence", 47, Rarity.COMMON, mage.cards.a.AssimilateEssence.class));
         cards.add(new SetCardInfo("Astral Wingspan", 48, Rarity.UNCOMMON, mage.cards.a.AstralWingspan.class));
         cards.add(new SetCardInfo("Atraxa's Fall", 176, Rarity.COMMON, mage.cards.a.AtraxasFall.class));
         cards.add(new SetCardInfo("Attentive Skywarden", 7, Rarity.COMMON, mage.cards.a.AttentiveSkywarden.class));
         cards.add(new SetCardInfo("Awaken the Maelstrom", 230, Rarity.RARE, mage.cards.a.AwakenTheMaelstrom.class));
+        cards.add(new SetCardInfo("Baral and Kari Zev", 218, Rarity.RARE, mage.cards.b.BaralAndKariZev.class));
         cards.add(new SetCardInfo("Beamtown Beatstick", 131, Rarity.COMMON, mage.cards.b.BeamtownBeatstick.class));
         cards.add(new SetCardInfo("Belenon War Anthem", 20, Rarity.UNCOMMON, mage.cards.b.BelenonWarAnthem.class));
         cards.add(new SetCardInfo("Belligerent Regisaur", 191, Rarity.RARE, mage.cards.b.BelligerentRegisaur.class));
@@ -269,6 +271,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Thornwood Falls", 274, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
         cards.add(new SetCardInfo("Thrashing Frontliner", 167, Rarity.COMMON, mage.cards.t.ThrashingFrontliner.class));
         cards.add(new SetCardInfo("Thunderhead Squadron", 81, Rarity.COMMON, mage.cards.t.ThunderheadSquadron.class));
+        cards.add(new SetCardInfo("Tidal Terror", 82, Rarity.COMMON, mage.cards.t.TidalTerror.class));
         cards.add(new SetCardInfo("Tiller of Flesh", 44, Rarity.UNCOMMON, mage.cards.t.TillerOfFlesh.class));
         cards.add(new SetCardInfo("Timberland Ancient", 210, Rarity.COMMON, mage.cards.t.TimberlandAncient.class));
         cards.add(new SetCardInfo("Trailblazing Historian", 168, Rarity.COMMON, mage.cards.t.TrailblazingHistorian.class));
@@ -278,6 +281,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Unseal the Necropolis", 128, Rarity.COMMON, mage.cards.u.UnsealTheNecropolis.class));
         cards.add(new SetCardInfo("Urn of Godfire", 266, Rarity.COMMON, mage.cards.u.UrnOfGodfire.class));
         cards.add(new SetCardInfo("Vanquish the Weak", 129, Rarity.COMMON, mage.cards.v.VanquishTheWeak.class));
+        cards.add(new SetCardInfo("Vengeant Earth", 212, Rarity.COMMON, mage.cards.v.VengeantEarth.class));
         cards.add(new SetCardInfo("Vertex Paladin", 242, Rarity.UNCOMMON, mage.cards.v.VertexPaladin.class));
         cards.add(new SetCardInfo("Volcanic Spite", 170, Rarity.COMMON, mage.cards.v.VolcanicSpite.class));
         cards.add(new SetCardInfo("Voldaren Thrillseeker", 171, Rarity.RARE, mage.cards.v.VoldarenThrillseeker.class));
