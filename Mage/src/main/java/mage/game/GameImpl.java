@@ -2518,8 +2518,7 @@ public abstract class GameImpl implements Game {
                         .noneMatch(perm.getId()::equals)) {
                     movePermanentToGraveyardWithInfo(perm);
                     somethingHappened = true;
-                }
-                if (this.getPlayer(perm.getProtectorId()) == null || perm.isControlledBy(perm.getProtectorId())) {
+                } else if (this.getPlayer(perm.getProtectorId()) == null || perm.isControlledBy(perm.getProtectorId())) {
                     perm.chooseProtector(this, null);
                     somethingHappened = true;
                 }
