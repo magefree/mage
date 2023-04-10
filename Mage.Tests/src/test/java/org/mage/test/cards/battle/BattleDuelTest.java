@@ -48,6 +48,7 @@ public class BattleDuelTest extends BattleBaseTest {
 
     @Test
     public void testAttackBattleBlock() {
+        // TODO: this test fails randomly and it's not clear exactly why
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
         addCard(Zone.BATTLEFIELD, playerA, bear);
         addCard(Zone.BATTLEFIELD, playerB, bear);
