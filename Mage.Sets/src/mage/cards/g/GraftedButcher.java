@@ -51,7 +51,7 @@ public final class GraftedButcher extends CardImpl {
 
         // {3}{B}, Sacrifice an artifact or creature: Return Grafted Butcher from your graveyard to the battlefield. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
-                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl<>("{3}{B}")
+                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(false, false), new ManaCostsImpl<>("{3}{B}")
         );
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ARTIFACT_OR_CREATURE_SHORT_TEXT));
         this.addAbility(ability);

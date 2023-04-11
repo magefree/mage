@@ -24,7 +24,7 @@ public class ModifyCountersAddedEffect extends ReplacementEffectImpl {
         this.filter = filter;
         this.counterType = counterType;
         staticText = "if one or more " + (counterType != null ? counterType + " " : "") + "counters would be put on " +
-                CardUtil.addArticle(filter.getMessage()) + " you control, that many plus one " +
+                CardUtil.addArticle(filter.getMessage()) + ", that many plus one " +
                 (counterType != null ? counterType : "of each of those kinds of") + " counters are put on it instead";
     }
 

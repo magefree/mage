@@ -44,7 +44,7 @@ public final class EtaliPrimalSickness extends CardImpl {
 
         // Whenever Etali, Primal Sickness deals combat damage to a player, they get that many poison counters.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new EtaliPrimalConquerorEffect(), false, true
+                new EtaliPrimalSicknessEffect(), false, true
         ));
     }
 

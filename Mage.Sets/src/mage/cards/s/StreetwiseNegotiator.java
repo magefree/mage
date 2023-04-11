@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class StreetwiseNegotiator extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("this creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
         filter.add(StreetwiseNegotiatorPredicate.instance);
@@ -41,7 +41,8 @@ public final class StreetwiseNegotiator extends CardImpl {
         this.addAbility(backupAbility);
 
         // This creature assigns combat damage equal to its toughness rather than its power.
-        backupAbility.addAbility(new SimpleStaticAbility(new CombatDamageByToughnessEffect(filter, false)));
+        backupAbility.addAbility(new SimpleStaticAbility(new CombatDamageByToughnessEffect(filter, false)
+                .setText("this creature assigns combat damage equal to its toughness rather than its power")));
     }
 
     private StreetwiseNegotiator(final StreetwiseNegotiator card) {

@@ -42,7 +42,7 @@ public final class AttentiveSkywarden extends CardImpl {
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
                 new TransformTargetEffect(), false
         ).setOrBattle(true);
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability);
     }
 

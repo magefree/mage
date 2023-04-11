@@ -38,7 +38,9 @@ public final class VoldarenThrillseeker extends CardImpl {
 
         // {1}, Sacrifice this creature: It deals damage equal to its power to any target.
         Ability ability = new SimpleActivatedAbility(
-                new DamageTargetEffect(xValue, "it"), new GenericManaCost(1)
+                new DamageTargetEffect(xValue)
+                        .setText("it deals damage equal to its power to any target"),
+                new GenericManaCost(1)
         );
         ability.addCost(new SacrificeSourceCost().setText("sacrifice this creature"));
         ability.addTarget(new TargetAnyTarget());

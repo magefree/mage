@@ -27,7 +27,7 @@ public final class OrderOfTheAlabasterHost extends CardImpl {
         this.nightCard = true;
 
         // Whenever Order of the Alabaster Host becomes blocked by a creature, that creature gets -1/-1 until end of turn.
-        this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new BoostTargetEffect(-1, -1), false));
+        this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new BoostTargetEffect(-1, -1).setText("that creature gets -1/-1 until end of turn"), false));
     }
 
     private OrderOfTheAlabasterHost(final OrderOfTheAlabasterHost card) {
