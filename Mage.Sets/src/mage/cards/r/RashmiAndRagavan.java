@@ -2,9 +2,11 @@ package mage.cards.r;
 
 import mage.ApprovingObject;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
@@ -19,9 +21,13 @@ import mage.game.permanent.token.TreasureToken;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
 import mage.watchers.common.SpellsCastWatcher;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -126,7 +132,18 @@ class RashmiAndRagavanEffect extends OneShotEffect {
             return false;
         }
         Card card = player.getLibrary().getFromTop(game);
-        if (card == null || !player.moveCards(card, Zone.EXILED, source, game)) {
+        MageObject sourceObject = source.getSourceObject(game);
+        UUID exileId = CardUtil.getExileZoneId(
+                controller.getId().toString()
+                        + "-" + game.getState().getTurnNum()
+                        + "-" + sourceObject.getIdName(), game
+        );
+        String exileName = sourceObject.getIdName() + " play on turn " + game.getState().getTurnNum()
+                + " for " + controller.getName();
+        game.getExile().createZone(exileId, exileName).setCleanupOnEndTurn(true);
+        Set<Card> cards = new HashSet<>();
+        cards.add(card);
+        if (card == null || !controller.moveCardsToExile(cards, source, game, true, exileId, exileName)) {
             return false;
         }
         int artifactCount = new PermanentsOnBattlefieldCount(
@@ -140,9 +157,9 @@ class RashmiAndRagavanEffect extends OneShotEffect {
             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
         }
         if (!cardWasCast) {
-            return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(
-                    game, source, card, TargetController.YOU, Duration.EndOfTurn, false, false, true
-            );
+            ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, TargetController.YOU, Duration.EndOfTurn, false, true);
+            effect.setTargetPointer(new FixedTargets(cards, game));
+            game.addEffect(effect, source);
         }
         return true;
     }
