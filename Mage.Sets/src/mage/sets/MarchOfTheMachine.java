@@ -85,6 +85,8 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Ephara's Dispersal", 55, Rarity.COMMON, mage.cards.e.EpharasDispersal.class));
         cards.add(new SetCardInfo("Errant and Giada", 224, Rarity.RARE, mage.cards.e.ErrantAndGiada.class));
         cards.add(new SetCardInfo("Essence of Orthodoxy", 323, Rarity.RARE, mage.cards.e.EssenceOfOrthodoxy.class));
+        cards.add(new SetCardInfo("Etali, Primal Conqueror", 137, Rarity.RARE, mage.cards.e.EtaliPrimalConqueror.class));
+        cards.add(new SetCardInfo("Etali, Primal Sickness", 137, Rarity.RARE, mage.cards.e.EtaliPrimalSickness.class));
         cards.add(new SetCardInfo("Etched Familiar", 101, Rarity.COMMON, mage.cards.e.EtchedFamiliar.class));
         cards.add(new SetCardInfo("Etched Host Doombringer", 102, Rarity.COMMON, mage.cards.e.EtchedHostDoombringer.class));
         cards.add(new SetCardInfo("Expedition Lookout", 56, Rarity.COMMON, mage.cards.e.ExpeditionLookout.class));
