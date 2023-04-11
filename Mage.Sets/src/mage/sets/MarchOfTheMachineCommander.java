@@ -148,6 +148,8 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Imprisoned in the Moon", 224, Rarity.RARE, mage.cards.i.ImprisonedInTheMoon.class));
         cards.add(new SetCardInfo("Improbable Alliance", 329, Rarity.UNCOMMON, mage.cards.i.ImprobableAlliance.class));
         cards.add(new SetCardInfo("Incubation Druid", 302, Rarity.RARE, mage.cards.i.IncubationDruid.class));
+        cards.add(new SetCardInfo("Infernal Sovereign", 75, Rarity.MYTHIC, mage.cards.i.InfernalSovereign.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Infernal Sovereign", 83, Rarity.MYTHIC, mage.cards.i.InfernalSovereign.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Inscription of Abundance", 303, Rarity.RARE, mage.cards.i.InscriptionOfAbundance.class));
         cards.add(new SetCardInfo("Inspiring Call", 304, Rarity.UNCOMMON, mage.cards.i.InspiringCall.class));
         cards.add(new SetCardInfo("Inspiring Statuary", 361, Rarity.RARE, mage.cards.i.InspiringStatuary.class));
