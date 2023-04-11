@@ -102,6 +102,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Bone Picker", 383, Rarity.UNCOMMON, mage.cards.b.BonePicker.class));
         cards.add(new SetCardInfo("Borderland Marauder", 505, Rarity.COMMON, mage.cards.b.BorderlandMarauder.class));
         cards.add(new SetCardInfo("Bounding Wolf", 633, Rarity.COMMON, mage.cards.b.BoundingWolf.class));
+        cards.add(new SetCardInfo("Brazen Cannonade", 31, Rarity.RARE, mage.cards.b.BrazenCannonade.class));
         cards.add(new SetCardInfo("Brazen Freebooter", 506, Rarity.COMMON, mage.cards.b.BrazenFreebooter.class));
         cards.add(new SetCardInfo("Brazen Wolves", 507, Rarity.COMMON, mage.cards.b.BrazenWolves.class));
         cards.add(new SetCardInfo("Briarpack Alpha", 634, Rarity.UNCOMMON, mage.cards.b.BriarpackAlpha.class));
