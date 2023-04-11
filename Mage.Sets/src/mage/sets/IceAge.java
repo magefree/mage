@@ -147,6 +147,7 @@ public final class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Glaciers", 294, Rarity.RARE, mage.cards.g.Glaciers.class));
         cards.add(new SetCardInfo("Goblin Lyre", 319, Rarity.RARE, mage.cards.g.GoblinLyre.class));
         cards.add(new SetCardInfo("Goblin Mutant", 188, Rarity.UNCOMMON, mage.cards.g.GoblinMutant.class));
+        cards.add(new SetCardInfo("Goblin Sappers", 189, Rarity.COMMON, mage.cards.g.GoblinSappers.class));
         cards.add(new SetCardInfo("Goblin Snowman", 191, Rarity.UNCOMMON, mage.cards.g.GoblinSnowman.class));
         cards.add(new SetCardInfo("Gorilla Pack", 247, Rarity.COMMON, mage.cards.g.GorillaPack.class));
         cards.add(new SetCardInfo("Gravebind", 129, Rarity.RARE, mage.cards.g.Gravebind.class));
