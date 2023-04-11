@@ -139,6 +139,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Hamza, Guardian of Arashin", 327, Rarity.UNCOMMON, mage.cards.h.HamzaGuardianOfArashin.class));
         cards.add(new SetCardInfo("Heaven // Earth", 328, Rarity.RARE, mage.cards.h.HeavenEarth.class));
         cards.add(new SetCardInfo("Hedron Archive", 359, Rarity.UNCOMMON, mage.cards.h.HedronArchive.class));
+        cards.add(new SetCardInfo("Hedron Detonator", 31, Rarity.RARE, mage.cards.h.HedronDetonator.class));
         cards.add(new SetCardInfo("Hellkite Igniter", 284, Rarity.RARE, mage.cards.h.HellkiteIgniter.class));
         cards.add(new SetCardInfo("Herald of Hoofbeats", 22, Rarity.RARE, mage.cards.h.HeraldOfHoofbeats.class));
         cards.add(new SetCardInfo("Herald's Horn", 360, Rarity.UNCOMMON, mage.cards.h.HeraldsHorn.class));
