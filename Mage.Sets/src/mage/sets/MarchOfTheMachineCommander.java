@@ -175,6 +175,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Kykar, Wind's Fury", 334, Rarity.MYTHIC, mage.cards.k.KykarWindsFury.class));
         cards.add(new SetCardInfo("Liliana's Standard Bearer", 255, Rarity.RARE, mage.cards.l.LilianasStandardBearer.class));
         cards.add(new SetCardInfo("Llanowar Reborn", 413, Rarity.UNCOMMON, mage.cards.l.LlanowarReborn.class));
+        cards.add(new SetCardInfo("Locthwain Lancer", 27, Rarity.RARE, mage.cards.l.LocthwainLancer.class));
         cards.add(new SetCardInfo("Managorger Hydra", 307, Rarity.RARE, mage.cards.m.ManagorgerHydra.class));
         cards.add(new SetCardInfo("Massacre Wurm", 256, Rarity.MYTHIC, mage.cards.m.MassacreWurm.class));
         cards.add(new SetCardInfo("Master Splicer", 194, Rarity.UNCOMMON, mage.cards.m.MasterSplicer.class));
