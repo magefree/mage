@@ -38,7 +38,7 @@ public final class LocthwainLancer extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever a nontoken Knight you control dies, each opponent loses 1 life and you draw a card.
         Ability ability = new DiesCreatureTriggeredAbility(new LoseLifeOpponentsEffect(1), false, filter);
