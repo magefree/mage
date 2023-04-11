@@ -80,6 +80,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Cultivator's Caravan", 354, Rarity.RARE, mage.cards.c.CultivatorsCaravan.class));
         cards.add(new SetCardInfo("Curse of Opulence", 274, Rarity.UNCOMMON, mage.cards.c.CurseOfOpulence.class));
         cards.add(new SetCardInfo("Death-Greeter's Champion", 30, Rarity.RARE, mage.cards.d.DeathGreetersChampion.class));
+        cards.add(new SetCardInfo("Deluxe Dragster", 21, Rarity.RARE, mage.cards.d.DeluxeDragster.class));
         cards.add(new SetCardInfo("Despark", 322, Rarity.UNCOMMON, mage.cards.d.Despark.class));
         cards.add(new SetCardInfo("Devouring Light", 180, Rarity.UNCOMMON, mage.cards.d.DevouringLight.class));
         cards.add(new SetCardInfo("Distant Melody", 220, Rarity.COMMON, mage.cards.d.DistantMelody.class));
