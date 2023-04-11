@@ -223,6 +223,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Promise of Loyalty", 200, Rarity.RARE, mage.cards.p.PromiseOfLoyalty.class));
         cards.add(new SetCardInfo("Psychosis Crawler", 371, Rarity.RARE, mage.cards.p.PsychosisCrawler.class));
         cards.add(new SetCardInfo("Pull from Tomorrow", 230, Rarity.RARE, mage.cards.p.PullFromTomorrow.class));
+        cards.add(new SetCardInfo("Rashmi and Ragavan", 94, Rarity.MYTHIC, mage.cards.r.RashmiAndRagavan.class));
         cards.add(new SetCardInfo("Read the Bones", 267, Rarity.COMMON, mage.cards.r.ReadTheBones.class));
         cards.add(new SetCardInfo("Reality Shift", 231, Rarity.UNCOMMON, mage.cards.r.RealityShift.class));
         cards.add(new SetCardInfo("Replicating Ring", 372, Rarity.UNCOMMON, mage.cards.r.ReplicatingRing.class));
