@@ -61,7 +61,7 @@ enum SandsteppeWarRidersValue implements DynamicValue {
         filter.add(TokenPredicate.TRUE);
     }
 
-    private static final Hint hint = new ValueHint("Different artifact token names you control", instance)
+    private static final Hint hint = new ValueHint("Different artifact token names you control", instance);
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
