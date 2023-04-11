@@ -160,6 +160,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Kalonian Hydra", 305, Rarity.MYTHIC, mage.cards.k.KalonianHydra.class));
         cards.add(new SetCardInfo("Karn's Bastion", 409, Rarity.RARE, mage.cards.k.KarnsBastion.class));
         cards.add(new SetCardInfo("Kasla, the Broken Halo", 4, Rarity.MYTHIC, mage.cards.k.KaslaTheBrokenHalo.class));
+        cards.add(new SetCardInfo("Katilda and Lier", 446, Rarity.MYTHIC, mage.cards.k.KatildaAndLier.class));
         cards.add(new SetCardInfo("Keeper of the Accord", 191, Rarity.RARE, mage.cards.k.KeeperOfTheAccord.class));
         cards.add(new SetCardInfo("Keskit, the Flesh Sculptor", 254, Rarity.UNCOMMON, mage.cards.k.KeskitTheFleshSculptor.class));
         cards.add(new SetCardInfo("Kessig Wolf Run", 410, Rarity.RARE, mage.cards.k.KessigWolfRun.class));
