@@ -244,6 +244,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Root Out", 311, Rarity.COMMON, mage.cards.r.RootOut.class));
         cards.add(new SetCardInfo("Saheeli's Artistry", 234, Rarity.RARE, mage.cards.s.SaheelisArtistry.class));
         cards.add(new SetCardInfo("Saheeli, Sublime Artificer", 338, Rarity.UNCOMMON, mage.cards.s.SaheeliSublimeArtificer.class));
+        cards.add(new SetCardInfo("Saint Traft and Rem Karolus", 9, Rarity.MYTHIC, mage.cards.s.SaintTraftAndRemKarolus.class));
         cards.add(new SetCardInfo("Sandsteppe War Riders", 39, Rarity.RARE, mage.cards.s.SandsteppeWarRiders.class));
         cards.add(new SetCardInfo("Schema Thief", 24, Rarity.RARE, mage.cards.s.SchemaThief.class));
         cards.add(new SetCardInfo("Scrap Trawler", 373, Rarity.RARE, mage.cards.s.ScrapTrawler.class));
