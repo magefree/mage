@@ -55,6 +55,7 @@ class VeiledSentryEffect extends ContinuousEffectImpl {
 
     public VeiledSentryEffect(final VeiledSentryEffect effect) {
         super(effect);
+        this.spellMV = effect.spellMV;
     }
 
     @Override
@@ -64,6 +65,7 @@ class VeiledSentryEffect extends ContinuousEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         Spell spell = (Spell) getValue("spellCast");
         if (spell != null) {
             spellMV = spell.getManaValue();
