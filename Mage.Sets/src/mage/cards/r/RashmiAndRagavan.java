@@ -5,8 +5,10 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,6 +23,7 @@ import mage.game.permanent.token.TreasureToken;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 import mage.watchers.common.SpellsCastWatcher;
 
@@ -147,12 +150,13 @@ class RashmiAndRagavanEffect extends OneShotEffect {
         int artifactCount = new PermanentsOnBattlefieldCount(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT
         ).calculate(game, source, this);
-        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
         FilterCard filter = new FilterCard();
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, artifactCount));
         Boolean cardWasCast = CardUtil.castSpellWithAttributesForFree(controller, source, game, new CardsImpl(card), filter);
         if (!cardWasCast) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, false, controller.getId(), null);
+            ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, TargetController.YOU, Duration.EndOfTurn, false, true);
+            effect.setTargetPointer(new FixedTargets(cards, game));
+            game.addEffect(effect, source);
         }
         return true;
     }
