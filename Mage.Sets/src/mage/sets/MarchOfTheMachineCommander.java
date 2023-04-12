@@ -91,6 +91,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Echo Storm", 221, Rarity.RARE, mage.cards.e.EchoStorm.class));
         cards.add(new SetCardInfo("Elite Scaleguard", 181, Rarity.UNCOMMON, mage.cards.e.EliteScaleguard.class));
         cards.add(new SetCardInfo("Elspeth, Sun's Champion", 182, Rarity.MYTHIC, mage.cards.e.ElspethSunsChampion.class));
+        cards.add(new SetCardInfo("Emergent Woodwurm", 37, Rarity.RARE, mage.cards.e.EmergentWoodwurm.class));
         cards.add(new SetCardInfo("Emeria Angel", 183, Rarity.RARE, mage.cards.e.EmeriaAngel.class));
         cards.add(new SetCardInfo("Enduring Scalelord", 325, Rarity.UNCOMMON, mage.cards.e.EnduringScalelord.class));
         cards.add(new SetCardInfo("Ephemeral Shields", 184, Rarity.COMMON, mage.cards.e.EphemeralShields.class));
