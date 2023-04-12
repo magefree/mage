@@ -45,10 +45,10 @@ public final class RashmiAndRagavan extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever you cast your first spell during each of your turns,
-        // exile the top card of target opponent’s library and create a Treasure token.
-        // Then you may cast the exiled card without paying its mana cost if it’s a spell with mana value
+        // exile the top card of target opponent's library and create a Treasure token.
+        // Then you may cast the exiled card without paying its mana cost if it's a spell with mana value
         // less than the number of artifacts you control.
-        // If you don’t cast it this way, you may cast it this turn.
+        // If you don't cast it this way, you may cast it this turn.
         Ability ability = new RashmiAndRagavanTriggeredAbility();
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability, new SpellsCastWatcher());
@@ -98,9 +98,9 @@ class RashmiAndRagavanTriggeredAbility extends SpellCastControllerTriggeredAbili
     @Override
     public String getRule() {
         return "Whenever you cast your first spell during each of your turns, exile the top card of target "
-                + "opponent’s library and create a Treasure token. Then you may cast the exiled card without "
-                + "paying its mana cost if it’s a spell with mana value less than the number of artifacts you "
-                + "control. If you don’t cast it this way, you may cast it this turn.";
+                + "opponent's library and create a Treasure token. Then you may cast the exiled card without "
+                + "paying its mana cost if it's a spell with mana value less than the number of artifacts you "
+                + "control. If you don't cast it this way, you may cast it this turn.";
     }
 }
 
@@ -108,9 +108,9 @@ class RashmiAndRagavanEffect extends OneShotEffect {
 
     RashmiAndRagavanEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "exile the top card of target opponent’s library and create a Treasure token. "
-                + "Then you may cast the exiled card without paying its mana cost if it’s a spell with mana value "
-                + "less than the number of artifacts you control. If you don’t cast it this way, "
+        this.staticText = "exile the top card of target opponent's library and create a Treasure token. "
+                + "Then you may cast the exiled card without paying its mana cost if it's a spell with mana value "
+                + "less than the number of artifacts you control. If you don't cast it this way, "
                 + "you may cast it this turn";
     }
 

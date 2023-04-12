@@ -72,6 +72,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Commander's Sphere", 352, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
         cards.add(new SetCardInfo("Conclave Mentor", 320, Rarity.UNCOMMON, mage.cards.c.ConclaveMentor.class));
         cards.add(new SetCardInfo("Conclave Tribunal", 178, Rarity.UNCOMMON, mage.cards.c.ConclaveTribunal.class));
+        cards.add(new SetCardInfo("Conjurer's Mantle", 12, Rarity.RARE, mage.cards.c.ConjurersMantle.class));
         cards.add(new SetCardInfo("Constable of the Realm", 179, Rarity.UNCOMMON, mage.cards.c.ConstableOfTheRealm.class));
         cards.add(new SetCardInfo("Corpse Knight", 321, Rarity.UNCOMMON, mage.cards.c.CorpseKnight.class));
         cards.add(new SetCardInfo("Coveted Jewel", 353, Rarity.RARE, mage.cards.c.CovetedJewel.class));
@@ -79,6 +80,8 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Cultivate", 295, Rarity.COMMON, mage.cards.c.Cultivate.class));
         cards.add(new SetCardInfo("Cultivator's Caravan", 354, Rarity.RARE, mage.cards.c.CultivatorsCaravan.class));
         cards.add(new SetCardInfo("Curse of Opulence", 274, Rarity.UNCOMMON, mage.cards.c.CurseOfOpulence.class));
+        cards.add(new SetCardInfo("Dance with Calamity", 29, Rarity.RARE, mage.cards.d.DanceWithCalamity.class));
+        cards.add(new SetCardInfo("Darksteel Splicer", 13, Rarity.RARE, mage.cards.d.DarksteelSplicer.class));
         cards.add(new SetCardInfo("Death-Greeter's Champion", 30, Rarity.RARE, mage.cards.d.DeathGreetersChampion.class));
         cards.add(new SetCardInfo("Deluxe Dragster", 21, Rarity.RARE, mage.cards.d.DeluxeDragster.class));
         cards.add(new SetCardInfo("Despark", 322, Rarity.UNCOMMON, mage.cards.d.Despark.class));
@@ -90,6 +93,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Echo Storm", 221, Rarity.RARE, mage.cards.e.EchoStorm.class));
         cards.add(new SetCardInfo("Elite Scaleguard", 181, Rarity.UNCOMMON, mage.cards.e.EliteScaleguard.class));
         cards.add(new SetCardInfo("Elspeth, Sun's Champion", 182, Rarity.MYTHIC, mage.cards.e.ElspethSunsChampion.class));
+        cards.add(new SetCardInfo("Emergent Woodwurm", 37, Rarity.RARE, mage.cards.e.EmergentWoodwurm.class));
         cards.add(new SetCardInfo("Emeria Angel", 183, Rarity.RARE, mage.cards.e.EmeriaAngel.class));
         cards.add(new SetCardInfo("Enduring Scalelord", 325, Rarity.UNCOMMON, mage.cards.e.EnduringScalelord.class));
         cards.add(new SetCardInfo("Ephemeral Shields", 184, Rarity.COMMON, mage.cards.e.EphemeralShields.class));
@@ -138,6 +142,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Hamza, Guardian of Arashin", 327, Rarity.UNCOMMON, mage.cards.h.HamzaGuardianOfArashin.class));
         cards.add(new SetCardInfo("Heaven // Earth", 328, Rarity.RARE, mage.cards.h.HeavenEarth.class));
         cards.add(new SetCardInfo("Hedron Archive", 359, Rarity.UNCOMMON, mage.cards.h.HedronArchive.class));
+        cards.add(new SetCardInfo("Hedron Detonator", 31, Rarity.RARE, mage.cards.h.HedronDetonator.class));
         cards.add(new SetCardInfo("Hellkite Igniter", 284, Rarity.RARE, mage.cards.h.HellkiteIgniter.class));
         cards.add(new SetCardInfo("Herald of Hoofbeats", 22, Rarity.RARE, mage.cards.h.HeraldOfHoofbeats.class));
         cards.add(new SetCardInfo("Herald's Horn", 360, Rarity.UNCOMMON, mage.cards.h.HeraldsHorn.class));
@@ -192,6 +197,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Mikaeus, the Lunarch", 197, Rarity.RARE, mage.cards.m.MikaeusTheLunarch.class));
         cards.add(new SetCardInfo("Mind Stone", 364, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Mindless Automaton", 365, Rarity.UNCOMMON, mage.cards.m.MindlessAutomaton.class));
+        cards.add(new SetCardInfo("Mirror-Style Master", 32, Rarity.RARE, mage.cards.m.MirrorStyleMaster.class));
         cards.add(new SetCardInfo("Mortify", 337, Rarity.UNCOMMON, mage.cards.m.Mortify.class));
         cards.add(new SetCardInfo("Mossfire Valley", 414, Rarity.RARE, mage.cards.m.MossfireValley.class));
         cards.add(new SetCardInfo("Mosswort Bridge", 415, Rarity.RARE, mage.cards.m.MosswortBridge.class));
@@ -238,6 +244,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Root Out", 311, Rarity.COMMON, mage.cards.r.RootOut.class));
         cards.add(new SetCardInfo("Saheeli's Artistry", 234, Rarity.RARE, mage.cards.s.SaheelisArtistry.class));
         cards.add(new SetCardInfo("Saheeli, Sublime Artificer", 338, Rarity.UNCOMMON, mage.cards.s.SaheeliSublimeArtificer.class));
+        cards.add(new SetCardInfo("Saint Traft and Rem Karolus", 9, Rarity.MYTHIC, mage.cards.s.SaintTraftAndRemKarolus.class));
         cards.add(new SetCardInfo("Sandsteppe War Riders", 39, Rarity.RARE, mage.cards.s.SandsteppeWarRiders.class));
         cards.add(new SetCardInfo("Schema Thief", 24, Rarity.RARE, mage.cards.s.SchemaThief.class));
         cards.add(new SetCardInfo("Scrap Trawler", 373, Rarity.RARE, mage.cards.s.ScrapTrawler.class));
