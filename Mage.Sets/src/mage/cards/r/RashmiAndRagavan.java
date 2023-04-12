@@ -1,27 +1,26 @@
 package mage.cards.r;
 
-import mage.ApprovingObject;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.*;
+import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.TreasureToken;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
-import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 import mage.watchers.common.SpellsCastWatcher;
 
@@ -49,9 +48,7 @@ public final class RashmiAndRagavan extends CardImpl {
         // Then you may cast the exiled card without paying its mana cost if it’s a spell with mana value
         // less than the number of artifacts you control.
         // If you don’t cast it this way, you may cast it this turn.
-        Ability ability = new RashmiAndRagavanTriggeredAbility();
-        ability.addTarget(new TargetOpponent());
-        this.addAbility(ability, new SpellsCastWatcher());
+        this.addAbility(new RashmiAndRagavanTriggeredAbility());
     }
 
     private RashmiAndRagavan(final RashmiAndRagavan card) {
@@ -68,6 +65,8 @@ class RashmiAndRagavanTriggeredAbility extends SpellCastControllerTriggeredAbili
 
     RashmiAndRagavanTriggeredAbility() {
         super(new CreateTokenEffect(new TreasureToken()), false);
+        this.addTarget(new TargetOpponent());
+        this.addWatcher(new SpellsCastWatcher());
         this.addEffect(new RashmiAndRagavanEffect());
     }
 
@@ -125,7 +124,6 @@ class RashmiAndRagavanEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Boolean cardWasCast = false;
         Player controller = game.getPlayer(source.getControllerId());
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller == null || player == null) {
@@ -149,17 +147,12 @@ class RashmiAndRagavanEffect extends OneShotEffect {
         int artifactCount = new PermanentsOnBattlefieldCount(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT
         ).calculate(game, source, this);
-        if (!card.isLand() && card.getManaValue() < artifactCount && controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getName()
-                + " without paying its mana cost?", source, game)) {
-            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-            cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
-                    game, true, new ApprovingObject(source, game));
-            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-        }
+        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+        FilterCard filter = new FilterCard();
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, artifactCount));
+        Boolean cardWasCast = CardUtil.castSpellWithAttributesForFree(controller, source, game, new CardsImpl(card), filter);
         if (!cardWasCast) {
-            ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, TargetController.YOU, Duration.EndOfTurn, false, true);
-            effect.setTargetPointer(new FixedTargets(cards, game));
-            game.addEffect(effect, source);
+            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, false, controller.getId(), null);
         }
         return true;
     }
