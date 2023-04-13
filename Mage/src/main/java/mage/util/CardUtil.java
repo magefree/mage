@@ -561,7 +561,7 @@ public final class CardUtil {
      */
     public static int parseCardNumberAsInt(String cardNumber) {
 
-        if (cardNumber.isEmpty()) {
+        if (cardNumber == null || cardNumber.isEmpty()) {
             throw new IllegalArgumentException("Card number is empty.");
         }
 

@@ -283,6 +283,16 @@ public class Commander implements CommandObject {
     }
 
     @Override
+    public String getExpansionSetCodeForImage() {
+        return sourceObject.getExpansionSetCode();
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String expansionSetCodeForImage) {
+        throw new IllegalStateException("Can't change a set code of the commander, source card already has it");
+    }
+
+    @Override
     public int getZoneChangeCounter(Game game) {
         return sourceObject.getZoneChangeCounter(game);
     }

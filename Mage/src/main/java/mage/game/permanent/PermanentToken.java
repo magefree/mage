@@ -121,4 +121,24 @@ public class PermanentToken extends PermanentImpl {
         // token don't have game card, so return itself
         return this;
     }
+
+    @Override
+    public String getCardNumber() {
+        return token.getOriginalCardNumber();
+    }
+
+    @Override
+    public void setCardNumber(String cardNumber) {
+        throw new IllegalArgumentException("Wrong code usage: you can't change a token's card number");
+    }
+
+    @Override
+    public String getExpansionSetCode() {
+        return token.getOriginalExpansionSetCode();
+    }
+
+    @Override
+    public void setExpansionSetCode(String expansionSetCode) {
+        throw new IllegalArgumentException("Wrong code usage: you can't change a token's set code");
+    }
 }

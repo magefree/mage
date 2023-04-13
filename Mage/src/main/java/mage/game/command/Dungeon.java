@@ -327,10 +327,12 @@ public class Dungeon implements CommandObject {
         return new Dungeon(this);
     }
 
+    @Override
     public String getExpansionSetCodeForImage() {
         return expansionSetCodeForImage;
     }
 
+    @Override
     public void setExpansionSetCodeForImage(String expansionSetCodeForImage) {
         this.expansionSetCodeForImage = expansionSetCodeForImage;
     }

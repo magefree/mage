@@ -259,7 +259,7 @@ public class MageBook extends JComponent {
                     if (newToken instanceof Token) {
                         ((Token) newToken).setOriginalExpansionSetCode(currentSet);
                         ((Token) newToken).setExpansionSetCodeForImage(currentSet);
-                        ((Token) newToken).setTokenType(token.getType());
+                        ((Token) newToken).setTokenType(token.getType()); // must be called after set code, so it keep the type
                         res.add(newToken);
                     }
                 } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
