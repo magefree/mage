@@ -142,6 +142,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Kithkin Billyrider", 24, Rarity.COMMON, mage.cards.k.KithkinBillyrider.class));
         cards.add(new SetCardInfo("Knight of the New Coalition", 25, Rarity.COMMON, mage.cards.k.KnightOfTheNewCoalition.class));
         cards.add(new SetCardInfo("Knight-Errant of Eos", 26, Rarity.RARE, mage.cards.k.KnightErrantOfEos.class));
+        cards.add(new SetCardInfo("Kogla and Yidaro", 244, Rarity.RARE, mage.cards.k.KoglaAndYidaro.class));
         cards.add(new SetCardInfo("Kor Halberd", 27, Rarity.COMMON, mage.cards.k.KorHalberd.class));
         cards.add(new SetCardInfo("Kroxa and Kunoros", 245, Rarity.MYTHIC, mage.cards.k.KroxaAndKunoros.class));
         cards.add(new SetCardInfo("Lithomantic Barrage", 152, Rarity.UNCOMMON, mage.cards.l.LithomanticBarrage.class));
