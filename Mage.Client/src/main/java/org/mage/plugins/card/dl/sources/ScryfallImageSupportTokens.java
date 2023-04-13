@@ -1900,6 +1900,10 @@ public class ScryfallImageSupportTokens {
             put ("ONC/Spirit", "https://api.scryfall.com/cards/tonc/9/en?format=image");
             put ("ONC/Thopter", "https://api.scryfall.com/cards/tonc/21/en?format=image");
 
+            // 30A
+            // TODO: add another tokens
+            put ("30A/Wasp", "https://api.scryfall.com/cards/t30a/16/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
