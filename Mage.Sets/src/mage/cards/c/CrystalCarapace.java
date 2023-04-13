@@ -42,6 +42,7 @@ public final class CrystalCarapace extends CardImpl {
         ability.addEffect(new GainAbilityAttachedEffect(
                 new WardAbility(new GenericManaCost(2), false), AttachmentType.AURA
         ).setText("and has ward {2}"));
+        this.addAbility(ability);
 
         // Cycling {2}
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));

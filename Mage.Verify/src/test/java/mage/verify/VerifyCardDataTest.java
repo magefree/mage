@@ -63,7 +63,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODE = "40K"; // check all abilities and output cards with wrong abilities texts;
+    private static final String FULL_ABILITIES_CHECK_SET_CODE = "MOM"; // check all abilities and output cards with wrong abilities texts;
     private static final boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
@@ -1283,6 +1283,8 @@ public class VerifyCardDataTest {
             if (token == null) {
                 errorsList.add("Error: token must have default constructor with zero params: " + tokenClass.getName());
             } else if (tokDataNamesIndex.getOrDefault(token.getName().replace(" Token", ""), "").isEmpty()) {
+                // how-to fix: public token must be downloadable, so tok-data must contain miss set
+                // (also don't forget to add new set to scryfall download)
                 errorsList.add("Error: can't find data in card-pictures-tok.txt for token: " + tokenClass.getName() + " -> " + token.getName());
             }
         }
@@ -1312,20 +1314,45 @@ public class VerifyCardDataTest {
         }
         // set uses tokens, but tok data miss it
         setsWithTokens.forEach((setCode, sourceCards) -> {
-            if (!tokDataTokensBySetIndex.containsKey(setCode)) {
+            List<CardDownloadData> setTokens = tokDataTokensBySetIndex.getOrDefault(setCode, null);
+            if (setTokens == null) {
                 // it's not a problem -- just find set's cards without real tokens for image tests
-                // (most use cases: promo sets)
-                warningsList.add("info, set has cards with token abilities, but it haven't token data: "
+                // Possible reasons:
+                // - promo sets with cards without tokens (nothing to do with it)
+                // - miss set from tok-data (must add new set to tok-data and scryfall download)
+                warningsList.add("info, set's cards uses tokens but tok-data haven't it: "
                         + setCode + " - " + sourceCards.stream().map(MageObject::getName).collect(Collectors.joining(", ")));
+            } else {
+                // Card can be checked on scryfall like "set:set_code oracle:token_name oracle:token"
+                // Possible reasons for un-used tokens:
+                // - normal use case: tok-data contains wrong token data and must be removed
+                // - normal use case: card uses wrong rules text (must contain "create" and "token" words)
+                // - rare use case: un-implemented card that uses a token
+                setTokens.forEach(token -> {
+                    if (token.getName().contains("Plane - ")) {
+                        // cards don't put it to the game, so no related cards
+                        return;
+                    }
+                    String needTokenName = token.getName()
+                            .replace(" Token", "")
+                            .replace("Emblem ", "");
+                    // need add card name, so it will skip no name emblems like Sarkhan, the Dragonspeaker
+                    if (sourceCards.stream()
+                            .map(card -> card.getName() + " - " + String.join(", ", card.getRules()))
+                            .noneMatch(s -> s.contains(needTokenName))) {
+                        warningsList.add("info, tok-data has un-used tokens: "
+                                + token.getSet() + " - " + token.getName());
+                    }
+                });
             }
         });
         // tok data have tokens, but cards from set are miss
         tokDataTokensBySetIndex.forEach((setCode, setTokens) -> {
             if (!setsWithTokens.containsKey(setCode)) {
-                // possible reasons:
-                // - bad: outdated set code in tokens database (must use exists set codes, see additional check with token's codes)
-                // - ok: promo set contains additional tokens for main set -- it's ok and must be ignored (example: Saproling in E02)
-                warningsList.add("warning, tok data has set with tokens, but real set haven't cards with it: "
+                // Possible reasons:
+                // - outdated set code in tokens database (must be fixed by new set code, another verify check it)
+                // - promo set contains additional tokens for main set (it's ok and must be ignored, example: Saproling in E02)
+                warningsList.add("warning, tok-data has tokens, but real set haven't cards with it: "
                         + setCode + " - " + setTokens.stream().map(CardDownloadData::getName).collect(Collectors.joining(", ")));
             }
         });

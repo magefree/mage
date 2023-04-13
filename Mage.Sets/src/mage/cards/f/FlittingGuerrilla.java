@@ -49,7 +49,7 @@ public final class FlittingGuerrilla extends CardImpl {
         ReflexiveTriggeredAbility rAbility = new ReflexiveTriggeredAbility(new PutOnLibraryTargetEffect(true), false);
         rAbility.addTarget(new TargetCardInYourGraveyard(filter));
         Ability ability = new DiesSourceTriggeredAbility(new MillCardsEachPlayerEffect(2, TargetController.EACH_PLAYER));
-        ability.addEffect(new DoWhenCostPaid(rAbility, new ExileSourceFromGraveCost(), "Exile this from your graveyard?"));
+        ability.addEffect(new DoWhenCostPaid(rAbility, new ExileSourceFromGraveCost().setText("exile {this}"), "Exile this from your graveyard?").concatBy("Then"));
         this.addAbility(ability);
     }
 

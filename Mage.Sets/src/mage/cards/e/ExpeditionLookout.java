@@ -40,7 +40,7 @@ public final class ExpeditionLookout extends CardImpl {
         ).setText("as long as an opponent has eight or more cards in their graveyard, " +
                 "{this} can attack as though it didn't have defender"));
         ability.addEffect(new ConditionalRestrictionEffect(
-                new CantBeBlockedSourceEffect(), CardsInOpponentGraveyardCondition.EIGHT, "and can't be blocked"
+                new CantBeBlockedSourceEffect(), CardsInOpponentGraveyardCondition.EIGHT, "and it can't be blocked"
         ));
         this.addAbility(ability.addHint(CardsInOpponentGraveyardCondition.EIGHT.getHint()));
     }

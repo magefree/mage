@@ -65,7 +65,7 @@ class HaloChargedSkaabEffect extends OneShotEffect {
 
     HaloChargedSkaabEffect() {
         super(Outcome.Benefit);
-        staticText = "then you may put an instant, sorcery, or battle card from your graveyard on top of your library";
+        staticText = "Then you may put an instant, sorcery, or battle card from your graveyard on top of your library";
     }
 
     private HaloChargedSkaabEffect(final HaloChargedSkaabEffect effect) {

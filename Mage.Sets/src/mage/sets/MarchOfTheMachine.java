@@ -92,6 +92,8 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Ephara, Ever-Sheltering", 23, Rarity.RARE, mage.cards.e.EpharaEverSheltering.class));
         cards.add(new SetCardInfo("Errant and Giada", 224, Rarity.RARE, mage.cards.e.ErrantAndGiada.class));
         cards.add(new SetCardInfo("Essence of Orthodoxy", 323, Rarity.RARE, mage.cards.e.EssenceOfOrthodoxy.class));
+        cards.add(new SetCardInfo("Etali, Primal Conqueror", 137, Rarity.RARE, mage.cards.e.EtaliPrimalConqueror.class));
+        cards.add(new SetCardInfo("Etali, Primal Sickness", 137, Rarity.RARE, mage.cards.e.EtaliPrimalSickness.class));
         cards.add(new SetCardInfo("Etched Familiar", 101, Rarity.COMMON, mage.cards.e.EtchedFamiliar.class));
         cards.add(new SetCardInfo("Etched Host Doombringer", 102, Rarity.COMMON, mage.cards.e.EtchedHostDoombringer.class));
         cards.add(new SetCardInfo("Expedition Lookout", 56, Rarity.COMMON, mage.cards.e.ExpeditionLookout.class));
@@ -173,6 +175,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Kithkin Billyrider", 24, Rarity.COMMON, mage.cards.k.KithkinBillyrider.class));
         cards.add(new SetCardInfo("Knight of the New Coalition", 25, Rarity.COMMON, mage.cards.k.KnightOfTheNewCoalition.class));
         cards.add(new SetCardInfo("Knight-Errant of Eos", 26, Rarity.RARE, mage.cards.k.KnightErrantOfEos.class));
+        cards.add(new SetCardInfo("Kogla and Yidaro", 244, Rarity.RARE, mage.cards.k.KoglaAndYidaro.class));
         cards.add(new SetCardInfo("Kor Halberd", 27, Rarity.COMMON, mage.cards.k.KorHalberd.class));
         cards.add(new SetCardInfo("Kroxa and Kunoros", 245, Rarity.MYTHIC, mage.cards.k.KroxaAndKunoros.class));
         cards.add(new SetCardInfo("Kyren Flamewright", 147, Rarity.UNCOMMON, mage.cards.k.KyrenFlamewright.class));
@@ -190,6 +193,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Monastery Mentor", 28, Rarity.MYTHIC, mage.cards.m.MonasteryMentor.class));
         cards.add(new SetCardInfo("Mountain", 280, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mutagen Connoisseur", 248, Rarity.UNCOMMON, mage.cards.m.MutagenConnoisseur.class));
+        cards.add(new SetCardInfo("Nahiri's Warcrafting", 155, Rarity.RARE, mage.cards.n.NahirisWarcrafting.class));
         cards.add(new SetCardInfo("Negate", 68, Rarity.COMMON, mage.cards.n.Negate.class));
         cards.add(new SetCardInfo("Nezumi Freewheeler", 119, Rarity.UNCOMMON, mage.cards.n.NezumiFreewheeler.class));
         cards.add(new SetCardInfo("Nezumi Informant", 120, Rarity.COMMON, mage.cards.n.NezumiInformant.class));
@@ -213,6 +217,8 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Placid Rottentail", 199, Rarity.COMMON, mage.cards.p.PlacidRottentail.class));
         cards.add(new SetCardInfo("Plains", 277, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plated Kilnbeast", 178, Rarity.COMMON, mage.cards.p.PlatedKilnbeast.class));
+        cards.add(new SetCardInfo("Polukranos Reborn", 200, Rarity.RARE, mage.cards.p.PolukranosReborn.class));
+        cards.add(new SetCardInfo("Polukranos, Engine of Ruin", 200, Rarity.RARE, mage.cards.p.PolukranosEngineOfRuin.class));
         cards.add(new SetCardInfo("Portent Tracker", 201, Rarity.COMMON, mage.cards.p.PortentTracker.class));
         cards.add(new SetCardInfo("Preening Champion", 73, Rarity.COMMON, mage.cards.p.PreeningChampion.class));
         cards.add(new SetCardInfo("Prickle Faeries", 113, Rarity.UNCOMMON, mage.cards.p.PrickleFaeries.class));
@@ -223,12 +229,15 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Ral's Reinforcements", 158, Rarity.COMMON, mage.cards.r.RalsReinforcements.class));
         cards.add(new SetCardInfo("Ramosian Greatsword", 159, Rarity.UNCOMMON, mage.cards.r.RamosianGreatsword.class));
         cards.add(new SetCardInfo("Rampaging Geoderm", 251, Rarity.UNCOMMON, mage.cards.r.RampagingGeoderm.class));
+        cards.add(new SetCardInfo("Rampaging Raptor", 160, Rarity.RARE, mage.cards.r.RampagingRaptor.class));
         cards.add(new SetCardInfo("Rankle and Torbran", 252, Rarity.RARE, mage.cards.r.RankleAndTorbran.class));
         cards.add(new SetCardInfo("Ravenous Sailback", 202, Rarity.UNCOMMON, mage.cards.r.RavenousSailback.class));
         cards.add(new SetCardInfo("Realmbreaker's Grasp", 33, Rarity.COMMON, mage.cards.r.RealmbreakersGrasp.class));
         cards.add(new SetCardInfo("Redcap Heelslasher", 161, Rarity.COMMON, mage.cards.r.RedcapHeelslasher.class));
         cards.add(new SetCardInfo("Referee Squad", 327, Rarity.UNCOMMON, mage.cards.r.RefereeSquad.class));
         cards.add(new SetCardInfo("Refraction Elemental", 146, Rarity.RARE, mage.cards.r.RefractionElemental.class));
+        cards.add(new SetCardInfo("Rona, Herald of Invasion", 75, Rarity.RARE, mage.cards.r.RonaHeraldOfInvasion.class));
+        cards.add(new SetCardInfo("Rona, Tolarian Obliterator", 75, Rarity.RARE, mage.cards.r.RonaTolarianObliterator.class));
         cards.add(new SetCardInfo("Rooftop Saboteurs", 62, Rarity.UNCOMMON, mage.cards.r.RooftopSaboteurs.class));
         cards.add(new SetCardInfo("Rugged Highlands", 271, Rarity.COMMON, mage.cards.r.RuggedHighlands.class));
         cards.add(new SetCardInfo("Ruins Recluse", 336, Rarity.UNCOMMON, mage.cards.r.RuinsRecluse.class));
@@ -266,6 +275,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Swordsworn Cavalier", 42, Rarity.COMMON, mage.cards.s.SwordswornCavalier.class));
         cards.add(new SetCardInfo("Tangled Skyline", 209, Rarity.UNCOMMON, mage.cards.t.TangledSkyline.class));
         cards.add(new SetCardInfo("Tarkir Duneshaper", 43, Rarity.COMMON, mage.cards.t.TarkirDuneshaper.class));
+        cards.add(new SetCardInfo("Temporal Cleansing", 80, Rarity.COMMON, mage.cards.t.TemporalCleansing.class));
         cards.add(new SetCardInfo("Tenured Oilcaster", 126, Rarity.COMMON, mage.cards.t.TenuredOilcaster.class));
         cards.add(new SetCardInfo("The Broken Sky", 241, Rarity.RARE, mage.cards.t.TheBrokenSky.class));
         cards.add(new SetCardInfo("Thornwood Falls", 274, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
@@ -277,6 +287,8 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Trailblazing Historian", 168, Rarity.COMMON, mage.cards.t.TrailblazingHistorian.class));
         cards.add(new SetCardInfo("Tranquil Cove", 275, Rarity.COMMON, mage.cards.t.TranquilCove.class));
         cards.add(new SetCardInfo("Transcendent Message", 83, Rarity.RARE, mage.cards.t.TranscendentMessage.class));
+        cards.add(new SetCardInfo("Traumatic Revelation", 127, Rarity.COMMON, mage.cards.t.TraumaticRevelation.class));
+        cards.add(new SetCardInfo("Tribute to the World Tree", 211, Rarity.RARE, mage.cards.t.TributeToTheWorldTree.class));
         cards.add(new SetCardInfo("Truga Cliffcharger", 233, Rarity.UNCOMMON, mage.cards.t.TrugaCliffcharger.class));
         cards.add(new SetCardInfo("Unseal the Necropolis", 128, Rarity.COMMON, mage.cards.u.UnsealTheNecropolis.class));
         cards.add(new SetCardInfo("Urn of Godfire", 266, Rarity.COMMON, mage.cards.u.UrnOfGodfire.class));

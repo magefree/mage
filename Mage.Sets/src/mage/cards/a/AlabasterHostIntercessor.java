@@ -33,6 +33,7 @@ public final class AlabasterHostIntercessor extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
+        this.addAbility(ability);
 
         // Plainscycling {2}
         this.addAbility(new PlainscyclingAbility(new ManaCostsImpl<>("{2}")));

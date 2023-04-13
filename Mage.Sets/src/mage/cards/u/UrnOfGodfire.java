@@ -41,6 +41,7 @@ public final class UrnOfGodfire extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(ability);
     }
 
     private UrnOfGodfire(final UrnOfGodfire card) {

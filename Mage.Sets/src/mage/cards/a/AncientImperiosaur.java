@@ -45,7 +45,7 @@ public final class AncientImperiosaur extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
                 CounterType.P1P1.createInstance(), xValue, true
         ), null, "{this} enters the battlefield with two " +
-                "+1/+1 counters on it for each creature that convoked it", null));
+                "+1/+1 counters on it for each creature that convoked it.", null));
     }
 
     private AncientImperiosaur(final AncientImperiosaur card) {

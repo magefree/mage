@@ -252,12 +252,14 @@ public class Emblem implements CommandObject {
         return new Emblem(this);
     }
 
-    public void setExpansionSetCodeForImage(String expansionSetCodeForImage) {
-        this.expansionSetCodeForImage = expansionSetCodeForImage;
-    }
-
+    @Override
     public String getExpansionSetCodeForImage() {
         return expansionSetCodeForImage;
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String expansionSetCodeForImage) {
+        this.expansionSetCodeForImage = expansionSetCodeForImage;
     }
 
     @Override

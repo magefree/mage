@@ -40,7 +40,8 @@ public final class ArchangelElspeth extends CardImpl {
 
         // -2: Put two +1/+1 counters on target creature. It becomes an Angel in addition to its other types and gains flying.
         Ability ability = new LoyaltyAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)), -2);
-        ability.addEffect(new AddCardSubTypeTargetEffect(SubType.ANGEL, Duration.Custom));
+        ability.addEffect(new AddCardSubTypeTargetEffect(SubType.ANGEL, Duration.Custom)
+                .setText("It becomes an Angel in addition to its other types"));
         ability.addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.Custom).setText("and gains flying"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

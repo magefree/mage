@@ -28,7 +28,7 @@ public final class GlisteningGoremonger extends CardImpl {
         this.nightCard = true;
 
         // When Glistening Goremonger dies, each opponent sacrifices an artifact or creature.
-        this.addAbility(new DiesSourceTriggeredAbility(new SacrificeOpponentsEffect(StaticFilters.FILTER_PERMANENT_ARTIFACT_CREATURE)));
+        this.addAbility(new DiesSourceTriggeredAbility(new SacrificeOpponentsEffect(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE)));
     }
 
     private GlisteningGoremonger(final GlisteningGoremonger card) {

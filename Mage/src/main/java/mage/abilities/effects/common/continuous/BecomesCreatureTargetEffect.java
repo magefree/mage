@@ -39,16 +39,16 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
 
     /**
      * @param token
-     * @param loseAllAbilities loses all creature subtypes, colors and abilities
-     * @param stillALand add rule text, "it's still a land"
-     * @param loseName permanent loses name and gets it from token
-     * @param keepAbilities lose subtypes/colors, but keep abilities (example:
-     * Scale Up)
+     * @param loseAllAbilities   loses all creature subtypes, colors and abilities
+     * @param stillALand         add rule text, "it's still a land"
+     * @param loseName           permanent loses name and gets it from token
+     * @param keepAbilities      lose subtypes/colors, but keep abilities (example:
+     *                           Scale Up)
      * @param duration
      * @param loseOtherCardTypes permanent loses other (original) card types, exclusively obtains card types of token
      */
     public BecomesCreatureTargetEffect(Token token, boolean loseAllAbilities, boolean stillALand, Duration duration, boolean loseName,
-            boolean keepAbilities, boolean loseOtherCardTypes) {
+                                       boolean keepAbilities, boolean loseOtherCardTypes) {
         super(duration, Outcome.BecomeCreature);
         this.token = token;
         this.loseAllAbilities = loseAllAbilities;
@@ -179,10 +179,13 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
         }
         StringBuilder sb = new StringBuilder();
         Target target = mode.getTargets().get(0);
-        if (target.getMaxNumberOfTargets() > 1) {
-            if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
-                sb.append("up to ");
+        if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
+            sb.append("up to ");
+            if (target.getMaxNumberOfTargets() == 1) {
+                sb.append("one ");
             }
+        }
+        if (target.getMaxNumberOfTargets() > 1) {
             sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName());
             if (loseAllAbilities) {
                 sb.append(" lose all their abilities and ");

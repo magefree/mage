@@ -46,7 +46,7 @@ class UnsealTheNecropolisEffect extends OneShotEffect {
 
     UnsealTheNecropolisEffect() {
         super(Outcome.Benefit);
-        staticText = "then you return up to two creature cards from your graveyard to your hand";
+        staticText = "Then you return up to two creature cards from your graveyard to your hand";
     }
 
     private UnsealTheNecropolisEffect(final UnsealTheNecropolisEffect effect) {

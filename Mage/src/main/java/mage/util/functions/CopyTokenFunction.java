@@ -36,12 +36,14 @@ public class CopyTokenFunction implements Function<Token, Card> {
 
         MageObject sourceObj = source;
         if (source instanceof PermanentToken) {
+            // create token from another token
             sourceObj = ((PermanentToken) source).getToken();
             // to show the source image, the original values have to be used
             target.setOriginalExpansionSetCode(((Token) sourceObj).getOriginalExpansionSetCode());
             target.setOriginalCardNumber(((Token) sourceObj).getOriginalCardNumber());
             target.setCopySourceCard(((PermanentToken) source).getToken().getCopySourceCard());
         } else if (source instanceof PermanentCard) {
+            // create token from non-token permanent
             if (((PermanentCard) source).isMorphed() || ((PermanentCard) source).isManifested()) {
                 MorphAbility.setPermanentToFaceDownCreature(target, game);
                 return target;
@@ -57,6 +59,7 @@ public class CopyTokenFunction implements Function<Token, Card> {
                 target.setCopySourceCard((Card) sourceObj);
             }
         } else {
+            // create token from non-permanent object like card (example: Embalm ability)
             target.setOriginalExpansionSetCode(source.getExpansionSetCode());
             target.setOriginalCardNumber(source.getCardNumber());
             target.setCopySourceCard(source);
