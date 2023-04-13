@@ -2516,8 +2516,9 @@ public abstract class GameImpl implements Game {
                         .filter(TriggeredAbility.class::isInstance)
                         .map(Ability::getSourceId)
                         .noneMatch(perm.getId()::equals)) {
-                    movePermanentToGraveyardWithInfo(perm);
-                    somethingHappened = true;
+                    if (movePermanentToGraveyardWithInfo(perm)) {
+                        somethingHappened = true;
+                    }
                 } else if (this.getPlayer(perm.getProtectorId()) == null || perm.isControlledBy(perm.getProtectorId())) {
                     perm.chooseProtector(this, null);
                     somethingHappened = true;
