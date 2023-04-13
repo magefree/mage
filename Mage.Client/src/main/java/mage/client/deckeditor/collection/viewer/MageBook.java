@@ -448,7 +448,7 @@ public class MageBook extends JComponent {
         if (cardDimension == null) {
             cardDimension = new Dimension(ClientDefaultSettings.dimensions.getFrameWidth(), ClientDefaultSettings.dimensions.getFrameHeight());
         }
-        PermanentToken newToken = new PermanentToken(token, null, token.getOriginalExpansionSetCode(), null);
+        PermanentToken newToken = new PermanentToken(token, null, null);
         newToken.removeSummoningSickness();
         PermanentView theToken = new PermanentView(newToken, null, null, null);
         theToken.setInViewerOnly(true);

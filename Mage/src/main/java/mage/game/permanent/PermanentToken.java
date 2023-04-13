@@ -20,9 +20,8 @@ public class PermanentToken extends PermanentImpl {
 
     protected Token token;
 
-    public PermanentToken(Token token, UUID controllerId, String expansionSetCode, Game game) {
+    public PermanentToken(Token token, UUID controllerId, Game game) {
         super(controllerId, controllerId, token.getName());
-        this.expansionSetCode = expansionSetCode;
         this.token = token.copy();
         this.token.getAbilities().newOriginalId(); // neccessary if token has ability like DevourAbility()
         this.token.getAbilities().setSourceId(objectId);
@@ -40,7 +39,6 @@ public class PermanentToken extends PermanentImpl {
     public PermanentToken(final PermanentToken permanent) {
         super(permanent);
         this.token = permanent.token.copy();
-        this.expansionSetCode = permanent.expansionSetCode;
     }
 
     @Override
