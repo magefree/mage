@@ -7,7 +7,6 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.Outcome;
 import mage.counters.Counter;
-import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -47,7 +46,16 @@ public class RemoveCountersSourceCost extends CostImpl {
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        return permanent != null && permanent.getCounters(game).getCount(name) >= amount;
+        return permanent != null && name.isEmpty()
+                ? permanent
+                .getCounters(game)
+                .values()
+                .stream()
+                .map(Counter::getCount)
+                .anyMatch(i -> i > 0)
+                : permanent
+                .getCounters(game)
+                .getCount(name) >= amount;
     }
 
     @Override
