@@ -19,7 +19,6 @@ public class ProtectorIdPredicate implements Predicate<Permanent> {
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        // TODO: implement this on battles branch
-        return false;
+        return input.isProtectedBy(protectorId);
     }
 }
