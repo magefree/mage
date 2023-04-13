@@ -154,8 +154,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Imprisoned in the Moon", 224, Rarity.RARE, mage.cards.i.ImprisonedInTheMoon.class));
         cards.add(new SetCardInfo("Improbable Alliance", 329, Rarity.UNCOMMON, mage.cards.i.ImprobableAlliance.class));
         cards.add(new SetCardInfo("Incubation Druid", 302, Rarity.RARE, mage.cards.i.IncubationDruid.class));
-        cards.add(new SetCardInfo("Infernal Sovereign", 75, Rarity.MYTHIC, mage.cards.i.InfernalSovereign.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Infernal Sovereign", 83, Rarity.MYTHIC, mage.cards.i.InfernalSovereign.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Infernal Sovereign", 75, Rarity.MYTHIC, mage.cards.i.InfernalSovereign.class));
         cards.add(new SetCardInfo("Inscription of Abundance", 303, Rarity.RARE, mage.cards.i.InscriptionOfAbundance.class));
         cards.add(new SetCardInfo("Inspiring Call", 304, Rarity.UNCOMMON, mage.cards.i.InspiringCall.class));
         cards.add(new SetCardInfo("Inspiring Statuary", 361, Rarity.RARE, mage.cards.i.InspiringStatuary.class));
@@ -190,11 +189,12 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Master Splicer", 194, Rarity.UNCOMMON, mage.cards.m.MasterSplicer.class));
         cards.add(new SetCardInfo("Master of Etherium", 226, Rarity.RARE, mage.cards.m.MasterOfEtherium.class));
         cards.add(new SetCardInfo("Masterful Replication", 227, Rarity.RARE, mage.cards.m.MasterfulReplication.class));
-        cards.add(new SetCardInfo("Mentor of the Meek", 196, Rarity.UNCOMMON, mage.cards.m.MentorOfTheMeek.class));
+        cards.add(new SetCardInfo("Maul of the Skyclaves", 195, Rarity.RARE, mage.cards.m.MaulOfTheSkyclaves.class));
+        cards.add(new SetCardInfo("Mentor of the Meek", 196, Rarity.RARE, mage.cards.m.MentorOfTheMeek.class));
         cards.add(new SetCardInfo("Meteor Golem", 363, Rarity.UNCOMMON, mage.cards.m.MeteorGolem.class));
         cards.add(new SetCardInfo("Midnight Reaper", 257, Rarity.RARE, mage.cards.m.MidnightReaper.class));
         cards.add(new SetCardInfo("Migratory Route", 336, Rarity.UNCOMMON, mage.cards.m.MigratoryRoute.class));
-        cards.add(new SetCardInfo("Mikaeus, the Lunarch", 197, Rarity.RARE, mage.cards.m.MikaeusTheLunarch.class));
+        cards.add(new SetCardInfo("Mikaeus, the Lunarch", 197, Rarity.MYTHIC, mage.cards.m.MikaeusTheLunarch.class));
         cards.add(new SetCardInfo("Mind Stone", 364, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Mindless Automaton", 365, Rarity.UNCOMMON, mage.cards.m.MindlessAutomaton.class));
         cards.add(new SetCardInfo("Mirror-Style Master", 32, Rarity.RARE, mage.cards.m.MirrorStyleMaster.class));
@@ -230,7 +230,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Promise of Loyalty", 200, Rarity.RARE, mage.cards.p.PromiseOfLoyalty.class));
         cards.add(new SetCardInfo("Psychosis Crawler", 371, Rarity.RARE, mage.cards.p.PsychosisCrawler.class));
         cards.add(new SetCardInfo("Pull from Tomorrow", 230, Rarity.RARE, mage.cards.p.PullFromTomorrow.class));
-        cards.add(new SetCardInfo("Rashmi and Ragavan", 94, Rarity.MYTHIC, mage.cards.r.RashmiAndRagavan.class));
+        cards.add(new SetCardInfo("Rashmi and Ragavan", 8, Rarity.MYTHIC, mage.cards.r.RashmiAndRagavan.class));
         cards.add(new SetCardInfo("Read the Bones", 267, Rarity.COMMON, mage.cards.r.ReadTheBones.class));
         cards.add(new SetCardInfo("Reality Shift", 231, Rarity.UNCOMMON, mage.cards.r.RealityShift.class));
         cards.add(new SetCardInfo("Replicating Ring", 372, Rarity.UNCOMMON, mage.cards.r.ReplicatingRing.class));
@@ -261,7 +261,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Sigiled Sword of Valeron", 377, Rarity.RARE, mage.cards.s.SigiledSwordOfValeron.class));
         cards.add(new SetCardInfo("Silverquill Campus", 423, Rarity.COMMON, mage.cards.s.SilverquillCampus.class));
         cards.add(new SetCardInfo("Silverwing Squadron", 207, Rarity.RARE, mage.cards.s.SilverwingSquadron.class));
-        cards.add(new SetCardInfo("Simic Growth Chamber", 424, Rarity.UNCOMMON, mage.cards.s.SimicGrowthChamber.class));
+        cards.add(new SetCardInfo("Simic Growth Chamber", 424, Rarity.COMMON, mage.cards.s.SimicGrowthChamber.class));
         cards.add(new SetCardInfo("Simic Signet", 378, Rarity.COMMON, mage.cards.s.SimicSignet.class));
         cards.add(new SetCardInfo("Skullclamp", 379, Rarity.UNCOMMON, mage.cards.s.Skullclamp.class));
         cards.add(new SetCardInfo("Skyclave Relic", 380, Rarity.RARE, mage.cards.s.SkyclaveRelic.class));
@@ -295,7 +295,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of Plenty", 435, Rarity.RARE, mage.cards.t.TempleOfPlenty.class));
         cards.add(new SetCardInfo("Temple of Silence", 436, Rarity.RARE, mage.cards.t.TempleOfSilence.class));
         cards.add(new SetCardInfo("Temple of Triumph", 438, Rarity.RARE, mage.cards.t.TempleOfTriumph.class));
-        cards.add(new SetCardInfo("Temple of the False God", 437, Rarity.RARE, mage.cards.t.TempleOfTheFalseGod.class));
+        cards.add(new SetCardInfo("Temple of the False God", 437, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 439, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("Tetsuko Umezawa, Fugitive", 240, Rarity.UNCOMMON, mage.cards.t.TetsukoUmezawaFugitive.class));
         cards.add(new SetCardInfo("The Locust God", 335, Rarity.MYTHIC, mage.cards.t.TheLocustGod.class));
