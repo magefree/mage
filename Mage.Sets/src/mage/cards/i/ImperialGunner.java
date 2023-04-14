@@ -11,8 +11,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
-import mage.target.common.TargetAnyTarget;
+import mage.filter.common.FilterPermanentOrPlayer;
+import mage.filter.predicate.Predicates;
+import mage.target.common.TargetPermanentOrPlayer;
 
 import java.util.UUID;
 
@@ -21,8 +22,18 @@ import java.util.UUID;
  */
 public final class ImperialGunner extends CardImpl {
 
-    private static final FilterCreaturePlayerOrPlaneswalker filter = new FilterCreaturePlayerOrPlaneswalker(
-            "target player, planeswalker or Starship creature", SubType.STARSHIP);
+    private static final FilterPermanentOrPlayer filter
+            = new FilterPermanentOrPlayer("player, planeswalker, or Starship creature");
+
+    static {
+        filter.getPermanentFilter().add(Predicates.or(
+                CardType.PLANESWALKER.getPredicate(),
+                Predicates.and(
+                        CardType.CREATURE.getPredicate(),
+                        SubType.STARSHIP.getPredicate()
+                )
+        ));
+    }
 
     public ImperialGunner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
@@ -33,7 +44,7 @@ public final class ImperialGunner extends CardImpl {
 
         // {1},{T}: Imperial Gunner deals 1 damage to target player or Starship creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl<>("{1}"));
-        ability.addTarget(new TargetAnyTarget(filter));
+        ability.addTarget(new TargetPermanentOrPlayer(filter));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

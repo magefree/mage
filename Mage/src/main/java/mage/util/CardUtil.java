@@ -77,6 +77,9 @@ public final class CardUtil {
             "put", "return", "exile", "discard", "sacrifice", "remove", "tap", "reveal", "pay"
     );
 
+    public static final int TESTS_SET_CODE_LOOKUP_LENGTH = 6; // search set code in commands like "set_code-card_name"
+    public static final String TESTS_SET_CODE_DELIMETER = "-"; // delimeter for cheats and tests command "set_code-card_name"
+
     /**
      * Increase spell or ability cost to be paid.
      *
@@ -558,7 +561,7 @@ public final class CardUtil {
      */
     public static int parseCardNumberAsInt(String cardNumber) {
 
-        if (cardNumber.isEmpty()) {
+        if (cardNumber == null || cardNumber.isEmpty()) {
             throw new IllegalArgumentException("Card number is empty.");
         }
 
@@ -1723,14 +1726,36 @@ public final class CardUtil {
         return i == null ? 1 : Integer.sum(i, 1);
     }
 
-    public static String convertStartingLoyalty(int startingLoyalty) {
-        switch (startingLoyalty) {
+    public static String convertLoyaltyOrDefense(int value) {
+        switch (value) {
             case -2:
                 return "X";
             case -1:
                 return "";
             default:
-                return "" + startingLoyalty;
+                return "" + value;
         }
+    }
+
+    public static void checkSetParamForSerializationCompatibility(Set<String> data) {
+        // HashMap uses inner class for Keys without serialization support,
+        // so you can't use it for client-server data
+        if (data != null && data.getClass().getName().endsWith("$KeySet")) {
+            throw new IllegalArgumentException("Can't use KeySet as param, use new LinkedHashSet<>(data.keySet()) instead");
+        }
+    }
+
+    /**
+     * Don't raise exception, so must be used instead standard substring calls all the time
+     *
+     * @param str
+     * @param maxLength
+     * @return
+     */
+    public static String substring(String str, int maxLength) {
+        if (str == null || str.isEmpty()) {
+            return str;
+        }
+        return str.substring(0, Math.min(str.length(), maxLength));
     }
 }

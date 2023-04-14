@@ -46,6 +46,7 @@ public enum CounterType {
     CURRENCY("currency"),
     DEATH("death"),
     DEATHTOUCH("deathtouch"),
+    DEFENSE("defense"),
     DELAY("delay"),
     DEPLETION("depletion"),
     DESCENT("descent"),

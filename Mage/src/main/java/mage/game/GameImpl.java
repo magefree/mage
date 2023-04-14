@@ -48,6 +48,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
 import mage.game.stack.SpellStack;
+import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.game.turn.Phase;
 import mage.game.turn.Step;
@@ -675,8 +676,8 @@ public abstract class GameImpl implements Game {
                 spell = (Spell) obj;
             } else if (obj != null) {
                 logger.error(String.format(
-                        "getSpellOrLKIStack got non-spell id %s correlating to non-spell object %s.",
-                        obj.getClass().getName(), obj.getName()),
+                                "getSpellOrLKIStack got non-spell id %s correlating to non-spell object %s.",
+                                obj.getClass().getName(), obj.getName()),
                         new Throwable()
                 );
             }
@@ -1299,6 +1300,7 @@ public abstract class GameImpl implements Game {
         newWatchers.add(new BlockingOrBlockedWatcher());
         newWatchers.add(new EndStepCountWatcher());
         newWatchers.add(new CommanderPlaysCountWatcher()); // commander plays count uses in non commander games by some cards
+        newWatchers.add(new CreaturesDiedWatcher());
 
         // runtime check - allows only GAME scope (one watcher per game)
         newWatchers.forEach(watcher -> {
@@ -1397,6 +1399,27 @@ public abstract class GameImpl implements Game {
             logger.debug("END of gameId: " + this.getId());
             endTime = new Date();
             state.endGame();
+
+            // inform players about face down cards
+            state.getBattlefield().getAllPermanents()
+                    .stream()
+                    .filter(permanent -> permanent.isFaceDown(this))
+                    .map(permanent -> {
+                        Player player = this.getPlayer(permanent.getControllerId());
+                        Card card = permanent.getMainCard();
+                        if (card != null) {
+                            return String.format("Face down card reveal: %s had %s",
+                                    (player == null ? "Unknown" : player.getLogName()),
+                                    card.getLogName());
+                        } else {
+                            return null;
+                        }
+                    })
+                    .filter(Objects::nonNull)
+                    .sorted()
+                    .forEach(this::informPlayers);
+
+            // cancel all player dialogs/feedbacks
             for (Player player : state.getPlayers().values()) {
                 player.abort();
             }
@@ -2147,7 +2170,7 @@ public abstract class GameImpl implements Game {
             for (Card card : commanders) {
                 Zone currentZone = this.getState().getZone(card.getId());
                 String currentZoneInfo = (currentZone == null ? "(error)" : "(" + currentZone.name() + ")");
-                if (player.chooseUse(Outcome.Benefit, "Move " + card.getIdName()
+                if (player.chooseUse(Outcome.Benefit, "Move " + card.getLogName()
                                 + " to the command zone or leave it in current zone " + currentZoneInfo + "?", "You can only make this choice once per object",
                         "Move to command", "Leave in current zone " + currentZoneInfo, null, this)) {
                     toMove.add(card);
@@ -2476,6 +2499,32 @@ public abstract class GameImpl implements Game {
                     somethingHappened = true;
                 }
             }
+
+            if (perm.isBattle(this)) {
+                if (perm
+                        .getCounters(this)
+                        .getCount(CounterType.DEFENSE) == 0
+                        && this.getStack()
+                        .stream()
+                        .filter(StackAbility.class::isInstance)
+                        .filter(stackObject -> stackObject.getStackAbility() instanceof TriggeredAbilityImpl)
+                        .map(StackObject::getSourceId)
+                        .noneMatch(perm.getId()::equals)
+                        && this.state
+                        .getTriggered(perm.getControllerId())
+                        .stream()
+                        .filter(TriggeredAbility.class::isInstance)
+                        .map(Ability::getSourceId)
+                        .noneMatch(perm.getId()::equals)) {
+                    if (movePermanentToGraveyardWithInfo(perm)) {
+                        somethingHappened = true;
+                    }
+                } else if (this.getPlayer(perm.getProtectorId()) == null || perm.isControlledBy(perm.getProtectorId())) {
+                    perm.chooseProtector(this, null);
+                    somethingHappened = true;
+                }
+            }
+
             if (perm.isLegendary() && perm.legendRuleApplies()) {
                 legendary.add(perm);
             }
@@ -2883,6 +2932,16 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
+    public PhaseStep getTurnStepType() {
+        return state.getTurnStepType();
+    }
+
+    @Override
+    public TurnPhase getTurnPhaseType() {
+        return state.getTurnPhaseType();
+    }
+
+    @Override
     public Phase getPhase() {
         return state.getTurn().getPhase();
     }
@@ -2919,7 +2978,7 @@ public abstract class GameImpl implements Game {
 
     @Override
     public boolean isMainPhase() {
-        return state.getTurn().getStepType() == PhaseStep.PRECOMBAT_MAIN || state.getTurn().getStepType() == PhaseStep.POSTCOMBAT_MAIN;
+        return state.getTurnStepType() == PhaseStep.PRECOMBAT_MAIN || state.getTurnStepType() == PhaseStep.POSTCOMBAT_MAIN;
     }
 
     @Override

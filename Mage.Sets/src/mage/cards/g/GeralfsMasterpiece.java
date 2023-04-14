@@ -22,6 +22,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -48,7 +49,7 @@ public final class GeralfsMasterpiece extends CardImpl {
 
         // {3}{U}, Discard three cards: Return Geralf's Masterpiece from your graveyard to the battlefield tapped.
         Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true), new ManaCostsImpl<>("{3}{U}"));
-        ability.addCost(new DiscardTargetCost(new TargetCardInHand(3, new FilterCard("three cards"))));
+        ability.addCost(new DiscardTargetCost(new TargetCardInHand(3, StaticFilters.FILTER_CARD_CARDS)));
         this.addAbility(ability);
     }
 

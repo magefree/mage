@@ -86,7 +86,7 @@ public class MillThenPutInHandEffect extends OneShotEffect {
         sb.append(CardUtil.numberToText(amount));
         sb.append(" cards. You may put ");
         sb.append(filter.getMessage());
-        sb.append(" from among the cards milled this way into your hand");
+        sb.append(" from among the milled cards into your hand");
         if (otherwiseEffect != null) {
             sb.append(". If you don't, ");
             sb.append(otherwiseEffect.getText(mode));

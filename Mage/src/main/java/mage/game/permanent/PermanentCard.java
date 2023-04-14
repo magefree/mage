@@ -62,6 +62,7 @@ public class PermanentCard extends PermanentImpl {
         power = card.getPower().copy();
         toughness = card.getToughness().copy();
         startingLoyalty = card.getStartingLoyalty();
+        startingDefense = card.getStartingDefense();
         copyFromCard(card, game);
         // if temporary added abilities to the spell/card exist, you need to add it to the permanent derived from that card
         Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(card.getId());
@@ -71,7 +72,7 @@ public class PermanentCard extends PermanentImpl {
         if (card instanceof LevelerCard) {
             maxLevelCounters = ((LevelerCard) card).getMaxLevelCounters();
         }
-        if (isTransformable()) {
+        if (card.isTransformable()) {
             if (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId()) != null
                     || NightboundAbility.checkCard(this, game)) {
                 game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId(), null);
@@ -132,6 +133,9 @@ public class PermanentCard extends PermanentImpl {
 
         if (card.getSecondCardFace() != null) {
             this.secondSideCardClazz = card.getSecondCardFace().getClass();
+        }
+        if (card.getMeldsToCard() != null) {
+            this.meldsToClazz = card.getMeldsToCard().getClass();
         }
         this.nightCard = card.isNightCard();
         this.flipCard = card.isFlipCard();

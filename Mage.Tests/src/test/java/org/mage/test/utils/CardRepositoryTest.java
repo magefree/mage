@@ -2,7 +2,9 @@ package org.mage.test.utils;
 
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.cards.repository.CardScanner;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
@@ -10,17 +12,22 @@ import java.util.List;
 /**
  * Testing of CardRepository functionality.
  *
- * @author Alex-Vasile
+ * @author Alex-Vasile, JayDi85
  */
 public class CardRepositoryTest {
 
+    @Before
+    public void setUp() {
+        CardScanner.scan();
+    }
+
     /**
      * Test CardRepository.findCards for the difficult cases when provided with the full card name.
-     *
+     * <p>
      * CardRepository.findCards is used only for testing purposes.
      */
     @Test
-    public void testFindSplitCardsByFullName() {
+    public void test_FindSplitCardsByFullName() {
         // Modal double-faced
         assertFindCard("Malakir Rebirth // Malakir Mire");
         // Transform double-faced
@@ -35,11 +42,11 @@ public class CardRepositoryTest {
 
     /**
      * Test CardRepository.findCards for the difficult cases.
-     *
+     * <p>
      * CardRepository.findCards is used only for testing purposes.
      */
     @Test
-    public void testFindSplitCardsByMainName() {
+    public void test_FindSplitCardsByMainName() {
         // Modal double-faced
         assertFindCard("Malakir Rebirth");
         // Transform double-faced
@@ -54,11 +61,11 @@ public class CardRepositoryTest {
 
     /**
      * Test CardRepository.findCards for the difficult cases.
-     *
+     * <p>
      * CardRepository.findCards is used only for testing purposes.
      */
     @Test
-    public void testFindSplitCardsBySecondName() {
+    public void test_FindSplitCardsBySecondName() {
         // Modal double-faced
         assertFindCard("Malakir Mire");
         // Transform double-faced
@@ -73,11 +80,11 @@ public class CardRepositoryTest {
 
     /**
      * Test CardRepository.findCardsCaseInsensitive for the difficult cases.
-     *
+     * <p>
      * CardRepository.findCardsCaseInsensitive is used for actual game
      */
     @Test
-    public void testFindSplitCardsByFullNameCaseInsensitive() {
+    public void test_FindSplitCardsByFullNameCaseInsensitive() {
         // Modal double-faced
         assertFindCard("malakIR rebirTH // maLAkir mIRe");
         // Transform double-faced
@@ -92,11 +99,11 @@ public class CardRepositoryTest {
 
     /**
      * Test CardRepository.findCards for the difficult cases.
-     *
+     * <p>
      * CardRepository.findCards is used only for testing purposes.
      */
     @Test
-    public void testFindSplitCardsByMainNameCaseInsensitive() {
+    public void test_FindSplitCardsByMainNameCaseInsensitive() {
         // Modal double-faced
         assertFindCard("malakIR rebirTH");
         // Transform double-faced
@@ -111,11 +118,11 @@ public class CardRepositoryTest {
 
     /**
      * Test CardRepository.findCards for the difficult cases.
-     *
+     * <p>
      * CardRepository.findCards is used only for testing purposes.
      */
     @Test
-    public void testFindSplitCardsBySecondNameCaseInsensitive() {
+    public void test_FindSplitCardsBySecondNameCaseInsensitive() {
         // Modal double-faced
         assertFindCard("maLAkir mIRe");
         // Transform double-faced
@@ -130,13 +137,13 @@ public class CardRepositoryTest {
 
     /**
      * Reported bug: https://github.com/magefree/mage/issues/9533
-     *
+     * <p>
      * Each half of a split card displays the combined information of both halves in the deck editor.
-     *
+     * <p>
      * `findCards`'s `returnSplitCardHalf` parameter should handle this issue
      */
     @Test
-    public void splitCardInfoIsntDoubled() {
+    public void test_splitCardInfoIsntDoubled() {
         // Consecrate   // Consume
         // {1}{W/B}     // {2}{W}{B}
         List<CardInfo> fullCard1 = CardRepository.instance.findCards("Consecrate", 1, false);
@@ -146,7 +153,7 @@ public class CardRepositoryTest {
         Assert.assertTrue(fullCard2.get(0).isSplitCard());
         Assert.assertEquals("Consecrate // Consume", fullCard2.get(0).getName());
 
-        List<CardInfo> splitHalfCardLeft  = CardRepository.instance.findCards("Consecrate", 1, true);
+        List<CardInfo> splitHalfCardLeft = CardRepository.instance.findCards("Consecrate", 1, true);
         Assert.assertTrue(splitHalfCardLeft.get(0).isSplitCardHalf());
         Assert.assertEquals("Consecrate", splitHalfCardLeft.get(0).getName());
         List<CardInfo> splitHalfCardRight = CardRepository.instance.findCards("Consume", 1, true);
@@ -166,5 +173,36 @@ public class CardRepositoryTest {
                 "Could not find " + "\"" + cardName + "\".",
                 foundCards.isEmpty()
         );
+    }
+
+    /**
+     * Some set can contain both main and second side cards with same card numbers,
+     * so search result must return main side first
+     */
+    @Test
+    public void test_SearchSecondSides_FindCard() {
+        // XLN - Ixalan - Arguel's Blood Fast -> Temple of Aclazotz - 90
+        Assert.assertEquals("Arguel's Blood Fast", CardRepository.instance.findCard("XLN", "90").getName());
+        Assert.assertEquals("Arguel's Blood Fast", CardRepository.instance.findCard("XLN", "90", true).getName());
+        Assert.assertEquals("Arguel's Blood Fast", CardRepository.instance.findCard("XLN", "90", false).getName());
+
+        // VOW - Innistrad: Crimson Vow - Jacob Hauken, Inspector -> Hauken's Insight - 320
+        Assert.assertEquals("Jacob Hauken, Inspector", CardRepository.instance.findCard("VOW", "320").getName());
+        Assert.assertEquals("Jacob Hauken, Inspector", CardRepository.instance.findCard("VOW", "320", true).getName());
+        Assert.assertEquals("Jacob Hauken, Inspector", CardRepository.instance.findCard("VOW", "320", false).getName());
+    }
+
+    @Test
+    public void test_SearchSecondSides_FindCardWithPreferredSetAndNumber() {
+        // VOW - Innistrad: Crimson Vow - Jacob Hauken, Inspector -> Hauken's Insight - 65
+        // VOW - Innistrad: Crimson Vow - Jacob Hauken, Inspector -> Hauken's Insight - 320
+        // VOW - Innistrad: Crimson Vow - Jacob Hauken, Inspector -> Hauken's Insight - 332
+        Assert.assertEquals("65", CardRepository.instance.findCardWithPreferredSetAndNumber("Jacob Hauken, Inspector", "VOW", "65").getCardNumber());
+        Assert.assertEquals("320", CardRepository.instance.findCardWithPreferredSetAndNumber("Jacob Hauken, Inspector", "VOW", "320").getCardNumber());
+        Assert.assertEquals("332", CardRepository.instance.findCardWithPreferredSetAndNumber("Jacob Hauken, Inspector", "VOW", "332").getCardNumber());
+
+        Assert.assertEquals("65", CardRepository.instance.findCardWithPreferredSetAndNumber("Hauken's Insight", "VOW", "65").getCardNumber());
+        Assert.assertEquals("320", CardRepository.instance.findCardWithPreferredSetAndNumber("Hauken's Insight", "VOW", "320").getCardNumber());
+        Assert.assertEquals("332", CardRepository.instance.findCardWithPreferredSetAndNumber("Hauken's Insight", "VOW", "332").getCardNumber());
     }
 }

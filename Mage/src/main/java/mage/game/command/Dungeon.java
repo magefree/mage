@@ -45,7 +45,7 @@ public class Dungeon implements CommandObject {
         dungeonNames.add("Dungeon of the Mad Mage");
     }
 
-    private static final List<CardType> emptySet = Arrays.asList(CardType.DUNGEON);
+    private static final List<CardType> emptyList = Collections.unmodifiableList(Arrays.asList(CardType.DUNGEON));
     private static final ObjectColor emptyColor = new ObjectColor();
     private static final ManaCosts<ManaCost> emptyCost = new ManaCostsImpl<>();
 
@@ -240,7 +240,7 @@ public class Dungeon implements CommandObject {
 
     @Override
     public List<CardType> getCardType(Game game) {
-        return emptySet;
+        return emptyList;
     }
 
     @Override
@@ -318,6 +318,15 @@ public class Dungeon implements CommandObject {
     }
 
     @Override
+    public int getStartingDefense() {
+        return 0;
+    }
+
+    @Override
+    public void setStartingDefense(int startingDefense) {
+    }
+
+    @Override
     public UUID getId() {
         return this.id;
     }
@@ -327,10 +336,12 @@ public class Dungeon implements CommandObject {
         return new Dungeon(this);
     }
 
+    @Override
     public String getExpansionSetCodeForImage() {
         return expansionSetCodeForImage;
     }
 
+    @Override
     public void setExpansionSetCodeForImage(String expansionSetCodeForImage) {
         this.expansionSetCodeForImage = expansionSetCodeForImage;
     }

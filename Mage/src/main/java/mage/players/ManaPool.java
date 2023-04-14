@@ -271,7 +271,7 @@ public class ManaPool implements Serializable {
 
     private int emptyItem(ManaPoolItem item, Emptiable toEmpty, Game game, ManaType manaType) {
         if (item.getDuration() == Duration.EndOfTurn
-                && game.getPhase().getType() != TurnPhase.END) {
+                && game.getTurnPhaseType() != TurnPhase.END) {
             return 0;
         }
         if (!manaBecomesColorless) {

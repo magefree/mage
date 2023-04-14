@@ -116,10 +116,33 @@
                     <version>2.7</version>
                 </plugin>
 
+                <!-- devs only: allows to run apps from command line by exec:java command -->
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
                     <version>3.0.0</version>
+                </plugin>
+
+                <!-- generate readable readme file for releases -->
+                <!-- results uses in distribution.xml -->
+                <!-- https://github.com/walokra/markdown-page-generator-plugin -->
+                <plugin>
+                    <groupId>com.ruleoftech</groupId>
+                    <artifactId>markdown-page-generator-plugin</artifactId>
+                    <version>2.4.0</version>
+                    <executions>
+                        <execution>
+                            <phase>process-resources</phase>
+                            <goals>
+                                <goal>generate</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <inputDirectory>../</inputDirectory>
+                        <inputFileExtensions>md</inputFileExtensions>
+                        <outputDirectory>${project.build.directory}/docs</outputDirectory>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>

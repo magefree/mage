@@ -45,7 +45,7 @@ public final class TallymanOfNurgle extends CardImpl {
                         "If seven or more creatures died this turn, instead you draw seven cards and you lose 7 life"
                 ).addEffect(new LoseLifeSourceControllerEffect(7)).addOtherwiseEffect(new LoseLifeSourceControllerEffect(1)),
                 TargetController.YOU, MorbidCondition.instance, false
-        ).withFlavorWord("The Seven-fold Chant").addHint(CreaturesDiedThisTurnHint.instance), new CreaturesDiedWatcher());
+        ).withFlavorWord("The Seven-fold Chant").addHint(CreaturesDiedThisTurnHint.instance));
     }
 
     private TallymanOfNurgle(final TallymanOfNurgle card) {

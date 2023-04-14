@@ -18,6 +18,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -49,7 +50,7 @@ public final class Grimdancer extends CardImpl {
 
 class GrimdancerEffect extends OneShotEffect {
 
-    private static final Set<String> choices = new HashSet();
+    private static final Set<String> choices = new LinkedHashSet<>();
 
     static {
         choices.add("Menace and deathtouch");

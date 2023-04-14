@@ -89,7 +89,7 @@ public class MCTSNode {
         if (game.getStep().getStepPart() == StepPart.PRIORITY) {
             playerId = game.getPriorityPlayerId();
         } else {
-            if (game.getStep().getType() == PhaseStep.DECLARE_BLOCKERS) {
+            if (game.getTurnStepType() == PhaseStep.DECLARE_BLOCKERS) {
                 playerId = game.getCombat().getDefenders().iterator().next();
             } else {
                 playerId = game.getActivePlayerId();
@@ -129,7 +129,7 @@ public class MCTSNode {
         }
         switch (player.getNextAction()) {
             case PRIORITY:
-//                logger.info("Priority for player:" + player.getName() + " turn: " + game.getTurnNum() + " phase: " + game.getPhase().getType() + " step: " + game.getStep().getType());
+//                logger.info("Priority for player:" + player.getName() + " turn: " + game.getTurnNum() + " phase: " + game.getTurnPhaseType() + " step: " + game.getTurnStepType());
                 List<Ability> abilities;
                 if (!USE_ACTION_CACHE)
                     abilities = player.getPlayableOptions(game);

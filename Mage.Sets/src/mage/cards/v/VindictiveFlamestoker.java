@@ -14,7 +14,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.effects.common.discard.DiscardHandAllEffect;
+import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -44,7 +44,7 @@ public final class VindictiveFlamestoker extends CardImpl {
         ));
 
         // {6}{R}, Sacrifice Vindictive Flamestoker: Discard your hand, then draw four cards. This ability costs {1} less to activate for each oil counter on Vindictive Flamestoker.
-        Ability ability = new SimpleActivatedAbility(new DiscardHandAllEffect(), new ManaCostsImpl<>("{6}{R}"));
+        Ability ability = new SimpleActivatedAbility(new DiscardHandControllerEffect(), new ManaCostsImpl<>("{6}{R}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addEffect(new DrawCardSourceControllerEffect(4).concatBy(", then"));
         ability.addEffect(new InfoEffect("This ability costs {1} less to activate for each oil counter on {this}"));
