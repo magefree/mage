@@ -37,14 +37,26 @@ public class SagaAbility extends SimpleStaticAbility {
         this(card, SagaChapter.CHAPTER_III);
     }
 
+    public SagaAbility(Card card, boolean showSacText) {
+        this(card, showSacText, SagaChapter.CHAPTER_III);
+    }
+
     public SagaAbility(Card card, SagaChapter maxChapter) {
-        this(card, maxChapter, false);
+        this(card, card.getSecondCardFace() == null, maxChapter);
+    }
+
+    public SagaAbility(Card card, boolean showSacText, SagaChapter maxChapter) {
+        this(card, maxChapter, false, showSacText);
     }
 
     public SagaAbility(Card card, SagaChapter maxChapter, boolean readAhead) {
+        this(card, maxChapter, readAhead, card.getSecondCardFace() == null);
+    }
+
+    public SagaAbility(Card card, SagaChapter maxChapter, boolean readAhead, boolean showSacText) {
         super(Zone.ALL, null);
         this.maxChapter = maxChapter;
-        this.showSacText = card.getSecondCardFace() == null;
+        this.showSacText = showSacText;
         this.readAhead = readAhead;
         this.setRuleVisible(true);
         this.setRuleAtTheTop(true);
