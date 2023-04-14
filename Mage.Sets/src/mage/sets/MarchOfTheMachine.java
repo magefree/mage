@@ -135,6 +135,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Heliod, the Warped Eclipse", 17, Rarity.RARE, mage.cards.h.HeliodTheWarpedEclipse.class));
         cards.add(new SetCardInfo("Herbology Instructor", 189, Rarity.UNCOMMON, mage.cards.h.HerbologyInstructor.class));
         cards.add(new SetCardInfo("Hideous Fleshwheeler", 119, Rarity.UNCOMMON, mage.cards.h.HideousFleshwheeler.class));
+        cards.add(new SetCardInfo("Holy Frazzle-Cannon", 238, Rarity.UNCOMMON, mage.cards.h.HolyFrazzleCannon.class));
         cards.add(new SetCardInfo("Ichor Drinker", 111, Rarity.COMMON, mage.cards.i.IchorDrinker.class));
         cards.add(new SetCardInfo("Ichor Shade", 112, Rarity.COMMON, mage.cards.i.IchorShade.class));
         cards.add(new SetCardInfo("Infected Defector", 18, Rarity.COMMON, mage.cards.i.InfectedDefector.class));
@@ -160,6 +161,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Invasion of Mercadia", 147, Rarity.UNCOMMON, mage.cards.i.InvasionOfMercadia.class));
         cards.add(new SetCardInfo("Invasion of Moag", 237, Rarity.UNCOMMON, mage.cards.i.InvasionOfMoag.class));
         cards.add(new SetCardInfo("Invasion of Muraganda", 192, Rarity.UNCOMMON, mage.cards.i.InvasionOfMuraganda.class));
+        cards.add(new SetCardInfo("Invasion of New Capenna", 238, Rarity.UNCOMMON, mage.cards.i.InvasionOfNewCapenna.class));
         cards.add(new SetCardInfo("Invasion of Pyrulea", 240, Rarity.UNCOMMON, mage.cards.i.InvasionOfPyrulea.class));
         cards.add(new SetCardInfo("Invasion of Ravnica", 1, Rarity.MYTHIC, mage.cards.i.InvasionOfRavnica.class));
         cards.add(new SetCardInfo("Invasion of Shandalar", 193, Rarity.MYTHIC, mage.cards.i.InvasionOfShandalar.class));
