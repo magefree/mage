@@ -56,6 +56,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Brawn", 292, Rarity.UNCOMMON, mage.cards.b.Brawn.class));
         cards.add(new SetCardInfo("Bretagard Stronghold", 392, Rarity.UNCOMMON, mage.cards.b.BretagardStronghold.class));
         cards.add(new SetCardInfo("Bright-Palm, Soul Awakener", 1, Rarity.MYTHIC, mage.cards.b.BrightPalmSoulAwakener.class));
+        cards.add(new SetCardInfo("Brimaz, Blight of Oreskos", 2, Rarity.MYTHIC, mage.cards.b.BrimazBlightOfOreskos.class));
         cards.add(new SetCardInfo("Burnished Hart", 351, Rarity.UNCOMMON, mage.cards.b.BurnishedHart.class));
         cards.add(new SetCardInfo("Canopy Vista", 393, Rarity.RARE, mage.cards.c.CanopyVista.class));
         cards.add(new SetCardInfo("Cataclysmic Gearhulk", 176, Rarity.MYTHIC, mage.cards.c.CataclysmicGearhulk.class));
