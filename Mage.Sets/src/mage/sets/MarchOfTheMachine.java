@@ -84,9 +84,6 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Deeproot Wayfinder", 184, Rarity.RARE, mage.cards.d.DeeprootWayfinder.class));
         cards.add(new SetCardInfo("Deluge of the Dead", 115, Rarity.MYTHIC, mage.cards.d.DelugeOfTheDead.class));
         cards.add(new SetCardInfo("Dismal Backwater", 269, Rarity.COMMON, mage.cards.d.DismalBackwater.class));
-        cards.add(new SetCardInfo("Jin-Gitaxias", 65, Rarity.MYTHIC, mage.cards.j.JinGitaxias.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Jin-Gitaxias", 294, Rarity.MYTHIC, mage.cards.j.JinGitaxias.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Jin-Gitaxias", 339, Rarity.MYTHIC, mage.cards.j.JinGitaxias.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Disturbing Conversion", 54, Rarity.COMMON, mage.cards.d.DisturbingConversion.class));
         cards.add(new SetCardInfo("Doomskar Warrior", 185, Rarity.RARE, mage.cards.d.DoomskarWarrior.class));
         cards.add(new SetCardInfo("Dreg Recycler", 100, Rarity.COMMON, mage.cards.d.DregRecycler.class));
@@ -178,6 +175,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Invasion of Zendikar", 194, Rarity.UNCOMMON, mage.cards.i.InvasionOfZendikar.class));
         cards.add(new SetCardInfo("Iridescent Blademaster", 195, Rarity.COMMON, mage.cards.i.IridescentBlademaster.class));
         cards.add(new SetCardInfo("Island", 278, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jin-Gitaxias", 65, Rarity.MYTHIC, mage.cards.j.JinGitaxias.class));
         cards.add(new SetCardInfo("Joyful Stormsculptor", 243, Rarity.UNCOMMON, mage.cards.j.JoyfulStormsculptor.class));
         cards.add(new SetCardInfo("Jungle Hollow", 270, Rarity.COMMON, mage.cards.j.JungleHollow.class));
         cards.add(new SetCardInfo("Kami of Whispered Hopes", 196, Rarity.UNCOMMON, mage.cards.k.KamiOfWhisperedHopes.class));
@@ -258,10 +256,6 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Saiba Cryptomancer", 76, Rarity.COMMON, mage.cards.s.SaibaCryptomancer.class));
         cards.add(new SetCardInfo("Scorn-Blade Berserker", 124, Rarity.UNCOMMON, mage.cards.s.ScornBladeBerserker.class));
         cards.add(new SetCardInfo("Scoured Barrens", 272, Rarity.COMMON, mage.cards.s.ScouredBarrens.class));
-        cards.add(new SetCardInfo("Swiftwater Cliffs", 273, Rarity.MYTHIC, mage.cards.s.SwiftwaterCliffs.class));
-        cards.add(new SetCardInfo("The Great Synthesis", 65, Rarity.MYTHIC, mage.cards.t.TheGreatSynthesis.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("The Great Synthesis", 294, Rarity.MYTHIC, mage.cards.t.TheGreatSynthesis.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("The Great Synthesis", 339, Rarity.MYTHIC, mage.cards.t.TheGreatSynthesis.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Scrappy Bruiser", 162, Rarity.UNCOMMON, mage.cards.s.ScrappyBruiser.class));
         cards.add(new SetCardInfo("Scrollshift", 34, Rarity.COMMON, mage.cards.s.Scrollshift.class));
         cards.add(new SetCardInfo("Sculpted Perfection", 253, Rarity.UNCOMMON, mage.cards.s.SculptedPerfection.class));
@@ -299,6 +293,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Temporal Cleansing", 80, Rarity.COMMON, mage.cards.t.TemporalCleansing.class));
         cards.add(new SetCardInfo("Tenured Oilcaster", 126, Rarity.COMMON, mage.cards.t.TenuredOilcaster.class));
         cards.add(new SetCardInfo("The Broken Sky", 241, Rarity.RARE, mage.cards.t.TheBrokenSky.class));
+        cards.add(new SetCardInfo("The Great Synthesis", 65, Rarity.MYTHIC, mage.cards.t.TheGreatSynthesis.class));
         cards.add(new SetCardInfo("Thornwood Falls", 274, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
         cards.add(new SetCardInfo("Thrashing Frontliner", 167, Rarity.COMMON, mage.cards.t.ThrashingFrontliner.class));
         cards.add(new SetCardInfo("Thunderhead Squadron", 81, Rarity.COMMON, mage.cards.t.ThunderheadSquadron.class));
