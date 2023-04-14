@@ -390,6 +390,10 @@ public class CardInfo {
         return startingLoyalty;
     }
 
+    public String getStartingDefense() {
+        return startingDefense;
+    }
+
     public String getSetCode() {
         return setCode;
     }

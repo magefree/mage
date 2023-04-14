@@ -1737,6 +1737,17 @@ public final class CardUtil {
         }
     }
 
+    public static int convertLoyaltyOrDefense(String value) {
+        switch (value) {
+            case "X":
+                return -2;
+            case "":
+                return -1;
+            default:
+                return Integer.parseInt(value);
+        }
+    }
+
     public static void checkSetParamForSerializationCompatibility(Set<String> data) {
         // HashMap uses inner class for Keys without serialization support,
         // so you can't use it for client-server data
