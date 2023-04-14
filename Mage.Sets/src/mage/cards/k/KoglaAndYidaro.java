@@ -48,7 +48,6 @@ public final class KoglaAndYidaro extends CardImpl {
         ability.addEffect(new GainAbilitySourceEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn
         ).setText("and haste until end of turn"));
-        this.addAbility(ability);
 
         // * It fights target creature you don't control.
         ability.addMode(new Mode(new FightTargetSourceEffect().setText("it fights target creature you don't control"))

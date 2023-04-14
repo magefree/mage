@@ -38,7 +38,7 @@ public final class InvasionOfUlgrotha extends CardImpl {
         this.addAbility(new SiegeAbility());
 
         // When Invasion of Ulgrotha enters the battlefield, it deals 3 damage to any other target and you gain 3 life.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3, "it"));
         ability.addEffect(new GainLifeEffect(3).concatBy("and"));
         ability.addTarget(new TargetPermanentOrPlayer(filter));
         this.addAbility(ability);

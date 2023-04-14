@@ -23,7 +23,7 @@ public final class LeylineSurge extends CardImpl {
 
         // At the beginning of your upkeep, you may put a permanent card from your hand onto the battlefield.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_PERMANENT),
+                new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_A_PERMANENT),
                 TargetController.YOU, false
         ));
     }

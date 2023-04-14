@@ -6,6 +6,7 @@ import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DoWhenCostPaid;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -31,7 +32,7 @@ public final class InvasionOfNewCapenna extends CardImpl {
         this.addAbility(new SiegeAbility());
 
         // When Invasion of New Capenna enters the battlefield, you may sacrifice an artifact or creature. When you do, exile target artifact or creature an opponent controls.
-        ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(new DestroyTargetEffect(), false);
+        ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(new ExileTargetEffect(), false);
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_ARTIFACT_OR_CREATURE));
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoWhenCostPaid(
                 ability,

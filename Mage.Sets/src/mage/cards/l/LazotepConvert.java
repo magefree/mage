@@ -40,7 +40,7 @@ public final class LazotepConvert extends CardImpl {
         this.nightCard = true;
 
         // You may have Lazotep Convert enter the battlefield as a copy of any creature card in a graveyard, except it's a 4/4 black Zombie in addition to its other types.
-        this.addAbility(new EntersBattlefieldAbility(new LazotepConvertCopyEffect()));
+        this.addAbility(new EntersBattlefieldAbility(new LazotepConvertCopyEffect(), true));
     }
 
     private LazotepConvert(final LazotepConvert card) {

@@ -32,7 +32,7 @@ public final class InvasionOfErgamon extends CardImpl {
 
         // When Invasion of Ergamon enters the battlefield, create a Treasure token. Then you may discard a card. If you do, draw a card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TreasureToken()));
-        ability.addEffect(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new DiscardCardCost()));
+        ability.addEffect(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new DiscardCardCost()).concatBy("Then"));
         this.addAbility(ability);
     }
 

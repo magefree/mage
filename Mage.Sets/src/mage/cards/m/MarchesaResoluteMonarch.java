@@ -43,7 +43,7 @@ public final class MarchesaResoluteMonarch extends CardImpl {
         this.nightCard = true;
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());

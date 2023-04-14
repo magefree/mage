@@ -29,7 +29,7 @@ public final class InvasionOfDominaria extends CardImpl {
 
         // When Invasion of Dominaria enters the battlefield, you gain 4 life and draw a card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GainLifeEffect(4));
-        ability.addEffect(new DrawCardSourceControllerEffect(1));
+        ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);
     }
 

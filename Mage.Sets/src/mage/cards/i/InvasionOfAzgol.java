@@ -11,6 +11,7 @@ import mage.cards.a.AshenReaper;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
+import mage.target.TargetPlayer;
 
 import java.util.UUID;
 
@@ -31,9 +32,10 @@ public final class InvasionOfAzgol extends CardImpl {
 
         // When Invasion of Azgol enters the battlefield, target player sacrifices a creature or planeswalker and loses 1 life.
         Ability ability = new EntersBattlefieldTriggeredAbility(new SacrificeEffect(
-                StaticFilters.FILTER_PERMANENT_CREATURE_OR_PLANESWALKER_A, 1, null
+                StaticFilters.FILTER_PERMANENT_CREATURE_OR_PLANESWALKER_A, 1, "target player"
         ));
         ability.addEffect(new LoseLifeTargetEffect(1).setText("and loses 1 life"));
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability, AshenReaper.makeWatcher());
     }
 

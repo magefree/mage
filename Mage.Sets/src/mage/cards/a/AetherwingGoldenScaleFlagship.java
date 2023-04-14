@@ -32,7 +32,11 @@ public final class AetherwingGoldenScaleFlagship extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Aetherwing, Golden-Scale Flagship's power is equal to the number of artifacts you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(ArtifactYouControlCount.instance, Duration.Custom)));
+        this.addAbility(new SimpleStaticAbility(
+                Zone.ALL,
+                new SetBasePowerSourceEffect(ArtifactYouControlCount.instance, Duration.Custom)
+                        .setText("{this}'s power is equal to the number of artifacts you control")
+        ));
 
         // Crew 1
         this.addAbility(new CrewAbility(1));

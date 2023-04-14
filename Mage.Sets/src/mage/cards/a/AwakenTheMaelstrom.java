@@ -42,7 +42,7 @@ public final class AwakenTheMaelstrom extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("{this} is all colors")));
 
         // Target player draws two cards.
-        this.getSpellAbility().addEffect(new DrawCardTargetEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetPlayer().withChooseHint("to draw two cards"));
 
         // You may put an artifact card from your hand onto the battlefield.

@@ -40,12 +40,11 @@ public final class GlissaHeraldOfPredation extends CardImpl {
         // At the beginning of combat on your turn, choose one --
         // * Incubate 2 twice.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new IncubateEffect(2).setText("incubate"), TargetController.YOU, false
+                new GlissaHeraldOfPredationIncubateEffect(), TargetController.YOU, false
         );
-        ability.addEffect(new IncubateEffect(2).setText("2 twice"));
 
         // * Transform all Incubator tokens you control.
-        ability.addMode(new Mode(new GlissaHeraldOfPredationEffect()));
+        ability.addMode(new Mode(new GlissaHeraldOfPredationTransformEffect()));
 
         // * Phyrexians you control gain first strike and deathtouch until end of turn.
         ability.addMode(new Mode(new GainAbilityControlledEffect(
@@ -68,7 +67,31 @@ public final class GlissaHeraldOfPredation extends CardImpl {
     }
 }
 
-class GlissaHeraldOfPredationEffect extends OneShotEffect {
+class GlissaHeraldOfPredationIncubateEffect extends OneShotEffect {
+
+    GlissaHeraldOfPredationIncubateEffect() {
+        super(Outcome.Benefit);
+        staticText = "incubate 2 twice";
+    }
+
+    private GlissaHeraldOfPredationIncubateEffect(final GlissaHeraldOfPredationIncubateEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public GlissaHeraldOfPredationIncubateEffect copy() {
+        return new GlissaHeraldOfPredationIncubateEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        IncubateEffect.doIncubate(2, game, source);
+        IncubateEffect.doIncubate(2, game, source);
+        return true;
+    }
+}
+
+class GlissaHeraldOfPredationTransformEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterControlledPermanent(SubType.INCUBATOR);
 
@@ -76,18 +99,18 @@ class GlissaHeraldOfPredationEffect extends OneShotEffect {
         filter.add(TokenPredicate.TRUE);
     }
 
-    GlissaHeraldOfPredationEffect() {
+    GlissaHeraldOfPredationTransformEffect() {
         super(Outcome.Benefit);
         staticText = "transform all Incubator tokens you control";
     }
 
-    private GlissaHeraldOfPredationEffect(final GlissaHeraldOfPredationEffect effect) {
+    private GlissaHeraldOfPredationTransformEffect(final GlissaHeraldOfPredationTransformEffect effect) {
         super(effect);
     }
 
     @Override
-    public GlissaHeraldOfPredationEffect copy() {
-        return new GlissaHeraldOfPredationEffect(this);
+    public GlissaHeraldOfPredationTransformEffect copy() {
+        return new GlissaHeraldOfPredationTransformEffect(this);
     }
 
     @Override

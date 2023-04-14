@@ -22,7 +22,7 @@ public class IncubateEffect extends OneShotEffect {
     public IncubateEffect(int amount) {
         super(Outcome.Detriment);
         this.amount = amount;
-        staticText = "incubate " + amount + " <i>(Create an Incubator artifact token with " +
+        staticText = "incubate " + amount + ". <i>(Create an Incubator artifact token with " +
                 CardUtil.numberToText(amount, "a") + " +1/+1 counter" + (amount > 1 ? "s" : "") +
                 " on it and \"{2}: Transform this artifact.\" It transforms into a 0/0 Phyrexian artifact creature.)</i>";
     }

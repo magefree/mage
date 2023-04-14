@@ -45,7 +45,7 @@ public final class SunderTheGateway extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
         // * Incubate 2, then transform an Incubator token you control.
-        this.getSpellAbility().addMode(new Mode(new IncubateEffect(2)).addEffect(new SunderTheGatewayEffect()));
+        this.getSpellAbility().addMode(new Mode(new IncubateEffect(2).setText("incubate 2")).addEffect(new SunderTheGatewayEffect()));
     }
 
     private SunderTheGateway(final SunderTheGateway card) {
