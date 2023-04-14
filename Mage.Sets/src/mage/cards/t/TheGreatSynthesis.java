@@ -4,16 +4,16 @@ import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.ExileSagaAndReturnTransformedEffect;
+import mage.abilities.effects.common.ExileSourceAndReturnFaceUpEffect;
 import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
@@ -52,8 +52,11 @@ public class TheGreatSynthesis extends CardImpl {
 
         //III — You may cast any number of spells from your hand without paying their mana cost. Exile The Great
         //Synthesis, then return it to the battlefield <i>(front face up)</i>.
-        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new TheGreatSynthesisCastEffect(),
-                new TheGreatSynthesisExileReturnEffect());
+        sagaAbility.addChapterEffect(
+                this, SagaChapter.CHAPTER_III,
+                new TheGreatSynthesisCastEffect(),
+                new ExileSourceAndReturnFaceUpEffect()
+        );
 
         this.addAbility(sagaAbility);
     }
@@ -93,42 +96,4 @@ class TheGreatSynthesisCastEffect extends OneShotEffect {
         CardUtil.castMultipleWithAttributeForFree(controller, source, game, cards, StaticFilters.FILTER_CARD);
         return true;
     }
-}
-
-class TheGreatSynthesisExileReturnEffect extends OneShotEffect {
-    public TheGreatSynthesisExileReturnEffect() {
-        super(Outcome.PutCreatureInPlay);
-        staticText = "exile {this}, then return it to the battlefield <i>(front face up)</i>";
-    }
-
-    private TheGreatSynthesisExileReturnEffect(final TheGreatSynthesisExileReturnEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TheGreatSynthesisExileReturnEffect copy() {
-        return new TheGreatSynthesisExileReturnEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        if (game.getState().getZone(source.getSourceId()) != Zone.BATTLEFIELD) {
-            return false;
-        }
-        Card card = game.getCard(source.getSourceId());
-        if (card == null) {
-            return false;
-        }
-
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-
-        if (!player.moveCards(card, Zone.EXILED, source, game)) {
-            return false;
-        }
-        return player.moveCards(card, Zone.BATTLEFIELD, source, game);
-    }
-
 }

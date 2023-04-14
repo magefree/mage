@@ -1,13 +1,12 @@
 package mage.cards.j;
 
 import mage.MageInt;
-import mage.abilities.Pronoun;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.ExileAndReturnTransformedSourceEffect;
+import mage.abilities.effects.common.ExileAndReturnSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.CardImpl;
@@ -50,7 +49,7 @@ public class JinGitaxias extends CardImpl {
         //only as a sorcery and only if you have seven or more cards in hand.
         this.addAbility(new TransformAbility());
         ConditionalActivatedAbility conditionalActivatedAbility =
-                new ConditionalActivatedAbility(Zone.BATTLEFIELD, new ExileAndReturnTransformedSourceEffect(Pronoun.IT),
+                new ConditionalActivatedAbility(Zone.BATTLEFIELD, new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED),
                         new ManaCostsImpl<>("{3}{U}"), new CardsInHandCondition(ComparisonType.MORE_THAN, 6));
         conditionalActivatedAbility.setTiming(TimingRule.SORCERY);
         this.addAbility(conditionalActivatedAbility);
