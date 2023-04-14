@@ -37,6 +37,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Archangel Elspeth", 6, Rarity.MYTHIC, mage.cards.a.ArchangelElspeth.class));
         cards.add(new SetCardInfo("Archpriest of Shadows", 89, Rarity.RARE, mage.cards.a.ArchpriestOfShadows.class));
         cards.add(new SetCardInfo("Artistic Refusal", 46, Rarity.UNCOMMON, mage.cards.a.ArtisticRefusal.class));
+        cards.add(new SetCardInfo("Ashen Reaper", 232, Rarity.UNCOMMON, mage.cards.a.AshenReaper.class));
         cards.add(new SetCardInfo("Assimilate Essence", 47, Rarity.COMMON, mage.cards.a.AssimilateEssence.class));
         cards.add(new SetCardInfo("Astral Wingspan", 48, Rarity.UNCOMMON, mage.cards.a.AstralWingspan.class));
         cards.add(new SetCardInfo("Atraxa's Fall", 176, Rarity.COMMON, mage.cards.a.AtraxasFall.class));
@@ -143,6 +144,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Into the Fire", 144, Rarity.RARE, mage.cards.i.IntoTheFire.class));
         cards.add(new SetCardInfo("Invasion of Alara", 230, Rarity.RARE, mage.cards.i.InvasionOfAlara.class));
         cards.add(new SetCardInfo("Invasion of Amonkhet", 231, Rarity.UNCOMMON, mage.cards.i.InvasionOfAmonkhet.class));
+        cards.add(new SetCardInfo("Invasion of Azgol", 232, Rarity.UNCOMMON, mage.cards.i.InvasionOfAzgol.class));
         cards.add(new SetCardInfo("Invasion of Belenon", 20, Rarity.UNCOMMON, mage.cards.i.InvasionOfBelenon.class));
         cards.add(new SetCardInfo("Invasion of Dominaria", 21, Rarity.UNCOMMON, mage.cards.i.InvasionOfDominaria.class));
         cards.add(new SetCardInfo("Invasion of Eldraine", 113, Rarity.UNCOMMON, mage.cards.i.InvasionOfEldraine.class));
