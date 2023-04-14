@@ -159,6 +159,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Invasion of Lorwyn", 236, Rarity.UNCOMMON, mage.cards.i.InvasionOfLorwyn.class));
         cards.add(new SetCardInfo("Invasion of Mercadia", 147, Rarity.UNCOMMON, mage.cards.i.InvasionOfMercadia.class));
         cards.add(new SetCardInfo("Invasion of Moag", 237, Rarity.UNCOMMON, mage.cards.i.InvasionOfMoag.class));
+        cards.add(new SetCardInfo("Invasion of Muraganda", 192, Rarity.UNCOMMON, mage.cards.i.InvasionOfMuraganda.class));
         cards.add(new SetCardInfo("Invasion of Pyrulea", 240, Rarity.UNCOMMON, mage.cards.i.InvasionOfPyrulea.class));
         cards.add(new SetCardInfo("Invasion of Ravnica", 1, Rarity.MYTHIC, mage.cards.i.InvasionOfRavnica.class));
         cards.add(new SetCardInfo("Invasion of Shandalar", 193, Rarity.MYTHIC, mage.cards.i.InvasionOfShandalar.class));
@@ -226,6 +227,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Portent Tracker", 201, Rarity.COMMON, mage.cards.p.PortentTracker.class));
         cards.add(new SetCardInfo("Preening Champion", 73, Rarity.COMMON, mage.cards.p.PreeningChampion.class));
         cards.add(new SetCardInfo("Prickle Faeries", 113, Rarity.UNCOMMON, mage.cards.p.PrickleFaeries.class));
+        cards.add(new SetCardInfo("Primordial Plasm", 192, Rarity.UNCOMMON, mage.cards.p.PrimordialPlasm.class));
         cards.add(new SetCardInfo("Progenitor Exarch", 32, Rarity.RARE, mage.cards.p.ProgenitorExarch.class));
         cards.add(new SetCardInfo("Protocol Knight", 74, Rarity.COMMON, mage.cards.p.ProtocolKnight.class));
         cards.add(new SetCardInfo("Pyre of the World Tree", 145, Rarity.RARE, mage.cards.p.PyreOfTheWorldTree.class));
