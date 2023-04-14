@@ -62,7 +62,7 @@ class TributeToTheWorldTreeEffect extends OneShotEffect {
             return false;
         }
         if (permanent.getPower().getValue() < 3) {
-            return permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
+            return permanent.addCounters(CounterType.P1P1.createInstance(2), source, game);
         }
         Player player = game.getPlayer(source.getControllerId());
         return player != null && player.drawCards(1, source, game) > 0;
