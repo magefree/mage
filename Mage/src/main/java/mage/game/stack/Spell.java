@@ -62,6 +62,7 @@ public class Spell extends StackObjectImpl implements Card {
     private boolean resolving = false;
     private UUID commandedBy = null; // for Word of Command
     private int startingLoyalty;
+    private int startingDefense;
 
     private ActivationManaAbilityStep currentActivatingManaAbilitiesStep = ActivationManaAbilityStep.BEFORE;
 
@@ -73,7 +74,7 @@ public class Spell extends StackObjectImpl implements Card {
         Card affectedCard = card;
 
         // TODO: must be removed after transform cards (one side) migrated to MDF engine (multiple sides)
-        if (ability.getSpellAbilityCastMode() == SpellAbilityCastMode.DISTURB && affectedCard.getSecondCardFace() != null) {
+        if (ability.getSpellAbilityCastMode() == SpellAbilityCastMode.TRANSFORMED && affectedCard.getSecondCardFace() != null) {
             // simulate another side as new card (another code part in continues effect from disturb ability)
             affectedCard = TransformAbility.transformCardSpellStatic(card, card.getSecondCardFace(), game);
         }
@@ -83,6 +84,7 @@ public class Spell extends StackObjectImpl implements Card {
         this.frameColor = affectedCard.getFrameColor(null).copy();
         this.frameStyle = affectedCard.getFrameStyle();
         this.startingLoyalty = affectedCard.getStartingLoyalty();
+        this.startingDefense = affectedCard.getStartingDefense();
         this.id = ability.getId();
         this.zoneChangeCounter = affectedCard.getZoneChangeCounter(game); // sync card's ZCC with spell (copy spell settings)
         this.ability = ability;
@@ -134,6 +136,7 @@ public class Spell extends StackObjectImpl implements Card {
         this.currentActivatingManaAbilitiesStep = spell.currentActivatingManaAbilitiesStep;
         this.targetChanged = spell.targetChanged;
         this.startingLoyalty = spell.startingLoyalty;
+        this.startingDefense = spell.startingDefense;
     }
 
     public boolean activate(Game game, boolean noMana) {
@@ -639,6 +642,16 @@ public class Spell extends StackObjectImpl implements Card {
     @Override
     public void setStartingLoyalty(int startingLoyalty) {
         this.startingLoyalty = startingLoyalty;
+    }
+
+    @Override
+    public int getStartingDefense() {
+        return startingDefense;
+    }
+
+    @Override
+    public void setStartingDefense(int startingDefense) {
+        this.startingDefense = startingDefense;
     }
 
     @Override

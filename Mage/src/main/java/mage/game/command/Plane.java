@@ -233,6 +233,15 @@ public class Plane implements CommandObject {
     }
 
     @Override
+    public int getStartingDefense() {
+        return 0;
+    }
+
+    @Override
+    public void setStartingDefense(int startingDefense) {
+    }
+
+    @Override
     public UUID getId() {
         return this.id;
     }

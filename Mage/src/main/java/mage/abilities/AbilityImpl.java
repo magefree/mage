@@ -2,7 +2,6 @@ package mage.abilities;
 
 import mage.MageIdentifier;
 import mage.MageObject;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.*;
 import mage.abilities.costs.common.PayLifeCost;
@@ -19,7 +18,6 @@ import mage.abilities.hint.Hint;
 import mage.abilities.icon.CardIcon;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
-import mage.cards.SplitCard;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.command.Dungeon;
@@ -437,7 +435,7 @@ public abstract class AbilityImpl implements Ability {
 
                 case FLASHBACK:
                 case MADNESS:
-                case DISTURB:
+                case TRANSFORMED:
                     // from Snapcaster Mage:
                     // If you cast a spell from a graveyard using its flashback ability, you can't pay other alternative costs
                     // (such as that of Foil). (2018-12-07)

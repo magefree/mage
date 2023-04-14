@@ -8,9 +8,13 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.dynamicvalue.common.GetXLoyaltyValue;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.*;
+import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.mana.AddManaInAnyCombinationEffect;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -29,7 +33,7 @@ public class ChandraHopesBeacon extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{R}{R}");
         this.addSuperType(SuperType.LEGENDARY);
         this.addSubType(SubType.CHANDRA);
-        this.startingLoyalty = 5;
+        this.setStartingLoyalty(5);
 
         //Whenever you cast an instant or sorcery spell, copy it. You may choose new targets for the copy. This ability
         //triggers only once each turn.

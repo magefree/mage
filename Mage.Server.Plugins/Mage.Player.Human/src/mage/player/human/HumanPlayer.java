@@ -1795,7 +1795,7 @@ public class HumanPlayer extends PlayerImpl {
             declareAttacker(attackerId, possibleDefender.iterator().next(), game, true);
             return true;
         } else {
-            TargetDefender target = new TargetDefender(possibleDefender, attackerId);
+            TargetDefender target = new TargetDefender(possibleDefender);
             if (forcedToAttack) {
                 StringBuilder sb = new StringBuilder(target.getTargetName());
                 Permanent attacker = game.getPermanent(attackerId);
@@ -1814,7 +1814,7 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     protected UUID selectDefenderForAllAttack(Set<UUID> defenders, Game game) {
-        TargetDefender target = new TargetDefender(defenders, null);
+        TargetDefender target = new TargetDefender(defenders);
         if (chooseTarget(Outcome.Damage, target, null, game)) {
             return getFixedResponseUUID(game);
         }

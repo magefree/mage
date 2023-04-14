@@ -14,6 +14,10 @@ public enum SubType {
     ARCANE("Arcane", SubTypeSet.SpellType),
     LESSON("Lesson", SubTypeSet.SpellType),
     TRAP("Trap", SubTypeSet.SpellType),
+
+    // Battle subtypes
+    SIEGE("Siege", SubTypeSet.BattleType),
+
     // 205.3i: Lands have their own unique set of subtypes; these subtypes are called land types.
     // Of that list, Forest, Island, Mountain, Plains, and Swamp are the basic land types.
     FOREST("Forest", SubTypeSet.BasicLandType),
@@ -623,6 +627,8 @@ public enum SubType {
                 return mageObject.isPlaneswalker(game);
             case SpellType:
                 return mageObject.isInstantOrSorcery(game);
+            case BattleType:
+                return mageObject.isBattle(game);
         }
         return false;
     }
@@ -637,12 +643,10 @@ public enum SubType {
 
     public static Set<SubType> getPlaneswalkerTypes() {
         return subTypeSetMap.get(SubTypeSet.PlaneswalkerType);
-
     }
 
     public static Set<SubType> getCreatureTypes() {
         return subTypeSetMap.get(SubTypeSet.CreatureType);
-
     }
 
     public static Set<SubType> getBasicLands() {
@@ -651,6 +655,10 @@ public enum SubType {
 
     public static Set<SubType> getLandTypes() {
         return landTypes;
+    }
+
+    public static Set<SubType> getBattleTypes() {
+        return subTypeSetMap.get(SubTypeSet.BattleType);
     }
 
     public static Set<SubType> getBySubTypeSet(SubTypeSet subTypeSet) {

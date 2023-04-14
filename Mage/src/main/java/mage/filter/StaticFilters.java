@@ -230,6 +230,12 @@ public final class StaticFilters {
         FILTER_CARD_A_PERMANENT.setLockedFilter(true);
     }
 
+    public static final FilterPermanentCard FILTER_CARD_PERMANENTS = new FilterPermanentCard("permanent cards");
+
+    static {
+        FILTER_CARD_PERMANENTS.setLockedFilter(true);
+    }
+
     public static final FilterPermanent FILTER_PERMANENT = new FilterPermanent();
 
     static {

@@ -48,6 +48,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
 import mage.game.stack.SpellStack;
+import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.game.turn.Phase;
 import mage.game.turn.Step;
@@ -2498,6 +2499,32 @@ public abstract class GameImpl implements Game {
                     somethingHappened = true;
                 }
             }
+
+            if (perm.isBattle(this)) {
+                if (perm
+                        .getCounters(this)
+                        .getCount(CounterType.DEFENSE) == 0
+                        && this.getStack()
+                        .stream()
+                        .filter(StackAbility.class::isInstance)
+                        .filter(stackObject -> stackObject.getStackAbility() instanceof TriggeredAbilityImpl)
+                        .map(StackObject::getSourceId)
+                        .noneMatch(perm.getId()::equals)
+                        && this.state
+                        .getTriggered(perm.getControllerId())
+                        .stream()
+                        .filter(TriggeredAbility.class::isInstance)
+                        .map(Ability::getSourceId)
+                        .noneMatch(perm.getId()::equals)) {
+                    if (movePermanentToGraveyardWithInfo(perm)) {
+                        somethingHappened = true;
+                    }
+                } else if (this.getPlayer(perm.getProtectorId()) == null || perm.isControlledBy(perm.getProtectorId())) {
+                    perm.chooseProtector(this, null);
+                    somethingHappened = true;
+                }
+            }
+
             if (perm.isLegendary() && perm.legendRuleApplies()) {
                 legendary.add(perm);
             }

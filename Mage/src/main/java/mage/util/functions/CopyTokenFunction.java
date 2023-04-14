@@ -96,6 +96,7 @@ public class CopyTokenFunction implements Function<Token, Card> {
         target.setPower(sourceObj.getPower().getBaseValue());
         target.setToughness(sourceObj.getToughness().getBaseValue());
         target.setStartingLoyalty(sourceObj.getStartingLoyalty());
+        target.setStartingDefense(sourceObj.getStartingDefense());
 
         return target;
     }
@@ -114,6 +115,7 @@ public class CopyTokenFunction implements Function<Token, Card> {
             target.setZoneChangeCounter(spell.getZoneChangeCounter(game), game);
             // Copy starting loyalty from spell (Ob Nixilis, the Adversary)
             target.setStartingLoyalty(spell.getStartingLoyalty());
+            target.setStartingDefense(spell.getStartingDefense());
         } else {
             target.setZoneChangeCounter(source.getZoneChangeCounter(game), game);
         }

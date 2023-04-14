@@ -18,7 +18,10 @@ import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
 import mage.util.SubTypes;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 public class Commander implements CommandObject {
 
@@ -270,6 +273,15 @@ public class Commander implements CommandObject {
 
     @Override
     public void setStartingLoyalty(int startingLoyalty) {
+    }
+
+    @Override
+    public int getStartingDefense() {
+        return sourceObject.getStartingDefense();
+    }
+
+    @Override
+    public void setStartingDefense(int startingDefense) {
     }
 
     @Override

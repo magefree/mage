@@ -52,6 +52,8 @@ public class CardInfo {
     @DatabaseField
     protected String startingLoyalty;
     @DatabaseField
+    protected String startingDefense;
+    @DatabaseField
     protected int manaValue;
     @DatabaseField(dataType = DataType.ENUM_STRING)
     protected Rarity rarity;
@@ -226,7 +228,8 @@ public class CardInfo {
         }
 
         // Starting loyalty
-        this.startingLoyalty = CardUtil.convertStartingLoyalty(card.getStartingLoyalty());
+        this.startingLoyalty = CardUtil.convertLoyaltyOrDefense(card.getStartingLoyalty());
+        this.startingDefense = CardUtil.convertLoyaltyOrDefense(card.getStartingDefense());
     }
 
     public Card getCard() {

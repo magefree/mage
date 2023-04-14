@@ -1726,14 +1726,14 @@ public final class CardUtil {
         return i == null ? 1 : Integer.sum(i, 1);
     }
 
-    public static String convertStartingLoyalty(int startingLoyalty) {
-        switch (startingLoyalty) {
+    public static String convertLoyaltyOrDefense(int value) {
+        switch (value) {
             case -2:
                 return "X";
             case -1:
                 return "";
             default:
-                return "" + startingLoyalty;
+                return "" + value;
         }
     }
 

@@ -21,6 +21,7 @@ import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.counters.Counters;
+import mage.filter.FilterOpponent;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.ZoneChangeInfo;
@@ -33,9 +34,10 @@ import mage.game.permanent.token.SquirrelToken;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
-import mage.target.TargetCard;
+import mage.target.TargetPlayer;
 import mage.util.CardUtil;
 import mage.util.GameLog;
+import mage.util.RandomUtil;
 import mage.util.ThreadLocalStringBuilder;
 import org.apache.log4j.Logger;
 
@@ -75,6 +77,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected final Set<UUID> goadingPlayers = new HashSet<>();
     protected UUID originalControllerId;
     protected UUID controllerId;
+    protected UUID protectorId = null;
     protected UUID beforeResetControllerId;
     protected int damage;
     protected boolean controlledFromStartOfControllerTurn;
@@ -174,6 +177,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.loyaltyActivationsAvailable = permanent.loyaltyActivationsAvailable;
         this.legendRuleApplies = permanent.legendRuleApplies;
         this.transformCount = permanent.transformCount;
+        this.protectorId = permanent.protectorId;
 
         this.morphed = permanent.morphed;
         this.manifested = permanent.manifested;
@@ -482,7 +486,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public void setLoyaltyActivationsAvailable(int setActivations) {
-        if(this.loyaltyActivationsAvailable < setActivations) {
+        if (this.loyaltyActivationsAvailable < setActivations) {
             this.loyaltyActivationsAvailable = setActivations;
         }
     }
@@ -991,6 +995,15 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 removeCounters(CounterType.LOYALTY.getName(), countersToRemove, source, game);
             }
         }
+        if (this.isBattle(game)) {
+            int defense = getCounters(game).getCount(CounterType.DEFENSE);
+            int countersToRemove = Math.min(actualDamage, defense);
+            if (attacker != null && markDamage) {
+                markDamage(CounterType.DEFENSE.createInstance(countersToRemove), attacker, false);
+            } else {
+                removeCounters(CounterType.DEFENSE.getName(), countersToRemove, source, game);
+            }
+        }
         DamagedEvent damagedEvent = new DamagedPermanentEvent(this.getId(), attackerId, this.getControllerId(), actualDamage, combat);
         damagedEvent.setExcess(actualDamage - lethal);
         game.fireEvent(damagedEvent);
@@ -1134,6 +1147,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (this.isPlaneswalker(game)) {
             lethal = Math.min(lethal, this.getCounters(game).getCount(CounterType.LOYALTY));
         }
+        if (this.isBattle(game)) {
+            lethal = Math.min(lethal, this.getCounters(game).getCount(CounterType.DEFENSE));
+        }
         return lethal;
     }
 
@@ -1195,6 +1211,18 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             if (countersToAdd > 0) {
                 this.addCounters(CounterType.LOYALTY.createInstance(countersToAdd), source, game);
             }
+        }
+        if (this.isBattle(game)) {
+            int defense;
+            if (this.getStartingDefense() == -2) {
+                defense = source.getManaCostsToPay().getX();
+            } else {
+                defense = this.getStartingDefense();
+            }
+            if (defense > 0) {
+                this.addCounters(CounterType.DEFENSE.createInstance(defense), source, game);
+            }
+            this.chooseProtector(game, source);
         }
         if (!fireEvent) {
             return false;
@@ -1382,7 +1410,22 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public boolean canBeAttacked(UUID attackerId, UUID playerToAttack, Game game) {
+        if (isPlaneswalker(game)) {
+            return isControlledBy(playerToAttack);
+        }
+        if (isBattle(game)) {
+            return isProtectedBy(playerToAttack);
+        }
+        return false;
+    }
+
+    @Override
     public boolean canAttackInPrinciple(UUID defenderId, Game game) {
+        if (isBattle(game)) {
+            // battles can never attack
+            return false;
+        }
         ApprovingObject approvingObject = game.getContinuousEffects().asThough(
                 this.objectId, AsThoughEffectType.ATTACK_AS_HASTE, null, defenderId, game
         );
@@ -1422,7 +1465,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean canBlock(UUID attackerId, Game game) {
-        if (tapped && null == game.getState().getContinuousEffects().asThough(this.getId(), AsThoughEffectType.BLOCK_TAPPED, null, this.getControllerId(), game)) {
+        if (tapped && game.getState().getContinuousEffects().asThough(this.getId(), AsThoughEffectType.BLOCK_TAPPED, null, this.getControllerId(), game) == null || isBattle(game)) {
             return false;
         }
         Permanent attacker = game.getPermanent(attackerId);
@@ -1528,7 +1571,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             return game.getCombat().removeFromCombat(objectId, game, withEvent);
         } else if (this.isPlaneswalker(game)) {
             if (game.getCombat().getDefenders().contains(getId())) {
-                game.getCombat().removePlaneswalkerFromCombat(objectId, game);
+                game.getCombat().removeDefendingPermanentFromCombat(objectId, game);
             }
         }
         return false;
@@ -1627,6 +1670,40 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public Set<UUID> getGoadingPlayers() {
         return goadingPlayers;
+    }
+
+    @Override
+    public void chooseProtector(Game game, Ability source) {
+        Set<UUID> opponents = game.getOpponents(this.getControllerId());
+        UUID protectorId;
+        if (opponents.size() > 1) {
+            TargetPlayer target = new TargetPlayer(new FilterOpponent("protector for " + getName()));
+            target.setNotTarget(true);
+            target.setRequired(true);
+            game.getPlayer(getControllerId()).choose(Outcome.Neutral, target, source, game);
+            protectorId = target.getFirstTarget();
+        } else {
+            protectorId = RandomUtil.randomFromCollection(opponents);
+        }
+        String protectorName = game.getPlayer(protectorId).getLogName();
+        game.informPlayers(protectorName + " has been chosen to protect " + this.getLogName());
+        this.addInfo("protector", "Protected by " + protectorName, game);
+        this.setProtectorId(protectorId);
+    }
+
+    @Override
+    public void setProtectorId(UUID protectorId) {
+        this.protectorId = protectorId;
+    }
+
+    @Override
+    public UUID getProtectorId() {
+        return protectorId;
+    }
+
+    @Override
+    public boolean isProtectedBy(UUID playerId) {
+        return protectorId != null && protectorId.equals(playerId);
     }
 
     @Override

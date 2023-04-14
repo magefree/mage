@@ -134,6 +134,7 @@ public class CopyEffect extends ContinuousEffectImpl {
         permanent.getPower().setModifiedBaseValue(copyFromObject.getPower().getModifiedBaseValue());
         permanent.getToughness().setModifiedBaseValue(copyFromObject.getToughness().getModifiedBaseValue());
         permanent.setStartingLoyalty(copyFromObject.getStartingLoyalty());
+        permanent.setStartingDefense(copyFromObject.getStartingDefense());
         if (copyFromObject instanceof Permanent) {
             Permanent targetPermanent = (Permanent) copyFromObject;
             permanent.setTransformed(targetPermanent.isTransformed());
@@ -199,8 +200,9 @@ public class CopyEffect extends ContinuousEffectImpl {
         return applier;
     }
 
-    public void setApplier(CopyApplier applier) {
+    public CopyEffect setApplier(CopyApplier applier) {
         this.applier = applier;
+        return this;
     }
 
 }
