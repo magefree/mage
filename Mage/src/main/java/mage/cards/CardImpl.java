@@ -614,7 +614,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public final Card getSecondCardFace() {
         // init card side on first call
-        if (secondSideCardClazz == null) {
+        if (secondSideCardClazz == null && secondSideCard == null) {
             return null;
         }
 
