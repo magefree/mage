@@ -33,6 +33,7 @@ public class TheGreatSynthesis extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "");
         this.addSubType(SubType.SAGA);
         this.color.setBlue(true);
+        this.nightCard = true;
 
         //(As this Saga enters and after your draw step, add a lore counter.)
         SagaAbility sagaAbility = new SagaAbility(this, false);
