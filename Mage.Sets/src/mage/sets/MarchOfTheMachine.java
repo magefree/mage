@@ -280,6 +280,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Sun-Blessed Guardian", 38, Rarity.UNCOMMON, mage.cards.s.SunBlessedGuardian.class));
         cards.add(new SetCardInfo("Sunder the Gateway", 39, Rarity.COMMON, mage.cards.s.SunderTheGateway.class));
         cards.add(new SetCardInfo("Sunfall", 40, Rarity.RARE, mage.cards.s.Sunfall.class));
+        cards.add(new SetCardInfo("Surge of Salvation", 41, Rarity.UNCOMMON, mage.cards.s.SurgeOfSalvation.class));
         cards.add(new SetCardInfo("Surrak and Goreclaw", 337, Rarity.RARE, mage.cards.s.SurrakAndGoreclaw.class));
         cards.add(new SetCardInfo("Swamp", 279, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swiftwater Cliffs", 273, Rarity.COMMON, mage.cards.s.SwiftwaterCliffs.class));
