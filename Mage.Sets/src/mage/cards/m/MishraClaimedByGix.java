@@ -38,7 +38,9 @@ public final class MishraClaimedByGix extends CardImpl {
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
+
         this.meldsWithClazz = mage.cards.p.PhyrexianDragonEngine.class;
+        this.meldsToClazz = mage.cards.m.MishraLostToPhyrexia.class;
 
         // Whenever you attack, each opponent loses X life and you gain X life, where X is the number of attacking creatures. If Mishra, Claimed by Gix and a creature named Phyrexian Dragon Engine are attacking, and you both own and control them, exile them, then meld them into Mishra, Lost to Phyrexia. It enters the battlefield tapped and attacking.
         Ability ability = new AttacksWithCreaturesTriggeredAbility(

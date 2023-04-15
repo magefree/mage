@@ -1205,6 +1205,11 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public boolean moveCardsToHandWithInfo(Cards cards, Ability source, Game game, boolean withName) {
+        return false;
+    }
+
+    @Override
     public boolean moveCardToExileWithInfo(Card card, UUID exileId, String exileName, Ability source, Game game, Zone fromZone, boolean withName) {
         return false;
     }

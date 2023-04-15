@@ -23,7 +23,7 @@ public final class WaspToken extends TokenImpl {
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("10E");
+        availableImageSetCodes = Arrays.asList("10E", "30A");
     }
 
     public WaspToken(final WaspToken token) {

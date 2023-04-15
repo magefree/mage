@@ -46,7 +46,9 @@ public final class UrzaLordProtector extends CardImpl {
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
+
         this.meldsWithClazz = mage.cards.t.TheMightstoneAndWeakstone.class;
+        this.meldsToClazz = mage.cards.u.UrzaPlaneswalker.class;
 
         // Artifact, instant, and sorcery spells you cast cost {1} less to cast.
         this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));

@@ -4,6 +4,7 @@ import mage.cards.s.Storyweave;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -56,12 +57,12 @@ public class StoryweaveTest extends CardTestPlayerBase {
 
         assertCounterCount(playerA, fang, CounterType.P1P1, 0);
         assertPermanentCount(playerA, "Centaur Token", 2);
-        currentGame
+        Assert.assertTrue(currentGame
                 .getBattlefield()
                 .getAllActivePermanents()
                 .stream()
                 .filter(permanent -> "Centaur Token".equals(permanent.getName()))
-                .noneMatch(permanent -> permanent.getCounters(currentGame).getCount(CounterType.P1P1) != 2);
+                .noneMatch(permanent -> permanent.getCounters(currentGame).getCount(CounterType.P1P1) != 2));
     }
 
     @Test
@@ -80,11 +81,11 @@ public class StoryweaveTest extends CardTestPlayerBase {
 
         assertCounterCount(playerA, fang, CounterType.P1P1, 2);
         assertPermanentCount(playerA, "Centaur Token", 2);
-        currentGame
+        Assert.assertTrue(currentGame
                 .getBattlefield()
                 .getAllActivePermanents()
                 .stream()
                 .filter(permanent -> "Centaur Token".equals(permanent.getName()))
-                .noneMatch(permanent -> permanent.getCounters(currentGame).getCount(CounterType.P1P1) != 0);
+                .noneMatch(permanent -> permanent.getCounters(currentGame).getCount(CounterType.P1P1) != 0));
     }
 }

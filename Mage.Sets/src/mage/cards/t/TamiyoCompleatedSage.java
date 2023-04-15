@@ -25,6 +25,7 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -108,7 +109,7 @@ class TamiyoCompleatedSageEffect extends OneShotEffect {
         }
         player.moveCards(card, Zone.EXILED, source, game);
         return new CreateTokenCopyTargetEffect().setSavedPermanent(
-                new PermanentCard(card, source.getControllerId(), game)
+                new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, card), source.getControllerId(), game)
         ).apply(game, source);
     }
 }

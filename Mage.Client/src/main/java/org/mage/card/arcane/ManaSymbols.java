@@ -25,6 +25,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicIntegerArray;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
@@ -67,7 +68,7 @@ public final class ManaSymbols {
     }
 
     private static final Map<String, Dimension> setImagesExist = new HashMap<>();
-    private static final Pattern REPLACE_SYMBOLS_PATTERN = Pattern.compile("\\{([^}/]*)/?([^}]*)\\}");
+    private static final Pattern REPLACE_SYMBOLS_PATTERN = Pattern.compile("\\{([^}/]*)/?([^}/]*)/?([^}/]*)\\}");
 
     private static final String[] symbols = new String[]{
             "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
@@ -78,7 +79,8 @@ public final class ManaSymbols {
             "S", "T", "Q",
             "U", "UB", "UR", "UP", "2U",
             "W", "WB", "WU", "WP", "2W",
-            "X", "C", "E"};
+            "X", "C", "E",
+            "BGP", "BRP", "GUP", "GWP", "RGP", "RWP", "UBP", "URP", "WBP", "WUP"};
 
     private static final JLabel labelRender = new JLabel(); // render mana text
 
@@ -287,7 +289,7 @@ public final class ManaSymbols {
         // priority: SVG -> GIF
         // gif remain for backward compatibility
 
-        int[] iconErrors = new int[2]; // 0 - svg, 1 - gif
+        AtomicIntegerArray iconErrors = new AtomicIntegerArray(2); // 0 - svg, 1 - gif
 
         AtomicBoolean fileErrors = new AtomicBoolean(false);
         Map<String, BufferedImage> sizedSymbols = new ConcurrentHashMap<>();
@@ -312,7 +314,7 @@ public final class ManaSymbols {
             // gif
             if (image == null) {
 
-                iconErrors[0] += 1; // svg fail
+                iconErrors.incrementAndGet(0); // svg fail
 
                 file = getSymbolFileNameAsGIF(symbol, size);
                 if (file.exists()) {
@@ -324,21 +326,21 @@ public final class ManaSymbols {
             if (image != null) {
                 sizedSymbols.put(symbol, image);
             } else {
-                iconErrors[1] += 1; // gif fail
+                iconErrors.incrementAndGet(1); // gif fail
                 fileErrors.set(true);
             }
         });
 
         // total errors
         String errorInfo = "";
-        if (iconErrors[0] > 0) {
-            errorInfo += "SVG fails - " + iconErrors[0];
+        if (iconErrors.get(0) > 0) {
+            errorInfo += "SVG fails - " + iconErrors.get(0);
         }
-        if (iconErrors[1] > 0) {
+        if (iconErrors.get(1) > 0) {
             if (!errorInfo.isEmpty()) {
                 errorInfo += ", ";
             }
-            errorInfo += "GIF fails - " + iconErrors[1];
+            errorInfo += "GIF fails - " + iconErrors.get(1);
         }
 
         if (!errorInfo.isEmpty()) {
@@ -651,7 +653,7 @@ public final class ManaSymbols {
 
         replaced = replaced.replace(CardInfo.SPLIT_MANA_SEPARATOR_FULL, CardInfo.SPLIT_MANA_SEPARATOR_RENDER);
         replaced = REPLACE_SYMBOLS_PATTERN.matcher(replaced).replaceAll(
-                "<img src='" + filePathToUrl(htmlImagesPath) + "$1$2" + ".png' alt='$1$2' width="
+                "<img src='" + filePathToUrl(htmlImagesPath) + "$1$2$3" + ".png' alt='$1$2$3' width="
                         + symbolSize + " height=" + symbolSize + '>');
 
         // replace hint icons

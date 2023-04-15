@@ -59,10 +59,10 @@ public class ManaPaidSourceWatcher extends Watcher {
 
         private void increment(MageObject sourceObject, ManaType manaType, Game game) {
             total++;
-            if (sourceObject.hasSubtype(SubType.TREASURE, game)) {
+            if (sourceObject != null && sourceObject.hasSubtype(SubType.TREASURE, game)) {
                 treasure++;
             }
-            if (!sourceObject.isSnow()) {
+            if (sourceObject != null && !sourceObject.isSnow()) {
                 return;
             }
             switch (manaType) {

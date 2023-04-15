@@ -20,9 +20,8 @@ public class PermanentToken extends PermanentImpl {
 
     protected Token token;
 
-    public PermanentToken(Token token, UUID controllerId, String expansionSetCode, Game game) {
+    public PermanentToken(Token token, UUID controllerId, Game game) {
         super(controllerId, controllerId, token.getName());
-        this.expansionSetCode = expansionSetCode;
         this.token = token.copy();
         this.token.getAbilities().newOriginalId(); // neccessary if token has ability like DevourAbility()
         this.token.getAbilities().setSourceId(objectId);
@@ -40,7 +39,6 @@ public class PermanentToken extends PermanentImpl {
     public PermanentToken(final PermanentToken permanent) {
         super(permanent);
         this.token = permanent.token.copy();
-        this.expansionSetCode = permanent.expansionSetCode;
     }
 
     @Override
@@ -87,8 +85,8 @@ public class PermanentToken extends PermanentImpl {
         this.supertype.clear();
         this.supertype.addAll(token.getSuperType());
         this.subtype.copyFrom(token.getSubtype(game));
-        this.tokenDescriptor = token.getTokenDescriptor();
         this.startingLoyalty = token.getStartingLoyalty();
+        this.startingDefense = token.getStartingDefense();
         // workaround for entersTheBattlefield replacement effects
         if (this.abilities.containsClass(ChangelingAbility.class)) {
             this.subtype.setIsAllCreatureTypes(true);
@@ -121,5 +119,25 @@ public class PermanentToken extends PermanentImpl {
     public Card getMainCard() {
         // token don't have game card, so return itself
         return this;
+    }
+
+    @Override
+    public String getCardNumber() {
+        return token.getOriginalCardNumber();
+    }
+
+    @Override
+    public void setCardNumber(String cardNumber) {
+        throw new IllegalArgumentException("Wrong code usage: you can't change a token's card number");
+    }
+
+    @Override
+    public String getExpansionSetCode() {
+        return token.getOriginalExpansionSetCode();
+    }
+
+    @Override
+    public void setExpansionSetCode(String expansionSetCode) {
+        throw new IllegalArgumentException("Wrong code usage: you can't change a token's set code");
     }
 }

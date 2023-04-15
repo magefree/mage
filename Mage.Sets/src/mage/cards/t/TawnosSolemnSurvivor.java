@@ -116,7 +116,7 @@ class TawnosSolemnSurvivorEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        Permanent permanent = new PermanentCard(card, source.getControllerId(), game);
+        Permanent permanent = new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, card), source.getControllerId(), game);
         return new CreateTokenCopyTargetEffect(
                 null, CardType.ARTIFACT, false
         ).setSavedPermanent(permanent).apply(game, source);

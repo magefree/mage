@@ -6,8 +6,8 @@ XMage allows you to play Magic against one or more online players or computer op
 It includes full rules enforcement for over **20 000** unique cards and more than 50.000 reprints from different editions. 
 You can also find custom sets like Star Wars. All regular sets have nearly all implemented cards.
 
-It's support single matches and tournaments with dozens game modes like duel, multiplayer, standard, modern, commander, 
-pauper, oathbreaker, historic, freeform and much more.
+It supports single matches and tournaments with dozens of game modes like duel, multiplayer, standard, modern, commander, 
+pauper, oathbreaker, historic, freeform, richman and much more.
 
 Local server supports a [special test mode](https://github.com/magefree/mage/wiki/Development-Testing-Tools) for 
 testing combos and other game situations with pre-defined conditions.
@@ -112,7 +112,7 @@ More info about [XRender](https://docs.oracle.com/javase/8/docs/technotes/guides
 #### Increase memory usage
 
 This is not guaranteed to yield improvements, but it depends on your use-case. 
-If you have a lot of RAM to spare, you might as well increase the initial heap size for good measure.
+If you have a lot of RAM to spare, you can increase the initial heap size for good measure.
 More details about [memory settings](https://stackoverflow.com/a/57839720/8401696):
 * `-Xms1G -Xmx2G`
 

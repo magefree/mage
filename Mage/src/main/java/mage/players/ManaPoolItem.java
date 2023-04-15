@@ -22,7 +22,7 @@ public class ManaPoolItem implements Serializable, Emptiable {
     private int black = 0;
     private int colorless = 0;
     private ConditionalMana conditionalMana;
-    private MageObject sourceObject;
+    private MageObject sourceObject; // source of the mana, can be null (what's use case for null values? JayDi85)
     private UUID originalId; // originalId of the mana producing ability
     private boolean flag = false;
     private Duration duration;

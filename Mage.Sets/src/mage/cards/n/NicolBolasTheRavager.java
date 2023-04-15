@@ -7,17 +7,13 @@ import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.common.ExileAndReturnTransformedSourceEffect;
+import mage.abilities.effects.common.ExileAndReturnSourceEffect;
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 
 /**
  *
@@ -46,7 +42,7 @@ public final class NicolBolasTheRavager extends CardImpl {
         this.addAbility(new TransformAbility());
         this.addAbility(new ActivateAsSorceryActivatedAbility(
                 Zone.BATTLEFIELD,
-                new ExileAndReturnTransformedSourceEffect(Pronoun.HE),
+                new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED,Pronoun.HE),
                 new ManaCostsImpl<>("{4}{U}{B}{R}")
         ));
     }

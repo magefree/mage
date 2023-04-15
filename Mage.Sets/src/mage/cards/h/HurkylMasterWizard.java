@@ -94,7 +94,7 @@ class HurkylMasterWizardEffect extends OneShotEffect {
         TargetCard target = new HurkylMasterWizardTarget(source, game);
         player.choose(outcome, cards, target, game);
         Cards toHand = new CardsImpl(target.getTargets());
-        player.moveCards(toHand, Zone.HAND, source, game);
+        player.moveCardsToHandWithInfo(toHand, source, game, true);
         cards.retainZone(Zone.LIBRARY, game);
         player.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;
