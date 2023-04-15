@@ -162,6 +162,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Invasion of Kaldheim", 145, Rarity.RARE, mage.cards.i.InvasionOfKaldheim.class));
         cards.add(new SetCardInfo("Invasion of Kamigawa", 62, Rarity.UNCOMMON, mage.cards.i.InvasionOfKamigawa.class));
         cards.add(new SetCardInfo("Invasion of Karsus", 146, Rarity.RARE, mage.cards.i.InvasionOfKarsus.class));
+        cards.add(new SetCardInfo("Invasion of Kylem", 235, Rarity.UNCOMMON, mage.cards.i.InvasionOfKylem.class));
         cards.add(new SetCardInfo("Invasion of Lorwyn", 236, Rarity.UNCOMMON, mage.cards.i.InvasionOfLorwyn.class));
         cards.add(new SetCardInfo("Invasion of Mercadia", 147, Rarity.UNCOMMON, mage.cards.i.InvasionOfMercadia.class));
         cards.add(new SetCardInfo("Invasion of Moag", 237, Rarity.UNCOMMON, mage.cards.i.InvasionOfMoag.class));
@@ -322,6 +323,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Unseal the Necropolis", 128, Rarity.COMMON, mage.cards.u.UnsealTheNecropolis.class));
         cards.add(new SetCardInfo("Urabrask", 169, Rarity.MYTHIC, mage.cards.u.Urabrask.class));
         cards.add(new SetCardInfo("Urn of Godfire", 266, Rarity.COMMON, mage.cards.u.UrnOfGodfire.class));
+        cards.add(new SetCardInfo("Valor's Reach Tag Team", 235, Rarity.UNCOMMON, mage.cards.v.ValorsReachTagTeam.class));
         cards.add(new SetCardInfo("Vanquish the Weak", 129, Rarity.COMMON, mage.cards.v.VanquishTheWeak.class));
         cards.add(new SetCardInfo("Vengeant Earth", 212, Rarity.COMMON, mage.cards.v.VengeantEarth.class));
         cards.add(new SetCardInfo("Vertex Paladin", 242, Rarity.UNCOMMON, mage.cards.v.VertexPaladin.class));
