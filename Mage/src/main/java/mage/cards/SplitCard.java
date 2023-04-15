@@ -196,7 +196,9 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
                 sourceAbilities,
                 sourceAbilities
         );
-        res.add("--------------------------------------------------------------------------\n" + FUSE_RULE);
+        if (getSpellAbility().getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
+            res.add("--------------------------------------------------------------------------\n" + FUSE_RULE);
+        }
         return res;
     }
 
@@ -210,7 +212,9 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
                 sourceAbilities,
                 sourceAbilities
         );
-        res.add("--------------------------------------------------------------------------\n" + FUSE_RULE);
+        if (getSpellAbility().getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
+            res.add("--------------------------------------------------------------------------\n" + FUSE_RULE);
+        }
         return res;
     }
 
