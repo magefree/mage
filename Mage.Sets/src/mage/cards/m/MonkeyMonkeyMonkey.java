@@ -2,6 +2,7 @@
 package mage.cards.m;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
@@ -79,7 +80,7 @@ class ChooseLetterEffect extends OneShotEffect {
 
         ChoiceImpl choice = new ChoiceImpl(true);
         choice.setMessage("Choose letter");
-        Set<String> choices = new HashSet<>();
+        Set<String> choices = new LinkedHashSet<>();
         for (char letter = 'A'; letter <= 'Z'; letter++) {
             choices.add(Character.toString(letter));
         }

@@ -32,7 +32,7 @@ public final class ObsessiveCollector extends CardImpl {
 
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(4);
-        this.toughness = new MageInt(3);
+        this.toughness = new MageInt(4);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

@@ -34,7 +34,7 @@ public final class GrizzlyGhoul extends CardImpl {
         // Grizzly Ghoul enters the battlefield with a +1/+1 counter on it for each creature that died this turn.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
                 CounterType.P1P1.createInstance(0), CreaturesDiedThisTurnCount.instance, true
-        ).setText("with a +1/+1 counter on it for each creature that died this turn.")).addHint(CreaturesDiedThisTurnHint.instance), new CreaturesDiedWatcher());
+        ).setText("with a +1/+1 counter on it for each creature that died this turn.")).addHint(CreaturesDiedThisTurnHint.instance));
     }
 
     private GrizzlyGhoul(final GrizzlyGhoul card) {

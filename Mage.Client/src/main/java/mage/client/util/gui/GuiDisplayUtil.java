@@ -313,11 +313,15 @@ public final class GuiDisplayUtil {
         }
         buffer.append("</td></tr></table>");
 
-        String pt = "";
+        String pt;
         if (card.isCreature()) {
             pt = card.getPower() + '/' + card.getToughness();
-        } else if (card.isPlanesWalker()) {
+        } else if (card.isPlaneswalker()) {
             pt = card.getLoyalty();
+        } else if (card.isBattle()) {
+            pt = card.getDefense();
+        } else {
+            pt = "";
         }
 
         buffer.append("<table cellspacing=0 cellpadding=0 border=0 width='100%' valign='bottom'><tr><td><b>");

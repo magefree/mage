@@ -32,4 +32,8 @@ public abstract class DamagedEvent extends GameEvent {
     public int getExcess() {
         return excess;
     }
+
+    public UUID getAttackerId() {
+        return getSourceId();
+    }
 }

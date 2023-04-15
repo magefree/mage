@@ -85,7 +85,6 @@ public class CardsInHandCondition implements Condition {
 
     @Override
     public String toString() {
-        int workCount = count;
         StringBuilder sb = new StringBuilder("if");
         switch (targetController) {
             case YOU:
@@ -97,20 +96,21 @@ public class CardsInHandCondition implements Condition {
         }
         switch (this.type) {
             case FEWER_THAN:
-                sb.append(" less or equal than ");
-                workCount++;
+                sb.append(CardUtil.numberToText(count));
+                sb.append(" or fewer ");
                 break;
             case MORE_THAN:
-                sb.append(" more than ");
+                sb.append(CardUtil.numberToText(count));
+                sb.append(" or more ");
                 break;
             case EQUAL_TO:
-                sb.append(" exactly ");
+                if (count > 0) {
+                    sb.append(" exactly ");
+                    sb.append(CardUtil.numberToText(count));
+                } else {
+                    sb.append(" no ");
+                }
                 break;
-        }
-        if (count == 0) {
-            sb.append("no");
-        } else {
-            sb.append(CardUtil.numberToText(workCount));
         }
         sb.append(" cards in hand");
         return sb.toString();

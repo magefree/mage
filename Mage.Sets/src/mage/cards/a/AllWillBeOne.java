@@ -9,9 +9,10 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
+import mage.filter.common.FilterPermanentOrPlayer;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetPermanentOrPlayer;
 
 import java.util.UUID;
 
@@ -40,8 +41,8 @@ public final class AllWillBeOne extends CardImpl {
 
 class AllWillBeOneTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final FilterCreaturePlayerOrPlaneswalker filter =
-            new FilterCreaturePlayerOrPlaneswalker("target opponent, creature an opponent controls, or planeswalker an opponent controls");
+    private static final FilterPermanentOrPlayer filter
+            = new FilterCreaturePlayerOrPlaneswalker("opponent, creature an opponent controls, or planeswalker an opponent controls.");
 
     static {
         filter.getPermanentFilter().add(TargetController.NOT_YOU.getControllerPredicate());
@@ -50,7 +51,7 @@ class AllWillBeOneTriggeredAbility extends TriggeredAbilityImpl {
 
     AllWillBeOneTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(SavedDamageValue.MUCH));
-        this.addTarget(new TargetAnyTarget(filter));
+        this.addTarget(new TargetPermanentOrPlayer(filter));
     }
 
     private AllWillBeOneTriggeredAbility(final AllWillBeOneTriggeredAbility ability) {

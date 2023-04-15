@@ -73,7 +73,7 @@ class FlameKinWarScourEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             if (permanent.sacrifice(source, game)) {
                 Effect effect = new DamageTargetEffect(4).setText("{this} deals 4 damage to it");

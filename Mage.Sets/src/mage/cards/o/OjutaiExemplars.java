@@ -4,19 +4,18 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ExileAndReturnSourceEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.PutCards;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -49,7 +48,7 @@ public final class OjutaiExemplars extends CardImpl {
         ability.addMode(mode);
 
         // or Exile Ojutai Exemplars, then return it to the battlefield tapped under its owner's control.
-        ability.addMode(new Mode(new OjutaiExemplarsEffect()));
+        ability.addMode(new Mode(new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TAPPED)));
 
         this.addAbility(ability);
     }
@@ -61,35 +60,5 @@ public final class OjutaiExemplars extends CardImpl {
     @Override
     public OjutaiExemplars copy() {
         return new OjutaiExemplars(this);
-    }
-}
-
-class OjutaiExemplarsEffect extends OneShotEffect {
-
-    OjutaiExemplarsEffect() {
-        super(Outcome.Neutral);
-        this.staticText = "Exile {this}, then return it to the battlefield tapped under its owner's control";
-    }
-
-    private OjutaiExemplarsEffect(final OjutaiExemplarsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public OjutaiExemplarsEffect copy() {
-        return new OjutaiExemplarsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (player == null || permanent == null) {
-            return false;
-        }
-        Card card = permanent.getMainCard();
-        player.moveCards(permanent, Zone.EXILED, source, game);
-        player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, true, null);
-        return true;
     }
 }

@@ -21,7 +21,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class ScorchedRuins extends CardImpl {
     
-    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("two untapped lands");
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("untapped lands");
     static {
         filter.add(TappedPredicate.UNTAPPED);
     }

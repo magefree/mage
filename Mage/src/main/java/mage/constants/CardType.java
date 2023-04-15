@@ -13,6 +13,7 @@ import java.util.List;
  */
 public enum CardType {
     ARTIFACT("Artifact", true, true),
+    BATTLE("Battle", true, true),
     CONSPIRACY("Conspiracy", false, false),
     CREATURE("Creature", true, true),
     DUNGEON("Dungeon", false, false),

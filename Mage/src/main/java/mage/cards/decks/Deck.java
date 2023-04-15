@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 public class Deck implements Serializable, Copyable<Deck> {
 
-    static final int MAX_CARDS_PER_DECK = 1000;
+    static final int MAX_CARDS_PER_DECK = 2000;
 
     private String name;
     private final Set<Card> cards = new LinkedHashSet<>();

@@ -39,7 +39,9 @@ public final class TitaniaVoiceOfGaea extends CardImpl {
         this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
+
         this.meldsWithClazz = mage.cards.a.ArgothSanctumOfNature.class;
+        this.meldsToClazz = mage.cards.t.TitaniaGaeaIncarnate.class;
 
         // Reach
         this.addAbility(ReachAbility.getInstance());

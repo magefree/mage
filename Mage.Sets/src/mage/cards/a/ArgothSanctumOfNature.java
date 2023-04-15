@@ -47,6 +47,7 @@ public final class ArgothSanctumOfNature extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         this.meldsWithClazz = mage.cards.t.TitaniaVoiceOfGaea.class;
+        this.meldsToClazz = mage.cards.h.HanweirTheWrithingTownship.class;
 
         // Argoth, Sanctum of Nature enters the battlefield tapped unless you control a legendary green creature.
         this.addAbility(new EntersBattlefieldAbility(

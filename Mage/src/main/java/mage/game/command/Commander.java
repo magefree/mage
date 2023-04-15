@@ -18,7 +18,10 @@ import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
 import mage.util.SubTypes;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 public class Commander implements CommandObject {
 
@@ -273,6 +276,15 @@ public class Commander implements CommandObject {
     }
 
     @Override
+    public int getStartingDefense() {
+        return sourceObject.getStartingDefense();
+    }
+
+    @Override
+    public void setStartingDefense(int startingDefense) {
+    }
+
+    @Override
     public UUID getId() {
         return sourceObject.getId();
     }
@@ -280,6 +292,16 @@ public class Commander implements CommandObject {
     @Override
     public String getImageName() {
         return sourceObject.getImageName();
+    }
+
+    @Override
+    public String getExpansionSetCodeForImage() {
+        return sourceObject.getExpansionSetCode();
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String expansionSetCodeForImage) {
+        throw new IllegalStateException("Can't change a set code of the commander, source card already has it");
     }
 
     @Override

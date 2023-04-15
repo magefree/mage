@@ -105,7 +105,7 @@ class SmeltingVatTarget extends TargetCardInLibrary {
     private final int value;
 
     SmeltingVatTarget(Ability source) {
-        super(0, Integer.MAX_VALUE, filter);
+        super(0, 2, filter);
         this.value = CardUtil
                 .castStream(source.getCosts().stream(), SacrificeTargetCost.class)
                 .map(SacrificeTargetCost::getPermanents)

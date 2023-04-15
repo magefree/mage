@@ -27,7 +27,7 @@ import java.util.UUID;
  */
 public final class DrivnodCarnageDominus extends CardImpl {
 
-    private static final FilterCard filter = new FilterCreatureCard("three creature cards from your graveyard");
+    private static final FilterCard filter = new FilterCreatureCard("creature cards from your graveyard");
 
     public DrivnodCarnageDominus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

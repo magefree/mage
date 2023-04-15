@@ -57,23 +57,20 @@ class TibaltCosmicImpostorPlayFromExileEffect extends AsThoughEffectImpl {
             return false;
         }
         // the exile zone of the Tibalt, Cosmic Impostor that spawned the emblem only
-        UUID exileId = CardUtil.getExileZoneId(tibaltEmblem.getSourceObject().getId().toString(), game);
-        if (exileId == null) {
+        UUID sourceId = tibaltEmblem.getSourceId();
+        UUID exileId = CardUtil.getExileZoneId(sourceId != null ? sourceId.toString() : source.getSourceId().toString(), game);
+        ExileZone exileZone = game.getState().getExile().getExileZone(exileId);
+        if (exileZone == null || exileZone.isEmpty()) {
             return false;
         }
-        ExileZone exile = game.getState().getExile().getExileZone(exileId);
-        if (exile == null) {
-            return false;
-        }
-        if (exile.isEmpty()) {
-            return false;
-        }
+
         Card cardInExile = game.getCard(objectId);
         if (cardInExile == null) {
             return false;
         }
+
         UUID mainCardId = cardInExile.getMainCard().getId();
-        if (exile.contains(mainCardId)
+        if (exileZone.contains(mainCardId)
                 && affectedControllerId.equals(source.getControllerId())
                 && game.getState().getZone(mainCardId).equals(Zone.EXILED)) {
             CardUtil.makeCardPlayable(game, source, cardInExile, Duration.Custom, true);

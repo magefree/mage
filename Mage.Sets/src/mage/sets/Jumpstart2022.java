@@ -102,6 +102,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Bone Picker", 383, Rarity.UNCOMMON, mage.cards.b.BonePicker.class));
         cards.add(new SetCardInfo("Borderland Marauder", 505, Rarity.COMMON, mage.cards.b.BorderlandMarauder.class));
         cards.add(new SetCardInfo("Bounding Wolf", 633, Rarity.COMMON, mage.cards.b.BoundingWolf.class));
+        cards.add(new SetCardInfo("Brazen Cannonade", 31, Rarity.RARE, mage.cards.b.BrazenCannonade.class));
         cards.add(new SetCardInfo("Brazen Freebooter", 506, Rarity.COMMON, mage.cards.b.BrazenFreebooter.class));
         cards.add(new SetCardInfo("Brazen Wolves", 507, Rarity.COMMON, mage.cards.b.BrazenWolves.class));
         cards.add(new SetCardInfo("Briarpack Alpha", 634, Rarity.UNCOMMON, mage.cards.b.BriarpackAlpha.class));
@@ -557,6 +558,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Preordain", 63, Rarity.COMMON, mage.cards.p.Preordain.class));
         cards.add(new SetCardInfo("Presence of Gond", 709, Rarity.COMMON, mage.cards.p.PresenceOfGond.class));
         cards.add(new SetCardInfo("Press for Answers", 337, Rarity.COMMON, mage.cards.p.PressForAnswers.class));
+        cards.add(new SetCardInfo("Preston, the Vanisher", 8, Rarity.RARE, mage.cards.p.PrestonTheVanisher.class));
         cards.add(new SetCardInfo("Prey Upon", 710, Rarity.COMMON, mage.cards.p.PreyUpon.class));
         cards.add(new SetCardInfo("Prickly Marmoset", 580, Rarity.COMMON, mage.cards.p.PricklyMarmoset.class));
         cards.add(new SetCardInfo("Pridemalkin", 711, Rarity.COMMON, mage.cards.p.Pridemalkin.class));
