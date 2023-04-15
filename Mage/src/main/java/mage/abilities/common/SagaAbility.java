@@ -20,6 +20,7 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
+import mage.target.targetadjustment.TargetAdjuster;
 import mage.util.CardUtil;
 
 import java.util.Arrays;
@@ -89,7 +90,7 @@ public class SagaAbility extends SimpleStaticAbility {
     }
 
     public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effect effect, Target target, boolean optional) {
-        addChapterEffect(card, fromChapter, toChapter, new Effects(effect), new Targets(target), optional);
+        addChapterEffect(card, fromChapter, toChapter, new Effects(effect), new Targets(target), optional, null);
     }
 
     public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effects effects, Target target) {
@@ -97,10 +98,10 @@ public class SagaAbility extends SimpleStaticAbility {
     }
 
     public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effects effects, Targets targets) {
-        addChapterEffect(card, fromChapter, toChapter, effects, targets, false);
+        addChapterEffect(card, fromChapter, toChapter, effects, targets, false, null);
     }
 
-    public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effects effects, Targets targets, boolean optional, Mode... modes) {
+    public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effects effects, Targets targets, boolean optional, TargetAdjuster targetAdjuster, Mode... modes) {
         for (int i = fromChapter.getNumber(); i <= toChapter.getNumber(); i++) {
             ChapterTriggeredAbility ability = new ChapterTriggeredAbility(null, SagaChapter.getChapter(i), toChapter, optional, readAhead);
             for (Effect effect : effects) {
@@ -118,6 +119,9 @@ public class SagaAbility extends SimpleStaticAbility {
             }
             if (i > fromChapter.getNumber()) {
                 ability.setRuleVisible(false);
+            }
+            if (targetAdjuster != null) {
+                ability.setTargetAdjuster(targetAdjuster);
             }
             card.addAbility(ability);
         }

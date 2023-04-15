@@ -48,11 +48,11 @@ public class JinGitaxias extends CardImpl {
         //{3}{U}: Exile Jin-Gitaxias, then return it to the battlefield transformed under its owner’s control. Activate
         //only as a sorcery and only if you have seven or more cards in hand.
         this.addAbility(new TransformAbility());
-        ConditionalActivatedAbility conditionalActivatedAbility =
-                new ConditionalActivatedAbility(Zone.BATTLEFIELD, new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED),
-                        new ManaCostsImpl<>("{3}{U}"), new CardsInHandCondition(ComparisonType.MORE_THAN, 6));
-        conditionalActivatedAbility.setTiming(TimingRule.SORCERY);
-        this.addAbility(conditionalActivatedAbility);
+        this.addAbility(new ConditionalActivatedAbility(
+                new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED),
+                new ManaCostsImpl<>("{3}{U}"),
+                new CardsInHandCondition(ComparisonType.MORE_THAN, 6)
+        ).setTiming(TimingRule.SORCERY));
     }
 
     private JinGitaxias(final JinGitaxias card) {

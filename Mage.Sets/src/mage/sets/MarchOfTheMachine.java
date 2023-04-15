@@ -270,6 +270,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Serpent-Blade Assailant", 205, Rarity.COMMON, mage.cards.s.SerpentBladeAssailant.class));
         cards.add(new SetCardInfo("Serra Faithkeeper", 21, Rarity.UNCOMMON, mage.cards.s.SerraFaithkeeper.class));
         cards.add(new SetCardInfo("Shatter the Source", 164, Rarity.COMMON, mage.cards.s.ShatterTheSource.class));
+        cards.add(new SetCardInfo("Sheoldred", 125, Rarity.MYTHIC, mage.cards.s.Sheoldred.class));
         cards.add(new SetCardInfo("Shivan Branch-Burner", 165, Rarity.UNCOMMON, mage.cards.s.ShivanBranchBurner.class));
         cards.add(new SetCardInfo("Sigiled Sentinel", 37, Rarity.COMMON, mage.cards.s.SigiledSentinel.class));
         cards.add(new SetCardInfo("Skittering Surveyor", 264, Rarity.COMMON, mage.cards.s.SkitteringSurveyor.class));
@@ -296,6 +297,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("The Argent Etchings", 12, Rarity.MYTHIC, mage.cards.t.TheArgentEtchings.class));
         cards.add(new SetCardInfo("The Broken Sky", 241, Rarity.RARE, mage.cards.t.TheBrokenSky.class));
         cards.add(new SetCardInfo("The Great Synthesis", 65, Rarity.MYTHIC, mage.cards.t.TheGreatSynthesis.class));
+        cards.add(new SetCardInfo("The True Scriptures", 125, Rarity.MYTHIC, mage.cards.t.TheTrueScriptures.class));
         cards.add(new SetCardInfo("Thornwood Falls", 274, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
         cards.add(new SetCardInfo("Thrashing Frontliner", 167, Rarity.COMMON, mage.cards.t.ThrashingFrontliner.class));
         cards.add(new SetCardInfo("Thunderhead Squadron", 81, Rarity.COMMON, mage.cards.t.ThunderheadSquadron.class));
