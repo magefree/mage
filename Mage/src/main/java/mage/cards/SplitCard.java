@@ -10,6 +10,7 @@ import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,8 @@ import java.util.UUID;
  * @author LevelX2
  */
 public abstract class SplitCard extends CardImpl implements CardWithHalves {
+
+    static public String FUSE_RULE = "Fuse (You may cast both halves from your hand.)";
 
     protected Card leftHalfCard;
     protected Card rightHalfCard;
@@ -186,11 +189,29 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
 
     @Override
     public List<String> getRules() {
-        List<String> rules = new ArrayList<>();
-        if (getSpellAbility().getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
-            rules.add("--------------------------------------------------------------------------\nFuse (You may cast one or both halves of this card from your hand.)");
-        }
-        return rules;
+        Abilities<Ability> sourceAbilities = this.getAbilities();
+        List<String> res = CardUtil.getCardRulesWithAdditionalInfo(
+                this.getId(),
+                this.getName(),
+                sourceAbilities,
+                sourceAbilities
+        );
+        res.add("--------------------------------------------------------------------------\n" + FUSE_RULE);
+        return res;
+    }
+
+    @Override
+    public List<String> getRules(Game game) {
+        Abilities<Ability> sourceAbilities = this.getAbilities(game);
+        List<String> res = CardUtil.getCardRulesWithAdditionalInfo(
+                game,
+                this.getId(),
+                this.getName(),
+                sourceAbilities,
+                sourceAbilities
+        );
+        res.add("--------------------------------------------------------------------------\n" + FUSE_RULE);
+        return res;
     }
 
     @Override

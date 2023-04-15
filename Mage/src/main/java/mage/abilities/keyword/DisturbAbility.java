@@ -37,7 +37,7 @@ public class DisturbAbility extends SpellAbility {
         this.setCardName(card.getSecondCardFace().getName() + " with Disturb");
         this.zone = Zone.GRAVEYARD;
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
-        this.spellAbilityCastMode = SpellAbilityCastMode.DISTURB;
+        this.spellAbilityCastMode = SpellAbilityCastMode.TRANSFORMED;
 
         this.manaCost = manaCost;
         this.getManaCosts().clear();

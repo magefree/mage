@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author North
@@ -38,7 +39,7 @@ public final class CardScanner {
                 setsToAdd.add(new ExpansionInfo(set));
             } else if (!expansionInfo.name.equals(set.getName())
                     || !expansionInfo.code.equals(set.getCode())
-                    || (expansionInfo.blockName == null ? set.getBlockName() != null : !expansionInfo.blockName.equals(set.getBlockName()))
+                    || !(Objects.equals(expansionInfo.blockName, set.getBlockName()))
                     || !expansionInfo.releaseDate.equals(set.getReleaseDate())
                     || expansionInfo.type != set.getSetType()
                     || expansionInfo.boosters != set.hasBoosters()

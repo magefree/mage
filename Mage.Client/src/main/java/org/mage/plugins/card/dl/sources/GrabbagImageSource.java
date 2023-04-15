@@ -230,7 +230,7 @@ public enum GrabbagImageSource implements CardImageSource {
         singleLinks.put("SWS/Mountain-c", "wqXTdsC.jpg");
         singleLinks.put("SWS/Mountain-d", "9oBNCHk.jpg");
         singleLinks.put("SWS/N-1 Starfighter", "UH3qd7x.jpg");
-        singleLinks.put("SWS/Nebulon-B Frigate", "IwEpVkz.jpg");
+        singleLinks.put("SWS/Nebulon-B Frigate", "F0yIR08.jpg");
         singleLinks.put("SWS/Neophyte Hateflayer", "Has2AIW.jpg");
         singleLinks.put("SWS/Nerf Herder", "VUX0LHV.jpg");
         singleLinks.put("SWS/Nexu Stalker", "E1xxHe1.jpg");
@@ -415,6 +415,40 @@ public enum GrabbagImageSource implements CardImageSource {
         singleLinks.put("SWS/Tobias Beckett", "hzm6ilE.jpg");
         singleLinks.put("SWS/Underground Forum", "FH2pRfU.jpg");
         singleLinks.put("SWS/Chewbacca, the Beast", "Zb5TitZ.jpg");
+        singleLinks.put("SWS/A Jedi's Fervor", "5MjPOpE.jpg");
+        singleLinks.put("SWS/Allegiant General Pryde", "Ucithhc.jpg");
+        singleLinks.put("SWS/Balance", "EMdbTBj.jpg");
+        singleLinks.put("SWS/Band Together", "xc9dQaZ.jpg");
+        singleLinks.put("SWS/Ben Solo", "4GXbkI3.jpg");
+        singleLinks.put("SWS/Betray", "SjyF6Nq.jpg");
+        singleLinks.put("SWS/Brave the Elements", "z2etu3V.jpg");
+        singleLinks.put("SWS/Culling Dais", "NHRMrmo.jpg");
+        singleLinks.put("SWS/Droidsmith", "HYyiEI7.jpg");
+        singleLinks.put("SWS/Dyad Force Transfer", "dmyQ7Jm.jpg");
+        singleLinks.put("SWS/Festival of the Ancestors", "JUPnIEr.jpg");
+        singleLinks.put("SWS/First Order Jet Trooper", "wVqmWMK.jpg");
+        singleLinks.put("SWS/Force Lift", "46eGWAq.jpg");
+        singleLinks.put("SWS/General Organa", "YSv61yR.jpg");
+        singleLinks.put("SWS/Hidden Base", "M6BR6aH.jpg");
+        singleLinks.put("SWS/Hold Captive", "3dR542o.jpg");
+        singleLinks.put("SWS/Holochess", "lPS1mR6.jpg");
+        singleLinks.put("SWS/Knights of Ren", "vdXyRpy.jpg");
+        singleLinks.put("SWS/Lightspeed Skipping", "VRquVqA.jpg");
+        singleLinks.put("SWS/Luke's Lightsaber", "Ty3j9y3.jpg");
+        singleLinks.put("SWS/Mimic Vat", "9bAK1LC.jpg");
+        singleLinks.put("SWS/Orbak", "8RvSbhX.jpg");
+        singleLinks.put("SWS/Propaganda", "TBNlxqj.jpg");
+        singleLinks.put("SWS/Rey Skywalker", "dOyjNXc.jpg");
+        singleLinks.put("SWS/Rey's Lightsaber", "eMzKXAP.jpg");
+        singleLinks.put("SWS/Sith Eternal Lightning", "oaFkj3N.jpg");
+        singleLinks.put("SWS/Sith Wayfinder", "AznLRt0.jpg");
+        singleLinks.put("SWS/Swamp-e", "LrbqB3U.jpg");
+        singleLinks.put("SWS/Training Droid", "JCY9KOM.jpg");
+        singleLinks.put("SWS/Unpleasant Discovery", "lDKoeAu.jpg");
+        singleLinks.put("SWS/Vexis", "cNQX9Ue.jpg");
+        singleLinks.put("SWS/War Room", "pqQ9kzt.jpg");
+        singleLinks.put("SWS/Xyston Star Destroyer", "oqbHtUC.jpg");
+        singleLinks.put("SWS/Zorii Bliss", "vOyNE39.jpg");
 
         // Emblems
         singleLinks.put("SWS/Emblem Obi-Wan Kenobi", "Qyc10aT.png");
@@ -488,7 +522,7 @@ public enum GrabbagImageSource implements CardImageSource {
         if (!httpImageUrl.startsWith("/MTG")) {
             try {
                 TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException ex) {
+            } catch (InterruptedException ignored) {
             }
         }
     }

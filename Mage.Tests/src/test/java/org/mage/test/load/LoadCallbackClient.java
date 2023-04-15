@@ -7,6 +7,7 @@ import mage.remote.Session;
 import mage.view.*;
 import org.apache.log4j.Logger;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -29,8 +30,11 @@ public class LoadCallbackClient implements CallbackClient {
 
     private GameView gameView;
 
-    public LoadCallbackClient(boolean joinGameChat) {
+    private final String logsPrefix;
+
+    public LoadCallbackClient(boolean joinGameChat, String logsPrefix) {
         this.joinGameChat = joinGameChat;
+        this.logsPrefix = logsPrefix;
     }
 
     @Override
@@ -59,7 +63,7 @@ public class LoadCallbackClient implements CallbackClient {
 
             case CHATMESSAGE: {
                 ChatMessage message = (ChatMessage) callback.getData();
-                log.info("Chat message: " + message.getMessage());
+                log.info(getLogStartInfo() + "chat message: " + message.getMessage());
                 break;
             }
 
@@ -81,10 +85,16 @@ public class LoadCallbackClient implements CallbackClient {
                 break;
             }
 
+            case SHOW_USERMESSAGE: {
+                List<String> messageData = (List<String>) callback.getData();
+                log.info(getLogStartInfo() + "warning message: " + String.join(" - ", messageData));
+                break;
+            }
+
             case GAME_TARGET: {
                 GameClientMessage message = (GameClientMessage) callback.getData();
                 this.gameView = message.getGameView();
-                log.info("Target: " + message.getMessage());
+                log.info(getLogStartInfo() + " target: " + message.getMessage());
                 switch (message.getMessage()) {
                     case "Select a starting player":
                         session.sendPlayerUUID(gameId, playerId);
@@ -104,7 +114,7 @@ public class LoadCallbackClient implements CallbackClient {
 
             case GAME_ASK: {
                 GameClientMessage message = (GameClientMessage) callback.getData();
-                log.info(getLogStartInfo() + "Ask: " + message.getMessage());
+                log.info(getLogStartInfo() + "ask: " + message.getMessage());
                 if (message.getMessage().startsWith("Mulligan")) {
                     session.sendPlayerBoolean(gameId, false);
                     return;
@@ -116,7 +126,7 @@ public class LoadCallbackClient implements CallbackClient {
 
             case GAME_SELECT: {
                 GameClientMessage message = (GameClientMessage) callback.getData();
-                log.info("Select: " + message.getMessage());
+                log.info(getLogStartInfo() + "select: " + message.getMessage());
                 this.gameView = message.getGameView();
 
                 // concede
@@ -142,14 +152,14 @@ public class LoadCallbackClient implements CallbackClient {
             }
 
             case GAME_OVER:
-                log.info(getLogStartInfo() + "Game over");
+                log.info(getLogStartInfo() + "game over");
                 gameOver = true;
                 break;
 
             case END_GAME_INFO:
                 GameEndView message = (GameEndView) callback.getData();
                 this.gameResult = message.hasWon() ? "win" : "lose";
-                log.info(getLogStartInfo() + "Game end info, " + this.gameResult);
+                log.info(getLogStartInfo() + "game end info, " + this.gameResult);
                 break;
 
             // skip callbacks (no need to react)
@@ -158,7 +168,7 @@ public class LoadCallbackClient implements CallbackClient {
                 break;
 
             default:
-                log.error(getLogStartInfo() + "Unknown callback: " + callback.getMethod() + ", " + callback.getData().toString());
+                log.error(getLogStartInfo() + "unknown callback: " + callback.getMethod() + ", " + callback.getData().toString());
                 session.sendPlayerBoolean(gameId, false);
                 return;
             //break;
@@ -180,16 +190,14 @@ public class LoadCallbackClient implements CallbackClient {
         String mes = "";
 
         //throw new IllegalArgumentException("test exception");
-        if (this.session != null) {
-            mes += session.getUserName() + ": ";
-        }
 
         PlayerView p = getPlayer();
         if (this.gameView != null && p != null && this.gameView.getStep() != null) {
+            // never calls for client side client, cause it used as game's watcher, not a player
             mes += "T" + this.gameView.getTurn() + "-" + this.gameView.getStep().getIndex() + ", L:" + p.getLibraryCount() + ", H:" + getPlayer().getHandCount() + ": ";
         }
 
-        return mes;
+        return logsPrefix + ": " + mes;
     }
 
     public void setSession(Session session) {
@@ -215,7 +223,7 @@ public class LoadCallbackClient implements CallbackClient {
                 }
 
                 if (controlCount > 5) {
-                    log.warn(getLogStartInfo() + "Game seems frozen. Sending boolean message to server.");
+                    log.warn(getLogStartInfo() + "game seems frozen. Sending boolean message to server.");
                     session.sendPlayerBoolean(gameId, false);
                     controlCount = 0;
                 }

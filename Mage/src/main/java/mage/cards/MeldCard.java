@@ -109,6 +109,8 @@ public abstract class MeldCard extends CardImpl {
 
     @Override
     public boolean isTransformable() {
+        // there are multiple day cards for one meld card, so can't show it as second side
+        // TODO: can be fixed after mutiple sides implement, e.g. with Mutate support
         return false;
     }
 

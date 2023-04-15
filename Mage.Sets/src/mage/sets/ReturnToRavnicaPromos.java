@@ -29,6 +29,6 @@ public class ReturnToRavnicaPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Dryad Militant", 214, Rarity.UNCOMMON, mage.cards.d.DryadMilitant.class));
         cards.add(new SetCardInfo("Grove of the Guardian", "240*", Rarity.RARE, mage.cards.g.GroveOfTheGuardian.class));
         cards.add(new SetCardInfo("Hypersonic Dragon", "170*", Rarity.RARE, mage.cards.h.HypersonicDragon.class));
-        cards.add(new SetCardInfo("Supreme Verdict", "*201", Rarity.RARE, mage.cards.s.SupremeVerdict.class));
+        cards.add(new SetCardInfo("Supreme Verdict", "201*", Rarity.RARE, mage.cards.s.SupremeVerdict.class));
     }
 }

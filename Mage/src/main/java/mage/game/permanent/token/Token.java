@@ -17,8 +17,6 @@ public interface Token extends MageObject {
     @Override
     Token copy();
 
-    String getTokenDescriptor();
-
     String getDescription();
 
     List<UUID> getLastAddedTokenIds();
@@ -60,6 +58,4 @@ public interface Token extends MageObject {
     void setCopySourceCard(Card copySourceCard);
 
     void setExpansionSetCodeForImage(String code);
-
-    boolean updateExpansionSetCode(String setCode);
 }

@@ -13,6 +13,10 @@ import java.util.Arrays;
  */
 public final class PhyrexianHorrorRedToken extends TokenImpl {
 
+    public PhyrexianHorrorRedToken() {
+        this(0);
+    }
+
     public PhyrexianHorrorRedToken(int xValue) {
         super("Phyrexian Horror Token", "X/1 red Phyrexian Horror creature token with trample and haste");
         cardType.add(CardType.CREATURE);

@@ -7,13 +7,14 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
+import mage.filter.common.FilterAnyTarget;
+import mage.filter.common.FilterPermanentOrPlayer;
 import mage.filter.predicate.other.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetPermanentOrPlayer;
 
 import java.io.ObjectStreamException;
 import java.util.UUID;
@@ -23,23 +24,21 @@ import java.util.UUID;
  */
 public final class ArcTrail extends CardImpl {
 
+    private static final FilterPermanentOrPlayer filter1 = new FilterAnyTarget("creature, player or planeswalker to deal 2 damage");
+    private static final FilterPermanentOrPlayer filter2 = new FilterAnyTarget("another creature, player or planeswalker to deal 1 damage");
+
+    static {
+        filter2.getPermanentFilter().add(new AnotherTargetPredicate(2));
+        filter2.getPlayerFilter().add(new AnotherTargetPredicate(2));
+    }
+
     public ArcTrail(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}");
 
         // Arc Trail deals 2 damage to any target and 1 damage to another any target
-        FilterCreaturePlayerOrPlaneswalker filter1 = new FilterCreaturePlayerOrPlaneswalker("creature, player or planeswalker to deal 2 damage");
-        TargetAnyTarget target1 = new TargetAnyTarget(1, 1, filter1);
-        target1.setTargetTag(1);
-        this.getSpellAbility().addTarget(target1);
-
-        FilterCreaturePlayerOrPlaneswalker filter2 = new FilterCreaturePlayerOrPlaneswalker("another creature, player or planeswalker to deal 1 damage");
-        filter2.getPermanentFilter().add(new AnotherTargetPredicate(2));
-        filter2.getPlayerFilter().add(new AnotherTargetPredicate(2));
-        TargetAnyTarget target2 = new TargetAnyTarget(1, 1, filter2);
-        target2.setTargetTag(2);
-        this.getSpellAbility().addTarget(target2);
-
         this.getSpellAbility().addEffect(ArcTrailEffect.getInstance());
+        this.getSpellAbility().addTarget(new TargetPermanentOrPlayer(filter1).setTargetTag(1));
+        this.getSpellAbility().addTarget(new TargetPermanentOrPlayer(filter2).setTargetTag(2));
     }
 
     private ArcTrail(final ArcTrail card) {

@@ -7,6 +7,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.command.CommandObject;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
@@ -133,6 +134,7 @@ public class CopyEffect extends ContinuousEffectImpl {
         permanent.getPower().setModifiedBaseValue(copyFromObject.getPower().getModifiedBaseValue());
         permanent.getToughness().setModifiedBaseValue(copyFromObject.getToughness().getModifiedBaseValue());
         permanent.setStartingLoyalty(copyFromObject.getStartingLoyalty());
+        permanent.setStartingDefense(copyFromObject.getStartingDefense());
         if (copyFromObject instanceof Permanent) {
             Permanent targetPermanent = (Permanent) copyFromObject;
             permanent.setTransformed(targetPermanent.isTransformed());
@@ -142,13 +144,38 @@ public class CopyEffect extends ContinuousEffectImpl {
         }
 
         // to get the image of the copied permanent copy number und expansionCode
-        if (copyFromObject instanceof PermanentCard) {
-            permanent.setCardNumber(((PermanentCard) copyFromObject).getCard().getCardNumber());
-            permanent.setExpansionSetCode(((PermanentCard) copyFromObject).getCard().getExpansionSetCode());
-        } else if (copyFromObject instanceof PermanentToken || copyFromObject instanceof Card) {
-            permanent.setCardNumber(((Card) copyFromObject).getCardNumber());
-            permanent.setExpansionSetCode(((Card) copyFromObject).getExpansionSetCode());
+        String needSetCode;
+        String needCardNumber;
+        int needTokenType;
+        if (copyFromObject instanceof CommandObject) {
+            needSetCode = ((CommandObject) copyFromObject).getExpansionSetCodeForImage();
+            needCardNumber = "0";
+            needTokenType = 0;
+        } else if (copyFromObject instanceof PermanentCard) {
+            needSetCode = ((PermanentCard) copyFromObject).getExpansionSetCode();
+            needCardNumber = ((PermanentCard) copyFromObject).getCardNumber();
+            needTokenType = 0;
+        } else if (copyFromObject instanceof PermanentToken) {
+            needSetCode = ((PermanentToken) copyFromObject).getToken().getOriginalExpansionSetCode();
+            needCardNumber = ((PermanentToken) copyFromObject).getToken().getOriginalCardNumber();
+            needTokenType = ((PermanentToken) copyFromObject).getToken().getTokenType();
+        } else if (copyFromObject instanceof Card) {
+            needSetCode = ((Card) copyFromObject).getExpansionSetCode();
+            needCardNumber = ((Card) copyFromObject).getCardNumber();
+            needTokenType = 0;
+        } else {
+            throw new IllegalStateException("Unsupported copyFromObject class: " + copyFromObject.getClass().getSimpleName());
         }
+
+        if (permanent instanceof PermanentToken) {
+            ((PermanentToken) permanent).getToken().setOriginalExpansionSetCode(needSetCode);
+            ((PermanentToken) permanent).getToken().setExpansionSetCodeForImage(needSetCode);
+            ((PermanentToken) permanent).getToken().setTokenType(needTokenType);
+        } else {
+            permanent.setExpansionSetCode(needSetCode);
+            permanent.setCardNumber(needCardNumber);
+        }
+
         return true;
     }
 
@@ -173,8 +200,9 @@ public class CopyEffect extends ContinuousEffectImpl {
         return applier;
     }
 
-    public void setApplier(CopyApplier applier) {
+    public CopyEffect setApplier(CopyApplier applier) {
         this.applier = applier;
+        return this;
     }
 
 }

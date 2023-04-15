@@ -16,6 +16,8 @@ public interface DownloadServiceInfo {
     void updateGlobalMessage(String text);
 
     void updateProgressMessage(String text);
+    
+    void updateProgressMessage(String text, int progressCurrent, int progressNeed);
 
     void showDownloadControls(boolean needToShow);
 

@@ -13,11 +13,11 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
+import mage.filter.common.FilterAnyTarget;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetPermanentOrPlayer;
 
 import java.util.UUID;
 
@@ -50,6 +50,12 @@ public class PhyrexianVindicator extends CardImpl {
 
 class PhyrexianVindicatorEffect extends ReplacementEffectImpl {
 
+    private static final FilterAnyTarget filter = new FilterAnyTarget("any other target");
+
+    static {
+        filter.getPermanentFilter().add(AnotherPredicate.instance);
+    }
+
     public PhyrexianVindicatorEffect() {
         super(Duration.WhileOnBattlefield, Outcome.PreventDamage);
         staticText = "If damage would be dealt to {this}, prevent that damage. When damage is prevented this way, " +
@@ -67,16 +73,15 @@ class PhyrexianVindicatorEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        int damage = event.getAmount();
-        game.preventDamage(event, source, game, Integer.MAX_VALUE);
-        ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
-                new DamageTargetEffect(damage), false,
-                "{this} deals that much damage to any other target"
-        );
-        FilterCreaturePlayerOrPlaneswalker filter = new FilterCreaturePlayerOrPlaneswalker("any other target");
-        filter.getPermanentFilter().add(AnotherPredicate.instance);
-        ability.addTarget(new TargetAnyTarget(filter));
-        game.fireReflexiveTriggeredAbility(ability, source);
+        int damage = game.preventDamage(event, source, game, Integer.MAX_VALUE).getPreventedDamage();
+        if (damage > 0) {
+            ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
+                    new DamageTargetEffect(damage), false,
+                    "{this} deals that much damage to any other target"
+            );
+            ability.addTarget(new TargetPermanentOrPlayer(filter));
+            game.fireReflexiveTriggeredAbility(ability, source);
+        }
         return false;
     }
 

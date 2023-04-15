@@ -10,6 +10,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.mana.ConditionalColorlessManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.ManaCondition;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -87,7 +88,8 @@ class AutomatedArtificerManaCondition extends ManaCondition {
                     return false;
                 }
                 if (object instanceof Commander) {
-                    return ((Commander) object).getSourceObject().isArtifact(game);
+                    Card card = ((Commander) object).getSourceObject();
+                    return card != null && card.isArtifact(game);
                 }
                 return object.isArtifact(game);
         }
