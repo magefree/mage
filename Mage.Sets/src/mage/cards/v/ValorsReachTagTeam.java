@@ -17,7 +17,7 @@ public final class ValorsReachTagTeam extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "");
 
         this.color.setWhite(true);
-        this.color.setBlue(true);
+        this.color.setRed(true);
         this.nightCard = true;
 
         // Create two 3/2 red and white Warrior creature tokens with "Whenever this creature and at least one other creature token attack, put a +1/+1 counter on this creature."
