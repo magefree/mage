@@ -15,11 +15,12 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.UUID;
 
 public class OmnathLocusOfAll extends CardImpl {
+
     public OmnathLocusOfAll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B/P}{R}{G}");
         this.addSuperType(SuperType.LEGENDARY);
@@ -28,12 +29,12 @@ public class OmnathLocusOfAll extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        //If you would lose unspent mana, that mana becomes black instead.
+        // If you would lose unspent mana, that mana becomes black instead.
         this.addAbility(new SimpleStaticAbility(new OmnathLocusOfAllManaEffect()));
 
-        //At the beginning of your precombat main phase, look at the top card of your library. You may reveal that card
-        //if it has three or more colored mana symbols in its mana cost. If you do, add three mana in any combination of
-        //colors and put it into your hand. If you don’t reveal it, put it into your hand.
+        // At the beginning of your precombat main phase, look at the top card of your library. You may reveal that card
+        // if it has three or more colored mana symbols in its mana cost. If you do, add three mana in any combination of
+        // colors and put it into your hand. If you don’t reveal it, put it into your hand.
         this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(
                 new OmnathLocusOfAllCardEffect(), TargetController.YOU, false
         ));
@@ -76,14 +77,17 @@ class OmnathLocusOfAllManaEffect extends ContinuousEffectImpl {
 }
 
 class OmnathLocusOfAllCardEffect extends OneShotEffect {
-    public OmnathLocusOfAllCardEffect() {
+
+    private static final String wubrg = "WUBRG";
+
+    OmnathLocusOfAllCardEffect() {
         super(Outcome.Benefit);
         this.staticText = "look at the top card of your library. You may reveal that card if it has three or more " +
                 "colored mana symbols in its mana cost. If you do, add three mana in any combination of colors and " +
                 "put it into your hand. If you don't reveal it, put it into your hand.";
     }
 
-    public OmnathLocusOfAllCardEffect(final OmnathLocusOfAllCardEffect effect) {
+    private OmnathLocusOfAllCardEffect(final OmnathLocusOfAllCardEffect effect) {
         super(effect);
     }
 
@@ -103,35 +107,17 @@ class OmnathLocusOfAllCardEffect extends OneShotEffect {
             return false;
         }
         player.lookAtCards(null, card, game);
-        int amountOfDifferentManaColors = 0;
-        List<ColoredManaSymbol> manaList = new ArrayList<>();
-        if (card.getManaCost().containsColor(ColoredManaSymbol.W)) {
-            amountOfDifferentManaColors++;
-            manaList.add(ColoredManaSymbol.W);
-        }
-        if (card.getManaCost().containsColor(ColoredManaSymbol.U)) {
-            amountOfDifferentManaColors++;
-            manaList.add(ColoredManaSymbol.U);
-        }
-        if (card.getManaCost().containsColor(ColoredManaSymbol.B)) {
-            amountOfDifferentManaColors++;
-            manaList.add(ColoredManaSymbol.B);
-        }
-        if (card.getManaCost().containsColor(ColoredManaSymbol.R)) {
-            amountOfDifferentManaColors++;
-            manaList.add(ColoredManaSymbol.R);
-        }
-        if (card.getManaCost().containsColor(ColoredManaSymbol.G)) {
-            amountOfDifferentManaColors++;
-            manaList.add(ColoredManaSymbol.G);
-        }
-        if (amountOfDifferentManaColors > 2) {
-            if (!player.chooseUse(outcome, "Reveal " + card.getName() + '?', source, game)) {
-                player.moveCards(card, Zone.HAND, source, game);
-                return true;
-            }
+        if (card.getManaCostSymbols()
+                .stream()
+                .map(String::toCharArray)
+                .map(Arrays::asList)
+                .flatMap(Collection::stream)
+                .map(c -> "" + c)
+                .filter(wubrg::contains)
+                .count() >= 3
+                && player.chooseUse(outcome, "Reveal " + card.getName() + '?', source, game)) {
             player.revealCards(source, new CardsImpl(card), game);
-            new AddManaInAnyCombinationEffect(3, manaList.toArray(new ColoredManaSymbol[0])).apply(game, source);
+            new AddManaInAnyCombinationEffect(3).apply(game, source);
         }
         player.moveCards(card, Zone.HAND, source, game);
         return true;

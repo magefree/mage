@@ -179,8 +179,6 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Jin-Gitaxias", 65, Rarity.MYTHIC, mage.cards.j.JinGitaxias.class));
         cards.add(new SetCardInfo("Joyful Stormsculptor", 243, Rarity.UNCOMMON, mage.cards.j.JoyfulStormsculptor.class));
         cards.add(new SetCardInfo("Jungle Hollow", 270, Rarity.COMMON, mage.cards.j.JungleHollow.class));
-        cards.add(new SetCardInfo("Omnath, Locus of All", 249, Rarity.RARE, mage.cards.o.OmnathLocusOfAll.class));
-        cards.add(new SetCardInfo("Moment of Truth", 67, Rarity.COMMON, mage.cards.m.MomentOfTruth.class));
         cards.add(new SetCardInfo("Kami of Whispered Hopes", 196, Rarity.UNCOMMON, mage.cards.k.KamiOfWhisperedHopes.class));
         cards.add(new SetCardInfo("Karsus Depthguard", 150, Rarity.COMMON, mage.cards.k.KarsusDepthguard.class));
         cards.add(new SetCardInfo("Khenra Spellspear", 151, Rarity.UNCOMMON, mage.cards.k.KhenraSpellspear.class));
@@ -204,6 +202,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Mirran Banesplitter", 154, Rarity.COMMON, mage.cards.m.MirranBanesplitter.class));
         cards.add(new SetCardInfo("Mirrodin Avenged", 118, Rarity.COMMON, mage.cards.m.MirrodinAvenged.class));
         cards.add(new SetCardInfo("Mirror-Shield Hoplite", 247, Rarity.UNCOMMON, mage.cards.m.MirrorShieldHoplite.class));
+        cards.add(new SetCardInfo("Moment of Truth", 67, Rarity.COMMON, mage.cards.m.MomentOfTruth.class));
         cards.add(new SetCardInfo("Monastery Mentor", 28, Rarity.MYTHIC, mage.cards.m.MonasteryMentor.class));
         cards.add(new SetCardInfo("Mountain", 280, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mutagen Connoisseur", 248, Rarity.UNCOMMON, mage.cards.m.MutagenConnoisseur.class));
@@ -214,6 +213,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Norn's Inquisitor", 29, Rarity.UNCOMMON, mage.cards.n.NornsInquisitor.class));
         cards.add(new SetCardInfo("Oculus Whelp", 69, Rarity.COMMON, mage.cards.o.OculusWhelp.class));
         cards.add(new SetCardInfo("Omen Hawker", 70, Rarity.UNCOMMON, mage.cards.o.OmenHawker.class));
+        cards.add(new SetCardInfo("Omnath, Locus of All", 249, Rarity.RARE, mage.cards.o.OmnathLocusOfAll.class));
         cards.add(new SetCardInfo("Onakke Javelineer", 156, Rarity.COMMON, mage.cards.o.OnakkeJavelineer.class));
         cards.add(new SetCardInfo("Oracle of Tragedy", 71, Rarity.UNCOMMON, mage.cards.o.OracleOfTragedy.class));
         cards.add(new SetCardInfo("Order of the Alabaster Host", 72, Rarity.COMMON, mage.cards.o.OrderOfTheAlabasterHost.class));

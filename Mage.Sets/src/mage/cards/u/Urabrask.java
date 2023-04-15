@@ -11,6 +11,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ExileAndReturnSourceEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -49,6 +50,7 @@ public final class Urabrask extends CardImpl {
         this.addAbility(ability);
 
         // {R}: Exile Urabrask, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery and only if you've cast three or more instant and/or sorcery spells this turn.
+        this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalActivatedAbility(
                 new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED),
                 new ManaCostsImpl<>("{R}"), UrabraskCondition.instance
