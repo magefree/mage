@@ -84,6 +84,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Cut Short", 10, Rarity.COMMON, mage.cards.c.CutShort.class));
         cards.add(new SetCardInfo("Deadly Derision", 99, Rarity.COMMON, mage.cards.d.DeadlyDerision.class));
         cards.add(new SetCardInfo("Deeproot Wayfinder", 184, Rarity.RARE, mage.cards.d.DeeprootWayfinder.class));
+        cards.add(new SetCardInfo("Defiant Thundermaw", 149, Rarity.MYTHIC, mage.cards.d.DefiantThundermaw.class));
         cards.add(new SetCardInfo("Deluge of the Dead", 115, Rarity.MYTHIC, mage.cards.d.DelugeOfTheDead.class));
         cards.add(new SetCardInfo("Dismal Backwater", 269, Rarity.COMMON, mage.cards.d.DismalBackwater.class));
         cards.add(new SetCardInfo("Disturbing Conversion", 54, Rarity.COMMON, mage.cards.d.DisturbingConversion.class));
@@ -174,6 +175,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Invasion of Ravnica", 1, Rarity.MYTHIC, mage.cards.i.InvasionOfRavnica.class));
         cards.add(new SetCardInfo("Invasion of Segovia", 63, Rarity.RARE, mage.cards.i.InvasionOfSegovia.class));
         cards.add(new SetCardInfo("Invasion of Shandalar", 193, Rarity.MYTHIC, mage.cards.i.InvasionOfShandalar.class));
+        cards.add(new SetCardInfo("Invasion of Tarkir", 149, Rarity.MYTHIC, mage.cards.i.InvasionOfTarkir.class));
         cards.add(new SetCardInfo("Invasion of Theros", 23, Rarity.RARE, mage.cards.i.InvasionOfTheros.class));
         cards.add(new SetCardInfo("Invasion of Tolvada", 241, Rarity.RARE, mage.cards.i.InvasionOfTolvada.class));
         cards.add(new SetCardInfo("Invasion of Ulgrotha", 116, Rarity.UNCOMMON, mage.cards.i.InvasionOfUlgrotha.class));
