@@ -298,6 +298,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("The Broken Sky", 241, Rarity.RARE, mage.cards.t.TheBrokenSky.class));
         cards.add(new SetCardInfo("The Grand Evolution", 213, Rarity.MYTHIC, mage.cards.t.TheGrandEvolution.class));
         cards.add(new SetCardInfo("The Great Synthesis", 65, Rarity.MYTHIC, mage.cards.t.TheGreatSynthesis.class));
+        cards.add(new SetCardInfo("The Great Work", 169, Rarity.MYTHIC, mage.cards.t.TheGreatWork.class));
         cards.add(new SetCardInfo("The True Scriptures", 125, Rarity.MYTHIC, mage.cards.t.TheTrueScriptures.class));
         cards.add(new SetCardInfo("Thornwood Falls", 274, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
         cards.add(new SetCardInfo("Thrashing Frontliner", 167, Rarity.COMMON, mage.cards.t.ThrashingFrontliner.class));
@@ -312,6 +313,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Tribute to the World Tree", 211, Rarity.RARE, mage.cards.t.TributeToTheWorldTree.class));
         cards.add(new SetCardInfo("Truga Cliffcharger", 233, Rarity.UNCOMMON, mage.cards.t.TrugaCliffcharger.class));
         cards.add(new SetCardInfo("Unseal the Necropolis", 128, Rarity.COMMON, mage.cards.u.UnsealTheNecropolis.class));
+        cards.add(new SetCardInfo("Urabrask", 169, Rarity.MYTHIC, mage.cards.u.Urabrask.class));
         cards.add(new SetCardInfo("Urn of Godfire", 266, Rarity.COMMON, mage.cards.u.UrnOfGodfire.class));
         cards.add(new SetCardInfo("Vanquish the Weak", 129, Rarity.COMMON, mage.cards.v.VanquishTheWeak.class));
         cards.add(new SetCardInfo("Vengeant Earth", 212, Rarity.COMMON, mage.cards.v.VengeantEarth.class));
