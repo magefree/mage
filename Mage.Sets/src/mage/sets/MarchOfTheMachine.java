@@ -61,6 +61,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Breach the Multiverse", 94, Rarity.RARE, mage.cards.b.BreachTheMultiverse.class));
         cards.add(new SetCardInfo("Burning Sun's Fury", 133, Rarity.COMMON, mage.cards.b.BurningSunsFury.class));
         cards.add(new SetCardInfo("Burnished Dunestomper", 43, Rarity.COMMON, mage.cards.b.BurnishedDunestomper.class));
+        cards.add(new SetCardInfo("Caetus, Sea Tyrant of Segovia", 63, Rarity.RARE, mage.cards.c.CaetusSeaTyrantOfSegovia.class));
         cards.add(new SetCardInfo("Captive Weird", 49, Rarity.UNCOMMON, mage.cards.c.CaptiveWeird.class));
         cards.add(new SetCardInfo("Chandra, Hope's Beacon", 134, Rarity.MYTHIC, mage.cards.c.ChandraHopesBeacon.class));
         cards.add(new SetCardInfo("Change the Equation", 50, Rarity.UNCOMMON, mage.cards.c.ChangeTheEquation.class));
@@ -170,6 +171,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Invasion of New Capenna", 238, Rarity.UNCOMMON, mage.cards.i.InvasionOfNewCapenna.class));
         cards.add(new SetCardInfo("Invasion of Pyrulea", 240, Rarity.UNCOMMON, mage.cards.i.InvasionOfPyrulea.class));
         cards.add(new SetCardInfo("Invasion of Ravnica", 1, Rarity.MYTHIC, mage.cards.i.InvasionOfRavnica.class));
+        cards.add(new SetCardInfo("Invasion of Segovia", 63, Rarity.RARE, mage.cards.i.InvasionOfSegovia.class));
         cards.add(new SetCardInfo("Invasion of Shandalar", 193, Rarity.MYTHIC, mage.cards.i.InvasionOfShandalar.class));
         cards.add(new SetCardInfo("Invasion of Theros", 23, Rarity.RARE, mage.cards.i.InvasionOfTheros.class));
         cards.add(new SetCardInfo("Invasion of Tolvada", 241, Rarity.RARE, mage.cards.i.InvasionOfTolvada.class));
