@@ -19,21 +19,21 @@ import java.util.*;
  * @author TheElk801
  */
 public class DrawCardTriggeredAbility extends TriggeredAbilityImpl {
-    
+
     private static final Hint hint = new ValueHint(
             "Cards drawn this turn", CardsDrawnThisTurnDynamicValue.instance
     );
     private final TargetController targetController;
     private final int cardNumber;
-    
+
     public DrawCardTriggeredAbility(Effect effect, boolean optional, int cardNumber) {
         this(effect, optional, TargetController.YOU, cardNumber);
     }
-    
+
     public DrawCardTriggeredAbility(Effect effect, boolean optional, TargetController targetController, int cardNumber) {
         this(Zone.BATTLEFIELD, effect, optional, targetController, cardNumber);
     }
-    
+
     public DrawCardTriggeredAbility(Zone zone, Effect effect, boolean optional, TargetController targetController, int cardNumber) {
         super(zone, effect, optional);
         this.addWatcher(new DrawCardWatcher());
@@ -42,18 +42,18 @@ public class DrawCardTriggeredAbility extends TriggeredAbilityImpl {
         this.addHint(hint);
         setTriggerPhrase(generateTriggerPhrase());
     }
-    
+
     private DrawCardTriggeredAbility(final DrawCardTriggeredAbility ability) {
         super(ability);
         this.targetController = ability.targetController;
         this.cardNumber = ability.cardNumber;
     }
-    
+
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DREW_CARD;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         switch (targetController) {
@@ -78,7 +78,7 @@ public class DrawCardTriggeredAbility extends TriggeredAbilityImpl {
         }
         return DrawCardWatcher.checkEvent(event.getPlayerId(), event, game, cardNumber);
     }
-    
+
     public String generateTriggerPhrase() {
         switch (targetController) {
             case YOU:
@@ -91,7 +91,7 @@ public class DrawCardTriggeredAbility extends TriggeredAbilityImpl {
                 throw new IllegalArgumentException("TargetController " + targetController + " not supported");
         }
     }
-    
+
     @Override
     public DrawCardTriggeredAbility copy() {
         return new DrawCardTriggeredAbility(this);
@@ -99,13 +99,13 @@ public class DrawCardTriggeredAbility extends TriggeredAbilityImpl {
 }
 
 class DrawCardWatcher extends Watcher {
-    
+
     private final Map<UUID, List<UUID>> drawMap = new HashMap<>();
-    
+
     DrawCardWatcher() {
         super(WatcherScope.GAME);
     }
-    
+
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() != GameEvent.EventType.DREW_CARD) {
@@ -116,7 +116,7 @@ class DrawCardWatcher extends Watcher {
         }
         drawMap.get(event.getPlayerId()).add(event.getId());
     }
-    
+
     @Override
     public void reset() {
         super.reset();
