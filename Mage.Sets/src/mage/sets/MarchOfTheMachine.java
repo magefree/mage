@@ -300,6 +300,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Swiftwater Cliffs", 273, Rarity.COMMON, mage.cards.s.SwiftwaterCliffs.class));
         cards.add(new SetCardInfo("Sword of Once and Future", 265, Rarity.MYTHIC, mage.cards.s.SwordOfOnceAndFuture.class));
         cards.add(new SetCardInfo("Swordsworn Cavalier", 42, Rarity.COMMON, mage.cards.s.SwordswornCavalier.class));
+        cards.add(new SetCardInfo("Tandem Takedown", 208, Rarity.UNCOMMON, mage.cards.t.TandemTakedown.class));
         cards.add(new SetCardInfo("Tangled Skyline", 209, Rarity.UNCOMMON, mage.cards.t.TangledSkyline.class));
         cards.add(new SetCardInfo("Tarkir Duneshaper", 43, Rarity.COMMON, mage.cards.t.TarkirDuneshaper.class));
         cards.add(new SetCardInfo("Temporal Cleansing", 80, Rarity.COMMON, mage.cards.t.TemporalCleansing.class));
