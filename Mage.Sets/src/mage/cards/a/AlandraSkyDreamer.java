@@ -1,7 +1,7 @@
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.abilities.common.DrawCardTriggeredAbility;
+import mage.abilities.common.DrawNthCardTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,8 +34,7 @@ public final class AlandraSkyDreamer extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever you draw your second card earch turn, create a 2/2 blue Drake creature token with flying.
-        this.addAbility(
-                new DrawCardTriggeredAbility(
+        this.addAbility(new DrawNthCardTriggeredAbility(
                         new CreateTokenEffect(
                                 new DrakeToken()
                         ),
@@ -45,8 +44,7 @@ public final class AlandraSkyDreamer extends CardImpl {
         );
         
         // Whenever you draw your fifth card each turn, Drakes you control each get +X/+X until end of turn, where X is the number of cards in your hand.
-        this.addAbility(
-                new DrawCardTriggeredAbility(
+        this.addAbility(new DrawNthCardTriggeredAbility(
                         new BoostControlledEffect(
                             CardsInControllerHandCount.instance,
                                 CardsInControllerHandCount.instance,
@@ -60,8 +58,7 @@ public final class AlandraSkyDreamer extends CardImpl {
         );
         
         // Whenever you draw your fifth card each turn, Alandra, Sky Dreamer get +X/+X until end of turn, where X is the number of cards in your hand.
-        this.addAbility(
-                new DrawCardTriggeredAbility(
+        this.addAbility(new DrawNthCardTriggeredAbility(
                         new BoostSourceEffect(
                                 CardsInControllerHandCount.instance, 
                                 CardsInControllerHandCount.instance, 

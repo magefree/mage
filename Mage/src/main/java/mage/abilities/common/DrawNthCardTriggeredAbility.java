@@ -18,7 +18,7 @@ import java.util.*;
 /**
  * @author TheElk801
  */
-public class DrawCardTriggeredAbility extends TriggeredAbilityImpl {
+public class DrawNthCardTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final Hint hint = new ValueHint(
             "Cards drawn this turn", CardsDrawnThisTurnDynamicValue.instance
@@ -26,15 +26,15 @@ public class DrawCardTriggeredAbility extends TriggeredAbilityImpl {
     private final TargetController targetController;
     private final int cardNumber;
 
-    public DrawCardTriggeredAbility(Effect effect, boolean optional, int cardNumber) {
+    public DrawNthCardTriggeredAbility(Effect effect, boolean optional, int cardNumber) {
         this(effect, optional, TargetController.YOU, cardNumber);
     }
 
-    public DrawCardTriggeredAbility(Effect effect, boolean optional, TargetController targetController, int cardNumber) {
+    public DrawNthCardTriggeredAbility(Effect effect, boolean optional, TargetController targetController, int cardNumber) {
         this(Zone.BATTLEFIELD, effect, optional, targetController, cardNumber);
     }
 
-    public DrawCardTriggeredAbility(Zone zone, Effect effect, boolean optional, TargetController targetController, int cardNumber) {
+    public DrawNthCardTriggeredAbility(Zone zone, Effect effect, boolean optional, TargetController targetController, int cardNumber) {
         super(zone, effect, optional);
         this.addWatcher(new DrawCardWatcher());
         this.targetController = targetController;
@@ -43,7 +43,7 @@ public class DrawCardTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase(generateTriggerPhrase());
     }
 
-    private DrawCardTriggeredAbility(final DrawCardTriggeredAbility ability) {
+    private DrawNthCardTriggeredAbility(final DrawNthCardTriggeredAbility ability) {
         super(ability);
         this.targetController = ability.targetController;
         this.cardNumber = ability.cardNumber;
@@ -93,8 +93,8 @@ public class DrawCardTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public DrawCardTriggeredAbility copy() {
-        return new DrawCardTriggeredAbility(this);
+    public DrawNthCardTriggeredAbility copy() {
+        return new DrawNthCardTriggeredAbility(this);
     }
 }
 

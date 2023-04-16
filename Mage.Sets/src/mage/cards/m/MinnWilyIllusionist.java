@@ -3,7 +3,7 @@ package mage.cards.m;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
-import mage.abilities.common.DrawCardTriggeredAbility;
+import mage.abilities.common.DrawNthCardTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.Card;
@@ -41,7 +41,7 @@ public final class MinnWilyIllusionist extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you draw your second card each turn, create a 1/1 blue Illusion creature token with "This creature gets +1/+0 for each other Illusion you control."
-        this.addAbility(new DrawCardTriggeredAbility(
+        this.addAbility(new DrawNthCardTriggeredAbility(
                 new CreateTokenEffect(new MinnWilyIllusionistToken()), false, 2
         ));
 

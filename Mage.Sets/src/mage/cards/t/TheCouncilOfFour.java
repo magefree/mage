@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.common.CastSecondSpellTriggeredAbility;
-import mage.abilities.common.DrawCardTriggeredAbility;
+import mage.abilities.common.DrawNthCardTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -30,7 +30,7 @@ public final class TheCouncilOfFour extends CardImpl {
         this.toughness = new MageInt(8);
 
         // Whenever a player draws their second card during their turn, you draw a card.
-        this.addAbility(new DrawCardTriggeredAbility(
+        this.addAbility(new DrawNthCardTriggeredAbility(
                 new DrawCardSourceControllerEffect(1)
                         .setText("you draw a card"),
                 false, TargetController.ACTIVE, 2

@@ -1,7 +1,7 @@
 package mage.cards.l;
 
 import mage.MageInt;
-import mage.abilities.common.DrawCardTriggeredAbility;
+import mage.abilities.common.DrawNthCardTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +25,7 @@ public final class LatNamAdept extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you draw your second card each turn, put a +1/+1 counter on Lat-Nam Adept.
-        this.addAbility(new DrawCardTriggeredAbility(
+        this.addAbility(new DrawNthCardTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, 2
         ));
     }

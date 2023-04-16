@@ -1,7 +1,7 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.abilities.common.DrawCardTriggeredAbility;
+import mage.abilities.common.DrawNthCardTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -25,7 +25,7 @@ public final class MysticSkyfish extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever you draw your second card each turn, Mystic Skyfish gains flying until end of turn.
-        this.addAbility(new DrawCardTriggeredAbility(
+        this.addAbility(new DrawNthCardTriggeredAbility(
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), false, 2)
         );
     }
