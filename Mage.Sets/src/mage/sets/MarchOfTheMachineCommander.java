@@ -201,6 +201,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Mind Stone", 364, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Mindless Automaton", 365, Rarity.UNCOMMON, mage.cards.m.MindlessAutomaton.class));
         cards.add(new SetCardInfo("Mirror-Style Master", 32, Rarity.RARE, mage.cards.m.MirrorStyleMaster.class));
+        cards.add(new SetCardInfo("Mistmeadow Vanisher", 42, Rarity.RARE, mage.cards.m.MistmeadowVanisher.class));
         cards.add(new SetCardInfo("Mortify", 337, Rarity.UNCOMMON, mage.cards.m.Mortify.class));
         cards.add(new SetCardInfo("Mossfire Valley", 414, Rarity.RARE, mage.cards.m.MossfireValley.class));
         cards.add(new SetCardInfo("Mosswort Bridge", 415, Rarity.RARE, mage.cards.m.MosswortBridge.class));
