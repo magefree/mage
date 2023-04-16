@@ -289,6 +289,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Syr Konrad, the Grim", 269, Rarity.UNCOMMON, mage.cards.s.SyrKonradTheGrim.class));
         cards.add(new SetCardInfo("Tainted Field", 429, Rarity.UNCOMMON, mage.cards.t.TaintedField.class));
         cards.add(new SetCardInfo("Talisman of Hierarchy", 385, Rarity.UNCOMMON, mage.cards.t.TalismanOfHierarchy.class));
+        cards.add(new SetCardInfo("Teferi's Talent", 74, Rarity.RARE, mage.cards.t.TeferisTalent.class));
         cards.add(new SetCardInfo("Temple of Abandon", 430, Rarity.RARE, mage.cards.t.TempleOfAbandon.class));
         cards.add(new SetCardInfo("Temple of Deceit", 431, Rarity.RARE, mage.cards.t.TempleOfDeceit.class));
         cards.add(new SetCardInfo("Temple of Enlightenment", 432, Rarity.RARE, mage.cards.t.TempleOfEnlightenment.class));
