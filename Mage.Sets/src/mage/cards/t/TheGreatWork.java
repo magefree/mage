@@ -139,7 +139,7 @@ class TheGreatWorkReplacementEffect extends ReplacementEffectImpl {
 
     public TheGreatWorkReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Exile);
-        staticText = "iIf a spell cast this way would be put into a graveyard, exile it instead";
+        staticText = "if a spell cast this way would be put into a graveyard, exile it instead";
     }
 
     private TheGreatWorkReplacementEffect(final TheGreatWorkReplacementEffect effect) {

@@ -51,6 +51,7 @@ public final class RealmbreakerTheInvasionTree extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addEffect(new RealmbreakerTheInvasionTreeEffect());
         ability.addTarget(new TargetOpponent());
+        this.addAbility(ability);
 
         // {10}, {T}, Sacrifice Realmbreaker, the Invasion Tree: Search your library for any number of Praetor cards, put them onto the battlefield, then shuffle.
         ability = new SimpleActivatedAbility(new SearchLibraryPutInPlayEffect(

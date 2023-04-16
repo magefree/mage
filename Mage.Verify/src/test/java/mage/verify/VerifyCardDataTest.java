@@ -87,7 +87,7 @@ public class VerifyCardDataTest {
     private static final List<String> evergreenKeywords = Arrays.asList(
             "flying", "lifelink", "menace", "trample", "haste", "first strike", "hexproof", "fear",
             "deathtouch", "double strike", "indestructible", "reach", "flash", "defender", "vigilance",
-            "plainswalk", "islandwalk", "swampwalk", "mountainwalk", "forestwalk", "myriad"
+            "plainswalk", "islandwalk", "swampwalk", "mountainwalk", "forestwalk", "myriad", "prowess"
     );
 
     private static final List<String> doubleNumbers = new ArrayList<>();

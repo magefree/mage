@@ -78,7 +78,7 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
         StringBuilder sb = new StringBuilder(super.getRule());
         sb.append(" Activate only ");
         if (timing == TimingRule.SORCERY) {
-            sb.append("as a sorcery and only");
+            sb.append("as a sorcery and only ");
         }
         String conditionText = condition.toString();
         if (conditionText.startsWith("during")

@@ -88,31 +88,31 @@ public class CardsInHandCondition implements Condition {
         StringBuilder sb = new StringBuilder("if");
         switch (targetController) {
             case YOU:
-                sb.append(" you have");
+                sb.append(" you have ");
                 break;
             case ANY:
-                sb.append(" each player has");
+                sb.append(" each player has ");
                 break;
         }
         switch (this.type) {
             case FEWER_THAN:
-                sb.append(CardUtil.numberToText(count));
+                sb.append(CardUtil.numberToText(count - 1));
                 sb.append(" or fewer ");
                 break;
             case MORE_THAN:
-                sb.append(CardUtil.numberToText(count));
+                sb.append(CardUtil.numberToText(count + 1));
                 sb.append(" or more ");
                 break;
             case EQUAL_TO:
                 if (count > 0) {
-                    sb.append(" exactly ");
+                    sb.append("exactly ");
                     sb.append(CardUtil.numberToText(count));
                 } else {
-                    sb.append(" no ");
+                    sb.append("no ");
                 }
                 break;
         }
-        sb.append(" cards in hand");
+        sb.append("cards in hand");
         return sb.toString();
     }
 }

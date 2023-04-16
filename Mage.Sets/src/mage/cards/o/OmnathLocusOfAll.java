@@ -1,6 +1,7 @@
 package mage.cards.o;
 
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -83,8 +84,8 @@ class OmnathLocusOfAllCardEffect extends OneShotEffect {
     OmnathLocusOfAllCardEffect() {
         super(Outcome.Benefit);
         this.staticText = "look at the top card of your library. You may reveal that card if it has three or more " +
-                "colored mana symbols in its mana cost. If you do, add three mana in any combination of colors and " +
-                "put it into your hand. If you don't reveal it, put it into your hand.";
+                "colored mana symbols in its mana cost. If you do, add three mana in any combination of its colors " +
+                "and put it into your hand. If you don't reveal it, put it into your hand.";
     }
 
     private OmnathLocusOfAllCardEffect(final OmnathLocusOfAllCardEffect effect) {
@@ -115,9 +116,18 @@ class OmnathLocusOfAllCardEffect extends OneShotEffect {
                 .map(c -> "" + c)
                 .filter(wubrg::contains)
                 .count() >= 3
-                && player.chooseUse(outcome, "Reveal " + card.getName() + '?', source, game)) {
+                && player.chooseUse(outcome, "Reveal " + card.getName() + '?', source, game)
+        ) {
             player.revealCards(source, new CardsImpl(card), game);
-            new AddManaInAnyCombinationEffect(3).apply(game, source);
+            ColoredManaSymbol[] colors = card
+                    .getColor(game)
+                    .getColors()
+                    .stream()
+                    .map(ObjectColor::getOneColoredManaSymbol)
+                    .toArray(ColoredManaSymbol[]::new);
+            if (colors.length > 0) {
+                new AddManaInAnyCombinationEffect(3, colors).apply(game, source);
+            }
         }
         player.moveCards(card, Zone.HAND, source, game);
         return true;

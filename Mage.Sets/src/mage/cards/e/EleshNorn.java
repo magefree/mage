@@ -15,7 +15,9 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -28,6 +30,12 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class EleshNorn extends CardImpl {
+
+    private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent("other creatures");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
 
     public EleshNorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
@@ -51,7 +59,7 @@ public final class EleshNorn extends CardImpl {
                 new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED),
                 new ManaCostsImpl<>("{2}{W}")
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(3, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(3, filter)));
         this.addAbility(ability);
     }
 

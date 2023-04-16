@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 
 import java.util.UUID;
@@ -26,6 +25,7 @@ public final class ThaliaAndTheGitrogMonster extends CardImpl {
 
     private static final FilterPermanent filter
             = new FilterPermanent("creatures and nonbasic lands your opponents control");
+    private static final FilterPermanent filter2 = new FilterPermanent("a creature or land");
 
     static {
         filter.add(Predicates.or(
@@ -36,6 +36,10 @@ public final class ThaliaAndTheGitrogMonster extends CardImpl {
                 )
         ));
         filter.add(TargetController.OPPONENT.getControllerPredicate());
+        filter2.add(Predicates.or(
+                CardType.CREATURE.getPredicate(),
+                CardType.LAND.getPredicate()
+        ));
     }
 
     public ThaliaAndTheGitrogMonster(UUID ownerId, CardSetInfo setInfo) {
@@ -63,9 +67,7 @@ public final class ThaliaAndTheGitrogMonster extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new PermanentsEnterBattlefieldTappedEffect(filter)));
 
         // Whenever Thalia and The Gitrog Monster attacks, sacrifice a creature or land, then draw a card.
-        Ability ability = new AttacksTriggeredAbility(new SacrificeControllerEffect(
-                StaticFilters.FILTER_CONTROLLED_ARTIFACT_OR_CREATURE_SHORT_TEXT, 1, null
-        ));
+        Ability ability = new AttacksTriggeredAbility(new SacrificeControllerEffect(filter2, 1, null));
         ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy(", then"));
         this.addAbility(ability);
     }

@@ -31,7 +31,8 @@ public final class ScrappyBruiser extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Scrappy Bruiser attacks, up to one target attacking creature gets +2/+0 and gains trample until end of turn. Return that creature to its owner's hand at end of combat.
-        Ability ability = new AttacksTriggeredAbility(new BoostTargetEffect(2, 0));
+        Ability ability = new AttacksTriggeredAbility(new BoostTargetEffect(2, 0)
+                .setText("up to one target attacking creature gets +2/+0"));
         ability.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance())
                 .setText("and gains trample until end of turn"));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(

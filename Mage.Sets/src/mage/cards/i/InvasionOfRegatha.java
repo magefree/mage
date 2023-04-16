@@ -44,8 +44,11 @@ public final class InvasionOfRegatha extends CardImpl {
 
         // When Invasion of Regatha enters the battlefield, it deals 4 damage to another target battle or opponent and 1 damage to up to one target creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new DamageTargetEffect(4, "it")
-                        .setUseOnlyTargetPointer(true)
+                new DamageTargetEffect(
+                        4, true,
+                        "another target battle or opponent", "it"
+
+                ).setUseOnlyTargetPointer(true)
         );
         ability.addTarget(new TargetPermanentOrPlayer(filter));
         ability.addEffect(new DamageTargetEffect(1)
