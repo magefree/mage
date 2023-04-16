@@ -431,6 +431,14 @@ public final class StaticFilters {
         FILTER_CONTROLLED_ANOTHER_ARTIFACT.setLockedFilter(true);
     }
 
+    public static final FilterControlledPermanent FILTER_CONTROLLED_ANOTHER_ARTIFACT_SHORT_TEXT = new FilterControlledPermanent("another artifact");
+
+    static {
+        FILTER_CONTROLLED_ANOTHER_ARTIFACT_SHORT_TEXT.add(AnotherPredicate.instance);
+        FILTER_CONTROLLED_ANOTHER_ARTIFACT_SHORT_TEXT.add(CardType.ARTIFACT.getPredicate());
+        FILTER_CONTROLLED_ANOTHER_ARTIFACT_SHORT_TEXT.setLockedFilter(true);
+    }
+
     public static final FilterControlledPermanent FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE = new FilterControlledPermanent("another creature or artifact you control");
 
     static {

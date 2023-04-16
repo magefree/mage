@@ -113,6 +113,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fetid Heath", 399, Rarity.RARE, mage.cards.f.FetidHeath.class));
         cards.add(new SetCardInfo("Field of Ruin", 400, Rarity.UNCOMMON, mage.cards.f.FieldOfRuin.class));
         cards.add(new SetCardInfo("Fiery Confluence", 278, Rarity.RARE, mage.cards.f.FieryConfluence.class));
+        cards.add(new SetCardInfo("Filigree Vector", 15, Rarity.RARE, mage.cards.f.FiligreeVector.class));
         cards.add(new SetCardInfo("First-Sphere Gargantua", 248, Rarity.COMMON, mage.cards.f.FirstSphereGargantua.class));
         cards.add(new SetCardInfo("Flamerush Rider", 279, Rarity.RARE, mage.cards.f.FlamerushRider.class));
         cards.add(new SetCardInfo("Flameshadow Conjuring", 280, Rarity.RARE, mage.cards.f.FlameshadowConjuring.class));
