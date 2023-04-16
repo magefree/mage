@@ -254,6 +254,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Secure the Wastes", 203, Rarity.RARE, mage.cards.s.SecureTheWastes.class));
         cards.add(new SetCardInfo("Semester's End", 204, Rarity.RARE, mage.cards.s.SemestersEnd.class));
         cards.add(new SetCardInfo("Seraph of the Masses", 205, Rarity.UNCOMMON, mage.cards.s.SeraphOfTheMasses.class));
+        cards.add(new SetCardInfo("Shalai and Hallar", 10, Rarity.MYTHIC, mage.cards.s.ShalaiAndHallar.class));
         cards.add(new SetCardInfo("Sharding Sphinx", 235, Rarity.RARE, mage.cards.s.ShardingSphinx.class));
         cards.add(new SetCardInfo("Shattered Angel", 206, Rarity.UNCOMMON, mage.cards.s.ShatteredAngel.class));
         cards.add(new SetCardInfo("Shimmer Dragon", 236, Rarity.RARE, mage.cards.s.ShimmerDragon.class));
