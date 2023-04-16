@@ -329,6 +329,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Vivien's Talent", 78, Rarity.RARE, mage.cards.v.ViviensTalent.class));
         cards.add(new SetCardInfo("Vodalian Wave-Knight", 43, Rarity.RARE, mage.cards.v.VodalianWaveKnight.class));
         cards.add(new SetCardInfo("Vona, Butcher of Magan", 342, Rarity.MYTHIC, mage.cards.v.VonaButcherOfMagan.class));
+        cards.add(new SetCardInfo("Vulpine Harvester", 19, Rarity.RARE, mage.cards.v.VulpineHarvester.class));
         cards.add(new SetCardInfo("Wayfarer's Bauble", 389, Rarity.COMMON, mage.cards.w.WayfarersBauble.class));
         cards.add(new SetCardInfo("Wear // Tear", 343, Rarity.UNCOMMON, mage.cards.w.WearTear.class));
         cards.add(new SetCardInfo("Weirding Wood", 315, Rarity.UNCOMMON, mage.cards.w.WeirdingWood.class));
