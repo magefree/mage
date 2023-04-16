@@ -129,6 +129,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Genesis Hydra", 298, Rarity.RARE, mage.cards.g.GenesisHydra.class));
         cards.add(new SetCardInfo("Ghirapur Aether Grid", 281, Rarity.UNCOMMON, mage.cards.g.GhirapurAetherGrid.class));
         cards.add(new SetCardInfo("Gilded Goose", 299, Rarity.RARE, mage.cards.g.GildedGoose.class));
+        cards.add(new SetCardInfo("Gimbal, Gremlin Prodigy", 3, Rarity.MYTHIC, mage.cards.g.GimbalGremlinProdigy.class));
         cards.add(new SetCardInfo("Go for the Throat", 250, Rarity.UNCOMMON, mage.cards.g.GoForTheThroat.class));
         cards.add(new SetCardInfo("Goblin Instigator", 282, Rarity.COMMON, mage.cards.g.GoblinInstigator.class));
         cards.add(new SetCardInfo("Goblin Medics", 283, Rarity.COMMON, mage.cards.g.GoblinMedics.class));
