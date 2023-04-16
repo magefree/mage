@@ -310,6 +310,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Temporal Cleansing", 80, Rarity.COMMON, mage.cards.t.TemporalCleansing.class));
         cards.add(new SetCardInfo("Tenured Oilcaster", 126, Rarity.COMMON, mage.cards.t.TenuredOilcaster.class));
         cards.add(new SetCardInfo("Terror of Towashi", 331, Rarity.RARE, mage.cards.t.TerrorOfTowashi.class));
+        cards.add(new SetCardInfo("Thalia and The Gitrog Monster", 255, Rarity.MYTHIC, mage.cards.t.ThaliaAndTheGitrogMonster.class));
         cards.add(new SetCardInfo("The Argent Etchings", 12, Rarity.MYTHIC, mage.cards.t.TheArgentEtchings.class));
         cards.add(new SetCardInfo("The Broken Sky", 241, Rarity.RARE, mage.cards.t.TheBrokenSky.class));
         cards.add(new SetCardInfo("The Grand Evolution", 213, Rarity.MYTHIC, mage.cards.t.TheGrandEvolution.class));
