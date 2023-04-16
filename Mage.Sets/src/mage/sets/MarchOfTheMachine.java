@@ -259,6 +259,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Rankle and Torbran", 252, Rarity.RARE, mage.cards.r.RankleAndTorbran.class));
         cards.add(new SetCardInfo("Ravenous Sailback", 202, Rarity.UNCOMMON, mage.cards.r.RavenousSailback.class));
         cards.add(new SetCardInfo("Realmbreaker's Grasp", 33, Rarity.COMMON, mage.cards.r.RealmbreakersGrasp.class));
+        cards.add(new SetCardInfo("Realmbreaker, the Invasion Tree", 263, Rarity.RARE, mage.cards.r.RealmbreakerTheInvasionTree.class));
         cards.add(new SetCardInfo("Redcap Heelslasher", 161, Rarity.COMMON, mage.cards.r.RedcapHeelslasher.class));
         cards.add(new SetCardInfo("Referee Squad", 327, Rarity.UNCOMMON, mage.cards.r.RefereeSquad.class));
         cards.add(new SetCardInfo("Refraction Elemental", 146, Rarity.RARE, mage.cards.r.RefractionElemental.class));
