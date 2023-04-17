@@ -281,6 +281,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Sculpted Perfection", 253, Rarity.UNCOMMON, mage.cards.s.SculptedPerfection.class));
         cards.add(new SetCardInfo("Seal from Existence", 35, Rarity.UNCOMMON, mage.cards.s.SealFromExistence.class));
         cards.add(new SetCardInfo("Searing Barb", 163, Rarity.COMMON, mage.cards.s.SearingBarb.class));
+        cards.add(new SetCardInfo("See Double", 77, Rarity.RARE, mage.cards.s.SeeDouble.class));
         cards.add(new SetCardInfo("Seed of Hope", 204, Rarity.COMMON, mage.cards.s.SeedOfHope.class));
         cards.add(new SetCardInfo("Seedpod Caretaker", 325, Rarity.UNCOMMON, mage.cards.s.SeedpodCaretaker.class));
         cards.add(new SetCardInfo("Seer of Stolen Sight", 330, Rarity.UNCOMMON, mage.cards.s.SeerOfStolenSight.class));
