@@ -23,7 +23,7 @@ import mage.filter.common.FilterCreaturePermanent;
 public final class AlandraSkyDreamer extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.DRAKE, "Drakes");
-    
+
     public AlandraSkyDreamer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
         addSuperType(SuperType.LEGENDARY);
@@ -34,7 +34,8 @@ public final class AlandraSkyDreamer extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever you draw your second card earch turn, create a 2/2 blue Drake creature token with flying.
-        this.addAbility(new DrawNthCardTriggeredAbility(
+        this.addAbility(
+                new DrawNthCardTriggeredAbility(
                         new CreateTokenEffect(
                                 new DrakeToken()
                         ),
@@ -42,30 +43,30 @@ public final class AlandraSkyDreamer extends CardImpl {
                         2
                 )
         );
-        
+
         // Whenever you draw your fifth card each turn, Alandra, Sky Dreamer and Drakes you control each get +X/+X until end of turn, where X is the number of cards in your hand.
         DrawNthCardTriggeredAbility drawNthCardTriggeredAbility = new DrawNthCardTriggeredAbility(
+                new BoostSourceEffect(
+                        CardsInControllerHandCount.instance,
+                        CardsInControllerHandCount.instance,
+                        Duration.EndOfTurn
+                ).setText("{this}"),
+                false,
+                5
+        );
+        drawNthCardTriggeredAbility.addEffect(
                 new BoostControlledEffect(
                         CardsInControllerHandCount.instance,
                         CardsInControllerHandCount.instance,
                         Duration.EndOfTurn,
                         filter,
                         false
-                ),
-                false,
-                5
-        );
-        drawNthCardTriggeredAbility.addEffect(
-                new BoostSourceEffect(
-                                CardsInControllerHandCount.instance, 
-                                CardsInControllerHandCount.instance, 
-                                Duration.EndOfTurn
-                        )
+                ).setText("and Drakes you control each get +X/+X until end of turn, where X is the number of cards in your hand")
         );
         this.addAbility(
-            drawNthCardTriggeredAbility
+                drawNthCardTriggeredAbility
         );
-        
+
     }
 
     private AlandraSkyDreamer(final AlandraSkyDreamer card) {
