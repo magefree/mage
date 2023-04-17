@@ -38,6 +38,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.filter.predicate.permanent.LegendRuleAppliesPredicate;
 import mage.game.combat.Combat;
+import mage.game.combat.CombatGroup;
 import mage.game.command.*;
 import mage.game.command.dungeons.UndercityDungeon;
 import mage.game.events.*;
@@ -2519,8 +2520,18 @@ public abstract class GameImpl implements Game {
                     if (movePermanentToGraveyardWithInfo(perm)) {
                         somethingHappened = true;
                     }
-                } else if (this.getPlayer(perm.getProtectorId()) == null || perm.isControlledBy(perm.getProtectorId())) {
+                } else if (this
+                        .getCombat()
+                        .getGroups()
+                        .stream()
+                        .map(CombatGroup::getDefenderId)
+                        .noneMatch(perm.getId()::equals)
+                        && this.getPlayer(perm.getProtectorId()) == null
+                        || perm.isControlledBy(perm.getProtectorId())) {
                     perm.chooseProtector(this, null);
+                    if (this.getPlayer(perm.getProtectorId()) == null) {
+                        movePermanentToGraveyardWithInfo(perm);
+                    }
                     somethingHappened = true;
                 }
             }
@@ -2565,21 +2576,24 @@ public abstract class GameImpl implements Game {
                     }
                 }
             }
-            //20091005 - 704.5q If a creature is attached to an object or player, it becomes unattached and remains on the battlefield.
+            //20091005 - 704.5q If a creature or battle is attached to an object or player, it becomes unattached and remains on the battlefield.
             // Similarly, if a permanent that's neither an Aura, an Equipment, nor a Fortification is attached to an object or player,
             // it becomes unattached and remains on the battlefield.
             if (!perm.getAttachments().isEmpty()) {
                 for (UUID attachmentId : perm.getAttachments()) {
                     Permanent attachment = getPermanent(attachmentId);
-                    if (attachment != null
-                            && (attachment.isCreature(this)
-                            || !(attachment.hasSubtype(SubType.AURA, this)
+                    if (attachment == null) {
+                        continue;
+                    }
+                    if ((!attachment.isCreature(this) && !attachment.isBattle(this))
+                            && (attachment.hasSubtype(SubType.AURA, this)
                             || attachment.hasSubtype(SubType.EQUIPMENT, this)
-                            || attachment.hasSubtype(SubType.FORTIFICATION, this)))) {
-                        if (perm.removeAttachment(attachment.getId(), null, this)) {
-                            somethingHappened = true;
-                            break;
-                        }
+                            || attachment.hasSubtype(SubType.FORTIFICATION, this))) {
+                        continue;
+                    }
+                    if (perm.removeAttachment(attachment.getId(), null, this)) {
+                        somethingHappened = true;
+                        break;
                     }
                 }
             }
