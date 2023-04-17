@@ -136,6 +136,7 @@ public final class Judgment extends ExpansionSet {
         cards.add(new SetCardInfo("Silver Seraph", 23, Rarity.RARE, mage.cards.s.SilverSeraph.class));
         cards.add(new SetCardInfo("Solitary Confinement", 24, Rarity.RARE, mage.cards.s.SolitaryConfinement.class));
         cards.add(new SetCardInfo("Soulcatchers' Aerie", 25, Rarity.UNCOMMON, mage.cards.s.SoulcatchersAerie.class));
+        cards.add(new SetCardInfo("Soulgorger Orgg", 99, Rarity.UNCOMMON, mage.cards.s.SoulgorgerOrgg.class));
         cards.add(new SetCardInfo("Spellgorger Barbarian", 100, Rarity.COMMON, mage.cards.s.SpellgorgerBarbarian.class));
         cards.add(new SetCardInfo("Spelljack", 51, Rarity.RARE, mage.cards.s.Spelljack.class));
         cards.add(new SetCardInfo("Spirit Cairn", 26, Rarity.UNCOMMON, mage.cards.s.SpiritCairn.class));
