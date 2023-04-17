@@ -168,6 +168,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Invasion of Eldraine", 113, Rarity.UNCOMMON, mage.cards.i.InvasionOfEldraine.class));
         cards.add(new SetCardInfo("Invasion of Ergamon", 233, Rarity.UNCOMMON, mage.cards.i.InvasionOfErgamon.class));
         cards.add(new SetCardInfo("Invasion of Fiora", 114, Rarity.RARE, mage.cards.i.InvasionOfFiora.class));
+        cards.add(new SetCardInfo("Invasion of Gobakhan", 22, Rarity.RARE, mage.cards.i.InvasionOfGobakhan.class));
         cards.add(new SetCardInfo("Invasion of Innistrad", 115, Rarity.MYTHIC, mage.cards.i.InvasionOfInnistrad.class));
         cards.add(new SetCardInfo("Invasion of Ixalan", 191, Rarity.RARE, mage.cards.i.InvasionOfIxalan.class));
         cards.add(new SetCardInfo("Invasion of Kaladesh", 234, Rarity.UNCOMMON, mage.cards.i.InvasionOfKaladesh.class));
@@ -210,6 +211,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Kyren Flamewright", 147, Rarity.UNCOMMON, mage.cards.k.KyrenFlamewright.class));
         cards.add(new SetCardInfo("Lazotep Convert", 231, Rarity.UNCOMMON, mage.cards.l.LazotepConvert.class));
         cards.add(new SetCardInfo("Leyline Surge", 193, Rarity.MYTHIC, mage.cards.l.LeylineSurge.class));
+        cards.add(new SetCardInfo("Lightshield Array", 22, Rarity.RARE, mage.cards.l.LightshieldArray.class));
         cards.add(new SetCardInfo("Lithomantic Barrage", 152, Rarity.UNCOMMON, mage.cards.l.LithomanticBarrage.class));
         cards.add(new SetCardInfo("Malady Invoker", 189, Rarity.UNCOMMON, mage.cards.m.MaladyInvoker.class));
         cards.add(new SetCardInfo("Marauding Dreadship", 153, Rarity.COMMON, mage.cards.m.MaraudingDreadship.class));
