@@ -50,6 +50,8 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Belligerent Regisaur", 191, Rarity.RARE, mage.cards.b.BelligerentRegisaur.class));
         cards.add(new SetCardInfo("Bladed Battle-Fan", 91, Rarity.COMMON, mage.cards.b.BladedBattleFan.class));
         cards.add(new SetCardInfo("Blighted Burgeoning", 177, Rarity.COMMON, mage.cards.b.BlightedBurgeoning.class));
+        cards.add(new SetCardInfo("Blightreaper Thallid", 92, Rarity.UNCOMMON, mage.cards.b.BlightreaperThallid.class));
+        cards.add(new SetCardInfo("Blightsower Thallid", 92, Rarity.UNCOMMON, mage.cards.b.BlightsowerThallid.class));
         cards.add(new SetCardInfo("Bloated Processor", 93, Rarity.RARE, mage.cards.b.BloatedProcessor.class));
         cards.add(new SetCardInfo("Bloodfeather Phoenix", 132, Rarity.RARE, mage.cards.b.BloodfeatherPhoenix.class));
         cards.add(new SetCardInfo("Bloodfell Caves", 267, Rarity.COMMON, mage.cards.b.BloodfellCaves.class));
