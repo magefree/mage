@@ -72,6 +72,8 @@ public class VerifyCardDataTest {
     private static final HashMap<String, Set<String>> skipCheckLists = new HashMap<>();
     private static final Set<String> subtypesToIgnore = new HashSet<>();
     private static final String SKIP_LIST_PT = "PT";
+    private static final String SKIP_LIST_LOYALTY = "LOYALTY";
+    private static final String SKIP_LIST_DEFENSE = "DEFENSE";
     private static final String SKIP_LIST_COLOR = "COLOR";
     private static final String SKIP_LIST_COST = "COST";
     private static final String SKIP_LIST_SUPERTYPE = "SUPERTYPE";
@@ -105,6 +107,12 @@ public class VerifyCardDataTest {
 
         // power-toughness
         skipListCreate(SKIP_LIST_PT);
+
+        // loyalty
+        skipListCreate(SKIP_LIST_LOYALTY);
+
+        // defense
+        skipListCreate(SKIP_LIST_DEFENSE);
 
         // color
         skipListCreate(SKIP_LIST_COLOR);
@@ -1490,6 +1498,8 @@ public class VerifyCardDataTest {
         if (!CHECK_ONLY_ABILITIES_TEXT) {
             checkCost(card, ref);
             checkPT(card, ref);
+            checkLoyalty(card, ref);
+            checkDefense(card, ref);
             checkSubtypes(card, ref);
             checkSupertypes(card, ref);
             checkTypes(card, ref);
@@ -2017,6 +2027,42 @@ public class VerifyCardDataTest {
         } else {
             return found.equals(expected) || expected.contains("*");
         }
+    }
+
+    private void checkLoyalty(Card card, MtgJsonCard ref) {
+        if (skipListHaveName(SKIP_LIST_LOYALTY, card.getExpansionSetCode(), card.getName())) {
+            return;
+        }
+        if (ref.loyalty == null) {
+            if (card.getStartingLoyalty() == -1) {
+                return;
+            }
+        } else if (ref.loyalty.equals("X")) {
+            if (card.getStartingLoyalty() == -2) {
+                return;
+            }
+        } else if (ref.loyalty.equals("" + card.getStartingLoyalty())) {
+            return;
+        }
+        fail(card, "loyalty", card.getStartingLoyalty() + " != " + ref.loyalty);
+    }
+
+    private void checkDefense(Card card, MtgJsonCard ref) {
+        if (skipListHaveName(SKIP_LIST_DEFENSE, card.getExpansionSetCode(), card.getName())) {
+            return;
+        }
+        if (ref.defense == null) {
+            if (card.getStartingDefense() == -1) {
+                return;
+            }
+        } else if (ref.defense.equals("X")) {
+            if (card.getStartingDefense() == -2) {
+                return;
+            }
+        } else if (ref.defense.equals("" + card.getStartingDefense())) {
+            return;
+        }
+        fail(card, "defense", card.getStartingDefense() + " != " + ref.defense);
     }
 
     private void checkCost(Card card, MtgJsonCard ref) {
