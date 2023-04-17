@@ -118,6 +118,8 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Flamerush Rider", 279, Rarity.RARE, mage.cards.f.FlamerushRider.class));
         cards.add(new SetCardInfo("Flameshadow Conjuring", 280, Rarity.RARE, mage.cards.f.FlameshadowConjuring.class));
         cards.add(new SetCardInfo("Flight of Equenauts", 186, Rarity.UNCOMMON, mage.cards.f.FlightOfEquenauts.class));
+        cards.add(new SetCardInfo("Flockchaser Phantom", 41, Rarity.RARE, mage.cards.f.FlockchaserPhantom.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Flockchaser Phantom", 128, Rarity.RARE, mage.cards.f.FlockchaserPhantom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forgotten Ancient", 297, Rarity.RARE, mage.cards.f.ForgottenAncient.class));
         cards.add(new SetCardInfo("Fortified Village", 401, Rarity.RARE, mage.cards.f.FortifiedVillage.class));
         cards.add(new SetCardInfo("Foulmire Knight", 249, Rarity.UNCOMMON, mage.cards.f.FoulmireKnight.class));
