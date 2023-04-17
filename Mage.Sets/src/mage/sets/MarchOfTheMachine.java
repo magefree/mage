@@ -181,6 +181,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Invasion of Moag", 237, Rarity.UNCOMMON, mage.cards.i.InvasionOfMoag.class));
         cards.add(new SetCardInfo("Invasion of Muraganda", 192, Rarity.UNCOMMON, mage.cards.i.InvasionOfMuraganda.class));
         cards.add(new SetCardInfo("Invasion of New Capenna", 238, Rarity.UNCOMMON, mage.cards.i.InvasionOfNewCapenna.class));
+        cards.add(new SetCardInfo("Invasion of New Phyrexia", 239, Rarity.MYTHIC, mage.cards.i.InvasionOfNewPhyrexia.class));
         cards.add(new SetCardInfo("Invasion of Pyrulea", 240, Rarity.UNCOMMON, mage.cards.i.InvasionOfPyrulea.class));
         cards.add(new SetCardInfo("Invasion of Ravnica", 1, Rarity.MYTHIC, mage.cards.i.InvasionOfRavnica.class));
         cards.add(new SetCardInfo("Invasion of Regatha", 148, Rarity.UNCOMMON, mage.cards.i.InvasionOfRegatha.class));
@@ -320,6 +321,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Tandem Takedown", 208, Rarity.UNCOMMON, mage.cards.t.TandemTakedown.class));
         cards.add(new SetCardInfo("Tangled Skyline", 209, Rarity.UNCOMMON, mage.cards.t.TangledSkyline.class));
         cards.add(new SetCardInfo("Tarkir Duneshaper", 43, Rarity.COMMON, mage.cards.t.TarkirDuneshaper.class));
+        cards.add(new SetCardInfo("Teferi Akosa of Zhalfir", 239, Rarity.MYTHIC, mage.cards.t.TeferiAkosaOfZhalfir.class));
         cards.add(new SetCardInfo("Temporal Cleansing", 80, Rarity.COMMON, mage.cards.t.TemporalCleansing.class));
         cards.add(new SetCardInfo("Tenured Oilcaster", 126, Rarity.COMMON, mage.cards.t.TenuredOilcaster.class));
         cards.add(new SetCardInfo("Terror of Towashi", 331, Rarity.RARE, mage.cards.t.TerrorOfTowashi.class));
