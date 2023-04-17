@@ -341,6 +341,8 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Weirding Wood", 315, Rarity.UNCOMMON, mage.cards.w.WeirdingWood.class));
         cards.add(new SetCardInfo("Whirler Rogue", 244, Rarity.UNCOMMON, mage.cards.w.WhirlerRogue.class));
         cards.add(new SetCardInfo("Whirlwind of Thought", 344, Rarity.RARE, mage.cards.w.WhirlwindOfThought.class));
+        cards.add(new SetCardInfo("Wildfire Awakener", 44, Rarity.RARE, mage.cards.w.WildfireAwakener.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wildfire Awakener", 131, Rarity.RARE, mage.cards.w.WildfireAwakener.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wintermoor Commander", 345, Rarity.UNCOMMON, mage.cards.w.WintermoorCommander.class));
         cards.add(new SetCardInfo("Wood Elves", 316, Rarity.COMMON, mage.cards.w.WoodElves.class));
         cards.add(new SetCardInfo("Workshop Elders", 245, Rarity.RARE, mage.cards.w.WorkshopElders.class));
