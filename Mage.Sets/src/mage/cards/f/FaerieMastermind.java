@@ -1,7 +1,7 @@
 package mage.cards.f;
 
 import mage.MageInt;
-import mage.abilities.common.DrawSecondCardTriggeredAbility;
+import mage.abilities.common.DrawNthCardTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawCardAllEffect;
@@ -32,10 +32,10 @@ public class FaerieMastermind extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         //Whenever an opponent draws their second card each turn, you draw a card.
-        this.addAbility(new DrawSecondCardTriggeredAbility(
+        this.addAbility(new DrawNthCardTriggeredAbility(
                 new DrawCardSourceControllerEffect(1)
                         .setText("you draw a card"),
-                false, TargetController.OPPONENT
+                false, TargetController.OPPONENT, 2
         ));
 
         //{3}{U}: Each player draws a card.
