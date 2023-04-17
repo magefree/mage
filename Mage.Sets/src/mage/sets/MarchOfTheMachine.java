@@ -137,6 +137,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Golden-Scale Aeronaut", 15, Rarity.COMMON, mage.cards.g.GoldenScaleAeronaut.class));
         cards.add(new SetCardInfo("Grafted Butcher", 109, Rarity.RARE, mage.cards.g.GraftedButcher.class));
         cards.add(new SetCardInfo("Grandmother Ravi Sengir", 116, Rarity.UNCOMMON, mage.cards.g.GrandmotherRaviSengir.class));
+        cards.add(new SetCardInfo("Guardian of Ghirapur", 16, Rarity.RARE, mage.cards.g.GuardianOfGhirapur.class));
         cards.add(new SetCardInfo("Guildpact Paragon", 1, Rarity.MYTHIC, mage.cards.g.GuildpactParagon.class));
         cards.add(new SetCardInfo("Halo Forager", 227, Rarity.UNCOMMON, mage.cards.h.HaloForager.class));
         cards.add(new SetCardInfo("Halo Hopper", 260, Rarity.COMMON, mage.cards.h.HaloHopper.class));
