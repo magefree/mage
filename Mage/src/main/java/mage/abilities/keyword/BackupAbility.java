@@ -11,6 +11,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.ArrayList;
@@ -57,11 +58,23 @@ public class BackupAbility extends EntersBattlefieldTriggeredAbility {
     }
 
     public void addAbility(Ability ability, Watcher watcher) {
+        addAbility(ability, watcher, false);
+    }
+
+    public void addAbility(Ability ability, boolean dontAddToCard) {
+        addAbility(ability, null, dontAddToCard);
+    }
+
+    public void addAbility(Ability ability, Watcher watcher, boolean dontAddToCard) {
         if (watcher != null) {
             ability.addWatcher(watcher);
         }
-        card.addAbility(ability);
+        if (!dontAddToCard) {
+            card.addAbility(ability);
+        }
         abilitiesToAdd.add(ability);
+        CardUtil.castStream(this.getEffects().stream(), BackupEffect.class)
+                .forEach(backupEffect -> backupEffect.addAbility(ability));
     }
 
     public boolean hasAbilities() {
@@ -84,6 +97,10 @@ class BackupEffect extends OneShotEffect {
         super(effect);
         this.amount = effect.amount;
         this.abilitiesToAdd.addAll(effect.abilitiesToAdd);
+    }
+
+    void addAbility(Ability ability) {
+        this.abilitiesToAdd.add(ability);
     }
 
     @Override

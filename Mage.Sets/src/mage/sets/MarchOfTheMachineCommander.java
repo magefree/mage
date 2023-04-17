@@ -72,6 +72,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Command Tower", 396, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Sphere", 352, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
         cards.add(new SetCardInfo("Conclave Mentor", 320, Rarity.UNCOMMON, mage.cards.c.ConclaveMentor.class));
+        cards.add(new SetCardInfo("Conclave Sledge-Captain", 36, Rarity.RARE, mage.cards.c.ConclaveSledgeCaptain.class));
         cards.add(new SetCardInfo("Conclave Tribunal", 178, Rarity.UNCOMMON, mage.cards.c.ConclaveTribunal.class));
         cards.add(new SetCardInfo("Conjurer's Mantle", 12, Rarity.RARE, mage.cards.c.ConjurersMantle.class));
         cards.add(new SetCardInfo("Constable of the Realm", 179, Rarity.UNCOMMON, mage.cards.c.ConstableOfTheRealm.class));
