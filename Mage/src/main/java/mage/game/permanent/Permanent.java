@@ -212,7 +212,7 @@ public interface Permanent extends Card, Controllable {
      * @param sourceId
      * @param game
      */
-    void addAbility(Ability ability, UUID sourceId, Game game);
+    Ability addAbility(Ability ability, UUID sourceId, Game game);
 
     void removeAllAbilities(UUID sourceId, Game game);
 

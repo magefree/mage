@@ -97,6 +97,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Disturbing Conversion", 54, Rarity.COMMON, mage.cards.d.DisturbingConversion.class));
         cards.add(new SetCardInfo("Djeru and Hazoret", 221, Rarity.RARE, mage.cards.d.DjeruAndHazoret.class));
         cards.add(new SetCardInfo("Doomskar Warrior", 185, Rarity.RARE, mage.cards.d.DoomskarWarrior.class));
+        cards.add(new SetCardInfo("Drana and Linvala", 222, Rarity.RARE, mage.cards.d.DranaAndLinvala.class));
         cards.add(new SetCardInfo("Dreg Recycler", 100, Rarity.COMMON, mage.cards.d.DregRecycler.class));
         cards.add(new SetCardInfo("Dusk Legion Duelist", 11, Rarity.RARE, mage.cards.d.DuskLegionDuelist.class));
         cards.add(new SetCardInfo("Elesh Norn", 12, Rarity.MYTHIC, mage.cards.e.EleshNorn.class));
