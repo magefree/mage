@@ -19,7 +19,7 @@ public final class SliverToken extends TokenImpl {
         subtype.add(SubType.SLIVER);
         power = new MageInt(1);
         toughness = new MageInt(1);
-        availableImageSetCodes.addAll(Arrays.asList("M14", "M15"));
+        availableImageSetCodes.addAll(Arrays.asList("M14", "M15", "MOC"));
     }
 
     public SliverToken(final SliverToken token) {

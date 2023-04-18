@@ -1940,6 +1940,52 @@ public class ScryfallImageSupportTokens {
             put ("MOM/Emblem Wrenn and Realmbreaker", "https://api.scryfall.com/cards/tmom/23/en?format=image");
             put ("MOM/Zombie", "https://api.scryfall.com/cards/tmom/5/en?format=image");
 
+            // MOC
+            put ("MOC/Angel/1", "https://api.scryfall.com/cards/tmoc/3/en?format=image");
+            put ("MOC/Angel/2", "https://api.scryfall.com/cards/tmoc/4/en?format=image");
+            put ("MOC/Assassin", "https://api.scryfall.com/cards/tmoc/17/en?format=image");
+            put ("MOC/Beast", "https://api.scryfall.com/cards/tmoc/28/en?format=image");
+            put ("MOC/Bird", "https://api.scryfall.com/cards/tmoc/5/en?format=image");
+            put ("MOC/Blood", "https://api.scryfall.com/cards/tmoc/32/en?format=image");
+            put ("MOC/Butterfly", "https://api.scryfall.com/cards/tmoc/29/en?format=image");
+            put ("MOC/Clue", "https://api.scryfall.com/cards/tmoc/33/en?format=image");
+            put ("MOC/Construct", "https://api.scryfall.com/cards/tmoc/34/en?format=image");
+            put ("MOC/Demon", "https://api.scryfall.com/cards/tmoc/18/en?format=image");
+            put ("MOC/Eldrazi", "https://api.scryfall.com/cards/tmoc/1/en?format=image");
+            put ("MOC/Elemental", "https://api.scryfall.com/cards/tmoc/22/en?format=image");
+            put ("MOC/Elephant", "https://api.scryfall.com/cards/tmoc/30/en?format=image");
+            put ("MOC/Emblem Elspeth, Sun's Champion", "https://api.scryfall.com/cards/tmoc/43/en?format=image");
+            put ("MOC/Faerie", "https://api.scryfall.com/cards/tmoc/11/en?format=image");
+            put ("MOC/Feather", "https://api.scryfall.com/cards/tmoc/23/en?format=image");
+            put ("MOC/Food", "https://api.scryfall.com/cards/tmoc/35/en?format=image");
+            put ("MOC/Goblin", "https://api.scryfall.com/cards/tmoc/24/en?format=image");
+            put ("MOC/Gold", "https://api.scryfall.com/cards/tmoc/36/en?format=image");
+            put ("MOC/Golem", "https://api.scryfall.com/cards/tmoc/37/en?format=image");
+            put ("MOC/Gremlin", "https://api.scryfall.com/cards/tmoc/25/en?format=image");
+            put ("MOC/Human/1", "https://api.scryfall.com/cards/tmoc/26/en?format=image");
+            put ("MOC/Human/2", "https://api.scryfall.com/cards/tmoc/6/en?format=image");
+            put ("MOC/Insect", "https://api.scryfall.com/cards/tmoc/31/en?format=image");
+            put ("MOC/Knight", "https://api.scryfall.com/cards/tmoc/7/en?format=image");
+            put ("MOC/Kobolds of Kher Keep", "https://api.scryfall.com/cards/tmoc/27/en?format=image");
+            put ("MOC/Myr", "https://api.scryfall.com/cards/tmoc/38/en?format=image");
+            put ("MOC/Phyrexian Germ", "https://api.scryfall.com/cards/tmoc/19/en?format=image");
+            put ("MOC/Phyrexian Golem", "https://api.scryfall.com/cards/tmoc/39/en?format=image");
+            put ("MOC/Phyrexian Horror", "https://api.scryfall.com/cards/tmoc/40/en?format=image");
+            put ("MOC/Replicated Ring", "https://api.scryfall.com/cards/tmoc/41/en?format=image");
+            put ("MOC/Servo", "https://api.scryfall.com/cards/tmoc/42/en?format=image");
+            put ("MOC/Shapeshifter", "https://api.scryfall.com/cards/tmoc/12/en?format=image");
+            put ("MOC/Sliver", "https://api.scryfall.com/cards/tmoc/2/en?format=image");
+            put ("MOC/Soldier", "https://api.scryfall.com/cards/tmoc/8/en?format=image");
+            put ("MOC/Spirit/1", "https://api.scryfall.com/cards/tmoc/13/en?format=image");
+            put ("MOC/Spirit/2", "https://api.scryfall.com/cards/tmoc/9/en?format=image");
+            put ("MOC/Squid", "https://api.scryfall.com/cards/tmoc/14/en?format=image");
+            put ("MOC/Emblem Teferi's Talent", "https://api.scryfall.com/cards/tmoc/44/en?format=image");
+            put ("MOC/Tentacle", "https://api.scryfall.com/cards/tmoc/15/en?format=image");
+            put ("MOC/Thopter", "https://api.scryfall.com/cards/tmoc/16/en?format=image");
+            put ("MOC/Vampire Knight", "https://api.scryfall.com/cards/tmoc/20/en?format=image");
+            put ("MOC/Warrior", "https://api.scryfall.com/cards/tmoc/10/en?format=image");
+            put ("MOC/Zombie Knight", "https://api.scryfall.com/cards/tmoc/21/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

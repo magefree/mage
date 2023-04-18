@@ -9,6 +9,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 
+import java.util.Arrays;
+
 public final class FeatherToken extends TokenImpl {
 
     private static final FilterCard filter = new FilterCard("Phoenix card");
@@ -19,7 +21,6 @@ public final class FeatherToken extends TokenImpl {
 
     public FeatherToken() {
         super("Feather", "red artifact token named Feather with \"{1}, Sacrifice Feather: Return target Phoenix card from your graveyard to the battlefield tapped.\"");
-
         this.cardType.add(CardType.ARTIFACT);
         this.color.setRed(true);
         Ability ability = new SimpleActivatedAbility(
@@ -27,7 +28,8 @@ public final class FeatherToken extends TokenImpl {
         );
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
-        setOriginalExpansionSetCode("IKO");
+
+        availableImageSetCodes = Arrays.asList("IKO", "MOC");
     }
 
     private FeatherToken(final FeatherToken token) {

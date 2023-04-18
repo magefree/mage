@@ -23,7 +23,7 @@ public final class StoneTrapIdolToken extends TokenImpl {
         toughness = new MageInt(12);
         addAbility(TrampleAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("WWK", "C18");
+        availableImageSetCodes = Arrays.asList("WWK", "C18", "MOC");
     }
 
     public StoneTrapIdolToken(final StoneTrapIdolToken token) {

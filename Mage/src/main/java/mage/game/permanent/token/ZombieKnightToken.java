@@ -13,7 +13,7 @@ public final class ZombieKnightToken extends TokenImpl {
 
     static final private List<String> tokenImageSets = new ArrayList<>();
     static {
-        tokenImageSets.addAll(Arrays.asList("DOM", "DMC"));
+        tokenImageSets.addAll(Arrays.asList("DOM", "DMC", "MOC"));
     }
     
     public ZombieKnightToken(){

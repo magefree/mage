@@ -19,7 +19,7 @@ public final class HumanToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes.addAll(Arrays.asList("DKA", "AVR", "FNMP", "RNA", "ELD", "C19", "C20", "MID", "VOW", "NCC", "DDQ", "CLB", "DMC", "ONC", "30A"));
+        availableImageSetCodes.addAll(Arrays.asList("DKA", "AVR", "FNMP", "RNA", "ELD", "C19", "C20", "MID", "VOW", "NCC", "DDQ", "CLB", "DMC", "ONC", "30A", "MOC"));
     }
 
     public HumanToken(final HumanToken token) {
@@ -39,6 +39,9 @@ public final class HumanToken extends TokenImpl {
             this.setTokenType(2);
         }
         if (getOriginalExpansionSetCode().equals("AVR")) {
+            this.setTokenType(2);
+        }
+        if (getOriginalExpansionSetCode().equals("MOC")) {
             this.setTokenType(2);
         }
     }

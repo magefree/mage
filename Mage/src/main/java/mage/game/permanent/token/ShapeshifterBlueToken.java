@@ -22,7 +22,7 @@ public final class ShapeshifterBlueToken extends TokenImpl {
 
         addAbility(new ChangelingAbility());
 
-        availableImageSetCodes = Arrays.asList("KHM", "CLB");
+        availableImageSetCodes = Arrays.asList("KHM", "CLB", "MOC");
     }
 
     @Override

@@ -16,6 +16,8 @@ public final class VampireKnightToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(LifelinkAbility.getInstance());
+
+        this.setOriginalExpansionSetCode("MOC");
     }
 
     public VampireKnightToken(final VampireKnightToken token) {

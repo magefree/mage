@@ -141,6 +141,8 @@
 |Generate|EMBLEM:ONE|Koth, Fire of Resistance||Emblem Koth|KothFireOfResistanceEmblem|
 |Generate|EMBLEM:MOM|Teferi Akosa of Zhalfir||Emblem Teferi|TeferiAkosaOfZhalfirEmblem|
 |Generate|EMBLEM:MOM|Wrenn and Realmbreaker||Emblem Wrenn|WrennAndRealmbreakerEmblem|
+|Generate|EMBLEM:MOC|Elspeth, Sun's Champion||Emblem Elspeth|ElspethSunsChampionEmblem|
+|Generate|EMBLEM:MOC|Teferi's Talent||Emblem Teferi|TeferisTalentEmblem|
 
 # Planes
 |Generate|PLANE:PCA|Plane - Academy at Tolaria West|||AcademyAtTolariaWestPlane|
@@ -2056,3 +2058,47 @@
 |Generate|TOK:MOM|Vampire|||IxalanVampireToken|
 |Generate|TOK:MOM|Warrior|||ValorsReachTagTeamToken|
 |Generate|TOK:MOM|Zombie|||ZombieToken|
+
+# MOC
+|Generate|TOK:MOC|Angel|1||Angel33Token|
+|Generate|TOK:MOC|Angel|2||AngelToken|
+|Generate|TOK:MOC|Assassin|||QueenMarchesaAssassinToken|
+|Generate|TOK:MOC|Beast|||BeastToken2|
+|Generate|TOK:MOC|Bird|||BirdToken|
+|Generate|TOK:MOC|Blood|||BloodToken|
+|Generate|TOK:MOC|Butterfly|||ButterflyToken|
+|Generate|TOK:MOC|Clue|||ClueArtifactToken|
+|Generate|TOK:MOC|Construct|||StoneTrapIdolToken|
+|Generate|TOK:MOC|Demon|||BelzenlokDemonToken|
+|Generate|TOK:MOC|Eldrazi|||EldraziAnnihilatorToken|
+|Generate|TOK:MOC|Elemental|||WildfireAwakenerToken|
+|Generate|TOK:MOC|Elephant|||ElephantToken|
+|Generate|TOK:MOC|Faerie|||FaerieToken|
+|Generate|TOK:MOC|Feather|||FeatherToken|
+|Generate|TOK:MOC|Food|||FoodToken|
+|Generate|TOK:MOC|Goblin|||GoblinToken|
+|Generate|TOK:MOC|Gold|||GoldToken|
+|Generate|TOK:MOC|Golem|||GolemToken|
+|Generate|TOK:MOC|Gremlin|||GremlinArtifactToken|
+|Generate|TOK:MOC|Human|1||RedHumanToken|
+|Generate|TOK:MOC|Human|2||HumanToken|
+|Generate|TOK:MOC|Insect|||TheLocustGodInsectToken|
+|Generate|TOK:MOC|Knight|||KnightToken|
+|Generate|TOK:MOC|Kobolds of Kher Keep|||KherKeepKoboldToken|
+|Generate|TOK:MOC|Myr|||MyrToken|
+|Generate|TOK:MOC|Phyrexian Germ|||PhyrexianGermToken|
+|Generate|TOK:MOC|Phyrexian Golem|||PhyrexianGolemToken|
+|Generate|TOK:MOC|Phyrexian Horror|||PhyrexianRebirthHorrorToken|
+|Generate|TOK:MOC|Replicated Ring|||ReplicatedRingToken|
+|Generate|TOK:MOC|Servo|||ServoToken|
+|Generate|TOK:MOC|Shapeshifter|||ShapeshifterBlueToken|
+|Generate|TOK:MOC|Sliver|||SliverToken|
+|Generate|TOK:MOC|Soldier|||SoldierToken|
+|Generate|TOK:MOC|Spirit|1||SpiritBlueToken|
+|Generate|TOK:MOC|Spirit|2||SpiritWhiteToken|
+|Generate|TOK:MOC|Squid|||SquidToken|
+|Generate|TOK:MOC|Tentacle|||TentacleToken|
+|Generate|TOK:MOC|Thopter|||ThopterToken|
+|Generate|TOK:MOC|Vampire Knight|||VampireKnightToken|
+|Generate|TOK:MOC|Warrior|||WarriorToken|
+|Generate|TOK:MOC|Zombie Knight|||ZombieKnightToken|

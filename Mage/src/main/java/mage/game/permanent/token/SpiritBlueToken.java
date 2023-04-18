@@ -21,16 +21,18 @@ public final class SpiritBlueToken extends TokenImpl {
         color.setBlue(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
-        setTokenType(2);
         addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("AVR");
+        availableImageSetCodes = Arrays.asList("AVR", "MOC");
     }
 
     @Override
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("AVR")) {
+            setTokenType(1);
+        }
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("MOC")) {
             setTokenType(1);
         }
     }
