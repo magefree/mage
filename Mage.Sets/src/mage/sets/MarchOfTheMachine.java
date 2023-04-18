@@ -175,6 +175,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Invasion of Ergamon", 233, Rarity.UNCOMMON, mage.cards.i.InvasionOfErgamon.class));
         cards.add(new SetCardInfo("Invasion of Fiora", 114, Rarity.RARE, mage.cards.i.InvasionOfFiora.class));
         cards.add(new SetCardInfo("Invasion of Gobakhan", 22, Rarity.RARE, mage.cards.i.InvasionOfGobakhan.class));
+        cards.add(new SetCardInfo("Invasion of Ikoria", 190, Rarity.RARE, mage.cards.i.InvasionOfIkoria.class));
         cards.add(new SetCardInfo("Invasion of Innistrad", 115, Rarity.MYTHIC, mage.cards.i.InvasionOfInnistrad.class));
         cards.add(new SetCardInfo("Invasion of Ixalan", 191, Rarity.RARE, mage.cards.i.InvasionOfIxalan.class));
         cards.add(new SetCardInfo("Invasion of Kaladesh", 234, Rarity.UNCOMMON, mage.cards.i.InvasionOfKaladesh.class));
@@ -376,6 +377,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Zephyr Winder", 328, Rarity.COMMON, mage.cards.z.ZephyrWinder.class));
         cards.add(new SetCardInfo("Zhalfirin Lancer", 45, Rarity.UNCOMMON, mage.cards.z.ZhalfirinLancer.class));
         cards.add(new SetCardInfo("Zhalfirin Shapecraft", 87, Rarity.COMMON, mage.cards.z.ZhalfirinShapecraft.class));
+        cards.add(new SetCardInfo("Zilortha, Apex of Ikoria", 190, Rarity.RARE, mage.cards.z.ZilorthaApexOfIkoria.class));
         cards.add(new SetCardInfo("Zimone and Dina", 257, Rarity.MYTHIC, mage.cards.z.ZimoneAndDina.class));
 
         cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is implemented
