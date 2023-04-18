@@ -17,8 +17,9 @@ public final class Kraken11Token extends TokenImpl {
         this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-
         this.addAbility(TrampleAbility.getInstance());
+
+        this.setExpansionSetCodeForImage("MOM");
     }
 
     private Kraken11Token(final Kraken11Token token) {

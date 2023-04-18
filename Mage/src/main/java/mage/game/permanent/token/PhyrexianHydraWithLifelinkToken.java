@@ -27,6 +27,14 @@ public final class PhyrexianHydraWithLifelinkToken extends TokenImpl {
         availableImageSetCodes = Arrays.asList("MOM");
     }
 
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("MOM")) {
+            this.setTokenType(1);
+        }
+    }
+
     public PhyrexianHydraWithLifelinkToken(final PhyrexianHydraWithLifelinkToken token) {
         super(token);
     }

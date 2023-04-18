@@ -1918,6 +1918,28 @@ public class ScryfallImageSupportTokens {
             put ("30A/Wasp", "https://api.scryfall.com/cards/t30a/16/en?format=image");
             put ("30A/Wolf", "https://api.scryfall.com/cards/t30a/9/en?format=image");
 
+            // MOM
+            put ("MOM/Dinosaur", "https://api.scryfall.com/cards/tmom/7/en?format=image");
+            put ("MOM/Elemental", "https://api.scryfall.com/cards/tmom/9/en?format=image");
+            put ("MOM/First Mate Ragavan", "https://api.scryfall.com/cards/tmom/6/en?format=image");
+            put ("MOM/Knight", "https://api.scryfall.com/cards/tmom/10/en?format=image");
+            put ("MOM/Kraken", "https://api.scryfall.com/cards/tmom/4/en?format=image");
+            put ("MOM/Monk", "https://api.scryfall.com/cards/tmom/1/en?format=image");
+            put ("MOM/Phyrexian Hydra/1", "https://api.scryfall.com/cards/tmom/12/en?format=image");
+            put ("MOM/Phyrexian Hydra/2", "https://api.scryfall.com/cards/tmom/11/en?format=image");
+            put ("MOM/Phyrexian Saproling", "https://api.scryfall.com/cards/tmom/8/en?format=image");
+            put ("MOM/Soldier", "https://api.scryfall.com/cards/tmom/2/en?format=image");
+            put ("MOM/Spirit/1", "https://api.scryfall.com/cards/tmom/14/en?format=image");
+            put ("MOM/Spirit/2", "https://api.scryfall.com/cards/tmom/13/en?format=image");
+            put ("MOM/Emblem Teferi Akosa of Zhalfir", "https://api.scryfall.com/cards/tmom/22/en?format=image");
+            put ("MOM/Thopter", "https://api.scryfall.com/cards/tmom/19/en?format=image");
+            put ("MOM/Treasure/1", "https://api.scryfall.com/cards/tmom/20/en?format=image");
+            put ("MOM/Treasure/2", "https://api.scryfall.com/cards/tmom/21/en?format=image");
+            put ("MOM/Vampire", "https://api.scryfall.com/cards/tmom/3/en?format=image");
+            put ("MOM/Warrior", "https://api.scryfall.com/cards/tmom/15/en?format=image");
+            put ("MOM/Emblem Wrenn and Realmbreaker", "https://api.scryfall.com/cards/tmom/23/en?format=image");
+            put ("MOM/Zombie", "https://api.scryfall.com/cards/tmom/5/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

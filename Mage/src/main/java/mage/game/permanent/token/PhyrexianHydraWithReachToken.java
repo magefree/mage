@@ -27,6 +27,14 @@ public final class PhyrexianHydraWithReachToken extends TokenImpl {
         availableImageSetCodes = Arrays.asList("MOM");
     }
 
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("MOM")) {
+            this.setTokenType(2);
+        }
+    }
+
     public PhyrexianHydraWithReachToken(final PhyrexianHydraWithReachToken token) {
         super(token);
     }
