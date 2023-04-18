@@ -1,7 +1,6 @@
 
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -15,20 +14,21 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class UlvenwaldCaptive extends CardImpl {
 
     public UlvenwaldCaptive(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add(SubType.WEREWOLF);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        this.secondSideCardClazz = UlvenwaldAbomination.class;
+        this.secondSideCardClazz = mage.cards.u.UlvenwaldAbomination.class;
 
         // Defender
         this.addAbility(DefenderAbility.getInstance());

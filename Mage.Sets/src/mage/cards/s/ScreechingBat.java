@@ -24,7 +24,7 @@ public final class ScreechingBat extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add(SubType.BAT);
 
-        this.secondSideCardClazz = StalkingVampire.class;
+        this.secondSideCardClazz = mage.cards.s.StalkingVampire.class;
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

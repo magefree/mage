@@ -42,7 +42,7 @@ public final class ChandraFireOfKaladesh extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.secondSideCardClazz = ChandraRoaringFlame.class;
+        this.secondSideCardClazz = mage.cards.c.ChandraRoaringFlame.class;
 
         // Whenever you cast a red spell, untap Chandra, Fire of Kaladesh.
         this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filter, false));

@@ -38,7 +38,7 @@ public final class LilianaHereticalHealer extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        this.secondSideCardClazz = LilianaDefiantNecromancer.class;
+        this.secondSideCardClazz = mage.cards.l.LilianaDefiantNecromancer.class;
         this.addAbility(new TransformAbility());
 
         // Lifelink

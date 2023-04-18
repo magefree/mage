@@ -23,7 +23,7 @@ public final class ThrabenSentry extends CardImpl {
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
 
-        this.secondSideCardClazz = ThrabenMilitia.class;
+        this.secondSideCardClazz = mage.cards.t.ThrabenMilitia.class;
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

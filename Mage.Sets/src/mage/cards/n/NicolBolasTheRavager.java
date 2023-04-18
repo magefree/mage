@@ -30,7 +30,7 @@ public final class NicolBolasTheRavager extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        this.secondSideCardClazz = NicolBolasTheArisen.class;
+        this.secondSideCardClazz = mage.cards.n.NicolBolasTheArisen.class;
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
