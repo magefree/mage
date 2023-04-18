@@ -1,7 +1,6 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -10,16 +9,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.watchers.Watcher;
+import mage.watchers.common.BoostCountersAddedFirstTimeWatcher;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -61,7 +57,7 @@ class BotanicalBrawlerTriggeredAbility extends TriggeredAbilityImpl {
 
     BotanicalBrawlerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
-        this.addWatcher(new BotanicalBrawlerWatcher());
+        this.addWatcher(new BoostCountersAddedFirstTimeWatcher());
     }
 
     private BotanicalBrawlerTriggeredAbility(final BotanicalBrawlerTriggeredAbility ability) {
@@ -85,7 +81,7 @@ class BotanicalBrawlerTriggeredAbility extends TriggeredAbilityImpl {
                 && !getSourceId().equals(event.getTargetId())
                 && isControlledBy(permanent.getControllerId())
                 && event.getData().equals(CounterType.P1P1.getName())
-                && BotanicalBrawlerWatcher.checkEvent(event, permanent, game);
+                && BoostCountersAddedFirstTimeWatcher.checkEvent(event, permanent, game);
     }
 
     @Override
@@ -93,41 +89,5 @@ class BotanicalBrawlerTriggeredAbility extends TriggeredAbilityImpl {
         return "Whenever one or more +1/+1 counters are put on another permanent you control, " +
                 "if it's the first time +1/+1 counters have been put on that permanent this turn, " +
                 "put a +1/+1 counter on {this}.";
-    }
-}
-
-class BotanicalBrawlerWatcher extends Watcher {
-
-    private final Map<MageObjectReference, UUID> map = new HashMap<>();
-
-    BotanicalBrawlerWatcher() {
-        super(WatcherScope.GAME);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.COUNTERS_ADDED) {
-            return;
-        }
-        Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && event.getData().equals(CounterType.P1P1.getName())) {
-            map.putIfAbsent(new MageObjectReference(permanent, game), event.getId());
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        map.clear();
-    }
-
-    static boolean checkEvent(GameEvent event, Permanent permanent, Game game) {
-        return event
-                .getId()
-                .equals(game
-                        .getState()
-                        .getWatcher(BotanicalBrawlerWatcher.class)
-                        .map
-                        .getOrDefault(new MageObjectReference(permanent, game), null));
     }
 }

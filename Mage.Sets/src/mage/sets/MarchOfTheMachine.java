@@ -44,6 +44,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Attentive Skywarden", 7, Rarity.COMMON, mage.cards.a.AttentiveSkywarden.class));
         cards.add(new SetCardInfo("Awaken the Maelstrom", 230, Rarity.RARE, mage.cards.a.AwakenTheMaelstrom.class));
         cards.add(new SetCardInfo("Awakened Skyclave", 194, Rarity.UNCOMMON, mage.cards.a.AwakenedSkyclave.class));
+        cards.add(new SetCardInfo("Axgard Artisan", 332, Rarity.UNCOMMON, mage.cards.a.AxgardArtisan.class));
         cards.add(new SetCardInfo("Ayara, Furnace Queen", 90, Rarity.RARE, mage.cards.a.AyaraFurnaceQueen.class));
         cards.add(new SetCardInfo("Ayara, Widow of the Realm", 90, Rarity.RARE, mage.cards.a.AyaraWidowOfTheRealm.class));
         cards.add(new SetCardInfo("Baral and Kari Zev", 218, Rarity.RARE, mage.cards.b.BaralAndKariZev.class));
