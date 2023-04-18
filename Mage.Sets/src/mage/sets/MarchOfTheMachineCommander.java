@@ -328,6 +328,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Together Forever", 212, Rarity.RARE, mage.cards.t.TogetherForever.class));
         cards.add(new SetCardInfo("Triskelion", 387, Rarity.RARE, mage.cards.t.Triskelion.class));
         cards.add(new SetCardInfo("Unbreakable Formation", 213, Rarity.RARE, mage.cards.u.UnbreakableFormation.class));
+        cards.add(new SetCardInfo("Uncivil Unrest", 35, Rarity.RARE, mage.cards.u.UncivilUnrest.class));
         cards.add(new SetCardInfo("Utter End", 341, Rarity.RARE, mage.cards.u.UtterEnd.class));
         cards.add(new SetCardInfo("Valiant Knight", 214, Rarity.RARE, mage.cards.v.ValiantKnight.class));
         cards.add(new SetCardInfo("Vampires' Vengeance", 289, Rarity.UNCOMMON, mage.cards.v.VampiresVengeance.class));
