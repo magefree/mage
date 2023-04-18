@@ -97,6 +97,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Elenda and Azor", 6, Rarity.MYTHIC, mage.cards.e.ElendaAndAzor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elenda and Azor", 90, Rarity.MYTHIC, mage.cards.e.ElendaAndAzor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elite Scaleguard", 181, Rarity.UNCOMMON, mage.cards.e.EliteScaleguard.class));
+        cards.add(new SetCardInfo("Elspeth's Talent", 72, Rarity.RARE, mage.cards.e.ElspethsTalent.class));
         cards.add(new SetCardInfo("Elspeth, Sun's Champion", 182, Rarity.MYTHIC, mage.cards.e.ElspethSunsChampion.class));
         cards.add(new SetCardInfo("Emergent Woodwurm", 37, Rarity.RARE, mage.cards.e.EmergentWoodwurm.class));
         cards.add(new SetCardInfo("Emeria Angel", 183, Rarity.RARE, mage.cards.e.EmeriaAngel.class));
