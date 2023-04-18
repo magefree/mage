@@ -36,7 +36,8 @@ public final class BrightPalmSoulAwakener extends CardImpl {
         this.addAbility(backupAbility);
 
         // Whenever this creature attacks, double the number of +1/+1 counters on target creature. That creature can't be blocked by creatures with power 2 or less this turn.
-        Ability ability = new AttacksTriggeredAbility(new BrightPalmSoulAwakenerEffect());
+        Ability ability = new AttacksTriggeredAbility(new BrightPalmSoulAwakenerEffect())
+                .setTriggerPhrase("Whenever this creature attacks, ");
         ability.addEffect(new CantBeBlockedTargetEffect(
                 DauntAbility.getFilter(), Duration.EndOfTurn
         ).setText("that creature can't be blocked by creatures with power 2 or less this turn"));

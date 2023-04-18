@@ -37,6 +37,7 @@ public final class FiligreeVector extends CardImpl {
         // When Filigree Vector enters the battlefield, put a +1/+1 counter on each of any number of target creatures and a charge counter on each of any number of target artifacts.
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance())
+                        .setText("put a +1/+1 counter on each of any number of target creatures")
         );
         ability.addEffect(new AddCountersTargetEffect(CounterType.CHARGE.createInstance())
                 .setText("and a charge counter on each of any number of target artifacts")

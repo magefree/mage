@@ -83,7 +83,7 @@ public class FilterCard extends FilterObject<Card> {
     }
 
     public boolean hasPredicates() {
-        return !predicates.isEmpty();
+        return !predicates.isEmpty() || !extraPredicates.isEmpty();
     }
 
     @Override

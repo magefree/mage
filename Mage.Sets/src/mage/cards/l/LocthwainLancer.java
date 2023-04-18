@@ -42,7 +42,7 @@ public final class LocthwainLancer extends CardImpl {
 
         // Whenever a nontoken Knight you control dies, each opponent loses 1 life and you draw a card.
         Ability ability = new DiesCreatureTriggeredAbility(new LoseLifeOpponentsEffect(1), false, filter);
-        ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));
+        ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and you"));
         this.addAbility(ability);
     }
 

@@ -29,7 +29,7 @@ import java.util.UUID;
  */
 public final class SlimefootAndSquee extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.SAPROLING);
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.SAPROLING, "a Saproling");
     private static final FilterCard filter2 = new FilterCreatureCard("another creature card from your graveyard");
 
     static {

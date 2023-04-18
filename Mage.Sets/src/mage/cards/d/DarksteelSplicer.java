@@ -41,7 +41,8 @@ public final class DarksteelSplicer extends CardImpl {
 
         // Whenever Darksteel Splicer or another nontoken Phyrexian enters the battlefield under your control, create X 3/3 colorless Phyrexian Golem artifact creature tokens, where X is the number of opponents you have.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
-                new CreateTokenEffect(new PhyrexianGolemToken(), OpponentsCount.instance),
+                new CreateTokenEffect(new PhyrexianGolemToken(), OpponentsCount.instance)
+                        .setText("create X 3/3 colorless Phyrexian Golem artifact creature tokens, where X is the number of opponents you have"),
                 filter, false, true
         ));
 
