@@ -2017,5 +2017,19 @@
 |Generate|TOK:ONC|Thopter|||ThopterColorlessToken|
 
 # 30A
-# TODO: add all 30A tokens here
+|Generate|TOK:30A|Beast|||BeastToken|
+|Generate|TOK:30A|Bird|||BlueBirdToken|
+|Generate|TOK:30A|Clue|1||ClueArtifactToken|
+|Generate|TOK:30A|Clue|2||ClueArtifactToken|
+|Generate|TOK:30A|Demon|||DemonToken|
+|Generate|TOK:30A|Human|||HumanToken|
+|Generate|TOK:30A|Human Cleric|||HumanCleric|
+|Generate|TOK:30A|Human Warrior|||HumanWarriorToken|
+|Generate|TOK:30A|Human Wizard|||HumanWizardToken|
+|Generate|TOK:30A|Skeleton|||SkeletonToken|
+|Generate|TOK:30A|Soldier|||SoldierToken|
+|Generate|TOK:30A|Treasure|1||TreasureToken|
+|Generate|TOK:30A|Treasure|2||TreasureToken|
+|Generate|TOK:30A|Treasure|3||TreasureToken|
 |Generate|TOK:30A|Wasp|||WaspToken|
+|Generate|TOK:30A|Wolf|||WolfToken|

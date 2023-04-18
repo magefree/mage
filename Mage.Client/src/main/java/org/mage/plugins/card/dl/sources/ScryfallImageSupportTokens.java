@@ -1901,8 +1901,22 @@ public class ScryfallImageSupportTokens {
             put ("ONC/Thopter", "https://api.scryfall.com/cards/tonc/21/en?format=image");
 
             // 30A
-            // TODO: add another tokens
+            put ("30A/Beast", "https://api.scryfall.com/cards/t30a/8/en?format=image");
+            put ("30A/Bird", "https://api.scryfall.com/cards/t30a/4/en?format=image");
+            put ("30A/Clue/1", "https://api.scryfall.com/cards/t30a/11/en?format=image");
+            put ("30A/Clue/2", "https://api.scryfall.com/cards/t30a/12/en?format=image");
+            put ("30A/Demon", "https://api.scryfall.com/cards/t30a/6/en?format=image");
+            put ("30A/Human", "https://api.scryfall.com/cards/t30a/1/en?format=image");
+            put ("30A/Human Cleric", "https://api.scryfall.com/cards/t30a/10/en?format=image");
+            put ("30A/Human Warrior", "https://api.scryfall.com/cards/t30a/2/en?format=image");
+            put ("30A/Human Wizard", "https://api.scryfall.com/cards/t30a/5/en?format=image");
+            put ("30A/Skeleton", "https://api.scryfall.com/cards/t30a/7/en?format=image");
+            put ("30A/Soldier", "https://api.scryfall.com/cards/t30a/3/en?format=image");
+            put ("30A/Treasure/1", "https://api.scryfall.com/cards/t30a/13/en?format=image");
+            put ("30A/Treasure/2", "https://api.scryfall.com/cards/t30a/14/en?format=image");
+            put ("30A/Treasure/3", "https://api.scryfall.com/cards/t30a/15/en?format=image");
             put ("30A/Wasp", "https://api.scryfall.com/cards/t30a/16/en?format=image");
+            put ("30A/Wolf", "https://api.scryfall.com/cards/t30a/9/en?format=image");
 
             // generate supported sets
             supportedSets.clear();

@@ -29,7 +29,7 @@ public final class ClueArtifactToken extends TokenImpl {
         ability.addCost(cost);
         this.addAbility(ability);
 
-        availableImageSetCodes = Arrays.asList("C18", "SOI", "MH2", "AFC", "MID", "VOC", "SLD", "2XM", "NCC", "CLB", "40K");
+        availableImageSetCodes = Arrays.asList("C18", "SOI", "MH2", "AFC", "MID", "VOC", "SLD", "2XM", "NCC", "CLB", "40K", "30A");
     }
 
     @Override
@@ -41,6 +41,10 @@ public final class ClueArtifactToken extends TokenImpl {
         }
 
         if (getOriginalExpansionSetCode().equals("MH2")) {
+            this.setTokenType(RandomUtil.nextInt(2) + 1); // 2 different images
+        }
+
+        if (getOriginalExpansionSetCode().equals("30A")) {
             this.setTokenType(RandomUtil.nextInt(2) + 1); // 2 different images
         }
     }

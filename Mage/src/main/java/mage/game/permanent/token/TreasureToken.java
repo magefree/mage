@@ -30,7 +30,7 @@ public final class TreasureToken extends TokenImpl {
         availableImageSetCodes = Arrays.asList("XLN", "RNA", "M20", "C19", "C20",
                 "M21", "CMR", "KHM", "STX", "MH2",
                 "AFR", "VOW", "NEO", "SLD", "2XM",
-                "SNC", "CLB", "2X2", "DMC", "GN3");
+                "SNC", "CLB", "2X2", "DMC", "GN3", "30A");
     }
 
     public TreasureToken(final TreasureToken token) {
@@ -53,6 +53,9 @@ public final class TreasureToken extends TokenImpl {
         }
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("MH2")) {
             this.setTokenType(RandomUtil.nextInt(2) + 1);
+        }
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("30A")) {
+            this.setTokenType(RandomUtil.nextInt(3) + 1);
         }
     }
 }
