@@ -108,6 +108,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Evolving Wilds", 397, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Excise the Imperfect", 14, Rarity.RARE, mage.cards.e.ExciseTheImperfect.class));
         cards.add(new SetCardInfo("Exotic Orchard", 398, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
+        cards.add(new SetCardInfo("Exsanguinator Cavalry", 26, Rarity.RARE, mage.cards.e.ExsanguinatorCavalry.class));
         cards.add(new SetCardInfo("Falkenrath Exterminator", 276, Rarity.UNCOMMON, mage.cards.f.FalkenrathExterminator.class));
         cards.add(new SetCardInfo("Fallowsage", 223, Rarity.UNCOMMON, mage.cards.f.Fallowsage.class));
         cards.add(new SetCardInfo("Feldon of the Third Path", 277, Rarity.MYTHIC, mage.cards.f.FeldonOfTheThirdPath.class));
