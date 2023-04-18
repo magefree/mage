@@ -8,7 +8,8 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
 
@@ -19,12 +20,14 @@ import java.util.UUID;
  */
 public final class BogDown extends CardImpl {
 
+    private static final FilterControlledPermanent filter
+            = new FilterControlledLandPermanent("lands");
+
     public BogDown(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
         // Kicker-Sacrifice two lands.
-        this.addAbility(new KickerAbility(new SacrificeTargetCost(new TargetControlledPermanent(2, 2,
-                StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT, true))));
+        this.addAbility(new KickerAbility(new SacrificeTargetCost(new TargetControlledPermanent(2, filter))));
 
         // Target player discards two cards. If Bog Down was kicked, that player discards three cards instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DiscardTargetEffect(3),
