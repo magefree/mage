@@ -104,7 +104,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Enduring Scalelord", 325, Rarity.UNCOMMON, mage.cards.e.EnduringScalelord.class));
         cards.add(new SetCardInfo("Ephemeral Shields", 184, Rarity.COMMON, mage.cards.e.EphemeralShields.class));
         cards.add(new SetCardInfo("Ethersworn Adjudicator", 222, Rarity.MYTHIC, mage.cards.e.EtherswornAdjudicator.class));
-        cards.add(new SetCardInfo("Everquill Phoenix", 275, Rarity.RARE, mage.cards.e.EverquillPhoenix.class));
+//        cards.add(new SetCardInfo("Everquill Phoenix", 275, Rarity.RARE, mage.cards.e.EverquillPhoenix.class));
         cards.add(new SetCardInfo("Evolving Wilds", 397, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Excise the Imperfect", 14, Rarity.RARE, mage.cards.e.ExciseTheImperfect.class));
         cards.add(new SetCardInfo("Exotic Orchard", 398, Rarity.RARE, mage.cards.e.ExoticOrchard.class));

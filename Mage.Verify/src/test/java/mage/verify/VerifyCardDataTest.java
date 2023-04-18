@@ -1632,7 +1632,7 @@ public class VerifyCardDataTest {
             fail(card, "abilities", "card is a front face werewolf with a back face ability");
         }
 
-        // special check: transform ability in MDFC should only be on front and vice versa
+        // special check: transform ability in TDFC should only be on front and vice versa
         if (card.getSecondCardFace() != null && !card.isNightCard() && !card.getAbilities().containsClass(TransformAbility.class)) {
             fail(card, "abilities", "double-faced cards should have transform ability on the front");
         }
@@ -1640,9 +1640,13 @@ public class VerifyCardDataTest {
             fail(card, "abilities", "double-faced cards should not have transform ability on the back");
         }
 
-        // special check: back side in MDFC must be only night card
+        // special check: back side in TDFC must be only night card
         if (card.getSecondCardFace() != null && !card.getSecondCardFace().isNightCard()) {
             fail(card, "abilities", "the back face of a double-faced card should be nightCard = true");
+        }
+
+        if (card.getAbilities().containsClass(MutateAbility.class)) {
+            fail(card, "abilities", "mutate cards aren't implemented and shouldn't be available");
         }
 
         // special check: duplicated numbers in ability text (wrong target/filter usage)
