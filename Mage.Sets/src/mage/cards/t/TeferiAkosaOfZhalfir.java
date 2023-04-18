@@ -47,7 +47,8 @@ public final class TeferiAkosaOfZhalfir extends CardImpl {
                 null, new DiscardControllerEffect(2),
                 new DiscardTargetCost(new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE_A))
                         .setText("discard a creature card instead of discarding two cards")
-        ).setText("Then discard two cards unless you discard an artifact card"));
+        ).setText("Then discard two cards unless you discard a creature card"));
+        this.addAbility(ability);
 
         // -2: You get an emblem with "Knights you control get +1/+0 and have ward {1}."
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new TeferiAkosaOfZhalfirEmblem()), -2));

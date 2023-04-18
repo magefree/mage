@@ -33,7 +33,7 @@ import java.util.UUID;
 public final class IngaAndEsika extends CardImpl {
 
     private static final FilterSpell filter
-            = new FilterCreatureSpell("creature spell, if three or more mana from creatures was spent to cast it");
+            = new FilterCreatureSpell("a creature spell, if three or more mana from creatures was spent to cast it");
 
     static {
         filter.add(IngaAndEsikaPredicate.instance);

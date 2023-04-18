@@ -45,7 +45,7 @@ public final class CompleteTheCircuit extends CardImpl {
                         new CompleteTheCircuitEffect(), "When you next cast an instant or sorcery spell " +
                         "this turn, copy that spell twice. You may choose new targets for the copies."
                 )
-        ));
+        ).concatBy("<br>"));
     }
 
     private CompleteTheCircuit(final CompleteTheCircuit card) {

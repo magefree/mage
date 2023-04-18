@@ -36,7 +36,7 @@ public final class GhaltaAndMavren extends CardImpl {
         filter.add(AnotherPredicate.instance);
     }
 
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter, null);
 
     public GhaltaAndMavren(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{W}{W}");
