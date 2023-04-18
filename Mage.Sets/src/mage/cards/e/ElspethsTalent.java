@@ -18,9 +18,12 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SoldierToken;
+import mage.game.stack.StackObject;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetPlaneswalkerPermanent;
 
+import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -86,8 +89,9 @@ class ElspethsTalentTriggeredAbility extends TriggeredAbilityImpl {
         return permanent != null
                 && event.getSourceId().equals(permanent.getAttachedTo())
                 && isControlledBy(event.getPlayerId())
-                && game
-                .getAbility(event.getTargetId(), event.getSourceId())
+                && Optional.ofNullable(game.getStack().getStackObject(event.getSourceId()))
+                .filter(Objects::nonNull)
+                .map(StackObject::getStackAbility)
                 .map(LoyaltyAbility.class::isInstance)
                 .orElse(false);
     }

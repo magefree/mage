@@ -254,6 +254,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Rishkar, Peema Renegade", 310, Rarity.RARE, mage.cards.r.RishkarPeemaRenegade.class));
         cards.add(new SetCardInfo("Rogue's Passage", 421, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
         cards.add(new SetCardInfo("Root Out", 311, Rarity.COMMON, mage.cards.r.RootOut.class));
+        cards.add(new SetCardInfo("Rowan's Talent", 77, Rarity.RARE, mage.cards.r.RowansTalent.class));
         cards.add(new SetCardInfo("Saheeli's Artistry", 234, Rarity.RARE, mage.cards.s.SaheelisArtistry.class));
         cards.add(new SetCardInfo("Saheeli, Sublime Artificer", 338, Rarity.UNCOMMON, mage.cards.s.SaheeliSublimeArtificer.class));
         cards.add(new SetCardInfo("Saint Traft and Rem Karolus", 9, Rarity.MYTHIC, mage.cards.s.SaintTraftAndRemKarolus.class));
