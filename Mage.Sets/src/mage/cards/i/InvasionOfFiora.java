@@ -27,7 +27,7 @@ public final class InvasionOfFiora extends CardImpl {
 
     static {
         filter.add(SuperType.LEGENDARY.getPredicate());
-        filter.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));
+        filter2.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));
     }
 
     public InvasionOfFiora(UUID ownerId, CardSetInfo setInfo) {
