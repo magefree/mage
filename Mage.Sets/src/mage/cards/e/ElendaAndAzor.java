@@ -39,7 +39,7 @@ public final class ElendaAndAzor extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // Whenever Elenda and Azor attacks, you may pay {X}{W}{U}{B}. If you do, draw X cards.
         this.addAbility(new AttacksTriggeredAbility(new ElendaAndAzorEffect(), false));
