@@ -274,6 +274,9 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Shimmer Dragon", 236, Rarity.RARE, mage.cards.s.ShimmerDragon.class));
         cards.add(new SetCardInfo("Shimmer Myr", 376, Rarity.UNCOMMON, mage.cards.s.ShimmerMyr.class));
         cards.add(new SetCardInfo("Shineshadow Snarl", 422, Rarity.RARE, mage.cards.s.ShineshadowSnarl.class));
+        cards.add(new SetCardInfo("Sidar Jabari of Zhalfir", 5, Rarity.RARE, mage.cards.s.SidarJabariOfZhalfir.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sidar Jabari of Zhalfir", 97, Rarity.RARE, mage.cards.s.SidarJabariOfZhalfir.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sidar Jabari of Zhalfir", 138, Rarity.RARE, mage.cards.s.SidarJabariOfZhalfir.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sigiled Sword of Valeron", 377, Rarity.RARE, mage.cards.s.SigiledSwordOfValeron.class));
         cards.add(new SetCardInfo("Silverquill Campus", 423, Rarity.COMMON, mage.cards.s.SilverquillCampus.class));
         cards.add(new SetCardInfo("Silverwing Squadron", 207, Rarity.RARE, mage.cards.s.SilverwingSquadron.class));
