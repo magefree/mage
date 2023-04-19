@@ -55,7 +55,7 @@ public final class TheGreatWork extends CardImpl {
                 this, SagaChapter.CHAPTER_III, new TheGreatWorkCastFromGraveyardEffect(),
                 new TheGreatWorkReplacementEffect(), new ExileSourceAndReturnFaceUpEffect()
         );
-        this.addAbility(sagaAbility);
+        this.addAbility(sagaAbility, new CastFromGraveyardWatcher());
     }
 
     private TheGreatWork(final TheGreatWork card) {
