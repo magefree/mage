@@ -379,6 +379,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Zhalfirin Shapecraft", 87, Rarity.COMMON, mage.cards.z.ZhalfirinShapecraft.class));
         cards.add(new SetCardInfo("Zilortha, Apex of Ikoria", 190, Rarity.RARE, mage.cards.z.ZilorthaApexOfIkoria.class));
         cards.add(new SetCardInfo("Zimone and Dina", 257, Rarity.MYTHIC, mage.cards.z.ZimoneAndDina.class));
+        cards.add(new SetCardInfo("Zurgo and Ojutai", 258, Rarity.MYTHIC, mage.cards.z.ZurgoAndOjutai.class));
 
         cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is implemented
     }
