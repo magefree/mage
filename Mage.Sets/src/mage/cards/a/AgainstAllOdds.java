@@ -18,38 +18,38 @@ import mage.target.common.TargetControlledPermanent;
 import java.util.UUID;
 
 /**
- *
  * @author AhmadYProjects
  */
 public final class AgainstAllOdds extends CardImpl {
+
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact or creature card you control");
     private static final FilterCard filter2 = new FilterCard("artifact or creature card with mana value 3 or less from your graveyard");
 
-    static{
+    static {
         filter.add(Predicates.or(
                 CardType.CREATURE.getPredicate(),
                 CardType.ARTIFACT.getPredicate()
         ));
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
-        filter2.add(new ManaValuePredicate(ComparisonType.FEWER_THAN,4));
+        filter2.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
         filter2.add(Predicates.or(
                 CardType.CREATURE.getPredicate(),
                 CardType.ARTIFACT.getPredicate()
         ));
-
     }
+
     public AgainstAllOdds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}");
-        
 
         // Choose one or both --
         this.getSpellAbility().getModes().setMinModes(1);
         this.getSpellAbility().getModes().setMaxModes(2);
+
         // * Exile target artifact or creature you control, then return it to the battlefield under its owner's control.
         this.getSpellAbility().addTarget(new TargetControlledPermanent(filter));
         this.getSpellAbility().addEffect(new ExileTargetForSourceEffect());
         this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false,
-                false,"it").concatBy(", then"));
+                false, "it").concatBy(", then"));
+
         // * Return target artifact or creature card with mana value 3 or less from your graveyard to the battlefield.
         Mode mode2 = new Mode(new ReturnFromGraveyardToBattlefieldTargetEffect());
         mode2.addTarget(new TargetCardInYourGraveyard(filter2));
