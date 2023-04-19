@@ -24,6 +24,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.UUID;
 
@@ -89,7 +90,7 @@ class ArgivianAvengerEffect extends OneShotEffect {
         game.addEffect(new BoostSourceEffect(-1, -1, Duration.EndOfTurn), source);
         Choice choice = new ChoiceImpl(true);
         choice.setMessage("Choose an ability");
-        choice.setChoices(abilityMap.keySet());
+        choice.setChoices(new HashSet<>(abilityMap.keySet()));
         player.choose(outcome, choice, game);
         Ability ability = abilityMap.getOrDefault(choice.getChoice(), null);
         if (ability != null) {

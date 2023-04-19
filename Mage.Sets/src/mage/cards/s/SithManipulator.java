@@ -8,8 +8,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.HateCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.effects.common.ReturnTargetToOwnersLibraryPermanentEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.abilities.effects.common.ReturnToLibraryPermanentEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -40,7 +40,7 @@ public final class SithManipulator extends CardImpl {
 
         // <i>Hate</i> &mdash; If opponent lost life from source other than combat damage this turn, put that card on top of its owner's library instead.
         ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new ReturnToLibraryPermanentEffect(true)),
+                new EntersBattlefieldTriggeredAbility(new ReturnTargetToOwnersLibraryPermanentEffect(true)),
                 HateCondition.instance,
                 "<i>Hate</i> &mdash; If opponent lost life from source other than combat damage this turn, put that card on top of its owner's library instead");
         ability.addTarget(new TargetCreaturePermanent());

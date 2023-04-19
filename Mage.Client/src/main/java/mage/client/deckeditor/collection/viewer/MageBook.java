@@ -259,7 +259,7 @@ public class MageBook extends JComponent {
                     if (newToken instanceof Token) {
                         ((Token) newToken).setOriginalExpansionSetCode(currentSet);
                         ((Token) newToken).setExpansionSetCodeForImage(currentSet);
-                        ((Token) newToken).setTokenType(token.getType());
+                        ((Token) newToken).setTokenType(token.getType()); // must be called after set code, so it keep the type
                         res.add(newToken);
                     }
                 } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
@@ -448,7 +448,7 @@ public class MageBook extends JComponent {
         if (cardDimension == null) {
             cardDimension = new Dimension(ClientDefaultSettings.dimensions.getFrameWidth(), ClientDefaultSettings.dimensions.getFrameHeight());
         }
-        PermanentToken newToken = new PermanentToken(token, null, token.getOriginalExpansionSetCode(), null);
+        PermanentToken newToken = new PermanentToken(token, null, null);
         newToken.removeSummoningSickness();
         PermanentView theToken = new PermanentView(newToken, null, null, null);
         theToken.setInViewerOnly(true);

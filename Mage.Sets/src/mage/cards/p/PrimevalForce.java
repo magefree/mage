@@ -19,7 +19,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class PrimevalForce extends CardImpl {
 
-    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("three Forests");
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Forests");
     static{
         filter.add(SubType.FOREST.getPredicate());
     }

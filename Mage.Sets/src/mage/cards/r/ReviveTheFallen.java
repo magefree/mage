@@ -2,7 +2,9 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.abilities.effects.common.ClashWinReturnToHandSpellEffect;
+
+import mage.abilities.effects.common.DoIfClashWonEffect;
+import mage.abilities.effects.common.ReturnToHandSpellEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,7 +25,7 @@ public final class ReviveTheFallen extends CardImpl {
          this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
          this.getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
         // Clash with an opponent. If you win, return Revive the Fallen to its owner's hand.
-        this.getSpellAbility().addEffect(ClashWinReturnToHandSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new DoIfClashWonEffect(ReturnToHandSpellEffect.getInstance()));
     }
 
     private ReviveTheFallen(final ReviveTheFallen card) {

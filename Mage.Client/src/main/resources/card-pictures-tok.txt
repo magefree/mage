@@ -138,6 +138,11 @@
 |Generate|EMBLEM:DMU|Ajani, Sleeper Agent||Emblem Ajani|AjaniSleeperAgentEmblem|
 |Generate|EMBLEM:DMU|Jaya, Fiery Negotiator||Emblem Jaya|JayaFieryNegotiatorEmblem|
 |Generate|EMBLEM:BRO|Saheeli, Filigree Master||Emblem Saheeli|SaheeliFiligreeMasterEmblem|
+|Generate|EMBLEM:ONE|Koth, Fire of Resistance||Emblem Koth|KothFireOfResistanceEmblem|
+|Generate|EMBLEM:MOM|Teferi Akosa of Zhalfir||Emblem Teferi|TeferiAkosaOfZhalfirEmblem|
+|Generate|EMBLEM:MOM|Wrenn and Realmbreaker||Emblem Wrenn|WrennAndRealmbreakerEmblem|
+|Generate|EMBLEM:MOC|Elspeth, Sun's Champion||Emblem Elspeth|ElspethSunsChampionEmblem|
+|Generate|EMBLEM:MOC|Teferi's Talent||Emblem Teferi|TeferisTalentEmblem|
 
 # Planes
 |Generate|PLANE:PCA|Plane - Academy at Tolaria West|||AcademyAtTolariaWestPlane|
@@ -535,7 +540,7 @@
 |Generate|TOK:DST|Beast|||BeastToken|
 |Generate|TOK:DST|Elemental|1||WandOfTheElementsFirstToken|
 |Generate|TOK:DST|Elemental|2||WandOfTheElementsSecondToken|
-|Generate|TOK:DST|InsectWirefly|||WireflyToken|
+|Generate|TOK:DST|Wirefly|||WireflyToken|
 |Generate|TOK:DST|Insect|||InsectToken|
 |Generate|TOK:DST|Myr|||MyrToken|
 |Generate|TOK:DST|Spawn|||SpawningPitToken|
@@ -1976,3 +1981,124 @@
 |Generate|TOK:DMR|Sheep|||SheepToken|
 |Generate|TOK:DMR|Squirrel|||SquirrelToken|
 |Generate|TOK:DMR|Zombie|||ZombieToken|
+
+# ONE
+|Generate|TOK:ONE|Cat|||CatToken|
+|Generate|TOK:ONE|Drone|||DroneToken|
+|Generate|TOK:ONE|Phyrexian Beast|||PhyrexianBeastToxicToken|
+|Generate|TOK:ONE|Phyrexian Goblin|||PhyrexianGoblinToken|
+|Generate|TOK:ONE|Phyrexian Golem|||PhyrexianGolemToken|
+|Generate|TOK:ONE|Phyrexian Horror|1||PhyrexianHorrorGreenToken|
+|Generate|TOK:ONE|Phyrexian Horror|2||PhyrexianHorrorRedToken|
+|Generate|TOK:ONE|Phyrexian Mite|1||PhyrexianMiteToken|
+|Generate|TOK:ONE|Phyrexian Mite|2||PhyrexianMiteToken|
+|Generate|TOK:ONE|Rebel|||RebelRedToken|
+|Generate|TOK:ONE|Samurai|||DoublestrikeSamuraiToken|
+|Generate|TOK:ONE|The Hollow Sentinel|||TheHollowSentinelToken|
+
+# ONC
+|Generate|TOK:ONC|Angel|1||AngelToken|
+|Generate|TOK:ONC|Angel|2||AngelVigilanceToken|
+|Generate|TOK:ONC|Beast|||BeastToken|
+|Generate|TOK:ONC|Bird|||BirdToken|
+|Generate|TOK:ONC|Dragon|||DragonToken2|
+|Generate|TOK:ONC|Eldrazi|||EldraziToken|
+|Generate|TOK:ONC|Elephant|||ElephantToken|
+|Generate|TOK:ONC|Goblin|||GoblinToken|
+|Generate|TOK:ONC|Golem|||HasteGolemToken|
+|Generate|TOK:ONC|Human|||HumanToken|
+|Generate|TOK:ONC|Human Soldier|||HumanSoldierToken|
+|Generate|TOK:ONC|Kobolds of Kher Keep|||KherKeepKoboldToken|
+|Generate|TOK:ONC|Myr|||MyrToken|
+|Generate|TOK:ONC|Phyrexian Germ|||PhyrexianGermToken|
+|Generate|TOK:ONC|Phyrexian Horror|||PhyrexianRebirthHorrorToken|
+|Generate|TOK:ONC|Phyrexian Insect|||InsectInfectToken|
+|Generate|TOK:ONC|Phyrexian Wurm|||PhyrexianWurmToken|
+|Generate|TOK:ONC|Soldier|1||SoldierToken|
+|Generate|TOK:ONC|Soldier|2||SoldierVigilanceToken|
+|Generate|TOK:ONC|Soldier|3||SoldierTokenWithHaste|
+|Generate|TOK:ONC|Spirit|||SpiritWhiteToken|
+|Generate|TOK:ONC|Thopter|||ThopterColorlessToken|
+
+# 30A
+|Generate|TOK:30A|Beast|||BeastToken|
+|Generate|TOK:30A|Bird|||BlueBirdToken|
+|Generate|TOK:30A|Clue|1||ClueArtifactToken|
+|Generate|TOK:30A|Clue|2||ClueArtifactToken|
+|Generate|TOK:30A|Demon|||DemonToken|
+|Generate|TOK:30A|Human|||HumanToken|
+|Generate|TOK:30A|Human Cleric|||HumanCleric|
+|Generate|TOK:30A|Human Warrior|||HumanWarriorToken|
+|Generate|TOK:30A|Human Wizard|||HumanWizardToken|
+|Generate|TOK:30A|Skeleton|||SkeletonToken|
+|Generate|TOK:30A|Soldier|||SoldierToken|
+|Generate|TOK:30A|Treasure|1||TreasureToken|
+|Generate|TOK:30A|Treasure|2||TreasureToken|
+|Generate|TOK:30A|Treasure|3||TreasureToken|
+|Generate|TOK:30A|Wasp|||WaspToken|
+|Generate|TOK:30A|Wolf|||WolfToken|
+
+# MOM
+|Generate|TOK:MOM|Dinosaur|||DinosaurXXToken|
+|Generate|TOK:MOM|Elemental|||Elemental11BlueRedToken|
+|Generate|TOK:MOM|First Mate Ragavan|||FirstMateRagavanToken|
+// TODO: Add Incubator token images when the mechanic is implemented
+|Generate|TOK:MOM|Knight|||KnightWhiteBlueToken|
+|Generate|TOK:MOM|Kraken|||Kraken11Token|
+|Generate|TOK:MOM|Monk|||MonasteryMentorToken|
+|Generate|TOK:MOM|Phyrexian Hydra|1||PhyrexianHydraWithLifelinkToken|
+|Generate|TOK:MOM|Phyrexian Hydra|2||PhyrexianHydraWithReachToken|
+|Generate|TOK:MOM|Phyrexian Saproling|||PhyrexianSaprolingToken|
+|Generate|TOK:MOM|Soldier|||SoldierLifelinkToken|
+|Generate|TOK:MOM|Spirit|1||WhiteBlackSpiritToken|
+|Generate|TOK:MOM|Spirit|2||Spirit32Token|
+|Generate|TOK:MOM|Thopter|||ThopterColorlessToken|
+|Generate|TOK:MOM|Treasure|1||TreasureToken|
+|Generate|TOK:MOM|Treasure|2||TreasureToken|
+|Generate|TOK:MOM|Vampire|||IxalanVampireToken|
+|Generate|TOK:MOM|Warrior|||ValorsReachTagTeamToken|
+|Generate|TOK:MOM|Zombie|||ZombieToken|
+
+# MOC
+|Generate|TOK:MOC|Angel|1||Angel33Token|
+|Generate|TOK:MOC|Angel|2||AngelToken|
+|Generate|TOK:MOC|Assassin|||QueenMarchesaAssassinToken|
+|Generate|TOK:MOC|Beast|||BeastToken2|
+|Generate|TOK:MOC|Bird|||BirdToken|
+|Generate|TOK:MOC|Blood|||BloodToken|
+|Generate|TOK:MOC|Butterfly|||ButterflyToken|
+|Generate|TOK:MOC|Clue|||ClueArtifactToken|
+|Generate|TOK:MOC|Construct|||StoneTrapIdolToken|
+|Generate|TOK:MOC|Demon|||BelzenlokDemonToken|
+|Generate|TOK:MOC|Eldrazi|||EldraziAnnihilatorToken|
+|Generate|TOK:MOC|Elemental|||WildfireAwakenerToken|
+|Generate|TOK:MOC|Elephant|||ElephantToken|
+|Generate|TOK:MOC|Faerie|||FaerieToken|
+|Generate|TOK:MOC|Feather|||FeatherToken|
+|Generate|TOK:MOC|Food|||FoodToken|
+|Generate|TOK:MOC|Goblin|||GoblinToken|
+|Generate|TOK:MOC|Gold|||GoldToken|
+|Generate|TOK:MOC|Golem|||GolemToken|
+|Generate|TOK:MOC|Gremlin|||GremlinArtifactToken|
+|Generate|TOK:MOC|Human|1||RedHumanToken|
+|Generate|TOK:MOC|Human|2||HumanToken|
+|Generate|TOK:MOC|Insect|||TheLocustGodInsectToken|
+|Generate|TOK:MOC|Knight|||KnightToken|
+|Generate|TOK:MOC|Kobolds of Kher Keep|||KherKeepKoboldToken|
+|Generate|TOK:MOC|Myr|||MyrToken|
+|Generate|TOK:MOC|Phyrexian Germ|||PhyrexianGermToken|
+|Generate|TOK:MOC|Phyrexian Golem|||PhyrexianGolemToken|
+|Generate|TOK:MOC|Phyrexian Horror|||PhyrexianRebirthHorrorToken|
+|Generate|TOK:MOC|Replicated Ring|||ReplicatedRingToken|
+|Generate|TOK:MOC|Servo|||ServoToken|
+|Generate|TOK:MOC|Shapeshifter|||ShapeshifterBlueToken|
+|Generate|TOK:MOC|Sliver|||SliverToken|
+|Generate|TOK:MOC|Soldier|||SoldierToken|
+|Generate|TOK:MOC|Spirit|1||SpiritBlueToken|
+|Generate|TOK:MOC|Spirit|2||SpiritWhiteToken|
+|Generate|TOK:MOC|Squid|||SquidToken|
+|Generate|TOK:MOC|Tentacle|||TentacleToken|
+|Generate|TOK:MOC|Thopter|||ThopterToken|
+|Generate|TOK:MOC|Vampire Knight|||VampireKnightToken|
+|Generate|TOK:MOC|Warrior|||WarriorToken|
+|Generate|TOK:MOC|Zombie Knight|||ZombieKnightToken|

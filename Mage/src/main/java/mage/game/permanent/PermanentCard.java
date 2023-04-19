@@ -62,6 +62,7 @@ public class PermanentCard extends PermanentImpl {
         power = card.getPower().copy();
         toughness = card.getToughness().copy();
         startingLoyalty = card.getStartingLoyalty();
+        startingDefense = card.getStartingDefense();
         copyFromCard(card, game);
         // if temporary added abilities to the spell/card exist, you need to add it to the permanent derived from that card
         Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(card.getId());
@@ -71,7 +72,7 @@ public class PermanentCard extends PermanentImpl {
         if (card instanceof LevelerCard) {
             maxLevelCounters = ((LevelerCard) card).getMaxLevelCounters();
         }
-        if (isTransformable()) {
+        if (card.isTransformable()) {
             if (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId()) != null
                     || NightboundAbility.checkCard(this, game)) {
                 game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId(), null);
@@ -109,11 +110,7 @@ public class PermanentCard extends PermanentImpl {
         } else {
             // copy only own abilities; all dynamic added abilities must be added in the parent call
             this.abilities = card.getAbilities().copy();
-            // only set spellAbility to null if it has no targets IE: Dance of the Dead bug #7031
-            if (this.getSpellAbility() != null
-                    && this.getSpellAbility().getTargets().isEmpty()) {
-                this.spellAbility = null; // will be set on first getSpellAbility call if card has one.
-            }
+            this.spellAbility = null; // will be set on first getSpellAbility call if card has one.
         }
         this.abilities.setControllerId(this.controllerId);
         this.abilities.setSourceId(objectId);
@@ -136,6 +133,9 @@ public class PermanentCard extends PermanentImpl {
 
         if (card.getSecondCardFace() != null) {
             this.secondSideCardClazz = card.getSecondCardFace().getClass();
+        }
+        if (card.getMeldsToCard() != null) {
+            this.meldsToClazz = card.getMeldsToCard().getClass();
         }
         this.nightCard = card.isNightCard();
         this.flipCard = card.isFlipCard();

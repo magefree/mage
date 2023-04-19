@@ -77,9 +77,10 @@ public final class MtgJsonService {
             return new ArrayList<>();
         }
 
+        // for a double faced cards each side goes here as one card, so must search by face name
         String needName = convertXmageToMtgJsonCardName(name);
         return set.cards.stream()
-                .filter(c -> needName.equals(c.getRealCardName()))
+                .filter(c -> needName.equals(c.getNameAsFace()))
                 .collect(Collectors.toList());
     }
 
@@ -147,7 +148,7 @@ public final class MtgJsonService {
         public HashMap<String, ArrayList<MtgJsonCard>> data;
 
         private boolean containsSameNames(ArrayList<MtgJsonCard> list) {
-            Set<String> names = list.stream().map(MtgJsonCard::getRealCardName).collect(Collectors.toSet());
+            Set<String> names = list.stream().map(MtgJsonCard::getNameAsFace).collect(Collectors.toSet());
             return names.size() == 1;
         }
 

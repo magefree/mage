@@ -95,7 +95,7 @@ public class BolsterEffect extends OneShotEffect {
         } else {
             sb.append("X, where X is the number of ");
             sb.append(amount.getMessage());
-            sb.append(" (Choose a creature with the least toughness among creatures you control and put X +1/+1 counters on it.)");
+            sb.append(". (Choose a creature with the least toughness among creatures you control and put X +1/+1 counters on it.)");
         }
         return sb.toString();
     }

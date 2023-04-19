@@ -1,7 +1,6 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
@@ -22,7 +21,8 @@ import mage.cards.CardSetInfo;
 import mage.cards.ModalDoubleFacesCard;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
+import mage.filter.common.FilterAnyTarget;
+import mage.filter.common.FilterPermanentOrPlayer;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
@@ -31,6 +31,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetPermanentOrPlayer;
 
 import java.util.UUID;
 
@@ -118,9 +119,9 @@ class ToralfGodOfFuryTriggeredAbility extends TriggeredAbilityImpl {
         this.getTargets().clear();
         int excessDamage = dEvent.getExcess();
         this.addEffect(new DamageTargetEffect(excessDamage));
-        FilterCreaturePlayerOrPlaneswalker filter = new FilterCreaturePlayerOrPlaneswalker();
-        filter.getPermanentFilter().add(Predicates.not(new MageObjectReferencePredicate(new MageObjectReference(event.getTargetId(), game))));
-        this.addTarget(new TargetAnyTarget(filter).withChooseHint(Integer.toString(excessDamage) + " damage"));
+        FilterPermanentOrPlayer filter = new FilterAnyTarget();
+        filter.getPermanentFilter().add(Predicates.not(new MageObjectReferencePredicate(event.getTargetId(), game)));
+        this.addTarget(new TargetPermanentOrPlayer(filter).withChooseHint(Integer.toString(excessDamage) + " damage"));
         return true;
     }
 

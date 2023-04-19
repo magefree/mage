@@ -15,8 +15,10 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
+import mage.filter.common.FilterPermanentOrPlayer;
+import mage.filter.predicate.Predicates;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetPermanentOrPlayer;
 
 import java.util.UUID;
 
@@ -26,8 +28,18 @@ import java.util.UUID;
 public final class CauterySliver extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent(SubType.SLIVER, "All Slivers");
-    private static final FilterCreaturePlayerOrPlaneswalker filter2
-            = new FilterCreaturePlayerOrPlaneswalker("player, planeswalker, or Sliver creature", SubType.SLIVER);
+    private static final FilterPermanentOrPlayer filter2
+            = new FilterPermanentOrPlayer("player, planeswalker, or Sliver creature");
+
+    static {
+        filter2.getPermanentFilter().add(Predicates.or(
+                CardType.PLANESWALKER.getPredicate(),
+                Predicates.and(
+                        CardType.CREATURE.getPredicate(),
+                        SubType.SLIVER.getPredicate()
+                )
+        ));
+    }
 
     public CauterySliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}");
@@ -51,7 +63,7 @@ public final class CauterySliver extends CardImpl {
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new GenericManaCost(1)
         );
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetAnyTarget(filter2));
+        ability.addTarget(new TargetPermanentOrPlayer(filter2));
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 ability, Duration.WhileOnBattlefield, filter, "All Slivers have " +
                 "\"{1}, Sacrifice this permanent: Prevent the next 1 damage " +

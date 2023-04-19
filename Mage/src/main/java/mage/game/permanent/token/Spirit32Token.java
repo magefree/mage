@@ -20,7 +20,16 @@ public final class Spirit32Token extends TokenImpl {
         power = new MageInt(3);
         toughness = new MageInt(2);
 
-        availableImageSetCodes = Arrays.asList("STX");
+        availableImageSetCodes = Arrays.asList("STX", "MOM");
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode().equals("MOM")) {
+            this.setTokenType(2);
+        }
     }
 
     private Spirit32Token(final Spirit32Token token) {

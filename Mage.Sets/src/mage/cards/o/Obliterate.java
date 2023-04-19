@@ -32,7 +32,7 @@ public final class Obliterate extends CardImpl {
         // Obliterate can't be countered.
         this.addAbility(new CantBeCounteredSourceAbility());
         // Destroy all artifacts, creatures, and lands. They can't be regenerated.
-        this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
+        this.getSpellAbility().addEffect(new DestroyAllEffect(filter, true));
     }
 
     private Obliterate(final Obliterate card) {

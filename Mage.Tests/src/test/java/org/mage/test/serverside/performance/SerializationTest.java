@@ -1,11 +1,14 @@
 package org.mage.test.serverside.performance;
 
-import mage.abilities.keyword.InfectAbility;
+import mage.abilities.Ability;
+import mage.abilities.keyword.*;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.choices.Choice;
+import mage.choices.ChoiceImpl;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -21,8 +24,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -73,18 +75,18 @@ public class SerializationTest extends CardTestPlayerBase {
         CardUtil.getObjectPartsAsObjects(newCard).stream()
                 .map(Card.class::cast)
                 .forEach(card -> {
-                    Card testCard = CardUtil.getDefaultCardSideForBattlefield(currentGame, newCard);
                     Card testPermanent = null;
-                    if (!testCard.isInstantOrSorcery()) {
-                        testPermanent = new PermanentCard(testCard, playerA.getId(), currentGame);
+                    if (!card.isInstantOrSorcery()) {
+                        Card battlefieldCard = CardUtil.getDefaultCardSideForBattlefield(currentGame, card);
+                        testPermanent = new PermanentCard(battlefieldCard, playerA.getId(), currentGame);
                     }
 
                     // card
                     {
-                        Object compressed = CompressUtil.compress(testCard);
+                        Object compressed = CompressUtil.compress(card);
                         Assert.assertTrue("Must be zip", compressed instanceof ZippedObjectImpl);
                         Card uncompressed = (Card) CompressUtil.decompress(compressed);
-                        Assert.assertEquals("Must be same", testCard.getName(), uncompressed.getName());
+                        Assert.assertEquals("Must be same", card.getName(), uncompressed.getName());
                     }
 
                     // permanent
@@ -165,5 +167,36 @@ public class SerializationTest extends CardTestPlayerBase {
         Assert.assertTrue("Must be zip", compressed instanceof ZippedObjectImpl);
         GameView uncompressed = (GameView) CompressUtil.decompress(compressed);
         Assert.assertEquals("Must be same", 1, uncompressed.getPlayers().get(0).getBattlefield().size());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void test_Choices_MustHaveProtectionFromKeySetUsage() {
+        Map<String, Ability> abilityMap = new HashMap<>();
+        abilityMap.put("Flying", FlyingAbility.getInstance());
+        Choice choice = new ChoiceImpl(true);
+        choice.setMessage("Choose an ability");
+
+        choice.setChoices(abilityMap.keySet());
+        Assert.fail("Can't be here");
+    }
+
+    @Test
+    public void test_Choices_MustSupportSerialization() {
+        // related issue: https://github.com/magefree/mage/issues/10115
+        // copy-paste structure for the test (example from Atraxas Skitter)
+        Map<String, Ability> abilityMap = new HashMap<>();
+        abilityMap.put("Flying", FlyingAbility.getInstance());
+        abilityMap.put("Vigilance", VigilanceAbility.getInstance());
+        abilityMap.put("Deathtouch", DeathtouchAbility.getInstance());
+        abilityMap.put("Lifelink", LifelinkAbility.getInstance());
+        Choice choice = new ChoiceImpl(true);
+        choice.setMessage("Choose an ability");
+
+        choice.setChoices(new LinkedHashSet<>(abilityMap.keySet()));
+
+        Object compressed = CompressUtil.compress(choice);
+        Assert.assertTrue("Must be zip", compressed instanceof ZippedObjectImpl);
+        Choice uncompressed = (Choice) CompressUtil.decompress(compressed);
+        Assert.assertEquals("Must be same", choice.getChoices().size(), uncompressed.getChoices().size());
     }
 }

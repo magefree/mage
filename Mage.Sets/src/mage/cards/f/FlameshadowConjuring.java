@@ -39,7 +39,7 @@ public final class FlameshadowConjuring extends CardImpl {
                 StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN, false, SetTargetPointer.PERMANENT,
                 "Whenever a nontoken creature enters the battlefield under your control, "
                 + "you may pay {R}. If you do, create a token that's a copy of that creature. "
-                + "That token gains haste. Exile it at the beginning of the next end step");
+                + "That token gains haste. Exile it at the beginning of the next end step.");
         this.addAbility(ability);
     }
 

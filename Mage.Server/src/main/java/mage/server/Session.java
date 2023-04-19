@@ -203,6 +203,12 @@ public class Session {
         }
         returnMessage = connectUserHandling(userName, password);
         if (returnMessage != null) {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                logger.fatal("waiting of error message had failed", e);
+                Thread.currentThread().interrupt();
+            }
             sendErrorMessageToClient(returnMessage);
         }
         return returnMessage;

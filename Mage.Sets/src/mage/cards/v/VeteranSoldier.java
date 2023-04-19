@@ -60,7 +60,7 @@ class VeteranSoldierEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+        for (UUID opponentId : game.getOpponents(source.getControllerId(), true)) {
             if (game.getPlayer(opponentId) != null) {
                 new SoldierToken().putOntoBattlefield(
                         1, game, source, source.getControllerId(),

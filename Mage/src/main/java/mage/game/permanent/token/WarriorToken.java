@@ -22,7 +22,7 @@ public final class WarriorToken extends TokenImpl {
         subtype.add(SubType.WARRIOR);
         power = new MageInt(1);
         toughness = new MageInt(1);
-        availableImageSetCodes.addAll(Arrays.asList("KTK", "DTK", "BBD"));
+        availableImageSetCodes.addAll(Arrays.asList("KTK", "DTK", "BBD", "MOC"));
     }
 
     public WarriorToken(final WarriorToken token) {

@@ -27,6 +27,7 @@ public class AbilityView extends CardView {
         this.power = "";
         this.toughness = "";
         this.loyalty = "";
+        this.defense = "";
         this.cardTypes = new ArrayList<>();
         this.subTypes = new SubTypes();
         this.superTypes = EnumSet.noneOf(SuperType.class);

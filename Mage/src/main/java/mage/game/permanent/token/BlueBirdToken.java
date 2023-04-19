@@ -22,7 +22,7 @@ public final class BlueBirdToken extends TokenImpl {
 
         this.addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("EVE", "INV", "KHM");
+        availableImageSetCodes = Arrays.asList("EVE", "INV", "KHM", "30A");
     }
 
     public BlueBirdToken(final BlueBirdToken token) {
