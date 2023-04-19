@@ -1,6 +1,5 @@
 package mage.game.permanent.token;
 
-import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.TransformSourceEffect;
@@ -34,27 +33,5 @@ public final class IncubatorToken extends TokenImpl {
 
     public IncubatorToken copy() {
         return new IncubatorToken(this);
-    }
-}
-
-class Phyrexian00Token extends TokenImpl {
-
-    Phyrexian00Token() {
-        super("Phyrexian Token", "0/0 Phyrexian artifact creature token");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.PHYREXIAN);
-        power = new MageInt(0);
-        toughness = new MageInt(0);
-
-        availableImageSetCodes = Arrays.asList("MOM");
-    }
-
-    public Phyrexian00Token(final Phyrexian00Token token) {
-        super(token);
-    }
-
-    public Phyrexian00Token copy() {
-        return new Phyrexian00Token(this);
     }
 }
