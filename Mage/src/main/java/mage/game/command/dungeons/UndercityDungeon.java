@@ -159,9 +159,11 @@ class ThroneOfTheDeadThreeEffect extends OneShotEffect {
         if (card != null) {
             player.moveCards(card, Zone.BATTLEFIELD, source, game);
             Permanent permanent = game.getPermanent(card.getId());
-            permanent.addCounters(CounterType.P1P1.createInstance(3), source, game);
-            game.addEffect(new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.UntilYourNextTurn)
-                    .setTargetPointer(new FixedTarget(permanent, game)), source);
+            if (permanent != null) {
+                permanent.addCounters(CounterType.P1P1.createInstance(3), source, game);
+                game.addEffect(new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.UntilYourNextTurn)
+                        .setTargetPointer(new FixedTarget(permanent, game)), source);
+            }
         }
         player.shuffleLibrary(source, game);
         return true;
