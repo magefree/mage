@@ -41,21 +41,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     // list of set codes token images are available for
     protected List<String> availableImageSetCodes = new ArrayList<>();
 
-    public enum Type {
-
-        FIRST(1),
-        SECOND(2);
-
-        int code;
-
-        Type(int code) {
-            this.code = code;
-        }
-
-        int getCode() {
-            return this.code;
-        }
-    }
+    protected Token backFace = null;
 
     public TokenImpl() {
     }
@@ -65,7 +51,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         this.description = description;
     }
 
-    public TokenImpl(final TokenImpl token) {
+    protected TokenImpl(final TokenImpl token) {
         super(token);
         this.description = token.description;
         this.tokenType = token.tokenType;
@@ -74,6 +60,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         this.originalExpansionSetCode = token.originalExpansionSetCode;
         this.copySourceCard = token.copySourceCard; // will never be changed
         this.availableImageSetCodes = token.availableImageSetCodes;
+        this.backFace = token.backFace != null ? token.backFace.copy() : null;
     }
 
     @Override
@@ -434,5 +421,10 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     public void setExpansionSetCodeForImage(String code) {
         // TODO: delete
         setOriginalExpansionSetCode(code);
+    }
+
+    @Override
+    public Token getBackFace() {
+        return backFace;
     }
 }

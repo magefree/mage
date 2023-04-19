@@ -122,6 +122,16 @@ public class PermanentToken extends PermanentImpl {
     }
 
     @Override
+    public boolean isTransformable() {
+        return token.getBackFace() != null;
+    }
+
+    @Override
+    protected MageObject getOtherFace() {
+        return this.transformed ? token : this.token.getBackFace();
+    }
+
+    @Override
     public String getCardNumber() {
         return token.getOriginalCardNumber();
     }

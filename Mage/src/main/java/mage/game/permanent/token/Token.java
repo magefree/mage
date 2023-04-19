@@ -58,4 +58,6 @@ public interface Token extends MageObject {
     void setCopySourceCard(Card copySourceCard);
 
     void setExpansionSetCodeForImage(String code);
+
+    Token getBackFace();
 }

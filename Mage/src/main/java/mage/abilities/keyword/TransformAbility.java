@@ -1,5 +1,6 @@
 package mage.abilities.keyword;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.SimpleStaticAbility;
@@ -9,6 +10,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.MageObjectAttribute;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 import mage.game.stack.Spell;
 
 /**
@@ -37,7 +39,7 @@ public class TransformAbility extends SimpleStaticAbility {
         return "";
     }
 
-    public static void transformPermanent(Permanent permanent, Card sourceCard, Game game, Ability source) {
+    public static void transformPermanent(Permanent permanent, MageObject sourceCard, Game game, Ability source) {
         if (sourceCard == null) {
             return;
         }
@@ -57,7 +59,9 @@ public class TransformAbility extends SimpleStaticAbility {
         for (SuperType type : sourceCard.getSuperType()) {
             permanent.addSuperType(type);
         }
-        permanent.setExpansionSetCode(sourceCard.getExpansionSetCode());
+        if (sourceCard instanceof Card) {
+            permanent.setExpansionSetCode(((Card) sourceCard).getExpansionSetCode());
+        }
         permanent.getAbilities().clear();
         for (Ability ability : sourceCard.getAbilities()) {
             // source == null -- call from init card (e.g. own abilities)
@@ -141,7 +145,12 @@ class TransformEffect extends ContinuousEffectImpl {
             return true;
         }
 
-        Card card = permanent.getSecondCardFace();
+        MageObject card;
+        if (permanent instanceof PermanentToken) {
+            card = ((PermanentToken) permanent).getToken().getBackFace();
+        } else {
+            card = permanent.getSecondCardFace();
+        }
 
         if (card == null) {
             return false;
