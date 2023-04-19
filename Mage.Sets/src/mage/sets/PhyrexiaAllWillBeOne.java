@@ -128,6 +128,8 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Karumonix, the Rat King", 98, Rarity.RARE, mage.cards.k.KarumonixTheRatKing.class));
         cards.add(new SetCardInfo("Kaya, Intangible Slayer", 205, Rarity.RARE, mage.cards.k.KayaIntangibleSlayer.class));
         cards.add(new SetCardInfo("Kemba, Kha Enduring", 19, Rarity.RARE, mage.cards.k.KembaKhaEnduring.class));
+        cards.add(new SetCardInfo("Kethek, Crucible Goliath", 206, Rarity.RARE, mage.cards.k.KethekCrucibleGoliath.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kethek, Crucible Goliath", 319, Rarity.RARE, mage.cards.k.KethekCrucibleGoliath.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Koth, Fire of Resistance", 138, Rarity.RARE, mage.cards.k.KothFireOfResistance.class));
         cards.add(new SetCardInfo("Kuldotha Cackler", 139, Rarity.COMMON, mage.cards.k.KuldothaCackler.class));
         cards.add(new SetCardInfo("Lattice-Blade Mantis", 173, Rarity.COMMON, mage.cards.l.LatticeBladeMantis.class));
