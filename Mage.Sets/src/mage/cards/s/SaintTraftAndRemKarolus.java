@@ -19,6 +19,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.permanent.token.AngelToken;
 import mage.game.permanent.token.RedHumanToken;
 import mage.game.permanent.token.SpiritBlueToken;
+import mage.watchers.common.AbilityResolvedWatcher;
 
 import java.util.UUID;
 
@@ -52,7 +53,7 @@ public final class SaintTraftAndRemKarolus extends CardImpl {
         ability.addEffect(new IfAbilityHasResolvedXTimesEffect(
                 Outcome.PutCreatureInPlay, 3, new CreateTokenEffect(new AngelToken())
         ).setText("If it's the third time, create a 4/4 white Angel creature token with flying"));
-        this.addAbility(ability);
+        this.addAbility(ability, new AbilityResolvedWatcher());
 
         // Whenever you cast a spell that has convoke, untap Saint Traft and Rem Karolus.
         this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filter, false));
