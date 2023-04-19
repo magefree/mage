@@ -168,6 +168,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Into the Fire", 144, Rarity.RARE, mage.cards.i.IntoTheFire.class));
         cards.add(new SetCardInfo("Invasion of Alara", 230, Rarity.RARE, mage.cards.i.InvasionOfAlara.class));
         cards.add(new SetCardInfo("Invasion of Amonkhet", 231, Rarity.UNCOMMON, mage.cards.i.InvasionOfAmonkhet.class));
+        cards.add(new SetCardInfo("Invasion of Arcavios", 61, Rarity.RARE, mage.cards.i.InvasionOfArcavios.class));
         cards.add(new SetCardInfo("Invasion of Azgol", 232, Rarity.UNCOMMON, mage.cards.i.InvasionOfAzgol.class));
         cards.add(new SetCardInfo("Invasion of Belenon", 20, Rarity.UNCOMMON, mage.cards.i.InvasionOfBelenon.class));
         cards.add(new SetCardInfo("Invasion of Dominaria", 21, Rarity.UNCOMMON, mage.cards.i.InvasionOfDominaria.class));
@@ -201,6 +202,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Invasion of Vryn", 64, Rarity.UNCOMMON, mage.cards.i.InvasionOfVryn.class));
         cards.add(new SetCardInfo("Invasion of Xerex", 242, Rarity.UNCOMMON, mage.cards.i.InvasionOfXerex.class));
         cards.add(new SetCardInfo("Invasion of Zendikar", 194, Rarity.UNCOMMON, mage.cards.i.InvasionOfZendikar.class));
+        cards.add(new SetCardInfo("Invocation of the Founders", 61, Rarity.RARE, mage.cards.i.InvocationOfTheFounders.class));
         cards.add(new SetCardInfo("Iridescent Blademaster", 195, Rarity.COMMON, mage.cards.i.IridescentBlademaster.class));
         cards.add(new SetCardInfo("Island", 278, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jin-Gitaxias", 65, Rarity.MYTHIC, mage.cards.j.JinGitaxias.class));
