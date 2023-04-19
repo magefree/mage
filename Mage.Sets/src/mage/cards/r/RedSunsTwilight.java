@@ -68,13 +68,13 @@ class RedSunsTwilightEffect extends OneShotEffect {
                 "Those tokens gain haste. Exile them at the beginning of the next end step.";
     }
 
-    private RedSunsTwilightEffect(final mage.cards.r.RedSunsTwilightEffect effect) {
+    private RedSunsTwilightEffect(final RedSunsTwilightEffect effect) {
         super(effect);
     }
 
     @Override
-    public mage.cards.r.RedSunsTwilightEffect copy() {
-        return new mage.cards.r.RedSunsTwilightEffect(this);
+    public RedSunsTwilightEffect copy() {
+        return new RedSunsTwilightEffect(this);
     }
 
     @Override
@@ -105,11 +105,10 @@ class RedSunsTwilightEffect extends OneShotEffect {
             // Copies gain haste
             CreateTokenCopyTargetEffect effect
                     = new CreateTokenCopyTargetEffect(player.getId(), null, true);
-            effect.setUseLKI(true);
             effect.setSavedPermanent(destoyedArtifact);
             effect.apply(game, source);
             // Collect created Tokens
-            tokens.add(effect.getAddedPermanents().get(0));
+            tokens.addAll(effect.getAddedPermanents());
         }
 
         // Exile them at the beginning of the next end step
