@@ -21,6 +21,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         this.hasBoosters = false; // temporary
 
         cards.add(new SetCardInfo("Adaptive Sporesinger", 157, Rarity.COMMON, mage.cards.a.AdaptiveSporesinger.class));
+        cards.add(new SetCardInfo("Against All Odds", 1, Rarity.UNCOMMON, mage.cards.a.AgainstAllOdds.class));
         cards.add(new SetCardInfo("All Will Be One", 118, Rarity.MYTHIC, mage.cards.a.AllWillBeOne.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("All Will Be One", 352, Rarity.MYTHIC, mage.cards.a.AllWillBeOne.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ambulatory Edifice", 79, Rarity.UNCOMMON, mage.cards.a.AmbulatoryEdifice.class));
