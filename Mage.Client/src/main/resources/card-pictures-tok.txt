@@ -1,150 +1,119 @@
-#TODO: some sets (TOK:code) don't have tokens but recorded here - must be fixed and removed (from that file and from tokens)
-#Generate|TOK:TPR|Goblin||
-#Generate|TOK:TPR|Pegasus||
-#Generate|TOK:TPR|Rat||
-#Generate|TOK:TPR|Reflection||
-#Generate|TOK:TPR|Saproling||
-#Generate|TOK:TPR|Sliver||
-#Generate|TOK:TPR|Spike||
-#Generate|TOK:TPR|Spirit||
-#Generate|TOK:TPR|Thopter||
-#Generate|TOK:TPR|Zombie||
-#|Generate|TOK:5DN|Kaldra||
-#|Generate|TOK:CHK|Dragon Spirit||
-#|Generate|TOK:FNMP|Centaur||
-#|Generate|TOK:FNMP|Wurm||
-#|Generate|TOK:PGPX|Elephant||
-#|Generate|TOK:PGPX|Germ||
-#|Generate|TOK:GRC|Bird||
-#|Generate|TOK:GRC|Golem||
-#|Generate|TOK:GRC|Human||
-#|Generate|TOK:GRC|Myr||
-#|Generate|TOK:GRC|Saproling||
-#|Generate|TOK:JR|Angel||
-#|Generate|TOK:JR|Faerie Rogue||
-#|Generate|TOK:JR|Soldier||
-#|Generate|TOK:JR|Squirrel||
-#|Generate|TOK:PMEI|Beast||
-#|Generate|TOK:PMEI|Cat||
-#|Generate|TOK:PMEI|Dragon||
-#|Generate|TOK:PMEI|Elephant||
-#|Generate|TOK:PMEI|Goblin||
-#|Generate|TOK:PMEI|Zombie||
-#|Generate|TOK:MLP|Thopter||
-#|Generate|TOK:PPRE|Angel||
-#|Generate|TOK:PPRE|Avatar||
-#|Generate|TOK:PPRE|Beast||
-#|Generate|TOK:PPRE|Dragon||
-#|Generate|TOK:PPRE|Elemental||
-#|Generate|TOK:PPRE|Harpy||
-#|Generate|TOK:PPRE|Hippo||
-#|Generate|TOK:PPRE|Soldier||
-#|Generate|TOK:PPRE|Wolf||
-#|Generate|TOK:PPRE|Wurm||
+# Tokens database
 
-# Emblems
-|Generate|EMBLEM!:BFZ|Emblem Gideon|||GideonAllyOfZendikarEmblem|
-|Generate|EMBLEM!:BFZ|Emblem Kiora|||KioraMasterOfTheDepthsEmblem|
-|Generate|EMBLEM!:BFZ|Emblem Nixilis|||ObNixilisReignitedEmblem|
-|Generate|EMBLEM!:DDR|Emblem Nixilis|||ObNixilisReignitedEmblem|
-|Generate|EMBLEM!:AKH|Emblem Gideon|||GideonOfTheTrialsEmblem|
-|Generate|EMBLEM!:C14|Emblem Daretti|||DarettiScrapSavantEmblem|
-|Generate|EMBLEM!:C14|Emblem Nixilis|||ObNixilisOfTheBlackOathEmblem|
-|Generate|EMBLEM!:C14|Emblem Teferi|||TeferiTemporalArchmageEmblem|
-|Generate|EMBLEM!:C16|Emblem Daretti|||DarettiScrapSavantEmblem|
-|Generate|EMBLEM!:CM2|Emblem Daretti|||DarettiScrapSavantEmblem|
-|Generate|EMBLEM:C19|Ob Nixilis Reignited||Emblem Nixilis|ObNixilisReignitedEmblem|
-|Generate|EMBLEM!:CNS|Emblem Dack Fayden||Emblem Dack|DackFaydenEmblem|
-|Generate|EMBLEM!:DTK|Emblem Narset|||NarsetTranscendentEmblem|
-|Generate|EMBLEM!:EMA|Emblem Dack Fayden||Emblem Dack|DackFaydenEmblem|
-|Generate|EMBLEM!:EMN|Emblem Liliana|||LilianaTheLastHopeEmblem|
-|Generate|EMBLEM!:EMN|Emblem Tamiyo|||TamiyoFieldResearcherEmblem|
-|Generate|EMBLEM!:KLD|Emblem Chandra|||ChandraTorchOfDefianceEmblem|
-|Generate|EMBLEM!:KLD|Emblem Dovin|||DovinBaanEmblem|
-|Generate|EMBLEM!:KLD|Emblem Nissa|||NissaVitalForceEmblem|
-|Generate|EMBLEM!:KTK|Emblem Sarkhan|||SarkhanTheDragonspeakerEmblem|
-|Generate|EMBLEM!:KTK|Emblem Sorin|||SorinSolemnVisitorEmblem|
-|Generate|EMBLEM!:M15|Emblem Ajani|||AjaniSteadfastEmblem|
-|Generate|EMBLEM!:M15|Emblem Garruk|||GarrukApexPredatorEmblem|
-|Generate|EMBLEM!:MM3|Emblem Domri|||DomriRadeEmblem|
-|Generate|EMBLEM!:ORI|Emblem Chandra|||ChandraRoaringFlameEmblem|
-|Generate|EMBLEM!:ORI|Emblem Jace|||JaceTelepathUnboundEmblem|
-|Generate|EMBLEM!:ORI|Emblem Liliana|||LilianaDefiantNecromancerEmblem|
-|Generate|EMBLEM!:SOI|Emblem Arlinn|||ArlinnEmbracedByTheMoonEmblem|
-|Generate|EMBLEM!:SOI|Emblem Jace|||JaceUnravelerOfSecretsEmblem|
-|Generate|EMBLEM!:MED|Emblem Dack|||DackFaydenEmblem|
-|Generate|EMBLEM!:MED|Emblem Domri|||DomriChaosBringerEmblem|
-|Generate|EMBLEM!:MED|Emblem Elspeth|||ElspethKnightErrantEmblem|
-|Generate|EMBLEM!:MED|Emblem Garruk|||GarrukApexPredatorEmblem|
-|Generate|EMBLEM!:MED|Emblem Jaya Ballard|||JayaBallardEmblem|
-|Generate|EMBLEM!:MED|Emblem Liliana|||LilianaTheLastHopeEmblem|
-|Generate|EMBLEM!:MED|Emblem Ral|||RalIzzetViceroyEmblem|
-|Generate|EMBLEM!:MED|Emblem Tamiyo|||TamiyoTheMoonSageEmblem|
-|Generate|EMBLEM!:MED|Emblem Teferi|||TeferiHeroOfDominariaEmblem|
-|Generate|EMBLEM!:MED|Emblem Vraska|||VraskaGolgariQueenEmblem|
-|Generate|EMBLEM!:BBD|Emblem Rowan Kenrith|||RowanKenrithEmblem|
-|Generate|EMBLEM!:BBD|Emblem Will Kenrith|||WillKenrithEmblem|
-|Generate|EMBLEM!:CLB|Emblem Rowan Kenrith|||RowanKenrithEmblem|
-|Generate|EMBLEM!:CLB|Emblem Will Kenrith|||WillKenrithEmblem|
-|Generate|EMBLEM!:2X2|Emblem Liliana|||LilianaTheLastHopeEmblem|
-|Generate|EMBLEM:THS|Elspeth, Sun's Champion||Emblem Elspeth|ElspethSunsChampionEmblem|
-|Generate|EMBLEM:AVR|Tamiyo, the Moon Sage||Emblem Tamiyo|TamiyoTheMoonSageEmblem|
-|Generate|EMBLEM:BNG|Kiora, the Crashing Wave||Emblem Kiora|KioraEmblem|
-|Generate|EMBLEM:DDI|Koth of the Hammer||Emblem Koth|KothOfTheHammerEmblem|
-|Generate|EMBLEM:DDI|Venser, the Sojourner||Emblem Venser|VenserTheSojournerEmblem|
-|Generate|EMBLEM:DKA|Sorin, Lord of Innistrad||Emblem Sorin|SorinLordOfInnistradEmblem|
-|Generate|EMBLEM:GTC|Domri Rade||Emblem Domri|DomriRadeEmblem|
-|Generate|EMBLEM:M13|Liliana of the Dark Realms||Emblem Liliana|LilianaOfTheDarkRealmsEmblem|
-|Generate|EMBLEM:M14|Garruk, Caller of Beasts||Emblem Garruk|GarrukCallerOfBeastsEmblem|
-|Generate|EMBLEM:M14|Liliana of the Dark Realms||Emblem Liliana|LilianaOfTheDarkRealmsEmblem|
-|Generate|EMBLEM:MMA|Elspeth, Knight Errant||Emblem Elspeth|ElspethKnightErrantEmblem|
-|Generate|EMBLEM:MD1|Elspeth, Knight Errant||Emblem Elspeth|ElspethKnightErrantEmblem|
-|Generate|EMBLEM:SWS|Obi-Wan Kenobi||Emblem Obi-Wan Kenobi|ObiWanKenobiEmblem|
-|Generate|EMBLEM:RIX|Huatli, Radiant Champion||Emblem Huatli|HuatliRadiantChampionEmblem|
-|Generate|EMBLEM:RNA|Domri, Chaos Bringer||Emblem Domri|DomriChaosBringerEmblem|
-|Generate|EMBLEM:WAR|Nissa, Who Shakes the World||Emblem Nissa|NissaWhoShakesTheWorldEmblem|
-|Generate|EMBLEM:MH1|Serra the Benevolent||Emblem Serra|SerraTheBenevolentEmblem|
-|Generate|EMBLEM:MH1|Wrenn and Six||Emblem Wrenn|WrennAndSixEmblem|
-|Generate|EMBLEM:M19|Ajani, Adversary of Tyrants||Emblem Ajani|AjaniAdversaryOfTyrantsEmblem|
-|Generate|EMBLEM:M19|Tezzeret, Artifice Master||Emblem Tezzeret|TezzeretArtificeMasterEmblem|
-|Generate|EMBLEM:M19|Vivien Reid||Emblem Vivien|VivienReidEmblem|
-|Generate|EMBLEM:M20|Chandra, Awakened Inferno||Emblem Chandra|ChandraAwakenedInfernoEmblem|
-|Generate|EMBLEM:M20|Mu Yanling, Sky Dancer||Emblem Yanling|MuYanlingSkyDancerEmblem|
-|Generate|EMBLEM:GRN|Ral, Izzet Viceroy||Emblem Ral|RalIzzetViceroyEmblem|
-|Generate|EMBLEM:GRN|Vraska, Golgari Queen||Emblem Vraska|VraskaGolgariQueenEmblem|
-|Generate|EMBLEM:DOM|Jaya Ballard||Emblem Jaya Ballard|JayaBallardEmblem|
-|Generate|EMBLEM:DOM|Teferi, Hero of Dominaria||Emblem Teferi|TeferiHeroOfDominariaEmblem|
-|Generate|EMBLEM:AER|Tezzeret the Schemer||Emblem Tezzeret|TezzeretTheSchemerEmblem|
-|Generate|EMBLEM:ELD|Garruk, Cursed Huntsman||Emblem Garruk|GarrukCursedHuntsmanEmblem|
-|Generate|EMBLEM:IKO|Narset Of The Ancient Way||Emblem Narset|NarsetOfTheAncientWayEmblem|
-|Generate|EMBLEM:M21|Basri Ket||Emblem Basri|BasriKetEmblem|
-|Generate|EMBLEM:M21|Garruk, Unleashed||Emblem Garruk|GarrukUnleashedEmblem|
-|Generate|EMBLEM:M21|Liliana, Waker of the Dead||Emblem Liliana|LilianaWakerOfTheDeadEmblem|
-|Generate|EMBLEM:KHM|Kaya the Inexorable||Emblem Kaya|KayaTheInexorableEmblem|
-|Generate|EMBLEM:KHM|Tibalt, Cosmic Impostor||Emblem Tibalt|TibaltCosmicImpostorEmblem|
-|Generate|EMBLEM:KHM|Tyvar Kell||Emblem Tyvar|TyvarKellEmblem|
-|Generate|EMBLEM:STX|Lukka, Wayward Bonder||Emblem Lukka|LukkaWaywardBonderEmblem|
-|Generate|EMBLEM:STX|Rowan, Scholar of Sparks||Emblem Rowan|RowanScholarOfSparksEmblem|
-|Generate|EMBLEM:AFR|Ellywick Tumblestrum||Emblem Ellywick|EllywickTumblestrumEmblem|
-|Generate|EMBLEM:AFR|Lolth, Spider Queen||Emblem Lolth|LolthSpiderQueenEmblem|
-|Generate|EMBLEM:AFR|Mordenkainen||Emblem Mordenkainen|MordenkainenEmblem|
-|Generate|EMBLEM:AFR|Zariel, Archduke of Avernus||Emblem Zariel|ZarielArchdukeOfAvernusEmblem|
-|Generate|EMBLEM:MID|Teferi, Who Slows the Sunset||Emblem Teferi|TeferiWhoSlowsTheSunsetEmblem|
-|Generate|EMBLEM:MID|Wrenn and Seven||Emblem Wrenn|WrennAndSevenEmblem|
-|Generate|EMBLEM:VOW|Chandra, Dressed to Kill||Emblem Chandra|ChandraDressedToKillEmblem|
-|Generate|EMBLEM:NEO|Kaito Shizuki||Emblem Kaito|KaitoShizukiEmblem|
-|Generate|EMBLEM:NEO|Tezzeret, Betrayer of Flesh||Emblem Tezzeret|TezzeretBetrayerOfFleshEmblem|
-|Generate|EMBLEM:2X2|Wrenn and Six||Emblem Wrenn|WrennAndSixEmblem|
-|Generate|EMBLEM:DMU|Ajani, Sleeper Agent||Emblem Ajani|AjaniSleeperAgentEmblem|
-|Generate|EMBLEM:DMU|Jaya, Fiery Negotiator||Emblem Jaya|JayaFieryNegotiatorEmblem|
-|Generate|EMBLEM:BRO|Saheeli, Filigree Master||Emblem Saheeli|SaheeliFiligreeMasterEmblem|
-|Generate|EMBLEM:ONE|Koth, Fire of Resistance||Emblem Koth|KothFireOfResistanceEmblem|
-|Generate|EMBLEM:MOM|Teferi Akosa of Zhalfir||Emblem Teferi|TeferiAkosaOfZhalfirEmblem|
-|Generate|EMBLEM:MOM|Wrenn and Realmbreaker||Emblem Wrenn|WrennAndRealmbreakerEmblem|
-|Generate|EMBLEM:MOC|Elspeth, Sun's Champion||Emblem Elspeth|ElspethSunsChampionEmblem|
-|Generate|EMBLEM:MOC|Teferi's Talent||Emblem Teferi|TeferisTalentEmblem|
+# Contains all possible emblems, planes, dungeons and tokens
+# All objects must have an image (private tokens don't have image,
+# so can be ignored)
 
-# Planes
+# Use verify test to check it: test_checkMissingTokenData
+
+# ALL EMBLEMS
+# Usage hints:
+# - use simple name for the emblem like Gideon
+# - all names must be different in one set
+# - xmage do not support various arts for the emblems (e.g. must be one emblem's image per set)
+|Generate|EMBLEM:BFZ|Emblem Gideon|||GideonAllyOfZendikarEmblem|
+|Generate|EMBLEM:BFZ|Emblem Kiora|||KioraMasterOfTheDepthsEmblem|
+|Generate|EMBLEM:BFZ|Emblem Nixilis|||ObNixilisReignitedEmblem|
+|Generate|EMBLEM:DDR|Emblem Nixilis|||ObNixilisReignitedEmblem|
+|Generate|EMBLEM:AKH|Emblem Gideon|||GideonOfTheTrialsEmblem|
+|Generate|EMBLEM:C14|Emblem Daretti|||DarettiScrapSavantEmblem|
+|Generate|EMBLEM:C14|Emblem Nixilis|||ObNixilisOfTheBlackOathEmblem|
+|Generate|EMBLEM:C14|Emblem Teferi|||TeferiTemporalArchmageEmblem|
+|Generate|EMBLEM:C16|Emblem Daretti|||DarettiScrapSavantEmblem|
+|Generate|EMBLEM:CM2|Emblem Daretti|||DarettiScrapSavantEmblem|
+|Generate|EMBLEM:C19|Emblem Nixilis|||ObNixilisReignitedEmblem|
+|Generate|EMBLEM:CNS|Emblem Dack Fayden||Emblem Dack|DackFaydenEmblem|
+|Generate|EMBLEM:DTK|Emblem Narset|||NarsetTranscendentEmblem|
+|Generate|EMBLEM:EMA|Emblem Dack Fayden||Emblem Dack|DackFaydenEmblem|
+|Generate|EMBLEM:EMN|Emblem Liliana|||LilianaTheLastHopeEmblem|
+|Generate|EMBLEM:EMN|Emblem Tamiyo|||TamiyoFieldResearcherEmblem|
+|Generate|EMBLEM:KLD|Emblem Chandra|||ChandraTorchOfDefianceEmblem|
+|Generate|EMBLEM:KLD|Emblem Dovin|||DovinBaanEmblem|
+|Generate|EMBLEM:KLD|Emblem Nissa|||NissaVitalForceEmblem|
+|Generate|EMBLEM:KTK|Emblem Sarkhan|||SarkhanTheDragonspeakerEmblem|
+|Generate|EMBLEM:KTK|Emblem Sorin|||SorinSolemnVisitorEmblem|
+|Generate|EMBLEM:M15|Emblem Ajani|||AjaniSteadfastEmblem|
+|Generate|EMBLEM:M15|Emblem Garruk|||GarrukApexPredatorEmblem|
+|Generate|EMBLEM:MM3|Emblem Domri|||DomriRadeEmblem|
+|Generate|EMBLEM:ORI|Emblem Chandra|||ChandraRoaringFlameEmblem|
+|Generate|EMBLEM:ORI|Emblem Jace|||JaceTelepathUnboundEmblem|
+|Generate|EMBLEM:ORI|Emblem Liliana|||LilianaDefiantNecromancerEmblem|
+|Generate|EMBLEM:SOI|Emblem Arlinn|||ArlinnEmbracedByTheMoonEmblem|
+|Generate|EMBLEM:SOI|Emblem Jace|||JaceUnravelerOfSecretsEmblem|
+|Generate|EMBLEM:MED|Emblem Dack|||DackFaydenEmblem|
+|Generate|EMBLEM:MED|Emblem Domri|||DomriChaosBringerEmblem|
+|Generate|EMBLEM:MED|Emblem Elspeth|||ElspethKnightErrantEmblem|
+|Generate|EMBLEM:MED|Emblem Garruk|||GarrukApexPredatorEmblem|
+|Generate|EMBLEM:MED|Emblem Jaya Ballard|||JayaBallardEmblem|
+|Generate|EMBLEM:MED|Emblem Liliana|||LilianaTheLastHopeEmblem|
+|Generate|EMBLEM:MED|Emblem Ral|||RalIzzetViceroyEmblem|
+|Generate|EMBLEM:MED|Emblem Tamiyo|||TamiyoTheMoonSageEmblem|
+|Generate|EMBLEM:MED|Emblem Teferi|||TeferiHeroOfDominariaEmblem|
+|Generate|EMBLEM:MED|Emblem Vraska|||VraskaGolgariQueenEmblem|
+|Generate|EMBLEM:BBD|Emblem Rowan Kenrith|||RowanKenrithEmblem|
+|Generate|EMBLEM:BBD|Emblem Will Kenrith|||WillKenrithEmblem|
+|Generate|EMBLEM:CLB|Emblem Rowan Kenrith|||RowanKenrithEmblem|
+|Generate|EMBLEM:CLB|Emblem Will Kenrith|||WillKenrithEmblem|
+|Generate|EMBLEM:2X2|Emblem Liliana|||LilianaTheLastHopeEmblem|
+|Generate|EMBLEM:THS|Emblem Elspeth|||ElspethSunsChampionEmblem|
+|Generate|EMBLEM:AVR|Emblem Tamiyo|||TamiyoTheMoonSageEmblem|
+|Generate|EMBLEM:BNG|Emblem Kiora|||KioraEmblem|
+|Generate|EMBLEM:DDI|Emblem Koth|||KothOfTheHammerEmblem|
+|Generate|EMBLEM:DDI|Emblem Venser|||VenserTheSojournerEmblem|
+|Generate|EMBLEM:DKA|Emblem Sorin|||SorinLordOfInnistradEmblem|
+|Generate|EMBLEM:GTC|Emblem Domri|||DomriRadeEmblem|
+|Generate|EMBLEM:M13|Emblem Liliana|||LilianaOfTheDarkRealmsEmblem|
+|Generate|EMBLEM:M14|Emblem Garruk|||GarrukCallerOfBeastsEmblem|
+|Generate|EMBLEM:M14|Emblem Liliana|||LilianaOfTheDarkRealmsEmblem|
+|Generate|EMBLEM:MMA|Emblem Elspeth|||ElspethKnightErrantEmblem|
+|Generate|EMBLEM:MD1|Emblem Elspeth|||ElspethKnightErrantEmblem|
+|Generate|EMBLEM:SWS|Emblem Obi-Wan Kenobi|||ObiWanKenobiEmblem|
+|Generate|EMBLEM:SWS|Emblem Luke Skywalker|||LukeSkywalkerEmblem|
+|Generate|EMBLEM:RIX|Emblem Huatli|||HuatliRadiantChampionEmblem|
+|Generate|EMBLEM:RNA|Emblem Domri|||DomriChaosBringerEmblem|
+|Generate|EMBLEM:WAR|Emblem Nissa|||NissaWhoShakesTheWorldEmblem|
+|Generate|EMBLEM:MH1|Emblem Serra|||SerraTheBenevolentEmblem|
+|Generate|EMBLEM:MH1|Emblem Wrenn|||WrennAndSixEmblem|
+|Generate|EMBLEM:M19|Emblem Ajani|||AjaniAdversaryOfTyrantsEmblem|
+|Generate|EMBLEM:M19|Emblem Tezzeret|||TezzeretArtificeMasterEmblem|
+|Generate|EMBLEM:M19|Emblem Vivien|||VivienReidEmblem|
+|Generate|EMBLEM:M20|Emblem Chandra|||ChandraAwakenedInfernoEmblem|
+|Generate|EMBLEM:M20|Emblem Yanling|||MuYanlingSkyDancerEmblem|
+|Generate|EMBLEM:GRN|Emblem Ral|||RalIzzetViceroyEmblem|
+|Generate|EMBLEM:GRN|Emblem Vraska|||VraskaGolgariQueenEmblem|
+|Generate|EMBLEM:DOM|Emblem Jaya Ballard|||JayaBallardEmblem|
+|Generate|EMBLEM:DOM|Emblem Teferi|||TeferiHeroOfDominariaEmblem|
+|Generate|EMBLEM:AER|Emblem Tezzeret|||TezzeretTheSchemerEmblem|
+|Generate|EMBLEM:ELD|Emblem Garruk|||GarrukCursedHuntsmanEmblem|
+|Generate|EMBLEM:IKO|Emblem Narset|||NarsetOfTheAncientWayEmblem|
+|Generate|EMBLEM:M21|Emblem Basri|||BasriKetEmblem|
+|Generate|EMBLEM:M21|Emblem Garruk|||GarrukUnleashedEmblem|
+|Generate|EMBLEM:M21|Emblem Liliana|||LilianaWakerOfTheDeadEmblem|
+|Generate|EMBLEM:KHM|Emblem Kaya|||KayaTheInexorableEmblem|
+|Generate|EMBLEM:KHM|Emblem Tibalt|||TibaltCosmicImpostorEmblem|
+|Generate|EMBLEM:KHM|Emblem Tyvar|||TyvarKellEmblem|
+|Generate|EMBLEM:STX|Emblem Lukka|||LukkaWaywardBonderEmblem|
+|Generate|EMBLEM:STX|Emblem Rowan|||RowanScholarOfSparksEmblem|
+|Generate|EMBLEM:AFR|Emblem Ellywick|||EllywickTumblestrumEmblem|
+|Generate|EMBLEM:AFR|Emblem Lolth|||LolthSpiderQueenEmblem|
+|Generate|EMBLEM:AFR|Emblem Mordenkainen|||MordenkainenEmblem|
+|Generate|EMBLEM:AFR|Emblem Zariel|||ZarielArchdukeOfAvernusEmblem|
+|Generate|EMBLEM:MID|Emblem Teferi|||TeferiWhoSlowsTheSunsetEmblem|
+|Generate|EMBLEM:MID|Emblem Wrenn|||WrennAndSevenEmblem|
+|Generate|EMBLEM:VOW|Emblem Chandra|||ChandraDressedToKillEmblem|
+|Generate|EMBLEM:NEO|Emblem Kaito|||KaitoShizukiEmblem|
+|Generate|EMBLEM:NEO|Emblem Tezzeret|||TezzeretBetrayerOfFleshEmblem|
+|Generate|EMBLEM:2X2|Emblem Wrenn|||WrennAndSixEmblem|
+|Generate|EMBLEM:DMU|Emblem Ajani|||AjaniSleeperAgentEmblem|
+|Generate|EMBLEM:DMU|Emblem Jaya|||JayaFieryNegotiatorEmblem|
+|Generate|EMBLEM:BRO|Emblem Saheeli|||SaheeliFiligreeMasterEmblem|
+|Generate|EMBLEM:ONE|Emblem Koth|||KothFireOfResistanceEmblem|
+|Generate|EMBLEM:MOM|Emblem Teferi|||TeferiAkosaOfZhalfirEmblem|
+|Generate|EMBLEM:MOM|Emblem Wrenn|||WrennAndRealmbreakerEmblem|
+|Generate|EMBLEM:MOC|Emblem Elspeth|||ElspethSunsChampionEmblem|
+|Generate|EMBLEM:MOC|Emblem Teferi|||TeferisTalentEmblem|
+
+# ALL PLANES
 |Generate|PLANE:PCA|Plane - Academy at Tolaria West|||AcademyAtTolariaWestPlane|
 |Generate|PLANE:PCA|Plane - Agyrem|||AgyremPlane|
 |Generate|PLANE:PCA|Plane - Akoum|||AkoumPlane|
@@ -166,12 +135,23 @@
 |Generate|PLANE:PCA|Plane - Undercity Reaches|||UndercityReachesPlane|
 |Generate|PLANE:PCA|Plane - The Zephyr Maze|||TheZephyrMazePlane|
 |Generate|PLANE:PCA|Plane - Trail of the Mage-Rings|||TrailOfTheMageRingsPlane|
+
+# ALL DUNGEONS
+|Generate|DUNGEON:AFR|Tomb of Annihilation|||TombOfAnnihilationDungeon|
+|Generate|DUNGEON:AFR|Lost Mine of Phandelver|||LostMineOfPhandelverDungeon|
+|Generate|DUNGEON:AFR|Dungeon of the Mad Mage|||DungeonOfTheMadMageDungeon|
+
+# ALL TOKENS
+
+# 10E
 |Generate|TOK:10E|Dragon|||DragonToken2|
 |Generate|TOK:10E|Goblin|||GoblinToken|
 |Generate|TOK:10E|Saproling|||SaprolingToken|
 |Generate|TOK:10E|Soldier|||SoldierToken|
 |Generate|TOK:10E|Wasp|||WaspToken|
 |Generate|TOK:10E|Zombie|||ZombieToken|
+
+# 5ED
 |Generate|TOK:5ED|Caribou|||CaribouToken|
 |Generate|TOK:5ED|Citizen|||CitizenToken|
 |Generate|TOK:5ED|Djinn|||DjinnToken|
@@ -180,6 +160,8 @@
 |Generate|TOK:5ED|Serf|||SerfToken|
 |Generate|TOK:5ED|Snake|||SerpentGeneratorSnakeToken|
 |Generate|TOK:5ED|Thrull|||BreedingPitBlackInsectToken|
+
+# 6ED
 |Generate|TOK:6ED|Cat|||GreenCatToken|
 |Generate|TOK:6ED|Citizen|||CitizenToken|
 |Generate|TOK:6ED|Djinn|||DjinnToken|
@@ -187,18 +169,19 @@
 |Generate|TOK:6ED|Insect|||WaspToken|
 |Generate|TOK:6ED|Serf|||SerfToken|
 |Generate|TOK:6ED|Snake|||SnakeToken|
+
+# 8ED
 |Generate|TOK:8ED|Bird|||RukhEggBirdToken|
 |Generate|TOK:8ED|Rukh||
+
+# 9ED
 |Generate|TOK:9ED|Bird|||RukhEggBirdToken|
 |Generate|TOK:9ED|Saproling|||SaprolingToken|
+
+# AER
 |Generate|TOK:AER|Etherium Cell|||EtheriumCellToken|
 |Generate|TOK:AER|Gremlin|||GremlinToken|
 |Generate|TOK:AER|Ragavan|||RagavanToken|
-
-# Dungeons
-|Generate|DUNGEON:AFR|Tomb of Annihilation|||TombOfAnnihilationDungeon|
-|Generate|DUNGEON:AFR|Lost Mine of Phandelver|||LostMineOfPhandelverDungeon|
-|Generate|DUNGEON:AFR|Dungeon of the Mad Mage|||DungeonOfTheMadMageDungeon|
 
 # AKH
 |Generate|TOK:AKH|Beast|||BeastToken3|

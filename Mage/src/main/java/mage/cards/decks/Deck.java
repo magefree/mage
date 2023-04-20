@@ -158,7 +158,7 @@ public class Deck implements Serializable, Copyable<Deck> {
             return new GameException(cardError);
         } else {
             // critical error, server must be restarted
-            // TODO: add auto-retart task here someday (with a docker support)
+            // TODO: add auto-restart task here someday (with a docker support)
             //  see https://github.com/magefree/mage/issues/8130
             return new GameException("Problems detected on the server side (memory issue), wait for a restart.");
         }

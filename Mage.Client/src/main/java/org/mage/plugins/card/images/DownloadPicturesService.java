@@ -560,89 +560,126 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     }
 
     public static List<CardDownloadData> getTokenCardUrls() throws RuntimeException {
+        // Must load tokens data in strict mode (throw exception on any error)
+        // Try to put verify checks here instead verify tests
+        String dbSource = "card-pictures-tok.txt";
         List<CardDownloadData> list = new ArrayList<>();
-        InputStream in = DownloadPicturesService.class.getClassLoader().getResourceAsStream("card-pictures-tok.txt");
-
+        InputStream in = DownloadPicturesService.class.getClassLoader().getResourceAsStream(dbSource);
         if (in == null) {
-            logger.error("resources input stream is null");
-            return list;
+            throw new RuntimeException("Tokens database: can't load resource file " + dbSource);
         }
 
+        List<String> errorsList = new ArrayList<>();
         try (InputStreamReader input = new InputStreamReader(in);
              BufferedReader reader = new BufferedReader(input)) {
-
             String line = reader.readLine();
             while (line != null) {
-                line = line.trim();
-                if (line.startsWith("|")) { // new format
-                    String[] params = line.split("\\|", -1);
-                    if (params.length >= 5) {
-                        int type = 0;
-                        if (params[4] != null && !params[4].isEmpty()) {
-                            type = Integer.parseInt(params[4].trim()); // token number for same names
-                        }
-                        String fileName = "";
-                        if (params.length > 5 && params[5] != null && !params[5].isEmpty()) {
-                            fileName = params[5].trim();
-                        }
-                        String tokenClassName = "";
-                        if (params.length > 7 && params[6] != null && !params[6].isEmpty()) {
-                            tokenClassName = params[6].trim();
-                        }
-
-                        if (params[1].toLowerCase(Locale.ENGLISH).equals("generate") && params[2].startsWith("TOK:")) {
-                            String set = params[2].substring(4);
-                            CardDownloadData card = new CardDownloadData(params[3], set, "0", false, type,true);
-                            card.setTokenClassName(tokenClassName);
-                            list.add(card);
-                        } else if (params[1].toLowerCase(Locale.ENGLISH).equals("generate") && params[2].startsWith("EMBLEM:")) {
-                            String set = params[2].substring(7);
-                            CardDownloadData card = new CardDownloadData("Emblem " + params[3], set, "0", false, type, true, fileName);
-                            card.setTokenClassName(tokenClassName);
-                            list.add(card);
-                        } else if (params[1].toLowerCase(Locale.ENGLISH).equals("generate") && params[2].startsWith("EMBLEM-:")) {
-                            String set = params[2].substring(8);
-                            CardDownloadData card = new CardDownloadData(params[3] + " Emblem", set, "0", false, type,true, fileName);
-                            card.setTokenClassName(tokenClassName);
-                            list.add(card);
-                        } else if (params[1].toLowerCase(Locale.ENGLISH).equals("generate") && params[2].startsWith("EMBLEM!:")) {
-                            String set = params[2].substring(8);
-                            CardDownloadData card = new CardDownloadData(params[3], set, "0", false, type, true, fileName);
-                            card.setTokenClassName(tokenClassName);
-                            list.add(card);
-                        } else if (params[1].toLowerCase(Locale.ENGLISH).equals("generate") && params[2].startsWith("PLANE:")) {
-                            String set = params[2].substring(6);
-                            CardDownloadData card = new CardDownloadData(params[3], set, "0", false, type, true, fileName);
-                            card.setTokenClassName(tokenClassName);
-                            list.add(card);
-                        } else if (params[1].toLowerCase(Locale.ENGLISH).equals("generate") && params[2].startsWith("DUNGEON:")) {
-                            String set = params[2].substring(8);
-                            CardDownloadData card = new CardDownloadData(params[3], set, "0", false, type, true, fileName);
-                            card.setTokenClassName(tokenClassName);
-                            list.add(card);
-                        } else {
-                            logger.error("wrong line format in tokens file: " + line);
-                        }
-                    } else {
-                        logger.error("wrong line data in tokens file: " + line);
+                try {
+                    line = line.trim();
+                    if (!line.startsWith("|")) {
+                        continue;
                     }
+
+                    List<String> params = Arrays.stream(line.split("\\|", -1))
+                            .map(String::trim)
+                            .collect(Collectors.toList());
+                    if (params.size() < 5) {
+                        errorsList.add("Tokens database: wrong params count: " + line);
+                        continue;
+                    }
+                    if (!params.get(1).toLowerCase(Locale.ENGLISH).equals("generate")) {
+                        // TODO: remove "generate" from db
+                        errorsList.add("Tokens database: miss generate param: " + line);
+                        continue;
+                    }
+
+                    // token type (uses if one set contains multiple tokens with same name)
+                    int tokenType = 0;
+                    if (!params.get(4).isEmpty()) {
+                        tokenType = Integer.parseInt(params.get(4));
+                    }
+
+                    // image file name
+                    String imageFileName = "";
+                    if (params.size() > 5 && !params.get(5).isEmpty()) {
+                        imageFileName = params.get(5);
+                    }
+
+                    // token class name (uses for images search for render)
+                    String tokenClassName = "";
+                    if (params.size() > 7 && !params.get(6).isEmpty()) {
+                        tokenClassName = params.get(6);
+                    }
+
+                    // object type
+                    String objectType = params.get(2);
+                    String tokenName = params.get(3);
+                    String setCode = "";
+
+                    // type - token
+                    if (objectType.startsWith("TOK:")) {
+                        setCode = objectType.substring("TOK:".length());
+                    }
+
+                    // type - emblem
+                    if (objectType.startsWith("EMBLEM:")) {
+                        setCode = objectType.substring("EMBLEM:".length());
+                        if (!tokenName.startsWith("Emblem ")) {
+                            errorsList.add("Tokens database: emblem's name must start with [Emblem ...] word: " + line);
+                            continue;
+                        }
+                        if (!tokenClassName.endsWith("Emblem")) {
+                            errorsList.add("Tokens database: emblem's class name must ends with [...Emblem] word: " + line);
+                            continue;
+                        }
+                    }
+
+                    // type - plane
+                    if (objectType.startsWith("PLANE:")) {
+                        setCode = objectType.substring("PLANE:".length());
+                        if (!tokenName.startsWith("Plane - ")) {
+                            errorsList.add("Tokens database: plane's name must start with [Plane - ...] word: " + line);
+                            continue;
+                        }
+                        if (!tokenClassName.endsWith("Plane")) {
+                            errorsList.add("Tokens database: plane's class name must ends with [...Plane] word: " + line);
+                            continue;
+                        }
+                    }
+
+                    // type - dungeon
+                    if (objectType.startsWith("DUNGEON:")) {
+                        setCode = objectType.substring("DUNGEON:".length());
+                        if (!tokenClassName.endsWith("Dungeon")) {
+                            errorsList.add("Tokens database: dungeon's class name must ends with [...Dungeon] word: " + line);
+                            continue;
+                        }
+                    }
+
+                    // type - unknown
+                    if (setCode.isEmpty()) {
+                        errorsList.add("Tokens database: unknown line format: " + line);
+                        continue;
+                    }
+
+                    // OK
+                    CardDownloadData card = new CardDownloadData(tokenName, setCode, "0", false, tokenType, true);
+                    card.setTokenClassName(tokenClassName);
+                    card.setFileName(imageFileName);
+                    list.add(card);
+                } finally {
+                    line = reader.readLine();
                 }
-                line = reader.readLine();
             }
-
-        } catch (Exception ex) {
-            logger.error(ex);
-            throw new RuntimeException("DownloadPicturesService : readFile() error");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Tokens database: can't read data, unknown error - " + e.getMessage());
         }
 
-        // TODO: delete and move to copy-pate images download mode
-        /*
-        for (CardDownloadData card : list) {
-            if (card.isToken()) {
-                System.out.println(card.getSet() + "/" + card.getName() + (!card.getType().equals(0) ? "/" + card.getType() : ""));
-            }
+        if (!errorsList.isEmpty()) {
+            errorsList.forEach(logger::error);
+            throw new RuntimeException(String.format("Tokens database: found %d errors, see logs above for details", errorsList.size()));
         }
-        */
 
         return list;
     }
@@ -904,10 +941,9 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         // check result
                         if (responseCode != 200) {
                             // show errors only on full fail (all urls were not work)
-                            String info = String.format("Image download failed for %s - %s%s, http code: %d, url: %s",
+                            String info = String.format("Image download failed for %s - %s, http code: %d, url: %s",
                                     card.getSet(),
                                     card.getName(),
-                                    (card.getDownloadName().equals(card.getName()) ? "" : ", cardDownloadName: " + card.getDownloadName()),
                                     responseCode,
                                     url
                             );
