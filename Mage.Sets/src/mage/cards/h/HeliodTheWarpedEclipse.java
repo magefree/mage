@@ -6,7 +6,6 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -33,10 +32,10 @@ public class HeliodTheWarpedEclipse extends CardImpl {
         this.toughness = new MageInt(6);
         this.nightCard = true;
 
-        //You may cast spells as though they had flash.
+        // You may cast spells as though they had flash.
         this.addAbility(new SimpleStaticAbility(new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter)));
 
-        //Spells you cast cost {1} less to cast for each card your opponents have drawn this turn.
+        // Spells you cast cost {1} less to cast for each card your opponents have drawn this turn.
         this.addAbility(new SimpleStaticAbility(new HeliodTheWarpedEclipseEffect()));
     }
 
@@ -67,10 +66,11 @@ class HeliodTheWarpedEclipseEffect extends CostModificationEffectImpl {
         if (watcher == null) {
             return false;
         }
-        int amount = 0;
-        for (UUID playerID : game.getOpponents(source.getControllerId())) {
-            amount = amount + watcher.getCardsDrawnThisTurn(playerID);
-        }
+        int amount = game
+                .getOpponents(source.getControllerId())
+                .stream()
+                .mapToInt(watcher::getCardsDrawnThisTurn)
+                .sum();
         if (amount < 1) {
             return false;
         }
@@ -80,11 +80,9 @@ class HeliodTheWarpedEclipseEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (!(abilityToModify instanceof SpellAbility)) {
-            return false;
-        }
-        Card sourceCard = game.getCard(abilityToModify.getSourceId());
-        return sourceCard != null && abilityToModify.isControlledBy(source.getControllerId());
+        return abilityToModify instanceof SpellAbility
+                && game.getCard(abilityToModify.getSourceId()) != null
+                && abilityToModify.isControlledBy(source.getControllerId());
     }
 
     @Override
