@@ -610,6 +610,10 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                     if (params.size() > 7 && !params.get(6).isEmpty()) {
                         tokenClassName = params.get(6);
                     }
+                    if (tokenClassName.isEmpty()) {
+                        errorsList.add("Tokens database: miss class name: " + line);
+                        continue;
+                    }
 
                     // object type
                     String objectType = params.get(2);

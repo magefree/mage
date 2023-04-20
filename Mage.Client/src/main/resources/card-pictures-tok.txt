@@ -172,7 +172,6 @@
 
 # 8ED
 |Generate|TOK:8ED|Bird|||RukhEggBirdToken|
-|Generate|TOK:8ED|Rukh||
 
 # 9ED
 |Generate|TOK:9ED|Bird|||RukhEggBirdToken|
@@ -194,21 +193,21 @@
 |Generate|TOK:AKH|Wurm|||Wurm55Token|
 |Generate|TOK:AKH|Zombie|||ZombieToken|
 #TOK:AKH - some tokens from real cards (see Embalm ability)
-|Generate|TOK:AKH|Angel of Sanctions||
-|Generate|TOK:AKH|Anointer Priest||
-|Generate|TOK:AKH|Aven Initiate||
-|Generate|TOK:AKH|Aven Wind Guide||
-|Generate|TOK:AKH|Glyph Keeper||
-|Generate|TOK:AKH|Heart-Piercer Manticore||
-|Generate|TOK:AKH|Honored Hydra||
-|Generate|TOK:AKH|Labyrinth Guardian||
-|Generate|TOK:AKH|Oketra's Attendant||
-|Generate|TOK:AKH|Sacred Cat||
-|Generate|TOK:AKH|Tah-Crop Skirmisher||
-|Generate|TOK:AKH|Temmet, Vizier of Naktamun||
-|Generate|TOK:AKH|Trueheart Duelist||
-|Generate|TOK:AKH|Unwavering Initiate||
-|Generate|TOK:AKH|Vizier of Many Faces||
+#|Generate|TOK:AKH|Angel of Sanctions||
+#|Generate|TOK:AKH|Anointer Priest||
+#|Generate|TOK:AKH|Aven Initiate||
+#|Generate|TOK:AKH|Aven Wind Guide||
+#|Generate|TOK:AKH|Glyph Keeper||
+#|Generate|TOK:AKH|Heart-Piercer Manticore||
+#|Generate|TOK:AKH|Honored Hydra||
+#|Generate|TOK:AKH|Labyrinth Guardian||
+#|Generate|TOK:AKH|Oketra's Attendant||
+#|Generate|TOK:AKH|Sacred Cat||
+#|Generate|TOK:AKH|Tah-Crop Skirmisher||
+#|Generate|TOK:AKH|Temmet, Vizier of Naktamun||
+#|Generate|TOK:AKH|Trueheart Duelist||
+#|Generate|TOK:AKH|Unwavering Initiate||
+#|Generate|TOK:AKH|Vizier of Many Faces||
 
 |Generate|TOK:ALA|Beast|||GodSireBeastToken|
 |Generate|TOK:ALA|Dragon|||DragonToken|
@@ -435,7 +434,7 @@
 |Generate|TOK:CNS|Construct|||DarettiConstructToken|
 |Generate|TOK:CNS|Demon|||DemonFlyingToken|
 |Generate|TOK:CNS|Elephant|||ElephantToken|
-|Generate|TOK:CNS|Ogre||
+#un-implemented card|Generate|TOK:CNS|Ogre||
 |Generate|TOK:CNS|Spirit|||SpiritWhiteToken|
 |Generate|TOK:CNS|Squirrel|||SquirrelToken|
 |Generate|TOK:CNS|Wolf|||WolfToken|
@@ -447,20 +446,9 @@
 |Generate|TOK:CSP|Marit Lage|||MaritLageToken|
 |Generate|TOK:CSP|Soldier|||SoldierToken|
 |Generate|TOK:DD2|Elemental Shaman|||ElementalShamanToken|
-|Generate|TOK:DD3A|Demon||
-|Generate|TOK:DD3A|Spirit||
-|Generate|TOK:DD3A|Thrull||
-|Generate|TOK:DD3B|Elemental||
-|Generate|TOK:DD3B|Elf Warrior||
-|Generate|TOK:DD3B|Goblin||
-|Generate|TOK:DD3C|Bat||
-|Generate|TOK:DD3C|Beast|1|
-|Generate|TOK:DD3C|Beast|2|
-|Generate|TOK:DD3C|Elephant||
 |Generate|TOK:DVD|Demon|||DemonFlyingToken|
 |Generate|TOK:DVD|Spirit|||SpiritWhiteToken|
 |Generate|TOK:DVD|Thrull|||BreedingPitThrullToken|
-|Generate|TOK:DD3D|Elemental Shaman||
 |Generate|TOK:GVL|Bat|||BatToken|
 |Generate|TOK:GVL|Beast|1||BeastToken|
 |Generate|TOK:GVL|Beast|2||BeastToken2|
@@ -530,7 +518,6 @@
 |Generate|TOK:DTK|Djinn Monk|||DjinnMonkToken|
 |Generate|TOK:DTK|Dragon|||DragonToken|
 |Generate|TOK:DTK|Goblin|||GoblinToken|
-|Generate|TOK:DTK|Morph||
 |Generate|TOK:DTK|Warrior|||WarriorToken|
 |Generate|TOK:DTK|Zombie Horror|||CorpseweftZombieToken|
 |Generate|TOK:DTK|Zombie|||ZombieToken|
@@ -583,8 +570,6 @@
 |Generate|TOK:FEM|Goblin|||GoblinToken|
 |Generate|TOK:FEM|Saproling|||SaprolingToken|
 |Generate|TOK:FEM|Thrull|||BreedingPitBlackInsectToken|
-|Generate|TOK:FNMP|Human||
-|Generate|TOK:FNMP|Wolf||
 |Generate|TOK:FRF|Monk|||MonasteryMentorToken|
 |Generate|TOK:FRF|Spirit|||SpiritWhiteToken|
 |Generate|TOK:FRF|Warrior|||MarduStrikeLeaderWarriorToken|
@@ -609,15 +594,15 @@
 |Generate|TOK:HOU|Snake|||RhonassLastStandToken|
 #TOK:HOU - some tokens from real cards (see Eternalize ability)
 #TOK:HOU - Cat, Warrior and Zombie tokens from AKH set
-|Generate|TOK:HOU|Adorned Pouncer||||
-|Generate|TOK:HOU|Champion of Wits||||
-|Generate|TOK:HOU|Dreamstealer||||
-|Generate|TOK:HOU|Earthshaker Khenra||||
-|Generate|TOK:HOU|Proven Combatant||||
-|Generate|TOK:HOU|Resilient Khenra||||
-|Generate|TOK:HOU|Sinuous Striker||||
-|Generate|TOK:HOU|Steadfast Sentinel||||
-|Generate|TOK:HOU|Sunscourge Champion||||
+#|Generate|TOK:HOU|Adorned Pouncer||||
+#|Generate|TOK:HOU|Champion of Wits||||
+#|Generate|TOK:HOU|Dreamstealer||||
+#|Generate|TOK:HOU|Earthshaker Khenra||||
+#|Generate|TOK:HOU|Proven Combatant||||
+#|Generate|TOK:HOU|Resilient Khenra||||
+#|Generate|TOK:HOU|Sinuous Striker||||
+#|Generate|TOK:HOU|Steadfast Sentinel||||
+#|Generate|TOK:HOU|Sunscourge Champion||||
 |Generate|TOK:ICE|Caribou|||CaribouToken|
 |Generate|TOK:INV|Bird|||BlueBirdToken|
 |Generate|TOK:INV|Elephant|||ElephantToken|
@@ -640,7 +625,7 @@
 |Generate|TOK:JOU|Snake|||PharikaSnakeToken|
 |Generate|TOK:JOU|Sphinx|||HourOfNeedSphinxToken|
 |Generate|TOK:JOU|Spider|||RenownedWeaverSpiderToken|
-|Generate|TOK:JOU|Zombie||RitualOfTheReturnedZombieToken|
+|Generate|TOK:JOU|Zombie|||RitualOfTheReturnedZombieToken|
 |Generate|TOK:JUD|Bear|||BearToken|
 |Generate|TOK:JUD|Bird|||BirdToken|
 |Generate|TOK:JUD|Elemental Cat|||ElementalCatToken|
