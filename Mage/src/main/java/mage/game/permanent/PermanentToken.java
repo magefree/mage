@@ -51,6 +51,14 @@ public class PermanentToken extends PermanentImpl {
     }
 
     @Override
+    public int getManaValue() {
+        if (this.isTransformed()) {
+            return token.getManaValue();
+        }
+        return super.getManaValue();
+    }
+
+    @Override
     public String getName() {
         if (name.isEmpty()) {
             return EmptyNames.FACE_DOWN_TOKEN.toString();
