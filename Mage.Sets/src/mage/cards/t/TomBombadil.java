@@ -1,8 +1,10 @@
 package mage.cards.t;
 
+import java.util.Optional;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -78,7 +80,7 @@ public final class TomBombadil extends CardImpl {
 class TomBombadilTriggeredAbility extends TriggeredAbilityImpl {
 
     public TomBombadilTriggeredAbility() {
-        super(Zone.BATTLEFIELD, null, false);
+        super(Zone.BATTLEFIELD, new TomBombadilEffect(), false);
     }
 
     public TomBombadilTriggeredAbility(final TomBombadilTriggeredAbility ability) {
@@ -97,23 +99,44 @@ class TomBombadilTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        // From Historian's Boon. I think there might be an issue with this if the saga
-        // ceases to exist by the time this actually resolves, but let's try this for
-        // now.
-        StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
-        Permanent permanent = game.getPermanent(event.getSourceId());
-        if (stackObject == null
-                || permanent == null
+        // At this point, the stack ability no longer exists, so we can only reference
+        // the ability that it came from. For EventType.RESOLVING_ABILITY, targetID is
+        // the ID of the original ability (on the permanent) that the resolving ability
+        // came from.
+        Optional<Ability> ability_opt = game.getAbility(event.getTargetId(), event.getSourceId());
+        if (ability_opt.isEmpty())
+            return false;
+
+        // Make sure it was a triggered ability (needed for checking if it's a chapter
+        // ability)
+        Ability ability = ability_opt.get();
+        if (!(ability instanceof TriggeredAbility))
+            return false;
+
+        // Make sure it was a chapter ability
+        TriggeredAbility triggeredAbility = (TriggeredAbility) ability;
+        if (!SagaAbility.isChapterAbility(triggeredAbility))
+            return false;
+
+        // There's a chance that the permanent that this abiltiy came from no longer
+        // exists, so try and find it on the battlefield or check last known
+        // information.
+        // This permanent is needed to check if the resolving ability was the final
+        // chapter ability on that permanent.
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        if (permanent == null
                 || !permanent.isControlledBy(getControllerId())
                 || !permanent.hasSubtype(SubType.SAGA, game)) {
             return false;
         }
+        // Find the max chapter number from that permanent
         int maxChapter = CardUtil
                 .castStream(permanent.getAbilities(game).stream(), SagaAbility.class)
                 .map(SagaAbility::getMaxChapter)
                 .mapToInt(SagaChapter::getNumber)
                 .sum();
-        return SagaAbility.isFinalAbility(stackObject.getStackAbility(), maxChapter);
+        // Check if the ability was the last one
+        return SagaAbility.isFinalAbility(triggeredAbility, maxChapter);
     }
 
     @Override
