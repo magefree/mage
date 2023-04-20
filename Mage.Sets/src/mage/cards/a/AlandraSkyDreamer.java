@@ -49,7 +49,8 @@ public final class AlandraSkyDreamer extends CardImpl {
                 new BoostSourceEffect(
                         CardsInControllerHandCount.instance,
                         CardsInControllerHandCount.instance,
-                        Duration.EndOfTurn
+                        Duration.EndOfTurn,
+                        true
                 ).setText("{this}"),
                 false,
                 5
@@ -60,7 +61,8 @@ public final class AlandraSkyDreamer extends CardImpl {
                         CardsInControllerHandCount.instance,
                         Duration.EndOfTurn,
                         filter,
-                        false
+                        false,
+                        true
                 ).setText("and Drakes you control each get +X/+X until end of turn, where X is the number of cards in your hand")
         );
         this.addAbility(
