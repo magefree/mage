@@ -21,10 +21,10 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
+import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.util.CardUtil;
+import mage.util.functions.CopyTokenFunction;
 
 import java.util.UUID;
 
@@ -149,8 +149,7 @@ class PrototypePortalCreateTokenEffect extends OneShotEffect {
         if (!permanent.getImprinted().isEmpty()) {
             Card card = game.getCard(permanent.getImprinted().get(0));
             if (card != null) {
-                EmptyToken token = new EmptyToken();
-                CardUtil.copyTo(token).from(card, game);
+                Token token = CopyTokenFunction.createTokenCopy(card, game);
                 token.putOntoBattlefield(1, game, source, source.getControllerId());
                 return true;
             }

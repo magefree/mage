@@ -9,6 +9,7 @@ import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
+import mage.game.permanent.token.EmptyToken;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 
@@ -17,13 +18,21 @@ import mage.game.stack.Spell;
  */
 public class CopyTokenFunction implements Function<Token, Card> {
 
-    protected Token target;
+    protected final Token target;
 
-    public CopyTokenFunction(Token target) {
+    private CopyTokenFunction(Token target) {
         if (target == null) {
             throw new IllegalArgumentException("Target can't be null");
         }
         this.target = target;
+    }
+
+    public static Token createTokenCopy(Card source, Game game) {
+        return createTokenCopy(source, game, null);
+    }
+
+    public static Token createTokenCopy(Card source, Game game, Spell spell) {
+        return new CopyTokenFunction(new EmptyToken()).from(source, game, spell);
     }
 
     @Override
@@ -34,7 +43,7 @@ public class CopyTokenFunction implements Function<Token, Card> {
         // A copy contains only the attributes of the basic card or basic Token that's the base of the permanent
         // else gained abililies would be copied too.
 
-        MageObject sourceObj = source;
+        MageObject sourceObj;
         if (source instanceof PermanentToken) {
             // create token from another token
             sourceObj = ((PermanentToken) source).getToken();
@@ -63,6 +72,7 @@ public class CopyTokenFunction implements Function<Token, Card> {
             target.setOriginalExpansionSetCode(source.getExpansionSetCode());
             target.setOriginalCardNumber(source.getCardNumber());
             target.setCopySourceCard(source);
+            sourceObj = source;
         }
 
         // modify all attributes permanently (without game usage)
@@ -101,11 +111,7 @@ public class CopyTokenFunction implements Function<Token, Card> {
         return target;
     }
 
-    public Token from(Card source, Game game) {
-        return from(source, game, null);
-    }
-
-    public Token from(Card source, Game game, Spell spell) {
+    private Token from(Card source, Game game, Spell spell) {
         apply(source, game);
 
         // token's ZCC must be synced with original card to keep abilities settings

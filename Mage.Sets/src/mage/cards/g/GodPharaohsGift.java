@@ -14,11 +14,11 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
+import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTargets;
-import mage.util.CardUtil;
+import mage.util.functions.CopyTokenFunction;
 
 import java.util.List;
 import java.util.Objects;
@@ -83,8 +83,7 @@ class GodPharaohsGiftEffect extends OneShotEffect {
             return false;
         }
         // create token and modify all attributes permanently (without game usage)
-        EmptyToken token = new EmptyToken();
-        CardUtil.copyTo(token).from(cardChosen, game);
+        Token token = CopyTokenFunction.createTokenCopy(cardChosen, game);
         token.removePTCDA();
         token.setPower(4);
         token.setToughness(4);

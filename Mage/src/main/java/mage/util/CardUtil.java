@@ -37,13 +37,11 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentMeld;
-import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.functions.CopyTokenFunction;
 import org.apache.log4j.Logger;
 
 import java.io.UnsupportedEncodingException;
@@ -473,17 +471,6 @@ public final class CardUtil {
         adjustedCost.setSourceFilter(previousCost.getSourceFilter());  // keep mana source restrictions
         spellAbility.getManaCostsToPay().clear();
         spellAbility.getManaCostsToPay().addAll(adjustedCost);
-    }
-
-    /**
-     * Returns function that copies params\abilities from one card to
-     * {@link Token}.
-     *
-     * @param target
-     * @return
-     */
-    public static CopyTokenFunction copyTo(Token target) {
-        return new CopyTokenFunction(target);
     }
 
     /**

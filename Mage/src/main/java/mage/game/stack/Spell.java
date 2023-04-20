@@ -25,12 +25,13 @@ import mage.game.events.CopiedStackObjectEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
-import mage.game.permanent.token.EmptyToken;
+import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.ManaUtil;
 import mage.util.SubTypes;
+import mage.util.functions.CopyTokenFunction;
 import mage.util.functions.StackObjectCopyApplier;
 import org.apache.log4j.Logger;
 
@@ -275,8 +276,7 @@ public class Spell extends StackObjectImpl implements Card {
                 UUID permId;
                 boolean flag;
                 if (isCopy()) {
-                    EmptyToken token = new EmptyToken();
-                    CardUtil.copyTo(token).from(card, game, this);
+                    Token token = CopyTokenFunction.createTokenCopy(card, game, this);
                     // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
                     if (token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, false)) {
                         permId = token.getLastAddedTokenIds().stream().findFirst().orElse(null);
@@ -343,8 +343,7 @@ public class Spell extends StackObjectImpl implements Card {
                 return false;
             }
         } else if (isCopy()) {
-            EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(card, game, this);
+            Token token = CopyTokenFunction.createTokenCopy(card, game, this);
             // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
             token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, false);
             return true;
