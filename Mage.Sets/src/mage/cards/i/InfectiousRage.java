@@ -80,7 +80,7 @@ class InfectiousRageReattachEffect extends OneShotEffect {
 
         Player controller = game.getPlayer(source.getControllerId());
         Card auraCard = game.getCard(source.getSourceId());
-        Permanent auraPermanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+        Permanent auraPermanent = source.getSourcePermanentOrLKI(game);
         if (controller == null || auraCard == null || auraPermanent == null) {
             return false;
         }
@@ -91,15 +91,8 @@ class InfectiousRageReattachEffect extends OneShotEffect {
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game);
 
         if (!permanents.isEmpty()) {
-            Permanent creature = permanents.get(RandomUtil.nextInt(permanents.size()));
+            Permanent creature = RandomUtil.randomFromCollection(permanents);
             if (creature != null) {
-                StringBuilder message = new StringBuilder(creature.getLogName());
-                message.append(" was randomly chosen from among: ");
-                for (Permanent p : permanents) {
-                    message.append(p.getLogName());
-                    message.append(", ");
-                }
-                game.informPlayers(message.substring(0, message.length() - 2));
                 game.getState().setValue("attachTo:" + auraCard.getId(), creature);
                 controller.moveCards(auraCard, Zone.BATTLEFIELD, source, game);
                 return creature.addAttachment(auraCard.getId(), source, game);
