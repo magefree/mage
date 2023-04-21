@@ -84,6 +84,9 @@ class InfectiousRageReattachEffect extends OneShotEffect {
         if (controller == null || auraCard == null || auraPermanent == null) {
             return false;
         }
+        if (source.getSourceObjectZoneChangeCounter() != auraCard.getZoneChangeCounter(game)) {
+            return false;
+        }
 
         FilterPermanent filter = new FilterPermanent();
         filter.add(CardType.CREATURE.getPredicate());
