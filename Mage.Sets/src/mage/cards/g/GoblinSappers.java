@@ -37,7 +37,7 @@ public final class GoblinSappers extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
         DelayedTriggeredAbility triggeredAbility = new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect().setText("destroy that creature"));
-        triggeredAbility.addEffect(new DestroySourceEffect().setText(" and {this}"));
+        triggeredAbility.addEffect(new DestroySourceEffect().setText("and {this}"));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(triggeredAbility).setText("Destroy it and {this} at end of combat."));
         this.addAbility(ability);
 
