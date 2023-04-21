@@ -700,7 +700,7 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
+    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
         if (gameInCheckPlayableState(game)) {
             return true;
         }
@@ -719,8 +719,8 @@ public class HumanPlayer extends PlayerImpl {
         }
 
         while (canRespond()) {
-            boolean required = target.isRequired(null, game);
-            int count = cards.count(target.getFilter(), abilityControllerId, game);
+            boolean required = target.isRequired(source != null ? source.getSourceId() : null, game);
+            int count = cards.count(target.getFilter(), abilityControllerId, source, game);
             if (count == 0
                     || target.getTargets().size() >= target.getNumberOfTargets()) {
                 required = false;
@@ -729,7 +729,7 @@ public class HumanPlayer extends PlayerImpl {
             List<UUID> chosenTargets = target.getTargets();
             List<UUID> possibleTargets = new ArrayList<>();
             for (UUID cardId : cards) {
-                if (target.canTarget(abilityControllerId, cardId, null, cards, game)) {
+                if (target.canTarget(abilityControllerId, cardId, source, cards, game)) {
                     possibleTargets.add(cardId);
                 }
             }
@@ -738,7 +738,7 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            UUID responseId = target.tryToAutoChoose(abilityControllerId, null, game, possibleTargets);
+            UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game, possibleTargets);
 
             if (responseId == null) {
                 Map<String, Serializable> options = getOptions(target, null);
@@ -761,7 +761,7 @@ public class HumanPlayer extends PlayerImpl {
                 if (target.getTargets().contains(responseId)) { // if already included remove it with
                     target.remove(responseId);
                 } else {
-                    if (target.canTarget(abilityControllerId, responseId, null, cards, game)) {
+                    if (target.canTarget(abilityControllerId, responseId, source, cards, game)) {
                         target.add(responseId, game);
                         if (target.doneChoosing()) {
                             return true;
@@ -802,7 +802,7 @@ public class HumanPlayer extends PlayerImpl {
 
         while (canRespond()) {
             boolean required = target.isRequiredExplicitlySet() ? target.isRequired() : target.isRequired(source);
-            int count = cards.count(target.getFilter(), abilityControllerId, game);
+            int count = cards.count(target.getFilter(), abilityControllerId, source, game);
             if (count == 0
                     || target.getTargets().size() >= target.getNumberOfTargets()) {
                 required = false;

@@ -2030,7 +2030,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     @Override
-    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
+    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
         log.debug("choose 2");
         if (cards == null || cards.isEmpty()) {
             return true;
@@ -2043,9 +2043,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             abilityControllerId = target.getAbilityController();
         }
 
-        List<Card> cardChoices = new ArrayList<>(cards.getCards(target.getFilter(), game));
+        List<Card> cardChoices = new ArrayList<>(cards.getCards(target.getFilter(), abilityControllerId, source, game));
         while (!target.doneChoosing()) {
-            Card card = pickTarget(abilityControllerId, cardChoices, outcome, target, null, game);
+            Card card = pickTarget(abilityControllerId, cardChoices, outcome, target, source, game);
             if (card != null) {
                 target.add(card.getId(), game);
                 cardChoices.remove(card);
