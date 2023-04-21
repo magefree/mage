@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.ChooseColorEffect;
@@ -28,7 +28,7 @@ public final class TeferisMoat extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{U}");
 
         // As Teferi's Moat enters the battlefield, choose a color.
-        this.addAbility(new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
         // Creatures of the chosen color without flying can't attack you.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TeferisMoatRestrictionEffect()));
     }

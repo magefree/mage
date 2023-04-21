@@ -2,6 +2,7 @@ package mage.cards.r;
 
 import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -33,7 +34,7 @@ public final class RiptideReplicator extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{X}{4}");
 
         // As Riptide Replicator enters the battlefield, choose a color and a creature type.
-        Ability ability = new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral));
+        Ability ability = new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral));
         Effect effect = new ChooseCreatureTypeEffect(Outcome.Neutral);
         effect.setText("and a creature type");
         ability.addEffect(effect);

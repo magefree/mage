@@ -1677,20 +1677,22 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public void chooseProtector(Game game, Ability source) {
         Set<UUID> opponents = game.getOpponents(this.getControllerId());
-        UUID protectorId;
+        Player newProtector;
         if (opponents.size() > 1) {
             TargetPlayer target = new TargetPlayer(new FilterOpponent("protector for " + getName()));
             target.setNotTarget(true);
             target.setRequired(true);
             game.getPlayer(getControllerId()).choose(Outcome.Neutral, target, source, game);
-            protectorId = target.getFirstTarget();
+            newProtector = game.getPlayer(target.getFirstTarget());
         } else {
-            protectorId = RandomUtil.randomFromCollection(opponents);
+            newProtector = game.getPlayer(opponents.iterator().next());
         }
-        String protectorName = game.getPlayer(protectorId).getLogName();
-        game.informPlayers(protectorName + " has been chosen to protect " + this.getLogName());
-        this.addInfo("protector", "Protected by " + protectorName, game);
-        this.setProtectorId(protectorId);
+        if (newProtector != null) {
+            String protectorName = newProtector.getLogName();
+            game.informPlayers(protectorName + " has been chosen to protect " + this.getLogName());
+            this.addInfo("protector", "Protected by " + protectorName, game);
+            this.setProtectorId(newProtector.getId());
+        }
     }
 
     @Override

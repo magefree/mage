@@ -3,7 +3,7 @@ package mage.cards.q;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ChooseColorEffect;
 import mage.abilities.effects.mana.AddManaChosenColorEffect;
@@ -30,7 +30,7 @@ public final class QuirionElves extends CardImpl {
         this.toughness = new MageInt(1);
 
         // As Quirion Elves enters the battlefield, choose a color.
-        this.addAbility(new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
 
         // {tap}: Add {G}.
         this.addAbility(new GreenManaAbility());

@@ -93,6 +93,7 @@ public final class Judgment extends ExpansionSet {
         cards.add(new SetCardInfo("Hapless Researcher", 42, Rarity.COMMON, mage.cards.h.HaplessResearcher.class));
         cards.add(new SetCardInfo("Harvester Druid", 120, Rarity.COMMON, mage.cards.h.HarvesterDruid.class));
         cards.add(new SetCardInfo("Hunting Grounds", 138, Rarity.RARE, mage.cards.h.HuntingGrounds.class));
+        cards.add(new SetCardInfo("Infectious Rage", 92, Rarity.UNCOMMON, mage.cards.i.InfectiousRage.class));
         cards.add(new SetCardInfo("Ironshell Beetle", 121, Rarity.COMMON, mage.cards.i.IronshellBeetle.class));
         cards.add(new SetCardInfo("Jeska, Warrior Adept", 93, Rarity.RARE, mage.cards.j.JeskaWarriorAdept.class));
         cards.add(new SetCardInfo("Keep Watch", 43, Rarity.COMMON, mage.cards.k.KeepWatch.class));
@@ -136,6 +137,7 @@ public final class Judgment extends ExpansionSet {
         cards.add(new SetCardInfo("Silver Seraph", 23, Rarity.RARE, mage.cards.s.SilverSeraph.class));
         cards.add(new SetCardInfo("Solitary Confinement", 24, Rarity.RARE, mage.cards.s.SolitaryConfinement.class));
         cards.add(new SetCardInfo("Soulcatchers' Aerie", 25, Rarity.UNCOMMON, mage.cards.s.SoulcatchersAerie.class));
+        cards.add(new SetCardInfo("Soulgorger Orgg", 99, Rarity.UNCOMMON, mage.cards.s.SoulgorgerOrgg.class));
         cards.add(new SetCardInfo("Spellgorger Barbarian", 100, Rarity.COMMON, mage.cards.s.SpellgorgerBarbarian.class));
         cards.add(new SetCardInfo("Spelljack", 51, Rarity.RARE, mage.cards.s.Spelljack.class));
         cards.add(new SetCardInfo("Spirit Cairn", 26, Rarity.UNCOMMON, mage.cards.s.SpiritCairn.class));

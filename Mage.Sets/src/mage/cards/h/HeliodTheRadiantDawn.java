@@ -1,6 +1,7 @@
 package mage.cards.h;
 
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,19 +13,18 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterEnchantmentCard;
 import mage.filter.predicate.Predicates;
-import mage.target.TargetCard;
+import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
 
 public class HeliodTheRadiantDawn extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("enchantment card that isn't a God");
+    private static final FilterCard filter = new FilterEnchantmentCard("enchantment card that isn't a God");
 
     static {
-        filter.add(CardType.ENCHANTMENT.getPredicate());
         filter.add(Predicates.not(SubType.GOD.getPredicate()));
     }
 
@@ -36,14 +36,12 @@ public class HeliodTheRadiantDawn extends CardImpl {
         this.toughness = new MageInt(4);
         this.secondSideCardClazz = mage.cards.h.HeliodTheWarpedEclipse.class;
 
-        //When Heliod, the Radiant Dawn enters the battlefield, return target enchantment card that isn't a God from
-        //your graveyard to your hand.
-        EntersBattlefieldTriggeredAbility entersBattlefieldTriggeredAbility =
-                new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect());
-        entersBattlefieldTriggeredAbility.addTarget(new TargetCard(Zone.GRAVEYARD, filter));
-        this.addAbility(entersBattlefieldTriggeredAbility);
+        // When Heliod, the Radiant Dawn enters the battlefield, return target enchantment card that isn't a God from your graveyard to your hand.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect());
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
+        this.addAbility(ability);
 
-        //{3}{U/P}: Transform Heliod, the Radiant Dawn. Activate only as a sorcery.
+        // {3}{U/P}: Transform Heliod, the Radiant Dawn. Activate only as a sorcery.
         this.addAbility(new TransformAbility());
         this.addAbility(new ActivateAsSorceryActivatedAbility(new TransformSourceEffect(), new ManaCostsImpl<>("{3}{U/P}")));
     }

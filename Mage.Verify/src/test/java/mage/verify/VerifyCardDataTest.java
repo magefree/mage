@@ -782,6 +782,7 @@ public class VerifyCardDataTest {
         }
 
         // CHECK: unknown direct download links
+        // TODO: add same for tokens
         for (Map.Entry<String, String> direct : ScryfallImageSupportCards.getDirectDownloadLinks().entrySet()) {
             // skip custom sets
             String setCode = ScryfallImageSupportCards.extractSetCodeFromDirectKey(direct.getKey());
@@ -1244,7 +1245,7 @@ public class VerifyCardDataTest {
             tokensInSet.add(tokData);
 
             // by class
-            searchName = tokData.getTokenClassName();
+            searchName = tokData.getAffectedClassName();
             setsList = tokDataClassesIndex.getOrDefault(searchName, "");
             if (!setsList.isEmpty()) {
                 setsList += ",";

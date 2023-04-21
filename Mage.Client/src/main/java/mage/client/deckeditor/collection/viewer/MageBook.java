@@ -39,10 +39,8 @@ import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -238,116 +236,86 @@ public class MageBook extends JComponent {
         List<Object> res = new ArrayList<>();
 
         // tokens
-        List<CardDownloadData> allTokens = getTokenCardUrls();
-        for (CardDownloadData token : allTokens) {
-            if (token.getSet().equals(currentSet)) {
-                try {
-                    String className = token.getName();
-                    className = className.replaceAll("[^a-zA-Z0-9]", "");
-                    className = "mage.game.permanent.token." + className + "Token";
-                    if (token.getTokenClassName() != null && token.getTokenClassName().length() > 0) {
-                        if (token.getTokenClassName().toLowerCase(Locale.ENGLISH).matches(".*token.*")) {
-                            className = token.getTokenClassName();
-                            className = "mage.game.permanent.token." + className;
-                        } else if (token.getTokenClassName().toLowerCase(Locale.ENGLISH).matches(".*emblem.*")) {
-                            continue;
-                        }
-                    }
-                    Class<?> c = Class.forName(className);
-                    Constructor<?> cons = c.getConstructor();
-                    Object newToken = cons.newInstance();
-                    if (newToken instanceof Token) {
-                        ((Token) newToken).setOriginalExpansionSetCode(currentSet);
-                        ((Token) newToken).setExpansionSetCodeForImage(currentSet);
-                        ((Token) newToken).setTokenType(token.getType()); // must be called after set code, so it keep the type
-                        res.add(newToken);
-                    }
-                } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-                    // Swallow exception
+        List<CardDownloadData> allTokens = getTokenCardUrls().stream()
+                .filter(token -> token.getSet().equals(currentSet))
+                .filter(token -> token.getAffectedClassName().contains("Token"))
+                .collect(Collectors.toList());
+        allTokens.forEach(token -> {
+            String fullClassName = "mage.game.permanent.token." + token.getAffectedClassName();
+            try {
+                Class<?> c = Class.forName(fullClassName);
+                Constructor<?> cons = c.getConstructor();
+                Object newToken = cons.newInstance();
+                if (newToken instanceof Token) {
+                    ((Token) newToken).setOriginalExpansionSetCode(currentSet);
+                    ((Token) newToken).setExpansionSetCodeForImage(currentSet);
+                    ((Token) newToken).setTokenType(token.getType()); // must be called after set code, so it keep the type
+                    res.add(newToken);
                 }
+            } catch (Exception e) {
+                // ignore error
             }
-        }
+        });
 
         // emblems
-        List<CardDownloadData> allEmblems = getTokenCardUrls();
-        for (CardDownloadData emblem : allEmblems) {
-            if (emblem.getSet().equals(currentSet)) {
-                try {
-                    String className = emblem.getName();
-                    if (emblem.getTokenClassName() != null && emblem.getTokenClassName().length() > 0) {
-                        if (emblem.getTokenClassName().toLowerCase(Locale.ENGLISH).matches(".*emblem.*")) {
-                            className = emblem.getTokenClassName();
-                            className = "mage.game.command.emblems." + className;
-                        }
-                    } else {
-                        continue;
-                    }
-                    Class<?> c = Class.forName(className);
-                    Constructor<?> cons = c.getConstructor();
-                    Object newEmblem = cons.newInstance();
-                    if (newEmblem instanceof Emblem) {
-                        ((Emblem) newEmblem).setExpansionSetCodeForImage(currentSet);
-                        res.add(newEmblem);
-                    }
-                } catch (ClassNotFoundException | InvocationTargetException | IllegalArgumentException | IllegalAccessException | InstantiationException | SecurityException | NoSuchMethodException ex) {
-                    // Swallow exception
+        List<CardDownloadData> allEmblems = getTokenCardUrls().stream()
+                .filter(token -> token.getSet().equals(currentSet))
+                .filter(token -> token.getAffectedClassName().contains("Emblem"))
+                .collect(Collectors.toList());
+        allEmblems.forEach(token -> {
+            String fullClassName = "mage.game.command.emblems." + token.getAffectedClassName();
+            try {
+                Class<?> c = Class.forName(fullClassName);
+                Constructor<?> cons = c.getConstructor();
+                Object newEmblem = cons.newInstance();
+                if (newEmblem instanceof Emblem) {
+                    ((Emblem) newEmblem).setExpansionSetCodeForImage(currentSet);
+                    res.add(newEmblem);
                 }
+            } catch (Exception e) {
+                // ignore error
             }
-        }
+        });
 
         // planes
-        List<CardDownloadData> allPlanes = getTokenCardUrls();
-        for (CardDownloadData plane : allPlanes) {
-            if (plane.getSet().equals(currentSet)) {
-                try {
-                    String className = plane.getName();
-                    if (plane.getTokenClassName() != null && plane.getTokenClassName().length() > 0) {
-                        if (plane.getTokenClassName().toLowerCase(Locale.ENGLISH).matches(".*plane.*")) {
-                            className = plane.getTokenClassName();
-                            className = "mage.game.command.planes." + className;
-                        }
-                    } else {
-                        continue;
-                    }
-                    Class<?> c = Class.forName(className);
-                    Constructor<?> cons = c.getConstructor();
-                    Object newPlane = cons.newInstance();
-                    if (newPlane instanceof Plane) {
-                        ((Plane) newPlane).setExpansionSetCodeForImage(currentSet);
-                        res.add(newPlane);
-                    }
-                } catch (ClassNotFoundException | InvocationTargetException | IllegalArgumentException | IllegalAccessException | InstantiationException | SecurityException | NoSuchMethodException ex) {
-                    // Swallow exception
+        List<CardDownloadData> allPlanes = getTokenCardUrls().stream()
+                .filter(token -> token.getSet().equals(currentSet))
+                .filter(token -> token.getAffectedClassName().contains("Plane"))
+                .collect(Collectors.toList());
+        allPlanes.forEach(token -> {
+            String fullClassName = "mage.game.command.planes." + token.getAffectedClassName();
+            try {
+                Class<?> c = Class.forName(fullClassName);
+                Constructor<?> cons = c.getConstructor();
+                Object newPlane = cons.newInstance();
+                if (newPlane instanceof Plane) {
+                    ((Plane) newPlane).setExpansionSetCodeForImage(currentSet);
+                    res.add(newPlane);
                 }
+            } catch (Exception e) {
+                // ignore error
             }
-        }
+        });
 
         // dungeons
-        List<CardDownloadData> allDungeons = getTokenCardUrls();
-        for (CardDownloadData dungeon : allDungeons) {
-            if (dungeon.getSet().equals(currentSet)) {
-                try {
-                    String className = dungeon.getName();
-                    if (dungeon.getTokenClassName() != null && dungeon.getTokenClassName().length() > 0) {
-                        if (dungeon.getTokenClassName().toLowerCase(Locale.ENGLISH).matches(".*dungeon.*")) {
-                            className = dungeon.getTokenClassName();
-                            className = "mage.game.command.dungeons." + className;
-                        }
-                    } else {
-                        continue;
-                    }
-                    Class<?> c = Class.forName(className);
-                    Constructor<?> cons = c.getConstructor();
-                    Object newDungeon = cons.newInstance();
-                    if (newDungeon instanceof Dungeon) {
-                        ((Dungeon) newDungeon).setExpansionSetCodeForImage(currentSet);
-                        res.add(newDungeon);
-                    }
-                } catch (ClassNotFoundException | InvocationTargetException | IllegalArgumentException | IllegalAccessException | InstantiationException | SecurityException | NoSuchMethodException ex) {
-                    // Swallow exception
+        List<CardDownloadData> allDungeons = getTokenCardUrls().stream()
+                .filter(token -> token.getSet().equals(currentSet))
+                .filter(token -> token.getAffectedClassName().contains("Dungeon"))
+                .collect(Collectors.toList());
+        allDungeons.forEach(token -> {
+            String fullClassName = "mage.game.command.dungeons." + token.getAffectedClassName();
+            try {
+                Class<?> c = Class.forName(fullClassName);
+                Constructor<?> cons = c.getConstructor();
+                Object newDungeon = cons.newInstance();
+                if (newDungeon instanceof Dungeon) {
+                    ((Dungeon) newDungeon).setExpansionSetCodeForImage(currentSet);
+                    res.add(newDungeon);
                 }
+            } catch (Exception e) {
+                // ignore error
             }
-        }
+        });
 
         return res;
     }
