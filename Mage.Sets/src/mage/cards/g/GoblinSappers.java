@@ -36,8 +36,8 @@ public final class GoblinSappers extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(), new ManaCostsImpl<>("{R}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
-        DelayedTriggeredAbility triggeredAbility = new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect());
-        triggeredAbility.addEffect(new DestroySourceEffect());
+        DelayedTriggeredAbility triggeredAbility = new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect().setText("destroy that creature"));
+        triggeredAbility.addEffect(new DestroySourceEffect().setText(" and {this}"));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(triggeredAbility).setText("Destroy it and {this} at end of combat."));
         this.addAbility(ability);
 
@@ -45,7 +45,7 @@ public final class GoblinSappers extends CardImpl {
         Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(), new ManaCostsImpl<>("{R}{R}{R}{R}"));
         secondAbility.addCost(new TapSourceCost());
         secondAbility.addTarget(new TargetControlledCreaturePermanent());
-        DelayedTriggeredAbility secondTriggeredAbility = new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect());
+        DelayedTriggeredAbility secondTriggeredAbility = new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect().setText("destroy that creature"));
         secondAbility.addEffect(new CreateDelayedTriggeredAbilityEffect(secondTriggeredAbility).setText("Destroy it at end of combat."));
         this.addAbility(secondAbility);
 
