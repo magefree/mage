@@ -12,17 +12,16 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.predicate.permanent.PermanentCanBeAttachedToPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.util.TargetAddress;
 
 /**
  * @author duncant
@@ -63,27 +62,6 @@ class AttachedToPermanentPredicate implements ObjectSourcePlayerPredicate<Perman
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         Permanent attached = input.getObject();
         return attached != null && game.getPermanent(attached.getAttachedTo()) != null;
-    }
-}
-
-class PermanentCanBeAttachedToPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-
-    protected Permanent aura;
-
-    public PermanentCanBeAttachedToPredicate(Permanent aura) {
-        super();
-        this.aura = aura;
-    }
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        Permanent potentialAttachment = input.getObject();
-        for (TargetAddress addr : TargetAddress.walk(aura)) {
-            Target target = addr.getTarget(aura);
-            Filter filter = target.getFilter();
-            return filter.match(potentialAttachment, game);
-        }
-        return false;
     }
 }
 
