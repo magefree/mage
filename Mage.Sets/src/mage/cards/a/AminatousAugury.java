@@ -102,7 +102,7 @@ class AminatousAuguryEffect extends OneShotEffect {
 
         if (cardsToCast.count(StaticFilters.FILTER_CARD_LAND, game) > 0) {
             if (controller.chooseUse(Outcome.PutLandInPlay, "Put a land from among the exiled cards into play?", source, game)) {
-                if (controller.choose(Outcome.PutLandInPlay, cardsToCast, target, game)) {
+                if (controller.choose(Outcome.PutLandInPlay, cardsToCast, target, source, game)) {
                     Card card = cardsToCast.get(target.getFirstTarget(), game);
                     if (card != null) {
                         cardsToCast.remove(card);

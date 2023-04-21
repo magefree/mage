@@ -24,9 +24,9 @@ import java.util.*;
  */
 public final class ZonesHandler {
 
-    public static boolean cast(ZoneChangeInfo info, Game game, Ability source) {
+    public static boolean cast(ZoneChangeInfo info, Ability source, Game game) {
         if (maybeRemoveFromSourceZone(info, game, source)) {
-            placeInDestinationZone(info, game, 0);
+            placeInDestinationZone(info,0, source, game);
             // create a group zone change event if a card is moved to stack for casting (it's always only one card, but some effects check for group events (one or more xxx))
             Set<Card> cards = new HashSet<>();
             Set<PermanentToken> tokens = new HashSet<>();
@@ -54,10 +54,10 @@ public final class ZonesHandler {
     public static boolean moveCard(ZoneChangeInfo info, Game game, Ability source) {
         List<ZoneChangeInfo> list = new ArrayList<>();
         list.add(info);
-        return !moveCards(list, game, source).isEmpty();
+        return !moveCards(list, source, game).isEmpty();
     }
 
-    public static List<ZoneChangeInfo> moveCards(List<ZoneChangeInfo> zoneChangeInfos, Game game, Ability source) {
+    public static List<ZoneChangeInfo> moveCards(List<ZoneChangeInfo> zoneChangeInfos, Ability source, Game game) {
         // Handle Unmelded Meld Cards
         for (ListIterator<ZoneChangeInfo> itr = zoneChangeInfos.listIterator(); itr.hasNext(); ) {
             ZoneChangeInfo info = itr.next();
@@ -110,7 +110,7 @@ public final class ZonesHandler {
                 // All permanents go to battlefield at the same time (=create order)
                 createOrder = game.getState().getNextPermanentOrderNumber();
             }
-            placeInDestinationZone(zoneChangeInfo, game, createOrder);
+            placeInDestinationZone(zoneChangeInfo, createOrder, source, game);
             if (game.getPhase() != null) { // moving cards to zones before game started does not need events
                 game.addSimultaneousEvent(zoneChangeInfo.event);
             }
@@ -118,14 +118,14 @@ public final class ZonesHandler {
         return zoneChangeInfos;
     }
 
-    private static void placeInDestinationZone(ZoneChangeInfo info, Game game, int createOrder) {
+    private static void placeInDestinationZone(ZoneChangeInfo info, int createOrder, Ability source, Game game) {
         // Handle unmelded cards
         if (info instanceof ZoneChangeInfo.Unmelded) {
             ZoneChangeInfo.Unmelded unmelded = (ZoneChangeInfo.Unmelded) info;
             Zone toZone = null;
             for (ZoneChangeInfo subInfo : unmelded.subInfo) {
                 toZone = subInfo.event.getToZone();
-                placeInDestinationZone(subInfo, game, createOrder);
+                placeInDestinationZone(subInfo, createOrder, source, game);
             }
             // We arbitrarily prefer the bottom half card. This should never be relevant.
             if (toZone != null) {
@@ -199,7 +199,8 @@ public final class ZonesHandler {
                     break;
                 case GRAVEYARD:
                     for (Card card : chooseOrder(
-                            "order to put in graveyard (last chosen will be on top)", cardsToMove, owner, game)) {
+                            "order to put in graveyard (last chosen will be on top)",
+                            cardsToMove, owner, source, game)) {
                         game.getPlayer(card.getOwnerId()).getGraveyard().add(card);
                     }
                     break;
@@ -207,13 +208,15 @@ public final class ZonesHandler {
                     if (info instanceof ZoneChangeInfo.Library && ((ZoneChangeInfo.Library) info).top) {
                         // on top
                         for (Card card : chooseOrder(
-                                "order to put on top of library (last chosen will be topmost)", cardsToMove, owner, game)) {
+                                "order to put on top of library (last chosen will be topmost)",
+                                cardsToMove, owner, source, game)) {
                             game.getPlayer(card.getOwnerId()).getLibrary().putOnTop(card, game);
                         }
                     } else {
                         // on bottom
                         for (Card card : chooseOrder(
-                                "order to put on bottom of library (last chosen will be bottommost)", cardsToMove, owner, game)) {
+                                "order to put on bottom of library (last chosen will be bottommost)",
+                                cardsToMove, owner, source, game)) {
                             game.getPlayer(card.getOwnerId()).getLibrary().putOnBottom(card, game);
                         }
                     }
@@ -404,7 +407,7 @@ public final class ZonesHandler {
         return success;
     }
 
-    public static List<Card> chooseOrder(String message, Cards cards, Player player, Game game) {
+    public static List<Card> chooseOrder(String message, Cards cards, Player player, Ability source, Game game) {
         List<Card> order = new ArrayList<>();
         if (cards.isEmpty()) {
             return order;
@@ -412,7 +415,7 @@ public final class ZonesHandler {
         TargetCard target = new TargetCard(Zone.ALL, new FilterCard(message));
         target.setRequired(true);
         while (player.canRespond() && cards.size() > 1) {
-            player.choose(Outcome.Neutral, cards, target, game);
+            player.choose(Outcome.Neutral, cards, target, source, game);
             UUID targetObjectId = target.getFirstTarget();
             order.add(cards.get(targetObjectId, game));
             cards.remove(targetObjectId);

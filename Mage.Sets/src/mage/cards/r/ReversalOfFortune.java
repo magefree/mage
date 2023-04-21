@@ -76,7 +76,7 @@ class ReversalOfFortuneEffect extends OneShotEffect {
             //You may copy an instant or sorcery card in it
             TargetCard target = new TargetCard(1, Zone.HAND, new FilterInstantOrSorceryCard());
             target.setRequired(false);
-            if (controller.choose(Outcome.PlayForFree, revealedCards, target, game)) {
+            if (controller.choose(Outcome.PlayForFree, revealedCards, target, source, game)) {
                 Card card = revealedCards.get(target.getFirstTarget(), game);
                 //If you do, you may cast the copy without paying its mana cost
                 if (card != null) {

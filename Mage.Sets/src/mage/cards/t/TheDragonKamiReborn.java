@@ -82,7 +82,7 @@ class TheDragonKamiRebornEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetCardInLibrary();
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {
             player.moveCards(card, Zone.EXILED, source, game);

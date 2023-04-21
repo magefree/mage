@@ -79,7 +79,7 @@ class ViviensArkbowEffect extends OneShotEffect {
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
         TargetCard target = new TargetCardInLibrary(0, 1, filter);
 
-        if (player.choose(outcome, cards, target, game)) {
+        if (player.choose(outcome, cards, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (player.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                 cards.remove(card);

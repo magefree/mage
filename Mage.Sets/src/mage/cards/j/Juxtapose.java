@@ -79,8 +79,8 @@ class JuxtaposeEffect extends ContinuousEffectImpl {
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
 
         if (you != null && targetPlayer != null) {
-            Permanent permanent1 = chooseOnePermanentsWithTheHighestCMC(game, you, filter);
-            Permanent permanent2 = chooseOnePermanentsWithTheHighestCMC(game, targetPlayer, filter);
+            Permanent permanent1 = chooseOnePermanentsWithTheHighestCMC(you, filter, source, game);
+            Permanent permanent2 = chooseOnePermanentsWithTheHighestCMC(targetPlayer, filter, source, game);
 
             if (permanent1 != null && permanent2 != null) {
                 // exchange works only for two different controllers
@@ -131,12 +131,12 @@ class JuxtaposeEffect extends ContinuousEffectImpl {
         return true;
     }
 
-    private Permanent chooseOnePermanentsWithTheHighestCMC(Game game, Player player, FilterPermanent filter) {
-        List<Permanent> permanents = getPermanentsWithTheHighestCMC(game, player.getId(), filter);
-        return chooseOnePermanent(game, player, permanents);
+    private Permanent chooseOnePermanentsWithTheHighestCMC(Player player, FilterPermanent filter, Ability source, Game game) {
+        List<Permanent> permanents = getPermanentsWithTheHighestCMC(player.getId(), filter, source, game);
+        return chooseOnePermanent(player, permanents, source, game);
     }
 
-    private List<Permanent> getPermanentsWithTheHighestCMC(Game game, UUID playerId, FilterPermanent filter) {
+    private List<Permanent> getPermanentsWithTheHighestCMC(UUID playerId, FilterPermanent filter, Ability source, Game game) {
         List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, playerId, game);
         int highestCMC = -1;
         for (Permanent permanent : permanents) {
@@ -153,7 +153,7 @@ class JuxtaposeEffect extends ContinuousEffectImpl {
         return result;
     }
 
-    private Permanent chooseOnePermanent(Game game, Player player, List<Permanent> permanents) {
+    private Permanent chooseOnePermanent(Player player, List<Permanent> permanents, Ability source, Game game) {
         Permanent permanent = null;
         if (permanents.size() == 1) {
             permanent = permanents.iterator().next();
@@ -164,7 +164,7 @@ class JuxtaposeEffect extends ContinuousEffectImpl {
             }
 
             TargetCard targetCard = new TargetCard(Zone.BATTLEFIELD, new FilterCard());
-            if (player.choose(Outcome.Benefit, cards, targetCard, game)) {
+            if (player.choose(Outcome.Benefit, cards, targetCard, source, game)) {
                 permanent = game.getPermanent(targetCard.getFirstTarget());
             }
         }

@@ -416,7 +416,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         ZoneChangeEvent event = new ZoneChangeEvent(mainCard.getId(), ability, controllerId, fromZone, Zone.STACK);
         Spell spell = new Spell(this, ability.getSpellAbilityToResolve(game), controllerId, event.getFromZone(), game);
         ZoneChangeInfo.Stack info = new ZoneChangeInfo.Stack(event, spell);
-        return ZonesHandler.cast(info, game, ability);
+        return ZonesHandler.cast(info, ability, game);
     }
 
     @Override

@@ -76,7 +76,7 @@ class WatchersOfTheDeadEffect extends OneShotEffect {
                     target.setNotTarget(true);
                     Cards cardsInGraveyard = opponent.getGraveyard();
                     if (cardsInGraveyard.size() > 1) {
-                        opponent.choose(outcome, cardsInGraveyard, target, game);
+                        opponent.choose(outcome, cardsInGraveyard, target, source, game);
                         for (Card cardInGraveyard : cardsInGraveyard.getCards(game)) {
                             if (!target.getTargets().contains(cardInGraveyard.getId())) {
                                 opponent.moveCardToExileWithInfo(cardInGraveyard, CardUtil.getCardExileZoneId(game, source.getId()),

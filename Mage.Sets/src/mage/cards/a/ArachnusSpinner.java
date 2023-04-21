@@ -98,7 +98,7 @@ class ArachnusSpinnerEffect extends OneShotEffect {
         Card card = null;
         if (controller.chooseUse(Outcome.Neutral, "Search your graveyard for Arachnus Web?", source, game)) {
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);
-            if (controller.choose(Outcome.PutCardInPlay, controller.getGraveyard(), target, game)) {
+            if (controller.choose(Outcome.PutCardInPlay, controller.getGraveyard(), target, source, game)) {
                 card = game.getCard(target.getFirstTarget());
             }
         }

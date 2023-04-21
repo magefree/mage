@@ -100,7 +100,7 @@ class KnightErrantOfEosEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 6));
         TargetCard target = new TargetCardInLibrary(0, 2, filter);
-        player.choose(Outcome.DrawCard, cards, target, game);
+        player.choose(Outcome.DrawCard, cards, target, source, game);
         Cards toHand = new CardsImpl(target.getTargets());
         player.revealCards(source, toHand, game);
         player.moveCards(toHand, Zone.HAND, source, game);

@@ -122,7 +122,7 @@ class BoreasChargerEffect extends OneShotEffect {
         }
         TargetCard target3 = new TargetCard(Zone.LIBRARY, filter3);
         Card cardToBattlefield = null;
-        if (controller.choose(outcome, cardsToHand, target3, game)) {
+        if (controller.choose(outcome, cardsToHand, target3, source, game)) {
             cardToBattlefield = cardsToHand.get(target2.getFirstTarget(), game);
             cardsToHand.remove(cardToBattlefield);
         }

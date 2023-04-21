@@ -70,7 +70,7 @@ class RofellossGiftEffect extends OneShotEffect {
             return false;
         }
         TargetCardInHand targetCardInHand = new TargetCardInHand(0, Integer.MAX_VALUE, filter1);
-        if (!player.choose(outcome, player.getHand(), targetCardInHand, game)) {
+        if (!player.choose(outcome, player.getHand(), targetCardInHand, source, game)) {
             return false;
         }
         Cards cards = new CardsImpl();

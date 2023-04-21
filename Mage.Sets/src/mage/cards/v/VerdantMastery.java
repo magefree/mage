@@ -88,7 +88,7 @@ class VerdantMasteryEffect extends OneShotEffect {
                 target = new TargetCardInLibrary(1, StaticFilters.FILTER_CARD_BASIC_LAND);
                 target.setRequired(true);
                 target.withChooseHint("to give to " + opponent.getName());
-                player.choose(outcome, cards, target, game);
+                player.choose(outcome, cards, target, source, game);
                 Card card = game.getCard(target.getFirstTarget());
                 opponent.moveCards(
                         card, Zone.BATTLEFIELD, source, game, true,
@@ -103,7 +103,7 @@ class VerdantMasteryEffect extends OneShotEffect {
         }
         target = new TargetCardInLibrary(Math.min(cards.size(), 2), StaticFilters.FILTER_CARD_BASIC_LAND);
         target.setRequired(true);
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         player.moveCards(
                 new CardsImpl(target.getTargets()).getCards(game), Zone.BATTLEFIELD, source,
                 game, true, false, false, null

@@ -117,7 +117,7 @@ class CurrencyConverterTokenEffect extends OneShotEffect {
         Card card;
         if (exileZone.size() > 1) {
             TargetCard target = new TargetCardInExile(StaticFilters.FILTER_CARD);
-            player.choose(outcome, exileZone, target, game);
+            player.choose(outcome, exileZone, target, source, game);
             card = exileZone.get(target.getFirstTarget(), game);
         } else {
             card = exileZone.getRandom(game);

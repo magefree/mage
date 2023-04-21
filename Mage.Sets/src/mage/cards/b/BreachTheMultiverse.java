@@ -87,7 +87,7 @@ class BreachTheMultiverseEffect extends OneShotEffect {
             }
             target.clearChosen();
             target.withChooseHint("from " + player.getName() + "'s graveyard");
-            controller.choose(Outcome.PutCreatureInPlay, player.getGraveyard(), target, game);
+            controller.choose(Outcome.PutCreatureInPlay, player.getGraveyard(), target, source, game);
             cards.add(target.getFirstTarget());
         }
         return controller.moveCards(cards, Zone.BATTLEFIELD, source, game);

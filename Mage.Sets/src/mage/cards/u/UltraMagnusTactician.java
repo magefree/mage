@@ -88,7 +88,7 @@ class UltraMagnusTacticianEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetCardInHand(0, 1, filter);
-        player.choose(outcome, player.getHand(), target, game);
+        player.choose(outcome, player.getHand(), target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return false;

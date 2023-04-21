@@ -84,7 +84,7 @@ class NivMizzetRebornEffect extends OneShotEffect {
         }
         player.revealCards(source, cards, game);
         TargetCard target = new NivMizzetRebornTarget();
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         Cards toHand = new CardsImpl(target.getTargets());
         player.moveCardsToHandWithInfo(toHand, source, game, true);
         cards.retainZone(Zone.LIBRARY, game);

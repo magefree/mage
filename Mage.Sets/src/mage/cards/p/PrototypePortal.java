@@ -101,7 +101,7 @@ class PrototypePortalEffect extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             if (!controller.getHand().isEmpty()) {
                 TargetCard target = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD_ARTIFACT);
-                controller.choose(Outcome.Benefit, controller.getHand(), target, game);
+                controller.choose(Outcome.Benefit, controller.getHand(), target, source, game);
                 Card card = controller.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
                     controller.moveCardsToExile(card, source, game, true, source.getSourceId(), sourceObject.getIdName() + " (Imprint)");

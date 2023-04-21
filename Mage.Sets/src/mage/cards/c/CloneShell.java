@@ -69,7 +69,7 @@ class CloneShellEffect extends OneShotEffect {
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 4));
         if (!cards.isEmpty()) {
             TargetCard target1 = new TargetCard(Zone.LIBRARY, filter1);
-            if (controller.choose(Outcome.Benefit, cards, target1, game)) {
+            if (controller.choose(Outcome.Benefit, cards, target1, source, game)) {
                 Card card = cards.get(target1.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);

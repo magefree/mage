@@ -91,7 +91,7 @@ class GishathSunsAvatarEffect extends OneShotEffect {
             filter.add(SubType.DINOSAUR.getPredicate());
             TargetCard target1 = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, filter);
             target1.setNotTarget(true);
-            controller.choose(Outcome.PutCardInPlay, cards, target1, game);
+            controller.choose(Outcome.PutCardInPlay, cards, target1, source, game);
             Cards toBattlefield = new CardsImpl(target1.getTargets());
             cards.removeAll(toBattlefield);
             controller.moveCards(toBattlefield.getCards(game), Zone.BATTLEFIELD, source, game, false, false, false, null);

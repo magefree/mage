@@ -74,7 +74,7 @@ class WorldlyCounselEffect extends OneShotEffect {
                 controller.moveCards(cards, Zone.HAND, source, game);
             } else {
                 TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put into your hand"));
-                if (controller.choose(Outcome.DrawCard, cards, target, game)) {
+                if (controller.choose(Outcome.DrawCard, cards, target, source, game)) {
                     Card card = cards.get(target.getFirstTarget(), game);
                     if (card != null) {
                         cards.remove(card);

@@ -78,7 +78,7 @@ class MindleechGhoulEffect extends OneShotEffect {
                 continue;
             }
             TargetCard target = new TargetCardInHand();
-            opponent.choose(Outcome.Discard, opponent.getHand(), target, game);
+            opponent.choose(Outcome.Discard, opponent.getHand(), target, source, game);
             cards.add(game.getCard(target.getFirstTarget()));
         }
         return controller.moveCards(cards, Zone.EXILED, source, game);

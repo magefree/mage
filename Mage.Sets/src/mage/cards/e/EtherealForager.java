@@ -85,7 +85,7 @@ class EtherealForagerEffect extends OneShotEffect {
         }
         TargetCard targetCard = new TargetCardInExile(0, 1, StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY, null, true);
         ;
-        player.choose(Outcome.DrawCard, delvedCards, targetCard, game);
+        player.choose(Outcome.DrawCard, delvedCards, targetCard, source, game);
         Card card = game.getCard(targetCard.getFirstTarget());
         if (card == null || !player.moveCards(card, Zone.HAND, source, game)) {
             return false;

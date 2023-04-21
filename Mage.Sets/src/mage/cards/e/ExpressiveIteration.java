@@ -72,7 +72,7 @@ class ExpressiveIterationEffect extends OneShotEffect {
                 cards.size() == 3 ? 1 : 0, 1, StaticFilters.FILTER_CARD
         );
         target.withChooseHint("To put into your hand");
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {
             player.moveCards(card, Zone.HAND, source, game);
@@ -85,7 +85,7 @@ class ExpressiveIterationEffect extends OneShotEffect {
                 cards.size() == 2 ? 1 : 0, 1, StaticFilters.FILTER_CARD
         );
         target.withChooseHint("To put on the bottom of your library");
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         card = game.getCard(target.getFirstTarget());
         if (card != null) {
             player.putCardsOnBottomOfLibrary(card, game, source, false);
@@ -96,7 +96,7 @@ class ExpressiveIterationEffect extends OneShotEffect {
         }
         target = new TargetCardInLibrary();
         target.withChooseHint("To exile (you may play it this turn)");
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return true;

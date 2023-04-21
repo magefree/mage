@@ -104,7 +104,7 @@ class EcologicalAppreciationEffect extends OneShotEffect {
             };
             targetCardsInGY.setNotTarget(true);
             targetCardsInGY.withChooseHint("Step 2 of 2: Search graveyard");
-            player.choose(Outcome.PutCreatureInPlay, player.getGraveyard(), targetCardsInGY, game);
+            player.choose(Outcome.PutCreatureInPlay, player.getGraveyard(), targetCardsInGY, source, game);
             cards.addAll(targetCardsInGY.getTargets());
             cards.removeIf(uuid -> {
                 Zone zone = game.getState().getZone(uuid);
@@ -120,7 +120,7 @@ class EcologicalAppreciationEffect extends OneShotEffect {
         if (opponent != null) {
             TargetCard chosenCards = new TargetCard(2, Zone.ALL, StaticFilters.FILTER_CARD);
             chosenCards.setNotTarget(true);
-            opponent.choose(outcome, cards, chosenCards, game);
+            opponent.choose(outcome, cards, chosenCards, source, game);
             Cards toShuffle = new CardsImpl(chosenCards.getTargets().stream()
                     .map(game::getCard)
                     .collect(Collectors.toList()));

@@ -78,7 +78,7 @@ class QueenKaylaBinKroogEffect extends OneShotEffect {
         Cards cards = player.discard(player.getHand(), false, source, game);
         player.drawCards(cards.size(), source, game);
         TargetCard target = new QueenKaylaBinKroogTarget();
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
         return true;
     }

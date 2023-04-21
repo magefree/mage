@@ -86,7 +86,7 @@ class InvasionOfTarkirEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetCardInHand(0, Integer.MAX_VALUE, filter);
-        player.choose(Outcome.Benefit, player.getHand(), target, game);
+        player.choose(Outcome.Benefit, player.getHand(), target, source, game);
         Cards cards = new CardsImpl(target.getTargets());
         player.revealCards(source, cards, game);
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(

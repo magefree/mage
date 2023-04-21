@@ -69,7 +69,7 @@ public class CastCardFromOutsideTheGameEffect extends OneShotEffect {
             }
 
             TargetCard target = new TargetCard(Zone.OUTSIDE, filterCard);
-            if (player.choose(Outcome.Benefit, filteredCards, target, game)) {
+            if (player.choose(Outcome.Benefit, filteredCards, target, source, game)) {
                 Card card = player.getSideboard().get(target.getFirstTarget(), game);
                 if (card != null) {
                     game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);

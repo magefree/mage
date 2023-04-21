@@ -92,7 +92,7 @@ class TajuruParagonEffect extends OneShotEffect {
             FilterCard filter = new FilterCard("card that shares a creature type with " + permanent.getName());
             filter.add(new SharesCreatureTypePredicate(permanent));
             TargetCard target = new TargetCardInLibrary(0, 1, filter);
-            player.choose(outcome, cards, target, game);
+            player.choose(outcome, cards, target, source, game);
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 player.moveCardToHandWithInfo(card, source, game, true);

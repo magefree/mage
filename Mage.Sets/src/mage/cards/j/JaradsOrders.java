@@ -71,7 +71,7 @@ class JaradsOrdersEffect extends OneShotEffect {
                     controller.revealCards("Jarad's Orders", revealed, game);
                     if (target.getTargets().size() == 2) {
                         TargetCard target2 = new TargetCard(Zone.LIBRARY, filter);
-                        controller.choose(Outcome.Benefit, revealed, target2, game);
+                        controller.choose(Outcome.Benefit, revealed, target2, source, game);
                         Card card = revealed.get(target2.getFirstTarget(), game);
                         controller.moveCards(card, Zone.HAND, source, game);
                         revealed.remove(card);

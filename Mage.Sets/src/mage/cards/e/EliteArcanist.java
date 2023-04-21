@@ -104,7 +104,7 @@ class EliteArcanistImprintEffect extends OneShotEffect {
         if (player != null && !player.getHand().isEmpty()) {
             TargetCard target = new TargetCard(Zone.HAND, filter);
             if (target.canChoose(source.getControllerId(), source, game)
-                    && player.choose(Outcome.Benefit, player.getHand(), target, game)) {
+                    && player.choose(Outcome.Benefit, player.getHand(), target, source, game)) {
                 Card card = player.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
                     card.moveToExile(source.getSourceId(), "Elite Arcanist", source, game);

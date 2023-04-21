@@ -94,7 +94,7 @@ class NavigationOrbEffect extends OneShotEffect {
             default:
                 TargetCard targetCard = new TargetCardInLibrary(0, 1, StaticFilters.FILTER_CARD);
                 targetCard.withChooseHint("To put onto the battlefield");
-                player.choose(outcome, cards, targetCard, game);
+                player.choose(outcome, cards, targetCard, source, game);
                 card = cards.get(targetCard.getFirstTarget(), game);
         }
         cards.remove(card);
