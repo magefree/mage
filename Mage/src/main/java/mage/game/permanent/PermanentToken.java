@@ -138,6 +138,6 @@ public class PermanentToken extends PermanentImpl {
 
     @Override
     public void setExpansionSetCode(String expansionSetCode) {
-        throw new IllegalArgumentException("Wrong code usage: you can't change a token's set code");
+        throw new IllegalArgumentException("Wrong code usage: you can't change a token's set code, use CardUtils.copySetAndCardNumber instead");
     }
 }
