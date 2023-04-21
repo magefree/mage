@@ -97,8 +97,8 @@ class WormfangCrabExileEffect extends OneShotEffect {
         if (!opponent.choose(outcome, target, source, game)) {
             return false;
         }
-        Card cardToMove = game.getCard(target.getFirstTarget());
-        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+        Card cardToMove = game.getPermanent(target.getFirstTarget());
+        UUID exileId = CardUtil.getExileZoneId(game, source);
         return cardToMove != null && opponent.moveCardsToExile(cardToMove, source, game, true, exileId, sourceObject.getIdName());
     }
 
