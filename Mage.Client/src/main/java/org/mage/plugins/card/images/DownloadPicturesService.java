@@ -5,6 +5,7 @@ import mage.cards.Sets;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.cards.repository.TokenRepository;
 import mage.client.MageFrame;
 import mage.client.dialog.DownloadImagesDialog;
 import mage.client.dialog.PreferencesDialog;
@@ -536,7 +537,19 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 }
             });
 
-            allCardsUrls.addAll(getTokenCardUrls());
+            // tokens
+            TokenRepository.instance.getAllTokens().forEach(token -> {
+                CardDownloadData card = new CardDownloadData(
+                        token.getName(),
+                        token.getSetCode(),
+                        "0",
+                        false,
+                        token.getImageNumber(),
+                        true,
+                        token.getImageFileName()
+                );
+                allCardsUrls.add(card);
+            });
         } catch (Exception e) {
             logger.error(e);
         }

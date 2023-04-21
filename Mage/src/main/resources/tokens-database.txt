@@ -11,6 +11,7 @@
 # - use simple name for the emblem like Gideon
 # - all names must be different in one set
 # - xmage do not support various arts for the emblems (e.g. must be one emblem's image per set)
+# - download images must be setup in ScryfallImageSupportTokens
 |Generate|EMBLEM:BFZ|Emblem Gideon|||GideonAllyOfZendikarEmblem|
 |Generate|EMBLEM:BFZ|Emblem Kiora|||KioraMasterOfTheDepthsEmblem|
 |Generate|EMBLEM:BFZ|Emblem Nixilis|||ObNixilisReignitedEmblem|
@@ -114,6 +115,8 @@
 |Generate|EMBLEM:MOC|Emblem Teferi|||TeferisTalentEmblem|
 
 # ALL PLANES
+# Usage hints:
+# - download images must be setup in ScryfallImageSupportTokens
 |Generate|PLANE:PCA|Plane - Academy at Tolaria West|||AcademyAtTolariaWestPlane|
 |Generate|PLANE:PCA|Plane - Agyrem|||AgyremPlane|
 |Generate|PLANE:PCA|Plane - Akoum|||AkoumPlane|
@@ -137,11 +140,15 @@
 |Generate|PLANE:PCA|Plane - Trail of the Mage-Rings|||TrailOfTheMageRingsPlane|
 
 # ALL DUNGEONS
+# Usage hints:
+# - download images must be setup in ScryfallImageSupportTokens
 |Generate|DUNGEON:AFR|Tomb of Annihilation|||TombOfAnnihilationDungeon|
 |Generate|DUNGEON:AFR|Lost Mine of Phandelver|||LostMineOfPhandelverDungeon|
 |Generate|DUNGEON:AFR|Dungeon of the Mad Mage|||DungeonOfTheMadMageDungeon|
 
 # ALL TOKENS
+# Usage hints:
+# - download images must be setup in ScryfallImageSupportTokens
 
 # 10E
 |Generate|TOK:10E|Dragon|||DragonToken2|

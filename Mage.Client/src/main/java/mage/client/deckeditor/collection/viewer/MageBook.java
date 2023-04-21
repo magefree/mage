@@ -5,10 +5,7 @@ import mage.cards.CardDimensions;
 import mage.cards.ExpansionSet;
 import mage.cards.MageCard;
 import mage.cards.Sets;
-import mage.cards.repository.CardCriteria;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
-import mage.cards.repository.ExpansionRepository;
+import mage.cards.repository.*;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.components.HoverButton;
@@ -30,7 +27,6 @@ import mage.game.permanent.token.Token;
 import mage.view.*;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.ManaSymbols;
-import org.mage.plugins.card.images.CardDownloadData;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -46,7 +42,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static java.lang.Math.min;
-import static org.mage.plugins.card.images.DownloadPicturesService.getTokenCardUrls;
 
 /**
  * Card viewer (mage book) with cards and page flipping
@@ -236,20 +231,19 @@ public class MageBook extends JComponent {
         List<Object> res = new ArrayList<>();
 
         // tokens
-        List<CardDownloadData> allTokens = getTokenCardUrls().stream()
-                .filter(token -> token.getSet().equals(currentSet))
-                .filter(token -> token.getAffectedClassName().contains("Token"))
+        List<TokenInfo> allTokens = TokenRepository.instance.getByType(TokenType.TOKEN)
+                .stream()
+                .filter(token -> token.getSetCode().equals(currentSet))
                 .collect(Collectors.toList());
         allTokens.forEach(token -> {
-            String fullClassName = "mage.game.permanent.token." + token.getAffectedClassName();
             try {
-                Class<?> c = Class.forName(fullClassName);
+                Class<?> c = Class.forName(token.getFullClassFileName());
                 Constructor<?> cons = c.getConstructor();
                 Object newToken = cons.newInstance();
                 if (newToken instanceof Token) {
                     ((Token) newToken).setOriginalExpansionSetCode(currentSet);
                     ((Token) newToken).setExpansionSetCodeForImage(currentSet);
-                    ((Token) newToken).setTokenType(token.getType()); // must be called after set code, so it keep the type
+                    ((Token) newToken).setTokenType(token.getImageNumber()); // must be called after set code, so it keep the type
                     res.add(newToken);
                 }
             } catch (Exception e) {
@@ -258,14 +252,13 @@ public class MageBook extends JComponent {
         });
 
         // emblems
-        List<CardDownloadData> allEmblems = getTokenCardUrls().stream()
-                .filter(token -> token.getSet().equals(currentSet))
-                .filter(token -> token.getAffectedClassName().contains("Emblem"))
+        List<TokenInfo> allEmblems = TokenRepository.instance.getByType(TokenType.EMBLEM)
+                .stream()
+                .filter(token -> token.getSetCode().equals(currentSet))
                 .collect(Collectors.toList());
         allEmblems.forEach(token -> {
-            String fullClassName = "mage.game.command.emblems." + token.getAffectedClassName();
             try {
-                Class<?> c = Class.forName(fullClassName);
+                Class<?> c = Class.forName(token.getFullClassFileName());
                 Constructor<?> cons = c.getConstructor();
                 Object newEmblem = cons.newInstance();
                 if (newEmblem instanceof Emblem) {
@@ -278,14 +271,13 @@ public class MageBook extends JComponent {
         });
 
         // planes
-        List<CardDownloadData> allPlanes = getTokenCardUrls().stream()
-                .filter(token -> token.getSet().equals(currentSet))
-                .filter(token -> token.getAffectedClassName().contains("Plane"))
+        List<TokenInfo> allPlanes = TokenRepository.instance.getByType(TokenType.PLANE)
+                .stream()
+                .filter(token -> token.getSetCode().equals(currentSet))
                 .collect(Collectors.toList());
         allPlanes.forEach(token -> {
-            String fullClassName = "mage.game.command.planes." + token.getAffectedClassName();
             try {
-                Class<?> c = Class.forName(fullClassName);
+                Class<?> c = Class.forName(token.getFullClassFileName());
                 Constructor<?> cons = c.getConstructor();
                 Object newPlane = cons.newInstance();
                 if (newPlane instanceof Plane) {
@@ -298,14 +290,13 @@ public class MageBook extends JComponent {
         });
 
         // dungeons
-        List<CardDownloadData> allDungeons = getTokenCardUrls().stream()
-                .filter(token -> token.getSet().equals(currentSet))
-                .filter(token -> token.getAffectedClassName().contains("Dungeon"))
+        List<TokenInfo> allDungeons = TokenRepository.instance.getByType(TokenType.DUNGEON)
+                .stream()
+                .filter(token -> token.getSetCode().equals(currentSet))
                 .collect(Collectors.toList());
         allDungeons.forEach(token -> {
-            String fullClassName = "mage.game.command.dungeons." + token.getAffectedClassName();
             try {
-                Class<?> c = Class.forName(fullClassName);
+                Class<?> c = Class.forName(token.getFullClassFileName());
                 Constructor<?> cons = c.getConstructor();
                 Object newDungeon = cons.newInstance();
                 if (newDungeon instanceof Dungeon) {
