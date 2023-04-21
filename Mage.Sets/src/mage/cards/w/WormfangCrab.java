@@ -2,7 +2,6 @@ package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
@@ -76,8 +75,7 @@ class WormfangCrabExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller == null || sourceObject == null) {
+        if (controller == null) {
             return false;
         }
         TargetOpponent targetOpponent = new TargetOpponent(true);
@@ -86,8 +84,7 @@ class WormfangCrabExileEffect extends OneShotEffect {
         if (opponent == null) {
             return false;
         }
-        game.informPlayers(sourceObject.getLogName() + ": "
-                + controller.getLogName() + " has selected " + opponent.getLogName() + " to choose a permanent to exile");
+        game.informPlayers(controller.getLogName() + " has selected " + opponent.getLogName() + " to choose a permanent to exile" + CardUtil.getSourceLogName(game, source));
         FilterPermanent filter = new FilterPermanent();
         filter.add(AnotherPredicate.instance);
         filter.add(new ControllerIdPredicate(controller.getId()));
@@ -99,7 +96,7 @@ class WormfangCrabExileEffect extends OneShotEffect {
         }
         Card cardToMove = game.getPermanent(target.getFirstTarget());
         UUID exileId = CardUtil.getExileZoneId(game, source);
-        return cardToMove != null && opponent.moveCardsToExile(cardToMove, source, game, true, exileId, sourceObject.getIdName());
+        return cardToMove != null && opponent.moveCardsToExile(cardToMove, source, game, true, exileId, CardUtil.getSourceName(game, source));
     }
 
 }
