@@ -82,11 +82,11 @@ enum BirthOfTheImperiumValue implements DynamicValue {
                 .map(Controllable::getControllerId)
                 .collect(Collectors.toMap(Function.identity(), x -> 1, Integer::sum));
         int yourCreatures = map.getOrDefault(sourceAbility.getControllerId(), 0);
-        return yourCreatures > 0 ? 2 * game
+        return yourCreatures > 0 ? (int) (2 * game
                 .getOpponents(sourceAbility.getControllerId())
                 .stream().mapToInt(uuid -> map.getOrDefault(uuid, 0))
                 .filter(x -> x < yourCreatures)
-                .sum() : 0;
+                .count()) : 0;
     }
 
     @Override
