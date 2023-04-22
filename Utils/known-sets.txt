@@ -141,6 +141,7 @@ Legends|Legends|
 Legions|Legions|
 Limited Edition Alpha|LimitedEditionAlpha|
 Limited Edition Beta|LimitedEditionBeta|
+The Lord of the Rings: Tales of Middle-earth|TheLordOfTheRingsTalesOfMiddleEarth|
 Lorwyn|Lorwyn|
 Magic 2010|Magic2010|
 Magic 2011|Magic2011|
