@@ -29,7 +29,7 @@ import java.util.UUID;
  */
 public final class JeweledAmulet extends CardImpl {
 
-    private static final String rule = "{1}, {T}: Put a charge counter on {this}. Note the type of mana spent to pay this activation cost. Activate only if there are no charge counters on {this}";
+    private static final String rule = "{1}, {T}: Put a charge counter on {this}. Note the type of mana spent to pay this activation cost. Activate only if there are no charge counters on {this}.";
 
     public JeweledAmulet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{0}");
