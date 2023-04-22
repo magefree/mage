@@ -530,8 +530,10 @@ public class ScryfallImageSupportCards {
             add("MOM"); // March of the Machine
             add("MOC"); // March of the Machine Commander
             add("MAT"); // March of the Machine: The Aftermath
-            add("30A"); // Thirtieth Anniversary Edition
             add("MUL"); // Multiverse Legends
+            add("30A"); // Thirtieth Anniversary Edition
+            add("LTR"); // Lord of the Rings: Tales of Middle-Earth
+            add("LTC"); // Lord of the Rings: Tales of Middle-Earth Commander
         }
     };
 
