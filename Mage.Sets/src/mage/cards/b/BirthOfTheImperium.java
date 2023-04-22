@@ -86,7 +86,7 @@ enum BirthOfTheImperiumValue implements DynamicValue {
                 .getOpponents(sourceAbility.getControllerId())
                 .stream().mapToInt(uuid -> map.getOrDefault(uuid, 0))
                 .filter(x -> x < yourCreatures)
-                .sum() : 0;
+                .count() : 0;
     }
 
     @Override
