@@ -39,6 +39,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentMeld;
 import mage.game.permanent.PermanentToken;
+import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.Target;
@@ -1784,6 +1785,9 @@ public final class CardUtil {
             needSetCode = ((Card) copyFromObject).getExpansionSetCode();
             needCardNumber = ((Card) copyFromObject).getCardNumber();
             needTokenType = 0;
+        } else if (copyFromObject instanceof Token) {
+            // TODO: make this work
+            return;
         } else {
             throw new IllegalStateException("Unsupported copyFromObject class: " + copyFromObject.getClass().getSimpleName());
         }
