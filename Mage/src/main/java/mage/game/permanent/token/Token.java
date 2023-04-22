@@ -65,4 +65,8 @@ public interface Token extends MageObject {
     void setColor(ObjectColor color);
 
     void clearManaCost();
+
+    void setEntersTransformed(boolean entersTransformed);
+
+    boolean isEntersTransformed();
 }

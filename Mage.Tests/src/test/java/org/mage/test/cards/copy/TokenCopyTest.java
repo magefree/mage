@@ -6,7 +6,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -84,7 +83,6 @@ public class TokenCopyTest extends CardTestPlayerBase {
         checkProwlers(0, 1 + 1);
     }
 
-    @Ignore // currently failing
     @Test
     public void testCopyTransformedDFC() {
         addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 5 + 4);

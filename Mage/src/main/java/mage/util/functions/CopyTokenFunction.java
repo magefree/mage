@@ -7,6 +7,7 @@ import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.EmptyToken;
@@ -35,17 +36,19 @@ public class CopyTokenFunction {
         return new CopyTokenFunction(new EmptyToken(source.isTransformable())).from(source, game, spell);
     }
 
-    public Token apply(Card source, Game game) {
+    public void apply(Card source, Game game) {
         if (target == null) {
             throw new IllegalArgumentException("Target can't be null");
         }
         // A copy contains only the attributes of the basic card or basic Token that's the base of the permanent
         // else gained abililies would be copied too.
+        target.setEntersTransformed(source instanceof Permanent && ((Permanent) source).isTransformed());
         MageObject sourceObj;
         if (source instanceof PermanentToken) {
             // create token from another token
             Token sourceToken = ((PermanentToken) source).getToken();
             sourceObj = sourceToken;
+            copyToToken(target, sourceObj, game);
             if (sourceToken.getBackFace() != null) {
                 target.getBackFace().setOriginalExpansionSetCode(sourceToken.getOriginalExpansionSetCode());
                 target.getBackFace().setOriginalCardNumber(sourceToken.getOriginalCardNumber());
@@ -56,13 +59,16 @@ public class CopyTokenFunction {
             target.setOriginalExpansionSetCode(sourceToken.getOriginalExpansionSetCode());
             target.setOriginalCardNumber(sourceToken.getOriginalCardNumber());
             target.setCopySourceCard(((PermanentToken) source).getToken().getCopySourceCard());
-        } else if (source instanceof PermanentCard) {
+            return;
+        }
+        if (source instanceof PermanentCard) {
             // create token from non-token permanent
             if (((PermanentCard) source).isMorphed() || ((PermanentCard) source).isManifested()) {
                 MorphAbility.setPermanentToFaceDownCreature(target, game);
-                return target;
+                return;
             }
             sourceObj = ((PermanentCard) source).getMainCard();
+            copyToToken(target, sourceObj, game);
             if (((Card) sourceObj).isTransformable()) {
                 target.getBackFace().setOriginalExpansionSetCode(source.getExpansionSetCode());
                 target.getBackFace().setOriginalCardNumber(source.getCardNumber());
@@ -73,20 +79,20 @@ public class CopyTokenFunction {
             target.setOriginalExpansionSetCode(source.getExpansionSetCode());
             target.setOriginalCardNumber(source.getCardNumber());
             target.setCopySourceCard((Card) sourceObj);
-        } else {
-            sourceObj = source;
-            if (source.isTransformable()) {
-                target.getBackFace().setOriginalExpansionSetCode(source.getExpansionSetCode());
-                target.getBackFace().setOriginalCardNumber(source.getCardNumber());
-                target.getBackFace().setCopySourceCard(source.getSecondCardFace());
-                copyToToken(target.getBackFace(), source.getSecondCardFace(), game);
-            }
-            // create token from non-permanent object like card (example: Embalm ability)
-            target.setOriginalExpansionSetCode(source.getExpansionSetCode());
-            target.setOriginalCardNumber(source.getCardNumber());
-            target.setCopySourceCard(source);
+            return;
         }
-        return copyToToken(target, sourceObj, game);
+        sourceObj = source;
+        copyToToken(target, sourceObj, game);
+        if (source.isTransformable()) {
+            target.getBackFace().setOriginalExpansionSetCode(source.getExpansionSetCode());
+            target.getBackFace().setOriginalCardNumber(source.getCardNumber());
+            target.getBackFace().setCopySourceCard(source.getSecondCardFace());
+            copyToToken(target.getBackFace(), source.getSecondCardFace(), game);
+        }
+        // create token from non-permanent object like card (example: Embalm ability)
+        target.setOriginalExpansionSetCode(source.getExpansionSetCode());
+        target.setOriginalCardNumber(source.getCardNumber());
+        target.setCopySourceCard(source);
     }
 
     private static Token copyToToken(Token target, MageObject sourceObj, Game game) {

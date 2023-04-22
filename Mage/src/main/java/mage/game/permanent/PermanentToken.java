@@ -5,6 +5,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.keyword.ChangelingAbility;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.constants.EmptyNames;
 import mage.game.Game;
@@ -28,6 +29,9 @@ public class PermanentToken extends PermanentImpl {
         this.power = new MageInt(token.getPower().getModifiedBaseValue());
         this.toughness = new MageInt(token.getToughness().getModifiedBaseValue());
         this.copyFromToken(this.token, game, false); // needed to have at this time (e.g. for subtypes for entersTheBattlefield replacement effects)
+        if (this.token.isEntersTransformed()) {
+            TransformAbility.transformPermanent(this, this.token.getBackFace(), game, null);
+        }
 
         // token's ZCC must be synced with original token to keep abilities settings
         // Example: kicker ability and kicked status

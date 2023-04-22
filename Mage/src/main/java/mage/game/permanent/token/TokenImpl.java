@@ -45,6 +45,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     protected List<String> availableImageSetCodes = new ArrayList<>(); // TODO: delete
 
     protected Token backFace = null;
+    private boolean entersTransformed = false;
 
     public TokenImpl() {
     }
@@ -64,6 +65,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         this.copySourceCard = token.copySourceCard; // will never be changed
         this.availableImageSetCodes = token.availableImageSetCodes;
         this.backFace = token.backFace != null ? token.backFace.copy() : null;
+        this.entersTransformed = token.entersTransformed;
     }
 
     @Override
@@ -619,5 +621,15 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
             backFace.clearManaCost();
         }
         this.getManaCost().clear();
+    }
+
+    @Override
+    public void setEntersTransformed(boolean entersTransformed) {
+        this.entersTransformed = entersTransformed;
+    }
+
+    @Override
+    public boolean isEntersTransformed() {
+        return this.entersTransformed && this.backFace != null;
     }
 }
