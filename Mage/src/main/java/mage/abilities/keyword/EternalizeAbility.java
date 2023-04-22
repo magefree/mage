@@ -92,9 +92,9 @@ class EternalizeEffect extends OneShotEffect {
 
         // create token and modify all attributes permanently (without game usage)
         Token token = CopyTokenFunction.createTokenCopy(card, game); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
-        token.getColor().setColor(ObjectColor.BLACK);
+        token.setColor(ObjectColor.BLACK);
         token.addSubType(SubType.ZOMBIE);
-        token.getManaCost().clear();
+        token.clearManaCost();
         token.removePTCDA();
         token.setPower(4);
         token.setToughness(4);

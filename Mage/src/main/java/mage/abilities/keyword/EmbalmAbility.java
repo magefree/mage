@@ -88,9 +88,9 @@ class EmbalmEffect extends OneShotEffect {
 
         // create token and modify all attributes permanently (without game usage)
         Token token = CopyTokenFunction.createTokenCopy(card, game); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
-        token.getColor().setColor(ObjectColor.WHITE);
+        token.setColor(ObjectColor.WHITE);
         token.addSubType(SubType.ZOMBIE);
-        token.getManaCost().clear();
+        token.clearManaCost();
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.EMBALMED_CREATURE, token.getId(), source, controller.getId()));
         token.putOntoBattlefield(1, game, source, controller.getId(), false, false, null);
         // Probably it makes sense to remove also the Embalm ability (it's not shown on the token cards).

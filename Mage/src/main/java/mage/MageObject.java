@@ -246,6 +246,10 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
         getSuperType().add(superType);
     }
 
+    default void removeSuperType(SuperType superType) {
+        getSuperType().remove(superType);
+    }
+
     default boolean isBasic() {
         return getSuperType().contains(SuperType.BASIC);
     }

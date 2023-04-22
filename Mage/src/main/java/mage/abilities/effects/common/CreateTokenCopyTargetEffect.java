@@ -206,7 +206,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             token.addCardType(CardType.ARTIFACT);
         }
         if (isntLegendary) {
-            token.getSuperType().remove(SuperType.LEGENDARY);
+            token.removeSuperType(SuperType.LEGENDARY);
         }
 
         if (startingLoyalty != -1) {
@@ -237,7 +237,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             token.addSubType(additionalSubType);
         }
         if (color != null) {
-            token.getColor().setColor(color);
+            token.setColor(color);
         }
         additionalAbilities.stream().forEach(token::addAbility);
         if (permanentModifier != null) {

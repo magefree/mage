@@ -2,6 +2,7 @@
 package mage.game.permanent.token;
 
 import mage.MageObject;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.game.Game;
@@ -60,4 +61,8 @@ public interface Token extends MageObject {
     void setExpansionSetCodeForImage(String code);
 
     Token getBackFace();
+
+    void setColor(ObjectColor color);
+
+    void clearManaCost();
 }
