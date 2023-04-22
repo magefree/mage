@@ -104,7 +104,7 @@ class TomBombadilTriggeredAbility extends TriggeredAbilityImpl {
         // the ID of the original ability (on the permanent) that the resolving ability
         // came from.
         Optional<Ability> ability_opt = game.getAbility(event.getTargetId(), event.getSourceId());
-        if (ability_opt.isEmpty())
+        if (!ability_opt.isPresent())
             return false;
 
         // Make sure it was a triggered ability (needed for checking if it's a chapter
