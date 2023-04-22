@@ -9,6 +9,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.Card;
+import mage.cards.repository.TokenInfo;
+import mage.cards.repository.TokenRepository;
+import mage.cards.repository.TokenType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
@@ -24,6 +27,7 @@ import mage.target.Target;
 import mage.util.RandomUtil;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Each token must have default constructor without params (GUI require for card viewer)
@@ -39,7 +43,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     private static final int MAX_TOKENS_PER_GAME = 500;
 
     // list of set codes token images are available for
-    protected List<String> availableImageSetCodes = new ArrayList<>();
+    protected List<String> availableImageSetCodes = new ArrayList<>(); // TODO: delete
 
     public enum Type {
 
@@ -140,42 +144,53 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         return putOntoBattlefield(amount, game, source, controllerId, tapped, attacking, null);
     }
 
-    public static String generateSetCode(TokenImpl token, Game game, UUID sourceId) {
-        // Choose a set code's by priority:
-        // - use source's code
-        // - use parent source's code (too complicated, so ignore it)
+    public static TokenInfo generateTokenInfo(TokenImpl token, Game game, UUID sourceId) {
+        // Choose a token image by priority:
+        // - use source's set code
+        // - use parent source's set code (too complicated, so ignore it)
         // - use random set code
         // - use default set code
-        // Token type must be set on set's code update
+
+        if (token.getOriginalCardNumber() != null) {
+            // token from a card, so must use card image instead (example: Embalm ability)
+            return new TokenInfo(TokenType.TOKEN, token.getName(), token.getOriginalExpansionSetCode(), 0);
+        }
 
         // source
-        String setCode = null;
+        final String setCode;
         Card sourceCard = game.getCard(sourceId);
         if (sourceCard != null) {
             setCode = sourceCard.getExpansionSetCode();
-        }
-        MageObject sourceObject = game.getObject(sourceId);
-        if (sourceObject instanceof CommandObject) {
-            setCode = ((CommandObject) sourceObject).getExpansionSetCodeForImage();
-        }
-
-        // TODO: change to tokens database
-        if (token.availableImageSetCodes.contains(setCode)) {
-            return setCode;
+        } else {
+            MageObject sourceObject = game.getObject(sourceId);
+            if (sourceObject instanceof CommandObject) {
+                setCode = ((CommandObject) sourceObject).getExpansionSetCodeForImage();
+            } else {
+                setCode = null;
+            }
         }
 
-        // random
-        if (!token.availableImageSetCodes.isEmpty()) {
-            return token.availableImageSetCodes.get(RandomUtil.nextInt(token.availableImageSetCodes.size()));
+
+        // by set code
+        List<TokenInfo> possibleInfo = TokenRepository.instance.getByClassName(token.getClass().getName())
+                .stream()
+                .filter(info -> info.getSetCode().equals(setCode))
+                .collect(Collectors.toList());
+
+        // by random set
+        if (possibleInfo.isEmpty()) {
+            possibleInfo = new ArrayList<>(TokenRepository.instance.getByClassName(token.getClass().getName()));
         }
 
-        // default
-        // TODO: implement
-        if (setCode == null) {
-            setCode = "DEFAULT";
+        if (possibleInfo.size() > 0) {
+            return RandomUtil.randomFromCollection(possibleInfo);
         }
 
-        return setCode;
+        // unknown token
+        // TODO: download default tokens for xmage's set and use random images from it
+        //  example: TOK.zip/Creature.1.full.jpg
+        //  example: TOK.zip/Creature.2.full.jpg
+        return new TokenInfo(TokenType.TOKEN, "Unknown", "XMAGE", 0);
     }
 
     @Override
@@ -241,9 +256,10 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
             int amount = entry.getValue();
 
             // choose token's set code due source
-            String setCode = TokenImpl.generateSetCode((TokenImpl) token, game, source == null ? null : source.getSourceId());
-            token.setOriginalExpansionSetCode(setCode);
-            token.setExpansionSetCodeForImage(setCode);
+            TokenInfo tokenInfo = TokenImpl.generateTokenInfo((TokenImpl) token, game, source == null ? null : source.getSourceId());
+            token.setOriginalExpansionSetCode(tokenInfo.getSetCode());
+            token.setExpansionSetCodeForImage(tokenInfo.getSetCode());
+            token.setTokenType(tokenInfo.getImageNumber());
 
             List<Permanent> needTokens = new ArrayList<>();
             List<Permanent> allowedTokens = new ArrayList<>();

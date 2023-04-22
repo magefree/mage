@@ -538,7 +538,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             });
 
             // tokens
-            TokenRepository.instance.getAllTokens().forEach(token -> {
+            TokenRepository.instance.getAll().forEach(token -> {
                 CardDownloadData card = new CardDownloadData(
                         token.getName(),
                         token.getSetCode(),
@@ -570,135 +570,6 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         });
 
         return Collections.synchronizedList(new ArrayList<>(cardsToDownload));
-    }
-
-    public static List<CardDownloadData> getTokenCardUrls() throws RuntimeException {
-        // Must load tokens data in strict mode (throw exception on any error)
-        // Try to put verify checks here instead verify tests
-        String dbSource = "card-pictures-tok.txt";
-        List<CardDownloadData> list = new ArrayList<>();
-        InputStream in = DownloadPicturesService.class.getClassLoader().getResourceAsStream(dbSource);
-        if (in == null) {
-            throw new RuntimeException("Tokens database: can't load resource file " + dbSource);
-        }
-
-        List<String> errorsList = new ArrayList<>();
-        try (InputStreamReader input = new InputStreamReader(in);
-             BufferedReader reader = new BufferedReader(input)) {
-            String line = reader.readLine();
-            while (line != null) {
-                try {
-                    line = line.trim();
-                    if (!line.startsWith("|")) {
-                        continue;
-                    }
-
-                    List<String> params = Arrays.stream(line.split("\\|", -1))
-                            .map(String::trim)
-                            .collect(Collectors.toList());
-                    if (params.size() < 5) {
-                        errorsList.add("Tokens database: wrong params count: " + line);
-                        continue;
-                    }
-                    if (!params.get(1).toLowerCase(Locale.ENGLISH).equals("generate")) {
-                        // TODO: remove "generate" from db
-                        errorsList.add("Tokens database: miss generate param: " + line);
-                        continue;
-                    }
-
-                    // token type (uses if one set contains multiple tokens with same name)
-                    int tokenType = 0;
-                    if (!params.get(4).isEmpty()) {
-                        tokenType = Integer.parseInt(params.get(4));
-                    }
-
-                    // image file name
-                    String imageFileName = "";
-                    if (params.size() > 5 && !params.get(5).isEmpty()) {
-                        imageFileName = params.get(5);
-                    }
-
-                    // token class name (uses for images search for render)
-                    String tokenClassName = "";
-                    if (params.size() > 7 && !params.get(6).isEmpty()) {
-                        tokenClassName = params.get(6);
-                    }
-                    if (tokenClassName.isEmpty()) {
-                        errorsList.add("Tokens database: miss class name: " + line);
-                        continue;
-                    }
-
-                    // object type
-                    String objectType = params.get(2);
-                    String tokenName = params.get(3);
-                    String setCode = "";
-
-                    // type - token
-                    if (objectType.startsWith("TOK:")) {
-                        setCode = objectType.substring("TOK:".length());
-                    }
-
-                    // type - emblem
-                    if (objectType.startsWith("EMBLEM:")) {
-                        setCode = objectType.substring("EMBLEM:".length());
-                        if (!tokenName.startsWith("Emblem ")) {
-                            errorsList.add("Tokens database: emblem's name must start with [Emblem ...] word: " + line);
-                            continue;
-                        }
-                        if (!tokenClassName.endsWith("Emblem")) {
-                            errorsList.add("Tokens database: emblem's class name must ends with [...Emblem] word: " + line);
-                            continue;
-                        }
-                    }
-
-                    // type - plane
-                    if (objectType.startsWith("PLANE:")) {
-                        setCode = objectType.substring("PLANE:".length());
-                        if (!tokenName.startsWith("Plane - ")) {
-                            errorsList.add("Tokens database: plane's name must start with [Plane - ...] word: " + line);
-                            continue;
-                        }
-                        if (!tokenClassName.endsWith("Plane")) {
-                            errorsList.add("Tokens database: plane's class name must ends with [...Plane] word: " + line);
-                            continue;
-                        }
-                    }
-
-                    // type - dungeon
-                    if (objectType.startsWith("DUNGEON:")) {
-                        setCode = objectType.substring("DUNGEON:".length());
-                        if (!tokenClassName.endsWith("Dungeon")) {
-                            errorsList.add("Tokens database: dungeon's class name must ends with [...Dungeon] word: " + line);
-                            continue;
-                        }
-                    }
-
-                    // type - unknown
-                    if (setCode.isEmpty()) {
-                        errorsList.add("Tokens database: unknown line format: " + line);
-                        continue;
-                    }
-
-                    // OK
-                    CardDownloadData card = new CardDownloadData(tokenName, setCode, "0", false, tokenType, true);
-                    card.setTokenClassName(tokenClassName);
-                    card.setFileName(imageFileName);
-                    list.add(card);
-                } finally {
-                    line = reader.readLine();
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("Tokens database: can't read data, unknown error - " + e.getMessage());
-        }
-
-        if (!errorsList.isEmpty()) {
-            errorsList.forEach(logger::error);
-            throw new RuntimeException(String.format("Tokens database: found %d errors, see logs above for details", errorsList.size()));
-        }
-
-        return list;
     }
 
     @Override

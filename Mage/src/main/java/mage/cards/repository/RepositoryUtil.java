@@ -26,7 +26,7 @@ public final class RepositoryUtil {
         logger.info("Loading database...");
         ExpansionRepository.instance.getContentVersionConstant();
         CardRepository.instance.getContentVersionConstant();
-        TokenRepository.instance.getAllTokens().size();
+        TokenRepository.instance.getAll().size();
 
         // stats
         int totalCards = CardRepository.instance.findCards(new CardCriteria().nightCard(false)).size()

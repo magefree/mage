@@ -23,9 +23,9 @@
 |Generate|EMBLEM:C16|Emblem Daretti|||DarettiScrapSavantEmblem|
 |Generate|EMBLEM:CM2|Emblem Daretti|||DarettiScrapSavantEmblem|
 |Generate|EMBLEM:C19|Emblem Nixilis|||ObNixilisReignitedEmblem|
-|Generate|EMBLEM:CNS|Emblem Dack Fayden||Emblem Dack|DackFaydenEmblem|
+|Generate|EMBLEM:CNS|Emblem Dack|||DackFaydenEmblem|
 |Generate|EMBLEM:DTK|Emblem Narset|||NarsetTranscendentEmblem|
-|Generate|EMBLEM:EMA|Emblem Dack Fayden||Emblem Dack|DackFaydenEmblem|
+|Generate|EMBLEM:EMA|Emblem Dack|||DackFaydenEmblem|
 |Generate|EMBLEM:EMN|Emblem Liliana|||LilianaTheLastHopeEmblem|
 |Generate|EMBLEM:EMN|Emblem Tamiyo|||TamiyoFieldResearcherEmblem|
 |Generate|EMBLEM:KLD|Emblem Chandra|||ChandraTorchOfDefianceEmblem|
@@ -163,7 +163,6 @@
 |Generate|TOK:5ED|Citizen|||CitizenToken|
 |Generate|TOK:5ED|Djinn|||DjinnToken|
 |Generate|TOK:5ED|Goblin|||GoblinToken|
-|Generate|TOK:5ED|Insect|||WaspToken|
 |Generate|TOK:5ED|Serf|||SerfToken|
 |Generate|TOK:5ED|Snake|||SerpentGeneratorSnakeToken|
 |Generate|TOK:5ED|Thrull|||BreedingPitBlackInsectToken|
@@ -173,7 +172,6 @@
 |Generate|TOK:6ED|Citizen|||CitizenToken|
 |Generate|TOK:6ED|Djinn|||DjinnToken|
 |Generate|TOK:6ED|Goblin|||GoblinToken|
-|Generate|TOK:6ED|Insect|||WaspToken|
 |Generate|TOK:6ED|Serf|||SerfToken|
 |Generate|TOK:6ED|Snake|||SnakeToken|
 
@@ -468,7 +466,7 @@
 |Generate|TOK:DDD|Beast|2||BeastToken2|
 |Generate|TOK:DDD|Elephant|||ElephantToken|
 |Generate|TOK:DDE|Hornet|||HornetToken|
-|Generate|TOK:DDE|Phyrexian Minion|||MinionToken|
+|Generate|TOK:DDE|Minion|||MinionToken|
 |Generate|TOK:DDE|Saproling|||SaprolingToken|
 |Generate|TOK:DDF|Soldier|||SoldierToken|
 |Generate|TOK:DDG|Goblin|||GoblinToken|
@@ -658,8 +656,6 @@
 |Generate|TOK:KTK|Warrior|1||WarriorToken|
 |Generate|TOK:KTK|Warrior|2||WarriorToken|
 |Generate|TOK:KTK|Zombie|||ZombieToken|
-|Generate|TOK:LEA|Insect|||WaspToken|
-|Generate|TOK:LEB|Insect|||WaspToken|
 |Generate|TOK:LEG|Demon|||MinorDemonToken|
 |Generate|TOK:LEG|Sand Warrior|||HazezonTamarSandWarriorToken|
 |Generate|TOK:LEG|Snake|||SerpentGeneratorSnakeToken|
@@ -802,7 +798,7 @@
 |Generate|TOK:MMA|Worm|||BlackGreenWormToken|
 |Generate|TOK:MMA|Zombie|||ZombieToken|
 |Generate|TOK:MMQ|Ape|||ApeToken|
-|Generate|TOK:MMQ|Insect Butterfly|||ButterflyToken|
+|Generate|TOK:MMQ|Butterfly|||ButterflyToken|
 |Generate|TOK:MMQ|Insect|||InsectToken|
 |Generate|TOK:MMQ|Saproling|||SaprolingToken|
 |Generate|TOK:MMQ|Snake|||SnakeToken|
@@ -862,7 +858,7 @@
 |Generate|TOK:PC2|Beast|||BeastToken|
 |Generate|TOK:PC2|Boar|||BoarToken|
 |Generate|TOK:PC2|Eldrazi Spawn|||EldraziSpawnToken|
-|Generate|TOK:PC2|Germ|||PhyrexianGermToken|
+|Generate|TOK:PC2|Phyrexian Germ|||PhyrexianGermToken|
 |Generate|TOK:PC2|Goblin|||GoblinToken|
 |Generate|TOK:PC2|Hellion|||HellionToken|
 |Generate|TOK:PC2|Insect|||InsectToken|
@@ -887,7 +883,7 @@
 |Generate|TOK:RAV|Knight|||HuntedDragonKnightToken|
 |Generate|TOK:RAV|Saproling|||SaprolingToken|
 |Generate|TOK:RAV|Spirit|||SpiritWhiteToken|
-|Generate|TOK:RAV|Wolf|||VojaToken|
+|Generate|TOK:RAV|Voja|||VojaToken|
 |Generate|TOK:RAV|Faerie|||FaerieToken|
 |Generate|TOK:RIX|Elemental|1||RekindlingPhoenixToken|
 |Generate|TOK:RIX|Elemental|2||RedElementalToken|
@@ -1242,7 +1238,7 @@
 # OonaQueenFaerieRogueToken is FaerieRogueToken with additional blue color, but ZNC contains only one token - so don't use normal token for it
 #|Generate|TOK:ZNC|Faerie Rogue|||OonaQueenFaerieRogueToken|
 # Germ token uses in chest and antology, but scryfall put it here
-#|Generate|TOK:ZNC|Germ|||PhyrexianGermToken|
+#|Generate|TOK:ZNC|Phyrexian Germ|||PhyrexianGermToken|
 #
 |Generate|TOK:ZNC|Goblin Rogue|||GoblinRogueToken|
 |Generate|TOK:ZNC|Kor Ally|||KorAllyToken|

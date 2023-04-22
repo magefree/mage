@@ -25,19 +25,20 @@ public enum TokenRepository {
     }
 
     public void init() {
-        allTokens.clear();
-        indexByClassName.clear();
-        indexByType.clear();
+        if (!allTokens.isEmpty()) {
+            return;
+        }
 
         allTokens = loadAllTokens();
 
         // index
         allTokens.forEach(token -> {
             // by class
-            List<TokenInfo> list = indexByClassName.getOrDefault(token.getClassFileName(), null);
+            String needClass = token.getFullClassFileName();
+            List<TokenInfo> list = indexByClassName.getOrDefault(needClass, null);
             if (list == null) {
                 list = new ArrayList<>();
-                indexByClassName.put(token.getClassFileName(), list);
+                indexByClassName.put(needClass, list);
             }
             list.add(token);
 
@@ -51,16 +52,24 @@ public enum TokenRepository {
         });
     }
 
-    public List<TokenInfo> getAllTokens() {
-        if (allTokens.isEmpty()) {
-            init();
-        }
-
+    public List<TokenInfo> getAll() {
+        init();
         return allTokens;
     }
 
+    public Map<String, List<TokenInfo>> getAllByClassName() {
+        init();
+        return indexByClassName;
+    }
+
     public List<TokenInfo> getByType(TokenType tokenType) {
+        init();
         return indexByType.getOrDefault(tokenType, new ArrayList<>());
+    }
+
+    public List<TokenInfo> getByClassName(String fullClassName) {
+        init();
+        return indexByClassName.getOrDefault(fullClassName, new ArrayList<>());
     }
 
     private static ArrayList<TokenInfo> loadAllTokens() throws RuntimeException {

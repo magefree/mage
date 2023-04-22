@@ -1422,7 +1422,7 @@ public class ScryfallImageSupportTokens {
 
             // CNS
             put("CNS/Construct", "https://api.scryfall.com/cards/tcns/8/en?format=image");
-            put("CNS/Emblem Dack Fayden", "https://api.scryfall.com/cards/tcns/9/en?format=image");
+            put("CNS/Emblem Dack", "https://api.scryfall.com/cards/tcns/9/en?format=image");
             put("CNS/Demon", "https://api.scryfall.com/cards/tcns/2/en?format=image");
             put("CNS/Elephant", "https://api.scryfall.com/cards/tcns/5/en?format=image");
             put("CNS/Spirit", "https://api.scryfall.com/cards/tcns/1/en?format=image");
@@ -1521,7 +1521,7 @@ public class ScryfallImageSupportTokens {
 
             // EMA
             put("EMA/Carnivore", "https://api.scryfall.com/cards/tema/7/en?format=image");
-            put("EMA/Emblem Dack Fayden", "https://api.scryfall.com/cards/tema/16/en?format=image");
+            put("EMA/Emblem Dack", "https://api.scryfall.com/cards/tema/16/en?format=image");
             put("EMA/Dragon", "https://api.scryfall.com/cards/tema/8/en?format=image");
             put("EMA/Elemental/1", "https://api.scryfall.com/cards/tema/9/en?format=image");
             put("EMA/Elemental/2", "https://api.scryfall.com/cards/tema/14/en?format=image");

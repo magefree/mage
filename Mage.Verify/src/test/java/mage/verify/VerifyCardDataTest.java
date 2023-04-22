@@ -1222,7 +1222,7 @@ public class VerifyCardDataTest {
 
 
         // tok file's data
-        List<TokenInfo> tokFileTokens = TokenRepository.instance.getAllTokens();
+        List<TokenInfo> tokFileTokens = TokenRepository.instance.getAll();
         LinkedHashMap<String, String> tokDataClassesIndex = new LinkedHashMap<>();
         LinkedHashMap<String, String> tokDataNamesIndex = new LinkedHashMap<>();
         LinkedHashMap<String, List<TokenInfo>> tokDataTokensBySetIndex = new LinkedHashMap<>();
@@ -1358,6 +1358,15 @@ public class VerifyCardDataTest {
                 // - promo set contains additional tokens for main set (it's ok and must be ignored, example: Saproling in E02)
                 warningsList.add("warning, tok-data has tokens, but real set haven't cards with it: "
                         + setCode + " - " + setTokens.stream().map(TokenInfo::getName).collect(Collectors.joining(", ")));
+            }
+        });
+
+        // CHECK: token and class names must be same in all sets
+        TokenRepository.instance.getAllByClassName().forEach((className, list) -> {
+            Set<String> names = list.stream().map(TokenInfo::getName).collect(Collectors.toSet());
+            if (names.size() > 1) {
+                errorsList.add("error, card-pictures-tok.txt contains different names for same class: "
+                        + className + " - " + String.join(", ", names));
             }
         });
 

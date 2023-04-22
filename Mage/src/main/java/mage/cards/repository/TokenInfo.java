@@ -29,6 +29,11 @@ public class TokenInfo {
         this.imageFileName = imageFileName;
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s - %s - %d (%s)", this.setCode, this.name, this.imageNumber, this.classFileName);
+    }
+
     public TokenType getTokenType() {
         return tokenType;
     }
