@@ -142,6 +142,7 @@ Legions|Legions|
 Limited Edition Alpha|LimitedEditionAlpha|
 Limited Edition Beta|LimitedEditionBeta|
 The Lord of the Rings: Tales of Middle-earth|TheLordOfTheRingsTalesOfMiddleEarth|
+Tales of Middle-earth Commander|TalesOfMiddleEarthCommander|
 Lorwyn|Lorwyn|
 Magic 2010|Magic2010|
 Magic 2011|Magic2011|

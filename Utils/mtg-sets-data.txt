@@ -140,6 +140,7 @@ Limited Edition Beta|LEB|
 Legends|LEG|
 Legions|LGN|
 The Lord of the Rings: Tales of Middle-earth|LTR|
+Tales of Middle-earth Commander|LTC|
 Lorwyn|LRW|
 Magic 2010|M10|
 Magic 2011|M11|
