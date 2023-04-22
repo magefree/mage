@@ -12,6 +12,7 @@ import mage.game.MageObjectAttribute;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.game.stack.Spell;
+import mage.util.CardUtil;
 
 /**
  * @author nantuko
@@ -62,6 +63,7 @@ public class TransformAbility extends SimpleStaticAbility {
         if (sourceCard instanceof Card) {
             permanent.setExpansionSetCode(((Card) sourceCard).getExpansionSetCode());
         }
+        CardUtil.copySetAndCardNumber(permanent, sourceCard);
         permanent.getAbilities().clear();
         for (Ability ability : sourceCard.getAbilities()) {
             // source == null -- call from init card (e.g. own abilities)

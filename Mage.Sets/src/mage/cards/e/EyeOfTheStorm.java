@@ -147,7 +147,7 @@ class EyeOfTheStormEffect1 extends OneShotEffect {
                         cardToCopy = copiedCards.getCards(game).iterator().next();
                     } else {
                         TargetCard target = new TargetCard(1, Zone.EXILED, new FilterCard("card to copy"));
-                        spellController.choose(Outcome.Copy, copiedCards, target, game);
+                        spellController.choose(Outcome.Copy, copiedCards, target, source, game);
                         cardToCopy = copiedCards.get(target.getFirstTarget(), game);
                         copiedCards.remove(cardToCopy);
                     }

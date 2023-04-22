@@ -75,7 +75,7 @@ class ManifoldInsightsEffect extends OneShotEffect {
                         Player opponent = game.getPlayer(playerId);
                         if (opponent != null && !topLib.getCards(StaticFilters.FILTER_CARD_NON_LAND, game).isEmpty()) {
                             TargetCard target = new TargetCard(Zone.LIBRARY, StaticFilters.FILTER_CARD_NON_LAND);
-                            if (opponent.choose(Outcome.Detriment, topLib, target, game)) {
+                            if (opponent.choose(Outcome.Detriment, topLib, target, source, game)) {
                                 Card card = game.getCard(target.getFirstTarget());
                                 if (card != null) {
                                     topLib.remove(card);

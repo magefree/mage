@@ -109,7 +109,7 @@ class DeadlyBrewEffect extends OneShotEffect {
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(
                 0, 1, StaticFilters.FILTER_CARD_PERMANENT, true
         );
-        controller.choose(outcome, yourGrave, target, game);
+        controller.choose(outcome, yourGrave, target, source, game);
         Card card = controller.getGraveyard().get(target.getFirstTarget(), game);
         if (card != null) {
             controller.moveCards(card, Zone.HAND, source, game);

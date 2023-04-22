@@ -32,11 +32,13 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.CardState;
 import mage.game.Game;
 import mage.game.GameState;
+import mage.game.command.CommandObject;
 import mage.game.command.Commander;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentMeld;
+import mage.game.permanent.PermanentToken;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.Target;
@@ -1269,7 +1271,7 @@ public final class CardUtil {
                 Cards castableCards = new CardsImpl(cardMap.keySet());
                 TargetCard target = new TargetCard(0, 1, Zone.ALL, defaultFilter);
                 target.setNotTarget(true);
-                player.choose(Outcome.PlayForFree, castableCards, target, game);
+                player.choose(Outcome.PlayForFree, castableCards, target, source, game);
                 cardToCast = castableCards.get(target.getFirstTarget(), game);
         }
         if (cardToCast == null) {
@@ -1755,5 +1757,48 @@ public final class CardUtil {
             return str;
         }
         return str.substring(0, Math.min(str.length(), maxLength));
+    }
+
+
+    /**
+     * Copy image related data from one object to another (card number, set code, token type)
+     * Use it in copy/transform effects
+     */
+    public static void copySetAndCardNumber(Permanent permanent, MageObject copyFromObject) {
+        String needSetCode;
+        String needCardNumber;
+        int needTokenType;
+        if (copyFromObject instanceof CommandObject) {
+            needSetCode = ((CommandObject) copyFromObject).getExpansionSetCodeForImage();
+            needCardNumber = "0";
+            needTokenType = 0;
+        } else if (copyFromObject instanceof PermanentCard) {
+            needSetCode = ((PermanentCard) copyFromObject).getExpansionSetCode();
+            needCardNumber = ((PermanentCard) copyFromObject).getCardNumber();
+            needTokenType = 0;
+        } else if (copyFromObject instanceof PermanentToken) {
+            needSetCode = ((PermanentToken) copyFromObject).getToken().getOriginalExpansionSetCode();
+            needCardNumber = ((PermanentToken) copyFromObject).getToken().getOriginalCardNumber();
+            needTokenType = ((PermanentToken) copyFromObject).getToken().getTokenType();
+        } else if (copyFromObject instanceof Card) {
+            needSetCode = ((Card) copyFromObject).getExpansionSetCode();
+            needCardNumber = ((Card) copyFromObject).getCardNumber();
+            needTokenType = 0;
+        } else {
+            throw new IllegalStateException("Unsupported copyFromObject class: " + copyFromObject.getClass().getSimpleName());
+        }
+
+        copySetAndCardNumber(permanent, needSetCode, needCardNumber, needTokenType);
+    }
+
+    public static void copySetAndCardNumber(Permanent permanent, String newSetCode, String newCardNumber, Integer newTokenType) {
+        if (permanent instanceof PermanentToken) {
+            ((PermanentToken) permanent).getToken().setOriginalExpansionSetCode(newSetCode);
+            ((PermanentToken) permanent).getToken().setExpansionSetCodeForImage(newCardNumber);
+            ((PermanentToken) permanent).getToken().setTokenType(newTokenType);
+        } else {
+            permanent.setExpansionSetCode(newSetCode);
+            permanent.setCardNumber(newCardNumber);
+        }
     }
 }

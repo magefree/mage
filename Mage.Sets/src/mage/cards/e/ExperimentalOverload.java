@@ -72,7 +72,7 @@ class ExperimentalOverloadEffect extends OneShotEffect {
         TargetCard target = new TargetCardInYourGraveyard(
                 0, 1, StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY, true
         );
-        player.choose(outcome, player.getGraveyard(), target, game);
+        player.choose(outcome, player.getGraveyard(), target, source, game);
         return player.moveCards(game.getCard(target.getFirstTarget()), Zone.HAND, source, game);
     }
 }

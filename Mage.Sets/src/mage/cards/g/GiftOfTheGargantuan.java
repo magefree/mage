@@ -64,7 +64,7 @@ class GiftOfTheGargantuanEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 4));
         TargetCard target = new GiftOfTheGargantuanTarget();
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         Cards toHand = new CardsImpl();
         toHand.addAll(target.getTargets());
         player.revealCards(source, toHand, game);

@@ -82,7 +82,7 @@ class ReckonerShakedownEffect extends OneShotEffect {
         }
         player.revealCards(source, player.getHand(), game);
         TargetCard target = new TargetCardInHand(0, 1, StaticFilters.FILTER_CARD_A_NON_LAND);
-        controller.choose(Outcome.Discard, player.getHand(), target, game);
+        controller.choose(Outcome.Discard, player.getHand(), target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {
             player.discard(card, false, source, game);

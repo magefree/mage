@@ -69,7 +69,7 @@ class ViviensInvocationEffect extends OneShotEffect {
         }
         TargetCard target = new TargetCard(Zone.LIBRARY, filter);
         target.setNotTarget(true);
-        controller.choose(Outcome.PutCreatureInPlay, cards, target, game);
+        controller.choose(Outcome.PutCreatureInPlay, cards, target, source, game);
         Card card = cards.get(target.getFirstTarget(), game);
         if (card == null) {
             controller.putCardsOnBottomOfLibrary(cards, game, source, false);

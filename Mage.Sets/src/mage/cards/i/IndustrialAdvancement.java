@@ -84,7 +84,7 @@ class IndustrialAdvancementEffect extends OneShotEffect {
         TargetCard targetCard = new TargetCardInLibrary(
                 0, 1, StaticFilters.FILTER_CARD_CREATURE
         );
-        player.choose(outcome, cards, targetCard, game);
+        player.choose(outcome, cards, targetCard, source, game);
         player.moveCards(game.getCard(targetCard.getFirstTarget()), Zone.BATTLEFIELD, source, game);
         cards.retainZone(Zone.LIBRARY, game);
         player.putCardsOnBottomOfLibrary(cards, game, source, false);

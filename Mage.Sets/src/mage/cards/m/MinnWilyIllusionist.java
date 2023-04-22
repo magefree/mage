@@ -89,7 +89,7 @@ class MinnWilyIllusionistEffect extends OneShotEffect {
         );
         filterCard.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, permanent.getPower().getValue() + 1));
         TargetCardInHand target = new TargetCardInHand(0, 1, filterCard);
-        player.choose(Outcome.PutCardInPlay, player.getHand(), target, game);
+        player.choose(Outcome.PutCardInPlay, player.getHand(), target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return false;

@@ -153,7 +153,7 @@ class ThroneOfTheDeadThreeEffect extends OneShotEffect {
                 break;
             default:
                 TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_CREATURE);
-                player.choose(outcome, cards, target, game);
+                player.choose(outcome, cards, target, source, game);
                 card = cards.get(target.getFirstTarget(), game);
         }
         if (card != null) {

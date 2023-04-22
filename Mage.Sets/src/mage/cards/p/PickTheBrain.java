@@ -71,7 +71,7 @@ class PickTheBrainEffect extends SearchTargetGraveyardHandLibraryForCardNameAndE
             if (!opponent.getHand().isEmpty()) {
                 opponent.revealCards("Exile " + StaticFilters.FILTER_CARD_A_NON_LAND.getMessage(), opponent.getHand(), game);
                 TargetCard target = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD_A_NON_LAND);
-                if (controller.choose(Outcome.Exile, opponent.getHand(), target, game)) {
+                if (controller.choose(Outcome.Exile, opponent.getHand(), target, source, game)) {
                     Card card = opponent.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {
                         controller.moveCardToExileWithInfo(card, null, "", source, game, Zone.HAND, true);

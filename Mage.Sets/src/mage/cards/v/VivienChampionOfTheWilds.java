@@ -101,7 +101,7 @@ class VivienChampionOfTheWildsEffect extends OneShotEffect {
         Cards cardsToLook = new CardsImpl(player.getLibrary().getTopCards(game, 3));
         FilterCard filter = new FilterCard("card to exile face down");
         TargetCard target = new TargetCardInLibrary(filter);
-        if (!player.choose(outcome, cardsToLook, target, game)) {
+        if (!player.choose(outcome, cardsToLook, target, source, game)) {
             return false;
         }
 

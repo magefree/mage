@@ -76,7 +76,7 @@ class EllywickTumblestrumEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 6));
         TargetCardInLibrary target = new TargetCardInLibrary(0, 1, StaticFilters.FILTER_CARD_CREATURE);
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         Card card = cards.get(target.getFirstTarget(), game);
         if (card != null) {
             player.revealCards(source, new CardsImpl(card), game);

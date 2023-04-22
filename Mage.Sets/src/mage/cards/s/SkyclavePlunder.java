@@ -71,7 +71,7 @@ class SkyclavePlunderEffect extends OneShotEffect {
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, xValue));
         int toTake = Math.min(cards.size(), 3);
         TargetCard target = new TargetCardInLibrary(toTake, toTake, StaticFilters.FILTER_CARD);
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         Cards toHand = new CardsImpl(target.getTargets());
         cards.removeIf(target.getTargets()::contains);
         player.moveCards(toHand, Zone.HAND, source, game);

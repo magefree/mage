@@ -937,7 +937,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         new FilterCard("card ORDER to put on the BOTTOM of your library (last one chosen will be bottommost)"));
                 target.setRequired(true);
                 while (cards.size() > 1 && this.canRespond()
-                        && this.choose(Outcome.Neutral, cards, target, game)) {
+                        && this.choose(Outcome.Neutral, cards, target, source, game)) {
                     UUID targetObjectId = target.getFirstTarget();
                     if (targetObjectId == null) {
                         break;
@@ -1031,7 +1031,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 target.setRequired(true);
                 while (cards.size() > 1
                         && this.canRespond()
-                        && this.choose(Outcome.Neutral, cards, target, game)) {
+                        && this.choose(Outcome.Neutral, cards, target, source, game)) {
                     UUID targetObjectId = target.getFirstTarget();
                     if (targetObjectId == null) {
                         break;
@@ -2691,7 +2691,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
             // handling Panglacial Wurm - cast cards while searching from own library
             if (targetPlayer.getId().equals(searchingPlayer.getId())) {
-                if (handleCastableCardsWhileLibrarySearching(library, game, targetPlayer)) {
+                if (handleCastableCardsWhileLibrarySearching(library, targetPlayer, source, game)) {
                     // clear all choices to start from scratch (casted cards must be removed from library)
                     newTarget.clearChosen();
                     continue;
@@ -2748,7 +2748,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
     }
 
-    private boolean handleCastableCardsWhileLibrarySearching(Library library, Game game, Player targetPlayer) {
+    private boolean handleCastableCardsWhileLibrarySearching(Library library, Player targetPlayer, Ability source, Game game) {
         // must return true after cast try (to restart searching process without casted cards)
         // uses for handling Panglacial Wurm:
         // * While you're searching your library, you may cast Panglacial Wurm from your library.
@@ -2776,7 +2776,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         targetCard.setNotTarget(true);
         while (castableCards.size() > 0) {
             targetCard.clearChosen();
-            if (!targetPlayer.choose(Outcome.AIDontUseIt, new CardsImpl(castableCards), targetCard, game)) {
+            if (!targetPlayer.choose(Outcome.AIDontUseIt, new CardsImpl(castableCards), targetCard, source, game)) {
                 break;
             }
 
@@ -4539,7 +4539,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                             byOwner ? card.getOwnerId() : getId(), fromZone, Zone.BATTLEFIELD, appliedEffects);
                     infoList.add(new ZoneChangeInfo.Battlefield(event, faceDown, tapped, source));
                 }
-                infoList = ZonesHandler.moveCards(infoList, game, source);
+                infoList = ZonesHandler.moveCards(infoList, source, game);
                 for (ZoneChangeInfo info : infoList) {
                     Permanent permanent = game.getPermanent(info.event.getTargetId());
                     if (permanent != null) {

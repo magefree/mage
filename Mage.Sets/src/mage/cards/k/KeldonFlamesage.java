@@ -85,7 +85,7 @@ class KeldonFlamesageEffect extends OneShotEffect {
         );
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, power + 1));
         TargetCard target = new TargetCardInLibrary(0, 1, filter);
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         Card card = cards.get(target.getFirstTarget(), game);
         if (card != null) {
             player.moveCards(card, Zone.EXILED, source, game);

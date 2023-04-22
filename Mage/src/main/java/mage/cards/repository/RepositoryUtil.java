@@ -22,10 +22,22 @@ public final class RepositoryUtil {
     public static final boolean CARD_DB_RECREATE_BY_CLIENT_SIDE = true; // re-creates db from client (best performance) or downloads from server on connects (can be slow)
 
     public static void bootstrapLocalDb() {
-        // call local db to init all sets and cards repository (need for correct updates cycle, not on random request)
+        // call local db to init all sets and cards/tokens repository (need for correct updates cycle, not on random request)
         logger.info("Loading database...");
         ExpansionRepository.instance.getContentVersionConstant();
         CardRepository.instance.getContentVersionConstant();
+        TokenRepository.instance.getAll().size();
+
+        // stats
+        int totalCards = CardRepository.instance.findCards(new CardCriteria().nightCard(false)).size()
+                + CardRepository.instance.findCards(new CardCriteria().nightCard(true)).size();
+        logger.info("Database stats:");
+        logger.info(" - sets: " + ExpansionRepository.instance.getAll().size());
+        logger.info(" - cards: " + totalCards);
+        logger.info(" - tokens: " + TokenRepository.instance.getByType(TokenType.TOKEN).size());
+        logger.info(" - emblems: " + TokenRepository.instance.getByType(TokenType.EMBLEM).size());
+        logger.info(" - planes: " + TokenRepository.instance.getByType(TokenType.PLANE).size());
+        logger.info(" - dungeons: " + TokenRepository.instance.getByType(TokenType.DUNGEON).size());
     }
 
     public static boolean isDatabaseObsolete(ConnectionSource connectionSource, String entityName, long version) throws SQLException {

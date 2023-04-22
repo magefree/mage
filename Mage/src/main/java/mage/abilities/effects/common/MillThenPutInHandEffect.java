@@ -58,7 +58,7 @@ public class MillThenPutInHandEffect extends OneShotEffect {
             return applyOtherwiseEffect(game, source);
         }
         TargetCard target = new TargetCard(0, 1, Zone.ALL, filter);
-        player.choose(Outcome.DrawCard, cards, target, game);
+        player.choose(Outcome.DrawCard, cards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return applyOtherwiseEffect(game, source);

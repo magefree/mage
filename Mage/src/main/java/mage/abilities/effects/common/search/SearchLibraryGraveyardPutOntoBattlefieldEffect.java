@@ -69,7 +69,7 @@ public class SearchLibraryGraveyardPutOntoBattlefieldEffect extends OneShotEffec
             if (cardFound == null && controller.chooseUse(outcome, "Search your graveyard for a " + filter.getMessage() + '?', source, game)) {
                 TargetCard target = new TargetCardInYourGraveyard(0, 1, filter, true);
                 target.clearChosen();
-                if (controller.choose(outcome, controller.getGraveyard(), target, game)) {
+                if (controller.choose(outcome, controller.getGraveyard(), target, source, game)) {
                     if (!target.getTargets().isEmpty()) {
                         cardFound = game.getCard(target.getFirstTarget());
                     }

@@ -107,7 +107,7 @@ class NissasEncouragementEffect extends OneShotEffect {
                     namedFilterGY.add(new NamePredicate(name));
                     if (player.getGraveyard().count(namedFilterGY, game) > 0) {
                         TargetCard targetGY = new TargetCard(0, 1, Zone.GRAVEYARD, namedFilterGY);
-                        if (player.choose(Outcome.ReturnToHand, player.getGraveyard(), targetGY, game)) {
+                        if (player.choose(Outcome.ReturnToHand, player.getGraveyard(), targetGY, source, game)) {
                             for (UUID cardIdGY : targetGY.getTargets()) {
                                 Card cardGY = player.getGraveyard().get(cardIdGY, game);
                                 cards.add(cardGY);

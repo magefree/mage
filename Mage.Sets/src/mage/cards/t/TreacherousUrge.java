@@ -77,7 +77,7 @@ class TreacherousUrgeEffect extends OneShotEffect {
                 Card card = null;
                 if (cardsHand > 0) {
                     TargetCard target = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD_CREATURE);
-                    if (controller.choose(Outcome.Benefit, opponent.getHand(), target, game)) {
+                    if (controller.choose(Outcome.Benefit, opponent.getHand(), target, source, game)) {
                         card = opponent.getHand().get(target.getFirstTarget(), game);
                         if (card != null) {
                             if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {

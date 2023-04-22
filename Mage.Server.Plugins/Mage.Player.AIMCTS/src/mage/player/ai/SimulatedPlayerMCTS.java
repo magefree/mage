@@ -261,12 +261,12 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     }
 
     @Override
-    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
+    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
         if (this.isHuman()) {
             if (cards.isEmpty()) {
                 return false;
             }
-            Set<UUID> possibleTargets = target.possibleTargets(playerId, cards, game);
+            Set<UUID> possibleTargets = target.possibleTargets(playerId, cards, source, game);
             if (possibleTargets.isEmpty()) {
                 return false;
             }
@@ -279,7 +279,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
             target.add(targetId, game);
             return true;
         }
-        return super.choose(outcome, cards, target, game);
+        return super.choose(outcome, cards, target, source, game);
     }
 
     @Override

@@ -94,7 +94,7 @@ class DjeruAndHazoretEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 6));
         TargetCard target = new TargetCardInLibrary(0, 1, filter);
-        player.choose(Outcome.PlayForFree, cards, target, game);
+        player.choose(Outcome.PlayForFree, cards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {
             player.moveCards(card, Zone.EXILED, source, game);

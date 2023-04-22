@@ -143,38 +143,7 @@ public class CopyEffect extends ContinuousEffectImpl {
             permanent.setFlipCardName(targetPermanent.getFlipCardName());
         }
 
-        // to get the image of the copied permanent copy number und expansionCode
-        String needSetCode;
-        String needCardNumber;
-        int needTokenType;
-        if (copyFromObject instanceof CommandObject) {
-            needSetCode = ((CommandObject) copyFromObject).getExpansionSetCodeForImage();
-            needCardNumber = "0";
-            needTokenType = 0;
-        } else if (copyFromObject instanceof PermanentCard) {
-            needSetCode = ((PermanentCard) copyFromObject).getExpansionSetCode();
-            needCardNumber = ((PermanentCard) copyFromObject).getCardNumber();
-            needTokenType = 0;
-        } else if (copyFromObject instanceof PermanentToken) {
-            needSetCode = ((PermanentToken) copyFromObject).getToken().getOriginalExpansionSetCode();
-            needCardNumber = ((PermanentToken) copyFromObject).getToken().getOriginalCardNumber();
-            needTokenType = ((PermanentToken) copyFromObject).getToken().getTokenType();
-        } else if (copyFromObject instanceof Card) {
-            needSetCode = ((Card) copyFromObject).getExpansionSetCode();
-            needCardNumber = ((Card) copyFromObject).getCardNumber();
-            needTokenType = 0;
-        } else {
-            throw new IllegalStateException("Unsupported copyFromObject class: " + copyFromObject.getClass().getSimpleName());
-        }
-
-        if (permanent instanceof PermanentToken) {
-            ((PermanentToken) permanent).getToken().setOriginalExpansionSetCode(needSetCode);
-            ((PermanentToken) permanent).getToken().setExpansionSetCodeForImage(needSetCode);
-            ((PermanentToken) permanent).getToken().setTokenType(needTokenType);
-        } else {
-            permanent.setExpansionSetCode(needSetCode);
-            permanent.setCardNumber(needCardNumber);
-        }
+        CardUtil.copySetAndCardNumber(permanent, copyFromObject);
 
         return true;
     }

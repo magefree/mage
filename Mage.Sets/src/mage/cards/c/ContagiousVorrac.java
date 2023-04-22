@@ -73,7 +73,7 @@ class ContagiousVorracEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 4));
         TargetCard target = new TargetCardInLibrary(0, 1, StaticFilters.FILTER_CARD_LAND);
-        player.choose(Outcome.DrawCard, cards, target, game);
+        player.choose(Outcome.DrawCard, cards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {
             player.revealCards(source, new CardsImpl(card), game);

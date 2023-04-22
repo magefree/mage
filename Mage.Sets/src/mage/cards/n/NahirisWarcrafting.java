@@ -87,7 +87,7 @@ class NahirisWarcraftingEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, excess));
         TargetCard target = new TargetCardInLibrary(0, 1, StaticFilters.FILTER_CARD_A);
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {
             player.moveCards(card, Zone.EXILED, source, game);

@@ -64,7 +64,7 @@ class MomentOfTruthEffect extends OneShotEffect {
                 cards.size() == 3 ? 1 : 0, 1, StaticFilters.FILTER_CARD
         );
         target.withChooseHint("To put into your hand");
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {
             player.moveCards(card, Zone.HAND, source, game);
@@ -77,7 +77,7 @@ class MomentOfTruthEffect extends OneShotEffect {
                 cards.size() == 2 ? 1 : 0, 1, StaticFilters.FILTER_CARD
         );
         target.withChooseHint("To put into your graveyard");
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         card = game.getCard(target.getFirstTarget());
         if (card != null) {
             player.putInGraveyard(card, game);
@@ -88,7 +88,7 @@ class MomentOfTruthEffect extends OneShotEffect {
         }
         target = new TargetCardInLibrary();
         target.withChooseHint("To put on the bottom of your library");
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return true;

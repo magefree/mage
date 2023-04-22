@@ -762,9 +762,9 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
     }
 
     @Override
-    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
+    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
         if (targets.isEmpty()) {
-            return super.choose(outcome, cards, target, game);
+            return super.choose(outcome, cards, target, source, game);
         }
         if (!target.doneChoosing()) {
             for (UUID targetId : targets) {

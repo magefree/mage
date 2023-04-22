@@ -71,7 +71,7 @@ class TellingTimeEffect extends OneShotEffect {
         if (cards.isEmpty()) {
             return true;
         }
-        Card card = pickCard(game, controller, cards, "card to put in your hand");
+        Card card = pickCard(controller, cards, "card to put in your hand", source, game);
         if (card != null) {
             controller.moveCards(card, Zone.HAND, source, game);
             cards.remove(card);
@@ -80,7 +80,7 @@ class TellingTimeEffect extends OneShotEffect {
             return true;
         }
 
-        card = pickCard(game, controller, cards, "card to put on top of your library");
+        card = pickCard(controller, cards, "card to put on top of your library", source, game);
         if (card != null) {
             controller.moveCards(card, Zone.LIBRARY, source, game);
             cards.remove(card);
@@ -91,7 +91,7 @@ class TellingTimeEffect extends OneShotEffect {
         return true;
     }
 
-    private Card pickCard(Game game, Player player, Cards cards, String message) {
+    private Card pickCard(Player player, Cards cards, String message, Ability source, Game game) {
         if (cards.isEmpty()) {
             return null;
         }
@@ -102,7 +102,7 @@ class TellingTimeEffect extends OneShotEffect {
         }
 
         TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard(message));
-        if (player.choose(Outcome.Benefit, cards, target, game)) {
+        if (player.choose(Outcome.Benefit, cards, target, source, game)) {
             Card card = cards.get(target.getFirstTarget(), game);
             if (card != null) {
                 cards.remove(card);

@@ -68,7 +68,7 @@ class FireProphecyEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetCardInHand();
-        player.choose(outcome, player.getHand(), target, game);
+        player.choose(outcome, player.getHand(), target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return false;

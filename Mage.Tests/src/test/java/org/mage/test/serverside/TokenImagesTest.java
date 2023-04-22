@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
- * All tests logic: create a tokens list from specific cards and check a used settins (set code, type)
+ * All tests logic: create a tokens list from specific cards and check a used settings (set code, image number)
  *
  * @author JayDi85
  */

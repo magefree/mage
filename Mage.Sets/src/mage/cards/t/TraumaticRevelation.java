@@ -76,7 +76,7 @@ class TraumaticRevelationEffect extends OneShotEffect {
         }
         opponent.revealCards(source, opponent.getHand(), game);
         TargetCard target = new TargetCardInHand(0, 1, filter);
-        controller.choose(Outcome.Discard, opponent.getHand(), target, game);
+        controller.choose(Outcome.Discard, opponent.getHand(), target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {
             opponent.discard(card, false, source, game);

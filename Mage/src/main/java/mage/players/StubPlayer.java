@@ -50,7 +50,7 @@ public class StubPlayer extends PlayerImpl implements Player {
     }
 
     @Override
-    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
+    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
         cards.getCards(game).stream().map(MageItem::getId).forEach(cardId -> target.add(cardId, game));
         return true;
     }

@@ -97,7 +97,7 @@ class EmergentUltimatumEffect extends OneShotEffect {
         }
         TargetCardInExile targetCardInExile = new TargetCardInExile(StaticFilters.FILTER_CARD);
         targetCardInExile.setNotTarget(true);
-        opponent.choose(outcome, cards, targetCardInExile, game);
+        opponent.choose(outcome, cards, targetCardInExile, source, game);
         Card toShuffle = game.getCard(targetCardInExile.getFirstTarget());
         if (toShuffle != null) {
             player.putCardsOnBottomOfLibrary(toShuffle, game, source, false);

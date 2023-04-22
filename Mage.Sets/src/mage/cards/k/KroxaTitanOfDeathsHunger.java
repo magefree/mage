@@ -118,7 +118,7 @@ class KroxaTitanOfDeathsHungerDiscardEffect extends OneShotEffect {
                         return;
                     }
                     TargetCard target = new TargetCardInHand(1, StaticFilters.FILTER_CARD);
-                    player.choose(Outcome.Discard, player.getHand(), target, game);
+                    player.choose(Outcome.Discard, player.getHand(), target, source, game);
                     cards.add(target.getFirstTarget());
                 });
         Set<UUID> playerSet = new HashSet();

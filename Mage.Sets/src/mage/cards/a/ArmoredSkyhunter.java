@@ -87,7 +87,7 @@ class ArmoredSkyhunterEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 6));
         TargetCardInLibrary targetCard = new TargetCardInLibrary(0, 1, filter);
-        player.choose(outcome, cards, targetCard, game);
+        player.choose(outcome, cards, targetCard, source, game);
         Card card = game.getCard(targetCard.getFirstTarget());
         if (card == null) {
             return player.putCardsOnBottomOfLibrary(cards, game, source, false);

@@ -63,7 +63,7 @@ class BrowseEffect extends OneShotEffect {
             if (!cards.isEmpty()) {
                 controller.lookAtCards(source, null, cards, game);
                 TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put in your hand"));
-                if (controller.choose(Outcome.Benefit, cards, target, game)) {
+                if (controller.choose(Outcome.Benefit, cards, target, source, game)) {
                     Card card = cards.get(target.getFirstTarget(), game);
                     if (card != null) {
                         controller.moveCards(card, Zone.HAND, source, game);

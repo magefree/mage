@@ -78,7 +78,7 @@ class YouFindSomePrisonersEffect extends OneShotEffect {
         player.moveCards(cards, Zone.EXILED, source, game);
         TargetCardInExile target = new TargetCardInExile(StaticFilters.FILTER_CARD);
         target.setNotTarget(true);
-        player.choose(Outcome.PlayForFree, cards, target, game);
+        player.choose(Outcome.PlayForFree, cards, target, source, game);
         Card card = cards.get(target.getFirstTarget(), game);
         if (card != null) {
             CardUtil.makeCardPlayable(game, source, card, Duration.UntilEndOfYourNextTurn, true);

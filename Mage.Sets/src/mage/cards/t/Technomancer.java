@@ -73,7 +73,7 @@ class TechnomancerEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TechnomancerTarget();
-        player.choose(outcome, player.getGraveyard(), target, game);
+        player.choose(outcome, player.getGraveyard(), target, source, game);
         return player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
     }
 }

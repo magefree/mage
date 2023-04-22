@@ -165,7 +165,7 @@ class NicolBolasDragonGodPlusOneEffect extends OneShotEffect {
             for (Target target : possibleTargetTypes) {
                 // hand
                 if (target.equals(targetHand)) {
-                    if (opponent.choose(Outcome.Exile, opponent.getHand(), targetHand, game)
+                    if (opponent.choose(Outcome.Exile, opponent.getHand(), targetHand, source, game)
                             && game.getCard(targetHand.getFirstTarget()) != null) {
                         cards.add(game.getCard(targetHand.getFirstTarget()));
                         break;

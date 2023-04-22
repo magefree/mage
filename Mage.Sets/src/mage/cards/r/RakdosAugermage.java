@@ -74,7 +74,7 @@ class RakdosAugermageEffect extends OneShotEffect {
             Card sourceCard = game.getCard(source.getSourceId());
             player.revealCards((sourceCard != null ? sourceCard.getIdName() + " (" + sourceCard.getZoneChangeCounter(game) + ") (" : "Discard (") + controller.getName() + ")", revealedCards, game);
             TargetCard target = new TargetCard(Zone.HAND, new FilterCard());
-            if (player.choose(Outcome.Benefit, revealedCards, target, game)) {
+            if (player.choose(Outcome.Benefit, revealedCards, target, source, game)) {
                 Card card = revealedCards.get(target.getFirstTarget(), game);
                 return player.discard(card, false, source, game);
 
