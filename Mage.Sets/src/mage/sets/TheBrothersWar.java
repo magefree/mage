@@ -147,6 +147,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Hero of the Dunes", 213, Rarity.UNCOMMON, mage.cards.h.HeroOfTheDunes.class));
         cards.add(new SetCardInfo("Hoarding Recluse", 186, Rarity.COMMON, mage.cards.h.HoardingRecluse.class));
         cards.add(new SetCardInfo("Horned Stoneseeker", 138, Rarity.UNCOMMON, mage.cards.h.HornedStoneseeker.class));
+        cards.add(new SetCardInfo("Hostile Negotiations", 105, Rarity.RARE, mage.cards.h.HostileNegotiations.class));
         cards.add(new SetCardInfo("Hurkyl's Final Meditation", 52, Rarity.RARE, mage.cards.h.HurkylsFinalMeditation.class));
         cards.add(new SetCardInfo("Hurkyl, Master Wizard", 51, Rarity.RARE, mage.cards.h.HurkylMasterWizard.class));
         cards.add(new SetCardInfo("In the Trenches", 8, Rarity.MYTHIC, mage.cards.i.InTheTrenches.class));
