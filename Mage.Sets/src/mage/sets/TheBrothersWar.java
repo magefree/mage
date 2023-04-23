@@ -204,6 +204,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("No One Left Behind", 109, Rarity.UNCOMMON, mage.cards.n.NoOneLeftBehind.class));
         cards.add(new SetCardInfo("Obliterating Bolt", 145, Rarity.UNCOMMON, mage.cards.o.ObliteratingBolt.class));
         cards.add(new SetCardInfo("Obstinate Baloth", 187, Rarity.UNCOMMON, mage.cards.o.ObstinateBaloth.class));
+        cards.add(new SetCardInfo("One with the Multiverse", 59, Rarity.MYTHIC, mage.cards.o.OneWithTheMultiverse.class));
         cards.add(new SetCardInfo("Over the Top", 146, Rarity.RARE, mage.cards.o.OverTheTop.class));
         cards.add(new SetCardInfo("Overwhelming Remorse", 110, Rarity.COMMON, mage.cards.o.OverwhelmingRemorse.class));
         cards.add(new SetCardInfo("Painful Quandary", 111, Rarity.RARE, mage.cards.p.PainfulQuandary.class));
