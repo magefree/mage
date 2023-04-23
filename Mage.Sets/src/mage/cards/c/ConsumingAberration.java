@@ -93,10 +93,6 @@ class CardsInOpponentsGraveyardsCount implements DynamicValue {
         super();
     }
 
-    public CardsInOpponentsGraveyardsCount(DynamicValue count) {
-        super();
-    }
-
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int amount = 0;
@@ -111,7 +107,7 @@ class CardsInOpponentsGraveyardsCount implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return new CardsInOpponentsGraveyardsCount(this);
+        return this;
     }
 
     @Override

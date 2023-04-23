@@ -51,9 +51,6 @@ class AwakenedAmalgamLandNamesCount implements DynamicValue {
     public AwakenedAmalgamLandNamesCount() {
     }
 
-    public AwakenedAmalgamLandNamesCount(AwakenedAmalgamLandNamesCount dynamicValue) {
-    }
-
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Set<String> landNames = new HashSet<>();
@@ -67,7 +64,7 @@ class AwakenedAmalgamLandNamesCount implements DynamicValue {
 
     @Override
     public AwakenedAmalgamLandNamesCount copy() {
-        return new AwakenedAmalgamLandNamesCount(this);
+        return this;
     }
 
     @Override

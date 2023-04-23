@@ -59,7 +59,7 @@ public final class MonstrousWarLeech extends CardImpl {
                 new SetBasePowerToughnessSourceEffect(
                         MonstrousWarLeechValue.instance
                 )
-        ));
+        ).addHint(hint));
     }
 
     private MonstrousWarLeech(final MonstrousWarLeech card) {
