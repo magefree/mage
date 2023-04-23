@@ -49,7 +49,7 @@ public final class RadagastWizardOfWilds extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Ward {1}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{1}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{1}"), false));
 
         // Beasts and Birds you control have ward {1}.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
