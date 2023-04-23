@@ -36,7 +36,7 @@ public final class UurgSpawnOfTurg extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Uurg, Spawn of Turg's power is equal to the number of land cards in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(xValue, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(xValue)));
 
         // At the beginning of your upkeep, look at the top card of your library. You may put that card into your graveyard.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(

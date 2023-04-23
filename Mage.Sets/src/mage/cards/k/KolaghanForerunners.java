@@ -11,7 +11,6 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
@@ -34,7 +33,7 @@ public final class KolaghanForerunners extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Kolaghan Forerunners' power is equal to the number of creatures you control.
-        Effect effect = new SetBasePowerSourceEffect(new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURES), Duration.EndOfGame);
+        Effect effect = new SetBasePowerSourceEffect(new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURES));
         this.addAbility(new SimpleStaticAbility(Zone.ALL, effect).addHint(CreaturesYouControlHint.instance));
 
         // Dash {2}{R} <i.(You may cast this spell for its dash cost. If you do it gains haste and it's returned to its owner's hand at the beginning of the next end step.)</i>

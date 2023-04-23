@@ -42,7 +42,7 @@ public final class AnaxHardenedInTheForge extends CardImpl {
         // Anax's power is equal to your devotion to red.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
-                new SetBasePowerSourceEffect(DevotionCount.R, Duration.EndOfGame)
+                new SetBasePowerSourceEffect(DevotionCount.R)
                         .setText("{this}'s power is equal to your devotion to red")
         ).addHint(DevotionCount.R.getHint()));
 

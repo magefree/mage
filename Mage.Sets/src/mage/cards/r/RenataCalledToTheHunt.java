@@ -33,7 +33,7 @@ public final class RenataCalledToTheHunt extends CardImpl {
         // Renata's power is equal to your devotion to green.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
-                new SetBasePowerSourceEffect(DevotionCount.G, Duration.EndOfGame)
+                new SetBasePowerSourceEffect(DevotionCount.G)
                         .setText("{this}'s power is equal to your devotion to green")
         ).addHint(DevotionCount.G.getHint()));
 

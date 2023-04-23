@@ -35,7 +35,7 @@ public final class ShamblingSuit extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Shambling Suit's power is equal to the number of artifacts and/or enchantments you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(xValue, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(xValue)));
     }
 
     private ShamblingSuit(final ShamblingSuit card) {

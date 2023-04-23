@@ -36,7 +36,7 @@ public final class AdelineResplendentCathar extends CardImpl {
 
         // Adeline, Resplendent Cathar's power is equal to the number of creatures you control.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(
-                CreaturesYouControlCount.instance, Duration.EndOfGame)).addHint(CreaturesYouControlHint.instance)
+                CreaturesYouControlCount.instance)).addHint(CreaturesYouControlHint.instance)
         );
 
         // Whenever you attack, for each opponent, create a 1/1 white Human creature token that's tapped and attacking that player or a planeswalker they control.

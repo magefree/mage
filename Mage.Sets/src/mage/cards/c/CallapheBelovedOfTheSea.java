@@ -41,7 +41,7 @@ public final class CallapheBelovedOfTheSea extends CardImpl {
 
         // Callaphe's power is equal to your to devotion to blue.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetBasePowerSourceEffect(DevotionCount.U, Duration.EndOfGame)
+                Zone.ALL, new SetBasePowerSourceEffect(DevotionCount.U)
                 .setText("{this}'s power is equal to your devotion to blue")
         ).addHint(DevotionCount.U.getHint()));
 

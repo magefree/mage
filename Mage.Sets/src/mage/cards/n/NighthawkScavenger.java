@@ -14,7 +14,6 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 
@@ -48,7 +47,7 @@ public final class NighthawkScavenger extends CardImpl {
 
         // Nighthawk Scavenger's power is equal to 1 plus the number of card types among cards in your opponents' graveyards.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetBasePowerSourceEffect(xValue, Duration.EndOfGame)
+                Zone.ALL, new SetBasePowerSourceEffect(xValue)
                 .setText("{this}'s power is equal to 1 plus the number of " +
                         "card types among cards in your opponents' graveyards. " +
                         "<i>(Cards in graveyards have only the characteristics of their front face.)</i>")
