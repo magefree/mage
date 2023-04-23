@@ -43,6 +43,7 @@ public final class TheStoneBrain extends CardImpl {
         ability.addCost(new ExileSourceCost());
         ability.addEffect(new TheStoneBrainEffect());
         ability.addTarget(new TargetOpponent());
+        this.addAbility(ability);
     }
 
     private TheStoneBrain(final TheStoneBrain card) {
