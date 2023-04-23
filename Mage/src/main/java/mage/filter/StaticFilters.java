@@ -608,6 +608,13 @@ public final class StaticFilters {
         FILTER_CONTROLLED_ANOTHER_CREATURE.setLockedFilter(true);
     }
 
+    public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_UNTAPPED_CREATURE = new FilterControlledCreaturePermanent("untapped creature you control");
+
+    static {
+        FILTER_CONTROLLED_UNTAPPED_CREATURE.add(TappedPredicate.UNTAPPED);
+        FILTER_CONTROLLED_UNTAPPED_CREATURE.setLockedFilter(true);
+    }
+
     public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_UNTAPPED_CREATURES = new FilterControlledCreaturePermanent("untapped creatures you control");
 
     static {
