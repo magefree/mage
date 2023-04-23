@@ -47,7 +47,7 @@ public final class PainDistributor extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever a player casts their first spell each turn, they create a Treasure token.
         this.addAbility(new SpellCastAllTriggeredAbility(
