@@ -72,14 +72,14 @@ class SacrificeXManaValueCost extends VariableCostImpl implements SacrificeCost 
         this.filter = filter;
     }
 
-    public SacrificeXManaValueCost(final mage.cards.n.SacrificeXManaValueCost cost) {
+    public SacrificeXManaValueCost(final SacrificeXManaValueCost cost) {
         super(cost);
         this.filter = cost.filter;
     }
 
     @Override
-    public mage.cards.n.SacrificeXManaValueCost copy() {
-        return new mage.cards.n.SacrificeXManaValueCost(this);
+    public SacrificeXManaValueCost copy() {
+        return new SacrificeXManaValueCost(this);
     }
 
     @Override
@@ -102,7 +102,7 @@ class SacrificeXCostConvertedMana implements DynamicValue {
         this.type = type;
     }
 
-    public SacrificeXCostConvertedMana(mage.cards.n.SacrificeXCostConvertedMana value) {
+    public SacrificeXCostConvertedMana(SacrificeXCostConvertedMana value) {
         this.type = value.type;
     }
 
@@ -118,8 +118,8 @@ class SacrificeXCostConvertedMana implements DynamicValue {
     }
 
     @Override
-    public mage.cards.n.SacrificeXCostConvertedMana copy() {
-        return new mage.cards.n.SacrificeXCostConvertedMana(this);
+    public SacrificeXCostConvertedMana copy() {
+        return new SacrificeXCostConvertedMana(this);
     }
 
     @Override
