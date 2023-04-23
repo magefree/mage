@@ -228,6 +228,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Order of Midnight", 261, Rarity.UNCOMMON, mage.cards.o.OrderOfMidnight.class));
         cards.add(new SetCardInfo("Orzhov Locket", 368, Rarity.COMMON, mage.cards.o.OrzhovLocket.class));
         cards.add(new SetCardInfo("Orzhov Signet", 369, Rarity.COMMON, mage.cards.o.OrzhovSignet.class));
+        cards.add(new SetCardInfo("Pain Distributor", 33, Rarity.RARE, mage.cards.p.PainDistributor.class));
         cards.add(new SetCardInfo("Painful Truths", 262, Rarity.RARE, mage.cards.p.PainfulTruths.class));
         cards.add(new SetCardInfo("Path of Ancestry", 418, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Path to Exile", 198, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
