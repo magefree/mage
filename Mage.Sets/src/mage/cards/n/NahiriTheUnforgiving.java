@@ -63,13 +63,13 @@ public final class NahiriTheUnforgiving extends CardImpl {
         this.addAbility(ability3);
     }
 
-    private NahiriTheUnforgiving(final mage.cards.n.NahiriTheUnforgiving card) {
+    private NahiriTheUnforgiving(final NahiriTheUnforgiving card) {
         super(card);
     }
 
     @Override
-    public mage.cards.n.NahiriTheUnforgiving copy() {
-        return new mage.cards.n.NahiriTheUnforgiving(this);
+    public NahiriTheUnforgiving copy() {
+        return new NahiriTheUnforgiving(this);
     }
 }
 
