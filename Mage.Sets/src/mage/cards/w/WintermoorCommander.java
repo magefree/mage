@@ -51,7 +51,7 @@ public final class WintermoorCommander extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // Wintermoor Commander's toughness is equal to the number of Knights you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBaseToughnessSourceEffect(xValue, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBaseToughnessSourceEffect(xValue)));
 
         // Whenever Wintermoor Commander attacks, another target Knight you control gains indestructible until end of turn.
         Ability ability = new AttacksTriggeredAbility(new GainAbilityTargetEffect(

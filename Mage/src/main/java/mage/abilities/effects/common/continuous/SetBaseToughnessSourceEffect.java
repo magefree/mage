@@ -19,12 +19,13 @@ public class SetBaseToughnessSourceEffect extends ContinuousEffectImpl {
 
     private final DynamicValue amount;
 
-    public SetBaseToughnessSourceEffect(DynamicValue amount, Duration duration) {
-        this(amount, duration, SubLayer.CharacteristicDefining_7a);
-    }
-
-    public SetBaseToughnessSourceEffect(DynamicValue amount, Duration duration, SubLayer subLayer) {
-        super(duration, Layer.PTChangingEffects_7, subLayer, Outcome.BoostCreature);
+    /**
+     *
+     * @param amount Toughness to set as a characteristic-defining ability
+     */
+    public SetBaseToughnessSourceEffect(DynamicValue amount) {
+        super(Duration.EndOfGame, Layer.PTChangingEffects_7, SubLayer.CharacteristicDefining_7a, Outcome.BoostCreature);
+        setCharacterDefining(true);
         this.amount = amount;
         staticText = "{this}'s toughness is equal to the number of " + amount.getMessage();
     }
@@ -46,10 +47,6 @@ public class SetBaseToughnessSourceEffect extends ContinuousEffectImpl {
             int value = amount.calculate(game, source, this);
             mageObject.getToughness().setModifiedBaseValue(value);
             return true;
-        } else {
-            if (duration == Duration.Custom) {
-                discard();
-            }
         }
         return false;
     }

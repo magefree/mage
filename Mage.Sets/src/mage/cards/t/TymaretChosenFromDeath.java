@@ -35,7 +35,7 @@ public final class TymaretChosenFromDeath extends CardImpl {
 
         // Tymaret's toughness is equal to your devotion to black.
         this.addAbility(new SimpleStaticAbility(
-                        Zone.ALL, new SetBaseToughnessSourceEffect(DevotionCount.B, Duration.EndOfGame)
+                        Zone.ALL, new SetBaseToughnessSourceEffect(DevotionCount.B)
                         .setText("{this}'s toughness is equal to your devotion to black")
                 ).addHint(DevotionCount.B.getHint())
         );

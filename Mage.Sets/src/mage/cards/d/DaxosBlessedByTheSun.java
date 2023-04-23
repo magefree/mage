@@ -32,7 +32,7 @@ public final class DaxosBlessedByTheSun extends CardImpl {
         // Daxos's toughness is equal to your devotion to white.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
-                new SetBaseToughnessSourceEffect(DevotionCount.W, Duration.EndOfGame)
+                new SetBaseToughnessSourceEffect(DevotionCount.W)
                         .setText("{this}'s toughness is equal to your devotion to white")
         ).addHint(DevotionCount.W.getHint()));
 
