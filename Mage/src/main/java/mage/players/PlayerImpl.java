@@ -5128,6 +5128,11 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public ActivatedAbility chooseLandOrSpellAbility(Card card, Game game, boolean noMana) {
+        return card.getSpellAbility();
+    }
+
+    @Override
     public SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana) {
         return card.getSpellAbility();
     }

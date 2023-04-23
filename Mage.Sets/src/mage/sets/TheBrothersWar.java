@@ -126,6 +126,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Giant Growth", 183, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
         cards.add(new SetCardInfo("Gix's Caress", 96, Rarity.COMMON, mage.cards.g.GixsCaress.class));
         cards.add(new SetCardInfo("Gix's Command", 97, Rarity.RARE, mage.cards.g.GixsCommand.class));
+        cards.add(new SetCardInfo("Gix, Yawgmoth Praetor", 95, Rarity.MYTHIC, mage.cards.g.GixYawgmothPraetor.class));
         cards.add(new SetCardInfo("Gixian Infiltrator", 98, Rarity.COMMON, mage.cards.g.GixianInfiltrator.class));
         cards.add(new SetCardInfo("Gixian Puppeteer", 99, Rarity.RARE, mage.cards.g.GixianPuppeteer.class));
         cards.add(new SetCardInfo("Gixian Skullflayer", 100, Rarity.COMMON, mage.cards.g.GixianSkullflayer.class));
