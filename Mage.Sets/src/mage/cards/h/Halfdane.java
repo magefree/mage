@@ -86,7 +86,7 @@ class HalfdaneUpkeepEffect extends OneShotEffect {
 class HalfdaneSetBasePowerToughnessEffect extends SetBasePowerToughnessSourceEffect {
 
     public HalfdaneSetBasePowerToughnessEffect(int power, int toughness) {
-        super(power, toughness, Duration.UntilYourNextTurn, SubLayer.SetPT_7b, true);
+        super(power, toughness, Duration.UntilYourNextTurn, SubLayer.SetPT_7b);
     }
 
     public HalfdaneSetBasePowerToughnessEffect(final HalfdaneSetBasePowerToughnessEffect effect) {

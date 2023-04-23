@@ -95,7 +95,7 @@ class WoodElementalEffect extends OneShotEffect {
                             targetPermanent.sacrifice(source, game);
                         }
                     }
-                    game.addEffect(new SetBasePowerToughnessSourceEffect(sacrificedForests, sacrificedForests, Duration.Custom, SubLayer.SetPT_7b, false), source);
+                    game.addEffect(new SetBasePowerToughnessSourceEffect(sacrificedForests, sacrificedForests, Duration.Custom, SubLayer.SetPT_7b), source);
                     return true;
                 }
             }

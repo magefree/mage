@@ -47,19 +47,21 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
      * @param amount Power and toughness to set as a characteristic-defining ability
      */
     public SetBasePowerToughnessSourceEffect(DynamicValue amount) {
-        this(amount, amount, Duration.EndOfGame);
+        this(amount, amount);
     }
 
-    public SetBasePowerToughnessSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
-        this(power, toughness, duration, SubLayer.CharacteristicDefining_7a, false);
+    /**
+     *
+     * @param power Power to set as a characteristic-defining ability
+     * @param toughness Toughness to set as a characteristic-defining ability
+     */
+    public SetBasePowerToughnessSourceEffect(DynamicValue power, DynamicValue toughness) {
+        this(power, toughness, Duration.EndOfGame, SubLayer.CharacteristicDefining_7a, false);
     }
 
-    public SetBasePowerToughnessSourceEffect(int power, int toughness, Duration duration) {
-        this(power, toughness, duration, SubLayer.CharacteristicDefining_7a, false);
-    }
-
-    public SetBasePowerToughnessSourceEffect(int power, int toughness, Duration duration, SubLayer subLayer, boolean baseInText) {
-        this(StaticValue.get(power), StaticValue.get(toughness), duration, subLayer, baseInText);
+    public SetBasePowerToughnessSourceEffect(int power, int toughness, Duration duration, SubLayer subLayer) {
+        this(StaticValue.get(power), StaticValue.get(toughness), duration, subLayer, true);
+        this.staticText = "{this} has base power and toughness " + power + '/' + toughness + ' ' + duration.toString();
     }
 
     public SetBasePowerToughnessSourceEffect(final SetBasePowerToughnessSourceEffect effect) {

@@ -45,7 +45,7 @@ public final class ShorecrasherMimic extends CardImpl {
 
         // Whenever you cast a spell that's both green and blue, Shorecrasher Mimic has base power and toughness 5/3 until end of turn and gains trample until end of turn.
         Ability ability = new SpellCastControllerTriggeredAbility(
-                new SetBasePowerToughnessSourceEffect(5, 3, Duration.EndOfTurn, SubLayer.SetPT_7b, true),
+                new SetBasePowerToughnessSourceEffect(5, 3, Duration.EndOfTurn, SubLayer.SetPT_7b),
                 filter,
                 false,
                 rule);

@@ -74,7 +74,7 @@ class ShapeStealerEffect extends OneShotEffect {
             return false;
         }
 
-        ContinuousEffect effect = new SetBasePowerToughnessSourceEffect(permanent.getPower().getValue(), permanent.getToughness().getValue(), Duration.EndOfTurn, SubLayer.SetPT_7b, true);
+        ContinuousEffect effect = new SetBasePowerToughnessSourceEffect(permanent.getPower().getValue(), permanent.getToughness().getValue(), Duration.EndOfTurn, SubLayer.SetPT_7b);
         game.addEffect(effect, source);
         return true;
     }

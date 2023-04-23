@@ -41,7 +41,7 @@ public final class BattlegateMimic extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever you cast a spell that's both red and white, Battlegate Mimic has base power and toughness 4/2 and gains first strike until end of turn.
-        SetBasePowerToughnessSourceEffect baseToughnessSourceEffect = new SetBasePowerToughnessSourceEffect(4, 2, Duration.EndOfTurn, SubLayer.SetPT_7b, true);
+        SetBasePowerToughnessSourceEffect baseToughnessSourceEffect = new SetBasePowerToughnessSourceEffect(4, 2, Duration.EndOfTurn, SubLayer.SetPT_7b);
         Ability ability = new SpellCastControllerTriggeredAbility(baseToughnessSourceEffect, filter, false, rule);
         ability.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, false, true));
         this.addAbility(ability);

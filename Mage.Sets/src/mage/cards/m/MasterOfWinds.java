@@ -79,7 +79,7 @@ class MasterOfWindsEffect extends OneShotEffect {
                 null, "4/1", "1/4", source, game
         ) ? 4 : 1;
         game.addEffect(new SetBasePowerToughnessSourceEffect(
-                power, 5 - power, Duration.EndOfTurn, SubLayer.SetPT_7b, true
+                power, 5 - power, Duration.EndOfTurn, SubLayer.SetPT_7b
         ), source);
         return true;
     }

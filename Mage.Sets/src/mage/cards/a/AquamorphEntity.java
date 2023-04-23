@@ -124,7 +124,7 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
                 toughness = 5;
                 break;
         }
-        game.addEffect(new SetBasePowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield), source);
+        game.addEffect(new SetBasePowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield, SubLayer.CharacteristicDefining_7a), source);
         return false;
     }
 

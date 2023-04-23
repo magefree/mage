@@ -71,7 +71,7 @@ class GigantiformAbility extends StaticAbility {
         super(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA));
         Ability ability = new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
-                new SetBasePowerToughnessSourceEffect(8, 8, Duration.WhileOnBattlefield, SubLayer.SetPT_7b, true)
+                new SetBasePowerToughnessSourceEffect(8, 8, Duration.WhileOnBattlefield, SubLayer.SetPT_7b)
         );
         this.addEffect(new GainAbilityAttachedEffect(ability, AttachmentType.AURA));
     }
