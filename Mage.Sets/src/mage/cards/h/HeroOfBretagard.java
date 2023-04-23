@@ -63,7 +63,7 @@ public final class HeroOfBretagard extends CardImpl {
                 ), condition, "As long as {this} has five or more counters on it, it has flying"
         ));
         ability.addEffect(new ConditionalContinuousEffect(new AddCardSubTypeSourceEffect(
-                Duration.WhileOnBattlefield, SubType.ANGEL
+                Duration.WhileOnBattlefield, true, SubType.ANGEL
         ), condition, "and is an Angel in addition to its other types."));
         this.addAbility(ability);
 
@@ -72,7 +72,7 @@ public final class HeroOfBretagard extends CardImpl {
                 IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield
         ), condition2, "As long as {this} has ten or more counters on it, it has indestructible"));
         ability.addEffect(new ConditionalContinuousEffect(new AddCardSubTypeSourceEffect(
-                Duration.WhileOnBattlefield, SubType.GOD
+                Duration.WhileOnBattlefield, true, SubType.GOD
         ), condition2, "and is a God in addition to its other types."));
         this.addAbility(ability);
     }

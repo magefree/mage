@@ -29,6 +29,7 @@ public enum CounterType {
     BOUNTY("bounty"),
     BRIBERY("bribery"),
     BRICK("brick"),
+    BURDEN("burden"),
     CAGE("cage"),
     CARRION("carrion"),
     CHARGE("charge"),
