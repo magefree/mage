@@ -122,7 +122,7 @@ class LukkaBoundToRuinDamageEffect extends DamageMultiEffect {
                 "where X is the greatest power among creatures you controlled as you activated this ability.";
     }
 
-    private LukkaBoundToRuinDamageEffect(final mage.cards.l.LukkaBoundToRuinDamageEffect effect) {
+    private LukkaBoundToRuinDamageEffect(final LukkaBoundToRuinDamageEffect effect) {
         super(effect);
     }
 
@@ -131,8 +131,8 @@ class LukkaBoundToRuinDamageEffect extends DamageMultiEffect {
     }
 
     @Override
-    public mage.cards.l.LukkaBoundToRuinDamageEffect copy() {
-        return new mage.cards.l.LukkaBoundToRuinDamageEffect(this);
+    public LukkaBoundToRuinDamageEffect copy() {
+        return new LukkaBoundToRuinDamageEffect(this);
     }
 }
 
