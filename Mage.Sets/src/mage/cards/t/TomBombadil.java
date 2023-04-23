@@ -179,8 +179,8 @@ class TomBombadilEffect extends OneShotEffect {
         }
         controller.revealCards(source, toReveal, game);
         if (toBattlefield != null) {
-            toReveal.remove(toBattlefield);
             controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game);
+            toReveal.retainZone(Zone.LIBRARY, game);
         }
         controller.putCardsOnBottomOfLibrary(toReveal, game, source, false);
         return true;
