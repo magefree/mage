@@ -9,7 +9,6 @@ import mage.abilities.keyword.EncoreAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 
@@ -31,7 +30,7 @@ public final class SoulOfEternity extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
                 new SetBasePowerToughnessSourceEffect(
-                        ControllerLifeCount.instance, Duration.EndOfGame
+                        ControllerLifeCount.instance
                 ).setText("{this}'s power and toughness are each equal to your life total")
         ));
 

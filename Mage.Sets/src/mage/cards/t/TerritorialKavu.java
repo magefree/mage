@@ -33,7 +33,7 @@ public final class TerritorialKavu extends CardImpl {
 
         // Domain — Territorial Kavu's power and toughness are each equal to the number of basic land types among lands you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetBasePowerToughnessSourceEffect(DomainValue.REGULAR, Duration.EndOfGame)
+                Zone.ALL, new SetBasePowerToughnessSourceEffect(DomainValue.REGULAR)
         ).addHint(DomainHint.instance).setAbilityWord(AbilityWord.DOMAIN));
 
         // Whenever Territorial Kavu attacks, choose one —

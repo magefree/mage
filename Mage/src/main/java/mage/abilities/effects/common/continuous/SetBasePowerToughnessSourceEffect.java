@@ -43,8 +43,11 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
         }
     }
 
-    public SetBasePowerToughnessSourceEffect(DynamicValue amount, Duration duration) {
-        this(amount, amount, duration);
+    /**
+     * @param amount Power and toughness to set as a characteristic-defining ability
+     */
+    public SetBasePowerToughnessSourceEffect(DynamicValue amount) {
+        this(amount, amount, Duration.EndOfGame);
     }
 
     public SetBasePowerToughnessSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration) {

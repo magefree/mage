@@ -43,7 +43,7 @@ public final class KorlashHeirToBlackblade extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Korlash, Heir to Blackblade's power and toughness are each equal to the number of Swamps you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterPermanent), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterPermanent))));
 
         // {1}{B}: Regenerate Korlash.
         Effect effect = new RegenerateSourceEffect();

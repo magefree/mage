@@ -34,7 +34,7 @@ public final class OldStickfingers extends CardImpl {
 
         // Old Stickfingers' power and toughness are equal to the number of creature cards in your graveyard.
         DynamicValue value = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURES);
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(value, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(value)));
     }
 
     private OldStickfingers(final OldStickfingers card) {

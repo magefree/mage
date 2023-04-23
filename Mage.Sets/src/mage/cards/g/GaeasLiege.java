@@ -48,8 +48,8 @@ public final class GaeasLiege extends CardImpl {
 
         // As long as Gaea's Liege isn't attacking, its power and toughness are each equal to the number of Forests you control. As long as Gaea's Liege is attacking, its power and toughness are each equal to the number of Forests defending player controls.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new ConditionalContinuousEffect(
-                new SetBasePowerToughnessSourceEffect(xValue2, Duration.EndOfGame),
-                new SetBasePowerToughnessSourceEffect(xValue1, Duration.EndOfGame),
+                new SetBasePowerToughnessSourceEffect(xValue2),
+                new SetBasePowerToughnessSourceEffect(xValue1),
                 SourceAttackingCondition.instance, "as long as {this} isn't attacking, " +
                 "its power and toughness are each equal to the number of Forests you control. " +
                 "As long as {this} is attacking, its power and toughness are each equal " +

@@ -40,8 +40,8 @@ public final class ChameleonSpirit extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
                 new SetBasePowerToughnessSourceEffect(
-                        PermanentsOfTheChosenColorOpponentsControlCount.instance,
-                        Duration.EndOfGame)));
+                        PermanentsOfTheChosenColorOpponentsControlCount.instance
+                )));
     }
 
     private ChameleonSpirit(final ChameleonSpirit card) {

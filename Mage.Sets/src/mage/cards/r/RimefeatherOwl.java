@@ -4,7 +4,6 @@ package mage.cards.r;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -55,7 +54,7 @@ public final class RimefeatherOwl extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Rimefeather Owl's power and toughness are each equal to the number of snow permanents on the battlefield.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter2), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter2))));
 
         // {1}{snow}: Put an ice counter on target permanent.
         Ability ability = new SimpleActivatedAbility(

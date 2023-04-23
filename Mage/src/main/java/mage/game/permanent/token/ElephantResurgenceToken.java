@@ -7,7 +7,6 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
-import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 
@@ -28,7 +27,7 @@ public final class ElephantResurgenceToken extends TokenImpl {
 
         this.addAbility(new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
-                new SetBasePowerToughnessSourceEffect(new CardsInControllerGraveyardCount(new FilterCreatureCard()), Duration.EndOfGame)
+                new SetBasePowerToughnessSourceEffect(new CardsInControllerGraveyardCount(new FilterCreatureCard()))
                         .setText("This creature's power and toughness are each equal to the number of creature cards in its controller's graveyard.")
         ));
     }

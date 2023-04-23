@@ -31,7 +31,7 @@ public final class WestvaleCultLeader extends CardImpl {
         this.nightCard = true;
 
         // Westvale Cult Leader's power and toughness are each equal to the number of creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(CreaturesYouControlCount.instance, Duration.EndOfGame))
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(CreaturesYouControlCount.instance))
                 .addHint(CreaturesYouControlHint.instance));
 
         // At the beginning of your end step, create a 1/1 white and black Human Cleric creature token.

@@ -7,7 +7,6 @@ import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 
@@ -31,7 +30,7 @@ public final class WinnowingForces extends CardImpl {
 
         // Winnowing Forces's power and toughness are each equal to the number of lands you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetBasePowerToughnessSourceEffect(LandsYouControlCount.instance, Duration.Custom)
+                Zone.ALL, new SetBasePowerToughnessSourceEffect(LandsYouControlCount.instance)
         ));
     }
 

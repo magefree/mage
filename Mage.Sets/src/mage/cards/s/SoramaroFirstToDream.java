@@ -17,7 +17,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -40,7 +39,7 @@ public final class SoramaroFirstToDream extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Soramaro, First to Dream's power and toughness are each equal to the number of cards in your hand.
          DynamicValue xValue= CardsInControllerHandCount.instance;
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue)));
 
         // {4}, Return a land you control to its owner's hand: Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,

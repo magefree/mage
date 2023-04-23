@@ -4,7 +4,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.ControllerLifeCount;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 
 import java.util.Arrays;
@@ -20,7 +19,7 @@ public final class AvatarToken extends TokenImpl {
         subtype.add(SubType.AVATAR);
         color.setWhite(true);
         this.addAbility(new SimpleStaticAbility(new SetBasePowerToughnessSourceEffect(
-                ControllerLifeCount.instance, Duration.WhileOnBattlefield
+                ControllerLifeCount.instance
         ).setText("this creature's power and toughness are each equal to your life total")));
 
         availableImageSetCodes = Arrays.asList("LRW", "M10", "M11");

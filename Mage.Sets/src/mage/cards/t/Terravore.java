@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 
@@ -32,7 +31,7 @@ public final class Terravore extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         // Terravore's power and toughness are each equal to the number of land cards in all graveyards.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(
-                new CardsInAllGraveyardsCount(new FilterLandCard("land cards")), Duration.EndOfGame)));
+                new CardsInAllGraveyardsCount(new FilterLandCard("land cards")))));
     }
 
     private Terravore(final Terravore card) {

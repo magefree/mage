@@ -35,7 +35,7 @@ public final class Malignus extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Malignus's power and toughness are each equal to half the highest life total among your opponents, rounded up.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new HighestLifeTotalAmongOpponentsCount(), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new HighestLifeTotalAmongOpponentsCount())));
 
         // Damage that would be dealt by Malignus can't be prevented.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MalignusEffect()));

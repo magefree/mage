@@ -80,7 +80,7 @@ class DruidClassToken extends TokenImpl {
 
         this.addAbility(HasteAbility.getInstance());
         this.addAbility(new SimpleStaticAbility(new SetBasePowerToughnessSourceEffect(
-                LandsYouControlCount.instance, Duration.EndOfGame
+                LandsYouControlCount.instance
         ).setText("this creature's power and toughness are each equal to the number of lands you control")));
     }
 

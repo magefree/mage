@@ -39,7 +39,7 @@ public final class QueenAllenalOfRuadach extends CardImpl {
         // Queen Allenal of Ruadach's power and toughness are each equal to the number of creatures you control.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
-                new SetBasePowerToughnessSourceEffect(count, Duration.EndOfGame)
+                new SetBasePowerToughnessSourceEffect(count)
         ));
 
         // If one or more creature tokens would be created under your control, those tokens plus a 1/1 white Soldier creature token are created instead.

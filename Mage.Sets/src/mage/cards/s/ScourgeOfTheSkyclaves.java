@@ -44,7 +44,7 @@ public final class ScourgeOfTheSkyclaves extends CardImpl {
         // Scourge of the Skyclaves's power and toughness are each equal to 20 minus the highest life total among players.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new SetBasePowerToughnessSourceEffect(
-                ScourgeOfTheSkyclavesValue.instance, Duration.EndOfGame
+                ScourgeOfTheSkyclavesValue.instance
         ).setText("{this}'s power and toughness are each equal to 20 minus the highest life total among players.")));
     }
 
