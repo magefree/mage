@@ -19,12 +19,12 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.SpiritWhiteToken;
 
 import java.util.UUID;
@@ -71,6 +71,12 @@ public final class MillicentRestlessRevenant extends CardImpl {
 
 class MillicentRestlessRevenantTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final FilterPermanent filterNontoken = new FilterControlledPermanent(SubType.SPIRIT);
+
+    static {
+        filterNontoken.add(TokenPredicate.FALSE);
+    }
+
     MillicentRestlessRevenantTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new SpiritWhiteToken()));
     }
@@ -114,8 +120,7 @@ class MillicentRestlessRevenantTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         return permanent.getId().equals(this.getSourceId())
-                || (!(permanent instanceof PermanentToken)
-                && permanent.hasSubtype(SubType.SPIRIT, game));
+                || filterNontoken.match(permanent, getControllerId(), this, game);
     }
 
     @Override

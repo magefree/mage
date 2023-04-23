@@ -212,6 +212,7 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Mindless Automaton", 365, Rarity.UNCOMMON, mage.cards.m.MindlessAutomaton.class));
         cards.add(new SetCardInfo("Mirror-Style Master", 32, Rarity.RARE, mage.cards.m.MirrorStyleMaster.class));
         cards.add(new SetCardInfo("Mistmeadow Vanisher", 42, Rarity.RARE, mage.cards.m.MistmeadowVanisher.class));
+        cards.add(new SetCardInfo("Moira and Teshar", 7, Rarity.MYTHIC, mage.cards.m.MoiraAndTeshar.class));
         cards.add(new SetCardInfo("Mortify", 337, Rarity.UNCOMMON, mage.cards.m.Mortify.class));
         cards.add(new SetCardInfo("Mossfire Valley", 414, Rarity.RARE, mage.cards.m.MossfireValley.class));
         cards.add(new SetCardInfo("Mosswort Bridge", 415, Rarity.RARE, mage.cards.m.MosswortBridge.class));
@@ -227,8 +228,14 @@ public final class MarchOfTheMachineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Order of Midnight", 261, Rarity.UNCOMMON, mage.cards.o.OrderOfMidnight.class));
         cards.add(new SetCardInfo("Orzhov Locket", 368, Rarity.COMMON, mage.cards.o.OrzhovLocket.class));
         cards.add(new SetCardInfo("Orzhov Signet", 369, Rarity.COMMON, mage.cards.o.OrzhovSignet.class));
+        cards.add(new SetCardInfo("Pain Distributor", 33, Rarity.RARE, mage.cards.p.PainDistributor.class));
         cards.add(new SetCardInfo("Painful Truths", 262, Rarity.RARE, mage.cards.p.PainfulTruths.class));
         cards.add(new SetCardInfo("Path of Ancestry", 418, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
+//        cards.add(new SetCardInfo("Path of the Animist", 38, Rarity.RARE, mage.cards.p.PathOfTheAnimist.class));
+//        cards.add(new SetCardInfo("Path of the Enigma", 23, Rarity.RARE, mage.cards.p.PathOfTheEnigma.class));
+//        cards.add(new SetCardInfo("Path of the Ghosthunter", 18, Rarity.RARE, mage.cards.p.PathOfTheGhosthunter.class));
+//        cards.add(new SetCardInfo("Path of the Pyromancer", 34, Rarity.RARE, mage.cards.p.PathOfThePyromancer.class));
+//        cards.add(new SetCardInfo("Path of the Schemer", 28, Rarity.RARE, mage.cards.p.PathOfTheSchemer.class));
         cards.add(new SetCardInfo("Path to Exile", 198, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
         cards.add(new SetCardInfo("Perplexing Test", 229, Rarity.RARE, mage.cards.p.PerplexingTest.class));
         cards.add(new SetCardInfo("Phyrexian Delver", 263, Rarity.RARE, mage.cards.p.PhyrexianDelver.class));

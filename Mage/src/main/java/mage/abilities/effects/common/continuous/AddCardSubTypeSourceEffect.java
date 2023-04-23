@@ -17,10 +17,16 @@ import java.util.Locale;
  */
 public class AddCardSubTypeSourceEffect extends ContinuousEffectImpl {
 
+    private final boolean inAddition;
     private final List<SubType> addedSubTypes = new ArrayList<>();
 
     public AddCardSubTypeSourceEffect(Duration duration, SubType... addedSubType) {
+        this(duration, false, addedSubType);
+    }
+
+    public AddCardSubTypeSourceEffect(Duration duration, boolean inAddition, SubType... addedSubType) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
+        this.inAddition = inAddition;
         for (SubType cardType : addedSubType) {
             this.addedSubTypes.add(cardType);
         }
@@ -28,6 +34,7 @@ public class AddCardSubTypeSourceEffect extends ContinuousEffectImpl {
 
     private AddCardSubTypeSourceEffect(final AddCardSubTypeSourceEffect effect) {
         super(effect);
+        this.inAddition = effect.inAddition;
         this.addedSubTypes.addAll(effect.addedSubTypes);
     }
 
@@ -41,6 +48,9 @@ public class AddCardSubTypeSourceEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null && affectedObjectList.contains(new MageObjectReference(permanent, game))) {
+            if (!inAddition) {
+                permanent.removeAllCreatureTypes(game);
+            }
             for (SubType cardType : addedSubTypes) {
                 permanent.addSubType(game, cardType);
             }
@@ -75,7 +85,10 @@ public class AddCardSubTypeSourceEffect extends ContinuousEffectImpl {
             }
             sb.append(subType.toString().toLowerCase(Locale.ENGLISH)).append(" ");
         }
-        sb.append(" in addition to its other types ").append(this.getDuration().toString());
+        if (inAddition) {
+            sb.append(" in addition to its other types ");
+        }
+        sb.append(this.getDuration().toString());
         return sb.toString();
     }
 }

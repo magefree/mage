@@ -2281,6 +2281,53 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
+    public ActivatedAbility chooseLandOrSpellAbility(Card card, Game game, boolean noMana) {
+        if (gameInCheckPlayableState(game)) {
+            return null;
+        }
+
+        // TODO: add canRespond cycle?
+        if (!canRespond()) {
+            return null;
+        }
+
+        MageObject object = game.getObject(card.getId()); // must be object to find real abilities (example: commander)
+        if (object != null) {
+            LinkedHashMap<UUID, ActivatedAbility> useableAbilities = new LinkedHashMap<>(PlayerImpl.getCastableSpellAbilities(game, playerId, object, game.getState().getZone(object.getId()), noMana));
+
+            if (canPlayLand() && isActivePlayer(game)) {
+                for (Ability ability : card.getAbilities(game)) {
+                    if (ability instanceof PlayLandAbility) {
+                        useableAbilities.put(ability.getId(), (PlayLandAbility) ability);
+                    }
+                }
+            }
+
+            switch (useableAbilities.size()) {
+                case 0:
+                    return card.getSpellAbility();
+                case 1:
+                    return useableAbilities.values().iterator().next();
+                default:
+                    updateGameStatePriority("chooseLandOrSpellAbility", game);
+                    prepareForResponse(game);
+                    if (!isExecutingMacro()) {
+                        String message = "Choose spell or ability to play" + (noMana ? " for FREE" : "") + "<br>" + object.getLogName();
+                        game.fireGetChoiceEvent(playerId, message, object, new ArrayList<>(useableAbilities.values()));
+                    }
+                    waitForResponse(game);
+                    ActivatedAbility response = useableAbilities.get(getFixedResponseUUID(game));
+                    if (response != null) {
+                        return response;
+                    }
+            }
+        }
+
+        // default ability (example: on disconnect or cancel)
+        return card.getSpellAbility();
+    }
+
+    @Override
     public Mode chooseMode(Modes modes, Ability source, Game game) {
         // choose mode to activate
         if (gameInCheckPlayableState(game)) {
