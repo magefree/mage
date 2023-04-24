@@ -19,6 +19,7 @@ import mage.target.TargetPermanent;
 import mage.util.CardUtil;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -108,7 +109,7 @@ public class RemoveCounterCost extends CostImpl {
                 }
             } else {  // Multiple counters, player much choose which type to remove from
                 Choice choice = new ChoiceImpl(true);
-                Set<String> choices = new HashSet<>();
+                Set<String> choices = new LinkedHashSet<>();
                 for (Counter counter : targetObject.getCounters(game).values()) {
                     if (targetObject.getCounters(game).getCount(counter.getName()) > 0) {
                         choices.add(counter.getName());

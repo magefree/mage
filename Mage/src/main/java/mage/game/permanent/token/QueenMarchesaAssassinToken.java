@@ -25,7 +25,7 @@ public final class QueenMarchesaAssassinToken extends TokenImpl {
         addAbility(DeathtouchAbility.getInstance());
         addAbility(HasteAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("CN2");
+        availableImageSetCodes = Arrays.asList("CN2", "MOC");
     }
 
     public QueenMarchesaAssassinToken(final QueenMarchesaAssassinToken token) {

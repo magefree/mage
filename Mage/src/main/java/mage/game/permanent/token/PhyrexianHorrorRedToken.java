@@ -13,6 +13,10 @@ import java.util.Arrays;
  */
 public final class PhyrexianHorrorRedToken extends TokenImpl {
 
+    public PhyrexianHorrorRedToken() {
+        this(0);
+    }
+
     public PhyrexianHorrorRedToken(int xValue) {
         super("Phyrexian Horror Token", "X/1 red Phyrexian Horror creature token with trample and haste");
         cardType.add(CardType.CREATURE);
@@ -26,6 +30,15 @@ public final class PhyrexianHorrorRedToken extends TokenImpl {
         addAbility(HasteAbility.getInstance());
 
         availableImageSetCodes = Arrays.asList("ONE");
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("ONE")) {
+            setTokenType(2);
+        }
     }
 
     public PhyrexianHorrorRedToken(final PhyrexianHorrorRedToken token) {

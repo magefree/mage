@@ -43,7 +43,7 @@ public final class JunkyardGenius extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new BoostControlledEffect(
                 1, 1, Duration.EndOfTurn, true
         ).setText("until end of turn, other creatures you control get +1/+0"), new ManaCostsImpl<>("{1}{B}{R}"));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE_SHORT_TEXT));
         ability.addEffect(new GainAbilityControlledEffect(
                 new MenaceAbility(), Duration.EndOfTurn,
                 StaticFilters.FILTER_PERMANENT_CREATURES, true

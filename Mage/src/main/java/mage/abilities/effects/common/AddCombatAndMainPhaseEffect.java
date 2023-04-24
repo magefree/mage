@@ -35,8 +35,8 @@ public class AddCombatAndMainPhaseEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         // 15.07.2006 If it's somehow not a main phase when Fury of the Horde resolves, all it does is untap all creatures that attacked that turn. No new phases are created.
-        if (game.getTurn().getPhaseType() == TurnPhase.PRECOMBAT_MAIN
-                || game.getTurn().getPhaseType() == TurnPhase.POSTCOMBAT_MAIN) {
+        if (game.getTurnPhaseType() == TurnPhase.PRECOMBAT_MAIN
+                || game.getTurnPhaseType() == TurnPhase.POSTCOMBAT_MAIN) {
             // we can't add two turn modes at once, will add additional post combat on delayed trigger resolution
             TurnMod combat = new TurnMod(source.getControllerId(), TurnPhase.COMBAT, TurnPhase.POSTCOMBAT_MAIN, false);
             game.getState().getTurnMods().add(combat);

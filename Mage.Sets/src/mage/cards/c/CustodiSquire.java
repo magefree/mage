@@ -111,7 +111,7 @@ class CustodiSquireVote extends VoteHandler<Card> {
         TargetCardInGraveyard target = new TargetCardInGraveyard(filter);
         target.withChooseHint(voteInfo + " (from graveyard to hand)");
         target.setNotTarget(true);
-        decidingPlayer.choose(Outcome.ReturnToHand, controller.getGraveyard(), target, game);
+        decidingPlayer.choose(Outcome.ReturnToHand, controller.getGraveyard(), target, source, game);
         return controller.getGraveyard().get(target.getFirstTarget(), game);
     }
 

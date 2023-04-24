@@ -16,6 +16,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.SpiritWhiteToken;
 import mage.target.common.TargetCardInHand;
 
@@ -36,7 +37,7 @@ public final class HauntedDead extends CardImpl {
 
         // {1}{B}, Discard two cards: Return Haunted Dead from your graveyard to the battlefield tapped.
         Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true, false), new ManaCostsImpl<>("{1}{B}"));
-        ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("two cards"))));
+        ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS)));
         this.addAbility(ability);
     }
 

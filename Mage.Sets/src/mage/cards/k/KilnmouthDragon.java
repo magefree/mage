@@ -37,9 +37,10 @@ public final class KilnmouthDragon extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         
-        // {tap}: Kilnmouth Dragon deals damage equal to the number of +1/+1 counters on it to any target.
+        // {T}: Kilnmouth Dragon deals damage equal to the number of +1/+1 counters on it to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new DamageTargetEffect(new CountersSourceCount(CounterType.P1P1)), new TapSourceCost());
+                new DamageTargetEffect(new CountersSourceCount(CounterType.P1P1))
+                        .setText("{this} deals damage equal to the number of +1/+1 counters on it to any target"), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

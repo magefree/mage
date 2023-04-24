@@ -20,6 +20,8 @@ public final class ButterflyToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());
+
+        this.setExpansionSetCodeForImage("MOC");
     }
 
     public ButterflyToken(final ButterflyToken token) {

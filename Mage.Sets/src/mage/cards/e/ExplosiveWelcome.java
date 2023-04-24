@@ -8,10 +8,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ManaType;
-import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
+import mage.filter.common.FilterAnyTarget;
+import mage.filter.common.FilterPermanentOrPlayer;
 import mage.filter.predicate.other.AnotherTargetPredicate;
 import mage.target.Target;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetPermanentOrPlayer;
 import mage.target.targetpointer.SecondTargetPointer;
 
 import java.util.UUID;
@@ -21,7 +23,7 @@ import java.util.UUID;
  */
 public final class ExplosiveWelcome extends CardImpl {
 
-    private static final FilterCreaturePlayerOrPlaneswalker filter = new FilterCreaturePlayerOrPlaneswalker();
+    private static final FilterPermanentOrPlayer filter = new FilterAnyTarget();
 
     static {
         filter.getPermanentFilter().add(new AnotherTargetPredicate(2));
@@ -42,7 +44,7 @@ public final class ExplosiveWelcome extends CardImpl {
         Target target = new TargetAnyTarget();
         target.setTargetTag(1);
         this.getSpellAbility().addTarget(target);
-        target = new TargetAnyTarget(filter);
+        target = new TargetPermanentOrPlayer(filter);
         target.setTargetTag(2);
         this.getSpellAbility().addTarget(target);
     }

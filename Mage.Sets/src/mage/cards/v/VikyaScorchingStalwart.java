@@ -38,7 +38,7 @@ public final class VikyaScorchingStalwart extends CardImpl {
         // Training
         this.addAbility(new TrainingAbility());
 
-        // Hadoken—{4}{R}, {Q}, Discard a card: Ryu, World Warrior deals damage equal to his power to any target. If excess damage was dealt to a creature this way, draw a card.
+        // Hadoken—{4}{R}, {Q}, Discard a card: Ryu, World Warrior deals damage equal to its power to any target. If excess damage was dealt to a creature this way, draw a card.
         Ability ability = new SimpleActivatedAbility(new VikyaScorchingStalwartEffect(), new ManaCostsImpl<>("{4}{R}"));
         ability.addCost(new UntapSourceCost());
         ability.addCost(new DiscardCardCost());
@@ -60,7 +60,7 @@ class VikyaScorchingStalwartEffect extends OneShotEffect {
 
     VikyaScorchingStalwartEffect() {
         super(Outcome.Benefit);
-        staticText = "{this} deals damage equal to his power to any target. " +
+        staticText = "{this} deals damage equal to its power to any target. " +
                 "If excess damage was dealt to a creature this way, draw a card";
     }
 

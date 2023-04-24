@@ -66,7 +66,7 @@ class PrimordialOozeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourceObject = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
         if (controller != null && sourceObject != null) {
             int counter = sourceObject.getCounters(game).getCount(CounterType.P1P1);
             Cost cost = new ManaCostsImpl<>("{" + counter + '}');

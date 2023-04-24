@@ -95,7 +95,7 @@ class GlacianPowerstoneEngineerEffect extends OneShotEffect {
             return false;
         }
         TargetCard targetCard = new TargetCardInLibrary(1, StaticFilters.FILTER_CARD);
-        player.choose(outcome, cards, targetCard, game);
+        player.choose(outcome, cards, targetCard, source, game);
         Card card = game.getCard(targetCard.getFirstTarget());
         if (card != null && player.moveCards(card, Zone.HAND, source, game)) {
             cards.remove(card);

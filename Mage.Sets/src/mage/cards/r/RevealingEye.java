@@ -83,7 +83,7 @@ class RevealingEyeEffect extends OneShotEffect {
             return true;
         }
         TargetCard target = new TargetCardInHand(0, 1, StaticFilters.FILTER_CARD_NON_LAND);
-        controller.choose(outcome, opponent.getHand(), target, game);
+        controller.choose(outcome, opponent.getHand(), target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return true;

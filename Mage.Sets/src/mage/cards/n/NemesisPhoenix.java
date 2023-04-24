@@ -58,7 +58,7 @@ enum NemesisPhoenixCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (game.getStep().getType() != PhaseStep.DECLARE_ATTACKERS) {
+        if (game.getTurnStepType() != PhaseStep.DECLARE_ATTACKERS) {
             return false;
         }
         Set<UUID> opponents = game.getOpponents(source.getControllerId());

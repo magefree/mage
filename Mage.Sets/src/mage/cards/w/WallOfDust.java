@@ -70,7 +70,7 @@ class WallOfDustRestrictionEffect extends RestrictionEffect {
             return true;
         }
 
-        return game.getPhase().getType() == TurnPhase.END && this.isYourNextTurn(game);
+        return game.getTurnPhaseType() == TurnPhase.END && this.isYourNextTurn(game);
     }
 
     @Override

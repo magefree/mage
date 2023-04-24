@@ -20,7 +20,7 @@ public final class HumanWarriorToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("KHM");
+        availableImageSetCodes = Arrays.asList("KHM", "30A");
     }
 
     private HumanWarriorToken(final HumanWarriorToken token) {

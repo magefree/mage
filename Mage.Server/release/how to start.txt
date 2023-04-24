@@ -1,4 +1,0 @@
-use .exe or one of the scripts:
-  startServer.bat - for Windows
-  startServer.sh - for Linux
-  startServer.command - for MacOS

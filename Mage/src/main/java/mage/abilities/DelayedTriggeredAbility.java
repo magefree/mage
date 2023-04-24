@@ -1,4 +1,3 @@
-
 package mage.abilities;
 
 import mage.abilities.effects.Effect;
@@ -7,7 +6,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class DelayedTriggeredAbility extends TriggeredAbilityImpl {
@@ -57,6 +55,12 @@ public abstract class DelayedTriggeredAbility extends TriggeredAbilityImpl {
      * @param game
      */
     public void init(Game game) {
+    }
+
+    @Override
+    public DelayedTriggeredAbility setTriggerPhrase(String triggerPhrase) {
+        super.setTriggerPhrase(triggerPhrase);
+        return this;
     }
 
     public boolean isInactive(Game game) {

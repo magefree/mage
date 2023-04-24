@@ -16,7 +16,7 @@ import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-import mage.watchers.common.CreatureWasCastWatcher;
+import mage.watchers.common.PermanentWasCastWatcher;
 
 /**
  *
@@ -29,7 +29,7 @@ public final class HallowedMoonlight extends CardImpl {
 
         // Until end of turn, if a creature would enter the battlefield and it wasn't cast, exile it instead.
         this.getSpellAbility().addEffect(new HallowedMoonlightEffect());
-        this.getSpellAbility().addWatcher(new CreatureWasCastWatcher());
+        this.getSpellAbility().addWatcher(new PermanentWasCastWatcher());
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
@@ -83,8 +83,8 @@ class HallowedMoonlightEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) event;
         if (entersTheBattlefieldEvent.getTarget().isCreature(game)) {
-            CreatureWasCastWatcher watcher = game.getState().getWatcher(CreatureWasCastWatcher.class);
-            if (watcher != null && !watcher.wasCreatureCastThisTurn(event.getTargetId())) {
+            PermanentWasCastWatcher watcher = game.getState().getWatcher(PermanentWasCastWatcher.class);
+            if (watcher != null && !watcher.wasPermanentCastThisTurn(event.getTargetId())) {
                 return true;
             }
         }

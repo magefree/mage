@@ -98,7 +98,7 @@ class KaaliaZenithSeekerEffect extends OneShotEffect {
         Cards toHand = new CardsImpl();
         for (CreatureFinder creatureFinder : CreatureFinder.values()) {
             TargetCard targetCard = creatureFinder.getTarget();
-            if (player.choose(outcome, cards, targetCard, game)) {
+            if (player.choose(outcome, cards, targetCard, source, game)) {
                 toHand.addAll(targetCard.getTargets());
             }
         }

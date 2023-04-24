@@ -89,7 +89,7 @@ public class DontUntapInPlayersNextUntapStepAllEffect extends ContinuousRuleModi
             }
         }
 
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
+        if (game.getTurnStepType() == PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null) {
                 Player controller = game.getPlayer(source.getControllerId());

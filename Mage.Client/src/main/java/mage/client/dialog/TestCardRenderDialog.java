@@ -33,6 +33,7 @@ import mage.game.mulligan.Mulligan;
 import mage.game.mulligan.MulliganType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
+import mage.game.permanent.PermanentMeld;
 import mage.players.Player;
 import mage.players.StubPlayer;
 import mage.util.CardUtil;
@@ -111,7 +112,7 @@ public class TestCardRenderDialog extends MageDialog {
     }
 
     private PermanentView createPermanentCard(Game game, UUID controllerId, String code, String cardNumber, int powerBoosted, int toughnessBoosted, int damage, boolean tapped, boolean transform, List<Ability> extraAbilities) {
-        CardInfo cardInfo = CardRepository.instance.findCard(code, cardNumber);
+        CardInfo cardInfo = CardRepository.instance.findCard(code, cardNumber, false);
         ExpansionInfo setInfo = ExpansionRepository.instance.getSetByCode(code);
         CardSetInfo testSet = new CardSetInfo(cardInfo.getName(), setInfo.getCode(), cardNumber, cardInfo.getRarity(),
                 new CardGraphicInfo(cardInfo.getFrameStyle(), cardInfo.usesVariousArt()));
@@ -126,24 +127,31 @@ public class TestCardRenderDialog extends MageDialog {
             extraAbilities.forEach(ability -> permCard.addAbility(ability));
         }
 
-        PermanentCard perm = new PermanentCard(permCard, controllerId, game);
-        if (transform) {
-            // need direct transform call to keep other side info (original)
-            TransformAbility.transformPermanent(perm, permCard.getSecondCardFace(), game, null);
+        // meld card must be a special class, see CardUtils.putCardOntoBattlefieldWithEffects
+        PermanentCard permanent;
+        if (permCard instanceof MeldCard) {
+            permanent = new PermanentMeld(permCard, controllerId, game);
+        } else {
+            permanent = new PermanentCard(permCard, controllerId, game);
         }
 
-        if (damage > 0) perm.damage(damage, controllerId, null, game);
-        if (powerBoosted > 0) perm.getPower().setBoostedValue(powerBoosted);
-        if (toughnessBoosted > 0) perm.getToughness().setBoostedValue(toughnessBoosted);
-        perm.removeSummoningSickness();
-        perm.setTapped(tapped);
-        PermanentView cardView = new PermanentView(perm, permCard, controllerId, game);
+        if (transform) {
+            // need direct transform call to keep other side info (original)
+            TransformAbility.transformPermanent(permanent, permCard.getSecondCardFace(), game, null);
+        }
+
+        if (damage > 0) permanent.damage(damage, controllerId, null, game);
+        if (powerBoosted > 0) permanent.getPower().setBoostedValue(powerBoosted);
+        if (toughnessBoosted > 0) permanent.getToughness().setBoostedValue(toughnessBoosted);
+        permanent.removeSummoningSickness();
+        permanent.setTapped(tapped);
+        PermanentView cardView = new PermanentView(permanent, permCard, controllerId, game);
 
         return cardView;
     }
 
     private CardView createFaceDownCard(Game game, UUID controllerId, String code, String cardNumber, boolean isMorphed, boolean isManifested, boolean tapped) {
-        CardInfo cardInfo = CardRepository.instance.findCard(code, cardNumber);
+        CardInfo cardInfo = CardRepository.instance.findCard(code, cardNumber, false);
         ExpansionInfo setInfo = ExpansionRepository.instance.getSetByCode(code);
         CardSetInfo testSet = new CardSetInfo(cardInfo.getName(), setInfo.getCode(), cardNumber, cardInfo.getRarity(),
                 new CardGraphicInfo(cardInfo.getFrameStyle(), cardInfo.usesVariousArt()));
@@ -170,7 +178,7 @@ public class TestCardRenderDialog extends MageDialog {
     }
 
     private CardView createHandCard(Game game, UUID controllerId, String code, String cardNumber) {
-        CardInfo cardInfo = CardRepository.instance.findCard(code, cardNumber);
+        CardInfo cardInfo = CardRepository.instance.findCard(code, cardNumber, false);
         ExpansionInfo setInfo = ExpansionRepository.instance.getSetByCode(code);
         CardSetInfo testSet = new CardSetInfo(cardInfo.getName(), setInfo.getCode(), cardNumber, cardInfo.getRarity(),
                 new CardGraphicInfo(cardInfo.getFrameStyle(), cardInfo.usesVariousArt()));
@@ -303,12 +311,31 @@ public class TestCardRenderDialog extends MageDialog {
 
         //test split, transform and mdf in hands
         cardViews.add(createHandCard(game, playerYou.getId(), "SOI", "97")); // Accursed Witch
-        cardViews.add(createHandCard(game, playerYou.getId(), "UMA", "225")); // Fire // Ice
-        cardViews.add(createHandCard(game, playerYou.getId(), "ELD", "14")); // Giant Killer
-        cardViews.add(createHandCard(game, playerYou.getId(), "ZNR", "134")); // Akoum Warrior
+        //cardViews.add(createHandCard(game, playerYou.getId(), "UMA", "225")); // Fire // Ice
+        //cardViews.add(createHandCard(game, playerYou.getId(), "ELD", "14")); // Giant Killer
+        //cardViews.add(createHandCard(game, playerYou.getId(), "ZNR", "134")); // Akoum Warrior
         //*/
 
-        //* //test card icons
+        /*// test meld cards in hands and battlefield
+        cardViews.add(createHandCard(game, playerYou.getId(), "EMN", "204")); // Hanweir Battlements
+        cardViews.add(createHandCard(game, playerYou.getId(), "EMN", "130a")); // Hanweir Garrison
+        cardViews.add(createHandCard(game, playerYou.getId(), "EMN", "130b")); // Hanweir, the Writhing Township
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "EMN", "204", 1, 1, 0, false, false, null)); // Hanweir Battlements
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "EMN", "130a", 1, 1, 0, false, false, null)); // Hanweir Garrison
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "EMN", "130b", 1, 1, 0, false, false, null)); // Hanweir, the Writhing Township
+        //*/
+
+        // test variant double faced cards (main and second sides must be same pair)
+        // Jacob Hauken, Inspector -> Hauken's Insight
+        cardViews.add(createHandCard(game, playerYou.getId(), "VOW", "65"));
+        cardViews.add(createHandCard(game, playerYou.getId(), "VOW", "320"));
+        cardViews.add(createHandCard(game, playerYou.getId(), "VOW", "332"));
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "VOW", "65", 1, 1, 0, false, false, null));
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "VOW", "320", 1, 1, 0, false, false, null));
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "VOW", "332", 1, 1, 0, false, false, null));
+        //*/
+
+        /*//test card icons
         cardViews.add(createHandCard(game, playerYou.getId(), "POR", "169")); // Grizzly Bears
         cardViews.add(createHandCard(game, playerYou.getId(), "DKA", "140")); // Huntmaster of the Fells, transforms
         cardViews.add(createPermanentCard(game, playerYou.getId(), "DKA", "140", 3, 3, 1, false, true, additionalIcons)); // Huntmaster of the Fells, transforms

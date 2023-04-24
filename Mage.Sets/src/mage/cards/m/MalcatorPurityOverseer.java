@@ -50,7 +50,7 @@ public final class MalcatorPurityOverseer extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new CreateTokenEffect(new PhyrexianGolemToken()), TargetController.YOU,
                 MalcatorPurityOverseerCondition.instance, false
-        ));
+        ), new MalcatorPurityOverseerWatcher());
     }
 
     private MalcatorPurityOverseer(final MalcatorPurityOverseer card) {

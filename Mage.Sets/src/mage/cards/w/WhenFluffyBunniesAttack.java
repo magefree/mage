@@ -17,6 +17,7 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -62,7 +63,7 @@ class WhenFluffyBunniesAttackEffect extends OneShotEffect {
 
         ChoiceImpl choice = new ChoiceImpl(true);
         choice.setMessage("Choose letter");
-        Set<String> choices = new HashSet<>();
+        Set<String> choices = new LinkedHashSet<>();
         for (Character letter = 'A'; letter <= 'Z'; letter++) {
             choices.add(letter.toString());
         }

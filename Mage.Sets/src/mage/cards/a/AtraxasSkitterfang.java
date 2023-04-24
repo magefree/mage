@@ -26,6 +26,7 @@ import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.UUID;
 
@@ -103,7 +104,7 @@ class AtraxasSkitterfangEffect extends OneShotEffect {
         }
         Choice choice = new ChoiceImpl(true);
         choice.setMessage("Choose an ability");
-        choice.setChoices(abilityMap.keySet());
+        choice.setChoices(new HashSet<>(abilityMap.keySet()));
         player.choose(outcome, choice, game);
         Ability ability = abilityMap.getOrDefault(choice.getChoice(), null);
         if (ability != null) {

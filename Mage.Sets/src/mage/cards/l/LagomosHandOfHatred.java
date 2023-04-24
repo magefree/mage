@@ -46,7 +46,7 @@ public final class LagomosHandOfHatred extends CardImpl {
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary()),
                 new TapSourceCost(),
                 LagomosHandOfHatredCondition.instance
-        ), new CreaturesDiedWatcher());
+        ));
     }
 
     private LagomosHandOfHatred(final LagomosHandOfHatred card) {

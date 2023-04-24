@@ -8,13 +8,11 @@ import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.ToxicAbility;
-import mage.abilities.keyword.TrampleAbility;
 import mage.constants.AttachmentType;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 
 /**
  * @author TheElk801
@@ -31,6 +29,7 @@ public final class ProstheticInjector extends CardImpl {
         ability.addEffect(new GainAbilityAttachedEffect(
                 new ToxicAbility(1), AttachmentType.EQUIPMENT
         ).setText("and has toxic 1"));
+        this.addAbility(ability);
 
         // Equip {1}
         this.addAbility(new EquipAbility(1, false));

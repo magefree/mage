@@ -67,7 +67,7 @@ public class SearchLibraryGraveyardWithLessMVPutIntoPlay extends OneShotEffect {
             if (cardFound == null && controller.chooseUse(outcome, "Search your graveyard for a " + filter.getMessage() + " with mana value X or less" + '?', source, game)) {
                 TargetCard target = new TargetCard(0, 1, Zone.GRAVEYARD, advancedFilter);
                 target.clearChosen();
-                if (controller.choose(outcome, controller.getGraveyard(), target, game)) {
+                if (controller.choose(outcome, controller.getGraveyard(), target, source, game)) {
                     if (!target.getTargets().isEmpty()) {
                         cardFound = game.getCard(target.getFirstTarget());
                     }

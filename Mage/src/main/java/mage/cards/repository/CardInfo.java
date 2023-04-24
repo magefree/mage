@@ -52,6 +52,8 @@ public class CardInfo {
     @DatabaseField
     protected String startingLoyalty;
     @DatabaseField
+    protected String startingDefense;
+    @DatabaseField
     protected int manaValue;
     @DatabaseField(dataType = DataType.ENUM_STRING)
     protected Rarity rarity;
@@ -93,7 +95,7 @@ public class CardInfo {
     protected boolean flipCard;
     @DatabaseField
     protected boolean doubleFaced;
-    @DatabaseField(indexName = "name_index")
+    @DatabaseField(indexName = "nightCard_index")
     protected boolean nightCard;
     @DatabaseField
     protected String flipCardName;
@@ -107,6 +109,8 @@ public class CardInfo {
     protected boolean modalDoubleFacesCard;
     @DatabaseField
     protected String modalDoubleFacesSecondSideName;
+    @DatabaseField
+    protected String meldsToCardName;
 
     // if you add new field with card side name then update CardRepository.addNewNames too
 
@@ -133,6 +137,11 @@ public class CardInfo {
 
         this.flipCard = card.isFlipCard();
         this.flipCardName = card.getFlipCardName();
+
+        Card meldToCard = card.getMeldsToCard();
+        if (meldToCard != null) {
+            this.meldsToCardName = meldToCard.getName();
+        }
 
         this.doubleFaced = card.isTransformable() && card.getSecondCardFace() != null;
         this.nightCard = card.isNightCard();
@@ -183,31 +192,14 @@ public class CardInfo {
 
         int length = 0;
         List<String> rulesList = new ArrayList<>();
-        if (card instanceof SplitCard) {
-            for (String rule : ((SplitCard) card).getLeftHalfCard().getRules()) {
-                length += rule.length();
-                rulesList.add(rule);
-            }
-            for (String rule : ((SplitCard) card).getRightHalfCard().getRules()) {
-                length += rule.length();
-                rulesList.add(rule);
-            }
-            for (String rule : card.getRules()) {
-                length += rule.length();
-                rulesList.add(rule);
-            }
-        } else if (card instanceof ModalDoubleFacesCard) {
-            // mdf card return main side's rules only (GUI can toggle it to another side)
-            for (String rule : card.getRules()) {
-                length += rule.length();
-                rulesList.add(rule);
-            }
-        } else {
-            for (String rule : card.getRules()) {
-                length += rule.length();
-                rulesList.add(rule);
-            }
+        // All cards must use getRules logic, so no special code here for rules, example:
+        // - split card: show all rules from both sides
+        // - mdf card: return main side's rules only (GUI can toggle it to another side)
+        for (String rule : card.getRules()) {
+            length += rule.length();
+            rulesList.add(rule);
         }
+
         if (length > MAX_RULE_LENGTH) {
             length = 0;
             List<String> shortRules = new ArrayList<>();
@@ -236,7 +228,8 @@ public class CardInfo {
         }
 
         // Starting loyalty
-        this.startingLoyalty = CardUtil.convertStartingLoyalty(card.getStartingLoyalty());
+        this.startingLoyalty = CardUtil.convertLoyaltyOrDefense(card.getStartingLoyalty());
+        this.startingDefense = CardUtil.convertLoyaltyOrDefense(card.getStartingDefense());
     }
 
     public Card getCard() {
@@ -397,6 +390,10 @@ public class CardInfo {
         return startingLoyalty;
     }
 
+    public String getStartingDefense() {
+        return startingDefense;
+    }
+
     public String getSetCode() {
         return setCode;
     }
@@ -435,6 +432,10 @@ public class CardInfo {
 
     public String getFlipCardName() {
         return flipCardName;
+    }
+
+    public String getMeldsToCardName() {
+        return meldsToCardName;
     }
 
     public boolean isDoubleFaced() {
