@@ -141,6 +141,8 @@ Legends|Legends|
 Legions|Legions|
 Limited Edition Alpha|LimitedEditionAlpha|
 Limited Edition Beta|LimitedEditionBeta|
+The Lord of the Rings: Tales of Middle-earth|TheLordOfTheRingsTalesOfMiddleEarth|
+Tales of Middle-earth Commander|TalesOfMiddleEarthCommander|
 Lorwyn|Lorwyn|
 Magic 2010|Magic2010|
 Magic 2011|Magic2011|
@@ -160,6 +162,9 @@ Masters Edition III|MastersEditionIII|
 Masters Edition IV|MastersEditionIV|
 Masters 25|Masters25|
 Media Inserts|MediaInserts|
+March of the Machine|MarchOfTheMachine|
+March of the Machine Commander|MarchOfTheMachineCommander|
+March of the Machine: The Aftermath|MarchOfTheMachineTheAftermath|
 Mercadian Masques|MercadianMasques|
 Mirage|Mirage|
 Mirrodin|Mirrodin|

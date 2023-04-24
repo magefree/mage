@@ -31,7 +31,7 @@ public final class ArlinnKord extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ARLINN);
 
-        this.secondSideCardClazz = ArlinnEmbracedByTheMoon.class;
+        this.secondSideCardClazz = mage.cards.a.ArlinnEmbracedByTheMoon.class;
 
         this.setStartingLoyalty(3);
 

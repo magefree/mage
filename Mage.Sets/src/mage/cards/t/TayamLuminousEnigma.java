@@ -32,6 +32,7 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -101,7 +102,7 @@ class TayamLuminousEnigmaCost extends RemoveCounterCost {
                         String counterName = null;
                         if (permanent.getCounters(game).size() > 1) {
                             Choice choice = new ChoiceImpl(true);
-                            Set<String> choices = new HashSet<>();
+                            Set<String> choices = new LinkedHashSet<>();
                             for (Counter counter : permanent.getCounters(game).values()) {
                                 if (permanent.getCounters(game).getCount(counter.getName()) > 0) {
                                     choices.add(counter.getName());
@@ -185,7 +186,7 @@ class TayamLuminousEnigmaEffect extends OneShotEffect {
         }
         TargetCard target = new TargetCardInYourGraveyard(filter);
         target.setNotTarget(true);
-        if (!player.choose(outcome, player.getGraveyard(), target, game)) {
+        if (!player.choose(outcome, player.getGraveyard(), target, source, game)) {
             return false;
         }
         return player.moveCards(game.getCard(target.getFirstTarget()), Zone.BATTLEFIELD, source, game);

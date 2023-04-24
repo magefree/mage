@@ -39,9 +39,9 @@ public final class ArdozCobblerOfWar extends CardImpl {
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new BoostTargetEffect(2, 0)
                         .setText("that creature gets +2/+0 until end of turn"),
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false,
+                StaticFilters.FILTER_CONTROLLED_A_CREATURE, false,
                 SetTargetPointer.PERMANENT, true
-        ));
+        ).setTriggerPhrase("Whenever {this} or another creature enters the battlefield under your control, "));
 
         // {3}{R}: Create a 1/1 red Goblin creature token with haste. Activate only as sorcery.
         this.addAbility(new ActivateAsSorceryActivatedAbility(

@@ -29,7 +29,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class SekkiSeasonsGuide extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("eight Spirits");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Spirits");
 
     static {
         filter.add(SubType.SPIRIT.getPredicate());

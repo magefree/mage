@@ -164,8 +164,8 @@ public class GameView implements Serializable {
                 companion.add(new RevealedView(name, state.getCompanion().get(name), game));
             }
         }
-        this.phase = state.getTurn().getPhaseType();
-        this.step = state.getTurn().getStepType();
+        this.phase = state.getTurnPhaseType();
+        this.step = state.getTurnStepType();
         this.turn = state.getTurnNum();
         this.activePlayerId = state.getActivePlayerId();
         if (state.getActivePlayerId() != null) {

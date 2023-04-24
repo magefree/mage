@@ -6,7 +6,6 @@ import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.players.Player;
 
 import java.util.Objects;
@@ -21,7 +20,7 @@ public enum CorruptedCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game.getOpponents(source.getControllerId())
+        return game.getOpponents(source.getControllerId(), true)
                 .stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)

@@ -109,7 +109,7 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         return super.getRule();
     }
 
-    private String generateTriggerPhrase() {
+    protected String generateTriggerPhrase() {
         StringBuilder sb = new StringBuilder("Whenever ");
         if (thisOrAnother) {
             sb.append("{this} or another ");

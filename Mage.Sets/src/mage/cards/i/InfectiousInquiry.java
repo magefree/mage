@@ -20,7 +20,7 @@ public final class InfectiousInquiry extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
         // You draw two cards and you lose 2 life. Each opponent gets a poison counter.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1, "you"));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2, "you"));
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2).concatBy("and"));
         this.getSpellAbility().addEffect(new AddCountersPlayersEffect(
                 CounterType.POISON.createInstance(), TargetController.OPPONENT

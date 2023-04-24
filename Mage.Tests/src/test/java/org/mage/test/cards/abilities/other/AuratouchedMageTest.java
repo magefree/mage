@@ -30,7 +30,7 @@ public class AuratouchedMageTest extends CardTestPlayerBase {
      * made the Mage an artifact, for example, you could search for an Aura with
      * “enchant artifact.” (2005-10-01)
      */
-    @Test
+    @Test // TODO: fix very rare random fails (16 of 1000)
     public void testAuratouchedMageEffectHasMadeIntoTypeArtifact() {
         //Expected result: An effect has made Auratouched Mage into an artifact upon entering the battlefield.  An aura that only works on artifacts should work.
         setStrictChooseMode(true);

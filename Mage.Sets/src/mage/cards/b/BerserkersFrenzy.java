@@ -68,8 +68,8 @@ enum BerserkersFrenzyCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (game.getPhase().getType() == TurnPhase.COMBAT) {
-            return game.getStep().getType().isBefore(PhaseStep.DECLARE_BLOCKERS);
+        if (game.getTurnPhaseType() == TurnPhase.COMBAT) {
+            return game.getTurnStepType().isBefore(PhaseStep.DECLARE_BLOCKERS);
         }
         return !game.getTurn().isDeclareAttackersStepStarted();
     }

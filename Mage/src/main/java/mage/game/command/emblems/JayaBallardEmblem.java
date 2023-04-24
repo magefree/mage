@@ -31,6 +31,7 @@ public final class JayaBallardEmblem extends Emblem {
         availableImageSetCodes = Arrays.asList("DOM", "MED");
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new JayaBallardCastFromGraveyardEffect());
         ability.addEffect(new JayaBallardReplacementEffect());
+        ability.addWatcher(new CastFromGraveyardWatcher());
         this.getAbilities().add(ability);
     }
 }

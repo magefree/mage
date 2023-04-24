@@ -79,6 +79,7 @@ $cardTypes{'Land'} = 'CardType.LAND';
 $cardTypes{'Sorcery'} = 'CardType.SORCERY';
 $cardTypes{'Planeswalker'} = 'CardType.PLANESWALKER';
 $cardTypes{'Tribal'} = 'CardType.TRIBAL';
+$cardTypes{'Battle'} = 'CardType.BATTLE';
 
 my %raritiesConversion;
 $raritiesConversion{'C'} = 'COMMON';
@@ -185,6 +186,7 @@ $vars{'toughness'} = $card[7];
 
 my @types;
 $vars{'planeswalker'} = 'false';
+$vars{'battle'} = 'false';
 $vars{'subType'} = '';
 $vars{'hasSubTypes'} = 'false';
 $vars{'hasSuperTypes'} = 'false';
@@ -195,6 +197,9 @@ while ($type =~ m/([a-zA-Z]+)( )*/g) {
         push(@types, $cardTypes{$1}); 
         if ($cardTypes{$1} eq $cardTypes{'Planeswalker'}) {
             $vars{'planeswalker'} = 'true';
+            $cardAbilities = $card[7];
+        } elsif ($cardTypes{$1} eq $cardTypes{'Battle'}) {
+            $vars{'battle'} = 'true';
             $cardAbilities = $card[7];
         }
     } else {

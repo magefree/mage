@@ -1,7 +1,5 @@
 package mage.cards.m;
 
-import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 
 import mage.abilities.Ability;
@@ -64,15 +62,12 @@ enum MirrexCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return Optional
-                .ofNullable(source.getSourcePermanentIfItStillExists(game))
-                .filter(Objects::nonNull)
-                .map(Permanent::getTurnsOnBattlefield)
-                .equals(0);
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        return permanent != null && permanent.getTurnsOnBattlefield() == 0;
     }
 
     @Override
     public String toString() {
-        return "if {this} entered the battlefield this turn";
+        return "{this} entered the battlefield this turn";
     }
 }

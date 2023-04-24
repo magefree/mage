@@ -17,6 +17,7 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetCardInHand;
 
@@ -44,7 +45,7 @@ public final class MagetaTheLion extends CardImpl {
         // {2}{W}{W}, {tap}, Discard two cards: Destroy all creatures except for Mageta the Lion. Those creatures can't be regenerated.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAllEffect(filter, true), new ManaCostsImpl<>("{2}{W}{W}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new DiscardTargetCost(new TargetCardInHand(2,2, new FilterCard("two cards"))));
+        ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS)));
         this.addAbility(ability);
     }
 

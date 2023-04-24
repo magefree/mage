@@ -85,7 +85,7 @@ public enum ScryfallImageSource implements CardImageSource {
                     alternativeUrl = link + defaultCode + "?format=image";
                     // workaround to use cards without english images (some promos or special cards)
                     if (Objects.equals(baseUrl, alternativeUrl) && baseUrl.endsWith("/en?format=image")) {
-                        alternativeUrl = alternativeUrl.replace("/en?format=image", "/?format=image");
+                        alternativeUrl = alternativeUrl.replace("/en?format=image", "?format=image");
                     }
                 } else {
                     // image
@@ -250,7 +250,11 @@ public enum ScryfallImageSource implements CardImageSource {
 
     private void updatePrepareStats(DownloadServiceInfo service, int need, int current) {
         synchronized (service.getSync()) {
-            service.updateProgressMessage(String.format("Preparing download list... %d of %d", current, need));
+            service.updateProgressMessage(
+                    String.format("Preparing download list... %d of %d", current, need),
+                    current,
+                    need
+            );
         }
     }
 

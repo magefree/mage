@@ -86,7 +86,7 @@ class AshiokNightmareMuseBounceEffect extends OneShotEffect {
             return true;
         }
         TargetCardInHand target = new TargetCardInHand();
-        if (!player.choose(outcome, player.getHand(), target, game)) {
+        if (!player.choose(outcome, player.getHand(), target, source, game)) {
             return false;
         }
         return player.moveCards(game.getCard(target.getFirstTarget()), Zone.EXILED, source, game);

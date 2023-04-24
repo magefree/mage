@@ -103,12 +103,12 @@ class KotoseTheSilentSpiderEffect extends OneShotEffect {
         filter.add(new NamePredicate(card.getName()));
 
         TargetCardInGraveyard targetCardInGraveyard = new TargetCardInGraveyard(0, Integer.MAX_VALUE, filter);
-        controller.choose(outcome, opponent.getGraveyard(), targetCardInGraveyard, game);
+        controller.choose(outcome, opponent.getGraveyard(), targetCardInGraveyard, source, game);
         cards.addAll(targetCardInGraveyard.getTargets());
 
         filter.setMessage("cards named " + card.getName() + " from " + opponent.getName() + "'s hand");
         TargetCardInHand targetCardInHand = new TargetCardInHand(0, Integer.MAX_VALUE, filter);
-        controller.choose(outcome, opponent.getHand(), targetCardInHand, game);
+        controller.choose(outcome, opponent.getHand(), targetCardInHand, source, game);
         cards.addAll(targetCardInHand.getTargets());
 
         filter.setMessage("cards named " + card.getName() + " from " + opponent.getName() + "'s library");
@@ -166,7 +166,7 @@ class KotoseTheSilentSpiderWatcher extends Watcher {
             morMap.values()
                     .stream()
                     .flatMap(Collection::stream)
-                    .map(set -> set.removeIf(mor -> !mor.zoneCounterIsCurrent(game)));
+                    .forEach(set -> set.removeIf(mor -> !mor.zoneCounterIsCurrent(game)));
             morMap.values().removeIf(Set::isEmpty);
             return;
         }

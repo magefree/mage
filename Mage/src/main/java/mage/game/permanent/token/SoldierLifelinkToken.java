@@ -22,7 +22,7 @@ public final class SoldierLifelinkToken extends TokenImpl {
         toughness = new MageInt(1);
         addAbility(LifelinkAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("GRN", "NCC");
+        availableImageSetCodes = Arrays.asList("GRN", "NCC", "MOM");
     }
 
     @Override

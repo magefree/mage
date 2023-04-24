@@ -24,19 +24,16 @@ import mage.util.RandomUtil;
 import mage.util.SubTypes;
 
 import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author spjspj
  */
 public class Plane implements CommandObject {
 
-    private static List<CardType> emptySet = new ArrayList<>();
-    private static ObjectColor emptyColor = new ObjectColor();
-    private static ManaCosts emptyCost = new ManaCostsImpl<>();
+    private static final List<CardType> emptyList = Collections.unmodifiableList(new ArrayList<>());
+    private static final ObjectColor emptyColor = new ObjectColor();
+    private static final ManaCosts emptyCost = new ManaCostsImpl<>();
 
     private Planes planeType = null;
     private UUID id;
@@ -158,7 +155,7 @@ public class Plane implements CommandObject {
 
     @Override
     public List<CardType> getCardType(Game game) {
-        return emptySet;
+        return emptyList;
     }
 
     @Override
@@ -236,6 +233,15 @@ public class Plane implements CommandObject {
     }
 
     @Override
+    public int getStartingDefense() {
+        return 0;
+    }
+
+    @Override
+    public void setStartingDefense(int startingDefense) {
+    }
+
+    @Override
     public UUID getId() {
         return this.id;
     }
@@ -245,12 +251,14 @@ public class Plane implements CommandObject {
         return new Plane(this);
     }
 
-    public void setExpansionSetCodeForImage(String expansionSetCodeForImage) {
-        this.expansionSetCodeForImage = expansionSetCodeForImage;
-    }
-
+    @Override
     public String getExpansionSetCodeForImage() {
         return expansionSetCodeForImage;
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String expansionSetCodeForImage) {
+        this.expansionSetCodeForImage = expansionSetCodeForImage;
     }
 
     @Override

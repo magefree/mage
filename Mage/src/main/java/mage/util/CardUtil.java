@@ -4,10 +4,7 @@ import com.google.common.collect.ImmutableList;
 import mage.ApprovingObject;
 import mage.MageObject;
 import mage.Mana;
-import mage.abilities.Abilities;
-import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.SpellAbility;
+import mage.abilities.*;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
@@ -32,11 +29,13 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.CardState;
 import mage.game.Game;
 import mage.game.GameState;
+import mage.game.command.CommandObject;
 import mage.game.command.Commander;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentMeld;
+import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -76,6 +75,9 @@ public final class CardUtil {
     private static final List<String> costWords = Arrays.asList(
             "put", "return", "exile", "discard", "sacrifice", "remove", "tap", "reveal", "pay"
     );
+
+    public static final int TESTS_SET_CODE_LOOKUP_LENGTH = 6; // search set code in commands like "set_code-card_name"
+    public static final String TESTS_SET_CODE_DELIMETER = "-"; // delimeter for cheats and tests command "set_code-card_name"
 
     /**
      * Increase spell or ability cost to be paid.
@@ -558,7 +560,7 @@ public final class CardUtil {
      */
     public static int parseCardNumberAsInt(String cardNumber) {
 
-        if (cardNumber.isEmpty()) {
+        if (cardNumber == null || cardNumber.isEmpty()) {
             throw new IllegalArgumentException("Card number is empty.");
         }
 
@@ -1230,7 +1232,8 @@ public final class CardUtil {
         void addCard(Card card, Ability source, Game game);
     }
 
-    private static List<Card> getCastableComponents(Card cardToCast, FilterCard filter, Ability source, UUID playerId, Game game, SpellCastTracker spellCastTracker) {
+    private static List<Card> getCastableComponents(Card cardToCast, FilterCard filter, Ability source, Player player, Game game, SpellCastTracker spellCastTracker, boolean playLand) {
+        UUID playerId = player.getId();
         List<Card> cards = new ArrayList<>();
         if (cardToCast instanceof CardWithHalves) {
             cards.add(((CardWithHalves) cardToCast).getLeftHalfCard());
@@ -1242,7 +1245,9 @@ public final class CardUtil {
             cards.add(cardToCast);
         }
         cards.removeIf(Objects::isNull);
-        cards.removeIf(card -> card.isLand(game));
+        if (!playLand || !player.canPlayLand() || !game.isActivePlayer(playerId)) {
+            cards.removeIf(card -> card.isLand(game));
+        }
         cards.removeIf(card -> !filter.match(card, playerId, source, game));
         if (spellCastTracker != null) {
             cards.removeIf(card -> !spellCastTracker.checkCard(card, game));
@@ -1261,9 +1266,13 @@ public final class CardUtil {
     }
 
     public static boolean castSpellWithAttributesForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter, SpellCastTracker spellCastTracker) {
+        return castSpellWithAttributesForFree(player, source, game, cards, filter, spellCastTracker, false);
+    }
+
+    public static boolean castSpellWithAttributesForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter, SpellCastTracker spellCastTracker, boolean playLand) {
         Map<UUID, List<Card>> cardMap = new HashMap<>();
         for (Card card : cards.getCards(game)) {
-            List<Card> castableComponents = getCastableComponents(card, filter, source, player.getId(), game, spellCastTracker);
+            List<Card> castableComponents = getCastableComponents(card, filter, source, player, game, spellCastTracker, playLand);
             if (!castableComponents.isEmpty()) {
                 cardMap.put(card.getId(), castableComponents);
             }
@@ -1279,7 +1288,7 @@ public final class CardUtil {
                 Cards castableCards = new CardsImpl(cardMap.keySet());
                 TargetCard target = new TargetCard(0, 1, Zone.ALL, defaultFilter);
                 target.setNotTarget(true);
-                player.choose(Outcome.PlayForFree, castableCards, target, game);
+                player.choose(Outcome.PlayForFree, castableCards, target, source, game);
                 cardToCast = castableCards.get(target.getFirstTarget(), game);
         }
         if (cardToCast == null) {
@@ -1298,10 +1307,22 @@ public final class CardUtil {
             return false;
         }
         partsToCast.forEach(card -> game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE));
-        boolean result = player.cast(
-                player.chooseAbilityForCast(cardToCast, game, true),
-                game, true, new ApprovingObject(source, game)
-        );
+        ActivatedAbility chosenAbility;
+        if (playLand) {
+            chosenAbility = player.chooseLandOrSpellAbility(cardToCast, game, true);
+        } else {
+            chosenAbility = player.chooseAbilityForCast(cardToCast, game, true);
+        }
+        boolean result = false;
+        if (chosenAbility instanceof SpellAbility) {
+            result = player.cast(
+                    (SpellAbility) chosenAbility,
+                    game, true, new ApprovingObject(source, game)
+            );
+        } else if (playLand && chosenAbility instanceof PlayLandAbility) {
+            Card land = game.getCard(chosenAbility.getSourceId());
+            result = player.playLand(land, game, true);
+        }
         partsToCast.forEach(card -> game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null));
         if (result && spellCastTracker != null) {
             spellCastTracker.addCard(cardToCast, source, game);
@@ -1312,11 +1333,11 @@ public final class CardUtil {
         return result;
     }
 
-    private static boolean checkForPlayable(Cards cards, FilterCard filter, Ability source, UUID playerId, Game game, SpellCastTracker spellCastTracker) {
+    private static boolean checkForPlayable(Cards cards, FilterCard filter, Ability source, Player player, Game game, SpellCastTracker spellCastTracker, boolean playLand) {
         return cards
                 .getCards(game)
                 .stream()
-                .anyMatch(card -> !getCastableComponents(card, filter, source, playerId, game, spellCastTracker).isEmpty());
+                .anyMatch(card -> !getCastableComponents(card, filter, source, player, game, spellCastTracker, playLand).isEmpty());
     }
 
     public static void castMultipleWithAttributeForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter) {
@@ -1328,6 +1349,10 @@ public final class CardUtil {
     }
 
     public static void castMultipleWithAttributeForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter, int maxSpells, SpellCastTracker spellCastTracker) {
+        castMultipleWithAttributeForFree(player, source, game, cards, filter, maxSpells, spellCastTracker, false);
+    }
+
+    public static void castMultipleWithAttributeForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter, int maxSpells, SpellCastTracker spellCastTracker, boolean playLand) {
         if (maxSpells == 1) {
             CardUtil.castSpellWithAttributesForFree(player, source, game, cards, filter);
             return;
@@ -1335,11 +1360,11 @@ public final class CardUtil {
         int spellsCast = 0;
         cards.removeZone(Zone.STACK, game);
         while (player.canRespond() && spellsCast < maxSpells && !cards.isEmpty()) {
-            if (CardUtil.castSpellWithAttributesForFree(player, source, game, cards, filter, spellCastTracker)) {
+            if (CardUtil.castSpellWithAttributesForFree(player, source, game, cards, filter, spellCastTracker, playLand)) {
                 spellsCast++;
                 cards.removeZone(Zone.STACK, game);
             } else if (!checkForPlayable(
-                    cards, filter, source, player.getId(), game, spellCastTracker
+                    cards, filter, source, player, game, spellCastTracker, playLand
             ) || !player.chooseUse(
                     Outcome.PlayForFree, "Continue casting spells?", source, game
             )) {
@@ -1723,14 +1748,90 @@ public final class CardUtil {
         return i == null ? 1 : Integer.sum(i, 1);
     }
 
-    public static String convertStartingLoyalty(int startingLoyalty) {
-        switch (startingLoyalty) {
+    public static String convertLoyaltyOrDefense(int value) {
+        switch (value) {
             case -2:
                 return "X";
             case -1:
                 return "";
             default:
-                return "" + startingLoyalty;
+                return "" + value;
+        }
+    }
+
+    public static int convertLoyaltyOrDefense(String value) {
+        switch (value) {
+            case "X":
+                return -2;
+            case "":
+                return -1;
+            default:
+                return Integer.parseInt(value);
+        }
+    }
+
+    public static void checkSetParamForSerializationCompatibility(Set<String> data) {
+        // HashMap uses inner class for Keys without serialization support,
+        // so you can't use it for client-server data
+        if (data != null && data.getClass().getName().endsWith("$KeySet")) {
+            throw new IllegalArgumentException("Can't use KeySet as param, use new LinkedHashSet<>(data.keySet()) instead");
+        }
+    }
+
+    /**
+     * Don't raise exception, so must be used instead standard substring calls all the time
+     *
+     * @param str
+     * @param maxLength
+     * @return
+     */
+    public static String substring(String str, int maxLength) {
+        if (str == null || str.isEmpty()) {
+            return str;
+        }
+        return str.substring(0, Math.min(str.length(), maxLength));
+    }
+
+
+    /**
+     * Copy image related data from one object to another (card number, set code, token type)
+     * Use it in copy/transform effects
+     */
+    public static void copySetAndCardNumber(Permanent permanent, MageObject copyFromObject) {
+        String needSetCode;
+        String needCardNumber;
+        int needTokenType;
+        if (copyFromObject instanceof CommandObject) {
+            needSetCode = ((CommandObject) copyFromObject).getExpansionSetCodeForImage();
+            needCardNumber = "0";
+            needTokenType = 0;
+        } else if (copyFromObject instanceof PermanentCard) {
+            needSetCode = ((PermanentCard) copyFromObject).getExpansionSetCode();
+            needCardNumber = ((PermanentCard) copyFromObject).getCardNumber();
+            needTokenType = 0;
+        } else if (copyFromObject instanceof PermanentToken) {
+            needSetCode = ((PermanentToken) copyFromObject).getToken().getOriginalExpansionSetCode();
+            needCardNumber = ((PermanentToken) copyFromObject).getToken().getOriginalCardNumber();
+            needTokenType = ((PermanentToken) copyFromObject).getToken().getTokenType();
+        } else if (copyFromObject instanceof Card) {
+            needSetCode = ((Card) copyFromObject).getExpansionSetCode();
+            needCardNumber = ((Card) copyFromObject).getCardNumber();
+            needTokenType = 0;
+        } else {
+            throw new IllegalStateException("Unsupported copyFromObject class: " + copyFromObject.getClass().getSimpleName());
+        }
+
+        copySetAndCardNumber(permanent, needSetCode, needCardNumber, needTokenType);
+    }
+
+    public static void copySetAndCardNumber(Permanent permanent, String newSetCode, String newCardNumber, Integer newTokenType) {
+        if (permanent instanceof PermanentToken) {
+            ((PermanentToken) permanent).getToken().setOriginalExpansionSetCode(newSetCode);
+            ((PermanentToken) permanent).getToken().setExpansionSetCodeForImage(newCardNumber);
+            ((PermanentToken) permanent).getToken().setTokenType(newTokenType);
+        } else {
+            permanent.setExpansionSetCode(newSetCode);
+            permanent.setCardNumber(newCardNumber);
         }
     }
 }

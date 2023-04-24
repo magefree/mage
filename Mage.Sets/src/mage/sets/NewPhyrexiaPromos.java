@@ -25,6 +25,6 @@ public class NewPhyrexiaPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Priest of Urabrask", 90, Rarity.UNCOMMON, mage.cards.p.PriestOfUrabrask.class));
         cards.add(new SetCardInfo("Pristine Talisman", 151, Rarity.COMMON, mage.cards.p.PristineTalisman.class));
         cards.add(new SetCardInfo("Sheoldred, Whispering One", "73*", Rarity.MYTHIC, mage.cards.s.SheoldredWhisperingOne.class));
-        cards.add(new SetCardInfo("Surgical Extraction", "*74", Rarity.RARE, mage.cards.s.SurgicalExtraction.class));
+        cards.add(new SetCardInfo("Surgical Extraction", "74*", Rarity.RARE, mage.cards.s.SurgicalExtraction.class));
     }
 }

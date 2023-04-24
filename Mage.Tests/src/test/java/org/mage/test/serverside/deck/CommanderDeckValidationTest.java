@@ -71,4 +71,28 @@ public class CommanderDeckValidationTest extends MageTestBase {
 
         deckTester.validate();
     }
+
+    @Test(expected = AssertionError.class)
+    public void testBackgrounds() {
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Forest", 98);
+
+        deckTester.addSideboard("Thrasios, Triton Hero", 1);
+        deckTester.addSideboard("Haunted One", 1);
+
+        deckTester.validate(
+                "Commanders without the 'Choose a Background' ability should not be able to have a background as an additional commander");
+    }
+
+    @Test()
+    public void testBackgrounds2() {
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Plains", 98);
+
+        deckTester.addSideboard("Abdel Adrian, Gorion's Ward", 1);
+        deckTester.addSideboard("Haunted One", 1);
+
+        deckTester.validate(
+                "Commanders with the 'Choose a Background' ability should be able to have a background as an additional commander");
+    }
 }

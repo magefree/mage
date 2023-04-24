@@ -1,5 +1,6 @@
 package mage.choices;
 
+import mage.util.CardUtil;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
@@ -111,6 +112,7 @@ public class ChoiceImpl implements Choice {
 
     @Override
     public void setChoices(Set<String> choices) {
+        CardUtil.checkSetParamForSerializationCompatibility(choices);
         this.choices = choices;
         protectFromEmptyChoices();
     }

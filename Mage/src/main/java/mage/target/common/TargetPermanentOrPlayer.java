@@ -219,10 +219,22 @@ public class TargetPermanentOrPlayer extends TargetImpl {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
                 sb.append(permanent.getLogName()).append(' ');
-            } else {
-                Player player = game.getPlayer(targetId);
-                sb.append(player.getLogName()).append(' ');
+                continue;
             }
+
+            Player player = game.getPlayer(targetId);
+            if (player != null) {
+                sb.append(player.getLogName()).append(' ');
+                continue;
+            }
+
+            MageObject object = game.getObject(targetId);
+            if (object != null) {
+                sb.append(object.getLogName()).append(' ');
+                continue;
+            }
+
+            sb.append("ERROR");
         }
         return sb.toString().trim();
     }

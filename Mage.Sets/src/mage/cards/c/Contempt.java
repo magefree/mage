@@ -1,6 +1,8 @@
 package mage.cards.c;
 
 import java.util.UUID;
+
+import mage.constants.AttachmentType;
 import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
@@ -40,7 +42,7 @@ public final class Contempt extends CardImpl {
         this.addAbility(ability);
 
         // Whenever enchanted creature attacks, return it and Contempt to their owners' hands at end of combat.
-        this.addAbility(new AttacksAttachedTriggeredAbility(new ContemptEffect()));
+        this.addAbility(new AttacksAttachedTriggeredAbility(new ContemptEffect(), AttachmentType.AURA, false));
 
     }
 
@@ -74,17 +76,16 @@ class ContemptEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent contempt = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (contempt != null) {
+            Effect effect = new ReturnToHandSourceEffect();
+            AtTheEndOfCombatDelayedTriggeredAbility ability = new AtTheEndOfCombatDelayedTriggeredAbility(effect);
             Permanent attachedToPermanent = game.getPermanent(contempt.getAttachedTo());
             if (attachedToPermanent != null) {
-                Effect effect = new ReturnToHandTargetEffect();
+                effect = new ReturnToHandTargetEffect();
                 effect.setTargetPointer(new FixedTarget(
                         attachedToPermanent.getId(), game)).setText("return "
                         + attachedToPermanent.getName() + " to owner's hand.");
-                AtTheEndOfCombatDelayedTriggeredAbility ability = new AtTheEndOfCombatDelayedTriggeredAbility(effect);
-                game.addDelayedTriggeredAbility(ability, source);
+                ability.addEffect(effect);
             }
-            Effect effect = new ReturnToHandSourceEffect();
-            AtTheEndOfCombatDelayedTriggeredAbility ability = new AtTheEndOfCombatDelayedTriggeredAbility(effect);
             game.addDelayedTriggeredAbility(ability, source);
             return true;
         }

@@ -7,6 +7,7 @@ import mage.abilities.keyword.ToxicAbility;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.util.RandomUtil;
 
 import java.util.Arrays;
 
@@ -28,6 +29,15 @@ public final class PhyrexianMiteToken extends TokenImpl {
         this.addAbility(new SimpleStaticAbility(new CantBlockSourceEffect(Duration.WhileOnBattlefield).setText("this creature can't block")));
 
         availableImageSetCodes = Arrays.asList("ONE");
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("ONE")) {
+            this.setTokenType(RandomUtil.nextInt(2) + 1);
+        }
     }
 
     public PhyrexianMiteToken(final PhyrexianMiteToken token) {

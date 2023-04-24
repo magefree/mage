@@ -74,8 +74,8 @@ class RuxaPatientProfessorEffect extends AsThoughEffectImpl {
 
     RuxaPatientProfessorEffect() {
         super(AsThoughEffectType.DAMAGE_NOT_BLOCKED, Duration.WhileOnBattlefield, Outcome.Damage);
-        this.staticText = "you may have creatures you control with no abilities " +
-                "assign their combat damage as though they weren't blocked";
+        this.staticText = "for each creature you control with no abilities, you may have " +
+                "that creature assign its combat damage as though it weren't blocked.";
     }
 
     private RuxaPatientProfessorEffect(RuxaPatientProfessorEffect effect) {

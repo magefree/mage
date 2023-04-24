@@ -76,7 +76,7 @@ class CreepingDreadEffect extends OneShotEffect {
             if(!controller.getHand().isEmpty()) {      
                 
                 TargetCard controllerTarget = new TargetCard(Zone.HAND, new FilterCard());
-                if(controller.choose(Outcome.Discard, controller.getHand(), controllerTarget, game)) {
+                if(controller.choose(Outcome.Discard, controller.getHand(), controllerTarget, source, game)) {
                     Card card = controller.getHand().get(controllerTarget.getFirstTarget(), game);
                     if (card != null) {
                         typesChosen = new HashSet<>(card.getCardType(game));
@@ -91,7 +91,7 @@ class CreepingDreadEffect extends OneShotEffect {
                 // opponent discards a card - if it is same card type as controller, add to opponentsAffected
                 if(opponent != null && !opponent.getHand().isEmpty()) {
                     TargetCard target = new TargetCard(Zone.HAND, new FilterCard());
-                    if(opponent.choose(Outcome.Discard, opponent.getHand(), target, game)) {
+                    if(opponent.choose(Outcome.Discard, opponent.getHand(), target, source, game)) {
                         Card card = opponent.getHand().get(target.getFirstTarget(), game);
                         if (card != null) {                            
                             if (!typesChosen.isEmpty()) {

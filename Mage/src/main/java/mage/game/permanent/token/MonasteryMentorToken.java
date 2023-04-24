@@ -23,7 +23,7 @@ public final class MonasteryMentorToken extends TokenImpl {
         toughness = new MageInt(1);
         this.addAbility(new ProwessAbility());
 
-        availableImageSetCodes = Arrays.asList("FRF", "2X2");
+        availableImageSetCodes = Arrays.asList("FRF", "2X2", "MOM");
     }
 
     public MonasteryMentorToken(final MonasteryMentorToken token) {

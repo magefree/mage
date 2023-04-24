@@ -2,7 +2,9 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.abilities.effects.common.ClashWinReturnToHandSpellEffect;
+
+import mage.abilities.effects.common.DoIfClashWonEffect;
+import mage.abilities.effects.common.ReturnToHandSpellEffect;
 import mage.abilities.effects.common.RevealCardsFromLibraryUntilEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,7 +25,7 @@ public final class RecrossThePaths extends CardImpl {
         this.getSpellAbility().addEffect(new RevealCardsFromLibraryUntilEffect(new FilterLandCard(), Zone.BATTLEFIELD, Zone.LIBRARY, false, true));
 
         // Clash with an opponent. If you win, return Recross the Paths to its owner's hand.
-        this.getSpellAbility().addEffect(ClashWinReturnToHandSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new DoIfClashWonEffect(ReturnToHandSpellEffect.getInstance()));
     }
 
     private RecrossThePaths(final RecrossThePaths card) {

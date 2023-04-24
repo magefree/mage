@@ -83,7 +83,7 @@ class ChromeCourierEffect extends OneShotEffect {
             default:
                 TargetCard target = new TargetCardInLibrary();
                 target.withChooseHint("to hand");
-                player.choose(outcome, cards, target, game);
+                player.choose(outcome, cards, target, source, game);
                 card = cards.get(target.getFirstTarget(), game);
         }
         player.moveCards(card, Zone.HAND, source, game);

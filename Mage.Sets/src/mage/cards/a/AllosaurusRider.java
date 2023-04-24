@@ -28,7 +28,7 @@ import mage.target.common.TargetCardInHand;
  */
 public final class AllosaurusRider extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("two green cards");
+    private static final FilterCard filter = new FilterCard("green cards");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.GREEN));

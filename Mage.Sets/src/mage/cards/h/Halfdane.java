@@ -95,7 +95,7 @@ class HalfdaneSetBasePowerToughnessEffect extends SetBasePowerToughnessSourceEff
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        if (super.isInactive(source, game) && game.getStep().getType().isAfter(PhaseStep.UPKEEP)) {
+        if (super.isInactive(source, game) && game.getTurnStepType().isAfter(PhaseStep.UPKEEP)) {
             return true;
         }
         return false;
