@@ -828,7 +828,6 @@
 |Generate|TOK:ODY|Bear|||BearToken|
 |Generate|TOK:ODY|Beast|||BeastToken2|
 |Generate|TOK:ODY|Elephant|||ElephantToken|
-|Generate|TOK:ODY|Spirit|||SpiritWhiteToken|
 |Generate|TOK:ODY|Squirrel|||SquirrelToken|
 |Generate|TOK:ODY|Wurm|||WurmToken|
 |Generate|TOK:ODY|Zombie|||ZombieToken|

@@ -1986,6 +1986,14 @@ public class ScryfallImageSupportTokens {
             put("MOC/Warrior", "https://api.scryfall.com/cards/tmoc/10/en?format=image");
             put("MOC/Zombie Knight", "https://api.scryfall.com/cards/tmoc/21/en?format=image");
 
+            // ODY
+            put("ODY/Bear", "https://api.scryfall.com/cards/mpr/7/en?format=image");
+            put("ODY/Beast", "https://api.scryfall.com/cards/mpr/8/en?format=image");
+            put("ODY/Elephant", "https://api.scryfall.com/cards/pr2/5/en?format=image");
+            put("ODY/Squirrel", "https://api.scryfall.com/cards/pr2/3/en?format=image");
+            put("ODY/Wurm", "https://api.scryfall.com/cards/pr2/6/en?format=image");
+            put("ODY/Zombie", "https://api.scryfall.com/cards/pr2/4/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
