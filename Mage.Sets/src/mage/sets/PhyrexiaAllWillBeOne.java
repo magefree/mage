@@ -56,6 +56,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Bring the Ending", 44, Rarity.COMMON, mage.cards.b.BringTheEnding.class));
         cards.add(new SetCardInfo("Cacophony Scamp", 124, Rarity.UNCOMMON, mage.cards.c.CacophonyScamp.class));
         cards.add(new SetCardInfo("Cankerbloom", 161, Rarity.UNCOMMON, mage.cards.c.Cankerbloom.class));
+        cards.add(new SetCardInfo("Carnivorous Canopy", 162, Rarity.COMMON, mage.cards.c.CarnivorousCanopy.class));
         cards.add(new SetCardInfo("Capricious Hellraiser", 125, Rarity.MYTHIC, mage.cards.c.CapriciousHellraiser.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Capricious Hellraiser", 310, Rarity.MYTHIC, mage.cards.c.CapriciousHellraiser.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Capricious Hellraiser", 353, Rarity.MYTHIC, mage.cards.c.CapriciousHellraiser.class, NON_FULL_USE_VARIOUS));
