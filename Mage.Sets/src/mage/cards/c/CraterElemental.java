@@ -41,7 +41,7 @@ public final class CraterElemental extends CardImpl {
         // <i>Formidable</i> &mdash; {2}{R}: Crater Elemental has base power 8 until end of turn. Activate this ability only if creatures you control have total power 8 or greater.
         ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
-                new SetBasePowerToughnessSourceEffect(StaticValue.get(8), null, Duration.EndOfTurn, SubLayer.SetPT_7b,true)
+                new SetBasePowerToughnessSourceEffect(StaticValue.get(8), null, Duration.EndOfTurn, SubLayer.SetPT_7b)
                         .setText("{this} has base power 8 until end of turn"),
                 new ManaCostsImpl<>("{2}{R}"),
                 FormidableCondition.instance

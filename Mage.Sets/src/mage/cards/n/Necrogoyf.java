@@ -32,7 +32,7 @@ public final class Necrogoyf extends CardImpl {
 
         // Necrogoyf's power is equal to the number of creature cards in all graveyards.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetBasePowerSourceEffect(xValue, Duration.EndOfGame)
+                Zone.ALL, new SetBasePowerSourceEffect(xValue)
         ));
 
         // At the beginning of each player's upkeep, that player discards a card.

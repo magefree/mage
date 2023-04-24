@@ -88,7 +88,7 @@ class ArniBrokenbrowEffect extends OneShotEffect {
         if (controller.chooseUse(outcome, "Change base power of " + mageObject.getLogName() + " to "
                 + power + " until end of turn?", source, game
         )) {
-            game.addEffect(new SetBasePowerToughnessSourceEffect(StaticValue.get(power), null, Duration.EndOfTurn, SubLayer.SetPT_7b, true), source);
+            game.addEffect(new SetBasePowerToughnessSourceEffect(StaticValue.get(power), null, Duration.EndOfTurn, SubLayer.SetPT_7b), source);
             return true;
         }
         return false;
