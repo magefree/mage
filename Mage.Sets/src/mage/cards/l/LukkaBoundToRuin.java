@@ -49,7 +49,11 @@ public class LukkaBoundToRuin extends CardImpl {
         // −4: Lukka deals X damage divided as you choose among any number of target creatures and/or planeswalkers,
         // where X is the greatest power among creatures you controlled as you activated this ability.
         DynamicValue xValue = GreatestPowerAmongControlledCreaturesValue.instance;
-        ability = new LoyaltyAbility(new LukkaBoundToRuinDamageEffect(xValue), -4);
+        DamageMultiEffect damageMultiEffect = new DamageMultiEffect(xValue);
+        damageMultiEffect.setText("Lukka deals X damage divided as you choose" +
+                " among any number of target creatures and/or planeswalkers," +
+                "where X is the greatest power among creatures you controlled as you activated this ability.");
+        ability = new LoyaltyAbility(damageMultiEffect, -4);
         ability.setTargetAdjuster(LukkaBoundToRuinAdjuster.instance);
         this.addAbility(ability);
     }
@@ -113,29 +117,6 @@ enum LukkaBoundToRuinManaCondition implements Condition {
     }
 }
 
-class LukkaBoundToRuinDamageEffect extends DamageMultiEffect {
-
-    LukkaBoundToRuinDamageEffect(DynamicValue xValue) {
-        super(xValue);
-        staticText = "Lukka deals X damage divided as you choose" +
-                " among any number of target creatures and/or planeswalkers," +
-                "where X is the greatest power among creatures you controlled as you activated this ability.";
-    }
-
-    private LukkaBoundToRuinDamageEffect(final LukkaBoundToRuinDamageEffect effect) {
-        super(effect);
-    }
-
-    public DynamicValue getDamage() {
-        return amount;
-    }
-
-    @Override
-    public LukkaBoundToRuinDamageEffect copy() {
-        return new LukkaBoundToRuinDamageEffect(this);
-    }
-}
-
 /**
  * Gatherer Rulings:
  * 04.02.2023
@@ -149,8 +130,7 @@ enum LukkaBoundToRuinAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         // Maximum targets is equal to the damage - as each target need to be assigned at least 1 damage
         ability.getTargets().clear();
-        LukkaBoundToRuinDamageEffect effect = (LukkaBoundToRuinDamageEffect) ability.getEffects().get(0);
-        int xValue = effect.getDamage().calculate(game,ability,effect);
+        int xValue = GreatestPowerAmongControlledCreaturesValue.instance.calculate(game,ability,null);
         TargetCreatureOrPlaneswalkerAmount targetCreatureOrPlaneswalkerAmount = new TargetCreatureOrPlaneswalkerAmount(xValue);
         targetCreatureOrPlaneswalkerAmount.setMinNumberOfTargets(0);
         targetCreatureOrPlaneswalkerAmount.setMaxNumberOfTargets(xValue);
