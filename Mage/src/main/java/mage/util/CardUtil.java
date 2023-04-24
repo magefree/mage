@@ -1706,7 +1706,7 @@ public final class CardUtil {
     }
 
     public static <T> Stream<T> castStream(Stream<?> stream, Class<T> clazz) {
-        return stream.filter(clazz::isInstance).map(clazz::cast);
+        return stream.filter(clazz::isInstance).map(clazz::cast).filter(Objects::nonNull);
     }
 
     /**
