@@ -198,6 +198,8 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Ravenous Necrotitan", 106, Rarity.UNCOMMON, mage.cards.r.RavenousNecrotitan.class));
         cards.add(new SetCardInfo("Razorverge Thicket", 257, Rarity.RARE, mage.cards.r.RazorvergeThicket.class));
         cards.add(new SetCardInfo("Rebel Salvo", 144, Rarity.UNCOMMON, mage.cards.r.RebelSalvo.class));
+        cards.add(new SetCardInfo("Red Sun's Twilight", 145, Rarity.RARE, mage.cards.r.RedSunsTwilight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Red Sun's Twilight", 386, Rarity.RARE, mage.cards.r.RedSunsTwilight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reject Imperfection", 67, Rarity.UNCOMMON, mage.cards.r.RejectImperfection.class));
         cards.add(new SetCardInfo("Resistance Reunited", 31, Rarity.UNCOMMON, mage.cards.r.ResistanceReunited.class));
         cards.add(new SetCardInfo("Resistance Skywarden", 146, Rarity.UNCOMMON, mage.cards.r.ResistanceSkywarden.class));
