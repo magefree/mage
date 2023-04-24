@@ -58,7 +58,7 @@ class FatespinnerChooseEffect extends OneShotEffect {
 
     public FatespinnerChooseEffect() {
         super(Outcome.Detriment);
-        staticText = "At the beginning of each opponent's upkeep, that player chooses draw step, main phase, or combat phase. The player skips each instance of the chosen step or phase this turn.";
+        staticText = "that player chooses draw step, main phase, or combat phase. The player skips each instance of the chosen step or phase this turn.";
     }
 
     public FatespinnerChooseEffect(final FatespinnerChooseEffect effect) {

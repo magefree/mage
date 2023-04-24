@@ -2,7 +2,7 @@ package mage.cards.[=$cardNameFirstLetter=];
 
 import java.util.UUID;[=
 if ($power || $power eq 0) {
-    if ($planeswalker eq 'true') {
+    if ($planeswalker eq 'true' || $battle eq 'true') {
     }else {
         $OUT .= "\nimport mage.MageInt;"
     }
@@ -30,6 +30,8 @@ public final class [=$className=] extends CardImpl {
 if ($power || $power eq 0) {
     if ($planeswalker eq 'true') {
         $OUT .= "\n        this.setStartingLoyalty($power);";
+    } elsif ($battle eq 'true') {
+        $OUT .= "\n        this.setStartingDefense($power);";
     } else {
         $OUT .= "\n        this.power = new MageInt($power);";
         $OUT .= "\n        this.toughness = new MageInt($toughness);";

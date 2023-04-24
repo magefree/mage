@@ -12,7 +12,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
@@ -34,7 +33,7 @@ public final class ConsumingAberration extends CardImpl {
         this.toughness = new MageInt(0);
 
         //Consuming Aberration's power and toughness are each equal to the number of cards in your opponents' graveyards.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new CardsInOpponentsGraveyardsCount(), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new CardsInOpponentsGraveyardsCount())));
         //Whenever you cast a spell, each opponent reveals cards from the top of their library until they reveal a land card, then puts those cards into their graveyard.
         this.addAbility(new SpellCastControllerTriggeredAbility(new ConsumingAberrationEffect(), false));
     }
@@ -94,10 +93,6 @@ class CardsInOpponentsGraveyardsCount implements DynamicValue {
         super();
     }
 
-    public CardsInOpponentsGraveyardsCount(DynamicValue count) {
-        super();
-    }
-
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int amount = 0;
@@ -112,7 +107,7 @@ class CardsInOpponentsGraveyardsCount implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return new CardsInOpponentsGraveyardsCount(this);
+        return this;
     }
 
     @Override

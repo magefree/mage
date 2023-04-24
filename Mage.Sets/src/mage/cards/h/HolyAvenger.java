@@ -84,7 +84,7 @@ class HolyAvengerEffect extends OneShotEffect {
         filter.add(SubType.AURA.getPredicate());
         filter.add(new AuraCardCanAttachToPermanentId(permanent.getId()));
         TargetCardInHand target = new TargetCardInHand(0, 1, filter);
-        player.choose(Outcome.PutCardInPlay, player.getHand(), target, game);
+        player.choose(Outcome.PutCardInPlay, player.getHand(), target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return false;

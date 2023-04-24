@@ -56,7 +56,7 @@ public final class TitaniaGaeaIncarnate extends MeldCard {
 
         // Titania, Gaea Incarnate's power and toughness are each equal to the number of lands you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetBasePowerToughnessSourceEffect(LandsYouControlCount.instance, Duration.EndOfGame)
+                Zone.ALL, new SetBasePowerToughnessSourceEffect(LandsYouControlCount.instance)
         ));
 
         // When Titania, Gaea Incarnate enters the battlefield, return all land cards from your graveyard to the battlefield tapped.

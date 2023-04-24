@@ -19,7 +19,7 @@ public final class TentacleToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("THB", "NCC");
+        availableImageSetCodes = Arrays.asList("THB", "NCC", "MOC");
     }
 
     private TentacleToken(final TentacleToken token) {

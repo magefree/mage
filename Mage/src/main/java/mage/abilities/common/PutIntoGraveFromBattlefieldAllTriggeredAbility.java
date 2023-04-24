@@ -11,7 +11,6 @@ import mage.game.events.ZoneChangeEvent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author LevelX2
  */
 public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
@@ -49,20 +48,15 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.isDiesEvent()) {
-            if (filter.match(zEvent.getTarget(), this.getControllerId(), this, game)) {
-                if (onlyToControllerGraveyard && !this.isControlledBy(game.getOwnerId(zEvent.getTargetId()))) {
-                    return false;
-                }
-                if (setTargetPointer) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getTargetId(), game.getObject(event.getTargetId()).getZoneChangeCounter(game)));
-                    }
-                }
-                return true;
-            }
+        if (!zEvent.isDiesEvent() || !filter.match(zEvent.getTarget(), this.getControllerId(), this, game)
+                || onlyToControllerGraveyard && !this.isControlledBy(game.getOwnerId(zEvent.getTargetId()))) {
+            return false;
         }
-        return false;
+        this.getEffects().setValue("permanentDied", zEvent.getTarget());
+        if (setTargetPointer) {
+            this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game.getObject(event.getTargetId()).getZoneChangeCounter(game)));
+        }
+        return true;
     }
 
     @Override

@@ -19,7 +19,7 @@ public final class SkeletonToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("AFR");
+        availableImageSetCodes = Arrays.asList("AFR", "30A");
     }
 
     public SkeletonToken(final SkeletonToken token) {

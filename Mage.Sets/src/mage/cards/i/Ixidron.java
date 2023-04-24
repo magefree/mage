@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -46,7 +45,7 @@ public final class Ixidron extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new BecomesFaceDownCreatureAllEffect(filterTurnFaceDown)));
 
         // Ixidron's power and toughness are each equal to the number of face-down creatures on the battlefield.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter))));
     }
 
     private Ixidron(final Ixidron card) {

@@ -78,7 +78,7 @@ class BalshanBeguilerEffect extends OneShotEffect {
         }
         player.revealCards(source, cards, game);
         TargetCard target = new TargetCardInLibrary();
-        if (you.choose(Outcome.Benefit, cards, target, game)) {
+        if (you.choose(Outcome.Benefit, cards, target, source, game)) {
             Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
             you.moveCards(card, Zone.GRAVEYARD, source, game);
         }

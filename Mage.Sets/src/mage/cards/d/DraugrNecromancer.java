@@ -193,7 +193,7 @@ class DraugrNecromancerSpendAnyManaEffect extends AsThoughEffectImpl implements 
 
     @Override
     public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
-        if (mana.getSourceObject().isSnow()) {
+        if (mana.getSourceObject() != null && mana.getSourceObject().isSnow()) {
             return mana.getFirstAvailable();
         }
         return null;

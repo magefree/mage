@@ -38,6 +38,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.filter.predicate.permanent.LegendRuleAppliesPredicate;
 import mage.game.combat.Combat;
+import mage.game.combat.CombatGroup;
 import mage.game.command.*;
 import mage.game.command.dungeons.UndercityDungeon;
 import mage.game.events.*;
@@ -48,6 +49,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
 import mage.game.stack.SpellStack;
+import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.game.turn.Phase;
 import mage.game.turn.Step;
@@ -675,8 +677,8 @@ public abstract class GameImpl implements Game {
                 spell = (Spell) obj;
             } else if (obj != null) {
                 logger.error(String.format(
-                        "getSpellOrLKIStack got non-spell id %s correlating to non-spell object %s.",
-                        obj.getClass().getName(), obj.getName()),
+                                "getSpellOrLKIStack got non-spell id %s correlating to non-spell object %s.",
+                                obj.getClass().getName(), obj.getName()),
                         new Throwable()
                 );
             }
@@ -1398,6 +1400,27 @@ public abstract class GameImpl implements Game {
             logger.debug("END of gameId: " + this.getId());
             endTime = new Date();
             state.endGame();
+
+            // inform players about face down cards
+            state.getBattlefield().getAllPermanents()
+                    .stream()
+                    .filter(permanent -> permanent.isFaceDown(this))
+                    .map(permanent -> {
+                        Player player = this.getPlayer(permanent.getControllerId());
+                        Card card = permanent.getMainCard();
+                        if (card != null) {
+                            return String.format("Face down card reveal: %s had %s",
+                                    (player == null ? "Unknown" : player.getLogName()),
+                                    card.getLogName());
+                        } else {
+                            return null;
+                        }
+                    })
+                    .filter(Objects::nonNull)
+                    .sorted()
+                    .forEach(this::informPlayers);
+
+            // cancel all player dialogs/feedbacks
             for (Player player : state.getPlayers().values()) {
                 player.abort();
             }
@@ -2477,6 +2500,42 @@ public abstract class GameImpl implements Game {
                     somethingHappened = true;
                 }
             }
+
+            if (perm.isBattle(this)) {
+                if (perm
+                        .getCounters(this)
+                        .getCount(CounterType.DEFENSE) == 0
+                        && this.getStack()
+                        .stream()
+                        .filter(StackAbility.class::isInstance)
+                        .filter(stackObject -> stackObject.getStackAbility() instanceof TriggeredAbilityImpl)
+                        .map(StackObject::getSourceId)
+                        .noneMatch(perm.getId()::equals)
+                        && this.state
+                        .getTriggered(perm.getControllerId())
+                        .stream()
+                        .filter(TriggeredAbility.class::isInstance)
+                        .map(Ability::getSourceId)
+                        .noneMatch(perm.getId()::equals)) {
+                    if (movePermanentToGraveyardWithInfo(perm)) {
+                        somethingHappened = true;
+                    }
+                } else if (this
+                        .getCombat()
+                        .getGroups()
+                        .stream()
+                        .map(CombatGroup::getDefenderId)
+                        .noneMatch(perm.getId()::equals)
+                        && this.getPlayer(perm.getProtectorId()) == null
+                        || perm.isControlledBy(perm.getProtectorId())) {
+                    perm.chooseProtector(this, null);
+                    if (this.getPlayer(perm.getProtectorId()) == null) {
+                        movePermanentToGraveyardWithInfo(perm);
+                    }
+                    somethingHappened = true;
+                }
+            }
+
             if (perm.isLegendary() && perm.legendRuleApplies()) {
                 legendary.add(perm);
             }
@@ -2517,21 +2576,24 @@ public abstract class GameImpl implements Game {
                     }
                 }
             }
-            //20091005 - 704.5q If a creature is attached to an object or player, it becomes unattached and remains on the battlefield.
+            //20091005 - 704.5q If a creature or battle is attached to an object or player, it becomes unattached and remains on the battlefield.
             // Similarly, if a permanent that's neither an Aura, an Equipment, nor a Fortification is attached to an object or player,
             // it becomes unattached and remains on the battlefield.
             if (!perm.getAttachments().isEmpty()) {
                 for (UUID attachmentId : perm.getAttachments()) {
                     Permanent attachment = getPermanent(attachmentId);
-                    if (attachment != null
-                            && (attachment.isCreature(this)
-                            || !(attachment.hasSubtype(SubType.AURA, this)
+                    if (attachment == null) {
+                        continue;
+                    }
+                    if ((!attachment.isCreature(this) && !attachment.isBattle(this))
+                            && (attachment.hasSubtype(SubType.AURA, this)
                             || attachment.hasSubtype(SubType.EQUIPMENT, this)
-                            || attachment.hasSubtype(SubType.FORTIFICATION, this)))) {
-                        if (perm.removeAttachment(attachment.getId(), null, this)) {
-                            somethingHappened = true;
-                            break;
-                        }
+                            || attachment.hasSubtype(SubType.FORTIFICATION, this))) {
+                        continue;
+                    }
+                    if (perm.removeAttachment(attachment.getId(), null, this)) {
+                        somethingHappened = true;
+                        break;
                     }
                 }
             }

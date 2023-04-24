@@ -87,7 +87,10 @@ public final class SystemUtil {
 
     private static final Pattern patternGroup = Pattern.compile("\\[(.+)\\]"); // [test new card]
     private static final Pattern patternCommand = Pattern.compile("([\\w]+):([\\S ]+?):([\\S ]+):([\\d]+)"); // battlefield:Human:Island:10
-    private static final Pattern patternCardInfo = Pattern.compile("([\\S ]+):([\\S ]+)"); // Island:XLN
+    private static final Pattern patternCardInfo = Pattern.compile("(^[\\dA-Z]{2,7})@([\\S ]+)" // XLN-Island
+            .replace("7", String.valueOf(CardUtil.TESTS_SET_CODE_LOOKUP_LENGTH))
+            .replace("@", CardUtil.TESTS_SET_CODE_DELIMETER)
+    );
 
     // show ext info for special commands
     private static final String PARAM_COLOR_COST = "color cost";
@@ -220,17 +223,10 @@ public final class SystemUtil {
         }
 
         // card name can be with set
-        String cardInfo = matchCommand.group(3);
-        Matcher matchInfo = patternCardInfo.matcher(cardInfo);
-        if (matchInfo.matches()) {
-            // name with set
-            com.cardName = matchInfo.group(1);
-            com.cardSet = matchInfo.group(2);
-        } else {
-            // name only
-            com.cardName = cardInfo;
-            com.cardSet = "";
-        }
+        // example: XLN-Island
+        List<String> cardInfo = parseSetAndCardNameCommand(matchCommand.group(3));
+        com.cardSet = cardInfo.get(0);
+        com.cardName = cardInfo.get(1);
 
         if (com.cardName.isEmpty()) {
             com.Error = "Card name is empty";
@@ -728,5 +724,23 @@ public final class SystemUtil {
     public static long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
         long diffInMillies = date2.getTime() - date1.getTime();
         return timeUnit.convert(diffInMillies, TimeUnit.MILLISECONDS);
+    }
+
+    /**
+     * Parse set code and card name from command line
+     *
+     * @param info format example: XLN-Mountain (set code must be upper case)
+     * @return
+     */
+    public static List<String> parseSetAndCardNameCommand(String info) {
+        Matcher matchInfo = patternCardInfo.matcher(info);
+        String cardSet = "";
+        String cardName = info;
+        if (matchInfo.matches()) {
+            // set with card
+            cardSet = matchInfo.group(1);
+            cardName = matchInfo.group(2);
+        }
+        return Arrays.asList(cardSet, cardName);
     }
 }

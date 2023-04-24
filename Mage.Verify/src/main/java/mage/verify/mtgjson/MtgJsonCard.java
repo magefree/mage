@@ -25,6 +25,7 @@ public final class MtgJsonCard {
     public String text; // rules splits by \n
 
     public String loyalty;
+    public String defense;
     public String power;
     public String toughness;
 

@@ -1,7 +1,6 @@
 
 package mage.abilities.effects.common.counter;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.Mode;
@@ -14,8 +13,9 @@ import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LoneFox
  */
 public class DistributeCountersEffect extends OneShotEffect {
@@ -24,6 +24,10 @@ public class DistributeCountersEffect extends OneShotEffect {
     private final int amount;
     private final boolean removeAtEndOfTurn;
     private final String targetDescription;
+
+    public DistributeCountersEffect(CounterType counterType, int amount, String targetDescription) {
+        this(counterType, amount, false, targetDescription);
+    }
 
     public DistributeCountersEffect(CounterType counterType, int amount, boolean removeAtEndOfTurn, String targetDescription) {
         super(Outcome.BoostCreature);

@@ -32,6 +32,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Aftershock", 129, Rarity.COMMON, mage.cards.a.Aftershock.class));
         cards.add(new SetCardInfo("Ajani's Pridemate", 142, Rarity.UNCOMMON, mage.cards.a.AjanisPridemate.class));
         cards.add(new SetCardInfo("Ajani, Strength of the Pride", 141, Rarity.MYTHIC, mage.cards.a.AjaniStrengthOfThePride.class));
+        cards.add(new SetCardInfo("Alandra, Sky Dreamer", 9, Rarity.RARE, mage.cards.a.AlandraSkyDreamer.class));
         cards.add(new SetCardInfo("Alchemist's Vial", 753, Rarity.COMMON, mage.cards.a.AlchemistsVial.class));
         cards.add(new SetCardInfo("Alley Strangler", 375, Rarity.COMMON, mage.cards.a.AlleyStrangler.class));
         cards.add(new SetCardInfo("Alseid of Life's Bounty", 143, Rarity.UNCOMMON, mage.cards.a.AlseidOfLifesBounty.class));
@@ -102,6 +103,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Bone Picker", 383, Rarity.UNCOMMON, mage.cards.b.BonePicker.class));
         cards.add(new SetCardInfo("Borderland Marauder", 505, Rarity.COMMON, mage.cards.b.BorderlandMarauder.class));
         cards.add(new SetCardInfo("Bounding Wolf", 633, Rarity.COMMON, mage.cards.b.BoundingWolf.class));
+        cards.add(new SetCardInfo("Brazen Cannonade", 31, Rarity.RARE, mage.cards.b.BrazenCannonade.class));
         cards.add(new SetCardInfo("Brazen Freebooter", 506, Rarity.COMMON, mage.cards.b.BrazenFreebooter.class));
         cards.add(new SetCardInfo("Brazen Wolves", 507, Rarity.COMMON, mage.cards.b.BrazenWolves.class));
         cards.add(new SetCardInfo("Briarpack Alpha", 634, Rarity.UNCOMMON, mage.cards.b.BriarpackAlpha.class));

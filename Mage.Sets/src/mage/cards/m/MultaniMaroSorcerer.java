@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 
@@ -33,7 +32,7 @@ public final class MultaniMaroSorcerer extends CardImpl {
         this.addAbility(ShroudAbility.getInstance());
         
         // Multani, Maro-Sorcerer's power and toughness are each equal to the total number of cards in all players' hands.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(CardsInAllHandsCount.instance, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(CardsInAllHandsCount.instance)));
     }
 
     private MultaniMaroSorcerer(final MultaniMaroSorcerer card) {

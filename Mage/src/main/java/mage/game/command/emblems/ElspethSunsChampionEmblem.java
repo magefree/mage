@@ -10,6 +10,8 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.command.Emblem;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -19,7 +21,8 @@ public final class ElspethSunsChampionEmblem extends Emblem {
     // -7: You get an emblem with "Creatures you control get +2/+2 and have flying."
     public ElspethSunsChampionEmblem() {
         this.setName("Emblem Elspeth");
-        this.setExpansionSetCodeForImage("THS");
+        availableImageSetCodes = Arrays.asList("THS", "MOC");
+
         Ability ability = new SimpleStaticAbility(
                 Zone.COMMAND,
                 new BoostControlledEffect(

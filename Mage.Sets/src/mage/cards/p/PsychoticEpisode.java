@@ -71,7 +71,7 @@ class PsychoticEpisodeEffect extends OneShotEffect {
             Card topdeck = player.getLibrary().getFromTop(game);
             options.add(topdeck);
             controller.lookAtCards("Top of Library (Psychotic Episode)", topdeck, game);
-            if (controller.choose(Outcome.Discard, options, targetCard, game)) {
+            if (controller.choose(Outcome.Discard, options, targetCard, source, game)) {
                 Card card = game.getCard(targetCard.getFirstTarget());
                 if (card != null) {
                     CardsImpl cards = new CardsImpl();

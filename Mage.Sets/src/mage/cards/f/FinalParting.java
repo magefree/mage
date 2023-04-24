@@ -70,7 +70,7 @@ class FinalPartingEffect extends OneShotEffect {
                     }
                     if (target.getTargets().size() == 2) {
                         TargetCard target2 = new TargetCard(Zone.LIBRARY, filter);
-                        controller.choose(Outcome.Benefit, searched, target2, game);
+                        controller.choose(Outcome.Benefit, searched, target2, source, game);
                         Card card = searched.get(target2.getFirstTarget(), game);
                         controller.moveCards(card, Zone.HAND, source, game);
                         searched.remove(card);

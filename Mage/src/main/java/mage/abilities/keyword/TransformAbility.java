@@ -10,6 +10,7 @@ import mage.game.Game;
 import mage.game.MageObjectAttribute;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+import mage.util.CardUtil;
 
 /**
  * @author nantuko
@@ -57,7 +58,9 @@ public class TransformAbility extends SimpleStaticAbility {
         for (SuperType type : sourceCard.getSuperType()) {
             permanent.addSuperType(type);
         }
-        permanent.setExpansionSetCode(sourceCard.getExpansionSetCode());
+
+        CardUtil.copySetAndCardNumber(permanent, sourceCard);
+
         permanent.getAbilities().clear();
         for (Ability ability : sourceCard.getAbilities()) {
             // source == null -- call from init card (e.g. own abilities)
@@ -67,6 +70,7 @@ public class TransformAbility extends SimpleStaticAbility {
         permanent.getPower().setModifiedBaseValue(sourceCard.getPower().getValue());
         permanent.getToughness().setModifiedBaseValue(sourceCard.getToughness().getValue());
         permanent.setStartingLoyalty(sourceCard.getStartingLoyalty());
+        permanent.setStartingDefense(sourceCard.getStartingDefense());
     }
 
     public static Card transformCardSpellStatic(Card mainSide, Card otherSide, Game game) {

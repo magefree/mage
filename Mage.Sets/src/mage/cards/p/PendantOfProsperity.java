@@ -84,7 +84,7 @@ class PendantOfProsperityEffect extends OneShotEffect {
             return true;
         }
         TargetCardInHand target = new TargetCardInHand(0, 1, StaticFilters.FILTER_CARD_LAND_A);
-        if (!player.choose(outcome, player.getHand(), target, game)) {
+        if (!player.choose(outcome, player.getHand(), target, source, game)) {
             return true;
         }
         player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);

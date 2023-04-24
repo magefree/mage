@@ -1,6 +1,7 @@
 package mage.cards.mock;
 
 import mage.MageInt;
+import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
@@ -9,6 +10,8 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
+import mage.game.Game;
+import mage.util.CardUtil;
 
 import java.util.List;
 
@@ -108,5 +111,23 @@ public class MockSplitCard extends SplitCard {
 
     private static String getRightHalfName(CardInfo card) {
         return card.getName().split(" // ")[1];
+    }
+
+    @Override
+    public List<String> getRules() {
+        // SplitCard adds additional fuse text to the card and to the database,
+        // so a MockSplitCard must ignore it (duplicate fix)
+        Abilities<Ability> sourceAbilities = this.getAbilities();
+        return CardUtil.getCardRulesWithAdditionalInfo(
+                this.getId(),
+                this.getName(),
+                sourceAbilities,
+                sourceAbilities
+        );
+    }
+
+    @Override
+    public List<String> getRules(Game game) {
+        return this.getRules();
     }
 }

@@ -835,7 +835,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
+    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
         return false;
     }
 
@@ -1429,4 +1429,8 @@ public class PlayerStub implements Player {
         return card.getSpellAbility();
     }
 
+    @Override
+    public ActivatedAbility chooseLandOrSpellAbility(Card card, Game game, boolean noMana) {
+        return card.getSpellAbility();
+    }
 }

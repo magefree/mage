@@ -600,7 +600,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param gameZone {@link mage.constants.Zone} to add cards to.
      * @param player   {@link Player} to add cards for. Use either playerA or
      *                 playerB.
-     * @param cardName Card name or set:card
+     * @param cardName Card name or set-card
      * @param count    Amount of cards to be added.
      * @param tapped   In case gameZone is Battlefield, determines whether
      *                 permanent should be tapped. In case gameZone is other
@@ -624,11 +624,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
         // set code for card
         String setCode = "";
-        String setLookup = CardUtil.substring(cardName, CardUtil.TESTS_SET_CODE_LOOKUP_LENGTH);
-        if (setLookup.contains(":")) {
-            setCode = setLookup.substring(0, setLookup.indexOf(":"));
-            cardName = cardName.substring(setCode.length() + 1);
-        }
+        List<String> cardCommand = SystemUtil.parseSetAndCardNameCommand(cardName);
+        setCode = cardCommand.get(0);
+        cardName = cardCommand.get(1);
 
         CardInfo cardInfo;
         if (setCode.isEmpty()) {
@@ -1905,11 +1903,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         addPlayerAction(player, turnNum, PhaseStep.DECLARE_ATTACKERS, "attack:" + attacker + "$defendingPlayer=" + defendingPlayer.getName());
     }
 
-    public void attack(int turnNum, TestPlayer player, String attacker, String planeswalker) {
+    public void attack(int turnNum, TestPlayer player, String attacker, String permanent) {
         //Assert.assertNotEquals("", attacker);
         assertAliaseSupportInActivateCommand(attacker, false); // it uses old special notation like card_name:index
-        assertAliaseSupportInActivateCommand(planeswalker, false);
-        addPlayerAction(player, turnNum, PhaseStep.DECLARE_ATTACKERS, "attack:" + attacker + "$planeswalker=" + planeswalker);
+        assertAliaseSupportInActivateCommand(permanent, false);
+        addPlayerAction(player, turnNum, PhaseStep.DECLARE_ATTACKERS, "attack:" + attacker + "$permanent=" + permanent);
     }
 
     public void attackSkip(int turnNum, TestPlayer player) {

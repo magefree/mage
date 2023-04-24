@@ -797,8 +797,10 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
             }
             if (card.isCreature()) {
                 sb.append('\n').append(card.getPower()).append('/').append(card.getToughness());
-            } else if (card.isPlanesWalker()) {
+            } else if (card.isPlaneswalker()) {
                 sb.append('\n').append(card.getLoyalty());
+            } else if (card.isBattle()) {
+                sb.append('\n').append(card.getDefense());
             }
             if (card.getRules() == null) {
                 card.overrideRules(new ArrayList<>());

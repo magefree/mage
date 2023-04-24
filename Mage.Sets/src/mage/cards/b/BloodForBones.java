@@ -76,14 +76,14 @@ class BloodForBonesEffect extends OneShotEffect {
             return false;
         }
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);
-        if (player.choose(outcome, player.getGraveyard(), target, game)) {
+        if (player.choose(outcome, player.getGraveyard(), target, source, game)) {
             player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
         }
         if (player.getGraveyard().getCards(game).stream().noneMatch(card -> card.isCreature(game))) {
             return true;
         }
         target = new TargetCardInYourGraveyard(filter2);
-        if (player.choose(outcome, player.getGraveyard(), target, game)) {
+        if (player.choose(outcome, player.getGraveyard(), target, source, game)) {
             player.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
         }
         return true;

@@ -19,13 +19,13 @@ public class SetBasePowerSourceEffect extends ContinuousEffectImpl {
 
     private final DynamicValue amount;
 
-    public SetBasePowerSourceEffect(DynamicValue amount, Duration duration) {
-        this(amount, duration, SubLayer.CharacteristicDefining_7a);
-    }
-
-    public SetBasePowerSourceEffect(DynamicValue amount, Duration duration, SubLayer subLayer) {
-        super(duration, Layer.PTChangingEffects_7, subLayer, Outcome.BoostCreature);
-        setCharacterDefining(subLayer == SubLayer.CharacteristicDefining_7a);
+    /**
+     *
+     * @param amount Power to set as a characteristic-defining ability
+     */
+    public SetBasePowerSourceEffect(DynamicValue amount) {
+        super(Duration.EndOfGame, Layer.PTChangingEffects_7, SubLayer.CharacteristicDefining_7a, Outcome.BoostCreature);
+        setCharacterDefining(true);
         this.amount = amount;
         staticText = "{this}'s power is equal to the number of " + amount.getMessage();
     }
