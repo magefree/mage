@@ -173,6 +173,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Myr Convert", 234, Rarity.UNCOMMON, mage.cards.m.MyrConvert.class));
         cards.add(new SetCardInfo("Myr Custodian", 235, Rarity.COMMON, mage.cards.m.MyrCustodian.class));
         cards.add(new SetCardInfo("Myr Kinsmith", 236, Rarity.COMMON, mage.cards.m.MyrKinsmith.class));
+        cards.add(new SetCardInfo("Nahiri's Sacrifice", 142, Rarity.UNCOMMON, mage.cards.n.NahirisSacrifice.class));
         cards.add(new SetCardInfo("Nahiri, the Unforgiving", 211, Rarity.MYTHIC, mage.cards.n.NahiriTheUnforgiving.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nahiri, the Unforgiving", 329, Rarity.MYTHIC, mage.cards.n.NahiriTheUnforgiving.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nahiri, the Unforgiving", 343, Rarity.MYTHIC, mage.cards.n.NahiriTheUnforgiving.class, NON_FULL_USE_VARIOUS));
