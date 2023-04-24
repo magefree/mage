@@ -49,7 +49,8 @@ public final class CarnivorousCanopy extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new ProliferateEffect(), condition, "If that permanent's mana value was 3 or less, proliferate"
+                new ProliferateEffect(), condition, "If that permanent's mana value was 3 or less, proliferate. " +
+                "<i>(Choose any number of permanents and/or players, then give each another counter of each kind already there.)</i>"
         ));
     }
 
