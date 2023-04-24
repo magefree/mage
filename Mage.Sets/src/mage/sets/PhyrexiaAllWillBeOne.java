@@ -171,6 +171,10 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Myr Convert", 234, Rarity.UNCOMMON, mage.cards.m.MyrConvert.class));
         cards.add(new SetCardInfo("Myr Custodian", 235, Rarity.COMMON, mage.cards.m.MyrCustodian.class));
         cards.add(new SetCardInfo("Myr Kinsmith", 236, Rarity.COMMON, mage.cards.m.MyrKinsmith.class));
+        cards.add(new SetCardInfo("Nahiri, the Unforgiving", 211, Rarity.MYTHIC, mage.cards.n.NahiriTheUnforgiving.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nahiri, the Unforgiving", 329, Rarity.MYTHIC, mage.cards.n.NahiriTheUnforgiving.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nahiri, the Unforgiving", 343, Rarity.MYTHIC, mage.cards.n.NahiriTheUnforgiving.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nahiri, the Unforgiving", 364, Rarity.MYTHIC, mage.cards.n.NahiriTheUnforgiving.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Necrogen Communion", 99, Rarity.UNCOMMON, mage.cards.n.NecrogenCommunion.class));
         cards.add(new SetCardInfo("Necrogen Rotpriest", 212, Rarity.UNCOMMON, mage.cards.n.NecrogenRotpriest.class));
         cards.add(new SetCardInfo("Necrosquito", 100, Rarity.UNCOMMON, mage.cards.n.Necrosquito.class));
