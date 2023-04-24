@@ -18,8 +18,8 @@ import mage.game.Game;
  */
 public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
 
-    private DynamicValue power;
-    private DynamicValue toughness;
+    private final DynamicValue power;
+    private final DynamicValue toughness;
 
     /**
      * Note: Need to set text manually if calling this constructor directly
