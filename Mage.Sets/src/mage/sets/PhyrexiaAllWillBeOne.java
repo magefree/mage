@@ -36,6 +36,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Atmosphere Surgeon", 41, Rarity.UNCOMMON, mage.cards.a.AtmosphereSurgeon.class));
         cards.add(new SetCardInfo("Atraxa's Skitterfang", 223, Rarity.UNCOMMON, mage.cards.a.AtraxasSkitterfang.class));
         cards.add(new SetCardInfo("Atraxa, Grand Unifier", 196, Rarity.MYTHIC, mage.cards.a.AtraxaGrandUnifier.class));
+        cards.add(new SetCardInfo("Awaken the Sleeper", 119, Rarity.UNCOMMON, mage.cards.a.AwakenTheSleeper.class));
         cards.add(new SetCardInfo("Axiom Engraver", 120, Rarity.COMMON, mage.cards.a.AxiomEngraver.class));
         cards.add(new SetCardInfo("Barbed Batterfist", 121, Rarity.COMMON, mage.cards.b.BarbedBatterfist.class));
         cards.add(new SetCardInfo("Basilica Shepherd", 4, Rarity.COMMON, mage.cards.b.BasilicaShepherd.class));
