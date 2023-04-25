@@ -66,7 +66,6 @@ public final class TriumphOfSaintKatherine extends CardImpl {
 
 class TriumphOfSaintKatherineCost extends CostImpl {
     
-    private final int amount = 6;
     private static UUID exileId;
     
     public TriumphOfSaintKatherineCost() {
@@ -97,7 +96,7 @@ class TriumphOfSaintKatherineCost extends CostImpl {
         Set<Card> exiledCards = new HashSet<>();
         exileId = UUID.randomUUID();
         exiledCards.add(card);
-        for (Card libraryCard : controller.getLibrary().getTopCards(game, amount)) {
+        for (Card libraryCard : controller.getLibrary().getTopCards(game, 6)) {
             exiledCards.add(libraryCard);
         }
         controller.moveCardsToExile(exiledCards, source, game, false, exileId, "");
@@ -119,7 +118,7 @@ class TriumphOfSaintKatherineCost extends CostImpl {
         if (controller == null) {
             return false;
         }
-        return controller.getLibrary().size() >= amount
+        return controller.getLibrary().size() >= 6
                 && game.getCard(source.getSourceId()) != null
                 && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD;
     }
