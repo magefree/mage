@@ -119,6 +119,7 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Myr Battlesphere", 138, Rarity.RARE, mage.cards.m.MyrBattlesphere.class));
         cards.add(new SetCardInfo("Myriad Landscape", 159, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
         cards.add(new SetCardInfo("Necroblossom Snarl", 160, Rarity.RARE, mage.cards.n.NecroblossomSnarl.class));
+        cards.add(new SetCardInfo("Neyali, Suns' Vanguard", 2, Rarity.MYTHIC, mage.cards.n.NeyaliSunsVanguard.class));
         cards.add(new SetCardInfo("Night's Whisper", 94, Rarity.COMMON, mage.cards.n.NightsWhisper.class));
         cards.add(new SetCardInfo("Norn's Annex", 83, Rarity.RARE, mage.cards.n.NornsAnnex.class));
         cards.add(new SetCardInfo("Norn's Choirmaster", 8, Rarity.RARE, mage.cards.n.NornsChoirmaster.class, NON_FULL_USE_VARIOUS));
