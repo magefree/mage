@@ -17,20 +17,16 @@ import mage.target.TargetPermanent;
 import java.util.UUID;
 
 /**
- *
  * @author AhmadYProjects
  */
 public final class GleefulDemolition extends CardImpl {
 
     public GleefulDemolition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");
-        
 
         // Destroy target artifact. If you controlled that artifact, creature three 1/1 red Phyrexian Goblin creature tokens.
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT));
         this.getSpellAbility().addEffect(new GleefulDemolitionEffect());
-
-
     }
 
     private GleefulDemolition(final GleefulDemolition card) {
@@ -44,10 +40,10 @@ public final class GleefulDemolition extends CardImpl {
 }
 
 class GleefulDemolitionEffect extends OneShotEffect {
-    GleefulDemolitionEffect(){
+    GleefulDemolitionEffect() {
         super(Outcome.Benefit);
         staticText = "destroy target artifact. " +
-                "if you controlled that artifact, create three 1/1 red Phyrexian Goblin creature tokens";
+                "If you controlled that artifact, create three 1/1 red Phyrexian Goblin creature tokens";
     }
 
     private GleefulDemolitionEffect(final GleefulDemolitionEffect effect) {
@@ -55,24 +51,22 @@ class GleefulDemolitionEffect extends OneShotEffect {
     }
 
     @Override
-    public GleefulDemolitionEffect copy(){
+    public GleefulDemolitionEffect copy() {
         return new GleefulDemolitionEffect(this);
     }
 
     @Override
-    public boolean apply(Game game, Ability source){
+    public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game,source));
-
-        if (
-                permanent == null || player == null) {
+        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        if (permanent == null || player == null) {
             return false;
         }
         boolean isMine = permanent.isControlledBy(source.getControllerId());
         permanent.destroy(source, game, false);
         if (isMine) {
             Token token = new PhyrexianGoblinToken();
-            token.putOntoBattlefield(3,game,source);
+            token.putOntoBattlefield(3, game, source);
 
         }
         return true;

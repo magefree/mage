@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public final class NahirisSacrifice extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent(" an artifact or creature");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact or creature");
 
     static {
         filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(), CardType.CREATURE.getPredicate()));
@@ -68,7 +68,7 @@ class SacrificeXManaValueCost extends VariableCostImpl implements SacrificeCost 
     public SacrificeXManaValueCost(FilterControlledPermanent filter, boolean useAsAdditionalCost) {
         super(useAsAdditionalCost ? VariableCostType.ADDITIONAL : VariableCostType.NORMAL,
                 filter.getMessage() + " with manavalue X to sacrifice");
-        this.text = (useAsAdditionalCost ? " sacrifice" : "Sacrifice ") + filter.getMessage() + " with mana value " +xText;
+        this.text = (useAsAdditionalCost ? "sacrifice " : "Sacrifice ") + filter.getMessage() + " with mana value " +xText;
         this.filter = filter;
     }
 

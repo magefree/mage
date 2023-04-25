@@ -58,7 +58,7 @@ class KethekCrucibleGoliathEffect extends OneShotEffect {
     KethekCrucibleGoliathEffect() {
         super(Outcome.Benefit);
         staticText = "you may sacrifice another creature. " +
-                "If you do, reveal cards from the top of your library" +
+                "If you do, reveal cards from the top of your library " +
                 "until you reveal a nonlegendary creature card with lesser mana value" +
                 ", put it onto the battlefield, then put the rest on the bottom of your library in a random order.";
     }
@@ -97,7 +97,7 @@ class KethekCrucibleGoliathEffect extends OneShotEffect {
         filterCreatureCard.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue));
         //put it onto the battlefield, then put the rest on the bottom of your library in a random order.
         RevealCardsFromLibraryUntilEffect effect = new RevealCardsFromLibraryUntilEffect(filterCreatureCard, Zone.BATTLEFIELD, Zone.LIBRARY);
-        effect.apply(game,source);
+        effect.apply(game, source);
         return true;
     }
 }

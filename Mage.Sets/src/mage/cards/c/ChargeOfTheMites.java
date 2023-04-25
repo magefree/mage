@@ -23,7 +23,8 @@ public final class ChargeOfTheMites extends CardImpl {
 
         // Choose one--
         // * Charge of the Mites deals damage equal to the number of creatures you control to target creature or planeswalker.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(CreaturesYouControlCount.instance));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(CreaturesYouControlCount.instance)
+                .setText("{this} deals damage equal to the number of creatures you control to target creature or planeswalker"));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
         this.getSpellAbility().addHint(CreaturesYouControlHint.instance);
 

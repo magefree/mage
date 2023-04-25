@@ -2,7 +2,8 @@ package mage.cards.n;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.effects.*;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleTargetEffect;
@@ -31,6 +32,16 @@ import java.util.UUID;
  */
 public final class NahiriTheUnforgiving extends CardImpl {
 
+    private static final FilterCard filter = new FilterCard("Equipment or creature with lesser manavalue than Nahiri's loyalty");
+
+    {
+        filter.add(Predicates.or(
+                CardType.CREATURE.getPredicate(),
+                SubType.EQUIPMENT.getPredicate()
+        ));
+        filter.add(NahiriLoyaltyPredicate.instance);
+    }
+
     public NahiriTheUnforgiving(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{R}{R/W/P}{W}");
         this.addSuperType(SuperType.LEGENDARY);
@@ -45,7 +56,7 @@ public final class NahiriTheUnforgiving extends CardImpl {
         LoyaltyAbility ability1 = new LoyaltyAbility(new AttacksIfAbleTargetEffect(Duration.UntilYourNextTurn)
                 .setText("Until your next turn, up to one target creature attacks"), 1);
         ability1.addEffect(new NahiriTheUnforgivingRestrictionEffect());
-        ability1.addTarget(new TargetCreaturePermanent(0,1));
+        ability1.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability1);
 
         // +1: Discard a card, then draw a card.
@@ -56,9 +67,6 @@ public final class NahiriTheUnforgiving extends CardImpl {
         // 0: Exile target creature or Equipment card with mana value less than Nahiri's loyalty from your graveyard.
         // Create a token that's a copy of it. That token gains haste. Exile it at the beginning of the next end step.
         LoyaltyAbility ability3 = new LoyaltyAbility(new NahiriTheUnforgivingTokenEffect(), 0);
-        FilterCard filter = new FilterCard("Equipment or Creature with lesser manavalue than Nahiri's loyalty");
-        filter.add(Predicates.or(CardType.CREATURE.getPredicate(), SubType.EQUIPMENT.getPredicate()));
-        filter.add(NahiriLoyaltyPredicate.instance);
         ability3.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability3);
     }
@@ -80,7 +88,7 @@ enum NahiriLoyaltyPredicate implements ObjectSourcePlayerPredicate<Card> {
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
         //mana value less than Nahiri's loyalty
         int manaValue = input.getObject().getManaValue();
-        Card card =  (Card) input.getSource().getSourceObject(game);
+        Card card = (Card) input.getSource().getSourceObject(game);
         int loyalty = card.getCounters(game).getCount(CounterType.LOYALTY);
         return manaValue < loyalty;
     }
@@ -118,7 +126,7 @@ class NahiriTheUnforgivingTokenEffect extends OneShotEffect {
 
     NahiriTheUnforgivingTokenEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Exile target creature or Equipment card with mana value less than Nahiri's loyalty from your graveyard." +
+        this.staticText = "Exile target creature or Equipment card with mana value less than Nahiri's loyalty from your graveyard. " +
                 "Create a token that's a copy of it. That token gains haste. Exile it at the beginning of the next end step.";
     }
 

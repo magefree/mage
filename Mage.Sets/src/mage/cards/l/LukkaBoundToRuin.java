@@ -14,7 +14,10 @@ import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.keyword.CompleatedAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.permanent.token.PhyrexianBeastToxicToken;
 import mage.players.Player;
@@ -39,19 +42,19 @@ public class LukkaBoundToRuin extends CardImpl {
         this.addAbility(CompleatedAbility.getInstance());
 
         // +1: Add {R}{G}. Spend this mana only to cast creature spells or activate abilities of creatures.
-        Ability ability = new LoyaltyAbility(new LukkaBoundToRuinManaEffect(),1);
+        Ability ability = new LoyaltyAbility(new LukkaBoundToRuinManaEffect(), 1);
         this.addAbility(ability);
 
         // −1: Create a 3/3 green Phyrexian Beast creature token with toxic 1.
-        ability = new LoyaltyAbility(new CreateTokenEffect(new PhyrexianBeastToxicToken()),-1);
+        ability = new LoyaltyAbility(new CreateTokenEffect(new PhyrexianBeastToxicToken()), -1);
         this.addAbility(ability);
 
         // −4: Lukka deals X damage divided as you choose among any number of target creatures and/or planeswalkers,
         // where X is the greatest power among creatures you controlled as you activated this ability.
         DynamicValue xValue = GreatestPowerAmongControlledCreaturesValue.instance;
         DamageMultiEffect damageMultiEffect = new DamageMultiEffect(xValue);
-        damageMultiEffect.setText("Lukka deals X damage divided as you choose" +
-                " among any number of target creatures and/or planeswalkers," +
+        damageMultiEffect.setText("Lukka deals X damage divided as you choose " +
+                "among any number of target creatures and/or planeswalkers, " +
                 "where X is the greatest power among creatures you controlled as you activated this ability.");
         ability = new LoyaltyAbility(damageMultiEffect, -4);
         ability.setTargetAdjuster(LukkaBoundToRuinAdjuster.instance);
@@ -99,7 +102,8 @@ class LukkaBoundToRuinManaEffect extends OneShotEffect {
 class LukkaBoundToRuinConditionalMana extends ConditionalMana {
 
     // Add {R}{G}
-    private static Mana mana = new Mana(0,0,0,1,1,0,0,0);
+    private static Mana mana = new Mana(0, 0, 0, 1, 1, 0, 0, 0);
+
     public LukkaBoundToRuinConditionalMana() {
         super(mana);
         addCondition(LukkaBoundToRuinManaCondition.instance);
@@ -130,11 +134,10 @@ enum LukkaBoundToRuinAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         // Maximum targets is equal to the damage - as each target need to be assigned at least 1 damage
         ability.getTargets().clear();
-        int xValue = GreatestPowerAmongControlledCreaturesValue.instance.calculate(game,ability,null);
+        int xValue = GreatestPowerAmongControlledCreaturesValue.instance.calculate(game, ability, null);
         TargetCreatureOrPlaneswalkerAmount targetCreatureOrPlaneswalkerAmount = new TargetCreatureOrPlaneswalkerAmount(xValue);
         targetCreatureOrPlaneswalkerAmount.setMinNumberOfTargets(0);
         targetCreatureOrPlaneswalkerAmount.setMaxNumberOfTargets(xValue);
         ability.addTarget(targetCreatureOrPlaneswalkerAmount);
     }
 }
-
