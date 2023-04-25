@@ -152,6 +152,7 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Soul-Guide Lantern", 142, Rarity.UNCOMMON, mage.cards.s.SoulGuideLantern.class));
         cards.add(new SetCardInfo("Sungrass Prairie", 166, Rarity.RARE, mage.cards.s.SungrassPrairie.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 89, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
+        cards.add(new SetCardInfo("Synthesis Pod", 23, Rarity.RARE, mage.cards.s.SynthesisPod.class));
         cards.add(new SetCardInfo("Tainted Field", 167, Rarity.UNCOMMON, mage.cards.t.TaintedField.class));
         cards.add(new SetCardInfo("Tainted Wood", 168, Rarity.UNCOMMON, mage.cards.t.TaintedWood.class));
         cards.add(new SetCardInfo("Talisman of Conviction", 143, Rarity.UNCOMMON, mage.cards.t.TalismanOfConviction.class));
