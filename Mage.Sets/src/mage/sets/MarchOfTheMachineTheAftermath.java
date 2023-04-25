@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
@@ -19,5 +20,7 @@ public final class MarchOfTheMachineTheAftermath extends ExpansionSet {
         this.blockName = "March of the Machine";
         this.hasBasicLands = false;
         this.hasBoosters = false; // temporary
+
+        cards.add(new SetCardInfo("Jolrael, Voice of Zhalfir", 33, Rarity.RARE, mage.cards.j.JolraelVoiceOfZhalfir.class));
     }
 }
