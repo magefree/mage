@@ -80,7 +80,7 @@ class ContagiousVorracEffect extends OneShotEffect {
             player.moveCards(card, Zone.HAND, source, game);
         }
         cards.retainZone(Zone.LIBRARY, game);
-        player.putCardsOnBottomOfLibrary(card, game, source, false);
+        player.putCardsOnBottomOfLibrary(cards, game, source, false);
         return card == null || new ProliferateEffect().apply(game, source);
     }
 }
