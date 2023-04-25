@@ -552,6 +552,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Plague Spitter", 456, Rarity.UNCOMMON, mage.cards.p.PlagueSpitter.class));
         cards.add(new SetCardInfo("Plaguecrafter", 72, Rarity.UNCOMMON, mage.cards.p.Plaguecrafter.class));
         cards.add(new SetCardInfo("Plains", 98, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Planar Atlas", 51, Rarity.UNCOMMON, mage.cards.p.PlanarAtlas.class));
         cards.add(new SetCardInfo("Plundering Predator", 37, Rarity.COMMON, mage.cards.p.PlunderingPredator.class));
         cards.add(new SetCardInfo("Pounce", 707, Rarity.COMMON, mage.cards.p.Pounce.class));
         cards.add(new SetCardInfo("Pouncing Lynx", 228, Rarity.COMMON, mage.cards.p.PouncingLynx.class));
