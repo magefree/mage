@@ -72,6 +72,7 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Glissa's Retriever", 56, Rarity.RARE, mage.cards.g.GlissasRetriever.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glistening Sphere", 20, Rarity.RARE, mage.cards.g.GlisteningSphere.class));
         cards.add(new SetCardInfo("Goldnight Commander", 72, Rarity.UNCOMMON, mage.cards.g.GoldnightCommander.class));
+        cards.add(new SetCardInfo("Goldwardens' Gambit", 13, Rarity.RARE, mage.cards.g.GoldwardensGambit.class));
         cards.add(new SetCardInfo("Golgari Signet", 131, Rarity.UNCOMMON, mage.cards.g.GolgariSignet.class));
         cards.add(new SetCardInfo("Grafted Exoskeleton", 132, Rarity.UNCOMMON, mage.cards.g.GraftedExoskeleton.class));
         cards.add(new SetCardInfo("Grateful Apparition", 73, Rarity.UNCOMMON, mage.cards.g.GratefulApparition.class));
