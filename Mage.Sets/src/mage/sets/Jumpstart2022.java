@@ -548,6 +548,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Pillardrop Rescuer", 226, Rarity.COMMON, mage.cards.p.PillardropRescuer.class));
         cards.add(new SetCardInfo("Pious Wayfarer", 227, Rarity.COMMON, mage.cards.p.PiousWayfarer.class));
         cards.add(new SetCardInfo("Piranha Marsh", 818, Rarity.COMMON, mage.cards.p.PiranhaMarsh.class));
+        cards.add(new SetCardInfo("Pirated Copy", 16, Rarity.MYTHIC, mage.cards.p.PiratedCopy.class));
         cards.add(new SetCardInfo("Pit Keeper", 455, Rarity.COMMON, mage.cards.p.PitKeeper.class));
         cards.add(new SetCardInfo("Plague Spitter", 456, Rarity.UNCOMMON, mage.cards.p.PlagueSpitter.class));
         cards.add(new SetCardInfo("Plaguecrafter", 72, Rarity.UNCOMMON, mage.cards.p.Plaguecrafter.class));
