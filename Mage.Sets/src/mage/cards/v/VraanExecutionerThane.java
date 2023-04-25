@@ -31,7 +31,7 @@ public final class VraanExecutionerThane extends CardImpl {
         // Whenever one or more other creatures you control die, each opponent loses 2 life and you gain 2 life. This ability triggers only once each turn.
         Ability ability = new DiesCreatureTriggeredAbility(
                 new LoseLifeOpponentsEffect(2), false,
-                StaticFilters.FILTER_CONTROLLED_CREATURE
+                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
         ).setTriggerPhrase("Whenever one or more other creatures you control die, ").setTriggersOnce(true);
         ability.addEffect(new GainLifeEffect(2).concatBy("and"));
         this.addAbility(ability);
