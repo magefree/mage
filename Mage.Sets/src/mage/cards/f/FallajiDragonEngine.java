@@ -1,7 +1,6 @@
 package mage.cards.f;
 
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -28,7 +27,7 @@ public final class FallajiDragonEngine extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Prototype {2}{R} -- 1/3
-        this.addAbility(new PrototypeAbility(this, "{2}{R}", ObjectColor.RED, 1, 3));
+        this.addAbility(new PrototypeAbility(this, "{2}{R}", 1, 3));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

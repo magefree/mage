@@ -2,7 +2,6 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.MageObject;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
@@ -40,7 +39,7 @@ public final class WoodcallerAutomaton extends CardImpl {
         this.toughness = new MageInt(8);
 
         // Prototype {2}{G}{G} -- 3/3
-        this.addAbility(new PrototypeAbility(this, "{2}{G}{G}", ObjectColor.GREEN, 3, 3));
+        this.addAbility(new PrototypeAbility(this, "{2}{G}{G}", 3, 3));
 
         // When Woodcaller Automaton enters the battlefield, if you cast it, untap target land you control. It becomes a Treefolk creature with haste and base power and toughness equal to Woodcaller Automaton's power and toughness. It's still a land.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(

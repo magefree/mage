@@ -1,7 +1,6 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -29,7 +28,7 @@ public final class SkitterbeamBattalion extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Prototype {3}{R}{R} -- 2/2
-        this.addAbility(new PrototypeAbility(this, "{3}{R}{R}", ObjectColor.RED, 2, 2));
+        this.addAbility(new PrototypeAbility(this, "{3}{R}{R}", 2, 2));
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());

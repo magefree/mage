@@ -1,7 +1,6 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
@@ -29,7 +28,7 @@ public final class BoulderbranchGolem extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Prototype {3}{G} -- 3/3
-        this.addAbility(new PrototypeAbility(this, "{3}{G}", ObjectColor.GREEN,3, 3));
+        this.addAbility(new PrototypeAbility(this, "{3}{G}", 3, 3));
 
         // When Boulderbranch Golem enters the battlefield, you gain life equal to its power.
         this.addAbility(new EntersBattlefieldTriggeredAbility(

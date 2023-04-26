@@ -1,7 +1,6 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.PrototypeAbility;
 import mage.cards.CardImpl;
@@ -24,7 +23,7 @@ public final class GoringWarplow extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Prototype {1}{B} -- 1/1
-        this.addAbility(new PrototypeAbility(this, "{1}{B}", ObjectColor.BLACK,1, 1));
+        this.addAbility(new PrototypeAbility(this, "{1}{B}", 1, 1));
 
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());

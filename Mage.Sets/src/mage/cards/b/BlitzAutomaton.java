@@ -1,7 +1,6 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.PrototypeAbility;
 import mage.cards.CardImpl;
@@ -24,7 +23,7 @@ public final class BlitzAutomaton extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Prototype {2}{R} - 3/2
-        this.addAbility(new PrototypeAbility(this, "{2}{R}", ObjectColor.RED,3, 2));
+        this.addAbility(new PrototypeAbility(this, "{2}{R}", 3, 2));
 
         // Haste
         this.addAbility(HasteAbility.getInstance());
