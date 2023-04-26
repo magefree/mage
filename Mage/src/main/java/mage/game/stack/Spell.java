@@ -9,6 +9,7 @@ import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.mana.ActivationManaAbilityStep;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.abilities.keyword.TransformAbility;
@@ -46,6 +47,7 @@ public class Spell extends StackObjectImpl implements Card {
     private final List<SpellAbility> spellAbilities = new ArrayList<>();
 
     private final Card card;
+    private ManaCosts<ManaCost> manaCost;
     private final ObjectColor color;
     private final ObjectColor frameColor;
     private final FrameStyle frameStyle;
@@ -61,6 +63,7 @@ public class Spell extends StackObjectImpl implements Card {
     private boolean countered;
     private boolean resolving = false;
     private UUID commandedBy = null; // for Word of Command
+    private boolean prototyped;
     private int startingLoyalty;
     private int startingDefense;
 
@@ -80,6 +83,7 @@ public class Spell extends StackObjectImpl implements Card {
         }
 
         this.card = affectedCard;
+        this.manaCost = this.card.getManaCost().copy();
         this.color = affectedCard.getColor(null).copy();
         this.frameColor = affectedCard.getFrameColor(null).copy();
         this.frameStyle = affectedCard.getFrameStyle();
@@ -89,19 +93,25 @@ public class Spell extends StackObjectImpl implements Card {
         this.zoneChangeCounter = affectedCard.getZoneChangeCounter(game); // sync card's ZCC with spell (copy spell settings)
         this.ability = ability;
         this.ability.setControllerId(controllerId);
-        if (ability.getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
-            // if this spell is going to be a copy, these abilities will be copied in copySpell
-            if (!isCopy) {
-                SpellAbility left = ((SplitCard) affectedCard).getLeftHalfCard().getSpellAbility().copy();
-                SpellAbility right = ((SplitCard) affectedCard).getRightHalfCard().getSpellAbility().copy();
-                left.setSourceId(ability.getSourceId());
-                right.setSourceId(ability.getSourceId());
-                spellAbilities.add(left);
-                spellAbilities.add(right);
-            }
-        } else {
-            spellAbilities.add(ability);
+
+        switch (ability.getSpellAbilityType()) {
+            case SPLIT_FUSED:
+                // if this spell is going to be a copy, these abilities will be copied in copySpell
+                if (!isCopy) {
+                    SpellAbility left = ((SplitCard) affectedCard).getLeftHalfCard().getSpellAbility().copy();
+                    SpellAbility right = ((SplitCard) affectedCard).getRightHalfCard().getSpellAbility().copy();
+                    left.setSourceId(ability.getSourceId());
+                    right.setSourceId(ability.getSourceId());
+                    spellAbilities.add(left);
+                    spellAbilities.add(right);
+                }
+                break;
+            case PROTOTYPE:
+                this.prototyped = true;
+            default:
+                spellAbilities.add(ability);
         }
+
         this.controllerId = controllerId;
         this.fromZone = fromZone;
         this.countered = false;
@@ -121,6 +131,7 @@ public class Spell extends StackObjectImpl implements Card {
         this.card = spell.card.copy();
 
         this.fromZone = spell.fromZone;
+        this.manaCost = spell.getManaCost().copy();
         this.color = spell.color.copy();
         this.frameColor = spell.color.copy();
         this.frameStyle = spell.frameStyle;
@@ -135,6 +146,7 @@ public class Spell extends StackObjectImpl implements Card {
 
         this.currentActivatingManaAbilitiesStep = spell.currentActivatingManaAbilitiesStep;
         this.targetChanged = spell.targetChanged;
+        this.prototyped = spell.prototyped;
         this.startingLoyalty = spell.startingLoyalty;
         this.startingDefense = spell.startingDefense;
     }
@@ -600,8 +612,11 @@ public class Spell extends StackObjectImpl implements Card {
 
     @Override
     public ManaCosts<ManaCost> getManaCost() {
-        return card.getManaCost();
+        return this.manaCost;
     }
+
+    @Override
+    public void setManaCost(ManaCosts<ManaCost> costs) { this.manaCost = costs.copy(); }
 
     /**
      * 202.3b When calculating the converted mana cost of an object with an {X}
@@ -620,7 +635,7 @@ public class Spell extends StackObjectImpl implements Card {
         for (SpellAbility spellAbility : spellAbilities) {
             cmc += spellAbility.getConvertedXManaCost(getCard());
         }
-        cmc += getCard().getManaCost().manaValue();
+        cmc += this.manaCost.manaValue();
         return cmc;
     }
 
@@ -760,6 +775,10 @@ public class Spell extends StackObjectImpl implements Card {
     @Override
     public boolean isNightCard() {
         return false;
+    }
+
+    public boolean isPrototyped() {
+        return prototyped;
     }
 
     @Override

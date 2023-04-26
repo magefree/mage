@@ -1,6 +1,7 @@
 package mage.cards.a;
 
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -34,7 +35,7 @@ public final class AutonomousAssembler extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Prototype {1}{W} -- 2/2
-        this.addAbility(new PrototypeAbility(this, "{1}{W}", 2, 2));
+        this.addAbility(new PrototypeAbility(this, "{1}{W}", ObjectColor.WHITE,2, 2));
 
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());

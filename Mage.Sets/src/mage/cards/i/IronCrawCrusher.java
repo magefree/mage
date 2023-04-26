@@ -1,6 +1,7 @@
 package mage.cards.i;
 
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -32,7 +33,7 @@ public final class IronCrawCrusher extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Prototype {2}{G}{G} -- 2/5
-        this.addAbility(new PrototypeAbility(this, "{2}{G}{G}", 2, 5));
+        this.addAbility(new PrototypeAbility(this, "{2}{G}{G}", ObjectColor.GREEN, 2, 5));
 
         // Whenever Iron-Craw Crusher attacks, target attacking creature gets +X/+0 until end of turn, where X is Iron-Craw Crusher's power.
         Ability ability = new AttacksTriggeredAbility(

@@ -1,6 +1,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -30,7 +31,7 @@ public final class SpotterThopter extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Prototype {3}{U} -- 2/3
-        this.addAbility(new PrototypeAbility(this, "{3}{U}", 2, 3));
+        this.addAbility(new PrototypeAbility(this, "{3}{U}", ObjectColor.BLUE, 2, 3));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

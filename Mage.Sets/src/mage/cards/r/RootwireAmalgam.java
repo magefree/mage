@@ -2,6 +2,7 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.MageObject;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -37,7 +38,7 @@ public final class RootwireAmalgam extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Prototype {1}{G} -- 2/3
-        this.addAbility(new PrototypeAbility(this, "{1}{G}", 2, 3));
+        this.addAbility(new PrototypeAbility(this, "{1}{G}", ObjectColor.GREEN,2, 3));
 
         // {3}{G}{G}, Sacrifice Rootwire Amalgam: Create an X/X colorless Golem artifact creature token, where X is three times Rootwire Amalgam's power. It gains haste until end of turn. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(

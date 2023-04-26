@@ -1,6 +1,7 @@
 package mage.cards.d;
 
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -27,7 +28,7 @@ public final class DepthChargeColossus extends CardImpl {
         this.toughness = new MageInt(9);
 
         // Prototype {4}{U}{U} -- 6/6
-        this.addAbility(new PrototypeAbility(this, "{4}{U}{U}", 6, 6));
+        this.addAbility(new PrototypeAbility(this, "{4}{U}{U}", ObjectColor.BLUE,6, 6));
 
         // Depth Charge Colossus doesn't untap during your untap step.
         this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepSourceEffect()));

@@ -1,6 +1,7 @@
 package mage.cards.r;
 
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.keyword.PrototypeAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -24,7 +25,7 @@ public final class RustGoliath extends CardImpl {
         this.toughness = new MageInt(10);
 
         // Prototype {3}{G}{G} -- 3/5
-        this.addAbility(new PrototypeAbility(this, "{3}{G}{G}", 3, 5));
+        this.addAbility(new PrototypeAbility(this, "{3}{G}{G}", ObjectColor.GREEN,3, 5));
 
         // Reach
         this.addAbility(ReachAbility.getInstance());

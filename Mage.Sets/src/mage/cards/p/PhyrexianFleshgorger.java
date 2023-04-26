@@ -1,6 +1,7 @@
 package mage.cards.p;
 
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
@@ -31,16 +32,16 @@ public final class PhyrexianFleshgorger extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Prototype {1}{B}{B} -- 3/3
-        this.addAbility(new PrototypeAbility(this, "{1}{B}{B}", 3, 3));
+        this.addAbility(new PrototypeAbility(this, "{1}{B}{B}", ObjectColor.BLACK, 3, 3));
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
 
         // Ward--Pay life equal to Phyrexian Fleshgorger's power.
-        this.addAbility(new WardAbility(new PayLifeCost(xValue, "pay life equal to {this}'s power")));
+        this.addAbility(new WardAbility(new PayLifeCost(xValue, "pay life equal to {this}'s power"), false));
     }
 
     private PhyrexianFleshgorger(final PhyrexianFleshgorger card) {
