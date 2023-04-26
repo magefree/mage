@@ -161,6 +161,7 @@ public enum CounterType {
     PUPA("pupa"),
     REACH("reach"),
     REPAIR("repair"),
+    REPRIEVE("reprieve"),
     RITUAL("ritual"),
     ROPE("rope"),
     RUST("rust"),

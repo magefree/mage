@@ -445,6 +445,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Maalfeld Twins", 438, Rarity.COMMON, mage.cards.m.MaalfeldTwins.class));
         cards.add(new SetCardInfo("Mad Ratter", 570, Rarity.UNCOMMON, mage.cards.m.MadRatter.class));
         cards.add(new SetCardInfo("Magmatic Channeler", 571, Rarity.RARE, mage.cards.m.MagmaticChanneler.class));
+        cards.add(new SetCardInfo("Magnanimous Magistrate", 7, Rarity.UNCOMMON, mage.cards.m.MagnanimousMagistrate.class));
         cards.add(new SetCardInfo("Magnifying Glass", 95, Rarity.UNCOMMON, mage.cards.m.MagnifyingGlass.class));
         cards.add(new SetCardInfo("Make a Stand", 211, Rarity.UNCOMMON, mage.cards.m.MakeAStand.class));
         cards.add(new SetCardInfo("Mammoth Spider", 687, Rarity.COMMON, mage.cards.m.MammothSpider.class));
