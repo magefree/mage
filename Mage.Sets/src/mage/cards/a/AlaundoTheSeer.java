@@ -6,7 +6,6 @@ import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -27,7 +26,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInHand;
@@ -121,7 +119,7 @@ class AlaundoTheSeerEffect extends OneShotEffect {
         // It gains “When the last time counter is removed from this card, if it’s
         // exiled, you may cast it without paying its mana cost. If you cast a creature
         // spell this way, it gains haste until end of turn.”
-        game.addEffect(new GainSuspendEffect(new MageObjectReference(card, game)), source);
+        game.addEffect(new PlayFromExileEffect(new MageObjectReference(card, game)), source);
 
         // Then remove a time counter from each other card you own in exile.
         game.getExile()
@@ -133,31 +131,30 @@ class AlaundoTheSeerEffect extends OneShotEffect {
     }
 }
 
-class GainSuspendEffect extends ContinuousEffectImpl implements SourceEffect {
+class PlayFromExileEffect extends ContinuousEffectImpl implements SourceEffect {
 
     MageObjectReference mor;
 
-    public GainSuspendEffect(MageObjectReference mor) {
+    public PlayFromExileEffect(MageObjectReference mor) {
         super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.mor = mor;
-        staticText = "{this} gains suspend";
     }
 
-    public GainSuspendEffect(final GainSuspendEffect effect) {
+    public PlayFromExileEffect(final PlayFromExileEffect effect) {
         super(effect);
         this.mor = effect.mor;
     }
 
     @Override
-    public GainSuspendEffect copy() {
-        return new GainSuspendEffect(this);
+    public PlayFromExileEffect copy() {
+        return new PlayFromExileEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(mor.getSourceId());
         if (card != null && mor.refersTo(card, game) && game.getState().getZone(card.getId()) == Zone.EXILED) {
-            SuspendPlayCardAbility ability = new SuspendPlayCardAbility();
+            PlayFromExileAbility ability = new PlayFromExileAbility();
             ability.setSourceId(card.getId());
             ability.setControllerId(card.getOwnerId());
             game.getState().addOtherAbility(card, ability);
@@ -168,14 +165,14 @@ class GainSuspendEffect extends ContinuousEffectImpl implements SourceEffect {
     }
 }
 
-class SuspendPlayCardAbility extends TriggeredAbilityImpl {
+class PlayFromExileAbility extends TriggeredAbilityImpl {
 
-    public SuspendPlayCardAbility() {
-        super(Zone.EXILED, new SuspendPlayCardEffect());
+    public PlayFromExileAbility() {
+        super(Zone.EXILED, new CastForFreeEffect());
         setRuleVisible(false);
     }
 
-    public SuspendPlayCardAbility(SuspendPlayCardAbility ability) {
+    public PlayFromExileAbility(PlayFromExileAbility ability) {
         super(ability);
     }
 
@@ -201,25 +198,25 @@ class SuspendPlayCardAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public SuspendPlayCardAbility copy() {
-        return new SuspendPlayCardAbility(this);
+    public PlayFromExileAbility copy() {
+        return new PlayFromExileAbility(this);
     }
 }
 
-class SuspendPlayCardEffect extends OneShotEffect {
+class CastForFreeEffect extends OneShotEffect {
 
-    public SuspendPlayCardEffect() {
+    public CastForFreeEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "you may cast it without paying its mana cost. If you cast a creature spell this way, it gains haste until end of turn.";
     }
 
-    public SuspendPlayCardEffect(final SuspendPlayCardEffect effect) {
+    public CastForFreeEffect(final CastForFreeEffect effect) {
         super(effect);
     }
 
     @Override
-    public SuspendPlayCardEffect copy() {
-        return new SuspendPlayCardEffect(this);
+    public CastForFreeEffect copy() {
+        return new CastForFreeEffect(this);
     }
 
     @Override
@@ -228,17 +225,9 @@ class SuspendPlayCardEffect extends OneShotEffect {
         Card card = game.getCard(source.getSourceId());
         if (player != null && card != null) {
             if (CardUtil.castSpellWithAttributesForFree(player, source, game, card)) {
-                System.out.println(card.getName());
                 if (card.isCreature(game)) {
-                    Permanent creature = game.getPermanent(card.getId());
-                    System.out.println(creature);
-                    if (creature == null) {
-                        return true;
-                    }
-                    ContinuousEffect hasteEffect = new GainAbilityTargetEffect(HasteAbility.getInstance(),
-                            Duration.EndOfTurn);
-                    hasteEffect.setTargetPointer(new FixedTarget(creature, game));
-                    game.addEffect(hasteEffect, source);
+                    game.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(),
+                            Duration.EndOfTurn, null, true).setTargetPointer(new FixedTarget(card, game)), source);
                 }
                 return true;
             }
