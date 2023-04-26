@@ -21,12 +21,10 @@ public final class NornsDecree extends CardImpl {
     public NornsDecree(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[] { CardType.ENCHANTMENT }, "{2}{W}");
 
-        // Whenever one or more creatures an opponent controls deal combat damage to
-        // you, that opponent gets a poison counter.
+        // Whenever one or more creatures an opponent controls deal combat damage to you, that opponent gets a poison counter.
         this.addAbility(new CombatDamageDealtToYouTriggeredAbility(new AddPoisonCounterTargetEffect(1).setText("that opponent gets a poison counter."), true));
 
-        // Whenever a player attacks, if one or more players being attacked are
-        // poisoned, the attacking player draws a card.
+        // Whenever a player attacks, if one or more players being attacked are poisoned, the attacking player draws a card.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new PlayerAttacksTriggeredAbility(new DrawCardTargetEffect(1), true),
                 AttackedPlayersPoisonedCondition.instance,
