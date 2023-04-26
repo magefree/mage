@@ -6,7 +6,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 import mage.util.RandomUtil;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
