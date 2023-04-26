@@ -21,7 +21,8 @@ public class PrototypeAbility extends SpellAbility {
     private final int toughness;
 
     public PrototypeAbility(Card card, String manaString, int power, int toughness) {
-        super(new ManaCostsImpl<>(manaString), card.getName(), Zone.HAND, SpellAbilityType.PROTOTYPE);
+        super(new ManaCostsImpl<>(manaString), card.getName() + " with prototype", Zone.HAND, SpellAbilityType.PROTOTYPE);
+        this.setTiming(TimingRule.SORCERY);
         this.addSubAbility(new SimpleStaticAbility(
                 Zone.ALL, new PrototypeEffect(power, toughness, manaString)
         ).setRuleVisible(false));
