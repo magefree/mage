@@ -34,13 +34,13 @@ public final class PhyrexianFleshgorger extends CardImpl {
         this.addAbility(new PrototypeAbility(this, "{1}{B}{B}", 3, 3));
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
 
         // Ward--Pay life equal to Phyrexian Fleshgorger's power.
-        this.addAbility(new WardAbility(new PayLifeCost(xValue, "pay life equal to {this}'s power")));
+        this.addAbility(new WardAbility(new PayLifeCost(xValue, "pay life equal to {this}'s power"), false));
     }
 
     private PhyrexianFleshgorger(final PhyrexianFleshgorger card) {

@@ -83,7 +83,7 @@ class HidetsuguAndKairiEffect extends OneShotEffect {
             return false;
         }
         Card card = player.getLibrary().getFromTop(game);
-        if (card == null) {
+        if (card == null || !player.moveCardsToExile(card, source, game, true, null, "")) {
             return false;
         }
         opponent.loseLife(card.getManaValue(), game, source, false);
