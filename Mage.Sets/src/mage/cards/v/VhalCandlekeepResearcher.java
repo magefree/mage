@@ -40,7 +40,7 @@ public final class VhalCandlekeepResearcher extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
 
-        // {T}: Add an amount of {C} equal to Vhal, Candlekeep Researcher’s toughness.
+        // {T}: Add an amount of {C} equal to Vhal, Candlekeep Researcher's toughness.
         this.addAbility(
                 new SimpleManaAbility(Zone.BATTLEFIELD, new VhalCandlekeepResearcherManaEffect(), new TapSourceCost()));
 
@@ -63,7 +63,7 @@ class VhalCandlekeepResearcherManaEffect extends ManaEffect {
     ConditionalManaBuilder manaBuilder = new VhalCandlekeepResearcherManaBuilder();
 
     VhalCandlekeepResearcherManaEffect() {
-        this.staticText = " Add an amount of {C} equal to Vhal, Candlekeep Researcher's toughness. This mana can't be spent to cast spells from your hand.";
+        this.staticText = "Add an amount of {C} equal to Vhal, Candlekeep Researcher's toughness. This mana can't be spent to cast spells from your hand.";
     }
 
     VhalCandlekeepResearcherManaEffect(final VhalCandlekeepResearcherManaEffect effect) {
