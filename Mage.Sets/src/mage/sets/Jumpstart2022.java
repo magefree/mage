@@ -30,6 +30,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Aether Spellbomb", 752, Rarity.COMMON, mage.cards.a.AetherSpellbomb.class));
         cards.add(new SetCardInfo("Aethershield Artificer", 140, Rarity.UNCOMMON, mage.cards.a.AethershieldArtificer.class));
         cards.add(new SetCardInfo("Aftershock", 129, Rarity.COMMON, mage.cards.a.Aftershock.class));
+        cards.add(new SetCardInfo("Agrus Kos, Eternal Soldier", 1, Rarity.RARE, mage.cards.a.AgrusKosEternalSoldier.class));
         cards.add(new SetCardInfo("Ajani's Pridemate", 142, Rarity.UNCOMMON, mage.cards.a.AjanisPridemate.class));
         cards.add(new SetCardInfo("Ajani, Strength of the Pride", 141, Rarity.MYTHIC, mage.cards.a.AjaniStrengthOfThePride.class));
         cards.add(new SetCardInfo("Alandra, Sky Dreamer", 9, Rarity.RARE, mage.cards.a.AlandraSkyDreamer.class));
