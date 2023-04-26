@@ -67,7 +67,7 @@ class IntellectDevourerExileEffect extends OneShotEffect {
 
     IntellectDevourerExileEffect() {
         super(Outcome.Exile);
-        this.staticText = "each opponent exiles a card from their hand until Intellect Devourer leaves the battlefield";
+        this.staticText = "each opponent exiles a card from their hand until {this} leaves the battlefield";
     }
 
     private IntellectDevourerExileEffect(final IntellectDevourerExileEffect effect) {super(effect);}
