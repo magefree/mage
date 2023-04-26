@@ -23,7 +23,7 @@ public final class BlitzAutomaton extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Prototype {2}{R} - 3/2
-        this.addAbility(new PrototypeAbility(this, "{2}{R}", 2, 2));
+        this.addAbility(new PrototypeAbility(this, "{2}{R}", 3, 2));
 
         // Haste
         this.addAbility(HasteAbility.getInstance());
