@@ -75,10 +75,10 @@ class AlaundoTheSeerEffect extends OneShotEffect {
     public AlaundoTheSeerEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Draw a card, then exile a card from your hand and put a number of time "
-                + "counters on it equal to its mana value. It gains “When the last time counter "
-                + "is removed from this card, if it’s exiled, you may cast it without paying its "
+                + "counters on it equal to its mana value. It gains \"When the last time counter "
+                + "is removed from this card, if it's exiled, you may cast it without paying its "
                 + "mana cost. If you cast a creature spell this way, it gains haste until end of "
-                + "turn.” Then remove a time counter from each other card you own in exile.";
+                + "turn.\" Then remove a time counter from each other card you own in exile.";
     }
 
     private AlaundoTheSeerEffect(final AlaundoTheSeerEffect effect) {
@@ -103,8 +103,7 @@ class AlaundoTheSeerEffect extends OneShotEffect {
             return false;
         }
 
-        // then exile a card from your hand and put a number of time counters on it
-        // equal to its mana value
+        // then exile a card from your hand and put a number of time counters on it equal to its mana value
         TargetCard target = new TargetCardInHand().withChooseHint("to exile");
         controller.chooseTarget(outcome, controller.getHand(), target, source, game);
         Card card = game.getCard(target.getFirstTarget());
@@ -116,9 +115,8 @@ class AlaundoTheSeerEffect extends OneShotEffect {
             return false;
         }
 
-        // It gains “When the last time counter is removed from this card, if it’s
-        // exiled, you may cast it without paying its mana cost. If you cast a creature
-        // spell this way, it gains haste until end of turn.”
+        // It gains "When the last time counter is removed from this card, if it's exiled, you may cast it without paying its mana cost. 
+        // If you cast a creature spell this way, it gains haste until end of turn."
         game.addEffect(new PlayFromExileEffect(new MageObjectReference(card, game)), source);
 
         // Then remove a time counter from each other card you own in exile.
