@@ -6,13 +6,14 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
+import mage.filter.common.FilterAnyTarget;
+import mage.filter.common.FilterPermanentOrPlayer;
 import mage.filter.predicate.other.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetPermanentOrPlayer;
 
 import java.util.UUID;
 
@@ -21,30 +22,24 @@ import java.util.UUID;
  */
 public final class ConeOfFlame extends CardImpl {
 
+    private static final FilterPermanentOrPlayer filter1 = new FilterAnyTarget("any target to deal 1 damage");
+    private static final FilterPermanentOrPlayer filter2 = new FilterAnyTarget("another target to deal 2 damage");
+    private static final FilterPermanentOrPlayer filter3 = new FilterAnyTarget("third target to deal 3 damage");
+
+    static {
+        filter2.getPermanentFilter().add(new AnotherTargetPredicate(2));
+        filter2.getPlayerFilter().add(new AnotherTargetPredicate(2));
+        filter3.getPermanentFilter().add(new AnotherTargetPredicate(3));
+        filter3.getPlayerFilter().add(new AnotherTargetPredicate(3));
+    }
+
     public ConeOfFlame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
 
         // Cone of Flame deals 1 damage to any target, 2 damage to another target, and 3 damage to a third target.
-        // 1
-        FilterCreaturePlayerOrPlaneswalker filter1 = new FilterCreaturePlayerOrPlaneswalker("any target to deal 1 damage");
-        TargetAnyTarget target1 = new TargetAnyTarget(1, 1, filter1);
-        target1.setTargetTag(1);
-        this.getSpellAbility().addTarget(target1);
-        // 2
-        FilterCreaturePlayerOrPlaneswalker filter2 = new FilterCreaturePlayerOrPlaneswalker("another target to deal 2 damage");
-        filter2.getPermanentFilter().add(new AnotherTargetPredicate(2));
-        filter2.getPlayerFilter().add(new AnotherTargetPredicate(2));
-        TargetAnyTarget target2 = new TargetAnyTarget(1, 1, filter2);
-        target2.setTargetTag(2);
-        this.getSpellAbility().addTarget(target2);
-        // 3
-        FilterCreaturePlayerOrPlaneswalker filter3 = new FilterCreaturePlayerOrPlaneswalker("third target to deal 3 damage");
-        filter3.getPermanentFilter().add(new AnotherTargetPredicate(3));
-        filter3.getPlayerFilter().add(new AnotherTargetPredicate(3));
-        TargetAnyTarget target3 = new TargetAnyTarget(1, 1, filter3);
-        target3.setTargetTag(3);
-        this.getSpellAbility().addTarget(target3);
-
+        this.getSpellAbility().addTarget(new TargetPermanentOrPlayer(filter1).setTargetTag(1));
+        this.getSpellAbility().addTarget(new TargetPermanentOrPlayer(filter2).setTargetTag(2));
+        this.getSpellAbility().addTarget(new TargetPermanentOrPlayer(filter3).setTargetTag(3));
         this.getSpellAbility().addEffect(new ConeOfFlameEffect());
     }
 

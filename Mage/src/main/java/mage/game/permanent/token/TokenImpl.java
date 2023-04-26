@@ -9,11 +9,15 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.Card;
+import mage.cards.repository.TokenInfo;
+import mage.cards.repository.TokenRepository;
+import mage.cards.repository.TokenType;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.command.CommandObject;
 import mage.game.events.CreateTokenEvent;
 import mage.game.events.CreatedTokenEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -24,6 +28,7 @@ import mage.target.Target;
 import mage.util.RandomUtil;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Each token must have default constructor without params (GUI require for card viewer)
@@ -35,13 +40,11 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     private int tokenType;
     private String originalCardNumber;
     private String originalExpansionSetCode;
-    private String tokenDescriptor;
-    private boolean expansionSetCodeChecked;
     private Card copySourceCard; // the card the Token is a copy from
     private static final int MAX_TOKENS_PER_GAME = 500;
 
     // list of set codes token images are available for
-    protected List<String> availableImageSetCodes = new ArrayList<>();
+    protected List<String> availableImageSetCodes = new ArrayList<>(); // TODO: delete
 
     public enum Type {
 
@@ -74,33 +77,12 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         this.lastAddedTokenIds.addAll(token.lastAddedTokenIds);
         this.originalCardNumber = token.originalCardNumber;
         this.originalExpansionSetCode = token.originalExpansionSetCode;
-        this.expansionSetCodeChecked = token.expansionSetCodeChecked;
         this.copySourceCard = token.copySourceCard; // will never be changed
         this.availableImageSetCodes = token.availableImageSetCodes;
     }
 
     @Override
     public abstract Token copy();
-
-    private void setTokenDescriptor() {
-        this.tokenDescriptor = tokenDescriptor();
-    }
-
-    @Override
-    public String getTokenDescriptor() {
-        this.tokenDescriptor = tokenDescriptor();
-        return tokenDescriptor;
-    }
-
-    private String tokenDescriptor() {
-        String strName = this.name.replaceAll("[^a-zA-Z0-9]", "");
-        String strColor = this.color.toString().replaceAll("[^a-zA-Z0-9]", "");
-        String strSubtype = this.subtype.toString().replaceAll("[^a-zA-Z0-9]", "");
-        String strCardType = this.cardType.toString().replaceAll("[^a-zA-Z0-9]", "");
-        String descriptor = strName + '.' + strColor + '.' + strSubtype + '.' + strCardType + '.' + this.power + '.' + this.toughness;
-        descriptor = descriptor.toUpperCase(Locale.ENGLISH);
-        return descriptor;
-    }
 
     @Override
     public String getDescription() {
@@ -163,29 +145,53 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         return putOntoBattlefield(amount, game, source, controllerId, tapped, attacking, null);
     }
 
-    private String getSetCode(Game game, UUID sourceId) {
-        // moved here from CreateTokenEffect because not all cards that create tokens use CreateTokenEffect
-        // they use putOntoBattlefield directly
-        // TODO: Check this setCode handling because it makes no sense if token put into play with e.g. "Feldon of the third Path"
-        String setCode = null;
-        if (this.getOriginalExpansionSetCode() != null && !this.getOriginalExpansionSetCode().isEmpty()) {
-            setCode = this.getOriginalExpansionSetCode();
+    public static TokenInfo generateTokenInfo(TokenImpl token, Game game, UUID sourceId) {
+        // Choose a token image by priority:
+        // - use source's set code
+        // - use parent source's set code (too complicated, so ignore it)
+        // - use random set code
+        // - use default set code
+
+        if (token.getOriginalCardNumber() != null) {
+            // token from a card, so must use card image instead (example: Embalm ability)
+            return new TokenInfo(TokenType.TOKEN, token.getName(), token.getOriginalExpansionSetCode(), 0);
+        }
+
+        // source
+        final String setCode;
+        Card sourceCard = game.getCard(sourceId);
+        if (sourceCard != null) {
+            setCode = sourceCard.getExpansionSetCode();
         } else {
-            Card source = game.getCard(sourceId);
-            if (source != null) {
-                setCode = source.getExpansionSetCode();
+            MageObject sourceObject = game.getObject(sourceId);
+            if (sourceObject instanceof CommandObject) {
+                setCode = ((CommandObject) sourceObject).getExpansionSetCodeForImage();
             } else {
-                MageObject object = game.getObject(sourceId);
-                if (object instanceof PermanentToken) {
-                    setCode = ((PermanentToken) object).getExpansionSetCode();
-                }
+                setCode = null;
             }
         }
 
-        if (!expansionSetCodeChecked) {
-            expansionSetCodeChecked = this.updateExpansionSetCode(setCode);
+
+        // by set code
+        List<TokenInfo> possibleInfo = TokenRepository.instance.getByClassName(token.getClass().getName())
+                .stream()
+                .filter(info -> info.getSetCode().equals(setCode))
+                .collect(Collectors.toList());
+
+        // by random set
+        if (possibleInfo.isEmpty()) {
+            possibleInfo = new ArrayList<>(TokenRepository.instance.getByClassName(token.getClass().getName()));
         }
-        return setCode;
+
+        if (possibleInfo.size() > 0) {
+            return RandomUtil.randomFromCollection(possibleInfo);
+        }
+
+        // unknown token
+        // TODO: download default tokens for xmage's set and use random images from it
+        //  example: TOK.zip/Creature.1.full.jpg
+        //  example: TOK.zip/Creature.2.full.jpg
+        return new TokenInfo(TokenType.TOKEN, "Unknown", "XMAGE", 0);
     }
 
     @Override
@@ -249,22 +255,28 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         for (Map.Entry<Token, Integer> entry : event.getTokens().entrySet()) {
             Token token = entry.getKey();
             int amount = entry.getValue();
-            String setCode = token instanceof TokenImpl ? ((TokenImpl) token).getSetCode(game, event.getSourceId()) : null;
+
+            // choose token's set code due source
+            TokenInfo tokenInfo = TokenImpl.generateTokenInfo((TokenImpl) token, game, source == null ? null : source.getSourceId());
+            token.setOriginalExpansionSetCode(tokenInfo.getSetCode());
+            token.setExpansionSetCodeForImage(tokenInfo.getSetCode());
+            token.setTokenType(tokenInfo.getImageNumber());
 
             List<Permanent> needTokens = new ArrayList<>();
             List<Permanent> allowedTokens = new ArrayList<>();
 
             // prepare tokens to enter
             for (int i = 0; i < amount; i++) {
-                // use event.getPlayerId() as controller cause it can be replaced by replacement effect
-                PermanentToken newPermanent = new PermanentToken(token, event.getPlayerId(), setCode, game);
+                // TODO: add random setTokenType here?
+                // use event.getPlayerId() as controller because it can be replaced by replacement effect
+                PermanentToken newPermanent = new PermanentToken(token, event.getPlayerId(), game);
                 game.getState().addCard(newPermanent);
                 needTokens.add(newPermanent);
                 game.getPermanentsEntering().put(newPermanent.getId(), newPermanent);
                 newPermanent.setTapped(tapped);
 
                 ZoneChangeEvent emptyEvent = new ZoneChangeEvent(newPermanent, newPermanent.getControllerId(), Zone.OUTSIDE, Zone.BATTLEFIELD);
-                // tokens zcc must simulate card's zcc too keep copied card/spell settings
+                // tokens zcc must simulate card's zcc to keep copied card/spell settings
                 // (example: etb's kicker ability of copied creature spell, see tests with Deathforge Shaman)
                 newPermanent.updateZoneChangeCounter(game, emptyEvent);
             }
@@ -423,10 +435,10 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
 
     @Override
     public void setOriginalExpansionSetCode(String originalExpansionSetCode) {
+        // TODO: delete
         // TODO: remove original set code at all... token image must be takes by card source or by latest set (on null source)
         // TODO: if set have same tokens then selects it by random
         this.originalExpansionSetCode = originalExpansionSetCode;
-        setTokenDescriptor();
     }
 
     @Override
@@ -443,28 +455,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
 
     @Override
     public void setExpansionSetCodeForImage(String code) {
-        if (!availableImageSetCodes.isEmpty()) {
-            if (availableImageSetCodes.contains(code)) {
-                setOriginalExpansionSetCode(code);
-            } else // we should not set random set if appropriate set is already used
-            {
-                if (getOriginalExpansionSetCode() == null || getOriginalExpansionSetCode().isEmpty()
-                        || !availableImageSetCodes.contains(getOriginalExpansionSetCode())) {
-                    setOriginalExpansionSetCode(availableImageSetCodes.get(RandomUtil.nextInt(availableImageSetCodes.size())));
-                }
-            }
-        } else if (getOriginalExpansionSetCode() == null || getOriginalExpansionSetCode().isEmpty()) {
-            setOriginalExpansionSetCode(code);
-        }
-        setTokenDescriptor();
-    }
-
-    @Override
-    public boolean updateExpansionSetCode(String setCode) {
-        if (setCode == null || setCode.isEmpty()) {
-            return false;
-        }
-        this.setExpansionSetCodeForImage(setCode);
-        return true;
+        // TODO: delete
+        setOriginalExpansionSetCode(code);
     }
 }

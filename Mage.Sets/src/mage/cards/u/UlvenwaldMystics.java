@@ -21,7 +21,7 @@ public final class UlvenwaldMystics extends CardImpl {
         this.subtype.add(SubType.SHAMAN);
         this.subtype.add(SubType.WEREWOLF);
 
-        this.secondSideCardClazz = UlvenwaldPrimordials.class;
+        this.secondSideCardClazz = mage.cards.u.UlvenwaldPrimordials.class;
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

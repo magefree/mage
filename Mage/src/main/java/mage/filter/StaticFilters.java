@@ -230,6 +230,12 @@ public final class StaticFilters {
         FILTER_CARD_A_PERMANENT.setLockedFilter(true);
     }
 
+    public static final FilterPermanentCard FILTER_CARD_PERMANENTS = new FilterPermanentCard("permanent cards");
+
+    static {
+        FILTER_CARD_PERMANENTS.setLockedFilter(true);
+    }
+
     public static final FilterPermanent FILTER_PERMANENT = new FilterPermanent();
 
     static {
@@ -400,6 +406,16 @@ public final class StaticFilters {
         FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE.setLockedFilter(true);
     }
 
+    public static final FilterControlledPermanent FILTER_CONTROLLED_ARTIFACT_OR_CREATURE_SHORT_TEXT = new FilterControlledPermanent("artifact or creature");
+
+    static {
+        FILTER_CONTROLLED_ARTIFACT_OR_CREATURE_SHORT_TEXT.add(Predicates.or(
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate()
+        ));
+        FILTER_CONTROLLED_ARTIFACT_OR_CREATURE_SHORT_TEXT.setLockedFilter(true);
+    }
+
     public static final FilterControlledPermanent FILTER_CONTROLLED_ARTIFACT_OR_OTHER_CREATURE = new FilterControlledPermanent("another creature or an artifact");
 
     static {
@@ -415,6 +431,14 @@ public final class StaticFilters {
         FILTER_CONTROLLED_ANOTHER_ARTIFACT.setLockedFilter(true);
     }
 
+    public static final FilterControlledPermanent FILTER_CONTROLLED_ANOTHER_ARTIFACT_SHORT_TEXT = new FilterControlledPermanent("another artifact");
+
+    static {
+        FILTER_CONTROLLED_ANOTHER_ARTIFACT_SHORT_TEXT.add(AnotherPredicate.instance);
+        FILTER_CONTROLLED_ANOTHER_ARTIFACT_SHORT_TEXT.add(CardType.ARTIFACT.getPredicate());
+        FILTER_CONTROLLED_ANOTHER_ARTIFACT_SHORT_TEXT.setLockedFilter(true);
+    }
+
     public static final FilterControlledPermanent FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE = new FilterControlledPermanent("another creature or artifact you control");
 
     static {
@@ -424,6 +448,17 @@ public final class StaticFilters {
                 CardType.CREATURE.getPredicate()
         ));
         FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE.setLockedFilter(true);
+    }
+
+    public static final FilterControlledPermanent FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE_SHORT_TEXT = new FilterControlledPermanent("another creature or artifact");
+
+    static {
+        FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE_SHORT_TEXT.add(AnotherPredicate.instance);
+        FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE_SHORT_TEXT.add(Predicates.or(
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate()
+        ));
+        FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE_SHORT_TEXT.setLockedFilter(true);
     }
 
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_ENCHANTMENT = new FilterControlledEnchantmentPermanent();
@@ -450,6 +485,12 @@ public final class StaticFilters {
         FILTER_CONTROLLED_PERMANENT_LANDS.setLockedFilter(true);
     }
 
+    public static final FilterPermanent FILTER_CONTROLLED_PERMANENT_CREATURE_OR_PLANESWALKER = new FilterControlledCreatureOrPlaneswalkerPermanent("creature or planeswalker you control");
+
+    static {
+        FILTER_CONTROLLED_PERMANENT_CREATURE_OR_PLANESWALKER.setLockedFilter(true);
+    }
+
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_PLANESWALKER = new FilterControlledPlaneswalkerPermanent("planeswalker you control");
 
     static {
@@ -468,6 +509,12 @@ public final class StaticFilters {
     static {
         FILTER_OPPONENTS_PERMANENT_NON_LAND.add(TargetController.OPPONENT.getControllerPredicate());
         FILTER_OPPONENTS_PERMANENT_NON_LAND.setLockedFilter(true);
+    }
+
+    public static final FilterNoncreaturePermanent FILTER_PERMANENT_NON_CREATURE = new FilterNoncreaturePermanent();
+
+    static {
+        FILTER_PERMANENT_NON_CREATURE.setLockedFilter(true);
     }
 
     public static final FilterCreaturePermanent FILTER_OPPONENTS_PERMANENT_CREATURE = new FilterOpponentsCreaturePermanent();
@@ -559,6 +606,13 @@ public final class StaticFilters {
     static {
         FILTER_CONTROLLED_ANOTHER_CREATURE.add(AnotherPredicate.instance);
         FILTER_CONTROLLED_ANOTHER_CREATURE.setLockedFilter(true);
+    }
+
+    public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_UNTAPPED_CREATURE = new FilterControlledCreaturePermanent("untapped creature you control");
+
+    static {
+        FILTER_CONTROLLED_UNTAPPED_CREATURE.add(TappedPredicate.UNTAPPED);
+        FILTER_CONTROLLED_UNTAPPED_CREATURE.setLockedFilter(true);
     }
 
     public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_UNTAPPED_CREATURES = new FilterControlledCreaturePermanent("untapped creatures you control");
@@ -730,6 +784,18 @@ public final class StaticFilters {
         FILTER_PERMANENT_PLANESWALKERS.setLockedFilter(true);
     }
 
+    public static final FilterBattlePermanent FILTER_PERMANENT_BATTLE = new FilterBattlePermanent();
+
+    static {
+        FILTER_PERMANENT_BATTLE.setLockedFilter(true);
+    }
+
+    public static final FilterBattlePermanent FILTER_PERMANENT_BATTLES = new FilterBattlePermanent("battles");
+
+    static {
+        FILTER_PERMANENT_BATTLES.setLockedFilter(true);
+    }
+
     public static final FilterNonlandPermanent FILTER_PERMANENT_NON_LAND = new FilterNonlandPermanent();
 
     static {
@@ -747,15 +813,6 @@ public final class StaticFilters {
     static {
         FILTER_SPELL_OR_ABILITY_OPPONENTS.add(TargetController.OPPONENT.getControllerPredicate());
         FILTER_SPELL_OR_ABILITY_OPPONENTS.setLockedFilter(true);
-    }
-
-    public static final FilterStackObject FILTER_SPELL_OR_ABILITY_OPPONENTS_NON_GREEN = new FilterStackObject("a nongreen spell or ability an opponent controls");
-
-    static {
-        FILTER_SPELL_OR_ABILITY_OPPONENTS_NON_GREEN.add(Predicates.not(new ColorPredicate(ObjectColor.GREEN)));
-        FILTER_SPELL_OR_ABILITY_OPPONENTS_NON_GREEN.add(TargetController.OPPONENT.getControllerPredicate());
-        FILTER_SPELL_OR_ABILITY_OPPONENTS_NON_GREEN.setLockedFilter(true);
-
     }
 
     public static final FilterStackObject FILTER_SPELL_OR_ABILITY = new FilterStackObject();
@@ -782,21 +839,21 @@ public final class StaticFilters {
         FILTER_SPELL_CREATURE.setLockedFilter(true);
     }
 
-    public static final FilterSpell FILTER_SPELL_NON_CREATURE = (FilterSpell) new FilterSpell("noncreature spell");
+    public static final FilterSpell FILTER_SPELL_NON_CREATURE = new FilterSpell("noncreature spell");
 
     static {
         FILTER_SPELL_NON_CREATURE.add(Predicates.not(CardType.CREATURE.getPredicate()));
         FILTER_SPELL_NON_CREATURE.setLockedFilter(true);
     }
 
-    public static final FilterSpell FILTER_SPELLS_NON_CREATURE = (FilterSpell) new FilterSpell("noncreature spells");
+    public static final FilterSpell FILTER_SPELLS_NON_CREATURE = new FilterSpell("noncreature spells");
 
     static {
         FILTER_SPELLS_NON_CREATURE.add(Predicates.not(CardType.CREATURE.getPredicate()));
         FILTER_SPELLS_NON_CREATURE.setLockedFilter(true);
     }
 
-    public static final FilterSpell FILTER_SPELL_A_NON_CREATURE = (FilterSpell) new FilterSpell("a noncreature spell");
+    public static final FilterSpell FILTER_SPELL_A_NON_CREATURE = new FilterSpell("a noncreature spell");
 
     static {
         FILTER_SPELL_A_NON_CREATURE.add(Predicates.not(CardType.CREATURE.getPredicate()));
@@ -960,6 +1017,12 @@ public final class StaticFilters {
 
     static {
         FILTER_ATTACKING_CREATURE.setLockedFilter(true);
+    }
+
+    public static final FilterAttackingCreature FILTER_AN_ATTACKING_CREATURE = new FilterAttackingCreature("an attacking creature");
+
+    static {
+        FILTER_AN_ATTACKING_CREATURE.setLockedFilter(true);
     }
 
     public static final FilterAttackingCreature FILTER_ATTACKING_CREATURES = new FilterAttackingCreature("attacking creatures");

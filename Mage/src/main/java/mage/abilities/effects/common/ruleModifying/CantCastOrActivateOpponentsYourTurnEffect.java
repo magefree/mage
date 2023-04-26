@@ -65,9 +65,9 @@ public class CantCastOrActivateOpponentsYourTurnEffect extends ContinuousRuleMod
             case ACTIVATE_ABILITY:
                 Permanent permanent = game.getPermanent(event.getSourceId());
                 return permanent != null
-                        && permanent.isArtifact(game)
+                        && (permanent.isArtifact(game)
                         || permanent.isCreature(game)
-                        || permanent.isEnchantment(game);
+                        || permanent.isEnchantment(game));
         }
         return false;
     }

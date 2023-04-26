@@ -65,7 +65,7 @@ class LostHoursEffect extends OneShotEffect {
             targetPlayer.revealCards(source, targetPlayer.getHand(), game);
             if (targetPlayer.getHand().size() > 0) {
                 TargetCard target = new TargetCard(Zone.HAND, new FilterCard(StaticFilters.FILTER_CARD_A_NON_LAND));
-                if (controller.choose(Outcome.Discard, targetPlayer.getHand(), target, game)) {
+                if (controller.choose(Outcome.Discard, targetPlayer.getHand(), target, source, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         targetPlayer.putCardOnTopXOfLibrary(card, game, source, 3, true);

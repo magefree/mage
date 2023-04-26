@@ -241,8 +241,9 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     }
 
     @Override
-    public void setTiming(TimingRule timing) {
+    public ActivatedAbilityImpl setTiming(TimingRule timing) {
         this.timing = timing;
+        return this;
     }
 
     protected boolean hasMoreActivationsThisTurn(Game game) {

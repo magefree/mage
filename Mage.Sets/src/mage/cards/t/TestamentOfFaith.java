@@ -27,7 +27,7 @@ public final class TestamentOfFaith extends CardImpl {
 
         // {X}: Testament of Faith becomes an X/X Wall creature with defender in addition to its other types until end of turn.
         Ability ability = new SimpleActivatedAbility(new SetBasePowerToughnessSourceEffect(
-                ManacostVariableValue.REGULAR, Duration.EndOfTurn, SubLayer.SetPT_7b, true
+                ManacostVariableValue.REGULAR, ManacostVariableValue.REGULAR, Duration.EndOfTurn, SubLayer.SetPT_7b
         ).setText("{this} becomes an X/X"), new VariableManaCost(VariableCostType.NORMAL));
         ability.addEffect(new TestamentOfFaithEffect());
         ability.addEffect(new GainAbilitySourceEffect(

@@ -180,6 +180,19 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     Turn getTurn();
 
+    /**
+     * @return can return null in non started games
+     */
+    PhaseStep getTurnStepType();
+
+    /**
+     * @return can return null in non started games
+     */
+    TurnPhase getTurnPhaseType();
+
+    /**
+     * @return can return null in non started games
+     */
     Phase getPhase();
 
     Step getStep();

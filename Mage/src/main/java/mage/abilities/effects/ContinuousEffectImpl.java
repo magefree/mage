@@ -228,6 +228,12 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         return EndStepCountWatcher.getCount(startingControllerId, game) > effectStartingEndStep;
     }
 
+    public boolean isYourNextEndCombatStep(Game game) {
+        return effectStartingOnTurn < game.getTurnNum()
+                && game.isActivePlayer(startingControllerId)
+                && game.getPhase().getType() == TurnPhase.POSTCOMBAT_MAIN;
+    }
+
     @Override
     public boolean isInactive(Ability source, Game game) {
         // YOUR turn checks
@@ -237,6 +243,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
             case UntilYourNextTurn:
             case UntilEndOfYourNextTurn:
             case UntilYourNextEndStep:
+            case UntilYourNextEndCombatStep:
                 break;
             default:
                 return false;
@@ -278,6 +285,12 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
                 if (player != null && player.isInGame()) {
                     return this.isYourNextEndStep(game);
                 }
+                break;
+            case UntilYourNextEndCombatStep:
+                if (player != null && player.isInGame()) {
+                    return this.isYourNextEndCombatStep(game);
+                }
+                break;
         }
 
         return canDelete;

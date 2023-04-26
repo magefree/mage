@@ -14,57 +14,34 @@ import mage.game.Game;
 
 /**
  * RENAME
- * @author BetaSteward_at_googlemail.com, North, Alex-Vasile
+ * @author BetaSteward_at_googlemail.com, North, Alex-Vasile, xenohedron
  */
 public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
 
-    private DynamicValue power;
-    private DynamicValue toughness;
+    private final DynamicValue power;
+    private final DynamicValue toughness;
 
     /**
-     *
-     * @param power
-     * @param toughness
-     * @param duration
-     * @param subLayer
-     * @param baseInText    Whether or not the rules text should refer to "base power and toughness" or "power and toughness"
-     *                      Either way, it is always the based power and toughness that are set.
+     * Note: Need to set text manually if calling this constructor directly
      */
-    public SetBasePowerToughnessSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration, SubLayer subLayer, boolean baseInText) {
+    public SetBasePowerToughnessSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration, SubLayer subLayer) {
         super(duration, Layer.PTChangingEffects_7, subLayer, Outcome.BoostCreature);
         setCharacterDefining(subLayer == SubLayer.CharacteristicDefining_7a);
         this.power = power;
         this.toughness = toughness;
-        if (power == toughness) { // When power and toughness are equal, a previous constructor passes the same object for both power nad toughness, so use == instead of .equals
-            this.staticText = "{this}'s " + (baseInText ? "base " : "") + "power and toughness are each equal to the number of " + power.getMessage();
-        } else {  // The only other constructor creates the power and toughenss dynamic values as static values from passed-in ints.
-            String value = (power != null ? power.toString() : toughness.toString());
-            this.staticText = "{this}'s " + (baseInText ? "base " : "") + "power and toughness is " + value + '/' + toughness + ' ' + duration.toString();
-        }
     }
 
-    public SetBasePowerToughnessSourceEffect(DynamicValue amount, Duration duration) {
-        this(amount, duration, SubLayer.CharacteristicDefining_7a, false);
-    }
-
-    public SetBasePowerToughnessSourceEffect(DynamicValue amount, Duration duration, SubLayer subLayer) {
-        this(amount, duration, subLayer, true);
-    }
-
-    public SetBasePowerToughnessSourceEffect(DynamicValue amount, Duration duration, SubLayer subLayer, boolean changeBaseValue) {
-        this(amount, amount, duration, subLayer, changeBaseValue);
-    }
-
-    public SetBasePowerToughnessSourceEffect(int power, int toughness, Duration duration, boolean changeBaseValue) {
-        this(power, toughness, duration, SubLayer.CharacteristicDefining_7a, changeBaseValue);
+    /**
+     * @param amount Power and toughness to set as a characteristic-defining ability
+     */
+    public SetBasePowerToughnessSourceEffect(DynamicValue amount) {
+        this(amount, amount, Duration.EndOfGame, SubLayer.CharacteristicDefining_7a);
+        this.staticText = "{this}'s power and toughness are each equal to the number of " + amount.getMessage();
     }
 
     public SetBasePowerToughnessSourceEffect(int power, int toughness, Duration duration, SubLayer subLayer) {
-        this(power, toughness, duration, subLayer, false);
-    }
-
-    public SetBasePowerToughnessSourceEffect(int power, int toughness, Duration duration, SubLayer subLayer, boolean changeBaseValue) {
-        this(StaticValue.get(power), StaticValue.get(toughness), duration, subLayer, changeBaseValue);
+        this(StaticValue.get(power), StaticValue.get(toughness), duration, subLayer);
+        this.staticText = "{this} has base power and toughness " + power + '/' + toughness + ' ' + duration.toString();
     }
 
     public SetBasePowerToughnessSourceEffect(final SetBasePowerToughnessSourceEffect effect) {

@@ -31,6 +31,7 @@ public final class TheMightstoneAndWeakstone extends CardImpl {
         this.subtype.add(SubType.POWERSTONE);
 
         this.meldsWithClazz = mage.cards.u.UrzaLordProtector.class;
+        this.meldsToClazz = mage.cards.u.UrzaPlaneswalker.class;
 
         // When The Mightstone and Weakstone enters the battlefield, choose one --
         // * Draw two cards.

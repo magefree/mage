@@ -54,7 +54,7 @@ public final class VeteranWarleader extends CardImpl {
 
         // Veteran Warleader's power and toughness are each equal to the number of creatures you control.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(
-                CreaturesYouControlCount.instance, Duration.EndOfGame))
+                CreaturesYouControlCount.instance))
                 .addHint(CreaturesYouControlHint.instance));
 
         // Tap another untapped Ally you control: Veteran Warleader gains your choice of first strike, vigilance, or trample until end of turn.

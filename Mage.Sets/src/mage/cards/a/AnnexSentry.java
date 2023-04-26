@@ -21,18 +21,17 @@ import mage.target.TargetPermanent;
 import java.util.UUID;
 
 /**
- *
  * @author AhmadYProjects
  */
 public final class AnnexSentry extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact or creature an opponent controls with cmc 3 or less");
+    private static final FilterPermanent filter = new FilterPermanent("artifact or creature an opponent controls with mana value 3 or less");
 
     static {
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN,4));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
         filter.add(Predicates.or
                 (CardType.ARTIFACT.getPredicate(),
-                CardType.CREATURE.getPredicate()));
+                        CardType.CREATURE.getPredicate()));
         filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 

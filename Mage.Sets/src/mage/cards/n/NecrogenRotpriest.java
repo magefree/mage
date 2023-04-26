@@ -1,27 +1,25 @@
 package mage.cards.n;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddPoisonCounterTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
-import mage.constants.SetTargetPointer;
-import mage.constants.SubType;
 import mage.abilities.keyword.ToxicAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
+import mage.constants.SetTargetPointer;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -56,7 +54,9 @@ public final class NecrogenRotpriest extends CardImpl {
 
         // {1}{B}{G}: Target creature you control with toxic gains deathtouch until end of turn.
         Ability ability = new SimpleActivatedAbility(
-                new GainAbilityTargetEffect(DeathtouchAbility.getInstance()), new ManaCostsImpl<>("{1}{B}{G}")
+                new GainAbilityTargetEffect(DeathtouchAbility.getInstance())
+                        .setText("target creature you control with toxic gains deathtouch until end of turn"),
+                new ManaCostsImpl<>("{1}{B}{G}")
         );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

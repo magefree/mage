@@ -3,6 +3,7 @@ Afterlife|number|
 Annihilator|number|
 Ascend|new|
 Assist|new|
+Backup|card, number|
 Basic landcycling|cost|
 Battle cry|new|
 Bestow|card, manaString|

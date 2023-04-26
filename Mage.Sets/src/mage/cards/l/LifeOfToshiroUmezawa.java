@@ -41,7 +41,7 @@ public final class LifeOfToshiroUmezawa extends CardImpl {
                 this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II,
                 new Effects(new BoostTargetEffect(2, 2)),
                 new Targets(new TargetCreaturePermanent()), false,
-                mode, new Mode(new GainLifeEffect(2))
+                null, mode, new Mode(new GainLifeEffect(2))
         );
 
         // III — Exile this Saga, then return it to the battlefield transformed under your control.

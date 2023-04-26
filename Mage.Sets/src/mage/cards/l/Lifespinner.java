@@ -42,7 +42,7 @@ public final class Lifespinner extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)),
                 new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, new FilterControlledCreaturePermanent(SubType.SPIRIT, "three Spirits"), false)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, new FilterControlledCreaturePermanent(SubType.SPIRIT, "Spirits"), false)));
         this.addAbility(ability);
     }
 

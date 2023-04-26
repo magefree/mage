@@ -76,10 +76,10 @@ class CovetousUrgeEffect extends OneShotEffect {
                 return true;
             }
             target = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD_A_NON_LAND);
-            controller.choose(Outcome.Exile, player.getHand(), target, game);
+            controller.choose(Outcome.Exile, player.getHand(), target, source, game);
         } else {
             target = new TargetCard(Zone.GRAVEYARD, StaticFilters.FILTER_CARD_A_NON_LAND);
-            controller.choose(Outcome.Exile, player.getGraveyard(), target, game);
+            controller.choose(Outcome.Exile, player.getGraveyard(), target, source, game);
         }
 
         // use same player's zone for all Covetous Urge instances

@@ -29,7 +29,7 @@ public final class AdamaroFirstToDesire extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Adamaro, First to Desire's power and toughness are each equal to the number of cards in the hand of the opponent with the most cards in hand.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new MostCardsInOpponentsHandCount(), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new MostCardsInOpponentsHandCount())));
     }
 
     private AdamaroFirstToDesire(final AdamaroFirstToDesire card) {

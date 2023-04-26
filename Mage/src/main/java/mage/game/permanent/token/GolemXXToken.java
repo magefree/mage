@@ -11,6 +11,10 @@ import java.util.Arrays;
  */
 public final class GolemXXToken extends TokenImpl {
 
+    public GolemXXToken() {
+        this(0);
+    }
+
     public GolemXXToken(int xValue) {
         super("Golem Token", "X/X colorless Golem artifact creature token");
         cardType.add(CardType.ARTIFACT);

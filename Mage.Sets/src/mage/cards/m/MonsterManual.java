@@ -82,7 +82,7 @@ class ZoologicalStudyEffect extends OneShotEffect {
                 break;
             default:
                 TargetCard target = new TargetCard(Zone.ALL, StaticFilters.FILTER_CARD_CREATURE);
-                player.choose(outcome, cards, target, game);
+                player.choose(outcome, cards, target, source, game);
                 card = cards.get(target.getFirstTarget(), game);
         }
         player.moveCards(card, Zone.HAND, source, game);

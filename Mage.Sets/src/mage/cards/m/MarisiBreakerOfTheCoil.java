@@ -79,7 +79,7 @@ class MarisiBreakerOfTheCoilSpellEffect extends ContinuousRuleModifyingEffectImp
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return game.getPhase().getType() == TurnPhase.COMBAT
+        return game.getTurnPhaseType() == TurnPhase.COMBAT
                 && game.getOpponents(source.getControllerId()).contains(event.getPlayerId());
     }
 }

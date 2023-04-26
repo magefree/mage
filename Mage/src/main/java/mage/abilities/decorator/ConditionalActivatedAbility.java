@@ -12,11 +12,11 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.constants.EffectType;
+import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
 
 /**
- *
  * @author LevelX
  */
 public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
@@ -24,6 +24,10 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
     private static final Effects emptyEffects = new Effects();
 
     private String ruleText = null;
+
+    public ConditionalActivatedAbility(Effect effect, Cost cost, Condition condition) {
+        this(Zone.BATTLEFIELD, effect, cost, condition);
+    }
 
     public ConditionalActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition) {
         super(zone, effect, cost);
@@ -71,13 +75,21 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
         if (ruleText != null && !ruleText.isEmpty()) {
             return ruleText;
         }
+        StringBuilder sb = new StringBuilder(super.getRule());
+        sb.append(" Activate only ");
+        if (timing == TimingRule.SORCERY) {
+            sb.append("as a sorcery and only ");
+        }
         String conditionText = condition.toString();
-        String additionalText = "if ";
         if (conditionText.startsWith("during")
                 || conditionText.startsWith("before")
                 || conditionText.startsWith("if")) {
-            additionalText = "";
+            sb.append("");
+        } else {
+            sb.append("if ");
         }
-        return super.getRule() + " Activate only " + additionalText + condition.toString() + ".";
+        sb.append(conditionText);
+        sb.append('.');
+        return sb.toString();
     }
 }

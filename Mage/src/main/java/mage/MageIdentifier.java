@@ -17,5 +17,6 @@ public enum MageIdentifier {
     ShareTheSpoilsWatcher,
     WishWatcher,
     GlimpseTheCosmosWatcher,
-    SerraParagonWatcher
+    SerraParagonWatcher,
+    OneWithTheMultiverseWatcher
 }

@@ -169,6 +169,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Deadly Dispute", 124, Rarity.COMMON, mage.cards.d.DeadlyDispute.class));
         cards.add(new SetCardInfo("Death Kiss", 675, Rarity.RARE, mage.cards.d.DeathKiss.class));
         cards.add(new SetCardInfo("Decanter of Endless Water", 309, Rarity.COMMON, mage.cards.d.DecanterOfEndlessWater.class));
+        cards.add(new SetCardInfo("Deep Gnome Terramancer", 658, Rarity.RARE, mage.cards.d.DeepGnomeTerramancer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Deep Gnome Terramancer", 607, Rarity.RARE, mage.cards.d.DeepGnomeTerramancer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Delayed Blast Fireball", 676, Rarity.RARE, mage.cards.d.DelayedBlastFireball.class));
         cards.add(new SetCardInfo("Demon Bolt", 787, Rarity.COMMON, mage.cards.d.DemonBolt.class));
         cards.add(new SetCardInfo("Descent into Avernus", 169, Rarity.RARE, mage.cards.d.DescentIntoAvernus.class));
@@ -315,6 +317,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Inspired Tinkering", 183, Rarity.UNCOMMON, mage.cards.i.InspiredTinkering.class));
         cards.add(new SetCardInfo("Inspiring Leader", 28, Rarity.UNCOMMON, mage.cards.i.InspiringLeader.class));
         cards.add(new SetCardInfo("Insufferable Balladeer", 184, Rarity.COMMON, mage.cards.i.InsufferableBalladeer.class));
+        cards.add(new SetCardInfo("Intellect Devourer", 132, Rarity.RARE, mage.cards.i.IntellectDevourer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Intellect Devourer", 575, Rarity.RARE, mage.cards.i.IntellectDevourer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Irenicus's Vile Duplication", 78, Rarity.UNCOMMON, mage.cards.i.IrenicussVileDuplication.class));
         cards.add(new SetCardInfo("Iron Mastiff", 317, Rarity.UNCOMMON, mage.cards.i.IronMastiff.class));
         cards.add(new SetCardInfo("Irregular Cohort", 696, Rarity.COMMON, mage.cards.i.IrregularCohort.class));
@@ -339,6 +343,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Kindred Discovery", 81, Rarity.RARE, mage.cards.k.KindredDiscovery.class));
         cards.add(new SetCardInfo("Kodama's Reach", 826, Rarity.COMMON, mage.cards.k.KodamasReach.class));
         cards.add(new SetCardInfo("Korlessa, Scale Singer", 280, Rarity.UNCOMMON, mage.cards.k.KorlessaScaleSinger.class));
+        cards.add(new SetCardInfo("Lae'zel's Acrobatics", 30, Rarity.RARE, mage.cards.l.LaezelsAcrobatics.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lae'zel's Acrobatics", 556, Rarity.RARE, mage.cards.l.LaezelsAcrobatics.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lae'zel, Vlaakith's Champion", 29, Rarity.RARE, mage.cards.l.LaezelVlaakithsChampion.class));
         cards.add(new SetCardInfo("Laelia, the Blade Reforged", 801, Rarity.RARE, mage.cards.l.LaeliaTheBladeReforged.class));
         cards.add(new SetCardInfo("Lantern of Revealing", 318, Rarity.COMMON, mage.cards.l.LanternOfRevealing.class));

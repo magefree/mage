@@ -42,11 +42,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected UUID ownerId;
     protected String cardNumber;
     protected String expansionSetCode;
-    protected String tokenSetCode;
-    protected String tokenDescriptor;
     protected Rarity rarity;
     protected Class<? extends Card> secondSideCardClazz;
     protected Class<? extends Card> meldsWithClazz;
+    protected Class<? extends Card> meldsToClazz;
+    protected Card meldsToCard;
     protected Card secondSideCard;
     protected boolean nightCard;
 
@@ -120,14 +120,14 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         ownerId = card.ownerId;
         cardNumber = card.cardNumber;
         expansionSetCode = card.expansionSetCode;
-        tokenSetCode = card.tokenSetCode;
-        tokenDescriptor = card.tokenDescriptor;
         rarity = card.rarity;
 
         secondSideCardClazz = card.secondSideCardClazz;
         secondSideCard = null; // will be set on first getSecondCardFace call if card has one
         nightCard = card.nightCard;
         meldsWithClazz = card.meldsWithClazz;
+        meldsToClazz = card.meldsToClazz;
+        meldsToCard = null; // will be set on first getMeldsToCard call if card has one
 
         spellAbility = null; // will be set on first getSpellAbility call if card has one
         flipCard = card.flipCard;
@@ -376,16 +376,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public String getTokenSetCode() {
-        return tokenSetCode;
-    }
-
-    @Override
-    public String getTokenDescriptor() {
-        return tokenDescriptor;
-    }
-
-    @Override
     public List<Mana> getMana() {
         List<Mana> mana = new ArrayList<>();
         for (ActivatedManaAbilityImpl ability : this.abilities.getActivatedManaAbilities(Zone.BATTLEFIELD)) {
@@ -427,7 +417,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         ZoneChangeEvent event = new ZoneChangeEvent(mainCard.getId(), ability, controllerId, fromZone, Zone.STACK);
         Spell spell = new Spell(this, ability.getSpellAbilityToResolve(game), controllerId, event.getFromZone(), game);
         ZoneChangeInfo.Stack info = new ZoneChangeInfo.Stack(event, spell);
-        return ZonesHandler.cast(info, game, ability);
+        return ZonesHandler.cast(info, ability, game);
     }
 
     @Override
@@ -615,29 +605,41 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public boolean isTransformable() {
+        // warning, not all multifaces cards can be transformable (meld, mdfc)
+        // mtg rules method: here
+        // GUI related method: search "transformable = true" in CardView
+        // TODO: check and fix method usage in game engine, it's must be mtg rules logic, not GUI
         return this.secondSideCardClazz != null || this.nightCard;
     }
 
     @Override
     public final Card getSecondCardFace() {
-        // init second side card on first call
+        // init card side on first call
         if (secondSideCardClazz == null && secondSideCard == null) {
             return null;
         }
 
-        if (secondSideCard != null) {
-            return secondSideCard;
+        if (secondSideCard == null) {
+            secondSideCard = initSecondSideCard(secondSideCardClazz);
+            if (secondSideCard != null && secondSideCard.getSpellAbility() != null) {
+                secondSideCard.getSpellAbility().setSourceId(this.getId());
+                secondSideCard.getSpellAbility().setSpellAbilityType(SpellAbilityType.BASE_ALTERNATE);
+                secondSideCard.getSpellAbility().setSpellAbilityCastMode(SpellAbilityCastMode.TRANSFORMED);
+            }
         }
 
+        return secondSideCard;
+    }
+
+    private Card initSecondSideCard(Class<? extends Card> cardClazz) {
         // must be non strict search in any sets, not one set
         // example: if set contains only one card side
         // method used in cards database creating, so can't use repository here
-        ExpansionSet.SetCardInfo info = Sets.findCardByClass(secondSideCardClazz, expansionSetCode);
+        ExpansionSet.SetCardInfo info = Sets.findCardByClass(cardClazz, expansionSetCode, cardNumber);
         if (info == null) {
             return null;
         }
-        secondSideCard = createCard(secondSideCardClazz, new CardSetInfo(info.getName(), expansionSetCode, info.getCardNumber(), info.getRarity(), info.getGraphicInfo()));
-        return secondSideCard;
+        return createCard(cardClazz, new CardSetInfo(info.getName(), expansionSetCode, info.getCardNumber(), info.getRarity(), info.getGraphicInfo()));
     }
 
     @Override
@@ -652,6 +654,25 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public boolean meldsWith(Card card) {
         return this.meldsWithClazz != null && this.meldsWithClazz.isInstance(card.getMainCard());
+    }
+
+    @Override
+    public Class<? extends Card> getMeldsToClazz() {
+        return this.meldsToClazz;
+    }
+
+    @Override
+    public Card getMeldsToCard() {
+        // init card on first call
+        if (meldsToClazz == null && meldsToCard == null) {
+            return null;
+        }
+
+        if (meldsToCard == null) {
+            meldsToCard = initSecondSideCard(meldsToClazz);
+        }
+
+        return meldsToCard;
     }
 
     @Override

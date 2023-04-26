@@ -1,6 +1,5 @@
 package mage.abilities.keyword;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -8,11 +7,11 @@ import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.cards.Card;
-import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -20,17 +19,20 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author Styxo
+ * @author Styxo, Merlingilb
  */
 public class RepairAbility extends DiesSourceTriggeredAbility {
 
-    private String ruleText;
+    private final String ruleText;
 
     public RepairAbility(int count) {
-        super(new AddCountersSourceEffect(CounterType.REPAIR.createInstance(), StaticValue.get(count), false, true));
+        super(new AddCountersSourceEffect(
+                CounterType.REPAIR.createInstance(), StaticValue.get(count), false, true));
         addSubAbility(new RepairBeginningOfUpkeepInterveningIfTriggeredAbility());
         addSubAbility(new RepairCastFromGraveyardTriggeredAbility());
 
@@ -56,37 +58,41 @@ public class RepairAbility extends DiesSourceTriggeredAbility {
     }
 }
 
-class RepairCastFromGraveyardEffect extends AsThoughEffectImpl {
+class RepairedCastFromGraveyardEffect extends OneShotEffect {
 
-    public RepairCastFromGraveyardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "You may cast it from graveyard until end of turn";
+    public RepairedCastFromGraveyardEffect() {
+        super(Outcome.Benefit);
     }
 
-    public RepairCastFromGraveyardEffect(final RepairCastFromGraveyardEffect effect) {
+    private RepairedCastFromGraveyardEffect(final RepairedCastFromGraveyardEffect effect) {
         super(effect);
     }
 
     @Override
+    public RepairedCastFromGraveyardEffect copy() {
+        return new RepairedCastFromGraveyardEffect(this);
+    }
+
+    @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        Card card = game.getCard(source.getSourceId());
+        if (card == null) {
+            return false;
+        }
+        game.addEffect(new PlayFromNotOwnHandZoneTargetEffect(Zone.GRAVEYARD, Duration.UntilYourNextEndStep)
+                .setTargetPointer(new FixedTarget(card, game)), source);
         return true;
-    }
-
-    @Override
-    public RepairCastFromGraveyardEffect copy() {
-        return new RepairCastFromGraveyardEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return source.isControlledBy(affectedControllerId);
     }
 }
 
 class RepairCastFromGraveyardTriggeredAbility extends TriggeredAbilityImpl {
 
     public RepairCastFromGraveyardTriggeredAbility() {
-        super(Zone.GRAVEYARD, new RepairCastFromGraveyardEffect());
+        super(Zone.GRAVEYARD, new RepairedCastFromGraveyardEffect());
         setRuleVisible(false);
     }
 
@@ -103,10 +109,8 @@ class RepairCastFromGraveyardTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(getSourceId())) {
             Card card = game.getCard(getSourceId());
-            if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD
-                    && card.getCounters(game).getCount(CounterType.REPAIR) == 0) {
-                return true;
-            }
+            return card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD
+                    && card.getCounters(game).getCount(CounterType.REPAIR) == 0;
         }
         return false;
     }
@@ -125,11 +129,11 @@ class RepairCastFromGraveyardTriggeredAbility extends TriggeredAbilityImpl {
 class RepairBeginningOfUpkeepInterveningIfTriggeredAbility extends ConditionalInterveningIfTriggeredAbility {
 
     public RepairBeginningOfUpkeepInterveningIfTriggeredAbility() {
-        super(new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD, new RemoveCounterSourceEffect(CounterType.REPAIR.createInstance()), TargetController.YOU, false),
+        super(new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD,
+                new RemoveCounterSourceEffect(CounterType.REPAIR.createInstance()),TargetController.YOU, false),
                 new SourceHasCounterCondition(CounterType.REPAIR),
                 "At the beginning of your upkeep, remove a repair counter from {this}");
         this.setRuleVisible(false);
-
     }
 
     public RepairBeginningOfUpkeepInterveningIfTriggeredAbility(final RepairBeginningOfUpkeepInterveningIfTriggeredAbility effect) {

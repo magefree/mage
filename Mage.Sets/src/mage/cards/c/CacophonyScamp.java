@@ -1,7 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -12,11 +10,13 @@ import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.counter.ProliferateEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -40,7 +40,8 @@ public final class CacophonyScamp extends CardImpl {
         ), false));
 
         // When Cacophony Scamp dies, it deals damage equal to its power to any target.
-        Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(xValue, "it"));
+        Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(xValue)
+                .setText("it deals damage equal to its power to any target"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

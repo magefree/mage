@@ -31,7 +31,9 @@ public final class GiselaTheBrokenBlade extends CardImpl {
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
+
         this.meldsWithClazz = mage.cards.b.BrunaTheFadingLight.class;
+        this.meldsToClazz = mage.cards.b.BriselaVoiceOfNightmares.class;
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

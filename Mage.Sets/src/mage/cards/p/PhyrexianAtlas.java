@@ -44,7 +44,7 @@ class PhyrexianAtlasEffect extends OneShotEffect {
 
     PhyrexianAtlasEffect() {
         super(Outcome.Benefit);
-        staticText = "each opponent with three or more poison counters loses 1 life";
+        staticText = "each opponent who has three or more poison counters loses 1 life";
     }
 
     private PhyrexianAtlasEffect(final PhyrexianAtlasEffect effect) {

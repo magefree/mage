@@ -63,7 +63,7 @@ enum GreatUncleanOneValue implements DynamicValue {
         }
         int life = player.getLife();
         return game
-                .getOpponents(player.getId())
+                .getOpponents(player.getId(), true)
                 .stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)

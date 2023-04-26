@@ -77,7 +77,7 @@ class AllureOfTheUnknownEffect extends OneShotEffect {
             return false;
         }
         TargetCard targetCard = new TargetCardInLibrary(StaticFilters.FILTER_CARD_A_NON_LAND);
-        opponent.choose(Outcome.Exile, cards, targetCard, game);
+        opponent.choose(Outcome.Exile, cards, targetCard, source, game);
         Card card = game.getCard(targetCard.getFirstTarget());
         if (player.moveCards(card, Zone.EXILED, source, game)
                 && card != null

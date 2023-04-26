@@ -124,7 +124,7 @@ class XenagosExileEffect extends OneShotEffect {
             target1.setNotTarget(true);
             if (!exiledCards.isEmpty()
                     && target1.canChoose(source.getControllerId(), source, game)
-                    && controller.choose(Outcome.PutCardInPlay, exiledCards, target1, game)) {
+                    && controller.choose(Outcome.PutCardInPlay, exiledCards, target1, source, game)) {
                 controller.moveCards(new CardsImpl(target1.getTargets()), Zone.BATTLEFIELD, source, game);
             }
             return true;

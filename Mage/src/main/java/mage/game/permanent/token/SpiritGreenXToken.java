@@ -11,6 +11,10 @@ import java.util.Arrays;
  */
 public final class SpiritGreenXToken extends TokenImpl {
 
+    public SpiritGreenXToken() {
+        this(0);
+    }
+
     public SpiritGreenXToken(int xValue) {
         super("Spirit Token", "X/X green Spirit creature token");
         cardType.add(CardType.CREATURE);
