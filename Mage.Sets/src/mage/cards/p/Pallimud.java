@@ -38,7 +38,7 @@ public final class Pallimud extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseOpponentEffect(Outcome.Detriment)));
         
         // Pallimud's power is equal to the number of tapped lands the chosen player controls.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(new AnathemancerCount())));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(new PallimudCount())));
     }
 
     private Pallimud(final Pallimud card) {
@@ -51,7 +51,7 @@ public final class Pallimud extends CardImpl {
     }
 }
 
-class AnathemancerCount implements DynamicValue {
+class PallimudCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -69,8 +69,8 @@ class AnathemancerCount implements DynamicValue {
     }
 
     @Override
-    public AnathemancerCount copy() {
-        return new AnathemancerCount();
+    public PallimudCount copy() {
+        return new PallimudCount();
     }
 
     @Override
