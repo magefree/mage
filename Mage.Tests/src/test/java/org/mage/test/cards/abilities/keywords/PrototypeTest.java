@@ -9,6 +9,7 @@ import mage.constants.ComparisonType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.*;
 import mage.game.permanent.Permanent;
@@ -25,16 +26,31 @@ public class PrototypeTest extends CardTestPlayerBase {
     private static final String automatonWithPrototype = "Blitz Automaton with prototype";
     private static final String bolt = "Lightning Bolt";
     private static final String cloudshift = "Cloudshift";
+    private static final String clone = "Clone";
+    private static final String counterpart = "Cackling Counterpart";
 
     private void checkAutomaton(boolean prototyped) {
-        assertPermanentCount(playerA, automaton, 1);
-        assertPowerToughness(playerA, automaton, prototyped ? 3 : 6, prototyped ? 2 : 4);
-        Permanent permanent = getPermanent(automaton, playerA);
-        Assert.assertTrue("need color", prototyped
-                ? permanent.getColor(currentGame).isRed()
-                : permanent.getColor(currentGame).isColorless()
-        );
-        Assert.assertEquals("need cmc", prototyped ? 3 : 7, permanent.getManaValue());
+        checkAutomaton(prototyped, 1);
+    }
+
+    private void checkAutomaton(boolean prototyped, int count) {
+        assertPermanentCount(playerA, automaton, count);
+        for (Permanent permanent : currentGame.getBattlefield().getActivePermanents(
+                StaticFilters.FILTER_PERMANENT, playerA.getId(), currentGame
+        )) {
+            if (!permanent.getName().equals(automaton)) {
+                continue;
+            }
+            assertPowerToughness(playerA, automaton, prototyped ? 3 : 6, prototyped ? 2 : 4);
+            getPermanent(automaton, playerA);
+            Assert.assertEquals("Power is wrong", prototyped ? 3 : 6, permanent.getPower().getValue());
+            Assert.assertEquals("Toughness is wrong", prototyped ? 2 : 4, permanent.getToughness().getValue());
+            Assert.assertTrue("Color is wrong", prototyped
+                    ? permanent.getColor(currentGame).isRed()
+                    : permanent.getColor(currentGame).isColorless()
+            );
+            Assert.assertEquals("Mana value is wrong", prototyped ? 3 : 7, permanent.getManaValue());
+        }
     }
 
     private void makeTester(Predicate<? super MageObject>... predicates) {
@@ -78,7 +94,7 @@ public class PrototypeTest extends CardTestPlayerBase {
 
     @Test
     public void testLeavesBattlefield() {
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3 + 1);
         addCard(Zone.HAND, playerA, automaton);
         addCard(Zone.HAND, playerA, bolt);
 
@@ -104,7 +120,7 @@ public class PrototypeTest extends CardTestPlayerBase {
 
     @Test
     public void testBlink() {
-        addCard(Zone.BATTLEFIELD, playerA, "Plateau", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Plateau", 3 + 1);
         addCard(Zone.HAND, playerA, automaton);
         addCard(Zone.HAND, playerA, cloudshift);
 
@@ -212,5 +228,65 @@ public class PrototypeTest extends CardTestPlayerBase {
 
         checkAutomaton(true);
         assertLife(playerA, 20 + 1);
+    }
+
+    @Test
+    public void testCloneRegular() {
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 7 + 4);
+        addCard(Zone.HAND, playerA, automaton);
+        addCard(Zone.HAND, playerA, clone);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automaton);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, clone);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        checkAutomaton(false, 2);
+    }
+
+    @Test
+    public void testClonePrototype() {
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 3 + 4);
+        addCard(Zone.HAND, playerA, automaton);
+        addCard(Zone.HAND, playerA, clone);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automatonWithPrototype);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, clone);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        checkAutomaton(true, 2);
+    }
+
+    @Test
+    public void testTokenCopyRegular() {
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 7 + 3);
+        addCard(Zone.HAND, playerA, automaton);
+        addCard(Zone.HAND, playerA, counterpart);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automaton);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, counterpart, automaton);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        checkAutomaton(false, 2);
+    }
+
+    @Test
+    public void testTokenCopyPrototype() {
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 3 + 3);
+        addCard(Zone.HAND, playerA, automaton);
+        addCard(Zone.HAND, playerA, counterpart);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automatonWithPrototype);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, counterpart, automaton);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        checkAutomaton(true, 2);
     }
 }
