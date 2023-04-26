@@ -71,13 +71,11 @@ public class CombatDamageDealtToYouTriggeredAbility extends TriggeredAbilityImpl
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         DamagedPlayerBatchEvent damageEvent = (DamagedPlayerBatchEvent) event;
-        boolean isCombatDamage = damageEvent.getEvents()
+        boolean check = damageEvent.getEvents()
                 .stream()
-                .anyMatch(DamagedEvent::isCombatDamage);
+                .anyMatch(c -> c.isCombatDamage() && c.getPlayerId() == this.controllerId);
 
-        boolean damagedController = damageEvent.getEvents().stream()
-                .anyMatch(c -> c.getPlayerId() == this.controllerId);
-        if (isCombatDamage && damagedController) {
+        if (check) {
             if (this.setTarget) {
                 this.getEffects().setTargetPointer(
                         new FixedTarget(game.getPermanent(damageEvent.getSourceId()).getControllerId()));
