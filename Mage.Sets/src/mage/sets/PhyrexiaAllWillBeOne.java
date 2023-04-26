@@ -36,6 +36,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Atmosphere Surgeon", 41, Rarity.UNCOMMON, mage.cards.a.AtmosphereSurgeon.class));
         cards.add(new SetCardInfo("Atraxa's Skitterfang", 223, Rarity.UNCOMMON, mage.cards.a.AtraxasSkitterfang.class));
         cards.add(new SetCardInfo("Atraxa, Grand Unifier", 196, Rarity.MYTHIC, mage.cards.a.AtraxaGrandUnifier.class));
+        cards.add(new SetCardInfo("Awaken the Sleeper", 119, Rarity.UNCOMMON, mage.cards.a.AwakenTheSleeper.class));
         cards.add(new SetCardInfo("Axiom Engraver", 120, Rarity.COMMON, mage.cards.a.AxiomEngraver.class));
         cards.add(new SetCardInfo("Barbed Batterfist", 121, Rarity.COMMON, mage.cards.b.BarbedBatterfist.class));
         cards.add(new SetCardInfo("Basilica Shepherd", 4, Rarity.COMMON, mage.cards.b.BasilicaShepherd.class));
@@ -43,6 +44,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Bilious Skulldweller", 83, Rarity.UNCOMMON, mage.cards.b.BiliousSkulldweller.class));
         cards.add(new SetCardInfo("Black Sun's Twilight", 84, Rarity.RARE, mage.cards.b.BlackSunsTwilight.class));
         cards.add(new SetCardInfo("Blackcleave Cliffs", 248, Rarity.RARE, mage.cards.b.BlackcleaveCliffs.class));
+        cards.add(new SetCardInfo("Blade of Shared Souls", 42, Rarity.RARE, mage.cards.b.BladeOfSharedSouls.class));
         cards.add(new SetCardInfo("Bladed Ambassador", 5, Rarity.UNCOMMON, mage.cards.b.BladedAmbassador.class));
         cards.add(new SetCardInfo("Bladegraft Aspirant", 122, Rarity.COMMON, mage.cards.b.BladegraftAspirant.class));
         cards.add(new SetCardInfo("Bladehold War-Whip", 197, Rarity.UNCOMMON, mage.cards.b.BladeholdWarWhip.class));
@@ -55,16 +57,21 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Bring the Ending", 44, Rarity.COMMON, mage.cards.b.BringTheEnding.class));
         cards.add(new SetCardInfo("Cacophony Scamp", 124, Rarity.UNCOMMON, mage.cards.c.CacophonyScamp.class));
         cards.add(new SetCardInfo("Cankerbloom", 161, Rarity.UNCOMMON, mage.cards.c.Cankerbloom.class));
+        cards.add(new SetCardInfo("Carnivorous Canopy", 162, Rarity.COMMON, mage.cards.c.CarnivorousCanopy.class));
         cards.add(new SetCardInfo("Capricious Hellraiser", 125, Rarity.MYTHIC, mage.cards.c.CapriciousHellraiser.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Capricious Hellraiser", 310, Rarity.MYTHIC, mage.cards.c.CapriciousHellraiser.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Capricious Hellraiser", 353, Rarity.MYTHIC, mage.cards.c.CapriciousHellraiser.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Capricious Hellraiser", 444, Rarity.MYTHIC, mage.cards.c.CapriciousHellraiser.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cephalopod Sentry", 198, Rarity.UNCOMMON, mage.cards.c.CephalopodSentry.class));
         cards.add(new SetCardInfo("Charforger", 199, Rarity.UNCOMMON, mage.cards.c.Charforger.class));
+        cards.add(new SetCardInfo("Charge of the Mites", 6, Rarity.COMMON, mage.cards.c.ChargeOfTheMites.class));
         cards.add(new SetCardInfo("Chimney Rabble", 126, Rarity.COMMON, mage.cards.c.ChimneyRabble.class));
         cards.add(new SetCardInfo("Chittering Skitterling", 87, Rarity.UNCOMMON, mage.cards.c.ChitteringSkitterling.class));
         cards.add(new SetCardInfo("Chrome Prowler", 45, Rarity.COMMON, mage.cards.c.ChromeProwler.class));
+        cards.add(new SetCardInfo("Churning Reservoir", 127, Rarity.UNCOMMON, mage.cards.c.ChurningReservoir.class));
+        cards.add(new SetCardInfo("Cinderslash Ravager", 200, Rarity.UNCOMMON, mage.cards.c.CinderslashRavager.class));
         cards.add(new SetCardInfo("Compleat Devotion", 7, Rarity.COMMON, mage.cards.c.CompleatDevotion.class));
+        cards.add(new SetCardInfo("Conduit of Worlds", 163, Rarity.RARE, mage.cards.c.ConduitOfWorlds.class));
         cards.add(new SetCardInfo("Contagious Vorrac", 164, Rarity.COMMON, mage.cards.c.ContagiousVorrac.class));
         cards.add(new SetCardInfo("Copper Longlegs", 165, Rarity.COMMON, mage.cards.c.CopperLonglegs.class));
         cards.add(new SetCardInfo("Copperline Gorge", 249, Rarity.RARE, mage.cards.c.CopperlineGorge.class));
@@ -109,6 +116,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Goldwarden's Helm", 13, Rarity.COMMON, mage.cards.g.GoldwardensHelm.class));
         cards.add(new SetCardInfo("Goliath Hatchery", 408, Rarity.RARE, mage.cards.g.GoliathHatchery.class));
         cards.add(new SetCardInfo("Graaz, Unstoppable Juggernaut", 229, Rarity.RARE, mage.cards.g.GraazUnstoppableJuggernaut.class));
+        cards.add(new SetCardInfo("Green Sun's Twilight", 169, Rarity.RARE, mage.cards.g.GreenSunsTwilight.class));
         cards.add(new SetCardInfo("Gulping Scraptrap", 96, Rarity.COMMON, mage.cards.g.GulpingScraptrap.class));
         cards.add(new SetCardInfo("Hazardous Blast", 135, Rarity.COMMON, mage.cards.h.HazardousBlast.class));
         cards.add(new SetCardInfo("Hexgold Halberd", 136, Rarity.UNCOMMON, mage.cards.h.HexgoldHalberd.class));
@@ -139,6 +147,10 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Kuldotha Cackler", 139, Rarity.COMMON, mage.cards.k.KuldothaCackler.class));
         cards.add(new SetCardInfo("Lattice-Blade Mantis", 173, Rarity.COMMON, mage.cards.l.LatticeBladeMantis.class));
         cards.add(new SetCardInfo("Leonin Lightbringer", 20, Rarity.COMMON, mage.cards.l.LeoninLightbringer.class));
+        cards.add(new SetCardInfo("Lukka, Bound to Ruin", 207, Rarity.MYTHIC, mage.cards.l.LukkaBoundToRuin.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lukka, Bound to Ruin", 328, Rarity.MYTHIC, mage.cards.l.LukkaBoundToRuin.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lukka, Bound to Ruin", 342, Rarity.MYTHIC, mage.cards.l.LukkaBoundToRuin.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lukka, Bound to Ruin", 363, Rarity.MYTHIC, mage.cards.l.LukkaBoundToRuin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Magmatic Sprinter", 140, Rarity.UNCOMMON, mage.cards.m.MagmaticSprinter.class));
         cards.add(new SetCardInfo("Malcator's Watcher", 58, Rarity.COMMON, mage.cards.m.MalcatorsWatcher.class));
         cards.add(new SetCardInfo("Malcator, Purity Overseer", 208, Rarity.RARE, mage.cards.m.MalcatorPurityOverseer.class));
@@ -163,6 +175,11 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Myr Convert", 234, Rarity.UNCOMMON, mage.cards.m.MyrConvert.class));
         cards.add(new SetCardInfo("Myr Custodian", 235, Rarity.COMMON, mage.cards.m.MyrCustodian.class));
         cards.add(new SetCardInfo("Myr Kinsmith", 236, Rarity.COMMON, mage.cards.m.MyrKinsmith.class));
+        cards.add(new SetCardInfo("Nahiri's Sacrifice", 142, Rarity.UNCOMMON, mage.cards.n.NahirisSacrifice.class));
+        cards.add(new SetCardInfo("Nahiri, the Unforgiving", 211, Rarity.MYTHIC, mage.cards.n.NahiriTheUnforgiving.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nahiri, the Unforgiving", 329, Rarity.MYTHIC, mage.cards.n.NahiriTheUnforgiving.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nahiri, the Unforgiving", 343, Rarity.MYTHIC, mage.cards.n.NahiriTheUnforgiving.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nahiri, the Unforgiving", 364, Rarity.MYTHIC, mage.cards.n.NahiriTheUnforgiving.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Necrogen Communion", 99, Rarity.UNCOMMON, mage.cards.n.NecrogenCommunion.class));
         cards.add(new SetCardInfo("Necrogen Rotpriest", 212, Rarity.UNCOMMON, mage.cards.n.NecrogenRotpriest.class));
         cards.add(new SetCardInfo("Necrosquito", 100, Rarity.UNCOMMON, mage.cards.n.Necrosquito.class));
@@ -195,9 +212,12 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Ravenous Necrotitan", 106, Rarity.UNCOMMON, mage.cards.r.RavenousNecrotitan.class));
         cards.add(new SetCardInfo("Razorverge Thicket", 257, Rarity.RARE, mage.cards.r.RazorvergeThicket.class));
         cards.add(new SetCardInfo("Rebel Salvo", 144, Rarity.UNCOMMON, mage.cards.r.RebelSalvo.class));
+        cards.add(new SetCardInfo("Red Sun's Twilight", 145, Rarity.RARE, mage.cards.r.RedSunsTwilight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Red Sun's Twilight", 386, Rarity.RARE, mage.cards.r.RedSunsTwilight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reject Imperfection", 67, Rarity.UNCOMMON, mage.cards.r.RejectImperfection.class));
         cards.add(new SetCardInfo("Resistance Reunited", 31, Rarity.UNCOMMON, mage.cards.r.ResistanceReunited.class));
         cards.add(new SetCardInfo("Resistance Skywarden", 146, Rarity.UNCOMMON, mage.cards.r.ResistanceSkywarden.class));
+        cards.add(new SetCardInfo("Rhuk, Hexgold Nabber", 407, Rarity.RARE, mage.cards.r.RhukHexgoldNabber.class));
         cards.add(new SetCardInfo("Ribskiff", 240, Rarity.UNCOMMON, mage.cards.r.Ribskiff.class));
         cards.add(new SetCardInfo("Rustvine Cultivator", 181, Rarity.COMMON, mage.cards.r.RustvineCultivator.class));
         cards.add(new SetCardInfo("Ruthless Predation", 182, Rarity.COMMON, mage.cards.r.RuthlessPredation.class));
@@ -216,6 +236,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Skrelv's Hive", 34, Rarity.RARE, mage.cards.s.SkrelvsHive.class));
         cards.add(new SetCardInfo("Skyscythe Engulfer", 183, Rarity.COMMON, mage.cards.s.SkyscytheEngulfer.class));
         cards.add(new SetCardInfo("Slaughter Singer", 216, Rarity.UNCOMMON, mage.cards.s.SlaughterSinger.class));
+        cards.add(new SetCardInfo("Slobad, Iron Goblin", 149, Rarity.RARE, mage.cards.s.SlobadIronGoblin.class));
         cards.add(new SetCardInfo("Solphim, Mayhem Dominus", 150, Rarity.MYTHIC, mage.cards.s.SolphimMayhemDominus.class));
         cards.add(new SetCardInfo("Soulless Jailer", 241, Rarity.RARE, mage.cards.s.SoullessJailer.class));
         cards.add(new SetCardInfo("Staff of Compleation", 242, Rarity.MYTHIC, mage.cards.s.StaffOfCompleation.class));
@@ -254,6 +275,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Tyvar's Stand", 190, Rarity.UNCOMMON, mage.cards.t.TyvarsStand.class));
         cards.add(new SetCardInfo("Tyvar, Jubilant Brawler", 218, Rarity.RARE, mage.cards.t.TyvarJubilantBrawler.class));
         cards.add(new SetCardInfo("Unctus, Grand Metatect", 75, Rarity.RARE, mage.cards.u.UnctusGrandMetatect.class));
+        cards.add(new SetCardInfo("Unctus's Retrofitter", 76, Rarity.UNCOMMON, mage.cards.u.UnctussRetrofitter.class));
         cards.add(new SetCardInfo("Unnatural Restoration", 191, Rarity.UNCOMMON, mage.cards.u.UnnaturalRestoration.class));
         cards.add(new SetCardInfo("Urabrask's Anointer", 152, Rarity.UNCOMMON, mage.cards.u.UrabrasksAnointer.class));
         cards.add(new SetCardInfo("Urabrask's Forge", 153, Rarity.RARE, mage.cards.u.UrabrasksForge.class));
@@ -265,6 +287,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Venomous Brutalizer", 193, Rarity.UNCOMMON, mage.cards.v.VenomousBrutalizer.class));
         cards.add(new SetCardInfo("Venser, Corpse Puppet", 219, Rarity.RARE, mage.cards.v.VenserCorpsePuppet.class));
         cards.add(new SetCardInfo("Vindictive Flamestoker", 154, Rarity.RARE, mage.cards.v.VindictiveFlamestoker.class));
+        cards.add(new SetCardInfo("Viral Spawning", 194, Rarity.UNCOMMON, mage.cards.v.ViralSpawning.class));
         cards.add(new SetCardInfo("Vivisection Evangelist", 220, Rarity.UNCOMMON, mage.cards.v.VivisectionEvangelist.class));
         cards.add(new SetCardInfo("Vivisurgeon's Insight", 77, Rarity.COMMON, mage.cards.v.VivisurgeonsInsight.class));
         cards.add(new SetCardInfo("Voidwing Hybrid", 221, Rarity.UNCOMMON, mage.cards.v.VoidwingHybrid.class));

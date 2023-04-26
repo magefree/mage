@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class AgainstAllOdds extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact or creature card you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact or creature you control");
     private static final FilterCard filter2 = new FilterCard("artifact or creature card with mana value 3 or less from your graveyard");
 
     static {

@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
@@ -39,7 +38,7 @@ public final class Pallimud extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseOpponentEffect(Outcome.Detriment)));
         
         // Pallimud's power is equal to the number of tapped lands the chosen player controls.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(new AnathemancerCount(), Duration.Custom)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(new PallimudCount())));
     }
 
     private Pallimud(final Pallimud card) {
@@ -52,7 +51,7 @@ public final class Pallimud extends CardImpl {
     }
 }
 
-class AnathemancerCount implements DynamicValue {
+class PallimudCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -70,8 +69,8 @@ class AnathemancerCount implements DynamicValue {
     }
 
     @Override
-    public AnathemancerCount copy() {
-        return new AnathemancerCount();
+    public PallimudCount copy() {
+        return new PallimudCount();
     }
 
     @Override

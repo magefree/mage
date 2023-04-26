@@ -48,13 +48,14 @@ public final class UnctusGrandMetatect extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new BecomesTappedSourceTriggeredAbility(
                         new DrawDiscardControllerEffect(1, 1)
-                ), Duration.WhileOnBattlefield, filter, true
+                ).setTriggerPhrase("Whenever this creature becomes tapped, "),
+                Duration.WhileOnBattlefield, filter, true
         )));
 
         // Other artifact creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(
                 1, 1, Duration.WhileOnBattlefield,
-                StaticFilters.FILTER_PERMANENT_ARTIFACT_CREATURE, true
+                StaticFilters.FILTER_PERMANENTS_ARTIFACT_CREATURE, true
         )));
 
         // {U/P}: Until end of turn, target creature you control becomes a blue artifact in addition to its other colors and types. Activate only as a sorcery.

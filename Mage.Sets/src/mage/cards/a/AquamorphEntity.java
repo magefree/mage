@@ -87,9 +87,7 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
             }
         }
         if (event.getType() == GameEvent.EventType.TURNFACEUP) {
-            if (event.getTargetId().equals(source.getSourceId())) {
-                return true;
-            }
+            return event.getTargetId().equals(source.getSourceId());
         }
         return false;
     }
@@ -126,7 +124,7 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
                 toughness = 5;
                 break;
         }
-        game.addEffect(new SetBasePowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield, true), source);
+        game.addEffect(new SetBasePowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield, SubLayer.CharacteristicDefining_7a), source);
         return false;
     }
 

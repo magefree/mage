@@ -72,6 +72,7 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Glissa's Retriever", 56, Rarity.RARE, mage.cards.g.GlissasRetriever.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glistening Sphere", 20, Rarity.RARE, mage.cards.g.GlisteningSphere.class));
         cards.add(new SetCardInfo("Goldnight Commander", 72, Rarity.UNCOMMON, mage.cards.g.GoldnightCommander.class));
+        cards.add(new SetCardInfo("Goldwardens' Gambit", 13, Rarity.RARE, mage.cards.g.GoldwardensGambit.class));
         cards.add(new SetCardInfo("Golgari Signet", 131, Rarity.UNCOMMON, mage.cards.g.GolgariSignet.class));
         cards.add(new SetCardInfo("Grafted Exoskeleton", 132, Rarity.UNCOMMON, mage.cards.g.GraftedExoskeleton.class));
         cards.add(new SetCardInfo("Grateful Apparition", 73, Rarity.UNCOMMON, mage.cards.g.GratefulApparition.class));
@@ -118,6 +119,7 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Myr Battlesphere", 138, Rarity.RARE, mage.cards.m.MyrBattlesphere.class));
         cards.add(new SetCardInfo("Myriad Landscape", 159, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
         cards.add(new SetCardInfo("Necroblossom Snarl", 160, Rarity.RARE, mage.cards.n.NecroblossomSnarl.class));
+        cards.add(new SetCardInfo("Neyali, Suns' Vanguard", 2, Rarity.MYTHIC, mage.cards.n.NeyaliSunsVanguard.class));
         cards.add(new SetCardInfo("Night's Whisper", 94, Rarity.COMMON, mage.cards.n.NightsWhisper.class));
         cards.add(new SetCardInfo("Norn's Annex", 83, Rarity.RARE, mage.cards.n.NornsAnnex.class));
         cards.add(new SetCardInfo("Norn's Choirmaster", 8, Rarity.RARE, mage.cards.n.NornsChoirmaster.class, NON_FULL_USE_VARIOUS));
@@ -152,6 +154,7 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Soul-Guide Lantern", 142, Rarity.UNCOMMON, mage.cards.s.SoulGuideLantern.class));
         cards.add(new SetCardInfo("Sungrass Prairie", 166, Rarity.RARE, mage.cards.s.SungrassPrairie.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 89, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
+        cards.add(new SetCardInfo("Synthesis Pod", 23, Rarity.RARE, mage.cards.s.SynthesisPod.class));
         cards.add(new SetCardInfo("Tainted Field", 167, Rarity.UNCOMMON, mage.cards.t.TaintedField.class));
         cards.add(new SetCardInfo("Tainted Wood", 168, Rarity.UNCOMMON, mage.cards.t.TaintedWood.class));
         cards.add(new SetCardInfo("Talisman of Conviction", 143, Rarity.UNCOMMON, mage.cards.t.TalismanOfConviction.class));

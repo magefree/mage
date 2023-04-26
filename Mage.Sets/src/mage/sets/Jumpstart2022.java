@@ -30,6 +30,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Aether Spellbomb", 752, Rarity.COMMON, mage.cards.a.AetherSpellbomb.class));
         cards.add(new SetCardInfo("Aethershield Artificer", 140, Rarity.UNCOMMON, mage.cards.a.AethershieldArtificer.class));
         cards.add(new SetCardInfo("Aftershock", 129, Rarity.COMMON, mage.cards.a.Aftershock.class));
+        cards.add(new SetCardInfo("Agrus Kos, Eternal Soldier", 1, Rarity.RARE, mage.cards.a.AgrusKosEternalSoldier.class));
         cards.add(new SetCardInfo("Ajani's Pridemate", 142, Rarity.UNCOMMON, mage.cards.a.AjanisPridemate.class));
         cards.add(new SetCardInfo("Ajani, Strength of the Pride", 141, Rarity.MYTHIC, mage.cards.a.AjaniStrengthOfThePride.class));
         cards.add(new SetCardInfo("Alandra, Sky Dreamer", 9, Rarity.RARE, mage.cards.a.AlandraSkyDreamer.class));
@@ -444,6 +445,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Maalfeld Twins", 438, Rarity.COMMON, mage.cards.m.MaalfeldTwins.class));
         cards.add(new SetCardInfo("Mad Ratter", 570, Rarity.UNCOMMON, mage.cards.m.MadRatter.class));
         cards.add(new SetCardInfo("Magmatic Channeler", 571, Rarity.RARE, mage.cards.m.MagmaticChanneler.class));
+        cards.add(new SetCardInfo("Magnanimous Magistrate", 7, Rarity.UNCOMMON, mage.cards.m.MagnanimousMagistrate.class));
         cards.add(new SetCardInfo("Magnifying Glass", 95, Rarity.UNCOMMON, mage.cards.m.MagnifyingGlass.class));
         cards.add(new SetCardInfo("Make a Stand", 211, Rarity.UNCOMMON, mage.cards.m.MakeAStand.class));
         cards.add(new SetCardInfo("Mammoth Spider", 687, Rarity.COMMON, mage.cards.m.MammothSpider.class));
@@ -548,10 +550,12 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Pillardrop Rescuer", 226, Rarity.COMMON, mage.cards.p.PillardropRescuer.class));
         cards.add(new SetCardInfo("Pious Wayfarer", 227, Rarity.COMMON, mage.cards.p.PiousWayfarer.class));
         cards.add(new SetCardInfo("Piranha Marsh", 818, Rarity.COMMON, mage.cards.p.PiranhaMarsh.class));
+        cards.add(new SetCardInfo("Pirated Copy", 16, Rarity.MYTHIC, mage.cards.p.PiratedCopy.class));
         cards.add(new SetCardInfo("Pit Keeper", 455, Rarity.COMMON, mage.cards.p.PitKeeper.class));
         cards.add(new SetCardInfo("Plague Spitter", 456, Rarity.UNCOMMON, mage.cards.p.PlagueSpitter.class));
         cards.add(new SetCardInfo("Plaguecrafter", 72, Rarity.UNCOMMON, mage.cards.p.Plaguecrafter.class));
         cards.add(new SetCardInfo("Plains", 98, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Planar Atlas", 51, Rarity.UNCOMMON, mage.cards.p.PlanarAtlas.class));
         cards.add(new SetCardInfo("Plundering Predator", 37, Rarity.COMMON, mage.cards.p.PlunderingPredator.class));
         cards.add(new SetCardInfo("Pounce", 707, Rarity.COMMON, mage.cards.p.Pounce.class));
         cards.add(new SetCardInfo("Pouncing Lynx", 228, Rarity.COMMON, mage.cards.p.PouncingLynx.class));

@@ -39,7 +39,7 @@ public final class KagemaroFirstToSuffer extends CardImpl {
 
         DynamicValue xValue = CardsInControllerHandCount.instance;
         // Kagemaro, First to Suffer's power and toughness are each equal to the number of cards in your hand.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue)));
         // {B}, Sacrifice Kagemaro: All creatures get -X/-X until end of turn, where X is the number of cards in your hand.
 
         DynamicValue xMinusValue = new SignInversionDynamicValue(xValue);

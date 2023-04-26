@@ -1705,8 +1705,12 @@ public final class CardUtil {
         return sb.toString();
     }
 
+    public static <T> Stream<T> castStream(Collection<?> collection, Class<T> clazz) {
+        return castStream(collection.stream(), clazz);
+    }
+
     public static <T> Stream<T> castStream(Stream<?> stream, Class<T> clazz) {
-        return stream.filter(clazz::isInstance).map(clazz::cast);
+        return stream.filter(clazz::isInstance).map(clazz::cast).filter(Objects::nonNull);
     }
 
     /**

@@ -2,17 +2,12 @@ package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
-import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DoWhenCostPaid;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -45,8 +40,9 @@ public class ForgehammerCenturion extends CardImpl {
                 new CantBlockTargetEffect(Duration.EndOfTurn), false
         );
         ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(new AttacksTriggeredAbility(new DoWhenCostPaid(ability,
-                new RemoveCountersSourceCost(CounterType.OIL.createInstance(2)), "Remove 2 oil counters?"
+        this.addAbility(new AttacksTriggeredAbility(new DoWhenCostPaid(
+                ability, new RemoveCountersSourceCost(CounterType.OIL.createInstance(2))
+                .setText("remove two oil counters from it"), "Remove 2 oil counters?"
         )));
     }
 

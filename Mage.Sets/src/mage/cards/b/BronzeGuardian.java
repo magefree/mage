@@ -45,7 +45,7 @@ public final class BronzeGuardian extends CardImpl {
 
         // Bronze Guardian's power is equal to the number of artifacts you control.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(
-                ArtifactYouControlCount.instance, Duration.EndOfGame
+                ArtifactYouControlCount.instance
         )));
     }
 
