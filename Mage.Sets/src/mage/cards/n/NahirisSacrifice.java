@@ -14,7 +14,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanentAmount;
 
 import java.util.UUID;
@@ -38,7 +37,7 @@ public final class NahirisSacrifice extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}");
 
         // As an additional cost to cast this spell, sacrifice an artifact or creature with mana value X.
-        this.getSpellAbility().addCost(new SacrificeXManaValueCost(filter,true));
+        this.getSpellAbility().addCost(new SacrificeXManaValueCost(filter, true));
 
         // Nahiri’s Sacrifice deals X damage divided as you choose among any number of target creatures.
         DynamicValue damage = new SacrificeXCostConvertedMana("artifact or creature");
@@ -68,7 +67,7 @@ class SacrificeXManaValueCost extends VariableCostImpl implements SacrificeCost 
     public SacrificeXManaValueCost(FilterControlledPermanent filter, boolean useAsAdditionalCost) {
         super(useAsAdditionalCost ? VariableCostType.ADDITIONAL : VariableCostType.NORMAL,
                 filter.getMessage() + " with manavalue X to sacrifice");
-        this.text = (useAsAdditionalCost ? "sacrifice " : "Sacrifice ") + filter.getMessage() + " with mana value " +xText;
+        this.text = (useAsAdditionalCost ? "sacrifice " : "Sacrifice ") + filter.getMessage() + " with mana value " + xText;
         this.filter = filter;
     }
 
@@ -85,11 +84,10 @@ class SacrificeXManaValueCost extends VariableCostImpl implements SacrificeCost 
     @Override
     public Cost getFixedCostsFromAnnouncedValue(int xValue) {
         //Add the announced cost to the filter
-        FilterControlledPermanent manavaluefilter = new FilterControlledPermanent(filter.getMessage() + " with mana value "+xValue);
+        FilterControlledPermanent manavaluefilter = new FilterControlledPermanent(filter.getMessage() + " with mana value " + xValue);
         manavaluefilter.add(filter.getPredicates().get(0));
         manavaluefilter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
-        TargetControlledPermanent target = new TargetControlledPermanent(manavaluefilter);
-        return new SacrificeTargetCost(target);
+        return new SacrificeTargetCost(manavaluefilter);
     }
 
 }

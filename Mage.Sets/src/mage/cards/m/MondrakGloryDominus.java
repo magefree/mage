@@ -10,12 +10,14 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.replacement.CreateTwiceThatManyTokensEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -53,7 +55,7 @@ public final class MondrakGloryDominus extends CardImpl {
                         CounterType.INDESTRUCTIBLE.createInstance()
                 ),
                 new ManaCostsImpl<>("{1}{W/P}{W/P}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, filter)));
+        ability.addCost(new SacrificeTargetCost(2, filter));
         this.addAbility(ability);
     }
 

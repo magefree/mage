@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -13,20 +11,16 @@ import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SetTargetPointer;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetNonlandPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author alexander-novo
  */
 public final class PrestonTheVanisher extends CardImpl {
@@ -42,7 +36,7 @@ public final class PrestonTheVanisher extends CardImpl {
     }
 
     public PrestonTheVanisher(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[] { CardType.CREATURE }, "{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.RABBIT);
         this.subtype.add(SubType.WIZARD);
@@ -66,7 +60,7 @@ public final class PrestonTheVanisher extends CardImpl {
         // {1}{W}, Sacrifice five Illusions: Exile target nonland permanent.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(),
                 new ManaCostsImpl<>("{1}{W}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(5, activeCostFilter)));
+        ability.addCost(new SacrificeTargetCost(5, activeCostFilter));
         ability.addTarget(new TargetNonlandPermanent());
         this.addAbility(ability);
     }

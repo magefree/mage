@@ -19,7 +19,6 @@ import mage.filter.StaticFilters;
 import mage.game.permanent.token.AshnodZombieToken;
 import mage.game.permanent.token.PowerstoneToken;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -43,7 +42,7 @@ public final class AshnodFleshMechanist extends CardImpl {
                 new DoIfCostPaid(
                         new CreateTokenEffect(
                                 new PowerstoneToken(), 1, true, false
-                        ), new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE))
+                        ), new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)
                 ), false
         ));
 

@@ -29,7 +29,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledPermanent;
 import mage.util.CardUtil;
 
 import java.util.Collection;
@@ -71,7 +70,7 @@ public final class TawnosSolemnSurvivor extends CardImpl {
                 new TawnosSolemnSurvivorEffect(), new ManaCostsImpl<>("{1}{W}{U}{B}")
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, filter2)));
+        ability.addCost(new SacrificeTargetCost(2, filter2));
         ability.addCost(new ExileFromGraveCost(
                 new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_ARTIFACT_OR_CREATURE)
         ));
