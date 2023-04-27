@@ -89,6 +89,9 @@ class VhalCandlekeepResearcherManaEffect extends ManaEffect {
 
     @Override
     public Mana produceMana(Game game, Ability source) {
+        if (game == null) {
+            return new Mana();
+        }
         return manaBuilder.setMana(Mana.ColorlessMana(this.calculateToughness(game, source)), source, game).build();
     }
 }
