@@ -3,6 +3,7 @@ package mage.game.permanent.token;
 import mage.MageInt;
 import mage.MageObject;
 import mage.MageObjectImpl;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.Effect;
@@ -12,9 +13,7 @@ import mage.cards.Card;
 import mage.cards.repository.TokenInfo;
 import mage.cards.repository.TokenRepository;
 import mage.cards.repository.TokenType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.command.CommandObject;
 import mage.game.events.CreateTokenEvent;
@@ -45,21 +44,8 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     // list of set codes token images are available for
     protected List<String> availableImageSetCodes = new ArrayList<>(); // TODO: delete
 
-    public enum Type {
-
-        FIRST(1),
-        SECOND(2);
-
-        int code;
-
-        Type(int code) {
-            this.code = code;
-        }
-
-        int getCode() {
-            return this.code;
-        }
-    }
+    protected Token backFace = null;
+    private boolean entersTransformed = false;
 
     public TokenImpl() {
     }
@@ -69,7 +55,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         this.description = description;
     }
 
-    public TokenImpl(final TokenImpl token) {
+    protected TokenImpl(final TokenImpl token) {
         super(token);
         this.description = token.description;
         this.tokenType = token.tokenType;
@@ -78,6 +64,8 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         this.originalExpansionSetCode = token.originalExpansionSetCode;
         this.copySourceCard = token.copySourceCard; // will never be changed
         this.availableImageSetCodes = token.availableImageSetCodes;
+        this.backFace = token.backFace != null ? token.backFace.copy() : null;
+        this.entersTransformed = token.entersTransformed;
     }
 
     @Override
@@ -98,11 +86,17 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         ability.setSourceId(this.getId());
         abilities.add(ability);
         abilities.addAll(ability.getSubAbilities());
+        if (backFace != null) {
+            backFace.addAbility(ability);
+        }
     }
 
     // Directly from PermanentImpl
     @Override
     public void removeAbility(Ability abilityToRemove) {
+        if (backFace != null) {
+            backFace.removeAbility(abilityToRemove);
+        }
         if (abilityToRemove == null) {
             return;
         }
@@ -127,6 +121,9 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         }
 
         abilitiesToRemove.forEach(a -> removeAbility(a));
+        if (backFace != null) {
+            backFace.removeAbilities(abilitiesToRemove);
+        }
     }
 
     @Override
@@ -389,11 +386,17 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
 
     @Override
     public void setPower(int power) {
+        if (this.backFace != null) {
+            this.backFace.setPower(power);
+        }
         this.power = new MageInt(power);
     }
 
     @Override
     public void setToughness(int toughness) {
+        if (this.backFace != null) {
+            this.backFace.setToughness(toughness);
+        }
         this.toughness = new MageInt(toughness);
     }
 
@@ -427,6 +430,21 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     }
 
     @Override
+    public void setStartingLoyalty(int startingLoyalty) {
+        if (backFace != null) {
+            backFace.setStartingLoyalty(startingLoyalty);
+        }
+        super.setStartingLoyalty(startingLoyalty);
+    }
+
+    public void setStartingDefense(int intArg) {
+        if (backFace != null) {
+            backFace.setStartingDefense(intArg);
+        }
+        super.setStartingDefense(intArg);
+    }
+
+    @Override
     public void setOriginalExpansionSetCode(String originalExpansionSetCode) {
         // TODO: delete
         // TODO: remove original set code at all... token image must be takes by card source or by latest set (on null source)
@@ -450,5 +468,168 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     public void setExpansionSetCodeForImage(String code) {
         // TODO: delete
         setOriginalExpansionSetCode(code);
+    }
+
+    @Override
+    public Token getBackFace() {
+        return backFace;
+    }
+
+    public void retainAllArtifactSubTypes(Game game) {
+        if (backFace != null) {
+            backFace.retainAllArtifactSubTypes(game);
+        }
+        super.retainAllArtifactSubTypes(game);
+    }
+
+    public void retainAllEnchantmentSubTypes(Game game) {
+        if (backFace != null) {
+            backFace.retainAllEnchantmentSubTypes(game);
+        }
+        super.retainAllEnchantmentSubTypes(game);
+    }
+
+    public void addSuperType(SuperType superType) {
+        if (backFace != null) {
+            backFace.addSuperType(superType);
+        }
+        super.addSuperType(superType);
+    }
+
+    public void removeSuperType(SuperType superType) {
+        if (backFace != null) {
+            backFace.removeSuperType(superType);
+        }
+        super.removeSuperType(superType);
+    }
+
+    public void addCardType(CardType... cardTypes) {
+        if (backFace != null) {
+            backFace.addCardType(cardTypes);
+        }
+        super.addCardType(cardTypes);
+    }
+
+    public void removeCardType(CardType... cardTypes) {
+        if (backFace != null) {
+            backFace.removeCardType(cardTypes);
+        }
+        super.removeCardType(cardTypes);
+    }
+
+    public void removeAllCardTypes() {
+        if (backFace != null) {
+            backFace.removeAllCardTypes();
+        }
+        super.removeAllCardTypes();
+    }
+
+    public void removeAllCardTypes(Game game) {
+        if (backFace != null) {
+            backFace.removeAllCardTypes(game);
+        }
+        super.removeAllCardTypes(game);
+    }
+
+    public void addSubType(SubType... subTypes) {
+        if (backFace != null) {
+            backFace.addSubType(subTypes);
+        }
+        super.addSubType(subTypes);
+    }
+
+    public void removeAllSubTypes(Game game, SubTypeSet subTypeSet) {
+        if (backFace != null) {
+            backFace.removeAllSubTypes(game, subTypeSet);
+        }
+        super.removeAllSubTypes(game, subTypeSet);
+    }
+
+    public void removeAllSubTypes(Game game) {
+        if (backFace != null) {
+            backFace.removeAllSubTypes(game);
+        }
+        super.removeAllSubTypes(game);
+    }
+
+    public void retainAllLandSubTypes(Game game) {
+        if (backFace != null) {
+            backFace.retainAllLandSubTypes(game);
+        }
+        super.retainAllLandSubTypes(game);
+    }
+
+    public void removeAllCreatureTypes(Game game) {
+        if (backFace != null) {
+            backFace.removeAllCreatureTypes(game);
+        }
+        super.removeAllCreatureTypes(game);
+    }
+
+    public void removeAllCreatureTypes() {
+        if (backFace != null) {
+            backFace.removeAllCreatureTypes();
+        }
+        super.removeAllCreatureTypes();
+    }
+
+    public void removeSubType(Game game, SubType subType) {
+        if (backFace != null) {
+            backFace.removeSubType(game, subType);
+        }
+        super.removeSubType(game, subType);
+    }
+
+    public void setIsAllCreatureTypes(boolean value) {
+        if (backFace != null) {
+            backFace.setIsAllCreatureTypes(value);
+        }
+        super.setIsAllCreatureTypes(value);
+    }
+
+    public void removePTCDA() {
+        if (backFace != null) {
+            backFace.removePTCDA();
+        }
+        super.removePTCDA();
+    }
+
+    public String getName() {
+        if (backFace != null) {
+            backFace.getName();
+        }
+        return super.getName();
+    }
+
+    public void setName(String name) {
+        if (backFace != null) {
+            backFace.setName(name);
+        }
+        super.setName(name);
+    }
+
+    public void setColor(ObjectColor color) {
+        if (backFace != null) {
+            backFace.setColor(color);
+        }
+        this.getColor().setColor(color);
+    }
+
+    @Override
+    public void clearManaCost() {
+        if (backFace != null) {
+            backFace.clearManaCost();
+        }
+        this.getManaCost().clear();
+    }
+
+    @Override
+    public void setEntersTransformed(boolean entersTransformed) {
+        this.entersTransformed = entersTransformed;
+    }
+
+    @Override
+    public boolean isEntersTransformed() {
+        return this.entersTransformed && this.backFace != null;
     }
 }

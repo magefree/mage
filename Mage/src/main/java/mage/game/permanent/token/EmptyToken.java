@@ -1,4 +1,3 @@
-
 package mage.game.permanent.token;
 
 /**
@@ -7,7 +6,14 @@ package mage.game.permanent.token;
 public final class EmptyToken extends TokenImpl {
 
     public EmptyToken() {
+        this(false);
+    }
+
+    public EmptyToken(boolean withBackFace) {
         super(" Token", "");
+        if (withBackFace) {
+            this.backFace = new EmptyToken();
+        }
     }
 
     public EmptyToken(final EmptyToken token) {

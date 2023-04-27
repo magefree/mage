@@ -5,6 +5,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.keyword.ChangelingAbility;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.constants.EmptyNames;
 import mage.game.Game;
@@ -28,6 +29,9 @@ public class PermanentToken extends PermanentImpl {
         this.power = new MageInt(token.getPower().getModifiedBaseValue());
         this.toughness = new MageInt(token.getToughness().getModifiedBaseValue());
         this.copyFromToken(this.token, game, false); // needed to have at this time (e.g. for subtypes for entersTheBattlefield replacement effects)
+        if (this.token.isEntersTransformed()) {
+            TransformAbility.transformPermanent(this, this.token.getBackFace(), game, null);
+        }
 
         // token's ZCC must be synced with original token to keep abilities settings
         // Example: kicker ability and kicked status
@@ -48,6 +52,14 @@ public class PermanentToken extends PermanentImpl {
         // Because the P/T objects have there own base value for reset we have to take it from there instead of from the basic token object
         this.power.resetToBaseValue();
         this.toughness.resetToBaseValue();
+    }
+
+    @Override
+    public int getManaValue() {
+        if (this.isTransformed()) {
+            return token.getManaValue();
+        }
+        return super.getManaValue();
     }
 
     @Override
@@ -119,6 +131,16 @@ public class PermanentToken extends PermanentImpl {
     public Card getMainCard() {
         // token don't have game card, so return itself
         return this;
+    }
+
+    @Override
+    public boolean isTransformable() {
+        return token.getBackFace() != null;
+    }
+
+    @Override
+    protected MageObject getOtherFace() {
+        return this.transformed ? token : this.token.getBackFace();
     }
 
     @Override
