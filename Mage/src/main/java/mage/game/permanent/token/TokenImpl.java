@@ -167,14 +167,13 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
             }
         }
 
-
-        // by set code
+        // search by set code
         List<TokenInfo> possibleInfo = TokenRepository.instance.getByClassName(token.getClass().getName())
                 .stream()
                 .filter(info -> info.getSetCode().equals(setCode))
                 .collect(Collectors.toList());
 
-        // by random set
+        // search by random set
         if (possibleInfo.isEmpty()) {
             possibleInfo = new ArrayList<>(TokenRepository.instance.getByClassName(token.getClass().getName()));
         }
@@ -183,11 +182,13 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
             return RandomUtil.randomFromCollection(possibleInfo);
         }
 
-        // unknown token
-        // TODO: download default tokens for xmage's set and use random images from it
-        //  example: TOK.zip/Creature.1.full.jpg
-        //  example: TOK.zip/Creature.2.full.jpg
-        return new TokenInfo(TokenType.TOKEN, "Unknown", "XMAGE", 0);
+        // TODO: implement auto-generate images for CreatureToken (search public tokens for same characteristics)
+        // TODO: implement Copy image
+        // TODO: implement Manifest image
+        // TODO: implement Morph image
+
+        // unknown tokens
+        return new TokenInfo(TokenType.TOKEN, "Unknown", TokenRepository.XMAGE_TOKENS_SET_CODE, 0);
     }
 
     @Override
@@ -406,7 +407,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     }
 
     /**
-     * Set token index to search in card-pictures-tok.txt (if set have multiple
+     * Set token index to search in tokens-database.txt (if set have multiple
      * tokens with same name) Default is 1
      */
     @Override

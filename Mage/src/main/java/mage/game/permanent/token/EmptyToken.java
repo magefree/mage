@@ -1,6 +1,8 @@
 package mage.game.permanent.token;
 
 /**
+ * Token container for copyable characteristics, don't put it to battlefield
+ *
  * @author nantuko
  */
 public final class EmptyToken extends TokenImpl {

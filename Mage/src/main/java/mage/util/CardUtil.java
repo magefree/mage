@@ -976,7 +976,7 @@ public final class CardUtil {
                 || text.startsWith("any ")) {
             return text;
         }
-        return vowels.contains(text.substring(0, 1)) ? "an " + text : "a " + text;
+        return (!text.isEmpty() && vowels.contains(text.substring(0, 1))) ? "an " + text : "a " + text;
     }
 
     public static String italicizeWithEmDash(String text) {

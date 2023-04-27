@@ -1203,7 +1203,7 @@ public class VerifyCardDataTest {
         Collection<String> errorsList = new ArrayList<>();
         Collection<String> warningsList = new ArrayList<>();
 
-        // all tokens must be stores in card-pictures-tok.txt (if not then viewer and image downloader are missing token images)
+        // all tokens must be stores in tokens-database.txt (if not then viewer and image downloader are missing token images)
         // https://github.com/ronmamo/reflections
         Reflections reflections = new Reflections("mage.");
         Set<Class<? extends TokenImpl>> tokenClassesList = reflections.getSubTypesOf(TokenImpl.class);
@@ -1220,6 +1220,7 @@ public class VerifyCardDataTest {
         }
         // xmage sets
         Set<String> allSetCodes = Sets.getInstance().values().stream().map(ExpansionSet::getCode).collect(Collectors.toSet());
+        allSetCodes.add(TokenRepository.XMAGE_TOKENS_SET_CODE); // reminder tokens
 
 
         // tok file's data
@@ -1290,14 +1291,14 @@ public class VerifyCardDataTest {
             } else if (tokDataNamesIndex.getOrDefault(token.getName().replace(" Token", ""), "").isEmpty()) {
                 // how-to fix: public token must be downloadable, so tok-data must contain miss set
                 // (also don't forget to add new set to scryfall download)
-                errorsList.add("Error: can't find data in card-pictures-tok.txt for token: " + tokenClass.getName() + " -> " + token.getName());
+                errorsList.add("Error: can't find data in tokens-database.txt for token: " + tokenClass.getName() + " -> " + token.getName());
             }
         }
 
         // CHECK: wrong set codes in tok-data
         tokDataTokensBySetIndex.forEach((setCode, setTokens) -> {
             if (!allSetCodes.contains(setCode)) {
-                errorsList.add("error, card-pictures-tok.txt contains unknown set code: "
+                errorsList.add("error, tokens-database.txt contains unknown set code: "
                         + setCode + " - " + setTokens.stream().map(TokenInfo::getName).collect(Collectors.joining(", ")));
             }
         });
@@ -1353,6 +1354,10 @@ public class VerifyCardDataTest {
         });
         // tok data have tokens, but cards from set are miss
         tokDataTokensBySetIndex.forEach((setCode, setTokens) -> {
+            if (setCode.equals(TokenRepository.XMAGE_TOKENS_SET_CODE)) {
+                // ignore reminder tokens
+                return;
+            }
             if (!setsWithTokens.containsKey(setCode)) {
                 // Possible reasons:
                 // - outdated set code in tokens database (must be fixed by new set code, another verify check it)
@@ -1364,10 +1369,34 @@ public class VerifyCardDataTest {
 
         // CHECK: token and class names must be same in all sets
         TokenRepository.instance.getAllByClassName().forEach((className, list) -> {
-            Set<String> names = list.stream().map(TokenInfo::getName).collect(Collectors.toSet());
+            // ignore reminder tokens
+            Set<String> names = list.stream()
+                    .filter(token -> !token.getTokenType().equals(TokenType.XMAGE))
+                    .map(TokenInfo::getName)
+                    .collect(Collectors.toSet());
             if (names.size() > 1) {
-                errorsList.add("error, card-pictures-tok.txt contains different names for same class: "
+                errorsList.add("error, tokens-database.txt contains different names for same class: "
                         + className + " - " + String.join(", ", names));
+            }
+        });
+
+        Set<String> usedNames = new HashSet<>();
+        TokenRepository.instance.getByType(TokenType.XMAGE).forEach(token -> {
+            // CHECK: xmage's tokens must be unique
+            // how-to fix: edit TokenRepository->loadXmageTokens
+            String needName = String.format("%s.%d", token.getName(), token.getImageNumber());
+            if (usedNames.contains(needName)) {
+                errorsList.add("error, xmage token's name and image number must be unique: "
+                        + token.getName() + " - " + token.getImageNumber());
+            } else {
+                usedNames.add(needName);
+            }
+
+            // CHECK: xmage's tokens must be downloadable
+            // how-to fix: edit TokenRepository->loadXmageTokens
+            if (token.getDownloadUrl().isEmpty()) {
+                errorsList.add("error, xmage token's must have download url: "
+                        + token.getName() + " - " + token.getImageNumber());
             }
         });
 
