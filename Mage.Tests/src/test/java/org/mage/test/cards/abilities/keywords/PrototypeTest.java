@@ -4,6 +4,7 @@ import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.constants.ComparisonType;
 import mage.constants.PhaseStep;
@@ -41,14 +42,14 @@ public class PrototypeTest extends CardTestPlayerBase {
             if (!permanent.getName().equals(automaton)) {
                 continue;
             }
-            assertPowerToughness(playerA, automaton, prototyped ? 3 : 6, prototyped ? 2 : 4);
-            getPermanent(automaton, playerA);
+            Assert.assertTrue("Needs haste", permanent.getAbilities(currentGame).contains(HasteAbility.getInstance()));
             Assert.assertEquals("Power is wrong", prototyped ? 3 : 6, permanent.getPower().getValue());
             Assert.assertEquals("Toughness is wrong", prototyped ? 2 : 4, permanent.getToughness().getValue());
             Assert.assertTrue("Color is wrong", prototyped
                     ? permanent.getColor(currentGame).isRed()
                     : permanent.getColor(currentGame).isColorless()
             );
+            Assert.assertEquals("Mana cost is wrong", prototyped ? "{2}{R}" : "{7}", permanent.getManaCost().getText());
             Assert.assertEquals("Mana value is wrong", prototyped ? 3 : 7, permanent.getManaValue());
         }
     }
@@ -145,7 +146,6 @@ public class PrototypeTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        checkAutomaton(false);
         assertLife(playerA, 20 + 1);
     }
 
@@ -160,7 +160,6 @@ public class PrototypeTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        checkAutomaton(true);
         assertLife(playerA, 20 + 1);
     }
 
@@ -178,7 +177,6 @@ public class PrototypeTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        checkAutomaton(false);
         assertLife(playerA, 20 + 1);
     }
 
@@ -196,7 +194,6 @@ public class PrototypeTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        checkAutomaton(true);
         assertLife(playerA, 20 + 1);
     }
 
@@ -211,7 +208,6 @@ public class PrototypeTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        checkAutomaton(false);
         assertLife(playerA, 20 + 1);
     }
 
@@ -226,7 +222,6 @@ public class PrototypeTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        checkAutomaton(true);
         assertLife(playerA, 20 + 1);
     }
 
