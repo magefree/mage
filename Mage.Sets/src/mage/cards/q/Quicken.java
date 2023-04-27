@@ -33,7 +33,7 @@ public final class Quicken extends CardImpl {
         this.getSpellAbility().addWatcher(new QuickenWatcher());
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Quicken(final Quicken card) {

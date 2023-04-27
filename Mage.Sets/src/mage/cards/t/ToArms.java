@@ -26,7 +26,7 @@ public final class ToArms extends CardImpl {
         Effect effect = new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), rule);
         this.getSpellAbility().addEffect(effect);
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private ToArms(final ToArms card) {

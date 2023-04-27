@@ -27,7 +27,7 @@ public final class SlipThroughSpace extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private SlipThroughSpace(final SlipThroughSpace card) {
