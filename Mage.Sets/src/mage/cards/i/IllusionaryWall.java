@@ -33,7 +33,7 @@ public final class IllusionaryWall extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
         // Cumulative upkeep {U}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{U}")));
     }
 
     private IllusionaryWall(final IllusionaryWall card) {

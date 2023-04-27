@@ -36,7 +36,7 @@ public final class WarmongerHellkite extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new AttacksIfAbleAllEffect(StaticFilters.FILTER_PERMANENT_ALL_CREATURES)));
 
         // {1}{R}: Attacking creatures get +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(new BoostAllEffect(1, 0, Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, false), new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new SimpleActivatedAbility(new BoostAllEffect(1, 0, Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, false), new ManaCostsImpl<>("{1}{R}")));
 
     }
 

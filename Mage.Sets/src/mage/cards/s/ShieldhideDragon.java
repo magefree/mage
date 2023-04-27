@@ -43,7 +43,7 @@ public final class ShieldhideDragon extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Megamorph {5}{W}{W}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{5}{W}{W}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{5}{W}{W}"), true));
 
         // When Shieldhide Dragon is turned face up, put a +1/+1 counter on each other Dragon you control.
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), false, false));

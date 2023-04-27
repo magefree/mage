@@ -30,7 +30,7 @@ public final class SteamcoreWeird extends CardImpl {
         // When Steamcore Weird enters the battlefield, if {R} was spent to cast Steamcore Weird, it deals 2 damage to any target.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2, "it"));
         ability.addTarget(new TargetAnyTarget());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new ManaWasSpentCondition(ColoredManaSymbol.R),
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, ManaWasSpentCondition.RED,
                 "if {R} was spent to cast this spell, it deals 2 damage to any target."));
     }
 

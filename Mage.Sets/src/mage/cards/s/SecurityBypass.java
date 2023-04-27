@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedAttachedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.effects.keyword.ConniveSourceEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -34,11 +34,11 @@ public final class SecurityBypass extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // As long as enchanted creature is attacking alone, it can't be blocked.
         this.addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
-                new CantBeBlockedSourceEffect(), SecurityBypassCondition.instance,
+                new CantBeBlockedAttachedEffect(AttachmentType.AURA), SecurityBypassCondition.instance,
                 "as long as enchanted creature is attacking alone, it can't be blocked"
         )));
 

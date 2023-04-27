@@ -46,6 +46,7 @@ class FleshReaverTriggeredAbility extends TriggeredAbilityImpl {
 
     FleshReaverTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageControllerEffect(SavedDamageValue.MUCH));
+        setTriggerPhrase("Whenever {this} deals damage to a creature or opponent, ");
     }
 
     private FleshReaverTriggeredAbility(final FleshReaverTriggeredAbility effect) {
@@ -75,10 +76,5 @@ class FleshReaverTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} deals damage to a creature or opponent, ";
     }
 }

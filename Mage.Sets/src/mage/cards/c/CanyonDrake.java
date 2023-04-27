@@ -31,7 +31,7 @@ public final class CanyonDrake extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {1}, Discard a card at random: Canyon Drake gets +2/+0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}"));
         ability.addCost(new DiscardCardCost(true));
         this.addAbility(ability);
     }

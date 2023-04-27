@@ -22,5 +22,7 @@ public final class NarsetOfTheAncientWayEmblem extends Emblem {
         );
         ability.addTarget(new TargetAnyTarget());
         this.getAbilities().add(ability);
+
+        this.setExpansionSetCodeForImage("IKO");
     }
 }

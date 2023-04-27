@@ -49,7 +49,7 @@ public final class WalkerOfSecretWays extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new WalkerOfSecretWaysEffect(), false, true));
 
         // {1}{U}: Return target Ninja you control to its owner's hand. Activate this ability only during your turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{1}{U}"), MyTurnCondition.instance);
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{1}{U}"), MyTurnCondition.instance);
         ability.addTarget(new TargetControlledCreaturePermanent(1, 1, filterCreature, false));
         ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);

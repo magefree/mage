@@ -6,6 +6,8 @@ import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -20,6 +22,8 @@ public final class VampireToken extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(2);
         addAbility(FlyingAbility.getInstance());
+
+        availableImageSetCodes = Arrays.asList("ISD", "KTK");
     }
 
     public VampireToken(final VampireToken token) {

@@ -39,7 +39,7 @@ public final class DiamondFaerie extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // {1}{S}: Snow creatures you control get +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1,
-            Duration.EndOfTurn, filter), new ManaCostsImpl("{1}{S}")));
+            Duration.EndOfTurn, filter), new ManaCostsImpl<>("{1}{S}")));
     }
 
     private DiamondFaerie(final DiamondFaerie card) {

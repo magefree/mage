@@ -54,7 +54,7 @@ class LeoninArbiterSpecialAction extends SpecialAction {
 
     public LeoninArbiterSpecialAction(final String keyString) {
         super(Zone.BATTLEFIELD);
-        this.addCost(new ManaCostsImpl("{2}"));
+        this.addCost(new ManaCostsImpl<>("{2}"));
         this.addEffect(new LeoninArbiterIgnoreEffect(keyString));
         this.setMayActivate(TargetController.ANY);
     }

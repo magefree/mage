@@ -49,7 +49,6 @@ public class CommandersGameRestartTest extends CardTestCommander4PlayersWithAIHe
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         // check watcher after restart
         UUID commanderId = currentGame.getCommandersIds(playerA, CommanderCardType.ANY, false).stream().findFirst().orElse(null);
@@ -98,6 +97,5 @@ public class CommandersGameRestartTest extends CardTestCommander4PlayersWithAIHe
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 }

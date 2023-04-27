@@ -33,7 +33,7 @@ public final class LAATGunship extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new TrooperToken(), 1, true, true), false));
 
         // {W}: LAAT Gunship gains spaceflight until the end of turn. Activate this ability only as a sorcery
-        this.addAbility(new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(SpaceflightAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{W}")));
+        this.addAbility(new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(SpaceflightAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{W}")));
 
     }
 

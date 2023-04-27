@@ -29,7 +29,7 @@ public final class MoltenFrame extends CardImpl {
 
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     public MoltenFrame (final MoltenFrame card) {

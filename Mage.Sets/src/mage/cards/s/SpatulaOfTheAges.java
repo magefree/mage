@@ -38,7 +38,7 @@ public final class SpatulaOfTheAges extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {4}, {T}, Sacrifice Spatula of the Ages: You may put a silver-bordered permanent card from your hand onto the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutCardFromHandOntoBattlefieldEffect(filter), new ManaCostsImpl("{4}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutCardFromHandOntoBattlefieldEffect(filter), new ManaCostsImpl<>("{4}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

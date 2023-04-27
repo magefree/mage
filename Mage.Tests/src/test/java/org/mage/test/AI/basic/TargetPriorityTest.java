@@ -37,7 +37,6 @@ public class TargetPriorityTest extends CardTestPlayerBaseAI {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, "Memnite", 3);
         assertPermanentCount(playerB, "Balduvian Bears", 3);
@@ -62,7 +61,6 @@ public class TargetPriorityTest extends CardTestPlayerBaseAI {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, "Memnite", 3 - 1);
         //assertPermanentCount(playerB, "Balduvian Bears", 3);
@@ -87,7 +85,6 @@ public class TargetPriorityTest extends CardTestPlayerBaseAI {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, "Memnite", 3);
         assertPermanentCount(playerB, "Balduvian Bears", 3);
@@ -118,7 +115,6 @@ public class TargetPriorityTest extends CardTestPlayerBaseAI {
         //setStrictChooseMode(true); // AI
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Burning Sun's Avatar", 1);
         assertPermanentCount(playerB, "Ancient Brontodon", 1); // can't be killed
@@ -145,7 +141,6 @@ public class TargetPriorityTest extends CardTestPlayerBaseAI {
 //        showHand("after", 1, PhaseStep.BEGIN_COMBAT, playerA);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         /* disabled checks cause target is not yet fixed, see comments at the start file
         assertPermanentCount(playerB, "Memnite", 1 * cardsMultiplier);
@@ -172,7 +167,6 @@ public class TargetPriorityTest extends CardTestPlayerBaseAI {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, "Memnite", 3);
         assertPermanentCount(playerB, "Balduvian Bears", 3);
@@ -196,7 +190,6 @@ public class TargetPriorityTest extends CardTestPlayerBaseAI {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, "Memnite", 3 - 1);
         assertPermanentCount(playerB, "Balduvian Bears", 3 - 1);
@@ -220,7 +213,6 @@ public class TargetPriorityTest extends CardTestPlayerBaseAI {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, "Memnite", 3 - 1);
         assertPermanentCount(playerB, "Balduvian Bears", 3);
@@ -246,7 +238,6 @@ public class TargetPriorityTest extends CardTestPlayerBaseAI {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, "Memnite", 3);
         assertPermanentCount(playerB, "Balduvian Bears", 3);
@@ -277,7 +268,6 @@ public class TargetPriorityTest extends CardTestPlayerBaseAI {
         // showBattlefield("after", 1, PhaseStep.BEGIN_COMBAT, playerA);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "damage 3", 1);
 
@@ -308,7 +298,6 @@ public class TargetPriorityTest extends CardTestPlayerBaseAI {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, "Memnite", 1 * cardsMultiplier);
         assertPermanentCount(playerB, "Balduvian Bears", 1 * cardsMultiplier);

@@ -8,6 +8,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Targets;
+import mage.util.CardUtil;
 
 import java.util.*;
 import java.util.function.Function;
@@ -78,14 +79,18 @@ public class OrCost implements Cost {
                 StringBuilder sb = new StringBuilder();
                 if (usable.get(0) instanceof ManaCost) {
                     sb.append("Pay ");
+                    sb.append(usable.get(0).getText());
+                } else {
+                    sb.append(CardUtil.getTextWithFirstCharUpperCase(usable.get(0).getText()));
                 }
-                sb.append(usable.get(0).getText());
                 sb.append(" or ");
-                sb.append(usable.get(1));
+                sb.append(usable.get(1).getText());
                 sb.append('?');
                 if (controller.chooseUse(
                         Outcome.Detriment, sb.toString(), null,
-                        usable.get(0).getText(), usable.get(1).getText(), ability, game
+                        CardUtil.getTextWithFirstCharUpperCase(usable.get(0).getText()),
+                        CardUtil.getTextWithFirstCharUpperCase(usable.get(1).getText()),
+                        ability, game
                 )) {
                     selectedCost = usable.get(0);
                 } else {
@@ -98,15 +103,20 @@ public class OrCost implements Cost {
                         .collect(Collectors.toMap(Cost::getText, Function.identity()));
                 Choice choice = new ChoiceImpl(true);
                 choice.setMessage("Choose a cost to pay");
-                choice.setChoices(costMap.keySet());
+                choice.setChoices(costMap
+                        .keySet()
+                        .stream()
+                        .map(CardUtil::getTextWithFirstCharUpperCase)
+                        .collect(Collectors.toSet()));
                 controller.choose(Outcome.Neutral, choice, game);
-                selectedCost = costMap.getOrDefault(choice.getChoice(), null);
+                selectedCost = costMap.getOrDefault(
+                        CardUtil.getTextWithFirstCharLowerCase(choice.getChoice()), null
+                );
         }
         if (selectedCost == null) {
             return false;
         }
         return selectedCost.pay(ability, game, source, controllerId, noMana, costToPay);
-
     }
 
     @Override

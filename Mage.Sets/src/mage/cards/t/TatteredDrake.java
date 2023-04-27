@@ -28,7 +28,7 @@ public final class TatteredDrake extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
     }
 
     public TatteredDrake (final TatteredDrake card) {

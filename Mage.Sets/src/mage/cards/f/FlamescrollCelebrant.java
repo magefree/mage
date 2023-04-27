@@ -48,7 +48,7 @@ public final class FlamescrollCelebrant extends ModalDoubleFacesCard {
 
         // {1}{R}: Flamescroll Celebrant gets +2/+0 until end of turn.
         this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(
-                new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")
+                new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}")
         ));
 
         // 2.
@@ -74,7 +74,7 @@ public final class FlamescrollCelebrant extends ModalDoubleFacesCard {
 class FlamescrollCelebrantTriggeredAbility extends TriggeredAbilityImpl {
 
     FlamescrollCelebrantTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(StaticValue.get(2), true, "that player", true));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(StaticValue.get(1), true, "that player", true));
     }
 
     private FlamescrollCelebrantTriggeredAbility(final FlamescrollCelebrantTriggeredAbility ability) {
@@ -114,7 +114,7 @@ class FlamescrollCelebrantTriggeredAbility extends TriggeredAbilityImpl {
 class RevelInSilenceEffect extends ContinuousRuleModifyingEffectImpl {
 
     RevelInSilenceEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Your opponents can't cast spells or activate planeswalkers' loyalty abilities this turn.";
     }
 

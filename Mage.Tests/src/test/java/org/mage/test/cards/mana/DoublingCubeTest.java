@@ -7,6 +7,7 @@ import mage.constants.Zone;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
+
 import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
 
 public class DoublingCubeTest extends CardTestPlayerBase {
@@ -38,7 +39,6 @@ public class DoublingCubeTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
         assertManaPool(playerA, ManaType.COLORLESS, 4);
-        assertAllCommandsUsed();
     }
     
     @Test
@@ -53,9 +53,7 @@ public class DoublingCubeTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         
         execute();
-        
-        assertAllCommandsUsed();
-        
+
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
         Assert.assertEquals("mana variations don't fit", 4, manaOptions.size());
         assertManaOptions("{R}{R}{R}{R}{R}{R}{R}{R}{G}{G}", manaOptions);
@@ -80,9 +78,7 @@ public class DoublingCubeTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.UPKEEP);
         
         execute();
-        
-        assertAllCommandsUsed();
-        
+
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
         Assert.assertEquals("mana variations don't fit", 138, manaOptions.size());
         assertManaOptions("{C}{C}{C}{C}{C}{C}{C}{C}{R}{R}{R}{R}{R}{R}{R}{R}{R}{R}{R}{R}{R}{R}", manaOptions);

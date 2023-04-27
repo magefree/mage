@@ -35,7 +35,7 @@ public final class CosmicHorror extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // At the beginning of your upkeep, destroy Cosmic Horror unless you pay {3}{B}{B}{B}. If Cosmic Horror is destroyed this way, it deals 7 damage to you.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CosmicHorrorEffect(new ManaCostsImpl("{3}{B}{B}{B}")), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CosmicHorrorEffect(new ManaCostsImpl<>("{3}{B}{B}{B}")), TargetController.YOU, false));
     }
 
     private CosmicHorror(final CosmicHorror card) {

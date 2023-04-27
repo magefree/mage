@@ -22,38 +22,52 @@ public class MtgaImporter extends PlainTextDeckImporter {
             "(\\p{Digit}+)" +
                     "\\p{javaWhitespace}+" +
                     "(" + CARD_NAME_PATTERN.pattern() + ")" +
-                    "\\p{javaWhitespace}+" +
-                    "\\((\\p{Alnum}+)\\)" +
-                    "\\p{javaWhitespace}+" +
-                    "(\\p{Digit}+)");
+                    "(?:\\p{javaWhitespace}+\\()?" +
+                    "(\\p{Alnum}+)?" +
+                    "(?:\\)\\p{javaWhitespace}+)?" +
+                    "(\\p{Graph}+)?");
 
     private final CardLookup lookup = getCardLookup();
     private boolean sideboard = false;
 
     @Override
     protected void readLine(String line, DeckCardLists deckList, FixedInfo fixedInfo) {
+        
+        line = line.trim();
+        
+        if (line.equals("Deck")) {
+            return;
+        }
 
-        if (line.trim().equals("")) {
+        if (line.equals("Sideboard") || line.equals("")) {
             sideboard = true;
             return;
         }
 
-        Matcher m = MTGA_PATTERN.matcher(CardNameUtil.normalizeCardName(line));
-        if (m.matches()) {
-            int count = Integer.parseInt(m.group(1));
-            String name = m.group(2);
-            String set = SET_REMAPPING.getOrDefault(m.group(3), m.group(3));
-            String cardNumber = m.group(4);
-            final List<DeckCardInfo> zone = sideboard ? deckList.getSideboard() : deckList.getCards();
-            Optional<CardInfo> found = lookup.lookupCardInfo(name, set, cardNumber);
-            if (!found.isPresent()) {
-                sbMessage.append("Cound not find card for '").append(line).append("'\n");
-            } else {
-                found.ifPresent(card -> zone.addAll(Collections.nCopies(count,
-                        new DeckCardInfo(card.getName(), card.getCardNumber(), card.getSetCode()))));
-            }
-        } else {
+        Matcher pattern = MTGA_PATTERN.matcher(CardNameUtil.normalizeCardName(line));
+        
+        if (!pattern.matches()) {
             sbMessage.append("Error reading '").append(line).append("'\n");
+            return;
+        }
+        
+        Optional<CardInfo> found;
+        int count = Integer.parseInt(pattern.group(1));
+        String name = pattern.group(2);    
+        if (pattern.group(3) != null && pattern.group(4) != null) {
+            String set = SET_REMAPPING.getOrDefault(pattern.group(3), pattern.group(3));
+            String cardNumber = pattern.group(4);
+            found = lookup.lookupCardInfo(name, set, cardNumber);
+        } else {
+            found = lookup.lookupCardInfo(name);
+        }
+        
+        if (!found.isPresent()) {
+            sbMessage.append("Cound not find card for '").append(line).append("'\n");
+        } else {
+            final List<DeckCardInfo> zone = sideboard ? deckList.getSideboard() : deckList.getCards();
+            found.ifPresent(card -> zone.addAll(Collections.nCopies(count,
+                    new DeckCardInfo(card.getName(), card.getCardNumber(), card.getSetCode()))));
         }
     }
 

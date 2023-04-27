@@ -20,15 +20,16 @@ public class BountyAbility extends DiesCreatureTriggeredAbility {
     }
 
     public BountyAbility(Effect effect) {
-        super(effect, false, bountyCounterFilter);
+        this(effect, false);
     }
 
     public BountyAbility(Effect effect, boolean optional) {
-        super(effect, optional, bountyCounterFilter);
+        this(effect, optional, false);
     }
 
     public BountyAbility(Effect effect, boolean optional, boolean setTargetPointer) {
         super(effect, optional, bountyCounterFilter, setTargetPointer);
+        setTriggerPhrase("<i>Bounty</i> &mdash; Whenever a creature an opponent controls with a bounty counter on it dies, ");
     }
 
     public BountyAbility(final BountyAbility ability) {
@@ -39,10 +40,4 @@ public class BountyAbility extends DiesCreatureTriggeredAbility {
     public BountyAbility copy() {
         return new BountyAbility(this);
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "<i>Bounty</i> &mdash; " ;
-    }
-
 }

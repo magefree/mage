@@ -23,7 +23,7 @@ public final class DriftingMeadow extends CardImpl {
 
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new WhiteManaAbility());
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private DriftingMeadow(final DriftingMeadow card) {

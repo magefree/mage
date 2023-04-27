@@ -28,7 +28,7 @@ public final class AcademyRuins extends CardImpl {
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {1}{U}, {T}: Put target artifact card from your graveyard on top of your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(true), new ManaCostsImpl("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(true), new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD));
         this.addAbility(ability);

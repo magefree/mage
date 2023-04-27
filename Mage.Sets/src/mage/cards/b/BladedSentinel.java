@@ -26,7 +26,7 @@ public final class BladedSentinel extends CardImpl {
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{W}")));
     }
 
     public BladedSentinel (final BladedSentinel card) {

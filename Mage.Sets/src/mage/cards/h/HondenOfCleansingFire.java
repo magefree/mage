@@ -3,8 +3,12 @@
 package mage.cards.h;
 
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -20,11 +24,10 @@ import java.util.UUID;
  */
 public final class HondenOfCleansingFire extends CardImpl {
 
-    static final FilterControlledPermanent filter = new FilterControlledPermanent("Shrine");
-
-    static {
-        filter.add(SubType.SHRINE.getPredicate());
-    }
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(
+            new FilterControlledPermanent(SubType.SHRINE)
+    );
+    private static final Hint hint = new ValueHint("Shrines you control", xValue);
 
     public HondenOfCleansingFire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
@@ -33,7 +36,7 @@ public final class HondenOfCleansingFire extends CardImpl {
 
 
         // At the beginning of your upkeep, you gain 2 life for each Shrine you control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter, 2)), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(new MultipliedValue(xValue, 2)), TargetController.YOU, false).addHint(hint));
     }
 
     private HondenOfCleansingFire(final HondenOfCleansingFire card) {

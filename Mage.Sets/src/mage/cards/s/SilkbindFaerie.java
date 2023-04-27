@@ -34,7 +34,7 @@ public final class SilkbindFaerie extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // {1}{WU}, {untap}: Tap target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{1}{W/U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl<>("{1}{W/U}"));
         ability.addCost(new UntapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

@@ -14,6 +14,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
+import mage.watchers.common.AbilityResolvedWatcher;
 
 import java.util.UUID;
 
@@ -41,7 +42,7 @@ public final class VenomConnoisseur extends CardImpl {
                         StaticFilters.FILTER_CONTROLLED_CREATURE
                 ).setText("all creatures you control gain deathtouch until end of turn")
         ));
-        this.addAbility(ability);
+        this.addAbility(ability, new AbilityResolvedWatcher());
     }
 
     private VenomConnoisseur(final VenomConnoisseur card) {

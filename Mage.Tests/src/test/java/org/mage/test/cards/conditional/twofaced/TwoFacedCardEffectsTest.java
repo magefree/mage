@@ -89,7 +89,6 @@ public class TwoFacedCardEffectsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(5, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 2);
         assertHandCount(playerB, 2);

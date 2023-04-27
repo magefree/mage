@@ -21,6 +21,8 @@ public final class SerraTheBenevolentEmblem extends Emblem {
     public SerraTheBenevolentEmblem() {
         this.setName("Emblem Serra");
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new SerraTheBenevolentEmblemEffect()));
+
+        this.setExpansionSetCodeForImage("MH1");
     }
 }
 

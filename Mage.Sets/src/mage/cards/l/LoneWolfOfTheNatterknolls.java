@@ -31,7 +31,7 @@ public final class LoneWolfOfTheNatterknolls extends CardImpl {
 
         // Whenever an opponent cast a spell during your turn, draw two cards.
         this.addAbility(new ConditionalTriggeredAbility(
-                new SpellCastOpponentTriggeredAbility(new DrawCardSourceControllerEffect(2), StaticFilters.FILTER_SPELL_A, true),
+                new SpellCastOpponentTriggeredAbility(new DrawCardSourceControllerEffect(2), StaticFilters.FILTER_SPELL_A, false),
                 MyTurnCondition.instance,
                 "Whenever an opponent casts a spell during your turn, draw two cards."
         ).addHint(MyTurnHint.instance));

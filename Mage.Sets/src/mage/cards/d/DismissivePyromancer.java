@@ -35,7 +35,7 @@ public final class DismissivePyromancer extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(1),
-                new ManaCostsImpl("{R}")
+                new ManaCostsImpl<>("{R}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
@@ -45,7 +45,7 @@ public final class DismissivePyromancer extends CardImpl {
         ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new DamageTargetEffect(4, "it"),
-                new ManaCostsImpl("{2}{R}")
+                new ManaCostsImpl<>("{2}{R}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

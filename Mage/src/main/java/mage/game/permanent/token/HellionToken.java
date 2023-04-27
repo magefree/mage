@@ -2,14 +2,26 @@
 package mage.game.permanent.token;
 
 import mage.MageInt;
+import mage.abilities.keyword.HasteAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
+
+import java.util.Arrays;
 
 /**
  *
  * @author spjspj
  */
 public final class HellionToken extends TokenImpl {
+
+    public HellionToken(boolean withHaste) {
+        this();
+
+        if (withHaste) {
+            addAbility(HasteAbility.getInstance());
+            this.description = "4/4 red Hellion creature token with haste";
+        }
+    }
 
     public HellionToken() {
         super("Hellion Token", "4/4 red Hellion creature token");
@@ -18,6 +30,8 @@ public final class HellionToken extends TokenImpl {
         subtype.add(SubType.HELLION);
         power = new MageInt(4);
         toughness = new MageInt(4);
+
+        availableImageSetCodes = Arrays.asList("ROE", "DDP", "M13", "PCA");
     }
 
     public HellionToken(final HellionToken token) {

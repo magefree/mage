@@ -34,7 +34,7 @@ public final class CreatureBond extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // When enchanted creature dies, Creature Bond deals damage equal to that creature's toughness to the creature's controller.
         Effect effect = new DamageAttachedControllerEffect(CreatureBondValue.instance);

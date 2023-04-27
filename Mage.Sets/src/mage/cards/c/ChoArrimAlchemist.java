@@ -36,7 +36,7 @@ public final class ChoArrimAlchemist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{W}{W}, {tap}, Discard a card: The next time a source of your choice would deal damage to you this turn, prevent that damage. You gain life equal to the damage prevented this way.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChoArrimAlchemistEffect(), new ManaCostsImpl("{1}{W}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChoArrimAlchemistEffect(), new ManaCostsImpl<>("{1}{W}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);

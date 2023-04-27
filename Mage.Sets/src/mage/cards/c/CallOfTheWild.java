@@ -24,7 +24,7 @@ public final class CallOfTheWild extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{G}");
 
         // {2}{G}{G}: Reveal the top card of your library. If it's a creature card, put it onto the battlefield. Otherwise, put it into your graveyard.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CallOfTheWildEffect(), new ManaCostsImpl("{2}{G}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CallOfTheWildEffect(), new ManaCostsImpl<>("{2}{G}{G}")));
     }
 
     private CallOfTheWild(final CallOfTheWild card) {

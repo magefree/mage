@@ -2,6 +2,7 @@
 package mage.cards.u;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
@@ -37,7 +38,7 @@ public final class UrzasAvenger extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {0}: Urza's Avenger gets -1/-1 and gains your choice of banding, flying, first strike, or trample until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UrzasAvengerEffect(), new ManaCostsImpl("{0}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UrzasAvengerEffect(), new ManaCostsImpl<>("{0}")));
     }
 
     private UrzasAvenger(final UrzasAvenger card) {
@@ -52,7 +53,7 @@ public final class UrzasAvenger extends CardImpl {
 
 class UrzasAvengerEffect extends ContinuousEffectImpl {
 
-    private static final Set<String> choices = new HashSet<>();
+    private static final Set<String> choices = new LinkedHashSet<>();
     private Ability gainedAbility;
 
     static {

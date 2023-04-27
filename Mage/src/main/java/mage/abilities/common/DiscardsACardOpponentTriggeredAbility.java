@@ -27,6 +27,7 @@ public class DiscardsACardOpponentTriggeredAbility extends TriggeredAbilityImpl 
     public DiscardsACardOpponentTriggeredAbility(Effect effect, boolean isOptional, SetTargetPointer setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, isOptional);
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever an opponent discards a card, ");
     }
 
     public DiscardsACardOpponentTriggeredAbility(final DiscardsACardOpponentTriggeredAbility ability) {
@@ -61,10 +62,5 @@ public class DiscardsACardOpponentTriggeredAbility extends TriggeredAbilityImpl 
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever an opponent discards a card, " ;
     }
 }

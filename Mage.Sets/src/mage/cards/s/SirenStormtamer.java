@@ -45,7 +45,7 @@ public final class SirenStormtamer extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {U}, Sacrifice Siren Stormtamer: Counter target spell or ability that targets you or a creature you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl<>("{U}"));
         ability.addTarget(new SirenStormtamerTargetObject());
         ability.addCost(new SacrificeSourceCost());
 

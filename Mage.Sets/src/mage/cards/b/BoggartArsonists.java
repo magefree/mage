@@ -43,7 +43,7 @@ public final class BoggartArsonists extends CardImpl {
         this.addAbility(new PlainswalkAbility());
 
         // {2}{R}, Sacrifice Boggart Arsonists: Destroy target Scarecrow or Plains.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{2}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{2}{R}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

@@ -46,7 +46,7 @@ public final class MoratoriumStone extends CardImpl {
         this.addAbility(ability);
 
         // {2}{W}{B}, {tap}, Sacrifice Moratorium Stone: Exile target nonland card from a graveyard, all other cards from graveyards with the same name as that card, and all permanents with that name.
-        ability = new SimpleActivatedAbility(new MoratoriumStoneEffect(), new ManaCostsImpl("{2}{W}{B}"));
+        ability = new SimpleActivatedAbility(new MoratoriumStoneEffect(), new ManaCostsImpl<>("{2}{W}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInGraveyard(filter));

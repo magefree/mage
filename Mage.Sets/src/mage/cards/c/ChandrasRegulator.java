@@ -84,7 +84,7 @@ class ChandrasRegulatorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        ManaCostsImpl cost = new ManaCostsImpl("{1}");
+        ManaCostsImpl cost = new ManaCostsImpl<>("{1}");
         if (player == null) {
             return false;
         }
@@ -96,7 +96,7 @@ class ChandrasRegulatorEffect extends OneShotEffect {
         if (!cost.pay(source, game, source, source.getControllerId(), false, null)) {
             return true;
         }
-        StackAbility ability = (StackAbility) getValue("stackAbility");
+        StackAbility ability = (StackAbility) getValue("stackObject");
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (ability == null || controller == null || sourcePermanent == null) {

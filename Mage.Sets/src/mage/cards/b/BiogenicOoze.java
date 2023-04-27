@@ -51,7 +51,7 @@ public final class BiogenicOoze extends CardImpl {
         // {1}{G}{G}{G}: Create a 2/2 green Ooze creature token.
         this.addAbility(new SimpleActivatedAbility(
                 new CreateTokenEffect(new BiogenicOozeToken()),
-                new ManaCostsImpl("{1}{G}{G}{G}")
+                new ManaCostsImpl<>("{1}{G}{G}{G}")
         ));
     }
 

@@ -14,6 +14,7 @@ public class ExertCreatureControllerTriggeredAbility extends TriggeredAbilityImp
 
     public ExertCreatureControllerTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
+        setTriggerPhrase("Whenever you exert a creature, ");
     }
 
     public ExertCreatureControllerTriggeredAbility(final ExertCreatureControllerTriggeredAbility ability) {
@@ -36,10 +37,5 @@ public class ExertCreatureControllerTriggeredAbility extends TriggeredAbilityImp
     @Override
     public ExertCreatureControllerTriggeredAbility copy() {
         return new ExertCreatureControllerTriggeredAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you exert a creature, " ;
     }
 }

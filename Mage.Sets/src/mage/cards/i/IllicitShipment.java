@@ -18,7 +18,7 @@ public final class IllicitShipment extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
 
         // Casualty 3
-        this.addAbility(new CasualtyAbility(this, 3));
+        this.addAbility(new CasualtyAbility(3));
 
         // Search your library for a card, put that card into your hand, then shuffle.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary()));

@@ -125,4 +125,8 @@ public class ConditionalContinuousRuleModifyingEffect extends ContinuousRuleModi
         return effect.getInfoMessage(source, event, game); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public Condition getCondition() {
+        return condition;
+    }
 }

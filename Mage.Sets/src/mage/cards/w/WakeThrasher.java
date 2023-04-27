@@ -49,6 +49,7 @@ class BecomesUntappedControlledPermanentTriggeredAbility extends TriggeredAbilit
 
     public BecomesUntappedControlledPermanentTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever a permanent you control becomes untapped, ");
     }
 
     public BecomesUntappedControlledPermanentTriggeredAbility(final BecomesUntappedControlledPermanentTriggeredAbility ability) {
@@ -69,10 +70,4 @@ class BecomesUntappedControlledPermanentTriggeredAbility extends TriggeredAbilit
     public boolean checkTrigger(GameEvent event, Game game) {
         return game.getPermanent(event.getTargetId()).isControlledBy(this.controllerId);
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a permanent you control becomes untapped, " ;
-    }
-
 }

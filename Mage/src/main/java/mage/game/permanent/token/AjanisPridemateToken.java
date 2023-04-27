@@ -20,6 +20,7 @@ public final class AjanisPridemateToken extends TokenImpl {
         subtype.add(SubType.SOLDIER);
         power = new MageInt(2);
         toughness = new MageInt(2);
+        setOriginalExpansionSetCode("M20");
 
         this.addAbility(new GainLifeControllerTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false

@@ -35,7 +35,7 @@ public final class RingOfImmortals extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // {3}, {tap}: Counter target instant or Aura spell that targets a permanent you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{3}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl<>("{3}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);

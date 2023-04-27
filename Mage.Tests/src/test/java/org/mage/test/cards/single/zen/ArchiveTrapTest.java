@@ -43,7 +43,6 @@ public class ArchiveTrapTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLibraryCount(playerA, 15 - 1 - 13); // -1 by search, -13 by trap's mill
     }

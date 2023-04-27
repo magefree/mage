@@ -16,6 +16,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -69,12 +70,6 @@ public final class BasriKet extends CardImpl {
 
 class BasriKetTriggeredAbility extends DelayedTriggeredAbility {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
-
-    static {
-        filter.add(TokenPredicate.FALSE);
-    }
-
     public BasriKetTriggeredAbility() {
         super(null, Duration.EndOfTurn, false);
     }
@@ -98,7 +93,7 @@ class BasriKetTriggeredAbility extends DelayedTriggeredAbility {
         int attackingNonTokens = 0;
         for (UUID attacker : game.getCombat().getAttackers()) {
             Permanent permanent = game.getPermanent(attacker);
-            if (filter.match(permanent, game)) {
+            if (StaticFilters.FILTER_CREATURE_NON_TOKEN.match(permanent, game)) {
                 attackingNonTokens++;
             }
         }

@@ -30,7 +30,7 @@ public final class SpikeshotElder extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SpikeshotElderEffect(), new ManaCostsImpl("{1}{R}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SpikeshotElderEffect(), new ManaCostsImpl<>("{1}{R}{R}"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

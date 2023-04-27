@@ -19,8 +19,8 @@ public final class BeastToken2 extends TokenImpl {
         power = new MageInt(4);
         toughness = new MageInt(4);
 
-        availableImageSetCodes = Arrays.asList("C13", "C14", "C15", "C19", "CMA", "CMD", "GVL", "DDD",
-                "E01", "ODY", "SCG", "ZEN", "C20", "ZNC", "CMR", "C21", "MH2", "MID");
+        availableImageSetCodes = Arrays.asList("C14", "C15", "C18", "C19", "CMA", "GVL", "DDD",
+                "E01", "ODY", "SCG", "ZEN", "C20", "ZNC", "CMR", "C21", "MH2", "MID", "IMA", "MM3", "DDS", "MOC");
     }
 
     public BeastToken2(final BeastToken2 token) {
@@ -38,6 +38,10 @@ public final class BeastToken2 extends TokenImpl {
 
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C14")) {
             this.setTokenType(2);
+        }
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C18")) {
+            this.setTokenType(1);
         }
 
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C19")) {
@@ -61,6 +65,14 @@ public final class BeastToken2 extends TokenImpl {
         }
 
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C21")) {
+            this.setTokenType(2);
+        }
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("GVL")) {
+            this.setTokenType(2);
+        }
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("MM3")) {
             this.setTokenType(2);
         }
     }

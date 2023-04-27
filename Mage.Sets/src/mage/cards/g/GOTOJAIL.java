@@ -72,7 +72,7 @@ class GoToJailExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
 
         // If GO TO JAIL leaves the battlefield before its triggered ability resolves,
@@ -92,6 +92,7 @@ class GoToJailTriggeredAbility extends TriggeredAbilityImpl {
 
     public GoToJailTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GoToJailUpkeepEffect(), false);
+        setTriggerPhrase("At the beginning of the chosen player's upkeep, ");
     }
 
     public GoToJailTriggeredAbility(final GoToJailTriggeredAbility ability) {
@@ -111,11 +112,6 @@ class GoToJailTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(game.getState().getValue(this.getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY));
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "At the beginning of the chosen player's upkeep, " ;
     }
 }
 
@@ -138,7 +134,7 @@ class GoToJailUpkeepEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
 
 
         if (sourceObject instanceof Permanent && permanent != null) {

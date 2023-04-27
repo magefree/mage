@@ -38,8 +38,8 @@ public final class AbzanCharm extends CardImpl {
         this.getSpellAbility().addEffect(new ExileTargetEffect());
 
         // *You draw two cards and you lose 2 life
-        Mode mode = new Mode(new DrawCardSourceControllerEffect(2));
-        mode.addEffect(new LoseLifeSourceControllerEffect(2));
+        Mode mode = new Mode(new DrawCardSourceControllerEffect(2).setText("you draw two cards"));
+        mode.addEffect(new LoseLifeSourceControllerEffect(2).concatBy("and"));
         this.getSpellAbility().addMode(mode);
 
         // *Distribute two +1/+1 counters among one or two target creatures.

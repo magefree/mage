@@ -35,7 +35,7 @@ public final class Helldozer extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new HelldozerEffect(),
-                new ManaCostsImpl("{B}{B}{B}"));
+                new ManaCostsImpl<>("{B}{B}{B}"));
         ability.addTarget(new TargetLandPermanent());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

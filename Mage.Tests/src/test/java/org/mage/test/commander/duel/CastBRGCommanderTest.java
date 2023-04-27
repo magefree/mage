@@ -42,7 +42,6 @@ public class CastBRGCommanderTest extends CardTestCommanderDuelBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Savage Summoning", 1);
         assertPermanentCount(playerA, "Prossh, Skyraider of Kher", 1);
@@ -73,7 +72,6 @@ public class CastBRGCommanderTest extends CardTestCommanderDuelBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Karn Liberated", 0);
         assertPermanentCount(playerA, "Silvercoat Lion", 2);
@@ -132,7 +130,6 @@ public class CastBRGCommanderTest extends CardTestCommanderDuelBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Karn Liberated", 0);
         assertPermanentCount(playerA, "Silvercoat Lion", 3);
@@ -168,7 +165,6 @@ public class CastBRGCommanderTest extends CardTestCommanderDuelBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Mogg Infestation", 1);
         assertCommandZoneCount(playerB, "Daxos of Meletis", 1);

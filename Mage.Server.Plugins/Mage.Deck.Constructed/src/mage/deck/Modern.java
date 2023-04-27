@@ -69,6 +69,7 @@ public class Modern extends Constructed {
         banned.add("Tree of Tales");
         banned.add("Umezawa's Jitte");
         banned.add("Uro, Titan of Nature's Wrath");
+        banned.add("Yorion, the Sky Nomad");
         banned.add("Vault of Whispers");
     }
 }

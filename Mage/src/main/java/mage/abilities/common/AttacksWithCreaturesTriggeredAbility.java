@@ -29,6 +29,16 @@ public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
         super(zone, effect);
         this.filter = filter;
         this.minAttackers = minAttackers;
+        if (minAttackers == 1) {
+            setTriggerPhrase("Whenever you attack, ");
+        } else {
+            StringBuilder sb = new StringBuilder("Whenever you attack with ");
+            sb.append(CardUtil.numberToText(minAttackers));
+            sb.append(" or more ");
+            sb.append(filter.getMessage());
+            sb.append(", ");
+            setTriggerPhrase(sb.toString());
+        }
     }
 
     public AttacksWithCreaturesTriggeredAbility(final AttacksWithCreaturesTriggeredAbility ability) {
@@ -65,18 +75,5 @@ public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
         }
         getEffects().setValue("attackers", attackers);
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        if (minAttackers == 1) {
-            return "Whenever you attack, ";
-        }
-        StringBuilder sb = new StringBuilder("Whenever you attack with ");
-        sb.append(CardUtil.numberToText(minAttackers));
-        sb.append(" or more ");
-        sb.append(filter.getMessage());
-        sb.append(", ");
-        return sb.toString();
     }
 }

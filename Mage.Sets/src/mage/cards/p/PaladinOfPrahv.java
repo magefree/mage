@@ -40,7 +40,7 @@ public final class PaladinOfPrahv extends CardImpl {
         
         // Forecast - {1}{W}, Reveal Paladin of Prahv from your hand: Whenever target creature deals damage this turn, you gain that much life.
         Ability ability = new ForecastAbility(new CreateDelayedTriggeredAbilityEffect(
-                new PaladinOfPrahvTriggeredAbility()), new ManaCostsImpl("{1}{W}"));
+                new PaladinOfPrahvTriggeredAbility()), new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -59,6 +59,7 @@ class PaladinOfPrahvTriggeredAbility extends DelayedTriggeredAbility {
     
     public PaladinOfPrahvTriggeredAbility() {
         super(new GainLifeEffect(SavedDamageValue.MUCH), Duration.EndOfTurn, false);
+        setTriggerPhrase("Whenever target creature deals damage this turn, ");
     }
 
     public PaladinOfPrahvTriggeredAbility(final PaladinOfPrahvTriggeredAbility ability) {
@@ -90,10 +91,5 @@ class PaladinOfPrahvTriggeredAbility extends DelayedTriggeredAbility {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever target creature deals damage this turn, " ;
     }
 }

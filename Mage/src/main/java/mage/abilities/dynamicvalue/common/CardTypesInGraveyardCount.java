@@ -23,7 +23,7 @@ public enum CardTypesInGraveyardCount implements DynamicValue {
     private final String message;
 
     CardTypesInGraveyardCount(String message) {
-        this.message = message;
+        this.message = "the number of card types among cards in " + message;
     }
 
     @Override
@@ -44,12 +44,12 @@ public enum CardTypesInGraveyardCount implements DynamicValue {
 
     @Override
     public String toString() {
-        return "1";
+        return "X";
     }
 
     @Override
     public String getMessage() {
-        return "the number of card types in " + message;
+        return message;
     }
 
     private final Stream<Card> getStream(Game game, Ability ability) {

@@ -5,6 +5,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 
+import java.util.Arrays;
+
 /**
  *
  * @author TheElk801
@@ -19,6 +21,8 @@ public final class MowuToken extends TokenImpl {
         subtype.add(SubType.DOG);
         power = new MageInt(3);
         toughness = new MageInt(3);
+
+        availableImageSetCodes = Arrays.asList("GS1");
     }
 
     public MowuToken(final MowuToken token) {

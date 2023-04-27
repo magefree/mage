@@ -60,6 +60,7 @@ class MasterOfCrueltiesTriggeredAbility extends TriggeredAbilityImpl {
     public MasterOfCrueltiesTriggeredAbility() {
         super(Zone.BATTLEFIELD, new MasterOfCrueltiesEffect());
         this.addEffect(new MasterOfCrueltiesNoDamageEffect());
+        setTriggerPhrase("Whenever {this} attacks a player and isn't blocked, ");
     }
 
     public MasterOfCrueltiesTriggeredAbility(final MasterOfCrueltiesTriggeredAbility ability) {
@@ -94,11 +95,6 @@ class MasterOfCrueltiesTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} attacks a player and isn't blocked, ";
     }
 }
 

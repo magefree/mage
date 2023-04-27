@@ -34,7 +34,7 @@ public final class ThornThrashViashino extends CardImpl {
         this.addAbility(new DevourAbility(DevourFactor.Devour2));
 
         // {G}: Thorn-Thrash Viashino gains trample until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn),new ManaCostsImpl("{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn),new ManaCostsImpl<>("{G}")));
     }
 
     private ThornThrashViashino(final ThornThrashViashino card) {

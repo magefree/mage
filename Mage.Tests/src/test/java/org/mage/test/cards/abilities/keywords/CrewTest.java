@@ -43,7 +43,6 @@ public class CrewTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertTappedCount(lion, true, 2);
         assertPowerToughness(playerA, caravan, 5, 5);
@@ -64,7 +63,6 @@ public class CrewTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertTappedCount(fanatic, true, 1);
         assertPowerToughness(playerA, copter, 3, 3);
@@ -90,7 +88,6 @@ public class CrewTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // Only crewed vehicles have card type creature
         assertNotType(copter, CardType.CREATURE);
@@ -105,7 +102,6 @@ public class CrewTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped(ox, true);
         assertType(plow, CardType.CREATURE, true);
@@ -120,7 +116,6 @@ public class CrewTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped(kotori, true);
         assertType(crusher, CardType.ARTIFACT, true);
@@ -136,7 +131,6 @@ public class CrewTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped(mechanic, true);
         assertType(express, CardType.ARTIFACT, true);
@@ -152,7 +146,6 @@ public class CrewTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, jace, CounterType.LOYALTY, 2);
         assertType(heart, CardType.ARTIFACT, true);

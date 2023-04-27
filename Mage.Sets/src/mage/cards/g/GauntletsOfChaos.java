@@ -34,7 +34,7 @@ public final class GauntletsOfChaos extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExchangeControlTargetEffect(Duration.EndOfGame,
                 "exchange control of target artifact, creature, or land you control and target permanent an opponent controls that shares one of those types with it."
                         + " If those permanents are exchanged this way, destroy all Auras attached to them", false, true, true),
-                new ManaCostsImpl("{5}")
+                new ManaCostsImpl<>("{5}")
         );
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new GauntletsOfChaosFirstTarget());

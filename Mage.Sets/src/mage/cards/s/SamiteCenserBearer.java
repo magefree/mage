@@ -34,7 +34,7 @@ public final class SamiteCenserBearer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {W}, Sacrifice Samite Censer-Bearer: Prevent the next 1 damage that would be dealt to each creature you control this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SamiteCenserBearerEffect(), new ManaCostsImpl("{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SamiteCenserBearerEffect(), new ManaCostsImpl<>("{W}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

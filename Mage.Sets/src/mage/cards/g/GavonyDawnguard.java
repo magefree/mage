@@ -5,12 +5,12 @@ import mage.abilities.common.BecomeDayAsEntersAbility;
 import mage.abilities.common.BecomesDayOrNightTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
+import mage.constants.PutCards;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
@@ -38,7 +38,7 @@ public final class GavonyDawnguard extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Ward {1}
-        this.addAbility(new WardAbility(new GenericManaCost(1)));
+        this.addAbility(new WardAbility(new GenericManaCost(1), false));
 
         // If it's neither day nor night, it becomes day as Gavony Dawnguard enters the battlefield.
         this.addAbility(new BecomeDayAsEntersAbility());

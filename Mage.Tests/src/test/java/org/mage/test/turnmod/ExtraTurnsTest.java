@@ -133,8 +133,6 @@ public class ExtraTurnsTest extends CardTestPlayerBase {
         setStopAt(4, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
-        assertAllCommandsUsed();
-
         assertExileCount(playerB, "Temporal Mastery", 1);
 
         Assert.assertTrue("Turn 4 is an extra turn ", currentGame.getState().isExtraTurn());

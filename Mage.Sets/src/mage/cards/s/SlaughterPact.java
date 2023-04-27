@@ -26,7 +26,7 @@ public final class SlaughterPact extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         // At the beginning of your next upkeep, pay {2}{B}. If you don't, you lose the game.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new PactDelayedTriggeredAbility(new ManaCostsImpl("{2}{B}")),false));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new PactDelayedTriggeredAbility(new ManaCostsImpl<>("{2}{B}")),false));
     }
 
     private SlaughterPact(final SlaughterPact card) {

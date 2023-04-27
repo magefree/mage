@@ -57,6 +57,7 @@ class PutridWarriorDealsDamageTriggeredAbility extends TriggeredAbilityImpl {
 
     public PutridWarriorDealsDamageTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        setTriggerPhrase("Whenever {this} deals damage, " );
     }
 
     public PutridWarriorDealsDamageTriggeredAbility(final PutridWarriorDealsDamageTriggeredAbility ability) {
@@ -77,11 +78,6 @@ class PutridWarriorDealsDamageTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getSourceId().equals(this.sourceId);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} deals damage, " ;
     }
 }
 

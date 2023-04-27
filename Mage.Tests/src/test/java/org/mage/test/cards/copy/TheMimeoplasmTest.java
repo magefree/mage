@@ -41,7 +41,7 @@ public class TheMimeoplasmTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
 
 
-        castSpell(1,PhaseStep.PRECOMBAT_MAIN, playerA, "The Mimeoplasm");
+        castSpell(1,PhaseStep.PRECOMBAT_MAIN, playerA, "The Mimeoplasm", true);
         setChoice(playerA, "Aven Riftwatcher");
         setChoice(playerA, "Silvercoat Lion");
 

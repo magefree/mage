@@ -30,7 +30,7 @@ public final class GatesOfIstfell extends CardImpl {
         this.addAbility(new WhiteManaAbility());
 
         // {2}{W}{U}{U}, {T}, Sacrifice Gates of Istfell: You gain 2 life and draw two cards.
-        Ability ability = new SimpleActivatedAbility(new GainLifeEffect(2), new ManaCostsImpl("{2}{W}{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(new GainLifeEffect(2), new ManaCostsImpl<>("{2}{W}{U}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addEffect(new DrawCardSourceControllerEffect(2).concatBy("and"));

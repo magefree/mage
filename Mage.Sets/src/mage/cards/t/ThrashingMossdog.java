@@ -31,7 +31,7 @@ public final class ThrashingMossdog extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
         // Scavenge {4}{G}{G}
-        this.addAbility(new ScavengeAbility(new ManaCostsImpl("{4}{G}{G}")));
+        this.addAbility(new ScavengeAbility(new ManaCostsImpl<>("{4}{G}{G}")));
 
     }
 

@@ -58,7 +58,7 @@ public final class PurphorosBronzeBlooded extends CardImpl {
         )));
 
         // {2}{R}: You may put a red creature card or an artifact creature card from your hand onto the battlefield. Sacrifice it at the beginning of the next end step.
-        this.addAbility(new SimpleActivatedAbility(new PurphurosBronzeBloodedEffect(), new ManaCostsImpl("{2}{R}")));
+        this.addAbility(new SimpleActivatedAbility(new PurphurosBronzeBloodedEffect(), new ManaCostsImpl<>("{2}{R}")));
     }
 
     private PurphorosBronzeBlooded(final PurphorosBronzeBlooded card) {

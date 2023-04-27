@@ -30,7 +30,7 @@ public final class AphettoExterminator extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Morph {3}{B}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{3}{B}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{B}")));
 
         // When Aphetto Exterminator is turned face up, target creature gets -3/-3 until end of turn.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new BoostTargetEffect(-3,-3,Duration.EndOfTurn));

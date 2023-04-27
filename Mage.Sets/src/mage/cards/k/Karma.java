@@ -51,15 +51,11 @@ class KarmaDamageTargetEffect extends OneShotEffect {
 
     public KarmaDamageTargetEffect() {
         super(Outcome.Damage);
+        this.staticText = "{this} deals damage to that player equal to the number of Swamps they control";
     }
 
     public KarmaDamageTargetEffect(KarmaDamageTargetEffect copy) {
         super(copy);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "{this} deals damage to that player equal to the number of Swamps they control";
     }
 
     @Override

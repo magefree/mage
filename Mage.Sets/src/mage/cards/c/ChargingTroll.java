@@ -30,7 +30,7 @@ public final class ChargingTroll extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
         // {G}: Regenerate Charging Troll.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{G}"));
         this.addAbility(ability);
 
     }

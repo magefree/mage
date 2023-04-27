@@ -8,7 +8,6 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
 import mage.abilities.effects.mana.BasicManaEffect;

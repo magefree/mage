@@ -27,7 +27,6 @@ public class KruphixGodOfHorizonsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertManaPool(playerA, ManaType.COLORLESS, 3);
         assertManaPool(playerA, ManaType.GREEN, 0);
@@ -51,7 +50,6 @@ public class KruphixGodOfHorizonsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertManaPool(playerA, ManaType.COLORLESS, 0);
         assertManaPool(playerA, ManaType.GREEN, 0);

@@ -19,6 +19,7 @@ public class DrawCardControllerTriggeredAbility extends TriggeredAbilityImpl {
 
     public DrawCardControllerTriggeredAbility(Zone zone, Effect effect, boolean optional) {
         super(zone, effect, optional);
+        setTriggerPhrase("Whenever you draw a card, ");
     }
 
     public DrawCardControllerTriggeredAbility(final DrawCardControllerTriggeredAbility ability) {
@@ -33,11 +34,6 @@ public class DrawCardControllerTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(controllerId);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you draw a card, " ;
     }
 
     @Override

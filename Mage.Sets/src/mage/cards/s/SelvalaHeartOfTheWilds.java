@@ -51,7 +51,7 @@ public final class SelvalaHeartOfTheWilds extends CardImpl {
         ManaEffect manaEffect = new AddManaInAnyCombinationEffect(
                 GreatestPowerAmongControlledCreaturesValue.instance, GreatestPowerAmongControlledCreaturesValue.instance,
                 ColoredManaSymbol.W, ColoredManaSymbol.U, ColoredManaSymbol.B, ColoredManaSymbol.R, ColoredManaSymbol.G);
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, manaEffect, new ManaCostsImpl("{G}"));
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, manaEffect, new ManaCostsImpl<>("{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

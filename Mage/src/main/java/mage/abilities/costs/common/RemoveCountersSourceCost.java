@@ -7,14 +7,13 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.Outcome;
 import mage.counters.Counter;
-import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.util.CardUtil;
 import mage.util.RandomUtil;
 
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -27,19 +26,15 @@ public class RemoveCountersSourceCost extends CostImpl {
     private final String name;
 
     public RemoveCountersSourceCost() {
-        this((Counter) null);
+        this.amount = 1;
+        this.name = "";
+        this.text = "remove a counter from {this}";
     }
 
     public RemoveCountersSourceCost(Counter counter) {
-        this.amount = counter != null ? counter.getCount() : 1;
-        this.name = counter != null ? counter.getName() : "";
-        this.text = new StringBuilder("remove ")
-                .append((amount == 1 ? CounterType.findArticle(name) : CardUtil.numberToText(amount)))
-                .append(name.isEmpty() ? "" : (' ' + name))
-                .append(" counter")
-                .append((amount != 1 ? "s" : ""))
-                .append(" from {this}").toString();
-
+        this.amount = counter.getCount();
+        this.name = counter.getName();
+        this.text = "remove " + counter.getDescription() + " from {this}";
     }
 
     private RemoveCountersSourceCost(RemoveCountersSourceCost cost) {
@@ -51,7 +46,16 @@ public class RemoveCountersSourceCost extends CostImpl {
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        return permanent != null && permanent.getCounters(game).getCount(name) >= amount;
+        return permanent != null && name.isEmpty()
+                ? permanent
+                .getCounters(game)
+                .values()
+                .stream()
+                .map(Counter::getCount)
+                .anyMatch(i -> i > 0)
+                : permanent
+                .getCounters(game)
+                .getCount(name) >= amount;
     }
 
     @Override
@@ -63,7 +67,7 @@ public class RemoveCountersSourceCost extends CostImpl {
         }
         String toRemove;
         if (name.isEmpty()) {
-            Set<String> toChoose = permanent.getCounters(game).keySet();
+            Set<String> toChoose = new LinkedHashSet<>(permanent.getCounters(game).keySet());
             switch (toChoose.size()) {
                 case 0:
                     return paid;

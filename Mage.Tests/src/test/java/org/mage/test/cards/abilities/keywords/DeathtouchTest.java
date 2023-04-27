@@ -102,7 +102,7 @@ public class DeathtouchTest extends CardTestPlayerBase {
         // Creatures your opponents control get -2/-2.
         addCard(Zone.BATTLEFIELD, playerB, "Elesh Norn, Grand Cenobite");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Marath, Will of the Wild");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Marath, Will of the Wild", true);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {2}", "Marath, Will of the Wild");
 

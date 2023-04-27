@@ -37,7 +37,6 @@ public class DivineVisitationTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerB, 3);
         assertPermanentCount(playerA, "Treasure Token", 3);
@@ -64,7 +63,6 @@ public class DivineVisitationTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, 1);
         assertPermanentCount(playerA, 5);
@@ -89,7 +87,6 @@ public class DivineVisitationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Human Token", 0);
         assertPermanentCount(playerA, "Angel Token", 0);

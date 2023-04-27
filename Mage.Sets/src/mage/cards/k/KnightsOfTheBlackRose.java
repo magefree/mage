@@ -57,6 +57,7 @@ class KnightsOfTheBlackRoseTriggeredAbility extends TriggeredAbilityImpl {
 
     public KnightsOfTheBlackRoseTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        setTriggerPhrase("Whenever an opponent becomes the monarch, if you were the monarch as the turn began, ");
     }
 
     public KnightsOfTheBlackRoseTriggeredAbility(final KnightsOfTheBlackRoseTriggeredAbility ability) {
@@ -83,11 +84,6 @@ class KnightsOfTheBlackRoseTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkInterveningIfClause(Game game) {
         KnightsOfTheBlackRoseWatcher watcher = game.getState().getWatcher(KnightsOfTheBlackRoseWatcher.class);
         return watcher != null && isControlledBy(watcher.getMonarchIdAtTurnStart());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever an opponent becomes the monarch, if you were the monarch as the turn began, ";
     }
 
     @Override

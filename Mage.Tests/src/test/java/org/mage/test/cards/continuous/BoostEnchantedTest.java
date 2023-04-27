@@ -2,6 +2,7 @@ package org.mage.test.cards.continuous;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.players.Player;
 import org.junit.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -19,6 +20,7 @@ public class BoostEnchantedTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Firebreathing"); // {R} Enchantment - Aura
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Firebreathing", "Silvercoat Lion");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}: Enchanted creature");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -51,6 +53,7 @@ public class BoostEnchantedTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Boomerang"); // {U}{U} Instant
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Firebreathing", "Silvercoat Lion");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Boomerang", "Firebreathing");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}: Enchanted creature", TestPlayer.NO_TARGET, "Boomerang");
 
@@ -66,7 +69,6 @@ public class BoostEnchantedTest extends CardTestPlayerBase {
      * If the aura moves between activation and resolution, the new enchanted
      * creature should be boosted, not the old one.
      */
-
     @Test
     public void testFirebreathingWithAuraGraft() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
@@ -80,8 +82,9 @@ public class BoostEnchantedTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Aura Graft"); // {1}{U} Instant
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Firebreathing", "Silvercoat Lion");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}: Enchanted creature");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Aura Graft", "Firebreathing");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Aura Graft", "Firebreathing", "{R}: Enchanted");
         setChoice(playerB, "Pillarfield Ox");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -91,7 +94,5 @@ public class BoostEnchantedTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Firebreathing", 1);
         assertPowerToughness(playerA, "Silvercoat Lion", 2, 2);
         assertPowerToughness(playerB, "Pillarfield Ox", 3, 4);
-
     }
-
 }

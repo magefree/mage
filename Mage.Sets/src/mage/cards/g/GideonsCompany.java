@@ -40,7 +40,7 @@ public final class GideonsCompany extends CardImpl {
 
         // {3}{W}: Put a loyalty counter on target Gideon planeswalker.
         Ability ability = new SimpleActivatedAbility(
-                new AddCountersTargetEffect(CounterType.LOYALTY.createInstance()), new ManaCostsImpl("{3}{W}")
+                new AddCountersTargetEffect(CounterType.LOYALTY.createInstance()), new ManaCostsImpl<>("{3}{W}")
         );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

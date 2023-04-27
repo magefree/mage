@@ -31,10 +31,10 @@ public final class IcatianInfantry extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}: Icatian Infantry gains first strike until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}")));
 
         // {1}: Icatian Infantry gains banding until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(BandingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(BandingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}")));
     }
 
     private IcatianInfantry(final IcatianInfantry card) {

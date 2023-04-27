@@ -35,6 +35,7 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
         this.targetController = targetController;
         this.setTargetPointer = setTargetPointer;
         this.ruleTrigger = ruleTrigger;
+        setTriggerPhrase(generateTriggerPhrase());
     }
 
     public BeginningOfUpkeepTriggeredAbility(final BeginningOfUpkeepTriggeredAbility ability) {
@@ -111,8 +112,7 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    @Override
-    public String getTriggerPhrase() {
+    private String generateTriggerPhrase() {
         if (ruleTrigger != null && !ruleTrigger.isEmpty()) {
             return ruleTrigger;
         }

@@ -33,16 +33,17 @@ public class AttackIfAbleTargetRandomOpponentSourceEffect extends OneShotEffect 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            List<UUID> opponents = new ArrayList<>();
-            opponents.addAll(game.getOpponents(controller.getId()));
-            Player opponent = game.getPlayer(opponents.get(RandomUtil.nextInt(opponents.size())));
-            if (opponent != null) {
-                ContinuousEffect effect = new AttacksIfAbleTargetPlayerSourceEffect();
-                effect.setTargetPointer(new FixedTarget(opponent.getId()));
-                game.addEffect(effect, source);
-                return true;
-            }
+        if (controller == null) {
+            return false;
+        }
+        List<UUID> opponents = new ArrayList<>(game.getOpponents(controller.getId()));
+        Player opponent = game.getPlayer(opponents.get(RandomUtil.nextInt(opponents.size())));
+        if (opponent != null) {
+            game.informPlayers(opponent.getLogName() + " was chosen at random.");
+            ContinuousEffect effect = new AttacksIfAbleTargetPlayerSourceEffect();
+            effect.setTargetPointer(new FixedTarget(opponent.getId()));
+            game.addEffect(effect, source);
+            return true;
         }
         return false;
     }

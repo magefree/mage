@@ -25,7 +25,7 @@ public final class SilentDeparture extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
 
         // Flashback {4}{U}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{4}{U}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{4}{U}")));
     }
 
     private SilentDeparture(final SilentDeparture card) {

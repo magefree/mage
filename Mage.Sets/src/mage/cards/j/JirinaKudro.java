@@ -36,7 +36,7 @@ public final class JirinaKudro extends CardImpl {
         // When Jirina Kudro enters the battlefield, create a 1/1 white Human Soldier creature token for each time you've cast a commander from the command zone this game.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(
                 new HumanSoldierToken(), CommanderCastCountValue.instance
-        ).setText("create a 1/1 white Human Soldier creature token for each time you've cast a commander from the command zone this game")));
+        ).setText("create a 1/1 white Human Soldier creature token for each time you've cast a commander from the command zone this game")).addHint(CommanderCastCountValue.getHint()));
 
         // Other Humans you control get +2/+0.
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(

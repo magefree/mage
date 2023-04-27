@@ -28,7 +28,7 @@ public final class SacredCat extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Embalm {W}
-        this.addAbility(new EmbalmAbility(new ManaCostsImpl("{W}"), this));
+        this.addAbility(new EmbalmAbility(new ManaCostsImpl<>("{W}"), this));
     }
 
     private SacredCat(final SacredCat card) {

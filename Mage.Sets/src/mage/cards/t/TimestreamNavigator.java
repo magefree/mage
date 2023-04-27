@@ -38,7 +38,7 @@ public final class TimestreamNavigator extends CardImpl {
         // {2}{U}{U}, {T}, Put Timestream Navigator on the bottom of its owner's library: Take an extra turn after this one. Activate this ability only if you have the city's blessing.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                 new AddExtraTurnControllerEffect(),
-                new ManaCostsImpl("{2}{U}{U}"),
+                new ManaCostsImpl<>("{2}{U}{U}"),
                 CitysBlessingCondition.instance);
         ability.addCost(new TapSourceCost());
         ability.addCost(new PutSourceOnBottomOwnerLibraryCost());

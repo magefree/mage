@@ -1,54 +1,41 @@
-
 package mage.cards.s;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.InfoEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.SacrificeTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.StanggTwinToken;
-import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
+import mage.game.permanent.token.Token;
+import mage.target.targetpointer.FixedTargets;
 
 /**
  *
- * @author jeffwadsworth & L_J
+ * @author awjackson
  */
 public final class Stangg extends CardImpl {
 
     public Stangg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{G}");
         addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WARRIOR);
+        this.subtype.add(SubType.HUMAN, SubType.WARRIOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
-        // When Stangg enters the battlefield, create a legendary 3/4 red and green Human Warrior creature token named Stangg Twin.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new StanggCreateTokenEffect(), false));
-
-        // When Stangg leaves the battlefield, exile that token. 
-        // When that token leaves the battlefield, sacrifice Stangg.
-        Ability ability = new LeavesBattlefieldTriggeredAbility(new StanggExileTokenEffect(), false);
-        ability.addEffect(new InfoEffect("When that token leaves the battlefield, sacrifice {this}"));
-        this.addAbility(ability);
-
+        // When Stangg enters the battlefield, create Stangg Twin, a legendary 3/4 red and green Human Warrior creature token.
+        // Exile that token when Stangg leaves the battlefield. Sacrifice Stangg when that token leaves the battlefield.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new StanggCreateTokenEffect()));
     }
 
     private Stangg(final Stangg card) {
@@ -65,7 +52,9 @@ class StanggCreateTokenEffect extends OneShotEffect {
 
     public StanggCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "create Stangg Twin, a legendary 3/4 red and green Human Warrior creature token";
+        staticText = "create Stangg Twin, a legendary 3/4 red and green Human Warrior creature token. "
+                + "Exile that token when {this} leaves the battlefield. "
+                + "Sacrifice {this} when that token leaves the battlefield";
     }
 
     public StanggCreateTokenEffect(final StanggCreateTokenEffect effect) {
@@ -74,22 +63,11 @@ class StanggCreateTokenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourceObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (sourceObject != null) {
-            CreateTokenEffect effect = new CreateTokenEffect(new StanggTwinToken());
-            effect.apply(game, source);
-            game.getState().setValue(source.getSourceId() + "_token", effect.getLastAddedTokenIds());
-            for (UUID addedTokenId : effect.getLastAddedTokenIds()) {
-                Effect sacrificeEffect = new SacrificeTargetEffect("sacrifice " + sourceObject.getName());
-                sacrificeEffect.setTargetPointer(new FixedTarget(sourceObject, game));
-                LeavesBattlefieldTriggeredAbility triggerAbility = new LeavesBattlefieldTriggeredAbility(sacrificeEffect, false);
-                ContinuousEffect continuousEffect = new GainAbilityTargetEffect(triggerAbility, Duration.WhileOnBattlefield);
-                continuousEffect.setTargetPointer(new FixedTarget(addedTokenId, game));
-                game.addEffect(continuousEffect, source);
-            }
-            return true;
-        }
-        return false;
+        Token token = new StanggTwinToken();
+        token.putOntoBattlefield(1, game, source);
+        game.addDelayedTriggeredAbility(new StanggLeavesTriggeredAbility(token, game), source);
+        game.addDelayedTriggeredAbility(new StanggTwinLeavesTriggeredAbility(token), source);
+        return true;
     }
 
     @Override
@@ -98,39 +76,78 @@ class StanggCreateTokenEffect extends OneShotEffect {
     }
 }
 
-class StanggExileTokenEffect extends OneShotEffect {
+class StanggLeavesTriggeredAbility extends DelayedTriggeredAbility {
 
-    public StanggExileTokenEffect() {
-        super(Outcome.Removal);
-        staticText = "exile that token";
+    StanggLeavesTriggeredAbility(Token token, Game game) {
+        super(new ExileTargetEffect());
+        this.getEffects().setTargetPointer(new FixedTargets(token, game));
     }
 
-    public StanggExileTokenEffect(final StanggExileTokenEffect effect) {
-        super(effect);
+    private StanggLeavesTriggeredAbility(final StanggLeavesTriggeredAbility ability) {
+        super(ability);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            List<UUID> tokenIds = (ArrayList<UUID>) game.getState().getValue(source.getSourceId() + "_token");
-            if (tokenIds != null) {
-                Cards cards = new CardsImpl();
-                for (UUID tokenId : tokenIds) {
-                    Permanent tokenPermanent = game.getPermanent(tokenId);
-                    if (tokenPermanent != null) {
-                        cards.add(tokenPermanent);
-                    }
-                }
-                controller.moveCards(cards, Zone.EXILED, source, game);
-                return true;
-            }
+    public StanggLeavesTriggeredAbility copy() {
+        return new StanggLeavesTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return event.getTargetId().equals(getSourceId()) && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD;
+    }
+
+    @Override
+    public String getRule() {
+        return "Exile that token when {this} leaves the battlefield.";
+    }
+}
+
+class StanggTwinLeavesTriggeredAbility extends DelayedTriggeredAbility {
+
+    private final Set<UUID> tokenIds = new HashSet<>();
+
+    StanggTwinLeavesTriggeredAbility(Token token) {
+        super(new SacrificeSourceEffect(), Duration.Custom, false);
+        tokenIds.addAll(token.getLastAddedTokenIds());
+    }
+
+    private StanggTwinLeavesTriggeredAbility(final StanggTwinLeavesTriggeredAbility ability) {
+        super(ability);
+        this.tokenIds.addAll(ability.tokenIds);
+    }
+
+    @Override
+    public StanggTwinLeavesTriggeredAbility copy() {
+        return new StanggTwinLeavesTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (tokenIds.contains(event.getTargetId()) && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
+            tokenIds.remove(event.getTargetId());
+            return true;
         }
         return false;
     }
 
     @Override
-    public StanggExileTokenEffect copy() {
-        return new StanggExileTokenEffect(this);
+    public boolean isInactive(Game game) {
+        return tokenIds.isEmpty();
+    }
+
+    @Override
+    public String getRule() {
+        return "Sacrifice {this} when that token leaves the battlefield.";
     }
 }

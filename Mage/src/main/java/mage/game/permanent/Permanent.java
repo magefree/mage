@@ -43,8 +43,6 @@ public interface Permanent extends Card, Controllable {
 
     boolean isFlipped();
 
-    boolean unflip(Game game);
-
     boolean flip(Game game);
 
     boolean transform(Ability source, Game game);
@@ -90,6 +88,14 @@ public interface Permanent extends Card, Controllable {
     void addGoadingPlayer(UUID playerId);
 
     Set<UUID> getGoadingPlayers();
+
+    void chooseProtector(Game game, Ability source);
+
+    void setProtectorId(UUID playerId);
+
+    UUID getProtectorId();
+
+    boolean isProtectedBy(UUID playerId);
 
     void setCardNumber(String cid);
 
@@ -206,7 +212,7 @@ public interface Permanent extends Card, Controllable {
      * @param sourceId
      * @param game
      */
-    void addAbility(Ability ability, UUID sourceId, Game game);
+    Ability addAbility(Ability ability, UUID sourceId, Game game);
 
     void removeAllAbilities(UUID sourceId, Game game);
 
@@ -214,9 +220,19 @@ public interface Permanent extends Card, Controllable {
 
     void removeAbilities(List<Ability> abilitiesToRemove, UUID sourceId, Game game);
 
+    void incrementLoyaltyActivationsAvailable();
+
+    void incrementLoyaltyActivationsAvailable(int max);
+
+    void setLoyaltyActivationsAvailable(int loyaltyActivationsAvailable);
+
     void addLoyaltyUsed();
 
     boolean canLoyaltyBeUsed(Game game);
+
+    void setLegendRuleApplies(boolean legendRuleApplies);
+
+    boolean legendRuleApplies();
 
     void resetControl();
 
@@ -254,10 +270,6 @@ public interface Permanent extends Card, Controllable {
 
     int getMaxBlockedBy();
 
-    boolean isRemovedFromCombat();
-
-    void setRemovedFromCombat(boolean removedFromCombat);
-
     /**
      * Sets the maximum number of blockers the creature can be blocked by.
      * Default = 0 which means there is no restriction in the number of
@@ -288,6 +300,8 @@ public interface Permanent extends Card, Controllable {
 
     boolean canBlockAny(Game game);
 
+    boolean canBeAttacked(UUID attackerId, UUID playerToAttack, Game game);
+
     /**
      * Checks by restriction effects if the permanent can use activated
      * abilities
@@ -297,9 +311,17 @@ public interface Permanent extends Card, Controllable {
      */
     boolean canUseActivatedAbilities(Game game);
 
+    /**
+     * Removes this permanent from combat
+     *
+     * @param game
+     * @param withEvent true if removed from combat by an effect (default)
+     *                  false if removed because it left the battlefield
+     * @return true if permanent was attacking or blocking
+     */
     boolean removeFromCombat(Game game);
 
-    boolean removeFromCombat(Game game, boolean withInfo);
+    boolean removeFromCombat(Game game, boolean withEvent);
 
     boolean isDeathtouched();
 
@@ -411,5 +433,12 @@ public interface Permanent extends Card, Controllable {
             return false;
         }
         return getAttachedTo().equals(otherId);
+    }
+
+    default void switchPowerToughness() {
+        // This is supposed to use boosted value since its switching the final values
+        int power = this.getPower().getValue();
+        this.getPower().setBoostedValue(this.getToughness().getValue());
+        this.getToughness().setBoostedValue(power);
     }
 }

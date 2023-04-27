@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -24,15 +23,15 @@ import mage.target.TargetPermanent;
  */
 public final class ChiseiHeartOfOceans extends CardImpl {
 
-    private static final  FilterPermanent filter = new FilterControlledPermanent("remove a counter from a permanent you control");
-    
+    private static final FilterPermanent filter = new FilterControlledPermanent("remove a counter from a permanent you control");
+
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(CounterAnyPredicate.instance);
-    }       
-    
+    }
+
     public ChiseiHeartOfOceans(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
 
@@ -41,11 +40,11 @@ public final class ChiseiHeartOfOceans extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // At the beginning of your upkeep, sacrifice Chisei, Heart of Oceans unless you remove a counter from a permanent you control.
-        TargetPermanent target = new TargetPermanent(1,1,filter,true);
+        TargetPermanent target = new TargetPermanent(1, 1, filter, true);
         target.setTargetName("a permanent you control");
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new RemoveCounterCost(target)),TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new RemoveCounterCost(target)), TargetController.YOU, false));
 
     }
 

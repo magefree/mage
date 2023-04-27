@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import mage.abilities.Ability;
@@ -12,9 +11,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
 import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
 
@@ -32,13 +31,12 @@ public final class LavaballTrap extends CardImpl {
         this.subtype.add(SubType.TRAP);
 
         // If an opponent had two or more lands enter the battlefield under their control this turn, you may pay {3}{R}{R} rather than pay Lavaball Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{3}{R}{R}"), LavaballTrapCondition.instance), new PermanentsEnteredBattlefieldWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{3}{R}{R}"), LavaballTrapCondition.instance), new PermanentsEnteredBattlefieldWatcher());
 
         // Destroy two target lands. Lavaball Trap deals 4 damage to each creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addEffect(new DamageAllEffect(4, new FilterCreaturePermanent()));
-        this.getSpellAbility().addTarget(new TargetLandPermanent(2, 2, StaticFilters.FILTER_LANDS, false));
-
+        this.getSpellAbility().addEffect(new DamageAllEffect(4, StaticFilters.FILTER_PERMANENT_CREATURE));
+        this.getSpellAbility().addTarget(new TargetLandPermanent(2));
     }
 
     private LavaballTrap(final LavaballTrap card) {
@@ -57,9 +55,10 @@ enum LavaballTrapCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
         PermanentsEnteredBattlefieldWatcher watcher = game.getState().getWatcher(PermanentsEnteredBattlefieldWatcher.class);
-        if (watcher != null) {
-            for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+        if (watcher != null && controller != null) {
+            for (UUID opponentId : game.getOpponents(controller.getId())) {
                 List<Permanent> permanents = watcher.getThisTurnEnteringPermanents(opponentId);
                 if (permanents != null) {
                     int count = 0;

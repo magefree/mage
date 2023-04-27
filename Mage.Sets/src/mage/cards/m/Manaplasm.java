@@ -51,7 +51,7 @@ enum ManaplasmValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return Optional.of((Spell) effect.getValue("spellCast")).map(Spell::getManaValue).orElse(0);
+        return Optional.ofNullable((Spell) effect.getValue("spellCast")).map(Spell::getManaValue).orElse(0);
     }
 
     @Override

@@ -68,8 +68,9 @@ class SharedAnimosityEffect extends OneShotEffect {
         }
         FilterPermanent filter = new FilterAttackingCreature();
         filter.add(new SharesCreatureTypePredicate(permanent));
-        filter.add(AnotherPredicate.instance);
-        int count = game.getBattlefield().count(filter, source.getControllerId(), source, game);
+        // Can't use AnotherPredicate since that compares against SharedAnimosity, not against the attacker.
+        // The attacker will match with itself once for the count, so subtract 1 from the total to get the number of other creatures that fit the filter.
+        int count = game.getBattlefield().count(filter, source.getControllerId(), source, game) - 1;
         if (count > 0) {
             game.addEffect(new BoostTargetEffect(
                     count, 0, Duration.EndOfTurn

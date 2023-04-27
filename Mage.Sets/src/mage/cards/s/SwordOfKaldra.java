@@ -31,7 +31,7 @@ public final class SwordOfKaldra extends CardImpl {
         // Whenever equipped creature deals damage to a creature, exile that creature.
         this.addAbility(new SwordOfKaldraTriggeredAbility());
         // Equip {4}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl("{4}")));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{4}")));
     }
 
     private SwordOfKaldra(final SwordOfKaldra card) {
@@ -48,6 +48,7 @@ class SwordOfKaldraTriggeredAbility extends TriggeredAbilityImpl {
 
     public SwordOfKaldraTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ExileTargetEffect("exile that creature. (Exile it only if it's still on the battlefield.)"), false);
+        setTriggerPhrase("Whenever equipped creature deals damage to a creature, ");
     }
 
     public SwordOfKaldraTriggeredAbility(final SwordOfKaldraTriggeredAbility ability) {
@@ -75,10 +76,4 @@ class SwordOfKaldraTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever equipped creature deals damage to a creature, ";
-    }
-
 }

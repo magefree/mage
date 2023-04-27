@@ -37,7 +37,7 @@ public final class KraulSwarm extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToHandEffect(),
-                new ManaCostsImpl("{2}{B}")
+                new ManaCostsImpl<>("{2}{B}")
         );
         ability.addCost(new DiscardTargetCost(
                 new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE_A)

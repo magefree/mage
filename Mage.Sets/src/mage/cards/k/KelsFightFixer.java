@@ -65,6 +65,7 @@ class KelsFightFixerTriggeredAbility extends TriggeredAbilityImpl {
     KelsFightFixerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{U/B}")), false);
         setLeavesTheBattlefieldTrigger(true);
+        setTriggerPhrase("Whenever you sacrifice a creature, ");
     }
 
     private KelsFightFixerTriggeredAbility(final KelsFightFixerTriggeredAbility ability) {
@@ -85,10 +86,5 @@ class KelsFightFixerTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(this.getControllerId())
                 && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).isCreature(game);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you sacrifice a creature, " ;
     }
 }

@@ -38,7 +38,7 @@ public final class SlingshotGoblin extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {R}, {tap}: Slingshot Goblin deals 2 damage to target blue creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl<>("{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

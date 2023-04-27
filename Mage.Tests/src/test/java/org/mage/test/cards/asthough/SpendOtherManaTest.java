@@ -76,13 +76,15 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
      * of Nissa in play. Pretty sure Oath is working usually, so here were the
      * conditions in my game:
      * <p>
-     * -Cast Dark Petition with spell mastery -Attempt to cast Nissa, Voice of
-     * Zendikar using the triple black mana from Dark Petition
+     * 1. Cast Dark Petition with spell mastery
+     * 2. Attempt to cast Nissa, Voice of Zendikar using the triple black mana from Dark Petition
      */
     @Test
     public void testOathOfNissaWithDarkPetition() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
-        // When Oath of Nissa enters the battlefield, look at the top three cards of your library. You may reveal a creature, land, or planeswalker card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+        // When Oath of Nissa enters the battlefield, look at the top three cards of your library.
+        // You may reveal a creature, land, or planeswalker card from among them and put it into your hand.
+        // Put the rest on the bottom of your library in any order.
         // You may spend mana as though it were mana of any color to cast planeswalker spells.
         addCard(Zone.BATTLEFIELD, playerA, "Oath of Nissa");
         addCard(Zone.GRAVEYARD, playerA, "Lightning Bolt", 2);
@@ -96,8 +98,9 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
         // -7: You gain X life and draw X cards, where X is the number of lands you control.
         addCard(Zone.LIBRARY, playerA, "Nissa, Voice of Zendikar"); // {1}{G}{G}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dark Petition");
-        setChoice(playerA, "Nissa, Voice of Zendikar");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dark Petition", true);
+        addTarget(playerA, "Nissa, Voice of Zendikar");
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nissa, Voice of Zendikar");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -135,7 +138,6 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Hostage Taker", 1);
         assertTappedCount("Mountain", true, 4);
@@ -164,7 +166,6 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20 - 1);
@@ -200,7 +201,6 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Flicker", 1);
         assertLife(playerA, 20);
@@ -237,7 +237,6 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         Assert.assertTrue("Mana pool of conditional mana has to be empty", playerA.getManaPool().getConditionalMana().isEmpty());
         assertExileCount("Pillarfield Ox", 1);
@@ -258,7 +257,6 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Adriana, Captain of the Guard", 1);
     }

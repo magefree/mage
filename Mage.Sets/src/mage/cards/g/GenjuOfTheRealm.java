@@ -34,7 +34,7 @@ public final class GenjuOfTheRealm extends CardImpl {
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.PutCreatureInPlay));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // {2}: Enchanted land becomes a legendary 8/12 Spirit creature with trample until end of turn. It's still a land.

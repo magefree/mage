@@ -176,8 +176,8 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
                     break;
                 case PTChangingEffects_7:
                     if (sublayer == SubLayer.SetPT_7b) {
-                        permanent.getPower().setValue(2);
-                        permanent.getToughness().setValue(2);
+                        permanent.getPower().setModifiedBaseValue(2);
+                        permanent.getToughness().setModifiedBaseValue(2);
                     }
             }
         } else if (duration == Duration.Custom && foundPermanent == true) {

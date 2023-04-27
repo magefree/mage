@@ -41,7 +41,7 @@ public final class TorrentElemental extends CardImpl {
         effect.setText("tap all creatures defending player controls.");
         this.addAbility(new AttacksTriggeredAbility(effect, false, null, SetTargetPointer.PLAYER));
         // {3}{B/G}{B/G}: Put Torrent Elemental from exile onto the battlefield tapped. Activate this ability only any time you could cast a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.EXILED, new ReturnSourceFromExileToBattlefieldEffect(true), new ManaCostsImpl("{3}{B/G}{B/G}"));
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.EXILED, new ReturnSourceFromExileToBattlefieldEffect(true), new ManaCostsImpl<>("{3}{B/G}{B/G}"));
         this.addAbility(ability);
 
     }

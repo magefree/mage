@@ -1,5 +1,6 @@
 package mage.abilities.effects.common;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.constants.Duration;
@@ -10,10 +11,9 @@ import mage.filter.predicate.other.PlayerIdPredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 
 import java.util.UUID;
-import mage.MageItem;
-import mage.game.events.GameEvent.EventType;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -41,7 +41,8 @@ public class PreventAllDamageToAllEffect extends PreventionEffectImpl {
                 + (onlyCombat ? "combat " : "")
                 + "damage that would be dealt to "
                 + filter.getMessage()
-                + (duration.toString().isEmpty() ? "" : ' ' + duration.toString());
+                + (duration.toString().isEmpty() ? "" : ' ')
+                + (duration == Duration.EndOfTurn ? "this turn" : duration.toString());
     }
 
     public PreventAllDamageToAllEffect(final PreventAllDamageToAllEffect effect) {
@@ -85,12 +86,12 @@ public class PreventAllDamageToAllEffect extends PreventionEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
-            MageItem object ;
-            if(EventType.DAMAGE_PLAYER.equals(event.getType())) {
-                object = game.getPlayer(event.getTargetId());                
+            MageItem object;
+            if (EventType.DAMAGE_PLAYER.equals(event.getType())) {
+                object = game.getPlayer(event.getTargetId());
             } else {
                 object = game.getObject(event.getTargetId());
-            }            
+            }
             if (object != null) {
                 return filter.match(object, source.getControllerId(), source, game);
             }

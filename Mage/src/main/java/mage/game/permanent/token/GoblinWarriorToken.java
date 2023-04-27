@@ -21,7 +21,7 @@ public final class GoblinWarriorToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes.addAll(Arrays.asList("C20"));
+        availableImageSetCodes = Arrays.asList("SHM", "MM3", "C20");
     }
 
     public GoblinWarriorToken(final GoblinWarriorToken token) {

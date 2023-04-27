@@ -57,7 +57,7 @@ public final class PashalikMons extends CardImpl {
 
         // {3}{R}, Sacrifice a Goblin: Create two 1/1 red Goblin creature tokens.
         ability = new SimpleActivatedAbility(
-                new CreateTokenEffect(new GoblinToken(), 2), new ManaCostsImpl("{3}{R}")
+                new CreateTokenEffect(new GoblinToken(), 2), new ManaCostsImpl<>("{3}{R}")
         );
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter2)));
         this.addAbility(ability);

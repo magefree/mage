@@ -37,8 +37,8 @@ public class MyojinOfGrimBetrayal extends CardImpl {
     private static final DynamicValue xValue = new CardsInAllGraveyardsCount(filter);
     private static final Hint hint = new ValueHint("Permanents put into the graveyard this turn", xValue);
 
-    public MyojinOfGrimBetrayal(UUID ownderId, CardSetInfo setInfo) {
-        super(ownderId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}{B}");
+    public MyojinOfGrimBetrayal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}{B}");
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);

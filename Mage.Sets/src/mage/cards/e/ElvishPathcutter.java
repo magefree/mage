@@ -37,7 +37,7 @@ public final class ElvishPathcutter extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}{G}: Target Elf creature gains forestwalk until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(new ForestwalkAbility(), Duration.EndOfTurn), new ManaCostsImpl("{2}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(new ForestwalkAbility(), Duration.EndOfTurn), new ManaCostsImpl<>("{2}{G}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

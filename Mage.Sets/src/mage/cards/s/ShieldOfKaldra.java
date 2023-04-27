@@ -46,7 +46,7 @@ public final class ShieldOfKaldra extends CardImpl {
         effect.setText("Equipped creature is indestructible");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         // Equip {4}
-        this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(4)));
+        this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(4), false));
     }
 
     private ShieldOfKaldra(final ShieldOfKaldra card) {

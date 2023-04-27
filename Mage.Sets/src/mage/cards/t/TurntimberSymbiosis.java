@@ -95,20 +95,20 @@ class TurntimberSymbiosisEffect extends OneShotEffect {
         TargetCard target = new TargetCardInLibrary(
                 0, 1, StaticFilters.FILTER_CARD_CREATURE
         );
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
-        if (card == null) {
-            player.putCardsOnBottomOfLibrary(cards, game, source, false);
-            return true;
-        }
+        if (card != null) {
+            cards.remove(card);
 
-        boolean small = card.getManaValue() <= 3;
-        player.moveCards(card, Zone.BATTLEFIELD, source, game);
-        Permanent permanent = game.getPermanent(card.getId());
-        if (permanent == null || !small) {
-            return true;
+            boolean small = card.getManaValue() <= 3;
+            player.moveCards(card, Zone.BATTLEFIELD, source, game);
+            Permanent permanent = game.getPermanent(card.getId());
+            if (small && permanent != null) {
+                permanent.addCounters(CounterType.P1P1.createInstance(3), source.getControllerId(), source, game);
+            }
         }
-        permanent.addCounters(CounterType.P1P1.createInstance(3), source.getControllerId(), source, game);
+        player.putCardsOnBottomOfLibrary(cards, game, source, false);
+
         return true;
     }
 }

@@ -21,7 +21,7 @@ public final class InstillInfection extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}");
 
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.M1M1.createInstance()));
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

@@ -29,7 +29,6 @@ public class UntilNextEndStepTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(endTurnNum, endPhaseStep);
         execute();
-        assertAllCommandsUsed();
 
         int powerToughness = stillActive ? 2 : 1;
         assertPowerToughness(playerA, "tester", powerToughness, powerToughness);

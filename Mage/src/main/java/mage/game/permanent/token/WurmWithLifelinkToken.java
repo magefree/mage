@@ -22,7 +22,7 @@ public final class WurmWithLifelinkToken extends TokenImpl {
         toughness = new MageInt(3);
         this.addAbility(LifelinkAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("C14", "SOM", "2XM");
+        availableImageSetCodes = Arrays.asList("C14", "SOM", "2XM", "CM2");
     }
 
     @Override

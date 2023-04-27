@@ -18,13 +18,13 @@ import mage.cards.*;
 import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 import mage.watchers.common.ForetoldWatcher;
 
 import java.util.UUID;
-import mage.game.events.GameEvent;
 
 /**
  * @author jeffwadsworth
@@ -312,7 +312,7 @@ public class ForetellAbility extends SpecialAction {
             }
             this.setAdditionalCostsRuleVisible(false);
             this.name = "Foretell " + foretellCost;
-            this.addCost(new ManaCostsImpl(foretellCost));
+            this.addCost(new ManaCostsImpl<>(foretellCost));
         }
 
         public ForetellCostAbility(final ForetellCostAbility ability) {

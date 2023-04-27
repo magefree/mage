@@ -24,7 +24,7 @@ public class ExileAndReturnTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tawnos's Coffin");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tawnos's Coffin", true);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}", "Silvercoat Lion");
 
@@ -80,8 +80,9 @@ public class ExileAndReturnTest extends CardTestPlayerBase {
 
         // Whenever an Aura becomes attached to Bramble Elemental, put two 1/1 green Saproling creature tokens onto the battlefield.
         addCard(Zone.BATTLEFIELD, playerB, "Bramble Elemental"); // Creature 4/4
-        // Put a +1/+1 counter on target creature.
+
         addCard(Zone.BATTLEFIELD, playerB, "Forest", 5);
+        // Put a +1/+1 counter on target creature.
         addCard(Zone.HAND, playerB, "Battlegrowth"); // Instant {G}
         // Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)
         // Enchanted creature gets +1/+1 for each Forest you control.
@@ -91,10 +92,12 @@ public class ExileAndReturnTest extends CardTestPlayerBase {
         // Enchanted creature has reach. (It can block creatures with flying.)
         addCard(Zone.HAND, playerB, "Frog Tongue"); // Enchantment Aura {G}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tawnos's Coffin");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tawnos's Coffin", true);
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Battlegrowth", "Bramble Elemental");
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Blanchwood Armor", "Bramble Elemental");
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Frog Tongue", "Bramble Elemental");
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "{3}, {T}", "Bramble Elemental");
 
@@ -130,7 +133,7 @@ public class ExileAndReturnTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Disenchant");
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tawnos's Coffin");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tawnos's Coffin", true);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}", "Silvercoat Lion");
 
@@ -145,6 +148,5 @@ public class ExileAndReturnTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Tawnos's Coffin", 1);
 
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
-
     }
 }

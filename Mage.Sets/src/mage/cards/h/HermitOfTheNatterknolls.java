@@ -32,7 +32,7 @@ public final class HermitOfTheNatterknolls extends CardImpl {
 
         // Whenever an opponent casts a spell during your turn, draw a card.
         this.addAbility(new ConditionalTriggeredAbility(
-                new SpellCastOpponentTriggeredAbility(new DrawCardSourceControllerEffect(1), StaticFilters.FILTER_SPELL_A, true),
+                new SpellCastOpponentTriggeredAbility(new DrawCardSourceControllerEffect(1), StaticFilters.FILTER_SPELL_A, false),
                 MyTurnCondition.instance,
                 "Whenever an opponent casts a spell during your turn, draw a card."
         ).addHint(MyTurnHint.instance));

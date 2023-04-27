@@ -33,7 +33,7 @@ public final class Cloudseeder extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {U}, {tap}, Discard a card: Create a 1/1 blue Faerie creature token named Cloud Sprite. It has flying and "Cloud Sprite can block only creatures with flying."
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CloudSpriteToken()), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CloudSpriteToken()), new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);

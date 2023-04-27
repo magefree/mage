@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.MagecraftAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -32,7 +32,7 @@ public final class SymmetrySage extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Magecraft — Whenever you cast or copy an instant or sorcery spell, target creature you control has base power 2 until end of turn.
-        Ability ability = new MagecraftAbility(new SetPowerToughnessTargetEffect(
+        Ability ability = new MagecraftAbility(new SetBasePowerToughnessTargetEffect(
                 StaticValue.get(2), null, Duration.EndOfTurn
         ).setText("target creature you control has base power 2 until end of turn"));
         ability.addTarget(new TargetControlledCreaturePermanent());

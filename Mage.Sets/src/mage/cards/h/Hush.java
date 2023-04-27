@@ -21,7 +21,7 @@ public final class Hush extends CardImpl {
 
 
         this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterEnchantmentPermanent("enchantments")));
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private Hush(final Hush card) {

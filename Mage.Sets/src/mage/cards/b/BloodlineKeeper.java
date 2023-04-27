@@ -50,7 +50,7 @@ public final class BloodlineKeeper extends CardImpl {
         this.addAbility(new TransformAbility());
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
                 new TransformSourceEffect(),
-                new ManaCostsImpl("{B}"),
+                new ManaCostsImpl<>("{B}"),
                 new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 4));
         this.addAbility(ability);
     }

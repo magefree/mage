@@ -45,7 +45,6 @@ public class CastBGPartnerCommanderTest extends CardTestCommanderDuelBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Titan's Presence", 1);
         assertCommandZoneCount(playerA, "Reyhan, Last of the Abzan", 1);
@@ -78,8 +77,6 @@ public class CastBGPartnerCommanderTest extends CardTestCommanderDuelBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-
-        assertAllCommandsUsed();
 
         assertCommandZoneCount(playerA, "Reyhan, Last of the Abzan", 0);
         assertCommandZoneCount(playerA, "Ikra Shidiqi, the Usurper", 0);

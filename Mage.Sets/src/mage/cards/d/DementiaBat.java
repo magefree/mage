@@ -30,7 +30,7 @@ public final class DementiaBat extends CardImpl {
         this.toughness = new MageInt(2);
 
         this.addAbility(FlyingAbility.getInstance());
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(2), new ManaCostsImpl("{4}{B}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(2), new ManaCostsImpl<>("{4}{B}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

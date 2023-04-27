@@ -26,7 +26,7 @@ public final class BoldImpaler extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}{R}: Bold Impaler gets +2/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl("{2}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{R}")));
     }
 
     private BoldImpaler(final BoldImpaler card) {

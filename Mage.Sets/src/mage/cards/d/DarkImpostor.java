@@ -39,7 +39,7 @@ public final class DarkImpostor extends CardImpl {
 
         // {4}{B}{B}: Exile target creature and put a +1/+1 counter on Dark Impostor.
         Ability ability = new SimpleActivatedAbility(
-                new DarkImpostorExileTargetEffect(), new ManaCostsImpl("{4}{B}{B}")
+                new DarkImpostorExileTargetEffect(), new ManaCostsImpl<>("{4}{B}{B}")
         );
         ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance())
                 .setText("and put a +1/+1 counter on {this}"));

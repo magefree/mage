@@ -55,6 +55,6 @@ enum FallingTimberAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        ability.addTarget(new TargetCreaturePermanent(KickedCondition.instance.apply(game, ability) ? 2 : 1));
+        ability.addTarget(new TargetCreaturePermanent(KickedCondition.ONCE.apply(game, ability) ? 2 : 1));
     }
 }

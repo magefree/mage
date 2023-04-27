@@ -32,7 +32,7 @@ public final class Spiritualize extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new SpiritualizeTriggeredAbility()));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Spiritualize(final Spiritualize card) {
@@ -49,6 +49,7 @@ class SpiritualizeTriggeredAbility extends DelayedTriggeredAbility {
 
     public SpiritualizeTriggeredAbility() {
         super(new GainLifeEffect(SavedDamageValue.MUCH), Duration.EndOfTurn, false);
+        setTriggerPhrase("Whenever target creature deals damage, ");
     }
 
     public SpiritualizeTriggeredAbility(final SpiritualizeTriggeredAbility ability) {
@@ -76,10 +77,5 @@ class SpiritualizeTriggeredAbility extends DelayedTriggeredAbility {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever target creature deals damage, " ;
     }
 }

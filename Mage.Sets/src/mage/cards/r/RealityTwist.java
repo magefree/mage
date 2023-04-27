@@ -31,7 +31,7 @@ public final class RealityTwist extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}{U}");
 
         // Cumulative upkeep-Pay {1}{U}{U}.
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}{U}{U}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}{U}{U}")));
 
         // If tapped for mana, Plains produce {R}, Swamps produce {G}, Mountains produce {W}, and Forests produce {B} instead of any other type.
         this.addAbility(new SimpleStaticAbility(new RealityTwistEffect()));

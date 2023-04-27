@@ -34,7 +34,6 @@ public class WrathOfGodTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Silvercoat Lion", 0);
         assertPermanentCount(playerA, "Mossbridge Troll", 0);

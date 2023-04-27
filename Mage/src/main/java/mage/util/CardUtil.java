@@ -4,11 +4,10 @@ import com.google.common.collect.ImmutableList;
 import mage.ApprovingObject;
 import mage.MageObject;
 import mage.Mana;
-import mage.abilities.Abilities;
-import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.SpellAbility;
+import mage.abilities.*;
 import mage.abilities.condition.Condition;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.Costs;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -30,18 +29,19 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.CardState;
 import mage.game.Game;
 import mage.game.GameState;
+import mage.game.command.CommandObject;
 import mage.game.command.Commander;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentMeld;
+import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.functions.CopyTokenFunction;
 import org.apache.log4j.Logger;
 
 import java.io.UnsupportedEncodingException;
@@ -61,7 +61,7 @@ public final class CardUtil {
 
     public static final List<String> RULES_ERROR_INFO = ImmutableList.of("Exception occurred in rules generation");
 
-    private static final String SOURCE_EXILE_ZONE_TEXT = "SourceExileZone";
+    public static final String SOURCE_EXILE_ZONE_TEXT = "SourceExileZone";
 
     static final String[] numberStrings = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
             "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"};
@@ -74,6 +74,9 @@ public final class CardUtil {
     private static final List<String> costWords = Arrays.asList(
             "put", "return", "exile", "discard", "sacrifice", "remove", "tap", "reveal", "pay"
     );
+
+    public static final int TESTS_SET_CODE_LOOKUP_LENGTH = 6; // search set code in commands like "set_code-card_name"
+    public static final String TESTS_SET_CODE_DELIMETER = "-"; // delimeter for cheats and tests command "set_code-card_name"
 
     /**
      * Increase spell or ability cost to be paid.
@@ -174,7 +177,7 @@ public final class CardUtil {
                 }
 
                 // ignore unknown mana
-                if (manaCost.getOptions().size() == 0) {
+                if (manaCost.getOptions().isEmpty()) {
                     continue;
                 }
 
@@ -184,7 +187,7 @@ public final class CardUtil {
                 }
 
                 // generic mana reduce
-                Mana mana = manaCost.getOptions().get(0);
+                Mana mana = manaCost.getOptions().getAtIndex(0);
                 int colorless = mana != null ? mana.getGeneric() : 0;
                 if (restToReduce != 0 && colorless > 0) {
                     if ((colorless - restToReduce) > 0) {
@@ -217,7 +220,7 @@ public final class CardUtil {
                 if (manaCost instanceof MonoHybridManaCost) {
                     // current implemention supports reduce from left to right hybrid cost without cost parts announce
                     MonoHybridManaCost mono = (MonoHybridManaCost) manaCost;
-                    int colorless = mono.getOptions().get(1).getGeneric();
+                    int colorless = mono.getOptions().getAtIndex(1).getGeneric();
                     if (restToReduce != 0 && colorless > 0) {
                         if ((colorless - restToReduce) > 0) {
                             // partly reduce
@@ -252,7 +255,7 @@ public final class CardUtil {
                 // add to existing cost
                 if (reduceCount != 0 && manaCost instanceof GenericManaCost) {
                     GenericManaCost gen = (GenericManaCost) manaCost;
-                    changedCost.put(manaCost, new GenericManaCost(gen.getOptions().get(0).getGeneric() + -reduceCount));
+                    changedCost.put(manaCost, new GenericManaCost(gen.getOptions().getAtIndex(0).getGeneric() + -reduceCount));
                     reduceCount = 0;
                     added = true;
                 } else {
@@ -471,17 +474,6 @@ public final class CardUtil {
     }
 
     /**
-     * Returns function that copies params\abilities from one card to
-     * {@link Token}.
-     *
-     * @param target
-     * @return
-     */
-    public static CopyTokenFunction copyTo(Token target) {
-        return new CopyTokenFunction(target);
-    }
-
-    /**
      * Converts an integer number to string Numbers > 20 will be returned as
      * digits
      *
@@ -544,8 +536,7 @@ public final class CardUtil {
     }
 
     public static boolean checkNumeric(String s) {
-        return s.chars().allMatch(Character::isDigit);
-
+        return !s.isEmpty() && s.chars().allMatch(Character::isDigit);
     }
 
     /**
@@ -557,7 +548,7 @@ public final class CardUtil {
      */
     public static int parseCardNumberAsInt(String cardNumber) {
 
-        if (cardNumber.isEmpty()) {
+        if (cardNumber == null || cardNumber.isEmpty()) {
             throw new IllegalArgumentException("Card number is empty.");
         }
 
@@ -706,9 +697,9 @@ public final class CardUtil {
     }
 
     private static int overflowResult(long value) {
-        if (value > Integer.MAX_VALUE) {
+        if (value >= Integer.MAX_VALUE) {
             return Integer.MAX_VALUE;
-        } else if (value < Integer.MIN_VALUE) {
+        } else if (value <= Integer.MIN_VALUE) {
             return Integer.MIN_VALUE;
         } else {
             return (int) value;
@@ -869,10 +860,10 @@ public final class CardUtil {
         String p = power.toString();
         String t = toughness.toString();
         if (!p.startsWith("-")) {
-            p = (t.startsWith("-") && p.equals("0") ? "-" : "+") + p;
+            p = t.startsWith("-") && p.equals("0") ? "-0" : "+" + p;
         }
         if (!t.startsWith("-")) {
-            t = (p.startsWith("-") && t.equals("0") ? "-" : "+") + t;
+            t = p.startsWith("-") && t.equals("0") ? "-0" : "+" + t;
         }
         return p + "/" + t;
     }
@@ -888,7 +879,7 @@ public final class CardUtil {
         if (duration != Duration.EndOfGame) {
             String d = duration.toString();
             if (!d.isEmpty()) {
-                sb.append(" ").append(d);
+                sb.append(' ').append(d);
             }
         }
         String message = power.getMessage();
@@ -901,26 +892,46 @@ public final class CardUtil {
         return sb.toString();
     }
 
-    public static boolean isSpliceAbility(Ability ability, Game game) {
-        if (ability instanceof SpellAbility) {
-            return ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLICE;
+    public static Outcome getBoostOutcome(DynamicValue power, DynamicValue toughness) {
+        if (toughness.getSign() < 0) {
+            return Outcome.Removal;
         }
-        return false;
+        if (power.getSign() < 0) {
+            return Outcome.UnboostCreature;
+        }
+        return Outcome.BoostCreature;
+    }
+
+    public static String getAddRemoveCountersText(DynamicValue amount, Counter counter, String description, boolean add) {
+        StringBuilder sb = new StringBuilder(add ? "put " : "remove ");
+        boolean xValue = amount.toString().equals("X");
+        if (xValue) {
+            sb.append("X ").append(counter.getName()).append(" counters");
+        } else {
+            sb.append(counter.getDescription());
+        }
+        sb.append(add ? " on " : " from ").append(description);
+        if (!amount.getMessage().isEmpty()) {
+            sb.append(xValue ? ", where X is " : " for each ").append(amount.getMessage());
+        }
+        return sb.toString();
     }
 
     public static boolean isFusedPartAbility(Ability ability, Game game) {
         // TODO: does it work fine with copies of spells on stack?
-        if (ability instanceof SpellAbility) {
-            Spell mainSpell = game.getSpell(ability.getId());
-            if (mainSpell == null) {
-                return true;
-            } else {
-                SpellAbility mainSpellAbility = mainSpell.getSpellAbility();
-                return mainSpellAbility.getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED
-                        && !ability.equals(mainSpellAbility);
-            }
+        if (!(ability instanceof SpellAbility)) {
+            return false;
         }
-        return false;
+        if (((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLICE) {
+            return true;
+        }
+        Spell mainSpell = game.getSpell(ability.getId());
+        if (mainSpell == null) {
+            return true;
+        }
+        SpellAbility mainSpellAbility = mainSpell.getSpellAbility();
+        return mainSpellAbility.getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED
+                && !ability.equals(mainSpellAbility);
     }
 
     public static Abilities<Ability> getAbilities(MageObject object, Game game) {
@@ -965,7 +976,7 @@ public final class CardUtil {
                 || text.startsWith("any ")) {
             return text;
         }
-        return vowels.contains(text.substring(0, 1)) ? "an " + text : "a " + text;
+        return (!text.isEmpty() && vowels.contains(text.substring(0, 1))) ? "an " + text : "a " + text;
     }
 
     public static String italicizeWithEmDash(String text) {
@@ -1099,7 +1110,7 @@ public final class CardUtil {
      * Prepare rules list from abilities
      *
      * @param rulesSource abilities list to show as rules
-     * @param hintsSource abilities list to show as card hints only (you can add additional hints here; exameple: from second or transformed side)
+     * @param hintsSource abilities list to show as card hints only (you can add additional hints here; example: from second or transformed side)
      */
     public static List<String> getCardRulesWithAdditionalInfo(Game game, UUID cardId, String cardName,
                                                               Abilities<Ability> rulesSource, Abilities<Ability> hintsSource) {
@@ -1109,9 +1120,7 @@ public final class CardUtil {
             if (game != null) {
 
                 // debug state
-                for (String data : game.getState().getCardState(cardId).getInfo().values()) {
-                    rules.add(data);
-                }
+                rules.addAll(game.getState().getCardState(cardId).getInfo().values());
 
                 // ability hints
                 List<String> abilityHints = new ArrayList<>();
@@ -1211,7 +1220,8 @@ public final class CardUtil {
         void addCard(Card card, Ability source, Game game);
     }
 
-    private static List<Card> getCastableComponents(Card cardToCast, FilterCard filter, Ability source, UUID playerId, Game game, SpellCastTracker spellCastTracker) {
+    private static List<Card> getCastableComponents(Card cardToCast, FilterCard filter, Ability source, Player player, Game game, SpellCastTracker spellCastTracker, boolean playLand) {
+        UUID playerId = player.getId();
         List<Card> cards = new ArrayList<>();
         if (cardToCast instanceof CardWithHalves) {
             cards.add(((CardWithHalves) cardToCast).getLeftHalfCard());
@@ -1223,6 +1233,9 @@ public final class CardUtil {
             cards.add(cardToCast);
         }
         cards.removeIf(Objects::isNull);
+        if (!playLand || !player.canPlayLand() || !game.isActivePlayer(playerId)) {
+            cards.removeIf(card -> card.isLand(game));
+        }
         cards.removeIf(card -> !filter.match(card, playerId, source, game));
         if (spellCastTracker != null) {
             cards.removeIf(card -> !spellCastTracker.checkCard(card, game));
@@ -1241,9 +1254,13 @@ public final class CardUtil {
     }
 
     public static boolean castSpellWithAttributesForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter, SpellCastTracker spellCastTracker) {
+        return castSpellWithAttributesForFree(player, source, game, cards, filter, spellCastTracker, false);
+    }
+
+    public static boolean castSpellWithAttributesForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter, SpellCastTracker spellCastTracker, boolean playLand) {
         Map<UUID, List<Card>> cardMap = new HashMap<>();
         for (Card card : cards.getCards(game)) {
-            List<Card> castableComponents = getCastableComponents(card, filter, source, player.getId(), game, spellCastTracker);
+            List<Card> castableComponents = getCastableComponents(card, filter, source, player, game, spellCastTracker, playLand);
             if (!castableComponents.isEmpty()) {
                 cardMap.put(card.getId(), castableComponents);
             }
@@ -1259,7 +1276,7 @@ public final class CardUtil {
                 Cards castableCards = new CardsImpl(cardMap.keySet());
                 TargetCard target = new TargetCard(0, 1, Zone.ALL, defaultFilter);
                 target.setNotTarget(true);
-                player.choose(Outcome.PlayForFree, castableCards, target, game);
+                player.choose(Outcome.PlayForFree, castableCards, target, source, game);
                 cardToCast = castableCards.get(target.getFirstTarget(), game);
         }
         if (cardToCast == null) {
@@ -1278,10 +1295,22 @@ public final class CardUtil {
             return false;
         }
         partsToCast.forEach(card -> game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE));
-        boolean result = player.cast(
-                player.chooseAbilityForCast(cardToCast, game, true),
-                game, true, new ApprovingObject(source, game)
-        );
+        ActivatedAbility chosenAbility;
+        if (playLand) {
+            chosenAbility = player.chooseLandOrSpellAbility(cardToCast, game, true);
+        } else {
+            chosenAbility = player.chooseAbilityForCast(cardToCast, game, true);
+        }
+        boolean result = false;
+        if (chosenAbility instanceof SpellAbility) {
+            result = player.cast(
+                    (SpellAbility) chosenAbility,
+                    game, true, new ApprovingObject(source, game)
+            );
+        } else if (playLand && chosenAbility instanceof PlayLandAbility) {
+            Card land = game.getCard(chosenAbility.getSourceId());
+            result = player.playLand(land, game, true);
+        }
         partsToCast.forEach(card -> game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null));
         if (result && spellCastTracker != null) {
             spellCastTracker.addCard(cardToCast, source, game);
@@ -1292,11 +1321,11 @@ public final class CardUtil {
         return result;
     }
 
-    private static boolean checkForPlayable(Cards cards, FilterCard filter, Ability source, UUID playerId, Game game, SpellCastTracker spellCastTracker) {
+    private static boolean checkForPlayable(Cards cards, FilterCard filter, Ability source, Player player, Game game, SpellCastTracker spellCastTracker, boolean playLand) {
         return cards
                 .getCards(game)
                 .stream()
-                .anyMatch(card -> !getCastableComponents(card, filter, source, playerId, game, spellCastTracker).isEmpty());
+                .anyMatch(card -> !getCastableComponents(card, filter, source, player, game, spellCastTracker, playLand).isEmpty());
     }
 
     public static void castMultipleWithAttributeForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter) {
@@ -1308,6 +1337,10 @@ public final class CardUtil {
     }
 
     public static void castMultipleWithAttributeForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter, int maxSpells, SpellCastTracker spellCastTracker) {
+        castMultipleWithAttributeForFree(player, source, game, cards, filter, maxSpells, spellCastTracker, false);
+    }
+
+    public static void castMultipleWithAttributeForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter, int maxSpells, SpellCastTracker spellCastTracker, boolean playLand) {
         if (maxSpells == 1) {
             CardUtil.castSpellWithAttributesForFree(player, source, game, cards, filter);
             return;
@@ -1315,17 +1348,114 @@ public final class CardUtil {
         int spellsCast = 0;
         cards.removeZone(Zone.STACK, game);
         while (player.canRespond() && spellsCast < maxSpells && !cards.isEmpty()) {
-            if (CardUtil.castSpellWithAttributesForFree(player, source, game, cards, filter, spellCastTracker)) {
+            if (CardUtil.castSpellWithAttributesForFree(player, source, game, cards, filter, spellCastTracker, playLand)) {
                 spellsCast++;
                 cards.removeZone(Zone.STACK, game);
             } else if (!checkForPlayable(
-                    cards, filter, source, player.getId(), game, spellCastTracker
+                    cards, filter, source, player, game, spellCastTracker, playLand
             ) || !player.chooseUse(
                     Outcome.PlayForFree, "Continue casting spells?", source, game
             )) {
                 break;
             }
         }
+    }
+
+    public static void castSingle(Player player, Ability source, Game game, Card card) {
+        castSingle(player, source, game, card, null);
+    }
+
+    public static void castSingle(Player player, Ability source, Game game, Card card, ManaCostsImpl<ManaCost> manaCost) {
+        // handle split-cards
+        if (card instanceof SplitCard) {
+            SplitCardHalf leftHalfCard = ((SplitCard) card).getLeftHalfCard();
+            SplitCardHalf rightHalfCard = ((SplitCard) card).getRightHalfCard();
+            if (manaCost != null) {
+                // get additional cost if any
+                Costs<Cost> additionalCostsLeft = leftHalfCard.getSpellAbility().getCosts();
+                Costs<Cost> additionalCostsRight = rightHalfCard.getSpellAbility().getCosts();
+                // set alternative cost and any additional cost
+                player.setCastSourceIdWithAlternateMana(leftHalfCard.getId(), manaCost, additionalCostsLeft);
+                player.setCastSourceIdWithAlternateMana(rightHalfCard.getId(), manaCost, additionalCostsRight);
+            }
+            // allow the card to be cast
+            game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), Boolean.TRUE);
+            game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), Boolean.TRUE);
+        }
+
+        // handle MDFC
+        if (card instanceof ModalDoubleFacesCard) {
+            ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
+            ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
+            if (manaCost != null) {
+                // some MDFC cards are lands.  IE: sea gate restoration
+                if (!leftHalfCard.isLand(game)) {
+                    // get additional cost if any
+                    Costs<Cost> additionalCostsMDFCLeft = leftHalfCard.getSpellAbility().getCosts();
+                    // set alternative cost and any additional cost
+                    player.setCastSourceIdWithAlternateMana(leftHalfCard.getId(), manaCost, additionalCostsMDFCLeft);
+                }
+                if (!rightHalfCard.isLand(game)) {
+                    // get additional cost if any
+                    Costs<Cost> additionalCostsMDFCRight = rightHalfCard.getSpellAbility().getCosts();
+                    // set alternative cost and any additional cost
+                    player.setCastSourceIdWithAlternateMana(rightHalfCard.getId(), manaCost, additionalCostsMDFCRight);
+                }
+            }
+            // allow the card to be cast
+            game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), Boolean.TRUE);
+            game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), Boolean.TRUE);
+        }
+
+        // handle adventure cards
+        if (card instanceof AdventureCard) {
+            Card creatureCard = card.getMainCard();
+            Card spellCard = ((AdventureCard) card).getSpellCard();
+            if (manaCost != null) {
+                // get additional cost if any
+                Costs<Cost> additionalCostsCreature = creatureCard.getSpellAbility().getCosts();
+                Costs<Cost> additionalCostsSpellCard = spellCard.getSpellAbility().getCosts();
+                // set alternative cost and any additional cost
+                player.setCastSourceIdWithAlternateMana(creatureCard.getId(), manaCost, additionalCostsCreature);
+                player.setCastSourceIdWithAlternateMana(spellCard.getId(), manaCost, additionalCostsSpellCard);
+            }
+            // allow the card to be cast
+            game.getState().setValue("PlayFromNotOwnHandZone" + creatureCard.getId(), Boolean.TRUE);
+            game.getState().setValue("PlayFromNotOwnHandZone" + spellCard.getId(), Boolean.TRUE);
+        }
+
+        // normal card
+        if (manaCost != null) {
+            // get additional cost if any
+            Costs<Cost> additionalCostsNormalCard = card.getSpellAbility().getCosts();
+            player.setCastSourceIdWithAlternateMana(card.getMainCard().getId(), manaCost, additionalCostsNormalCard);
+        }
+
+        // cast it
+        player.cast(player.chooseAbilityForCast(card.getMainCard(), game, false),
+                game, false, new ApprovingObject(source, game));
+
+        // turn off effect after cast on every possible card-face
+        if (card instanceof SplitCard) {
+            SplitCardHalf leftHalfCard = ((SplitCard) card).getLeftHalfCard();
+            SplitCardHalf rightHalfCard = ((SplitCard) card).getRightHalfCard();
+            game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), null);
+            game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), null);
+        }
+        if (card instanceof ModalDoubleFacesCard) {
+            ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
+            ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
+            game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), null);
+            game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), null);
+        }
+        if (card instanceof AdventureCard) {
+            Card creatureCard = card.getMainCard();
+            Card spellCard = ((AdventureCard) card).getSpellCard();
+            game.getState().setValue("PlayFromNotOwnHandZone" + creatureCard.getId(), null);
+            game.getState().setValue("PlayFromNotOwnHandZone" + spellCard.getId(), null);
+        }
+        // turn off effect on a normal card
+        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
     }
 
     /**
@@ -1563,8 +1693,12 @@ public final class CardUtil {
         return sb.toString();
     }
 
+    public static <T> Stream<T> castStream(Collection<?> collection, Class<T> clazz) {
+        return castStream(collection.stream(), clazz);
+    }
+
     public static <T> Stream<T> castStream(Stream<?> stream, Class<T> clazz) {
-        return stream.filter(clazz::isInstance).map(clazz::cast);
+        return stream.filter(clazz::isInstance).map(clazz::cast).filter(Objects::nonNull);
     }
 
     /**
@@ -1606,14 +1740,93 @@ public final class CardUtil {
         return i == null ? 1 : Integer.sum(i, 1);
     }
 
-    public static String convertStartingLoyalty(int startingLoyalty) {
-        switch (startingLoyalty) {
+    public static String convertLoyaltyOrDefense(int value) {
+        switch (value) {
             case -2:
                 return "X";
             case -1:
                 return "";
             default:
-                return "" + startingLoyalty;
+                return "" + value;
+        }
+    }
+
+    public static int convertLoyaltyOrDefense(String value) {
+        switch (value) {
+            case "X":
+                return -2;
+            case "":
+                return -1;
+            default:
+                return Integer.parseInt(value);
+        }
+    }
+
+    public static void checkSetParamForSerializationCompatibility(Set<String> data) {
+        // HashMap uses inner class for Keys without serialization support,
+        // so you can't use it for client-server data
+        if (data != null && data.getClass().getName().endsWith("$KeySet")) {
+            throw new IllegalArgumentException("Can't use KeySet as param, use new LinkedHashSet<>(data.keySet()) instead");
+        }
+    }
+
+    /**
+     * Don't raise exception, so must be used instead standard substring calls all the time
+     *
+     * @param str
+     * @param maxLength
+     * @return
+     */
+    public static String substring(String str, int maxLength) {
+        if (str == null || str.isEmpty()) {
+            return str;
+        }
+        return str.substring(0, Math.min(str.length(), maxLength));
+    }
+
+
+    /**
+     * Copy image related data from one object to another (card number, set code, token type)
+     * Use it in copy/transform effects
+     */
+    public static void copySetAndCardNumber(Permanent permanent, MageObject copyFromObject) {
+        String needSetCode;
+        String needCardNumber;
+        int needTokenType;
+        if (copyFromObject instanceof CommandObject) {
+            needSetCode = ((CommandObject) copyFromObject).getExpansionSetCodeForImage();
+            needCardNumber = "0";
+            needTokenType = 0;
+        } else if (copyFromObject instanceof PermanentCard) {
+            needSetCode = ((PermanentCard) copyFromObject).getExpansionSetCode();
+            needCardNumber = ((PermanentCard) copyFromObject).getCardNumber();
+            needTokenType = 0;
+        } else if (copyFromObject instanceof PermanentToken) {
+            needSetCode = ((PermanentToken) copyFromObject).getToken().getOriginalExpansionSetCode();
+            needCardNumber = ((PermanentToken) copyFromObject).getToken().getOriginalCardNumber();
+            needTokenType = ((PermanentToken) copyFromObject).getToken().getTokenType();
+        } else if (copyFromObject instanceof Card) {
+            needSetCode = ((Card) copyFromObject).getExpansionSetCode();
+            needCardNumber = ((Card) copyFromObject).getCardNumber();
+            needTokenType = 0;
+        } else if (copyFromObject instanceof Token) {
+            // TODO: make this work
+            return;
+        } else {
+            throw new IllegalStateException("Unsupported copyFromObject class: " + copyFromObject.getClass().getSimpleName());
+        }
+
+        copySetAndCardNumber(permanent, needSetCode, needCardNumber, needTokenType);
+    }
+
+    public static void copySetAndCardNumber(Permanent permanent, String newSetCode, String newCardNumber, Integer newTokenType) {
+        if (permanent instanceof PermanentToken) {
+            ((PermanentToken) permanent).getToken().setOriginalExpansionSetCode(newSetCode);
+            ((PermanentToken) permanent).getToken().setExpansionSetCodeForImage(newCardNumber);
+            ((PermanentToken) permanent).getToken().setTokenType(newTokenType);
+        } else {
+            permanent.setExpansionSetCode(newSetCode);
+            permanent.setCardNumber(newCardNumber);
         }
     }
 }

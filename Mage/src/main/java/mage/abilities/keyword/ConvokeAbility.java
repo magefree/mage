@@ -30,6 +30,7 @@ import mage.players.ManaPool;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.watchers.common.ConvokeWatcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,6 +80,7 @@ public class ConvokeAbility extends SimpleStaticAbility implements AlternateMana
     public ConvokeAbility() {
         super(Zone.ALL, null); // all AlternateManaPaymentAbility must use ALL zone to calculate playable abilities
         this.setRuleAtTheTop(true);
+        this.addWatcher(new ConvokeWatcher());
         this.addHint(new ValueHint("Untapped creatures you control", new PermanentsOnBattlefieldCount(filterUntapped)));
     }
 
@@ -93,7 +95,7 @@ public class ConvokeAbility extends SimpleStaticAbility implements AlternateMana
 
     @Override
     public String getRule() {
-        return "Convoke <i>(Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)</i>";
+        return "convoke <i>(Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)</i>";
     }
 
     @Override
@@ -164,7 +166,7 @@ public class ConvokeAbility extends SimpleStaticAbility implements AlternateMana
                     options.addMana(permMana);
                 });
 
-        options.removeDuplicated();
+        options.removeFullyIncludedVariations();
         return options;
     }
 }

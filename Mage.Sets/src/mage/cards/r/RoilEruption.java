@@ -24,7 +24,7 @@ public final class RoilEruption extends CardImpl {
 
         // Roil Eruption deals 3 damage to any target. If this spell was kicked, it deals 5 damage instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new DamageTargetEffect(5), new DamageTargetEffect(3), KickedCondition.instance,
+                new DamageTargetEffect(5), new DamageTargetEffect(3), KickedCondition.ONCE,
                 "{this} deals 3 damage to any target. If this spell was kicked, it deals 5 damage instead"
         ));
         this.getSpellAbility().addTarget(new TargetAnyTarget());

@@ -28,7 +28,7 @@ public final class WitchingWell extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(2)));
 
         // {3}{U}, Sacrifice Witching Well: Draw two cards.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2), new ManaCostsImpl("{3}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2), new ManaCostsImpl<>("{3}{U}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

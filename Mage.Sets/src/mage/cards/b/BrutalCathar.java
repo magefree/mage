@@ -32,8 +32,8 @@ public final class BrutalCathar extends CardImpl {
 
         // When this creature enters the battlefield or transforms into Brutal Cathar, exile target creature an opponent controls until this creature leaves the battlefield.
         Ability ability = new TransformsOrEntersTriggeredAbility(
-                new ExileUntilSourceLeavesEffect("creature an opponent controls"), false
-        ).setTriggerPhrase("Whenever this creature enters the battlefield or transforms into {this}, ");
+                new ExileUntilSourceLeavesEffect(), false
+        ).setTriggerPhrase("When this creature enters the battlefield or transforms into {this}, ");
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);

@@ -79,16 +79,19 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        // choose land type
+
         if (chooseLandType) {
-            Player controller = game.getPlayer(source.getControllerId());
-            Choice choice = new ChoiceBasicLandType();
-            if (controller != null && controller.choose(outcome, choice, game)) {
-                landTypes.add(SubType.byDescription(choice.getChoice()));
-            } else {
-                this.discard();
-                return;
-            }
+            this.chooseLandType(source, game);
+        }
+    }
+
+    protected void chooseLandType(Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Choice choice = new ChoiceBasicLandType();
+        if (controller != null && controller.choose(outcome, choice, game)) {
+            landTypes.add(SubType.byDescription(choice.getChoice()));
+        } else {
+            this.discard();
         }
     }
 

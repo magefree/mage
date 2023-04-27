@@ -37,8 +37,8 @@ public final class EarthenGoo extends CardImpl {
 
         // Cumulative upkeep {R} or {G}
         this.addAbility(new CumulativeUpkeepAbility(new OrCost(
-                "{R} or {G}", new ManaCostsImpl("{R}"),
-                new ManaCostsImpl("{G}")
+                "{R} or {G}", new ManaCostsImpl<>("{R}"),
+                new ManaCostsImpl<>("{G}")
         )));
 
         // Earthen Goo gets +1/+1 for each age counter on it.

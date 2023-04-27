@@ -42,7 +42,6 @@ public class ThousandYearStormTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -59,6 +58,7 @@ public class ThousandYearStormTest extends CardTestPlayerBase {
 
         // bolt stack before
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         // storm
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thousand-Year Storm");
 
@@ -70,7 +70,6 @@ public class ThousandYearStormTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -98,7 +97,6 @@ public class ThousandYearStormTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -126,7 +124,6 @@ public class ThousandYearStormTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -154,7 +151,6 @@ public class ThousandYearStormTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -216,7 +212,6 @@ public class ThousandYearStormTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -250,7 +245,6 @@ public class ThousandYearStormTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -270,7 +264,6 @@ public class ThousandYearStormTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(4, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     /*
@@ -322,6 +315,5 @@ public class ThousandYearStormTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(4, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 }

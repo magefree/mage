@@ -17,7 +17,6 @@ public class FranticInventoryTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertHandCount(playerA, 2);
     }
 }

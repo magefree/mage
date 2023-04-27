@@ -33,7 +33,7 @@ public final class SergeantAtArms extends CardImpl {
 
         // When Sergeant-at-Arms enters the battlefield, if it was kicked, create two 1/1 white soldier creature tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(
-                new CreateTokenEffect(new SoldierToken(), 2), KickedCondition.instance,
+                new CreateTokenEffect(new SoldierToken(), 2), KickedCondition.ONCE,
                 "if it was kicked, create two 1/1 white Soldier creature tokens.")));
     }
 

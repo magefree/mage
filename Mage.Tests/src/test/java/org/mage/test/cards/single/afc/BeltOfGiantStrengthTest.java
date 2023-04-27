@@ -5,7 +5,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -28,7 +27,6 @@ public class BeltOfGiantStrengthTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertIsAttachedTo(playerA, belt, gigantosauras);
         Assert.assertTrue(
@@ -52,7 +50,6 @@ public class BeltOfGiantStrengthTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertIsAttachedTo(playerA, belt, gigantosauras);
     }

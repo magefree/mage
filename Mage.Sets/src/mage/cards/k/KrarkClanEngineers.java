@@ -32,11 +32,10 @@ public final class KrarkClanEngineers extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {R}, Sacrifice two artifacts: Destroy target artifact.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{R}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledArtifactPermanent("two artifacts"), true)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{R}"));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledArtifactPermanent("artifacts"), true)));
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
-        
     }
 
     private KrarkClanEngineers(final KrarkClanEngineers card) {

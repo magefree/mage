@@ -30,7 +30,7 @@ public final class HorrorOfTheBrokenLands extends CardImpl {
         this.addAbility(new CycleOrDiscardControllerTriggeredAbility(new BoostSourceEffect(2, 1, Duration.EndOfTurn)));
 
         // Cycling {B}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{B}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{B}")));
 
     }
 

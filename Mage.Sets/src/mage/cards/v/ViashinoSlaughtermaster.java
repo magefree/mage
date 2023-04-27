@@ -30,7 +30,7 @@ public final class ViashinoSlaughtermaster extends CardImpl {
 
         this.addAbility(DoubleStrikeAbility.getInstance());
         // {B}{G}: Viashino Slaughtermaster gets +1/+1 until end of turn. Activate this ability only once each turn.
-        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}{G}")));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{B}{G}")));
     }
 
     private ViashinoSlaughtermaster(final ViashinoSlaughtermaster card) {

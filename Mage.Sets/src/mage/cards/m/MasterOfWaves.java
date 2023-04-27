@@ -46,7 +46,7 @@ public final class MasterOfWaves extends CardImpl {
         // When Master of Waves enters the battlefield, create a number of 1/0 blue Elemental creature tokens equal to your devotion to blue.
         // <i>(Each {U} in the mana costs of permanents you control counts toward your devotion to blue.)</i>
         Effect effect = new CreateTokenEffect(new MasterOfWavesElementalToken(), DevotionCount.U);
-        effect.setText("create a number of 1/0 blue Elemental creature tokens equal to your devotion to blue. <i>(Each {U} in the mana costs of permanents you control counts toward your devotion to blue.)</i>");
+        effect.setText("create a number of 1/0 blue Elemental creature tokens equal to your devotion to blue. " + DevotionCount.U.getReminder());
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect).addHint(DevotionCount.U.getHint()));
     }
 

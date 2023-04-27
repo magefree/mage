@@ -40,10 +40,10 @@ public final class DuskmantleGuildmage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{U}{B}: Whenever a card is put into an opponent's graveyard from anywhere this turn, that player loses 1 life.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateDelayedTriggeredAbilityEffect(new CardPutIntoOpponentGraveThisTurn()), new ManaCostsImpl("{1}{U}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateDelayedTriggeredAbilityEffect(new CardPutIntoOpponentGraveThisTurn()), new ManaCostsImpl<>("{1}{U}{B}")));
 
         // {2}{U}{B}: Target player puts the top two cards of their library into their graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(2), new ManaCostsImpl("{2}{U}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(2), new ManaCostsImpl<>("{2}{U}{B}"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

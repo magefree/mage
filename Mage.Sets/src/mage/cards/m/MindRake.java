@@ -26,7 +26,7 @@ public final class MindRake extends CardImpl {
         // Overload {1}{B}
         this.addAbility(new OverloadAbility(this, new DiscardEachPlayerEffect(
                 2, false
-        ), new ManaCostsImpl("{1}{B}")));
+        ), new ManaCostsImpl<>("{1}{B}")));
     }
 
     private MindRake(final MindRake card) {

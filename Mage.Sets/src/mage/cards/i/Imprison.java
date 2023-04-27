@@ -43,7 +43,7 @@ public final class Imprison extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Whenever a player activates an ability of enchanted creature with {T} in its activation cost that isn't a mana ability, you may pay {1}. If you do, counter that ability. If you don't, destroy Imprison.
@@ -67,6 +67,7 @@ class ImprisonTriggeredAbility extends TriggeredAbilityImpl {
 
     ImprisonTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new CounterTargetEffect().setText("counter that ability"), new DestroySourceEffect(), new ManaCostsImpl<>("{1}")));
+        setTriggerPhrase("Whenever a player activates an ability of enchanted creature with {T} in its activation cost that isn't a mana ability, ");
     }
 
     ImprisonTriggeredAbility(final ImprisonTriggeredAbility ability) {
@@ -100,11 +101,6 @@ class ImprisonTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a player activates an ability of enchanted creature with {T} in its activation cost that isn't a mana ability, " ;
     }
 }
 

@@ -23,7 +23,7 @@ public final class PlaneswalkersFury extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // {3}{R}: Target opponent reveals a card at random from their hand. Planeswalker's Fury deals damage equal to that card's converted mana cost to that player. Activate this ability only any time you could cast a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new PlaneswalkersFuryEffect(), new ManaCostsImpl("{3}{R}"));
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new PlaneswalkersFuryEffect(), new ManaCostsImpl<>("{3}{R}"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

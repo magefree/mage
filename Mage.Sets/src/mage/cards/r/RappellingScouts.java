@@ -31,7 +31,7 @@ public final class RappellingScouts extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {2}{W}: Rappelling Scouts gains protection from the color of your choice until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{2}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorSourceEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{2}{W}")));
     }
 
     private RappellingScouts(final RappellingScouts card) {

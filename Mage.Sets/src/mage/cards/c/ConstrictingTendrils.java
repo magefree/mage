@@ -23,7 +23,7 @@ public final class ConstrictingTendrils extends CardImpl {
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(-3, 0, Duration.EndOfTurn));
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private ConstrictingTendrils(final ConstrictingTendrils card) {

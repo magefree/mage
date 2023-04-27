@@ -52,6 +52,7 @@ class ContainmentConstructTriggeredAbility extends TriggeredAbilityImpl {
 
     public ContainmentConstructTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ContainmentConstructEffect(), false);
+        setTriggerPhrase("Whenever you discard a card, ");
     }
 
     public ContainmentConstructTriggeredAbility(final ContainmentConstructTriggeredAbility ability) {
@@ -76,11 +77,6 @@ class ContainmentConstructTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you discard a card, ";
     }
 }
 

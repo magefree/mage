@@ -8,11 +8,10 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -33,7 +32,7 @@ public final class ElvishHouseParty extends CardImpl {
         // Elvish House Party's power and toughness are each equal to the current hour,
         // using the twelve-hour system.
         this.addAbility(new SimpleStaticAbility(Zone.ALL,
-                new SetPowerToughnessSourceEffect(new CurrentHourCount(), Duration.WhileOnBattlefield)));
+                new SetBasePowerToughnessSourceEffect(new CurrentHourCount())));
     }
 
     private ElvishHouseParty(final ElvishHouseParty card) {

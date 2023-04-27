@@ -48,6 +48,7 @@ public final class Sangromancer extends CardImpl {
 class SangromancerFirstTriggeredAbility extends TriggeredAbilityImpl {
     SangromancerFirstTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(3), true);
+        setTriggerPhrase("Whenever a creature an opponent controls dies, ");
     }
 
     SangromancerFirstTriggeredAbility(final SangromancerFirstTriggeredAbility ability) {
@@ -74,16 +75,12 @@ class SangromancerFirstTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature an opponent controls dies, " ;
-    }
 }
 
 class SangromancerSecondTriggeredAbility extends TriggeredAbilityImpl {
     SangromancerSecondTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(3), true);
+        setTriggerPhrase("Whenever an opponent discards a card, ");
     }
 
     SangromancerSecondTriggeredAbility(final SangromancerSecondTriggeredAbility ability) {
@@ -103,10 +100,5 @@ class SangromancerSecondTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return game.getOpponents(this.getControllerId()).contains(event.getPlayerId());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever an opponent discards a card, " ;
     }
 }

@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
@@ -112,7 +112,7 @@ class DanceOfTheManseEffect extends OneShotEffect {
                     ContinuousEffect effect = new AddCardTypeTargetEffect(Duration.EndOfGame, CardType.CREATURE);
                     effect.setTargetPointer(new FixedTarget(permanent, game));
                     game.addEffect(effect, source);
-                    effect = new SetPowerToughnessTargetEffect(4, 4, Duration.EndOfGame);
+                    effect = new SetBasePowerToughnessTargetEffect(4, 4, Duration.EndOfGame);
                     effect.setTargetPointer(new FixedTarget(permanent, game));
                     game.addEffect(effect, source);
                 });

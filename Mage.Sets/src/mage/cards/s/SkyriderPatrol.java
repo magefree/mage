@@ -53,7 +53,7 @@ public final class SkyriderPatrol extends CardImpl {
         ability.addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(new BeginningOfCombatTriggeredAbility(new DoWhenCostPaid(
-                ability, new ManaCostsImpl("{G}{U}"), "Pay {G}{U}?"
+                ability, new ManaCostsImpl<>("{G}{U}"), "Pay {G}{U}?"
         ), TargetController.YOU, false));
     }
 

@@ -40,7 +40,7 @@ public final class IvoryGargoyle extends CardImpl {
         this.addAbility(ability);
 
         // {4}{W}: Exile Ivory Gargoyle.
-        this.addAbility(new SimpleActivatedAbility(new ExileSourceEffect(), new ManaCostsImpl("{4}{W}")));
+        this.addAbility(new SimpleActivatedAbility(new ExileSourceEffect(), new ManaCostsImpl<>("{4}{W}")));
     }
 
     private IvoryGargoyle(final IvoryGargoyle card) {

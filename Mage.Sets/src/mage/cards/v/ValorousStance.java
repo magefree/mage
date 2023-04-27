@@ -11,6 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -32,7 +33,9 @@ public final class ValorousStance extends CardImpl {
 
         
         //Choose one - Target creature gains Indestructible until end of turn
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn));
+        GainAbilityTargetEffect gainAbilityEffect = new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn);
+        gainAbilityEffect.setOutcome(Outcome.Benefit);
+        this.getSpellAbility().addEffect(gainAbilityEffect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // or destroy target creature with toughness 4 or greater.
         Mode mode1 = new Mode(new DestroyTargetEffect());

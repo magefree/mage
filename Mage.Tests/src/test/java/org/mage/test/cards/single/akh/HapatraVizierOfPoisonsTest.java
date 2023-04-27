@@ -119,7 +119,7 @@ public class HapatraVizierOfPoisonsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, concordantCrossroads, 1);
         addCard(Zone.BATTLEFIELD, playerB, krakenHatchling, 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, sprout);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, sprout, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, triumphOfTheHordes);
 
         attack(1, playerA, "Saproling Token");
@@ -131,6 +131,5 @@ public class HapatraVizierOfPoisonsTest extends CardTestPlayerBase {
         assertPowerToughness(playerB, krakenHatchling, -2, 2);
         assertCounterCount(playerB, krakenHatchling, CounterType.M1M1, 2);
         assertPermanentCount(playerA, "Snake Token", 1); //Should have triggered when Saproling added -1/-1 counter
-        assertAllCommandsUsed();
     }
 }

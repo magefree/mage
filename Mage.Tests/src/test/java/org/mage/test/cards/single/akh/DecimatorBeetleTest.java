@@ -43,7 +43,6 @@ Whenever Decimator Beetle attacks, remove a -1/-1 counter from target creature y
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, grizzly, 2, 2); // had -1/-1 counter, but removed on attack
         assertPowerToughness(playerB, hillGiant, 2, 2); // gets -1/-1 counter from decimator attack ability

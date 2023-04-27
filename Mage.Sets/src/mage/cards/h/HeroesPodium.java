@@ -10,12 +10,12 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.PutCards;
 import mage.constants.SuperType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
@@ -48,7 +48,7 @@ public final class HeroesPodium extends CardImpl {
         // Put the rest on the bottom of your library in a random order.
         Ability ability = new SimpleActivatedAbility(
                 new LookLibraryAndPickControllerEffect(ManacostVariableValue.REGULAR, 1, filter2, PutCards.HAND, PutCards.BOTTOM_RANDOM),
-                new ManaCostsImpl("{X}"));
+                new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

@@ -37,7 +37,7 @@ public final class Willbender extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Morph {1}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{U}")));
         // When Willbender is turned face up, change the target of target spell or ability with a single target.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new ChooseNewTargetsTargetEffect(true, true));
         ability.addTarget(new TargetStackObject(FILTER));

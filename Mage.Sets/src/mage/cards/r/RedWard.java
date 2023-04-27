@@ -30,7 +30,7 @@ public final class RedWard extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Protect));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(
                 ProtectionAbility.from(ObjectColor.RED), AttachmentType.AURA

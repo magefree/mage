@@ -6,7 +6,6 @@ import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -34,7 +33,7 @@ public final class SummoningTrap extends CardImpl {
         this.subtype.add(SubType.TRAP);
 
         // If a creature spell you cast this turn was countered by a spell or ability an opponent controlled, you may pay {0} rather than pay Summoning Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{0}"), SummoningTrapCondition.instance), new SummoningTrapWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{0}"), SummoningTrapCondition.instance), new SummoningTrapWatcher());
 
         // Look at the top seven cards of your library. You may put a creature card from among them onto the battlefield.
         // Put the rest on the bottom of your library in any order.

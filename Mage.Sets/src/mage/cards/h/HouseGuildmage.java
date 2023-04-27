@@ -31,7 +31,7 @@ public final class HouseGuildmage extends CardImpl {
         // {1}{U}, {T}: Target creature doesn't untap during its controller's next untap step.
         Ability ability = new SimpleActivatedAbility(
                 new DontUntapInControllersNextUntapStepTargetEffect(),
-                new ManaCostsImpl("{1}{U}")
+                new ManaCostsImpl<>("{1}{U}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
@@ -40,7 +40,7 @@ public final class HouseGuildmage extends CardImpl {
         // {2}{B}, {T}: Surveil 2.
         ability = new SimpleActivatedAbility(
                 new SurveilEffect(2),
-                new ManaCostsImpl("{2}{B}")
+                new ManaCostsImpl<>("{2}{B}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

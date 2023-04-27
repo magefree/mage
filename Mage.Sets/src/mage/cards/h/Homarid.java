@@ -69,6 +69,7 @@ class HomaridTriggeredAbility extends StateTriggeredAbility {
 
     public HomaridTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
+        setTriggerPhrase("Whenever there are four tide counters on {this}, ");
     }
 
     public HomaridTriggeredAbility(final HomaridTriggeredAbility ability) {
@@ -84,10 +85,4 @@ class HomaridTriggeredAbility extends StateTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         return new CountersSourceCount(CounterType.TIDE).calculate(game, this, null) == 4;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever there are four tide counters on {this}, " ;
-    }
-
 }

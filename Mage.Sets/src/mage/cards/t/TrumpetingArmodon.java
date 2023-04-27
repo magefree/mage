@@ -27,7 +27,7 @@ public final class TrumpetingArmodon extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {1}{G}: Target creature blocks Trumpeting Armodon this turn if able.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MustBeBlockedByTargetSourceEffect(), new ManaCostsImpl("{1}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MustBeBlockedByTargetSourceEffect(), new ManaCostsImpl<>("{1}{G}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

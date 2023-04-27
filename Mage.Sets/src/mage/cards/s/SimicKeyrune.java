@@ -31,7 +31,7 @@ public final class SimicKeyrune extends CardImpl {
         this.addAbility(new BlueManaAbility());
 
         // {G}{U}: Simic Keyrune becomes a 2/3 green and blue Crab artifact creature with hexproof until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new SimicKeyruneToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{G}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new SimicKeyruneToken(), "", Duration.EndOfTurn), new ManaCostsImpl<>("{G}{U}")));
     }
 
     private SimicKeyrune(final SimicKeyrune card) {

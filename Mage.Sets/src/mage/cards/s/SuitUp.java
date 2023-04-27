@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -35,7 +35,7 @@ public final class SuitUp extends CardImpl {
         this.getSpellAbility().addEffect(new AddCardTypeTargetEffect(
                 Duration.EndOfTurn, CardType.ARTIFACT, CardType.CREATURE
         ).setText("until end of turn, target creature or Vehicle becomes an artifact creature"));
-        this.getSpellAbility().addEffect(new SetPowerToughnessTargetEffect(
+        this.getSpellAbility().addEffect(new SetBasePowerToughnessTargetEffect(
                 4, 5, Duration.EndOfTurn
         ).setText("with base power and toughness 4/5"));
         this.getSpellAbility().addTarget(new TargetPermanent(filter));

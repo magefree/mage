@@ -37,7 +37,7 @@ public final class KeeperOfTheBeasts extends CardImpl {
 
         // {G}, {tap}: Choose target opponent who controlled more creatures than you did as you activated this ability. Put a 2/2 green Beast creature token onto the battlefield.
         Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new BeastToken4()).setText("Choose target opponent who controlled more creatures than you did as you activated this ability. Create a 2/2 green Beast creature token."),
-                new ManaCostsImpl("{G}"));
+                new ManaCostsImpl<>("{G}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new KeeperOfTheBeastsTarget());
         this.addAbility(ability);

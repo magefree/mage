@@ -32,7 +32,7 @@ public final class DeclarationOfNaught extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL)));
 
         // {U}: Counter target spell with the chosen name.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{U}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl<>("{U}"));
         ability.setTargetAdjuster(DeclarationOfNaughtAdjuster.instance);
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);

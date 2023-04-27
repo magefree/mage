@@ -26,7 +26,7 @@ public final class SkullFracture extends CardImpl {
        this.getSpellAbility().addEffect(new DiscardTargetEffect(1));
        this.getSpellAbility().addTarget(new TargetPlayer());
         // Flashback {3}{B}
-       this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{3}{B}")));
+       this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{B}")));
     }
 
     private SkullFracture(final SkullFracture card) {

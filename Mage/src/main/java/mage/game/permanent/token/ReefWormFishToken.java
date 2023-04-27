@@ -23,7 +23,7 @@ public final class ReefWormFishToken extends TokenImpl {
 
         addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new ReefWormWhaleToken())));
 
-        availableImageSetCodes = Arrays.asList("C14", "C21");
+        availableImageSetCodes = Arrays.asList("C14", "A25", "C21");
     }
 
     public ReefWormFishToken(final ReefWormFishToken token) {

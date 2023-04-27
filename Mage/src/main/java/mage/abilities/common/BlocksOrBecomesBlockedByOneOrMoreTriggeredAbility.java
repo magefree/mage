@@ -33,13 +33,13 @@ public class BlocksOrBecomesBlockedByOneOrMoreTriggeredAbility extends Triggered
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
         this.rule = rule;
+        setTriggerPhrase("Whenever {this} blocks or becomes blocked by one or more " + (filter != null ? filter.getMessage() : "creatures") + ", ");
     }
 
     public BlocksOrBecomesBlockedByOneOrMoreTriggeredAbility(final BlocksOrBecomesBlockedByOneOrMoreTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.rule = ability.rule;
-
     }
 
     @Override
@@ -77,15 +77,7 @@ public class BlocksOrBecomesBlockedByOneOrMoreTriggeredAbility extends Triggered
 
     @Override
     public String getRule() {
-        if (rule != null) {
-            return rule;
-        }
-        return super.getRule();
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} blocks or becomes blocked by one or more " + (filter != null ? filter.getMessage() : "creatures") + ", ";
+        return rule != null ? rule : super.getRule();
     }
 
     @Override

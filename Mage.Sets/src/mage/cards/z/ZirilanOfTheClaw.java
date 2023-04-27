@@ -40,7 +40,7 @@ public final class ZirilanOfTheClaw extends CardImpl {
 
         // {1}{R}{R}, {tap}: Search your library for a Dragon permanent card and put that card onto the battlefield. Then shuffle your library.
         // That Dragon gains haste until end of turn. Exile it at the beginning of the next end step.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ZirilanOfTheClawEffect(), new ManaCostsImpl("{1}{R}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ZirilanOfTheClawEffect(), new ManaCostsImpl<>("{1}{R}{R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

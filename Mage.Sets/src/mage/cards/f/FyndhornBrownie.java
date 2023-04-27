@@ -29,7 +29,7 @@ public final class FyndhornBrownie extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{G}, {tap}: Untap target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ManaCostsImpl("{2}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ManaCostsImpl<>("{2}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

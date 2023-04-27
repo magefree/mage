@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldAllTriggeredAbility;
 import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.SourceHasCountersCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -40,7 +41,7 @@ public final class TheOzolith extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
                         new TheOzolithMoveCountersEffect(), TargetController.YOU, true
-                ), TheOzolithCondition.instance, "At the beginning of combat on your turn, " +
+                ), SourceHasCountersCondition.instance, "At the beginning of combat on your turn, " +
                 "if {this} has counters on it, you may move all counters from {this} onto target creature."
         );
         ability.addTarget(new TargetCreaturePermanent());
@@ -118,29 +119,8 @@ class TheOzolithLeaveEffect extends OneShotEffect {
             return false;
         }
         counters.values()
-                .stream()
                 .forEach(counter -> permanent.addCounters(counter, source.getControllerId(), source, game));
         return true;
-    }
-}
-
-enum TheOzolithCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) {
-            return false;
-        }
-        return permanent != null
-                && permanent
-                .getCounters(game)
-                .values()
-                .stream()
-                .mapToInt(Counter::getCount)
-                .max()
-                .orElse(0) > 0;
     }
 }
 

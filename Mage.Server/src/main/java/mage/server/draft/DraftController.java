@@ -199,6 +199,10 @@ public class DraftController {
     public void sendCardMark(UUID userId, UUID cardId) {
         draftSessions.get(userPlayerMap.get(userId)).setMarkedCard(cardId);
     }
+    
+    public void setBoosterLoaded(UUID userId) {
+        draftSessions.get(userPlayerMap.get(userId)).setBoosterLoaded();
+    }
 
     private synchronized void updateDraft() throws MageException {
         for (final Entry<UUID, DraftSession> entry : draftSessions.entrySet()) {

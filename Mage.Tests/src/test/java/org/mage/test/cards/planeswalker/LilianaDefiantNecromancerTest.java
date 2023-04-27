@@ -3,6 +3,7 @@ package org.mage.test.cards.planeswalker;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -12,14 +13,19 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class LilianaDefiantNecromancerTest extends CardTestPlayerBase {
 
-    // Reported bug: -X allowing returning creatures with higher CMC than counters removed
+    /**
+     * Reported bug:
+     *      -X allowing returning creatures with higher CMC than counters removed
+     */
     @Test
     public void testMinusAbilityShouldNotReturnHigherCmcCreature() {
         addCard(Zone.BATTLEFIELD, playerA, "Hill Giant", 1); // {3}{R} 3/3
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
 
         // Lifelink
-        // Whenever another nontoken creature you control dies, exile Liliana Heretical Healer, then return her to the battlefield transformed under her owner's control. If you do, put a 2/2 black Zombie creature token onto the battlefield.
+        // Whenever another nontoken creature you control dies, exile Liliana Heretical Healer,
+        // then return her to the battlefield transformed under her owner's control.
+        // If you do, put a 2/2 black Zombie creature token onto the battlefield.
         addCard(Zone.HAND, playerA, "Liliana, Heretical Healer");
 
         addCard(Zone.HAND, playerB, "Lightning Bolt");
@@ -34,7 +40,16 @@ public class LilianaDefiantNecromancerTest extends CardTestPlayerBase {
         setChoice(playerA, "X=1");
 
         setStopAt(1, PhaseStep.END_TURN);
-        execute();
+
+        try {
+            execute();
+
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("-X:$target=Hill Giant")) {
+                Assert.fail("Should have thrown error about cannot attack, but got:\n" + e.getMessage());
+            }
+        }
 
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertPermanentCount(playerA, "Liliana, Heretical Healer", 0);
@@ -63,10 +78,7 @@ public class LilianaDefiantNecromancerTest extends CardTestPlayerBase {
 
         // Transformed into Liliana, Defiant Necromancer with (3) loyalty to start
         // -X: Return target nonlegendary creature with converted mana cost X from your graveyard to the battlefield.
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "-X:");
-        setChoice(playerA, "X=3");
-        addTarget(playerA, "Alesha, Who Smiles at Death"); // dunno which to use for returning from grave, both target/choice seem to work
-        setChoice(playerA, "Alesha, Who Smiles at Death");
+        checkPlayableAbility("Can't -X", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "-X:", false);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -101,8 +113,7 @@ public class LilianaDefiantNecromancerTest extends CardTestPlayerBase {
         // -X: Return target nonlegendary creature with converted mana cost X from your graveyard to the battlefield.
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "-X:");
         setChoice(playerA, "X=2");
-        addTarget(playerA, "Bronze Sable"); // dunno which to use for returning from grave, both target/choice seem to work
-        setChoice(playerA, "Bronze Sable");
+        // Bronze Sable is auto-chosen since only option
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

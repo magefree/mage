@@ -32,7 +32,7 @@ public final class TinStreetHooligan extends CardImpl {
         // When Tin Street Hooligan enters the battlefield, if {G} was spent to cast Tin Street Hooligan, destroy target artifact.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect()),
-                new ManaWasSpentCondition(ColoredManaSymbol.G),
+                ManaWasSpentCondition.GREEN,
                 "When {this} enters the battlefield, if {G} was spent to cast Tin Street Hooligan, destroy target artifact.");
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);

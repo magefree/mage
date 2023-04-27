@@ -42,7 +42,7 @@ public final class SnowHound extends CardImpl {
         // {1}, {tap}: Return Snow Hound and target green or blue creature you control to their owner's hand.
         Effect effect = new ReturnToHandSourceEffect(true);
         effect.setText("Return Snow Hound");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
         effect = new ReturnToHandTargetEffect();
         effect.setText("and target green or blue creature you control to their owners' hands");

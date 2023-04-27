@@ -49,6 +49,7 @@ class TerritorialGorgerTriggeredAbility extends TriggeredAbilityImpl {
 
     TerritorialGorgerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), false);
+        setTriggerPhrase("Whenever you get one or more {E} <i>(energy counters)</i>, ");
     }
 
     TerritorialGorgerTriggeredAbility(final TerritorialGorgerTriggeredAbility ability) {
@@ -71,10 +72,5 @@ class TerritorialGorgerTriggeredAbility extends TriggeredAbilityImpl {
             return Objects.equals(event.getTargetId(), this.getControllerId());
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you get one or more {E} <i>(energy counters)</i>, " ;
     }
 }

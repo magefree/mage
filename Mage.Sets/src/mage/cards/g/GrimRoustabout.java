@@ -32,7 +32,7 @@ public final class GrimRoustabout extends CardImpl {
         this.addAbility(new UnleashAbility());
         
         // {1}{B}: Regenerate Grim Roustabout.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{B}")));
     }
  
     private GrimRoustabout(final GrimRoustabout card) {

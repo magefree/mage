@@ -36,7 +36,7 @@ public final class ClawsOfWirewood extends CardImpl {
         effect.setText("and each player");
         this.getSpellAbility().addEffect(effect);
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private ClawsOfWirewood(final ClawsOfWirewood card) {

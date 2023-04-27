@@ -35,7 +35,7 @@ public final class HammerMage extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {X}{R}, {tap}, Discard a card: Destroy all artifacts with converted mana cost X or less.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HammerMageEffect(), new ManaCostsImpl("{X}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HammerMageEffect(), new ManaCostsImpl<>("{X}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);

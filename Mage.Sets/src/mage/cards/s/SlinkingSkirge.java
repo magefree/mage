@@ -31,7 +31,7 @@ public final class SlinkingSkirge extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {2}, Sacrifice Slinking Skirge: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{2}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

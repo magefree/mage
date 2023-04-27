@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.continuous.LoseAllAbilitiesTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -43,7 +43,7 @@ public final class WarkiteMarauder extends CardImpl {
         // Whenever Warkite Marauder attacks, target creature defending player controls loses all abilities and has base power and toughness 0/1 until end of turn.
         Ability ability = new AttacksTriggeredAbility(new LoseAllAbilitiesTargetEffect(Duration.EndOfTurn)
                 .setText("target creature defending player controls loses all abilities"), false);
-        ability.addEffect(new SetPowerToughnessTargetEffect(0, 1, Duration.EndOfTurn)
+        ability.addEffect(new SetBasePowerToughnessTargetEffect(0, 1, Duration.EndOfTurn)
                 .setText("and has base power and toughness 0/1 until end of turn"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

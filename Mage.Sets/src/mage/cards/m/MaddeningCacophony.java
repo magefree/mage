@@ -57,7 +57,7 @@ class MaddeningCacophonyEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean kicked = KickedCondition.instance.apply(game, source);
+        boolean kicked = KickedCondition.ONCE.apply(game, source);
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
             Player player = game.getPlayer(playerId);
             if (player == null) {

@@ -10,6 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.SquirrelToken;
@@ -21,13 +22,6 @@ import java.util.UUID;
  */
 public final class SquirrelSanctuary extends CardImpl {
 
-    private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("a nontoken creature you control");
-
-    static {
-        filter.add(TokenPredicate.FALSE);
-    }
-
     public SquirrelSanctuary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
 
@@ -37,7 +31,7 @@ public final class SquirrelSanctuary extends CardImpl {
         // Whenever a nontoken creature you control dies, you may pay {1}. If you do, return Squirrel Sanctuary to its owner's hand.
         this.addAbility(new DiesCreatureTriggeredAbility(new DoIfCostPaid(
                 new ReturnToHandSourceEffect(true), new GenericManaCost(1)
-        ), false, filter));
+        ), false, StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN));
     }
 
     private SquirrelSanctuary(final SquirrelSanctuary card) {

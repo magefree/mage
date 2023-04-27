@@ -52,6 +52,7 @@ class WallOfSoulsTriggeredAbility extends TriggeredAbilityImpl {
 
     public WallOfSoulsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(SavedDamageValue.MUCH, "it"));
+        setTriggerPhrase("Whenever {this} is dealt combat damage, ");
     }
 
     public WallOfSoulsTriggeredAbility(final WallOfSoulsTriggeredAbility effect) {
@@ -75,10 +76,5 @@ class WallOfSoulsTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} is dealt combat damage, " ;
     }
 }

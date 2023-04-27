@@ -1,10 +1,10 @@
-# faster builds
+language: java
+jdk:
+  - openjdk11
+dist: focal
 git:
   depth: 3
   submodules: false
-sudo: false
-dist: trusty
-language: java
 before_install:
   - echo "MAVEN_OPTS='-Xmx2g'" > ~/.mavenrc
 cache:

@@ -1,6 +1,6 @@
 package mage.cards.s;
 
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -18,7 +18,7 @@ public final class SquareUp extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G/U}");
 
         // Target creature has base power and toughness 4/4 until end of turn.
-        this.getSpellAbility().addEffect(new SetPowerToughnessTargetEffect(4, 4, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new SetBasePowerToughnessTargetEffect(4, 4, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

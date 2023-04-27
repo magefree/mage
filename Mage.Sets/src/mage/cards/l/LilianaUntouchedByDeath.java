@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
@@ -12,7 +13,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
@@ -24,8 +25,9 @@ import java.util.UUID;
  */
 public final class LilianaUntouchedByDeath extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter
-            = new FilterControlledCreaturePermanent(SubType.ZOMBIE, "Zombies you control");
+    private static final DynamicValue xValue = new SignInversionDynamicValue(
+            new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.ZOMBIE, "Zombies you control"), null)
+    );
 
     public LilianaUntouchedByDeath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{B}{B}");
@@ -38,12 +40,7 @@ public final class LilianaUntouchedByDeath extends CardImpl {
         this.addAbility(new LoyaltyAbility(new LilianaUntouchedByDeathEffect(), 1));
 
         // -2: Target creature gets -X/-X until end of turn, where X is the number of Zombies you control.
-        DynamicValue xValue = new PermanentsOnBattlefieldCount(filter, -1);
-        Ability ability = new LoyaltyAbility(
-                new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn, true)
-                        .setText("target creature gets -X/-X until end of turn, "
-                                + "where X is the number of Zombies you control"), -2
-        );
+        Ability ability = new LoyaltyAbility(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn), -2);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

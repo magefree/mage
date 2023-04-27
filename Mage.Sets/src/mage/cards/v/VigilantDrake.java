@@ -30,7 +30,7 @@ public final class VigilantDrake extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {2}{U}: Untap Vigilant Drake.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl<>("{2}{U}")));
     }
 
     private VigilantDrake(final VigilantDrake card) {

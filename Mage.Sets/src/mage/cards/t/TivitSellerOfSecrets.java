@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -41,7 +42,7 @@ public final class TivitSellerOfSecrets extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Ward {3}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{3}")));
+        this.addAbility(new WardAbility(new GenericManaCost(3), false));
 
         // Council's dilemma — Whenever Tivit enters the battlefield or deals combat damage to a player, starting with you, each player votes for evidence or bribery. For each evidence vote, investigate. For each bribery vote, create a Treasure token.
         this.addAbility(new OrTriggeredAbility(

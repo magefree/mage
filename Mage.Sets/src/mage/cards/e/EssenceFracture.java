@@ -27,7 +27,7 @@ public final class EssenceFracture extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(2));
         
         // Cycling {2}{U}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}{U}")));
     }
 
     private EssenceFracture(final EssenceFracture card) {

@@ -31,7 +31,7 @@ public final class StartlingDevelopment extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Cycling {1}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}")));
     }
 
     private StartlingDevelopment(final StartlingDevelopment card) {

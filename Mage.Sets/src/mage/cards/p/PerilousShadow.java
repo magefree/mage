@@ -29,7 +29,7 @@ public final class PerilousShadow extends CardImpl {
 
 
         // {1}{B}: Perilous Shadow gets +2/+2 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2,2, Duration.EndOfTurn), new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2,2, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{B}")));
 
     }
 

@@ -51,6 +51,7 @@ class WallOfHopeTriggeredAbility extends TriggeredAbilityImpl {
 
     public WallOfHopeTriggeredAbility() {
         super(Zone.BATTLEFIELD, new WallOfHopeGainLifeEffect());
+        setTriggerPhrase("Whenever {this} is dealt damage, ");
     }
 
     public WallOfHopeTriggeredAbility(final WallOfHopeTriggeredAbility effect) {
@@ -69,16 +70,11 @@ class WallOfHopeTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(this.sourceId)) {
-            this.getEffects().setValue("damageAmount", event.getAmount());
-            return true;
+        if (!event.getTargetId().equals(this.sourceId)) {
+            return false;
         }
-        return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} is dealt damage, " ;
+        this.getEffects().setValue("damageAmount", event.getAmount());
+        return true;
     }
 }
 

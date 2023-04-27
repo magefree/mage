@@ -13,33 +13,21 @@ import mage.filter.common.FilterControlledPermanent;
  */
 
 public class AffinityForLandTypeAbility extends SimpleStaticAbility {
+    private final String rulesText;
 
-    private final FilterControlledPermanent filter;
-
-    String text;
-    SubType landType;
-
-    public AffinityForLandTypeAbility(SubType landType, String text) {
-        super(Zone.ALL, new AffinityEffect(getFilter(landType)));
-        this.filter = getFilter(landType);
+    public AffinityForLandTypeAbility(SubType landType, String pluralName) {
+        super(Zone.ALL, null);
+        rulesText = "Affinity for " + pluralName + " <i>(This spell costs {1} less to cast for each " + landType + " you control.)</i>";
         setRuleAtTheTop(true);
-        this.text = text;
-        this.landType = landType;
 
-        this.addHint(new ValueHint(landType + " you control", new PermanentsOnBattlefieldCount(filter)));
-    }
-
-    private static FilterControlledPermanent getFilter(SubType landType) {
-        FilterControlledPermanent affinityfilter = new FilterControlledPermanent();
-        affinityfilter.add(landType.getPredicate());
-        return affinityfilter;
-
+        FilterControlledPermanent filter = new FilterControlledPermanent(landType);
+        addEffect(new AffinityEffect(filter));
+        addHint(new ValueHint(pluralName + " you control", new PermanentsOnBattlefieldCount(filter)));
     }
 
     public AffinityForLandTypeAbility(final AffinityForLandTypeAbility ability) {
         super(ability);
-        this.text = ability.text;
-        this.filter = ability.filter.copy();
+        this.rulesText = ability.rulesText;
     }
 
     @Override
@@ -49,6 +37,6 @@ public class AffinityForLandTypeAbility extends SimpleStaticAbility {
 
     @Override
     public String getRule() {
-        return "Affinity for " + text + " <i>(This spell costs 1 less to cast for each " + landType + " you control.)</i>";
+        return rulesText;
     }
 }

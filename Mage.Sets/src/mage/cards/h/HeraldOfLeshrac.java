@@ -101,7 +101,7 @@ class HeraldOfLeshracCumulativeCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return game.getBattlefield().contains(filter, source.getSourceId(), controllerId, source, game, 1);
+        return game.getBattlefield().contains(filter, controllerId, source, game, 1);
     }
 
     @Override

@@ -37,7 +37,6 @@ public class RadiateTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, 6); // 6 lands
         assertPermanentCount(playerB, 0);
@@ -70,7 +69,6 @@ public class RadiateTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, 6); // 6 lands
         assertPermanentCount(playerB, 0);

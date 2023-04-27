@@ -34,7 +34,7 @@ public final class BanewaspAffliction extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When enchanted creature dies, that creature's controller loses life equal to its toughness.
@@ -56,6 +56,7 @@ class BanewaspAfflictionLoseLifeEffect extends OneShotEffect {
 
     public BanewaspAfflictionLoseLifeEffect() {
         super(Outcome.LoseLife);
+        this.staticText = "that creature's controller loses life equal to its toughness";
     }
 
     public BanewaspAfflictionLoseLifeEffect(BanewaspAfflictionLoseLifeEffect copy) {
@@ -80,10 +81,4 @@ class BanewaspAfflictionLoseLifeEffect extends OneShotEffect {
         }
         return false;
     }
-
-    @Override
-    public String getText(Mode mode) {
-        return "that creature's controller loses life equal to its toughness";
-    }
-
 }

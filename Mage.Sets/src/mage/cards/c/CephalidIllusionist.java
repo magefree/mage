@@ -41,7 +41,7 @@ public final class CephalidIllusionist extends CardImpl {
         Effect effect = new PreventDamageToTargetEffect(Duration.EndOfTurn, true);
         effect.setText("Prevent all combat damage that would be dealt to");
         // and dealt by target creature you control this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}{U}"));
         effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, true);
         effect.setText("and dealt by target creature you control this turn.");
         ability.addEffect(effect);

@@ -10,7 +10,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
 import mage.abilities.effects.common.InfoEffect;
-import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -46,8 +46,8 @@ public final class BellBorcaSpectralSergeant extends CardImpl {
         this.addAbility(BellBorcaSpectralSergeantAbility.getInstance());
 
         // Bell Borca, Spectral Sergeant's power is equal to the greatest number noted for it this turn.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerSourceEffect(
-                BellBorcaSpectralSergeantValue.instance, Duration.EndOfGame
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(
+                BellBorcaSpectralSergeantValue.instance
         ).setText("{this}'s power is equal to the greatest number noted for it this turn")));
 
         // At the beginning of your upkeep, exile the top card of your library. You may play that card this turn.

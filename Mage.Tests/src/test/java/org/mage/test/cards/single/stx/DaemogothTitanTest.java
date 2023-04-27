@@ -22,7 +22,6 @@ public class DaemogothTitanTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 11);
         assertGraveyardCount(playerA, "Grizzly Bears", 1);
@@ -39,7 +38,6 @@ public class DaemogothTitanTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 11);
         assertGraveyardCount(playerA, "Grizzly Bears", 1);

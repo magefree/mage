@@ -39,7 +39,7 @@ public final class GoblinRazerunners extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {1}{R}, Sacrifice a land: Put a +1/+1 counter on Goblin Razerunners.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{1}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
 

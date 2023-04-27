@@ -28,7 +28,7 @@ public final class RitualOfSubdual extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{G}");
 
         // Cumulative upkeep-Pay {2}.
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{2}")));
 
         // If a land is tapped for mana, it produces colorless mana instead of any other type.
         this.addAbility(new SimpleStaticAbility(new RitualOfSubdualReplacementEffect()));

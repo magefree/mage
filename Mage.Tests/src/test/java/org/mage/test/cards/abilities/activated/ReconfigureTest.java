@@ -30,7 +30,6 @@ public class ReconfigureTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertType(boar, CardType.CREATURE, false);
         assertSubtype(boar, SubType.EQUIPMENT);
@@ -51,7 +50,6 @@ public class ReconfigureTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertType(boar, CardType.CREATURE, true);
         assertSubtype(boar, SubType.EQUIPMENT);
@@ -73,7 +71,6 @@ public class ReconfigureTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertType(boar, CardType.CREATURE, false);
         assertSubtype(boar, SubType.EQUIPMENT);
@@ -94,7 +91,6 @@ public class ReconfigureTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertType(boar, CardType.CREATURE, false);
         assertSubtype(boar, SubType.EQUIPMENT);

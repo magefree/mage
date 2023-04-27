@@ -33,7 +33,7 @@ public final class EntrancingLyre extends CardImpl {
 
         // {X}, {T}: Tap target creature with power X or less. It doesn't untap during its controller's untap step for as long as Entrancing Lyre remains tapped.
         Ability ability = new SimpleActivatedAbility(
-                new TapTargetEffect("tap target creature with power X or less"), new ManaCostsImpl("{X}")
+                new TapTargetEffect("tap target creature with power X or less"), new ManaCostsImpl<>("{X}")
         );
         ability.addCost(new TapSourceCost());
         ability.addEffect(new DontUntapAsLongAsSourceTappedEffect());

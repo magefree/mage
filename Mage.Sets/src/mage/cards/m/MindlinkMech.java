@@ -205,8 +205,8 @@ class MindlinkMechEffect extends OneShotEffect {
 class MindlinkMechApplier extends CopyApplier {
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID targetObjectId) {
-        blueprint.getPower().modifyBaseValue(4);
-        blueprint.getToughness().modifyBaseValue(3);
+        blueprint.getPower().setModifiedBaseValue(4);
+        blueprint.getToughness().setModifiedBaseValue(3);
         blueprint.addCardType(game, CardType.ARTIFACT);
         blueprint.addSubType(game, SubType.VEHICLE);
         blueprint.getAbilities().add(FlyingAbility.getInstance());

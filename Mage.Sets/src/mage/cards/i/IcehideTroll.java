@@ -34,7 +34,7 @@ public final class IcehideTroll extends CardImpl {
         // {S}{S}: Icehide Troll gets +2/+0 and gains indestructible until end of turn. Tap it.
         Ability ability = new SimpleActivatedAbility(new BoostSourceEffect(
                 2, 0, Duration.EndOfTurn
-        ).setText("{this} gets +2/+0"), new ManaCostsImpl("{S}{S}"));
+        ).setText("{this} gets +2/+0"), new ManaCostsImpl<>("{S}{S}"));
         ability.addEffect(new GainAbilitySourceEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn
         ).setText("and gains indestructible until end of turn."));

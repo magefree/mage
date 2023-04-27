@@ -32,7 +32,7 @@ public final class HallowedGround extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
         // {W}{W}: Return target nonsnow land you control to its owner's hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{W}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{W}{W}"));
         ability.addTarget(new TargetControlledPermanent(filter));
         this.addAbility(ability);
     }

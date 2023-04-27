@@ -23,7 +23,7 @@ public final class ScarabFeast extends CardImpl {
         getSpellAbility().addTarget(new TargetCardInASingleGraveyard(0, 3, StaticFilters.FILTER_CARD_CARDS));
 
         // Cycling {B}
-        addAbility(new CyclingAbility(new ManaCostsImpl("{B}")));
+        addAbility(new CyclingAbility(new ManaCostsImpl<>("{B}")));
     }
 
     private ScarabFeast(final ScarabFeast card) {

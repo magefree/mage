@@ -2,12 +2,12 @@ package mage.cards.s;
 
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
+import mage.constants.PutCards;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;

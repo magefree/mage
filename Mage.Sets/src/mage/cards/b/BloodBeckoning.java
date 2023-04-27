@@ -48,7 +48,7 @@ enum BloodBeckoningAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        if (KickedCondition.instance.apply(game, ability)) {
+        if (KickedCondition.ONCE.apply(game, ability)) {
             ability.addTarget(new TargetCardInYourGraveyard(2, StaticFilters.FILTER_CARD_CREATURE));
         } else {
             ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE));

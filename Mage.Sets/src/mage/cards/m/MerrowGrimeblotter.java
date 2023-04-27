@@ -31,7 +31,7 @@ public final class MerrowGrimeblotter extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{UB}, {untap}: Target creature gets -2/-0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-2, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{U/B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{U/B}"));
         ability.addCost(new UntapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

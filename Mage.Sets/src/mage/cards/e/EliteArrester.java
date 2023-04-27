@@ -29,7 +29,7 @@ public final class EliteArrester extends CardImpl {
 
         // {1}{U}, {T}: Tap target creature.
         Ability ability = new SimpleActivatedAbility(
-                new TapTargetEffect(), new ManaCostsImpl("{1}{U}")
+                new TapTargetEffect(), new ManaCostsImpl<>("{1}{U}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

@@ -45,7 +45,6 @@ public class IntetTheDreamerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Intet, the Dreamer", 6 + 2, 6 + 2); // boost from Wax
     }

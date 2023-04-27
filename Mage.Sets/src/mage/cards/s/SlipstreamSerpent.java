@@ -38,7 +38,7 @@ public final class SlipstreamSerpent extends CardImpl {
                 new SacrificeSourceEffect()));
 
         // Morph {5}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{5}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{5}{U}")));
     }
 
     private SlipstreamSerpent(final SlipstreamSerpent card) {

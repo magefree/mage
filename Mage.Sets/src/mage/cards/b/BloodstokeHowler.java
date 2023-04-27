@@ -34,7 +34,7 @@ public final class BloodstokeHowler extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Morph {6}{R}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{6}{R}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{6}{R}")));
 
         // When Bloodstoke Howler is turned face up, Beast creatures you control get +3/+0 until end of turn.
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new BoostControlledEffect(3, 0, Duration.EndOfTurn, filter)));

@@ -113,7 +113,7 @@ class OKagachiVengefulKamiTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever {this} deals combat damage to a player, " +
                 "if that player attacked you during their last turn, " +
-                "exile target nonland permanent that player controls";
+                "exile target nonland permanent that player controls.";
     }
 }
 

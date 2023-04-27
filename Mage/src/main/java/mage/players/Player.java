@@ -48,6 +48,22 @@ import java.util.*;
 public interface Player extends MageItem, Copyable<Player> {
 
     /**
+     * Enum used to indicate what each player is allowed to spend life on.
+     * By default it is set to `allAbilities`, but can be changed by effects.
+     * E.g. Angel of Jubilation sets it to `nonSpellnonActivatedAbilities`,
+     * and Karn's Sylex sets it to `onlyManaAbilities`.
+     * <p>
+     * <p>
+     * Default is PayLifeCostLevel.allAbilities.
+     */
+    enum PayLifeCostLevel {
+        allAbilities,
+        nonSpellnonActivatedAbilities,
+        onlyManaAbilities,
+        none
+    }
+
+    /**
      * Current player is real life player (human). Try to use in GUI and network engine only.
      * <p>
      * WARNING, you must use isComputer instead isHuman in card's code (for good Human/AI logic testing in unit tests)
@@ -147,12 +163,12 @@ public interface Player extends MageItem, Copyable<Player> {
     /**
      * Is the player allowed to pay life for casting spells or activate activated abilities
      *
-     * @param canPayLifeCost
+     * @param payLifeCostLevel
      */
 
-    void setCanPayLifeCost(boolean canPayLifeCost);
+    void setPayLifeCostLevel(PayLifeCostLevel payLifeCostLevel);
 
-    boolean getCanPayLifeCost();
+    PayLifeCostLevel getPayLifeCostLevel();
 
     /**
      * Can the player pay life to cast or activate the given ability
@@ -198,10 +214,6 @@ public interface Player extends MageItem, Copyable<Player> {
     int getLandsPerTurn();
 
     void setLandsPerTurn(int landsPerTurn);
-
-    int getLoyaltyUsePerTurn();
-
-    void setLoyaltyUsePerTurn(int loyaltyUsePerTurn);
 
     int getMaxHandSize();
 
@@ -374,6 +386,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     /**
      * Draw cards. If you call it in replace events then use method with event.appliedEffects param instead.
+     * Returns 0 if replacement effect triggers on card draw.
      *
      * @param num
      * @param source can be null for game default draws (non effects, example: start of the turn)
@@ -384,6 +397,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     /**
      * Draw cards with applied effects, for replaceEvent
+     * Returns 0 if replacement effect triggers on card draw.
      *
      * @param num
      * @param source can be null for game default draws (non effects, example: start of the turn)
@@ -411,7 +425,7 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana);
 
-    boolean putInHand(Card card, Game game);
+    ActivatedAbility chooseLandOrSpellAbility(Card card, Game game, boolean noMana);
 
     boolean removeFromHand(Card card, Game game);
 
@@ -613,7 +627,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean choose(Outcome outcome, Target target, Ability source, Game game, Map<String, Serializable> options);
 
-    boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game); // TODO: remove to use choose with "Ability source"
+    boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game);
 
     boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game);
 
@@ -897,6 +911,17 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean moveCardToHandWithInfo(Card card, Ability source, Game game, boolean withName);
 
     /**
+     * Iterates through a set of cards and runs moveCardToHandWithInfo on each item
+     *
+     * @param cards
+     * @param source
+     * @param game
+     * @param withName show the card names in the log
+     * @return
+     */
+    boolean moveCardsToHandWithInfo(Cards cards, Ability source, Game game, boolean withName);
+
+    /**
      * Uses card.moveToExile and posts a inform message about moving the card to
      * exile into the game log. Don't use this in replacement effects, because
      * list of applied effects is not saved
@@ -1054,4 +1079,16 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     FilterMana getPhyrexianColors();
+
+    /**
+     * Function to query if the player has strictChooseMode enabled. Only the test player can have it.
+     * Function is added here so that the test suite project does not have to be imported into the client/server project.
+     *
+     * @return whether the player has strictChooseMode enabled
+     */
+    public default boolean getStrictChooseMode() {
+        return false;
+    }
+
+    public UserData getControllingPlayersUserData(Game game);
 }

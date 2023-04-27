@@ -41,7 +41,7 @@ public final class IfhBiffEfreet extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // {G}: Ifh-Biff Efreet deals 1 damage to each creature with flying and each player. Any player may activate this ability.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter), new ManaCostsImpl("{G}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter), new ManaCostsImpl<>("{G}"));
         Effect effect = new DamagePlayersEffect(1);
         effect.setText("and each player");
         ability.addEffect(effect);

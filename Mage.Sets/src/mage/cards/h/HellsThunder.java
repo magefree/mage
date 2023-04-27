@@ -32,7 +32,7 @@ public final class HellsThunder extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
         this.addAbility(new OnEventTriggeredAbility(EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect()));
-        this.addAbility(new UnearthAbility(new ManaCostsImpl("{4}{R}")));
+        this.addAbility(new UnearthAbility(new ManaCostsImpl<>("{4}{R}")));
 
     }
 

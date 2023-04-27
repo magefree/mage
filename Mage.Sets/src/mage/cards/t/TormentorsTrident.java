@@ -37,7 +37,7 @@ public final class TormentorsTrident extends CardImpl {
         this.addAbility(ability);
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3), false));
     }
 
     private TormentorsTrident(final TormentorsTrident card) {

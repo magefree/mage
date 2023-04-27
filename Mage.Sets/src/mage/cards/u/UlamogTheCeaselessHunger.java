@@ -66,6 +66,7 @@ class UlamogExilePermanentsOnCastAbility extends TriggeredAbilityImpl {
     UlamogExilePermanentsOnCastAbility() {
         super(Zone.STACK, new ExileTargetEffect("exile two target permanents"));
         this.addTarget(new TargetPermanent(2, new FilterPermanent()));
+        setTriggerPhrase("When you cast this spell, ");
     }
 
     UlamogExilePermanentsOnCastAbility(UlamogExilePermanentsOnCastAbility ability) {
@@ -87,17 +88,13 @@ class UlamogExilePermanentsOnCastAbility extends TriggeredAbilityImpl {
     public UlamogExilePermanentsOnCastAbility copy() {
         return new UlamogExilePermanentsOnCastAbility(this);
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When you cast this spell, " ;
-    }
 }
 
 class UlamogAttackTriggeredAbility extends TriggeredAbilityImpl {
 
     public UlamogAttackTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
+        setTriggerPhrase("Whenever {this} attacks, ");
     }
 
     public UlamogAttackTriggeredAbility(final UlamogAttackTriggeredAbility ability) {
@@ -125,11 +122,6 @@ class UlamogAttackTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} attacks, " ;
     }
 }
 

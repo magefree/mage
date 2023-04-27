@@ -124,11 +124,10 @@ class GristTheHungerTideTypeEffect extends ContinuousEffectImpl {
                 sourceObject.addSubType(game, SubType.INSECT);
                 break;
             case PTChangingEffects_7:
-                if (sublayer != SubLayer.SetPT_7b) {
-                    break;
+                if (sublayer == SubLayer.SetPT_7b) {
+                    sourceObject.getPower().setModifiedBaseValue(1);
+                    sourceObject.getToughness().setModifiedBaseValue(1);
                 }
-                sourceObject.getPower().setValue(1);
-                sourceObject.getToughness().setValue(1);
                 break;
         }
         return true;

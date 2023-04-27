@@ -31,7 +31,7 @@ public final class PyrewildShaman extends CardImpl {
 
         // Whenever one or more creatures you control deal combat damage to a player, if Pyrewild Shaman is in your graveyard, you may pay {3}. If you do, return Pyrewild Shaman to your hand.
         this.addAbility(new DealCombatDamageControlledTriggeredAbility(Zone.GRAVEYARD,
-                new DoIfCostPaid(new ReturnToHandSourceEffect(), new ManaCostsImpl("{3}"))
+                new DoIfCostPaid(new ReturnToHandSourceEffect(), new ManaCostsImpl<>("{3}"))
                         .setText("if {this} is in your graveyard, you may pay {3}. If you do, return {this} to your hand")));
 
     }

@@ -1,7 +1,6 @@
 
 package mage.abilities.effects.keyword;
 
-import java.util.Set;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCosts;
@@ -17,6 +16,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.Set;
 
 /**
  *
@@ -54,7 +55,7 @@ public class ManifestEffect extends OneShotEffect {
                 if (card.isCreature(game)) {
                     manaCosts = card.getSpellAbility() != null ? card.getSpellAbility().getManaCosts() : null;
                     if (manaCosts == null) {
-                        manaCosts = new ManaCostsImpl("{0}");
+                        manaCosts = new ManaCostsImpl<>("{0}");
                     }
                 }
                 MageObjectReference objectReference = new MageObjectReference(card.getId(), card.getZoneChangeCounter(game) + 1, game);

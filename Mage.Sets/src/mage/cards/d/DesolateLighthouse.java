@@ -26,7 +26,7 @@ public final class DesolateLighthouse extends CardImpl {
         // {1}{U}{R}, {tap}: Draw a card, then discard a card.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DrawDiscardControllerEffect(),
-                new ManaCostsImpl("{1}{U}{R}"));
+                new ManaCostsImpl<>("{1}{U}{R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

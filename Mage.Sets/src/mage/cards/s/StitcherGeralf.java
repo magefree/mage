@@ -37,7 +37,7 @@ public final class StitcherGeralf extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {2}{U}, {tap}: Each player puts the top three cards of their library into their graveyard. Exile up to two creature cards put into graveyards this way. Create an X/X blue Zombie creature token, where X is the total power of the cards exiled this way.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new StitcherGeralfEffect(), new ManaCostsImpl("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new StitcherGeralfEffect(), new ManaCostsImpl<>("{2}{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

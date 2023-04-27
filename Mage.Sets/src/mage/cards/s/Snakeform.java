@@ -30,9 +30,7 @@ public final class Snakeform extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         
         // Draw a card.
-        effect = new DrawCardSourceControllerEffect(1);
-        effect.setText("<br>Draw a card.");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
         
     }
 

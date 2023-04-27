@@ -47,7 +47,7 @@ public final class BoneyardScourge extends CardImpl {
 
         // Whenever a Dragon you control dies while Boneyard Scourge is in your graveyard, you may pay 1B. If you do, return Boneyard Scourge from your graveyard to the battlefield.
         TriggeredAbility ability = new DiesWhileInGraveyardTriggeredAbility(
-                new DoIfCostPaid(new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl("{1}{B}")),
+                new DoIfCostPaid(new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl<>("{1}{B}")),
                 filter);
         this.addAbility(ability);
     }
@@ -69,6 +69,7 @@ class DiesWhileInGraveyardTriggeredAbility extends TriggeredAbilityImpl {
     public DiesWhileInGraveyardTriggeredAbility(Effect effect, FilterCreaturePermanent filter) {
         super(Zone.GRAVEYARD, effect, false);
         this.filter = filter;
+        setTriggerPhrase("Whenever " + filter.getMessage() + " dies while {this} is in your graveyard, ");
     }
 
     public DiesWhileInGraveyardTriggeredAbility(final DiesWhileInGraveyardTriggeredAbility ability) {
@@ -98,10 +99,5 @@ class DiesWhileInGraveyardTriggeredAbility extends TriggeredAbilityImpl {
         }
 
         return filter.match(zEvent.getTarget(), controllerId,this, game);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever " + filter.getMessage() + " dies while {this} is in your graveyard, " ;
     }
 }

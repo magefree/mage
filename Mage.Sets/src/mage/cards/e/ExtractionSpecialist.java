@@ -44,7 +44,8 @@ public final class ExtractionSpecialist extends CardImpl {
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
 
-        // When Extraction Specialist enters the battlefield, return target creature card with mana value 2 or less from your graveyard to the battlefield. That creature can't attack or block for as long as you control Extraction Specialist.
+        // When Extraction Specialist enters the battlefield, return target creature card with mana value 2 or less from your graveyard to the battlefield.
+        // That creature can't attack or block for as long as you control Extraction Specialist.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExtractionSpecialistEffect());
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
@@ -86,7 +87,7 @@ class ExtractionSpecialistEffect extends OneShotEffect {
         }
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
         Permanent permanent = game.getPermanent(card.getId());
-        if (permanent == null
+        if (permanent != null
                 && source.getSourcePermanentIfItStillExists(game) != null
                 && source.isControlledBy(game.getControllerId(source.getSourceId()))) {
             game.addEffect(new CantAttackBlockTargetEffect(Duration.WhileControlled)

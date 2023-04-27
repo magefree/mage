@@ -44,7 +44,7 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
     @Override
     public boolean canTarget(UUID objectId, Game game) {
 
-        // max targets limit reached (only selected can be choosen again)
+        // max targets limit reached (only selected can be chosen again)
         if (getMaxNumberOfTargets() > 0 && getTargets().size() >= getMaxNumberOfTargets()) {
             return getTargets().contains(objectId);
         }
@@ -60,7 +60,7 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
     @Override
     public boolean canTarget(UUID objectId, Ability source, Game game) {
 
-        // max targets limit reached (only selected can be choosen again)
+        // max targets limit reached (only selected can be chosen again)
         if (getMaxNumberOfTargets() > 0 && getTargets().size() >= getMaxNumberOfTargets()) {
             return getTargets().contains(objectId);
         }
@@ -147,7 +147,7 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
 
-        // max targets limit reached (only selected can be choosen again)
+        // max targets limit reached (only selected can be chosen again)
         if (getMaxNumberOfTargets() > 0 && getTargets().size() >= getMaxNumberOfTargets()) {
             possibleTargets.addAll(getTargets());
             return possibleTargets;
@@ -181,7 +181,7 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
 
-        // max targets limit reached (only selected can be choosen again)
+        // max targets limit reached (only selected can be chosen again)
         if (getMaxNumberOfTargets() > 0 && getTargets().size() >= getMaxNumberOfTargets()) {
             possibleTargets.addAll(getTargets());
             return possibleTargets;

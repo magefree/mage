@@ -41,7 +41,7 @@ public final class DaringFiendbonder extends CardImpl {
         Ability ability = new ActivateAsSorceryActivatedAbility(
                 Zone.GRAVEYARD,
                 new AddCountersTargetEffect(CounterType.INDESTRUCTIBLE.createInstance()),
-                new ManaCostsImpl("{1}{B}")
+                new ManaCostsImpl<>("{1}{B}")
         );
         ability.addCost(new ExileSourceFromGraveCost());
         ability.addTarget(new TargetCreaturePermanent());

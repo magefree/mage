@@ -28,7 +28,7 @@ public final class AladdinsLamp extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{10}");
 
         // {X}, {T}: The next time you would draw a card this turn, instead look at the top X cards of your library, put all but one of them on the bottom of your library in a random order, then draw a card. X can't be 0.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AladdinsLampEffect(), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AladdinsLampEffect(), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
@@ -70,7 +70,7 @@ class AladdinsLampEffect extends ReplacementEffectImpl {
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, source.getManaCostsToPay().getX()));
         controller.lookAtCards(source, null, cards, game);
         TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to stay at the top of library"));
-        if (controller.choose(outcome, cards, target, game)) {
+        if (controller.choose(outcome, cards, target, source, game)) {
             cards.remove(target.getFirstTarget());
         }
         controller.putCardsOnBottomOfLibrary(cards, game, source, false);

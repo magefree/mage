@@ -38,7 +38,7 @@ public final class Songstitcher extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{W}: Prevent all combat damage that would be dealt this turn by target attacking creature with flying.
-        Ability ability = new SimpleActivatedAbility(new PreventDamageByTargetEffect(Duration.EndOfTurn, true), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(new PreventDamageByTargetEffect(Duration.EndOfTurn, true), new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

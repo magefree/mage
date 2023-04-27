@@ -32,7 +32,7 @@ public final class Nebuchadnezzar extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {X}, {T}: Choose a card name. Target opponent reveals X cards at random from their hand. Then that player discards all cards with that name revealed this way. Activate this ability only during your turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL), new ManaCostsImpl("{X}"), MyTurnCondition.instance);
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL), new ManaCostsImpl<>("{X}"), MyTurnCondition.instance);
         ability.addCost(new TapSourceCost());
         ability.addEffect(new NebuchadnezzarEffect());
         ability.addTarget(new TargetOpponent());

@@ -65,6 +65,7 @@ class SkullsnatcherTriggeredAbility extends TriggeredAbilityImpl {
 
     SkullsnatcherTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        setTriggerPhrase("Whenever {this} deals combat damage to a player, ");
     }
 
     SkullsnatcherTriggeredAbility(final SkullsnatcherTriggeredAbility ability) {
@@ -95,9 +96,4 @@ class SkullsnatcherTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} deals combat damage to a player, " ;
-   }
 }

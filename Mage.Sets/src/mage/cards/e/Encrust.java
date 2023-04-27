@@ -42,7 +42,7 @@ public final class Encrust extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted permanent doesn't untap during its controller's untap step and its activated abilities can't be activated.

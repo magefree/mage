@@ -23,7 +23,7 @@ public final class FaithlessLooting extends CardImpl {
         // Draw two cards, then discard two cards.
         this.getSpellAbility().addEffect(new DrawDiscardControllerEffect(2,2));
         // Flashback {2}{R}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{2}{R}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{2}{R}")));
     }
 
     private FaithlessLooting(final FaithlessLooting card) {

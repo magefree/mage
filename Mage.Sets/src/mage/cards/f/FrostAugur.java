@@ -31,7 +31,7 @@ public final class FrostAugur extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {S}, {T}: Look at the top card of your library. If it's a snow card, you may reveal it and put it into your hand.
-        Ability ability = new SimpleActivatedAbility(new FrostAugurEffect(), new ManaCostsImpl("{S}"));
+        Ability ability = new SimpleActivatedAbility(new FrostAugurEffect(), new ManaCostsImpl<>("{S}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

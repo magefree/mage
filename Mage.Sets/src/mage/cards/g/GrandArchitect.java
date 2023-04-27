@@ -51,7 +51,7 @@ public final class GrandArchitect extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, boostFilter, true)));
 
         // {U}: Target artifact creature becomes blue until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrandArchitectEffect(), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrandArchitectEffect(), new ManaCostsImpl<>("{U}"));
         ability.addTarget(new TargetPermanent(targetFilter));
         this.addAbility(ability);
 

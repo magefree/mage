@@ -51,7 +51,6 @@ public class RanarTheEverWatchfulTest extends CardTestPlayerBase {
 
         setStopAt(4, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Boar Token", 3); // created token by Curse
         assertPermanentCount(playerA, "Spirit Token", 1); // created token by Ranar
@@ -81,8 +80,7 @@ public class RanarTheEverWatchfulTest extends CardTestPlayerBase {
         
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
-        
+
         assertPermanentCount(playerA, "Spirit Token", 1); // created token by Ranar
         assertPermanentCount(playerB, "Spirit Token", 0); // no Spirit tokens for the other player
     }

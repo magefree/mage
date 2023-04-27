@@ -19,7 +19,7 @@ public final class MakeDisappear extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Casualty 1
-        this.addAbility(new CasualtyAbility(this, 1));
+        this.addAbility(new CasualtyAbility(1));
 
         // Counter target spell unless its controller pays {2}.
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(2)));

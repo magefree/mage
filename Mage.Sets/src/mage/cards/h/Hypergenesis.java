@@ -31,7 +31,7 @@ public final class Hypergenesis extends CardImpl {
         this.color.setGreen(true);
 
         // Suspend 3-{1}{G}{G}
-        this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{1}{G}{G}"), this));
+        this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{1}{G}{G}"), this));
 
         // Starting with you, each player may put an artifact, creature, enchantment, or land card from their hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield.
         this.getSpellAbility().addEffect(new HypergenesisEffect());

@@ -110,6 +110,7 @@ class DropOfHoneyStateTriggeredAbility extends StateTriggeredAbility {
 
     public DropOfHoneyStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
+        setTriggerPhrase("When there are no creatures on the battlefield, ");
     }
 
     public DropOfHoneyStateTriggeredAbility(final DropOfHoneyStateTriggeredAbility ability) {
@@ -124,10 +125,5 @@ class DropOfHoneyStateTriggeredAbility extends StateTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return game.getBattlefield().count(StaticFilters.FILTER_PERMANENT_CREATURES, this.getControllerId(), this, game) == 0;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When there are no creatures on the battlefield, " ;
     }
 }

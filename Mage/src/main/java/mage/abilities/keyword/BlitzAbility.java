@@ -15,6 +15,7 @@ import mage.cards.Card;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
+import mage.constants.TimingRule;
 import mage.game.Game;
 import mage.target.targetpointer.FixedTarget;
 
@@ -42,6 +43,7 @@ public class BlitzAbility extends SpellAbility {
         ability.setRuleVisible(false);
         addSubAbility(ability);
         this.ruleAdditionalCostsVisible = false;
+        this.timing = TimingRule.SORCERY;
     }
 
     private BlitzAbility(final BlitzAbility ability) {

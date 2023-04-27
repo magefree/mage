@@ -50,15 +50,14 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
     public PayCostToAttackBlockEffectImpl(Duration duration, Outcome outcome, RestrictType restrictType, Cost cost) {
         super(duration, outcome, false);
         this.restrictType = restrictType;
-        this.cost = cost;
-        this.manaCosts = null;
-    }
-
-    public PayCostToAttackBlockEffectImpl(Duration duration, Outcome outcome, RestrictType restrictType, ManaCosts manaCosts) {
-        super(duration, outcome, false);
-        this.restrictType = restrictType;
-        this.cost = null;
-        this.manaCosts = manaCosts;
+        if (cost instanceof ManaCosts) {
+            this.cost = null;
+            this.manaCosts = (ManaCosts) cost;
+        }
+        else {
+            this.cost = cost;
+            this.manaCosts = null;
+        }
     }
 
     public PayCostToAttackBlockEffectImpl(final PayCostToAttackBlockEffectImpl effect) {

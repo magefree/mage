@@ -28,7 +28,7 @@ public final class DiscipleOfMalice extends CardImpl {
         // Protection from white
         this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private DiscipleOfMalice(final DiscipleOfMalice card) {

@@ -43,7 +43,7 @@ public final class YisanTheWandererBard extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{G}, {T}, Put a verse counter on Yisan, the Wanderer Bard: Search your library for a creature card with converted mana cost equal to the number of verse counters on Yisan, put it onto the battlefield, then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new YisanTheWandererBardEffect(), new ManaCostsImpl("{2}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new YisanTheWandererBardEffect(), new ManaCostsImpl<>("{2}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new PutCountersSourceCost(CounterType.VERSE.createInstance()));
         this.addAbility(ability);

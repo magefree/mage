@@ -47,9 +47,13 @@ public class BiovisionaryTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
         setChoice(playerA, true);
         setChoice(playerA, "Biovisionary");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
         setChoice(playerA, true);
         setChoice(playerA, "Biovisionary");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
         setChoice(playerA, true);
         setChoice(playerA, "Biovisionary");

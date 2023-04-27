@@ -34,7 +34,7 @@ public final class RonomHulk extends CardImpl {
         // Protection from snow
         this.addAbility(new ProtectionAbility(filter));
         // Cumulative upkeep {1}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")));
     }
 
     private RonomHulk(final RonomHulk card) {

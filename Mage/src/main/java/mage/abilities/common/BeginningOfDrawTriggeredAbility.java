@@ -28,6 +28,7 @@ public class BeginningOfDrawTriggeredAbility extends TriggeredAbilityImpl {
     public BeginningOfDrawTriggeredAbility(Zone zone, Effect effect, TargetController targetController, boolean isOptional) {
         super(zone, effect, isOptional);
         this.targetController = targetController;
+        setTriggerPhrase(generateTriggerPhrase());
     }
 
     public BeginningOfDrawTriggeredAbility(final BeginningOfDrawTriggeredAbility ability) {
@@ -101,8 +102,7 @@ public class BeginningOfDrawTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    @Override
-    public String getTriggerPhrase() {
+    private String generateTriggerPhrase() {
         switch (targetController) {
             case ACTIVE:
             case YOU:

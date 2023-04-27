@@ -17,6 +17,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -34,7 +35,7 @@ public final class MetamorphicAlteration extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // As Metamorphic Alteration enters the battlefield, choose a creature.
@@ -123,7 +124,9 @@ class MetamorphicAlterationEffect extends ContinuousEffectImpl {
         permanent.setName(copied.getName());
         permanent.getManaCost().clear();
         permanent.getManaCost().addAll(copied.getManaCost());
-        permanent.setExpansionSetCode(copied.getExpansionSetCode());
+
+        CardUtil.copySetAndCardNumber(permanent, copied);
+
         permanent.getSuperType().clear();
         for (SuperType t : copied.getSuperType()) {
             permanent.addSuperType(t);
@@ -139,8 +142,8 @@ class MetamorphicAlterationEffect extends ContinuousEffectImpl {
         for (Ability ability : copied.getAbilities()) {
             permanent.addAbility(ability, source.getSourceId(), game);
         }
-        permanent.getPower().setValue(copied.getPower().getBaseValueModified());
-        permanent.getToughness().setValue(copied.getToughness().getBaseValueModified());
+        permanent.getPower().setModifiedBaseValue(copied.getPower().getBaseValue());
+        permanent.getToughness().setModifiedBaseValue(copied.getToughness().getBaseValue());
         return true;
     }
 

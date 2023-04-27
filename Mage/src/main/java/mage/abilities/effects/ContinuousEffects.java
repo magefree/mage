@@ -201,7 +201,7 @@ public class ContinuousEffects implements Serializable {
         updateTimestamps(timestampGroupName, layerEffects);
         layerEffects.sort(Comparator.comparingLong(ContinuousEffect::getOrder));
         /* debug effects apply order:
-        if (game.getStep() != null) System.out.println("layr - " + game.getTurnNum() + "." + game.getStep().getType() + ": layers " + layerEffects.size()
+        if (game.getStep() != null) System.out.println("layr - " + game.getTurnNum() + "." + game.getTurnStepType() + ": layers " + layerEffects.size()
                 + " - " + layerEffects.stream().map(l -> l.getClass().getSimpleName()).collect(Collectors.joining(", "))
                 + " - " + callName);
         //*/
@@ -338,7 +338,7 @@ public class ContinuousEffects implements Serializable {
      * event
      */
     private Map<ReplacementEffect, Set<Ability>> getApplicableReplacementEffects(GameEvent event, Game game) {
-        Map<ReplacementEffect, Set<Ability>> replaceEffects = new HashMap<>();
+        Map<ReplacementEffect, Set<Ability>> replaceEffects = new LinkedHashMap<>();
         if (auraReplacementEffect.checksEventType(event, game) && auraReplacementEffect.applies(event, null, game)) {
             replaceEffects.put(auraReplacementEffect, null);
         }
@@ -764,15 +764,6 @@ public class ContinuousEffects implements Serializable {
      */
     public void applySpliceEffects(Ability abilityToModify, Game game) {
         // add effects from splice card to spell ability on activate/cast
-
-        // splice spell - spell can't be spliced again
-        if (CardUtil.isSpliceAbility(abilityToModify, game)) {
-            return;
-        }
-        // fused spell - can be spliced only to main fused ability, not to parts
-        if (CardUtil.isFusedPartAbility(abilityToModify, game)) {
-            return;
-        }
 
         List<SpliceCardEffect> spliceEffects = getApplicableSpliceCardEffects(game, abilityToModify.getControllerId());
         // get the applyable splice abilities
@@ -1282,12 +1273,12 @@ public class ContinuousEffects implements Serializable {
     }
 
     public synchronized void addEffect(ContinuousEffect effect, Ability source) {
-        if (effect == null) {
-            logger.error("Effect is null: " + source.toString());
-            return;
-        } else if (source == null) {
-            logger.warn("Adding effect without ability : " + effect);
+        if (effect == null || source == null) {
+            // addEffect(effect, source) need a non-null source
+            throw new IllegalArgumentException("Wrong code usage. Effect and source can't be null here: "
+                    + source + "; " + effect);
         }
+
         switch (effect.getEffectType()) {
             case REPLACEMENT:
             case REDIRECTION:
@@ -1322,9 +1313,12 @@ public class ContinuousEffects implements Serializable {
             case CONTINUOUS_RULE_MODIFICATION:
                 continuousRuleModifyingEffects.addEffect((ContinuousRuleModifyingEffect) effect, source);
                 break;
-            default:
+            case CONTINUOUS:
+            case ONESHOT:
                 layeredEffects.addEffect(effect, source);
                 break;
+            default:
+                throw new IllegalArgumentException("Unknown effect type: " + effect.getEffectType());
         }
     }
 

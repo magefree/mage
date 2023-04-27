@@ -35,7 +35,7 @@ public final class GenjuOfTheSpires extends CardImpl {
         TargetPermanent auraTarget = new TargetLandPermanent(FILTER);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.PutCreatureInPlay));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // {2}: Enchanted Mountain becomes a 6/1 red Spirit creature until end of turn. It's still a land.

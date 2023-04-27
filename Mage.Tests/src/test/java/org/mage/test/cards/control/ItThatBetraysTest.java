@@ -28,6 +28,7 @@ public class ItThatBetraysTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "It That Betrays");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Pay 1 life, Sacrifice");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}, Pay 1 life, Sacrifice");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

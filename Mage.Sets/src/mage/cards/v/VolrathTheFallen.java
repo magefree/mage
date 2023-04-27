@@ -40,7 +40,7 @@ public final class VolrathTheFallen extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 effect,
-                new ManaCostsImpl("{1}{B}"));
+                new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new DiscardCardCost(StaticFilters.FILTER_CARD_CREATURE));
         this.addAbility(ability);
     }

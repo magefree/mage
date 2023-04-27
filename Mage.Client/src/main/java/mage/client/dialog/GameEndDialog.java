@@ -104,9 +104,12 @@
                              .append(sdf.format(gameEndView.getStartTime()))
                              .append('_').append(gameEndView.getMatchView().getGameType())
                              .append('_').append(gameEndView.getMatchView().getGames().size())
-                             .append(".txt").toString();
+                             .append(".html").toString();
                      PrintWriter out = new PrintWriter(fileName);
-                     out.print(gamePanel.getGameLog());
+                     String log = gamePanel.getGameLog();
+                     log = log.replace("<body>", "<body style=\"background-color:black\">");
+                     log = log.replace("<font color=\"#CCCC33\">", "<br><font color=\"#CCCC33\">"); //The color is TIMESTAMP_COLOR and we can utilize it to add line breaks to new lines
+                     out.print(log);
                      out.close();
                  }
              }

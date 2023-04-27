@@ -38,7 +38,7 @@ public final class TelJiladLifebreather extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {G}, {tap}, Sacrifice a Forest: Regenerate target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl("{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl<>("{G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetCreaturePermanent());

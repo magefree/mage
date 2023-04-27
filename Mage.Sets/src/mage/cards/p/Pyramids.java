@@ -41,7 +41,7 @@ public final class Pyramids extends CardImpl {
         // {2}: Choose one - Destroy target Aura attached to a land; 
         Effect effect = new DestroyTargetEffect();
         effect.setText("Destroy target Aura attached to a land");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}"));
         //or the next time target land would be destroyed this turn, remove all damage marked on it instead.
         Mode mode = new Mode(new PreventDamageToTargetEffect(Duration.EndOfTurn)); //back in the day this was not technically "damage", hopefully this modern description will work nowadays
         mode.addTarget(new TargetLandPermanent());

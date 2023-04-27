@@ -7,7 +7,6 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.constants.*;
 import mage.cards.CardImpl;
@@ -58,6 +57,7 @@ class CarthTheLionTriggeredAbility extends TriggeredAbilityImpl {
     public CarthTheLionTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LookLibraryAndPickControllerEffect(
                 7, 1, filter, PutCards.HAND, PutCards.BOTTOM_RANDOM));
+        setTriggerPhrase("Whenever {this} enters the battlefield or a planeswalker you control dies, ");
     }
 
     private CarthTheLionTriggeredAbility(final CarthTheLionTriggeredAbility ability) {
@@ -89,11 +89,6 @@ class CarthTheLionTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} enters the battlefield or a planeswalker you control dies, " ;
     }
 }
 

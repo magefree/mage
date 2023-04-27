@@ -48,7 +48,7 @@ public final class Skitterskin extends CardImpl {
         // {1}{B}: Regenerate Skitterskin. Activate this ability only if you control another colorless creature.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
                 new RegenerateSourceEffect(),
-                new ManaCostsImpl("{1}{B}"),
+                new ManaCostsImpl<>("{1}{B}"),
                 new PermanentsOnTheBattlefieldCondition(filter));
         this.addAbility(ability);
     }

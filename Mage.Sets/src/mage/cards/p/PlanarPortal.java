@@ -23,7 +23,7 @@ public final class PlanarPortal extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
         // {6}, {tap}: Search your library for a card and put that card into your hand. Then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false, true), new ManaCostsImpl("{6}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false, true), new ManaCostsImpl<>("{6}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

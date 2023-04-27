@@ -21,7 +21,7 @@ public abstract class PlainTextDeckImporter extends DeckImporter {
     /**
      * Import deck from text file
      *
-     * @param file              file to import
+     * @param fileName          file to import
      * @param errorMessages     you can setup output messages to showup to user (set null for fatal exception on messages.count > 0)
      * @param saveAutoFixedFile save fixed deck file (if any fixes applied)
      * @return decks list

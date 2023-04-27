@@ -1,7 +1,6 @@
 package mage.game.permanent.token;
 
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -20,7 +19,7 @@ public final class TitaniaProtectorOfArgothElementalToken extends TokenImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
 
-        availableImageSetCodes = Arrays.asList("C14", "CMA", "MH2");
+        availableImageSetCodes = Arrays.asList("C14", "CMA", "MH2", "BRC");
     }
 
     public TitaniaProtectorOfArgothElementalToken(final TitaniaProtectorOfArgothElementalToken token) {

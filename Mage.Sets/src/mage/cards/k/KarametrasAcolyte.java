@@ -26,8 +26,7 @@ public final class KarametrasAcolyte extends CardImpl {
 
         // {T}: Add an amount of {G} equal to your devotion to green.
         this.addAbility(new DynamicManaAbility(
-                Mana.GreenMana(1), DevotionCount.G, "Add an amount of {G} equal to your devotion to green. " +
-                "(Each {G} in the mana costs of permanents you control counts towards your devotion to green.)"
+                Mana.GreenMana(1), DevotionCount.G, "Add an amount of {G} equal to your devotion to green. " + DevotionCount.G.getReminder()
         ).addHint(DevotionCount.G.getHint()));
     }
 

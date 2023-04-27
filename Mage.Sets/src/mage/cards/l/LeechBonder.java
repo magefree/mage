@@ -26,6 +26,7 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -46,7 +47,7 @@ public final class LeechBonder extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(2)), "with two -1/-1 counters on it"));
 
         // {U}, {untap}: Move a counter from target creature onto another target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LeechBonderEffect(), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LeechBonderEffect(), new ManaCostsImpl<>("{U}"));
         ability.addCost(new UntapSourceCost());
         // target 1
         TargetCreaturePermanent target1 = new TargetCreaturePermanent(new FilterCreaturePermanent("creature to remove counter from"));
@@ -100,7 +101,7 @@ class LeechBonderEffect extends OneShotEffect {
             return false;
         }
 
-        Set<String> possibleChoices = new HashSet<>(fromPermanent.getCounters(game).keySet());
+        Set<String> possibleChoices = new LinkedHashSet<>(fromPermanent.getCounters(game).keySet());
         if (possibleChoices.size() == 0) {
             return false;
         }

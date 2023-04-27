@@ -1,9 +1,8 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.abilities.keyword.SpliceOntoArcaneAbility;
+import mage.abilities.keyword.SpliceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -23,9 +22,9 @@ public final class ConsumingVortex extends CardImpl {
 
         // Return target creature to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent().withChooseHint("return to hand"));
         // Splice onto Arcane {3}{U}
-        this.addAbility(new SpliceOntoArcaneAbility("{3}{U}"));
+        this.addAbility(new SpliceAbility(SpliceAbility.ARCANE, "{3}{U}"));
     }
 
     private ConsumingVortex(final ConsumingVortex card) {

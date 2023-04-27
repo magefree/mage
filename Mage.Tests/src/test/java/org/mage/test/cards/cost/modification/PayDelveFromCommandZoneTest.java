@@ -28,7 +28,6 @@ public class PayDelveFromCommandZoneTest extends CardTestCommander4Players {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Tasigur, the Golden Fang", 1);
     }

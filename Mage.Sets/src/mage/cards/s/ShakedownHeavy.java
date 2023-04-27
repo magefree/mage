@@ -69,7 +69,7 @@ class ShakedownHeavyEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player defender = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (controller == null || defender == null || !controller.chooseUse(
+        if (controller == null || defender == null || !defender.chooseUse(
                 outcome, "Have " + controller.getName() + " draw a card?", source, game
         )) {
             return false;

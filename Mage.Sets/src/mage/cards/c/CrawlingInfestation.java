@@ -48,6 +48,7 @@ class CrawlingInfestationTriggeredAbility extends TriggeredAbilityImpl {
     public CrawlingInfestationTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new InsectToken()));
         this.setTriggersOnce(true);
+        setTriggerPhrase("Whenever one or more creature cards are put into your graveyard from anywhere during your turn, ");
     }
 
     private CrawlingInfestationTriggeredAbility(final CrawlingInfestationTriggeredAbility ability) {
@@ -72,10 +73,5 @@ class CrawlingInfestationTriggeredAbility extends TriggeredAbilityImpl {
             return card != null && !card.isCopy() && card.isCreature(game) && card.isOwnedBy(controllerId);
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever one or more creature cards are put into your graveyard from anywhere during your turn, ";
     }
 }

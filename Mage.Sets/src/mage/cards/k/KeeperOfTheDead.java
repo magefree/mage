@@ -50,7 +50,7 @@ public final class KeeperOfTheDead extends CardImpl {
 
         // {B}, {T}: Choose target opponent who had at least two fewer creature cards in their graveyard than you did as you activated this ability. Destroy target nonblack creature they control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KeeperOfTheDeadEffect(), new TapSourceCost());
-        ability.addCost(new ManaCostsImpl("{B}"));
+        ability.addCost(new ManaCostsImpl<>("{B}"));
         ability.addTarget(new TargetPlayer(1, 1, false, filter));
         ability.addTarget(new KeeperOfTheDeadCreatureTarget());
         this.addAbility(ability);

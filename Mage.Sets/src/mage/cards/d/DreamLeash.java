@@ -32,7 +32,7 @@ public final class DreamLeash extends CardImpl {
         auraTarget.withChooseHint("must be tapped");
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // You can't choose an untapped permanent as Dream Leash's target as you cast Dream Leash.

@@ -33,7 +33,7 @@ public final class SadisticSacrament extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new SearchLibraryAndExileTargetEffect(15, true),
                 new SearchLibraryAndExileTargetEffect(3, true),
-                KickedCondition.instance, ruleText
+                KickedCondition.ONCE, ruleText
         ));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

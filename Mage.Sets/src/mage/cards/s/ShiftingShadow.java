@@ -33,7 +33,7 @@ public final class ShiftingShadow extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature has haste and “At the beginning of your upkeep, destroy this creature. Reveal cards from the top of your library until you reveal a creature card.
         // Put that card onto the battlefield and attach Shifting Shadow to it, then put all other cards revealed this way on the bottom of your library in a random order.”
@@ -90,18 +90,18 @@ class ShiftingShadowGainEffect extends ContinuousEffectImpl {
 class ShiftingShadowEffect extends OneShotEffect {
 
     private final MageObjectReference mor;
-    private final String name;
 
     ShiftingShadowEffect(Permanent permanent, Game game) {
         super(Outcome.Benefit);
         this.mor = new MageObjectReference(permanent, game);
-        this.name = permanent.getName();
+        this.staticText = "destroy this creature. Reveal cards from the top of your library until you reveal a creature card. " +
+                "Put that card onto the battlefield and attach " + permanent.getName() + " to it, then put all other cards " +
+                "revealed this way on the bottom of your library in a random order.";
     }
 
     private ShiftingShadowEffect(final ShiftingShadowEffect effect) {
         super(effect);
         this.mor = effect.mor;
-        this.name = effect.name;
     }
 
     @Override
@@ -146,12 +146,5 @@ class ShiftingShadowEffect extends OneShotEffect {
         cards.retainZone(Zone.LIBRARY, game);
         player.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "destroy this creature. Reveal cards from the top of your library until you reveal a creature card. " +
-                "Put that card onto the battlefield and attach " + name + " to it, then put all other cards " +
-                "revealed this way on the bottom of your library in a random order.";
     }
 }

@@ -39,7 +39,7 @@ public final class WellgabberApothecary extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {1}{W} : Prevent all damage that would be dealt to target tapped Merfolk or Kithkin creatuer this turn
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE), new ManaCostsImpl("{1}{W}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE), new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
 

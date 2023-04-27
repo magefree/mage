@@ -24,6 +24,8 @@ import mage.target.targetpointer.FixedTarget;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -42,12 +44,15 @@ public final class HandOfVecna extends CardImpl {
         ));
 
         // Equip—Pay 1 life for each card in your hand.
-        this.addAbility(new EquipAbility(Outcome.Benefit, new PayLifeCost(
-                CardsInControllerHandCount.instance, "1 life for each card in your hand"
-        )));
+        this.addAbility(new EquipAbility(
+                Outcome.Benefit,
+                new PayLifeCost(
+                CardsInControllerHandCount.instance, "1 life for each card in your hand"),
+                false
+        ));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private HandOfVecna(final HandOfVecna card) {

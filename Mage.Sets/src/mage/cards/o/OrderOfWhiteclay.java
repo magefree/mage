@@ -41,7 +41,7 @@ public final class OrderOfWhiteclay extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {1}{W}{W}, {untap}: Return target creature card with converted mana cost 3 or less from your graveyard to the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl("{1}{W}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl<>("{1}{W}{W}"));
         ability.addCost(new UntapSourceCost());
         Target target = new TargetCardInYourGraveyard(filter);
         ability.addTarget(target);

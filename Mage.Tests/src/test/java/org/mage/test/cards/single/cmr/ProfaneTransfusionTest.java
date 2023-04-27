@@ -30,7 +30,6 @@ public class ProfaneTransfusionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 16);
         assertLife(playerB, 24);
@@ -56,7 +55,6 @@ public class ProfaneTransfusionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 24);
         assertLife(playerB, 16);
@@ -82,7 +80,6 @@ public class ProfaneTransfusionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 16);
         assertLife(playerB, 32);
@@ -101,12 +98,13 @@ public class ProfaneTransfusionTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, skullcrack, playerB);
         addTarget(playerA, playerA);
         addTarget(playerA, playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, transfusion);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 17);

@@ -9,8 +9,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
-import mage.constants.Duration;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -33,7 +32,7 @@ public final class SaprolingBurstToken extends TokenImpl {
         this.color.setGreen(true);
         this.subtype.add(SubType.SAPROLING);
         this.cardType.add(CardType.CREATURE);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(new SaprolingBurstTokenDynamicValue(saprolingBurstMOR), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetBasePowerToughnessSourceEffect(new SaprolingBurstTokenDynamicValue(saprolingBurstMOR))));
     }
 
     public SaprolingBurstToken(final SaprolingBurstToken token) {

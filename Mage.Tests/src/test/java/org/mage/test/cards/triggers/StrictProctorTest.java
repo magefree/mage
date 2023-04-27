@@ -33,8 +33,7 @@ public class StrictProctorTest extends CardTestPlayerBase {
         
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
-        
+
         assertLife(playerA, 23); // player gains the 3 life
         
     }
@@ -56,8 +55,7 @@ public class StrictProctorTest extends CardTestPlayerBase {
         
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
-        
+
         assertLife(playerA, 20); // player does not gain the 3 life
         
     }

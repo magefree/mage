@@ -14,6 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -65,10 +66,9 @@ public final class BombSquad extends CardImpl {
 
 class BombSquadTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
     public BombSquadTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BombSquadDamgeEffect(), false);
+        setTriggerPhrase("Whenever a creature has four or more fuse counters on it, ");
     }
 
     public BombSquadTriggeredAbility(final BombSquadTriggeredAbility ability) {
@@ -89,7 +89,7 @@ class BombSquadTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getData().equals(CounterType.FUSE.getName())) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (filter.match(permanent, game)) {
+            if (StaticFilters.FILTER_PERMANENT_CREATURE.match(permanent, game)) {
                 if (4 <= permanent.getCounters(game).getCount(CounterType.FUSE)) {
                     for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(permanent, game));
@@ -99,11 +99,6 @@ class BombSquadTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature has four or more fuse counters on it, " ;
     }
 }
 

@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
@@ -12,6 +11,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,7 +28,7 @@ public final class Fogwalker extends CardImpl {
 
         // Skulk
         this.addAbility(new SkulkAbility());
-        // When Fogwalker enters the battlefield, target creature an opponent controls doesn't untap during it controler's next untap step.
+        // When Fogwalker enters the battlefield, target creature an opponent controls doesn't untap during its controller's next untap step.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DontUntapInControllersNextUntapStepTargetEffect());
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);

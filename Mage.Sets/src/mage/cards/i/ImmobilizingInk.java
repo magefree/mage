@@ -39,7 +39,7 @@ public final class ImmobilizingInk extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         
         // Enchanted creature doesn't untap during its controller's untap step.
@@ -49,7 +49,7 @@ public final class ImmobilizingInk extends CardImpl {
                                                     Duration.WhileOnBattlefield,"Enchanted creature doesn't untap during its controller's untap step.")));
         
         // Enchanted creature has "{1}, Discard a card: Untap this creature."
-        Ability untapAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{1}"));
+        Ability untapAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl<>("{1}"));
         untapAbility.addCost(new DiscardTargetCost(new TargetCardInHand()));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
                                                 new GainAbilityAttachedEffect(untapAbility,

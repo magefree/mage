@@ -34,10 +34,10 @@ public final class TidalControl extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");
 
         // Cumulative upkeep-Pay {2}.
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{2}")));
 
         // Pay 2 life or {2}: Counter target red or green spell. Any player may activate this ability.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new OrCost("pay 2 life or pay {2}", new PayLifeCost(2), new ManaCostsImpl("{2}")));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new OrCost("pay 2 life or pay {2}", new PayLifeCost(2), new ManaCostsImpl<>("{2}")));
         ability.addTarget(new TargetSpell(filter));
         ability.setMayActivate(TargetController.ANY);
         ability.addEffect(new InfoEffect("Any player may activate this ability"));

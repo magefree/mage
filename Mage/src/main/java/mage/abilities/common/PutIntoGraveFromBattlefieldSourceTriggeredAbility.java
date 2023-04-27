@@ -23,6 +23,7 @@ public class PutIntoGraveFromBattlefieldSourceTriggeredAbility extends Triggered
         super(Zone.ALL, effect, optional);
         setLeavesTheBattlefieldTrigger(true);
         this.onlyToControllerGraveyard = onlyToControllerGraveyard;
+        setTriggerPhrase("When {this} is put into " + (onlyToControllerGraveyard ? "your" : "a") + " graveyard from the battlefield, ");
     }
 
     public PutIntoGraveFromBattlefieldSourceTriggeredAbility(final PutIntoGraveFromBattlefieldSourceTriggeredAbility ability) {
@@ -53,10 +54,5 @@ public class PutIntoGraveFromBattlefieldSourceTriggeredAbility extends Triggered
         }
         this.getEffects().setValue("permanentWasCreature", permanent.isCreature(game));
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When {this} is put into " + (onlyToControllerGraveyard ? "your" : "a") + " graveyard from the battlefield, ";
     }
 }

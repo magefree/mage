@@ -38,7 +38,7 @@ public final class TidalFlats extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}");
 
         // {U}{U}: For each attacking creature without flying, its controller may pay {1}. If they don't, creatures you control blocking that creature gain first strike until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TidalFlatsEffect(), new ManaCostsImpl("{U}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TidalFlatsEffect(), new ManaCostsImpl<>("{U}{U}")));
     }
 
     private TidalFlats(final TidalFlats card) {
@@ -83,7 +83,7 @@ class TidalFlatsEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Cost cost = new ManaCostsImpl("{1}");
+        Cost cost = new ManaCostsImpl<>("{1}");
         List<Permanent> affectedPermanents = new ArrayList<>();
         for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
             cost.clearPaid();

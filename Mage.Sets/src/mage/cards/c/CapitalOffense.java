@@ -28,7 +28,7 @@ public final class CapitalOffense extends CardImpl {
 
         // target creature gets -x/-x until end of turn, where x is the number of times a capital letter appears in its rules text. (ignore reminder text and flavor text.)
         this.getSpellAbility().addEffect(new BoostTargetEffect(
-                capitaloffensecount.instance, capitaloffensecount.instance, Duration.EndOfTurn, true
+                capitaloffensecount.instance, capitaloffensecount.instance, Duration.EndOfTurn
         ).setText("target creature gets -x/-x until end of turn, where x is the number of times " +
                 "a capital letter appears in its rules text. <i>(ignore reminder text and flavor text.)</i>"
         ));

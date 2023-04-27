@@ -106,7 +106,7 @@ class OpenSeasonEffect extends OneShotEffect {
 
     public OpenSeasonEffect() {
         super(Outcome.LoseLife);
-        staticText = "that creature's controler loses 2 life. Each other player gains 2 life";
+        staticText = "that creature's controller loses 2 life. Each other player gains 2 life";
     }
 
     public OpenSeasonEffect(final OpenSeasonEffect effect) {

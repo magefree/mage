@@ -75,8 +75,7 @@ enum MageDuelCondition implements Condition {
                 .stream()
                 .filter(Objects::nonNull)
                 .filter(spell -> spell.isInstantOrSorcery(game))
-                .map(Spell::getSourceId)
-                .anyMatch(source.getSourceId()::equals);
+                .anyMatch(spell -> !spell.getSourceId().equals(source.getSourceId()));
     }
 
     @Override

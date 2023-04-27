@@ -1,9 +1,8 @@
 package mage.cards.q;
 
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAttachToTarget;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -13,9 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -33,14 +30,11 @@ public final class QuickDrawDagger extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // When Quick-Draw Dagger enters the battlefield, attach it to target creature you control. That creature gains first strike until end of turn.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new AttachEffect(
-                Outcome.BoostCreature, "attach it to target creature you control"
-        ), false);
+        Ability ability = new EntersBattlefieldAttachToTarget();
         ability.addEffect(new GainAbilityTargetEffect(
                 FirstStrikeAbility.getInstance(), Duration.EndOfTurn,
                 "That creature gains first strike until end of turn"
         ));
-        ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
 
         // Equipped creature gets +1/+1.

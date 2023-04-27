@@ -51,7 +51,7 @@ public final class MagusOfTheOrder extends CardImpl {
         // {G}, {T}, Sacrifice Magus of the Order and another green creature: Search your library for a green creature card and put it onto the battlefield. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(new SearchLibraryPutInPlayEffect(
                 new TargetCardInLibrary(1, filter), false, true
-        ), new ManaCostsImpl("{G}"));
+        ), new ManaCostsImpl<>("{G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new CompositeCost(
                 new SacrificeSourceCost(), new SacrificeTargetCost(new TargetControlledPermanent(filter2)),

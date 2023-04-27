@@ -28,7 +28,7 @@ public final class SkeletalChangeling extends CardImpl {
         // Changeling
         this.addAbility(new ChangelingAbility());
         // {1}{B}: Regenerate Skeletal Changeling.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{B}")));
     }
 
     private SkeletalChangeling(final SkeletalChangeling card) {

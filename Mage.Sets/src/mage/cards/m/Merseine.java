@@ -39,7 +39,7 @@ public final class Merseine extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Merseine enters the battlefield with three net counters on it.
         Effect effect = new AddCountersSourceEffect(CounterType.NET.createInstance(3));

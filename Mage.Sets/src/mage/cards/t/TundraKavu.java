@@ -1,9 +1,8 @@
 
 package mage.cards.t;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -66,25 +65,18 @@ class TundraKavuEffect extends BecomesBasicLandTargetEffect {
     }
 
     @Override
-    public void init(Ability source, Game game) {
+    protected void chooseLandType(Ability source, Game game) {
         landTypes.clear();
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Set<String> choiceSet = new LinkedHashSet<>();
-            choiceSet.add("Island");
-            choiceSet.add("Plains");
-            ChoiceImpl choice = new ChoiceImpl(true, ChoiceHintType.CARD);
-            choice.setChoices(choiceSet);
-            choice.setMessage("Choose a basic land type");
-            if (!controller.choose(outcome, choice, game)) {
-                discard();
-                return;
-            }
+
+        ChoiceImpl choice = new ChoiceImpl(true, ChoiceHintType.CARD);
+        choice.setChoices(new HashSet<>(Arrays.asList("Plains", "Island")));
+        choice.setMessage("Choose a basic land type");
+
+        if (controller != null && controller.choose(outcome, choice, game)) {
             landTypes.add(SubType.byDescription(choice.getChoice()));
         } else {
             this.discard();
         }
-
-        super.init(source, game);
     }
 }

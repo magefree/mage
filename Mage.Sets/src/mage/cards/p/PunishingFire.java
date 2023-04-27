@@ -45,6 +45,7 @@ class PunishingFireTriggeredAbility extends TriggeredAbilityImpl {
 
     public PunishingFireTriggeredAbility() {
         super(Zone.GRAVEYARD, new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl<>("{R}")));
+        setTriggerPhrase("Whenever an opponent gains life, ");
     }
 
     public PunishingFireTriggeredAbility(final PunishingFireTriggeredAbility ability) {
@@ -64,10 +65,5 @@ class PunishingFireTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return game.getOpponents(this.controllerId).contains(event.getPlayerId());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever an opponent gains life, ";
     }
 }

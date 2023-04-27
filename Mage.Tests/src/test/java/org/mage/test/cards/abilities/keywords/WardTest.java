@@ -30,6 +30,5 @@ public class WardTest extends CardTestPlayerBase {
         assertExileCount("Healer's Hawk", 1);
         assertGraveyardCount(playerA, "Solitude", 1);
         assertPermanentCount(playerB, "Waterfall Aerialist", 1);
-        assertAllCommandsUsed();
     }
 }

@@ -29,10 +29,10 @@ public final class BaskingRootwalla extends CardImpl {
 
         // {1}{G}: Basking Rootwalla gets +2/+2 until end of turn. Activate this ability only once each turn.
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD,
-                new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{1}{G}")));
+                new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{G}")));
 
         // Madness {0}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{0}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{0}")));
     }
 
     private BaskingRootwalla(final BaskingRootwalla card) {

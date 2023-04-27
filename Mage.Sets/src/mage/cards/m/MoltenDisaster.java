@@ -78,14 +78,14 @@ class MoltenDisasterSplitSecondEffect extends ContinuousRuleModifyingEffectImpl 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL) {
-            if (KickedCondition.instance.apply(game, source)) {
+            if (KickedCondition.ONCE.apply(game, source)) {
                 return true;
             }
         }
         if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
             Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
             if (ability.isPresent() && !(ability.get() instanceof ActivatedManaAbilityImpl)) {
-                return KickedCondition.instance.apply(game, source);
+                return KickedCondition.ONCE.apply(game, source);
             }
         }
         return false;

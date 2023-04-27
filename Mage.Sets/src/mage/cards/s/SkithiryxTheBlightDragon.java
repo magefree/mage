@@ -36,8 +36,8 @@ public final class SkithiryxTheBlightDragon extends CardImpl {
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(InfectAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{B}")));
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}{B}")));
     }
 
     public SkithiryxTheBlightDragon (final SkithiryxTheBlightDragon card) {

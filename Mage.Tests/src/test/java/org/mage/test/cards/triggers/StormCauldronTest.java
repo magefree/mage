@@ -20,7 +20,6 @@ public class StormCauldronTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, "Mountain", 1);
         assertPermanentCount(playerA, "Mountain", 0);
@@ -57,7 +56,6 @@ public class StormCauldronTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Crystal Vein", 1);
         assertPermanentCount(playerA, "Mountain", 1);

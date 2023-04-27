@@ -18,7 +18,6 @@ public class DeathbloomThallidTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Saproling Token", 1);
 

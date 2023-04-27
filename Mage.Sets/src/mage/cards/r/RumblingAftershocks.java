@@ -55,6 +55,7 @@ class RumblingAftershocksTriggeredAbility extends TriggeredAbilityImpl {
 
     RumblingAftershocksTriggeredAbility() {
         super(Zone.BATTLEFIELD, new RumblingAftershocksDealDamageEffect(), true);
+        setTriggerPhrase("Whenever you cast a kicked spell, ");
     }
 
     RumblingAftershocksTriggeredAbility(final RumblingAftershocksTriggeredAbility ability) {
@@ -79,11 +80,6 @@ class RumblingAftershocksTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you cast a kicked spell, " ;
     }
 }
 

@@ -38,7 +38,7 @@ public final class LordOfShatterskullPass extends LevelerCard {
         this.toughness = new MageInt(3);
 
         // Level up {1}{R}
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{1}{R}")));
         // LEVEL 1-5
         // 6/6
         Abilities<Ability> abilities1 = new AbilitiesImpl<>();

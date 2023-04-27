@@ -46,7 +46,7 @@ public final class CavalierOfFlame extends CardImpl {
         // {1}{R}: Creatures you control get +1/+0 and gain haste until end of turn.
         Ability ability = new SimpleActivatedAbility(new BoostControlledEffect(
                 1, 0, Duration.EndOfTurn
-        ).setText("Creatures you control get +1/+0"), new ManaCostsImpl("{1}{R}"));
+        ).setText("Creatures you control get +1/+0"), new ManaCostsImpl<>("{1}{R}"));
         ability.addEffect(new GainAbilityControlledEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_PERMANENT_CREATURE

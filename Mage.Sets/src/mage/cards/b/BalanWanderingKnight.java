@@ -42,7 +42,7 @@ public final class BalanWanderingKnight extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         // {1}{W}: Attach all Equipment you control to Balan.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BalanWanderingKnightEffect(), new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BalanWanderingKnightEffect(), new ManaCostsImpl<>("{1}{W}")));
     }
 
     private BalanWanderingKnight(final BalanWanderingKnight card) {

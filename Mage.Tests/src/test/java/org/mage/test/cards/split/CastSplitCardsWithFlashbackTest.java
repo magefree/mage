@@ -31,7 +31,6 @@ public class CastSplitCardsWithFlashbackTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 3);
         assertExileCount(playerA, "Lightning Bolt", 1);
@@ -63,7 +62,6 @@ public class CastSplitCardsWithFlashbackTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Bident of Thassa", 1);
         assertPermanentCount(playerB, "Bow of Nylea", 1);
@@ -100,7 +98,6 @@ public class CastSplitCardsWithFlashbackTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Bident of Thassa", 1);
         assertGraveyardCount(playerB, "Bow of Nylea", 1);
@@ -133,7 +130,6 @@ public class CastSplitCardsWithFlashbackTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Bident of Thassa", 1);
         assertPermanentCount(playerB, "Bow of Nylea", 1);

@@ -37,7 +37,7 @@ public final class HedronAlignment extends CardImpl {
         // At the beginning of your upkeep, you may reveal your hand. If you do, you win the game if you own a card named Hedron Alignment in exile, in your hand, in your graveyard, and on the battlefield.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new HedronAlignmentEffect(), TargetController.YOU, true));
         // {1}{U}: Scry 1.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1, false), new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1, false), new ManaCostsImpl<>("{1}{U}")));
     }
 
     private HedronAlignment(final HedronAlignment card) {

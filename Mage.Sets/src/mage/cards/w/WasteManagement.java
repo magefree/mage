@@ -53,7 +53,7 @@ enum WasteManagementAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        if (KickedCondition.instance.apply(game, ability)) {
+        if (KickedCondition.ONCE.apply(game, ability)) {
             ability.addTarget(new TargetPlayer());
         } else {
             ability.addTarget(new TargetCardInASingleGraveyard(0, 2, StaticFilters.FILTER_CARD));
@@ -86,7 +86,7 @@ class WasteManagementEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl();
-        if (KickedCondition.instance.apply(game, source)) {
+        if (KickedCondition.ONCE.apply(game, source)) {
             Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (player != null) {
                 cards.addAll(player.getGraveyard());

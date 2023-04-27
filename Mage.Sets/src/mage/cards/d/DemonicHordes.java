@@ -47,7 +47,7 @@ public final class DemonicHordes extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, unless you pay {B}{B}{B}, tap Demonic Hordes and sacrifice a land of an opponent's choice.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DemonicHordesEffect(new ManaCostsImpl("{B}{B}{B}")), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DemonicHordesEffect(new ManaCostsImpl<>("{B}{B}{B}")), TargetController.YOU, false));
     }
 
     private DemonicHordes(final DemonicHordes card) {

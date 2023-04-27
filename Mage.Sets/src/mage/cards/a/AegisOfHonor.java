@@ -31,7 +31,7 @@ public final class AegisOfHonor extends CardImpl {
 
 	// {1}: The next time an instant or sorcery spell would deal damage to you this
         //turn, that spell deals that damage to its controller instead.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AegisOfHonorEffect(), new ManaCostsImpl("{1}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AegisOfHonorEffect(), new ManaCostsImpl<>("{1}")));
 
     }
 

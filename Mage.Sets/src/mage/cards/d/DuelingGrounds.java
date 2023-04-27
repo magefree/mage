@@ -51,11 +51,11 @@ class NoMoreThanOneCreatureCanAttackEachTurnEffect extends RestrictionEffect {
 
     public NoMoreThanOneCreatureCanAttackEachTurnEffect() {
         super(Duration.WhileOnBattlefield);
+        this.staticText = "No more than one creature can attack each turn";
     }
 
     public NoMoreThanOneCreatureCanAttackEachTurnEffect(final NoMoreThanOneCreatureCanAttackEachTurnEffect effect) {
         super(effect);
-        this.staticText = "No more than one creature can attack each turn";
     }
 
     @Override

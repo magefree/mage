@@ -19,13 +19,12 @@ public class HotheadedGiantTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, goblin);
         addCard(Zone.HAND, playerA, giant);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, goblin);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, goblin, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, giant);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, giant, CounterType.M1M1, 0);
     }
@@ -40,7 +39,6 @@ public class HotheadedGiantTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, giant, CounterType.M1M1, 2);
     }

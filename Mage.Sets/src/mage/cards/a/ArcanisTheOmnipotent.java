@@ -33,7 +33,7 @@ public final class ArcanisTheOmnipotent extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(3), new TapSourceCost()));
         
         // {2}{U}{U}: Return Arcanis the Omnipotent to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{2}{U}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{2}{U}{U}")));
     }
 
     private ArcanisTheOmnipotent(final ArcanisTheOmnipotent card) {

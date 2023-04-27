@@ -20,6 +20,7 @@ public class FableOfTheMirrorBreakerToken extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(2);
         addAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new TreasureToken())).setTriggerPhrase("Whenever this creature attacks, "));
+        setOriginalExpansionSetCode("NEO");
     }
 
     private FableOfTheMirrorBreakerToken(final FableOfTheMirrorBreakerToken token) {

@@ -18,6 +18,7 @@ public class BecomesTargetControlledPermanentTriggeredAbility extends TriggeredA
 
     public BecomesTargetControlledPermanentTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever a permanent you control becomes the target of a spell or ability an opponent controls, ");
     }
 
     private BecomesTargetControlledPermanentTriggeredAbility(final BecomesTargetControlledPermanentTriggeredAbility ability) {
@@ -68,10 +69,5 @@ public class BecomesTargetControlledPermanentTriggeredAbility extends TriggeredA
         targetMap.put(event.getTargetId(), sourceObjects);
         game.getState().setValue("targetMap" + this.id, targetMap);
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a permanent you control becomes the target of a spell or ability an opponent controls, " ;
     }
 }

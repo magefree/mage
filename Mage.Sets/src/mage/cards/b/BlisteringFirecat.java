@@ -35,7 +35,7 @@ public final class BlisteringFirecat extends CardImpl {
         // At the beginning of the end step, sacrifice Blistering Firecat.
          this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect()));
         // Morph {R}{R}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{R}{R}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{R}{R}")));
     }
 
     private BlisteringFirecat(final BlisteringFirecat card) {

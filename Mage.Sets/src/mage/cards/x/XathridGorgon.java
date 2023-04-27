@@ -43,7 +43,7 @@ public final class XathridGorgon extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // {2}{B}, {tap}: Put a petrification counter on target creature. It gains defender and becomes a colorless artifact in addition to its other types. Its activated abilities can't be activated.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.PETRIFICATION.createInstance()), new ManaCostsImpl("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.PETRIFICATION.createInstance()), new ManaCostsImpl<>("{2}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         Effect effect = new GainAbilityTargetEffect(DefenderAbility.getInstance(), Duration.Custom);

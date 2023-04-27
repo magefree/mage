@@ -25,7 +25,7 @@ public final class DecimatorWeb extends CardImpl {
 
     public DecimatorWeb (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), new ManaCostsImpl("{4}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), new ManaCostsImpl<>("{4}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new AddCountersTargetEffect(CounterType.POISON.createInstance()));
         ability.addEffect(new PutLibraryIntoGraveTargetEffect(6));

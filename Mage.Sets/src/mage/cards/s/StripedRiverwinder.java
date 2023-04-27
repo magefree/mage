@@ -28,7 +28,7 @@ public final class StripedRiverwinder extends CardImpl {
         this.addAbility(HexproofAbility.getInstance());
 
         // Cycling {U}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{U}")));
 
     }
 

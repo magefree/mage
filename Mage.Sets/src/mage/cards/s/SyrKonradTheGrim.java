@@ -37,7 +37,7 @@ public final class SyrKonradTheGrim extends CardImpl {
         // {1}{B}: Each player puts the top card of their library into their graveyard.
         this.addAbility(new SimpleActivatedAbility(new MillCardsEachPlayerEffect(
                 1, TargetController.ANY
-        ), new ManaCostsImpl("{1}{B}")));
+        ), new ManaCostsImpl<>("{1}{B}")));
     }
 
     private SyrKonradTheGrim(final SyrKonradTheGrim card) {

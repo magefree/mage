@@ -26,7 +26,6 @@ public class ForetellTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertAllCommandsUsed();
         assertExileCount(playerA, "Behold the Multiverse", 1);
 
     }
@@ -42,7 +41,6 @@ public class ForetellTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
         assertExileCount(playerA, "Behold the Multiverse", 1); // still in exile because it can't be cast the same turn
     }
 
@@ -57,7 +55,6 @@ public class ForetellTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
         assertExileCount(playerA, "Behold the Multiverse", 0); // no longer in exile
         assertGraveyardCount(playerA, "Behold the Multiverse", 1);  // now in graveyard
         assertHandCount(playerA, 2); // 2 cards drawn
@@ -76,8 +73,7 @@ public class ForetellTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fore"); // foretell the Lightning Bolt
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        
-        assertAllCommandsUsed();
+
         assertExileCount(playerA, "Sol Talisman", 1); // suspend card in exile
         assertExileCount(playerA, "Lightning Bolt", 1); // foretold card in exile
         assertPowerToughness(playerA, "Dream Devourer", 2, 3);  // +2 power boost from trigger due to foretell of Lightning Bolt

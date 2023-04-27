@@ -32,7 +32,7 @@ public final class DimirCluestone extends CardImpl {
         this.addAbility(new BlackManaAbility());
 
         // {U}{B}, {T}, Sacrifice Dimir Cluestone: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{U}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{U}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

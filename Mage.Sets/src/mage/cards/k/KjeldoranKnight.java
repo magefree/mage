@@ -32,10 +32,10 @@ public final class KjeldoranKnight extends CardImpl {
         this.addAbility(BandingAbility.getInstance());
 
         // {1}{W}: Kjeldoran Knight gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{W}")));
 
         // {W}{W}: Kjeldoran Knight gets +0/+2 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 2, Duration.EndOfTurn), new ManaCostsImpl("{W}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 2, Duration.EndOfTurn), new ManaCostsImpl<>("{W}{W}")));
     }
 
     private KjeldoranKnight(final KjeldoranKnight card) {

@@ -35,7 +35,7 @@ public final class TauntingArbormage extends CardImpl {
         // When Taunting Arbormage enters the battlefield, if it was kicked, all creatures able to block target creature this turn do so.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new MustBeBlockedByAllTargetEffect(Duration.EndOfTurn)),
-                KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, " +
+                KickedCondition.ONCE, "When {this} enters the battlefield, if it was kicked, " +
                 "all creatures able to block target creature this turn do so."
         );
         ability.addTarget(new TargetCreaturePermanent());

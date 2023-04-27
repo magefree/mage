@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -21,7 +20,7 @@ import mage.target.TargetPermanent;
  */
 public final class ThopterArrest extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
+    private static final FilterPermanent filter = new FilterPermanent("artifact or creature an opponent controls");
 
     static {
         filter.add(Predicates.or(
@@ -35,7 +34,7 @@ public final class ThopterArrest extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
         // When Thopter Arrest enters the battlefield, exile target artifact or creature an opponent controls until Thopter Arrest leaves the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect(filter.getMessage()));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
         ability.addTarget(new TargetPermanent(filter));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);

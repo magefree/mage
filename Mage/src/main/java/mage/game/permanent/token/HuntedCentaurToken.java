@@ -16,12 +16,6 @@ import mage.abilities.keyword.ProtectionAbility;
  */
 public final class HuntedCentaurToken extends TokenImpl {
 
-    static final private List<String> tokenImageSets = new ArrayList<>();
-
-    static {
-        tokenImageSets.addAll(Arrays.asList("RTR", "MM3"));
-    }
-
     public HuntedCentaurToken() {
         super("Centaur Token", "3/3 green Centaur creature tokens with protection from black");
         cardType.add(CardType.CREATURE);
@@ -30,6 +24,8 @@ public final class HuntedCentaurToken extends TokenImpl {
         power = new MageInt(3);
         toughness = new MageInt(3);
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
+
+        availableImageSetCodes = Arrays.asList("RTR", "MM3", "CLB");
     }
 
     public HuntedCentaurToken(final HuntedCentaurToken token) {

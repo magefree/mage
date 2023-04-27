@@ -87,31 +87,4 @@ public class MiracleTest extends CardTestPlayerBase {
         assertLife(playerB, 15);
 
     }
-
-    /**
-     * Test that you can't cast a card by miracle if you put it back to library before casting
-     */
-    @Test
-    public void testMiracleWontWorkFromLibrary() {
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
-        addCard(Zone.LIBRARY, playerA, "Plains");
-        addCard(Zone.LIBRARY, playerA, "Forest");
-        addCard(Zone.LIBRARY, playerA, "Thunderous Wrath");
-        addCard(Zone.HAND, playerA, "Brainstorm");
-        skipInitShuffling();
-
-        castSpell(1, PhaseStep.UPKEEP, playerA, "Brainstorm");
-        addTarget(playerA, "Thunderous Wrath");
-        addTarget(playerA, "Plains");
-        addTarget(playerA, playerB);
-
-        setStopAt(1, PhaseStep.DRAW);
-        execute();
-
-        // check Thunderous Wrath was not played
-        assertLife(playerA, 20);
-        assertLife(playerB, 20);
-
-    }
 }

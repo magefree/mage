@@ -39,7 +39,7 @@ public final class TombstoneStairwell extends CardImpl {
         addSuperType(SuperType.WORLD);
 
         // Cumulative upkeep-Pay {1}{B}.
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}{B}")));
 
         // At the beginning of each upkeep, if Tombstone Stairwell is on the battlefield, each player creates a 2/2 black Zombie creature token with haste named Tombspawn for each creature card in their graveyard.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TombstoneStairwellCreateTokenEffect(), TargetController.ANY, false));

@@ -1,25 +1,21 @@
 package mage.cards.m;
 
-import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
-import mage.abilities.effects.common.combat.GoadTargetEffect;
+import mage.abilities.effects.common.combat.GoadAllEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.filter.FilterCard;
-import mage.filter.StaticFilters;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.mageobject.MonocoloredPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -30,9 +26,11 @@ public final class MaestrosConfluence extends CardImpl {
 
     private static final FilterCard filter
             = new FilterInstantOrSorceryCard("monocolored instant or sorcery card from your graveyard");
+    private static final FilterPermanent filter2 = new FilterCreaturePermanent();
 
     static {
         filter.add(MonocoloredPredicate.instance);
+        filter2.add(TargetController.SOURCE_TARGETS.getControllerPredicate());
     }
 
     public MaestrosConfluence(UUID ownerId, CardSetInfo setInfo) {
@@ -53,7 +51,7 @@ public final class MaestrosConfluence extends CardImpl {
         ).addTarget(new TargetCreaturePermanent()));
 
         // • Goad each creature target player controls.
-        this.getSpellAbility().addMode(new Mode(new MaestrosConfluenceEffect()).addTarget(new TargetPlayer()));
+        this.getSpellAbility().addMode(new Mode(new GoadAllEffect(filter2).setText("goad each creature target player controls")).addTarget(new TargetPlayer()));
     }
 
     private MaestrosConfluence(final MaestrosConfluence card) {
@@ -63,32 +61,5 @@ public final class MaestrosConfluence extends CardImpl {
     @Override
     public MaestrosConfluence copy() {
         return new MaestrosConfluence(this);
-    }
-}
-
-class MaestrosConfluenceEffect extends OneShotEffect {
-
-    MaestrosConfluenceEffect() {
-        super(Outcome.Benefit);
-        staticText = "goad each creature target player controls";
-    }
-
-    private MaestrosConfluenceEffect(final MaestrosConfluenceEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MaestrosConfluenceEffect copy() {
-        return new MaestrosConfluenceEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_CONTROLLED_CREATURE, source.getFirstTarget(), source, game
-        )) {
-            game.addEffect(new GoadTargetEffect().setTargetPointer(new FixedTarget(permanent, game)), source);
-        }
-        return true;
     }
 }

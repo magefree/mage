@@ -33,7 +33,7 @@ public final class OmenOfTheDead extends CardImpl {
         this.addAbility(ability);
 
         // {2}{B}, Sacrifice Omen of the Dead: Scry 2.
-        ability = new SimpleActivatedAbility(new ScryEffect(2), new ManaCostsImpl("{2}{B}"));
+        ability = new SimpleActivatedAbility(new ScryEffect(2), new ManaCostsImpl<>("{2}{B}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

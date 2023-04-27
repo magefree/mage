@@ -64,24 +64,16 @@ public final class ShadrixSilverquill extends CardImpl {
 
         // • Target player creates a 2/1 white and black Inkling creature token with flying.
         ability.addEffect(new CreateTokenTargetEffect(new InklingToken()));
-        TargetPlayer target = new TargetPlayer(filter1);
-        target.setTargetTag(1);
-        ability.addTarget(target.withChooseHint("to create a token"));
+        ability.addTarget(new TargetPlayer(filter1).setTargetTag(1).withChooseHint("to create a token"));
 
         // • Target player draws a card and loses 1 life.
-        Mode mode = new Mode(new DrawCardTargetEffect(1));
-        mode.addEffect(new LoseLifeTargetEffect(1).setText("and loses 1 life"));
-        target = new TargetPlayer(filter2);
-        target.setTargetTag(2);
-        mode.addTarget(target.withChooseHint("to draw a card and lose 1 life"));
-        ability.addMode(mode);
+        ability.addMode(new Mode(new DrawCardTargetEffect(1))
+                .addEffect(new LoseLifeTargetEffect(1).setText("and loses 1 life"))
+                .addTarget(new TargetPlayer(filter2).setTargetTag(2).withChooseHint("to draw a card and lose 1 life")));
 
         // • Target player puts a +1/+1 counter on each creature they control.
-        mode = new Mode(new ShadrixSilverquillEffect());
-        target = new TargetPlayer(filter3);
-        target.setTargetTag(3);
-        mode.addTarget(target.withChooseHint("to put a counter on each creature"));
-        ability.addMode(mode);
+        ability.addMode(new Mode(new ShadrixSilverquillEffect())
+                .addTarget(new TargetPlayer(filter3).setTargetTag(3).withChooseHint("to put a counter on each creature")));
         this.addAbility(ability);
     }
 

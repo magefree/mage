@@ -102,7 +102,7 @@ public class DiscardEachPlayerEffect extends OneShotEffect {
         if (randomDiscard) {
             return true;
         }
-        // discard all choosen cards
+        // discard all chosen cards
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player == null) {

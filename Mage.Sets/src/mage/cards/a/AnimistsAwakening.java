@@ -71,7 +71,7 @@ class AnimistsAwakeningEffect extends OneShotEffect {
                 toBattlefield.add(card);
             }
             controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game, true, false, true, null);
-            controller.putCardsOnBottomOfLibrary(cards, game, source, true);
+            controller.putCardsOnBottomOfLibrary(cards, game, source, false);
 
             if (SpellMasteryCondition.instance.apply(game, source)) {
                 for (Card card : toBattlefield) {

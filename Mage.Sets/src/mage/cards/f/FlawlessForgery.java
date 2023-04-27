@@ -35,7 +35,7 @@ public final class FlawlessForgery extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
 
         // Casualty 3
-        this.addAbility(new CasualtyAbility(this, 3));
+        this.addAbility(new CasualtyAbility(3));
 
         // Exile target instant or sorcery card from an opponent's graveyard. Copy that card. You may cast the copy without paying its mana cost.
         this.getSpellAbility().addEffect(new FlawlessForgeryEffect());

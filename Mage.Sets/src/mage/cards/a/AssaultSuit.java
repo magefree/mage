@@ -52,7 +52,7 @@ public final class AssaultSuit extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AssaultSuitGainControlEffect(), TargetController.OPPONENT, false));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.Detriment, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.Detriment, new GenericManaCost(3), false));
     }
 
     private AssaultSuit(final AssaultSuit card) {

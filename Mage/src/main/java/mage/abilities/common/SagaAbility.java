@@ -6,8 +6,9 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.Outcome;
 import mage.constants.SagaChapter;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -16,8 +17,10 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
+import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
+import mage.target.targetadjustment.TargetAdjuster;
 import mage.util.CardUtil;
 
 import java.util.Arrays;
@@ -29,18 +32,36 @@ public class SagaAbility extends SimpleStaticAbility {
 
     private final SagaChapter maxChapter;
     private final boolean showSacText;
+    private final boolean readAhead;
 
     public SagaAbility(Card card) {
         this(card, SagaChapter.CHAPTER_III);
     }
 
+    public SagaAbility(Card card, boolean showSacText) {
+        this(card, showSacText, SagaChapter.CHAPTER_III);
+    }
+
     public SagaAbility(Card card, SagaChapter maxChapter) {
-        super(Zone.ALL, new AddCountersSourceEffect(CounterType.LORE.createInstance()));
+        this(card, card.getSecondCardFace() == null, maxChapter);
+    }
+
+    public SagaAbility(Card card, boolean showSacText, SagaChapter maxChapter) {
+        this(card, maxChapter, false, showSacText);
+    }
+
+    public SagaAbility(Card card, SagaChapter maxChapter, boolean readAhead) {
+        this(card, maxChapter, readAhead, card.getSecondCardFace() == null);
+    }
+
+    public SagaAbility(Card card, SagaChapter maxChapter, boolean readAhead, boolean showSacText) {
+        super(Zone.ALL, null);
         this.maxChapter = maxChapter;
-        this.showSacText = card.getSecondCardFace() == null;
+        this.showSacText = showSacText;
+        this.readAhead = readAhead;
         this.setRuleVisible(true);
         this.setRuleAtTheTop(true);
-        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LORE.createInstance()));
+        Ability ability = new EntersBattlefieldAbility(new SagaLoreCountersEffect(readAhead, maxChapter));
         ability.setRuleVisible(false);
         card.addAbility(ability);
     }
@@ -49,6 +70,7 @@ public class SagaAbility extends SimpleStaticAbility {
         super(ability);
         this.maxChapter = ability.maxChapter;
         this.showSacText = ability.showSacText;
+        this.readAhead = ability.readAhead;
     }
 
     public void addChapterEffect(Card card, SagaChapter chapter, Effect... effects) {
@@ -68,7 +90,7 @@ public class SagaAbility extends SimpleStaticAbility {
     }
 
     public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effect effect, Target target, boolean optional) {
-        addChapterEffect(card, fromChapter, toChapter, new Effects(effect), new Targets(target), optional);
+        addChapterEffect(card, fromChapter, toChapter, new Effects(effect), new Targets(target), optional, null);
     }
 
     public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effects effects, Target target) {
@@ -76,12 +98,12 @@ public class SagaAbility extends SimpleStaticAbility {
     }
 
     public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effects effects, Targets targets) {
-        addChapterEffect(card, fromChapter, toChapter, effects, targets, false);
+        addChapterEffect(card, fromChapter, toChapter, effects, targets, false, null);
     }
 
-    public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effects effects, Targets targets, boolean optional, Mode... modes) {
+    public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effects effects, Targets targets, boolean optional, TargetAdjuster targetAdjuster, Mode... modes) {
         for (int i = fromChapter.getNumber(); i <= toChapter.getNumber(); i++) {
-            ChapterTriggeredAbility ability = new ChapterTriggeredAbility(null, SagaChapter.getChapter(i), toChapter, optional);
+            ChapterTriggeredAbility ability = new ChapterTriggeredAbility(null, SagaChapter.getChapter(i), toChapter, optional, readAhead);
             for (Effect effect : effects) {
                 if (effect != null) {
                     ability.addEffect(effect.copy());
@@ -98,6 +120,9 @@ public class SagaAbility extends SimpleStaticAbility {
             if (i > fromChapter.getNumber()) {
                 ability.setRuleVisible(false);
             }
+            if (targetAdjuster != null) {
+                ability.setTargetAdjuster(targetAdjuster);
+            }
             card.addAbility(ability);
         }
     }
@@ -108,7 +133,10 @@ public class SagaAbility extends SimpleStaticAbility {
 
     @Override
     public String getRule() {
-        return "<i>(As this Saga enters and after your draw step, add a lore counter."
+        return (readAhead
+                ? "Read ahead <i>(Choose a chapter and start with that many lore counters. " +
+                "Add one after your draw step. Skipped chapters don't trigger."
+                : "<i>(As this Saga enters and after your draw step, add a lore counter.")
                 + (showSacText ? " Sacrifice after " + maxChapter.toString() + '.' : "") + ")</i> ";
     }
 
@@ -127,27 +155,78 @@ public class SagaAbility extends SimpleStaticAbility {
     public static boolean isChapterAbility(TriggeredAbility ability) {
         return ability instanceof ChapterTriggeredAbility;
     }
+
+    public static boolean isFinalAbility(Ability ability, int maxChapter) {
+        return ability instanceof ChapterTriggeredAbility
+                && ((ChapterTriggeredAbility) ability).getChapterFrom().getNumber() == maxChapter;
+    }
+}
+
+class SagaLoreCountersEffect extends OneShotEffect {
+
+    private final boolean readAhead;
+    private final SagaChapter maxChapter;
+
+    SagaLoreCountersEffect(boolean readAhead, SagaChapter maxChapter) {
+        super(Outcome.Benefit);
+        this.readAhead = readAhead;
+        this.maxChapter = maxChapter;
+    }
+
+    private SagaLoreCountersEffect(final SagaLoreCountersEffect effect) {
+        super(effect);
+        this.readAhead = effect.readAhead;
+        this.maxChapter = effect.maxChapter;
+    }
+
+    @Override
+    public SagaLoreCountersEffect copy() {
+        return new SagaLoreCountersEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanentEntering(source.getSourceId());
+        if (permanent == null) {
+            return false;
+        }
+        if (!readAhead) {
+            return permanent.addCounters(CounterType.LORE.createInstance(), source, game);
+        }
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
+        }
+        int counters = player.getAmount(
+                1, maxChapter.getNumber(),
+                "Choose the number of lore counters to enter with", game
+        );
+        return permanent.addCounters(CounterType.LORE.createInstance(counters), source, game);
+    }
 }
 
 class ChapterTriggeredAbility extends TriggeredAbilityImpl {
 
     private final SagaChapter chapterFrom, chapterTo;
+    private final boolean readAhead;
 
-    public ChapterTriggeredAbility(Effect effect, SagaChapter chapterFrom, SagaChapter chapterTo, boolean optional) {
+    public ChapterTriggeredAbility(Effect effect, SagaChapter chapterFrom, SagaChapter chapterTo, boolean optional, boolean readAhead) {
         super(Zone.ALL, effect, optional);
         this.chapterFrom = chapterFrom;
         this.chapterTo = chapterTo;
+        this.readAhead = readAhead;
     }
 
     public ChapterTriggeredAbility(final ChapterTriggeredAbility ability) {
         super(ability);
         this.chapterFrom = ability.chapterFrom;
         this.chapterTo = ability.chapterTo;
+        this.readAhead = ability.readAhead;
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.COUNTER_ADDED;
+        return event.getType() == GameEvent.EventType.COUNTERS_ADDED;
     }
 
     @Override
@@ -161,6 +240,9 @@ class ChapterTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         int loreCounters = permanent.getCounters(game).getCount(CounterType.LORE);
+        if (readAhead && permanent.getTurnsOnBattlefield() == 0) {
+            return chapterFrom.getNumber() == loreCounters;
+        }
         return loreCounters - event.getAmount() < chapterFrom.getNumber()
                 && chapterFrom.getNumber() <= loreCounters;
     }

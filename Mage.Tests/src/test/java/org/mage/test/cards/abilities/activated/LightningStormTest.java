@@ -46,7 +46,6 @@ public class LightningStormTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Lightning Storm", 1);
         assertGraveyardCount(playerB, "Mountain", 1);

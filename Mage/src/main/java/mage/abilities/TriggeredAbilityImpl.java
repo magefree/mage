@@ -4,6 +4,7 @@ import mage.MageObject;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.constants.AbilityType;
+import mage.constants.AbilityWord;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -26,7 +27,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     private boolean triggersOnce = false;
     private boolean doOnlyOnce = false;
     private GameEvent triggerEvent = null;
-    private String triggerPhrase = null;
+    private String triggerPhrase = null; // TODO: This should be change to final and all constructers to set a value
 
     public TriggeredAbilityImpl(Zone zone, Effect effect) {
         this(zone, effect, false);
@@ -54,6 +55,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         this.leavesTheBattlefieldTrigger = ability.leavesTheBattlefieldTrigger;
         this.triggersOnce = ability.triggersOnce;
         this.doOnlyOnce = ability.doOnlyOnce;
+        this.triggerEvent = ability.triggerEvent;
         this.triggerPhrase = ability.triggerPhrase;
     }
 
@@ -110,12 +112,12 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     @Override
     public boolean checkUsedAlready(Game game) {
         if (!doOnlyOnce) {
-            return true;
+            return false;
         }
         Integer lastTurnUsed = (Integer) game.getState().getValue(
                 CardUtil.getCardZoneString("lastTurnUsed" + originalId, sourceId, game)
         );
-        return lastTurnUsed == null || lastTurnUsed != game.getTurnNum();
+        return lastTurnUsed != null && lastTurnUsed == game.getTurnNum();
     }
 
     public TriggeredAbility setDoOnlyOnce(boolean doOnlyOnce) {
@@ -138,6 +140,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             MageObject object = game.getObject(getSourceId());
             Player player = game.getPlayer(this.getControllerId());
             if (player == null || object == null
+                    || (doOnlyOnce && checkUsedAlready(game))
                     || !player.chooseUse(
                     getEffects().getOutcome(this),
                     this.getRule(object.getLogName()), this, game
@@ -175,8 +178,20 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
     @Override
     public String getRule() {
-        String superRule = super.getRule(true);
         StringBuilder sb = new StringBuilder();
+        String prefix;
+        if (abilityWord != null) {
+            prefix = abilityWord.formatWord();
+        } else if (flavorWord != null) {
+            prefix = CardUtil.italicizeWithEmDash(flavorWord);
+        } else {
+            prefix = "";
+        }
+        sb.append(prefix);
+
+        sb.append(triggerPhrase == null ? getTriggerPhrase() : triggerPhrase);
+
+        String superRule = super.getRule(true);
         if (!superRule.isEmpty()) {
             String ruleLow = superRule.toLowerCase(Locale.ENGLISH);
             if (isOptional()) {
@@ -190,6 +205,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                         || ruleLow.startsWith("attach")
                         || ruleLow.startsWith("counter")
                         || ruleLow.startsWith("destroy")
+                        || ruleLow.startsWith("sacrifice")
                         || ruleLow.startsWith("exchange")
                         || ruleLow.startsWith("exile")
                         || ruleLow.startsWith("gain")
@@ -213,19 +229,12 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 sb.append(" Do this only once each turn.");
             }
         }
-        String prefix;
-        if (abilityWord != null) {
-            prefix = abilityWord.formatWord();
-        } else if (flavorWord != null) {
-            prefix = CardUtil.italicizeWithEmDash(flavorWord);
-        } else {
-            prefix = "";
-        }
 
-        return prefix + (triggerPhrase == null ? getTriggerPhrase() : triggerPhrase) + sb;
+        return sb.toString();
     }
 
     @Override
+    @Deprecated
     public String getTriggerPhrase() {
         return "";
     }
@@ -320,6 +329,12 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     @Override
     public boolean isOptional() {
         return optional;
+    }
+
+    @Override
+    public TriggeredAbilityImpl setAbilityWord(AbilityWord abilityWord) {
+        super.setAbilityWord(abilityWord);
+        return this;
     }
 
     public static boolean isInUseableZoneDiesTrigger(TriggeredAbility source, GameEvent event, Game game) {

@@ -680,8 +680,13 @@ public class NewTournamentDialog extends MageDialog {
         // CHECKS
         TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
         if (tournamentType.isRandom() || tournamentType.isRichMan()) {
-            if (tOptions.getLimitedOptions().getSetCodes().isEmpty()) {
-                JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Warning, you must select packs for the pool", "Warning", JOptionPane.WARNING_MESSAGE);
+            if (tOptions.getLimitedOptions().getSetCodes().size() < tournamentType.getNumBoosters()) {
+                JOptionPane.showMessageDialog(
+                        MageFrame.getDesktop(),
+                        String.format("Warning, you must select %d packs for the pool", tournamentType.getNumBoosters()),
+                        "Warning",
+                        JOptionPane.WARNING_MESSAGE
+                );
                 return;
             }
         }
@@ -882,7 +887,7 @@ public class NewTournamentDialog extends MageDialog {
 //        this.spnNumPlayers.setModel(new SpinnerNumberModel(gameType.getMinPlayers(), gameType.getMinPlayers(), gameType.getMaxPlayers(), 1));
 //        this.spnNumPlayers.setEnabled(gameType.getMinPlayers() != gameType.getMaxPlayers());
 //        if (oldValue >= gameType.getMinPlayers() && oldValue <= gameType.getMaxPlayers()){
-//            this.spnNumPlayers.setValue(oldValue);
+//            this.spnNumPlayers.setBoostedValue(oldValue);
 //        }
         // this.cbAttackOption.setEnabled(gameType.isUseAttackOption());
         // this.cbRange.setEnabled(gameType.isUseRange());
@@ -1013,7 +1018,7 @@ public class NewTournamentDialog extends MageDialog {
     private void createRandomPacks() {
         if (pnlRandomPacks.getComponentCount() == 0) {
             if (randomPackSelector == null) {
-                randomPackSelector = new RandomPacksSelectorDialog(isRandom, isRichMan);
+                randomPackSelector = new RandomPacksSelectorDialog();
                 randomPackSelector.setLocationRelativeTo(this);
             }
             txtRandomPacks = new JTextArea();
@@ -1039,8 +1044,8 @@ public class NewTournamentDialog extends MageDialog {
     }
 
     private void showRandomPackSelectorDialog() {
-        randomPackSelector.setType(isRandom, isRichMan);
-        randomPackSelector.showDialog();
+        TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
+        randomPackSelector.showDialog(isRandom, isRichMan, tournamentType.getNumBoosters());
         this.txtRandomPacks.setText(String.join(";", randomPackSelector.getSelectedPacks()));
         this.pack();
         this.revalidate();
@@ -1314,7 +1319,7 @@ public class NewTournamentDialog extends MageDialog {
             tOptions.getLimitedOptions().setDraftCubeName("");
             tOptions.getMatchOptions().setDeckType((String) this.cbDeckType.getSelectedItem());
             tOptions.getMatchOptions().setGameType(((GameTypeView) this.cbGameType.getSelectedItem()).getName());
-            tOptions.getMatchOptions().setLimited(false);
+            tOptions.getMatchOptions().setLimited(tOptions.getMatchOptions().getDeckType().startsWith("Limited"));
         }
 
         String serverAddress = SessionHandler.getSession().getServerHostname().orElse("");

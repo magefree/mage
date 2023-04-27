@@ -38,7 +38,7 @@ public final class CorpseHauler extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{B}, Sacrifice Corpse Hauler: Return another target creature card from your graveyard to your hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), new ManaCostsImpl("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), new ManaCostsImpl<>("{2}{B}"));
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

@@ -30,13 +30,13 @@ public final class NightscapeMaster extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {U}{U}, {tap}: Return target creature to its owner's hand.
-        Ability returnAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{U}{U}"));
+        Ability returnAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{U}{U}"));
         returnAbility.addTarget(new TargetCreaturePermanent());
         returnAbility.addCost(new TapSourceCost());
         this.addAbility(returnAbility);
         
         // {R}{R}, {tap}: Nightscape Master deals 2 damage to target creature.
-        Ability damageAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{R}{R}"));
+        Ability damageAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl<>("{R}{R}"));
         damageAbility.addTarget(new TargetCreaturePermanent());
         damageAbility.addCost(new TapSourceCost());
         this.addAbility(damageAbility);

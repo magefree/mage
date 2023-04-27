@@ -66,7 +66,7 @@ public final class EaterOfVirtue extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EaterOfVirtueGainAbilityAttachedEffect()));
 
         // Equip {1}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), false));
 
     }
 

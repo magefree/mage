@@ -31,7 +31,7 @@ public final class BehindTheScenes extends CardImpl {
         // {4}{W}: Creatures you control get +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostControlledEffect(1, 1, Duration.EndOfTurn, FILTER_PERMANENT_CREATURES),
-                new ManaCostsImpl("{4}{W}")));
+                new ManaCostsImpl<>("{4}{W}")));
     }
 
     private BehindTheScenes(final BehindTheScenes card) {

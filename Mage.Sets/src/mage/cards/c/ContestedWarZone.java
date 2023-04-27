@@ -95,6 +95,7 @@ class ContestedWarZoneEffect extends ContinuousEffectImpl {
 
     public ContestedWarZoneEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
+        this.staticText = "Gain control of {this}";
     }
 
     public ContestedWarZoneEffect(final ContestedWarZoneEffect effect) {
@@ -116,10 +117,5 @@ class ContestedWarZoneEffect extends ContinuousEffectImpl {
             discard();
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Gain control of {this}";
     }
 }

@@ -33,7 +33,7 @@ public final class CuratorOfMysteries extends CardImpl {
         this.addAbility(new CycleOrDiscardControllerTriggeredAbility(new ScryEffect(1, false)).setTriggerPhrase("Whenever you cycle or discard another card, "));
 
         // Cycling {U}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{U}")));
 
     }
 

@@ -7,17 +7,18 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
+ * {@link mage.cards.i.IsochronScepter Isochron Scepter}
+ * {2}
+ * Artifact
+ * Imprint — When Isochron Scepter enters the battlefield, you may exile an instant card with mana value 2 or less from your hand.
+ * {2}, {T}: You may copy the exiled card. If you do, you may cast the copy without paying its mana cost.
  *
  * @author BetaSteward
  */
 public class IsochronScepterTest extends CardTestPlayerBase {
 
     /**
-     * Isochron Scepter Artifact, 2 (2) Imprint — When Isochron Scepter enters
-     * the battlefield, you may exile an instant card with converted mana cost 2
-     * or less from your hand. {2}, {T}: You may copy the exiled card. If you
-     * do, you may cast the copy without paying its mana cost.
-     *
+     * Test that the imprinting works.
      */
     @Test
     public void testImprint() {
@@ -25,8 +26,11 @@ public class IsochronScepterTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Isochron Scepter");
         addCard(Zone.HAND, playerA, "Lightning Bolt");
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Isochron Scepter");
-        addTarget(playerA, "Lightning Bolt");
+        setChoice(playerA, "Yes");
+        setChoice(playerA, "Lightning Bolt");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -34,9 +38,11 @@ public class IsochronScepterTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Isochron Scepter", 1);
         assertExileCount("Lightning Bolt", 1);
         assertLife(playerB, 20);
-
     }
 
+    /**
+     * Test that the exiled card can be cpied.
+     */
     @Test
     public void testCopyCard() {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
@@ -68,7 +74,8 @@ public class IsochronScepterTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Lightning Bolt");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Isochron Scepter");
-        addTarget(playerA, "Lightning Bolt");
+        setChoice(playerA, "Lightning Bolt");
+
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}, {T}:");
         setChoice(playerA, true);
         setChoice(playerA, false);
@@ -105,7 +112,7 @@ public class IsochronScepterTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Isochron Scepter");
-        addTarget(playerA, "Angel's Grace");
+        setChoice(playerA, "Angel's Grace");
 
         attack(2, playerB, "Dross Crocodile");
         attack(2, playerB, "Dross Crocodile");
@@ -142,7 +149,6 @@ public class IsochronScepterTest extends CardTestPlayerBase {
      * Resolving a Silence cast from exile via Isochron Scepter during my
      * opponent's upkeep does not prevent that opponent from casting spells that
      * turn.
-     *
      */
     @Test
     public void testSilence() {
@@ -154,13 +160,13 @@ public class IsochronScepterTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Silvercoat Lion", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Isochron Scepter");
-        addTarget(playerA, "Silence");
+        setChoice(playerA, "Silence");
 
         activateAbility(2, PhaseStep.UPKEEP, playerA, "{2}, {T}:");
         setChoice(playerA, true);
         setChoice(playerA, true);
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Silvercoat Lion");
+        checkPlayableAbility("Can't cast Silvercoat", 2, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Silvercoat", false);
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();

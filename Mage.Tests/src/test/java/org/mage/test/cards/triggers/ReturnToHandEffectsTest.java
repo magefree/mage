@@ -61,7 +61,7 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
         addCard(Zone.HAND, playerB, "Boomerang", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Stormfront Riders");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Stormfront Riders", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lab Rats");
         setChoice(playerA, false);
 

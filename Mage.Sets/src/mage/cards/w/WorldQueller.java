@@ -91,22 +91,22 @@ class WorldQuellerEffect extends OneShotEffect {
                 return false;
             }
             CardType type = null;
-            String choosenType = choiceImpl.getChoice();
-            if (choosenType.equals(CardType.ARTIFACT.toString())) {
+            String chosenType = choiceImpl.getChoice();
+            if (chosenType.equals(CardType.ARTIFACT.toString())) {
                 type = CardType.ARTIFACT;
-            } else if (choosenType.equals(CardType.LAND.toString())) {
+            } else if (chosenType.equals(CardType.LAND.toString())) {
                 type = CardType.LAND;
-            } else if (choosenType.equals(CardType.CREATURE.toString())) {
+            } else if (chosenType.equals(CardType.CREATURE.toString())) {
                 type = CardType.CREATURE;
-            } else if (choosenType.equals(CardType.ENCHANTMENT.toString())) {
+            } else if (chosenType.equals(CardType.ENCHANTMENT.toString())) {
                 type = CardType.ENCHANTMENT;
-            } else if (choosenType.equals(CardType.INSTANT.toString())) {
+            } else if (chosenType.equals(CardType.INSTANT.toString())) {
                 type = CardType.INSTANT;
-            } else if (choosenType.equals(CardType.SORCERY.toString())) {
+            } else if (chosenType.equals(CardType.SORCERY.toString())) {
                 type = CardType.SORCERY;
-            } else if (choosenType.equals(CardType.PLANESWALKER.toString())) {
+            } else if (chosenType.equals(CardType.PLANESWALKER.toString())) {
                 type = CardType.PLANESWALKER;
-            } else if (choosenType.equals(CardType.TRIBAL.toString())) {
+            } else if (chosenType.equals(CardType.TRIBAL.toString())) {
                 type = CardType.TRIBAL;
             }
             if (type != null) {

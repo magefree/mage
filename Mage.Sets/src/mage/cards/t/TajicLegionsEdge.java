@@ -62,7 +62,7 @@ public final class TajicLegionsEdge extends CardImpl {
                 new GainAbilitySourceEffect(
                         FirstStrikeAbility.getInstance(),
                         Duration.EndOfTurn
-                ), new ManaCostsImpl("{R}{W}")
+                ), new ManaCostsImpl<>("{R}{W}")
         ));
     }
 

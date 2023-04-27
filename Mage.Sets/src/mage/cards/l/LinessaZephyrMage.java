@@ -50,7 +50,7 @@ public final class LinessaZephyrMage extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {X}{U}{U}, {tap}: Return target creature with converted mana cost X to its owner's hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{X}{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{X}{U}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         ability.setTargetAdjuster(XCMCPermanentAdjuster.instance);

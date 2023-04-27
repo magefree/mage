@@ -23,7 +23,7 @@ public class ObscuringAetherTest extends CardTestPlayerBase {
         // {1}{G}: Turn Obscuring Aether face down.
         addCard(Zone.HAND, playerA, "Obscuring Aether");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Obscuring Aether");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Obscuring Aether", true);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{G}: Turn");
 
@@ -35,7 +35,5 @@ public class ObscuringAetherTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
         assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
-
     }
-
 }

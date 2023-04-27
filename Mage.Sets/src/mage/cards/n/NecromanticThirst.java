@@ -32,7 +32,7 @@ public final class NecromanticThirst extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Whenever enchanted creature deals combat damage to a player, you may return target creature card from your graveyard to your hand.
         Ability ability = new DealsDamageToAPlayerAttachedTriggeredAbility(

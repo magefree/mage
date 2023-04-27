@@ -34,7 +34,7 @@ public final class TribalForcemage extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Morph {1}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{G}")));
 
         // When Tribal Forcemage is turned face up, creatures of the creature type of your choice get +2/+2 and gain trample until end of turn.
         Effect effect = new ChooseCreatureTypeEffect(Outcome.BoostCreature);

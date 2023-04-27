@@ -46,7 +46,7 @@ public final class TheloniteDruid extends CardImpl {
         effect.getDependencyTypes().add(DependencyType.BecomeForest);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 effect,
-                new ManaCostsImpl("{1}{G}"));
+                new ManaCostsImpl<>("{1}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability);

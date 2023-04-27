@@ -51,6 +51,7 @@ class EssenceSliverTriggeredAbility extends TriggeredAbilityImpl {
 
     public EssenceSliverTriggeredAbility() {
         super(Zone.BATTLEFIELD, new EssenceSliverEffect(), false);
+        setTriggerPhrase("Whenever a Sliver deals damage, ");
     }
 
     public EssenceSliverTriggeredAbility(final EssenceSliverTriggeredAbility ability) {
@@ -81,11 +82,6 @@ class EssenceSliverTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a Sliver deals damage, ";
     }
 }
 

@@ -35,7 +35,7 @@ public final class LieutenantKirtar extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {1}{W}, Sacrifice Lieutenant Kirtar: Exile target attacking creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetAttackingCreature());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

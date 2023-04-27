@@ -29,9 +29,8 @@ public class CantUseActivatedAbilitiesTest extends CardTestPlayerBase {
                   
         setStopAt(1, PhaseStep.END_COMBAT);                
         setStrictChooseMode(true);
-        execute();        
-        assertAllCommandsUsed();
-        
+        execute();
+
         // Sol Ring can't produce mana
         Assert.assertTrue("PlayerB may not be able to produce any mana but he he can produce " + playerB.getManaAvailable(currentGame).toString(), playerB.getManaAvailable(currentGame).toString().equals("[]"));
     }
@@ -45,7 +44,8 @@ public class CantUseActivatedAbilitiesTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Adarkar Sentinel"); // Artifact Creature — Soldier (3/3)
         addCard(Zone.BATTLEFIELD, playerB, "Island");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}: ");
+        checkPlayableAbility("Can't Tap", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}", false);
+//        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}: ");
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
                 

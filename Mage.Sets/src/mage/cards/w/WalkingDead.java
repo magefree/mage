@@ -25,7 +25,7 @@ public final class WalkingDead extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {B}: Regenerate Walking Dead.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
     }
 
     private WalkingDead(final WalkingDead card) {

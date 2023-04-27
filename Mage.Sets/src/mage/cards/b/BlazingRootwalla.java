@@ -29,10 +29,10 @@ public final class BlazingRootwalla extends CardImpl {
 
         // {R}: Blazing Rootwalla gets +2/+0 until end of turn. Activate this ability only once each turn.
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD,
-                new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+                new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
 
         // Madness{0}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{0}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{0}")));
     }
 
     private BlazingRootwalla(final BlazingRootwalla card) {

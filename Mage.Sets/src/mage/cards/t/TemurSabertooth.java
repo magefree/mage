@@ -37,7 +37,7 @@ public final class TemurSabertooth extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {1}{G}: You may return another creature you control to its owner's hand. If you do, Temur Sabertooth gains indestructible until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TemurSabertoothEffect(), new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TemurSabertoothEffect(), new ManaCostsImpl<>("{1}{G}")));
 
     }
 

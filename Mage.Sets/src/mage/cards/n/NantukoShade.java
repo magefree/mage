@@ -28,7 +28,7 @@ public final class NantukoShade extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{B}")));
     }
 
     private NantukoShade(final NantukoShade card) {

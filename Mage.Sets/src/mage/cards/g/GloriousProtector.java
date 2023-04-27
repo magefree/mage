@@ -1,7 +1,6 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
@@ -20,6 +19,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.util.CardUtil;
@@ -90,7 +90,7 @@ class GloriousProtectorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
+        Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
         if (player == null || sourceObject == null) {
             return false;
         }

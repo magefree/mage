@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import java.util.Arrays;
 
 /**
  * @author TheElk801
@@ -19,6 +20,8 @@ public final class FishToken extends TokenImpl {
         toughness = new MageInt(1);
 
         addAbility(new CantBeBlockedSourceAbility("this creature can't be blocked"));
+
+        availableImageSetCodes = Arrays.asList("SNC");
     }
 
     public FishToken(final FishToken token) {

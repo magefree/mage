@@ -31,7 +31,7 @@ public final class SoldierOfFortune extends CardImpl {
 		
 		// {R}, {T}: Target player shuffles their library.
 		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShuffleLibraryTargetEffect(), new TapSourceCost());
-		ability.addManaCost(new ManaCostsImpl("{R}"));
+		ability.addManaCost(new ManaCostsImpl<>("{R}"));
 		ability.addTarget(new TargetPlayer());
 		this.addAbility(ability);
     }

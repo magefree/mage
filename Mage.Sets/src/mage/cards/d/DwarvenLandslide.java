@@ -55,7 +55,7 @@ enum DwarvenLandslideAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (KickedCondition.instance.apply(game, ability)) {
+        if (KickedCondition.ONCE.apply(game, ability)) {
             ability.getTargets().clear();
             ability.addTarget(new TargetLandPermanent(2));
         }

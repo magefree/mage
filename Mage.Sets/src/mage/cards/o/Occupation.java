@@ -34,7 +34,7 @@ public final class Occupation extends CardImpl {
         // {W}{B}: Target creature can't attack or block this turn, and its activated abilities can't be activated until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new OccupationOneShotEffect("Target creature can't attack or block this turn, and its activated abilities can't be activated until end of turn"),
-                new ManaCostsImpl("{W}{B}"));
+                new ManaCostsImpl<>("{W}{B}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

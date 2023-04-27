@@ -154,7 +154,6 @@ public class SpellCastTriggerTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Diamond Knight", 1);
         assertPowerToughness(playerA, "Diamond Knight", 3, 3);

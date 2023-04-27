@@ -44,7 +44,7 @@ public class GainProtectionFromColorSourceEffect extends GainAbilitySourceEffect
             ChoiceColor colorChoice = new ChoiceColor(true);
             colorChoice.setMessage("Choose color for protection ability");
             if (controller.choose(outcome, colorChoice, game)) {
-                game.informPlayers("Choosen color: " + colorChoice.getColor());
+                game.informPlayers("Chosen color: " + colorChoice.getColor());
                 protectionFilter.add(new ColorPredicate(colorChoice.getColor()));
                 protectionFilter.setMessage(colorChoice.getChoice());
                 ((ProtectionAbility) ability).setFilter(protectionFilter);

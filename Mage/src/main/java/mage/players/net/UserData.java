@@ -23,6 +23,7 @@ public class UserData implements Serializable {
     protected boolean passPriorityCast;
     protected boolean passPriorityActivation;
     protected boolean autoOrderTrigger;
+    protected int autoTargetLevel;
     protected boolean useSameSettingsForReplacementEffects;
     protected boolean useFirstManaAbility = false;
     private String userIdStr;
@@ -50,6 +51,7 @@ public class UserData implements Serializable {
                     boolean passPriorityCast,
                     boolean passPriorityActivation,
                     boolean autoOrderTrigger,
+                    int autoTargetLevel,
                     boolean useSameSettingsForReplacementEffects,
                     boolean useFirstManaAbility,
                     String userIdStr) {
@@ -66,6 +68,7 @@ public class UserData implements Serializable {
         this.passPriorityCast = passPriorityCast;
         this.passPriorityActivation = passPriorityActivation;
         this.autoOrderTrigger = autoOrderTrigger;
+        this.autoTargetLevel = autoTargetLevel;
         this.useSameSettingsForReplacementEffects = useSameSettingsForReplacementEffects;
         this.useFirstManaAbility = useFirstManaAbility;
         this.matchHistory = "";
@@ -90,6 +93,7 @@ public class UserData implements Serializable {
         this.passPriorityCast = userData.passPriorityCast;
         this.passPriorityActivation = userData.passPriorityActivation;
         this.autoOrderTrigger = userData.autoOrderTrigger;
+        this.autoTargetLevel = userData.autoTargetLevel;
         this.useSameSettingsForReplacementEffects = userData.useSameSettingsForReplacementEffects;
         this.useFirstManaAbility = userData.useFirstManaAbility;
         this.userIdStr = userData.userIdStr;
@@ -111,6 +115,7 @@ public class UserData implements Serializable {
                 false,
                 false,
                 true,
+                1,
                 true,
                 false,
                 ""
@@ -235,12 +240,20 @@ public class UserData implements Serializable {
         return autoOrderTrigger;
     }
 
-    public boolean isUseSameSettingsForReplacementEffects() {
-        return useSameSettingsForReplacementEffects;
-    }
-
     public void setAutoOrderTrigger(boolean autoOrderTrigger) {
         this.autoOrderTrigger = autoOrderTrigger;
+    }
+
+    public int getAutoTargetLevel() {
+        return autoTargetLevel;
+    }
+
+    public void setAutoTargetLevel(int autoTargetLevel) {
+        this.autoTargetLevel = autoTargetLevel;
+    }
+
+    public boolean isUseSameSettingsForReplacementEffects() {
+        return useSameSettingsForReplacementEffects;
     }
 
     public boolean isUseFirstManaAbility() {

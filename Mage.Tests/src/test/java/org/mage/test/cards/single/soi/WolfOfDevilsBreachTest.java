@@ -47,10 +47,11 @@ public class WolfOfDevilsBreachTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Bronze Sable", 1); // (2) 2/1
         addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears", 1); // 2/2
 
+        setStrictChooseMode(true);
         attack(1, playerA, "Wolf of Devil's Breach");
-        setChoice(playerA, false);
-        setChoice(playerA, "Bronze Sable");
         addTarget(playerA, "Grizzly Bears");
+        setChoice(playerA, false);
+
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 

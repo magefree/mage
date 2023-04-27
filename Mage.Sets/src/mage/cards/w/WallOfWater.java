@@ -31,7 +31,7 @@ public final class WallOfWater extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // {U}: Wall of Water gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{U}")));
     }
 
     private WallOfWater(final WallOfWater card) {

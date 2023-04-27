@@ -9,6 +9,8 @@ import mage.constants.ColoredManaSymbol;
 import mage.constants.SubType;
 import mage.constants.Zone;
 
+import java.util.Arrays;
+
 public final class SkeletonRegenerateToken extends TokenImpl {
 
     public SkeletonRegenerateToken() {
@@ -19,6 +21,8 @@ public final class SkeletonRegenerateToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(ColoredManaSymbol.B)));
+
+        availableImageSetCodes = Arrays.asList("ALA", "A25");
     }
 
     public SkeletonRegenerateToken(final SkeletonRegenerateToken token) {

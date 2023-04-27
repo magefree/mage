@@ -26,8 +26,8 @@ public class SpelltwineTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerB, "Shock");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spelltwine");
-        addTarget(playerA, "Lightning Bolt");
-        addTarget(playerA, "Shock");
+        // addTarget(playerA, "Lightning Bolt"); Autochosen, only target
+        // addTarget(playerA, "Shock"); Autochosen, only target
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

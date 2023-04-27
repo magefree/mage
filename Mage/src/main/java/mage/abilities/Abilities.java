@@ -1,17 +1,17 @@
 
 package mage.abilities;
 
+import mage.abilities.keyword.ProtectionAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
+import mage.constants.Zone;
+import mage.game.Game;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Predicate;
-
-import mage.abilities.keyword.ProtectionAbility;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
-import mage.constants.Zone;
-import mage.game.Game;
 
 /**
  * Represents a collection of {@link Ability Abilities}. This is the top most
@@ -75,14 +75,6 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
      */
     Abilities<ActivatedManaAbilityImpl> getActivatedManaAbilities(Zone zone);
 
-    /**
-     * Retrieves a list of all mana abilities (activated and triggered
-     * abilities)
-     *
-     * @param zone
-     * @return
-     */
-    Abilities<Ability> getManaAbilities(Zone zone);
 
     /**
      * Retrieves all {@link ActivatedManaAbilityImpl mana abilities} in the

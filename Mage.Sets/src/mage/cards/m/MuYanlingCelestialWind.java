@@ -42,7 +42,7 @@ public final class MuYanlingCelestialWind extends CardImpl {
         this.addAbility(ability);
 
         // −3: Return up to two target creatures to their owners' hands.
-        ability = new LoyaltyAbility(new ReturnToHandTargetEffect(true), -3);
+        ability = new LoyaltyAbility(new ReturnToHandTargetEffect(), -3);
         ability.addTarget(new TargetCreaturePermanent(0, 2));
         this.addAbility(ability);
 

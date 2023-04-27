@@ -4,6 +4,7 @@ import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
@@ -24,17 +25,17 @@ public class CreaturesDiedWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.isDiesEvent()
-                    && zEvent.getTarget() != null
-                    && zEvent.getTarget().isCreature(game)) {
-                int amount = getAmountOfCreaturesDiedThisTurnByController(zEvent.getTarget().getControllerId());
-                amountOfCreaturesThatDiedByController.put(zEvent.getTarget().getControllerId(), amount + 1);
-                amount = getAmountOfCreaturesDiedThisTurnByOwner(zEvent.getTarget().getOwnerId());
-                amountOfCreaturesThatDiedByOwner.put(zEvent.getTarget().getOwnerId(), amount + 1);
-            }
+        if (event.getType() != GameEvent.EventType.ZONE_CHANGE) {
+            return;
         }
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (!zEvent.isDiesEvent()
+                || zEvent.getTarget() == null
+                || !zEvent.getTarget().isCreature(game)) {
+            return;
+        }
+        amountOfCreaturesThatDiedByController.compute(zEvent.getTarget().getControllerId(), CardUtil::setOrIncrementValue);
+        amountOfCreaturesThatDiedByOwner.compute(zEvent.getTarget().getOwnerId(), CardUtil::setOrIncrementValue);
     }
 
     @Override

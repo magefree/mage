@@ -26,7 +26,7 @@ public final class RootElemental extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Morph {5}{G}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{5}{G}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{5}{G}{G}")));
         // When Root Elemental is turned face up, you may put a creature card from your hand onto the battlefield.
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_CREATURE_A)));
     }

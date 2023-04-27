@@ -12,6 +12,7 @@ import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -60,23 +61,23 @@ public final class Humility extends CardImpl {
         @Override
         public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
             Player player = game.getPlayer(source.getControllerId());
-            if (player != null) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                        new FilterCreaturePermanent(), source.getControllerId(), source, game)) {
-                    switch (layer) {
-                        case AbilityAddingRemovingEffects_6:
-                            permanent.removeAllAbilities(source.getSourceId(), game);
-                            break;
-                        case PTChangingEffects_7:
-                            if (sublayer == SubLayer.SetPT_7b) {
-                                permanent.getPower().setValue(1);
-                                permanent.getToughness().setValue(1);
-                            }
-                    }
-                }
-                return true;
+            if (player == null) {
+                return false;
             }
-            return false;
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(
+                    StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
+                switch (layer) {
+                    case AbilityAddingRemovingEffects_6:
+                        permanent.removeAllAbilities(source.getSourceId(), game);
+                        break;
+                    case PTChangingEffects_7:
+                        if (sublayer == SubLayer.SetPT_7b) {
+                            permanent.getPower().setModifiedBaseValue(1);
+                            permanent.getToughness().setModifiedBaseValue(1);
+                        }
+                }
+            }
+            return true;
         }
 
         @Override
@@ -89,6 +90,5 @@ public final class Humility extends CardImpl {
             return layer == Layer.AbilityAddingRemovingEffects_6
                     || layer == Layer.PTChangingEffects_7;
         }
-
     }
 }

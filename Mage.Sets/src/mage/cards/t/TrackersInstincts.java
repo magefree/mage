@@ -2,12 +2,12 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.RevealLibraryPickControllerEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.PutCards;
 import mage.filter.StaticFilters;
 
 /**
@@ -24,7 +24,7 @@ public final class TrackersInstincts extends CardImpl {
                 4, 1, StaticFilters.FILTER_CARD_CREATURE_A, PutCards.HAND, PutCards.GRAVEYARD, false));
 
         // Flashback {2}{U}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{2}{U}")));
     }
 
     private TrackersInstincts(final TrackersInstincts card) {

@@ -38,6 +38,7 @@ public class DealsDamageToAPlayerAttachedTriggeredAbility extends TriggeredAbili
         this.attachedDescription = attachedDescription;
         this.targetController = targetController;
         this.onlyCombat = onlyCombat;
+        setTriggerPhrase(generateTriggerPhrase());
     }
 
     public DealsDamageToAPlayerAttachedTriggeredAbility(final DealsDamageToAPlayerAttachedTriggeredAbility ability) {
@@ -84,8 +85,7 @@ public class DealsDamageToAPlayerAttachedTriggeredAbility extends TriggeredAbili
         return true;
     }
 
-    @Override
-    public String getTriggerPhrase() {
+    private String generateTriggerPhrase() {
         StringBuilder sb = new StringBuilder("Whenever ");
         sb.append(attachedDescription);
         if (!attachedDescription.endsWith("creature")) {

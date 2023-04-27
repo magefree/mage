@@ -45,6 +45,7 @@ class OverrideEffect extends OneShotEffect {
 
     public OverrideEffect() {
         super(Outcome.Benefit);
+        this.staticText = "Counter target spell unless its controller pays {1} for each artifact you control";
     }
 
     public OverrideEffect(final OverrideEffect effect) {
@@ -77,10 +78,4 @@ class OverrideEffect extends OneShotEffect {
         }
         return false;
     }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Counter target spell unless its controller pays {1} for each artifact you control";
-    }
-
 }

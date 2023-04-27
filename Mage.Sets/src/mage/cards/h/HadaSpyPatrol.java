@@ -32,7 +32,7 @@ public final class HadaSpyPatrol extends LevelerCard {
         this.toughness = new MageInt(1);
 
         // Level up 2Blue ({U}{U}: Put a level counter on this. Level up only as a sorcery.)
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{2}{U}")));
 
         // LEVEL 1-2
         // 2/2

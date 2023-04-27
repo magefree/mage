@@ -39,7 +39,7 @@ public final class PlanarGuide extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {3}{W}, Exile Planar Guide: Exile all creatures. At the beginning of the next end step, return those cards to the battlefield under their owners' control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PlanarGuideExileEffect(), new ManaCostsImpl("{3}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PlanarGuideExileEffect(), new ManaCostsImpl<>("{3}{W}"));
         ability.addCost(new ExileSourceCost());
         this.addAbility(ability);
     }

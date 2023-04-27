@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -12,8 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.MulticoloredPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -26,12 +23,6 @@ import mage.target.targetpointer.FixedTarget;
  * @author LevelX2
  */
 public final class RenderSilent extends CardImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("multicolored permanent");
-
-    static {
-        filter.add(MulticoloredPredicate.instance);
-    }
 
     public RenderSilent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{U}{U}");

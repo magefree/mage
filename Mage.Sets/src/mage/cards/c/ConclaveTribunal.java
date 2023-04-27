@@ -10,8 +10,7 @@ import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterNonlandPermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 /**
@@ -20,12 +19,6 @@ import mage.target.TargetPermanent;
  */
 public final class ConclaveTribunal extends CardImpl {
 
-    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent();
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-
     public ConclaveTribunal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
@@ -33,13 +26,9 @@ public final class ConclaveTribunal extends CardImpl {
         this.addAbility(new ConvokeAbility());
 
         // When Conclave Tribunal enters the battlefield, exile target nonland permanent an opponent controls until Conclave Tribunal leaves the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(
-                new ExileUntilSourceLeavesEffect(filter.getMessage())
-        );
-        ability.addTarget(new TargetPermanent(filter));
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(
-                new OnLeaveReturnExiledToBattlefieldAbility())
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_NON_LAND));
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);
     }
 

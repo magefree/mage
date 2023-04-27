@@ -9,6 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import java.util.UUID;
@@ -28,12 +29,6 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class VindictiveVampire extends CardImpl {
 
-    private static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
     public VindictiveVampire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
 
@@ -42,11 +37,7 @@ public final class VindictiveVampire extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever another creature you control dies, Vindictive Vampire deals 1 damage to each opponent and you gain 1 life.
-        Ability ability = new VindictiveVampireTriggeredAbility(Zone.ALL, new DamagePlayersEffect(1, TargetController.OPPONENT),
-                false,
-                filter,
-                true
-        );
+        Ability ability = new VindictiveVampireTriggeredAbility(Zone.ALL, new DamagePlayersEffect(1, TargetController.OPPONENT));
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(ability);
     }
@@ -63,20 +54,13 @@ public final class VindictiveVampire extends CardImpl {
 
 class VindictiveVampireTriggeredAbility extends TriggeredAbilityImpl {
 
-    protected FilterPermanent filter;
-    private final boolean setTargetPointer;
-
-    public VindictiveVampireTriggeredAbility(Zone zone, Effect effect,
-            boolean optional, FilterPermanent filter, boolean setTargetPointer) {
-        super(zone, effect, optional);
-        this.filter = filter;
-        this.setTargetPointer = setTargetPointer;
+    public VindictiveVampireTriggeredAbility(Zone zone, Effect effect) {
+        super(zone, effect, false);
+        setTriggerPhrase("Whenever another creature you control dies, ");
     }
 
     public VindictiveVampireTriggeredAbility(final VindictiveVampireTriggeredAbility ability) {
         super(ability);
-        this.filter = ability.filter;
-        this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
@@ -105,27 +89,20 @@ class VindictiveVampireTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getPermanentOrLKIBattlefield(getSourceId()) == null) {
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (!zEvent.isDiesEvent()
+                || zEvent.getTarget() == null
+                || game.getPermanentOrLKIBattlefield(getSourceId()) == null) {
             return false;
         }
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.isDiesEvent()) {
-            if (zEvent.getTarget() != null) {
-                if (filter.match(zEvent.getTarget(), getControllerId(), this, game)) {
-                    if (setTargetPointer) {
-                        for (Effect effect : this.getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
-                        }
-                    }
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
 
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever " + filter.getMessage() + " dies, " ;
+        if (!StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE.match(zEvent.getTarget(), getControllerId(), this, game)) {
+            return false;
+        }
+
+        for (Effect effect : this.getEffects()) {
+            effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
+        }
+        return true;
     }
 }

@@ -19,6 +19,7 @@ public class CycleOrDiscardControllerTriggeredAbility extends TriggeredAbilityIm
 
     public CycleOrDiscardControllerTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever you cycle or discard a card, ");
     }
 
     public CycleOrDiscardControllerTriggeredAbility(final CycleOrDiscardControllerTriggeredAbility ability) {
@@ -33,11 +34,6 @@ public class CycleOrDiscardControllerTriggeredAbility extends TriggeredAbilityIm
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(controllerId);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you cycle or discard a card, " ;
     }
 
     @Override

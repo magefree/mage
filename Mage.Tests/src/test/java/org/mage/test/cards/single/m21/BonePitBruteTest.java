@@ -20,7 +20,6 @@ public class BonePitBruteTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Bone Pit Brute", 8, 5);
     }

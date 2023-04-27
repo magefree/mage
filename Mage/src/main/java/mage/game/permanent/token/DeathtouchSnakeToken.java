@@ -20,6 +20,8 @@ public final class DeathtouchSnakeToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(DeathtouchAbility.getInstance());
+
+        setOriginalExpansionSetCode("AKH");
     }
 
     public DeathtouchSnakeToken(final DeathtouchSnakeToken token) {

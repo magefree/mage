@@ -33,7 +33,7 @@ public final class TourachsChant extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
 
         // At the beginning of your upkeep, sacrifice Tourach's Chant unless you pay {B}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{B}")), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{B}")), TargetController.YOU, false));
 
         // Whenever a player puts a Forest onto the battlefield, Tourach's Chant deals 3 damage to that player unless they put a -1/-1 counter on a creature they control.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new TourachsChantEffect(), filter, false, SetTargetPointer.PLAYER,

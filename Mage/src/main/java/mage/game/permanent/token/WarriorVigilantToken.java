@@ -23,7 +23,7 @@ public final class WarriorVigilantToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(VigilanceAbility.getInstance());
-        availableImageSetCodes.addAll(Arrays.asList("AKH"));
+        availableImageSetCodes.addAll(Arrays.asList("AKH", "DMC"));
     }
 
     public WarriorVigilantToken(final WarriorVigilantToken token) {

@@ -41,7 +41,7 @@ public final class DjinnOfWishes extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.WISH.createInstance(3)), "with three wish counters on it"));
 
         // {2}{U}{U}, Remove a wish counter from Djinn of Wishes: Reveal the top card of your library. You may play that card without paying its mana cost. If you don't, exile it.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DjinnOfWishesEffect(), new ManaCostsImpl("{2}{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DjinnOfWishesEffect(), new ManaCostsImpl<>("{2}{U}{U}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.WISH.createInstance()));
         this.addAbility(ability);
     }

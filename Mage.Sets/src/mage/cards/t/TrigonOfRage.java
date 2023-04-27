@@ -45,7 +45,7 @@ public final class TrigonOfRage extends CardImpl {
         this.addAbility(ability);
 
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
-        ability2.addManaCost(new ManaCostsImpl("{R}{R}"));
+        ability2.addManaCost(new ManaCostsImpl<>("{R}{R}"));
         this.addAbility(ability2);
     }
 

@@ -6,13 +6,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -61,54 +59,23 @@ class StolenGoodsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
-        if (opponent != null) {
-            Card card;
-            do {
-                card = opponent.getLibrary().getFromTop(game);
-                if (card != null) {
-                    opponent.moveCardsToExile(card, source, game, true, source.getSourceId(), CardUtil.createObjectRealtedWindowTitle(source, game, null));
-                }
-            } while (card != null && card.isLand(game));
-
-            if (card != null) {
-                ContinuousEffect effect = new StolenGoodsCastFromExileEffect();
-                effect.setTargetPointer(new FixedTarget(card, game));
-                game.addEffect(effect, source);
+        if (opponent == null) {
+            return false;
+        }
+        Card card;
+        do {
+            card = opponent.getLibrary().getFromTop(game);
+            if (card == null) {
+                continue;
             }
-            return true;
-        }
-        return false;
-    }
-}
+            if (card.isLand(game)) {
+                opponent.moveCardsToExile(card, source, game, true, source.getSourceId(), CardUtil.createObjectRealtedWindowTitle(source, game, null));
+            } else {
+                PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, card, TargetController.YOU, Duration.EndOfTurn, true, false, true);
+                break;
+            }
+        } while (card != null && card.isLand(game));
 
-class StolenGoodsCastFromExileEffect extends AsThoughEffectImpl {
-
-    public StolenGoodsCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "You may cast card from exile";
-    }
-
-    public StolenGoodsCastFromExileEffect(final StolenGoodsCastFromExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return true;
-    }
-
-    @Override
-    public StolenGoodsCastFromExileEffect copy() {
-        return new StolenGoodsCastFromExileEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (objectId != null && objectId.equals(getTargetPointer().getFirst(game, source))
-                && affectedControllerId.equals(source.getControllerId())) {
-            allowCardToPlayWithoutMana(objectId, source, affectedControllerId, game);
-            return true;
-        }
-        return false;
     }
 }

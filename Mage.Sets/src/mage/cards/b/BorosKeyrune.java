@@ -36,7 +36,7 @@ public final class BorosKeyrune extends CardImpl {
                         .withSubType(SubType.SOLDIER)
                         .withType(CardType.ARTIFACT)
                         .withAbility(DoubleStrikeAbility.getInstance()),
-                "", Duration.EndOfTurn), new ManaCostsImpl("{R}{W}")));
+                "", Duration.EndOfTurn), new ManaCostsImpl<>("{R}{W}")));
     }
 
     private BorosKeyrune(final BorosKeyrune card) {

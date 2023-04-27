@@ -32,9 +32,10 @@ package mage.cards.i;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealtDamageAndDiedTriggeredAbility;
+import mage.abilities.common.delayed.WhenTargetDiesDelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.cards.CardImpl;
@@ -42,14 +43,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
 import mage.game.permanent.token.TokenImpl;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
- * @author LevelX
+ * @author awjackson
  */
 public final class InitiateOfBlood extends CardImpl {
 
@@ -61,8 +61,7 @@ public final class InitiateOfBlood extends CardImpl {
 
     public InitiateOfBlood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add(SubType.OGRE);
-        this.subtype.add(SubType.SHAMAN);
+        this.subtype.add(SubType.OGRE, SubType.SHAMAN);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -70,13 +69,13 @@ public final class InitiateOfBlood extends CardImpl {
         this.flipCardName = "Goka the Unjust";
 
         // {T}: Initiate of Blood deals 1 damage to target creature that was dealt damage this turn. 
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        // When that creature dies this turn, flip Initiate of Blood.
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new WhenTargetDiesDelayedTriggeredAbility(
+                new FlipSourceEffect(new GokaTheUnjust()).setText("flip {this}")
+        )));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
-
-        // When that creature is put into a graveyard this turn, flip Initiate of Blood.
-        this.addAbility(new DealtDamageAndDiedTriggeredAbility(new FlipSourceEffect(new GokaTheUnjust())));
-
     }
 
     private InitiateOfBlood(final InitiateOfBlood card) {
@@ -102,13 +101,12 @@ class GokaTheUnjust extends TokenImpl {
         addSuperType(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setRed(true);
-        subtype.add(SubType.OGRE);
-        subtype.add(SubType.SHAMAN);
+        subtype.add(SubType.OGRE, SubType.SHAMAN);
         power = new MageInt(4);
         toughness = new MageInt(4);
 
         // {T}: Goka the Unjust deals 4 damage to target creature that was dealt damage this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(4), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(4), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

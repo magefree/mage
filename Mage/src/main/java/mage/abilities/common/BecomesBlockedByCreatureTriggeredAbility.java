@@ -24,6 +24,7 @@ public class BecomesBlockedByCreatureTriggeredAbility extends TriggeredAbilityIm
     public BecomesBlockedByCreatureTriggeredAbility(Effect effect, FilterCreaturePermanent filter, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
+        setTriggerPhrase("Whenever {this} becomes blocked by " + CardUtil.addArticle(filter.getMessage()) + ", ");
     }
 
     public BecomesBlockedByCreatureTriggeredAbility(final BecomesBlockedByCreatureTriggeredAbility ability) {
@@ -46,11 +47,6 @@ public class BecomesBlockedByCreatureTriggeredAbility extends TriggeredAbilityIm
         }
         getEffects().setTargetPointer(new FixedTarget(event.getSourceId(), game));
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} becomes blocked by " + CardUtil.addArticle(filter.getMessage()) + ", ";
     }
 
     @Override

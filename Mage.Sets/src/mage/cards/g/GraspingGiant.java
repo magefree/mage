@@ -30,10 +30,7 @@ public final class GraspingGiant extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Whenever Grasping Giant becomes blocked by a creature, exile that creature until Grasping Giant leaves the battlefield.
-        Ability ability = new BecomesBlockedByCreatureTriggeredAbility(
-                new ExileUntilSourceLeavesEffect("")
-                        .setText("exile that creature until {this} leaves the battlefield"), false
-        );
+        Ability ability = new BecomesBlockedByCreatureTriggeredAbility(new ExileUntilSourceLeavesEffect(), false);
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);
     }

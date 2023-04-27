@@ -23,6 +23,7 @@ public final class MuYanlingSkyDancerEmblem extends Emblem {
     // "Islands you control have '{T}: Draw a card'."
     public MuYanlingSkyDancerEmblem() {
         this.setName("Emblem Yanling");
+        this.setExpansionSetCodeForImage("M20");
         this.getAbilities().add(new SimpleStaticAbility(
                 Zone.COMMAND,
                 new GainAbilityControlledEffect(new SimpleActivatedAbility(

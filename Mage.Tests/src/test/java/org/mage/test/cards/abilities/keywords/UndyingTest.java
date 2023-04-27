@@ -141,6 +141,7 @@ public class UndyingTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Anafenza, the Foremost");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Butcher Ghoul");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Butcher Ghoul");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

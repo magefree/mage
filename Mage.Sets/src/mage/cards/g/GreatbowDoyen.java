@@ -58,6 +58,7 @@ class GreatbowDoyenTriggeredAbility extends TriggeredAbilityImpl {
 
     public GreatbowDoyenTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GreatbowDoyenEffect());
+        setTriggerPhrase("Whenever an Archer you control deals damage to a creature, ");
     }
 
     public GreatbowDoyenTriggeredAbility(final GreatbowDoyenTriggeredAbility ability) {
@@ -88,11 +89,6 @@ class GreatbowDoyenTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever an Archer you control deals damage to a creature, " ;
     }
 }
 

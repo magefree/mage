@@ -123,14 +123,14 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                 if ((sublayer == SubLayer.CharacteristicDefining_7a && isCharacterDefining())
                         || (sublayer == SubLayer.SetPT_7b && !isCharacterDefining())) {
                     if (power != null) {
-                        permanent.getPower().setValue(power.calculate(game, source, this)); // check all other becomes to use calculate?
+                        permanent.getPower().setModifiedBaseValue(power.calculate(game, source, this)); // check all other becomes to use calculate?
                     } else if (token.getPower() != null) {
-                        permanent.getPower().setValue(token.getPower().getValue());
+                        permanent.getPower().setModifiedBaseValue(token.getPower().getValue());
                     }
                     if (toughness != null) {
-                        permanent.getToughness().setValue(toughness.calculate(game, source, this));
+                        permanent.getToughness().setModifiedBaseValue(toughness.calculate(game, source, this));
                     } else if (token.getToughness() != null) {
-                        permanent.getToughness().setValue(token.getToughness().getValue());
+                        permanent.getToughness().setModifiedBaseValue(token.getToughness().getValue());
                     }
                 }
                 break;

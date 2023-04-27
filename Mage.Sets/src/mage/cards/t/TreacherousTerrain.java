@@ -28,7 +28,7 @@ public final class TreacherousTerrain extends CardImpl {
         this.getSpellAbility().addEffect(new TreacherousTerrainEffect());
 
         // Basic landcycling {2}
-        this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private TreacherousTerrain(final TreacherousTerrain card) {

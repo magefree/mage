@@ -54,6 +54,7 @@ class CultOfTheWaxingMoonAbility extends TriggeredAbilityImpl {
 
     public CultOfTheWaxingMoonAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new WolfToken()), false);
+        setTriggerPhrase("Whenever a permanent you control transforms into a non-Human creature, ");
     }
 
     public CultOfTheWaxingMoonAbility(final CultOfTheWaxingMoonAbility ability) {
@@ -74,10 +75,5 @@ class CultOfTheWaxingMoonAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         return filter.match(permanent, getControllerId(), this, game);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a permanent you control transforms into a non-Human creature, " ;
     }
 }

@@ -100,6 +100,11 @@ public class ModularAbility extends DiesSourceTriggeredAbility {
         }
         return sb.toString();
     }
+
+    @Override
+    public boolean caresAboutManaColor() {
+        return sunburst;
+    }
 }
 
 class ModularStaticAbility extends StaticAbility {

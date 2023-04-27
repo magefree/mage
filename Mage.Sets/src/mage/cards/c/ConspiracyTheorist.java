@@ -123,7 +123,7 @@ class ConspiracyTheoristEffect extends OneShotEffect {
             boolean validTarget = cards.stream()
                 .anyMatch(card -> target.canTarget(card, game));
             if (validTarget && controller.chooseUse(Outcome.Benefit, "Exile a card?", source, game)) {
-                if (controller.choose(Outcome.Benefit, cards, target, game)) {
+                if (controller.choose(Outcome.Benefit, cards, target, source, game)) {
                     Card card = cards.get(target.getFirstTarget(), game);
                     if (card != null && controller.moveCards(card, Zone.EXILED, source, game)) {
                         // you may cast it this turn

@@ -9,6 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.TreasureToken;
@@ -20,12 +21,6 @@ import java.util.UUID;
  */
 public final class LifeInsurance extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("a nontoken creature");
-
-    static {
-        filter.add(TokenPredicate.FALSE);
-    }
-
     public LifeInsurance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{B}");
 
@@ -34,7 +29,7 @@ public final class LifeInsurance extends CardImpl {
 
         // Whenever a nontoken creature dies, you lose 1 life and create a Treasure token.
         Ability ability = new DiesCreatureTriggeredAbility(
-                new LoseLifeSourceControllerEffect(1), false, filter
+                new LoseLifeSourceControllerEffect(1), false, StaticFilters.FILTER_CREATURE_NON_TOKEN
         );
         ability.addEffect(new CreateTokenEffect(new TreasureToken()).concatBy("and"));
         this.addAbility(ability);

@@ -38,7 +38,7 @@ public final class TattermungeWitch extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {R}{G}: Each blocked creature gets +1/+0 and gains trample until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 0, Duration.EndOfTurn, filter, false).setText("each blocked creature gets +1/+0"), new ManaCostsImpl("{R}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 0, Duration.EndOfTurn, filter, false).setText("each blocked creature gets +1/+0"), new ManaCostsImpl<>("{R}{G}"));
         ability.addEffect(new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, filter, "and gains trample until end of turn"));
         this.addAbility(ability);
         

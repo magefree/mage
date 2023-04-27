@@ -45,6 +45,7 @@ class LeylinePhantomTriggeredAbility extends TriggeredAbilityImpl {
 
     public LeylinePhantomTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), false);
+        setTriggerPhrase("Whenever {this} deals combat damage, ");
     }
 
     public LeylinePhantomTriggeredAbility(final LeylinePhantomTriggeredAbility ability) {
@@ -66,10 +67,4 @@ class LeylinePhantomTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return ((DamagedEvent) event).isCombatDamage() && event.getSourceId().equals(this.getSourceId());
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} deals combat damage, " ;
-    }
-
 }

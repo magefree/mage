@@ -46,7 +46,7 @@ public final class ShuYunTheSilentTempest extends CardImpl {
         Ability ability = new SpellCastControllerTriggeredAbility(
                 new DoIfCostPaid(
                         new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn), 
-                        new ManaCostsImpl("{R/W}{R/W}"),
+                        new ManaCostsImpl<>("{R/W}{R/W}"),
                         "Pay to let target creature gain double strike?"),
                 filter, false);
         ability.addTarget(new TargetCreaturePermanent());

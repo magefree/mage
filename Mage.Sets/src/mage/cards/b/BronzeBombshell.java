@@ -49,6 +49,7 @@ class LoseControlTriggeredAbility extends TriggeredAbilityImpl {
 
     public LoseControlTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("When a player other than {this}'s owner controls it, ");
     }
 
     public LoseControlTriggeredAbility(final LoseControlTriggeredAbility ability) {
@@ -75,11 +76,6 @@ class LoseControlTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When a player other than {this}'s owner controls it, " ;
     }
 }
 

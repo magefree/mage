@@ -48,7 +48,8 @@ public class CullingScalesTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Elvish Visionary"); // CMC = 2
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 5);
         addCard(Zone.BATTLEFIELD, playerA, "Culling Scales"); // CMC = 3
-        
+
+        setStrictChooseMode(true);
         // On upkeep Culling Scales targets Elvish Visionary
         addTarget(playerA, "Elvish Visionary");
         

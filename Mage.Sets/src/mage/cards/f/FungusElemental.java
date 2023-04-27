@@ -43,7 +43,7 @@ public final class FungusElemental extends CardImpl {
         Ability ability = new ConditionalActivatedAbility(
                 Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(CounterType.P2P2.createInstance()),
-                new ManaCostsImpl("{G}"),
+                new ManaCostsImpl<>("{G}"),
                 FungusElementalCondition.instance
         );
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));

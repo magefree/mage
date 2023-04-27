@@ -26,7 +26,7 @@ public final class RixMaadiDungeonPalace extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {1}{B}{R}, {tap}: Each player discards a card. Activate this ability only any time you could cast a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardEachPlayerEffect(), new ManaCostsImpl("{1}{B}{R}"));
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardEachPlayerEffect(), new ManaCostsImpl<>("{1}{B}{R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

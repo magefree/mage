@@ -21,7 +21,7 @@ public final class ChimericStaff extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {X}: Chimeric Staff becomes an X/X Construct artifact creature until end of turn.
-        this.addAbility(new SimpleActivatedAbility(new ChimericStaffEffect(), new ManaCostsImpl("{X}")));
+        this.addAbility(new SimpleActivatedAbility(new ChimericStaffEffect(), new ManaCostsImpl<>("{X}")));
     }
 
     private ChimericStaff(final ChimericStaff card) {
@@ -70,8 +70,8 @@ class ChimericStaffEffect extends ContinuousEffectImpl {
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
                     int xValue = source.getManaCostsToPay().getX();
-                    permanent.getPower().setValue(xValue);
-                    permanent.getToughness().setValue(xValue);
+                    permanent.getPower().setModifiedBaseValue(xValue);
+                    permanent.getToughness().setModifiedBaseValue(xValue);
                 }
         }
         return true;

@@ -45,6 +45,7 @@ class DragonAppeasementTriggeredAbility extends TriggeredAbilityImpl {
     public DragonAppeasementTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
         setLeavesTheBattlefieldTrigger(true);
+        setTriggerPhrase("Whenever you sacrifice a creature, ");
     }
 
     public DragonAppeasementTriggeredAbility(final DragonAppeasementTriggeredAbility ability) {
@@ -65,10 +66,5 @@ class DragonAppeasementTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(this.getControllerId())
                 && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).isCreature(game);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you sacrifice a creature, " ;
     }
 }

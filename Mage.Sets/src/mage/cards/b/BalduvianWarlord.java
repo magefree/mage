@@ -22,7 +22,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetAttackingCreature;
 import mage.watchers.common.BlockedByOnlyOneCreatureThisCombatWatcher;
 
 import java.util.*;
@@ -34,8 +33,7 @@ public final class BalduvianWarlord extends CardImpl {
 
     public BalduvianWarlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.BARBARIAN);
+        this.subtype.add(SubType.HUMAN, SubType.BARBARIAN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
@@ -114,7 +112,8 @@ class BalduvianWarlordUnblockEffect extends OneShotEffect {
                 if (targetsController != null) {
                     FilterAttackingCreature filter = new FilterAttackingCreature("creature attacking " + targetsController.getLogName());
                     filter.add(new PermanentInListPredicate(list));
-                    TargetAttackingCreature target = new TargetAttackingCreature(1, 1, filter, true);
+                    TargetPermanent target = new TargetPermanent(filter);
+                    target.setNotTarget(true);
                     if (target.canChoose(controller.getId(), source, game)) {
                         while (!target.isChosen() && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
                             controller.chooseTarget(outcome, target, source, game);
@@ -152,6 +151,7 @@ class BalduvianWarlordUnblockEffect extends OneShotEffect {
                                 );
                             }
                             game.fireEvent(new BlockerDeclaredEvent(chosenPermanent.getId(), permanent.getId(), permanent.getControllerId()));
+                            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKS, permanent.getId(), source, null));
                         }
                         CombatGroup blockGroup = findBlockingGroup(permanent, game); // a new blockingGroup is formed, so it's necessary to find it again
                         if (blockGroup != null) {

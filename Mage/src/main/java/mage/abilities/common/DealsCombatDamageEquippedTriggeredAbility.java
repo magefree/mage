@@ -20,6 +20,7 @@ public class DealsCombatDamageEquippedTriggeredAbility extends TriggeredAbilityI
 
     public DealsCombatDamageEquippedTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever equipped creature deals combat damage, ");
     }
 
     public DealsCombatDamageEquippedTriggeredAbility(final DealsCombatDamageEquippedTriggeredAbility ability) {
@@ -47,7 +48,7 @@ public class DealsCombatDamageEquippedTriggeredAbility extends TriggeredAbilityI
                 .getEvents()
                 .stream()
                 .filter(DamagedEvent::isCombatDamage)
-                .filter(e -> e.getSourceId().equals(sourcePermanent.getAttachedTo()))
+                .filter(e -> e.getAttackerId().equals(sourcePermanent.getAttachedTo()))
                 .mapToInt(GameEvent::getAmount)
                 .sum();
         if (amount < 1) {
@@ -55,10 +56,5 @@ public class DealsCombatDamageEquippedTriggeredAbility extends TriggeredAbilityI
         }
         this.getEffects().setValue("damage", amount);
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever equipped creature deals combat damage, ";
     }
 }

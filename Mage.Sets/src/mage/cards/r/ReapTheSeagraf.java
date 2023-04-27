@@ -19,7 +19,7 @@ public final class ReapTheSeagraf extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken()));
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{4}{U}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{4}{U}")));
     }
 
     private ReapTheSeagraf(final ReapTheSeagraf card) {

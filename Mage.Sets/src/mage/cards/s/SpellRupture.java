@@ -50,6 +50,7 @@ class SpellRuptureCounterUnlessPaysEffect extends OneShotEffect {
 
     public SpellRuptureCounterUnlessPaysEffect() {
         super(Outcome.Detriment);
+        this.staticText = "Counter target spell unless its controller pays {X}, where X is the greatest power among creatures you control";
     }
 
     public SpellRuptureCounterUnlessPaysEffect(final SpellRuptureCounterUnlessPaysEffect effect) {
@@ -80,11 +81,6 @@ class SpellRuptureCounterUnlessPaysEffect extends OneShotEffect {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Counter target spell unless its controller pays {X}, where X is the greatest power among creatures you control";
     }
 }
 

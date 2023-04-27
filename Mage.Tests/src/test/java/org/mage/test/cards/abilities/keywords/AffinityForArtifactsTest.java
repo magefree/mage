@@ -24,13 +24,13 @@ public class AffinityForArtifactsTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Myr Enforcer", 4);
     }
 
     /**
-     * Tests that cost wasn't reduced too much. 3 Mountains is not enough to cast Myr Enforcer.
+     * Tests that cost wasn't reduced too much.
+     * 3 Mountains is not enough to cast Myr Enforcer.
      */
     @Test
     public void testCorrectCostReduction() {
@@ -39,7 +39,7 @@ public class AffinityForArtifactsTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Myr Enforcer", 3);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Myr Enforcer");
+        checkPlayableAbility("Not enough mana", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Myr", false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

@@ -30,9 +30,9 @@ public final class PaleRecluse extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
         // Forestcycling {2}
-        this.addAbility(new ForestcyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new ForestcyclingAbility(new ManaCostsImpl<>("{2}")));
         // plainscycling {2}
-        this.addAbility(new PlainscyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new PlainscyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private PaleRecluse(final PaleRecluse card) {

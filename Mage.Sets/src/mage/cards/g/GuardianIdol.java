@@ -30,7 +30,7 @@ public final class GuardianIdol extends CardImpl {
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {2}: Guardian Idol becomes a 2/2 Golem artifact creature until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new GuardianIdolGolemToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{2}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new GuardianIdolGolemToken(), "", Duration.EndOfTurn), new ManaCostsImpl<>("{2}")));
     }
 
     private GuardianIdol(final GuardianIdol card) {

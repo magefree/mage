@@ -57,6 +57,7 @@ class SpitefulReturnedTriggeredAbility extends TriggeredAbilityImpl {
 
     public SpitefulReturnedTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
+        setTriggerPhrase("Whenever {this} or enchanted creature attacks, ");
     }
 
     public SpitefulReturnedTriggeredAbility(final SpitefulReturnedTriggeredAbility ability) {
@@ -76,27 +77,24 @@ class SpitefulReturnedTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent sourcePermanent = game.getPermanent(this.getSourceId());
-        if (sourcePermanent != null) {
-            if (sourcePermanent.isCreature(game)) {
-                if (event.getSourceId() != null
-                        && event.getSourceId().equals(this.getSourceId())) {
-                    UUID defender = game.getCombat().getDefendingPlayerId(this.getSourceId(), game);
-                    this.getEffects().get(0).setTargetPointer(new FixedTarget(defender));
-                    return true;
-                }
-            } else {
-                if (sourcePermanent.isAttachedTo(event.getSourceId())) {
-                    UUID defender = game.getCombat().getDefendingPlayerId(sourcePermanent.getAttachedTo(), game);
-                    this.getEffects().get(0).setTargetPointer(new FixedTarget(defender));
-                    return true;
-                }
+        if (sourcePermanent == null) {
+            return false;
+        }
+
+        if (sourcePermanent.isCreature(game)) {
+            if (event.getSourceId() != null
+                    && event.getSourceId().equals(this.getSourceId())) {
+                UUID defender = game.getCombat().getDefendingPlayerId(this.getSourceId(), game);
+                this.getEffects().get(0).setTargetPointer(new FixedTarget(defender));
+                return true;
+            }
+        } else {
+            if (sourcePermanent.isAttachedTo(event.getSourceId())) {
+                UUID defender = game.getCombat().getDefendingPlayerId(sourcePermanent.getAttachedTo(), game);
+                this.getEffects().get(0).setTargetPointer(new FixedTarget(defender));
+                return true;
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} or enchanted creature attacks, " ;
     }
 }

@@ -27,7 +27,7 @@ public final class Metrognome extends CardImpl {
         this.addAbility(new DiscardedByOpponentTriggeredAbility(new CreateTokenEffect(new GnomeToken(), 4)));
 
         // {4}, {tap}: Create a 1/1 colorless Gnome artifact creature token.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GnomeToken()), new ManaCostsImpl("{4}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GnomeToken()), new ManaCostsImpl<>("{4}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

@@ -56,6 +56,5 @@ public class XanatharGuildKingpinTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 }

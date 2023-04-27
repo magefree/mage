@@ -40,7 +40,7 @@ public final class DromarTheBanisher extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Dromar, the Banisher deals combat damage to a player, you may pay {2}{U}. If you do, choose a color, then return all creatures of that color to their owners' hands.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(new DromarTheBanisherEffect(), new ManaCostsImpl("{2}{U}")), false));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(new DromarTheBanisherEffect(), new ManaCostsImpl<>("{2}{U}")), false));
     }
 
     private DromarTheBanisher(final DromarTheBanisher card) {

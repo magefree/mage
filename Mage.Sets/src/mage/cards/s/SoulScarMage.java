@@ -84,10 +84,19 @@ class SoulScarMageDamageReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
+        // If a source you control...
+        if (!source.isControlledBy(game.getControllerId(event.getSourceId()))) {
+            return false;
+        }
+        // ...would deal noncombat damage...
+        if (((DamageEvent) event).isCombatDamage()) {
+            return false;
+        }
         Permanent permanent = game.getPermanent(event.getTargetId());
         return permanent != null
+                // ...to a creature...
                 && permanent.isCreature(game)
-                && !((DamageEvent) event).isCombatDamage()
+                // ...an opponent controls
                 && game.getOpponents(permanent.getControllerId()).contains(source.getControllerId());
     }
 }

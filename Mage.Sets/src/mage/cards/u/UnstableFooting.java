@@ -14,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 import mage.target.targetadjustment.TargetAdjuster;
 
@@ -35,7 +34,7 @@ public final class UnstableFooting extends CardImpl {
         this.getSpellAbility().addEffect(new UnstableFootingEffect());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageTargetEffect(5),
-                KickedCondition.instance,
+                KickedCondition.ONCE,
                 "If this spell was kicked, it deals 5 damage to target player or planeswalker")
         );
         this.getSpellAbility().setTargetAdjuster(UnstableFootingAdjuster.instance);
@@ -58,7 +57,7 @@ enum UnstableFootingAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        if (KickedCondition.instance.apply(game, ability)) {
+        if (KickedCondition.ONCE.apply(game, ability)) {
             ability.addTarget(new TargetPlayerOrPlaneswalker());
         }
     }

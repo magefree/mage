@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
@@ -46,7 +46,7 @@ public final class TaranikaAkroanVeteran extends CardImpl {
 
         // Whenever Taranika, Akroan Veteran attacks, untap another target creature you control. Until end of turn, that creature has base power and toughness 4/4 and gains indestructible.
         Ability ability = new AttacksTriggeredAbility(new UntapTargetEffect(), false);
-        ability.addEffect(new SetPowerToughnessTargetEffect(4, 4, Duration.EndOfTurn)
+        ability.addEffect(new SetBasePowerToughnessTargetEffect(4, 4, Duration.EndOfTurn)
                 .setText("Until end of turn, that creature has base power and toughness 4/4"));
         ability.addEffect(new GainAbilityTargetEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn

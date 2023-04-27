@@ -36,7 +36,7 @@ public final class PouncingWurm extends CardImpl {
         // If Pouncing Wurm was kicked, it enters the battlefield with three +1/+1 counters on it and with haste.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3))),
-                KickedCondition.instance,"If Pouncing Wurm was kicked, it enters the battlefield with three +1/+1 counters on it and with haste.");
+                KickedCondition.ONCE,"If Pouncing Wurm was kicked, it enters the battlefield with three +1/+1 counters on it and with haste.");
 		ability.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield));
 		this.addAbility(ability);
     }

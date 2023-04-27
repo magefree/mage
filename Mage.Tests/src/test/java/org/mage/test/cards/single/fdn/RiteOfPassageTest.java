@@ -22,7 +22,6 @@ public class RiteOfPassageTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA,"Shock","Watchwolf");
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertCounterCount("Watchwolf", CounterType.P1P1, 1);
     }
 
@@ -43,7 +42,6 @@ public class RiteOfPassageTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA,"Shock","Watchwolf");
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertCounterCount("Watchwolf", CounterType.P1P1, 0);
     }
 }

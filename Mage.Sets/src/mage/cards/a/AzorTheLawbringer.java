@@ -161,7 +161,7 @@ class AzorTheLawbringerAttacksEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            ManaCosts cost = new ManaCostsImpl("{X}{W}{U}{U}");
+            ManaCosts cost = new ManaCostsImpl<>("{X}{W}{U}{U}");
             if (controller.chooseUse(Outcome.Damage, "Pay " + cost.getText() + "? If you do, you gain X life and draw X cards.", source, game)) {
                 int costX = controller.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
                 cost.add(new GenericManaCost(costX));

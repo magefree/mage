@@ -57,6 +57,7 @@ class PyrimalWellspringTriggeredAbility extends TriggeredAbilityImpl {
     public PyrimalWellspringTriggeredAbility(UUID abilityOriginalId, Effect effect) {
         super(Zone.ALL, effect, false);
         this.abilityOriginalId = abilityOriginalId.toString();
+        setTriggerPhrase("When that mana is used to cast an instant or sorcery spell, ");
     }
 
     public PyrimalWellspringTriggeredAbility(final PyrimalWellspringTriggeredAbility ability) {
@@ -86,10 +87,5 @@ class PyrimalWellspringTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When that mana is used to cast an instant or sorcery spell, " ;
     }
 }

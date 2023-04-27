@@ -10,7 +10,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
@@ -114,8 +114,8 @@ enum CallerOfTheHuntAdjuster implements CostAdjuster {
         // apply boost
         FilterCreaturePermanent filter = new FilterCreaturePermanent("chosen creature type");
         filter.add(typeChoice.getPredicate());
-        ContinuousEffect effectPowerToughness = new SetPowerToughnessSourceEffect(
-                new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame);
+        ContinuousEffect effectPowerToughness = new SetBasePowerToughnessSourceEffect(
+                new PermanentsOnBattlefieldCount(filter));
         effectPowerToughness.setText("");
         SimpleStaticAbility setPT = new SimpleStaticAbility(Zone.ALL, effectPowerToughness);
         GainAbilityTargetEffect gainAbility = new GainAbilityTargetEffect(setPT, Duration.EndOfGame);

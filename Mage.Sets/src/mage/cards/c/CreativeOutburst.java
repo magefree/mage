@@ -7,10 +7,10 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.PutCards;
 import mage.constants.Zone;
 import mage.game.permanent.token.TreasureToken;
 import mage.target.common.TargetAnyTarget;
@@ -32,7 +32,7 @@ public final class CreativeOutburst extends CardImpl {
 
         // {U/R}{U/R}, Discard Creative Outburst: Create a Treasure token.
         Ability ability = new SimpleActivatedAbility(
-                Zone.HAND, new CreateTokenEffect(new TreasureToken()), new ManaCostsImpl("{U/R}{U/R}")
+                Zone.HAND, new CreateTokenEffect(new TreasureToken()), new ManaCostsImpl<>("{U/R}{U/R}")
         );
         ability.addCost(new DiscardSourceCost());
         this.addAbility(ability);

@@ -96,6 +96,7 @@ class PiasRevolutionTriggeredAbility extends TriggeredAbilityImpl {
 
     public PiasRevolutionTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PiasRevolutionReturnEffect(), false);
+        setTriggerPhrase("Whenever a nontoken artifact is put into your graveyard from the battlefield, ");
     }
 
     public PiasRevolutionTriggeredAbility(PiasRevolutionTriggeredAbility ability) {
@@ -125,10 +126,5 @@ class PiasRevolutionTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a nontoken artifact is put into your graveyard from the battlefield, " ;
     }
 }

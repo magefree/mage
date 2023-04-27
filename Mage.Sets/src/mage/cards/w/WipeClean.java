@@ -23,7 +23,7 @@ public final class WipeClean extends CardImpl {
         this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         // Cycling {3}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{3}")));
     }
 
     private WipeClean(final WipeClean card) {

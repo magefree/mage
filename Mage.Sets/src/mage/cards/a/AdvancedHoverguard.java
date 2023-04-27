@@ -31,7 +31,7 @@ public final class AdvancedHoverguard extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {U}: Advanced Hoverguard gains shroud until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(ShroudAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(ShroudAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{U}")));
     }
 
     private AdvancedHoverguard(final AdvancedHoverguard card) {

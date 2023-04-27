@@ -43,6 +43,7 @@ class DeicideExileEffect extends SearchTargetGraveyardHandLibraryForCardNameAndE
 
     DeicideExileEffect() {
         super(true, "its controller's", "any number of cards with the same name as that card");
+        this.staticText = "Exile target enchantment. If the exiled card is a God card, " + this.staticText;
     }
 
     private DeicideExileEffect(final DeicideExileEffect effect) {
@@ -61,6 +62,8 @@ class DeicideExileEffect extends SearchTargetGraveyardHandLibraryForCardNameAndE
             return false;
         }
         controller.moveCards(targetEnchantment, Zone.EXILED, source, game);
+        game.getState().processAction(game);
+
         // 4/26/2014
         // Deicide looks at the card in exile, not the permanent that was exiled, to determine
         // if it is a God. For each of the Gods in the Theros block, it won't matter what your
@@ -76,10 +79,5 @@ class DeicideExileEffect extends SearchTargetGraveyardHandLibraryForCardNameAndE
     @Override
     public DeicideExileEffect copy() {
         return new DeicideExileEffect(this);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Exile target enchantment. If the exiled card is a God card, " + super.getText(mode);
     }
 }

@@ -31,6 +31,7 @@ public final class AshiokNightmareMuseToken extends TokenImpl {
         subtype.add(SubType.NIGHTMARE);
         power = new MageInt(2);
         toughness = new MageInt(3);
+        setOriginalExpansionSetCode("THB");
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new AshiokNightmareMuseTokenEffect(), false));
     }
 

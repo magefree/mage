@@ -42,7 +42,7 @@ public final class FlaringFlameKin extends CardImpl {
             new GainAbilitySourceEffect(TrampleAbility.getInstance()), enchanted,
             ", has trample"));
         Ability grantedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-            new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}"));
+            new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}"));
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(grantedAbility),
             enchanted, ", and has \"{R}: {this} gets +1/+0 until end of turn.\""));
         this.addAbility(ability);

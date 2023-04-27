@@ -35,7 +35,6 @@ public class GenesisUltimatumTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount(playerA, "Genesis Ultimatum", 1);
         assertPermanentCount(playerA, "Grizzly Bears", 1);

@@ -34,7 +34,7 @@ public final class GovernTheGuildless extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
 
         // Forecast - {1}{U}, Reveal Govern the Guildless from your hand: Target creature becomes the color or colors of your choice until end of turn.
-        ForecastAbility ability = new ForecastAbility(new BecomesColorTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{U}"));
+        ForecastAbility ability = new ForecastAbility(new BecomesColorTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{1}{U}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

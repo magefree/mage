@@ -28,7 +28,7 @@ public final class WarCadence extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // {X}{R}: This turn, creatures can't block unless their controller pays {X} for each blocking creature they control.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WarCadenceReplacementEffect(), new ManaCostsImpl("{X}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WarCadenceReplacementEffect(), new ManaCostsImpl<>("{X}{R}")));
 
     }
 
@@ -62,7 +62,7 @@ class WarCadenceReplacementEffect extends ReplacementEffectImpl {
             int amount = xCosts.calculate(game, source, this);
             if (amount > 0) {
                 String mana = "{" + amount + '}';
-                ManaCostsImpl cost = new ManaCostsImpl(mana);
+                ManaCostsImpl cost = new ManaCostsImpl<>(mana);
                 if (cost.canPay(source, source, event.getPlayerId(), game)
                         && player.chooseUse(Outcome.Benefit, "Pay " + mana + " to declare blocker?", source, game)) {
                     if (cost.payOrRollback(source, game, source, event.getPlayerId())) {

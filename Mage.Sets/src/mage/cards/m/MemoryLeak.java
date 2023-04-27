@@ -33,7 +33,7 @@ public final class MemoryLeak extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
 
         // Cycling {1}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}")));
     }
 
     private MemoryLeak(final MemoryLeak card) {
@@ -85,7 +85,7 @@ class MemoryLeakEffect extends OneShotEffect {
             target.setNotTarget(true);
             cards = opponent.getGraveyard();
         }
-        if (controller.choose(outcome, cards, target, game)) {
+        if (controller.choose(outcome, cards, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 controller.moveCards(card, Zone.EXILED, source, game);

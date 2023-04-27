@@ -60,7 +60,7 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Trusted Forcemage", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -188,6 +188,7 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Act of Treason", "Trusted Forcemage");
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Elite Vanguard");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
@@ -216,6 +217,7 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Act of Treason", "Trusted Forcemage");
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Elite Vanguard");
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN); // Effect of "Act of Treason" will end here
@@ -261,6 +263,7 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Blinkmoth Nexus", 1);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: ");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -302,6 +305,7 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Blinkmoth Nexus", 1);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: ");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
 
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
@@ -330,8 +334,8 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Elite Vanguard");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Elite Vanguard");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Phantasmal Bear");
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -392,17 +396,15 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
 
         Permanent trustedForcemange = getPermanent("Trusted Forcemage", playerA.getId());
         Permanent eliteVanguard = getPermanent("Elite Vanguard", playerA.getId());
-        Assert.assertEquals(trustedForcemange.getPairedCard(), null);
-        Assert.assertEquals(eliteVanguard.getPairedCard(), null);
+        Assert.assertNull(trustedForcemange.getPairedCard());
+        Assert.assertNull(eliteVanguard.getPairedCard());
     }
 
-    /*
+    /**
      * Reported bug: Soulbond should use the stack, but unable to use instant speed removal since no trigger occurs
      */
     @Test
-    // Soulbond does not currently use the stack, so this test will fail until then
     public void testRespondToSoulboundWithRemoval() {
-
         // When Palinchron enters the battlefield, untap up to seven lands.
         // {2}{U}{U}: Return Palinchron to its owner's hand.
         addCard(Zone.BATTLEFIELD, playerA, "Palinchron"); // 4/5 flying
@@ -415,17 +417,17 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Deadeye Navigator");
-        setChoice(playerA, true);
-        setChoice(playerA, "Palinchron");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Doom Blade", "Deadeye Navigator");
 
         // Deadeye's ability should not be usable since was destroyed before Soulbond trigger resolved
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{U}:");
+        checkPlayableAbility("Can't activate", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{U}:", false);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         Permanent palinchron = getPermanent("Palinchron", playerA);
-        Assert.assertEquals(null, palinchron.getPairedCard()); // should not be paired
+        Assert.assertNull(palinchron.getPairedCard()); // should not be paired
         assertGraveyardCount(playerA, "Deadeye Navigator", 1);
         assertGraveyardCount(playerB, "Doom Blade", 1);
         assertPermanentCount(playerA, "Palinchron", 1);

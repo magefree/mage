@@ -45,7 +45,7 @@ public final class LordOfTresserhorn extends CardImpl {
         this.addAbility(ability);
 
         // {B}: Regenerate Lord of Tresserhorn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
     }
 
     private LordOfTresserhorn(final LordOfTresserhorn card) {

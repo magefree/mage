@@ -40,7 +40,7 @@ public final class ShefetMonitor extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Cycling {3}{G}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}{G}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{3}{G}")));
 
         // When you cycle Shefet Monitor, you may search your library for a basic land card or a Desert card, put it onto the battlefield, then shuffle your library.
         this.addAbility(new CycleTriggeredAbility(

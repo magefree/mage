@@ -65,7 +65,7 @@ class ForgottenLoreEffect extends OneShotEffect {
         if (you != null && opponent != null) {
             FilterCard filter = new FilterCard();
             filter.add(new OwnerIdPredicate(you.getId()));
-            Cost cost = new ManaCostsImpl("{G}");
+            Cost cost = new ManaCostsImpl<>("{G}");
             TargetCardInGraveyard chosenCard;
             Card card = null;
             boolean done = false;

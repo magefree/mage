@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -24,8 +23,8 @@ public final class BoneSplinters extends CardImpl {
         // As an additional cost to cast Bone Splinters, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         // Destroy target creature.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature (to destoy)")));
-        this.getSpellAbility().addEffect(new DestroyTargetEffect("Destroy target creature"));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent().withChooseHint("to destroy"));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
     private BoneSplinters(final BoneSplinters card) {

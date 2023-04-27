@@ -36,7 +36,7 @@ public final class LlanowarElite extends CardImpl {
         
         // If Llanowar Elite was kicked, it enters the battlefield with five +1/+1 counters on it.
         Ability ability = new EntersBattlefieldAbility(
-                new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(5)), KickedCondition.instance, ""),
+                new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(5)), KickedCondition.ONCE, ""),
                   "If {this} was kicked, it enters the battlefield with five +1/+1 counters on it.");
         this.addAbility(ability);
         

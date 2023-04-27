@@ -50,6 +50,7 @@ class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl {
     CarpetOfFlowersTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CarpetOfFlowersEffect(), true);
         this.addTarget(new TargetOpponent());
+        setTriggerPhrase("At the beginning of each of your main phases, if you haven't added mana with this ability this turn, ");
     }
 
     CarpetOfFlowersTriggeredAbility(final CarpetOfFlowersTriggeredAbility ability) {
@@ -98,14 +99,6 @@ class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl {
                         + game.getState().getZoneChangeCounter(sourceId),
                 Boolean.FALSE);
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "At the beginning of each of your main phases, if "
-                + "you haven't added mana with this ability this turn, "
-                ;
-    }
-
 }
 
 class CarpetOfFlowersEffect extends ManaEffect {

@@ -45,7 +45,7 @@ public final class SerrasLiturgy extends CardImpl {
         // {W}, Sacrifice Serra's Liturgy: Destroy up to X target artifacts and/or enchantments, where X is the number of verse counters on Serra's Liturgy.
         Effect effect = new DestroyTargetEffect(true);
         effect.setText("Destroy up to X target artifacts and/or enchantments, where X is the number of verse counters on {this}.");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{W}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPermanent(0, 0, filter, false));
         ability.setTargetAdjuster(VerseCounterAdjuster.instance);

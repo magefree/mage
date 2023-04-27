@@ -24,7 +24,7 @@ public final class SpinedBasher extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Morph {2}{B}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{B}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{B}")));
     }
 
     private SpinedBasher(final SpinedBasher card) {

@@ -27,7 +27,7 @@ public final class OrdruunCommando extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {W}: Prevent the next 1 damage that would be dealt to Ordruun Commando this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToSourceEffect(Duration.EndOfTurn, 1), new ManaCostsImpl("{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToSourceEffect(Duration.EndOfTurn, 1), new ManaCostsImpl<>("{W}")));
     }
 
     private OrdruunCommando(final OrdruunCommando card) {

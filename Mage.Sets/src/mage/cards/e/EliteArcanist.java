@@ -42,7 +42,7 @@ public final class EliteArcanist extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new EliteArcanistImprintEffect(), true));
 
         // {X}, {T}: Copy the exiled card. You may cast the copy without paying its mana cost. X is the converted mana cost of the exiled card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new EliteArcanistCopyEffect(), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new EliteArcanistCopyEffect(), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         ability.setCostAdjuster(EliteArcanistAdjuster.instance);
         this.addAbility(ability);
@@ -104,7 +104,7 @@ class EliteArcanistImprintEffect extends OneShotEffect {
         if (player != null && !player.getHand().isEmpty()) {
             TargetCard target = new TargetCard(Zone.HAND, filter);
             if (target.canChoose(source.getControllerId(), source, game)
-                    && player.choose(Outcome.Benefit, player.getHand(), target, game)) {
+                    && player.choose(Outcome.Benefit, player.getHand(), target, source, game)) {
                 Card card = player.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
                     card.moveToExile(source.getSourceId(), "Elite Arcanist", source, game);

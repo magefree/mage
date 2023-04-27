@@ -31,7 +31,7 @@ public final class PitRaptor extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(FirstStrikeAbility.getInstance());
         // At the beginning of your upkeep, sacrifice Pit Raptor unless you pay {2}{B}{B}
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{2}{B}{B}")), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{2}{B}{B}")), TargetController.YOU, false));
     }
 
     private PitRaptor(final PitRaptor card) {

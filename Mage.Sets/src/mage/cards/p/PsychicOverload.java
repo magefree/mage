@@ -40,7 +40,7 @@ public final class PsychicOverload extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
         
         // When Psychic Overload enters the battlefield, tap enchanted permanent.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect()));

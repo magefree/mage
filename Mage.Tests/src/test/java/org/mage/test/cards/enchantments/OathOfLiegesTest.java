@@ -30,7 +30,6 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Plains", 4 + 1);
         assertPermanentCount(playerB, "Island", 5);
@@ -62,7 +61,6 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Plains", 5);
         assertPermanentCount(playerB, "Plains", 4 + 1);
@@ -86,7 +84,6 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Plains", 4 + 1);
         assertPermanentCount(playerB, "Plains", 5);
@@ -115,7 +112,6 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Plains", 3 + 2);
         assertPermanentCount(playerB, "Plains", 5);
@@ -171,7 +167,6 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Plains", 10 + 2);
         assertPermanentCount(playerB, "Plains", 12);
@@ -222,7 +217,6 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Plains", 10 + 2);
         assertPermanentCount(playerB, "Plains", 12);

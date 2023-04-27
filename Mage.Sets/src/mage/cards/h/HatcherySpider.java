@@ -5,7 +5,6 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.RevealLibraryPickControllerEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;

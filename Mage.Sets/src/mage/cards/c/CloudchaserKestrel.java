@@ -39,7 +39,7 @@ public final class CloudchaserKestrel extends CardImpl {
         ability.addTarget(new TargetEnchantmentPermanent());
         this.addAbility(ability);
         // {W}: Target permanent becomes white until end of turn.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorTargetEffect(ObjectColor.WHITE, Duration.EndOfTurn), new ManaCostsImpl("{W}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorTargetEffect(ObjectColor.WHITE, Duration.EndOfTurn), new ManaCostsImpl<>("{W}"));
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
     }

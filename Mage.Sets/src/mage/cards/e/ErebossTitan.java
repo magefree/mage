@@ -64,6 +64,7 @@ class ErebossTitanTriggeredAbility extends TriggeredAbilityImpl {
 
     public ErebossTitanTriggeredAbility() {
         super(Zone.GRAVEYARD, new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect(), new DiscardCardCost()));
+        setTriggerPhrase("Whenever a creature card leaves an opponent's graveyard, ");
     }
 
     public ErebossTitanTriggeredAbility(final ErebossTitanTriggeredAbility ability) {
@@ -92,10 +93,5 @@ class ErebossTitanTriggeredAbility extends TriggeredAbilityImpl {
                     && controller.hasOpponent(card.getOwnerId(), game);
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature card leaves an opponent's graveyard, " ;
     }
 }

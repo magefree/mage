@@ -31,7 +31,7 @@ public final class NotoriousAssassin extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}{B}, {tap}, Discard a card: Destroy target nonblack creature. It can't be regenerated.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(true), new ManaCostsImpl("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(true), new ManaCostsImpl<>("{2}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK));

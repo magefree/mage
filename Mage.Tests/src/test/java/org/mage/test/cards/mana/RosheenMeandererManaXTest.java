@@ -35,7 +35,6 @@ public class RosheenMeandererManaXTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -60,7 +59,6 @@ public class RosheenMeandererManaXTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -90,7 +88,6 @@ public class RosheenMeandererManaXTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
     // https://github.com/magefree/mage/issues/5206
@@ -118,7 +115,6 @@ public class RosheenMeandererManaXTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -144,7 +140,6 @@ public class RosheenMeandererManaXTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
     // Condescend {X}{U}
@@ -179,6 +174,5 @@ public class RosheenMeandererManaXTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 }

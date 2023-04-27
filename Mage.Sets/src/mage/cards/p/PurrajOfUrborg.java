@@ -58,7 +58,7 @@ public final class PurrajOfUrborg extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(
                 new DoIfCostPaid(
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                        new ManaCostsImpl("{B}")
+                        new ManaCostsImpl<>("{B}")
                 ),
                 filter, false
         ));

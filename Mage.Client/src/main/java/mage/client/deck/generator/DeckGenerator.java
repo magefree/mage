@@ -291,7 +291,7 @@ public final class DeckGenerator {
 
         for (ColoredManaSymbol c : ColoredManaSymbol.values()) {
             String landName = DeckGeneratorPool.getBasicLandName(c.toString());
-            criteria.rarities(Rarity.LAND).name(landName);
+            criteria.rarities(Rarity.LAND).nameExact(landName);
             List<CardInfo> cards = CardRepository.instance.findCards(criteria);
             if (cards.isEmpty()) { // Workaround to get basic lands if lands are not available for the given sets
                 criteria.setCodes("M15");

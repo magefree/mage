@@ -13,6 +13,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.CommanderPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -59,6 +60,7 @@ class CrimsonHonorGuardEffect extends OneShotEffect {
 
     public CrimsonHonorGuardEffect() {
         super(Outcome.Damage);
+        this.staticText = "{this} deals 4 damage to that player unless they control a commander";
     }
 
     private CrimsonHonorGuardEffect(final CrimsonHonorGuardEffect effect) {
@@ -76,11 +78,6 @@ class CrimsonHonorGuardEffect extends OneShotEffect {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "{this} deals 4 damage to that player unless they control a commander";
     }
 
     @Override

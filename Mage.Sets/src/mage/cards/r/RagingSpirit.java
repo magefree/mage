@@ -27,7 +27,7 @@ public final class RagingSpirit extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}: Raging Spirit becomes colorless until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorSourceEffect(new ObjectColor(), Duration.EndOfTurn), new ManaCostsImpl("{2}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorSourceEffect(new ObjectColor(), Duration.EndOfTurn), new ManaCostsImpl<>("{2}")));
     }
 
     private RagingSpirit(final RagingSpirit card) {

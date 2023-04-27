@@ -577,7 +577,7 @@
     <Component class="javax.swing.JCheckBox" name="chkRated">
       <Properties>
         <Property name="text" type="java.lang.String" value="Rated game"/>
-        <Property name="toolTipText" type="java.lang.String" value="Indicates if matche will be rated"/>
+        <Property name="toolTipText" type="java.lang.String" value="Indicates if match will be rated"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnSettingsLoad">

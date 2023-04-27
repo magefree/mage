@@ -30,7 +30,7 @@ public final class NovaCleric extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}{W}, {tap}, Sacrifice Nova Cleric: Destroy all enchantments.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAllEffect(new FilterEnchantmentPermanent("enchantments")), new ManaCostsImpl("{2}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAllEffect(new FilterEnchantmentPermanent("enchantments")), new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

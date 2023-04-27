@@ -47,13 +47,13 @@ public final class LochmereSerpent extends CardImpl {
 
         // {U}, Sacrifice an Island: Lochmere Serpent can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(
-                new CantBeBlockedSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{U}")
+                new CantBeBlockedSourceEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{U}")
         );
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter1)));
         this.addAbility(ability);
 
         // {B}, Sacrifice a Swamp: You gain 1 life and draw a card.
-        ability = new SimpleActivatedAbility(new GainLifeEffect(1), new ManaCostsImpl("{B}"));
+        ability = new SimpleActivatedAbility(new GainLifeEffect(1), new ManaCostsImpl<>("{B}"));
         ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter2)));
         this.addAbility(ability);
@@ -62,7 +62,7 @@ public final class LochmereSerpent extends CardImpl {
         ability = new ActivateAsSorceryActivatedAbility(
                 Zone.GRAVEYARD,
                 new ExileTargetEffect().setText("Exile five target cards from an opponent's graveyard."),
-                new ManaCostsImpl("{U}{B}")
+                new ManaCostsImpl<>("{U}{B}")
         );
         ability.addEffect(new ReturnSourceFromGraveyardToHandEffect());
         ability.addTarget(new TargetCardInOpponentsGraveyard(

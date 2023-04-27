@@ -26,7 +26,7 @@ public final class PlatedRootwalla extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{G}: Plated Rootwalla gets +3/+3 until end of turn. Activate this ability only once each turn.
-        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, 3, Duration.EndOfTurn), new ManaCostsImpl("{2}{G}")));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, 3, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{G}")));
     }
 
     private PlatedRootwalla(final PlatedRootwalla card) {

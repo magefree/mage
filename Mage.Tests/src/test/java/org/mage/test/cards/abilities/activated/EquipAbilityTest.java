@@ -32,7 +32,7 @@ public class EquipAbilityTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests equipping creature with shroud
+     * Tests not being able to equip creature with shroud.
      */
     @Test
     public void testEquipShroud() {
@@ -40,8 +40,7 @@ public class EquipAbilityTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Simic Sky Swallower");
         addCard(Zone.BATTLEFIELD, playerA, "Plains");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", "Simic Sky Swallower");
-
+        checkPlayableAbility("during", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", false);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -51,7 +50,7 @@ public class EquipAbilityTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests equipping opponent's creature
+     * Tests not being able to equip opponent's creature.
      */
     @Test
     public void testEquipOpponentsCreature() {
@@ -59,7 +58,7 @@ public class EquipAbilityTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves");
         addCard(Zone.BATTLEFIELD, playerA, "Plains");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", "Llanowar Elves");
+        checkPlayableAbility("during", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

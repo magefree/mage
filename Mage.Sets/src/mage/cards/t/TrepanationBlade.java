@@ -38,7 +38,7 @@ public final class TrepanationBlade extends CardImpl {
         this.addAbility(new AttacksAttachedTriggeredAbility(new TrepanationBladeDiscardEffect()));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), false));
     }
 
     private TrepanationBlade(final TrepanationBlade card) {

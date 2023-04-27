@@ -40,7 +40,7 @@ public final class PilferingImp extends CardImpl {
                 new DiscardCardYouChooseTargetEffect(
                         StaticFilters.FILTER_CARD_NON_LAND,
                         TargetController.OPPONENT
-                ), new ManaCostsImpl("{1}{B}")
+                ), new ManaCostsImpl<>("{1}{B}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

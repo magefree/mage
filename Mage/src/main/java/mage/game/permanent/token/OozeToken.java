@@ -3,6 +3,7 @@ package mage.game.permanent.token;
 import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.util.RandomUtil;
 
 import java.util.Arrays;
 
@@ -25,7 +26,24 @@ public final class OozeToken extends TokenImpl {
         power = new MageInt(0);
         toughness = new MageInt(0);
 
-        availableImageSetCodes = Arrays.asList("ALA", "ROE", "RTR", "MM3", "UMA", "GK2", "2XM");
+        availableImageSetCodes = Arrays.asList("ALA", "ROE", "RTR", "MM3", "UMA", "GK2", "2XM", "M11", "PCA", "NCC");
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("M11")) {
+            setTokenType(1);
+        }
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("PCA")) {
+            setTokenType(1);
+        }
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("NCC")) {
+            setTokenType(1);
+        }
     }
 
     public OozeToken(final OozeToken token) {

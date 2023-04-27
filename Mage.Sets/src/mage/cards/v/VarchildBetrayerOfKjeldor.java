@@ -28,7 +28,7 @@ import mage.game.permanent.token.SurvivorToken;
 public final class VarchildBetrayerOfKjeldor extends CardImpl {
 
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent(SubType.SURVIVOR, "Survivors your opponents control");
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent(SubType.SURVIVOR, "all Survivors");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent(SubType.SURVIVOR, "Survivors");
 
     static {
         filter1.add(TargetController.OPPONENT.getControllerPredicate());

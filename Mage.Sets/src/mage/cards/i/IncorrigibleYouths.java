@@ -26,7 +26,7 @@ public final class IncorrigibleYouths extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // Madness {2}{R}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{2}{R}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{2}{R}")));
     }
 
     private IncorrigibleYouths(final IncorrigibleYouths card) {

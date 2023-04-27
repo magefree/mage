@@ -1,16 +1,13 @@
 package org.mage.plugins.card.images;
 
-import com.google.common.base.Function;
 import com.google.common.collect.ComputationException;
 import mage.abilities.icon.CardIconColor;
 import mage.client.constants.Constants;
-import mage.client.dialog.PreferencesDialog;
 import mage.client.util.SoftValuesLoadingCache;
 import mage.client.util.TransformedImageCache;
 import mage.view.CardView;
 import net.java.truevfs.access.TFile;
 import net.java.truevfs.access.TFileInputStream;
-import net.java.truevfs.access.TFileOutputStream;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
 import org.mage.plugins.card.utils.CardImageUtils;
@@ -20,7 +17,6 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,165 +25,113 @@ import java.util.regex.Pattern;
  * that the images may be garbage collected when they are not needed any more,
  * but will be kept as long as possible.
  * <p>
- * Key format: "[cardname]#[setname]#[type]#[collectorID]#[param]"
- * <p>
- * where param is:
- * <ul>
- * <li>size of image</li>
+ * Key format: "[cardname]#[setname]#[type]#[collectorID]#[image size]#[additional data]"
  *
  * <li>#Normal: request for unrotated image</li>
  * <li>#Tapped: request for rotated image</li>
  * <li>#Cropped: request for cropped image that is used for Shandalar like card
  * look</li>
  * </ul>
+ *
+ * @author JayDi85
  */
 public final class ImageCache {
 
     private static final Logger LOGGER = Logger.getLogger(ImageCache.class);
 
-    private static final SoftValuesLoadingCache<String, BufferedImage> IMAGE_CACHE;
-    private static final SoftValuesLoadingCache<String, BufferedImage> FACE_IMAGE_CACHE;
-    private static final SoftValuesLoadingCache<String, BufferedImage> CARD_ICONS_CACHE;
+    private static final SoftValuesLoadingCache<String, ImageCacheData> IMAGE_CACHE; // cards and tokens
+    private static final SoftValuesLoadingCache<String, ImageCacheData> FACE_IMAGE_CACHE;
+    private static final SoftValuesLoadingCache<String, ImageCacheData> CARD_ICONS_CACHE;
 
     /**
      * Common pattern for keys. See ImageCache.getKey for structure info
      */
-    private static final Pattern KEY_PATTERN = Pattern.compile("(.*)#(.*)#(.*)#(.*)#(.*)#(.*)");
+    private static final Pattern KEY_PATTERN = Pattern.compile("(.*)#(.*)#(.*)#(.*)#(.*)");
     private static final Pattern CARD_ICON_KEY_PATTERN = Pattern.compile("(.*)#(.*)#(.*)");
 
     static {
         // softValues() = Specifies that each value (not key) stored in the map should be wrapped in a SoftReference
         // (by default, strong references are used). Softly-referenced objects will be garbage-collected in a
         // globally least-recently-used manner, in response to memory demand.
-        IMAGE_CACHE = SoftValuesLoadingCache.from(new Function<String, BufferedImage>() {
-            @Override
-            public BufferedImage apply(String key) {
-                try {
-                    boolean usesVariousArt = false;
-                    if (key.matches(".*#usesVariousArt.*")) {
-                        usesVariousArt = true;
-                        key = key.replace("#usesVariousArt", "");
+        IMAGE_CACHE = SoftValuesLoadingCache.from(key -> {
+            try {
+                boolean usesVariousArt = false;
+                if (key.matches(".*#usesVariousArt.*")) {
+                    usesVariousArt = true;
+                    key = key.replace("#usesVariousArt", "");
+                }
+                Matcher m = KEY_PATTERN.matcher(key);
+
+                if (m.matches()) {
+                    String name = m.group(1);
+                    String setCode = m.group(2);
+                    Integer type = Integer.parseInt(m.group(3));
+                    String collectorId = m.group(4);
+                    if (collectorId.equals("null")) {
+                        collectorId = "0";
                     }
-                    boolean thumbnail = false;
-                    if (key.matches(".*#thumb.*")) {
-                        thumbnail = true;
-                        key = key.replace("#thumb", "");
-                    }
-                    Matcher m = KEY_PATTERN.matcher(key);
 
-                    if (m.matches()) {
-                        String name = m.group(1);
-                        String set = m.group(2);
-                        Integer type = Integer.parseInt(m.group(3));
-                        String collectorId = m.group(4);
-                        if (collectorId.equals("null")) {
-                            collectorId = "0";
-                        }
-                        String tokenSetCode = m.group(5);
-                        String tokenDescriptor = m.group(6);
+                    CardDownloadData info = new CardDownloadData(name, setCode, collectorId, usesVariousArt, type);
 
-                        CardDownloadData info = new CardDownloadData(name, set, collectorId, usesVariousArt, type, tokenSetCode, tokenDescriptor);
+                    boolean cardback = false;
+                    String path;
+                    if (collectorId.isEmpty() || "0".equals(collectorId)) {
+                        // TOKEN
+                        // can be a normal token or a token from card (see embalm ability)
+                        info.setToken(true);
+                        TFile tokenFile;
 
-                        boolean cardback = false;
-                        String path;
-                        if (collectorId.isEmpty() || "0".equals(collectorId) || !tokenDescriptor.isEmpty()) { // tokenDescriptor for embalm ability
-                            info.setToken(true);
-                            path = CardImageUtils.generateTokenImagePath(info);
-                            if (path == null) {
-                                cardback = true;
-                                // try token image from card
-                                CardDownloadData newInfo = new CardDownloadData(info);
-                                newInfo.setToken(false);
-                                path = CardImageUtils.buildImagePathToCard(newInfo);
-                                TFile tokenFile = getTFile(path);
-                                if (tokenFile == null || !tokenFile.exists()) {
-                                    // token empty token image
-                                    // TODO: replace empty token by other default card, not cardback
-                                    path = CardImageUtils.buildImagePathToDefault(DirectLinksForDownload.cardbackFilename);
-                                }
-                            }
-                        } else {
-                            path = CardImageUtils.buildImagePathToCard(info);
+                        // try normal token
+                        path = CardImageUtils.buildImagePathToCardOrToken(info);
+                        tokenFile = getTFile(path);
+
+                        // try token from card
+                        if (tokenFile == null || !tokenFile.exists()) {
+                            CardDownloadData tempInfo = new CardDownloadData(info);
+                            tempInfo.setToken(false);
+                            path = CardImageUtils.buildImagePathToCardOrToken(info);
+                            tokenFile = getTFile(path);
                         }
 
-                        if (path == null) {
-                            return null;
-                        }
-                        TFile file = getTFile(path);
-                        if (file == null) {
-                            return null;
-                        }
-
-                        if (thumbnail && path.endsWith(".jpg")) {
-                            // need thumbnail image
-                            String thumbnailPath = buildThumbnailPath(path);
-                            TFile thumbnailFile = null;
-                            try {
-                                thumbnailFile = new TFile(thumbnailPath);
-                            } catch (Exception ex) {
-                            }
-                            boolean exists = false;
-                            if (thumbnailFile != null) {
-                                try {
-                                    exists = thumbnailFile.exists();
-                                } catch (Exception ex) {
-                                    exists = false;
-                                }
-                            }
-                            if (exists) {
-                                LOGGER.debug("loading thumbnail for " + key + ", path=" + thumbnailPath);
-                                BufferedImage thumbnailImage = loadImage(thumbnailFile);
-                                if (thumbnailImage == null) { // thumbnail exists but broken for some reason
-                                    LOGGER.warn("failed loading thumbnail for " + key + ", path=" + thumbnailPath
-                                            + ", thumbnail file is probably broken, attempting to recreate it...");
-                                    thumbnailImage = makeThumbnailByFile(key, file, thumbnailPath);
-                                }
-
-                                if (cardback) {
-                                    // unknown tokens on opponent desk
-                                    thumbnailImage = getRoundCorner(thumbnailImage);
-                                }
-
-                                return thumbnailImage;
-                            } else {
-                                return makeThumbnailByFile(key, file, thumbnailPath);
-                            }
-                        } else {
-                            if (cardback) {
-                                // need cardback image
-                                BufferedImage image = loadImage(file);
-                                image = getRoundCorner(image);
-                                return image;
-                            } else {
-                                // need normal card image
-                                BufferedImage image = loadImage(file);
-                                image = getWizardsCard(image);
-                                image = getRoundCorner(image);
-                                return image;
-                            }
+                        // try unknown token image
+                        if (tokenFile == null || !tokenFile.exists()) {
+                            // TODO: replace empty token by other default card, not cardback
+                            cardback = true;
+                            path = CardImageUtils.buildImagePathToDefault(DirectLinksForDownload.cardbackFilename);
                         }
                     } else {
-                        throw new RuntimeException(
-                                "Requested image doesn't fit the requirement for key (<cardname>#<setname>#<collectorID>): " + key);
+                        // CARD
+                        path = CardImageUtils.buildImagePathToCardOrToken(info);
                     }
-                } catch (Exception ex) {
-                    if (ex instanceof ComputationException) {
-                        throw (ComputationException) ex;
-                    } else {
-                        throw new ComputationException(ex);
-                    }
-                }
-            }
 
-            public BufferedImage makeThumbnailByFile(String key, TFile file, String thumbnailPath) {
-                BufferedImage image = loadImage(file);
-                image = getWizardsCard(image);
-                image = getRoundCorner(image);
-                if (image == null) {
-                    return null;
+                    TFile file = getTFile(path);
+                    if (file == null) {
+                        return new ImageCacheData(path, null);
+                    }
+
+                    if (cardback) {
+                        // TODO: is there any different in images styles? Cardback must be from scryfall, not wizards
+                        // need cardback image
+                        BufferedImage image = loadImage(file);
+                        image = getRoundCorner(image);
+                        return new ImageCacheData(path, image);
+                    } else {
+                        // need normal card image
+                        BufferedImage image = loadImage(file);
+                        image = getWizardsCard(image);
+                        image = getRoundCorner(image);
+                        return new ImageCacheData(path, image);
+                    }
+                } else {
+                    throw new RuntimeException(
+                            "Requested image doesn't fit the requirement for key (<cardname>#<setname>#<collectorID>): " + key);
                 }
-                LOGGER.debug("creating thumbnail for " + key);
-                return makeThumbnail(image, thumbnailPath);
+            } catch (Exception ex) {
+                if (ex instanceof ComputationException) {
+                    throw (ComputationException) ex;
+                } else {
+                    throw new ComputationException(ex);
+                }
             }
         });
 
@@ -197,22 +141,18 @@ public final class ImageCache {
 
                 if (m.matches()) {
                     String name = m.group(1);
-                    String set = m.group(2);
-                    //Integer artid = Integer.parseInt(m.group(2));
+                    String setCode = m.group(2);
+                    // skip type
+                    // skip collectorId
 
-                    String path;
-                    path = CardImageUtils.generateFaceImagePath(name, set);
-
-                    if (path == null) {
-                        return null;
-                    }
+                    String path = CardImageUtils.generateFaceImagePath(name, setCode);
                     TFile file = getTFile(path);
                     if (file == null) {
-                        return null;
+                        return new ImageCacheData(path, null);
                     }
 
                     BufferedImage image = loadImage(file);
-                    return image;
+                    return new ImageCacheData(path, image);
                 } else {
                     throw new RuntimeException(
                             "Requested face image doesn't fit the requirement for key (<cardname>#<artid>#: " + key);
@@ -235,7 +175,7 @@ public final class ImageCache {
                     String resourceName = m.group(2);
                     CardIconColor cardIconColor = CardIconColor.valueOf(m.group(3));
                     BufferedImage image = ImageManagerImpl.instance.getCardIcon(resourceName, cardSize, cardIconColor);
-                    return image;
+                    return new ImageCacheData(resourceName, image);
                 } else {
                     throw new RuntimeException("Wrong card icons image key format: " + key);
                 }
@@ -255,109 +195,38 @@ public final class ImageCache {
         CARD_ICONS_CACHE.invalidateAll();
     }
 
-    public static String getFilePath(CardView card, int width) {
-        String key = getKey(card, card.getName(), Integer.toString(width));
-        boolean usesVariousArt = false;
-        if (key.matches(".*#usesVariousArt.*")) {
-            usesVariousArt = true;
-            key = key.replace("#usesVariousArt", "");
-        }
-        boolean thumbnail = false;
-        if (key.matches(".*#thumb.*")) {
-            thumbnail = true;
-            key = key.replace("#thumb", "");
-        }
-        Matcher m = KEY_PATTERN.matcher(key);
-
-        if (m.matches()) {
-            String name = m.group(1);
-            String set = m.group(2);
-            Integer type = Integer.parseInt(m.group(3));
-            String collectorId = m.group(4);
-            if (collectorId.equals("null")) {
-                collectorId = "0";
-            }
-            String tokenSetCode = m.group(5);
-            String tokenDescriptor = m.group(6);
-
-            CardDownloadData info = new CardDownloadData(name, set, collectorId, usesVariousArt, type, tokenSetCode, tokenDescriptor);
-
-            String path;
-            if (collectorId.isEmpty() || "0".equals(collectorId) || !tokenDescriptor.isEmpty()) { // tokenDescriptor for embalm ability
-                info.setToken(true);
-                path = CardImageUtils.generateTokenImagePath(info);
-                if (path == null) {
-                    // try token image from card
-                    CardDownloadData newInfo = new CardDownloadData(info);
-                    newInfo.setToken(false);
-                    path = CardImageUtils.buildImagePathToCard(newInfo);
-                    TFile tokenFile = getTFile(path);
-                    if (tokenFile == null || !tokenFile.exists()) {
-                        // token empty token image
-                        // TODO: replace empty token by other default card, not cardback
-                        path = CardImageUtils.buildImagePathToDefault(DirectLinksForDownload.cardbackFilename);
-                    }
-                }
-            } else {
-                path = CardImageUtils.buildImagePathToCard(info);
-            }
-
-            if (thumbnail && path.endsWith(".jpg")) {
-                return buildThumbnailPath(path);
-            }
-            return path;
-        }
-
-        return "";
-    }
-
     private ImageCache() {
     }
 
-    public static BufferedImage getCardbackImage() {
-        BufferedImage image = ImageCache.loadImage(new TFile(CardImageUtils.buildImagePathToDefault(DirectLinksForDownload.cardbackFilename)));
+    public static ImageCacheData getCardbackImage() {
+        String path = CardImageUtils.buildImagePathToDefault(DirectLinksForDownload.cardbackFilename);
+        BufferedImage image = ImageCache.loadImage(getTFile(path));
         image = getRoundCorner(image);
-        return image;
+        return new ImageCacheData(path, image);
     }
 
-    public static BufferedImage getMorphImage() {
-        // TODO: replace by morth image
-        CardDownloadData info = new CardDownloadData("Morph", "KTK", "0", false, 0, "KTK", "");
+    public static ImageCacheData getMorphImage() {
+        // TODO: replace by downloadable morth image
+        CardDownloadData info = new CardDownloadData("Morph", "KTK", "0", false, 0);
         info.setToken(true);
-        String path = CardImageUtils.generateTokenImagePath(info);
-        if (path == null) {
-            return null;
-        }
-        TFile file = getTFile(path);
+        String path = CardImageUtils.buildImagePathToCardOrToken(info);
 
+        TFile file = getTFile(path);
         BufferedImage image = loadImage(file);
         image = getRoundCorner(image);
-        return image;
+        return new ImageCacheData(path, image);
     }
 
-    public static BufferedImage getManifestImage() {
-        // TODO: replace by manifestest image
-        CardDownloadData info = new CardDownloadData("Manifest", "FRF", "0", false, 0, "FRF", "");
+    public static ImageCacheData getManifestImage() {
+        // TODO: replace by downloadable manifestest image
+        CardDownloadData info = new CardDownloadData("Manifest", "FRF", "0", false, 0);
         info.setToken(true);
-        String path = CardImageUtils.generateTokenImagePath(info);
-        if (path == null) {
-            return null;
-        }
-        TFile file = getTFile(path);
+        String path = CardImageUtils.buildImagePathToCardOrToken(info);
 
+        TFile file = getTFile(path);
         BufferedImage image = loadImage(file);
         image = getRoundCorner(image);
-        return image;
-    }
-
-    private static String buildThumbnailPath(String path) {
-        String thumbnailPath;
-        if (PreferencesDialog.isSaveImagesToZip()) {
-            thumbnailPath = path.replace(".zip", ".thumb.zip");
-        } else {
-            thumbnailPath = path.replace(".jpg", ".thumb.jpg");
-        }
-        return thumbnailPath;
+        return new ImageCacheData(path, image);
     }
 
     public static BufferedImage getRoundCorner(BufferedImage image) {
@@ -387,6 +256,7 @@ public final class ImageCache {
     }
 
     public static BufferedImage getWizardsCard(BufferedImage image) {
+        // TODO: can be removed?
         if (image != null && image.getWidth() == 265 && image.getHeight() == 370) {
             BufferedImage crop = new BufferedImage(256, 360, BufferedImage.TYPE_INT_RGB);
             Graphics2D graphics2D = crop.createGraphics();
@@ -398,80 +268,61 @@ public final class ImageCache {
         }
     }
 
-    public static boolean isFaceImagePresent(CardView card) {
-        String path;
-        path = CardImageUtils.generateFaceImagePath(card.getName(), card.getExpansionSetCode());
-
-        if (path == null) {
-            return false;
-        }
-        TFile file = getTFile(path);
-        if (file == null) {
-            return false;
-        }
-        return file.exists();
+    public static ImageCacheData getImageOriginal(CardView card) {
+        return getImage(getKey(card, card.getName(), 0));
     }
 
-    public static BufferedImage getThumbnail(CardView card) {
-        return getImage(getKey(card, card.getName(), "#thumb"));
+    public static ImageCacheData getImageOriginalAlternateName(CardView card) {
+        return getImage(getKey(card, card.getAlternateName(), 0));
     }
 
-    public static BufferedImage tryGetThumbnail(CardView card) {
-        return tryGetImage(getKey(card, card.getName(), "#thumb"));
-    }
-
-    public static BufferedImage getImageOriginal(CardView card) {
-        return getImage(getKey(card, card.getName(), ""));
-    }
-
-    public static BufferedImage getImageOriginalAlternateName(CardView card) {
-        return getImage(getKey(card, card.getAlternateName(), ""));
-    }
-
-    public static BufferedImage getCardIconImage(String resourceName, int iconSize, String cardColorName) {
+    public static ImageCacheData getCardIconImage(String resourceName, int iconSize, String cardColorName) {
         return getCardIconImage(getCardIconKey(resourceName, iconSize, cardColorName));
     }
 
     /**
      * Returns the Image corresponding to the key
      */
-    private static BufferedImage getImage(String key) {
+    private static ImageCacheData getImage(String key) {
         try {
-            return IMAGE_CACHE.getOrNull(key);
+            ImageCacheData data = IMAGE_CACHE.getOrNull(key);
+            return data != null ? data : new ImageCacheData("ERROR: key - " + key, null);
         } catch (ComputationException ex) {
             // too low memory
             if (ex.getCause() instanceof NullPointerException) {
-                return null;
+                return new ImageCacheData("ERROR: low memory?", null);
             }
             LOGGER.error(ex, ex);
-            return null;
+            return new ImageCacheData("ERROR: see logs", null);
         }
     }
 
     /**
      * Returns the Image corresponding to the key
      */
-    private static BufferedImage getFaceImage(String key) {
+    private static ImageCacheData getFaceImage(String key) {
         try {
-            return FACE_IMAGE_CACHE.getOrNull(key);
+            ImageCacheData data = FACE_IMAGE_CACHE.getOrNull(key);
+            return data != null ? data : new ImageCacheData("ERROR: key " + key, null);
         } catch (ComputationException ex) {
             if (ex.getCause() instanceof NullPointerException) {
-                return null;
+                return new ImageCacheData("ERROR: low memory?", null);
             }
             LOGGER.error(ex, ex);
-            return null;
+            return new ImageCacheData("ERROR: see logs", null);
         }
     }
 
-    private static BufferedImage getCardIconImage(String key) {
+    private static ImageCacheData getCardIconImage(String key) {
         try {
-            return CARD_ICONS_CACHE.getOrNull(key);
+            ImageCacheData data = CARD_ICONS_CACHE.getOrNull(key);
+            return data != null ? data : new ImageCacheData("ERROR: key - " + key, null);
         } catch (ComputationException ex) {
             if (ex.getCause() instanceof NullPointerException) {
-                return null;
+                return new ImageCacheData("ERROR: low memory?", null);
             }
             LOGGER.error(ex, ex);
-            return null;
+            return new ImageCacheData("ERROR: see logs", null);
         }
     }
 
@@ -479,22 +330,24 @@ public final class ImageCache {
      * Returns the Image corresponding to the key only if it already exists in
      * the cache.
      */
-    private static BufferedImage tryGetImage(String key) {
+    private static ImageCacheData tryGetImage(String key) {
         return IMAGE_CACHE.peekIfPresent(key);
     }
 
     /**
-     * Returns the map key for a card, without any suffixes for the image size.
+     * Generate key for images cache (it must contain all info to search and load image from the disk)
+     *
+     * @param card
+     * @param cardName  - can be alternative name
+     * @param imageSize - size info, 0 to use original image (with max size)
      */
-    private static String getKey(CardView card, String name, String suffix) {
-        return (card.isToken() ? name.replace(" Token", "") : name)
+    private static String getKey(CardView card, String cardName, int imageSize) {
+        return (card.isToken() ? cardName.replace(" Token", "") : cardName)
                 + '#' + card.getExpansionSetCode()
                 + '#' + card.getType()
                 + '#' + card.getCardNumber()
-                + '#' + (card.getTokenSetCode() == null ? "" : card.getTokenSetCode())
-                + suffix
-                + (card.getUsesVariousArt() ? "#usesVariousArt" : "")
-                + '#' + (card.getTokenDescriptor() != null ? card.getTokenDescriptor() : "");
+                + '#' + imageSize
+                + (card.getUsesVariousArt() ? "#usesVariousArt" : "");
     }
 
     /**
@@ -534,24 +387,6 @@ public final class ImageCache {
         return image;
     }
 
-    public static BufferedImage makeThumbnail(BufferedImage original, String path) {
-        BufferedImage image = TransformedImageCache.getResizedImage(original, Constants.THUMBNAIL_SIZE_FULL.width, Constants.THUMBNAIL_SIZE_FULL.height);
-        TFile imageFile = getTFile(path);
-        if (imageFile == null) {
-            return null;
-        }
-        try {
-            try (TFileOutputStream outputStream = new TFileOutputStream(imageFile)) {
-                String format = image.getColorModel().getNumComponents() > 3 ? "png" : "jpg";
-                ImageIO.write(image, format, outputStream);
-            }
-        } catch (IOException e) {
-            LOGGER.error(e.getMessage(), e);
-            imageFile.delete();
-        }
-        return image;
-    }
-
     /**
      * Returns an image scaled to the size given
      *
@@ -584,23 +419,22 @@ public final class ImageCache {
      * @param height
      * @return
      */
-    public static BufferedImage getImage(CardView card, int width, int height) {
-        if (Constants.THUMBNAIL_SIZE_FULL.width + 10 > width) {
-            return getThumbnail(card);
-        }
-        String key = getKey(card, card.getName(), Integer.toString(width));
-        BufferedImage original = getImage(key);
-        if (original == null) {
-            LOGGER.debug(key + " not found");
-            return null;
+    public static ImageCacheData getImage(CardView card, int width, int height) {
+        String key = getKey(card, card.getName(), width);
+        ImageCacheData data = getImage(key);
+        if (data.getImage() == null) {
+            LOGGER.debug("Image doesn't exists in the cache: " + key);
+            return data;
         }
 
-        double scale = Math.min((double) width / original.getWidth(), (double) height / original.getHeight());
+        double scale = Math.min((double) width / data.getImage().getWidth(), (double) height / data.getImage().getHeight());
         if (scale >= 1) {
-            return original;
+            return data;
         }
 
-        return TransformedImageCache.getResizedImage(original, (int) (original.getWidth() * scale), (int) (original.getHeight() * scale));
+        BufferedImage newImage = TransformedImageCache.getResizedImage(data.getImage(), (int) (data.getImage().getWidth() * scale), (int) (data.getImage().getHeight() * scale));
+        data.setImage(newImage);
+        return data;
     }
 
     /**
@@ -611,15 +445,13 @@ public final class ImageCache {
      * @param height
      * @return
      */
-    public static BufferedImage getFaceImage(CardView card, int width, int height) {
+    public static ImageCacheData getFaceImage(CardView card, int width, int height) {
         String key = getFaceKey(card, card.getName(), card.getExpansionSetCode());
-        BufferedImage original = getFaceImage(key);
-        if (original == null) {
+        ImageCacheData data = getFaceImage(key);
+        if (data.getImage() == null) {
             LOGGER.debug(key + " (faceimage) not found");
-            return null;
         }
-
-        return original;
+        return data;
     }
 
     /**
@@ -632,29 +464,31 @@ public final class ImageCache {
      * @param height
      * @return
      */
-    public static BufferedImage tryGetImage(CardView card, int width, int height) {
-        if (Constants.THUMBNAIL_SIZE_FULL.width + 10 > width) {
-            return tryGetThumbnail(card);
-        }
-        String key = getKey(card, card.getName(), Integer.toString(width));
-        BufferedImage original = tryGetImage(key);
-        if (original == null) {
+    public static ImageCacheData tryGetImage(CardView card, int width, int height) {
+        String key = getKey(card, card.getName(), width);
+        ImageCacheData data = tryGetImage(key);
+        if (data.getImage() == null) {
             LOGGER.debug(key + " not found");
-            return null;
+            return data;
         }
 
-        double scale = Math.min((double) width / original.getWidth(), (double) height / original.getHeight());
+        double scale = Math.min((double) width / data.getImage().getWidth(), (double) height / data.getImage().getHeight());
         if (scale >= 1) {
-            return original;
+            return data;
         }
 
-        return TransformedImageCache.getResizedImage(original, (int) (original.getWidth() * scale), (int) (original.getHeight() * scale));
+        BufferedImage newImage = TransformedImageCache.getResizedImage(data.getImage(), (int) (data.getImage().getWidth() * scale), (int) (data.getImage().getHeight() * scale));
+        data.setImage(newImage);
+        return data;
     }
 
     public static TFile getTFile(String path) {
         try {
-            return new TFile(path);
+            if (path != null) {
+                return new TFile(path);
+            }
         } catch (NullPointerException ex) {
+            // TODO: raise error on path == null -- is it actual?!
             LOGGER.warn("Imagefile does not exist: " + path);
         }
         return null;

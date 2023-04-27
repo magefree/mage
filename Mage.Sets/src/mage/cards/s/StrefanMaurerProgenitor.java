@@ -116,7 +116,7 @@ class StrefanMaurerProgenitorPlayVampireEffect extends OneShotEffect {
         if (player == null) { return false; }
 
         TargetCard target = new TargetCardInHand(0, 1, vampireCardFilter);
-        if (!player.choose(outcome, player.getHand(), target, game)) { return false; }
+        if (!player.choose(outcome, player.getHand(), target, source, game)) { return false; }
 
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) { return false; }

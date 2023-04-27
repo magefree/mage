@@ -15,31 +15,28 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class BlocksAttachedTriggeredAbility extends TriggeredAbilityImpl {
 
-    private boolean setFixedTargetPointer;
-    private String attachedDescription;
-    private boolean setFixedTargetPointerToBlocked;
+    private final boolean setFixedTargetPointer;
+    private final boolean setFixedTargetPointerToBlocked;
 
     public BlocksAttachedTriggeredAbility(Effect effect, String attachedDescription, boolean optional) {
         this(effect, attachedDescription, optional, false);
     }
 
     public BlocksAttachedTriggeredAbility(Effect effect, String attachedDescription, boolean optional, boolean setFixedTargetPointer) {
-        super(Zone.BATTLEFIELD, effect, optional);
-        this.setFixedTargetPointer = setFixedTargetPointer;
-        this.attachedDescription = attachedDescription;
+        this(effect, attachedDescription, optional, setFixedTargetPointer, false);
     }
 
     public BlocksAttachedTriggeredAbility(Effect effect, String attachedDescription, boolean optional, boolean setFixedTargetPointer, boolean setFixedTargetPointerToBlocked) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.setFixedTargetPointer = setFixedTargetPointer;
-        this.attachedDescription = attachedDescription;
         this.setFixedTargetPointerToBlocked = setFixedTargetPointerToBlocked;
+        setTriggerPhrase("Whenever " + attachedDescription + " creature blocks" + (setFixedTargetPointerToBlocked ? " a creature, " : ", "));
     }
 
     public BlocksAttachedTriggeredAbility(final BlocksAttachedTriggeredAbility ability) {
         super(ability);
         this.setFixedTargetPointer = ability.setFixedTargetPointer;
-        this.attachedDescription = ability.attachedDescription;
+        this.setFixedTargetPointerToBlocked = ability.setFixedTargetPointerToBlocked;
     }
 
     @Override
@@ -69,10 +66,5 @@ public class BlocksAttachedTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever " + attachedDescription + " creature blocks" + (setFixedTargetPointerToBlocked ? " a creature, " : ", ") ;
     }
 }

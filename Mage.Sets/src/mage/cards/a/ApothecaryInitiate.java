@@ -37,7 +37,7 @@ public final class ApothecaryInitiate extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever a player casts a white spell, you may pay {1}. If you do, you gain 1 life.
-        this.addAbility(new SpellCastAllTriggeredAbility(new DoIfCostPaid(new GainLifeEffect(1), new ManaCostsImpl("{1}")), filter, false));
+        this.addAbility(new SpellCastAllTriggeredAbility(new DoIfCostPaid(new GainLifeEffect(1), new ManaCostsImpl<>("{1}")), filter, false));
 
     }
 

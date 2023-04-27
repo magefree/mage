@@ -31,8 +31,9 @@ public class HallowedMoonlightTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.DRAW, playerA, "Hallowed Moonlight");
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Spiritual Visit");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Spiritual Visit", true);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Reanimate", "Pillarfield Ox");
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Silvercoat Lion");
 
         setStopAt(2, PhaseStep.END_TURN);

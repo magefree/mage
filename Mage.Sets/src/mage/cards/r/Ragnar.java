@@ -31,7 +31,7 @@ public final class Ragnar extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {G}{W}{U}, {tap}: Regenerate target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl("{G}{W}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl<>("{G}{W}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

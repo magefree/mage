@@ -38,7 +38,7 @@ public final class CrosisThePurger extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Crosis, the Purger deals combat damage to a player, you may pay {2}{B}. If you do, choose a color, then that player reveals their hand and discards all cards of that color.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(new CrosisThePurgerEffect(),
-                new ManaCostsImpl("{2}{B}")), false, true));
+                new ManaCostsImpl<>("{2}{B}")), false, true));
     }
 
     private CrosisThePurger(final CrosisThePurger card) {

@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import java.util.Arrays;
 
 /**
  * @author TheElk801
@@ -20,6 +21,8 @@ public final class DogVigilanceToken extends TokenImpl {
         toughness = new MageInt(1);
 
         this.addAbility(VigilanceAbility.getInstance());
+
+        availableImageSetCodes = Arrays.asList("SNC");
     }
 
     private DogVigilanceToken(final DogVigilanceToken token) {

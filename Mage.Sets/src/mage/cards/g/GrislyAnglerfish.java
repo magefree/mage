@@ -33,7 +33,7 @@ public final class GrislyAnglerfish extends CardImpl {
         this.nightCard = true;
 
         // {6}: Creatures your opponents control attack this turn if able.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrislyAnglerfishMustAttackEffect(), new ManaCostsImpl("{6}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrislyAnglerfishMustAttackEffect(), new ManaCostsImpl<>("{6}")));
     }
 
     private GrislyAnglerfish(final GrislyAnglerfish card) {

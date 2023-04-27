@@ -21,10 +21,9 @@ public class HachetteUK extends ExpansionSet {
         this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Betrayal of Flesh", 52, Rarity.UNCOMMON, mage.cards.b.BetrayalOfFlesh.class));
-        // Card not implemented
-        // cards.add(new SetCardInfo("Carrion Rats", 40, Rarity.COMMON, mage.cards.c.CarrionRats.class, NON_FULL_USE_VARIOUS));
-        // cards.add(new SetCardInfo("Carrion Rats", 41, Rarity.COMMON, mage.cards.c.CarrionRats.class, NON_FULL_USE_VARIOUS));
-        // cards.add(new SetCardInfo("Carrion Rats", 53, Rarity.COMMON, mage.cards.c.CarrionRats.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Carrion Rats", 40, Rarity.COMMON, mage.cards.c.CarrionRats.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Carrion Rats", 41, Rarity.COMMON, mage.cards.c.CarrionRats.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Carrion Rats", 53, Rarity.COMMON, mage.cards.c.CarrionRats.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chittering Rats", 5, Rarity.COMMON, mage.cards.c.ChitteringRats.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chittering Rats", 19, Rarity.COMMON, mage.cards.c.ChitteringRats.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chittering Rats", 54, Rarity.COMMON, mage.cards.c.ChitteringRats.class, NON_FULL_USE_VARIOUS));

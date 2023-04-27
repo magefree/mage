@@ -28,7 +28,7 @@ public final class KeeneyeAven extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private KeeneyeAven(final KeeneyeAven card) {

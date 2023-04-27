@@ -48,6 +48,11 @@ public class HalfValue implements DynamicValue {
     }
 
     @Override
+    public int getSign() {
+        return value.getSign();
+    }
+
+    @Override
     public String toString() {
         return "half ";
     }

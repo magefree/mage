@@ -21,7 +21,6 @@ import java.util.UUID;
  */
 public class HeroicAbility extends TriggeredAbilityImpl {
 
-
     public HeroicAbility(Effect effect) {
         this(effect, false);
     }
@@ -35,6 +34,7 @@ public class HeroicAbility extends TriggeredAbilityImpl {
         if (isHeroic) {
             this.setAbilityWord(AbilityWord.HEROIC);
         }
+        setTriggerPhrase("Whenever you cast a spell that targets {this}, ");
     }
 
     public HeroicAbility(final HeroicAbility ability) {
@@ -63,29 +63,25 @@ public class HeroicAbility extends TriggeredAbilityImpl {
     }
 
     private boolean checkSpell(Spell spell, Game game) {
-        if (spell != null) {
-            SpellAbility sa = spell.getSpellAbility();
-            for (UUID modeId : sa.getModes().getSelectedModes()) {
-                Mode mode = sa.getModes().get(modeId);
-                for (Target target : mode.getTargets()) {
-                    if (!target.isNotTarget() && target.getTargets().contains(this.getSourceId())) {
-                        return true;
-                    }
+        if (spell == null) {
+            return false;
+        }
+        SpellAbility sa = spell.getSpellAbility();
+        for (UUID modeId : sa.getModes().getSelectedModes()) {
+            Mode mode = sa.getModes().get(modeId);
+            for (Target target : mode.getTargets()) {
+                if (!target.isNotTarget() && target.getTargets().contains(this.getSourceId())) {
+                    return true;
                 }
-                for (Effect effect : mode.getEffects()) {
-                    for (UUID targetId : effect.getTargetPointer().getTargets(game, sa)) {
-                        if (targetId.equals(this.getSourceId())) {
-                            return true;
-                        }
+            }
+            for (Effect effect : mode.getEffects()) {
+                for (UUID targetId : effect.getTargetPointer().getTargets(game, sa)) {
+                    if (targetId.equals(this.getSourceId())) {
+                        return true;
                     }
                 }
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you cast a spell that targets {this}, ";
     }
 }

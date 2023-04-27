@@ -4,10 +4,9 @@ import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAttachToTarget;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
 import mage.abilities.effects.common.continuous.PlayTheTopCardEffect;
@@ -21,7 +20,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -123,7 +121,8 @@ class GaleaKindlerOfHopeEffect extends ContinuousEffectImpl {
 
     private final MageObjectReference spellRef;
     private final MageObjectReference permRef;
-    private final Ability ability = makeAbility();
+    private final Ability ability = new EntersBattlefieldAttachToTarget()
+            .setTriggerPhrase("When this Equipment enters the battlefield, ");
 
     GaleaKindlerOfHopeEffect(Spell spell, Game game) {
         super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.Benefit);
@@ -156,13 +155,5 @@ class GaleaKindlerOfHopeEffect extends ContinuousEffectImpl {
         }
         permanent.addAbility(ability, source.getSourceId(), game);
         return true;
-    }
-
-    private static Ability makeAbility() {
-        Ability ability = new EntersBattlefieldTriggeredAbility(new AttachEffect(
-                Outcome.BoostCreature, "attach it to target creature you control"
-        ), false).setTriggerPhrase("When this Equipment enters the battlefield, ");
-        ability.addTarget(new TargetControlledCreaturePermanent());
-        return ability;
     }
 }

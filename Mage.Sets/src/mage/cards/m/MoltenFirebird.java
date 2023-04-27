@@ -37,7 +37,7 @@ public final class MoltenFirebird extends CardImpl {
         this.addAbility(ability);
 
         // {4}{R}: Exile Molten Firebird.
-        this.addAbility(new SimpleActivatedAbility(new ExileSourceEffect(), new ManaCostsImpl("{4}{R}")));
+        this.addAbility(new SimpleActivatedAbility(new ExileSourceEffect(), new ManaCostsImpl<>("{4}{R}")));
     }
 
     private MoltenFirebird(final MoltenFirebird card) {

@@ -32,7 +32,7 @@ public final class MysticRemora extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}");
 
         // Cumulative upkeep {1}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")));
         // Whenever an opponent casts a noncreature spell, you may draw a card unless that player pays {4}.
         this.addAbility(new MysticRemoraTriggeredAbility());
 

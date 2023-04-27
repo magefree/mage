@@ -29,7 +29,7 @@ public final class ChainwhipCyclops extends CardImpl {
 
         // {3}{R}: Target creature can't block this turn.
         Ability ability = new SimpleActivatedAbility(
-                new CantBlockTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{3}{R}")
+                new CantBlockTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{3}{R}")
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

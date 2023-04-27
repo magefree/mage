@@ -39,7 +39,7 @@ public final class GoblinRimerunner extends CardImpl {
         this.addAbility(ability);
 
         // {snow}: Goblin Rimerunner gains haste until end of turn.
-        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{S}")));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{S}")));
     }
 
     private GoblinRimerunner(final GoblinRimerunner card) {

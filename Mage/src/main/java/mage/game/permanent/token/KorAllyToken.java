@@ -17,7 +17,7 @@ public final class KorAllyToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("BFZ", "OGW", "ZNC");
+        availableImageSetCodes = Arrays.asList("BFZ", "ZNC");
     }
 
     public KorAllyToken(final KorAllyToken token) {

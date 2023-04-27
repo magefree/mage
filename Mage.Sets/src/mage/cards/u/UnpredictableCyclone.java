@@ -30,7 +30,7 @@ public final class UnpredictableCyclone extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new UnpredictableCycloneReplacementEffect()));
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private UnpredictableCyclone(final UnpredictableCyclone card) {

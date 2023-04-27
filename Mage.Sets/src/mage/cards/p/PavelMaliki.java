@@ -28,7 +28,7 @@ public final class PavelMaliki extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {B}{R}: Pavel Maliki gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{B}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{B}{R}")));
     }
 
     private PavelMaliki(final PavelMaliki card) {

@@ -5,6 +5,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -19,6 +21,8 @@ public final class TreefolkShamanToken extends TokenImpl {
         subtype.add(SubType.SHAMAN);
         power = new MageInt(2);
         toughness = new MageInt(5);
+
+        availableImageSetCodes = Arrays.asList("MOR", "MMA");
     }
 
     public TreefolkShamanToken(final TreefolkShamanToken token) {

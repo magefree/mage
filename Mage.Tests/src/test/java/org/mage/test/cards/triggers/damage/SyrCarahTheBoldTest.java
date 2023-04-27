@@ -48,7 +48,6 @@ public class SyrCarahTheBoldTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -81,6 +80,5 @@ public class SyrCarahTheBoldTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 }

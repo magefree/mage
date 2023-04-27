@@ -69,7 +69,6 @@ public class OfferingTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, patron, 1);
         
         assertGraveyardCount(playerA, "Akki Drillmaster", 1);
@@ -99,7 +98,6 @@ public class OfferingTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, patron, 1);
         
         assertGraveyardCount(playerA, "Boros Recruit", 1);
@@ -132,7 +130,6 @@ public class OfferingTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, patron, 1);
         
         assertGraveyardCount(playerA, "Boggart Ram-Gang", 1);

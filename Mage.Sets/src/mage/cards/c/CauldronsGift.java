@@ -1,6 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.AdamantCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -75,7 +76,7 @@ class CauldronsGiftEffect extends OneShotEffect {
         }
         TargetCard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
         target.setNotTarget(true);
-        if (!player.choose(outcome, player.getGraveyard(), target, game)) {
+        if (!player.choose(outcome, player.getGraveyard(), target, source, game)) {
             return false;
         }
         Card card = game.getCard(target.getFirstTarget());
@@ -87,5 +88,10 @@ class CauldronsGiftEffect extends OneShotEffect {
             permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
         }
         return true;
+    }
+
+    @Override
+    public Condition getCondition() {
+        return AdamantCondition.BLACK;
     }
 }

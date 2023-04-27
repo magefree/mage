@@ -27,7 +27,7 @@ public final class BatteringCraghorn extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
         // Morph {1}{R}{R}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{1}{R}{R}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{R}{R}")));
     }
 
     private BatteringCraghorn(final BatteringCraghorn card) {

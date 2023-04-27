@@ -28,7 +28,7 @@ public final class DarksteelPlate extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAttachedEffect(IndestructibleAbility.getInstance(), AttachmentType.EQUIPMENT, Duration.WhileOnBattlefield)));
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), false));
     }
 
     public DarksteelPlate (final DarksteelPlate card) {

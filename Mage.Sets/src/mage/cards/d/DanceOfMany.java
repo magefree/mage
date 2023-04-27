@@ -55,7 +55,7 @@ public final class DanceOfMany extends CardImpl {
         this.addAbility(ability2);
 
         // At the beginning of your upkeep, sacrifice Dance of Many unless you pay {U}{U}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{U}{U}")), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{U}{U}")), TargetController.YOU, false));
 
     }
 

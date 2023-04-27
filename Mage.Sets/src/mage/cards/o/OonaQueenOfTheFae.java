@@ -35,7 +35,7 @@ public final class OonaQueenOfTheFae extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {X}{UB}: Choose a color. Target opponent exiles the top X cards of their library. For each card of the chosen color exiled this way, create a 1/1 blue and black Faerie Rogue creature token with flying.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new OonaQueenOfTheFaeEffect(), new ManaCostsImpl("{X}{U/B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new OonaQueenOfTheFaeEffect(), new ManaCostsImpl<>("{X}{U/B}"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

@@ -40,7 +40,7 @@ public final class ArchfiendOfIfnir extends CardImpl {
         ));
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private ArchfiendOfIfnir(final ArchfiendOfIfnir card) {

@@ -25,7 +25,7 @@ public final class AkromasBlessing extends CardImpl {
         // Choose a color. Creatures you control gain protection from the chosen color until end of turn.
         this.getSpellAbility().addEffect(new GainProtectionFromColorAllEffect(Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES));
         // Cycling {W}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{W}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{W}")));
     }
 
     private AkromasBlessing(final AkromasBlessing card) {

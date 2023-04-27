@@ -39,7 +39,7 @@ public final class CabalArchon extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {B}, Sacrifice a Cleric: Target player loses 2 life and you gain 2 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), new ManaCostsImpl("{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), new ManaCostsImpl<>("{B}"));
         Effect effect = new GainLifeEffect(2);
         effect.setText("and you gain 2 life");
         ability.addEffect(effect);

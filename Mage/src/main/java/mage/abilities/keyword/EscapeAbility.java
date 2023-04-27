@@ -40,7 +40,7 @@ public class EscapeAbility extends SpellAbility {
         this.exileCount = exileCount;
         this.getManaCosts().clear();
         this.getManaCostsToPay().clear();
-        this.addManaCost(new ManaCostsImpl(manaCost));
+        this.addManaCost(new ManaCostsImpl<>(manaCost));
         this.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(exileCount, filter), "")); // hide additional cost text from rules
     }
 

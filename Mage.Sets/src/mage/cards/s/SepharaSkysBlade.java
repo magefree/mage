@@ -50,7 +50,7 @@ public final class SepharaSkysBlade extends CardImpl {
         this.toughness = new MageInt(7);
 
         // You may pay {W} and tap four untapped creatures you control with flying rather than pay this spell's mana cost.
-        Ability ability = new AlternativeCostSourceAbility(new ManaCostsImpl("{W}"));
+        Ability ability = new AlternativeCostSourceAbility(new ManaCostsImpl<>("{W}"));
         ability.addCost(new TapTargetCost(new TargetControlledPermanent(
                 4, 4, filter, true
         )));

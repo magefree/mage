@@ -34,7 +34,6 @@ public class MycosynthGolemTest extends CardTestCommander4Players {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Alpha Myr", 1);
         assertHandCount(playerA, "Alpha Myr", 0);

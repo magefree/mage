@@ -34,7 +34,7 @@ public final class EnclaveCryptologist extends LevelerCard {
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{1}{U}")));
 
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new TapSourceCost());
         Abilities<Ability> abilities1 = new AbilitiesImpl<>(ability);

@@ -28,7 +28,7 @@ public final class SearchForTomorrow extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay));
         
         // Suspend 2-{G}
-        this.addAbility(new SuspendAbility(2, new ManaCostsImpl("{G}"), this));
+        this.addAbility(new SuspendAbility(2, new ManaCostsImpl<>("{G}"), this));
     }
 
     private SearchForTomorrow(final SearchForTomorrow card) {

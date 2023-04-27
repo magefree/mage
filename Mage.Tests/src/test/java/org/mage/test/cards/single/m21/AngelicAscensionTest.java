@@ -22,7 +22,6 @@ public class AngelicAscensionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount(playerB, 1);
         assertPermanentCount(playerB,  "Angel Token", 1);
@@ -40,7 +39,6 @@ public class AngelicAscensionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount(playerA, 1);
         assertPermanentCount(playerA,  "Angel Token", 1);

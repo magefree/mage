@@ -43,7 +43,7 @@ public final class CrovaxTheCursed extends CardImpl {
         this.addAbility(ability);
 
         // {B}: Crovax gains flying until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{B}")));
 
     }
 
@@ -77,7 +77,7 @@ class CrovaxTheCursedEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Permanent sourceObject = (Permanent) source.getSourceObjectIfItStillExists(game);
+            Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
             int creatures = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURES, source.getControllerId(), game);
             if (creatures > 0 && controller.chooseUse(outcome, "Sacrifice a creature?", source, game)) {
                 if (new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURES, 1, "").apply(game, source)) {

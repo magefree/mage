@@ -12,6 +12,8 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.command.Emblem;
 
+import java.util.Arrays;
+
 /**
  * @author spjspj
  */
@@ -31,5 +33,7 @@ public final class TamiyoTheMoonSageEmblem extends Emblem {
                 Zone.COMMAND, new ReturnToHandTargetEffect().setText("return it to your hand"),
                 true, StaticFilters.FILTER_CARD_A, TargetController.YOU, SetTargetPointer.CARD
         ));
+
+        availableImageSetCodes = Arrays.asList("AVR", "MED");
     }
 }

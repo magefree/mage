@@ -31,7 +31,7 @@ public final class DregscapeSliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new DregscapeSliverEffect()));
 
         // Unearth {2}
-        this.addAbility(new UnearthAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new UnearthAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private DregscapeSliver(final DregscapeSliver card) {
@@ -65,7 +65,7 @@ class DregscapeSliverEffect extends ContinuousEffectImpl {
             if (card == null || !card.isCreature(game) || !card.hasSubtype(SubType.SLIVER, game)) {
                 continue;
             }
-            UnearthAbility ability = new UnearthAbility(new ManaCostsImpl("{2}"));
+            UnearthAbility ability = new UnearthAbility(new ManaCostsImpl<>("{2}"));
             ability.setSourceId(cardId);
             ability.setControllerId(card.getOwnerId());
             game.getState().addOtherAbility(card, ability);

@@ -26,7 +26,11 @@ public final class ProtectionRacket extends CardImpl {
     public ProtectionRacket(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 
-        // At the beginning of your upkeep, repeat the following process for each opponent in turn order. Reveal the top card of your library. That player pay pay life equal to that card's mana value. If they do, exile that card. Otherwise, put it into your hand.
+        // At the beginning of your upkeep, repeat the following process for each opponent in turn order.
+        //      Reveal the top card of your library.
+        //      That player may pay life equal to that card's mana value.
+        //          If they do, exile that card.
+        //          Otherwise, put it into your hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new ProtectionRacketEffect(), TargetController.YOU, false
         ));
@@ -80,8 +84,9 @@ class ProtectionRacketEffect extends OneShotEffect {
             )) {
                 cost.pay(source, game, source, playerId, true);
                 controller.moveCards(card, Zone.EXILED, source, game);
+            } else {
+                controller.moveCards(card, Zone.HAND, source, game);
             }
-            controller.moveCards(card, Zone.HAND, source, game);
         }
         return true;
     }

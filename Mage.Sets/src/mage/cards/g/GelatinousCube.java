@@ -33,7 +33,7 @@ import java.util.UUID;
  */
 public final class GelatinousCube extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterOpponentsCreaturePermanent("non-Ooze creature");
+    private static final FilterPermanent filter = new FilterOpponentsCreaturePermanent("non-Ooze creature an opponent controls");
 
     static {
         filter.add(Predicates.not(SubType.OOZE.getPredicate()));
@@ -47,7 +47,7 @@ public final class GelatinousCube extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Engulf — When Gelatinous Cube enters the battlefield, exile target non-Ooze creature an opponent controls until Gelatinous Cube leaves the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect(filter.getMessage()));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
         ability.addTarget(new TargetPermanent(filter));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability.withFlavorWord("Engulf"));

@@ -82,7 +82,7 @@ class IsarethTheAwakenerCreateReflexiveTriggerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        ManaCosts cost = new ManaCostsImpl("{X}");
+        ManaCosts cost = new ManaCostsImpl<>("{X}");
         if (player == null
                 || !player.chooseUse(Outcome.BoostCreature, "Pay " + cost.getText() + "?", source, game)) {
             return false;

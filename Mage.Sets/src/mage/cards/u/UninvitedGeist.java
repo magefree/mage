@@ -1,7 +1,6 @@
 
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
@@ -12,19 +11,20 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class UninvitedGeist extends CardImpl {
 
     public UninvitedGeist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.secondSideCardClazz = UnimpededTrespasser.class;
+        this.secondSideCardClazz = mage.cards.u.UnimpededTrespasser.class;
 
         // Skulk (This creature can't be blocked by creatures with greater power.)
         this.addAbility(new SkulkAbility());

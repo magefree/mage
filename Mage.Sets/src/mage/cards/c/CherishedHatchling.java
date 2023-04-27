@@ -46,7 +46,7 @@ public final class CherishedHatchling extends CardImpl {
 
         // When Cherished Hatchling dies, you may cast Dinosaur spells this turn as though they had flash, and whenever you cast a Dinosaur spell this turn, it gains "When this creature enters the battlefield, you may have it fight another target creature."
         Ability ability = new DiesSourceTriggeredAbility(new CastAsThoughItHadFlashAllEffect(Duration.EndOfTurn, filterCard, false));
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new CherishedHatchlingTriggeredAbility()));
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new CherishedHatchlingTriggeredAbility()).concatBy(", and"));
         this.addAbility(ability);
     }
 
@@ -69,7 +69,8 @@ class CherishedHatchlingTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     public CherishedHatchlingTriggeredAbility() {
-        super(getEffectToAdd(), Duration.EndOfTurn, true);
+        super(getEffectToAdd(), Duration.EndOfTurn, false);
+        setTriggerPhrase("whenever you cast a Dinosaur spell this turn, ");
     }
 
     private static Effect getEffectToAdd() {
@@ -104,10 +105,5 @@ class CherishedHatchlingTriggeredAbility extends DelayedTriggeredAbility {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "and whenever you cast a Dinosaur spell this turn, " ;
     }
 }

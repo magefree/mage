@@ -31,7 +31,6 @@ public class ConditionalPreventionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Balduvian Bears", 0);
         assertHandCount(playerA, "Lightning Bolt", 0);
@@ -50,7 +49,6 @@ public class ConditionalPreventionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Balduvian Bears", 1);
         assertHandCount(playerA, "Lightning Bolt", 0);
@@ -75,7 +73,6 @@ public class ConditionalPreventionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Balduvian Bears", 1);
         assertHandCount(playerA, "Lightning Bolt", 0);
@@ -100,7 +97,6 @@ public class ConditionalPreventionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Balduvian Bears", 0);
         assertHandCount(playerA, "Lightning Bolt", 0);
@@ -127,7 +123,6 @@ public class ConditionalPreventionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Balduvian Bears", 0); // not prevented, dies
         assertLife(playerA, 20); // prevented, no damage
@@ -152,7 +147,6 @@ public class ConditionalPreventionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(4, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Balduvian Bears", 1);
         assertPermanentCount(playerB, "Balduvian Bears", 1);
@@ -183,7 +177,6 @@ public class ConditionalPreventionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(4, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Balduvian Bears", 0);
         assertPermanentCount(playerB, "Balduvian Bears", 1);
@@ -223,7 +216,6 @@ public class ConditionalPreventionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -261,6 +253,5 @@ public class ConditionalPreventionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 }

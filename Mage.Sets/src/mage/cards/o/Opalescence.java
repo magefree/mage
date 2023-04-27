@@ -84,8 +84,8 @@ public final class Opalescence extends CardImpl {
                     case PTChangingEffects_7:
                         if (sublayer == SubLayer.SetPT_7b) {
                             int manaCost = permanent.getManaValue();
-                            permanent.getPower().setValue(manaCost);
-                            permanent.getToughness().setValue(manaCost);
+                            permanent.getPower().setModifiedBaseValue(manaCost);
+                            permanent.getToughness().setModifiedBaseValue(manaCost);
                         }
                 }
 

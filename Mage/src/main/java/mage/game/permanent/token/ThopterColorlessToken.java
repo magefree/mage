@@ -23,8 +23,8 @@ public final class ThopterColorlessToken extends TokenImpl {
 
         addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("C18", "EXO", "KLD", "MBS", "ORI", "VMA", "M19", "ZNC",
-                "KHC", "C21", "MH2", "AFC", "VOC", "NEC", "2XM");
+        availableImageSetCodes = Arrays.asList("C18", "KLD", "MBS", "ORI", "VMA", "M19", "ZNC",
+                "KHC", "C21", "MH2", "AFC", "VOC", "NEC", "2XM", "RNA", "NCC", "DDU", "BRO", "ONC", "MOM");
     }
 
     @Override
@@ -32,7 +32,7 @@ public final class ThopterColorlessToken extends TokenImpl {
         super.setExpansionSetCodeForImage(code);
 
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C18")) {
-            this.setTokenType(RandomUtil.nextInt(3) + 1);
+            this.setTokenType(RandomUtil.nextInt(2) + 1);
         }
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("KLD")) {
             this.setTokenType(RandomUtil.nextInt(3) + 1);
@@ -42,6 +42,9 @@ public final class ThopterColorlessToken extends TokenImpl {
         }
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("2XM")) {
             this.setTokenType(1);
+        }
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("DDU")) {
+            this.setTokenType(RandomUtil.nextInt(2) + 1);
         }
 
     }

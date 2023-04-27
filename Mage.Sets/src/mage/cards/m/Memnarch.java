@@ -35,12 +35,12 @@ public final class Memnarch extends CardImpl {
         // {1}{U}{U}: Target permanent becomes an artifact in addition to its other types.
         Effect effect = new AddCardTypeTargetEffect(Duration.Custom, CardType.ARTIFACT);
         effect.setText("Target permanent becomes an artifact in addition to its other types");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{U}{U}"));
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
 
         // {3}{U}: Gain control of target artifact.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainControlTargetEffect(Duration.WhileOnBattlefield), new ManaCostsImpl("{3}{U}"));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainControlTargetEffect(Duration.WhileOnBattlefield), new ManaCostsImpl<>("{3}{U}"));
         ability2.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability2);
     }

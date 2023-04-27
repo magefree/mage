@@ -88,7 +88,7 @@ class WandOfWonderEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl();
         Cards toCast = new CardsImpl();
-        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+        for (UUID playerId : game.getOpponents(controller.getId())) {
             Player opponent = game.getPlayer(playerId);
             if (opponent == null) {
                 continue;

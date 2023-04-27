@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -55,12 +54,12 @@ class BattleStrainTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.BLOCKER_DECLARED;
+        return event.getType() == GameEvent.EventType.CREATURE_BLOCKS;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent blocker = game.getPermanent(event.getSourceId());
+        Permanent blocker = game.getPermanent(event.getTargetId());
         if (blocker != null) {
             getEffects().get(0).setTargetPointer(new FixedTarget(blocker.getControllerId()));
             return true;

@@ -20,7 +20,7 @@ public final class BlastedLandscape extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         this.addAbility(new ColorlessManaAbility());
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private BlastedLandscape(final BlastedLandscape card) {

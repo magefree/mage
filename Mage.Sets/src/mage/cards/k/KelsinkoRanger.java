@@ -43,7 +43,7 @@ public final class KelsinkoRanger extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn),
-                new ManaCostsImpl("{1}{W}")
+                new ManaCostsImpl<>("{1}{W}")
         );
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

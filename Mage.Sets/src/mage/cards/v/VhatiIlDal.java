@@ -10,7 +10,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -75,7 +75,7 @@ class VhatiIlDalEffect extends OneShotEffect {
             } else {
                 toughness = StaticValue.get(1);
             }
-            ContinuousEffect effect = new SetPowerToughnessTargetEffect(power, toughness, Duration.EndOfTurn);
+            ContinuousEffect effect = new SetBasePowerToughnessTargetEffect(power, toughness, Duration.EndOfTurn);
             game.addEffect(effect, source);
             return true;
         }

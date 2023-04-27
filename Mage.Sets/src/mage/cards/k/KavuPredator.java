@@ -52,6 +52,7 @@ class KavuPredatorTriggeredAbility extends TriggeredAbilityImpl {
 
     public KavuPredatorTriggeredAbility() {
         super(Zone.BATTLEFIELD, new KavuPredatorEffect());
+        setTriggerPhrase("Whenever an opponent gains life, ");
     }
 
     public KavuPredatorTriggeredAbility(final KavuPredatorTriggeredAbility ability) {
@@ -75,11 +76,6 @@ class KavuPredatorTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever an opponent gains life, " ;
     }
 }
 

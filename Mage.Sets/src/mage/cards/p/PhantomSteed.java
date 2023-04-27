@@ -17,14 +17,17 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
+import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
+import mage.util.functions.CopyTokenFunction;
 
 import java.util.List;
 import java.util.Objects;
@@ -35,6 +38,12 @@ import java.util.stream.Collectors;
  * @author TheElk801
  */
 public final class PhantomSteed extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another target creature you control");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
 
     public PhantomSteed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
@@ -48,9 +57,8 @@ public final class PhantomSteed extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // When Phantom Steed enters the battlefield, exile another target creature you control until Phantom Steed leaves the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect("")
-                .setText("exile another target creature you control until Phantom Steed leaves the battlefield"));
-        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
+        ability.addTarget(new TargetPermanent(filter));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);
 
@@ -92,8 +100,7 @@ class PhantomSteedEffect extends OneShotEffect {
             return false;
         }
         for (Card card : exileZone.getCards(game)) {
-            EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(card, game);
+            Token token = CopyTokenFunction.createTokenCopy(card, game);
             token.addSubType(SubType.ILLUSION);
             token.putOntoBattlefield(1, game, source, source.getControllerId(), true, true);
             List<Permanent> permanents = token

@@ -10,9 +10,11 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 import java.util.UUID;
 
 /**
- * Arcane Melee:
- *   Enchantment
- *   Instant and sorcery spells cost {2} less to cast.
+ * {@link mage.cards.a.ArcaneMelee Arcane Melee}
+ * {4}{U}
+ * Enchantment
+ *
+ * Instant and sorcery spells cost {2} less to cast.
  *
  * @author noxx
  */
@@ -42,7 +44,7 @@ public class ArcaneMeleeTest extends CardTestPlayerBase {
 
 
     /**
-     * "Arcane Melee" shouldn't cause any affect while being in hand
+     * Shouldn't have any affect while being in the hand.
      */
     @Test
     public void testInHand() {
@@ -50,7 +52,7 @@ public class ArcaneMeleeTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Arcane Melee", 1);
         addCard(Zone.HAND, playerA, "Flow of Ideas", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flow of Ideas");
+        checkPlayableAbility("doesn't work on creature", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Flow", false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -63,7 +65,7 @@ public class ArcaneMeleeTest extends CardTestPlayerBase {
     }
 
     /**
-     * Test cumulative effect of cost reduction effects
+     * Test cumulative effect of cost reduction effects.
      */
     @Test
     public void testMultiArcaneMelee() {
@@ -76,26 +78,14 @@ public class ArcaneMeleeTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertLife(playerA, 20);
-        assertLife(playerB, 20);
         // by default players don't draw 7 cards at startup in tests (it can be changed through command though)
         // 1 card: Flow of Ideas should be cast and one card should be drawn
         assertHandCount(playerA, 1);
-
-        // check there is 'Flow of Ideas' in graveyard
-        boolean found = false;
-        for (UUID cardId : playerA.getGraveyard()) {
-            Card card = currentGame.getCard(cardId);
-            if (card.getName().equals("Flow of Ideas")) {
-                found = true;
-                break;
-            }
-        }
-        Assert.assertTrue("Flow of Ideas wasn't found in graveyard, means it wasn't cast", found);
+        assertGraveyardCount(playerA, "Flow of Ideas", 1);
     }
 
     /**
-     * Tests that "Arcane Melee" doesn't affect creature card
+     * Should not affect creature card.
      */
     @Test
     public void testNonInstantAndSorcery() {
@@ -103,15 +93,9 @@ public class ArcaneMeleeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Arcane Melee", 1);
         addCard(Zone.HAND, playerA, "Merfolk Looter", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Merfolk Looter");
+        checkPlayableAbility("doesn't work on creature", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Merfolk", false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-
-        assertLife(playerA, 20);
-        assertLife(playerB, 20);
-        // by default players don't draw 7 cards at startup in tests (it can be changed through command though)
-        // 1 card: Merfolk Looter (Arcane Melee doesn't affect creatures' costs)
-        assertHandCount(playerA, 1);
     }
 }

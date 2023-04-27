@@ -36,7 +36,7 @@ public final class EyesEverywhere extends CardImpl {
                 new ExchangeControlTargetEffect(
                         Duration.EndOfGame, "Exchange control of {this} " +
                         "and target nonland permanent", true
-                ), new ManaCostsImpl("{5}{U}")
+                ), new ManaCostsImpl<>("{5}{U}")
         );
         ability.addTarget(new TargetNonlandPermanent());
         this.addAbility(ability);

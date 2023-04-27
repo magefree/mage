@@ -30,7 +30,7 @@ public final class Blustersquall extends CardImpl {
         this.getSpellAbility().addEffect(new TapTargetEffect());
 
         // Overload {3}{U} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        this.addAbility(new OverloadAbility(this, new BlustersqallTapAllEffect(), new ManaCostsImpl("{3}{U}")));
+        this.addAbility(new OverloadAbility(this, new BlustersqallTapAllEffect(), new ManaCostsImpl<>("{3}{U}")));
     }
 
     private Blustersquall(final Blustersquall card) {

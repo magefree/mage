@@ -41,7 +41,7 @@ public final class MentorOfTheMeek extends CardImpl {
         this.toughness = new MageInt(2);
 
         //Whenever another creature with power 2 or less enters the battlefield under your control, you may pay 1. If you do, draw a card.
-        Effect effect = new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{1}"));
+        Effect effect = new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{1}"));
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, effect, filter, false);
         this.addAbility(ability);

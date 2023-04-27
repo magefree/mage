@@ -35,7 +35,7 @@ public final class MeletisCharlatan extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{U}, {T}: The controller of target instant or sorcery spell copies it. That player may choose new targets for the copy.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MeletisCharlatanCopyTargetSpellEffect(), new ManaCostsImpl("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MeletisCharlatanCopyTargetSpellEffect(), new ManaCostsImpl<>("{2}{U}"));
         ability.addCost(new TapSourceCost());
         Target target = new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY);
         ability.addTarget(target);

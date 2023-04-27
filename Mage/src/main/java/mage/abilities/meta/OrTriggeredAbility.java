@@ -42,6 +42,7 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
             //Remove useless data
             ability.getEffects().clear();
         }
+        setTriggerPhrase(generateTriggerPhrase());
     }
 
     public OrTriggeredAbility(OrTriggeredAbility ability) {
@@ -78,8 +79,7 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
         return new OrTriggeredAbility(this);
     }
 
-    @Override
-    public String getTriggerPhrase() {
+    private String generateTriggerPhrase() {
         if (ruleTrigger != null && !ruleTrigger.isEmpty()) {
             return ruleTrigger;
         }

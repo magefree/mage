@@ -47,14 +47,14 @@ public final class ChamberSentry extends CardImpl {
         // {X}, {T}, Remove X +1/+1 counters from Chamber Sentry: It deals X damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(ManacostVariableValue.REGULAR)
                 .setText("It deals X damage to any target"),
-                new ManaCostsImpl("{X}"));
+                new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ChamberSentryRemoveVariableCountersSourceCost(CounterType.P1P1.createInstance()));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 
         // {W}{U}{B}{R}{G}: Return Chamber Sentry from your graveyard to your hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{W}{U}{B}{R}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl<>("{W}{U}{B}{R}{G}")));
     }
 
     private ChamberSentry(final ChamberSentry card) {

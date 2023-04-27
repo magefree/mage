@@ -33,7 +33,7 @@ public final class Pyrohemia extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(triggered, new CreatureCountCondition(0, TargetController.ANY), ruleText));
 
         // {R}: Pyrohemia deals 1 damage to each creature and each player.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(1), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(1), new ManaCostsImpl<>("{R}")));
     }
 
     private Pyrohemia(final Pyrohemia card) {

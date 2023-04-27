@@ -31,7 +31,7 @@ public final class ParadiseMantle extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAttachedEffect(new AnyColorManaAbility(new TapSourceCost()), AttachmentType.EQUIPMENT, Duration.WhileOnBattlefield)));
         // Equip {1}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1), false));
     }
 
     private ParadiseMantle(final ParadiseMantle card) {

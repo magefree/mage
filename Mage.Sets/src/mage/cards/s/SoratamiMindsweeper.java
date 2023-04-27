@@ -38,7 +38,7 @@ public final class SoratamiMindsweeper extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {2}, Return a land you control to its owner's hand: Target player puts the top two cards of their library into their graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,new PutLibraryIntoGraveTargetEffect(2), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,new PutLibraryIntoGraveTargetEffect(2), new ManaCostsImpl<>("{2}"));
         ability.addTarget(new TargetPlayer());
         ability.addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);

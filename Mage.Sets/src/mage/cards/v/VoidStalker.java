@@ -34,7 +34,7 @@ public final class VoidStalker extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{U}, {tap}: Put Void Stalker and target creature on top of their owners' libraries, then those players shuffle their libraries.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VoidStalkerEffect(), new ManaCostsImpl("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VoidStalkerEffect(), new ManaCostsImpl<>("{2}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

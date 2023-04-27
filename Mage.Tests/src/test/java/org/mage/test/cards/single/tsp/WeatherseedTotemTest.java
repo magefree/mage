@@ -23,7 +23,6 @@ public class WeatherseedTotemTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, totem, 0);
         assertGraveyardCount(playerA, totem, 1);
@@ -43,7 +42,6 @@ public class WeatherseedTotemTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, totem, 1);
         assertGraveyardCount(playerA, totem, 0);

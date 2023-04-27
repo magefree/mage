@@ -1,22 +1,21 @@
 package mage.cards.r;
 
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAttachToTarget;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.EquippedHasSubtypeCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.constants.Outcome;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -31,11 +30,7 @@ public final class RelicAxe extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // When Relic Axe enters the battlefield, attach it to target creature you control.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new AttachEffect(
-                Outcome.BoostCreature, "attach it to target creature you control"
-        ), false);
-        ability.addTarget(new TargetControlledCreaturePermanent());
-        this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldAttachToTarget());
 
         // Equipped creature gets +1/+1. If it's a Warrior, it gets +2/+1 instead.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
@@ -44,7 +39,7 @@ public final class RelicAxe extends CardImpl {
         )));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private RelicAxe(final RelicAxe card) {

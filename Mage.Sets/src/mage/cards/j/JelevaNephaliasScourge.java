@@ -13,8 +13,10 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.StaticFilters;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -81,24 +83,26 @@ class JelevaNephaliasScourgeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
+        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         JelevaNephaliasWatcher watcher = game.getState().getWatcher(JelevaNephaliasWatcher.class);
-        if (controller != null
-                && sourceObject != null
-                && watcher != null) {
-            int xValue = watcher.getManaSpentToCastLastTime(sourceObject.getId(), sourceObject.getZoneChangeCounter(game) - 1);
-            if (xValue > 0) {
-                for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                    Player player = game.getPlayer(playerId);
-                    if (player != null) {
-                        player.moveCardsToExile(player.getLibrary().getTopCards(game, xValue),
-                                source, game, true, CardUtil.getCardExileZoneId(game, source), sourceObject.getIdName());
-                    }
-                }
-            }
-            return true;
+        if (controller == null || permanent == null || watcher == null) {
+            return false;
         }
-        return false;
+
+        int xValue = watcher.getManaSpentToCastLastTime(permanent.getId(), permanent.getZoneChangeCounter(game) - 1);
+        if (xValue == 0) {
+            return false;
+        }
+
+        boolean succeeded = false;
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                succeeded |= player.moveCardsToExile(player.getLibrary().getTopCards(game, xValue),
+                        source, game, true, CardUtil.getCardExileZoneId(game, source), permanent.getIdName());
+            }
+        }
+        return succeeded;
     }
 }
 
@@ -122,10 +126,11 @@ class JelevaNephaliasCastEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
+        if (controller == null || exileZone == null) {
             return false;
         }
-        Cards cards = new CardsImpl(game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source)));
+        Cards cards = new CardsImpl(exileZone);
         return CardUtil.castSpellWithAttributesForFree(
                 controller, source, game, cards,
                 StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY
@@ -143,17 +148,16 @@ class JelevaNephaliasWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        // Watcher saves all casts becaus of possible Clone cards that copy Jeleva
-        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            if (!game.getStack().isEmpty()) {
-                for (StackObject stackObject : game.getStack()) {
-                    if (stackObject instanceof Spell) {
-                        Spell spell = (Spell) stackObject;
-                        manaSpendToCast.putIfAbsent(spell.getSourceId().toString()
-                                        + spell.getCard().getZoneChangeCounter(game),
-                                spell.getSpellAbility().getManaCostsToPay().manaValue());
-                    }
-                }
+        // Watcher saves all casts because of possible Clone cards that copy Jeleva
+        if (event.getType() != GameEvent.EventType.SPELL_CAST || game.getStack().isEmpty()) {
+            return;
+        }
+        for (StackObject stackObject : game.getStack()) {
+            if (stackObject instanceof Spell) {
+                Spell spell = (Spell) stackObject;
+                manaSpendToCast.putIfAbsent(
+                        spell.getSourceId().toString() + spell.getCard().getZoneChangeCounter(game),
+                        spell.getSpellAbility().getManaCostsToPay().manaValue());
             }
         }
     }

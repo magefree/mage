@@ -99,6 +99,7 @@ class PerplexingChimeraTriggeredAbility extends TriggeredAbilityImpl {
 
     public PerplexingChimeraTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PerplexingChimeraControlExchangeEffect(), true);
+        setTriggerPhrase("Whenever an opponent casts a spell, ");
     }
 
     public PerplexingChimeraTriggeredAbility(final PerplexingChimeraTriggeredAbility ability) {
@@ -119,11 +120,6 @@ class PerplexingChimeraTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever an opponent casts a spell, " ;
     }
 
     @Override

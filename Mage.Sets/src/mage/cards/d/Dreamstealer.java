@@ -36,7 +36,7 @@ public final class Dreamstealer extends CardImpl {
                 false, true));
 
         // Eternalize {4}{B}{B}
-        this.addAbility(new EternalizeAbility(new ManaCostsImpl("{4}{B}{B}"), this));
+        this.addAbility(new EternalizeAbility(new ManaCostsImpl<>("{4}{B}{B}"), this));
     }
 
     private Dreamstealer(final Dreamstealer card) {

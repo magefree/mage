@@ -31,7 +31,7 @@ public final class FacelessHaven extends CardImpl {
         // {S}{S}{S}: Faceless Haven becomes a 4/3 creature with vigilance and all creature types until end of turn. It's still a land.
         this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
                 new FacelessHavenToken(), "land", Duration.EndOfTurn
-        ).setText("{this} becomes a 4/3 creature with vigilance and all creature types until end of turn. It's still a land"), new ManaCostsImpl("{S}{S}{S}")));
+        ).setText("{this} becomes a 4/3 creature with vigilance and all creature types until end of turn. It's still a land"), new ManaCostsImpl<>("{S}{S}{S}")));
     }
 
     private FacelessHaven(final FacelessHaven card) {

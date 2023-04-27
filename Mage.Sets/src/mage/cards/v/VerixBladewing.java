@@ -41,7 +41,7 @@ public final class VerixBladewing extends CardImpl {
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(
                 new CreateTokenEffect(new KaroxBladewingDragonToken()));
 
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.instance,
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.ONCE,
                 "When {this} enters the battlefield, if it was kicked, create Karox Bladewing, " +
                         "a legendary 4/4 red Dragon creature token with flying."));
     }

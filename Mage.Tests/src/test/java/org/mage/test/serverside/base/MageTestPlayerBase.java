@@ -487,7 +487,7 @@ public abstract class MageTestPlayerBase {
      * @param damageAmount
      */
     protected void addCustomEffect_TargetDamage(TestPlayer controller, int damageAmount) {
-        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(damageAmount).setText("target damage " + damageAmount), new ManaCostsImpl(""));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(damageAmount).setText("target damage " + damageAmount), new ManaCostsImpl<>(""));
         ability.addTarget(new TargetAnyTarget());
         addCustomCardWithAbility(
                 "target damage " + damageAmount + " for " + controller.getName(),
@@ -502,7 +502,7 @@ public abstract class MageTestPlayerBase {
      * @param controller
      */
     protected void addCustomEffect_DestroyTarget(TestPlayer controller) {
-        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect().setText("target destroy"), new ManaCostsImpl(""));
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect().setText("target destroy"), new ManaCostsImpl<>(""));
         ability.addTarget(new TargetPermanent());
         addCustomCardWithAbility(
                 "target destroy for " + controller.getName(),
@@ -518,7 +518,7 @@ public abstract class MageTestPlayerBase {
      */
     protected void addCustomEffect_ReturnFromAnyToHand(TestPlayer controller) {
         // graveyard
-        Ability ability = new SimpleActivatedAbility(new ReturnFromGraveyardToHandTargetEffect().setText("return from graveyard"), new ManaCostsImpl(""));
+        Ability ability = new SimpleActivatedAbility(new ReturnFromGraveyardToHandTargetEffect().setText("return from graveyard"), new ManaCostsImpl<>(""));
         ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD));
         addCustomCardWithAbility(
                 "return from graveyard for " + controller.getName(),
@@ -527,7 +527,7 @@ public abstract class MageTestPlayerBase {
         );
 
         // exile
-        ability = new SimpleActivatedAbility(new ReturnFromExileEffect(Zone.HAND).setText("return from exile"), new ManaCostsImpl(""));
+        ability = new SimpleActivatedAbility(new ReturnFromExileEffect(Zone.HAND).setText("return from exile"), new ManaCostsImpl<>(""));
         ability.addTarget(new TargetCardInExile(StaticFilters.FILTER_CARD));
         addCustomCardWithAbility(
                 "return from exile for " + controller.getName(),
@@ -536,7 +536,7 @@ public abstract class MageTestPlayerBase {
         );
 
         // library
-        ability = new SimpleActivatedAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD)).setText("return from library"), new ManaCostsImpl(""));
+        ability = new SimpleActivatedAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD)).setText("return from library"), new ManaCostsImpl<>(""));
         addCustomCardWithAbility(
                 "return from library for " + controller.getName(),
                 controller,

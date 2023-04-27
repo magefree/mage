@@ -43,7 +43,7 @@ public final class TheBigIdea extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {2}{B/R}{B/R}, {T}: Roll a six-sided dice. Create a number of 1/1 red Brainiac creature tokens equal to the result.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TheBigIdeaEffect(), new ManaCostsImpl("{2}{B/R}{B/R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TheBigIdeaEffect(), new ManaCostsImpl<>("{2}{B/R}{B/R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

@@ -60,7 +60,7 @@ public final class KoglaTheTitanApe extends CardImpl {
         this.addAbility(ability);
 
         // {1}{G}: Return target Human you control to its owner's hand. Kogla gains indestructible until end of turn.
-        ability = new SimpleActivatedAbility(new ReturnToHandTargetEffect(), new ManaCostsImpl("{1}{G}"));
+        ability = new SimpleActivatedAbility(new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{1}{G}"));
         ability.addEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn));
         ability.addTarget(new TargetPermanent(filter2));
         this.addAbility(ability);

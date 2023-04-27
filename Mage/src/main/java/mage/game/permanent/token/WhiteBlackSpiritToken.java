@@ -22,7 +22,7 @@ public final class WhiteBlackSpiritToken extends TokenImpl {
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes.addAll(Arrays.asList("MH1", "C21", "UMA"));
+        availableImageSetCodes.addAll(Arrays.asList("GTC", "EVE", "MH1", "C15", "C21", "UMA", "RNA", "MOM"));
     }
 
     @Override
@@ -31,6 +31,12 @@ public final class WhiteBlackSpiritToken extends TokenImpl {
 
         if (getOriginalExpansionSetCode().equals("UMA")) {
             this.setTokenType(2);
+        }
+        if (getOriginalExpansionSetCode().equals("C15")) {
+            this.setTokenType(2);
+        }
+        if (getOriginalExpansionSetCode().equals("MOM")) {
+            this.setTokenType(1);
         }
     }
 

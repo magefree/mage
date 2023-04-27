@@ -9,7 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.token.TemptWithVengeanceElementalToken;
+import mage.game.permanent.token.Elemental11HasteToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 
@@ -58,7 +58,7 @@ class TemptWithVengeanceEffect extends OneShotEffect {
         int xValue = source.getManaCostsToPay().getX();
         if (controller != null && xValue > 0) {
 
-            Token tokenCopy = new TemptWithVengeanceElementalToken();
+            Token tokenCopy = new Elemental11HasteToken();
             tokenCopy.putOntoBattlefield(xValue, game, source, source.getControllerId(), false, false);
 
             int opponentsAddedTokens = 0;

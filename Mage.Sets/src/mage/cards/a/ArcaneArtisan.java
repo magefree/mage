@@ -48,7 +48,7 @@ public final class ArcaneArtisan extends CardImpl {
         // {2}{U}, {T}: Target player draws a card, then exiles a card from their hand. If a creature card is exiled this way, that player creates a token that's a copy of that card.
         Ability ability = new SimpleActivatedAbility(
                 new ArcaneArtisanCreateTokenEffect(),
-                new ManaCostsImpl("{2}{U}")
+                new ManaCostsImpl<>("{2}{U}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());

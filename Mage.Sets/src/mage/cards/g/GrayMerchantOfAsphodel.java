@@ -50,8 +50,7 @@ class GrayMerchantOfAsphodelEffect extends OneShotEffect {
         super(Outcome.GainLife);
         this.staticText = "each opponent loses X life, where X is your devotion to black. "
                 + "You gain life equal to the life lost this way. "
-                + "<i>(Each {B} in the mana costs of permanents you control "
-                + "counts towards your devotion to black.)</i>";
+                + DevotionCount.B.getReminder();
     }
 
     private GrayMerchantOfAsphodelEffect(final GrayMerchantOfAsphodelEffect effect) {

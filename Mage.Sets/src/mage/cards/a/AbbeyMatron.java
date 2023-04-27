@@ -29,7 +29,7 @@ public final class AbbeyMatron extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {W}, {tap}: Abbey Matron gets +0/+3 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0,3,Duration.EndOfTurn), new ManaCostsImpl("{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0,3,Duration.EndOfTurn), new ManaCostsImpl<>("{W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

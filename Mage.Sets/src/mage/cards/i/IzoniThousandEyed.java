@@ -48,7 +48,7 @@ public final class IzoniThousandEyed extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new GainLifeEffect(1),
-                new ManaCostsImpl("{B}{G}")
+                new ManaCostsImpl<>("{B}{G}")
         );
         ability.addEffect(
                 new DrawCardSourceControllerEffect(1).setText("and draw a card")

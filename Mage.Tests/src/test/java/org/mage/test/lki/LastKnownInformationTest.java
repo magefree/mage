@@ -40,6 +40,7 @@ public class LastKnownInformationTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Murder Investigation", "Safehold Elite");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Safehold Elite");
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN, 2); // Let the Lightning Bolt and persist resolve
         // choose triggered ability order
         setChoice(playerA, "When enchanted creature dies");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Safehold Elite", "When enchanted creature dies");
@@ -137,7 +138,5 @@ public class LastKnownInformationTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Grizzly Bears", 1);
         assertLife(playerA, 27);
-
     }
-
 }

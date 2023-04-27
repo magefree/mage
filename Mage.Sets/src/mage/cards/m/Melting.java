@@ -48,6 +48,7 @@ class MeltingEffect extends ContinuousEffectImpl {
 
     public MeltingEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Detriment);
+        this.staticText = "All lands are no longer snow";
     }
 
     public MeltingEffect(final MeltingEffect effect) {
@@ -65,10 +66,5 @@ class MeltingEffect extends ContinuousEffectImpl {
             permanent.getSuperType().remove(SuperType.SNOW);
         }
         return true;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "All lands are no longer snow";
     }
 }

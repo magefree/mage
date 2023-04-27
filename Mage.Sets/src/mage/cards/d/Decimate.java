@@ -2,7 +2,6 @@
 package mage.cards.d;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -11,6 +10,7 @@ import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetEnchantmentPermanent;
 import mage.target.common.TargetLandPermanent;
+import mage.target.targetpointer.EachTargetPointer;
 
 /**
  *
@@ -22,9 +22,7 @@ public final class Decimate extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{G}");
 
         // Destroy target artifact, target creature, target enchantment, and target land.
-        Effect effect = new DestroyTargetEffect(false, true);
-        effect.setText("Destroy target artifact, target creature, target enchantment, and target land.");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new DestroyTargetEffect().setTargetPointer(new EachTargetPointer()));
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());

@@ -27,7 +27,7 @@ public final class RimeboundDead extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {S}: Regenerate Rimebound Dead.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{S}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{S}")));
     }
 
     private RimeboundDead(final RimeboundDead card) {

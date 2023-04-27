@@ -83,7 +83,7 @@ class WrennAndSevenLandEffect extends OneShotEffect {
         TargetCardInHand target = new TargetCardInHand(
                 0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD_LANDS
         );
-        player.choose(outcome, player.getHand(), target, game);
+        player.choose(outcome, player.getHand(), target, source, game);
         return player.moveCards(
                 new CardsImpl(target.getTargets()).getCards(game),
                 Zone.BATTLEFIELD, source, game, true,

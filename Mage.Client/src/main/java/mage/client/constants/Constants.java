@@ -51,7 +51,6 @@ public final class Constants {
 
     // cards render
     public static final Rectangle CARD_SIZE_FULL = new Rectangle(101, 149);
-    public static final Rectangle THUMBNAIL_SIZE_FULL = new Rectangle(102, 146);
 
     // resources - default images
     public static final String RESOURCE_PATH_DEFAULT_IMAGES = File.separator + "default";
@@ -92,6 +91,10 @@ public final class Constants {
     public static final int BATTLEFIELD_FEEDBACK_COLORIZING_MODE_DISABLE = 0;
     public static final int BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_ONE_COLOR = 1;
     public static final int BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_MULTICOLOR = 2;
+
+    public static final int AUTO_TARGET_DISABLE      = 0;
+    public static final int AUTO_TARGET_NON_FEEL_BAD = 1;
+    public static final int AUTO_TARGET_ALL          = 2;
 
     public interface IO {
         String DEFAULT_IMAGES_DIR = "plugins" + File.separator + "images" + File.separator;

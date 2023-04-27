@@ -34,7 +34,7 @@ public final class FlayedNim extends CardImpl {
                 false, true));
 
         // {2}{B}: Regenerate Flayed Nim.
-        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl("{2}{B}")));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl<>("{2}{B}")));
     }
 
     private FlayedNim(final FlayedNim card) {

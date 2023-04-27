@@ -37,7 +37,7 @@ public final class MaskedAdmirers extends CardImpl {
         OneShotEffect effect = new ReturnToHandSourceEffect();
         effect.setText("return {this} from your graveyard to your hand");
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                Zone.GRAVEYARD, new DoIfCostPaid(effect, new ManaCostsImpl("{G}{G}")), StaticFilters.FILTER_SPELL_A_CREATURE, false, false));
+                Zone.GRAVEYARD, new DoIfCostPaid(effect, new ManaCostsImpl<>("{G}{G}")), StaticFilters.FILTER_SPELL_A_CREATURE, false, false));
     }
 
     private MaskedAdmirers(final MaskedAdmirers card) {

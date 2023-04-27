@@ -27,7 +27,6 @@ public class KaradorGhostChieftainTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Karador, Ghost Chieftain");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, "Karador, Ghost Chieftain", 1);
     }
 
@@ -55,7 +54,6 @@ public class KaradorGhostChieftainTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Karador, Ghost Chieftain");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, "Karador, Ghost Chieftain", 1);
     }
 
@@ -74,18 +72,17 @@ public class KaradorGhostChieftainTest extends CardTestPlayerBase {
         // During each of your turns, you may cast one creature card from your graveyard.
         addCard(Zone.HAND, playerA, "Karador, Ghost Chieftain");// {5}{B}{G}{W}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Karador, Ghost Chieftain");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Karador, Ghost Chieftain", true);
 
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion", true);
 
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cloudshift", "Karador, Ghost Chieftain");
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
 
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
-
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Silvercoat Lion", 2);
         assertGraveyardCount(activePlayer, "Cloudshift", 1);
@@ -116,7 +113,7 @@ public class KaradorGhostChieftainTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Gisa and Geralf"); // CREATURE {2}{U}{B} (4/4)
 
         // prepare spels with same AsThough effects and puts creature to graveyard
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Karador, Ghost Chieftain");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Karador, Ghost Chieftain", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gisa and Geralf");
 
         // you play any creatures due to two approve objects
@@ -135,7 +132,5 @@ public class KaradorGhostChieftainTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
     }
-
 }

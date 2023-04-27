@@ -76,7 +76,7 @@ class ChariotOfTheSunEffect extends ContinuousEffectImpl {
             this.discard();
             return false;
         }
-        permanent.getToughness().setValue(1);
+        permanent.getToughness().setModifiedBaseValue(1);
         return true;
     }
 }

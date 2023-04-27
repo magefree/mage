@@ -7,7 +7,7 @@ import mage.abilities.common.BlocksSourceTriggeredAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -81,10 +81,10 @@ class SereneMasterEffect extends OneShotEffect {
         if (sourceCreature != null && attackingCreature != null) {
             StaticValue newSourcePower = StaticValue.get(attackingCreature.getPower().getValue());
             StaticValue newAttackerPower = StaticValue.get(sourceCreature.getPower().getValue());
-            ContinuousEffect effect = new SetPowerToughnessTargetEffect(newSourcePower, null, Duration.EndOfCombat);
+            ContinuousEffect effect = new SetBasePowerToughnessTargetEffect(newSourcePower, null, Duration.EndOfCombat);
             effect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
             game.addEffect(effect, source);
-            effect = new SetPowerToughnessTargetEffect(newAttackerPower, null, Duration.EndOfCombat);
+            effect = new SetBasePowerToughnessTargetEffect(newAttackerPower, null, Duration.EndOfCombat);
             effect.setTargetPointer(new FixedTarget(attackingCreature.getId(), game));
             game.addEffect(effect, source);
             return true;

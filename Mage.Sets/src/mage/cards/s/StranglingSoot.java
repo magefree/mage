@@ -32,7 +32,7 @@ public final class StranglingSoot extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         // Flashback {5}{R}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{R}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{5}{R}")));
     }
 
     private StranglingSoot(final StranglingSoot card) {

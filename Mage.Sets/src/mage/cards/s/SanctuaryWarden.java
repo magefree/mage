@@ -50,15 +50,15 @@ public final class SanctuaryWarden extends CardImpl {
         // Sanctuary Warden enters the battlefield with two shield counters on it.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.SHIELD.createInstance(2)),
-                "with two shield counters on it. <i>(If it would be dealt damage " +
-                        "or destroyed, remove a shield counter from it instead.)</i>"
+                "with two shield counters on it. <i>(If it would be dealt damage "
+                + "or destroyed, remove a shield counter from it instead.)</i>"
         ));
 
         // Whenever Sanctuary Warden enters the battlefield or attacks, you may remove a counter from a creature or planeswalker you control. If you do, draw a card and create a 1/1 green and white Citizen creature token.
         this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(
                 new DoIfCostPaid(
                         new DrawCardSourceControllerEffect(1),
-                        new RemoveCounterCost(new TargetControlledPermanent(filter))
+                        new RemoveCounterCost(new TargetControlledPermanent(1, 1, filter, true))
                 ).addEffect(new CreateTokenEffect(new CitizenGreenWhiteToken()).concatBy("and"))
         ));
     }

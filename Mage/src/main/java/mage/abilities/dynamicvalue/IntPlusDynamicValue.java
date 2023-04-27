@@ -45,4 +45,9 @@ public class IntPlusDynamicValue implements DynamicValue {
     public String getMessage() {
         return value.getMessage();
     }
+
+    @Override
+    public int getSign() {
+        return value.getSign();
+    }
 }

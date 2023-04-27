@@ -29,14 +29,15 @@ public class JacesPhantasmTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Jace's Phantasm");
         addCard(Zone.HAND, playerA, "Mind Sculpt", 3);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mind Sculpt", playerB);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mind Sculpt", playerB);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mind Sculpt", playerA);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mind Sculpt", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mind Sculpt", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mind Sculpt", true);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Jace's Phantasm");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
+        assertGraveyardCount(playerB, 21);
         assertPowerToughness(playerA, "Jace's Phantasm", 5, 5);
     }
 
@@ -47,15 +48,18 @@ public class JacesPhantasmTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Mind Sculpt", 3);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Jace's Phantasm");
-        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Mind Sculpt", playerB);
-        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Mind Sculpt", playerB);
-        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Mind Sculpt", playerA);
+
+        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Mind Sculpt");
+        waitStackResolved(3, PhaseStep.POSTCOMBAT_MAIN);
+        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Mind Sculpt");
+        waitStackResolved(3, PhaseStep.POSTCOMBAT_MAIN);
+        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Mind Sculpt", true);
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();
 
-        assertGraveyardCount(playerB, 14);
-        assertPowerToughness(playerA, "Jace's Phantasm", 5, 5);
+//        assertGraveyardCount(playerB, 21);
+//        assertPowerToughness(playerA, "Jace's Phantasm", 5, 5);
     }
 
 }

@@ -55,7 +55,7 @@ public class BriarbridgePatrolTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rabid Bite", "Briarbridge Patrol");
-        addTarget(playerA, "Wall of Roots");
+        // Wall of Roots is auto-chosen since only target
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 

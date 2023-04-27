@@ -54,6 +54,7 @@ class HallarTheFirefletcherTriggeredAbility extends TriggeredAbilityImpl {
         this.addEffect(new DamagePlayersEffect(Outcome.Benefit, new CountersSourceCount(CounterType.P1P1), TargetController.OPPONENT)
                 .setText("then {this} deals damage equal to the number of +1/+1 counters on it to each opponent")
         );
+        setTriggerPhrase("Whenever you cast a spell, if that spell was kicked, ");
     }
 
     HallarTheFirefletcherTriggeredAbility(final HallarTheFirefletcherTriggeredAbility ability) {
@@ -76,10 +77,5 @@ class HallarTheFirefletcherTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         return KickerAbility.getSpellKickedCount(game, event.getTargetId()) > 0;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you cast a spell, if that spell was kicked, ";
     }
 }

@@ -34,7 +34,7 @@ public final class Abduction extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
         
         // When Abduction enters the battlefield, untap enchanted creature.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new UntapEnchantedEffect()));

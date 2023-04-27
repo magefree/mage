@@ -38,8 +38,8 @@ public final class OviyaPashiriSageLifecrafterToken extends TokenImpl {
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
 
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C21")) {
-            setTokenType(2);
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("KLD")) {
+            setTokenType(1);
         }
     }
 }

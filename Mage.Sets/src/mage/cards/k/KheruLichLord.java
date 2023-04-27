@@ -51,7 +51,7 @@ public final class KheruLichLord extends CardImpl {
 
         // At the beginning of your upkeep, you may pay {2}{B}. If you do, return a creature card at random from your graveyard to the battlefield. It gains flying, trample, and haste. Exile that card at the beginning of the next end step. If that card would leave the battlefield, exile it instead of putting it anywhere else.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                new DoIfCostPaid(new KheruLichLordEffect(), new ManaCostsImpl("{2}{B}"), "Return creature card from your graveyard?"), TargetController.YOU, false));
+                new DoIfCostPaid(new KheruLichLordEffect(), new ManaCostsImpl<>("{2}{B}"), "Return creature card from your graveyard?"), TargetController.YOU, false));
     }
 
     private KheruLichLord(final KheruLichLord card) {

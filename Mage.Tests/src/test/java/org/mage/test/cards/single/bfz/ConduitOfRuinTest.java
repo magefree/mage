@@ -43,8 +43,6 @@ public class ConduitOfRuinTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-        
         assertPermanentCount(playerA, "Conduit of Ruin", 1);
         assertPermanentCount(playerA, "Emrakul, the Aeons Torn", 1);
     }

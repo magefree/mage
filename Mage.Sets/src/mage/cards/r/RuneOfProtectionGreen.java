@@ -33,7 +33,7 @@ public final class RuneOfProtectionGreen extends CardImpl {
         Effect effect = new PreventNextDamageFromChosenSourceToYouEffect(Duration.EndOfTurn, filter);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{W}")));
         // Cycling {2} ({2}, Discard this card: Draw a card.)
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private RuneOfProtectionGreen(final RuneOfProtectionGreen card) {

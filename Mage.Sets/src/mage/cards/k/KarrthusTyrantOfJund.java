@@ -1,40 +1,32 @@
-
 package mage.cards.k;
 
-import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.effects.common.UntapAllEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.effects.common.continuous.GainControlAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author jeffwadsworth
+ * @author awjackson
  */
 public final class KarrthusTyrantOfJund extends CardImpl {
-    
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Dragon creatures you control");
-    
-    static {
-        filter.add(AnotherPredicate.instance);
-        filter.add(SubType.DRAGON.getPredicate());
-    }
+
+    private static final FilterPermanent filter = new FilterPermanent(SubType.DRAGON, "Dragons");
+    private static final FilterPermanent filter2 = new FilterCreaturePermanent(SubType.DRAGON, "Dragon creatures");
 
     public KarrthusTyrantOfJund(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{R}{G}");
@@ -45,16 +37,19 @@ public final class KarrthusTyrantOfJund extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // Haste
         this.addAbility(HasteAbility.getInstance());
-        
+
         // When Karrthus, Tyrant of Jund enters the battlefield, gain control of all Dragons, then untap all Dragons.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new KarrthusEffect()));
-        
+        Ability ability = new EntersBattlefieldTriggeredAbility(new GainControlAllEffect(Duration.Custom, filter));
+        ability.addEffect(new UntapAllEffect(filter).concatBy(", then"));
+        this.addAbility(ability);
+
         // Other Dragon creatures you control have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
-        
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
+                HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter2, true
+        )));
     }
 
     private KarrthusTyrantOfJund(final KarrthusTyrantOfJund card) {
@@ -64,67 +59,5 @@ public final class KarrthusTyrantOfJund extends CardImpl {
     @Override
     public KarrthusTyrantOfJund copy() {
         return new KarrthusTyrantOfJund(this);
-    }
-}
-
-class KarrthusEffect extends OneShotEffect {
-
-    public KarrthusEffect() {
-        super(Outcome.GainControl);
-        this.staticText = "gain control of all Dragons, then untap all Dragons";
-    }
-
-    public KarrthusEffect(final KarrthusEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public KarrthusEffect copy() {
-        return new KarrthusEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        FilterPermanent filter = new FilterPermanent();
-        filter.add(SubType.DRAGON.getPredicate());
-        List<Permanent> dragons = game.getBattlefield().getAllActivePermanents(filter, game);
-        for (Permanent dragon : dragons) {
-            ContinuousEffect effect = new KarrthusControlEffect(source.getControllerId());
-            effect.setTargetPointer(new FixedTarget(dragon.getId(), game));
-            game.addEffect(effect, source);
-        }
-        for (Permanent dragon : dragons) {
-            dragon.untap(game);
-        }
-        return true;
-    }
-}
-
-class KarrthusControlEffect extends ContinuousEffectImpl {
-
-    private UUID controllerId;
-
-    public KarrthusControlEffect(UUID controllerId) {
-        super(Duration.EndOfGame, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
-        this.controllerId = controllerId;
-    }
-
-    public KarrthusControlEffect(final KarrthusControlEffect effect) {
-        super(effect);
-        this.controllerId = effect.controllerId;
-    }
-
-    @Override
-    public KarrthusControlEffect copy() {
-        return new KarrthusControlEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent dragon = game.getPermanent(targetPointer.getFirst(game, source));
-        if (dragon != null && controllerId != null) {
-            return dragon.changeControllerId(controllerId, game, source);
-        }
-        return false;
     }
 }

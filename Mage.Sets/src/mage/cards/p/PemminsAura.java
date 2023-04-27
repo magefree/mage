@@ -38,22 +38,22 @@ public final class PemminsAura extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // {U}: Untap enchanted creature.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapEnchantedEffect(), new ManaCostsImpl("{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapEnchantedEffect(), new ManaCostsImpl<>("{U}")));
 
         // {U}: Enchanted creature gains flying until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(),
-                AttachmentType.AURA, Duration.EndOfTurn), new ManaCostsImpl("{U}")));
+                AttachmentType.AURA, Duration.EndOfTurn), new ManaCostsImpl<>("{U}")));
 
         // {U}: Enchanted creature gains shroud until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ShroudAbility.getInstance(),
-                AttachmentType.AURA, Duration.EndOfTurn), new ManaCostsImpl("{U}")));
+                AttachmentType.AURA, Duration.EndOfTurn), new ManaCostsImpl<>("{U}")));
 
         // {1}: Enchanted creature gets +1/-1 or -1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PemminsAuraBoostEnchantedEffect(), new ManaCostsImpl("{1}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PemminsAuraBoostEnchantedEffect(), new ManaCostsImpl<>("{1}")));
     }
 
     private PemminsAura(final PemminsAura card) {

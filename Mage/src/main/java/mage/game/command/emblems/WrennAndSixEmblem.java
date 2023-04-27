@@ -11,6 +11,7 @@ import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.players.Player;
 
+import java.util.Arrays;
 import java.util.UUID;
 import mage.cards.ModalDoubleFacesCard;
 import mage.cards.ModalDoubleFacesCardHalf;
@@ -25,7 +26,8 @@ public final class WrennAndSixEmblem extends Emblem {
     public WrennAndSixEmblem() {
         this.setName("Emblem Wrenn");
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new WrennAndSixEmblemEffect()));
-        this.setExpansionSetCodeForImage("MH1");
+
+        availableImageSetCodes = Arrays.asList("MH1", "2X2");
     }
 }
 

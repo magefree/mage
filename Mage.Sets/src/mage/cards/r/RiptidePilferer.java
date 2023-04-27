@@ -27,7 +27,7 @@ public final class RiptidePilferer extends CardImpl {
 
         // Whenever Riptide Pilferer deals combat damage to a player, that player discards a card.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1), false, true));                                                                                               // Morph {U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{U}")));
     }
 
     private RiptidePilferer(final RiptidePilferer card) {

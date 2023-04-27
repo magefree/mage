@@ -45,7 +45,7 @@ public final class HanSoloScrumrat extends CardImpl {
         this.addAbility(new PartnerWithAbility("Chewbacca, the Beast"));
 
         // R: Han Solo, Scrumrat gains first strike until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
 
         // Whenever Han Solo, Scrumrat deals damage during your turn, put a +1/+1 counter on another target creature you control.
         Ability ability = new HanSoloScrumratTriggeredAbility();
@@ -67,6 +67,7 @@ class HanSoloScrumratTriggeredAbility extends TriggeredAbilityImpl {
 
     public HanSoloScrumratTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false);
+        setTriggerPhrase("Whenever {this} creature deals damage during your turn, ");
     }
 
     public HanSoloScrumratTriggeredAbility(final HanSoloScrumratTriggeredAbility ability) {
@@ -90,10 +91,5 @@ class HanSoloScrumratTriggeredAbility extends TriggeredAbilityImpl {
         return source != null
                 && game.isActivePlayer(source.getControllerId())
                 && event.getSourceId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} creature deals damage during your turn, " ;
     }
 }

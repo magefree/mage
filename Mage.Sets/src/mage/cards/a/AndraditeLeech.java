@@ -34,10 +34,10 @@ public final class AndraditeLeech extends CardImpl {
 
         // Black spells you cast cost {B} more to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new SpellsCostIncreasingAllEffect(new ManaCostsImpl("{B}"), filter, TargetController.YOU)));
+                new SpellsCostIncreasingAllEffect(new ManaCostsImpl<>("{B}"), filter, TargetController.YOU)));
         // {B}: Andradite Leech gets +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
+                new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{B}")));
     }
 
     private AndraditeLeech(final AndraditeLeech card) {

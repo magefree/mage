@@ -28,7 +28,7 @@ public final class TrenchWurm extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{R}, {tap}: Destroy target nonbasic land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{2}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{2}{R}"));
         ability.addTarget(new TargetNonBasicLandPermanent());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

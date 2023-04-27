@@ -33,7 +33,7 @@ public final class Glory extends CardImpl {
         // {2}{W}: Choose a color. Creatures you control gain protection from the chosen color until end of turn. Activate this ability only if Glory is in your graveyard.
         Effect effect = new GainProtectionFromColorAllEffect(Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES);
         effect.setText("Choose a color. Creatures you control gain protection from the chosen color until end of turn. Activate only if {this} is in your graveyard.");
-        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, effect, new ManaCostsImpl("{2}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, effect, new ManaCostsImpl<>("{2}{W}")));
     }
 
     private Glory(final Glory card) {

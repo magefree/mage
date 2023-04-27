@@ -10,7 +10,8 @@ public class CardNameUtil {
         return name
             .replace("&amp;", "//")
             .replace("Ã†", "Ae")
-            .replace("Ã¶", "o")
+            .replace("Ã¶", "A")
+            .replace("ö", "o")
             .replace("û", "u")
             .replace("í", "i")
             .replace("â", "a")
@@ -18,7 +19,7 @@ public class CardNameUtil {
             .replace("à", "a")
             .replace("é", "e")
             .replace("ú", "u")
-            .replace("\"", "'");
+            .replace("†", "+");
     }
 
 }

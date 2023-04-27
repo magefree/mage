@@ -71,19 +71,13 @@ public class CastAsThoughItHadFlashAllEffect extends AsThoughEffectImpl {
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder();
-        if (anyPlayer) {
-            sb.append("Any player");
-        } else {
-            sb.append("You");
-        }
+        StringBuilder sb = new StringBuilder(anyPlayer ? "any player" : "you");
         sb.append(" may cast ");
         sb.append(filter.getMessage());
         if (!duration.toString().isEmpty()) {
             if (duration == Duration.EndOfTurn) {
                 sb.append(" this turn");
             } else {
-                sb.append(' ');
                 sb.append(' ');
                 sb.append(duration.toString());
             }

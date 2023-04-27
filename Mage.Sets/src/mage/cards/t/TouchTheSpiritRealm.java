@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -31,24 +30,20 @@ import mage.util.CardUtil;
  */
 public final class TouchTheSpiritRealm extends CardImpl {
 
-    private static final FilterPermanent filter = StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE;
-
     public TouchTheSpiritRealm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
         // When Touch the Spirit Realm enters the battlefield, exile up to one target artifact or creature until
         // Touch the Spirit Realm leaves the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect(filter.getMessage())
-        		.setText("exile up to one target " + filter.getMessage()
-        		+ " until {this} leaves the battlefield"));
-        ability.addTarget(new TargetPermanent(0, 1, filter, false));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);
         
         // Channel - {1}{W}, Discard Touch the Spirit Realm: Exile target artifact or creature.
         // Return it to the battlefield under its owner's control at the beginning of the next end step.
         Ability channelAbility = new ChannelAbility("{1}{W}", new TouchTheSpiritRealmEffect());
-        channelAbility.addTarget(new TargetPermanent(filter));
+        channelAbility.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
         this.addAbility(channelAbility);
     }
 

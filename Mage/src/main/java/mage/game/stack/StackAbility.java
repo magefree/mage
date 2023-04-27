@@ -16,7 +16,6 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.hint.Hint;
 import mage.abilities.icon.CardIcon;
-import mage.cards.Card;
 import mage.cards.FrameStyle;
 import mage.constants.*;
 import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
@@ -34,18 +33,15 @@ import mage.util.SubTypes;
 import mage.util.functions.StackObjectCopyApplier;
 import mage.watchers.Watcher;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class StackAbility extends StackObjectImpl implements Ability {
 
-    private static final List<CardType> emptyCardType = new ArrayList<>();
-    private static final List<String> emptyString = new ArrayList<>();
+    private static final List<CardType> emptyCardType = Collections.unmodifiableList(new ArrayList<>());
+    private static final List<String> emptyString = Collections.unmodifiableList(new ArrayList<>());
     private static final ObjectColor emptyColor = new ObjectColor();
     private static final ManaCosts<ManaCost> emptyCost = new ManaCostsImpl<>();
     private static final Costs<Cost> emptyCosts = new CostsImpl<>();
@@ -104,12 +100,12 @@ public class StackAbility extends StackObjectImpl implements Ability {
 
     @Override
     public void counter(Ability source, Game game) {
-        // zone, owner, top ignored
-        this.counter(source, game, Zone.GRAVEYARD, true, ZoneDetail.TOP);
+        // zone ignored
+        this.counter(source, game, PutCards.GRAVEYARD);
     }
 
     @Override
-    public void counter(Ability source, Game game, Zone zone, boolean owner, ZoneDetail zoneDetail) {
+    public void counter(Ability source, Game game, PutCards putCard) {
         //20100716 - 603.8
         if (ability instanceof StateTriggeredAbility) {
             ((StateTriggeredAbility) ability).counter(game);
@@ -244,6 +240,15 @@ public class StackAbility extends StackObjectImpl implements Ability {
 
     @Override
     public void setStartingLoyalty(int startingLoyalty) {
+    }
+
+    @Override
+    public int getStartingDefense() {
+        return 0;
+    }
+
+    @Override
+    public void setStartingDefense(int startingDefense) {
     }
 
     @Override

@@ -50,7 +50,7 @@ public final class TawnosUrzasApprentice extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // {U}{R}, {T}: Copy target activated or triggered ability you control from an artifact source. You may choose new targets for the copy.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TawnosUrzasApprenticeEffect(), new ManaCostsImpl("{U}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TawnosUrzasApprenticeEffect(), new ManaCostsImpl<>("{U}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetActivatedOrTriggeredAbility(filter));
         this.addAbility(ability);

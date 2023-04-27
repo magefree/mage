@@ -29,7 +29,7 @@ public final class ShivanFire extends CardImpl {
         // Shivan Fire deals 2 damage to any target. If Shivan Fire was kicked, it deals 4 damage to that creature or player instead.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DamageTargetEffect(4),
-                new DamageTargetEffect(2), KickedCondition.instance, "{this} deals 2 damage to target creature. If this spell was kicked, it deals 4 damage to that creature instead"));
+                new DamageTargetEffect(2), KickedCondition.ONCE, "{this} deals 2 damage to target creature. If this spell was kicked, it deals 4 damage to that creature instead"));
     }
 
     private ShivanFire(final ShivanFire card) {

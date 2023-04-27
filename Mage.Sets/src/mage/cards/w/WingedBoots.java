@@ -14,6 +14,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 import java.util.UUID;
+import mage.constants.Outcome;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -31,11 +33,13 @@ public final class WingedBoots extends CardImpl {
         ));
         ability.addEffect(new GainAbilityAttachedEffect(
                 new WardAbility(new GenericManaCost(4)), AttachmentType.EQUIPMENT
-        ).setText("and ward {4}"));
+        ).setText("and ward {4}. " +
+                "<i>(Whenever equipped creature becomes the target of a spell or ability an opponent controls, " +
+                "counter it unless that player pays {4}.)</i>"));
         this.addAbility(ability);
 
         // Equip {1}
-        this.addAbility(new EquipAbility(1));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), new TargetControlledCreaturePermanent(), false));
     }
 
     private WingedBoots(final WingedBoots card) {

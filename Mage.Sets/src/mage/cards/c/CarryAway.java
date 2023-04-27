@@ -35,7 +35,7 @@ public final class CarryAway extends CardImpl {
         TargetPermanent auraTarget = new TargetEquipmentPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When Carry Away enters the battlefield, unattach enchanted Equipment.

@@ -47,7 +47,7 @@ public final class MtendaGriffin extends CardImpl {
         Effect effect = new ReturnToHandSourceEffect(true);
         effect.setText("Return Mtenda Griffin to its owner's hand");        
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, 
-               effect, new ManaCostsImpl("{W}"), new IsStepCondition(PhaseStep.UPKEEP));
+               effect, new ManaCostsImpl<>("{W}"), new IsStepCondition(PhaseStep.UPKEEP));
         effect = new ReturnToHandTargetEffect();
         ability.addCost(new TapSourceCost());
         effect.setText("and return target Griffin card from your graveyard to your hand");

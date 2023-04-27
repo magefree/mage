@@ -17,7 +17,7 @@ import java.util.UUID;
  */
 public class LoseLifeOpponentsEffect extends OneShotEffect {
 
-    private DynamicValue amount;
+    private final DynamicValue amount;
 
     public LoseLifeOpponentsEffect(int amount) {
         this(StaticValue.get(amount));
@@ -26,7 +26,7 @@ public class LoseLifeOpponentsEffect extends OneShotEffect {
     public LoseLifeOpponentsEffect(DynamicValue amount) {
         super(Outcome.Damage);
         this.amount = amount;
-        staticText = "each opponent loses " + amount + " life";
+        staticText = generateStaticText();
     }
 
     public LoseLifeOpponentsEffect(final LoseLifeOpponentsEffect effect) {
@@ -50,8 +50,7 @@ public class LoseLifeOpponentsEffect extends OneShotEffect {
         return new LoseLifeOpponentsEffect(this);
     }
 
-    @Override
-    public String getText(Mode mode) {
+    private String generateStaticText() {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
@@ -59,7 +58,7 @@ public class LoseLifeOpponentsEffect extends OneShotEffect {
         String message = amount.getMessage();
 
         sb.append("each opponent loses ");
-        if (message.isEmpty() || !message.equals("1")) {
+        if (!message.equals("1")) {
             sb.append(amount).append(' ');
         }
         sb.append("life");

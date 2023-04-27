@@ -16,13 +16,18 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
     private final Condition interveningIfClauseCondition;
 
     public BeginningOfEndStepTriggeredAbility(Effect effect, TargetController targetController, boolean isOptional) {
-        this(Zone.BATTLEFIELD, effect, targetController, null, isOptional);
+        this(effect, targetController, null, isOptional);
+    }
+
+    public BeginningOfEndStepTriggeredAbility(Effect effect, TargetController targetController, Condition interveningIfClauseCondition, boolean isOptional) {
+        this(Zone.BATTLEFIELD, effect, targetController, interveningIfClauseCondition, isOptional);
     }
 
     public BeginningOfEndStepTriggeredAbility(Zone zone, Effect effect, TargetController targetController, Condition interveningIfClauseCondition, boolean isOptional) {
         super(zone, effect, isOptional);
         this.targetController = targetController;
         this.interveningIfClauseCondition = interveningIfClauseCondition;
+        setTriggerPhrase(generateTriggerPhrase());
     }
 
     public BeginningOfEndStepTriggeredAbility(final BeginningOfEndStepTriggeredAbility ability) {
@@ -99,8 +104,7 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
         return true;
     }
 
-    @Override
-    public String getTriggerPhrase() {
+    private String generateTriggerPhrase() {
         switch (targetController) {
             case YOU:
                 return "At the beginning of your end step, " + generateConditionString();
@@ -130,7 +134,7 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
         }
         String clauseText = interveningIfClauseCondition.toString();
         if (clauseText.startsWith("if")) {
-            //Fixes punctuation on multiple sentence if-then construction
+            // Fixes punctuation on multiple sentence if-then construction
             // see -- Colfenor's Urn
             if (clauseText.endsWith(".")) {
                 return clauseText + " ";

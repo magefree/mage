@@ -18,7 +18,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.ChasmSkulkerSquidToken;
+import mage.game.permanent.token.SquidToken;
 import mage.players.Player;
 
 /**
@@ -76,7 +76,7 @@ class ChasmSkulkerEffect extends OneShotEffect {
             if (permanent != null) {
                 int counters = permanent.getCounters(game).getCount(CounterType.P1P1);
                 if (counters > 0) {
-                    return new CreateTokenEffect(new ChasmSkulkerSquidToken(), counters).apply(game, source);
+                    return new CreateTokenEffect(new SquidToken(), counters).apply(game, source);
                 }
                 return true;
             }

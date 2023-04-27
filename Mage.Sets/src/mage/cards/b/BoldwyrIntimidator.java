@@ -37,14 +37,14 @@ public final class BoldwyrIntimidator extends CardImpl {
         // {R}: Target creature becomes a Coward until end of turn.
         Effect effect = new BecomesCreatureTypeTargetEffect(Duration.EndOfTurn, SubType.COWARD);
         effect.setText("Target creature becomes a Coward until end of turn");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{R}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // {2}{R}: Target creature becomes a Warrior until end of turn.
         effect = new BecomesCreatureTypeTargetEffect(Duration.EndOfTurn, SubType.WARRIOR);
         effect.setText("Target creature becomes a Warrior until end of turn");
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}{R}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}{R}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

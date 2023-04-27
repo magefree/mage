@@ -37,7 +37,6 @@ public class NotOfThisWorldTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerB, "Not of This World", 0);
         assertGraveyardCount(playerB, "Not of This World", 1);

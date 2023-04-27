@@ -50,7 +50,7 @@ public final class AboshanCephalidEmperor extends CardImpl {
         this.addAbility(ability);
 
         // {U}{U}{U}: Tap all creatures without flying.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapAllEffect(filter2), new ManaCostsImpl("{U}{U}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapAllEffect(filter2), new ManaCostsImpl<>("{U}{U}{U}")));
     }
 
     private AboshanCephalidEmperor(final AboshanCephalidEmperor card) {

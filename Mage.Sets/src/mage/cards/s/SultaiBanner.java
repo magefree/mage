@@ -31,7 +31,7 @@ public final class SultaiBanner extends CardImpl {
         this.addAbility(new BlueManaAbility());
 
         // {B}{G}{U}, {T}, Sacrifice Sultai Banner: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{B}{G}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{B}{G}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

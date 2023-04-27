@@ -64,7 +64,7 @@ class ConsulateCracksownExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
 
         //If the permanent leaves the battlefield before the ability resolves, artifacts won't be exiled.
         if (permanent == null || controller == null) return false;
@@ -86,5 +86,4 @@ class ConsulateCracksownExileEffect extends OneShotEffect {
     public ConsulateCracksownExileEffect copy() {
         return new ConsulateCracksownExileEffect(this);
     }
-
 }

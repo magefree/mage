@@ -62,6 +62,7 @@ class GrolnokTheOmnivoreTriggeredAbility extends TriggeredAbilityImpl {
 
     public GrolnokTheOmnivoreTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GrolnokTheOmnivoreExileEffect());
+        setTriggerPhrase("Whenever a permanent card is put into your graveyard from your library, ");
     }
 
     private GrolnokTheOmnivoreTriggeredAbility(final GrolnokTheOmnivoreTriggeredAbility ability) {
@@ -88,11 +89,6 @@ class GrolnokTheOmnivoreTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a permanent card is put into your graveyard from your library, ";
     }
 }
 

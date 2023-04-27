@@ -52,6 +52,7 @@ class PossibilityStormTriggeredAbility extends TriggeredAbilityImpl {
 
     public PossibilityStormTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PossibilityStormEffect(), false);
+        setTriggerPhrase("Whenever a player casts a spell from their hand, ");
     }
 
     public PossibilityStormTriggeredAbility(final PossibilityStormTriggeredAbility ability) {
@@ -79,11 +80,6 @@ class PossibilityStormTriggeredAbility extends TriggeredAbilityImpl {
             effect.setTargetPointer(new FixedTarget(event.getTargetId()));
         }
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a player casts a spell from their hand, " ;
     }
 }
 

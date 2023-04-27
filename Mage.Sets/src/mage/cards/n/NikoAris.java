@@ -28,7 +28,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.token.ShardToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.watchers.common.CardsDrawnThisTurnWatcher;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -69,7 +68,7 @@ public final class NikoAris extends CardImpl {
                 "{this} deals 2 damage to target tapped creature for each card you've drawn this turn"
         ), -1);
         ability.addTarget(new TargetPermanent(filter));
-        this.addAbility(ability, new CardsDrawnThisTurnWatcher());
+        this.addAbility(ability.addHint(CardsDrawnThisTurnDynamicValue.getHint()));
 
         // −1: Create a Shard token.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new ShardToken()), -1));

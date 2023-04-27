@@ -47,7 +47,7 @@ public final class MorophonTheBoundless extends CardImpl {
 
         // Spells of the chosen type you cast cost {W}{U}{B}{R}{G} less to cast. This effect reduces only the amount of colored mana you pay.
         this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(
-                filter, new ManaCostsImpl("{W}{U}{B}{R}{G}")
+                filter, new ManaCostsImpl<>("{W}{U}{B}{R}{G}")
         )));
 
         // Other creatures you control of the chosen type get +1/+1.

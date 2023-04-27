@@ -45,7 +45,7 @@ public final class EyeOfUgin extends CardImpl {
         Ability searchAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true),
                 new TapSourceCost());
-        searchAbility.addCost(new ManaCostsImpl("{7}"));
+        searchAbility.addCost(new ManaCostsImpl<>("{7}"));
         this.addAbility(searchAbility);
     }
 

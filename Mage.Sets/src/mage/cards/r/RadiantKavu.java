@@ -36,7 +36,7 @@ public final class RadiantKavu extends CardImpl {
 
         // {R}{G}{W}: Prevent all combat damage blue creatures and black creatures would deal this turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, (new PreventAllDamageByAllPermanentsEffect(filter,
-           Duration.EndOfTurn, true)), new ManaCostsImpl("{R}{G}{W}")));
+           Duration.EndOfTurn, true)), new ManaCostsImpl<>("{R}{G}{W}")));
     }
 
     private RadiantKavu(final RadiantKavu card) {

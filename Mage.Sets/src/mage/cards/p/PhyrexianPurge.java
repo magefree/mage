@@ -1,10 +1,9 @@
-
 package mage.cards.p;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.effects.common.DestroyMultiTargetEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -17,7 +16,7 @@ import mage.target.targetadjustment.TargetAdjuster;
 import java.util.UUID;
 
 /**
- * @author escplan9 - Derek Monturo
+ * @author awjackson
  */
 public final class PhyrexianPurge extends CardImpl {
 
@@ -28,7 +27,7 @@ public final class PhyrexianPurge extends CardImpl {
         // Phyrexian Purge costs 3 life more to cast for each target.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
         this.getSpellAbility().addEffect(new InfoEffect("this spell costs 3 life more to cast for each target"));
-        this.getSpellAbility().addEffect(new DestroyMultiTargetEffect().concatBy("<br>"));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect().concatBy("<br>").setText("destroy any number of target creatures"));
         this.getSpellAbility().setTargetAdjuster(PhyrexianPurgeTargetAdjuster.instance);
         this.getSpellAbility().setCostAdjuster(PhyrexianPurgeCostAdjuster.instance);
     }

@@ -13,20 +13,13 @@ import mage.constants.SubType;
 public final class DefenderPlantToken extends TokenImpl {
 
     public DefenderPlantToken() {
-        this(null, 0);
-    }
-
-    public DefenderPlantToken(String setCode) {
-        this(setCode, 0);
-    }
-
-    public DefenderPlantToken(String setCode, int tokenType) {
         super("Plant Token", "0/2 green Plant creature token with defender");
         color.setGreen(true);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.PLANT);
         power = new MageInt(0);
         toughness = new MageInt(2);
+        setOriginalExpansionSetCode("XLN");
 
         this.addAbility(DefenderAbility.getInstance());
     }

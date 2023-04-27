@@ -39,7 +39,7 @@ public final class BarbedWire extends CardImpl {
 
         // {2}: Prevent the next 1 damage that would be dealt by Barbed Wire this turn.
         this.addAbility(new SimpleActivatedAbility(
-                new BarbedWirePreventionEffect(), new ManaCostsImpl("{2}")));
+                new BarbedWirePreventionEffect(), new ManaCostsImpl<>("{2}")));
 
     }
 

@@ -31,7 +31,7 @@ public final class FlowstoneArmor extends CardImpl {
         // {3}, {tap}: Target creature gets +1/-1 for as long as Flowstone Armor remains tapped.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
             new BoostTargetEffect(1, -1, Duration.Custom), SourceTappedCondition.TAPPED,
-            "target creature gets +1/-1 for as long as {this} remains tapped"), new ManaCostsImpl("{3}"));
+            "target creature gets +1/-1 for as long as {this} remains tapped"), new ManaCostsImpl<>("{3}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

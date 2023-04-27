@@ -57,6 +57,7 @@ class BecomesMonarchSourceControllerTriggeredAbility extends TriggeredAbilityImp
 
     public BecomesMonarchSourceControllerTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        setTriggerPhrase("Whenever you become the monarch, ");
     }
 
     public BecomesMonarchSourceControllerTriggeredAbility(final BecomesMonarchSourceControllerTriggeredAbility ability) {
@@ -71,11 +72,6 @@ class BecomesMonarchSourceControllerTriggeredAbility extends TriggeredAbilityImp
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return isControlledBy(event.getPlayerId());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you become the monarch, " ;
     }
 
     @Override

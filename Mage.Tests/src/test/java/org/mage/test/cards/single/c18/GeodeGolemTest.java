@@ -62,7 +62,6 @@ public class GeodeGolemTest extends CardTestCommanderDuelBase {
         setStrictChooseMode(true);
         setStopAt(5, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Grizzly Bears", 1);
     }
@@ -121,7 +120,6 @@ public class GeodeGolemTest extends CardTestCommanderDuelBase {
         setStrictChooseMode(true);
         setStopAt(5, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Akoum Warrior", 1);
     }
@@ -198,7 +196,6 @@ public class GeodeGolemTest extends CardTestCommanderDuelBase {
         setStrictChooseMode(true);
         setStopAt(7, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Harnfel, Horn of Bounty", 1);
     }

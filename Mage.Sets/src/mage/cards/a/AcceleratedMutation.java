@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -17,12 +16,13 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class AcceleratedMutation extends CardImpl {
 
+    private static final DynamicValue xValue = new HighestManaValueCount();
+
     public AcceleratedMutation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{G}{G}");
 
         // Target creature gets +X/+X until end of turn, where X is the highest converted mana cost among permanents you control.
-        DynamicValue amount = new HighestManaValueCount();
-        this.getSpellAbility().addEffect(new BoostTargetEffect(amount, amount, Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

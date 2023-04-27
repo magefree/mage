@@ -27,6 +27,7 @@ public class DealtDamageAttachedTriggeredAbility extends TriggeredAbilityImpl {
     public DealtDamageAttachedTriggeredAbility(Zone zone, Effect effect, boolean optional, SetTargetPointer setTargetPointer) {
         super(zone, effect, optional);
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever enchanted creature is dealt damage, ");
     }
 
     public DealtDamageAttachedTriggeredAbility(final DealtDamageAttachedTriggeredAbility ability) {
@@ -63,10 +64,5 @@ public class DealtDamageAttachedTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever enchanted creature is dealt damage, " ;
     }
 }

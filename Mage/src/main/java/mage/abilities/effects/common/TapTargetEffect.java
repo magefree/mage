@@ -52,22 +52,6 @@ public class TapTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-
-        if (mode.getTargets().isEmpty()) {
-            return "tap target permanent";
-        }
-
-        Target target = mode.getTargets().get(0);
-        if (target.getMaxNumberOfTargets() > 1 || target.getNumberOfTargets() == 0) {
-            if (target.getMaxNumberOfTargets() == target.getNumberOfTargets()) {
-                return "tap " + CardUtil.numberToText(target.getNumberOfTargets()) + " target " + target.getTargetName() + 's';
-            } else {
-                return "tap up to " + CardUtil.numberToText(target.getMaxNumberOfTargets()) + " target " + target.getTargetName() + (target.getMaxNumberOfTargets() > 1 ? "s" : "");
-            }
-        } else if (target.getMaxNumberOfTargets() == 0) {
-            return "tap X target " + mode.getTargets().get(0).getTargetName();
-        } else {
-            return "tap target " + mode.getTargets().get(0).getTargetName();
-        }
+        return "tap " + getTargetPointer().describeTargets(mode.getTargets(), "that creature");
     }
 }

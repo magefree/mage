@@ -24,7 +24,7 @@ public final class CompellingArgument extends CardImpl {
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(5));
 
         // Cycling {U}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{U}")));
 
     }
 

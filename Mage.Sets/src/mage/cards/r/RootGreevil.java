@@ -35,7 +35,7 @@ public final class RootGreevil extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{G}, {tap}, Sacrifice Root Greevil: Destroy all enchantments of the color of your choice.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RootGreevilEffect(), new ManaCostsImpl("{2}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RootGreevilEffect(), new ManaCostsImpl<>("{2}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

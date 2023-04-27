@@ -41,7 +41,7 @@ public final class ShimianNightStalker extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {B}, {T}: All damage that would be dealt to you this turn by target attacking creature is dealt to Shimian Night Stalker instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShimianNightStalkerRedirectDamageEffect(), new ManaCostsImpl("{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShimianNightStalkerRedirectDamageEffect(), new ManaCostsImpl<>("{B}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
@@ -62,7 +62,7 @@ class ShimianNightStalkerRedirectDamageEffect extends RedirectionEffect {
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public ShimianNightStalkerRedirectDamageEffect() {
-        super(Duration.EndOfTurn, Integer.MAX_VALUE, UsageType.ONE_USAGE_ABSOLUTE);
+        super(Duration.EndOfTurn, Integer.MAX_VALUE, UsageType.ACCORDING_DURATION);
         this.staticText = "All damage that would be dealt to you this turn by target attacking creature is dealt to {this} instead";
     }
 

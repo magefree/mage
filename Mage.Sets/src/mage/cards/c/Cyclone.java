@@ -71,7 +71,7 @@ class CycloneEffect extends OneShotEffect {
             greens.append("{G}");
         }
                   
-        if(this.choice(game, source, player, new ManaCostsImpl(greens.toString()))){
+        if(this.choice(game, source, player, new ManaCostsImpl<>(greens.toString()))){
             DamageEverythingEffect dmg = new DamageEverythingEffect(total);
             dmg.apply(game, source);
         } else {            

@@ -45,11 +45,11 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="btnQuickStartDuel" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnQuickStart2Player" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnQuickStartMCTS" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="btnQuickStartCommander" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnQuickStart4Player" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="540" max="32767" attributes="0"/>
               </Group>
@@ -69,7 +69,7 @@
                               <Component id="filterBar1" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="btnQuickStartDuel" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnQuickStart2Player" min="-2" max="-2" attributes="0"/>
                                       <Component id="btnQuickStartMCTS" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -79,7 +79,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="filterBar2" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
-                                  <Component id="btnQuickStartCommander" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnQuickStart4Player" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -555,26 +555,26 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="btnQuickStartDuel">
+        <Component class="javax.swing.JButton" name="btnQuickStart2Player">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Quick start duel"/>
+            <Property name="text" type="java.lang.String" value="Quick 2 player"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuickStartDuelActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuickStart2Player"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnQuickStartCommander">
+        <Component class="javax.swing.JButton" name="btnQuickStart4Player">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Quick start commander"/>
+            <Property name="text" type="java.lang.String" value="Quick 4 player"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuickStartCommanderActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuickStart4PlayerActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnQuickStartMCTS">

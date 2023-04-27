@@ -27,7 +27,7 @@ public final class KnightOfOldBenalia extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Suspend 5—{W}
-        this.addAbility(new SuspendAbility(5, new ManaCostsImpl("{W}"), this));
+        this.addAbility(new SuspendAbility(5, new ManaCostsImpl<>("{W}"), this));
 
         // When Knight of Old Benalia enters the battlefield, other creatures you control get +1/+1 until end of turn.
         this.addAbility(new EntersBattlefieldTriggeredAbility(

@@ -78,7 +78,7 @@ class CurrencyConverterExileEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Card card = (Card) getValue("discardedCard");
-        if (player == null || card == null || card.isOwnedBy(player.getId())
+        if (player == null || card == null || !card.isOwnedBy(player.getId())
                 || !Zone.GRAVEYARD.match(game.getState().getZone(card.getId()))) {
             return false;
         }
@@ -117,7 +117,7 @@ class CurrencyConverterTokenEffect extends OneShotEffect {
         Card card;
         if (exileZone.size() > 1) {
             TargetCard target = new TargetCardInExile(StaticFilters.FILTER_CARD);
-            player.choose(outcome, exileZone, target, game);
+            player.choose(outcome, exileZone, target, source, game);
             card = exileZone.get(target.getFirstTarget(), game);
         } else {
             card = exileZone.getRandom(game);

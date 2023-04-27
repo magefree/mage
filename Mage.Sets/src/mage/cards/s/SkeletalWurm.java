@@ -26,7 +26,7 @@ public final class SkeletalWurm extends CardImpl {
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);
 
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
     }
 
     private SkeletalWurm(final SkeletalWurm card) {

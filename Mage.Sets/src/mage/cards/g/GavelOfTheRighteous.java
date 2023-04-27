@@ -22,7 +22,10 @@ import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.Game;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.IntStream;
 
 /**
@@ -58,7 +61,8 @@ public final class GavelOfTheRighteous extends CardImpl {
                 new OrCost(
                         "Pay {3} or remove a counter from {this}",
                         new GenericManaCost(3), new RemoveCountersSourceCost()
-                )
+                ),
+                false
         ));
     }
 
@@ -77,8 +81,7 @@ enum GavelOfTheRighteousCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return Optional.of(source.getSourcePermanentIfItStillExists(game))
-                .filter(Objects::nonNull)
+        return Optional.ofNullable(source.getSourcePermanentIfItStillExists(game))
                 .map(permanent -> permanent.getCounters(game))
                 .map(HashMap::values)
                 .map(Collection::stream)

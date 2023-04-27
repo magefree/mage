@@ -142,7 +142,7 @@ class ChefsKissApplier implements StackObjectCopyApplier {
     }
 
     @Override
-    public MageObjectReferencePredicate getNextNewTargetType(int copyNumber) {
+    public MageObjectReferencePredicate getNextNewTargetType() {
         if (predicate.hasNext()) {
             return predicate.next();
         }

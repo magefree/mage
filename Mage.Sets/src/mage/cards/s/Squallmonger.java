@@ -38,7 +38,7 @@ public final class Squallmonger extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}: Squallmonger deals 1 damage to each creature with flying and each player. Any player may activate this ability.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter), new ManaCostsImpl("{2}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter), new ManaCostsImpl<>("{2}"));
         Effect effect = new DamagePlayersEffect(1);
         effect.setText("and each player");
         ability.addEffect(effect);

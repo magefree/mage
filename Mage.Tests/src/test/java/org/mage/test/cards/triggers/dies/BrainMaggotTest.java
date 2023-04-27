@@ -23,12 +23,11 @@ public class BrainMaggotTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Bloodflow Connoisseur", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Brain Maggot");
-        addTarget(playerA, playerB);
+        // addTarget(playerA, playerB); Autochosen, only target
         setChoice(playerA, "Bloodflow Connoisseur");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Brain Maggot", 1);
         assertExileCount("Bloodflow Connoisseur", 1);
@@ -46,7 +45,7 @@ public class BrainMaggotTest extends CardTestPlayerBase {
 
         // exile
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Brain Maggot");
-        addTarget(playerA, playerB);
+        // addTarget(playerA, playerB); Autochosen, only target
         setChoice(playerA, "Bloodflow Connoisseur");
 //        showExile("exile", 1, PhaseStep.BEGIN_COMBAT, playerB);
         checkExileCount("blood must be in exile", 1, PhaseStep.BEGIN_COMBAT, playerB, "Bloodflow Connoisseur", 1);
@@ -59,7 +58,6 @@ public class BrainMaggotTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Brain Maggot", 1);
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
@@ -77,14 +75,13 @@ public class BrainMaggotTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mesmeric Fiend");
-        addTarget(playerA, playerB);
+        // addTarget(playerA, playerB); Autochosen, only target
         setChoice(playerA, "Bloodflow Connoisseur");
         //
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, "Lightning Bolt", "Mesmeric Fiend");
 
         setStopAt(1, PhaseStep.DECLARE_ATTACKERS);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Mesmeric Fiend", 1);
         assertGraveyardCount(playerB, "Lightning Bolt", 1);

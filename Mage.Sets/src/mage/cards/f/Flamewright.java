@@ -42,7 +42,7 @@ public final class Flamewright extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}, {tap}: Create a 1/1 colorless Construct artifact creature token with defender.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DarettiConstructToken()), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DarettiConstructToken()), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

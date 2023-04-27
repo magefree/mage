@@ -57,6 +57,7 @@ class HammerheimEffect extends ContinuousEffectImpl {
 
     public HammerheimEffect() {
         super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.LoseAbility);
+        this.staticText = "Target creature loses all landwalk abilities until end of turn.";
     }
 
     public HammerheimEffect(final HammerheimEffect effect) {
@@ -80,10 +81,5 @@ class HammerheimEffect extends ContinuousEffectImpl {
             }
         }
         return true;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Target creature loses all landwalk abilities until end of turn.";
     }
 }

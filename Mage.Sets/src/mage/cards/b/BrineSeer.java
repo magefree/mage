@@ -37,7 +37,7 @@ public final class BrineSeer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{U}, {tap}: Reveal any number of blue cards in your hand. Counter target spell unless its controller pays {1} for each card revealed this way.
-        Ability ability = new SimpleActivatedAbility(new BrineSeerEffect(), new ManaCostsImpl("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(new BrineSeerEffect(), new ManaCostsImpl<>("{2}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);

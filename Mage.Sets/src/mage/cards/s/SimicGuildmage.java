@@ -51,7 +51,7 @@ public final class SimicGuildmage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{G}: Move a +1/+1 counter from target creature onto another target creature with the same controller.
-        Ability countersAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MoveCounterFromTargetToTargetEffect(), new ManaCostsImpl("{1}{G}"));
+        Ability countersAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MoveCounterFromTargetToTargetEffect(), new ManaCostsImpl<>("{1}{G}"));
         TargetCreaturePermanent target = new TargetCreaturePermanent(
                 new FilterCreaturePermanent("creature (you take counter from)"));
         target.setTargetTag(1);
@@ -67,7 +67,7 @@ public final class SimicGuildmage extends CardImpl {
         this.addAbility(countersAbility);
 
         // {1}{U}: Attach target Aura enchanting a permanent to another permanent with the same controller.
-        Ability auraAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MoveAuraEffect(), new ManaCostsImpl("{1}{U}"));
+        Ability auraAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MoveAuraEffect(), new ManaCostsImpl<>("{1}{U}"));
         auraAbility.addTarget(new TargetPermanent(auraFilter));
         this.addAbility(auraAbility);
 

@@ -21,7 +21,7 @@ public final class DemonToken extends TokenImpl {
         toughness = new MageInt(5);
         addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes.addAll(Arrays.asList("AVR", "C14", "DD3A", "ISD", "ORI", "M20", "M21", "2XM"));
+        availableImageSetCodes.addAll(Arrays.asList("AVR", "C14", "ISD", "ORI", "M20", "M21", "2XM", "DDR", "GN3", "30A"));
     }
 
     public DemonToken(final DemonToken token) {
@@ -31,5 +31,14 @@ public final class DemonToken extends TokenImpl {
     @Override
     public DemonToken copy() {
         return new DemonToken(this);
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C14")) {
+            setTokenType(1);
+        }
     }
 }

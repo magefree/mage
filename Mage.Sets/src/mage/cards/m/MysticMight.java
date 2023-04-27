@@ -38,10 +38,10 @@ public final class MysticMight extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent(new FilterControlledLandPermanent());
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Cumulative upkeep {1}{U}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}{U}")));
         // Enchanted land has "{tap}: Target creature gets +2/+2 until end of turn."
         Ability gainAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 2, Duration.EndOfTurn), new TapSourceCost());
         gainAbility.addTarget(new TargetCreaturePermanent());

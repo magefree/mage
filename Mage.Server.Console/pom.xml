@@ -35,7 +35,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-install-plugin</artifactId>
-                <version>2.5.2</version>
             </plugin>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -62,6 +61,10 @@
                         <descriptor>src/main/assembly/distribution.xml</descriptor>
                     </descriptors>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.ruleoftech</groupId>
+                <artifactId>markdown-page-generator-plugin</artifactId>
             </plugin>
         </plugins>
 

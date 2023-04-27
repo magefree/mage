@@ -23,7 +23,7 @@ public final class GisasBidding extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken(), 2));
 
         // Madness {2}{B}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{2}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{2}{B}")));
     }
 
     private GisasBidding(final GisasBidding card) {

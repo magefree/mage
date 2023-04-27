@@ -25,7 +25,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class VoldarenPariah extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("three other creatures");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creatures");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -49,7 +49,7 @@ public final class VoldarenPariah extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledPermanent(3, 3, filter, false))));
 
         // Madness {B}{B}{B}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{B}{B}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{B}{B}{B}")));
     }
 
     private VoldarenPariah(final VoldarenPariah card) {

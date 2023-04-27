@@ -28,7 +28,7 @@ public final class ShivanGorge extends CardImpl {
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {2}{R}, {tap}: Shivan Gorge deals 1 damage to each opponent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamagePlayersEffect(1, TargetController.OPPONENT), new ManaCostsImpl("{2}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamagePlayersEffect(1, TargetController.OPPONENT), new ManaCostsImpl<>("{2}{R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

@@ -32,7 +32,7 @@ public final class UktabiFaerie extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {3}{G}, Sacrifice Uktabi Faerie: Destroy target artifact.
-        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl("{3}{G}"));
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl<>("{3}{G}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);

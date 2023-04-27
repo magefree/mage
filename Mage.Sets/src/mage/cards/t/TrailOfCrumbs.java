@@ -6,10 +6,10 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.PutCards;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
@@ -53,6 +53,7 @@ class TrailOfCrumbsTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new LookLibraryAndPickControllerEffect(
                 2, 1, StaticFilters.FILTER_CARD_PERMANENT, PutCards.HAND, PutCards.BOTTOM_ANY
         ), new GenericManaCost(1)));
+        setTriggerPhrase("Whenever you sacrifice a Food, ");
     }
 
     private TrailOfCrumbsTriggeredAbility(final TrailOfCrumbsTriggeredAbility ability) {
@@ -75,10 +76,5 @@ class TrailOfCrumbsTriggeredAbility extends TriggeredAbilityImpl {
         return permanent != null
                 && event.getPlayerId().equals(this.getControllerId())
                 && permanent.hasSubtype(SubType.FOOD, game);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you sacrifice a Food, ";
     }
 }

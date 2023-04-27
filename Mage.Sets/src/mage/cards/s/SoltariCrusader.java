@@ -30,7 +30,7 @@ public final class SoltariCrusader extends CardImpl {
         // Shadow
         this.addAbility(ShadowAbility.getInstance());
         // {1}{W}: Soltari Crusader gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{W}")));
     }
 
     private SoltariCrusader(final SoltariCrusader card) {

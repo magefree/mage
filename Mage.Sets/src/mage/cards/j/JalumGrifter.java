@@ -45,7 +45,7 @@ public final class JalumGrifter extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {1}{R}, {T}: Shuffle Jalum Grifter and two lands you control face down. Target opponent chooses one of those cards. Turn the cards face up. If they chose Jalum Grifter, sacrifice it. Otherwise, destroy target permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JalumGrifterEffect(), new ManaCostsImpl("{1}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JalumGrifterEffect(), new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetOpponent());
         ability.addTarget(new TargetPermanent());
@@ -117,7 +117,7 @@ class JalumGrifterEffect extends OneShotEffect {
             TargetCard targetCard = new TargetCard(Zone.HAND, new FilterCard());
             CardsImpl cards = new CardsImpl();
             cards.addAll(shellGamePile);
-            if (opponent.choose(Outcome.Sacrifice, cards, targetCard, game)) {
+            if (opponent.choose(Outcome.Sacrifice, cards, targetCard, source, game)) {
                 Card card = game.getCard(targetCard.getFirstTarget());
                 if (card != null) {
                     card.setFaceDown(false, game);

@@ -79,11 +79,6 @@ class JaceMemoryAdeptEffect extends DrawCardTargetEffect {
     }
 
     @Override
-    public String getText(Mode mode) {
-        return staticText;
-    }
-
-    @Override
     public JaceMemoryAdeptEffect copy() {
         return new JaceMemoryAdeptEffect(this);
     }

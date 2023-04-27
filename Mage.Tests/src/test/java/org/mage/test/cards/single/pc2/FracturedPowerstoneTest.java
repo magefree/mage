@@ -25,7 +25,6 @@ public class FracturedPowerstoneTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Eldrazi Token", 2);
         assertTappedCount("Fractured Powerstone", true, 1);
@@ -53,7 +52,6 @@ public class FracturedPowerstoneTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Eldrazi Token", 3);
         assertTappedCount("Mountain", true, 1); // cost for second planar die

@@ -41,7 +41,7 @@ public final class BrineShaman extends CardImpl {
         this.addAbility(ability);
 
         // {1}{U}{U}, Sacrifice a creature: Counter target creature spell.
-        ability = new SimpleActivatedAbility(new CounterTargetEffect(), new ManaCostsImpl("{1}{U}{U}"));
+        ability = new SimpleActivatedAbility(new CounterTargetEffect(), new ManaCostsImpl<>("{1}{U}{U}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         ability.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_CREATURE));
         this.addAbility(ability);

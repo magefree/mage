@@ -37,7 +37,7 @@ public final class KarlovOfTheGhostCouncil extends CardImpl {
         this.addAbility(new GainLifeControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), false));
         
         // {W}{B}, Remove six +1/+1 counters from Karlov of the Ghost Council: Exile target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{W}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl<>("{W}{B}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance(6)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

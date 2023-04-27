@@ -35,7 +35,7 @@ public final class GraverobberSpider extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
         // {3}{B}: Graverobber Spider gets +X/+X until end of turn, where X is the number of creature cards in your graveyard. Activate this ability only once each turn.
         DynamicValue xValue = new CardsInControllerGraveyardCount(new FilterCreatureCard("creature cards"));
-        Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn, true), new ManaCostsImpl("{3}{B}"));
+        Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn, true), new ManaCostsImpl<>("{3}{B}"));
         this.addAbility(ability);
     }
 

@@ -20,6 +20,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import mage.game.permanent.Permanent;
 
 /**
  * @author JayDi85
@@ -40,7 +41,7 @@ public final class OppositionAgent extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new YouControlYourOpponentsWhileSearchingReplacementEffect()));
 
         // While an opponent is searching their library, they exile each card they find. You may play those cards for as long as they remain exiled, and you may spend mana as though it were mana of any color to cast them.
-        this.addAbility(new SimpleStaticAbility(new OppositionAgentReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new OppositionAgentReplacementEffect()));
 
     }
 
@@ -57,7 +58,8 @@ public final class OppositionAgent extends CardImpl {
 class OppositionAgentReplacementEffect extends ReplacementEffectImpl {
 
     public OppositionAgentReplacementEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        // Duration.WhileOnBattlefield won't work correctly here, so we check in applies
+        super(Duration.EndOfGame, Outcome.Benefit);
         staticText = "While an opponent is searching their library, they exile each card they find. You may play "
                 + "those cards for as long as they remain exiled, and you may spend mana as though it were mana "
                 + "of any color to cast them";
@@ -101,7 +103,8 @@ class OppositionAgentReplacementEffect extends ReplacementEffectImpl {
 
         // You may play those cards for as long as they remain exiled, and you may spend mana as though it were mana of any color to cast them
         for (Card card : cardsToExile) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.Custom, true);
+            // the source ability is tied to the effect so we need to keep it active to work correctly
+            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfGame, true);
         }
 
         // return false all the time
@@ -115,8 +118,14 @@ class OppositionAgentReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
+        // Due to the nature of this effect, the "while on battlefield" part of the duration is checked here.
+        // If Opposition Agent leaves the battlefield, its source ability (SimpleStaticAbility) will leave with it, discarding the play/anyMana effect with it
+        // The exiled card must be playable even if Opposition Agent leaves the battlefield
+        Permanent oppositionAgent = game.getPermanent(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
-        return controller != null && game.isOpponent(controller, event.getPlayerId());
+        return oppositionAgent != null
+                && controller != null
+                && game.isOpponent(controller, event.getPlayerId());
     }
 
     @Override
@@ -124,5 +133,3 @@ class OppositionAgentReplacementEffect extends ReplacementEffectImpl {
         return new OppositionAgentReplacementEffect(this);
     }
 }
-
-

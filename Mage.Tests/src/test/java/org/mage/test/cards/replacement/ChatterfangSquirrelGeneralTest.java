@@ -20,7 +20,6 @@ public class ChatterfangSquirrelGeneralTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, "Plains", 2);
         assertPermanentCount(playerA, chatterfang, 1);
         assertPermanentCount(playerA, "Soldier Token", 2);
@@ -38,7 +37,6 @@ public class ChatterfangSquirrelGeneralTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, "Plains", 2);
         assertPermanentCount(playerB, chatterfang, 1);
         assertPermanentCount(playerA, "Soldier Token", 2);
@@ -62,7 +60,6 @@ public class ChatterfangSquirrelGeneralTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, "Plains", 1);
         assertPermanentCount(playerA, chatterfang, 1);
         assertPermanentCount(playerA, "Academy Manufactor", 1);

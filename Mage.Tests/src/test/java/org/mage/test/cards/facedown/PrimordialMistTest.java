@@ -46,8 +46,6 @@ public class PrimordialMistTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
-        
         assertExileCount(playerA, 0);
         
         assertPowerToughness(playerA, "Brine Elemental", 5, 4);

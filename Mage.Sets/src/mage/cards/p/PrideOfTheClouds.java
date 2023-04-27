@@ -49,7 +49,7 @@ public final class PrideOfTheClouds extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(xValue, xValue, Duration.WhileOnBattlefield)));
 
         // Forecast - {2}{W}{U}, Reveal Pride of the Clouds from your hand: Create a 1/1 white and blue Bird creature token with flying.
-        this.addAbility(new ForecastAbility(new CreateTokenEffect(new WhiteBlueBirdToken()), new ManaCostsImpl("{2}{W}{U}")));
+        this.addAbility(new ForecastAbility(new CreateTokenEffect(new WhiteBlueBirdToken()), new ManaCostsImpl<>("{2}{W}{U}")));
     }
 
     private PrideOfTheClouds(final PrideOfTheClouds card) {

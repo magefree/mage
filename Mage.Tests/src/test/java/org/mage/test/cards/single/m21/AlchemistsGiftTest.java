@@ -29,7 +29,6 @@ public class AlchemistsGiftTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertAbility(playerA, "Adherent of Hope", DeathtouchAbility.getInstance(), true);
         assertAbility(playerA, "Adherent of Hope", LifelinkAbility.getInstance(), false);
@@ -50,7 +49,6 @@ public class AlchemistsGiftTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertAbility(playerA, "Adherent of Hope", LifelinkAbility.getInstance(), true);
         assertAbility(playerA, "Adherent of Hope", DeathtouchAbility.getInstance(), false);
         assertPowerToughness(playerA, "Adherent of Hope", 3, 2);

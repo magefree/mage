@@ -17,6 +17,7 @@ import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+import mage.util.CardUtil;
 
 /**
  * 702.36. Morph
@@ -134,8 +135,8 @@ public class MorphAbility extends AlternativeSourceCostsImpl {
     }
 
     public static void setPermanentToFaceDownCreature(MageObject mageObject, Game game) {
-        mageObject.getPower().modifyBaseValue(2);
-        mageObject.getToughness().modifyBaseValue(2);
+        mageObject.getPower().setModifiedBaseValue(2);
+        mageObject.getToughness().setModifiedBaseValue(2);
         mageObject.getAbilities().clear();
         mageObject.getColor(game).setColor(new ObjectColor());
         mageObject.setName("");
@@ -144,8 +145,12 @@ public class MorphAbility extends AlternativeSourceCostsImpl {
         mageObject.removeAllSubTypes(game);
         mageObject.getSuperType().clear();
         mageObject.getManaCost().clear();
+
+        // TODO: add morph image here?
         if (mageObject instanceof Permanent) {
-            ((Permanent) mageObject).setExpansionSetCode("");
+            // hide image info
+            CardUtil.copySetAndCardNumber((Permanent) mageObject, "", "", 0);
+            // hide rarity info
             ((Permanent) mageObject).setRarity(Rarity.SPECIAL);
         }
     }

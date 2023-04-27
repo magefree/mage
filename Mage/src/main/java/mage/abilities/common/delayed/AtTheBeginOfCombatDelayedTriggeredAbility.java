@@ -8,9 +8,10 @@ import mage.game.events.GameEvent;
 public class AtTheBeginOfCombatDelayedTriggeredAbility extends DelayedTriggeredAbility {
     public AtTheBeginOfCombatDelayedTriggeredAbility(Effect effect) {
         super(effect);
+        setTriggerPhrase(" At the beginning of the next combat, ");
     }
 
-    public AtTheBeginOfCombatDelayedTriggeredAbility(AtTheBeginOfCombatDelayedTriggeredAbility ability) {
+    public AtTheBeginOfCombatDelayedTriggeredAbility(final AtTheBeginOfCombatDelayedTriggeredAbility ability) {
         super(ability);
     }
 
@@ -27,10 +28,5 @@ public class AtTheBeginOfCombatDelayedTriggeredAbility extends DelayedTriggeredA
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return " At the beginning of the next combat, ";
     }
 }

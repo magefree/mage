@@ -39,7 +39,7 @@ public final class HeartfireImmolator extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new DamageTargetEffect(xValue)
                         .setText("it deals damage equal to its power to target creature or planeswalker"),
-                new ManaCostsImpl("{R}")
+                new ManaCostsImpl<>("{R}")
         );
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreatureOrPlaneswalker());

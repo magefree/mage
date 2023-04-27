@@ -48,6 +48,7 @@ class CrackdownConstructTriggeredAbility extends TriggeredAbilityImpl {
 
     CrackdownConstructTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), false);
+        setTriggerPhrase("Whenever you activate an ability of an artifact or creature that isn't a mana ability, ");
     }
 
     CrackdownConstructTriggeredAbility(final CrackdownConstructTriggeredAbility ability) {
@@ -76,10 +77,5 @@ class CrackdownConstructTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you activate an ability of an artifact or creature that isn't a mana ability, " ;
     }
 }

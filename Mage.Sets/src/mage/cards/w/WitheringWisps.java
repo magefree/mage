@@ -66,7 +66,7 @@ class WitheringWispsActivatedAbility extends ActivatedAbilityImpl {
     }
 
     public WitheringWispsActivatedAbility() {
-        super(Zone.BATTLEFIELD, new DamageEverythingEffect(1), new ManaCostsImpl("{B}"));
+        super(Zone.BATTLEFIELD, new DamageEverythingEffect(1), new ManaCostsImpl<>("{B}"));
 
     }
 

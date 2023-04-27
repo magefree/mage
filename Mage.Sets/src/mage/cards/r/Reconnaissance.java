@@ -34,7 +34,7 @@ public final class Reconnaissance extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
 
         // {0}: Remove target attacking creature you control from combat and untap it.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReconnaissanceRemoveFromCombatEffect(), new ManaCostsImpl("{0}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReconnaissanceRemoveFromCombatEffect(), new ManaCostsImpl<>("{0}"));
         ability.addTarget(new TargetControlledCreaturePermanent(filter));
         this.addAbility(ability);
     }

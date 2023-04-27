@@ -39,7 +39,7 @@ public final class PathwayArrows extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability2, AttachmentType.EQUIPMENT)));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), false));
     }
 
     private PathwayArrows(final PathwayArrows card) {

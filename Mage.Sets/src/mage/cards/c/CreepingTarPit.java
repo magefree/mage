@@ -40,7 +40,7 @@ public final class CreepingTarPit extends CardImpl {
                         .withColor("BU")
                         .withSubType(SubType.ELEMENTAL)
                         .withAbility(new CantBeBlockedSourceAbility()),
-                "land", Duration.EndOfTurn), new ManaCostsImpl("{1}{U}{B}")));
+                "land", Duration.EndOfTurn), new ManaCostsImpl<>("{1}{U}{B}")));
     }
 
     private CreepingTarPit(final CreepingTarPit card) {

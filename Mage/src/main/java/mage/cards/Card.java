@@ -49,11 +49,6 @@ public interface Card extends MageObject {
     List<String> getRules(Game game);  // gets card rules + in game modifications
 
     String getExpansionSetCode();
-
-    String getTokenSetCode();
-
-    String getTokenDescriptor();
-
     void checkForCountersToAdd(Permanent permanent, Ability source, Game game);
 
     void setFaceDown(boolean value, Game game);
@@ -72,7 +67,21 @@ public interface Card extends MageObject {
 
     Card getSecondCardFace();
 
+    SpellAbility getSecondFaceSpellAbility();
+
     boolean isNightCard();
+
+    default boolean meldsWith(Card card) {
+        return false;
+    }
+
+    default Class<? extends Card> getMeldsToClazz() {
+        return null;
+    }
+
+    default Card getMeldsToCard() {
+        return null;
+    }
 
     void assignNewId();
 

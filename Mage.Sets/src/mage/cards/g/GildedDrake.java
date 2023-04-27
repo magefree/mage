@@ -72,24 +72,23 @@ class GildedDrakeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent sourceObject = game.getPermanent(source.getSourceId());
-            if (sourceObject != null) {
-                if (targetPointer.getFirst(game, source) != null) {
-                    Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
-                    if (targetPermanent != null) {
-                        ContinuousEffect effect = new ExchangeControlTargetEffect(Duration.EndOfGame, "", true);
-                        effect.setTargetPointer(targetPointer);
-                        game.addEffect(effect, source);
-                        return true;
-                    }
-                }
-                sourceObject.sacrifice(source, game);
-            }
+        if (controller == null) {
+            return false;
+        }
+        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        if (sourceObject == null) {
+            return false;
+        }
+
+        if (targetPointer.getFirst(game, source) == null || game.getPermanent(targetPointer.getFirst(game, source)) == null) {
+            sourceObject.sacrifice(source, game);
             return true;
         }
-        return false;
+
+        ContinuousEffect effect = new ExchangeControlTargetEffect(Duration.EndOfGame, "", true);
+        effect.setTargetPointer(targetPointer);
+        game.addEffect(effect, source);
+        return true;
     }
 }

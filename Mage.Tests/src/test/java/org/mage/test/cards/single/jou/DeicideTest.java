@@ -25,7 +25,6 @@ public class DeicideTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertAllCommandsUsed();
         assertExiledCardSubtype("Heliod, Sun-Crowned", SubType.GOD);
 
 

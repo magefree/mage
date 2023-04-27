@@ -26,10 +26,10 @@ public final class UnnervingAssault extends CardImpl {
         // Creatures your opponents control get -1/-0 until end of turn if {U} was spent to cast Unnerving Assault, and creatures you control get +1/+0 until end of turn if {R} was spent to cast it.
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new BoostAllEffect(-1, 0, Duration.EndOfTurn, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES, false),
-                new ManaWasSpentCondition(ColoredManaSymbol.U), "Creatures your opponents control get -1/-0 until end of turn if {U} was spent to cast this spell,"));
+                ManaWasSpentCondition.BLUE, "Creatures your opponents control get -1/-0 until end of turn if {U} was spent to cast this spell,"));
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new BoostControlledEffect(1, 0, Duration.EndOfTurn),
-                new ManaWasSpentCondition(ColoredManaSymbol.R), " and creatures you control get +1/+0 until end of turn if {R} was spent to cast this spell"));
+                ManaWasSpentCondition.RED, " and creatures you control get +1/+0 until end of turn if {R} was spent to cast this spell"));
         this.getSpellAbility().addEffect(new InfoEffect("<i>(Do both if {U}{R} was spent.)</i>"));
 
     }

@@ -25,7 +25,7 @@ public final class KrumarBondKin extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Morph {4}{B}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{4}{B}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{4}{B}")));
     }
 
     private KrumarBondKin(final KrumarBondKin card) {

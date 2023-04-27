@@ -27,6 +27,7 @@ public class InspiredAbility extends TriggeredAbilityImpl {
         if (isInspired) {
             setAbilityWord(AbilityWord.INSPIRED);
         }
+        setTriggerPhrase("Whenever {this} becomes untapped, ");
     }
 
     public InspiredAbility(final InspiredAbility ability) {
@@ -46,10 +47,5 @@ public class InspiredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getTargetId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} becomes untapped, ";
     }
 }

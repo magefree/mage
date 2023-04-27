@@ -23,7 +23,7 @@ public final class VoiceOfTheWoodsElementalToken extends TokenImpl {
 
         addAbility(TrampleAbility.getInstance());
 
-        availableImageSetCodes.addAll(Arrays.asList("EVG", "KHC"));
+        availableImageSetCodes.addAll(Arrays.asList("DD1", "EVG", "KHC"));
     }
 
     public VoiceOfTheWoodsElementalToken(final VoiceOfTheWoodsElementalToken token) {

@@ -69,7 +69,7 @@ class ProhibitEffect extends OneShotEffect {
             if (targetSpell != null) {
                 int cmc = targetSpell.getManaValue();
                 if (cmc <= 2
-                        || (KickedCondition.instance.apply(game, source) && cmc <= 4)) {
+                        || (KickedCondition.ONCE.apply(game, source) && cmc <= 4)) {
                     game.getStack().counter(targetSpell.getId(), source, game);
                 }
             }

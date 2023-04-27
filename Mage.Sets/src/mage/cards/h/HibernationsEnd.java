@@ -32,7 +32,7 @@ public final class HibernationsEnd extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}");
 
         // Cumulative upkeep {1}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")));
         // Whenever you pay Hibernation's End's cumulative upkeep, you may search your library for a creature card with converted mana cost equal to the number of age counters on Hibernation's End and put it onto the battlefield. If you do, shuffle your library.
         this.addAbility(new HibernationsEndAbility());
     }
@@ -51,6 +51,7 @@ class HibernationsEndAbility extends TriggeredAbilityImpl {
 
     public HibernationsEndAbility() {
         super(Zone.BATTLEFIELD, new HibernationsEndEffect(), true);
+        setTriggerPhrase("Whenever you pay {this}'s cumulative upkeep, ");
     }
 
     public HibernationsEndAbility(final HibernationsEndAbility ability) {
@@ -70,11 +71,6 @@ class HibernationsEndAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getTargetId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you pay {this}'s cumulative upkeep, " ;
     }
 }
 

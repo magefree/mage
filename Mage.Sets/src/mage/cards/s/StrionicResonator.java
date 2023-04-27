@@ -45,6 +45,7 @@ class StrionicResonatorEffect extends OneShotEffect {
 
     public StrionicResonatorEffect() {
         super(Outcome.Copy);
+        this.staticText = "Copy target triggered ability you control. You may choose new targets for the copy";
     }
 
     public StrionicResonatorEffect(final StrionicResonatorEffect effect) {
@@ -65,10 +66,5 @@ class StrionicResonatorEffect extends OneShotEffect {
     @Override
     public StrionicResonatorEffect copy() {
         return new StrionicResonatorEffect(this);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Copy " + mode.getTargets().get(0).getTargetName() + ". You may choose new targets for the copy";
     }
 }

@@ -38,7 +38,7 @@ public final class ClanGuildmage extends CardImpl {
 
         // {1}{R}, {T}: Target creature can't block this turn.
         Ability ability = new SimpleActivatedAbility(
-                new CantBlockTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")
+                new CantBlockTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
@@ -47,7 +47,7 @@ public final class ClanGuildmage extends CardImpl {
         // {2}{G}, {T}: Target land you control becomes a 4/4 Elemental creature with haste until end of turn. It's still a land.
         ability = new SimpleActivatedAbility(new BecomesCreatureTargetEffect(
                 new ClanGuildmageToken(), false, true, Duration.EndOfTurn
-        ), new ManaCostsImpl("{2}{G}"));
+        ), new ManaCostsImpl<>("{2}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

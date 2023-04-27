@@ -43,6 +43,7 @@ public class StackAbilityView extends CardView {
         this.sourceCard.setMageObjectType(mageObjectType);
         this.name = "Ability";
         this.loyalty = "";
+        this.defense = "";
 
         this.cardTypes = ability.getCardType(game);
         this.subTypes = ability.getSubtype(game);
@@ -122,7 +123,7 @@ public class StackAbilityView extends CardView {
             getRules().add("<i>Related objects: " + names + "</i>");
         }
 
-        // show for modal ability, which mode was choosen
+        // show for modal ability, which mode was chosen
         if (ability.isModal()) {
             Modes modes = ability.getModes();
             for (UUID modeId : modes.getSelectedModes()) {
@@ -154,11 +155,10 @@ public class StackAbilityView extends CardView {
                         stackObjectTarget = (StackObject) mo;
                     }
                     if (stackObjectTarget != null) {
-                        this.rules.add("<span color='green'><i>Targeted ability related to this card: " + game.getCard(stackObjectTarget.getSourceId()).getIdName());
+                        this.rules.add("<span color='green'><i>Target on stack: " + stackObjectTarget.getIdName());
                     }
                 }
             }
-
         }
     }
 

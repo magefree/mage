@@ -38,7 +38,7 @@ public final class CaptivatingGlance extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // At the beginning of your end step, clash with an opponent. If you win, gain control of enchanted creature. Otherwise, that player gains control of enchanted creature.
@@ -83,14 +83,14 @@ class CaptivatingGlanceEffect extends OneShotEffect {
             clashResult = ClashEffect.getInstance().apply(game, source);
             if (enchantedCreature != null) {
                 if (clashResult) {
-                    ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, false, controller.getId());
-                    effect.setTargetPointer(new FixedTarget(enchantedCreature.getId(), game));
+                    ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, controller.getId());
+                    effect.setTargetPointer(new FixedTarget(enchantedCreature, game));
                     game.addEffect(effect, source);
                 } else {
-                    Player opponentWhomControllerClashedWith = game.getPlayer(targetPointer.getFirst(game, source));
-                    if (opponentWhomControllerClashedWith != null) {
-                        ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, false, opponentWhomControllerClashedWith.getId());
-                        effect.setTargetPointer(new FixedTarget(enchantedCreature.getId(), game));
+                    Object opponent = getValue("clashOpponent");
+                    if (opponent instanceof Player) {
+                        ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, ((Player)opponent).getId());
+                        effect.setTargetPointer(new FixedTarget(enchantedCreature, game));
                         game.addEffect(effect, source);
                     }
                 }

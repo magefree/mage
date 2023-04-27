@@ -37,7 +37,7 @@ public final class JazalGoldmane extends CardImpl {
         DynamicValue xValue = new AttackingCreatureCount("the number of attacking creatures");
         this.addAbility(new SimpleActivatedAbility(
                 new BoostControlledEffect(xValue, xValue, Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, false, true),
-                new ManaCostsImpl("{3}{W}{W}")));
+                new ManaCostsImpl<>("{3}{W}{W}")));
     }
 
     private JazalGoldmane(final JazalGoldmane card) {

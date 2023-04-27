@@ -33,7 +33,7 @@ public final class FirebornKnight extends CardImpl {
 
         // {R/W}{R/W}{R/W}{R/W}: Fireborn Knight gets +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn),
-                new ManaCostsImpl("{R/W}{R/W}{R/W}{R/W}")));
+                new ManaCostsImpl<>("{R/W}{R/W}{R/W}{R/W}")));
     }
 
     private FirebornKnight(final FirebornKnight card) {

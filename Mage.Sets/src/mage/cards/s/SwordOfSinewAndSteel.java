@@ -17,7 +17,9 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.target.common.TargetArtifactPermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetPlaneswalkerPermanent;
+import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
 
@@ -40,8 +42,7 @@ public final class SwordOfSinewAndSteel extends CardImpl {
 
         // Whenever equipped creature deals combat damage to a player, destroy up to one target planeswalker and up to one target artifact.
         ability = new DealsDamageToAPlayerAttachedTriggeredAbility(
-                new DestroyTargetEffect(false, true)
-                        .setText("destroy up to one target planeswalker and up to one target artifact."),
+                new DestroyTargetEffect().setTargetPointer(new EachTargetPointer()),
                 "equipped creature", false
         );
         ability.addTarget(new TargetPlaneswalkerPermanent(0, 1));
@@ -49,7 +50,7 @@ public final class SwordOfSinewAndSteel extends CardImpl {
         this.addAbility(ability);
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private SwordOfSinewAndSteel(final SwordOfSinewAndSteel card) {

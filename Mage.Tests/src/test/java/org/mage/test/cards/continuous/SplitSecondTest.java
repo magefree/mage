@@ -2,6 +2,7 @@ package org.mage.test.cards.continuous;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -20,11 +21,22 @@ public class SplitSecondTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Counterspell", "Sudden Shock");
 
         setStopAt(1, PhaseStep.END_TURN);
-        execute();
 
-        assertHandCount(playerA, "Counterspell", 1);
-        assertGraveyardCount(playerA, "Sudden Shock", 1);
-        assertLife(playerB, 20 - 2);
+        // TODO: Needed, see https://github.com/magefree/mage/issues/8973
+        try {
+            execute();
+
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Cast Counterspell$target=Sudden Shock")) {
+                Assert.fail("Should have thrown error about trying to use Counterspell, but got:\n" + e.getMessage());
+            }
+        }
+
+        // TODO: Re-enable when checkPlayableAbility can be used instead of try-catch
+//        assertHandCount(playerA, "Counterspell", 1);
+//        assertGraveyardCount(playerA, "Sudden Shock", 1);
+//        assertLife(playerB, 20 - 2);
     }
 
     @Test
@@ -43,7 +55,6 @@ public class SplitSecondTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 2 - 2);
         assertPermanentCount(playerA, "Raging Goblin", 1);

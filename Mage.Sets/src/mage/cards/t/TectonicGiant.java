@@ -56,6 +56,7 @@ class TectonicGiantTriggeredAbility extends TriggeredAbilityImpl {
     TectonicGiantTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamagePlayersEffect(3, TargetController.OPPONENT), false);
         this.addMode(new Mode(new TectonicGiantEffect()));
+        setTriggerPhrase("Whenever {this} attacks or becomes the target of a spell an opponent controls, ");
     }
 
     private TectonicGiantTriggeredAbility(final TectonicGiantTriggeredAbility ability) {
@@ -84,11 +85,6 @@ class TectonicGiantTriggeredAbility extends TriggeredAbilityImpl {
                 }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} attacks or becomes the target of a spell an opponent controls, " ;
     }
 
     @Override
@@ -123,7 +119,7 @@ class TectonicGiantEffect extends OneShotEffect {
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 2));
         controller.moveCards(cards, Zone.EXILED, source, game);
         TargetCard targetCard = new TargetCardInExile(StaticFilters.FILTER_CARD);
-        controller.choose(outcome, cards, targetCard, game);
+        controller.choose(outcome, cards, targetCard, source, game);
 
         Card card = game.getCard(targetCard.getFirstTarget());
         if (card == null) {

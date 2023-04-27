@@ -24,7 +24,7 @@ public final class CranialExtraction extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}");
         this.subtype.add(SubType.ARCANE);
 
-        /* Name a nonland card. Search target player's graveyard, hand, and library for
+        /* Choose a nonland card. Search target player's graveyard, hand, and library for
          * all cards with that name and exile them. Then that player shuffles their library. */
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new CranialExtractionEffect());
@@ -44,6 +44,7 @@ class CranialExtractionEffect extends SearchTargetGraveyardHandLibraryForCardNam
 
     CranialExtractionEffect() {
         super(false, "target player's", "all cards with that name");
+        this.staticText = "Choose a nonland card name. " + CardUtil.getTextWithFirstCharUpperCase(this.staticText);
     }
 
     CranialExtractionEffect(final CranialExtractionEffect effect) {
@@ -67,10 +68,5 @@ class CranialExtractionEffect extends SearchTargetGraveyardHandLibraryForCardNam
     @Override
     public CranialExtractionEffect copy() {
         return new CranialExtractionEffect(this);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Choose a nonland card name. " + CardUtil.getTextWithFirstCharUpperCase(super.getText(mode));
     }
 }

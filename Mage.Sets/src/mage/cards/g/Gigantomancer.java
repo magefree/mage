@@ -7,7 +7,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -31,7 +31,7 @@ public final class Gigantomancer extends CardImpl {
         this.toughness = new MageInt(1);
         
         //{1}: Target creature you control has base power and toughness 7/7 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SetPowerToughnessTargetEffect(7, 7, Duration.EndOfTurn), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SetBasePowerToughnessTargetEffect(7, 7, Duration.EndOfTurn), new GenericManaCost(1));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

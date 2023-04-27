@@ -1,6 +1,6 @@
 package mage.cards.m;
 
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Stream;
 
@@ -108,8 +108,8 @@ class MandateOfPeaceEndCombatEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Combat combat = game.getCombat();
-        List<UUID> attackerIds = combat.getAttackers();
-        List<UUID> blockerIds = combat.getBlockers();
+        Set<UUID> attackerIds = combat.getAttackers();
+        Set<UUID> blockerIds = combat.getBlockers();
         Stream.concat(blockerIds.stream(), attackerIds.stream())
                 .map(id -> game.getPermanent(id))
                 .filter(e -> e != null)

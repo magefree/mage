@@ -42,7 +42,7 @@ public final class LedevChampion extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new CreateTokenEffect(new SoldierLifelinkToken()),
-                new ManaCostsImpl("{3}{G}{W}")
+                new ManaCostsImpl<>("{3}{G}{W}")
         ));
     }
 

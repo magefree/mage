@@ -17,6 +17,7 @@ public class DealsDamageGainLifeSourceTriggeredAbility extends TriggeredAbilityI
 
     public DealsDamageGainLifeSourceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(SavedDamageValue.MUCH), false);
+        setTriggerPhrase("Whenever {this} deals damage, ");
     }
 
     public DealsDamageGainLifeSourceTriggeredAbility(final DealsDamageGainLifeSourceTriggeredAbility ability) {
@@ -42,10 +43,5 @@ public class DealsDamageGainLifeSourceTriggeredAbility extends TriggeredAbilityI
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} deals damage, " ;
     }
 }

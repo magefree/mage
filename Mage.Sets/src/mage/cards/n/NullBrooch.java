@@ -25,7 +25,7 @@ public final class NullBrooch extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {2}, {tap}, Discard your hand: Counter target noncreature spell.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl<>("{2}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardHandCost());
         ability.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_NON_CREATURE));

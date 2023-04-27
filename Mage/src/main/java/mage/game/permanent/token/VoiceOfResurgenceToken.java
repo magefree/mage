@@ -3,9 +3,8 @@ package mage.game.permanent.token;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 
@@ -17,7 +16,7 @@ import java.util.Arrays;
 public final class VoiceOfResurgenceToken extends TokenImpl {
 
     public VoiceOfResurgenceToken() {
-        super("Elemental Token", "X/X green and white Elemental creature with with \"This creature's power and toughness are each equal to the number of creatures you control.");
+        super("Elemental Token", "green and white Elemental creature token with \"This creature's power and toughness are each equal to the number of creatures you control.");
         setOriginalExpansionSetCode("DGM");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
@@ -28,8 +27,8 @@ public final class VoiceOfResurgenceToken extends TokenImpl {
         toughness = new MageInt(0);
 
         // This creature's power and toughness are each equal to the number of creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(
-                CreaturesYouControlCount.instance, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetBasePowerToughnessSourceEffect(
+                CreaturesYouControlCount.instance)));
             
         availableImageSetCodes = Arrays.asList("DGM", "MM3", "2XM");
     }

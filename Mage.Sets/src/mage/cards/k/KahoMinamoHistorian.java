@@ -16,6 +16,7 @@ import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -43,7 +44,7 @@ public final class KahoMinamoHistorian extends CardImpl {
         // {X}, {tap}: You may cast a card with converted mana cost X exiled with 
         // Kaho without paying its mana cost.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new KahoMinamoHistorianCastEffect(), new ManaCostsImpl("{X}"));
+                new KahoMinamoHistorianCastEffect(), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -121,10 +122,16 @@ class KahoMinamoHistorianCastEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Cards cards = new CardsImpl(game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source)));
-        if (controller == null || cards.isEmpty()) {
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
+        if (controller == null || exileZone == null) {
             return false;
         }
+
+        Cards cards = new CardsImpl(exileZone);
+        if (cards.isEmpty()) {
+            return false;
+        }
+
         FilterCard filter = new FilterCard();
         filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, source.getManaCostsToPay().getX()));
         return CardUtil.castSpellWithAttributesForFree(controller, source, game, cards, filter);

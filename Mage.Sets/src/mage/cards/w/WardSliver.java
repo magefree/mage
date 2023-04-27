@@ -3,6 +3,7 @@ package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -13,6 +14,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterObject;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
@@ -57,7 +59,7 @@ public final class WardSliver extends CardImpl {
 
 class WardSliverGainAbilityControlledEffect extends ContinuousEffectImpl {
 
-    protected FilterPermanent protectionFilter;
+    protected FilterObject<MageObject> protectionFilter;
 
     public WardSliverGainAbilityControlledEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
@@ -81,7 +83,7 @@ class WardSliverGainAbilityControlledEffect extends ContinuousEffectImpl {
             if (permanent != null) {
                 ObjectColor color = (ObjectColor) game.getState().getValue(permanent.getId() + "_color");
                 if (color != null) {
-                    protectionFilter = new FilterPermanent(color.getDescription());
+                    protectionFilter = new FilterObject<>(color.getDescription());
                     protectionFilter.add(new ColorPredicate(color));
                 }
             }

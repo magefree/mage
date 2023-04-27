@@ -71,11 +71,11 @@ class DeceiverOfFormEffect extends OneShotEffect {
                 Cards cards = new CardsImpl(cardFromTop);
                 controller.revealCards(sourceObject.getIdName(), cards, game);
                 if (cardFromTop.isCreature(game)) {
+                    copyFromCard = cardFromTop;
                     if (controller.chooseUse(outcome, "Let creatures you control other than "
                             + sourceObject.getLogName() + " becomes copies of " + cardFromTop.getLogName() + " until end of turn?", source, game)) {
                         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), game)) {
                             if (!permanent.getId().equals(sourceObject.getId())) {
-                                copyFromCard = cardFromTop;
                                 // handle MDFC
                                 if (cardFromTop instanceof ModalDoubleFacesCard
                                         && ((ModalDoubleFacesCard) cardFromTop).getLeftHalfCard().isCreature(game)) {
@@ -93,8 +93,8 @@ class DeceiverOfFormEffect extends OneShotEffect {
                         }
                     }
                 }
-                if (controller.chooseUse(outcome, "Move " + copyFromCard.getLogName() + " to the bottom of your library?", source, game)) {
-                    controller.moveCardToLibraryWithInfo(copyFromCard, source, game, Zone.LIBRARY, false, true);
+                if (controller.chooseUse(outcome, "Move " + cardFromTop.getLogName() + " to the bottom of your library?", source, game)) {
+                    controller.moveCardToLibraryWithInfo(cardFromTop, source, game, Zone.LIBRARY, false, true);
                 }
             }
             return true;

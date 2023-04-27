@@ -30,7 +30,7 @@ public final class TeferisHonorGuard extends CardImpl {
         this.addAbility(new FlankingAbility());
         
         // {U}{U}: Teferi's Honor Guard phases out.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PhaseOutSourceEffect(), new ManaCostsImpl("{U}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PhaseOutSourceEffect(), new ManaCostsImpl<>("{U}{U}")));
     }
 
     private TeferisHonorGuard(final TeferisHonorGuard card) {

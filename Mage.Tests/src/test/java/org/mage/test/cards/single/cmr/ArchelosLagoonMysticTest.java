@@ -41,6 +41,5 @@ public class ArchelosLagoonMysticTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 }

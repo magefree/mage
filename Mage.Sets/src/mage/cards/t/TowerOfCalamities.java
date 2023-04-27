@@ -22,7 +22,7 @@ public final class TowerOfCalamities extends CardImpl {
 
     public TowerOfCalamities (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(12), new ManaCostsImpl("{8}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(12), new ManaCostsImpl<>("{8}"));
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

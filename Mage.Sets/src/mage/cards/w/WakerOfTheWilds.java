@@ -42,7 +42,7 @@ public final class WakerOfTheWilds extends CardImpl {
                         CounterType.P1P1.createInstance(0),
                         ManacostVariableValue.REGULAR
                 ).setText("Put X +1/+1 counters on target land you control."),
-                new ManaCostsImpl("{X}{G}{G}")
+                new ManaCostsImpl<>("{X}{G}{G}")
         );
         Effect effect = new BecomesCreatureTargetEffect(new WallOfResurgenceToken(), false, true, Duration.Custom);
         effect.setText("That land becomes a 0/0 Elemental creature with haste. It's still a land");

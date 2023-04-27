@@ -30,7 +30,7 @@ public final class RenownedWeaver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{G}, Sacrifice Renowned Weaver: Create a 1/3 green Spider enchantment creature token with reach.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new RenownedWeaverSpiderToken(), 1), new ManaCostsImpl("{1}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new RenownedWeaverSpiderToken(), 1), new ManaCostsImpl<>("{1}{G}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
 

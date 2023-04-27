@@ -18,6 +18,8 @@ public class TeferiWhoSlowsTheSunsetEmblem extends Emblem {
                 Zone.COMMAND, new UntapAllDuringEachOtherPlayersUntapStepEffect(StaticFilters.FILTER_CONTROLLED_PERMANENTS)
         ));
         this.getAbilities().add(new SimpleStaticAbility(new TeferiWhoSlowsTheSunsetEmblemEffect()));
+
+        this.setExpansionSetCodeForImage("MID");
     }
 }
 

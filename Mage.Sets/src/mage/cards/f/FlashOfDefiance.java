@@ -38,7 +38,7 @@ public final class FlashOfDefiance extends CardImpl {
         this.getSpellAbility().addEffect(new CantBlockAllEffect(filter, Duration.EndOfTurn));
         
         // Flashback-{1}{R}, Pay 3 life.
-        Ability ability = new FlashbackAbility(this, new ManaCostsImpl("{1}{R}"));
+        Ability ability = new FlashbackAbility(this, new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new PayLifeCost(3));
         this.addAbility(ability);
     }

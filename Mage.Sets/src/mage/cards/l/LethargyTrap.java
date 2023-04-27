@@ -26,7 +26,7 @@ public final class LethargyTrap extends CardImpl {
         this.subtype.add(SubType.TRAP);
 
         // If three or more creatures are attacking, you may pay {U} rather than pay Lethargy Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{U}"), LethargyTrapCondition.instance));
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{U}"), LethargyTrapCondition.instance));
 
         // Attacking creatures get -3/-0 until end of turn.
         this.getSpellAbility().addEffect(new BoostAllEffect(-3, 0, Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, false));

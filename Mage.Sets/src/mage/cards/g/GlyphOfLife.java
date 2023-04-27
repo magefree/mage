@@ -56,6 +56,7 @@ class GlyphOfLifeTriggeredAbility extends DelayedTriggeredAbility {
 
     public GlyphOfLifeTriggeredAbility() {
         super(new GlyphOfLifeGainLifeEffect(), Duration.EndOfTurn, false);
+        setTriggerPhrase("Whenever that creature is dealt damage by an attacking creature this turn, ");
     }
 
     public GlyphOfLifeTriggeredAbility(final GlyphOfLifeTriggeredAbility effect) {
@@ -83,11 +84,6 @@ class GlyphOfLifeTriggeredAbility extends DelayedTriggeredAbility {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever that creature is dealt damage by an attacking creature this turn, " ;
     }
 }
 

@@ -22,6 +22,7 @@ public class OneOrMoreCountersAddedTriggeredAbility extends TriggeredAbilityImpl
     public OneOrMoreCountersAddedTriggeredAbility(Effect effect, boolean optional, CounterType counterType) {
         super(Zone.ALL, effect, optional);
         this.counterType = counterType;
+        setTriggerPhrase("Whenever one or more " + counterType.getName() + " counters are put on {this}, ");
     }
 
     private OneOrMoreCountersAddedTriggeredAbility(final OneOrMoreCountersAddedTriggeredAbility ability) {
@@ -44,10 +45,5 @@ public class OneOrMoreCountersAddedTriggeredAbility extends TriggeredAbilityImpl
         return event.getData().equals(counterType.getName())
                 && event.getAmount() > 0
                 && event.getTargetId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever one or more " + counterType.getName() + " counters are put on {this}, " ;
     }
 }

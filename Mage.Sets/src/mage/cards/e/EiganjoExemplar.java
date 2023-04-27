@@ -26,7 +26,7 @@ public final class EiganjoExemplar extends CardImpl {
 
         // Whenever a Samurai or Warrior you control attacks alone, it gets +1/+1 until end of turn.
         this.addAbility(new AttacksAloneControlledTriggeredAbility(
-                new BoostTargetEffect(1, 1).setText("it gets +1/+1 until end of turn"),
+                new BoostTargetEffect(1, 1),
                 StaticFilters.FILTER_CONTROLLED_SAMURAI_OR_WARRIOR, true, false
         ));
     }

@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -13,20 +12,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetOpponentsCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
 public final class TrapjawTyrant extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public TrapjawTyrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
@@ -35,9 +27,9 @@ public final class TrapjawTyrant extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
-        // Enrage — Whenever Trapjaw Tyrant is dealt damage, exile target creature your opponent controls until Trapjaw Tyrant leaves the battlefield.
-        Ability ability = new DealtDamageToSourceTriggeredAbility(new ExileUntilSourceLeavesEffect(filter.getMessage()), false, true);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        // Enrage — Whenever Trapjaw Tyrant is dealt damage, exile target creature an opponent controls until Trapjaw Tyrant leaves the battlefield.
+        Ability ability = new DealtDamageToSourceTriggeredAbility(new ExileUntilSourceLeavesEffect(), false, true);
+        ability.addTarget(new TargetOpponentsCreaturePermanent());
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);
     }

@@ -32,7 +32,7 @@ public final class Genesis extends CardImpl {
 
         // At the beginning of your upkeep, if Genesis is in your graveyard, you may pay {2}{G}. If you do, return target creature card from your graveyard to your hand.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                Zone.GRAVEYARD, new DoIfCostPaid(new ReturnFromGraveyardToHandTargetEffect(), new ManaCostsImpl("{2}{G}")), TargetController.YOU, false, false);
+                Zone.GRAVEYARD, new DoIfCostPaid(new ReturnFromGraveyardToHandTargetEffect(), new ManaCostsImpl<>("{2}{G}")), TargetController.YOU, false, false);
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }

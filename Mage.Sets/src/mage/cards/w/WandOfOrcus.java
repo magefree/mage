@@ -3,7 +3,6 @@ package mage.cards.w;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksOrBlocksAttachedTriggeredAbility;
 import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -17,6 +16,8 @@ import mage.filter.FilterPermanent;
 import mage.game.permanent.token.ZombieToken;
 
 import java.util.UUID;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author zeffirojoe
@@ -49,7 +50,7 @@ public final class WandOfOrcus extends CardImpl {
                 false));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), new TargetControlledCreaturePermanent(), false));
     }
 
     private WandOfOrcus(final WandOfOrcus card) {

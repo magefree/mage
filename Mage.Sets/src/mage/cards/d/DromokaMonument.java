@@ -32,7 +32,7 @@ public final class DromokaMonument extends CardImpl {
         
         // {4}{G}{W}: Dromoka Monument becomes a 4/4 green and white Dragon artifact creature with flying until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect
-            (new DromokaMonumentToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{4}{G}{W}")));
+            (new DromokaMonumentToken(), "", Duration.EndOfTurn), new ManaCostsImpl<>("{4}{G}{W}")));
     }
 
     private DromokaMonument(final DromokaMonument card) {

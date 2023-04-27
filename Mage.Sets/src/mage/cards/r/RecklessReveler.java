@@ -29,7 +29,7 @@ public final class RecklessReveler extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {R}, Sacrifice Reckless Reveler: Destroy target artifact.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{R}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetArtifactPermanent());
         

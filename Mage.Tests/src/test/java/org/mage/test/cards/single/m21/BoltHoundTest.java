@@ -20,7 +20,6 @@ public class BoltHoundTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 16);
         assertPowerToughness(playerA, "Bolt Hound", 2,2);

@@ -16,8 +16,8 @@ import mage.util.CardUtil;
  */
 public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityImpl {
 
-    protected FilterControlledCreaturePermanent filter;
-    protected boolean setTargetPointer;
+    protected final FilterControlledCreaturePermanent filter;
+    protected final boolean setTargetPointer;
     protected boolean once = false;
 
     public AttacksCreatureYouControlTriggeredAbility(Effect effect) {
@@ -40,6 +40,7 @@ public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityI
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever " + CardUtil.addArticle(filter.getMessage()) + " attacks, ");
     }
 
     public AttacksCreatureYouControlTriggeredAbility(AttacksCreatureYouControlTriggeredAbility ability) {
@@ -51,6 +52,7 @@ public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityI
 
     public void setOnce(boolean once) {
         this.once = once;
+        setTriggerPhrase("When" + (once ? " " : "ever ") + CardUtil.addArticle(filter.getMessage()) + " attacks, ");
     }
 
     @Override
@@ -74,10 +76,5 @@ public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityI
     @Override
     public AttacksCreatureYouControlTriggeredAbility copy() {
         return new AttacksCreatureYouControlTriggeredAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When" + (once ? "" : "ever") + " " + CardUtil.addArticle(filter.getMessage()) + " attacks, " ;
     }
 }

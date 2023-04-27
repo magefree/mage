@@ -23,7 +23,7 @@ public final class RenewedFaith extends CardImpl {
         // You gain 6 life.
         this.getSpellAbility().addEffect(new GainLifeEffect(6));
         // Cycling {1}{W}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{W}")));
         // When you cycle Renewed Faith, you may gain 2 life.
         this.addAbility(new CycleTriggeredAbility(new GainLifeEffect(2), true));
     }

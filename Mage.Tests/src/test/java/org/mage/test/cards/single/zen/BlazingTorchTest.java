@@ -28,7 +28,6 @@ public class BlazingTorchTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 18);
@@ -45,17 +44,17 @@ public class BlazingTorchTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, masterwork);
         addCard(Zone.BATTLEFIELD, playerB, torch);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, masterwork);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, masterwork, true);
         setChoice(playerA, true); // use copy
         setChoice(playerA, torch);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", lion);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T},", playerB);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 18);
@@ -83,7 +82,6 @@ public class BlazingTorchTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20); // Ability resolves as it's from the equipped creature but damage is from torch and is prevented

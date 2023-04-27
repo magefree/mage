@@ -29,7 +29,7 @@ public final class IzzetLocket extends CardImpl {
         // {U/R}{U/R}{U/R}{U/R}, {T}, Sacrifice Izzet Locket: Draw two cards.
         Ability ability = new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(2),
-                new ManaCostsImpl("{U/R}{U/R}{U/R}{U/R}")
+                new ManaCostsImpl<>("{U/R}{U/R}{U/R}{U/R}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

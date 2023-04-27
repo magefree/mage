@@ -111,7 +111,7 @@ class DereviEmpyrialTacticianTriggeredAbility extends TriggeredAbilityImpl {
 class DereviEmpyrialTacticianAbility extends ActivatedAbilityImpl {
 
     public DereviEmpyrialTacticianAbility() {
-        super(Zone.COMMAND, new PutCommanderOnBattlefieldEffect(), new ManaCostsImpl("{1}{G}{W}{U}"));
+        super(Zone.COMMAND, new PutCommanderOnBattlefieldEffect(), new ManaCostsImpl<>("{1}{G}{W}{U}"));
     }
 
     @Override

@@ -6,6 +6,8 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.command.Emblem;
 
+import java.util.Arrays;
+
 /**
  * @author TheElk801
  */
@@ -21,5 +23,7 @@ public final class WillKenrithEmblem extends Emblem {
                 false,
                 true
         ));
+
+        availableImageSetCodes = Arrays.asList("BBD", "CLB");
     }
 }

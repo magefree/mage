@@ -88,8 +88,8 @@ class BladeOfTheOniEffect extends ContinuousEffectImpl {
                 if (sublayer != SubLayer.SetPT_7b) {
                     return false;
                 }
-                permanent.getPower().setValue(5);
-                permanent.getToughness().setValue(5);
+                permanent.getPower().setModifiedBaseValue(5);
+                permanent.getToughness().setModifiedBaseValue(5);
                 return true;
         }
         return false;

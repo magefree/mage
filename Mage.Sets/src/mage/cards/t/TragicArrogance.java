@@ -65,7 +65,7 @@ class TragicArroganceffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Set<Permanent> choosenPermanent = new HashSet<>();
+            Set<Permanent> chosenPermanents = new HashSet<>();
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
@@ -89,7 +89,7 @@ class TragicArroganceffect extends OneShotEffect {
                         controller.chooseTarget(Outcome.Benefit, target1, source, game);
                         Permanent artifact = game.getPermanent(target1.getFirstTarget());
                         if (artifact != null) {
-                            choosenPermanent.add(artifact);
+                            chosenPermanents.add(artifact);
                         }
                         target1.clearChosen();
                     }
@@ -98,7 +98,7 @@ class TragicArroganceffect extends OneShotEffect {
                         controller.chooseTarget(Outcome.Benefit, target2, source, game);
                         Permanent creature = game.getPermanent(target2.getFirstTarget());
                         if (creature != null) {
-                            choosenPermanent.add(creature);
+                            chosenPermanents.add(creature);
                         }
                         target2.clearChosen();
                     }
@@ -107,7 +107,7 @@ class TragicArroganceffect extends OneShotEffect {
                         controller.chooseTarget(Outcome.Benefit, target3, source, game);
                         Permanent enchantment = game.getPermanent(target3.getFirstTarget());
                         if (enchantment != null) {
-                            choosenPermanent.add(enchantment);
+                            chosenPermanents.add(enchantment);
                         }
                         target3.clearChosen();
                     }
@@ -116,7 +116,7 @@ class TragicArroganceffect extends OneShotEffect {
                         controller.chooseTarget(Outcome.Benefit, target4, source, game);
                         Permanent planeswalker = game.getPermanent(target4.getFirstTarget());
                         if (planeswalker != null) {
-                            choosenPermanent.add(planeswalker);
+                            chosenPermanents.add(planeswalker);
                         }
                         target4.clearChosen();
                     }
@@ -127,7 +127,7 @@ class TragicArroganceffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENTS_NON_LAND, playerId, game)) {
-                        if (!choosenPermanent.contains(permanent)) {
+                        if (!chosenPermanents.contains(permanent)) {
                             permanent.sacrifice(source, game);
                         }
                     }

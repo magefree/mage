@@ -36,7 +36,7 @@ public final class OrimsThunder extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new OrimsThunderEffect2(),
-                KickedCondition.instance,
+                KickedCondition.ONCE,
                 "If this spell was kicked, it deals damage equal to that permanent's mana value to target creature")
         );
         this.getSpellAbility().setTargetAdjuster(OrimsThunderAdjuster.instance);
@@ -57,7 +57,7 @@ enum OrimsThunderAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (KickedCondition.instance.apply(game, ability)) {
+        if (KickedCondition.ONCE.apply(game, ability)) {
             ability.addTarget(new TargetCreaturePermanent());
         }
     }
@@ -82,7 +82,7 @@ class OrimsThunderEffect2 extends OneShotEffect {
         if (firstTarget != null) {
             damage = firstTarget.getManaValue();
         }
-        boolean kicked = KickedCondition.instance.apply(game, source);
+        boolean kicked = KickedCondition.ONCE.apply(game, source);
         if (kicked && secondTarget != null) {
             secondTarget.damage(damage, source.getSourceId(), source, game);
             return true;

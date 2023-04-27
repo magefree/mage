@@ -27,7 +27,7 @@ public final class VerdantAutomaton extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {3}{G}: Put a +1/+1 counter on Verdant Automaton.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), new ManaCostsImpl("{3}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), new ManaCostsImpl<>("{3}{G}")));
     }
 
     private VerdantAutomaton(final VerdantAutomaton card) {

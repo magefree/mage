@@ -33,7 +33,7 @@ public final class SanctuarySmasher extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Cycling {2}{R}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}{R}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}{R}")));
 
         // When you cycle Sanctuary Smasher, put a first strike counter on target creature you control.
         Ability ability = new CycleTriggeredAbility(

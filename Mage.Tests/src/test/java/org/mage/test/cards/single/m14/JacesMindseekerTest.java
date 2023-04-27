@@ -33,10 +33,11 @@ public class JacesMindseekerTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerB, "Silvercoat Lion", 2);
         skipInitShuffling();
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Jace's Mindseeker");
         addTarget(playerA, playerB);
         setChoice(playerA, true);
-        setChoice(playerA, "Lightning Bolt");
         addTarget(playerA, playerB);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

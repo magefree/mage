@@ -47,7 +47,7 @@ public final class SomberwaldAlpha extends CardImpl {
         // {1}{G}: Target creature you control gains trample until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
                 new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), 
-                new ManaCostsImpl("{1}{G}"));
+                new ManaCostsImpl<>("{1}{G}"));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);  
     }

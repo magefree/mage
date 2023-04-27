@@ -48,7 +48,7 @@ public final class ImmolationShaman extends CardImpl {
                 new BoostSourceEffect(
                         3, 3, Duration.EndOfTurn
                 ).setText("{this} gets +3/+3"),
-                new ManaCostsImpl("{3}{R}{R}")
+                new ManaCostsImpl<>("{3}{R}{R}")
         );
         ability.addEffect(new GainAbilitySourceEffect(
                 new MenaceAbility(), Duration.EndOfTurn

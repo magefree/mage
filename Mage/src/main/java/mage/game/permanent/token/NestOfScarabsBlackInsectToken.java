@@ -18,6 +18,8 @@ public final class NestOfScarabsBlackInsectToken extends TokenImpl {
         subtype.add(SubType.INSECT);
         power = new MageInt(1);
         toughness = new MageInt(1);
+
+        setOriginalExpansionSetCode("AKH");
     }
 
     public NestOfScarabsBlackInsectToken(final NestOfScarabsBlackInsectToken token) {

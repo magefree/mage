@@ -30,7 +30,6 @@ import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -60,7 +59,7 @@ public final class MechtitanCore extends CardImpl {
         // {5}, Exile Mechtitan Core and four other artifact creatures and/or Vehicles you control: Create Mechtitan, a legendary 10/10 Construct artifact creature token with flying, vigilance, trample, lifelink, and haste that's all colors. When that token leaves the battlefield, return all cards exiled with Mechtitan Core except Mechtitan Core to the battlefield tapped under their owners' control.
         Ability ability = new SimpleActivatedAbility(new MechtitanCoreTokenEffect(), new GenericManaCost(5));
         ability.addCost(new CompositeCost(
-                new ExileSourceCost(), new ExileTargetCost(new TargetControlledPermanent(4, filter)),
+                new ExileSourceCost(), new ExileTargetCost(new TargetControlledPermanent(4, 4, filter, true)),
                 "exile {this} and four other artifact creatures and/or Vehicles you control"));
         this.addAbility(ability);
 
@@ -82,10 +81,10 @@ class MechtitanCoreTokenEffect extends OneShotEffect {
 
     MechtitanCoreTokenEffect() {
         super(Outcome.Benefit);
-        staticText = "create Mechtitan, a legendary 10/10 Construct artifact creature token with flying, " +
-                "vigilance, trample, lifelink, and haste that's all colors. " +
-                "When that token leaves the battlefield, return all cards exiled with {this} except " +
-                "{this} to the battlefield tapped under their owners' control";
+        staticText = "create Mechtitan, a legendary 10/10 Construct artifact creature token with flying, "
+                + "vigilance, trample, lifelink, and haste that's all colors. "
+                + "When that token leaves the battlefield, return all cards exiled with {this} except "
+                + "{this} to the battlefield tapped under their owners' control";
     }
 
     private MechtitanCoreTokenEffect(final MechtitanCoreTokenEffect effect) {
@@ -133,22 +132,22 @@ class MechtitanCoreTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return tokenIds.contains(event.getTargetId())
-                && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD;
+        if (tokenIds.contains(event.getTargetId()) && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
+            tokenIds.remove(event.getTargetId());
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean isInactive(Game game) {
-        return tokenIds
-                .stream()
-                .map(game::getPermanent)
-                .noneMatch(Objects::nonNull);
+        return tokenIds.isEmpty();
     }
 
     @Override
     public String getRule() {
-        return "When that token leaves the battlefield, return all cards exiled with {this} except " +
-                "{this} to the battlefield tapped under their owners' control";
+        return "When that token leaves the battlefield, return all cards exiled with {this} except "
+                + "{this} to the battlefield tapped under their owners' control";
     }
 }
 

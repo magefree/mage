@@ -39,7 +39,7 @@ public final class ImpromptuRaid extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R/G}");
 
         // {2}{RG}: Reveal the top card of your library. If it isn't a creature card, put it into your graveyard. Otherwise, put that card onto the battlefield. That creature gains haste. Sacrifice it at the beginning of the next end step.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ImpromptuRaidEffect(), new ManaCostsImpl("{2}{R/G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ImpromptuRaidEffect(), new ManaCostsImpl<>("{2}{R/G}")));
 
     }
 

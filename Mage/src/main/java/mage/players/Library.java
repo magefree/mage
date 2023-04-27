@@ -168,7 +168,7 @@ public class Library implements Serializable {
     }
 
     public Set<Card> getTopCards(Game game, int amount) {
-        Set<Card> cards = new HashSet<>();
+        Set<Card> cards = new LinkedHashSet<>();
         Iterator<UUID> it = library.iterator();
         int count = 0;
         while (it.hasNext() && count < amount) {

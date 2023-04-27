@@ -18,8 +18,8 @@ public class AtTheEndOfTurnStepPostDelayedTriggeredAbility extends DelayedTrigge
     public AtTheEndOfTurnStepPostDelayedTriggeredAbility(Effect effect, boolean usesStack) {
         super(effect);
         this.usesStack = usesStack;
+        setTriggerPhrase("At end of turn ");
     }
-
 
     public AtTheEndOfTurnStepPostDelayedTriggeredAbility(AtTheEndOfTurnStepPostDelayedTriggeredAbility ability) {
         super(ability);
@@ -38,10 +38,5 @@ public class AtTheEndOfTurnStepPostDelayedTriggeredAbility extends DelayedTrigge
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "At end of turn " ;
     }
 }

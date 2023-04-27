@@ -9,6 +9,8 @@ import mage.filter.FilterPermanent;
 import mage.game.command.Emblem;
 import mage.target.TargetPermanent;
 
+import java.util.Arrays;
+
 /**
  *
  * @author LevelX2
@@ -23,6 +25,8 @@ public final class TeferiHeroOfDominariaEmblem extends Emblem {
         filter.add(TargetController.OPPONENT.getControllerPredicate());
         ability.addTarget(new TargetPermanent(filter));
         this.getAbilities().add(ability);
+
+        availableImageSetCodes = Arrays.asList("DOM", "MED");
     }
 
 }

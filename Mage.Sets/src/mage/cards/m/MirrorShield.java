@@ -1,7 +1,7 @@
 package mage.cards.m;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
+import mage.abilities.common.BlocksOrBlockedByCreatureSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
@@ -25,14 +25,14 @@ import java.util.UUID;
  */
 public final class MirrorShield extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent();
+    private static final FilterPermanent filter = new FilterCreaturePermanent("creature with deathtouch");
 
     static {
         filter.add(new AbilityPredicate(DeathtouchAbility.class));
     }
 
-    private static final String rule
-            = "Whenever a creature with deathtouch blocks or becomes blocked by this creature, destroy that creature.";
+    private static final String triggerPhrase
+            = "Whenever a creature with deathtouch blocks or becomes blocked by this creature, ";
 
     public MirrorShield(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
@@ -40,13 +40,14 @@ public final class MirrorShield extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +0/+2 and has hexproof and "Whenever a creature with deathtouch blocks or becomes blocked by this creature, destroy that creature."
+        Ability gainedAbility = new BlocksOrBlockedByCreatureSourceTriggeredAbility(new DestroyTargetEffect(), filter).setTriggerPhrase(triggerPhrase);
         Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(0, 2));
         ability.addEffect(new GainAbilityAttachedEffect(
                 HexproofAbility.getInstance(), AttachmentType.EQUIPMENT
         ).setText("and has hexproof"));
-        ability.addEffect(new GainAbilityAttachedEffect(new BlocksOrBecomesBlockedSourceTriggeredAbility(
-                new DestroyTargetEffect(), filter, false, rule + "", true
-        ), AttachmentType.EQUIPMENT).setText("and \"" + rule + "\""));
+        ability.addEffect(new GainAbilityAttachedEffect(
+                gainedAbility, AttachmentType.EQUIPMENT
+        ).setText("and \"" + triggerPhrase + "destroy that creature.\""));
         this.addAbility(ability);
 
         // Equip {2}

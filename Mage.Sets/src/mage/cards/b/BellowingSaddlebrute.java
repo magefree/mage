@@ -1,10 +1,11 @@
 package mage.cards.b;
 
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.RaidCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.hint.common.RaidHint;
 import mage.cards.CardImpl;
@@ -17,7 +18,7 @@ import mage.watchers.common.PlayerAttackedWatcher;
 import java.util.UUID;
 
 /**
- * @author LevelX2
+ * @author awjackson
  */
 public final class BellowingSaddlebrute extends CardImpl {
 
@@ -28,14 +29,15 @@ public final class BellowingSaddlebrute extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 
-        // Raid - When Bellowing Saddlebrute enters the battlefield, you lose 4 life unless you attacked with a creature this turn
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                        new EntersBattlefieldTriggeredAbility(new LoseLifeSourceControllerEffect(4)),
-                        new InvertCondition(RaidCondition.instance),
-                        "When {this} enters the battlefield, you lose 4 life unless you attacked this turn.")
-                        .setAbilityWord(AbilityWord.RAID)
-                        .addHint(RaidHint.instance),
-                new PlayerAttackedWatcher());
+        // Raid - When Bellowing Saddlebrute enters the battlefield, you lose 4 life unless you attacked this turn
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(
+                new LoseLifeSourceControllerEffect(4),
+                new InvertCondition(RaidCondition.instance),
+                "you lose 4 life unless you attacked this turn"
+        ));
+        ability.setAbilityWord(AbilityWord.RAID);
+        ability.addHint(RaidHint.instance);
+        this.addAbility(ability, new PlayerAttackedWatcher());
     }
 
     private BellowingSaddlebrute(final BellowingSaddlebrute card) {

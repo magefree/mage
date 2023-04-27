@@ -62,7 +62,7 @@ public class ArtisanOfFormsTest extends CardTestPlayerBase {
         // Heroic - Whenever you cast a spell that targets Artisan of Forms, you may have
         // Artisan of Forms become a copy of target creature and gain this ability.
         addCard(Zone.BATTLEFIELD, playerA, "Artisan of Forms");
-        // {1}{U}{U} Create a tokenonto the battlefield that's a copy of target creature you control.
+        // {1}{U}{U} Create a token onto the battlefield that's a copy of target creature you control.
         addCard(Zone.HAND, playerA, "Cackling Counterpart");
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
         addCard(Zone.HAND, playerA, "Eyes in the Skies");
@@ -72,8 +72,9 @@ public class ArtisanOfFormsTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cackling Counterpart", "Artisan of Forms");
         addTarget(playerA, "Silvercoat Lion");
+        setChoice(playerA, "Yes");
+
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Eyes in the Skies");
-        addTarget(playerA, "Silvercoat Lion");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

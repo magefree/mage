@@ -33,7 +33,7 @@ public final class KrovikanRot extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         
         // Recover {1}{B}{B}
-        this.addAbility(new RecoverAbility(new ManaCostsImpl("{1}{B}{B}"), this));
+        this.addAbility(new RecoverAbility(new ManaCostsImpl<>("{1}{B}{B}"), this));
     }
 
     private KrovikanRot(final KrovikanRot card) {

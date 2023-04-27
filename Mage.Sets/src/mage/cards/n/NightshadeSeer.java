@@ -37,7 +37,7 @@ public final class NightshadeSeer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{B}, {tap}: Reveal any number of black cards in your hand. Target creature gets -X/-X until end of turn, where X is the number of cards revealed this way.
-        Ability ability = new SimpleActivatedAbility(new NightshadeSeerEffect(), new ManaCostsImpl("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(new NightshadeSeerEffect(), new ManaCostsImpl<>("{2}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

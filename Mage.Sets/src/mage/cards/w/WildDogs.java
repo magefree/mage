@@ -38,7 +38,7 @@ public final class WildDogs extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WildDogsEffect(), TargetController.YOU, false));
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private WildDogs(final WildDogs card) {

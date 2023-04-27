@@ -14,6 +14,7 @@ public final class ArtifactWallToken extends TokenImpl {
         subtype.add(SubType.WALL);
         power = new MageInt(0);
         toughness = new MageInt(4);
+        setOriginalExpansionSetCode("THB");
 
         addAbility(DefenderAbility.getInstance());
     }

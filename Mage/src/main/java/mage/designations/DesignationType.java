@@ -1,13 +1,12 @@
-
 package mage.designations;
 
 /**
- *
  * @author LevelX2
  */
 public enum DesignationType {
     THE_MONARCH("The Monarch"),
-    CITYS_BLESSING("City's Blessing");
+    CITYS_BLESSING("City's Blessing"),
+    THE_INITIATIVE("The Initiative");
 
     private final String text;
 

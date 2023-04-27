@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -49,7 +49,7 @@ public final class CreepyPuppeteer extends CardImpl {
 class CreepyPuppeteerTriggeredAbility extends TriggeredAbilityImpl {
 
     CreepyPuppeteerTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SetPowerToughnessTargetEffect(4, 3, Duration.EndOfTurn), true);
+        super(Zone.BATTLEFIELD, new SetBasePowerToughnessTargetEffect(4, 3, Duration.EndOfTurn), true);
     }
 
     private CreepyPuppeteerTriggeredAbility(final CreepyPuppeteerTriggeredAbility ability) {

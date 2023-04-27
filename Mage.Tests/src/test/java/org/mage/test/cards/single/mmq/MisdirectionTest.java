@@ -34,7 +34,6 @@ public class MisdirectionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -56,7 +55,6 @@ public class MisdirectionTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Boomerang", 1);
         assertPermanentCount(playerA, "Ashcoat Bear", 0);
@@ -94,7 +92,6 @@ public class MisdirectionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Rakshasa's Secret", 1);
         assertGraveyardCount(playerB, "Misdirection", 1);
@@ -125,7 +122,6 @@ public class MisdirectionTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Public Execution", 1);
         assertGraveyardCount(playerB, "Misdirection", 1);

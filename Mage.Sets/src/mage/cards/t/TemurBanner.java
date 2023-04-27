@@ -31,7 +31,7 @@ public final class TemurBanner extends CardImpl {
         this.addAbility(new RedManaAbility());
 
         // {G}{U}{R}, {T}, Sacrifice Temur Banner: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{G}{U}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{G}{U}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

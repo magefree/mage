@@ -27,7 +27,7 @@ public final class DruidicSatchel extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {2}, {T}: Reveal the top card of your library. If it’s a creature card, create a 1/1 green Saproling creature token. If it’s a land card, put that card onto the battlefield under your control. If it’s a noncreature, nonland card, you gain 2 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DruidicSatchelEffect(), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DruidicSatchelEffect(), new ManaCostsImpl<>("{2}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

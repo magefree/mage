@@ -28,7 +28,7 @@ public final class VectisSilencers extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{2}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{2}{B}")));
     }
 
     public VectisSilencers (final VectisSilencers card) {

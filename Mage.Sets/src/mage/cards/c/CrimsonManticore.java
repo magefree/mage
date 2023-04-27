@@ -32,7 +32,7 @@ public final class CrimsonManticore extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // {R}, {tap}: Crimson Manticore deals 1 damage to target attacking or blocking creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl<>("{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAttackingOrBlockingCreature());
         this.addAbility(ability);

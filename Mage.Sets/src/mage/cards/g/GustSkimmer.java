@@ -26,7 +26,7 @@ public final class GustSkimmer extends CardImpl {
         this.subtype.add(SubType.INSECT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{U}")));
     }
 
     public GustSkimmer (final GustSkimmer card) {

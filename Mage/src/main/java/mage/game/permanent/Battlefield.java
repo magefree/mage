@@ -93,7 +93,7 @@ public class Battlefield implements Serializable {
     }
 
     public boolean containsControlled(FilterPermanent filter, Ability source, Game game, int num) {
-        return containsControlled(filter, source.getSourceId(), source.getControllerId(), source, game, num);
+        return containsControlled(filter, source.getControllerId(), source, game, num);
     }
 
     /**
@@ -102,25 +102,23 @@ public class Battlefield implements Serializable {
      * ignores the range of influence.
      *
      * @param filter
-     * @param sourceId
      * @param controllerId controller and source can be different (from different players)
      * @param source
      * @param game
      * @param num
      * @return boolean
      */
-    public boolean containsControlled(FilterPermanent filter, UUID sourceId, UUID controllerId, Ability source, Game game, int num) {
+    public boolean containsControlled(FilterPermanent filter, UUID controllerId, Ability source, Game game, int num) {
         return field.values()
                 .stream()
                 .filter(permanent -> permanent.isControlledBy(controllerId)
                         && filter.match(permanent, controllerId, source, game)
                         && permanent.isPhasedIn())
                 .count() >= num;
-
     }
 
     public boolean contains(FilterPermanent filter, Ability source, Game game, int num) {
-        return contains(filter, source.getSourceId(), source.getControllerId(), source, game, num);
+        return contains(filter, source.getControllerId(), source, game, num);
     }
 
     /**
@@ -129,14 +127,13 @@ public class Battlefield implements Serializable {
      * matches the supplied filter.
      *
      * @param filter
-     * @param sourceId       can be null for default SBA checks like legendary rule
      * @param sourcePlayerId
      * @param source
      * @param game
      * @param num
      * @return boolean
      */
-    public boolean contains(FilterPermanent filter, UUID sourceId, UUID sourcePlayerId, Ability source, Game game, int num) {
+    public boolean contains(FilterPermanent filter, UUID sourcePlayerId, Ability source, Game game, int num) {
         if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
             return field.values().stream()
                     .filter(permanent -> filter.match(permanent, sourcePlayerId, source, game)
@@ -156,6 +153,14 @@ public class Battlefield implements Serializable {
         field.put(permanent.getId(), permanent);
     }
 
+    /**
+     * Find a permanent on the battlefield by its ID.
+     * If you are working with cards and want to know if it is on the battlefield then use game.getState().getZone() instead.
+     * Note that the card ID and permanant ID may be different (e.g. MDFC puts a half card on the battlefield, not the main card).
+     *
+     * @param key   the UUID of a permanent to be retrieved
+     * @return      the permanent matching the passed in UUID
+     */
     public Permanent getPermanent(UUID key) {
         return field.get(key);
     }
@@ -165,12 +170,10 @@ public class Battlefield implements Serializable {
     }
 
     /**
-     * Find permanent on the battlefield by id. If you works with cards and want to check it on battlefield then
-     * use game.getState().getZone() instead. Card's id and permanent's id can be different (example: mdf card
-     * puts half card to battlefield, not the main card).
+     * Check whether the battlefield contains a permanent with the passed in UUID.
      *
-     * @param key
-     * @return
+     * @param key   the UUID whose existence we're checking for among permanents on the battlefield
+     * @return      whether the passed in UUID matches a permanent on the battlefield
      */
     public boolean containsPermanent(UUID key) {
         return field.containsKey(key);

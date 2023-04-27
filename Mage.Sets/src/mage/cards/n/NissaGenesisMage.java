@@ -5,17 +5,12 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetLandPermanent;
@@ -47,8 +42,8 @@ public final class NissaGenesisMage extends CardImpl {
         Effect effect = new UntapTargetEffect("untap up to two target creatures and up to two target lands");
         effect.setTargetPointer(new EachTargetPointer());
         Ability ability = new LoyaltyAbility(effect, +2);
-        ability.addTarget(new TargetCreaturePermanent(0, 2, StaticFilters.FILTER_PERMANENT_CREATURES, false));
-        ability.addTarget(new TargetLandPermanent(0, 2, StaticFilters.FILTER_LANDS, false));
+        ability.addTarget(new TargetCreaturePermanent(0, 2));
+        ability.addTarget(new TargetLandPermanent(0, 2));
         this.addAbility(ability);
 
         //-3: Target creature gets +5/+5 until end of turn.

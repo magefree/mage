@@ -34,7 +34,7 @@ public final class BorosChallenger extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new BoostSourceEffect(1, 1, Duration.EndOfTurn),
-                new ManaCostsImpl("{2}{R}{W}")
+                new ManaCostsImpl<>("{2}{R}{W}")
         ));
     }
 

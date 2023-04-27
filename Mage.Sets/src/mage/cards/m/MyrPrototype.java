@@ -53,7 +53,7 @@ public final class MyrPrototype extends CardImpl {
 class MyrPrototypeCantAttackUnlessYouPayEffect extends CantAttackBlockUnlessPaysSourceEffect {
 
     MyrPrototypeCantAttackUnlessYouPayEffect() {
-        super(new ManaCostsImpl("{0}"), RestrictType.ATTACK_AND_BLOCK);
+        super(new ManaCostsImpl<>("{0}"), RestrictType.ATTACK_AND_BLOCK);
         staticText = "{this} can't attack or block unless you pay {1} for each +1/+1 counter on it";
     }
 

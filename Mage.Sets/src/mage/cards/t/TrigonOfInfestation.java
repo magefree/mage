@@ -41,7 +41,7 @@ public final class TrigonOfInfestation extends CardImpl {
         this.addAbility(ability);
 
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
-        ability2.addManaCost(new ManaCostsImpl("{G}{G}"));
+        ability2.addManaCost(new ManaCostsImpl<>("{G}{G}"));
         this.addAbility(ability2);
     }
 

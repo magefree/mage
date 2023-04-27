@@ -42,7 +42,6 @@ public class AbilityOwnershipTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         // Obelisk Spider Triggers 3x (Soul Snuffers puts 3 counters on 3 creatures)
         assertLife(playerA, 20 + 3);
@@ -73,7 +72,6 @@ public class AbilityOwnershipTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);

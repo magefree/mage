@@ -30,6 +30,7 @@ public interface Draft extends MageItem, Serializable {
     int getBoosterNum();
     int getCardNum();
     boolean addPick(UUID playerId, UUID cardId, Set<UUID> hiddenCards);
+    void setBoosterLoaded(UUID playerID);
     void start();
     boolean isStarted();
     void setStarted();

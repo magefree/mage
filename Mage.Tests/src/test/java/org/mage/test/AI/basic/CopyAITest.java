@@ -32,7 +32,6 @@ public class CopyAITest extends CardTestPlayerBaseWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Spectral Bears", 1);
         assertPermanentCount(playerB, "Spectral Bears", 1);
@@ -55,7 +54,6 @@ public class CopyAITest extends CardTestPlayerBaseWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Spectral Bears", 2);
         assertPermanentCount(playerB, "Spectral Bears", 0);
@@ -78,7 +76,6 @@ public class CopyAITest extends CardTestPlayerBaseWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Spectral Bears", 1);
         assertPermanentCount(playerB, "Spectral Bears", 1);
@@ -102,7 +99,6 @@ public class CopyAITest extends CardTestPlayerBaseWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Spectral Bears", 1);
         assertExileCount("Spectral Bears", 1);
@@ -126,7 +122,6 @@ public class CopyAITest extends CardTestPlayerBaseWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Spectral Bears", 1);
         assertExileCount("Spectral Bears", 1);
@@ -150,7 +145,6 @@ public class CopyAITest extends CardTestPlayerBaseWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Spectral Bears", 1);
         assertExileCount("Spectral Bears", 1);
@@ -175,7 +169,6 @@ public class CopyAITest extends CardTestPlayerBaseWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         //setStrictChooseMode(true); // AI must choose
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Spectral Bears", 1);
         assertExileCount("Spectral Bears", 1);
@@ -200,7 +193,6 @@ public class CopyAITest extends CardTestPlayerBaseWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         //setStrictChooseMode(true); // AI must choose
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Spectral Bears", 1);
         assertExileCount("Spectral Bears", 1);

@@ -65,7 +65,7 @@ class OverloadEffect extends OneShotEffect {
             Permanent targetArtifact = game.getPermanent(this.getTargetPointer().getFirst(game, source));
             if (targetArtifact != null) {
                 int cmc = targetArtifact.getManaValue();
-                if (cmc <= 2 || (KickedCondition.instance.apply(game, source) && cmc <= 5)) {
+                if (cmc <= 2 || (KickedCondition.ONCE.apply(game, source) && cmc <= 5)) {
                     targetArtifact.destroy(source, game, false);
                 }
             }

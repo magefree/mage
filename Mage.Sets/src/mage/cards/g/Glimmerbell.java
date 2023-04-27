@@ -29,7 +29,7 @@ public final class Glimmerbell extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {1}{U}: Untap Glimmerbell.
-        this.addAbility(new SimpleActivatedAbility(new UntapSourceEffect(), new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new SimpleActivatedAbility(new UntapSourceEffect(), new ManaCostsImpl<>("{1}{U}")));
     }
 
     private Glimmerbell(final Glimmerbell card) {

@@ -43,7 +43,7 @@ public final class SpinerockKnoll extends CardImpl {
                 new HideawayPlayEffect(), SpinerockKnollCondition.instance,
                 "you may play the exiled card without paying its mana cost " +
                         "if an opponent was dealt 7 or more damage this turn"
-        ), new ManaCostsImpl("{R}"));
+        ), new ManaCostsImpl<>("{R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability, new SpinerockKnollWatcher());
     }

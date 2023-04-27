@@ -99,6 +99,7 @@ class ChangeCreatureTypeTargetEffect extends ContinuousEffectImpl {
         super(duration, Layer.TextChangingEffects_3, SubLayer.NA, Outcome.Benefit);
         this.fromSubType = fromSubType;
         this.toSubType = toSubType;
+        this.staticText = "Change the text of that creature by replacing all instances of one creature type with Vampire";
     }
 
     public ChangeCreatureTypeTargetEffect(final ChangeCreatureTypeTargetEffect effect) {
@@ -170,10 +171,5 @@ class ChangeCreatureTypeTargetEffect extends ContinuousEffectImpl {
     @Override
     public ChangeCreatureTypeTargetEffect copy() {
         return new ChangeCreatureTypeTargetEffect(this);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Change the text of that creature by replacing all instances of one creature type with Vampire";
     }
 }

@@ -49,7 +49,7 @@ public final class SilverWyvern extends CardImpl {
                 new ChooseNewTargetsTargetEffect(true, true)
                         .setText("Change the target of target spell or ability that targets only {this}. " +
                                 "The new target must be a creature"),
-                new ManaCostsImpl("{U}")
+                new ManaCostsImpl<>("{U}")
         );
         ability.addTarget(new TargetStackObject(filter));
         this.addAbility(ability);

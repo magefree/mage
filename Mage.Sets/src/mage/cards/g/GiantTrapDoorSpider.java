@@ -40,7 +40,7 @@ public final class GiantTrapDoorSpider extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {1}{R}{G}, {tap}: Exile Giant Trap Door Spider and target creature without flying that's attacking you.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileSourceEffect(), new ManaCostsImpl("{1}{R}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileSourceEffect(), new ManaCostsImpl<>("{1}{R}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new ExileTargetEffect().setText("and target creature without flying that's attacking you"));
         ability.addTarget(new TargetCreaturePermanent(filter));

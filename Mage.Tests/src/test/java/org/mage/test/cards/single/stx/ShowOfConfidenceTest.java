@@ -65,7 +65,6 @@ public class ShowOfConfidenceTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, "Balduvian Bears", CounterType.P1P1, 4);
         assertAbility(playerA, "Balduvian Bears", VigilanceAbility.getInstance(), true);

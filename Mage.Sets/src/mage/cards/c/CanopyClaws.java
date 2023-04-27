@@ -26,7 +26,7 @@ public final class CanopyClaws extends CardImpl {
         this.getSpellAbility().addEffect(new LoseAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Flashback {G}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{G}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{G}")));
     }
 
     private CanopyClaws(final CanopyClaws card) {

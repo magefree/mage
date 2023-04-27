@@ -47,7 +47,7 @@ public final class FruitcakeElemental extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DamageControllerEffect(7), TargetController.YOU, false));
 
         // {3}: Target player gains control of Fruitcake Elemental.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new FruitcakeElementalEffect(), new ManaCostsImpl("{3}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new FruitcakeElementalEffect(), new ManaCostsImpl<>("{3}"));
         ability.addTarget(new TargetPlayer(1, 1, false));
         this.addAbility(ability);
     }
@@ -80,7 +80,7 @@ class FruitcakeElementalEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null && permanent != null) {
             ContinuousEffect effect = new FruitcakeElementalControlSourceEffect();

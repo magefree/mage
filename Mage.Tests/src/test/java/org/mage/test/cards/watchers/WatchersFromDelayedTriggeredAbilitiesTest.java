@@ -36,7 +36,6 @@ public class WatchersFromDelayedTriggeredAbilitiesTest extends CardTestPlayerBas
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerB, "Lightning Bolt", 1);
     }

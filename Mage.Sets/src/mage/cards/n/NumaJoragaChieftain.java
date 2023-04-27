@@ -78,7 +78,7 @@ class NumaJoragaChieftainEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        ManaCosts cost = new ManaCostsImpl("{X}{X}");
+        ManaCosts cost = new ManaCostsImpl<>("{X}{X}");
         if (!player.chooseUse(Outcome.BoostCreature, "Pay " + cost.getText() + "?", source, game)) {
             return false;
         }

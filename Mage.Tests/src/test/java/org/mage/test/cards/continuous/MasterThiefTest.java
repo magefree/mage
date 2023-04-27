@@ -7,6 +7,11 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
+ * {@link mage.cards.m.MasterThief Master Thief}
+ * {2}{U}{U}
+ * Creature — Human Rogue
+ * When Master Thief enters the battlefield, gain control of target artifact for as long as you control Master Thief.
+ *
  * @author JayDi85
  */
 public class MasterThiefTest extends CardTestPlayerBase {
@@ -17,9 +22,8 @@ public class MasterThiefTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Master Thief", 3);
         addCard(Zone.BATTLEFIELD, playerB, "Accorder's Shield", 1);
 
-        // cast and get control of shield
+        // Cast Master Theif, auto get control of the shield since it's the only artifact in play
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Master Thief");
-        addTarget(playerB, "Accorder's Shield");
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
@@ -44,9 +48,9 @@ public class MasterThiefTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Master Thief");
         addTarget(playerA, "Accorder's Shield");
 
-        // sacrifice Master Thief -- must lost control
+        // sacrifice Master Thief -- must lose control
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice a creature");
-        addTarget(playerA, "Master Thief");
+        setChoice(playerA, "Master Thief");
 
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -64,25 +68,29 @@ public class MasterThiefTest extends CardTestPlayerBase {
 
     @Test
     public void testMasterThief_LostControlOnSacrificeButArtifactAttached() {
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 10);
         addCard(Zone.HAND, playerA, "Master Thief", 3);
-        addCard(Zone.BATTLEFIELD, playerB, "Accorder's Shield", 1);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 10);
         addCard(Zone.BATTLEFIELD, playerA, "Bearer of the Heavens", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Ashnod's Altar", 1);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Accorder's Shield", 1);
 
         // cast and get control of shield
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Master Thief");
         addTarget(playerA, "Accorder's Shield");
+
         checkPermanentCount("must control shield", 1, PhaseStep.BEGIN_COMBAT, playerA, "Accorder's Shield", 1);
 
         // attach and boost
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Equip {3}");
         addTarget(playerA, "Bearer of the Heavens");
+
         checkAbility("bear must have boost", 1, PhaseStep.END_TURN, playerA, "Bearer of the Heavens", VigilanceAbility.class, true);
 
-        // sacrifice Master Thief -- must lost control, but attached and boosted
+        // sacrifice Master Thief, lose control of the shield but it should still be attached to Bearer of the Heavens
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice a creature");
-        addTarget(playerA, "Master Thief");
+        setChoice(playerA, "Master Thief");
 
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();

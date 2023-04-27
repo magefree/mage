@@ -60,7 +60,7 @@ class VeilApparitionToken extends TokenImpl {
         subtype.add(SubType.ILLUSION);
         power = new MageInt(3);
         toughness = new MageInt(3);
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DoUnlessControllerPaysEffect(new SacrificeSourceEffect(), new ManaCostsImpl("{1}{U}")), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DoUnlessControllerPaysEffect(new SacrificeSourceEffect(), new ManaCostsImpl<>("{1}{U}")), TargetController.YOU, false);
         this.addAbility(ability);
     }
 

@@ -8,7 +8,7 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.condition.common.HateCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.dynamicvalue.common.BlockedCreatureCount;
+import mage.abilities.dynamicvalue.common.BlockingCreatureCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.BlocksIfAbleTargetEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -30,18 +30,16 @@ public final class AsajjVentress extends CardImpl {
     public AsajjVentress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}{R}");
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.DATHOMIRIAN);
-        this.subtype.add(SubType.SITH);
+        this.subtype.add(SubType.DATHOMIRIAN, SubType.SITH);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
         // Double Strike
         this.addAbility(DoubleStrikeAbility.getInstance());
 
-        // When Asajj Ventress becomes blocked, she gets +1/+1 for each creature blocking her until end of turn.
-        BlockedCreatureCount value = BlockedCreatureCount.ALL;
-        Effect effect = new BoostSourceEffect(value, value, Duration.EndOfTurn, true);
-        effect.setText("she gets +1/+1 for each creature blocking her until end of turn");
+        // When Asajj Ventress becomes blocked, she gets +1/+1 until end of turn for each creature blocking her.
+        Effect effect = new BoostSourceEffect(BlockingCreatureCount.SOURCE, BlockingCreatureCount.SOURCE, Duration.EndOfTurn, true);
+        effect.setText("she gets +1/+1 until end of turn for each creature blocking her");
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(effect, false));
 
         // <i>Hate</i> &mdash; Whenever Asajj Ventress attacks, if an opponent lost life from a source other than combat damage this turn, target creature blocks this turn if able.

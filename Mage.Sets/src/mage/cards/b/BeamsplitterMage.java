@@ -1,7 +1,6 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.AbilityImpl;
 import mage.abilities.Mode;
@@ -197,9 +196,7 @@ class BeamsplitterMageApplier implements StackObjectCopyApplier {
     private final Iterator<MageObjectReferencePredicate> predicate;
 
     BeamsplitterMageApplier(Permanent permanent, Game game) {
-        this.predicate = Arrays.asList(new MageObjectReferencePredicate(
-                new MageObjectReference(permanent, game)
-        )).iterator();
+        this.predicate = Arrays.asList(new MageObjectReferencePredicate(permanent, game)).iterator();
     }
 
     @Override
@@ -207,7 +204,7 @@ class BeamsplitterMageApplier implements StackObjectCopyApplier {
     }
 
     @Override
-    public MageObjectReferencePredicate getNextNewTargetType(int copyNumber) {
+    public MageObjectReferencePredicate getNextNewTargetType() {
         if (predicate.hasNext()) {
             return predicate.next();
         }

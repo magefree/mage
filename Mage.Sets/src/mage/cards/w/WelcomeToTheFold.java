@@ -28,7 +28,7 @@ public final class WelcomeToTheFold extends CardImpl {
         // Madness {X}{U}{U} <i>(If you discard this card
         // discard it into exile. When you do
         // cast it for its madness cost or put it into your graveyard.
-        Ability ability = new MadnessAbility(new ManaCostsImpl("{X}{U}{U}"));
+        Ability ability = new MadnessAbility(new ManaCostsImpl<>("{X}{U}{U}"));
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 

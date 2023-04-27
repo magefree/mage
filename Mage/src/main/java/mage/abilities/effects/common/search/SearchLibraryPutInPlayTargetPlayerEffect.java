@@ -1,6 +1,7 @@
 package mage.abilities.effects.common.search;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
@@ -8,9 +9,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -46,7 +44,6 @@ public class SearchLibraryPutInPlayTargetPlayerEffect extends SearchEffect {
         this.tapped = tapped;
         this.forceShuffle = forceShuffle;
         this.ownerIsController = ownerIsController;
-        setText();
     }
 
     public SearchLibraryPutInPlayTargetPlayerEffect(final SearchLibraryPutInPlayTargetPlayerEffect effect) {
@@ -82,32 +79,17 @@ public class SearchLibraryPutInPlayTargetPlayerEffect extends SearchEffect {
         return false;
     }
 
-    private void setText() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("target player searches their library for ");
-        if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
-            if (target.getMaxNumberOfTargets() == Integer.MAX_VALUE) {
-                sb.append("any number of ").append(' ');
-            } else {
-                sb.append("up to ").append(target.getMaxNumberOfTargets()).append(' ');
-            }
-            sb.append(target.getTargetName()).append(", puts them onto the battlefield");
-        } else {
-            sb.append("a ").append(target.getTargetName()).append(", puts it onto the battlefield");
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
         }
-        if (tapped) {
-            sb.append(" tapped");
-        }
-        if (forceShuffle) {
-            sb.append(", then shuffles");
-        } else {
-            sb.append(". If that player does, they shuffle");
-        }
-        staticText = sb.toString();
+        return getTargetPointer().describeTargets(mode.getTargets(), "that player")
+            + " searches their library for "
+            + target.getDescription()
+            + (forceShuffle ? ", " : " and ")
+            + (target.getMaxNumberOfTargets() > 1 ? "puts them onto the battlefield" : "puts it onto the battlefield")
+            + (tapped ? " tapped" : "")
+            + (forceShuffle ? ", then shuffles" : ". If that player does, they shuffle");
     }
-
-    public List<UUID> getTargets() {
-        return target.getTargets();
-    }
-
 }

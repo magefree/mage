@@ -58,9 +58,10 @@ class MaskwoodNexusEffect extends ContinuousEffectImpl {
 
     MaskwoodNexusEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
-        staticText = "Creatures you control are every creature type. " +
-                "The same is true for creature spells you control " +
-                "and creature cards you own that aren't on the battlefield.";
+        staticText = "Creatures you control are every creature type. "
+                + "The same is true for creature spells you control "
+                + "and creature cards you own that aren't on the battlefield.";
+        this.dependendToTypes.add(DependencyType.BecomeCreature);
     }
 
     private MaskwoodNexusEffect(final MaskwoodNexusEffect effect) {
@@ -118,7 +119,7 @@ class MaskwoodNexusEffect extends ContinuousEffectImpl {
             }
         }
         // creature spells you control
-        for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext(); ) {
+        for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext();) {
             StackObject stackObject = iterator.next();
             if (stackObject instanceof Spell
                     && stackObject.isControlledBy(source.getControllerId())

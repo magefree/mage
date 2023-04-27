@@ -101,6 +101,7 @@ class CemeteryProtectorTriggeredAbility extends TriggeredAbilityImpl {
 
     public CemeteryProtectorTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new HumanToken()));
+        setTriggerPhrase("Whenever you play a land or cast a spell, if it shares a card type with the exiled card, ");
     }
 
     private CemeteryProtectorTriggeredAbility(final CemeteryProtectorTriggeredAbility ability) {
@@ -163,10 +164,5 @@ class CemeteryProtectorTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you play a land or cast a spell, if it shares a card type with the exiled card, ";
     }
 }

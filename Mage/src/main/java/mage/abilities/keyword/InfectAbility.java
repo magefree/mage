@@ -53,7 +53,7 @@ public class InfectAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public String getRule() {
-        return "Infect <i>(This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)</i>";
+        return "infect <i>(This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)</i>";
     }
 
     @Override

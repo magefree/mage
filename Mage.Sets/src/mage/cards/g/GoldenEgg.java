@@ -38,7 +38,7 @@ public final class GoldenEgg extends CardImpl {
         this.addAbility(ability);
 
         // {2}, {T}, Sacrifice Golden Egg: You gain 3 life.
-        Ability ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(3), new ManaCostsImpl("{2}"));
+        Ability ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(3), new ManaCostsImpl<>("{2}"));
         ability1.addCost(new TapSourceCost());
         ability1.addCost(new SacrificeSourceCost());
         this.addAbility(ability1);

@@ -32,7 +32,7 @@ public final class XandersPact extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
 
         // Casualty 2
-        this.addAbility(new CasualtyAbility(this, 2));
+        this.addAbility(new CasualtyAbility(2));
 
         // Each opponent exiles the top card of their library. You may cast spells from among those cards this turn. If you cast a spell this way, pay life equal to that spell's mana value rather than pay its mana cost.
         this.getSpellAbility().addEffect(new XandersPactExileEffect());

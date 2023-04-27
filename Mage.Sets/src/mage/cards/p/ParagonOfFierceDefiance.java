@@ -51,7 +51,7 @@ public final class ParagonOfFierceDefiance extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterCreatures, true)));
         
         // {R}, {T}: Another target red creature you control gains haste until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent(filterCreature));
         this.addAbility(ability);

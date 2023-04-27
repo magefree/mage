@@ -7,6 +7,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
+import mage.target.Targets;
+import mage.util.CardUtil;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -128,5 +130,18 @@ public class EachTargetPointer extends TargetPointerImpl {
             }
         }
         return permanent;
+    }
+
+    @Override
+    public String describeTargets(Targets targets, String defaultDescription) {
+        if (targets.isEmpty()) {
+            return defaultDescription;
+        }
+        return CardUtil.concatWithAnd(targets.stream().map(Target::getDescription).collect(Collectors.toList()));
+    }
+
+    @Override
+    public boolean isPlural(Targets targets) {
+        return true;
     }
 }

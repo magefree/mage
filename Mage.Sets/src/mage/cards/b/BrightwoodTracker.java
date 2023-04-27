@@ -6,10 +6,10 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.PutCards;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 
@@ -32,7 +32,7 @@ public final class BrightwoodTracker extends CardImpl {
         // Put the rest on the bottom of your library in a random order.
         Ability ability = new SimpleActivatedAbility(
                 new LookLibraryAndPickControllerEffect(4, 1, StaticFilters.FILTER_CARD_CREATURE_A, PutCards.HAND, PutCards.BOTTOM_RANDOM),
-                new ManaCostsImpl("{5}{G}"));
+                new ManaCostsImpl<>("{5}{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

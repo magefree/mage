@@ -6,18 +6,20 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -64,27 +66,32 @@ class TreeOfPerditionEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(source.getFirstTarget());
-        if (opponent != null && opponent.isLifeTotalCanChange()) {
-            Permanent perm = game.getPermanent(source.getSourceId());
-            if (perm != null) {
-                int amount = perm.getToughness().getValue();
-                int life = opponent.getLife();
-                if (life == amount) {
-                    return false;
-                }
-                if (life < amount && !opponent.isCanGainLife()) {
-                    return false;
-                }
-                if (life > amount && !opponent.isCanLoseLife()) {
-                    return false;
-                }
-                opponent.setLife(amount, game, source);
-                perm.getToughness().modifyBaseValue(life);
-                // game.addEffect(new SetPowerToughnessSourceEffect(Integer.MIN_VALUE, life, Duration.Custom, SubLayer.SetPT_7b), source);
-                return true;
-            }
+        Permanent perm = game.getPermanent(source.getSourceId());
+        if (perm == null || opponent == null || !opponent.isLifeTotalCanChange()) {
+            return false;
         }
-        return false;
+
+        int amount = perm.getToughness().getValue(); // Must get total value
+        int life = opponent.getLife();
+        if (life == amount) {
+            return false;
+        }
+        if (life < amount && !opponent.isCanGainLife()) {
+            return false;
+        }
+        if (life > amount && !opponent.isCanLoseLife()) {
+            return false;
+        }
+        opponent.setLife(amount, game, source);
+
+        // Any toughness-modifying effects, counters, Auras, or Equipment will apply after its toughness is set to the player’s former life total.
+        // For example, say Tree of Perdition is equipped with Cultist’s Staff (which makes it 2/15) and the player’s life total is 7.
+        // After the exchange, Tree of Perdition would be a 2/9 creature (its toughness became 7, which was then modified by Cultist’s Staff) and the player’s life total would be 15.
+        // (2016-07-13)
+        ContinuousEffect powerToughnessEffect = new SetBasePowerToughnessTargetEffect(null, StaticValue.get(life), Duration.Custom);
+        powerToughnessEffect.setTargetPointer(new FixedTarget(perm.getId()));
+        game.addEffect(powerToughnessEffect, source);
+        return true;
     }
 
     @Override

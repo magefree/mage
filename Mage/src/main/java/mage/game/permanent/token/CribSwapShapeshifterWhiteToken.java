@@ -21,7 +21,16 @@ public final class CribSwapShapeshifterWhiteToken extends TokenImpl {
         toughness = new MageInt(1);
         addAbility(new ChangelingAbility());
 
-        availableImageSetCodes = Arrays.asList("LRW", "C15", "CM2", "C18", "2XM");
+        availableImageSetCodes = Arrays.asList("LRW", "C15", "CM2", "C18", "2XM", "CLB");
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("CLB")) {
+            this.setTokenType(1);
+        }
     }
 
     public CribSwapShapeshifterWhiteToken(final CribSwapShapeshifterWhiteToken token) {

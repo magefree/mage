@@ -40,7 +40,7 @@ public final class ViashinoSandsprinter extends CardImpl {
         ));
 
         // Cycling {R}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{R}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{R}")));
 
     }
 

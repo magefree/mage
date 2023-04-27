@@ -35,7 +35,7 @@ public final class SwarmGuildmage extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new BoostControlledEffect(1, 0, Duration.EndOfTurn)
                         .setText("creatures you control get +1/+0"),
-                new ManaCostsImpl("{4}{B}")
+                new ManaCostsImpl<>("{4}{B}")
         );
         ability.addEffect(new GainAbilityControlledEffect(
                 new MenaceAbility(), Duration.EndOfTurn,
@@ -48,7 +48,7 @@ public final class SwarmGuildmage extends CardImpl {
         // {1}{G}, {T}: You gain 2 life.
         ability = new SimpleActivatedAbility(
                 new GainLifeEffect(2),
-                new ManaCostsImpl("{1}{G}")
+                new ManaCostsImpl<>("{1}{G}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

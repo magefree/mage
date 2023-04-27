@@ -27,7 +27,7 @@ public final class CircleOfTheMoonDruid extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Bear Form — As long as its your turn, Circle of the Moon Druid is a Bear with base power and toughness 4/2.
-        this.addAbility(new SimpleStaticAbility(new WerewolfPackLeaderEffect()).withFlavorWord("Bear Form"));
+        this.addAbility(new SimpleStaticAbility(new CircleOfTheMoonDruidBearEffect()).withFlavorWord("Bear Form"));
     }
 
     private CircleOfTheMoonDruid(final CircleOfTheMoonDruid card) {
@@ -40,20 +40,20 @@ public final class CircleOfTheMoonDruid extends CardImpl {
     }
 }
 
-class WerewolfPackLeaderEffect extends ContinuousEffectImpl {
+class CircleOfTheMoonDruidBearEffect extends ContinuousEffectImpl {
 
-    WerewolfPackLeaderEffect() {
+    CircleOfTheMoonDruidBearEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "as long as it's your turn, {this} is a Bear with base power and toughness 4/2";
     }
 
-    private WerewolfPackLeaderEffect(final WerewolfPackLeaderEffect effect) {
+    private CircleOfTheMoonDruidBearEffect(final CircleOfTheMoonDruidBearEffect effect) {
         super(effect);
     }
 
     @Override
-    public WerewolfPackLeaderEffect copy() {
-        return new WerewolfPackLeaderEffect(this);
+    public CircleOfTheMoonDruidBearEffect copy() {
+        return new CircleOfTheMoonDruidBearEffect(this);
     }
 
     @Override
@@ -69,8 +69,8 @@ class WerewolfPackLeaderEffect extends ContinuousEffectImpl {
                 return true;
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
-                    permanent.getPower().setValue(4);
-                    permanent.getToughness().setValue(2);
+                    permanent.getPower().setModifiedBaseValue(4);
+                    permanent.getToughness().setModifiedBaseValue(2);
                     return true;
                 }
         }

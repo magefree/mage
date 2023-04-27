@@ -87,7 +87,7 @@ class WildbornPreserverCreateReflexiveTriggerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        ManaCosts cost = new ManaCostsImpl("{X}");
+        ManaCosts cost = new ManaCostsImpl<>("{X}");
         if (player == null) {
             return false;
         }

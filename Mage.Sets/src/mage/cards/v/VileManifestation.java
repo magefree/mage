@@ -50,7 +50,7 @@ public final class VileManifestation extends CardImpl {
         this.addAbility(ability);
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
 
     }
 

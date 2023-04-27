@@ -41,7 +41,6 @@ public class PlayLandsFromGraveyardTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Island", 1);
     }

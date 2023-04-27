@@ -35,7 +35,6 @@ public class TargetStackObjectByAITest extends CardTestPlayerBaseWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Grizzly Bears", 0);
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
@@ -64,7 +63,6 @@ public class TargetStackObjectByAITest extends CardTestPlayerBaseWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         //setStrictChooseMode(true); // AI must choose
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Grizzly Bears", 0);
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
@@ -92,7 +90,6 @@ public class TargetStackObjectByAITest extends CardTestPlayerBaseWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true); // AI play with full simulation
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Grizzly Bears", 0);
         assertGraveyardCount(playerA, "Lightning Bolt", 1);

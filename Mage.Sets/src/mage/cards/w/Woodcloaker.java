@@ -29,7 +29,7 @@ public final class Woodcloaker extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Morph {2}{G}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{G}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{G}{G}")));
         // When Woodcloaker is turned face up, target creature gains trample until end of turn.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent());

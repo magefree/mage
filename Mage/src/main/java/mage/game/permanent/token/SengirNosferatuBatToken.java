@@ -40,11 +40,11 @@ public final class SengirNosferatuBatToken extends TokenImpl {
         // {1}{B}, Sacrifice this creature: Return an exiled card named Sengir Nosferatu to the battlefield under its owner’s control.
         ReturnSengirNosferatuEffect effect = new ReturnSengirNosferatuEffect();
         effect.setText("Return an exiled card named Sengir Nosferatu to the battlefield under its owner's control.");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
 
-        availableImageSetCodes = Arrays.asList("TSP", "TSR");
+        availableImageSetCodes = Arrays.asList("TSR");
     }
 
     public SengirNosferatuBatToken(final SengirNosferatuBatToken token) {

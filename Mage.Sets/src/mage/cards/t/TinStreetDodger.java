@@ -42,7 +42,7 @@ public final class TinStreetDodger extends CardImpl {
 
         // {R}: Tin Street Dodger can't be blocked this turn except by creatures with defender.
         this.addAbility(new SimpleActivatedAbility(
-                new CantBeBlockedByCreaturesSourceEffect(filter, Duration.EndOfTurn), new ManaCostsImpl("{R}")
+                new CantBeBlockedByCreaturesSourceEffect(filter, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")
         ));
     }
 

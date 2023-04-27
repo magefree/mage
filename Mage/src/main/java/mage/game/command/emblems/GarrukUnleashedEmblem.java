@@ -17,5 +17,7 @@ public class GarrukUnleashedEmblem extends Emblem {
         Effect effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_CREATURE), false, true, Outcome.PutCreatureInPlay)
             .setText("search your library for a creature card, put it onto the battlefield, then shuffle");
         this.getAbilities().add(new BeginningOfYourEndStepTriggeredAbility(Zone.COMMAND, effect, true));
+
+        this.setExpansionSetCodeForImage("M21");
     }
 }

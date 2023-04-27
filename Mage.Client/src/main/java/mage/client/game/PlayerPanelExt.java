@@ -380,6 +380,9 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         if (player.isMonarch()) {
             this.avatar.setTopTextImageRight(ImageHelper.getImageFromResources("/info/crown.png"));
         }
+        if (player.isInitiative()) {
+            this.avatar.setTopTextImageRight(ImageHelper.getImageFromResources("/info/initiative.png"));
+        }
         for (Counter counter : player.getCounters().values()) {
             tooltipText.append("<br/>").append(counter.getName()).append(" counters: ").append(counter.getCount());
         }

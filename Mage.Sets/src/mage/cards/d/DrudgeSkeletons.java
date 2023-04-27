@@ -25,7 +25,7 @@ public final class DrudgeSkeletons extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
     }
 
     private DrudgeSkeletons(final DrudgeSkeletons card) {

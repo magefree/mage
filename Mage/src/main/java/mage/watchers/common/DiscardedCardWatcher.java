@@ -43,4 +43,16 @@ public class DiscardedCardWatcher extends Watcher {
         DiscardedCardWatcher watcher = game.getState().getWatcher(DiscardedCardWatcher.class);
         return watcher == null ? 0 : watcher.playerMap.getOrDefault(playerId, 0);
     }
+
+    public static boolean playerInRangeDiscarded(UUID controllerId, Game game) {
+        DiscardedCardWatcher watcher = game.getState().getWatcher(DiscardedCardWatcher.class);
+        if (watcher != null) {
+            for (UUID playerId : game.getState().getPlayersInRange(controllerId, game)) {
+                if (watcher.playerMap.getOrDefault(playerId, 0) > 0) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

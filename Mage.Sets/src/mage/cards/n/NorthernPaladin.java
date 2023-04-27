@@ -38,7 +38,7 @@ public final class NorthernPaladin extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {W}{W}, {tap}: Destroy target black permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{W}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{W}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

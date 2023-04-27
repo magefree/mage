@@ -28,7 +28,6 @@ public class BuybackTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Silvercoat Lion", 4, 4);
         assertHandCount(playerA, "Elvish Fury", 1);
@@ -49,7 +48,6 @@ public class BuybackTest extends CardTestPlayerBase {
         //setStrictChooseMode(true); - AI must choose
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Silvercoat Lion", 4, 4);
         assertHandCount(playerA, "Elvish Fury", 1);
@@ -155,6 +153,5 @@ public class BuybackTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 }

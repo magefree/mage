@@ -33,7 +33,7 @@ import java.util.UUID;
  */
 public class AminatouTheFateshifter extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("permanent you own");
+    private static final FilterPermanent filter = new FilterPermanent("another target permanent you own");
 
     static {
         filter.add(TargetController.YOU.getOwnerPredicate());
@@ -53,7 +53,7 @@ public class AminatouTheFateshifter extends CardImpl {
 
         // −1: Exile another target permanent you own, then return it to the battlefield under your control.
         ability = new LoyaltyAbility(new ExileTargetForSourceEffect(), -1);
-        ability.addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect(false));
+        ability.addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect().concatBy(", then"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 

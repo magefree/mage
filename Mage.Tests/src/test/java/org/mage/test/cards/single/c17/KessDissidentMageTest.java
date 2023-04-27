@@ -28,7 +28,6 @@ public class KessDissidentMageTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount(playerA, "Lightning Bolt", 1);
         assertLife(playerB, 20 - 3);
@@ -49,7 +48,6 @@ public class KessDissidentMageTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Centaur Token", 1);
         assertLife(playerA, 20);
@@ -74,7 +72,6 @@ public class KessDissidentMageTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Centaur Token", 1);
         assertLife(playerA, 20 + 2);
@@ -99,6 +96,5 @@ public class KessDissidentMageTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 }

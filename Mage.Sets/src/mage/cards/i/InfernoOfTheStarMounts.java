@@ -43,7 +43,7 @@ public final class InfernoOfTheStarMounts extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // {R}: Inferno of the Star Mounts gets +1/+0 until end of turn. When its power becomes 20 this way, it deals 20 damage to any target.
-        Ability ability = new SimpleActivatedAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}"));
         ability.addEffect(new InfernoOfTheStarMountsEffect());
         this.addAbility(ability);
     }

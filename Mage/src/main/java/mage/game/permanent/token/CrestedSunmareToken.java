@@ -18,6 +18,7 @@ public final class CrestedSunmareToken extends TokenImpl {
         color.setWhite(true);
         subtype.add(SubType.HORSE);
         cardType.add(CardType.CREATURE);
+        setOriginalExpansionSetCode("HOU");
     }
 
     public CrestedSunmareToken(final CrestedSunmareToken token) {

@@ -27,7 +27,7 @@ public final class MagmaBurst extends CardImpl {
 
         // Kicker-Sacrifice two lands.
         this.addAbility(new KickerAbility(new SacrificeTargetCost(new TargetControlledPermanent(2, 2,
-                new FilterControlledLandPermanent("two lands"), true))));
+                new FilterControlledLandPermanent("lands"), true))));
 
         // Magma Burst deals 3 damage to any target. If Magma Burst was kicked, it deals 3 damage to another any target.
         Effect effect = new DamageTargetEffect(3);
@@ -51,6 +51,6 @@ enum MagmaBurstAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        ability.addTarget(new TargetAnyTarget(KickedCondition.instance.apply(game, ability) ? 2 : 1));
+        ability.addTarget(new TargetAnyTarget(KickedCondition.ONCE.apply(game, ability) ? 2 : 1));
     }
 }

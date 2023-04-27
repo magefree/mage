@@ -24,7 +24,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -40,7 +39,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -56,7 +54,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -73,7 +70,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -90,7 +86,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -116,7 +111,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 4);
     }
@@ -136,7 +130,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         //setStrictChooseMode(true); AI must choose targets
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 4);
     }
@@ -160,7 +153,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 4);
     }
@@ -180,7 +172,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 4);
     }
@@ -202,7 +193,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
@@ -231,7 +221,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
@@ -255,7 +244,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Alpha Myr", 1);
     }
@@ -291,7 +279,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -312,7 +299,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Hogaak, Arisen Necropolis", 1);
     }
@@ -337,7 +323,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Hogaak, Arisen Necropolis", 1);
     }
@@ -361,7 +346,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Soldier Token", 1);
     }

@@ -49,12 +49,12 @@ public final class MetzaliTowerOfTriumph extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
 
         // {1}{R}, {T}: Metzali, Tower of Triumph deals 2 damage to each opponent.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamagePlayersEffect(2, TargetController.OPPONENT), new ManaCostsImpl("{1}{R}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamagePlayersEffect(2, TargetController.OPPONENT), new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
         // {2}{W}, {T}: Choose a creature at random that attacked this turn. Destroy that creature.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MetzaliTowerOfTriumphEffect(), new ManaCostsImpl("{2}{W}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MetzaliTowerOfTriumphEffect(), new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addWatcher(new AttackedThisTurnWatcher());
         this.addAbility(ability);

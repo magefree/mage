@@ -35,7 +35,7 @@ public final class NoxiousField extends CardImpl {
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted land has "{tap}: This land deals 1 damage to each creature and each player."
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(1), new TapSourceCost());

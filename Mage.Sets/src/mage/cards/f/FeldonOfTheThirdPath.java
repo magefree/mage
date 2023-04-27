@@ -42,7 +42,7 @@ public final class FeldonOfTheThirdPath extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{R}, {T}: Create a token that's a copy of target creature card in your graveyard, except it's an artifact in addition to its other types. It gains haste. Sacrifice it at the beginning of the next end step.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new FeldonOfTheThirdPathEffect(), new ManaCostsImpl("{2}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new FeldonOfTheThirdPathEffect(), new ManaCostsImpl<>("{2}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(1, 1, new FilterCreatureCard("creature card in your graveyard")));
         this.addAbility(ability);

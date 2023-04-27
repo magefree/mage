@@ -46,6 +46,7 @@ class DesolationTwinOnCastAbility extends TriggeredAbilityImpl {
 
     DesolationTwinOnCastAbility() {
         super(Zone.STACK, new CreateTokenEffect(new EldraziToken()));
+        setTriggerPhrase("When you cast this spell, ");
     }
 
     DesolationTwinOnCastAbility(DesolationTwinOnCastAbility ability) {
@@ -66,10 +67,5 @@ class DesolationTwinOnCastAbility extends TriggeredAbilityImpl {
     @Override
     public DesolationTwinOnCastAbility copy() {
         return new DesolationTwinOnCastAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When you cast this spell, " ;
     }
 }

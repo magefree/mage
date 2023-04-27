@@ -50,6 +50,7 @@ class PiousWarriorTriggeredAbility extends TriggeredAbilityImpl {
 
     public PiousWarriorTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PiousWarriorGainLifeEffect());
+        setTriggerPhrase("Whenever {this} is dealt combat damage, ");
     }
 
     public PiousWarriorTriggeredAbility(final PiousWarriorTriggeredAbility effect) {
@@ -73,11 +74,6 @@ class PiousWarriorTriggeredAbility extends TriggeredAbilityImpl {
        		return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} is dealt combat damage, " ;
     }
 }
 

@@ -14,13 +14,13 @@ public class FlameshadowConjuringTest extends CardTestPlayerBase {
 
     /**
      * My opponent ran into an issue with Priest of the Blood Rite being copied
-     * with Flameshadow Conjuring. Their copy was made and removed correctly at
-     * the end of the turn, but the "lose two life a turn" trigger still
-     * happened twice.
+     * with Flameshadow Conjuring.
+     * Their copy was made and removed correctly at the end of the turn,
+     * but the "lose two life a turn" trigger still happened twice.
      *
      * TODO: Seems like there are too much triggered abilities in
-     * TriggeredAbilities as the TriggeredAbilities get removed from
-     * PlayerImpl.removeFromBattlefield()
+     *       TriggeredAbilities as the TriggeredAbilities get removed from
+     *       PlayerImpl.removeFromBattlefield()
      */
     @Test
     public void testCopyAndItsEffectsRemoved() {
@@ -33,7 +33,6 @@ public class FlameshadowConjuringTest extends CardTestPlayerBase {
         // When Priest of the Blood Rite enters the battlefield, put a 5/5 black Demon creature token with flying onto the battlefield.
         // At the beginning of your upkeep, you lose 2 life.
         addCard(Zone.HAND, playerA, "Priest of the Blood Rite", 1); // {3}{B}{B}
-        setChoice(playerB, true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Priest of the Blood Rite");
         setStopAt(3, PhaseStep.UPKEEP);
@@ -47,8 +46,8 @@ public class FlameshadowConjuringTest extends CardTestPlayerBase {
     }
 
     /**
-     * I created a token copy of Wurmcoil Engine and sacrificed it. This gave me
-     * 4 tokens
+     * I created a token copy of Wurmcoil Engine and sacrificed it.
+     * This gave me 4 tokens.
      */
     @Test
     public void testWurmcoilEngine() {
@@ -80,7 +79,5 @@ public class FlameshadowConjuringTest extends CardTestPlayerBase {
         assertLife(playerA, 26);
 
         assertPermanentCount(playerA, "Phyrexian Wurm Token", 2);
-
     }
-
 }

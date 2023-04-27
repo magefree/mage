@@ -3,6 +3,7 @@ package mage.abilities.dynamicvalue.common;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.abilities.hint.ValueHint;
 import mage.game.Game;
 import mage.watchers.common.CardsDrawnThisTurnWatcher;
 
@@ -13,6 +14,7 @@ import mage.watchers.common.CardsDrawnThisTurnWatcher;
  */
 public enum CardsDrawnThisTurnDynamicValue implements DynamicValue {
     instance;
+    private static final ValueHint hint = new ValueHint("Cards you've drawn this turn", instance);
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -35,7 +37,12 @@ public enum CardsDrawnThisTurnDynamicValue implements DynamicValue {
 
     @Override
     public String getMessage() {
+
         return "card you've drawn this turn";
+    }
+
+    public static ValueHint getHint() {
+        return hint;
     }
 }
 

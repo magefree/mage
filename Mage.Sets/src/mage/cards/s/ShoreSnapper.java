@@ -29,7 +29,7 @@ public final class ShoreSnapper extends CardImpl {
 
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(new IslandwalkAbility(), Duration.EndOfTurn),
-                new ManaCostsImpl("{U}")));
+                new ManaCostsImpl<>("{U}")));
     }
 
     private ShoreSnapper(final ShoreSnapper card) {

@@ -8,8 +8,6 @@ import mage.abilities.hint.ValueHint;
 import mage.game.Game;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
-import java.util.UUID;
-
 /**
  * Amount of life the controller got this turn.
  *
@@ -22,13 +20,9 @@ public enum ControllerGotLifeCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return this.calculate(game, sourceAbility.getControllerId());
-    }
-
-    public int calculate(Game game, UUID controllerId) {
         PlayerGainedLifeWatcher watcher = game.getState().getWatcher(PlayerGainedLifeWatcher.class);
         if (watcher != null) {
-            return watcher.getLifeGained(controllerId);
+            return watcher.getLifeGained(sourceAbility.getControllerId());
         }
         return 0;
     }
@@ -45,7 +39,7 @@ public enum ControllerGotLifeCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "the amount of life you've gained this turn";
+        return "the amount of life you gained this turn";
     }
 
     public static Hint getHint() {

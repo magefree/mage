@@ -7,6 +7,7 @@ import mage.constants.Zone;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
+
 import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
 
 /**
@@ -32,8 +33,6 @@ public class TitansNestTest extends CardTestPlayerBase {
         
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Titans' Nest", 1);
         

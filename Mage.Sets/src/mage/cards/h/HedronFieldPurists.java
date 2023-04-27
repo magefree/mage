@@ -37,7 +37,7 @@ public final class HedronFieldPurists extends LevelerCard {
         this.toughness = new MageInt(3);
 
         // Level up {2}{W}
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{2}{W}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{2}{W}")));
         // LEVEL 1-4
         // 1/4
         // If a source would deal damage to you or a creature you control, prevent 1 of that damage.

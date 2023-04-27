@@ -1,9 +1,11 @@
 
 package mage.cards.s;
 
+import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksAllTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.PartnerWithAbility;
@@ -16,7 +18,6 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
@@ -69,14 +70,17 @@ class SoulbladeCorrupterTriggeredAbility extends AttacksAllTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (super.checkTrigger(event, game)) {
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null) {
-                Player player = game.getPlayer(permanent.getControllerId());
-                if (player != null && player.hasOpponent(getControllerId(), game)) {
-                    getEffects().setTargetPointer(new FixedTarget(permanent, game));
-                    return true;
+        if (super.checkTrigger(event,game)) {
+            Player defender = game.getPlayer(event.getTargetId());
+            if (defender == null) {
+                return false;
+            }
+            Set<UUID> opponents = game.getOpponents(this.getControllerId());
+            if (opponents != null && opponents.contains(defender.getId())) {
+                for (Effect effect : this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(event.getSourceId(), game));
                 }
+                return true;
             }
         }
         return false;

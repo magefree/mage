@@ -26,7 +26,7 @@ public final class MosquitoGuard extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(FirstStrikeAbility.getInstance());
-        this.addAbility(new ReinforceAbility(1, new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new ReinforceAbility(1, new ManaCostsImpl<>("{1}{W}")));
     }
 
     public MosquitoGuard (final MosquitoGuard card) {

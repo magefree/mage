@@ -48,7 +48,7 @@ public final class GildedGoose extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new FoodToken()), false));
 
         // {1}{G}, {T}: Create a Food token.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new FoodToken()), new ManaCostsImpl("{1}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new FoodToken()), new ManaCostsImpl<>("{1}{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

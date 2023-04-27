@@ -18,6 +18,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -82,6 +83,11 @@ class ReflectionOfKikiJikiEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
+        if (permanent == null) {
+            return false;
+        }
+
         CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(null, null, true);
         effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
         effect.apply(game, source);

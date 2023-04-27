@@ -45,6 +45,7 @@ class ChastiseEffect extends OneShotEffect {
 
     public ChastiseEffect() {
         super(Outcome.GainLife);
+        this.staticText = "You gain life equal to its power";
     }
 
     public ChastiseEffect(final ChastiseEffect effect) {
@@ -68,10 +69,5 @@ class ChastiseEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "You gain life equal to its power";
     }
 }

@@ -31,9 +31,9 @@ public final class Tornado extends CardImpl {
 
 
         // Cumulative upkeep {G}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{G}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{G}")));
         // {2}{G}, Pay 3 life for each velocity counter on Tornado: Destroy target permanent and put a velocity counter on Tornado. Activate this ability only once each turn.
-        Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{2}{G}"));
+        Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{2}{G}"));
         DynamicValue lifeToPayAmount = new MultipliedValue(new CountersSourceCount(CounterType.VELOCITY), 3);
         ability.addCost(new PayLifeCost(lifeToPayAmount, "3 life for each velocity counter on {this}"));
         ability.addTarget(new TargetPermanent());

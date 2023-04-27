@@ -27,7 +27,7 @@ public final class KeldonHalberdier extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
         // Suspend 4-{R}
-        this.addAbility(new SuspendAbility(4, new ManaCostsImpl("{R}"), this));
+        this.addAbility(new SuspendAbility(4, new ManaCostsImpl<>("{R}"), this));
     }
 
     private KeldonHalberdier(final KeldonHalberdier card) {

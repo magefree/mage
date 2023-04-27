@@ -2,6 +2,7 @@
 
 package mage.game.permanent.token;
 
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -12,8 +13,10 @@ import mage.constants.SubType;
 public final class HunterToken extends TokenImpl {
 
     public HunterToken() {
-        super("Hunter Token", "4/4 red Hunter creature token", 4, 4);
+        super("Hunter Token", "4/4 red Hunter creature token");
         this.setOriginalExpansionSetCode("SWS");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.HUNTER);

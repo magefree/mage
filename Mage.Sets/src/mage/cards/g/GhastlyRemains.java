@@ -52,7 +52,7 @@ public final class GhastlyRemains extends CardImpl {
 class GhastlyRemainsTriggeredAbility extends BeginningOfUpkeepTriggeredAbility {
 
     public GhastlyRemainsTriggeredAbility() {
-        super(Zone.GRAVEYARD, new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{B}{B}{B}")), TargetController.YOU, false);
+        super(Zone.GRAVEYARD, new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl<>("{B}{B}{B}")), TargetController.YOU, false);
     }
 
     public GhastlyRemainsTriggeredAbility(GhastlyRemainsTriggeredAbility ability) {

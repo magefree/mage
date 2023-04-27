@@ -248,7 +248,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             }
             val = minimaxAB(node, depth - 1, alpha, beta);
         } else {
-            logger.trace("Add Action -- alpha: " + alpha + " beta: " + beta + " depth:" + depth + " step:" + game.getTurn().getStepType() + " for player:" + game.getPlayer(game.getActivePlayerId()).getName());
+            logger.trace("Add Action -- alpha: " + alpha + " beta: " + beta + " depth:" + depth + " step:" + game.getTurnStepType() + " for player:" + game.getPlayer(game.getActivePlayerId()).getName());
             if (allPassed(game)) {
                 if (!game.getStack().isEmpty()) {
                     resolve(node, depth, game);
@@ -291,7 +291,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             }
         }
         node.setScore(val);
-        logger.trace("returning -- score: " + val + " depth:" + depth + " step:" + game.getTurn().getStepType() + " for player:" + game.getPlayer(node.getPlayerId()).getName());
+        logger.trace("returning -- score: " + val + " depth:" + depth + " step:" + game.getTurnStepType() + " for player:" + game.getPlayer(node.getPlayerId()).getName());
         return val;
 
     }
@@ -395,7 +395,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             if (effect != null
                     && stackObject.getControllerId().equals(playerId)) {
                 Target target = effect.getTarget();
-                if (!target.doneChosing()) {
+                if (!target.doneChoosing()) {
                     for (UUID targetId : target.possibleTargets(stackObject.getControllerId(), stackObject.getStackAbility(), game)) {
                         Game sim = game.copy();
                         StackAbility newAbility = (StackAbility) stackObject.copy();
@@ -748,10 +748,10 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         if (targets.isEmpty()) {
             return super.chooseTarget(outcome, cards, target, source, game);
         }
-        if (!target.doneChosing()) {
+        if (!target.doneChoosing()) {
             for (UUID targetId : targets) {
                 target.addTarget(targetId, source, game);
-                if (target.doneChosing()) {
+                if (target.doneChoosing()) {
                     targets.clear();
                     return true;
                 }
@@ -762,14 +762,14 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
     }
 
     @Override
-    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
+    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
         if (targets.isEmpty()) {
-            return super.choose(outcome, cards, target, game);
+            return super.choose(outcome, cards, target, source, game);
         }
-        if (!target.doneChosing()) {
+        if (!target.doneChoosing()) {
             for (UUID targetId : targets) {
                 target.add(targetId, game);
-                if (target.doneChosing()) {
+                if (target.doneChoosing()) {
                     targets.clear();
                     return true;
                 }
@@ -844,7 +844,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
     }
 
     private List<Permanent> getAttackers(Game game) {
-        List<UUID> attackersUUID = game.getCombat().getAttackers();
+        Set<UUID> attackersUUID = game.getCombat().getAttackers();
         if (attackersUUID.isEmpty()) {
             return null;
         }

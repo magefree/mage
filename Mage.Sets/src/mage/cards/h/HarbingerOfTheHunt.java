@@ -42,10 +42,10 @@ public final class HarbingerOfTheHunt extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // {2}{R}: Harbinger of the Hunt deals 1 damage to each creature without flying.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter), new ManaCostsImpl("{2}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter), new ManaCostsImpl<>("{2}{R}")));
         
         // {2}{G}: Harbinger of the Hunt deals 1 damage to each other creature with flying.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter2), new ManaCostsImpl("{2}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter2), new ManaCostsImpl<>("{2}{G}")));
     }
 
     private HarbingerOfTheHunt(final HarbingerOfTheHunt card) {

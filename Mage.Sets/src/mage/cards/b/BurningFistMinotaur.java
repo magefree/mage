@@ -33,7 +33,7 @@ public final class BurningFistMinotaur extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // {1}{R}, Discard a card: Burning-Fist Minotaur gets +2/+0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
     }

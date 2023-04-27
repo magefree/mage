@@ -23,7 +23,6 @@ public class ArchfiendsVesselTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Demon Token", 1);
         assertPermanentCount(playerA, archfiendsVessel, 0);
@@ -41,12 +40,11 @@ public class ArchfiendsVesselTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Yawgmoth's Will");
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 10);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Yawgmoth's Will");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Yawgmoth's Will", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, archfiendsVessel);
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Demon Token", 1);
         assertPermanentCount(playerA, archfiendsVessel, 0);
@@ -55,7 +53,7 @@ public class ArchfiendsVesselTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void diesOnStack() {
+    public void diesWithAbilityStack() {
         // If Archfiend’s Vessel leaves the battlefield while its triggered ability is on the stack,
         // you can’t exile it from the zone it’s put into, so you won’t create a Demon.
 
@@ -64,14 +62,15 @@ public class ArchfiendsVesselTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Fatal Push");
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Exhume");
         addTarget(playerA, archfiendsVessel);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fatal Push");
-        addTarget(playerA, archfiendsVessel);
-        setStrictChooseMode(true);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fatal Push", archfiendsVessel);
+
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Demon Token", 0);
         assertPermanentCount(playerA, archfiendsVessel, 0);

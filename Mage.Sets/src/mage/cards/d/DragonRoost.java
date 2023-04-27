@@ -20,7 +20,7 @@ public final class DragonRoost extends CardImpl {
     public DragonRoost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R}{R}");
 
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DragonToken2(), 1), new ManaCostsImpl("{5}{R}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DragonToken2(), 1), new ManaCostsImpl<>("{5}{R}{R}")));
     }
 
     private DragonRoost(final DragonRoost card) {

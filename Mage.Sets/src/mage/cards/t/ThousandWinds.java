@@ -39,7 +39,7 @@ public final class ThousandWinds extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Morph {5}{U}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{5}{U}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{5}{U}{U}")));
         // When Thousand Winds is turned face up, return all other tapped creatures to their owners' hands.
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new ReturnToHandFromBattlefieldAllEffect(filter)));
     }

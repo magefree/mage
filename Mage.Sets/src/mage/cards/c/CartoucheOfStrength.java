@@ -38,7 +38,7 @@ public final class CartoucheOfStrength extends CardImpl {
         TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When Cartouche of Strength enters the battlefield, you may have enchanted creature fight target creature an opponent controls.
@@ -69,8 +69,11 @@ public final class CartoucheOfStrength extends CardImpl {
  * @author stravant
  */
 class FightEnchantedTargetEffect extends OneShotEffect {
+
     public FightEnchantedTargetEffect() {
         super(Outcome.Damage);
+        this.staticText = "you may have enchanted creature fight target creature an opponent controls. " +
+                "<i>(Each deals damage equal to its power to the other.)</i>";
     }
 
     public FightEnchantedTargetEffect(final FightEnchantedTargetEffect effect) {
@@ -105,11 +108,4 @@ class FightEnchantedTargetEffect extends OneShotEffect {
     public FightEnchantedTargetEffect copy() {
         return new FightEnchantedTargetEffect(this);
     }
-
-    @Override
-    public String getText(Mode mode) {
-        return "you may have enchanted creature fight target creature an opponent controls. " +
-                "<i>(Each deals damage equal to its power to the other.)</i>";
-    }
-
 }

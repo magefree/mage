@@ -3,19 +3,16 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LandfallAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.combat.GoadTargetEffect;
+import mage.abilities.effects.common.combat.GoadAllEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.constants.TargetController;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPlayer;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -23,6 +20,12 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class GeodeRager extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterCreaturePermanent();
+
+    static {
+        filter.add(TargetController.SOURCE_TARGETS.getControllerPredicate());
+    }
 
     public GeodeRager(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
@@ -35,7 +38,7 @@ public final class GeodeRager extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Landfall — Whenever a land enters the battlefield under your control, goad each creature target player controls.
-        Ability ability = new LandfallAbility(new GeodeRagerEffect());
+        Ability ability = new LandfallAbility(new GoadAllEffect(filter).setText("goad each creature target player controls"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
@@ -47,35 +50,5 @@ public final class GeodeRager extends CardImpl {
     @Override
     public GeodeRager copy() {
         return new GeodeRager(this);
-    }
-}
-
-class GeodeRagerEffect extends OneShotEffect {
-
-    GeodeRagerEffect() {
-        super(Outcome.Benefit);
-        staticText = "goad each creature target player controls";
-    }
-
-    private GeodeRagerEffect(final GeodeRagerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GeodeRagerEffect copy() {
-        return new GeodeRagerEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_CONTROLLED_CREATURE, source.getFirstTarget(), source, game
-        )) {
-            if (permanent == null) {
-                continue;
-            }
-            game.addEffect(new GoadTargetEffect().setTargetPointer(new FixedTarget(permanent, game)), source);
-        }
-        return true;
     }
 }

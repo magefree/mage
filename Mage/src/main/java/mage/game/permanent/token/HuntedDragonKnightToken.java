@@ -21,7 +21,7 @@ public final class HuntedDragonKnightToken extends TokenImpl {
         toughness = new MageInt(2);
         this.addAbility(FirstStrikeAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("ORI", "RTR", "C15");
+        availableImageSetCodes = Arrays.asList("ORI", "RTR", "C15", "CM2");
     }
 
     public HuntedDragonKnightToken(final HuntedDragonKnightToken token) {
@@ -37,7 +37,7 @@ public final class HuntedDragonKnightToken extends TokenImpl {
         super.setExpansionSetCodeForImage(code);
 
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C15")) {
-            setTokenType(2);
+            setTokenType(1);
         }
     }
 }

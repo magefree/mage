@@ -49,7 +49,7 @@ public final class DemonOfDarkSchemes extends CardImpl {
         // {2}{B}, Pay {E}{E}{E}{E}: Put target creature card from a graveyard onto the battlefield under your control tapped.
         effect = new ReturnFromGraveyardToBattlefieldTargetEffect(true);
         effect.setText("Put target creature card from a graveyard onto the battlefield under your control tapped");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}{B}"));
         ability.addCost(new PayEnergyCost(4));
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
         this.addAbility(ability);

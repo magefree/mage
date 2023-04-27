@@ -24,8 +24,6 @@ import java.util.UUID;
  */
 public final class FaeOfWishes extends AdventureCard {
 
-    private static final FilterCard filter = new FilterCard("two cards");
-
     public FaeOfWishes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{1}{U}", "Granted", "{3}{U}");
 
@@ -39,9 +37,9 @@ public final class FaeOfWishes extends AdventureCard {
 
         // {1}{U}, Discard two cards: Return Fae of Wishes to its owner's hand.
         Ability ability = new SimpleActivatedAbility(
-                new ReturnToHandSourceEffect(true), new ManaCostsImpl("{1}{U}")
+                new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{1}{U}")
         );
-        ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, filter)));
+        ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS)));
         this.addAbility(ability);
 
         // Granted

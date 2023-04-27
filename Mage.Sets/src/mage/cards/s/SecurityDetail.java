@@ -26,7 +26,7 @@ public final class SecurityDetail extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(
                 Zone.BATTLEFIELD,
                 new CreateTokenEffect(new SoldierToken()),
-                new ManaCostsImpl("{W}{W}"),
+                new ManaCostsImpl<>("{W}{W}"),
                 1,
                 new CreatureCountCondition(0, TargetController.YOU)
         ));

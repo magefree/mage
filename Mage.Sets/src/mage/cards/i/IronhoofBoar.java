@@ -11,6 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -37,6 +38,7 @@ public final class IronhoofBoar extends CardImpl {
                 .setText("target creature gets +3/+1"));
         ability.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance())
                 .setText("and gains trample until end of turn"));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

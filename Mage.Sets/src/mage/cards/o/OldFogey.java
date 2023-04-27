@@ -36,7 +36,7 @@ public final class OldFogey extends CardImpl {
         // Phasing
         this.addAbility(PhasingAbility.getInstance());
         // Cumulative upkeep {1}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")));
         // Echo {G}{G}
         this.addAbility(new EchoAbility("{G}{G}"));
         // Fading 3

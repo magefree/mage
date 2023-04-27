@@ -9,6 +9,11 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
+ * {@link mage.cards.s.SwarmSurge Swarm Surge}
+ * {2}{B}
+ * Devoid
+ * Creatures you control get +2/+0 until end of turn.
+ * Colorless creatures you control also gain first strike until end of turn.
  *
  * @author LevelX2
  */
@@ -23,12 +28,9 @@ public class SwarmSurgeTest extends CardTestPlayerBase {
         // When Birthing Hulk enters the battlefield, put two 1/1 colorless Eldrazi Scion creature tokens onto the battlefield. They have "Sacrifice this creature: Add {C}."
         // {1}{C}: Regenerate Birthing Hulk.
         addCard(Zone.HAND, playerA, "Birthing Hulk"); // {6}{G}  5/4
-        // Devoid
-        // Creatures you control get +2/+0 until end of turn.
-        // Colorless creatures you control also gain first strike until end of turn.
         addCard(Zone.HAND, playerA, "Swarm Surge"); // {2}{B}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Birthing Hulk");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Birthing Hulk", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Swarm Surge");
 
         attack(1, playerA, "Silvercoat Lion");

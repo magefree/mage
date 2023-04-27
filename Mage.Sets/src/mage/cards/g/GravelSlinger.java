@@ -35,7 +35,7 @@ public final class GravelSlinger extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent(new FilterAttackingOrBlockingCreature()));
         this.addAbility(ability);
         // Morph {1}{W}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{W}")));
     }
 
     private GravelSlinger(final GravelSlinger card) {

@@ -53,6 +53,7 @@ class RuthlessDeathfangTriggeredAbility extends TriggeredAbilityImpl {
     public RuthlessDeathfangTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "target opponent"), false);
         setLeavesTheBattlefieldTrigger(true);
+        setTriggerPhrase("Whenever you sacrifice a creature, ");
     }
 
     public RuthlessDeathfangTriggeredAbility(final RuthlessDeathfangTriggeredAbility ability) {
@@ -73,10 +74,5 @@ class RuthlessDeathfangTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(this.getControllerId())
                 && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).isCreature(game);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you sacrifice a creature, " ;
     }
 }

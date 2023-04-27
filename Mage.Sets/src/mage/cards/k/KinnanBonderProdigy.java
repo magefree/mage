@@ -5,7 +5,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.TapForManaAllTriggeredManaAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.mana.AddManaOfAnyTypeProducedEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -52,7 +51,7 @@ public final class KinnanBonderProdigy extends CardImpl {
         // Put the rest on the bottom of your library in a random order.
         this.addAbility(new SimpleActivatedAbility(
                 new LookLibraryAndPickControllerEffect(5, 1, filter2, PutCards.BATTLEFIELD, PutCards.BOTTOM_RANDOM),
-                new ManaCostsImpl("{5}{G}{U}")));
+                new ManaCostsImpl<>("{5}{G}{U}")));
     }
 
     private KinnanBonderProdigy(final KinnanBonderProdigy card) {

@@ -67,6 +67,7 @@ class VoltaicVisionaryTriggeredAbility extends TriggeredAbilityImpl {
     VoltaicVisionaryTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TransformSourceEffect());
         this.addWatcher(new VoltaicVisionaryWatcher());
+        setTriggerPhrase("When you play a card exiled with {this}, ");
     }
 
     private VoltaicVisionaryTriggeredAbility(final VoltaicVisionaryTriggeredAbility ability) {
@@ -89,13 +90,11 @@ class VoltaicVisionaryTriggeredAbility extends TriggeredAbilityImpl {
         if (!this.isControlledBy(event.getPlayerId())) {
             return false;
         }
-        Card card = game.getCard(event.getTargetId());
+        Card card = game.getCard(event.getSourceId());
+        if (card == null) {
+            return false;
+        }
         return VoltaicVisionaryWatcher.checkCard(card, this, game);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When you play a card exiled with {this}, ";
     }
 }
 
@@ -111,14 +110,18 @@ class VoltaicVisionaryWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() != GameEvent.EventType.ZONE_CHANGE
-                || ((ZoneChangeEvent) event).getToZone() != Zone.EXILED) {
+                || ((ZoneChangeEvent) event).getToZone() != Zone.EXILED
+                || ((ZoneChangeEvent) event).getFromZone() != Zone.LIBRARY) {
             return;
         }
         Card card = game.getCard(event.getTargetId());
+        if (card == null) {
+            return;
+        }
         UUID exileId = game
                 .getExile()
                 .getExileZones()
-                .stream().filter(exileZone -> exileZone.contains(card))
+                .stream().filter(exileZone -> exileZone.contains(card.getId()))
                 .map(ExileZone::getId)
                 .findFirst()
                 .orElse(null);
@@ -137,9 +140,8 @@ class VoltaicVisionaryWatcher extends Watcher {
     static boolean checkCard(Card card, Ability source, Game game) {
         return card != null
                 && game.getState()
-                .getWatcher(VoltaicVisionaryWatcher.class)
-                .map
-                .getOrDefault(CardUtil.getCardExileZoneId(game, source), emptySet)
-                .contains(new MageObjectReference(card, game, -1));
+                        .getWatcher(VoltaicVisionaryWatcher.class).map
+                        .getOrDefault(CardUtil.getCardExileZoneId(game, source), emptySet)
+                        .contains(new MageObjectReference(card, game, -1));
     }
 }

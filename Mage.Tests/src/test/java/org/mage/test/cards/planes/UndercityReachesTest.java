@@ -25,7 +25,6 @@ public class UndercityReachesTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 2);
         assertHandCount(playerA, 1);
@@ -45,7 +44,6 @@ public class UndercityReachesTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20 - 2);
         assertHandCount(playerB, 1 + 1); // +1 from turn draw, +1 from trigger

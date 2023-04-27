@@ -39,8 +39,6 @@ public class CumulativeUpkeepTest extends CardTestPlayerBase {
         setStopAt(7, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-        
         assertGraveyardCount(playerA, "Phobian Phantasm", 1);
         
         assertLife(playerA, 20);
@@ -95,8 +93,6 @@ public class CumulativeUpkeepTest extends CardTestPlayerBase {
         setStopAt(5, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-        
         assertLife(playerA, 40);
         assertLife(playerB, 21);  
         

@@ -30,7 +30,7 @@ public final class KuroPitlord extends CardImpl {
         this.power = new MageInt(9);
         this.toughness = new MageInt(9);
         // At the beginning of your upkeep, sacrifice Kuro, Pitlord unless you pay {B}{B}{B}{B}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{B}{B}{B}{B}")), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{B}{B}{B}{B}")), TargetController.YOU, false));
         // Pay 1 life: Target creature gets -1/-1 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-1, -1, Duration.EndOfTurn), new PayLifeCost(1));
         ability.addTarget(new TargetCreaturePermanent());

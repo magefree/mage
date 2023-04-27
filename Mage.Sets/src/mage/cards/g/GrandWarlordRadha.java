@@ -87,6 +87,7 @@ class GrandWarlordRadhaTriggeredAbility extends TriggeredAbilityImpl {
 
     public GrandWarlordRadhaTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GrandWarlordRadhaEffect(), false);
+        setTriggerPhrase("Whenever one or more creatures you control attack, ");
     }
 
     public GrandWarlordRadhaTriggeredAbility(final GrandWarlordRadhaTriggeredAbility ability) {
@@ -114,11 +115,6 @@ class GrandWarlordRadhaTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever one or more creatures you control attack, " ;
     }
 }
 

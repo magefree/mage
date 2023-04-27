@@ -17,7 +17,7 @@ public final class HeroesRemembered extends CardImpl {
         //You gain 20 life.
         this.getSpellAbility().addEffect(new GainLifeEffect(20));
         //Suspend 10-{W}
-        this.addAbility(new SuspendAbility(10, new ManaCostsImpl("{W}"), this));
+        this.addAbility(new SuspendAbility(10, new ManaCostsImpl<>("{W}"), this));
     }
 
     private HeroesRemembered(final HeroesRemembered card) {

@@ -38,6 +38,7 @@ public class LeavesBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         super(zone, effect, optional);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever " + filter.getMessage() + " leaves the battlefield, ");
     }
 
     protected LeavesBattlefieldAllTriggeredAbility(final LeavesBattlefieldAllTriggeredAbility ability) {
@@ -79,10 +80,5 @@ public class LeavesBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever " + filter.getMessage() + " leaves the battlefield, " ;
     }
 }

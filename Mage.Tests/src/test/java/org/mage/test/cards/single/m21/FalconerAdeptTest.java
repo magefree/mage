@@ -15,7 +15,6 @@ public class FalconerAdeptTest extends CardTestPlayerBase {
         attack(3, playerA, "Falconer Adept");
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertLife(playerB, 17);
     }
 }

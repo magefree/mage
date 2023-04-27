@@ -42,7 +42,7 @@ public class CryptGhastTest extends CardTestPlayerBase {
      */
     @Test
     public void TestExiled() {
-        //Extort (Whenever you cast a spell, you may pay {WB}. If you do, each opponent loses 1 life and you gain that much life.)
+        // Extort (Whenever you cast a spell, you may pay {WB}. If you do, each opponent loses 1 life and you gain that much life.)
         // Whenever you tap a Swamp for mana, add {B} (in addition to the mana the land produces).
         addCard(Zone.BATTLEFIELD, playerA, "Crypt Ghast", 1);
         // Imprint - Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with Mimic Vat to its owner's graveyard.
@@ -58,20 +58,17 @@ public class CryptGhastTest extends CardTestPlayerBase {
         // {X}{U}{R},{T}: Nin, the Pain Artist deals X damage to target creature. That creature's controller draws X cards.
         addCard(Zone.BATTLEFIELD, playerB, "Nin, the Pain Artist", 1);
 
+        // Remove the Crypt Ghast
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{X}{U}{R}, {T}: {this} deals X damage to target creature", "Crypt Ghast");
         setChoice(playerB, "X=2");
 
-        // Crypt Ghast may no longer give additional mana
-        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}");
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Erebos's Titan");
+        // Without Crypt Ghast, the land won't give extra mana
+        checkPlayableAbility("Not enough mana", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Erebos's", false);
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
-        assertPermanentCount(playerA, "Erebos's Titan", 0);
         assertTapped("Nin, the Pain Artist", true);
         assertExileCount("Crypt Ghast", 1);
-
     }
 }

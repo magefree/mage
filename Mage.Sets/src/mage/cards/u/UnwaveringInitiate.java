@@ -29,7 +29,7 @@ public final class UnwaveringInitiate extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Embalm {4}{W}
-        this.addAbility(new EmbalmAbility(new ManaCostsImpl("{4}{W}"), this));
+        this.addAbility(new EmbalmAbility(new ManaCostsImpl<>("{4}{W}"), this));
     }
 
     private UnwaveringInitiate(final UnwaveringInitiate card) {

@@ -76,7 +76,7 @@ class FrontierSiegeKhansTriggeredAbility extends TriggeredAbilityImpl {
 
     FrontierSiegeKhansTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddManaToManaPoolSourceControllerEffect(Mana.GreenMana(2)), false);
-
+        setTriggerPhrase("At the beginning of each of your main phases, ");
     }
 
     private FrontierSiegeKhansTriggeredAbility(final FrontierSiegeKhansTriggeredAbility ability) {
@@ -98,12 +98,6 @@ class FrontierSiegeKhansTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(this.controllerId);
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "At the beginning of each of your main phases, " ;
-    }
-
 }
 
 class FrontierSiegeFightEffect extends OneShotEffect {

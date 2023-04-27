@@ -56,6 +56,7 @@ class WindreaderSphinxTriggeredAbility extends TriggeredAbilityImpl {
 
     public WindreaderSphinxTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
+        setTriggerPhrase("Whenever a creature with flying attacks, ");
     }
 
     public WindreaderSphinxTriggeredAbility(final WindreaderSphinxTriggeredAbility ability) {
@@ -71,11 +72,6 @@ class WindreaderSphinxTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent attacker = game.getPermanent(event.getSourceId());
         return attacker != null && filter.match(attacker, game);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature with flying attacks, " ;
     }
 
     @Override

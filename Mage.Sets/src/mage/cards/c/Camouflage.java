@@ -3,8 +3,10 @@ package mage.cards.c;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
@@ -71,7 +73,7 @@ class CamouflageEffect extends ContinuousRuleModifyingEffectImpl {
     public CamouflageEffect copy() {
         return new CamouflageEffect(this);
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DECLARING_BLOCKERS;
@@ -98,7 +100,7 @@ class CamouflageEffect extends ContinuousRuleModifyingEffectImpl {
                     for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), defenderId, game)) {
                         permanent.setBlocking(0);
                     }
-                    
+
                     boolean declinedChoice = false;
                     while (masterList.size() < attackerCount) {
                         List<Permanent> newPile = new ArrayList<>();
@@ -133,7 +135,7 @@ class CamouflageEffect extends ContinuousRuleModifyingEffectImpl {
                             }
                         }
                         masterList.add(newPile);
-                        
+
                         StringBuilder sb = new StringBuilder("Blocker pile of ").append(defender.getLogName()).append(" (no. " + masterList.size() + "): ");
                         int i = 0;
                         for (Permanent permanent : newPile) {
@@ -168,6 +170,7 @@ class CamouflageEffect extends ContinuousRuleModifyingEffectImpl {
                     }
                     
                     List<List<Permanent>> allPiles = masterMap.get(playerId);
+                    Set<UUID> blockerIds = new HashSet<>();
                     for (List<Permanent> pile : allPiles) {
                         if (available.isEmpty()) {
                             break;
@@ -180,18 +183,21 @@ class CamouflageEffect extends ContinuousRuleModifyingEffectImpl {
                                 CombatGroup group = game.getCombat().findGroup(attacker.getId());
                                 if (group != null) {
                                     if (blocker.canBlock(attacker.getId(), game) && (blocker.getMaxBlocks() == 0 || group.getAttackers().size() <= blocker.getMaxBlocks())) {
+                                        blockerIds.add(blocker.getId());
                                         boolean notYetBlocked = group.getBlockers().isEmpty();
                                         group.addBlockerToGroup(blocker.getId(), blocker.getControllerId(), game);
                                         game.getCombat().addBlockingGroup(blocker.getId(), attacker.getId(), blocker.getControllerId(), game);
                                         if (notYetBlocked) {
                                             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKED, attacker.getId(), source, null));
                                         }
-                                        // TODO: find an alternate event solution for multi-blockers (as per issue #4285), this will work fine for single blocker creatures though
                                         game.fireEvent(new BlockerDeclaredEvent(attacker.getId(), blocker.getId(), blocker.getControllerId()));
                                     }
                                 }
                             }
                         }
+                    }
+                    for (UUID blockerId : blockerIds) {
+                        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKS, blockerId, source, null));
                     }
                 }
             }

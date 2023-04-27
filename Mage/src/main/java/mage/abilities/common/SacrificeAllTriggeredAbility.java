@@ -23,6 +23,7 @@ public class SacrificeAllTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
         this.sacrificingPlayer = sacrificingPlayer;
+        setTriggerPhrase(generateTriggerPhrase());
     }
 
     public SacrificeAllTriggeredAbility(final SacrificeAllTriggeredAbility ability) {
@@ -61,15 +62,17 @@ public class SacrificeAllTriggeredAbility extends TriggeredAbilityImpl {
         return sacrificed && filter.match(sacrificedPermanent, getControllerId(), this, game);
     }
 
-    @Override
-    public String getTriggerPhrase() {
-        String targetControllerText = "a player sacrifices ";
+    private String generateTriggerPhrase() {
+        String targetControllerText;
         switch (sacrificingPlayer) {
             case YOU:
                 targetControllerText = "you sacrifice ";
                 break;
             case OPPONENT:
                 targetControllerText = "an opponent sacrifices ";
+                break;
+            default:
+                targetControllerText = "a player sacrifices ";
                 break;
         }
         return "Whenever " + targetControllerText + filter.getMessage() + ", ";

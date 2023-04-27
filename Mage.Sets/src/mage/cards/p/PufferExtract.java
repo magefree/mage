@@ -28,7 +28,7 @@ public final class PufferExtract extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // {X}, {T}: Target creature you control gets +X/+X until end of turn. Destroy it at the beginning of the next end step.
-        Ability ability = new SimpleActivatedAbility(new PufferExtractEffect(), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(new PufferExtractEffect(), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);

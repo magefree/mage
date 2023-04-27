@@ -11,6 +11,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.command.Emblem;
 import mage.target.common.TargetCardInLibrary;
+import mage.constants.Zone;
 
 /**
  * @author TheElk801
@@ -31,9 +32,9 @@ public final class KaitoShizukiEmblem extends Emblem {
         this.setName("Emblem Kaito");
         this.setExpansionSetCodeForImage("NEO");
         this.getAbilities().add(new DealsDamageToAPlayerAllTriggeredAbility(
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)),
+                Zone.COMMAND, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)),
                 StaticFilters.FILTER_CONTROLLED_A_CREATURE, false,
-                SetTargetPointer.NONE, true
+                SetTargetPointer.NONE, true, false
         ));
     }
 }

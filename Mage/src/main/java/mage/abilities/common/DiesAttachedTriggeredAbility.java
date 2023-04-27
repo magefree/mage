@@ -40,6 +40,7 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
         this.attachedDescription = attachedDescription;
         this.diesRuleText = diesRuleText;
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase(generateTriggerPhrase());
     }
 
     public DiesAttachedTriggeredAbility(final DiesAttachedTriggeredAbility ability) {
@@ -126,8 +127,7 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
         return true;
     }
 
-    @Override
-    public String getTriggerPhrase() {
+    private String generateTriggerPhrase() {
         StringBuilder sb = new StringBuilder();
         if (attachedDescription.startsWith("equipped")) {
             sb.append("Whenever ");

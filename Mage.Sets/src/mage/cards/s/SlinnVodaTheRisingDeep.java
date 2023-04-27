@@ -49,7 +49,7 @@ public final class SlinnVodaTheRisingDeep extends CardImpl {
         // When Slinn Voda, the Rising Deep enters the battlefield, if it was kicked, return all creatures to their owners' hands except for Merfolk, Krakens, Leviathans, Octopuses, and Serpents.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReturnToHandFromBattlefieldAllEffect(filter)),
-                KickedCondition.instance,
+                KickedCondition.ONCE,
                 "when {this} enters the battlefield, if it was kicked, "
                 + "return all creatures to their owners' hands except for "
                 + "Merfolk, Krakens, Leviathans, Octopuses, and Serpents."

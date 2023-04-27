@@ -25,7 +25,7 @@ import java.util.UUID;
  * @author ciaccona007
  */
 public final class Bifurcate extends CardImpl {
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creatures");
 
     static {
         filter.add(TokenPredicate.FALSE);

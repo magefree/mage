@@ -26,7 +26,7 @@ public final class BranchsnapLorian extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Morph {G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{G}")));
     }
 
     private BranchsnapLorian(final BranchsnapLorian card) {

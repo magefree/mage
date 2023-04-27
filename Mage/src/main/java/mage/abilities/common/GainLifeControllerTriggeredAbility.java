@@ -25,6 +25,7 @@ public class GainLifeControllerTriggeredAbility extends TriggeredAbilityImpl {
     public GainLifeControllerTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever you gain life, ");
     }
 
     public GainLifeControllerTriggeredAbility(final GainLifeControllerTriggeredAbility ability) {
@@ -45,17 +46,12 @@ public class GainLifeControllerTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(this.getControllerId())) {
+            this.getEffects().setValue("gainedLife", event.getAmount());
             if (setTargetPointer) {
                 this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
-                this.getEffects().setValue("gainedLife", event.getAmount());
             }
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you gain life, ";
     }
 }

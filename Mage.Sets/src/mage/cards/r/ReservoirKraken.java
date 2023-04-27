@@ -5,6 +5,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.SourceTappedCondition;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
@@ -41,7 +42,7 @@ public final class ReservoirKraken extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new GenericManaCost(2), false));
 
         // At the beginning of each combat, if Reservoir Kraken is untapped, any opponent may tap an untapped creature they control. If they do, tap Reservoir Kraken and create a 1/1 blue Fish creature token with "This creature can't be blocked."
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(

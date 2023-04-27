@@ -19,6 +19,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.common.TargetControlledCreaturePermanent;
  
 /**
  *
@@ -32,8 +33,9 @@ public final class CivicSaber extends CardImpl {
  
         // Equipped creature gets +1/+0 for each of its colors.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(new CivicSaberColorCount(), StaticValue.get(0), Duration.WhileOnBattlefield)));
+
         // Equip {1}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), new TargetControlledCreaturePermanent(), false));
     }
  
     private CivicSaber(final CivicSaber card) {

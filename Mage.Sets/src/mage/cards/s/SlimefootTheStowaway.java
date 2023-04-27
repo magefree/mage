@@ -43,7 +43,7 @@ public final class SlimefootTheStowaway extends CardImpl {
         this.addAbility(ability);
 
         // {4}: Create a 1/1 green Saproling creature token.
-        this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new SaprolingToken()), new ManaCostsImpl("{4}")));
+        this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new SaprolingToken()), new ManaCostsImpl<>("{4}")));
     }
 
     private SlimefootTheStowaway(final SlimefootTheStowaway card) {

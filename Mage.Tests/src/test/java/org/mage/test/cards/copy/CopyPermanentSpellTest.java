@@ -36,7 +36,6 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Grizzly Bears", 2);
     }
@@ -53,7 +52,6 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Grizzly Bears", 1);
         assertPermanentCount(playerA, "Holy Strength", 2);
@@ -72,7 +70,6 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Centaur Courser", 1);
         assertPowerToughness(playerA, "Centaur Courser", 1, 1);
@@ -94,7 +91,6 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Goblin Bushwhacker", 2);
         assertPowerToughness(playerA, "Grizzly Bears", 4, 2);
@@ -112,7 +108,6 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Aether Figment", 2);
         assertPowerToughness(playerA, "Aether Figment", 3, 3, Filter.ComparisonScope.All);
@@ -131,7 +126,6 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Reckless Bushwhacker", 2);
         assertPowerToughness(playerA, "Memnite", 3, 1, Filter.ComparisonScope.All);
@@ -149,7 +143,6 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Grizzly Bears", 1);
         assertPowerToughness(playerA, "Grizzly Bears", 6, 6);
@@ -169,7 +162,6 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Grizzly Bears", 1);
         assertPowerToughness(playerA, "Grizzly Bears", 4, 4);
@@ -199,7 +191,6 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Grizzly Bears", 0);
         assertGraveyardCount(playerA, "Grizzly Bears", 1);
@@ -225,7 +216,6 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Grizzly Bears", 0);
         assertGraveyardCount(playerA, "Grizzly Bears", 1);
@@ -253,7 +243,6 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Grizzly Bears", 0);
         assertGraveyardCount(playerA, "Grizzly Bears", 1);

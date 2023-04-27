@@ -22,6 +22,7 @@ public final class DinosaurBeastToken extends TokenImpl {
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
         addAbility(TrampleAbility.getInstance());
+        setOriginalExpansionSetCode("IKO");
     }
 
     private DinosaurBeastToken(final DinosaurBeastToken token) {

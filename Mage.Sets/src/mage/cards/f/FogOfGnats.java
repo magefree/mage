@@ -29,7 +29,7 @@ public final class FogOfGnats extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {B}: Regenerate Fog of Gnats.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
     }
 
     private FogOfGnats(final FogOfGnats card) {

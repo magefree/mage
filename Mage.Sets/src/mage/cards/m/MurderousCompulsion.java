@@ -32,7 +32,7 @@ public final class MurderousCompulsion extends CardImpl {
         getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
 
         // Madness {1}{B} <i>(If you discard card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)<i>
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{1}{B}")));
     }
 
     private MurderousCompulsion(final MurderousCompulsion card) {

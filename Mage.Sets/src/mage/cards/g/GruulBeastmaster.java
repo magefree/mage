@@ -36,9 +36,7 @@ public final class GruulBeastmaster extends CardImpl {
 
     public GruulBeastmaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
-
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.SHAMAN);
+        this.subtype.add(SubType.HUMAN, SubType.SHAMAN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
@@ -47,8 +45,7 @@ public final class GruulBeastmaster extends CardImpl {
 
         // Whenever Gruul Beastmaster attacks, another target creature you control gets +X/+0 until end of turn, where X is Gruul Beastmaster's power.
         Ability ability = new AttacksTriggeredAbility(new BoostTargetEffect(
-                xValue, StaticValue.get(0), Duration.EndOfTurn, true
-        ), false);
+                xValue, StaticValue.get(0), Duration.EndOfTurn), false);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

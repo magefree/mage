@@ -29,7 +29,7 @@ public final class DutyBoundDead extends CardImpl {
         // Exalted
         this.addAbility(new ExaltedAbility());
         // {3}{B}: Regenerate Duty-Bound Dead.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{3}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{3}{B}")));
     }
 
     private DutyBoundDead(final DutyBoundDead card) {

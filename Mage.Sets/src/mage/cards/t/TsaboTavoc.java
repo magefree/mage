@@ -47,7 +47,7 @@ public final class TsaboTavoc extends CardImpl {
         // protection from legendary creatures
         this.addAbility(new ProtectionAbility(filter));
         // {B}{B}, {tap}: Destroy target legendary creature. It can't be regenerated.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(true), new ManaCostsImpl("{B}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(true), new ManaCostsImpl<>("{B}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filterDestroy));
         this.addAbility(ability);        

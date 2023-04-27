@@ -38,7 +38,7 @@ public final class WindbriskHeights extends CardImpl {
                 new HideawayPlayEffect(), WindbriskHeightsAttackersCondition.instance,
                 "you may play the exiled card without paying its mana cost " +
                         "if you attacked with three or more creatures this turn"
-        ), new ManaCostsImpl("{W}"));
+        ), new ManaCostsImpl<>("{W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability, new PlayerAttackedWatcher());
     }

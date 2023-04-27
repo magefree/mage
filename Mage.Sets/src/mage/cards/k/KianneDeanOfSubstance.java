@@ -51,7 +51,7 @@ public final class KianneDeanOfSubstance extends ModalDoubleFacesCard {
         this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(FractalToken.getEffect(
                 KianneDeanOfSubstanceValue.instance, "Put a +1/+1 counter on it for each different mana value " +
                         "among nonland cards you own in exile with study counters on them"
-        ), new ManaCostsImpl("{4}{G}")).addHint(KianneDeanOfSubstanceHint.instance));
+        ), new ManaCostsImpl<>("{4}{G}")).addHint(KianneDeanOfSubstanceHint.instance));
 
         // 2.
         // Imbraham, Dean of Theory
@@ -64,7 +64,7 @@ public final class KianneDeanOfSubstance extends ModalDoubleFacesCard {
 
         // {X}{U}{U}, {T}: Exile the top X cards of your library and put a study counter on each of them. Then you may put a card you own in exile with a study counter on it into your hand.
         Ability ability = new SimpleActivatedAbility(
-                new ImbrahamDeanOfTheoryEffect(), new ManaCostsImpl("{X}{U}{U}")
+                new ImbrahamDeanOfTheoryEffect(), new ManaCostsImpl<>("{X}{U}{U}")
         );
         ability.addCost(new TapSourceCost());
         this.getRightHalfCard().addAbility(ability);

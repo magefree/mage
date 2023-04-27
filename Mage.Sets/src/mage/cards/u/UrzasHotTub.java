@@ -31,7 +31,7 @@ public class UrzasHotTub extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {2}, Discard a card: Search your library for a card that shares a complete word in its name with the discarded card, reveal it, put it into your hand, then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UrzasHotTubEffect(), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UrzasHotTubEffect(), new ManaCostsImpl<>("{2}"));
         ability.addCost(new DiscardTargetCost(new TargetCardInHand()));
         this.addAbility(ability);
     }

@@ -30,7 +30,7 @@ public final class VolunteerReserves extends CardImpl {
         this.addAbility(BandingAbility.getInstance());
 
         // Cumulative upkeep-Pay {1}.
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")));
     }
 
     public VolunteerReserves (final VolunteerReserves card) {

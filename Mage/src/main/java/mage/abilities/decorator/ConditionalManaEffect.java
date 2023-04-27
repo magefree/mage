@@ -85,4 +85,9 @@ public class ConditionalManaEffect extends ManaEffect {
         }
         return mana;
     }
+
+    @Override
+    public Condition getCondition() {
+        return condition;
+    }
 }

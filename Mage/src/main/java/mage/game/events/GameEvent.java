@@ -65,7 +65,8 @@ public class GameEvent implements Serializable {
         //player events
         /* ZONE_CHANGE
          targetId    id of the zone changing object
-         sourceId    sourceId of the ability with the object moving effect (WARNING, can be null if it move of fizzled spells)
+         sourceId    sourceId of the ability with the object moving effect
+                     WARNING: can be null if moved by game rules (e.g. draw in draw step, discard in cleanup step, fizzled spell)
          playerId    controller of the moved object
          amount      not used for this event
          flag        not used for this event
@@ -102,6 +103,7 @@ public class GameEvent implements Serializable {
         DAMAGE_PLAYER,
         MILL_CARDS,
         MILLED_CARD,
+        MILLED_CARDS,
         /* DAMAGED_PLAYER
          targetId    the id of the damaged player
          sourceId    sourceId of the ability which caused the damage
@@ -110,7 +112,12 @@ public class GameEvent implements Serializable {
          flag        true = comabat damage - other damage = false
          */
         DAMAGED_PLAYER,
+
+        /* DAMAGED_PLAYER_BATCH
+         combines all player damaged events in one single event
+         */
         DAMAGED_PLAYER_BATCH,
+
         /* DAMAGE_CAUSES_LIFE_LOSS,
          targetId    the id of the damaged player
          sourceId    sourceId of the ability which caused the damage, can be null for default events like combat
@@ -199,7 +206,6 @@ public class GameEvent implements Serializable {
          playerId    player that tries to use this ability
          */
         TRIGGERED_ABILITY,
-        ABILITY_TRIGGERED,
         RESOLVING_ABILITY,
         /* COPY_STACKOBJECT
          targetId    id of the spell/ability to copy
@@ -297,14 +303,16 @@ public class GameEvent implements Serializable {
          */
         BLOCKER_DECLARED,
         CREATURE_BLOCKED,
+        CREATURE_BLOCKS,
         BATCH_BLOCK_NONCOMBAT,
         UNBLOCKED_ATTACKER,
         SEARCH_LIBRARY, LIBRARY_SEARCHED,
         SHUFFLE_LIBRARY, LIBRARY_SHUFFLED,
         ENCHANT_PLAYER, ENCHANTED_PLAYER,
         CAN_TAKE_MULLIGAN,
-        SCRY, SCRIED,
+        SCRY, SCRIED, SCRY_TO_BOTTOM,
         SURVEIL, SURVEILED,
+        PROLIFERATE, PROLIFERATED,
         FATESEALED,
         FLIP_COIN, COIN_FLIPPED,
         REPLACE_ROLLED_DIE, // for Clam-I-Am workaround only
@@ -339,8 +347,7 @@ public class GameEvent implements Serializable {
          */
         UNTAP, UNTAPPED,
         FLIP, FLIPPED,
-        UNFLIP, UNFLIPPED,
-        TRANSFORM, TRANSFORMING, TRANSFORMED,
+        TRANSFORMING, TRANSFORMED,
         ADAPT,
         BECOMES_MONSTROUS,
         /* BECOMES_EXERTED
@@ -353,6 +360,14 @@ public class GameEvent implements Serializable {
         BECOMES_EXERTED,
         BECOMES_RENOWNED,
         GAINS_CLASS_LEVEL,
+        /* CREATURE_ENLISTED
+         targetId    id of the enlisted creature
+         sourceId    id of the creature that enlisted
+         playerId    player who controls the creatures
+         amount      not used for this event
+         flag        not used for this event
+         */
+        CREATURE_ENLISTED,
         /* BECOMES_MONARCH
          targetId    playerId of the player that becomes the monarch
          sourceId    id of the source object that created that effect, if no effect exist it's null
@@ -362,6 +377,7 @@ public class GameEvent implements Serializable {
          */
         BECOME_MONARCH,
         BECOMES_MONARCH,
+        TOOK_INITIATIVE,
         BECOMES_DAY_NIGHT,
         MEDITATED,
         PHASE_OUT, PHASED_OUT,
@@ -376,9 +392,15 @@ public class GameEvent implements Serializable {
          flag        not used for this event
          */
         OPTION_USED,
+
         DAMAGE_PERMANENT,
         DAMAGED_PERMANENT,
+
+        /*  DAMAGED_PERMANENT_BATCH
+         combine all permanent damage events to single event
+         */
         DAMAGED_PERMANENT_BATCH,
+
         DESTROY_PERMANENT,
         /* DESTROY_PERMANENT_BY_LEGENDARY_RULE
          targetId    id of the permanent to destroy

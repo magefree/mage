@@ -30,7 +30,7 @@ public final class WhisperingShade extends CardImpl {
         // Swampwalk
         this.addAbility(new SwampwalkAbility());
         // {B}: Whispering Shade gets +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,1,Duration.EndOfTurn), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,1,Duration.EndOfTurn), new ManaCostsImpl<>("{B}")));
     }
 
     private WhisperingShade(final WhisperingShade card) {

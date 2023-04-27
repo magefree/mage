@@ -28,7 +28,7 @@ public class JourneyToNowhereTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Journey to Nowhere");
-        addTarget(playerA, "Silvercoat Lion");
+        // Silvercoat Lion is auto-chosen since only target
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -46,7 +46,7 @@ public class JourneyToNowhereTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Journey to Nowhere");
-        addTarget(playerA, "Silvercoat Lion");
+        // Silvercoat Lion is auto-chosen since it's the only possible target
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Disenchant", "Journey to Nowhere");
 
@@ -58,7 +58,7 @@ public class JourneyToNowhereTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
     }
 
-    /*
+    /**
      10/1/2009: If Journey to Nowhere leaves the battlefield before its first ability has resolved, its second ability will
      trigger and do nothing. Then its first ability will resolve and exile the targeted creature forever.
      */
@@ -72,8 +72,8 @@ public class JourneyToNowhereTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Journey to Nowhere");
-        addTarget(playerA, "Silvercoat Lion");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Disenchant", "Journey to Nowhere");
+        // Silvercoat Lion" is auto-chosen since only target
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Disenchant", "Journey to Nowhere", "When {this} enters");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -107,7 +107,7 @@ public class JourneyToNowhereTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Boomerang", "Journey to Nowhere", "Journey to Nowhere", StackClause.WHILE_NOT_ON_STACK);
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Journey to Nowhere");
-        addTarget(playerA, "Pillarfield Ox");
+        // Pillarfield Ox is auto-chosen since only possible target
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Disenchant", "Journey to Nowhere");
 

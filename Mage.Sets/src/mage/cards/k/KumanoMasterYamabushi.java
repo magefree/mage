@@ -60,7 +60,7 @@ public final class KumanoMasterYamabushi extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {1}{R}: Kumano, Master Yamabushi deals 1 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{1}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl<>("{1}{R}"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
         // If a creature dealt damage by Kumano this turn would die, exile it instead.

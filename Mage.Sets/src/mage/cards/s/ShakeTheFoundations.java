@@ -31,7 +31,7 @@ public final class ShakeTheFoundations extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(1, filter));
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private ShakeTheFoundations(final ShakeTheFoundations card) {

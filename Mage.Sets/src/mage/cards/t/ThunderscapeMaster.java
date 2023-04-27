@@ -33,13 +33,13 @@ public final class ThunderscapeMaster extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {B}{B}, {tap}: Target player loses 2 life and you gain 2 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), new ManaCostsImpl("{B}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), new ManaCostsImpl<>("{B}{B}"));
         ability.addEffect(new GainLifeEffect(2).setText("and you gain 2 life"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         // {G}{G}, {tap}: Creatures you control get +2/+2 until end of turn.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{G}{G}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl<>("{G}{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

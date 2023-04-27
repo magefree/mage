@@ -32,7 +32,7 @@ public final class Drought extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
 
         // At the beginning of your upkeep, sacrifice Drought unless you pay {W}{W}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{W}{W}")), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{W}{W}")), TargetController.YOU, false));
 
         // Spells cost an additional "Sacrifice a Swamp" to cast for each black mana symbol in their mana costs.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DroughtAdditionalCostEffect(true)));

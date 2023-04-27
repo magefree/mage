@@ -65,7 +65,7 @@ public final class ShalaiVoiceOfPlenty extends CardImpl {
                         CounterType.P1P1.createInstance(),
                         StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED
                 ),
-                new ManaCostsImpl("{4}{G}{G}")
+                new ManaCostsImpl<>("{4}{G}{G}")
         ));
 
     }

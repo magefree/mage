@@ -21,7 +21,7 @@ public class BecomesAuraSourceEffect extends ContinuousEffectImpl implements Sou
     public BecomesAuraSourceEffect(Target target) {
         super(Duration.Custom, Outcome.AddAbility);
         this.target = target;
-        newAbility = new EnchantAbility(target.getTargetName());
+        newAbility = new EnchantAbility(target);
         newAbility.setRuleAtTheTop(true);
         staticText = "it becomes an Aura with enchant " + target.getTargetName();
         dependencyTypes.add(DependencyType.AuraAddingRemoving);

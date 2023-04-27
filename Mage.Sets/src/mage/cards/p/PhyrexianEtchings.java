@@ -25,7 +25,7 @@ public final class PhyrexianEtchings extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}{B}");
 
         // Cumulative upkeep-Pay {B}.
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{B}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{B}")));
 
         // At the beginning of your end step, draw a card for each age counter on Phyrexian Etchings.
         this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new DrawCardSourceControllerEffect(new CountersSourceCount(CounterType.AGE)), false));

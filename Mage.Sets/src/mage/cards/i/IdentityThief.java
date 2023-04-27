@@ -64,6 +64,7 @@ class IdentityThiefAbility extends TriggeredAbilityImpl {
     public IdentityThiefAbility() {
         super(Zone.BATTLEFIELD, null, true);
         this.addEffect(new IdentityThiefEffect());
+        setTriggerPhrase("Whenever {this} attacks, ");
     }
 
     public IdentityThiefAbility(final IdentityThiefAbility ability) {
@@ -78,11 +79,6 @@ class IdentityThiefAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getSourceId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} attacks, ";
     }
 
     @Override

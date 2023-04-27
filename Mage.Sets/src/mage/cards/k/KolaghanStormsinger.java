@@ -32,7 +32,7 @@ public final class KolaghanStormsinger extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // Megamorph {R}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{R}"), true));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{R}"), true));
 
         // When Kolaghan Stormsinger is turned face up, target creature gains haste until end of turn.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), false);

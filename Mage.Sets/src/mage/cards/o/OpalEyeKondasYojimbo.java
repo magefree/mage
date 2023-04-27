@@ -46,7 +46,7 @@ public final class OpalEyeKondasYojimbo extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new OpalEyeKondasYojimboRedirectionEffect(), new TapSourceCost()));
 
         // {1}{W}: Prevent the next 1 damage that would be dealt to Opal-Eye this turn.        
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToSourceEffect(Duration.EndOfTurn, 1), new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToSourceEffect(Duration.EndOfTurn, 1), new ManaCostsImpl<>("{1}{W}")));
 
     }
 

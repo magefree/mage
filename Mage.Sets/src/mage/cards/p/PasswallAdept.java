@@ -31,7 +31,7 @@ public final class PasswallAdept extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new CantBeBlockedTargetEffect(),
-                new ManaCostsImpl("{2}{U}")
+                new ManaCostsImpl<>("{2}{U}")
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

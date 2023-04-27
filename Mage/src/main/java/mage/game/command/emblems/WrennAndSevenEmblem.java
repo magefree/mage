@@ -17,5 +17,7 @@ public final class WrennAndSevenEmblem extends Emblem {
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new MaximumHandSizeControllerEffect(
                 Integer.MAX_VALUE, Duration.WhileOnBattlefield, MaximumHandSizeControllerEffect.HandSizeModification.SET
         )));
+
+        this.setExpansionSetCodeForImage("MID");
     }
 }

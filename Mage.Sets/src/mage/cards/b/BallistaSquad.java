@@ -30,7 +30,7 @@ public final class BallistaSquad extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {X}{W}, {T}: Ballista Squad deals X damage to target attacking or blocking creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(ManacostVariableValue.REGULAR), new ManaCostsImpl("{X}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(ManacostVariableValue.REGULAR), new ManaCostsImpl<>("{X}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAttackingOrBlockingCreature());
         this.addAbility(ability);

@@ -29,7 +29,7 @@ public final class SteamSpitter extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
         // {R}: Steam Spitter gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
     }
 
     private SteamSpitter(final SteamSpitter card) {

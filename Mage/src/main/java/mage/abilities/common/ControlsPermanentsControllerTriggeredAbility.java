@@ -30,6 +30,7 @@ public class ControlsPermanentsControllerTriggeredAbility extends StateTriggered
         this.filter = filter;
         this.value = value;
         this.type = type;
+        setTriggerPhrase("When you control " + filter.getMessage() + ", " );
     }
 
     public ControlsPermanentsControllerTriggeredAbility(final ControlsPermanentsControllerTriggeredAbility ability) {
@@ -48,10 +49,5 @@ public class ControlsPermanentsControllerTriggeredAbility extends StateTriggered
     public boolean checkTrigger(GameEvent event, Game game) {
         int inputValue = game.getBattlefield().countAll(filter, getControllerId(), game);
         return ComparisonType.compare(inputValue, type, value);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When you control " + filter.getMessage() + ", " ;
     }
 }

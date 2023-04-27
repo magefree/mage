@@ -13,8 +13,6 @@ import org.mage.test.utils.ManaOptionsTestUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mage.test.utils.ManaOptionsTestUtils.assertDuplicatedManaOptions;
-
 /**
  * @author TheElk801
  */
@@ -54,7 +52,7 @@ public class ThePrismaticPiperTest7 extends ThePrismaticPiperBaseTest {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        assertDuplicatedManaOptions(manaOptions);
+
         Assert.assertEquals("mana variations don't fit", 2, manaOptions.size());
         ManaOptionsTestUtils.assertManaOptions("{R}", manaOptions);
         ManaOptionsTestUtils.assertManaOptions("{G}", manaOptions);

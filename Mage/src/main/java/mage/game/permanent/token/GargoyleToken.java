@@ -6,6 +6,8 @@ import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -20,6 +22,8 @@ public final class GargoyleToken extends TokenImpl {
         power = new MageInt(3);
         toughness = new MageInt(4);
         addAbility(FlyingAbility.getInstance());
+
+        availableImageSetCodes.addAll(Arrays.asList("M10", "C14", "CMA", "C19"));
     }
 
     public GargoyleToken(final GargoyleToken token) {

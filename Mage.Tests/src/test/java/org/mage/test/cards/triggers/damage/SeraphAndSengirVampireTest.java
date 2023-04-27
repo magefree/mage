@@ -29,8 +29,7 @@ public class SeraphAndSengirVampireTest extends CardTestPlayerBase {
 
         setStopAt(4, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
-        
+
         assertGraveyardCount(playerA, "Seraph", 1);  // Seraph dies
         assertGraveyardCount(playerB, "Sengir Vampire", 0);
         assertPermanentCount(playerA, "Sengir Vampire", 1);  // playerA now controls the Sengir Vampire

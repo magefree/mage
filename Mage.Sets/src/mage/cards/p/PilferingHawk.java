@@ -33,7 +33,7 @@ public final class PilferingHawk extends CardImpl {
 
         // {S}, {T}: Draw a card, then discard a card.
         Ability ability = new SimpleActivatedAbility(
-                new DrawDiscardControllerEffect(1, 1), new ManaCostsImpl("{S}")
+                new DrawDiscardControllerEffect(1, 1), new ManaCostsImpl<>("{S}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

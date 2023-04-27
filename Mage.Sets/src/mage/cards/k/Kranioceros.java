@@ -27,7 +27,7 @@ public final class Kranioceros extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 3, Duration.EndOfTurn), new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 3, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{W}")));
     }
 
     public Kranioceros (final Kranioceros card) {

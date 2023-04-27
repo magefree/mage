@@ -6,7 +6,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.FlurryOfHornsMinotaurToken;
+import mage.game.permanent.token.MinotaurToken;
 
 /**
  *
@@ -18,7 +18,7 @@ public final class FlurryOfHorns extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}");
 
         // Create two 2/3 red Minotaur creature tokens with haste.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new FlurryOfHornsMinotaurToken(), 2));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new MinotaurToken(true), 2));
     }
 
     private FlurryOfHorns(final FlurryOfHorns card) {

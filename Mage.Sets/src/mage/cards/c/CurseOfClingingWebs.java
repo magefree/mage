@@ -43,7 +43,7 @@ public final class CurseOfClingingWebs extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Whenever a nontoken creature enchanted player controls dies, exile it and you create a 1/2 green Spider creature token with reach.
         Ability ability = new DiesCreatureTriggeredAbility(

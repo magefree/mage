@@ -136,14 +136,6 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
     }
 
     @Override
-    public Abilities<Ability> getManaAbilities(Zone zone) {
-        return stream()
-                .filter(ability -> ability.getAbilityType() == AbilityType.MANA)
-                .filter(ability -> ability.getZone().match(zone))
-                .collect(Collectors.toCollection(AbilitiesImpl::new));
-    }
-
-    @Override
     public Abilities<EvasionAbility> getEvasionAbilities() {
         return stream()
                 .filter(EvasionAbility.class::isInstance)

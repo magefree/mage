@@ -22,12 +22,11 @@ public class ChiefOfTheFoundryTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Chief of the Foundry");
         addCard(Zone.HAND, playerA, "Chief of the Foundry");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chief of the Foundry");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chief of the Foundry", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chief of the Foundry");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertPowerToughness(playerA, "Chief of the Foundry", 3, 4, Filter.ComparisonScope.All);
     }
-
 }

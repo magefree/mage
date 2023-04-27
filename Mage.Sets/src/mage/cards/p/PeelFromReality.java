@@ -7,6 +7,7 @@ import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
 
@@ -19,8 +20,7 @@ public final class PeelFromReality extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Return target creature you control and target creature you don't control to their owners' hands.
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect(true)
-                .setText("return target creature you control and target creature you don't control to their owners' hands"));
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect().setTargetPointer(new EachTargetPointer()));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
     }

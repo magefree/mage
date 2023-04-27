@@ -41,7 +41,7 @@ public final class SmeltWardIgnus extends CardImpl {
                 Zone.BATTLEFIELD,
                 new GainControlTargetEffect(
                         Duration.EndOfTurn, true
-                ), new ManaCostsImpl("{2}{R}")
+                ), new ManaCostsImpl<>("{2}{R}")
         );
         ability.addEffect(new UntapTargetEffect().setText("Untap that creature"));
         ability.addEffect(new GainAbilityTargetEffect(

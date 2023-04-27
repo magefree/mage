@@ -5,6 +5,9 @@ import mage.cards.Card;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Enum for counters, names and instances.
  *
@@ -26,6 +29,7 @@ public enum CounterType {
     BOUNTY("bounty"),
     BRIBERY("bribery"),
     BRICK("brick"),
+    BURDEN("burden"),
     CAGE("cage"),
     CARRION("carrion"),
     CHARGE("charge"),
@@ -33,6 +37,7 @@ public enum CounterType {
     COIN("coin"),
     COLLECTION("collection"),
     COMPONENT("component"),
+    CONTESTED("contested"),
     CORPSE("corpse"),
     CORRUPTION("corruption"),
     CREDIT("credit"),
@@ -42,8 +47,10 @@ public enum CounterType {
     CURRENCY("currency"),
     DEATH("death"),
     DEATHTOUCH("deathtouch"),
+    DEFENSE("defense"),
     DELAY("delay"),
     DEPLETION("depletion"),
+    DESCENT("descent"),
     DESPAIR("despair"),
     DEVOTION("devotion"),
     DIVINITY("divinity"),
@@ -93,6 +100,8 @@ public enum CounterType {
     INCARNATION("incarnation"),
     INDESTRUCTIBLE("indestructible"),
     INFECTION("infection"),
+    INGENUITY("ingenuity"),
+    INTEL("intel"),
     INTERVENTION("intervention"),
     INVITATION("invitation"),
     ISOLATION("isolation"),
@@ -122,8 +131,10 @@ public enum CounterType {
     MIRE("mire"),
     MUSIC("music"),
     MUSTER("muster"),
+    NECRODERMIS("necrodermis"),
     NET("net"),
     NIGHT("night"),
+    OIL("oil"),
     OMEN("omen"),
     ORE("ore"),
     P0P1(new BoostCounter(0, 1).name),
@@ -138,6 +149,7 @@ public enum CounterType {
     PETAL("petal"),
     PETRIFICATION("petrification"),
     PHYLACTERY("phylactery"),
+    PHYRESIS("phyresis"),
     PIN("pin"),
     PLAGUE("plague"),
     PLOT("plot"),
@@ -149,7 +161,9 @@ public enum CounterType {
     PUPA("pupa"),
     REACH("reach"),
     REPAIR("repair"),
+    REPRIEVE("reprieve"),
     RITUAL("ritual"),
+    ROPE("rope"),
     RUST("rust"),
     QUEST("quest"),
     SILVER("silver"),
@@ -168,6 +182,7 @@ public enum CounterType {
     STORAGE("storage"),
     STRIFE("strife"),
     STUDY("study"),
+    STUN("stun"),
     SUSPECT("suspect"),
     TASK("task"),
     THEFT("theft"),
@@ -196,6 +211,14 @@ public enum CounterType {
     private final String name;
     private final String article;
     private final CounterPredicate predicate;
+
+    private static final Map<String, CounterType> counterNameMap = new HashMap<>();
+
+    static {
+        for (CounterType counter : CounterType.values()) {
+            counterNameMap.put(counter.name, counter);
+        }
+    }
 
     CounterType(String name) {
         this(name, "aeiou".contains("" + name.charAt(0)) ? "an" : "a");
@@ -293,12 +316,7 @@ public enum CounterType {
     }
 
     public static CounterType findByName(String name) {
-        for (CounterType counterType : values()) {
-            if (counterType.getName().equals(name)) {
-                return counterType;
-            }
-        }
-        return null;
+        return counterNameMap.get(name);
     }
 
     public static String findArticle(String name) {

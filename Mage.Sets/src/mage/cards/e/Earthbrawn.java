@@ -22,7 +22,7 @@ public final class Earthbrawn extends CardImpl {
 
         this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.addAbility(new ReinforceAbility(1, new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new ReinforceAbility(1, new ManaCostsImpl<>("{1}{G}")));
     }
 
     private Earthbrawn(final Earthbrawn card) {

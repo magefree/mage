@@ -29,7 +29,7 @@ public final class MonstrousCarabid extends CardImpl {
         // Monstrous Carabid attacks each turn if able.
         this.addAbility(new AttacksEachCombatStaticAbility());
         // Cycling {BR}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{B/R}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{B/R}")));
     }
 
     private MonstrousCarabid(final MonstrousCarabid card) {

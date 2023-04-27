@@ -48,6 +48,7 @@ public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
         super(zone, effect, optional);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever " + filter.getMessage() + (filter.getMessage().startsWith("one or more") ? " die, " : " dies, "));
     }
 
     public DiesCreatureTriggeredAbility(final DiesCreatureTriggeredAbility ability) {
@@ -82,10 +83,5 @@ public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
         return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever " + filter.getMessage() + (filter.getMessage().startsWith("one or more") ? " die, " : " dies, ") ;
     }
 }

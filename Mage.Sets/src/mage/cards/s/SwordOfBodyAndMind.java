@@ -43,7 +43,7 @@ public final class SwordOfBodyAndMind extends CardImpl {
         this.addAbility(new SwordOfBodyAndMindAbility());
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), false));
     }
 
     private SwordOfBodyAndMind(final SwordOfBodyAndMind card) {

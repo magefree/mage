@@ -20,7 +20,6 @@ public class ChromeReplicatorTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Construct Token", 1);
     }
@@ -37,7 +36,6 @@ public class ChromeReplicatorTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Construct Token", 0);
     }
@@ -53,12 +51,11 @@ public class ChromeReplicatorTest extends CardTestPlayerBase {
         // create 2 soldier tokens
         addCard(Zone.HAND, playerA, "Raise the Alarm");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Raise the Alarm");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Raise the Alarm", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chrome Replicator");
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Construct Token", 0);
     }

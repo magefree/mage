@@ -57,24 +57,24 @@ public class TargetPermanent extends TargetObject {
     @Override
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
         Permanent permanent = game.getPermanent(id);
-        if (permanent != null) {
-            if (source != null) {
-                //1. TODO: check for replacement effects
-                //2. We need to check both source.getId() and source.getSourceId()
-                // first for protection from spells or abilities (e.g. protection from colored spells, r1753)
-                // second for protection from sources (e.g. protection from artifacts + equip ability)
-                if (!isNotTarget()) {
-                    if (!permanent.canBeTargetedBy(game.getObject(source.getId()), controllerId, game)
-                            || !permanent.canBeTargetedBy(game.getObject(source), controllerId, game)) {
-                        return false;
-                    }
+        if (permanent == null) {
+            return false;
+        }
+
+        if (source != null) {
+            //1. TODO: check for replacement effects
+            //2. We need to check both source.getId() and source.getSourceId()
+            // first for protection from spells or abilities (e.g. protection from colored spells, r1753)
+            // second for protection from sources (e.g. protection from artifacts + equip ability)
+            if (!isNotTarget()) {
+                if (!permanent.canBeTargetedBy(game.getObject(source.getId()), controllerId, game)
+                        || !permanent.canBeTargetedBy(game.getObject(source), controllerId, game)) {
+                    return false;
                 }
-                return filter.match(permanent, controllerId, source, game);
-            } else {
-                return filter.match(permanent, controllerId, source, game);
             }
         }
-        return false;
+
+        return filter.match(permanent, controllerId, source, game);
     }
 
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game, boolean flag) {

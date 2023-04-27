@@ -9,18 +9,15 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
-import mage.choices.ChoiceColor;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
+import mage.constants.ManaType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author anonymous
@@ -47,11 +44,9 @@ public final class MeteorCrater extends CardImpl {
 class MeteorCraterEffect extends ManaEffect {
 
     /**
-     * *
      * 04/10/2004 You can't choose "colorless". You have to choose one of the
      * five colors.
      */
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 
     public MeteorCraterEffect() {
         super();
@@ -64,110 +59,60 @@ class MeteorCraterEffect extends ManaEffect {
 
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
-        List<Mana> netManas = new ArrayList<>();
-        Mana types = getManaTypes(game, source);
-        if (types.getBlack() > 0) {
-            netManas.add(new Mana(ColoredManaSymbol.B));
-        }
-        if (types.getRed() > 0) {
-            netManas.add(new Mana(ColoredManaSymbol.R));
-        }
-        if (types.getBlue() > 0) {
-            netManas.add(new Mana(ColoredManaSymbol.U));
-        }
-        if (types.getGreen() > 0) {
-            netManas.add(new Mana(ColoredManaSymbol.G));
-        }
-        if (types.getWhite() > 0) {
-            netManas.add(new Mana(ColoredManaSymbol.W));
-        }
-        return netManas;
+        return game == null ? new ArrayList<>() : ManaType.getManaListFromManaTypes(getManaTypes(game, source), true);
     }
 
     @Override
     public Mana produceMana(Game game, Ability source) {
-        Mana mana = new Mana();
         if (game == null) {
-            return mana;
+            return null;
         }
-        Mana types = getManaTypes(game, source);
-        Choice choice = new ChoiceColor(true);
-        choice.getChoices().clear();
-        choice.setMessage("Pick a mana color");
-        if (types.getAny() > 0) {
-            choice.getChoices().add("Black");
-            choice.getChoices().add("Red");
-            choice.getChoices().add("Blue");
-            choice.getChoices().add("Green");
-            choice.getChoices().add("White");
+
+        Set<ManaType> types = getManaTypes(game, source);
+        if (types.isEmpty()) {
+            return null;
+        }
+        Choice choice = ManaType.getChoiceOfManaTypes(types, true);
+        if (choice.getChoices().size() == 1) {
+            choice.setChoice(choice.getChoices().iterator().next());
         } else {
-            if (types.getBlack() > 0) {
-                choice.getChoices().add("Black");
-            }
-            if (types.getRed() > 0) {
-                choice.getChoices().add("Red");
-            }
-            if (types.getBlue() > 0) {
-                choice.getChoices().add("Blue");
-            }
-            if (types.getGreen() > 0) {
-                choice.getChoices().add("Green");
-            }
-            if (types.getWhite() > 0) {
-                choice.getChoices().add("White");
-            }
-        }
-        if (!choice.getChoices().isEmpty()) {
             Player player = game.getPlayer(source.getControllerId());
-            if (choice.getChoices().size() == 1) {
-                choice.setChoice(choice.getChoices().iterator().next());
-            } else {
-                player.choose(outcome, choice, game);
-            }
-            if (choice.getChoice() != null) {
-                switch (choice.getChoice()) {
-                    case "Black":
-                        mana.setBlack(1);
-                        break;
-                    case "Blue":
-                        mana.setBlue(1);
-                        break;
-                    case "Red":
-                        mana.setRed(1);
-                        break;
-                    case "Green":
-                        mana.setGreen(1);
-                        break;
-                    case "White":
-                        mana.setWhite(1);
-                        break;
-                }
+            if (player == null || !player.choose(outcome, choice, game)) {
+                return null;
             }
         }
-        return mana;
+        ManaType chosenType = ManaType.findByName(choice.getChoice());
+        return chosenType == null ? null : new Mana(chosenType);
     }
 
-    private Mana getManaTypes(Game game, Ability source) {
-        Mana types = new Mana();
-        if (game != null) {
-            List<Permanent> controlledPermanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
-            for (Permanent permanent : controlledPermanents) {
-                ObjectColor color = permanent.getColor(game);
-                if (color.isBlack()) {
-                    types.add(Mana.BlackMana(1));
-                }
-                if (color.isBlue()) {
-                    types.add(Mana.BlueMana(1));
-                }
-                if (color.isGreen()) {
-                    types.add(Mana.GreenMana(1));
-                }
-                if (color.isRed()) {
-                    types.add(Mana.RedMana(1));
-                }
-                if (color.isWhite()) {
-                    types.add(Mana.WhiteMana(1));
-                }
+    private Set<ManaType> getManaTypes(Game game, Ability source) {
+        Set<ManaType> types = new HashSet<>(5);
+        if (game == null) {
+            return types;
+        }
+
+        List<Permanent> controlledPermanents = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_PERMANENT, source.getControllerId(), game);
+        for (Permanent permanent : controlledPermanents) {
+            ObjectColor color = permanent.getColor(game);
+            if (color.isBlack()) {
+                types.add(ManaType.BLACK);
+            }
+            if (color.isBlue()) {
+                types.add(ManaType.BLUE);
+            }
+            if (color.isGreen()) {
+                types.add(ManaType.GREEN);
+            }
+            if (color.isRed()) {
+                types.add(ManaType.RED);
+            }
+            if (color.isWhite()) {
+                types.add(ManaType.WHITE);
+            }
+
+            // If all types are already added, exit early
+            if (types.size() == 5) {
+                break;
             }
         }
         return types;

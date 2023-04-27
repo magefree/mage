@@ -55,7 +55,7 @@ public final class DivinersWand extends CardImpl {
                 filter, true, SetTargetPointer.PERMANENT, null));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3), false));
     }
 
     private DivinersWand(final DivinersWand card) {

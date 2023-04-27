@@ -20,11 +20,9 @@ public final class AngelicExaltation extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
         // Whenever a creature you control attacks alone, it gets +X/+X until end of turn, where X is the number of creatures you control.
-        this.addAbility(new AttacksAloneControlledTriggeredAbility(new BoostTargetEffect(
-                CreaturesYouControlCount.instance,
-                CreaturesYouControlCount.instance,
-                Duration.EndOfTurn, true
-        ).setText("it gets +X/+X until end of turn, where X is the number of creatures you control"), true, false).addHint(CreaturesYouControlHint.instance));
+        this.addAbility(new AttacksAloneControlledTriggeredAbility(
+                new BoostTargetEffect(CreaturesYouControlCount.instance, CreaturesYouControlCount.instance, Duration.EndOfTurn),
+                true, false).addHint(CreaturesYouControlHint.instance));
     }
 
     private AngelicExaltation(final AngelicExaltation card) {

@@ -30,6 +30,9 @@ public final class WalkerOfTheGroveToken extends TokenImpl {
         if (getOriginalExpansionSetCode().equals("UMA")) {
             this.setTokenType(1);
         }
+        if (getOriginalExpansionSetCode().equals("LRW")) {
+            this.setTokenType(1);
+        }
     }
 
     public WalkerOfTheGroveToken(final WalkerOfTheGroveToken token) {

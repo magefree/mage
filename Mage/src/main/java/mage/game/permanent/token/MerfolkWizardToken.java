@@ -4,6 +4,8 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 /**
  *
  * @author Loki
@@ -18,6 +20,8 @@ public final class MerfolkWizardToken extends TokenImpl {
         subtype.add(SubType.WIZARD);
         power = new MageInt(1);
         toughness = new MageInt(1);
+
+        availableImageSetCodes = Arrays.asList("LRW");
     }
 
     public MerfolkWizardToken(final MerfolkWizardToken token) {

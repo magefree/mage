@@ -28,7 +28,7 @@ public final class FurnaceBrood extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {R}: Target creature can't be regenerated this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeRegeneratedTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeRegeneratedTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{R}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

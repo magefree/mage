@@ -37,7 +37,7 @@ public final class AtarkaPummeler extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(new MenaceAbility(), Duration.EndOfTurn, filter),
-                new ManaCostsImpl("{3}{R}{R}"),
+                new ManaCostsImpl<>("{3}{R}{R}"),
                 FormidableCondition.instance);
         ability.setAbilityWord(AbilityWord.FORMIDABLE);
         this.addAbility(ability);

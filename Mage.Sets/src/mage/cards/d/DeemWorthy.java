@@ -29,7 +29,7 @@ public final class DeemWorthy extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         
         //Cycling {3}{R}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}{R}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{3}{R}")));
         // When you cycle Deem Worthy, you may have it deal 2 damage to target creature.
         Ability ability = new CycleTriggeredAbility(new DamageTargetEffect(2),true);
         ability.addTarget(new TargetCreaturePermanent());

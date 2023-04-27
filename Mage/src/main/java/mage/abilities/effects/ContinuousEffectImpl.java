@@ -228,6 +228,12 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         return EndStepCountWatcher.getCount(startingControllerId, game) > effectStartingEndStep;
     }
 
+    public boolean isYourNextEndCombatStep(Game game) {
+        return effectStartingOnTurn < game.getTurnNum()
+                && game.isActivePlayer(startingControllerId)
+                && game.getPhase().getType() == TurnPhase.POSTCOMBAT_MAIN;
+    }
+
     @Override
     public boolean isInactive(Ability source, Game game) {
         // YOUR turn checks
@@ -237,6 +243,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
             case UntilYourNextTurn:
             case UntilEndOfYourNextTurn:
             case UntilYourNextEndStep:
+            case UntilYourNextEndCombatStep:
                 break;
             default:
                 return false;
@@ -278,6 +285,12 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
                 if (player != null && player.isInGame()) {
                     return this.isYourNextEndStep(game);
                 }
+                break;
+            case UntilYourNextEndCombatStep:
+                if (player != null && player.isInGame()) {
+                    return this.isYourNextEndCombatStep(game);
+                }
+                break;
         }
 
         return canDelete;
@@ -291,20 +304,6 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     @Override
     public SubLayer getSublayer() {
         return sublayer;
-    }
-
-    protected static boolean isCanKill(DynamicValue toughness) {
-        if (toughness instanceof StaticValue) {
-            return toughness.calculate(null, null, null) < 0;
-        }
-        if (toughness instanceof SignInversionDynamicValue) {
-            // count this class as used for "-{something_positive}"
-            return true;
-        }
-        if (toughness instanceof DomainValue) {
-            return ((DomainValue) toughness).getAmount() < 0;
-        }
-        return false;
     }
 
     @Override
@@ -366,7 +365,9 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
 
     @Override
     public void addDependencyType(DependencyType dependencyType) {
-        dependencyTypes.add(dependencyType);
+        if (dependencyType != null) {
+            dependencyTypes.add(dependencyType);
+        }
     }
 
     @Override

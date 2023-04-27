@@ -42,7 +42,7 @@ public final class PiaAndKiranNalaar extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect));
 
         // {2}{R}, Sacrifice an artifact: Pia and Kiran Nalaar deals 2 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{2}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl<>("{2}{R}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, new FilterControlledArtifactPermanent("an artifact"), true)));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

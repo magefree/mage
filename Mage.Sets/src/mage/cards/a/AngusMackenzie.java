@@ -36,7 +36,7 @@ public final class AngusMackenzie extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD, 
                 effect,
-                new ManaCostsImpl("{G}{W}{U}"), 
+                new ManaCostsImpl<>("{G}{W}{U}"), 
                 BeforeCombatDamageCondition.getInstance()
         );
         ability.addCost(new TapSourceCost());
@@ -62,7 +62,7 @@ class BeforeCombatDamageCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-            PhaseStep phaseStep = game.getStep().getType();
+            PhaseStep phaseStep = game.getTurnStepType();
             if(phaseStep.getIndex() < PhaseStep.FIRST_COMBAT_DAMAGE.getIndex()) {
                 return true;
             }

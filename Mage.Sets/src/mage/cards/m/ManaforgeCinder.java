@@ -35,7 +35,7 @@ public final class ManaforgeCinder extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}: Add {B} or {R}. Activate this ability no more than three times each turn.
-        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new ManaforgeCinderManaEffect(), new ManaCostsImpl("{1}"), 3));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new ManaforgeCinderManaEffect(), new ManaCostsImpl<>("{1}"), 3));
 
     }
 

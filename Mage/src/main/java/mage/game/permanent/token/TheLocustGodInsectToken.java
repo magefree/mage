@@ -24,7 +24,16 @@ public final class TheLocustGodInsectToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
         addAbility(HasteAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("HOU", "C20");
+        availableImageSetCodes = Arrays.asList("HOU", "C20", "MOC");
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C20")) {
+            this.setTokenType(2);
+        }
     }
 
     public TheLocustGodInsectToken(final TheLocustGodInsectToken token) {

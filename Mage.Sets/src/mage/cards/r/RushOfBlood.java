@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -20,9 +19,8 @@ public final class RushOfBlood extends CardImpl {
     public RushOfBlood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
-
         // Target creature gets +X/+0 until end of turn, where X is its power.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(TargetPermanentPowerCount.instance, StaticValue.get(0), Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(TargetPermanentPowerCount.instance, StaticValue.get(0), Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

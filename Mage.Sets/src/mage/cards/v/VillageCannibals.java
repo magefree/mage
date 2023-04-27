@@ -47,6 +47,7 @@ class VillageCannibalsTriggeredAbility extends TriggeredAbilityImpl {
 
     public VillageCannibalsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
+        setTriggerPhrase("Whenever another Human creature dies, ");
     }
 
     public VillageCannibalsTriggeredAbility(final VillageCannibalsTriggeredAbility ability) {
@@ -66,18 +67,11 @@ class VillageCannibalsTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.isDiesEvent()) {
-            Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (permanent != null && permanent.isCreature(game) && permanent.hasSubtype(SubType.HUMAN, game)
-                    && !permanent.getId().equals(this.getSourceId())) {
-                return true;
-            }
+        if (!zEvent.isDiesEvent()) {
+            return false;
         }
-        return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever another Human creature dies, " ;
+        Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+        return permanent != null && permanent.isCreature(game) && permanent.hasSubtype(SubType.HUMAN, game)
+                && !permanent.getId().equals(this.getSourceId());
     }
 }

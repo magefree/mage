@@ -34,7 +34,7 @@ public final class TriclopeanSight extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Neutral));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // When Triclopean Sight enters the battlefield, untap enchanted creature.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new UntapEnchantedEffect()));

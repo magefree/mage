@@ -37,7 +37,7 @@ public final class ImaginaryThreats extends CardImpl {
         getSpellAbility().addEffect(new DontUntapInPlayersNextUntapStepAllEffect(new FilterCreaturePermanent())
                 .setText("During that player's next untap step, creatures they control don't untap"));
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
 
     }
 

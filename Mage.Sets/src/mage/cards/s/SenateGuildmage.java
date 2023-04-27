@@ -33,7 +33,7 @@ public final class SenateGuildmage extends CardImpl {
         this.addAbility(ability1);
 
         // {U}, {T}: Draw a card, then discard a card.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new ManaCostsImpl("{U}"));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new ManaCostsImpl<>("{U}"));
         ability2.addCost(new TapSourceCost());
         this.addAbility(ability2);
     }

@@ -447,7 +447,7 @@ public class ScryfallImageSupportCards {
             add("PELD"); // Throne of Eldraine Promos
             add("ELD"); // Throne of Eldraine
             //add("PTG"); // Ponies: The Galloping
-            //add("CMB1"); // Mystery Booster Playtest Cards
+            add("CMB1"); // Mystery Booster Playtest Cards
             add("MB1"); // Mystery Booster
             add("GN2"); // Game Night 2019
             add("HA1"); // Historic Anthology 1
@@ -503,14 +503,37 @@ public class ScryfallImageSupportCards {
             add("MIC"); // Midnight Hunt Commander
             add("VOW"); // Innistrad: Crimson Vow
             add("VOC"); // Crimson Vow Commander
-            add("Y22"); // Alchemy: Innistrad
+            add("YMID"); // Alchemy: Innistrad
             add("DBL"); // Innistrad: Double Feature
+            add("CC2"); // Commander Collection: Black
             add("NEO"); // Kamigawa: Neon Dynasty
             add("NEC"); // Neon Dynasty Commander
             add("SNC"); // Streets of New Capenna
             add("NCC"); // New Capenna Commander
             add("SLX"); // Universes Within
             add("CLB"); // Commander Legends: Battle for Baldur's Gate
+            add("2X2"); // Double Masters 2022
+            add("DMU"); // Dominaria United
+            add("DMC"); // Dominaria United Commander
+            add("40K"); // Warhammer 40,000
+            add("UNF"); // Unfinity
+            add("GN3"); // Game Night 2022
+            add("BRO"); // The Brothers' War
+            add("BRC"); // The Brothers' War Commander
+            add("BRR"); // The Brothers' War Retro Artifacts
+            add("BOT"); // Transformers
+            add("J22"); // Jumpstart 2022
+            add("SLC"); // Secret Lair 30th Anniversary Countdown Kit
+            add("DMR"); // Dominaria Remastered
+            add("ONE"); // Phyrexia: All Will Be One
+            add("ONC"); // Phyrexia: All Will Be One Commander
+            add("MOM"); // March of the Machine
+            add("MOC"); // March of the Machine Commander
+            add("MAT"); // March of the Machine: The Aftermath
+            add("MUL"); // Multiverse Legends
+            add("30A"); // Thirtieth Anniversary Edition
+            add("LTR"); // The Lord of the Rings: Tales of Middle-Earth
+            add("LTC"); // Tales of Middle-Earth Commander
         }
     };
 
@@ -531,7 +554,8 @@ public class ScryfallImageSupportCards {
             //   set/card_name/card_number_2
             //
             // Cards with non-ASCII collector numbers must use direct download (cause xmage uses different card number)
-            // Verify checks must check and show missing data from that list
+            // Verify checks must check and show missing data from that list,
+            // see test_checkMissingScryfallSettingsAndCardNumbers
 
             // 10E
             put("10E/Air Elemental/64*", "https://api.scryfall.com/cards/10e/64★/");
@@ -955,7 +979,7 @@ public class ScryfallImageSupportCards {
             put("WAR/Vivien, Champion of the Wilds/180*", "https://api.scryfall.com/cards/war/180★/");
             put("WAR/Vraska, Swarm's Eminence/236*", "https://api.scryfall.com/cards/war/236★/");
             // SLD
-            // TODO: update direct image links in 2022 for HQ images
+            // fake double faced cards
             put("SLD/Zndrsplt, Eye of Wisdom/379", "https://api.scryfall.com/cards/sld/379/");
             put("SLD/Zndrsplt, Eye of Wisdom/379b", "https://c1.scryfall.com/file/scryfall-cards/large/back/d/5/d5dfd236-b1da-4552-b94f-ebf6bb9dafdf.jpg");
             put("SLD/Krark's Thumb/383", "https://api.scryfall.com/cards/sld/383/");
@@ -966,6 +990,16 @@ public class ScryfallImageSupportCards {
             put("SLD/Propaganda/381b", "https://c1.scryfall.com/file/scryfall-cards/large/back/3/e/3e3f0bcd-0796-494d-bf51-94b33c1671e9.jpg");
             put("SLD/Stitch in Time/382", "https://api.scryfall.com/cards/sld/382/");
             put("SLD/Stitch in Time/382b", "https://c1.scryfall.com/file/scryfall-cards/large/back/0/8/087c3a0d-c710-4451-989e-596b55352184.jpg");
+            // normal cards
+            put("SLD/Demonlord Belzenlok/159*", "https://api.scryfall.com/cards/sld/159★/");
+            put("SLD/Griselbrand/160*", "https://api.scryfall.com/cards/sld/160★/");
+            put("SLD/Kothophed, Soul Hoarder/162*", "https://api.scryfall.com/cards/sld/162★/");
+            put("SLD/Liliana's Contract/161*", "https://api.scryfall.com/cards/sld/161★/");
+            put("SLD/Razaketh, the Foulblooded/163*", "https://api.scryfall.com/cards/sld/163★/");
+            // PMEI
+            put("PMEI/Jamuraan Lion/10*", "https://api.scryfall.com/cards/pmei/10★/");
+            // PRES
+            put("PRES/Lathliss, Dragon Queen/149*", "https://api.scryfall.com/cards/pres/149★/");
         }
     };
 

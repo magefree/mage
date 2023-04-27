@@ -26,7 +26,7 @@ public final class DeepReconnaissance extends CardImpl {
         // Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true));
         // Flashback {4}{G}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{4}{G}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{4}{G}")));
     }
 
     private DeepReconnaissance(final DeepReconnaissance card) {

@@ -58,8 +58,8 @@ class CephalidFacetakerEffect extends OneShotEffect {
     private static final CopyApplier copyApplier = new CopyApplier() {
         @Override
         public boolean apply(Game game, MageObject blueprint, Ability source, UUID targetObjectId) {
-            blueprint.getPower().modifyBaseValue(1);
-            blueprint.getToughness().modifyBaseValue(4);
+            blueprint.getPower().setModifiedBaseValue(1);
+            blueprint.getToughness().setModifiedBaseValue(4);
             blueprint.getAbilities().add(new SimpleStaticAbility(
                     new CantBeBlockedSourceEffect().setText("this creature can't be blocked")
             ));

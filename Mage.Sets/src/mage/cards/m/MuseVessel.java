@@ -38,12 +38,12 @@ public final class MuseVessel extends CardImpl {
 
         // {3}, {tap}: Target player exiles a card from their hand. Activate this ability only any time you could cast a sorcery.
         ActivateAsSorceryActivatedAbility tapAbility = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new MuseVesselExileEffect(), new TapSourceCost());
-        tapAbility.addCost(new ManaCostsImpl("{3}"));
+        tapAbility.addCost(new ManaCostsImpl<>("{3}"));
         tapAbility.addTarget(new TargetPlayer());
         this.addAbility(tapAbility);
 
         // {1}: Choose a card exiled with Muse Vessel. You may play that card this turn.
-        SimpleActivatedAbility playAbility = new SimpleActivatedAbility(new MuseVesselMayPlayExiledEffect(), new ManaCostsImpl("{1}"));
+        SimpleActivatedAbility playAbility = new SimpleActivatedAbility(new MuseVesselMayPlayExiledEffect(), new ManaCostsImpl<>("{1}"));
         playAbility.addTarget(new TargetCardInMuseVesselExile());
         this.addAbility(playAbility);
     }

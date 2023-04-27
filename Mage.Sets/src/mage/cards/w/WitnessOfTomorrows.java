@@ -28,7 +28,7 @@ public final class WitnessOfTomorrows extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {3}{U}: Scry 1.
-        this.addAbility(new SimpleActivatedAbility(new ScryEffect(1, false), new ManaCostsImpl("{3}{U}")));
+        this.addAbility(new SimpleActivatedAbility(new ScryEffect(1, false), new ManaCostsImpl<>("{3}{U}")));
     }
 
     private WitnessOfTomorrows(final WitnessOfTomorrows card) {

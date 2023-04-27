@@ -24,7 +24,7 @@ public final class DarkWithering extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
 
         // Madness {B}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{B}")));
     }
 
     private DarkWithering(final DarkWithering card) {

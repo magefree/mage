@@ -28,7 +28,7 @@ public final class MalignantGrowth extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{U}");
 
         // Cumulative upkeep {1}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")));
 
         // At the beginning of your upkeep, put a growth counter on Malignant Growth.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(

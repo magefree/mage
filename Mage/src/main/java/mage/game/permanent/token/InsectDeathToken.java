@@ -23,7 +23,7 @@ public final class InsectDeathToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
         addAbility(DeathtouchAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("M15", "C20", "C21");
+        availableImageSetCodes = Arrays.asList("M15", "C20", "C21", "CLB");
     }
 
     public InsectDeathToken(final InsectDeathToken token) {

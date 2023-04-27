@@ -15,7 +15,7 @@ import mage.util.CardUtil;
  */
 public class MillCardsTargetEffect extends OneShotEffect {
 
-    private DynamicValue numberCards;
+    private final DynamicValue numberCards;
 
     public MillCardsTargetEffect(int numberCards) {
         this(StaticValue.get(numberCards));

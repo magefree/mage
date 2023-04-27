@@ -7,8 +7,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.utils.ManaOptionsTestUtils;
 
-import static org.mage.test.utils.ManaOptionsTestUtils.assertDuplicatedManaOptions;
-
 /**
  * @author TheElk801
  */
@@ -31,13 +29,12 @@ public class ThePrismaticPiperTest8 extends ThePrismaticPiperBaseTest {
         setChoice(playerA, true); // Companion
         addCard(Zone.BATTLEFIELD, playerA, "Island", 8);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, piper);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, piper, true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Companion");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertColor(playerA, piper, "G", true);
         assertHandCount(playerA, "Keruga, the Macrosage", 1);
@@ -51,7 +48,7 @@ public class ThePrismaticPiperTest8 extends ThePrismaticPiperBaseTest {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        assertDuplicatedManaOptions(manaOptions);
+
         Assert.assertEquals("mana variations don't fit", 3, manaOptions.size());
         ManaOptionsTestUtils.assertManaOptions("{U}", manaOptions);
         ManaOptionsTestUtils.assertManaOptions("{R}", manaOptions);

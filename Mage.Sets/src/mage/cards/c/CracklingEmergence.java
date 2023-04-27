@@ -39,7 +39,7 @@ public final class CracklingEmergence extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted land is a 3/3 red Spirit creature with haste. It's still a land.
         this.addAbility(new SimpleStaticAbility(new BecomesCreatureAttachedEffect(

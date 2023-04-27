@@ -39,7 +39,7 @@ public final class VitoThornOfTheDuskRose extends CardImpl {
         // {3}{B}{B}: Creatures you control gain lifelink until end of turn.
         this.addAbility(new SimpleActivatedAbility(new GainAbilityControlledEffect(
                 LifelinkAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES
-        ), new ManaCostsImpl("{3}{B}{B}")));
+        ), new ManaCostsImpl<>("{3}{B}{B}")));
     }
 
     private VitoThornOfTheDuskRose(final VitoThornOfTheDuskRose card) {

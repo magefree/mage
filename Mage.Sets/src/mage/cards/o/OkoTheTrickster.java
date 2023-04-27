@@ -5,7 +5,7 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessAllEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessAllEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -47,7 +47,7 @@ public final class OkoTheTrickster extends CardImpl {
         this.addAbility(ability);
 
         // −7: Until end of turn, each creature you control has base power and toughness 10/10 and gains trample.
-        ability = new LoyaltyAbility(new SetPowerToughnessAllEffect(
+        ability = new LoyaltyAbility(new SetBasePowerToughnessAllEffect(
                 10, 10, Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURE, true
         ).setText("Until end of turn, each creature you control has base power and toughness 10/10"), -7);
         ability.addEffect(new GainAbilityAllEffect(

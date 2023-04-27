@@ -53,7 +53,7 @@ public final class RathiAssassin extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{B}{B}, {T}: Destroy target tapped nonblack creature.
-        Ability destroyAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}{B}{B}"));
+        Ability destroyAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{1}{B}{B}"));
         destroyAbility.addCost(new TapSourceCost());
         destroyAbility.addTarget(new TargetCreaturePermanent(destroyFilter));
         this.addAbility(destroyAbility);

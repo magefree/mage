@@ -40,7 +40,7 @@ public final class MagmaSliver extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostTargetEffect(new PermanentsOnBattlefieldCount(
                         StaticFilters.FILTER_PERMANENT_ALL_SLIVERS),
-                        StaticValue.get(0), Duration.EndOfTurn, true),
+                        StaticValue.get(0), Duration.EndOfTurn),
                 new TapSourceCost());
         Target target = new TargetCreaturePermanent(
                 new FilterCreaturePermanent(SubType.SLIVER, "Sliver creature"));

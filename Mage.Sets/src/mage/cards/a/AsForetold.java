@@ -86,7 +86,7 @@ class AsForetoldAlternativeCost extends AlternativeCostSourceAbility {
     private boolean wasActivated;
 
     AsForetoldAlternativeCost(int timeCounters) {
-        super(new ManaCostsImpl("{0}"), new SpellWithManaCostLessThanOrEqualToCondition(timeCounters));
+        super(new ManaCostsImpl<>("{0}"), new SpellWithManaCostLessThanOrEqualToCondition(timeCounters));
     }
 
     private AsForetoldAlternativeCost(final AsForetoldAlternativeCost ability) {

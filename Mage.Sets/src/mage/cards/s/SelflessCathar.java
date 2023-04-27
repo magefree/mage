@@ -29,7 +29,7 @@ public final class SelflessCathar extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{W}, Sacrifice Selfless Cathar: Creatures you control get +1/+1 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{W}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

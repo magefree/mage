@@ -33,7 +33,7 @@ public final class VoroshTheHunter extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Vorosh, the Hunter deals combat damage to a player, you may pay {2}{G}. If you do, put six +1/+1 counters on Vorosh.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new DoIfCostPaid(new AddCountersSourceEffect(CounterType.P1P1.createInstance(6), true), new ManaCostsImpl("{2}{G}")), false));
+                new DoIfCostPaid(new AddCountersSourceEffect(CounterType.P1P1.createInstance(6), true), new ManaCostsImpl<>("{2}{G}")), false));
     }
 
     private VoroshTheHunter(final VoroshTheHunter card) {

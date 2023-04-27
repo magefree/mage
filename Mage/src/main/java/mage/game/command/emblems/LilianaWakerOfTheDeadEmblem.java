@@ -22,5 +22,7 @@ public final class LilianaWakerOfTheDeadEmblem extends Emblem {
                 TargetController.YOU, false, false);
         ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE));
         this.getAbilities().add(ability);
+
+        this.setExpansionSetCodeForImage("M21");
     }
 }

@@ -33,7 +33,7 @@ public final class AuroraGriffin extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // {W}: Target permanent becomes white until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorTargetEffect(ObjectColor.WHITE,
-            Duration.EndOfTurn), new ManaCostsImpl("{W}"));
+            Duration.EndOfTurn), new ManaCostsImpl<>("{W}"));
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
     }

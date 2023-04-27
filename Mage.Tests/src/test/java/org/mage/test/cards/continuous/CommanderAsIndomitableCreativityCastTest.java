@@ -38,7 +38,6 @@ public class CommanderAsIndomitableCreativityCastTest extends CardTestCommander4
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -60,7 +59,6 @@ public class CommanderAsIndomitableCreativityCastTest extends CardTestCommander4
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
 }

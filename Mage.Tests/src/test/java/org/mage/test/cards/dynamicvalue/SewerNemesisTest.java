@@ -16,7 +16,6 @@ public class SewerNemesisTest extends CardTestPlayerBase {
 
     /**
      * BUG: Sewer Nemesis count's all cards in each player's graveyard to determine it's * / *, not just the chosen player's graveyard.
-     *
     */
     @Test
     public void test1() {
@@ -32,14 +31,11 @@ public class SewerNemesisTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sewer Nemesis");
         setChoice(playerA, "PlayerA"); // Starting player
-        setChoice(playerA, "PlayerA");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertGraveyardCount(playerA,"Sewer Nemesis", 0);
         assertPowerToughness(playerA,  "Sewer Nemesis", 4, 4);
-
     }
-
 }

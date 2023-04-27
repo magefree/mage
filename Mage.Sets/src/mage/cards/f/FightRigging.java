@@ -15,7 +15,7 @@ import mage.constants.ComparisonType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public final class FightRigging extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent();
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
 
     static {
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 6));

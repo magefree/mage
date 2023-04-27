@@ -20,7 +20,6 @@ public class CanopyStalkerTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Scryb Sprites", 1);
 
@@ -39,7 +38,6 @@ public class CanopyStalkerTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 22);
     }

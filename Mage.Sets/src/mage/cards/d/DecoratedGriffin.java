@@ -30,7 +30,7 @@ public final class DecoratedGriffin extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {1}{W}: Prevent the next 1 combat damage that would be dealt to you this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToControllerEffect(Duration.EndOfTurn, true, true, 1), new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToControllerEffect(Duration.EndOfTurn, true, true, 1), new ManaCostsImpl<>("{1}{W}")));
     }
 
     private DecoratedGriffin(final DecoratedGriffin card) {

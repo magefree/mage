@@ -48,7 +48,7 @@ public final class TinybonesTrinketThief extends CardImpl {
         this.addAbility(ability, new TinybonesTrinketThiefWatcher());
 
         // {4}{B}{B}: Each opponent with no cards in hand loses 10 life.
-        this.addAbility(new SimpleActivatedAbility(new TinybonesTrinketThiefEffect(), new ManaCostsImpl("{4}{B}{B}")));
+        this.addAbility(new SimpleActivatedAbility(new TinybonesTrinketThiefEffect(), new ManaCostsImpl<>("{4}{B}{B}")));
     }
 
     private TinybonesTrinketThief(final TinybonesTrinketThief card) {

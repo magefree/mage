@@ -46,7 +46,7 @@ public final class JediStarfighter extends CardImpl {
         this.addAbility(ability);
 
         // Meditate {1}{W}
-        this.addAbility(new MeditateAbility(new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new MeditateAbility(new ManaCostsImpl<>("{1}{W}")));
     }
 
     private JediStarfighter(final JediStarfighter card) {

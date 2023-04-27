@@ -84,7 +84,7 @@ class HeroismEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Player player = game.getPlayer(game.getActivePlayerId());
-            Cost cost = new ManaCostsImpl("{2}{R}");
+            Cost cost = new ManaCostsImpl<>("{2}{R}");
             List<Permanent> permanentsToPrevent = new ArrayList<>();
             for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(filter, game.getActivePlayerId(), game)) {
                 cost.clearPaid();

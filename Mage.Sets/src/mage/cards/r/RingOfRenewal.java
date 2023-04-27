@@ -24,7 +24,7 @@ public final class RingOfRenewal extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // {5}, {tap}: Discard a card at random, then draw two cards.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardControllerEffect(1, true), new ManaCostsImpl("{5}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardControllerEffect(1, true), new ManaCostsImpl<>("{5}"));
         ability.addCost(new TapSourceCost());
         Effect effect = new DrawCardSourceControllerEffect(2);
         effect.setText(", then draw two cards");

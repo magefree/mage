@@ -53,6 +53,7 @@ class GainControlAllPermanentsEffect extends ContinuousEffectImpl {
 
     public GainControlAllPermanentsEffect(Duration duration) {
         super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.Detriment);
+        this.staticText = "target opponent gains control of all other permanents you control";
     }
 
     public GainControlAllPermanentsEffect(final GainControlAllPermanentsEffect effect) {
@@ -77,10 +78,5 @@ class GainControlAllPermanentsEffect extends ContinuousEffectImpl {
             discard();
         }
         return true;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "target opponent gains control of all other permanents you control";
     }
 }

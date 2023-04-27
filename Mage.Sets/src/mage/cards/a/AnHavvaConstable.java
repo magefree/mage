@@ -70,7 +70,7 @@ class AnHavvaConstableEffect extends ContinuousEffectImpl {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
         int numberOfGreenCreatures = game.getBattlefield().count(filter, source.getSourceId(), source, game);
 
-        mageObject.getToughness().setValue(1 + numberOfGreenCreatures);
+        mageObject.getToughness().setModifiedBaseValue(1 + numberOfGreenCreatures);
 
         return true;
     }

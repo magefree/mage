@@ -25,7 +25,7 @@ public final class Censor extends CardImpl {
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(1)));
 
         // Cycling {U}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{U}")));
 
     }
 

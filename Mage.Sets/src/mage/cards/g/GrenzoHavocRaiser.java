@@ -68,6 +68,7 @@ class GrenzoHavocRaiserTriggeredAbility extends TriggeredAbilityImpl {
 
     public GrenzoHavocRaiserTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        setTriggerPhrase("Whenever a creature you control deals combat damage to a player, ");
     }
 
     public GrenzoHavocRaiserTriggeredAbility(final GrenzoHavocRaiserTriggeredAbility ability) {
@@ -116,11 +117,6 @@ class GrenzoHavocRaiserTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature you control deals combat damage to a player, " ;
     }
 }
 

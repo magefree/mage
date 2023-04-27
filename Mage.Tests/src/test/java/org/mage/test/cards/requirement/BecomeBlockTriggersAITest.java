@@ -29,7 +29,6 @@ public class BecomeBlockTriggersAITest extends CardTestPlayerBaseWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, 0);
         assertGraveyardCount(playerB, 1);
@@ -61,7 +60,6 @@ public class BecomeBlockTriggersAITest extends CardTestPlayerBaseWithAIHelps {
         } catch (UnsupportedOperationException ue) {
             Assert.assertEquals("Balduvian Bears cannot block Nessian Boar it is already blocking the maximum amount of creatures.", ue.getMessage());
         }
-        //assertAllCommandsUsed(); // must have 1 missing command (block)
     }
 
     @Test
@@ -83,7 +81,6 @@ public class BecomeBlockTriggersAITest extends CardTestPlayerBaseWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, 0);
         assertGraveyardCount(playerB, 1);

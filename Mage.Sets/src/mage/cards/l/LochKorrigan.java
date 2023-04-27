@@ -26,7 +26,7 @@ public final class LochKorrigan extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{U/B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{U/B}")));
     }
 
     private LochKorrigan(final LochKorrigan card) {

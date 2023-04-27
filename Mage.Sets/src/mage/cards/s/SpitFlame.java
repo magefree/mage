@@ -35,7 +35,7 @@ public final class SpitFlame extends CardImpl {
                 Zone.GRAVEYARD,
                 new DoIfCostPaid(
                         new ReturnSourceFromGraveyardToHandEffect(),
-                        new ManaCostsImpl("{R}")
+                        new ManaCostsImpl<>("{R}")
                 ), filter, false
         ));
     }

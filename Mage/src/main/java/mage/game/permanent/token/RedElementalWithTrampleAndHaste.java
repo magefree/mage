@@ -23,15 +23,6 @@ public final class RedElementalWithTrampleAndHaste extends TokenImpl {
         addAbility(HasteAbility.getInstance());
     }
 
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("ZEN")) {
-            setTokenType(RandomUtil.nextInt(2) + 1);
-        }
-    }
-
     public RedElementalWithTrampleAndHaste(final RedElementalWithTrampleAndHaste token) {
         super(token);
     }

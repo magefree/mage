@@ -58,6 +58,7 @@ class ProsperTomeBoundTriggeredAbility extends TriggeredAbilityImpl {
     ProsperTomeBoundTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new TreasureToken()));
         this.flavorWord = "Pact Boon";
+        setTriggerPhrase("Whenever you play a card from exile, ");
     }
 
     private ProsperTomeBoundTriggeredAbility(final ProsperTomeBoundTriggeredAbility ability) {
@@ -78,10 +79,5 @@ class ProsperTomeBoundTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public ProsperTomeBoundTriggeredAbility copy() {
         return new ProsperTomeBoundTriggeredAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you play a card from exile, ";
     }
 }

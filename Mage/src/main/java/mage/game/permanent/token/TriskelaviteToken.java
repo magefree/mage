@@ -12,6 +12,8 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.Zone;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -32,6 +34,8 @@ public final class TriskelaviteToken extends TokenImpl {
         this.addAbility(ability);
 
         addAbility(FlyingAbility.getInstance());
+
+        availableImageSetCodes = Arrays.asList("CM2");
     }
 
     public TriskelaviteToken(final TriskelaviteToken token) {

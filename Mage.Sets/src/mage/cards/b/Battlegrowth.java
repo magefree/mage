@@ -18,6 +18,7 @@ public final class Battlegrowth extends CardImpl {
     public Battlegrowth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
+        // Put a +1/+1 counter on target creature.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

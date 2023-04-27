@@ -15,6 +15,7 @@ public class WinsCoinFlipTriggeredAbility extends TriggeredAbilityImpl {
 
     public WinsCoinFlipTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        setTriggerPhrase("Whenever a player wins a coin flip, ");
     }
 
     public WinsCoinFlipTriggeredAbility(final WinsCoinFlipTriggeredAbility ability) {
@@ -35,10 +36,5 @@ public class WinsCoinFlipTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         CoinFlippedEvent flipEvent = (CoinFlippedEvent) event;
         return flipEvent.isWinnable() && (flipEvent.getChosen() == flipEvent.getResult());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a player wins a coin flip, " ;
     }
 }

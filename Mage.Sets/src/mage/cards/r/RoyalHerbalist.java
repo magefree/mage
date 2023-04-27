@@ -29,7 +29,7 @@ public final class RoyalHerbalist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}, Exile the top card of your library: You gain 1 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new ManaCostsImpl<>("{2}"));
         ability.addCost(new ExileFromTopOfLibraryCost(1));
         this.addAbility(ability);
     }

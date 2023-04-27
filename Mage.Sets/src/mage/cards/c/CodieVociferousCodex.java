@@ -83,7 +83,7 @@ class CodieVociferousCodexCantCastEffect extends ContinuousRuleModifyingEffectIm
         if (!source.isControlledBy(event.getPlayerId())) {
             return false;
         }
-        Card card = game.getCard(event.getTargetId());
+        Card card = game.getCard(event.getSourceId());
         return card != null && card.isPermanent(game);
     }
 }

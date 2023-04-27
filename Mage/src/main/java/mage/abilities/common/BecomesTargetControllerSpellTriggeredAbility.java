@@ -16,6 +16,7 @@ public class BecomesTargetControllerSpellTriggeredAbility extends TriggeredAbili
 
     public BecomesTargetControllerSpellTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("When you become the target of a spell, ");
     }
 
     public BecomesTargetControllerSpellTriggeredAbility(final BecomesTargetControllerSpellTriggeredAbility ability) {
@@ -40,10 +41,5 @@ public class BecomesTargetControllerSpellTriggeredAbility extends TriggeredAbili
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When you become the target of a spell, " ;
     }
 }

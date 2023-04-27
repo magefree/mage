@@ -48,7 +48,7 @@ public final class YidaroWanderingMonster extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Cycling {1}{R}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{R}")));
 
         // When you cycle Yidaro, Wandering Monster, shuffle it into your library from your graveyard. If you've cycled a card named Yidaro, Wandering Monster four or more times this game, put it onto the battlefield from your graveyard instead.
         this.addAbility(new CycleTriggeredAbility(new YidaroWanderingMonsterEffect())

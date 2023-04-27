@@ -32,6 +32,7 @@ public class DealsDamageToOpponentTriggeredAbility extends TriggeredAbilityImpl 
         super(Zone.BATTLEFIELD, effect, optional);
         this.onlyCombat = onlyCombat;
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever {this} deals " + (onlyCombat ? "combat " : "") + "damage to an opponent, ");
     }
 
     public DealsDamageToOpponentTriggeredAbility(final DealsDamageToOpponentTriggeredAbility ability) {
@@ -69,15 +70,5 @@ public class DealsDamageToOpponentTriggeredAbility extends TriggeredAbilityImpl 
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        StringBuilder sb = new StringBuilder("Whenever {this} deals ");
-        if (onlyCombat) {
-            sb.append("combat ");
-        }
-        sb.append("damage to an opponent, ");
-        return sb.toString();
     }
 }

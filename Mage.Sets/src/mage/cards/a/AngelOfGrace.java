@@ -42,7 +42,7 @@ public final class AngelOfGrace extends CardImpl {
 
         // {4}{W}{W}, Exile Angel of Grace from your graveyard: Your life total becomes 10.
         Ability ability = new SimpleActivatedAbility(
-                Zone.GRAVEYARD, new SetPlayerLifeSourceEffect(10), new ManaCostsImpl("{4}{W}{W}")
+                Zone.GRAVEYARD, new SetPlayerLifeSourceEffect(10), new ManaCostsImpl<>("{4}{W}{W}")
         );
         ability.addCost(new ExileSourceFromGraveCost());
         this.addAbility(ability);

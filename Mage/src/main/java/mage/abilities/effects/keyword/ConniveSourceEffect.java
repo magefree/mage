@@ -5,6 +5,7 @@ import mage.abilities.Mode;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -48,19 +49,26 @@ public class ConniveSourceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent != null) {
-            connive(permanent, 1, source, game);
-        }
+        boolean connived = connive(permanent, 1, source, game);
         if (ability != null) {
             game.fireReflexiveTriggeredAbility(ability, source);
         }
-        return permanent != null || ability != null;
+        return connived || ability != null;
     }
 
     public static boolean connive(Permanent permanent, int amount, Ability source, Game game) {
         if (amount < 1) {
             return false;
         }
+        boolean permanentStillOnBattlefield;
+        if (permanent == null) {
+            // If the permanent was killed, get last known information
+            permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+            permanentStillOnBattlefield = false;
+        } else {
+            permanentStillOnBattlefield = true;
+        }
+
         Player player = game.getPlayer(permanent.getControllerId());
         if (player == null) {
             return false;
@@ -69,7 +77,7 @@ public class ConniveSourceEffect extends OneShotEffect {
         int counters = player
                 .discard(amount, false, false, source, game)
                 .count(StaticFilters.FILTER_CARDS_NON_LAND, game);
-        if (counters > 0) {
+        if (permanentStillOnBattlefield && counters > 0) {
             permanent.addCounters(CounterType.P1P1.createInstance(counters), source, game);
         }
         return true;

@@ -61,6 +61,7 @@ class NecropotenceTriggeredAbility extends TriggeredAbilityImpl {
 
     NecropotenceTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        setTriggerPhrase("Whenever you discard a card, ");
     }
 
     NecropotenceTriggeredAbility(final NecropotenceTriggeredAbility ability) {
@@ -84,11 +85,6 @@ class NecropotenceTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you discard a card, " ;
     }
 }
 

@@ -51,6 +51,7 @@ class GladehartCavalryTriggeredAbility extends TriggeredAbilityImpl {
 
     public GladehartCavalryTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(2));
+        setTriggerPhrase("Whenever a creature you control with a +1/+1 counter on it dies, ");
     }
 
     public GladehartCavalryTriggeredAbility(final GladehartCavalryTriggeredAbility ability) {
@@ -80,10 +81,5 @@ class GladehartCavalryTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature you control with a +1/+1 counter on it dies, " ;
     }
 }

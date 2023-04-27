@@ -48,7 +48,7 @@ public final class GrimReminder extends CardImpl {
         this.addAbility(new ConditionalActivatedAbility(
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToHandEffect(),
-                new ManaCostsImpl("{B}{B}"),
+                new ManaCostsImpl<>("{B}{B}"),
                 new IsStepCondition(PhaseStep.UPKEEP),
                 null
         ));

@@ -25,7 +25,7 @@ public final class Browse extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
 
         // {2}{U}{U}: Look at the top five cards of your library, put one of them into your hand, and exile the rest.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BrowseEffect(), new ManaCostsImpl("{2}{U}{U}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BrowseEffect(), new ManaCostsImpl<>("{2}{U}{U}"));
         this.addAbility(ability);
     }
 
@@ -63,7 +63,7 @@ class BrowseEffect extends OneShotEffect {
             if (!cards.isEmpty()) {
                 controller.lookAtCards(source, null, cards, game);
                 TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put in your hand"));
-                if (controller.choose(Outcome.Benefit, cards, target, game)) {
+                if (controller.choose(Outcome.Benefit, cards, target, source, game)) {
                     Card card = cards.get(target.getFirstTarget(), game);
                     if (card != null) {
                         controller.moveCards(card, Zone.HAND, source, game);

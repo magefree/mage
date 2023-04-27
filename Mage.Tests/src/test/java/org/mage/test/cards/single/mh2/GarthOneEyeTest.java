@@ -36,7 +36,6 @@ public class GarthOneEyeTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped(garth, true);
         assertTapped("Plains", true);
@@ -59,7 +58,6 @@ public class GarthOneEyeTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped(garth, true);
         assertTapped("Island", true);
@@ -81,7 +79,6 @@ public class GarthOneEyeTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped(garth, true);
         assertTapped("Swamp", true);
@@ -100,7 +97,6 @@ public class GarthOneEyeTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped(garth, true);
         assertTapped("Mountain", true);
@@ -123,7 +119,6 @@ public class GarthOneEyeTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped(garth, true);
         assertTapped("Forest", true);
@@ -141,7 +136,6 @@ public class GarthOneEyeTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped(garth, true);
         Permanent permanent = getPermanent(lotus);

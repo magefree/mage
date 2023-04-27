@@ -10,6 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -44,10 +45,9 @@ public final class RiteOfPassage extends CardImpl {
 
 class RiteOfPassageTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-
     public RiteOfPassageTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
+        setTriggerPhrase("Whenever a creature you control is dealt damage, ");
     }
 
     public RiteOfPassageTriggeredAbility(final RiteOfPassageTriggeredAbility ability) {
@@ -68,15 +68,10 @@ class RiteOfPassageTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         UUID targetId = event.getTargetId();
         Permanent permanent = game.getPermanent(targetId);
-        if (permanent != null && filter.match(permanent, getControllerId(), this, game)) {
+        if (permanent != null && StaticFilters.FILTER_CONTROLLED_CREATURE.match(permanent, getControllerId(), this, game)) {
             getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature you control is dealt damage, " ;
     }
 }

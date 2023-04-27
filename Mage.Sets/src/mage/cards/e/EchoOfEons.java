@@ -27,7 +27,7 @@ public final class EchoOfEons extends CardImpl {
         this.getSpellAbility().addEffect(effect);
 
         // Flashback {2}{U}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{2}{U}")));
     }
 
     private EchoOfEons(final EchoOfEons card) {

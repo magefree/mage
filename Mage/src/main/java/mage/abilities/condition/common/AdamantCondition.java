@@ -54,4 +54,9 @@ public enum AdamantCondition implements Condition {
         }
         return payment.getColor(coloredManaSymbol) > 2;
     }
+
+    @Override
+    public boolean caresAboutManaColor() {
+        return true;
+    }
 }

@@ -150,4 +150,8 @@ public class ConditionalRequirementEffect extends RequirementEffect {
         return new ConditionalRequirementEffect(this);
     }
 
+    @Override
+    public Condition getCondition() {
+        return condition;
+    }
 }

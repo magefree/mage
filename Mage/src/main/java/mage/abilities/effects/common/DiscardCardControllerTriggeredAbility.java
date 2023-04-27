@@ -22,6 +22,7 @@ public class DiscardCardControllerTriggeredAbility extends TriggeredAbilityImpl 
     public DiscardCardControllerTriggeredAbility(Effect effect, boolean isOptional, FilterCard filter) {
         super(Zone.BATTLEFIELD, effect, isOptional);
         this.filter = filter;
+        setTriggerPhrase("Whenever you discard " + filter.getMessage() + ", ");
     }
 
     private DiscardCardControllerTriggeredAbility(final DiscardCardControllerTriggeredAbility ability) {
@@ -47,10 +48,5 @@ public class DiscardCardControllerTriggeredAbility extends TriggeredAbilityImpl 
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you discard " + filter.getMessage() + ", ";
     }
 }

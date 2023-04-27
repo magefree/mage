@@ -16,6 +16,7 @@ public final class DwarfToken extends TokenImpl {
         subtype.add(SubType.DWARF);
         power = new MageInt(1);
         toughness = new MageInt(1);
+        setOriginalExpansionSetCode("ELD");
     }
 
     private DwarfToken(final DwarfToken token) {

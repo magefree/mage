@@ -20,7 +20,7 @@ public class ModeChoiceSourceCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        String choosenMode = (String) game.getState().getValue(source.getSourceId() + "_modeChoice");
-        return choosenMode != null && choosenMode.equals(mode);
+        String chosenMode = (String) game.getState().getValue(source.getSourceId() + "_modeChoice");
+        return chosenMode != null && chosenMode.equals(mode);
     }
 }

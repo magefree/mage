@@ -24,7 +24,7 @@ public final class WarBehemoth extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Morph {4}{W}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{4}{W}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{4}{W}")));
     }
 
     private WarBehemoth(final WarBehemoth card) {

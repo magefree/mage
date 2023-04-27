@@ -33,7 +33,7 @@ public final class ParadoxHaze extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Neutral));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // At the beginning of enchanted player's first upkeep each turn, that player gets an additional upkeep step after this step.
         this.addAbility(new ParadoxHazeTriggeredAbility(), new ParadoxHazeWatcher());

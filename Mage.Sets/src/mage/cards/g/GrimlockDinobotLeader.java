@@ -47,7 +47,7 @@ public final class GrimlockDinobotLeader extends CardImpl{
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        this.secondSideCardClazz = GrimlockFerociousKing.class;
+        this.secondSideCardClazz = mage.cards.g.GrimlockFerociousKing.class;
 
         // Dinosaurs, Vehicles and other Transformers creatures you control get +2/+0.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 0, Duration.WhileOnBattlefield, filter, false)));
@@ -55,7 +55,7 @@ public final class GrimlockDinobotLeader extends CardImpl{
         
         // {2}: Grimlock, Dinobot Leader becomes Grimlock, Ferocious King.
         this.addAbility(new TransformAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new ManaCostsImpl("{2}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new ManaCostsImpl<>("{2}")));
     }
 
     private GrimlockDinobotLeader(final GrimlockDinobotLeader card) {

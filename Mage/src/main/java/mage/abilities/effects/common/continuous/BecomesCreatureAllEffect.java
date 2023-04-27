@@ -140,8 +140,8 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
                         int power = token.getPower().getValue();
                         int toughness = token.getToughness().getValue();
                         if (power != 0 && toughness != 0) {
-                            permanent.getPower().setValue(power);
-                            permanent.getToughness().setValue(toughness);
+                            permanent.getPower().setModifiedBaseValue(power);
+                            permanent.getToughness().setModifiedBaseValue(toughness);
                         }
                     }
                     break;

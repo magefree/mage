@@ -32,7 +32,7 @@ public final class TreetopVillage extends CardImpl {
         this.addAbility(new GreenManaAbility());
 
         // {1}{G}: Treetop Village becomes a 3/3 green Ape creature with trample until end of turn. It’s still a land. (It can deal excess combat damage to the player or planeswalker it’s attacking.)
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new ApeToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new ApeToken(), "land", Duration.EndOfTurn), new ManaCostsImpl<>("{1}{G}")));
     }
 
     private TreetopVillage(final TreetopVillage card) {

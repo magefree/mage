@@ -6,9 +6,10 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -63,8 +64,8 @@ class SingingTreeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
         if (targetCreature != null) {
-            int toughness = targetCreature.getToughness().getBaseValueModified();
-            game.addEffect(new SetPowerToughnessTargetEffect(0, toughness, Duration.EndOfTurn), source);
+            int toughness = targetCreature.getToughness().getModifiedBaseValue();
+            game.addEffect(new SetBasePowerToughnessTargetEffect(StaticValue.get(0), null, Duration.EndOfTurn), source);
             return true;
         }
         return false;

@@ -25,7 +25,6 @@ public class NornsAnnexTest extends CardTestPlayerBase {
         
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 18);
         assertLife(playerB, 18);

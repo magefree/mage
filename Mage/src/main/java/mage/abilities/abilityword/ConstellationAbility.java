@@ -32,6 +32,8 @@ public class ConstellationAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, optional);
         this.thisOr = thisOr;
         setAbilityWord(AbilityWord.CONSTELLATION);
+        setTriggerPhrase("Whenever " + (thisOr ? "{this} or another" : "an")
+                + " enchantment enters the battlefield under your control, ");
     }
 
     public ConstellationAbility(final ConstellationAbility ability) {
@@ -56,11 +58,5 @@ public class ConstellationAbility extends TriggeredAbilityImpl {
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
         return permanent != null && ((thisOr && permanent.getId().equals(getSourceId())) || permanent.isEnchantment(game));
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever " + (thisOr ? "{this} or another" : "an")
-                + " enchantment enters the battlefield under your control, ";
     }
 }

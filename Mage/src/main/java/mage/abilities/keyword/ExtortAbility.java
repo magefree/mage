@@ -2,19 +2,19 @@
 
 package mage.abilities.keyword;
 
-import java.util.UUID;
-
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * FAQ 2013/01/11
@@ -76,7 +76,7 @@ class ExtortEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
             if (player.chooseUse(Outcome.Damage, new StringBuilder("Extort opponents? (").append(permanent.getName()).append(')').toString(), source, game)) {
-                Cost cost = new ManaCostsImpl("{W/B}");
+                Cost cost = new ManaCostsImpl<>("{W/B}");
                 if (cost.pay(source, game, source, player.getId(), false, null)) {
                     int loseLife = 0;
                     for (UUID opponentId : game.getOpponents(source.getControllerId())) {

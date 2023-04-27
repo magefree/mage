@@ -68,6 +68,7 @@ class IndulgeTriggeredAbility extends DelayedTriggeredAbility {
         super(new CreateTokenEffect(
                 new CitizenGreenWhiteToken(), 1, true, true
         ), Duration.EndOfTurn, false, false);
+        setTriggerPhrase("Whenever a creature you control attacks this turn, ");
     }
 
     private IndulgeTriggeredAbility(final IndulgeTriggeredAbility ability) {
@@ -87,11 +88,6 @@ class IndulgeTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return isControlledBy(game.getControllerId(event.getSourceId()));
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature you control attacks this turn, ";
     }
 }
 

@@ -44,15 +44,11 @@ class PrimalOrderDamageTargetEffect extends OneShotEffect {
 
     public PrimalOrderDamageTargetEffect() {
         super(Outcome.Damage);
+        this.staticText = "{this} deals damage to that player equal to the number of nonbasic lands they control";
     }
 
     public PrimalOrderDamageTargetEffect(PrimalOrderDamageTargetEffect copy) {
         super(copy);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "{this} deals damage to that player equal to the number of nonbasic lands they control";
     }
 
     @Override

@@ -9,7 +9,7 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessAllEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -68,15 +68,21 @@ class BrineHagEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (sourcePermanent == null) { return false; }
+        if (sourcePermanent == null) {
+            return false;
+        }
 
         List<Permanent> list = new ArrayList<>();
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
-            if (player == null) { continue; }
+            if (player == null) {
+                continue;
+            }
 
             for (Permanent creature : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, playerId, game)) {
                 if (sourcePermanent.getDealtDamageByThisTurn().contains(new MageObjectReference(creature.getId(), game))) {
@@ -87,7 +93,7 @@ class BrineHagEffect extends OneShotEffect {
         if (!list.isEmpty()) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             filter.add(new PermanentInListPredicate(list));
-            game.addEffect(new SetPowerToughnessAllEffect(0, 2, Duration.Custom, filter, true), source);
+            game.addEffect(new SetBasePowerToughnessAllEffect(0, 2, Duration.Custom, filter, true), source);
         }
         return true;
     }

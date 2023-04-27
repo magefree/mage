@@ -56,12 +56,12 @@ class MageHuntersOnslaughtDelayedTriggeredAbility extends DelayedTriggeredAbilit
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.BLOCKER_DECLARED;
+        return event.getType() == GameEvent.EventType.CREATURE_BLOCKS;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent permanent = game.getPermanent(event.getSourceId());
+        Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent == null) {
             return false;
         }

@@ -38,7 +38,7 @@ public final class MizzixsMastery extends CardImpl {
 
         // Overload {5}{R}{R}{R}
         Ability ability = new OverloadAbility(this, new MizzixsMasteryOverloadEffect(),
-                new ManaCostsImpl("{5}{R}{R}{R}"));
+                new ManaCostsImpl<>("{5}{R}{R}{R}"));
         ability.addEffect(new ExileSpellEffect());
         this.addAbility(ability);
     }

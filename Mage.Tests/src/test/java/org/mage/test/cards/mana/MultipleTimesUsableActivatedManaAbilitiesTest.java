@@ -35,9 +35,7 @@ public class MultipleTimesUsableActivatedManaAbilitiesTest extends CardTestPlaye
         
         setStrictChooseMode(true);
         execute();
-        
-        assertAllCommandsUsed();
-        
+
         assertTappedCount("Citanul Druid", true, 3);
         assertPermanentCount(playerA, "Leatherback Baloth", 1);
     }

@@ -52,7 +52,7 @@ public final class GrimoireThief extends CardImpl {
         // {U}, Sacrifice Grimoire Thief: Turn all cards exiled with 
         //Grimoire Thief face up. Counter all spells with those names.
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new GrimoireThiefCounterspellEffect(), new ManaCostsImpl("{U}"));
+                new GrimoireThiefCounterspellEffect(), new ManaCostsImpl<>("{U}"));
         ability2.addCost(new SacrificeSourceCost());
         this.addAbility(ability2);
 

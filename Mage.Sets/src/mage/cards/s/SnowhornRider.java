@@ -28,7 +28,7 @@ public final class SnowhornRider extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Morph {2}{G}{U}{R}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{G}{U}{R}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{G}{U}{R}")));
     }
 
     private SnowhornRider(final SnowhornRider card) {

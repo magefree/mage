@@ -45,7 +45,7 @@ public final class InTooDeep extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted permanent is a colorless Clue artifact with "{2}, Sacrifice this artifact: Draw a card" and loses all other abilities.
         this.addAbility(new SimpleStaticAbility(new BecomesCreatureAttachedEffect(

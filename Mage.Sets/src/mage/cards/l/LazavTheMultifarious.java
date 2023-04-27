@@ -52,7 +52,7 @@ public final class LazavTheMultifarious extends CardImpl {
         // {X}: Lazav, the Multifarious becomes a copy of target creature card in your graveyard with converted mana cost X, except its name is Lazav, the Multifarious, it's legendary in addition to its other types, and it has this ability.
         Ability ability = new SimpleActivatedAbility(
                 new LazavTheMultifariousEffect(),
-                new ManaCostsImpl("{X}")
+                new ManaCostsImpl<>("{X}")
         );
         ability.setTargetAdjuster(LazavTheMultifariousAdjuster.instance);
         this.addAbility(ability);
@@ -133,7 +133,7 @@ class LazavTheMultifariousCopyApplier extends CopyApplier {
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
         Ability ability = new SimpleActivatedAbility(
                 new LazavTheMultifariousEffect(),
-                new ManaCostsImpl("{X}")
+                new ManaCostsImpl<>("{X}")
         );
         ability.setTargetAdjuster(LazavTheMultifariousAdjuster.instance);
         blueprint.getAbilities().add(ability);

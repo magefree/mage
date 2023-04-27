@@ -25,7 +25,7 @@ public final class DreamTwist extends CardImpl {
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(3));
 
         // Flashback {1}{U}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{1}{U}")));
     }
 
     private DreamTwist(final DreamTwist card) {

@@ -21,7 +21,6 @@ public class DireFleetWarmongerTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Dire Fleet Warmonger", 5, 5);
     }

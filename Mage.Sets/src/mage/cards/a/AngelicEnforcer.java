@@ -6,13 +6,12 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.ControllerLifeCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControllerEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 
@@ -39,8 +38,8 @@ public final class AngelicEnforcer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainAbilityControllerEffect(HexproofAbility.getInstance())));
 
         // Angelic Enforcer's power and toughness are each equal to your life total.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(
-                ControllerLifeCount.instance, Duration.EndOfGame
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(
+                ControllerLifeCount.instance
         ).setText("{this}'s power and toughness are each equal to your life total")));
 
         // Whenever Angelic Enforcer attacks, double your life total.

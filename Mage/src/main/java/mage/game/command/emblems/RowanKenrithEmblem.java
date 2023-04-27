@@ -1,13 +1,15 @@
 package mage.game.command.emblems;
 
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.CopyStackAbilityEffect;
+import mage.abilities.effects.common.CopyStackObjectEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
 import mage.game.stack.StackAbility;
+
+import java.util.Arrays;
 
 /**
  * @author TheElk801
@@ -18,13 +20,15 @@ public final class RowanKenrithEmblem extends Emblem {
     public RowanKenrithEmblem() {
         this.setName("Emblem Rowan Kenrith");
         this.getAbilities().add(new RowanKenrithEmblemTriggeredAbility());
+
+        availableImageSetCodes = Arrays.asList("BBD", "CLB");
     }
 }
 
 class RowanKenrithEmblemTriggeredAbility extends TriggeredAbilityImpl {
 
     RowanKenrithEmblemTriggeredAbility() {
-        super(Zone.COMMAND, new CopyStackAbilityEffect(), false);
+        super(Zone.COMMAND, new CopyStackObjectEffect(), false);
     }
 
     private RowanKenrithEmblemTriggeredAbility(final RowanKenrithEmblemTriggeredAbility ability) {
@@ -50,7 +54,7 @@ class RowanKenrithEmblemTriggeredAbility extends TriggeredAbilityImpl {
         if (stackAbility == null || stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl) {
             return false;
         }
-        this.getEffects().setValue("stackAbility", stackAbility);
+        this.getEffects().setValue("stackObject", stackAbility);
         return true;
     }
 

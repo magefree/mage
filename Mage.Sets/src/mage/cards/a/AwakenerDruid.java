@@ -54,6 +54,7 @@ class AwakenerDruidBecomesCreatureEffect extends BecomesCreatureTargetEffect {
 
     public AwakenerDruidBecomesCreatureEffect() {
         super(new AwakenerDruidToken(), false, true, Duration.WhileOnBattlefield);
+        this.staticText = "target Forest becomes a 4/5 green Treefolk creature for as long as {this} remains on the battlefield. It's still a land";
     }
 
     public AwakenerDruidBecomesCreatureEffect(final AwakenerDruidBecomesCreatureEffect effect) {
@@ -73,11 +74,6 @@ class AwakenerDruidBecomesCreatureEffect extends BecomesCreatureTargetEffect {
             return false;
         }
         return super.apply(layer, sublayer, source, game);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "target Forest becomes a 4/5 green Treefolk creature for as long as {this} remains on the battlefield. It's still a land";
     }
 }
 

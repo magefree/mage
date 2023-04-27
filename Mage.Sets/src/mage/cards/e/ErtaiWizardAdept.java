@@ -32,7 +32,7 @@ public final class ErtaiWizardAdept extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{U}{U}, {tap}: Counter target spell.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{2}{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl<>("{2}{U}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);

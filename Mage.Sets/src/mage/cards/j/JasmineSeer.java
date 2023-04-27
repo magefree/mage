@@ -35,7 +35,7 @@ public final class JasmineSeer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{W}, {tap}: Reveal any number of white cards in your hand. You gain 2 life for each card revealed this way.
-        Ability ability = new SimpleActivatedAbility(new JasmineSeerEffect(), new ManaCostsImpl("{2}{W}"));
+        Ability ability = new SimpleActivatedAbility(new JasmineSeerEffect(), new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

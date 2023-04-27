@@ -1,11 +1,9 @@
 
 package org.mage.test.cards.facedown;
 
-import mage.cards.Card;
 import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -41,15 +39,13 @@ public class TriggerTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ixidron");
         
-        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", EmptyNames.FACE_DOWN_CREATURE.toString());
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-        
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
         
         assertGraveyardCount(playerA, "Midnight Reaper", 1);

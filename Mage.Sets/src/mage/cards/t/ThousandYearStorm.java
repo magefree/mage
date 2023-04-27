@@ -114,6 +114,7 @@ class ThousandYearStormEffect extends OneShotEffect {
     public ThousandYearStormEffect() {
         super(Outcome.Benefit);
         this.stormCount = -1;
+        this.staticText = "copy it for each other instant and sorcery spell you've cast before it this turn. You may choose new targets for the copies";
     }
 
     public ThousandYearStormEffect(final ThousandYearStormEffect effect) {
@@ -138,11 +139,6 @@ class ThousandYearStormEffect extends OneShotEffect {
 
     public void setStormCount(int stormCount) {
         this.stormCount = stormCount;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "copy it for each other instant and sorcery spell you've cast before it this turn. You may choose new targets for the copies";
     }
 }
 

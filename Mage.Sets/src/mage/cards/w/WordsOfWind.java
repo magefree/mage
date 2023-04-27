@@ -30,7 +30,7 @@ public final class WordsOfWind extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         // {1}: The next time you would draw a card this turn, each player returns a permanent they control to its owner's hand instead.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WordsOfWindEffect(), new ManaCostsImpl("{1}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WordsOfWindEffect(), new ManaCostsImpl<>("{1}")));
     }
 
     private WordsOfWind(final WordsOfWind card) {

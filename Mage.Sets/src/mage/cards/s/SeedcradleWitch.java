@@ -30,7 +30,7 @@ public final class SeedcradleWitch extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{G}{W}: Target creature gets +3/+3 until end of turn. Untap that creature.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(3, 3, Duration.EndOfTurn), new ManaCostsImpl("{2}{G}{W}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(3, 3, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{G}{W}"));
         ability.addEffect(new UntapTargetEffect().setText("untap that creature"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

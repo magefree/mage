@@ -137,4 +137,8 @@ public class ConditionalPreventionEffect extends PreventionEffectImpl {
         return new ConditionalPreventionEffect(this);
     }
 
+    @Override
+    public Condition getCondition() {
+        return condition;
+    }
 }

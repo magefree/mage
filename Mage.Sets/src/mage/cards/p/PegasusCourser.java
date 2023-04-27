@@ -1,23 +1,23 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.target.common.TargetAttackingCreature;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class PegasusCourser extends CardImpl {
@@ -40,7 +40,7 @@ public final class PegasusCourser extends CardImpl {
 
         // Whenever Pegasus Courser attacks, another target attacking creature gains flying until end of turn.
         Ability ability = new AttacksTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), false);
-        ability.addTarget(new TargetAttackingCreature(1, 1, filter, false));
+        ability.addTarget(new TargetPermanent(filter));
         addAbility(ability);
     }
 

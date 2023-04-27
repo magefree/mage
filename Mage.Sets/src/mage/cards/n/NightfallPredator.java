@@ -36,7 +36,7 @@ public final class NightfallPredator extends CardImpl {
                 new FightTargetSourceEffect().setText(
                         "{this} fights target creature. " +
                         "<i>(Each deals damage equal to its power to the other.)</i>"),
-                new ManaCostsImpl("{R}")
+                new ManaCostsImpl<>("{R}")
         );
         activatedAbility.addCost(new TapSourceCost());
         activatedAbility.addTarget(new TargetCreaturePermanent());

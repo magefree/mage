@@ -29,7 +29,7 @@ public final class GrimMonolith extends CardImpl {
         // {tap}: Add {C}{C}{C}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(3), new TapSourceCost()));
         // {4}: Untap Grim Monolith.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{4}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl<>("{4}")));
     }
 
     private GrimMonolith(final GrimMonolith card) {

@@ -21,7 +21,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class ElvishChampionForestwalkTest extends CardTestPlayerBase {
 
     /**
-     * Tests "If all other elves get the Forestwalk ability and can't be blockt from creatures whose controler has a forest in game"
+     * Tests "If all other elves get the Forestwalk ability and can't be blockt from creatures whose controller has a forest in game"
      */
 
     @Test

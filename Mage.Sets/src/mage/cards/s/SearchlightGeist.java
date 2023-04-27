@@ -32,7 +32,7 @@ public final class SearchlightGeist extends CardImpl {
         // {3}{B}: Searchlight Geist gains deathtouch until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn),
-                new ManaCostsImpl("{3}{B}")));
+                new ManaCostsImpl<>("{3}{B}")));
     }
 
     private SearchlightGeist(final SearchlightGeist card) {

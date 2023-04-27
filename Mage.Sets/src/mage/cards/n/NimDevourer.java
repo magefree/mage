@@ -44,7 +44,7 @@ public final class NimDevourer extends CardImpl {
         // {B}{B}: Return Nim Devourer from your graveyard to the battlefield, then sacrifice a creature. Activate this ability only during your upkeep.
         Ability ability = new ConditionalActivatedAbility(Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToBattlefieldEffect(false, false),
-                new ManaCostsImpl("{B}{B}"),
+                new ManaCostsImpl<>("{B}{B}"),
                 new IsStepCondition(PhaseStep.UPKEEP), null);
         ability.addEffect(new NimDevourerEffect());
         this.addAbility(ability);

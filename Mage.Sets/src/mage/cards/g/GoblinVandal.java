@@ -43,7 +43,7 @@ public final class GoblinVandal extends CardImpl {
         // Whenever Goblin Vandal attacks and isn't blocked, you may pay {R}. If you do, destroy target artifact defending player controls and Goblin Vandal assigns no combat damage this turn.
         Effect effect = new DestroyTargetEffect();
         effect.setText("destroy target artifact defending player controls");
-        DoIfCostPaid effect2 = new DoIfCostPaid(effect, new ManaCostsImpl("{R}"), "Pay {R} to destroy artifact of defending player?");
+        DoIfCostPaid effect2 = new DoIfCostPaid(effect, new ManaCostsImpl<>("{R}"), "Pay {R} to destroy artifact of defending player?");
         effect = new AssignNoCombatDamageSourceEffect(Duration.EndOfTurn);
         effect.setText("and {this} assigns no combat damage this turn");
         effect2.addEffect(effect);

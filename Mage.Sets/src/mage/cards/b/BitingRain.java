@@ -23,7 +23,7 @@ public final class BitingRain extends CardImpl {
         this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Duration.EndOfTurn));
 
         // Madness {2}{B}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{2}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{2}{B}")));
     }
 
     private BitingRain(final BitingRain card) {

@@ -35,7 +35,7 @@ public final class FallenIdeal extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature has flying and "Sacrifice a creature: This creature gets +2/+1 until end of turn."
         Ability ability = new SimpleStaticAbility(new GainAbilityAttachedEffect(

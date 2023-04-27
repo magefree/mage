@@ -42,7 +42,7 @@ public final class IntetTheDreamer extends CardImpl {
         // Whenever Intet, the Dreamer deals combat damage to a player, you may pay {2}{U}. If you do, exile the top card of your library face down.
         // You may play that card without paying its mana cost for as long as Intet remains on the battlefield.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new DoIfCostPaid(new IntetTheDreamerExileEffect(), new ManaCostsImpl("{2}{U}")), false, true));
+                new DoIfCostPaid(new IntetTheDreamerExileEffect(), new ManaCostsImpl<>("{2}{U}")), false, true));
 
         // You may look at that card for as long as it remains exiled.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new IntetTheDreamerLookEffect()));

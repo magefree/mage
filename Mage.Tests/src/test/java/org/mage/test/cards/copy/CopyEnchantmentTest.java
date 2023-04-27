@@ -57,7 +57,6 @@ public class CopyEnchantmentTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);

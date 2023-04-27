@@ -47,7 +47,7 @@ public final class ValiantKnight extends CardImpl {
                 new GainAbilityControlledEffect(
                         DoubleStrikeAbility.getInstance(),
                         Duration.EndOfTurn, filter
-                ), new ManaCostsImpl("{3}{W}{W}")
+                ), new ManaCostsImpl<>("{3}{W}{W}")
         ));
     }
 

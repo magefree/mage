@@ -21,6 +21,7 @@ public class DraftPlayer {
     protected Deck deck;
     protected List<Card> booster;
     protected boolean picking;
+    protected boolean boosterLoaded;
     protected boolean joined = false;
     protected Set<UUID> hiddenCards;
 
@@ -96,6 +97,18 @@ public class DraftPlayer {
 
     public void setJoined() {
         this.joined = true;
+    }
+    
+    public void setBoosterLoaded() {
+        boosterLoaded = true;
+    }
+    
+    public void setBoosterNotLoaded() {
+        boosterLoaded = false;
+    }
+    
+    public boolean isBoosterLoaded() {
+        return boosterLoaded;
     }
 
 }

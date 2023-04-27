@@ -31,7 +31,7 @@ public final class ElvishHexhunter extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {GW}, {tap}, Sacrifice Elvish Hexhunter: Destroy target enchantment.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{G/W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{G/W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetEnchantmentPermanent());

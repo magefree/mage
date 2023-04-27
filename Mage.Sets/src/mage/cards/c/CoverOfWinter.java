@@ -33,13 +33,13 @@ public final class CoverOfWinter extends CardImpl {
         this.addSuperType(SuperType.SNOW);
 
         // Cumulative upkeep {S}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{S}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{S}")));
 
         // If a creature would deal combat damage to you and/or one or more creatures you control, prevent X of that damage, where X is the number of age counters on Cover of Winter.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CoverOfWinterEffect()));
 
         // {S}: Put an age counter on Cover of Winter.
-        this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.AGE.createInstance()), new ManaCostsImpl("{S}")));
+        this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.AGE.createInstance()), new ManaCostsImpl<>("{S}")));
     }
 
     private CoverOfWinter(final CoverOfWinter card) {

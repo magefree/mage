@@ -27,7 +27,7 @@ public final class DeathPulse extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Cycling {1}{B}{B}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{B}{B}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{B}{B}")));
         // When you cycle Death Pulse, you may have target creature get -1/-1 until end of turn.
         Ability ability = new CycleTriggeredAbility(new BoostTargetEffect(-1, -1, Duration.EndOfTurn), true);
         ability.addTarget(new TargetCreaturePermanent());

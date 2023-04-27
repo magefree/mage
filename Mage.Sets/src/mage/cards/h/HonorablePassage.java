@@ -43,6 +43,7 @@ class HonorablePassageEffect extends PreventNextDamageFromChosenSourceToTargetEf
 
     public HonorablePassageEffect() {
         super(Duration.EndOfTurn);
+        this.staticText = "The next time a source of your choice would deal damage to any target this turn, prevent that damage. If damage from a red source is prevented this way, {this} deals that much damage to the source's controller";
     }
 
     public HonorablePassageEffect(final HonorablePassageEffect effect) {
@@ -72,10 +73,5 @@ class HonorablePassageEffect extends PreventNextDamageFromChosenSourceToTargetEf
             this.used = true;
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "The next time a source of your choice would deal damage to any target this turn, prevent that damage. If damage from a red source is prevented this way, {this} deals that much damage to the source's controller";
     }
 }

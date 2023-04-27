@@ -19,6 +19,7 @@ public class EntersBattlefieldOrAttacksSourceTriggeredAbility extends TriggeredA
 
     public EntersBattlefieldOrAttacksSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever {this} enters the battlefield or attacks, ");
     }
 
     public EntersBattlefieldOrAttacksSourceTriggeredAbility(final EntersBattlefieldOrAttacksSourceTriggeredAbility ability) {
@@ -43,10 +44,4 @@ public class EntersBattlefieldOrAttacksSourceTriggeredAbility extends TriggeredA
         }
         return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(this.getSourceId());
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} enters the battlefield or attacks, " ;
-    }
-
 }

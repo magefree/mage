@@ -27,7 +27,7 @@ public final class SoldierReplica extends CardImpl {
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new ManaCostsImpl<>("{1}{W}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent(new FilterAttackingOrBlockingCreature()));
         this.addAbility(ability);

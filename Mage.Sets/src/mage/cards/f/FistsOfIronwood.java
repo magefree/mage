@@ -36,7 +36,7 @@ public final class FistsOfIronwood extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // When Fists of Ironwood enters the battlefield, create two 1/1 green Saproling creature tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SaprolingToken(), 2), false));

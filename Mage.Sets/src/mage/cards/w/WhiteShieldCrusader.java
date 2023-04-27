@@ -35,10 +35,10 @@ public final class WhiteShieldCrusader extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
 
         // {W}: White Shield Crusader gains flying until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{W}")));
 
         // {W}{W}: White Shield Crusader gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,0, Duration.EndOfTurn), new ManaCostsImpl("{W}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,0, Duration.EndOfTurn), new ManaCostsImpl<>("{W}{W}")));
     }
 
     private WhiteShieldCrusader(final WhiteShieldCrusader card) {

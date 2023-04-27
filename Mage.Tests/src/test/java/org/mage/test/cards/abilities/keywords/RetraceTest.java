@@ -42,7 +42,7 @@ public class RetraceTest extends CardTestPlayerBase {
     }
 
     /**
-     * Test that it does cost {B}{1} + land discard
+     * Test that it does cost {1}{B} + land discard
      */
     @Test
     public void RetraceCostIncreaseCantPay() {
@@ -56,7 +56,7 @@ public class RetraceTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Thalia, Guardian of Thraben", 1);
         addCard(Zone.HAND, playerB, "Silvercoat Lion", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Raven's Crime", playerB);
+        checkPlayableAbility("Check price increase", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Raven's", false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

@@ -42,7 +42,7 @@ public final class RagingRavine extends CardImpl {
                 "land", Duration.EndOfTurn);
         effect.setText("Until end of turn, {this} becomes a 3/3 red and green Elemental creature");
         // {2}{R}{G}: Until end of turn, Raging Ravine becomes a 3/3 red and green Elemental creature with "Whenever this creature attacks, put a +1/+1 counter on it." It's still a land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}{R}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}{R}{G}"));
         effect = new GainAbilitySourceEffect(new AttacksTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false), Duration.EndOfTurn);
         effect.setText("with \"Whenever this creature attacks, put a +1/+1 counter on it.\" It's still a land");
         ability.addEffect(effect);

@@ -1,7 +1,6 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
@@ -22,7 +21,8 @@ import mage.cards.CardSetInfo;
 import mage.cards.ModalDoubleFacesCard;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
+import mage.filter.common.FilterAnyTarget;
+import mage.filter.common.FilterPermanentOrPlayer;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
@@ -31,6 +31,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetPermanentOrPlayer;
 
 import java.util.UUID;
 
@@ -78,7 +79,7 @@ public final class ToralfGodOfFury extends ModalDoubleFacesCard {
         )));
 
         // Equip {1}{R}
-        this.getRightHalfCard().addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{1}{R}")));
+        this.getRightHalfCard().addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{1}{R}"), false));
     }
 
     private ToralfGodOfFury(final ToralfGodOfFury card) {
@@ -116,10 +117,11 @@ class ToralfGodOfFuryTriggeredAbility extends TriggeredAbilityImpl {
         }
         this.getEffects().clear();
         this.getTargets().clear();
-        this.addEffect(new DamageTargetEffect(dEvent.getExcess()));
-        FilterCreaturePlayerOrPlaneswalker filter = new FilterCreaturePlayerOrPlaneswalker();
-        filter.getPermanentFilter().add(Predicates.not(new MageObjectReferencePredicate(new MageObjectReference(event.getTargetId(), game))));
-        this.addTarget(new TargetAnyTarget(filter));
+        int excessDamage = dEvent.getExcess();
+        this.addEffect(new DamageTargetEffect(excessDamage));
+        FilterPermanentOrPlayer filter = new FilterAnyTarget();
+        filter.getPermanentFilter().add(Predicates.not(new MageObjectReferencePredicate(event.getTargetId(), game)));
+        this.addTarget(new TargetPermanentOrPlayer(filter).withChooseHint(Integer.toString(excessDamage) + " damage"));
         return true;
     }
 

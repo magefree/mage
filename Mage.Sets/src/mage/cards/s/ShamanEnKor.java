@@ -51,7 +51,7 @@ public final class ShamanEnKor extends CardImpl {
         this.addAbility(ability);
 
         // {1}{W}: The next time a source of your choice would deal damage to target creature this turn, that damage is dealt to Shaman en-Kor instead.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShamanEnKorRedirectFromTargetEffect(), new ManaCostsImpl("{1}{W}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShamanEnKorRedirectFromTargetEffect(), new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

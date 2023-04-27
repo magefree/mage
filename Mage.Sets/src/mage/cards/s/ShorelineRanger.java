@@ -29,7 +29,7 @@ public final class ShorelineRanger extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Islandcycling {2}
-        this.addAbility(new IslandcyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new IslandcyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private ShorelineRanger(final ShorelineRanger card) {

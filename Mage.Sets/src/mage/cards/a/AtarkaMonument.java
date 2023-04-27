@@ -36,7 +36,7 @@ public final class AtarkaMonument extends CardImpl {
                         .withSubType(SubType.DRAGON)
                         .withType(CardType.ARTIFACT)
                         .withAbility(FlyingAbility.getInstance()),
-                "", Duration.EndOfTurn), new ManaCostsImpl("{4}{R}{G}")));
+                "", Duration.EndOfTurn), new ManaCostsImpl<>("{4}{R}{G}")));
     }
 
     private AtarkaMonument(final AtarkaMonument card) {

@@ -32,7 +32,7 @@ public final class DruidsCall extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Whenever enchanted creature is dealt damage, its controller creates that many 1/1 green Squirrel creature tokens.
         Effect effect = new CreateTokenTargetEffect(new SquirrelToken(), SavedDamageValue.MANY);

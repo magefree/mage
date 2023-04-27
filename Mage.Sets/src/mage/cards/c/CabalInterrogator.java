@@ -33,7 +33,7 @@ public final class CabalInterrogator extends CardImpl {
         // Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
                 new DiscardCardYouChooseTargetEffect(TargetController.ANY, ManacostVariableValue.REGULAR),
-                new ManaCostsImpl("{X}{B}"));
+                new ManaCostsImpl<>("{X}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

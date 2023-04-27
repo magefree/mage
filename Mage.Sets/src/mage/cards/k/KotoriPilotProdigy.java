@@ -27,7 +27,7 @@ public final class KotoriPilotProdigy extends CardImpl {
     private static final FilterPermanent filter2 = new FilterArtifactCreaturePermanent("artifact creature you control");
 
     static {
-        filter.add(TargetController.YOU.getControllerPredicate());
+        filter2.add(TargetController.YOU.getControllerPredicate());
     }
 
     public KotoriPilotProdigy(UUID ownerId, CardSetInfo setInfo) {

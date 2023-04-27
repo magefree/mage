@@ -19,6 +19,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.util.CardUtil;
 import org.apache.log4j.Logger;
 
@@ -44,7 +45,7 @@ public final class Spellbinder extends CardImpl {
         this.addAbility(new SpellbinderTriggeredAbility());
 
         // Equip {4}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4), new TargetControlledCreaturePermanent(), false));
     }
 
     private Spellbinder(final Spellbinder card) {
@@ -119,7 +120,7 @@ class SpellbinderImprintEffect extends OneShotEffect {
             if (!controller.getHand().isEmpty()) {
                 TargetCard target = new TargetCard(Zone.HAND, filter);
                 if (target.canChoose(source.getControllerId(), source, game)
-                        && controller.choose(Outcome.Benefit, controller.getHand(), target, game)) {
+                        && controller.choose(Outcome.Benefit, controller.getHand(), target, source, game)) {
                     Card card = controller.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {
                         controller.moveCardToExileWithInfo(card, source.getSourceId(),

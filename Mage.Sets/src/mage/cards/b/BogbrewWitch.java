@@ -41,7 +41,7 @@ public final class BogbrewWitch extends CardImpl {
         TargetCardInLibrary target = new TargetCardInLibrary(1, 1, new FilterCard(filter));
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new SearchLibraryPutInPlayEffect(target, true, true, Outcome.PutCardInPlay),
-                new ManaCostsImpl("{2}"));
+                new ManaCostsImpl<>("{2}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

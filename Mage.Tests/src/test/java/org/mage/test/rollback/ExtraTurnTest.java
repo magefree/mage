@@ -20,7 +20,7 @@ public class ExtraTurnTest extends CardTestPlayerBase {
         // Take an extra turn after this one.
         addCard(Zone.HAND, playerA, "Time Walk");
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Quicken");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Quicken", true);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Time Walk");
 
         rollbackTurns(3, PhaseStep.PRECOMBAT_MAIN, playerA, 0);
@@ -30,5 +30,4 @@ public class ExtraTurnTest extends CardTestPlayerBase {
 
         assertActivePlayer(playerA);
     }
-
 }

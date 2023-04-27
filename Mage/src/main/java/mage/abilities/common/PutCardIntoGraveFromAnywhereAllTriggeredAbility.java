@@ -19,7 +19,6 @@ import mage.target.targetpointer.FixedTarget;
 public class PutCardIntoGraveFromAnywhereAllTriggeredAbility extends TriggeredAbilityImpl {
 
     private final FilterCard filter;
-    private final String ruleText;
     private final SetTargetPointer setTargetPointer;
 
     public PutCardIntoGraveFromAnywhereAllTriggeredAbility(Effect effect, boolean optional, TargetController targetController) {
@@ -54,14 +53,12 @@ public class PutCardIntoGraveFromAnywhereAllTriggeredAbility extends TriggeredAb
                 sb.append('a');
         }
         sb.append(" graveyard from anywhere, ");
-        ruleText = sb.toString();
-
+        setTriggerPhrase(sb.toString());
     }
 
     public PutCardIntoGraveFromAnywhereAllTriggeredAbility(final PutCardIntoGraveFromAnywhereAllTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
-        this.ruleText = ability.ruleText;
         this.setTargetPointer = ability.setTargetPointer;
     }
 
@@ -95,10 +92,5 @@ public class PutCardIntoGraveFromAnywhereAllTriggeredAbility extends TriggeredAb
 
         }
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return ruleText;
     }
 }

@@ -1,10 +1,11 @@
 package mage.cards.t;
 
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.condition.common.AttackedThisTurnCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.condition.common.RaidCondition;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.hint.common.RaidHint;
 import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -13,7 +14,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.game.permanent.token.HumanSoldierToken;
-import mage.watchers.common.AttackedThisTurnWatcher;
+import mage.watchers.common.PlayerAttackedWatcher;
 
 import java.util.UUID;
 
@@ -35,13 +36,14 @@ public final class TrynnChampionOfFreedom extends CardImpl {
         this.addAbility(new PartnerWithAbility("Silvar, Devourer of the Free"));
 
         // At the beginning of your end step, if you attacked this turn, create a 1/1 white Human Soldier creature token.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(
-                        new CreateTokenEffect(new HumanSoldierToken()),
-                        TargetController.YOU, false
-                ), AttackedThisTurnCondition.instance, "At the beginning of your end step, " +
-                "if you attacked this turn, create a 1/1 white Human Soldier creature token."
-        ), new AttackedThisTurnWatcher());
+        Ability ability = new BeginningOfEndStepTriggeredAbility(
+                new CreateTokenEffect(new HumanSoldierToken()),
+                TargetController.YOU,
+                RaidCondition.instance,
+                false
+        );
+        ability.addHint(RaidHint.instance);
+        this.addAbility(ability, new PlayerAttackedWatcher());
     }
 
     private TrynnChampionOfFreedom(final TrynnChampionOfFreedom card) {

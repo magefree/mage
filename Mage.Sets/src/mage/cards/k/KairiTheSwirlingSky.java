@@ -45,7 +45,7 @@ public final class KairiTheSwirlingSky extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Ward {3}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{3}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{3}"), false));
 
         // When Kairi, the Swirling Sky dies, choose one —
         // • Return any number of target nonland permanents with total mana value 6 or less to their owners' hands.
@@ -133,7 +133,7 @@ class KairiTheSwirlingSkyEffect extends OneShotEffect {
                 0, 2, StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY
         );
         target.setNotTarget(true);
-        player.choose(outcome, player.getGraveyard(), target, game);
+        player.choose(outcome, player.getGraveyard(), target, source, game);
         return player.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
     }
 }

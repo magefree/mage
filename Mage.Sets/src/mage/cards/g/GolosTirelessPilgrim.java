@@ -41,7 +41,7 @@ public final class GolosTirelessPilgrim extends CardImpl {
         // {2}{W}{U}{B}{R}{G}: Exile the top three cards of your library. You may play them this turn without paying their mana costs.
         this.addAbility(new SimpleActivatedAbility(
                 new GolosTirelessPilgrimEffect(),
-                new ManaCostsImpl("{2}{W}{U}{B}{R}{G}")
+                new ManaCostsImpl<>("{2}{W}{U}{B}{R}{G}")
         ));
     }
 

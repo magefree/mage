@@ -39,7 +39,7 @@ public final class KrovikanElementalist extends CardImpl {
         // {2}{R}: Target creature gets +1/+0 until end of turn.
         Ability ability = new SimpleActivatedAbility(
                 new BoostTargetEffect(1, 0, Duration.EndOfTurn),
-                new ManaCostsImpl("{2}{R}")
+                new ManaCostsImpl<>("{2}{R}")
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -48,7 +48,7 @@ public final class KrovikanElementalist extends CardImpl {
         ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(
                 FlyingAbility.getInstance(),
                 Duration.EndOfTurn
-        ), new ManaCostsImpl("{U}{U}"));
+        ), new ManaCostsImpl<>("{U}{U}"));
         ability.addEffect(new KrovikanElementalistEffect());
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);

@@ -1,4 +1,3 @@
-
 package mage.cards.o;
 
 import java.util.UUID;
@@ -7,6 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -18,8 +18,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -29,20 +28,23 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class OboroEnvoy extends CardImpl {
 
+    private static final DynamicValue xValue = new SignInversionDynamicValue(CardsInControllerHandCount.instance);
+
     public OboroEnvoy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.subtype.add(SubType.MOONFOLK);
-        this.subtype.add(SubType.WIZARD);
+        this.subtype.add(SubType.MOONFOLK, SubType.WIZARD);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // {2}, Return a land you control to its owner's hand: Target creature gets -X/-0 until end of turn, where X is the number of cards in your hand.
-        Effect effect = new BoostTargetEffect(new SignInversionDynamicValue(CardsInControllerHandCount.instance), StaticValue.get(-0), Duration.EndOfTurn, true);
+        Effect effect = new BoostTargetEffect(xValue, StaticValue.get(0), Duration.EndOfTurn);
         effect.setText("Target creature gets -X/-0 until end of turn, where X is the number of cards in your hand");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
-        ability.addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
+        Ability ability = new SimpleActivatedAbility(effect, new GenericManaCost(2));
+        ability.addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

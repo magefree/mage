@@ -33,7 +33,7 @@ public final class ZhalfirinCrusader extends CardImpl {
         this.addAbility(new FlankingAbility());
 
         // {1}{W}: The next 1 damage that would be dealt to Zhalfirin Crusader this turn is dealt to any target instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RedirectDamageFromSourceToTargetEffect(Duration.EndOfTurn, 1, ONE_USAGE_ABSOLUTE), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RedirectDamageFromSourceToTargetEffect(Duration.EndOfTurn, 1, ONE_USAGE_ABSOLUTE), new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

@@ -35,7 +35,7 @@ public final class KalitasBloodchiefOfGhet extends CardImpl {
         this.subtype.add(SubType.WARRIOR);
 
         // {B}{B}{B}, {T}: Destroy target creature. If that creature dies this way, create a black Vampire creature token. Its power is equal to that creature's power and its toughness is equal to that creature's toughness.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KalitasDestroyEffect(), new ManaCostsImpl("{B}{B}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KalitasDestroyEffect(), new ManaCostsImpl<>("{B}{B}{B}"));
         ability.addCost(new TapSourceCost());
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

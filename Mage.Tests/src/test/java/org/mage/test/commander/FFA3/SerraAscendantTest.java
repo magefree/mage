@@ -33,7 +33,7 @@ public class SerraAscendantTest extends CardTestCommander3PlayersFFA {
         addCard(Zone.HAND, playerC, "Lightning Bolt", 2);
         addCard(Zone.BATTLEFIELD, playerC, "Mountain", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Serra Ascendant");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Serra Ascendant", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Soul's Majesty", "Serra Ascendant");
 
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, "Lightning Bolt", playerA);

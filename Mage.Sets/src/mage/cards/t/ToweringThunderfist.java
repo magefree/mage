@@ -29,7 +29,7 @@ public final class ToweringThunderfist extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {W}: Towering Thunderfist gains vigilance until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{W}")));
     }
 
     private ToweringThunderfist(final ToweringThunderfist card) {

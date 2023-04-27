@@ -24,6 +24,7 @@ public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect 
     protected final boolean tapped;
     protected final boolean ownerControl;
     private final boolean haste;
+    private final boolean attacking;
 
     public ReturnSourceFromGraveyardToBattlefieldEffect() {
         this(false);
@@ -38,11 +39,16 @@ public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect 
     }
 
     public ReturnSourceFromGraveyardToBattlefieldEffect(boolean tapped, boolean ownerControl, boolean haste) {
+        this(tapped, ownerControl, haste, false);
+    }
+
+    public ReturnSourceFromGraveyardToBattlefieldEffect(boolean tapped, boolean ownerControl, boolean haste, boolean attacking) {
         super(Outcome.PutCreatureInPlay);
         this.tapped = tapped;
         this.ownerControl = ownerControl;
         this.haste = haste;
-        setText();
+        this.attacking = attacking;
+        this.staticText = setText();
     }
 
     public ReturnSourceFromGraveyardToBattlefieldEffect(final ReturnSourceFromGraveyardToBattlefieldEffect effect) {
@@ -50,6 +56,7 @@ public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect 
         this.tapped = effect.tapped;
         this.ownerControl = effect.ownerControl;
         this.haste = effect.haste;
+        this.attacking = effect.attacking;
     }
 
     @Override
@@ -82,19 +89,27 @@ public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect 
                     game.addEffect(effect, source);
                 }
             }
+            if (attacking) {
+                game.getCombat().addAttackingCreature(card.getId(), game);
+            }
         }
         return true;
     }
 
-    private void setText() {
+    private String setText() {
         StringBuilder sb = new StringBuilder("return {this} from your graveyard to the battlefield");
         if (tapped) {
             sb.append(" tapped");
         }
+        if (attacking) {
+            if (tapped) {
+                sb.append(" and");
+            }
+            sb.append(" attacking");
+        }
         if (ownerControl) {
             sb.append(" under its owner's control");
         }
-        staticText = sb.toString();
+        return sb.toString();
     }
-
 }

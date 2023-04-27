@@ -31,7 +31,7 @@ public final class SerpentineBasilisk extends CardImpl {
                 new CreateDelayedTriggeredAbilityEffect(
                         new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect("destroy that creature at end of combat")), true), false, true));
         // Morph {1}{G}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{1}{G}{G}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{G}{G}")));
     }
 
     private SerpentineBasilisk(final SerpentineBasilisk card) {

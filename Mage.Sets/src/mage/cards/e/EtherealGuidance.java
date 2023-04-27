@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -7,7 +6,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -19,7 +18,7 @@ public final class EtherealGuidance extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");
 
         // Creatures you control get +2/+1 until end of turn.
-        this.getSpellAbility().addEffect(new BoostControlledEffect(2, 1, Duration.EndOfTurn, new FilterCreaturePermanent()));
+        this.getSpellAbility().addEffect(new BoostControlledEffect(2, 1, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES));
     }
 
     private EtherealGuidance(final EtherealGuidance card) {

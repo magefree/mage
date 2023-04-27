@@ -34,7 +34,7 @@ public final class KabiraVindicator extends LevelerCard {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{2}{W}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{2}{W}")));
 
         Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         abilities1.add(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES, true)));

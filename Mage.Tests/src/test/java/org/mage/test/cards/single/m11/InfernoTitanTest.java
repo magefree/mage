@@ -30,7 +30,6 @@ public class InfernoTitanTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Inferno Titan", 1);
         assertGraveyardCount(playerA, "Grizzly Bears", 1);
@@ -56,7 +55,6 @@ public class InfernoTitanTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Inferno Titan", 1); // own in safe
         assertPermanentCount(playerA, "Grizzly Bears", 1); // own in safe
@@ -84,7 +82,6 @@ public class InfernoTitanTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Inferno Titan", 1); // own in safe
         assertPermanentCount(playerA, "Grizzly Bears", 1); // own in safe

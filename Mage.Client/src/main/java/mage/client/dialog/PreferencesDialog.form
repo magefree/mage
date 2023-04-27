@@ -42,8 +42,8 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="tabsPanel" min="-2" pref="554" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <Component id="tabsPanel" pref="554" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="saveButton" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="exitButton" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -98,7 +98,7 @@
                       <Component id="main_gamelog" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="main_battlefield" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="22" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -171,18 +171,19 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                          <Component id="tooltipDelayLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="383" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="tooltipDelayLabel" max="32767" attributes="0"/>
-                                  <Component id="tooltipDelay" alignment="1" max="32767" attributes="0"/>
-                              </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="showCardName" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="showFullImagePath" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="tooltipDelay" alignment="0" min="-2" pref="522" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -268,22 +269,25 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="showPlayerNamesPermanently" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="nonLandPermanentsInOnePile" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="cbConfirmEmptyManaPool" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="cbAllowRequestToShowHandCards" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="cbShowStormCounter" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="cbAskMoveToGraveOrder" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="showAbilityPickerForced" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              </Group>
-                              <Component id="displayLifeOnAvatar" alignment="0" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="lblTargetAutoChoose" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
+                          <Component id="cbTargetAutoChooseLevel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                      <Component id="displayLifeOnAvatar" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="cbAskMoveToGraveOrder" alignment="0" min="-2" pref="596" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="showPlayerNamesPermanently" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="nonLandPermanentsInOnePile" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="cbConfirmEmptyManaPool" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="cbAllowRequestToShowHandCards" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="cbShowStormCounter" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="showAbilityPickerForced" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="0" pref="315" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -305,6 +309,11 @@
                           <Component id="cbConfirmEmptyManaPool" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="cbAskMoveToGraveOrder" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblTargetAutoChoose" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbTargetAutoChooseLevel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -328,7 +337,6 @@
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="text" type="java.lang.String" value="Show player names on avatar permanently"/>
                     <Property name="toolTipText" type="java.lang.String" value="Instead showing the names only if you hover over the avatar with the mouse, the name is shown all the time."/>
-                    <Property name="horizontalAlignment" type="int" value="2"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showPlayerNamesPermanentlyActionPerformed"/>
@@ -339,7 +347,6 @@
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="text" type="java.lang.String" value="Display life on avatar image"/>
                     <Property name="toolTipText" type="java.lang.String" value="Display the player&apos;s life over its avatar image."/>
-                    <Property name="horizontalAlignment" type="int" value="2"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="displayLifeOnAvatarActionPerformed"/>
@@ -350,7 +357,6 @@
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="text" type="java.lang.String" value="Show ability picker for 1 available option (spells without costs, mdf/split side, adventure)"/>
                     <Property name="toolTipText" type="java.lang.String" value="This prevents you from accidently activating abilities what you don&apos;t want (example: if you haven&apos;t mana to cast main side, but clicks on mdf card and play land instead)"/>
-                    <Property name="horizontalAlignment" type="int" value="2"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showAbilityPickerForcedActionPerformed"/>
@@ -361,7 +367,6 @@
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="text" type="java.lang.String" value="Allow requests from players and spectators to show your hand cards"/>
                     <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;This is the default setting used for your matches. If activated other players or spectators&lt;br&gt;&#xa;of your match can send a request so you can allow them to see your hand cards."/>
-                    <Property name="horizontalAlignment" type="int" value="2"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbAllowRequestToShowHandCardsActionPerformed"/>
@@ -372,7 +377,6 @@
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="text" type="java.lang.String" value="Show the number of spell casts during the current turn"/>
                     <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Adds a little box left to the short keys line with the number&lt;br&gt;&#xa;of spells already cast during the current turn (storm counter)."/>
-                    <Property name="horizontalAlignment" type="int" value="2"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbShowStormCounterActionPerformed"/>
@@ -383,7 +387,6 @@
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="text" type="java.lang.String" value="Confirm if you want to pass a phase/step but there is still mana in your mana pool"/>
                     <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;If activated you get a confirm message if you pass priority while stack is empty&lt;br&gt;&#xa; and you still have mana in your mana pool."/>
-                    <Property name="horizontalAlignment" type="int" value="2"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbConfirmEmptyManaPoolActionPerformed"/>
@@ -394,11 +397,40 @@
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="text" type="java.lang.String" value="Ask player for setting order cards go to graveyard"/>
                     <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;If activated and multiple cards go to the graveyard at the same time&lt;br&gt;&#xa;the player is asked to set the order of the cards."/>
-                    <Property name="horizontalAlignment" type="int" value="2"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbAskMoveToGraveOrderActionPerformed"/>
                   </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblTargetAutoChoose">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Auto-choose targets for player:"/>
+                    <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;When there is only one possible outcome for targeting, the targets can be chosen for you.&#xa;&lt;br&gt;&#xa;&lt;b&gt;None:&lt;/b&gt; All targeting must be done by the player.&#xa;&lt;br&gt;&#xa;&lt;b&gt;Most:&lt;/b&gt; All targeting other than feel-bad effects (discarding, destroy, sacrifice, exile) that target you, a card you own, or a permanent/spell you control.&#xa;&lt;br&gt;&#xa;&lt;b&gt;All:&lt;/b&gt; All targeting that can be automated will be."/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="cbTargetAutoChooseLevel">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="3">
+                        <StringItem index="0" value="Off"/>
+                        <StringItem index="1" value="Most"/>
+                        <StringItem index="2" value="All"/>
+                      </StringArray>
+                    </Property>
+                    <Property name="selectedIndex" type="int" value="1"/>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection component="lblTargetAutoChoose" name="toolTipText" type="property"/>
+                    </Property>
+                  </Properties>
+                  <AccessibilityProperties>
+                    <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Auto-choose targets for player combo box"/>
+                  </AccessibilityProperties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbTargetAutoChooseLevelActionPerformed"/>
+                  </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
@@ -4082,7 +4114,7 @@
                           <Component id="checkBoxEndTurnOthers" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="phases_stopSettings" pref="291" max="32767" attributes="0"/>
+                      <Component id="phases_stopSettings" pref="354" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -4341,7 +4373,7 @@
                       <Component id="panelCardImages" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="panelBackgroundImages" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="98" max="32767" attributes="0"/>
+                      <EmptySpace pref="142" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -6297,12 +6329,12 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="526" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="623" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                           <Component id="themesCategory" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="430" max="32767" attributes="0"/>
+                          <EmptySpace pref="523" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -6395,7 +6427,6 @@
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[100, 30]"/>
         </Property>
-        <Property name="verticalAlignment" type="int" value="3"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveButtonActionPerformed"/>
@@ -6413,7 +6444,6 @@
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[100, 30]"/>
         </Property>
-        <Property name="verticalAlignment" type="int" value="3"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exitButtonActionPerformed"/>

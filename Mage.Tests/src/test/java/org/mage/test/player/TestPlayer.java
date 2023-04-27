@@ -256,7 +256,7 @@ public class TestPlayer implements Player {
         int index = 0;
         if (indexedMatcher.matches()) {
             filteredName = indexedMatcher.group(1);
-            index = Integer.valueOf(indexedMatcher.group(2));
+            index = Integer.parseInt(indexedMatcher.group(2));
         }
         filter.add(new NamePredicate(filteredName, true)); // must find any cards even without names
         List<Permanent> allPermanents = game.getBattlefield().getAllActivePermanents(filter, controllerID, game);
@@ -567,7 +567,7 @@ public class TestPlayer implements Player {
         if (actionsToRemoveLater.size() > 0) {
             List<PlayerAction> removed = new ArrayList<>();
             actionsToRemoveLater.forEach((action, step) -> {
-                if (game.getStep().getType() != step) {
+                if (game.getTurnStepType() != step) {
                     action.onActionRemovedLater(game, this);
                     actions.remove(action);
                     removed.add(action);
@@ -584,7 +584,7 @@ public class TestPlayer implements Player {
         List<PlayerAction> tempActions = new ArrayList<>();
         tempActions.addAll(actions);
         for (PlayerAction action : tempActions) {
-            if (action.getTurnNum() == game.getTurnNum() && action.getStep() == game.getStep().getType()) {
+            if (action.getTurnNum() == game.getTurnNum() && action.getStep() == game.getTurnStepType()) {
 
                 if (action.getAction().startsWith(ACTIVATE_ABILITY)) {
                     String command = action.getAction();
@@ -620,8 +620,10 @@ public class TestPlayer implements Player {
                             groupsForTargetHandling = null;
                         }
                     }
-                    // TODO: fix wrong commands (on non existing card), it's HUGE (350+ failed tests with wrong commands)
-                    //Assert.fail("Can't find ability to activate command: " + command);
+                    printStart("Available for " + this.getName());
+                    printAbilities(game, this.getPlayable(game, true));
+                    printEnd();
+                    Assert.fail("Can't find ability to activate command: " + command);
                 } else if (action.getAction().startsWith(ACTIVATE_MANA)) {
                     String command = action.getAction();
                     command = command.substring(command.indexOf(ACTIVATE_MANA) + ACTIVATE_MANA.length());
@@ -670,6 +672,13 @@ public class TestPlayer implements Player {
                             }
                         }
                     }
+                    printStart("Available for " + this.getName());
+                    printAbilities(game, this.getPlayable(game, true));
+                    printEnd();
+                    // TODO: enable assert and rewrite failed activateManaAbility tests
+                    //  (must use checkAbility instead multiple mana calls)
+                    LOGGER.warn("WARNING, test must be rewritten to use checkAbility instead multiple mana calls");
+                    //Assert.fail("Can't find mana ability to activate command: " + command);
                 } else if (action.getAction().startsWith("addCounters:")) {
                     String command = action.getAction();
                     command = command.substring(command.indexOf("addCounters:") + 12);
@@ -738,7 +747,7 @@ public class TestPlayer implements Player {
                     // play step
                     if (command.equals(AI_COMMAND_PLAY_STEP)) {
                         AIRealGameSimulation = true; // disable on action's remove
-                        actionsToRemoveLater.put(action, game.getStep().getType());
+                        actionsToRemoveLater.put(action, game.getTurnStepType());
                         computerPlayer.priority(game);
                         return true;
                     }
@@ -976,7 +985,7 @@ public class TestPlayer implements Player {
                         }
 
                         // show graveyard
-                        if (params[0].equals(SHOW_COMMAND_GRAVEYEARD) && params.length == 1) {
+                        if (params[0].equals(SHOW_COMMAND_GRAVEYARD) && params.length == 1) {
                             printStart(action.getActionName());
                             printCards(computerPlayer.getGraveyard().getCards(game));
                             printEnd();
@@ -1064,8 +1073,8 @@ public class TestPlayer implements Player {
 
     /**
      * Adds actions to the player actions after an executed rollback Actions
-     * have to be added after the rollback becauuse otherwise the actions are
-     * not valid because otehr ot the same actions are already taken before the
+     * have to be added after the rollback because otherwise the actions are
+     * not valid because other ot the same actions are already taken before the
      * rollback.
      *
      * @param game
@@ -1205,9 +1214,9 @@ public class TestPlayer implements Player {
                         + a.getSourceObject(game).getIdName() + " -> "
                         + (a.toString().startsWith("Cast ") ? "[" + a.getManaCostsToPay().getText() + "] -> " : "") // printed cost, not modified
                         + (a.toString().length() > 0
-                        ? a.toString().substring(0, Math.min(20, a.toString().length()))
+                        ? a.toString().substring(0, Math.min(40, a.toString().length())) + "..."
                         : a.getClass().getSimpleName())
-                        + "..."))
+                ))
                 .sorted()
                 .collect(Collectors.toList());
 
@@ -1702,15 +1711,15 @@ public class TestPlayer implements Player {
                 String[] groups = command.split("\\$");
                 for (int i = 1; i < groups.length; i++) {
                     String group = groups[i];
-                    if (group.startsWith("planeswalker=")) {
-                        String planeswalkerName = group.substring(group.indexOf("planeswalker=") + 13);
-                        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_PLANESWALKER, game)) {
-                            if (hasObjectTargetNameOrAlias(permanent, planeswalkerName)) {
+                    if (group.startsWith("permanent=")) {
+                        String permanentName = group.substring(group.indexOf("permanent=") + 10);
+                        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT, game)) {
+                            if (hasObjectTargetNameOrAlias(permanent, permanentName)) {
                                 defenderId = permanent.getId();
+                                break;
                             }
                         }
-                    }
-                    if (group.startsWith("defendingPlayer=")) {
+                    } else if (group.startsWith("defendingPlayer=")) {
                         String defendingPlayerName = group.substring(group.indexOf("defendingPlayer=") + 16);
                         for (Player defendingPlayer : game.getPlayers().values()) {
                             if (defendingPlayer.getName().equals(defendingPlayerName)) {
@@ -1734,7 +1743,7 @@ public class TestPlayer implements Player {
                 // Second check to filter creature for combat - less strict to workaround issue in #3038
                 FilterCreatureForCombat secondFilter = new FilterCreatureForCombat();
                 // secondFilter.add(Predicates.not(AttackingPredicate.instance));
-                secondFilter.add(Predicates.not(new SummoningSicknessPredicate()));
+                secondFilter.add(Predicates.not(SummoningSicknessPredicate.instance));
                 // TODO: Cannot enforce legal attackers multiple times per combat. See issue #3038
                 Permanent attacker = findPermanent(secondFilter, groups[0], computerPlayer.getId(), game, false);
                 if (attacker != null && attacker.canAttack(defenderId, game)) {
@@ -1956,7 +1965,7 @@ public class TestPlayer implements Player {
             }
             Assert.fail("Missing " + choiceType.toUpperCase(Locale.ENGLISH) + " def for"
                     + " turn " + game.getTurnNum()
-                    + ", step " + (game.getStep() != null ? game.getStep().getType().name() : "not started")
+                    + ", step " + (game.getStep() != null ? game.getTurnStepType().name() : "not started")
                     + ", " + this.getName()
                     + "\n" + reason);
         }
@@ -2004,9 +2013,10 @@ public class TestPlayer implements Player {
         assertAliasSupportInChoices(false);
 
         if (!choices.isEmpty()) {
+            String possibleChoice = choices.get(0);
 
             // skip choices
-            if (choices.get(0).equals(CHOICE_SKIP)) {
+            if (possibleChoice.equals(CHOICE_SKIP)) {
                 choices.remove(0);
                 return true;
             }
@@ -2014,8 +2024,8 @@ public class TestPlayer implements Player {
             if (choice.setChoiceByAnswers(choices, true)) {
                 return true;
             }
-            // TODO: enable fail checks and fix tests
-            //Assert.fail("Wrong choice");
+
+            assertWrongChoiceUsage(possibleChoice);
         }
 
         String choicesInfo;
@@ -2047,8 +2057,7 @@ public class TestPlayer implements Player {
                 index++;
             }
 
-            // TODO: enable fail checks and fix tests
-            //Assert.fail("wrong choice");
+            assertWrongChoiceUsage(choice);
         }
 
         this.chooseStrictModeFailed("choice", game, String.join("\n", rEffects.values()));
@@ -2256,11 +2265,9 @@ public class TestPlayer implements Player {
             }
 
             // TODO: enable fail checks and fix tests
-            /*
             if (!target.getTargetName().equals("starting player")) {
-                Assert.fail("Wrong choice");
+                assertWrongChoiceUsage(choices.size() > 0 ? choices.get(0) : "empty list");
             }
-             */
         }
 
         this.chooseStrictModeFailed("choice", game, getInfo(game.getObject(source)) + ";\n" + getInfo(target));
@@ -2315,8 +2322,7 @@ public class TestPlayer implements Player {
             if (target.getOriginalTarget() instanceof TargetPlayer
                     || target.getOriginalTarget() instanceof TargetAnyTarget
                     || target.getOriginalTarget() instanceof TargetCreatureOrPlayer
-                    || target.getOriginalTarget() instanceof TargetPermanentOrPlayer
-                    || target.getOriginalTarget() instanceof TargetDefender) {
+                    || target.getOriginalTarget() instanceof TargetPermanentOrPlayer) {
                 for (String targetDefinition : targets) {
                     if (!targetDefinition.startsWith("targetPlayer=")) {
                         continue;
@@ -2339,7 +2345,6 @@ public class TestPlayer implements Player {
                     || (target.getOriginalTarget() instanceof TargetPermanentOrPlayer)
                     || (target.getOriginalTarget() instanceof TargetAnyTarget)
                     || (target.getOriginalTarget() instanceof TargetCreatureOrPlayer)
-                    || (target.getOriginalTarget() instanceof TargetDefender)
                     || (target.getOriginalTarget() instanceof TargetPermanentOrSuspendedCard)) {
                 for (String targetDefinition : targets) {
                     if (targetDefinition.startsWith("targetPlayer=")) {
@@ -2368,9 +2373,6 @@ public class TestPlayer implements Player {
                         }
                         if (filter instanceof FilterPermanentOrPlayer) {
                             filter = ((FilterPermanentOrPlayer) filter).getPermanentFilter();
-                        }
-                        if (filter instanceof FilterPlaneswalkerOrPlayer) {
-                            filter = ((FilterPlaneswalkerOrPlayer) filter).getFilterPermanent();
                         }
                         if (filter instanceof FilterPermanentOrSuspendedCard) {
                             filter = ((FilterPermanentOrSuspendedCard) filter).getPermanentFilter();
@@ -2644,6 +2646,7 @@ public class TestPlayer implements Player {
 
             // TODO: enable fail checks and fix tests
             //Assert.fail("Wrong target");
+            LOGGER.warn("Wrong target");
         }
 
         this.chooseStrictModeFailed("target", game, getInfo(source, game) + "\n" + getInfo(target));
@@ -2654,14 +2657,16 @@ public class TestPlayer implements Player {
     public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
         assertAliasSupportInChoices(false);
         if (!choices.isEmpty()) {
+            String choice = choices.get(0);
+
             for (TriggeredAbility ability : abilities) {
-                if (ability.toString().startsWith(choices.get(0))) {
+                if (ability.toString().startsWith(choice)) {
                     choices.remove(0);
                     return ability;
                 }
             }
-            // TODO: enable fail checks and fix tests
-            //Assert.fail("Wrong choice");
+
+            assertWrongChoiceUsage(choice);
         }
 
         this.chooseStrictModeFailed("choice", game,
@@ -2682,16 +2687,18 @@ public class TestPlayer implements Player {
         }
         assertAliasSupportInChoices(false);
         if (!choices.isEmpty()) {
-            if (choices.get(0).equals("No")) {
+            String choice = choices.get(0);
+
+            if (choice.equals("No")) {
                 choices.remove(0);
                 return false;
             }
-            if (choices.get(0).equals("Yes")) {
+            if (choice.equals("Yes")) {
                 choices.remove(0);
                 return true;
             }
-            // TODO: enable fail checks and fix tests
-            //Assert.fail("Wrong choice");
+
+            assertWrongChoiceUsage(choice);
         }
 
         this.chooseStrictModeFailed("choice", game, getInfo(source, game)
@@ -2942,11 +2949,6 @@ public class TestPlayer implements Player {
     @Override
     public void discardToMax(Game game) {
         computerPlayer.discardToMax(game);
-    }
-
-    @Override
-    public boolean putInHand(Card card, Game game) {
-        return computerPlayer.putInHand(card, game);
     }
 
     @Override
@@ -3349,16 +3351,6 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public int getLoyaltyUsePerTurn() {
-        return computerPlayer.getLoyaltyUsePerTurn();
-    }
-
-    @Override
-    public void setLoyaltyUsePerTurn(int loyaltyUsePerTurn) {
-        computerPlayer.setLoyaltyUsePerTurn(loyaltyUsePerTurn);
-    }
-
-    @Override
     public int getMaxHandSize() {
         return computerPlayer.getMaxHandSize();
     }
@@ -3675,13 +3667,13 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean getCanPayLifeCost() {
-        return computerPlayer.getCanPayLifeCost();
+    public PayLifeCostLevel getPayLifeCostLevel() {
+        return computerPlayer.getPayLifeCostLevel();
     }
 
     @Override
-    public void setCanPayLifeCost(boolean canPayLifeCost) {
-        computerPlayer.setCanPayLifeCost(canPayLifeCost);
+    public void setPayLifeCostLevel(PayLifeCostLevel payLifeCostLevel) {
+        computerPlayer.setPayLifeCostLevel(payLifeCostLevel);
     }
 
     @Override
@@ -3822,6 +3814,11 @@ public class TestPlayer implements Player {
     @Override
     public boolean moveCardToHandWithInfo(Card card, Ability source, Game game, boolean withName) {
         return computerPlayer.moveCardToHandWithInfo(card, source, game, withName);
+    }
+
+    @Override
+    public boolean moveCardsToHandWithInfo(Cards cards, Ability source, Game game, boolean withName) {
+        return computerPlayer.moveCardsToHandWithInfo(cards, source, game, withName);
     }
 
     @Override
@@ -3968,9 +3965,7 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean choose(Outcome outcome, Cards cards,
-                          TargetCard target, Game game
-    ) {
+    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
         assertAliasSupportInChoices(false);
         if (!choices.isEmpty()) {
 
@@ -3998,7 +3993,7 @@ public class TestPlayer implements Player {
                             continue;
                         }
                         if (hasObjectTargetNameOrAlias(card, targetName)) {
-                            if (target.isNotTarget() || target.canTarget(card.getId(), game)) {
+                            if (target.isNotTarget() || target.canTarget(card.getId(), source, game)) {
                                 target.add(card.getId(), game);
                                 targetFound = true;
                                 break;
@@ -4011,12 +4006,12 @@ public class TestPlayer implements Player {
                     return true;
                 }
             }
-            // TODO: enable fail checks and fix tests
-            //Assert.fail("Wrong choice");
+
+            assertWrongChoiceUsage(choices.size() > 0 ? choices.get(0) : "empty list");
         }
 
         this.chooseStrictModeFailed("choice", game, getInfo(target));
-        return computerPlayer.choose(outcome, cards, target, game);
+        return computerPlayer.choose(outcome, cards, target, source, game);
     }
 
     @Override
@@ -4347,6 +4342,16 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public boolean getStrictChooseMode() {
+        return this.strictChooseMode;
+    }
+
+    @Override
+    public UserData getControllingPlayersUserData(Game game) {
+        return null;
+    }
+
+    @Override
     public void addPhyrexianToColors(FilterMana colors) {
         computerPlayer.addPhyrexianToColors(colors);
     }
@@ -4366,7 +4371,40 @@ public class TestPlayer implements Player {
         }
 
         if (!choices.isEmpty()) {
+            String choice = choices.get(0);
             for (SpellAbility ability : useable.values()) {
+                if (ability.toString().startsWith(choice)) {
+                    choices.remove(0);
+                    return ability;
+                }
+            }
+
+            assertWrongChoiceUsage(choice);
+        }
+
+        String allInfo = useable.values().stream().map(Object::toString).collect(Collectors.joining("\n"));
+        this.chooseStrictModeFailed("choice", game, getInfo(card) + " - can't select ability to cast.\n" + "Card's abilities:\n" + allInfo);
+        return computerPlayer.chooseAbilityForCast(card, game, noMana);
+    }
+
+    @Override
+    public ActivatedAbility chooseLandOrSpellAbility(Card card, Game game, boolean noMana) {
+        assertAliasSupportInChoices(false);
+        MageObject object = game.getObject(card.getId()); // must be object to find real abilities (example: commander)
+        Map<UUID, ActivatedAbility> useable = new LinkedHashMap<>(PlayerImpl.getCastableSpellAbilities(game, this.getId(), object, game.getState().getZone(object.getId()), noMana));
+        if (canPlayLand()) {
+            for (Ability ability : card.getAbilities(game)) {
+                if (ability instanceof PlayLandAbility) {
+                    useable.put(ability.getId(), (PlayLandAbility) ability);
+                }
+            }
+        }
+        if (useable.size() == 1) {
+            return useable.values().iterator().next();
+        }
+
+        if (!choices.isEmpty()) {
+            for (ActivatedAbility ability : useable.values()) {
                 if (ability.toString().startsWith(choices.get(0))) {
                     choices.remove(0);
                     return ability;
@@ -4375,6 +4413,7 @@ public class TestPlayer implements Player {
 
             // TODO: enable fail checks and fix tests
             //Assert.fail("Wrong choice");
+            LOGGER.warn("Wrong choice");
         }
 
         String allInfo = useable.values().stream().map(Object::toString).collect(Collectors.joining("\n"));
@@ -4406,10 +4445,12 @@ public class TestPlayer implements Player {
         }
 
         // non-strict mode allows computer assisted choices (for old tests compatibility only)
-        if (!this.strictChooseMode) {
-            return true;
-        }
+        return !this.strictChooseMode;
+    }
 
-        return false;
+    private void assertWrongChoiceUsage(String choice) {
+        // TODO: enable fail checks and fix tests, it's a part of setStrictChooseMode's implementation to all tests
+        //Assert.fail("Wrong choice command: " + choice);
+        LOGGER.warn("Wrong choice command: " + choice);
     }
 }

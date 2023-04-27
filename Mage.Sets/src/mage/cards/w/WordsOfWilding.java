@@ -28,7 +28,7 @@ public final class WordsOfWilding extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
         // {1}: The next time you would draw a card this turn, create a 2/2 green Bear creature token instead.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WordsOfWildingEffect(), new ManaCostsImpl("{1}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WordsOfWildingEffect(), new ManaCostsImpl<>("{1}")));
     }
 
     private WordsOfWilding(final WordsOfWilding card) {

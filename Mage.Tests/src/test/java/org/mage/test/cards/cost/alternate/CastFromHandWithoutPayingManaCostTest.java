@@ -3,7 +3,6 @@ package org.mage.test.cards.cost.alternate;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -25,16 +24,21 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Gray Ogre", 1);
     }
 
+    /**
+     * Omniscience only lets you cast spells for free from your hand.
+     * Haakon lets you cast knights from your graveyard.
+     *
+     * If you control both, you must still pay costs to cast knights from your graveyard.
+     */
     @Test
     public void testSpellHasCostIfCastFromGraveyard() {
-        // You may cast nonland cards from your hand without paying their mana costs.
         addCard(Zone.BATTLEFIELD, playerA, "Omniscience", 1);
 
         addCard(Zone.BATTLEFIELD, playerA, "Haakon, Stromgald Scourge", 1);
 
         addCard(Zone.GRAVEYARD, playerA, "Knight of the White Orchid", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Knight of the White Orchid");
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Knight of the White Orchid", false);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -222,9 +226,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-        
-        assertHandCount(playerA, "Silvercoat Lion", 1);        
+        assertHandCount(playerA, "Silvercoat Lion", 1);
         assertHandCount(playerB, 0);
 
         assertGraveyardCount(playerA, "Far // Away", 1);
@@ -235,10 +237,9 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
     
 
     /**
+     * Omniscience only lets you cast spells from your hand without paying their mana costs.
      * If another effect (e.g. Future Sight) allows you to cast nonland cards
-     * from zones other than your hand, Xmage incorrectly lets you cast those
-     * cards without paying their mana costs. Omniscience only lets you cast
-     * spells from your hand without paying their mana costs.
+     * from zones other than your hand, then you still have to pay the costs.
      */
     @Test
     public void testCastingWithFutureSight() {
@@ -252,8 +253,8 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerA, "Silvercoat Lion", 1);
         skipInitShuffling();
 
+        setStrictChooseMode(true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
-        setChoice(playerA, true);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -297,7 +298,6 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Barbed Lightning", 1);
         assertGraveyardCount(playerB, "Bog Wraith", 1);
@@ -309,14 +309,14 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
     }
 
     /**
-     * If a spell has an unpayable cost (e.g. Ancestral Vision, which has no
-     * mana cost), Omniscience should allow you to cast that spell without
-     * paying its mana cost. In the case of Ancestral Vision, for example, Xmage
-     * only gives you the option to suspend Ancestral Vision. 117.6a If an
-     * unpayable cost is increased by an effect or an additional cost is
-     * imposed, the cost is still unpayable. If an alternative cost is applied
-     * to an unpayable cost, including an effect that allows a player to cast a
-     * spell without paying its mana cost, the alternative cost may be paid.
+     * If a spell has an unpayable cost (e.g. Ancestral Vision, which has no mana cost),
+     * Omniscience should allow you to cast that spell without paying its mana cost.
+     * In the case of Ancestral Vision, for example, Xmage only gives you the option to suspend Ancestral Vision.
+     *
+     * 118.6a   If an unpayable cost is increased by an effect or an additional cost is imposed,
+     *          the cost is still unpayable.
+     *          If an alternative cost is applied to an unpayable cost, including an effect that allows a player
+     *          to cast a spell without paying its mana cost, the alternative cost may be paid.
      */
     @Test
     public void testCastingUnpayableCost() {
@@ -327,8 +327,9 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         // Target player draws three cards.
         addCard(Zone.HAND, playerA, "Ancestral Vision", 1);
 
+        setStrictChooseMode(true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ancestral Vision", playerA);
-        addTarget(playerA, playerB);
+        setChoice(playerA, "Yes");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -363,7 +364,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         // Creature - 3/3 Swampwalk
         addCard(Zone.HAND, playerA, "Bog Wraith", 1); // Creature {3}{B} (3/3)
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Omniscience");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Omniscience", true);
         setChoice(playerA, true); // Pay alternative costs? ({W}{U}{B}{R}{G})   
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bog Wraith");
@@ -374,8 +375,6 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-        
         assertPermanentCount(playerA, "Omniscience", 1);
         assertPermanentCount(playerA, "Bog Wraith", 1);
 

@@ -45,7 +45,7 @@ public final class NantukoShaman extends CardImpl {
         this.addAbility(ability);
 
         // Suspend 1-{2}{G}{G}
-        this.addAbility(new SuspendAbility(1, new ManaCostsImpl("{2}{G}{G}"), this));
+        this.addAbility(new SuspendAbility(1, new ManaCostsImpl<>("{2}{G}{G}"), this));
     }
 
     private NantukoShaman(final NantukoShaman card) {

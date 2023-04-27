@@ -26,7 +26,6 @@ public class ChooseTargetTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
@@ -49,7 +48,6 @@ public class ChooseTargetTest extends CardTestPlayerBase {
         //setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertPermanentCount(playerB, "Silvercoat Lion", 1);

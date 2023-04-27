@@ -29,7 +29,7 @@ public final class SliverQueen extends CardImpl {
         this.toughness = new MageInt(7);
 
         // {2}: Create a 1/1 colorless Sliver creature token.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SliverToken()), new ManaCostsImpl("{2}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SliverToken()), new ManaCostsImpl<>("{2}")));
     }
 
     private SliverQueen(final SliverQueen card) {

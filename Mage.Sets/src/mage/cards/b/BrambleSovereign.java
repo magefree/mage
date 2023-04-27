@@ -44,7 +44,7 @@ public final class BrambleSovereign extends CardImpl {
         // Whenever another nontoken creature enters the battlefield, you may pay {1}{G}. If you do, that creature's controller creates a token that's a copy of that creature.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD,
-                new DoIfCostPaid(new BrambleSovereignEffect(), new ManaCostsImpl("{1}{G}")),
+                new DoIfCostPaid(new BrambleSovereignEffect(), new ManaCostsImpl<>("{1}{G}")),
                 filter, false, SetTargetPointer.PERMANENT,
                 "Whenever another nontoken creature enters the battlefield, you may pay {1}{G}. "
                 + "If you do, that creature's controller creates a token that's a copy of that creature."

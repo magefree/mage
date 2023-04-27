@@ -27,7 +27,7 @@ public final class PotionOfHealing extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
 
         // {W}, {T}, Sacrifice Potion of Healing: You gain 3 life.
-        Ability ability = new SimpleActivatedAbility(new GainLifeEffect(3), new ManaCostsImpl("{W}"));
+        Ability ability = new SimpleActivatedAbility(new GainLifeEffect(3), new ManaCostsImpl<>("{W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

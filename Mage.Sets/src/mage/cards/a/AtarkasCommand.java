@@ -46,7 +46,7 @@ public final class AtarkasCommand extends CardImpl {
         effect.setText("Creatures you control get +1/+1");
         mode = new Mode(effect);
         effect = new GainAbilityControlledEffect(ReachAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gain reach until the end of turn");
+        effect.setText("and gain reach until end of turn");
         mode.addEffect(effect);
         this.getSpellAbility().addMode(mode);
 

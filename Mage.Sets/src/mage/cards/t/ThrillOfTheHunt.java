@@ -25,7 +25,7 @@ public final class ThrillOfTheHunt extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 2, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Flashback {W}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{W}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{W}")));
     }
 
     private ThrillOfTheHunt(final ThrillOfTheHunt card) {

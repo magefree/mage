@@ -13,6 +13,7 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -26,12 +27,6 @@ import java.util.UUID;
  */
 public final class MinionReflector extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a nontoken creature");
-
-    static {
-        filter.add(TokenPredicate.FALSE);
-    }
-
     public MinionReflector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
@@ -42,7 +37,7 @@ public final class MinionReflector extends CardImpl {
                         new MinionReflectorEffect(), new ManaCostsImpl<>("{2}"), "Pay {2} " +
                         "to create a token that's a copy of that creature that entered the battlefield?"
                 ),
-                filter, false, SetTargetPointer.PERMANENT, null
+                StaticFilters.FILTER_CREATURE_NON_TOKEN, false, SetTargetPointer.PERMANENT, null
         ));
     }
 

@@ -20,6 +20,7 @@ public final class OphiomancerSnakeToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(DeathtouchAbility.getInstance());
+        setOriginalExpansionSetCode("CC2");
     }
 
     public OphiomancerSnakeToken(final OphiomancerSnakeToken token) {

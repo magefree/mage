@@ -21,6 +21,7 @@ public class DealsCombatDamageTriggeredAbility extends TriggeredAbilityImpl {
     public DealsCombatDamageTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.usedInPhase = false;
+        setTriggerPhrase("Whenever {this} deals combat damage, ");
     }
 
     public DealsCombatDamageTriggeredAbility(final DealsCombatDamageTriggeredAbility ability) {
@@ -52,10 +53,5 @@ public class DealsCombatDamageTriggeredAbility extends TriggeredAbilityImpl {
             usedInPhase = false;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} deals combat damage, ";
     }
 }

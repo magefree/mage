@@ -24,7 +24,7 @@ public final class CallOfTheHerd extends CardImpl {
         // Create a 3/3 green Elephant creature token.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ElephantToken()));
         // Flashback {3}{G}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{3}{G}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{G}")));
     }
 
     private CallOfTheHerd(final CallOfTheHerd card) {

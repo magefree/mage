@@ -72,11 +72,9 @@ class AlignedHedronNetworkExileEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) { return false;}
 
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent == null) { return false; }
 
-        // If Whale leaves the battlefield before its triggered ability resolves,
-        // the target creature won't be exiled.
         Set<Card> toExile = new LinkedHashSet<>(game.getBattlefield().getActivePermanents(filter, controller.getId(), source, game));
         if (toExile.isEmpty()) { return false; }
         

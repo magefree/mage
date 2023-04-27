@@ -38,7 +38,7 @@ public final class DarigaazTheIgniter extends CardImpl {
 
         // Whenever Darigaaz, the Igniter deals combat damage to a player, you may pay {2}{R}. If you do, choose a color, then that player reveals their hand and Darigaaz deals damage to the player equal to the number of cards of that color revealed this way.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(
-                new DarigaazTheIgniterEffect(), new ManaCostsImpl("{2}{R}")), false, true));
+                new DarigaazTheIgniterEffect(), new ManaCostsImpl<>("{2}{R}")), false, true));
     }
 
     private DarigaazTheIgniter(final DarigaazTheIgniter card) {

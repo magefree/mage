@@ -28,7 +28,7 @@ public final class TeferisProtege extends CardImpl {
 
         // {1}{U}, {T}: Draw a card, then discard a card.
         Ability ability = new SimpleActivatedAbility(
-                new DrawDiscardControllerEffect(1, 1), new ManaCostsImpl("{1}{U}")
+                new DrawDiscardControllerEffect(1, 1), new ManaCostsImpl<>("{1}{U}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

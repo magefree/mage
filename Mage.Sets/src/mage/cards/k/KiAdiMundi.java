@@ -42,7 +42,7 @@ public final class KiAdiMundi extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter)));
 
         // Meditate {1}{G}
-        this.addAbility(new MeditateAbility(new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new MeditateAbility(new ManaCostsImpl<>("{1}{G}")));
     }
 
     private KiAdiMundi(final KiAdiMundi card) {

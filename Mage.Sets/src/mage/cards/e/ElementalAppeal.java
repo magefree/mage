@@ -71,7 +71,7 @@ class ElementalAppealEffect extends OneShotEffect {
         CreateTokenEffect effect = new CreateTokenEffect(new RedElementalWithTrampleAndHaste());
         if (effect.apply(game, source)) {
             effect.exileTokensCreatedAtNextEndStep(game, source);
-            if (KickedCondition.instance.apply(game, source)) {
+            if (KickedCondition.ONCE.apply(game, source)) {
                 List<Predicate<MageObject>> predList = new ArrayList<>();
                 for (UUID tokenId : effect.getLastAddedTokenIds()) {
                     predList.add(new CardIdPredicate(tokenId));

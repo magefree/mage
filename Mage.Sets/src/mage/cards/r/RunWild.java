@@ -30,7 +30,7 @@ public final class RunWild extends CardImpl {
         effect1.setText("Until end of turn, target creature gains trample");
         this.getSpellAbility().addEffect(effect1);
 
-        Effect effect2 = new GainAbilityTargetEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")), Duration.EndOfTurn);
+        Effect effect2 = new GainAbilityTargetEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{G}")), Duration.EndOfTurn);
         effect2.setText("and \"{G}: Regenerate this creature\"");
         this.getSpellAbility().addEffect(effect2);
 

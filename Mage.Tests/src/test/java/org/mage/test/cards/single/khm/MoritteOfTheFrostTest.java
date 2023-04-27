@@ -35,7 +35,6 @@ public class MoritteOfTheFrostTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Moritte of the Frost", 1); // removed to graveyard due 0/0
     }
@@ -64,7 +63,6 @@ public class MoritteOfTheFrostTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Moritte of the Frost", 1); // boosted +1/+1
     }
@@ -99,7 +97,6 @@ public class MoritteOfTheFrostTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Grizzly Bears", 2);
 

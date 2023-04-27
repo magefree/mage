@@ -32,7 +32,7 @@ public final class Earthlink extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{R}{G}");
 
         // At the beginning of your upkeep, sacrifice Earthlink unless you pay {2}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{2}")), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{2}")), TargetController.YOU, false));
 
         // Whenever a creature dies, that creature's controller sacrifices a land.
         this.addAbility(new DiesCreatureTriggeredAbility(new EarthlinkEffect(), false, false, true));

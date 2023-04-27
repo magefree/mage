@@ -33,17 +33,18 @@ public class TokenLimitTest extends CardTestPlayerBase {
 
     @Test
     public void testOnePlayerHitsLimitWithOtherPlayer() {
-        addCard(Zone.BATTLEFIELD, playerA, procession, 4);
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 33);
-        addCard(Zone.BATTLEFIELD, playerB, "Plains", 3);
         addCard(Zone.HAND, playerA, secure);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 33);
+        addCard(Zone.BATTLEFIELD, playerA, procession, 4);
+
         addCard(Zone.HAND, playerB, secure);
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 3);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, secure);
         setChoice(playerA, "X=32");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, secure);
-        setChoice(playerB, "X=3");
+        setChoice(playerB, "X=2");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

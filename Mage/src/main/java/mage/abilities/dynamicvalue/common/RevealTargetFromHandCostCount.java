@@ -25,12 +25,12 @@ public enum RevealTargetFromHandCostCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "number of revealed cards";
+        return "";
     }
 
     @Override
     public RevealTargetFromHandCostCount copy() {
-        return RevealTargetFromHandCostCount.instance;
+        return instance;
     }
 
     @Override

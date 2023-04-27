@@ -2,6 +2,7 @@ package mage.cards.k;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -11,25 +12,18 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.watchers.common.AttackedThisTurnWatcher;
 import java.util.UUID;
-import mage.abilities.common.AttackingCreaturePutIntoGraveyardTriggeredAbility;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AttackingPredicate;
 
 /**
  * @author TheElk801
  */
 public final class KardurDoomscourge extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("an attacking creature");
-
-    static {
-        filter.add(AttackingPredicate.instance);
-    }
+    private static final FilterAttackingCreature filter = new FilterAttackingCreature("an attacking creature");
 
     public KardurDoomscourge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
@@ -49,9 +43,9 @@ public final class KardurDoomscourge extends CardImpl {
         this.addAbility(ability);
 
         // Whenever an attacking creature dies, each opponent loses 1 life and you gain 1 life.
-        Ability ability2 = new AttackingCreaturePutIntoGraveyardTriggeredAbility(new LoseLifeOpponentsEffect(1), filter, false, true, false);
-        ability2.addEffect(new GainLifeEffect(1).concatBy("and"));
-        this.addAbility(ability2);
+        ability = new DiesCreatureTriggeredAbility(new LoseLifeOpponentsEffect(1), false, filter);
+        ability.addEffect(new GainLifeEffect(1).concatBy("and"));
+        this.addAbility(ability);
     }
 
     private KardurDoomscourge(final KardurDoomscourge card) {

@@ -29,14 +29,14 @@ public final class ChimericSphere extends CardImpl {
                         .withSubType(SubType.CONSTRUCT)
                         .withType(CardType.ARTIFACT)
                         .withAbility(FlyingAbility.getInstance()),
-                "", Duration.EndOfTurn), new ManaCostsImpl("{2}")));
+                "", Duration.EndOfTurn), new ManaCostsImpl<>("{2}")));
 
         // {2}: Until end of turn, Chimeric Sphere becomes a 3/2 Construct artifact creature without flying.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
                 new CreatureToken(3, 2, "3/2 Construct artifact creature without flying")
                         .withSubType(SubType.CONSTRUCT)
                         .withType(CardType.ARTIFACT),
-                "", Duration.EndOfTurn), new ManaCostsImpl("{2}")));
+                "", Duration.EndOfTurn), new ManaCostsImpl<>("{2}")));
     }
 
     private ChimericSphere(final ChimericSphere card) {

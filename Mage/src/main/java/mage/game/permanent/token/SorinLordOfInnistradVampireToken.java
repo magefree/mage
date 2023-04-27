@@ -6,6 +6,8 @@ import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.LifelinkAbility;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -20,6 +22,8 @@ public final class SorinLordOfInnistradVampireToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(LifelinkAbility.getInstance());
+
+        availableImageSetCodes = Arrays.asList("DKA");
     }
 
     public SorinLordOfInnistradVampireToken(final SorinLordOfInnistradVampireToken token) {

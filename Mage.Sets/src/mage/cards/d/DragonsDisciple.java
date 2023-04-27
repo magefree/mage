@@ -44,7 +44,9 @@ public final class DragonsDisciple extends CardImpl {
         // Dragons you control have ward {1}.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new WardAbility(new GenericManaCost(1)), Duration.WhileOnBattlefield, filter
-        )));
+        ).setText("Dragons you control have ward {1}. " +
+                "<i>(Whenever a Dragon you control becomes the target of a spell or ability an opponent controls, " +
+                "counter it unless that player pays 1.)</i>")));
     }
 
     private DragonsDisciple(final DragonsDisciple card) {

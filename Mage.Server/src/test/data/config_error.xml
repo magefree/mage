@@ -32,7 +32,6 @@
     />
     <playerTypes>
         <playerType name="Human" jar="mage-player-human.jar" className="mage.player.human.HumanPlayer"/>
-        <!--<playerType name="Computer - minimax" jar="mage-player-aiminimax.jar" className="mage.player.ai.ComputerPlayer3"/>-->
         <playerType name="Computer - mad" jar="mage-player-ai-ma.jar" className="mage.player.ai.ComputerPlayer7"/>
         <playerType name="Computer - monte carlo" jar="mage-player-aimcts.jar" className="mage.player.ai.ComputerPlayerMCTS"/>
         <playerType name="Computer - draftbot" jar="mage-player-ai-draft-bot.jar" className="mage.player.ai.ComputerDraftPlayer"/>
@@ -87,6 +86,7 @@
         <draftCube name="Sam Black's No Search Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.SamBlacksCube"/>
         <draftCube name="Timothee Simonot's Twisted Color Pie Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.TimotheeSimonotsTwistedColorPieCube"/>
         <draftCube name="MTGA Cube 2020 April" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MTGACube2020April"/>
+        <draftCube name="MTGO Khans Expanded Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.KhansExpandedCube"/>
         <draftCube name="MTGO Cube March 2014" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MTGOMarchCube2014"/>
         <draftCube name="MTGO Legacy Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegacyCube"/>
         <draftCube name="MTGO Legacy Cube 2015 March" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegacyCubeMarch2015"/>

@@ -23,6 +23,8 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author jeffwadsworth
@@ -45,7 +47,7 @@ public final class UnscytheKillerOfKings extends CardImpl {
         this.addAbility(new UnscytheKillerOfKingsTriggeredAbility(new UnscytheEffect()));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private UnscytheKillerOfKings(final UnscytheKillerOfKings card) {
@@ -62,6 +64,7 @@ class UnscytheKillerOfKingsTriggeredAbility extends TriggeredAbilityImpl {
 
     public UnscytheKillerOfKingsTriggeredAbility(Effect effect) {
         super(Zone.ALL, effect, true);
+        setTriggerPhrase("Whenever a creature dealt damage by equipped creature this turn dies, ");
     }
 
     public UnscytheKillerOfKingsTriggeredAbility(final UnscytheKillerOfKingsTriggeredAbility ability) {
@@ -101,11 +104,6 @@ class UnscytheKillerOfKingsTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature dealt damage by equipped creature this turn dies, ";
-    }
 }
 
 class UnscytheEffect extends OneShotEffect {
@@ -131,10 +129,13 @@ class UnscytheEffect extends OneShotEffect {
             return false;
         }
         Card card = game.getCard(targetPointer.getFirst(game, source));
-        if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD && controller.moveCardToExileWithInfo(card, null, "", source, game, Zone.GRAVEYARD, true)) {
+        if (card == null) {
+            return false;
+        }
+        if (game.getState().getZone(card.getId()) == Zone.GRAVEYARD && controller.moveCardToExileWithInfo(card, null, "", source, game, Zone.GRAVEYARD, true)) {
             ZombieToken zombie = new ZombieToken();
             return zombie.putOntoBattlefield(1, game, source, source.getControllerId());
         }
-        return true;
+        return false;
     }
 }

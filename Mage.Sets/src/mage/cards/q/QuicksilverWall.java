@@ -31,7 +31,7 @@ public final class QuicksilverWall extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
         // {4}: Return Quicksilver Wall to its owner's hand. Any player may activate this ability.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-            new ReturnToHandSourceEffect(true), new ManaCostsImpl("{4}"));
+            new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{4}"));
         ability.setMayActivate(TargetController.ANY);
         ability.addEffect(new InfoEffect("Any player may activate this ability"));
         this.addAbility(ability);

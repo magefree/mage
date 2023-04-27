@@ -24,6 +24,7 @@ public final class ExtravagantReplication extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public ExtravagantReplication(UUID ownerId, CardSetInfo setInfo) {

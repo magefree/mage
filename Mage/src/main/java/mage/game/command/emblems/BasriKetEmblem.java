@@ -27,5 +27,7 @@ public final class BasriKetEmblem extends Emblem {
                 .setText(", then put a +1/+1 counter on each creature you control")
         );
         this.getAbilities().add(ability);
+
+        this.setExpansionSetCodeForImage("M21");
     }
 }

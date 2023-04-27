@@ -34,7 +34,7 @@ public final class RiptideBiologist extends CardImpl {
         // Protection from Beasts
         this.addAbility(new ProtectionAbility(filter));
         // Morph {2}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{U}")));
     }
 
     private RiptideBiologist(final RiptideBiologist card) {

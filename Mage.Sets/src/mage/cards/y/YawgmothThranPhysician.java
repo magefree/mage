@@ -56,7 +56,7 @@ public final class YawgmothThranPhysician extends CardImpl {
         this.addAbility(ability);
 
         // {B}{B}, Discard a card: Proliferate.
-        ability = new SimpleActivatedAbility(new ProliferateEffect(), new ManaCostsImpl("{B}{B}"));
+        ability = new SimpleActivatedAbility(new ProliferateEffect(), new ManaCostsImpl<>("{B}{B}"));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
     }

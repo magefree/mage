@@ -32,14 +32,14 @@ public final class Chainflinger extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{R}, {tap}: Chainflinger deals 1 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1),new ManaCostsImpl("{1}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1),new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
         // Threshold - {2}{R}, {tap}: Chainflinger deals 2 damage to any target. Activate this ability only if seven or more cards are in your graveyard.
         Ability thresholdAbility = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
             new DamageTargetEffect(2),
-            new ManaCostsImpl("{2}{R}"),
+            new ManaCostsImpl<>("{2}{R}"),
             new CardsInControllerGraveyardCondition(7));
         thresholdAbility.addCost(new TapSourceCost());
         thresholdAbility.addTarget(new TargetAnyTarget());

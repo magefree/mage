@@ -23,7 +23,7 @@ public final class RhysticDeluge extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
 
         // {U}: Tap target creature unless its controller pays {1}.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new TapTargetEffect(), new ManaCostsImpl("{1}")), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new TapTargetEffect(), new ManaCostsImpl<>("{1}")), new ManaCostsImpl<>("{U}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

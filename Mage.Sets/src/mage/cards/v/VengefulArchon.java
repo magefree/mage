@@ -37,7 +37,7 @@ public final class VengefulArchon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {X}: Prevent the next X damage that would be dealt to you this turn. If damage is prevented this way, Vengeful Archon deals that much damage to target player.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VengefulArchonEffect(), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VengefulArchonEffect(), new ManaCostsImpl<>("{X}"));
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }

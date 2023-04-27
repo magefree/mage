@@ -33,14 +33,14 @@ public final class DreadfulApathy extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature can't attack or block.
         this.addAbility(new SimpleStaticAbility(new CantAttackBlockAttachedEffect(AttachmentType.AURA)));
 
         // {2}{W}: Exile enchanted creature.
-        this.addAbility(new SimpleActivatedAbility(new ExileAttachedEffect(), new ManaCostsImpl("{2}{W}")));
+        this.addAbility(new SimpleActivatedAbility(new ExileAttachedEffect(), new ManaCostsImpl<>("{2}{W}")));
     }
 
     private DreadfulApathy(final DreadfulApathy card) {

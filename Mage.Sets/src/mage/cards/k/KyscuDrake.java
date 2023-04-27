@@ -46,7 +46,7 @@ public final class KyscuDrake extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {G}: Kyscu Drake gets +0/+1 until end of turn. Activate this ability only once each turn.
-        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl("{G}")));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{G}")));
 
         // Sacrifice Kyscu Drake and a creature named Spitting Drake: Search your library for a card named Viashivan Dragon and put that card onto the battlefield. Then shuffle your library.
         this.addAbility(new SimpleActivatedAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(1, 1, filter), false, true, Outcome.PutCardInPlay), new CompositeCost(new SacrificeSourceCost(), new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filterSpitting, false)), "sacrifice {this} and a creature named Spitting Drake")));

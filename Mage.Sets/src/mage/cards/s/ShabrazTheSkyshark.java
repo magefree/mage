@@ -54,7 +54,7 @@ public final class ShabrazTheSkyshark extends CardImpl {
         // {W/U}: Target Human gains flying until end of turn.
         ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(
                 FlyingAbility.getInstance(), Duration.EndOfTurn
-        ), new ManaCostsImpl("{W/U}"));
+        ), new ManaCostsImpl<>("{W/U}"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

@@ -31,7 +31,7 @@ public final class SlipstreamEel extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND,"an Island"))));
         
         // Cycling {1}{U}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{U}")));
     }
 
     private SlipstreamEel(final SlipstreamEel card) {

@@ -39,7 +39,7 @@ public final class WaveElemental extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {U}, {tap}, Sacrifice Wave Elemental: Tap up to three target creatures without flying.
-        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPermanent(0, 4, filter, false));

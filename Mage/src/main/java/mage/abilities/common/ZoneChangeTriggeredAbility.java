@@ -17,36 +17,34 @@ import mage.game.permanent.Permanent;
  */
 public class ZoneChangeTriggeredAbility extends TriggeredAbilityImpl {
 
-    protected Zone fromZone;
-    protected Zone toZone;
-    protected String rule;
+    protected final Zone fromZone;
+    protected final Zone toZone;
 
-    public ZoneChangeTriggeredAbility(Zone fromZone, Zone toZone, Effect effect, String rule, boolean optional) {
-        this(toZone == null ? Zone.ALL : toZone, fromZone, toZone, effect, rule, optional);
+    public ZoneChangeTriggeredAbility(Zone fromZone, Zone toZone, Effect effect, String triggerPhrase, boolean optional) {
+        this(toZone == null ? Zone.ALL : toZone, fromZone, toZone, effect, triggerPhrase, optional);
     }
 
-    public ZoneChangeTriggeredAbility(Zone worksInZone, Zone fromZone, Zone toZone, Effect effect, String rule, boolean optional) {
+    public ZoneChangeTriggeredAbility(Zone worksInZone, Zone fromZone, Zone toZone, Effect effect, String triggerPhrase, boolean optional) {
         super(worksInZone, effect, optional);
         if (fromZone == Zone.BATTLEFIELD) {
             setLeavesTheBattlefieldTrigger(true);
         }
         this.fromZone = fromZone;
         this.toZone = toZone;
-        this.rule = rule;
+        setTriggerPhrase(triggerPhrase);
     }
 
-    public ZoneChangeTriggeredAbility(Zone toZone, Effect effect, String rule, boolean optional) {
+    public ZoneChangeTriggeredAbility(Zone toZone, Effect effect, String triggerPhrase, boolean optional) {
         super(toZone, effect, optional);
         this.fromZone = null;
         this.toZone = toZone;
-        this.rule = rule;
+        setTriggerPhrase(triggerPhrase);
     }
 
     public ZoneChangeTriggeredAbility(final ZoneChangeTriggeredAbility ability) {
         super(ability);
         this.fromZone = ability.fromZone;
         this.toZone = ability.toZone;
-        this.rule = ability.rule;
     }
 
     @Override
@@ -63,11 +61,6 @@ public class ZoneChangeTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return rule ;
     }
 
     @Override

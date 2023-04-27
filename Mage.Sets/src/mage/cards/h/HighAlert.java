@@ -44,7 +44,7 @@ public final class HighAlert extends CardImpl {
         ));
 
         // {2}{W}{U}: Untap target creature.
-        Ability ability = new SimpleActivatedAbility(new UntapTargetEffect(), new ManaCostsImpl("{2}{W}{U}"));
+        Ability ability = new SimpleActivatedAbility(new UntapTargetEffect(), new ManaCostsImpl<>("{2}{W}{U}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

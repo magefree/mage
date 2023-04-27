@@ -27,7 +27,7 @@ import mage.target.common.TargetControlledPermanent;
 public final class FungalPlots extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("a creature card from your graveyard");
-    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("two Saprolings");
+    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("Saprolings");
 
     static {
         filter2.add(SubType.SAPROLING.getPredicate());
@@ -39,7 +39,7 @@ public final class FungalPlots extends CardImpl {
         // {1}{G}, Exile a creature card from your graveyard: Create a 1/1 green Saproling creature token.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CreateTokenEffect(new SaprolingToken()),
-                new ManaCostsImpl("{1}{G}"));
+                new ManaCostsImpl<>("{1}{G}"));
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(filter)));
         this.addAbility(ability);
 

@@ -30,7 +30,7 @@ public final class KrallenhordeKiller extends CardImpl {
         this.nightCard = true;
 
         // {3}{G}: Krallenhorde Killer gets +4/+4 until end of turn. Activate this ability only once each turn.
-        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(4, 4, Duration.EndOfTurn), new ManaCostsImpl("{3}{G}")));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(4, 4, Duration.EndOfTurn), new ManaCostsImpl<>("{3}{G}")));
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Krallenhorde Killer.
         this.addAbility(new WerewolfBackTriggeredAbility());

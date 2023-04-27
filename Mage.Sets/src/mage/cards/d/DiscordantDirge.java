@@ -39,7 +39,7 @@ public final class DiscordantDirge extends CardImpl {
         // {B}, Sacrifice Discordant Dirge: Look at target opponent's hand and choose up to X cards from it, where X is the number of verse counters on Discordant Dirge. That player discards those cards.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DiscordantDirgeEffect(),
-                new ManaCostsImpl("{B}"));
+                new ManaCostsImpl<>("{B}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
@@ -83,7 +83,7 @@ class DiscordantDirgeEffect extends OneShotEffect {
         controller.lookAtCards(targetOpponent.getName() + " hand", targetOpponent.getHand(), game);
         TargetCard target = new TargetCard(0, verseCounters, Zone.HAND, new FilterCard());
         target.setNotTarget(true);
-        if (!controller.choose(Outcome.Benefit, targetOpponent.getHand(), target, game)) {
+        if (!controller.choose(Outcome.Benefit, targetOpponent.getHand(), target, source, game)) {
             return false;
         }
         targetOpponent.discard(new CardsImpl(target.getTargets()), false, source, game);

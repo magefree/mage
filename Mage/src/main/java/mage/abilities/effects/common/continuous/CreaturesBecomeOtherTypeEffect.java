@@ -19,6 +19,8 @@ public class CreaturesBecomeOtherTypeEffect extends ContinuousEffectImpl {
         this.subType = subType;
 
         this.dependendToTypes.add(DependencyType.BecomeCreature);  // Opalescence and Starfield of Nyx
+        this.staticText = this.filter.getMessage() + " is " + this.subType.getIndefiniteArticle()
+                + " " + this.subType.toString() + " in addition to its other types";
     }
 
     protected CreaturesBecomeOtherTypeEffect(final CreaturesBecomeOtherTypeEffect effect) {
@@ -51,15 +53,5 @@ public class CreaturesBecomeOtherTypeEffect extends ContinuousEffectImpl {
     @Override
     public boolean hasLayer(Layer layer) {
         return layer == Layer.TypeChangingEffects_4;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        if (staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
-
-        return this.filter.getMessage() + " is " + this.subType.getIndefiniteArticle()
-                + " " + this.subType.toString() + " in addition to its other types";
     }
 }

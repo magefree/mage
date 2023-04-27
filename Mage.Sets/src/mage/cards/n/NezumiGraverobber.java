@@ -43,7 +43,7 @@ public final class NezumiGraverobber extends CardImpl {
         this.flipCardName = "Nighteyes the Desecrator";
 
         // {1}{B}: Exile target card from an opponent's graveyard. If no cards are in that graveyard, flip Nezumi Graverobber.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl<>("{1}{B}"));
         Target target = new TargetCardInOpponentsGraveyard(new FilterCard("card from an opponent's graveyard"));
         ability.addTarget(target);
         ability.addEffect(new NezumiGraverobberFlipEffect());
@@ -104,7 +104,7 @@ class NighteyesTheDesecratorToken extends TokenImpl {
         power = new MageInt(4);
         toughness = new MageInt(2);
         // {4}{B}: Put target creature card from a graveyard onto the battlefield under your control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl("{4}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl<>("{4}{B}"));
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
         this.addAbility(ability);
     }

@@ -29,6 +29,7 @@ public class DealsDamageToAPlayerTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, optional);
         this.setTargetPointer = setTargetPointer;
         this.orPlaneswalker = orPlaneswalker;
+        setTriggerPhrase("Whenever {this} deals damage to a player" + (orPlaneswalker ? " or planeswalker" : "") + ", ");
     }
 
     public DealsDamageToAPlayerTriggeredAbility(final DealsDamageToAPlayerTriggeredAbility ability) {
@@ -67,10 +68,4 @@ public class DealsDamageToAPlayerTriggeredAbility extends TriggeredAbilityImpl {
         }
         return true;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} deals damage to a player" + (orPlaneswalker ? " or planeswalker" : "") + ", " ;
-    }
-
 }

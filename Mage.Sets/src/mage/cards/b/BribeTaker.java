@@ -81,7 +81,7 @@ class BribeTakerEffect extends OneShotEffect {
         Set<String> counterTypes = game
                 .getBattlefield()
                 .getActivePermanents(
-                        StaticFilters.FILTER_CONTROLLED_CREATURE,
+                        StaticFilters.FILTER_CONTROLLED_PERMANENT,
                         source.getControllerId(), source, game
                 ).stream()
                 .map(p -> p.getCounters(game))

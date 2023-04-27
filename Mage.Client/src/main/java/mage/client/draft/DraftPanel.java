@@ -303,6 +303,10 @@
          if (timeout != 0) {
              countdown.start();
          }
+         
+         if (!draftBooster.isEmptyGrid()) {
+            SessionHandler.setBoosterLoaded(draftId); // confirm to the server that the booster has been successfully loaded, otherwise the server will re-send the booster
+         }
      }
 
      private void loadCardsToPickedCardsArea(SimpleCardsView pickedCards) {
@@ -522,6 +526,7 @@
          draftLeftPane.setVerifyInputWhenFocusTarget(false);
 
          btnQuitTournament.setText("Quit Tournament");
+         btnQuitTournament.setFocusable(false);
          btnQuitTournament.addActionListener(evt -> btnQuitTournamentActionPerformed(evt));
 
          lblPack1.setText("Pack 1:");

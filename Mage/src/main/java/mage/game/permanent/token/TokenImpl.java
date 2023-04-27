@@ -1,17 +1,21 @@
 package mage.game.permanent.token;
 
+import mage.MageInt;
 import mage.MageObject;
 import mage.MageObjectImpl;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.Card;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.cards.repository.TokenInfo;
+import mage.cards.repository.TokenRepository;
+import mage.cards.repository.TokenType;
+import mage.constants.*;
 import mage.game.Game;
+import mage.game.command.CommandObject;
 import mage.game.events.CreateTokenEvent;
 import mage.game.events.CreatedTokenEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -22,6 +26,7 @@ import mage.target.Target;
 import mage.util.RandomUtil;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Each token must have default constructor without params (GUI require for card viewer)
@@ -33,29 +38,14 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     private int tokenType;
     private String originalCardNumber;
     private String originalExpansionSetCode;
-    private String tokenDescriptor;
-    private boolean expansionSetCodeChecked;
     private Card copySourceCard; // the card the Token is a copy from
     private static final int MAX_TOKENS_PER_GAME = 500;
 
     // list of set codes token images are available for
-    protected List<String> availableImageSetCodes = new ArrayList<>();
+    protected List<String> availableImageSetCodes = new ArrayList<>(); // TODO: delete
 
-    public enum Type {
-
-        FIRST(1),
-        SECOND(2);
-
-        int code;
-
-        Type(int code) {
-            this.code = code;
-        }
-
-        int getCode() {
-            return this.code;
-        }
-    }
+    protected Token backFace = null;
+    private boolean entersTransformed = false;
 
     public TokenImpl() {
     }
@@ -65,46 +55,21 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         this.description = description;
     }
 
-    public TokenImpl(String name, String description, int power, int toughness) {
-        this(name, description);
-        this.power.modifyBaseValue(power);
-        this.toughness.modifyBaseValue(toughness);
-    }
-
-    public TokenImpl(final TokenImpl token) {
+    protected TokenImpl(final TokenImpl token) {
         super(token);
         this.description = token.description;
         this.tokenType = token.tokenType;
         this.lastAddedTokenIds.addAll(token.lastAddedTokenIds);
         this.originalCardNumber = token.originalCardNumber;
         this.originalExpansionSetCode = token.originalExpansionSetCode;
-        this.expansionSetCodeChecked = token.expansionSetCodeChecked;
         this.copySourceCard = token.copySourceCard; // will never be changed
         this.availableImageSetCodes = token.availableImageSetCodes;
+        this.backFace = token.backFace != null ? token.backFace.copy() : null;
+        this.entersTransformed = token.entersTransformed;
     }
 
     @Override
     public abstract Token copy();
-
-    private void setTokenDescriptor() {
-        this.tokenDescriptor = tokenDescriptor();
-    }
-
-    @Override
-    public String getTokenDescriptor() {
-        this.tokenDescriptor = tokenDescriptor();
-        return tokenDescriptor;
-    }
-
-    private String tokenDescriptor() {
-        String strName = this.name.replaceAll("[^a-zA-Z0-9]", "");
-        String strColor = this.color.toString().replaceAll("[^a-zA-Z0-9]", "");
-        String strSubtype = this.subtype.toString().replaceAll("[^a-zA-Z0-9]", "");
-        String strCardType = this.cardType.toString().replaceAll("[^a-zA-Z0-9]", "");
-        String descriptor = strName + '.' + strColor + '.' + strSubtype + '.' + strCardType + '.' + this.power + '.' + this.toughness;
-        descriptor = descriptor.toUpperCase(Locale.ENGLISH);
-        return descriptor;
-    }
 
     @Override
     public String getDescription() {
@@ -121,11 +86,17 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         ability.setSourceId(this.getId());
         abilities.add(ability);
         abilities.addAll(ability.getSubAbilities());
+        if (backFace != null) {
+            backFace.addAbility(ability);
+        }
     }
 
     // Directly from PermanentImpl
     @Override
     public void removeAbility(Ability abilityToRemove) {
+        if (backFace != null) {
+            backFace.removeAbility(abilityToRemove);
+        }
         if (abilityToRemove == null) {
             return;
         }
@@ -150,6 +121,9 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         }
 
         abilitiesToRemove.forEach(a -> removeAbility(a));
+        if (backFace != null) {
+            backFace.removeAbilities(abilitiesToRemove);
+        }
     }
 
     @Override
@@ -167,29 +141,54 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         return putOntoBattlefield(amount, game, source, controllerId, tapped, attacking, null);
     }
 
-    private String getSetCode(Game game, UUID sourceId) {
-        // moved here from CreateTokenEffect because not all cards that create tokens use CreateTokenEffect
-        // they use putOntoBattlefield directly
-        // TODO: Check this setCode handling because it makes no sense if token put into play with e.g. "Feldon of the third Path"
-        String setCode = null;
-        if (this.getOriginalExpansionSetCode() != null && !this.getOriginalExpansionSetCode().isEmpty()) {
-            setCode = this.getOriginalExpansionSetCode();
+    public static TokenInfo generateTokenInfo(TokenImpl token, Game game, UUID sourceId) {
+        // Choose a token image by priority:
+        // - use source's set code
+        // - use parent source's set code (too complicated, so ignore it)
+        // - use random set code
+        // - use default set code
+
+        if (token.getOriginalCardNumber() != null) {
+            // token from a card, so must use card image instead (example: Embalm ability)
+            return new TokenInfo(TokenType.TOKEN, token.getName(), token.getOriginalExpansionSetCode(), 0);
+        }
+
+        // source
+        final String setCode;
+        Card sourceCard = game.getCard(sourceId);
+        if (sourceCard != null) {
+            setCode = sourceCard.getExpansionSetCode();
         } else {
-            Card source = game.getCard(sourceId);
-            if (source != null) {
-                setCode = source.getExpansionSetCode();
+            MageObject sourceObject = game.getObject(sourceId);
+            if (sourceObject instanceof CommandObject) {
+                setCode = ((CommandObject) sourceObject).getExpansionSetCodeForImage();
             } else {
-                MageObject object = game.getObject(sourceId);
-                if (object instanceof PermanentToken) {
-                    setCode = ((PermanentToken) object).getExpansionSetCode();
-                }
+                setCode = null;
             }
         }
 
-        if (!expansionSetCodeChecked) {
-            expansionSetCodeChecked = this.updateExpansionSetCode(setCode);
+        // search by set code
+        List<TokenInfo> possibleInfo = TokenRepository.instance.getByClassName(token.getClass().getName())
+                .stream()
+                .filter(info -> info.getSetCode().equals(setCode))
+                .collect(Collectors.toList());
+
+        // search by random set
+        if (possibleInfo.isEmpty()) {
+            possibleInfo = new ArrayList<>(TokenRepository.instance.getByClassName(token.getClass().getName()));
         }
-        return setCode;
+
+        if (possibleInfo.size() > 0) {
+            return RandomUtil.randomFromCollection(possibleInfo);
+        }
+
+        // TODO: implement auto-generate images for CreatureToken (search public tokens for same characteristics)
+        // TODO: implement Copy image
+        // TODO: implement Manifest image
+        // TODO: implement Morph image
+
+        // unknown tokens
+        return new TokenInfo(TokenType.TOKEN, "Unknown", TokenRepository.XMAGE_TOKENS_SET_CODE, 0);
     }
 
     @Override
@@ -253,22 +252,28 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         for (Map.Entry<Token, Integer> entry : event.getTokens().entrySet()) {
             Token token = entry.getKey();
             int amount = entry.getValue();
-            String setCode = token instanceof TokenImpl ? ((TokenImpl) token).getSetCode(game, event.getSourceId()) : null;
+
+            // choose token's set code due source
+            TokenInfo tokenInfo = TokenImpl.generateTokenInfo((TokenImpl) token, game, source == null ? null : source.getSourceId());
+            token.setOriginalExpansionSetCode(tokenInfo.getSetCode());
+            token.setExpansionSetCodeForImage(tokenInfo.getSetCode());
+            token.setTokenType(tokenInfo.getImageNumber());
 
             List<Permanent> needTokens = new ArrayList<>();
             List<Permanent> allowedTokens = new ArrayList<>();
 
             // prepare tokens to enter
             for (int i = 0; i < amount; i++) {
-                // use event.getPlayerId() as controller cause it can be replaced by replacement effect
-                PermanentToken newPermanent = new PermanentToken(token, event.getPlayerId(), setCode, game);
+                // TODO: add random setTokenType here?
+                // use event.getPlayerId() as controller because it can be replaced by replacement effect
+                PermanentToken newPermanent = new PermanentToken(token, event.getPlayerId(), game);
                 game.getState().addCard(newPermanent);
                 needTokens.add(newPermanent);
                 game.getPermanentsEntering().put(newPermanent.getId(), newPermanent);
                 newPermanent.setTapped(tapped);
 
                 ZoneChangeEvent emptyEvent = new ZoneChangeEvent(newPermanent, newPermanent.getControllerId(), Zone.OUTSIDE, Zone.BATTLEFIELD);
-                // tokens zcc must simulate card's zcc too keep copied card/spell settings
+                // tokens zcc must simulate card's zcc to keep copied card/spell settings
                 // (example: etb's kicker ability of copied creature spell, see tests with Deathforge Shaman)
                 newPermanent.updateZoneChangeCounter(game, emptyEvent);
             }
@@ -303,9 +308,10 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                     game.addSimultaneousEvent(new CreatedTokenEvent(source, (PermanentToken) permanent));
                 }
 
-                // handle auras coming into the battlefield
-                // code refactored from CopyPermanentEffect
-                if (permanent.getSubtype().contains(SubType.AURA)) {
+                // if token was created (not a spell copy) handle auras coming into the battlefield
+                // code blindly copied from CopyPermanentEffect
+                // TODO: clean this up -- half the comments make no sense in the context of creating a token
+                if (created && permanent.getSubtype().contains(SubType.AURA)) {
                     Outcome auraOutcome = Outcome.BoostCreature;
                     Target auraTarget = null;
 
@@ -381,12 +387,18 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
 
     @Override
     public void setPower(int power) {
-        this.power.setValue(power);
+        if (this.backFace != null) {
+            this.backFace.setPower(power);
+        }
+        this.power = new MageInt(power);
     }
 
     @Override
     public void setToughness(int toughness) {
-        this.toughness.setValue(toughness);
+        if (this.backFace != null) {
+            this.backFace.setToughness(toughness);
+        }
+        this.toughness = new MageInt(toughness);
     }
 
     @Override
@@ -395,7 +407,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     }
 
     /**
-     * Set token index to search in card-pictures-tok.txt (if set have multiple
+     * Set token index to search in tokens-database.txt (if set have multiple
      * tokens with same name) Default is 1
      */
     @Override
@@ -419,11 +431,26 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     }
 
     @Override
+    public void setStartingLoyalty(int startingLoyalty) {
+        if (backFace != null) {
+            backFace.setStartingLoyalty(startingLoyalty);
+        }
+        super.setStartingLoyalty(startingLoyalty);
+    }
+
+    public void setStartingDefense(int intArg) {
+        if (backFace != null) {
+            backFace.setStartingDefense(intArg);
+        }
+        super.setStartingDefense(intArg);
+    }
+
+    @Override
     public void setOriginalExpansionSetCode(String originalExpansionSetCode) {
+        // TODO: delete
         // TODO: remove original set code at all... token image must be takes by card source or by latest set (on null source)
         // TODO: if set have same tokens then selects it by random
         this.originalExpansionSetCode = originalExpansionSetCode;
-        setTokenDescriptor();
     }
 
     @Override
@@ -440,28 +467,170 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
 
     @Override
     public void setExpansionSetCodeForImage(String code) {
-        if (!availableImageSetCodes.isEmpty()) {
-            if (availableImageSetCodes.contains(code)) {
-                setOriginalExpansionSetCode(code);
-            } else // we should not set random set if appropriate set is already used
-            {
-                if (getOriginalExpansionSetCode() == null || getOriginalExpansionSetCode().isEmpty()
-                        || !availableImageSetCodes.contains(getOriginalExpansionSetCode())) {
-                    setOriginalExpansionSetCode(availableImageSetCodes.get(RandomUtil.nextInt(availableImageSetCodes.size())));
-                }
-            }
-        } else if (getOriginalExpansionSetCode() == null || getOriginalExpansionSetCode().isEmpty()) {
-            setOriginalExpansionSetCode(code);
-        }
-        setTokenDescriptor();
+        // TODO: delete
+        setOriginalExpansionSetCode(code);
     }
 
     @Override
-    public boolean updateExpansionSetCode(String setCode) {
-        if (setCode == null || setCode.isEmpty()) {
-            return false;
+    public Token getBackFace() {
+        return backFace;
+    }
+
+    public void retainAllArtifactSubTypes(Game game) {
+        if (backFace != null) {
+            backFace.retainAllArtifactSubTypes(game);
         }
-        this.setExpansionSetCodeForImage(setCode);
-        return true;
+        super.retainAllArtifactSubTypes(game);
+    }
+
+    public void retainAllEnchantmentSubTypes(Game game) {
+        if (backFace != null) {
+            backFace.retainAllEnchantmentSubTypes(game);
+        }
+        super.retainAllEnchantmentSubTypes(game);
+    }
+
+    public void addSuperType(SuperType superType) {
+        if (backFace != null) {
+            backFace.addSuperType(superType);
+        }
+        super.addSuperType(superType);
+    }
+
+    public void removeSuperType(SuperType superType) {
+        if (backFace != null) {
+            backFace.removeSuperType(superType);
+        }
+        super.removeSuperType(superType);
+    }
+
+    public void addCardType(CardType... cardTypes) {
+        if (backFace != null) {
+            backFace.addCardType(cardTypes);
+        }
+        super.addCardType(cardTypes);
+    }
+
+    public void removeCardType(CardType... cardTypes) {
+        if (backFace != null) {
+            backFace.removeCardType(cardTypes);
+        }
+        super.removeCardType(cardTypes);
+    }
+
+    public void removeAllCardTypes() {
+        if (backFace != null) {
+            backFace.removeAllCardTypes();
+        }
+        super.removeAllCardTypes();
+    }
+
+    public void removeAllCardTypes(Game game) {
+        if (backFace != null) {
+            backFace.removeAllCardTypes(game);
+        }
+        super.removeAllCardTypes(game);
+    }
+
+    public void addSubType(SubType... subTypes) {
+        if (backFace != null) {
+            backFace.addSubType(subTypes);
+        }
+        super.addSubType(subTypes);
+    }
+
+    public void removeAllSubTypes(Game game, SubTypeSet subTypeSet) {
+        if (backFace != null) {
+            backFace.removeAllSubTypes(game, subTypeSet);
+        }
+        super.removeAllSubTypes(game, subTypeSet);
+    }
+
+    public void removeAllSubTypes(Game game) {
+        if (backFace != null) {
+            backFace.removeAllSubTypes(game);
+        }
+        super.removeAllSubTypes(game);
+    }
+
+    public void retainAllLandSubTypes(Game game) {
+        if (backFace != null) {
+            backFace.retainAllLandSubTypes(game);
+        }
+        super.retainAllLandSubTypes(game);
+    }
+
+    public void removeAllCreatureTypes(Game game) {
+        if (backFace != null) {
+            backFace.removeAllCreatureTypes(game);
+        }
+        super.removeAllCreatureTypes(game);
+    }
+
+    public void removeAllCreatureTypes() {
+        if (backFace != null) {
+            backFace.removeAllCreatureTypes();
+        }
+        super.removeAllCreatureTypes();
+    }
+
+    public void removeSubType(Game game, SubType subType) {
+        if (backFace != null) {
+            backFace.removeSubType(game, subType);
+        }
+        super.removeSubType(game, subType);
+    }
+
+    public void setIsAllCreatureTypes(boolean value) {
+        if (backFace != null) {
+            backFace.setIsAllCreatureTypes(value);
+        }
+        super.setIsAllCreatureTypes(value);
+    }
+
+    public void removePTCDA() {
+        if (backFace != null) {
+            backFace.removePTCDA();
+        }
+        super.removePTCDA();
+    }
+
+    public String getName() {
+        if (backFace != null) {
+            backFace.getName();
+        }
+        return super.getName();
+    }
+
+    public void setName(String name) {
+        if (backFace != null) {
+            backFace.setName(name);
+        }
+        super.setName(name);
+    }
+
+    public void setColor(ObjectColor color) {
+        if (backFace != null) {
+            backFace.setColor(color);
+        }
+        this.getColor().setColor(color);
+    }
+
+    @Override
+    public void clearManaCost() {
+        if (backFace != null) {
+            backFace.clearManaCost();
+        }
+        this.getManaCost().clear();
+    }
+
+    @Override
+    public void setEntersTransformed(boolean entersTransformed) {
+        this.entersTransformed = entersTransformed;
+    }
+
+    @Override
+    public boolean isEntersTransformed() {
+        return this.entersTransformed && this.backFace != null;
     }
 }

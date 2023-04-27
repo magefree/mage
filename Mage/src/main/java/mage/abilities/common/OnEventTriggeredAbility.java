@@ -35,6 +35,7 @@ public class OnEventTriggeredAbility extends TriggeredAbilityImpl {
         this.eventType = eventType;
         this.eventName = eventName;
         this.allPlayers = allPlayers;
+        setTriggerPhrase("At the " + eventName + ", ");
     }
 
     public OnEventTriggeredAbility(final OnEventTriggeredAbility ability) {
@@ -52,11 +53,6 @@ public class OnEventTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return allPlayers || event.getPlayerId().equals(this.controllerId);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "At the " + eventName + ", " ;
     }
 
     @Override

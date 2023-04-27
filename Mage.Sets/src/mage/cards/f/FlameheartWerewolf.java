@@ -1,14 +1,13 @@
 package mage.cards.f;
 
 import mage.MageInt;
-import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
+import mage.abilities.common.BlocksOrBlockedByCreatureSourceTriggeredAbility;
 import mage.abilities.common.WerewolfBackTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -28,8 +27,7 @@ public final class FlameheartWerewolf extends CardImpl {
         this.nightCard = true;
 
         // Whenever Flameheart Werewolf blocks or becomes blocked by a creature, Flameheart Werewolf deals 2 damage to that creature.
-        this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(new DamageTargetEffect(2, true, "that creature"),
-                StaticFilters.FILTER_PERMANENT_CREATURE, false, null, true));
+        this.addAbility(new BlocksOrBlockedByCreatureSourceTriggeredAbility(new DamageTargetEffect(2, true, "that creature")));
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Flameheart Werewolf.
         this.addAbility(new WerewolfBackTriggeredAbility());

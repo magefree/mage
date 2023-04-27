@@ -28,8 +28,7 @@ public class SkycatSovereignTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        
-        assertAllCommandsUsed();
+
         assertPowerToughness(playerA, "Skycat Sovereign", 3, 3);
     }
 
@@ -54,8 +53,7 @@ public class SkycatSovereignTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        
-        assertAllCommandsUsed();
+
         assertPowerToughness(playerA, "Skycat Sovereign", 1, 1);
     }
     
@@ -77,9 +75,7 @@ public class SkycatSovereignTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        
-        assertAllCommandsUsed();
-        
+
         assertPermanentCount(playerA, "Cat Bird Token", 1);
         assertColor(playerA, "Cat Bird Token", ObjectColor.WHITE, true);
         assertColor(playerA, "Cat Bird Token", ObjectColor.BLUE, false);

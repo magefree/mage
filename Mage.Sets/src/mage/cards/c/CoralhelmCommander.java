@@ -41,7 +41,7 @@ public final class CoralhelmCommander extends LevelerCard {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{1}")));
 
         Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         abilities1.add(FlyingAbility.getInstance());

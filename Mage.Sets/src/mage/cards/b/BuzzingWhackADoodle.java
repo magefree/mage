@@ -47,7 +47,7 @@ public final class BuzzingWhackADoodle extends CardImpl {
         this.addAbility(ability2);
 
         // *Buzz - 2, T: Draw a card.
-        Ability ability3 = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{2}"), new BuzzCondition());
+        Ability ability3 = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{2}"), new BuzzCondition());
         ability3.addCost(new TapSourceCost());
         this.addAbility(ability3);
     }

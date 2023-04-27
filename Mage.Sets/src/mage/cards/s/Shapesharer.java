@@ -40,7 +40,7 @@ public final class Shapesharer extends CardImpl {
         // {2}{U}: Target Shapeshifter becomes a copy of target creature until your next turn.
         Ability copyAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new ShapesharerEffect(),
-                new ManaCostsImpl("{2}{U}"));
+                new ManaCostsImpl<>("{2}{U}"));
         copyAbility.addTarget(new TargetPermanent(filterShapeshifter));
         copyAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(copyAbility);

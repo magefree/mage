@@ -15,7 +15,7 @@ public enum CommanderInPlayCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return ControlACommanderCondition.instance.apply(game, source);
+        return ControlYourCommanderCondition.instance.apply(game, source);
     }
 
     @Override

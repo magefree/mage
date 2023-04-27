@@ -30,7 +30,7 @@ public final class CadaverousKnight extends CardImpl {
         // Flanking
         this.addAbility(new FlankingAbility());
         // {1}{B}{B}: Regenerate Cadaverous Knight.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{B}{B}")));
     }
 
     private CadaverousKnight(final CadaverousKnight card) {

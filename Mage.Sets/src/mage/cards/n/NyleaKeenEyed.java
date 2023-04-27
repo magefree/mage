@@ -48,7 +48,7 @@ public final class NyleaKeenEyed extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
 
         // {2}{G}: Reveal the top card of your library. If it's a creature card, put it into your hand. Otherwise, you may put it into your graveyard.
-        this.addAbility(new SimpleActivatedAbility(new NyleaKeenEyedEffect(), new ManaCostsImpl("{2}{G}")));
+        this.addAbility(new SimpleActivatedAbility(new NyleaKeenEyedEffect(), new ManaCostsImpl<>("{2}{G}")));
     }
 
     private NyleaKeenEyed(final NyleaKeenEyed card) {

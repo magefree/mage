@@ -34,7 +34,7 @@ public final class GoblinBanneret extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new BoostSourceEffect(2, 0, Duration.EndOfTurn),
-                new ManaCostsImpl("{1}{R}")
+                new ManaCostsImpl<>("{1}{R}")
         ));
     }
 

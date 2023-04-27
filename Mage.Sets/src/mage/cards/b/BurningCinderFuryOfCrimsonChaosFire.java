@@ -56,6 +56,7 @@ class BurningCinderFuryOfCrimsonChaosFireAbility extends TriggeredAbilityImpl {
 
     public BurningCinderFuryOfCrimsonChaosFireAbility() {
         super(Zone.BATTLEFIELD, new BurningCinderFuryOfCrimsonChaosFireEffect(), false);
+        setTriggerPhrase("Whenever any player taps a permanent, ");
     }
 
     public BurningCinderFuryOfCrimsonChaosFireAbility(BurningCinderFuryOfCrimsonChaosFireAbility ability) {
@@ -82,11 +83,6 @@ class BurningCinderFuryOfCrimsonChaosFireAbility extends TriggeredAbilityImpl {
     @Override
     public BurningCinderFuryOfCrimsonChaosFireAbility copy() {
         return new BurningCinderFuryOfCrimsonChaosFireAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever any player taps a permanent, ";
     }
 }
 

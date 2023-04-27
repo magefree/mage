@@ -46,6 +46,7 @@ class ForbiddenOrchardTriggeredAbility extends TriggeredAbilityImpl {
     ForbiddenOrchardTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenTargetEffect(new SpiritToken()));
         this.addTarget(new TargetOpponent());
+        setTriggerPhrase("Whenever you tap {this} for mana, ");
     }
 
     private ForbiddenOrchardTriggeredAbility(final ForbiddenOrchardTriggeredAbility ability) {
@@ -67,11 +68,6 @@ class ForbiddenOrchardTriggeredAbility extends TriggeredAbilityImpl {
         return permanent != null
                 && permanent == getSourcePermanentOrLKI(game)
                 && isControlledBy(event.getPlayerId());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you tap {this} for mana, " ;
     }
 
     @Override

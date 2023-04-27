@@ -46,7 +46,7 @@ public final class DaghatarTheAdamant extends CardImpl {
                 "with four +1/+1 counters on it"));
 
         // {1}{B/G}{B/G}: Move a +1/+1 counter from target creature onto a second target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MoveCounterFromTargetToTargetEffect(),new ManaCostsImpl("{1}{B/G}{B/G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MoveCounterFromTargetToTargetEffect(),new ManaCostsImpl<>("{1}{B/G}{B/G}"));
         ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature the +1/+1 counter is moved from")));
         ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature the +1/+1 counter is moved to")));
         this.addAbility(ability);

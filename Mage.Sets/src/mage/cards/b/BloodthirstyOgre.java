@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -29,11 +28,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class BloodthirstyOgre extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control a Demon");
-    
-    static {
-        filter.add(SubType.DEMON.getPredicate());
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.DEMON, "you control a Demon");
+    private static final DynamicValue xValue = new SignInversionDynamicValue(new CountersSourceCount(CounterType.DEVOTION));
 
     public BloodthirstyOgre(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
@@ -46,9 +42,10 @@ public final class BloodthirstyOgre extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.DEVOTION.createInstance()),new TapSourceCost()));
 
         // {T}: Target creature gets -X/-X until end of turn, where X is the number of devotion counters on Bloodthirsty Ogre. Activate this ability only if you control a Demon.
-        DynamicValue devotionCounters = new SignInversionDynamicValue(new CountersSourceCount(CounterType.DEVOTION));
+
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
-                new BoostTargetEffect(devotionCounters,devotionCounters, Duration.EndOfTurn, true),
+                new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn)
+                        .setText("target creature gets -X/-X until end of turn, where X is the number of devotion counters on {this}"),
                 new TapSourceCost(),
                 new PermanentsOnTheBattlefieldCondition(filter));
         ability.addTarget(new TargetCreaturePermanent());
@@ -63,5 +60,4 @@ public final class BloodthirstyOgre extends CardImpl {
     public BloodthirstyOgre copy() {
         return new BloodthirstyOgre(this);
     }
-
 }

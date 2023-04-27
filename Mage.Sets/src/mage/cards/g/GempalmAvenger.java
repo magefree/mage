@@ -38,7 +38,7 @@ public final class GempalmAvenger extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Cycling {2}{W}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}{W}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}{W}")));
 
         // When you cycle Gempalm Avenger, Soldier creatures get +1/+1 and gain first strike until end of turn.
         Ability ability = new CycleTriggeredAbility(

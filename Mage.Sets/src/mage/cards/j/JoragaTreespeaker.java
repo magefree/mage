@@ -46,7 +46,7 @@ public final class JoragaTreespeaker extends LevelerCard {
         this.toughness = new MageInt(1);
 
         // Level up {1}{G} ({1}{G}: Put a level counter on this. Level up only as a sorcery.)
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{1}{G}")));
 
         // LEVEL 1-4
         // 1/2

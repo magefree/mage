@@ -20,7 +20,7 @@ public final class KorWarriorToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("ZNR");
+        availableImageSetCodes = Arrays.asList("ZNR", "CLB");
     }
 
     public KorWarriorToken(final KorWarriorToken token) {

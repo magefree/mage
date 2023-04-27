@@ -58,6 +58,7 @@ class ArashinWarBeastTriggeredAbility extends TriggeredAbilityImpl {
     public ArashinWarBeastTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.usedForCombatDamageStep = false;
+        setTriggerPhrase("Whenever {this} deals combat damage to one or more blockers, ");
     }
 
     public ArashinWarBeastTriggeredAbility(final ArashinWarBeastTriggeredAbility ability) {
@@ -94,10 +95,5 @@ class ArashinWarBeastTriggeredAbility extends TriggeredAbilityImpl {
             usedForCombatDamageStep = false;
         }        
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} deals combat damage to one or more blockers, " ;
     }
 }

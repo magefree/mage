@@ -47,6 +47,7 @@ class PyroblastCounterTargetEffect extends OneShotEffect {
 
     public PyroblastCounterTargetEffect() {
         super(Outcome.Detriment);
+        this.staticText = "Counter target spell if it's blue";
     }
 
     public PyroblastCounterTargetEffect(final PyroblastCounterTargetEffect effect) {
@@ -66,18 +67,13 @@ class PyroblastCounterTargetEffect extends OneShotEffect {
         }
         return true;
     }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Counter target spell if it's blue";
-    }
-
 }
 
 class PyroblastDestroyTargetEffect extends OneShotEffect {
 
     public PyroblastDestroyTargetEffect() {
         super(Outcome.DestroyPermanent);
+        this.staticText = "Destroy target permanent if it's blue";
     }
 
     public PyroblastDestroyTargetEffect(final PyroblastDestroyTargetEffect effect) {
@@ -97,10 +93,4 @@ class PyroblastDestroyTargetEffect extends OneShotEffect {
         }
         return true;
     }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Destroy target permanent if it's blue";
-    }
-
 }

@@ -307,15 +307,13 @@ public class CloudshiftTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
         // Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
         addCard(Zone.HAND, playerA, "Act of Treason");
-
         // At the beginning of your end step, you may exile target creature you control, then return that card to the battlefield under your control
         addCard(Zone.BATTLEFIELD, playerA, "Conjurer's Closet");
 
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Act of Treason", "Silvercoat Lion");
-
-        addTarget(playerA, "Silvercoat Lion");
+        // Silvercoat Lion is autochosen
 
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();

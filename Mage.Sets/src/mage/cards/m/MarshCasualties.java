@@ -38,7 +38,7 @@ public final class MarshCasualties extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new MarshCasualtiesEffect(-2, -2),
                 new MarshCasualtiesEffect(-1, -1),
-                new LockedInCondition(KickedCondition.instance),
+                new LockedInCondition(KickedCondition.ONCE),
                 ruleText));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

@@ -41,7 +41,7 @@ public final class ScaleUp extends CardImpl {
                 new CreatureToken(6, 4, "green Wurm with base power and toughness 6/4")
                         .withColor("G").withSubType(SubType.WURM),
                 null, filter, Duration.EndOfTurn, true, false, true
-        ), new ManaCostsImpl("{4}{G}{G}")));
+        ), new ManaCostsImpl<>("{4}{G}{G}")));
     }
 
     private ScaleUp(final ScaleUp card) {

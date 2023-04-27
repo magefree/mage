@@ -31,7 +31,7 @@ public final class TaskMageAssembly extends CardImpl {
         this.addAbility(new TaskMageAssemblyStateTriggeredAbility());
 
         // {2}: Task Mage Assembly deals 1 damage to target creature. Any player may activate this ability but only any time they could cast a sorcery.
-        ActivateAsSorceryActivatedAbility ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{2}"));
+        ActivateAsSorceryActivatedAbility ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl<>("{2}"));
         ability.addTarget(new TargetCreaturePermanent());
         ability.setMayActivate(TargetController.ANY);
         ability.addEffect(new InfoEffect("Any player may activate this ability"));
@@ -52,6 +52,7 @@ class TaskMageAssemblyStateTriggeredAbility extends StateTriggeredAbility {
 
     public TaskMageAssemblyStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
+        setTriggerPhrase("When there are no creatures on the battlefield, ");
     }
 
     public TaskMageAssemblyStateTriggeredAbility(final TaskMageAssemblyStateTriggeredAbility ability) {
@@ -67,10 +68,4 @@ class TaskMageAssemblyStateTriggeredAbility extends StateTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         return game.getBattlefield().count(new FilterCreaturePermanent(), this.getControllerId(), this, game) == 0;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When there are no creatures on the battlefield, " ;
-    }
-
 }

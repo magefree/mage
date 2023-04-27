@@ -19,6 +19,7 @@ public class AttacksFirstTimeTriggeredAbility extends TriggeredAbilityImpl {
     public AttacksFirstTimeTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.addWatcher(new AttackedThisTurnWatcher());
+        setTriggerPhrase("Whenever {this} attacks for the first time each turn, ");
     }
 
     public AttacksFirstTimeTriggeredAbility(final AttacksFirstTimeTriggeredAbility ability) {
@@ -50,11 +51,6 @@ public class AttacksFirstTimeTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} attacks for the first time each turn, " ;
     }
 
     @Override

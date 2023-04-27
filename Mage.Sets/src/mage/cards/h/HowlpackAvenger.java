@@ -15,6 +15,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.DamagedBatchEvent;
 import mage.game.events.DamagedPermanentBatchEvent;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetAnyTarget;
@@ -62,6 +63,7 @@ class HowlpackAvengerTriggeredAbility extends TriggeredAbilityImpl {
     HowlpackAvengerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(SavedDamageValue.MUCH));
         this.addTarget(new TargetAnyTarget());
+        setTriggerPhrase("Whenever a permanent you control is dealt damage, ");
     }
 
     private HowlpackAvengerTriggeredAbility(final HowlpackAvengerTriggeredAbility ability) {
@@ -80,7 +82,7 @@ class HowlpackAvengerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPermanentBatchEvent dEvent = (DamagedPermanentBatchEvent) event;
+        DamagedBatchEvent dEvent = (DamagedBatchEvent) event;
         int damage = dEvent
                 .getEvents()
                 .stream()
@@ -92,10 +94,5 @@ class HowlpackAvengerTriggeredAbility extends TriggeredAbilityImpl {
         }
         this.getEffects().setValue("damage", damage);
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a permanent you control is dealt damage, ";
     }
 }

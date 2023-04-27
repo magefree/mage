@@ -44,7 +44,7 @@ public final class CastleEmbereth extends CardImpl {
 
         // {1}{R}{R}, {T}: Creatures you control get +1/+0 until end of turn.
         Ability ability = new SimpleActivatedAbility(
-                new BoostControlledEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}{R}")
+                new BoostControlledEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}{R}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

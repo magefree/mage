@@ -37,7 +37,7 @@ public final class HoardSmelterDragon extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{3}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{3}{R}"));
         ability.addTarget(new TargetPermanent(filter));
         ability.addEffect(new HoardSmelterEffect());
         this.addAbility(ability);

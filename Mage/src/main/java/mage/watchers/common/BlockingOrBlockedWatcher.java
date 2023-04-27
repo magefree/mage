@@ -32,6 +32,9 @@ public class BlockingOrBlockedWatcher extends Watcher {
                 blockerMap.clear();
                 return;
             case REMOVED_FROM_COMBAT:
+                // remove attacker
+                blockerMap.remove(new MageObjectReference(event.getTargetId(), game));
+                // remove blocker
                 blockerMap
                         .values()
                         .stream()
@@ -51,6 +54,16 @@ public class BlockingOrBlockedWatcher extends Watcher {
                 .blockerMap
                 .getOrDefault(new MageObjectReference(attacker, game), Collections.emptySet())
                 .stream()
+                .anyMatch(mor -> mor.refersTo(blocker, game));
+    }
+
+    public static boolean check(Permanent blocker, Game game) {
+        return game.getState()
+                .getWatcher(BlockingOrBlockedWatcher.class)
+                .blockerMap
+                .values()
+                .stream()
+                .flatMap(Collection::stream)
                 .anyMatch(mor -> mor.refersTo(blocker, game));
     }
 }

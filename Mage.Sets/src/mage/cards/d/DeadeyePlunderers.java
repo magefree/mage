@@ -37,7 +37,7 @@ public final class DeadeyePlunderers extends CardImpl {
         ).addHint(ArtifactYouControlHint.instance));
 
         // {2}{U}{B}: Create a colorless artifact token named Treasure with "{T}, Sacrifice this artifact: Add one mana of any color."
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new TreasureToken()), new ManaCostsImpl("{2}{U}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new TreasureToken()), new ManaCostsImpl<>("{2}{U}{B}")));
     }
 
     private DeadeyePlunderers(final DeadeyePlunderers card) {

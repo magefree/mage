@@ -43,6 +43,7 @@ class GravityWellTriggeredAbility extends TriggeredAbilityImpl {
 
     public GravityWellTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GravityWellEffect());
+        setTriggerPhrase("Whenever a creature with flying attacks, ");
     }
 
     public GravityWellTriggeredAbility(final GravityWellTriggeredAbility ability) {
@@ -64,11 +65,6 @@ class GravityWellTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature with flying attacks, " ;
     }
 
     @Override

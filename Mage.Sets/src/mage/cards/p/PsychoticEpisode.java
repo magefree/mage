@@ -34,7 +34,7 @@ public final class PsychoticEpisode extends CardImpl {
         this.getSpellAbility().addEffect(new PsychoticEpisodeEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
         // Madness {1}{B}
-        this.addAbility(new MadnessAbility(new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{1}{B}")));
     }
 
     private PsychoticEpisode(final PsychoticEpisode card) {
@@ -71,7 +71,7 @@ class PsychoticEpisodeEffect extends OneShotEffect {
             Card topdeck = player.getLibrary().getFromTop(game);
             options.add(topdeck);
             controller.lookAtCards("Top of Library (Psychotic Episode)", topdeck, game);
-            if (controller.choose(Outcome.Discard, options, targetCard, game)) {
+            if (controller.choose(Outcome.Discard, options, targetCard, source, game)) {
                 Card card = game.getCard(targetCard.getFirstTarget());
                 if (card != null) {
                     CardsImpl cards = new CardsImpl();

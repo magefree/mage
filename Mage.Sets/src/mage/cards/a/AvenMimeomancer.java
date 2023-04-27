@@ -28,8 +28,6 @@ public final class AvenMimeomancer extends CardImpl {
         this.subtype.add(SubType.BIRD);
         this.subtype.add(SubType.WIZARD);
 
-
-
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 
@@ -58,6 +56,7 @@ class AvenEffect extends ContinuousEffectImpl {
 
     public AvenEffect() {
         super(Duration.Custom, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
+        this.staticText = "If you do, that creature has base power and toughness 3/1 and has flying for as long as it has a feather counter on it";
     }
 
     public AvenEffect(final AvenEffect effect) {
@@ -72,12 +71,12 @@ class AvenEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (target != null) {
-            target.getPower().setValue(3);
-            target.getToughness().setValue(1);
-            return true;
+        if (target == null) {
+            return false;
         }
-        return false;
+        target.getPower().setModifiedBaseValue(3);
+        target.getToughness().setModifiedBaseValue(1);
+        return true;
     }
 
     @Override
@@ -87,11 +86,6 @@ class AvenEffect extends ContinuousEffectImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "If you do, that creature has base power and toughness 3/1 and has flying for as long as it has a feather counter on it";
     }
 }
 

@@ -39,7 +39,7 @@ public final class GleamOfAuthority extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+1 for each +1/+1 counter on other creatures you control
@@ -50,7 +50,7 @@ public final class GleamOfAuthority extends CardImpl {
 
         // Enchanted creature has vigilance and "{W}, {T}: Bloster 1."
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA));
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BolsterEffect(1), new ManaCostsImpl("{W}"));
+        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BolsterEffect(1), new ManaCostsImpl<>("{W}"));
         gainedAbility.addCost(new TapSourceCost());
         ability.addEffect(new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA).setText("and \"{W}, {T}: Bloster 1.\""));
         this.addAbility(ability);

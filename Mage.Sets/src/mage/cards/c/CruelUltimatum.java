@@ -53,8 +53,8 @@ class CruelUltimatumEffect extends OneShotEffect {
 
     public CruelUltimatumEffect() {
         super(Outcome.ReturnToHand);
-        this.staticText = "You return a creature card from your graveyard " +
-                "to your hand, draw three cards, then gain 5 life";
+        this.staticText = "You return a creature card from your graveyard "
+                + "to your hand, draw three cards, then gain 5 life";
     }
 
     public CruelUltimatumEffect(final CruelUltimatumEffect effect) {
@@ -76,10 +76,10 @@ class CruelUltimatumEffect extends OneShotEffect {
         controller.choose(Outcome.ReturnToHand, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {
-            return controller.moveCards(card, Zone.HAND, source, game);
+            controller.moveCards(card, Zone.HAND, source, game);
         }
-        controller.drawCards(1, source, game);
-        controller.gainLife(1, game, source);
+        controller.drawCards(3, source, game);
+        controller.gainLife(5, game, source);
         return true;
     }
 }

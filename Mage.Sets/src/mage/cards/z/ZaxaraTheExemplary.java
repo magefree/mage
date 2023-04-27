@@ -64,6 +64,7 @@ class ZaxaraTheExemplaryHydraTokenAbility extends TriggeredAbilityImpl {
 
     public ZaxaraTheExemplaryHydraTokenAbility() {
         super(Zone.BATTLEFIELD, new ZaxaraTheExemplaryHydraTokenEffect(), false);
+        setTriggerPhrase("Whenever you cast a spell with {X} in its mana cost");
     }
 
     public ZaxaraTheExemplaryHydraTokenAbility(final ZaxaraTheExemplaryHydraTokenAbility ability) {
@@ -77,29 +78,20 @@ class ZaxaraTheExemplaryHydraTokenAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId().equals(getControllerId())) {
-            if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-                Spell spell = game.getStack().getSpell(event.getTargetId());
-                if (spell != null) {
-                    if (spell.getSpellAbility().getManaCostsToPay().containsX()) {
-                        game.getState().setValue(this.getSourceId() + ZaxaraTheExemplary.needPrefix, spell);
-                        return true;
-                    }
-                }
-            }
-
+        if (!event.getPlayerId().equals(getControllerId()) || event.getType() != GameEvent.EventType.SPELL_CAST) {
+            return false;
         }
-        return false;
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        if (spell == null || !spell.getSpellAbility().getManaCostsToPay().containsX()) {
+            return false;
+        }
+        game.getState().setValue(this.getSourceId() + ZaxaraTheExemplary.needPrefix, spell);
+        return true;
     }
 
     @Override
     public TriggeredAbility copy() {
         return new ZaxaraTheExemplaryHydraTokenAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you cast a spell with {X} in its mana cost" ;
     }
 }
 

@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
@@ -43,7 +43,7 @@ public final class RiseAndShine extends CardImpl {
         this.getSpellAbility().addEffect(new AddCardTypeTargetEffect(
                 Duration.EndOfGame, CardType.ARTIFACT, CardType.CREATURE
         ).setText("Target noncreature artifact you control becomes"));
-        this.getSpellAbility().addEffect(new SetPowerToughnessTargetEffect(
+        this.getSpellAbility().addEffect(new SetBasePowerToughnessTargetEffect(
                 0, 0, Duration.EndOfGame
         ).setText(" a 0/0 artifact creature"));
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(
@@ -91,7 +91,7 @@ class RiseAndShineEffect extends OneShotEffect {
         game.addEffect(new AddCardTypeTargetEffect(
                 Duration.EndOfGame, CardType.ARTIFACT, CardType.CREATURE
         ).setTargetPointer(new FixedTargets(permanents, game)), source);
-        game.addEffect(new SetPowerToughnessTargetEffect(
+        game.addEffect(new SetBasePowerToughnessTargetEffect(
                 0, 0, Duration.EndOfGame
         ).setTargetPointer(new FixedTargets(permanents, game)), source);
         for (Permanent permanent : permanents) {

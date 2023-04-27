@@ -33,8 +33,10 @@ public class UginTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Nissa, Vastwood Seer");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: {this} deals 3 damage", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Nissa, Vastwood Seer");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Nissa, Vastwood Seer", true);
+        setChoice(playerB, "Yes");
         playLand(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Forest");
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "-2: Create Ashaya, the Awoken World, a legendary 4/4 green Elemental creature token.");
 
@@ -58,7 +60,5 @@ public class UginTest extends CardTestPlayerBase {
 
         assertLife(playerA, 20);
         assertLife(playerB, 17);
-
     }
-
 }

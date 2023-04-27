@@ -38,7 +38,7 @@ public final class VexingShusher extends CardImpl {
         // Vexing Shusher can't be countered.
         this.addAbility(new CantBeCounteredSourceAbility());
         // {R/G}: Target spell can't be countered.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VexingShusherCantCounterTargetEffect(), new ManaCostsImpl("{R/G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VexingShusherCantCounterTargetEffect(), new ManaCostsImpl<>("{R/G}"));
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);
     }

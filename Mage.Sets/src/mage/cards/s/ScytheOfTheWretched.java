@@ -46,7 +46,7 @@ public final class ScytheOfTheWretched extends CardImpl {
         this.addAbility(new ScytheOfTheWretchedTriggeredAbility());
 
         // Equip {4}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4), false));
     }
 
     private ScytheOfTheWretched(final ScytheOfTheWretched card) {
@@ -63,6 +63,7 @@ class ScytheOfTheWretchedTriggeredAbility extends TriggeredAbilityImpl {
 
     public ScytheOfTheWretchedTriggeredAbility() {
         super(Zone.ALL, new ScytheOfTheWretchedReanimateEffect(), false);
+        setTriggerPhrase("Whenever a creature dealt damage by equipped creature this turn dies, ");
     }
 
     public ScytheOfTheWretchedTriggeredAbility(final ScytheOfTheWretchedTriggeredAbility ability) {
@@ -94,11 +95,6 @@ class ScytheOfTheWretchedTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature dealt damage by equipped creature this turn dies, " ;
     }
 
     private void setTarget(TargetPointer target) {

@@ -25,7 +25,6 @@ public class ShieldCounterTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, "Disciplined Duelist", 1);
         assertCounterCount("Disciplined Duelist", CounterType.SHIELD, 0);
     }
@@ -42,7 +41,6 @@ public class ShieldCounterTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, "Disciplined Duelist", 1);
         assertCounterCount("Disciplined Duelist", CounterType.SHIELD, 0);
         assertGraveyardCount(playerB, "Hill Giant", 1);
@@ -61,7 +59,6 @@ public class ShieldCounterTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, "Disciplined Duelist", 1);
         assertCounterCount("Disciplined Duelist", CounterType.SHIELD, 0);
     }
@@ -81,7 +78,6 @@ public class ShieldCounterTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
         assertGraveyardCount(playerA, "Disciplined Duelist", 1);
     }
 }

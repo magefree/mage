@@ -30,7 +30,6 @@ public final class DismissIntoDream extends CardImpl {
     public DismissIntoDream(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{6}{U}");
 
-
         // Each creature your opponents control is an Illusion in addition to its other types 
         // and has "When this creature becomes the target of a spell or ability, sacrifice it."
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DismissIntoDreamEffect(filter)));
@@ -51,6 +50,7 @@ class DismissIntoDreamEffect extends CreaturesBecomeOtherTypeEffect {
     DismissIntoDreamEffect(FilterPermanent filter) {
         super(filter, SubType.ILLUSION, Duration.WhileOnBattlefield);
         this.outcome = Outcome.Detriment;
+        this.staticText = this.staticText + " and has \"When this creature becomes the target of a spell or ability, sacrifice it.\"";
     }
 
     DismissIntoDreamEffect(final DismissIntoDreamEffect effect) {
@@ -83,10 +83,5 @@ class DismissIntoDreamEffect extends CreaturesBecomeOtherTypeEffect {
     @Override
     public boolean hasLayer(Layer layer) {
         return super.hasLayer(layer) || layer == Layer.AbilityAddingRemovingEffects_6;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return super.getText(mode) + " and has \"When this creature becomes the target of a spell or ability, sacrifice it.\"";
     }
 }

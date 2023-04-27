@@ -21,7 +21,6 @@ public class ShinenOfLifesRoarTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Shinen of Life's Roar", 1);
     }

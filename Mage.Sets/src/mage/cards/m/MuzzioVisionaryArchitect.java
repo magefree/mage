@@ -37,7 +37,7 @@ public final class MuzzioVisionaryArchitect extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {3}{U}, {tap}: Look at the top X cards of your library, where X is the highest converted mana cost among artifacts you control. You may reveal an artifact card from among them and put it onto the battlefield. Put the rest on the bottom of your library in any order.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MuzzioVisionaryArchitectEffect(), new ManaCostsImpl("{3}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MuzzioVisionaryArchitectEffect(), new ManaCostsImpl<>("{3}{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -90,7 +90,7 @@ class MuzzioVisionaryArchitectEffect extends OneShotEffect {
         controller.lookAtCards(source, null, cards, game);
         if (!cards.isEmpty()) {
             TargetCard target = new TargetCard(Zone.LIBRARY, new FilterArtifactCard("artifact card to put onto the battlefield"));
-            if (target.canChoose(controller.getId(), source, game) && controller.choose(Outcome.Benefit, cards, target, game)) {
+            if (target.canChoose(controller.getId(), source, game) && controller.choose(Outcome.Benefit, cards, target, source, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
                     controller.revealCards(source, new CardsImpl(card), game);

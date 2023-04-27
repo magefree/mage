@@ -63,9 +63,9 @@ public final class ArahboRoarOfTheWorld extends CardImpl {
         this.addAbility(ability);
 
         // Whenever another Cat you control attacks, you may pay {1}{G}{W}. If you do, it gains trample and gets +X/+X until end of turn, where X is its power.
-//        Effect effect = new DoIfCostPaid(new ArahboEffect(), new ManaCostsImpl("{1}{G}{W}"));
+//        Effect effect = new DoIfCostPaid(new ArahboEffect(), new ManaCostsImpl<>("{1}{G}{W}"));
         ability = new AttacksCreatureYouControlTriggeredAbility(
-                new DoIfCostPaid(new ArahboEffect(), new ManaCostsImpl("{1}{G}{W}")), false, filter2, true);
+                new DoIfCostPaid(new ArahboEffect(), new ManaCostsImpl<>("{1}{G}{W}")), false, filter2, true);
         this.addAbility(ability);
     }
 

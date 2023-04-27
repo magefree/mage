@@ -18,6 +18,8 @@ public final class SheepToken extends TokenImpl {
         subtype.add(SubType.SHEEP);
         power = new MageInt(0);
         toughness = new MageInt(1);
+
+        setOriginalExpansionSetCode("DMR");
     }
 
     public SheepToken(final SheepToken token) {
