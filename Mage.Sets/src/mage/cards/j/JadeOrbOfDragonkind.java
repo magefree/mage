@@ -9,7 +9,6 @@ import mage.filter.common.FilterCreatureSpell;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.ManaSpentDelayedTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -23,7 +22,6 @@ import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -41,12 +39,12 @@ public final class JadeOrbOfDragonkind extends CardImpl {
 
         // {T}: Add {G}.
         BasicManaAbility ability = new GreenManaAbility();
-        // When you spend this mana to cast a Dragon creature spell, it enters the battlefield with an additional +1/+1 counter on it and gains hexproof until your next turn.
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(
-                new ManaSpentDelayedTriggeredAbility(new JadeOrbOfDragonkindCastEffect(), filter)));
 
-        // Ability aa = new ManaSpentDelayedTriggeredAbility(new JadeOrbOfDragonkindCastEffect(), filter);
-        // aa.addEffect(new JadeOrbOfDragonkindCastEffect());
+        // When you spend this mana to cast a Dragon creature spell, it enters the battlefield with an additional +1/+1 counter on it and gains hexproof until your next turn.
+        ManaSpentDelayedTriggeredAbility manaSpentAbility = new ManaSpentDelayedTriggeredAbility(
+                new HexproofGainAbilityTargetEffect(), filter);
+        manaSpentAbility.addEffect(new AdditionalCounterEffect());
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(manaSpentAbility));
 
         ability.setUndoPossible(false);
         this.addAbility(ability);
@@ -62,57 +60,43 @@ public final class JadeOrbOfDragonkind extends CardImpl {
     }
 }
 
-// Not one shot
-class JadeOrbOfDragonkindCastEffect extends OneShotEffect {
+class HexproofGainAbilityTargetEffect extends GainAbilityTargetEffect {
 
-    JadeOrbOfDragonkindCastEffect() {
-        super(Outcome.Benefit);
-        staticText = "it enters the battlefield with an additional +1/+1 counter on it " +
-                "and gains hexproof until your next turn ";
+    HexproofGainAbilityTargetEffect() {
+        super(HexproofAbility.getInstance(), Duration.UntilYourNextTurn, null, true);
+        staticText = "and gains hexproof until your next turn.";
     }
 
-    public JadeOrbOfDragonkindCastEffect(final JadeOrbOfDragonkindCastEffect effect) {
+    public HexproofGainAbilityTargetEffect(final HexproofGainAbilityTargetEffect effect) {
         super(effect);
     }
 
     @Override
-    public JadeOrbOfDragonkindCastEffect copy() {
-        return new JadeOrbOfDragonkindCastEffect(this);
+    public HexproofGainAbilityTargetEffect copy() {
+        return new HexproofGainAbilityTargetEffect(this);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+
         GameEvent event = ((ManaSpentDelayedTriggeredAbility) source).getTriggerEvent();
         if (event != null) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            // it enters the battlefield with an additional +1/+1 counter on it
-            game.addEffect(
-                    new AdditionalCounterEffect(
-                            new MageObjectReference((spell).getSourceId(), spell.getZoneChangeCounter(game), game)),
-                    source);
-            // and gains hexproof until your next turn
-            game.addEffect(
-                    new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.UntilYourNextTurn, null, true)
-                            .setTargetPointer(new FixedTarget(spell.getCard(), game)),
-                    source);
+            affectedObjectList.add(new MageObjectReference(spell.getSourceId(), game));
         }
-        return true;
     }
 }
 
 class AdditionalCounterEffect extends ReplacementEffectImpl {
 
-    private final MageObjectReference mor;
-
-    public AdditionalCounterEffect(MageObjectReference mor) {
+    public AdditionalCounterEffect() {
         super(Duration.EndOfTurn, Outcome.BoostCreature);
         this.staticText = "it enters the battlefield with an additional +1/+1 counter on it";
-        this.mor = mor;
     }
 
     public AdditionalCounterEffect(AdditionalCounterEffect effect) {
         super(effect);
-        this.mor = effect.mor;
     }
 
     @Override
@@ -122,8 +106,15 @@ class AdditionalCounterEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-        return permanent != null && mor.refersTo(permanent, game);
+        if (source instanceof ManaSpentDelayedTriggeredAbility == false) {
+            return false;
+        }
+        GameEvent manaUsedEvent = ((ManaSpentDelayedTriggeredAbility) source).getTriggerEvent();
+        Spell spell = game.getStack().getSpell(manaUsedEvent.getTargetId());
+        if (spell == null) {
+            return false;
+        }
+        return event.getSourceId() == spell.getSourceId();
     }
 
     @Override
