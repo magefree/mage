@@ -11,7 +11,6 @@ import mage.abilities.keyword.BattleCryAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.game.Game;
-import mage.game.events.CreateTokenEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.PhyrexianMiteToken;
@@ -55,7 +54,7 @@ public final class RiaIvorBaneOfBladehold extends CardImpl {
 class RiaIvorBaneOfBladeholdEffect extends PreventionEffectImpl {
 
     public RiaIvorBaneOfBladeholdEffect() {
-        super(Duration.EndOfCombat, Integer.MAX_VALUE, false, false);
+        super(Duration.EndOfCombat, Integer.MAX_VALUE, true, false);
         this.staticText = "the next time target creature would deal combat damage to one or more players this combat, prevent that damage. If damage is prevented this way, create that many 1/1 colorless Phyrexian Mite artifact creature tokens with toxic 1 and \"This creature can't block.\"";
     }
 
@@ -66,10 +65,12 @@ class RiaIvorBaneOfBladeholdEffect extends PreventionEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         PreventionEffectData preventionData = preventDamageAction(event, source, game);
-        Token token = new PhyrexianMiteToken();
-        token.putOntoBattlefield(preventionData.getPreventedDamage(), game, source);
         this.used = true;
         this.discard();
+        if (preventionData.getPreventedDamage() > 0) {
+            Token token = new PhyrexianMiteToken();
+            token.putOntoBattlefield(preventionData.getPreventedDamage(), game, source);
+        }
         return true;
     }
 
@@ -85,5 +86,10 @@ class RiaIvorBaneOfBladeholdEffect extends PreventionEffectImpl {
     @Override
     public RiaIvorBaneOfBladeholdEffect copy() {
         return new RiaIvorBaneOfBladeholdEffect(this);
+    }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
     }
 }
