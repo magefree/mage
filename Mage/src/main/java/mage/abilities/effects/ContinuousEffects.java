@@ -1273,12 +1273,12 @@ public class ContinuousEffects implements Serializable {
     }
 
     public synchronized void addEffect(ContinuousEffect effect, Ability source) {
-        if (effect == null) {
-            logger.error("Effect is null: " + source.toString());
-            return;
-        } else if (source == null) {
-            logger.warn("Adding effect without ability : " + effect);
+        if (effect == null || source == null) {
+            // addEffect(effect, source) need a non-null source
+            throw new IllegalArgumentException("Wrong code usage. Effect and source can't be null here: "
+                    + source + "; " + effect);
         }
+
         switch (effect.getEffectType()) {
             case REPLACEMENT:
             case REDIRECTION:
@@ -1313,9 +1313,12 @@ public class ContinuousEffects implements Serializable {
             case CONTINUOUS_RULE_MODIFICATION:
                 continuousRuleModifyingEffects.addEffect((ContinuousRuleModifyingEffect) effect, source);
                 break;
-            default:
+            case CONTINUOUS:
+            case ONESHOT:
                 layeredEffects.addEffect(effect, source);
                 break;
+            default:
+                throw new IllegalArgumentException("Unknown effect type: " + effect.getEffectType());
         }
     }
 

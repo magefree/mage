@@ -38,7 +38,7 @@ public final class WheelAndDeal extends CardImpl {
         this.getSpellAbility().addEffect(effect);
         
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private WheelAndDeal(final WheelAndDeal card) {

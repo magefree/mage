@@ -24,7 +24,7 @@ public final class CripplingChill extends CardImpl {
         this.getSpellAbility().addEffect(new TapTargetEffect());
         this.getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect("It"));
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private CripplingChill(final CripplingChill card) {

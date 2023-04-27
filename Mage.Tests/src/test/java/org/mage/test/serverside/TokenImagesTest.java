@@ -1,9 +1,17 @@
 package org.mage.test.serverside;
 
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.Card;
+import mage.cards.repository.TokenRepository;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.PermanentToken;
+import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.util.CardUtil;
 import mage.view.CardView;
 import mage.view.GameView;
@@ -30,6 +38,22 @@ public class TokenImagesTest extends CardTestPlayerBase {
     // TODO: add tests for Planes, Dungeons and other command objects (when it gets additional sets)
 
     private static final Pattern checkPattern = Pattern.compile("(\\w+)([<=>])(\\d+)"); // code=12, code>0
+
+    static class TestToken extends TokenImpl {
+
+        TestToken(String name, String description) {
+            super(name, description);
+        }
+
+        TestToken(final TestToken token) {
+            super(token);
+        }
+
+        @Override
+        public Token copy() {
+            return new TestToken(this);
+        }
+    }
 
     private void prepareCards_MemorialToGlory(String... cardsList) {
         // {3}{W}, {T}, Sacrifice Memorial to Glory: Create two 1/1 white Soldier creature tokens.
@@ -315,8 +339,52 @@ public class TokenImagesTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore // TODO: implement
+    @Ignore
+    // TODO: implement auto-generate creature token images from public tokens (by name, type, color, PT, abilities)
+    public void test_CreatureToken_MustGetDefaultImage() {
+        Ability ability = new SimpleActivatedAbility(
+                Zone.ALL,
+                new CreateTokenEffect(new CreatureToken(2, 2), 10),
+                new ManaCostsImpl<>("")
+        );
+        addCustomCardWithAbility("test", playerA, ability);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "create ten");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, 1 + 10); // 1 test card + 10 tokens
+
+        assert_Inner("test", 0, 0, 1,
+                "", 10, false, "XXX=10");
+    }
+
+    @Test
     public void test_UnknownToken_MustGetDefaultImage() {
+        // all unknown tokens must put in XMAGE set
+        String xmageSetCode = TokenRepository.XMAGE_TOKENS_SET_CODE;
+        TestToken token = new TestToken("Unknown Token", "xxx");
+        Ability ability = new SimpleActivatedAbility(
+                Zone.ALL,
+                new CreateTokenEffect(token, 10),
+                new ManaCostsImpl<>("")
+        );
+        addCustomCardWithAbility("test", playerA, ability);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "create ten");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, 1 + 10); // 1 test card + 10 tokens
+
+        assert_Inner("test", 0, 0, 1,
+                "Unknown Token", 10, false, xmageSetCode + "=10");
     }
 
     @Test
