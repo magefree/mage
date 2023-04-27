@@ -147,7 +147,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
         if (quotes) {
             sb.append('"');
         }
-        sb.append(ability.getRule("this " + targetObjectName));
+        sb.append(ability.getRule("This " + targetObjectName));
         if (quotes) {
             sb.append('"');
         }

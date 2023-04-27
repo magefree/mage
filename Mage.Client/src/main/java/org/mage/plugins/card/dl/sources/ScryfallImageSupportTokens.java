@@ -1,5 +1,7 @@
 package org.mage.plugins.card.dl.sources;
 
+import mage.cards.repository.TokenRepository;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,11 +15,13 @@ public class ScryfallImageSupportTokens {
     private static final Map<String, String> supportedCards = new HashMap<String, String>() {
         {
             // xmage token -> direct or api link:
+            //
             // examples:
-            //   direct example: https://img.scryfall.com/cards/large/en/trix/6.jpg
+            //   direct example: https://cards.scryfall.io/large/back/d/c/dc26e13b-7a0f-4e7f-8593-4f22234f4517.jpg
             //   api example: https://api.scryfall.com/cards/trix/6/en?format=image
             //   api example: https://api.scryfall.com/cards/trix/6?format=image
-            // api format is primary
+            //   api example: https://api.scryfall.com/cards/tvow/21/en?format=image&face=back
+            // api format is primary (direct images links can be changed by scryfall)
             //
             // code form for one token:
             //   set/token_name
@@ -25,6 +29,14 @@ public class ScryfallImageSupportTokens {
             // code form for same name tokens (alternative images):
             //   set/token_name/1
             //   set/token_name/2
+            //
+            // double faced cards:
+            //  front face image: format=image&face=front
+            //  back face image: format=image&face=back
+
+            // XMAGE
+            // additional tokens for reminder/helper images
+            putAll(TokenRepository.instance.prepareScryfallDownloadList());
 
             // RIX
             put("RIX/City's Blessing", "https://api.scryfall.com/cards/trix/6/en?format=image"); // TODO: missing from tokens data

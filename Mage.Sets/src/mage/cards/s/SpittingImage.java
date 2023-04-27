@@ -11,9 +11,9 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
+import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
-import mage.util.CardUtil;
+import mage.util.functions.CopyTokenFunction;
 
 import java.util.UUID;
 
@@ -62,8 +62,7 @@ class SpittingImageEffect extends OneShotEffect {
             permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
         }
         if (permanent != null) {
-            EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(permanent, game);
+            Token token = CopyTokenFunction.createTokenCopy(permanent, game);
             token.putOntoBattlefield(1, game, source, source.getControllerId());
             return true;
         }

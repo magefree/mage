@@ -15,11 +15,13 @@ public enum TokenRepository {
 
     instance;
 
+    public static final String XMAGE_TOKENS_SET_CODE = "XMAGE";
+
     private static final Logger logger = Logger.getLogger(TokenRepository.class);
 
     private ArrayList<TokenInfo> allTokens = new ArrayList<>();
-    private Map<String, List<TokenInfo>> indexByClassName = new HashMap<>();
-    private Map<TokenType, List<TokenInfo>> indexByType = new HashMap<>();
+    private final Map<String, List<TokenInfo>> indexByClassName = new HashMap<>();
+    private final Map<TokenType, List<TokenInfo>> indexByType = new HashMap<>();
 
     TokenRepository() {
     }
@@ -29,7 +31,9 @@ public enum TokenRepository {
             return;
         }
 
-        allTokens = loadAllTokens();
+        // tokens
+        allTokens = loadMtgTokens();
+        allTokens.addAll(loadXmageTokens());
 
         // index
         allTokens.forEach(token -> {
@@ -72,7 +76,7 @@ public enum TokenRepository {
         return indexByClassName.getOrDefault(fullClassName, new ArrayList<>());
     }
 
-    private static ArrayList<TokenInfo> loadAllTokens() throws RuntimeException {
+    private static ArrayList<TokenInfo> loadMtgTokens() throws RuntimeException {
         // Must load tokens data in strict mode (throw exception on any error)
         // Try to put verify checks here instead verify tests
         String dbSource = "tokens-database.txt";
@@ -202,5 +206,73 @@ public enum TokenRepository {
         }
 
         return list;
+    }
+
+    public Map<String, String> prepareScryfallDownloadList() {
+        init();
+
+        Map<String, String> res = new LinkedHashMap<>();
+
+        // format example:
+        // put("ONC/Angel/1", "https://api.scryfall.com/cards/tonc/2/en?format=image");
+        allTokens.stream()
+                .filter(token -> token.getTokenType().equals(TokenType.XMAGE))
+                .forEach(token -> {
+                    String code = String.format("%s/%s/%d", token.getSetCode(), token.getName(), token.getImageNumber());
+                    res.put(code, token.getDownloadUrl());
+                });
+        return res;
+    }
+
+    private static TokenInfo createXmageToken(String name, Integer imageNumber, String scryfallDownloadUrl) {
+        return new TokenInfo(TokenType.XMAGE, name, XMAGE_TOKENS_SET_CODE, imageNumber)
+                .withDownloadUrl(scryfallDownloadUrl);
+    }
+
+    private static ArrayList<TokenInfo> loadXmageTokens() {
+        // Create reminder/helper tokens (special images like Copy, Morph, Manifest, etc)
+        // Search by
+        // - https://tagger.scryfall.com/tags/card/assistant-cards
+        // - https://scryfall.com/search?q=otag%3Aassistant-cards&unique=cards&as=grid&order=name
+        // Must add only unique prints
+        // TODO: add custom set in download window to download a custom tokens only
+        // TODO: add custom set in card viewer to view a custom tokens only
+        ArrayList<TokenInfo> res = new ArrayList<>();
+
+        // Copy
+        // https://scryfall.com/search?q=include%3Aextras+unique%3Aprints+type%3Atoken+copy&unique=cards&as=grid&order=name
+        res.add(createXmageToken("Copy", 1, "https://api.scryfall.com/cards/tclb/19/en?format=image"));
+        res.add(createXmageToken("Copy", 2, "https://api.scryfall.com/cards/tsnc/1/en?format=image"));
+        res.add(createXmageToken("Copy", 3, "https://api.scryfall.com/cards/tvow/19/en?format=image"));
+        res.add(createXmageToken("Copy", 4, "https://api.scryfall.com/cards/tznr/12/en?format=image"));
+
+        // City's Blessing
+        // https://scryfall.com/search?q=type%3Atoken+include%3Aextras+unique%3Aprints+City%27s+Blessing+&unique=cards&as=grid&order=name
+        res.add(createXmageToken("City's Blessing", 1, "https://api.scryfall.com/cards/f18/2/en?format=image"));
+
+        // Day // Night
+        // https://scryfall.com/search?q=include%3Aextras+unique%3Aprints+%22Day+%2F%2F+Night%22&unique=cards&as=grid&order=name
+        res.add(createXmageToken("Day", 1, "https://api.scryfall.com/cards/tvow/21/en?format=image&face=front"));
+        res.add(createXmageToken("Night", 1, "https://api.scryfall.com/cards/tvow/21/en?format=image&face=back"));
+
+        // Manifest
+        // https://scryfall.com/search?q=Manifest+include%3Aextras+unique%3Aprints&unique=cards&as=grid&order=name
+        res.add(createXmageToken("Manifest", 1, "https://api.scryfall.com/cards/tc19/28/en?format=image"));
+        res.add(createXmageToken("Manifest", 2, "https://api.scryfall.com/cards/tc18/1/en?format=image"));
+        res.add(createXmageToken("Manifest", 3, "https://api.scryfall.com/cards/tfrf/4/en?format=image"));
+        res.add(createXmageToken("Manifest", 4, "https://api.scryfall.com/cards/tncc/3/en?format=image"));
+
+        // Morph
+        // https://scryfall.com/search?q=Morph+unique%3Aprints+otag%3Aassistant-cards&unique=cards&as=grid&order=name
+        res.add(createXmageToken("Morph", 1, "https://api.scryfall.com/cards/tktk/11/en?format=image"));
+        res.add(createXmageToken("Morph", 2, "https://api.scryfall.com/cards/ta25/15/en?format=image"));
+        res.add(createXmageToken("Morph", 3, "https://api.scryfall.com/cards/tc19/27/en?format=image"));
+
+        // The Monarch
+        // https://scryfall.com/search?q=Monarch+unique%3Aprints+otag%3Aassistant-cards&unique=cards&as=grid&order=name
+        res.add(createXmageToken("The Monarch", 1, "https://api.scryfall.com/cards/tonc/22/en?format=image"));
+        res.add(createXmageToken("The Monarch", 2, "https://api.scryfall.com/cards/tcn2/1/en?format=image"));
+
+        return res;
     }
 }

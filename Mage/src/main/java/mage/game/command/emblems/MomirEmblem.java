@@ -18,11 +18,10 @@ import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.command.Emblem;
-import mage.game.permanent.token.EmptyToken;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.custom.CreatureToken;
-import mage.util.CardUtil;
 import mage.util.RandomUtil;
+import mage.util.functions.CopyTokenFunction;
 
 import java.util.List;
 
@@ -79,7 +78,7 @@ class MomirEffect extends OneShotEffect {
         }
 
         // search for a random non custom set creature
-        EmptyToken token = null;
+        Token token = null;
         while (!options.isEmpty()) {
             int index = RandomUtil.nextInt(options.size());
             ExpansionSet expansionSet = Sets.findSet(options.get(index).getSetCode());
@@ -88,8 +87,7 @@ class MomirEffect extends OneShotEffect {
             } else {
                 Card card = options.get(index).getCard();
                 if (card != null) {
-                    token = new EmptyToken();
-                    CardUtil.copyTo(token).from(card, game);
+                    token = CopyTokenFunction.createTokenCopy(card, game);
                     break;
                 } else {
                     options.remove(index);

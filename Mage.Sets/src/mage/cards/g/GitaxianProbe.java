@@ -22,7 +22,7 @@ public final class GitaxianProbe extends CardImpl {
         this.getSpellAbility().addEffect(new LookAtTargetPlayerHandEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
 
     }
 
