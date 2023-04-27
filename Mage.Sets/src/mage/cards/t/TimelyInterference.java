@@ -36,7 +36,7 @@ public final class TimelyInterference extends CardImpl {
                 new LockedInCondition(KickedCondition.ONCE),
                 "If this spell was kicked, that creature blocks this turn if able.<br>"
         ));
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private TimelyInterference(final TimelyInterference card) {

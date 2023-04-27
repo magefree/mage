@@ -27,7 +27,7 @@ public final class GripOfAmnesia extends CardImpl {
         // Counter target spell unless its controller exiles all cards from their graveyard.
         // Draw a card.
         this.getSpellAbility().addEffect(new GripOfAmnesiaEffect());
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
