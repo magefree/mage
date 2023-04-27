@@ -37,7 +37,6 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.util.CardUtil;
 import mage.util.GameLog;
-import mage.util.RandomUtil;
 import mage.util.ThreadLocalStringBuilder;
 import org.apache.log4j.Logger;
 
@@ -110,6 +109,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected Map<String, String> info;
     protected int createOrder;
     protected boolean legendRuleApplies = true;
+    private final CopiableValues copiableValues = new CopiableValues();
 
     private static final List<UUID> emptyList = Collections.unmodifiableList(new ArrayList<UUID>());
 
@@ -182,6 +182,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.morphed = permanent.morphed;
         this.manifested = permanent.manifested;
         this.createOrder = permanent.createOrder;
+        this.copiableValues.copyFrom(permanent.copiableValues, null);
     }
 
     @Override
@@ -221,6 +222,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.goadingPlayers.clear();
         this.loyaltyActivationsAvailable = 1;
         this.legendRuleApplies = true;
+    }
+
+    @Override
+    public void saveCopiableValues(Game game) {
+        this.copiableValues.copyFrom(this, game);
+    }
+
+    @Override
+    public Permanent getCopiableValues() {
+        return copiableValues;
     }
 
     @Override

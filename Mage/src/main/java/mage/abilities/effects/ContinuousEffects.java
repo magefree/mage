@@ -24,7 +24,6 @@ import mage.game.stack.Spell;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
-import mage.util.CardUtil;
 import mage.util.trace.TraceInfo;
 import org.apache.log4j.Logger;
 
@@ -1000,6 +999,10 @@ public class ContinuousEffects implements Serializable {
         //Reload layerEffect if copy effects were applied
         if (!layer.isEmpty()) {
             activeLayerEffects = getLayeredEffects(game, "layer_1");
+        }
+
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
+            permanent.saveCopiableValues(game);
         }
 
         layer = filterLayeredEffects(activeLayerEffects, Layer.ControlChangingEffects_2);

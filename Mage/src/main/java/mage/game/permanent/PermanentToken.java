@@ -29,6 +29,7 @@ public class PermanentToken extends PermanentImpl {
         this.power = new MageInt(token.getPower().getModifiedBaseValue());
         this.toughness = new MageInt(token.getToughness().getModifiedBaseValue());
         this.copyFromToken(this.token, game, false); // needed to have at this time (e.g. for subtypes for entersTheBattlefield replacement effects)
+        this.saveCopiableValues(game);
         if (this.token.isEntersTransformed()) {
             TransformAbility.transformPermanent(this, this.token.getBackFace(), game, null);
         }
