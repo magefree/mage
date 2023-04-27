@@ -9,7 +9,7 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetAnyTarget;
 import mage.target.targetadjustment.TargetAdjuster;
@@ -25,8 +25,7 @@ public final class MagmaBurst extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");
 
         // Kicker-Sacrifice two lands.
-        this.addAbility(new KickerAbility(new SacrificeTargetCost(2,
-                new FilterControlledLandPermanent("two lands"))));
+        this.addAbility(new KickerAbility(new SacrificeTargetCost(2, StaticFilters.FILTER_LANDS)));
 
         // Magma Burst deals 3 damage to any target. If Magma Burst was kicked, it deals 3 damage to another any target.
         Effect effect = new DamageTargetEffect(3);

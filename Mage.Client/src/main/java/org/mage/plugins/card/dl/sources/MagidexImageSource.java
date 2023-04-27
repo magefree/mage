@@ -236,8 +236,8 @@ public enum MagidexImageSource implements CardImageSource {
         String cardDownloadName = card.getDownloadName().toLowerCase(Locale.ENGLISH);
         String cardSet = card.getSet();
 
-        if (cardDownloadName == null || cardSet == null) {
-            throw new Exception("Wrong parameters for image: cardDownloadName: " + cardDownloadName + ",card set: " + cardSet);
+        if (cardSet == null || cardSet.isEmpty() || cardDownloadName.isEmpty()) {
+            throw new Exception("Wrong parameters for image: cardDownloadName: " + cardDownloadName + ", card set: " + cardSet);
         }
 
         if (card.isSplitCard()) {

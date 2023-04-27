@@ -113,6 +113,6 @@ public class BecomesColorSourceEffect extends ContinuousEffectImpl {
             return staticText;
         }
         return "{this} becomes " + (setColor == null ? "the color of your choice" : setColor.getDescription())
-                + ' ' + duration.toString();
+                + (' ' + duration.toString()).trim();
     }
 }

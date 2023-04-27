@@ -12,4 +12,13 @@ public final class MtgJsonSet {
     public String name;
     public String releaseDate;
     public int totalSetSize;
+
+    public String block;
+
+    public String parentCode;
+
+    @Override
+    public String toString() {
+        return code + " - " + name;
+    }
 }

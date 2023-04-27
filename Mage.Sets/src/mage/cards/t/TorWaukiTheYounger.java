@@ -13,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.DamagedEvent;
+import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetAnyTarget;
 import mage.util.CardUtil;
@@ -84,7 +84,7 @@ class TorWaukiTheYoungerEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         return source.isControlledBy(game.getControllerId(event.getSourceId()))
                 && !source.getSourceId().equals(event.getSourceId())
-                && !((DamagedEvent) event).isCombatDamage();
+                && !((DamageEvent) event).isCombatDamage();
     }
 
     @Override

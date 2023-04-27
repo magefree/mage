@@ -46,7 +46,7 @@ public final class EmielTheBlessed extends CardImpl {
 
         // {3}: Exile another target creature you control, then return it to the battlefield under its owner's control.
         Ability ability = new SimpleActivatedAbility(new ExileTargetForSourceEffect(), new GenericManaCost(3));
-        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false));
+        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false, "it").concatBy(", then"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 

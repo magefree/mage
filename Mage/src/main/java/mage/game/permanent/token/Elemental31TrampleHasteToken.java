@@ -22,7 +22,7 @@ public final class Elemental31TrampleHasteToken extends TokenImpl {
         toughness = new MageInt(1);
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
-        availableImageSetCodes.addAll(Arrays.asList("BFZ", "MH1", "DOM"));
+        availableImageSetCodes.addAll(Arrays.asList("BFZ", "MH1", "DOM", "DMR"));
     }
 
     @Override

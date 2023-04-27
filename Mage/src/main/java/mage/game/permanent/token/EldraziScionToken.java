@@ -33,7 +33,7 @@ public final class EldraziScionToken extends TokenImpl {
         subtype.add(SubType.SCION);
         power = new MageInt(1);
         toughness = new MageInt(1);
-        addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GenericMana(1), new SacrificeSourceCost()));
+        addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), new SacrificeSourceCost()));
         availableImageSetCodes = tokenImageSets;
     }
 

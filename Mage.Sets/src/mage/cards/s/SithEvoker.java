@@ -2,6 +2,7 @@
 package mage.cards.s;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
@@ -60,7 +61,7 @@ public final class SithEvoker extends CardImpl {
 
 class SithEvokerEffect extends OneShotEffect {
 
-    private static final Set<String> choices = new HashSet<>();
+    private static final Set<String> choices = new LinkedHashSet<>();
 
     static {
         choices.add("Gain life equal to creature's power");

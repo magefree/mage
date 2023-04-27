@@ -24,7 +24,7 @@ public final class BirdIllusionToken extends TokenImpl {
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("GRN", "C20");
+        availableImageSetCodes = Arrays.asList("GRN", "C20", "GN3");
     }
 
     public BirdIllusionToken(final BirdIllusionToken token) {

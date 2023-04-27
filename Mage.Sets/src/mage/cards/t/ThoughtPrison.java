@@ -84,7 +84,7 @@ class ThoughtPrisonImprintEffect extends OneShotEffect {
             targetPlayer.revealCards("Thought Prison ", targetPlayer.getHand(), game);
 
             TargetCard target = new TargetCard(1, Zone.HAND, filter);
-            if (player.choose(Outcome.Benefit, targetPlayer.getHand(), target, game)) {
+            if (player.choose(Outcome.Benefit, targetPlayer.getHand(), target, source, game)) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {
                     Card card = targetPlayer.getHand().get(targetId, game);

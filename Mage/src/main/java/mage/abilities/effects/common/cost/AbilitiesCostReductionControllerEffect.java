@@ -15,22 +15,29 @@ public class AbilitiesCostReductionControllerEffect extends CostModificationEffe
 
     private final Class<? extends ActivatedAbility> activatedAbility;
     private final int amount;
+    private final boolean excludeSource;
 
     public AbilitiesCostReductionControllerEffect(Class<? extends ActivatedAbility> activatedAbility, String activatedAbilityName) {
         this(activatedAbility, activatedAbilityName, 1);
     }
 
     public AbilitiesCostReductionControllerEffect(Class<? extends ActivatedAbility> activatedAbility, String activatedAbilityName, int amount) {
+        this(activatedAbility, activatedAbilityName, 1, false);
+    }
+
+    public AbilitiesCostReductionControllerEffect(Class<? extends ActivatedAbility> activatedAbility, String activatedAbilityName, int amount, boolean excludeSource) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.activatedAbility = activatedAbility;
         staticText = activatedAbilityName + " costs you pay cost {" + amount + "} less";
         this.amount = amount;
+        this.excludeSource = excludeSource;
     }
 
     public AbilitiesCostReductionControllerEffect(AbilitiesCostReductionControllerEffect effect) {
         super(effect);
         this.activatedAbility = effect.activatedAbility;
         this.amount = effect.amount;
+        this.excludeSource = effect.excludeSource;
     }
 
     @Override
@@ -40,6 +47,11 @@ public class AbilitiesCostReductionControllerEffect extends CostModificationEffe
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
+
+        if (excludeSource && abilityToModify.getSourceId().equals(source.getSourceId())) {
+            return false;
+        }
+        
         CardUtil.reduceCost(abilityToModify, amount);
         return true;
     }

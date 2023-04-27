@@ -24,7 +24,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
  */
 public final class VoldarenPariah extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("three other creatures");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creatures");
 
     static {
         filter.add(AnotherPredicate.instance);

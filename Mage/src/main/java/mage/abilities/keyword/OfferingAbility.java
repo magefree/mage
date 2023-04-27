@@ -12,12 +12,12 @@ import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 import mage.util.GameLog;
@@ -48,15 +48,14 @@ import java.util.UUID;
  */
 public class OfferingAbility extends StaticAbility implements AlternateManaPaymentAbility {
 
-    private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+    private final FilterControlledPermanent filter;
 
     /**
      * @param subtype name of the subtype that can be offered
      */
-    public OfferingAbility(SubType subtype) {
+    public OfferingAbility(FilterControlledPermanent filter) {
         super(Zone.ALL, null);
-        filter.add(subtype.getPredicate());
-        filter.setMessage(subtype.getDescription());
+        this.filter = filter;
         this.addEffect(new OfferingAsThoughEffect());
     }
 
@@ -70,14 +69,16 @@ public class OfferingAbility extends StaticAbility implements AlternateManaPayme
         return new OfferingAbility(this);
     }
 
-    public FilterControlledCreaturePermanent getFilter() {
+    public FilterControlledPermanent getFilter() {
         return filter;
     }
 
     @Override
     public String getRule(boolean all) {
-        String subtype = filter.getMessage();
-        return subtype + " offering <i>(You may cast this card any time you could cast an instant by sacrificing a " + subtype + " and paying the difference in mana costs between this and the sacrificed " + subtype + ". Mana cost includes color.)</i>";
+        String message = filter.getMessage();
+        return message + " offering <i>(You may cast this card any time you could cast an instant by sacrificing " +
+                CardUtil.addArticle(message) + " and paying the difference in mana costs between this and the sacrificed " +
+                message + ". Mana cost includes color.)</i>";
     }
 
     @Override
@@ -169,7 +170,7 @@ class OfferingAsThoughEffect extends AsThoughEffectImpl {
                 if (game.inCheckPlayableState()) {
                     return true;
                 }
-                FilterControlledCreaturePermanent filter = ((OfferingAbility) source).getFilter();
+                FilterControlledPermanent filter = ((OfferingAbility) source).getFilter();
                 Card spellToCast = game.getCard(source.getSourceId());
                 if (spellToCast == null) {
                     return false;
@@ -177,7 +178,7 @@ class OfferingAsThoughEffect extends AsThoughEffectImpl {
                 Player player = game.getPlayer(source.getControllerId());
                 if (player != null
                         && player.chooseUse(Outcome.Benefit, "Offer a " + filter.getMessage() + " to cast " + spellToCast.getName() + '?', source, game)) {
-                    Target target = new TargetControlledCreaturePermanent(1, 1, filter, true);
+                    Target target = new TargetPermanent(1, 1, filter, true);
                     player.chooseTarget(Outcome.Sacrifice, target, source, game);
                     if (!target.isChosen()) {
                         return false;

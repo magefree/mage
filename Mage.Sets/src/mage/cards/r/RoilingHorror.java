@@ -17,7 +17,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -39,7 +38,7 @@ public final class RoilingHorror extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Roiling Horror's power and toughness are each equal to your life total minus the life total of an opponent with the most life.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new RoilingHorrorDynamicValue(), Duration.EndOfGame)
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new RoilingHorrorDynamicValue())
                 .setText("{this}'s power and toughness are each equal to your life total minus the life total of an opponent with the most life.")
         ));
 

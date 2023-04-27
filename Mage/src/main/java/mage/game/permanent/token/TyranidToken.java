@@ -20,6 +20,7 @@ public final class TyranidToken extends TokenImpl {
         toughness = new MageInt(1);
 
         availableImageSetCodes.addAll(Arrays.asList("40K"));
+        this.setTokenType(1);
     }
 
     public TyranidToken(final TyranidToken token) {

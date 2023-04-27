@@ -20,7 +20,7 @@ public final class SquirrelToken extends TokenImpl {
         toughness = new MageInt(1);
 
         availableImageSetCodes = Arrays.asList("CNS", "ODY", "PCY", "TOR", "ULG", "UNH", "WMA",
-                "WTH", "MH1", "MH2", "2XM", "CLB");
+                "WTH", "MH1", "MH2", "2XM", "CLB", "DMR");
     }
 
     public SquirrelToken(final SquirrelToken token) {

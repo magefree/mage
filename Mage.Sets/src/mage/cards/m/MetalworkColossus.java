@@ -67,7 +67,7 @@ public final class MetalworkColossus extends CardImpl {
 
 class totalNonCreatureArtifactManaValue implements DynamicValue {
 
-    private static final String message = "total mana value of noncreature artifacts you control";
+    private static final String message = "the total mana value of noncreature artifacts you control";
     private static final FilterPermanent filter = new FilterControlledArtifactPermanent("noncreature artifacts you control");
 
     static {

@@ -59,7 +59,6 @@ public class Premodern extends Constructed {
         banned.add("Mind Twist");
         banned.add("Mystical Tutor");
         banned.add("Necropotence");
-        banned.add("Show and Tell");
         banned.add("Strip Mine");
         banned.add("Tendrils of Agony");
         banned.add("Time Spiral");

@@ -835,7 +835,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
+    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
         return false;
     }
 
@@ -1205,6 +1205,11 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public boolean moveCardsToHandWithInfo(Cards cards, Ability source, Game game, boolean withName) {
+        return false;
+    }
+
+    @Override
     public boolean moveCardToExileWithInfo(Card card, UUID exileId, String exileName, Ability source, Game game, Zone fromZone, boolean withName) {
         return false;
     }
@@ -1424,4 +1429,8 @@ public class PlayerStub implements Player {
         return card.getSpellAbility();
     }
 
+    @Override
+    public ActivatedAbility chooseLandOrSpellAbility(Card card, Game game, boolean noMana) {
+        return card.getSpellAbility();
+    }
 }

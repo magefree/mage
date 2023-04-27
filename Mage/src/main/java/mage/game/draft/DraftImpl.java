@@ -8,6 +8,7 @@ import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
 import mage.players.Player;
 import mage.players.PlayerList;
+import org.apache.log4j.Logger;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -19,6 +20,8 @@ import java.util.concurrent.TimeUnit;
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class DraftImpl implements Draft {
+
+    protected static final Logger logger = Logger.getLogger(DraftImpl.class);
 
     protected final UUID id;
     protected final Map<UUID, DraftPlayer> players = new LinkedHashMap<>();
@@ -156,7 +159,9 @@ public abstract class DraftImpl implements Draft {
     @Override
     public void autoPick(UUID playerId) {
         List<Card> booster = players.get(playerId).getBooster();
-        this.addPick(playerId, booster.get(booster.size()-1).getId(), null);
+        if (booster.size() > 0) {
+            this.addPick(playerId, booster.get(booster.size() - 1).getId(), null);
+        }
     }
 
     protected void passBoosterToLeft() {
@@ -225,7 +230,7 @@ public abstract class DraftImpl implements Draft {
         synchronized (this) {
             while (!donePicking()) {
                 try {
-                    this.wait();
+                    this.wait(10000); // checked every 10s to make sure the draft moves on
                 } catch (InterruptedException ex) {
                 }
             }
@@ -245,6 +250,7 @@ public abstract class DraftImpl implements Draft {
                     boosterLoadingCounter++;
                 }
             } catch (Exception ex) {
+                logger.fatal("Fatal boosterLoadingHandle error in draft " + id + " pack " + boosterNum + " pick " + cardNum, ex);
             }
         }, 0, BOOSTER_LOADING_INTERVAL, TimeUnit.SECONDS);
     }
@@ -306,7 +312,12 @@ public abstract class DraftImpl implements Draft {
     public void firePickCardEvent(UUID playerId) {
         DraftPlayer player = players.get(playerId);
         int cardNum = Math.min(15, this.cardNum);
-        int time = timing.getPickTimeout(cardNum) - boosterLoadingCounter * BOOSTER_LOADING_INTERVAL;
+        int time = timing.getPickTimeout(cardNum);
+        // if the pack is re-sent to a player because they haven't been able to successfully load it, the pick time is reduced appropriately because of the elapsed time
+        // the time is always at least 1 second unless it's set to 0, i.e. unlimited time
+        if (time > 0) {
+            time = Math.max(1, time - boosterLoadingCounter * BOOSTER_LOADING_INTERVAL);
+        }
         playerQueryEventSource.pickCard(playerId, "Pick card", player.getBooster(), time);
     }
 

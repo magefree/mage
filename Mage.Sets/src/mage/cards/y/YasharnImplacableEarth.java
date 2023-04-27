@@ -150,7 +150,7 @@ class YasharnImplacableEarthEffect extends ContinuousRuleModifyingEffectImpl {
             return false;
         }
 
-        if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY || permanent == null) {
+        if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY && permanent == null) {
             return false;
         }
 

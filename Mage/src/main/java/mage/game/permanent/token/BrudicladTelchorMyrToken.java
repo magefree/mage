@@ -13,7 +13,7 @@ public final class BrudicladTelchorMyrToken extends TokenImpl {
     static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("C18", "2XM"));
+        tokenImageSets.addAll(Arrays.asList("C18", "2XM", "BRC"));
     }
 
     public BrudicladTelchorMyrToken() {

@@ -1,6 +1,5 @@
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -12,13 +11,14 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class ProwlingPangolin extends CardImpl {
@@ -65,7 +65,7 @@ class ProwlingPangolinEffect extends OneShotEffect {
         if (controller != null) {
             boolean costPaid = false;
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Cost cost = new SacrificeTargetCost(2, 2, new FilterControlledCreaturePermanent("two creatures"));
+                Cost cost = new SacrificeTargetCost(2, 2, StaticFilters.FILTER_PERMANENT_CREATURES);
                 Player player = game.getPlayer(playerId);
                 if (player != null
                         && cost.canPay(source, source, playerId, game)

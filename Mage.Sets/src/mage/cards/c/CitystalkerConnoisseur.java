@@ -94,7 +94,7 @@ class CitystalkerConnoisseurEffect extends OneShotEffect {
             return true;
         }
         TargetCardInHand target = new TargetCardInHand();
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         player.discard(cards.get(target.getFirstTarget(), game), false, source, game);
         return true;
     }

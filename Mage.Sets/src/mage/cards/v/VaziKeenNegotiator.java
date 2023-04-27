@@ -23,6 +23,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.TreasureToken;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
@@ -93,14 +94,15 @@ class VaziKeenNegotiatorOpponentCastsOrActivatesTriggeredAbility extends Trigger
     public boolean checkTrigger(GameEvent event, Game game) {
         Player controller = game.getPlayer(getControllerId());
         Player caster = game.getPlayer(event.getPlayerId());
-        Optional<Ability> optionalAbility = game.getAbility(event.getTargetId(), this.sourceId);
         if (controller == null
                 || caster == null
-                || !game.getOpponents(controller.getId()).contains(caster.getId())
-                || !optionalAbility.isPresent()) {
+                || !game.getOpponents(controller.getId()).contains(caster.getId())) {
             return false;
         }
-        return TreasureSpentToCastCondition.instance.apply(game, optionalAbility.get());
+
+        Ability ability = game.getStack().getStackObject(event.getTargetId()).getStackAbility();
+
+        return TreasureSpentToCastCondition.instance.apply(game, ability);
     }
 
     @Override

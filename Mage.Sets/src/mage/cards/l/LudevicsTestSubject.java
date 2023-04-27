@@ -34,7 +34,7 @@ public final class LudevicsTestSubject extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 
-        this.secondSideCardClazz = LudevicsAbomination.class;
+        this.secondSideCardClazz = mage.cards.l.LudevicsAbomination.class;
 
         this.addAbility(DefenderAbility.getInstance());
         // {1}{U}: Put a hatchling counter on Ludevic's Test Subject. Then if there are five or more hatchling counters on it, remove all of them and transform it.

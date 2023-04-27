@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import mage.abilities.Ability;
@@ -12,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -26,7 +24,8 @@ import java.util.UUID;
  */
 public final class Hecatomb extends CardImpl {
 
-    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("an untapped Swamp you control");
+    private static final FilterControlledLandPermanent filter
+            = new FilterControlledLandPermanent("an untapped Swamp you control");
 
     static {
         filter.add(SubType.SWAMP.getPredicate());
@@ -37,10 +36,14 @@ public final class Hecatomb extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
 
         // When Hecatomb enters the battlefield, sacrifice Hecatomb unless you sacrifice four creatures.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(4, StaticFilters.FILTER_PERMANENT_CREATURES)), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(
+                new SacrificeTargetCost(4, StaticFilters.FILTER_PERMANENT_CREATURES)
+        ), false));
 
         // Tap an untapped Swamp you control: Hecatomb deals 1 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
+        Ability ability = new SimpleActivatedAbility(
+                new DamageTargetEffect(1), new TapTargetCost(new TargetControlledPermanent(filter))
+        );
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

@@ -104,7 +104,6 @@ class AngelOfCondemnationExileUntilEOTEffect extends OneShotEffect {
         //create delayed triggered ability
         game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
                 new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false)
-                        .setText("return that card to the battlefield under its owner's control")
                         .setTargetPointer(new FixedTarget(source.getFirstTarget(), game))
         ), source);
         return true;

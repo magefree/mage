@@ -1,5 +1,0 @@
-use .exe or one of the scripts:
-  startClient.bat - for Windows
-  startClientWin7.bat - for Windows 7
-  startClient.sh - for Linux
-  startClient.command - for MacOS

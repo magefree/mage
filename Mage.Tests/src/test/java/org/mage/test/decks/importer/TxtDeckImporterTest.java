@@ -22,13 +22,13 @@ public class TxtDeckImporterTest {
 
         for (String c : cards) {
             card = CardRepository.instance.findPreferredCoreExpansionCard(c);
-            assert card != null;
+            Assert.assertNotNull(String.format("Card %s was null", c), card);
             deck.getCards().add(new DeckCardInfo(card.getName(), card.getCardNumber(), card.getSetCode()));
         }
 
         for (String s : sideboard) {
             card = CardRepository.instance.findPreferredCoreExpansionCard(s);
-            assert card != null;
+            Assert.assertNotNull(String.format("Card %s was null", s), card);
             deck.getSideboard().add(new DeckCardInfo(card.getName(), card.getCardNumber(), card.getSetCode()));
         }
 

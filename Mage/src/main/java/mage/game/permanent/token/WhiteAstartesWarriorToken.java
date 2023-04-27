@@ -23,6 +23,7 @@ public final class WhiteAstartesWarriorToken extends TokenImpl {
         addAbility(VigilanceAbility.getInstance());
 
         availableImageSetCodes.addAll(Arrays.asList("40K"));
+        this.setTokenType(2);
     }
 
     public WhiteAstartesWarriorToken(final WhiteAstartesWarriorToken token) {

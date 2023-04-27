@@ -29,4 +29,6 @@ public interface ServerState {
 
     String getVersionInfo();
 
+    Boolean isServerReady();
+
 }

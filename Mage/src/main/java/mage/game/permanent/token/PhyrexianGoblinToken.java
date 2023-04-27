@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class PhyrexianGoblinToken extends TokenImpl {
 
     public PhyrexianGoblinToken() {
-        super("Phyrexian Goblin Token", "1/1 red Phyrexian Goblin creature token with haste");
+        super("Phyrexian Goblin Token", "1/1 red Phyrexian Goblin creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.PHYREXIAN);
         subtype.add(SubType.GOBLIN);
@@ -21,9 +21,7 @@ public final class PhyrexianGoblinToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        addAbility(HasteAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("NPH");
+        availableImageSetCodes = Arrays.asList("ONE");
     }
 
     public PhyrexianGoblinToken(final PhyrexianGoblinToken token) {

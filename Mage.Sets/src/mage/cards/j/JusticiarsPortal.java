@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
@@ -62,7 +62,7 @@ class JusticiarsPortalEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         UUID targetId = source.getFirstTarget();
         new ExileTargetForSourceEffect().apply(game, source);
-        new ReturnToBattlefieldUnderYourControlTargetEffect().apply(game, source);
+        new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false).apply(game, source);
         ContinuousEffect effect = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
         effect.setTargetPointer(new FixedTarget(targetId, game));
         game.addEffect(effect, source);

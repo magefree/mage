@@ -23,6 +23,7 @@ public final class BlackAstartesWarriorToken extends TokenImpl {
         addAbility(new MenaceAbility());
 
         availableImageSetCodes.addAll(Arrays.asList("40K"));
+        this.setTokenType(1);
     }
 
     public BlackAstartesWarriorToken(final BlackAstartesWarriorToken token) {

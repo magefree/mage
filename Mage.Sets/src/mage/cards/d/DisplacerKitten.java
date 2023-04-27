@@ -40,7 +40,7 @@ public final class DisplacerKitten extends CardImpl {
         Ability ability = new SpellCastControllerTriggeredAbility(
                 new ExileTargetForSourceEffect(), StaticFilters.FILTER_SPELL_A_NON_CREATURE, false
         );
-        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false));
+        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false).concatBy(", then"));
         ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability.withFlavorWord("Avoidance"));
     }

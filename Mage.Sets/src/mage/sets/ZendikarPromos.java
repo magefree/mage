@@ -20,7 +20,7 @@ public class ZendikarPromos extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Day of Judgment", "*9", Rarity.RARE, mage.cards.d.DayOfJudgment.class));
+        cards.add(new SetCardInfo("Day of Judgment", "9*", Rarity.RARE, mage.cards.d.DayOfJudgment.class));
         cards.add(new SetCardInfo("Emeria Angel", 35, Rarity.RARE, mage.cards.e.EmeriaAngel.class));
         cards.add(new SetCardInfo("Nissa's Chosen", 34, Rarity.RARE, mage.cards.n.NissasChosen.class));
         cards.add(new SetCardInfo("Rampaging Baloths", "178*", Rarity.MYTHIC, mage.cards.r.RampagingBaloths.class));

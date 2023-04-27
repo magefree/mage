@@ -31,6 +31,7 @@ public final class TheMightstoneAndWeakstone extends CardImpl {
         this.subtype.add(SubType.POWERSTONE);
 
         this.meldsWithClazz = mage.cards.u.UrzaLordProtector.class;
+        this.meldsToClazz = mage.cards.u.UrzaPlaneswalker.class;
 
         // When The Mightstone and Weakstone enters the battlefield, choose one --
         // * Draw two cards.
@@ -45,7 +46,7 @@ public final class TheMightstoneAndWeakstone extends CardImpl {
 
         // (Melds with Urza, Lord Protector)
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new InfoEffect("<i>(Melds with Urza, Lord Protector)</i>")
+                Zone.ALL, new InfoEffect("<i>(Melds with Urza, Lord Protector.)</i>")
         ));
     }
 

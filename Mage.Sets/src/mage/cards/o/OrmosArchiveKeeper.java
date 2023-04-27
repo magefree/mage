@@ -114,7 +114,7 @@ class OrmosArchiveKeeperEffect extends ReplacementEffectImpl {
 
 class OrmosArchiveKeeperTarget extends TargetCardInHand {
 
-    private static final FilterCard filter = new FilterCard("three cards with different names");
+    private static final FilterCard filter = new FilterCard("cards with different names");
 
     OrmosArchiveKeeperTarget() {
         super(3, filter);

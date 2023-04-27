@@ -31,7 +31,7 @@ public final class BloodToken extends TokenImpl {
         ability.addCost(new SacrificeSourceCost().setText("Sacrifice this artifact"));
         this.addAbility(ability);
 
-        availableImageSetCodes = Arrays.asList("VOW");
+        availableImageSetCodes = Arrays.asList("VOW", "MOC");
     }
 
     public BloodToken(final BloodToken token) {

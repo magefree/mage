@@ -61,7 +61,7 @@ public final class AbaddonTheDespoiler extends CardImpl {
                 MyTurnCondition.instance, "during your turn, spells you cast from " +
                 "your hand with mana value X or less have cascade, where X is the " +
                 "total amount of life your opponents have lost this turn"
-        )).addHint(hint));
+        )).addHint(hint).withFlavorWord("Mark of the Chaos Ascendant"));
     }
 
     private AbaddonTheDespoiler(final AbaddonTheDespoiler card) {

@@ -1,6 +1,6 @@
 package mage.abilities.keyword;
 
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.AddCardTypeSourceEffect;
@@ -11,7 +11,7 @@ import mage.constants.Duration;
 /**
  * @author TheElk801
  */
-public class LivingMetalAbility extends EntersBattlefieldTriggeredAbility {
+public class LivingMetalAbility extends SimpleStaticAbility {
 
     public LivingMetalAbility() {
         super(new ConditionalContinuousEffect(new AddCardTypeSourceEffect(

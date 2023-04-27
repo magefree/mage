@@ -3,7 +3,6 @@ package org.mage.card.arcane;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import mage.cards.action.ActionCallback;
-import mage.client.constants.Constants;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
@@ -13,6 +12,7 @@ import mage.view.PermanentView;
 import mage.view.StackAbilityView;
 import org.jdesktop.swingx.graphics.GraphicsUtilities;
 import org.mage.plugins.card.images.ImageCache;
+import org.mage.plugins.card.images.ImageCacheData;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -62,6 +62,7 @@ public class CardPanelRenderModeMTGO extends CardPanel {
                 && a.getPower().equals(b.getPower())
                 && a.getToughness().equals(b.getToughness())
                 && a.getLoyalty().equals(b.getLoyalty())
+                && a.getDefense().equals(b.getDefense())
                 && 0 == a.getColor().compareTo(b.getColor())
                 && a.getCardTypes().equals(b.getCardTypes())
                 && a.getSubTypes().equals(b.getSubTypes())
@@ -128,6 +129,7 @@ public class CardPanelRenderModeMTGO extends CardPanel {
             sb.append(this.view.getPower());
             sb.append(this.view.getToughness());
             sb.append(this.view.getLoyalty());
+            sb.append(this.view.getDefense());
             sb.append(this.view.getColor().toString());
             sb.append(this.view.getType());
             sb.append(this.view.getExpansionSetCode());
@@ -194,9 +196,9 @@ public class CardPanelRenderModeMTGO extends CardPanel {
             return null;
         }
         if (getGameCard().isFaceDown()) {
-            return getFaceDownImage();
+            return getFaceDownImage().getImage();
         } else {
-            return ImageCache.getImageOriginal(getGameCard());
+            return ImageCache.getImageOriginal(getGameCard()).getImage();
         }
     }
 
@@ -319,12 +321,9 @@ public class CardPanelRenderModeMTGO extends CardPanel {
                         // Nothing to do
                         srcImage = null;
                         faceArtSrcImage = null;
-                    } else if (getCardWidth() > Constants.THUMBNAIL_SIZE_FULL.width) {
-                        srcImage = ImageCache.getImage(getGameCard(), getCardWidth(), getCardHeight());
-                        faceArtSrcImage = ImageCache.getFaceImage(getGameCard(), getCardWidth(), getCardHeight());
                     } else {
-                        srcImage = ImageCache.getThumbnail(getGameCard());
-                        faceArtSrcImage = ImageCache.getFaceImage(getGameCard(), getCardWidth(), getCardHeight());
+                        srcImage = ImageCache.getImage(getGameCard(), getCardWidth(), getCardHeight()).getImage();
+                        faceArtSrcImage = ImageCache.getFaceImage(getGameCard(), getCardWidth(), getCardHeight()).getImage();
                     }
 
                     UI.invokeLater(() -> {
@@ -352,7 +351,7 @@ public class CardPanelRenderModeMTGO extends CardPanel {
         return new CardPanelAttributes(getCardWidth(), getCardHeight(), isChoosable(), isSelected(), isTransformed());
     }
 
-    private BufferedImage getFaceDownImage() {
+    private ImageCacheData getFaceDownImage() {
         // TODO: add download default images
         if (isPermanent() && getGameCard() instanceof PermanentView) {
             if (((PermanentView) getGameCard()).isMorphed()) {

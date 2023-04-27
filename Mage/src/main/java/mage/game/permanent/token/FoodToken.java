@@ -11,17 +11,13 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.util.RandomUtil;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author jmharmon
  */
 
 public final class FoodToken extends TokenImpl {
-
-    static final private List<String> tokenImageSets = new ArrayList<>();
 
     public FoodToken() {
         super("Food Token", "Food token");
@@ -36,7 +32,7 @@ public final class FoodToken extends TokenImpl {
         ability.addCost(cost);
         this.addAbility(ability);
 
-        availableImageSetCodes = Arrays.asList("ELD", "C21", "MH2", "NCC");
+        availableImageSetCodes = Arrays.asList("ELD", "C21", "MH2", "NCC", "MOC");
     }
 
     @Override

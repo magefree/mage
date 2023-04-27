@@ -19,6 +19,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -56,7 +57,7 @@ class KarnsSylexEffect extends ContinuousEffectImpl {
 
     public KarnsSylexEffect() {
         super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
-        staticText = "Players can't pay life or sacrifice creatures to cast spells";
+        staticText = "Players can't pay life to cast spells or to activate abilities that aren't mana abilities";
     }
 
     public KarnsSylexEffect(final KarnsSylexEffect effect) {
@@ -73,7 +74,6 @@ class KarnsSylexEffect extends ContinuousEffectImpl {
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             player.setPayLifeCostLevel(Player.PayLifeCostLevel.onlyManaAbilities);
-            player.setCanPaySacrificeCostFilter(new FilterCreaturePermanent());
         }
         return true;
     }

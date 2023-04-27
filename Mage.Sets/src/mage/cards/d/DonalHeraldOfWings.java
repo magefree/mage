@@ -20,7 +20,6 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.functions.StackObjectCopyApplier;
 
 import java.util.UUID;
@@ -52,7 +51,7 @@ public class DonalHeraldOfWings extends CardImpl {
         // except the copy is a 1/1 Spirit in addition to its other types.
         // Do this only once each turn. (The copy becomes a token.)
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new DonalHeraldOfWingsEffect(), filterSpell, true, true
+                new DonalHeraldOfWingsEffect(), filterSpell, true
         ).setDoOnlyOnce(true));
     }
 
@@ -80,19 +79,15 @@ class DonalHeraldOfWingsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        Spell spell = (Spell) getValue("spellCast");
+        if (controller == null || spell == null) {
             return false;
         }
-
-        // Get the card that was cast
-        if (this.getTargetPointer() == null) {
-            return false;
-        }
-        Spell originalSpell = game.getStack().getSpell(((FixedTarget) this.getTargetPointer()).getTarget());
-
         // Create a token copy
-        originalSpell.createCopyOnStack(game, source, controller.getId(), false, 1, DonalHeraldOfWingsApplier.instance);
-
+        spell.createCopyOnStack(
+                game, source, controller.getId(), false,
+                1, DonalHeraldOfWingsApplier.instance
+        );
         return true;
     }
 

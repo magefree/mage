@@ -38,7 +38,7 @@ public final class FarTraveler extends CardImpl {
         Ability ability = new BeginningOfEndStepTriggeredAbility(
                 new ExileTargetForSourceEffect(), TargetController.YOU, false
         );
-        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false));
+        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false, "it").concatBy(", then"));
         ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 ability, Duration.WhileOnBattlefield,

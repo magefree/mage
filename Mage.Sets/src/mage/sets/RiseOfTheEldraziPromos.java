@@ -22,9 +22,9 @@ public class RiseOfTheEldraziPromos extends ExpansionSet {
 
         cards.add(new SetCardInfo("Deathless Angel", 49, Rarity.RARE, mage.cards.d.DeathlessAngel.class));
         cards.add(new SetCardInfo("Emrakul, the Aeons Torn", "4*", Rarity.MYTHIC, mage.cards.e.EmrakulTheAeonsTorn.class));
-        cards.add(new SetCardInfo("Guul Draz Assassin", "*112", Rarity.RARE, mage.cards.g.GuulDrazAssassin.class));
+        cards.add(new SetCardInfo("Guul Draz Assassin", "112*", Rarity.RARE, mage.cards.g.GuulDrazAssassin.class));
         cards.add(new SetCardInfo("Lord of Shatterskull Pass", "156*", Rarity.RARE, mage.cards.l.LordOfShatterskullPass.class));
-        cards.add(new SetCardInfo("Pestilence Demon", "*124", Rarity.RARE, mage.cards.p.PestilenceDemon.class));
+        cards.add(new SetCardInfo("Pestilence Demon", "124*", Rarity.RARE, mage.cards.p.PestilenceDemon.class));
         cards.add(new SetCardInfo("Staggershock", 48, Rarity.RARE, mage.cards.s.Staggershock.class));
     }
 }

@@ -30,7 +30,7 @@ public final class GarrukRelentless extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.GARRUK);
 
-        this.secondSideCardClazz = GarrukTheVeilCursed.class;
+        this.secondSideCardClazz = mage.cards.g.GarrukTheVeilCursed.class;
 
         this.setStartingLoyalty(3);
 

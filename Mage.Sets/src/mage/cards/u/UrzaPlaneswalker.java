@@ -111,8 +111,12 @@ class UrzaPlaneswalkerEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Optional.ofNullable(source.getSourcePermanentIfItStillExists(game))
-                .ifPresent(Permanent::incrementLoyaltyActivationsAvailable);
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (permanent == null) {
+            return false;
+        }
+
+        permanent.setLoyaltyActivationsAvailable(2);
         return true;
     }
 }

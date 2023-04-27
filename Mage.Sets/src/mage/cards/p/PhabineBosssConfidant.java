@@ -5,6 +5,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.ParleyCount;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardAllEffect;
@@ -94,7 +96,7 @@ class PhabineBosssConfidantParleyEffect extends OneShotEffect {
             return false;
         }
 
-        int landCount = ParleyCount.getInstance().calculate(game, source, this);
+        int nonLandCount = ParleyCount.getInstance().calculate(game, source, this);
         int nonEmptyLibraries = 0;
         for (UUID playerID : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerID);
@@ -102,16 +104,17 @@ class PhabineBosssConfidantParleyEffect extends OneShotEffect {
                 nonEmptyLibraries++;
             }
         }
-        int nonLandCount = nonEmptyLibraries - landCount;
+        int landCount = nonEmptyLibraries - nonLandCount;
 
         if (landCount > 0) {
             Token citizenToken = new CitizenGreenWhiteToken();
             citizenToken.putOntoBattlefield(landCount, game, source, source.getControllerId(), false, false);
+            game.applyEffects();
         }
 
         if (nonLandCount > 0) {
-            Effect boostEffect = new BoostControlledEffect(nonLandCount, nonLandCount, Duration.EndOfTurn);
-            boostEffect.apply(game, source);
+            BoostControlledEffect boostEffect = new BoostControlledEffect(nonLandCount, nonLandCount, Duration.EndOfTurn);
+            game.addEffect(boostEffect, source);
         }
 
         return true;

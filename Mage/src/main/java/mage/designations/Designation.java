@@ -18,17 +18,14 @@ import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
 import mage.util.SubTypes;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author LevelX2
  */
 public abstract class Designation implements MageObject {
 
-    private static final List<CardType> emptySet = new ArrayList<>();
+    private static final List<CardType> emptyList = Collections.unmodifiableList(new ArrayList<>());
     private static final ObjectColor emptyColor = new ObjectColor();
     private static final ManaCostsImpl emptyCost = new ManaCostsImpl<>();
 
@@ -155,7 +152,7 @@ public abstract class Designation implements MageObject {
 
     @Override
     public List<CardType> getCardType(Game game) {
-        return emptySet;
+        return emptyList;
     }
 
     @Override
@@ -220,6 +217,15 @@ public abstract class Designation implements MageObject {
 
     @Override
     public void setStartingLoyalty(int startingLoyalty) {
+    }
+
+    @Override
+    public int getStartingDefense() {
+        return 0;
+    }
+
+    @Override
+    public void setStartingDefense(int startingDefense) {
     }
 
     @Override

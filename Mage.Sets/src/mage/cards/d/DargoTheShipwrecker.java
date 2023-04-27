@@ -38,9 +38,8 @@ public final class DargoTheShipwrecker extends CardImpl {
         this.toughness = new MageInt(5);
 
         // As an additional cost to cast this spell, you may sacrifice any number of artifacts and/or creatures. This spell costs {2} less to cast for each permanent sacrificed this way and {2} less to cast for each other artifact or creature you've sacrificed this turn.
-        Cost cost = new SacrificeXTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE);
-        cost.setText("As an additional cost to cast this spell, " +
-                "you may sacrifice any number of artifacts and/or creatures. " +
+        Cost cost = new SacrificeXTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE, true);
+        cost.setText("you may sacrifice any number of artifacts and/or creatures. " +
                 "This spell costs {2} less to cast for each permanent sacrificed this way " +
                 "and {2} less to cast for each other artifact or creature you've sacrificed this turn");
         this.getSpellAbility().addCost(cost);

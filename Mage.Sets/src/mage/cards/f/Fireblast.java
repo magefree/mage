@@ -19,7 +19,7 @@ import mage.target.common.TargetAnyTarget;
  */
 public final class Fireblast extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("two Mountains");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Mountains");
 
     static {
         filter.add(SubType.MOUNTAIN.getPredicate());

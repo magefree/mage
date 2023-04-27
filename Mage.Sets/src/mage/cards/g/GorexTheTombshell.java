@@ -39,8 +39,7 @@ public final class GorexTheTombshell extends CardImpl {
 
         // As an additional cost to cast this spell, you may exile any number of creature cards from your graveyard. This spell costs {2} less to cast for each card exiled this way.
         Cost cost = new ExileXFromYourGraveCost(StaticFilters.FILTER_CARD_CREATURES, true);
-        cost.setText("as an additional cost to cast this spell, you may exile any number of creature cards " +
-                "from your graveyard. This spell costs {2} less to cast for each card exiled this way");
+        cost.setText("you may exile any number of creature cards from your graveyard. This spell costs {2} less to cast for each card exiled this way");
         this.getSpellAbility().addCost(cost);
         Ability ability = new SimpleStaticAbility(Zone.ALL, new GorexTheTombshellCostReductionEffect());
         ability.setRuleVisible(false);

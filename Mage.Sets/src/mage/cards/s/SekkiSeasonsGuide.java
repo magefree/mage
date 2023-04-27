@@ -28,7 +28,7 @@ import mage.game.permanent.token.SpiritToken;
  */
 public final class SekkiSeasonsGuide extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("eight Spirits");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Spirits");
 
     static {
         filter.add(SubType.SPIRIT.getPredicate());

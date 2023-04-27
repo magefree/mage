@@ -27,19 +27,23 @@ public final class UniteTheCoalition extends CardImpl {
 
         // • Target permanent phases out.
         this.getSpellAbility().addEffect(new PhaseOutTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent());
+        this.getSpellAbility().addTarget(new TargetPermanent().withChooseHint("to phase out"));
 
         // • Target player draws a card.
-        this.getSpellAbility().addMode(new Mode(new DrawCardTargetEffect(1)).addTarget(new TargetPlayer()));
+        this.getSpellAbility().addMode(new Mode(new DrawCardTargetEffect(1)).addTarget(new TargetPlayer()
+                .withChooseHint("to draw a card")));
 
         // • Exile target player's graveyard.
-        this.getSpellAbility().addMode(new Mode(new ExileGraveyardAllTargetPlayerEffect()).addTarget(new TargetPlayer()));
+        this.getSpellAbility().addMode(new Mode(new ExileGraveyardAllTargetPlayerEffect()).addTarget(new TargetPlayer()
+                .withChooseHint("to have their graveyard exiled")));
 
         // • Unite the Coalition deals 2 damage to any target.
-        this.getSpellAbility().addMode(new Mode(new DamageTargetEffect(2)).addTarget(new TargetAnyTarget()));
+        this.getSpellAbility().addMode(new Mode(new DamageTargetEffect(2)).addTarget(new TargetAnyTarget()
+                .withChooseHint("to deal 2 damage to")));
 
         // • Destroy target artifact or enchantment.
-        this.getSpellAbility().addMode(new Mode(new DestroyTargetEffect()).addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT)));
+        this.getSpellAbility().addMode(new Mode(new DestroyTargetEffect()).addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT)
+                .withChooseHint("to destroy")));
     }
 
     private UniteTheCoalition(final UniteTheCoalition card) {

@@ -11,11 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.TokenImpl;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -23,13 +20,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class BogardanDragonheart extends CardImpl {
-
-    private static final FilterControlledPermanent filter
-            = new FilterControlledCreaturePermanent("another creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public BogardanDragonheart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
@@ -43,7 +33,7 @@ public final class BogardanDragonheart extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
                 new BogardanDragonheartToken(), null, Duration.EndOfTurn, false,
                 false, null, null, false
-        ), new SacrificeTargetCost(filter)));
+        ), new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
     }
 
     private BogardanDragonheart(final BogardanDragonheart card) {

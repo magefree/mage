@@ -24,7 +24,7 @@ import mage.game.permanent.token.TreasureToken;
  */
 public final class RuthlessKnave extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("three Treasures");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Treasures");
 
     static {
         filter.add(SubType.TREASURE.getPredicate());

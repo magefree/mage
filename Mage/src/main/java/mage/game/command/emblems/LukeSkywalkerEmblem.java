@@ -41,7 +41,7 @@ class LukeSkywalkerEmblemEffect extends PreventionEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getPhase().getType() == TurnPhase.COMBAT
+        if (game.getTurnPhaseType() == TurnPhase.COMBAT
                 && super.applies(event, source, game)
                 && event.getType() == GameEvent.EventType.DAMAGE_PLAYER) {
             Player controller = game.getPlayer(source.getControllerId());

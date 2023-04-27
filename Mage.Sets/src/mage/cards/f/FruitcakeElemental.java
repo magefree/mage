@@ -80,7 +80,7 @@ class FruitcakeElementalEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null && permanent != null) {
             ContinuousEffect effect = new FruitcakeElementalControlSourceEffect();

@@ -34,6 +34,7 @@ public final class YouveBeenCaughtStealing extends CardImpl {
         this.getSpellAbility().addMode(new Mode(new CreateTokenEffect(
                 new TreasureToken(), YouveBeenCaughtStealingValue.instance
         ).setText("you create a Treasure token for each opponent who was dealt damage this turn")).withFlavorWord("Bribe the Guards"));
+        this.getSpellAbility().addWatcher(new AmountOfDamageAPlayerReceivedThisTurnWatcher());
     }
 
     private YouveBeenCaughtStealing(final YouveBeenCaughtStealing card) {

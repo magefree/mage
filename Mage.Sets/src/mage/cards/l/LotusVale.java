@@ -21,7 +21,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
  */
 public final class LotusVale extends CardImpl {
 
-    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("two untapped lands");
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("untapped lands");
 
     static {
         filter.add(TappedPredicate.UNTAPPED);

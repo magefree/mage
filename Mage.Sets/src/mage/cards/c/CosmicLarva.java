@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -12,16 +10,17 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
- *
  * @author Plopman
  */
 public final class CosmicLarva extends CardImpl {
 
     public CosmicLarva(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
         this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(7);
@@ -29,8 +28,11 @@ public final class CosmicLarva extends CardImpl {
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
+
         // At the beginning of your upkeep, sacrifice Cosmic Larva unless you sacrifice two lands.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(2, new FilterControlledLandPermanent("two lands"))), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(
+                new SacrificeTargetCost(2, StaticFilters.FILTER_LANDS)
+        ), TargetController.YOU, false));
     }
 
     private CosmicLarva(final CosmicLarva card) {

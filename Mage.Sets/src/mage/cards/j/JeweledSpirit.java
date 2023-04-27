@@ -1,7 +1,5 @@
-
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -18,15 +16,15 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class JeweledSpirit extends CardImpl {
@@ -41,8 +39,9 @@ public final class JeweledSpirit extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Sacrifice two lands: Jeweled Spirit gains protection from artifacts or from the color of your choice until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new JeweledSpiritEffect(),
-                new SacrificeTargetCost(2, 2, new FilterControlledLandPermanent("two lands"))));
+        this.addAbility(new SimpleActivatedAbility(
+                new JeweledSpiritEffect(), new SacrificeTargetCost(2, StaticFilters.FILTER_LANDS)
+        ));
     }
 
     private JeweledSpirit(final JeweledSpirit card) {

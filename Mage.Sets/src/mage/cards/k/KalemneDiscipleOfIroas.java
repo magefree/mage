@@ -1,7 +1,5 @@
-
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -9,25 +7,21 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.effects.common.counter.AddCountersControllerEffect;
+import mage.abilities.effects.common.counter.AddCountersPlayersEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.ComparisonType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class KalemneDiscipleOfIroas extends CardImpl {
@@ -40,7 +34,7 @@ public final class KalemneDiscipleOfIroas extends CardImpl {
     }
 
     public KalemneDiscipleOfIroas(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIANT);
         this.subtype.add(SubType.SOLDIER);
@@ -54,10 +48,9 @@ public final class KalemneDiscipleOfIroas extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Whenever you cast a creature spell with converted mana cost 5 or greater, you get an experience counter.
-        Effect effect = new AddCountersControllerEffect(CounterType.EXPERIENCE.createInstance(1), false);
-        effect.setText("you get an experience counter");
-        Ability ability = new SpellCastControllerTriggeredAbility(effect, filterSpell, false);
-        this.addAbility(ability);
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersPlayersEffect(
+                CounterType.EXPERIENCE.createInstance(), TargetController.YOU
+        ), filterSpell, false));
 
         // Kalemne, Disciple of Iroas gets +1/+1 for each experience counter you have.
         DynamicValue value = new SourceControllerExperienceCountersCount();

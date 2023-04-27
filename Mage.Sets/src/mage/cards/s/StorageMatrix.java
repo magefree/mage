@@ -69,7 +69,7 @@ class StorageMatrixRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (game.getStep().getType() == PhaseStep.UNTAP) {
+        if (game.getTurnStepType() == PhaseStep.UNTAP) {
             if (game.getTurnNum() != turn) {
                 turn = game.getTurnNum();
                 applies = false;

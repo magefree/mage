@@ -29,9 +29,9 @@ public final class ScionOfHalaster extends CardImpl {
 
         // Commander creatures you own have "The first time you would draw a card each turn, instead look at the top two cards of your library. Put one of them into your graveyard and the other back on top of your library. Then draw a card."
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
-               new SimpleStaticAbility(new ScionOfHalasterReplacementEffect()),
+                new SimpleStaticAbility(new ScionOfHalasterReplacementEffect()),
                 Duration.WhileOnBattlefield, StaticFilters.FILTER_CREATURES_OWNED_COMMANDER
-        )), new CardsDrawnThisTurnWatcher());
+        )));
     }
 
     private ScionOfHalaster(final ScionOfHalaster card) {

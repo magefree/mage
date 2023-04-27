@@ -43,7 +43,7 @@ public final class MishrasFoundry extends CardImpl {
                         "2/2 Assembly-Worker artifact creature",
                         SubType.ASSEMBLY_WORKER
                 ).withType(CardType.ARTIFACT), "land", Duration.EndOfTurn
-        ), new GenericManaCost(1)));
+        ), new GenericManaCost(2)));
 
         // {1}, {T}: Target attacking Assembly-Worker gets +2/+2 until end of turn.
         Ability ability = new SimpleActivatedAbility(

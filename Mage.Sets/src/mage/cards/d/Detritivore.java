@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -41,7 +40,7 @@ public final class Detritivore extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Detritivore's power and toughness are each equal to the number of nonbasic land cards in your opponents' graveyards.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new NonBasicLandsInOpponentsGraveyards(), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new NonBasicLandsInOpponentsGraveyards())));
 
         // Suspend X-{X}{3}{R}. X can't be 0.
         this.addAbility(new SuspendAbility(Integer.MAX_VALUE, new ManaCostsImpl<>("{3}{R}"), this, true));

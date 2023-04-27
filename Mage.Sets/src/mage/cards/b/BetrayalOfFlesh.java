@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -11,14 +9,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LoneFox
- *
  */
 public final class BetrayalOfFlesh extends CardImpl {
 
@@ -36,7 +33,7 @@ public final class BetrayalOfFlesh extends CardImpl {
         mode.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.getSpellAbility().getModes().addMode(mode);
         // Entwine-Sacrifice three lands.
-        this.addAbility(new EntwineAbility(new SacrificeTargetCost(3, 3, new FilterControlledLandPermanent("three lands"))));
+        this.addAbility(new EntwineAbility(new SacrificeTargetCost(3, StaticFilters.FILTER_LANDS)));
     }
 
     private BetrayalOfFlesh(final BetrayalOfFlesh card) {

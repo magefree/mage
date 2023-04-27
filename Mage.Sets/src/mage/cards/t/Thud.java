@@ -23,7 +23,8 @@ public final class Thud extends CardImpl {
         this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
 
         // Thud deals damage equal to the sacrificed creature's power to any target.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(SacrificeCostCreaturesPower.instance));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(SacrificeCostCreaturesPower.instance)
+                .setText("{this} deals damage equal to the sacrificed creature's power to any target"));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 

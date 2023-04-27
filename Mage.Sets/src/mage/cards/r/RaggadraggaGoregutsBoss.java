@@ -20,6 +20,7 @@ import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
+import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.ManaPaidSourceWatcher;
 
 import java.util.UUID;
@@ -51,7 +52,7 @@ public final class RaggadraggaGoregutsBoss extends CardImpl {
         // Each creature you control with a mana ability gets +2/+2.
         this.addAbility(new SimpleStaticAbility(new BoostAllEffect(
                 2, 2, Duration.WhileOnBattlefield, filter, false
-        )));
+        ).setText("Each " + filter.getMessage() + " gets +2/+2")));
 
         // Whenever a creature you control with a mana ability attacks, untap it.
         this.addAbility(new AttacksAllTriggeredAbility(
@@ -67,6 +68,7 @@ public final class RaggadraggaGoregutsBoss extends CardImpl {
         ability.addEffect(new GainAbilityTargetEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn
         ).setText("and gains trample until end of turn"));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

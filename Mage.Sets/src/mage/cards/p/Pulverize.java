@@ -18,7 +18,7 @@ import mage.filter.common.FilterControlledPermanent;
  */
 public final class Pulverize extends CardImpl {
     
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("two Mountains");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Mountains");
     static {
         filter.add(SubType.MOUNTAIN.getPredicate());
     }

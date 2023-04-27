@@ -18,7 +18,7 @@ import mage.game.permanent.token.GoblinToken;
  */
 public final class MoggAlarm extends CardImpl {
 
-     private static final FilterControlledPermanent filter = new FilterControlledPermanent("two Mountains");
+     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Mountains");
     static {
         filter.add(SubType.MOUNTAIN.getPredicate());
     }

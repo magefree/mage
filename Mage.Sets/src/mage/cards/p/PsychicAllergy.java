@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public final class PsychicAllergy extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("two Islands");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Islands");
 
     static {
         filter.add(SubType.ISLAND.getPredicate());

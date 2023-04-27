@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,25 +11,26 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
- *
  * @author Quercitron
  */
 public final class SoldeviSage extends CardImpl {
 
     public SoldeviSage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {tap}, Sacrifice two lands: Draw three cards, then discard one of them.
+        // {T}, Sacrifice two lands: Draw three cards, then discard one of them.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardOneOfThemEffect(3), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(2, 2, new FilterControlledLandPermanent("two lands")));
+        ability.addCost(new SacrificeTargetCost(2, 2, StaticFilters.FILTER_LANDS));
         this.addAbility(ability);
     }
 
