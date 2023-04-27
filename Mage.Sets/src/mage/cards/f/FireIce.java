@@ -26,7 +26,7 @@ public final class FireIce extends SplitCard {
         // Draw a card.
         getRightHalfCard().getSpellAbility().addEffect(new TapTargetEffect());
         getRightHalfCard().getSpellAbility().addTarget(new TargetPermanent());
-        getRightHalfCard().getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        getRightHalfCard().getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
 
     }
 
