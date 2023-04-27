@@ -17,6 +17,7 @@ public class RegenerateSourceWithReflexiveEffect extends RegenerateSourceEffect 
         super();
         this.reflexive = reflexive;
         this.reflexive.setTriggerPhrase("When it regenerates this way, ");
+        this.reflexive.withRuleTextReplacement(true);
         this.setReflexiveTarget = setReflexiveTarget;
         this.staticText = "regenerate {this}. " + reflexive.getRule();
     }
