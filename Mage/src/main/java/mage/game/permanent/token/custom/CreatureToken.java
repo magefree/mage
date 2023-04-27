@@ -10,6 +10,10 @@ import mage.game.permanent.token.TokenImpl;
 import java.util.Arrays;
 
 /**
+ * Token builder for token effects
+ *
+ * Use it for custom tokens (tokens without public class and image)
+ *
  * @author JayDi85
  */
 public final class CreatureToken extends TokenImpl {

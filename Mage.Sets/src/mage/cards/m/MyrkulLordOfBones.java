@@ -104,7 +104,7 @@ class MyrkulLordOfBonesEffect extends OneShotEffect {
         return new CreateTokenCopyTargetEffect().setSavedPermanent(
                 new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, card), source.getControllerId(), game)
         ).setPermanentModifier((token, g) -> {
-            token.getCardType().clear();
+            token.removeAllCardTypes();
             token.addCardType(CardType.ENCHANTMENT);
             token.retainAllEnchantmentSubTypes(g);
         }).apply(game, source);

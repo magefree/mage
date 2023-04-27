@@ -4,15 +4,10 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * @author TheElk801
  */
 public final class MarchOfTheMachine extends ExpansionSet {
-
-    private static final List<String> unfinished = Arrays.asList("Assimilate Essence", "Blighted Burgeoning", "Bloated Processor", "Chrome Host Seedshark", "Compleated Huntmaster", "Converter Beast", "Corruption of Towashi", "Elesh Norn", "The Argent Etchings", "Elvish Vatkeeper", "Essence of Orthodoxy", "Eyes of Gitaxias", "Furnace Gremlin", "Gift of Compleation", "Glissa, Herald of Predation", "Glistening Dawn", "Ichor Drinker", "Infected Defector", "Injector Crocodile", "Marauding Dreadship", "Merciless Repurposing", "Norn's Inquisitor", "Phyrexian Awakening", "Progenitor Exarch", "Sculpted Perfection", "Searing Barb", "Sunder the Gateway", "Sunfall", "Tangled Skyline", "Tiller of Flesh", "Traumatic Revelation");
 
     private static final MarchOfTheMachine instance = new MarchOfTheMachine();
 
@@ -488,8 +483,6 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Zimone and Dina", 318, Rarity.MYTHIC, mage.cards.z.ZimoneAndDina.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zurgo and Ojutai", 258, Rarity.MYTHIC, mage.cards.z.ZurgoAndOjutai.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zurgo and Ojutai", 319, Rarity.MYTHIC, mage.cards.z.ZurgoAndOjutai.class, NON_FULL_USE_VARIOUS));
-
-        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is implemented
     }
 
 //    @Override

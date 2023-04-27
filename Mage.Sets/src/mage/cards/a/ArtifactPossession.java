@@ -87,6 +87,6 @@ class AbilityActivatedTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever enchanted artifact becomes tapped or a player activates an ability of enchanted artifact without {tap} in its activation cost, Artifact Possession deals 2 damage to that artifact's controller.";
+        return "Whenever enchanted artifact becomes tapped or a player activates an ability of enchanted artifact without {T} in its activation cost, Artifact Possession deals 2 damage to that artifact's controller.";
     }
 }
