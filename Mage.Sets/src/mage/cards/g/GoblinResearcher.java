@@ -113,7 +113,7 @@ class GoblinResearcherWatcher extends Watcher {
     }
 
     static boolean checkPlayer(Ability source, Game game) {
-        game.getState()
+        return game.getState()
                 .getWatcher(GoblinResearcherWatcher.class)
                 .map
                 .getOrDefault(new MageObjectReference(source, 0), Collections.emptySet())
