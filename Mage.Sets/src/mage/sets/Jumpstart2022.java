@@ -130,6 +130,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Cellar Door", 759, Rarity.UNCOMMON, mage.cards.c.CellarDoor.class));
         cards.add(new SetCardInfo("Cemetery Recruitment", 385, Rarity.COMMON, mage.cards.c.CemeteryRecruitment.class));
         cards.add(new SetCardInfo("Certain Death", 386, Rarity.COMMON, mage.cards.c.CertainDeath.class));
+        cards.add(new SetCardInfo("Chains of Custody", 3, Rarity.COMMON, mage.cards.c.ChainsOfCustody.class));
         cards.add(new SetCardInfo("Challenger Troll", 639, Rarity.UNCOMMON, mage.cards.c.ChallengerTroll.class));
         cards.add(new SetCardInfo("Chandra's Magmutt", 512, Rarity.COMMON, mage.cards.c.ChandrasMagmutt.class));
         cards.add(new SetCardInfo("Chandra's Pyreling", 513, Rarity.UNCOMMON, mage.cards.c.ChandrasPyreling.class));
