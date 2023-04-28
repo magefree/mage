@@ -4,14 +4,11 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
-import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.keyword.ToxicAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -24,7 +21,6 @@ import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
-import mage.util.CardUtil;
 import java.util.UUID;
 
 /**
@@ -52,19 +48,20 @@ public final class KinzuOfTheBleakCoven extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever another nontoken creature you control dies, you may pay 2 Life and exile it. If you do, create a token that's a copy of that card, except it’s 1/1 and has toxic 1.
-        Effect effect = new DoIfCostPaid(new mage.cards.k.KinzuOfTheBleakCovenEffect(), new KinzuOfTheBleakCovenCost(2), "Pay 2 Life and exile it?");
+        // Whenever another nontoken creature you control dies, you may pay 2 Life and exile it.
+        // If you do, create a token that's a copy of that card, except it’s 1/1 and has toxic 1.
+        Effect effect = new KinzuOfTheBleakCovenEffect();
         this.addAbility(new DiesCreatureTriggeredAbility(effect,false, filter, true));
 
     }
 
-    private KinzuOfTheBleakCoven(final mage.cards.k.KinzuOfTheBleakCoven card) {
+    private KinzuOfTheBleakCoven(final KinzuOfTheBleakCoven card) {
         super(card);
     }
 
     @Override
-    public mage.cards.k.KinzuOfTheBleakCoven copy() {
-        return new mage.cards.k.KinzuOfTheBleakCoven(this);
+    public KinzuOfTheBleakCoven copy() {
+        return new KinzuOfTheBleakCoven(this);
     }
 }
 
@@ -72,17 +69,18 @@ class KinzuOfTheBleakCovenEffect extends OneShotEffect {
 
     KinzuOfTheBleakCovenEffect() {
         super(Outcome.Benefit);
-        staticText = "create a token that's a copy of that creature" +
+        staticText = "you may pay 2 Life and exile it. If you do, " +
+                "create a token that's a copy of that creature" +
                 ", except it's 1/1 and has toxic 1.";
     }
 
-    private KinzuOfTheBleakCovenEffect(final mage.cards.k.KinzuOfTheBleakCovenEffect effect) {
+    private KinzuOfTheBleakCovenEffect(final KinzuOfTheBleakCovenEffect effect) {
         super(effect);
     }
 
     @Override
-    public mage.cards.k.KinzuOfTheBleakCovenEffect copy() {
-        return new mage.cards.k.KinzuOfTheBleakCovenEffect(this);
+    public KinzuOfTheBleakCovenEffect copy() {
+        return new KinzuOfTheBleakCovenEffect(this);
     }
 
     @Override
@@ -92,7 +90,12 @@ class KinzuOfTheBleakCovenEffect extends OneShotEffect {
         if (player == null || card == null) {
             return false;
         }
-        //Can move to exile here - checked earlier if target is still legal
+        Cost cost = new PayLifeCost(2);
+        if (!cost.canPay(source, source, source.getControllerId(), game)
+                || !player.chooseUse(Outcome.Benefit,"Pay 2 Life and Exile " + card.getName() + "?",source,game)
+                || !cost.pay(source, game, source, source.getControllerId(), true)) {
+            return false;
+        }
         player.moveCards(card, Zone.EXILED, source, game);
         return new CreateTokenCopyTargetEffect().setSavedPermanent(
                 new PermanentCard(card, source.getControllerId(), game)
@@ -102,55 +105,4 @@ class KinzuOfTheBleakCovenEffect extends OneShotEffect {
             token.addAbility(new ToxicAbility(1)); // Add Toxic (is additive)
         }).apply(game, source);
     }
-}
-
-
-class KinzuOfTheBleakCovenCost extends CostImpl {
-
-    //New Cost as exiling the Card is part of the Cost.
-
-    private DynamicValue amount;
-
-    public KinzuOfTheBleakCovenCost(int amount) {
-        super();
-        this.amount = StaticValue.get(amount).copy();
-        this.text = "2 Life and exile it";
-    }
-
-    @Override
-    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        int lifeToPayAmount = amount.calculate(game, ability, null);
-        // Paying 0 life is not considered paying any life.
-        if (lifeToPayAmount > 0 && !game.getPlayer(controllerId).canPayLifeCost(ability)) {
-            return false;
-        }
-        Card card = game.getCard((ability.getAllEffects().get(0).getTargetPointer().getFirst(game, source)));
-        if (card == null) {
-            //Need to be able to Exile the Card as it is part of the cost. Can't pay if the target is not legal.
-            return false;
-        }
-        return game.getPlayer(controllerId).getLife() >= lifeToPayAmount || lifeToPayAmount == 0;
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        Player controller = game.getPlayer(controllerId);
-        if (controller == null) {
-            return false;
-        }
-        int lifeToPayAmount = amount.calculate(game, ability, null);
-        this.paid = CardUtil.tryPayLife(lifeToPayAmount, controller, source, game);
-        return this.paid;
-    }
-
-    @Override
-    public KinzuOfTheBleakCovenCost copy() {
-        return new KinzuOfTheBleakCovenCost(2);
-    }
-
-    @Override
-    public void clearPaid() {
-        super.clearPaid();
-    }
-
 }
