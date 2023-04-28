@@ -17,7 +17,7 @@ import java.util.List;
 public class CopiableValues extends PermanentImpl {
 
     CopiableValues() {
-        super(null, null, "");
+        super();
     }
 
     private CopiableValues(final CopiableValues permanent) {
