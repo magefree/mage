@@ -6,6 +6,7 @@ import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 
 import java.util.UUID;
@@ -27,7 +28,9 @@ public final class CompleatedConjurer extends CardImpl {
         this.nightCard = true;
 
         // When this creature transforms into Compleated Conjurer, exile the top card of your library. Until the end of your next turn, you may play that card.
-        this.addAbility(new TransformIntoSourceTriggeredAbility(new ExileTopXMayPlayUntilEndOfTurnEffect(1)));
+        this.addAbility(new TransformIntoSourceTriggeredAbility(
+                new ExileTopXMayPlayUntilEndOfTurnEffect(1, false, Duration.UntilEndOfYourNextTurn)
+        ));
     }
 
     private CompleatedConjurer(final CompleatedConjurer card) {

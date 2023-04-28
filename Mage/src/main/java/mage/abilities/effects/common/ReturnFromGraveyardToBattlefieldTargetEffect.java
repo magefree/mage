@@ -87,11 +87,13 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect 
             if (target.getMaxNumberOfTargets() == Integer.MAX_VALUE
                     && target.getMinNumberOfTargets() == 0) {
                 sb.append("any number of ");
-            } else {
-                if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
-                    sb.append("up to ");
-                }
-                sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
+            } else if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
+                sb.append("up to ");
+                sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets()));
+                sb.append(' ');
+            } else if (target.getMaxNumberOfTargets() > 1) {
+                sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets()));
+                sb.append(' ');
             }
             String targetName = mode.getTargets().get(0).getTargetName();
             if (!targetName.contains("target ")) {

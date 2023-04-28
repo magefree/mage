@@ -21,12 +21,10 @@ public final class PileOn extends CardImpl {
         // Convoke
         this.addAbility(new ConvokeAbility());
 
-        // Destroy target creature or planeswalker.
+        // Destroy target creature or planeswalker. Surveil 2.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
-
-        // Surveil 2.
-        this.getSpellAbility().addEffect(new SurveilEffect(2).concatBy("<br>"));
+        this.getSpellAbility().addEffect(new SurveilEffect(2));
     }
 
     private PileOn(final PileOn card) {

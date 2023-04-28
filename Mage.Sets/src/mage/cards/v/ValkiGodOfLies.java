@@ -125,7 +125,7 @@ class ValkiGodOfLiesRevealExileEffect extends OneShotEffect {
                     TargetCard targetToExile = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD_CREATURE);
                     targetToExile.withChooseHint("card to exile");
                     targetToExile.setNotTarget(true);
-                    if (controller.choose(Outcome.Exile, opponent.getHand(), targetToExile, game)) {
+                    if (controller.choose(Outcome.Exile, opponent.getHand(), targetToExile, source, game)) {
                         Card targetedCardToExile = game.getCard(targetToExile.getFirstTarget());
                         if (targetedCardToExile != null
                                 && game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {
@@ -242,7 +242,7 @@ class ValkiGodOfLiesCopyExiledEffect extends OneShotEffect {
             Cards cards = game.getExile().getExileZone(exileId);
             if (cards != null
                     && !cards.isEmpty()
-                    && controller.choose(Outcome.Benefit, cards, target, game)) {
+                    && controller.choose(Outcome.Benefit, cards, target, source, game)) {
                 Card chosenExiledCard = game.getCard(target.getFirstTarget());
                 if (chosenExiledCard != null) {
                     ContinuousEffect copyEffect = new CopyEffect(Duration.WhileOnBattlefield, chosenExiledCard.getMainCard(), source.getSourceId());

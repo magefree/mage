@@ -20,7 +20,7 @@ public final class AngelToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
 
         availableImageSetCodes = Arrays.asList("APC", "AVR", "C14", "C15", "C18", "CON", "DDQ", "GTC",
-                "ISD", "M14", "MM3", "NEM", "OGW", "ORI", "PC2", "SCG", "SOI", "ZEN", "C20", "M21", "CMR", "AFC", "VOC", "2XM", "IMA", "PCA", "A25", "GN3", "ONC");
+                "ISD", "M14", "MM3", "NEM", "OGW", "ORI", "PC2", "SCG", "SOI", "ZEN", "C20", "M21", "CMR", "AFC", "VOC", "2XM", "IMA", "PCA", "A25", "GN3", "ONC", "MOC");
     }
 
     @Override
@@ -28,6 +28,9 @@ public final class AngelToken extends TokenImpl {
         super.setExpansionSetCodeForImage(code);
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("ONC")) {
             this.setTokenType(1);
+        }
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("MOC")) {
+            this.setTokenType(2);
         }
     }
 

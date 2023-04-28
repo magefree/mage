@@ -53,7 +53,7 @@ public class PermanentView extends CardView {
         this.attachedTo = permanent.getAttachedTo();
 
         // show face down cards to all players at the game end
-        boolean showFaceDownInfo = controlled || game.hasEnded();
+        boolean showFaceDownInfo = controlled || (game != null && game.hasEnded());
 
         if (isToken()) {
             original = new CardView(((PermanentToken) permanent).getToken().copy(), (Game) null);

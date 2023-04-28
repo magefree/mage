@@ -30,7 +30,9 @@ public final class EssenceOfOrthodoxy extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Essence of Orthodoxy or another Phyrexian enters the battlefield under your control, incubate 2.
-        this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(new IncubateEffect(2), filter));
+        this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
+                new IncubateEffect(2), filter, false, true
+        ));
     }
 
     private EssenceOfOrthodoxy(final EssenceOfOrthodoxy card) {

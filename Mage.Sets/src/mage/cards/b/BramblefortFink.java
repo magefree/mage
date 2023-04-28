@@ -34,7 +34,7 @@ public final class BramblefortFink extends CardImpl {
         this.addAbility(new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
                 new SetBasePowerToughnessSourceEffect(
-                        10, 10, Duration.EndOfTurn, SubLayer.SetPT_7b, true
+                        10, 10, Duration.EndOfTurn, SubLayer.SetPT_7b
                 ).setText("{this} has base power and toughness 10/10 until end of turn"),
                 new GenericManaCost(8),
                 condition));

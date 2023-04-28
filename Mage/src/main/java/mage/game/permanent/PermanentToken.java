@@ -5,6 +5,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.keyword.ChangelingAbility;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.constants.EmptyNames;
 import mage.game.Game;
@@ -20,15 +21,17 @@ public class PermanentToken extends PermanentImpl {
 
     protected Token token;
 
-    public PermanentToken(Token token, UUID controllerId, String expansionSetCode, Game game) {
+    public PermanentToken(Token token, UUID controllerId, Game game) {
         super(controllerId, controllerId, token.getName());
-        this.expansionSetCode = expansionSetCode;
         this.token = token.copy();
         this.token.getAbilities().newOriginalId(); // neccessary if token has ability like DevourAbility()
         this.token.getAbilities().setSourceId(objectId);
         this.power = new MageInt(token.getPower().getModifiedBaseValue());
         this.toughness = new MageInt(token.getToughness().getModifiedBaseValue());
         this.copyFromToken(this.token, game, false); // needed to have at this time (e.g. for subtypes for entersTheBattlefield replacement effects)
+        if (this.token.isEntersTransformed()) {
+            TransformAbility.transformPermanent(this, this.token.getBackFace(), game, null);
+        }
 
         // token's ZCC must be synced with original token to keep abilities settings
         // Example: kicker ability and kicked status
@@ -40,7 +43,6 @@ public class PermanentToken extends PermanentImpl {
     public PermanentToken(final PermanentToken permanent) {
         super(permanent);
         this.token = permanent.token.copy();
-        this.expansionSetCode = permanent.expansionSetCode;
     }
 
     @Override
@@ -50,6 +52,14 @@ public class PermanentToken extends PermanentImpl {
         // Because the P/T objects have there own base value for reset we have to take it from there instead of from the basic token object
         this.power.resetToBaseValue();
         this.toughness.resetToBaseValue();
+    }
+
+    @Override
+    public int getManaValue() {
+        if (this.isTransformed()) {
+            return token.getManaValue();
+        }
+        return super.getManaValue();
     }
 
     @Override
@@ -88,6 +98,7 @@ public class PermanentToken extends PermanentImpl {
         this.supertype.addAll(token.getSuperType());
         this.subtype.copyFrom(token.getSubtype(game));
         this.startingLoyalty = token.getStartingLoyalty();
+        this.startingDefense = token.getStartingDefense();
         // workaround for entersTheBattlefield replacement effects
         if (this.abilities.containsClass(ChangelingAbility.class)) {
             this.subtype.setIsAllCreatureTypes(true);
@@ -120,5 +131,35 @@ public class PermanentToken extends PermanentImpl {
     public Card getMainCard() {
         // token don't have game card, so return itself
         return this;
+    }
+
+    @Override
+    public boolean isTransformable() {
+        return token.getBackFace() != null;
+    }
+
+    @Override
+    protected MageObject getOtherFace() {
+        return this.transformed ? token : this.token.getBackFace();
+    }
+
+    @Override
+    public String getCardNumber() {
+        return token.getOriginalCardNumber();
+    }
+
+    @Override
+    public void setCardNumber(String cardNumber) {
+        throw new IllegalArgumentException("Wrong code usage: you can't change a token's card number");
+    }
+
+    @Override
+    public String getExpansionSetCode() {
+        return token.getOriginalExpansionSetCode();
+    }
+
+    @Override
+    public void setExpansionSetCode(String expansionSetCode) {
+        throw new IllegalArgumentException("Wrong code usage: you can't change a token's set code, use CardUtils.copySetAndCardNumber instead");
     }
 }

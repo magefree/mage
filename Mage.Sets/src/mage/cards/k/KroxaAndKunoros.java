@@ -38,7 +38,7 @@ public final class KroxaAndKunoros extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
@@ -48,7 +48,6 @@ public final class KroxaAndKunoros extends CardImpl {
                 new ReturnFromGraveyardToBattlefieldTargetEffect(), false
         );
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
-        this.addAbility(ability);
         this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new DoWhenCostPaid(
                 ability, new ExileFromGraveCost(new TargetCardInYourGraveyard(5)),
                 "Exile five cards from your graveyard?"

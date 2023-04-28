@@ -1,7 +1,6 @@
 package mage.cards.n;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -14,11 +13,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
-import mage.util.CardUtil;
 
 import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -76,15 +73,12 @@ class NivMizzetRebornEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 10));
-        game.informPlayers(player.getLogName() + " reveals " + CardUtil.concatWithAnd(
-                cards.getCards(game).stream().map(MageObject::getName).collect(Collectors.toList())
-        ));
         if (cards.isEmpty()) {
             return false;
         }
         player.revealCards(source, cards, game);
         TargetCard target = new NivMizzetRebornTarget();
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         Cards toHand = new CardsImpl(target.getTargets());
         player.moveCardsToHandWithInfo(toHand, source, game, true);
         cards.retainZone(Zone.LIBRARY, game);

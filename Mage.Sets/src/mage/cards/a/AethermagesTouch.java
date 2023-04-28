@@ -67,7 +67,7 @@ class AethermagesTouchEffect extends OneShotEffect {
                 FilterCreatureCard filter = new FilterCreatureCard("a creature card to put onto the battlefield");
                 controller.revealCards(sourceObject.getIdName(), cards, game);
                 TargetCard target = new TargetCard(Zone.LIBRARY, filter);
-                if (cards.count(filter, game) > 0 && controller.choose(outcome, cards, target, game)) {
+                if (cards.count(filter, game) > 0 && controller.choose(outcome, cards, target, source, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         cards.remove(card);

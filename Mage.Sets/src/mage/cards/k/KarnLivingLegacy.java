@@ -86,7 +86,7 @@ class KarnLivingLegacyEffect extends OneShotEffect {
             return true;
         }
         TargetCard target = new TargetCardInLibrary(StaticFilters.FILTER_CARD);
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         Card card = cards.get(target.getFirstTarget(), game);
         if (card != null) {
             player.moveCards(card, Zone.HAND, source, game);

@@ -173,7 +173,7 @@ class MadWizardsLairEffect extends OneShotEffect {
         }
         player.revealCards(source, cards, game);
         TargetCardInHand target = new TargetCardInHand(0, 1, StaticFilters.FILTER_CARD_NON_LAND);
-        player.choose(Outcome.PlayForFree, cards, target, game);
+        player.choose(Outcome.PlayForFree, cards, target, source, game);
         Card card = player.getHand().get(target.getFirstTarget(), game);
         if (card == null) {
             return true;

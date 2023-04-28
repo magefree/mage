@@ -40,7 +40,7 @@ public final class KaitoDancingShadow extends CardImpl {
 
     public KaitoDancingShadow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{B}");
-        
+
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.KAITO);
         this.setStartingLoyalty(3);
@@ -50,7 +50,7 @@ public final class KaitoDancingShadow extends CardImpl {
         this.addAbility(ability);
 
         // +1: Up to one target creature can't attack or block until your next turn.
-        Ability KaitoCantAttackOrBlockAbility = new LoyaltyAbility(new CantAttackTargetEffect(Duration.UntilYourNextTurn).setText("Up to one target creature can't attack "), 1);
+        Ability KaitoCantAttackOrBlockAbility = new LoyaltyAbility(new CantAttackTargetEffect(Duration.UntilYourNextTurn).setText("Up to one target creature can't attack"), 1);
         KaitoCantAttackOrBlockAbility.addEffect(new CantBlockTargetEffect(Duration.UntilYourNextTurn).setText("or block until your next turn"));
         KaitoCantAttackOrBlockAbility.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(KaitoCantAttackOrBlockAbility);
@@ -128,7 +128,7 @@ class KaitoDancingShadowEffect extends OneShotEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) { 
+    public boolean apply(Game game, Ability source) {
         KaitoDancingShadowWatcher watcher = game.getState().getWatcher(KaitoDancingShadowWatcher.class);
         if (watcher == null) {
             return false;
@@ -221,7 +221,7 @@ class TargetCreatureThatDealtCombatDamage extends TargetObject {
         return super.chooseTarget(Outcome.Benefit, playerId, source, game);
     }
 
-    
+
     @Override
     public TargetCreatureThatDealtCombatDamage copy() {
         return new TargetCreatureThatDealtCombatDamage(this);

@@ -2,14 +2,54 @@ package org.mage.test.testapi;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.server.util.SystemUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
+
+import java.util.List;
 
 /**
  * @author JayDi85
  */
 public class AddCardApiTest extends CardTestPlayerBase {
+
+    @Test
+    public void test_CardParsing() {
+        List<String> info;
+
+        info = SystemUtil.parseSetAndCardNameCommand("");
+        Assert.assertEquals(2, info.size());
+        Assert.assertEquals("", info.get(0));
+        Assert.assertEquals("", info.get(1));
+
+        info = SystemUtil.parseSetAndCardNameCommand("single name");
+        Assert.assertEquals(2, info.size());
+        Assert.assertEquals("", info.get(0));
+        Assert.assertEquals("single name", info.get(1));
+
+        info = SystemUtil.parseSetAndCardNameCommand("SET-name");
+        Assert.assertEquals(2, info.size());
+        Assert.assertEquals("SET", info.get(0));
+        Assert.assertEquals("name", info.get(1));
+
+        // only upper case set codes can be used
+        info = SystemUtil.parseSetAndCardNameCommand("non-set-code-name");
+        Assert.assertEquals(2, info.size());
+        Assert.assertEquals("", info.get(0));
+        Assert.assertEquals("non-set-code-name", info.get(1));
+
+        info = SystemUtil.parseSetAndCardNameCommand("SET-card-name");
+        Assert.assertEquals(2, info.size());
+        Assert.assertEquals("SET", info.get(0));
+        Assert.assertEquals("card-name", info.get(1));
+
+        // must find first symbols before delimeter, e.g. TOO
+        info = SystemUtil.parseSetAndCardNameCommand("TOO-LONG-SET-card-name");
+        Assert.assertEquals(2, info.size());
+        Assert.assertEquals("TOO", info.get(0));
+        Assert.assertEquals("LONG-SET-card-name", info.get(1));
+    }
 
     @Test
     public void test_CardName_Normal() {
@@ -30,8 +70,8 @@ public class AddCardApiTest extends CardTestPlayerBase {
 
     @Test
     public void test_CardNameWithSetCode_Normal() {
-        addCard(Zone.BATTLEFIELD, playerA, "40K:Memorial to Glory", 2);
-        addCard(Zone.BATTLEFIELD, playerA, "PANA:Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "40K-Memorial to Glory", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "PANA-Plains", 2);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -50,6 +90,6 @@ public class AddCardApiTest extends CardTestPlayerBase {
 
     @Test(expected = org.junit.ComparisonFailure.class)
     public void test_CardNameWithSetCode_RaiseErrorOnUnknownSet() {
-        addCard(Zone.BATTLEFIELD, playerA, "SS4:Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "SS4-Plains", 1);
     }
 }

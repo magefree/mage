@@ -15,6 +15,7 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
+import mage.filter.common.FilterBattlePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.permanent.ProtectedByOpponentPredicate;
 import mage.game.permanent.token.Elemental11BlueRedToken;
@@ -27,11 +28,10 @@ import java.util.UUID;
 public final class JoyfulStormsculptor extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a spell that has convoke");
-    private static final FilterPermanent filter2 = new FilterPermanent();
+    private static final FilterPermanent filter2 = new FilterBattlePermanent();
 
     static {
         filter.add(new AbilityPredicate(ConvokeAbility.class));
-        filter2.add(CardType.BATTLE.getPredicate());
         filter2.add(ProtectedByOpponentPredicate.instance);
     }
 

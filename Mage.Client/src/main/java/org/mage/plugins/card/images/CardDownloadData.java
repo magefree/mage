@@ -173,8 +173,8 @@ public class CardDownloadData {
         this.tokenClassName = tokenClassName;
     }
 
-    public String getTokenClassName() {
-        return tokenClassName;
+    public String getAffectedClassName() {
+        return tokenClassName.isEmpty() ? name.replaceAll("[^a-zA-Z0-9]", "") : tokenClassName;
     }
 
     public boolean isToken() {

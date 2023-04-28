@@ -22,7 +22,7 @@ public class IncubateEffect extends OneShotEffect {
     public IncubateEffect(int amount) {
         super(Outcome.Detriment);
         this.amount = amount;
-        staticText = "incubate " + amount + " <i>(Create an Incubator artifact token with " +
+        staticText = "incubate " + amount + ". <i>(Create an Incubator artifact token with " +
                 CardUtil.numberToText(amount, "a") + " +1/+1 counter" + (amount > 1 ? "s" : "") +
                 " on it and \"{2}: Transform this artifact.\" It transforms into a 0/0 Phyrexian artifact creature.)</i>";
     }
@@ -39,14 +39,21 @@ public class IncubateEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        return doIncubate(amount, game, source);
+    }
+
+    public static boolean doIncubate(int amount, Game game, Ability source) {
+        return doIncubate(amount, source.getControllerId(), game, source);
+    }
+
+    public static boolean doIncubate(int amount, UUID playerId, Game game, Ability source) {
         Token token = new IncubatorToken();
-        token.putOntoBattlefield(1, game, source);
+        token.putOntoBattlefield(1, game, source, playerId);
         for (UUID tokenId : token.getLastAddedTokenIds()) {
             Permanent permanent = game.getPermanent(tokenId);
-            if (permanent == null) {
-                continue;
+            if (permanent != null && amount > 0) {
+                permanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game);
             }
-            permanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game);
         }
         return true;
     }

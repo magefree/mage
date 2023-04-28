@@ -220,6 +220,15 @@ public abstract class Designation implements MageObject {
     }
 
     @Override
+    public int getStartingDefense() {
+        return 0;
+    }
+
+    @Override
+    public void setStartingDefense(int startingDefense) {
+    }
+
+    @Override
     public int getZoneChangeCounter(Game game) {
         return 1; // Emblems can't move zones until now so return always 1
     }

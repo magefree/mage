@@ -33,7 +33,7 @@ public final class BeamtownBeatstick extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+0 and has menace.
-        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(2, 2));
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(1, 0));
         ability.addEffect(new GainAbilityAttachedEffect(
                 new MenaceAbility(), AttachmentType.EQUIPMENT
         ).setText("and has menace. <i>(It can't be blocked except by two or more creatures.)</i>"));

@@ -17,12 +17,12 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
 import mage.game.permanent.token.Token;
 import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
+import mage.util.functions.CopyTokenFunction;
 import mage.util.functions.EmptyCopyApplier;
 
 import java.util.*;
@@ -200,14 +200,13 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         }
 
         // create token and modify all attributes permanently (without game usage)
-        EmptyToken token = new EmptyToken();
-        CardUtil.copyTo(token).from(copyFrom, game); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
+        Token token = CopyTokenFunction.createTokenCopy(copyFrom, game); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
         applier.apply(game, token, source, targetId);
         if (becomesArtifact) {
             token.addCardType(CardType.ARTIFACT);
         }
         if (isntLegendary) {
-            token.getSuperType().remove(SuperType.LEGENDARY);
+            token.removeSuperType(SuperType.LEGENDARY);
         }
 
         if (startingLoyalty != -1) {
@@ -238,7 +237,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             token.addSubType(additionalSubType);
         }
         if (color != null) {
-            token.getColor().setColor(color);
+            token.setColor(color);
         }
         additionalAbilities.stream().forEach(token::addAbility);
         if (permanentModifier != null) {

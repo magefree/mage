@@ -9,7 +9,6 @@ import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -36,7 +35,7 @@ public final class PlagueRats extends CardImpl {
 
         // Plague Rats's power and toughness are each equal to the number of creatures named Plague Rats on the battlefield.
         DynamicValue amount = new PermanentsOnBattlefieldCount(plagueRatsFilter);
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(amount, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(amount)));
     }
 
     private PlagueRats(final PlagueRats card) {

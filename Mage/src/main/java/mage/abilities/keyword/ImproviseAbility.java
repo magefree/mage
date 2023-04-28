@@ -70,7 +70,7 @@ public class ImproviseAbility extends SimpleStaticAbility implements AlternateMa
 
     @Override
     public String getRule() {
-        return "Improvise <i>(Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)</i>";
+        return "improvise <i>(Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)</i>";
     }
 
     @Override

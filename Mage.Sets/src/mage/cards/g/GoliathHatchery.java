@@ -1,7 +1,5 @@
 package mage.cards.g;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -12,6 +10,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.ToxicAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -19,11 +18,12 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.PhyrexianBeastToxicToken;
-import mage.game.permanent.token.PhyrexianGolemToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -42,8 +42,8 @@ public final class GoliathHatchery extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
                         new GoliathHatcheryEffect(), TargetController.YOU, false
-                ), CorruptedCondition.instance, null
-        ));
+                ).setAbilityWord(AbilityWord.CORRUPTED), CorruptedCondition.instance, null
+        ).addHint(CorruptedCondition.getHint()));
     }
 
     private GoliathHatchery(final GoliathHatchery card) {

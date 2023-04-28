@@ -233,6 +233,15 @@ public class Plane implements CommandObject {
     }
 
     @Override
+    public int getStartingDefense() {
+        return 0;
+    }
+
+    @Override
+    public void setStartingDefense(int startingDefense) {
+    }
+
+    @Override
     public UUID getId() {
         return this.id;
     }
@@ -242,12 +251,14 @@ public class Plane implements CommandObject {
         return new Plane(this);
     }
 
-    public void setExpansionSetCodeForImage(String expansionSetCodeForImage) {
-        this.expansionSetCodeForImage = expansionSetCodeForImage;
-    }
-
+    @Override
     public String getExpansionSetCodeForImage() {
         return expansionSetCodeForImage;
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String expansionSetCodeForImage) {
+        this.expansionSetCodeForImage = expansionSetCodeForImage;
     }
 
     @Override

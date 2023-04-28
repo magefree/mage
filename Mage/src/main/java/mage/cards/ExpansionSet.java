@@ -104,13 +104,13 @@ public abstract class ExpansionSet implements Serializable {
     protected String name;
     protected String code;
     protected Date releaseDate;
-    protected ExpansionSet parentSet;
+    protected ExpansionSet parentSet; // used to search additional lands and reprints for booster
     protected SetType setType;
 
     // TODO: 03.10.2018, hasBasicLands can be removed someday -- it's uses to optimize lands search in deck generation and lands adding (search all available lands from sets)
     protected boolean hasBasicLands = true;
 
-    protected String blockName;
+    protected String blockName; // used to group sets in some GUI dialogs like choose set dialog
     protected boolean hasBoosters = false;
     protected int numBoosterSpecial;
 
@@ -539,6 +539,7 @@ public abstract class ExpansionSet implements Serializable {
             List<String> needSets = new ArrayList<>();
             needSets.add(this.code);
             if (this.parentSet != null) {
+                // TODO: is it ok to put all parent's cards to booster instead lands only?
                 needSets.add(this.parentSet.code);
             }
             List<CardInfo> cardInfos = CardRepository.instance.findCards(new CardCriteria()

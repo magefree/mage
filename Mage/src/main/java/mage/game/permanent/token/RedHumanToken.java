@@ -4,7 +4,6 @@ package mage.game.permanent.token;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
-import mage.ObjectColor;
 
 import java.util.Arrays;
 
@@ -23,7 +22,7 @@ public final class RedHumanToken extends TokenImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("AVR", "EMN", "VOW");
+        availableImageSetCodes = Arrays.asList("AVR", "EMN", "VOW", "MOC");
     }
 
     @Override
@@ -31,6 +30,9 @@ public final class RedHumanToken extends TokenImpl {
         super.setExpansionSetCodeForImage(code);
 
         if (getOriginalExpansionSetCode().equals("AVR")) {
+            this.setTokenType(1);
+        }
+        if (getOriginalExpansionSetCode().equals("MOC")) {
             this.setTokenType(1);
         }
     }

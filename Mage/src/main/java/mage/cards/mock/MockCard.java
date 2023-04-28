@@ -8,6 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.ModalDoubleFacesCard;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,7 @@ public class MockCard extends CardImpl {
     // PlaneswalkerEntersWithLoyaltyAbility of the card... but the MockCard
     // only has MockAbilities.
     private final int startingLoyalty;
+    private final int startingDefense;
 
     // mana cost extra info for multiple mana drawing
     // warning, don't use ManaCost objects here due too much memory consumptions
@@ -79,16 +81,9 @@ public class MockCard extends CardImpl {
             this.isModalDoubleFacesCard = true;
         }
 
-        switch (card.getStartingLoyalty()) {
-            case "X":
-                this.startingLoyalty = -2;
-                break;
-            case "":
-                this.startingLoyalty = -1;
-                break;
-            default:
-                this.startingLoyalty = Integer.parseInt(card.getStartingLoyalty());
-        }
+        this.startingLoyalty = CardUtil.convertLoyaltyOrDefense(card.getStartingLoyalty());
+        this.startingDefense = CardUtil.convertLoyaltyOrDefense(card.getStartingDefense());
+
         this.flipCardName = card.getFlipCardName();
         for (String ruleText : card.getRules()) {
             this.addAbility(textAbilityFromString(ruleText));
@@ -99,6 +94,7 @@ public class MockCard extends CardImpl {
         super(card);
 
         this.startingLoyalty = card.startingLoyalty;
+        this.startingDefense = card.startingDefense;
         this.manaCostLeftStr = new ArrayList<>(card.manaCostLeftStr);
         this.manaCostRightStr = new ArrayList<>(card.manaCostRightStr);
         this.manaCostStr = new ArrayList<>(card.manaCostStr);
@@ -110,6 +106,11 @@ public class MockCard extends CardImpl {
     @Override
     public int getStartingLoyalty() {
         return startingLoyalty;
+    }
+
+    @Override
+    public int getStartingDefense() {
+        return startingDefense;
     }
 
     @Override

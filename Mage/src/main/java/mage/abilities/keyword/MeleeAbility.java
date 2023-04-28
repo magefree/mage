@@ -19,7 +19,7 @@ import java.util.*;
 public class MeleeAbility extends AttacksTriggeredAbility {
 
     public MeleeAbility() {
-        super(new BoostSourceEffect(MeleeDynamicValue.instance, MeleeDynamicValue.instance, Duration.EndOfTurn), false);
+        super(new BoostSourceEffect(MeleeDynamicValue.instance, MeleeDynamicValue.instance, Duration.EndOfTurn, true), false);
         this.addWatcher(new MeleeWatcher());
     }
 
@@ -53,7 +53,7 @@ class MeleeWatcher extends Watcher {
                 this.playersAttacked.clear();
                 return;
             case ATTACKER_DECLARED:
-                if (game.getPlayer(event.getTargetId()) == null) {
+                if (!game.getOpponents(event.getPlayerId()).contains(event.getTargetId())) {
                     return;
                 }
                 this.playersAttacked
@@ -62,7 +62,7 @@ class MeleeWatcher extends Watcher {
         }
     }
 
-    public static int getNumberOfAttackedPlayers(UUID attackerId, Game game) {
+    static int getNumberOfAttackedPlayers(UUID attackerId, Game game) {
         return game
                 .getState()
                 .getWatcher(MeleeWatcher.class)
@@ -77,7 +77,7 @@ enum MeleeDynamicValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return MeleeWatcher.getNumberOfAttackedPlayers(sourceAbility.getSourceId(), game);
+        return MeleeWatcher.getNumberOfAttackedPlayers(sourceAbility.getControllerId(), game);
     }
 
     @Override

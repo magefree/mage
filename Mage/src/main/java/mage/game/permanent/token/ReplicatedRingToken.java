@@ -18,7 +18,7 @@ public final class ReplicatedRingToken extends TokenImpl {
 
         this.addAbility(new AnyColorManaAbility());
 
-        availableImageSetCodes = Arrays.asList("KHM");
+        availableImageSetCodes = Arrays.asList("KHM", "MOC");
     }
 
 

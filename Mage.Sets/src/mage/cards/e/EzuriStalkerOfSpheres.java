@@ -1,7 +1,5 @@
 package mage.cards.e;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.ProliferatedControllerTriggeredAbility;
@@ -9,11 +7,13 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801

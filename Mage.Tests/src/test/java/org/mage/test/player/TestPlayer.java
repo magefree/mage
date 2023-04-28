@@ -1711,15 +1711,15 @@ public class TestPlayer implements Player {
                 String[] groups = command.split("\\$");
                 for (int i = 1; i < groups.length; i++) {
                     String group = groups[i];
-                    if (group.startsWith("planeswalker=")) {
-                        String planeswalkerName = group.substring(group.indexOf("planeswalker=") + 13);
-                        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_PLANESWALKER, game)) {
-                            if (hasObjectTargetNameOrAlias(permanent, planeswalkerName)) {
+                    if (group.startsWith("permanent=")) {
+                        String permanentName = group.substring(group.indexOf("permanent=") + 10);
+                        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT, game)) {
+                            if (hasObjectTargetNameOrAlias(permanent, permanentName)) {
                                 defenderId = permanent.getId();
+                                break;
                             }
                         }
-                    }
-                    if (group.startsWith("defendingPlayer=")) {
+                    } else if (group.startsWith("defendingPlayer=")) {
                         String defendingPlayerName = group.substring(group.indexOf("defendingPlayer=") + 16);
                         for (Player defendingPlayer : game.getPlayers().values()) {
                             if (defendingPlayer.getName().equals(defendingPlayerName)) {
@@ -2322,8 +2322,7 @@ public class TestPlayer implements Player {
             if (target.getOriginalTarget() instanceof TargetPlayer
                     || target.getOriginalTarget() instanceof TargetAnyTarget
                     || target.getOriginalTarget() instanceof TargetCreatureOrPlayer
-                    || target.getOriginalTarget() instanceof TargetPermanentOrPlayer
-                    || target.getOriginalTarget() instanceof TargetDefender) {
+                    || target.getOriginalTarget() instanceof TargetPermanentOrPlayer) {
                 for (String targetDefinition : targets) {
                     if (!targetDefinition.startsWith("targetPlayer=")) {
                         continue;
@@ -2346,7 +2345,6 @@ public class TestPlayer implements Player {
                     || (target.getOriginalTarget() instanceof TargetPermanentOrPlayer)
                     || (target.getOriginalTarget() instanceof TargetAnyTarget)
                     || (target.getOriginalTarget() instanceof TargetCreatureOrPlayer)
-                    || (target.getOriginalTarget() instanceof TargetDefender)
                     || (target.getOriginalTarget() instanceof TargetPermanentOrSuspendedCard)) {
                 for (String targetDefinition : targets) {
                     if (targetDefinition.startsWith("targetPlayer=")) {
@@ -2375,9 +2373,6 @@ public class TestPlayer implements Player {
                         }
                         if (filter instanceof FilterPermanentOrPlayer) {
                             filter = ((FilterPermanentOrPlayer) filter).getPermanentFilter();
-                        }
-                        if (filter instanceof FilterPlaneswalkerOrPlayer) {
-                            filter = ((FilterPlaneswalkerOrPlayer) filter).getFilterPermanent();
                         }
                         if (filter instanceof FilterPermanentOrSuspendedCard) {
                             filter = ((FilterPermanentOrSuspendedCard) filter).getPermanentFilter();
@@ -3970,9 +3965,7 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean choose(Outcome outcome, Cards cards,
-                          TargetCard target, Game game
-    ) {
+    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
         assertAliasSupportInChoices(false);
         if (!choices.isEmpty()) {
 
@@ -4000,7 +3993,7 @@ public class TestPlayer implements Player {
                             continue;
                         }
                         if (hasObjectTargetNameOrAlias(card, targetName)) {
-                            if (target.isNotTarget() || target.canTarget(card.getId(), game)) {
+                            if (target.isNotTarget() || target.canTarget(card.getId(), source, game)) {
                                 target.add(card.getId(), game);
                                 targetFound = true;
                                 break;
@@ -4018,7 +4011,7 @@ public class TestPlayer implements Player {
         }
 
         this.chooseStrictModeFailed("choice", game, getInfo(target));
-        return computerPlayer.choose(outcome, cards, target, game);
+        return computerPlayer.choose(outcome, cards, target, source, game);
     }
 
     @Override
@@ -4387,6 +4380,40 @@ public class TestPlayer implements Player {
             }
 
             assertWrongChoiceUsage(choice);
+        }
+
+        String allInfo = useable.values().stream().map(Object::toString).collect(Collectors.joining("\n"));
+        this.chooseStrictModeFailed("choice", game, getInfo(card) + " - can't select ability to cast.\n" + "Card's abilities:\n" + allInfo);
+        return computerPlayer.chooseAbilityForCast(card, game, noMana);
+    }
+
+    @Override
+    public ActivatedAbility chooseLandOrSpellAbility(Card card, Game game, boolean noMana) {
+        assertAliasSupportInChoices(false);
+        MageObject object = game.getObject(card.getId()); // must be object to find real abilities (example: commander)
+        Map<UUID, ActivatedAbility> useable = new LinkedHashMap<>(PlayerImpl.getCastableSpellAbilities(game, this.getId(), object, game.getState().getZone(object.getId()), noMana));
+        if (canPlayLand()) {
+            for (Ability ability : card.getAbilities(game)) {
+                if (ability instanceof PlayLandAbility) {
+                    useable.put(ability.getId(), (PlayLandAbility) ability);
+                }
+            }
+        }
+        if (useable.size() == 1) {
+            return useable.values().iterator().next();
+        }
+
+        if (!choices.isEmpty()) {
+            for (ActivatedAbility ability : useable.values()) {
+                if (ability.toString().startsWith(choices.get(0))) {
+                    choices.remove(0);
+                    return ability;
+                }
+            }
+
+            // TODO: enable fail checks and fix tests
+            //Assert.fail("Wrong choice");
+            LOGGER.warn("Wrong choice");
         }
 
         String allInfo = useable.values().stream().map(Object::toString).collect(Collectors.joining("\n"));

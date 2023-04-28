@@ -4,27 +4,23 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.counters.CounterType;
-import mage.filter.StaticFilters;
+import mage.filter.FilterCard;
+import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
-import mage.players.Player;
 import mage.util.CardUtil;
 import mage.watchers.common.CardsDrawnThisTurnWatcher;
 
-import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 
 public class HeliodTheWarpedEclipse extends CardImpl {
+
+    private static final FilterCard filter = new FilterNonlandCard("spells");
+
     public HeliodTheWarpedEclipse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "");
         this.color.setWhite(true);
@@ -36,12 +32,10 @@ public class HeliodTheWarpedEclipse extends CardImpl {
         this.toughness = new MageInt(6);
         this.nightCard = true;
 
-        //You may cast spells as though they had flash.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(
-                Duration.WhileOnBattlefield, StaticFilters.FILTER_CARD_NON_LAND
-        )));
+        // You may cast spells as though they had flash.
+        this.addAbility(new SimpleStaticAbility(new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter)));
 
-        //Spells you cast cost {1} less to cast for each card your opponents have drawn this turn.
+        // Spells you cast cost {1} less to cast for each card your opponents have drawn this turn.
         this.addAbility(new SimpleStaticAbility(new HeliodTheWarpedEclipseEffect()));
     }
 
@@ -72,10 +66,11 @@ class HeliodTheWarpedEclipseEffect extends CostModificationEffectImpl {
         if (watcher == null) {
             return false;
         }
-        int amount = 0;
-        for (UUID playerID : game.getOpponents(source.getControllerId())) {
-            amount = amount + watcher.getCardsDrawnThisTurn(playerID);
-        }
+        int amount = game
+                .getOpponents(source.getControllerId())
+                .stream()
+                .mapToInt(watcher::getCardsDrawnThisTurn)
+                .sum();
         if (amount < 1) {
             return false;
         }
@@ -85,11 +80,9 @@ class HeliodTheWarpedEclipseEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (!(abilityToModify instanceof SpellAbility)) {
-            return false;
-        }
-        Card sourceCard = game.getCard(abilityToModify.getSourceId());
-        return sourceCard != null && abilityToModify.isControlledBy(source.getControllerId());
+        return abilityToModify instanceof SpellAbility
+                && game.getCard(abilityToModify.getSourceId()) != null
+                && abilityToModify.isControlledBy(source.getControllerId());
     }
 
     @Override

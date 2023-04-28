@@ -57,20 +57,26 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect {
                 costValueMessage = "{" + genericMana.calculate(game, source, this) + "}";
             }
             String message = "";
+            String logMessage = "";
             if (costToPay instanceof ManaCost) {
-                message += "Pay ";
+                message += "Pay " + costValueMessage;
+                logMessage += "pay " + costValueMessage;
             }
-            message += costValueMessage + '?';
+            else if (costValueMessage.length() > 1) {
+                message += costValueMessage.substring(0,1).toUpperCase() + costValueMessage.substring(1);
+                logMessage += costValueMessage;
+            }
+            message += '?';
 
             costToPay.clearPaid();
             if (costToPay.canPay(source, source, source.getControllerId(), game)
                     && player.chooseUse(Outcome.Benefit, message, source, game)
                     && costToPay.pay(source, game, source, source.getControllerId(), false, null)) {
-                game.informPlayers(player.getLogName() + " chooses to pay " + costValueMessage + " to prevent sacrifice effect");
+                game.informPlayers(player.getLogName() + " chooses to " + logMessage + " to prevent sacrifice effect");
                 return true;
             }
 
-            game.informPlayers(player.getLogName() + " chooses not to pay " + costValueMessage + " to prevent sacrifice effect");
+            game.informPlayers(player.getLogName() + " chooses not to " + logMessage + " to prevent sacrifice effect");
             if (source.getSourceObjectZoneChangeCounter() == game.getState().getZoneChangeCounter(source.getSourceId())
                     && game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {
                 sourcePermanent.sacrifice(source, game);

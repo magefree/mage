@@ -72,6 +72,7 @@ public class WatcherTest {
         Map<String, List<String>> copyListInMap = copy.getListInMapField();
         assertEquals(2, copyListInMap.size());
         assertTrue(copyListInMap.containsKey("k1"));
+        assertEquals(copyListInMap.get("k1").getClass(), listInMapField.get("k1").getClass());
         assertEquals(ImmutableList.of("v1", "v1.1"), copyListInMap.get("k1"));
         assertTrue(copyListInMap.containsKey("k2"));
         assertEquals(ImmutableList.of("v2"), copyListInMap.get("k2"));
@@ -103,6 +104,7 @@ public class WatcherTest {
         Map<String, Set<String>> copySetInMap = copy.getSetInMapField();
         assertEquals(3, copySetInMap.size());
         assertTrue(copySetInMap.containsKey("k3"));
+        assertEquals(copySetInMap.get("k3").getClass(), copySetInMap.get("k3").getClass());
         assertEquals(ImmutableSet.of("v3"), copySetInMap.get("k3"));
         assertTrue(copySetInMap.containsKey("k4"));
         assertEquals(ImmutableSet.of("v4", "v4.1"), copySetInMap.get("k4"));
@@ -136,6 +138,7 @@ public class WatcherTest {
         Map<String, Map<String, String>> copyMapInMap = copy.getMapInMapField();
         assertEquals(2, copyMapInMap.size());
         assertTrue(copyMapInMap.containsKey("k1"));
+        assertEquals(copyMapInMap.get("k1").getClass(), mapInMapField.get("k1").getClass());
         assertEquals(ImmutableMap.of("k1.1", "v1.1", "k1.2", "v1.2"), copyMapInMap.get("k1"));
         assertTrue(copyMapInMap.containsKey("k2"));
         assertEquals(ImmutableMap.of("k2.1", "v2.1"), copyMapInMap.get("k2"));
@@ -163,6 +166,7 @@ public class WatcherTest {
         Map<String, SortedSet<String>> copySortedSetInMapField = copy.getSortedSetInMapField();
         assertEquals(2, copySortedSetInMapField.size());
         assertTrue(copySortedSetInMapField.containsKey("k1"));
+        assertEquals(copySortedSetInMapField.get("k1").getClass(), sortedSetInMapField.get("k1").getClass());
         assertEquals(ImmutableSortedSet.of("v1_1", "v1_2"), copySortedSetInMapField.get("k1"));
         assertTrue(copySortedSetInMapField.containsKey("k2"));
         assertEquals(ImmutableSortedSet.of("v2_1", "v2_2"), copySortedSetInMapField.get("k2"));

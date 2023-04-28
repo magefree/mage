@@ -28,7 +28,7 @@ import mage.filter.predicate.permanent.EquippedPredicate;
  */
 public final class JorKadeenFirstGoldwarden extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("equipped creatures you control");
     private static final FilterPermanent filter2 = new FilterPermanent();
 
     static {

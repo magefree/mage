@@ -126,7 +126,7 @@ class VivienOnTheHuntMillEffect extends OneShotEffect {
         TargetCard target = new TargetCard(
                 0, Integer.MAX_VALUE, Zone.ALL, StaticFilters.FILTER_CARD_CREATURE
         );
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         player.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
         return true;
     }
