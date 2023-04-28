@@ -319,6 +319,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Psychopath", 544, Rarity.UNCOMMON, mage.cards.g.GoblinPsychopath.class));
         cards.add(new SetCardInfo("Goblin Rabblemaster", 545, Rarity.RARE, mage.cards.g.GoblinRabblemaster.class));
         cards.add(new SetCardInfo("Goblin Rally", 546, Rarity.UNCOMMON, mage.cards.g.GoblinRally.class));
+        cards.add(new SetCardInfo("Goblin Researcher", 34, Rarity.COMMON, mage.cards.g.GoblinResearcher.class));
         cards.add(new SetCardInfo("Goblin Trailblazer", 547, Rarity.COMMON, mage.cards.g.GoblinTrailblazer.class));
         cards.add(new SetCardInfo("Goblin Warchief", 548, Rarity.UNCOMMON, mage.cards.g.GoblinWarchief.class));
         cards.add(new SetCardInfo("Goldhound", 549, Rarity.COMMON, mage.cards.g.Goldhound.class));
