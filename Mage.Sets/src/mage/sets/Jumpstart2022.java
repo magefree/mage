@@ -480,6 +480,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Mirror Image", 62, Rarity.UNCOMMON, mage.cards.m.MirrorImage.class));
         cards.add(new SetCardInfo("Mishra's Factory", 816, Rarity.UNCOMMON, mage.cards.m.MishrasFactory.class));
         cards.add(new SetCardInfo("Mistwalker", 323, Rarity.COMMON, mage.cards.m.Mistwalker.class));
+        cards.add(new SetCardInfo("Mizzix, Replica Rider", 35, Rarity.RARE, mage.cards.m.MizzixReplicaRider.class));
         cards.add(new SetCardInfo("Moldgraf Millipede", 691, Rarity.COMMON, mage.cards.m.MoldgrafMillipede.class));
         cards.add(new SetCardInfo("Moment of Craving", 444, Rarity.COMMON, mage.cards.m.MomentOfCraving.class));
         cards.add(new SetCardInfo("Moment of Triumph", 218, Rarity.COMMON, mage.cards.m.MomentOfTriumph.class));
