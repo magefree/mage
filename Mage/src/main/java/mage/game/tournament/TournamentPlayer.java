@@ -100,12 +100,11 @@ public class TournamentPlayer {
         return validDeck;
     }
 
-    public Deck generateDeck() {
+    public Deck generateDeck(int minDeckSize) {
         /*
         If user fails to submit deck on time, submit deck as is if meets minimum size,
         else add basic lands per suggested land counts
          */
-        int minDeckSize = 40;
         if (deck.getCards().size() < minDeckSize) {
             int[] lands = DeckBuildUtils.landCountSuggestion(minDeckSize, deck.getCards());
             Set<String> landSets = TournamentUtil.getLandSetCodeForDeckSets(deck.getExpansionSetCodes());
