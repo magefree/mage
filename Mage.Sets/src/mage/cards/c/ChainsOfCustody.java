@@ -1,9 +1,13 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.WardAbility;
@@ -15,17 +19,13 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
-import java.util.UUID;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
-/**
 
+import java.util.UUID;
+
+/**
  * @author Chesse20
  */
 public final class ChainsOfCustody extends CardImpl {
-
 
     public ChainsOfCustody(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
@@ -39,8 +39,7 @@ public final class ChainsOfCustody extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         //exile until leaves the battlefield
-        Ability ability = new EnchantAbility(auraTarget);
-        ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_NON_LAND)); //more than just creatures
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);
@@ -51,8 +50,6 @@ public final class ChainsOfCustody extends CardImpl {
                         new WardAbility(new GenericManaCost(2), false), AttachmentType.AURA
                 ).setText("Enchanted creature has ward {2}.")
         ));
-
-
     }
 
     private ChainsOfCustody(final ChainsOfCustody card) {
