@@ -18,6 +18,7 @@ import mage.game.Game;
 import mage.game.command.CommandObject;
 import mage.game.events.CreateTokenEvent;
 import mage.game.events.CreatedTokenEvent;
+import mage.game.events.CreatedTokensEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -249,6 +250,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
             return;
         }
 
+        Set<PermanentToken> allAddedTokens = new HashSet<>();
         for (Map.Entry<Token, Integer> entry : event.getTokens().entrySet()) {
             Token token = entry.getKey();
             int amount = entry.getValue();
@@ -306,6 +308,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                 game.addSimultaneousEvent(zccEvent);
                 if (permanent instanceof PermanentToken && created) {
                     game.addSimultaneousEvent(new CreatedTokenEvent(source, (PermanentToken) permanent));
+                    allAddedTokens.add((PermanentToken) permanent);
                 }
 
                 // if token was created (not a spell copy) handle auras coming into the battlefield
@@ -382,6 +385,8 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                 }
             }
         }
+        CreatedTokensEvent.addEvents(allAddedTokens, source, game);
+
         game.getState().applyEffects(game); // Needed to do it here without LKIReset i.e. do get SwordOfTheMeekTest running correctly.
     }
 
