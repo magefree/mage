@@ -191,6 +191,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Devouring Light", 175, Rarity.UNCOMMON, mage.cards.d.DevouringLight.class));
         cards.add(new SetCardInfo("Devouring Swarm", 401, Rarity.COMMON, mage.cards.d.DevouringSwarm.class));
         cards.add(new SetCardInfo("Diabolic Edict", 67, Rarity.COMMON, mage.cards.d.DiabolicEdict.class));
+        cards.add(new SetCardInfo("Disciple of Perdition", 23, Rarity.UNCOMMON, mage.cards.d.DiscipleOfPerdition.class));
         cards.add(new SetCardInfo("Dismiss", 286, Rarity.UNCOMMON, mage.cards.d.Dismiss.class));
         cards.add(new SetCardInfo("Distinguished Conjurer", 4, Rarity.UNCOMMON, mage.cards.d.DistinguishedConjurer.class));
         cards.add(new SetCardInfo("Divine Arrow", 176, Rarity.COMMON, mage.cards.d.DivineArrow.class));
