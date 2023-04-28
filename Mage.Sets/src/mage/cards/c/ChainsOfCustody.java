@@ -45,11 +45,9 @@ public final class ChainsOfCustody extends CardImpl {
         this.addAbility(ability);
 
         // ward 2
-        this.addAbility(new SimpleStaticAbility(
-                new GainAbilityAttachedEffect(
-                        new WardAbility(new GenericManaCost(2), false), AttachmentType.AURA
-                ).setText("Enchanted creature has ward {2}.")
-        ));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(
+                new WardAbility(new GenericManaCost(2), true), AttachmentType.AURA
+        )));
     }
 
     private ChainsOfCustody(final ChainsOfCustody card) {
