@@ -609,7 +609,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         return true;
     }
 
-    protected MageObject getOtherFace() {
+    public MageObject getOtherFace() {
         return transformed ? this.getMainCard() : this.getMainCard().getSecondCardFace();
     }
 

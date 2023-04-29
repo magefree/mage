@@ -22,6 +22,7 @@ import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
 import mage.filter.FilterMana;
 import mage.game.Game;
+import mage.game.permanent.token.Token;
 import mage.players.Player;
 
 import java.util.*;
@@ -636,6 +637,10 @@ public final class ManaUtil {
             secondSide = card.getSecondCardFace();
         }
         return getColorIdentity(card.getColor(), String.join("", card.getManaCostSymbols()), card.getRules(), secondSide);
+    }
+
+    public static FilterMana getColorIdentity(Token token) {
+        return getColorIdentity(token.getColor(), String.join("", token.getManaCostSymbols()), token.getAbilities().getRules(token.getName()), null);
     }
 
     public static int getColorIdentityHash(FilterMana colorIdentity) {

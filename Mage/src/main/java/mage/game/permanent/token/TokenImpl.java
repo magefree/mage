@@ -87,6 +87,8 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         ability.setSourceId(this.getId());
         abilities.add(ability);
         abilities.addAll(ability.getSubAbilities());
+
+        // TODO: remove all override and backFace changes (bug example: active transform ability in back face)
         if (backFace != null) {
             backFace.addAbility(ability);
         }
@@ -443,6 +445,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         super.setStartingLoyalty(startingLoyalty);
     }
 
+    @Override
     public void setStartingDefense(int intArg) {
         if (backFace != null) {
             backFace.setStartingDefense(intArg);
@@ -481,6 +484,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         return backFace;
     }
 
+    @Override
     public void retainAllArtifactSubTypes(Game game) {
         if (backFace != null) {
             backFace.retainAllArtifactSubTypes(game);
@@ -488,6 +492,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         super.retainAllArtifactSubTypes(game);
     }
 
+    @Override
     public void retainAllEnchantmentSubTypes(Game game) {
         if (backFace != null) {
             backFace.retainAllEnchantmentSubTypes(game);
@@ -495,6 +500,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         super.retainAllEnchantmentSubTypes(game);
     }
 
+    @Override
     public void addSuperType(SuperType superType) {
         if (backFace != null) {
             backFace.addSuperType(superType);
@@ -502,6 +508,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         super.addSuperType(superType);
     }
 
+    @Override
     public void removeSuperType(SuperType superType) {
         if (backFace != null) {
             backFace.removeSuperType(superType);
@@ -509,6 +516,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         super.removeSuperType(superType);
     }
 
+    @Override
     public void addCardType(CardType... cardTypes) {
         if (backFace != null) {
             backFace.addCardType(cardTypes);
@@ -516,6 +524,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         super.addCardType(cardTypes);
     }
 
+    @Override
     public void removeCardType(CardType... cardTypes) {
         if (backFace != null) {
             backFace.removeCardType(cardTypes);
@@ -523,6 +532,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         super.removeCardType(cardTypes);
     }
 
+    @Override
     public void removeAllCardTypes() {
         if (backFace != null) {
             backFace.removeAllCardTypes();
@@ -530,6 +540,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         super.removeAllCardTypes();
     }
 
+    @Override
     public void removeAllCardTypes(Game game) {
         if (backFace != null) {
             backFace.removeAllCardTypes(game);
@@ -537,6 +548,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         super.removeAllCardTypes(game);
     }
 
+    @Override
     public void addSubType(SubType... subTypes) {
         if (backFace != null) {
             backFace.addSubType(subTypes);
@@ -544,6 +556,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         super.addSubType(subTypes);
     }
 
+    @Override
     public void removeAllSubTypes(Game game, SubTypeSet subTypeSet) {
         if (backFace != null) {
             backFace.removeAllSubTypes(game, subTypeSet);
@@ -551,6 +564,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         super.removeAllSubTypes(game, subTypeSet);
     }
 
+    @Override
     public void removeAllSubTypes(Game game) {
         if (backFace != null) {
             backFace.removeAllSubTypes(game);
@@ -558,6 +572,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         super.removeAllSubTypes(game);
     }
 
+    @Override
     public void retainAllLandSubTypes(Game game) {
         if (backFace != null) {
             backFace.retainAllLandSubTypes(game);
@@ -565,6 +580,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         super.retainAllLandSubTypes(game);
     }
 
+    @Override
     public void removeAllCreatureTypes(Game game) {
         if (backFace != null) {
             backFace.removeAllCreatureTypes(game);
@@ -572,6 +588,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         super.removeAllCreatureTypes(game);
     }
 
+    @Override
     public void removeAllCreatureTypes() {
         if (backFace != null) {
             backFace.removeAllCreatureTypes();
@@ -579,6 +596,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         super.removeAllCreatureTypes();
     }
 
+    @Override
     public void removeSubType(Game game, SubType subType) {
         if (backFace != null) {
             backFace.removeSubType(game, subType);
@@ -586,6 +604,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         super.removeSubType(game, subType);
     }
 
+    @Override
     public void setIsAllCreatureTypes(boolean value) {
         if (backFace != null) {
             backFace.setIsAllCreatureTypes(value);
@@ -593,6 +612,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         super.setIsAllCreatureTypes(value);
     }
 
+    @Override
     public void removePTCDA() {
         if (backFace != null) {
             backFace.removePTCDA();
@@ -600,13 +620,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         super.removePTCDA();
     }
 
-    public String getName() {
-        if (backFace != null) {
-            backFace.getName();
-        }
-        return super.getName();
-    }
-
+    @Override
     public void setName(String name) {
         if (backFace != null) {
             backFace.setName(name);
@@ -614,6 +628,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         super.setName(name);
     }
 
+    @Override
     public void setColor(ObjectColor color) {
         if (backFace != null) {
             backFace.setColor(color);

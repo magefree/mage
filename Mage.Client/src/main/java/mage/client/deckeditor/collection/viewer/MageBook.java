@@ -395,8 +395,10 @@ public class MageBook extends JComponent {
             draftRating.setHorizontalAlignment(SwingConstants.CENTER);
             draftRating.setFont(jLayeredPane.getFont().deriveFont(jLayeredPane.getFont().getStyle() | Font.BOLD));
             if (card.getOriginalCard() != null) {
+                // card
                 draftRating.setText("draft rating: " + RateCard.rateCard(card.getOriginalCard(), null));
             } else {
+                // token
                 draftRating.setText("");
             }
             jLayeredPane.add(draftRating);

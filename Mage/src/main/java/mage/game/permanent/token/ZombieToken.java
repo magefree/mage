@@ -41,22 +41,22 @@ public final class ZombieToken extends TokenImpl {
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
 
-        if (getOriginalExpansionSetCode().equals("ISD")) {
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("ISD")) {
             this.setTokenType(RandomUtil.nextInt(3) + 1);
         }
-        if (getOriginalExpansionSetCode().equals("C14")) {
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C14")) {
             this.setTokenType(1);
         }
-        if (getOriginalExpansionSetCode().equals("EMN")) {
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("EMN")) {
             this.setTokenType(RandomUtil.nextInt(3) + 1);
         }
-        if (getOriginalExpansionSetCode().equals("C19")) {
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C19")) {
             this.setTokenType(RandomUtil.nextInt(2) + 1);
         }
-        if (getOriginalExpansionSetCode().equals("MIC")) {
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("MIC")) {
             this.setTokenType(1);
         }
-        if (getOriginalExpansionSetCode().equals("VOW")) {
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("VOW")) {
             this.setTokenType(1);
         }
     }

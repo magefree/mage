@@ -1,4 +1,3 @@
-
 package mage.game.permanent.token;
 
 import mage.MageObject;

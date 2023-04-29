@@ -60,10 +60,9 @@ public class TransformAbility extends SimpleStaticAbility {
         for (SuperType type : sourceCard.getSuperType()) {
             permanent.addSuperType(type);
         }
-        if (sourceCard instanceof Card) {
-            permanent.setExpansionSetCode(((Card) sourceCard).getExpansionSetCode());
-        }
+
         CardUtil.copySetAndCardNumber(permanent, sourceCard);
+
         permanent.getAbilities().clear();
         for (Ability ability : sourceCard.getAbilities()) {
             // source == null -- call from init card (e.g. own abilities)

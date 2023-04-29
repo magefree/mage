@@ -11,7 +11,7 @@ import java.util.Arrays;
  */
 public class Phyrexian00Token extends TokenImpl {
 
-    Phyrexian00Token() {
+    public Phyrexian00Token() {
         super("Phyrexian Token", "0/0 Phyrexian artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);

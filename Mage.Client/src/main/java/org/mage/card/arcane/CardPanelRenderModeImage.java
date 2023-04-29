@@ -362,6 +362,8 @@ public class CardPanelRenderModeImage extends CardPanel {
         int cardXOffset = 0;
         int cardYOffset = 0;
 
+        CardView cardView = getGameCard();
+
         // workaround to fix a rare NPE error with image loading
         // reason: panel runs image load in another thread and that thread can be completed before top panel init, see updateArtImage
         if (getTopPanelRef() == null) {
@@ -381,7 +383,7 @@ public class CardPanelRenderModeImage extends CardPanel {
         imagePanel.setLocation(realCardSize.x, realCardSize.y);
         imagePanel.setSize(realCardSize.width, realCardSize.height);
 
-        if (hasSickness() && getGameCard().isCreature() && isPermanent()) {
+        if (hasSickness() && cardView.isCreature() && isPermanent()) {
             overlayPanel.setLocation(realCardSize.x, realCardSize.y);
             overlayPanel.setSize(realCardSize.width, realCardSize.height);
         } else {
@@ -441,10 +443,27 @@ public class CardPanelRenderModeImage extends CardPanel {
             fullImageText.setBounds(titleText.getX(), titleText.getY(), titleText.getBounds().width, titleText.getBounds().height);
 
             // PT (font as title)
-            if (getGameCard().getOriginalCard() != null) {
-                prepareGlowFont(ptText1, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), getGameCard().getOriginalCard().getPower(), false);
+            if (cardView.showPT()) {
+
+                // real PT info
+                MageInt currentPower;
+                MageInt currentToughness;
+                if (cardView.getOriginalCard() != null) {
+                    // card
+                    currentPower = cardView.getOriginalCard().getPower();
+                    currentToughness = cardView.getOriginalCard().getToughness();
+                } else if (cardView.getOriginalToken() != null) {
+                    // token
+                    currentPower = cardView.getOriginalToken().getPower();
+                    currentToughness = cardView.getOriginalToken().getToughness();
+                } else {
+                    currentPower = null;
+                    currentToughness = null;
+                }
+
+                prepareGlowFont(ptText1, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), currentPower, false);
                 prepareGlowFont(ptText2, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), null, false);
-                prepareGlowFont(ptText3, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), getGameCard().getOriginalCard().getToughness(), CardRendererUtils.isCardWithDamage(getGameCard()));
+                prepareGlowFont(ptText3, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), currentToughness, CardRendererUtils.isCardWithDamage(cardView));
 
                 // right bottom corner with margin (sizes from any sample card)
                 int ptMarginRight = Math.round(64f / 672f * cardWidth);

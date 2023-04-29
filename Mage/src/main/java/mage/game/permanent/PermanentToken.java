@@ -139,7 +139,7 @@ public class PermanentToken extends PermanentImpl {
     }
 
     @Override
-    protected MageObject getOtherFace() {
+    public MageObject getOtherFace() {
         return this.transformed ? token : this.token.getBackFace();
     }
 

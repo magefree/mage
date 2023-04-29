@@ -2,10 +2,7 @@ package mage.client.dialog;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.icon.CardIconImpl;
-import mage.abilities.icon.CardIconOrder;
-import mage.abilities.icon.CardIconPosition;
-import mage.abilities.icon.CardIconType;
+import mage.abilities.icon.*;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.*;
 import mage.cards.decks.Deck;
@@ -34,6 +31,11 @@ import mage.game.mulligan.MulliganType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentMeld;
+import mage.game.permanent.PermanentToken;
+import mage.game.permanent.token.IncubatorToken;
+import mage.game.permanent.token.Phyrexian00Token;
+import mage.game.permanent.token.Token;
+import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
 import mage.players.StubPlayer;
 import mage.util.CardUtil;
@@ -47,7 +49,6 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.*;
-import mage.abilities.icon.CardIconColor;
 
 /**
  * App GUI: debug only, testing card renders and manipulations
@@ -75,7 +76,7 @@ public class TestCardRenderDialog extends MageDialog {
         // init themes list
         this.comboTheme.setModel(new DefaultComboBoxModel(ThemeType.values()));
         this.comboTheme.setSelectedItem(PreferencesDialog.getCurrentTheme());
-        
+
         // init card icon colors list
         this.comboCardColor.setModel(new DefaultComboBoxModel(CardIconColor.values()));
         this.comboCardColor.setSelectedItem(CardIconColor.DEFAULT);
@@ -210,6 +211,27 @@ public class TestCardRenderDialog extends MageDialog {
         return planeView;
     }
 
+    private CardView createToken(Game game, UUID controllerId, Token token, String code, int damage, boolean tapped, boolean transformed) {
+        Token sourceToken = token.copy();
+        sourceToken.setExpansionSetCodeForImage(code);
+        sourceToken.setOriginalExpansionSetCode(code);
+
+        PermanentToken perm = new PermanentToken(sourceToken, controllerId, game);
+        Set<Card> cardsList = new HashSet<>();
+        cardsList.add(perm);
+        game.loadCards(cardsList, controllerId);
+
+        if (damage > 0) perm.damage(damage, controllerId, null, game);
+        perm.removeSummoningSickness();
+        perm.setTapped(tapped);
+        if (perm.isTransformable() && transformed) {
+            perm.setTransformed(true);
+        }
+        PermanentView cardView = new PermanentView(perm, game.getCard(perm.getId()), controllerId, game);
+        //cardView.setInViewerOnly(true); // ???
+        return cardView;
+    }
+
     private void reloadCards() {
         // apply selected theme (warning, it will be applied for all app, so can be bugged in other dialogs - but it's ok for debug)
         PreferencesDialog.setCurrentTheme((ThemeType) comboTheme.getSelectedItem());
@@ -289,7 +311,8 @@ public class TestCardRenderDialog extends MageDialog {
         }
 
         List<CardView> cardViews = new ArrayList<>();
-        /* // test morphed
+
+        /* test morphed
         cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "263", 0, 0, 0, false, null)); // mountain
         cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "185", 0, 0, 0, true, null)); // Judith, the Scourge Diva
         cardViews.add(createHandCard(game, playerYou.getId(), "DIS", "153")); // Odds // Ends (split card)
@@ -299,7 +322,7 @@ public class TestCardRenderDialog extends MageDialog {
         cardViews.add(createFaceDownCard(game, playerOpponent.getId(), "ELD", "38", false, true, false)); // manifested
         //*/
 
-        /* //test emblems
+        /* test emblems
         cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "78", 125, 89, 0, false, false, null)); // Noxious Groodion
         cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "14", 3, 5, 2, false, false, null)); // Knight of Sorrows
         cardViews.add(createPermanentCard(game, playerYou.getId(), "DKA", "140", 5, 2, 2, false, false, null)); // Huntmaster of the Fells, transforms
@@ -309,14 +332,14 @@ public class TestCardRenderDialog extends MageDialog {
         cardViews.add(createPlane(new AkoumPlane())); // Plane - Akoum
         //*/
 
-        //test split, transform and mdf in hands
+        /* test split, transform and mdf in hands
         cardViews.add(createHandCard(game, playerYou.getId(), "SOI", "97")); // Accursed Witch
-        //cardViews.add(createHandCard(game, playerYou.getId(), "UMA", "225")); // Fire // Ice
-        //cardViews.add(createHandCard(game, playerYou.getId(), "ELD", "14")); // Giant Killer
-        //cardViews.add(createHandCard(game, playerYou.getId(), "ZNR", "134")); // Akoum Warrior
+        cardViews.add(createHandCard(game, playerYou.getId(), "UMA", "225")); // Fire // Ice
+        cardViews.add(createHandCard(game, playerYou.getId(), "ELD", "14")); // Giant Killer
+        cardViews.add(createHandCard(game, playerYou.getId(), "ZNR", "134")); // Akoum Warrior
         //*/
 
-        /*// test meld cards in hands and battlefield
+        /* test meld cards in hands and battlefield
         cardViews.add(createHandCard(game, playerYou.getId(), "EMN", "204")); // Hanweir Battlements
         cardViews.add(createHandCard(game, playerYou.getId(), "EMN", "130a")); // Hanweir Garrison
         cardViews.add(createHandCard(game, playerYou.getId(), "EMN", "130b")); // Hanweir, the Writhing Township
@@ -325,7 +348,7 @@ public class TestCardRenderDialog extends MageDialog {
         cardViews.add(createPermanentCard(game, playerYou.getId(), "EMN", "130b", 1, 1, 0, false, false, null)); // Hanweir, the Writhing Township
         //*/
 
-        // test variant double faced cards (main and second sides must be same pair)
+        /* test variant double faced cards (main and second sides must be same pair)
         // Jacob Hauken, Inspector -> Hauken's Insight
         cardViews.add(createHandCard(game, playerYou.getId(), "VOW", "65"));
         cardViews.add(createHandCard(game, playerYou.getId(), "VOW", "320"));
@@ -335,14 +358,23 @@ public class TestCardRenderDialog extends MageDialog {
         cardViews.add(createPermanentCard(game, playerYou.getId(), "VOW", "332", 1, 1, 0, false, false, null));
         //*/
 
-        /*//test card icons
+        /* test card icons
         cardViews.add(createHandCard(game, playerYou.getId(), "POR", "169")); // Grizzly Bears
         cardViews.add(createHandCard(game, playerYou.getId(), "DKA", "140")); // Huntmaster of the Fells, transforms
         cardViews.add(createPermanentCard(game, playerYou.getId(), "DKA", "140", 3, 3, 1, false, true, additionalIcons)); // Huntmaster of the Fells, transforms
         cardViews.add(createPermanentCard(game, playerYou.getId(), "MB1", "401", 1, 1, 0, false, false, additionalIcons)); // Hinterland Drake
         //cardViews.add(createPermanentCard(game, playerYou.getId(), "MB1", "1441", 1, 1, 0, true, false, additionalIcons)); // Kathari Remnant
         //cardViews.add(createPermanentCard(game, playerYou.getId(), "KHM", "50", 1, 1, 0, true, false, additionalIcons)); // Cosima, God of the Voyage
+        //*/
 
+        //* test tokens
+        // normal
+        cardViews.add(createToken(game, playerYou.getId(), new ZombieToken(), "10E", 0, false, false));
+        cardViews.add(createToken(game, playerYou.getId(), new ZombieToken(), "XXX", 1, false, false));
+        cardViews.add(createToken(game, playerYou.getId(), new ZombieToken(), null, 0, false, false));
+        // double faced
+        cardViews.add(createToken(game, playerYou.getId(), new IncubatorToken(), "MOM", 0, false, false));
+        cardViews.add(createToken(game, playerYou.getId(), new Phyrexian00Token(), "MOM", 1, false, true));
         //*/
 
         // duplicate cards
@@ -371,7 +403,7 @@ public class TestCardRenderDialog extends MageDialog {
                 if (main.getGameCard() instanceof PermanentView) {
                     // new settings must be as a new copy -- it would activate the animations
                     PermanentView oldPermanent = (PermanentView) main.getGameCard();
-                    PermanentView newPermament = new PermanentView(
+                    PermanentView newPermament = new PermanentView( // ???
                             (Permanent) oldPermanent.getOriginalCard(),
                             game.getCard(oldPermanent.getOriginalCard().getId()),
                             UUID.randomUUID(),
@@ -454,7 +486,7 @@ public class TestCardRenderDialog extends MageDialog {
 
         labelRenderMode.setText("Render mode:");
 
-        comboRenderMode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MTGO", "Image" }));
+        comboRenderMode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"MTGO", "Image"}));
         comboRenderMode.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboRenderModeItemStateChanged(evt);
@@ -478,7 +510,7 @@ public class TestCardRenderDialog extends MageDialog {
 
         labelCardIconsPosition.setText("Card icons position:");
 
-        comboCardIconsPosition.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TOP", "LEFT", "RIGHT", "BOTTOM", "CORNER_TOP_LEFT", "CORNER_TOP_RIGHT", "CORNER_BOTTOM_LEFT", "CORNER_BOTTOM_RIGHT" }));
+        comboCardIconsPosition.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"TOP", "LEFT", "RIGHT", "BOTTOM", "CORNER_TOP_LEFT", "CORNER_TOP_RIGHT", "CORNER_BOTTOM_LEFT", "CORNER_BOTTOM_RIGHT"}));
         comboCardIconsPosition.setSelectedIndex(1);
         comboCardIconsPosition.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -506,7 +538,7 @@ public class TestCardRenderDialog extends MageDialog {
 
         labelCardIconsOrder.setText("Order:");
 
-        comboCardIconsOrder.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "START", "CENTER", "END" }));
+        comboCardIconsOrder.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"START", "CENTER", "END"}));
         comboCardIconsOrder.setSelectedIndex(2);
         comboCardIconsOrder.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -517,41 +549,41 @@ public class TestCardRenderDialog extends MageDialog {
         javax.swing.GroupLayout panelCardIconsLayout = new javax.swing.GroupLayout(panelCardIcons);
         panelCardIcons.setLayout(panelCardIconsLayout);
         panelCardIconsLayout.setHorizontalGroup(
-            panelCardIconsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCardIconsLayout.createSequentialGroup()
-                .addComponent(labelCardIconsPosition)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(comboCardIconsPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labelCardIconsOrder)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(comboCardIconsOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labelCardIconsMaxVisible)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(spinnerCardIconsMaxVisible, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labelCardIconsAdditionalAmount)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(spinnerCardIconsAdditionalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(305, Short.MAX_VALUE))
+                panelCardIconsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelCardIconsLayout.createSequentialGroup()
+                                .addComponent(labelCardIconsPosition)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboCardIconsPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelCardIconsOrder)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboCardIconsOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelCardIconsMaxVisible)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(spinnerCardIconsMaxVisible, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelCardIconsAdditionalAmount)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(spinnerCardIconsAdditionalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(305, Short.MAX_VALUE))
         );
         panelCardIconsLayout.setVerticalGroup(
-            panelCardIconsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCardIconsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(comboCardIconsPosition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(labelCardIconsPosition)
-                .addComponent(labelCardIconsMaxVisible)
-                .addComponent(spinnerCardIconsMaxVisible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(labelCardIconsAdditionalAmount)
-                .addComponent(spinnerCardIconsAdditionalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(labelCardIconsOrder)
-                .addComponent(comboCardIconsOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                panelCardIconsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelCardIconsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(comboCardIconsPosition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(labelCardIconsPosition)
+                                .addComponent(labelCardIconsMaxVisible)
+                                .addComponent(spinnerCardIconsMaxVisible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(labelCardIconsAdditionalAmount)
+                                .addComponent(spinnerCardIconsAdditionalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(labelCardIconsOrder)
+                                .addComponent(comboCardIconsOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         labelTheme.setText("Theme:");
 
-        comboTheme.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "loading..." }));
+        comboTheme.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"loading..."}));
         comboTheme.setToolTipText("WARNING, selected theme will be applied to full app, not render dialog only");
         comboTheme.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -561,7 +593,7 @@ public class TestCardRenderDialog extends MageDialog {
 
         labelCardColor.setText("Card color:");
 
-        comboCardColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "loading..." }));
+        comboCardColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"loading..."}));
         comboCardColor.setToolTipText("");
         comboCardColor.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -572,62 +604,62 @@ public class TestCardRenderDialog extends MageDialog {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelCardIcons, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cardsPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(buttonReloadCards)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelRenderMode)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboRenderMode, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelTheme)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboTheme, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelCardColor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboCardColor, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelSize)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sliderSize, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(checkBoxGenerateManyCards)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(panelCardIcons, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cardsPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(buttonReloadCards)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(labelRenderMode)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(comboRenderMode, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(labelTheme)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(comboTheme, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(labelCardColor)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(comboCardColor, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(labelSize)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(sliderSize, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(checkBoxGenerateManyCards)
+                                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(buttonReloadCards)
-                        .addComponent(labelRenderMode)
-                        .addComponent(comboRenderMode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(labelSize)
-                        .addComponent(comboTheme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(labelTheme)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(comboCardColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelCardColor)))
-                    .addComponent(sliderSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(checkBoxGenerateManyCards))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelCardIcons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cardsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(buttonReloadCards)
+                                                .addComponent(labelRenderMode)
+                                                .addComponent(comboRenderMode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(labelSize)
+                                                .addComponent(comboTheme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(labelTheme)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(comboCardColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(labelCardColor)))
+                                        .addComponent(sliderSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(checkBoxGenerateManyCards))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panelCardIcons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cardsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
         );
 
         pack();
