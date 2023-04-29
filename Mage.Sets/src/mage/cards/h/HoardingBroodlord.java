@@ -88,7 +88,7 @@ class HoardingBroodlordEffect extends OneShotEffect {
         }
         TargetCardInLibrary target = new TargetCardInLibrary();
         player.searchLibrary(target, source, game);
-        Card card = player.getLibrary().getCard(target.getTargetController(), game);
+        Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
         player.shuffleLibrary(source, game);
         if (card != null) {
             player.moveCards(card, Zone.EXILED, source, game);
