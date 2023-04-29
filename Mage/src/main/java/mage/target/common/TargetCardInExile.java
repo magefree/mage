@@ -1,4 +1,4 @@
-upackage mage.target.common;
+package mage.target.common;
 
 import mage.abilities.Ability;
 import mage.cards.Card;
