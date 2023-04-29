@@ -9,7 +9,6 @@ import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -22,7 +21,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.WallToken;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -43,6 +41,7 @@ public final class BasaltGolem extends CardImpl {
 
         // Whenever Basalt Golem becomes blocked by a creature, that creature's controller sacrifices it at end of combat. If the player does, they put a 0/2 colorless Wall artifact creature token with defender onto the battlefield.
         Effect effect = new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new BasaltGolemEffect()), true);
+        effect.setText("that creature's controller sacrifices it at end of combat. If the player does, they put a 0/2 colorless Wall artifact creature token with defender onto the battlefield.");
         this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(effect, false));
     }
 
@@ -59,7 +58,7 @@ public final class BasaltGolem extends CardImpl {
 class BasaltGolemEffect extends OneShotEffect {
     BasaltGolemEffect() {
         super(Outcome.DestroyPermanent);
-        staticText = "that creature's controller sacrifices it at end of combat. If the player does, they create a 0/2 colorless Wall artifact creature token with defender.";
+        staticText = "that creature's controller sacrifices it. If the player does, they create a 0/2 colorless Wall artifact creature token with defender.";
     }
 
     private BasaltGolemEffect(final BasaltGolemEffect effect) {
@@ -74,15 +73,16 @@ class BasaltGolemEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
+        if (creature == null)
+            return false;
+
         Player player = game.getPlayer(creature.getControllerId());
-        if (player == null || creature == null)
+        if (player == null)
             return false;
 
         if (!creature.sacrifice(source, game))
             return false;
 
-        Effect effect = new CreateTokenTargetEffect(new WallToken());
-        effect.setTargetPointer(new FixedTarget(player.getId(), game));
-        return effect.apply(game, source);
+        return new WallToken().putOntoBattlefield(1, game, source, player.getId());
     }
 }
