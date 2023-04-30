@@ -78,7 +78,7 @@ class RampagingGrowthEffect extends OneShotEffect {
                     new CreatureToken(4, 3, "", SubType.INSECT
                     ).withAbility(ReachAbility.getInstance()).withAbility(HasteAbility.getInstance()),
                     false, true, Duration.EndOfTurn
-            ).setTargetPointer(new FixedTarget(permanent, game)), source);
+            ).withDurationRuleAtStart(true).setTargetPointer(new FixedTarget(permanent, game)), source);
         }
         player.shuffleLibrary(source, game);
         return true;

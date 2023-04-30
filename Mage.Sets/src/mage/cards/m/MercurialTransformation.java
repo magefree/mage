@@ -77,7 +77,7 @@ class MercurialTransformationEffect extends OneShotEffect {
         }
         game.addEffect(new BecomesCreatureTargetEffect(
                 token, true, false, Duration.EndOfTurn
-        ), source);
+        ).withDurationRuleAtStart(true), source);
         return true;
     }
 }

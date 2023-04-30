@@ -43,14 +43,14 @@ public final class KamahlHeartOfKrosa extends CardImpl {
         this.addAbility(ability);
 
         // {1}{G}: Until end of turn, target land you control becomes a 1/1 Elemental creature with vigilance, indestructible, and haste. It's still a land.
-        ability = new SimpleActivatedAbility(new BecomesCreatureTargetEffect(new CreatureToken(
-                1, 1, "1/1 Elemental creature with vigilance, indestructible, and haste"
-        ).withSubType(SubType.ELEMENTAL)
-                .withAbility(VigilanceAbility.getInstance())
-                .withAbility(IndestructibleAbility.getInstance())
-                .withAbility(HasteAbility.getInstance()),
+        ability = new SimpleActivatedAbility(new BecomesCreatureTargetEffect(
+                new CreatureToken(1, 1, "1/1 Elemental creature with vigilance, indestructible, and haste")
+                        .withSubType(SubType.ELEMENTAL)
+                        .withAbility(VigilanceAbility.getInstance())
+                        .withAbility(IndestructibleAbility.getInstance())
+                        .withAbility(HasteAbility.getInstance()),
                 false, true, Duration.EndOfTurn
-        ), new ManaCostsImpl<>("{1}{G}"));
+        ).withDurationRuleAtStart(true), new ManaCostsImpl<>("{1}{G}"));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));
         this.addAbility(ability);
 

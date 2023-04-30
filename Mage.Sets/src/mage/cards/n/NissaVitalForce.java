@@ -44,7 +44,7 @@ public final class NissaVitalForce extends CardImpl {
         LoyaltyAbility ability = new LoyaltyAbility(new UntapTargetEffect(), 1);
         ability.addEffect(new BecomesCreatureTargetEffect(
                 new NissaVitalForceToken(), false, true, Duration.UntilYourNextTurn
-        ).setText("Until your next turn, it becomes a 5/5 Elemental creature with haste. It's still a land"));
+        ).withDurationRuleAtStart(true).setText("Until your next turn, it becomes a 5/5 Elemental creature with haste. It's still a land"));
         ability.addTarget(new TargetLandPermanent(filter));
         this.addAbility(ability);
 

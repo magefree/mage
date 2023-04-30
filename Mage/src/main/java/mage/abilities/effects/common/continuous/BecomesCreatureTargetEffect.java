@@ -25,6 +25,8 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
     protected boolean removeSubtypes = false;
     protected boolean loseOtherCardTypes;
 
+    protected boolean durationRuleAtStart = false; // put duration rule to the start of the rules instead end
+
     public BecomesCreatureTargetEffect(Token token, boolean loseAllAbilities, boolean stillALand, Duration duration) {
         this(token, loseAllAbilities, stillALand, duration, false);
     }
@@ -68,6 +70,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
         this.keepAbilities = effect.keepAbilities;
         this.loseOtherCardTypes = effect.loseOtherCardTypes;
         this.dependencyTypes.add(DependencyType.BecomeCreature);
+        this.durationRuleAtStart = effect.durationRuleAtStart;
     }
 
     @Override
@@ -172,34 +175,54 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                 || layer == Layer.TextChangingEffects_3;
     }
 
+    public BecomesCreatureTargetEffect withDurationRuleAtStart(boolean durationRuleAtStart) {
+        this.durationRuleAtStart = durationRuleAtStart;
+        return this;
+    }
+
     @Override
     public String getText(Mode mode) {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
+        if (durationRuleAtStart && duration != Duration.Custom) {
+            sb.append(duration.toString());
+            sb.append(", ");
+        }
+
         Target target = mode.getTargets().get(0);
-        if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
-            sb.append("up to ");
-            if (target.getMaxNumberOfTargets() == 1) {
-                sb.append("one ");
+        if (target.getMaxNumberOfTargets() != Integer.MAX_VALUE) {
+            if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
+                sb.append("up to ");
+                if (target.getMaxNumberOfTargets() == 1) {
+                    sb.append("one ");
+                }
             }
         }
+
         if (target.getMaxNumberOfTargets() > 1) {
             sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName());
             if (loseAllAbilities) {
-                sb.append(" lose all their abilities and ");
+                sb.append(" lose all their abilities and");
             }
-            sb.append(" each become ");
+            if (target.getMaxNumberOfTargets() != Integer.MAX_VALUE) {
+                sb.append(" each");
+            }
+            sb.append(" become ");
         } else {
             sb.append("target ").append(target.getTargetName());
             if (loseAllAbilities && !keepAbilities) {
-                sb.append(" loses all abilities and ");
+                sb.append(" loses all abilities and");
             }
             sb.append(" becomes a ");
         }
         sb.append(token.getDescription());
-        sb.append(' ').append(duration.toString());
+
+        if (!durationRuleAtStart && duration != Duration.Custom) {
+            sb.append(' ').append(duration.toString());
+        }
+
         if (addStillALandText) {
             if (!sb.toString().endsWith("\" ")) {
                 sb.append(". ");
