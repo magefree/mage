@@ -66,7 +66,7 @@ public final class GideonOfTheTrials extends CardImpl {
 class GideonOfTheTrialsToken extends TokenImpl {
 
     public GideonOfTheTrialsToken() {
-        super("", "a 4/4 Human Soldier creature with indestructible");
+        super("", "4/4 Human Soldier creature with indestructible");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.HUMAN);
         subtype.add(SubType.SOLDIER);

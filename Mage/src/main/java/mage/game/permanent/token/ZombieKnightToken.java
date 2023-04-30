@@ -17,7 +17,7 @@ public final class ZombieKnightToken extends TokenImpl {
     }
     
     public ZombieKnightToken(){
-        super("Zombie Knight Token", "a 2/2 black Zombie Knight creature token with menace");
+        super("Zombie Knight Token", "2/2 black Zombie Knight creature token with menace");
         availableImageSetCodes = tokenImageSets;
         color.setBlack(true);
         cardType.add(CardType.CREATURE);

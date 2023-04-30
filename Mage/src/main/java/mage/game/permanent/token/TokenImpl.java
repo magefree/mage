@@ -54,6 +54,11 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     public TokenImpl(String name, String description) {
         this.name = name;
         this.description = description;
+
+        // verify check: indefinite article
+        if (description.startsWith("a ") || description.startsWith("an ")) {
+            throw new IllegalArgumentException("Wrong code usage: don't use indefinite article here - " + description);
+        }
     }
 
     protected TokenImpl(final TokenImpl token) {
