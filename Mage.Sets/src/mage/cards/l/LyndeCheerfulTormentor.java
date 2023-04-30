@@ -3,6 +3,7 @@ package mage.cards.l;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -90,7 +91,7 @@ class LyndeCheerfulTormentorCurseDiesTriggeredAbility extends TriggeredAbilityIm
         if (zEvent.isDiesEvent()) {
             Permanent permanent = zEvent.getTarget();
             if (permanent != null && permanent.hasSubtype(SubType.CURSE, game) && permanent.isOwnedBy(controllerId)) {
-                getEffects().setValue("curse", zEvent.getTargetId());
+                getEffects().setValue("curse", new MageObjectReference(game.getCard(zEvent.getTargetId()), game));
                 return true;
             }
         }
@@ -127,7 +128,7 @@ class LyndeCheerfulTormentorReturnCurseEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Card curse = game.getCard((UUID)getValue("curse"));
+        Card curse = ((MageObjectReference) getValue("curse")).getCard(game);
         if (controller != null && curse != null) {
             game.getState().setValue("attachTo:" + curse.getId(), controller.getId());
             controller.moveCards(curse, Zone.BATTLEFIELD, source, game);
