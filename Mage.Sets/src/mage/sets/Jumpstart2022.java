@@ -62,6 +62,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Assembly-Worker", 755, Rarity.COMMON, mage.cards.a.AssemblyWorker.class));
         cards.add(new SetCardInfo("Attended Healer", 152, Rarity.UNCOMMON, mage.cards.a.AttendedHealer.class));
         cards.add(new SetCardInfo("Augury Owl", 273, Rarity.COMMON, mage.cards.a.AuguryOwl.class));
+        cards.add(new SetCardInfo("Auntie Blyte, Bad Influence", 30, Rarity.MYTHIC, mage.cards.a.AuntieBlyteBadInfluence.class));
         cards.add(new SetCardInfo("Auramancer", 153, Rarity.COMMON, mage.cards.a.Auramancer.class));
         cards.add(new SetCardInfo("Avalanche Caller", 274, Rarity.UNCOMMON, mage.cards.a.AvalancheCaller.class));
         cards.add(new SetCardInfo("Avenger of Zendikar", 629, Rarity.MYTHIC, mage.cards.a.AvengerOfZendikar.class));
