@@ -95,7 +95,7 @@ class HaktosTheUnscarredChooseEffect extends OneShotEffect {
         }
         int number = 2 + RandomUtil.nextInt(3);
         game.informPlayers(permanent.getLogName() + ": " + controller.getLogName() + " has chosen " + number + " at random");
-        game.getState().setValue(permanent.getId() + "" + (permanent.getZoneChangeCounter(game) + 1) + "_haktos_number", number);
+        game.getState().setValue(permanent.getId() + "" + source.getSourceObjectZoneChangeCounter() + "_haktos_number", number);
         permanent.addInfo("chosen number", CardUtil.addToolTipMarkTags("Chosen number: " + number), game);
         return true;
     }
