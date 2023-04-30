@@ -588,6 +588,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Ram Through", 91, Rarity.COMMON, mage.cards.r.RamThrough.class));
         cards.add(new SetCardInfo("Rambunctious Mutt", 231, Rarity.COMMON, mage.cards.r.RambunctiousMutt.class));
         cards.add(new SetCardInfo("Rampaging Baloths", 715, Rarity.RARE, mage.cards.r.RampagingBaloths.class));
+        cards.add(new SetCardInfo("Rampaging Growth", 43, Rarity.UNCOMMON, mage.cards.r.RampagingGrowth.class));
         cards.add(new SetCardInfo("Rapacious Dragon", 80, Rarity.UNCOMMON, mage.cards.r.RapaciousDragon.class));
         cards.add(new SetCardInfo("Ravenous Giant", 585, Rarity.UNCOMMON, mage.cards.r.RavenousGiant.class));
         cards.add(new SetCardInfo("Raze the Effigy", 586, Rarity.COMMON, mage.cards.r.RazeTheEffigy.class));
