@@ -14,6 +14,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.PermanentToken;
+import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
 
@@ -52,6 +53,7 @@ class PsychomancerTriggeredAbility extends TriggeredAbilityImpl {
     PsychomancerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1));
         this.addEffect(new GainLifeEffect(1).concatBy("and"));
+        this.addTarget(new TargetOpponent());
         this.setTriggerPhrase("Whenever {this} or another nontoken artifact you control is put " +
                 "into a graveyard from the battlefield or is put into exile from the battlefield, ");
         this.withFlavorWord("Harbinger of Despair");

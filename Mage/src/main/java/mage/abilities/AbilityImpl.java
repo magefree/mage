@@ -2,6 +2,7 @@ package mage.abilities;
 
 import mage.MageIdentifier;
 import mage.MageObject;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.*;
 import mage.abilities.costs.common.PayLifeCost;
@@ -821,7 +822,7 @@ public abstract class AbilityImpl implements Ability {
             rule = ruleStart;
         }
         String prefix;
-        if (this instanceof TriggeredAbility) {
+        if (this instanceof TriggeredAbility || this instanceof EntersBattlefieldAbility) {
             prefix = null;
         } else if (abilityWord != null) {
             prefix = abilityWord.formatWord();

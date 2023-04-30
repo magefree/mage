@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class TyranidGargoyleToken extends TokenImpl {
 
     public TyranidGargoyleToken() {
-        super("Tyranid Gargoyle Token", "1/1 blue Tyranid creature token with flying");
+        super("Tyranid Gargoyle Token", "1/1 blue Tyranid Gargoyle creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.TYRANID);

@@ -13,7 +13,7 @@ import java.util.Arrays;
 public final class WhiteAstartesWarriorToken extends TokenImpl {
 
     public WhiteAstartesWarriorToken() {
-        super("Astartes Warrior Token", "2/2 white Astartes Warrior creature tokens with vigilance");
+        super("Astartes Warrior Token", "2/2 white Astartes Warrior creature token with vigilance");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.ASTARTES);

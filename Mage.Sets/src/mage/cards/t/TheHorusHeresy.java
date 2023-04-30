@@ -60,7 +60,7 @@ public final class TheHorusHeresy extends CardImpl {
         });
 
         // II -- Draw a card for each creature you control but don't own.
-        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, new DrawCardSourceControllerEffect(xValue));
+        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_II, new DrawCardSourceControllerEffect(xValue));
 
         // III -- Starting with you, each player chooses a creature. Destroy each creature chosen this way.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new TheHorusHeresyDestroyEffect());
