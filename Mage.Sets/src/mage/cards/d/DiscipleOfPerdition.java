@@ -34,10 +34,10 @@ public final class DiscipleOfPerdition extends CardImpl {
 
         // When Disciple of Perdition dies, choose one. If you have exactly 13 life, you may choose both.
         // * You draw a card and you lose 1 life.
-        Ability ability = new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), false);
-        ability.getModes().setChooseText("Choose one. If you have exactly 13 life, you may choose both.");
+        Ability ability = new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1, "you"), false);
+        ability.getModes().setChooseText("choose one. If you have exactly 13 life, you may choose both.");
         ability.getModes().setMoreCondition(DiscipleOfPerditionCondition.instance);
-        ability.addEffect(new LoseLifeSourceControllerEffect(1));
+        ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
 
         // * Exile target opponent's graveyard. That player loses 1 life.
         ability.addMode(new Mode(new ExileGraveyardAllTargetPlayerEffect()

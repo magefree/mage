@@ -46,7 +46,7 @@ public final class PiratedCopy extends CardImpl {
         }
 
         @Override
-        public String toString() {
+        public String getText() {
             return ", except it's a Pirate in addition to its other types and it has \"Whenever this creature " +
                     "or another creature with the same name deals combat damage to a player, you may draw a card.\"";
         }

@@ -8,7 +8,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
@@ -48,14 +48,15 @@ public final class AshcoatOfTheShadowSwarm extends CardImpl {
 
         // Whenever Ashcoat of the Shadow Swarm attacks or blocks, other Rats you control
         // get +X/+X until end of turn, where X is the number of Rats you control.
-        this.addAbility(new AttacksOrBlocksTriggeredAbility(new BoostControlledEffect(
+        this.addAbility(new AttacksOrBlocksTriggeredAbility(new BoostAllEffect(
                 xValue, xValue, Duration.EndOfTurn, filter, true
         ), false).addHint(hint));
 
         // At the beginning of your end step, you may mill four cards. If you do,
         // return up to two Rat creature cards from your graveyard to your hand.
-        Ability ability =  new BeginningOfEndStepTriggeredAbility(new MillCardsControllerEffect(4),
-                TargetController.YOU, true);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(
+                new MillCardsControllerEffect(4), TargetController.YOU, true
+        );
         ability.addEffect(new AshcoatEffect());
         this.addAbility(ability);
     }

@@ -27,7 +27,7 @@ import java.util.UUID;
 public final class KiboUktabiPrince extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("creature you control that's an Ape or Monkey");
+            = new FilterControlledCreaturePermanent("creature you control that's an Ape or a Monkey");
     private static final FilterPermanent filter2
             = new FilterArtifactPermanent("an artifact an opponent controls");
 

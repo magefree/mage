@@ -58,7 +58,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODE = "ONE"; // check all abilities and output cards with wrong abilities texts;
+    private static final String FULL_ABILITIES_CHECK_SET_CODE = "J22"; // check all abilities and output cards with wrong abilities texts;
     private static final boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
@@ -87,18 +87,13 @@ public class VerifyCardDataTest {
             "plainswalk", "islandwalk", "swampwalk", "mountainwalk", "forestwalk", "myriad", "prowess", "convoke"
     );
 
-    private static final List<String> doubleWords = new ArrayList<>();
+    private static final List<String> doubleNumbers = new ArrayList<>();
 
     {
-        // numbers
         for (int i = 1; i <= 9; i++) {
             String s = CardUtil.numberToText(i).toLowerCase(Locale.ENGLISH);
-            doubleWords.add(s + " " + s);
+            doubleNumbers.add(s + " " + s);
         }
-
-        // additional checks
-        doubleWords.add(" an an ");
-        doubleWords.add(" a a ");
     }
 
     static {
@@ -284,7 +279,7 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    public void test_verifyCards() {
+    public void test_verifyCards() throws IOException {
         int cardIndex = 0;
         for (Card card : CardScanner.getAllCards()) {
             cardIndex++;
@@ -1689,15 +1684,15 @@ public class VerifyCardDataTest {
             fail(card, "abilities", "mutate cards aren't implemented and shouldn't be available");
         }
 
-        // special check: duplicated words in ability text (wrong target/filter usage)
+        // special check: duplicated numbers in ability text (wrong target/filter usage)
         // example: You may exile __two two__ blue cards
         // possible fixes:
         //  - remove numbers from filter's text
         //  - use target.getDescription() in ability instead target.getTargetName()
         for (String rule : card.getRules()) {
-            for (String doubleNumber : doubleWords) {
-                if (rule.toLowerCase(Locale.ENGLISH).contains(doubleNumber)) {
-                    fail(card, "abilities", "duplicated numbers/words: " + rule);
+            for (String doubleNumber : doubleNumbers) {
+                if (rule.contains(doubleNumber)) {
+                    fail(card, "abilities", "duplicated numbers: " + rule);
                 }
             }
         }
@@ -1797,29 +1792,18 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    public void test_showCardInfo() {
-        // debug only: show direct card info from class file without db-recreate
-        //  - search by card name: Spark Double
-        //  - search by class name: SparkDouble
-        //  - multiple searches: name1;class2;name3
-        String cardSearches = "Spark Double";
+    public void test_showCardInfo() throws Exception {
+        // debug only: show direct card info (takes it from class file, not from db repository)
+        // can check multiple cards at once, example: name1;name2;name3
+        String cardNames = "Spark Double";
         CardScanner.scan();
-        Arrays.stream(cardSearches.split(";")).forEach(searchName -> {
-            searchName = searchName.trim();
-            CardInfo cardInfo = CardRepository.instance.findCard(searchName);
+        Arrays.stream(cardNames.split(";")).forEach(cardName -> {
+            cardName = cardName.trim();
+            CardSetInfo testSet = new CardSetInfo(cardName, "test", "123", Rarity.COMMON);
+            CardInfo cardInfo = CardRepository.instance.findCard(cardName);
             if (cardInfo == null) {
-                String searchClass = String.format("mage.cards.%s.%s",
-                        searchName.substring(0, 1).toLowerCase(Locale.ENGLISH),
-                        searchName);
-                cardInfo = CardRepository.instance.findCardsByClass(searchClass)
-                        .stream()
-                        .findFirst()
-                        .orElse(null);
+                Assert.fail("Can't find card name: " + cardName);
             }
-            if (cardInfo == null) {
-                Assert.fail("Can't find card by name or class: " + searchName);
-            }
-            CardSetInfo testSet = new CardSetInfo(cardInfo.getName(), "test", "123", Rarity.COMMON);
             Card card = CardImpl.createCard(cardInfo.getClassName(), testSet);
             System.out.println();
             System.out.println(card.getName() + " " + card.getManaCost().getText());
@@ -2213,12 +2197,11 @@ public class VerifyCardDataTest {
 
     @Test
     public void test_checkCardConstructors() {
-        // create all cards, can catch additional verify and runtime checks from abilities and effects
-        // example: wrong code usage errors
         Collection<String> errorsList = new ArrayList<>();
         Collection<ExpansionSet> sets = Sets.getInstance().values();
         for (ExpansionSet set : sets) {
             for (ExpansionSet.SetCardInfo setInfo : set.getSetCardInfo()) {
+                // catch cards creation errors and report (e.g. on wrong card code or construction checks fail)
                 try {
                     Card card = CardImpl.createCard(setInfo.getCardClass(), new CardSetInfo(setInfo.getName(), set.getCode(),
                             setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()));

@@ -42,7 +42,7 @@ public final class JaceArcaneStrategist extends CardImpl {
 
         // -7: Creatures you control can't be blocked this turn.
         this.addAbility(new LoyaltyAbility(new CantBeBlockedAllEffect(
-                StaticFilters.FILTER_CONTROLLED_CREATURE, Duration.EndOfTurn
+                StaticFilters.FILTER_CONTROLLED_CREATURES, Duration.EndOfTurn
         ), -7));
     }
 
