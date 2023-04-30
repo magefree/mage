@@ -84,7 +84,7 @@ class BaralAndKariZevTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Spell spell = game.getSpell(event.getId());
+        Spell spell = game.getSpell(event.getTargetId());
         if (spell == null || !spell.isInstantOrSorcery(game)) {
             return false;
         }
