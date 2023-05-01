@@ -31,27 +31,31 @@ public class VesselOfTheAllConsumingTest extends CardTestPlayerBase {
     public void doubleStrike() {
         String conviction = "True Conviction";
 
+        // Cards necessary for test
         addCard(Zone.BATTLEFIELD, playerA, hidetsugu);
         addCard(Zone.BATTLEFIELD, playerA, conviction);
 
+        // Flip hidetsugu
         addCounters(1, PhaseStep.PRECOMBAT_MAIN, playerA, hidetsugu, CounterType.LORE, 3);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
         checkPermanentCount("post flip", 1, PhaseStep.PRECOMBAT_MAIN, playerA, vessel, 1);
 
+        // Make vessel a 5/5
         addCounters(1, PhaseStep.PRECOMBAT_MAIN, playerA, vessel, CounterType.P1P1, 2);
         checkPT("precombat", 1, PhaseStep.PRECOMBAT_MAIN, playerA, vessel, 5, 5);
 
         // Wait until turn 3 because no haste
         attack(3, playerA, vessel, playerB);
 
-        // -5 -6 becausei t gets a +1/+1 on the first strike damage
+        // -5 -6 because it gets a +1/+1 on the first strike damage
         checkLife("post damage", 3, PhaseStep.COMBAT_DAMAGE, playerB, 20 - 5 - 6);
         checkStackObject("post damage", 3, PhaseStep.COMBAT_DAMAGE, playerA,
-                "Whenever {this} deals damage", 1);
+                "Whenever {this} deals damage to a player", 1);
 
         setStopAt(3, PhaseStep.COMBAT_DAMAGE);
         execute();
 
+        // Player B should have lost the game because they took 11 damage from vessel this turn
         assertLostTheGame(playerB);
     }
 }
