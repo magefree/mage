@@ -156,10 +156,21 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         // - use random set code
         // - use default set code
 
+        // token from a card - must use card image instead (example: Embalm ability)
         if (token.getOriginalCardNumber() != null) {
-            // token from a card, so must use card image instead (example: Embalm ability)
             return new TokenInfo(TokenType.TOKEN, token.getName(), token.getOriginalExpansionSetCode(), 0);
         }
+
+        // token from another token
+        if (token instanceof EmptyToken) {
+            if (token.getOriginalExpansionSetCode() == null) {
+                // possible reason: miss call of CardUtil.copySetAndCardNumber in copying method
+                throw new IllegalArgumentException("Wrong code usage: can't copy token without set code");
+            }
+            return new TokenInfo(TokenType.TOKEN, token.getName(), token.getOriginalExpansionSetCode(), token.getTokenType());
+        }
+
+        // token as is
 
         // source
         final String setCode;
@@ -272,8 +283,8 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
             List<Permanent> allowedTokens = new ArrayList<>();
 
             // prepare tokens to enter
+            // must use same image for all tokens
             for (int i = 0; i < amount; i++) {
-                // TODO: add random setTokenType here?
                 // use event.getPlayerId() as controller because it can be replaced by replacement effect
                 PermanentToken newPermanent = new PermanentToken(token, event.getPlayerId(), game);
                 game.getState().addCard(newPermanent);
