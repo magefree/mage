@@ -1912,9 +1912,10 @@ public abstract class GameImpl implements Game {
             newBluePrint.reset(this);
 
             //getState().addCard(permanent);
-            if (copyFromPermanent.isMorphed() || copyFromPermanent.isManifested()
+            if (copyFromPermanent.isMorphed()
+                    || copyFromPermanent.isManifested()
                     || copyFromPermanent.isFaceDown(this)) {
-                MorphAbility.setPermanentToFaceDownCreature(newBluePrint, this);
+                MorphAbility.setPermanentToFaceDownCreature(newBluePrint, copyFromPermanent, this);
             }
             newBluePrint.assignNewId();
             if (copyFromPermanent.isTransformed()) {

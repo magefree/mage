@@ -19,6 +19,8 @@ import java.util.UUID;
  */
 public class PermanentToken extends PermanentImpl {
 
+    // non-modifyable container with token characteristics
+    // this PermanentToken resets to it on each game cycle
     protected Token token;
 
     public PermanentToken(Token token, UUID controllerId, Game game) {

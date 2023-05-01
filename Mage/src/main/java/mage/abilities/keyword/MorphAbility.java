@@ -12,10 +12,13 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect.FaceDownType;
+import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.EmptyToken;
+import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.util.CardUtil;
 
@@ -134,24 +137,40 @@ public class MorphAbility extends AlternativeSourceCostsImpl {
                 morphCosts.getText() + (isMana ? ' ' : ". ") + alternativeCost.getReminderText();
     }
 
-    public static void setPermanentToFaceDownCreature(MageObject mageObject, Game game) {
-        mageObject.getPower().setModifiedBaseValue(2);
-        mageObject.getToughness().setModifiedBaseValue(2);
-        mageObject.getAbilities().clear();
-        mageObject.getColor(game).setColor(new ObjectColor());
-        mageObject.setName("");
-        mageObject.removeAllCardTypes(game);
-        mageObject.addCardType(game, CardType.CREATURE);
-        mageObject.removeAllSubTypes(game);
-        mageObject.getSuperType().clear();
-        mageObject.getManaCost().clear();
+    /**
+     * Hide all info and make it a 2/2 creature
+     *
+     * @param targetObject
+     * @param sourcePermanent source of the face down status
+     * @param game
+     */
+    public static void setPermanentToFaceDownCreature(MageObject targetObject, Permanent sourcePermanent, Game game) {
+        targetObject.getPower().setModifiedBaseValue(2);
+        targetObject.getToughness().setModifiedBaseValue(2);
+        targetObject.getAbilities().clear();
+        targetObject.getColor(game).setColor(new ObjectColor());
+        targetObject.setName("");
+        targetObject.removeAllCardTypes(game);
+        targetObject.addCardType(game, CardType.CREATURE);
+        targetObject.removeAllSubTypes(game);
+        targetObject.getSuperType().clear();
+        targetObject.getManaCost().clear();
+
+        Token emptyImage = new EmptyToken();
+        emptyImage.setOriginalExpansionSetCode("");
+        emptyImage.setExpansionSetCodeForImage("");
+        emptyImage.setOriginalCardNumber("");
 
         // TODO: add morph image here?
-        if (mageObject instanceof Permanent) {
+        if (targetObject instanceof Permanent) {
             // hide image info
-            CardUtil.copySetAndCardNumber((Permanent) mageObject, "", "", 0);
+            CardUtil.copySetAndCardNumber(targetObject, emptyImage);
             // hide rarity info
-            ((Permanent) mageObject).setRarity(Rarity.SPECIAL);
+            ((Permanent) targetObject).setRarity(Rarity.SPECIAL);
+        } else if (targetObject instanceof Token) {
+            CardUtil.copySetAndCardNumber(targetObject, emptyImage);
+        } else {
+            throw new IllegalArgumentException("Wrong code usage: un-supported targetObject in face down method: " + targetObject.getClass().getSimpleName());
         }
     }
 }
