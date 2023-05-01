@@ -6,11 +6,13 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /*
  * 702.31. Fading
@@ -31,10 +33,20 @@ public class FadingAbility extends EntersBattlefieldAbility {
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new FadingEffect(), TargetController.YOU, false);
         ability.setRuleVisible(false);
         addSubAbility(ability);
+        String cardTypeName;
+        if (card.getCardType().contains(CardType.CREATURE)) {
+            cardTypeName = "creature";
+        } else if (card.getCardType().contains(CardType.ARTIFACT)) {
+            cardTypeName = "artifact";
+        } else if (card.getCardType().contains(CardType.ENCHANTMENT)) {
+            cardTypeName = "enchantment";
+        } else {
+            cardTypeName = "permanent";
+        }
         ruleText = "Fading " + fadeCounter
                 + (shortRuleText ? ""
-                        : " <i>(This permanent enters the battlefield with " + fadeCounter + " fade counters on it."
-                        + " At the beginning of your upkeep, remove a fade counter from this permanent. If you can't, sacrifice the permanent.)</i>");
+                        : " <i>(This " + cardTypeName + " enters the battlefield with " + CardUtil.numberToText(fadeCounter) + " fade counters on it."
+                        + " At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)</i>");
     }
 
     public FadingAbility(final FadingAbility ability) {
@@ -57,7 +69,7 @@ class FadingEffect extends OneShotEffect {
 
     FadingEffect() {
         super(Outcome.Sacrifice);
-        staticText = "remove a fade counter from this permanent. If you can't, sacrifice the permanent";
+        staticText = "remove a fade counter from {this}. If you can't, sacrifice it";
     }
 
     FadingEffect(final FadingEffect effect) {
