@@ -359,11 +359,6 @@ public enum CardRepository {
         return findPreferredOrLatestCard(cards, preferredSetCode);
     }
 
-    public CardInfo findPreferredCoreExpansionCardByClassName(String canonicalClassName, String preferredSetCode) {
-        List<CardInfo> cards = findCardsByClass(canonicalClassName);
-        return findPreferredOrLatestCard(cards, preferredSetCode);
-    }
-
     private CardInfo findPreferredOrLatestCard(List<CardInfo> cards, String preferredSetCode) {
         if (!cards.isEmpty()) {
             Date lastReleaseDate = null;

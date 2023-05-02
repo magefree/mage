@@ -147,7 +147,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
         if (quotes) {
             sb.append('"');
         }
-        sb.append(ability.getRule("this " + targetObjectName));
+        sb.append(ability.getRule("This " + targetObjectName));
         if (quotes) {
             sb.append('"');
         }
@@ -155,7 +155,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
             sb.append(' ').append(duration);
         }
         if (doesntRemoveItself) {
-            sb.append(" This effect doesn't remove {this}.");
+            sb.append(". This effect doesn't remove {this}.");
         }
         return sb.toString();
     }

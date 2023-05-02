@@ -462,7 +462,7 @@ public class GameEvent implements Serializable {
          flag        not used for this event
          */
         GAINED_CONTROL,
-        CREATE_TOKEN, CREATED_TOKEN,
+        CREATE_TOKEN, CREATED_TOKEN, CREATED_TOKENS,
         /* REGENERATE
          targetId    id of the creature to regenerate
          sourceId    sourceId of the effect doing the regeneration

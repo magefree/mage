@@ -3,7 +3,6 @@ package mage.cards.t;
 import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ExileSourceAndReturnFaceUpEffect;
@@ -21,7 +20,6 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.Targets;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
@@ -47,11 +45,12 @@ public final class TheTrueScriptures extends CardImpl {
 
         // I -- For each opponent, destroy up to one target creature or planeswalker that player controls.
         sagaAbility.addChapterEffect(
-                this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_I,
-                new Effects(
-                        new DestroyTargetEffect().setTargetPointer(new EachTargetPointer())
-                                .setText("for each opponent, destroy up to one target creature or planeswalker that player controls")
-                ), new Targets(), false, TheTrueScripturesAdjuster.instance
+                this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_I, false,
+                ability -> {
+                    ability.addEffect(new DestroyTargetEffect().setTargetPointer(new EachTargetPointer())
+                            .setText("for each opponent, destroy up to one target creature or planeswalker that player controls"));
+                    ability.setTargetAdjuster(TheTrueScripturesAdjuster.instance);
+                }
         );
 
         // II -- Each opponent discards three cards, then mills three cards.

@@ -21,6 +21,7 @@ import mage.game.command.CommandObject;
 import mage.game.match.MatchOptions;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
+import mage.game.permanent.PermanentToken;
 import mage.player.ai.ComputerPlayer7;
 import mage.player.ai.ComputerPlayerMCTS;
 import mage.players.ManaPool;
@@ -623,7 +624,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         }
 
         // set code for card
-        String setCode = "";
+        String setCode;
         List<String> cardCommand = SystemUtil.parseSetAndCardNameCommand(cardName);
         setCode = cardCommand.get(0);
         cardName = cardCommand.get(1);
@@ -964,6 +965,22 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             }
         }
         Assert.assertEquals("(Battlefield) Permanents counts for " + player.getName() + " are not equal (" + cardName + ')', count, actualCount);
+    }
+
+    @Override
+    public void assertTokenCount(Player player, String tokenName, int count) throws AssertionError {
+        //Assert.assertNotEquals("", tokenName);
+        int actualCount = 0;
+        for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
+            if (permanent instanceof PermanentToken) {
+                if (permanent.getControllerId().equals(player.getId())) {
+                    if (isObjectHaveTargetNameOrAlias(player, permanent, tokenName)) {
+                        actualCount++;
+                    }
+                }
+            }
+        }
+        Assert.assertEquals("(Battlefield) Tokens counts for " + player.getName() + " are not equal (" + tokenName + ')', count, actualCount);
     }
 
     @Override

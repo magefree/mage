@@ -41,7 +41,7 @@ public final class Interdict extends CardImpl {
         this.getSpellAbility().addTarget(new TargetActivatedAbility(filter));
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("<br><br>Draw a card"));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Interdict(final Interdict card) {

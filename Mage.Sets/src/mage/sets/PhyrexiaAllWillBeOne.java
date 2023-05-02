@@ -145,6 +145,8 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Kethek, Crucible Goliath", 319, Rarity.RARE, mage.cards.k.KethekCrucibleGoliath.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Koth, Fire of Resistance", 138, Rarity.RARE, mage.cards.k.KothFireOfResistance.class));
         cards.add(new SetCardInfo("Kuldotha Cackler", 139, Rarity.COMMON, mage.cards.k.KuldothaCackler.class));
+        cards.add(new SetCardInfo("Kinzu of the Bleak Coven", 406, Rarity.RARE, mage.cards.k.KinzuOfTheBleakCoven.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kinzu of the Bleak Coven", 411, Rarity.RARE, mage.cards.k.KinzuOfTheBleakCoven.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lattice-Blade Mantis", 173, Rarity.COMMON, mage.cards.l.LatticeBladeMantis.class));
         cards.add(new SetCardInfo("Leonin Lightbringer", 20, Rarity.COMMON, mage.cards.l.LeoninLightbringer.class));
         cards.add(new SetCardInfo("Lukka, Bound to Ruin", 207, Rarity.MYTHIC, mage.cards.l.LukkaBoundToRuin.class, NON_FULL_USE_VARIOUS));
@@ -217,6 +219,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Reject Imperfection", 67, Rarity.UNCOMMON, mage.cards.r.RejectImperfection.class));
         cards.add(new SetCardInfo("Resistance Reunited", 31, Rarity.UNCOMMON, mage.cards.r.ResistanceReunited.class));
         cards.add(new SetCardInfo("Resistance Skywarden", 146, Rarity.UNCOMMON, mage.cards.r.ResistanceSkywarden.class));
+        cards.add(new SetCardInfo("Ria Ivor, Bane of Bladehold", 214, Rarity.RARE, mage.cards.r.RiaIvorBaneOfBladehold.class));
         cards.add(new SetCardInfo("Rhuk, Hexgold Nabber", 407, Rarity.RARE, mage.cards.r.RhukHexgoldNabber.class));
         cards.add(new SetCardInfo("Ribskiff", 240, Rarity.UNCOMMON, mage.cards.r.Ribskiff.class));
         cards.add(new SetCardInfo("Rustvine Cultivator", 181, Rarity.COMMON, mage.cards.r.RustvineCultivator.class));

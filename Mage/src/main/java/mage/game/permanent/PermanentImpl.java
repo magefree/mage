@@ -609,7 +609,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         return true;
     }
 
-    private Card getOtherFace() {
+    public MageObject getOtherFace() {
         return transformed ? this.getMainCard() : this.getMainCard().getSecondCardFace();
     }
 
@@ -1185,9 +1185,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public boolean entersBattlefield(Ability source, Game game, Zone fromZone, boolean fireEvent) {
         controlledFromStartOfControllerTurn = false;
-        if (this.isFaceDown(game)) {
+        if (this.isFaceDown(game)) { // ?? add morphed/manifested here ??
             // remove some attributes here, because first apply effects comes later otherwise abilities (e.g. color related) will unintended trigger
-            MorphAbility.setPermanentToFaceDownCreature(this, game);
+            MorphAbility.setPermanentToFaceDownCreature(this, this, game);
         }
 
         if (game.replaceEvent(new EntersTheBattlefieldEvent(this, source, getControllerId(), fromZone, EnterEventType.SELF))) {

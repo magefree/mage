@@ -19,8 +19,7 @@ import java.util.UUID;
  */
 public final class Exterminatus extends CardImpl {
 
-    private static final FilterPermanent filter
-            = new FilterNonlandPermanent("nonland permanents your opponents control");
+    private static final FilterPermanent filter = new FilterNonlandPermanent();
 
     static {
         filter.add(TargetController.OPPONENT.getControllerPredicate());
@@ -32,7 +31,7 @@ public final class Exterminatus extends CardImpl {
         // Nonland permanents your opponents control lose indestructible until end of turn.
         this.getSpellAbility().addEffect(new LoseAbilityAllEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn, filter
-        ));
+        ).setText("nonland permanents your opponents control lose indestructible until end of turn"));
 
         // Destroy all nonland permanents.
         this.getSpellAbility().addEffect(new DestroyAllEffect(

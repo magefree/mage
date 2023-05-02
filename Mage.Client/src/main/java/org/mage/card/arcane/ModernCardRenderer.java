@@ -1,5 +1,6 @@
 package org.mage.card.arcane;
 
+import mage.MageInt;
 import mage.ObjectColor;
 import mage.cards.ArtRect;
 import mage.cards.FrameStyle;
@@ -1044,7 +1045,7 @@ public class ModernCardRenderer extends CardRenderer {
 
         // Is it a creature?
         boolean isVehicle = cardView.getSubTypes().contains(SubType.VEHICLE);
-        if (cardView.isCreature() || isVehicle) {
+        if (cardView.showPT()) {
 
             // draws p/t by parts
             int ptDeviderSpace = 1;  // Arial font is too narrow for devider (2/2) and needs extra space
@@ -1093,19 +1094,35 @@ public class ModernCardRenderer extends CardRenderer {
             g.setColor(defaultTextColor);
             g.setFont(ptTextFont);
 
+            // real PT info
+            MageInt currentPower;
+            MageInt currentToughness;
+            if (cardView.getOriginalCard() != null) {
+                // card
+                currentPower = cardView.getOriginalCard().getPower();
+                currentToughness = cardView.getOriginalCard().getToughness();
+            } else if (cardView.getOriginalToken() != null) {
+                // token
+                currentPower = cardView.getOriginalToken().getPower();
+                currentToughness = cardView.getOriginalToken().getToughness();
+            } else {
+                currentPower = null;
+                currentToughness = null;
+            }
+
             // draws
             int ptEmptySpace = (partBoxWidth - ptContentWidth) / 2;
             int ptPosStart1 = x + contentInset + ptEmptySpace;
             int ptPosStart2 = ptPosStart1 + ptTextWidth1 + ptDeviderSpace;
             int ptPosStart3 = ptPosStart2 + ptTextWidth2 + ptDeviderSpace;
             // p
-            g.setColor(CardRendererUtils.getCardTextColor(cardView.getOriginalCard().getPower(), false, defaultTextColor, defaultTextLight));
+            g.setColor(CardRendererUtils.getCardTextColor(currentPower, false, defaultTextColor, defaultTextLight));
             g.drawString(ptText1, ptPosStart1, curY - ptTextOffset - 1); // left
             // /
             g.setColor(defaultTextColor);
             g.drawString(ptText2, ptPosStart2, curY - ptTextOffset - 1); // center
             // t
-            g.setColor(CardRendererUtils.getCardTextColor(cardView.getOriginalCard().getToughness(), CardRendererUtils.isCardWithDamage(cardView), defaultTextColor, defaultTextLight));
+            g.setColor(CardRendererUtils.getCardTextColor(currentToughness, CardRendererUtils.isCardWithDamage(cardView), defaultTextColor, defaultTextLight));
             g.drawString(ptText3, ptPosStart3, curY - ptTextOffset - 1); // right
             //
             g.setColor(defaultTextColor);

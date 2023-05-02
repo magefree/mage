@@ -1,9 +1,18 @@
 package org.mage.test.serverside;
 
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.Card;
+import mage.cards.repository.TokenRepository;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.PermanentToken;
+import mage.game.permanent.token.SoldierToken;
+import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.util.CardUtil;
 import mage.view.CardView;
 import mage.view.GameView;
@@ -30,6 +39,22 @@ public class TokenImagesTest extends CardTestPlayerBase {
     // TODO: add tests for Planes, Dungeons and other command objects (when it gets additional sets)
 
     private static final Pattern checkPattern = Pattern.compile("(\\w+)([<=>])(\\d+)"); // code=12, code>0
+
+    static class TestToken extends TokenImpl {
+
+        TestToken(String name, String description) {
+            super(name, description);
+        }
+
+        TestToken(final TestToken token) {
+            super(token);
+        }
+
+        @Override
+        public Token copy() {
+            return new TestToken(this);
+        }
+    }
 
     private void prepareCards_MemorialToGlory(String... cardsList) {
         // {3}{W}, {T}, Sacrifice Memorial to Glory: Create two 1/1 white Soldier creature tokens.
@@ -105,16 +130,19 @@ public class TokenImagesTest extends CardTestPlayerBase {
 
     private void assert_Inner(String cardName, int cardAmountInExile, int cardAmountInGrave, int cardAmountInBattlefield,
                               String tokenName, int tokenAmount, boolean mustStoreAsCard, String... checks) {
-        assertExileCount(playerA, cardName, cardAmountInExile);
-        assertGraveyardCount(playerA, cardName, cardAmountInGrave);
-        assertPermanentCount(playerA, cardName, cardAmountInBattlefield);
-        assertPermanentCount(playerA, tokenName, tokenAmount);
+        if (!cardName.isEmpty()) {
+            assertExileCount(playerA, cardName, cardAmountInExile);
+            assertGraveyardCount(playerA, cardName, cardAmountInGrave);
+            assertPermanentCount(playerA, cardName, cardAmountInBattlefield);
+        }
+        assertTokenCount(playerA, tokenName, tokenAmount);
 
         // collect real server stats
         Map<String, List<Card>> realServerStats = new LinkedHashMap<>();
         currentGame.getBattlefield().getAllPermanents()
                 .stream()
                 .filter(card -> card.getName().equals(tokenName))
+                .filter(card -> card instanceof PermanentToken)
                 .sorted(Comparator.comparing(Card::getExpansionSetCode))
                 .forEach(card -> {
                     Assert.assertNotNull("must have set code", card.getExpansionSetCode());
@@ -135,6 +163,7 @@ public class TokenImagesTest extends CardTestPlayerBase {
         playerView.getBattlefield().values()
                 .stream()
                 .filter(card -> card.getName().equals(tokenName))
+                .filter(CardView::isToken)
                 .sorted(Comparator.comparing(CardView::getExpansionSetCode))
                 .forEach(permanentView -> {
                     String realCode = permanentView.getExpansionSetCode();
@@ -315,8 +344,139 @@ public class TokenImagesTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore // TODO: implement
+    public void test_TokenExists_MustGetSameImageForAllTokenInstances() {
+        Ability ability = new SimpleActivatedAbility(
+                Zone.ALL,
+                new CreateTokenEffect(new SoldierToken(), 10),
+                new ManaCostsImpl<>("")
+        );
+        addCustomCardWithAbility("40K-test", playerA, ability);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "create ten");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, 1 + 10); // 1 test card + 10 tokens
+        assert_TokenTypes("Soldier Token", 1); // one ability's call must generate tokens with same image
+        assert_Inner("test", 0, 0, 1,
+                "Soldier Token", 10, false, "40K=10");
+    }
+
+    @Test
+    public void test_TokenExists_CopyMustGetSameImageAsCopiedCard() {
+        // copied cards
+        // https://github.com/magefree/mage/issues/10222
+
+        addCard(Zone.BATTLEFIELD, playerA, "NEC-Silver Myr", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "MM2-Alloy Myr", 3);
+        //
+        // Choose target artifact creature you control. For each creature chosen this way, create a token that's a copy of it.
+        // Overload {6}{U} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
+        addCard(Zone.HAND, playerA, "BRC-March of Progress", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 7);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "March of Progress with overload");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        // +3 new tokens for each
+        assertPermanentCount(playerA, "Silver Myr", 3 + 3);
+        assertPermanentCount(playerA, "Alloy Myr", 3 + 3);
+
+        // tokens must use same set code as copied card
+        assert_Inner("Silver Myr", 0, 0, 3 + 3,
+                "Silver Myr", 3, true, "NEC=3");
+        assert_Inner("Alloy Myr", 0, 0, 3 + 3,
+                "Alloy Myr", 3, true, "MM2=3");
+    }
+
+    @Test
+    public void test_TokenExists_CopyMustGetSameImageAsCopiedToken() {
+        // copied tokens
+        // https://github.com/magefree/mage/issues/10222
+
+        // -2: Create a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control."
+        addCard(Zone.BATTLEFIELD, playerA, "MED-Karn, Scion of Urza", 1);
+        //
+        // Choose target artifact creature you control. For each creature chosen this way, create a token that's a copy of it.
+        // Overload {6}{U} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
+        addCard(Zone.HAND, playerA, "BRC-March of Progress", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 7);
+
+        // prepare token
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-2:");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Construct Token", 1);
+
+        // copy token
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "March of Progress with overload");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        // +1 new token
+        assertPermanentCount(playerA, "Construct Token", 1 + 1);
+
+        // tokens must use same set code as copied token
+        assert_Inner("", 0, 0, 0,
+                "Construct Token", 2, false, "MED=2");
+    }
+
+    @Test
+    @Ignore
+    // TODO: implement auto-generate creature token images from public tokens (by name, type, color, PT, abilities)
+    public void test_CreatureToken_MustGetDefaultImage() {
+        Ability ability = new SimpleActivatedAbility(
+                Zone.ALL,
+                new CreateTokenEffect(new CreatureToken(2, 2), 10),
+                new ManaCostsImpl<>("")
+        );
+        addCustomCardWithAbility("test", playerA, ability);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "create ten");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, 1 + 10); // 1 test card + 10 tokens
+
+        assert_Inner("test", 0, 0, 1,
+                "", 10, false, "XXX=10");
+    }
+
+    @Test
     public void test_UnknownToken_MustGetDefaultImage() {
+        // all unknown tokens must put in XMAGE set
+        String xmageSetCode = TokenRepository.XMAGE_TOKENS_SET_CODE;
+        TestToken token = new TestToken("Unknown Token", "xxx");
+        Ability ability = new SimpleActivatedAbility(
+                Zone.ALL,
+                new CreateTokenEffect(token, 10),
+                new ManaCostsImpl<>("")
+        );
+        addCustomCardWithAbility("test", playerA, ability);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "create ten");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, 1 + 10); // 1 test card + 10 tokens
+
+        assert_Inner("test", 0, 0, 1,
+                "Unknown Token", 10, false, xmageSetCode + "=10");
     }
 
     @Test

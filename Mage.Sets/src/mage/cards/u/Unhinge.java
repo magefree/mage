@@ -23,7 +23,7 @@ public final class Unhinge extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardTargetEffect(1));
         
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Unhinge(final Unhinge card) {

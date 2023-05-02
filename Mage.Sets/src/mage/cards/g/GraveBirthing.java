@@ -39,7 +39,7 @@ public final class GraveBirthing extends CardImpl {
         Effect effect = new CreateTokenEffect(new EldraziScionToken());
         effect.setText("You create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this creature: Add {C}.\"<br>");
         this.getSpellAbility().addEffect(effect);        // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private GraveBirthing(final GraveBirthing card) {

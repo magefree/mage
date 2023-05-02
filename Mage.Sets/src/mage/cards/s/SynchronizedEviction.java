@@ -57,7 +57,7 @@ enum SynchronizedEvictionCondition implements Condition {
 
     @Override
     public String toString() {
-        return "you control two or more creatures that share a creature type";
+        return "you control at least two creatures that share a creature type";
     }
 }
 

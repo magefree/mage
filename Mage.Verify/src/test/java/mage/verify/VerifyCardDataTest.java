@@ -58,7 +58,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODE = "ONE"; // check all abilities and output cards with wrong abilities texts;
+    private static final String FULL_ABILITIES_CHECK_SET_CODE = "ONC"; // check all abilities and output cards with wrong abilities texts;
     private static final boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
@@ -87,13 +87,18 @@ public class VerifyCardDataTest {
             "plainswalk", "islandwalk", "swampwalk", "mountainwalk", "forestwalk", "myriad", "prowess", "convoke"
     );
 
-    private static final List<String> doubleNumbers = new ArrayList<>();
+    private static final List<String> doubleWords = new ArrayList<>();
 
     {
+        // numbers
         for (int i = 1; i <= 9; i++) {
             String s = CardUtil.numberToText(i).toLowerCase(Locale.ENGLISH);
-            doubleNumbers.add(s + " " + s);
+            doubleWords.add(s + " " + s);
         }
+
+        // additional checks
+        doubleWords.add(" an an ");
+        doubleWords.add(" a a ");
     }
 
     static {
@@ -279,7 +284,7 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    public void test_verifyCards() throws IOException {
+    public void test_verifyCards() {
         int cardIndex = 0;
         for (Card card : CardScanner.getAllCards()) {
             cardIndex++;
@@ -1203,7 +1208,7 @@ public class VerifyCardDataTest {
         Collection<String> errorsList = new ArrayList<>();
         Collection<String> warningsList = new ArrayList<>();
 
-        // all tokens must be stores in card-pictures-tok.txt (if not then viewer and image downloader are missing token images)
+        // all tokens must be stores in tokens-database.txt (if not then viewer and image downloader are missing token images)
         // https://github.com/ronmamo/reflections
         Reflections reflections = new Reflections("mage.");
         Set<Class<? extends TokenImpl>> tokenClassesList = reflections.getSubTypesOf(TokenImpl.class);
@@ -1220,6 +1225,7 @@ public class VerifyCardDataTest {
         }
         // xmage sets
         Set<String> allSetCodes = Sets.getInstance().values().stream().map(ExpansionSet::getCode).collect(Collectors.toSet());
+        allSetCodes.add(TokenRepository.XMAGE_TOKENS_SET_CODE); // reminder tokens
 
 
         // tok file's data
@@ -1290,14 +1296,14 @@ public class VerifyCardDataTest {
             } else if (tokDataNamesIndex.getOrDefault(token.getName().replace(" Token", ""), "").isEmpty()) {
                 // how-to fix: public token must be downloadable, so tok-data must contain miss set
                 // (also don't forget to add new set to scryfall download)
-                errorsList.add("Error: can't find data in card-pictures-tok.txt for token: " + tokenClass.getName() + " -> " + token.getName());
+                errorsList.add("Error: can't find data in tokens-database.txt for token: " + tokenClass.getName() + " -> " + token.getName());
             }
         }
 
         // CHECK: wrong set codes in tok-data
         tokDataTokensBySetIndex.forEach((setCode, setTokens) -> {
             if (!allSetCodes.contains(setCode)) {
-                errorsList.add("error, card-pictures-tok.txt contains unknown set code: "
+                errorsList.add("error, tokens-database.txt contains unknown set code: "
                         + setCode + " - " + setTokens.stream().map(TokenInfo::getName).collect(Collectors.joining(", ")));
             }
         });
@@ -1353,6 +1359,10 @@ public class VerifyCardDataTest {
         });
         // tok data have tokens, but cards from set are miss
         tokDataTokensBySetIndex.forEach((setCode, setTokens) -> {
+            if (setCode.equals(TokenRepository.XMAGE_TOKENS_SET_CODE)) {
+                // ignore reminder tokens
+                return;
+            }
             if (!setsWithTokens.containsKey(setCode)) {
                 // Possible reasons:
                 // - outdated set code in tokens database (must be fixed by new set code, another verify check it)
@@ -1364,10 +1374,34 @@ public class VerifyCardDataTest {
 
         // CHECK: token and class names must be same in all sets
         TokenRepository.instance.getAllByClassName().forEach((className, list) -> {
-            Set<String> names = list.stream().map(TokenInfo::getName).collect(Collectors.toSet());
+            // ignore reminder tokens
+            Set<String> names = list.stream()
+                    .filter(token -> !token.getTokenType().equals(TokenType.XMAGE))
+                    .map(TokenInfo::getName)
+                    .collect(Collectors.toSet());
             if (names.size() > 1) {
-                errorsList.add("error, card-pictures-tok.txt contains different names for same class: "
+                errorsList.add("error, tokens-database.txt contains different names for same class: "
                         + className + " - " + String.join(", ", names));
+            }
+        });
+
+        Set<String> usedNames = new HashSet<>();
+        TokenRepository.instance.getByType(TokenType.XMAGE).forEach(token -> {
+            // CHECK: xmage's tokens must be unique
+            // how-to fix: edit TokenRepository->loadXmageTokens
+            String needName = String.format("%s.%d", token.getName(), token.getImageNumber());
+            if (usedNames.contains(needName)) {
+                errorsList.add("error, xmage token's name and image number must be unique: "
+                        + token.getName() + " - " + token.getImageNumber());
+            } else {
+                usedNames.add(needName);
+            }
+
+            // CHECK: xmage's tokens must be downloadable
+            // how-to fix: edit TokenRepository->loadXmageTokens
+            if (token.getDownloadUrl().isEmpty()) {
+                errorsList.add("error, xmage token's must have download url: "
+                        + token.getName() + " - " + token.getImageNumber());
             }
         });
 
@@ -1655,15 +1689,15 @@ public class VerifyCardDataTest {
             fail(card, "abilities", "mutate cards aren't implemented and shouldn't be available");
         }
 
-        // special check: duplicated numbers in ability text (wrong target/filter usage)
+        // special check: duplicated words in ability text (wrong target/filter usage)
         // example: You may exile __two two__ blue cards
         // possible fixes:
         //  - remove numbers from filter's text
         //  - use target.getDescription() in ability instead target.getTargetName()
         for (String rule : card.getRules()) {
-            for (String doubleNumber : doubleNumbers) {
-                if (rule.contains(doubleNumber)) {
-                    fail(card, "abilities", "duplicated numbers: " + rule);
+            for (String doubleNumber : doubleWords) {
+                if (rule.toLowerCase(Locale.ENGLISH).contains(doubleNumber)) {
+                    fail(card, "abilities", "duplicated numbers/words: " + rule);
                 }
             }
         }
@@ -1763,18 +1797,29 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    public void test_showCardInfo() throws Exception {
-        // debug only: show direct card info (takes it from class file, not from db repository)
-        // can check multiple cards at once, example: name1;name2;name3
-        String cardNames = "Spark Double";
+    public void test_showCardInfo() {
+        // debug only: show direct card info from class file without db-recreate
+        //  - search by card name: Spark Double
+        //  - search by class name: SparkDouble
+        //  - multiple searches: name1;class2;name3
+        String cardSearches = "Spark Double";
         CardScanner.scan();
-        Arrays.stream(cardNames.split(";")).forEach(cardName -> {
-            cardName = cardName.trim();
-            CardSetInfo testSet = new CardSetInfo(cardName, "test", "123", Rarity.COMMON);
-            CardInfo cardInfo = CardRepository.instance.findCard(cardName);
+        Arrays.stream(cardSearches.split(";")).forEach(searchName -> {
+            searchName = searchName.trim();
+            CardInfo cardInfo = CardRepository.instance.findCard(searchName);
             if (cardInfo == null) {
-                Assert.fail("Can't find card name: " + cardName);
+                String searchClass = String.format("mage.cards.%s.%s",
+                        searchName.substring(0, 1).toLowerCase(Locale.ENGLISH),
+                        searchName);
+                cardInfo = CardRepository.instance.findCardsByClass(searchClass)
+                        .stream()
+                        .findFirst()
+                        .orElse(null);
             }
+            if (cardInfo == null) {
+                Assert.fail("Can't find card by name or class: " + searchName);
+            }
+            CardSetInfo testSet = new CardSetInfo(cardInfo.getName(), "test", "123", Rarity.COMMON);
             Card card = CardImpl.createCard(cardInfo.getClassName(), testSet);
             System.out.println();
             System.out.println(card.getName() + " " + card.getManaCost().getText());
@@ -2168,11 +2213,12 @@ public class VerifyCardDataTest {
 
     @Test
     public void test_checkCardConstructors() {
+        // create all cards, can catch additional verify and runtime checks from abilities and effects
+        // example: wrong code usage errors
         Collection<String> errorsList = new ArrayList<>();
         Collection<ExpansionSet> sets = Sets.getInstance().values();
         for (ExpansionSet set : sets) {
             for (ExpansionSet.SetCardInfo setInfo : set.getSetCardInfo()) {
-                // catch cards creation errors and report (e.g. on wrong card code or construction checks fail)
                 try {
                     Card card = CardImpl.createCard(setInfo.getCardClass(), new CardSetInfo(setInfo.getName(), set.getCode(),
                             setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()));

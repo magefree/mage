@@ -22,7 +22,7 @@ public final class BlindingSpray extends CardImpl {
         this.getSpellAbility().addEffect(new BoostAllEffect(-4, 0, Duration.EndOfTurn, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES, false));
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private BlindingSpray(final BlindingSpray card) {

@@ -48,12 +48,14 @@ public final class StaffOfTheStoryteller extends CardImpl {
 
         // {W}, {T}, Remove a story counter from Staff of the Storyteller: Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{W}"));
+
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.STORY.createInstance()));
         this.addAbility(ability);
     }
 
     private StaffOfTheStoryteller(final StaffOfTheStoryteller card) { super(card); }
+    
     @Override
     public StaffOfTheStoryteller copy() {
         return new StaffOfTheStoryteller(this);

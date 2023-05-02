@@ -42,7 +42,6 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.functions.CopyTokenFunction;
 import org.apache.log4j.Logger;
 
 import java.io.UnsupportedEncodingException;
@@ -472,17 +471,6 @@ public final class CardUtil {
         adjustedCost.setSourceFilter(previousCost.getSourceFilter());  // keep mana source restrictions
         spellAbility.getManaCostsToPay().clear();
         spellAbility.getManaCostsToPay().addAll(adjustedCost);
-    }
-
-    /**
-     * Returns function that copies params\abilities from one card to
-     * {@link Token}.
-     *
-     * @param target
-     * @return
-     */
-    public static CopyTokenFunction copyTo(Token target) {
-        return new CopyTokenFunction(target);
     }
 
     /**
@@ -988,7 +976,7 @@ public final class CardUtil {
                 || text.startsWith("any ")) {
             return text;
         }
-        return vowels.contains(text.substring(0, 1)) ? "an " + text : "a " + text;
+        return (!text.isEmpty() && vowels.contains(text.substring(0, 1))) ? "an " + text : "a " + text;
     }
 
     public static String italicizeWithEmDash(String text) {
@@ -1801,7 +1789,7 @@ public final class CardUtil {
      * Copy image related data from one object to another (card number, set code, token type)
      * Use it in copy/transform effects
      */
-    public static void copySetAndCardNumber(Permanent permanent, MageObject copyFromObject) {
+    public static void copySetAndCardNumber(MageObject targetObject, MageObject copyFromObject) {
         String needSetCode;
         String needCardNumber;
         int needTokenType;
@@ -1821,21 +1809,38 @@ public final class CardUtil {
             needSetCode = ((Card) copyFromObject).getExpansionSetCode();
             needCardNumber = ((Card) copyFromObject).getCardNumber();
             needTokenType = 0;
+        } else if (copyFromObject instanceof Token) {
+            needSetCode = ((Token) copyFromObject).getOriginalExpansionSetCode();
+            needCardNumber = ((Token) copyFromObject).getOriginalCardNumber();
+            needTokenType = ((Token) copyFromObject).getTokenType();
         } else {
             throw new IllegalStateException("Unsupported copyFromObject class: " + copyFromObject.getClass().getSimpleName());
         }
 
-        copySetAndCardNumber(permanent, needSetCode, needCardNumber, needTokenType);
+        if (targetObject instanceof Permanent) {
+            copySetAndCardNumber((Permanent) targetObject, needSetCode, needCardNumber, needTokenType);
+        } else if (targetObject instanceof Token) {
+            copySetAndCardNumber((Token) targetObject, needSetCode, needCardNumber, needTokenType);
+        } else {
+            throw new IllegalStateException("Unsupported target object class: " + targetObject.getClass().getSimpleName());
+        }
     }
 
-    public static void copySetAndCardNumber(Permanent permanent, String newSetCode, String newCardNumber, Integer newTokenType) {
-        if (permanent instanceof PermanentToken) {
-            ((PermanentToken) permanent).getToken().setOriginalExpansionSetCode(newSetCode);
-            ((PermanentToken) permanent).getToken().setExpansionSetCodeForImage(newCardNumber);
-            ((PermanentToken) permanent).getToken().setTokenType(newTokenType);
+    private static void copySetAndCardNumber(Permanent targetPermanent, String newSetCode, String newCardNumber, Integer newTokenType) {
+        if (targetPermanent instanceof PermanentToken) {
+            copySetAndCardNumber(((PermanentToken) targetPermanent).getToken(), newSetCode, newCardNumber, newTokenType);
+        } else if (targetPermanent instanceof PermanentCard) {
+            targetPermanent.setExpansionSetCode(newSetCode);
+            targetPermanent.setCardNumber(newCardNumber);
         } else {
-            permanent.setExpansionSetCode(newSetCode);
-            permanent.setCardNumber(newCardNumber);
+            throw new IllegalArgumentException("Wrong code usage: un-supported target permanent type: " + targetPermanent.getClass().getSimpleName());
         }
+    }
+
+    private static void copySetAndCardNumber(Token targetToken, String newSetCode, String newCardNumber, Integer newTokenType) {
+        targetToken.setOriginalExpansionSetCode(newSetCode);
+        targetToken.setExpansionSetCodeForImage(newSetCode);
+        targetToken.setOriginalCardNumber(newCardNumber);
+        targetToken.setTokenType(newTokenType);
     }
 }

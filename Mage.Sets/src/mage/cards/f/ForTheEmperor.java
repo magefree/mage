@@ -21,15 +21,17 @@ public final class ForTheEmperor extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}");
 
         // Creatures you control get +2/+2 and gain vigilance and lifelink until end of turn.
-        this.getSpellAbility().addEffect(new BoostControlledEffect(2, 2, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostControlledEffect(
+                2, 2, Duration.EndOfTurn
+        ).setText("creatures you control get +2/+2"));
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(
                 VigilanceAbility.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_PERMANENT_CREATURE
-        ).setText("and gain lifelink"));
+        ).setText("and gain vigilance"));
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(
                 LifelinkAbility.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_PERMANENT_CREATURE
-        ).setText("and vigilance until end of turn"));
+        ).setText("and lifelink until end of turn"));
     }
 
     private ForTheEmperor(final ForTheEmperor card) {

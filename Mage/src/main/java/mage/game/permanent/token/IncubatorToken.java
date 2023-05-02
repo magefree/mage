@@ -1,5 +1,9 @@
 package mage.game.permanent.token;
 
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.keyword.TransformAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -14,9 +18,12 @@ public final class IncubatorToken extends TokenImpl {
         super("Incubator Token", "Incubator artifact token with \"{2}: Transform this artifact.\"");
         cardType.add(CardType.ARTIFACT);
         subtype.add(SubType.INCUBATOR);
+        this.backFace = new Phyrexian00Token();
 
-        // TODO: Implement this correctly
-
+        this.addAbility(new TransformAbility());
+        this.addAbility(new SimpleActivatedAbility(
+                new TransformSourceEffect().setText("transform this artifact"), new GenericManaCost(2)
+        ));
         availableImageSetCodes = Arrays.asList("MOM");
     }
 

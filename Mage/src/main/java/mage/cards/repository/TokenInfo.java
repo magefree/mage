@@ -7,14 +7,16 @@ package mage.cards.repository;
  */
 public class TokenInfo {
 
-    private TokenType tokenType;
-    private String name;
-    private String setCode;
-    private Integer imageNumber = 1; // if one set contains diff images with same name
+    private final TokenType tokenType;
+    private final String name;
+    private final String setCode;
+    private final Integer imageNumber; // if one set contains diff images with same name
 
-    private String classFileName;
+    private final String classFileName;
 
-    private String imageFileName;
+    private final String imageFileName;
+
+    private String downloadUrl = "";
 
     public TokenInfo(TokenType tokenType, String name, String setCode, Integer imageNumber) {
         this(tokenType, name, setCode, imageNumber, "", "");
@@ -31,7 +33,7 @@ public class TokenInfo {
 
     @Override
     public String toString() {
-        return String.format("%s - %s - %d (%s)", this.setCode, this.name, this.imageNumber, this.classFileName);
+        return String.format("%s - %s - %s - %d (%s)", this.tokenType, this.setCode, this.name, this.imageNumber, this.classFileName);
     }
 
     public TokenType getTokenType() {
@@ -50,12 +52,17 @@ public class TokenInfo {
         return setCode;
     }
 
-    public String getClassFileName() {
-        return classFileName;
-    }
-
     public Integer getImageNumber() {
         return imageNumber;
+    }
+
+    public String getDownloadUrl() {
+        return downloadUrl;
+    }
+
+    public TokenInfo withDownloadUrl(String downloadUrl) {
+        this.downloadUrl = downloadUrl;
+        return this;
     }
 
     public String getFullClassFileName() {
@@ -69,6 +76,8 @@ public class TokenInfo {
                 return "mage.game.command.planes." + simpleName;
             case DUNGEON:
                 return "mage.game.command.dungeons." + simpleName;
+            case XMAGE:
+                return classFileName;
             default:
                 throw new IllegalStateException("Unknown token type: " + this.tokenType);
         }

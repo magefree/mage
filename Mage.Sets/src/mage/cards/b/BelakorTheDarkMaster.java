@@ -34,7 +34,7 @@ import java.util.UUID;
 public final class BelakorTheDarkMaster extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledPermanent(SubType.DEMON, "Demons you control");
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter, null);
     private static final Hint hint = new ValueHint("Demons you control", xValue);
     private static final FilterPermanent filter2 = new FilterControlledPermanent(SubType.DEMON, "another Demon");
 

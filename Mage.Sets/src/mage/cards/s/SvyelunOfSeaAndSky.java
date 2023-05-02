@@ -19,7 +19,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 
 import java.util.UUID;
@@ -29,7 +28,7 @@ import java.util.UUID;
  */
 public final class SvyelunOfSeaAndSky extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.MERFOLK);
+    private static final FilterPermanent filter = new FilterPermanent(SubType.MERFOLK, "Merfolk");
 
     static {
         filter.add(AnotherPredicate.instance);

@@ -1,11 +1,8 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -18,8 +15,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ApeToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author LoneFox
  */
 public final class MonkeyCage extends CardImpl {
@@ -28,8 +26,10 @@ public final class MonkeyCage extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // When a creature enters the battlefield, sacrifice Monkey Cage and create X 2/2 green Ape creature tokens, where X is that creature's converted mana cost.
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(),
-                StaticFilters.FILTER_PERMANENT_A_CREATURE, false, SetTargetPointer.PERMANENT, "");
+        Ability ability = new EntersBattlefieldAllTriggeredAbility(
+                Zone.BATTLEFIELD, new SacrificeSourceEffect(), StaticFilters.FILTER_PERMANENT_A_CREATURE,
+                false, SetTargetPointer.PERMANENT, null
+        ).setTriggerPhrase("When a creature enters the battlefield, ");
         ability.addEffect(new MonkeyCageEffect());
         this.addAbility(ability);
     }
@@ -62,10 +62,10 @@ class MonkeyCageEffect extends OneShotEffect {
 
     public boolean apply(Game game, Ability source) {
         Permanent creature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
-        if (creature != null) {
-            int cmc = creature.getManaValue();
-            return new CreateTokenEffect(new ApeToken(), cmc).apply(game, source);
+        if (creature == null) {
+            return false;
         }
-        return false;
+        int cmc = creature.getManaValue();
+        return cmc > 0 && new ApeToken().putOntoBattlefield(cmc, game, source);
     }
 }

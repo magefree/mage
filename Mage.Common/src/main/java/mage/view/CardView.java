@@ -37,6 +37,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
 import mage.util.CardUtil;
+import mage.util.ManaUtil;
 import mage.util.SubTypes;
 
 import java.util.*;
@@ -127,10 +128,10 @@ public class CardView extends SimpleCardView {
 
     protected boolean canAttack;
     protected boolean canBlock;
-    protected boolean inViewerOnly;
+    protected boolean inViewerOnly; // GUI render: show object as a card instead permanent (without PT, etc)
     protected List<CardIcon> cardIcons = new ArrayList<>(); // additional icons to render
 
-    protected Card originalCard = null;
+    protected MageObject originalObject = null; // GUI related: additional info about current object (example: real PT)
 
     /**
      * Non game usage like deck editor
@@ -233,7 +234,7 @@ public class CardView extends SimpleCardView {
         this.canAttack = cardView.canAttack;
         this.canBlock = cardView.canBlock;
         this.inViewerOnly = cardView.inViewerOnly;
-        this.originalCard = cardView.originalCard == null ? null : cardView.originalCard.copy();
+        this.originalObject = cardView.originalObject == null ? null : cardView.originalObject.copy();
         if (cardView.cardIcons != null) {
             cardView.cardIcons.forEach(icon -> this.cardIcons.add(icon.copy()));
         }
@@ -279,7 +280,7 @@ public class CardView extends SimpleCardView {
      */
     public CardView(Card card, Game game, boolean controlled, boolean showFaceDownCard, boolean storeZone) {
         super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), game != null);
-        this.originalCard = card;
+        this.originalObject = card;
 
         // no information available for face down cards as long it's not a controlled face down morph card
         // TODO: Better handle this in Framework (but currently I'm not sure how to do it there) LevelX2
@@ -528,6 +529,12 @@ public class CardView extends SimpleCardView {
             this.alternateName = meldsToCard.getName();
         }
 
+        if (card instanceof PermanentToken && card.isTransformable()) {
+            Token backFace = (Token) ((PermanentToken) card).getOtherFace();
+            this.secondCardFace = new CardView(backFace, game);
+            this.alternateName = backFace.getName();
+        }
+
         if (card instanceof Spell) {
             this.mageObjectType = MageObjectType.SPELL;
             Spell spell = (Spell) card;
@@ -606,7 +613,7 @@ public class CardView extends SimpleCardView {
 
     public CardView(MageObject object, Game game) {
         super(object.getId(), "", "0", false, true);
-        this.originalCard = null;
+        this.originalObject = object;
 
         this.name = object.getName();
         this.displayName = object.getName();
@@ -688,6 +695,7 @@ public class CardView extends SimpleCardView {
 
     public CardView(EmblemView emblem) {
         this(true);
+        this.originalObject = null;
         this.gameObject = true;
         this.id = emblem.getId();
         this.mageObjectType = MageObjectType.EMBLEM;
@@ -703,6 +711,7 @@ public class CardView extends SimpleCardView {
 
     public CardView(DungeonView dungeon) {
         this(true);
+        this.originalObject = null;
         this.gameObject = true;
         this.id = dungeon.getId();
         this.mageObjectType = MageObjectType.DUNGEON;
@@ -718,6 +727,7 @@ public class CardView extends SimpleCardView {
 
     public CardView(PlaneView plane) {
         this(true);
+        this.originalObject = null;
         this.gameObject = true;
         this.id = plane.getId();
         this.mageObjectType = MageObjectType.PLANE;
@@ -734,6 +744,7 @@ public class CardView extends SimpleCardView {
 
     public CardView(Designation designation, StackAbility stackAbility) {
         this(true);
+        this.originalObject = null;
         this.gameObject = true;
         this.id = designation.getId();
         this.mageObjectType = MageObjectType.NULL;
@@ -756,6 +767,7 @@ public class CardView extends SimpleCardView {
     }
 
     private void fillEmpty(Card card, boolean controlled) {
+        this.originalObject = null;
         this.name = "Face Down";
         this.displayName = name;
         this.displayFullName = name;
@@ -954,11 +966,25 @@ public class CardView extends SimpleCardView {
     }
 
     public String getColorIdentityStr() {
-        FilterMana filterMana = originalCard.getColorIdentity();
-        if (filterMana.getColorCount() == 0) {
-            return CardUtil.concatManaSymbols(CardInfo.SPLIT_MANA_SEPARATOR_FULL, "{C}", "");
+        FilterMana colorInfo;
+        if (getOriginalCard() != null) {
+            // card
+            colorInfo = getOriginalCard().getColorIdentity();
+        } else if (getOriginalToken() != null) {
+            // token
+            colorInfo = ManaUtil.getColorIdentity(getOriginalToken());
+        } else {
+            colorInfo = new FilterMana();
         }
-        return CardUtil.concatManaSymbols(CardInfo.SPLIT_MANA_SEPARATOR_FULL, filterMana.toString(), "");
+
+        String colorRes;
+        if (colorInfo.getColorCount() == 0) {
+            colorRes = "{C}";
+        } else {
+            colorRes = colorInfo.toString();
+        }
+
+        return CardUtil.concatManaSymbols(CardInfo.SPLIT_MANA_SEPARATOR_FULL, colorRes, "");
     }
 
     @Override
@@ -1236,10 +1262,26 @@ public class CardView extends SimpleCardView {
     }
 
     public Card getOriginalCard() {
-        return this.originalCard;
+        if (this.originalObject instanceof Card) {
+            return (Card) this.originalObject;
+        } else {
+            return null;
+        }
+    }
+
+    public Token getOriginalToken() {
+        if (this.originalObject instanceof Token) {
+            return (Token) this.originalObject;
+        } else {
+            return null;
+        }
     }
 
     public List<CardIcon> getCardIcons() {
         return this.cardIcons;
+    }
+
+    public boolean showPT() {
+        return this.isCreature() || this.getSubTypes().contains(SubType.VEHICLE);
     }
 }
