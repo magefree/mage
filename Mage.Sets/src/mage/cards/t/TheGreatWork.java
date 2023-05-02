@@ -36,7 +36,7 @@ public final class TheGreatWork extends CardImpl {
         this.nightCard = true;
 
         // (As this Saga enters and after your draw step, add a lore counter.)
-        SagaAbility sagaAbility = new SagaAbility(this, false);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         // I -- The Great Work deals 3 damage to target opponent and each creature they control.
         sagaAbility.addChapterEffect(
