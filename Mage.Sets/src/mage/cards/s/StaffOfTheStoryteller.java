@@ -23,7 +23,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
 import java.util.UUID;
 
 /**
- * @author isaacwatson
+ * @author TheElk801, isaacwatson
  */
 public final class StaffOfTheStoryteller extends CardImpl {
 
