@@ -266,7 +266,7 @@
 |Generate|TOK:BNG|Wolf|||WolfToken|
 |Generate|TOK:BNG|Zombie|||ForlornPseudammaZombieToken|
 |Generate|TOK:C14|Angel|||AngelToken|
-|Generate|TOK:C14|Ape|||PongifyApeToken|
+|Generate|TOK:C14|Ape|||ApeToken|
 |Generate|TOK:C14|Beast|1||BeastToken|
 |Generate|TOK:C14|Beast|2||BeastToken2|
 |Generate|TOK:C14|Cat|||CatToken|
@@ -797,14 +797,6 @@
 |Generate|TOK:MMA|Treefolk Shaman|||TreefolkShamanToken|
 |Generate|TOK:MMA|Worm|||BlackGreenWormToken|
 |Generate|TOK:MMA|Zombie|||ZombieToken|
-|Generate|TOK:MMQ|Ape|||ApeToken|
-|Generate|TOK:MMQ|Butterfly|||ButterflyToken|
-|Generate|TOK:MMQ|Insect|||InsectToken|
-|Generate|TOK:MMQ|Saproling|||SaprolingToken|
-|Generate|TOK:MMQ|Snake|||SnakeToken|
-|Generate|TOK:MMQ|Soldier|||SoldierToken|
-|Generate|TOK:MMQ|Spirit|||SpiritWhiteToken|
-|Generate|TOK:MMQ|Zombie|||ZombieToken|
 |Generate|TOK:MOR|Faerie Rogue|||FaerieRogueToken|
 |Generate|TOK:MOR|Giant Warrior|||GiantWarriorToken|
 |Generate|TOK:MOR|Treefolk Shaman|||TreefolkShamanToken|
@@ -867,12 +859,6 @@
 |Generate|TOK:PC2|Spider|||PenumbraSpiderToken|
 |Generate|TOK:PCY|Minion|||MinionToken|
 |Generate|TOK:PCY|Squirrel|||SquirrelToken|
-|Generate|TOK:PLC|Ape|||PongifyApeToken|
-|Generate|TOK:PLC|Cat Warrior|||CatWarriorToken|
-|Generate|TOK:PLC|Insect|||DeadlyGrubInsectToken|
-|Generate|TOK:PLC|Knight|||RiftmarkedKnightToken|
-|Generate|TOK:PLC|Saproling|||SaprolingToken|
-|Generate|TOK:PLC|Soldier|||SoldierToken|
 |Generate|TOK:PLS|Hippo|||HippoToken|
 |Generate|TOK:PLS|Saproling|||SaprolingToken|
 |Generate|TOK:PLS|Spirit|||SpiritWhiteToken|
@@ -975,12 +961,6 @@
 |Generate|TOK:THS|Soldier|3||AkroanSoldierToken|
 |Generate|TOK:TOR|Squirrel|||SquirrelToken|
 |Generate|TOK:UDS|Goblin|||GoblinToken|
-|Generate|TOK:ULG|Ape|||PongifyApeToken|
-|Generate|TOK:ULG|Skeleton|||SkeletonRegenerateToken|
-|Generate|TOK:ULG|Squirrel|||SquirrelToken|
-|Generate|TOK:UNH|Ape|||PongifyApeToken|
-|Generate|TOK:UNH|Goblin|||GoblinToken|
-|Generate|TOK:UNH|Squirrel|||SquirrelToken|
 |Generate|TOK:USG|Beast|||BeastToken|
 |Generate|TOK:USG|Gnome|||GnomeToken|
 |Generate|TOK:USG|Goblin|||GoblinToken|
@@ -1299,7 +1279,7 @@
 |Generate|TOK:KHC|Thopter|||ThopterColorlessToken|
 
 # TSR
-|Generate|TOK:TSR|Ape|||PongifyApeToken|
+|Generate|TOK:TSR|Ape|||ApeToken|
 |Generate|TOK:TSR|Assembly-Worker|||AssemblyWorkerToken|
 |Generate|TOK:TSR|Bat|||SengirNosferatuBatToken|
 |Generate|TOK:TSR|Cloud Sprite|||CloudSpriteToken|

@@ -13,7 +13,7 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.ApeToken;
+import mage.game.permanent.token.MonkeyToken;
 
 import java.util.UUID;
 
@@ -25,7 +25,7 @@ public final class MonkeyCage extends CardImpl {
     public MonkeyCage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
-        // When a creature enters the battlefield, sacrifice Monkey Cage and create X 2/2 green Ape creature tokens, where X is that creature's converted mana cost.
+        // When a creature enters the battlefield, sacrifice Monkey Cage and create X 2/2 green Monkey creature tokens, where X is that creature's converted mana cost.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD, new SacrificeSourceEffect(), StaticFilters.FILTER_PERMANENT_A_CREATURE,
                 false, SetTargetPointer.PERMANENT, null
@@ -48,7 +48,7 @@ class MonkeyCageEffect extends OneShotEffect {
 
     public MonkeyCageEffect() {
         super(Outcome.Benefit);
-        staticText = "and create X 2/2 green Ape creature tokens, where X is that creature's mana value";
+        staticText = "and create X 2/2 green Monkey creature tokens, where X is that creature's mana value";
     }
 
     public MonkeyCageEffect(final MonkeyCageEffect effect) {
@@ -66,6 +66,6 @@ class MonkeyCageEffect extends OneShotEffect {
             return false;
         }
         int cmc = creature.getManaValue();
-        return cmc > 0 && new ApeToken().putOntoBattlefield(cmc, game, source);
+        return cmc > 0 && new MonkeyToken().putOntoBattlefield(cmc, game, source);
     }
 }
