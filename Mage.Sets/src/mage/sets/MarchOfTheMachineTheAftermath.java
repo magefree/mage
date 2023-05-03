@@ -26,6 +26,7 @@ public final class MarchOfTheMachineTheAftermath extends ExpansionSet {
         cards.add(new SetCardInfo("Jolrael, Voice of Zhalfir", 33, Rarity.RARE, mage.cards.j.JolraelVoiceOfZhalfir.class));
         cards.add(new SetCardInfo("Kolaghan Warmonger", 17, Rarity.UNCOMMON, mage.cards.k.KolaghanWarmonger.class));
         cards.add(new SetCardInfo("Markov Baron", 14, Rarity.UNCOMMON, mage.cards.m.MarkovBaron.class));
+        cards.add(new SetCardInfo("Reckless Handling", 19, Rarity.UNCOMMON, mage.cards.r.RecklessHandling.class));
         cards.add(new SetCardInfo("Spark Rupture", 5, Rarity.RARE, mage.cards.s.SparkRupture.class));
         cards.add(new SetCardInfo("The Kenriths' Royal Funeral", 34, Rarity.RARE, mage.cards.t.TheKenrithsRoyalFuneral.class));
         cards.add(new SetCardInfo("Training Grounds", 9, Rarity.RARE, mage.cards.t.TrainingGrounds.class));
