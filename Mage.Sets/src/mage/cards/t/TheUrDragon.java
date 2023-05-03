@@ -14,6 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -27,6 +28,7 @@ public final class TheUrDragon extends CardImpl {
 
     static {
         filter.add(SubType.DRAGON.getPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public TheUrDragon(UUID ownerId, CardSetInfo setInfo) {
