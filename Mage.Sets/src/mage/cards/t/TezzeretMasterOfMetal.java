@@ -36,7 +36,7 @@ public final class TezzeretMasterOfMetal extends CardImpl {
         this.setStartingLoyalty(5);
 
         // +1: Reveal cards from the top of your library until you reveal an artifact card. Put that card into your hand and the rest on the bottom of your library in a random order.
-        this.addAbility(new LoyaltyAbility(new RevealCardsFromLibraryUntilEffect(StaticFilters.FILTER_CARD_ARTIFACT, Zone.HAND, Zone.LIBRARY), 1));
+        this.addAbility(new LoyaltyAbility(new RevealCardsFromLibraryUntilEffect(StaticFilters.FILTER_CARD_ARTIFACT, PutCards.HAND, PutCards.BOTTOM_RANDOM), 1));
 
         // -3: Target opponent loses life equal to the number of artifacts you control.
         Ability ability = new LoyaltyAbility(new LoseLifeTargetEffect(ArtifactYouControlCount.instance).setText("target opponent loses life equal to the number of artifacts you control"), -3);

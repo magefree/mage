@@ -41,7 +41,7 @@ public final class NissaResurgentAnimist extends CardImpl {
         Ability ability = new LandfallAbility(new AddManaOfAnyColorEffect());
         ability.addEffect(new IfAbilityHasResolvedXTimesEffect(
                 Outcome.DrawCard, 2,
-                new RevealCardsFromLibraryUntilEffect(filter, Zone.HAND, Zone.LIBRARY)
+                new RevealCardsFromLibraryUntilEffect(filter, PutCards.HAND, PutCards.BOTTOM_RANDOM)
         ).concatBy("Then"));
         this.addAbility(ability);
     }

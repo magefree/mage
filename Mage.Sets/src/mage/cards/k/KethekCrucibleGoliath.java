@@ -96,7 +96,7 @@ class KethekCrucibleGoliathEffect extends OneShotEffect {
         // Lesser Mana Value
         filterCreatureCard.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue));
         //put it onto the battlefield, then put the rest on the bottom of your library in a random order.
-        RevealCardsFromLibraryUntilEffect effect = new RevealCardsFromLibraryUntilEffect(filterCreatureCard, Zone.BATTLEFIELD, Zone.LIBRARY);
+        RevealCardsFromLibraryUntilEffect effect = new RevealCardsFromLibraryUntilEffect(filterCreatureCard, PutCards.BATTLEFIELD,PutCards.BOTTOM_RANDOM);
         effect.apply(game, source);
         return true;
     }
