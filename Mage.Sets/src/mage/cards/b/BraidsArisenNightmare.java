@@ -101,7 +101,7 @@ class BraidsArisenNightmareEffect extends OneShotEffect {
         if (!permanent.sacrifice(source, game)) {
             return false;
         }
-        for (UUID opponentId : game.getOpponents(controller.getId())) {
+        for (UUID opponentId : game.getOpponents(controller.getId(), true)) {
             Player opponent = game.getPlayer(opponentId);
             if (opponent == null) {
                 continue;
