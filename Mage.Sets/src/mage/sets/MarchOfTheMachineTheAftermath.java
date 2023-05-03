@@ -27,6 +27,7 @@ public final class MarchOfTheMachineTheAftermath extends ExpansionSet {
         cards.add(new SetCardInfo("Filter Out", 7, Rarity.UNCOMMON, mage.cards.f.FilterOut.class));
         cards.add(new SetCardInfo("Gold-Forged Thopteryx", 31, Rarity.UNCOMMON, mage.cards.g.GoldForgedThopteryx.class));
         cards.add(new SetCardInfo("Harnessed Snubhorn", 3, Rarity.UNCOMMON, mage.cards.h.HarnessedSnubhorn.class));
+        cards.add(new SetCardInfo("Jirina, Dauntless General", 32, Rarity.RARE, mage.cards.j.JirinaDauntlessGeneral.class));
         cards.add(new SetCardInfo("Jolrael, Voice of Zhalfir", 33, Rarity.RARE, mage.cards.j.JolraelVoiceOfZhalfir.class));
         cards.add(new SetCardInfo("Karn, Legacy Reforged", 49, Rarity.MYTHIC, mage.cards.k.KarnLegacyReforged.class));
         cards.add(new SetCardInfo("Kiora, Sovereign of the Deep", 35, Rarity.MYTHIC, mage.cards.k.KioraSovereignOfTheDeep.class));
