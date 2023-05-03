@@ -52,7 +52,7 @@ public final class KioraSovereignOfTheDeep extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Ward {3}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{3}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{3}"), false));
 
         // Whenever you cast a Kraken, Leviathan, Octopus, or Serpent spell from your hand, look at the top X cards of your library, where X is that spell's mana value. You may cast a spell with mana value less than X from among them without paying its mana cost. Put the rest on the bottom of your library in a random order.
         this.addAbility(new SpellCastControllerTriggeredAbility(
