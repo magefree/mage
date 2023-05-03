@@ -22,6 +22,7 @@ public final class MarchOfTheMachineTheAftermath extends ExpansionSet {
         this.hasBoosters = false; // temporary
 
         cards.add(new SetCardInfo("Campus Renovation", 27, Rarity.UNCOMMON, mage.cards.c.CampusRenovation.class));
+        cards.add(new SetCardInfo("Coppercoat Vanguard", 1, Rarity.UNCOMMON, mage.cards.c.CoppercoatVanguard.class));
         cards.add(new SetCardInfo("Drannith Ruins", 50, Rarity.RARE, mage.cards.d.DrannithRuins.class));
         cards.add(new SetCardInfo("Filter Out", 7, Rarity.UNCOMMON, mage.cards.f.FilterOut.class));
         cards.add(new SetCardInfo("Gold-Forged Thopteryx", 31, Rarity.UNCOMMON, mage.cards.g.GoldForgedThopteryx.class));
