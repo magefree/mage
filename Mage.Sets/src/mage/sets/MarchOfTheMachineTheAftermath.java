@@ -22,6 +22,7 @@ public final class MarchOfTheMachineTheAftermath extends ExpansionSet {
         this.hasBoosters = false; // temporary
 
         cards.add(new SetCardInfo("Filter Out", 7, Rarity.UNCOMMON, mage.cards.f.FilterOut.class));
+        cards.add(new SetCardInfo("Gold-Forged Thopteryx", 31, Rarity.UNCOMMON, mage.cards.g.GoldForgedThopteryx.class));
         cards.add(new SetCardInfo("Harnessed Snubhorn", 3, Rarity.UNCOMMON, mage.cards.h.HarnessedSnubhorn.class));
         cards.add(new SetCardInfo("Jolrael, Voice of Zhalfir", 33, Rarity.RARE, mage.cards.j.JolraelVoiceOfZhalfir.class));
         cards.add(new SetCardInfo("Kolaghan Warmonger", 17, Rarity.UNCOMMON, mage.cards.k.KolaghanWarmonger.class));
