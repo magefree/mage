@@ -36,7 +36,7 @@ public final class AyarasOathsworn extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever Ayara's Oathsworn deals combat damage to a player, if it has fewer than four +1/+1 counters on it, put a +1/+1 counter on it. Then if it has exactly four +1/+1 counters on it, search your library for a card, put it into your hand, then shuffle.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
