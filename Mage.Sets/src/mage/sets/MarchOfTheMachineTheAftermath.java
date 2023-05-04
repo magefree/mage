@@ -39,6 +39,7 @@ public final class MarchOfTheMachineTheAftermath extends ExpansionSet {
         cards.add(new SetCardInfo("Metropolis Reformer", 4, Rarity.RARE, mage.cards.m.MetropolisReformer.class));
         cards.add(new SetCardInfo("Nissa, Resurgent Animist", 22, Rarity.MYTHIC, mage.cards.n.NissaResurgentAnimist.class));
         cards.add(new SetCardInfo("Niv-Mizzet, Supreme", 40, Rarity.RARE, mage.cards.n.NivMizzetSupreme.class));
+        cards.add(new SetCardInfo("Open the Way", 23, Rarity.RARE, mage.cards.o.OpenTheWay.class));
         cards.add(new SetCardInfo("Rebuild the City", 43, Rarity.RARE, mage.cards.r.RebuildTheCity.class));
         cards.add(new SetCardInfo("Reckless Handling", 19, Rarity.UNCOMMON, mage.cards.r.RecklessHandling.class));
         cards.add(new SetCardInfo("Samut, Vizier of Naktamun", 45, Rarity.MYTHIC, mage.cards.s.SamutVizierOfNaktamun.class));
