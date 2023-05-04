@@ -50,5 +50,6 @@ public final class MarchOfTheMachineTheAftermath extends ExpansionSet {
         cards.add(new SetCardInfo("Training Grounds", 9, Rarity.RARE, mage.cards.t.TrainingGrounds.class));
         cards.add(new SetCardInfo("Tyvar the Bellicose", 48, Rarity.MYTHIC, mage.cards.t.TyvarTheBellicose.class));
         cards.add(new SetCardInfo("Undercity Upheaval", 25, Rarity.UNCOMMON, mage.cards.u.UndercityUpheaval.class));
+        cards.add(new SetCardInfo("Vesuvan Drifter", 10, Rarity.RARE, mage.cards.v.VesuvanDrifter.class));
     }
 }
