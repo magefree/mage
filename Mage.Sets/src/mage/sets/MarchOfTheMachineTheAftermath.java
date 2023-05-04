@@ -35,6 +35,7 @@ public final class MarchOfTheMachineTheAftermath extends ExpansionSet {
         cards.add(new SetCardInfo("Karn, Legacy Reforged", 49, Rarity.MYTHIC, mage.cards.k.KarnLegacyReforged.class));
         cards.add(new SetCardInfo("Kiora, Sovereign of the Deep", 35, Rarity.MYTHIC, mage.cards.k.KioraSovereignOfTheDeep.class));
         cards.add(new SetCardInfo("Kolaghan Warmonger", 17, Rarity.UNCOMMON, mage.cards.k.KolaghanWarmonger.class));
+        cards.add(new SetCardInfo("Leyline Immersion", 21, Rarity.RARE, mage.cards.l.LeylineImmersion.class));
         cards.add(new SetCardInfo("Markov Baron", 14, Rarity.UNCOMMON, mage.cards.m.MarkovBaron.class));
         cards.add(new SetCardInfo("Metropolis Reformer", 4, Rarity.RARE, mage.cards.m.MetropolisReformer.class));
         cards.add(new SetCardInfo("Nissa, Resurgent Animist", 22, Rarity.MYTHIC, mage.cards.n.NissaResurgentAnimist.class));
