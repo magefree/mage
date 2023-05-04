@@ -22,6 +22,7 @@ public final class MarchOfTheMachineTheAftermath extends ExpansionSet {
         this.hasBoosters = false; // temporary
 
         cards.add(new SetCardInfo("Ayara's Oathsworn", 11, Rarity.RARE, mage.cards.a.AyarasOathsworn.class));
+        cards.add(new SetCardInfo("Calix, Guided by Fate", 26, Rarity.MYTHIC, mage.cards.c.CalixGuidedByFate.class));
         cards.add(new SetCardInfo("Campus Renovation", 27, Rarity.UNCOMMON, mage.cards.c.CampusRenovation.class));
         cards.add(new SetCardInfo("Coppercoat Vanguard", 1, Rarity.UNCOMMON, mage.cards.c.CoppercoatVanguard.class));
         cards.add(new SetCardInfo("Cosmic Rebirth", 28, Rarity.UNCOMMON, mage.cards.c.CosmicRebirth.class));
