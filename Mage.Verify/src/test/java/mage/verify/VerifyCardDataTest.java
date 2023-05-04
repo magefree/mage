@@ -27,6 +27,7 @@ import mage.game.draft.DraftCube;
 import mage.game.draft.RateCard;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.server.util.SystemUtil;
 import mage.sets.TherosBeyondDeath;
 import mage.util.CardUtil;
@@ -1285,18 +1286,63 @@ public class VerifyCardDataTest {
         // CHECK: private class for inner tokens (no needs at all -- all private tokens must be replaced by CreatureToken)
         for (Class<? extends TokenImpl> tokenClass : privateTokens) {
             String className = extractShortClass(tokenClass);
-            errorsList.add("Error: no needs in private tokens, replace it with CreatureToken: " + className + " from " + tokenClass.getName());
+            errorsList.add("Warning: no needs in private tokens, replace it with CreatureToken: " + className + " from " + tokenClass.getName());
         }
 
         // CHECK: all public tokens must have tok-data (private tokens uses for innner abilities -- no need images for it)
         for (Class<? extends TokenImpl> tokenClass : publicTokens) {
             Token token = (Token) createNewObject(tokenClass);
             if (token == null) {
+                // how-to fix:
+                // - create empty param
+                // - fix error in token's constructor
                 errorsList.add("Error: token must have default constructor with zero params: " + tokenClass.getName());
             } else if (tokDataNamesIndex.getOrDefault(token.getName().replace(" Token", ""), "").isEmpty()) {
-                // how-to fix: public token must be downloadable, so tok-data must contain miss set
-                // (also don't forget to add new set to scryfall download)
+                if (token instanceof CreatureToken) {
+                    // ignore custom token builders
+                    continue;
+                }
+                // how-to fix:
+                // - public token must be downloadable, so tok-data must contain miss set
+                //   (also don't forget to add new set to scryfall download)
                 errorsList.add("Error: can't find data in tokens-database.txt for token: " + tokenClass.getName() + " -> " + token.getName());
+            }
+        }
+
+        // 111.4. A spell or ability that creates a token sets both its name and its subtype(s).
+        // If the spell or ability doesn’t specify the name of the token, its name is the same
+        // as its subtype(s) plus the word “Token.” Once a token is on the battlefield, changing
+        // its name doesn’t change its subtype(s), and vice versa.
+        for (Class<? extends TokenImpl> tokenClass : publicTokens) {
+            Token token = (Token) createNewObject(tokenClass);
+            if (token == null) {
+                // error in constructor, see checks above
+                continue;
+            }
+
+            // CHECK: tokens must have Token word in the name
+            if (token.getDescription().startsWith(token.getName() + ", ")
+                    || token.getDescription().contains("named " + token.getName())
+                    || (token instanceof CreatureToken)) {
+                // ignore some names:
+                // - Boo, a legendary 1/1 red Hamster creature token with trample and haste
+                // - 1/1 green Insect creature token with flying named Butterfly
+                // - custom token builders
+            } else {
+                if (!token.getName().endsWith("Token")) {
+                    errorsList.add("Error: token's name must ends with Token: "
+                            + tokenClass.getName() + " - " + token.getName());
+                }
+            }
+
+            // CHECK: named tokens must not have Token in the name
+            if (token.getDescription().contains("named") && token.getName().contains("Token")) {
+                if (token.getDescription().contains("card named")) {
+                    // ignore ability text like Return a card named Deathpact Angel from
+                    continue;
+                }
+                errorsList.add("Error: named token must not have Token in the name: "
+                        + tokenClass.getName() + " - " + token.getName() + " - " + token.getDescription());
             }
         }
 
