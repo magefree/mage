@@ -29,6 +29,7 @@ public final class MarchOfTheMachine extends ExpansionSet {
         this.numBoosterRare = 1;
         this.numBoosterSpecial = 1; // Multiverse Legends
         this.ratioBoosterMythic = 7;
+        this.numBoosterDoubleFaced = -1; // include normally for now, TODO: Collation
         this.maxCardNumberInBooster = 291;
 
         cards.add(new SetCardInfo("Aerial Boost", 2, Rarity.COMMON, mage.cards.a.AerialBoost.class));
