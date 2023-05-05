@@ -18,7 +18,14 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
     private PhyrexiaAllWillBeOne() {
         super("Phyrexia: All Will Be One", "ONE", ExpansionSet.buildDate(2023, 1, 10), SetType.EXPANSION);
         this.blockName = "Phyrexia: All Will Be One";
-        this.hasBoosters = false; // temporary
+        this.hasBoosters = true;
+        this.hasBasicLands = true;
+        this.numBoosterLands = 1;
+        this.numBoosterCommon = 10;
+        this.numBoosterUncommon = 3;
+        this.numBoosterRare = 1;
+        this.ratioBoosterMythic = 7;
+        this.maxCardNumberInBooster = 271;
 
         cards.add(new SetCardInfo("Adaptive Sporesinger", 157, Rarity.COMMON, mage.cards.a.AdaptiveSporesinger.class));
         cards.add(new SetCardInfo("Against All Odds", 1, Rarity.UNCOMMON, mage.cards.a.AgainstAllOdds.class));
