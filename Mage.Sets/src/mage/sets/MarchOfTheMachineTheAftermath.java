@@ -41,6 +41,7 @@ public final class MarchOfTheMachineTheAftermath extends ExpansionSet {
         cards.add(new SetCardInfo("Markov Baron", 14, Rarity.UNCOMMON, mage.cards.m.MarkovBaron.class));
         cards.add(new SetCardInfo("Metropolis Reformer", 4, Rarity.RARE, mage.cards.m.MetropolisReformer.class));
         cards.add(new SetCardInfo("Narset, Enlightened Exile", 38, Rarity.MYTHIC, mage.cards.n.NarsetEnlightenedExile.class));
+        cards.add(new SetCardInfo("Nashi, Moon's Legacy", 0039, Rarity.RARE, mage.cards.n.NashiMoonsLegacy.class));
         cards.add(new SetCardInfo("Nissa, Resurgent Animist", 22, Rarity.MYTHIC, mage.cards.n.NissaResurgentAnimist.class));
         cards.add(new SetCardInfo("Niv-Mizzet, Supreme", 40, Rarity.RARE, mage.cards.n.NivMizzetSupreme.class));
         cards.add(new SetCardInfo("Open the Way", 23, Rarity.RARE, mage.cards.o.OpenTheWay.class));
