@@ -534,6 +534,7 @@ public class ScryfallImageSupportCards {
             add("30A"); // Thirtieth Anniversary Edition
             add("LTR"); // The Lord of the Rings: Tales of Middle-Earth
             add("LTC"); // Tales of Middle-Earth Commander
+            add("CMM"); // Commander Masters
         }
     };
 

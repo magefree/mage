@@ -37,6 +37,7 @@ Commander Legends: Battle for Baldur's Gate|CommanderLegendsBattleForBaldursGate
 Commander Anthology|CommanderAnthology|
 Commander Anthology 2018|CommanderAnthology2018|
 Commander's Arsenal|CommandersArsenal|
+Commander Masters|CommanderMasters|
 Conflux|Conflux|
 Conspiracy: Take the Crown|ConspiracyTakeTheCrown|
 Core Set 2019|CoreSet2019|

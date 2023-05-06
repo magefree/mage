@@ -47,6 +47,7 @@ Clash Pack|CLASH|
 Commander Anthology|CMA|
 Commander Anthology 2018|CM2|
 Commander's Arsenal|CM1|
+Commander Masters|CMM|
 Commander|CMD|
 Conspiracy|CNS|
 Conspiracy: Take the Crown|CN2|
