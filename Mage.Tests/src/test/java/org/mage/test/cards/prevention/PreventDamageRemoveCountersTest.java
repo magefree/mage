@@ -53,7 +53,6 @@ public class PreventDamageRemoveCountersTest extends CardTestPlayerBase {
 
     }
 
-    @Ignore // Need to refactor Protean Hydra as its damage prevention is not conditional on having counters
     @Test
     public void testProteanHydraBoosted() {
         setStrictChooseMode(true);
