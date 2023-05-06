@@ -5157,8 +5157,25 @@ public abstract class PlayerImpl implements Player, Serializable {
         int creatureCount = game.getBattlefield().count(
                 StaticFilters.FILTER_CONTROLLED_CREATURE, getId(), null, game
         );
-        if (creatureCount <= ((currentBearer != null && currentBearer.isCreature(game)) ? 1 : 0)
-                || !chooseUse(Outcome.Neutral, "Choose a new Ring-bearer?", null, game)) {
+        boolean mustChoose;
+        if (currentBearer == null) {
+            if (creatureCount > 0) {
+                mustChoose = true;
+            } else {
+                return;
+            }
+        } else if (currentBearer.isCreature(game)) {
+            if (creatureCount > 1) {
+                mustChoose = false;
+            } else {
+                return;
+            }
+        } else if (creatureCount > 0) {
+            mustChoose = false;
+        } else {
+            return;
+        }
+        if (!mustChoose && !chooseUse(Outcome.Neutral, "Choose a new Ring-bearer?", null, game)) {
             return;
         }
         TargetPermanent target = new TargetControlledCreaturePermanent();
