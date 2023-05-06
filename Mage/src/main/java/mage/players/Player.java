@@ -1080,6 +1080,12 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     FilterMana getPhyrexianColors();
 
+    UUID getRingBearerId();
+
+    Permanent getRingBearer(Game game);
+
+    void chooseRingBearer(Game game);
+
     /**
      * Function to query if the player has strictChooseMode enabled. Only the test player can have it.
      * Function is added here so that the test suite project does not have to be imported into the client/server project.

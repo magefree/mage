@@ -37,7 +37,6 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.util.CardUtil;
 import mage.util.GameLog;
-import mage.util.RandomUtil;
 import mage.util.ThreadLocalStringBuilder;
 import org.apache.log4j.Logger;
 
@@ -1811,6 +1810,12 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public void setSecondCardFace(Card card) {
         this.secondSideCard = card;
+    }
+
+    @Override
+    public boolean isRingBearer(Game game) {
+        Player player = game.getPlayer(getControllerId());
+        return player != null && this.equals(player.getRingBearer(game));
     }
 
     @Override

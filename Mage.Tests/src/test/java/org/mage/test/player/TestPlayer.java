@@ -4362,6 +4362,21 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public UUID getRingBearerId() {
+        return computerPlayer.getRingBearerId();
+    }
+
+    @Override
+    public Permanent getRingBearer(Game game) {
+        return computerPlayer.getRingBearer(game);
+    }
+
+    @Override
+    public void chooseRingBearer(Game game) {
+        computerPlayer.chooseRingBearer(game);
+    }
+
+    @Override
     public SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana) {
         assertAliasSupportInChoices(false);
         MageObject object = game.getObject(card.getId()); // must be object to find real abilities (example: commander)

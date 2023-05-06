@@ -419,6 +419,8 @@ public interface Permanent extends Card, Controllable {
 
     boolean isManifested();
 
+    boolean isRingBearer(Game game);
+
     @Override
     Permanent copy();
 
