@@ -305,7 +305,7 @@ public abstract class ExpansionSet implements Serializable {
         return true;
     }
 
-    private static ObjectColor getColorForValidate(Card card) {
+    public static ObjectColor getColorForValidate(Card card) {
         ObjectColor color = card.getColor();
         // treat colorless nonland cards with exactly one ID color as cards of that color
         // (e.g. devoid, emerge, spellbombs... but not mana fixing artifacts)
