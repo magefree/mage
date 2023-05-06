@@ -19,6 +19,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
+import mage.watchers.common.TemptedByTheRingWatcher;
 
 import java.util.UUID;
 
@@ -80,7 +81,6 @@ enum FrodoSauronsBaneCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // TODO: Implement when mechanic is known
-        return false;
+        return TemptedByTheRingWatcher.getCount(source.getControllerId(), game) >= 4;
     }
 }

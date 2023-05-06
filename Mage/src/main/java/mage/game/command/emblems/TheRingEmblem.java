@@ -21,6 +21,7 @@ import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.watchers.common.TemptedByTheRingWatcher;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -30,7 +31,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class TheRingEmblem extends Emblem {
-    private int temptCount = 0;
     private static final FilterPermanent filter = new FilterControlledPermanent("your Ring-bearer");
 
     static {
@@ -45,32 +45,32 @@ public final class TheRingEmblem extends Emblem {
     }
 
     public void addNextAbility(Game game) {
-        temptCount++;
         Ability ability;
-        switch (temptCount) {
-            case 1:
+        switch (TemptedByTheRingWatcher.getCount(this.getControllerId(), game)) {
+            case 0:
                 // Your Ring-bearer is legendary and can't be blocked by creatures with greater power.
                 ability = new SimpleStaticAbility(Zone.COMMAND, new TheRingEmblemLegendaryEffect());
                 ability.addEffect(new TheRingEmblemEvasionEffect());
                 break;
-            case 2:
+            case 1:
                 // Whenever your Ring-bearer attacks, draw a card, then discard a card.
                 ability = new AttacksCreatureYouControlTriggeredAbility(
                         Zone.COMMAND,
                         new DrawDiscardControllerEffect(1, 1),
                         false, filter, false
-                );
+                ).setTriggerPhrase("Whenever your Ring-bearer attacks, ");
                 break;
-            case 3:
+            case 2:
                 // Whenever your Ring-bearer becomes blocked by a creature, that creature's controller sacrifices it at end of combat.
                 ability = new TheRingEmblemTriggeredAbility();
                 break;
-            case 4:
+            case 3:
                 // Whenever your Ring-bearer deals combat damage to a player, each opponent loses 3 life.
                 ability = new DealsDamageToAPlayerAllTriggeredAbility(
                         Zone.COMMAND, new LoseLifeOpponentsEffect(3), filter, false,
                         SetTargetPointer.NONE, true, false
                 );
+                break;
             default:
                 return;
         }
