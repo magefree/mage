@@ -44,7 +44,7 @@ public final class NashiMoonsLegacy extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Ward {1}
         this.addAbility(new WardAbility(new ManaCostsImpl<>("{1}"), false));
