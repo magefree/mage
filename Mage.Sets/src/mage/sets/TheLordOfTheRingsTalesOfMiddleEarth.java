@@ -9,7 +9,7 @@ import java.util.List;
 
 public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Frodo, Sauron's Bane", "Gollum, Patient Plotter", "Samwise the Stouthearted");
+    private static final List<String> unfinished = Arrays.asList("Call of the Ring", "Frodo, Sauron's Bane", "Gollum, Patient Plotter", "Samwise the Stouthearted");
     private static final TheLordOfTheRingsTalesOfMiddleEarth instance = new TheLordOfTheRingsTalesOfMiddleEarth();
 
     public static TheLordOfTheRingsTalesOfMiddleEarth getInstance() {
