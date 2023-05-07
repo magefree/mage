@@ -10,6 +10,7 @@ import mage.abilities.effects.keyword.TheRingTemptsYouEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
@@ -44,7 +45,7 @@ public final class FrodoBaggins extends CardImpl {
 
         // As long as Frodo is your Ring-bearer, it must be blocked if able.
         this.addAbility(new SimpleStaticAbility(new ConditionalRequirementEffect(
-                new MustBeBlockedByAtLeastOneSourceEffect(), SourceIsRingBearerCondition.instance,
+                new MustBeBlockedByAtLeastOneSourceEffect(Duration.WhileOnBattlefield), SourceIsRingBearerCondition.instance,
                 "as long as {this} is your Ring-bearer, it must be blocked if able"
         )));
     }

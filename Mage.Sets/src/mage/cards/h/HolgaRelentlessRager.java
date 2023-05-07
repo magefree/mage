@@ -39,7 +39,7 @@ public final class HolgaRelentlessRager extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Holga, Relentless Rager must be blocked if able.
-        this.addAbility(new SimpleStaticAbility(new MustBeBlockedByAtLeastOneSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new MustBeBlockedByAtLeastOneSourceEffect(Duration.WhileOnBattlefield)));
 
         // Whenever Holga attacks, each creature you control attacking a player gets +1/+0 until end of turn for each creature that player controls.
         this.addAbility(new AttacksTriggeredAbility(new HolgaRelentlessRagerEffect()));
