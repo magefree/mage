@@ -1,14 +1,11 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.IslandwalkAbility;
-import java.util.Arrays;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class SquidToken extends TokenImpl {
@@ -22,8 +19,6 @@ public final class SquidToken extends TokenImpl {
         toughness = new MageInt(1);
 
         this.addAbility(new IslandwalkAbility());
-
-        availableImageSetCodes = Arrays.asList("M15", "C16", "NCC", "CLB", "MOC");
     }
 
     private SquidToken(final SquidToken token) {

@@ -36,7 +36,6 @@ public final class ElspethKnightErrant extends CardImpl {
 
         // +1: Create a 1/1 white Soldier creature token.
         Token token = new SoldierToken();
-        token.setOriginalExpansionSetCode("ALA"); // to get the right image
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(token), 1));
 
         // +1: Target creature gets +3/+3 and gains flying until end of turn.

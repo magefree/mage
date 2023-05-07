@@ -1,14 +1,10 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
-
-import java.util.Arrays;
 
 /**
- *
  * @author spjspj
  */
 public final class MasterOfWavesElementalToken extends TokenImpl {
@@ -22,8 +18,6 @@ public final class MasterOfWavesElementalToken extends TokenImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(0);
-
-        availableImageSetCodes = Arrays.asList("THS", "DDT");
     }
 
     public MasterOfWavesElementalToken(final MasterOfWavesElementalToken token) {

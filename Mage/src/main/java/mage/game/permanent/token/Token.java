@@ -37,27 +37,13 @@ public interface Token extends MageObject {
 
     boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, boolean created);
 
-    int getTokenType();
-
     void setPower(int power);
 
     void setToughness(int toughness);
 
-    void setTokenType(int tokenType);
-
-    String getOriginalCardNumber();
-
-    void setOriginalCardNumber(String originalCardNumber);
-
-    String getOriginalExpansionSetCode();
-
-    void setOriginalExpansionSetCode(String originalExpansionSetCode);
-
     Card getCopySourceCard();
 
     void setCopySourceCard(Card copySourceCard);
-
-    void setExpansionSetCodeForImage(String code);
 
     Token getBackFace();
 

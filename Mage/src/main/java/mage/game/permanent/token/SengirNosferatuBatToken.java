@@ -19,8 +19,6 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInExile;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -43,8 +41,6 @@ public final class SengirNosferatuBatToken extends TokenImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
-
-        availableImageSetCodes = Arrays.asList("TSR");
     }
 
     public SengirNosferatuBatToken(final SengirNosferatuBatToken token) {

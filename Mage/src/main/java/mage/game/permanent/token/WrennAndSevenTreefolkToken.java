@@ -9,8 +9,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -27,8 +25,6 @@ public final class WrennAndSevenTreefolkToken extends TokenImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(
                 LandsYouControlCount.instance
         ).setText("this creature's power and toughness are each equal to the number of lands you control")));
-
-        availableImageSetCodes.addAll(Arrays.asList("MID"));
     }
 
     public WrennAndSevenTreefolkToken(final WrennAndSevenTreefolkToken token) {

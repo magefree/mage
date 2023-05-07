@@ -1,17 +1,12 @@
-
 package mage.game.permanent.token;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.keyword.ProtectionAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author LevelX2
  */
 public final class HuntedCentaurToken extends TokenImpl {
@@ -24,8 +19,6 @@ public final class HuntedCentaurToken extends TokenImpl {
         power = new MageInt(3);
         toughness = new MageInt(3);
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
-
-        availableImageSetCodes = Arrays.asList("RTR", "MM3", "CLB");
     }
 
     public HuntedCentaurToken(final HuntedCentaurToken token) {

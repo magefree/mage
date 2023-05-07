@@ -5,8 +5,6 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -23,16 +21,6 @@ public final class PhyrexianHydraWithLifelinkToken extends TokenImpl {
         toughness = new MageInt(3);
 
         this.addAbility(LifelinkAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("MOM");
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("MOM")) {
-            this.setTokenType(1);
-        }
     }
 
     public PhyrexianHydraWithLifelinkToken(final PhyrexianHydraWithLifelinkToken token) {

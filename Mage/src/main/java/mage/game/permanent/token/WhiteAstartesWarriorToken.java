@@ -5,8 +5,6 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -21,9 +19,6 @@ public final class WhiteAstartesWarriorToken extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(2);
         addAbility(VigilanceAbility.getInstance());
-
-        availableImageSetCodes.addAll(Arrays.asList("40K"));
-        this.setTokenType(2);
     }
 
     public WhiteAstartesWarriorToken(final WhiteAstartesWarriorToken token) {

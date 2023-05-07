@@ -8,9 +8,6 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.util.RandomUtil;
-
-import java.util.Arrays;
 
 /**
  *
@@ -28,25 +25,6 @@ public final class ClueArtifactToken extends TokenImpl {
         cost.setText("Sacrifice this artifact");
         ability.addCost(cost);
         this.addAbility(ability);
-
-        availableImageSetCodes = Arrays.asList("C18", "SOI", "MH2", "AFC", "MID", "VOC", "SLD", "2XM", "NCC", "CLB", "40K", "30A", "MOC");
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode().equals("SOI")) {
-            this.setTokenType(RandomUtil.nextInt(6) + 1); // 6 different images
-        }
-
-        if (getOriginalExpansionSetCode().equals("MH2")) {
-            this.setTokenType(RandomUtil.nextInt(2) + 1); // 2 different images
-        }
-
-        if (getOriginalExpansionSetCode().equals("30A")) {
-            this.setTokenType(RandomUtil.nextInt(2) + 1); // 2 different images
-        }
     }
 
     public ClueArtifactToken(final ClueArtifactToken token) {

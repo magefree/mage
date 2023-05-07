@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -18,8 +16,6 @@ public final class GreenCat2Token extends TokenImpl {
         subtype.add(SubType.CAT);
         power = new MageInt(2);
         toughness = new MageInt(2);
-
-        availableImageSetCodes = Arrays.asList("M21", "KHM", "DMR");
     }
 
     private GreenCat2Token(final GreenCat2Token token) {
@@ -28,17 +24,5 @@ public final class GreenCat2Token extends TokenImpl {
 
     public GreenCat2Token copy() {
         return new GreenCat2Token(this);
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("M21")) {
-            this.setTokenType(2);
-        }
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("DMR")) {
-            this.setTokenType(2);
-        }
     }
 }

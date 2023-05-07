@@ -5,8 +5,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -21,8 +19,6 @@ public final class TuktukTheReturnedToken extends TokenImpl {
         subtype.add(SubType.GOLEM);
         power = new MageInt(5);
         toughness = new MageInt(5);
-
-        availableImageSetCodes = Arrays.asList("ROE", "C14", "CM2", "2XM");
     }
 
     public TuktukTheReturnedToken(final TuktukTheReturnedToken token) {

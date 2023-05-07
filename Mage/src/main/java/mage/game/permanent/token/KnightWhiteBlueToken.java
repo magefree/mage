@@ -20,8 +20,6 @@ public final class KnightWhiteBlueToken extends TokenImpl {
         toughness = new MageInt(2);
 
         addAbility(VigilanceAbility.getInstance());
-
-        this.setExpansionSetCodeForImage("MOM");
     }
 
     public KnightWhiteBlueToken(final KnightWhiteBlueToken token) {

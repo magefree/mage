@@ -5,8 +5,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -21,17 +19,6 @@ public final class AnotherSpiritToken extends TokenImpl {
         toughness = new MageInt(3);
 
         this.addAbility(FlyingAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("VOC");
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("VOC")) {
-            setTokenType(2);
-        }
     }
 
     public AnotherSpiritToken(final AnotherSpiritToken token) {

@@ -1,16 +1,12 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
-
-import java.util.Arrays;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class WeirdToken extends TokenImpl {
@@ -24,8 +20,6 @@ public final class WeirdToken extends TokenImpl {
         toughness = new MageInt(3);
         this.addAbility(DefenderAbility.getInstance());
         this.addAbility(FlyingAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("GK1");
     }
 
     public WeirdToken(final WeirdToken token) {

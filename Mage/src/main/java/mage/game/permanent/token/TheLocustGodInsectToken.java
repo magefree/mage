@@ -6,8 +6,6 @@ import mage.abilities.keyword.HasteAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -23,17 +21,6 @@ public final class TheLocustGodInsectToken extends TokenImpl {
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());
         addAbility(HasteAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("HOU", "C20", "MOC");
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C20")) {
-            this.setTokenType(2);
-        }
     }
 
     public TheLocustGodInsectToken(final TheLocustGodInsectToken token) {

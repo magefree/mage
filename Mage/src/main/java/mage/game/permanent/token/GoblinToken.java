@@ -5,8 +5,6 @@ import mage.abilities.keyword.HasteAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author North
  */
@@ -29,12 +27,6 @@ public final class GoblinToken extends TokenImpl {
         color.setRed(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
-
-        availableImageSetCodes = Arrays.asList("10E", "ALA", "SOM", "M10", "M13", "RTR",
-                "MMA", "M15", "C14", "KTK", "EVG", "DTK", "ORI", "DDG", "DDN",
-                "MM3", "EMA", "DOM", "RNA", "WAR", "MH1", "TSR", "MH2", "AFR",
-                "NEC", "M19", "CM2", "PCA", "DD1", "DDS", "DDT", "A25", "GRN",
-                "GK1", "DMU", "DMR", "ONC", "MOC");
     }
 
     public GoblinToken(final GoblinToken token) {

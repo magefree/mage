@@ -1,15 +1,11 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
-
-import java.util.Arrays;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class NightwingHorrorToken extends TokenImpl {
@@ -25,8 +21,6 @@ public final class NightwingHorrorToken extends TokenImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("GTC", "GK1");
     }
 
     public NightwingHorrorToken(final NightwingHorrorToken token) {

@@ -1,16 +1,12 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.keyword.ReachAbility;
-
-import java.util.Arrays;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class RenownedWeaverSpiderToken extends TokenImpl {
@@ -25,8 +21,6 @@ public final class RenownedWeaverSpiderToken extends TokenImpl {
         toughness = new MageInt(3);
 
         this.addAbility(ReachAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("JOU");
     }
 
     public RenownedWeaverSpiderToken(final RenownedWeaverSpiderToken token) {

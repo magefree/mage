@@ -5,8 +5,6 @@ import mage.abilities.keyword.HasteAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -20,8 +18,6 @@ public final class AkroanSoldierToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(HasteAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("THS", "UMA");
     }
 
     public AkroanSoldierToken(final AkroanSoldierToken token) {
@@ -30,14 +26,5 @@ public final class AkroanSoldierToken extends TokenImpl {
 
     public AkroanSoldierToken copy() {
         return new AkroanSoldierToken(this);
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("THS")) {
-            this.setTokenType(3);
-        }
     }
 }

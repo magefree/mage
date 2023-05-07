@@ -31,6 +31,7 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class TheRingEmblem extends Emblem {
+
     private static final FilterPermanent filter = new FilterControlledPermanent("your Ring-bearer");
 
     static {
@@ -38,10 +39,17 @@ public final class TheRingEmblem extends Emblem {
     }
 
     public TheRingEmblem(UUID controllerId) {
-        super();
-        this.setName("The Ring");
-        this.setExpansionSetCodeForImage("LTR");
+        super("The Ring");
         this.setControllerId(controllerId);
+    }
+
+    private TheRingEmblem(final TheRingEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public TheRingEmblem copy() {
+        return new TheRingEmblem(this);
     }
 
     public void addNextAbility(Game game) {

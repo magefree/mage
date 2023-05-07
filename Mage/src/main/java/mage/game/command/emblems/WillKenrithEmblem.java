@@ -6,8 +6,6 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.command.Emblem;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -15,7 +13,7 @@ public final class WillKenrithEmblem extends Emblem {
     // Target player gets an emblem with "Whenever you cast an instant or sorcery spell, copy it. You may choose new targets for the copy."
 
     public WillKenrithEmblem() {
-        this.setName("Emblem Will Kenrith");
+        super("Emblem Will Kenrith");
         this.getAbilities().add(new SpellCastControllerTriggeredAbility(
                 Zone.COMMAND,
                 new CopyTargetSpellEffect(true).withSpellName("it"),
@@ -23,7 +21,14 @@ public final class WillKenrithEmblem extends Emblem {
                 false,
                 true
         ));
+    }
 
-        availableImageSetCodes = Arrays.asList("BBD", "CLB");
+    private WillKenrithEmblem(final WillKenrithEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public WillKenrithEmblem copy() {
+        return new WillKenrithEmblem(this);
     }
 }

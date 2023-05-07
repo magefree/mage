@@ -13,13 +13,20 @@ import mage.players.Player;
 public class TeferiWhoSlowsTheSunsetEmblem extends Emblem {
     // You get an emblem with "Untap all permanents you control during each opponent's untap step" and "You draw a card during each opponent's draw step."
     public TeferiWhoSlowsTheSunsetEmblem() {
-        this.setName("Emblem Teferi");
+        super("Emblem Teferi");
         this.getAbilities().add(new SimpleStaticAbility(
                 Zone.COMMAND, new UntapAllDuringEachOtherPlayersUntapStepEffect(StaticFilters.FILTER_CONTROLLED_PERMANENTS)
         ));
         this.getAbilities().add(new SimpleStaticAbility(new TeferiWhoSlowsTheSunsetEmblemEffect()));
+    }
 
-        this.setExpansionSetCodeForImage("MID");
+    private TeferiWhoSlowsTheSunsetEmblem(final TeferiWhoSlowsTheSunsetEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public TeferiWhoSlowsTheSunsetEmblem copy() {
+        return new TeferiWhoSlowsTheSunsetEmblem(this);
     }
 }
 

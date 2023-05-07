@@ -1,15 +1,11 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.TrampleAbility;
-
-import java.util.Arrays;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class PenumbraWurmToken extends TokenImpl {
@@ -23,8 +19,6 @@ public final class PenumbraWurmToken extends TokenImpl {
         toughness = new MageInt(6);
 
         this.addAbility(TrampleAbility.getInstance());
-
-        availableImageSetCodes.addAll(Arrays.asList("UMA"));
     }
 
     public PenumbraWurmToken(final PenumbraWurmToken token) {

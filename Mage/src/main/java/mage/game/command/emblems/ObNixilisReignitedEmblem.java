@@ -1,4 +1,3 @@
-
 package mage.game.command.emblems;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -8,21 +7,24 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-
-import java.util.Arrays;
 
 /**
- *
  * @author spjspj
  */
 public final class ObNixilisReignitedEmblem extends Emblem {
 
     public ObNixilisReignitedEmblem() {
-        setName("Emblem Nixilis");
-
+        super("Emblem Nixilis");
         this.getAbilities().add(new ObNixilisEmblemTriggeredAbility(new LoseLifeSourceControllerEffect(2), false));
-        availableImageSetCodes = Arrays.asList("BFZ", "DDR", "C19");
+    }
+
+    private ObNixilisReignitedEmblem(final ObNixilisReignitedEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public ObNixilisReignitedEmblem copy() {
+        return new ObNixilisReignitedEmblem(this);
     }
 }
 

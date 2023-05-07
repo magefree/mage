@@ -1,13 +1,11 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class SatyrNyxSmithElementalToken extends TokenImpl {
@@ -21,7 +19,6 @@ public final class SatyrNyxSmithElementalToken extends TokenImpl {
         power = new MageInt(3);
         toughness = new MageInt(1);
         this.addAbility(HasteAbility.getInstance());
-        this.setOriginalExpansionSetCode("BNG");
     }
 
     public SatyrNyxSmithElementalToken(final SatyrNyxSmithElementalToken token) {

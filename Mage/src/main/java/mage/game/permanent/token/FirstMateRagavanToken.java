@@ -5,8 +5,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -21,8 +19,6 @@ public final class FirstMateRagavanToken extends TokenImpl {
         this.subtype.add(SubType.MONKEY);
         this.subtype.add(SubType.PIRATE);
         this.cardType.add(CardType.CREATURE);
-
-        availableImageSetCodes = Arrays.asList("MOM");
     }
 
     public FirstMateRagavanToken(final FirstMateRagavanToken token) {

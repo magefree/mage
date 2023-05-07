@@ -5,8 +5,6 @@ import mage.abilities.keyword.InfectAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author nantuko
  */
@@ -21,7 +19,6 @@ public final class InsectInfectToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(InfectAbility.getInstance());
-        availableImageSetCodes = Arrays.asList("SOM", "ONC");
     }
 
     public InsectInfectToken(final InsectInfectToken token) {

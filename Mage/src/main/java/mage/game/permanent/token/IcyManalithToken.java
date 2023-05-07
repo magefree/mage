@@ -4,8 +4,6 @@ import mage.abilities.mana.AnyColorManaAbility;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -17,8 +15,6 @@ public final class IcyManalithToken extends TokenImpl {
         this.cardType.add(CardType.ARTIFACT);
 
         this.addAbility(new AnyColorManaAbility());
-
-        availableImageSetCodes = Arrays.asList("KHM");
     }
 
     private IcyManalithToken(final IcyManalithToken token) {

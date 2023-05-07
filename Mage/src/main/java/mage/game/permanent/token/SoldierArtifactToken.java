@@ -3,9 +3,6 @@ package mage.game.permanent.token;
 import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.util.RandomUtil;
-
-import java.util.Arrays;
 
 /**
  * @author TheElk801
@@ -19,9 +16,6 @@ public final class SoldierArtifactToken extends TokenImpl {
         subtype.add(SubType.SOLDIER);
         power = new MageInt(1);
         toughness = new MageInt(1);
-
-        availableImageSetCodes = Arrays.asList("BRO");
-        this.setTokenType(RandomUtil.nextInt(2) + 1);
     }
 
     public SoldierArtifactToken(final SoldierArtifactToken token) {

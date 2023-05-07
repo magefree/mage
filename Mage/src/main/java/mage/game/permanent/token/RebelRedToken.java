@@ -16,8 +16,6 @@ public final class RebelRedToken extends TokenImpl {
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.REBEL);
-
-        setOriginalExpansionSetCode("ONE");
     }
 
     public RebelRedToken(final RebelRedToken token) {

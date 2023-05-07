@@ -31,7 +31,6 @@ public class TheGreatForestPlane extends Plane {
 
     public TheGreatForestPlane() {
         this.setPlaneType(Planes.PLANE_THE_GREAT_FOREST);
-        this.setExpansionSetCodeForImage("PCA");
 
         // Each creature assigns combat damage equal to its toughness rather than its power
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new TheGreatForestCombatDamageRuleEffect());
@@ -55,6 +54,15 @@ public class TheGreatForestPlane extends Plane {
         this.getAbilities().add(chaosAbility);
         chaosAbility.setMayActivate(TargetController.ANY);
         this.getAbilities().add(new SimpleStaticAbility(Zone.ALL, new PlanarDieRollCostIncreasingEffect(chaosAbility.getOriginalId())));
+    }
+
+    private TheGreatForestPlane(final TheGreatForestPlane plane) {
+        super(plane);
+    }
+
+    @Override
+    public TheGreatForestPlane copy() {
+        return new TheGreatForestPlane(this);
     }
 }
 

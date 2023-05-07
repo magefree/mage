@@ -1,38 +1,17 @@
-
-
 package mage.game.permanent.token;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class LeafdrakeRoostDrakeToken extends TokenImpl {
 
-    static final private List<String> tokenImageSets = new ArrayList<>();
-
-    static {
-        tokenImageSets.addAll(Arrays.asList("CMA"));
-    }
-
     public LeafdrakeRoostDrakeToken() {
-        this(null, 0);
-    }
-
-    public LeafdrakeRoostDrakeToken(String setCode) {
-        this(setCode, 0);
-    }
-
-    public LeafdrakeRoostDrakeToken(String setCode, int tokenType) {
         super("Drake Token", "2/2 green and blue Drake creature token with flying");
-        availableImageSetCodes = tokenImageSets;
-        setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         color.setBlue(true);
@@ -41,7 +20,7 @@ public final class LeafdrakeRoostDrakeToken extends TokenImpl {
         toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());
     }
-    
+
     public LeafdrakeRoostDrakeToken(final LeafdrakeRoostDrakeToken token) {
         super(token);
     }

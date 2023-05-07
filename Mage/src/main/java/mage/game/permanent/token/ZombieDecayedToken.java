@@ -18,17 +18,6 @@ public final class ZombieDecayedToken extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(2);
         this.addAbility(new DecayedAbility());
-
-        this.setExpansionSetCodeForImage("MID");
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("MID")) {
-            this.setTokenType(1);
-        }
     }
 
     public ZombieDecayedToken(final ZombieDecayedToken token) {

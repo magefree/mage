@@ -7,8 +7,6 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -25,8 +23,6 @@ public final class HungryForMoreVampireToken extends TokenImpl {
         addAbility(TrampleAbility.getInstance());
         addAbility(LifelinkAbility.getInstance());
         addAbility(HasteAbility.getInstance());
-
-        availableImageSetCodes.addAll(Arrays.asList("MID"));
     }
 
     public HungryForMoreVampireToken(final HungryForMoreVampireToken token) {

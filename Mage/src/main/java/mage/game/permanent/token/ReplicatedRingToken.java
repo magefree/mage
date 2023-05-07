@@ -4,8 +4,6 @@ import mage.abilities.mana.AnyColorManaAbility;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -17,10 +15,7 @@ public final class ReplicatedRingToken extends TokenImpl {
         cardType.add(CardType.ARTIFACT);
 
         this.addAbility(new AnyColorManaAbility());
-
-        availableImageSetCodes = Arrays.asList("KHM", "MOC");
     }
-
 
     private ReplicatedRingToken(final ReplicatedRingToken token) {
         super(token);

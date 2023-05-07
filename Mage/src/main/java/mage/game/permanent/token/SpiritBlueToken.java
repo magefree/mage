@@ -1,15 +1,11 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
-
-import java.util.Arrays;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class SpiritBlueToken extends TokenImpl {
@@ -22,19 +18,6 @@ public final class SpiritBlueToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("AVR", "MOC");
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("AVR")) {
-            setTokenType(1);
-        }
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("MOC")) {
-            setTokenType(1);
-        }
     }
 
     public SpiritBlueToken(final SpiritBlueToken token) {

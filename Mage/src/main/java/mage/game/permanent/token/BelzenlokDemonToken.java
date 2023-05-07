@@ -17,8 +17,6 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.Arrays;
-
 /**
  * @author LoneFox
  */
@@ -35,8 +33,6 @@ public final class BelzenlokDemonToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
         addAbility(TrampleAbility.getInstance());
         addAbility(new BeginningOfUpkeepTriggeredAbility(new BelzenlokDemonTokenEffect(), TargetController.YOU, false));
-
-        availableImageSetCodes = Arrays.asList("DOM", "MOC");
     }
 
     public BelzenlokDemonToken(final BelzenlokDemonToken token) {

@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -19,8 +17,6 @@ public final class Elemental11BlueRedToken extends TokenImpl {
         color.setRed(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
-
-        availableImageSetCodes = Arrays.asList("MOM");
     }
 
     public Elemental11BlueRedToken(final Elemental11BlueRedToken token) {

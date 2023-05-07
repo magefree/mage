@@ -15,7 +15,6 @@ import mage.cards.repository.TokenRepository;
 import mage.cards.repository.TokenType;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.command.CommandObject;
 import mage.game.events.CreateTokenEvent;
 import mage.game.events.CreatedTokenEvent;
 import mage.game.events.CreatedTokensEvent;
@@ -24,10 +23,8 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.target.Target;
-import mage.util.RandomUtil;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Each token must have default constructor without params (GUI require for card viewer)
@@ -36,14 +33,9 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
 
     protected String description;
     private final ArrayList<UUID> lastAddedTokenIds = new ArrayList<>();
-    private int tokenType;
-    private String originalCardNumber;
-    private String originalExpansionSetCode;
+
     private Card copySourceCard; // the card the Token is a copy from
     private static final int MAX_TOKENS_PER_GAME = 500;
-
-    // list of set codes token images are available for
-    protected List<String> availableImageSetCodes = new ArrayList<>(); // TODO: delete
 
     protected Token backFace = null;
     private boolean entersTransformed = false;
@@ -64,12 +56,8 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     protected TokenImpl(final TokenImpl token) {
         super(token);
         this.description = token.description;
-        this.tokenType = token.tokenType;
         this.lastAddedTokenIds.addAll(token.lastAddedTokenIds);
-        this.originalCardNumber = token.originalCardNumber;
-        this.originalExpansionSetCode = token.originalExpansionSetCode;
         this.copySourceCard = token.copySourceCard; // will never be changed
-        this.availableImageSetCodes = token.availableImageSetCodes;
         this.backFace = token.backFace != null ? token.backFace.copy() : null;
         this.entersTransformed = token.entersTransformed;
     }
@@ -157,17 +145,17 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         // - use default set code
 
         // token from a card - must use card image instead (example: Embalm ability)
-        if (token.getOriginalCardNumber() != null) {
-            return new TokenInfo(TokenType.TOKEN, token.getName(), token.getOriginalExpansionSetCode(), 0);
+        if (!token.getCardNumber().isEmpty()) {
+            return new TokenInfo(TokenType.TOKEN, token.getName(), token.getExpansionSetCode(), 0);
         }
 
         // token from another token
         if (token instanceof EmptyToken) {
-            if (token.getOriginalExpansionSetCode() == null) {
+            if (token.getExpansionSetCode() == null) {
                 // possible reason: miss call of CardUtil.copySetAndCardNumber in copying method
                 throw new IllegalArgumentException("Wrong code usage: can't copy token without set code");
             }
-            return new TokenInfo(TokenType.TOKEN, token.getName(), token.getOriginalExpansionSetCode(), token.getTokenType());
+            return new TokenInfo(TokenType.TOKEN, token.getName(), token.getExpansionSetCode(), token.getImageNumber());
         }
 
         // token as is
@@ -179,26 +167,17 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
             setCode = sourceCard.getExpansionSetCode();
         } else {
             MageObject sourceObject = game.getObject(sourceId);
-            if (sourceObject instanceof CommandObject) {
-                setCode = ((CommandObject) sourceObject).getExpansionSetCodeForImage();
+            if (sourceObject != null) {
+                setCode = sourceObject.getExpansionSetCode();
             } else {
                 setCode = null;
             }
         }
 
         // search by set code
-        List<TokenInfo> possibleInfo = TokenRepository.instance.getByClassName(token.getClass().getName())
-                .stream()
-                .filter(info -> info.getSetCode().equals(setCode))
-                .collect(Collectors.toList());
-
-        // search by random set
-        if (possibleInfo.isEmpty()) {
-            possibleInfo = new ArrayList<>(TokenRepository.instance.getByClassName(token.getClass().getName()));
-        }
-
-        if (possibleInfo.size() > 0) {
-            return RandomUtil.randomFromCollection(possibleInfo);
+        TokenInfo foundInfo = TokenRepository.instance.generateTokenInfoBySetCode(token.getClass().getName(), setCode);
+        if (foundInfo != null) {
+            return foundInfo;
         }
 
         // TODO: implement auto-generate images for CreatureToken (search public tokens for same characteristics)
@@ -275,9 +254,9 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
 
             // choose token's set code due source
             TokenInfo tokenInfo = TokenImpl.generateTokenInfo((TokenImpl) token, game, source == null ? null : source.getSourceId());
-            token.setOriginalExpansionSetCode(tokenInfo.getSetCode());
-            token.setExpansionSetCodeForImage(tokenInfo.getSetCode());
-            token.setTokenType(tokenInfo.getImageNumber());
+            token.setExpansionSetCode(tokenInfo.getSetCode());
+            //token.setCardNumber(""); // if token from a card then don't change a card number
+            token.setImageNumber(tokenInfo.getImageNumber());
 
             List<Permanent> needTokens = new ArrayList<>();
             List<Permanent> allowedTokens = new ArrayList<>();
@@ -425,35 +404,6 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     }
 
     @Override
-    public int getTokenType() {
-        return tokenType;
-    }
-
-    /**
-     * Set token index to search in tokens-database.txt (if set have multiple
-     * tokens with same name) Default is 1
-     */
-    @Override
-    public void setTokenType(int tokenType) {
-        this.tokenType = tokenType;
-    }
-
-    @Override
-    public String getOriginalCardNumber() {
-        return originalCardNumber;
-    }
-
-    @Override
-    public void setOriginalCardNumber(String originalCardNumber) {
-        this.originalCardNumber = originalCardNumber;
-    }
-
-    @Override
-    public String getOriginalExpansionSetCode() {
-        return originalExpansionSetCode;
-    }
-
-    @Override
     public void setStartingLoyalty(int startingLoyalty) {
         if (backFace != null) {
             backFace.setStartingLoyalty(startingLoyalty);
@@ -470,14 +420,6 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     }
 
     @Override
-    public void setOriginalExpansionSetCode(String originalExpansionSetCode) {
-        // TODO: delete
-        // TODO: remove original set code at all... token image must be takes by card source or by latest set (on null source)
-        // TODO: if set have same tokens then selects it by random
-        this.originalExpansionSetCode = originalExpansionSetCode;
-    }
-
-    @Override
     public Card getCopySourceCard() {
         return copySourceCard;
     }
@@ -487,12 +429,6 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         if (copySourceCard != null) {
             this.copySourceCard = copySourceCard.copy();
         }
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        // TODO: delete
-        setOriginalExpansionSetCode(code);
     }
 
     @Override

@@ -1,4 +1,3 @@
-
 package mage.game.permanent.token;
 
 import mage.MageInt;
@@ -9,7 +8,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class DragonBroodmotherDragonToken extends TokenImpl {
@@ -24,7 +22,6 @@ public final class DragonBroodmotherDragonToken extends TokenImpl {
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());
         addAbility(new DevourAbility(DevourEffect.DevourFactor.Devour2));
-        setOriginalExpansionSetCode("ARB");
     }
 
     public DragonBroodmotherDragonToken(final DragonBroodmotherDragonToken token) {

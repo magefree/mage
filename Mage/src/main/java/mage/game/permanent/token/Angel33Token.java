@@ -5,8 +5,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -22,16 +20,6 @@ public final class Angel33Token extends TokenImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("AFR", "SNC", "OGW", "MOC");
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("MOC")) {
-            this.setTokenType(1);
-        }
     }
 
     public Angel33Token(final Angel33Token token) {

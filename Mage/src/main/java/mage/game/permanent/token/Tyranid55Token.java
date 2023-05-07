@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -18,9 +16,6 @@ public final class Tyranid55Token extends TokenImpl {
         subtype.add(SubType.TYRANID);
         power = new MageInt(5);
         toughness = new MageInt(5);
-
-        availableImageSetCodes.addAll(Arrays.asList("40K"));
-        this.setTokenType(2);
     }
 
     public Tyranid55Token(final Tyranid55Token token) {

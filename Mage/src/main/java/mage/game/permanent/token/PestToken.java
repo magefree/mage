@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -18,8 +16,6 @@ public final class PestToken extends TokenImpl {
         subtype.add(SubType.PEST);
         power = new MageInt(0);
         toughness = new MageInt(1);
-
-        availableImageSetCodes = Arrays.asList("HOP", "MRD");
     }
 
     public PestToken(final PestToken token) {

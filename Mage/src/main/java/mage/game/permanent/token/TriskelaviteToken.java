@@ -1,28 +1,23 @@
-
 package mage.game.permanent.token;
 
-import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetAnyTarget;
 
-import java.util.Arrays;
-
 /**
- *
  * @author spjspj
  */
 public final class TriskelaviteToken extends TokenImpl {
 
     public TriskelaviteToken() {
         super("Triskelavite Token", "1/1 colorless Triskelavite artifact creature token with flying. It has \"Sacrifice this creature: This creature deals 1 damage to any target.\"");
-        this.setOriginalExpansionSetCode("TSP");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.TRISKELAVITE);
@@ -34,8 +29,6 @@ public final class TriskelaviteToken extends TokenImpl {
         this.addAbility(ability);
 
         addAbility(FlyingAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("CM2");
     }
 
     public TriskelaviteToken(final TriskelaviteToken token) {

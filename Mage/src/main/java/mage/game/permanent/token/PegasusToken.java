@@ -5,8 +5,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author LoneFox
  */
@@ -21,8 +19,6 @@ public final class PegasusToken extends TokenImpl {
         toughness = new MageInt(1);
 
         addAbility(FlyingAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("C14", "C19", "KHC", "CLB");
     }
 
     public PegasusToken(final PegasusToken token) {

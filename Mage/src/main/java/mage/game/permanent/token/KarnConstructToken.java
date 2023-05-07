@@ -9,8 +9,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -28,8 +26,6 @@ public final class KarnConstructToken extends TokenImpl {
                 new BoostSourceEffect(ArtifactYouControlCount.instance, ArtifactYouControlCount.instance, Duration.WhileOnBattlefield)
                         .setText("This creature gets +1/+1 for each artifact you control")
         ));
-
-        availableImageSetCodes = Arrays.asList("DOM", "MH1", "C21", "MH2", "MED", "BRO", "DMR");
     }
 
     public KarnConstructToken(final KarnConstructToken token) {
@@ -38,20 +34,5 @@ public final class KarnConstructToken extends TokenImpl {
 
     public KarnConstructToken copy() {
         return new KarnConstructToken(this);
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C21")) {
-            setTokenType(2);
-        }
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("MED")) {
-            setTokenType(1);
-        }
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("BRO")) {
-            setTokenType(1);
-        }
     }
 }

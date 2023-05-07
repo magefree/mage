@@ -29,8 +29,6 @@ public final class BlueHorrorToken extends TokenImpl {
         );
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
-
-        this.setExpansionSetCodeForImage("40K");
     }
 
     public BlueHorrorToken(final BlueHorrorToken token) {

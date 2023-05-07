@@ -7,8 +7,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -26,8 +24,6 @@ public final class MaritLageToken extends TokenImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(IndestructibleAbility.getInstance());
-
-        availableImageSetCodes.addAll(Arrays.asList("CSP", "MH1", "UMA", "2XM", "V16", "DMR"));
     }
 
     public MaritLageToken(final MaritLageToken token) {

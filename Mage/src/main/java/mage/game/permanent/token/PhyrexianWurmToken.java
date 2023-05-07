@@ -6,8 +6,6 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 public final class PhyrexianWurmToken extends TokenImpl {
 
     public PhyrexianWurmToken() {
@@ -24,8 +22,6 @@ public final class PhyrexianWurmToken extends TokenImpl {
         toughness = new MageInt(amount);
         addAbility(TrampleAbility.getInstance());
         addAbility(new ToxicAbility(1));
-
-        availableImageSetCodes = Arrays.asList("ONC");
     }
 
     public PhyrexianWurmToken(final PhyrexianWurmToken token) {

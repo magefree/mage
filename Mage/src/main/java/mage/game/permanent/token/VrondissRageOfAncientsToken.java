@@ -9,8 +9,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
-import java.util.Arrays;
-
 public final class VrondissRageOfAncientsToken extends TokenImpl {
 
     public VrondissRageOfAncientsToken() {
@@ -24,8 +22,6 @@ public final class VrondissRageOfAncientsToken extends TokenImpl {
         toughness = new MageInt(4);
 
         this.addAbility(new VrondissRageOfAncientsTokenTriggeredAbility());
-
-        availableImageSetCodes = Arrays.asList("AFC");
     }
 
     public VrondissRageOfAncientsToken(final VrondissRageOfAncientsToken token) {

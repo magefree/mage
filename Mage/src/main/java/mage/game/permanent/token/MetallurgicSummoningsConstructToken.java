@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -22,8 +20,6 @@ public final class MetallurgicSummoningsConstructToken extends TokenImpl {
         subtype.add(SubType.CONSTRUCT);
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
-
-        availableImageSetCodes = Arrays.asList("KLD", "C21");
     }
 
     public MetallurgicSummoningsConstructToken(final MetallurgicSummoningsConstructToken token) {
@@ -32,17 +28,5 @@ public final class MetallurgicSummoningsConstructToken extends TokenImpl {
 
     public MetallurgicSummoningsConstructToken copy() {
         return new MetallurgicSummoningsConstructToken(this);
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("KLD")) {
-            setTokenType(2);
-        }
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C21")) {
-            setTokenType(1);
-        }
     }
 }

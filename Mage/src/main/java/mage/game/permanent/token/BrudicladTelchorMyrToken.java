@@ -4,17 +4,7 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public final class BrudicladTelchorMyrToken extends TokenImpl {
-
-    static final private List<String> tokenImageSets = new ArrayList<>();
-
-    static {
-        tokenImageSets.addAll(Arrays.asList("C18", "2XM", "BRC"));
-    }
 
     public BrudicladTelchorMyrToken() {
         super("Phyrexian Myr Token", "2/1 blue Phyrexian Myr artifact creature token");
@@ -25,8 +15,6 @@ public final class BrudicladTelchorMyrToken extends TokenImpl {
         color.setBlue(true);
         power = new MageInt(2);
         toughness = new MageInt(1);
-
-        availableImageSetCodes = tokenImageSets;
     }
 
     public BrudicladTelchorMyrToken(final BrudicladTelchorMyrToken token) {

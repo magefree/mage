@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author AsterAether
  */
@@ -18,8 +16,6 @@ public class ZaxaraTheExemplaryHydraToken extends TokenImpl {
         subtype.add(SubType.HYDRA);
         power = new MageInt(0);
         toughness = new MageInt(0);
-
-        availableImageSetCodes = Arrays.asList("C20", "DMC");
     }
 
     private ZaxaraTheExemplaryHydraToken(final ZaxaraTheExemplaryHydraToken token) {

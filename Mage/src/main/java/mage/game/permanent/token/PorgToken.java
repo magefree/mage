@@ -1,5 +1,3 @@
-
-
 package mage.game.permanent.token;
 
 import mage.MageInt;
@@ -7,17 +5,13 @@ import mage.abilities.keyword.MonstrosityAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Collections;
-
 /**
- *
  * @author NinthWorld
  */
 public final class PorgToken extends TokenImpl {
 
     public PorgToken() {
         super("Porg", "0/1 green Bird creature token named Porg with \"{G}: Monstrosity 1.\"");
-        availableImageSetCodes.addAll(Collections.singletonList("SWS"));
 
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.BIRD);

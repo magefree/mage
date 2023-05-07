@@ -23,8 +23,6 @@ public final class RobotToken extends TokenImpl {
                 new CantBlockSourceEffect(Duration.WhileOnBattlefield)
                         .setText("this creature can't block")
         ));
-
-        this.setExpansionSetCodeForImage("40K");
     }
 
     public RobotToken(final RobotToken token) {

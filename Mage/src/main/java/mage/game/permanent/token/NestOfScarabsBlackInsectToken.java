@@ -1,12 +1,10 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class NestOfScarabsBlackInsectToken extends TokenImpl {
@@ -18,8 +16,6 @@ public final class NestOfScarabsBlackInsectToken extends TokenImpl {
         subtype.add(SubType.INSECT);
         power = new MageInt(1);
         toughness = new MageInt(1);
-
-        setOriginalExpansionSetCode("AKH");
     }
 
     public NestOfScarabsBlackInsectToken(final NestOfScarabsBlackInsectToken token) {

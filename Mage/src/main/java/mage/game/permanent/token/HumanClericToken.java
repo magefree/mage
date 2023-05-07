@@ -1,14 +1,10 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
-
-import java.util.Arrays;
 
 /**
- *
  * @author spjspj
  */
 public final class HumanClericToken extends TokenImpl {
@@ -22,9 +18,8 @@ public final class HumanClericToken extends TokenImpl {
         color.setBlack(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
-
-        availableImageSetCodes.addAll(Arrays.asList("SOI", "30A"));
     }
+
     public HumanClericToken(final HumanClericToken token) {
         super(token);
     }

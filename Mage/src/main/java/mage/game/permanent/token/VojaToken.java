@@ -1,15 +1,11 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
 import mage.constants.SuperType;
 
-import java.util.Arrays;
-
 /**
- *
  * @author spjspj
  */
 public final class VojaToken extends TokenImpl {
@@ -24,8 +20,6 @@ public final class VojaToken extends TokenImpl {
         this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-
-        availableImageSetCodes = Arrays.asList("GK1");
     }
 
     public VojaToken(final VojaToken token) {

@@ -23,8 +23,6 @@ public final class CommodoreGuffToken extends TokenImpl {
         toughness = new MageInt(1);
 
         this.addAbility(new ConditionalColoredManaAbility(Mana.RedMana(1), new CommodoreGuffTokenManaBuilder()));
-
-        setOriginalExpansionSetCode("CMM");
     }
 
     private CommodoreGuffToken(final CommodoreGuffToken token) {

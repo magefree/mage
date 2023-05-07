@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author North
  */
@@ -18,9 +16,6 @@ public final class SquirrelToken extends TokenImpl {
         color.setGreen(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
-
-        availableImageSetCodes = Arrays.asList("CNS", "ODY", "PCY", "TOR", "ULG", "UNH", "WMA",
-                "WTH", "MH1", "MH2", "2XM", "CLB", "DMR");
     }
 
     public SquirrelToken(final SquirrelToken token) {

@@ -7,8 +7,6 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.constants.CardType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -27,8 +25,6 @@ public final class BananaToken extends TokenImpl {
         ability.addCost(new SacrificeSourceCost().setText("sacrifice this artifact"));
         ability.addEffect(new GainLifeEffect(2));
         this.addAbility(ability);
-
-        availableImageSetCodes = Arrays.asList("J22");
     }
 
     public BananaToken(final BananaToken token) {

@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -22,8 +20,6 @@ public final class OviyaPashiriSageLifecrafterToken extends TokenImpl {
         subtype.add(SubType.CONSTRUCT);
         power = new MageInt(number);
         toughness = new MageInt(number);
-
-        availableImageSetCodes = Arrays.asList("KLD");
     }
 
     public OviyaPashiriSageLifecrafterToken(final OviyaPashiriSageLifecrafterToken token) {
@@ -32,14 +28,5 @@ public final class OviyaPashiriSageLifecrafterToken extends TokenImpl {
 
     public OviyaPashiriSageLifecrafterToken copy() {
         return new OviyaPashiriSageLifecrafterToken(this);
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("KLD")) {
-            setTokenType(1);
-        }
     }
 }

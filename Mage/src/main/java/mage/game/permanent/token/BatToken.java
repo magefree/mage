@@ -5,8 +5,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 public final class BatToken extends TokenImpl {
 
     public BatToken() {
@@ -17,8 +15,6 @@ public final class BatToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("C17", "GVL", "MMA", "M19", "MID", "VOC", "GK2");
     }
 
     public BatToken(final BatToken token) {

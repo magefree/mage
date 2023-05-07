@@ -1,13 +1,11 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class ButterflyToken extends TokenImpl {
@@ -20,8 +18,6 @@ public final class ButterflyToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());
-
-        this.setExpansionSetCodeForImage("MOC");
     }
 
     public ButterflyToken(final ButterflyToken token) {

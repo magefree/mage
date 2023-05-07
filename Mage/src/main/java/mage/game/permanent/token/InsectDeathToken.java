@@ -6,8 +6,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -22,8 +20,6 @@ public final class InsectDeathToken extends TokenImpl {
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());
         addAbility(DeathtouchAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("M15", "C20", "C21", "CLB");
     }
 
     public InsectDeathToken(final InsectDeathToken token) {

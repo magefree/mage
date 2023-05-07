@@ -5,8 +5,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -22,8 +20,6 @@ public final class TyranidGargoyleToken extends TokenImpl {
         toughness = new MageInt(1);
 
         addAbility(FlyingAbility.getInstance());
-
-        availableImageSetCodes.addAll(Arrays.asList("40K"));
     }
 
     public TyranidGargoyleToken(final TyranidGargoyleToken token) {

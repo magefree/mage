@@ -9,19 +9,16 @@ import mage.filter.StaticFilters;
 import mage.game.command.Emblem;
 import mage.target.common.TargetAnyTarget;
 
-import java.util.Arrays;
-
 /**
- *
  * @author TheElk801
  */
 public final class RalIzzetViceroyEmblem extends Emblem {
 
     // You get an emblem with "Whenever you cast an instant or sorcery spell, this emblem deals 4 damage to any target and you draw two cards."
     public RalIzzetViceroyEmblem() {
-        this.setName("Emblem Ral");
+        super("Emblem Ral");
         Ability ability = new SpellCastControllerTriggeredAbility(
-                Zone.COMMAND, new DamageTargetEffect(4, "this emblem"), 
+                Zone.COMMAND, new DamageTargetEffect(4, "this emblem"),
                 StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false, false
         );
         ability.addEffect(
@@ -30,7 +27,14 @@ public final class RalIzzetViceroyEmblem extends Emblem {
         );
         ability.addTarget(new TargetAnyTarget());
         getAbilities().add(ability);
+    }
 
-        availableImageSetCodes = Arrays.asList("MED", "GRN");
+    private RalIzzetViceroyEmblem(final RalIzzetViceroyEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public RalIzzetViceroyEmblem copy() {
+        return new RalIzzetViceroyEmblem(this);
     }
 }

@@ -6,8 +6,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -22,8 +20,6 @@ public final class ZeppelinToken extends TokenImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(new CrewAbility(3));
-
-        availableImageSetCodes = Arrays.asList("J22");
     }
 
     public ZeppelinToken(final ZeppelinToken token) {
