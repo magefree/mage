@@ -26,5 +26,6 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Selvala, Heart of the Wilds", 220, Rarity.MYTHIC, mage.cards.s.SelvalaHeartOfTheWilds.class));
         cards.add(new SetCardInfo("Sliver Gravemother", 707, Rarity.MYTHIC, mage.cards.s.SliverGravemother.class));
         cards.add(new SetCardInfo("The Ur-Dragon", 361, Rarity.MYTHIC, mage.cards.t.TheUrDragon.class));
+        cards.add(new SetCardInfo("Zhulodok, Void Gorger", 704, Rarity.MYTHIC, mage.cards.z.ZhulodokVoidGorger.class));
     }
 }
