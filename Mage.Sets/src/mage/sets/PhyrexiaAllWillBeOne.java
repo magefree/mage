@@ -168,6 +168,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
         cards.add(new SetCardInfo("Maze's Mantle", 174, Rarity.COMMON, mage.cards.m.MazesMantle.class));
         cards.add(new SetCardInfo("Meldweb Curator", 59, Rarity.COMMON, mage.cards.m.MeldwebCurator.class));
         cards.add(new SetCardInfo("Meldweb Strider", 60, Rarity.COMMON, mage.cards.m.MeldwebStrider.class));
+        cards.add(new SetCardInfo("Melira, the Living Cure", 209, Rarity.RARE, mage.cards.m.MeliraTheLivingCure.class));
         cards.add(new SetCardInfo("Mercurial Spelldancer", 61, Rarity.RARE, mage.cards.m.MercurialSpelldancer.class));
         cards.add(new SetCardInfo("Mesmerizing Dose", 62, Rarity.COMMON, mage.cards.m.MesmerizingDose.class));
         cards.add(new SetCardInfo("Migloz, Maze Crusher", 210, Rarity.RARE, mage.cards.m.MiglozMazeCrusher.class));
