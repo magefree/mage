@@ -41,6 +41,7 @@ import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.game.command.*;
 import mage.game.command.dungeons.UndercityDungeon;
+import mage.game.command.emblems.TheRingEmblem;
 import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
 import mage.game.mulligan.Mulligan;
@@ -561,6 +562,34 @@ public abstract class GameImpl implements Game {
         }
         this.getOrCreateDungeon(playerId, undercity).moveToNextRoom(playerId, this);
         fireEvent(GameEvent.getEvent(GameEvent.EventType.VENTURED, playerId, null, playerId));
+    }
+
+    private TheRingEmblem getOrCreateTheRing(UUID playerId) {
+        TheRingEmblem emblem = state
+                .getCommand()
+                .stream()
+                .filter(TheRingEmblem.class::isInstance)
+                .map(TheRingEmblem.class::cast)
+                .filter(commandObject -> commandObject.isControlledBy(playerId))
+                .findFirst()
+                .orElse(null);
+        if (emblem != null) {
+            return emblem;
+        }
+        TheRingEmblem newEmblem = new TheRingEmblem(playerId);
+        state.addCommandObject(newEmblem);
+        return newEmblem;
+    }
+
+    @Override
+    public void temptWithTheRing(UUID playerId) {
+        Player player = getPlayer(playerId);
+        if (player == null) {
+            return;
+        }
+        player.chooseRingBearer(this);
+        getOrCreateTheRing(playerId).addNextAbility(this);
+        fireEvent(GameEvent.getEvent(GameEvent.EventType.TEMPTED_BY_RING, playerId, null, playerId));
     }
 
     @Override
@@ -1302,6 +1331,7 @@ public abstract class GameImpl implements Game {
         newWatchers.add(new EndStepCountWatcher());
         newWatchers.add(new CommanderPlaysCountWatcher()); // commander plays count uses in non commander games by some cards
         newWatchers.add(new CreaturesDiedWatcher());
+        newWatchers.add(new TemptedByTheRingWatcher());
 
         // runtime check - allows only GAME scope (one watcher per game)
         newWatchers.forEach(watcher -> {

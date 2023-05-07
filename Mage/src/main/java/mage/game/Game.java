@@ -406,6 +406,8 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     void ventureIntoDungeon(UUID playerId, boolean undercity);
 
+    void temptWithTheRing(UUID playerId);
+
     /**
      * Tells whether the current game has day or night, defaults to false
      */
@@ -552,8 +554,8 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     /**
      * Function to call for a player to take the initiative.
      *
-     * @param source        The ability granting initiative.
-     * @param initiativeId  UUID of the player taking the initiative
+     * @param source       The ability granting initiative.
+     * @param initiativeId UUID of the player taking the initiative
      */
     void takeInitiative(Ability source, UUID initiativeId);
 
@@ -681,6 +683,6 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     void setGameStopped(boolean gameStopped);
 
     boolean isGameStopped();
-    
+
     boolean isTurnOrderReversed();
 }

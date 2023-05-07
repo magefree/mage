@@ -4,12 +4,8 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.Arrays;
-import java.util.List;
-
 public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Bilbo, Retired Burglar", "Call of the Ring", "Frodo Baggins", "Frodo, Sauron's Bane", "Gollum, Patient Plotter", "Samwise the Stouthearted");
     private static final TheLordOfTheRingsTalesOfMiddleEarth instance = new TheLordOfTheRingsTalesOfMiddleEarth();
 
     public static TheLordOfTheRingsTalesOfMiddleEarth getInstance() {
@@ -24,6 +20,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
 
         cards.add(new SetCardInfo("Aragorn and Arwen, Wed", 287, Rarity.MYTHIC, mage.cards.a.AragornAndArwenWed.class));
         cards.add(new SetCardInfo("Bilbo, Retired Burglar", 403, Rarity.UNCOMMON, mage.cards.b.BilboRetiredBurglar.class));
+        cards.add(new SetCardInfo("Call of the Ring", 79, Rarity.RARE, mage.cards.c.CallOfTheRing.class));
         cards.add(new SetCardInfo("Forest", 280, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Frodo Baggins", 404, Rarity.UNCOMMON, mage.cards.f.FrodoBaggins.class));
         cards.add(new SetCardInfo("Frodo, Sauron's Bane", 18, Rarity.RARE, mage.cards.f.FrodoSauronsBane.class));
@@ -45,7 +42,5 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Trailblazer's Boots", 398, Rarity.RARE, mage.cards.t.TrailblazersBoots.class));
         cards.add(new SetCardInfo("Wizard's Rockets", 400, Rarity.COMMON, mage.cards.w.WizardsRockets.class));
         cards.add(new SetCardInfo("You Cannot Pass!", 38, Rarity.UNCOMMON, mage.cards.y.YouCannotPass.class));
-
-        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is implemented
     }
 }

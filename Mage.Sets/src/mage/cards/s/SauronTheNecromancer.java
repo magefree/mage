@@ -6,6 +6,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.condition.Condition;
+import mage.abilities.condition.InvertCondition;
+import mage.abilities.condition.common.SourceIsRingBearerCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
@@ -38,7 +40,7 @@ public final class SauronTheNecromancer extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever Sauron, the Necromancer attacks, exile target creature card from your graveyard. Create a tapped and attacking token that's a copy of that card, except it's a 3/3 black Wraith with menace. At the beginning of the next end step, exile that token unless Sauron is your Ring-bearer.
         Ability ability = new AttacksTriggeredAbility(new SauronTheNecromancerEffect());
@@ -56,17 +58,9 @@ public final class SauronTheNecromancer extends CardImpl {
     }
 }
 
-enum SauronTheNecromancerCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        // TODO: Implement this
-        return true;
-    }
-}
-
 class SauronTheNecromancerEffect extends OneShotEffect {
+
+    private static final Condition condition = new InvertCondition(SourceIsRingBearerCondition.instance);
 
     SauronTheNecromancerEffect() {
         super(Outcome.Benefit);
@@ -105,7 +99,7 @@ class SauronTheNecromancerEffect extends OneShotEffect {
         effect.apply(game, source);
         game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
                 new ConditionalOneShotEffect(
-                        new ExileTargetEffect(), SauronTheNecromancerCondition.instance,
+                        new ExileTargetEffect(), condition,
                         "exile that token unless {this} is your Ring-bearer"
                 ).setTargetPointer(new FixedTargets(effect.getAddedPermanents(), game))
         ), source);

@@ -1420,6 +1420,20 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public UUID getRingBearerId() {
+        return null;
+    }
+
+    @Override
+    public Permanent getRingBearer(Game game) {
+        return null;
+    }
+
+    @Override
+    public void chooseRingBearer(Game game) {
+    }
+
+    @Override
     public UserData getControllingPlayersUserData(Game game) {
         return null;
     }

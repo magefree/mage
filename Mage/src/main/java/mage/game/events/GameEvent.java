@@ -493,6 +493,7 @@ public class GameEvent implements Serializable {
         ROOM_ENTERED,
         VENTURE, VENTURED,
         DUNGEON_COMPLETED,
+        TEMPTED_BY_RING, RING_BEARER_CHOSEN,
         REMOVED_FROM_COMBAT, // targetId    id of permanent removed from combat
         FORETOLD, // targetId   id of card foretold
         FORETELL, // targetId   id of card foretell  playerId   id of the controller

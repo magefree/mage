@@ -1,10 +1,9 @@
 package mage.cards.f;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.SourceIsRingBearerCondition;
 import mage.abilities.decorator.ConditionalRequirementEffect;
 import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneSourceEffect;
 import mage.abilities.effects.keyword.TheRingTemptsYouEffect;
@@ -15,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
 
 import java.util.UUID;
 
@@ -46,7 +44,7 @@ public final class FrodoBaggins extends CardImpl {
 
         // As long as Frodo is your Ring-bearer, it must be blocked if able.
         this.addAbility(new SimpleStaticAbility(new ConditionalRequirementEffect(
-                new MustBeBlockedByAtLeastOneSourceEffect(), FrodoBagginsCondition.instance,
+                new MustBeBlockedByAtLeastOneSourceEffect(), SourceIsRingBearerCondition.instance,
                 "as long as {this} is your Ring-bearer, it must be blocked if able"
         )));
     }
@@ -58,15 +56,5 @@ public final class FrodoBaggins extends CardImpl {
     @Override
     public FrodoBaggins copy() {
         return new FrodoBaggins(this);
-    }
-}
-
-enum FrodoBagginsCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        // TODO: Implement this
-        return false;
     }
 }

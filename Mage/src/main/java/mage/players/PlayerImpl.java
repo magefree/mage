@@ -58,6 +58,7 @@ import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetDiscard;
 import mage.util.CardUtil;
 import mage.util.GameLog;
@@ -176,6 +177,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     // mana colors the player can handle like Phyrexian mana
     protected FilterMana phyrexianColors;
 
+    protected UUID ringBearerId = null;
+
     // Used during available mana calculation to give back possible available net mana from triggered mana abilities (No need to copy)
     protected final List<List<Mana>> availableTriggeredManaList = new ArrayList<>();
 
@@ -285,6 +288,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         this.payManaMode = player.payManaMode;
         this.phyrexianColors = player.getPhyrexianColors() != null ? player.phyrexianColors.copy() : null;
+        this.ringBearerId = player.ringBearerId;
         for (Designation object : player.designations) {
             this.designations.add(object.copy());
         }
@@ -371,6 +375,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
 
         this.phyrexianColors = player.getPhyrexianColors() != null ? player.getPhyrexianColors().copy() : null;
+
+        this.ringBearerId = player.getRingBearerId();
 
         this.designations.clear();
         for (Designation object : player.getDesignations()) {
@@ -5125,6 +5131,62 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public FilterMana getPhyrexianColors() {
         return this.phyrexianColors;
+    }
+
+    @Override
+    public UUID getRingBearerId() {
+        return ringBearerId;
+    }
+
+    @Override
+    public Permanent getRingBearer(Game game) {
+        if (ringBearerId == null) {
+            return null;
+        }
+        Permanent bearer = game.getPermanent(ringBearerId);
+        if (bearer != null && bearer.isControlledBy(getId())) {
+            return bearer;
+        }
+        ringBearerId = null;
+        return null;
+    }
+
+    @Override
+    public void chooseRingBearer(Game game) {
+        Permanent currentBearer = getRingBearer(game);
+        int creatureCount = game.getBattlefield().count(
+                StaticFilters.FILTER_CONTROLLED_CREATURE, getId(), null, game
+        );
+        boolean mustChoose;
+        if (currentBearer == null) {
+            if (creatureCount > 0) {
+                mustChoose = true;
+            } else {
+                return;
+            }
+        } else if (currentBearer.isCreature(game)) {
+            if (creatureCount > 1) {
+                mustChoose = false;
+            } else {
+                return;
+            }
+        } else if (creatureCount > 0) {
+            mustChoose = false;
+        } else {
+            return;
+        }
+        if (!mustChoose && !chooseUse(Outcome.Neutral, "Choose a new Ring-bearer?", null, game)) {
+            return;
+        }
+        TargetPermanent target = new TargetControlledCreaturePermanent();
+        target.setNotTarget(true);
+        target.withChooseHint("to be your Ring-bearer");
+        choose(Outcome.Neutral, target, null, game);
+        UUID newBearerId = target.getFirstTarget();
+        if (game.getPermanent(newBearerId) != null) {
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.RING_BEARER_CHOSEN, newBearerId, null, getId()));
+            this.ringBearerId = newBearerId;
+        }
     }
 
     @Override
