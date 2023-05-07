@@ -23,6 +23,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Jeweled Lotus", 396, Rarity.MYTHIC, mage.cards.j.JeweledLotus.class));
         cards.add(new SetCardInfo("Personal Tutor", 110, Rarity.RARE, mage.cards.p.PersonalTutor.class));
         cards.add(new SetCardInfo("Selvala, Heart of the Wilds", 220, Rarity.MYTHIC, mage.cards.s.SelvalaHeartOfTheWilds.class));
+        cards.add(new SetCardInfo("Sliver Gravemother", 707, Rarity.MYTHIC, mage.cards.s.SliverGravemother.class));
         cards.add(new SetCardInfo("The Ur-Dragon", 361, Rarity.MYTHIC, mage.cards.t.TheUrDragon.class));
     }
 }
