@@ -18,6 +18,7 @@ public final class CommanderMasters extends ExpansionSet {
         this.hasBasicLands = false;
         this.hasBoosters = false; //temporary
 
+        cards.add(new SetCardInfo("Anikthea, Hand of Erebos", 705, Rarity.MYTHIC, mage.cards.a.AniktheaHandOfErebos.class));
         cards.add(new SetCardInfo("Capture of Jingzhou", 79, Rarity.RARE, mage.cards.c.CaptureOfJingzhou.class));
         cards.add(new SetCardInfo("Commodore Guff", 706, Rarity.MYTHIC, mage.cards.c.CommodoreGuff.class));
         cards.add(new SetCardInfo("Jeweled Lotus", 396, Rarity.MYTHIC, mage.cards.j.JeweledLotus.class));
