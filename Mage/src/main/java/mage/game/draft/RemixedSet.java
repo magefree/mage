@@ -80,7 +80,7 @@ public class RemixedSet implements Serializable {
         if (cards.isEmpty()) {
             return;
         }
-        CardInfo cardInfo = cards.remove(RandomUtil.nextInt(cards.size())); // so no duplicates
+        CardInfo cardInfo = cards.remove(RandomUtil.nextInt(cards.size())); // so no duplicates in a booster
         Card card = cardInfo.getCard();
         if (card == null) {
             return;
@@ -132,7 +132,7 @@ public class RemixedSet implements Serializable {
         return boosterRares;
     }
 
-    // See ExpansionSet for original code by awjackson
+    // See ExpansionSet for original validation logic by awjackson
     protected boolean validateCommonColors(List<Card> booster) {
         List<ObjectColor> commonColors = booster.stream()
                 .filter(card -> card.getRarity() == Rarity.COMMON)
@@ -174,8 +174,6 @@ public class RemixedSet implements Serializable {
         return (RandomUtil.nextDouble() > Math.pow(0.8, colorlessCountPlusOne));
     }
 
-    private static final ObjectColor COLORLESS = new ObjectColor();
-
     protected boolean validateUncommonColors(List<Card> booster) {
         List<ObjectColor> uncommonColors = booster.stream()
                 .filter(card -> card.getRarity() == Rarity.UNCOMMON)
@@ -185,7 +183,7 @@ public class RemixedSet implements Serializable {
         // if there are only two uncommons, they can be the same color
         if (uncommonColors.size() < 3) return true;
         // boosters of artifact sets can have all colorless uncommons
-        if (uncommonColors.contains(COLORLESS)) return true;
+        if (uncommonColors.contains(ObjectColor.COLORLESS)) return true;
         // otherwise, reject if all uncommons are the same color combination
         return (new HashSet<>(uncommonColors).size() > 1);
     }
