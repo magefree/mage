@@ -5184,6 +5184,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         choose(Outcome.Neutral, target, null, game);
         UUID newBearerId = target.getFirstTarget();
         if (game.getPermanent(newBearerId) != null) {
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.RING_BEARER_CHOSEN, newBearerId, null, getId()));
             this.ringBearerId = newBearerId;
         }
     }
