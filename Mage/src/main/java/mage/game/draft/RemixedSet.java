@@ -58,7 +58,7 @@ public class RemixedSet implements Serializable {
         List<CardInfo> cardInfos = CardRepository.instance.findCards(new CardCriteria()
                 .setCodes(set.getCode())
                 .rarities(rarity)
-                .maxCardNumber(set.getMaxCardNumberInBooster()));
+                .maxCardNumber(set.getMaxCardNumberInBooster())); // TODO: Make sure this parameter is set appropriately where needed
 
         cardInfos.removeIf(next -> (
                 next.getCardNumber().contains("*")
