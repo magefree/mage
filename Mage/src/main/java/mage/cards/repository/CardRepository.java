@@ -349,7 +349,7 @@ public enum CardRepository {
     }
 
     public CardInfo findPreferredCoreExpansionCard(String name) {
-        return findPreferredCoreExpansionCard(name, null);
+        return findPreferredCoreExpansionCard(name, "");
     }
 
     public CardInfo findPreferredCoreExpansionCard(String name, String preferredSetCode) {
@@ -368,7 +368,7 @@ public enum CardRepository {
                 ExpansionInfo set = ExpansionRepository.instance.getSetByCode(cardinfo.getSetCode());
                 if (set != null) {
 
-                    if ((preferredSetCode != null) && (preferredSetCode.equals(set.getCode()))) {
+                    if (preferredSetCode.equals(set.getCode())) {
                         return cardinfo;
                     }
 

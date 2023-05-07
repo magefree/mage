@@ -13,6 +13,8 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
+import mage.cards.repository.TokenInfo;
+import mage.cards.repository.TokenRepository;
 import mage.constants.CardType;
 import mage.constants.Planes;
 import mage.constants.SubType;
@@ -29,29 +31,28 @@ import java.util.*;
 /**
  * @author spjspj
  */
-public class Plane implements CommandObject {
+public abstract class Plane extends CommandObjectImpl {
 
     private static final List<CardType> emptyList = Collections.unmodifiableList(new ArrayList<>());
     private static final ObjectColor emptyColor = new ObjectColor();
     private static final ManaCosts emptyCost = new ManaCostsImpl<>();
 
     private Planes planeType = null;
-    private UUID id;
+
     private UUID controllerId;
     private MageObject sourceObject;
     private boolean copy;
     private MageObject copyFrom; // copied card INFO (used to call original adjusters)
     private FrameStyle frameStyle;
     private Abilities<Ability> abilites = new AbilitiesImpl<>();
-    private String expansionSetCodeForImage = "";
 
     public Plane() {
-        this.id = UUID.randomUUID();
+        super("");
         this.frameStyle = FrameStyle.M15_NORMAL;
     }
 
     public Plane(final Plane plane) {
-        this.id = plane.id;
+        super(plane);
         this.planeType = plane.planeType;
         this.frameStyle = plane.frameStyle;
         this.controllerId = plane.controllerId;
@@ -59,7 +60,6 @@ public class Plane implements CommandObject {
         this.copy = plane.copy;
         this.copyFrom = (plane.copyFrom != null ? plane.copyFrom.copy() : null);
         this.abilites = plane.abilites.copy();
-        this.expansionSetCodeForImage = plane.expansionSetCodeForImage;
     }
 
     @Override
@@ -67,17 +67,18 @@ public class Plane implements CommandObject {
         return frameStyle;
     }
 
-    @Override
-    public void assignNewId() {
-        this.id = UUID.randomUUID();
-    }
+    public void setSourceObject() {
+        this.sourceObject = null;
 
-    public void setSourceObject(MageObject sourceObject) {
-        this.sourceObject = sourceObject;
-        if (sourceObject instanceof Card) {
-            if (expansionSetCodeForImage.isEmpty()) {
-                expansionSetCodeForImage = ((Card) sourceObject).getExpansionSetCode();
-            }
+        // choose set code due source
+        TokenInfo foundInfo = TokenRepository.instance.generateTokenInfoBySetCode(this.getClass().getName(), null);
+        if (foundInfo != null) {
+            this.setExpansionSetCode(foundInfo.getSetCode());
+            this.setCardNumber("");
+            this.setImageNumber(foundInfo.getImageNumber());
+        } else {
+            // how-to fix: add plane to the tokens-database
+            throw new IllegalArgumentException("Wrong code usage: can't find token info for the plane: " + this.getClass().getName());
         }
     }
 
@@ -105,6 +106,9 @@ public class Plane implements CommandObject {
     }
 
     @Override
+    abstract public Plane copy();
+
+    @Override
     public void setCopy(boolean isCopy, MageObject copyFrom) {
         this.copy = isCopy;
         this.copyFrom = (copyFrom != null ? copyFrom.copy() : null);
@@ -122,21 +126,6 @@ public class Plane implements CommandObject {
 
     @Override
     public String getName() {
-        return planeType != null ? planeType.getFullName() : "";
-    }
-
-    @Override
-    public String getIdName() {
-        return getName() + " [" + getId().toString().substring(0, 3) + ']';
-    }
-
-    @Override
-    public String getLogName() {
-        return GameLog.getColoredObjectIdName(this);
-    }
-
-    @Override
-    public String getImageName() {
         return planeType != null ? planeType.getFullName() : "";
     }
 
@@ -242,28 +231,8 @@ public class Plane implements CommandObject {
     }
 
     @Override
-    public UUID getId() {
-        return this.id;
-    }
-
-    @Override
-    public Plane copy() {
-        return new Plane(this);
-    }
-
-    @Override
-    public String getExpansionSetCodeForImage() {
-        return expansionSetCodeForImage;
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String expansionSetCodeForImage) {
-        this.expansionSetCodeForImage = expansionSetCodeForImage;
-    }
-
-    @Override
     public int getZoneChangeCounter(Game game) {
-        return 1; // Emblems can't move zones until now so return always 1
+        return 1; // Planes can't move zones until now so return always 1
     }
 
     @Override
@@ -311,6 +280,7 @@ public class Plane implements CommandObject {
                 Constructor<?> cons = c.getConstructor();
                 Object plane = cons.newInstance();
                 if (plane instanceof Plane) {
+                    // TODO: generate image for plane here?
                     return (Plane) plane;
                 }
             } catch (Exception ex) {

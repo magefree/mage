@@ -21,7 +21,7 @@ public class DungeonView implements CommandObjectView, Serializable {
     public DungeonView(Dungeon dungeon) {
         this.id = dungeon.getId();
         this.name = dungeon.getName();
-        this.expansionSetCode = dungeon.getExpansionSetCodeForImage();
+        this.expansionSetCode = dungeon.getExpansionSetCode();
         this.rules = dungeon.getRules();
     }
 

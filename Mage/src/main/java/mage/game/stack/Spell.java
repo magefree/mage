@@ -203,6 +203,36 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
+    public String getExpansionSetCode() {
+        return card.getExpansionSetCode();
+    }
+
+    @Override
+    public void setExpansionSetCode(String expansionSetCode) {
+        throw new IllegalStateException("Wrong code usage: you can't change set code for the spell");
+    }
+
+    @Override
+    public String getCardNumber() {
+        return card.getCardNumber();
+    }
+
+    @Override
+    public void setCardNumber(String cardNumber) {
+        throw new IllegalStateException("Wrong code usage: you can't change card number for the spell");
+    }
+
+    @Override
+    public Integer getImageNumber() {
+        return card.getImageNumber();
+    }
+
+    @Override
+    public void setImageNumber(Integer imageNumber) {
+        throw new IllegalStateException("Wrong code usage: you can't change image number for the spell");
+    }
+
+    @Override
     public boolean resolve(Game game) {
         boolean result;
         Player controller = game.getPlayer(getControllerId());
@@ -482,11 +512,6 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
-    public String getImageName() {
-        return card.getImageName();
-    }
-
-    @Override
     public void setName(String name) {
     }
 
@@ -705,11 +730,6 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
-    public String getExpansionSetCode() {
-        return card.getExpansionSetCode();
-    }
-
-    @Override
     public void setFaceDown(boolean value, Game game) {
         faceDown = value;
     }
@@ -873,11 +893,6 @@ public class Spell extends StackObjectImpl implements Card {
     @Override
     public boolean putOntoBattlefield(Game game, Zone fromZone, Ability source, UUID controllerId, boolean tapped, boolean facedown, List<UUID> appliedEffects) {
         throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public String getCardNumber() {
-        return card.getCardNumber();
     }
 
     @Override

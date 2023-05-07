@@ -126,9 +126,10 @@ public class PermanentCard extends PermanentImpl {
         this.subtype.copyFrom(card.getSubtype());
         this.supertype.clear();
         this.supertype.addAll(card.getSuperType());
-        this.expansionSetCode = card.getExpansionSetCode();
+
+        this.setExpansionSetCode(card.getExpansionSetCode());
+        this.setCardNumber(card.getCardNumber());
         this.rarity = card.getRarity();
-        this.cardNumber = card.getCardNumber();
         this.usesVariousArt = card.getUsesVariousArt();
 
         if (card.getSecondCardFace() != null) {

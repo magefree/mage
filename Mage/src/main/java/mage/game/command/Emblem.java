@@ -13,11 +13,14 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
+import mage.cards.repository.TokenInfo;
+import mage.cards.repository.TokenRepository;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.token.TokenImpl;
 import mage.util.GameLog;
 import mage.util.RandomUtil;
 import mage.util.SubTypes;
@@ -27,40 +30,31 @@ import java.util.*;
 /**
  * @author nantuko
  */
-public class Emblem implements CommandObject {
+public abstract class Emblem extends CommandObjectImpl {
 
     private static final List<CardType> emptyList = Collections.unmodifiableList(new ArrayList<>());
     private static final ObjectColor emptyColor = new ObjectColor();
     private static final ManaCosts emptyCost = new ManaCostsImpl<>();
 
-    private String name = "";
-    private UUID id;
     private UUID controllerId;
     private MageObject sourceObject;
     private boolean copy;
     private MageObject copyFrom; // copied card INFO (used to call original adjusters)
     private FrameStyle frameStyle;
     private Abilities<Ability> abilites = new AbilitiesImpl<>();
-    private String expansionSetCodeForImage = "";
 
-    // list of set codes emblem images are available for
-    protected List<String> availableImageSetCodes = new ArrayList<>();
-
-    public Emblem() {
-        this.id = UUID.randomUUID();
+    public Emblem(String name) {
+        super(name);
     }
 
     public Emblem(final Emblem emblem) {
-        this.id = emblem.id;
-        this.name = emblem.name;
+        super(emblem);
         this.frameStyle = emblem.frameStyle;
         this.controllerId = emblem.controllerId;
         this.sourceObject = emblem.sourceObject;
         this.copy = emblem.copy;
         this.copyFrom = (emblem.copyFrom != null ? emblem.copyFrom : null);
         this.abilites = emblem.abilites.copy();
-        this.expansionSetCodeForImage = emblem.expansionSetCodeForImage;
-        this.availableImageSetCodes = emblem.availableImageSetCodes;
     }
 
     @Override
@@ -68,25 +62,18 @@ public class Emblem implements CommandObject {
         return frameStyle;
     }
 
-    @Override
-    public void assignNewId() {
-        this.id = UUID.randomUUID();
-    }
-
     public void setSourceObject(MageObject sourceObject) {
         this.sourceObject = sourceObject;
-        if (sourceObject instanceof Card) {
-            if (name.isEmpty()) {
-                name = sourceObject.getSubtype().toString();
-            }
-            if (expansionSetCodeForImage.isEmpty()) {
-                expansionSetCodeForImage = ((Card) sourceObject).getExpansionSetCode();
-            }
-            if (!availableImageSetCodes.isEmpty()) {
-                if (expansionSetCodeForImage.equals("") || !availableImageSetCodes.contains(expansionSetCodeForImage)) {
-                    expansionSetCodeForImage = availableImageSetCodes.get(RandomUtil.nextInt(availableImageSetCodes.size()));
-                }
-            }
+
+        // choose set code due source
+        TokenInfo foundInfo = TokenRepository.instance.generateTokenInfoBySetCode(this.getClass().getName(), sourceObject.getExpansionSetCode());
+        if (foundInfo != null) {
+            this.setExpansionSetCode(foundInfo.getSetCode());
+            this.setCardNumber("");
+            this.setImageNumber(foundInfo.getImageNumber());
+        } else {
+            // how-to fix: add emblem to the tokens-database
+            throw new IllegalArgumentException("Wrong code usage: can't find token info for the emblem: " + this.getClass().getName());
         }
     }
 
@@ -114,6 +101,9 @@ public class Emblem implements CommandObject {
     }
 
     @Override
+    abstract public Emblem copy();
+
+    @Override
     public void setCopy(boolean isCopy, MageObject copyFrom) {
         this.copy = isCopy;
         this.copyFrom = (copyFrom != null ? copyFrom.copy() : null);
@@ -127,31 +117,6 @@ public class Emblem implements CommandObject {
     @Override
     public MageObject getCopyFrom() {
         return this.copyFrom;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public String getIdName() {
-        return getName() + " [" + getId().toString().substring(0, 3) + ']';
-    }
-
-    @Override
-    public String getLogName() {
-        return GameLog.getColoredObjectIdName(this);
-    }
-
-    @Override
-    public String getImageName() {
-        return this.name;
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override
@@ -240,26 +205,6 @@ public class Emblem implements CommandObject {
 
     @Override
     public void setStartingDefense(int startingDefense) {
-    }
-
-    @Override
-    public UUID getId() {
-        return this.id;
-    }
-
-    @Override
-    public Emblem copy() {
-        return new Emblem(this);
-    }
-
-    @Override
-    public String getExpansionSetCodeForImage() {
-        return expansionSetCodeForImage;
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String expansionSetCodeForImage) {
-        this.expansionSetCodeForImage = expansionSetCodeForImage;
     }
 
     @Override

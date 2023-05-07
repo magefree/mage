@@ -186,7 +186,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public String toString() {
         StringBuilder sb = threadLocalBuilder.get();
-        sb.append(this.getName()).append('-').append(this.expansionSetCode);
+        sb.append(this.getName()).append('-').append(this.getExpansionSetCode());
         if (copy) {
             sb.append(" [Copy]");
         }
@@ -1184,7 +1184,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public boolean entersBattlefield(Ability source, Game game, Zone fromZone, boolean fireEvent) {
         controlledFromStartOfControllerTurn = false;
-        if (this.isFaceDown(game)) { // ?? add morphed/manifested here ??
+        if (this.isFaceDown(game)) { // ?? add morphed/manifested here ???
             // remove some attributes here, because first apply effects comes later otherwise abilities (e.g. color related) will unintended trigger
             MorphAbility.setPermanentToFaceDownCreature(this, this, game);
         }
@@ -1780,16 +1780,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public void setMorphed(boolean value) {
         morphed = value;
-    }
-
-    @Override
-    public void setCardNumber(String cardNumber) {
-        this.cardNumber = cardNumber;
-    }
-
-    @Override
-    public void setExpansionSetCode(String expansionSetCode) {
-        this.expansionSetCode = expansionSetCode;
     }
 
     @Override

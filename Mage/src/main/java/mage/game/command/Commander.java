@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-public class Commander implements CommandObject {
+public class Commander extends CommandObjectImpl {
 
     private final Card sourceObject;
     private boolean copy;
@@ -31,6 +31,7 @@ public class Commander implements CommandObject {
     private final Abilities<Ability> abilities = new AbilitiesImpl<>();
 
     public Commander(Card card) {
+        super(card.getName());
         this.sourceObject = card;
 
         // All abilities must be added to the game before usage. It adding by addCard and addCommandObject calls
@@ -106,6 +107,7 @@ public class Commander implements CommandObject {
     }
 
     private Commander(final Commander commander) {
+        super(commander);
         this.sourceObject = commander.sourceObject.copy();
         this.copy = commander.copy;
         this.copyFrom = (commander.copyFrom != null ? commander.copyFrom.copy() : null);
@@ -125,10 +127,6 @@ public class Commander implements CommandObject {
     @Override
     public UUID getControllerId() {
         return sourceObject.getOwnerId();
-    }
-
-    @Override
-    public void assignNewId() {
     }
 
     @Override
@@ -160,15 +158,6 @@ public class Commander implements CommandObject {
     @Override
     public String getIdName() {
         return sourceObject.getName() + " [" + sourceObject.getId().toString().substring(0, 3) + ']';
-    }
-
-    @Override
-    public String getLogName() {
-        return GameLog.getColoredObjectIdName(this);
-    }
-
-    @Override
-    public void setName(String name) {
     }
 
     @Override
@@ -287,21 +276,6 @@ public class Commander implements CommandObject {
     @Override
     public UUID getId() {
         return sourceObject.getId();
-    }
-
-    @Override
-    public String getImageName() {
-        return sourceObject.getImageName();
-    }
-
-    @Override
-    public String getExpansionSetCodeForImage() {
-        return sourceObject.getExpansionSetCode();
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String expansionSetCodeForImage) {
-        throw new IllegalStateException("Can't change a set code of the commander, source card already has it");
     }
 
     @Override

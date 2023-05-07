@@ -52,7 +52,7 @@ public abstract class AbilityImpl implements Ability {
     private static final List<Ability> emptyAbilities = new ArrayList<>();
 
     protected UUID id;
-    protected UUID originalId;
+    protected UUID originalId; // TODO: delete originalId???
     protected AbilityType abilityType;
     protected UUID controllerId;
     protected UUID sourceId;

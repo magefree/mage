@@ -344,7 +344,7 @@ public final class ImageCache {
     private static String getKey(CardView card, String cardName, int imageSize) {
         return (card.isToken() ? cardName.replace(" Token", "") : cardName)
                 + '#' + card.getExpansionSetCode()
-                + '#' + card.getType()
+                + '#' + card.getImageNumber()
                 + '#' + card.getCardNumber()
                 + '#' + imageSize
                 + (card.getUsesVariousArt() ? "#usesVariousArt" : "");

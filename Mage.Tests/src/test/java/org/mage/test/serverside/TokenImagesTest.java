@@ -1,5 +1,6 @@
 package org.mage.test.serverside;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -9,6 +10,7 @@ import mage.cards.repository.TokenRepository;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.PermanentToken;
+import mage.game.permanent.token.HumanToken;
 import mage.game.permanent.token.SoldierToken;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
@@ -24,6 +26,7 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -148,7 +151,7 @@ public class TokenImagesTest extends CardTestPlayerBase {
                     Assert.assertNotNull("must have set code", card.getExpansionSetCode());
                     Assert.assertEquals("must have same set codes in all fields",
                             card.getExpansionSetCode(),
-                            ((PermanentToken) card).getToken().getOriginalExpansionSetCode()
+                            ((PermanentToken) card).getToken().getExpansionSetCode()
                     );
                     String realCode = card.getExpansionSetCode();
                     realServerStats.computeIfAbsent(realCode, code -> new ArrayList<>());
@@ -225,7 +228,7 @@ public class TokenImagesTest extends CardTestPlayerBase {
             // token as card like Embalm ability must have card number, so it will link to card's image instead token's image
             boolean hasCardNumbers = !realList.isEmpty() && realList
                     .stream()
-                    .mapToInt(card -> card.getCardNumber() == null ? 0 : CardUtil.parseCardNumberAsInt(card.getCardNumber()))
+                    .mapToInt(card -> card.getCardNumber().isEmpty() ? 0 : CardUtil.parseCardNumberAsInt(card.getCardNumber()))
                     .allMatch(x -> x > 0);
             if (mustStoreAsCard != hasCardNumbers) {
                 isFine = false;
@@ -257,13 +260,14 @@ public class TokenImagesTest extends CardTestPlayerBase {
         }
     }
 
-    private void assert_TokenTypes(String tokenName, int needTokenTypes) {
+    private void assert_TokenImageNumber(String tokenName, List<Integer> needUniqueImages) {
         Set<Integer> serverStats = currentGame.getBattlefield().getAllPermanents()
                 .stream()
                 .filter(card -> card.getName().equals(tokenName))
+                .filter(card -> card instanceof PermanentToken)
                 .sorted(Comparator.comparing(Card::getExpansionSetCode))
                 .map(card -> (PermanentToken) card)
-                .map(perm -> perm.getToken().getTokenType())
+                .map(perm -> perm.getToken().getImageNumber())
                 .collect(Collectors.toSet());
 
         GameView gameView = new GameView(currentGame.getState(), currentGame, playerA.getId(), null);
@@ -277,13 +281,15 @@ public class TokenImagesTest extends CardTestPlayerBase {
                 .stream()
                 .filter(card -> card.getName().equals(tokenName))
                 .sorted(Comparator.comparing(CardView::getExpansionSetCode))
-                .map(CardView::getType)
+                .map(CardView::getImageNumber)
                 .collect(Collectors.toSet());
 
         // server and client sides must have same data
-        Assert.assertEquals(serverStats.size(), clientStats.size());
-        Assert.assertEquals(needTokenTypes, serverStats.size());
-        Assert.assertEquals(needTokenTypes, clientStats.size());
+        String imagesNeed = needUniqueImages.stream().sorted().map(Object::toString).collect(Collectors.joining(", "));
+        String imagesServer = serverStats.stream().sorted().map(Object::toString).collect(Collectors.joining(", "));
+        String imagesClient = clientStats.stream().sorted().map(Object::toString).collect(Collectors.joining(", "));
+        Assert.assertEquals(imagesNeed, imagesServer);
+        Assert.assertEquals(imagesNeed, imagesClient);
     }
 
     @Test
@@ -310,7 +316,7 @@ public class TokenImagesTest extends CardTestPlayerBase {
 
         // x2 tokens
         assert_MemorialToGlory(20, "40K=40");
-        assert_TokenTypes("Soldier Token", 3); // 40K set contains 3 diffrent soldiers
+        assert_TokenImageNumber("Soldier Token", Arrays.asList(1, 2, 3)); // 40K set contains 3 diffrent soldiers
     }
 
     @Test
@@ -355,12 +361,26 @@ public class TokenImagesTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "create ten");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
+        // workaround to find a real image number (tokens get random image on put to battlefield)
+        AtomicInteger realImageNumber = new AtomicInteger(0);
+        runCode("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            PermanentToken token = game.getBattlefield().getAllPermanents()
+                    .stream()
+                    .filter(p -> p instanceof PermanentToken)
+                    .map(p -> (PermanentToken) p)
+                    .findFirst()
+                    .orElse(null);
+            Assert.assertNotNull(token);
+            Assert.assertTrue(token.getImageNumber() >= 1 && token.getImageNumber() <= 3);
+            realImageNumber.set(token.getImageNumber());
+        });
+
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, 1 + 10); // 1 test card + 10 tokens
-        assert_TokenTypes("Soldier Token", 1); // one ability's call must generate tokens with same image
+        assert_TokenImageNumber("Soldier Token", Arrays.asList(realImageNumber.get())); // one ability's call must generate tokens with same image
         assert_Inner("test", 0, 0, 1,
                 "Soldier Token", 10, false, "40K=10");
     }
@@ -428,6 +448,108 @@ public class TokenImagesTest extends CardTestPlayerBase {
         // tokens must use same set code as copied token
         assert_Inner("", 0, 0, 0,
                 "Construct Token", 2, false, "MED=2");
+    }
+
+    @Test
+    public void test_TokenExists_CopyMustGetSameImageNumber() {
+        Ability ability = new SimpleActivatedAbility(
+                Zone.ALL,
+                new CreateTokenEffect(new HumanToken(), 10),
+                new ManaCostsImpl<>("")
+        );
+        addCustomCardWithAbility("MOC-test", playerA, ability); // MOC contains only 1 token with image number 2
+        //
+        // You may have Vesuvan Doppelganger enter the battlefield as a copy of any creature on the battlefield
+        addCard(Zone.HAND, playerA, "Vesuvan Doppelganger", 1); // {3}{U}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+
+        // create tokens
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "create ten");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Human Token", 10);
+        // copy token
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Vesuvan Doppelganger");
+        setChoice(playerA, true);
+        setChoice(playerA, "Human Token");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Human Token", 10 + 1);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assert_TokenImageNumber("Human Token", Arrays.asList(2)); // one ability's call must generate tokens with same image
+        assert_Inner("test", 0, 0, 1,
+                "Human Token", 10, false, "MOC=10");
+    }
+
+    @Test
+    public void test_TokenExists_CopyEffectMustRestoreOldImageAfterEnd() {
+        // check a copy effect for:
+        // - a: card
+        // - b: token
+        // - c: token for card
+
+        // {3}{U}{U}
+        // Echoing Equation
+        // Choose target creature you control. Each other creature you control becomes a copy of it until end of turn, except those creatures aren’t legendary if the chosen creature is legendary.
+        addCard(Zone.HAND, playerA, "STX-Augmenter Pugilist", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "ICE-Balduvian Bears", 1);
+        //
+        // a: card
+        addCard(Zone.BATTLEFIELD, playerA, "NEC-Silver Myr", 1);
+        //
+        // b: token
+        prepareCards_TheHive("10E=1");
+        //
+        // - c: token for card
+        // {2}{U}
+        // Choose target artifact creature you control. For each creature chosen this way, create a token that's a copy of it.
+        addCard(Zone.HAND, playerA, "BRC-March of Progress", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+
+        // prepare b: token
+        activate_TheHive(1);
+
+        // prepare c: token for card
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "March of Progress");
+        addTarget(playerA, "Silver Myr");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // check prepared data
+        checkPermanentCount("prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silver Myr", 2); // card + token
+        checkPermanentCount("prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wasp", 1);
+
+        // copy bear
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Echoing Equation");
+        addTarget(playerA, "Balduvian Bears");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        // must get 1 original card + 3 copies (1 from card, 1 from copy of card, 1 from token)
+        checkPermanentCount("after copy start", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears", 4);
+        runCode("after copy start", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            Set<String> usedSetCodes = game.getBattlefield().getAllPermanents()
+                    .stream()
+                    .filter(MageObject::isCopy)
+                    .map(Card::getExpansionSetCode)
+                    .collect(Collectors.toSet());
+            Assert.assertEquals(1, usedSetCodes.size());
+            Assert.assertEquals("ICE", usedSetCodes.stream().findFirst().orElse(null));
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+
+        // end of copy - must get original images
+        assertPermanentCount(playerA, "Balduvian Bears", 1);
+        assertPermanentCount(playerA, "Silver Myr", 2); // card + token
+        assertTokenCount(playerA, "Silver Myr", 1);
+        assertPermanentCount(playerA, "Wasp", 1);
+        assert_Inner("Silver Myr", 0, 0, 2,
+                "Silver Myr", 1, true, "NEC=1");
+        assert_Inner("", 0, 0, 0,
+                "Wasp", 1, false, "10E=1");
     }
 
     @Test

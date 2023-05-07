@@ -25,8 +25,6 @@ public interface Card extends MageObject {
 
     UUID getOwnerId();
 
-    String getCardNumber();
-
     Rarity getRarity(); // null for tokens
 
     void setOwnerId(UUID ownerId);
@@ -48,7 +46,6 @@ public interface Card extends MageObject {
 
     List<String> getRules(Game game);  // gets card rules + in game modifications
 
-    String getExpansionSetCode();
     void checkForCountersToAdd(Permanent permanent, Ability source, Game game);
 
     void setFaceDown(boolean value, Game game);

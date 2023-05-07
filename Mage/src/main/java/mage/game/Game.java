@@ -398,7 +398,7 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     void addEmblem(Emblem emblem, MageObject sourceObject, UUID toPlayerId);
 
-    boolean addPlane(Plane plane, MageObject sourceObject, UUID toPlayerId);
+    boolean addPlane(Plane plane, UUID toPlayerId);
 
     void addCommander(Commander commander);
 

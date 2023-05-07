@@ -1307,7 +1307,7 @@ public abstract class GameImpl implements Game {
         if (gameOptions.planeChase) {
             Plane plane = Plane.createRandomPlane();
             plane.setControllerId(startingPlayerId);
-            addPlane(plane, null, startingPlayerId);
+            addPlane(plane, startingPlayerId);
             state.setPlaneChase(this, gameOptions.planeChase);
         }
     }
@@ -1850,18 +1850,18 @@ public abstract class GameImpl implements Game {
         for (Ability ability : newEmblem.getAbilities()) {
             ability.setSourceId(newEmblem.getId());
         }
-        state.addCommandObject(newEmblem);
+
+        state.addCommandObject(newEmblem); // TODO: generate image for emblem here?
     }
 
     /**
      * @param plane
-     * @param sourceObject
      * @param toPlayerId   controller and owner of the plane (may only be one
      *                     per game..)
      * @return boolean - whether the plane was added successfully or not
      */
     @Override
-    public boolean addPlane(Plane plane, MageObject sourceObject, UUID toPlayerId) {
+    public boolean addPlane(Plane plane, UUID toPlayerId) {
         // Implementing planechase as if it were 901.15. Single Planar Deck Option
         // Here, can enforce the world plane restriction (the Grand Melee format may have some impact on this implementation)
 
@@ -1872,7 +1872,7 @@ public abstract class GameImpl implements Game {
             }
         }
         Plane newPlane = plane.copy();
-        newPlane.setSourceObject(sourceObject);
+        newPlane.setSourceObject();
         newPlane.setControllerId(toPlayerId);
         newPlane.assignNewId();
         newPlane.getAbilities().newId();
@@ -3160,7 +3160,7 @@ public abstract class GameImpl implements Game {
                     addedAgain = true;
                     Plane plane = Plane.createRandomPlane();
                     plane.setControllerId(aplayer.getId());
-                    addPlane(plane, null, aplayer.getId());
+                    addPlane(plane, aplayer.getId());
                 }
             }
         }

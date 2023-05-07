@@ -26,7 +26,6 @@ public class MockSplitCard extends SplitCard {
                 join(card.getManaCosts(CardInfo.ManaCostSide.LEFT)),
                 join(card.getManaCosts(CardInfo.ManaCostSide.RIGHT)),
                 getSpellAbilityType(card));
-        this.expansionSetCode = card.getSetCode();
         this.power = mageIntFromString(card.getPower());
         this.toughness = mageIntFromString(card.getToughness());
         this.cardType = card.getTypes();

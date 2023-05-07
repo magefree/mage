@@ -1786,61 +1786,40 @@ public final class CardUtil {
 
 
     /**
-     * Copy image related data from one object to another (card number, set code, token type)
+     * Copy image related data from one object to another (set code, card number, image number)
      * Use it in copy/transform effects
      */
     public static void copySetAndCardNumber(MageObject targetObject, MageObject copyFromObject) {
         String needSetCode;
         String needCardNumber;
-        int needTokenType;
-        if (copyFromObject instanceof CommandObject) {
-            needSetCode = ((CommandObject) copyFromObject).getExpansionSetCodeForImage();
-            needCardNumber = "0";
-            needTokenType = 0;
-        } else if (copyFromObject instanceof PermanentCard) {
-            needSetCode = ((PermanentCard) copyFromObject).getExpansionSetCode();
-            needCardNumber = ((PermanentCard) copyFromObject).getCardNumber();
-            needTokenType = 0;
-        } else if (copyFromObject instanceof PermanentToken) {
-            needSetCode = ((PermanentToken) copyFromObject).getToken().getOriginalExpansionSetCode();
-            needCardNumber = ((PermanentToken) copyFromObject).getToken().getOriginalCardNumber();
-            needTokenType = ((PermanentToken) copyFromObject).getToken().getTokenType();
-        } else if (copyFromObject instanceof Card) {
-            needSetCode = ((Card) copyFromObject).getExpansionSetCode();
-            needCardNumber = ((Card) copyFromObject).getCardNumber();
-            needTokenType = 0;
-        } else if (copyFromObject instanceof Token) {
-            needSetCode = ((Token) copyFromObject).getOriginalExpansionSetCode();
-            needCardNumber = ((Token) copyFromObject).getOriginalCardNumber();
-            needTokenType = ((Token) copyFromObject).getTokenType();
-        } else {
-            throw new IllegalStateException("Unsupported copyFromObject class: " + copyFromObject.getClass().getSimpleName());
-        }
+        int needImageNumber;
+        needSetCode = copyFromObject.getExpansionSetCode();
+        needCardNumber = copyFromObject.getCardNumber();
+        needImageNumber = copyFromObject.getImageNumber();
 
         if (targetObject instanceof Permanent) {
-            copySetAndCardNumber((Permanent) targetObject, needSetCode, needCardNumber, needTokenType);
+            copySetAndCardNumber((Permanent) targetObject, needSetCode, needCardNumber, needImageNumber);
         } else if (targetObject instanceof Token) {
-            copySetAndCardNumber((Token) targetObject, needSetCode, needCardNumber, needTokenType);
+            copySetAndCardNumber((Token) targetObject, needSetCode, needCardNumber, needImageNumber);
         } else {
             throw new IllegalStateException("Unsupported target object class: " + targetObject.getClass().getSimpleName());
         }
     }
 
-    private static void copySetAndCardNumber(Permanent targetPermanent, String newSetCode, String newCardNumber, Integer newTokenType) {
-        if (targetPermanent instanceof PermanentToken) {
-            copySetAndCardNumber(((PermanentToken) targetPermanent).getToken(), newSetCode, newCardNumber, newTokenType);
-        } else if (targetPermanent instanceof PermanentCard) {
+    private static void copySetAndCardNumber(Permanent targetPermanent, String newSetCode, String newCardNumber, Integer newImageNumber) {
+        if (targetPermanent instanceof PermanentCard
+                || targetPermanent instanceof PermanentToken) {
             targetPermanent.setExpansionSetCode(newSetCode);
             targetPermanent.setCardNumber(newCardNumber);
+            targetPermanent.setImageNumber(newImageNumber);
         } else {
             throw new IllegalArgumentException("Wrong code usage: un-supported target permanent type: " + targetPermanent.getClass().getSimpleName());
         }
     }
 
-    private static void copySetAndCardNumber(Token targetToken, String newSetCode, String newCardNumber, Integer newTokenType) {
-        targetToken.setOriginalExpansionSetCode(newSetCode);
-        targetToken.setExpansionSetCodeForImage(newSetCode);
-        targetToken.setOriginalCardNumber(newCardNumber);
-        targetToken.setTokenType(newTokenType);
+    private static void copySetAndCardNumber(Token targetToken, String newSetCode, String newCardNumber, Integer newImageNumber) {
+        targetToken.setExpansionSetCode(newSetCode);
+        targetToken.setCardNumber(newCardNumber);
+        targetToken.setImageNumber(newImageNumber);
     }
 }

@@ -369,7 +369,7 @@ public class ModernCardRenderer extends CardRenderer {
     }
 
     private float getTypeLineYFrac() {
-        if (cardView.isToken() && cardView.getCardNumber() == null) {
+        if (cardView.isToken() && cardView.getCardNumber().isEmpty()) {
             return TYPE_LINE_Y_FRAC_TOKEN;
         } else if (cardView.getFrameStyle().isFullArt()) {
             return TYPE_LINE_Y_FRAC_FULL_ART;

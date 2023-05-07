@@ -241,9 +241,8 @@ public class MageBook extends JComponent {
                 Constructor<?> cons = c.getConstructor();
                 Object newToken = cons.newInstance();
                 if (newToken instanceof Token) {
-                    ((Token) newToken).setOriginalExpansionSetCode(currentSet);
-                    ((Token) newToken).setExpansionSetCodeForImage(currentSet);
-                    ((Token) newToken).setTokenType(token.getImageNumber()); // must be called after set code, so it keep the type
+                    ((Token) newToken).setExpansionSetCode(currentSet);
+                    ((Token) newToken).setImageNumber(token.getImageNumber());
                     res.add(newToken);
                 }
             } catch (Exception e) {
@@ -262,7 +261,7 @@ public class MageBook extends JComponent {
                 Constructor<?> cons = c.getConstructor();
                 Object newEmblem = cons.newInstance();
                 if (newEmblem instanceof Emblem) {
-                    ((Emblem) newEmblem).setExpansionSetCodeForImage(currentSet);
+                    ((Emblem) newEmblem).setExpansionSetCode(currentSet);
                     res.add(newEmblem);
                 }
             } catch (Exception e) {
@@ -281,7 +280,7 @@ public class MageBook extends JComponent {
                 Constructor<?> cons = c.getConstructor();
                 Object newPlane = cons.newInstance();
                 if (newPlane instanceof Plane) {
-                    ((Plane) newPlane).setExpansionSetCodeForImage(currentSet);
+                    ((Plane) newPlane).setExpansionSetCode(currentSet);
                     res.add(newPlane);
                 }
             } catch (Exception e) {
@@ -300,7 +299,7 @@ public class MageBook extends JComponent {
                 Constructor<?> cons = c.getConstructor();
                 Object newDungeon = cons.newInstance();
                 if (newDungeon instanceof Dungeon) {
-                    ((Dungeon) newDungeon).setExpansionSetCodeForImage(currentSet);
+                    ((Dungeon) newDungeon).setExpansionSetCode(currentSet);
                     res.add(newDungeon);
                 }
             } catch (Exception e) {

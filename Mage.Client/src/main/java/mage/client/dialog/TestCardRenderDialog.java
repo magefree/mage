@@ -213,8 +213,7 @@ public class TestCardRenderDialog extends MageDialog {
 
     private CardView createToken(Game game, UUID controllerId, Token token, String code, int damage, boolean tapped, boolean transformed) {
         Token sourceToken = token.copy();
-        sourceToken.setExpansionSetCodeForImage(code);
-        sourceToken.setOriginalExpansionSetCode(code);
+        sourceToken.setExpansionSetCode(code);
 
         PermanentToken perm = new PermanentToken(sourceToken, controllerId, game);
         Set<Card> cardsList = new HashSet<>();

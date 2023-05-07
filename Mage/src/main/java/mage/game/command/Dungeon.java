@@ -35,7 +35,7 @@ import java.util.*;
 /**
  * @author TheElk801
  */
-public class Dungeon implements CommandObject {
+public class Dungeon extends CommandObjectImpl {
 
     private static final Set<String> dungeonNames = new HashSet<>();
 
@@ -49,31 +49,24 @@ public class Dungeon implements CommandObject {
     private static final ObjectColor emptyColor = new ObjectColor();
     private static final ManaCosts<ManaCost> emptyCost = new ManaCostsImpl<>();
 
-    private final String name;
-    private UUID id;
     private UUID controllerId;
     private boolean copy;
     private MageObject copyFrom; // copied card INFO (used to call original adjusters)
     private FrameStyle frameStyle;
     private final Abilities<Ability> abilites = new AbilitiesImpl<>();
-    private String expansionSetCodeForImage;
     private final List<DungeonRoom> dungeonRooms = new ArrayList<>();
     private DungeonRoom currentRoom = null;
 
-    public Dungeon(String name, String expansionSetCodeForImage) {
-        this.id = UUID.randomUUID();
-        this.name = name;
-        this.expansionSetCodeForImage = expansionSetCodeForImage;
+    public Dungeon(String name) {
+        super(name);
     }
 
     public Dungeon(final Dungeon dungeon) {
-        this.id = dungeon.id;
-        this.name = dungeon.name;
+        super(dungeon);
         this.frameStyle = dungeon.frameStyle;
         this.controllerId = dungeon.controllerId;
         this.copy = dungeon.copy;
         this.copyFrom = (dungeon.copyFrom != null ? dungeon.copyFrom : null);
-        this.expansionSetCodeForImage = dungeon.expansionSetCodeForImage;
         this.copyRooms(dungeon);
     }
 
@@ -91,7 +84,7 @@ public class Dungeon implements CommandObject {
 
     public void addRoom(DungeonRoom room) {
         this.dungeonRooms.add(room);
-        room.getRoomTriggeredAbility().setSourceId(id);
+        room.getRoomTriggeredAbility().setSourceId(this.getId());
         this.abilites.add(room.getRoomTriggeredAbility());
     }
 
@@ -174,11 +167,6 @@ public class Dungeon implements CommandObject {
     }
 
     @Override
-    public void assignNewId() {
-        this.id = UUID.randomUUID();
-    }
-
-    @Override
     public MageObject getSourceObject() {
         return null;
     }
@@ -212,30 +200,6 @@ public class Dungeon implements CommandObject {
     @Override
     public MageObject getCopyFrom() {
         return this.copyFrom;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public String getIdName() {
-        return getName() + " [" + getId().toString().substring(0, 3) + ']';
-    }
-
-    @Override
-    public String getLogName() {
-        return GameLog.getColoredObjectIdName(this);
-    }
-
-    @Override
-    public String getImageName() {
-        return this.name;
-    }
-
-    @Override
-    public void setName(String name) {
     }
 
     @Override
@@ -327,23 +291,8 @@ public class Dungeon implements CommandObject {
     }
 
     @Override
-    public UUID getId() {
-        return this.id;
-    }
-
-    @Override
     public Dungeon copy() {
         return new Dungeon(this);
-    }
-
-    @Override
-    public String getExpansionSetCodeForImage() {
-        return expansionSetCodeForImage;
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String expansionSetCodeForImage) {
-        this.expansionSetCodeForImage = expansionSetCodeForImage;
     }
 
     @Override

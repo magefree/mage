@@ -1337,12 +1337,11 @@ public class VerifyCardDataTest {
 
             // CHECK: named tokens must not have Token in the name
             if (token.getDescription().contains("named") && token.getName().contains("Token")) {
-                if (token.getDescription().contains("card named")) {
-                    // ignore ability text like Return a card named Deathpact Angel from
-                    continue;
+                // ignore ability text like Return a card named Deathpact Angel from
+                if (!token.getDescription().contains("card named")) {
+                    errorsList.add("Error: named token must not have Token in the name: "
+                            + tokenClass.getName() + " - " + token.getName() + " - " + token.getDescription());
                 }
-                errorsList.add("Error: named token must not have Token in the name: "
-                        + tokenClass.getName() + " - " + token.getName() + " - " + token.getDescription());
             }
         }
 
@@ -1462,10 +1461,6 @@ public class VerifyCardDataTest {
         if (errorsList.size() > 0) {
             Assert.fail("Found token errors: " + errorsList.size());
         }
-
-        // TODO: all token must have correct availableImageSetCodes (all sets with that token)
-        // Some sets have original card, but don't have token card at all. So you must use scryfall tokens list above to find
-        // all token's sets and compare with xmage
     }
 
     @Test

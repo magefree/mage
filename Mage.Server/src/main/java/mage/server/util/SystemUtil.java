@@ -686,8 +686,7 @@ public final class SystemUtil {
         Planes planeType = Planes.fromClassName(planeClassName);
         Plane plane = Plane.createPlane(planeType);
         if (plane != null) {
-            plane.setControllerId(player.getId());
-            game.addPlane(plane, null, player.getId());
+            game.addPlane(plane, player.getId());
             return true;
         }
         return false;

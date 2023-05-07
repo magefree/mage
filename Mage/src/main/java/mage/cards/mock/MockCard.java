@@ -40,8 +40,8 @@ public class MockCard extends CardImpl {
 
     public MockCard(CardInfo card) {
         super(null, card.getName());
-        this.cardNumber = card.getCardNumber();
-        this.expansionSetCode = card.getSetCode();
+        this.setExpansionSetCode(card.getSetCode());
+        this.setCardNumber(card.getCardNumber());
         this.power = mageIntFromString(card.getPower());
         this.toughness = mageIntFromString(card.getToughness());
         this.rarity = card.getRarity();

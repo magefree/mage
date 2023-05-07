@@ -11,6 +11,7 @@ import mage.constants.EmptyNames;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.Token;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -73,6 +74,11 @@ public class PermanentToken extends PermanentImpl {
         }
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s - %s", getExpansionSetCode(), getName());
+    }
+
     private void copyFromToken(Token token, Game game, boolean reset) {
         // modify all attributes permanently (without game usage)
         this.name = token.getName();
@@ -105,6 +111,8 @@ public class PermanentToken extends PermanentImpl {
         if (this.abilities.containsClass(ChangelingAbility.class)) {
             this.subtype.setIsAllCreatureTypes(true);
         }
+
+        CardUtil.copySetAndCardNumber(this, token);
     }
 
     @Override
@@ -143,25 +151,5 @@ public class PermanentToken extends PermanentImpl {
     @Override
     public MageObject getOtherFace() {
         return this.transformed ? token : this.token.getBackFace();
-    }
-
-    @Override
-    public String getCardNumber() {
-        return token.getOriginalCardNumber();
-    }
-
-    @Override
-    public void setCardNumber(String cardNumber) {
-        throw new IllegalArgumentException("Wrong code usage: you can't change a token's card number");
-    }
-
-    @Override
-    public String getExpansionSetCode() {
-        return token.getOriginalExpansionSetCode();
-    }
-
-    @Override
-    public void setExpansionSetCode(String expansionSetCode) {
-        throw new IllegalArgumentException("Wrong code usage: you can't change a token's set code, use CardUtils.copySetAndCardNumber instead");
     }
 }

@@ -12,7 +12,6 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect.FaceDownType;
-import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.game.Game;
@@ -157,9 +156,6 @@ public class MorphAbility extends AlternativeSourceCostsImpl {
         targetObject.getManaCost().clear();
 
         Token emptyImage = new EmptyToken();
-        emptyImage.setOriginalExpansionSetCode("");
-        emptyImage.setExpansionSetCodeForImage("");
-        emptyImage.setOriginalCardNumber("");
 
         // TODO: add morph image here?
         if (targetObject instanceof Permanent) {

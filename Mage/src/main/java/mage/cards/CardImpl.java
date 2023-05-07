@@ -40,8 +40,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     private static final Logger logger = Logger.getLogger(CardImpl.class);
 
     protected UUID ownerId;
-    protected String cardNumber;
-    protected String expansionSetCode;
     protected Rarity rarity;
     protected Class<? extends Card> secondSideCardClazz;
     protected Class<? extends Card> meldsWithClazz;
@@ -59,12 +57,12 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public CardImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs) {
         this(ownerId, setInfo, cardTypes, costs, SpellAbilityType.BASE);
     }
-
     public CardImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs, SpellAbilityType spellAbilityType) {
         this(ownerId, setInfo.getName());
+
         this.rarity = setInfo.getRarity();
-        this.cardNumber = setInfo.getCardNumber();
-        this.expansionSetCode = setInfo.getExpansionSetCode();
+        this.setExpansionSetCode(setInfo.getExpansionSetCode());
+        this.setCardNumber(setInfo.getCardNumber());
         this.cardType.addAll(Arrays.asList(cardTypes));
         this.manaCost.load(costs);
         setDefaultColor();
@@ -104,6 +102,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     protected CardImpl(UUID ownerId, String name) {
+        super();
         this.ownerId = ownerId;
         this.name = name;
     }
@@ -117,8 +116,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public CardImpl(final CardImpl card) {
         super(card);
         ownerId = card.ownerId;
-        cardNumber = card.cardNumber;
-        expansionSetCode = card.expansionSetCode;
         rarity = card.rarity;
 
         secondSideCardClazz = card.secondSideCardClazz;
@@ -197,11 +194,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public UUID getOwnerId() {
         return ownerId;
-    }
-
-    @Override
-    public String getCardNumber() {
-        return cardNumber;
     }
 
     @Override
@@ -367,11 +359,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public void setOwnerId(UUID ownerId) {
         this.ownerId = ownerId;
         abilities.setControllerId(ownerId);
-    }
-
-    @Override
-    public String getExpansionSetCode() {
-        return expansionSetCode;
     }
 
     @Override
@@ -634,11 +621,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         // must be non strict search in any sets, not one set
         // example: if set contains only one card side
         // method used in cards database creating, so can't use repository here
-        ExpansionSet.SetCardInfo info = Sets.findCardByClass(cardClazz, expansionSetCode, cardNumber);
+        ExpansionSet.SetCardInfo info = Sets.findCardByClass(cardClazz, this.getExpansionSetCode(), this.getCardNumber());
         if (info == null) {
             return null;
         }
-        return createCard(cardClazz, new CardSetInfo(info.getName(), expansionSetCode, info.getCardNumber(), info.getRarity(), info.getGraphicInfo()));
+        return createCard(cardClazz, new CardSetInfo(info.getName(), this.getExpansionSetCode(), info.getCardNumber(), info.getRarity(), info.getGraphicInfo()));
     }
 
     @Override

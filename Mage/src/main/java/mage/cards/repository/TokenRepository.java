@@ -1,5 +1,6 @@
 package mage.cards.repository;
 
+import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
@@ -274,5 +275,32 @@ public enum TokenRepository {
         res.add(createXmageToken("The Monarch", 2, "https://api.scryfall.com/cards/tcn2/1/en?format=image"));
 
         return res;
+    }
+
+    /**
+     * Try to find random image info by related set code
+     *
+     * @param className full class name of the token or other object
+     * @param setCode   primary set code for possible image
+     * @return
+     */
+    public TokenInfo generateTokenInfoBySetCode(String className, String setCode) {
+        // search by set code
+        List<TokenInfo> possibleInfo = TokenRepository.instance.getByClassName(className)
+                .stream()
+                .filter(info -> info.getSetCode().equals(setCode))
+                .collect(Collectors.toList());
+
+        // search by random set
+        if (possibleInfo.isEmpty()) {
+            possibleInfo = new ArrayList<>(TokenRepository.instance.getByClassName(className));
+        }
+
+        // also weill return diff image number for tokens
+        if (possibleInfo.size() > 0) {
+            return RandomUtil.randomFromCollection(possibleInfo);
+        } else {
+            return null;
+        }
     }
 }

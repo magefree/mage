@@ -2,7 +2,8 @@
 
 # Contains all possible emblems, planes, dungeons and tokens
 # All objects must have an image (private tokens don't have image,
-# so can be ignored)
+# so can be ignored, use TokenCreature instead)
+# One class for same images (if you have 2/2 and */* then must use different classes)
 
 # Use verify test to check it: test_checkMissingTokenData
 

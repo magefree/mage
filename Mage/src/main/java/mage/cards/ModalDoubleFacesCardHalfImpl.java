@@ -37,11 +37,6 @@ public class ModalDoubleFacesCardHalfImpl extends CardImpl implements ModalDoubl
     }
 
     @Override
-    public String getImageName() {
-        return name;
-    }
-
-    @Override
     public String getExpansionSetCode() {
         // TODO: own set code?
         return parentCard.getExpansionSetCode();

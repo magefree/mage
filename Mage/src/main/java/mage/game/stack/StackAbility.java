@@ -52,23 +52,23 @@ public class StackAbility extends StackObjectImpl implements Ability {
     private boolean copy;
     private MageObject copyFrom; // copied card INFO (used to call original adjusters)
     private String name;
-    private String expansionSetCode;
     private TargetAdjuster targetAdjuster = null;
     private CostAdjuster costAdjuster = null;
 
     public StackAbility(Ability ability, UUID controllerId) {
+        super();
         this.ability = ability;
         this.controllerId = controllerId;
         this.name = "stack ability (" + ability.getRule() + ')';
     }
 
     public StackAbility(final StackAbility stackAbility) {
+        super();
         this.ability = stackAbility.ability.copy();
         this.controllerId = stackAbility.controllerId;
         this.copy = stackAbility.copy;
         this.copyFrom = (stackAbility.copyFrom != null ? stackAbility.copyFrom.copy() : null);
         this.name = stackAbility.name;
-        this.expansionSetCode = stackAbility.expansionSetCode;
         this.targetAdjuster = stackAbility.targetAdjuster;
         this.targetChanged = stackAbility.targetChanged;
         this.costAdjuster = stackAbility.costAdjuster;
@@ -129,6 +129,36 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public String getExpansionSetCode() {
+        return "";
+    }
+
+    @Override
+    public void setExpansionSetCode(String expansionSetCode) {
+        throw new IllegalStateException("Wrong code usage: you can't change set code for the stack ability");
+    }
+
+    @Override
+    public String getCardNumber() {
+        return "";
+    }
+
+    @Override
+    public void setCardNumber(String cardNumber) {
+        throw new IllegalStateException("Wrong code usage: you can't change card number for the stack ability");
+    }
+
+    @Override
+    public Integer getImageNumber() {
+        return 0;
+    }
+
+    @Override
+    public void setImageNumber(Integer imageNumber) {
+        throw new IllegalStateException("Wrong code usage: you can't change image number for the stack ability");
+    }
+
+    @Override
     public String getName() {
         return name;
     }
@@ -144,12 +174,8 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public String getImageName() {
-        return name;
-    }
-
-    public String getExpansionSetCode() {
-        return expansionSetCode;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -382,15 +408,6 @@ public class StackAbility extends StackObjectImpl implements Ability {
     @Override
     public StackAbility copy() {
         return new StackAbility(this);
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setExpansionSetCode(String expansionSetCode) {
-        this.expansionSetCode = expansionSetCode;
     }
 
     @Override

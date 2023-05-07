@@ -23,14 +23,18 @@ import java.util.Set;
 
 public interface MageObject extends MageItem, Serializable, Copyable<MageObject> {
 
+    String getExpansionSetCode();
+    void setExpansionSetCode(String expansionSetCode);
+
+    String getCardNumber();
+    void setCardNumber(String cardNumber);
+
+    Integer getImageNumber();
+    void setImageNumber(Integer imageNumber);
+
     String getName();
-
     String getIdName();
-
     String getLogName();
-
-    String getImageName();
-
     void setName(String name);
 
     default List<CardType> getCardType() {

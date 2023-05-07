@@ -52,7 +52,7 @@ public class CardView extends SimpleCardView {
 
     protected UUID parentId;
     @Expose
-    protected String name;
+    protected String name; // TODO: remove duplicated field name/displayName???
     @Expose
     protected String displayName;
     @Expose
@@ -88,7 +88,7 @@ public class CardView extends SimpleCardView {
     protected boolean isToken;
 
     protected CardView ability;
-    protected int type;
+    protected int imageNumber;
 
     protected boolean transformable; // can toggle one card side to another (transformable cards, modal double faces)
     protected CardView secondCardFace;
@@ -182,6 +182,10 @@ public class CardView extends SimpleCardView {
         this.subTypes = new SubTypes(cardView.subTypes);
         this.superTypes = cardView.superTypes;
 
+        this.expansionSetCode = cardView.expansionSetCode;
+        this.cardNumber = cardView.cardNumber;
+        this.imageNumber = cardView.imageNumber;
+
         this.color = cardView.color.copy();
         this.frameColor = cardView.frameColor.copy();
         this.frameStyle = cardView.frameStyle;
@@ -195,7 +199,6 @@ public class CardView extends SimpleCardView {
         this.abilityType = cardView.abilityType;
         this.isToken = cardView.isToken;
         this.ability = cardView.ability; // reference, not copy
-        this.type = cardView.type;
 
         this.transformable = cardView.transformable;
         this.secondCardFace = cardView.secondCardFace == null ? null : new CardView(cardView.secondCardFace);
@@ -281,6 +284,7 @@ public class CardView extends SimpleCardView {
     public CardView(Card card, Game game, boolean controlled, boolean showFaceDownCard, boolean storeZone) {
         super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), game != null);
         this.originalObject = card;
+        this.imageNumber = card.getImageNumber();
 
         // no information available for face down cards as long it's not a controlled face down morph card
         // TODO: Better handle this in Framework (but currently I'm not sure how to do it there) LevelX2
@@ -305,6 +309,7 @@ public class CardView extends SimpleCardView {
         if (!showFaceUp) {
             this.fillEmpty(card, controlled);
             if (card instanceof Spell) {
+                // TODO: add face down image here???
                 // special handling for casting of Morph cards
                 if (controlled) {
                     this.name = card.getName();
@@ -391,7 +396,7 @@ public class CardView extends SimpleCardView {
             this.manaCostRightStr = "";
         }
 
-        this.name = card.getImageName();
+        this.name = card.getName();
         this.displayName = card.getName();
         this.displayFullName = fullCardName;
         this.rules = new ArrayList<>(card.getRules(game));
@@ -483,19 +488,7 @@ public class CardView extends SimpleCardView {
             this.isToken = true;
             this.mageObjectType = MageObjectType.TOKEN;
             this.rarity = Rarity.COMMON;
-            boolean originalCardNumberIsNull = ((PermanentToken) card).getToken().getOriginalCardNumber() == null;
-            if (!originalCardNumberIsNull && !"0".equals(((PermanentToken) card).getToken().getOriginalCardNumber())) {
-                // a token copied from permanent
-                this.expansionSetCode = ((PermanentToken) card).getToken().getOriginalExpansionSetCode();
-                this.cardNumber = ((PermanentToken) card).getToken().getOriginalCardNumber();
-            } else {
-                // a created token
-                this.expansionSetCode = card.getExpansionSetCode();
-            }
-            //
-            // set code and card number for token copies to get the image
             this.rules = new ArrayList<>(card.getRules(game));
-            this.type = ((PermanentToken) card).getToken().getTokenType();
         } else {
             this.rarity = card.getRarity();
             this.isToken = false;
@@ -612,9 +605,10 @@ public class CardView extends SimpleCardView {
     }
 
     public CardView(MageObject object, Game game) {
-        super(object.getId(), "", "0", false, true);
+        super(object.getId(), object.getExpansionSetCode(), object.getCardNumber(), false, true);
         this.originalObject = object;
 
+        this.imageNumber = object.getImageNumber();
         this.name = object.getName();
         this.displayName = object.getName();
         this.displayFullName = object.getName();
@@ -641,9 +635,7 @@ public class CardView extends SimpleCardView {
             this.mageObjectType = MageObjectType.TOKEN;
             PermanentToken permanentToken = (PermanentToken) object;
             this.rarity = Rarity.COMMON;
-            this.expansionSetCode = permanentToken.getExpansionSetCode();
             this.rules = new ArrayList<>(permanentToken.getRules(game));
-            this.type = permanentToken.getToken().getTokenType();
         } else if (object instanceof Emblem) {
             this.mageObjectType = MageObjectType.EMBLEM;
             Emblem emblem = (Emblem) object;
@@ -675,9 +667,6 @@ public class CardView extends SimpleCardView {
             this.rarity = Rarity.SPECIAL;
             this.rules = new ArrayList<>();
             this.rules.add(stackAbility.getRule());
-            if (stackAbility.getZone() == Zone.COMMAND) {
-                this.expansionSetCode = stackAbility.getExpansionSetCode();
-            }
         }
         // Frame color
         this.frameColor = object.getFrameColor(game).copy();
@@ -706,6 +695,8 @@ public class CardView extends SimpleCardView {
         // emblem images are always with common (black) symbol
         this.frameStyle = FrameStyle.M15_NORMAL;
         this.expansionSetCode = emblem.getExpansionSetCode();
+        this.cardNumber = "";
+        this.imageNumber = 0;
         this.rarity = Rarity.COMMON;
     }
 
@@ -722,6 +713,8 @@ public class CardView extends SimpleCardView {
         // emblem images are always with common (black) symbol
         this.frameStyle = FrameStyle.M15_NORMAL;
         this.expansionSetCode = dungeon.getExpansionSetCode();
+        this.cardNumber = "";
+        this.imageNumber = 0;
         this.rarity = Rarity.COMMON;
     }
 
@@ -739,6 +732,8 @@ public class CardView extends SimpleCardView {
         this.rotate = true;
         this.frameStyle = FrameStyle.M15_NORMAL;
         this.expansionSetCode = plane.getExpansionSetCode();
+        this.cardNumber = "";
+        this.imageNumber = 0;
         this.rarity = Rarity.COMMON;
     }
 
@@ -754,7 +749,10 @@ public class CardView extends SimpleCardView {
         this.rules = new ArrayList<>();
         this.rules.add(stackAbility.getRule(designation.getName()));
         this.frameStyle = FrameStyle.M15_NORMAL;
-        this.expansionSetCode = designation.getExpansionSetCodeForImage();
+        this.cardNumber = designation.getCardNumber();
+        this.expansionSetCode = designation.getExpansionSetCode();
+        this.cardNumber = "";
+        this.imageNumber = 0;
         this.rarity = Rarity.COMMON;
     }
 
@@ -793,6 +791,7 @@ public class CardView extends SimpleCardView {
             this.rarity = Rarity.COMMON;
             this.expansionSetCode = "";
             this.cardNumber = "0";
+            this.imageNumber = 0;
         } else {
             this.rarity = card.getRarity();
         }
@@ -819,7 +818,6 @@ public class CardView extends SimpleCardView {
         super(token.getId(), "", "0", false);
         this.isToken = true;
         this.id = token.getId();
-        this.expansionSetCode = token.getOriginalExpansionSetCode();
         this.name = token.getName();
         this.displayName = token.getName();
         this.displayFullName = token.getName();
@@ -839,7 +837,11 @@ public class CardView extends SimpleCardView {
         this.manaCostLeftStr = String.join("", token.getManaCostSymbols());
         this.manaCostRightStr = "";
         this.rarity = Rarity.SPECIAL;
-        this.type = token.getTokenType();
+
+        // source object is a token, so no card number
+        this.expansionSetCode = token.getExpansionSetCode();
+        this.cardNumber = token.getCardNumber();
+        this.imageNumber = token.getImageNumber();
     }
 
     protected final void addTargets(Targets targets, Effects effects, Ability source, Game game) {
@@ -995,10 +997,6 @@ public class CardView extends SimpleCardView {
         return expansionSetCode;
     }
 
-    public void setExpansionSetCode(String expansionSetCode) {
-        this.expansionSetCode = expansionSetCode;
-    }
-
     @Override
     public UUID getId() {
         return id;
@@ -1135,8 +1133,8 @@ public class CardView extends SimpleCardView {
         return bandedCards;
     }
 
-    public int getType() {
-        return type;
+    public int getImageNumber() {
+        return imageNumber;
     }
 
     public MageObjectType getMageObjectType() {
