@@ -148,7 +148,7 @@
 
      public void updateDraft(DraftView draftView) {
          if (draftView.getSets().size() != 3) {
-             // Random draft
+             // Random draft - TODO: can we access the type of draft here?
              this.txtPack1.setText("Random Boosters");
              this.txtPack2.setText("Random Boosters");
              this.txtPack3.setText("Random Boosters");
@@ -171,6 +171,7 @@
          int left = draftView.getPlayers().size() - right;
          int height = left * 18;
          lblTableImage.setSize(new Dimension(lblTableImage.getWidth(), height));
+         // TODO: Can we fix this for Rich Draft where there is no direction?
          Image tableImage = ImageHelper.getImageFromResources(draftView.getBoosterNum() % 2 == 1 ? "/draft/table_left.png" : "/draft/table_right.png");
          BufferedImage resizedTable = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(tableImage, BufferedImage.TYPE_INT_ARGB), lblTableImage.getWidth(), lblTableImage.getHeight());
          lblTableImage.setIcon(new ImageIcon(resizedTable));
@@ -431,10 +432,11 @@
      }
 
      private String getCurrentSetCode() {
-         if (!setCodes.isEmpty()) {
+         // TODO: Record set codes for random drafts correctly
+         if (setCodes.size() >= packNo) {
              return setCodes.get(packNo - 1);
          } else {
-             return "";
+             return "   ";
          }
      }
 
