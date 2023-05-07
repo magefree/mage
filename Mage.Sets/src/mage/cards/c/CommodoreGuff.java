@@ -45,7 +45,7 @@ public final class CommodoreGuff extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.GUFF);
-        this.setStartingLoyalty(6);
+        this.setStartingLoyalty(5);
 
         // At the beginning of your end step, put a loyalty counter on another target planeswalker you control.
         Ability ability = new BeginningOfEndStepTriggeredAbility(

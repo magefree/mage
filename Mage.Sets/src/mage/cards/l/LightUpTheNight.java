@@ -1,7 +1,5 @@
 package mage.cards.l;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.costs.common.RemoveVariableCountersTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -19,8 +17,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class LightUpTheNight extends CardImpl {
@@ -69,21 +68,16 @@ class LightUpTheNightEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // Normal cast
-        int damage = source.getManaCostsToPay().getX();
-        // Flashback cast
-        damage += GetXValue.instance.calculate(game, source, this);
-        UUID targetId = source.getFirstTarget();
+        // Normal cast + Flashback cast
+        int damage = source.getManaCostsToPay().getX() + GetXValue.instance.calculate(game, source, this);
+        UUID targetId = getTargetPointer().getFirst(game, source);
         Player player = game.getPlayer(targetId);
         if (player != null) {
-            player.damage(damage, source.getSourceId(), source, game);
-            return true;
+            return player.damage(damage, source.getSourceId(), source, game) > 0;
         }
         Permanent permanent = game.getPermanent(targetId);
-        if (permanent != null) {
-            permanent.damage(damage + 1, source.getSourceId(), source, game);
-            return true;
-        }
-        return false;
+        return permanent != null && permanent.damage(damage + ((
+                permanent.isCreature(game) || permanent.isPlaneswalker(game)
+        ) ? 1 : 0), source.getSourceId(), source, game) > 0;
     }
 }

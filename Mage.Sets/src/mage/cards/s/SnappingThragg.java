@@ -86,6 +86,6 @@ class SnappingThraggTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} deals combat damage to a player, you may have it deal 3 damage to target creature that player controls";
+        return "Whenever {this} deals combat damage to a player, you may have it deal 3 damage to target creature that player controls.";
     }
 }

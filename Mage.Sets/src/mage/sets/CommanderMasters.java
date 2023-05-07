@@ -18,11 +18,14 @@ public final class CommanderMasters extends ExpansionSet {
         this.hasBasicLands = false;
         this.hasBoosters = false; //temporary
 
+        cards.add(new SetCardInfo("Anikthea, Hand of Erebos", 705, Rarity.MYTHIC, mage.cards.a.AniktheaHandOfErebos.class));
         cards.add(new SetCardInfo("Capture of Jingzhou", 79, Rarity.RARE, mage.cards.c.CaptureOfJingzhou.class));
         cards.add(new SetCardInfo("Commodore Guff", 706, Rarity.MYTHIC, mage.cards.c.CommodoreGuff.class));
         cards.add(new SetCardInfo("Jeweled Lotus", 396, Rarity.MYTHIC, mage.cards.j.JeweledLotus.class));
         cards.add(new SetCardInfo("Personal Tutor", 110, Rarity.RARE, mage.cards.p.PersonalTutor.class));
         cards.add(new SetCardInfo("Selvala, Heart of the Wilds", 220, Rarity.MYTHIC, mage.cards.s.SelvalaHeartOfTheWilds.class));
+        cards.add(new SetCardInfo("Sliver Gravemother", 707, Rarity.MYTHIC, mage.cards.s.SliverGravemother.class));
         cards.add(new SetCardInfo("The Ur-Dragon", 361, Rarity.MYTHIC, mage.cards.t.TheUrDragon.class));
+        cards.add(new SetCardInfo("Zhulodok, Void Gorger", 704, Rarity.MYTHIC, mage.cards.z.ZhulodokVoidGorger.class));
     }
 }

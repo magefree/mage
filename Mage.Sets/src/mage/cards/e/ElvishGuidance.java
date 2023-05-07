@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public final class ElvishGuidance extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent(SubType.ELF, "");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.ELF, "Elf on the battlefield");
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
 
     public ElvishGuidance(UUID ownerId, CardSetInfo setInfo) {
@@ -41,7 +41,7 @@ public final class ElvishGuidance extends CardImpl {
         // Whenever enchanted land is tapped for mana, its controller adds {G} for each Elf on the battlefield.
         this.addAbility(new EnchantedTappedTriggeredManaAbility(new DynamicManaEffect(
                 Mana.GreenMana(1), xValue
-        ).setText("its controller adds {G} for each Elf on the battlefield")));
+        )));
     }
 
     private ElvishGuidance(final ElvishGuidance card) {
