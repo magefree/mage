@@ -47,7 +47,7 @@ public final class LobeliaSackvilleBaggins extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // When Lobelia Sackville-Baggins enters the battlefield, exile target creature card from an opponent's graveyard that was put there from the battlefield this turn, then create X Treasure tokens, where X is the exiled card's power.
         Ability ability = new EntersBattlefieldTriggeredAbility(new LobeliaSackvilleBagginsEffect());
