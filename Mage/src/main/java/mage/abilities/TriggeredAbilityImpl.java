@@ -210,6 +210,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                         || ruleLow.startsWith("exile")
                         || ruleLow.startsWith("gain")
                         || ruleLow.startsWith("goad")
+                        || ruleLow.startsWith("prevent")
                         || ruleLow.startsWith("put")
                         || ruleLow.startsWith("remove")
                         || ruleLow.startsWith("return")

@@ -40,7 +40,7 @@ public final class EmbermageGoblin extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Embermage Goblin enters the battlefield, you may search your library for a card named Embermage Goblin, reveal it, and put it into your hand. If you do, shuffle your library.
-        TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
+        TargetCardInLibrary target = new TargetCardInLibrary(1, 1, filter);
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true, true), true));
         
         // {tap}: Embermage Goblin deals 1 damage to any target.

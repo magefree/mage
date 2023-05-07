@@ -32,8 +32,10 @@ public final class SkarrgGoliath extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         
         // Bloodrush - {5}{G}{G}, Discard Skarrg Goliath: Target attacking creature gets +9/+9 and gains trample until end of turn.
-        Ability ability = new BloodrushAbility("{5}{G}{G}", new BoostTargetEffect(9,9, Duration.EndOfTurn));
-        ability.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
+        Ability ability = new BloodrushAbility("{5}{G}{G}", new BoostTargetEffect(9,9, Duration.EndOfTurn)
+                .setText("target attacking creature gets +9/+9"));
+        ability.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn)
+                .setText("and gains trample until end of turn"));
         this.addAbility(ability);
     }
 

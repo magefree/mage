@@ -41,7 +41,7 @@ public final class ArchaeomancersMap extends CardImpl {
 
         // When Archaeomancer's Map enters the battlefield, search your library for up to two basic Plains cards, reveal them, put them into your hand, then shuffle.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(2, filter), true)
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 2, filter), true)
         ));
 
         // Whenever a land enters the battlefield under an opponent's control, if that player controls more lands than you, you may put a land card from your hand onto the battlefield.
