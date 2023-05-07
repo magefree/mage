@@ -18,7 +18,6 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
      * Creates new form RandomPacksSelectorDialog
      */
     private boolean boxesCreated;
-    private int needSetsAmount;
     public static final String randomDraftDescription = ("The selected packs will be randomly distributed to players. Each player may open different packs. Duplicates will be avoided.");
 
     public RandomPacksSelectorDialog() {
@@ -28,9 +27,8 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
         boxesCreated = false;
     }
 
-    private void setType(boolean isRandomDraft, boolean isRichManDraft, boolean isRemixedDraft, int needSetsAmount) {
-        this.needSetsAmount = needSetsAmount;
-        String title = "";
+    private void setType(boolean isRandomDraft, boolean isRichManDraft, boolean isRemixedDraft) {
+        String title;
         if (isRandomDraft) {
             title = "Random Booster Draft Packs Selector";
         } else if (isRichManDraft) {
@@ -43,8 +41,8 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
         setTitle(title);
     }
 
-    public void showDialog(boolean isRandomDraft, boolean isRichManDraft, boolean isRemixedDraft, int needSetsAmount) {
-        setType(isRandomDraft, isRichManDraft, isRemixedDraft, needSetsAmount);
+    public void showDialog(boolean isRandomDraft, boolean isRichManDraft, boolean isRemixedDraft) {
+        setType(isRandomDraft, isRichManDraft, isRemixedDraft);
         createCheckboxes();
         pnlPacks.setVisible(true);
         pnlPacks.revalidate();
@@ -206,8 +204,8 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowClosing
 
     public void doApply() {
-        if (getSelectedPacks().size() < needSetsAmount) {
-            JOptionPane.showMessageDialog(this, String.format("At least %d sets must be selected", needSetsAmount), "Error", JOptionPane.ERROR_MESSAGE);
+        if (getSelectedPacks().size() < 1) {
+            JOptionPane.showMessageDialog(this, "At least one set must be selected", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             this.setVisible(false);
         }

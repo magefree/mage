@@ -681,10 +681,10 @@ public class NewTournamentDialog extends MageDialog {
         // CHECKS
         TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
         if (tournamentType.isRandom() || tournamentType.isRichMan() || tournamentType.isRemixed()) {
-            if (tOptions.getLimitedOptions().getSetCodes().size() < tournamentType.getNumBoosters()) {
+            if (tOptions.getLimitedOptions().getSetCodes().size() < 1) {
                 JOptionPane.showMessageDialog(
                         MageFrame.getDesktop(),
-                        String.format("Warning, you must select %d packs for the pool", tournamentType.getNumBoosters()),
+                        "Warning, you must select at least one set for the pool",
                         "Warning",
                         JOptionPane.WARNING_MESSAGE
                 );
@@ -1033,7 +1033,7 @@ public class NewTournamentDialog extends MageDialog {
             pnlRandomPacks.add(txtRandomPacks);
             JButton btnSelectRandomPacks = new JButton();
             btnSelectRandomPacks.setAlignmentX(Component.LEFT_ALIGNMENT);
-            btnSelectRandomPacks.setText("Select " + (this.isRemixed ? "sets" : "packs") + " to be included in the pool");
+            btnSelectRandomPacks.setText("Select sets to be included in the pool");
             btnSelectRandomPacks.setToolTipText(RandomPacksSelectorDialog.randomDraftDescription);
             btnSelectRandomPacks.addActionListener(evt -> showRandomPackSelectorDialog());
             pnlRandomPacks.add(btnSelectRandomPacks);
@@ -1046,8 +1046,7 @@ public class NewTournamentDialog extends MageDialog {
     }
 
     private void showRandomPackSelectorDialog() {
-        TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
-        randomPackSelector.showDialog(isRandom, isRichMan, isRemixed, tournamentType.getNumBoosters());
+        randomPackSelector.showDialog(isRandom, isRichMan, isRemixed);
         this.txtRandomPacks.setText(String.join(";", randomPackSelector.getSelectedPacks()));
         this.pack();
         this.revalidate();
