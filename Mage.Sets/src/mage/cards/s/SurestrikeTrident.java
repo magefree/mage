@@ -19,7 +19,7 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 import java.util.UUID;
 
@@ -39,10 +39,10 @@ public final class SurestrikeTrident extends CardImpl {
                 FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT
         ));
         ability.addEffect(new GainAbilityWithAttachmentEffect(
-                "and \"{T}, Unattach {this}: This creature deals damage equal to its power to target player.\"",
+                "and \"{T}, Unattach {this}: This creature deals damage equal to its power to target player or planeswalker.\"",
                 new DamageTargetEffect(xValue)
                         .setText("This creature deals damage equal to its power to target player or planeswalker"),
-                new TargetPlayer(), new UnattachCost(), new TapSourceCost()
+                new TargetPlayerOrPlaneswalker(), new UnattachCost(), new TapSourceCost()
         ));
         this.addAbility(ability);
 

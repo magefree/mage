@@ -50,7 +50,7 @@ class TajNarSwordsmithEffect extends OneShotEffect {
 
     TajNarSwordsmithEffect() {
         super(Outcome.Benefit);
-        this.staticText = "you may pay {X}. If you do, search your library for an Equipment card with mana value X or less and put that card onto the battlefield. Then shuffle";
+        this.staticText = "you may pay {X}. If you do, search your library for an Equipment card with mana value X or less, put that card onto the battlefield, then shuffle";
     }
 
     TajNarSwordsmithEffect(final TajNarSwordsmithEffect effect) {
