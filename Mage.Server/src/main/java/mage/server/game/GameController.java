@@ -917,14 +917,21 @@ public class GameController implements GameCallback {
 
     private void error(String message, Exception ex) {
         StringBuilder sb = new StringBuilder();
-        sb.append(message).append(ex.toString());
+        sb.append(message);
+        sb.append("\n");
+        sb.append("\n");
+        sb.append(ex);
         sb.append("\nServer version: ").append(Main.getVersion().toString());
-        sb.append('\n');
+        sb.append("\nStack trace:");
+        sb.append("\n");
         for (StackTraceElement e : ex.getStackTrace()) {
-            sb.append(e.toString()).append('\n');
+            sb.append(e.toString()).append("\n");
         }
+        String mes = sb.toString();
+
+        // send error for each player
         for (final Entry<UUID, GameSessionPlayer> entry : getGameSessionsMap().entrySet()) {
-            entry.getValue().gameError(sb.toString());
+            entry.getValue().gameError(mes);
         }
     }
 

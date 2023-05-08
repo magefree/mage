@@ -1636,14 +1636,15 @@ public abstract class GameImpl implements Game {
                         String info = this.getStack().stream().map(MageObject::toString).collect(Collectors.joining("\n"));
                         logger.info(String.format("\nStack before error %d: \n%s\n", this.getStack().size(), info));
 
-                        // rollback game to prev state
-                        GameState restoredState = restoreState(rollbackBookmark, "Game exception: " + ex.getMessage());
-                        rollbackBookmark = 0;
-
+                        // too many errors - end game
                         if (errorContinueCounter > 15) {
                             throw new MageException("Iterated player priority after game exception too often, game ends! Last error:\n "
                                     + ex.getMessage());
                         }
+
+                        // rollback game to prev state
+                        GameState restoredState = restoreState(rollbackBookmark, "Game exception: " + ex.getMessage());
+                        rollbackBookmark = 0;
 
                         if (restoredState != null) {
                             this.informPlayers(String.format("Auto-restored to %s due game error: %s", restoredState, ex.getMessage()));

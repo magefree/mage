@@ -268,6 +268,7 @@ public final class SystemUtil {
         Ability fakeSourceAbilityTemplate = new SimpleStaticAbility(Zone.OUTSIDE, new InfoEffect("adding testing cards"));
         fakeSourceAbilityTemplate.setControllerId(feedbackPlayer.getId());
 
+        List<String> errorsList = new ArrayList<>();
         try {
             String fileName = fileSource;
             if (fileName == null) {
@@ -276,7 +277,10 @@ public final class SystemUtil {
 
             File f = new File(fileName);
             if (!f.exists()) {
-                logger.warn("Couldn't find init file: " + fileName);
+                String mes = String.format("Couldn't find init file: %s", f.getAbsolutePath());
+                logger.warn(mes);
+                errorsList.add(mes);
+                sendCheatCommandsFeedback(game, feedbackPlayer, errorsList);
                 return;
             }
 
@@ -287,6 +291,7 @@ public final class SystemUtil {
             // 2. ask user if many groups
             // 3. process system commands
             // 4. run commands from selected group
+
             // 1. parse
             List<CommandGroup> groups = new ArrayList<>();
 
@@ -312,7 +317,9 @@ public final class SystemUtil {
                                 currentGroup = new CommandGroup(groupName, true);
                                 groups.add(currentGroup);
                             } else {
-                                logger.warn("Special group [" + groupName + "] is not supported.");
+                                String mes = String.format("Special group is not supported: %s", groupName);
+                                errorsList.add(mes);
+                                logger.warn(mes);
                             }
                             continue;
                         } else {
@@ -368,7 +375,10 @@ public final class SystemUtil {
                 return;
             }
 
-            logger.info("Selected group [" + runGroup.name + "] with " + runGroup.commands.size() + " commands");
+            logger.info(String.format("Selected group [%s] with %d commands",
+                    runGroup.name,
+                    runGroup.commands.size()
+            ));
 
             // 3. system commands
             if (runGroup.isSpecialCommand) {
@@ -447,7 +457,14 @@ public final class SystemUtil {
                             game.firePriorityEvent(savedPriorityPlayer);
                         }
                         break;
+
+                    default:
+                        String mes = String.format("Unknown system command: %s", runGroup.name);
+                        errorsList.add(mes);
+                        logger.error(mes);
+                        break;
                 }
+                sendCheatCommandsFeedback(game, feedbackPlayer, errorsList);
                 return;
             }
 
@@ -464,11 +481,16 @@ public final class SystemUtil {
                 if (line.startsWith(COMMAND_REF_PREFIX)) {
                     CommandGroup other = otherGroupRefs.getOrDefault(line, null);
                     if (other != null && !other.isSpecialCommand) {
-                        logger.info("Replace ref group " + line + " by " + other.commands.size() + " commands");
+                        logger.info(String.format("Replace ref group [%s] by %d child commands",
+                                line,
+                                other.commands.size()
+                        ));
                         runGroup.commands.remove(i);
                         runGroup.commands.addAll(i, other.commands);
                     } else {
-                        logger.error("Can't find ref group: " + line);
+                        String mes = String.format("Can't find ref group: %s", line);
+                        errorsList.add(mes);
+                        logger.error(mes);
                     }
                 }
             }
@@ -478,13 +500,17 @@ public final class SystemUtil {
 
                 CardCommandData command = parseCardCommand(line);
                 if (!command.OK) {
-                    logger.warn(command.Error + ": " + line);
+                    String mes = String.format("%s: %s", command.Error, line);
+                    errorsList.add(mes);
+                    logger.warn(mes);
                     continue;
                 }
 
                 Optional<Player> playerOptional = findPlayer(game, command.player);
                 if (!playerOptional.isPresent()) {
-                    logger.warn("Unknown player: " + line);
+                    String mes = String.format("Unknown player: %s", line);
+                    errorsList.add(mes);
+                    logger.warn(mes);
                     continue;
                 }
                 Player player = playerOptional.get();
@@ -531,7 +557,11 @@ public final class SystemUtil {
                     // find card info
                     CardInfo cardInfo = CardLookup.instance.lookupCardInfo(command.cardName, command.cardSet).orElse(null);
                     if (cardInfo == null) {
-                        logger.warn("Unknown card for stack command [" + command.cardName + "]: " + line);
+                        String mes = String.format("Unknown card for stack command [%s]: %s",
+                                command.cardName,
+                                line);
+                        errorsList.add(mes);
+                        logger.warn(mes);
                         continue;
                     }
 
@@ -576,7 +606,11 @@ public final class SystemUtil {
                 } else if ("sideboard".equalsIgnoreCase(command.zone)) {
                     gameZone = Zone.OUTSIDE;
                 } else {
-                    logger.warn("Unknown zone [" + command.zone + "]: " + line);
+                    String mes = String.format("Unknown zone [%s]: %s",
+                            command.zone,
+                            line);
+                    errorsList.add(mes);
+                    logger.warn(mes);
                     continue;
                 }
 
@@ -590,11 +624,13 @@ public final class SystemUtil {
                 }
 
                 if (cards.isEmpty()) {
-                    logger.warn(String.format("Unknown card [%s%s]: %s",
+                    String mes = String.format("Unknown card [%s%s]: %s",
                             command.cardSet.isEmpty() ? "" : command.cardSet + "-",
                             command.cardName,
                             line
-                    ));
+                    );
+                    errorsList.add(mes);
+                    logger.warn(mes);
                     continue;
                 }
 
@@ -615,7 +651,9 @@ public final class SystemUtil {
                         cardsToLoad.forEach(card -> gameCommander.addCommander(card, player));
                         cardsToLoad.forEach(card -> gameCommander.initCommander(card, player));
                     } else {
-                        logger.fatal("Commander card can be used in commander game only: " + command.cardName);
+                        String mes = String.format("Commander card can be used in commander game only: %s", command.cardName);
+                        errorsList.add(mes);
+                        logger.error(mes);
                     }
                 } else if ("sideboard".equalsIgnoreCase(command.zone) && cardsToLoad.size() > 0) {
                     // put to sideboard
@@ -632,8 +670,24 @@ public final class SystemUtil {
                 }
             }
         } catch (Exception e) {
-            logger.fatal("", e);
+            String mes = String.format("Catch critical error: %s", e.getMessage());
+            errorsList.add(mes);
+            logger.error(mes, e);
         }
+        sendCheatCommandsFeedback(game, feedbackPlayer, errorsList);
+    }
+
+    private static void sendCheatCommandsFeedback(Game game, Player feedbackPlayer, List<String> errorsList) {
+        // inform all players about wrong commands or other errors
+        // TODO: it's a workaround to show a dialog with error message (must be replaced by message dialog for feedback player)
+        if (errorsList.size() > 0) {
+            String mes = String.format("Player %s tried to apply cheat commands and catch %d errors:\n\n",
+                    feedbackPlayer.getName(), errorsList.size());
+            mes += String.join("\n", errorsList);
+            mes += "\n";
+            game.fireErrorEvent("Cheat command errors", new IllegalArgumentException(mes));
+        }
+        game.informPlayers(String.format("%s: tried to apply cheat commands", feedbackPlayer.getLogName()));
     }
 
     /**
