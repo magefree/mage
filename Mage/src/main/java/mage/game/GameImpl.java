@@ -589,7 +589,7 @@ public abstract class GameImpl implements Game {
         }
         player.chooseRingBearer(this);
         getOrCreateTheRing(playerId).addNextAbility(this);
-        fireEvent(GameEvent.getEvent(GameEvent.EventType.TEMPTED_BY_RING, playerId, null, playerId));
+        fireEvent(GameEvent.getEvent(GameEvent.EventType.TEMPTED_BY_RING, player.getRingBearerId(), null, playerId));
     }
 
     @Override
@@ -1857,8 +1857,8 @@ public abstract class GameImpl implements Game {
 
     /**
      * @param plane
-     * @param toPlayerId   controller and owner of the plane (may only be one
-     *                     per game..)
+     * @param toPlayerId controller and owner of the plane (may only be one
+     *                   per game..)
      * @return boolean - whether the plane was added successfully or not
      */
     @Override
