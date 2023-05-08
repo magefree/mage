@@ -8,6 +8,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.cards.Card;
+import mage.cards.decks.importer.CardLookup;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -528,7 +529,7 @@ public final class SystemUtil {
                     // simple cast (without targets or modes)
 
                     // find card info
-                    CardInfo cardInfo = CardRepository.instance.findCard(command.cardName);
+                    CardInfo cardInfo = CardLookup.instance.lookupCardInfo(command.cardName, command.cardSet).orElse(null);
                     if (cardInfo == null) {
                         logger.warn("Unknown card for stack command [" + command.cardName + "]: " + line);
                         continue;
@@ -579,7 +580,7 @@ public final class SystemUtil {
                     continue;
                 }
 
-                List<CardInfo> cards = null;
+                List<CardInfo> cards;
                 if (command.cardSet.isEmpty()) {
                     // by name
                     cards = CardRepository.instance.findCards(command.cardName);
@@ -589,7 +590,11 @@ public final class SystemUtil {
                 }
 
                 if (cards.isEmpty()) {
-                    logger.warn("Unknown card [" + command.cardName + "]: " + line);
+                    logger.warn(String.format("Unknown card [%s%s]: %s",
+                            command.cardSet.isEmpty() ? "" : command.cardSet + "-",
+                            command.cardName,
+                            line
+                    ));
                     continue;
                 }
 

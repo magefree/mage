@@ -154,9 +154,11 @@ public class AddLandDialog extends MageDialog {
             criteria.ignoreSetsWithSnowLands();
         }
         if (mode == DeckEditorMode.FREE_BUILDING && expansionInfo != null && CardRepository.haveSnowLands(expansionInfo.getCode())) {
-            criteria.name(landName); // snow basics added only if in free mode and the chosen set has exclusively snow basics
+            // snow basics added only if in free mode and the chosen set has exclusively snow basics
+            // use contains to find snow lands too
+            criteria.nameContains(landName);
         } else {
-            criteria.nameExact(landName);
+            criteria.name(landName);
         }
         criteria.rarities(Rarity.LAND);        
         List<CardInfo> cards = CardRepository.instance.findCards(criteria);
