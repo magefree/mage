@@ -29,6 +29,7 @@ public final class MarchOfTheMachineTheAftermath extends ExpansionSet {
         cards.add(new SetCardInfo("Campus Renovation", 27, Rarity.UNCOMMON, mage.cards.c.CampusRenovation.class));
         cards.add(new SetCardInfo("Coppercoat Vanguard", 1, Rarity.UNCOMMON, mage.cards.c.CoppercoatVanguard.class));
         cards.add(new SetCardInfo("Cosmic Rebirth", 28, Rarity.UNCOMMON, mage.cards.c.CosmicRebirth.class));
+        cards.add(new SetCardInfo("Danitha, New Benalia's Light", 29, Rarity.RARE, mage.cards.d.DanithaNewBenaliasLight.class));
         cards.add(new SetCardInfo("Death-Rattle Oni", 13, Rarity.UNCOMMON, mage.cards.d.DeathRattleOni.class));
         cards.add(new SetCardInfo("Drannith Ruins", 50, Rarity.RARE, mage.cards.d.DrannithRuins.class));
         cards.add(new SetCardInfo("Feast of the Victorious Dead", 30, Rarity.UNCOMMON, mage.cards.f.FeastOfTheVictoriousDead.class));
