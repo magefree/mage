@@ -87,4 +87,8 @@ public class MageVersion implements Serializable, Comparable<MageVersion> {
         // all fine
         return 0;
     }
+
+    public boolean isDeveloperBuild() {
+        return this.buildTime.contains(JarVersion.JAR_BUILD_TIME_FROM_CLASSES);
+    }
 }

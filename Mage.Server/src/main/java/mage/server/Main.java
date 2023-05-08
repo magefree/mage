@@ -72,7 +72,7 @@ public final class Main {
     // - cheat commands;
     // - no deck validation;
     // - simplified registration and login (no password check);
-    // - debug main menu for GUI and rendering testing;
+    // - debug main menu for GUI and rendering testing (must use -debug arg for client app);
     private static boolean testMode;
 
     private static boolean fastDbMode;
@@ -88,12 +88,12 @@ public final class Main {
         String adminPassword = "";
         for (String arg : args) {
             if (arg.startsWith(testModeArg)) {
-                testMode = Boolean.valueOf(arg.replace(testModeArg, ""));
+                testMode = Boolean.parseBoolean(arg.replace(testModeArg, ""));
             } else if (arg.startsWith(adminPasswordArg)) {
                 adminPassword = arg.replace(adminPasswordArg, "");
                 adminPassword = SystemUtil.sanitize(adminPassword);
             } else if (arg.startsWith(fastDBModeArg)) {
-                fastDbMode = Boolean.valueOf(arg.replace(fastDBModeArg, ""));
+                fastDbMode = Boolean.parseBoolean(arg.replace(fastDBModeArg, ""));
             }
         }
 
