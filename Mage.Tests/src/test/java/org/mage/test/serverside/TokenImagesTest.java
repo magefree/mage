@@ -8,6 +8,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.Card;
 import mage.cards.repository.TokenRepository;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.HumanToken;
@@ -21,7 +22,6 @@ import mage.view.GameView;
 import mage.view.PermanentView;
 import mage.view.PlayerView;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -553,15 +553,13 @@ public class TokenImagesTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore
-    // TODO: implement auto-generate creature token images from public tokens (by name, type, color, PT, abilities)
     public void test_CreatureToken_MustGetDefaultImage() {
         Ability ability = new SimpleActivatedAbility(
                 Zone.ALL,
-                new CreateTokenEffect(new CreatureToken(2, 2), 10),
+                new CreateTokenEffect(new CreatureToken(2, 2, "", SubType.HUMAN), 10),
                 new ManaCostsImpl<>("")
         );
-        addCustomCardWithAbility("test", playerA, ability);
+        addCustomCardWithAbility("40K-test", playerA, ability);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "create ten");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
@@ -573,7 +571,7 @@ public class TokenImagesTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, 1 + 10); // 1 test card + 10 tokens
 
         assert_Inner("test", 0, 0, 1,
-                "", 10, false, "XXX=10");
+                "Human Token", 10, false, "XMAGE=10");
     }
 
     @Test

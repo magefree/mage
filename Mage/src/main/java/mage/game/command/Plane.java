@@ -71,7 +71,7 @@ public abstract class Plane extends CommandObjectImpl {
         this.sourceObject = null;
 
         // choose set code due source
-        TokenInfo foundInfo = TokenRepository.instance.generateTokenInfoBySetCode(this.getClass().getName(), null);
+        TokenInfo foundInfo = TokenRepository.instance.findPreferredTokenInfoForClass(this.getClass().getName(), null);
         if (foundInfo != null) {
             this.setExpansionSetCode(foundInfo.getSetCode());
             this.setCardNumber("");

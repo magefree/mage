@@ -66,7 +66,7 @@ public abstract class Emblem extends CommandObjectImpl {
         this.sourceObject = sourceObject;
 
         // choose set code due source
-        TokenInfo foundInfo = TokenRepository.instance.generateTokenInfoBySetCode(this.getClass().getName(), sourceObject.getExpansionSetCode());
+        TokenInfo foundInfo = TokenRepository.instance.findPreferredTokenInfoForClass(this.getClass().getName(), sourceObject.getExpansionSetCode());
         if (foundInfo != null) {
             this.setExpansionSetCode(foundInfo.getSetCode());
             this.setCardNumber("");

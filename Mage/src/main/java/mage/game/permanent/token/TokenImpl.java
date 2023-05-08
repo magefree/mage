@@ -21,9 +21,11 @@ import mage.game.events.CreatedTokensEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.players.Player;
 import mage.target.Target;
 
+import java.lang.reflect.Constructor;
 import java.util.*;
 
 /**
@@ -175,12 +177,16 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         }
 
         // search by set code
-        TokenInfo foundInfo = TokenRepository.instance.generateTokenInfoBySetCode(token.getClass().getName(), setCode);
+        TokenInfo foundInfo = TokenRepository.instance.findPreferredTokenInfoForClass(token.getClass().getName(), setCode);
         if (foundInfo != null) {
             return foundInfo;
         }
 
-        // TODO: implement auto-generate images for CreatureToken (search public tokens for same characteristics)
+        // auto-image for creature token (it's a private token without official image, so try to find same paper image)
+        if (token instanceof CreatureToken) {
+            // TODO: return default creature token image
+        }
+
         // TODO: implement Copy image
         // TODO: implement Manifest image
         // TODO: implement Morph image
@@ -604,5 +610,19 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     @Override
     public boolean isEntersTransformed() {
         return this.entersTransformed && this.backFace != null;
+    }
+
+    public static TokenImpl createTokenByClassName(String fullClassName) {
+        try {
+            Class<?> c = Class.forName(fullClassName);
+            Constructor<?> cons = c.getConstructor();
+            Object newToken = cons.newInstance();
+            if (newToken instanceof Token) {
+                return (TokenImpl) newToken;
+            }
+        } catch (Exception e) {
+            // ignore error
+        }
+        return null;
     }
 }

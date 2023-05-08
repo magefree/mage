@@ -24,6 +24,7 @@ import mage.game.command.Plane;
 import mage.game.draft.RateCard;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;
 import mage.view.*;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.ManaSymbols;
@@ -236,17 +237,11 @@ public class MageBook extends JComponent {
                 .filter(token -> token.getSetCode().equals(currentSet))
                 .collect(Collectors.toList());
         allTokens.forEach(token -> {
-            try {
-                Class<?> c = Class.forName(token.getFullClassFileName());
-                Constructor<?> cons = c.getConstructor();
-                Object newToken = cons.newInstance();
-                if (newToken instanceof Token) {
-                    ((Token) newToken).setExpansionSetCode(currentSet);
-                    ((Token) newToken).setImageNumber(token.getImageNumber());
-                    res.add(newToken);
-                }
-            } catch (Exception e) {
-                // ignore error
+            TokenImpl newToken = TokenImpl.createTokenByClassName(token.getFullClassFileName());
+            if (newToken != null) {
+                newToken.setExpansionSetCode(currentSet);
+                newToken.setImageNumber(token.getImageNumber());
+                res.add(newToken);
             }
         });
 

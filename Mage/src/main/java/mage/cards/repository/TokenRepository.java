@@ -280,27 +280,37 @@ public enum TokenRepository {
     /**
      * Try to find random image info by related set code
      *
-     * @param className full class name of the token or other object
-     * @param setCode   primary set code for possible image
+     * @param possibleList     all possible tokens e.g. by clas name
+     * @param preferredSetCode primary set code for possible image (if not found then will use any set)
      * @return
      */
-    public TokenInfo generateTokenInfoBySetCode(String className, String setCode) {
+    private TokenInfo findPreferredTokenInfo(List<TokenInfo> possibleList, String preferredSetCode) {
         // search by set code
-        List<TokenInfo> possibleInfo = TokenRepository.instance.getByClassName(className)
-                .stream()
-                .filter(info -> info.getSetCode().equals(setCode))
+        List<TokenInfo> needList = possibleList.stream()
+                .filter(info -> info.getSetCode().equals(preferredSetCode))
                 .collect(Collectors.toList());
 
-        // search by random set
-        if (possibleInfo.isEmpty()) {
-            possibleInfo = new ArrayList<>(TokenRepository.instance.getByClassName(className));
+        // search by all sets
+        if (needList.isEmpty()) {
+            needList = possibleList;
         }
 
-        // also weill return diff image number for tokens
-        if (possibleInfo.size() > 0) {
-            return RandomUtil.randomFromCollection(possibleInfo);
+        // also will return diff image number for tokens
+        if (needList.size() > 0) {
+            return RandomUtil.randomFromCollection(needList);
         } else {
             return null;
         }
+    }
+
+    /**
+     * Try to find random image info by related set code
+     *
+     * @param className        full class name of the token or other object
+     * @param preferredSetCode primary set code for possible image (if not found then will use any set)
+     * @return
+     */
+    public TokenInfo findPreferredTokenInfoForClass(String className, String preferredSetCode) {
+        return findPreferredTokenInfo(TokenRepository.instance.getByClassName(className), preferredSetCode);
     }
 }
