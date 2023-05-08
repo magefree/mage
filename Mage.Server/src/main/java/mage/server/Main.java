@@ -97,6 +97,9 @@ public final class Main {
             }
         }
 
+        // enable test mode by default for developer build (if you run it from source code)
+        testMode |= version.isDeveloperBuild();
+
         final String configPath = Optional.ofNullable(System.getProperty(configPathProp))
                 .orElse(defaultConfigPath);
 
