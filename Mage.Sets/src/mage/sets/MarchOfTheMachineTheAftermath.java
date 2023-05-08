@@ -54,6 +54,7 @@ public final class MarchOfTheMachineTheAftermath extends ExpansionSet {
         cards.add(new SetCardInfo("Sigarda, Font of Blessings", 47, Rarity.RARE, mage.cards.s.SigardaFontOfBlessings.class));
         cards.add(new SetCardInfo("Spark Rupture", 5, Rarity.RARE, mage.cards.s.SparkRupture.class));
         cards.add(new SetCardInfo("The Kenriths' Royal Funeral", 34, Rarity.RARE, mage.cards.t.TheKenrithsRoyalFuneral.class));
+        cards.add(new SetCardInfo("Tolarian Contempt", 8, Rarity.UNCOMMON, mage.cards.t.TolarianContempt.class));
         cards.add(new SetCardInfo("Training Grounds", 9, Rarity.RARE, mage.cards.t.TrainingGrounds.class));
         cards.add(new SetCardInfo("Tyvar the Bellicose", 48, Rarity.MYTHIC, mage.cards.t.TyvarTheBellicose.class));
         cards.add(new SetCardInfo("Undercity Upheaval", 25, Rarity.UNCOMMON, mage.cards.u.UndercityUpheaval.class));
