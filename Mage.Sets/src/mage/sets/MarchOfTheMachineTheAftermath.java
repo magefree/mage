@@ -53,6 +53,7 @@ public final class MarchOfTheMachineTheAftermath extends ExpansionSet {
         cards.add(new SetCardInfo("Plargg and Nassari", 18, Rarity.RARE, mage.cards.p.PlarggAndNassari.class));
         cards.add(new SetCardInfo("Rebuild the City", 43, Rarity.RARE, mage.cards.r.RebuildTheCity.class));
         cards.add(new SetCardInfo("Reckless Handling", 19, Rarity.UNCOMMON, mage.cards.r.RecklessHandling.class));
+        cards.add(new SetCardInfo("Rocco, Street Chef", 44, Rarity.RARE, mage.cards.r.RoccoStreetChef.class));
         cards.add(new SetCardInfo("Samut, Vizier of Naktamun", 45, Rarity.MYTHIC, mage.cards.s.SamutVizierOfNaktamun.class));
         cards.add(new SetCardInfo("Sarkhan, Soul Aflame", 46, Rarity.MYTHIC, mage.cards.s.SarkhanSoulAflame.class));
         cards.add(new SetCardInfo("Sigarda, Font of Blessings", 47, Rarity.RARE, mage.cards.s.SigardaFontOfBlessings.class));
