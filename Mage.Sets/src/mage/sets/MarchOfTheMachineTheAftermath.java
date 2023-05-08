@@ -21,6 +21,7 @@ public final class MarchOfTheMachineTheAftermath extends ExpansionSet {
         this.hasBasicLands = false;
         this.hasBoosters = false; // temporary
 
+        cards.add(new SetCardInfo("Animist's Might", 20, Rarity.UNCOMMON, mage.cards.a.AnimistsMight.class));
         cards.add(new SetCardInfo("Arni Metalbrow", 16, Rarity.RARE, mage.cards.a.ArniMetalbrow.class));
         cards.add(new SetCardInfo("Ayara's Oathsworn", 11, Rarity.RARE, mage.cards.a.AyarasOathsworn.class));
         cards.add(new SetCardInfo("Blot Out", 12, Rarity.UNCOMMON, mage.cards.b.BlotOut.class));
