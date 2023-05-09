@@ -211,6 +211,7 @@ public interface Permanent extends Card, Controllable {
      * @param ability
      * @param sourceId
      * @param game
+     * @return can be null for exists abilities
      */
     Ability addAbility(Ability ability, UUID sourceId, Game game);
 
