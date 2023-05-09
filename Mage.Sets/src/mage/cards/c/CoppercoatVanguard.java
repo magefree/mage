@@ -35,12 +35,12 @@ public final class CoppercoatVanguard extends CardImpl {
 
         // Each other Human you control gets +1/+0 and has ward {1}.
         Ability ability = new SimpleStaticAbility(new BoostControlledEffect(
-                1, 1, Duration.WhileOnBattlefield, filter, true
+                1, 0, Duration.WhileOnBattlefield, filter, true
         ));
         ability.addEffect(new GainAbilityControlledEffect(
                 new WardAbility(new GenericManaCost(1), false),
                 Duration.WhileOnBattlefield, filter2
-        ).setText("and has ward {1} <i>(Whenever it becomes the target " +
+        ).setText("and has ward {1}. <i>(Whenever it becomes the target " +
                 "of a spell or ability an opponent controls, counter it unless that player pays {1}.)</i>"));
         this.addAbility(ability);
     }

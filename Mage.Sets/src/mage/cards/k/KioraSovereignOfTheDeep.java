@@ -28,7 +28,7 @@ import java.util.UUID;
  */
 public final class KioraSovereignOfTheDeep extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("");
+    private static final FilterSpell filter = new FilterSpell("a Kraken, Leviathan, Octopus, or Serpent spell");
 
     static {
         filter.add(Predicates.or(

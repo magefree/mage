@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 public final class SamutVizierOfNaktamun extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("a creature you controls");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("a creature you control");
 
     static {
         filter.add(EnteredThisTurnPredicate.instance);
@@ -51,7 +51,7 @@ public final class SamutVizierOfNaktamun extends CardImpl {
         // Whenever a creature you control deals combat damage to a player, if that creature entered the battlefield this turn, draw a card.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
                 new DrawCardSourceControllerEffect(1)
-                        .concatBy("if that creature entered the battlefield this turn, "),
+                        .setText("if that creature entered the battlefield this turn, draw a card"),
                 filter, false, SetTargetPointer.NONE, true
         ));
     }

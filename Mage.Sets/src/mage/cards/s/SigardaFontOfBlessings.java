@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class SigardaFontOfBlessings extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Angel spells and Human spells");
+    private static final FilterCard filter = new FilterCard("cast Angel spells and Human spells");
 
     static {
         filter.add(Predicates.or(

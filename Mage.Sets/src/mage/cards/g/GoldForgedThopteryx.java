@@ -45,7 +45,7 @@ public final class GoldForgedThopteryx extends CardImpl {
         // Each legendary permanent you control has ward {2}.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new WardAbility(new GenericManaCost(2)), Duration.WhileOnBattlefield, filter
-        ).setText("each legendary permanent you control has ward {2} <i>(Whenever it becomes the target " +
+        ).setText("each legendary permanent you control has ward {2}. <i>(Whenever it becomes the target " +
                 "of a spell or ability an opponent controls, counter it unless that player pays {2})</i>")));
     }
 

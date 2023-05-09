@@ -14,6 +14,7 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.token.FoodToken;
 import mage.game.permanent.token.TreasureToken;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
@@ -95,8 +96,8 @@ class RoccoStreetChefEffect extends OneShotEffect {
 class RoccoStreetChefTriggeredAbility extends TriggeredAbilityImpl {
 
     RoccoStreetChefTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), true);
-        this.addEffect(new CreateTokenEffect(new TreasureToken()).concatBy("and"));
+        super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()).setText("you put a +1/+1 counter on target creature"));
+        this.addEffect(new CreateTokenEffect(new FoodToken()).concatBy("and"));
         this.addTarget(new TargetCreaturePermanent());
         this.setTriggerPhrase("Whenever a player plays a land from exile or casts a spell from exile, ");
     }

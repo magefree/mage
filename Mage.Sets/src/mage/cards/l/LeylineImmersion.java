@@ -46,7 +46,7 @@ public final class LeylineImmersion extends CardImpl {
         // Enchanted creature has ward {2} and "{T}: Add five mana in any combination of colors. Spend this mana only to cast spells."
         Ability ability = new SimpleStaticAbility(new GainAbilityAttachedEffect(
                 new WardAbility(new GenericManaCost(2), false), AttachmentType.AURA
-        ));
+        ).setText("enchanted creature has ward {2}"));
         ability.addEffect(new GainAbilityAttachedEffect(
                 new ConditionalAnyColorManaAbility(5, new LeylineImmersionManaBuilder()), AttachmentType.AURA
         ).setText("and \"{T}: Add five mana in any combination of colors. Spend this mana only to cast spells.\""));

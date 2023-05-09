@@ -52,7 +52,9 @@ public final class TyvarTheBellicose extends CardImpl {
                 new TyvarTheBellicoseTriggeredAbility(),
                 Duration.WhileOnBattlefield,
                 StaticFilters.FILTER_PERMANENT_CREATURE
-        )));
+        ).setText("each creature you control has \"Whenever a mana ability of this creature resolves, " +
+                "put a number of +1/+1 counters on it equal to the amount of mana this creature produced. " +
+                "This ability triggers only once each turn.\"")));
     }
 
     private TyvarTheBellicose(final TyvarTheBellicose card) {

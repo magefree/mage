@@ -47,7 +47,7 @@ public final class AnimistsMight extends CardImpl {
         // Target creature you control deals damage equal to twice its power to target creature or planeswalker you don't control.
         this.getSpellAbility().addEffect(new DamageWithPowerFromOneToAnotherTargetEffect("", 2));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter2));
     }
 
     private AnimistsMight(final AnimistsMight card) {
