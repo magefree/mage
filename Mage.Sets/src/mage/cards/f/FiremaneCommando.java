@@ -17,6 +17,7 @@ import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -84,6 +85,7 @@ class FiremaneCommandoTriggeredAbility extends TriggeredAbilityImpl {
                 .getGroups()
                 .stream()
                 .map(CombatGroup::getDefenderId)
+                .filter(Objects::nonNull)
                 .anyMatch(this.getControllerId()::equals);
         this.getEffects().setValue("damage", youWereAttacked ? 0 : 1);
         this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));

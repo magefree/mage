@@ -1594,6 +1594,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 .stream()
                 .filter(group -> group.getAttackers().contains(attackerId))
                 .map(CombatGroup::getDefenderId)
+                .filter(Objects::nonNull)
                 .findFirst()
                 .orElse(null);
     }

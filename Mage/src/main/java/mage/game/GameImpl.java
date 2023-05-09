@@ -2557,6 +2557,7 @@ public abstract class GameImpl implements Game {
                         .getGroups()
                         .stream()
                         .map(CombatGroup::getDefenderId)
+                        .filter(Objects::nonNull)
                         .noneMatch(perm.getId()::equals)
                         && this.getPlayer(perm.getProtectorId()) == null
                         || perm.isControlledBy(perm.getProtectorId())) {

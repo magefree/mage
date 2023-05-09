@@ -72,6 +72,7 @@ enum AmberGristleOMaulValue implements DynamicValue {
                         .map(game::getControllerId)
                         .anyMatch(sourceAbility::isControlledBy))
                 .map(CombatGroup::getDefenderId)
+                .filter(Objects::nonNull)
                 .distinct()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)
