@@ -158,9 +158,11 @@ public abstract class DraftImpl implements Draft {
 
     @Override
     public void autoPick(UUID playerId) {
-        List<Card> booster = players.get(playerId).getBooster();
-        if (booster.size() > 0) {
-            this.addPick(playerId, booster.get(booster.size() - 1).getId(), null);
+        if (players.containsKey(playerId)) {
+            List<Card> booster = players.get(playerId).getBooster();
+            if (booster.size() > 0) {
+                this.addPick(playerId, booster.get(booster.size() - 1).getId(), null);
+            }
         }
     }
 
