@@ -1376,6 +1376,7 @@ public class VerifyCardDataTest {
                 // Possible reasons:
                 // - promo sets with cards without tokens (nothing to do with it)
                 // - miss set from tok-data (must add new set to tok-data and scryfall download)
+                // - wizards miss some paper printed token, see https://www.mtg.onl/mtg-missing-tokens/
                 warningsList.add("info, set's cards uses tokens but tok-data haven't it: "
                         + setCode + " - " + sourceCards.stream().map(MageObject::getName).collect(Collectors.joining(", ")));
             } else {

@@ -55,6 +55,7 @@ import static org.mage.card.arcane.ManaSymbols.getSizedManaSymbol;
  * @author stravant@gmail.com, JayDi85
  * <p>
  * Base rendering class for new border cards
+ * M15 frame style, for another styles see https://www.mtg.onl/evolution-of-magic-token-card-frame-design/
  */
 public class ModernCardRenderer extends CardRenderer {
 

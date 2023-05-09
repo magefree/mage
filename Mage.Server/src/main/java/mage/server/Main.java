@@ -67,10 +67,11 @@ public final class Main {
     public static final PluginClassLoader classLoader = new PluginClassLoader();
     private static TransporterServer server;
 
-    // special test mode:
+    // Special test mode:
     // - fast game buttons;
     // - cheat commands;
     // - no deck validation;
+    // - load any deck in sideboarding;
     // - simplified registration and login (no password check);
     // - debug main menu for GUI and rendering testing (must use -debug arg for client app);
     private static boolean testMode;
@@ -412,7 +413,9 @@ public final class Main {
 
         @Override
         public Object invoke(final InvocationRequest invocation) throws Throwable {
-            // Called for every client connecting to the server (after add Listener)
+            // called for every client connecting to the server (after add Listener)
+
+            // save client ip-address
             String sessionId = invocation.getSessionId();
             Map map = invocation.getRequestPayload();
             String host;
