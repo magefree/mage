@@ -537,6 +537,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             // runtime check: inRange filled on beginTurn, but unit tests adds cards by cheat engine before game starting,
             // so inRange will be empty and some ETB effects can be broken (example: Spark Double puts direct to battlefield).
             // Cheat engine already have a workaround, so that error must not be visible in normal situation.
+            // TODO: that's error possible on GameView call before real game start (too laggy players on starting???)
             throw new IllegalStateException("Wrong code usage (game is not started, but you call getInRange in some effects).");
         }
 
