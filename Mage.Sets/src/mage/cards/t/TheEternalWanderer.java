@@ -212,7 +212,7 @@ class TheEternalWandererAttackRestrictionEffect extends RestrictionEffect {
 
             //If there is already a creature attacking The Eternal Wanderer, dont let another creature attack it
             for(CombatGroup group : game.getCombat().getGroups()){
-                if(group.getDefenderId().equals(source.getSourceId())){
+                if(group.getDefenderId() != null && group.getDefenderId().equals(source.getSourceId())){
                     return false;
                 }
             }

@@ -66,6 +66,10 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 
     }
 
+    /**
+     *
+     * @return can be null
+     */
     public UUID getDefenderId() {
         return defenderId;
     }
