@@ -1966,8 +1966,9 @@ public class VerifyCardDataTest {
 
     private void checkWrongAbilitiesTextEnd() {
         // TODO: implement tests result/stats by github actions to show in check message compared to prev version
+        System.out.println(String.format(""));
         System.out.println(String.format("Ability text checks ends with stats:"));
-        System.out.println(String.format(" - total: %d (100.00)", wrongAbilityStatsTotal));
+        System.out.println(String.format(" - total: %d (%.2f)", wrongAbilityStatsTotal, 100.0));
         System.out.println(String.format(" - good: %d (%.2f)", wrongAbilityStatsGood, wrongAbilityStatsGood * 100.0 / wrongAbilityStatsTotal));
         System.out.println(String.format(" - bad: %d (%.2f)", wrongAbilityStatsBad, wrongAbilityStatsBad * 100.0 / wrongAbilityStatsTotal));
         System.out.println(String.format(""));
