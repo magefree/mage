@@ -59,7 +59,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODE = "MAT"; // check all abilities and output cards with wrong abilities texts;
+    private static final List<String> FULL_ABILITIES_CHECK_SET_CODES = Arrays.asList("MAT"); // check all abilities and output cards with wrong abilities texts;
     private static final boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
@@ -1952,7 +1952,7 @@ public class VerifyCardDataTest {
 
     private void checkWrongAbilitiesText(Card card, MtgJsonCard ref, int cardIndex) {
         // checks missing or wrong text
-        if (!card.getExpansionSetCode().equals(FULL_ABILITIES_CHECK_SET_CODE) || !wasCheckedByAbilityText(ref)) {
+        if (!FULL_ABILITIES_CHECK_SET_CODES.contains(card.getExpansionSetCode()) || !wasCheckedByAbilityText(ref)) {
             return;
         }
 
