@@ -27,6 +27,7 @@ public final class DarksteelSplicer extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
+        filter.add(TokenPredicate.FALSE); //non token
     }
 
     private static final FilterPermanent filter2 = new FilterPermanent(SubType.GOLEM, "Golems");
