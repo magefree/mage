@@ -2,6 +2,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.effects.common.CopyStackObjectEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.WardAbility;
@@ -12,10 +13,10 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.NumberOfTriggersEvent;
-import mage.game.stack.StackAbility;
+import mage.game.stack.StackObject;
+import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -66,36 +67,36 @@ class AbolethSpawnTriggeredAbility extends TriggeredAbilityImpl {
 
   @Override
   public boolean checkEventType(GameEvent event, Game game) {
-    return event.getType() == GameEvent.EventType.NUMBER_OF_TRIGGERS;
+    return event.getType() == GameEvent.EventType.TRIGGERED_ABILITY;
   }
 
   @Override
   public boolean checkTrigger(GameEvent event, Game game) {
-    if (event instanceof NumberOfTriggersEvent) {
-      NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
-      // Only triggers if not the controller of Aboleth Spawn
-      if (!event.getPlayerId().equals(controllerId)) {
-        GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
-        // Only EtB triggers
-        if (sourceEvent != null
-            && sourceEvent.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
-            && sourceEvent instanceof EntersTheBattlefieldEvent) {
-          EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) sourceEvent;
-          // Only for entering creatures
-          if (entersTheBattlefieldEvent.getTarget().isCreature(game)
-              && !entersTheBattlefieldEvent.getTarget().getControllerId().equals(controllerId)) {
-            // Only for triggers of permanents
-            if (game.getPermanent(numberOfTriggersEvent.getSourceId()) != null) {
-              StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(
-                  numberOfTriggersEvent.getSourceId());
-              this.getEffects().setValue("stackObject", stackAbility);
-              return true;
-            }
-          }
-        }
-      }
+    StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
+    Permanent permanent = game.getPermanent(event.getSourceId());
+
+    if (stackObject == null || !(stackObject.getStackAbility() instanceof TriggeredAbility)) {
+      return false;
     }
-    return false;
+
+    TriggeredAbility ability = (TriggeredAbility) stackObject.getStackAbility();
+
+    GameEvent triggerEvent = ability.getTriggerEvent();
+
+    if (triggerEvent == null
+        || triggerEvent.getType() != GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
+      return false;
+    }
+
+    if (permanent == null
+        || !permanent.isCreature(game)
+        || permanent.getControllerId().equals(controllerId)) {
+      return false;
+    }
+
+    this.getEffects().setValue("stackObject", stackObject);
+    this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
+    return true;
   }
 
   @Override
