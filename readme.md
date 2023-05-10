@@ -1,6 +1,12 @@
 # XMage — Magic, Another Game Engine
 
-[![Build Status](https://travis-ci.org/magefree/mage.svg?branch=master)](https://travis-ci.org/magefree/mage) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=JayDi85_mage&metric=coverage)](https://sonarcloud.io/dashboard?id=JayDi85_mage) [![latest release](https://img.shields.io/github/v/release/magefree/mage)](https://github.com/magefree/mage/releases/) [![commints since latest release](https://img.shields.io/github/commits-since/magefree/mage/latest)](https://github.com/magefree/mage/commits/) [![Join the chat at https://gitter.im/magefree/mage](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/magefree/mage?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status](https://app.travis-ci.com/magefree/mage.svg?branch=master)](https://app.travis-ci.com/magefree/mage)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=magefree_mage&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=magefree_mage)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=magefree_mage&metric=coverage)](https://sonarcloud.io/summary/new_code?id=magefree_mage)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=magefree_mage&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=magefree_mage)
+[![latest release](https://img.shields.io/github/v/release/magefree/mage)](https://github.com/magefree/mage/releases/)
+[![commints since latest release](https://img.shields.io/github/commits-since/magefree/mage/latest)](https://github.com/magefree/mage/commits/)
+[![Join the chat at https://gitter.im/magefree/mage](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/magefree/mage?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 XMage allows you to play Magic against one or more online players or computer opponents. 
 It includes full rules enforcement for over **20 000** unique cards and more than 50.000 reprints from different editions. 
