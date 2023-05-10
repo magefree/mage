@@ -59,7 +59,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODE = "MAT"; // check all abilities and output cards with wrong abilities texts;
+    private static final String FULL_ABILITIES_CHECK_SET_CODES = "MAT"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
     private static final boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
@@ -242,6 +242,9 @@ public class VerifyCardDataTest {
 
     private final ArrayList<String> outputMessages = new ArrayList<>();
     private int failed = 0;
+    private int wrongAbilityStatsTotal = 0;
+    private int wrongAbilityStatsGood = 0;
+    private int wrongAbilityStatsBad = 0;
 
     private static void skipListCreate(String listName) {
         skipCheckLists.put(listName, new LinkedHashSet<>());
@@ -286,6 +289,8 @@ public class VerifyCardDataTest {
 
     @Test
     public void test_verifyCards() {
+        checkWrongAbilitiesTextStart();
+
         int cardIndex = 0;
         for (Card card : CardScanner.getAllCards()) {
             cardIndex++;
@@ -299,6 +304,8 @@ public class VerifyCardDataTest {
                 check(card, cardIndex);
             }
         }
+
+        checkWrongAbilitiesTextEnd();
 
         printMessages(outputMessages);
         if (failed > 0) {
@@ -1565,15 +1572,15 @@ public class VerifyCardDataTest {
     }
 
     private static boolean wasCheckedByAbilityText(MtgJsonCard ref) {
-        // ignore already checkd cards, so no bloated logs from duplicated cards
-        if (!CHECK_ONLY_ABILITIES_TEXT) {
+        // ignore already checked cards, so no bloated logs from duplicated cards
+        if (CHECK_ONLY_ABILITIES_TEXT) {
             return true;
         }
         if (checkedNames.contains(ref.getNameAsFace())) {
-            return false;
+            return true;
         }
         checkedNames.add(ref.getNameAsFace());
-        return true;
+        return false;
     }
 
     private void checkAll(Card card, MtgJsonCard ref, int cardIndex) {
@@ -1950,9 +1957,28 @@ public class VerifyCardDataTest {
                 .anyMatch(effectClazz::isInstance);
     }
 
+    private void checkWrongAbilitiesTextStart() {
+        System.out.println("Ability text checks started for " + FULL_ABILITIES_CHECK_SET_CODES);
+        wrongAbilityStatsTotal = 0;
+        wrongAbilityStatsGood = 0;
+        wrongAbilityStatsBad = 0;
+    }
+
+    private void checkWrongAbilitiesTextEnd() {
+        // TODO: implement tests result/stats by github actions to show in check message compared to prev version
+        System.out.println(String.format("Ability text checks ends with stats:"));
+        System.out.println(String.format(" - total: %d (100.00)", wrongAbilityStatsTotal));
+        System.out.println(String.format(" - good: %d (%.2f)", wrongAbilityStatsGood, wrongAbilityStatsGood * 100.0 / wrongAbilityStatsTotal));
+        System.out.println(String.format(" - bad: %d (%.2f)", wrongAbilityStatsBad, wrongAbilityStatsBad * 100.0 / wrongAbilityStatsTotal));
+        System.out.println(String.format(""));
+    }
+
     private void checkWrongAbilitiesText(Card card, MtgJsonCard ref, int cardIndex) {
         // checks missing or wrong text
-        if (!card.getExpansionSetCode().equals(FULL_ABILITIES_CHECK_SET_CODE) || !wasCheckedByAbilityText(ref)) {
+        if (!FULL_ABILITIES_CHECK_SET_CODES.equals("*") && !FULL_ABILITIES_CHECK_SET_CODES.contains(card.getExpansionSetCode())) {
+            return;
+        }
+        if (wasCheckedByAbilityText(ref)) {
             return;
         }
 
@@ -1960,6 +1986,7 @@ public class VerifyCardDataTest {
             return;
         }
 
+        wrongAbilityStatsTotal++;
         String refText = ref.text;
         // planeswalker fix [-7]: xxx
         refText = refText.replaceAll("\\[([\\−\\+]?\\d*)\\]\\: ", "$1: ").replaceAll("\\[\\−X\\]\\: ", "-X: ");
@@ -2069,6 +2096,12 @@ public class VerifyCardDataTest {
                 isFine = false;
                 refRules[j] = "- " + refRules[j];
             }
+        }
+
+        if (isFine) {
+            wrongAbilityStatsGood++;
+        } else {
+            wrongAbilityStatsBad++;
         }
 
         // extra message for easy checks
