@@ -8,7 +8,7 @@ import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -44,7 +44,7 @@ public final class GenjuOfTheFalls extends CardImpl {
         this.addAbility(ability2);
 
         // When enchanted Island is put into a graveyard, you may return Genju of the Falls from your graveyard to your hand.        TargetPermanent auraTarget = new TargetLandPermanent(filter);
-        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandSourceEffect(false, true), "enchanted Island", true, false);
+        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnSourceFromGraveyardToHandEffect(), "enchanted Island", true, false);
         this.addAbility(ability3);
     }
 

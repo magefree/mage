@@ -9,7 +9,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -45,7 +45,7 @@ public final class GenjuOfTheFens extends CardImpl {
         this.addAbility(ability2);
 
         // When enchanted Swamp is put into a graveyard, you may return Genju of the Fens from your graveyard to your hand.
-        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandSourceEffect(false, true), "enchanted Swamp", true, false);
+        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnSourceFromGraveyardToHandEffect(), "enchanted Swamp", true, false);
         this.addAbility(ability3);
     }
 

@@ -24,7 +24,7 @@ public final class SwallowingPlague extends CardImpl {
         this.subtype.add(SubType.ARCANE);
 
         this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
-        this.getSpellAbility().addEffect(new GainLifeEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new GainLifeEffect(ManacostVariableValue.REGULAR).concatBy("and"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
