@@ -5,12 +5,12 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.CantBlockAbility;
 import mage.abilities.common.DealsCombatDamageTriggeredAbility;
-import mage.abilities.effects.common.SacrificeEffect;
+import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -29,7 +29,7 @@ public final class DrinkerOfSorrow extends CardImpl {
         this.addAbility(new CantBlockAbility());
 
         // Whenever Drinker of Sorrow deals combat damage, sacrifice a permanent.
-        this.addAbility(new DealsCombatDamageTriggeredAbility(new SacrificeEffect(new FilterPermanent(), 1, ""), false));
+        this.addAbility(new DealsCombatDamageTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_A, 1, ""), false));
     }
 
     private DrinkerOfSorrow(final DrinkerOfSorrow card) {
