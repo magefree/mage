@@ -7,8 +7,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
+import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -42,7 +43,9 @@ public final class GenjuOfTheRealm extends CardImpl {
         this.addAbility(ability2);
 
         // When enchanted land is put into a graveyard, you may return Genju of the Realm from your graveyard to your hand.
-        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnSourceFromGraveyardToHandEffect(), "enchanted land", true, false);
+        Effect effect = new ReturnToHandSourceEffect(false, true);
+        effect.setText("you may return {this} from your graveyard to your hand");
+        Ability ability3 = new DiesAttachedTriggeredAbility(effect, "enchanted land", true, false);
         this.addAbility(ability3);
     }
 

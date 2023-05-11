@@ -10,7 +10,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
+import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -51,7 +51,9 @@ public final class GenjuOfTheFields extends CardImpl {
         this.addAbility(ability2);
 
         // When enchanted Plains is put into a graveyard, you may return Genju of the Fields from your graveyard to your hand.
-        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnSourceFromGraveyardToHandEffect(), "enchanted Plains", true, false);
+        Effect effect2 = new ReturnToHandSourceEffect(false, true);
+        effect2.setText("you may return {this} from your graveyard to your hand");
+        Ability ability3 = new DiesAttachedTriggeredAbility(effect2, "enchanted Plains", true, false);
         this.addAbility(ability3);
     }
 
