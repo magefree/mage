@@ -34,7 +34,7 @@ public final class OathkeeperTakenosDaisho extends CardImpl {
 
     public OathkeeperTakenosDaisho(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +3/+1.

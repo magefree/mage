@@ -44,7 +44,7 @@ public final class TomBombadil extends CardImpl {
     public TomBombadil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[] { CardType.CREATURE }, "{W}{U}{B}{R}{G}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
         this.subtype.add(SubType.BARD);
         this.power = new MageInt(4);

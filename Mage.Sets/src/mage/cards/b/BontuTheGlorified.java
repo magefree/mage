@@ -32,7 +32,7 @@ public final class BontuTheGlorified extends CardImpl {
 
     public BontuTheGlorified(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);

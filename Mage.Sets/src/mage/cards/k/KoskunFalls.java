@@ -33,7 +33,7 @@ public final class KoskunFalls extends CardImpl {
 
     public KoskunFalls(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");
-        addSuperType(SuperType.WORLD);
+        this.supertype.add(SuperType.WORLD);
 
         // At the beginning of your upkeep, sacrifice Koskun Falls unless you tap an untapped creature you control.
         Effect effect = new SacrificeSourceUnlessPaysEffect(new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filterCreature, true)));

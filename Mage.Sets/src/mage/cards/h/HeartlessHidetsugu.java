@@ -20,7 +20,7 @@ public final class HeartlessHidetsugu extends CardImpl {
 
     public HeartlessHidetsugu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.OGRE);
         this.subtype.add(SubType.SHAMAN);
 

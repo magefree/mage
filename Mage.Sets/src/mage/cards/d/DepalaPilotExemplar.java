@@ -31,7 +31,7 @@ public final class DepalaPilotExemplar extends CardImpl {
 
     public DepalaPilotExemplar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DWARF);
         this.subtype.add(SubType.PILOT);
         this.power = new MageInt(3);

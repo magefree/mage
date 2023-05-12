@@ -28,7 +28,7 @@ public final class Karakas extends CardImpl {
 
     public Karakas(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {tap}: Add {W}.
         this.addAbility(new WhiteManaAbility());

@@ -35,7 +35,7 @@ public final class ArixmethesSlumberingIsle extends CardImpl {
     public ArixmethesSlumberingIsle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KRAKEN);
         this.power = new MageInt(12);
         this.toughness = new MageInt(12);

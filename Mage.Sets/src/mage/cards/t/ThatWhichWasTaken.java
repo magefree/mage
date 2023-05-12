@@ -40,7 +40,7 @@ public final class ThatWhichWasTaken extends CardImpl {
 
     public ThatWhichWasTaken(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {4}, {T}: Put a divinity counter on target permanent other than That Which Was Taken.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.DIVINITY.createInstance()), new GenericManaCost(4));

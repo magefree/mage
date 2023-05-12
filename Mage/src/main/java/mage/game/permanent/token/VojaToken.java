@@ -13,7 +13,7 @@ public final class VojaToken extends TokenImpl {
     public VojaToken() {
         super("Voja", "Voja, a legendary 2/2 green and white Wolf creature token");
         this.cardType.add(CardType.CREATURE);
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.WOLF);
 
         this.color.setGreen(true);

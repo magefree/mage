@@ -14,7 +14,7 @@ public final class TuktukTheReturnedToken extends TokenImpl {
         super("Tuktuk the Returned", "Tuktuk the Returned, a legendary 5/5 colorless Goblin Golem artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         subtype.add(SubType.GOBLIN);
         subtype.add(SubType.GOLEM);
         power = new MageInt(5);

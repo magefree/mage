@@ -86,7 +86,7 @@ class TobitaMasterOfWinds extends TokenImpl {
 
     TobitaMasterOfWinds() {
         super("Tobita, Master of Winds", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.HUMAN);

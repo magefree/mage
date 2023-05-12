@@ -28,7 +28,7 @@ public final class VarolzTheScarStriped extends CardImpl {
 
     public VarolzTheScarStriped(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TROLL);
         this.subtype.add(SubType.WARRIOR);
 

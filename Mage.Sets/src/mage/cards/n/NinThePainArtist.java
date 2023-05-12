@@ -28,7 +28,7 @@ public final class NinThePainArtist extends CardImpl {
 
     public NinThePainArtist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VEDALKEN);
         this.subtype.add(SubType.WIZARD);
 

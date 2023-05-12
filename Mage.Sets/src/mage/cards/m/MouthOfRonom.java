@@ -24,7 +24,7 @@ public final class MouthOfRonom extends CardImpl {
 
     public MouthOfRonom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());

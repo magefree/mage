@@ -44,7 +44,7 @@ public final class ShellOfTheLastKappa extends CardImpl {
 
     public ShellOfTheLastKappa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {3}, {tap}: Exile target instant or sorcery spell that targets you.
         Ability ability = new SimpleActivatedAbility(

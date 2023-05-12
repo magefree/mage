@@ -35,7 +35,7 @@ public final class SivitriDragonMaster extends CardImpl {
 
     public SivitriDragonMaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SIVITRI);
 
         this.setStartingLoyalty(4);

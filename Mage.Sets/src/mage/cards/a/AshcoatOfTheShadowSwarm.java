@@ -41,7 +41,7 @@ public final class AshcoatOfTheShadowSwarm extends CardImpl {
 
     public AshcoatOfTheShadowSwarm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.RAT, SubType.WARLOCK);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

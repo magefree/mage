@@ -28,7 +28,7 @@ public final class DaxosTheReturned extends CardImpl {
 
     public DaxosTheReturned(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(2);

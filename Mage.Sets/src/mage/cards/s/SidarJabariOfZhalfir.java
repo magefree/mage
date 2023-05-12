@@ -33,7 +33,7 @@ public final class SidarJabariOfZhalfir extends CardImpl {
 
     public SidarJabariOfZhalfir(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.KNIGHT);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);

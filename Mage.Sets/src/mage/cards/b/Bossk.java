@@ -32,7 +32,7 @@ public final class Bossk extends CardImpl {
 
     public Bossk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TRANDOSHAN, SubType.HUNTER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

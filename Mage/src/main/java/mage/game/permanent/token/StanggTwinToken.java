@@ -13,7 +13,7 @@ public final class StanggTwinToken extends TokenImpl {
     public StanggTwinToken() {
         super("Stangg Twin", "Stangg Twin, a legendary 3/4 red and green Human Warrior creature token");
         this.cardType.add(CardType.CREATURE);
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
 

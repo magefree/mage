@@ -28,7 +28,7 @@ public final class ScryingSheets extends CardImpl {
 
     public ScryingSheets(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
 
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());

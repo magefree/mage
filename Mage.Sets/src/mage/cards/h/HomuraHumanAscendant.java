@@ -38,7 +38,7 @@ public final class HomuraHumanAscendant extends CardImpl {
 
     public HomuraHumanAscendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.MONK);
 
@@ -106,7 +106,7 @@ class HomurasEssence2 extends TokenImpl {
 
     HomurasEssence2() {
         super("Homura's Essence", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.ENCHANTMENT);
         color.setRed(true);
         // Creatures you control get +2/+2 and have flying and "{R}: This creature gets +1/+0 until end of turn."

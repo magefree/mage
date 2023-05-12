@@ -38,7 +38,7 @@ public final class SnowMercy extends CardImpl {
     public SnowMercy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
 
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
 
         // Whenever a creature deals damage to you, put a globe counter on it.
         this.addAbility(new AddGlobeCountersAbility());

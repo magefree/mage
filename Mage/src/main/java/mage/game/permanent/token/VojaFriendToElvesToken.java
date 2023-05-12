@@ -13,7 +13,7 @@ public final class VojaFriendToElvesToken extends TokenImpl {
     public VojaFriendToElvesToken() {
         super("Voja, Friend to Elves", "Voja, Friend to Elves, a legendary 3/3 green and white Wolf creature token");
         this.cardType.add(CardType.CREATURE);
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.WOLF);
 
         this.color.setGreen(true);

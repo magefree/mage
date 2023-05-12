@@ -37,7 +37,7 @@ public final class BrudicladTelchorEngineer extends CardImpl {
     public BrudicladTelchorEngineer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{U}{R}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(4);

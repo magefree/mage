@@ -19,7 +19,7 @@ public final class GaeasCradle extends CardImpl {
 
     public GaeasCradle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {T}: Add {G} for each creature you control.
         DynamicManaAbility ability = new DynamicManaAbility(

@@ -30,7 +30,7 @@ public final class KalitasBloodchiefOfGhet extends CardImpl {
 
     public KalitasBloodchiefOfGhet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.WARRIOR);
 

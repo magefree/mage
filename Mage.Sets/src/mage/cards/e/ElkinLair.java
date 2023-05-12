@@ -33,7 +33,7 @@ public final class ElkinLair extends CardImpl {
 
     public ElkinLair(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
-        addSuperType(SuperType.WORLD);
+        this.supertype.add(SuperType.WORLD);
 
         // At the beginning of each player's upkeep, that player exiles a card at random from their hand.
         // The player may play that card this turn.
