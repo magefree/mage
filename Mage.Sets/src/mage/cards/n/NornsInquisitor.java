@@ -11,6 +11,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -71,7 +72,7 @@ class NornsInquisitorTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent == null || !permanent.hasSubtype(SubType.PHYREXIAN, game)) {
+        if (permanent == null || !StaticFilters.FILTER_CONTROLLED_PERMANENT.match(permanent, getControllerId(), this, game) || !permanent.hasSubtype(SubType.PHYREXIAN, game)) {
             return false;
         }
         this.getEffects().setTargetPointer(new FixedTarget(permanent, game));
