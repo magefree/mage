@@ -132,7 +132,7 @@ class SavraSacrificeEffect extends OneShotEffect {
 class SavraSacrificeGreenCreatureAbility extends TriggeredAbilityImpl {
 
     public SavraSacrificeGreenCreatureAbility() {
-        super(Zone.BATTLEFIELD, new GainLifeEffect(2));
+        super(Zone.BATTLEFIELD, new GainLifeEffect(2), true);
         setTriggerPhrase("Whenever you sacrifice a green creature, ");
     }
 

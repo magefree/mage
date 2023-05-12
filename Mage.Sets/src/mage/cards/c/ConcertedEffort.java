@@ -27,7 +27,7 @@ public final class ConcertedEffort extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
 
         // At the beginning of each upkeep, creatures you control gain flying until end of turn if a creature you control has flying. The same is true for fear, first strike, double strike, landwalk, protection, trample, and vigilance.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ConcertedEffortEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ConcertedEffortEffect(), TargetController.EACH_PLAYER, false));
     }
 
     private ConcertedEffort(final ConcertedEffort card) {
