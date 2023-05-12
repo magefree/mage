@@ -35,7 +35,6 @@ public abstract class Designation extends MageObjectImpl {
 
     private boolean copy;
     private MageObject copyFrom; // copied card INFO (used to call original adjusters)
-    private Abilities<Ability> abilites = new AbilitiesImpl<>();
 
     public Designation(DesignationType designationType) {
         this(designationType, true);
@@ -56,7 +55,6 @@ public abstract class Designation extends MageObjectImpl {
         this.frameStyle = designation.frameStyle;
         this.copy = designation.copy;
         this.copyFrom = (designation.copyFrom != null ? designation.copyFrom.copy() : null);
-        this.abilites = designation.abilites.copy();
     }
 
     @Override
@@ -80,8 +78,8 @@ public abstract class Designation extends MageObjectImpl {
 
     public void addAbility(Ability ability) {
         ability.setSourceId(this.objectId);
-        abilites.add(ability);
-        abilites.addAll(ability.getSubAbilities());
+        this.abilities.add(ability);
+        this.abilities.addAll(ability.getSubAbilities());
     }
 
     @Override

@@ -9,17 +9,18 @@ import mage.game.Game;
 import mage.game.GameException;
 import mage.game.mulligan.MulliganType;
 import org.junit.Test;
-import org.mage.test.serverside.base.CardTestMultiPlayerBaseWithRangeAll;
+import org.mage.test.serverside.base.CardTestMultiPlayerBase;
 
 import java.io.FileNotFoundException;
 
 /**
  * @author JayDi85
  */
-public class MonarchTest extends CardTestMultiPlayerBaseWithRangeAll {
+public class MonarchTest extends CardTestMultiPlayerBase {
 
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
+        // reason: must use MultiplayerAttackOption.MULTIPLE
         Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
         // Player order: A -> D -> C -> B
         playerA = createPlayer(game, "PlayerA");
@@ -92,5 +93,32 @@ public class MonarchTest extends CardTestMultiPlayerBaseWithRangeAll {
         setStrictChooseMode(true);
         setStopAt(3 + 4, PhaseStep.END_TURN);
         execute();
+    }
+
+    @Test
+    public void test_MonarchByDies() {
+        // Player order: A -> D -> C -> B
+        addCustomEffect_TargetDamage(playerA, 100);
+
+        // When Thorn of the Black Rose enters the battlefield, you become the monarch.
+        addCard(Zone.HAND, playerA, "Thorn of the Black Rose", 1); // {3}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+
+        // A as monarch
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thorn of the Black Rose");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkMonarch("monarch to A", 1, PhaseStep.PRECOMBAT_MAIN, playerA, playerA);
+
+        // kill itself, so monarch goes to next - player D
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "target damage 100", playerA);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        checkMonarch("monarch to D", 2, PhaseStep.POSTCOMBAT_MAIN, playerD, playerD);
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertLostTheGame(playerA);
     }
 }
