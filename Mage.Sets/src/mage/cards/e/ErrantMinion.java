@@ -89,11 +89,11 @@ class ErrantMinionEffect extends OneShotEffect {
                 PreventDamageToTargetEffect effect = new PreventDamageToTargetEffect(Duration.OneUse, manaPaid);
                 effect.setTargetPointer(new FixedTarget(controllerOfEnchantedCreature.getId()));
                 game.addEffect(effect, source);
-                DamageTargetEffect effect2 = new DamageTargetEffect(2);
-                effect2.setTargetPointer(new FixedTarget(controllerOfEnchantedCreature.getId()));
-                effect2.apply(game, source);
-                return true;
             }
+            DamageTargetEffect effect2 = new DamageTargetEffect(2);
+            effect2.setTargetPointer(new FixedTarget(controllerOfEnchantedCreature.getId()));
+            effect2.apply(game, source);
+            return true;
         }
         return false;
     }
