@@ -26,15 +26,16 @@ import java.util.UUID;
 public final class EgonGodOfDeath extends ModalDoubleFacesCard {
 
     public EgonGodOfDeath(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{2}{B}",
-                "Throne of Death", new CardType[]{CardType.ARTIFACT}, new SubType[]{}, "{B}"
+        super(
+                ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{2}{B}",
+                "Throne of Death",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT}, new SubType[]{}, "{B}"
         );
 
         // 1.
         // Egon, God of Death
         // Legendary Creature - God
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getLeftHalfCard().setPT(new MageInt(6), new MageInt(6));
 
         // Deathtouch
@@ -53,8 +54,6 @@ public final class EgonGodOfDeath extends ModalDoubleFacesCard {
         // 2.
         // Throne of Death
         // Legendary Artifact
-        this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
-
         // At the beginning of your upkeep, mill a card.
         this.getRightHalfCard().addAbility(new BeginningOfUpkeepTriggeredAbility(
                 Zone.BATTLEFIELD, new MillCardsControllerEffect(1), TargetController.YOU, false, false

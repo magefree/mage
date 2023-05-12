@@ -1,6 +1,5 @@
 package mage.cards.j;
 
-import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.common.MagecraftAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -22,9 +21,9 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+import mage.util.CardUtil;
 
 import java.util.UUID;
-import mage.util.CardUtil;
 
 /**
  * @author TheElk801
@@ -38,15 +37,14 @@ public final class JadziOracleOfArcavios extends ModalDoubleFacesCard {
     public JadziOracleOfArcavios(UUID ownerId, CardSetInfo setInfo) {
         super(
                 ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WIZARD}, "{6}{U}{U}",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WIZARD}, "{6}{U}{U}",
                 "Journey to the Oracle",
-                new CardType[]{CardType.SORCERY}, new SubType[]{}, "{2}{G}{G}"
+                new SuperType[]{}, new CardType[]{CardType.SORCERY}, new SubType[]{}, "{2}{G}{G}"
         );
 
         // 1.
         // Jadzi, Oracle of Arcavios
         // Legendary Creature - Human Wizard
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getLeftHalfCard().setPT(5, 5);
 
         // Discard a card: Return Jadzi, Oracle of Arcavios to its owner's hand.
