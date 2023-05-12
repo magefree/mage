@@ -47,7 +47,7 @@ public final class EpharaEverSheltering extends CardImpl {
     public EpharaEverSheltering(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

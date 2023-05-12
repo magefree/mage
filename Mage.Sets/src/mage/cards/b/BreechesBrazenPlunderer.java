@@ -29,7 +29,7 @@ public final class BreechesBrazenPlunderer extends CardImpl {
     public BreechesBrazenPlunderer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.PIRATE);
         this.power = new MageInt(3);

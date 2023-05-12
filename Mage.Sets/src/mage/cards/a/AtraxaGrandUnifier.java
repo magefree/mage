@@ -28,7 +28,7 @@ public final class AtraxaGrandUnifier extends CardImpl {
     public AtraxaGrandUnifier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{W}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(7);

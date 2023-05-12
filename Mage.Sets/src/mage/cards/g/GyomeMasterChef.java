@@ -45,7 +45,7 @@ public final class GyomeMasterChef extends CardImpl {
     public GyomeMasterChef(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TROLL);
         this.subtype.add(SubType.WARLOCK);
         this.power = new MageInt(5);

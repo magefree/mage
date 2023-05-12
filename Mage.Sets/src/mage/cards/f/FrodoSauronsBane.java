@@ -34,7 +34,7 @@ public final class FrodoSauronsBane extends CardImpl {
     public FrodoSauronsBane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HALFLING);
         this.subtype.add(SubType.CITIZEN);
         this.power = new MageInt(1);

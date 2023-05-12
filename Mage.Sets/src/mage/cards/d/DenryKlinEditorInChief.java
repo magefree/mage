@@ -32,7 +32,7 @@ public class DenryKlinEditorInChief extends CardImpl {
     public DenryKlinEditorInChief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.CAT, SubType.ADVISOR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

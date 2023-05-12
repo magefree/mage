@@ -36,7 +36,7 @@ public final class ChandraDressedToKill extends CardImpl {
     public ChandraDressedToKill(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
         this.setStartingLoyalty(3);
 

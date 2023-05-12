@@ -42,7 +42,7 @@ public final class SvyelunOfSeaAndSky extends CardImpl {
     public SvyelunOfSeaAndSky(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.GOD);
         this.power = new MageInt(3);

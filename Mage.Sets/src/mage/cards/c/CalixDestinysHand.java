@@ -52,7 +52,7 @@ public final class CalixDestinysHand extends CardImpl {
     public CalixDestinysHand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CALIX);
         this.setStartingLoyalty(4);
 

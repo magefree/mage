@@ -22,7 +22,7 @@ public final class GrowingRitesOfItlimoc extends CardImpl {
     public GrowingRitesOfItlimoc(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         this.secondSideCardClazz = mage.cards.i.ItlimocCradleOfTheSun.class;
 

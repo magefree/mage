@@ -25,7 +25,7 @@ public final class VorinclexMonstrousRaider extends CardImpl {
     public VorinclexMonstrousRaider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.PRAETOR);
         this.power = new MageInt(6);

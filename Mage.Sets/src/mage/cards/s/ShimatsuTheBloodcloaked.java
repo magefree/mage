@@ -27,7 +27,7 @@ public final class ShimatsuTheBloodcloaked extends CardImpl {
 
     public ShimatsuTheBloodcloaked(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.subtype.add(SubType.SPIRIT);
 

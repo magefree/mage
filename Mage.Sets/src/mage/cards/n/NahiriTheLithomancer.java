@@ -40,7 +40,7 @@ public final class NahiriTheLithomancer extends CardImpl {
 
     public NahiriTheLithomancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NAHIRI);
 
         this.setStartingLoyalty(3);

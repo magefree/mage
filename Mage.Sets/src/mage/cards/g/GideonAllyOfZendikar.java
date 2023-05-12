@@ -28,7 +28,7 @@ public final class GideonAllyOfZendikar extends CardImpl {
 
     public GideonAllyOfZendikar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIDEON);
 
         this.setStartingLoyalty(4);

@@ -34,7 +34,7 @@ public final class TyvarJubilantBrawler extends CardImpl {
     public TyvarJubilantBrawler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TYVAR);
         this.setStartingLoyalty(3);
 

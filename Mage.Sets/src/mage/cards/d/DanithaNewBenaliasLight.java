@@ -29,7 +29,7 @@ public final class DanithaNewBenaliasLight extends CardImpl {
     public DanithaNewBenaliasLight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(2);

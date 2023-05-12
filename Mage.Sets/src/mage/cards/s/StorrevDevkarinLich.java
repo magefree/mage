@@ -43,7 +43,7 @@ public final class StorrevDevkarinLich extends CardImpl {
     public StorrevDevkarinLich(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.WIZARD);

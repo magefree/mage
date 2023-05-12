@@ -35,7 +35,7 @@ public final class GideonJura extends CardImpl {
 
     public GideonJura(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIDEON);
 
         this.setStartingLoyalty(6);

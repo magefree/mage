@@ -37,7 +37,7 @@ public final class YedoraGraveGardener extends CardImpl {
     public YedoraGraveGardener(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TREEFOLK);
         this.subtype.add(SubType.DRUID);
         this.power = new MageInt(5);

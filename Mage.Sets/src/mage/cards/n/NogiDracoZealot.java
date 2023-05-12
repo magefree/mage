@@ -44,7 +44,7 @@ public final class NogiDracoZealot extends CardImpl {
 
     public NogiDracoZealot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KOBOLD, SubType.SHAMAN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

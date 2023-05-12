@@ -26,7 +26,7 @@ import java.util.UUID;
 public class BenSolo extends CardImpl {
     public BenSolo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R/W}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.HUMAN);
         this.addSubType(SubType.KNIGHT);
         this.power = new MageInt(4);

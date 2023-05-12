@@ -39,7 +39,7 @@ public final class KaitoShizuki extends CardImpl {
     public KaitoShizuki(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KAITO);
         this.setStartingLoyalty(3);
 

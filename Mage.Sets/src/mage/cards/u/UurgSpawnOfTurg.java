@@ -29,7 +29,7 @@ public final class UurgSpawnOfTurg extends CardImpl {
     public UurgSpawnOfTurg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FROG);
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(0);

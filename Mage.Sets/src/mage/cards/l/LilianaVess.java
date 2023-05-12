@@ -30,7 +30,7 @@ public final class LilianaVess extends CardImpl {
 
     public LilianaVess(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.LILIANA);
 
         this.setStartingLoyalty(5);

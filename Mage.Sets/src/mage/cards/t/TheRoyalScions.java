@@ -30,7 +30,7 @@ public final class TheRoyalScions extends CardImpl {
     public TheRoyalScions(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.WILL);
         this.subtype.add(SubType.ROWAN);
         this.setStartingLoyalty(5);

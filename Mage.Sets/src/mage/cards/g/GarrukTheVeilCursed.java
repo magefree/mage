@@ -33,7 +33,7 @@ public final class GarrukTheVeilCursed extends CardImpl {
 
     public GarrukTheVeilCursed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GARRUK);
 
         // this card is the second face of double-faced card

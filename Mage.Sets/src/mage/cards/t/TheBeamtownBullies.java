@@ -44,7 +44,7 @@ public final class TheBeamtownBullies extends CardImpl {
     public TheBeamtownBullies(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.OGRE);
         this.subtype.add(SubType.DEVIL);
         this.subtype.add(SubType.WARRIOR);

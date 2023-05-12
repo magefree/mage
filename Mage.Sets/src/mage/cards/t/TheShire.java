@@ -45,7 +45,7 @@ public final class TheShire extends CardImpl {
     public TheShire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // The Shire enters the battlefield tapped unless you control a legendary creature.
         this.addAbility(new EntersBattlefieldAbility(

@@ -35,7 +35,7 @@ public class BessSoulNourisher extends CardImpl {
     public BessSoulNourisher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.HUMAN, SubType.CITIZEN);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

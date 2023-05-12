@@ -44,7 +44,7 @@ public final class NicolBolasGodPharaoh extends CardImpl {
 
     public NicolBolasGodPharaoh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{B}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BOLAS);
 
         this.setStartingLoyalty(7);

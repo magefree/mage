@@ -30,7 +30,7 @@ public final class MoraugFuryOfAkoum extends CardImpl {
     public MoraugFuryOfAkoum(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MINOTAUR);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(6);

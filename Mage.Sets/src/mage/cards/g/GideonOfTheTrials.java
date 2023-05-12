@@ -28,7 +28,7 @@ public final class GideonOfTheTrials extends CardImpl {
 
     public GideonOfTheTrials(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{W}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIDEON);
 
         //Starting Loyalty: 3

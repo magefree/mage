@@ -42,7 +42,7 @@ public final class TheFiligreeSylex extends CardImpl {
     public TheFiligreeSylex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {T}: Put an oil counter on The Filigree Sylex.
         this.addAbility(new SimpleActivatedAbility(

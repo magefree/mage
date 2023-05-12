@@ -33,7 +33,7 @@ public final class FalthisShadowcatFamiliar extends CardImpl {
     public FalthisShadowcatFamiliar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NIGHTMARE);
         this.subtype.add(SubType.CAT);
         this.power = new MageInt(2);

@@ -26,7 +26,7 @@ public final class PiaNalaarConsulOfRevival extends CardImpl {
     public PiaNalaarConsulOfRevival(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(2);

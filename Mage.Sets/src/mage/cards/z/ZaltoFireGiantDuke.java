@@ -20,7 +20,7 @@ public final class ZaltoFireGiantDuke extends CardImpl {
     public ZaltoFireGiantDuke(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIANT);
         this.subtype.add(SubType.BARBARIAN);
         this.power = new MageInt(7);

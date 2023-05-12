@@ -41,7 +41,7 @@ public final class LonisCryptozoologist extends CardImpl {
     public LonisCryptozoologist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SCOUT);

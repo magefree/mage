@@ -31,7 +31,7 @@ public final class IlluminorSzeras extends CardImpl {
     public IlluminorSzeras(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NECRON);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

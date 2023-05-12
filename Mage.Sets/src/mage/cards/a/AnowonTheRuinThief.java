@@ -31,7 +31,7 @@ public final class AnowonTheRuinThief extends CardImpl {
     public AnowonTheRuinThief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(2);

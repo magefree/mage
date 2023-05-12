@@ -37,7 +37,7 @@ public final class GrothamaAllDevouring extends CardImpl {
     public GrothamaAllDevouring(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.WURM);
         this.power = new MageInt(10);
         this.toughness = new MageInt(8);

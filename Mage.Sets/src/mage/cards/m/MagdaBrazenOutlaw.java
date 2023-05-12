@@ -40,7 +40,7 @@ public final class MagdaBrazenOutlaw extends CardImpl {
     public MagdaBrazenOutlaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DWARF);
         this.subtype.add(SubType.BERSERKER);
         this.power = new MageInt(2);

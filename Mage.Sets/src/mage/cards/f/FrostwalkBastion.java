@@ -27,7 +27,7 @@ public final class FrostwalkBastion extends CardImpl {
     public FrostwalkBastion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());

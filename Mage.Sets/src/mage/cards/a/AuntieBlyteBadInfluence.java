@@ -33,7 +33,7 @@ public final class AuntieBlyteBadInfluence extends CardImpl {
     public AuntieBlyteBadInfluence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEVIL);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(2);

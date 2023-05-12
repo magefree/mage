@@ -29,7 +29,7 @@ public final class TibaltTheFiendBlooded extends CardImpl {
 
     public TibaltTheFiendBlooded(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{R}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TIBALT);
 
         this.setStartingLoyalty(2);

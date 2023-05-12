@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 public class ChandraHopesBeacon extends CardImpl {
     public ChandraHopesBeacon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{R}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.CHANDRA);
         this.setStartingLoyalty(5);
 

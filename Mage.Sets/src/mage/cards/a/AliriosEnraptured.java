@@ -31,7 +31,7 @@ public final class AliriosEnraptured extends CardImpl {
     public AliriosEnraptured(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

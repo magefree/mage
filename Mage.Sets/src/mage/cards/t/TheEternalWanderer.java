@@ -53,7 +53,7 @@ public final class TheEternalWanderer extends CardImpl {
     public TheEternalWanderer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{W}{W}");
         
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.setStartingLoyalty(5);
 
         // No more than one creature can attack The Eternal Wanderer each combat.

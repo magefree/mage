@@ -26,7 +26,7 @@ public final class AshayaSoulOfTheWild extends CardImpl {
     public AshayaSoulOfTheWild(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

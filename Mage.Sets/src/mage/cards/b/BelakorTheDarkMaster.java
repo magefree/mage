@@ -45,7 +45,7 @@ public final class BelakorTheDarkMaster extends CardImpl {
     public BelakorTheDarkMaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.subtype.add(SubType.NOBLE);
         this.power = new MageInt(6);

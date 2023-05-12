@@ -28,7 +28,7 @@ public final class TheHowlingAbomination extends CardImpl {
     public TheHowlingAbomination(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.BEAST);
         this.subtype.add(SubType.WARRIOR);

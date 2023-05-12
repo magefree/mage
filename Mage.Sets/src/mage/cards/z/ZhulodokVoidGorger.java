@@ -31,7 +31,7 @@ public final class ZhulodokVoidGorger extends CardImpl {
     public ZhulodokVoidGorger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{C}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(7);
         this.toughness = new MageInt(4);

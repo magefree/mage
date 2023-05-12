@@ -33,7 +33,7 @@ public final class Elminster extends CardImpl {
     public Elminster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELMINSTER);
         this.setStartingLoyalty(5);
 

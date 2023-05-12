@@ -25,7 +25,7 @@ public final class TeferiMasterOfTime extends CardImpl {
     public TeferiMasterOfTime(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEFERI);
         this.setStartingLoyalty(3);
 

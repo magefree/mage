@@ -38,7 +38,7 @@ public final class TameshiRealityArchitect extends CardImpl {
     public TameshiRealityArchitect(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MOONFOLK);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);

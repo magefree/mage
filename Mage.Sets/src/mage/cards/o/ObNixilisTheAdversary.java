@@ -39,7 +39,7 @@ public final class ObNixilisTheAdversary extends CardImpl {
     public ObNixilisTheAdversary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NIXILIS);
         this.setStartingLoyalty(3);
 

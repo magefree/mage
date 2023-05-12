@@ -23,7 +23,7 @@ public final class EzuriStalkerOfSpheres extends CardImpl {
     public EzuriStalkerOfSpheres(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.WARRIOR);

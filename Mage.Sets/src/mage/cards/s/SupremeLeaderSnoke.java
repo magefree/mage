@@ -39,7 +39,7 @@ public final class SupremeLeaderSnoke extends CardImpl {
     public SupremeLeaderSnoke(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{U}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SNOKE);
         this.setStartingLoyalty(3);
 

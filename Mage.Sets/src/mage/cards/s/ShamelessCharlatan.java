@@ -34,7 +34,7 @@ public final class ShamelessCharlatan extends CardImpl {
     public ShamelessCharlatan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BACKGROUND);
 
         // Commander creatures you own have "{2}{U}: This creature becomes a copy of another target creature."

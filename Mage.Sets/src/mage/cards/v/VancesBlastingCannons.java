@@ -36,7 +36,7 @@ public final class VancesBlastingCannons extends CardImpl {
     public VancesBlastingCannons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.secondSideCardClazz = mage.cards.s.SpitfireBastion.class;
 
         // At the beginning of your upkeep, exile the top card of your library.  If it's a nonland card, you may cast that card this turn.

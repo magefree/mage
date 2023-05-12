@@ -40,7 +40,7 @@ public final class WilheltTheRotcleaver extends CardImpl {
     public WilheltTheRotcleaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);

@@ -36,7 +36,7 @@ public final class KatildaAndLier extends CardImpl {
     public KatildaAndLier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

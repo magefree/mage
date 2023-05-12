@@ -27,7 +27,7 @@ public final class EleshNornMotherOfMachines extends CardImpl {
     public EleshNornMotherOfMachines(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN, SubType.PRAETOR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(7);

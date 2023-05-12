@@ -43,7 +43,7 @@ public final class BlizzardStrix extends CardImpl {
     public BlizzardStrix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.BIRD);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

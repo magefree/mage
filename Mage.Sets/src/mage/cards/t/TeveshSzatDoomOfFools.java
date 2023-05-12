@@ -38,7 +38,7 @@ public final class TeveshSzatDoomOfFools extends CardImpl {
     public TeveshSzatDoomOfFools(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SZAT);
         this.setStartingLoyalty(4);
 

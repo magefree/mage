@@ -31,7 +31,7 @@ public final class RalIzzetViceroy extends CardImpl {
     public RalIzzetViceroy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.RAL);
         this.setStartingLoyalty(5);
 

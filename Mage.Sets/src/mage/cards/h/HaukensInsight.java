@@ -34,7 +34,7 @@ public final class HaukensInsight extends CardImpl {
     public HaukensInsight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.color.setBlue(true);
         // Back half of Jacob Hauken, Inspector
         this.nightCard = true;

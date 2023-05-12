@@ -43,7 +43,7 @@ public final class XiraTheGoldenSting extends CardImpl {
     public XiraTheGoldenSting(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.INSECT, SubType.ASSASSIN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

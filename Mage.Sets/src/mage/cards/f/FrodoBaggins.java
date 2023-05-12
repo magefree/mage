@@ -32,7 +32,7 @@ public final class FrodoBaggins extends CardImpl {
     public FrodoBaggins(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HALFLING);
         this.subtype.add(SubType.SCOUT);
         this.power = new MageInt(1);

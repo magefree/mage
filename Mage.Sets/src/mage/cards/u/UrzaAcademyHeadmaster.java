@@ -51,7 +51,7 @@ public final class UrzaAcademyHeadmaster extends CardImpl {
 
     public UrzaAcademyHeadmaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{W}{U}{B}{R}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.URZA);
 
         this.setStartingLoyalty(4);

@@ -38,7 +38,7 @@ public final class LathrilBladeOfTheElves extends CardImpl {
     public LathrilBladeOfTheElves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.NOBLE);
         this.power = new MageInt(2);

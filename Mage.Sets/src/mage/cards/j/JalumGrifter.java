@@ -39,7 +39,7 @@ public final class JalumGrifter extends CardImpl {
 
     public JalumGrifter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEVIL);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);

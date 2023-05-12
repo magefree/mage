@@ -36,7 +36,7 @@ public final class YorionSkyNomad extends CardImpl {
     public YorionSkyNomad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[] {CardType.CREATURE}, "{3}{W/U}{W/U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BIRD);
         this.subtype.add(SubType.SERPENT);
         this.power = new MageInt(4);
