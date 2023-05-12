@@ -22,6 +22,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
 
+import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -118,8 +119,8 @@ class VesselOfTheAllConsumingWatcher extends Watcher {
         }
         Permanent permanent = game.getPermanent(event.getSourceId());
         if (permanent != null) {
-            int damage = ((DamagedEvent) event).getAmount();
-            morMap.compute(Map.entry(new MageObjectReference(permanent, game), event.getTargetId()),
+            int damage = event.getAmount();
+            morMap.compute(new AbstractMap.SimpleImmutableEntry(new MageObjectReference(permanent, game), event.getTargetId()),
                     (u, i) -> i == null ? damage : Integer.sum(i, damage));
         }
     }
@@ -133,8 +134,8 @@ class VesselOfTheAllConsumingWatcher extends Watcher {
     static boolean checkPermanent(Game game, Ability source) {
         Map<Entry<MageObjectReference, UUID>, Integer> morMap = game.getState()
                 .getWatcher(VesselOfTheAllConsumingWatcher.class)
-                        .morMap;
-        Entry<MageObjectReference, UUID> key = Map.entry(
+                .morMap;
+        Entry<MageObjectReference, UUID> key = new AbstractMap.SimpleImmutableEntry(
                 new MageObjectReference(game.getPermanent(source.getSourceId()), game),
                 source.getEffects().get(0).getTargetPointer().getFirst(game, source));
         return morMap.getOrDefault(key, 0) >= 10;
