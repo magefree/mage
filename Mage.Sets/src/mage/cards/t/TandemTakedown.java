@@ -12,16 +12,14 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.other.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
-import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
- * @author TheElk801
+ * @author TheElk801, xenohedron
  */
 public final class TandemTakedown extends CardImpl {
 
@@ -43,7 +41,7 @@ public final class TandemTakedown extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 0)
                 .setText("up to two target creatures you control each get +1/+0 until end of turn"));
         this.getSpellAbility().addEffect(new TandemTakedownEffect());
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent().setTargetTag(1));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, 2).setTargetTag(1));
         this.getSpellAbility().addTarget(new TargetPermanent(filter).setTargetTag(2));
     }
 
@@ -75,19 +73,28 @@ class TandemTakedownEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> permanents = this
-                .getTargetPointer()
-                .getTargets(game, source)
-                .stream()
-                .map(game::getPermanent)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
-        Permanent targetPermanent = game.getPermanent(source.getTargets().get(0).getFirstTarget());
-        if (permanents.isEmpty() || targetPermanent == null) {
+        if (source.getTargets().size() < 2) {
             return false;
         }
-        for (Permanent permanent : permanents) {
-            targetPermanent.damage(permanent.getPower().getValue(), permanent.getId(), source, game);
+
+        Target damageTarget = source.getTargets().get(0);
+        Target destTarget = source.getTargets().get(1);
+        if (damageTarget.getTargets().isEmpty() || destTarget.getTargets().isEmpty()) {
+            return false;
+        }
+
+        Permanent permanentDamage1 = damageTarget.getTargets().isEmpty() ? null : game.getPermanent(damageTarget.getTargets().get(0));
+        Permanent permanentDamage2 = damageTarget.getTargets().size() < 2 ? null : game.getPermanent(damageTarget.getTargets().get(1));
+        Permanent permanentDest = game.getPermanent(destTarget.getTargets().get(0));
+        if (permanentDest == null) {
+            return false;
+        }
+
+        if (permanentDamage1 != null) {
+            permanentDest.damage(permanentDamage1.getPower().getValue(), permanentDamage1.getId(), source, game, false, true);
+        }
+        if (permanentDamage2 != null) {
+            permanentDest.damage(permanentDamage2.getPower().getValue(), permanentDamage2.getId(), source, game, false, true);
         }
         return true;
     }
