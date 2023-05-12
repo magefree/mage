@@ -95,13 +95,13 @@
         <tournamentType name="Booster Draft Elimination" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftEliminationTournament" typeName="mage.tournament.BoosterDraftEliminationTournamentType"/>
         <tournamentType name="Booster Draft Elimination (Cube)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftEliminationTournament" typeName="mage.tournament.BoosterDraftEliminationCubeTournamentType"/>
         <tournamentType name="Booster Draft Elimination (Random)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.RandomBoosterDraftEliminationTournament" typeName="mage.tournament.RandomBoosterDraftEliminationTournamentType"/>
-
+        <tournamentType name="Booster Draft Elimination (Remixed)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.RemixedBoosterDraftEliminationTournament" typeName="mage.tournament.RemixedBoosterDraftEliminationTournamentType"/>
         <tournamentType name="Booster Draft Elimination (Rich Man)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.RichManDraftEliminationTournament" typeName="mage.tournament.RichManDraftEliminationTournamentType"/>
-
         <tournamentType name="Booster Draft Elimination (Rich Man Cube)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.RichManCubeDraftEliminationTournament" typeName="mage.tournament.RichManCubeDraftEliminationTournamentType"/>
         <tournamentType name="Booster Draft Swiss" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftSwissTournament" typeName="mage.tournament.BoosterDraftSwissTournamentType"/>
         <tournamentType name="Booster Draft Swiss (Cube)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftSwissTournament" typeName="mage.tournament.BoosterDraftSwissCubeTournamentType"/>
         <tournamentType name="Booster Draft Swiss (Random)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.RandomBoosterDraftSwissTournament" typeName="mage.tournament.RandomBoosterDraftSwissTournamentType"/>
+        <tournamentType name="Booster Draft Swiss (Remixed)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.RemixedBoosterDraftSwissTournament" typeName="mage.tournament.RemixedBoosterDraftSwissTournamentType"/>
         <tournamentType name="Sealed Elimination" jar="mage-tournament-sealed.jar" className="mage.tournament.SealedEliminationTournament" typeName="mage.tournament.SealedEliminationTournamentType"/>
         <tournamentType name="Sealed Elimination (Cube)" jar="mage-tournament-sealed.jar" className="mage.tournament.SealedEliminationTournament" typeName="mage.tournament.SealedEliminationCubeTournamentType"/>
         <tournamentType name="Sealed Swiss" jar="mage-tournament-sealed.jar" className="mage.tournament.SealedSwissTournament" typeName="mage.tournament.SealedSwissTournamentType"/>

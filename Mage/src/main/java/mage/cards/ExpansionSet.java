@@ -305,7 +305,7 @@ public abstract class ExpansionSet implements Serializable {
         return true;
     }
 
-    private static ObjectColor getColorForValidate(Card card) {
+    public static ObjectColor getColorForValidate(Card card) {
         ObjectColor color = card.getColor();
         // treat colorless nonland cards with exactly one ID color as cards of that color
         // (e.g. devoid, emerge, spellbombs... but not mana fixing artifacts)
@@ -364,8 +364,6 @@ public abstract class ExpansionSet implements Serializable {
         return (RandomUtil.nextDouble() > Math.pow(0.8, colorlessCountPlusOne));
     }
 
-    private static final ObjectColor COLORLESS = new ObjectColor();
-
     protected boolean validateUncommonColors(List<Card> booster) {
         List<ObjectColor> uncommonColors = booster.stream()
                 .filter(card -> card.getRarity() == Rarity.UNCOMMON)
@@ -375,7 +373,7 @@ public abstract class ExpansionSet implements Serializable {
         // if there are only two uncommons, they can be the same color
         if (uncommonColors.size() < 3) return true;
         // boosters of artifact sets can have all colorless uncommons
-        if (uncommonColors.contains(COLORLESS)) return true;
+        if (uncommonColors.contains(ObjectColor.COLORLESS)) return true;
         // otherwise, reject if all uncommons are the same color combination
         return (new HashSet<>(uncommonColors).size() > 1);
     }

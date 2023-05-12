@@ -11,6 +11,7 @@ import mage.cards.repository.CardScanner;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SubType;
+import mage.game.draft.RemixedSet;
 import mage.sets.*;
 import mage.util.CardUtil;
 import org.junit.Assert;
@@ -552,7 +553,7 @@ public class BoosterGenerationTest extends MageTestBase {
     @Test
     public void test_CollectBoosterStats() {
         ExpansionSet setToAnalyse = FallenEmpires.getInstance();
-        int openBoosters = 1000;
+        int openBoosters = 10000;
 
         Map<String, Integer> resRatio = new HashMap<>();
         int totalCards = 0;
@@ -565,21 +566,47 @@ public class BoosterGenerationTest extends MageTestBase {
                 resRatio.computeIfPresent(code, (u, count) -> count + 1);
             });
         }
-        final Integer totalCardsFinal = totalCards;
         List<String> info = resRatio.entrySet().stream()
-                .sorted(new Comparator<Map.Entry<String, Integer>>() {
-                    @Override
-                    public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-                        return Integer.compare(o2.getValue(), o1.getValue());
-                    }
-                })
+                .sorted((o1, o2) -> Integer.compare(o2.getValue(), o1.getValue()))
                 .map(e -> String.format("%s: %d",
                         e.getKey(),
                         e.getValue()
-                        //(double) e.getValue() / totalCardsFinal * 100.0
                 ))
                 .collect(Collectors.toList());
-        System.out.println(setToAnalyse.getName() + " - boosters opened: " + openBoosters + ". Found cards: " + totalCardsFinal + "\n"
-                + info.stream().collect(Collectors.joining("\n")));
+        System.out.println(setToAnalyse.getName() + " - boosters opened: " + openBoosters + ". Found cards: " + totalCards + "\n"
+                + String.join("\n", info));
     }
+
+    @Ignore // debug only
+    @Test
+    public void test_RemixedBoosterStats() {
+        List<ExpansionSet> sets = new ArrayList<>();
+        sets.add(ScarsOfMirrodin.getInstance());
+        sets.add(MirrodinBesieged.getInstance());
+        sets.add(NewPhyrexia.getInstance());
+        RemixedSet setToAnalyse = new RemixedSet(sets, 10, 3, 1);
+        int openBoosters = 10000;
+
+        Map<String, Integer> resRatio = new HashMap<>();
+        int totalCards = 0;
+        for (int i = 1; i <= openBoosters; i++) {
+            List<Card> booster = setToAnalyse.createBooster();
+            totalCards += booster.size();
+            booster.forEach(card -> {
+                String code = String.format("%s %s", card.getRarity().getCode(), card.getName());
+                resRatio.putIfAbsent(code, 0);
+                resRatio.computeIfPresent(code, (u, count) -> count + 1);
+            });
+        }
+        List<String> info = resRatio.entrySet().stream()
+                .sorted((o1, o2) -> Integer.compare(o2.getValue(), o1.getValue()))
+                .map(e -> String.format("%s: %d",
+                        e.getKey(),
+                        e.getValue()
+                ))
+                .collect(Collectors.toList());
+        System.out.println("Boosters opened: " + openBoosters + ". Found cards: " + totalCards + "\n"
+                + String.join("\n", info));
+    }
+
 }
