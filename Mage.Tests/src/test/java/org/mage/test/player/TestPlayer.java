@@ -620,7 +620,7 @@ public class TestPlayer implements Player {
                             groupsForTargetHandling = null;
                         }
                     }
-                    printStart("Available for " + this.getName());
+                    printStart(game, "Available for " + this.getName());
                     printAbilities(game, this.getPlayable(game, true));
                     printEnd();
                     Assert.fail("Can't find ability to activate command: " + command);
@@ -672,7 +672,7 @@ public class TestPlayer implements Player {
                             }
                         }
                     }
-                    printStart("Available for " + this.getName());
+                    printStart(game, "Available for " + this.getName());
                     printAbilities(game, this.getPlayable(game, true));
                     printEnd();
                     // TODO: enable assert and rewrite failed activateManaAbility tests
@@ -933,6 +933,13 @@ public class TestPlayer implements Player {
                             actions.remove(action);
                             wasProccessed = true;
                         }
+
+                        // check monarch: plyer id with monarch
+                        if (params[0].equals(CHECK_COMMAND_MONARCH) && params.length == 2) {
+                            assertMonarch(action, game, params[1].equals("null") ? null : game.getPlayer(UUID.fromString(params[1])));
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
                     }
                     if (wasProccessed) {
                         return true;
@@ -949,7 +956,7 @@ public class TestPlayer implements Player {
 
                         // show library
                         if (params[0].equals(SHOW_COMMAND_LIBRARY) && params.length == 1) {
-                            printStart(action.getActionName());
+                            printStart(game, action.getActionName());
                             printCards(computerPlayer.getLibrary().getCards(game), false); // do not sort
                             printEnd();
                             actions.remove(action);
@@ -958,7 +965,7 @@ public class TestPlayer implements Player {
 
                         // show hand
                         if (params[0].equals(SHOW_COMMAND_HAND) && params.length == 1) {
-                            printStart(action.getActionName());
+                            printStart(game, action.getActionName());
                             printCards(computerPlayer.getHand().getCards(game));
                             printEnd();
                             actions.remove(action);
@@ -967,7 +974,7 @@ public class TestPlayer implements Player {
 
                         // show command
                         if (params[0].equals(SHOW_COMMAND_COMMAND) && params.length == 1) {
-                            printStart(action.getActionName());
+                            printStart(game, action.getActionName());
                             CardsImpl cards = new CardsImpl(game.getCommandersIds(computerPlayer, CommanderCardType.ANY, false));
                             printCards(cards.getCards(game));
                             printEnd();
@@ -977,7 +984,7 @@ public class TestPlayer implements Player {
 
                         // show battlefield
                         if (params[0].equals(SHOW_COMMAND_BATTLEFIELD) && params.length == 1) {
-                            printStart(action.getActionName());
+                            printStart(game, action.getActionName());
                             printPermanents(game, game.getBattlefield().getAllActivePermanents(computerPlayer.getId()));
                             printEnd();
                             actions.remove(action);
@@ -986,7 +993,7 @@ public class TestPlayer implements Player {
 
                         // show graveyard
                         if (params[0].equals(SHOW_COMMAND_GRAVEYARD) && params.length == 1) {
-                            printStart(action.getActionName());
+                            printStart(game, action.getActionName());
                             printCards(computerPlayer.getGraveyard().getCards(game));
                             printEnd();
                             actions.remove(action);
@@ -995,7 +1002,7 @@ public class TestPlayer implements Player {
 
                         // show exile
                         if (params[0].equals(SHOW_COMMAND_EXILE) && params.length == 1) {
-                            printStart(action.getActionName());
+                            printStart(game, action.getActionName());
                             printCards(game.getExile().getAllCards(game).stream()
                                     .filter(card -> card.isOwnedBy(computerPlayer.getId()))
                                     .collect(Collectors.toList()), true);
@@ -1006,7 +1013,7 @@ public class TestPlayer implements Player {
 
                         // show available abilities
                         if (params[0].equals(SHOW_COMMAND_AVAILABLE_ABILITIES) && params.length == 1) {
-                            printStart(action.getActionName());
+                            printStart(game, action.getActionName());
                             printAbilities(game, computerPlayer.getPlayable(game, true));
                             printEnd();
                             actions.remove(action);
@@ -1015,7 +1022,7 @@ public class TestPlayer implements Player {
 
                         // show available mana
                         if (params[0].equals(SHOW_COMMAND_AVAILABLE_MANA) && params.length == 1) {
-                            printStart(action.getActionName());
+                            printStart(game, action.getActionName());
                             printMana(game, computerPlayer.getManaAvailable(game));
                             printEnd();
                             actions.remove(action);
@@ -1024,7 +1031,7 @@ public class TestPlayer implements Player {
 
                         // show aliases
                         if (params[0].equals(SHOW_COMMAND_ALIASES) && params.length == 1) {
-                            printStart(action.getActionName());
+                            printStart(game, action.getActionName());
                             printAliases(game, this);
                             printEnd();
                             actions.remove(action);
@@ -1033,7 +1040,7 @@ public class TestPlayer implements Player {
 
                         // show stack
                         if (params[0].equals(SHOW_COMMAND_STACK) && params.length == 1) {
-                            printStart(action.getActionName());
+                            printStart(game, action.getActionName());
                             printStack(game);
                             printEnd();
                             actions.remove(action);
@@ -1123,9 +1130,10 @@ public class TestPlayer implements Player {
         Assert.fail(action.getActionName() + " - can''t find permanent to check: " + cardName);
         return null;
     }
-
-    private void printStart(String name) {
-        System.out.println("\n" + name + ":");
+    
+    private void printStart(Game game, String name) {
+        System.out.println("\n" + game.toString());
+        System.out.println(name + ":");
     }
 
     private void printEnd() {
@@ -1323,18 +1331,18 @@ public class TestPlayer implements Player {
         }
 
         if (mustHave && !found) {
-            printStart("Available mana for " + computerPlayer.getName());
+            printStart(game, "Available mana for " + computerPlayer.getName());
             printMana(game, computerPlayer.getManaAvailable(game));
-            printStart(action.getActionName());
+            printStart(game, action.getActionName());
             printAbilities(game, computerPlayer.getPlayable(game, true));
             printEnd();
             Assert.fail("Must have playable ability, but not found: " + abilityStartText);
         }
 
         if (!mustHave && found) {
-            printStart("Available mana for " + computerPlayer.getName());
+            printStart(game, "Available mana for " + computerPlayer.getName());
             printMana(game, computerPlayer.getManaAvailable(game));
-            printStart(action.getActionName());
+            printStart(game, action.getActionName());
             printAbilities(game, computerPlayer.getPlayable(game, true));
             printEnd();
             Assert.fail("Must not have playable ability, but found: " + abilityStartText);
@@ -1350,7 +1358,7 @@ public class TestPlayer implements Player {
         }
 
         if (foundCount != count) {
-            printStart("Permanents of " + player.getName());
+            printStart(game, "Permanents of " + player.getName());
             printPermanents(game, game.getBattlefield().getAllActivePermanents(player.getId()));
             printEnd();
             Assert.fail(action.getActionName() + " - permanent " + permanentName + " must exists in " + count + " instances, but found " + foundCount);
@@ -1368,7 +1376,7 @@ public class TestPlayer implements Player {
         }
 
         if (foundCount != count) {
-            printStart("Permanents of " + player.getName());
+            printStart(game, "Permanents of " + player.getName());
             printPermanents(game, game.getBattlefield().getAllActivePermanents(player.getId()));
             printEnd();
             Assert.fail(action.getActionName() + " - must have " + count + (tapped ? " tapped " : " untapped ")
@@ -1415,7 +1423,7 @@ public class TestPlayer implements Player {
         }
 
         if (foundCount != count) {
-            printStart("Exile cards");
+            printStart(game, "Exile cards");
             printCards(game.getExile().getAllCards(game), true);
             printEnd();
             Assert.fail(action.getActionName() + " - exile zone must have " + count + " cards with name " + permanentName + ", but found " + foundCount);
@@ -1431,7 +1439,7 @@ public class TestPlayer implements Player {
         }
 
         if (foundCount != count) {
-            printStart("Graveyard of " + player.getName());
+            printStart(game, "Graveyard of " + player.getName());
             printCards(player.getGraveyard().getCards(game));
             printEnd();
             Assert.fail(action.getActionName() + " - graveyard zone must have " + count + " cards with name " + permanentName + ", but found " + foundCount);
@@ -1451,7 +1459,7 @@ public class TestPlayer implements Player {
 
     private void assertHandCount(PlayerAction action, Game game, Player player, int count) {
         if (player.getHand().size() != count) {
-            printStart("Hand of " + player.getName());
+            printStart(game, "Hand of " + player.getName());
             printCards(player.getHand().getCards(game));
             printEnd();
             Assert.fail(action.getActionName() + " - hand must contain " + count + ", but found " + player.getHand().size());
@@ -1480,7 +1488,7 @@ public class TestPlayer implements Player {
         }
 
         if (realCount != count) {
-            printStart("Cards in command zone from " + player.getName());
+            printStart(game, "Cards in command zone from " + player.getName());
             printCards(game.getCommanderCardsFromCommandZone(player, CommanderCardType.COMMANDER_OR_OATHBREAKER));
             printEnd();
             Assert.fail(action.getActionName() + " - must have " + count + " cards with name " + cardName + ", but found " + realCount);
@@ -1592,6 +1600,20 @@ public class TestPlayer implements Player {
         if (needAmount != foundAmount) {
             printStack(game);
             Assert.fail(action.getActionName() + " - stack must have " + needAmount + " objects with ability [" + stackAbilityName + "] but have " + foundAmount);
+        }
+    }
+
+    private void assertMonarch(PlayerAction action, Game game, Player player) {
+        if (player != null) {
+            // must be
+            if (game.getMonarchId() != player.getId()) {
+                Assert.fail(action.getActionName() + " - game must have " + player.getName() + " as monarch, but found " + game.getPlayer(game.getMonarchId()));
+            }
+        } else {
+            // must not be
+            if (game.getMonarchId() != null) {
+                Assert.fail(action.getActionName() + " - game must be without monarch, but found " + game.getPlayer(game.getMonarchId()));
+            }
         }
     }
 
@@ -1943,21 +1965,21 @@ public class TestPlayer implements Player {
     private void chooseStrictModeFailed(String choiceType, Game game, String reason, boolean printAbilities) {
         if (!this.canChooseByComputer()) {
             if (printAbilities) {
-                printStart("Available mana for " + computerPlayer.getName());
+                printStart(game, "Available mana for " + computerPlayer.getName());
                 printMana(game, computerPlayer.getManaAvailable(game));
-                printStart("Available abilities for " + computerPlayer.getName());
+                printStart(game, "Available abilities for " + computerPlayer.getName());
                 printAbilities(game, computerPlayer.getPlayable(game, true));
                 printEnd();
             }
             if (choiceType.equals("choice")) {
-                printStart("Unused choices");
+                printStart(game, "Unused choices");
                 if (!choices.isEmpty()) {
                     System.out.println(String.join("\n", choices));
                 }
                 printEnd();
             }
             if (choiceType.equals("target")) {
-                printStart("Unused targets");
+                printStart(game, "Unused targets");
                 if (!targets.isEmpty()) {
                     System.out.println(String.join("\n", targets));
                 }
