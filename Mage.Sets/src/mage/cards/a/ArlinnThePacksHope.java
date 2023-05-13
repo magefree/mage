@@ -30,7 +30,7 @@ public final class ArlinnThePacksHope extends CardImpl {
     public ArlinnThePacksHope(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ARLINN);
         this.setStartingLoyalty(4);
         this.secondSideCardClazz = mage.cards.a.ArlinnTheMoonsFury.class;

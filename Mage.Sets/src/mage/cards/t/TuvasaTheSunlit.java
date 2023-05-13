@@ -37,7 +37,7 @@ public final class TuvasaTheSunlit extends CardImpl {
     public TuvasaTheSunlit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(1);

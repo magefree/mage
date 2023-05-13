@@ -30,7 +30,7 @@ public final class QueenAllenalOfRuadach extends CardImpl {
     public QueenAllenalOfRuadach(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.NOBLE);
         this.power = new MageInt(0);

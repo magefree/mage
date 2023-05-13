@@ -22,7 +22,7 @@ public final class ZetalpaPrimalDawn extends CardImpl {
 
     public ZetalpaPrimalDawn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDER);
         this.subtype.add(SubType.DINOSAUR);
 

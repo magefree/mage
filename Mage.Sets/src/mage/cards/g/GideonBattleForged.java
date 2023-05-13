@@ -35,7 +35,7 @@ public final class GideonBattleForged extends CardImpl {
 
     public GideonBattleForged(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIDEON);
 
         this.color.setWhite(true);

@@ -50,15 +50,16 @@ public final class HalvarGodOfBattle extends ModalDoubleFacesCard {
     }
 
     public HalvarGodOfBattle(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{2}{W}{W}",
-                "Sword of the Realms", new CardType[]{CardType.ARTIFACT}, new SubType[]{SubType.EQUIPMENT}, "{1}{W}"
+        super(
+                ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{2}{W}{W}",
+                "Sword of the Realms",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT}, new SubType[]{SubType.EQUIPMENT}, "{1}{W}"
         );
 
         // 1.
         // Halvar, God of Battle
         // Legendary Creature - God
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getLeftHalfCard().setPT(new MageInt(4), new MageInt(4));
 
         // Creatures you control that are enchanted or equipped have double strike.
@@ -76,8 +77,6 @@ public final class HalvarGodOfBattle extends ModalDoubleFacesCard {
         // 2.
         // Sword of the Realms
         // Legendary Artifact - Equipment
-        this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
-
         // Equipped creature gets +2/+0 and has vigilance
         ability = new SimpleStaticAbility(new BoostEquippedEffect(2, 0));
         ability.addEffect(new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT

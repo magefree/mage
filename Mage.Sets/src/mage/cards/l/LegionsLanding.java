@@ -26,7 +26,7 @@ public final class LegionsLanding extends CardImpl {
     public LegionsLanding(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         this.secondSideCardClazz = mage.cards.a.AdantoTheFirstFort.class;
 

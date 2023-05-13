@@ -31,7 +31,7 @@ public final class ZabazTheGlimmerwasp extends CardImpl {
     public ZabazTheGlimmerwasp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.INSECT);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

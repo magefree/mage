@@ -32,7 +32,7 @@ public final class TeferiHeroOfDominaria extends CardImpl {
     public TeferiHeroOfDominaria(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEFERI);
 
         this.setStartingLoyalty(4);

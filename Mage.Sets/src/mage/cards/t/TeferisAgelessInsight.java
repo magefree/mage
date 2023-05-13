@@ -20,7 +20,7 @@ public final class TeferisAgelessInsight extends CardImpl {
 
     public TeferisAgelessInsight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // If you would draw a card except the first one you draw in each of your draw steps, draw two cards instead.
         this.addAbility(new SimpleStaticAbility(new TeferisAgelessInsightEffect()), new CardsDrawnDuringDrawStepWatcher());

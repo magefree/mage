@@ -23,7 +23,7 @@ public final class JohnnyComboPlayer extends CardImpl {
 
     public JohnnyComboPlayer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.GAMER);
         this.power = new MageInt(1);

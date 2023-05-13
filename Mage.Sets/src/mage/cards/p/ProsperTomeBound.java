@@ -23,7 +23,7 @@ public final class ProsperTomeBound extends CardImpl {
     public ProsperTomeBound(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TIEFLING);
         this.subtype.add(SubType.WARLOCK);
         this.power = new MageInt(1);

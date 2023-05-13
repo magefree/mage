@@ -25,7 +25,7 @@ public final class GrunnTheLonelyKing extends CardImpl {
 
     public GrunnTheLonelyKing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.APE, SubType.WARRIOR);
 
         this.power = new MageInt(5);

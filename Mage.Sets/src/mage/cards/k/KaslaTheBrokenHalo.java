@@ -33,7 +33,7 @@ public final class KaslaTheBrokenHalo extends CardImpl {
     public KaslaTheBrokenHalo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
         this.subtype.add(SubType.ALLY);
         this.power = new MageInt(5);

@@ -35,7 +35,7 @@ public final class AdarkarValkyrie extends CardImpl {
 
     public AdarkarValkyrie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(4);

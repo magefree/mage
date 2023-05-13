@@ -22,7 +22,7 @@ import java.util.UUID;
 public class ReySkywalker extends CardImpl {
     public ReySkywalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.REY);
 
         this.setStartingLoyalty(2);

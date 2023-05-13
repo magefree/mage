@@ -23,15 +23,16 @@ import java.util.UUID;
 public final class BirgiGodOfStorytelling extends ModalDoubleFacesCard {
 
     public BirgiGodOfStorytelling(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{2}{R}",
-                "Harnfel, Horn of Bounty", new CardType[]{CardType.ARTIFACT}, new SubType[]{}, "{4}{R}"
+        super(
+                ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{2}{R}",
+                "Harnfel, Horn of Bounty",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT}, new SubType[]{}, "{4}{R}"
         );
 
         // 1.
         // Birgi, God of Storytelling
         // Legendary Creature - God
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getLeftHalfCard().setPT(new MageInt(3), new MageInt(3));
 
         // Whenever you cast a spell, add {R}. Until end of turn, you don't lose this mana as steps and phases end.
@@ -45,8 +46,6 @@ public final class BirgiGodOfStorytelling extends ModalDoubleFacesCard {
         // 2.
         // Harnfel, Horn of Bounty
         // Legendary Artifact
-        this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
-
         // Discard a card: Exile the top two cards of your library. You may play those cards this turn.
         this.getRightHalfCard().addAbility(new SimpleActivatedAbility(
                 new ExileTopXMayPlayUntilEndOfTurnEffect(2), new DiscardCardCost()

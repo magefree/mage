@@ -39,7 +39,7 @@ public final class KinzuOfTheBleakCoven extends CardImpl {
     public KinzuOfTheBleakCoven(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.VAMPIRE);
         this.power = new MageInt(5);

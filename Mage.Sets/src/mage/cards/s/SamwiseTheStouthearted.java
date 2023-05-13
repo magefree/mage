@@ -34,7 +34,7 @@ public final class SamwiseTheStouthearted extends CardImpl {
     public SamwiseTheStouthearted(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HALFLING);
         this.subtype.add(SubType.PEASANT);
         this.power = new MageInt(2);

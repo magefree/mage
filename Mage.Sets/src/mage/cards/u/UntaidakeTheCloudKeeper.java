@@ -29,7 +29,7 @@ public final class UntaidakeTheCloudKeeper extends CardImpl {
 
     public UntaidakeTheCloudKeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Untaidake, the Cloud Keeper enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

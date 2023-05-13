@@ -35,7 +35,7 @@ public final class TheOneRing extends CardImpl {
     public TheOneRing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Indestructible
         this.addAbility(IndestructibleAbility.getInstance());

@@ -49,7 +49,7 @@ public final class NazahnReveredBladesmith extends CardImpl {
     public NazahnReveredBladesmith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{W}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(5);

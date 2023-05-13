@@ -44,7 +44,7 @@ public final class ChainerDementiaMaster extends CardImpl {
 
     public ChainerDementiaMaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.MINION);
         this.power = new MageInt(3);

@@ -37,7 +37,7 @@ public final class MetzaliTowerOfTriumph extends CardImpl {
     public MetzaliTowerOfTriumph(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.nightCard = true;
 
         // <i>(Transforms from Path of Mettle.)</i>

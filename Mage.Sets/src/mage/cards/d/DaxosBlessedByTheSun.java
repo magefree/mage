@@ -24,7 +24,7 @@ public final class DaxosBlessedByTheSun extends CardImpl {
     public DaxosBlessedByTheSun(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMIGOD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(0);

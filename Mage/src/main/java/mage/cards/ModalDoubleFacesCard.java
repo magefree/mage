@@ -27,15 +27,38 @@ public abstract class ModalDoubleFacesCard extends CardImpl implements CardWithH
     protected Card leftHalfCard; // main card in all zone
     protected Card rightHalfCard; // second side card, can be only in stack and battlefield zones
 
-    public ModalDoubleFacesCard(UUID ownerId, CardSetInfo setInfo,
-                                CardType[] typesLeft, SubType[] subTypesLeft, String costsLeft,
-                                String secondSideName, CardType[] typesRight, SubType[] subTypesRight, String costsRight) {
+    public ModalDoubleFacesCard(
+            UUID ownerId, CardSetInfo setInfo,
+            CardType[] typesLeft, SubType[] subTypesLeft, String costsLeft,
+            String secondSideName,
+            CardType[] typesRight, SubType[] subTypesRight, String costsRight
+    ) {
+        this(
+                ownerId, setInfo,
+                new SuperType[]{}, typesLeft, subTypesLeft, costsLeft,
+                secondSideName,
+                new SuperType[]{}, typesRight, subTypesRight, costsRight
+        );
+    }
+
+    public ModalDoubleFacesCard(
+            UUID ownerId, CardSetInfo setInfo,
+            SuperType[] superTypesLeft, CardType[] typesLeft, SubType[] subTypesLeft, String costsLeft,
+            String secondSideName,
+            SuperType[] superTypesRight, CardType[] typesRight, SubType[] subTypesRight, String costsRight
+    ) {
         super(ownerId, setInfo, typesLeft, costsLeft + costsRight, SpellAbilityType.MODAL);
         // main card name must be same as left side
-        leftHalfCard = new ModalDoubleFacesCardHalfImpl(this.getOwnerId(), new CardSetInfo(setInfo.getName(), setInfo.getExpansionSetCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()),
-                typesLeft, subTypesLeft, costsLeft, this, SpellAbilityType.MODAL_LEFT);
-        rightHalfCard = new ModalDoubleFacesCardHalfImpl(this.getOwnerId(), new CardSetInfo(secondSideName, setInfo.getExpansionSetCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()),
-                typesRight, subTypesRight, costsRight, this, SpellAbilityType.MODAL_RIGHT);
+        leftHalfCard = new ModalDoubleFacesCardHalfImpl(
+                this.getOwnerId(), setInfo.copy(),
+                superTypesLeft, typesLeft, subTypesLeft, costsLeft,
+                this, SpellAbilityType.MODAL_LEFT
+        );
+        rightHalfCard = new ModalDoubleFacesCardHalfImpl(
+                this.getOwnerId(), new CardSetInfo(secondSideName, setInfo),
+                superTypesRight, typesRight, subTypesRight, costsRight,
+                this, SpellAbilityType.MODAL_RIGHT
+        );
     }
 
     public ModalDoubleFacesCard(ModalDoubleFacesCard card) {

@@ -34,15 +34,16 @@ import java.util.UUID;
 public final class TergridGodOfFright extends ModalDoubleFacesCard {
 
     public TergridGodOfFright(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{3}{B}{B}",
-                "Tergrid's Lantern", new CardType[]{CardType.ARTIFACT}, new SubType[]{}, "{3}{B}"
+        super(
+                ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{3}{B}{B}",
+                "Tergrid's Lantern",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT}, new SubType[]{}, "{3}{B}"
         );
 
         // 1.
         // Tergrid, God of Fright
         // Legendary Creature - God
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getLeftHalfCard().setPT(4, 5);
 
         // Menace
@@ -54,8 +55,6 @@ public final class TergridGodOfFright extends ModalDoubleFacesCard {
         // 2.
         // Tergrid's Lantern
         // Legendary Artifact
-        this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
-
         // {T}: Target player loses 3 life unless they sacrifice a nonland permanent or discard a card.
         Ability tergridsLaternActivatedAbility = new SimpleActivatedAbility(
                 new TergridsLaternEffect(), new TapSourceCost()

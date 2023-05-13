@@ -40,15 +40,14 @@ public final class ExtusOriqOverlord extends ModalDoubleFacesCard {
     public ExtusOriqOverlord(UUID ownerId, CardSetInfo setInfo) {
         super(
                 ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WARLOCK}, "{1}{W}{B}{B}",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WARLOCK}, "{1}{W}{B}{B}",
                 "Awaken the Blood Avatar",
-                new CardType[]{CardType.SORCERY}, new SubType[]{}, "{6}{B}{R}"
+                new SuperType[]{}, new CardType[]{CardType.SORCERY}, new SubType[]{}, "{6}{B}{R}"
         );
 
         // 1.
         // Extus, Oriq Overlord
         // Legendary Creature - Human Warlock
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getLeftHalfCard().setPT(2, 4);
 
         // Double strike

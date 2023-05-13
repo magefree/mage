@@ -30,7 +30,7 @@ public final class TezzeretMasterOfMetal extends CardImpl {
 
     public TezzeretMasterOfMetal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEZZERET);
 
         this.setStartingLoyalty(5);

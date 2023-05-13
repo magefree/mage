@@ -38,7 +38,7 @@ public final class AyaraWidowOfTheRealm extends CardImpl {
     public AyaraWidowOfTheRealm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.NOBLE);
         this.power = new MageInt(3);

@@ -41,7 +41,7 @@ public final class AniktheaHandOfErebos extends CardImpl {
     public AniktheaHandOfErebos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{W}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMIGOD);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

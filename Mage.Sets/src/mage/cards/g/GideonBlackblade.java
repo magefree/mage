@@ -50,7 +50,7 @@ public final class GideonBlackblade extends CardImpl {
     public GideonBlackblade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIDEON);
         this.setStartingLoyalty(4);
 

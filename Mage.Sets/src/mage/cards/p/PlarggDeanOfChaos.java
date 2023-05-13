@@ -46,14 +46,16 @@ public final class PlarggDeanOfChaos extends ModalDoubleFacesCard {
     }
 
     public PlarggDeanOfChaos(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.ORC, SubType.SHAMAN}, "{1}{R}",
-                "Augusta, Dean of Order", new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.CLERIC}, "{2}{W}");
+        super(
+                ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.ORC, SubType.SHAMAN}, "{1}{R}",
+                "Augusta, Dean of Order",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.CLERIC}, "{2}{W}"
+        );
 
         // 1.
         // Plargg, Dean of Chaos
         // Legendary Creature - Orc Shaman
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getLeftHalfCard().setPT(2, 2);
 
         // {T}, Discard a card: Draw a card.
@@ -69,7 +71,6 @@ public final class PlarggDeanOfChaos extends ModalDoubleFacesCard {
         // 2.
         // Augusta, Dean of Order
         // Legendary Creature - Human Cleric
-        this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getRightHalfCard().setPT(1, 3);
 
         // Other tapped creatures you control get +1/+0.

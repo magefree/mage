@@ -1,6 +1,5 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -9,8 +8,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.cards.Cards;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
 import mage.cards.ModalDoubleFacesCard;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
@@ -18,8 +17,9 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class BlexVexingPest extends ModalDoubleFacesCard {
@@ -38,15 +38,16 @@ public final class BlexVexingPest extends ModalDoubleFacesCard {
     }
 
     public BlexVexingPest(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.PEST}, "{2}{G}",
-                "Search for Blex", new CardType[]{CardType.SORCERY}, new SubType[]{}, "{2}{B}{B}"
+        super(
+                ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.PEST}, "{2}{G}",
+                "Search for Blex",
+                new SuperType[]{}, new CardType[]{CardType.SORCERY}, new SubType[]{}, "{2}{B}{B}"
         );
 
         // 1.
         // Blex, Vexing Pest
         // Legendary Creature - Pest
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getLeftHalfCard().setPT(new MageInt(3), new MageInt(2));
 
         // Other Pests, Bats, Insects, Snakes, and Spiders you control get +1/+1.

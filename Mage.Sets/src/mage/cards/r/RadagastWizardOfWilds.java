@@ -42,7 +42,7 @@ public final class RadagastWizardOfWilds extends CardImpl {
     public RadagastWizardOfWilds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AVATAR);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);

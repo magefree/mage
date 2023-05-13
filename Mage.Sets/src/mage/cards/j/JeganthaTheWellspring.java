@@ -27,7 +27,7 @@ public final class JeganthaTheWellspring extends CardImpl {
     public JeganthaTheWellspring(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R/G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.ELK);
         this.power = new MageInt(5);

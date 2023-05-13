@@ -30,7 +30,7 @@ public final class RowanFearlessSparkmage extends CardImpl {
     public RowanFearlessSparkmage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ROWAN);
         this.setStartingLoyalty(5);
 

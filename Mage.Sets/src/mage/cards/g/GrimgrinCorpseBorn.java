@@ -36,7 +36,7 @@ public final class GrimgrinCorpseBorn extends CardImpl {
 
     public GrimgrinCorpseBorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.WARRIOR);
 

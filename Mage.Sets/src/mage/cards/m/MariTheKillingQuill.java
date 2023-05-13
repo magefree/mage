@@ -52,7 +52,7 @@ public class MariTheKillingQuill extends CardImpl {
     public MariTheKillingQuill(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.VAMPIRE, SubType.ASSASSIN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

@@ -29,7 +29,7 @@ public final class AphemiaTheCacophony extends CardImpl {
     public AphemiaTheCacophony(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HARPY);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

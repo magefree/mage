@@ -22,7 +22,7 @@ public final class BilboRetiredBurglar extends CardImpl {
     public BilboRetiredBurglar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HALFLING);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(1);

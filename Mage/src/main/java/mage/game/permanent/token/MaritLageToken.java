@@ -16,7 +16,7 @@ public final class MaritLageToken extends TokenImpl {
         super("Marit Lage", "Marit Lage, a legendary 20/20 black Avatar creature token with flying and indestructible");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.AVATAR);
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         color.setBlack(true);
         power = new MageInt(20);

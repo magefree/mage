@@ -41,7 +41,7 @@ public final class ZurgoAndOjutai extends CardImpl {
     public ZurgoAndOjutai(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ORC);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(4);

@@ -27,7 +27,7 @@ public final class GyrudaDoomOfDepths extends CardImpl {
     public GyrudaDoomOfDepths(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U/B}{U/B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.subtype.add(SubType.KRAKEN);
         this.power = new MageInt(6);

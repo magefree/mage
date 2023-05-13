@@ -26,7 +26,7 @@ public final class AshiokDreamRender extends CardImpl {
     public AshiokDreamRender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{U/B}{U/B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ASHIOK);
         this.setStartingLoyalty(5);
 

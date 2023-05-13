@@ -32,7 +32,7 @@ public final class ThrastaTempestsRoar extends CardImpl {
 
     public ThrastaTempestsRoar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{10}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DINOSAUR);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);

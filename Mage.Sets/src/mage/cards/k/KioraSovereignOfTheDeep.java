@@ -42,7 +42,7 @@ public final class KioraSovereignOfTheDeep extends CardImpl {
     public KioraSovereignOfTheDeep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.NOBLE);
         this.power = new MageInt(4);

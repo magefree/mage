@@ -31,7 +31,7 @@ public final class IcebergCancrix extends CardImpl {
     public IcebergCancrix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.CRAB);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);

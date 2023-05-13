@@ -29,7 +29,7 @@ public final class TempleOfAclazotz extends CardImpl {
     public TempleOfAclazotz(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.nightCard = true;
 
         // {T}: Add {B}

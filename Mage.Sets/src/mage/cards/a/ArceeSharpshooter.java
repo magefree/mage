@@ -28,7 +28,7 @@ public final class ArceeSharpshooter extends CardImpl {
     public ArceeSharpshooter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ROBOT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

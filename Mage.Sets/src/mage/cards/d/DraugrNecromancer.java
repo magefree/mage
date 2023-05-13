@@ -29,7 +29,7 @@ public final class DraugrNecromancer extends CardImpl {
     public DraugrNecromancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(4);

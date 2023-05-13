@@ -42,7 +42,7 @@ public final class SanwellAvengerAce extends CardImpl {
     public SanwellAvengerAce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.PILOT);
         this.power = new MageInt(3);

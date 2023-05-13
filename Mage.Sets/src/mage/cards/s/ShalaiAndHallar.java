@@ -28,7 +28,7 @@ public final class ShalaiAndHallar extends CardImpl {
     public ShalaiAndHallar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
         this.subtype.add(SubType.ELF);
         this.power = new MageInt(3);

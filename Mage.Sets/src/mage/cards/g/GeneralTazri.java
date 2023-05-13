@@ -35,7 +35,7 @@ public final class GeneralTazri extends CardImpl {
 
     public GeneralTazri(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ALLY);
         this.power = new MageInt(3);

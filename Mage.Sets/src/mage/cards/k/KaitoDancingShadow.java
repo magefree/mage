@@ -41,7 +41,7 @@ public final class KaitoDancingShadow extends CardImpl {
     public KaitoDancingShadow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KAITO);
         this.setStartingLoyalty(3);
 

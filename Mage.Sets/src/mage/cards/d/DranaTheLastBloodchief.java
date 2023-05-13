@@ -34,7 +34,7 @@ public final class DranaTheLastBloodchief extends CardImpl {
     public DranaTheLastBloodchief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(4);

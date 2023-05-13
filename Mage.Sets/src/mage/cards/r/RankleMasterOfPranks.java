@@ -27,7 +27,7 @@ public final class RankleMasterOfPranks extends CardImpl {
     public RankleMasterOfPranks(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FAERIE);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(3);

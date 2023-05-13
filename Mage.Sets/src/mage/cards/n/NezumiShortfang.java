@@ -61,7 +61,7 @@ class StabwhiskerTheOdious extends TokenImpl {
 
     StabwhiskerTheOdious() {
         super("Stabwhisker the Odious", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.RAT);

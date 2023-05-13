@@ -46,7 +46,7 @@ public final class AbaddonTheDespoiler extends CardImpl {
     public AbaddonTheDespoiler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ASTARTES);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(5);

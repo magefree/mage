@@ -34,7 +34,7 @@ public final class BaralChiefOfCompliance extends CardImpl {
     public BaralChiefOfCompliance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.WIZARD);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);

@@ -24,7 +24,7 @@ public final class NivMizzetSupreme extends CardImpl {
     public NivMizzetSupreme(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(5);

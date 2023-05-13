@@ -34,7 +34,7 @@ public final class AeveProgenitorOoze extends CardImpl {
     public AeveProgenitorOoze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.OOZE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

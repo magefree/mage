@@ -35,7 +35,7 @@ public final class ChatterfangSquirrelGeneral extends CardImpl {
     public ChatterfangSquirrelGeneral(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SQUIRREL);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);

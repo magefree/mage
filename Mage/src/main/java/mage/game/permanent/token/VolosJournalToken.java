@@ -24,7 +24,7 @@ public final class VolosJournalToken extends TokenImpl {
 
     public VolosJournalToken() {
         super("Volo's Journal", "Volo's Journal, a legendary colorless artifact token with hexproof and \"Whenever you cast a creature spell, note one of its creature types that hasn't been noted for this artifact.\"");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.cardType.add(CardType.ARTIFACT);
         this.addAbility(HexproofAbility.getInstance());
         this.addAbility(new SpellCastControllerTriggeredAbility(

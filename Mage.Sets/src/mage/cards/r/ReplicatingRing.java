@@ -25,7 +25,7 @@ public final class ReplicatingRing extends CardImpl {
     public ReplicatingRing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
 
         // {T}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());

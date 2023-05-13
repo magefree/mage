@@ -34,7 +34,7 @@ public final class ZadaHedronGrinder extends CardImpl {
 
     public ZadaHedronGrinder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN, SubType.ALLY);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

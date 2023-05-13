@@ -34,7 +34,7 @@ public final class TheKenrithsRoyalFuneral extends CardImpl {
     public TheKenrithsRoyalFuneral(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // When The Kenriths' Royal Funeral enters the battlefield, exile up to two target legendary creature cards from your graveyard. You draw X cards and you lose X life, where X is the greatest mana value among cards exiled this way.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TheKenrithsRoyalFuneralExileEffect());

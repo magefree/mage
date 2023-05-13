@@ -26,7 +26,7 @@ public final class KarnsTemporalSundering extends CardImpl {
 
     public KarnsTemporalSundering(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // (You may cast a legendary sorcery only if you control a legendary creature or planeswalker.)
         this.addAbility(new LegendarySpellAbility());

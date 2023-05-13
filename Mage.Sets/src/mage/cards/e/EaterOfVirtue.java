@@ -53,7 +53,7 @@ public final class EaterOfVirtue extends CardImpl {
     public EaterOfVirtue(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Whenever equipped creature dies, exile it.

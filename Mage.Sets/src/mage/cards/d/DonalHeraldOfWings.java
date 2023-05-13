@@ -40,7 +40,7 @@ public class DonalHeraldOfWings extends CardImpl {
     public DonalHeraldOfWings(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         this.addSubType(SubType.HUMAN);
         this.addSubType(SubType.WIZARD);

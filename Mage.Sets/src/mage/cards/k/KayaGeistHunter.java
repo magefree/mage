@@ -41,7 +41,7 @@ public final class KayaGeistHunter extends CardImpl {
     public KayaGeistHunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KAYA);
         this.setStartingLoyalty(3);
 

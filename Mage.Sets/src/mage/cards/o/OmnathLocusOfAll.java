@@ -24,7 +24,7 @@ public class OmnathLocusOfAll extends CardImpl {
 
     public OmnathLocusOfAll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B/P}{R}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.PHYREXIAN);
         this.addSubType(SubType.ELEMENTAL);
         this.power = new MageInt(4);

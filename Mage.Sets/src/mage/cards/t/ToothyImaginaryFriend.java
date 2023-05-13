@@ -29,7 +29,7 @@ public final class ToothyImaginaryFriend extends CardImpl {
     public ToothyImaginaryFriend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ILLUSION);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

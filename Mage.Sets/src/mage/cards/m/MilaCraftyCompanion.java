@@ -40,15 +40,14 @@ public final class MilaCraftyCompanion extends ModalDoubleFacesCard {
     public MilaCraftyCompanion(UUID ownerId, CardSetInfo setInfo) {
         super(
                 ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.FOX}, "{1}{W}{W}",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.FOX}, "{1}{W}{W}",
                 "Lukka, Wayward Bonder",
-                new CardType[]{CardType.PLANESWALKER}, new SubType[]{SubType.LUKKA}, "{4}{R}{R}"
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.PLANESWALKER}, new SubType[]{SubType.LUKKA}, "{4}{R}{R}"
         );
 
         // 1.
         // Mila, Crafty Companion
         // Legendary Creature - Fox
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getLeftHalfCard().setPT(2, 3);
 
         // Whenever an opponent attacks one or more planeswalkers you control, put a loyalty counter on each planeswalker you control.
@@ -62,7 +61,6 @@ public final class MilaCraftyCompanion extends ModalDoubleFacesCard {
         // 2.
         // Lukka, Wayward Bonder
         // Legendary Planeswalker - Lukka
-        this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getRightHalfCard().setStartingLoyalty(5);
 
         // +1: You may discard a card. If you do, draw a card. If a creature card was discarded this way, draw two cards instead.

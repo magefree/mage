@@ -27,7 +27,7 @@ public final class WrennAndSeven extends CardImpl {
     public WrennAndSeven(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.WRENN);
         this.setStartingLoyalty(5);
 

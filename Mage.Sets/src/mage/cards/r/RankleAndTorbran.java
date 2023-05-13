@@ -31,7 +31,7 @@ public final class RankleAndTorbran extends CardImpl {
     public RankleAndTorbran(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FAERIE);
         this.subtype.add(SubType.DWARF);
         this.power = new MageInt(3);

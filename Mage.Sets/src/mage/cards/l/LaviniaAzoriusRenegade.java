@@ -36,7 +36,7 @@ public final class LaviniaAzoriusRenegade extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

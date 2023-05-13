@@ -41,7 +41,7 @@ public final class KatildaDawnhartPrime extends CardImpl {
     public KatildaDawnhartPrime(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARLOCK);
         this.power = new MageInt(1);

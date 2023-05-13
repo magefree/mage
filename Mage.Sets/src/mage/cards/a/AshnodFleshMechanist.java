@@ -30,7 +30,7 @@ public final class AshnodFleshMechanist extends CardImpl {
 
     public AshnodFleshMechanist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.ARTIFICER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

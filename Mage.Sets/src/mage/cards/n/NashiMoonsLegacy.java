@@ -37,7 +37,7 @@ public final class NashiMoonsLegacy extends CardImpl {
     public NashiMoonsLegacy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.RAT);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(3);

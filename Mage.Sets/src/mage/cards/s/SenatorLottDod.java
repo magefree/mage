@@ -24,7 +24,7 @@ public final class SenatorLottDod extends CardImpl {
 
     public SenatorLottDod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NEIMOIDIAN);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(2);

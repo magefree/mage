@@ -28,7 +28,7 @@ public final class IG88B extends CardImpl {
 
     public IG88B(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DROID);
         this.subtype.add(SubType.HUNTER);
         this.power = new MageInt(1);

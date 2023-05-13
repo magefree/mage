@@ -39,7 +39,7 @@ public final class ZaskSkitteringSwarmlord extends CardImpl {
 
     public ZaskSkitteringSwarmlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.INSECT);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

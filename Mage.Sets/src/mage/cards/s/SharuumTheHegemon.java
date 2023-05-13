@@ -22,7 +22,7 @@ public final class SharuumTheHegemon extends CardImpl {
 
     public SharuumTheHegemon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{W}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPHINX);
 
         this.power = new MageInt(5);

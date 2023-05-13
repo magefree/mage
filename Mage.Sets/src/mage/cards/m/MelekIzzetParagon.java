@@ -35,7 +35,7 @@ public final class MelekIzzetParagon extends CardImpl {
 
     public MelekIzzetParagon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.WEIRD);
         this.subtype.add(SubType.WIZARD);
 

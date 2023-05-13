@@ -29,7 +29,7 @@ public final class GandalfFriendOfTheShire extends CardImpl {
     public GandalfFriendOfTheShire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AVATAR);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);

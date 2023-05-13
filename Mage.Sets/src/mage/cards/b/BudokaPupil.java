@@ -63,7 +63,7 @@ class IchigaWhoTopplesOaks extends TokenImpl {
 
     IchigaWhoTopplesOaks() {
         super("Ichiga, Who Topples Oaks", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.SPIRIT);

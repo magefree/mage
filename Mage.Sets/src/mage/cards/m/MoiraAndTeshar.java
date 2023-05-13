@@ -43,7 +43,7 @@ public final class MoiraAndTeshar extends CardImpl {
   public MoiraAndTeshar(UUID ownerId, CardSetInfo setInfo) {
 
     super(ownerId, setInfo, new CardType[] { CardType.CREATURE }, "{3}{W}{B}");
-    addSuperType(SuperType.LEGENDARY);
+    this.supertype.add(SuperType.LEGENDARY);
     this.subtype.add(SubType.PHYREXIAN);
     this.subtype.add(SubType.SPIRIT);
     this.subtype.add(SubType.BIRD);

@@ -27,7 +27,7 @@ public final class EdginLarcenousLutenist extends CardImpl {
     public EdginLarcenousLutenist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.BARD);
         this.power = new MageInt(3);

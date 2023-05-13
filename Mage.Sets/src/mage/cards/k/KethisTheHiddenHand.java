@@ -37,7 +37,7 @@ public final class KethisTheHiddenHand extends CardImpl {
     public KethisTheHiddenHand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(3);

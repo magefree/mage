@@ -28,7 +28,7 @@ public final class ObNixilisOfTheBlackOath extends CardImpl {
 
     public ObNixilisOfTheBlackOath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NIXILIS);
 
         this.setStartingLoyalty(3);

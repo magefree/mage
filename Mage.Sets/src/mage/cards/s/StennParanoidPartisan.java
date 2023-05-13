@@ -24,7 +24,7 @@ public class StennParanoidPartisan extends CardImpl {
     public StennParanoidPartisan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         addSubType(SubType.HUMAN, SubType.WIZARD);
 
         this.power = new MageInt(2);
