@@ -38,9 +38,9 @@ public abstract class MageObjectImpl implements MageObject {
     private String cardNumber = "";
     private int imageNumber = 0;
 
+    protected List<SuperType> supertype = new ArrayList<>();
     protected List<CardType> cardType = new ArrayList<>();
     protected SubTypes subtype = new SubTypes();
-    protected Set<SuperType> supertype = EnumSet.noneOf(SuperType.class);
     protected Abilities<Ability> abilities;
 
     protected String text;
@@ -146,7 +146,14 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public Set<SuperType> getSuperType() {
+    public List<SuperType> getSuperType(Game game) {
+        if (game != null) {
+            // dynamic
+            MageObjectAttribute mageObjectAttribute = game.getState().getMageObjectAttribute(getId());
+            if (mageObjectAttribute != null) {
+                return mageObjectAttribute.getSuperType();
+            }
+        }
         return supertype;
     }
 

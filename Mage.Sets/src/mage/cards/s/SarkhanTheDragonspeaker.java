@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -20,6 +19,8 @@ import mage.game.Game;
 import mage.game.command.emblems.SarkhanTheDragonspeakerEmblem;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * import mage.game.command.emblems.SarkhanTheDragonspeakerEmblem;
@@ -92,8 +93,8 @@ class SarkhanTheDragonspeakerEffect extends ContinuousEffectImpl {
                         permanent.addCardType(game, CardType.CREATURE);
                         permanent.removeAllSubTypes(game);
                         permanent.addSubType(game, SubType.DRAGON);
-                        permanent.getSuperType().clear();
-                        permanent.addSuperType(SuperType.LEGENDARY);
+                        permanent.removeAllSuperTypes(game);
+                        permanent.addSuperType(game, SuperType.LEGENDARY);
                     }
                     break;
                 case ColorChangingEffects_5:

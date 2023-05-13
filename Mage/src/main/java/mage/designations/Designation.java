@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.ObjectColor;
-import mage.abilities.Abilities;
-import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
@@ -16,17 +14,17 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
-import mage.util.GameLog;
 import mage.util.SubTypes;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author LevelX2
  */
 public abstract class Designation extends MageObjectImpl {
 
-    private static final List<CardType> emptyList = Collections.unmodifiableList(new ArrayList<>());
     private static final ObjectColor emptyColor = new ObjectColor();
     private static final ManaCostsImpl emptyCost = new ManaCostsImpl<>();
 
@@ -93,7 +91,7 @@ public abstract class Designation extends MageObjectImpl {
 
     @Override
     public List<CardType> getCardType(Game game) {
-        return emptyList;
+        return Collections.emptyList();
     }
 
     @Override
@@ -112,8 +110,8 @@ public abstract class Designation extends MageObjectImpl {
     }
 
     @Override
-    public EnumSet<SuperType> getSuperType() {
-        return EnumSet.noneOf(SuperType.class);
+    public List<SuperType> getSuperType(Game game) {
+        return Collections.emptyList();
     }
 
     @Override

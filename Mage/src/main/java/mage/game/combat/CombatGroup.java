@@ -134,11 +134,11 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                             }
                         }
                         if (ability.getSupertype() != null) {
-                            if (perm.getSuperType().contains(ability.getSupertype())) {
+                            if (perm.getSuperType(game).contains(ability.getSupertype())) {
                                 for (UUID bandedId : creatureIds) {
                                     if (!bandedId.equals(creatureId)) {
                                         Permanent banded = game.getPermanent(bandedId);
-                                        if (banded != null && banded.getSuperType().contains(ability.getSupertype())) {
+                                        if (banded != null && banded.getSuperType(game).contains(ability.getSupertype())) {
                                             return true;
                                         }
                                     }

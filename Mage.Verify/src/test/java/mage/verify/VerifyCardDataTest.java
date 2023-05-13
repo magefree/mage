@@ -20,7 +20,6 @@ import mage.cards.repository.*;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.game.command.Dungeon;
 import mage.game.command.Plane;
 import mage.game.draft.DraftCube;
@@ -1064,7 +1063,7 @@ public class VerifyCardDataTest {
                 }
 
                 // CHECK: all planeswalkers must be legendary
-                if (card.isPlaneswalker() && !card.getSuperType().contains(SuperType.LEGENDARY)) {
+                if (card.isPlaneswalker() && !card.isLegendary()) {
                     errorsList.add("Error: planeswalker must have legendary type: " + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
 
@@ -2248,12 +2247,12 @@ public class VerifyCardDataTest {
                 fail(card, "rarity", "basic land must be Rarity.LAND");
             }
 
-            if (!card.getSuperType().contains(SuperType.BASIC)) {
+            if (!card.isBasic()) {
                 fail(card, "supertype", "basic land must be SuperType.BASIC");
             }
         } else if (name.equals("Wastes")) {
             // Wastes are SuperType.BASIC but not necessarily Rarity.LAND
-            if (!card.getSuperType().contains(SuperType.BASIC)) {
+            if (!card.isBasic()) {
                 fail(card, "supertype", "Wastes must be SuperType.BASIC");
             }
         } else {
@@ -2262,7 +2261,7 @@ public class VerifyCardDataTest {
                 fail(card, "rarity", "only basic land can be Rarity.LAND");
             }
 
-            if (card.getSuperType().contains(SuperType.BASIC)) {
+            if (card.isBasic()) {
                 fail(card, "supertype", "only basic land can be SuperType.BASIC");
             }
         }

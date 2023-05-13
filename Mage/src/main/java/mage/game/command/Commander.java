@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
-import mage.util.GameLog;
 import mage.util.SubTypes;
 
 import java.util.HashSet;
@@ -181,8 +180,8 @@ public class Commander extends CommandObjectImpl {
     }
 
     @Override
-    public Set<SuperType> getSuperType() {
-        return sourceObject.getSuperType();
+    public List<SuperType> getSuperType(Game game) {
+        return sourceObject.getSuperType(game);
     }
 
     @Override

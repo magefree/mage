@@ -9,7 +9,6 @@ import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -90,7 +89,7 @@ class KethisTheHiddenHandEffect extends ContinuousEffectImpl {
                 .stream()
                 .map(game::getCard)
                 .filter(Objects::nonNull)
-                .filter(Card::isLegendary)
+                .filter(card1 -> card1.isLegendary(game))
                 .forEach(card -> affectedObjectList.add(new MageObjectReference(card, game)));
     }
 

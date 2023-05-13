@@ -13,7 +13,9 @@ import mage.util.CardUtil;
 import mage.util.SubTypes;
 import org.apache.log4j.Logger;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -363,8 +365,8 @@ public class CardInfo {
         this.subtypes = joinList(subtypes);
     }
 
-    public final Set<SuperType> getSupertypes() {
-        Set<SuperType> list = EnumSet.noneOf(SuperType.class);
+    public final List<SuperType> getSupertypes() {
+        List<SuperType> list = new ArrayList<>();
         for (String type : this.supertypes.split(SEPARATOR)) {
             try {
                 list.add(SuperType.valueOf(type));
@@ -374,7 +376,7 @@ public class CardInfo {
         return list;
     }
 
-    public final void setSuperTypes(Set<SuperType> superTypes) {
+    public final void setSuperTypes(List<SuperType> superTypes) {
         StringBuilder sb = new StringBuilder();
         for (SuperType item : superTypes) {
             sb.append(item.name()).append(SEPARATOR);

@@ -92,7 +92,7 @@ class InstrumentOfTheBardsEffect extends OneShotEffect {
             if (card != null) {
                 controller.revealCards(permanent.getIdName(), new CardsImpl(card), game);
                 controller.moveCards(card, Zone.HAND, source, game);
-                if (card.isLegendary()) {
+                if (card.isLegendary(game)) {
                     new TreasureToken().putOntoBattlefield(1, game, source, source.getControllerId());
                 }
             }

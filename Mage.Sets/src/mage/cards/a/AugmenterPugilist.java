@@ -30,7 +30,7 @@ public final class AugmenterPugilist extends ModalDoubleFacesCard {
         super(ownerId, setInfo,
                 new CardType[]{CardType.CREATURE}, new SubType[]{SubType.TROLL, SubType.DRUID}, "{1}{G}{G}",
                 "Echoing Equation", new CardType[]{CardType.SORCERY}, new SubType[]{}, "{3}{U}{U}");
-        
+
         // 1.
         // Augmenter Pugilist
         // Creature — Troll Druid
@@ -99,7 +99,7 @@ class EchoingEquationEffect extends OneShotEffect {
                 .forEach(copyTo -> game.copyPermanent(Duration.EndOfTurn, copyFrom, copyTo.getId(), source, new CopyApplier() {
                     @Override
                     public boolean apply(Game game, MageObject blueprint, Ability source, UUID targetObjectId) {
-                        blueprint.getSuperType().remove(SuperType.LEGENDARY);
+                        blueprint.removeSuperType(SuperType.LEGENDARY);
                         return true;
                     }
                 }));

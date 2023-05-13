@@ -82,7 +82,7 @@ class EllywickTumblestrumEffect extends OneShotEffect {
             player.revealCards(source, new CardsImpl(card), game);
             player.moveCards(card, Zone.HAND, source, game);
             cards.remove(card);
-            if (card.isLegendary()) {
+            if (card.isLegendary(game)) {
                 player.gainLife(3, game, source);
             }
         }

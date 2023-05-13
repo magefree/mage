@@ -128,11 +128,11 @@ class TheKenrithsRoyalFuneralCostEffect extends CostModificationEffectImpl {
         }
         if (!game.inCheckPlayableState()) {
             Spell spell = (Spell) game.getSpell(abilityToModify.getId());
-            return spell != null && spell.isLegendary();
+            return spell != null && spell.isLegendary(game);
         }
         // Spell is not on the stack yet, but possible playable spells are determined
         Card sourceCard = game.getCard(abilityToModify.getSourceId());
-        return sourceCard != null && sourceCard.isLegendary();
+        return sourceCard != null && sourceCard.isLegendary(game);
     }
 
     @Override

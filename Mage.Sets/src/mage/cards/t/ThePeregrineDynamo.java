@@ -75,7 +75,7 @@ enum ThePeregrineDynamoPredicate implements ObjectSourcePlayerPredicate<StackObj
         MageObject sourceObject = ((StackAbility) input.getObject()).getSourceObject(game);
         return sourceObject != null
                 && !sourceObject.getId().equals(input.getSourceId())
-                && sourceObject.isLegendary()
+                && sourceObject.isLegendary(game)
                 && !CommanderPredicate.instance.apply(sourceObject, game);
     }
 }

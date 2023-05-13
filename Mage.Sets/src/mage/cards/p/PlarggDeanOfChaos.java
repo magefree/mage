@@ -121,7 +121,7 @@ class PlarggDeanOfChaosEffect extends OneShotEffect {
             Card eligibleCard = null;
             for (Card card : controller.getLibrary().getCards(game)) {
                 toReveal.add(card);
-                if (!card.isLand(game) && !card.isLegendary() && card.getManaValue() < 4) {
+                if (!card.isLand(game) && !card.isLegendary(game) && card.getManaValue() < 4) {
                     eligibleCard = card;
                     break;
                 }

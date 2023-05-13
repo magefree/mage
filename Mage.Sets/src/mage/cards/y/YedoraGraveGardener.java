@@ -116,7 +116,7 @@ class YedoraGraveGardenerContinuousEffect extends ContinuousEffectImpl {
             discard();
             return false;
         }
-        target.getSuperType().clear();
+        target.removeAllSuperTypes(game);
         target.removeAllCardTypes(game);
         target.removeAllSubTypes(game);
         target.addCardType(game, CardType.LAND);

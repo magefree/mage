@@ -71,7 +71,7 @@ public class CardView extends SimpleCardView {
     protected String startingDefense;
     protected List<CardType> cardTypes;
     protected SubTypes subTypes;
-    protected Set<SuperType> superTypes;
+    protected List<SuperType> superTypes;
     protected ObjectColor color;
     protected ObjectColor frameColor;
     protected FrameStyle frameStyle;
@@ -256,7 +256,7 @@ public class CardView extends SimpleCardView {
 
     private static String getCardTypeLine(Game game, Card card) {
         StringBuilder sbType = new StringBuilder();
-        for (SuperType superType : card.getSuperType()) {
+        for (SuperType superType : card.getSuperType(game)) {
             sbType.append(superType).append(' ');
         }
         for (CardType cardType : card.getCardType(game)) {
@@ -479,7 +479,7 @@ public class CardView extends SimpleCardView {
         this.toughness = Integer.toString(card.getToughness().getValue());
         this.cardTypes = new ArrayList<>(card.getCardType(game));
         this.subTypes = new SubTypes(card.getSubtype(game));
-        this.superTypes = card.getSuperType();
+        this.superTypes = card.getSuperType(game);
         this.color = card.getColor(game).copy();
         this.flipCard = card.isFlipCard();
         this.faceDown = !showFaceUp;
@@ -626,7 +626,7 @@ public class CardView extends SimpleCardView {
         }
         this.cardTypes = new ArrayList<>(object.getCardType(game));
         this.subTypes = new SubTypes(object.getSubtype(game));
-        this.superTypes = object.getSuperType();
+        this.superTypes = new ArrayList<>(object.getSuperType(game));
         this.color = object.getColor(game).copy();
         this.manaCostLeftStr = String.join("", object.getManaCostSymbols());
         this.manaCostRightStr = "";
@@ -778,7 +778,7 @@ public class CardView extends SimpleCardView {
         this.startingDefense = "";
         this.cardTypes = new ArrayList<>();
         this.subTypes = new SubTypes();
-        this.superTypes = EnumSet.noneOf(SuperType.class);
+        this.superTypes = new ArrayList<>();
         this.color = new ObjectColor();
         this.frameColor = new ObjectColor();
         this.frameStyle = FrameStyle.M15_NORMAL;
@@ -830,7 +830,7 @@ public class CardView extends SimpleCardView {
         this.startingDefense = "";
         this.cardTypes = new ArrayList<>(token.getCardType(game));
         this.subTypes = new SubTypes(token.getSubtype(game));
-        this.superTypes = token.getSuperType();
+        this.superTypes = new ArrayList<>(token.getSuperType(game));
         this.color = token.getColor(game).copy();
         this.frameColor = token.getFrameColor(game).copy();
         this.frameStyle = token.getFrameStyle();
@@ -939,7 +939,7 @@ public class CardView extends SimpleCardView {
         return subTypes;
     }
 
-    public Set<SuperType> getSuperTypes() {
+    public List<SuperType> getSuperTypes() {
         return superTypes;
     }
 

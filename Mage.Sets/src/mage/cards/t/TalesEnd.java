@@ -48,6 +48,6 @@ enum TalesEndPredicate implements Predicate<StackObject> {
 
     @Override
     public boolean apply(StackObject input, Game game) {
-        return !(input instanceof Spell) || input.isLegendary();
+        return !(input instanceof Spell) || input.isLegendary(game);
     }
 }

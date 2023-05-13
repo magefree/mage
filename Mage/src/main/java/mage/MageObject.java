@@ -19,22 +19,27 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 public interface MageObject extends MageItem, Serializable, Copyable<MageObject> {
 
     String getExpansionSetCode();
+
     void setExpansionSetCode(String expansionSetCode);
 
     String getCardNumber();
+
     void setCardNumber(String cardNumber);
 
     Integer getImageNumber();
+
     void setImageNumber(Integer imageNumber);
 
     String getName();
+
     String getIdName();
+
     String getLogName();
+
     void setName(String name);
 
     default List<CardType> getCardType() {
@@ -66,7 +71,11 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
 
     boolean hasSubtype(SubType subtype, Game game);
 
-    Set<SuperType> getSuperType();
+    default List<SuperType> getSuperType() {
+        return getSuperType(null);
+    }
+
+    List<SuperType> getSuperType(Game game);
 
     /**
      * For cards: return basic abilities (without dynamic added)
@@ -143,7 +152,7 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
 
     default boolean isHistoric(Game game) {
         return getCardType(game).contains(CardType.ARTIFACT)
-                || getSuperType().contains(SuperType.LEGENDARY)
+                || getSuperType(game).contains(SuperType.LEGENDARY)
                 || hasSubtype(SubType.SAGA, game);
     }
 
@@ -236,30 +245,85 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
     }
 
     default boolean isLegendary() {
-        return getSuperType().contains(SuperType.LEGENDARY);
+        return isLegendary(null);
+    }
+
+    default boolean isLegendary(Game game) {
+        return getSuperType(game).contains(SuperType.LEGENDARY);
     }
 
     default boolean isSnow() {
-        return getSuperType().contains(SuperType.SNOW);
+        return isSnow(null);
     }
 
-    default void addSuperType(SuperType superType) {
-        if (getSuperType().contains(superType)) {
-            return;
-        }
-        getSuperType().add(superType);
-    }
-
-    default void removeSuperType(SuperType superType) {
-        getSuperType().remove(superType);
+    default boolean isSnow(Game game) {
+        return getSuperType(game).contains(SuperType.SNOW);
     }
 
     default boolean isBasic() {
-        return getSuperType().contains(SuperType.BASIC);
+        return isBasic(null);
+    }
+
+    default boolean isBasic(Game game) {
+        return getSuperType(game).contains(SuperType.BASIC);
     }
 
     default boolean isWorld() {
-        return getSuperType().contains(SuperType.WORLD);
+        return isWorld(null);
+    }
+
+    default boolean isWorld(Game game) {
+        return getSuperType(game).contains(SuperType.WORLD);
+    }
+
+    default void addSuperType(SuperType superType) {
+        addSuperType(null, superType);
+    }
+
+    default void addSuperType(Game game, SuperType superType) {
+        List<SuperType> currentSuperTypes;
+        if (game != null) {
+            // dynamic
+            currentSuperTypes = game.getState().getCreateMageObjectAttribute(this, game).getSuperType();
+        } else {
+            // static
+            currentSuperTypes = getSuperType();
+        }
+        if (!currentSuperTypes.contains(superType)) {
+            currentSuperTypes.add(superType);
+        }
+    }
+
+    default void removeAllSuperTypes() {
+        removeAllSuperTypes(null);
+    }
+
+    default void removeAllSuperTypes(Game game) {
+        List<SuperType> currentSuperTypes;
+        if (game != null) {
+            // dynamic
+            currentSuperTypes = game.getState().getCreateMageObjectAttribute(this, game).getSuperType();
+        } else {
+            // static
+            currentSuperTypes = getSuperType();
+        }
+        currentSuperTypes.clear();
+    }
+
+    default void removeSuperType(SuperType superType) {
+        removeSuperType(null, superType);
+    }
+
+    default void removeSuperType(Game game, SuperType superType) {
+        List<SuperType> currentSuperTypes;
+        if (game != null) {
+            // dynamic
+            currentSuperTypes = game.getState().getCreateMageObjectAttribute(this, game).getSuperType();
+        } else {
+            // static
+            currentSuperTypes = getSuperType();
+        }
+        currentSuperTypes.remove(superType);
     }
 
     /**

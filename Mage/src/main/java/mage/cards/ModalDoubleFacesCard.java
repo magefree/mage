@@ -16,7 +16,6 @@ import mage.util.CardUtil;
 import mage.util.SubTypes;
 
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -181,10 +180,10 @@ public abstract class ModalDoubleFacesCard extends CardImpl implements CardWithH
     }
 
     @Override
-    public Set<SuperType> getSuperType() {
+    public List<SuperType> getSuperType(Game game) {
         // CardImpl's constructor can call some code on init, so you must check left/right before
         // it's a bad workaround
-        return leftHalfCard != null ? leftHalfCard.getSuperType() : supertype;
+        return leftHalfCard != null ? leftHalfCard.getSuperType(game) : supertype;
     }
 
     @Override

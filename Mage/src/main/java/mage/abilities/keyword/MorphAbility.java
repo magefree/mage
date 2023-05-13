@@ -152,7 +152,7 @@ public class MorphAbility extends AlternativeSourceCostsImpl {
         targetObject.removeAllCardTypes(game);
         targetObject.addCardType(game, CardType.CREATURE);
         targetObject.removeAllSubTypes(game);
-        targetObject.getSuperType().clear();
+        targetObject.removeAllSuperTypes(game);
         targetObject.getManaCost().clear();
 
         Token emptyImage = new EmptyToken();

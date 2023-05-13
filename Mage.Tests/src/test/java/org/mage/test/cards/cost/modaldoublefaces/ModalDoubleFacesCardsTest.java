@@ -258,7 +258,7 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
 
         // stats in hand - mdf
         card = getHandCards(playerA).stream().filter(c -> CardUtil.haveSameNames(c, "Halvar, God of Battle", currentGame)).findFirst().get();
-        Assert.assertTrue("must be legendary", card.isLegendary());
+        Assert.assertTrue("must be legendary", card.isLegendary(currentGame));
         Assert.assertTrue("must be creature", card.isCreature(currentGame));
         Assert.assertTrue("must be god", card.hasSubtype(SubType.GOD, currentGame));
 
