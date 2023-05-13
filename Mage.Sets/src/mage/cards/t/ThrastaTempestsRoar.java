@@ -50,7 +50,7 @@ public final class ThrastaTempestsRoar extends CardImpl {
         // Thrasta has hexproof as long as it entered the battlefield this turn.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield),
-                ThrastaCondition.instance, "{this} has hexproof as long as it entered the battlefield this turn"
+                ThrastaCondition.INSTANCE, "{this} has hexproof as long as it entered the battlefield this turn"
         )));
     }
 
@@ -93,7 +93,7 @@ enum ThrastaDynamicValue implements DynamicValue {
 }
 
 enum ThrastaCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

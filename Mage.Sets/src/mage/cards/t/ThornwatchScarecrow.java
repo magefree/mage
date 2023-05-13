@@ -34,8 +34,8 @@ public final class ThornwatchScarecrow extends CardImpl {
         filter2.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
-    private static final String rule = "{this} has wither as long as you control a green creature";
-    private static final String rule2 = "{this} has vigilance as long as you control a white creature";
+    private static final String RULE = "{this} has wither as long as you control a green creature";
+    private static final String RULE2 = "{this} has vigilance as long as you control a white creature";
 
     public ThornwatchScarecrow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");
@@ -45,11 +45,11 @@ public final class ThornwatchScarecrow extends CardImpl {
 
         // Thornwatch Scarecrow has wither as long as you control a green creature.
         ContinuousEffect effect = new GainAbilitySourceEffect(WitherAbility.getInstance(), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect, new PermanentsOnTheBattlefieldCondition(filter), rule)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect, new PermanentsOnTheBattlefieldCondition(filter), RULE)));
 
         // Thornwatch Scarecrow has vigilance as long as you control a white creature.
         ContinuousEffect effect2 = new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect2, new PermanentsOnTheBattlefieldCondition(filter2), rule2)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect2, new PermanentsOnTheBattlefieldCondition(filter2), RULE2)));
         
     }
 

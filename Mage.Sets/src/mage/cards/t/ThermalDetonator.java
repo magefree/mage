@@ -24,7 +24,6 @@ import mage.target.common.TargetCreatureOrPlayer;
 public final class ThermalDetonator extends CardImpl {
 
     private static final FilterCreatureOrPlayer filter = new FilterCreatureOrPlayer("creature without spaceflight or target player");
-    private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent();
 
     static {
         filter.getCreatureFilter().add(Predicates.not(new AbilityPredicate(SpaceflightAbility.class)));

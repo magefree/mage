@@ -16,14 +16,13 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public final class ToArms extends CardImpl {
 
-     private static final String rule = "untap all creatures you control";
+     private static final String RULE = "untap all creatures you control";
       
     public ToArms(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
-
         // Untap all creatures you control.
-        Effect effect = new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), rule);
+        Effect effect = new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), RULE);
         this.getSpellAbility().addEffect(effect);
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));

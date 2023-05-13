@@ -135,17 +135,15 @@ class TombstoneStairwellTriggeredAbility extends TriggeredAbilityImpl {
                 }
                 return true;
             }
-        } else if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            if (event.getTargetId().equals(this.getSourceId())) {
-                ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-                if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-                    for (Effect effect : this.getEffects()) {
-                        if (effect instanceof TombstoneStairwellDestroyEffect) {
-                            ((TombstoneStairwellDestroyEffect) effect).setCardZoneString(CardUtil.getCardZoneString("_tokensCreated", this.getSourceId(), game, true));
-                        }
+        } else if (event.getType() == GameEvent.EventType.ZONE_CHANGE && (event.getTargetId().equals(this.getSourceId()))) {
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+            if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
+                for (Effect effect : this.getEffects()) {
+                    if (effect instanceof TombstoneStairwellDestroyEffect) {
+                        ((TombstoneStairwellDestroyEffect) effect).setCardZoneString(CardUtil.getCardZoneString("_tokensCreated", this.getSourceId(), game, true));
                     }
-                    return true;
                 }
+                return true;
             }
         }
         return false;

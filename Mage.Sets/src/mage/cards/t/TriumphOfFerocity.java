@@ -17,15 +17,14 @@ import mage.constants.TargetController;
  */
 public final class TriumphOfFerocity extends CardImpl {
 
-    private static final String ruleText = "At the beginning of your upkeep, draw a card if you control the creature with the greatest power or tied for the greatest power";
+    private static final String RULE_TEXT = "At the beginning of your upkeep, draw a card if you control the creature with the greatest power or tied for the greatest power";
 
     public TriumphOfFerocity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
 
-
         // At the beginning of your upkeep, draw a card if you control the creature with the greatest power or tied for the greatest power.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(1), TargetController.YOU, false);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, ControlsCreatureGreatestPowerCondition.instance, ruleText));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, ControlsCreatureGreatestPowerCondition.instance, RULE_TEXT));
     }
 
     private TriumphOfFerocity(final TriumphOfFerocity card) {

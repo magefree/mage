@@ -27,7 +27,7 @@ import java.util.UUID;
  */
 public final class UnboundFlourishing extends CardImpl {
 
-    final static String needPrefix = "_UnboundFlourishing_NeedCopy";
+    static final String needPrefix = "_UnboundFlourishing_NeedCopy";
 
     public UnboundFlourishing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
@@ -122,22 +122,18 @@ class UnboundFlourishingCopyAbility extends TriggeredAbilityImpl {
         // activated ability
         if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY) {
             StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-            if (stackAbility != null && !(stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl)) {
-                if (stackAbility.getManaCostsToPay().containsX()) {
-                    game.getState().setValue(this.getSourceId() + UnboundFlourishing.needPrefix, stackAbility);
-                    return true;
-                }
+            if (stackAbility != null && !(stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl) && stackAbility.getManaCostsToPay().containsX()) {
+                game.getState().setValue(this.getSourceId() + UnboundFlourishing.needPrefix, stackAbility);
+                return true;
             }
         }
 
         // spell
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.isInstantOrSorcery(game)) {
-                if (spell.getSpellAbility().getManaCostsToPay().containsX()) {
-                    game.getState().setValue(this.getSourceId() + UnboundFlourishing.needPrefix, spell);
-                    return true;
-                }
+            if (spell != null && spell.isInstantOrSorcery(game) && spell.getSpellAbility().getManaCostsToPay().containsX()) {
+                game.getState().setValue(this.getSourceId() + UnboundFlourishing.needPrefix, spell);
+                return true;
             }
         }
         return false;
@@ -164,7 +160,6 @@ class UnboundFlourishingCopyEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (player != null && controller != null) {
             Object needObject = game.getState().getValue(source.getSourceId() + UnboundFlourishing.needPrefix);
 

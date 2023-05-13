@@ -81,10 +81,8 @@ class ToppleTargetCreature extends TargetCreaturePermanent {
             }
         }
         for (Permanent permanent : activePermanents) {
-            if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
-                if (permanent.getPower().getValue() == maxPower) {
-                    possibleTargets.add(permanent.getId());
-                }
+            if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && (permanent.getPower().getValue() == maxPower)) {
+                possibleTargets.add(permanent.getId());
             }
         }
         return possibleTargets;

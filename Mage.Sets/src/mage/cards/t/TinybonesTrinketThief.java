@@ -41,7 +41,7 @@ public final class TinybonesTrinketThief extends CardImpl {
                 new BeginningOfEndStepTriggeredAbility(
                         new DrawCardSourceControllerEffect(1),
                         TargetController.EACH_PLAYER, false
-                ), TinybonesTrinketThiefCondition.instance, "At the beginning of each end step, " +
+                ), TinybonesTrinketThiefCondition.INSTANCE, "At the beginning of each end step, " +
                 "if an opponent discarded a card this turn, you draw a card and you lose 1 life."
         );
         ability.addEffect(new LoseLifeSourceControllerEffect(1));
@@ -62,7 +62,7 @@ public final class TinybonesTrinketThief extends CardImpl {
 }
 
 enum TinybonesTrinketThiefCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

@@ -31,7 +31,6 @@ import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -97,44 +96,42 @@ class TayamLuminousEnigmaCost extends RemoveCounterCost {
         for (int i = 0; i < countersToRemove; i++) {
             if (target.choose(Outcome.UnboostCreature, controllerId, source.getSourceId(), source, game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
-                if (permanent != null) {
-                    if (!permanent.getCounters(game).isEmpty()) {
-                        String counterName = null;
-                        if (permanent.getCounters(game).size() > 1) {
-                            Choice choice = new ChoiceImpl(true);
-                            Set<String> choices = new LinkedHashSet<>();
-                            for (Counter counter : permanent.getCounters(game).values()) {
-                                if (permanent.getCounters(game).getCount(counter.getName()) > 0) {
-                                    choices.add(counter.getName());
-                                }
-                            }
-                            choice.setChoices(choices);
-                            choice.setMessage("Choose a counter to remove from " + permanent.getLogName());
-                            if (!controller.choose(Outcome.UnboostCreature, choice, game)) {
-                                return false;
-                            }
-                            counterName = choice.getChoice();
-                        } else {
-                            for (Counter counter : permanent.getCounters(game).values()) {
-                                if (counter.getCount() > 0) {
-                                    counterName = counter.getName();
-                                }
+                if (permanent != null && !permanent.getCounters(game).isEmpty()) {
+                    String counterName = null;
+                    if (permanent.getCounters(game).size() > 1) {
+                        Choice choice = new ChoiceImpl(true);
+                        Set<String> choices = new LinkedHashSet<>();
+                        for (Counter counter : permanent.getCounters(game).values()) {
+                            if (permanent.getCounters(game).getCount(counter.getName()) > 0) {
+                                choices.add(counter.getName());
                             }
                         }
-                        if (counterName != null) {
-                            permanent.removeCounters(counterName, 1, source, game);
-                            target.clearChosen();
-                            if (!game.isSimulation()) {
-                                game.informPlayers(new StringBuilder(controller.getLogName())
-                                        .append(" removes a ")
-                                        .append(counterName).append(" counter from ")
-                                        .append(permanent.getName()).toString());
+                        choice.setChoices(choices);
+                        choice.setMessage("Choose a counter to remove from " + permanent.getLogName());
+                        if (!controller.choose(Outcome.UnboostCreature, choice, game)) {
+                            return false;
+                        }
+                        counterName = choice.getChoice();
+                    } else {
+                        for (Counter counter : permanent.getCounters(game).values()) {
+                            if (counter.getCount() > 0) {
+                                counterName = counter.getName();
                             }
-                            countersRemoved++;
-                            if (countersRemoved == countersToRemove) {
-                                paid = true;
-                                break;
-                            }
+                        }
+                    }
+                    if (counterName != null) {
+                        permanent.removeCounters(counterName, 1, source, game);
+                        target.clearChosen();
+                        if (!game.isSimulation()) {
+                            game.informPlayers(controller.getLogName() +
+                                    " removes a " +
+                                    counterName + " counter from " +
+                                    permanent.getName());
+                        }
+                        countersRemoved++;
+                        if (countersRemoved == countersToRemove) {
+                            paid = true;
+                            break;
                         }
                     }
                 }

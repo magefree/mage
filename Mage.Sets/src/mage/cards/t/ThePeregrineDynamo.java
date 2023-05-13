@@ -33,7 +33,7 @@ public final class ThePeregrineDynamo extends CardImpl {
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(ThePeregrineDynamoPredicate.instance);
+        filter.add(ThePeregrineDynamoPredicate.INSTANCE);
     }
 
     public ThePeregrineDynamo(UUID ownerId, CardSetInfo setInfo) {
@@ -65,7 +65,7 @@ public final class ThePeregrineDynamo extends CardImpl {
 }
 
 enum ThePeregrineDynamoPredicate implements ObjectSourcePlayerPredicate<StackObject> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {

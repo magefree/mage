@@ -36,7 +36,7 @@ import java.util.UUID;
 public final class TetsuoImperialChampion extends CardImpl {
 
     private static final Hint hint = new ValueHint(
-            "Greatest mana value of attached equipment", TetsuoImperialChampionValue.instance
+            "Greatest mana value of attached equipment", TetsuoImperialChampionValue.INSTANCE
     );
     private static final FilterCard filter = new FilterInstantOrSorceryCard(
             "an instant or sorcery spell from your hand with mana value " +
@@ -44,7 +44,7 @@ public final class TetsuoImperialChampion extends CardImpl {
     );
 
     static {
-        filter.add(TetsuoImperialChampionPredicate.instance);
+        filter.add(TetsuoImperialChampionPredicate.INSTANCE);
     }
 
     public TetsuoImperialChampion(UUID ownerId, CardSetInfo setInfo) {
@@ -60,7 +60,7 @@ public final class TetsuoImperialChampion extends CardImpl {
         // * Tetsuo deals damage equal to the highest mana value among Equipment attached to it to any target.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new AttacksTriggeredAbility(new DamageTargetEffect(
-                        TetsuoImperialChampionValue.instance, "it"
+                        TetsuoImperialChampionValue.INSTANCE, "it"
                 ).setText("{this} deals damage equal to the highest mana value " +
                         "among Equipment attached to it to any target")
                 ).setTriggerPhrase("Whenever {this} attacks, if it's equipped, "),
@@ -84,7 +84,7 @@ public final class TetsuoImperialChampion extends CardImpl {
 }
 
 enum TetsuoImperialChampionPredicate implements ObjectSourcePlayerPredicate<Card> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
@@ -92,13 +92,13 @@ enum TetsuoImperialChampionPredicate implements ObjectSourcePlayerPredicate<Card
                 .getObject()
                 .getManaValue()
                 <= TetsuoImperialChampionValue
-                .instance
+                .INSTANCE
                 .calculate(game, input.getSource(), null);
     }
 }
 
 enum TetsuoImperialChampionValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

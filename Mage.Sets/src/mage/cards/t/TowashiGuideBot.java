@@ -50,7 +50,7 @@ public final class TowashiGuideBot extends CardImpl {
         ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new GenericManaCost(4));
         ability.addEffect(new InfoEffect("This ability costs {1} less to activate for each modified creature you control"));
         ability.addCost(new TapSourceCost());
-        ability.setCostAdjuster(TowashiGuideBotAdjuster.instance);
+        ability.setCostAdjuster(TowashiGuideBotAdjuster.INSTANCE);
         this.addAbility(ability.addHint(TowashiGuideBotAdjuster.getHint()));
     }
 
@@ -65,7 +65,7 @@ public final class TowashiGuideBot extends CardImpl {
 }
 
 enum TowashiGuideBotAdjuster implements CostAdjuster {
-    instance;
+    INSTANCE;
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
 
     static {

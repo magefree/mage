@@ -32,7 +32,7 @@ public final class ThranPowerSuit extends CardImpl {
 
         // Equipped creature gets +1/+1 for each Aura and Equipment attached to it and has ward {2}.
         Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(
-                ThranPowerSuitValue.instance, ThranPowerSuitValue.instance
+                ThranPowerSuitValue.INSTANCE, ThranPowerSuitValue.INSTANCE
         ));
         ability.addEffect(new GainAbilityAttachedEffect(new WardAbility(
                 new GenericManaCost(2), false
@@ -54,7 +54,7 @@ public final class ThranPowerSuit extends CardImpl {
 }
 
 enum ThranPowerSuitValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -75,7 +75,7 @@ enum ThranPowerSuitValue implements DynamicValue {
 
     @Override
     public ThranPowerSuitValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

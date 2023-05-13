@@ -72,11 +72,9 @@ class CheeseStandsAloneContinuousEffect extends ContinuousRuleModifyingEffectImp
             if (controller.getHand().isEmpty()) {
                 int numberPerms = new PermanentsOnBattlefieldCount(new FilterControlledPermanent()).calculate(game, source, this);
                 if (numberPerms == 1) {
-                    if (game.getBattlefield().containsControlled(filter, source, game, 1)) {
-                        if (!wonAlready) {
-                            wonAlready = true;
-                            controller.won(game);
-                        }
+                    if (game.getBattlefield().containsControlled(filter, source, game, 1) && (!wonAlready)) {
+                        wonAlready = true;
+                        controller.won(game);
                     }
                 }
             }

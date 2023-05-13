@@ -25,7 +25,7 @@ public final class TwinningGlass extends CardImpl {
     private static final FilterCard filter = new FilterCard();
 
     static {
-        filter.add(TwinningGlassPredicate.instance);
+        filter.add(TwinningGlassPredicate.INSTANCE);
     }
 
     public TwinningGlass(UUID ownerId, CardSetInfo setInfo) {
@@ -53,7 +53,7 @@ public final class TwinningGlass extends CardImpl {
 }
 
 enum TwinningGlassPredicate implements Predicate<Card> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Card input, Game game) {

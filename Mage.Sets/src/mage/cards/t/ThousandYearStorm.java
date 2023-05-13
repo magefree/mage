@@ -3,7 +3,6 @@ package mage.cards.t;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -55,7 +54,7 @@ class ThousandYearStormAbility extends SpellCastControllerTriggeredAbility {
 
     public ThousandYearStormAbility() {
         super(Zone.BATTLEFIELD, new ThousandYearStormEffect(), StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false, true);
-        this.addHint(new ValueHint("You've cast instant and sorcery this turn", ThousandYearStormSpellsCastThatTurnValue.instance));
+        this.addHint(new ValueHint("You've cast instant and sorcery this turn", ThousandYearStormSpellsCastThatTurnValue.INSTANCE));
         this.stormCountInfo = null;
     }
 
@@ -177,8 +176,7 @@ class ThousandYearStormWatcher extends Watcher {
 }
 
 enum ThousandYearStormSpellsCastThatTurnValue implements DynamicValue {
-
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -191,7 +189,7 @@ enum ThousandYearStormSpellsCastThatTurnValue implements DynamicValue {
 
     @Override
     public ThousandYearStormSpellsCastThatTurnValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

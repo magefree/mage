@@ -22,7 +22,7 @@ import mage.constants.*;
  */
 public final class TrueFaithCenser extends CardImpl {
 
-    private static final String staticText = "As long as equipped creature is a Human, it gets an addtional +1/+0";
+    private static final String RULE_TEXT = "As long as equipped creature is a Human, it gets an additional +1/+0";
 
     public TrueFaithCenser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
@@ -40,7 +40,7 @@ public final class TrueFaithCenser extends CardImpl {
         // As long as equipped creature is a Human, it gets an additional +1/+0.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new BoostEquippedEffect(1, 0),
-                new EquippedHasSubtypeCondition(SubType.HUMAN), staticText)));
+                new EquippedHasSubtypeCondition(SubType.HUMAN), RULE_TEXT)));
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));

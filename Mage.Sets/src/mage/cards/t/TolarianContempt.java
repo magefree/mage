@@ -43,7 +43,7 @@ public final class TolarianContempt extends CardImpl {
         // At the beginning of your end step, for each opponent, choose up to one target creature they control with a rejection counter on it. That creature's owner puts it on the top or bottom of their library.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new TolarianContemptEffect(), TargetController.YOU, false
-        ).setTargetAdjuster(TolarianContemptAdjuster.instance));
+        ).setTargetAdjuster(TolarianContemptAdjuster.INSTANCE));
     }
 
     private TolarianContempt(final TolarianContempt card) {
@@ -57,7 +57,7 @@ public final class TolarianContempt extends CardImpl {
 }
 
 enum TolarianContemptAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

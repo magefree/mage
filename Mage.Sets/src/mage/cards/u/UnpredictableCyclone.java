@@ -90,7 +90,7 @@ class UnpredictableCycloneReplacementEffect extends ReplacementEffectImpl {
         player.moveCards(cards, Zone.EXILED, source, game);
         if (toCast != null && player.chooseUse(outcome, "Cast the exiled card?", source, game)) {
             game.getState().setValue("PlayFromNotOwnHandZone" + toCast.getId(), Boolean.TRUE);
-            Boolean cardWasCast = player.cast(player.chooseAbilityForCast(toCast, game, true),
+            boolean cardWasCast = player.cast(player.chooseAbilityForCast(toCast, game, true),
                     game, true, new ApprovingObject(source, game));
             game.getState().setValue("PlayFromNotOwnHandZone" + toCast.getId(), null);
             if (cardWasCast) {

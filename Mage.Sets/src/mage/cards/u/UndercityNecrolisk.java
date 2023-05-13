@@ -76,7 +76,4 @@ class SilencedActivateAsSorceryActivatedAbility extends ActivatedAbilityImpl {
     public SilencedActivateAsSorceryActivatedAbility copy() {
         return new SilencedActivateAsSorceryActivatedAbility(this);
     }
-
-    @Override
-    public String getRule() { return super.getRule(); }
 }

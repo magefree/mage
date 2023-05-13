@@ -190,7 +190,7 @@ class TurfWarControlEffect extends OneShotEffect {
         }
         FilterLandPermanent filter = new FilterLandPermanent("land with a contested counter controlled by " + damagedPlayer.getName());
         filter.add(new ControllerIdPredicate(damagedPlayer.getId()));
-        filter.add(TurfWarPredicate.instance);
+        filter.add(TurfWarPredicate.INSTANCE);
         TargetLandPermanent target = new TargetLandPermanent(1, 1, filter, true);
         if (!target.canChoose(creatureController.getId(), source, game)) {
             return false;
@@ -217,7 +217,7 @@ class TurfWarControlEffect extends OneShotEffect {
 }
 
 enum TurfWarPredicate implements Predicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Permanent input, Game game) {

@@ -93,13 +93,11 @@ class UlamogsNullifierEffect extends OneShotEffect {
         Spell spell = game.getStack().getSpell(source.getFirstTarget());
         if (controller != null && spell != null) {
             Target target = new TargetCardInExile(2, 2, filter, null);
-            if (target.canChoose(source.getControllerId(), source, game)) {
-                if (controller.chooseTarget(outcome, target, source, game)) {
-                    Cards cardsToGraveyard = new CardsImpl(target.getTargets());
-                    controller.moveCards(cardsToGraveyard, Zone.GRAVEYARD, source, game);
-                    game.getStack().counter(source.getFirstTarget(), source, game);
-                    return true;
-                }
+            if (target.canChoose(source.getControllerId(), source, game) && (controller.chooseTarget(outcome, target, source, game))) {
+                Cards cardsToGraveyard = new CardsImpl(target.getTargets());
+                controller.moveCards(cardsToGraveyard, Zone.GRAVEYARD, source, game);
+                game.getStack().counter(source.getFirstTarget(), source, game);
+                return true;
             }
         }
         return false;

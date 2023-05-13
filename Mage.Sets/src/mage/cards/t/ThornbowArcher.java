@@ -70,10 +70,8 @@ class ThornbowArcherEffect extends OneShotEffect {
         if (controller != null) {
             for (UUID opponentId : game.getOpponents(controller.getId())) {
                 Player opponent = game.getPlayer(opponentId);
-                if (opponent != null) {
-                    if (game.getBattlefield().countAll(filter, opponentId, game) == 0) {
-                        opponent.loseLife(1, game, source, false);
-                    }
+                if (opponent != null && (game.getBattlefield().countAll(filter, opponentId, game) == 0)) {
+                    opponent.loseLife(1, game, source, false);
                 }
             }
             return true;

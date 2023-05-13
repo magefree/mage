@@ -71,10 +71,8 @@ class TormentOfHailfireEffect extends OneShotEffect {
                             target.setNotTarget(true);
                             if (opponent.choose(outcome, target, source, game)) {
                                 Permanent permanent = game.getPermanent(target.getFirstTarget());
-                                if (permanent != null) {
-                                    if (permanent.sacrifice(source, game)) {
-                                        continue;
-                                    }
+                                if (permanent != null && (permanent.sacrifice(source, game))) {
+                                    continue;
                                 }
                             }
                         }

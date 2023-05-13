@@ -40,7 +40,7 @@ public final class TheHowlingAbomination extends CardImpl {
 
         // Rolling Attack—Blanka, Ferocious Friend has trample as long as you've cast three or more spells this turn.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(TrampleAbility.getInstance()), TheHowlingAbominationCondition.instance,
+                new GainAbilitySourceEffect(TrampleAbility.getInstance()), TheHowlingAbominationCondition.INSTANCE,
                 "{this} has trample as long as you've cast three or more spells this turn"
         )).withFlavorWord("Rolling Attack"));
 
@@ -64,7 +64,7 @@ public final class TheHowlingAbomination extends CardImpl {
 }
 
 enum TheHowlingAbominationCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

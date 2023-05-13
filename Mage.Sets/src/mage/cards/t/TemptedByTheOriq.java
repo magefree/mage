@@ -32,7 +32,7 @@ public final class TemptedByTheOriq extends CardImpl {
                 .setTargetPointer(new EachTargetPointer())
                 .setText("for each opponent, gain control of up to one target creature " +
                         "or planeswalker that player controls with mana value 3 or less"));
-        this.getSpellAbility().setTargetAdjuster(TemptedByTheOriqAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(TemptedByTheOriqAdjuster.INSTANCE);
     }
 
     private TemptedByTheOriq(final TemptedByTheOriq card) {
@@ -46,7 +46,7 @@ public final class TemptedByTheOriq extends CardImpl {
 }
 
 enum TemptedByTheOriqAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

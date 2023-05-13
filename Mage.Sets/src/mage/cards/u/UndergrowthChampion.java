@@ -107,12 +107,6 @@ class UndergrowthChampionPreventionEffect extends PreventionEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game)) {
-            if (event.getTargetId().equals(source.getSourceId())) {
-                return true;
-            }
-        }
-        return false;
+        return super.applies(event, source, game) && event.getTargetId().equals(source.getSourceId());
     }
-
 }

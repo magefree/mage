@@ -52,8 +52,8 @@ public final class TesharAncestorsApostle extends CardImpl {
 
     }
 
-    public TesharAncestorsApostle(final TesharAncestorsApostle TesharAncestorsApostle) {
-        super(TesharAncestorsApostle);
+    public TesharAncestorsApostle(final TesharAncestorsApostle tesharAncestorsApostle) {
+        super(tesharAncestorsApostle);
     }
 
     public TesharAncestorsApostle copy() {

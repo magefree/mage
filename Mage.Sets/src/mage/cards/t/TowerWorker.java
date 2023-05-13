@@ -34,7 +34,7 @@ public final class TowerWorker extends CardImpl {
 
         // {T}: Add {C}. If you control creatures named Mine Worker and Power Plant Worker, add {C}{C}{C} instead.
         this.addAbility(new DynamicManaAbility(
-                Mana.ColorlessMana(1), TowerWorkerValue.instance,
+                Mana.ColorlessMana(1), TowerWorkerValue.INSTANCE,
                 "Add {C}. If you control creatures named Mine Worker and Power Plant Worker, add {C}{C}{C} instead"
         ));
     }
@@ -50,7 +50,7 @@ public final class TowerWorker extends CardImpl {
 }
 
 enum TowerWorkerValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -74,7 +74,7 @@ enum TowerWorkerValue implements DynamicValue {
 
     @Override
     public TowerWorkerValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

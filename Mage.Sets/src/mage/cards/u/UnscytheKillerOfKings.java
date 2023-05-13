@@ -95,7 +95,6 @@ class UnscytheKillerOfKingsTriggeredAbility extends TriggeredAbilityImpl {
         if (equipment == null || equipment.getAttachedTo() == null) {
             return false;
         }
-        boolean damageDealt = false;
         for (MageObjectReference mor : zEvent.getTarget().getDealtDamageByThisTurn()) {
             if (mor.refersTo(equipment.getAttachedTo(), game)) {
                 getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));

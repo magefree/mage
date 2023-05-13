@@ -34,7 +34,7 @@ public final class TravelersCloak extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("chosen type");
 
     static {
-        filter.add(TravelersCloakChosenSubtypePredicate.instance);
+        filter.add(TravelersCloakChosenSubtypePredicate.INSTANCE);
     }
 
     public TravelersCloak(UUID ownerId, CardSetInfo setInfo) {
@@ -87,7 +87,7 @@ class TravelersCloakGainAbilityAttachedEffect extends GainAbilityAttachedEffect 
 }
 
 enum TravelersCloakChosenSubtypePredicate implements ObjectSourcePlayerPredicate<MageObject> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {

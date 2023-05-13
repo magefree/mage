@@ -76,8 +76,7 @@ class TitheTakerCostReductionEffect extends CostModificationEffectImpl {
         if (!MyTurnCondition.instance.apply(game, source)) {
             return false;
         }
-        if (!(abilityToModify.getAbilityType() == AbilityType.SPELL)
-                && !(abilityToModify.getAbilityType() == AbilityType.ACTIVATED)) {
+        if (!(abilityToModify.getAbilityType() == AbilityType.SPELL) && !(abilityToModify.getAbilityType() == AbilityType.ACTIVATED)) {
             return false;
         }
         return game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId());

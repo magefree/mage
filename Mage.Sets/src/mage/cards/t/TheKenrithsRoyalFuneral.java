@@ -117,7 +117,7 @@ class TheKenrithsRoyalFuneralCostEffect extends CostModificationEffectImpl {
             return false;
         }
         int amount = exileZone.size();
-        CardUtil.reduceCost((SpellAbility) abilityToModify, amount);
+        CardUtil.reduceCost(abilityToModify, amount);
         return true;
     }
 
@@ -127,7 +127,7 @@ class TheKenrithsRoyalFuneralCostEffect extends CostModificationEffectImpl {
             return false;
         }
         if (!game.inCheckPlayableState()) {
-            Spell spell = (Spell) game.getSpell(abilityToModify.getId());
+            Spell spell = game.getSpell(abilityToModify.getId());
             return spell != null && spell.isLegendary(game);
         }
         // Spell is not on the stack yet, but possible playable spells are determined

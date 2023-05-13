@@ -77,17 +77,15 @@ class TemptWithDiscoveryEffect extends OneShotEffect {
             int opponentsUsedSearch = 0;
             for (UUID playerId : game.getOpponents(controller.getId())) {
                 Player opponent = game.getPlayer(playerId);
-                if (opponent != null) {
-                    if (opponent.chooseUse(outcome, "Search your library for a land card and put it onto the battlefield?", source, game)) {
-                        target.clearChosen();
-                        opponentsUsedSearch++;
-                        playersShuffle.add(playerId);
-                        if (opponent.searchLibrary(target, source, game)) {
-                            for (UUID cardId : target.getTargets()) {
-                                Card card = game.getCard(cardId);
-                                if (card != null) {
-                                    opponent.moveCards(card, Zone.BATTLEFIELD, source, game);
-                                }
+                if (opponent != null && opponent.chooseUse(outcome, "Search your library for a land card and put it onto the battlefield?", source, game)) {
+                    target.clearChosen();
+                    opponentsUsedSearch++;
+                    playersShuffle.add(playerId);
+                    if (opponent.searchLibrary(target, source, game)) {
+                        for (UUID cardId : target.getTargets()) {
+                            Card card = game.getCard(cardId);
+                            if (card != null) {
+                                opponent.moveCards(card, Zone.BATTLEFIELD, source, game);
                             }
                         }
                     }

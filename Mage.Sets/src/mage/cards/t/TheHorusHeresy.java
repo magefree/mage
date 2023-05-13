@@ -56,7 +56,7 @@ public final class TheHorusHeresy extends CardImpl {
         // I -- For each opponent, gain control of up to one target nonlegendary creature that player controls for as long as The Horus Heresy remains on the battlefield.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, ability -> {
             ability.addEffect(new TheHorusHeresyControlEffect());
-            ability.setTargetAdjuster(TheHorusHeresyAdjuster.instance);
+            ability.setTargetAdjuster(TheHorusHeresyAdjuster.INSTANCE);
         });
 
         // II -- Draw a card for each creature you control but don't own.
@@ -78,7 +78,7 @@ public final class TheHorusHeresy extends CardImpl {
 }
 
 enum TheHorusHeresyAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

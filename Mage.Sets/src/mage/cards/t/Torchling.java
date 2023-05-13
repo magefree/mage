@@ -34,7 +34,7 @@ public final class Torchling extends CardImpl {
     private static final FilterSpell filter = new FilterSpell();
 
     static {
-        filter.add(TorchlingPredicate.instance);
+        filter.add(TorchlingPredicate.INSTANCE);
     }
 
     public Torchling(UUID ownerId, CardSetInfo setInfo) {
@@ -84,8 +84,7 @@ public final class Torchling extends CardImpl {
 }
 
 enum TorchlingPredicate implements ObjectSourcePlayerPredicate<StackObject> {
-
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {

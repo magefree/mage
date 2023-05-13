@@ -17,7 +17,7 @@ import mage.constants.Zone;
  */
 public final class TrustedForcemage extends CardImpl {
 
-    private static final String ruleText = "As long as {this} is paired with another creature, each of those creatures gets +1/+1";
+    private static final String RULE_TEXT = "As long as {this} is paired with another creature, each of those creatures gets +1/+1";
 
     public TrustedForcemage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
@@ -31,7 +31,7 @@ public final class TrustedForcemage extends CardImpl {
         this.addAbility(new SoulbondAbility());
 
         // As long as Trusted Forcemage is paired with another creature, each of those creatures gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostPairedEffect(1, 1, ruleText)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostPairedEffect(1, 1, RULE_TEXT)));
     }
 
     private TrustedForcemage(final TrustedForcemage card) {

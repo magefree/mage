@@ -109,12 +109,12 @@ class UrzasHotTubPredicate implements Predicate<MageObject> {
     }
 
     private boolean sharesWordWithName(String str) {
-        if (referenceName == null || referenceName == "") {
+        if (referenceName == null || referenceName.equals("")) {
             return false;
         }
         String[] arr = referenceName.split("\\s+");
-        for (int i = 0; i < arr.length; i++) {
-            if (str.contains(arr[i].replaceAll(",", ""))) {
+        for (String s : arr) {
+            if (str.contains(s.replace(",", ""))) {
                 return true;
             }
         }

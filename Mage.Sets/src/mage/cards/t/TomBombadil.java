@@ -26,7 +26,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.CardUtil;
 import mage.abilities.hint.common.CountersOnPermanentsHint;
@@ -103,13 +102,13 @@ class TomBombadilTriggeredAbility extends TriggeredAbilityImpl {
         // the ability that it came from. For EventType.RESOLVING_ABILITY, targetID is
         // the ID of the original ability (on the permanent) that the resolving ability
         // came from.
-        Optional<Ability> ability_opt = game.getAbility(event.getTargetId(), event.getSourceId());
-        if (!ability_opt.isPresent())
+        Optional<Ability> abilityOpt = game.getAbility(event.getTargetId(), event.getSourceId());
+        if (!abilityOpt.isPresent())
             return false;
 
         // Make sure it was a triggered ability (needed for checking if it's a chapter
         // ability)
-        Ability ability = ability_opt.get();
+        Ability ability = abilityOpt.get();
         if (!(ability instanceof TriggeredAbility))
             return false;
 

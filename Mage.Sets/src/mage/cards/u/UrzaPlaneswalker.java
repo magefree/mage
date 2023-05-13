@@ -20,7 +20,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SoldierArtifactToken;
 import mage.target.common.TargetNonlandPermanent;
 
-import java.util.Optional;
 import java.util.UUID;
 
 /**

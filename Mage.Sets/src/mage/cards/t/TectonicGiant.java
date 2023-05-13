@@ -78,8 +78,7 @@ class TectonicGiantTriggeredAbility extends TriggeredAbilityImpl {
                 if (event.getTargetId().equals(getSourceId())) {
                     MageObject mageObject = game.getObject(event.getSourceId());
                     Player player = game.getPlayer(getControllerId());
-                    return mageObject != null
-                            && mageObject instanceof Spell
+                    return mageObject instanceof Spell
                             && player != null
                             && player.hasOpponent(((Spell) mageObject).getControllerId(), game);
                 }

@@ -55,7 +55,7 @@ public final class TitansNest extends CardImpl {
 class TitansNestManaAbility extends ActivatedManaAbilityImpl {
 
     TitansNestManaAbility() {
-        super(Zone.BATTLEFIELD, (BasicManaEffect) new BasicManaEffect(
+        super(Zone.BATTLEFIELD, new BasicManaEffect(
                         new TitansNestConditionalMana(), new CardsInControllerGraveyardCount())
                         .setText("Add {C}. Spend this mana only to cast a spell that's one or more colors without {X} in its mana cost."),
                 new ExileFromGraveCost(new TargetCardInYourGraveyard()));

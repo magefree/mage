@@ -39,7 +39,7 @@ public final class ThoughtboundPrimoc extends CardImpl {
         // the player who controls the most Wizards gains control of Thoughtbound Primoc.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ThoughtboundPrimocEffect(), TargetController.YOU, false),
-                OnePlayerHasTheMostWizards.instance,
+                OnePlayerHasTheMostWizards.INSTANCE,
                 "At the beginning of your upkeep, if a player controls more Wizards than each other player, the player who controls the most Wizards gains control of {this}"
         ));
 
@@ -91,7 +91,7 @@ class ThoughtboundPrimocEffect extends OneShotEffect {
 }
 
 enum OnePlayerHasTheMostWizards implements Condition {
-    instance;
+    INSTANCE;
 
     private static final FilterPermanent filter = new FilterPermanent(SubType.WIZARD, "Wizards");
 

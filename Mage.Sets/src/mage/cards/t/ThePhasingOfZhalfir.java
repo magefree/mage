@@ -124,7 +124,6 @@ class ThePhasingOfZhalfirDestroyEffect extends OneShotEffect {
                 StaticFilters.FILTER_PERMANENT_CREATURES,
                 source.getControllerId(), source, game
         )) {
-            UUID controllerId = permanent.getControllerId();
             if (permanent.destroy(source, game, false)) {
                 playerMap.compute(permanent.getControllerId(), CardUtil::setOrIncrementValue);
             }

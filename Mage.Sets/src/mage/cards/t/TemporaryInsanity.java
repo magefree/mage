@@ -80,10 +80,8 @@ class TargetCreatureWithPowerLessThanNumberOfCardsInYourGraveyard extends Target
         MageObject targetSource = game.getObject(source);
         if(targetSource != null) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
-                if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
-                    if (permanent.getPower().getValue() < game.getPlayer(sourceControllerId).getGraveyard().size()) {
-                        return true;
-                    }
+                if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && permanent.getPower().getValue() < game.getPlayer(sourceControllerId).getGraveyard().size()) {
+                    return true;
                 }
             }
         }

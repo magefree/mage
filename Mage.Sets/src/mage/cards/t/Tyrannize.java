@@ -19,8 +19,6 @@ import mage.target.TargetPlayer;
  * @author jeffwadsworth using code from LevelX
  */
 public final class Tyrannize extends CardImpl {
-    
-    private static final String rule = "Pay 7 life? (otherwise discard your hand)";
 
     public Tyrannize(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B/R}{B/R}");

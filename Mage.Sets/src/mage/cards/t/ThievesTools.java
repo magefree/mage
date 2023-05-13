@@ -34,7 +34,7 @@ public final class ThievesTools extends CardImpl {
 
         // Equipped creature can't be blocked as long as its power is 3 or less.
         this.addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
-                new CantBeBlockedAttachedEffect(AttachmentType.EQUIPMENT), ThievesToolsCondition.instance,
+                new CantBeBlockedAttachedEffect(AttachmentType.EQUIPMENT), ThievesToolsCondition.INSTANCE,
                 "equipped creature can't be blocked as long as its power is 3 or less"
         )));
 
@@ -53,7 +53,7 @@ public final class ThievesTools extends CardImpl {
 }
 
 enum ThievesToolsCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

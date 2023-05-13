@@ -110,7 +110,6 @@ class UndeadAlchemistEffect extends ReplacementEffectImpl {
         Player player = game.getPlayer(event.getTargetId());
         if (player != null) {
             player.millCards(event.getAmount(), source, game);
-            return true;
         }
         return true;
     }

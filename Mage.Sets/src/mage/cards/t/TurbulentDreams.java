@@ -32,7 +32,7 @@ public final class TurbulentDreams extends CardImpl {
         Effect effect = new ReturnToHandTargetEffect();
         effect.setText("Return X target nonland permanents to their owners' hands");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().setTargetAdjuster(TurbulentDreamsAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(TurbulentDreamsAdjuster.INSTANCE);
     }
 
     private TurbulentDreams(final TurbulentDreams card) {
@@ -46,7 +46,7 @@ public final class TurbulentDreams extends CardImpl {
 }
 
 enum TurbulentDreamsAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
     private static final FilterPermanent filter = new FilterNonlandPermanent("nonland permanents");
 
     @Override

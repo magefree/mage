@@ -105,14 +105,12 @@ class ThopterSpyNetworkDamageTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
-            if (((DamagedPlayerEvent) event).isCombatDamage()) {
-                Permanent creature = game.getPermanent(event.getSourceId());
-                if (creature != null && creature.isControlledBy(controllerId)
-                        && creature.isArtifact(game) && !damagedPlayerIds.contains(event.getTargetId())) {
-                    damagedPlayerIds.add(event.getTargetId());
-                    return true;
-                }
+        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER && (((DamagedPlayerEvent) event).isCombatDamage())) {
+            Permanent creature = game.getPermanent(event.getSourceId());
+            if (creature != null && creature.isControlledBy(controllerId)
+                    && creature.isArtifact(game) && !damagedPlayerIds.contains(event.getTargetId())) {
+                damagedPlayerIds.add(event.getTargetId());
+                return true;
             }
         }
         if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST) {

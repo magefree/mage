@@ -37,7 +37,7 @@ public final class ToweringGibbon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
                 new SetBasePowerSourceEffect(
-                        ToweringGibbonValue.instance
+                        ToweringGibbonValue.INSTANCE
                 ).setText("{this}'s power is equal to the greatest mana value among creatures you control")
         ));
     }
@@ -53,7 +53,7 @@ public final class ToweringGibbon extends CardImpl {
 }
 
 enum ToweringGibbonValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

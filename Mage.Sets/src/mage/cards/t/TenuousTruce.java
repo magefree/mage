@@ -93,15 +93,15 @@ class TenuousTruceAttackTriggeredAbility extends TriggeredAbilityImpl {
 
         Set<UUID> defenderIds = game.getCombat().getPlayerDefenders(game, true);
         if (controller.equals(attacker)) {
-            return TenuousTruceAttackTriggeredAbility.playerOneAttackingPlayerBOrTheirPlaneswalker(controller.getId(), enchantedPlayer.getId(), defenderIds, game);
+            return TenuousTruceAttackTriggeredAbility.playerOneAttackingPlayerBOrTheirPlaneswalker(enchantedPlayer.getId(), defenderIds, game);
         } else if (enchantedPlayer.equals(attacker)) {
-            return TenuousTruceAttackTriggeredAbility.playerOneAttackingPlayerBOrTheirPlaneswalker(enchantedPlayer.getId(), controller.getId(), defenderIds, game);
+            return TenuousTruceAttackTriggeredAbility.playerOneAttackingPlayerBOrTheirPlaneswalker(controller.getId(), defenderIds, game);
         } else {
             return false;
         }
     }
 
-    private static boolean playerOneAttackingPlayerBOrTheirPlaneswalker(UUID playerAId, UUID playerBId, Set<UUID> defenderIds, Game game) {
+    private static boolean playerOneAttackingPlayerBOrTheirPlaneswalker(UUID playerBId, Set<UUID> defenderIds, Game game) {
         if (defenderIds.contains(playerBId)) {
             return true;
         }

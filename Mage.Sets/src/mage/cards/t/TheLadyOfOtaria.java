@@ -56,7 +56,7 @@ public final class TheLadyOfOtaria extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new RevealLibraryPickControllerEffect(
                         4, Integer.MAX_VALUE, filter2, PutCards.HAND, PutCards.BOTTOM_RANDOM, false
-                ), TargetController.ANY, TheLadyOfOtariaCondition.instance, false
+                ), TargetController.ANY, TheLadyOfOtariaCondition.INSTANCE, false
         ).addHint(TheLadyOfOtariaCondition.getHint()), new TheLadyOfOtariaWatcher());
     }
 
@@ -71,9 +71,9 @@ public final class TheLadyOfOtaria extends CardImpl {
 }
 
 enum TheLadyOfOtariaCondition implements Condition {
-    instance;
+    INSTANCE;
     private static final Hint hint = new ConditionHint(
-            instance, "A land you controlled was put into your graveyard"
+            INSTANCE, "A land you controlled was put into your graveyard"
     );
 
     @Override

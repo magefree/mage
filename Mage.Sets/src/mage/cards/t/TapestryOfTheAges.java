@@ -35,7 +35,7 @@ public final class TapestryOfTheAges extends CardImpl {
                 Zone.BATTLEFIELD, 
                 new DrawCardSourceControllerEffect(1), 
                 new ManaCostsImpl<>("{2}"), 
-                PlayerCastNonCreatureSpellCondition.instance);
+                PlayerCastNonCreatureSpellCondition.INSTANCE);
         ability.addCost(new TapSourceCost());
         this.addAbility(ability, new PlayerCastNonCreatureSpellWatcher());                       
 
@@ -52,7 +52,7 @@ public final class TapestryOfTheAges extends CardImpl {
 }
 
 enum PlayerCastNonCreatureSpellCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

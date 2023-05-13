@@ -39,7 +39,7 @@ public final class ThunderkinAwakener extends CardImpl {
 
     static {
         filter.add(SubType.ELEMENTAL.getPredicate());
-        filter.add(ThunderkinAwakenerPredicate.instance);
+        filter.add(ThunderkinAwakenerPredicate.INSTANCE);
     }
 
     public ThunderkinAwakener(UUID ownerId, CardSetInfo setInfo) {
@@ -71,7 +71,7 @@ public final class ThunderkinAwakener extends CardImpl {
 }
 
 enum ThunderkinAwakenerPredicate implements ObjectSourcePlayerPredicate<Card> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {

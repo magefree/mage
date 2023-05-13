@@ -133,7 +133,7 @@ class TaigamOjutaiMasterGainReboundEffect extends ContinuousEffectImpl {
             if (spell != null) {
                 Card card = spell.getCard();
                 if (card != null) {
-                    addReboundAbility(card, source, game);
+                    addReboundAbility(card, game);
                 }
             } else {
                 discard();
@@ -143,7 +143,7 @@ class TaigamOjutaiMasterGainReboundEffect extends ContinuousEffectImpl {
         return false;
     }
 
-    private void addReboundAbility(Card card, Ability source, Game game) {
+    private void addReboundAbility(Card card, Game game) {
         boolean found = card.getAbilities(game).containsClass(ReboundAbility.class);
         if (!found) {
             Ability ability = new ReboundAbility();

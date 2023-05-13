@@ -89,10 +89,7 @@ class AtBeginningOfUntapDelayedTriggeredAbility extends DelayedTriggeredAbility 
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.isActivePlayer(controllerId)) {
-            return true;
-        }
-        return false;
+        return game.isActivePlayer(controllerId);
     }
 
     @Override

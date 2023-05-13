@@ -45,7 +45,7 @@ public final class TerrorOfThePeaks extends CardImpl {
 
         // Whenever another creature enters the battlefield under your control, Terror of the Peaks deals damage equal to that creature's power to any target.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(
-                new DamageTargetEffect(TerrorOfThePeaksValue.instance),
+                new DamageTargetEffect(TerrorOfThePeaksValue.INSTANCE),
                 StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE,
                 "Whenever another creature enters the battlefield under your control, " +
                         "{this} deals damage equal to that creature's power to any target."
@@ -101,16 +101,15 @@ class TerrorOfThePeaksCostIncreaseEffect extends CostModificationEffectImpl {
             allTargets = CardUtil.getAllPossibleTargets(abilityToModify, game);
 
             // can target without cost increase
-            if (allTargets.stream().anyMatch(target -> !isTargetCompatible(target, source, game))) {
+            if (allTargets.stream().anyMatch(target -> !isTargetCompatible(target, source))) {
                 return false;
             }
-            ;
         }
 
-        return allTargets.stream().anyMatch(target -> isTargetCompatible(target, source, game));
+        return allTargets.stream().anyMatch(target -> isTargetCompatible(target, source));
     }
 
-    private boolean isTargetCompatible(UUID target, Ability source, Game game) {
+    private boolean isTargetCompatible(UUID target, Ability source) {
         // target {this}
         return Objects.equals(source.getSourceId(), target);
     }
@@ -122,7 +121,7 @@ class TerrorOfThePeaksCostIncreaseEffect extends CostModificationEffectImpl {
 }
 
 enum TerrorOfThePeaksValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

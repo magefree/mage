@@ -33,7 +33,7 @@ import java.util.UUID;
 public final class TobiasDoomedConqueror extends CardImpl {
 
     private static final Hint hint = new ValueHint(
-            "Nontoken creatures that died under your control", TobiasDoomedConquerorValue.instance
+            "Nontoken creatures that died under your control", TobiasDoomedConquerorValue.INSTANCE
     );
 
     public TobiasDoomedConqueror(UUID ownerId, CardSetInfo setInfo) {
@@ -50,7 +50,7 @@ public final class TobiasDoomedConqueror extends CardImpl {
 
         // When Tobias, Doomed Conqueror dies, create a 2/2 black Zombie creature token for each nontoken creature that died under your control this turn.
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(
-                new ZombieToken(), TobiasDoomedConquerorValue.instance
+                new ZombieToken(), TobiasDoomedConquerorValue.INSTANCE
         )).addHint(hint), new TobiasDoomedConquerorWatcher());
     }
 
@@ -65,7 +65,7 @@ public final class TobiasDoomedConqueror extends CardImpl {
 }
 
 enum TobiasDoomedConquerorValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

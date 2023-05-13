@@ -8,10 +8,7 @@ import mage.abilities.effects.common.continuous.EachSpellYouCastHasReplicateEffe
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCardHalf;
-import mage.cards.SplitCardHalf;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
@@ -25,7 +22,7 @@ public class ThreefoldSignal extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("spell you cast that's exactly three colors");
     static {
-        filter.add(ThreeColorPredicate.instance);
+        filter.add(ThreeColorPredicate.INSTANCE);
     }
 
     public ThreefoldSignal(UUID ownerId, CardSetInfo setInfo) {
@@ -55,7 +52,7 @@ public class ThreefoldSignal extends CardImpl {
  * Based on MultiColorPredicate
  */
 enum ThreeColorPredicate implements Predicate<MageObject> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(MageObject input, Game game) {

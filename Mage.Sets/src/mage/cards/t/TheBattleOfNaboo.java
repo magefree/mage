@@ -29,7 +29,7 @@ public final class TheBattleOfNaboo extends CardImpl {
         effect.setText("Return X target creatures to their owner's hands");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new TheBattleOfNabooEffect());
-        this.getSpellAbility().setTargetAdjuster(TheBattleOfNabooAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(TheBattleOfNabooAdjuster.INSTANCE);
     }
 
     private TheBattleOfNaboo(final TheBattleOfNaboo card) {
@@ -43,7 +43,7 @@ public final class TheBattleOfNaboo extends CardImpl {
 }
 
 enum TheBattleOfNabooAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

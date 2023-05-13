@@ -24,7 +24,7 @@ import mage.counters.CounterType;
  */
 public final class Thunderblust extends CardImpl {
 
-    private static final String rule = "{this} has trample as long as it has a -1/-1 counter on it";
+    private static final String RULE = "{this} has trample as long as it has a -1/-1 counter on it";
 
     public Thunderblust(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}{R}");
@@ -37,7 +37,7 @@ public final class Thunderblust extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Thunderblust has trample as long as it has a -1/-1 counter on it.
-        Effect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()), new SourceHasCounterCondition(CounterType.M1M1), rule);
+        Effect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()), new SourceHasCounterCondition(CounterType.M1M1), RULE);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         // Persist

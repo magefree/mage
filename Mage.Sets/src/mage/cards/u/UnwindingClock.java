@@ -69,10 +69,8 @@ class UnwindingClockEffect extends ContinuousEffectImpl {
                     }
                 }
             }
-        } else if (applied && layer == Layer.RulesEffects) {
-            if (game.getTurnStepType() == PhaseStep.END_TURN) {
-                game.getState().setValue(source.getSourceId() + "applied", false);
-            }
+        } else if (applied && layer == Layer.RulesEffects && game.getTurnStepType() == PhaseStep.END_TURN) {
+            game.getState().setValue(source.getSourceId() + "applied", false);
         }
         return true;
     }

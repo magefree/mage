@@ -78,7 +78,7 @@ class TatsumaTheDragonsFangEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Token token = new TatsumaDragonToken();
         token.putOntoBattlefield(1, game, source);
-        game.addDelayedTriggeredAbility(new TatsumaTheDragonsFangTriggeredAbility(token, source, game), source);
+        game.addDelayedTriggeredAbility(new TatsumaTheDragonsFangTriggeredAbility(token, source), source);
         return true;
     }
 }
@@ -87,7 +87,7 @@ class TatsumaTheDragonsFangTriggeredAbility extends DelayedTriggeredAbility {
 
     private final Set<UUID> tokens = new HashSet<>();
 
-    public TatsumaTheDragonsFangTriggeredAbility(Token token, Ability source, Game game) {
+    public TatsumaTheDragonsFangTriggeredAbility(Token token, Ability source) {
         super(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false).setTargetPointer(new FixedTarget(new MageObjectReference(source, 1))), Duration.Custom, false, false);
         tokens.addAll(token.getLastAddedTokenIds());
     }

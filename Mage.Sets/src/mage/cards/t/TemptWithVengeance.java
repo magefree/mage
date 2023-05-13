@@ -64,11 +64,9 @@ class TemptWithVengeanceEffect extends OneShotEffect {
             int opponentsAddedTokens = 0;
             for (UUID playerId : game.getOpponents(controller.getId())) {
                 Player opponent = game.getPlayer(playerId);
-                if (opponent != null) {
-                    if (opponent.chooseUse(outcome, "Create " + xValue + " Elemental tokens?", source, game)) {
-                        opponentsAddedTokens += xValue;
-                        tokenCopy.putOntoBattlefield(xValue, game, source, playerId, false, false);
-                    }
+                if (opponent != null && opponent.chooseUse(outcome, "Create " + xValue + " Elemental tokens?", source, game)) {
+                    opponentsAddedTokens += xValue;
+                    tokenCopy.putOntoBattlefield(xValue, game, source, playerId, false, false);
                 }
             }
             if (opponentsAddedTokens > 0) {

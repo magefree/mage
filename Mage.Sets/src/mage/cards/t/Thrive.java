@@ -26,7 +26,7 @@ public final class Thrive extends CardImpl {
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
         effect.setText("Put a +1/+1 counter on each of X target creatures");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().setTargetAdjuster(ThriveAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(ThriveAdjuster.INSTANCE);
     }
 
     private Thrive(final Thrive card) {
@@ -40,7 +40,7 @@ public final class Thrive extends CardImpl {
 }
 
 enum ThriveAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

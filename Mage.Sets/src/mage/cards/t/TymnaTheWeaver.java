@@ -15,7 +15,6 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.watchers.Watcher;
 
@@ -78,7 +77,7 @@ class TymnaTheWeaverEffect extends OneShotEffect {
         if (controller != null) {
             TymnaTheWeaverWatcher watcher = game.getState().getWatcher(TymnaTheWeaverWatcher.class);
             if (watcher != null) {
-                int cardsToDraw = watcher.opponentsThatGotCombatDamage(source.getControllerId(), game);
+                int cardsToDraw = watcher.opponentsThatGotCombatDamage(source.getControllerId());
                 Cost cost = new PayLifeCost(cardsToDraw);
                 if (cost.canPay(source, source, source.getControllerId(), game)
                         && cost.pay(source, game, source, source.getControllerId(), false)) {
@@ -93,7 +92,6 @@ class TymnaTheWeaverEffect extends OneShotEffect {
 
 class TymnaTheWeaverWatcher extends Watcher {
 
-    // private final Set<UUID> players = new HashSet<>();
     private final Map<UUID, Set<UUID>> players = new HashMap<>();
 
     public TymnaTheWeaverWatcher() {
@@ -120,7 +118,7 @@ class TymnaTheWeaverWatcher extends Watcher {
         players.clear();
     }
 
-    public int opponentsThatGotCombatDamage(UUID playerId, Game game) {
+    public int opponentsThatGotCombatDamage(UUID playerId) {
         int numberOfOpponents = 0;
         for (Set<UUID> opponents : players.values()) {
             if (opponents.contains(playerId)) {

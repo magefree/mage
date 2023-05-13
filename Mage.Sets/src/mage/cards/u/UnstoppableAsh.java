@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class UnstoppableAsh extends CardImpl {
 
-    static final private FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control");
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());

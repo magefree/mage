@@ -30,7 +30,7 @@ public final class TriarchStalker extends CardImpl {
             = new FilterCreaturePermanent("creatures attacking the last chosen player");
 
     static {
-        filter.add(TriarchStalkerPredicate.instance);
+        filter.add(TriarchStalkerPredicate.INSTANCE);
     }
 
     public TriarchStalker(UUID ownerId, CardSetInfo setInfo) {
@@ -59,7 +59,7 @@ public final class TriarchStalker extends CardImpl {
 }
 
 enum TriarchStalkerPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {

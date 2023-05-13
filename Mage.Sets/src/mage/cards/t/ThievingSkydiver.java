@@ -55,7 +55,7 @@ public final class ThievingSkydiver extends CardImpl {
                 "If that artifact is an Equipment, attach it to {this}."
         );
         ability.addEffect(new ThievingSkydiverEffect());
-        ability.setTargetAdjuster(ThievingSkydiverAdjuster.instance);
+        ability.setTargetAdjuster(ThievingSkydiverAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -70,7 +70,7 @@ public final class ThievingSkydiver extends CardImpl {
 }
 
 enum ThievingSkydiverAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

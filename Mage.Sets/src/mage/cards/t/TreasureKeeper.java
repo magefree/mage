@@ -60,7 +60,7 @@ class TreasureKeeperEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Boolean cardWasCast = false;
+        boolean cardWasCast = false;
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && controller.getLibrary().hasCards()) {
             CardsImpl toReveal = new CardsImpl();

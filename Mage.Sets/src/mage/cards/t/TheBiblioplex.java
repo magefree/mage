@@ -33,7 +33,7 @@ public final class TheBiblioplex extends CardImpl {
         // {2}, {T}: Look at the top card of your library. If it's an instant or sorcery card, you may reveal it and put it into your hand. If you don't put the card into your hand, you may put it into your graveyard. Activate only if you have exactly zero or seven cards in hand.
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD, new TheBiblioplexEffect(),
-                new GenericManaCost(2), TheBiblioplexCondition.instance
+                new GenericManaCost(2), TheBiblioplexCondition.INSTANCE
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -50,7 +50,7 @@ public final class TheBiblioplex extends CardImpl {
 }
 
 enum TheBiblioplexCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

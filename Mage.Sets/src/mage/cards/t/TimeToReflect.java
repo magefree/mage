@@ -32,7 +32,7 @@ public final class TimeToReflect extends CardImpl {
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(new FilterCreaturePermanent("creature that blocked or was blocked by a Zombie this turn.")));
         this.getSpellAbility().addWatcher(new BlockedOrWasBlockedByAZombieWatcher());
-        this.getSpellAbility().setTargetAdjuster(TimeToReflectAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(TimeToReflectAdjuster.INSTANCE);
     }
 
     private TimeToReflect(final TimeToReflect card) {
@@ -46,7 +46,7 @@ public final class TimeToReflect extends CardImpl {
 }
 
 enum TimeToReflectAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

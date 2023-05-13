@@ -39,7 +39,7 @@ public final class ThoughtSponge extends CardImpl {
 
         // Thought Sponge enters the battlefield with a number of +1/+1 counters on it equal to the greatest number of cards an opponent has drawn this turn.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(), ThoughtSpongeValue.instance, false
+                CounterType.P1P1.createInstance(), ThoughtSpongeValue.INSTANCE, false
         ), "with a number of +1/+1 counters on it equal to " +
                 "the greatest number of cards an opponent has drawn this turn"
         ));
@@ -61,7 +61,7 @@ public final class ThoughtSponge extends CardImpl {
 }
 
 enum ThoughtSpongeValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -78,7 +78,7 @@ enum ThoughtSpongeValue implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

@@ -29,7 +29,7 @@ import mage.target.common.TargetLandPermanent;
  */
 public final class UnderworldConnections extends CardImpl {
 
-    static final String rule = "Enchanted land has \"{T}, Pay 1 life: Draw a card.\"";
+    static final String RULE = "Enchanted land has \"{T}, Pay 1 life: Draw a card.\"";
 
     public UnderworldConnections (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{B}");
@@ -46,7 +46,7 @@ public final class UnderworldConnections extends CardImpl {
         // Enchanted land has "{T}, Pay 1 life: Draw a card."
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost());
         gainedAbility.addCost(new PayLifeCost(1));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, RULE)));
     }
 
     public UnderworldConnections (final UnderworldConnections card) {

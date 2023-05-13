@@ -73,11 +73,7 @@ class TheCelestusDayNightEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (game.checkDayNight(false)) {
-            game.setDaytime(true);
-        } else {
-            game.setDaytime(false);
-        }
+        game.setDaytime(game.checkDayNight(false));
         return true;
     }
 }

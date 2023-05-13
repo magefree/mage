@@ -41,7 +41,7 @@ public final class TwinbladePaladin extends CardImpl {
         // As long as you have 25 or more life, Twinblade Paladin has double strike.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
-                TwinbladePaladinCondition.instance, "As long as you have 25 or more life, {this} has double strike."
+                TwinbladePaladinCondition.INSTANCE, "As long as you have 25 or more life, {this} has double strike."
         )));
     }
 
@@ -56,7 +56,7 @@ public final class TwinbladePaladin extends CardImpl {
 }
 
 enum TwinbladePaladinCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

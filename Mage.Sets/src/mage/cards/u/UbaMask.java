@@ -65,12 +65,10 @@ class UbaMaskReplacementEffect extends ReplacementEffectImpl {
         Player player = game.getPlayer(event.getPlayerId());
         if (player != null && sourceObject != null) {
             Card card = player.getLibrary().getFromTop(game);
-            if (card != null) {
-                if (player.moveCardsToExile(card, source, game, true, source.getSourceId(), sourceObject.getIdName())) {
-                    UbaMaskExiledCardsWatcher watcher = game.getState().getWatcher(UbaMaskExiledCardsWatcher.class);
-                    if (watcher != null) {
-                        watcher.addExiledCard(event.getPlayerId(), card, game);
-                    }
+            if (card != null && (player.moveCardsToExile(card, source, game, true, source.getSourceId(), sourceObject.getIdName()))) {
+                UbaMaskExiledCardsWatcher watcher = game.getState().getWatcher(UbaMaskExiledCardsWatcher.class);
+                if (watcher != null) {
+                    watcher.addExiledCard(event.getPlayerId(), card, game);
                 }
             }
         }

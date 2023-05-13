@@ -66,9 +66,9 @@ class ThranWeaponryEffect extends BoostAllEffect{
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent ThranWeaponry = game.getPermanent(source.getSourceId());
-        if (ThranWeaponry != null) {
-            if (ThranWeaponry.isTapped()) {
+        Permanent thranWeaponry = game.getPermanent(source.getSourceId());
+        if (thranWeaponry != null) {
+            if (thranWeaponry.isTapped()) {
                 super.apply(game, source);
                 return true;
             } else {

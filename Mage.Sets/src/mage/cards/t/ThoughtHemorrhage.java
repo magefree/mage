@@ -54,7 +54,7 @@ public final class ThoughtHemorrhage extends CardImpl {
 
 class ThoughtHemorrhageEffect extends OneShotEffect {
 
-    static final String rule = "Target player reveals their hand. "
+    static final String RULE = "Target player reveals their hand. "
             + "{this} deals 3 damage to that player for each card with "
             + "the chosen name revealed this way. "
             + "Search that player's graveyard, hand, and library for "
@@ -63,7 +63,7 @@ class ThoughtHemorrhageEffect extends OneShotEffect {
 
     public ThoughtHemorrhageEffect() {
         super(Outcome.Exile);
-        staticText = rule;
+        staticText = RULE;
     }
 
     public ThoughtHemorrhageEffect(final ThoughtHemorrhageEffect effect) {

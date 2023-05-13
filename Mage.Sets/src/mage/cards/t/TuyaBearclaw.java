@@ -35,8 +35,8 @@ public final class TuyaBearclaw extends CardImpl {
 
         // Whenever Tuya Bearclaw attacks, it gets +X/+X until end of turn, where X is the greatest power among other creatures you control.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(
-                TuyaBearclawValue.instance,
-                TuyaBearclawValue.instance,
+                TuyaBearclawValue.INSTANCE,
+                TuyaBearclawValue.INSTANCE,
                 Duration.EndOfTurn, true
         ), false));
     }
@@ -52,7 +52,7 @@ public final class TuyaBearclaw extends CardImpl {
 }
 
 enum TuyaBearclawValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -70,7 +70,7 @@ enum TuyaBearclawValue implements DynamicValue {
 
     @Override
     public TuyaBearclawValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

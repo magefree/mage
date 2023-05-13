@@ -25,7 +25,7 @@ public final class TillerOfFlesh extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a spell that targets one or more permanents");
 
     static {
-        filter.add(TillerOfFleshPredicate.instance);
+        filter.add(TillerOfFleshPredicate.INSTANCE);
     }
 
     public TillerOfFlesh(UUID ownerId, CardSetInfo setInfo) {
@@ -51,7 +51,7 @@ public final class TillerOfFlesh extends CardImpl {
 }
 
 enum TillerOfFleshPredicate implements Predicate<StackObject> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(StackObject input, Game game) {

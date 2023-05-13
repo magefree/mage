@@ -3,7 +3,6 @@ package mage.cards.t;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -18,7 +17,7 @@ import java.util.UUID;
  */
 public final class TraverseTheUlvenwald extends CardImpl {
 
-    private static final String rule = "Search your library for a basic land card, reveal it, put it into your hand, then shuffle.<br>" +
+    private static final String RULE = "Search your library for a basic land card, reveal it, put it into your hand, then shuffle.<br>" +
             AbilityWord.DELIRIUM.formatWord() + "If " + DeliriumCondition.instance.toString() +
             ", instead search your library for a creature or land card, reveal it, put it into your hand, then shuffle.";
 
@@ -29,7 +28,7 @@ public final class TraverseTheUlvenwald extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, StaticFilters.FILTER_CARD_CREATURE_OR_LAND), true),
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, StaticFilters.FILTER_CARD_BASIC_LAND), true),
-                DeliriumCondition.instance, rule
+                DeliriumCondition.instance, RULE
         ));
     }
 

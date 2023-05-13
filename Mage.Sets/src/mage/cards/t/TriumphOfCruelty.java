@@ -20,7 +20,7 @@ import mage.target.common.TargetOpponent;
  */
 public final class TriumphOfCruelty extends CardImpl {
 
-    private static final String ruleText = "target opponent discards a card if you control the creature with the greatest power or tied for the greatest power";
+    private static final String RULE_TEXT = "target opponent discards a card if you control the creature with the greatest power or tied for the greatest power";
 
     public TriumphOfCruelty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
@@ -30,7 +30,7 @@ public final class TriumphOfCruelty extends CardImpl {
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new DiscardTargetEffect(1), TargetController.YOU, false);
         Target target =  new TargetOpponent();
         ability.addTarget(target);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, ControlsCreatureGreatestPowerCondition.instance, ruleText));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, ControlsCreatureGreatestPowerCondition.instance, RULE_TEXT));
     }
 
     private TriumphOfCruelty(final TriumphOfCruelty card) {

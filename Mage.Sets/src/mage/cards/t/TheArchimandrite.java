@@ -77,7 +77,7 @@ public final class TheArchimandrite extends CardImpl {
                 VigilanceAbility.getInstance(), Duration.EndOfTurn, filter
         ).setText("each Advisor, Artificer, and Monk you control gains vigilance"));
         ability.addEffect(new BoostControlledEffect(
-                TheArchimandriteValue.instance, StaticValue.get(0), Duration.EndOfTurn,
+                TheArchimandriteValue.INSTANCE, StaticValue.get(0), Duration.EndOfTurn,
                 filter2, false, true
         ).setText("and gets +X/+0 until end of turn, where X is the amount of life you gained"));
         this.addAbility(ability);
@@ -100,7 +100,7 @@ public final class TheArchimandrite extends CardImpl {
 }
 
 enum TheArchimandriteValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
