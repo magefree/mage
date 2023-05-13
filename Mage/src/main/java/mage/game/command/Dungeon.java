@@ -27,7 +27,6 @@ import mage.game.command.dungeons.TombOfAnnihilationDungeon;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
-import mage.util.GameLog;
 import mage.util.SubTypes;
 
 import java.util.*;
@@ -45,7 +44,6 @@ public class Dungeon extends CommandObjectImpl {
         dungeonNames.add("Dungeon of the Mad Mage");
     }
 
-    private static final List<CardType> emptyList = Collections.unmodifiableList(Arrays.asList(CardType.DUNGEON));
     private static final ObjectColor emptyColor = new ObjectColor();
     private static final ManaCosts<ManaCost> emptyCost = new ManaCostsImpl<>();
 
@@ -204,7 +202,7 @@ public class Dungeon extends CommandObjectImpl {
 
     @Override
     public List<CardType> getCardType(Game game) {
-        return emptyList;
+        return Collections.emptyList();
     }
 
     @Override
@@ -223,8 +221,8 @@ public class Dungeon extends CommandObjectImpl {
     }
 
     @Override
-    public EnumSet<SuperType> getSuperType() {
-        return EnumSet.noneOf(SuperType.class);
+    public List<SuperType> getSuperType() {
+        return Collections.emptyList();
     }
 
     @Override

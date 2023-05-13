@@ -568,7 +568,7 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
-    public Set<SuperType> getSuperType() {
+    public List<SuperType> getSuperType() {
         return card.getSuperType();
     }
 

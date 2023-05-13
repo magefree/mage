@@ -71,7 +71,7 @@ public class CardView extends SimpleCardView {
     protected String startingDefense;
     protected List<CardType> cardTypes;
     protected SubTypes subTypes;
-    protected Set<SuperType> superTypes;
+    protected List<SuperType> superTypes;
     protected ObjectColor color;
     protected ObjectColor frameColor;
     protected FrameStyle frameStyle;
@@ -778,7 +778,7 @@ public class CardView extends SimpleCardView {
         this.startingDefense = "";
         this.cardTypes = new ArrayList<>();
         this.subTypes = new SubTypes();
-        this.superTypes = EnumSet.noneOf(SuperType.class);
+        this.superTypes = new ArrayList<>();
         this.color = new ObjectColor();
         this.frameColor = new ObjectColor();
         this.frameStyle = FrameStyle.M15_NORMAL;
@@ -939,7 +939,7 @@ public class CardView extends SimpleCardView {
         return subTypes;
     }
 
-    public Set<SuperType> getSuperTypes() {
+    public List<SuperType> getSuperTypes() {
         return superTypes;
     }
 

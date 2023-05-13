@@ -19,7 +19,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 public interface MageObject extends MageItem, Serializable, Copyable<MageObject> {
 
@@ -72,7 +71,7 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
 
     boolean hasSubtype(SubType subtype, Game game);
 
-    Set<SuperType> getSuperType();
+    List<SuperType> getSuperType();
 
     /**
      * For cards: return basic abilities (without dynamic added)
