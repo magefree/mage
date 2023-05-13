@@ -2,7 +2,6 @@
 package mage.cards.a;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +28,7 @@ public final class AetherBurst extends CardImpl {
         // Return up to X target creatures to their owners' hands, where X is one plus the number of cards named Aether Burst in all graveyards as you cast this spell.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect().setText("Return up to X target creatures to their owners' hands, where X is one plus the number of cards named Aether Burst in all graveyards as you cast this spell"));
         this.getSpellAbility().addTarget(new DynamicTargetCreaturePermanent());
-        this.getSpellAbility().setTargetAdjuster(AetherBurstAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(AetherBurstAdjuster.INSTANCE);
     }
 
 
@@ -44,7 +43,7 @@ public final class AetherBurst extends CardImpl {
 }
 
 enum AetherBurstAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
     private static final FilterCard filter = new FilterCard("cards named Aether Burst");
 
     static {

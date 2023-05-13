@@ -104,10 +104,7 @@ class AfiyaGroveNoCountersAbility extends StateTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(getSourceId());
-        if (permanent != null && permanent.getCounters(game).getCount(CounterType.P1P1) == 0) {
-            return true;
-        }
-        return false;
+        return permanent != null && permanent.getCounters(game).getCount(CounterType.P1P1) == 0;
     }
 
     @Override

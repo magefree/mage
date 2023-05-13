@@ -76,10 +76,8 @@ class AjanisChosenEffect extends OneShotEffect {
                             if (oldCreature != null) {
                                 boolean canAttach = enchantment.getSpellAbility() == null
                                         || (!enchantment.getSpellAbility().getTargets().isEmpty() && enchantment.getSpellAbility().getTargets().get(0).canTarget(tokenPermanent.getId(), game));
-                                if (canAttach && controller.chooseUse(Outcome.Neutral, "Attach " + enchantment.getName() + " to the token ?", source, game)) {
-                                    if (oldCreature.removeAttachment(enchantment.getId(), source, game)) {
-                                        tokenPermanent.addAttachment(enchantment.getId(), source, game);
-                                    }
+                                if (canAttach && controller.chooseUse(Outcome.Neutral, "Attach " + enchantment.getName() + " to the token ?", source, game) && (oldCreature.removeAttachment(enchantment.getId(), source, game))) {
+                                    tokenPermanent.addAttachment(enchantment.getId(), source, game);
                                 }
                             }
                         }

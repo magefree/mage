@@ -22,7 +22,7 @@ import mage.filter.common.FilterControlledArtifactPermanent;
  */
 public final class AeronautTinkerer extends CardImpl {
     
-   private  static final String rule = "{this} has flying as long as you control an artifact";
+   private  static final String RULE_TEXT = "{this} has flying as long as you control an artifact";
 
     public AeronautTinkerer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
@@ -34,7 +34,7 @@ public final class AeronautTinkerer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Aeronaut Tinkerer has flying as long as you control an artifact.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield), new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent()), rule)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield), new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent()), RULE_TEXT)));
 
     }
 

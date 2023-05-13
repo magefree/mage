@@ -82,12 +82,10 @@ class AjanisLastStandTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.isDiesEvent()) {
-            if (zEvent.getTarget().isControlledBy(controllerId)
+        if (zEvent.isDiesEvent() && (zEvent.getTarget().isControlledBy(controllerId)
                     && (zEvent.getTarget().isCreature(game)
-                    || zEvent.getTarget().isPlaneswalker(game))) {
-                return true;
-            }
+                    || zEvent.getTarget().isPlaneswalker(game)))) {
+            return true;
         }
         return false;
     }

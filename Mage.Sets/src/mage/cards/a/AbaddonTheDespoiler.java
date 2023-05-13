@@ -36,7 +36,7 @@ public final class AbaddonTheDespoiler extends CardImpl {
 
     static {
         filter.add(new CastFromZonePredicate(Zone.HAND));
-        filter.add(AbaddonTheDespoilerPredicate.instance);
+        filter.add(AbaddonTheDespoilerPredicate.INSTANCE);
     }
 
     private static final Hint hint = new ValueHint(
@@ -75,7 +75,7 @@ public final class AbaddonTheDespoiler extends CardImpl {
 }
 
 enum AbaddonTheDespoilerPredicate implements Predicate<MageObject> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(MageObject input, Game game) {

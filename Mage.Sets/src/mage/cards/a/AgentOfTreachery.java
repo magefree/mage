@@ -42,7 +42,7 @@ public final class AgentOfTreachery extends CardImpl {
                 new BeginningOfEndStepTriggeredAbility(
                         new DrawCardSourceControllerEffect(3),
                         TargetController.YOU, false
-                ), AgentOfTreacheryCondition.instance, "At the beginning of your end step, " +
+                ), AgentOfTreacheryCondition.INSTANCE, "At the beginning of your end step, " +
                 "if you control three or more permanents you don't own, draw three cards."
         ));
     }
@@ -58,7 +58,7 @@ public final class AgentOfTreachery extends CardImpl {
 }
 
 enum AgentOfTreacheryCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

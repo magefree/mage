@@ -106,7 +106,7 @@ class AbandonedSarcophagusReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!(((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD)) {
+        if (((ZoneChangeEvent) event).getToZone() != Zone.GRAVEYARD) {
             return false;
         }
 

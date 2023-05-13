@@ -87,16 +87,14 @@ class AWingAttacksNextCombatIfAbleSourceEffect extends RequirementEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getId().equals(source.getSourceId())) {
-            if (game.getTurnNum() != turnNumber || game.getPhase().getCount() != phaseCount) {
-                if (nextPhaseTurnNumber == 0) {
-                    nextPhasePhaseCount = game.getPhase().getCount();
-                    nextPhaseTurnNumber = game.getTurnNum();
-                } else if (game.getTurnNum() != nextPhaseTurnNumber || game.getPhase().getCount() != nextPhasePhaseCount) {
-                    this.discard();
-                }
-                return true;
+        if (permanent.getId().equals(source.getSourceId()) && (game.getTurnNum() != turnNumber || game.getPhase().getCount() != phaseCount)) {
+            if (nextPhaseTurnNumber == 0) {
+                nextPhasePhaseCount = game.getPhase().getCount();
+                nextPhaseTurnNumber = game.getTurnNum();
+            } else if (game.getTurnNum() != nextPhaseTurnNumber || game.getPhase().getCount() != nextPhasePhaseCount) {
+                this.discard();
             }
+            return true;
         }
         return false;
     }

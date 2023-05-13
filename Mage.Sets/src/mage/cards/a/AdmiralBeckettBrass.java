@@ -74,17 +74,15 @@ class DamagedByPiratesWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
-            if (((DamagedPlayerEvent) event).isCombatDamage()) {
-                Permanent creature = game.getPermanentOrLKIBattlefield(event.getSourceId());
-                if (creature != null && creature.hasSubtype(SubType.PIRATE, game)) {
-                    if (damageSourceIds.containsKey(event.getTargetId())) {
-                        damageSourceIds.get(event.getTargetId()).add(creature.getId());
-                    } else {
-                        Set<UUID> creatureSet = new HashSet<>();
-                        creatureSet.add(creature.getId());
-                        damageSourceIds.put(event.getTargetId(), creatureSet);
-                    }
+        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER && (((DamagedPlayerEvent) event).isCombatDamage())) {
+            Permanent creature = game.getPermanentOrLKIBattlefield(event.getSourceId());
+            if (creature != null && creature.hasSubtype(SubType.PIRATE, game)) {
+                if (damageSourceIds.containsKey(event.getTargetId())) {
+                    damageSourceIds.get(event.getTargetId()).add(creature.getId());
+                } else {
+                    Set<UUID> creatureSet = new HashSet<>();
+                    creatureSet.add(creature.getId());
+                    damageSourceIds.put(event.getTargetId(), creatureSet);
                 }
             }
         }

@@ -29,7 +29,7 @@ public final class AcolyteOfBahamut extends CardImpl {
 
     static {
         filter.add(SubType.DRAGON.getPredicate());
-        filter.add(AcolyteOfBahamutPredicate.instance);
+        filter.add(AcolyteOfBahamutPredicate.INSTANCE);
     }
 
     public AcolyteOfBahamut(UUID ownerId, CardSetInfo setInfo) {
@@ -58,7 +58,7 @@ public final class AcolyteOfBahamut extends CardImpl {
 }
 
 enum AcolyteOfBahamutPredicate implements ObjectSourcePlayerPredicate<Card> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {

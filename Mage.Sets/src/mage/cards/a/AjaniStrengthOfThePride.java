@@ -35,7 +35,7 @@ public final class AjaniStrengthOfThePride extends CardImpl {
 
         // +1: You gain life equal to the number of creatures you control plus the number of planeswalkers you control.
         this.addAbility(new LoyaltyAbility(new GainLifeEffect(
-                AjaniStrengthOfThePrideValue.instance, "You gain life equal to " +
+                AjaniStrengthOfThePrideValue.INSTANCE, "You gain life equal to " +
                 "the number of creatures you control plus the number of planeswalkers you control."
         ), 1));
 
@@ -57,7 +57,7 @@ public final class AjaniStrengthOfThePride extends CardImpl {
 }
 
 enum AjaniStrengthOfThePrideValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

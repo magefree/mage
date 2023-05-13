@@ -74,14 +74,11 @@ public final class AAT1 extends CardImpl {
         @Override
         public boolean checkTrigger(GameEvent event, Game game) {
             Card card = game.getCard(event.getTargetId());
-            if (card != null
+            return card != null
                     && event.getPlayerId().equals(game.getControllerId(sourceId))
                     && card.isCreature(game)
                     && game.getState().getZone(card.getId()) == Zone.GRAVEYARD
-                    && event.getData().equals("repair")) {
-                return true;
-            }
-            return false;
+                    && event.getData().equals("repair");
         }
 
         @Override

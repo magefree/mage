@@ -69,12 +69,10 @@ class AcademicDisputeEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             Permanent permanent = game.getPermanent(this.targetPointer.getFirst(game, source));
-            if (permanent != null) {
-                if (player.chooseUse(outcome, "Have " + permanent.getLogName() + " gain reach until end of turn?", source, game)) {
-                    GainAbilityTargetEffect effect = new GainAbilityTargetEffect(ReachAbility.getInstance(), Duration.EndOfTurn);
-                    game.addEffect(effect, source);
-                    return true;
-                }
+            if (permanent != null && (player.chooseUse(outcome, "Have " + permanent.getLogName() + " gain reach until end of turn?", source, game))) {
+                GainAbilityTargetEffect effect = new GainAbilityTargetEffect(ReachAbility.getInstance(), Duration.EndOfTurn);
+                game.addEffect(effect, source);
+                return true;
             }
         }
         return false;

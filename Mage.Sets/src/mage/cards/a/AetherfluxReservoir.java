@@ -27,7 +27,7 @@ public final class AetherfluxReservoir extends CardImpl {
 
         // Whenever you cast a spell, you gain 1 life for each spell you've cast this turn.
         this.addAbility(new SpellCastControllerTriggeredAbility(new GainLifeEffect(
-                AetherfluxReservoirDynamicValue.instance, "you gain 1 life for each spell you've cast this turn"
+                AetherfluxReservoirDynamicValue.INSTANCE, "you gain 1 life for each spell you've cast this turn"
         ), false));
 
         // Pay 50 life: Aetherflux Reservoir deals 50 damage to any target.
@@ -47,7 +47,7 @@ public final class AetherfluxReservoir extends CardImpl {
 }
 
 enum AetherfluxReservoirDynamicValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

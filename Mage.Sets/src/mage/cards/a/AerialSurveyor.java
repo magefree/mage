@@ -49,10 +49,10 @@ public final class AerialSurveyor extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new AttacksTriggeredAbility(
                         new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true)
-                ), AerialSurveyorCondition.instance, "Whenever {this} attacks, if defending player " +
+                ), AerialSurveyorCondition.INSTANCE, "Whenever {this} attacks, if defending player " +
                 "controls more lands than you, search your library for a basic Plains card, " +
                 "put it onto the battlefield tapped, then shuffle."
-        ).addHint(LandsYouControlHint.instance).addHint(AerialSurveyorHint.instance));
+        ).addHint(LandsYouControlHint.instance).addHint(AerialSurveyorHint.INSTANCE));
 
         // Crew 2
         this.addAbility(new CrewAbility(2));
@@ -69,7 +69,7 @@ public final class AerialSurveyor extends CardImpl {
 }
 
 enum AerialSurveyorCondition implements Condition {
-    instance;
+    INSTANCE;
     private static final FilterPermanent filter = new FilterLandPermanent();
 
     static {
@@ -88,7 +88,7 @@ enum AerialSurveyorCondition implements Condition {
 }
 
 enum AerialSurveyorHint implements Hint {
-    instance;
+    INSTANCE;
 
     @Override
     public String getText(Game game, Ability ability) {
@@ -110,6 +110,6 @@ enum AerialSurveyorHint implements Hint {
 
     @Override
     public AerialSurveyorHint copy() {
-        return instance;
+        return INSTANCE;
     }
 }

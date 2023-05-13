@@ -38,7 +38,7 @@ public final class AetherTide extends CardImpl {
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().setTargetAdjuster(XTargetsAdjuster.instance);
-        this.getSpellAbility().setCostAdjuster(AetherTideCostAdjuster.instance);
+        this.getSpellAbility().setCostAdjuster(AetherTideCostAdjuster.INSTANCE);
 
     }
 
@@ -53,7 +53,7 @@ public final class AetherTide extends CardImpl {
 }
 
 enum AetherTideCostAdjuster implements CostAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustCosts(Ability ability, Game game) {

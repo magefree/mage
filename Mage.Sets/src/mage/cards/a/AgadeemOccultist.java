@@ -82,14 +82,10 @@ class AgadeemOccultistEffect extends OneShotEffect {
 
         if (controller != null) {
             if (target.canChoose(source.getControllerId(), source, game)
-                    && controller.choose(Outcome.GainControl, target, source, game)) {
-                if (!target.getTargets().isEmpty()) {
-                    Card card = game.getCard(target.getFirstTarget());
-                    if (card != null) {
-                        if (card.getManaValue() <= allycount) {
-                            return controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                        }
-                    }
+                    && controller.choose(Outcome.GainControl, target, source, game) && !target.getTargets().isEmpty()) {
+                Card card = game.getCard(target.getFirstTarget());
+                if (card != null && (card.getManaValue() <= allycount)) {
+                    return controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 }
             }
             return true;

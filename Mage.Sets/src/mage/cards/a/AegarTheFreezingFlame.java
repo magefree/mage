@@ -96,7 +96,6 @@ class AegarTheFreezingFlameWatcher extends Watcher {
         if (event.getType() != GameEvent.EventType.DAMAGED_PERMANENT) {
             return;
         }
-        DamagedEvent dEvent = (DamagedEvent) event;
         MageObject sourceObject = game.getObject(event.getSourceId());
         if (sourceObject == null) {
             return;

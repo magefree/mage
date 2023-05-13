@@ -24,7 +24,7 @@ import mage.watchers.common.RevoltWatcher;
  */
 public final class AidFromTheCowl extends CardImpl {
 
-    private static final String ruleText = "<i>Revolt</i> &mdash; At the beginning of your end step, if a permanent you controlled left the battlefield this turn, "
+    private static final String RULE_TEXT = "<i>Revolt</i> &mdash; At the beginning of your end step, if a permanent you controlled left the battlefield this turn, "
             + "reveal the top card of your library. If it's a permanent card, you may put it onto the battlefield. Otherwise, you may put it on the bottom of your library.";
 
     public AidFromTheCowl(UUID ownerId, CardSetInfo setInfo) {
@@ -33,7 +33,7 @@ public final class AidFromTheCowl extends CardImpl {
         // <i>Revolt</i> &mdash; At the beginning of your end step, if a permanent you controlled left the battlefield this turn,
         // reveal the top card of your library. If it is a permanent card, you may put it onto the battlefield. Otherwise, put it on the bottom of your library.
         TriggeredAbility ability = new BeginningOfYourEndStepTriggeredAbility(new AidFromTheCowlEffect(), false);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, RevoltCondition.instance, ruleText), new RevoltWatcher());
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, RevoltCondition.instance, RULE_TEXT), new RevoltWatcher());
     }
 
     private AidFromTheCowl(final AidFromTheCowl card) {

@@ -27,7 +27,7 @@ public final class AdviceFromTheFae extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new LookLibraryAndPickControllerEffect(5, 2, PutCards.HAND, PutCards.BOTTOM_ANY),
                 new LookLibraryAndPickControllerEffect(5, 1, PutCards.HAND, PutCards.BOTTOM_ANY),
-                AdviceFromTheFaeCondition.instance, "Look at the top five cards of your library. " +
+                AdviceFromTheFaeCondition.INSTANCE, "Look at the top five cards of your library. " +
                 "If you control more creatures than each other player, put two of those cards into your hand. " +
                 "Otherwise, put one of them into your hand. Then put the rest on the bottom of your library in any order."
         ));
@@ -44,7 +44,7 @@ public final class AdviceFromTheFae extends CardImpl {
 }
 
 enum AdviceFromTheFaeCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

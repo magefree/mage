@@ -42,7 +42,7 @@ public final class AgadeemsAwakening extends ModalDoubleFacesCard {
                 "return from your graveyard to the battlefield any number of target creature cards " +
                         "that each have a different mana value X or less"
         ));
-        this.getLeftHalfCard().getSpellAbility().setTargetAdjuster(AgadeemsAwakeningAdjuster.instance);
+        this.getLeftHalfCard().getSpellAbility().setTargetAdjuster(AgadeemsAwakeningAdjuster.INSTANCE);
 
         // 2.
         // Agadeem, the Undercrypt
@@ -69,7 +69,7 @@ public final class AgadeemsAwakening extends ModalDoubleFacesCard {
 }
 
 enum AgadeemsAwakeningAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

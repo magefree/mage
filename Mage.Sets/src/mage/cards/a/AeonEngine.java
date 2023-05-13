@@ -13,8 +13,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.GameState;
-import mage.players.PlayerList;
 
 /**
  * 
