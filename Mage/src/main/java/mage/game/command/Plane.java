@@ -162,7 +162,7 @@ public abstract class Plane extends CommandObjectImpl {
     }
 
     @Override
-    public List<SuperType> getSuperType() {
+    public List<SuperType> getSuperType(Game game) {
         return Collections.emptyList();
     }
 

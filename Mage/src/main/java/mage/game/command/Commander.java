@@ -180,8 +180,8 @@ public class Commander extends CommandObjectImpl {
     }
 
     @Override
-    public List<SuperType> getSuperType() {
-        return sourceObject.getSuperType();
+    public List<SuperType> getSuperType(Game game) {
+        return sourceObject.getSuperType(game);
     }
 
     @Override

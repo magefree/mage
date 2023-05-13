@@ -7,7 +7,6 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.command.CommandObject;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
@@ -112,8 +111,8 @@ public class CopyEffect extends ContinuousEffectImpl {
         permanent.removeAllSubTypes(game);
         permanent.copySubTypesFrom(game, copyFromObject);
 
-        permanent.getSuperType().clear();
-        for (SuperType type : copyFromObject.getSuperType()) {
+        permanent.removeAllSuperTypes(game);
+        for (SuperType type : copyFromObject.getSuperType(game)) {
             permanent.addSuperType(type);
         }
 

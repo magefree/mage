@@ -62,9 +62,8 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
         }
         switch (layer) {
             case TypeChangingEffects_4:
-                for (SuperType t : token.getSuperType()) {
-                    permanent.addSuperType(t);
-
+                for (SuperType t : token.getSuperType(game)) {
+                    permanent.addSuperType(game, t);
                 }
                 // card type
                 switch (loseType) {

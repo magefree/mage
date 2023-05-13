@@ -124,7 +124,7 @@ class TheRingEmblemLegendaryEffect extends ContinuousEffectImpl {
         if (permanent == null) {
             return false;
         }
-        permanent.addSuperType(SuperType.LEGENDARY);
+        permanent.addSuperType(game, SuperType.LEGENDARY);
         return true;
     }
 }

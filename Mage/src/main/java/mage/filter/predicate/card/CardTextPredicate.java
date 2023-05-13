@@ -130,7 +130,7 @@ public class CardTextPredicate implements Predicate<Card> {
                             break;
                         }
                     }
-                    for (SuperType superType : input.getSuperType()) {
+                    for (SuperType superType : input.getSuperType(game)) {
                         if (superType.toString().equalsIgnoreCase(token)) {
                             found = true;
                             break;

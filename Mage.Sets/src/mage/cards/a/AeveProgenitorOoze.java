@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -8,10 +7,10 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.constants.*;
 import mage.abilities.keyword.StormAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -19,8 +18,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class AeveProgenitorOoze extends CardImpl {
@@ -82,7 +82,7 @@ class AeveProgenitorOozeNonLegendaryEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent instanceof PermanentToken) {
-            permanent.getSuperType().remove(SuperType.LEGENDARY);
+            permanent.removeSuperType(game, SuperType.LEGENDARY);
             return true;
         }
         return false;

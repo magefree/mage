@@ -202,7 +202,7 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public List<SuperType> getSuperType() {
+    public List<SuperType> getSuperType(Game game) {
         return Collections.emptyList();
     }
 

@@ -110,7 +110,7 @@ public abstract class Designation extends MageObjectImpl {
     }
 
     @Override
-    public List<SuperType> getSuperType() {
+    public List<SuperType> getSuperType(Game game) {
         return Collections.emptyList();
     }
 

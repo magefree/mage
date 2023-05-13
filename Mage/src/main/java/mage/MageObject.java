@@ -71,7 +71,11 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
 
     boolean hasSubtype(SubType subtype, Game game);
 
-    List<SuperType> getSuperType();
+    default List<SuperType> getSuperType() {
+        return getSuperType(null);
+    }
+
+    List<SuperType> getSuperType(Game game);
 
     /**
      * For cards: return basic abilities (without dynamic added)
@@ -148,7 +152,7 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
 
     default boolean isHistoric(Game game) {
         return getCardType(game).contains(CardType.ARTIFACT)
-                || getSuperType().contains(SuperType.LEGENDARY)
+                || getSuperType(game).contains(SuperType.LEGENDARY)
                 || hasSubtype(SubType.SAGA, game);
     }
 
@@ -245,7 +249,7 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
     }
 
     default boolean isLegendary(Game game) {
-        return getSuperType().contains(SuperType.LEGENDARY);
+        return getSuperType(game).contains(SuperType.LEGENDARY);
     }
 
     default boolean isSnow() {
@@ -253,7 +257,7 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
     }
 
     default boolean isSnow(Game game) {
-        return getSuperType().contains(SuperType.SNOW);
+        return getSuperType(game).contains(SuperType.SNOW);
     }
 
     default boolean isBasic() {
@@ -261,7 +265,7 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
     }
 
     default boolean isBasic(Game game) {
-        return getSuperType().contains(SuperType.BASIC);
+        return getSuperType(game).contains(SuperType.BASIC);
     }
 
     default boolean isWorld() {
@@ -269,18 +273,34 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
     }
 
     default boolean isWorld(Game game) {
-        return getSuperType().contains(SuperType.WORLD);
+        return getSuperType(game).contains(SuperType.WORLD);
     }
 
     default void addSuperType(SuperType superType) {
-        if (getSuperType().contains(superType)) {
+        addSuperType(null, superType);
+    }
+
+    default void addSuperType(Game game, SuperType superType) {
+        if (getSuperType(game).contains(superType)) {
             return;
         }
-        getSuperType().add(superType);
+        getSuperType(game).add(superType);
+    }
+
+    default void removeAllSuperTypes() {
+        removeAllSuperTypes(null);
+    }
+
+    default void removeAllSuperTypes(Game game) {
+        getSuperType(game).clear();
     }
 
     default void removeSuperType(SuperType superType) {
-        getSuperType().remove(superType);
+        removeSuperType(null, superType);
+    }
+
+    default void removeSuperType(Game game, SuperType superType) {
+        getSuperType(game).remove(superType);
     }
 
     /**

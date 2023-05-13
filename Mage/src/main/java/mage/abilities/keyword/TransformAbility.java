@@ -56,9 +56,9 @@ public class TransformAbility extends SimpleStaticAbility {
         }
         permanent.removeAllSubTypes(game);
         permanent.copySubTypesFrom(game, sourceCard);
-        permanent.getSuperType().clear();
-        for (SuperType type : sourceCard.getSuperType()) {
-            permanent.addSuperType(type);
+        permanent.removeAllSuperTypes(game);
+        for (SuperType type : sourceCard.getSuperType(game)) {
+            permanent.addSuperType(game, type);
         }
 
         CardUtil.copySetAndCardNumber(permanent, sourceCard);
@@ -81,15 +81,11 @@ public class TransformAbility extends SimpleStaticAbility {
         // TODO: must be removed after transform cards (one side) migrated to MDF engine (multiple sides)
         Card newCard = mainSide.copy();
         newCard.setName(otherSide.getName());
-        newCard.getSuperType().clear();
 
         // mana value must be from main side only
         newCard.getManaCost().clear();
         newCard.getManaCost().add(mainSide.getManaCost().copy());
 
-        for (SuperType type : otherSide.getSuperType()) {
-            newCard.addSuperType(type);
-        }
         game.getState().getCardState(newCard.getId()).clearAbilities();
         for (Ability ability : otherSide.getAbilities()) {
             game.getState().addOtherAbility(newCard, ability);
@@ -108,6 +104,8 @@ public class TransformAbility extends SimpleStaticAbility {
         moa.getColor().setColor(otherSide.getColor(game));
         moa.getCardType().clear();
         moa.getCardType().addAll(otherSide.getCardType(game));
+        moa.getSuperType().clear();
+        moa.getSuperType().addAll(otherSide.getSuperType(game));
         moa.getSubtype().clear();
         moa.getSubtype().addAll(otherSide.getSubtype(game));
 
