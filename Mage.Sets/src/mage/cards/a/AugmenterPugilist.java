@@ -99,7 +99,7 @@ class EchoingEquationEffect extends OneShotEffect {
                 .forEach(copyTo -> game.copyPermanent(Duration.EndOfTurn, copyFrom, copyTo.getId(), source, new CopyApplier() {
                     @Override
                     public boolean apply(Game game, MageObject blueprint, Ability source, UUID targetObjectId) {
-                        blueprint.removeSuperType(game, SuperType.LEGENDARY);
+                        blueprint.removeSuperType(SuperType.LEGENDARY);
                         return true;
                     }
                 }));
