@@ -18,7 +18,7 @@ import mage.constants.Zone;
  */
 public final class SpectralGateguards extends CardImpl {
 
-    private static final String ruleText = "As long as {this} is paired with another creature, both creatures have vigilance";
+    private static final String RULE_TEXT = "As long as {this} is paired with another creature, both creatures have vigilance";
 
     public SpectralGateguards(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
@@ -32,7 +32,7 @@ public final class SpectralGateguards extends CardImpl {
         this.addAbility(new SoulbondAbility());
 
         // As long as Spectral Gateguards is paired with another creature, both creatures have vigilance.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(VigilanceAbility.getInstance(), ruleText)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(VigilanceAbility.getInstance(), RULE_TEXT)));
     }
 
     private SpectralGateguards(final SpectralGateguards card) {

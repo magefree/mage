@@ -42,7 +42,7 @@ public final class SeafloorStalker extends CardImpl {
         ability.addEffect(new InfoEffect(
                 "This ability costs {1} less to activate for each creature in your party. " + PartyCount.getReminder()
         ));
-        ability.setCostAdjuster(SeafloorStalkerAdjuster.instance);
+        ability.setCostAdjuster(SeafloorStalkerAdjuster.INSTANCE);
         this.addAbility(ability.addHint(PartyCountHint.instance));
     }
 
@@ -57,7 +57,7 @@ public final class SeafloorStalker extends CardImpl {
 }
 
 enum SeafloorStalkerAdjuster implements CostAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustCosts(Ability ability, Game game) {

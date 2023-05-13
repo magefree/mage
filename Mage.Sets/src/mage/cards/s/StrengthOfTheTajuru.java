@@ -30,7 +30,7 @@ public final class StrengthOfTheTajuru extends CardImpl {
         // Choose target creature, then choose another target creature for each time Strength of the Tajuru was kicked. Put X +1/+1 counters on each of them.
         this.getSpellAbility().addEffect(new StrengthOfTheTajuruAddCountersTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
-        this.getSpellAbility().setTargetAdjuster(StrengthOfTheTajuruAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(StrengthOfTheTajuruAdjuster.INSTANCE);
     }
 
     private StrengthOfTheTajuru(final StrengthOfTheTajuru card) {
@@ -44,7 +44,7 @@ public final class StrengthOfTheTajuru extends CardImpl {
 }
 
 enum StrengthOfTheTajuruAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

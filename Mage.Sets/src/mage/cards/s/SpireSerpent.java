@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class SpireSerpent extends CardImpl {
 
-    private static final String abilityText1 = "As long as you control three or more artifacts, {this} gets +2/+2";
+    private static final String ABILITY_TEXT = "As long as you control three or more artifacts, {this} gets +2/+2";
 
     public SpireSerpent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");
@@ -35,7 +35,7 @@ public final class SpireSerpent extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // Metalcraft — As long as you control three or more artifacts, Spire Serpent gets +2/+2 and can attack as though it didn’t have defender.
-        ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), MetalcraftCondition.instance, abilityText1);
+        ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), MetalcraftCondition.instance, ABILITY_TEXT);
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect1);
         Effect effect = new ConditionalAsThoughEffect(new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield),
                 MetalcraftCondition.instance);

@@ -26,9 +26,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LevelX2
  */
 public final class StabWound extends CardImpl {
-
-    static final String rule = "At the beginning of the upkeep of enchanted creature's controller, that player loses 2 life";
-
     public StabWound (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
         this.subtype.add(SubType.AURA);

@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 public final class SpiralingDuelist extends CardImpl {
 
-    private static final String effectText = "{this} has double strike as long as you control three or more artifacts.";
+    private static final String EFFECT_TEXT = "{this} has double strike as long as you control three or more artifacts.";
 
     public SpiralingDuelist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
@@ -30,7 +30,7 @@ public final class SpiralingDuelist extends CardImpl {
 
         // Metalcraft — Spiraling Duelist has double strike as long as you control three or more artifacts.
         ContinuousEffect effect = new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect, MetalcraftCondition.instance, effectText))
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect, MetalcraftCondition.instance, EFFECT_TEXT))
                 .setAbilityWord(AbilityWord.METALCRAFT)
                 .addHint(MetalcraftHint.instance));
     }

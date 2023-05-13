@@ -44,7 +44,7 @@ public final class ScrapWelder extends CardImpl {
         // {T}, Sacrifice an artifact with mana value X: Return target artifact card with mana value less than X from your graveyard to the battlefield. It gains haste until end of turn.
         Ability ability = new SimpleActivatedAbility(new ScrapWelderEffect(), new TapSourceCost());
         ability.addCost(new ScrapWelderCost());
-        ability.setTargetAdjuster(ScrapWelderTargetAdjuster.instance);
+        ability.setTargetAdjuster(ScrapWelderTargetAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -117,7 +117,7 @@ class ScrapWelderCost extends VariableCostImpl {
 }
 
 enum ScrapWelderTargetAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

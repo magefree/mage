@@ -32,7 +32,7 @@ import java.util.UUID;
 public final class SailorsBane extends CardImpl {
 
     private static final Hint hint = new ValueHint(
-            "Instant, sorcery, and Adventure cards in your graveyard and in exile", SailorsBaneValue.instance
+            "Instant, sorcery, and Adventure cards in your graveyard and in exile", SailorsBaneValue.INSTANCE
     );
 
     public SailorsBane(UUID ownerId, CardSetInfo setInfo) {
@@ -45,7 +45,7 @@ public final class SailorsBane extends CardImpl {
 
         // This spell costs {1} less to cast for each card you own in exile and in your graveyard that's an instant card, a sorcery card, or a card that has an Adventure.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionSourceEffect(SailorsBaneValue.instance)
+                Zone.ALL, new SpellCostReductionSourceEffect(SailorsBaneValue.INSTANCE)
                 .setText("this spell costs {1} less to cast for each card you own in exile and in " +
                         "your graveyard that's an instant card, a sorcery card, or a card that has an Adventure")
         ).addHint(hint).setRuleAtTheTop(true));
@@ -65,7 +65,7 @@ public final class SailorsBane extends CardImpl {
 }
 
 enum SailorsBaneValue implements DynamicValue {
-    instance;
+    INSTANCE;
     private static final FilterCard filter = new FilterCard();
 
     static {

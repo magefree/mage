@@ -20,7 +20,7 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class SidewinderSliver extends CardImpl {
 
-    static final private FilterCreaturePermanent filter = new FilterCreaturePermanent("All Sliver creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("All Sliver creatures");
 
     static {
         filter.add(SubType.SLIVER.getPredicate());

@@ -62,11 +62,11 @@ public final class SarkhanTheMad extends CardImpl {
 
 class SarkhanTheMadRevealAndDrawEffect extends OneShotEffect {
 
-    private static final String effectText = "Reveal the top card of your library and put it into your hand. {this} deals damage to himself equal to that card's mana value";
+    private static final String EFFECT_TEXT = "Reveal the top card of your library and put it into your hand. {this} deals damage to himself equal to that card's mana value";
 
     SarkhanTheMadRevealAndDrawEffect() {
         super(Outcome.DrawCard);
-        staticText = effectText;
+        staticText = EFFECT_TEXT;
     }
 
     SarkhanTheMadRevealAndDrawEffect(SarkhanTheMadRevealAndDrawEffect effect) {
@@ -135,7 +135,7 @@ class SarkhanTheMadSacEffect extends OneShotEffect {
 
 class SarkhanTheMadDragonDamageEffect extends OneShotEffect {
 
-    private static final String effectText = "Each Dragon creature you control deals damage equal to its power to target player or planeswalker";
+    private static final String EFFECT_TEXT = "Each Dragon creature you control deals damage equal to its power to target player or planeswalker";
     private static final FilterControlledPermanent filter;
 
     static {
@@ -146,7 +146,7 @@ class SarkhanTheMadDragonDamageEffect extends OneShotEffect {
 
     SarkhanTheMadDragonDamageEffect() {
         super(Outcome.Damage);
-        staticText = effectText;
+        staticText = EFFECT_TEXT;
     }
 
     SarkhanTheMadDragonDamageEffect(SarkhanTheMadDragonDamageEffect effect) {

@@ -28,9 +28,9 @@ public final class ShireiShizosCaretaker extends CardImpl {
         filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 2));
     }
 
-    private static final String rule1 = "you may return that card to the battlefield " +
+    private static final String RULE1 = "you may return that card to the battlefield " +
             "t the beginning of the next end step if {this} is still on the battlefield";
-    private static final String rule2 = "Whenever a creature with power 1 or less " +
+    private static final String RULE2 = "Whenever a creature with power 1 or less " +
             "is put into your graveyard from the battlefield, ";
 
     public ShireiShizosCaretaker(UUID ownerId, CardSetInfo setInfo) {
@@ -47,7 +47,7 @@ public final class ShireiShizosCaretaker extends CardImpl {
                         new ReturnFromGraveyardToBattlefieldTargetEffect(), SourceOnBattlefieldCondition.instance,
                         "you may return that card to the battlefield if {this} is still on the battlefield"
                 ), TargetController.ANY, null, true)
-        ).setText(rule1), false, filter, true).setTriggerPhrase(rule2));
+        ).setText(RULE1), false, filter, true).setTriggerPhrase(RULE2));
     }
 
     private ShireiShizosCaretaker(final ShireiShizosCaretaker card) {

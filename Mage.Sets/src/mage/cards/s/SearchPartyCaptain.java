@@ -26,7 +26,7 @@ import java.util.UUID;
 public final class SearchPartyCaptain extends CardImpl {
 
     private static final Hint hint = new ValueHint(
-            "Creatures you attacked with this turn", SearchPartyCaptainValue.instance
+            "Creatures you attacked with this turn", SearchPartyCaptainValue.INSTANCE
     );
 
     public SearchPartyCaptain(UUID ownerId, CardSetInfo setInfo) {
@@ -39,7 +39,7 @@ public final class SearchPartyCaptain extends CardImpl {
 
         // This spell costs {1} less to cast for each creature you attacked with this turn.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionSourceEffect(SearchPartyCaptainValue.instance)
+                Zone.ALL, new SpellCostReductionSourceEffect(SearchPartyCaptainValue.INSTANCE)
                 .setText("this spell costs {1} less to cast for each creature you attacked with this turn")
         ).addHint(hint), new PlayerAttackedWatcher());
 
@@ -58,7 +58,7 @@ public final class SearchPartyCaptain extends CardImpl {
 }
 
 enum SearchPartyCaptainValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

@@ -106,12 +106,10 @@ class ScoutsWarningWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            if (!getActiveScoutsWarningSpells().isEmpty() && event.getPlayerId().equals(getControllerId())) {
-                Spell spell = game.getStack().getSpell(event.getTargetId());
-                if (spell != null && spell.isCreature(game)) {
-                    getActiveScoutsWarningSpells().clear();
-                }
+        if (event.getType() == GameEvent.EventType.SPELL_CAST && (!getActiveScoutsWarningSpells().isEmpty() && event.getPlayerId().equals(getControllerId()))) {
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (spell != null && spell.isCreature(game)) {
+                getActiveScoutsWarningSpells().clear();
             }
         }
     }

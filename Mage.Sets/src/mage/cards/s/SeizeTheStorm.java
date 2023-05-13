@@ -24,7 +24,7 @@ import java.util.UUID;
 public final class SeizeTheStorm extends CardImpl {
 
     private static final Hint hint = new ValueHint(
-            "Spells in your graveyard and flashback cards in exile", SeizeTheStormValue.instance
+            "Spells in your graveyard and flashback cards in exile", SeizeTheStormValue.INSTANCE
     );
 
     public SeizeTheStorm(UUID ownerId, CardSetInfo setInfo) {
@@ -32,7 +32,7 @@ public final class SeizeTheStorm extends CardImpl {
 
         // Create a red Elemental creature token with trample and "This creature's power and toughness are each equal to the number of instant and sorcery cards in your graveyard, plus the number of cards with flashback you own in exile."
         this.getSpellAbility().addEffect(new CreateTokenEffect(
-                new SeizeTheStormElementalToken(SeizeTheStormValue.instance, hint)
+                new SeizeTheStormElementalToken(SeizeTheStormValue.INSTANCE, hint)
         ));
         this.getSpellAbility().addHint(hint);
 
@@ -51,7 +51,7 @@ public final class SeizeTheStorm extends CardImpl {
 }
 
 enum SeizeTheStormValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

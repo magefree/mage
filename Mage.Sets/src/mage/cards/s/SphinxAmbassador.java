@@ -96,10 +96,8 @@ class SphinxAmbassadorEffect extends OneShotEffect {
                 String cardName = cardChoice.getChoice();
 
                 game.informPlayers(sourcePermanent.getName() + ", named card: [" + cardName + ']');
-                if (!card.getName().equals(cardName) && card.isCreature(game)) {
-                    if (controller.chooseUse(outcome, "Put " + card.getName() + " onto the battlefield?", source, game)) {
-                        controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                    }
+                if (!card.getName().equals(cardName) && card.isCreature(game) && (controller.chooseUse(outcome, "Put " + card.getName() + " onto the battlefield?", source, game))) {
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 }
             }
 

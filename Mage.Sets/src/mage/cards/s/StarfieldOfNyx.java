@@ -26,7 +26,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class StarfieldOfNyx extends CardImpl {
 
-    private static final String rule1 = "As long as you control five or more enchantments, "
+    private static final String RULE_TEXT = "As long as you control five or more enchantments, "
             + "each other non-Aura enchantment you control is a creature in addition to its other types "
             + "and has base power and base toughness each equal to its mana value.";
 
@@ -58,7 +58,7 @@ public final class StarfieldOfNyx extends CardImpl {
         // base toughness each equal to its converted mana cost.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
                 new StarfieldOfNyxEffect(), new PermanentsOnTheBattlefieldCondition(
-                        filterEnchantmentYouControl, ComparisonType.MORE_THAN, 4), rule1);
+                        filterEnchantmentYouControl, ComparisonType.MORE_THAN, 4), RULE_TEXT);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
@@ -115,11 +115,8 @@ public final class StarfieldOfNyx extends CardImpl {
                     source.getControllerId(), source, game)) {
                 switch (layer) {
                     case TypeChangingEffects_4:
-                        if (sublayer == SubLayer.NA) {
-                            if (!permanent.isCreature(game)
-                                    && !permanent.hasSubtype(SubType.AURA, game)) {
-                                permanent.addCardType(game, CardType.CREATURE);
-                            }
+                        if (sublayer == SubLayer.NA && !permanent.isCreature(game) && !permanent.hasSubtype(SubType.AURA, game)) {
+                            permanent.addCardType(game, CardType.CREATURE);
                         }
                         break;
 

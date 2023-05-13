@@ -67,12 +67,10 @@ class MayRemoveM1M1CouterTargetEffect extends OneShotEffect {
             return false;
         }
 
-        if (target.getCounters(game).getCount(CounterType.M1M1) > 0) {
-            if (controller.chooseUse(outcome, "Remove a -1/-1 counter from " + target.getIdName() + "?", source, game)) {
-                Effect effect = new RemoveCounterTargetEffect(CounterType.M1M1.createInstance());
-                effect.setTargetPointer(new FixedTarget(target.getId(), game));
-                effect.apply(game, source);
-            }
+        if (target.getCounters(game).getCount(CounterType.M1M1) > 0 && (controller.chooseUse(outcome, "Remove a -1/-1 counter from " + target.getIdName() + "?", source, game))) {
+            Effect effect = new RemoveCounterTargetEffect(CounterType.M1M1.createInstance());
+            effect.setTargetPointer(new FixedTarget(target.getId(), game));
+            effect.apply(game, source);
         }
 
         return true;

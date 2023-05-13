@@ -56,11 +56,11 @@ class StumpsquallHydraEffect extends OneShotEffect {
             = new FilterPermanent("this permanent or any number of commanders");
 
     static {
-        filter.add(StumpsquallHydraPredicate.instance);
+        filter.add(StumpsquallHydraPredicate.INSTANCE);
     }
 
     private enum StumpsquallHydraPredicate implements ObjectSourcePlayerPredicate<MageObject> {
-        instance;
+        INSTANCE;
 
         @Override
         public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {

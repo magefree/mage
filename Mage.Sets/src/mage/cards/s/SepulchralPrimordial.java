@@ -44,7 +44,7 @@ public final class SepulchralPrimordial extends CardImpl {
         // When Sepulchral Primordial enters the battlefield, for each opponent, you may put up to one
         // target creature card from that player's graveyard onto the battlefield under your control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new SepulchralPrimordialEffect(), false);
-        ability.setTargetAdjuster(SepulchralPrimordialAdjuster.instance);
+        ability.setTargetAdjuster(SepulchralPrimordialAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -59,7 +59,7 @@ public final class SepulchralPrimordial extends CardImpl {
 }
 
 enum SepulchralPrimordialAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

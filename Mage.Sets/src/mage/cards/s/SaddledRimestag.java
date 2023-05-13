@@ -32,7 +32,7 @@ public final class SaddledRimestag extends CardImpl {
         // Saddled Rimestag gets +2/+2 as long as you had another creature enter the battlefield under your control this turn.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield),
-                SaddledRimestagCondition.instance, "{this} gets +2/+2 as long as " +
+                SaddledRimestagCondition.INSTANCE, "{this} gets +2/+2 as long as " +
                 "you had another creature enter the battlefield under your control this turn."
         )), new SaddledRimestagWatcher());
     }
@@ -48,7 +48,7 @@ public final class SaddledRimestag extends CardImpl {
 }
 
 enum SaddledRimestagCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

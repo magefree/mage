@@ -28,7 +28,7 @@ public final class SynchronizedEviction extends CardImpl {
 
         // This spell costs {2} less to cast if you control two or more creatures that share a creature type.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionSourceEffect(2, SynchronizedEvictionCondition.instance))
+                Zone.ALL, new SpellCostReductionSourceEffect(2, SynchronizedEvictionCondition.INSTANCE))
                 .addHint(GreatestSharedCreatureTypeCount.getHint()).setRuleAtTheTop(true)
         );
 
@@ -48,7 +48,7 @@ public final class SynchronizedEviction extends CardImpl {
 }
 
 enum SynchronizedEvictionCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

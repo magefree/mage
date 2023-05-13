@@ -57,8 +57,8 @@ public final class SpellpyrePhoenix extends CardImpl {
         // At the beginning of each end step, if you cycled two or more cards this turn, return Spellpyre Phoenix from your graveyard to your hand.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(),
-                TargetController.ANY, SpellpyrePhoenixCondition.instance, false
-        ).addHint(SpellpyrePhoenixHint.instance), new SpellpyrePhoenixWatcher());
+                TargetController.ANY, SpellpyrePhoenixCondition.INSTANCE, false
+        ).addHint(SpellpyrePhoenixHint.INSTANCE), new SpellpyrePhoenixWatcher());
     }
 
     private SpellpyrePhoenix(final SpellpyrePhoenix card) {
@@ -72,7 +72,7 @@ public final class SpellpyrePhoenix extends CardImpl {
 }
 
 enum SpellpyrePhoenixCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -87,7 +87,7 @@ enum SpellpyrePhoenixCondition implements Condition {
 }
 
 enum SpellpyrePhoenixHint implements Hint {
-    instance;
+    INSTANCE;
 
     @Override
     public String getText(Game game, Ability ability) {
@@ -101,7 +101,7 @@ enum SpellpyrePhoenixHint implements Hint {
 
     @Override
     public SpellpyrePhoenixHint copy() {
-        return instance;
+        return INSTANCE;
     }
 }
 

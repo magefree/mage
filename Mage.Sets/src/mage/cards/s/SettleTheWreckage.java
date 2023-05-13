@@ -77,11 +77,9 @@ class SettleTheWreckageEffect extends OneShotEffect {
                 attackers > 1 ? StaticFilters.FILTER_CARD_BASIC_LANDS : StaticFilters.FILTER_CARD_BASIC_LAND
         );
         if (player.chooseUse(Outcome.PutLandInPlay, "Search your library for " + target.getDescription() + '?', source, game)) {
-            if (player.searchLibrary(target, source, game)) {
-                if (!target.getTargets().isEmpty()) {
-                    player.moveCards(new CardsImpl(target.getTargets()).getCards(game),
-                            Zone.BATTLEFIELD, source, game, true, false, false, null);
-                }
+            if (player.searchLibrary(target, source, game) && !target.getTargets().isEmpty()) {
+                player.moveCards(new CardsImpl(target.getTargets()).getCards(game),
+                        Zone.BATTLEFIELD, source, game, true, false, false, null);
             }
         }
         return true;

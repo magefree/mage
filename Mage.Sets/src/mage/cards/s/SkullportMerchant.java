@@ -30,7 +30,7 @@ public final class SkullportMerchant extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another creature or a Treasure");
 
     static {
-        filter.add(SkullportMerchantPredicate.instance);
+        filter.add(SkullportMerchantPredicate.INSTANCE);
     }
 
     public SkullportMerchant(UUID ownerId, CardSetInfo setInfo) {
@@ -61,7 +61,7 @@ public final class SkullportMerchant extends CardImpl {
 }
 
 enum SkullportMerchantPredicate implements ObjectSourcePlayerPredicate<MageObject> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {

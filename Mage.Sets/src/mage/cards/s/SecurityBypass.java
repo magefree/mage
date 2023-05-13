@@ -38,7 +38,7 @@ public final class SecurityBypass extends CardImpl {
 
         // As long as enchanted creature is attacking alone, it can't be blocked.
         this.addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
-                new CantBeBlockedAttachedEffect(AttachmentType.AURA), SecurityBypassCondition.instance,
+                new CantBeBlockedAttachedEffect(AttachmentType.AURA), SecurityBypassCondition.INSTANCE,
                 "as long as enchanted creature is attacking alone, it can't be blocked"
         )));
 
@@ -64,7 +64,7 @@ public final class SecurityBypass extends CardImpl {
 }
 
 enum SecurityBypassCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

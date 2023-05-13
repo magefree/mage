@@ -45,7 +45,7 @@ public final class SoulFoundry extends CardImpl {
         // {X}, {T}: Create a token that's a copy of the exiled card. X is the converted mana cost of that card.
         Ability ability = new SimpleActivatedAbility(new SoulFoundryEffect(), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
-        ability.setCostAdjuster(SoulFoundryAdjuster.instance);
+        ability.setCostAdjuster(SoulFoundryAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -60,18 +60,16 @@ public final class SoulFoundry extends CardImpl {
 }
 
 enum SoulFoundryAdjuster implements CostAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
         Permanent sourcePermanent = game.getPermanent(ability.getSourceId());
-        if (sourcePermanent != null) {
-            if (!sourcePermanent.getImprinted().isEmpty()) {
-                Card imprinted = game.getCard(sourcePermanent.getImprinted().get(0));
-                if (imprinted != null) {
-                    ability.getManaCostsToPay().clear();
-                    ability.getManaCostsToPay().add(0, new GenericManaCost(imprinted.getManaValue()));
-                }
+        if (sourcePermanent != null && !sourcePermanent.getImprinted().isEmpty()) {
+            Card imprinted = game.getCard(sourcePermanent.getImprinted().get(0));
+            if (imprinted != null) {
+                ability.getManaCostsToPay().clear();
+                ability.getManaCostsToPay().add(0, new GenericManaCost(imprinted.getManaValue()));
             }
         }
 

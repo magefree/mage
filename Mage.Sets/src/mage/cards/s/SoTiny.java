@@ -44,7 +44,7 @@ public final class SoTiny extends CardImpl {
 
         // Enchanted creature gets -2/-0. It gets -6/-0 instead as long as its controller has seven or more cards in their graveyard.
         this.addAbility(new SimpleStaticAbility(
-                new BoostEnchantedEffect(SoTinyValue.instance, StaticValue.get(0))
+                new BoostEnchantedEffect(SoTinyValue.INSTANCE, StaticValue.get(0))
                         .setText("enchanted creature gets -2/-0. It gets -6/-0 instead as long as " +
                                 "its controller has seven or more cards in their graveyard")
         ));
@@ -61,7 +61,7 @@ public final class SoTiny extends CardImpl {
 }
 
 enum SoTinyValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -78,7 +78,7 @@ enum SoTinyValue implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

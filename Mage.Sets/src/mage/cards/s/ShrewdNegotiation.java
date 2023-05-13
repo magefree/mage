@@ -20,7 +20,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class ShrewdNegotiation extends CardImpl {
 
-    private static final String rule = "Exchange control of target artifact you control and target artifact or creature you don't control";
+    private static final String RULE_TEXT = "Exchange control of target artifact you control and target artifact or creature you don't control";
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or creature you don't control");
 
@@ -34,7 +34,7 @@ public final class ShrewdNegotiation extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}");
 
         // Exchange control of target artifact you control and target artifact or creature you don't control.
-        getSpellAbility().addEffect(new ExchangeControlTargetEffect(Duration.EndOfGame, rule, false, true));
+        getSpellAbility().addEffect(new ExchangeControlTargetEffect(Duration.EndOfGame, RULE_TEXT, false, true));
         getSpellAbility().addTarget(new TargetControlledPermanent(new FilterControlledArtifactPermanent("artifact you control")));
         getSpellAbility().addTarget(new TargetPermanent(filter));
     }

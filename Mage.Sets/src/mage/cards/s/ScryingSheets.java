@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -75,11 +74,9 @@ class ScryingSheetsEffect extends OneShotEffect {
                 CardsImpl cards = new CardsImpl();
                 cards.add(card);
                 controller.lookAtCards(sourceObject.getIdName(), cards, game);
-                if (card.isSnow(game)) {
-                    if (controller.chooseUse(outcome, "Reveal " + card.getLogName() + " and put it into your hand?", source, game)) {
-                        controller.moveCards(card, Zone.HAND, source, game);
-                        controller.revealCards(sourceObject.getIdName(), cards, game);
-                    }
+                if (card.isSnow(game) && (controller.chooseUse(outcome, "Reveal " + card.getLogName() + " and put it into your hand?", source, game))) {
+                    controller.moveCards(card, Zone.HAND, source, game);
+                    controller.revealCards(sourceObject.getIdName(), cards, game);
                 }
             }
             return true;
@@ -87,3 +84,4 @@ class ScryingSheetsEffect extends OneShotEffect {
         return false;
     }
 }
+

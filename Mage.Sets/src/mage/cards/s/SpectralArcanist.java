@@ -99,7 +99,7 @@ class SpectralArcanistCastEffect extends OneShotEffect {
                 .forEach(cards::addAll);
         return CardUtil.castSpellWithAttributesForFree(
                 player, source, game, cards, filterCard,
-                SpectralArcanistTracker.instance
+                SpectralArcanistTracker.INSTANCE
         );
     }
 
@@ -109,7 +109,7 @@ class SpectralArcanistCastEffect extends OneShotEffect {
 }
 
 enum SpectralArcanistTracker implements CardUtil.SpellCastTracker {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean checkCard(Card card, Game game) {

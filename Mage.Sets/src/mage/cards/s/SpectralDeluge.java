@@ -24,7 +24,7 @@ public final class SpectralDeluge extends CardImpl {
     private static final FilterPermanent filter = new FilterOpponentsCreaturePermanent();
 
     static {
-        filter.add(SpectralDelugePredicate.instance);
+        filter.add(SpectralDelugePredicate.INSTANCE);
     }
 
     public SpectralDeluge(UUID ownerId, CardSetInfo setInfo) {
@@ -51,7 +51,7 @@ public final class SpectralDeluge extends CardImpl {
 }
 
 enum SpectralDelugePredicate implements ObjectSourcePlayerPredicate<MageObject> {
-    instance;
+    INSTANCE;
     private static final FilterPermanent filter = new FilterControlledPermanent(SubType.ISLAND);
 
     @Override

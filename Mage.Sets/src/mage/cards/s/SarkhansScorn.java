@@ -24,7 +24,7 @@ public final class SarkhansScorn extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
         // Sarkhan's Scorn deals damage equal to the number of turns you have begun to target creature or planeswalker.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(SarkhansScornValue.instance)
+        this.getSpellAbility().addEffect(new DamageTargetEffect(SarkhansScornValue.INSTANCE)
                 .setText("{this} deals damage equal to the number of turns " +
                         "you have begun to target creature or planeswalker"));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
@@ -42,7 +42,7 @@ public final class SarkhansScorn extends CardImpl {
 }
 
 enum SarkhansScornValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

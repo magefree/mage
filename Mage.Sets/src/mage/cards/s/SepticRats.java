@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
 /**
@@ -69,11 +68,7 @@ class SepticRatsTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getSourceId().equals(this.getSourceId()) ) {
             Player target = game.getPlayer(event.getTargetId());
-            if (target != null) {
-                if (target.getCounters().getCount(CounterType.POISON) > 0) {
-                    return true;
-                }
-            }
+            return target != null && (target.getCounters().getCount(CounterType.POISON) > 0);
         }
         return false;
     }

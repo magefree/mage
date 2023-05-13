@@ -45,9 +45,9 @@ public final class SwimmerInNightmares extends CardImpl {
         // Swimmer in Nightmares gets +3/+0 as long as there are ten or more cards in a single graveyard.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(3, 0, Duration.WhileOnBattlefield),
-                SwimmerInNightmaresCondition.instance,
+                SwimmerInNightmaresCondition.INSTANCE,
                 "{this} gets +3/+0 as long as there are ten or more cards in a single graveyard"
-        )).addHint(new ValueHint("Max cards in single graveyard", SwimmerInNightmaresCardsInSingleGraveyardValue.instance)));
+        )).addHint(new ValueHint("Max cards in single graveyard", SwimmerInNightmaresCardsInSingleGraveyardValue.INSTANCE)));
 
         // Swimmer in Nightmares can't be blocked as long as you control an Ashiok planeswalker.
         this.addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
@@ -67,8 +67,7 @@ public final class SwimmerInNightmares extends CardImpl {
 }
 
 enum SwimmerInNightmaresCardsInSingleGraveyardValue implements DynamicValue {
-
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -99,10 +98,10 @@ enum SwimmerInNightmaresCardsInSingleGraveyardValue implements DynamicValue {
 }
 
 enum SwimmerInNightmaresCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return SwimmerInNightmaresCardsInSingleGraveyardValue.instance.calculate(game, source, null) >= 10;
+        return SwimmerInNightmaresCardsInSingleGraveyardValue.INSTANCE.calculate(game, source, null) >= 10;
     }
 }

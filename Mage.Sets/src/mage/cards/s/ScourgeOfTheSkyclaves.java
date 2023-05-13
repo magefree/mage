@@ -37,14 +37,14 @@ public final class ScourgeOfTheSkyclaves extends CardImpl {
 
         // When you cast this spell, if it was kicked, each player loses half their life, rounded up.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new CastSourceTriggeredAbility(new ScourgeOfTheSkyclavesEffect()), ScourgeOfTheSkyclavesCondition.instance,
+                new CastSourceTriggeredAbility(new ScourgeOfTheSkyclavesEffect()), ScourgeOfTheSkyclavesCondition.INSTANCE,
                 "When you cast this spell, if it was kicked, each player loses half their life, rounded up."
         ));
 
         // Scourge of the Skyclaves's power and toughness are each equal to 20 minus the highest life total among players.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new SetBasePowerToughnessSourceEffect(
-                ScourgeOfTheSkyclavesValue.instance
+                ScourgeOfTheSkyclavesValue.INSTANCE
         ).setText("{this}'s power and toughness are each equal to 20 minus the highest life total among players.")));
     }
 
@@ -59,7 +59,7 @@ public final class ScourgeOfTheSkyclaves extends CardImpl {
 }
 
 enum ScourgeOfTheSkyclavesCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -68,7 +68,7 @@ enum ScourgeOfTheSkyclavesCondition implements Condition {
 }
 
 enum ScourgeOfTheSkyclavesValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -85,7 +85,7 @@ enum ScourgeOfTheSkyclavesValue implements DynamicValue {
 
     @Override
     public ScourgeOfTheSkyclavesValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

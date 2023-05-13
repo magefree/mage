@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class ShivanWurm extends CardImpl {
 
-    static final private FilterControlledPermanent filter
+    private static final FilterControlledPermanent filter
             = new FilterControlledCreaturePermanent("red or green creature you control");
 
     static {

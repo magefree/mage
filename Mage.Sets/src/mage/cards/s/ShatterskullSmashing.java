@@ -42,11 +42,11 @@ public final class ShatterskullSmashing extends ModalDoubleFacesCard {
         // Shatterskull Smashing deals X damage divided as you choose among up to two target creatures and/or planeswalkers. If X is 6 or more, Shatterskull Smashing deals twice X damage divided as you choose among them instead.
         this.getLeftHalfCard().getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageMultiEffect(xValue), new DamageMultiEffect(ManacostVariableValue.REGULAR),
-                ShatterskullSmashingCondition.instance, "{this} deals X damage divided as you choose " +
+                ShatterskullSmashingCondition.INSTANCE, "{this} deals X damage divided as you choose " +
                 "among up to two target creatures and/or planeswalkers. If X is 6 or more, " +
                 "{this} deals twice X damage divided as you choose among them instead."
         ));
-        this.getLeftHalfCard().getSpellAbility().setTargetAdjuster(ShatterskullSmashingAdjuster.instance);
+        this.getLeftHalfCard().getSpellAbility().setTargetAdjuster(ShatterskullSmashingAdjuster.INSTANCE);
 
         // 2.
         // Shatterskull, the Hammer Pass
@@ -73,7 +73,7 @@ public final class ShatterskullSmashing extends ModalDoubleFacesCard {
 }
 
 enum ShatterskullSmashingCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -82,7 +82,7 @@ enum ShatterskullSmashingCondition implements Condition {
 }
 
 enum ShatterskullSmashingAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

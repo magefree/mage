@@ -23,7 +23,6 @@ import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;

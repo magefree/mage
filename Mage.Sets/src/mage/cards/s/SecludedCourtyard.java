@@ -121,11 +121,8 @@ class SecludedCourtyardManaCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source);
         // casting a creature card or using its ability
-        if (creatureType != null
+        return creatureType != null
                 && object != null
-                && object.hasSubtype(creatureType, game)) {
-            return true;
-        }
-        return false;
+                && object.hasSubtype(creatureType, game);
     }
 }

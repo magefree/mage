@@ -22,7 +22,7 @@ import mage.game.permanent.token.EldraziSpawnToken;
  */
 public final class SpawnsireOfUlamog extends CardImpl {
     
-    private static final String ruleText = "Cast any number of Eldrazi cards you own from outside the game without paying their mana costs";
+    private static final String RULE_TEXT = "Cast any number of Eldrazi cards you own from outside the game without paying their mana costs";
 
     private static final FilterCard filter = new FilterCard("Eldrazi cards");
 
@@ -45,7 +45,7 @@ public final class SpawnsireOfUlamog extends CardImpl {
 
         // {20}: Cast any number of Eldrazi cards you own from outside the game without paying their mana costs.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new CastCardFromOutsideTheGameEffect(filter, ruleText), new GenericManaCost(20)
+                new CastCardFromOutsideTheGameEffect(filter, RULE_TEXT), new GenericManaCost(20)
         ).addHint(OpenSideboardHint.instance));
     }
 

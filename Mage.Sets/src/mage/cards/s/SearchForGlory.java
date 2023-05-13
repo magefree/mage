@@ -26,7 +26,7 @@ public final class SearchForGlory extends CardImpl {
     );
 
     static {
-        filter.add(SearchForGloryPredicate.instance);
+        filter.add(SearchForGloryPredicate.INSTANCE);
     }
 
     public SearchForGlory(UUID ownerId, CardSetInfo setInfo) {
@@ -54,7 +54,7 @@ public final class SearchForGlory extends CardImpl {
 }
 
 enum SearchForGloryPredicate implements Predicate<Card> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Card input, Game game) {

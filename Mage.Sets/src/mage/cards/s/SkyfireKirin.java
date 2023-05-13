@@ -46,7 +46,7 @@ public final class SkyfireKirin extends CardImpl {
                 StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, true, true
         );
         ability.addTarget(new TargetCreaturePermanent());
-        ability.setTargetAdjuster(SkyfireKirinAdjuster.instance);
+        ability.setTargetAdjuster(SkyfireKirinAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -61,7 +61,7 @@ public final class SkyfireKirin extends CardImpl {
 }
 
 enum SkyfireKirinAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

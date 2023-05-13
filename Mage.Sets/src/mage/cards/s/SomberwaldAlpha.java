@@ -26,8 +26,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author fireshoes
  */
 public final class SomberwaldAlpha extends CardImpl {
-    
-    static final private FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control");
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control");
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());

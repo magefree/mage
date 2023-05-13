@@ -6,7 +6,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.DelveAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

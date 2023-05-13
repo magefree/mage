@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class SithLord extends CardImpl {
 
-    private static final String rule = "with X +1/+1 counters on it, where X is the total life lost by your opponents this turn";
+    private static final String RULE_TEXT = "with X +1/+1 counters on it, where X is the total life lost by your opponents this turn";
 
     public SithLord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
@@ -35,7 +35,7 @@ public final class SithLord extends CardImpl {
         this.addAbility(new MenaceAbility());
 
         // Sith Lord enters the battlefield with X +1/+1 counters on it, where X is the total life lost by your opponents this turn.
-        this.addAbility(new EntersBattlefieldAbility(new SithLordEffect(), rule));
+        this.addAbility(new EntersBattlefieldAbility(new SithLordEffect(), RULE_TEXT));
     }
 
     private SithLord(final SithLord card) {

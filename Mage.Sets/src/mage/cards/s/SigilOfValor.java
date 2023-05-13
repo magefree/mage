@@ -27,7 +27,7 @@ public final class SigilOfValor extends CardImpl {
 
         // Whenever equipped creature attacks alone, it gets +1/+1 until end of turn for each other creature you control.
         this.addAbility(new AttacksAloneAttachedTriggeredAbility(
-                new BoostTargetEffect(SigilOfValorCount.instance, SigilOfValorCount.instance, Duration.EndOfTurn),
+                new BoostTargetEffect(SigilOfValorCount.INSTANCE, SigilOfValorCount.INSTANCE, Duration.EndOfTurn),
                 AttachmentType.EQUIPMENT, false, SetTargetPointer.PERMANENT
         ));
 
@@ -46,7 +46,7 @@ public final class SigilOfValor extends CardImpl {
 }
 
 enum SigilOfValorCount implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -61,7 +61,7 @@ enum SigilOfValorCount implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

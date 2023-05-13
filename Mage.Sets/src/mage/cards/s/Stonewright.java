@@ -22,7 +22,7 @@ import mage.constants.Zone;
  */
 public final class Stonewright extends CardImpl {
 
-    private static final String ruleText = "As long as {this} is paired with another creature, each of those creatures has \"{R}: This creature gets +1/+0 until end of turn.\"";
+    private static final String RULE_TEXT = "As long as {this} is paired with another creature, each of those creatures has \"{R}: This creature gets +1/+0 until end of turn.\"";
 
     public Stonewright(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
@@ -37,7 +37,7 @@ public final class Stonewright extends CardImpl {
 
         // As long as Stonewright is paired with another creature, each of those creatures has "{R}: This creature gets +1/+0 until end of turn."
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}"));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(ability, ruleText)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(ability, RULE_TEXT)));
     }
 
     private Stonewright(final Stonewright card) {

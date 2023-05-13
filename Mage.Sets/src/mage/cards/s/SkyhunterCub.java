@@ -22,8 +22,8 @@ import mage.constants.Zone;
  */
 public final class SkyhunterCub extends CardImpl {
 
-    private static final String rule1 = "As long as {this} is equipped, it gets +1/+1";
-    private static final String rule2 = "As long as {this} is equipped, it has flying";
+    private static final String RULE1 = "As long as {this} is equipped, it gets +1/+1";
+    private static final String RULE2 = "As long as {this} is equipped, it has flying";
 
     public SkyhunterCub(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
@@ -33,9 +33,9 @@ public final class SkyhunterCub extends CardImpl {
         this.toughness = new MageInt(2);
 
         // As long as Skyhunter Cub is equipped, it gets +1/+1 and has flying.
-        ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), EquippedSourceCondition.instance, rule1);
+        ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), EquippedSourceCondition.instance, RULE1);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect1));
-        ConditionalContinuousEffect effect2 = new ConditionalContinuousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance()), EquippedSourceCondition.instance, rule2);
+        ConditionalContinuousEffect effect2 = new ConditionalContinuousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance()), EquippedSourceCondition.instance, RULE2);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect2));
     }
 

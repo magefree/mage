@@ -9,7 +9,6 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -26,7 +25,7 @@ public final class SecretsOfTheKey extends CardImpl {
 
         // Investigate. If this spell was cast from a graveyard, investigate twice instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new InvestigateEffect(2), new InvestigateEffect(), SecretsOfTheKeyCondition.instance,
+                new InvestigateEffect(2), new InvestigateEffect(), SecretsOfTheKeyCondition.INSTANCE,
                 "Investigate. If this spell was cast from a graveyard, investigate twice instead."
         ));
 
@@ -45,7 +44,7 @@ public final class SecretsOfTheKey extends CardImpl {
 }
 
 enum SecretsOfTheKeyCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

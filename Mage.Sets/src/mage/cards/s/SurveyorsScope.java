@@ -68,10 +68,8 @@ class SurveyorsScopeEffect extends OneShotEffect {
             int numberOfLands = 0;
             int ownLands = game.getBattlefield().countAll(new FilterLandPermanent(), controller.getId(), game);
             for (UUID playerId: game.getState().getPlayersInRange(controller.getId(), game)) {
-                if (!playerId.equals(controller.getId())) {
-                    if (game.getBattlefield().countAll(new FilterLandPermanent(), playerId, game) > ownLands + 1) {
-                        numberOfLands++;
-                    }
+                if (!playerId.equals(controller.getId()) && game.getBattlefield().countAll(new FilterLandPermanent(), playerId, game) > ownLands + 1) {
+                    numberOfLands++;
                 }
             }
             game.informPlayers("Surveyor's Scope: X = " + numberOfLands);

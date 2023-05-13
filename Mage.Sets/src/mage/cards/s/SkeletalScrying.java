@@ -35,7 +35,7 @@ public final class SkeletalScrying extends CardImpl {
                 ));
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
-        this.getSpellAbility().setCostAdjuster(SkeletalScryingAdjuster.instance);
+        this.getSpellAbility().setCostAdjuster(SkeletalScryingAdjuster.INSTANCE);
 
         // You draw X cards and you lose X life.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(
@@ -57,7 +57,7 @@ public final class SkeletalScrying extends CardImpl {
 }
 
 enum SkeletalScryingAdjuster implements CostAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustCosts(Ability ability, Game game) {

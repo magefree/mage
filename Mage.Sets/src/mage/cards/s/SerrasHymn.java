@@ -23,7 +23,7 @@ import mage.target.common.TargetAnyTargetAmount;
  */
 public final class SerrasHymn extends CardImpl {
 
-    private static final String rule = "Prevent the next X damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose, where X is the number of verse counters on {this}.";
+    private static final String RULE = "Prevent the next X damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose, where X is the number of verse counters on {this}.";
 
     public SerrasHymn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
@@ -37,7 +37,7 @@ public final class SerrasHymn extends CardImpl {
                 new PreventDamageToTargetMultiAmountEffect(
                         Duration.EndOfTurn,
                         1, false, true, // the integer 1 is ignored due to the dynamic number being set
-                        new CountersSourceCount(CounterType.VERSE)).setText(rule),
+                        new CountersSourceCount(CounterType.VERSE)).setText(RULE),
                 new SacrificeSourceCost());
         ability.addTarget(new TargetAnyTargetAmount(new CountersSourceCount(CounterType.VERSE)));
         this.addAbility(ability);

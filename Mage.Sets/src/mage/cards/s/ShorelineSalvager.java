@@ -20,7 +20,7 @@ import mage.filter.FilterPermanent;
  */
 public final class ShorelineSalvager extends CardImpl {
 
-    private static final String rule = "Whenever Shoreline Salvager deals combat damage to a player, if you control an Island, you may draw a card.";
+    private static final String RULE_TEXT = "Whenever Shoreline Salvager deals combat damage to a player, if you control an Island, you may draw a card.";
     private static final FilterPermanent filter = new FilterPermanent("Island");
 
     static {
@@ -36,7 +36,7 @@ public final class ShorelineSalvager extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Shoreline Salvager deals combat damage to a player, if you control an Island, you may draw a card.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), true), new PermanentsOnTheBattlefieldCondition(filter), rule));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), true), new PermanentsOnTheBattlefieldCondition(filter), RULE_TEXT));
     }
 
     private ShorelineSalvager(final ShorelineSalvager card) {

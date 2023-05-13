@@ -47,7 +47,7 @@ public final class SkyclaveShade extends CardImpl {
         // Landfall — Whenever a land enters the battlefield under your control, if Skyclave Shade is in your graveyard and it's your turn, you may cast it from your graveyard this turn.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new LandfallAbility(Zone.GRAVEYARD, new SkyclaveShadeEffect(), false),
-                SkyclaveShadeCondition.instance, "<i>Landfall</i> &mdash; Whenever a land " +
+                SkyclaveShadeCondition.INSTANCE, "<i>Landfall</i> &mdash; Whenever a land " +
                 "enters the battlefield under your control, if {this} is in your graveyard and it's your turn, " +
                 "you may cast it from your graveyard this turn."
         ));
@@ -64,7 +64,7 @@ public final class SkyclaveShade extends CardImpl {
 }
 
 enum SkyclaveShadeCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

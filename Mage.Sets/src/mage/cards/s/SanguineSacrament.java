@@ -22,7 +22,7 @@ public final class SanguineSacrament extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{W}{W}");
 
         // You gain twice X life. Put Sanguine Sacrament on the bottom of its owner's library.
-        this.getSpellAbility().addEffect(new GainLifeEffect(SanguineSacramentValue.instance));
+        this.getSpellAbility().addEffect(new GainLifeEffect(SanguineSacramentValue.INSTANCE));
         this.getSpellAbility().addEffect(new ReturnToLibrarySpellEffect(false));
     }
 
@@ -37,7 +37,7 @@ public final class SanguineSacrament extends CardImpl {
 }
 
 enum SanguineSacramentValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -46,7 +46,7 @@ enum SanguineSacramentValue implements DynamicValue {
 
     @Override
     public SanguineSacramentValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

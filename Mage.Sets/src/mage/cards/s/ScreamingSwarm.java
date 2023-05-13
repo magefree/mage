@@ -42,7 +42,7 @@ public final class ScreamingSwarm extends CardImpl {
 
         // Whenever you attack with one or more creatures, target player mills that many cards.
         Ability ability = new AttacksWithCreaturesTriggeredAbility(
-                new MillCardsTargetEffect(ScreamingSwarmValue.instance)
+                new MillCardsTargetEffect(ScreamingSwarmValue.INSTANCE)
                         .setText("target player mills that many cards"),
                 1
         ).setTriggerPhrase("Whenever you attack with one or more creatures, ");
@@ -64,7 +64,7 @@ public final class ScreamingSwarm extends CardImpl {
 }
 
 enum ScreamingSwarmValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

@@ -21,7 +21,7 @@ import mage.constants.CardType;
 public final class ShepherdOfHeroes extends CardImpl {
 
     private static final DynamicValue xValue = new MultipliedValue(PartyCount.instance, 2);
-    private static final String rule = "you gain 2 life for each creature in your party. " +
+    private static final String RULE_TEXT = "you gain 2 life for each creature in your party. " +
             "<i>(Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)</i>";
 
     public ShepherdOfHeroes(UUID ownerId, CardSetInfo setInfo) {
@@ -37,7 +37,7 @@ public final class ShepherdOfHeroes extends CardImpl {
 
         // When Shepherd of Heroes enters the battlefield, you gain 2 life for each creature in your party.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new GainLifeEffect(xValue).setText("" + rule)
+                new GainLifeEffect(xValue).setText("" + RULE_TEXT)
         ).addHint(PartyCountHint.instance));
     }
 

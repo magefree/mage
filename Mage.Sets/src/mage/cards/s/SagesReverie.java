@@ -36,7 +36,7 @@ public final class SagesReverie extends CardImpl {
     );
 
     static {
-        filter.add(SagesReveriePredicate.instance);
+        filter.add(SagesReveriePredicate.INSTANCE);
     }
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
@@ -71,7 +71,7 @@ public final class SagesReverie extends CardImpl {
 }
 
 enum SagesReveriePredicate implements Predicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Permanent input, Game game) {

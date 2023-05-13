@@ -34,8 +34,8 @@ public final class SelkieHedgeMage extends CardImpl {
         filter3.add(TappedPredicate.TAPPED);
     }
 
-    private static final String rule1 = "When {this} enters the battlefield, if you control two or more Forests, you may gain 3 life.";
-    private static final String rule2 = "When {this} enters the battlefield, if you control two or more Islands, you may return target tapped creature to its owner's hand.";
+    private static final String RULE1 = "When {this} enters the battlefield, if you control two or more Forests, you may gain 3 life.";
+    private static final String RULE2 = "When {this} enters the battlefield, if you control two or more Islands, you may return target tapped creature to its owner's hand.";
 
     public SelkieHedgeMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G/U}");
@@ -48,11 +48,11 @@ public final class SelkieHedgeMage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Selkie Hedge-Mage enters the battlefield, if you control two or more Forests, you may gain 3 life.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3), true), new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1), rule1);
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3), true), new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1), RULE1);
         this.addAbility(ability);
 
         // When Selkie Hedge-Mage enters the battlefield, if you control two or more Islands, you may return target tapped creature to its owner's hand.
-        Ability ability2 = new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true), new PermanentsOnTheBattlefieldCondition(filter2, ComparisonType.MORE_THAN, 1), rule2);
+        Ability ability2 = new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true), new PermanentsOnTheBattlefieldCondition(filter2, ComparisonType.MORE_THAN, 1), RULE2);
         ability2.addTarget(new TargetPermanent(filter3));
         this.addAbility(ability2);
 

@@ -26,8 +26,8 @@ public final class SuddenInsight extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{U}{U}");
 
         // Draw a card for each different mana value among nonland cards in your graveyard.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(SuddenInsightValue.instance));
-        this.getSpellAbility().addHint(SuddenInsightHint.instance);
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(SuddenInsightValue.INSTANCE));
+        this.getSpellAbility().addHint(SuddenInsightHint.INSTANCE);
     }
 
     private SuddenInsight(final SuddenInsight card) {
@@ -41,7 +41,7 @@ public final class SuddenInsight extends CardImpl {
 }
 
 enum SuddenInsightValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -73,7 +73,7 @@ enum SuddenInsightValue implements DynamicValue {
 }
 
 enum SuddenInsightHint implements Hint {
-    instance;
+    INSTANCE;
 
     @Override
     public String getText(Game game, Ability ability) {

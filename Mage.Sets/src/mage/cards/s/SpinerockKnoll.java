@@ -40,7 +40,7 @@ public final class SpinerockKnoll extends CardImpl {
 
         // {R}, {tap}: You may play the exiled card without paying its mana cost if an opponent was dealt 7 or more damage this turn.
         Ability ability = new SimpleActivatedAbility(new ConditionalOneShotEffect(
-                new HideawayPlayEffect(), SpinerockKnollCondition.instance,
+                new HideawayPlayEffect(), SpinerockKnollCondition.INSTANCE,
                 "you may play the exiled card without paying its mana cost " +
                         "if an opponent was dealt 7 or more damage this turn"
         ), new ManaCostsImpl<>("{R}"));
@@ -59,7 +59,7 @@ public final class SpinerockKnoll extends CardImpl {
 }
 
 enum SpinerockKnollCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

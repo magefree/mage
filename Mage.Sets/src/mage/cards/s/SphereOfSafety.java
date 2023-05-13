@@ -31,8 +31,8 @@ public final class SphereOfSafety extends CardImpl {
         // Creatures can't attack you or a planeswalker you control unless their controller pays {X} for each of those creatures, where X is the number of enchantments you control.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new SphereOfSafetyPayManaToAttackAllEffect());
         ability.addHint(new ValueHint(
-                NumberOfEnchantmentsYouControl.instance.getMessage(),
-                NumberOfEnchantmentsYouControl.instance)
+                NumberOfEnchantmentsYouControl.INSTANCE.getMessage(),
+                NumberOfEnchantmentsYouControl.INSTANCE)
         );
         this.addAbility(ability);
     }
@@ -61,7 +61,7 @@ class SphereOfSafetyPayManaToAttackAllEffect extends CantAttackYouUnlessPayAllEf
 
     @Override
     public ManaCosts getManaCostToPay(GameEvent event, Ability source, Game game) {
-        int enchantments = NumberOfEnchantmentsYouControl.instance.calculate(game, source, this);
+        int enchantments = NumberOfEnchantmentsYouControl.INSTANCE.calculate(game, source, this);
         if (enchantments > 0) {
             return new ManaCostsImpl<>("{" + enchantments + '}');
         }
@@ -76,7 +76,7 @@ class SphereOfSafetyPayManaToAttackAllEffect extends CantAttackYouUnlessPayAllEf
 }
 
 enum NumberOfEnchantmentsYouControl implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -85,7 +85,7 @@ enum NumberOfEnchantmentsYouControl implements DynamicValue {
 
     @Override
     public NumberOfEnchantmentsYouControl copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

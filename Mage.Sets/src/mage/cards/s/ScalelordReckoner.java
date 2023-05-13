@@ -37,7 +37,7 @@ public final class ScalelordReckoner extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever a Dragon you control becomes the target of a spell or ability an opponent controls, destroy target nonland permanent that player controls.
-        this.addAbility(new ScalelardReckonerTriggeredAbility(new DestroyTargetEffect()));
+        this.addAbility(new ScalelardReckonerTriggeredAbility());
     }
 
     private ScalelordReckoner(final ScalelordReckoner card) {
@@ -58,7 +58,7 @@ class ScalelardReckonerTriggeredAbility extends TriggeredAbilityImpl {
         filter.add(SubType.DRAGON.getPredicate());
     }
 
-    public ScalelardReckonerTriggeredAbility(Effect effect) {
+    public ScalelardReckonerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), false);
     }
 

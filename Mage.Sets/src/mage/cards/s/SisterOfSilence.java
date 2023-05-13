@@ -27,7 +27,7 @@ public final class SisterOfSilence extends CardImpl {
             = new FilterStackObject("instant spell, sorcery spell, activated ability, or triggered ability");
 
     static {
-        filter.add(SisterOfSilencePredicate.instance);
+        filter.add(SisterOfSilencePredicate.INSTANCE);
     }
 
     public SisterOfSilence(UUID ownerId, CardSetInfo setInfo) {
@@ -58,7 +58,7 @@ public final class SisterOfSilence extends CardImpl {
 }
 
 enum SisterOfSilencePredicate implements Predicate<StackObject> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(StackObject input, Game game) {

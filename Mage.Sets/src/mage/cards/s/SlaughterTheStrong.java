@@ -69,7 +69,7 @@ class SlaughterTheStrongEffect extends OneShotEffect {
                 if (player != null) {
                     boolean selectionDone = false;
                     Set<UUID> selectedCreatures = new HashSet<>();
-                    while (player.canRespond() && selectionDone == false) {
+                    while (player.canRespond() && !selectionDone) {
                         int powerSum = 0;
                         for (UUID creatureId : selectedCreatures) {
                             Permanent creature = game.getPermanent(creatureId);
@@ -95,9 +95,7 @@ class SlaughterTheStrongEffect extends OneShotEffect {
                         if (player.isComputer()) {
                             // AI settings
                             FilterControlledCreaturePermanent strictFilter = currentFilter.copy();
-                            selectedCreatures.stream().forEach(id -> {
-                                strictFilter.add(Predicates.not(new PermanentIdPredicate(id)));
-                            });
+                            selectedCreatures.stream().forEach(id -> strictFilter.add(Predicates.not(new PermanentIdPredicate(id))));
                             target = new TargetPermanent(0, 1, strictFilter, true);
                         } else {
                             // Human settings

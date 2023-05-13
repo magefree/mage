@@ -21,7 +21,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class SharpenedPitchfork extends CardImpl {
 
-    private static final String staticText = "As long as equipped creature is a Human, it gets +1/+1";
+    private static final String STATIC_TEXT = "As long as equipped creature is a Human, it gets +1/+1";
 
     public SharpenedPitchfork(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
@@ -31,7 +31,7 @@ public final class SharpenedPitchfork extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT)));
 
         // As long as equipped creature is a Human, it gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEquippedEffect(1, 1), new EquippedHasSubtypeCondition(SubType.HUMAN), staticText)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEquippedEffect(1, 1), new EquippedHasSubtypeCondition(SubType.HUMAN), STATIC_TEXT)));
 
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), new TargetControlledCreaturePermanent(), false));

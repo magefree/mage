@@ -97,10 +97,8 @@ class StormElementalEffect extends OneShotEffect {
                     card = ((ExileTopCardLibraryCost) cost).getCard();
                 }
             }
-            if (card != null) {
-                if (filter.match(card, game)) {
-                    game.addEffect(new BoostSourceEffect(1, 1, Duration.EndOfTurn), source);
-                }
+            if (card != null && filter.match(card, game)) {
+                game.addEffect(new BoostSourceEffect(1, 1, Duration.EndOfTurn), source);
             }
             return true;
         }

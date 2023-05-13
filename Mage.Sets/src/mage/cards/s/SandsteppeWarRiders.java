@@ -40,7 +40,7 @@ public final class SandsteppeWarRiders extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // At the beginning of combat on your turn, bolster X, where X is the number of differently named artifact tokens you control.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new BolsterEffect(SandsteppeWarRidersValue.instance), TargetController.YOU, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new BolsterEffect(SandsteppeWarRidersValue.INSTANCE), TargetController.YOU, false));
     }
 
     private SandsteppeWarRiders(final SandsteppeWarRiders card) {
@@ -54,14 +54,14 @@ public final class SandsteppeWarRiders extends CardImpl {
 }
 
 enum SandsteppeWarRidersValue implements DynamicValue {
-    instance;
+    INSTANCE;
     private static final FilterPermanent filter = new FilterControlledArtifactPermanent();
 
     static {
         filter.add(TokenPredicate.TRUE);
     }
 
-    private static final Hint hint = new ValueHint("Different artifact token names you control", instance);
+    private static final Hint hint = new ValueHint("Different artifact token names you control", INSTANCE);
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

@@ -20,7 +20,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -80,12 +79,10 @@ class SixthSenseTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (((DamagedEvent) event).isCombatDamage()) {
-            if (event.getSourceId().equals(getSourceId())) {
-                this.getEffects().clear();
-                this.addEffect(new DrawCardSourceControllerEffect(1));
-                return true;
-            }
+        if (((DamagedEvent) event).isCombatDamage() && event.getSourceId().equals(getSourceId())) {
+            this.getEffects().clear();
+            this.addEffect(new DrawCardSourceControllerEffect(1));
+            return true;
         }
         return false;
     }

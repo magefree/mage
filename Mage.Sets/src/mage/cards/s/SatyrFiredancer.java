@@ -53,7 +53,7 @@ class SatyrFiredancerTriggeredAbility extends TriggeredAbilityImpl {
 
     public SatyrFiredancerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SatyrFiredancerDamageEffect(), false);
-        targetAdjuster = SatyrFiredancerAdjuster.instance;
+        targetAdjuster = SatyrFiredancerAdjuster.INSTANCE;
         setTriggerPhrase("Whenever an instant or sorcery spell you control deals damage to an opponent, ");
     }
 
@@ -128,7 +128,7 @@ class SatyrFiredancerDamageEffect extends OneShotEffect {
 }
 
 enum SatyrFiredancerAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

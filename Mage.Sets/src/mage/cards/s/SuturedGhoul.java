@@ -31,8 +31,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class SuturedGhoul extends CardImpl {
 
-    private static final String staticText = "exile any number of creature cards from your graveyard";
-    private static final String staticText2 = "Sutured Ghoul's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness";
+    private static final String STATIC_TEXT = "exile any number of creature cards from your graveyard";
+    private static final String STATIC_TEXT2 = "Sutured Ghoul's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness";
 
     public SuturedGhoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{B}");
@@ -44,11 +44,11 @@ public final class SuturedGhoul extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // As Sutured Ghoul enters the battlefield, exile any number of creature cards from your graveyard.
-        this.addAbility(new AsEntersBattlefieldAbility(new SuturedGhoulEffect(), staticText));
+        this.addAbility(new AsEntersBattlefieldAbility(new SuturedGhoulEffect(), STATIC_TEXT));
 
         // Sutured Ghoul's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.
-        BoostSourceEffect effect = new BoostSourceEffect(SuturedGhoulPowerCount.instance, SuturedGhoulToughnessCount.instance, Duration.WhileOnBattlefield);
-        effect.setText(staticText2);
+        BoostSourceEffect effect = new BoostSourceEffect(SuturedGhoulPowerCount.INSTANCE, SuturedGhoulToughnessCount.INSTANCE, Duration.WhileOnBattlefield);
+        effect.setText(STATIC_TEXT2);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
@@ -112,8 +112,7 @@ class SuturedGhoulEffect extends OneShotEffect {
 }
 
 enum SuturedGhoulPowerCount implements DynamicValue {
-
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -132,7 +131,7 @@ enum SuturedGhoulPowerCount implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override
@@ -148,7 +147,7 @@ enum SuturedGhoulPowerCount implements DynamicValue {
 
 enum SuturedGhoulToughnessCount implements DynamicValue {
 
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -167,7 +166,7 @@ enum SuturedGhoulToughnessCount implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

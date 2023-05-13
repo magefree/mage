@@ -47,13 +47,13 @@ public final class SigardianPaladin extends CardImpl {
         // As long as you've put one or more +1/+1 counters on a creature this turn, Sigardian Paladin has trample and lifelink.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield),
-                SigardianPaladinCondition.instance, "as long as you've put " +
+                SigardianPaladinCondition.INSTANCE, "as long as you've put " +
                 "one or more +1/+1 counters on a creature this turn, {this} has trample"
         ));
         ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(
                         LifelinkAbility.getInstance(), Duration.WhileOnBattlefield
-                ), SigardianPaladinCondition.instance, "and lifelink"
+                ), SigardianPaladinCondition.INSTANCE, "and lifelink"
         ));
         this.addAbility(ability.addHint(SigardianPaladinCondition.getHint()), new SigardianPaladinWatcher());
 
@@ -81,9 +81,9 @@ public final class SigardianPaladin extends CardImpl {
 }
 
 enum SigardianPaladinCondition implements Condition {
-    instance;
+    INSTANCE;
     private static final Hint hint = new ConditionHint(
-            instance, "You've put one or more +1/+1 counters on a creature this turn"
+            INSTANCE, "You've put one or more +1/+1 counters on a creature this turn"
     );
 
     @Override

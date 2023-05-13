@@ -19,13 +19,13 @@ import mage.counters.CounterType;
  */
 public final class SphereOfTheSuns extends CardImpl {
 
-    private static final String ruleText = "{this} enters the battlefield tapped and with three charge counters on it.";
+    private static final String RULE_TEXT = "{this} enters the battlefield tapped and with three charge counters on it.";
 
     public SphereOfTheSuns(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // Sphere of the Suns enters the battlefield tapped and with three charge counters on it.
-        Ability ability = new EntersBattlefieldTappedAbility(ruleText);
+        Ability ability = new EntersBattlefieldTappedAbility(RULE_TEXT);
         ((EntersBattlefieldEffect) ability.getEffects().get(0)).addEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(3)));
         this.addAbility(ability);
 

@@ -31,9 +31,6 @@ public final class SliverHive extends CardImpl {
     private static final FilterSpell filterSpell = new FilterSpell("a Sliver spell");
 
     static {
-    }
-
-    static {
         filter.add(SubType.SLIVER.getPredicate());
         filterSpell.add(SubType.SLIVER.getPredicate());
     }

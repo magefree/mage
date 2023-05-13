@@ -2,7 +2,6 @@ package mage.cards.s;
 
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;

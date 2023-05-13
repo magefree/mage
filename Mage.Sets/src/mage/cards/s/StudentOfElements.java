@@ -69,10 +69,7 @@ class StudentOfElementsHasFlyingAbility extends StateTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(getSourceId());
-        if(permanent != null && permanent.getAbilities().contains(FlyingAbility.getInstance())){
-            return true;
-        }
-        return false;
+        return permanent != null && permanent.getAbilities().contains(FlyingAbility.getInstance());
     }
 
     @Override

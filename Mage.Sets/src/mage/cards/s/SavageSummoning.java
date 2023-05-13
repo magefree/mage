@@ -125,15 +125,13 @@ class SavageSummoningWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            if (isSavageSummoningSpellActive() && event.getPlayerId().equals(getControllerId())) {
-                Spell spell = game.getStack().getSpell(event.getTargetId());
-                if (spell != null && spell.isCreature(game)) {
-                    spellsCastWithSavageSummoning.put(spell.getId(), new HashSet<>(savageSummoningSpells));
-                    String cardKey = spell.getCard().getId().toString() + '_' + spell.getCard().getZoneChangeCounter(game);
-                    cardsCastWithSavageSummoning.put(cardKey, new HashSet<>(savageSummoningSpells));
-                    savageSummoningSpells.clear();
-                }
+        if (event.getType() == GameEvent.EventType.SPELL_CAST && (isSavageSummoningSpellActive() && event.getPlayerId().equals(getControllerId()))) {
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (spell != null && spell.isCreature(game)) {
+                spellsCastWithSavageSummoning.put(spell.getId(), new HashSet<>(savageSummoningSpells));
+                String cardKey = spell.getCard().getId().toString() + '_' + spell.getCard().getZoneChangeCounter(game);
+                cardsCastWithSavageSummoning.put(cardKey, new HashSet<>(savageSummoningSpells));
+                savageSummoningSpells.clear();
             }
         }
     }

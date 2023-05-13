@@ -18,7 +18,7 @@ import java.util.UUID;
  */
 public final class SeeTheUnwritten extends CardImpl {
 
-    private static final String rule = "Reveal the top eight cards of your library. " +
+    private static final String RULE = "Reveal the top eight cards of your library. " +
             "You may put a creature card from among them onto the battlefield. Put the rest into your graveyard.<br>" +
             AbilityWord.FEROCIOUS.formatWord() + "If " + FerociousCondition.instance.toString() +
             ", you may put two creature cards onto the battlefield instead of one";
@@ -31,7 +31,7 @@ public final class SeeTheUnwritten extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new RevealLibraryPickControllerEffect(8, 2, StaticFilters.FILTER_CARD_CREATURE_A, PutCards.BATTLEFIELD, PutCards.GRAVEYARD),
                 new RevealLibraryPickControllerEffect(8, 1, StaticFilters.FILTER_CARD_CREATURE_A, PutCards.BATTLEFIELD, PutCards.GRAVEYARD),
-                FerociousCondition.instance, rule
+                FerociousCondition.instance, RULE
         ));
         this.getSpellAbility().addHint(FerociousHint.instance);
     }

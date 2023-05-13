@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public final class SoulSculptor extends CardImpl {
 
-    private static final String rule = "Target creature becomes an enchantment and loses all abilities until a player casts a creature spell.";
+    private static final String RULE_TEXT = "Target creature becomes an enchantment and loses all abilities until a player casts a creature spell.";
 
     public SoulSculptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -34,7 +34,7 @@ public final class SoulSculptor extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{W}, {tap}: Target creature becomes an enchantment and loses all abilities until a player casts a creature spell.
-        Ability ability = new SimpleActivatedAbility(new ConditionalContinuousEffect(new SoulSculptorEffect(), SoulSculptorCondition.instance, rule), new ManaCostsImpl<>("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(new ConditionalContinuousEffect(new SoulSculptorEffect(), SoulSculptorCondition.INSTANCE, RULE_TEXT), new ManaCostsImpl<>("{1}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -115,8 +115,7 @@ class SoulSculptorEffect extends ContinuousEffectImpl {
 }
 
 enum SoulSculptorCondition implements Condition {
-
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

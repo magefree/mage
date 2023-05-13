@@ -115,21 +115,17 @@ class ShiningShoalRedirectDamageTargetEffect extends RedirectDamageFromSourceToT
             // check target
             //   check creature first
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.isCreature(game)) {
-                if (permanent.isControlledBy(source.getControllerId())) {
-                    // it's your creature
-                    redirectTarget = source.getTargets().get(1);
-                    return true;
-                }
+            if (permanent != null && permanent.isCreature(game) && permanent.isControlledBy(source.getControllerId())) {
+                // it's your creature
+                redirectTarget = source.getTargets().get(1);
+                return true;
             }
             //   check player
             Player player = game.getPlayer(event.getTargetId());
-            if (player != null) {
-                if (player.getId().equals(source.getControllerId())) {
-                    // it is you
-                    redirectTarget = source.getTargets().get(1);
-                    return true;
-                }
+            if (player != null && player.getId().equals(source.getControllerId())) {
+                // it is you
+                redirectTarget = source.getTargets().get(1);
+                return true;
             }
         }
         return false;

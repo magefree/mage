@@ -18,7 +18,7 @@ import mage.constants.Zone;
  */
 public final class SilverbladePaladin extends CardImpl {
 
-    private static final String ruleText = "As long as {this} is paired with another creature, both creatures have double strike";
+    private static final String RULE_TEXT = "As long as {this} is paired with another creature, both creatures have double strike";
 
     public SilverbladePaladin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
@@ -32,7 +32,7 @@ public final class SilverbladePaladin extends CardImpl {
         this.addAbility(new SoulbondAbility());
 
         // As long as Silverblade Paladin is paired with another creature, both creatures have double strike.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(DoubleStrikeAbility.getInstance(), ruleText)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(DoubleStrikeAbility.getInstance(), RULE_TEXT)));
     }
 
     private SilverbladePaladin(final SilverbladePaladin card) {

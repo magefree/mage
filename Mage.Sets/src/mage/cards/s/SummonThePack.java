@@ -77,7 +77,6 @@ class SummonThePackEffect extends OneShotEffect {
         }
 
         if (setChosen != null && controller != null) {
-            //ExpansionInfo set = ExpansionRepository.instance.getSetByName(setChosen);
             ExpansionSet expansionSet = Sets.findSet(setChosen);
             if (expansionSet != null) {
                 List<Card> boosterPack = expansionSet.create15CardBooster();

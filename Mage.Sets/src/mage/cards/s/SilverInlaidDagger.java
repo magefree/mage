@@ -21,7 +21,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class SilverInlaidDagger extends CardImpl {
 
-    private static final String staticText = "As long as equipped creature is a Human, it gets an additional +1/+0";
+    private static final String STATIC_TEXT = "As long as equipped creature is a Human, it gets an additional +1/+0";
 
     public SilverInlaidDagger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
@@ -31,7 +31,7 @@ public final class SilverInlaidDagger extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0)));
 
         // As long as equipped creature is a Human, it gets an additional +1/+0
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEquippedEffect(1, 0), new EquippedHasSubtypeCondition(SubType.HUMAN), staticText)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEquippedEffect(1, 0), new EquippedHasSubtypeCondition(SubType.HUMAN), STATIC_TEXT)));
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));

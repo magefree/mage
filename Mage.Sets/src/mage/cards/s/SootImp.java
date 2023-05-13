@@ -26,7 +26,7 @@ import mage.players.Player;
  */
 public final class SootImp extends CardImpl {
 
-    static final private FilterSpell filter = new FilterSpell("a nonblack spell");
+    private static final FilterSpell filter = new FilterSpell("a nonblack spell");
 
     static {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));

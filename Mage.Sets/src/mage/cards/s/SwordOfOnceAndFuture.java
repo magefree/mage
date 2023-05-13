@@ -98,13 +98,13 @@ class SwordOfOnceAndFutureCastEffect extends OneShotEffect {
         }
         return CardUtil.castSpellWithAttributesForFree(
                 player, source, game, new CardsImpl(player.getGraveyard()),
-                filter, SwordOfOnceAndFutureTracker.instance
+                filter, SwordOfOnceAndFutureTracker.INSTANCE
         );
     }
 }
 
 enum SwordOfOnceAndFutureTracker implements CardUtil.SpellCastTracker {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean checkCard(Card card, Game game) {

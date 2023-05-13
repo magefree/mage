@@ -59,7 +59,7 @@ public final class SorinVengefulBloodlord extends CardImpl {
                 "Return target creature card with mana value X from your graveyard to the battlefield"
         ));
         ability.addEffect(new SorinVengefulBloodlordEffect());
-        ability.setTargetAdjuster(SorinVengefulBloodlordAdjuster.instance);
+        ability.setTargetAdjuster(SorinVengefulBloodlordAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -74,7 +74,7 @@ public final class SorinVengefulBloodlord extends CardImpl {
 }
 
 enum SorinVengefulBloodlordAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

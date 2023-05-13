@@ -43,7 +43,7 @@ public final class SylvanPrimordial extends CardImpl {
 
         // When Sylvan Primordial enters the battlefield, for each opponent, destroy target noncreature permanent that player controls. For each permanent destroyed this way, search your library for a Forest card and put that card onto the battlefield tapped. Then shuffle your library.
         Ability ability = new EntersBattlefieldTriggeredAbility(new SylvanPrimordialEffect(), false);
-        ability.setTargetAdjuster(SylvanPrimordialAdjuster.instance);
+        ability.setTargetAdjuster(SylvanPrimordialAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -58,7 +58,7 @@ public final class SylvanPrimordial extends CardImpl {
 }
 
 enum SylvanPrimordialAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
@@ -105,10 +105,8 @@ class SylvanPrimordialEffect extends OneShotEffect {
         for (Target target : source.getTargets()) {
             if (target instanceof TargetPermanent) {
                 Permanent targetPermanent = game.getPermanent(target.getFirstTarget());
-                if (targetPermanent != null) {
-                    if (targetPermanent.destroy(source, game, false)) {
-                        destroyedCreatures++;
-                    }
+                if (targetPermanent != null && targetPermanent.destroy(source, game, false)) {
+                    destroyedCreatures++;
                 }
             }
         }

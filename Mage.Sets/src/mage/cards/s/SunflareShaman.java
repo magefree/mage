@@ -78,9 +78,9 @@ class SunflareShamanEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int ElementalsInYourGraveyard = controller.getGraveyard().count(filter, game);
-            new DamageTargetEffect(ElementalsInYourGraveyard).apply(game, source);
-            new DamageSelfEffect(ElementalsInYourGraveyard).apply(game, source);
+            int elementalsInYourGraveyard = controller.getGraveyard().count(filter, game);
+            new DamageTargetEffect(elementalsInYourGraveyard).apply(game, source);
+            new DamageSelfEffect(elementalsInYourGraveyard).apply(game, source);
             return true;
         }
         return false;

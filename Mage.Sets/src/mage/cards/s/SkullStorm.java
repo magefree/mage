@@ -63,7 +63,7 @@ class SkullStormEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.getOpponents(source.getControllerId()).forEach((playerId) -> {
+        game.getOpponents(source.getControllerId()).forEach(playerId -> {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 FilterPermanent filter = new FilterCreaturePermanent();

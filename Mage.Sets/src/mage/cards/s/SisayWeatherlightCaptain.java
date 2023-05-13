@@ -40,8 +40,8 @@ public final class SisayWeatherlightCaptain extends CardImpl {
 
         // Sisay, Weatherlight Captain gets +1/+1 for each color among other legendary permanents you control.
         this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(
-                SisayWeatherlightCaptainValue.instance,
-                SisayWeatherlightCaptainValue.instance,
+                SisayWeatherlightCaptainValue.INSTANCE,
+                SisayWeatherlightCaptainValue.INSTANCE,
                 Duration.WhileOnBattlefield
         )));
 
@@ -63,7 +63,7 @@ public final class SisayWeatherlightCaptain extends CardImpl {
 }
 
 enum SisayWeatherlightCaptainValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -80,7 +80,7 @@ enum SisayWeatherlightCaptainValue implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

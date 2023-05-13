@@ -34,7 +34,7 @@ public final class SelvalaHeartOfTheWilds extends CardImpl {
         filter.add(AnotherPredicate.instance);
     }
 
-    private static final String rule = "Whenever another creature enters the battlefield, its controller may draw a card if its power is greater than each other creature's power.";
+    private static final String RULE = "Whenever another creature enters the battlefield, its controller may draw a card if its power is greater than each other creature's power.";
 
     public SelvalaHeartOfTheWilds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
@@ -45,7 +45,7 @@ public final class SelvalaHeartOfTheWilds extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever another creature enters the battlefield, its controller may draw a card if its power is greater than each other creature's power.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new SelvalaHeartOfTheWildsEffect(), filter, false, SetTargetPointer.PERMANENT, rule));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new SelvalaHeartOfTheWildsEffect(), filter, false, SetTargetPointer.PERMANENT, RULE));
 
         // {G}, {T}: Add X mana in any combination of colors, where X is the greatest power among creatures you control.
         ManaEffect manaEffect = new AddManaInAnyCombinationEffect(

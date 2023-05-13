@@ -36,7 +36,7 @@ public final class SoulTransfer extends CardImpl {
         this.getSpellAbility().getModes().setChooseText(
                 "Choose one. If you control an artifact and an enchantment as you cast this spell, you may choose both."
         );
-        this.getSpellAbility().getModes().setMoreCondition(SoulTransferCondition.instance);
+        this.getSpellAbility().getModes().setMoreCondition(SoulTransferCondition.INSTANCE);
 
         // • Exile target creature or planeswalker.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
@@ -59,7 +59,7 @@ public final class SoulTransfer extends CardImpl {
 }
 
 enum SoulTransferCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

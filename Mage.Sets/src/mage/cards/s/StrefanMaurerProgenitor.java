@@ -40,7 +40,7 @@ import java.util.*;
  */
 public class StrefanMaurerProgenitor extends CardImpl {
 
-    private static final Hint hint = new ValueHint("Players who lost life this turn", StrefanMaurerProgenitorNumberPlayersLostLifeDynamicValue.instance);
+    private static final Hint hint = new ValueHint("Players who lost life this turn", StrefanMaurerProgenitorNumberPlayersLostLifeDynamicValue.INSTANCE);
     private static final FilterControlledPermanent bloodTokenFilter = new FilterControlledPermanent("Blood tokens");
 
     static {
@@ -66,7 +66,7 @@ public class StrefanMaurerProgenitor extends CardImpl {
                 new BeginningOfEndStepTriggeredAbility(
                         new CreateTokenEffect(
                                 new BloodToken(),
-                                StrefanMaurerProgenitorNumberPlayersLostLifeDynamicValue.instance),
+                                StrefanMaurerProgenitorNumberPlayersLostLifeDynamicValue.INSTANCE),
                         TargetController.YOU,
                         false)
                         .addHint(hint)
@@ -141,7 +141,7 @@ class StrefanMaurerProgenitorPlayVampireEffect extends OneShotEffect {
 }
 
 enum StrefanMaurerProgenitorNumberPlayersLostLifeDynamicValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -163,7 +163,7 @@ enum StrefanMaurerProgenitorNumberPlayersLostLifeDynamicValue implements Dynamic
     }
 
     @Override
-    public DynamicValue copy() { return instance; }
+    public DynamicValue copy() { return INSTANCE; }
 
     @Override
     public String getMessage() { return "player who lost life this turn"; }

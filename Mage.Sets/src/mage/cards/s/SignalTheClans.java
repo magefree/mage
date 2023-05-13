@@ -67,7 +67,7 @@ class SignalTheClansEffect extends SearchEffect {
                 Cards cards = new CardsImpl(target.getTargets());
                 //Reveal them
                 controller.revealCards(source, cards, game);
-                Card cardsArray[] = cards.getCards(game).toArray(new Card[0]);
+                Card[] cardsArray = cards.getCards(game).toArray(new Card[0]);
                 //If you reveal three cards with different names
                 if (Stream.of(cardsArray).map(MageObject::getName).collect(Collectors.toSet()).size() == 3) {
                     //Choose one of them at random and put that card into your hand

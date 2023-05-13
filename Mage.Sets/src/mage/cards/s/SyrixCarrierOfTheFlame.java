@@ -34,13 +34,13 @@ import java.util.UUID;
  */
 public class SyrixCarrierOfTheFlame extends CardImpl {
 
-    private static final String description = "Phoenix you control";
-    private static final FilterPermanent anotherPhoenixFilter = new FilterControlledPermanent("another Phoenix you control");
-    private static final FilterPermanent phoenixFilter = new FilterControlledPermanent(description);
+    private static final String DESCRIPTION = "Phoenix you control";
+    private static final FilterPermanent ANOTHER_PHOENIX_FILTER = new FilterControlledPermanent("another Phoenix you control");
+    private static final FilterPermanent PHOENIX_FILTER = new FilterControlledPermanent(DESCRIPTION);
     static {
-        anotherPhoenixFilter.add(AnotherPredicate.instance);
-        anotherPhoenixFilter.add(SubType.PHOENIX.getPredicate());
-        phoenixFilter.add(SubType.PHOENIX.getPredicate());
+        ANOTHER_PHOENIX_FILTER.add(AnotherPredicate.instance);
+        ANOTHER_PHOENIX_FILTER.add(SubType.PHOENIX.getPredicate());
+        PHOENIX_FILTER.add(SubType.PHOENIX.getPredicate());
     }
 
     public SyrixCarrierOfTheFlame(UUID ownerId, CardSetInfo setInfo) {
@@ -63,7 +63,7 @@ public class SyrixCarrierOfTheFlame extends CardImpl {
                 SyrixCarrierOfTheFlameCondition.instance,
                 false
         );
-        ability.addTarget(new TargetPermanent(phoenixFilter));
+        ability.addTarget(new TargetPermanent(PHOENIX_FILTER));
         ability.addTarget(new TargetAnyTarget());
         ability.addWatcher(new SyrixCarrierOfTheFlameWatcher());
         this.addAbility(ability);
@@ -73,7 +73,7 @@ public class SyrixCarrierOfTheFlame extends CardImpl {
                 Zone.GRAVEYARD,
                 new SyrixCarrierOfTheFlameCastEffect(),
                 true,
-                anotherPhoenixFilter,
+                ANOTHER_PHOENIX_FILTER,
                 false)
         );
     }

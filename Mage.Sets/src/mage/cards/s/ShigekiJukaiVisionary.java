@@ -52,7 +52,7 @@ public final class ShigekiJukaiVisionary extends CardImpl {
         this.addAbility(new ChannelAbility(
                 "{X}{X}{G}{G}", new ReturnFromGraveyardToHandTargetEffect()
                 .setText("return X target nonlegendary cards from your graveyard to your hand")
-        ).setTargetAdjuster(ShigekiJukaiVisionaryAdjuster.instance));
+        ).setTargetAdjuster(ShigekiJukaiVisionaryAdjuster.INSTANCE));
     }
 
     private ShigekiJukaiVisionary(final ShigekiJukaiVisionary card) {
@@ -66,7 +66,7 @@ public final class ShigekiJukaiVisionary extends CardImpl {
 }
 
 enum ShigekiJukaiVisionaryAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
     private static final FilterCard filter = new FilterCard("nonlegendary cards from your graveyard");
 
     static {

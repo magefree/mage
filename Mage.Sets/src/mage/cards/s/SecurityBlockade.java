@@ -30,7 +30,7 @@ import mage.target.common.TargetLandPermanent;
  */
 public final class SecurityBlockade extends CardImpl {
 
-    static final String rule = "Enchanted land has \"{T}: Prevent the next 1 damage that would be dealt to you this turn.\"";
+    static final String RULE = "Enchanted land has \"{T}: Prevent the next 1 damage that would be dealt to you this turn.\"";
 
     public SecurityBlockade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
@@ -49,7 +49,7 @@ public final class SecurityBlockade extends CardImpl {
 
         // Enchanted land has "{T}: Prevent the next 1 damage that would be dealt to you this turn."
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToControllerEffect(Duration.EndOfTurn, 1), new TapSourceCost());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.AURA, Duration.WhileOnBattlefield, RULE)));
     }
 
     private SecurityBlockade(final SecurityBlockade card) {

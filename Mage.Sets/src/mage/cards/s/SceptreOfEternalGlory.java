@@ -35,7 +35,7 @@ public final class SceptreOfEternalGlory extends CardImpl {
         // {T}: Add three mana of any one color. Activate only if you control three or more lands with the same name.
         this.addAbility(new ActivateIfConditionManaAbility(
                 Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3),
-                new TapSourceCost(), SceptreOfEternalGloryCondition.instance
+                new TapSourceCost(), SceptreOfEternalGloryCondition.INSTANCE
         ));
     }
 
@@ -50,7 +50,7 @@ public final class SceptreOfEternalGlory extends CardImpl {
 }
 
 enum SceptreOfEternalGloryCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

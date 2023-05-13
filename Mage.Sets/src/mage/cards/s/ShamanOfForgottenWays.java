@@ -4,11 +4,8 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageInt;
-import mage.MageObject;
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.FormidableCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -26,7 +23,6 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**

@@ -32,7 +32,7 @@ public final class SpiritOfResistance extends CardImpl {
         // As long as you control a permanent of each color, prevent all damage that would be dealt to you.
         Effect effect = new ConditionalReplacementEffect(
                 new PreventDamageToControllerEffect(Duration.WhileOnBattlefield),
-                SpiritOfResistanceCondition.instance);
+                SpiritOfResistanceCondition.INSTANCE);
         effect.setText("As long as you control a permanent of each color, prevent all damage that would be dealt to you.");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
@@ -48,8 +48,7 @@ public final class SpiritOfResistance extends CardImpl {
 }
 
 enum SpiritOfResistanceCondition implements Condition {
-
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

@@ -42,7 +42,7 @@ public final class SigilOfSleep extends CardImpl {
         Effect effect = new ReturnToHandTargetEffect();
         effect.setText("return target creature that player controls to its owner's hand");
         ability = new DealsDamageToAPlayerAttachedTriggeredAbility(effect, "enchanted", false, true, false);
-        ability.setTargetAdjuster(SigilOfSleepAdjuster.instance);
+        ability.setTargetAdjuster(SigilOfSleepAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -57,7 +57,7 @@ public final class SigilOfSleep extends CardImpl {
 }
 
 enum SigilOfSleepAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

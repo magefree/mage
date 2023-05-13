@@ -113,9 +113,9 @@ class SummonersEggPutOntoBattlefieldEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Permanent SummonersEgg = game.getPermanentOrLKIBattlefield(source.getSourceId());
-            if (SummonersEgg != null && SummonersEgg.getImprinted() != null && !SummonersEgg.getImprinted().isEmpty()) {
-                Card imprintedCard = game.getCard(SummonersEgg.getImprinted().get(0));
+            Permanent summonersEgg = game.getPermanentOrLKIBattlefield(source.getSourceId());
+            if (summonersEgg != null && summonersEgg.getImprinted() != null && !summonersEgg.getImprinted().isEmpty()) {
+                Card imprintedCard = game.getCard(summonersEgg.getImprinted().get(0));
                 if (imprintedCard != null && game.getState().getZone(imprintedCard.getId()) == Zone.EXILED) {
                     //turn the exiled card face up.
                     imprintedCard.turnFaceUp(source, game, source.getControllerId());

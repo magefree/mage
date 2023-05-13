@@ -129,20 +129,17 @@ class SoulfireGrandMasterCastFromHandReplacementEffect extends ReplacementEffect
                 && zEvent.getToZone() == Zone.STACK
                 && event.getPlayerId().equals(source.getControllerId())) {
             MageObject object = game.getObject(event.getTargetId());
-            if (object instanceof Card) {
-                if (filter.match((Card) object, game)) {
-                    this.spellId = event.getTargetId();
-                }
+            if (object instanceof Card && filter.match((Card) object, game)) {
+                this.spellId = event.getTargetId();
             }
         } else {
             // the spell goes to graveyard now so move it to hand again
             if (zEvent.getFromZone() == Zone.STACK
                     && zEvent.getToZone() == Zone.GRAVEYARD
-                    && event.getTargetId().equals(spellId)) {
-                if (game.getStack().getFirst() instanceof Spell) {
-                    Card cardOfSpell = ((Spell) game.getStack().getFirst()).getCard();
-                    return cardOfSpell.getMainCard().getId().equals(spellId);
-                }
+                    && event.getTargetId().equals(spellId)
+                    && game.getStack().getFirst() instanceof Spell) {
+                Card cardOfSpell = ((Spell) game.getStack().getFirst()).getCard();
+                return cardOfSpell.getMainCard().getId().equals(spellId);
             }
         }
         return false;

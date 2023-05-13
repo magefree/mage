@@ -26,7 +26,7 @@ public final class SpinningWheelKick extends CardImpl {
 
         // Target creature you control deals damage equal to its power to each of X target creatures and/or planeswalkers.
         this.getSpellAbility().addEffect(new SpinningWheelKickEffect());
-        this.getSpellAbility().setTargetAdjuster(SpinningWheelKickAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(SpinningWheelKickAdjuster.INSTANCE);
     }
 
     private SpinningWheelKick(final SpinningWheelKick card) {
@@ -40,7 +40,7 @@ public final class SpinningWheelKick extends CardImpl {
 }
 
 enum SpinningWheelKickAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

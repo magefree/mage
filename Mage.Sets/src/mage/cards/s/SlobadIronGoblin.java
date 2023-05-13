@@ -133,12 +133,12 @@ class SlobadIronGoblinConditionalMana extends ConditionalMana {
 
     SlobadIronGoblinConditionalMana(Mana mana) {
         super(mana);
-        addCondition(SlobadIronGoblinCondition.instance);
+        addCondition(SlobadIronGoblinCondition.INSTANCE);
     }
 }
 
 enum SlobadIronGoblinCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

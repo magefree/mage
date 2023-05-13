@@ -28,7 +28,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class Spawnbroker extends CardImpl {
 
-    private static final String rule = "you may exchange control of target creature you control and target creature with power less than or equal to that creature's power an opponent controls";
+    private static final String RULE_TEXT = "you may exchange control of target creature you control and target creature with power less than or equal to that creature's power an opponent controls";
 
     public Spawnbroker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
@@ -38,7 +38,7 @@ public final class Spawnbroker extends CardImpl {
         this.toughness = new MageInt(1);
         
         // When Spawnbroker enters the battlefield, you may exchange control of target creature you control and target creature with power less than or equal to that creature's power an opponent controls.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ExchangeControlTargetEffect(Duration.Custom, rule, false, true), true);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExchangeControlTargetEffect(Duration.Custom, RULE_TEXT, false, true), true);
         ability.addTarget(new TargetControlledCreatureWithPowerGreaterOrLessThanOpponentPermanent());
         ability.addTarget(new SpawnbrokerSecondTarget());
         this.addAbility(ability);
@@ -124,10 +124,8 @@ class SpawnbrokerSecondTarget extends TargetPermanent {
             MageObject targetSource = game.getObject(source);
             if(targetSource != null) {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
-                    if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
-                        if (firstTarget.getPower().getValue() >= permanent.getPower().getValue()) {
-                            possibleTargets.add(permanent.getId());
-                        }
+                    if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && firstTarget.getPower().getValue() >= permanent.getPower().getValue()) {
+                        possibleTargets.add(permanent.getId());
                     }
                 }
             }

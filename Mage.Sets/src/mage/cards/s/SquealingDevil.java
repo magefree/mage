@@ -18,7 +18,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -78,20 +77,18 @@ class SquealingDevilEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         ManaCosts cost = new ManaCostsImpl<>("{X}");
-        if (player != null) {
-            if (player.chooseUse(Outcome.BoostCreature, "Pay " + cost.getText() + "?", source, game)) {
-                int costX = player.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
-                cost.add(new GenericManaCost(costX));
-                if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
-                    Permanent permanent = game.getPermanent(source.getFirstTarget());
-                    if (permanent != null && permanent.isCreature(game)) {
-                        ContinuousEffect effect = new BoostTargetEffect(costX, 0, Duration.EndOfTurn);
-                        effect.setTargetPointer(new FixedTarget(permanent, game));
-                        game.addEffect(effect, source);
-                        return true;
-                    }
-                    return false;
+        if (player != null && player.chooseUse(Outcome.BoostCreature, "Pay " + cost.getText() + "?", source, game)) {
+            int costX = player.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
+            cost.add(new GenericManaCost(costX));
+            if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
+                Permanent permanent = game.getPermanent(source.getFirstTarget());
+                if (permanent != null && permanent.isCreature(game)) {
+                    ContinuousEffect effect = new BoostTargetEffect(costX, 0, Duration.EndOfTurn);
+                    effect.setTargetPointer(new FixedTarget(permanent, game));
+                    game.addEffect(effect, source);
+                    return true;
                 }
+                return false;
             }
         }
         return false;

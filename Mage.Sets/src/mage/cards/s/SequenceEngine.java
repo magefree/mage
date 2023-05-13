@@ -38,7 +38,7 @@ public final class SequenceEngine extends CardImpl {
         ability.addEffect(FractalToken.getEffect(
                 ManacostVariableValue.REGULAR, "Put X +1/+1 counters on it"
         ));
-        ability.setTargetAdjuster(SequenceEngineAdjuster.instance);
+        ability.setTargetAdjuster(SequenceEngineAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -53,7 +53,7 @@ public final class SequenceEngine extends CardImpl {
 }
 
 enum SequenceEngineAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

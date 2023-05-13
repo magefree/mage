@@ -37,7 +37,7 @@ public final class Seasinger extends CardImpl {
     static {
         filter.add(SubType.ISLAND.getPredicate());
         filter.add(TargetController.YOU.getControllerPredicate());
-        filter2.add(SeasingerPredicate.instance);
+        filter2.add(SeasingerPredicate.INSTANCE);
     }
 
     public Seasinger(UUID ownerId, CardSetInfo setInfo) {
@@ -76,7 +76,7 @@ public final class Seasinger extends CardImpl {
 }
 
 enum SeasingerPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-    instance;
+    INSTANCE;
     private static final FilterPermanent filter = new FilterControlledPermanent(SubType.ISLAND);
 
     @Override

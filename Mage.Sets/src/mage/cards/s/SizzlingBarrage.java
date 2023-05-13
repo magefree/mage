@@ -27,7 +27,7 @@ public final class SizzlingBarrage extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("creature that blocked this turn");
 
     static {
-        filter.add(SizzlingBarragePredicate.instance);
+        filter.add(SizzlingBarragePredicate.INSTANCE);
     }
 
     public SizzlingBarrage(UUID ownerId, CardSetInfo setInfo) {
@@ -50,7 +50,7 @@ public final class SizzlingBarrage extends CardImpl {
 }
 
 enum SizzlingBarragePredicate implements Predicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Permanent input, Game game) {

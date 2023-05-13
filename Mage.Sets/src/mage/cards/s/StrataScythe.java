@@ -72,16 +72,14 @@ class StrataScytheImprintEffect extends OneShotEffect {
             return false;
         }
         TargetCardInLibrary target = new TargetCardInLibrary(new FilterLandCard());
-        if (player.searchLibrary(target, source, game)) {
-            if (!target.getTargets().isEmpty()) {
-                UUID cardId = target.getTargets().get(0);
-                Card card = player.getLibrary().remove(cardId, game);
-                if (card != null) {
-                    card.moveToExile(source.getSourceId(), "Strata Scythe", source, game);
-                    Permanent permanent = game.getPermanent(source.getSourceId());
-                    if (permanent != null) {
-                        permanent.imprint(card.getId(), game);
-                    }
+        if (player.searchLibrary(target, source, game) && (!target.getTargets().isEmpty())) {
+            UUID cardId = target.getTargets().get(0);
+            Card card = player.getLibrary().remove(cardId, game);
+            if (card != null) {
+                card.moveToExile(source.getSourceId(), "Strata Scythe", source, game);
+                Permanent permanent = game.getPermanent(source.getSourceId());
+                if (permanent != null) {
+                    permanent.imprint(card.getId(), game);
                 }
             }
         }

@@ -40,7 +40,7 @@ public final class SigardasSplendor extends CardImpl {
         // At the beginning of your upkeep, draw a card if your life total is greater than or equal to the last noted life total for Sigarda's Splendor. Then note your life total.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new SigardasSplendorDrawEffect(), TargetController.YOU, false
-        ).addHint(SigardasSplendorHint.instance));
+        ).addHint(SigardasSplendorHint.INSTANCE));
 
         // Whenever you cast a white spell, you gain 1 life.
         this.addAbility(new SpellCastControllerTriggeredAbility(new GainLifeEffect(1), filter, false));
@@ -62,7 +62,7 @@ public final class SigardasSplendor extends CardImpl {
 }
 
 enum SigardasSplendorHint implements Hint {
-    instance;
+    INSTANCE;
 
     @Override
     public String getText(Game game, Ability ability) {

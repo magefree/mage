@@ -33,7 +33,7 @@ public final class SelectiveSnare extends CardImpl {
                                 + "the creature type of your choice "
                                 + "to their owner's hand")
         );
-        this.getSpellAbility().setTargetAdjuster(SelectiveSnareAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(SelectiveSnareAdjuster.INSTANCE);
     }
 
     private SelectiveSnare(final SelectiveSnare card) {
@@ -47,7 +47,7 @@ public final class SelectiveSnare extends CardImpl {
 }
 
 enum SelectiveSnareAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

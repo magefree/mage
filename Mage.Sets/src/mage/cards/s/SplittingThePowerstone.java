@@ -32,7 +32,7 @@ public final class SplittingThePowerstone extends CardImpl {
         // Create two tapped Powerstone tokens. If the sacrificed artifact was legendary, draw a card.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new PowerstoneToken(), 2, true));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new DrawCardSourceControllerEffect(1), SplittingThePowerstoneCondition.instance,
+                new DrawCardSourceControllerEffect(1), SplittingThePowerstoneCondition.INSTANCE,
                 "If the sacrificed artifact was legendary, draw a card"
         ));
     }
@@ -48,7 +48,7 @@ public final class SplittingThePowerstone extends CardImpl {
 }
 
 enum SplittingThePowerstoneCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

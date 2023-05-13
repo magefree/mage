@@ -32,7 +32,7 @@ public final class SilverWyvern extends CardImpl {
     private static final FilterStackObject filter = new FilterStackObject();
 
     static {
-        filter.add(SilverWyvernPredicate.instance);
+        filter.add(SilverWyvernPredicate.INSTANCE);
     }
 
     public SilverWyvern(UUID ownerId, CardSetInfo setInfo) {
@@ -67,7 +67,7 @@ public final class SilverWyvern extends CardImpl {
 }
 
 enum SilverWyvernPredicate implements ObjectSourcePlayerPredicate<StackObject> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {
@@ -75,7 +75,7 @@ enum SilverWyvernPredicate implements ObjectSourcePlayerPredicate<StackObject> {
                 && makeStream(input, game).allMatch(input.getSourceId()::equals);
     }
 
-    private static final Stream<UUID> makeStream(ObjectSourcePlayer<StackObject> input, Game game) {
+    private static Stream<UUID> makeStream(ObjectSourcePlayer<StackObject> input, Game game) {
         return input.getObject()
                 .getStackAbility()
                 .getTargets()

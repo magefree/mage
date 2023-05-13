@@ -25,7 +25,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class SelesnyaCharm extends CardImpl {
 
-    static private final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 5 or greater");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 5 or greater");
     
     static {
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 4));

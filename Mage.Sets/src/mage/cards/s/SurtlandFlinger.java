@@ -49,13 +49,13 @@ public final class SurtlandFlinger extends CardImpl {
 
 class SurtlandFlingerEffect extends OneShotEffect {
 
-    private static final String rule
+    private static final String RULE_TEXT
             = "{this} deals damage equal to the sacrificed creature's power to any target. " +
             "If the sacrificed creature was a Giant, {this} deals twice that much damage instead.";
 
     SurtlandFlingerEffect() {
         super(Outcome.Benefit);
-        staticText = "sacrifice another creature. When you do, " + rule;
+        staticText = "sacrifice another creature. When you do, " + RULE_TEXT;
     }
 
     private SurtlandFlingerEffect(final SurtlandFlingerEffect effect) {
@@ -90,7 +90,7 @@ class SurtlandFlingerEffect extends OneShotEffect {
             return false;
         }
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
-                new DamageTargetEffect(power), false, rule
+                new DamageTargetEffect(power), false, RULE_TEXT
         );
         ability.addTarget(new TargetAnyTarget());
         game.fireReflexiveTriggeredAbility(ability, source);

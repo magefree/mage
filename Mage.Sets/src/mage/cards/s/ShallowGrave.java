@@ -72,21 +72,19 @@ class ShallowGraveEffect extends OneShotEffect {
                     lastCreatureCard = card;
                 }
             }
-            if (lastCreatureCard != null) {
-                if (controller.moveCards(lastCreatureCard, Zone.BATTLEFIELD, source, game)) {
-                    Permanent returnedCreature = game.getPermanent(lastCreatureCard.getId());
-                    if (returnedCreature != null) {
-                        FixedTarget fixedTarget = new FixedTarget(returnedCreature, game);
-                        // Gains Haste
-                        ContinuousEffect hasteEffect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-                        hasteEffect.setTargetPointer(fixedTarget);
-                        game.addEffect(hasteEffect, source);
-                        // Exile it at end of turn
-                        ExileTargetEffect exileEffect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD);
-                        exileEffect.setTargetPointer(fixedTarget);
-                        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
-                        game.addDelayedTriggeredAbility(delayedAbility, source);
-                    }
+            if (lastCreatureCard != null && controller.moveCards(lastCreatureCard, Zone.BATTLEFIELD, source, game)) {
+                Permanent returnedCreature = game.getPermanent(lastCreatureCard.getId());
+                if (returnedCreature != null) {
+                    FixedTarget fixedTarget = new FixedTarget(returnedCreature, game);
+                    // Gains Haste
+                    ContinuousEffect hasteEffect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
+                    hasteEffect.setTargetPointer(fixedTarget);
+                    game.addEffect(hasteEffect, source);
+                    // Exile it at end of turn
+                    ExileTargetEffect exileEffect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD);
+                    exileEffect.setTargetPointer(fixedTarget);
+                    DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
+                    game.addDelayedTriggeredAbility(delayedAbility, source);
                 }
             }
             return true;

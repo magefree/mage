@@ -57,7 +57,7 @@ public final class ShacklesOfTreachery extends CardImpl {
 class ShacklesOfTreacheryTriggeredAbility extends TriggeredAbilityImpl {
 
     private enum ShacklesOfTreacheryPredicate implements ObjectSourcePlayerPredicate<MageObject> {
-        instance;
+        INSTANCE;
 
         @Override
         public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
@@ -70,7 +70,7 @@ class ShacklesOfTreacheryTriggeredAbility extends TriggeredAbilityImpl {
             = new FilterEquipmentPermanent("Equipment attached to this creature");
 
     static {
-        filter.add(ShacklesOfTreacheryPredicate.instance);
+        filter.add(ShacklesOfTreacheryPredicate.INSTANCE);
     }
 
     ShacklesOfTreacheryTriggeredAbility() {

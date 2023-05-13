@@ -42,7 +42,7 @@ public final class SpeakerOfTheHeavens extends CardImpl {
         // {T}: Create a 4/4 white Angel creature token with flying. Activate this ability only if you have at least 7 more life than your starting life total and only any time you could cast a sorcery.
         this.addAbility(new ConditionalActivatedAbility(
                 Zone.BATTLEFIELD, new CreateTokenEffect(new AngelToken()),
-                new TapSourceCost(), SpeakerOfTheHeavensCondition.instance
+                new TapSourceCost(), SpeakerOfTheHeavensCondition.INSTANCE
         ));
     }
 
@@ -57,7 +57,7 @@ public final class SpeakerOfTheHeavens extends CardImpl {
 }
 
 enum SpeakerOfTheHeavensCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

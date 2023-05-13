@@ -30,7 +30,7 @@ public final class StolenByTheFae extends CardImpl {
                 .setText("Return target creature with mana value X to its owner's hand"));
         this.getSpellAbility().addEffect(new CreateTokenEffect(new FaerieToken(), ManacostVariableValue.REGULAR)
                 .setText("You create X 1/1 blue Faerie creature tokens with flying"));
-        this.getSpellAbility().setTargetAdjuster(StolenByTheFaeAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(StolenByTheFaeAdjuster.INSTANCE);
     }
 
     private StolenByTheFae(final StolenByTheFae card) {
@@ -44,7 +44,7 @@ public final class StolenByTheFae extends CardImpl {
 }
 
 enum StolenByTheFaeAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

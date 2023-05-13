@@ -86,11 +86,11 @@ class SemblanceAnvilEffect extends OneShotEffect {
 
 class SemblanceAnvilCostReductionEffect extends CostModificationEffectImpl {
 
-    private static final String effectText = "Spells you cast that share a card type with the exiled card cost {2} less to cast";
+    private static final String EFFECT_TEXT = "Spells you cast that share a card type with the exiled card cost {2} less to cast";
 
     SemblanceAnvilCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = effectText;
+        staticText = EFFECT_TEXT;
     }
 
     SemblanceAnvilCostReductionEffect(SemblanceAnvilCostReductionEffect effect) {

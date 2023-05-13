@@ -64,13 +64,13 @@ public final class SentinelOfThePearlTrident extends CardImpl {
 
 class SentinelOfThePearlTridentEffect extends OneShotEffect {
 
-    private static final String effectText = "exile target historic permanent you control. "
+    private static final String EFFECT_TEXT = "exile target historic permanent you control. "
             + "If you do, return that card to the battlefield under its owner's control"
             + " at the beginning of the next end step. <i>(Artifacts, legendaries, and Sagas are historic.)</i>";
 
     SentinelOfThePearlTridentEffect() {
         super(Outcome.Detriment);
-        staticText = effectText;
+        staticText = EFFECT_TEXT;
     }
 
     SentinelOfThePearlTridentEffect(SentinelOfThePearlTridentEffect effect) {

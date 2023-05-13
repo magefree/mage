@@ -14,14 +14,14 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class Switcheroo extends CardImpl {
 
-    private static final String rule = "Exchange control of two target creatures";
+    private static final String RULE_TEXT = "Exchange control of two target creatures";
 
     public Switcheroo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}");
 
 
         // Exchange control of two target creatures.
-        this.getSpellAbility().addEffect(new ExchangeControlTargetEffect(Duration.EndOfGame, rule));
+        this.getSpellAbility().addEffect(new ExchangeControlTargetEffect(Duration.EndOfGame, RULE_TEXT));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(2));
     }
 

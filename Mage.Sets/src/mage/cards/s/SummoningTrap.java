@@ -14,8 +14,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
-import mage.players.Player;
-import mage.target.TargetCard;
 import mage.watchers.Watcher;
 
 import java.util.HashSet;
@@ -33,7 +31,7 @@ public final class SummoningTrap extends CardImpl {
         this.subtype.add(SubType.TRAP);
 
         // If a creature spell you cast this turn was countered by a spell or ability an opponent controlled, you may pay {0} rather than pay Summoning Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{0}"), SummoningTrapCondition.instance), new SummoningTrapWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{0}"), SummoningTrapCondition.INSTANCE), new SummoningTrapWatcher());
 
         // Look at the top seven cards of your library. You may put a creature card from among them onto the battlefield.
         // Put the rest on the bottom of your library in any order.
@@ -52,8 +50,7 @@ public final class SummoningTrap extends CardImpl {
 }
 
 enum SummoningTrapCondition implements Condition {
-
-   instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

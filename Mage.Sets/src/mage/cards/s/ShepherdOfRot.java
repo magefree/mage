@@ -20,9 +20,9 @@ import mage.filter.FilterPermanent;
  */
 public final class ShepherdOfRot extends CardImpl {
     
-    static final String rule = "Each player loses 1 life for each Zombie on the battlefield";
-    
-    static final private FilterPermanent filter = new FilterPermanent("Zombie");
+    static final String RULE_TEXT = "Each player loses 1 life for each Zombie on the battlefield";
+
+    private static final FilterPermanent filter = new FilterPermanent("Zombie");
     
     static {
         filter.add(SubType.ZOMBIE.getPredicate());
@@ -37,7 +37,7 @@ public final class ShepherdOfRot extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Each player loses 1 life for each Zombie on the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeAllPlayersEffect(new PermanentsOnBattlefieldCount(filter), rule), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeAllPlayersEffect(new PermanentsOnBattlefieldCount(filter), RULE_TEXT), new TapSourceCost()));
     }
 
     private ShepherdOfRot(final ShepherdOfRot card) {

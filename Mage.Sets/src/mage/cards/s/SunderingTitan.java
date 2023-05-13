@@ -81,10 +81,8 @@ class SunderingTitanDestroyLandEffect extends OneShotEffect {
                 int destroyedLands = 0;
                 for (UUID landId : lands) {
                     Permanent land = game.getPermanent(landId);
-                    if (land != null) {
-                        if (land.destroy(source, game, false)) {
-                            destroyedLands++;
-                        }
+                    if (land != null && (land.destroy(source, game, false))) {
+                        destroyedLands++;
                     }
                 }
                 game.informPlayers(sourcePermanent.getLogName() + ": " + destroyedLands + (destroyedLands > 1 ? " lands were" : "land was") + " destroyed");

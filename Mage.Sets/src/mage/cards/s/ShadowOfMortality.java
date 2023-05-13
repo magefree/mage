@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 public final class ShadowOfMortality extends CardImpl {
 
-    private static final Hint hint = new ValueHint("Current net life loss", ShadowOfMortalityValue.instance);
+    private static final Hint hint = new ValueHint("Current net life loss", ShadowOfMortalityValue.INSTANCE);
 
     public ShadowOfMortality(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{13}{B}{B}");
@@ -36,7 +36,7 @@ public final class ShadowOfMortality extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
                 new SpellCostReductionForEachSourceEffect(
-                        1, ShadowOfMortalityValue.instance
+                        1, ShadowOfMortalityValue.INSTANCE
                 ).setText("if your life total is less than your starting life total, " +
                         "this spell costs {X} less to cast, where X is the difference")
         ).addHint(hint));
@@ -53,7 +53,7 @@ public final class ShadowOfMortality extends CardImpl {
 }
 
 enum ShadowOfMortalityValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

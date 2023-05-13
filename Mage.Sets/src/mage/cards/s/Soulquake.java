@@ -66,7 +66,7 @@ class SoulquakeEffect extends OneShotEffect {
         }
         Set<Card> cardsToHand = new LinkedHashSet<>();
         for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
-            cardsToHand.add((Card) permanent);
+            cardsToHand.add(permanent);
         }
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);

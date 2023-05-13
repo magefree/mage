@@ -29,7 +29,7 @@ public final class SpellstutterSprite extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("spell with mana value X or less, where X is the number of Faeries you control");
 
     static {
-        filter.add(SpellstutterSpritePredicate.instance);
+        filter.add(SpellstutterSpritePredicate.INSTANCE);
     }
 
     public SpellstutterSprite(UUID ownerId, CardSetInfo setInfo) {
@@ -63,7 +63,7 @@ public final class SpellstutterSprite extends CardImpl {
 }
 
 enum SpellstutterSpritePredicate implements ObjectSourcePlayerPredicate<MageObject> {
-    instance;
+    INSTANCE;
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {

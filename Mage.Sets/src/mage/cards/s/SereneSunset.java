@@ -23,7 +23,7 @@ public final class SereneSunset extends CardImpl {
         // Prevent all combat damage X target creatures would deal this turn.
         this.getSpellAbility().addEffect(new PreventDamageByTargetEffect(Duration.EndOfTurn, true)
                 .setText("prevent all combat damage X target creatures would deal this turn"));
-        this.getSpellAbility().setTargetAdjuster(SereneSunsetAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(SereneSunsetAdjuster.INSTANCE);
     }
 
     private SereneSunset(final SereneSunset card) {
@@ -37,7 +37,7 @@ public final class SereneSunset extends CardImpl {
 }
 
 enum SereneSunsetAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

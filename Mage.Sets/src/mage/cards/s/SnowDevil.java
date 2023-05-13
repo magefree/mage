@@ -56,7 +56,7 @@ public final class SnowDevil extends CardImpl {
                                 FirstStrikeAbility.getInstance(),
                                 AttachmentType.AURA,
                                 Duration.WhileOnBattlefield),
-                        SnowDevilCondition.instance,
+                        SnowDevilCondition.INSTANCE,
                         "Enchanted creature has first strike as long as it's blocking and you control a snow land"
                 )));
     }
@@ -72,8 +72,7 @@ public final class SnowDevil extends CardImpl {
 }
 
 enum SnowDevilCondition implements Condition {
-
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

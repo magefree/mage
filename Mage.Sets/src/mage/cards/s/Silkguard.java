@@ -45,7 +45,7 @@ public final class Silkguard extends CardImpl {
         // Put a +1/+1 counter on each of up to X target creatures you control.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance())
                 .setText("put a +1/+1 counter on each of up to X target creatures you control"));
-        this.getSpellAbility().setTargetAdjuster(SilkguardAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(SilkguardAdjuster.INSTANCE);
 
         // Auras, Equipment, and modified creatures you control gain hexproof until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(
@@ -64,7 +64,7 @@ public final class Silkguard extends CardImpl {
 }
 
 enum SilkguardAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

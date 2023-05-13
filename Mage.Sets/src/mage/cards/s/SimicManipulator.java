@@ -55,7 +55,7 @@ public final class SimicManipulator extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainControlTargetEffect(Duration.Custom, true), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.P1P1.createInstance(), 1, "Remove one or more +1/+1 counters from {this}"));
-        ability.setTargetAdjuster(SimicManipulatorAdjuster.instance);
+        ability.setTargetAdjuster(SimicManipulatorAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -70,7 +70,7 @@ public final class SimicManipulator extends CardImpl {
 }
 
 enum SimicManipulatorAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

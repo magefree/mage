@@ -39,7 +39,7 @@ public final class SanctumOfTranquilLight extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new ManaCostsImpl<>("{5}{W}"));
         ability.addEffect(new InfoEffect("This ability costs {1} less to activate for each Shrine you control"));
         ability.addTarget(new TargetCreaturePermanent());
-        ability.setCostAdjuster(SanctumOfTranquilLightAdjuster.instance);
+        ability.setCostAdjuster(SanctumOfTranquilLightAdjuster.INSTANCE);
         this.addAbility(ability.addHint(SanctumOfTranquilLightAdjuster.getHint()));
     }
 
@@ -54,7 +54,7 @@ public final class SanctumOfTranquilLight extends CardImpl {
 }
 
 enum SanctumOfTranquilLightAdjuster implements CostAdjuster {
-    instance;
+    INSTANCE;
 
     private static final FilterPermanent filter = new FilterControlledPermanent(SubType.SHRINE);
     private static final DynamicValue count = new PermanentsOnBattlefieldCount(filter);

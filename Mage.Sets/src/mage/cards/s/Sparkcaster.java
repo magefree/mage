@@ -24,7 +24,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  */
 public final class Sparkcaster extends CardImpl {
 
-    static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("red or green creature you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("red or green creature you control");
 
     static {
         filter.add(Predicates.or(new ColorPredicate(ObjectColor.RED), new ColorPredicate(ObjectColor.GREEN)));

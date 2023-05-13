@@ -35,7 +35,7 @@ public final class SlingbowTrap extends CardImpl {
         this.subtype.add(SubType.TRAP);
 
         // If a black creature with flying is attacking, you may pay {G} rather than pay Slingbow Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{G}"), SlingbowTrapCondition.instance));
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{G}"), SlingbowTrapCondition.INSTANCE));
 
         // Destroy target attacking creature with flying.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
@@ -53,17 +53,14 @@ public final class SlingbowTrap extends CardImpl {
 }
 
 enum SlingbowTrapCondition implements Condition {
-
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {
         for (UUID attackingCreatureId : game.getCombat().getAttackers()) {
             Permanent attackingCreature = game.getPermanent(attackingCreatureId);
-            if (attackingCreature != null) {
-                if (attackingCreature.getColor(game).isBlack() && attackingCreature.hasAbility(FlyingAbility.getInstance(), game)) {
-                    return true;
-                }
+            if (attackingCreature != null && attackingCreature.getColor(game).isBlack() && attackingCreature.hasAbility(FlyingAbility.getInstance(), game)) {
+                return true;
             }
         }
         return false;

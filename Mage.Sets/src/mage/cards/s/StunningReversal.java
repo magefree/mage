@@ -79,10 +79,7 @@ class StunningReversalEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getPlayerId().equals(source.getControllerId())) {
-            return true;
-        }
-        return false;
+        return event.getPlayerId().equals(source.getControllerId());
     }
 
 }

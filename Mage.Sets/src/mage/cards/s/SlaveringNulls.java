@@ -15,7 +15,6 @@ import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -76,15 +75,13 @@ class SlaveringNullsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(this.sourceId) && ((DamagedPlayerEvent) event).isCombatDamage()) {
-            if (game.getBattlefield().countAll(filter, controllerId, game) > 0) {
-                Permanent slaveringNulls = game.getPermanent(event.getSourceId());
-                Player player = game.getPlayer(event.getTargetId());
-                if (slaveringNulls != null && player != null) {
-                    Effect effect = this.getEffects().get(0);
-                    effect.setTargetPointer(new FixedTarget(player.getId()));
-                    return true;
-                }
+        if (event.getSourceId().equals(this.sourceId) && ((DamagedPlayerEvent) event).isCombatDamage() && game.getBattlefield().countAll(filter, controllerId, game) > 0) {
+            Permanent slaveringNulls = game.getPermanent(event.getSourceId());
+            Player player = game.getPlayer(event.getTargetId());
+            if (slaveringNulls != null && player != null) {
+                Effect effect = this.getEffects().get(0);
+                effect.setTargetPointer(new FixedTarget(player.getId()));
+                return true;
             }
         }
         return false;

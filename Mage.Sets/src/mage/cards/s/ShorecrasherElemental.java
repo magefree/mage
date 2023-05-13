@@ -95,8 +95,8 @@ class ShorecrasherElementalEffect extends OneShotEffect {
 
 class ShorecrasherElementalBoostEffect extends OneShotEffect {
 
-    private static String CHOICE_1 = "+1/-1";
-    private static String CHOICE_2 = "-1/+1";
+    private static String CHOICE1 = "+1/-1";
+    private static String CHOICE2 = "-1/+1";
 
     public ShorecrasherElementalBoostEffect() {
         super(Outcome.BoostCreature);
@@ -118,10 +118,10 @@ class ShorecrasherElementalBoostEffect extends OneShotEffect {
         if (controller != null) {
             Choice choice = new ChoiceImpl(true);
             choice.setMessage("Select how to boost");
-            choice.getChoices().add(CHOICE_1);
-            choice.getChoices().add(CHOICE_2);
+            choice.getChoices().add(CHOICE1);
+            choice.getChoices().add(CHOICE2);
             if (controller.choose(outcome, choice, game)) {
-                if (choice.getChoice().equals(CHOICE_1)) {
+                if (choice.getChoice().equals(CHOICE1)) {
                     game.addEffect(new BoostSourceEffect(+1, -1, Duration.EndOfTurn), source);
                 } else {
                     game.addEffect(new BoostSourceEffect(-1, +1, Duration.EndOfTurn), source);

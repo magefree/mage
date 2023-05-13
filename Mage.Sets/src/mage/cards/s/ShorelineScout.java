@@ -61,7 +61,7 @@ public final class ShorelineScout extends CardImpl {
         // As long as another Merfolk or an Island entered the battlefield under your control this turn, Shoreline Scout gets +1/+0.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield),
-                ShorelineScoutCondition.instance, "as long as another Merfolk " +
+                ShorelineScoutCondition.INSTANCE, "as long as another Merfolk " +
                 "or an Island entered the battlefield under your control this turn, {this} gets +1/+0"
         )), new ShorelineScoutWatcher());
     }
@@ -77,7 +77,7 @@ public final class ShorelineScout extends CardImpl {
 }
 
 enum ShorelineScoutCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

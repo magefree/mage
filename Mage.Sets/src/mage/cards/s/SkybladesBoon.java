@@ -49,7 +49,7 @@ public final class SkybladesBoon extends CardImpl {
         // {2}{W}: Return Skyblade's Boon to its owner's hand. Activate only if Skyblade's Boon is on the battlefield or in your graveyard.
         this.addAbility(new ActivateIfConditionActivatedAbility(
                 Zone.ALL, new ReturnToHandSourceEffect(),
-                new ManaCostsImpl<>("{2}{W}"), SkybladesBoonCondition.instance
+                new ManaCostsImpl<>("{2}{W}"), SkybladesBoonCondition.INSTANCE
         ));
     }
 
@@ -64,7 +64,7 @@ public final class SkybladesBoon extends CardImpl {
 }
 
 enum SkybladesBoonCondition implements Condition {
-    instance;
+    INSTANCE;
     private static final List<Zone> zones = Arrays.asList(Zone.BATTLEFIELD, Zone.GRAVEYARD);
 
     @Override

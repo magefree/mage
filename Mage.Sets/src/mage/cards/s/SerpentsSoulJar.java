@@ -147,7 +147,6 @@ class SerpentsSoulJarWatcher extends Watcher {
             }
             morMap.computeIfAbsent(event.getAdditionalReference().getApprovingMageObjectReference(), m -> new HashMap<>())
                     .compute(event.getPlayerId(), (u, i) -> i == null ? 0 : Integer.sum(i, -1));
-            return;
         }
     }
 

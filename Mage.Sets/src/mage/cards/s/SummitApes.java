@@ -21,7 +21,7 @@ import mage.filter.common.FilterLandPermanent;
  */
 public final class SummitApes extends CardImpl {
 
-    private static final String rule = "As long as you control a Mountain, {this} has menace. (It can't be blocked except by two or more creatures.)";
+    private static final String RULE_TEXT = "As long as you control a Mountain, {this} has menace. (It can't be blocked except by two or more creatures.)";
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Mountain");
 
     static {
@@ -38,7 +38,7 @@ public final class SummitApes extends CardImpl {
 
         // As long as you control a Mountain, Summit Apes has menace. (It can't be blocked except by two or more creatures.)
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new ConditionalContinuousEffect(new GainAbilitySourceEffect(new MenaceAbility()), new PermanentsOnTheBattlefieldCondition(filter), rule)));
+                new ConditionalContinuousEffect(new GainAbilitySourceEffect(new MenaceAbility()), new PermanentsOnTheBattlefieldCondition(filter), RULE_TEXT)));
     }
 
     private SummitApes(final SummitApes card) {

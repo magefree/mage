@@ -59,7 +59,7 @@ public final class SupremeLeaderSnoke extends CardImpl {
         ability3.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield).setText("It gains haste"));
         ability3.addEffect(new GainAbilityTargetEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SacrificeSourceEffect()), Duration.WhileOnBattlefield)
                 .setText("Sacrifice that creature at the beginning of the next end step"));
-        ability3.setTargetAdjuster(SupremeLeaderSnokeAdjuster.instance);
+        ability3.setTargetAdjuster(SupremeLeaderSnokeAdjuster.INSTANCE);
         this.addAbility(ability3);
     }
 
@@ -74,7 +74,7 @@ public final class SupremeLeaderSnoke extends CardImpl {
 }
 
 enum SupremeLeaderSnokeAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

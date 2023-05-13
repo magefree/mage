@@ -52,7 +52,7 @@ class SentinelTowerTriggeredAbility extends SpellCastAllTriggeredAbility {
     SentinelTowerTriggeredAbility() {
         super(new DamageTargetEffect(0), StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false);
         this.addTarget(new TargetAnyTarget());
-        this.addHint(new ValueHint("There were cast instant and sorcery this turn", SentinelTowerSpellsCastValue.instance));
+        this.addHint(new ValueHint("There were cast instant and sorcery this turn", SentinelTowerSpellsCastValue.INSTANCE));
         this.damageInfo = null;
     }
 
@@ -136,8 +136,7 @@ class SentinelTowerWatcher extends Watcher {
 }
 
 enum SentinelTowerSpellsCastValue implements DynamicValue {
-
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -154,7 +153,7 @@ enum SentinelTowerSpellsCastValue implements DynamicValue {
 
     @Override
     public SentinelTowerSpellsCastValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

@@ -24,7 +24,7 @@ import mage.filter.common.FilterLandPermanent;
 public final class SireOfStagnation extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent();
-    private static final String rule = "Whenever a land enters the battlefield under an opponent's control, that player exiles the top two cards of their library and you draw two cards.";
+    private static final String RULE_TEXT = "Whenever a land enters the battlefield under an opponent's control, that player exiles the top two cards of their library and you draw two cards.";
 
     static {
         filter.add(TargetController.OPPONENT.getControllerPredicate());
@@ -41,7 +41,7 @@ public final class SireOfStagnation extends CardImpl {
 
         // Whenever a land enters the battlefield under an opponent's control, that player exiles the top two cards of their library and you draw two cards.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
-                new ExileCardsFromTopOfLibraryTargetEffect(2, "that player"), filter, false, SetTargetPointer.PLAYER, rule, false);
+                new ExileCardsFromTopOfLibraryTargetEffect(2, "that player"), filter, false, SetTargetPointer.PLAYER, RULE_TEXT, false);
         ability.addEffect(new DrawCardSourceControllerEffect(2));
         this.addAbility(ability);
     }

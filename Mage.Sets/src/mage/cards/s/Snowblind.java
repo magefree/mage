@@ -38,7 +38,7 @@ public final class Snowblind extends CardImpl {
 
         // Enchanted creature gets -X/-Y. If that creature is attacking, X is the number of snow lands defending player controls. Otherwise, X is the number of snow lands its controller controls. Y is equal to X or to enchanted creature's toughness minus 1, whichever is smaller.
         this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(
-                SnowblindValue.instanceX, SnowblindValue.instanceY, Duration.WhileOnBattlefield
+                SnowblindValue.INSTANCEX, SnowblindValue.INSTANCEY, Duration.WhileOnBattlefield
         ).setText("Enchanted creature gets -X/-Y. If that creature is attacking, " +
                 "X is the number of snow lands defending player controls. " +
                 "Otherwise, X is the number of snow lands its controller controls. " +
@@ -57,8 +57,8 @@ public final class Snowblind extends CardImpl {
 }
 
 enum SnowblindValue implements DynamicValue {
-    instanceX,
-    instanceY;
+    INSTANCEX,
+    INSTANCEY;
 
     private static final FilterPermanent filter = new FilterLandPermanent();
 
@@ -84,7 +84,7 @@ enum SnowblindValue implements DynamicValue {
         } else {
             xValue = game.getBattlefield().countAll(filter, permanent.getControllerId(), game);
         }
-        if (this == instanceX) {
+        if (this == INSTANCEX) {
             return -xValue;
         }
         return -Math.min(xValue, permanent.getToughness().getValue() - 1);

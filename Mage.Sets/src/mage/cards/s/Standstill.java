@@ -12,7 +12,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -92,16 +91,14 @@ class StandstillEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            if (permanent.sacrifice(source, game)) {
-                for (UUID uuid : game.getOpponents(this.getTargetPointer().getFirst(game, source))) {
-                    Player player = game.getPlayer(uuid);
-                    if (player != null) {
-                        player.drawCards(3, source, game);
-                    }
+        if (permanent != null && permanent.sacrifice(source, game)) {
+            for (UUID uuid : game.getOpponents(this.getTargetPointer().getFirst(game, source))) {
+                Player player = game.getPlayer(uuid);
+                if (player != null) {
+                    player.drawCards(3, source, game);
                 }
-                return true;
             }
+            return true;
         }
         return false;
     }

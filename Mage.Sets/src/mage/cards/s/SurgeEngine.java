@@ -51,7 +51,7 @@ public final class SurgeEngine extends CardImpl {
         // {2}{U}: Surge Engine becomes blue and has base power and toughness 5/4. Activate only if Surge Engine doesn't have defender.
         ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD, new BecomesColorSourceEffect(ObjectColor.BLUE, Duration.Custom),
-                new ManaCostsImpl<>("{2}{U}"), SurgeEngineCondition.instance
+                new ManaCostsImpl<>("{2}{U}"), SurgeEngineCondition.INSTANCE
         );
         ability.addEffect(new SetBasePowerToughnessSourceEffect(
                 5, 4, Duration.Custom, SubLayer.SetPT_7b
@@ -73,7 +73,7 @@ public final class SurgeEngine extends CardImpl {
 }
 
 enum SurgeEngineCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

@@ -25,9 +25,6 @@ import java.util.UUID;
  * @author LevelX2
  */
 public final class SoulTithe extends CardImpl {
-
-    static final String rule = "At the beginning of the upkeep of enchanted permanent's controller, that player sacrifices it unless they pay {X}, where X is its mana value";
-
     public SoulTithe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.subtype.add(SubType.AURA);

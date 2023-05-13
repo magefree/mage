@@ -16,7 +16,7 @@ import mage.constants.SubType;
  */
 public final class ShamblingGhoul extends CardImpl {
     
-    private static final String staticText = "tapped";
+    private static final String STATIC_TEXT = "tapped";
 
     public ShamblingGhoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
@@ -25,7 +25,7 @@ public final class ShamblingGhoul extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Shambling Ghoul enters the battlefield tapped.
-        this.addAbility(new EntersBattlefieldAbility(new TapSourceEffect(), staticText));
+        this.addAbility(new EntersBattlefieldAbility(new TapSourceEffect(), STATIC_TEXT));
     }
 
     private ShamblingGhoul(final ShamblingGhoul card) {

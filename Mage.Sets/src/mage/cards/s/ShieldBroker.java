@@ -17,7 +17,6 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CommanderPredicate;
-import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;

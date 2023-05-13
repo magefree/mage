@@ -37,7 +37,7 @@ public final class StorrevDevkarinLich extends CardImpl {
                 CardType.CREATURE.getPredicate(),
                 CardType.PLANESWALKER.getPredicate()
         ));
-        filter.add(StorrevDevkarinLichPredicate.instance);
+        filter.add(StorrevDevkarinLichPredicate.INSTANCE);
     }
 
     public StorrevDevkarinLich(UUID ownerId, CardSetInfo setInfo) {
@@ -72,7 +72,7 @@ public final class StorrevDevkarinLich extends CardImpl {
 }
 
 enum StorrevDevkarinLichPredicate implements Predicate<Card> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Card input, Game game) {

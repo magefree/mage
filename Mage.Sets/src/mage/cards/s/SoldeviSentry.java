@@ -58,10 +58,8 @@ class SoldeviSentryEffect extends RegenerateSourceEffect {
         Player opponent = game.getPlayer(source.getFirstTarget());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null && permanent.regenerate(source, game)) {
-            if (opponent != null) {
-                if (opponent.chooseUse(Outcome.DrawCard, "Draw a card?", source, game)) {
-                    opponent.drawCards(1, source, game);
-                }
+            if (opponent != null && (opponent.chooseUse(Outcome.DrawCard, "Draw a card?", source, game))) {
+                opponent.drawCards(1, source, game);
             }
             this.used = true;
             return true;

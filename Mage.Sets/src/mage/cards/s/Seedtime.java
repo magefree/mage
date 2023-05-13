@@ -22,18 +22,18 @@ import java.util.UUID;
  */
 public final class Seedtime extends CardImpl {
 
-    private static final String rule = "Cast this spell only during your turn.";
-    private static final String rule2 = "Take an extra turn after this one if an opponent cast a blue spell this turn.";
+    private static final String RULE = "Cast this spell only during your turn.";
+    private static final String RULE2 = "Take an extra turn after this one if an opponent cast a blue spell this turn.";
 
     public Seedtime(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
 
         // Cast Seedtime only during your turn.
-        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, null, MyTurnCondition.instance, rule)
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, null, MyTurnCondition.instance, RULE)
                 .addHint(MyTurnHint.instance));
 
         // Take an extra turn after this one if an opponent cast a blue spell this turn.
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new AddExtraTurnControllerEffect(), OpponentCastBlueSpellThisTurnCondition.instance, rule2));
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new AddExtraTurnControllerEffect(), OpponentCastBlueSpellThisTurnCondition.INSTANCE, RULE2));
         this.getSpellAbility().addWatcher(new SpellsCastWatcher());
 
     }
@@ -49,8 +49,7 @@ public final class Seedtime extends CardImpl {
 }
 
 enum OpponentCastBlueSpellThisTurnCondition implements Condition {
-
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

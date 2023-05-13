@@ -25,7 +25,7 @@ public final class SpellBlast extends CardImpl {
 
         // Counter target spell with converted mana cost X.
         this.getSpellAbility().addEffect(new CounterTargetEffect().setText("counter target spell with mana value X"));
-        this.getSpellAbility().setTargetAdjuster(SpellBlastAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(SpellBlastAdjuster.INSTANCE);
     }
 
     private SpellBlast(final SpellBlast card) {
@@ -39,7 +39,7 @@ public final class SpellBlast extends CardImpl {
 }
 
 enum SpellBlastAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

@@ -29,7 +29,7 @@ public final class SedraxisAlchemist extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
     
-    private static final String rule = "When {this} enters the battlefield, if you control a blue permanent, return target nonland permanent to its owner's hand.";
+    private static final String RULE = "When {this} enters the battlefield, if you control a blue permanent, return target nonland permanent to its owner's hand.";
 
     public SedraxisAlchemist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
@@ -42,7 +42,7 @@ public final class SedraxisAlchemist extends CardImpl {
         // When Sedraxis Alchemist enters the battlefield, if you control a blue permanent, return target nonland permanent to its owner's hand.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
         ability.addTarget(new TargetNonlandPermanent());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new PermanentsOnTheBattlefieldCondition(filter), rule));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new PermanentsOnTheBattlefieldCondition(filter), RULE));
         
     }
 

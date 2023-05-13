@@ -35,7 +35,7 @@ public final class SwordCoastSerpent extends AdventureCard {
 
         // Sword Coast Serpent can't be blocked as long as you've cast a noncreature spell this turn.
         this.addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
-                new CantBeBlockedSourceEffect(), SwordCoastSerpentCondition.instance,
+                new CantBeBlockedSourceEffect(), SwordCoastSerpentCondition.INSTANCE,
                 "{this} can't be blocked as long as you've cast a noncreature spell this turn"
         )), new SpellsCastWatcher());
 
@@ -56,7 +56,7 @@ public final class SwordCoastSerpent extends AdventureCard {
 }
 
 enum SwordCoastSerpentCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

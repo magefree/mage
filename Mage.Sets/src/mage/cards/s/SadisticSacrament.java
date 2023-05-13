@@ -16,7 +16,7 @@ import java.util.UUID;
  */
 public final class SadisticSacrament extends CardImpl {
 
-    private static final String ruleText = "Search target player's library for up to three cards, exile them, " +
+    private static final String RULE_TEXT = "Search target player's library for up to three cards, exile them, " +
             "then that player shuffles. If this spell was kicked, instead search that player's library " +
             "for up to fifteen cards, exile them, then that player shuffles";
 
@@ -33,7 +33,7 @@ public final class SadisticSacrament extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new SearchLibraryAndExileTargetEffect(15, true),
                 new SearchLibraryAndExileTargetEffect(3, true),
-                KickedCondition.ONCE, ruleText
+                KickedCondition.ONCE, RULE_TEXT
         ));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

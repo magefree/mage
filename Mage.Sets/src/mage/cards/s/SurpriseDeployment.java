@@ -53,7 +53,7 @@ public final class SurpriseDeployment extends CardImpl {
 
 class SurpriseDeploymentEffect extends OneShotEffect {
 
-    private static final String choiceText = "Put a nonwhite creature card from your hand onto the battlefield?";
+    private static final String CHOICE_TEXT = "Put a nonwhite creature card from your hand onto the battlefield?";
     
     private static final FilterCreatureCard filter = new FilterCreatureCard();
     
@@ -79,20 +79,18 @@ class SurpriseDeploymentEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (controller.chooseUse(Outcome.PutCreatureInPlay, choiceText, source, game)) {
+            if (controller.chooseUse(Outcome.PutCreatureInPlay, CHOICE_TEXT, source, game)) {
                 TargetCardInHand target = new TargetCardInHand(filter);
                 if (controller.choose(Outcome.PutCreatureInPlay, target, source, game)) {
                     Card card = game.getCard(target.getFirstTarget());
-                    if (card != null) {
-                        if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                            Permanent permanent = game.getPermanent(card.getId());
-                            if (permanent != null) {
-                                ReturnToHandTargetEffect effect = new ReturnToHandTargetEffect();
-                                effect.setTargetPointer(new FixedTarget(permanent, game));
-                                DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
-                                game.addDelayedTriggeredAbility(delayedAbility, source);
-                                return true;
-                            }
+                    if (card != null && controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
+                        Permanent permanent = game.getPermanent(card.getId());
+                        if (permanent != null) {
+                            ReturnToHandTargetEffect effect = new ReturnToHandTargetEffect();
+                            effect.setTargetPointer(new FixedTarget(permanent, game));
+                            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
+                            game.addDelayedTriggeredAbility(delayedAbility, source);
+                            return true;
                         }
                     }
                     return false;

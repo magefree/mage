@@ -60,10 +60,7 @@ class SuicidalChargeEffect extends RequirementEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (game.getOpponents(source.getControllerId()).contains(permanent.getControllerId())) {
-            return true;
-        }
-        return false;
+        return game.getOpponents(source.getControllerId()).contains(permanent.getControllerId());
     }
 
     @Override

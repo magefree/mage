@@ -46,7 +46,7 @@ public final class SpinyStarfish extends CardImpl {
                                         new SpinyStarfishDynamicValue()),
                                 TargetController.ANY,
                                 false),
-                        SpinyStarfishCondition.instance,
+                        SpinyStarfishCondition.INSTANCE,
                         "At the beginning of each end step, if {this} regenerated this turn, create a 0/1 blue Starfish creature token for each time it regenerated this turn."),
                 new SpinyStarfishWatcher());
     }
@@ -63,7 +63,7 @@ public final class SpinyStarfish extends CardImpl {
 
 enum SpinyStarfishCondition implements Condition {
 
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

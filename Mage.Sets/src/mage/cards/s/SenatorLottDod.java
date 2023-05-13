@@ -87,7 +87,6 @@ class SenatorLottDodSpellsTargetingCreatureCostModificationEffect extends CostMo
             if (allTargets.stream().anyMatch(target -> !isTargetCompatible(target, source, game))) {
                 return false;
             }
-            ;
         }
 
         return allTargets.stream().anyMatch(target -> isTargetCompatible(target, source, game));
@@ -149,7 +148,6 @@ class SenatorLottDodSpellsTargetingYouCostModificationEffect extends CostModific
             if (allTargets.stream().anyMatch(target -> !isTargetCompatible(target, source, game))) {
                 return false;
             }
-            ;
         }
 
         return allTargets.stream().anyMatch(target -> isTargetCompatible(target, source, game));
@@ -161,7 +159,6 @@ class SenatorLottDodSpellsTargetingYouCostModificationEffect extends CostModific
         if (targetPlayer != null && targetPlayer.getId().equals(source.getControllerId())) {
             return true;
         }
-
         return false;
     }
 

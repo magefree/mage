@@ -14,7 +14,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -66,14 +65,10 @@ class SpiritualFocusTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
-        if (stackObject != null) {
-            if (game.getOpponents(this.getControllerId()).contains(stackObject.getControllerId())) {
-                Permanent permanent = game.getPermanent(getSourceId());
-                if (permanent != null) {
-                    if (Objects.equals(permanent.getControllerId(), event.getPlayerId())) {
-                        return true;
-                    }
-                }
+        if (stackObject != null && game.getOpponents(this.getControllerId()).contains(stackObject.getControllerId())) {
+            Permanent permanent = game.getPermanent(getSourceId());
+            if (permanent != null && Objects.equals(permanent.getControllerId(), event.getPlayerId())) {
+                return true;
             }
         }
         return false;

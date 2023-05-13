@@ -127,8 +127,8 @@ class CouldAttackThisTurnWatcher extends Watcher {
                 if (permanent.isCreature(game)) {
                     for (UUID defender : game.getCombat().getDefenders()) {
                         if (!defender.equals(activePlayer.getId())) {
+                            // exclude Propaganda style effects
                             if (permanent.canAttack(defender, game)) {
-                                // exclude Propaganda style effects
                                 if (!game.getContinuousEffects().checkIfThereArePayCostToAttackBlockEffects(
                                         new DeclareAttackerEvent(defender, permanent.getId(), permanent.getControllerId()), game)) {
                                     this.couldAttackThisTurnCreatures.add(new MageObjectReference(permanent.getId(), game));

@@ -83,10 +83,10 @@ class SelvalasStampedeEffect extends OneShotEffect {
             }
             toReveal.add(card);
         }
-        if (toReveal.size() > 0) {
+        if (!toReveal.isEmpty()) {
             player.revealCards(source, toReveal, game);
         }
-        if (creatureCards.size() > 0) {
+        if (!creatureCards.isEmpty()) {
             player.moveCards(creatureCards, Zone.BATTLEFIELD, source, game);
         }
         player.shuffleLibrary(source, game);

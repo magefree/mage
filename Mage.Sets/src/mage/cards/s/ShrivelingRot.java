@@ -113,12 +113,10 @@ class ShrivelingRotLoseLifeTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.isDiesEvent()) {
-            if (zEvent.getTarget().isCreature(game)) {
-                Effect effect = this.getEffects().get(0);
-                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                return true;
-            }
+        if (zEvent.isDiesEvent() && zEvent.getTarget().isCreature(game)) {
+            Effect effect = this.getEffects().get(0);
+            effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+            return true;
         }
         return false;
     }

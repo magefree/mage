@@ -23,7 +23,7 @@ public final class SymmetryMatrix extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("a creature with power equal to its toughness");
 
     static {
-        filter.add(SymmetryMatrixPredicate.instance);
+        filter.add(SymmetryMatrixPredicate.INSTANCE);
     }
 
     public SymmetryMatrix(UUID ownerId, CardSetInfo setInfo) {
@@ -46,7 +46,7 @@ public final class SymmetryMatrix extends CardImpl {
 }
 
 enum SymmetryMatrixPredicate implements Predicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Permanent input, Game game) {

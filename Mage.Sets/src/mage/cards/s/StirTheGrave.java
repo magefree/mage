@@ -26,7 +26,7 @@ public final class StirTheGrave extends CardImpl {
 
         // Return target creature card with converted mana cost X or less from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect().setText("return target creature card with mana value X or less from your graveyard to the battlefield"));
-        this.getSpellAbility().setTargetAdjuster(StirTheGraveAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(StirTheGraveAdjuster.INSTANCE);
     }
 
     private StirTheGrave(final StirTheGrave card) {
@@ -40,7 +40,7 @@ public final class StirTheGrave extends CardImpl {
 }
 
 enum StirTheGraveAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

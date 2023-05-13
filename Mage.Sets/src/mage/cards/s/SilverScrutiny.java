@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.CastAsThoughItHadFlashIfConditionAbility;
 import mage.abilities.condition.Condition;
@@ -25,7 +24,7 @@ public final class SilverScrutiny extends CardImpl {
 
         // You may cast Silver Scrutiny as though it had flash if X is 3 or less.
         this.addAbility(new CastAsThoughItHadFlashIfConditionAbility(
-                SilverScrutinyCondition.instance,
+                SilverScrutinyCondition.INSTANCE,
                 "You may cast {this} as though it had flash if X is 3 or less."
         ));
 
@@ -44,7 +43,7 @@ public final class SilverScrutiny extends CardImpl {
 }
 
 enum SilverScrutinyCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

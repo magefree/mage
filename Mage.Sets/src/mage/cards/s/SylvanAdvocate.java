@@ -25,8 +25,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class SylvanAdvocate extends CardImpl {
 
-    private static final String rule1 = "As long as you control six or more lands, {this}";
-    private static final String rule2 = "and land creatures you control get +2/+2.";
+    private static final String RULE1 = "As long as you control six or more lands, {this}";
+    private static final String RULE2 = "and land creatures you control get +2/+2.";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("land creatures");
 
     static {
@@ -46,9 +46,9 @@ public final class SylvanAdvocate extends CardImpl {
 
         // As long as you control six or more lands, Sylvan Advocate and land creatures you control get +2/+2.
         ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield),
-                new PermanentsOnTheBattlefieldCondition(new FilterControlledLandPermanent(), ComparisonType.MORE_THAN, 5), rule1);
+                new PermanentsOnTheBattlefieldCondition(new FilterControlledLandPermanent(), ComparisonType.MORE_THAN, 5), RULE1);
         ConditionalContinuousEffect effect2 = new ConditionalContinuousEffect(new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, true),
-                new PermanentsOnTheBattlefieldCondition(new FilterControlledLandPermanent(), ComparisonType.MORE_THAN, 5), rule2);
+                new PermanentsOnTheBattlefieldCondition(new FilterControlledLandPermanent(), ComparisonType.MORE_THAN, 5), RULE2);
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect1);
         ability.addEffect(effect2);
         this.addAbility(ability);

@@ -39,8 +39,8 @@ public final class ScorchedEarth extends CardImpl {
         effect.setText("Destroy X target lands");
         this.getSpellAbility().addTarget(new TargetLandPermanent());
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().setTargetAdjuster(ScorchedEarthTargetAdjuster.instance);
-        this.getSpellAbility().setCostAdjuster(ScorchedEarthCostAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(ScorchedEarthTargetAdjuster.INSTANCE);
+        this.getSpellAbility().setCostAdjuster(ScorchedEarthCostAdjuster.INSTANCE);
     }
 
     private ScorchedEarth(final ScorchedEarth card) {
@@ -54,7 +54,7 @@ public final class ScorchedEarth extends CardImpl {
 }
 
 enum ScorchedEarthTargetAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
@@ -65,7 +65,7 @@ enum ScorchedEarthTargetAdjuster implements TargetAdjuster {
 }
 
 enum ScorchedEarthCostAdjuster implements CostAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustCosts(Ability ability, Game game) {

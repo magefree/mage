@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 public final class SunscourgeChampion extends CardImpl {
 
-    private static final String rule = "Eternalize &mdash; {2}{W}{W}, Discard a card. <i>({2}{W}{W}, Discard a card, Exile this card from your graveyard: Create a token that's a copy of it, except it's a 4/4 black Zombie)</i>";
+    private static final String RULE_TEXT = "Eternalize &mdash; {2}{W}{W}, Discard a card. <i>({2}{W}{W}, Discard a card, Exile this card from your graveyard: Create a token that's a copy of it, except it's a 4/4 black Zombie)</i>";
 
     public SunscourgeChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -37,7 +37,7 @@ public final class SunscourgeChampion extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SunscourgeChampionEffect(), false));
 
         // Eternalize - {2}{W}{W}, Discard a card.        
-        Ability ability = new EternalizeAbility(new ManaCostsImpl<>("{2}{W}{W}"), this, rule);
+        Ability ability = new EternalizeAbility(new ManaCostsImpl<>("{2}{W}{W}"), this, RULE_TEXT);
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
     }

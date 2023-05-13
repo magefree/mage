@@ -29,7 +29,7 @@ import java.util.UUID;
 public final class StormwingEntity extends CardImpl {
 
     private static final ConditionHint hint = new ConditionHint(
-            StormwingEntityCondition.instance, "You cast an instant or sorcery spell this turn"
+            StormwingEntityCondition.INSTANCE, "You cast an instant or sorcery spell this turn"
     );
 
     public StormwingEntity(UUID ownerId, CardSetInfo setInfo) {
@@ -41,7 +41,7 @@ public final class StormwingEntity extends CardImpl {
 
         // This spell costs {2}{U} less to cast if you've cast an instant or sorcery spell this turn.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(
-                new ManaCostsImpl<>("{2}{U}"), StormwingEntityCondition.instance
+                new ManaCostsImpl<>("{2}{U}"), StormwingEntityCondition.INSTANCE
         )).setRuleAtTheTop(true).addHint(hint), new SpellsCastWatcher());
 
         // Flying
@@ -65,7 +65,7 @@ public final class StormwingEntity extends CardImpl {
 }
 
 enum StormwingEntityCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

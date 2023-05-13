@@ -119,10 +119,8 @@ class ShadowgrangeArchfiendEffect extends OneShotEffect {
             powerOfCurrentCreature = permanent.getPower().getValue();
 
             // Try to sack it
-            if (permanent.sacrifice(source, game)) {
-                if (powerOfCurrentCreature > greatestPowerAmongAllCreaturesSacked) {
-                    greatestPowerAmongAllCreaturesSacked = powerOfCurrentCreature;
-                }
+            if (permanent.sacrifice(source, game) && (powerOfCurrentCreature > greatestPowerAmongAllCreaturesSacked)) {
+                greatestPowerAmongAllCreaturesSacked = powerOfCurrentCreature;
             }
         }
 

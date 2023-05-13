@@ -32,7 +32,7 @@ public final class SkanosDragonheart extends CardImpl {
 
     private static final Hint hint = new ValueHint(
             "Greatest power among Dragon cards in your graveyard or other Dragons you control",
-            SkanosDragonheartValue.instance
+            SkanosDragonheartValue.INSTANCE
     );
 
     public SkanosDragonheart(UUID ownerId, CardSetInfo setInfo) {
@@ -46,7 +46,7 @@ public final class SkanosDragonheart extends CardImpl {
 
         // Whenever Skanos Dragonheart attacks, it gets +X/+X until end of turn, where X is the greatest power among Dragon cards in your graveyard or other Dragons you control.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(
-                SkanosDragonheartValue.instance, SkanosDragonheartValue.instance,
+                SkanosDragonheartValue.INSTANCE, SkanosDragonheartValue.INSTANCE,
                 Duration.EndOfTurn, true, "it"
         )).addHint(hint));
 
@@ -65,7 +65,7 @@ public final class SkanosDragonheart extends CardImpl {
 }
 
 enum SkanosDragonheartValue implements DynamicValue {
-    instance;
+    INSTANCE;
     private static final FilterPermanent filter = new FilterControlledPermanent(SubType.DRAGON);
     private static final FilterCard filter2 = new FilterCard();
 

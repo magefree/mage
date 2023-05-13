@@ -27,7 +27,7 @@ public final class SageOfTheBeyond extends CardImpl {
     private static final FilterCard filter = new FilterCard();
 
     static {
-        filter.add(SageOfTheBeyondPredicate.instance);
+        filter.add(SageOfTheBeyondPredicate.INSTANCE);
     }
 
     public SageOfTheBeyond(UUID ownerId, CardSetInfo setInfo) {
@@ -60,7 +60,7 @@ public final class SageOfTheBeyond extends CardImpl {
 }
 
 enum SageOfTheBeyondPredicate implements ObjectSourcePlayerPredicate<Card> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {

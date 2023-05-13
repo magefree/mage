@@ -56,10 +56,8 @@ class SkullcageEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (player != null) {
-            if (player.getHand().size() != 3 && player.getHand().size() != 4) {
-                player.damage(2, source.getSourceId(), source, game);
-            }
+        if (player != null && player.getHand().size() != 3 && player.getHand().size() != 4) {
+            player.damage(2, source.getSourceId(), source, game);
         }
         return false;
     }

@@ -34,8 +34,8 @@ public final class SmugglersShare extends CardImpl {
         // At the beginning of each end step, draw a card for each opponent who drew two or more cards this turn, then
         // create a Treasure token for each opponent who had two or more lands enter the battlefield under their control
         // this turn.
-        Ability ability = new BeginningOfEndStepTriggeredAbility(new DrawCardSourceControllerEffect(SmugglersShareDrawValue.instance), TargetController.EACH_PLAYER, false);
-        ability.addEffect((new CreateTokenEffect(new TreasureToken(), SmugglersShareTreasureValue.instance)).concatBy(", then"));
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new DrawCardSourceControllerEffect(SmugglersShareDrawValue.INSTANCE), TargetController.EACH_PLAYER, false);
+        ability.addEffect((new CreateTokenEffect(new TreasureToken(), SmugglersShareTreasureValue.INSTANCE)).concatBy(", then"));
         ability.addWatcher(new CardsAmountDrawnThisTurnWatcher());
         ability.addWatcher(new PermanentsEnteredBattlefieldWatcher());
         this.addAbility(ability);
@@ -52,7 +52,7 @@ public final class SmugglersShare extends CardImpl {
 }
 
 enum SmugglersShareDrawValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability source, Effect effect) {
@@ -73,7 +73,7 @@ enum SmugglersShareDrawValue implements DynamicValue {
 
     @Override
     public SmugglersShareDrawValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override
@@ -88,7 +88,7 @@ enum SmugglersShareDrawValue implements DynamicValue {
 }
 
 enum SmugglersShareTreasureValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability source, Effect effect) {
@@ -122,7 +122,7 @@ enum SmugglersShareTreasureValue implements DynamicValue {
 
     @Override
     public SmugglersShareTreasureValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

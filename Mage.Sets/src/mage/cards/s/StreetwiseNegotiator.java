@@ -25,7 +25,7 @@ public final class StreetwiseNegotiator extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(StreetwiseNegotiatorPredicate.instance);
+        filter.add(StreetwiseNegotiatorPredicate.INSTANCE);
     }
 
     public StreetwiseNegotiator(UUID ownerId, CardSetInfo setInfo) {
@@ -56,7 +56,7 @@ public final class StreetwiseNegotiator extends CardImpl {
 }
 
 enum StreetwiseNegotiatorPredicate implements ObjectSourcePlayerPredicate<MageObject> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {

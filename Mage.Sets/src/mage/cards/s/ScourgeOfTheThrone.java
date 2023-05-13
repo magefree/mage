@@ -47,7 +47,7 @@ public final class ScourgeOfTheThrone extends CardImpl {
         ability.addEffect(new AdditionalCombatPhaseEffect());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 ability,
-                ScourgeOfTheThroneCondition.instance,
+                ScourgeOfTheThroneCondition.INSTANCE,
                 "Whenever {this} attacks for the first time each turn, "
                 + "if it's attacking the player with the most life or tied for most life, "
                 + "untap all attacking creatures. After this phase, "
@@ -66,8 +66,7 @@ public final class ScourgeOfTheThrone extends CardImpl {
 }
 
 enum ScourgeOfTheThroneCondition implements Condition {
-
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

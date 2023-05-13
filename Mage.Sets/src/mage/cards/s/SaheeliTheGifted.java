@@ -104,11 +104,9 @@ class SaheeliTheGiftedCostReductionEffect extends CostModificationEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
-        if (watcher != null) {
-            if (watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(source.getControllerId()) > spellsCast) {
-                discard(); // only one use 
-                return false;
-            }
+        if (watcher != null && (watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(source.getControllerId()) > spellsCast)) {
+            discard(); // only one use
+            return false;
         }
         if (abilityToModify instanceof SpellAbility) {
             return abilityToModify.isControlledBy(source.getControllerId());

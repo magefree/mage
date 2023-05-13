@@ -59,10 +59,8 @@ class SinsOfTheFatherEffect extends OneShotEffect {
         if(you != null && targetPlayer != null) {
             int exiledCards = 0;
             for(Card card : targetPlayer.getGraveyard().getCards(game)) {
-                if(filter.match(card, game)) {
-                    if(card.moveToExile(null, "", source, game)) {
-                        exiledCards++;
-                    }
+                if(filter.match(card, game) && (card.moveToExile(null, "", source, game))) {
+                    exiledCards++;
                 }
             }
             targetPlayer.loseLife(exiledCards, game, source, false);

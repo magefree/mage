@@ -51,11 +51,9 @@ class StitchInTimeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            if (player.flipCoin(source, game, true)) {
-                game.getState().getTurnMods().add(new TurnMod(player.getId(), false));
-                return true;
-            }
+        if (player != null && player.flipCoin(source, game, true)) {
+            game.getState().getTurnMods().add(new TurnMod(player.getId(), false));
+            return true;
         }
         return false;
     }
