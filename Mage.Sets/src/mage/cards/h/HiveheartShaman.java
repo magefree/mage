@@ -76,7 +76,7 @@ enum HiveheartShamanPredicate implements ObjectSourcePlayerPredicate<Card> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
-        if (!input.getObject().isBasic() || !input.getObject().isLand(game)) {
+        if (!input.getObject().isBasic(game) || !input.getObject().isLand(game)) {
             return false;
         }
         return game.getBattlefield()

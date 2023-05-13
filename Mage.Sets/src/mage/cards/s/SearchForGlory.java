@@ -13,7 +13,6 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
-import mage.watchers.common.ManaPaidSourceWatcher;
 
 import java.util.UUID;
 
@@ -59,8 +58,8 @@ enum SearchForGloryPredicate implements Predicate<Card> {
 
     @Override
     public boolean apply(Card input, Game game) {
-        return (input.isPermanent(game) && input.isSnow())
-                || input.isLegendary()
+        return (input.isPermanent(game) && input.isSnow(game))
+                || input.isLegendary(game)
                 || input.hasSubtype(SubType.SAGA, game);
     }
 }

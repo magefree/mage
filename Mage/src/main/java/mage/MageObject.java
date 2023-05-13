@@ -24,17 +24,23 @@ import java.util.Set;
 public interface MageObject extends MageItem, Serializable, Copyable<MageObject> {
 
     String getExpansionSetCode();
+
     void setExpansionSetCode(String expansionSetCode);
 
     String getCardNumber();
+
     void setCardNumber(String cardNumber);
 
     Integer getImageNumber();
+
     void setImageNumber(Integer imageNumber);
 
     String getName();
+
     String getIdName();
+
     String getLogName();
+
     void setName(String name);
 
     default List<CardType> getCardType() {
@@ -236,11 +242,35 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
     }
 
     default boolean isLegendary() {
+        return isLegendary(null);
+    }
+
+    default boolean isLegendary(Game game) {
         return getSuperType().contains(SuperType.LEGENDARY);
     }
 
     default boolean isSnow() {
+        return isSnow(null);
+    }
+
+    default boolean isSnow(Game game) {
         return getSuperType().contains(SuperType.SNOW);
+    }
+
+    default boolean isBasic() {
+        return isBasic(null);
+    }
+
+    default boolean isBasic(Game game) {
+        return getSuperType().contains(SuperType.BASIC);
+    }
+
+    default boolean isWorld() {
+        return isWorld(null);
+    }
+
+    default boolean isWorld(Game game) {
+        return getSuperType().contains(SuperType.WORLD);
     }
 
     default void addSuperType(SuperType superType) {
@@ -252,14 +282,6 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
 
     default void removeSuperType(SuperType superType) {
         getSuperType().remove(superType);
-    }
-
-    default boolean isBasic() {
-        return getSuperType().contains(SuperType.BASIC);
-    }
-
-    default boolean isWorld() {
-        return getSuperType().contains(SuperType.WORLD);
     }
 
     /**

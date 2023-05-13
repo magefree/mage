@@ -57,7 +57,7 @@ enum MoonsilverKeyPredicate implements Predicate<Card> {
 
     @Override
     public boolean apply(Card input, Game game) {
-        if (input.isLand(game) && input.isBasic()) {
+        if (input.isLand(game) && input.isBasic(game)) {
             return true;
         }
         return input.isArtifact(game)

@@ -64,7 +64,7 @@ class HauntingEchoesEffect extends OneShotEffect {
                 .getCards(game)
                 .stream()
                 .filter(Objects::nonNull)
-                .filter(card -> !card.isBasic() || !card.isLand(game))
+                .filter(card -> !card.isBasic(game) || !card.isLand(game))
                 .forEach(cards::add);
         controller.moveCards(cards, Zone.EXILED, source, game);
         cards.removeIf(uuid -> game.getState().getZone(uuid) != Zone.EXILED);

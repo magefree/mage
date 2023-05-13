@@ -2397,7 +2397,7 @@ public abstract class GameImpl implements Game {
                     }
                 }
             }
-            if (perm.isWorld()) {
+            if (perm.isWorld(this)) {
                 worldEnchantment.add(perm);
             }
             if (perm.hasSubtype(SubType.AURA, this)) {
@@ -2569,7 +2569,7 @@ public abstract class GameImpl implements Game {
                 }
             }
 
-            if (perm.isLegendary() && perm.legendRuleApplies()) {
+            if (perm.isLegendary(this) && perm.legendRuleApplies()) {
                 legendary.add(perm);
             }
             if (StaticFilters.FILTER_PERMANENT_EQUIPMENT.match(perm, this)) {

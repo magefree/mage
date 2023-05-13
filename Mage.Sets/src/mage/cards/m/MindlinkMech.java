@@ -161,7 +161,7 @@ class MindlinkMechWatcher extends Watcher {
                 .stream()
                 .filter(mor -> {
                     Permanent permanent = mor.getPermanent(game);
-                    return permanent != null && !permanent.isLegendary() && permanent.isCreature(game);
+                    return permanent != null && !permanent.isLegendary(game) && permanent.isCreature(game);
                 }).map(MageObjectReferencePredicate::new)
                 .collect(Collectors.toSet());
         if (predicates.isEmpty()) {

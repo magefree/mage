@@ -160,7 +160,7 @@ class TheRinghartCrestManaCondition extends CreatureCastManaCondition {
         if (super.apply(game, source)) {
             MageObject object = game.getObject(source);
             if (object != null) {
-                if (object.isLegendary()) {
+                if (object.isLegendary(game)) {
                     return true;
                 }
                 return creatureType != null && object.hasSubtype(creatureType, game);
