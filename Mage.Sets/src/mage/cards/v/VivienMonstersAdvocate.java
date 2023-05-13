@@ -28,7 +28,6 @@ import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801

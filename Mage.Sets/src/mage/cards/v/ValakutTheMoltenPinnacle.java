@@ -77,12 +77,7 @@ class ValakutTheMoltenPinnacleTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.isLand(game) && permanent.isControlledBy(this.getControllerId())) {
-            if (permanent.hasSubtype(SubType.MOUNTAIN, game)) {
-                return true;
-            }
-        }
-        return false;
+        return permanent != null && permanent.isLand(game) && permanent.isControlledBy(this.getControllerId()) && permanent.hasSubtype(SubType.MOUNTAIN, game);
     }
 
     @Override

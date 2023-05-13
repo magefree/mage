@@ -23,7 +23,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class ZhalfirinCommander extends CardImpl {
 
-    static final private FilterCreaturePermanent filter = new FilterCreaturePermanent("Knight creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Knight creature");
     
     static{
         filter.add(SubType.KNIGHT.getPredicate());

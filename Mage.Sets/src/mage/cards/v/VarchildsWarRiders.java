@@ -66,12 +66,7 @@ class OpponentCreateSurvivorTokenCost extends CostImpl {
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         Player controller = game.getPlayer(controllerId);
-        if (controller != null) {
-            if (!game.getOpponents(controllerId).isEmpty()) {
-                return true;
-            }
-        }
-        return false;
+        return controller != null && !game.getOpponents(controllerId).isEmpty();
     }
 
     @Override

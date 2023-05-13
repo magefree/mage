@@ -64,10 +64,8 @@ class WolfcallersHowlEffect extends OneShotEffect {
             for(UUID playerId :game.getState().getPlayersInRange(controller.getId(), game)) {
                 if (controller.hasOpponent(playerId, game)) {
                     Player opponent = game.getPlayer(playerId);
-                    if (opponent != null) {
-                        if (opponent.getHand().size() >= 4) {
-                            count++;
-                        }
+                    if (opponent != null && opponent.getHand().size() >= 4) {
+                        count++;
                     }
                 }
             }

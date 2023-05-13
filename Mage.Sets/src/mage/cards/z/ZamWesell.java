@@ -5,7 +5,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.FixedCondition;
-import mage.abilities.condition.common.AttachedCondition;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.*;
@@ -71,17 +70,15 @@ class ZamWesselEffect extends OneShotEffect {
         TargetPlayer targetOpponent = new TargetOpponent();
         if (you.chooseTarget(Outcome.Benefit, targetOpponent, source, game)) {
             Player targetPlayer = game.getPlayer(targetOpponent.getFirstTarget());
-            if (targetPlayer != null && you != null) {
-                if (!targetPlayer.getHand().isEmpty()) {
-                    TargetCard target = new TargetCard(0, 1, Zone.HAND, StaticFilters.FILTER_CARD_CREATURE);
-                    if (you.chooseTarget(Outcome.Benefit, targetPlayer.getHand(), target, source, game)) {
-                        Card card = game.getCard(target.getFirstTarget());
-                        if (card != null) {
-                            ContinuousEffect copyEffect = new CopyEffect(Duration.EndOfGame, card.getMainCard(), source.getSourceId());
-                            copyEffect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
-                            game.addEffect(copyEffect, source);
-                            return true;
-                        }
+            if (targetPlayer != null && you != null && !targetPlayer.getHand().isEmpty()) {
+                TargetCard target = new TargetCard(0, 1, Zone.HAND, StaticFilters.FILTER_CARD_CREATURE);
+                if (you.chooseTarget(Outcome.Benefit, targetPlayer.getHand(), target, source, game)) {
+                    Card card = game.getCard(target.getFirstTarget());
+                    if (card != null) {
+                        ContinuousEffect copyEffect = new CopyEffect(Duration.EndOfGame, card.getMainCard(), source.getSourceId());
+                        copyEffect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
+                        game.addEffect(copyEffect, source);
+                        return true;
                     }
                 }
             }

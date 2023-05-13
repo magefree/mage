@@ -1,23 +1,13 @@
 package mage.cards.x;
 
-import java.util.Map;
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.ReplaceTreasureWithAdditionalEffect;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.Game;
-import mage.game.events.CreateTokenEvent;
-import mage.game.events.GameEvent;
-import mage.game.permanent.token.Token;
-import mage.game.permanent.token.TreasureToken;
 
 /**
  *

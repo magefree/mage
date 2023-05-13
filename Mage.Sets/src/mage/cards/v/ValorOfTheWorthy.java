@@ -77,13 +77,10 @@ class LeavesTheBattlefieldAttachedTriggeredAbility extends ZoneChangeTriggeredAb
         Permanent enchantment = game.getPermanentOrLKIBattlefield(this.getSourceId());
         if (enchantment != null
                 && enchantment.getAttachedTo() != null
-                && event.getTargetId().equals(enchantment.getAttachedTo())) {
-            if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-                ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-                if ((zEvent.getFromZone() == Zone.BATTLEFIELD)) {
-                    return true;
-                }
-            }
+                && event.getTargetId().equals(enchantment.getAttachedTo())
+                && event.getType() == GameEvent.EventType.ZONE_CHANGE) {
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+            return zEvent.getFromZone() == Zone.BATTLEFIELD;
         }
         return false;
     }

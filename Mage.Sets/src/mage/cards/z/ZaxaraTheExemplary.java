@@ -28,7 +28,7 @@ import java.util.UUID;
  */
 public final class ZaxaraTheExemplary extends CardImpl {
 
-    final static String needPrefix = "_ZaxaraTheExemplary_NeedToken";
+    static final String needPrefix = "_ZaxaraTheExemplary_NeedToken";
 
     public ZaxaraTheExemplary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}{U}");

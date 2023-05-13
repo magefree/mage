@@ -69,7 +69,8 @@ class ValiantEndeavorEffect extends OneShotEffect {
         List<Integer> results = controller.rollDice(outcome, source, game, 6, 2, 0);
         int firstResult = results.get(0);
         int secondResult = results.get(1);
-        int first, second;
+        int first;
+        int second;
         if (firstResult != secondResult
                 && controller.chooseUse(outcome, "Destroy each creature with power greater than or equal to your choice",
                 "The other number will be the amount of 2/2 white Knight tokens with vigilance.",

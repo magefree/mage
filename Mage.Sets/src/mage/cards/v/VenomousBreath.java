@@ -101,10 +101,8 @@ class VenomousBreathEffect extends OneShotEffect {
             if (watcher != null) {
                 List<Permanent> toDestroy = new ArrayList<>();
                 for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
-                    if (!creature.getId().equals(targetCreature.getSourceId())) {
-                        if (watcher.creatureHasBlockedAttacker(new MageObjectReference(creature, game), targetCreature, game) || watcher.creatureHasBlockedAttacker(targetCreature, new MageObjectReference(creature, game), game)) {
-                            toDestroy.add(creature);
-                        }
+                    if (!creature.getId().equals(targetCreature.getSourceId()) && (watcher.creatureHasBlockedAttacker(new MageObjectReference(creature, game), targetCreature, game) || watcher.creatureHasBlockedAttacker(targetCreature, new MageObjectReference(creature, game), game))) {
+                        toDestroy.add(creature);
                     }
                 }
                 for (Permanent creature : toDestroy) {

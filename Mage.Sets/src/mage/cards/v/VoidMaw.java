@@ -82,15 +82,11 @@ class VoidMawEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null) {
-            if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
-                Permanent permanent = ((ZoneChangeEvent) event).getTarget();
-                if (permanent != null) {
-                    UUID exileZoneId = CardUtil.getCardExileZoneId(game, source);
-                    if (controller.moveCardsToExile(permanent, source, game, false, exileZoneId, sourceObject.getIdName())) {
-                        return true;
-                    }
-                }
+        if (controller != null && sourceObject != null && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
+            Permanent permanent = ((ZoneChangeEvent) event).getTarget();
+            if (permanent != null) {
+                UUID exileZoneId = CardUtil.getCardExileZoneId(game, source);
+                return controller.moveCardsToExile(permanent, source, game, false, exileZoneId, sourceObject.getIdName());
             }
         }
         return false;
@@ -142,10 +138,8 @@ class VoidMawCost extends CostImpl {
                     && !cards.isEmpty()
                     && controller.choose(Outcome.Benefit, cards, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
-                if (card != null) {
-                    if (controller.moveCardToGraveyardWithInfo(card, source, game, Zone.EXILED)) {
-                        paid = true;
-                    }
+                if (card != null && controller.moveCardToGraveyardWithInfo(card, source, game, Zone.EXILED)) {
+                    paid = true;
                 }
             }
         }

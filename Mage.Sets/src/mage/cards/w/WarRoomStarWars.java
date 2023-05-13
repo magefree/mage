@@ -63,12 +63,10 @@ class WarRoomStarWarsCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         AttackedOrBlockedThisCombatWatcher watcher = game.getState().getWatcher(AttackedOrBlockedThisCombatWatcher.class);
-        if (game.getActivePlayerId() == source.getControllerId()) {
-            if (watcher != null) {
-                for (MageObjectReference mor : watcher.getAttackedThisTurnCreatures()) {
-                    if (mor.getPermanent(game).getControllerId() == source.getControllerId()) {
-                        return true;
-                    }
+        if (game.getActivePlayerId() == source.getControllerId() && watcher != null) {
+            for (MageObjectReference mor : watcher.getAttackedThisTurnCreatures()) {
+                if (mor.getPermanent(game).getControllerId() == source.getControllerId()) {
+                    return true;
                 }
             }
         }

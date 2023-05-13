@@ -73,7 +73,8 @@ class WildEndeavorEffect extends OneShotEffect {
         List<Integer> results = controller.rollDice(outcome, source, game, 4, 2, 0);
         int firstResult = results.get(0);
         int secondResult = results.get(1);
-        int first, second;
+        int first;
+        int second;
         if (firstResult != secondResult && controller.chooseUse(outcome,
                 "Choose the amount of 3/3 green Beast creature tokens.",
                 "The other number is the amount of basic lands you search from your library and put on the battlefield tapped.",

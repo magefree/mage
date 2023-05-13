@@ -83,10 +83,8 @@ class WasitoraNekoruQueenEffect extends OneShotEffect {
             TargetPermanent target = new TargetPermanent(1, 1, filter, true);
             if (damagedPlayer.choose(Outcome.Sacrifice, target, source, game)) {
                 Permanent objectToBeSacrificed = game.getPermanent(target.getFirstTarget());
-                if (objectToBeSacrificed != null) {
-                    if (objectToBeSacrificed.sacrifice(source, game)) {
-                        return true;
-                    }
+                if (objectToBeSacrificed != null && objectToBeSacrificed.sacrifice(source, game)) {
+                    return true;
                 }
             }
             new CreateTokenEffect(new WasitoraCatDragonToken()).apply(game, source);

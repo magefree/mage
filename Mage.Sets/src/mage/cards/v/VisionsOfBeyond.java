@@ -52,11 +52,9 @@ class VisionsOfBeyondEffect extends OneShotEffect {
         int count = 1;
         for (UUID playerId: game.getState().getPlayersInRange(sourcePlayer.getId(), game)) {
             Player player = game.getPlayer(playerId);
-            if (player != null) {
-                if (player.getGraveyard().size() >= 20) {
-                    count = 3;
-                    break;
-                }
+            if (player != null && (player.getGraveyard().size() >= 20)) {
+                count = 3;
+                break;
             }
         }
         sourcePlayer.drawCards(count, source, game);

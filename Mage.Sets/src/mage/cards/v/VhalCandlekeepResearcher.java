@@ -8,7 +8,6 @@ import mage.Mana;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.ChooseABackgroundAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.mana.ConditionalColorlessManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;

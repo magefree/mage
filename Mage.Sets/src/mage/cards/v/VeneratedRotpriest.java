@@ -5,7 +5,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.FightTargetSourceEffect;
 import mage.abilities.effects.common.counter.AddPoisonCounterTargetEffect;
 import mage.constants.SubType;
 import mage.abilities.keyword.ToxicAbility;
@@ -13,12 +12,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetOpponent;
 
 /**

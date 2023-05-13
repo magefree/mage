@@ -32,7 +32,7 @@ import java.util.UUID;
  */
 public final class WallOfStolenIdentity extends CardImpl {
 
-    final static private String rule = "You may have {this} enter the battlefield as a copy of any "
+    private static final String rule = "You may have {this} enter the battlefield as a copy of any "
             + "creature on the battlefield, except it's a Wall in addition to its other types and it has defender. "
             + "When you do, tap the copied creature and it doesn't untap during its "
             + "controller's untap step for as long as you control {this}";

@@ -173,10 +173,8 @@ class YasharnImplacableEarthEffect extends ContinuousRuleModifyingEffectImpl {
                 SacrificeTargetCost sacrificeCost = (SacrificeTargetCost) cost;
                 Filter filter = sacrificeCost.getTargets().get(0).getFilter();
                 for (Object predicate : filter.getPredicates()) {
-                    if (predicate instanceof CardType.CardTypePredicate) {
-                        if (!predicate.toString().equals("CardType(Land)")) {
-                            canTargetLand = false;
-                        }
+                    if (predicate instanceof CardType.CardTypePredicate && !predicate.toString().equals("CardType(Land)")) {
+                        canTargetLand = false;
                     }
                 }
                 return !canTargetLand;  // must be nonland target
@@ -185,10 +183,8 @@ class YasharnImplacableEarthEffect extends ContinuousRuleModifyingEffectImpl {
                 SacrificeAllCost sacrificeAllCost = (SacrificeAllCost) cost;
                 Filter filter = sacrificeAllCost.getTargets().get(0).getFilter();
                 for (Object predicate : filter.getPredicates()) {
-                    if (predicate instanceof CardType.CardTypePredicate) {
-                        if (!predicate.toString().equals("CardType(Land)")) {
-                            canTargetLand = false;
-                        }
+                    if (predicate instanceof CardType.CardTypePredicate && !predicate.toString().equals("CardType(Land)")) {
+                        canTargetLand = false;
                     }
                 }
                 return !canTargetLand;  // must be nonland target
@@ -197,10 +193,8 @@ class YasharnImplacableEarthEffect extends ContinuousRuleModifyingEffectImpl {
                 SacrificeAttachedCost sacrificeAllCost = (SacrificeAttachedCost) cost;
                 Filter filter = sacrificeAllCost.getTargets().get(0).getFilter();
                 for (Object predicate : filter.getPredicates()) {
-                    if (predicate instanceof CardType.CardTypePredicate) {
-                        if (!predicate.toString().equals("CardType(Land)")) {
-                            canTargetLand = false;
-                        }
+                    if (predicate instanceof CardType.CardTypePredicate && !predicate.toString().equals("CardType(Land)")) {
+                        canTargetLand = false;
                     }
                 }
                 return !canTargetLand;  // must be nonland target
@@ -209,10 +203,8 @@ class YasharnImplacableEarthEffect extends ContinuousRuleModifyingEffectImpl {
                 SacrificeAttachmentCost sacrificeAllCost = (SacrificeAttachmentCost) cost;
                 Filter filter = sacrificeAllCost.getTargets().get(0).getFilter();
                 for (Object predicate : filter.getPredicates()) {
-                    if (predicate instanceof CardType.CardTypePredicate) {
-                        if (!predicate.toString().equals("CardType(Land)")) {
-                            canTargetLand = false;
-                        }
+                    if (predicate instanceof CardType.CardTypePredicate && !predicate.toString().equals("CardType(Land)")) {
+                        canTargetLand = false;
                     }
                 }
                 return !canTargetLand;  // must be nonland target
@@ -222,10 +214,8 @@ class YasharnImplacableEarthEffect extends ContinuousRuleModifyingEffectImpl {
                 SacrificeXTargetCost sacrificeCost = (SacrificeXTargetCost) cost;
                 Filter filter = sacrificeCost.getFilter();
                 for (Object predicate : filter.getPredicates()) {
-                    if (predicate instanceof CardType.CardTypePredicate) {
-                        if (!predicate.toString().equals("CardType(Land)")) {
-                            canTargetLand = false;
-                        }
+                    if (predicate instanceof CardType.CardTypePredicate && !predicate.toString().equals("CardType(Land)")) {
+                        canTargetLand = false;
                     }
                 }
                 return !canTargetLand;  // must be nonland target

@@ -70,12 +70,10 @@ class VolatileRigEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            if (!player.flipCoin(source, game, true)) {
-                Permanent permanent = game.getPermanent(source.getSourceId());
-                if (permanent != null) {
-                    return permanent.sacrifice(source, game);
-                }
+        if (player != null && !player.flipCoin(source, game, true)) {
+            Permanent permanent = game.getPermanent(source.getSourceId());
+            if (permanent != null) {
+                return permanent.sacrifice(source, game);
             }
         }
         return false;
@@ -101,22 +99,18 @@ class VolatileRigEffect2 extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            if (!player.flipCoin(source, game, true)) {
-
-                List<Permanent> permanents = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game);
-                for (Permanent permanent : permanents) {
-                    permanent.damage(4, source.getSourceId(), source, game, false, true);
-                }
-                for (UUID playerId : game.getState().getPlayersInRange(player.getId(), game)) {
-                    Player damageToPlayer = game.getPlayer(playerId);
-                    if (damageToPlayer != null) {
-                        damageToPlayer.damage(4, source.getSourceId(), source, game);
-                    }
-                }
-                return true;
-
+        if (player != null && !player.flipCoin(source, game, true)) {
+            List<Permanent> permanents = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game);
+            for (Permanent permanent : permanents) {
+                permanent.damage(4, source.getSourceId(), source, game, false, true);
             }
+            for (UUID playerId : game.getState().getPlayersInRange(player.getId(), game)) {
+                Player damageToPlayer = game.getPlayer(playerId);
+                if (damageToPlayer != null) {
+                    damageToPlayer.damage(4, source.getSourceId(), source, game);
+                }
+            }
+            return true;
         }
         return false;
     }

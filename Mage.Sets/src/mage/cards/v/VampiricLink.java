@@ -1,7 +1,6 @@
 package mage.cards.v;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageAttachedTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.AttachEffect;

@@ -2,7 +2,6 @@ package mage.cards.w;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.ExileFromGraveCost;
@@ -59,10 +58,8 @@ class WebOfInertiaEffect extends OneShotEffect {
             Cost cost = new ExileFromGraveCost(new TargetCardInYourGraveyard());
             if (cost.canPay(source, source, player.getId(), game) && player.chooseUse(Outcome.Detriment, "Exile a card from your graveyard?", source, game)) {
                 cost.clearPaid();
-                if (cost.pay(source, game, source, player.getId(), false, null)) {
-                    if (!game.isSimulation()) {
-                        game.informPlayers(player.getLogName() + " pays the cost to prevent the effect");
-                    }
+                if (cost.pay(source, game, source, player.getId(), false, null) && !game.isSimulation()) {
+                    game.informPlayers(player.getLogName() + " pays the cost to prevent the effect");
                 }
             } else {
                 game.addEffect(new WebOfInertiaRestrictionEffect(player.getId()), source);

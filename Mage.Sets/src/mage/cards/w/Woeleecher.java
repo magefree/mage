@@ -53,10 +53,6 @@ public final class Woeleecher extends CardImpl {
 }
 
 class WoeleecherEffect extends OneShotEffect {
-
-    private int numberCountersOriginal = 0;
-    private int numberCountersAfter = 0;
-
     public WoeleecherEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Remove a -1/-1 counter from target creature. If you do, you gain 2 life";
@@ -76,9 +72,9 @@ class WoeleecherEffect extends OneShotEffect {
         Permanent target = game.getPermanent(source.getFirstTarget());
         Player you = game.getPlayer(source.getControllerId());
         if (target != null && you != null) {
-            numberCountersOriginal = target.getCounters(game).getCount(CounterType.M1M1);
+            int numberCountersOriginal = target.getCounters(game).getCount(CounterType.M1M1);
             target.removeCounters(CounterType.M1M1.createInstance(), source, game);
-            numberCountersAfter = target.getCounters(game).getCount(CounterType.M1M1);
+            int numberCountersAfter = target.getCounters(game).getCount(CounterType.M1M1);
             if (numberCountersAfter < numberCountersOriginal && you != null) {
                 you.gainLife(2, game, source);
                 return true;

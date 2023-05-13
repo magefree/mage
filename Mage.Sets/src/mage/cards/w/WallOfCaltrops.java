@@ -78,10 +78,8 @@ class WallOfCaltropsAbility extends BlocksCreatureTriggeredAbility {
                 if (group != null) {
                     for (UUID blockerId : group.getBlockers()) {
                         Permanent blocker = game.getPermanent(blockerId);
-                        if (blocker != null) {
-                            if (!filter.match(blocker, game)) {
-                                return false;
-                            }
+                        if (blocker != null && !filter.match(blocker, game)) {
+                            return false;
                         }
                     }
                     return group.getBlockers().size() > 1 && group.getBlockers().contains(sourceId);

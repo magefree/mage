@@ -76,12 +76,10 @@ class VigorousChargeTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         DamagedEvent damageEvent = (DamagedEvent) event;
-        if (damageEvent.isCombatDamage()) {
-            if (event.getSourceId().equals(this.sourceId)) {
-                this.getEffects().clear();
-                this.getEffects().add(new GainLifeEffect(damageEvent.getAmount()));
-                return true;
-            }
+        if (damageEvent.isCombatDamage() && (event.getSourceId().equals(this.sourceId))) {
+            this.getEffects().clear();
+            this.getEffects().add(new GainLifeEffect(damageEvent.getAmount()));
+            return true;
         }
         return false;
     }

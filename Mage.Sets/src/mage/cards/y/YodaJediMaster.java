@@ -78,15 +78,13 @@ class YodaJediMasterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (permanent != null && sourcePermanent != null) {
-            if (permanent.moveToExile(source.getSourceId(), sourcePermanent.getName(), source, game)) {
-                //create delayed triggered ability
-                Effect effect = new ReturnToBattlefieldUnderYourControlTargetEffect();
-                effect.setText("Return that card to the battlefield under your control at the beginning of your next end step");
-                effect.setTargetPointer(new FixedTarget(permanent.getId(), game));
-                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
-                return true;
-            }
+        if (permanent != null && sourcePermanent != null && permanent.moveToExile(source.getSourceId(), sourcePermanent.getName(), source, game)) {
+            //create delayed triggered ability
+            Effect effect = new ReturnToBattlefieldUnderYourControlTargetEffect();
+            effect.setText("Return that card to the battlefield under your control at the beginning of your next end step");
+            effect.setTargetPointer(new FixedTarget(permanent.getId(), game));
+            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
+            return true;
         }
         return false;
     }

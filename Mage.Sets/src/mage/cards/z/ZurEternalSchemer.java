@@ -98,10 +98,8 @@ class ZurEternalSchemerEffect extends ContinuousEffectImpl {
         }
         switch (layer) {
             case TypeChangingEffects_4:
-                if (sublayer == SubLayer.NA) {
-                    if (!enchantment.isCreature(game)) {
-                        enchantment.addCardType(game, CardType.CREATURE);
-                    }
+                if (sublayer == SubLayer.NA && !enchantment.isCreature(game)) {
+                    enchantment.addCardType(game, CardType.CREATURE);
                 }
                 break;
 

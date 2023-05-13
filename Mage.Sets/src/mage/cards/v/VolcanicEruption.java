@@ -77,12 +77,8 @@ class VolcanicEruptionEffect extends OneShotEffect {
         int destroyedCount = 0;
         for (UUID targetID : this.targetPointer.getTargets(game, source)) {
             Permanent permanent = game.getPermanent(targetID);
-            if (permanent != null) {
-                if (permanent.destroy(source, game, false)) {
-                    if (game.getState().getZone(permanent.getId()) == Zone.GRAVEYARD) {
-                        destroyedCount++;
-                    }
-                }
+            if (permanent != null && permanent.destroy(source, game, false) && game.getState().getZone(permanent.getId()) == Zone.GRAVEYARD) {
+                destroyedCount++;
             }
         }
 

@@ -92,32 +92,24 @@ class WookieeMysticWatcher extends Watcher {
             if (event.getSourceId() != null
                     && event.getSourceId().equals(this.getSourceId())
                     && target != null && target.isCreature(game)
-                    && event.getFlag()) {
-                if (target instanceof Spell) {
-                    this.creatures.add(((Spell) target).getCard().getId());
-                }
+                    && event.getFlag() && target instanceof Spell) {
+                this.creatures.add(((Spell) target).getCard().getId());
             }
         }
-        if (event.getType() == GameEvent.EventType.COUNTERED) {
-            if (creatures.contains(event.getTargetId())) {
+        if (event.getType() == GameEvent.EventType.COUNTERED && creatures.contains(event.getTargetId())) {
+            creatures.remove(event.getSourceId());
+        }
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && creatures.contains(event.getSourceId())) {
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+            // spell was e.g. exiled and goes again to stack, so previous cast has not resolved.
+            if (zEvent.getToZone() == Zone.STACK) {
                 creatures.remove(event.getSourceId());
             }
         }
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            if (creatures.contains(event.getSourceId())) {
-                ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-                // spell was e.g. exiled and goes again to stack, so previous cast has not resolved.
-                if (zEvent.getToZone() == Zone.STACK) {
-                    creatures.remove(event.getSourceId());
-                }
-            }
-        }
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            if (creatures.contains(event.getSourceId())) {
-                Permanent creature = game.getPermanent(event.getSourceId());
-                creature.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
-                creatures.remove(event.getSourceId());
-            }
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && creatures.contains(event.getSourceId())) {
+            Permanent creature = game.getPermanent(event.getSourceId());
+            creature.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
+            creatures.remove(event.getSourceId());
         }
     }
 

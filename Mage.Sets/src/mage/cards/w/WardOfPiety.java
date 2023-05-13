@@ -89,11 +89,9 @@ class WardOfPietyPreventDamageTargetEffect extends RedirectionEffect {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null && event.getTargetId().equals(enchantment.getAttachedTo())) {
-            if (redirectToObject.equals(new MageObjectReference(source.getTargets().get(0).getFirstTarget(), game))) {
-                redirectTarget = source.getTargets().get(0);
-                return true;
-            }
+        if (enchantment != null && event.getTargetId().equals(enchantment.getAttachedTo()) && redirectToObject.equals(new MageObjectReference(source.getTargets().get(0).getFirstTarget(), game))) {
+            redirectTarget = source.getTargets().get(0);
+            return true;
         }
         return false;
     }

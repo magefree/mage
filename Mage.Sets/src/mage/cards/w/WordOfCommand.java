@@ -166,10 +166,8 @@ class WordOfCommandEffect extends OneShotEffect {
             if (targetPlayer.canPlayLand()
                     && game.getActivePlayerId().equals(targetPlayer.getId())) {
                 for (Ability ability : card.getAbilities(game)) {
-                    if (ability instanceof PlayLandAbility) {
-                        if (!game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(), ability, targetPlayer.getId()), ability, game, true)) {
-                            canPlay = true;
-                        }
+                    if (ability instanceof PlayLandAbility && !game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(), ability, targetPlayer.getId()), ability, game, true)) {
+                        canPlay = true;
                     }
                 }
             }

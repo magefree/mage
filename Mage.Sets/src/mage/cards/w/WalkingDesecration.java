@@ -63,17 +63,15 @@ class WalkingDesecrationEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source);
-        if (player != null) {
-            if (sourceObject != null) {
-                Choice typeChoice = new ChoiceCreatureType(sourceObject);
-                if (player.choose(outcome, typeChoice, game)) {
-                    game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoice());
-                    FilterCreaturePermanent filter = new FilterCreaturePermanent();
-                    filter.add(SubType.byDescription(typeChoice.getChoice()).getPredicate());
-                    RequirementEffect effect = new AttacksIfAbleAllEffect(filter, Duration.EndOfTurn);
-                    game.addEffect(effect, source);
-                    return true;
-                }
+        if (player != null && sourceObject != null) {
+            Choice typeChoice = new ChoiceCreatureType(sourceObject);
+            if (player.choose(outcome, typeChoice, game)) {
+                game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoice());
+                FilterCreaturePermanent filter = new FilterCreaturePermanent();
+                filter.add(SubType.byDescription(typeChoice.getChoice()).getPredicate());
+                RequirementEffect effect = new AttacksIfAbleAllEffect(filter, Duration.EndOfTurn);
+                game.addEffect(effect, source);
+                return true;
             }
         }
         return false;

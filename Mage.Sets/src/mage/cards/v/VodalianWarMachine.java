@@ -124,31 +124,29 @@ class VodalianWarMachineWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY) {
-            if (event.getSourceId() != null) {
-                Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-                if (sourcePermanent != null) {
-                    StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-                    if (stackAbility != null) {
-                        Ability ability = stackAbility.getStackAbility();
-                        if (ability != null) {
-                            for (Cost cost : ability.getCosts()) {
-                                if (cost instanceof TapTargetCost && cost.isPaid()) {
-                                    TapTargetCost tapCost = (TapTargetCost) cost;
-                                    if (tapCost.getTarget().isChosen()) {
-                                        MageObjectReference mor = new MageObjectReference(sourcePermanent.getId(), sourcePermanent.getZoneChangeCounter(game), game);
-                                        Set<MageObjectReference> toAdd;
-                                        if (tappedMerfolkIds.get(mor) == null) {
-                                            toAdd = new HashSet<>();
-                                        } else {
-                                            toAdd = tappedMerfolkIds.get(mor);
-                                        }
-                                        for (UUID targetId : tapCost.getTarget().getTargets()) {
-                                            toAdd.add(new MageObjectReference(targetId, game));
-                                        }
-                                        tappedMerfolkIds.put(mor, toAdd);
-                                        break;
+        if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY && event.getSourceId() != null) {
+            Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+            if (sourcePermanent != null) {
+                StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
+                if (stackAbility != null) {
+                    Ability ability = stackAbility.getStackAbility();
+                    if (ability != null) {
+                        for (Cost cost : ability.getCosts()) {
+                            if (cost instanceof TapTargetCost && cost.isPaid()) {
+                                TapTargetCost tapCost = (TapTargetCost) cost;
+                                if (tapCost.getTarget().isChosen()) {
+                                    MageObjectReference mor = new MageObjectReference(sourcePermanent.getId(), sourcePermanent.getZoneChangeCounter(game), game);
+                                    Set<MageObjectReference> toAdd;
+                                    if (tappedMerfolkIds.get(mor) == null) {
+                                        toAdd = new HashSet<>();
+                                    } else {
+                                        toAdd = tappedMerfolkIds.get(mor);
                                     }
+                                    for (UUID targetId : tapCost.getTarget().getTargets()) {
+                                        toAdd.add(new MageObjectReference(targetId, game));
+                                    }
+                                    tappedMerfolkIds.put(mor, toAdd);
+                                    break;
                                 }
                             }
                         }

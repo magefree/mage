@@ -57,7 +57,7 @@ class WildMagicSurgeEffect extends OneShotEffect {
         return new WildMagicSurgeEffect(this);
     }
 
-    private static final Card loopCards(List<CardType> cardTypes, Player player, Cards cards, Ability source, Game game) {
+    private static final Card loopCards(List<CardType> cardTypes, Player player, Cards cards, Game game) {
         for (Card card : player.getLibrary().getCards(game)) {
             cards.add(card);
             if (card.isPermanent(game)
@@ -83,7 +83,7 @@ class WildMagicSurgeEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl();
-        Card card = loopCards(permanent.getCardType(game), player, cards, source, game);
+        Card card = loopCards(permanent.getCardType(game), player, cards, game);
         player.revealCards(source, cards, game);
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
         cards.retainZone(Zone.LIBRARY, game);

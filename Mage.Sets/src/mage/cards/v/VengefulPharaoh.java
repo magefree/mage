@@ -100,21 +100,18 @@ class VengefulPharaohTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if ((event.getType() == GameEvent.EventType.DAMAGED_PLAYER && event.getTargetId().equals(this.getControllerId()))
-                && ((DamagedEvent) event).isCombatDamage()) {
-            if (!game.getPhase().getStep().equals(stepTriggeredPlayer) || game.getTurnNum() != turnTriggeredPlayer) {
+                && ((DamagedEvent) event).isCombatDamage() && (!game.getPhase().getStep().equals(stepTriggeredPlayer) || game.getTurnNum() != turnTriggeredPlayer)) {
                 stepTriggeredPlayer = game.getPhase().getStep();
                 turnTriggeredPlayer = game.getTurnNum();
                 return true;
-            }
+
         }
         if (event.getType() == GameEvent.EventType.DAMAGED_PERMANENT && ((DamagedEvent) event).isCombatDamage()) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.isPlaneswalker(game) && permanent.isControlledBy(this.getControllerId())) {
-                if (!game.getPhase().getStep().equals(stepTriggeredPlansewalker) || game.getTurnNum() != turnTriggeredPlaneswalker) {
-                    stepTriggeredPlansewalker = game.getPhase().getStep();
-                    turnTriggeredPlaneswalker = game.getTurnNum();
-                    return true;
-                }
+            if (permanent != null && permanent.isPlaneswalker(game) && permanent.isControlledBy(this.getControllerId()) && (!game.getPhase().getStep().equals(stepTriggeredPlansewalker) || game.getTurnNum() != turnTriggeredPlaneswalker)) {
+                stepTriggeredPlansewalker = game.getPhase().getStep();
+                turnTriggeredPlaneswalker = game.getTurnNum();
+                return true;
             }
         }
         return false;

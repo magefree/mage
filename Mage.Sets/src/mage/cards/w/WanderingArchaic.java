@@ -181,7 +181,6 @@ class ExploreTheVastlandsTarget extends TargetCardInLibrary {
         if (this.getTargets().isEmpty()) {
             return true;
         }
-        boolean isLand = card.isLand(game);
         return this.getTargets()
                 .stream()
                 .map(game::getCard)

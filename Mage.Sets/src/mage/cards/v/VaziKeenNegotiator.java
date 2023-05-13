@@ -23,13 +23,11 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.TreasureToken;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
 import mage.watchers.common.CreatedTokenWatcher;
 
-import java.util.Optional;
 import java.util.UUID;
 
 /**

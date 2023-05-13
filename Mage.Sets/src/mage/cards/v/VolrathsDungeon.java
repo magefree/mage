@@ -18,7 +18,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInHand;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 

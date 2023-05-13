@@ -75,7 +75,6 @@ class WallOfVipersFilter extends FilterCreaturePermanent {
     @Override
     public boolean match(Permanent permanent, UUID playerId, Ability source, Game game) {
         if (super.match(permanent, playerId, source, game)) {
-            SubType subtype = (SubType) game.getState().getValue(source.getSourceId() + "_type");
             for (CombatGroup combatGroup : game.getCombat().getGroups()) {
                 if (combatGroup.getBlockers().contains(source.getSourceId()) && combatGroup.getAttackers().contains(permanent.getId())) {
                     return true;

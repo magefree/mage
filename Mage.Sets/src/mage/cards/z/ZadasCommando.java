@@ -36,9 +36,6 @@ public final class ZadasCommando extends CardImpl {
     public ZadasCommando(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.subtype.add(SubType.GOBLIN, SubType.ARCHER, SubType.ALLY);
-        //this.subtype.add(SubType.GOBLIN);
-        //this.subtype.add(SubType.ARCHER);
-        //this.subtype.add(SubType.ALLY);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

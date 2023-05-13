@@ -62,15 +62,13 @@ class VoyagerStaffEffect extends OneShotEffect {
         Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller != null && creature != null && sourcePermanent != null) {
-            if (controller.moveCardToExileWithInfo(creature, source.getSourceId(), sourcePermanent.getIdName(), source, game, Zone.BATTLEFIELD, true)) {
-                //create delayed triggered ability
-                Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, true);
-                effect.setText("Return the exiled card to the battlefield under its owner's control at the beginning of the next end step");
-                effect.setTargetPointer(new FixedTarget(creature.getId(), game.getState().getZoneChangeCounter(creature.getId())));
-                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
-                return true;
-            }
+        if (controller != null && creature != null && sourcePermanent != null && controller.moveCardToExileWithInfo(creature, source.getSourceId(), sourcePermanent.getIdName(), source, game, Zone.BATTLEFIELD, true)) {
+            //create delayed triggered ability
+            Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, true);
+            effect.setText("Return the exiled card to the battlefield under its owner's control at the beginning of the next end step");
+            effect.setTargetPointer(new FixedTarget(creature.getId(), game.getState().getZoneChangeCounter(creature.getId())));
+            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
+            return true;
         }
         return false;
     }

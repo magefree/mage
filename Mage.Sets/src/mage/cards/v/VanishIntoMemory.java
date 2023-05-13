@@ -24,7 +24,6 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
@@ -70,19 +69,17 @@ class VanishIntoMemoryEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source);
-        if (controller != null && permanent != null && sourceObject != null) {
-            if (controller.moveCardsToExile(permanent, source, game, true, source.getSourceId(), sourceObject.getIdName())) {
-                controller.drawCards(permanent.getPower().getValue(), source, game);
-                ExileZone exile = game.getExile().getExileZone(source.getSourceId());
-                // only if permanent is in exile (tokens would be stop to exist)
-                if (exile != null && !exile.isEmpty()) {
-                    //create delayed triggered ability
-                    Effect effect = new VanishIntoMemoryReturnFromExileEffect();
-                    effect.setTargetPointer(new FixedTargets(exile, game));
-                    game.addDelayedTriggeredAbility(new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(effect), source);
-                }
-                return true;
+        if (controller != null && permanent != null && sourceObject != null && controller.moveCardsToExile(permanent, source, game, true, source.getSourceId(), sourceObject.getIdName())) {
+            controller.drawCards(permanent.getPower().getValue(), source, game);
+            ExileZone exile = game.getExile().getExileZone(source.getSourceId());
+            // only if permanent is in exile (tokens would be stop to exist)
+            if (exile != null && !exile.isEmpty()) {
+                //create delayed triggered ability
+                Effect effect = new VanishIntoMemoryReturnFromExileEffect();
+                effect.setTargetPointer(new FixedTargets(exile, game));
+                game.addDelayedTriggeredAbility(new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(effect), source);
             }
+            return true;
         }
         return false;
     }

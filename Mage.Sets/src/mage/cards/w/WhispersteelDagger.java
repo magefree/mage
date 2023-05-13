@@ -161,7 +161,6 @@ class WhispersteelDaggerWatcher extends Watcher {
             morMap.computeIfAbsent(event.getAdditionalReference().getApprovingMageObjectReference(), m -> new HashMap<>())
                     .computeIfAbsent(game.getOwnerId(event.getSourceId()), m -> new HashMap<>())
                     .compute(event.getPlayerId(), (u, i) -> i == null ? 0 : Integer.sum(i, -1));
-            return;
         }
     }
 

@@ -102,10 +102,8 @@ class VeteranExplorerEffect extends OneShotEffect {
         if (player.chooseUse(Outcome.PutCardInPlay, "Search your library for up to two basic land cards and put them onto the battlefield?", source, game)) {
             usingPlayers.add(player);
             TargetCardInLibrary target = new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_BASIC_LAND);
-            if (player.searchLibrary(target, source, game)) {
-                if (!target.getTargets().isEmpty()) {
-                    toBattlefield.addAll(new CardsImpl(target.getTargets()).getCards(game));
-                }
+            if (player.searchLibrary(target, source, game) && (!target.getTargets().isEmpty())) {
+                toBattlefield.addAll(new CardsImpl(target.getTargets()).getCards(game));
             }
         }
         return toBattlefield;

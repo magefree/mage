@@ -133,13 +133,11 @@ class VolrathsCurseCantActivateAbilitiesEffect extends ContinuousRuleModifyingEf
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
-            if (event.getSourceId().equals(enchantment.getAttachedTo())) {
-                Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
-                if (enchanted != null) {
-                    String key = source.getSourceId().toString() + enchantment.getZoneChangeCounter(game) + keyString + game.getTurnNum() + enchanted.getControllerId();
-                    return game.getState().getValue(key) == null;
-                }
+        if (enchantment != null && enchantment.getAttachedTo() != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
+            Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
+            if (enchanted != null) {
+                String key = source.getSourceId().toString() + enchantment.getZoneChangeCounter(game) + keyString + game.getTurnNum() + enchanted.getControllerId();
+                return game.getState().getValue(key) == null;
             }
         }
         return false;
@@ -167,7 +165,7 @@ class VolrathsCurseSpecialAction extends SpecialAction {
 
 class VolrathsCurseIgnoreEffect extends OneShotEffect {
 
-    public VolrathsCurseIgnoreEffect(final String keyString) {
+    public VolrathsCurseIgnoreEffect() {
         super(Outcome.Benefit);
         this.staticText = "That creature's controller may sacrifice a permanent for that player to ignore this effect until end of turn";
     }

@@ -62,7 +62,6 @@ class ZursWeirdingReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        boolean paid = false;
         Player player = game.getPlayer(event.getTargetId());
         MageObject sourceObject = source.getSourceObject(game);
         if (player == null || sourceObject == null) {

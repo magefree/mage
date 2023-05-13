@@ -66,11 +66,9 @@ public final class VulshokBattlemaster extends CardImpl {
                 FilterPermanent filter = new FilterPermanent();
                 filter.add(SubType.EQUIPMENT.getPredicate());
                 for (Permanent equipment : game.getBattlefield().getAllActivePermanents(filter, game)) {
-                    if (equipment != null) {
-                        //If an Equipment can't equip Vulshok Battlemaster, it isn't attached to the Battlemaster, and it doesn't become unattached (if it's attached to a creature). (https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=48125)
-                        if (!battlemaster.cantBeAttachedBy(equipment, source, game, false)) {
-                            battlemaster.addAttachment(equipment.getId(), source, game);
-                        }
+                    //If an Equipment can't equip Vulshok Battlemaster, it isn't attached to the Battlemaster, and it doesn't become unattached (if it's attached to a creature). (https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=48125)
+                    if (equipment != null && !battlemaster.cantBeAttachedBy(equipment, source, game, false)) {
+                        battlemaster.addAttachment(equipment.getId(), source, game);
                     }
                 }
                 return true;

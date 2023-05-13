@@ -70,7 +70,6 @@ class WeatheredBodyguardsEffect extends ReplacementEffectImpl {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null && !permanent.isTapped() && damageEvent.isCombatDamage() && attacker != null && attacker.isAttacking() && !attacker.isBlocked(game)) {
             permanent.damage(damageEvent.getAmount(), event.getSourceId(), source, game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
-            return true;
         }
         return true;
     }
