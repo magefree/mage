@@ -147,6 +147,13 @@ public abstract class MageObjectImpl implements MageObject {
 
     @Override
     public List<SuperType> getSuperType(Game game) {
+        if (game != null) {
+            // dynamic
+            MageObjectAttribute mageObjectAttribute = game.getState().getMageObjectAttribute(getId());
+            if (mageObjectAttribute != null) {
+                return mageObjectAttribute.getSuperType();
+            }
+        }
         return supertype;
     }
 

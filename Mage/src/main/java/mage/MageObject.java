@@ -281,10 +281,17 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
     }
 
     default void addSuperType(Game game, SuperType superType) {
-        if (getSuperType(game).contains(superType)) {
-            return;
+        List<SuperType> currentSuperTypes;
+        if (game != null) {
+            // dynamic
+            currentSuperTypes = game.getState().getCreateMageObjectAttribute(this, game).getSuperType();
+        } else {
+            // static
+            currentSuperTypes = getSuperType();
         }
-        getSuperType(game).add(superType);
+        if (!currentSuperTypes.contains(superType)) {
+            currentSuperTypes.add(superType);
+        }
     }
 
     default void removeAllSuperTypes() {
@@ -292,7 +299,15 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
     }
 
     default void removeAllSuperTypes(Game game) {
-        getSuperType(game).clear();
+        List<SuperType> currentSuperTypes;
+        if (game != null) {
+            // dynamic
+            currentSuperTypes = game.getState().getCreateMageObjectAttribute(this, game).getSuperType();
+        } else {
+            // static
+            currentSuperTypes = getSuperType();
+        }
+        currentSuperTypes.clear();
     }
 
     default void removeSuperType(SuperType superType) {
@@ -300,7 +315,15 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
     }
 
     default void removeSuperType(Game game, SuperType superType) {
-        getSuperType(game).remove(superType);
+        List<SuperType> currentSuperTypes;
+        if (game != null) {
+            // dynamic
+            currentSuperTypes = game.getState().getCreateMageObjectAttribute(this, game).getSuperType();
+        } else {
+            // static
+            currentSuperTypes = getSuperType();
+        }
+        currentSuperTypes.remove(superType);
     }
 
     /**
