@@ -44,6 +44,7 @@ public class Dungeon extends CommandObjectImpl {
         dungeonNames.add("Dungeon of the Mad Mage");
     }
 
+    private static final List<CardType> cardTypes = Collections.unmodifiableList(Arrays.asList(CardType.DUNGEON));
     private static final ObjectColor emptyColor = new ObjectColor();
     private static final ManaCosts<ManaCost> emptyCost = new ManaCostsImpl<>();
 
@@ -202,7 +203,7 @@ public class Dungeon extends CommandObjectImpl {
 
     @Override
     public List<CardType> getCardType(Game game) {
-        return Collections.emptyList();
+        return cardTypes;
     }
 
     @Override
