@@ -19,11 +19,6 @@ public class SearchLibraryPutOnLibraryEffect extends SearchEffect {
 
     private boolean reveal;
 
-    public SearchLibraryPutOnLibraryEffect(TargetCardInLibrary target) {
-        this(target, false);
-        setText();
-    }
-
     public SearchLibraryPutOnLibraryEffect(TargetCardInLibrary target, boolean reveal) {
         super(target, Outcome.DrawCard);
         this.reveal = reveal;
