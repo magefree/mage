@@ -31,7 +31,7 @@ public final class MwonvuliAcidMoss extends CardImpl {
         // Destroy target land. Search your library for a Forest card and put that card onto the battlefield tapped. Then shuffle your library.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(new FilterLandPermanent()));
-        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filterForest), true, true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filterForest), true));
     }
 
     private MwonvuliAcidMoss(final MwonvuliAcidMoss card) {

@@ -21,14 +21,10 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect {
     protected boolean optional;
 
     public SearchLibraryPutInPlayEffect(TargetCardInLibrary target) {
-        this(target, false, true);
+        this(target, false);
     }
 
     public SearchLibraryPutInPlayEffect(TargetCardInLibrary target, boolean tapped) {
-        this(target, tapped, true);
-    }
-
-    public SearchLibraryPutInPlayEffect(TargetCardInLibrary target, boolean tapped, boolean forceShuffle) {
         this(target, tapped, true, false);
     }
 

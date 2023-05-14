@@ -56,7 +56,7 @@ class DeepGnomeTerramancerTriggeredAbility extends TriggeredAbilityImpl {
         FilterCard filter = new FilterCard("Plains card");
         filter.add(SubType.PLAINS.getPredicate());
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        addEffect(new SearchLibraryPutInPlayEffect(target, true, true));
+        addEffect(new SearchLibraryPutInPlayEffect(target, true));
     }
 
     DeepGnomeTerramancerTriggeredAbility(DeepGnomeTerramancerTriggeredAbility ability) {

@@ -33,7 +33,7 @@ public final class WoodElves extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Wood Elves enters the battlefield, search your library for a Forest card and put that card onto the battlefield. Then shuffle your library.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false, true)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false)));
     }
 
     private WoodElves(final WoodElves card) {

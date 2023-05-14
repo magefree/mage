@@ -35,7 +35,7 @@ public final class BitterthornNissasAnimus extends CardImpl {
 
         // Whenever equipped creature attacks, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
         this.addAbility(new AttacksAttachedTriggeredAbility(new SearchLibraryPutInPlayEffect(
-                new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND_A), true, true
+                new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND_A), true
         ), true));
 
         // Equip {3}

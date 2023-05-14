@@ -32,7 +32,7 @@ public class FetchLandActivatedAbility extends ActivatedAbilityImpl {
         FilterCard filter = new FilterCard(subType1.getDescription() + " or " + subType2.getDescription() + " card");
         filter.add(Predicates.or(subType1.getPredicate(), subType2.getPredicate()));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        addEffect(new SearchLibraryPutInPlayEffect(target, false, true));
+        addEffect(new SearchLibraryPutInPlayEffect(target, false));
     }
 
     private FetchLandActivatedAbility(FetchLandActivatedAbility ability) {

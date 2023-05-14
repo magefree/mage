@@ -22,7 +22,7 @@ public final class GarrukCallerOfBeastsEmblem extends Emblem {
      */
     public GarrukCallerOfBeastsEmblem() {
         super("Emblem Garruk");
-        Effect effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterCreatureCard("creature card")), false, true);
+        Effect effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterCreatureCard("creature card")), false);
         Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND, effect, StaticFilters.FILTER_SPELL_A_CREATURE, true, false);
         this.getAbilities().add(ability);
     }
