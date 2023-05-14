@@ -36,7 +36,7 @@ public final class TamiyosJournal extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new InvestigateEffect(), TargetController.YOU, false));
 
         // {T}, Sacrifice three Clues: Search your library for a card and put that card into your hand. Then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false, true), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, filter, false)));
         this.addAbility(ability);
     }

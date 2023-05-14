@@ -37,7 +37,7 @@ public final class WelkinHawk extends CardImpl {
 
         // When Welkin Hawk dies, you may search your library for a card named Welkin Hawk, reveal that card, put it into your hand, then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(1, 1, filter);
-        this.addAbility(new DiesSourceTriggeredAbility(new SearchLibraryPutInHandEffect(target, true, true), true));
+        this.addAbility(new DiesSourceTriggeredAbility(new SearchLibraryPutInHandEffect(target, true), true));
     }
 
     private WelkinHawk(final WelkinHawk card) {

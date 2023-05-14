@@ -33,7 +33,7 @@ public final class WirewoodHerald extends CardImpl {
 
         // When Wirewood Herald dies, you may search your library for an Elf card, reveal that card, put it into your hand, then shuffle your library.
         this.addAbility(new DiesSourceTriggeredAbility(
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true),
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true),
                 true));
     }
 

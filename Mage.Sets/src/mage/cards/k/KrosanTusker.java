@@ -32,7 +32,7 @@ public final class KrosanTusker extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}{G}")));
         // When you cycle Krosan Tusker, you may search your library for a basic land card, reveal that card, put it into your hand, then shuffle your library.
         this.addAbility(new CycleTriggeredAbility(
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true),
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true),
                 true));
     }
 

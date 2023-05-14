@@ -24,7 +24,7 @@ public final class DiabolicIntent extends CardImpl {
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
 
         // Search your library for a card and put that card into your hand. Then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary()));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false));
     }
 
     private DiabolicIntent(final DiabolicIntent card) {

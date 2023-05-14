@@ -20,35 +20,17 @@ import java.util.UUID;
  */
 public class SearchLibraryPutInHandEffect extends SearchEffect {
 
-    private boolean revealCards = false;
-    private boolean forceShuffle;
-    private String rulePrefix;
-
-    public SearchLibraryPutInHandEffect(TargetCardInLibrary target) {
-        this(target, false, true);
-    }
+    private boolean revealCards;
 
     public SearchLibraryPutInHandEffect(TargetCardInLibrary target, boolean revealCards) {
-        this(target, revealCards, true);
-    }
-
-    public SearchLibraryPutInHandEffect(TargetCardInLibrary target, boolean revealCards, boolean forceShuffle) {
-        this(target, revealCards, forceShuffle, "search your library for ");
-    }
-
-    public SearchLibraryPutInHandEffect(TargetCardInLibrary target, boolean revealCards, boolean forceShuffle, String rulePrefix) {
         super(target, Outcome.DrawCard);
         this.revealCards = revealCards;
-        this.forceShuffle = forceShuffle;
-        this.rulePrefix = rulePrefix;
         setText();
     }
 
     public SearchLibraryPutInHandEffect(final SearchLibraryPutInHandEffect effect) {
         super(effect);
         this.revealCards = effect.revealCards;
-        this.forceShuffle = effect.forceShuffle;
-        this.rulePrefix = effect.rulePrefix;
     }
 
     @Override
@@ -85,34 +67,22 @@ public class SearchLibraryPutInHandEffect extends SearchEffect {
             controller.shuffleLibrary(source, game);
             return true;
         }
-        if (forceShuffle) {
-            controller.shuffleLibrary(source, game);
-        }
+        controller.shuffleLibrary(source, game);
         return false;
     }
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        sb.append(rulePrefix);
+        sb.append("search your library for ");
         if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
             sb.append("up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
             sb.append(target.getTargetName());
-            if (forceShuffle) {
-                sb.append(revealCards ? ", reveal them" : "");
-                sb.append(", put them into your hand, then shuffle");
-            } else {
-                sb.append(revealCards ? ", reveal them," : "");
-                sb.append(" and put them into your hand. If you do, shuffle");
-            }
+            sb.append(revealCards ? ", reveal them" : "");
+            sb.append(", put them into your hand, then shuffle");
         } else {
             sb.append(CardUtil.addArticle(target.getTargetName()));
-            if (forceShuffle) {
-                sb.append(revealCards ? ", reveal it, put it" : ", put that card");
-                sb.append(" into your hand, then shuffle");
-            } else {
-                sb.append(revealCards ? ", reveal it," : "");
-                sb.append(" and put that card into your hand. If you do, shuffle");
-            }
+            sb.append(revealCards ? ", reveal it, put it" : ", put that card");
+            sb.append(" into your hand, then shuffle");
         }
         staticText = sb.toString();
     }

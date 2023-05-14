@@ -25,7 +25,7 @@ public final class EladamrisCall extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{W}");
 
         // Search your library for a creature card, reveal that card, and put it into your hand. Then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true));
     }
 
     private EladamrisCall(final EladamrisCall card) {

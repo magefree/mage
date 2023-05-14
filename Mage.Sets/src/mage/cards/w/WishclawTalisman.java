@@ -66,7 +66,7 @@ public final class WishclawTalisman extends CardImpl {
 
 class WishclawTalismanEffect extends OneShotEffect {
 
-    private static final Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary());
+    private static final Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false);
 
     WishclawTalismanEffect() {
         super(Outcome.Benefit);

@@ -37,7 +37,7 @@ public final class CaptainSisay extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}: Search your library for a legendary card, reveal that card, and put it into your hand. Then shuffle your library.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true), new TapSourceCost()));
     }
 
     private CaptainSisay(final CaptainSisay card) {

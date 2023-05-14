@@ -39,7 +39,7 @@ public final class TrinketMage extends CardImpl {
 
         // When Trinket Mage enters the battlefield, you may search your library for an artifact card with converted mana cost 1 or less, reveal that card, and put it into your hand. If you do, shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        SearchEffect effect = new SearchLibraryPutInHandEffect(target, true, true);
+        SearchEffect effect = new SearchLibraryPutInHandEffect(target, true);
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, true));
     }
 
