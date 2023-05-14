@@ -203,6 +203,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                     }
                 } else if (this.getTargets().isEmpty()
                         || ruleLow.startsWith("attach")
+                        || ruleLow.startsWith("change")
                         || ruleLow.startsWith("counter")
                         || ruleLow.startsWith("destroy")
                         || ruleLow.startsWith("sacrifice")
@@ -210,19 +211,33 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                         || ruleLow.startsWith("exile")
                         || ruleLow.startsWith("gain")
                         || ruleLow.startsWith("goad")
+                        || ruleLow.startsWith("have")
+                        || ruleLow.startsWith("move")
                         || ruleLow.startsWith("prevent")
                         || ruleLow.startsWith("put")
                         || ruleLow.startsWith("remove")
                         || ruleLow.startsWith("return")
+                        || ruleLow.startsWith("shuffle")
+                        || ruleLow.startsWith("turn")
                         || ruleLow.startsWith("tap")
                         || ruleLow.startsWith("untap")) {
                     sb.append("you may ");
                 } else if (!ruleLow.startsWith("its controller may")) {
                     sb.append("you may have ");
+                    superRule = superRule
+                            .replaceAll(" becomes ", " become ")
+                            .replaceAll(" blocks ", " block ")
+                            .replaceAll(" deals ", " deal ")
+                            .replaceAll(" discards ", " discard ")
+                            .replaceAll(" gains ", " gain ")
+                            .replaceAll(" gets ", " get ")
+                            .replaceAll(" loses ", " lose ")
+                            .replaceAll(" mills ", " mill ")
+                            .replaceAll(" sacrifices ", " sacrifice ");
                 }
 
             }
-            sb.append(superRule);
+            sb.append(CardUtil.getTextWithFirstCharLowerCase(superRule));
             if (triggersOnce) {
                 sb.append(" This ability triggers only once each turn.");
             }
