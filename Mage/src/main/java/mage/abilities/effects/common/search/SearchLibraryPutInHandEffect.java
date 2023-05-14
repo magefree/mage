@@ -19,23 +19,23 @@ import java.util.UUID;
  */
 public class SearchLibraryPutInHandEffect extends SearchEffect {
 
-    private boolean revealCards;
+    private boolean reveal;
     private boolean textThatCard;
 
-    public SearchLibraryPutInHandEffect(TargetCardInLibrary target, boolean revealCards) {
-        this(target, revealCards, false);
+    public SearchLibraryPutInHandEffect(TargetCardInLibrary target, boolean reveal) {
+        this(target, reveal, false);
     }
 
-    public SearchLibraryPutInHandEffect(TargetCardInLibrary target, boolean revealCards, boolean textThatCard) {
+    public SearchLibraryPutInHandEffect(TargetCardInLibrary target, boolean reveal, boolean textThatCard) {
         super(target, Outcome.DrawCard);
-        this.revealCards = revealCards;
+        this.reveal = reveal;
         this.textThatCard = textThatCard;
         setText();
     }
 
     public SearchLibraryPutInHandEffect(final SearchLibraryPutInHandEffect effect) {
         super(effect);
-        this.revealCards = effect.revealCards;
+        this.reveal = effect.reveal;
         this.textThatCard = effect.textThatCard;
     }
 
@@ -61,7 +61,7 @@ public class SearchLibraryPutInHandEffect extends SearchEffect {
                     }
                 }
                 controller.moveCards(cards, Zone.HAND, source, game);
-                if (revealCards) {
+                if (reveal) {
                     String name = "Reveal";
                     Card sourceCard = game.getCard(source.getSourceId());
                     if (sourceCard != null) {
@@ -82,7 +82,7 @@ public class SearchLibraryPutInHandEffect extends SearchEffect {
         sb.append("search your library for ");
         sb.append(target.getDescription());
         if (target.getMaxNumberOfTargets() > 1) {
-            if (revealCards) {
+            if (reveal) {
                 sb.append(", reveal ");
                 sb.append(textThatCard ? "those cards" : "them");
                 sb.append(", put them");
@@ -91,7 +91,7 @@ public class SearchLibraryPutInHandEffect extends SearchEffect {
                 sb.append(textThatCard ? "those cards" : "them");
             }
         } else {
-            if (revealCards) {
+            if (reveal) {
                 sb.append(", reveal ");
                 sb.append(textThatCard ? "that card" : "it");
                 sb.append(", put it");
