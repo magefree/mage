@@ -6,6 +6,7 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -22,6 +23,7 @@ public final class OfferImmortality extends CardImpl {
                 .setText("target creature gains deathtouch"));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(IndestructibleAbility.getInstance())
                 .setText("and indestructible until end of turn"));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     private OfferImmortality(final OfferImmortality card) {
