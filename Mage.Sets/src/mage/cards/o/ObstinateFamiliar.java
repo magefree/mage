@@ -69,10 +69,7 @@ class ObstinateFamiliarReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player you = game.getPlayer(source.getControllerId());
-        if (you != null && you.chooseUse(Outcome.AIDontUseIt, "Skip this draw?", source, game)){
-            return true;
-        }
-        return false;
+        return you != null && you.chooseUse(Outcome.AIDontUseIt, "Skip this draw?", source, game);
     }
     
     @Override
@@ -82,11 +79,6 @@ class ObstinateFamiliarReplacementEffect extends ReplacementEffectImpl {
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent archmage = game.getPermanent(source.getSourceId());
-        if (archmage != null && event.getPlayerId().equals(source.getControllerId())) {
-            return true;
-        }
-        return false;
+        return game.getPermanent(source.getSourceId()) != null && event.getPlayerId().equals(source.getControllerId());
     }
-    
 }

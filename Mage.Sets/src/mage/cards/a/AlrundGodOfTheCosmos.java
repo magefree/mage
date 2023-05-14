@@ -47,7 +47,7 @@ public final class AlrundGodOfTheCosmos extends ModalDoubleFacesCard {
         this.getLeftHalfCard().setPT(new MageInt(1), new MageInt(1));
 
         // Alrund gets +1/+1 for each card in your hand and each foretold card you own in exile.
-        Effect effect = new BoostSourceEffect(AlrundGodOfTheCosmosValue.instance, AlrundGodOfTheCosmosValue.instance, Duration.EndOfGame);
+        Effect effect = new BoostSourceEffect(AlrundGodOfTheCosmosValue.INSTANCE, AlrundGodOfTheCosmosValue.instance, Duration.EndOfGame);
         effect.setText("{this} gets +1/+1 for each card in your hand and each foretold card you own in exile.");
         Ability ability = new SimpleStaticAbility(effect);
         this.getLeftHalfCard().addAbility(ability);
@@ -125,7 +125,7 @@ class AlrundGodOfTheCosmosEffect extends OneShotEffect {
 }
 
 enum AlrundGodOfTheCosmosValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -140,10 +140,8 @@ enum AlrundGodOfTheCosmosValue implements DynamicValue {
                 for (Card card : exile.getCards(filter, game)) {
                     // verify that the card is actually Foretold
                     UUID exileId = CardUtil.getExileZoneId(card.getId().toString() + "foretellAbility", game);
-                    if (exileId != null) {
-                        if (game.getState().getExile().getExileZone(exileId) != null) {
-                            cardsForetoldInExileZones.add(card);
-                        }
+                    if (game.getState().getExile().getExileZone(exileId) != null) {
+                        cardsForetoldInExileZones.add(card);
                     }
                 }
             }
@@ -154,7 +152,7 @@ enum AlrundGodOfTheCosmosValue implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

@@ -17,7 +17,6 @@ import mage.constants.PhaseStep;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.turn.Step;
 import mage.players.Player;
@@ -117,9 +116,7 @@ class BlindingBeamEffect2 extends ContinuousRuleModifyingEffectImpl {
     public boolean isInactive(Ability source, Game game) {
         // the PRE step part is directly after the UNTAP events for permanents
         if (game.getPhase().getStep().getType() == PhaseStep.UNTAP && game.getStep().getStepPart() == Step.StepPart.PRE) {
-            if (game.isActivePlayer(targetPlayerId) || game.getPlayer(source.getControllerId()).hasReachedNextTurnAfterLeaving()) {
-                return true;
-            }
+            return game.isActivePlayer(targetPlayerId) || game.getPlayer(source.getControllerId()).hasReachedNextTurnAfterLeaving();
         }
         return false;
     }

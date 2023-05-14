@@ -38,7 +38,7 @@ public final class TurfWar extends CardImpl {
 
         // When Turf War enters the battlefield, for each player, put a contested counter on target land that player controls.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new TurfWarCounterEffect())
-                .setTargetAdjuster(TurfWarAdjuster.instance));
+                .setTargetAdjuster(TurfWarAdjuster.INSTANCE));
 
         // Whenever a creature deals combat damage to a player, if that player controls one or more lands with contested counters on them, that creature's controller gains control of one of those lands of their choice and untaps it.
         this.addAbility(new TurfWarTriggeredAbility());
@@ -93,7 +93,7 @@ class TurfWarCounterEffect extends OneShotEffect {
 }
 
 enum TurfWarAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

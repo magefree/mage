@@ -24,7 +24,7 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class Anger extends CardImpl {
 
-    private static final String ruleText = "As long as Anger is in your graveyard and you control a Mountain, creatures you control have haste";
+    private static final String RULE_TEXT = "As long as Anger is in your graveyard and you control a Mountain, creatures you control have haste";
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Mountain");
 
@@ -47,7 +47,7 @@ public final class Anger extends CardImpl {
         ContinuousEffect effect = new GainAbilityControlledEffect(HasteAbility.getInstance(),
                 Duration.WhileOnBattlefield, new FilterCreaturePermanent());
         ConditionalContinuousEffect angerEffect = new ConditionalContinuousEffect(effect,
-                new PermanentsOnTheBattlefieldCondition(filter), ruleText);
+                new PermanentsOnTheBattlefieldCondition(filter), RULE_TEXT);
         this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD, angerEffect));
     }
 

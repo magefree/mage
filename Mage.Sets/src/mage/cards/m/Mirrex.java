@@ -36,7 +36,7 @@ public final class Mirrex extends CardImpl {
         // {T}: Add one mana of any color. Activate only if Mirrex entered the battlefield this turn.
         this.addAbility(new ActivateIfConditionManaAbility(
                 Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(),
-                new TapSourceCost(), MirrexCondition.instance
+                new TapSourceCost(), MirrexCondition.INSTANCE
         ));
 
         // {3}, {T}: Create a 1/1 colorless Phyrexian Mite artifact creature token with toxic 1 and "This creature can't block."
@@ -58,7 +58,7 @@ public final class Mirrex extends CardImpl {
 }
 
 enum MirrexCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

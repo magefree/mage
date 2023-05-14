@@ -30,7 +30,7 @@ public final class BeckoningWillOWisp extends CardImpl {
             = new FilterCreaturePermanent("creatures attacking the last chosen player");
 
     static {
-        filter.add(BeckoningWillOWispPredicate.instance);
+        filter.add(BeckoningWillOWispPredicate.INSTANCE);
     }
 
     public BeckoningWillOWisp(UUID ownerId, CardSetInfo setInfo) {
@@ -65,7 +65,7 @@ public final class BeckoningWillOWisp extends CardImpl {
 }
 
 enum BeckoningWillOWispPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {

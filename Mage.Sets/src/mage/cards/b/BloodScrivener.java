@@ -86,9 +86,7 @@ class BloodScrivenerReplacementEffect extends ReplacementEffectImpl {
         if (event.getPlayerId().equals(source.getControllerId())) {
             Player player = game.getPlayer(event.getPlayerId());
             if(player != null) {
-                if (player.getHand().isEmpty()) {
-                    return true;
-                }
+                return player.getHand().isEmpty();
             }
         }
         return false;

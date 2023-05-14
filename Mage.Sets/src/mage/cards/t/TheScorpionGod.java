@@ -116,11 +116,11 @@ class TheScorpionGodTriggeredAbility extends TriggeredAbilityImpl {
 
 class TheScorpionGodEffect extends OneShotEffect {
 
-    private static final String effectText = "return it to its owner's hand at the beginning of the next end step";
+    private static final String EFFECT_TEXT = "return it to its owner's hand at the beginning of the next end step";
 
     TheScorpionGodEffect() {
         super(Outcome.Benefit);
-        staticText = effectText;
+        staticText = EFFECT_TEXT;
     }
 
     TheScorpionGodEffect(TheScorpionGodEffect effect) {

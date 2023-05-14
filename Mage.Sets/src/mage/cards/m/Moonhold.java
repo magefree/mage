@@ -14,7 +14,6 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -91,10 +90,7 @@ class MoonholdEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getPlayerId().equals(source.getFirstTarget())) {
-            return true;
-        }
-        return false;
+        return event.getPlayerId().equals(source.getFirstTarget());
     }
 }
 

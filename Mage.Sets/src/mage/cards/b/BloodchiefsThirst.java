@@ -34,7 +34,7 @@ public final class BloodchiefsThirst extends CardImpl {
                 "Destroy target creature or planeswalker with mana value 2 or less. " +
                         "If this spell was kicked, instead destroy target creature or planeswalker."
         ));
-        this.getSpellAbility().setTargetAdjuster(BloodchiefsThirstAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(BloodchiefsThirstAdjuster.INSTANCE);
     }
 
     private BloodchiefsThirst(final BloodchiefsThirst card) {
@@ -48,7 +48,7 @@ public final class BloodchiefsThirst extends CardImpl {
 }
 
 enum BloodchiefsThirstAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     private static final FilterPermanent filter = new FilterCreatureOrPlaneswalkerPermanent(
             "creature or planeswalker with mana value 2 or less"

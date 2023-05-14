@@ -30,7 +30,7 @@ public final class PermafrostTrap extends CardImpl {
         this.subtype.add(SubType.TRAP);
 
         // If an opponent had a green creature enter the battlefield under their control this turn, you may pay {U} rather than pay Permafrost Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{U}"), PermafrostTrapCondition.instance), new PermanentsEnteredBattlefieldWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{U}"), PermafrostTrapCondition.INSTANCE), new PermanentsEnteredBattlefieldWatcher());
 
         // Tap up to two target creatures. Those creatures don't untap during their controller's next untap step.
         this.getSpellAbility().addEffect(new TapTargetEffect());
@@ -49,8 +49,7 @@ public final class PermafrostTrap extends CardImpl {
 }
 
 enum PermafrostTrapCondition implements Condition {
-
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

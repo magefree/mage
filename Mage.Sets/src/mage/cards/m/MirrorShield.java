@@ -31,7 +31,7 @@ public final class MirrorShield extends CardImpl {
         filter.add(new AbilityPredicate(DeathtouchAbility.class));
     }
 
-    private static final String triggerPhrase
+    private static final String TRIGGER_PHRASE
             = "Whenever a creature with deathtouch blocks or becomes blocked by this creature, ";
 
     public MirrorShield(UUID ownerId, CardSetInfo setInfo) {
@@ -40,14 +40,14 @@ public final class MirrorShield extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +0/+2 and has hexproof and "Whenever a creature with deathtouch blocks or becomes blocked by this creature, destroy that creature."
-        Ability gainedAbility = new BlocksOrBlockedByCreatureSourceTriggeredAbility(new DestroyTargetEffect(), filter).setTriggerPhrase(triggerPhrase);
+        Ability gainedAbility = new BlocksOrBlockedByCreatureSourceTriggeredAbility(new DestroyTargetEffect(), filter).setTriggerPhrase(TRIGGER_PHRASE);
         Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(0, 2));
         ability.addEffect(new GainAbilityAttachedEffect(
                 HexproofAbility.getInstance(), AttachmentType.EQUIPMENT
         ).setText("and has hexproof"));
         ability.addEffect(new GainAbilityAttachedEffect(
                 gainedAbility, AttachmentType.EQUIPMENT
-        ).setText("and \"" + triggerPhrase + "destroy that creature.\""));
+        ).setText("and \"" + TRIGGER_PHRASE + "destroy that creature.\""));
         this.addAbility(ability);
 
         // Equip {2}

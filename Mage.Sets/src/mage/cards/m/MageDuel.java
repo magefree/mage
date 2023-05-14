@@ -27,18 +27,13 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class MageDuel extends CardImpl {
-
-    private static final Hint hint = new ConditionHint(
-            MageDuelCondition.instance, "You've cast an instant or sorcery this turn"
-    );
-
     public MageDuel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
 
         // This spell costs {2} less to cast if you've cast another instant or sorcery spell this turn.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
-                new SpellCostReductionSourceEffect(2, MageDuelCondition.instance).setCanWorksOnStackOnly(true)
+                new SpellCostReductionSourceEffect(2, MageDuelCondition.INSTANCE).setCanWorksOnStackOnly(true)
         ).setRuleAtTheTop(true), new SpellsCastWatcher());
 
         // Target creature you control gets +1/+2 until end of turn. Then it fights target creature you don't control.
@@ -62,7 +57,7 @@ public final class MageDuel extends CardImpl {
 }
 
 enum MageDuelCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

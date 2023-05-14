@@ -45,7 +45,7 @@ public final class NimbleTrapfinder extends CardImpl {
 
         // Nimble Trapfinder can't be blocked if you had another Cleric, Rogue, Warrior, or Wizard enter the battlefield under your control this turn.
         this.addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
-                new CantBeBlockedSourceEffect(), NimbleTrapfinderCondition.instance,
+                new CantBeBlockedSourceEffect(), NimbleTrapfinderCondition.INSTANCE,
                 "{this} can't be blocked if you had another Cleric, Rogue, Warrior, or Wizard " +
                         "enter the battlefield under your control this turn"
         )).addHint(NimbleTrapfinderCondition.getHint()), new NimbleTrapfinderWatcher());
@@ -74,9 +74,9 @@ public final class NimbleTrapfinder extends CardImpl {
 }
 
 enum NimbleTrapfinderCondition implements Condition {
-    instance;
+    INSTANCE;
 
-    private static final Hint hint = new ConditionHint(instance);
+    private static final Hint hint = new ConditionHint(INSTANCE);
 
     static Hint getHint() {
         return hint;

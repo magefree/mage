@@ -62,7 +62,7 @@ public final class NazahnReveredBladesmith extends CardImpl {
         // Whenever an equipped creature you control attacks, you may tap target creature defending player controls.
         Ability ability = new AttacksCreatureYouControlTriggeredAbility(new NazahnTapEffect(), true, equippedFilter, true);
         ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature defending player controls")));
-        ability.setTargetAdjuster(NazahnReveredBladesmithAdjuster.instance);
+        ability.setTargetAdjuster(NazahnReveredBladesmithAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -77,7 +77,7 @@ public final class NazahnReveredBladesmith extends CardImpl {
 }
 
 enum NazahnReveredBladesmithAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

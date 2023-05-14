@@ -59,12 +59,12 @@ public final class ArgentSphinx extends CardImpl {
 
 class ArgentSphinxEffect extends OneShotEffect {
 
-    private static final String effectText = "Exile {this}. Return it to the battlefield " +
+    private static final String EFFECT_TEXT = "Exile {this}. Return it to the battlefield " +
             "under your control at the beginning of the next end step";
 
     ArgentSphinxEffect() {
         super(Outcome.Benefit);
-        staticText = effectText;
+        staticText = EFFECT_TEXT;
     }
 
     private ArgentSphinxEffect(ArgentSphinxEffect effect) {

@@ -39,7 +39,7 @@ public final class ObscuraAscendancy extends CardImpl {
         // Whenever you cast a spell, if its mana value is equal to the number of soul counters on Obscura Ascendancy plus one, put a soul counter on Obscura Ascendancy, then create a 2/2 white Spirit creature token with flying.
         SpellCastControllerTriggeredAbility triggeredAbility = new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.SOUL.createInstance()), false);
         triggeredAbility.addEffect(new CreateTokenEffect(new Spirit22Token()));
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(triggeredAbility, ObscuraAscendancyCondition.instance,
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(triggeredAbility, ObscuraAscendancyCondition.INSTANCE,
                 "Whenever you cast a spell, if its mana value is equal to 1 plus the number of soul counters on {this}, put a soul counter on {this}, then create a 2/2 white Spirit creature token with flying."
         ));
 
@@ -62,7 +62,7 @@ public final class ObscuraAscendancy extends CardImpl {
 }
 
 enum ObscuraAscendancyCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

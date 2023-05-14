@@ -35,7 +35,7 @@ public final class PostmortemLunge extends CardImpl {
         // Return target creature card with converted mana cost X from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new PostmortemLungeEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
-        this.getSpellAbility().setTargetAdjuster(PostmortemLungeAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(PostmortemLungeAdjuster.INSTANCE);
     }
 
     private PostmortemLunge(final PostmortemLunge card) {
@@ -49,7 +49,7 @@ public final class PostmortemLunge extends CardImpl {
 }
 
 enum PostmortemLungeAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

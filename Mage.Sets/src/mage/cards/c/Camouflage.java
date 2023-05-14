@@ -119,14 +119,12 @@ class CamouflageEffect extends ContinuousRuleModifyingEffectImpl {
                             }
                             if (defender.chooseUse(Outcome.Neutral, "Make a new blocker pile? If not, all remaining piles stay empty. (remaining piles: " + (attackerCount - masterList.size()) + ')', source, game)) {
                                 Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
-                                if (target.canChoose(defenderId, source, game)) {
-                                    if (defender.chooseTarget(Outcome.Neutral, target, source, game)) {
-                                        for (UUID creatureId : target.getTargets()) {
-                                            Permanent creature = game.getPermanent(creatureId);
-                                            if (creature != null) {
-                                                creature.setBlocking(creature.getBlocking() + 1);
-                                                newPile.add(creature);
-                                            }
+                                if (target.canChoose(defenderId, source, game) && defender.chooseTarget(Outcome.Neutral, target, source, game)) {
+                                    for (UUID creatureId : target.getTargets()) {
+                                        Permanent creature = game.getPermanent(creatureId);
+                                        if (creature != null) {
+                                            creature.setBlocking(creature.getBlocking() + 1);
+                                            newPile.add(creature);
                                         }
                                     }
                                 }

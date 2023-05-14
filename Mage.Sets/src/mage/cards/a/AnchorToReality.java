@@ -89,7 +89,7 @@ class AnchorToRealityEffect extends OneShotEffect {
         for (Cost cost : source.getCosts()) {
             if (cost instanceof SacrificeTargetCost) {
                 List<Permanent> sacrificedPermanents = ((SacrificeTargetCost) cost).getPermanents();
-                if (sacrificedPermanents.size() > 0) {
+                if (!sacrificedPermanents.isEmpty()) {
                     sacrificedManaValue = sacrificedPermanents.get(0).getManaValue();
                     break;
                 }

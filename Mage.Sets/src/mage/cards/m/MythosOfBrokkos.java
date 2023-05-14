@@ -7,7 +7,6 @@ import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;

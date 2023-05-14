@@ -31,7 +31,7 @@ import java.util.UUID;
 public final class PyreSledgeArsonist extends CardImpl {
 
     private static final Hint hint = new ValueHint(
-            "Permanents you've sacrificed this turn", PyreSledgeArsonistValue.instance
+            "Permanents you've sacrificed this turn", PyreSledgeArsonistValue.INSTANCE
     );
 
     public PyreSledgeArsonist(UUID ownerId, CardSetInfo setInfo) {
@@ -44,7 +44,7 @@ public final class PyreSledgeArsonist extends CardImpl {
 
         // {1}, {T}: Pyre-Sledge Arsonist deals X damage to any target, where X is the number of permanents you sacrificed this turn.
         Ability ability = new SimpleActivatedAbility(
-                new DamageTargetEffect(PyreSledgeArsonistValue.instance), new GenericManaCost(1)
+                new DamageTargetEffect(PyreSledgeArsonistValue.INSTANCE), new GenericManaCost(1)
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
@@ -62,7 +62,7 @@ public final class PyreSledgeArsonist extends CardImpl {
 }
 
 enum PyreSledgeArsonistValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

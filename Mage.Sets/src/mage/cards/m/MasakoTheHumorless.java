@@ -68,9 +68,6 @@ class BlockTappedEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         Permanent permanent = game.getPermanent(sourceId);
-        if (permanent != null && permanent.isControlledBy(source.getControllerId())) {
-            return true;
-        }
-        return false;
+        return permanent != null && permanent.isControlledBy(source.getControllerId());
     }
 }

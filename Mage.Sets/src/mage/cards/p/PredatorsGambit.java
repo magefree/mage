@@ -21,7 +21,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class PredatorsGambit extends CardImpl {
 
-    private static final String rule = "Enchanted creature has intimidate as long as its controller controls no other creatures. " +
+    private static final String RULE_TEXT = "Enchanted creature has intimidate as long as its controller controls no other creatures. " +
             "<i>(It can't be blocked except by artifact creatures and/or creatures that share a color with it.)</i>";
 
     public PredatorsGambit(UUID ownerId, CardSetInfo setInfo) {
@@ -43,7 +43,7 @@ public final class PredatorsGambit extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilityAttachedEffect(IntimidateAbility.getInstance(), AttachmentType.AURA),
                 new CreatureCountCondition(1, TargetController.YOU),
-                rule
+                RULE_TEXT
         )));
 
     }

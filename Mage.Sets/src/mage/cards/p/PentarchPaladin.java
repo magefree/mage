@@ -51,7 +51,7 @@ public final class PentarchPaladin extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{W}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
-        ability.setTargetAdjuster(PentarchPaladinAdjuster.instance);
+        ability.setTargetAdjuster(PentarchPaladinAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -66,7 +66,7 @@ public final class PentarchPaladin extends CardImpl {
 }
 
 enum PentarchPaladinAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

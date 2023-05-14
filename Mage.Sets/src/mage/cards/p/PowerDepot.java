@@ -65,12 +65,12 @@ class PowerDepotConditionalMana extends ConditionalMana {
 
     PowerDepotConditionalMana(Mana mana) {
         super(mana);
-        this.addCondition(PowerDepotCondition.instance);
+        this.addCondition(PowerDepotCondition.INSTANCE);
     }
 }
 
 enum PowerDepotCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

@@ -32,7 +32,7 @@ public final class Reap extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect().setText("Return up to X target cards from your graveyard to your hand, where X is the number of black permanents target opponent controls as you cast this spell"));
         this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 0));
-        this.getSpellAbility().setTargetAdjuster(ReapAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(ReapAdjuster.INSTANCE);
     }
 
     private Reap(final Reap card) {
@@ -46,7 +46,7 @@ public final class Reap extends CardImpl {
 }
 
 enum ReapAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
     private static final FilterPermanent filter = new FilterPermanent("black permanents");
 
     static {

@@ -40,7 +40,7 @@ public final class TheCrowdGoesWild extends CardImpl {
                 .setText("Support X <i>(Put a +1/+1 counter on each of up to X target creatures.)</i><br>")
         );
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().setTargetAdjuster(TheCrowdGoesWildAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(TheCrowdGoesWildAdjuster.INSTANCE);
 
         // Each creature with a +1/+1 counter on it gains trample until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, filter));
@@ -57,7 +57,7 @@ public final class TheCrowdGoesWild extends CardImpl {
 }
 
 enum TheCrowdGoesWildAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

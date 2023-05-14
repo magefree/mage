@@ -91,7 +91,7 @@ class MarchOfRecklessJoyEffect extends OneShotEffect {
         for (Card card : cards) {
             CardUtil.makeCardPlayable(
                     game, source, card, Duration.UntilEndOfYourNextTurn,
-                    false, null, MarchOfRecklessJoyCondition.instance
+                    false, null, MarchOfRecklessJoyCondition.INSTANCE
             );
         }
         return true;
@@ -99,7 +99,7 @@ class MarchOfRecklessJoyEffect extends OneShotEffect {
 }
 
 enum MarchOfRecklessJoyCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

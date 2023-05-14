@@ -89,14 +89,14 @@ class MizzixReplicaRiderEffect extends OneShotEffect {
         }
         spell.createCopyOnStack(
                 game, source, source.getControllerId(), true,
-                1, MizzixReplicaRiderApplier.instance
+                1, MizzixReplicaRiderApplier.INSTANCE
         );
         return true;
     }
 }
 
 enum MizzixReplicaRiderApplier implements StackObjectCopyApplier {
-    instance;
+    INSTANCE;
 
     @Override
     public void modifySpell(StackObject stackObject, Game game) {

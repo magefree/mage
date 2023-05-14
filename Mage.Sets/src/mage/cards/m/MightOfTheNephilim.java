@@ -25,7 +25,7 @@ public final class MightOfTheNephilim extends CardImpl {
 
         // Target creature gets +2/+2 until end of turn for each of its colors.
         this.getSpellAbility().addEffect(new BoostTargetEffect(
-                MightOfTheNephilimValue.instance, MightOfTheNephilimValue.instance, Duration.EndOfTurn
+                MightOfTheNephilimValue.INSTANCE, MightOfTheNephilimValue.INSTANCE, Duration.EndOfTurn
         ));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
@@ -41,8 +41,7 @@ public final class MightOfTheNephilim extends CardImpl {
 }
 
 enum MightOfTheNephilimValue implements DynamicValue {
-
-   instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -55,7 +54,7 @@ enum MightOfTheNephilimValue implements DynamicValue {
 
     @Override
     public MightOfTheNephilimValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

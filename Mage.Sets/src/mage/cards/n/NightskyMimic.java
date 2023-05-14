@@ -32,7 +32,7 @@ public final class NightskyMimic extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
-    private static final String rule = "Whenever you cast a spell that's both white and black, {this} has base power and toughness 4/4 until end of turn and gains flying until end of turn.";
+    private static final String RULE_TEXT = "Whenever you cast a spell that's both white and black, {this} has base power and toughness 4/4 until end of turn and gains flying until end of turn.";
 
     public NightskyMimic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W/B}");
@@ -48,7 +48,7 @@ public final class NightskyMimic extends CardImpl {
                 new SetBasePowerToughnessSourceEffect(4, 4, Duration.EndOfTurn, SubLayer.SetPT_7b),
                 filter,
                 false,
-                rule);
+                RULE_TEXT);
         ability.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, false, true));
         this.addAbility(ability);
     }

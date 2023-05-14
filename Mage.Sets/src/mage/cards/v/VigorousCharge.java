@@ -26,7 +26,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class VigorousCharge extends CardImpl {
     
-    private static final String staticText = "Whenever that creature deals combat damage this turn, if this spell was kicked, you gain life equal to that damage";
+    private static final String STATIC_TEXT = "Whenever that creature deals combat damage this turn, if this spell was kicked, you gain life equal to that damage";
 
     public VigorousCharge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
@@ -38,7 +38,7 @@ public final class VigorousCharge extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
         // Whenever that creature deals combat damage this turn, if this spell was kicked, you gain life equal to that damage.
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new GainAbilityTargetEffect(new VigorousChargeTriggeredAbility(), Duration.EndOfTurn),
-        new LockedInCondition(KickedCondition.ONCE), staticText));
+        new LockedInCondition(KickedCondition.ONCE), STATIC_TEXT));
 
     }
 

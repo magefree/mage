@@ -73,12 +73,12 @@ class VhalCandlekeepResearcherConditionalMana extends ConditionalMana {
     VhalCandlekeepResearcherConditionalMana(Mana mana) {
         super(mana);
         staticText = "This mana can't be spent to cast spells from your hand";
-        addCondition(VhalCandlekeepResearcherManaCondition.instance);
+        addCondition(VhalCandlekeepResearcherManaCondition.INSTANCE);
     }
 }
 
 enum VhalCandlekeepResearcherManaCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

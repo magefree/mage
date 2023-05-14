@@ -31,7 +31,7 @@ public final class OathOfMages extends CardImpl {
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
                 new OathOfMagesEffect(), TargetController.ANY, false
         );
-        ability.setTargetAdjuster(OathOfMagesAdjuster.instance);
+        ability.setTargetAdjuster(OathOfMagesAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -46,11 +46,11 @@ public final class OathOfMages extends CardImpl {
 }
 
 enum OathOfMagesAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
     private static final FilterPlayer filter = new FilterPlayer();
 
     static {
-        filter.add(OathOfMagesPredicate.instance);
+        filter.add(OathOfMagesPredicate.INSTANCE);
     }
 
     @Override
@@ -67,7 +67,7 @@ enum OathOfMagesAdjuster implements TargetAdjuster {
 }
 
 enum OathOfMagesPredicate implements ObjectSourcePlayerPredicate<Player> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Player> input, Game game) {

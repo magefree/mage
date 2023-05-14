@@ -37,7 +37,7 @@ public final class VodalianMindsinger extends CardImpl {
             = new FilterCreaturePermanent("creature with power less than {this}'s power");
 
     static {
-        filter.add(VodalianMindsingerPredicate.instance);
+        filter.add(VodalianMindsingerPredicate.INSTANCE);
     }
 
     public VodalianMindsinger(UUID ownerId, CardSetInfo setInfo) {
@@ -75,7 +75,7 @@ public final class VodalianMindsinger extends CardImpl {
 }
 
 enum VodalianMindsingerPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {

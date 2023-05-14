@@ -28,7 +28,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class BlowflyInfestation extends CardImpl {
 
-    private static final String rule = "Whenever a creature dies, if it had a -1/-1 counter on it, put a -1/-1 counter on target creature.";
+    private static final String RULE_TEXT = "Whenever a creature dies, if it had a -1/-1 counter on it, put a -1/-1 counter on target creature.";
 
     public BlowflyInfestation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
@@ -38,7 +38,7 @@ public final class BlowflyInfestation extends CardImpl {
         TriggeredAbility triggeredAbility = new DiesCreatureTriggeredAbility(effect, false, false, true);
         triggeredAbility.addTarget(new TargetCreaturePermanent());
         Condition condition = new BlowflyInfestationCondition();
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(triggeredAbility, condition, rule));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(triggeredAbility, condition, RULE_TEXT));
 
     }
 

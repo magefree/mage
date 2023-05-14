@@ -39,7 +39,7 @@ public final class LurrusOfTheDreamDen extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Companion — Each permanent card in your starting deck has converted mana cost 2 or less.
-        this.addAbility(new CompanionAbility(LurrusOfTheDreamDenCompanionCondition.instance));
+        this.addAbility(new CompanionAbility(LurrusOfTheDreamDenCompanionCondition.INSTANCE));
 
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
@@ -59,7 +59,7 @@ public final class LurrusOfTheDreamDen extends CardImpl {
 }
 
 enum LurrusOfTheDreamDenCompanionCondition implements CompanionCondition {
-    instance;
+    INSTANCE;
 
     @Override
     public String getRule() {

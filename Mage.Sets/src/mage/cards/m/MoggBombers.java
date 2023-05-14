@@ -22,7 +22,7 @@ import mage.target.TargetPlayer;
  */
 public final class MoggBombers extends CardImpl {
     
-    private static final String rule = "When another creature enters the battlefield, sacrifice {this} and it deals 3 damage to target player.";
+    private static final String RULE_TEXT = "When another creature enters the battlefield, sacrifice {this} and it deals 3 damage to target player.";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 
     static {
@@ -42,7 +42,7 @@ public final class MoggBombers extends CardImpl {
         Ability ability = new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD, 
                 sacrificeMoggBombers, 
-                filter, false, rule);
+                filter, false, RULE_TEXT);
         ability.addEffect(damageTargetPlayer);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

@@ -37,7 +37,7 @@ public final class ObsidianCharmaw extends CardImpl {
     }
 
     private static final Hint hint = new ValueHint(
-            "Lands your opponents control that could produce {C}", ObsidianCharmawValue.instance
+            "Lands your opponents control that could produce {C}", ObsidianCharmawValue.INSTANCE
     );
 
     public ObsidianCharmaw(UUID ownerId, CardSetInfo setInfo) {
@@ -49,7 +49,7 @@ public final class ObsidianCharmaw extends CardImpl {
 
         // This spell costs {1} less to cast for each land your opponents control that could produce {C}.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionForEachSourceEffect(1, ObsidianCharmawValue.instance)
+                Zone.ALL, new SpellCostReductionForEachSourceEffect(1, ObsidianCharmawValue.INSTANCE)
         ).addHint(hint));
 
         // Flying
@@ -72,7 +72,7 @@ public final class ObsidianCharmaw extends CardImpl {
 }
 
 enum ObsidianCharmawValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -95,7 +95,7 @@ enum ObsidianCharmawValue implements DynamicValue {
 
     @Override
     public ObsidianCharmawValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

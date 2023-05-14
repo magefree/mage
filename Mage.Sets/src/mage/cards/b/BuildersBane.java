@@ -28,7 +28,7 @@ public final class BuildersBane extends CardImpl {
         // Destroy X target artifacts. Builder's Bane deals damage to each player equal to the number of artifacts they controlled put into a graveyard this way.
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
         this.getSpellAbility().addEffect(new BuildersBaneEffect());
-        this.getSpellAbility().setTargetAdjuster(BuildersBaneAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(BuildersBaneAdjuster.INSTANCE);
     }
 
     private BuildersBane(final BuildersBane card) {
@@ -42,7 +42,7 @@ public final class BuildersBane extends CardImpl {
 }
 
 enum BuildersBaneAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
@@ -75,16 +75,14 @@ class BuildersBaneEffect extends OneShotEffect {
         // Destroy X target artifacts.
         for (UUID targetID : this.targetPointer.getTargets(game, source)) {
             Permanent permanent = game.getPermanent(targetID);
-            if (permanent != null) {
-                if (permanent.destroy(source, game, false)) {
-                    game.getState().processAction(game);
-                    if (permanent.getZoneChangeCounter(game) + 1 == game.getState().getZoneChangeCounter(permanent.getId())
-                            && game.getState().getZone(permanent.getId()) != Zone.GRAVEYARD) {
-                        // A replacement effect has moved the card to another zone as grvayard
-                        continue;
-                    }
-                    destroyedArtifactPerPlayer.merge(permanent.getControllerId(), 1, Integer::sum);
+            if (permanent != null && permanent.destroy(source, game, false)) {
+                game.getState().processAction(game);
+                if (permanent.getZoneChangeCounter(game) + 1 == game.getState().getZoneChangeCounter(permanent.getId())
+                        && game.getState().getZone(permanent.getId()) != Zone.GRAVEYARD) {
+                    // A replacement effect has moved the card to another zone as graveyard
+                    continue;
                 }
+                destroyedArtifactPerPlayer.merge(permanent.getControllerId(), 1, Integer::sum);
             }
         }
 

@@ -37,7 +37,7 @@ public final class RadiantPerformer extends CardImpl {
             = new FilterStackObject("spell or ability that targets only a single permanent or player");
 
     static {
-        filter.add(RadiantPerformerPredicate.instance);
+        filter.add(RadiantPerformerPredicate.INSTANCE);
     }
 
     public RadiantPerformer(UUID ownerId, CardSetInfo setInfo) {
@@ -74,7 +74,7 @@ public final class RadiantPerformer extends CardImpl {
 }
 
 enum RadiantPerformerPredicate implements Predicate<StackObject> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(StackObject input, Game game) {

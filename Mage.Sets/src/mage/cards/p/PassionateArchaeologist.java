@@ -39,7 +39,7 @@ public final class PassionateArchaeologist extends CardImpl {
 
         // Commander creatures you own have "Whenever you cast a spell from exile, this creature deals damage equal to that spell's mana value to target opponent."
         Ability ability = new SpellCastControllerTriggeredAbility(new DamageTargetEffect(
-                PassionateArchaeologistValue.instance, "this creature"
+                PassionateArchaeologistValue.INSTANCE, "this creature"
         ), filter, false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
@@ -59,7 +59,7 @@ public final class PassionateArchaeologist extends CardImpl {
 }
 
 enum PassionateArchaeologistValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

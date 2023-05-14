@@ -33,7 +33,7 @@ public final class BarroomBrawl extends CardImpl {
             = new FilterCreaturePermanent("creature the opponent to your left controls");
 
     static {
-        filter.add(BarroomBrawlPredicate.instance);
+        filter.add(BarroomBrawlPredicate.INSTANCE);
     }
 
     public BarroomBrawl(UUID ownerId, CardSetInfo setInfo) {
@@ -57,7 +57,7 @@ public final class BarroomBrawl extends CardImpl {
 }
 
 enum BarroomBrawlPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {

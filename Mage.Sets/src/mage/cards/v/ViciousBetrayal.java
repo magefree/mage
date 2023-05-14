@@ -29,7 +29,7 @@ public final class ViciousBetrayal extends CardImpl {
         this.getSpellAbility().addCost(new SacrificeXTargetCost(new FilterControlledCreaturePermanent(), true));
         // Target creature gets +2/+2 until end of turn for each creature sacrificed this way.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new BoostTargetEffect(GetXValue.instance, GetXValue.instance, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(GetXValue.INSTANCE, GetXValue.INSTANCE, Duration.EndOfTurn));
     }
 
     private ViciousBetrayal(final ViciousBetrayal card) {
@@ -43,7 +43,7 @@ public final class ViciousBetrayal extends CardImpl {
 }
 
 enum GetXValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -56,7 +56,7 @@ enum GetXValue implements DynamicValue {
 
     @Override
     public GetXValue copy() {
-        return GetXValue.instance;
+        return GetXValue.INSTANCE;
     }
 
     @Override

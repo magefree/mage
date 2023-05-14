@@ -146,12 +146,9 @@ class MoiraAndTesharReplacementEffect extends ReplacementEffectImpl {
 
   @Override
   public boolean applies(GameEvent event, Ability source, Game game) {
-    if (event.getTargetId().equals(source.getFirstTarget())
-        && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD
-        && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED) {
-      return true;
-    }
-    return false;
+    return event.getTargetId().equals(source.getFirstTarget())
+            && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD
+            && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED;
   }
 
   @Override

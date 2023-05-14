@@ -33,7 +33,7 @@ public final class RotHulk extends CardImpl {
         // When Rot Hulk enters the battlefield, return up to X target Zombie cards from your graveyard to the battlefield, where X is the number of opponents you have.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect()
                 .setText("return up to X target Zombie cards from your graveyard to the battlefield, where X is the number of opponents you have."));
-        ability.setTargetAdjuster(RotHulkAdjuster.instance);
+        ability.setTargetAdjuster(RotHulkAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -48,7 +48,7 @@ public final class RotHulk extends CardImpl {
 }
 
 enum RotHulkAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
     private static final FilterCard filterZombie = new FilterCard("Zombie cards from your graveyard");
 
     static {

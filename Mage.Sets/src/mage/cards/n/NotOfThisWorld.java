@@ -43,7 +43,7 @@ public final class NotOfThisWorld extends CardImpl {
 
         // Not of This World costs {7} less to cast if it targets a spell or ability that targets a creature you control with power 7 or greater.
         this.addAbility(new SimpleStaticAbility(Zone.ALL,
-                new SpellCostReductionSourceEffect(7, NotOfThisWorldCondition.instance).setCanWorksOnStackOnly(true))
+                new SpellCostReductionSourceEffect(7, NotOfThisWorldCondition.INSTANCE).setCanWorksOnStackOnly(true))
         );
     }
 
@@ -58,8 +58,7 @@ public final class NotOfThisWorld extends CardImpl {
 }
 
 enum NotOfThisWorldCondition implements Condition {
-
-    instance;
+    INSTANCE;
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {

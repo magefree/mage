@@ -51,7 +51,7 @@ public final class AstarionTheDecadent extends CardImpl {
         // At the beginning of your end step, choose one —
         // • Feed — Target opponent loses life equal to the amount of life they lost this turn.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new LoseLifeTargetEffect(AstarionTheDecadentValue.instance), TargetController.YOU, false
+                new LoseLifeTargetEffect(AstarionTheDecadentValue.INSTANCE), TargetController.YOU, false
         );
         ability.addTarget(new TargetOpponent());
         ability.withFirstModeFlavorWord("Feed");
@@ -59,7 +59,7 @@ public final class AstarionTheDecadent extends CardImpl {
 
         // • Friends — You gain life equal to the amount of life you gained this turn.
         ability.addMode(new Mode(new GainLifeEffect(ControllerGotLifeCount.instance)).withFlavorWord("Friends"));
-        this.addAbility(ability.addHint(AstarionTheDecadentHint.instance), new PlayerGainedLifeWatcher());
+        this.addAbility(ability.addHint(AstarionTheDecadentHint.INSTANCE), new PlayerGainedLifeWatcher());
     }
 
     private AstarionTheDecadent(final AstarionTheDecadent card) {
@@ -73,7 +73,7 @@ public final class AstarionTheDecadent extends CardImpl {
 }
 
 enum AstarionTheDecadentValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -99,7 +99,7 @@ enum AstarionTheDecadentValue implements DynamicValue {
 }
 
 enum AstarionTheDecadentHint implements Hint {
-    instance;
+    INSTANCE;
 
     @Override
     public String getText(Game game, Ability ability) {

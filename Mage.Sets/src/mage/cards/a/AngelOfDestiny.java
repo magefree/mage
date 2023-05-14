@@ -50,7 +50,7 @@ public final class AngelOfDestiny extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
                         new AngelOfDestinyLoseEffect(), TargetController.YOU, false
-                ), AngelOfDestinyCondition.instance, "At the beginning of your end step, " +
+                ), AngelOfDestinyCondition.INSTANCE, "At the beginning of your end step, " +
                 "if you have at least 15 life more than your starting life total, " +
                 "each player {this} attacked this turn loses the game."
         ), new AngelOfDestinyWatcher());
@@ -67,7 +67,7 @@ public final class AngelOfDestiny extends CardImpl {
 }
 
 enum AngelOfDestinyCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import mage.abilities.Ability;
 import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.InfoEffect;
@@ -9,7 +8,6 @@ import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.target.TargetPlayer;

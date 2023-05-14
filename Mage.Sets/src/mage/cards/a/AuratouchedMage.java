@@ -68,21 +68,19 @@ class AuratouchedMageEffect extends OneShotEffect {
             filter.add(new AuraCardCanAttachToLKIPermanentId(source.getSourceId()));
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             target.setNotTarget(true);
-            if (controller.searchLibrary(target, source, game)) {
-                if (target.getFirstTarget() != null) {
-                    Card aura = game.getCard(target.getFirstTarget());
-                    Permanent auratouchedMage = source.getSourcePermanentIfItStillExists(game);
-                    if (aura != null && auratouchedMage != null
-                            && game.getState().getZoneChangeCounter(source.getSourceId()) == source.getSourceObjectZoneChangeCounter()) {
-                        game.getState().setValue("attachTo:" + aura.getId(), auratouchedMage);
-                        if (controller.moveCards(aura, Zone.BATTLEFIELD, source, game)) {
-                            auratouchedMage.addAttachment(aura.getId(), source, game);
-                        }
-                    } else {
-                        Cards auraRevealed = new CardsImpl(aura);
-                        controller.revealCards(source, auraRevealed, game);
-                        controller.moveCards(aura, Zone.HAND, source, game);
+            if (controller.searchLibrary(target, source, game) && target.getFirstTarget() != null) {
+                Card aura = game.getCard(target.getFirstTarget());
+                Permanent auratouchedMage = source.getSourcePermanentIfItStillExists(game);
+                if (aura != null && auratouchedMage != null
+                        && game.getState().getZoneChangeCounter(source.getSourceId()) == source.getSourceObjectZoneChangeCounter()) {
+                    game.getState().setValue("attachTo:" + aura.getId(), auratouchedMage);
+                    if (controller.moveCards(aura, Zone.BATTLEFIELD, source, game)) {
+                        auratouchedMage.addAttachment(aura.getId(), source, game);
                     }
+                } else {
+                    Cards auraRevealed = new CardsImpl(aura);
+                    controller.revealCards(source, auraRevealed, game);
+                    controller.moveCards(aura, Zone.HAND, source, game);
                 }
             }
             controller.shuffleLibrary(source, game);

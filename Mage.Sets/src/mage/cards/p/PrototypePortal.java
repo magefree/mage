@@ -45,7 +45,7 @@ public final class PrototypePortal extends CardImpl {
         // {X}, {tap}: Create a token that's a copy of the exiled card. X is the converted mana cost of that card.
         Ability ability = new SimpleActivatedAbility(new PrototypePortalCreateTokenEffect(), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
-        ability.setCostAdjuster(PrototypePortalAdjuster.instance);
+        ability.setCostAdjuster(PrototypePortalAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -60,7 +60,7 @@ public final class PrototypePortal extends CardImpl {
 }
 
 enum PrototypePortalAdjuster implements CostAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustCosts(Ability ability, Game game) {

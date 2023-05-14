@@ -35,7 +35,7 @@ public final class LudevicNecroAlchemist extends CardImpl {
                 new LudevicNecroAlchemistEffect(),
                 TargetController.EACH_PLAYER,
                 false)
-                .addHint(new ConditionHint(LudevicNecroAlchemistCondition.instance, "Player other than you lost life this turn")));
+                .addHint(new ConditionHint(LudevicNecroAlchemistCondition.INSTANCE, "Player other than you lost life this turn")));
 
         // Partner
         this.addAbility(PartnerAbility.getInstance());
@@ -52,8 +52,7 @@ public final class LudevicNecroAlchemist extends CardImpl {
 }
 
 enum LudevicNecroAlchemistCondition implements Condition {
-
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -96,7 +95,7 @@ class LudevicNecroAlchemistEffect extends OneShotEffect {
         // Ludevic’s triggered ability triggers at the beginning of each player’s end step, including yours,
         // even if no player has lost life that turn. Whether or not a player has lost life is checked
         // only as the triggered ability resolves. (2016-11-08)
-        if (!LudevicNecroAlchemistCondition.instance.apply(game, source)) {
+        if (!LudevicNecroAlchemistCondition.INSTANCE.apply(game, source)) {
             return false;
         }
 

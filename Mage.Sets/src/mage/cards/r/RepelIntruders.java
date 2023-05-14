@@ -8,7 +8,6 @@ import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
 import mage.filter.common.FilterCreatureSpell;
 import mage.game.permanent.token.KithkinSoldierToken;
 import mage.target.TargetSpell;

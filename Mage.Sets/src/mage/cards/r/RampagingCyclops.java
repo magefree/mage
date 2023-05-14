@@ -35,7 +35,7 @@ public final class RampagingCyclops extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new BoostSourceEffect(-2, 0, Duration.WhileOnBattlefield),
-                        RampagingCyclopsCondition.instance,
+                        RampagingCyclopsCondition.INSTANCE,
                         "{this} gets -2/-0 as long as two or more creatures are blocking it"
                 )
         ));
@@ -52,7 +52,7 @@ public final class RampagingCyclops extends CardImpl {
 }
 
 enum RampagingCyclopsCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

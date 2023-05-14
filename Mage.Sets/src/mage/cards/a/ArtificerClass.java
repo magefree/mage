@@ -37,7 +37,7 @@ public final class ArtificerClass extends CardImpl {
     private static final FilterCard filter = new FilterArtifactCard();
 
     static {
-        filter.add(ArtificerClassPredicate.instance);
+        filter.add(ArtificerClassPredicate.INSTANCE);
     }
 
     public ArtificerClass(UUID ownerId, CardSetInfo setInfo) {
@@ -85,7 +85,7 @@ public final class ArtificerClass extends CardImpl {
 }
 
 enum ArtificerClassPredicate implements ObjectSourcePlayerPredicate<Card> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {

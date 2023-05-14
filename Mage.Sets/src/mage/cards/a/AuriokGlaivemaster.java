@@ -21,8 +21,8 @@ import mage.constants.Zone;
  * @author Loki
  */
 public final class AuriokGlaivemaster extends CardImpl {
-    private static final String rule1 = "As long as {this} is equipped, it gets +1/+1";
-    private static final String rule2 = "As long as {this} is equipped, it has first strike";
+    private static final String RULE1 = "As long as {this} is equipped, it gets +1/+1";
+    private static final String RULE2 = "As long as {this} is equipped, it has first strike";
 
     public AuriokGlaivemaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
@@ -32,9 +32,9 @@ public final class AuriokGlaivemaster extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), EquippedSourceCondition.instance, rule1);
+        ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), EquippedSourceCondition.instance, RULE1);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect1));
-        ConditionalContinuousEffect effect2 = new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), EquippedSourceCondition.instance, rule2);
+        ConditionalContinuousEffect effect2 = new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), EquippedSourceCondition.instance, RULE2);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect2));
     }
 

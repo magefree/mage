@@ -46,7 +46,7 @@ public final class RazorlashTransmogrant extends CardImpl {
                 ), new ManaCostsImpl<>("{4}{B}{B}")
         );
         ability.addEffect(new InfoEffect("This ability costs {4} less to activate if an opponent controls four or more nonbasic lands"));
-        this.addAbility(ability.setCostAdjuster(RazorlashTransmograntAdjuster.instance).addHint(RazorlashTransmograntHint.instance));
+        this.addAbility(ability.setCostAdjuster(RazorlashTransmograntAdjuster.INSTANCE).addHint(RazorlashTransmograntHint.INSTANCE));
     }
 
     private RazorlashTransmogrant(final RazorlashTransmogrant card) {
@@ -60,7 +60,7 @@ public final class RazorlashTransmogrant extends CardImpl {
 }
 
 enum RazorlashTransmograntAdjuster implements CostAdjuster {
-    instance;
+    INSTANCE;
     private static final FilterPermanent filter = new FilterLandPermanent();
 
     static {
@@ -88,7 +88,7 @@ enum RazorlashTransmograntAdjuster implements CostAdjuster {
 }
 
 enum RazorlashTransmograntHint implements Hint {
-    instance;
+    INSTANCE;
 
     @Override
     public String getText(Game game, Ability ability) {

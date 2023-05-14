@@ -25,7 +25,7 @@ import java.util.UUID;
  */
 public final class BrandedBrawlers extends CardImpl {
 
-    static final private FilterLandPermanent filter = new FilterLandPermanent("an untapped land");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("an untapped land");
 
     static {
         filter.add(TappedPredicate.UNTAPPED);

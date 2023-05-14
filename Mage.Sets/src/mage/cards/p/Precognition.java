@@ -24,13 +24,13 @@ import mage.target.common.TargetOpponent;
  */
 public final class Precognition extends CardImpl {
     
-    private static final String rule = "At the beginning of your upkeep, you may look at the top card of target opponent's library. You may put that card on the bottom of that player's library.";
+    private static final String RULE_TEXT = "At the beginning of your upkeep, you may look at the top card of target opponent's library. You may put that card on the bottom of that player's library.";
 
     public Precognition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}");
 
         // At the beginning of your upkeep, you may look at the top card of target opponent's library. If you do, you may put that card on the bottom of that player's library.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PrecognitionEffect(), TargetController.YOU, true, false, rule);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PrecognitionEffect(), TargetController.YOU, true, false, RULE_TEXT);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

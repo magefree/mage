@@ -67,17 +67,14 @@ class BattlefieldScroungerCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
-        if (controller != null) {
-            if (targets.choose(Outcome.Removal, controllerId, source.getSourceId(), source, game)) {
-                for (UUID targetId: targets.get(0).getTargets()) {
-                    Card card = game.getCard(targetId);
-                    if (card == null || game.getState().getZone(targetId) != Zone.GRAVEYARD) {
-                        return false;
-                    }
-                    paid |= controller.moveCardToLibraryWithInfo(card, source, game, Zone.GRAVEYARD, false, true);
+        if (controller != null && targets.choose(Outcome.Removal, controllerId, source.getSourceId(), source, game)) {
+            for (UUID targetId: targets.get(0).getTargets()) {
+                Card card = game.getCard(targetId);
+                if (card == null || game.getState().getZone(targetId) != Zone.GRAVEYARD) {
+                    return false;
                 }
+                paid |= controller.moveCardToLibraryWithInfo(card, source, game, Zone.GRAVEYARD, false, true);
             }
-
         }
         return paid;
     }

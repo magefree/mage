@@ -29,7 +29,7 @@ public final class MartialImpetus extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(MartialImpetusPredicate.instance);
+        filter.add(MartialImpetusPredicate.INSTANCE);
     }
 
     public MartialImpetus(UUID ownerId, CardSetInfo setInfo) {
@@ -68,7 +68,7 @@ public final class MartialImpetus extends CardImpl {
 }
 
 enum MartialImpetusPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {

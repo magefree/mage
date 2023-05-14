@@ -14,13 +14,13 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public final class Mobilize extends CardImpl {
     
-    private static final String rule = "untap all creatures you control";
+    private static final String RULE_TEXT = "untap all creatures you control";
 
     public Mobilize(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");
 
         // Untap all creatures you control.
-        this.getSpellAbility().addEffect(new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), rule));
+        this.getSpellAbility().addEffect(new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), RULE_TEXT));
     }
 
     private Mobilize(final Mobilize card) {

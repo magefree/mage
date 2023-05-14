@@ -37,7 +37,7 @@ public final class Archipelagore extends CardImpl {
                 "tap up to X target creatures, where X is the number of times this creature has mutated."
         ));
         ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect("Those creatures"));
-        ability.setTargetAdjuster(ArchipelagoreAdjuster.instance);
+        ability.setTargetAdjuster(ArchipelagoreAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -52,7 +52,7 @@ public final class Archipelagore extends CardImpl {
 }
 
 enum ArchipelagoreAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

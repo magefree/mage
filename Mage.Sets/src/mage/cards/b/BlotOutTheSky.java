@@ -36,7 +36,7 @@ public final class BlotOutTheSky extends CardImpl {
                 new InklingToken(), ManacostVariableValue.REGULAR, true, false
         ));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new DestroyAllEffect(filter), BlotOutTheSkyCondition.instance,
+                new DestroyAllEffect(filter), BlotOutTheSkyCondition.INSTANCE,
                 "If X is 6 or more, destroy all noncreature, nonland permanents"
         ));
     }
@@ -52,7 +52,7 @@ public final class BlotOutTheSky extends CardImpl {
 }
 
 enum BlotOutTheSkyCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

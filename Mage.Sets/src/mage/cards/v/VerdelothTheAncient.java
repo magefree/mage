@@ -34,7 +34,7 @@ public final class VerdelothTheAncient extends CardImpl {
             = new FilterCreaturePermanent("Saproling creatures and other Treefolk creatures");
 
     static {
-        filter.add(VerdelothTheAncientPredicate.instance);
+        filter.add(VerdelothTheAncientPredicate.INSTANCE);
     }
 
     public VerdelothTheAncient(UUID ownerId, CardSetInfo setInfo) {
@@ -71,7 +71,7 @@ public final class VerdelothTheAncient extends CardImpl {
 }
 
 enum VerdelothTheAncientPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {

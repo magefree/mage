@@ -28,7 +28,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class MightMakesRight extends CardImpl {
 
-    private static final String ruleText = "At the beginning of combat on your turn, if you control each creature on the battlefield with the greatest power, "
+    private static final String RULE_TEXT = "At the beginning of combat on your turn, if you control each creature on the battlefield with the greatest power, "
             + "gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn.";
 
     public MightMakesRight(UUID ownerId, CardSetInfo setInfo) {
@@ -41,7 +41,7 @@ public final class MightMakesRight extends CardImpl {
         gainControlAbility.addEffect(new UntapTargetEffect());
         gainControlAbility.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
         gainControlAbility.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
-        Ability conditionalAbility = new ConditionalInterveningIfTriggeredAbility(gainControlAbility, ControlsEachCreatureWithGreatestPowerCondition.instance, ruleText);
+        Ability conditionalAbility = new ConditionalInterveningIfTriggeredAbility(gainControlAbility, ControlsEachCreatureWithGreatestPowerCondition.instance, RULE_TEXT);
         this.addAbility(conditionalAbility);
     }
 

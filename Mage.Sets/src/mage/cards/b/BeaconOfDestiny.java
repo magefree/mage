@@ -95,9 +95,7 @@ class BeaconOfDestinyEffect extends RedirectionEffect {
         //   check player
         Player player = game.getPlayer(event.getTargetId());
         if (player != null) {
-            if (player.getId().equals(source.getControllerId())) {
-                return true;
-            }
+            return player.getId().equals(source.getControllerId());
         }
         return false;
     }

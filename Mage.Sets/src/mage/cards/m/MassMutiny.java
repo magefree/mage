@@ -33,7 +33,7 @@ public final class MassMutiny extends CardImpl {
 
         // For each opponent, gain control of up to one target creature that player controls until end of turn. Untap those creatures. They gain haste until end of turn.
         this.getSpellAbility().addEffect(new MassMutinyEffect());
-        this.getSpellAbility().setTargetAdjuster(MassMutinyAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(MassMutinyAdjuster.INSTANCE);
     }
 
     private MassMutiny(final MassMutiny card) {
@@ -47,7 +47,7 @@ public final class MassMutiny extends CardImpl {
 }
 
 enum MassMutinyAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

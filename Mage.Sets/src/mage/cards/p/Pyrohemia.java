@@ -23,14 +23,14 @@ import mage.game.events.GameEvent;
  */
 public final class Pyrohemia extends CardImpl {
 
-    private static final String ruleText = "At the beginning of the end step, if no creatures are on the battlefield, sacrifice {this}.";
+    private static final String RULE_TEXT = "At the beginning of the end step, if no creatures are on the battlefield, sacrifice {this}.";
 
     public Pyrohemia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}{R}");
 
         // At the beginning of the end step, if no creatures are on the battlefield, sacrifice Pyrohemia.
         TriggeredAbility triggered = new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(triggered, new CreatureCountCondition(0, TargetController.ANY), ruleText));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(triggered, new CreatureCountCondition(0, TargetController.ANY), RULE_TEXT));
 
         // {R}: Pyrohemia deals 1 damage to each creature and each player.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(1), new ManaCostsImpl<>("{R}")));

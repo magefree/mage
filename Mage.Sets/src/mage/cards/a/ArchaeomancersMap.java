@@ -48,7 +48,7 @@ public final class ArchaeomancersMap extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldAllTriggeredAbility(
                         new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A), filter2
-                ), ArchaeomancersMapCondition.instance, "Whenever a land enters the battlefield " +
+                ), ArchaeomancersMapCondition.INSTANCE, "Whenever a land enters the battlefield " +
                 "under an opponent's control, if that player controls more lands than you, " +
                 "you may put a land card from your hand onto the battlefield."
         ));
@@ -65,7 +65,7 @@ public final class ArchaeomancersMap extends CardImpl {
 }
 
 enum ArchaeomancersMapCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

@@ -37,7 +37,7 @@ public final class ValakutExploration extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
                         new ValakutExplorationDamageEffect(), TargetController.YOU, false
-                ), ValakutExplorationCondition.instance, "At the beginning of your end step, " +
+                ), ValakutExplorationCondition.INSTANCE, "At the beginning of your end step, " +
                 "if there are cards exiled with {this}, put them into their owner's graveyard, " +
                 "then {this} deals that much damage to each opponent."
         ));
@@ -54,7 +54,7 @@ public final class ValakutExploration extends CardImpl {
 }
 
 enum ValakutExplorationCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

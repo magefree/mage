@@ -22,14 +22,14 @@ import java.util.UUID;
 public final class BodyCount extends CardImpl {
 
     private static final Hint hint = new ValueHint(
-            "Creatures that died under your control this turn", BodyCountValue.instance
+            "Creatures that died under your control this turn", BodyCountValue.INSTANCE
     );
 
     public BodyCount(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}");
 
         // Draw a card for each creature that died under your control this turn.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(BodyCountValue.instance));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(BodyCountValue.INSTANCE));
         this.getSpellAbility().addHint(hint);
 
         // Spectacle {B}
@@ -47,7 +47,7 @@ public final class BodyCount extends CardImpl {
 }
 
 enum BodyCountValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

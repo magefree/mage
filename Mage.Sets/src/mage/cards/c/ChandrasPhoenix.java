@@ -87,12 +87,10 @@ class ChandrasPhoenixTriggeredAbility extends TriggeredAbilityImpl {
                     sourceObjectDamage = stackObject;
                 }
                 if (sourceObjectDamage != null) {
-                    if (sourceObjectDamage.getColor(game).isRed()
+                    return sourceObjectDamage.getColor(game).isRed()
                             && (sourceObjectDamage.isPlaneswalker(game)
                             || sourceObjectDamage.isInstant(game)
-                            || sourceObjectDamage.isSorcery(game))) {
-                        return true;
-                    }
+                            || sourceObjectDamage.isSorcery(game));
                 }
             }
         }

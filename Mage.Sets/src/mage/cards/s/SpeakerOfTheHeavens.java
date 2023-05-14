@@ -66,10 +66,7 @@ enum SpeakerOfTheHeavensCondition implements Condition {
             return false;
         }
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null || player.getLife() < game.getStartingLife() + 7) {
-            return false;
-        }
-        return true;
+        return player != null && player.getLife() >= game.getStartingLife() + 7;
     }
 
     @Override

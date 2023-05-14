@@ -22,7 +22,7 @@ public final class BodyOfResearch extends CardImpl {
 
         // Create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it, where X is the number of cards in your library.
         this.getSpellAbility().addEffect(FractalToken.getEffect(
-                BodyOfResearchValue.instance, "Put X +1/+1 counters on it, " +
+                BodyOfResearchValue.INSTANCE, "Put X +1/+1 counters on it, " +
                         "where X is the number of cards in your library"
         ));
     }
@@ -38,7 +38,7 @@ public final class BodyOfResearch extends CardImpl {
 }
 
 enum BodyOfResearchValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -48,7 +48,7 @@ enum BodyOfResearchValue implements DynamicValue {
 
     @Override
     public BodyOfResearchValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

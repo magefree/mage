@@ -25,14 +25,14 @@ import java.util.UUID;
  */
 public final class AstralConfrontation extends CardImpl {
 
-    private static final Hint hint = new ValueHint("Opponents you're attacking", AstralConfrontationValue.instance);
+    private static final Hint hint = new ValueHint("Opponents you're attacking", AstralConfrontationValue.INSTANCE);
 
     public AstralConfrontation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{W}");
 
         // This spell costs {1} less to cast for each opponent you're attacking.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionForEachSourceEffect(1, AstralConfrontationValue.instance)
+                Zone.ALL, new SpellCostReductionForEachSourceEffect(1, AstralConfrontationValue.INSTANCE)
         ).setRuleAtTheTop(true));
 
         // Exile target creature.
@@ -51,7 +51,7 @@ public final class AstralConfrontation extends CardImpl {
 }
 
 enum AstralConfrontationValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

@@ -66,12 +66,12 @@ class BaseCampConditionalMana extends ConditionalMana {
 
     public BaseCampConditionalMana(Mana mana) {
         super(mana);
-        addCondition(BaseCampCondition.instance);
+        addCondition(BaseCampCondition.INSTANCE);
     }
 }
 
 enum BaseCampCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

@@ -20,7 +20,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class PoliticalTrickery extends CardImpl {
 
-    private static final String rule = "exchange control of target land you control and target land an opponent controls";
+    private static final String RULE_TEXT = "exchange control of target land you control and target land an opponent controls";
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("land an opponent controls");
 
@@ -32,7 +32,7 @@ public final class PoliticalTrickery extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
 
         // Exchange control of target land you control and target land an opponent controls.
-        Effect effect = new ExchangeControlTargetEffect(Duration.EndOfGame, rule, false, true);
+        Effect effect = new ExchangeControlTargetEffect(Duration.EndOfGame, RULE_TEXT, false, true);
         effect.setText("exchange control of target land you control and target land an opponent controls");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetControlledPermanent(new FilterControlledLandPermanent()));

@@ -14,7 +14,6 @@ import mage.constants.*;
 import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -78,10 +77,8 @@ class AntiMagicAuraRuleEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent sourceObject = game.getPermanent(source.getSourceId());
-        if (sourceObject != null && sourceObject.getAttachedTo() != null) {
-            if (event.getTargetId().equals(sourceObject.getAttachedTo())) {
-                return !event.getSourceId().equals(source.getSourceId());
-            }
+        if (sourceObject != null && sourceObject.getAttachedTo() != null && event.getTargetId().equals(sourceObject.getAttachedTo())) {
+            return !event.getSourceId().equals(source.getSourceId());
         }
         return false;
     }

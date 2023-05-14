@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.StackObject;
 import mage.target.common.TargetAnyTarget;
 import mage.target.targetpointer.FixedTarget;

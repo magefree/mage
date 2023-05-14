@@ -54,7 +54,7 @@ public final class BribeTaker extends CardImpl {
 
 class BribeTakerEffect extends OneShotEffect {
 
-    private static final String plusName = CounterType.P1P1.getName();
+    private static final String PLUS_NAME = CounterType.P1P1.getName();
 
     BribeTakerEffect() {
         super(Outcome.Benefit);
@@ -88,26 +88,26 @@ class BribeTakerEffect extends OneShotEffect {
                 .map(HashMap::keySet)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toSet());
-        if (counterTypes.contains(plusName)) {
-            if (player.chooseUse(outcome, "Put a " + plusName +
+        if (counterTypes.contains(PLUS_NAME)) {
+            if (player.chooseUse(outcome, "Put a " + PLUS_NAME +
                     " counter on " + permanent.getName() + '?', source, game)) {
                 permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
             }
-            counterTypes.remove(plusName);
+            counterTypes.remove(PLUS_NAME);
         }
         if (counterTypes.isEmpty()) {
             return true;
         }
         for (String cType : counterTypes) {
             if (!player.chooseUse(
-                    outcome, "Put a " + cType + " counter or " + plusName +
+                    outcome, "Put a " + cType + " counter or " + PLUS_NAME +
                             " counter on " + permanent.getName() + '?', source, game
             )) {
                 continue;
             }
             CounterType counterType = player.chooseUse(
-                    outcome, "Choose " + cType + " counter or " + plusName +
-                            " counter", null, cType, plusName, source, game
+                    outcome, "Choose " + cType + " counter or " + PLUS_NAME +
+                            " counter", null, cType, PLUS_NAME, source, game
             ) ? CounterType.findByName(cType) : CounterType.P1P1;
             permanent.addCounters(counterType.createInstance(), source, game);
         }

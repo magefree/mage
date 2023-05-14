@@ -42,7 +42,7 @@ public final class WakeTheDead extends CardImpl {
 
         // Return X target creature cards from your graveyard to the battlefield. Sacrifice those creatures at the beginning of the next end step.
         this.getSpellAbility().addEffect(new WakeTheDeadReturnFromGraveyardToBattlefieldTargetEffect());
-        this.getSpellAbility().setTargetAdjuster(WakeTheDeadAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(WakeTheDeadAdjuster.INSTANCE);
     }
 
     private WakeTheDead(final WakeTheDead card) {
@@ -56,7 +56,7 @@ public final class WakeTheDead extends CardImpl {
 }
 
 enum WakeTheDeadAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

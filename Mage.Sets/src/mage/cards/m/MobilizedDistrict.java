@@ -42,7 +42,7 @@ public final class MobilizedDistrict extends CardImpl {
                 "It's still a land. This ability costs {1} less to activate " +
                 "for each legendary creature and planeswalker you control."
         ), new GenericManaCost(4));
-        ability.setCostAdjuster(MobilizedDistrictAdjuster.instance);
+        ability.setCostAdjuster(MobilizedDistrictAdjuster.INSTANCE);
         this.addAbility(ability.addHint(MobilizedDistrictAdjuster.getHint()));
     }
 
@@ -57,7 +57,7 @@ public final class MobilizedDistrict extends CardImpl {
 }
 
 enum MobilizedDistrictAdjuster implements CostAdjuster {
-    instance;
+    INSTANCE;
 
     private static final FilterPermanent filter = new FilterCreatureOrPlaneswalkerPermanent();
 

@@ -2,7 +2,6 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
@@ -91,10 +90,8 @@ class FightEnchantedTargetEffect extends OneShotEffect {
                 if (source.getTargets().get(0).isLegal(source, game)) {
                     Permanent creature1 = game.getPermanent(source.getTargets().get(0).getFirstTarget());
                     // 20110930 - 701.10
-                    if (creature1 != null && enchantedCreature != null) {
-                        if (creature1.isCreature(game) && enchantedCreature.isCreature(game)) {
-                            return enchantedCreature.fight(creature1, source, game);
-                        }
+                    if (creature1 != null && enchantedCreature != null && creature1.isCreature(game) && enchantedCreature.isCreature(game)) {
+                        return enchantedCreature.fight(creature1, source, game);
                     }
                 }
                 if (!game.isSimulation())

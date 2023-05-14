@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetAnyTarget;
 
 /**
@@ -38,7 +37,7 @@ public final class BurningVengeance extends CardImpl {
 
 class BurningVengeanceOnCastAbility extends TriggeredAbilityImpl {
 
-    private static final String abilityText = "Whenever you cast a spell from your graveyard, {this} deals 2 damage to any target";
+    private static final String ABILITY_TEXT = "Whenever you cast a spell from your graveyard, {this} deals 2 damage to any target";
 
     BurningVengeanceOnCastAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2), false);
@@ -67,6 +66,6 @@ class BurningVengeanceOnCastAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return abilityText;
+        return ABILITY_TEXT;
     }
 }

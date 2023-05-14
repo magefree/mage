@@ -30,7 +30,7 @@ public final class LoyalGyrfalcon extends CardImpl {
         filter.add(TargetController.YOU.getControllerPredicate());
     }
     
-    private static final String rule = "Whenever you cast a white spell, {this} loses defender until end of turn.";
+    private static final String RULE = "Whenever you cast a white spell, {this} loses defender until end of turn.";
 
     public LoyalGyrfalcon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
@@ -47,7 +47,7 @@ public final class LoyalGyrfalcon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // Whenever you cast a white spell, Loyal Gyrfalcon loses defender until end of turn.
-        this.addAbility(new SpellCastAllTriggeredAbility(new LoseAbilitySourceEffect(DefenderAbility.getInstance(), Duration.EndOfTurn), filter, false, rule));
+        this.addAbility(new SpellCastAllTriggeredAbility(new LoseAbilitySourceEffect(DefenderAbility.getInstance(), Duration.EndOfTurn), filter, false, RULE));
         
     }
 

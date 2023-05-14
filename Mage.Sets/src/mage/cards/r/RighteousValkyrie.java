@@ -52,7 +52,7 @@ public final class RighteousValkyrie extends CardImpl {
 
         // As long as you have at least 7 life more than your starting life total, creatures you control get +2/+2.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
-                new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield), RighteousValkyrieCondition.instance,
+                new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield), RighteousValkyrieCondition.INSTANCE,
                 "As long as you have at least 7 life more than your starting life total, creatures you control get +2/+2"
         )));
     }
@@ -96,7 +96,7 @@ class RighteousValkyrieEffect extends OneShotEffect {
 }
 
 enum RighteousValkyrieCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

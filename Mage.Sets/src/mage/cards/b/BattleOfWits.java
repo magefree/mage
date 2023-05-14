@@ -45,9 +45,6 @@ class BattleOfWitsCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null && player.getLibrary().size() >= 200) {
-            return true;
-        }
-        return false;
+        return player != null && player.getLibrary().size() >= 200;
     }
 }

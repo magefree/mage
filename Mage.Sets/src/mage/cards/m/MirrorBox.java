@@ -81,14 +81,14 @@ class MirrorBoxBoostEffect extends ContinuousEffectImpl {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN, source.getControllerId(), source, game
         )) {
-            int amount = getAmount(permanents, permanent, game);
+            int amount = getAmount(permanents, permanent);
             permanent.addPower(amount);
             permanent.addToughness(amount);
         }
         return true;
     }
 
-    private int getAmount(List<Permanent> permanents, Permanent target, Game game) {
+    private int getAmount(List<Permanent> permanents, Permanent target) {
         return permanents
                 .stream()
                 .filter(permanent -> !permanent.getId().equals(target.getId())

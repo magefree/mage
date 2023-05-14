@@ -150,7 +150,7 @@ class AminatouUltimateEffect extends OneShotEffect {
             UUID currentPlayer = playerList.get();
             UUID nextPlayer;
             UUID firstNextPlayer = null;
-            while (!getNextPlayerInDirection(left, playerList, game).equals(firstNextPlayer)) {
+            while (!getNextPlayerInDirection(left, playerList).equals(firstNextPlayer)) {
                 nextPlayer = playerList.get();
                 if (nextPlayer == null) {
                     return false;
@@ -180,7 +180,7 @@ class AminatouUltimateEffect extends OneShotEffect {
         return false;
     }
 
-    private UUID getNextPlayerInDirection(boolean left, PlayerList playerList, Game game) {
+    private UUID getNextPlayerInDirection(boolean left, PlayerList playerList) {
         UUID nextPlayerId;
         if (left) {
             nextPlayerId = playerList.getNext();

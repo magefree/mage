@@ -45,7 +45,7 @@ public final class TheBookOfVileDarkness extends CardImpl {
         // At the beginning of your end step, if you lost 2 or more life this turn, create a 2/2 black Zombie creature token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken()), TargetController.YOU,
-                TheBookOfVileDarknessCondition.instance, false
+                TheBookOfVileDarknessCondition.INSTANCE, false
         ));
 
         // {T}, Exile The Book of Vile Darkness and artifacts you control named Eye of Vecna and Hand of Vecna: Create Vecna, a legendary 8/8 black Zombie God creature token with indestructible and all triggered abilities of the exiled cards.
@@ -65,7 +65,7 @@ public final class TheBookOfVileDarkness extends CardImpl {
 }
 
 enum TheBookOfVileDarknessCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

@@ -32,7 +32,7 @@ public final class AshenmoorCohort extends CardImpl {
         filter.add(AnotherPredicate.instance);
     }
 
-    private static final String rule = "Ashenmoor Cohort gets +1/+1 as long as you control another black creature";
+    private static final String RULE_TEXT = "Ashenmoor Cohort gets +1/+1 as long as you control another black creature";
 
     public AshenmoorCohort(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}");
@@ -44,7 +44,7 @@ public final class AshenmoorCohort extends CardImpl {
 
         // Ashenmoor Cohort gets +1/+1 as long as you control another black creature.
         Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), condition, rule);
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), condition, RULE_TEXT);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
     }

@@ -28,8 +28,8 @@ public final class PhyrexianPurge extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
         this.getSpellAbility().addEffect(new InfoEffect("this spell costs 3 life more to cast for each target"));
         this.getSpellAbility().addEffect(new DestroyTargetEffect().concatBy("<br>").setText("destroy any number of target creatures"));
-        this.getSpellAbility().setTargetAdjuster(PhyrexianPurgeTargetAdjuster.instance);
-        this.getSpellAbility().setCostAdjuster(PhyrexianPurgeCostAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(PhyrexianPurgeTargetAdjuster.INSTANCE);
+        this.getSpellAbility().setCostAdjuster(PhyrexianPurgeCostAdjuster.INSTANCE);
     }
 
     private PhyrexianPurge(final PhyrexianPurge card) {
@@ -43,7 +43,7 @@ public final class PhyrexianPurge extends CardImpl {
 }
 
 enum PhyrexianPurgeCostAdjuster implements CostAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
@@ -55,7 +55,7 @@ enum PhyrexianPurgeCostAdjuster implements CostAdjuster {
 }
 
 enum PhyrexianPurgeTargetAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

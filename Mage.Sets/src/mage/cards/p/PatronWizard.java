@@ -24,7 +24,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class PatronWizard extends CardImpl {
 
-    static final private FilterControlledPermanent filter = new FilterControlledPermanent("untapped Wizard you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Wizard you control");
 
     static {
         filter.add(SubType.WIZARD.getPredicate());

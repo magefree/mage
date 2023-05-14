@@ -29,7 +29,7 @@ public final class RakshasaDebaser extends CardImpl {
         filter.add(DefendingPlayerOwnsCardPredicate.instance);
     }
 
-    private static final String rule
+    private static final String RULE_TEXT
             = "put target creature card from defending player's graveyard onto the battlefield under your control";
 
     public RakshasaDebaser(UUID ownerId, CardSetInfo setInfo) {
@@ -42,7 +42,7 @@ public final class RakshasaDebaser extends CardImpl {
 
         // Whenever Rakshasa Debaser attacks, put target creature card from defending player's graveyard onto the battlefield under your control.
         Ability ability = new AttacksTriggeredAbility(
-                new ReturnFromGraveyardToBattlefieldTargetEffect().setText(rule), false
+                new ReturnFromGraveyardToBattlefieldTargetEffect().setText(RULE_TEXT), false
         );
         ability.addTarget(new TargetCardInGraveyard(filter));
         this.addAbility(ability);

@@ -34,7 +34,7 @@ public final class PrismariApprentice extends CardImpl {
         // Magecraft — Whenever you cast or copy an instant or sorcery spell, Prismari Apprentice can't be blocked this turn. If that spell has mana value 5 or greater, put a +1/+1 counter on Prismari Apprentice.
         Ability ability = new MagecraftAbility(new CantBeBlockedSourceEffect(Duration.EndOfTurn));
         ability.addEffect(new ConditionalOneShotEffect(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance()), PrismariApprenticeCondition.instance,
+                CounterType.P1P1.createInstance()), PrismariApprenticeCondition.INSTANCE,
                 "If that spell has mana value 5 or greater, put a +1/+1 counter on {this}"
         ));
         this.addAbility(ability);
@@ -51,7 +51,7 @@ public final class PrismariApprentice extends CardImpl {
 }
 
 enum PrismariApprenticeCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

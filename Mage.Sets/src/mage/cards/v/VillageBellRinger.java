@@ -18,7 +18,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public final class VillageBellRinger extends CardImpl {
 
-    private static final String rule = "untap all creatures you control";
+    private static final String RULE_TEXT = "untap all creatures you control";
 
     public VillageBellRinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
@@ -31,7 +31,7 @@ public final class VillageBellRinger extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // When Village Bell-Ringer enters the battlefield, untap all creatures you control.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), rule), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), RULE_TEXT), false));
     }
 
     private VillageBellRinger(final VillageBellRinger card) {

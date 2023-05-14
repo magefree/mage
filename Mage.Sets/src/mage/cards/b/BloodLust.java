@@ -39,7 +39,7 @@ public final class BloodLust extends CardImpl {
         // If target creature has toughness 5 or greater, it gets +4/-4 until end of turn. Otherwise, it gets +4/-X until end of turn, where X is its toughness minus 1.
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new BoostTargetEffect(4, -4, Duration.EndOfTurn),
-                new BoostTargetEffect(StaticValue.get(4), new SignInversionDynamicValue(TargetPermanentToughnessMinus1Value.instance), Duration.WhileOnBattlefield),
+                new BoostTargetEffect(StaticValue.get(4), new SignInversionDynamicValue(TargetPermanentToughnessMinus1Value.INSTANCE), Duration.WhileOnBattlefield),
                 new TargetMatchesFilterCondition(filter),
                 "If target creature has toughness 5 or greater, it gets +4/-4 until end of turn. Otherwise, it gets +4/-X until end of turn, where X is its toughness minus 1"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -67,18 +67,15 @@ class TargetMatchesFilterCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent target = game.getBattlefield().getPermanent(source.getFirstTarget());
-        if (target != null) {
-            if (filter.match(target, source.getControllerId(), source, game)) {
-                return true;
-            }
+        if (target != null && filter.match(target, source.getControllerId(), source, game)) {
+            return true;
         }
         return false;
     }
 }
 
 enum TargetPermanentToughnessMinus1Value implements DynamicValue {
-
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -91,7 +88,7 @@ enum TargetPermanentToughnessMinus1Value implements DynamicValue {
 
     @Override
     public TargetPermanentToughnessMinus1Value copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

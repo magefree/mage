@@ -31,7 +31,7 @@ public final class PiratedCopy extends CardImpl {
             = new FilterPermanent("this creature or another creature with the same name");
 
     static {
-        filter.add(PiratedCopyPredicate.instance);
+        filter.add(PiratedCopyPredicate.INSTANCE);
     }
 
     private static final CopyApplier applier = new CopyApplier() {
@@ -75,7 +75,7 @@ public final class PiratedCopy extends CardImpl {
 }
 
 enum PiratedCopyPredicate implements ObjectSourcePlayerPredicate<MageObject> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {

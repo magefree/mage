@@ -31,9 +31,9 @@ public final class AvatarOfHope extends CardImpl {
         this.toughness = new MageInt(9);
 
         // If you have 3 or less life, Avatar of Hope costs {6} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(6, AvatarOfHopeCondition.instance)
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(6, AvatarOfHopeCondition.INSTANCE)
                 .setText("if you have 3 or less life, Avatar of Hope costs {6} less to cast"))
-                .addHint(new ConditionHint(AvatarOfHopeCondition.instance))
+                .addHint(new ConditionHint(AvatarOfHopeCondition.INSTANCE))
         );
 
         // Flying
@@ -54,8 +54,7 @@ public final class AvatarOfHope extends CardImpl {
 }
 
 enum AvatarOfHopeCondition implements Condition {
-
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

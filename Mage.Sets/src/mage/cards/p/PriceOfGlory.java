@@ -38,7 +38,7 @@ public final class PriceOfGlory extends CardImpl {
 
 class PriceOfGloryAbility extends TriggeredAbilityImpl {
 
-    private static final String staticText = "Whenever a player taps a land for mana, " +
+    private static final String STATIC_TEXT = "Whenever a player taps a land for mana, " +
             "if it's not that player's turn, destroy that land.";
 
     PriceOfGloryAbility() {
@@ -77,6 +77,6 @@ class PriceOfGloryAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return staticText;
+        return STATIC_TEXT;
     }
 }

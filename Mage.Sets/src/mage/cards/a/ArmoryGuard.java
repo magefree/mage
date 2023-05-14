@@ -21,7 +21,7 @@ import mage.filter.FilterPermanent;
  */
 public final class ArmoryGuard extends CardImpl {
     
-    private static final String rule = "Armory Guard has vigilance as long as you control a Gate";
+    private static final String RULE_TEXT = "Armory Guard has vigilance as long as you control a Gate";
     
     private static final FilterPermanent filter = new FilterPermanent("Gate");
     
@@ -38,7 +38,7 @@ public final class ArmoryGuard extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Armory Guard has vigilance as long as you control a Gate.
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(VigilanceAbility.getInstance()), new PermanentsOnTheBattlefieldCondition(filter), rule);
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(VigilanceAbility.getInstance()), new PermanentsOnTheBattlefieldCondition(filter), RULE_TEXT);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

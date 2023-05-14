@@ -37,7 +37,7 @@ public final class NarsetEnlightenedExile extends CardImpl {
 
     static {
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-        filter.add(NarsetEnlightenedExilePredicate.instance);
+        filter.add(NarsetEnlightenedExilePredicate.INSTANCE);
     }
 
     public NarsetEnlightenedExile(UUID ownerId, CardSetInfo setInfo) {
@@ -72,13 +72,12 @@ public final class NarsetEnlightenedExile extends CardImpl {
 }
 
 enum NarsetEnlightenedExilePredicate implements ObjectSourcePlayerPredicate<Card> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
         return Optional
                 .ofNullable(input.getSource().getSourcePermanentOrLKI(game))
-                .filter(Objects::nonNull)
                 .map(MageObject::getPower)
                 .map(MageInt::getValue)
                 .map(p -> input.getObject().getManaValue() < p)

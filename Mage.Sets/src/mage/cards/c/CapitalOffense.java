@@ -28,7 +28,7 @@ public final class CapitalOffense extends CardImpl {
 
         // target creature gets -x/-x until end of turn, where x is the number of times a capital letter appears in its rules text. (ignore reminder text and flavor text.)
         this.getSpellAbility().addEffect(new BoostTargetEffect(
-                capitaloffensecount.instance, capitaloffensecount.instance, Duration.EndOfTurn
+                CapitalOffenseCount.INSTANCE, CapitalOffenseCount.INSTANCE, Duration.EndOfTurn
         ).setText("target creature gets -x/-x until end of turn, where x is the number of times " +
                 "a capital letter appears in its rules text. <i>(ignore reminder text and flavor text.)</i>"
         ));
@@ -45,12 +45,12 @@ public final class CapitalOffense extends CardImpl {
     }
 }
 
-enum capitaloffensecount implements DynamicValue {
-    instance;
+enum CapitalOffenseCount implements DynamicValue {
+    INSTANCE;
 
     @Override
-    public capitaloffensecount copy() {
-        return instance;
+    public CapitalOffenseCount copy() {
+        return INSTANCE;
     }
 
     @Override

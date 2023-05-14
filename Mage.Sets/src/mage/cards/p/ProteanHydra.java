@@ -19,7 +19,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -76,10 +75,7 @@ public final class ProteanHydra extends CardImpl {
 
         @Override
         public boolean checkTrigger(GameEvent event, Game game) {
-            if (event.getData().equals("+1/+1") && event.getTargetId().equals(this.getSourceId())) {
-                return true;
-            }
-            return false;
+            return event.getData().equals("+1/+1") && event.getTargetId().equals(this.getSourceId());
         }
 
         @Override

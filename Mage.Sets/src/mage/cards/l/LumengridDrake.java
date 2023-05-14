@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class LumengridDrake extends CardImpl {
 
-    private static final String ruleText = "When {this} enters the battlefield, if you control three or more artifacts, return target creature to its owner's hand.";
+    private static final String RULE_TEXT = "When {this} enters the battlefield, if you control three or more artifacts, return target creature to its owner's hand.";
 
     public LumengridDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
@@ -37,7 +37,7 @@ public final class LumengridDrake extends CardImpl {
 
         // Metalcraft — When Lumengrid Drake enters the battlefield, if you control three or more artifacts, return target creature to its owner's hand.
         TriggeredAbility conditional = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()), MetalcraftCondition.instance, ruleText);
+                new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()), MetalcraftCondition.instance, RULE_TEXT);
         conditional.addTarget(new TargetCreaturePermanent());
         conditional.setAbilityWord(AbilityWord.METALCRAFT);
         conditional.addHint(MetalcraftHint.instance);

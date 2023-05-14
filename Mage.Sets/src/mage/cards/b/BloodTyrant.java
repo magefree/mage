@@ -110,10 +110,8 @@ class BloodTyrantEffect extends OneShotEffect {
         if (controller != null) {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    if (player.loseLife(1, game, source, false) > 0) {
-                        counters++;
-                    }
+                if (player != null && player.loseLife(1, game, source, false) > 0) {
+                    counters++;
                 }
             }
             Permanent bloodTyrant = game.getPermanent(source.getSourceId());

@@ -38,7 +38,7 @@ public final class BackstreetBruiser extends CardImpl {
         // As long as there are two or more counters among creatures you control, Backstreet Bruiser can attack as though it didn't have defender.
         this.addAbility(new SimpleStaticAbility(new ConditionalAsThoughEffect(
                 new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield),
-                BackstreetBruiserCondition.instance
+                BackstreetBruiserCondition.INSTANCE
         ).setText("As long as there are two or more counters among creatures you control, {this} can attack as though it didn't have defender")));
     }
 
@@ -53,7 +53,7 @@ public final class BackstreetBruiser extends CardImpl {
 }
 
 enum BackstreetBruiserCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

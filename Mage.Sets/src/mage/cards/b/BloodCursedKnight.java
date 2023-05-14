@@ -24,8 +24,8 @@ import mage.filter.common.FilterControlledEnchantmentPermanent;
  */
 public final class BloodCursedKnight extends CardImpl {
 
-    static final private String rule1 = "As long as you control an enchantment, {this} gets +1/+1";
-    static final private String rule2 = "and has lifelink";
+    private static final String RULE1 = "As long as you control an enchantment, {this} gets +1/+1";
+    private static final String RULE2 = "and has lifelink";
 
     public BloodCursedKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{B}");
@@ -37,10 +37,10 @@ public final class BloodCursedKnight extends CardImpl {
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield),
-                        new PermanentsOnTheBattlefieldCondition(new FilterControlledEnchantmentPermanent()), rule1));
+                        new PermanentsOnTheBattlefieldCondition(new FilterControlledEnchantmentPermanent()), RULE1));
         ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield),
-                new PermanentsOnTheBattlefieldCondition(new FilterControlledEnchantmentPermanent()), rule2));
+                new PermanentsOnTheBattlefieldCondition(new FilterControlledEnchantmentPermanent()), RULE2));
         this.addAbility(ability);
     }
 

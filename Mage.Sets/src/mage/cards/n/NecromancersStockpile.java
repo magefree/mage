@@ -34,7 +34,7 @@ public final class NecromancersStockpile extends CardImpl {
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE_A)));
         ability.addEffect(new ConditionalOneShotEffect(
                 new CreateTokenEffect(new ZombieToken(), 1, true, false),
-                NecromancersStockpileCondition.instance
+                NecromancersStockpileCondition.INSTANCE
         ));
         this.addAbility(ability);
     }
@@ -50,7 +50,7 @@ public final class NecromancersStockpile extends CardImpl {
 }
 
 enum NecromancersStockpileCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

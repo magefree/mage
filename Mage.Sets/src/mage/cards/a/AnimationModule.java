@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -147,32 +146,30 @@ class AnimationModuleEffect extends OneShotEffect {
                 }
             } else {
                 Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-                if (player != null) {
-                    if (!player.getCounters().isEmpty()) {
-                        if (player.getCounters().size() == 1) {
+                if (player != null && !player.getCounters().isEmpty()) {
+                    if (player.getCounters().size() == 1) {
+                        for (Counter counter : player.getCounters().values()) {
+                            Counter newCounter = new Counter(counter.getName());
+                            player.addCounters(newCounter, source.getControllerId(), source, game);
+                        }
+                    } else {
+                        Choice choice = new ChoiceImpl(true);
+                        Set<String> choices = new LinkedHashSet<>();
+                        for (Counter counter : player.getCounters().values()) {
+                            choices.add(counter.getName());
+                        }
+                        choice.setChoices(choices);
+                        choice.setMessage("Choose a counter");
+                        if (controller.choose(Outcome.Benefit, choice, game)) {
                             for (Counter counter : player.getCounters().values()) {
-                                Counter newCounter = new Counter(counter.getName());
-                                player.addCounters(newCounter, source.getControllerId(), source, game);
+                                if (counter.getName().equals(choice.getChoice())) {
+                                    Counter newCounter = new Counter(counter.getName());
+                                    player.addCounters(newCounter, source.getControllerId(), source, game);
+                                    break;
+                                }
                             }
                         } else {
-                            Choice choice = new ChoiceImpl(true);
-                            Set<String> choices = new LinkedHashSet<>();
-                            for (Counter counter : player.getCounters().values()) {
-                                choices.add(counter.getName());
-                            }
-                            choice.setChoices(choices);
-                            choice.setMessage("Choose a counter");
-                            if (controller.choose(Outcome.Benefit, choice, game)) {
-                                for (Counter counter : player.getCounters().values()) {
-                                    if (counter.getName().equals(choice.getChoice())) {
-                                        Counter newCounter = new Counter(counter.getName());
-                                        player.addCounters(newCounter, source.getControllerId(), source, game);
-                                        break;
-                                    }
-                                }
-                            } else {
-                                return false;
-                            }
+                            return false;
                         }
                     }
                 }

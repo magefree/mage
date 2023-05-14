@@ -32,7 +32,7 @@ public final class OpenIntoWonder extends CardImpl {
         Ability abilityToGain = new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), false);
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(abilityToGain, Duration.EndOfTurn,
                 "Until end of turn, those creatures gain \"Whenever this creature deals combat damage to a player, draw a card.\""));
-        this.getSpellAbility().setTargetAdjuster(OpenIntoWonderAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(OpenIntoWonderAdjuster.INSTANCE);
     }
 
     private OpenIntoWonder(final OpenIntoWonder card) {
@@ -46,7 +46,7 @@ public final class OpenIntoWonder extends CardImpl {
 }
 
 enum OpenIntoWonderAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

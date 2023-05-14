@@ -32,7 +32,7 @@ public final class RoarOfResistance extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures attacking your opponents");
 
     static {
-        filter.add(RoarOfResistancePredicate.instance);
+        filter.add(RoarOfResistancePredicate.INSTANCE);
     }
 
     public RoarOfResistance(UUID ownerId, CardSetInfo setInfo) {
@@ -61,7 +61,7 @@ public final class RoarOfResistance extends CardImpl {
 }
 
 enum RoarOfResistancePredicate implements ObjectSourcePlayerPredicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {

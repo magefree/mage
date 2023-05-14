@@ -24,7 +24,7 @@ public final class ChangeOfFortune extends CardImpl {
 
         // Discard your hand, then draw a card for each card you've discarded this turn.
         this.getSpellAbility().addEffect(new DiscardHandControllerEffect());
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ChangeOfFortuneValue.instance).concatBy(", then"));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ChangeOfFortuneValue.INSTANCE).concatBy(", then"));
         this.getSpellAbility().addWatcher(new DiscardedCardWatcher());
     }
 
@@ -39,7 +39,7 @@ public final class ChangeOfFortune extends CardImpl {
 }
 
 enum ChangeOfFortuneValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -48,7 +48,7 @@ enum ChangeOfFortuneValue implements DynamicValue {
 
     @Override
     public ChangeOfFortuneValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

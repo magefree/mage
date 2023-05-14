@@ -61,11 +61,8 @@ class CemeteryRecruitmentEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Card card = game.getCard(targetPointer.getFirst(game, source));
-            if (card != null) {
-                if (controller.moveCards(card, Zone.HAND, source, game)
-                        && card.hasSubtype(SubType.ZOMBIE, game)) {
-                    controller.drawCards(1, source, game);
-                }
+            if (card != null && controller.moveCards(card, Zone.HAND, source, game) && card.hasSubtype(SubType.ZOMBIE, game)) {
+                controller.drawCards(1, source, game);
             }
             return true;
         }

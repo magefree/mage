@@ -29,7 +29,7 @@ public final class RiveteersAscendancy extends CardImpl {
             = new FilterCreatureCard("creature card with lesser mana value from your graveyard");
 
     static {
-        filter.add(RiveteersAscendancyPredicate.instance);
+        filter.add(RiveteersAscendancyPredicate.INSTANCE);
     }
 
     public RiveteersAscendancy(UUID ownerId, CardSetInfo setInfo) {
@@ -55,7 +55,7 @@ public final class RiveteersAscendancy extends CardImpl {
 }
 
 enum RiveteersAscendancyPredicate implements ObjectSourcePlayerPredicate<Card> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {

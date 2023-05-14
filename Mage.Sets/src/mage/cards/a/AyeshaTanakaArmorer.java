@@ -37,7 +37,7 @@ public final class AyeshaTanakaArmorer extends CardImpl {
     private static final FilterPermanent filter2 = new FilterControlledArtifactPermanent();
 
     static {
-        filter.add(AyeshaTanakaArmorerPredicate.instance);
+        filter.add(AyeshaTanakaArmorerPredicate.INSTANCE);
         filter2.add(DefendingPlayerControlsPredicate.instance);
     }
 
@@ -78,7 +78,7 @@ public final class AyeshaTanakaArmorer extends CardImpl {
 }
 
 enum AyeshaTanakaArmorerPredicate implements ObjectSourcePlayerPredicate<Card> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {

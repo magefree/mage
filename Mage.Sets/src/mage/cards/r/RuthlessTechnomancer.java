@@ -57,7 +57,7 @@ public final class RuthlessTechnomancer extends CardImpl {
                 new ManaCostsImpl<>("{2}{B}")
         );
         ability.addCost(new SacrificeXTargetCost(filter, false, 1));
-        this.addAbility(ability.setTargetAdjuster(RuthlessTechnomancerAdjuster.instance));
+        this.addAbility(ability.setTargetAdjuster(RuthlessTechnomancerAdjuster.INSTANCE));
     }
 
     private RuthlessTechnomancer(final RuthlessTechnomancer card) {
@@ -71,7 +71,7 @@ public final class RuthlessTechnomancer extends CardImpl {
 }
 
 enum RuthlessTechnomancerAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

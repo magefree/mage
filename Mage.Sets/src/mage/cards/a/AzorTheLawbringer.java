@@ -131,9 +131,7 @@ class AzorTheLawbringerCantCastEffect extends ContinuousRuleModifyingEffectImpl 
                 if (opponentId.equals(event.getPlayerId())) {
                     MageObject object = game.getObject(event.getSourceId());
                     if (event.getType() == GameEvent.EventType.CAST_SPELL) {
-                        if (object.isInstantOrSorcery(game)) {
-                            return true;
-                        }
+                        return object.isInstantOrSorcery(game);
                     }
                 }
             } else {

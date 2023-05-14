@@ -54,7 +54,7 @@ public final class OldGrowthTroll extends CardImpl {
         // When Old-Growth Troll dies, if it was a creature, return it to the battlefield. It's an Aura enchantment with enchant Forest you control and "Enchanted Forest has '{T}: Add {G}{G}' and '{1}, {T}, Sacrifice this land: Create a 4/4 green Troll Warrior creature token with trample.'"
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new DiesSourceTriggeredAbility(new OldGrowthTrollReturnEffect()),
-                OldGrowthTrollCondition.instance, "When {this} dies, if it was a creature, " +
+                OldGrowthTrollCondition.INSTANCE, "When {this} dies, if it was a creature, " +
                 "return it to the battlefield. It's an Aura enchantment with enchant Forest you control " +
                 "and \"Enchanted Forest has '{T}: Add {G}{G}' and '{1}, {T}, Sacrifice this land: " +
                 "Create a tapped 4/4 green Troll Warrior creature token with trample.'\""
@@ -72,7 +72,7 @@ public final class OldGrowthTroll extends CardImpl {
 }
 
 enum OldGrowthTrollCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

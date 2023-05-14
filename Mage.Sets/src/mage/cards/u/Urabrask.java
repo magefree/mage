@@ -53,7 +53,7 @@ public final class Urabrask extends CardImpl {
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalActivatedAbility(
                 new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED),
-                new ManaCostsImpl<>("{R}"), UrabraskCondition.instance
+                new ManaCostsImpl<>("{R}"), UrabraskCondition.INSTANCE
         ).setTiming(TimingRule.SORCERY), new SpellsCastWatcher());
     }
 
@@ -68,7 +68,7 @@ public final class Urabrask extends CardImpl {
 }
 
 enum UrabraskCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

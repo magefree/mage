@@ -29,7 +29,7 @@ public final class RoccoCabarettiCaterer extends CardImpl {
     private static final FilterCard filter = new FilterCreatureCard("creature card with mana value X or less");
 
     static {
-        filter.add(RoccoCabarettiCatererPredicate.instance);
+        filter.add(RoccoCabarettiCatererPredicate.INSTANCE);
     }
 
     public RoccoCabarettiCaterer(UUID ownerId, CardSetInfo setInfo) {
@@ -65,7 +65,7 @@ public final class RoccoCabarettiCaterer extends CardImpl {
 }
 
 enum RoccoCabarettiCatererPredicate implements ObjectSourcePlayerPredicate<Card> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {

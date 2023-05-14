@@ -40,7 +40,7 @@ public final class AmberGristleOMaul extends CardImpl {
 
         // Whenver Amber Gristle O'Maul attacks, you may discard your hand. If you do, draw a card for each player you're attacking.
         this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(
-                new DrawCardSourceControllerEffect(AmberGristleOMaulValue.instance), new DiscardHandCost()
+                new DrawCardSourceControllerEffect(AmberGristleOMaulValue.INSTANCE), new DiscardHandCost()
         )));
 
         // Choose a Background
@@ -58,7 +58,7 @@ public final class AmberGristleOMaul extends CardImpl {
 }
 
 enum AmberGristleOMaulValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

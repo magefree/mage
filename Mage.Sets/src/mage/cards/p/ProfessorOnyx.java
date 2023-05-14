@@ -39,7 +39,7 @@ public final class ProfessorOnyx extends CardImpl {
     );
 
     static {
-        filter.add(ProfessorOnyxPredicate.instance);
+        filter.add(ProfessorOnyxPredicate.INSTANCE);
     }
 
     public ProfessorOnyx(UUID ownerId, CardSetInfo setInfo) {
@@ -77,7 +77,7 @@ public final class ProfessorOnyx extends CardImpl {
 }
 
 enum ProfessorOnyxPredicate implements Predicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Permanent input, Game game) {

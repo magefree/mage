@@ -30,7 +30,7 @@ public final class VesuvanDuplimancy extends CardImpl {
             = new FilterSpell("a spell that targets only a single artifact or creature you control");
 
     static {
-        filter.add(VesuvanDuplimancyPredicate.instance);
+        filter.add(VesuvanDuplimancyPredicate.INSTANCE);
     }
 
     public VesuvanDuplimancy(UUID ownerId, CardSetInfo setInfo) {
@@ -51,7 +51,7 @@ public final class VesuvanDuplimancy extends CardImpl {
 }
 
 enum VesuvanDuplimancyPredicate implements ObjectSourcePlayerPredicate<Spell> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Spell> input, Game game) {

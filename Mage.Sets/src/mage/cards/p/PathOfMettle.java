@@ -26,7 +26,7 @@ public final class PathOfMettle extends CardImpl {
 
     private static final FilterCreaturePermanent filterDamage = new FilterCreaturePermanent("creature that doesn't have first strike, double strike, vigilance, or haste");
     private static final FilterCreaturePermanent filterTransform = new FilterCreaturePermanent("creatures that have first strike, double strike, vigilance, and/or haste");
-    private static final String triggerPhrase = "Whenever you attack with at least two " + filterTransform.getMessage() + ", ";
+    private static final String TRIGGER_PHRASE = "Whenever you attack with at least two " + filterTransform.getMessage() + ", ";
 
     static {
         filterDamage.add(Predicates.not(Predicates.or(
@@ -56,7 +56,7 @@ public final class PathOfMettle extends CardImpl {
 
         // Whenever you attack with at least two creatures that have first strike, double strike, vigilance, and/or haste, transform Path of Mettle.
         this.addAbility(new TransformAbility());
-        this.addAbility(new AttacksWithCreaturesTriggeredAbility(new TransformSourceEffect(), 2, filterTransform).setTriggerPhrase(triggerPhrase));
+        this.addAbility(new AttacksWithCreaturesTriggeredAbility(new TransformSourceEffect(), 2, filterTransform).setTriggerPhrase(TRIGGER_PHRASE));
     }
 
     private PathOfMettle(final PathOfMettle card) {

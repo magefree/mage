@@ -2,7 +2,6 @@ package mage.cards.o;
 
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.keyword.DisturbAbility;
 import mage.cards.CardImpl;

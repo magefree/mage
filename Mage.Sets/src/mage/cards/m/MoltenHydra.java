@@ -40,7 +40,7 @@ public final class MoltenHydra extends CardImpl {
 
         // {tap}, Remove all +1/+1 counters from Molten Hydra: Molten Hydra deals damage to any target equal to the number of +1/+1 counters removed this way.
         Ability ability = new SimpleActivatedAbility(
-                new DamageTargetEffect(MoltenHydraDynamicValue.instance), new TapSourceCost()
+                new DamageTargetEffect(MoltenHydraDynamicValue.INSTANCE), new TapSourceCost()
         );
         ability.addCost(new RemoveAllCountersSourceCost(CounterType.P1P1));
         ability.addTarget(new TargetAnyTarget());
@@ -59,7 +59,7 @@ public final class MoltenHydra extends CardImpl {
 }
 
 enum MoltenHydraDynamicValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -74,7 +74,7 @@ enum MoltenHydraDynamicValue implements DynamicValue {
 
     @Override
     public MoltenHydraDynamicValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

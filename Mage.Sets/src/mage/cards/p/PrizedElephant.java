@@ -26,7 +26,7 @@ import mage.filter.common.FilterLandPermanent;
  */
 public final class PrizedElephant extends CardImpl {
     
-    private static final String rule = "{this} gets +1/+1 as long as you control a Forest";
+    private static final String RULE_TEXT = "{this} gets +1/+1 as long as you control a Forest";
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Forest");
     
     static {
@@ -44,7 +44,7 @@ public final class PrizedElephant extends CardImpl {
         // Prized Elephant gets +1/+1 as long as you control a Forest.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield),
-                new PermanentsOnTheBattlefieldCondition(filter), rule)));
+                new PermanentsOnTheBattlefieldCondition(filter), RULE_TEXT)));
         
         // {G}: Prized Elephant gains trample until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{G}"));

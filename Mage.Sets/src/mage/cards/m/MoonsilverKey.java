@@ -27,7 +27,7 @@ public final class MoonsilverKey extends CardImpl {
             = new FilterCard("an artifact card with a mana ability or a basic land card");
 
     static {
-        filter.add(MoonsilverKeyPredicate.instance);
+        filter.add(MoonsilverKeyPredicate.INSTANCE);
     }
 
     public MoonsilverKey(UUID ownerId, CardSetInfo setInfo) {
@@ -53,7 +53,7 @@ public final class MoonsilverKey extends CardImpl {
 }
 
 enum MoonsilverKeyPredicate implements Predicate<Card> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Card input, Game game) {

@@ -24,8 +24,8 @@ import mage.filter.common.FilterControlledPermanent;
  */
 public final class AngelicOverseer extends CardImpl {
 
-    private static final String rule1 = "As long as you control a Human, {this} has hexproof";
-    private static final String rule2 = "and is indestructible";
+    private static final String RULE1 = "As long as you control a Human, {this} has hexproof";
+    private static final String RULE2 = "and is indestructible";
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Human");
 
     static {
@@ -43,9 +43,9 @@ public final class AngelicOverseer extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // As long as you control a Human, Angelic Overseer has hexproof and is indestructible.
-        ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new GainAbilitySourceEffect(HexproofAbility.getInstance()), new PermanentsOnTheBattlefieldCondition(filter), rule1);
+        ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new GainAbilitySourceEffect(HexproofAbility.getInstance()), new PermanentsOnTheBattlefieldCondition(filter), RULE1);
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect1);
-        ConditionalContinuousEffect effect2 = new ConditionalContinuousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance()), new PermanentsOnTheBattlefieldCondition(filter), rule2);
+        ConditionalContinuousEffect effect2 = new ConditionalContinuousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance()), new PermanentsOnTheBattlefieldCondition(filter), RULE2);
         ability.addEffect(effect2);
         this.addAbility(ability);
     }

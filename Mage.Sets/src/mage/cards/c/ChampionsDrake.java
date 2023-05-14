@@ -24,7 +24,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public final class ChampionsDrake extends CardImpl {
 
-    private static final String rule = "{this} gets +3/+3 as long as you control a creature with three or more level counters on it.";
+    private static final String RULE_TEXT = "{this} gets +3/+3 as long as you control a creature with three or more level counters on it.";
 
     public ChampionsDrake(UUID ownerId, CardSetInfo setInfo) {
 
@@ -38,7 +38,7 @@ public final class ChampionsDrake extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Champion's Drake gets +3/+3 as long as you control a creature with three or more level counters on it.
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield), new PermanentHasCounterCondition(CounterType.LEVEL, 2, new FilterControlledCreaturePermanent(), ComparisonType.MORE_THAN), rule);
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield), new PermanentHasCounterCondition(CounterType.LEVEL, 2, new FilterControlledCreaturePermanent(), ComparisonType.MORE_THAN), RULE_TEXT);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

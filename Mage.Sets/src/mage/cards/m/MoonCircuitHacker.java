@@ -38,7 +38,7 @@ public final class MoonCircuitHacker extends CardImpl {
                 new DrawCardSourceControllerEffect(1), true
         );
         ability.addEffect(new ConditionalOneShotEffect(
-                new DiscardControllerEffect(1), MoonCircuitHackerCondition.instance,
+                new DiscardControllerEffect(1), MoonCircuitHackerCondition.INSTANCE,
                 "If you do, discard a card unless {this} entered the battlefield this turn"
         ));
         this.addAbility(ability);
@@ -55,7 +55,7 @@ public final class MoonCircuitHacker extends CardImpl {
 }
 
 enum MoonCircuitHackerCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

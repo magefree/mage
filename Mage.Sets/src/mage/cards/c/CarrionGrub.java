@@ -35,7 +35,7 @@ public final class CarrionGrub extends CardImpl {
 
         // Carrion Grub gets +X/+0, where X is the greatest power among creature cards in your graveyard.
         this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(
-                CarrionGrubValue.instance, StaticValue.get(0), Duration.WhileOnBattlefield
+                CarrionGrubValue.INSTANCE, StaticValue.get(0), Duration.WhileOnBattlefield
         )));
 
         // When Carrion Grub enters the battlefield, mill four cards.
@@ -53,7 +53,7 @@ public final class CarrionGrub extends CardImpl {
 }
 
 enum CarrionGrubValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -74,7 +74,7 @@ enum CarrionGrubValue implements DynamicValue {
 
     @Override
     public CarrionGrubValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

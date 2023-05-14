@@ -34,7 +34,7 @@ public final class MadDog extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of your end step, if Mad Dog didn't attack or come under your control this turn, sacrifice it.
-        Condition condition = new InvertCondition(new OrCondition(AttackedThisTurnSourceCondition.instance, MadDogCondition.instance));
+        Condition condition = new InvertCondition(new OrCondition(AttackedThisTurnSourceCondition.instance, MadDogCondition.INSTANCE));
         Ability ability = new ConditionalInterveningIfTriggeredAbility(new BeginningOfEndStepTriggeredAbility(
                 new SacrificeSourceEffect(), TargetController.YOU, false), condition,
                 "At the beginning of your end step, if {this} didn't attack or come under your control this turn, sacrifice it");
@@ -54,7 +54,7 @@ public final class MadDog extends CardImpl {
 }
 
 enum MadDogCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

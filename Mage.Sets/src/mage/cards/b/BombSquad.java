@@ -89,13 +89,11 @@ class BombSquadTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getData().equals(CounterType.FUSE.getName())) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (StaticFilters.FILTER_PERMANENT_CREATURE.match(permanent, game)) {
-                if (4 <= permanent.getCounters(game).getCount(CounterType.FUSE)) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(permanent, game));
-                    }
-                    return true;
+            if (StaticFilters.FILTER_PERMANENT_CREATURE.match(permanent, game) && permanent.getCounters(game).getCount(CounterType.FUSE) >= 4) {
+                for (Effect effect : this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(permanent, game));
                 }
+                return true;
             }
         }
         return false;

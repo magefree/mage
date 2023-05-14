@@ -58,7 +58,7 @@ class MarshlandBloodcasterEffect extends ContinuousEffectImpl {
 
     private static final FilterCard filter = new FilterCard("a spell");
     private final AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(
-            SourceIsSpellCondition.instance, null, filter, true, MarshlandBloodcasterCost.instance
+            SourceIsSpellCondition.instance, null, filter, true, MarshlandBloodcasterCost.INSTANCE
     );
     private int spellsCast = -1;
 
@@ -104,7 +104,7 @@ class MarshlandBloodcasterEffect extends ContinuousEffectImpl {
 }
 
 enum MarshlandBloodcasterCost implements DynamicCost {
-    instance;
+    INSTANCE;
 
     @Override
     public Cost getCost(Ability ability, Game game) {

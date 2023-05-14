@@ -22,14 +22,14 @@ import java.util.UUID;
  */
 public final class TaintedSigil extends CardImpl {
 
-    private static final String rule = "You gain life equal to the total life lost by all players this turn";
+    private static final String RULE_TEXT = "You gain life equal to the total life lost by all players this turn";
 
     public TaintedSigil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{W}{B}");
 
         // {tap}, Sacrifice Tainted Sigil: You gain life equal to the total life lost by all players this turn.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD, new GainLifeEffect(AllPlayersLostLifeCount.instance, rule), new TapSourceCost()
+                Zone.BATTLEFIELD, new GainLifeEffect(AllPlayersLostLifeCount.INSTANCE, RULE_TEXT), new TapSourceCost()
         );
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
@@ -47,7 +47,7 @@ public final class TaintedSigil extends CardImpl {
 }
 
 enum AllPlayersLostLifeCount implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -68,7 +68,7 @@ enum AllPlayersLostLifeCount implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

@@ -33,8 +33,8 @@ public final class BlazethornScarecrow extends CardImpl {
         filter2.add(new ColorPredicate(ObjectColor.GREEN));
     }
     
-    private static final String rule = "{this} has haste as long as you control a red creature";
-    private static final String rule2 = "{this} has wither as long as you control a green creature";
+    private static final String RULE = "{this} has haste as long as you control a red creature";
+    private static final String RULE2 = "{this} has wither as long as you control a green creature";
     
     public BlazethornScarecrow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");
@@ -44,12 +44,11 @@ public final class BlazethornScarecrow extends CardImpl {
 
         // Blazethorn Scarecrow has haste as long as you control a red creature.
         ContinuousEffect effect = new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect, new PermanentsOnTheBattlefieldCondition(filter), rule)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect, new PermanentsOnTheBattlefieldCondition(filter), RULE)));
         
         // Blazethorn Scarecrow has wither as long as you control a green creature.
         ContinuousEffect effect2 = new GainAbilitySourceEffect(WitherAbility.getInstance(), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect2, new PermanentsOnTheBattlefieldCondition(filter2), rule2)));
-        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect2, new PermanentsOnTheBattlefieldCondition(filter2), RULE2)));
     }
 
     private BlazethornScarecrow(final BlazethornScarecrow card) {

@@ -40,7 +40,7 @@ public final class MarchOfOtherworldlyLight extends CardImpl {
         this.getSpellAbility().addEffect(new ExileTargetEffect(
                 "exile target artifact, creature, or enchantment with mana value X or less"
         ));
-        this.getSpellAbility().setTargetAdjuster(MarchOfOtherworldlyLightAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(MarchOfOtherworldlyLightAdjuster.INSTANCE);
     }
 
     private MarchOfOtherworldlyLight(final MarchOfOtherworldlyLight card) {
@@ -54,7 +54,7 @@ public final class MarchOfOtherworldlyLight extends CardImpl {
 }
 
 enum MarchOfOtherworldlyLightAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

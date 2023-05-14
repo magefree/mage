@@ -29,7 +29,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  */
 public final class TaigamOjutaiMaster extends CardImpl {
 
-    private static final String effectText = "Whenever you cast an instant or sorcery spell from your hand, if {this} attacked this turn, that spell gains rebound.";
+    private static final String EFFECT_TEXT = "Whenever you cast an instant or sorcery spell from your hand, if {this} attacked this turn, that spell gains rebound.";
     private static final FilterSpell filter = new FilterSpell("Instant, Sorcery, and Dragon spells you control");
 
     static {
@@ -56,7 +56,7 @@ public final class TaigamOjutaiMaster extends CardImpl {
         // Whenever you cast an instant or sorcery spell from your hand, if Taigam, Ojutai Master attacked this turn, that spell gains rebound.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(new TaigamOjutaiMasterTriggeredAbility(),
                 AttackedThisTurnSourceCondition.instance,
-                effectText);
+                EFFECT_TEXT);
         this.addAbility(ability, new AttackedThisTurnWatcher());
     }
 

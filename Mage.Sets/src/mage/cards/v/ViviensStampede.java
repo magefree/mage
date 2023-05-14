@@ -48,7 +48,7 @@ public final class ViviensStampede extends CardImpl {
         // At the beginning of the next main phase this turn, draw a card for each player who was dealt combat damage this turn.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(
                 new AtTheBeginOfMainPhaseDelayedTriggeredAbility(
-                        new DrawCardSourceControllerEffect(ViviensStampedeValue.instance),
+                        new DrawCardSourceControllerEffect(ViviensStampedeValue.INSTANCE),
                         false, TargetController.ANY,
                         AtTheBeginOfMainPhaseDelayedTriggeredAbility.PhaseSelection.NEXT_MAIN_THIS_TURN
                 )
@@ -67,7 +67,7 @@ public final class ViviensStampede extends CardImpl {
 }
 
 enum ViviensStampedeValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

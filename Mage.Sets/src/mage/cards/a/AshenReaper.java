@@ -44,7 +44,7 @@ public final class AshenReaper extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new ConditionalOneShotEffect(
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                        AshenReaperCondition.instance, "put a +1/+1 counter on {this} " +
+                        AshenReaperCondition.INSTANCE, "put a +1/+1 counter on {this} " +
                         "if a permanent was put into a graveyard from the battlefield this turn"
                 ), TargetController.YOU, false
         ));
@@ -65,7 +65,7 @@ public final class AshenReaper extends CardImpl {
 }
 
 enum AshenReaperCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

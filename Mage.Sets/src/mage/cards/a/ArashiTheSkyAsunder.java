@@ -28,7 +28,7 @@ import mage.target.TargetPermanent;
  */
 public final class ArashiTheSkyAsunder extends CardImpl {
 
-    static final private FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 
     static {
         filter.add(new AbilityPredicate(FlyingAbility.class));

@@ -81,12 +81,12 @@ class OrbOfDragonkindConditionalMana extends ConditionalMana {
     public OrbOfDragonkindConditionalMana(Mana mana) {
         super(mana);
         this.staticText = "Spend this mana only to cast Dragon spells or activate abilities of Dragons";
-        addCondition(OrbOfDragonkindManaCondition.instance);
+        addCondition(OrbOfDragonkindManaCondition.INSTANCE);
     }
 }
 
 enum OrbOfDragonkindManaCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

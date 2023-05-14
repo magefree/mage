@@ -35,7 +35,7 @@ public final class Aurification extends CardImpl {
         filter.add(CounterType.GOLD.getPredicate());
     }
 
-    static final String rule = "Each creature with a gold counter on it is a Wall in addition to its other creature types and has defender.";
+    static final String RULE_TEXT = "Each creature with a gold counter on it is a Wall in addition to its other creature types and has defender.";
 
     public Aurification(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
@@ -48,7 +48,7 @@ public final class Aurification extends CardImpl {
         becomesSubtypeAllEffect.setText("");
 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, becomesSubtypeAllEffect));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(DefenderAbility.getInstance(), Duration.WhileOnBattlefield, filter, rule)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(DefenderAbility.getInstance(), Duration.WhileOnBattlefield, filter, RULE_TEXT)));
 
         // When Aurification leaves the battlefield, remove all gold counters from all creatures.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new RemoveAllGoldCountersEffect(), false));

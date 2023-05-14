@@ -28,7 +28,7 @@ public final class PartWater extends CardImpl {
         effect.setText("X target creatures gain islandwalk until end of turn");
         this.getSpellAbility().getEffects().add(effect);
         this.getSpellAbility().getTargets().add(new TargetCreaturePermanent());
-        this.getSpellAbility().setTargetAdjuster(PartWaterAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(PartWaterAdjuster.INSTANCE);
     }
 
     private PartWater(final PartWater card) {
@@ -42,7 +42,7 @@ public final class PartWater extends CardImpl {
 }
 
 enum PartWaterAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

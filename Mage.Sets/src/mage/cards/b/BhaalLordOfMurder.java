@@ -50,7 +50,7 @@ public final class BhaalLordOfMurder extends CardImpl {
 
         // As long as your life total is less than or equal to half your starting life total, Bhaal, Lord of Murder has indestructible.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(IndestructibleAbility.getInstance()), BhaalLordOfMurderCondition.instance,
+                new GainAbilitySourceEffect(IndestructibleAbility.getInstance()), BhaalLordOfMurderCondition.INSTANCE,
                 "as long as your life total is less than or equal to half your starting life total, {this} has indestructible"
         )));
 
@@ -74,7 +74,7 @@ public final class BhaalLordOfMurder extends CardImpl {
 }
 
 enum BhaalLordOfMurderCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

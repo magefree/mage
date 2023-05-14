@@ -23,7 +23,7 @@ import mage.players.Player;
  */
 public final class MoltenSentry extends CardImpl {
 
-    private static final String rule = "As {this} enters the battlefield, flip a coin. If the coin comes up heads, {this} enters the battlefield as a "
+    private static final String RULE_TEXT = "As {this} enters the battlefield, flip a coin. If the coin comes up heads, {this} enters the battlefield as a "
             + "5/2 creature with haste. If it comes up tails, {this} enters the battlefield as a 2/5 creature with defender.";
 
     public MoltenSentry(UUID ownerId, CardSetInfo setInfo) {
@@ -34,7 +34,7 @@ public final class MoltenSentry extends CardImpl {
 
         // As Molten Sentry enters the battlefield, flip a coin. If the coin comes up heads, Molten Sentry enters the battlefield as a 5/2 creature with haste.
         // If it comes up tails, Molten Sentry enters the battlefield as a 2/5 creature with defender.
-        this.addAbility(new EntersBattlefieldAbility(new MoltenSentryEffect(), null, rule, ""));
+        this.addAbility(new EntersBattlefieldAbility(new MoltenSentryEffect(), null, RULE_TEXT, ""));
     }
 
     private MoltenSentry(final MoltenSentry card) {

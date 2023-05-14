@@ -28,7 +28,7 @@ import java.util.UUID;
  */
 public final class ThrastaTempestsRoar extends CardImpl {
 
-    private static final ValueHint hint = new ValueHint("Spells cast this turn", ThrastaDynamicValue.instance);
+    private static final ValueHint hint = new ValueHint("Spells cast this turn", ThrastaDynamicValue.INSTANCE);
 
     public ThrastaTempestsRoar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{10}{G}{G}");
@@ -39,7 +39,7 @@ public final class ThrastaTempestsRoar extends CardImpl {
 
         // This spell costs 3 less to cast for each other spell cast this turn
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionForEachSourceEffect(3, ThrastaDynamicValue.instance)
+                Zone.ALL, new SpellCostReductionForEachSourceEffect(3, ThrastaDynamicValue.INSTANCE)
         ).addHint(hint));
 
         // Trample, Haste, and Trample over planeswalkers
@@ -65,7 +65,7 @@ public final class ThrastaTempestsRoar extends CardImpl {
 }
 
 enum ThrastaDynamicValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

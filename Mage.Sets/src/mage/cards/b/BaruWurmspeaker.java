@@ -40,7 +40,7 @@ public final class BaruWurmspeaker extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.WURM, "Wurms");
     private static final FilterPermanent filter2 = new FilterPermanent(SubType.WURM, "");
     private static final Hint hint = new ValueHint(
-            "Highest power among Wurms you control", BaruWurmspeakerValue.instance
+            "Highest power among Wurms you control", BaruWurmspeakerValue.INSTANCE
     );
 
     public BaruWurmspeaker(UUID ownerId, CardSetInfo setInfo) {
@@ -81,7 +81,7 @@ public final class BaruWurmspeaker extends CardImpl {
 }
 
 enum BaruWurmspeakerValue implements DynamicValue {
-    instance;
+    INSTANCE;
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent(SubType.WURM);
 
     @Override
@@ -117,7 +117,7 @@ enum BaruWurmspeakerAdjuster implements CostAdjuster {
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
-        int value = BaruWurmspeakerValue.instance.calculate(game, ability, null);
+        int value = BaruWurmspeakerValue.INSTANCE.calculate(game, ability, null);
         if (value > 0) {
             CardUtil.reduceCost(ability, value);
         }

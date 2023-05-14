@@ -33,7 +33,7 @@ import mage.target.common.TargetLandPermanent;
  */
 public final class ObsidianFireheart extends CardImpl {
 
-    private static final String rule = "For as long as that land has a blaze counter "
+    private static final String RULE_TEXT = "For as long as that land has a blaze counter "
             + "on it, it has \"At the beginning of your upkeep, this land deals 1 damage "
             + "to you.\" <i>(The land continues to burn after Obsidian Fireheart has left the battlefield.)</i>";
     private static final FilterLandPermanent filter = new FilterLandPermanent("land without a blaze counter on it");
@@ -58,7 +58,7 @@ public final class ObsidianFireheart extends CardImpl {
                 new ManaCostsImpl<>("{1}{R}{R}"));
         ability.addTarget(new TargetLandPermanent(filter));
         OneShotEffect effect = new ObsidianFireheartOneShotEffect();
-        effect.setText(rule);
+        effect.setText(RULE_TEXT);
         ability.addEffect(effect);
         this.addAbility(ability);
 
@@ -135,11 +135,7 @@ class ObsidianFireheartGainAbilityEffect extends GainAbilityTargetEffect {
     @Override
     public boolean isInactive(Ability source, Game game) {
         Permanent targetLand = game.getPermanent(this.targetPointer.getFirst(game, source));
-        if (targetLand != null 
-                && targetLand.getCounters(game).getCount(CounterType.BLAZE) < 1) {
-            return true;
-        }
-        return false;
+        return targetLand != null && targetLand.getCounters(game).getCount(CounterType.BLAZE) < 1);
     }
 
     @Override

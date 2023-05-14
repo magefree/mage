@@ -117,9 +117,6 @@ class MineMineMineDontLoseEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
-        if (player != null && player.getLibrary().getCards(game).isEmpty()) {
-            return true;
-        }
-        return false;
+        return player != null && player.getLibrary().getCards(game).isEmpty();
     }
 }

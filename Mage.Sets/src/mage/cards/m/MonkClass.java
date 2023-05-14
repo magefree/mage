@@ -44,7 +44,7 @@ public final class MonkClass extends CardImpl {
         // The second spell you cast each turn costs {1} less to cast.
         this.addAbility(new SimpleStaticAbility(new ConditionalCostModificationEffect(
                 new SpellsCostReductionControllerEffect(StaticFilters.FILTER_CARD, 1),
-                MonkClassCondition.instance, "the second spell you cast each turn costs {1} less to cast"
+                MonkClassCondition.INSTANCE, "the second spell you cast each turn costs {1} less to cast"
         )), new SpellsCastWatcher());
 
         // {W}{U}: Level 2
@@ -77,7 +77,7 @@ public final class MonkClass extends CardImpl {
 }
 
 enum MonkClassCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

@@ -23,7 +23,7 @@ public final class MeteorBlast extends CardImpl {
         this.getSpellAbility().addEffect(
                 new DamageTargetEffect(4).setText("{this} deals 4 damage to each of X targets")
         );
-        this.getSpellAbility().setTargetAdjuster(MeteorBlastAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(MeteorBlastAdjuster.INSTANCE);
     }
 
     private MeteorBlast(final MeteorBlast card) {
@@ -37,7 +37,7 @@ public final class MeteorBlast extends CardImpl {
 }
 
 enum MeteorBlastAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

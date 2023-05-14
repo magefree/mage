@@ -21,7 +21,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  */
 public final class CavalryMaster extends CardImpl {
 
-    static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control with flanking");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control with flanking");
 
     static {
         filter.add(new AbilityPredicate(FlankingAbility.class));

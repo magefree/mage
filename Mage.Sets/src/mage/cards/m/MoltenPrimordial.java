@@ -44,7 +44,7 @@ public final class MoltenPrimordial extends CardImpl {
 
         // When Molten Primordial enters the battlefield, for each opponent, take control of up to one target creature that player controls until end of turn. Untap those creatures. They have haste until end of turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(new MoltenPrimordialEffect(), false);
-        ability.setTargetAdjuster(MoltenPrimordialAdjuster.instance);
+        ability.setTargetAdjuster(MoltenPrimordialAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -59,7 +59,7 @@ public final class MoltenPrimordial extends CardImpl {
 }
 
 enum MoltenPrimordialAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

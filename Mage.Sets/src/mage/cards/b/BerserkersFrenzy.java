@@ -28,14 +28,14 @@ import java.util.UUID;
  */
 public final class BerserkersFrenzy extends CardImpl {
 
-    private static final Hint hint = new ConditionHint(BerserkersFrenzyCondition.instance, "Can be cast");
+    private static final Hint hint = new ConditionHint(BerserkersFrenzyCondition.INSTANCE, "Can be cast");
 
     public BerserkersFrenzy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
         // Cast this spell only before combat or during combat before blockers are declared.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(
-                null, null, BerserkersFrenzyCondition.instance,
+                null, null, BerserkersFrenzyCondition.INSTANCE,
                 "Cast this spell only before combat or during combat before blockers are declared"
         ).addHint(hint));
 
@@ -64,7 +64,7 @@ public final class BerserkersFrenzy extends CardImpl {
 }
 
 enum BerserkersFrenzyCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

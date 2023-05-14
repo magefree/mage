@@ -29,7 +29,7 @@ public final class VoloGuideToMonsters extends CardImpl {
     );
 
     static {
-        filter.add(VoloGuideToMonstersPredicate.instance);
+        filter.add(VoloGuideToMonstersPredicate.INSTANCE);
     }
 
     public VoloGuideToMonsters(UUID ownerId, CardSetInfo setInfo) {
@@ -60,7 +60,7 @@ public final class VoloGuideToMonsters extends CardImpl {
 }
 
 enum VoloGuideToMonstersPredicate implements Predicate<StackObject> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(StackObject input, Game game) {

@@ -32,7 +32,7 @@ public final class RestlessDreams extends CardImpl {
         Effect effect = new ReturnFromGraveyardToHandTargetEffect();
         effect.setText("Return X target creature cards from your graveyard to your hand");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().setTargetAdjuster(RestlessDreamsAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(RestlessDreamsAdjuster.INSTANCE);
 
     }
 
@@ -47,7 +47,7 @@ public final class RestlessDreams extends CardImpl {
 }
 
 enum RestlessDreamsAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

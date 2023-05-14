@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public final class PhantasmalImage extends CardImpl {
 
-    private static final String effectText = "as a copy of any creature on the battlefield, except it's an Illusion in addition to its other types and it has \"When this creature becomes the target of a spell or ability, sacrifice it.\"";
+    private static final String EFFECT_TEXT = "as a copy of any creature on the battlefield, except it's an Illusion in addition to its other types and it has \"When this creature becomes the target of a spell or ability, sacrifice it.\"";
 
     private static final CopyApplier phantasmalImageApplier = new CopyApplier() {
         @Override
@@ -48,7 +48,7 @@ public final class PhantasmalImage extends CardImpl {
         // on the battlefield, except it's an Illusion in addition to its other types and
         // it has "When this creature becomes the target of a spell or ability, sacrifice it."
         Effect effect = new CopyPermanentEffect(StaticFilters.FILTER_PERMANENT_CREATURE, phantasmalImageApplier);
-        effect.setText(effectText);
+        effect.setText(EFFECT_TEXT);
         this.addAbility(new EntersBattlefieldAbility(effect, true));
     }
 

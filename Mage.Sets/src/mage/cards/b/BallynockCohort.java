@@ -35,7 +35,7 @@ public final class BallynockCohort extends CardImpl {
         filter.add(AnotherPredicate.instance);
     }
     
-    private static final String rule = "{this} gets +1/+1 as long as you control another white creature";
+    private static final String RULE_TEXT = "{this} gets +1/+1 as long as you control another white creature";
 
     public BallynockCohort(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
@@ -50,9 +50,8 @@ public final class BallynockCohort extends CardImpl {
         
         // Ballynock Cohort gets +1/+1 as long as you control another white creature.
         Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
-        Effect effect = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), condition, rule);
+        Effect effect = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), condition, RULE_TEXT);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
-        
     }
 
     private BallynockCohort(final BallynockCohort card) {

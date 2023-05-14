@@ -40,7 +40,7 @@ public final class ParagonOfModernity extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new ConditionalOneShotEffect(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
                 new AddContinuousEffectToGame(new BoostSourceEffect(1, 1, Duration.EndOfTurn)),
-                ParagonOfModernityCondition.instance, "{this} gets +1/+1 until end of turn. If exactly three " +
+                ParagonOfModernityCondition.INSTANCE, "{this} gets +1/+1 until end of turn. If exactly three " +
                 "colors of mana were spent to activate this ability, put a +1/+1 counter on it instead"
         ), new GenericManaCost(3)));
     }
@@ -56,7 +56,7 @@ public final class ParagonOfModernity extends CardImpl {
 }
 
 enum ParagonOfModernityCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

@@ -3,7 +3,6 @@ package mage.cards.c;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
@@ -78,12 +77,10 @@ class ChainStasisEffect extends OneShotEffect {
                 return false;
             }
             Cost cost = new ManaCostsImpl<>("{2}{U}");
-            if (cost.pay(source, game, source, controller.getId(), false)) {
-                if (player.chooseUse(outcome, "Copy the spell?", source, game)) {
-                    Spell spell = game.getStack().getSpell(source.getSourceId());
-                    if (spell != null) {
-                        spell.createCopyOnStack(game, source, player.getId(), true);
-                    }
+            if (cost.pay(source, game, source, controller.getId(), false) && player.chooseUse(outcome, "Copy the spell?", source, game)) {
+                Spell spell = game.getStack().getSpell(source.getSourceId());
+                if (spell != null) {
+                    spell.createCopyOnStack(game, source, player.getId(), true);
                 }
             }
             return true;

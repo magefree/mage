@@ -65,11 +65,8 @@ class BiophagusWatcher extends Watcher {
             if (event.getSourceId() != null
                     && event.getSourceId().equals(this.getSourceId())
                     && target != null && target.isCreature(game)
-                    && event.getFlag()) {
-                if (target instanceof Spell) {
-                    game.getState().addEffect(new BiophagusEntersBattlefieldEffect(
-                            new MageObjectReference(((Spell) target).getSourceId(), target.getZoneChangeCounter(game), game)), source);
-                }
+                    && event.getFlag() && target instanceof Spell) {
+                game.getState().addEffect(new BiophagusEntersBattlefieldEffect(new MageObjectReference(((Spell) target).getSourceId(), target.getZoneChangeCounter(game), game)), source);
             }
         }
     }

@@ -26,7 +26,7 @@ public final class MassManipulation extends CardImpl {
                         .setText("Gain control of X target creatures and/or planeswalkers.")
         );
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
-        this.getSpellAbility().setTargetAdjuster(MassManipulationAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(MassManipulationAdjuster.INSTANCE);
     }
 
     private MassManipulation(final MassManipulation card) {
@@ -40,7 +40,7 @@ public final class MassManipulation extends CardImpl {
 }
 
 enum MassManipulationAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

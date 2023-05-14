@@ -28,7 +28,7 @@ public final class BoonOfBoseiju extends CardImpl {
 
         // Target creature gets +X/+X until end of turn, where X is the greatest mana value among permanents you control. Untap that creature.
         this.getSpellAbility().addEffect(new BoostTargetEffect(
-                BoonOfBoseijuValue.instance, BoonOfBoseijuValue.instance, Duration.EndOfTurn
+                BoonOfBoseijuValue.INSTANCE, BoonOfBoseijuValue.INSTANCE, Duration.EndOfTurn
         ));
         this.getSpellAbility().addEffect(new UntapTargetEffect().setText("Untap it"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -46,8 +46,8 @@ public final class BoonOfBoseiju extends CardImpl {
 }
 
 enum BoonOfBoseijuValue implements DynamicValue {
-    instance;
-    private static final Hint hint = new ValueHint("The greatest mana value among permanents you control", instance);
+    INSTANCE;
+    private static final Hint hint = new ValueHint("The greatest mana value among permanents you control", INSTANCE);
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

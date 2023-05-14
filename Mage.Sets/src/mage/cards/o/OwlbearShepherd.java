@@ -26,7 +26,7 @@ import java.util.UUID;
 public final class OwlbearShepherd extends CardImpl {
 
     private static final Hint hint = new ValueHint(
-            "Total power and toughness of creatures you control", OwlbearShepherdValue.instance
+            "Total power and toughness of creatures you control", OwlbearShepherdValue.INSTANCE
     );
 
     public OwlbearShepherd(UUID ownerId, CardSetInfo setInfo) {
@@ -55,7 +55,7 @@ public final class OwlbearShepherd extends CardImpl {
 }
 
 enum OwlbearShepherdValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

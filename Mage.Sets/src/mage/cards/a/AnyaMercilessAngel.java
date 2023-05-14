@@ -39,8 +39,8 @@ public final class AnyaMercilessAngel extends CardImpl {
 
         // Anya, Merciless Angel gets +3/+3 for each opponent whose life total is less than half their starting life total.
         this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(
-                AnyaMercilessAngelDynamicValue.instance,
-                AnyaMercilessAngelDynamicValue.instance,
+                AnyaMercilessAngelDynamicValue.INSTANCE,
+                AnyaMercilessAngelDynamicValue.INSTANCE,
                 Duration.WhileOnBattlefield
         ).setText("{this} gets +3/+3 for each opponent whose life total is less than half their starting life total")));
 
@@ -64,7 +64,7 @@ public final class AnyaMercilessAngel extends CardImpl {
 }
 
 enum AnyaMercilessAngelDynamicValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -87,7 +87,7 @@ enum AnyaMercilessAngelDynamicValue implements DynamicValue {
 
     @Override
     public AnyaMercilessAngelDynamicValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override
@@ -107,7 +107,7 @@ enum AnyaMercilessAngelCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return AnyaMercilessAngelDynamicValue.instance.calculate(game, source, null) > 0;
+        return AnyaMercilessAngelDynamicValue.INSTANCE.calculate(game, source, null) > 0;
     }
 
     @Override

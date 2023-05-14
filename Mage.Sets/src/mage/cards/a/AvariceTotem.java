@@ -19,12 +19,12 @@ import mage.target.common.TargetNonlandPermanent;
  */
 public final class AvariceTotem extends CardImpl {
 
-    private static final String rule = "Exchange control of {this} and target nonland permanent";
+    private static final String RULE_TEXT = "Exchange control of {this} and target nonland permanent";
     public AvariceTotem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {5}: Exchange control of Avarice Totem and target nonland permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExchangeControlTargetEffect(Duration.EndOfGame, rule, true), new ManaCostsImpl<>("{5}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExchangeControlTargetEffect(Duration.EndOfGame, RULE_TEXT, true), new ManaCostsImpl<>("{5}"));
         ability.addTarget(new TargetNonlandPermanent());
         this.addAbility(ability);
     }

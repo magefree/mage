@@ -37,13 +37,13 @@ public final class AvidReclaimer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}: Add {G} or {U}. If you control a Nissa planeswalker, you gain 2 life.
-        Ability GreenManaAbility = new GreenManaAbility();
-        GreenManaAbility.addEffect(new ConditionalOneShotEffect(new GainLifeEffect(2), new PermanentsOnTheBattlefieldCondition(filter), "If you control a Nissa planeswalker, you gain 2 life."));
-        this.addAbility(GreenManaAbility);
+        Ability greenManaAbility = new GreenManaAbility();
+        greenManaAbility.addEffect(new ConditionalOneShotEffect(new GainLifeEffect(2), new PermanentsOnTheBattlefieldCondition(filter), "If you control a Nissa planeswalker, you gain 2 life."));
+        this.addAbility(greenManaAbility);
 
-        Ability BlueManaAbility = new BlueManaAbility();
-        BlueManaAbility.addEffect(new ConditionalOneShotEffect(new GainLifeEffect(2), new PermanentsOnTheBattlefieldCondition(filter), "If you control a Nissa planeswalker, you gain 2 life."));
-        this.addAbility(BlueManaAbility);
+        Ability blueManaAbility = new BlueManaAbility();
+        blueManaAbility.addEffect(new ConditionalOneShotEffect(new GainLifeEffect(2), new PermanentsOnTheBattlefieldCondition(filter), "If you control a Nissa planeswalker, you gain 2 life."));
+        this.addAbility(blueManaAbility);
     }
 
     private AvidReclaimer(final AvidReclaimer card) {

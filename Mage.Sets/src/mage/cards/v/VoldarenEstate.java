@@ -55,7 +55,7 @@ public final class VoldarenEstate extends CardImpl {
             ).setText("Create a Blood token. This ability costs {1} less to activate for each Vampire you control"),
         new GenericManaCost(5));
         ability.addCost(new TapSourceCost());
-        ability.setCostAdjuster(VoldarenEstateCostAdjuster.instance);
+        ability.setCostAdjuster(VoldarenEstateCostAdjuster.INSTANCE);
         ability.addHint(VoldarenEstateCostAdjuster.getHint());
         this.addAbility(ability);
     }
@@ -121,7 +121,7 @@ class VoldarenEstateManaCondition extends ManaCondition implements Condition {
 }
 
 enum VoldarenEstateCostAdjuster implements CostAdjuster {
-    instance;
+    INSTANCE;
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.VAMPIRE);
     private static final DynamicValue vampireCount = new PermanentsOnBattlefieldCount(filter);

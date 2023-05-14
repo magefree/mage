@@ -117,47 +117,45 @@ class CelestialDawnToWhiteEffect extends ContinuousEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-                setColor(perm.getColor(game), game);
+                setColor(perm.getColor(game));
             }
             // Stack
             for (MageObject object : game.getStack()) {
                 if (object instanceof Spell && ((Spell) object).isControlledBy(controller.getId())) {
-                    setColor(object.getColor(game), game);
+                    setColor(object.getColor(game));
                 }
             }
             // Exile
             for (Card card : game.getExile().getAllCards(game)) {
                 if (card.isOwnedBy(controller.getId())) {
-                    setColor(card.getColor(game), game);
+                    setColor(card.getColor(game));
                 }
             }
             // Command
             for (CommandObject commandObject : game.getState().getCommand()) {
-                if (commandObject instanceof Commander) {
-                    if (commandObject.isControlledBy(controller.getId())) {
-                        setColor(commandObject.getColor(game), game);
-                    }
+                if (commandObject instanceof Commander && commandObject.isControlledBy(controller.getId())) {
+                    setColor(commandObject.getColor(game));
                 }
             }
 
             // Hand
             for (Card card : controller.getHand().getCards(game)) {
-                setColor(card.getColor(game), game);
+                setColor(card.getColor(game));
             }
             // Library
             for (Card card : controller.getLibrary().getCards(game)) {
-                setColor(card.getColor(game), game);
+                setColor(card.getColor(game));
             }
             // Graveyard
             for (Card card : controller.getGraveyard().getCards(game)) {
-                setColor(card.getColor(game), game);
+                setColor(card.getColor(game));
             }
             return true;
         }
         return false;
     }
 
-    protected static void setColor(ObjectColor color, Game game) {
+    protected static void setColor(ObjectColor color) {
         color.setWhite(true);
         color.setGreen(false);
         color.setBlue(false);

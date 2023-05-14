@@ -24,7 +24,7 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class Brawn extends CardImpl {
 
-    private static final String ruleText = "As long as Brawn is in your graveyard and you control a Forest, creatures you control have trample";
+    private static final String RULE_TEXT = "As long as Brawn is in your graveyard and you control a Forest, creatures you control have trample";
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forest");
 
@@ -47,7 +47,7 @@ public final class Brawn extends CardImpl {
         ContinuousEffect effect = new GainAbilityControlledEffect(TrampleAbility.getInstance(),
                 Duration.WhileOnBattlefield, new FilterCreaturePermanent());
         ConditionalContinuousEffect brawnEffect = new ConditionalContinuousEffect(effect,
-                new PermanentsOnTheBattlefieldCondition(filter), ruleText);
+                new PermanentsOnTheBattlefieldCondition(filter), RULE_TEXT);
         this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD, brawnEffect));
     }
 

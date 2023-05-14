@@ -40,7 +40,7 @@ public final class TallymanOfNurgle extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new ConditionalOneShotEffect(
                         new DrawCardSourceControllerEffect(7), new DrawCardSourceControllerEffect(1),
-                        TallymanOfNurgleCondition.instance, "you draw a card and you lose 1 life. " +
+                        TallymanOfNurgleCondition.INSTANCE, "you draw a card and you lose 1 life. " +
                         "If seven or more creatures died this turn, instead you draw seven cards and you lose 7 life"
                 ).addEffect(new LoseLifeSourceControllerEffect(7)).addOtherwiseEffect(new LoseLifeSourceControllerEffect(1)),
                 TargetController.YOU, MorbidCondition.instance, false
@@ -58,7 +58,7 @@ public final class TallymanOfNurgle extends CardImpl {
 }
 
 enum TallymanOfNurgleCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class UrbanBurgeoning extends CardImpl {
 
-    static final String rule = "Enchanted land has \"Untap this land during each other player's untap step.\"";
+    static final String RULE_TEXT = "Enchanted land has \"Untap this land during each other player's untap step.\"";
 
     public UrbanBurgeoning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
@@ -37,7 +37,7 @@ public final class UrbanBurgeoning extends CardImpl {
 
         // Enchanted land has "Untap this land during each other player's untap step."
         Ability gainedAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new UrbanBurgeoningUntapEffect());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, RULE_TEXT)));
     }
 
     private UrbanBurgeoning(final UrbanBurgeoning card) {

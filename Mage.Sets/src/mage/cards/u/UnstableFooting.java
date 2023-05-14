@@ -37,7 +37,7 @@ public final class UnstableFooting extends CardImpl {
                 KickedCondition.ONCE,
                 "If this spell was kicked, it deals 5 damage to target player or planeswalker")
         );
-        this.getSpellAbility().setTargetAdjuster(UnstableFootingAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(UnstableFootingAdjuster.INSTANCE);
 
     }
 
@@ -52,7 +52,7 @@ public final class UnstableFooting extends CardImpl {
 }
 
 enum UnstableFootingAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

@@ -24,7 +24,7 @@ public final class ThievingSprite extends CardImpl {
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.FAERIE, "Faeries you control"), null);
 
-    private static final String rule = "target player reveals X cards from their hand, where X is " +
+    private static final String RULE_TEXT = "target player reveals X cards from their hand, where X is " +
             xValue.getMessage() + ". You choose one of those cards. That player discards that card";
 
     public ThievingSprite(UUID ownerId, CardSetInfo setInfo) {
@@ -41,7 +41,7 @@ public final class ThievingSprite extends CardImpl {
         // When Thieving Sprite enters the battlefield, target player reveals X cards from their hand,
         // where X is the number of Faeries you control. You choose one of those cards.
         // That player discards that card.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DiscardCardYouChooseTargetEffect(TargetController.ANY, xValue).setText(rule));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DiscardCardYouChooseTargetEffect(TargetController.ANY, xValue).setText(RULE_TEXT));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 

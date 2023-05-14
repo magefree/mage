@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 public final class BladedBracers extends CardImpl {
 
-    private static final String ruleText = "As long as equipped creature is a Human or an Angel, it has vigilance";
+    private static final String RULE_TEXT = "As long as equipped creature is a Human or an Angel, it has vigilance";
     private static final Condition condition = new EquippedHasSubtypeCondition(SubType.HUMAN, SubType.ANGEL);
 
     public BladedBracers(UUID ownerId, CardSetInfo setInfo) {
@@ -37,7 +37,7 @@ public final class BladedBracers extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilityAttachedEffect(
                         VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT
-                ), condition, ruleText
+                ), condition, RULE_TEXT
         )));
 
         // Equip {2}

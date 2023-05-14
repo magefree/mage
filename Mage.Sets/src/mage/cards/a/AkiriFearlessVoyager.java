@@ -103,8 +103,8 @@ class AkiriFearlessVoyagerTriggeredAbility extends TriggeredAbilityImpl {
 
 class AkiriFearlessVoyagerEffect extends OneShotEffect {
 
-    private static enum AkiriFearlessVoyagerPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-        instance;
+    private enum AkiriFearlessVoyagerPredicate implements ObjectSourcePlayerPredicate<Permanent> {
+        INSTANCE;
 
         @Override
         public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
@@ -117,7 +117,7 @@ class AkiriFearlessVoyagerEffect extends OneShotEffect {
             = new FilterEquipmentPermanent("equipment attached to a creature you control");
 
     static {
-        filter.add(AkiriFearlessVoyagerPredicate.instance);
+        filter.add(AkiriFearlessVoyagerPredicate.INSTANCE);
     }
 
     AkiriFearlessVoyagerEffect() {

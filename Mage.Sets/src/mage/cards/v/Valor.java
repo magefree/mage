@@ -24,7 +24,7 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class Valor extends CardImpl {
 
-    private static final String ruleText = "As long as Valor is in your graveyard and you control a Plains, creatures you control have first strike";
+    private static final String RULE_TEXT = "As long as Valor is in your graveyard and you control a Plains, creatures you control have first strike";
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Plains");
 
@@ -47,7 +47,7 @@ public final class Valor extends CardImpl {
         ContinuousEffect effect = new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(),
                 Duration.WhileOnBattlefield, new FilterCreaturePermanent());
         ConditionalContinuousEffect valorEffect = new ConditionalContinuousEffect(effect,
-                new PermanentsOnTheBattlefieldCondition(filter), ruleText);
+                new PermanentsOnTheBattlefieldCondition(filter), RULE_TEXT);
         this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD, valorEffect));
     }
 

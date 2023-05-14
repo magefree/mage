@@ -30,7 +30,7 @@ import mage.target.common.TargetLandPermanent;
  */
 public final class RacecourseFury extends CardImpl {
 
-    static final String rule = "Enchanted land has \"{T}: Target creature gains haste until end of turn.\"";
+    static final String RULE_TEXT = "Enchanted land has \"{T}: Target creature gains haste until end of turn.\"";
 
     public RacecourseFury (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}");
@@ -47,7 +47,7 @@ public final class RacecourseFury extends CardImpl {
         // Enchanted land has "{T}: Target creature gains haste until end of turn."
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new TapSourceCost());
         gainedAbility.addTarget(new TargetCreaturePermanent());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, RULE_TEXT)));
     }
 
     public RacecourseFury (final RacecourseFury card) {

@@ -132,10 +132,7 @@ class TokTokVolcanoBornEffect extends ReplacementEffectImpl {
             sourceObject = sourcePermanent;
         }
 
-        if (sourceObject != null && sourceObject.getColor(game).isRed()) {
-            return true;
-        }
-        return false;
+        return sourceObject != null && sourceObject.getColor(game).isRed();
     }
 
     @Override

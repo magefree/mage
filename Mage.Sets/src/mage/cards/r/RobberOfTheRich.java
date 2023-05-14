@@ -48,7 +48,7 @@ public final class RobberOfTheRich extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new AttacksTriggeredAbility(
                         new RobberOfTheRichEffect(), false, "", SetTargetPointer.PLAYER
-                ), RobberOfTheRichAttacksCondition.instance, "Whenever {this} attacks, " +
+                ), RobberOfTheRichAttacksCondition.INSTANCE, "Whenever {this} attacks, " +
                 "if defending player has more cards in hand than you, exile the top card of their library. " +
                 "During any turn you attacked with a Rogue, you may cast that card and " +
                 "you may spend mana as though it were mana of any color to cast that spell."
@@ -66,7 +66,7 @@ public final class RobberOfTheRich extends CardImpl {
 }
 
 enum RobberOfTheRichAttacksCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

@@ -81,12 +81,12 @@ class CastleGarenbrigConditionalMana extends ConditionalMana {
     CastleGarenbrigConditionalMana(Mana mana) {
         super(mana);
         this.staticText = "Spend this mana only to cast creature spells or activate abilities of creatures";
-        addCondition(CastleGarenbrigManaCondition.instance);
+        addCondition(CastleGarenbrigManaCondition.INSTANCE);
     }
 }
 
 enum CastleGarenbrigManaCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

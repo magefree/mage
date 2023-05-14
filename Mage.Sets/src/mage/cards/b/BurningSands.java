@@ -27,7 +27,7 @@ public final class BurningSands extends CardImpl {
         Ability ability = new DiesCreatureTriggeredAbility(new SacrificeEffect(
                 StaticFilters.FILTER_LAND, 1, "that creature's controller"
         ), false, false, true);
-        ability.setTargetAdjuster(BurningSandsAdjuster.instance);
+        ability.setTargetAdjuster(BurningSandsAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -42,7 +42,7 @@ public final class BurningSands extends CardImpl {
 }
 
 enum BurningSandsAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

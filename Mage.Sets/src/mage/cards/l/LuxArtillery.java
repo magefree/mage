@@ -43,7 +43,7 @@ public final class LuxArtillery extends CardImpl {
         // At the beginning of your end step, if there are thirty or more counters among artifacts
         // and creatures you control, Lux Artillery deals 10 damage to each opponent.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility (new BeginningOfYourEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new DamagePlayersEffect(10, TargetController.OPPONENT), false), LuxArtilleryCondition.instance,
+                Zone.BATTLEFIELD, new DamagePlayersEffect(10, TargetController.OPPONENT), false), LuxArtilleryCondition.INSTANCE,
                 "At the beginning of your end step, if there are thirty or more counters among artifacts " +
                         "and creatures you control, {this} deals 10 damage to each opponent"
         ));
@@ -112,7 +112,7 @@ class LuxArtilleryEffect extends ContinuousEffectImpl {
 }
 
 enum LuxArtilleryCondition implements Condition {
-    instance;
+    INSTANCE;
 
     private static final FilterPermanent filter = new FilterPermanent("artifacts and creatures you control");
 

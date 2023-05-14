@@ -69,11 +69,11 @@ public final class BladegraftAspirant extends CardImpl {
 
 class BladegraftAspirantCostReductionEffect extends CostModificationEffectImpl {
 
-    private static final String effectText = "Activated abilities of Equipment you control that target Bladegraft Aspirant cost {1} less to activate.";
+    private static final String EFFECT_TEXT = "Activated abilities of Equipment you control that target Bladegraft Aspirant cost {1} less to activate.";
 
             BladegraftAspirantCostReductionEffect() {
         super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = effectText;
+        staticText = EFFECT_TEXT;
     }
 
     private BladegraftAspirantCostReductionEffect(final BladegraftAspirantCostReductionEffect effect) {

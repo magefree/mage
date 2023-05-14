@@ -28,7 +28,7 @@ public final class BarteredCow extends CardImpl {
     private static final FilterCard filter = new FilterCard();
 
     static {
-        filter.add(BarteredCowPredicate.instance);
+        filter.add(BarteredCowPredicate.INSTANCE);
     }
 
     public BarteredCow(UUID ownerId, CardSetInfo setInfo) {
@@ -57,7 +57,7 @@ public final class BarteredCow extends CardImpl {
 }
 
 enum BarteredCowPredicate implements ObjectSourcePlayerPredicate<MageObject> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {

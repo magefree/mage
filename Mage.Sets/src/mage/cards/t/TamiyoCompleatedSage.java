@@ -53,7 +53,7 @@ public final class TamiyoCompleatedSage extends CardImpl {
         this.addAbility(ability);
 
         // −X: Exile target nonland permanent card with mana value X from your graveyard. Create a token that's a copy of that card.
-        this.addAbility(new LoyaltyAbility(new TamiyoCompleatedSageEffect()).setTargetAdjuster(TamiyoCompleatedSageAdjuster.instance));
+        this.addAbility(new LoyaltyAbility(new TamiyoCompleatedSageEffect()).setTargetAdjuster(TamiyoCompleatedSageAdjuster.INSTANCE));
 
         // −7: Create Tamiyo's Notebook, a legendary colorless artifact token with "Spells you cast cost {2} less to cast" and "{T}: Draw a card."
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new TamiyosNotebookToken()), -7));
@@ -70,7 +70,7 @@ public final class TamiyoCompleatedSage extends CardImpl {
 }
 
 enum TamiyoCompleatedSageAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

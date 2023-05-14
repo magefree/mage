@@ -1,6 +1,5 @@
 package mage.cards.p;
 
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;

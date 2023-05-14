@@ -74,7 +74,7 @@ class PorcelainZealotEffect extends OneShotEffect {
             return false;
         }
 
-        Boolean targetHasToxic = creature.getAbilities().containsClass(ToxicAbility.class);
+        boolean targetHasToxic = creature.getAbilities().containsClass(ToxicAbility.class);
 
         if(targetHasToxic) {
             game.addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn), source);

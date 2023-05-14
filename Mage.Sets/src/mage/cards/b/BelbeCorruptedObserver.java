@@ -24,7 +24,7 @@ import java.util.*;
  */
 public final class BelbeCorruptedObserver extends CardImpl {
 
-    private static final Hint hint = new ValueHint("Opponents who lost life that turn", BelbeCorruptedObserverDynamicValue.instance);
+    private static final Hint hint = new ValueHint("Opponents who lost life that turn", BelbeCorruptedObserverDynamicValue.INSTANCE);
 
     public BelbeCorruptedObserver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{G}");
@@ -75,7 +75,7 @@ class BelbeCorruptedObserverEffect extends OneShotEffect {
             return false;
         }
 
-        int playerCount = BelbeCorruptedObserverDynamicValue.instance.calculate(game, source, this);
+        int playerCount = BelbeCorruptedObserverDynamicValue.INSTANCE.calculate(game, source, this);
         if (playerCount > 0) {
             player.getManaPool().addMana(Mana.ColorlessMana(2 * playerCount), game, source);
             return true;
@@ -116,7 +116,7 @@ class BelbeCorruptedObserverWatcher extends Watcher {
 }
 
 enum BelbeCorruptedObserverDynamicValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -129,7 +129,7 @@ enum BelbeCorruptedObserverDynamicValue implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

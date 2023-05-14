@@ -24,7 +24,7 @@ public final class Nix extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // Counter target spell if no mana was spent to cast it.
-        Effect effect = new ConditionalOneShotEffect(new CounterTargetEffect(), NoManaSpentToCastTargetCondition.instance);
+        Effect effect = new ConditionalOneShotEffect(new CounterTargetEffect(), NoManaSpentToCastTargetCondition.INSTANCE);
         effect.setText("Counter target spell if no mana was spent to cast it");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetSpell());
@@ -42,8 +42,7 @@ public final class Nix extends CardImpl {
 }
 
 enum NoManaSpentToCastTargetCondition implements Condition {
-
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

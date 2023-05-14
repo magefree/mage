@@ -21,7 +21,7 @@ public final class RestoreThePeace extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(RestoreThePeacePredicate.instance);
+        filter.add(RestoreThePeacePredicate.INSTANCE);
     }
 
     public RestoreThePeace(UUID ownerId, CardSetInfo setInfo) {
@@ -44,7 +44,7 @@ public final class RestoreThePeace extends CardImpl {
 }
 
 enum RestoreThePeacePredicate implements Predicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Permanent input, Game game) {

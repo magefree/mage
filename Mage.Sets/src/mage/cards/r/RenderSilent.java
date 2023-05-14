@@ -113,10 +113,7 @@ class RenderSilentEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (player != null && player.getId().equals(event.getPlayerId())) {
-            return true;
-        }
-        return false;
+        return player != null && player.getId().equals(event.getPlayerId());
     }
 
 }

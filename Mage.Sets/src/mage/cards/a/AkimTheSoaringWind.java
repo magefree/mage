@@ -138,9 +138,9 @@ class AkimTheSoaringTokenAbility extends TriggeredAbilityImpl {
 class AkimTheSoaringWindWatcher extends Watcher {
 
     public enum TokenState {
-        NoToken,
-        FirstToken,
-        MoreThanOneToken
+        NO_TOKEN,
+        FIRST_TOKEN,
+        MORE_THAN_ONE_TOKEN
     }
 
     private final Map<UUID, TokenState> playerIds = new HashMap<>();
@@ -157,9 +157,9 @@ class AkimTheSoaringWindWatcher extends Watcher {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent instanceof PermanentToken) {
             if (!playerIds.containsKey(permanent.getControllerId())) {
-                playerIds.put(permanent.getControllerId(), TokenState.FirstToken);
+                playerIds.put(permanent.getControllerId(), TokenState.FIRST_TOKEN);
             } else {
-                playerIds.put(permanent.getControllerId(), TokenState.MoreThanOneToken);
+                playerIds.put(permanent.getControllerId(), TokenState.MORE_THAN_ONE_TOKEN);
             }
         }
     }
@@ -170,6 +170,6 @@ class AkimTheSoaringWindWatcher extends Watcher {
     }
 
     boolean firstToken(UUID playerId) {
-        return playerIds.getOrDefault(playerId, TokenState.NoToken) == TokenState.FirstToken;
+        return playerIds.getOrDefault(playerId, TokenState.NO_TOKEN) == TokenState.FIRST_TOKEN;
     }
 }

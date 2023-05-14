@@ -39,7 +39,7 @@ public final class NahiriTheUnforgiving extends CardImpl {
                 CardType.CREATURE.getPredicate(),
                 SubType.EQUIPMENT.getPredicate()
         ));
-        filter.add(NahiriLoyaltyPredicate.instance);
+        filter.add(NahiriLoyaltyPredicate.INSTANCE);
     }
 
     public NahiriTheUnforgiving(UUID ownerId, CardSetInfo setInfo) {
@@ -82,7 +82,7 @@ public final class NahiriTheUnforgiving extends CardImpl {
 }
 
 enum NahiriLoyaltyPredicate implements ObjectSourcePlayerPredicate<Card> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {

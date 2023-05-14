@@ -39,7 +39,7 @@ public final class VeilOfSummer extends CardImpl {
         // gain hexproof from blue and from black until end of turn.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1),
-                VeilOfSummerCondition.instance, "Draw a card " +
+                VeilOfSummerCondition.INSTANCE, "Draw a card " +
                 "if an opponent has cast a blue or black spell this turn"
         ));
         this.getSpellAbility().addEffect(new CantBeCounteredControlledEffect(
@@ -60,7 +60,7 @@ public final class VeilOfSummer extends CardImpl {
 }
 
 enum VeilOfSummerCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

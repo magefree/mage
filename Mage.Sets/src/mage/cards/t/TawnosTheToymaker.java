@@ -85,14 +85,14 @@ class TawnosTheToymakerEffect extends OneShotEffect {
         // Create a token copy
         spell.createCopyOnStack(
                 game, source, controller.getId(), false,
-                1, TawnosTheToymakerApplier.instance
+                1, TawnosTheToymakerApplier.INSTANCE
         );
         return true;
     }
 }
 
 enum TawnosTheToymakerApplier implements StackObjectCopyApplier {
-    instance;
+    INSTANCE;
 
     @Override
     public void modifySpell(StackObject copiedSpell, Game game) {

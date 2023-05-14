@@ -28,7 +28,7 @@ public final class RazorPendulum extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
                         new RazorPendulumEffect(), TargetController.ANY, false
-                ), RazorPendulumCondition.instance, "At the beginning of each player's end step, " +
+                ), RazorPendulumCondition.INSTANCE, "At the beginning of each player's end step, " +
                 "if that player has 5 or less life, {this} deals 2 damage to that player."
         ));
     }
@@ -69,7 +69,7 @@ class RazorPendulumEffect extends OneShotEffect {
 }
 
 enum RazorPendulumCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

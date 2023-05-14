@@ -39,7 +39,7 @@ public final class OrimsThunder extends CardImpl {
                 KickedCondition.ONCE,
                 "If this spell was kicked, it deals damage equal to that permanent's mana value to target creature")
         );
-        this.getSpellAbility().setTargetAdjuster(OrimsThunderAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(OrimsThunderAdjuster.INSTANCE);
     }
 
     private OrimsThunder(final OrimsThunder card) {
@@ -53,7 +53,7 @@ public final class OrimsThunder extends CardImpl {
 }
 
 enum OrimsThunderAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

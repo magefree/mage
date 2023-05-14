@@ -22,6 +22,7 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -42,7 +43,7 @@ public final class NilsDisciplineEnforcer extends CardImpl {
         Ability ability = new BeginningOfEndStepTriggeredAbility(
                 new NilsDisciplineEnforcerCountersEffect(), TargetController.YOU, false
         );
-        ability.setTargetAdjuster(NilsDisciplineEnforcerAdjuster.instance);
+        ability.setTargetAdjuster(NilsDisciplineEnforcerAdjuster.INSTANCE);
         this.addAbility(ability);
 
         // Each creature with one or more counters on it can't attack you or planeswalkers you control unless its controller pays {X}, where X is the number of counters on that creature.
@@ -60,7 +61,7 @@ public final class NilsDisciplineEnforcer extends CardImpl {
 }
 
 enum NilsDisciplineEnforcerAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
@@ -96,11 +97,9 @@ class NilsDisciplineEnforcerCountersEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         source.getTargets()
                 .stream()
-                .filter(
-                        t -> (t != null))
+                .filter(Objects::nonNull)
                 .map(t -> game.getPermanent(t.getFirstTarget()))
-                .filter(targetedPermanent
-                        -> (targetedPermanent != null))
+                .filter(Objects::nonNull)
                 .forEachOrdered(targetedPermanent -> {
                     targetedPermanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
                 });

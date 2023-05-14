@@ -47,7 +47,7 @@ public final class BellBorcaSpectralSergeant extends CardImpl {
 
         // Bell Borca, Spectral Sergeant's power is equal to the greatest number noted for it this turn.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(
-                BellBorcaSpectralSergeantValue.instance
+                BellBorcaSpectralSergeantValue.INSTANCE
         ).setText("{this}'s power is equal to the greatest number noted for it this turn")));
 
         // At the beginning of your upkeep, exile the top card of your library. You may play that card this turn.
@@ -89,7 +89,7 @@ class BellBorcaSpectralSergeantAbility extends StaticAbility implements MageSing
 }
 
 enum BellBorcaSpectralSergeantValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -99,7 +99,7 @@ enum BellBorcaSpectralSergeantValue implements DynamicValue {
 
     @Override
     public BellBorcaSpectralSergeantValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

@@ -100,7 +100,6 @@ class MonasterySiegeCostIncreaseEffect extends CostModificationEffectImpl {
             if (allTargets.stream().anyMatch(target -> !isTargetCompatible(target, source, game))) {
                 return false;
             }
-            ;
         }
 
         return allTargets.stream().anyMatch(target -> isTargetCompatible(target, source, game));
@@ -114,11 +113,7 @@ class MonasterySiegeCostIncreaseEffect extends CostModificationEffectImpl {
         }
 
         Permanent targetPermanent = game.getPermanent(target);
-        if (targetPermanent != null && targetPermanent.isControlledBy(source.getControllerId())) {
-            return true;
-        }
-
-        return false;
+        return targetPermanent != null && targetPermanent.isControlledBy(source.getControllerId());
     }
 
     @Override

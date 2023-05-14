@@ -36,7 +36,7 @@ public final class CalixGuidedByFate extends CardImpl {
             = new FilterPermanent("{this} or an enchanted creature you control");
 
     static {
-        filter.add(CalixGuidedByFatePredicate.instance);
+        filter.add(CalixGuidedByFatePredicate.INSTANCE);
     }
 
     public CalixGuidedByFate(UUID ownerId, CardSetInfo setInfo) {
@@ -70,7 +70,7 @@ public final class CalixGuidedByFate extends CardImpl {
 }
 
 enum CalixGuidedByFatePredicate implements ObjectSourcePlayerPredicate<MageObject> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {

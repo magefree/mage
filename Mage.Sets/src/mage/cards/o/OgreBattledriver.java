@@ -32,7 +32,7 @@ public final class OgreBattledriver extends CardImpl {
         filter.add(AnotherPredicate.instance);
     }
     
-    private static final String rule = "Whenever another creature enters the battlefield under your control, that creature gets +2/+0 and gains haste until end of turn.";
+    private static final String RULE_TEXT = "Whenever another creature enters the battlefield under your control, that creature gets +2/+0 and gains haste until end of turn.";
 
     public OgreBattledriver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
@@ -43,7 +43,7 @@ public final class OgreBattledriver extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever another creature enters the battlefield under your control, that creature gets +2/+0 and gains haste until end of turn.
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 0, Duration.EndOfTurn), filter, false, SetTargetPointer.PERMANENT, rule, true);
+        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 0, Duration.EndOfTurn), filter, false, SetTargetPointer.PERMANENT, RULE_TEXT, true);
         ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
         this.addAbility(ability);
         

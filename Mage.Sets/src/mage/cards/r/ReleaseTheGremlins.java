@@ -30,7 +30,7 @@ public final class ReleaseTheGremlins extends CardImpl {
         // Create X 2/2 red Gremlin creature tokens.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GremlinToken(), ManacostVariableValue.REGULAR));
 
-        this.getSpellAbility().setTargetAdjuster(ReleaseTheGremlinsAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(ReleaseTheGremlinsAdjuster.INSTANCE);
     }
 
     private ReleaseTheGremlins(final ReleaseTheGremlins card) {
@@ -44,7 +44,7 @@ public final class ReleaseTheGremlins extends CardImpl {
 }
 
 enum ReleaseTheGremlinsAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

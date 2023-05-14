@@ -29,7 +29,7 @@ public final class BairdArgivianRecruiter extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("you control a creature with power greater than its base power");
 
     static {
-        filter.add(BairdArgivianRecruiterPredicate.instance);
+        filter.add(BairdArgivianRecruiterPredicate.INSTANCE);
     }
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
@@ -61,7 +61,7 @@ public final class BairdArgivianRecruiter extends CardImpl {
 }
 
 enum BairdArgivianRecruiterPredicate implements Predicate<MageObject> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(MageObject input, Game game) {

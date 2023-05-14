@@ -28,7 +28,7 @@ public final class OnceUponATime extends CardImpl {
 
         // If this spell is the first spell you've cast this game, you may cast it without paying its mana cost.
         this.addAbility(new AlternativeCostSourceAbility(
-                null, OnceUponATimeCondition.instance, "If this spell is the first spell " +
+                null, OnceUponATimeCondition.INSTANCE, "If this spell is the first spell " +
                 "you've cast this game, you may cast it without paying its mana cost."
         ), new OnceUponATimeWatcher());
 
@@ -48,7 +48,7 @@ public final class OnceUponATime extends CardImpl {
 }
 
 enum OnceUponATimeCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

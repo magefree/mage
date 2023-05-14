@@ -84,10 +84,8 @@ class AvatarOfGrowthSearchEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     TargetCardInLibrary target = new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_BASIC_LAND);
-                    if (player.searchLibrary(target, source, game)) {
-                        if (!target.getTargets().isEmpty()) {
-                            toBattlefield.addAll(new CardsImpl(target.getTargets()).getCards(game));
-                        }
+                    if (player.searchLibrary(target, source, game) && !target.getTargets().isEmpty()) {
+                        toBattlefield.addAll(new CardsImpl(target.getTargets()).getCards(game));
                     }
                 }
             }

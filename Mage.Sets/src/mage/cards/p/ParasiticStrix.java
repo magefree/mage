@@ -17,7 +17,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.TargetPlayer;
 
 /**
@@ -80,10 +79,7 @@ class ParasiticStrixTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkInterveningIfClause(Game game) {
         FilterPermanent filter = new FilterPermanent();
         filter.add(new ColorPredicate(ObjectColor.BLACK));
-        if (game.getBattlefield().countAll(filter, this.controllerId, game) >= 1) {
-            return true;
-        }
-        return false;
+        return game.getBattlefield().countAll(filter, this.controllerId, game) >= 1;
     }
 
     @Override

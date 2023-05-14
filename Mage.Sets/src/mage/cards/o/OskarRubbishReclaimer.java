@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public class OskarRubbishReclaimer extends CardImpl {
 
-    private static final ValueHint hint = new ValueHint("Number of different mana values in your graveyard", OskarRubbishReclaimerValue.instance);
+    private static final ValueHint hint = new ValueHint("Number of different mana values in your graveyard", OskarRubbishReclaimerValue.INSTANCE);
 
     public OskarRubbishReclaimer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
@@ -37,7 +37,7 @@ public class OskarRubbishReclaimer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // This spell costs {1} less to cast for each different mana value among cards in your graveyard.
-        Effect spellReductionEffect = new SpellCostReductionForEachSourceEffect(1, OskarRubbishReclaimerValue.instance);
+        Effect spellReductionEffect = new SpellCostReductionForEachSourceEffect(1, OskarRubbishReclaimerValue.INSTANCE);
         this.addAbility(new SimpleStaticAbility(Zone.ALL, spellReductionEffect).addHint(hint));
 
         // Whenever you discard a nonland card, you may cast it from your graveyard.
@@ -88,7 +88,7 @@ class OskarRubbishReclaimerCastEffect extends OneShotEffect {
 }
 
 enum OskarRubbishReclaimerValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

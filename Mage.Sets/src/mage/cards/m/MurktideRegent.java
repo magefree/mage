@@ -44,7 +44,7 @@ public final class MurktideRegent extends CardImpl {
 
         // Murktide Regent enters the battlefield with a +1/+1 counter on it for each instant and sorcery card exiled with it.
         this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(), MurktideRegentValue.instance, false),
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(), MurktideRegentValue.INSTANCE, false),
                 "with a +1/+1 counter on it for each instant and sorcery card exiled with it"
         ));
 
@@ -63,7 +63,7 @@ public final class MurktideRegent extends CardImpl {
 }
 
 enum MurktideRegentValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -82,7 +82,7 @@ enum MurktideRegentValue implements DynamicValue {
 
     @Override
     public MurktideRegentValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

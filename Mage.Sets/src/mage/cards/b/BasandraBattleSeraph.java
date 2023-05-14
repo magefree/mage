@@ -84,9 +84,6 @@ class BasandraBattleSeraphEffect extends ContinuousRuleModifyingEffectImpl {
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getTurnPhaseType() == TurnPhase.COMBAT) {
-            return true;
-        }
-        return false;
+        return game.getTurnPhaseType() == TurnPhase.COMBAT;
     }
 }

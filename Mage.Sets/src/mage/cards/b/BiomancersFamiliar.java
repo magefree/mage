@@ -54,13 +54,13 @@ public final class BiomancersFamiliar extends CardImpl {
 
 class BiomancersFamiliarCostReductionEffect extends CostModificationEffectImpl {
 
-    private static final String effectText = "Activated abilities of creatures "
+    private static final String EFFECT_TEXT = "Activated abilities of creatures "
             + "you control cost {2} less to activate. "
             + "This effect can't reduce the mana in that cost to less than one mana";
 
     BiomancersFamiliarCostReductionEffect() {
         super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = effectText;
+        staticText = EFFECT_TEXT;
     }
 
     private BiomancersFamiliarCostReductionEffect(final BiomancersFamiliarCostReductionEffect effect) {

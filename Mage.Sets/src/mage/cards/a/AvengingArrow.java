@@ -42,7 +42,7 @@ public final class AvengingArrow extends CardImpl {
 }
 
 enum AvengingArrowPredicate implements Predicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Permanent input, Game game) {

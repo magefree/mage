@@ -24,7 +24,6 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.token.PhyrexianHorrorGreenToken;
-import mage.game.permanent.token.PhyrexianHorrorRedToken;
 import mage.target.TargetPermanent;
 
 /**

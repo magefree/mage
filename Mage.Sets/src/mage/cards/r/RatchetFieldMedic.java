@@ -67,7 +67,7 @@ class RatchetFieldMedicEffect extends OneShotEffect {
             "less than or equal to the amount of life you gained this turn from your graveyard");
 
     static {
-        filter.add(RatchetFieldMedicPredicate.instance);
+        filter.add(RatchetFieldMedicPredicate.INSTANCE);
     }
 
     RatchetFieldMedicEffect() {
@@ -101,7 +101,7 @@ class RatchetFieldMedicEffect extends OneShotEffect {
 }
 
 enum RatchetFieldMedicPredicate implements Predicate<Card> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Card input, Game game) {

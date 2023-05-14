@@ -42,7 +42,7 @@ public final class MogissMarauder extends CardImpl {
                 HasteAbility.getInstance(), Duration.EndOfTurn,
                 "and haste until end of turn, where X is your devotion to black"
         ));
-        ability.setTargetAdjuster(MogissMarauderAdjuster.instance);
+        ability.setTargetAdjuster(MogissMarauderAdjuster.INSTANCE);
         ability.addHint(DevotionCount.B.getHint());
         this.addAbility(ability);
     }
@@ -58,7 +58,7 @@ public final class MogissMarauder extends CardImpl {
 }
 
 enum MogissMarauderAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

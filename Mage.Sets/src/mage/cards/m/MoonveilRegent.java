@@ -43,14 +43,14 @@ public final class MoonveilRegent extends CardImpl {
 
         // Whenever you cast a spell, you may discard your hand. If you do, draw a card for each of that spell's colors.
         this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(
-                new DrawCardSourceControllerEffect(MoonveilRegentSpellValue.instance)
+                new DrawCardSourceControllerEffect(MoonveilRegentSpellValue.INSTANCE)
                         .setText("draw a card for each of that spell's colors"),
                 new DiscardHandCost()
         ), StaticFilters.FILTER_SPELL_A, false, true));
 
         // When Moonveil Regent dies, it deals X damage to any target, where X is the number of colors among permanents you control.
         Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(
-                MoonveilRegentColorValue.instance
+                MoonveilRegentColorValue.INSTANCE
         ).setText("it deals X damage to any target, where X is the number of colors among permanents you control"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
@@ -67,7 +67,7 @@ public final class MoonveilRegent extends CardImpl {
 }
 
 enum MoonveilRegentSpellValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -87,7 +87,7 @@ enum MoonveilRegentSpellValue implements DynamicValue {
 }
 
 enum MoonveilRegentColorValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -119,7 +119,7 @@ enum MoonveilRegentColorValue implements DynamicValue {
 }
 
 enum MoonveilRegentHint implements Hint {
-    instance;
+    INSTANCE;
 
     @Override
     public String getText(Game game, Ability ability) {

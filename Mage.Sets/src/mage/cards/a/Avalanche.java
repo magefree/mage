@@ -25,7 +25,7 @@ public final class Avalanche extends CardImpl {
 
         // Destroy X target snow lands.
         this.getSpellAbility().addEffect(new DestroyTargetEffect("Destroy X target snow lands"));
-        this.getSpellAbility().setTargetAdjuster(AvalancheAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(AvalancheAdjuster.INSTANCE);
     }
 
     private Avalanche(final Avalanche card) {
@@ -39,7 +39,7 @@ public final class Avalanche extends CardImpl {
 }
 
 enum AvalancheAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
     private static final FilterPermanent filter = new FilterLandPermanent("snow lands");
 
     static {

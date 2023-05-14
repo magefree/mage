@@ -50,7 +50,7 @@ public final class NecroticPlague extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         ability = new DiesAttachedTriggeredAbility(new NecroticPlagueEffect(), "enchanted creature", false);
-        ability.setTargetAdjuster(NecroticPlagueAdjuster.instance);
+        ability.setTargetAdjuster(NecroticPlagueAdjuster.INSTANCE);
         this.addAbility(ability);
 
     }
@@ -67,7 +67,7 @@ public final class NecroticPlague extends CardImpl {
 }
 
 enum NecroticPlagueAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

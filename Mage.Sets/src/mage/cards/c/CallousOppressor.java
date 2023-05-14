@@ -87,14 +87,10 @@ class CallousOppressorFilter extends FilterCreaturePermanent {
     public boolean match(Permanent permanent, UUID playerId, Ability source, Game game) {
         if (super.match(permanent, playerId, source, game)) {
             SubType subtype = (SubType) game.getState().getValue(source.getSourceId() + "_type");
-            if (subtype != null && permanent.hasSubtype(subtype, game)) {
-                return false;
-            }
-            return true;
+            return subtype == null || !permanent.hasSubtype(subtype, game);
         }
         return false;
     }
-
 }
 
 class CallousOppressorChooseCreatureTypeEffect extends OneShotEffect {

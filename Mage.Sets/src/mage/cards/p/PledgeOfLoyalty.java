@@ -31,7 +31,7 @@ public final class PledgeOfLoyalty extends CardImpl {
     private static final FilterCard filter = new FilterCard("the colors of permanents you control");
 
     static {
-        filter.add(PledgeOfLoyaltyPredicate.instance);
+        filter.add(PledgeOfLoyaltyPredicate.INSTANCE);
     }
 
     public PledgeOfLoyalty(UUID ownerId, CardSetInfo setInfo) {
@@ -62,7 +62,7 @@ public final class PledgeOfLoyalty extends CardImpl {
 }
 
 enum PledgeOfLoyaltyPredicate implements ObjectSourcePlayerPredicate<MageObject> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {

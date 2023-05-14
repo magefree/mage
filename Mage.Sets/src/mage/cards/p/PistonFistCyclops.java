@@ -41,7 +41,7 @@ public final class PistonFistCyclops extends CardImpl {
                 new ConditionalAsThoughEffect(
                         new CanAttackAsThoughItDidntHaveDefenderSourceEffect(
                                 Duration.WhileOnBattlefield
-                        ), PistonFistCyclopsCondition.instance)
+                        ), PistonFistCyclopsCondition.INSTANCE)
                         .setText("As long as you've cast an instant or sorcery spell this turn, "
                                 + "{this} can attack as though it didn't have defender")
         ),
@@ -59,7 +59,7 @@ public final class PistonFistCyclops extends CardImpl {
 }
 
 enum PistonFistCyclopsCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

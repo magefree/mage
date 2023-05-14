@@ -44,7 +44,7 @@ public final class VoyagerDrake extends CardImpl {
                 ).setText("up to X target creatures gain flying until end of turn, " +
                         "where X is the number of times {this} was kicked.")
         );
-        ability.setTargetAdjuster(VoyagerDrakeAdjuster.instance);
+        ability.setTargetAdjuster(VoyagerDrakeAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -59,7 +59,7 @@ public final class VoyagerDrake extends CardImpl {
 }
 
 enum VoyagerDrakeAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

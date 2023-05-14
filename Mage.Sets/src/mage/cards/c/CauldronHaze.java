@@ -16,13 +16,13 @@ import java.util.UUID;
  */
 public final class CauldronHaze extends CardImpl {
 
-    private static final String rule = "Choose any number of target creatures. Each of those creatures gains persist until end of turn";
+    private static final String RULE_TEXT = "Choose any number of target creatures. Each of those creatures gains persist until end of turn";
 
     public CauldronHaze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W/B}");
 
         // Choose any number of target creatures. Each of those creatures gains persist until end of turn.
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new PersistAbility(), Duration.EndOfTurn, rule));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new PersistAbility(), Duration.EndOfTurn, RULE_TEXT));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
     }
 

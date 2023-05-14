@@ -43,7 +43,7 @@ public final class AlenaKessigTrapper extends CardImpl {
 
         // {T}: Add an amount of {R} equal to the greatest power among creatures you control that entered the battlefield this turn.
         this.addAbility(new DynamicManaAbility(
-                Mana.RedMana(1), AlenaKessigTrapperValue.instance, new TapSourceCost(), "Add an amount of {R} " +
+                Mana.RedMana(1), AlenaKessigTrapperValue.INSTANCE, new TapSourceCost(), "Add an amount of {R} " +
                 "equal to the greatest power among creatures you control that entered the battlefield this turn."
         ), new AlenaKessigTrapperWatcher());
 
@@ -62,7 +62,7 @@ public final class AlenaKessigTrapper extends CardImpl {
 }
 
 enum AlenaKessigTrapperValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -75,7 +75,7 @@ enum AlenaKessigTrapperValue implements DynamicValue {
 
     @Override
     public AlenaKessigTrapperValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

@@ -152,7 +152,7 @@ class UvildaDeanOfPerfectionGainAbilityEffect extends ContinuousEffectImpl {
                 new BeginningOfUpkeepTriggeredAbility(
                         Zone.EXILED, new RemoveCounterSourceEffect(CounterType.HONE.createInstance()),
                         TargetController.YOU, false
-                ), UvildaDeanOfPerfectionCondition.instance, "At the beginning of your upkeep, " +
+                ), UvildaDeanOfPerfectionCondition.INSTANCE, "At the beginning of your upkeep, " +
                 "if this card is exiled, remove a hone counter from it."
         );
         ability.setSourceId(card.getId());
@@ -167,7 +167,7 @@ class UvildaDeanOfPerfectionGainAbilityEffect extends ContinuousEffectImpl {
 }
 
 enum UvildaDeanOfPerfectionCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

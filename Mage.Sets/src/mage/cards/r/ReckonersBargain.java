@@ -31,7 +31,7 @@ public final class ReckonersBargain extends CardImpl {
 
         // You gain life equal to the sacrificed permanent's mana value. Draw two cards.
         this.getSpellAbility().addEffect(new GainLifeEffect(
-                ReckonersBargainValue.instance, "you gain life " +
+                ReckonersBargainValue.INSTANCE, "you gain life " +
                 "equal to the sacrificed permanent's mana value"
         ));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
@@ -48,7 +48,7 @@ public final class ReckonersBargain extends CardImpl {
 }
 
 enum ReckonersBargainValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

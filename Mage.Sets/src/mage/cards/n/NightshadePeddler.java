@@ -18,7 +18,7 @@ import mage.constants.Zone;
  */
 public final class NightshadePeddler extends CardImpl {
 
-    private static final String ruleText = "As long as {this} is paired with another creature, both creatures have deathtouch";
+    private static final String RULE_TEXT = "As long as {this} is paired with another creature, both creatures have deathtouch";
 
     public NightshadePeddler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
@@ -32,7 +32,7 @@ public final class NightshadePeddler extends CardImpl {
         this.addAbility(new SoulbondAbility());
 
         // As long as Nightshade Peddler is paired with another creature, both creatures have deathtouch.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(DeathtouchAbility.getInstance(), ruleText)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(DeathtouchAbility.getInstance(), RULE_TEXT)));
     }
 
     private NightshadePeddler(final NightshadePeddler card) {

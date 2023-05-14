@@ -30,7 +30,7 @@ import mage.util.functions.CopyApplier;
  */
 public final class VesuvanDoppelganger extends CardImpl {
 
-    private static final String rule = "You may have {this} enter the battlefield as a copy of any creature on the battlefield except it doesn't copy that creature's color and it has \"At the beginning of your upkeep, you may have this creature become a copy of target creature except it doesn't copy that creature's color and it has this ability.\"";
+    private static final String RULE_TEXT = "You may have {this} enter the battlefield as a copy of any creature on the battlefield except it doesn't copy that creature's color and it has \"At the beginning of your upkeep, you may have this creature become a copy of target creature except it doesn't copy that creature's color and it has this ability.\"";
 
     public VesuvanDoppelganger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
@@ -39,7 +39,7 @@ public final class VesuvanDoppelganger extends CardImpl {
         this.toughness = new MageInt(0);
 
         // You may have Vesuvan Doppelganger enter the battlefield as a copy of any creature on the battlefield except it doesn't copy that creature's color and it has "At the beginning of your upkeep, you may have this creature become a copy of target creature except it doesn't copy that creature's color and it has this ability."
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new VesuvanDoppelgangerCopyEffect(), rule, true));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new VesuvanDoppelgangerCopyEffect(), RULE_TEXT, true));
         this.addAbility(ability);
 
     }
@@ -56,7 +56,7 @@ public final class VesuvanDoppelganger extends CardImpl {
 
 class VesuvanDoppelgangerCopyEffect extends OneShotEffect {
 
-    private static final String rule2 = "At the beginning of your upkeep, you may have this creature become a copy of target creature except it doesn't copy that creature's color and it has this ability.";
+    private static final String RULE2 = "At the beginning of your upkeep, you may have this creature become a copy of target creature except it doesn't copy that creature's color and it has this ability.";
 
     public VesuvanDoppelgangerCopyEffect() {
         super(Outcome.Copy);
@@ -91,7 +91,7 @@ class VesuvanDoppelgangerCopyEffect extends OneShotEffect {
                         public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
                             blueprint.getColor().setColor(sourcePermanent.getColor(game));
                             blueprint.getAbilities().add(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                                    new VesuvanDoppelgangerCopyEffect(), TargetController.YOU, true, false, rule2));
+                                    new VesuvanDoppelgangerCopyEffect(), TargetController.YOU, true, false, RULE2));
                             return true;
                         }
                     });

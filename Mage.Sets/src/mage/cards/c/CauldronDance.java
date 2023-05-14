@@ -121,21 +121,19 @@ class CauldronDancePutCreatureFromHandOntoBattlefieldEffect extends OneShotEffec
                 TargetCardInHand target = new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE);
                 if (controller.choose(Outcome.PutCreatureInPlay, target, source, game)) {
                     Card card = game.getCard(target.getFirstTarget());
-                    if (card != null) {
-                        if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                            Permanent permanent = game.getPermanent(card.getId());
-                            if (permanent != null) {
-                                ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
-                                effect.setTargetPointer(new FixedTarget(permanent, game));
-                                game.addEffect(effect, source);
+                    if (card != null && controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
+                        Permanent permanent = game.getPermanent(card.getId());
+                        if (permanent != null) {
+                            ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
+                            effect.setTargetPointer(new FixedTarget(permanent, game));
+                            game.addEffect(effect, source);
 
-                                SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice " + card.getName(), source.getControllerId());
-                                sacrificeEffect.setTargetPointer(new FixedTarget(permanent, game));
-                                DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
-                                game.addDelayedTriggeredAbility(delayedAbility, source);
-                            }
-                            return true;
+                            SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice " + card.getName(), source.getControllerId());
+                            sacrificeEffect.setTargetPointer(new FixedTarget(permanent, game));
+                            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
+                            game.addDelayedTriggeredAbility(delayedAbility, source);
                         }
+                        return true;
                     }
                     return false;
                 }

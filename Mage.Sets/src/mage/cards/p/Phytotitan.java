@@ -47,11 +47,11 @@ public final class Phytotitan extends CardImpl {
 
 class PhytotitanEffect extends OneShotEffect {
 
-    private static final String effectText = "return it to the battlefield tapped under its owner's control at the beginning of their next upkeep";
+    private static final String EFFECT_TEXT = "return it to the battlefield tapped under its owner's control at the beginning of their next upkeep";
 
     PhytotitanEffect() {
         super(Outcome.Benefit);
-        staticText = effectText;
+        staticText = EFFECT_TEXT;
     }
 
     PhytotitanEffect(PhytotitanEffect effect) {

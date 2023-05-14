@@ -12,7 +12,6 @@ import mage.abilities.effects.common.FightTargetSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -78,7 +77,7 @@ class MythosOfIllunaEffect extends OneShotEffect {
         if (condition.apply(game, source)) {
             Ability ability = new ConditionalInterveningIfTriggeredAbility(
                     new EntersBattlefieldTriggeredAbility(new FightTargetSourceEffect()),
-                    MythosOfIllunaCondition.instance, "When this permanent enters the battlefield, " +
+                    MythosOfIllunaCondition.INSTANCE, "When this permanent enters the battlefield, " +
                     "if it's a creature, it fights up to one target creature you don't control."
             );
             ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, false));
@@ -94,7 +93,7 @@ class MythosOfIllunaEffect extends OneShotEffect {
 }
 
 enum MythosOfIllunaCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

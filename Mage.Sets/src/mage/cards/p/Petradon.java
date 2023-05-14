@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
 import mage.target.common.TargetLandPermanent;
 
 import java.util.UUID;

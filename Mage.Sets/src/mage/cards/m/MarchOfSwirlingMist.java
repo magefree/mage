@@ -34,7 +34,7 @@ public final class MarchOfSwirlingMist extends CardImpl {
 
         // Up to X target creatures phase out.
         this.getSpellAbility().addEffect(new PhaseOutTargetEffect().setText("up to X target creatures phase out"));
-        this.getSpellAbility().setTargetAdjuster(MarchOfSwirlingMistAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(MarchOfSwirlingMistAdjuster.INSTANCE);
     }
 
     private MarchOfSwirlingMist(final MarchOfSwirlingMist card) {
@@ -48,7 +48,7 @@ public final class MarchOfSwirlingMist extends CardImpl {
 }
 
 enum MarchOfSwirlingMistAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

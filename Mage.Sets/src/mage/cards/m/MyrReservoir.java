@@ -73,19 +73,16 @@ class MyrReservoirConditionalMana extends ConditionalMana {
     MyrReservoirConditionalMana(Mana mana) {
         super(mana);
         staticText = "Spend this mana only to cast Myr spells or activate abilities of Myr";
-        addCondition(MyrReservoirManaCondition.instance);
+        addCondition(MyrReservoirManaCondition.INSTANCE);
     }
 }
 
 enum MyrReservoirManaCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source);
-        if (object != null && object.hasSubtype(SubType.MYR, game)) {
-            return true;
-        }
-        return false;
+        return object != null && object.hasSubtype(SubType.MYR, game);
     }
 }

@@ -66,11 +66,9 @@ class AleatoryEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (controller != null && permanent != null) {
-            if (controller.flipCoin(source, game, true)) {
-                game.addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn), source);
-                return true;
-            }
+        if (controller != null && permanent != null && controller.flipCoin(source, game, true)) {
+            game.addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn), source);
+            return true;
         }
         return false;
     }

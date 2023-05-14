@@ -22,7 +22,7 @@ public final class TalesEnd extends CardImpl {
             = new FilterStackObject("activated ability, triggered ability, or legendary spell");
 
     static {
-        filter.add(TalesEndPredicate.instance);
+        filter.add(TalesEndPredicate.INSTANCE);
     }
 
     public TalesEnd(UUID ownerId, CardSetInfo setInfo) {
@@ -44,7 +44,7 @@ public final class TalesEnd extends CardImpl {
 }
 
 enum TalesEndPredicate implements Predicate<StackObject> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(StackObject input, Game game) {

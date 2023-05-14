@@ -38,7 +38,7 @@ public final class BorealOutrider extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new SpellCastControllerTriggeredAbility(
                         new BorealOutriderEffect(), StaticFilters.FILTER_SPELL_A_CREATURE, false, true
-                ), BorealOutriderCondition.instance, "Whenever you cast a creature spell, " +
+                ), BorealOutriderCondition.INSTANCE, "Whenever you cast a creature spell, " +
                 "if {S} of any of that spell's colors was spent to cast it, that creature " +
                 "enters the battlefield with an additional +1/+1 counter on it."
         ));
@@ -55,7 +55,7 @@ public final class BorealOutrider extends CardImpl {
 }
 
 enum BorealOutriderCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

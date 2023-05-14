@@ -39,7 +39,7 @@ public final class LuminarchAscension extends CardImpl {
                 new BeginningOfEndStepTriggeredAbility(
                         new AddCountersSourceEffect(CounterType.QUEST.createInstance()),
                         TargetController.OPPONENT, true
-                ), LuminarchAscensionCondition.instance, rule
+                ), LuminarchAscensionCondition.INSTANCE, rule
         ));
 
         // {1}{W}: Create a 4/4 white Angel creature token with flying. Activate this ability only if Luminarch Ascension has four or more quest counters on it.
@@ -60,7 +60,7 @@ public final class LuminarchAscension extends CardImpl {
 }
 
 enum LuminarchAscensionCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

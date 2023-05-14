@@ -29,7 +29,7 @@ public final class NoOneLeftBehind extends CardImpl {
 
         // This spell costs {3} less to cast if it targets a creature card with mana value 3 or less.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionSourceEffect(3, NoOneLeftBehindCondition.instance).setCanWorksOnStackOnly(true)
+                Zone.ALL, new SpellCostReductionSourceEffect(3, NoOneLeftBehindCondition.INSTANCE).setCanWorksOnStackOnly(true)
         ).setRuleAtTheTop(true));
 
         // Return target creature card from your graveyard to the battlefield.
@@ -48,7 +48,7 @@ public final class NoOneLeftBehind extends CardImpl {
 }
 
 enum NoOneLeftBehindCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

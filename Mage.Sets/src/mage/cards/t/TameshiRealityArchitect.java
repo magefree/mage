@@ -59,7 +59,7 @@ public final class TameshiRealityArchitect extends CardImpl {
         ability.addCost(new ReturnToHandChosenControlledPermanentCost(
                 new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND)
         ));
-        this.addAbility(ability.setTargetAdjuster(TameshiRealityArchitectAdjuster.instance));
+        this.addAbility(ability.setTargetAdjuster(TameshiRealityArchitectAdjuster.INSTANCE));
     }
 
     private TameshiRealityArchitect(final TameshiRealityArchitect card) {
@@ -73,7 +73,7 @@ public final class TameshiRealityArchitect extends CardImpl {
 }
 
 enum TameshiRealityArchitectAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

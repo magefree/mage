@@ -28,7 +28,7 @@ public final class OldManOfTheSea extends CardImpl {
             = new FilterCreaturePermanent("creature with less than or equal power");
 
     static {
-        filter.add(OldManOfTheSeaPredicate.instance);
+        filter.add(OldManOfTheSeaPredicate.INSTANCE);
     }
 
     public OldManOfTheSea(UUID ownerId, CardSetInfo setInfo) {
@@ -58,7 +58,7 @@ public final class OldManOfTheSea extends CardImpl {
 }
 
 enum OldManOfTheSeaPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {

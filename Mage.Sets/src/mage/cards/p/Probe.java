@@ -33,7 +33,7 @@ public final class Probe extends CardImpl {
                 new DiscardTargetEffect(2),
                 KickedCondition.ONCE,
                 "If this spell was kicked, target player discards two cards"));
-        this.getSpellAbility().setTargetAdjuster(ProbeAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(ProbeAdjuster.INSTANCE);
     }
 
     private Probe(final Probe card) {
@@ -47,7 +47,7 @@ public final class Probe extends CardImpl {
 }
 
 enum ProbeAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

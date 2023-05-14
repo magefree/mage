@@ -54,12 +54,7 @@ public final class MistformMask extends CardImpl {
 }
 
 class MistformMaskEffect extends OneShotEffect {
-
     public MistformMaskEffect() {
-        this(false);
-    }
-
-    public MistformMaskEffect(boolean nonWall) {
         super(Outcome.BoostCreature);
         staticText = "Enchanted creature becomes the creature type of your choice until end of turn.";
     }

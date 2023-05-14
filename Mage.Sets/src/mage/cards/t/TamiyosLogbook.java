@@ -35,7 +35,7 @@ public final class TamiyosLogbook extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addEffect(new InfoEffect("This ability costs {1} less to activate for each other artifact you control"));
-        this.addAbility(ability.setCostAdjuster(TamiyosLogbookAdjuster.instance).addHint(TamiyosLogbookAdjuster.getHint()));
+        this.addAbility(ability.setCostAdjuster(TamiyosLogbookAdjuster.INSTANCE).addHint(TamiyosLogbookAdjuster.getHint()));
     }
 
     private TamiyosLogbook(final TamiyosLogbook card) {
@@ -49,7 +49,7 @@ public final class TamiyosLogbook extends CardImpl {
 }
 
 enum TamiyosLogbookAdjuster implements CostAdjuster {
-    instance;
+    INSTANCE;
     private static final FilterPermanent filter = new FilterControlledArtifactPermanent();
 
     static {

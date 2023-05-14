@@ -103,21 +103,16 @@ class AsForetoldAlternativeCost extends AlternativeCostSourceAbility {
     public boolean askToActivateAlternativeCosts(Ability ability, Game game) {
         Player controller = game.getPlayer(ability.getControllerId());
         Permanent asForetold = game.getPermanent(getSourceId());
-        if (controller != null
-                && asForetold != null) {
-            if (controller.chooseUse(Outcome.Neutral, "Use "
-                    + asForetold.getLogName() + " to pay the alternative cost ?", ability, game)) {
-                wasActivated = super.askToActivateAlternativeCosts(ability, game);
-                if (wasActivated) {
-                    game.getState().setValue(asForetold.getId().toString()
-                            + asForetold.getZoneChangeCounter(game)
-                            + asForetold.getTurnsOnBattlefield(), true);
-                }
+        if (controller != null && asForetold != null && controller.chooseUse(Outcome.Neutral, "Use " + asForetold.getLogName() + " to pay the alternative cost ?", ability, game)) {
+            wasActivated = super.askToActivateAlternativeCosts(ability, game);
+            if (wasActivated) {
+                game.getState().setValue(asForetold.getId().toString()
+                        + asForetold.getZoneChangeCounter(game)
+                        + asForetold.getTurnsOnBattlefield(), true);
             }
         }
         return wasActivated;
     }
-
 }
 
 /**

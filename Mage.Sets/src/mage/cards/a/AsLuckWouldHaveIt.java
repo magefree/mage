@@ -23,9 +23,6 @@ import java.util.UUID;
  * @author spjspj
  */
 public final class AsLuckWouldHaveIt extends CardImpl {
-
-    static final String rule = "put a number of luck counters on {this} equal to the result. Then if there are 100 or more luck counters on {this}, you win the game.";
-
     public AsLuckWouldHaveIt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
 
@@ -102,20 +99,18 @@ class AsLuckWouldHaveItEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (controller != null && permanent != null) {
-            if (getValue("rolled") != null) {
-                int amount = (Integer) getValue("rolled");
-                permanent.addCounters(new Counter("luck", amount), source.getControllerId(), source, game);
+        if (controller != null && permanent != null && getValue("rolled") != null) {
+            int amount = (Integer) getValue("rolled");
+            permanent.addCounters(new Counter("luck", amount), source.getControllerId(), source, game);
 
-                if (permanent.getCounters(game).getCount("luck") >= 100) {
-                    Player player = game.getPlayer(permanent.getControllerId());
-                    if (player != null) {
-                        player.won(game);
-                    }
+            if (permanent.getCounters(game).getCount("luck") >= 100) {
+                Player player = game.getPlayer(permanent.getControllerId());
+                if (player != null) {
+                    player.won(game);
                 }
-
-                return true;
             }
+
+            return true;
         }
         return false;
 

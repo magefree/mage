@@ -97,12 +97,12 @@ class RootcoilCreeperConditionalMana extends ConditionalMana {
     public RootcoilCreeperConditionalMana(Mana mana) {
         super(mana);
         staticText = "Spend this mana only to cast spells from your graveyard";
-        addCondition(RootcoilCreeperManaCondition.instance);
+        addCondition(RootcoilCreeperManaCondition.INSTANCE);
     }
 }
 
 enum RootcoilCreeperManaCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

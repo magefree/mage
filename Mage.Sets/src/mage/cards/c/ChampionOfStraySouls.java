@@ -55,7 +55,7 @@ public final class ChampionOfStraySouls extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeXTargetCost(filter));
         ability.addTarget(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD));
-        ability.setTargetAdjuster(ChampionOfStraySoulsAdjuster.instance);
+        ability.setTargetAdjuster(ChampionOfStraySoulsAdjuster.INSTANCE);
         this.addAbility(ability);
 
         // {5}{B}{B}: Put Champion of Stray Souls on top of your library from your graveyard.
@@ -75,7 +75,7 @@ public final class ChampionOfStraySouls extends CardImpl {
 }
 
 enum ChampionOfStraySoulsAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

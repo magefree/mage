@@ -31,10 +31,10 @@ public final class BlueSunsTwilight extends CardImpl {
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.Custom, true)
                 .setText("gain control of target creature with mana value X or less"));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new CreateTokenCopyTargetEffect(), BlueSunsTwilightCondition.instance,
+                new CreateTokenCopyTargetEffect(), BlueSunsTwilightCondition.INSTANCE,
                 "If X is 5 or more, create a token that's a copy of that creature"
         ));
-        this.getSpellAbility().setTargetAdjuster(BlueSunsTwilightAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(BlueSunsTwilightAdjuster.INSTANCE);
     }
 
     private BlueSunsTwilight(final BlueSunsTwilight card) {
@@ -48,7 +48,7 @@ public final class BlueSunsTwilight extends CardImpl {
 }
 
 enum BlueSunsTwilightCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -57,7 +57,7 @@ enum BlueSunsTwilightCondition implements Condition {
 }
 
 enum BlueSunsTwilightAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

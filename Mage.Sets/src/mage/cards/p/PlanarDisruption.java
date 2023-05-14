@@ -7,7 +7,6 @@ import mage.abilities.effects.common.combat.CantBlockAttackActivateAttachedEffec
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.target.common.TargetArtifactPermanent;
 import mage.abilities.effects.common.AttachEffect;
 import mage.constants.Outcome;
 import mage.target.TargetPermanent;

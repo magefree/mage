@@ -38,7 +38,7 @@ public final class UrborgRepossession extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
         this.getSpellAbility().addEffect(new InfoEffect("If this spell was kicked, " +
                 "return another target permanent card from your graveyard to your hand"));
-        this.getSpellAbility().setTargetAdjuster(UrborgRepossessionAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(UrborgRepossessionAdjuster.INSTANCE);
     }
 
     private UrborgRepossession(final UrborgRepossession card) {
@@ -52,7 +52,7 @@ public final class UrborgRepossession extends CardImpl {
 }
 
 enum UrborgRepossessionAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
     private static final FilterCard filter = new FilterPermanentCard("another permanent card from your graveyard");
 
     static {

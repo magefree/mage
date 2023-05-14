@@ -63,7 +63,8 @@ class RecklessEndeavorEffect extends OneShotEffect {
         List<Integer> results = player.rollDice(outcome, source, game, 12, 2, 0);
         int firstResult = results.get(0);
         int secondResult = results.get(1);
-        int first, second;
+        int first;
+        int second;
         if (firstResult != secondResult && player.chooseUse(
                 outcome, "Choose a number to deal damage to each creature",
                 "The other number will be the amount of treasures you create",

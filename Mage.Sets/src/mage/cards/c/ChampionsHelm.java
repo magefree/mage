@@ -21,7 +21,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class ChampionsHelm extends CardImpl {
 
-    private static final String staticText = "As long as equipped creature is legendary, it has hexproof";
+    private static final String STATIC_TEXT = "As long as equipped creature is legendary, it has hexproof";
     
     public ChampionsHelm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
@@ -33,7 +33,7 @@ public final class ChampionsHelm extends CardImpl {
         // As long as equipped creature is legendary, it has hexproof.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new GainAbilityAttachedEffect(HexproofAbility.getInstance(), AttachmentType.EQUIPMENT), 
-                new EquippedHasSupertypeCondition(SuperType.LEGENDARY), staticText)));
+                new EquippedHasSupertypeCondition(SuperType.LEGENDARY), STATIC_TEXT)));
         
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), new TargetControlledCreaturePermanent(), false));

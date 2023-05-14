@@ -40,7 +40,7 @@ public final class VitalityHunter extends CardImpl {
                 new AddCountersTargetEffect(CounterType.LIFELINK.createInstance())
                         .setText("put a lifelink counter on each of up to X target creatures")
         );
-        ability.setTargetAdjuster(VitalityHunterAdjuster.instance);
+        ability.setTargetAdjuster(VitalityHunterAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -55,7 +55,7 @@ public final class VitalityHunter extends CardImpl {
 }
 
 enum VitalityHunterAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

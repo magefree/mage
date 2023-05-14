@@ -35,7 +35,7 @@ public final class ReturnOfTheWildspeaker extends CardImpl {
 
         // Choose one —
         // • Draw cards equal to the greatest power among non-Human creatures you control.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ReturnOfTheWildspeakerValue.instance)
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ReturnOfTheWildspeakerValue.INSTANCE)
                 .setText("draw cards equal to the greatest power among non-Human creatures you control"));
 
         // • Non-Human creatures you control get +3/+3 until end of turn.
@@ -55,7 +55,7 @@ public final class ReturnOfTheWildspeaker extends CardImpl {
 }
 
 enum ReturnOfTheWildspeakerValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -72,7 +72,7 @@ enum ReturnOfTheWildspeakerValue implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

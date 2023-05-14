@@ -65,8 +65,8 @@ public final class NecropolisFiend extends CardImpl {
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(
                 1, 1, StaticFilters.FILTER_CARDS_FROM_YOUR_GRAVEYARD
         ), "Exile X cards from your graveyard"));
-        ability.setTargetAdjuster(NecropolisFiendTargetAdjuster.instance);
-        ability.setCostAdjuster(NecropolisFiendCostAdjuster.instance);
+        ability.setTargetAdjuster(NecropolisFiendTargetAdjuster.INSTANCE);
+        ability.setCostAdjuster(NecropolisFiendCostAdjuster.INSTANCE);
         this.addAbility(ability);
 
     }
@@ -82,7 +82,7 @@ public final class NecropolisFiend extends CardImpl {
 }
 
 enum NecropolisFiendCostAdjuster implements CostAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
@@ -99,7 +99,7 @@ enum NecropolisFiendCostAdjuster implements CostAdjuster {
 }
 
 enum NecropolisFiendTargetAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

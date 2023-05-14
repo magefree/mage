@@ -26,7 +26,7 @@ import mage.counters.CounterType;
  */
 public final class PrivateResearch extends CardImpl {
 
-    private static final String rule = "draw a card for each page counter on {this}.";
+    private static final String RULE_TEXT = "draw a card for each page counter on {this}.";
 
     public PrivateResearch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}");
@@ -45,7 +45,7 @@ public final class PrivateResearch extends CardImpl {
                 new AddCountersSourceEffect(CounterType.PAGE.createInstance(), true), TargetController.YOU, true));
 
         // When enchanted creature dies, draw a card for each page counter on Private Research.
-        this.addAbility(new DiesAttachedTriggeredAbility(new DrawCardSourceControllerEffect(new CountersSourceCount(CounterType.PAGE)).setText(rule), "enchanted creature"));
+        this.addAbility(new DiesAttachedTriggeredAbility(new DrawCardSourceControllerEffect(new CountersSourceCount(CounterType.PAGE)).setText(RULE_TEXT), "enchanted creature"));
 
     }
 

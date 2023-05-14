@@ -39,7 +39,7 @@ public final class VoraciousDragon extends CardImpl {
         this.addAbility(new DevourAbility(DevourFactor.Devour1));
 
         // When Voracious Dragon enters the battlefield, it deals damage to any target equal to twice the number of Goblins it devoured.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(TwiceDevouredGoblins.instance, "it"), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(TwiceDevouredGoblins.INSTANCE, "it"), false);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
@@ -55,7 +55,7 @@ public final class VoraciousDragon extends CardImpl {
 }
 
 enum TwiceDevouredGoblins implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -86,7 +86,7 @@ enum TwiceDevouredGoblins implements DynamicValue {
 
     @Override
     public TwiceDevouredGoblins copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

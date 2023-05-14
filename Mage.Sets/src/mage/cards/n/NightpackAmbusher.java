@@ -57,7 +57,7 @@ public final class NightpackAmbusher extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
                         new CreateTokenEffect(new WolfToken()), TargetController.YOU, false
-                ), NightpackAmbusherCondition.instance, "At the beginning of your end step, " +
+                ), NightpackAmbusherCondition.INSTANCE, "At the beginning of your end step, " +
                 "if you didn't cast a spell this turn, create a 2/2 green Wolf creature token."
         ));
     }
@@ -73,7 +73,7 @@ public final class NightpackAmbusher extends CardImpl {
 }
 
 enum NightpackAmbusherCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

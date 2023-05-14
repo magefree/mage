@@ -69,11 +69,11 @@ public final class VenserTheSojourner extends CardImpl {
 
 class VenserTheSojournerEffect extends OneShotEffect {
 
-    private static final String effectText = "Exile target permanent you own. Return it to the battlefield under your control at the beginning of the next end step";
+    private static final String EFFECT_TEXT = "Exile target permanent you own. Return it to the battlefield under your control at the beginning of the next end step";
 
     VenserTheSojournerEffect() {
         super(Outcome.Benefit);
-        staticText = effectText;
+        staticText = EFFECT_TEXT;
     }
 
     VenserTheSojournerEffect(VenserTheSojournerEffect effect) {

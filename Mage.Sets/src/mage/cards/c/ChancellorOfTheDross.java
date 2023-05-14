@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -24,7 +23,7 @@ import mage.game.events.GameEvent.EventType;
  */
 public final class ChancellorOfTheDross extends CardImpl {
 
-    private static String abilityText = "at the beginning of the first upkeep, each opponent loses 3 life, then you gain life equal to the life lost this way";
+    private static final String ABILITY_TEXT = "at the beginning of the first upkeep, each opponent loses 3 life, then you gain life equal to the life lost this way";
 
     public ChancellorOfTheDross(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}{B}");
@@ -35,7 +34,7 @@ public final class ChancellorOfTheDross extends CardImpl {
         this.toughness = new MageInt(6);
 
         // You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, each opponent loses 3 life, then you gain life equal to the life lost this way.
-        this.addAbility(new ChancellorAbility(new ChancellorOfTheDrossDelayedTriggeredAbility(), abilityText));
+        this.addAbility(new ChancellorAbility(new ChancellorOfTheDrossDelayedTriggeredAbility(), ABILITY_TEXT));
 
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(LifelinkAbility.getInstance());

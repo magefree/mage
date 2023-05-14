@@ -41,7 +41,7 @@ public final class BoxingRing extends CardImpl {
             = new FilterCreaturePermanent("creature you don't control with the same mana value");
 
     static {
-        filter.add(BoxingRingPredicate.instance);
+        filter.add(BoxingRingPredicate.INSTANCE);
     }
 
     public BoxingRing(UUID ownerId, CardSetInfo setInfo) {
@@ -57,7 +57,7 @@ public final class BoxingRing extends CardImpl {
         // {T}: Create a Treasure token. Activate only if you control a creature that fought this turn.
         this.addAbility(new ConditionalActivatedAbility(
                 Zone.BATTLEFIELD, new CreateTokenEffect(new TreasureToken()),
-                new TapSourceCost(), BoxingRingCondition.instance
+                new TapSourceCost(), BoxingRingCondition.INSTANCE
         ), new BoxingRingWatcher());
     }
 
@@ -72,7 +72,7 @@ public final class BoxingRing extends CardImpl {
 }
 
 enum BoxingRingPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
@@ -117,7 +117,7 @@ class BoxingRingFightEffect extends OneShotEffect {
 }
 
 enum BoxingRingCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

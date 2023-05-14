@@ -38,7 +38,7 @@ public final class NoviceKnight extends CardImpl {
         // As long as Novice Knight is enchanted or equipped, it can attack as though it didn't have defender.
         Effect effect = new ConditionalAsThoughEffect(
                 new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield),
-                EnchantedOrEquippedSourceCondition.instance);
+                EnchantedOrEquippedSourceCondition.INSTANCE);
         effect.setText("As long as {this} is enchanted or equipped, it can attack as though it didn't have defender");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
@@ -54,8 +54,7 @@ public final class NoviceKnight extends CardImpl {
 }
 
 enum EnchantedOrEquippedSourceCondition implements Condition {
-
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

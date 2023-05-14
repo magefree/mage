@@ -70,7 +70,7 @@ class OddOrEvenEffect extends OneShotEffect {
                 if (creature != null) {
                     String name = creature.getName();
 
-                    if (name.equalsIgnoreCase("") && this.odd == false) {
+                    if (name.equalsIgnoreCase("") && !this.odd) {
                         creature.destroy(source, game, false);
                     } else {
                         int spaces = name.length() - name.replace(" ", "").length();

@@ -30,7 +30,7 @@ public final class UndercellarSweep extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new AttacksWithCreaturesTriggeredAbility(
                         new CreateTokenEffect(new SoldierToken(), 2, true, true), 1
-                ), UndercellarSweepCondition.instance, "Whenever you attack, if you or a player you're attacking " +
+                ), UndercellarSweepCondition.INSTANCE, "Whenever you attack, if you or a player you're attacking " +
                 "has the initiative, you create two 1/1 white Soldier creature token that are tapped and attacking."
         ));
     }
@@ -46,7 +46,7 @@ public final class UndercellarSweep extends CardImpl {
 }
 
 enum UndercellarSweepCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

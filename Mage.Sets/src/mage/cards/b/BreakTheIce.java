@@ -27,7 +27,7 @@ public final class BreakTheIce extends CardImpl {
             = new FilterLandPermanent("land that is snow or could produce {C}");
 
     static {
-        filter.add(BreakTheIcePredicate.instance);
+        filter.add(BreakTheIcePredicate.INSTANCE);
     }
 
     public BreakTheIce(UUID ownerId, CardSetInfo setInfo) {
@@ -52,7 +52,7 @@ public final class BreakTheIce extends CardImpl {
 }
 
 enum BreakTheIcePredicate implements Predicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Permanent input, Game game) {

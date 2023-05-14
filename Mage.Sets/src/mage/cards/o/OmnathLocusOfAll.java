@@ -79,7 +79,7 @@ class OmnathLocusOfAllManaEffect extends ContinuousEffectImpl {
 
 class OmnathLocusOfAllCardEffect extends OneShotEffect {
 
-    private static final String wubrg = "WUBRG";
+    private static final String WUBRG = "WUBRG";
 
     OmnathLocusOfAllCardEffect() {
         super(Outcome.Benefit);
@@ -113,8 +113,8 @@ class OmnathLocusOfAllCardEffect extends OneShotEffect {
                 .map(String::toCharArray)
                 .map(Arrays::asList)
                 .flatMap(Collection::stream)
-                .map(c -> "" + c)
-                .filter(wubrg::contains)
+                .map(String::valueOf)
+                .filter(WUBRG::contains)
                 .count() >= 3
                 && player.chooseUse(outcome, "Reveal " + card.getName() + '?', source, game)
         ) {

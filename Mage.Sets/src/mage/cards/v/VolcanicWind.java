@@ -18,7 +18,7 @@ public final class VolcanicWind extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures");
 
-    private static final String rule = "{this} deals X damage divided as you choose among any number of target creatures, where X is the number of creatures on the battlefield as you cast this spell";
+    private static final String RULE_TEXT = "{this} deals X damage divided as you choose among any number of target creatures, where X is the number of creatures on the battlefield as you cast this spell";
 
     public VolcanicWind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}");
@@ -26,7 +26,7 @@ public final class VolcanicWind extends CardImpl {
         // Volcanic Wind deals X damage divided as you choose among any number of target creatures, where X is the number of creatures as you cast Volcanic Wind.
         PermanentsOnBattlefieldCount creatures = new PermanentsOnBattlefieldCount(filter, null);
         Effect effect = new DamageMultiEffect(creatures);
-        effect.setText(rule);
+        effect.setText(RULE_TEXT);
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(creatures));
     }

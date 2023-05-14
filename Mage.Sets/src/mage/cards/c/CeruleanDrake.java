@@ -29,7 +29,7 @@ public final class CeruleanDrake extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("spell that targets you");
 
     static {
-        filter.add(CeruleanDrakePredicate.instance);
+        filter.add(CeruleanDrakePredicate.INSTANCE);
     }
 
     public CeruleanDrake(UUID ownerId, CardSetInfo setInfo) {
@@ -62,7 +62,7 @@ public final class CeruleanDrake extends CardImpl {
 }
 
 enum CeruleanDrakePredicate implements ObjectSourcePlayerPredicate<StackObject> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {

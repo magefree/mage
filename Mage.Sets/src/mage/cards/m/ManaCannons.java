@@ -25,7 +25,7 @@ public final class ManaCannons extends CardImpl {
 
         // Whenever you cast a multicolored spell, Mana Cannons deals X damage to any target, where X is the number of colors that spell is.
         Ability ability = new SpellCastControllerTriggeredAbility(
-                new DamageTargetEffect(ManaCannonsSpellValue.instance)
+                new DamageTargetEffect(ManaCannonsSpellValue.INSTANCE)
                         .setText("{this} deals X damage to any target, where X is the number of colors that spell is"),
                 StaticFilters.FILTER_SPELL_A_MULTICOLORED, false
         );
@@ -44,7 +44,7 @@ public final class ManaCannons extends CardImpl {
 }
 
 enum ManaCannonsSpellValue implements DynamicValue {
-    instance();
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

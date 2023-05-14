@@ -34,7 +34,7 @@ public final class CatapultFodder extends CardImpl {
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(new TransformSourceEffect(), TargetController.YOU, false),
-                CatapultFodderCondition.instance,
+                CatapultFodderCondition.INSTANCE,
                 "At the beginning of combat on your turn, if you control three or more creatures that each have toughness greater than their power, transform {this}"
         ));
     }
@@ -50,7 +50,7 @@ public final class CatapultFodder extends CardImpl {
 }
 
 enum CatapultFodderCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

@@ -32,7 +32,7 @@ public final class MirrorSigilSergeant extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
-    private static final String rule = "At the beginning of your upkeep, if you control a blue permanent, you may create a token that's a copy of {this}.";
+    private static final String RULE_TEXT = "At the beginning of your upkeep, if you control a blue permanent, you may create a token that's a copy of {this}.";
 
     public MirrorSigilSergeant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}");
@@ -49,7 +49,7 @@ public final class MirrorSigilSergeant extends CardImpl {
         Effect effect = new CreateTokenCopySourceEffect();
         effect.setText("you may create a token that's a copy of {this}");
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, true);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new PermanentsOnTheBattlefieldCondition(filter), rule));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new PermanentsOnTheBattlefieldCondition(filter), RULE_TEXT));
 
     }
 

@@ -48,7 +48,7 @@ public final class LutriTheSpellchaser extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Companion — Each nonland card in your starting deck has a different name.
-        this.addAbility(new CompanionAbility(LutriTheSpellchaserCompanionCondition.instance));
+        this.addAbility(new CompanionAbility(LutriTheSpellchaserCompanionCondition.INSTANCE));
 
         // Flash
         this.addAbility(FlashAbility.getInstance());
@@ -75,7 +75,7 @@ public final class LutriTheSpellchaser extends CardImpl {
 }
 
 enum LutriTheSpellchaserCompanionCondition implements CompanionCondition {
-    instance;
+    INSTANCE;
 
     @Override
     public String getRule() {

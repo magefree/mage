@@ -24,7 +24,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class VedalkenPlotter extends CardImpl {
     
-    private static final String rule = "exchange control of target land you control and target land an opponent controls";
+    private static final String RULE_TEXT = "exchange control of target land you control and target land an opponent controls";
     
     private static final FilterLandPermanent filter = new FilterLandPermanent("land an opponent controls");
 
@@ -40,7 +40,7 @@ public final class VedalkenPlotter extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Vedalken Plotter enters the battlefield, exchange control of target land you control and target land an opponent controls.
-        Effect effect = new ExchangeControlTargetEffect(Duration.EndOfGame, rule, false, true);
+        Effect effect = new ExchangeControlTargetEffect(Duration.EndOfGame, RULE_TEXT, false, true);
         effect.setText("exchange control of target land you control and target land an opponent controls");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
         ability.addTarget(new TargetControlledPermanent(new FilterControlledLandPermanent()));

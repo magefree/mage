@@ -80,9 +80,6 @@ class BlightbeetleEffect extends ContinuousRuleModifyingEffectImpl {
             return false;
         }
         Player player = game.getPlayer(permanent.getControllerId());
-        if (player == null || !player.hasOpponent(source.getControllerId(), game)) {
-            return false;
-        }
-        return true;
+        return player != null && player.hasOpponent(source.getControllerId(), game);
     }
 }

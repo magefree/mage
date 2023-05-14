@@ -26,7 +26,7 @@ import java.util.UUID;
 public final class PrimordialHydra extends CardImpl {
 
     private static final Condition condition = new SourceHasCounterCondition(CounterType.P1P1, 10, Integer.MAX_VALUE);
-    private static final String staticText = "{this} has trample as long as it has ten or more +1/+1 counters on it";
+    private static final String STATIC_TEXT = "{this} has trample as long as it has ten or more +1/+1 counters on it";
 
     public PrimordialHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{X}{G}{G}");
@@ -46,7 +46,7 @@ public final class PrimordialHydra extends CardImpl {
 
         // Primordial Hydra has trample as long as it has ten or more +1/+1 counters on it.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(TrampleAbility.getInstance()), condition, staticText
+                new GainAbilitySourceEffect(TrampleAbility.getInstance()), condition, STATIC_TEXT
         )));
     }
 

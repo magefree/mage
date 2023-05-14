@@ -6,7 +6,6 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PartyCount;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.mana.DynamicManaEffect;
 import mage.abilities.hint.common.PartyCountHint;
 import mage.constants.SubType;

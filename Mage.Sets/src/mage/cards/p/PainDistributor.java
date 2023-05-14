@@ -34,7 +34,7 @@ public final class PainDistributor extends CardImpl {
     private static final FilterPermanent filter2 = new FilterArtifactPermanent("an artifact an opponent controls");
 
     static {
-        filter.add(PainDistributorPredicate.instance);
+        filter.add(PainDistributorPredicate.INSTANCE);
         filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
@@ -73,7 +73,7 @@ public final class PainDistributor extends CardImpl {
 }
 
 enum PainDistributorPredicate implements Predicate<StackObject> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(StackObject input, Game game) {

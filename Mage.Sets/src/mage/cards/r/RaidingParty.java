@@ -98,7 +98,6 @@ class RaidingPartyEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    int countBattlefield = game.getBattlefield().getAllActivePermanents(filter, game.getActivePlayerId(), game).size();
                     int tappedCount = 0;
                     Target untappedCreatureTarget = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
                     if (player.choose(Outcome.Benefit, untappedCreatureTarget, source, game)) {

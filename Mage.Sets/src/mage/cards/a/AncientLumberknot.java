@@ -23,7 +23,7 @@ public final class AncientLumberknot extends CardImpl {
             = new FilterCreaturePermanent("creature you control with toughness greater than its power");
 
     static {
-        filter.add(AncientLumberknotPredicate.instance);
+        filter.add(AncientLumberknotPredicate.INSTANCE);
     }
 
     public AncientLumberknot(UUID ownerId, CardSetInfo setInfo) {
@@ -48,7 +48,7 @@ public final class AncientLumberknot extends CardImpl {
 }
 
 enum AncientLumberknotPredicate implements Predicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Permanent input, Game game) {

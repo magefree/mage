@@ -22,7 +22,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public final class MarshCrocodile extends CardImpl {
 
-    static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("blue or black creature you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("blue or black creature you control");
 
     static {
         filter.add(Predicates.or(new ColorPredicate(ObjectColor.BLUE), new ColorPredicate(ObjectColor.BLACK)));

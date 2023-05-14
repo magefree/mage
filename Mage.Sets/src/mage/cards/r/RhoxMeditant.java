@@ -28,7 +28,7 @@ public final class RhoxMeditant extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
     
-    private static final String rule = "When {this} enters the battlefield, if you control a green permanent, draw a card.";
+    private static final String RULE_TEXT = "When {this} enters the battlefield, if you control a green permanent, draw a card.";
 
     public RhoxMeditant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
@@ -40,7 +40,7 @@ public final class RhoxMeditant extends CardImpl {
 
         // When Rhox Meditant enters the battlefield, if you control a green permanent, draw a card.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new PermanentsOnTheBattlefieldCondition(filter), rule));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new PermanentsOnTheBattlefieldCondition(filter), RULE_TEXT));
         
     }
 

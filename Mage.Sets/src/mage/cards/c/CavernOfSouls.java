@@ -143,10 +143,8 @@ class CavernOfSoulsWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.MANA_PAID) {
-            if (event.getData() != null && event.getData().equals(originalId.toString()) && event.getTargetId() != null) {
-                spells.add(new MageObjectReference(game.getObject(event.getTargetId()), game));
-            }
+        if (event.getType() == GameEvent.EventType.MANA_PAID && event.getData() != null && event.getData().equals(originalId.toString()) && event.getTargetId() != null) {
+            spells.add(new MageObjectReference(game.getObject(event.getTargetId()), game));
         }
     }
 

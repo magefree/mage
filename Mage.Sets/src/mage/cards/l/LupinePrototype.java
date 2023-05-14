@@ -30,7 +30,7 @@ public final class LupinePrototype extends CardImpl {
 
         // Lupine Prototype can't attack or block unless a player has no cards in hand.
         this.addAbility(new SimpleStaticAbility(
-                new CantAttackBlockUnlessConditionSourceEffect(LupinePrototypeCondition.instance)
+                new CantAttackBlockUnlessConditionSourceEffect(LupinePrototypeCondition.INSTANCE)
         ));
     }
 
@@ -45,7 +45,7 @@ public final class LupinePrototype extends CardImpl {
 }
 
 enum LupinePrototypeCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

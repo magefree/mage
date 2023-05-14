@@ -48,7 +48,7 @@ public final class MyrkulLordOfBones extends CardImpl {
         this.toughness = new MageInt(5);
 
         // As long as your life total is less than or equal to half your starting life total, Myrkul, Lord of Bones has indestructible.
-        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance()), MyrkulLordOfBonesCondition.instance, "as long as your life total is less than or equal to half your starting life total, {this} has indestructible")));
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance()), MyrkulLordOfBonesCondition.INSTANCE, "as long as your life total is less than or equal to half your starting life total, {this} has indestructible")));
 
         // Whenever another nontoken creature you control dies, you may exile it. If you do, create a token that's a copy of that card, except it's an enchantment and loses all other card types.
         this.addAbility(new DiesCreatureTriggeredAbility(new MyrkulLordOfBonesEffect(), true, filter, true));
@@ -65,7 +65,7 @@ public final class MyrkulLordOfBones extends CardImpl {
 }
 
 enum MyrkulLordOfBonesCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

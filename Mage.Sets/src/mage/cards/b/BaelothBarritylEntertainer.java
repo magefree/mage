@@ -37,7 +37,7 @@ public final class BaelothBarritylEntertainer extends CardImpl {
             = new FilterCreaturePermanent("a goaded attacking or blocking creature");
 
     static {
-        filter.add(BaelothBarritylEntertainerPredicate.instance);
+        filter.add(BaelothBarritylEntertainerPredicate.INSTANCE);
         filter2.add(Predicates.or(
                 AttackingPredicate.instance,
                 BlockingPredicate.instance
@@ -81,7 +81,7 @@ public final class BaelothBarritylEntertainer extends CardImpl {
 }
 
 enum BaelothBarritylEntertainerPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {

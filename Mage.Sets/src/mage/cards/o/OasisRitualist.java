@@ -33,8 +33,8 @@ public final class OasisRitualist extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
         // {T}, Exert Oasis Ritualist: Add two mana of any one color to your manna pool.
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD,
-                (ManaEffect) new AddManaOfAnyColorEffect(2).setText("Add two mana of any one color to your manna pool. <i> (An exerted creature won't untap during your next untap step.)</i>"),
-                 new TapSourceCost());
+                new AddManaOfAnyColorEffect(2).setText("Add two mana of any one color to your manna pool. <i> (An exerted creature won't untap during your next untap step.)</i>"),
+                new TapSourceCost());
         ability.addCost(new ExertSourceCost());
         this.addAbility(ability);
     }

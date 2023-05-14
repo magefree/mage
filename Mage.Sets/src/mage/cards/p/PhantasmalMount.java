@@ -136,11 +136,7 @@ class PhantasmalMountDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE
-                && event.getTargetId().equals(creatureId)) {
-            return true;
-        }
-        return false;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(creatureId);
     }
 
     @Override

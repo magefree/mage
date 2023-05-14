@@ -25,7 +25,7 @@ public final class MeteorSwarm extends CardImpl {
                         setText("{this} deals 8 damage divided as you choose among X target creatures and/or planeswalkers.")
         );
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalkerAmount(8));
-        this.getSpellAbility().setTargetAdjuster(MeteorSwarmAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(MeteorSwarmAdjuster.INSTANCE);
     }
 
     private MeteorSwarm(final MeteorSwarm card) {
@@ -39,7 +39,7 @@ public final class MeteorSwarm extends CardImpl {
 }
 
 enum MeteorSwarmAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

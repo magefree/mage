@@ -63,11 +63,8 @@ class AbyssalPersecutorCannotWinEffect extends ContinuousRuleModifyingEffectImpl
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if ((event.getType() == GameEvent.EventType.LOSES && game.getOpponents(source.getControllerId()).contains(event.getPlayerId()))
-                || (event.getType() == GameEvent.EventType.WINS && event.getPlayerId().equals(source.getControllerId()))) {
-            return true;
-        }
-        return false;
+        return (event.getType() == GameEvent.EventType.LOSES && game.getOpponents(source.getControllerId()).contains(event.getPlayerId()))
+                || (event.getType() == GameEvent.EventType.WINS && event.getPlayerId().equals(source.getControllerId()));
     }
 
     @Override

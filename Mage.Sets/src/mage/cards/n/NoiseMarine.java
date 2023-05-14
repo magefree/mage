@@ -35,7 +35,7 @@ public final class NoiseMarine extends CardImpl {
 
         // Sonic Blaster -- When Noise Marine enters the battlefield, it deals damage equal to the number of spells you've cast this turn to any target.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new DamageTargetEffect(NoiseMarineValue.instance, "it")
+                new DamageTargetEffect(NoiseMarineValue.INSTANCE, "it")
         );
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability.withFlavorWord("Sonic Blaster"));
@@ -52,7 +52,7 @@ public final class NoiseMarine extends CardImpl {
 }
 
 enum NoiseMarineValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -62,7 +62,7 @@ enum NoiseMarineValue implements DynamicValue {
 
     @Override
     public NoiseMarineValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

@@ -36,7 +36,7 @@ public final class MosswortBridge extends CardImpl {
 
         // {G}, {T}: You may play the exiled card without paying its mana cost if creatures you control have total power 10 or greater.
         Ability ability = new SimpleActivatedAbility(new ConditionalOneShotEffect(
-                new HideawayPlayEffect(), MosswortBridgeTotalPowerCondition.instance,
+                new HideawayPlayEffect(), MosswortBridgeTotalPowerCondition.INSTANCE,
                 "you may play the exiled card without paying its mana cost " +
                         "if creatures you control have total power 10 or greater"
         ), new ManaCostsImpl<>("{G}"));
@@ -55,7 +55,7 @@ public final class MosswortBridge extends CardImpl {
 }
 
 enum MosswortBridgeTotalPowerCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

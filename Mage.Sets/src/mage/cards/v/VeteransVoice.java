@@ -53,7 +53,7 @@ public final class VeteransVoice extends CardImpl {
                 new BoostTargetEffect(2, 1, Duration.EndOfTurn)
                         .setText("target creature other than the creature tapped this way gets +2/+1 until end of turn"),
                 new TapAttachedCost(), condition
-        ).setTargetAdjuster(VeteransVoiceAdjuster.instance));
+        ).setTargetAdjuster(VeteransVoiceAdjuster.INSTANCE));
     }
 
     private VeteransVoice(final VeteransVoice card) {
@@ -67,7 +67,7 @@ public final class VeteransVoice extends CardImpl {
 }
 
 enum VeteransVoiceAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

@@ -12,7 +12,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.game.permanent.token.TreasureToken;
-import mage.watchers.common.CreaturesDiedWatcher;
 
 import java.util.UUID;
 

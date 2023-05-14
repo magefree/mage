@@ -36,7 +36,7 @@ public final class RodolfDuskbringer extends CardImpl {
     );
 
     static {
-        filter.add(RodolfDuskbringerPredicate.instance);
+        filter.add(RodolfDuskbringerPredicate.INSTANCE);
     }
 
     public RodolfDuskbringer(UUID ownerId, CardSetInfo setInfo) {
@@ -85,7 +85,7 @@ public final class RodolfDuskbringer extends CardImpl {
 }
 
 enum RodolfDuskbringerPredicate implements Predicate<Card> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Card input, Game game) {

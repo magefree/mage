@@ -35,7 +35,7 @@ public final class AnjeMaidOfDishonor extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another creature or a Blood token");
 
     static {
-        filter.add(AnjeMaidOfDishonorPredicate.instance);
+        filter.add(AnjeMaidOfDishonorPredicate.INSTANCE);
     }
 
     public AnjeMaidOfDishonor(UUID ownerId, CardSetInfo setInfo) {
@@ -100,7 +100,7 @@ class AnjeMaidOfDishonorTriggeredAbility extends TriggeredAbilityImpl {
 }
 
 enum AnjeMaidOfDishonorPredicate implements ObjectSourcePlayerPredicate<MageObject> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {

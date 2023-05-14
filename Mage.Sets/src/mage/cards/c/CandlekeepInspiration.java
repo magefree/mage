@@ -25,7 +25,7 @@ import java.util.stream.Stream;
 public final class CandlekeepInspiration extends CardImpl {
 
     private static final Hint hint = new ValueHint(
-            "Instants, sorceries, and Adventures in your graveyard and exile", CandlekeepInspirationValue.instance
+            "Instants, sorceries, and Adventures in your graveyard and exile", CandlekeepInspirationValue.INSTANCE
     );
 
     public CandlekeepInspiration(UUID ownerId, CardSetInfo setInfo) {
@@ -33,7 +33,7 @@ public final class CandlekeepInspiration extends CardImpl {
 
         // Until end of turn, creatures you control have base power and toughness X/X, where X is the number of cards you own in exile and in your graveyard that are instant cards, are sorcery cards, and/or have an Adventure.
         this.getSpellAbility().addEffect(new SetBasePowerToughnessAllEffect(
-                CandlekeepInspirationValue.instance, CandlekeepInspirationValue.instance,
+                CandlekeepInspirationValue.INSTANCE, CandlekeepInspirationValue.INSTANCE,
                 Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURE, true
         ).setText("until end of turn, creatures you control have base power and toughness X/X, " +
                 "where X is the number of cards you own in exile and in your graveyard " +
@@ -52,7 +52,7 @@ public final class CandlekeepInspiration extends CardImpl {
 }
 
 enum CandlekeepInspirationValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

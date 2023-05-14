@@ -86,10 +86,10 @@ class NacatlWarPrideEffect extends OneShotEffect {
             return false;
         }
         
-        CreatureAttackedWhichPlayerWatcher PlayerAttackedWatcher = game.getState().getWatcher(CreatureAttackedWhichPlayerWatcher.class);
+        CreatureAttackedWhichPlayerWatcher playerAttackedWatcher = game.getState().getWatcher(CreatureAttackedWhichPlayerWatcher.class);
 
         // Count the number of creatures attacked opponent controls
-        UUID defenderId = PlayerAttackedWatcher.getPlayerAttackedThisTurnByCreature(source.getSourceId());        
+        UUID defenderId = playerAttackedWatcher.getPlayerAttackedThisTurnByCreature(source.getSourceId());
 
         int count = 0;
         if (defenderId != null) {

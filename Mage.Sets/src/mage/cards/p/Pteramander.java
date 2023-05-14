@@ -40,7 +40,7 @@ public final class Pteramander extends CardImpl {
 
         // {7}{U}: Adapt 4. This ability costs {1} less to activate for each instant and sorcery card in your graveyard.
         Ability ability = new SimpleActivatedAbility(new AdaptEffect(4).setText("Adapt 4. This ability costs {1} less to activate for each instant and sorcery card in your graveyard."), new ManaCostsImpl<>("{7}{U}"));
-        ability.setCostAdjuster(PteramanderAdjuster.instance);
+        ability.setCostAdjuster(PteramanderAdjuster.INSTANCE);
         this.addAbility(ability.addHint(PteramanderAdjuster.getHint()));
     }
 
@@ -55,7 +55,7 @@ public final class Pteramander extends CardImpl {
 }
 
 enum PteramanderAdjuster implements CostAdjuster {
-    instance;
+    INSTANCE;
 
     private static final DynamicValue cardsCount = new CardsInControllerGraveyardCount(
             StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY

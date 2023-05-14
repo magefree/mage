@@ -156,10 +156,7 @@ class SenatorLottDodSpellsTargetingYouCostModificationEffect extends CostModific
     private boolean isTargetCompatible(UUID target, Ability source, Game game) {
         // target you
         Player targetPlayer = game.getPlayer(target);
-        if (targetPlayer != null && targetPlayer.getId().equals(source.getControllerId())) {
-            return true;
-        }
-        return false;
+        return targetPlayer != null && targetPlayer.getId().equals(source.getControllerId());
     }
 
     @Override

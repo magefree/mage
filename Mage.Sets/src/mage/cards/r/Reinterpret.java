@@ -65,7 +65,7 @@ class ReinterpretEffect extends OneShotEffect {
             return false;
         }
         int manaValue = spell.getManaValue();
-        game.getStack().counter(spell.getId(), source, game);;
+        game.getStack().counter(spell.getId(), source, game);
         FilterCard filter = new FilterCard();
         filter.add(new ManaValuePredicate(
                 ComparisonType.FEWER_THAN, manaValue + 1

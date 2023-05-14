@@ -33,7 +33,7 @@ import java.util.stream.IntStream;
 public final class MonstrousWarLeech extends CardImpl {
 
     private static final Hint hint = new ValueHint(
-            "Highest mana value in your graveyard", MonstrousWarLeechValue.instance
+            "Highest mana value in your graveyard", MonstrousWarLeechValue.INSTANCE
     );
 
     public MonstrousWarLeech(UUID ownerId, CardSetInfo setInfo) {
@@ -57,7 +57,7 @@ public final class MonstrousWarLeech extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
                 new SetBasePowerToughnessSourceEffect(
-                        MonstrousWarLeechValue.instance
+                        MonstrousWarLeechValue.INSTANCE
                 )
         ).addHint(hint));
     }
@@ -73,13 +73,12 @@ public final class MonstrousWarLeech extends CardImpl {
 }
 
 enum MonstrousWarLeechValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         return Optional
                 .ofNullable(game.getPlayer(sourceAbility.getControllerId()))
-                .filter(Objects::nonNull)
                 .map(Player::getGraveyard)
                 .map(graveyard -> graveyard.getCards(game))
                 .map(Collection::stream)

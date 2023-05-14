@@ -46,7 +46,7 @@ public final class OchreJelly extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new DiesSourceTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
                         new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new OchreJellyEffect())
-                )), OchreJellyCondition.instance, CardUtil.italicizeWithEmDash("Split")
+                )), OchreJellyCondition.INSTANCE, CardUtil.italicizeWithEmDash("Split")
                 + "When {this} dies, if it had two or more +1/+1 counters on it, "
                 + "create a token that's a copy of it at the beginning of the next end step. "
                 + "The token enters the battlefield with half that many +1/+1 counters on it, rounded down."
@@ -64,7 +64,7 @@ public final class OchreJelly extends CardImpl {
 }
 
 enum OchreJellyCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

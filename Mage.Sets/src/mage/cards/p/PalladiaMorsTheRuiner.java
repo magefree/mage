@@ -55,7 +55,7 @@ public final class PalladiaMorsTheRuiner extends CardImpl {
                 Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new GainAbilitySourceEffect(HexproofAbility.getInstance()),
-                        PalladiaMorsTheRuinerCondition.instance,
+                        PalladiaMorsTheRuinerCondition.INSTANCE,
                         "{this} has hexproof if it hasn't dealt damage yet"
                 )
         ), new PalladiaMorsTheRuinerWatcher());
@@ -72,8 +72,7 @@ public final class PalladiaMorsTheRuiner extends CardImpl {
 }
 
 enum PalladiaMorsTheRuinerCondition implements Condition {
-
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

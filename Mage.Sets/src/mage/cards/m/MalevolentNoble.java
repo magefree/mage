@@ -29,7 +29,7 @@ public final class MalevolentNoble extends CardImpl {
             = new FilterControlledPermanent("an artifact or another creature");
 
     static {
-        filter.add(MalevolentNoblePredicate.instance);
+        filter.add(MalevolentNoblePredicate.INSTANCE);
     }
 
     public MalevolentNoble(UUID ownerId, CardSetInfo setInfo) {
@@ -59,7 +59,7 @@ public final class MalevolentNoble extends CardImpl {
 }
 
 enum MalevolentNoblePredicate implements ObjectSourcePlayerPredicate<MageObject> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {

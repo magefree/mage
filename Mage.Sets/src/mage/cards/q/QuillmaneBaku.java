@@ -46,7 +46,7 @@ public final class QuillmaneBaku extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.KI.createInstance()));
         ability.addTarget(new TargetCreaturePermanent(filter));
-        ability.setTargetAdjuster(QuillmaneBakuAdjuster.instance);
+        ability.setTargetAdjuster(QuillmaneBakuAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -61,7 +61,7 @@ public final class QuillmaneBaku extends CardImpl {
 }
 
 enum QuillmaneBakuAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

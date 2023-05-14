@@ -60,11 +60,9 @@ class ArmedAndArmoredEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
-            if (permanent != null && permanent.hasSubtype(SubType.VEHICLE, game)) {
-                if (sublayer == SubLayer.NA) {
-                    permanent.addCardType(game, CardType.ARTIFACT);
-                    permanent.addCardType(game, CardType.CREATURE);// TODO: Check if giving CREATURE Type is correct
-                }
+            if (permanent != null && permanent.hasSubtype(SubType.VEHICLE, game) && sublayer == SubLayer.NA) {
+                permanent.addCardType(game, CardType.ARTIFACT);
+                permanent.addCardType(game, CardType.CREATURE);// TODO: Check if giving CREATURE Type is correct
             }
         }
         return true;

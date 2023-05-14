@@ -27,7 +27,7 @@ public final class AlchemistsGambit extends CardImpl {
         Ability ability = new CleaveAbility(
                 this,
                 new AddExtraTurnControllerEffect(
-                        false, AlchemistsGambitApplier.instance
+                        false, AlchemistsGambitApplier.INSTANCE
                 ), "{4}{U}{U}{R}"
         );
         ability.addEffect(new ExileSpellEffect());
@@ -35,7 +35,7 @@ public final class AlchemistsGambit extends CardImpl {
 
         // Take an extra turn after this one. During that turn, damage can't be prevented. [At the beginning of that turn's end step, you lose the game.]
         this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect(
-                true, AlchemistsGambitApplier.instance
+                true, AlchemistsGambitApplier.INSTANCE
         ).setText("take an extra turn after this one. During that turn, damage can't be prevented. " +
                 "[At the beginning of that turn's end step, you lose the game.]"));
 
@@ -54,7 +54,7 @@ public final class AlchemistsGambit extends CardImpl {
 }
 
 enum AlchemistsGambitApplier implements AddExtraTurnControllerEffect.TurnModApplier {
-    instance;
+    INSTANCE;
 
     @Override
     public void apply(UUID turnId, Ability source, Game game) {

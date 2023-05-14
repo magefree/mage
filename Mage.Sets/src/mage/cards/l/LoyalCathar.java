@@ -56,11 +56,11 @@ public final class LoyalCathar extends CardImpl {
 
 class LoyalCatharEffect extends OneShotEffect {
 
-    private static final String effectText = "return it to the battlefield transformed under your control at the beginning of the next end step";
+    private static final String EFFECT_TEXT = "return it to the battlefield transformed under your control at the beginning of the next end step";
 
     LoyalCatharEffect() {
         super(Outcome.Benefit);
-        staticText = effectText;
+        staticText = EFFECT_TEXT;
     }
 
     LoyalCatharEffect(LoyalCatharEffect effect) {

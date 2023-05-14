@@ -11,7 +11,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.abilities.keyword.TrampleAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

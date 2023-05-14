@@ -40,7 +40,7 @@ public final class BrassKnuckles extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilityAttachedEffect(
                         DoubleStrikeAbility.getInstance(), AttachmentType.EQUIPMENT
-                ), BrassKnucklesCondition.instance, "equipped creature has double strike " +
+                ), BrassKnucklesCondition.INSTANCE, "equipped creature has double strike " +
                 "as long as two or more Equipment are attached to it"
         )));
 
@@ -59,7 +59,7 @@ public final class BrassKnuckles extends CardImpl {
 }
 
 enum BrassKnucklesCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -67,7 +67,6 @@ enum BrassKnucklesCondition implements Condition {
                 .ofNullable(source.getSourcePermanentIfItStillExists(game))
                 .map(Permanent::getAttachedTo)
                 .map(game::getPermanent)
-                .filter(Objects::nonNull)
                 .map(Permanent::getAttachments)
                 .map(Collection::stream)
                 .map(stream -> stream.map(game::getPermanent))

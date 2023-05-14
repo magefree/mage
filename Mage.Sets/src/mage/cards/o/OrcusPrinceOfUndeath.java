@@ -54,7 +54,7 @@ public final class OrcusPrinceOfUndeath extends CardImpl {
         Mode mode = new Mode(new ReturnFromGraveyardToBattlefieldTargetEffect().setText("Return up to X target creature cards with total mana value X or less from your graveyard to the battlefield"));
         mode.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn, "They gain haste until end of turn"));
         ability.addMode(mode);
-        ability.setTargetAdjuster(OrcusPrinceOfUndeathAdjuster.instance);
+        ability.setTargetAdjuster(OrcusPrinceOfUndeathAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -137,7 +137,7 @@ class OrcusPrinceOfUndeathTarget extends TargetCardInYourGraveyard {
 }
 
 enum OrcusPrinceOfUndeathAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

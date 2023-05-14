@@ -31,7 +31,7 @@ public final class AphettoDredging extends CardImpl {
         Effect effect = new ReturnFromGraveyardToHandTargetEffect();
         effect.setText("Return up to three target creature cards of the creature type of your choice from your graveyard to your hand");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().setTargetAdjuster(AphettoDredgingAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(AphettoDredgingAdjuster.INSTANCE);
     }
 
     private AphettoDredging(final AphettoDredging card) {
@@ -45,7 +45,7 @@ public final class AphettoDredging extends CardImpl {
 }
 
 enum AphettoDredgingAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

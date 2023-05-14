@@ -38,7 +38,7 @@ public final class RabbleRousing extends CardImpl {
 
         // Whenever you attack with one or more creatures, create that many 1/1 green and white Citizen creature tokens. Then if you control ten or more creatures, you may play the exiled card without paying its mana cost.
         Ability ability = new AttacksWithCreaturesTriggeredAbility(
-                new CreateTokenEffect(new CitizenGreenWhiteToken(), RabbleRousingValue.instance)
+                new CreateTokenEffect(new CitizenGreenWhiteToken(), RabbleRousingValue.INSTANCE)
                         .setText("create that many 1/1 green and white Citizen creature tokens"), 1
         ).setTriggerPhrase("Whenever you attack with one or more creatures, ");
         ability.addEffect(new ConditionalOneShotEffect(
@@ -59,7 +59,7 @@ public final class RabbleRousing extends CardImpl {
 }
 
 enum RabbleRousingValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

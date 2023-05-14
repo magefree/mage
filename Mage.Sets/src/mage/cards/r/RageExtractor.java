@@ -26,14 +26,14 @@ public final class RageExtractor extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a spell with {P} in its mana cost");
 
     static {
-        filter.add(RageExtractorPredicate.instance);
+        filter.add(RageExtractorPredicate.INSTANCE);
     }
 
     public RageExtractor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}{R/P}");
 
         Ability ability = new SpellCastControllerTriggeredAbility(
-                new DamageTargetEffect(RageExtractorValue.instance)
+                new DamageTargetEffect(RageExtractorValue.INSTANCE)
                         .setText("{this} deals damage equal to that spell's mana value to any target"),
                 filter, false
         );
@@ -52,7 +52,7 @@ public final class RageExtractor extends CardImpl {
 }
 
 enum RageExtractorPredicate implements Predicate<StackObject> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(StackObject input, Game game) {
@@ -61,7 +61,7 @@ enum RageExtractorPredicate implements Predicate<StackObject> {
 }
 
 enum RageExtractorValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

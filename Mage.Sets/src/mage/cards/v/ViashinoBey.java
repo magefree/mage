@@ -22,7 +22,7 @@ import mage.target.common.TargetOpponent;
  */
 public final class ViashinoBey extends CardImpl {
 
-    private static final String rule = "If {this} attacks, all creatures you control attack if able.";
+    private static final String RULE_TEXT = "If {this} attacks, all creatures you control attack if able.";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
@@ -37,7 +37,7 @@ public final class ViashinoBey extends CardImpl {
         this.toughness = new MageInt(3);
 
         // If Viashino Bey attacks, all creatures you control attack if able.
-        this.addAbility(new AttacksTriggeredAbility(new ViashinoBeyEffect(), false, rule));
+        this.addAbility(new AttacksTriggeredAbility(new ViashinoBeyEffect(), false, RULE_TEXT));
 
     }
 

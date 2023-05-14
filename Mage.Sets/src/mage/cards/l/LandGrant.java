@@ -56,10 +56,7 @@ class LandGrantCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {   
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null && player.getHand().count(new FilterLandCard(), game) == 0) {
-            return true;
-        }
-        return false;
+        return player != null && player.getHand().count(new FilterLandCard(), game) == 0;
     }
     
     @Override

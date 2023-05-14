@@ -58,7 +58,7 @@ public final class PolukranosWorldEater extends CardImpl {
 
         // When Polukranos, World Eater becomes monstrous, it deals X damage divided as you choose among any number of target creatures your opponents control. Each of those creatures deals damage equal to its power to Polukranos.
         Ability ability = new BecomesMonstrousSourceTriggeredAbility(new PolukranosWorldEaterEffect());
-        ability.setTargetAdjuster(PolukranosWorldEaterAdjuster.instance);
+        ability.setTargetAdjuster(PolukranosWorldEaterAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -73,7 +73,7 @@ public final class PolukranosWorldEater extends CardImpl {
 }
 
 enum PolukranosWorldEaterAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

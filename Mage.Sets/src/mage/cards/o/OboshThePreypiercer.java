@@ -33,7 +33,7 @@ public final class OboshThePreypiercer extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Companion — Your starting deck contains only cards with odd converted mana costs and land cards.
-        this.addAbility(new CompanionAbility(OboshThePreypiercerCompanionCondition.instance));
+        this.addAbility(new CompanionAbility(OboshThePreypiercerCompanionCondition.INSTANCE));
 
         // If a source you control with an odd converted mana cost would deal damage to a permanent or player, it deals double that damage to that permanent or player instead.
         this.addAbility(new SimpleStaticAbility(new OboshThePreypiercerEffect()));
@@ -50,7 +50,7 @@ public final class OboshThePreypiercer extends CardImpl {
 }
 
 enum OboshThePreypiercerCompanionCondition implements CompanionCondition {
-    instance;
+    INSTANCE;
 
     @Override
     public String getRule() {

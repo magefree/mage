@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 public final class AuriokEdgewright extends CardImpl {
 
-    private static final String effectText = "{this} has double strike as long as you control three or more artifacts.";
+    private static final String EFFECT_TEXT = "{this} has double strike as long as you control three or more artifacts.";
 
     public AuriokEdgewright(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{W}");
@@ -32,7 +32,7 @@ public final class AuriokEdgewright extends CardImpl {
         ContinuousEffect effect = new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield);
         this.addAbility(new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
-                new ConditionalContinuousEffect(effect, MetalcraftCondition.instance, effectText))
+                new ConditionalContinuousEffect(effect, MetalcraftCondition.instance, EFFECT_TEXT))
                 .setAbilityWord(AbilityWord.METALCRAFT)
                 .addHint(MetalcraftHint.instance)
         );

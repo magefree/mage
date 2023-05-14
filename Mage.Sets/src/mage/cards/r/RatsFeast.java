@@ -22,7 +22,7 @@ public final class RatsFeast extends CardImpl {
 
         // Exile X target cards from a single graveyard.
         this.getSpellAbility().addEffect(new ExileTargetEffect("Exile X target cards from a single graveyard"));
-        this.getSpellAbility().setTargetAdjuster(RatsFeastAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(RatsFeastAdjuster.INSTANCE);
     }
 
     private RatsFeast(final RatsFeast card) {
@@ -36,7 +36,7 @@ public final class RatsFeast extends CardImpl {
 }
 
 enum RatsFeastAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

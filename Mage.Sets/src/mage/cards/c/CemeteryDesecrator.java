@@ -60,7 +60,7 @@ public final class CemeteryDesecrator extends CardImpl {
 class CemeteryDesecratorEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("another card from a graveyard");
-    private static final String triggerText = "choose one &mdash;<br>"
+    private static final String TRIGGER_TEXT = "choose one &mdash;<br>"
             + "&bull  Remove X counters from target permanent, where X is the mana value of the exiled card.<br>"
             + "&bull  Target creature an opponent controls gets -X/-X until end of turn, where X is the mana value of the exiled card.";
 
@@ -70,7 +70,7 @@ class CemeteryDesecratorEffect extends OneShotEffect {
 
     public CemeteryDesecratorEffect() {
         super(Outcome.Exile);
-        staticText = "exile another card from a graveyard. When you do, " + triggerText;
+        staticText = "exile another card from a graveyard. When you do, " + TRIGGER_TEXT;
     }
 
     private CemeteryDesecratorEffect(final CemeteryDesecratorEffect effect) {
@@ -93,7 +93,7 @@ class CemeteryDesecratorEffect extends OneShotEffect {
             if (card != null) {
                 int manaValue = card.getManaValue();
                 if (controller.moveCards(card, Zone.EXILED, source, game)) {
-                    ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(new CemeteryDesecratorRemoveCountersEffect(manaValue), false, triggerText);
+                    ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(new CemeteryDesecratorRemoveCountersEffect(manaValue), false, TRIGGER_TEXT);
                     ability.addTarget(new TargetPermanent());
                     Mode mode = new Mode(new BoostTargetEffect(-manaValue, -manaValue, Duration.EndOfTurn)
                             .setText("Target creature an opponent controls gets -X/-X until end of turn, where X is the mana value of the exiled card"));

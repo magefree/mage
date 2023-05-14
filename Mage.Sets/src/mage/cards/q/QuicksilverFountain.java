@@ -37,7 +37,7 @@ public final class QuicksilverFountain extends CardImpl {
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
                 new QuicksilverFountainEffect(), TargetController.ANY, false, true);
         ability.addTarget(new TargetLandPermanent());
-        ability.setTargetAdjuster(QuicksilverFountainAdjuster.instance);
+        ability.setTargetAdjuster(QuicksilverFountainAdjuster.INSTANCE);
         this.addAbility(ability);
 
         // At the beginning of each end step, if all lands on the battlefield are 
@@ -59,7 +59,7 @@ public final class QuicksilverFountain extends CardImpl {
 }
 
 enum QuicksilverFountainAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

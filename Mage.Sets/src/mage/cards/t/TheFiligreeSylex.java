@@ -36,7 +36,7 @@ public final class TheFiligreeSylex extends CardImpl {
     private static final FilterPermanent filter = new FilterNonlandPermanent();
 
     static {
-        filter.add(TheFiligreeSylexPredicate.instance);
+        filter.add(TheFiligreeSylexPredicate.INSTANCE);
     }
 
     public TheFiligreeSylex(UUID ownerId, CardSetInfo setInfo) {
@@ -83,13 +83,12 @@ public final class TheFiligreeSylex extends CardImpl {
 }
 
 enum TheFiligreeSylexPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         return Optional
                 .ofNullable(input.getSource().getSourcePermanentOrLKI(game))
-                .filter(Objects::nonNull)
                 .map(permanent -> permanent.getCounters(game))
                 .map(counters -> counters.getCount(CounterType.OIL))
                 .equals(input.getObject().getManaValue());

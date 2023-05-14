@@ -38,7 +38,7 @@ public final class ArcticFoxes extends CardImpl {
         // Creatures with power 2 or greater can't block Arctic Foxes as long as defending player controls a snow land.
         this.addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
                 new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield),
-                ArcticFoxesCondition.instance, "creatures with power 2 or greater can't block {this}" +
+                ArcticFoxesCondition.INSTANCE, "creatures with power 2 or greater can't block {this}" +
                 " as long as defending player controls a snow land"
         )));
     }
@@ -54,7 +54,7 @@ public final class ArcticFoxes extends CardImpl {
 }
 
 enum ArcticFoxesCondition implements Condition {
-    instance;
+    INSTANCE;
 
     private static final FilterPermanent filter = new FilterLandPermanent();
 

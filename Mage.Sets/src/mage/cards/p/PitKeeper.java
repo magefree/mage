@@ -60,9 +60,6 @@ class CreatureCardsInControllerGraveyardCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Player p = game.getPlayer(source.getControllerId());
-        if (p != null && p.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game) >= value) {
-            return true;
-        }
-        return false;
+        return p != null && p.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game) >= value;
     }
 }

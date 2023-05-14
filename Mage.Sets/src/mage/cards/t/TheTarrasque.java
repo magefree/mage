@@ -52,12 +52,12 @@ public final class TheTarrasque extends CardImpl {
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(
                         HasteAbility.getInstance(), Duration.WhileOnBattlefield
-                ), TheTarrasqueCondition.instance, "{this} has haste"
+                ), TheTarrasqueCondition.INSTANCE, "{this} has haste"
         ));
         ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(
                         new WardAbility(new GenericManaCost(10)), Duration.WhileOnBattlefield
-                ), TheTarrasqueCondition.instance, "and ward {10} as long as it was cast"
+                ), TheTarrasqueCondition.INSTANCE, "and ward {10} as long as it was cast"
         ));
         this.addAbility(ability, new TheTarrasqueWatcher());
 
@@ -79,7 +79,7 @@ public final class TheTarrasque extends CardImpl {
 }
 
 enum TheTarrasqueCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

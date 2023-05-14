@@ -49,7 +49,7 @@ public final class NemesisOfMortals extends CardImpl {
         for (Effect effect : ability.getEffects()) {
             effect.setText("Monstrosity 5. This ability costs {1} less to activate for each creature card in your graveyard");
         }
-        ability.setCostAdjuster(NemesisOfMortalsAdjuster.instance);
+        ability.setCostAdjuster(NemesisOfMortalsAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -64,7 +64,7 @@ public final class NemesisOfMortals extends CardImpl {
 }
 
 enum NemesisOfMortalsAdjuster implements CostAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustCosts(Ability ability, Game game) {

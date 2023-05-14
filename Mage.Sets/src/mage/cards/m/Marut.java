@@ -36,7 +36,7 @@ public final class Marut extends CardImpl {
 
         // When Marut enters the battlefield, if mana from a Treasure was spent to cast it, create a Treasure token for each mana from a Treasure spent to cast it.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TreasureToken(), MarutValue.instance)),
+                new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TreasureToken(), MarutValue.INSTANCE)),
                 TreasureSpentToCastCondition.instance, "When {this} enters the battlefield, if mana from a " +
                 "Treasure was spent to cast it, create a Treasure token for each mana from a Treasure spent to cast it."
         ));
@@ -53,7 +53,7 @@ public final class Marut extends CardImpl {
 }
 
 enum MarutValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

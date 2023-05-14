@@ -32,7 +32,7 @@ public final class NostalgicDreams extends CardImpl {
         Effect effect = new ReturnFromGraveyardToHandTargetEffect();
         effect.setText("Return X target cards from your graveyard to your hand");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().setTargetAdjuster(NostalgicDreamsAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(NostalgicDreamsAdjuster.INSTANCE);
 
         // Exile Nostalgic Dreams.
         this.getSpellAbility().addEffect(new ExileSpellEffect());
@@ -49,7 +49,7 @@ public final class NostalgicDreams extends CardImpl {
 }
 
 enum NostalgicDreamsAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

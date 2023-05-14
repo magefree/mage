@@ -20,7 +20,7 @@ import mage.constants.*;
  */
 public final class ButchersCleaver extends CardImpl {
 
-    private static final String staticText = "As long as equipped creature is a Human, it has lifelink";
+    private static final String STATIC_TEXT = "As long as equipped creature is a Human, it has lifelink";
 
     public ButchersCleaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
@@ -32,7 +32,7 @@ public final class ButchersCleaver extends CardImpl {
         // As long as equipped creature is a Human, it has lifelink.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.EQUIPMENT),
-                new EquippedHasSubtypeCondition(SubType.HUMAN), staticText)));
+                new EquippedHasSubtypeCondition(SubType.HUMAN), STATIC_TEXT)));
 
         // Equip {3}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3), false));

@@ -35,9 +35,9 @@ public final class MinotaurTactician extends CardImpl {
         filterBlue.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
-    static final private String ruleWhite = "{this} gets +1/+1 as long as you control a white creature";
+    private static final String RULE_WHITE = "{this} gets +1/+1 as long as you control a white creature";
 
-    static final private String ruleBlue = "{this} gets +1/+1 as long as you control a blue creature";
+    private static final String RULE_BLUE = "{this} gets +1/+1 as long as you control a blue creature";
 
     public MinotaurTactician(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
@@ -50,12 +50,12 @@ public final class MinotaurTactician extends CardImpl {
 
         // Minotaur Tactician gets +1/+1 as long as you control a white creature.
         Condition conditionWhite = new PermanentsOnTheBattlefieldCondition(filterWhite);
-        Effect effectWhite = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), conditionWhite, ruleWhite);
+        Effect effectWhite = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), conditionWhite, RULE_WHITE);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effectWhite));
 
         // Minotaur Tactician gets +1/+1 as long as you control a blue creature.
         Condition conditionBlue = new PermanentsOnTheBattlefieldCondition(filterBlue);
-        Effect effectBlue = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), conditionBlue, ruleBlue);
+        Effect effectBlue = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), conditionBlue, RULE_BLUE);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effectBlue));
     }
 

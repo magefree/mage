@@ -22,7 +22,7 @@ import mage.filter.common.FilterControlledPermanent;
  */
 public final class VillainousOgre extends CardImpl {
 
-    private static final String rule = "As long as you control a Demon, {this} has {B}: Regenerate Villainous Ogre";
+    private static final String RULE_TEXT = "As long as you control a Demon, {this} has {B}: Regenerate Villainous Ogre";
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Demon");
     static {
         filter.add(SubType.DEMON.getPredicate());
@@ -44,7 +44,7 @@ public final class VillainousOgre extends CardImpl {
                 new RegenerateSourceEffect(), 
                 new ColoredManaCost(ColoredManaSymbol.B),
                 new PermanentsOnTheBattlefieldCondition(filter), 
-                rule));        
+                RULE_TEXT));
     }
 
     private VillainousOgre(final VillainousOgre card) {

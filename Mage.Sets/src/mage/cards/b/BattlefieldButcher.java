@@ -39,7 +39,7 @@ public final class BattlefieldButcher extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new LoseLifeOpponentsEffect(2), new GenericManaCost(5));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new InfoEffect("this ability costs {1} less to activate for each creature card in your graveyard"));
-        this.addAbility(ability.setCostAdjuster(BattlefieldButcherAdjuster.instance).addHint(BattlefieldButcherAdjuster.getHint()));
+        this.addAbility(ability.setCostAdjuster(BattlefieldButcherAdjuster.INSTANCE).addHint(BattlefieldButcherAdjuster.getHint()));
     }
 
     private BattlefieldButcher(final BattlefieldButcher card) {
@@ -53,7 +53,7 @@ public final class BattlefieldButcher extends CardImpl {
 }
 
 enum BattlefieldButcherAdjuster implements CostAdjuster {
-    instance;
+    INSTANCE;
     private static final DynamicValue xValue = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE);
     private static final Hint hint = new ValueHint("Creature cards in your graveyard", xValue);
 

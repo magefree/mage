@@ -30,7 +30,7 @@ public final class OblivionsHunger extends CardImpl {
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn
         ));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new DrawCardSourceControllerEffect(1), OblivionsHungerCondition.instance,
+                new DrawCardSourceControllerEffect(1), OblivionsHungerCondition.INSTANCE,
                 "Draw a card if that creature has a +1/+1 counter on it"
         ));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
@@ -47,7 +47,7 @@ public final class OblivionsHunger extends CardImpl {
 }
 
 enum OblivionsHungerCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

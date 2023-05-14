@@ -48,7 +48,7 @@ public final class BishopOfBinding extends CardImpl {
         this.addAbility(ability);
 
         // Whenever Bishop of Binding attacks, target Vampire gets +X/+X until end of turn, where X is the power of the exiled card.
-        ability = new AttacksTriggeredAbility(new BoostTargetEffect(BishopOfBindingValue.instance, BishopOfBindingValue.instance, Duration.EndOfTurn));
+        ability = new AttacksTriggeredAbility(new BoostTargetEffect(BishopOfBindingValue.INSTANCE, BishopOfBindingValue.instance, Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
@@ -92,7 +92,7 @@ class BishopOfBindingExileEffect extends OneShotEffect {
 }
 
 enum BishopOfBindingValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -108,7 +108,7 @@ enum BishopOfBindingValue implements DynamicValue {
 
     @Override
     public BishopOfBindingValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

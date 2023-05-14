@@ -18,7 +18,7 @@ import mage.constants.Zone;
  */
 public final class PathbreakerWurm extends CardImpl {
 
-    private static final String ruleText = "As long as {this} is paired with another creature, both creatures have trample";
+    private static final String RULE_TEXT = "As long as {this} is paired with another creature, both creatures have trample";
 
     public PathbreakerWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
@@ -31,7 +31,7 @@ public final class PathbreakerWurm extends CardImpl {
         this.addAbility(new SoulbondAbility());
 
         // As long as Pathbreaker Wurm is paired with another creature, both creatures have trample.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(TrampleAbility.getInstance(), ruleText)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(TrampleAbility.getInstance(), RULE_TEXT)));
 
     }
 

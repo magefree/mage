@@ -33,12 +33,12 @@ public final class BellowingElk extends CardImpl {
         // As long as you had another creature enter the battlefield under your control this turn, Bellowing Elk has trample and indestructible.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield),
-                BellowingElkCondition.instance, "As long as you had another creature" +
+                BellowingElkCondition.INSTANCE, "As long as you had another creature" +
                 " enter the battlefield under your control this turn, {this} has trample"
         ));
         ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield),
-                BellowingElkCondition.instance, "and indestructible"
+                BellowingElkCondition.INSTANCE, "and indestructible"
         ));
         this.addAbility(ability, new BellowingElkWatcher());
     }
@@ -54,7 +54,7 @@ public final class BellowingElk extends CardImpl {
 }
 
 enum BellowingElkCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

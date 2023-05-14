@@ -35,7 +35,7 @@ public final class BeltOfGiantStrength extends CardImpl {
         // Equip {10}. This ability costs {X} less to activate where X is the power of the creature it targets.
         EquipAbility ability = new EquipAbility(Outcome.BoostCreature, new GenericManaCost(10), new TargetControlledCreaturePermanent(), false);
         ability.setCostReduceText("This ability costs {X} less to activate, where X is the power of the creature it targets.");
-        ability.setCostAdjuster(BeltOfGiantStrengthAdjuster.instance);
+        ability.setCostAdjuster(BeltOfGiantStrengthAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -50,7 +50,7 @@ public final class BeltOfGiantStrength extends CardImpl {
 }
 
 enum BeltOfGiantStrengthAdjuster implements CostAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustCosts(Ability ability, Game game) {

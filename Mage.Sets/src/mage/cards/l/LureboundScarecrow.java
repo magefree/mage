@@ -50,7 +50,7 @@ public final class LureboundScarecrow extends CardImpl {
 
 class LureboundScarecrowTriggeredAbility extends StateTriggeredAbility {
 
-    private static final String staticText = "When you control no permanents of the chosen color, sacrifice {this}.";
+    private static final String STATIC_TEXT = "When you control no permanents of the chosen color, sacrifice {this}.";
 
     public LureboundScarecrowTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
@@ -84,6 +84,6 @@ class LureboundScarecrowTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public String getRule() {
-        return staticText;
+        return STATIC_TEXT;
     }
 }

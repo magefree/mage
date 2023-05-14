@@ -35,7 +35,7 @@ public final class VineGecko extends CardImpl {
     private static final FilterCard filter = new FilterCard();
 
     static {
-        filter.add(VineGeckoPredicate.instance);
+        filter.add(VineGeckoPredicate.INSTANCE);
     }
 
     public VineGecko(UUID ownerId, CardSetInfo setInfo) {
@@ -68,7 +68,7 @@ public final class VineGecko extends CardImpl {
 }
 
 enum VineGeckoPredicate implements ObjectSourcePlayerPredicate<Card> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {

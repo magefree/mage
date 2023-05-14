@@ -32,7 +32,7 @@ public final class OathOfDruids extends CardImpl {
         // The first player may reveal cards from the top of their library until they reveal a creature card.
         // If they do, that player puts that card onto the battlefield and all other cards revealed this way into their graveyard.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new OathOfDruidsEffect(), TargetController.ANY, false);
-        ability.setTargetAdjuster(OathOfDruidsAdjuster.instance);
+        ability.setTargetAdjuster(OathOfDruidsAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -47,7 +47,7 @@ public final class OathOfDruids extends CardImpl {
 }
 
 enum OathOfDruidsAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
     private static final FilterPlayer filter = new FilterPlayer();
 
     static {

@@ -25,7 +25,7 @@ public final class MasterSymmetrist extends CardImpl {
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(MasterSymmetristPredicate.instance);
+        filter.add(MasterSymmetristPredicate.INSTANCE);
     }
 
     public MasterSymmetrist(UUID ownerId, CardSetInfo setInfo) {
@@ -57,7 +57,7 @@ public final class MasterSymmetrist extends CardImpl {
 }
 
 enum MasterSymmetristPredicate implements Predicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Permanent input, Game game) {

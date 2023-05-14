@@ -37,7 +37,7 @@ public final class QuarantineField extends CardImpl {
                 .setText("for each isolation counter on it, exile up to one target nonland permanent an opponent controls until {this} leaves the battlefield")
         );
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
-        ability.setTargetAdjuster(QuarantineFieldAdjuster.instance);
+        ability.setTargetAdjuster(QuarantineFieldAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -52,7 +52,7 @@ public final class QuarantineField extends CardImpl {
 }
 
 enum QuarantineFieldAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

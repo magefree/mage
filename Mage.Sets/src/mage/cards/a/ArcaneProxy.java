@@ -37,7 +37,7 @@ public final class ArcaneProxy extends CardImpl {
     );
 
     static {
-        filter.add(ArcaneProxyPredicate.instance);
+        filter.add(ArcaneProxyPredicate.INSTANCE);
     }
 
     public ArcaneProxy(UUID ownerId, CardSetInfo setInfo) {
@@ -72,7 +72,7 @@ public final class ArcaneProxy extends CardImpl {
 }
 
 enum ArcaneProxyPredicate implements ObjectSourcePlayerPredicate<Card> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {

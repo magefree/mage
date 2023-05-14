@@ -31,7 +31,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class LunarchMantle extends CardImpl {
 
-    static final String rule = "and has \"{1}, Sacrifice a permanent: This creature gains flying until end of turn.\"";
+    static final String RULE_TEXT = "and has \"{1}, Sacrifice a permanent: This creature gains flying until end of turn.\"";
 
     public LunarchMantle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
@@ -49,7 +49,7 @@ public final class LunarchMantle extends CardImpl {
         Ability abilityToGain = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}"));
         abilityToGain.addCost(new SacrificeTargetCost(new TargetControlledPermanent()));
-        ability2.addEffect(new GainAbilityAttachedEffect(abilityToGain, AttachmentType.AURA, Duration.WhileOnBattlefield, rule));
+        ability2.addEffect(new GainAbilityAttachedEffect(abilityToGain, AttachmentType.AURA, Duration.WhileOnBattlefield, RULE_TEXT));
         this.addAbility(ability2);
     }
 

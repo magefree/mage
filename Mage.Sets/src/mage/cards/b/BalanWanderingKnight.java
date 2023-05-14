@@ -25,7 +25,7 @@ import java.util.UUID;
  */
 public final class BalanWanderingKnight extends CardImpl {
 
-    private static final String rule = "{this} has double strike as long as two or more Equipment are attached to it.";
+    private static final String RULE_TEXT = "{this} has double strike as long as two or more Equipment are attached to it.";
 
     public BalanWanderingKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
@@ -38,7 +38,7 @@ public final class BalanWanderingKnight extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Balan, Wandering Knight has double strike as long as two or more Equipment are attached to it.
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance()), EquippedMultipleSourceCondition.instance, rule);
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance()), EquippedMultipleSourceCondition.instance, RULE_TEXT);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         // {1}{W}: Attach all Equipment you control to Balan.

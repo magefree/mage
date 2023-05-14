@@ -18,7 +18,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -75,10 +74,7 @@ class BloodhallOozeTriggeredAbility1 extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId().equals(this.controllerId)) {
-            return true;
-        }
-        return false;
+        return event.getPlayerId().equals(this.controllerId);
     }
 
     @Override
@@ -120,10 +116,7 @@ class BloodhallOozeTriggeredAbility2 extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId().equals(this.controllerId)) {
-            return true;
-        }
-        return false;
+        return event.getPlayerId().equals(this.controllerId);
     }
 
     @Override

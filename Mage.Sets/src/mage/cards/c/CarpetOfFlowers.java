@@ -83,7 +83,7 @@ class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean resolve(Game game) {
         boolean value = super.resolve(game);
-        if (value == true) {
+        if (value) {
             game.getState().setValue(this.originalId.toString()
                             + "addMana"
                             + game.getState().getZoneChangeCounter(sourceId),

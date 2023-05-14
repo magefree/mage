@@ -36,8 +36,8 @@ public final class RaggadraggaGoregutsBoss extends CardImpl {
 
     static {
         filter.add(TargetController.YOU.getOwnerPredicate());
-        filter.add(RaggadraggaGoregutsBossCreaturePredicate.instance);
-        filter2.add(RaggadraggaGoregutsBossSpellPredicate.instance);
+        filter.add(RaggadraggaGoregutsBossCreaturePredicate.INSTANCE);
+        filter2.add(RaggadraggaGoregutsBossSpellPredicate.INSTANCE);
     }
 
     public RaggadraggaGoregutsBoss(UUID ownerId, CardSetInfo setInfo) {
@@ -83,7 +83,7 @@ public final class RaggadraggaGoregutsBoss extends CardImpl {
 }
 
 enum RaggadraggaGoregutsBossCreaturePredicate implements Predicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Permanent input, Game game) {
@@ -92,7 +92,7 @@ enum RaggadraggaGoregutsBossCreaturePredicate implements Predicate<Permanent> {
 }
 
 enum RaggadraggaGoregutsBossSpellPredicate implements Predicate<StackObject> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(StackObject input, Game game) {

@@ -28,7 +28,7 @@ public final class RiseOfTheDreadMarn extends CardImpl {
 
         // Create X 2/2 black Zombie Berserker creature tokens, where X is the number of nontoken creatures that died this turn.
         this.getSpellAbility().addEffect(new CreateTokenEffect(
-                new ZombieBerserkerToken(), RiseOfTheDreadMarnValue.instance
+                new ZombieBerserkerToken(), RiseOfTheDreadMarnValue.INSTANCE
         ));
         this.getSpellAbility().addWatcher(new RiseOfTheDreadMarnWatcher());
 
@@ -47,7 +47,7 @@ public final class RiseOfTheDreadMarn extends CardImpl {
 }
 
 enum RiseOfTheDreadMarnValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -57,7 +57,7 @@ enum RiseOfTheDreadMarnValue implements DynamicValue {
 
     @Override
     public RiseOfTheDreadMarnValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

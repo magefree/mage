@@ -25,7 +25,7 @@ import mage.constants.Zone;
  */
 public final class MulDayaChannelers extends CardImpl {
 
-    private static final String rule1 = "As long as the top card of your library is a creature card, {this} gets +3/+3";
+    private static final String RULE_TEXT = "As long as the top card of your library is a creature card, {this} gets +3/+3";
 
     public MulDayaChannelers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
@@ -41,7 +41,7 @@ public final class MulDayaChannelers extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
 
         // As long as the top card of your library is a creature card, Mul Daya Channelers gets +3/+3.
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield), new TopLibraryCardTypeCondition(CardType.CREATURE), rule1);
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield), new TopLibraryCardTypeCondition(CardType.CREATURE), RULE_TEXT);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         // As long as the top card of your library is a land card, Mul Daya Channelers has "T: Add two mana of any one color."

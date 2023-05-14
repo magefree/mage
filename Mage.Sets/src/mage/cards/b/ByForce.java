@@ -23,7 +23,7 @@ public final class ByForce extends CardImpl {
         // Destroy X target artifacts.
         this.getSpellAbility().addEffect(new DestroyTargetEffect("Destroy X target artifacts"));
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
-        this.getSpellAbility().setTargetAdjuster(ByForceAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(ByForceAdjuster.INSTANCE);
     }
 
     private ByForce(final ByForce card) {
@@ -37,7 +37,7 @@ public final class ByForce extends CardImpl {
 }
 
 enum ByForceAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

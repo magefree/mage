@@ -33,7 +33,7 @@ public final class Pandemonium extends CardImpl {
                 false, SetTargetPointer.PERMANENT, ""
         );
         ability.addTarget(new TargetAnyTarget());
-        ability.setTargetAdjuster(PandemoniumAdjuster.instance);
+        ability.setTargetAdjuster(PandemoniumAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -48,7 +48,7 @@ public final class Pandemonium extends CardImpl {
 }
 
 enum PandemoniumAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

@@ -22,7 +22,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public final class SteelLeafPaladin extends CardImpl {
 
-    static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("green or white creature you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("green or white creature you control");
 
     static {
         filter.add(Predicates.or(new ColorPredicate(ObjectColor.GREEN), new ColorPredicate(ObjectColor.WHITE)));

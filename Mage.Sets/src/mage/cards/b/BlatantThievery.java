@@ -29,7 +29,7 @@ public final class BlatantThievery extends CardImpl {
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.Custom, true)
                 .setTargetPointer(new EachTargetPointer())
                 .setText("for each opponent, gain control of target permanent that player controls"));
-        this.getSpellAbility().setTargetAdjuster(BlatantThieveryAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(BlatantThieveryAdjuster.INSTANCE);
     }
 
     private BlatantThievery(final BlatantThievery card) {
@@ -43,7 +43,7 @@ public final class BlatantThievery extends CardImpl {
 }
 
 enum BlatantThieveryAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

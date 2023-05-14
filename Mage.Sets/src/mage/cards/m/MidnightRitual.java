@@ -31,7 +31,7 @@ public final class MidnightRitual extends CardImpl {
         // For each creature card exiled this way, create a 2/2 black Zombie creature token.
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.getSpellAbility().addEffect(new MidnightRitualEffect());
-        this.getSpellAbility().setTargetAdjuster(MidnightRitualAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(MidnightRitualAdjuster.INSTANCE);
     }
 
     private MidnightRitual(final MidnightRitual card) {
@@ -45,7 +45,7 @@ public final class MidnightRitual extends CardImpl {
 }
 
 enum MidnightRitualAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

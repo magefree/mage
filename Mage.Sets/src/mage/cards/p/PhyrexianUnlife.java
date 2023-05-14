@@ -93,9 +93,6 @@ class PhyrexianUnlifeEffect extends ReplacementEffectImpl {
                 return false;
             }
         }
-        if (player.getLife() < 1) {
-            return true;
-        }
-        return false;
+        return player.getLife() < 1;
     }
 }

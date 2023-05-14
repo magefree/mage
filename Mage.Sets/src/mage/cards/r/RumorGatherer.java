@@ -32,7 +32,7 @@ public final class RumorGatherer extends CardImpl {
         // Alliance — Whenever another creature enters the battlefield under your control, scry 1. If this is the second time this ability has resolved this turn, draw a card instead.
         this.addAbility(new AllianceAbility(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1), new ScryEffect(1),
-                RumorGathererCondition.instance, "scry 1. If this is the second time " +
+                RumorGathererCondition.INSTANCE, "scry 1. If this is the second time " +
                 "this ability has resolved this turn, draw a card instead"
         )), new AbilityResolvedWatcher());
     }
@@ -48,7 +48,7 @@ public final class RumorGatherer extends CardImpl {
 }
 
 enum RumorGathererCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

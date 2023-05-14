@@ -71,7 +71,7 @@ public final class TazriStalwartSurvivor extends CardImpl {
 class TazriStalwartSurvivorManaAbility extends ActivatedManaAbilityImpl {
 
     private enum TazriStalwartSurvivorCondition implements Condition {
-        instance;
+        INSTANCE;
 
         @Override
         public boolean apply(Game game, Ability source) {
@@ -89,7 +89,7 @@ class TazriStalwartSurvivorManaAbility extends ActivatedManaAbilityImpl {
 
     TazriStalwartSurvivorManaAbility() {
         super(Zone.BATTLEFIELD, new TazriStalwartSurvivorManaEffect(), new TapSourceCost());
-        this.condition = TazriStalwartSurvivorCondition.instance;
+        this.condition = TazriStalwartSurvivorCondition.INSTANCE;
     }
 
     private TazriStalwartSurvivorManaAbility(final TazriStalwartSurvivorManaAbility ability) {

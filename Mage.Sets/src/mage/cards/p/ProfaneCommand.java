@@ -63,7 +63,7 @@ public final class ProfaneCommand extends CardImpl {
         mode.addTarget(new TargetCreaturePermanent(0, 1));
         this.getSpellAbility().addMode(mode);
 
-        this.getSpellAbility().setTargetAdjuster(ProfaneCommandAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(ProfaneCommandAdjuster.INSTANCE);
     }
 
     private ProfaneCommand(final ProfaneCommand card) {
@@ -77,7 +77,7 @@ public final class ProfaneCommand extends CardImpl {
 }
 
 enum ProfaneCommandAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

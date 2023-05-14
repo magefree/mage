@@ -33,8 +33,8 @@ public final class Radiate extends CardImpl {
     );
 
     static {
-        filter.add(SpellWithOnlySingleTargetPredicate.instance);
-        filter.add(SpellWithOnlyPermanentOrPlayerTargetsPredicate.instance);
+        filter.add(SpellWithOnlySingleTargetPredicate.INSTANCE);
+        filter.add(SpellWithOnlyPermanentOrPlayerTargetsPredicate.INSTANCE);
     }
 
     public Radiate(UUID ownerId, CardSetInfo setInfo) {
@@ -56,7 +56,7 @@ public final class Radiate extends CardImpl {
 }
 
 enum SpellWithOnlySingleTargetPredicate implements ObjectSourcePlayerPredicate<Spell> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Spell> input, Game game) {
@@ -80,7 +80,7 @@ enum SpellWithOnlySingleTargetPredicate implements ObjectSourcePlayerPredicate<S
 }
 
 enum SpellWithOnlyPermanentOrPlayerTargetsPredicate implements ObjectSourcePlayerPredicate<Spell> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Spell> input, Game game) {

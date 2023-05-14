@@ -82,7 +82,7 @@ class OrderOfSuccessionEffect extends OneShotEffect {
             Player nextPlayer;
             UUID firstNextPlayer = null;
 
-            while (!getNextPlayerInDirection(left, playerList, game).equals(firstNextPlayer) && controller.canRespond()) {
+            while (!getNextPlayerInDirection(left, playerList).equals(firstNextPlayer) && controller.canRespond()) {
                 nextPlayer = game.getPlayer(playerList.get());
                 if (nextPlayer == null) {
                     return false;
@@ -126,7 +126,7 @@ class OrderOfSuccessionEffect extends OneShotEffect {
         return false;
     }
 
-    private UUID getNextPlayerInDirection(boolean left, PlayerList playerList, Game game) {
+    private UUID getNextPlayerInDirection(boolean left, PlayerList playerList) {
         UUID nextPlayerId;
         if (left) {
             nextPlayerId = playerList.getNext();

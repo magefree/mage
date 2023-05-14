@@ -30,7 +30,7 @@ public final class VerdantCommand extends CardImpl {
     private static final FilterStackObject filter = new FilterStackObject("loyalty ability of a planeswalker");
 
     static {
-        filter.add(VerdantCommandPredicate.instance);
+        filter.add(VerdantCommandPredicate.INSTANCE);
     }
 
     public VerdantCommand(UUID ownerId, CardSetInfo setInfo) {
@@ -73,7 +73,7 @@ public final class VerdantCommand extends CardImpl {
 }
 
 enum VerdantCommandPredicate implements Predicate<StackObject> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(StackObject input, Game game) {

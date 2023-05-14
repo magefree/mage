@@ -26,7 +26,7 @@ public final class AzureFleetAdmiral extends CardImpl {
             = new FilterCreaturePermanent("creatures the monarch controls");
 
     static {
-        filter.add(AzureFleetAdmiralPredicate.instance);
+        filter.add(AzureFleetAdmiralPredicate.INSTANCE);
     }
 
     public AzureFleetAdmiral(UUID ownerId, CardSetInfo setInfo) {
@@ -57,7 +57,7 @@ public final class AzureFleetAdmiral extends CardImpl {
 }
 
 enum AzureFleetAdmiralPredicate implements Predicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Permanent input, Game game) {

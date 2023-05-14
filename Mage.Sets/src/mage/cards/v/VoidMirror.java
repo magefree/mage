@@ -23,7 +23,7 @@ public final class VoidMirror extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a spell");
 
     static {
-        filter.add(VoidMirrorPredicate.instance);
+        filter.add(VoidMirrorPredicate.INSTANCE);
     }
 
     public VoidMirror(UUID ownerId, CardSetInfo setInfo) {
@@ -44,7 +44,7 @@ public final class VoidMirror extends CardImpl {
 }
 
 enum VoidMirrorPredicate implements Predicate<StackObject> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(StackObject input, Game game) {

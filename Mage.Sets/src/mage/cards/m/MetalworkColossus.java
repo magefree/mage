@@ -2,14 +2,12 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
@@ -22,11 +20,8 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
-import mage.util.CardUtil;
-import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -34,7 +29,7 @@ import java.util.UUID;
  */
 public final class MetalworkColossus extends CardImpl {
 
-    private static final String message = "Total mana value of noncreature artifacts you control";
+    private static final String MESSAGE = "Total mana value of noncreature artifacts you control";
     private static final FilterControlledPermanent filter = new FilterControlledArtifactPermanent("artifacts");
 
     public MetalworkColossus(UUID ownerId, CardSetInfo setInfo) {
@@ -48,7 +43,7 @@ public final class MetalworkColossus extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                         Zone.ALL,
                         new SpellCostReductionSourceEffect(xValue)
-                ).addHint(new ValueHint(message, xValue))
+                ).addHint(new ValueHint(MESSAGE, xValue))
         );
 
         // Sacrifice two artifacts: Return Metalwork Colossus from your graveyard to your hand.
@@ -67,7 +62,7 @@ public final class MetalworkColossus extends CardImpl {
 
 class totalNonCreatureArtifactManaValue implements DynamicValue {
 
-    private static final String message = "the total mana value of noncreature artifacts you control";
+    private static final String MESSAGE = "the total mana value of noncreature artifacts you control";
     private static final FilterPermanent filter = new FilterControlledArtifactPermanent("noncreature artifacts you control");
 
     static {
@@ -103,7 +98,7 @@ class totalNonCreatureArtifactManaValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return message;
+        return MESSAGE;
     }
 
     @Override

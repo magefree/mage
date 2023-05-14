@@ -46,7 +46,7 @@ public final class MartyrOfBones extends CardImpl {
         ability.addCost(new RevealVariableBlackCardsFromHandCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInASingleGraveyard(0, 1, StaticFilters.FILTER_CARD_CARDS));
-        ability.setTargetAdjuster(MartyrOfBonesAdjuster.instance);
+        ability.setTargetAdjuster(MartyrOfBonesAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -61,7 +61,7 @@ public final class MartyrOfBones extends CardImpl {
 }
 
 enum MartyrOfBonesAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

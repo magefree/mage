@@ -32,7 +32,7 @@ public final class BladeOfSharedSouls extends CardImpl {
             = new FilterControlledCreaturePermanent("another creature you control");
 
     static {
-        filter.add(BladeOfSharedSoulsPredicate.instance);
+        filter.add(BladeOfSharedSoulsPredicate.INSTANCE);
     }
 
     public BladeOfSharedSouls(UUID ownerId, CardSetInfo setInfo) {
@@ -63,7 +63,7 @@ public final class BladeOfSharedSouls extends CardImpl {
 }
 
 enum BladeOfSharedSoulsPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
@@ -136,9 +136,6 @@ class BladeOfSharedSoulsCopyEffect extends CopyEffect {
             return true;
         }
         Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
-        if (sourcePermanent == null || !sourcePermanent.isAttachedTo(this.copyToObjectId)) {
-            return true;
-        }
-        return false;
+        return sourcePermanent == null || !sourcePermanent.isAttachedTo(this.copyToObjectId);
     }
 }

@@ -40,7 +40,7 @@ public final class AshenGhoul extends CardImpl {
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToBattlefieldEffect(),
                 new ManaCostsImpl<>("{B}"),
-                AshenGhoulCondition.instance
+                AshenGhoulCondition.INSTANCE
         ));
     }
 
@@ -55,8 +55,7 @@ public final class AshenGhoul extends CardImpl {
 }
 
 enum AshenGhoulCondition implements Condition {
-
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

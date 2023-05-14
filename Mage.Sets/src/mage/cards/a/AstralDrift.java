@@ -79,10 +79,7 @@ class AstralDriftTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getSourceId().equals(this.getSourceId())) {
             return true;
         }
-        if (game.getPermanent(getSourceId()) == null || !event.getPlayerId().equals(controllerId)) {
-            return false;
-        }
-        return true;
+        return game.getPermanent(getSourceId()) != null && event.getPlayerId().equals(controllerId);
     }
 
     @Override

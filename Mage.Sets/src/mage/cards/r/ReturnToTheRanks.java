@@ -32,7 +32,7 @@ public final class ReturnToTheRanks extends CardImpl {
         Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
         effect.setText("Return X target creature cards with mana value 2 or less from your graveyard to the battlefield");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().setTargetAdjuster(ReturnToTheRanksAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(ReturnToTheRanksAdjuster.INSTANCE);
     }
 
     private ReturnToTheRanks(final ReturnToTheRanks card) {
@@ -46,7 +46,7 @@ public final class ReturnToTheRanks extends CardImpl {
 }
 
 enum ReturnToTheRanksAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature cards with mana value 2 or less from your graveyard");
 
     static {

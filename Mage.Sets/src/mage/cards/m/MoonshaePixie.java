@@ -31,7 +31,7 @@ import java.util.UUID;
  */
 public final class MoonshaePixie extends AdventureCard {
 
-    private static final Hint hint = new ValueHint("Opponents dealt damage this turn", MoonshaePixieValue.instance);
+    private static final Hint hint = new ValueHint("Opponents dealt damage this turn", MoonshaePixieValue.INSTANCE);
 
     public MoonshaePixie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{3}{U}", "Pixie Dust", "{1}{U}");
@@ -45,7 +45,7 @@ public final class MoonshaePixie extends AdventureCard {
 
         // When Moonshae Pixie enters the battlefield, draw cards equal to the number of opponents who were dealt combat damage this turn.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new DrawCardSourceControllerEffect(MoonshaePixieValue.instance)
+                new DrawCardSourceControllerEffect(MoonshaePixieValue.INSTANCE)
                         .setText("draw cards equal to the number of opponents who were dealt combat damage this turn")
         ).addHint(hint), new MoonshaePixieWatcher());
 
@@ -68,7 +68,7 @@ public final class MoonshaePixie extends AdventureCard {
 }
 
 enum MoonshaePixieValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

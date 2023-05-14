@@ -52,7 +52,7 @@ public final class OneWithTheKami extends CardImpl {
 
         // Whenever enchanted creature or another modified creature you control dies, create X 1/1 colorless Spirit creature tokens, where X is that creature's power.
         this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(
-                new SpiritToken(), OneWithTheKamiValue.instance
+                new SpiritToken(), OneWithTheKamiValue.INSTANCE
         ), false, filter));
     }
 
@@ -67,7 +67,7 @@ public final class OneWithTheKami extends CardImpl {
 }
 
 enum OneWithTheKamiValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

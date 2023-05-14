@@ -18,7 +18,7 @@ import mage.constants.Zone;
  */
 public final class NearheathPilgrim extends CardImpl {
 
-    private static final String ruleText = "As long as {this} is paired with another creature, both creatures have lifelink";
+    private static final String RULE_TEXT = "As long as {this} is paired with another creature, both creatures have lifelink";
 
     public NearheathPilgrim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
@@ -32,7 +32,7 @@ public final class NearheathPilgrim extends CardImpl {
         this.addAbility(new SoulbondAbility());
 
         // As long as Nearheath Pilgrim is paired with another creature, both creatures have lifelink.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(LifelinkAbility.getInstance(), ruleText)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(LifelinkAbility.getInstance(), RULE_TEXT)));
     }
 
     private NearheathPilgrim(final NearheathPilgrim card) {

@@ -74,7 +74,7 @@ class BackdraftHellkiteEffect extends ContinuousEffectImpl {
         }
         player.getGraveyard()
                 .stream()
-                .map((cardId) -> game.getCard(cardId))
+                .map(game::getCard)
                 .filter(card1 -> card1.isInstantOrSorcery(game))
                 .forEachOrdered(card -> affectedObjectList.add(new MageObjectReference(card, game)));
     }

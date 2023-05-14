@@ -87,7 +87,7 @@ class BoosterTutorEffect extends OneShotEffect {
                     game.informPlayers(message.toString());
 
                     TargetCard targetCard = new TargetCard(Zone.ALL, new FilterCard());
-                    Set<Card> cardsToLoad = new HashSet<Card>(boosterPack);
+                    Set<Card> cardsToLoad = new HashSet<>(boosterPack);
                     game.loadCards(cardsToLoad, controller.getId());
                     CardsImpl cards = new CardsImpl();
                     cards.addAll(boosterPack);

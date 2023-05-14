@@ -67,7 +67,8 @@ class ArcaneEndeavorEffect extends OneShotEffect {
         List<Integer> results = player.rollDice(outcome, source, game, 8, 2, 0);
         int firstResult = results.get(0);
         int secondResult = results.get(1);
-        int first, second;
+        int first;
+        int second;
         if (firstResult != secondResult && player.chooseUse(
                 outcome, "Choose a number of cards to draw",
                 "The other number will be the maximum mana value of the spell you cast",

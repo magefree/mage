@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class TemurBattleRage extends CardImpl {
 
-    private static final String rule = "<br><i>Ferocious</i> &mdash; That creature also gains trample until end of turn if you control a creature with power 4 or greater";
+    private static final String RULE_TEXT = "<br><i>Ferocious</i> &mdash; That creature also gains trample until end of turn if you control a creature with power 4 or greater";
 
     public TemurBattleRage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
@@ -33,7 +33,7 @@ public final class TemurBattleRage extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn),
                 new LockedInCondition(FerociousCondition.instance),
-                rule));
+                RULE_TEXT));
         this.getSpellAbility().addHint(FerociousHint.instance);
     }
 

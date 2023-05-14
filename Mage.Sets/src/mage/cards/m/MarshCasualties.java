@@ -24,7 +24,7 @@ import mage.target.TargetPlayer;
  */
 public final class MarshCasualties extends CardImpl {
 
-    private static final String ruleText = "Creatures target player controls get -1/-1 until end of turn. If this spell was kicked, those creatures get -2/-2 until end of turn instead";
+    private static final String RULE_TEXT = "Creatures target player controls get -1/-1 until end of turn. If this spell was kicked, those creatures get -2/-2 until end of turn instead";
 
     public MarshCasualties(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{B}");
@@ -39,7 +39,7 @@ public final class MarshCasualties extends CardImpl {
                 new MarshCasualtiesEffect(-2, -2),
                 new MarshCasualtiesEffect(-1, -1),
                 new LockedInCondition(KickedCondition.ONCE),
-                ruleText));
+                RULE_TEXT));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 

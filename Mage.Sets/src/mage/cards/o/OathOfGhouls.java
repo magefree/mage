@@ -38,7 +38,7 @@ public final class OathOfGhouls extends CardImpl {
 
         // At the beginning of each player's upkeep, that player chooses target player whose graveyard has fewer creature cards in it than their graveyard does and is their opponent. The first player may return a creature card from their graveyard to their hand.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new OathOfGhoulsEffect(), TargetController.ANY, false);
-        ability.setTargetAdjuster(OathOfGhoulsAdjuster.instance);
+        ability.setTargetAdjuster(OathOfGhoulsAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -53,7 +53,7 @@ public final class OathOfGhouls extends CardImpl {
 }
 
 enum OathOfGhoulsAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
     private static final FilterPlayer filter = new FilterPlayer();
 
     static {

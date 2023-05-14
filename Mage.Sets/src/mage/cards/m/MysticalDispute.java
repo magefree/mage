@@ -28,7 +28,7 @@ public final class MysticalDispute extends CardImpl {
 
         // This spell costs {2} less to cast if it targets a blue spell.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionSourceEffect(2, MysticalDisputeCondition.instance).setCanWorksOnStackOnly(true)
+                Zone.ALL, new SpellCostReductionSourceEffect(2, MysticalDisputeCondition.INSTANCE).setCanWorksOnStackOnly(true)
         ).setRuleAtTheTop(true));
 
         // Counter target spell unless its controller pays {3}.
@@ -47,7 +47,7 @@ public final class MysticalDispute extends CardImpl {
 }
 
 enum MysticalDisputeCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

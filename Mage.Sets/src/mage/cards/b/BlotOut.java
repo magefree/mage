@@ -47,7 +47,7 @@ public final class BlotOut extends CardImpl {
 class BlotOutEffect extends OneShotEffect {
 
     private enum BlotOutPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-        instance;
+        INSTANCE;
 
         @Override
         public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
@@ -72,7 +72,7 @@ class BlotOutEffect extends OneShotEffect {
     );
 
     static {
-        filter.add(BlotOutPredicate.instance);
+        filter.add(BlotOutPredicate.INSTANCE);
     }
 
     BlotOutEffect() {

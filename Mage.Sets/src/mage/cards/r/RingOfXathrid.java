@@ -2,7 +2,6 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.ObjectColor;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.AttachedToMatchesFilterCondition;

@@ -28,7 +28,7 @@ public final class MercadianAtlas extends CardImpl {
                 Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(1),
                 TargetController.YOU,
-                MercadianAtlasCondition.instance,
+                MercadianAtlasCondition.INSTANCE,
                 true
         ), new PlayLandWatcher());
     }
@@ -44,8 +44,7 @@ public final class MercadianAtlas extends CardImpl {
 }
 
 enum MercadianAtlasCondition implements Condition {
-
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

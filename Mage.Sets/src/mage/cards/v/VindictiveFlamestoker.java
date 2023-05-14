@@ -48,7 +48,7 @@ public final class VindictiveFlamestoker extends CardImpl {
         ability.addCost(new SacrificeSourceCost());
         ability.addEffect(new DrawCardSourceControllerEffect(4).concatBy(", then"));
         ability.addEffect(new InfoEffect("This ability costs {1} less to activate for each oil counter on {this}"));
-        this.addAbility(ability.setCostAdjuster(VindictiveFlamestokerAdjuster.instance));
+        this.addAbility(ability.setCostAdjuster(VindictiveFlamestokerAdjuster.INSTANCE));
     }
 
     private VindictiveFlamestoker(final VindictiveFlamestoker card) {
@@ -62,13 +62,12 @@ public final class VindictiveFlamestoker extends CardImpl {
 }
 
 enum VindictiveFlamestokerAdjuster implements CostAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
         int amount = Optional
                 .ofNullable(ability.getSourcePermanentIfItStillExists(game))
-                .filter(Objects::nonNull)
                 .map(permanent -> permanent.getCounters(game))
                 .map(counters -> counters.getCount(CounterType.OIL))
                 .orElse(0);

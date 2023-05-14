@@ -32,7 +32,7 @@ public final class BloodshotTrainee extends CardImpl {
 
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD, new DamageTargetEffect(4),
-                new TapSourceCost(), BloodshotTraineeCondition.instance
+                new TapSourceCost(), BloodshotTraineeCondition.INSTANCE
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -49,7 +49,7 @@ public final class BloodshotTrainee extends CardImpl {
 }
 
 enum BloodshotTraineeCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

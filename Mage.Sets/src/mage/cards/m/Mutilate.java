@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 public final class Mutilate extends CardImpl {
 
-    private static final String ruleText = "All creatures get -1/-1 until end of turn for each Swamp you control";
+    private static final String RULE_TEXT = "All creatures get -1/-1 until end of turn for each Swamp you control";
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Swamp you control");
 
@@ -36,7 +36,7 @@ public final class Mutilate extends CardImpl {
         PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter, -1);
         this.getSpellAbility().addEffect(
                 new BoostAllEffect(count, count, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES, false, null)
-                        .setText(ruleText)
+                        .setText(RULE_TEXT)
         );
     }
 

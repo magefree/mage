@@ -130,11 +130,4 @@ class ArcaneAdaptationEffect extends ContinuousEffectImpl {
         return true;
 
     }
-
-    private void setCreatureSubtype(MageObject object, SubType subtype, Game game) {
-        if (object == null) {
-            return;
-        }
-        game.getState().getCreateMageObjectAttribute(object, game).getSubtype().add(subtype);
-    }
 }

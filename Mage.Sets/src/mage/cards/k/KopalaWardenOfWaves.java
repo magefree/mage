@@ -71,7 +71,6 @@ public final class KopalaWardenOfWaves extends CardImpl {
                     .anyMatch(permanent -> !isTargetCompatible(permanent, source, game))) {
                 return false;
             }
-            ;
         }
 
         return allTargets.stream()

@@ -36,7 +36,7 @@ public final class CaptainVargusWrath extends CardImpl {
 
         // Whenever Captain Vargus Wrath attacks, Pirates you control get +1/+1 until end of turn for each time you've cast a commander from the command zone this game.
         this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(
-                CaptainVargusWrathValue.instance, CaptainVargusWrathValue.instance,
+                CaptainVargusWrathValue.INSTANCE, CaptainVargusWrathValue.INSTANCE,
                 Duration.EndOfTurn, filter, false, true
         ), false, "Whenever {this} attacks, Pirates you control get +1/+1 until end of turn " +
                 "for each time you've cast a commander from the command zone this game."
@@ -54,9 +54,9 @@ public final class CaptainVargusWrath extends CardImpl {
 }
 
 enum CaptainVargusWrathValue implements DynamicValue {
-    instance;
+    INSTANCE;
     private static final Hint hint = new ValueHint(
-            "Number of times you've cast a commander this game", instance
+            "Number of times you've cast a commander this game", INSTANCE
     );
 
     @Override
@@ -75,7 +75,7 @@ enum CaptainVargusWrathValue implements DynamicValue {
 
     @Override
     public CaptainVargusWrathValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

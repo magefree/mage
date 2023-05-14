@@ -18,7 +18,7 @@ import mage.constants.Zone;
  */
 public final class MetathranElite extends CardImpl {
 
-    private static final String rule = "{this} is unblockable as long as it's enchanted.";
+    private static final String RULE_TEXT = "{this} can't be blocked as long as it's enchanted.";
 
     public MetathranElite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
@@ -31,7 +31,7 @@ public final class MetathranElite extends CardImpl {
         // Metathran Elite is unblockable as long as it's enchanted.
         ConditionalRestrictionEffect effect = new ConditionalRestrictionEffect(
                 new CantBeBlockedSourceEffect(), new EnchantedSourceCondition());
-        effect.setText(rule);
+        effect.setText(RULE_TEXT);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
     }

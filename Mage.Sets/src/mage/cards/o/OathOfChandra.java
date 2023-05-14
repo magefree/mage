@@ -43,7 +43,7 @@ public final class OathOfChandra extends CardImpl {
         // At the beginning of each end step, if a planeswalker entered the battlefield under your control this turn, Oath of Chandra deals 2 damage to each opponent.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfEndStepTriggeredAbility(
                 new DamagePlayersEffect(Outcome.Damage, StaticValue.get(2), TargetController.OPPONENT),
-                TargetController.ANY, false), OathOfChandraCondition.instance,
+                TargetController.ANY, false), OathOfChandraCondition.INSTANCE,
                 "At the beginning of each end step, if a planeswalker entered the battlefield under your control this turn, {this} deals 2 damage to each opponent."), new OathOfChandraWatcher());
     }
 
@@ -58,8 +58,7 @@ public final class OathOfChandra extends CardImpl {
 }
 
 enum OathOfChandraCondition implements Condition {
-
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

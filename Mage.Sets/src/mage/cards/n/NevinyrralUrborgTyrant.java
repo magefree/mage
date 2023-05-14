@@ -18,7 +18,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.ZombieToken;
-import mage.watchers.common.CreaturesDiedWatcher;
 
 import java.util.UUID;
 

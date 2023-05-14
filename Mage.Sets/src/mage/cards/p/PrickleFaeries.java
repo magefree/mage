@@ -43,7 +43,7 @@ public final class PrickleFaeries extends CardImpl {
                 new BeginningOfUpkeepTriggeredAbility(
                         Zone.BATTLEFIELD, new DamageTargetEffect(2),
                         TargetController.OPPONENT, false, true
-                ), PrickleFaeriesCondition.instance, "At the beginning of each opponent's upkeep, " +
+                ), PrickleFaeriesCondition.INSTANCE, "At the beginning of each opponent's upkeep, " +
                 "if that player has two or fewer cards in hand, {this} deals 2 damage to them."
         ));
     }
@@ -59,7 +59,7 @@ public final class PrickleFaeries extends CardImpl {
 }
 
 enum PrickleFaeriesCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

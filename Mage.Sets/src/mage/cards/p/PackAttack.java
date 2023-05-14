@@ -27,7 +27,7 @@ public final class PackAttack extends CardImpl {
 
         // Attacking creatures get +X/+0 until end of turn, where X is the number of players being attacked.
         this.getSpellAbility().addEffect(new BoostAllEffect(
-                PackAttackValue.instance, StaticValue.get(0), Duration.EndOfTurn,
+                PackAttackValue.INSTANCE, StaticValue.get(0), Duration.EndOfTurn,
                 StaticFilters.FILTER_ATTACKING_CREATURES, false, null
         ));
 
@@ -46,7 +46,7 @@ public final class PackAttack extends CardImpl {
 }
 
 enum PackAttackValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

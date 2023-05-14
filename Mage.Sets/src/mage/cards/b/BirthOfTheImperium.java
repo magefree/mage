@@ -53,7 +53,7 @@ public final class BirthOfTheImperium extends CardImpl {
         // III -- Draw two cards for each opponent who controls fewer creatures than you.
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_III,
-                new DrawCardSourceControllerEffect(BirthOfTheImperiumValue.instance)
+                new DrawCardSourceControllerEffect(BirthOfTheImperiumValue.INSTANCE)
         );
         this.addAbility(sagaAbility);
     }
@@ -69,7 +69,7 @@ public final class BirthOfTheImperium extends CardImpl {
 }
 
 enum BirthOfTheImperiumValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

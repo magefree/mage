@@ -58,7 +58,7 @@ public final class AryelKnightOfWindgrace extends CardImpl {
                 .setText("Destroy target creature with power X or less"), new ManaCostsImpl<>("{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new TapVariableTargetCost(filter));
-        ability.setTargetAdjuster(AryelKnightOfWindgraceAdjuster.instance);
+        ability.setTargetAdjuster(AryelKnightOfWindgraceAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -73,7 +73,7 @@ public final class AryelKnightOfWindgrace extends CardImpl {
 }
 
 enum AryelKnightOfWindgraceAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

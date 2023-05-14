@@ -57,7 +57,7 @@ public class LukkaBoundToRuin extends CardImpl {
                 "among any number of target creatures and/or planeswalkers, " +
                 "where X is the greatest power among creatures you controlled as you activated this ability.");
         ability = new LoyaltyAbility(damageMultiEffect, -4);
-        ability.setTargetAdjuster(LukkaBoundToRuinAdjuster.instance);
+        ability.setTargetAdjuster(LukkaBoundToRuinAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -106,12 +106,12 @@ class LukkaBoundToRuinConditionalMana extends ConditionalMana {
 
     public LukkaBoundToRuinConditionalMana() {
         super(mana);
-        addCondition(LukkaBoundToRuinManaCondition.instance);
+        addCondition(LukkaBoundToRuinManaCondition.INSTANCE);
     }
 }
 
 enum LukkaBoundToRuinManaCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -128,7 +128,7 @@ enum LukkaBoundToRuinManaCondition implements Condition {
  * and each chosen target must receive at least 1 damage.
  */
 enum LukkaBoundToRuinAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

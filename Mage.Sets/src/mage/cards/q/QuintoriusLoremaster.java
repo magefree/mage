@@ -50,7 +50,7 @@ public final class QuintoriusLoremaster extends CardImpl {
 
     static {
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-        filter2.add(QuintoriusLoremasterPredicate.instance);
+        filter2.add(QuintoriusLoremasterPredicate.INSTANCE);
     }
 
     public QuintoriusLoremaster(UUID ownerId, CardSetInfo setInfo) {
@@ -92,7 +92,7 @@ public final class QuintoriusLoremaster extends CardImpl {
 }
 
 enum QuintoriusLoremasterPredicate implements ObjectSourcePlayerPredicate<Card> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
@@ -101,7 +101,6 @@ enum QuintoriusLoremasterPredicate implements ObjectSourcePlayerPredicate<Card> 
                 .map(Game::getState)
                 .map(GameState::getExile)
                 .map(exile -> exile.getExileZone(CardUtil.getExileZoneId(game, input.getSource())))
-                .filter(Objects::nonNull)
                 .map(exile -> exile.contains(input.getObject().getId()))
                 .orElse(false);
     }

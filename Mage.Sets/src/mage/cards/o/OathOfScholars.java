@@ -30,7 +30,7 @@ public final class OathOfScholars extends CardImpl {
 
         // At the beginning of each player's upkeep, that player chooses target player who has more cards in hand than they do and is their opponent. The first player may discard their hand and draw three cards.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new OathOfScholarsEffect(), TargetController.ANY, false);
-        ability.setTargetAdjuster(OathOfScholarsAdjuster.instance);
+        ability.setTargetAdjuster(OathOfScholarsAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -45,7 +45,7 @@ public final class OathOfScholars extends CardImpl {
 }
 
 enum OathOfScholarsAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
     private static final FilterPlayer filter = new FilterPlayer();
 
     static {

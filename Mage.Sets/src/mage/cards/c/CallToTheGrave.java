@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public final class CallToTheGrave extends CardImpl {
 
-    private static final String ruleText = "At the beginning of the end step, if no creatures are on the battlefield, sacrifice {this}.";
+    private static final String RULE_TEXT = "At the beginning of the end step, if no creatures are on the battlefield, sacrifice {this}.";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Zombie creature");
 
     static {
@@ -41,7 +41,7 @@ public final class CallToTheGrave extends CardImpl {
         this.addAbility(ability);
         // At the beginning of the end step, if no creatures are on the battlefield, sacrifice Call to the Grave.
         TriggeredAbility triggered = new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(triggered, new CreatureCountCondition(0, TargetController.ANY), ruleText));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(triggered, new CreatureCountCondition(0, TargetController.ANY), RULE_TEXT));
     }
 
     private CallToTheGrave(final CallToTheGrave card) {

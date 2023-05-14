@@ -42,7 +42,7 @@ public final class LuminatePrimordial extends CardImpl {
         // When Luminate Primordial enters the battlefield, for each opponent, exile up to one target creature
         // that player controls and that player gains life equal to its power.
         Ability ability = new EntersBattlefieldTriggeredAbility(new LuminatePrimordialEffect(), false);
-        ability.setTargetAdjuster(LuminatePrimordialAdjuster.instance);
+        ability.setTargetAdjuster(LuminatePrimordialAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -57,7 +57,7 @@ public final class LuminatePrimordial extends CardImpl {
 }
 
 enum LuminatePrimordialAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

@@ -60,7 +60,7 @@ public class SyrixCarrierOfTheFlame extends CardImpl {
         BeginningOfEndStepTriggeredAbility ability = new BeginningOfEndStepTriggeredAbility(
                 new DamageWithPowerFromOneToAnotherTargetEffect(),
                 TargetController.EACH_PLAYER,
-                SyrixCarrierOfTheFlameCondition.instance,
+                SyrixCarrierOfTheFlameCondition.INSTANCE,
                 false
         );
         ability.addTarget(new TargetPermanent(PHOENIX_FILTER));
@@ -131,9 +131,9 @@ class SyrixCarrierOfTheFlameCastEffect extends OneShotEffect {
  * Creature card left your graveyard this turn
  */
 enum SyrixCarrierOfTheFlameCondition implements Condition {
-    instance;
+    INSTANCE;
 
-    private static final String string = "a creature card left your graveyard this turn";
+    private static final String TRIGGER_TEXT = "a creature card left your graveyard this turn";
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -143,7 +143,7 @@ enum SyrixCarrierOfTheFlameCondition implements Condition {
 
     @Override
     public String toString() {
-        return string;
+        return TRIGGER_TEXT;
     }
 }
 

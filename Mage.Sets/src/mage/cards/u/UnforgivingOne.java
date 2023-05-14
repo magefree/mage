@@ -36,7 +36,7 @@ public final class UnforgivingOne extends CardImpl {
     );
 
     static {
-        filter.add(UnforgivingOnePredicate.instance);
+        filter.add(UnforgivingOnePredicate.INSTANCE);
     }
 
     public UnforgivingOne(UUID ownerId, CardSetInfo setInfo) {
@@ -68,7 +68,7 @@ public final class UnforgivingOne extends CardImpl {
 }
 
 enum UnforgivingOnePredicate implements ObjectSourcePlayerPredicate<Card> {
-    instance;
+    INSTANCE;
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
 
     static {

@@ -72,18 +72,16 @@ class ArchfiendsVesselAbility extends EntersBattlefieldTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (super.checkTrigger(event, game)) {
-            if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-                EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) event;
-                if (entersTheBattlefieldEvent.getTargetId().equals(getSourceId()) && entersTheBattlefieldEvent.getFromZone() == Zone.GRAVEYARD) {
-                    return true;
-                } else {
-                    SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
-                    List<Spell> spellsCastFromGraveyard = watcher.getSpellsCastFromGraveyardThisTurn(getControllerId());
-                    if (spellsCastFromGraveyard != null) {
-                        return spellsCastFromGraveyard.stream()
-                            .anyMatch(spell -> spell.getMainCard().getId().equals((entersTheBattlefieldEvent.getTarget().getMainCard().getId())));
-                    }
+        if (super.checkTrigger(event, game) && event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
+            EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) event;
+            if (entersTheBattlefieldEvent.getTargetId().equals(getSourceId()) && entersTheBattlefieldEvent.getFromZone() == Zone.GRAVEYARD) {
+                return true;
+            } else {
+                SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
+                List<Spell> spellsCastFromGraveyard = watcher.getSpellsCastFromGraveyardThisTurn(getControllerId());
+                if (spellsCastFromGraveyard != null) {
+                    return spellsCastFromGraveyard.stream()
+                        .anyMatch(spell -> spell.getMainCard().getId().equals((entersTheBattlefieldEvent.getTarget().getMainCard().getId())));
                 }
             }
         }

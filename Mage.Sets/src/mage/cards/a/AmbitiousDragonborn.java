@@ -27,7 +27,7 @@ import java.util.stream.Stream;
 public final class AmbitiousDragonborn extends CardImpl {
 
     private static final Hint hint = new ValueHint(
-            "Greatest power among creatures you control and in your graveyard", AmbitiousDragonbornValue.instance
+            "Greatest power among creatures you control and in your graveyard", AmbitiousDragonbornValue.INSTANCE
     );
 
     public AmbitiousDragonborn(UUID ownerId, CardSetInfo setInfo) {
@@ -40,7 +40,7 @@ public final class AmbitiousDragonborn extends CardImpl {
 
         // Ambitious Dragonborn enters the battlefield with X +1/+1 counters on it, where X is the greatest power among creatures you control and creature cards in your graveyard.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(), AmbitiousDragonbornValue.instance, false
+                CounterType.P1P1.createInstance(), AmbitiousDragonbornValue.INSTANCE, false
         ), "with X +1/+1 counters on it, where X is the greatest power " +
                 "among creatures you control and creature cards in your graveyard"));
     }
@@ -56,7 +56,7 @@ public final class AmbitiousDragonborn extends CardImpl {
 }
 
 enum AmbitiousDragonbornValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

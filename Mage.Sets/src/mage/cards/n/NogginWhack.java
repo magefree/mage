@@ -1,6 +1,5 @@
 package mage.cards.n;
 
-import mage.abilities.Ability;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.abilities.keyword.ProwlAbility;
 import mage.cards.CardImpl;
@@ -10,7 +9,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.target.TargetPlayer;
 
-import java.util.List;
 import java.util.UUID;
 
 /**

@@ -44,7 +44,7 @@ public final class MinamoSightbender extends CardImpl {
         // {X}, {T}: Target creature with power X or less can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(), new ManaCostsImpl<>("{X}"));
         Target target = new TargetPermanent(filter);
-        ability.setTargetAdjuster(MinamoSightbenderAdjuster.instance);
+        ability.setTargetAdjuster(MinamoSightbenderAdjuster.INSTANCE);
         ability.addTarget(target);
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -62,7 +62,7 @@ public final class MinamoSightbender extends CardImpl {
 }
 
 enum MinamoSightbenderAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

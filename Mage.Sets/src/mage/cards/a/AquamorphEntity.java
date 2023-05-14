@@ -53,8 +53,8 @@ public final class AquamorphEntity extends CardImpl {
 
 class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
 
-    private static final String choice51 = "a 5/1 creature";
-    private static final String choice15 = "a 1/5 creature";
+    private static final String CHOICE51 = "a 5/1 creature";
+    private static final String CHOICE15 = "a 1/5 creature";
 
     AquamorphEntityReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
@@ -78,12 +78,10 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            if (event.getTargetId().equals(source.getSourceId())) {
-                Permanent sourcePermanent = ((EntersTheBattlefieldEvent) event).getTarget();
-                if (sourcePermanent != null && !sourcePermanent.isFaceDown(game)) {
-                    return true;
-                }
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(source.getSourceId())) {
+            Permanent sourcePermanent = ((EntersTheBattlefieldEvent) event).getTarget();
+            if (sourcePermanent != null && !sourcePermanent.isFaceDown(game)) {
+                return true;
             }
         }
         if (event.getType() == GameEvent.EventType.TURNFACEUP) {
@@ -105,8 +103,8 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
         }
         Choice choice = new ChoiceImpl(true);
         choice.setMessage("Choose what the creature becomes to");
-        choice.getChoices().add(choice51);
-        choice.getChoices().add(choice15);
+        choice.getChoices().add(CHOICE51);
+        choice.getChoices().add(CHOICE15);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && !controller.choose(Outcome.Neutral, choice, game)) {
             discard();
@@ -115,11 +113,11 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
         int power = 0;
         int toughness = 0;
         switch (choice.getChoice()) {
-            case choice51:
+            case CHOICE51:
                 power = 5;
                 toughness = 1;
                 break;
-            case choice15:
+            case CHOICE15:
                 power = 1;
                 toughness = 5;
                 break;

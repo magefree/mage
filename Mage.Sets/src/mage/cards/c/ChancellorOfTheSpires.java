@@ -17,7 +17,6 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCardInOpponentsGraveyard;
 
 import java.util.UUID;
@@ -27,7 +26,7 @@ import java.util.UUID;
  */
 public final class ChancellorOfTheSpires extends CardImpl {
 
-    private static final String abilityText = "at the beginning of the first upkeep, each opponent mills seven cards";
+    private static final String ABILITY_TEXT = "at the beginning of the first upkeep, each opponent mills seven cards";
 
     private static final FilterCard filter = new FilterCard("instant or sorcery card from an opponent's graveyard");
 
@@ -46,7 +45,7 @@ public final class ChancellorOfTheSpires extends CardImpl {
         this.toughness = new MageInt(7);
 
         // You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, each opponent puts the top seven cards of their library into their graveyard.
-        this.addAbility(new ChancellorAbility(new ChancellorOfTheSpiresDelayedTriggeredAbility(), abilityText));
+        this.addAbility(new ChancellorAbility(new ChancellorOfTheSpiresDelayedTriggeredAbility(), ABILITY_TEXT));
 
         this.addAbility(FlyingAbility.getInstance());
 

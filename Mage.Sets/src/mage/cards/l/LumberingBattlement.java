@@ -58,8 +58,8 @@ public final class LumberingBattlement extends CardImpl {
 
         // Lumbering Battlement gets +2/+2 for each card exiled with it.
         this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(
-                LumberingBattlementValue.instance,
-                LumberingBattlementValue.instance,
+                LumberingBattlementValue.INSTANCE,
+                LumberingBattlementValue.INSTANCE,
                 Duration.WhileOnBattlefield
         ).setText("{this} gets +2/+2 for each card exiled with it.")));
     }
@@ -124,7 +124,7 @@ class LumberingBattlementEffect extends OneShotEffect {
 }
 
 enum LumberingBattlementValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -153,7 +153,7 @@ enum LumberingBattlementValue implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

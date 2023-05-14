@@ -37,7 +37,7 @@ public final class RaffinesSilencer extends CardImpl {
 
         // When Raffine's Silencer dies, target creature an opponent controls gets -X/-X until end of turn, where X is Raffine's Silencer's power.
         Ability ability = new DiesSourceTriggeredAbility(
-                new BoostTargetEffect(RaffinesSilencerValue.instance, RaffinesSilencerValue.instance, Duration.EndOfTurn),
+                new BoostTargetEffect(RaffinesSilencerValue.INSTANCE, RaffinesSilencerValue.INSTANCE, Duration.EndOfTurn),
                 false
         );
         ability.addTarget(new TargetOpponentsCreaturePermanent());
@@ -55,7 +55,7 @@ public final class RaffinesSilencer extends CardImpl {
 }
 
 enum RaffinesSilencerValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

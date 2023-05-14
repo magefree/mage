@@ -45,7 +45,7 @@ public final class BortukBonerattle extends CardImpl {
                 new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(
                         new ReturnFromGraveyardToBattlefieldTargetEffect(),
                         new ReturnFromGraveyardToHandTargetEffect(),
-                        BortukBonerattleCondition.instance,
+                        BortukBonerattleCondition.INSTANCE,
                         null
                 )),
                 CastFromEverywhereSourceCondition.instance,
@@ -70,7 +70,7 @@ public final class BortukBonerattle extends CardImpl {
 }
 
 enum BortukBonerattleCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

@@ -35,7 +35,7 @@ public final class VolcanicTorrent extends CardImpl {
         this.addAbility(new CascadeAbility());
 
         // Volcanic Torrent deals X damage to each creature and planeswalker your opponents control, where X is the number of spells you've cast this turn.
-        this.getSpellAbility().addEffect(new DamageAllEffect(VolcanicTorrentValue.instance, filter));
+        this.getSpellAbility().addEffect(new DamageAllEffect(VolcanicTorrentValue.INSTANCE, filter));
     }
 
     private VolcanicTorrent(final VolcanicTorrent card) {
@@ -49,7 +49,7 @@ public final class VolcanicTorrent extends CardImpl {
 }
 
 enum VolcanicTorrentValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -59,7 +59,7 @@ enum VolcanicTorrentValue implements DynamicValue {
 
     @Override
     public VolcanicTorrentValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

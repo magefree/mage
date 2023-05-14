@@ -83,10 +83,8 @@ class ChandraRoaringFlameEmblemEffect extends OneShotEffect {
             List<Player> opponentsEmblem = new ArrayList<>();
             for (UUID playerId : game.getOpponents(controller.getId())) {
                 Player opponent = game.getPlayer(playerId);
-                if (opponent != null) {
-                    if (opponent.damage(6, source.getSourceId(), source, game) > 0) {
-                        opponentsEmblem.add(opponent);
-                    }
+                if (opponent != null && opponent.damage(6, source.getSourceId(), source, game) > 0) {
+                    opponentsEmblem.add(opponent);
                 }
             }
             for (Player opponent : opponentsEmblem) {

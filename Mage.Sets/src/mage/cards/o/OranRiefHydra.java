@@ -52,7 +52,7 @@ public final class OranRiefHydra extends CardImpl {
 
 class OranRiefHydraTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String text = "<i>Landfall</i> &mdash; Whenever a "
+    private static final String RULE_TEXT = "<i>Landfall</i> &mdash; Whenever a "
             + "land enters the battlefield under your control, put a +1/+1 counter on {this}. "
             + "If that land is a Forest, put two +1/+1 counters on {this} instead.";
 
@@ -95,7 +95,7 @@ class OranRiefHydraTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return text;
+        return RULE_TEXT;
     }
 }
 

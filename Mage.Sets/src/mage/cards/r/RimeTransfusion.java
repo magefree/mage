@@ -27,7 +27,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class RimeTransfusion extends CardImpl {
 
-    static final String rule = "and has \"{S}: This creature can't be blocked this turn except by snow creatures.\"";
+    static final String RULE_TEXT = "and has \"{S}: This creature can't be blocked this turn except by snow creatures.\"";
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by snow creatures until end of turn");
 
@@ -50,7 +50,7 @@ public final class RimeTransfusion extends CardImpl {
         // Enchanted creature gets +2/+1 and has "{S}: This creature can't be blocked this turn except by snow creatures."
         SimpleStaticAbility ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 1, Duration.WhileOnBattlefield));
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.EndOfTurn))),new ManaCostsImpl<>("{S}"));
-        ability2.addEffect(new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, rule));
+        ability2.addEffect(new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, RULE_TEXT));
         this.addAbility(ability2);
     }
 

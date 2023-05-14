@@ -144,7 +144,7 @@ class LyndeCheerfulTormentorAttachCurseEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent(SubType.CURSE, "Curse attached to you");
 
     static {
-        filter.add(LyndeCheerfulTormentorPredicate.instance);
+        filter.add(LyndeCheerfulTormentorPredicate.INSTANCE);
     }
 
     public LyndeCheerfulTormentorAttachCurseEffect() {
@@ -191,7 +191,7 @@ class LyndeCheerfulTormentorAttachCurseEffect extends OneShotEffect {
 }
 
 enum LyndeCheerfulTormentorPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {

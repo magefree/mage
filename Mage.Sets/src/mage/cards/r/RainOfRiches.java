@@ -87,7 +87,7 @@ class RainOfRichesGainsCascadeEffect extends ContinuousEffectImpl {
                     && stackObject.isControlledBy(source.getControllerId())) {
                 Spell spell = (Spell) stackObject;
 
-                if (FirstSpellCastWithTreasureCondition.instance.apply(game, source)) {
+                if (FirstSpellCastWithTreasureCondition.INSTANCE.apply(game, source)) {
                     game.getState().addOtherAbility(spell.getCard(), cascadeAbility);
                     return true;  // TODO: I think this should return here as soon as it finds the first one.
                                   //       If it should, change WildMageSorcerer to also return early.
@@ -104,7 +104,7 @@ class RainOfRichesGainsCascadeEffect extends ContinuousEffectImpl {
 }
 
 enum FirstSpellCastWithTreasureCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

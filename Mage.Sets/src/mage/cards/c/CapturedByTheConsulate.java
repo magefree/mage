@@ -142,11 +142,9 @@ class CapturedByTheConsulateEffect extends OneShotEffect {
             StackObject stackObject = game.getStack().getStackObject(getTargetPointer().getFirst(game, source));
             if (stackObject != null) {
                 Target target = stackObject.getStackAbility().getTargets().get(0);
-                if (target != null) {
-                    if (target.canTarget(stackObject.getControllerId(), sourceEnchantment.getAttachedTo(), source, game)) {
-                        target.remove(target.getFirstTarget());
-                        target.add(sourceEnchantment.getAttachedTo(), game);
-                    }
+                if (target != null && target.canTarget(stackObject.getControllerId(), sourceEnchantment.getAttachedTo(), source, game)) {
+                    target.remove(target.getFirstTarget());
+                    target.add(sourceEnchantment.getAttachedTo(), game);
                 }
             }
             return true;

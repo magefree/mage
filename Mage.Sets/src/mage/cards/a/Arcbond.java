@@ -66,12 +66,10 @@ class ArcbondDelayedTriggeredAbility extends DelayedTriggeredAbility {
     public void init(Game game) {
         // because target can already be gone from battlefield if triggered ability resolves, we need to hold an own object reference
         targetObject = new MageObjectReference(getTargets().getFirstTarget(), game);
-        if (targetObject != null) {
-            for (Effect effect : this.getEffects()) {
-                effect.setValue("sourceId", targetObject.getSourceId());
-            }
-            this.getTargets().clear();
+        for (Effect effect : this.getEffects()) {
+            effect.setValue("sourceId", targetObject.getSourceId());
         }
+        this.getTargets().clear();
     }
 
     @Override

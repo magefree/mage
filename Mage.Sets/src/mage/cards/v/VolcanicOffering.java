@@ -33,7 +33,7 @@ public final class VolcanicOffering extends CardImpl {
         // Destroy target nonbasic land you don't control and target nonbasic land of an opponent's choice you don't control.
         // Volcanic Offering deals 7 damage to target creature you don't control and 7 damage to target creature of an opponent's choice you don't control.
         this.getSpellAbility().addEffect(new VolcanicOfferingEffect());
-        this.getSpellAbility().setTargetAdjuster(VolcanicOfferingAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(VolcanicOfferingAdjuster.INSTANCE);
     }
 
     private VolcanicOffering(final VolcanicOffering card) {
@@ -47,7 +47,7 @@ public final class VolcanicOffering extends CardImpl {
 }
 
 enum VolcanicOfferingAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
     private static final FilterLandPermanent filterLand = new FilterLandPermanent("nonbasic land you don't control");
 
     static {

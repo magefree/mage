@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
-import mage.choices.VoteHandler;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;

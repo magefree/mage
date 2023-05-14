@@ -32,7 +32,7 @@ public final class TimberProtector extends CardImpl {
 
     static {
         filterTreefolk.add(SubType.TREEFOLK.getPredicate());
-        filterBoth.add(TimberProtectorPredicate.instance);
+        filterBoth.add(TimberProtectorPredicate.INSTANCE);
     }
 
     public TimberProtector(UUID ownerId, CardSetInfo setInfo) {
@@ -65,7 +65,7 @@ public final class TimberProtector extends CardImpl {
 }
 
 enum TimberProtectorPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {

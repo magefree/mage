@@ -29,7 +29,7 @@ public final class BloodBeckoning extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect()
                 .setText("return target creature card from your graveyard to your hand. If this spell was kicked, " +
                         "instead return two target creature cards from your graveyard to your hand"));
-        this.getSpellAbility().setTargetAdjuster(BloodBeckoningAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(BloodBeckoningAdjuster.INSTANCE);
     }
 
     private BloodBeckoning(final BloodBeckoning card) {
@@ -43,7 +43,7 @@ public final class BloodBeckoning extends CardImpl {
 }
 
 enum BloodBeckoningAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

@@ -33,7 +33,7 @@ public final class ChangeOfPlans extends CardImpl {
 
         // Each of X target creatures you control connive. You may have any number of them phase out.
         this.getSpellAbility().addEffect(new ChangeOfPlansEffect());
-        this.getSpellAbility().setTargetAdjuster(ChangeOfPlansAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(ChangeOfPlansAdjuster.INSTANCE);
     }
 
     private ChangeOfPlans(final ChangeOfPlans card) {
@@ -47,7 +47,7 @@ public final class ChangeOfPlans extends CardImpl {
 }
 
 enum ChangeOfPlansAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

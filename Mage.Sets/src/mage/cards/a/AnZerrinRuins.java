@@ -3,7 +3,6 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
@@ -63,9 +62,7 @@ class AnZerrinRuinsDontUntapEffect extends DontUntapInControllersUntapStepAllEff
         if (super.applies(event, source, game)) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null) {
-                if (permanent.hasSubtype(ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game), game)) {
-                    return true;
-                }
+                return permanent.hasSubtype(ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game), game);
             }
         }
         return false;

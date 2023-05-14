@@ -30,7 +30,7 @@ public final class MaliciousAdvice extends CardImpl {
         effect.setText("Tap X target artifacts, creatures, and/or lands");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(ManacostVariableValue.REGULAR));
-        this.getSpellAbility().setTargetAdjuster(MaliciousAdviceAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(MaliciousAdviceAdjuster.INSTANCE);
     }
 
     private MaliciousAdvice(final MaliciousAdvice card) {
@@ -44,7 +44,7 @@ public final class MaliciousAdvice extends CardImpl {
 }
 
 enum MaliciousAdviceAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
     private static final FilterPermanent filter = new FilterPermanent("artifacts, creatures, and/or lands");
 
     static {

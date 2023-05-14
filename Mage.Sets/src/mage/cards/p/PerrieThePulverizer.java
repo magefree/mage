@@ -34,7 +34,7 @@ import java.util.UUID;
 public final class PerrieThePulverizer extends CardImpl {
 
     private static final Hint hint = new ValueHint(
-            "Different kinds of counters among permanents you control", PerrieThePulverizerValue.instance
+            "Different kinds of counters among permanents you control", PerrieThePulverizerValue.INSTANCE
     );
 
     public PerrieThePulverizer(UUID ownerId, CardSetInfo setInfo) {
@@ -57,7 +57,7 @@ public final class PerrieThePulverizer extends CardImpl {
         ability = new AttacksTriggeredAbility(new GainAbilityTargetEffect(TrampleAbility.getInstance())
                 .setText("target creature you control gains trample"));
         ability.addEffect(new BoostTargetEffect(
-                PerrieThePulverizerValue.instance, PerrieThePulverizerValue.instance, Duration.EndOfTurn
+                PerrieThePulverizerValue.INSTANCE, PerrieThePulverizerValue.INSTANCE, Duration.EndOfTurn
         ).setText("and gets +X/+X until end of turn, where X is the number of different kinds of counters among permanents you control"));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
@@ -74,7 +74,7 @@ public final class PerrieThePulverizer extends CardImpl {
 }
 
 enum PerrieThePulverizerValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

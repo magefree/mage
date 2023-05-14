@@ -48,7 +48,7 @@ public final class PlateArmor extends CardImpl {
 
         // Equip {3}. This ability costs {1} less to activate for each other Equipment you control.
         EquipAbility equipAbility = new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), new TargetControlledCreaturePermanent(), false);
-        equipAbility.setCostAdjuster(PlateArmorAdjuster.instance);
+        equipAbility.setCostAdjuster(PlateArmorAdjuster.INSTANCE);
         equipAbility.setCostReduceText("This ability costs {1} less to activate for each other Equipment you control.");
         this.addAbility(equipAbility.addHint(PlateArmorAdjuster.getHint()));
     }
@@ -64,7 +64,7 @@ public final class PlateArmor extends CardImpl {
 }
 
 enum PlateArmorAdjuster implements CostAdjuster {
-    instance;
+    INSTANCE;
 
     private static final FilterEquipmentPermanent filter = new FilterEquipmentPermanent("Other Equipment you control");
 

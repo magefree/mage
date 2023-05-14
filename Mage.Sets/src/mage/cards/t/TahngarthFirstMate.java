@@ -100,8 +100,8 @@ class TahngarthFirstMateEffect extends OneShotEffect {
             = new FilterPlayerOrPlaneswalker("player or planeswalker active player is attacking");
 
     static {
-        filter.getPlayerFilter().add(TahngarthFirstMatePlayerPredicate.instance);
-        filter.getPermanentFilter().add(TahngarthFirstMatePermanentPredicate.instance);
+        filter.getPlayerFilter().add(TahngarthFirstMatePlayerPredicate.INSTANCE);
+        filter.getPermanentFilter().add(TahngarthFirstMatePermanentPredicate.INSTANCE);
     }
 
     TahngarthFirstMateEffect() {
@@ -139,7 +139,7 @@ class TahngarthFirstMateEffect extends OneShotEffect {
 }
 
 enum TahngarthFirstMatePlayerPredicate implements Predicate<Player> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Player input, Game game) {
@@ -148,7 +148,7 @@ enum TahngarthFirstMatePlayerPredicate implements Predicate<Player> {
 }
 
 enum TahngarthFirstMatePermanentPredicate implements Predicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Permanent input, Game game) {

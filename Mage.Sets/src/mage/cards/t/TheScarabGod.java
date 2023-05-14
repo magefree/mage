@@ -154,11 +154,11 @@ class TheScarabGodEffect2 extends OneShotEffect {
 
 class TheScarabGodEffect3 extends OneShotEffect {
 
-    private static final String effectText = "return it to its owner's hand at the beginning of the next end step";
+    private static final String EFFECT_TEXT = "return it to its owner's hand at the beginning of the next end step";
 
     TheScarabGodEffect3() {
         super(Outcome.Benefit);
-        staticText = effectText;
+        staticText = EFFECT_TEXT;
     }
 
     TheScarabGodEffect3(TheScarabGodEffect3 effect) {

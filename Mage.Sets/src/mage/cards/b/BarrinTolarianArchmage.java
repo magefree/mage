@@ -53,7 +53,7 @@ public final class BarrinTolarianArchmage extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
                         new DrawCardSourceControllerEffect(1), TargetController.YOU, false
-                ), BarrinTolarianArchmageCondition.instance, "At the beginning of your end step, " +
+                ), BarrinTolarianArchmageCondition.INSTANCE, "At the beginning of your end step, " +
                 "if a permanent was put into your hand from the battlefield this turn, draw a card."
         ), new BarrinTolarianArchmageWatcher());
     }
@@ -69,7 +69,7 @@ public final class BarrinTolarianArchmage extends CardImpl {
 }
 
 enum BarrinTolarianArchmageCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

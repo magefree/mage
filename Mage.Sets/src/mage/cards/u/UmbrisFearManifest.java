@@ -48,8 +48,8 @@ public final class UmbrisFearManifest extends CardImpl {
 
         // Umbris, Fear Manifest gets +1/+1 for each card your opponents own in exile.
         this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(
-                UmbrisFearManifestValue.instance,
-                UmbrisFearManifestValue.instance,
+                UmbrisFearManifestValue.INSTANCE,
+                UmbrisFearManifestValue.INSTANCE,
                 Duration.WhileOnBattlefield
         )));
 
@@ -72,7 +72,7 @@ public final class UmbrisFearManifest extends CardImpl {
 }
 
 enum UmbrisFearManifestValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

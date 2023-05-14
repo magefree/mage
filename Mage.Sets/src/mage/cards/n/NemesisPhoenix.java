@@ -40,7 +40,7 @@ public final class NemesisPhoenix extends CardImpl {
                 Zone.GRAVEYARD,
                 new ReturnToBattlefieldUnderOwnerControlSourceEffect(true, true, -1)
                         .setText("return {this} from your graveyard to the battlefield tapped and attacking"),
-                new ManaCostsImpl<>("{2}{R}"), NemesisPhoenixCondition.instance
+                new ManaCostsImpl<>("{2}{R}"), NemesisPhoenixCondition.INSTANCE
         ));
     }
 
@@ -55,7 +55,7 @@ public final class NemesisPhoenix extends CardImpl {
 }
 
 enum NemesisPhoenixCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

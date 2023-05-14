@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 import mage.watchers.Watcher;
@@ -32,7 +31,7 @@ public final class ArchiveTrap extends CardImpl {
         this.subtype.add(SubType.TRAP);
 
         // If an opponent searched their library this turn, you may pay {0} rather than pay Archive Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new GenericManaCost(0), OpponentSearchesLibCondition.instance), new ArchiveTrapWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new GenericManaCost(0), OpponentSearchesLibCondition.INSTANCE), new ArchiveTrapWatcher());
 
         // Target opponent puts the top thirteen cards of their library into their graveyard.
         this.getSpellAbility().addTarget(new TargetOpponent());
@@ -77,8 +76,7 @@ class ArchiveTrapWatcher extends Watcher {
 }
 
 enum OpponentSearchesLibCondition implements Condition {
-
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

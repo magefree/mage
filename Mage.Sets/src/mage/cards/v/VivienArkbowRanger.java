@@ -72,7 +72,7 @@ public final class VivienArkbowRanger extends CardImpl {
     }
 
     enum VivienArkbowRangerAdjuster implements TargetAdjuster {
-        instance;
+        INSTANCE;
 
         @Override
         public void adjustTargets(Ability ability, Game game) {

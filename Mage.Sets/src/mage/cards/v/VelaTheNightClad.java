@@ -21,7 +21,7 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class VelaTheNightClad extends CardImpl {
 
-    private static final String rule = "Whenever {this} or another creature you control leaves the battlefield, ";
+    private static final String RULE_TEXT = "Whenever {this} or another creature you control leaves the battlefield, ";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
@@ -51,7 +51,7 @@ public final class VelaTheNightClad extends CardImpl {
                 Zone.BATTLEFIELD,
                 Zone.BATTLEFIELD, null,
                 new LoseLifeOpponentsEffect(1),
-                filter, rule, false);
+                filter, RULE_TEXT, false);
         this.addAbility(ability);
     }
 

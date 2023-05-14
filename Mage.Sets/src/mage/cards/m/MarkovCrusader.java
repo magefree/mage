@@ -24,7 +24,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
  */
 public final class MarkovCrusader extends CardImpl {
 
-    private static final String rule = "{this} has haste as long as you control another Vampire";
+    private static final String RULE_TEXT = "{this} has haste as long as you control another Vampire";
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another Vampire");
 
     static {
@@ -43,7 +43,7 @@ public final class MarkovCrusader extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Markov Crusader has haste as long as you control another Vampire.
-        Effect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(HasteAbility.getInstance()), new PermanentsOnTheBattlefieldCondition(filter), rule);
+        Effect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(HasteAbility.getInstance()), new PermanentsOnTheBattlefieldCondition(filter), RULE_TEXT);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

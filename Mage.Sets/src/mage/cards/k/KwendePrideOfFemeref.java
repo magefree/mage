@@ -25,7 +25,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  */
 public final class KwendePrideOfFemeref extends CardImpl {
 
-    static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control with first strike");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control with first strike");
 
     static {
         filter.add(new AbilityPredicate(FirstStrikeAbility.class));

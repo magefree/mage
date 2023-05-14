@@ -55,7 +55,7 @@ public final class MazesEnd extends CardImpl {
         ability.addEffect(new MazesEndEffect());
         ability.addCost(new TapSourceCost());
         ability.addCost(new ReturnToHandFromBattlefieldSourceCost());
-        ability.addHint(new ValueHint("Gates with different names you control", GatesWithDifferentNamesYouControlCount.instance));
+        ability.addHint(new ValueHint("Gates with different names you control", GatesWithDifferentNamesYouControlCount.INSTANCE));
         this.addAbility(ability);
     }
 
@@ -70,8 +70,7 @@ public final class MazesEnd extends CardImpl {
 }
 
 enum GatesWithDifferentNamesYouControlCount implements DynamicValue {
-
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -88,7 +87,7 @@ enum GatesWithDifferentNamesYouControlCount implements DynamicValue {
 
     @Override
     public GatesWithDifferentNamesYouControlCount copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override
@@ -121,7 +120,7 @@ class MazesEndEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int count = GatesWithDifferentNamesYouControlCount.instance.calculate(game, source, this);
+        int count = GatesWithDifferentNamesYouControlCount.INSTANCE.calculate(game, source, this);
         if (count >= 10) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {

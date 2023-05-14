@@ -19,7 +19,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
-import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.EnumSet;

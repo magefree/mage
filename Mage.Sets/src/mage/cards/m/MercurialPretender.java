@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class MercurialPretender extends CardImpl {
 
-    private static final String effectText = "as a copy of a creature you control, except it has \"{2}{U}{U}: Return this creature to its owner's hand.\"";
+    private static final String EFFECT_TEXT = "as a copy of a creature you control, except it has \"{2}{U}{U}: Return this creature to its owner's hand.\"";
 
     public MercurialPretender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");
@@ -36,7 +36,7 @@ public final class MercurialPretender extends CardImpl {
         // except it has "{2}{U}{U}: Return this creature to its owner's hand."
         Effect effect = new CopyPermanentEffect(new FilterControlledCreaturePermanent(),
                 new AbilityCopyApplier(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{2}{U}{U}"))));
-        effect.setText(effectText);
+        effect.setText(EFFECT_TEXT);
         this.addAbility(new EntersBattlefieldAbility(effect, true));
     }
 

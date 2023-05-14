@@ -35,7 +35,7 @@ public final class UrzasSaga extends CardImpl {
     private static final FilterCard filter = new FilterArtifactCard("artifact card with mana cost {0} or {1}");
 
     static {
-        filter.add(UrzasSagaPredicate.instance);
+        filter.add(UrzasSagaPredicate.INSTANCE);
     }
 
     public UrzasSaga(UUID ownerId, CardSetInfo setInfo) {
@@ -87,7 +87,7 @@ public final class UrzasSaga extends CardImpl {
 }
 
 enum UrzasSagaPredicate implements Predicate<Card> {
-    instance;
+    INSTANCE;
 
     private static final List<String> costs = Arrays.asList("{0}", "{1}");
 

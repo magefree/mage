@@ -31,7 +31,7 @@ public final class VengefulDreams extends CardImpl {
         Effect effect = new ExileTargetEffect();
         effect.setText("Exile X target attacking creatures");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().setTargetAdjuster(VengefulDreamsAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(VengefulDreamsAdjuster.INSTANCE);
     }
 
     private VengefulDreams(final VengefulDreams card) {
@@ -45,7 +45,7 @@ public final class VengefulDreams extends CardImpl {
 }
 
 enum VengefulDreamsAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

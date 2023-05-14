@@ -62,7 +62,7 @@ public final class OrvarTheAllForm extends CardImpl {
                         new OrvarTheAllFormEffect(),
                         StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY,
                         false, true
-                ), OrvarTheAllFormCondition.instance, "Whenever you cast an instant or sorcery spell, " +
+                ), OrvarTheAllFormCondition.INSTANCE, "Whenever you cast an instant or sorcery spell, " +
                 "if it targets one or more other permanents you control, " +
                 "create a token that's a copy of one of those permanents."
         ));
@@ -84,7 +84,7 @@ public final class OrvarTheAllForm extends CardImpl {
 }
 
 enum OrvarTheAllFormCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

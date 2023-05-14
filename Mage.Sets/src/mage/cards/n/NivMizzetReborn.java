@@ -89,8 +89,8 @@ class NivMizzetRebornEffect extends OneShotEffect {
 
 class NivMizzetRebornTarget extends TargetCardInLibrary {
 
-    private static enum NivMizzetRebornPredicate implements Predicate<Card> {
-        instance;
+    private enum NivMizzetRebornPredicate implements Predicate<Card> {
+        INSTANCE;
 
         @Override
         public boolean apply(Card input, Game game) {
@@ -102,7 +102,7 @@ class NivMizzetRebornTarget extends TargetCardInLibrary {
             = new FilterCard("a card of each color pair");
 
     static {
-        filter.add(NivMizzetRebornPredicate.instance);
+        filter.add(NivMizzetRebornPredicate.INSTANCE);
     }
 
     NivMizzetRebornTarget() {

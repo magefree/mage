@@ -32,7 +32,7 @@ import java.util.UUID;
 public final class TheSpaceFamilyGoblinson extends CardImpl {
 
     private static final Hint hint = new ValueHint(
-            "Dice you've rolled this turn", TheSpaceFamilyGoblinsonValue.instance
+            "Dice you've rolled this turn", TheSpaceFamilyGoblinsonValue.INSTANCE
     );
 
     public TheSpaceFamilyGoblinson(UUID ownerId, CardSetInfo setInfo) {
@@ -47,7 +47,7 @@ public final class TheSpaceFamilyGoblinson extends CardImpl {
         // The Space Family Goblinson has trample as long as you've rolled three or more dice this turn.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn),
-                TheSpaceFamilyGoblinsonCondition.instance, "{this} has trample " +
+                TheSpaceFamilyGoblinsonCondition.INSTANCE, "{this} has trample " +
                 "as long as you've rolled three or more dice this turn"
         )).addHint(hint), new TheSpaceFamilyGoblinsonWatcher());
 
@@ -66,7 +66,7 @@ public final class TheSpaceFamilyGoblinson extends CardImpl {
 }
 
 enum TheSpaceFamilyGoblinsonCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -75,7 +75,7 @@ enum TheSpaceFamilyGoblinsonCondition implements Condition {
 }
 
 enum TheSpaceFamilyGoblinsonValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

@@ -10,14 +10,12 @@ import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.constants.*;
 import mage.abilities.effects.common.AttachEffect;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.target.common.TargetLandPermanent;
 
 /**
  *

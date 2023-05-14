@@ -14,13 +14,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.CreatureExploresTriggeredAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.mana.SimpleManaAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.c.CarnelianOrbOfDragonkindHasteEffect;
-import mage.cards.c.CarnelianOrbOfDragonkindWatcher;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -72,7 +67,7 @@ class CarnelianOrbOfDragonkindWatcher extends Watcher {
         }
 
         MageObject target = game.getObject(event.getTargetId());
-        if (target == null || !(target instanceof Spell)) {
+        if (!(target instanceof Spell)) {
             return;
         }
 

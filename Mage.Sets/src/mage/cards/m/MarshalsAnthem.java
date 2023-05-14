@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public final class MarshalsAnthem extends CardImpl {
 
-    private static final String rule = "return up to X target creature cards from your graveyard to the battlefield, " +
+    private static final String RULE_TEXT = "return up to X target creature cards from your graveyard to the battlefield, " +
             "where X is the number of times {this} was kicked";
 
     public MarshalsAnthem(UUID ownerId, CardSetInfo setInfo) {
@@ -42,9 +42,9 @@ public final class MarshalsAnthem extends CardImpl {
 
         // When Marshal's Anthem enters the battlefield, return up to X target creature cards from your graveyard to the battlefield, where X is the number of times Marshal's Anthem was kicked.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new ReturnFromGraveyardToBattlefieldTargetEffect().setText(rule), false
+                new ReturnFromGraveyardToBattlefieldTargetEffect().setText(RULE_TEXT), false
         );
-        ability.setTargetAdjuster(MarshalsAnthemAdjuster.instance);
+        ability.setTargetAdjuster(MarshalsAnthemAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -59,7 +59,7 @@ public final class MarshalsAnthem extends CardImpl {
 }
 
 enum MarshalsAnthemAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
     private static final FilterCard filter = new FilterCreatureCard("creature card in your graveyard");
 
     @Override

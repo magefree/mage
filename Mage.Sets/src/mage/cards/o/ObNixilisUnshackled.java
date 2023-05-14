@@ -20,7 +20,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
@@ -101,7 +100,7 @@ class ObNixilisUnshackledTriggeredAbility extends TriggeredAbilityImpl {
 
 class ObNixilisUnshackledEffect extends SacrificeEffect {
 
-    static private final FilterPermanent filter = new FilterControlledCreaturePermanent("creature");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("creature");
 
     public ObNixilisUnshackledEffect() {
         super(filter, 1, "that player");

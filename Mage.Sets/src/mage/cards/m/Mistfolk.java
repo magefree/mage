@@ -30,7 +30,7 @@ public final class Mistfolk extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("spell that this creature");
 
     static {
-        filter.add(MistfolkPredicate.instance);
+        filter.add(MistfolkPredicate.INSTANCE);
     }
 
     public Mistfolk(UUID ownerId, CardSetInfo setInfo) {
@@ -61,7 +61,7 @@ public final class Mistfolk extends CardImpl {
 }
 
 enum MistfolkPredicate implements ObjectSourcePlayerPredicate<Spell> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Spell> input, Game game) {

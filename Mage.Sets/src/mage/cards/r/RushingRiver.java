@@ -40,7 +40,7 @@ public final class RushingRiver extends CardImpl {
         effect.setTargetPointer(new SecondTargetPointer());
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetNonlandPermanent().withChooseHint("nonland to return"));
-        this.getSpellAbility().setTargetAdjuster(RushingRiverAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(RushingRiverAdjuster.INSTANCE);
     }
 
     private RushingRiver(final RushingRiver card) {
@@ -54,7 +54,7 @@ public final class RushingRiver extends CardImpl {
 }
 
 enum RushingRiverAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

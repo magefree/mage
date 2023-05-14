@@ -18,7 +18,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public final class RoarOfTheKha extends CardImpl {
     
-    private static final String rule = "untap all creatures you control";
+    private static final String RULE_TEXT = "untap all creatures you control";
 
     public RoarOfTheKha(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
@@ -27,7 +27,7 @@ public final class RoarOfTheKha extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn));
         
         // or untap all creatures you control.
-        Mode mode = new Mode(new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), rule));
+        Mode mode = new Mode(new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), RULE_TEXT));
         this.getSpellAbility().getModes().addMode(mode);
         
         // Entwine {1}{W}

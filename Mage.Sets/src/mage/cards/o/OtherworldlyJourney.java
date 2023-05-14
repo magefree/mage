@@ -53,11 +53,11 @@ public final class OtherworldlyJourney extends CardImpl {
 
 class OtherworldlyJourneyEffect extends OneShotEffect {
 
-    private static final String effectText = "Exile target creature. At the beginning of the next end step, return that card to the battlefield under its owner's control with a +1/+1 counter on it";
+    private static final String EFFECT_TEXT = "Exile target creature. At the beginning of the next end step, return that card to the battlefield under its owner's control with a +1/+1 counter on it";
 
     OtherworldlyJourneyEffect() {
         super(Outcome.Benefit);
-        staticText = effectText;
+        staticText = EFFECT_TEXT;
     }
 
     OtherworldlyJourneyEffect(OtherworldlyJourneyEffect effect) {

@@ -120,11 +120,7 @@ class SeraphDelayedTriggeredAbility extends DelayedTriggeredAbility {
                 && event.getTargetId().equals(seraph)) {
             return true;
         }
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE
-                && event.getTargetId().equals(seraph)) {
-            return true;
-        }
-        return false;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(seraph);
     }
 
     @Override

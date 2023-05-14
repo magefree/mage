@@ -34,7 +34,7 @@ public final class CelestineTheLivingSaint extends CardImpl {
     );
 
     static {
-        filter.add(CelestineTheLivingSaintPredicate.instance);
+        filter.add(CelestineTheLivingSaintPredicate.INSTANCE);
     }
 
     public CelestineTheLivingSaint(UUID ownerId, CardSetInfo setInfo) {
@@ -75,7 +75,7 @@ public final class CelestineTheLivingSaint extends CardImpl {
 }
 
 enum CelestineTheLivingSaintPredicate implements ObjectSourcePlayerPredicate<Card> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {

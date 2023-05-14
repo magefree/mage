@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -19,13 +18,13 @@ import mage.game.events.GameEvent.EventType;
  */
 public final class Providence extends CardImpl {
 
-    private static String abilityText = "at the beginning of the first upkeep, your life total becomes 26";
+    private static final String ABILITY_TEXT = "at the beginning of the first upkeep, your life total becomes 26";
 
     public Providence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{W}{W}");
 
         // You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, your life total becomes 26.
-        Ability ability = new ChancellorAbility(new ProvidenceDelayedTriggeredAbility(), abilityText);
+        Ability ability = new ChancellorAbility(new ProvidenceDelayedTriggeredAbility(), ABILITY_TEXT);
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
         // Your life total becomes 26.

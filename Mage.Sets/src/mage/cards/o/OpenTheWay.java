@@ -28,7 +28,7 @@ public final class OpenTheWay extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new InfoEffect("X can't be greater than the number of players in the game")
         ).setRuleAtTheTop(true));
-        this.getSpellAbility().setCostAdjuster(OpenTheWayAdjuster.instance);
+        this.getSpellAbility().setCostAdjuster(OpenTheWayAdjuster.INSTANCE);
 
         // Reveal cards from the top of your library until you reveal X land cards. Put those land cards onto the battlefield tapped and the rest on the bottom of your library in a random order.
         this.getSpellAbility().addEffect(new OpenTheWayEffect());
@@ -45,7 +45,7 @@ public final class OpenTheWay extends CardImpl {
 }
 
 enum OpenTheWayAdjuster implements CostAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustCosts(Ability ability, Game game) {

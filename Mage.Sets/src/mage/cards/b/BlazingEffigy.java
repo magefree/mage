@@ -35,7 +35,7 @@ public final class BlazingEffigy extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Blazing Effigy dies, it deals X damage to target creature, where X is 3 plus the amount of damage dealt to Blazing Effigy this turn by other sources named Blazing Effigy.
-        Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(BlazingEffigyCount.instance), false);
+        Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(BlazingEffigyCount.INSTANCE), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability, new BlazingEffigyWatcher());
     }
@@ -51,7 +51,7 @@ public final class BlazingEffigy extends CardImpl {
 }
 
 enum BlazingEffigyCount implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -65,7 +65,7 @@ enum BlazingEffigyCount implements DynamicValue {
 
     @Override
     public BlazingEffigyCount copy() {
-        return BlazingEffigyCount.instance;
+        return BlazingEffigyCount.INSTANCE;
     }
 
     @Override
@@ -93,8 +93,6 @@ class BlazingEffigyWatcher extends Watcher {
 
         if (event.getSourceId().equals(event.getTargetId())) { return; }
 
-        // TODO: Should damageSourceRef be used for anything?
-        MageObjectReference damageSourceRef = new MageObjectReference(event.getSourceId(), game);
         MageObjectReference damageTargetRef = new MageObjectReference(event.getTargetId(), game);
         if (game.getPermanentOrLKIBattlefield(event.getSourceId()) != null && game.getPermanentOrLKIBattlefield(event.getSourceId()).getName().equals("Blazing Effigy")) {
             damagedObjects.putIfAbsent(damageTargetRef, 0);

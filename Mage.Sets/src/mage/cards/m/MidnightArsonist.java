@@ -38,7 +38,7 @@ public final class MidnightArsonist extends CardImpl {
         // When Midnight Arsonist enters the battlefield, destroy up to X target artifacts without mana abilities, where X is the number of Vampires you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect()
                 .setText("destroy up to X target artifacts without mana abilities, where X is the number of Vampires you control"));
-        ability.setTargetAdjuster(MidnightArsonistAdjuster.instance);
+        ability.setTargetAdjuster(MidnightArsonistAdjuster.INSTANCE);
         this.addAbility(ability.addHint(MidnightArsonistAdjuster.getHint()));
     }
 
@@ -53,12 +53,12 @@ public final class MidnightArsonist extends CardImpl {
 }
 
 enum MidnightArsonistAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
     private static final FilterPermanent filter = new FilterControlledPermanent(SubType.VAMPIRE);
     private static final FilterPermanent filter2 = new FilterArtifactPermanent("artifacts without mana abilities");
 
     static {
-        filter2.add(MidnightArsonistPredicate.instance);
+        filter2.add(MidnightArsonistPredicate.INSTANCE);
     }
 
     private static final Hint hint = new ValueHint("Vampires you control", new PermanentsOnBattlefieldCount(filter));
@@ -76,7 +76,7 @@ enum MidnightArsonistAdjuster implements TargetAdjuster {
 }
 
 enum MidnightArsonistPredicate implements Predicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Permanent input, Game game) {

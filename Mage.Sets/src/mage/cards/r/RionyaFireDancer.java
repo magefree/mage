@@ -49,7 +49,7 @@ public final class RionyaFireDancer extends CardImpl {
                 new RionyaFireDancerEffect(), TargetController.YOU, false
         );
         ability.addTarget(new TargetPermanent(filter));
-        this.addAbility(ability.addHint(RionyaFireDancerHint.instance), new RionyaFireDancerWatcher());
+        this.addAbility(ability.addHint(RionyaFireDancerHint.INSTANCE), new RionyaFireDancerWatcher());
     }
 
     private RionyaFireDancer(final RionyaFireDancer card) {
@@ -63,7 +63,7 @@ public final class RionyaFireDancer extends CardImpl {
 }
 
 enum RionyaFireDancerHint implements Hint {
-    instance;
+    INSTANCE;
 
     @Override
     public String getText(Game game, Ability ability) {
@@ -73,7 +73,7 @@ enum RionyaFireDancerHint implements Hint {
 
     @Override
     public RionyaFireDancerHint copy() {
-        return instance;
+        return INSTANCE;
     }
 }
 

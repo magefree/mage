@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 public final class BleakCovenVampires extends CardImpl {
 
-    private static final String effectText = "When {this} enters the battlefield, if you control three or more artifacts, target player loses 4 life and you gain 4 life.";
+    private static final String EFFECT_TEXT = "When {this} enters the battlefield, if you control three or more artifacts, target player loses 4 life and you gain 4 life.";
 
     public BleakCovenVampires(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
@@ -38,7 +38,7 @@ public final class BleakCovenVampires extends CardImpl {
         Target target = new TargetPlayer();
         ability.addTarget(target);
 
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, MetalcraftCondition.instance, effectText)
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, MetalcraftCondition.instance, EFFECT_TEXT)
                 .setAbilityWord(AbilityWord.METALCRAFT)
                 .addHint(MetalcraftHint.instance)
         );

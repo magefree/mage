@@ -35,7 +35,7 @@ public final class BridesGown extends CardImpl {
 
     static {
         filter.add(new NamePredicate("Groom's Finery"));
-        filter.add(BridesGownPredicate.instance);
+        filter.add(BridesGownPredicate.INSTANCE);
     }
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter, false);
@@ -77,7 +77,7 @@ public final class BridesGown extends CardImpl {
 }
 
 enum BridesGownPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {

@@ -28,7 +28,7 @@ import java.util.UUID;
  */
 public final class MudbrawlerCohort extends CardImpl {
 
-    private static final String rule = "{this} gets +1/+1 as long as you control another red creature";
+    private static final String RULE_TEXT = "{this} gets +1/+1 as long as you control another red creature";
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
@@ -50,7 +50,7 @@ public final class MudbrawlerCohort extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
         // Mudbrawler Cohort gets +1/+1 as long as you control another red creature.
         Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
-        Effect effect = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), condition, rule);
+        Effect effect = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), condition, RULE_TEXT);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

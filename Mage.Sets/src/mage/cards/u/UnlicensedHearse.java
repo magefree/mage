@@ -30,7 +30,7 @@ import mage.util.CardUtil;
  * @author TheElk801
  */
 enum UnlicensedHearseValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -63,7 +63,7 @@ enum UnlicensedHearseValue implements DynamicValue {
 
 public final class UnlicensedHearse extends CardImpl {
 
-    private static final Hint hint = new ValueHint("Cards exiled", UnlicensedHearseValue.instance);
+    private static final Hint hint = new ValueHint("Cards exiled", UnlicensedHearseValue.INSTANCE);
 
     public UnlicensedHearse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
@@ -81,7 +81,7 @@ public final class UnlicensedHearse extends CardImpl {
         this.addAbility(
                 new SimpleStaticAbility(
                         Zone.ALL,
-                        new SetBasePowerToughnessSourceEffect(UnlicensedHearseValue.instance)
+                        new SetBasePowerToughnessSourceEffect(UnlicensedHearseValue.INSTANCE)
                 ).addHint(hint)
         );
 

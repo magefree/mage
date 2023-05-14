@@ -70,7 +70,7 @@ class CallidusAssassinApplier extends CopyApplier {
             = new FilterCreaturePermanent("other target creature with the same name as this creature");
 
     static {
-        filter.add(CallidusAssassinPredicate.instance);
+        filter.add(CallidusAssassinPredicate.INSTANCE);
         filter.add(AnotherPredicate.instance);
     }
 
@@ -91,7 +91,7 @@ class CallidusAssassinApplier extends CopyApplier {
 }
 
 enum CallidusAssassinPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {

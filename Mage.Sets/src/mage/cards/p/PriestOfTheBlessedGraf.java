@@ -40,8 +40,8 @@ public final class PriestOfTheBlessedGraf extends CardImpl {
 
         // At the beginning of your end step, create X 1/1 white Spirit creature tokens with flying, where X is the number of opponents who control more lands than you.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(
-                new SpiritWhiteToken(), PriestOfTheBlessedGrafValue.instance
-        ), TargetController.YOU, false).addHint(PriestOfTheBlessedGrafHint.instance));
+                new SpiritWhiteToken(), PriestOfTheBlessedGrafValue.INSTANCE
+        ), TargetController.YOU, false).addHint(PriestOfTheBlessedGrafHint.INSTANCE));
     }
 
     private PriestOfTheBlessedGraf(final PriestOfTheBlessedGraf card) {
@@ -55,7 +55,7 @@ public final class PriestOfTheBlessedGraf extends CardImpl {
 }
 
 enum PriestOfTheBlessedGrafValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -99,7 +99,7 @@ enum PriestOfTheBlessedGrafValue implements DynamicValue {
 }
 
 enum PriestOfTheBlessedGrafHint implements Hint {
-    instance;
+    INSTANCE;
 
     @Override
     public String getText(Game game, Ability ability) {

@@ -2,6 +2,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -21,13 +22,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.token.custom.CreatureToken;
-import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -66,7 +65,7 @@ public final class MonumentToPerfection extends CardImpl {
                         .withAbility(new ToxicAbility(9)),
                         null, Duration.Custom, true,
                         false, null, null, true
-                ), new GenericManaCost(3), MonumentToPerfectionCondition.instance
+                ), new GenericManaCost(3), MonumentToPerfectionCondition.INSTANCE
         ).addHint(MonumentToPerfectionValue.getHint()));
     }
 
@@ -81,7 +80,7 @@ public final class MonumentToPerfection extends CardImpl {
 }
 
 enum MonumentToPerfectionValue implements DynamicValue {
-    instance;
+    INSTANCE;
     private static final FilterPermanent filter = new FilterControlledLandPermanent();
 
     static {
@@ -93,7 +92,7 @@ enum MonumentToPerfectionValue implements DynamicValue {
     }
 
     private static final Hint hint = new ValueHint(
-            "Different names among basics, Spheres, and Locuses you control", instance
+            "Different names among basics, Spheres, and Locuses you control", INSTANCE
     );
 
     @Override
@@ -102,7 +101,7 @@ enum MonumentToPerfectionValue implements DynamicValue {
                 .getBattlefield()
                 .getActivePermanents(filter, sourceAbility.getControllerId(), game)
                 .stream()
-                .map(permanent -> permanent.getName())
+                .map(MageObject::getName)
                 .filter(s -> s.length() > 0)
                 .distinct()
                 .mapToInt(x -> 1)
@@ -125,11 +124,11 @@ enum MonumentToPerfectionValue implements DynamicValue {
 }
 
 enum MonumentToPerfectionCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return MonumentToPerfectionValue.instance.calculate(game, source, null) >= 9;
+        return MonumentToPerfectionValue.INSTANCE.calculate(game, source, null) >= 9;
     }
 
     @Override

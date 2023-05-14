@@ -35,7 +35,7 @@ public final class ReaperOfNight extends AdventureCard {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new AttacksTriggeredAbility(new GainAbilitySourceEffect(
                         FlyingAbility.getInstance(), Duration.EndOfTurn
-                ), false), ReaperOfNightCondition.instance, "Whenever {this} attacks, " +
+                ), false), ReaperOfNightCondition.INSTANCE, "Whenever {this} attacks, " +
                 "if defending player has two or fewer cards in hand, it gains flying until end of turn."
         ));
 
@@ -56,7 +56,7 @@ public final class ReaperOfNight extends AdventureCard {
 }
 
 enum ReaperOfNightCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

@@ -47,7 +47,7 @@ public final class MarchOfBurgeoningLife extends CardImpl {
 
         // Choose target creature with mana value less than X. Search your library for a creature card with the same name as that creature, put it onto the battlefield tapped, then shuffle.
         this.getSpellAbility().addEffect(new MarchOfBurgeoningLifeEffect());
-        this.getSpellAbility().setTargetAdjuster(MarchOfBurgeoningLifeAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(MarchOfBurgeoningLifeAdjuster.INSTANCE);
     }
 
     private MarchOfBurgeoningLife(final MarchOfBurgeoningLife card) {
@@ -61,7 +61,7 @@ public final class MarchOfBurgeoningLife extends CardImpl {
 }
 
 enum MarchOfBurgeoningLifeAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

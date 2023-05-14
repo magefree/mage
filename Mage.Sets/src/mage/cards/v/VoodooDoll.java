@@ -55,7 +55,7 @@ public final class VoodooDoll extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
-        ability.setCostAdjuster(VoodooDollAdjuster.instance);
+        ability.setCostAdjuster(VoodooDollAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -70,7 +70,7 @@ public final class VoodooDoll extends CardImpl {
 }
 
 enum VoodooDollAdjuster implements CostAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustCosts(Ability ability, Game game) {

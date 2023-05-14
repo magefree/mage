@@ -50,7 +50,7 @@ class NoeticScalesEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
 
     static {
-        filter.add(NoeticScalesPredicate.instance);
+        filter.add(NoeticScalesPredicate.INSTANCE);
     }
 
     NoeticScalesEffect() {
@@ -82,7 +82,7 @@ class NoeticScalesEffect extends OneShotEffect {
 }
 
 enum NoeticScalesPredicate implements Predicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Permanent input, Game game) {

@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.FilterObject;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterNonlandCard;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;

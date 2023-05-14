@@ -25,9 +25,6 @@ import mage.counters.CounterType;
  * @author LevelX2
  */
 public final class ManaBloom extends CardImpl {
-
-    static final String rule = "with X charge counters on it";
-
     public ManaBloom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{X}{G}");
 

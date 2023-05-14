@@ -14,7 +14,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.players.Player;
@@ -27,7 +26,7 @@ import java.util.UUID;
  */
 public final class UnboundFlourishing extends CardImpl {
 
-    static final String needPrefix = "_UnboundFlourishing_NeedCopy";
+    static final String NEED_PREFIX = "_UnboundFlourishing_NeedCopy";
 
     public UnboundFlourishing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
@@ -123,7 +122,7 @@ class UnboundFlourishingCopyAbility extends TriggeredAbilityImpl {
         if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY) {
             StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
             if (stackAbility != null && !(stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl) && stackAbility.getManaCostsToPay().containsX()) {
-                game.getState().setValue(this.getSourceId() + UnboundFlourishing.needPrefix, stackAbility);
+                game.getState().setValue(this.getSourceId() + UnboundFlourishing.NEED_PREFIX, stackAbility);
                 return true;
             }
         }
@@ -132,7 +131,7 @@ class UnboundFlourishingCopyAbility extends TriggeredAbilityImpl {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && spell.isInstantOrSorcery(game) && spell.getSpellAbility().getManaCostsToPay().containsX()) {
-                game.getState().setValue(this.getSourceId() + UnboundFlourishing.needPrefix, spell);
+                game.getState().setValue(this.getSourceId() + UnboundFlourishing.NEED_PREFIX, spell);
                 return true;
             }
         }
@@ -161,7 +160,7 @@ class UnboundFlourishingCopyEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Player controller = game.getPlayer(source.getControllerId());
         if (player != null && controller != null) {
-            Object needObject = game.getState().getValue(source.getSourceId() + UnboundFlourishing.needPrefix);
+            Object needObject = game.getState().getValue(source.getSourceId() + UnboundFlourishing.NEED_PREFIX);
 
             // copy ability
             if (needObject instanceof StackAbility) {

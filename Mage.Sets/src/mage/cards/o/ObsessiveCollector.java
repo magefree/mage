@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.WardAbility;
@@ -55,7 +54,7 @@ public final class ObsessiveCollector extends CardImpl {
 }
 
 enum ObsessiveCollectorPredicate implements ObjectSourcePlayerPredicate<Card> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
@@ -68,7 +67,7 @@ class ObsessiveCollectorEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard();
 
     static {
-        filter.add(ObsessiveCollectorPredicate.instance);
+        filter.add(ObsessiveCollectorPredicate.INSTANCE);
     }
 
     ObsessiveCollectorEffect() {

@@ -21,7 +21,7 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class QuestForTheGoblinLord extends CardImpl {
 
-    private static final String rule = "As long as {this} has five or more quest counters on it, creatures you control get +2/+0";
+    private static final String RULE_TEXT = "As long as {this} has five or more quest counters on it, creatures you control get +2/+0";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     private static final FilterPermanent goblinFilter = new FilterControlledCreaturePermanent("a Goblin");
 
@@ -37,7 +37,7 @@ public final class QuestForTheGoblinLord extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance()), goblinFilter, true));
 
         // As long as Quest for the Goblin Lord has five or more quest counters on it, creatures you control get +2/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostAllEffect(2, 0, Duration.WhileOnBattlefield, filter, false), new SourceHasCounterCondition(CounterType.QUEST, 5, Integer.MAX_VALUE), rule)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostAllEffect(2, 0, Duration.WhileOnBattlefield, filter, false), new SourceHasCounterCondition(CounterType.QUEST, 5, Integer.MAX_VALUE), RULE_TEXT)));
     }
 
     private QuestForTheGoblinLord(final QuestForTheGoblinLord card) {

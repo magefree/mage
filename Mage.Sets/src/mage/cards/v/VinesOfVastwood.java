@@ -24,7 +24,7 @@ public final class VinesOfVastwood extends CardImpl {
 
     private static final FilterObject filter = new FilterStackObject("spells or abilities your opponents control");
 
-    private static final String staticText = "if this spell was kicked, that creature gets +4/+4 until end of turn";
+    private static final String STATIC_TEXT = "if this spell was kicked, that creature gets +4/+4 until end of turn";
 
     public VinesOfVastwood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
@@ -38,7 +38,7 @@ public final class VinesOfVastwood extends CardImpl {
 
         // If Vines of Vastwood was kicked, that creature gets +4/+4 until end of turn.
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new BoostTargetEffect(4, 4, Duration.EndOfTurn),
-                new LockedInCondition(KickedCondition.ONCE), staticText));
+                new LockedInCondition(KickedCondition.ONCE), STATIC_TEXT));
     }
 
     private VinesOfVastwood(final VinesOfVastwood card) {

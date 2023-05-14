@@ -57,7 +57,7 @@ public final class BodyLaunderer extends CardImpl {
         Ability ability = new DiesSourceTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect()
                 .setText("return another target non-Rogue creature card with equal or lesser power from your graveyard to the battlefield")
         );
-        ability.setTargetAdjuster(BodyLaundererAdjuster.instance);
+        ability.setTargetAdjuster(BodyLaundererAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -72,7 +72,7 @@ public final class BodyLaunderer extends CardImpl {
 }
 
 enum BodyLaundererAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

@@ -44,7 +44,7 @@ public final class UWing extends CardImpl {
         // As long as U-Wing is untapped, it gets +0/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostSourceEffect(0, 1, Duration.WhileOnBattlefield),
-                SourceUntappedCondition.instance,
+                SourceUntappedCondition.INSTANCE,
                 "As long as {this} is untapped, it gets +0/+1")));
     }
 
@@ -59,8 +59,7 @@ public final class UWing extends CardImpl {
 }
 
 enum SourceUntappedCondition implements Condition {
-
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

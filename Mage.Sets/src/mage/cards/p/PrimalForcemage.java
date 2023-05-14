@@ -29,7 +29,7 @@ public final class PrimalForcemage extends CardImpl {
         filter.add(AnotherPredicate.instance);
     }
 
-    private static final String rule = "Whenever another creature enters the battlefield under your control, that creature gets +3/+3 until end of turn.";
+    private static final String RULE_TEXT = "Whenever another creature enters the battlefield under your control, that creature gets +3/+3 until end of turn.";
 
     public PrimalForcemage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
@@ -42,7 +42,7 @@ public final class PrimalForcemage extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new BoostTargetEffect(3, 3, Duration.EndOfTurn),
-                filter, false, SetTargetPointer.PERMANENT, rule, true));
+                filter, false, SetTargetPointer.PERMANENT, RULE_TEXT, true));
     }
 
     private PrimalForcemage(final PrimalForcemage card) {

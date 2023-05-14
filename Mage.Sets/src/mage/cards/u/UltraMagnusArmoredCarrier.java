@@ -50,7 +50,7 @@ public final class UltraMagnusArmoredCarrier extends CardImpl {
                 StaticFilters.FILTER_ATTACKING_CREATURES
         ));
         ability.addEffect(new ConditionalOneShotEffect(
-                new TransformSourceEffect(), UltraMagnusArmoredCarrierCondition.instance,
+                new TransformSourceEffect(), UltraMagnusArmoredCarrierCondition.INSTANCE,
                 "If those creatures have total power 8 or greater, convert {this}"
         ));
         this.addAbility(ability.setAbilityWord(AbilityWord.FORMIDABLE));
@@ -67,7 +67,7 @@ public final class UltraMagnusArmoredCarrier extends CardImpl {
 }
 
 enum UltraMagnusArmoredCarrierCondition implements Condition {
-    instance;
+    INSTANCE;
     private static final FilterPermanent filter = new FilterAttackingCreature();
 
     static {

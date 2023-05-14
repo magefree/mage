@@ -44,7 +44,7 @@ public final class RisonaAsariCommander extends CardImpl {
         // Whenever Risona, Asari Commander deals combat damage to a player, if it doesn't have an indestructible counter on it, put an indestructible counter on it.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.INDESTRUCTIBLE.createInstance()), false),
-                RisonaAsariCommanderCondition.instance,
+                RisonaAsariCommanderCondition.INSTANCE,
                 "Whenever {this} deals combat damage to a player, if it doesn't have an indestructible counter on it, put an indestructible counter on it."
         ));
 
@@ -102,7 +102,7 @@ class RisonaAsariCommanderTriggeredAbility extends TriggeredAbilityImpl {
 }
 
 enum RisonaAsariCommanderCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

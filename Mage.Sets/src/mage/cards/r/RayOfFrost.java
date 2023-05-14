@@ -45,7 +45,7 @@ public final class RayOfFrost extends CardImpl {
         // When Ray of Frost enters the battlefield, if enchanted creature is red, tap it.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect()),
-                RayOfFrostCondition.instance,
+                RayOfFrostCondition.INSTANCE,
                 "When {this} enters the battlefield, if enchanted creature is red, tap it."
         ));
 
@@ -67,7 +67,7 @@ public final class RayOfFrost extends CardImpl {
 }
 
 enum RayOfFrostCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

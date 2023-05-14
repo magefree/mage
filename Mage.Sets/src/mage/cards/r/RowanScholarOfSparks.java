@@ -62,11 +62,11 @@ public final class RowanScholarOfSparks extends ModalDoubleFacesCard {
         Ability ability = new LoyaltyAbility(new ConditionalOneShotEffect(
                 new DamagePlayersEffect(3, TargetController.OPPONENT),
                 new DamagePlayersEffect(1, TargetController.OPPONENT),
-                RowanScholarOfSparksCondition.instance, "{this} deals 1 damage to each opponent. " +
+                RowanScholarOfSparksCondition.INSTANCE, "{this} deals 1 damage to each opponent. " +
                 "If you've drawn three or more cards this turn, she deals 3 damage to each opponent instead"
         ), 1);
         ability.addWatcher(new CardsAmountDrawnThisTurnWatcher());
-        this.getLeftHalfCard().addAbility(ability.addHint(RowanScholarOfSparksHint.instance));
+        this.getLeftHalfCard().addAbility(ability.addHint(RowanScholarOfSparksHint.INSTANCE));
 
         // −4: You get an emblem with "Whenever you cast an instant or sorcery spell, you may pay {2}. If you do, copy that spell. You may choose new targets for the copy."
         this.getLeftHalfCard().addAbility(new LoyaltyAbility(
@@ -110,7 +110,7 @@ public final class RowanScholarOfSparks extends ModalDoubleFacesCard {
 }
 
 enum RowanScholarOfSparksCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -120,7 +120,7 @@ enum RowanScholarOfSparksCondition implements Condition {
 }
 
 enum RowanScholarOfSparksHint implements Hint {
-    instance;
+    INSTANCE;
 
     @Override
     public String getText(Game game, Ability ability) {
@@ -131,7 +131,7 @@ enum RowanScholarOfSparksHint implements Hint {
 
     @Override
     public RowanScholarOfSparksHint copy() {
-        return instance;
+        return INSTANCE;
     }
 }
 

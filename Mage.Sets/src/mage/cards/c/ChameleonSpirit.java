@@ -40,7 +40,7 @@ public final class ChameleonSpirit extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
                 new SetBasePowerToughnessSourceEffect(
-                        PermanentsOfTheChosenColorOpponentsControlCount.instance
+                        PermanentsOfTheChosenColorOpponentsControlCount.INSTANCE
                 )));
     }
 
@@ -55,7 +55,7 @@ public final class ChameleonSpirit extends CardImpl {
 }
 
 enum PermanentsOfTheChosenColorOpponentsControlCount implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -74,7 +74,7 @@ enum PermanentsOfTheChosenColorOpponentsControlCount implements DynamicValue {
 
     @Override
     public PermanentsOfTheChosenColorOpponentsControlCount copy() {
-        return PermanentsOfTheChosenColorOpponentsControlCount.instance;
+        return PermanentsOfTheChosenColorOpponentsControlCount.INSTANCE;
     }
 
     @Override

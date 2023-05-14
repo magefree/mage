@@ -44,8 +44,8 @@ class RareBGoneEffect extends OneShotEffect {
     private static final FilterCard filterCard = new FilterCard();
 
     static {
-        filterPermanent.add(RareBGonePredicate.instance);
-        filterCard.add(RareBGonePredicate.instance);
+        filterPermanent.add(RareBGonePredicate.INSTANCE);
+        filterCard.add(RareBGonePredicate.INSTANCE);
     }
 
     RareBGoneEffect() {
@@ -85,7 +85,7 @@ class RareBGoneEffect extends OneShotEffect {
 }
 
 enum RareBGonePredicate implements Predicate<Card> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Card input, Game game) {

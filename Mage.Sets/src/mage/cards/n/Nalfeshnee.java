@@ -85,7 +85,7 @@ class NalfeshneeEffect extends OneShotEffect {
         if (spell.isPermanent()) {
             spell.createCopyOnStack(
                     game, source, controller.getId(), true,
-                    1, NalfeshneeApplier.instance
+                    1, NalfeshneeApplier.INSTANCE
             );
         }
         // Non-permanent spells should not gain haste or "must be sacrificed".
@@ -99,7 +99,7 @@ class NalfeshneeEffect extends OneShotEffect {
 }
 
 enum NalfeshneeApplier implements StackObjectCopyApplier {
-    instance;
+    INSTANCE;
 
     @Override
     public void modifySpell(StackObject copiedSpell, Game game) {

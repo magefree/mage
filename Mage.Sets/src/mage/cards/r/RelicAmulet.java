@@ -37,7 +37,7 @@ public final class RelicAmulet extends CardImpl {
 
         // {2}, {T}, Remove all charge counters from Relic Amulet: It deals that much damage to target creature.
         Ability ability = new SimpleActivatedAbility(
-                new DamageTargetEffect(RelicAmuletValue.instance)
+                new DamageTargetEffect(RelicAmuletValue.INSTANCE)
                         .setText("it deals that much damage to target creature"),
                 new GenericManaCost(2)
         );
@@ -58,7 +58,7 @@ public final class RelicAmulet extends CardImpl {
 }
 
 enum RelicAmuletValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -73,7 +73,7 @@ enum RelicAmuletValue implements DynamicValue {
 
     @Override
     public RelicAmuletValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

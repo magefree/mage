@@ -33,7 +33,7 @@ public final class BargainingTable extends CardImpl {
         // You choose an opponent on announcement. This is not targeted, but a choice is still made.
         // This choice is made before determining the value for X that is used in the cost. (2004-10-04)
         ability.addTarget(new TargetOpponent(true));
-        ability.setCostAdjuster(BargainingTableAdjuster.instance);
+        ability.setCostAdjuster(BargainingTableAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -48,7 +48,7 @@ public final class BargainingTable extends CardImpl {
 }
 
 enum BargainingTableAdjuster implements CostAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustCosts(Ability ability, Game game) {

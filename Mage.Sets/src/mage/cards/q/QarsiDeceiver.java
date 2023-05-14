@@ -68,7 +68,6 @@ class QarsiDeceiverConditionalMana extends ConditionalMana {
 }
 
 class QarsiDeceiverManaCondition implements Condition {
-
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source);
@@ -77,9 +76,6 @@ class QarsiDeceiverManaCondition implements Condition {
                 return true;
             }
         }
-        if (source instanceof TurnFaceUpAbility) {
-            return true;
-        }
-        return false;
+        return source instanceof TurnFaceUpAbility;
     }
 }

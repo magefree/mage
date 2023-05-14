@@ -24,7 +24,7 @@ public final class RoilingVortex extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a spell");
 
     static {
-        filter.add(RoilingVortexPredicate.instance);
+        filter.add(RoilingVortexPredicate.INSTANCE);
     }
 
     public RoilingVortex(UUID ownerId, CardSetInfo setInfo) {
@@ -60,7 +60,7 @@ public final class RoilingVortex extends CardImpl {
 }
 
 enum RoilingVortexPredicate implements Predicate<StackObject> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(StackObject input, Game game) {

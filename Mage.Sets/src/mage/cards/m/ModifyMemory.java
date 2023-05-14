@@ -34,7 +34,7 @@ public final class ModifyMemory extends CardImpl {
                 Duration.Custom, "exchange control of two target creatures controlled by different players"
         ).setTargetPointer(new EachTargetPointer()));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new DrawCardSourceControllerEffect(3), ModifyMemoryCondition.instance,
+                new DrawCardSourceControllerEffect(3), ModifyMemoryCondition.INSTANCE,
                 "If you control neither creature, draw three cards"
         ));
         this.getSpellAbility().addTarget(new ModifyMemoryTarget());
@@ -51,7 +51,7 @@ public final class ModifyMemory extends CardImpl {
 }
 
 enum ModifyMemoryCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

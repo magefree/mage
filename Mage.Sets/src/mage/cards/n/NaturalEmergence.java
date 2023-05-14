@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 public final class NaturalEmergence extends CardImpl {
 
-    static final private FilterControlledEnchantmentPermanent filter
+    private static final FilterControlledEnchantmentPermanent filter
             = new FilterControlledEnchantmentPermanent("red or green enchantment you control");
 
     static {

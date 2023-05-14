@@ -76,9 +76,7 @@ class BonePickerAdjustingCostsEffect extends CostModificationEffectImpl {
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify.getSourceId().equals(source.getSourceId())
                 && (abilityToModify instanceof SpellAbility)) {
-            if (MorbidCondition.instance.apply(game, abilityToModify)) {
-                return true;
-            }
+            return MorbidCondition.instance.apply(game, abilityToModify);
         }
 
         return false;

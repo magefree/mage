@@ -31,7 +31,7 @@ public final class PathOfBravery extends CardImpl {
         filter.add(TargetController.YOU.getControllerPredicate());
     }
 
-    static final String rule = "As long as your life total is greater than or equal to your starting life total, creatures you control get +1/+1";
+    static final String RULE_TEXT = "As long as your life total is greater than or equal to your starting life total, creatures you control get +1/+1";
     private static final DynamicValue xValue = new AttackingCreatureCount();
 
     public PathOfBravery(UUID ownerId, CardSetInfo setInfo) {
@@ -40,7 +40,7 @@ public final class PathOfBravery extends CardImpl {
         // As long as your life total is greater than or equal to your starting life total, creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(new BoostAllEffect(
                 1, 1, Duration.WhileOnBattlefield, filter, true
-        ), LifeCondition.instance, rule)));
+        ), LifeCondition.INSTANCE, RULE_TEXT)));
 
         // Whenever one or more creatures you control attack, you gain life equal to the number of attacking creatures.
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(new GainLifeEffect(
@@ -60,7 +60,7 @@ public final class PathOfBravery extends CardImpl {
 
 enum LifeCondition implements Condition {
 
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

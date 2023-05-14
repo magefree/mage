@@ -34,7 +34,7 @@ public final class Anathemancer extends CardImpl {
 
         // When Anathemancer enters the battlefield, it deals damage to target player equal to the number of nonbasic lands that player controls.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(
-                new DamageTargetEffect(AnathemancerCount.instance, "it")
+                new DamageTargetEffect(AnathemancerCount.INSTANCE, "it")
                         .setText("it deals damage to target player equal to the number of nonbasic lands that player controls")
         );
         ability.addTarget(new TargetPlayer());
@@ -55,7 +55,7 @@ public final class Anathemancer extends CardImpl {
 }
 
 enum AnathemancerCount implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

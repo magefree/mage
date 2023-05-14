@@ -83,9 +83,7 @@ class BartelRuneaxeEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
             StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
             if (stackObject != null && event.getTargetId().equals(source.getSourceId())) {
-                if (stackObject.hasSubtype(SubType.AURA, game)) {
-                    return true;
-                }
+                return stackObject.hasSubtype(SubType.AURA, game);
             }
         return false;
     }

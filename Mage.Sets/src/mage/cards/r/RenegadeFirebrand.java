@@ -25,7 +25,7 @@ import mage.filter.common.FilterControlledPermanent;
 public final class RenegadeFirebrand extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
-    private static final String rule = "As long as you control a Chandra planeswalker, {this} gets +1/+0";
+    private static final String RULE_TEXT = "As long as you control a Chandra planeswalker, {this} gets +1/+0";
 
     static {
         filter.add(CardType.PLANESWALKER.getPredicate());
@@ -40,7 +40,7 @@ public final class RenegadeFirebrand extends CardImpl {
         this.toughness = new MageInt(2);
 
         // As long as you control a Chandra planeswalker, Renegade Firebrand gets +1/+0 and has first strike.
-        ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield), new PermanentsOnTheBattlefieldCondition(filter), rule);
+        ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield), new PermanentsOnTheBattlefieldCondition(filter), RULE_TEXT);
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect1);
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield), new PermanentsOnTheBattlefieldCondition(filter), "and has first strike"));
         this.addAbility(ability);

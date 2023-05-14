@@ -30,7 +30,7 @@ public final class RebbecArchitectOfAscension extends CardImpl {
             = new FilterCard("each mana value among artifacts you control");
 
     static {
-        filter.add(RebbecArchitectOfAscensionPredicate.instance);
+        filter.add(RebbecArchitectOfAscensionPredicate.INSTANCE);
     }
 
     public RebbecArchitectOfAscension(UUID ownerId, CardSetInfo setInfo) {
@@ -63,7 +63,7 @@ public final class RebbecArchitectOfAscension extends CardImpl {
 }
 
 enum RebbecArchitectOfAscensionPredicate implements ObjectSourcePlayerPredicate<MageObject> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {

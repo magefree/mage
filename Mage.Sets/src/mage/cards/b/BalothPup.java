@@ -22,7 +22,7 @@ import mage.counters.CounterType;
  */
 public final class BalothPup extends CardImpl {
 
-    private static final String rule = "{this} has trample as long as it has a +1/+1 counter on it";
+    private static final String RULE_TEXT = "{this} has trample as long as it has a +1/+1 counter on it";
 
     public BalothPup(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
@@ -31,7 +31,7 @@ public final class BalothPup extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Baloth Pup has trample as long as it has a +1/+1 counter on it.
-        Effect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()), new SourceHasCounterCondition(CounterType.P1P1), rule);
+        Effect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()), new SourceHasCounterCondition(CounterType.P1P1), RULE_TEXT);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

@@ -34,7 +34,7 @@ public final class RadhasFirebrand extends CardImpl {
 
     static {
         filter.add(DefendingPlayerControlsPredicate.instance);
-        filter.add(RadhasFirebrandPredicate.instance);
+        filter.add(RadhasFirebrandPredicate.INSTANCE);
     }
 
     public RadhasFirebrand(UUID ownerId, CardSetInfo setInfo) {
@@ -75,7 +75,7 @@ public final class RadhasFirebrand extends CardImpl {
 }
 
 enum RadhasFirebrandPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {

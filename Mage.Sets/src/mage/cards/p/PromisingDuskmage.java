@@ -32,7 +32,7 @@ public final class PromisingDuskmage extends CardImpl {
         // When Promising Duskmage dies, if it had a +1/+1 counter on it, draw a card.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1)),
-                PromisingDuskmageCondition.instance, "When {this} dies, " +
+                PromisingDuskmageCondition.INSTANCE, "When {this} dies, " +
                 "if it had a +1/+1 counter on it, draw a card."
         ));
     }
@@ -48,7 +48,7 @@ public final class PromisingDuskmage extends CardImpl {
 }
 
 enum PromisingDuskmageCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

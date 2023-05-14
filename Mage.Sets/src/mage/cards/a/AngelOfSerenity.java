@@ -24,7 +24,7 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class AngelOfSerenity extends CardImpl {
 
-    private static final String rule = "you may exile up to three other target creatures " +
+    private static final String RULE_TEXT = "you may exile up to three other target creatures " +
             "from the battlefield and/or creature cards from graveyards.";
     
     private static final FilterCreatureCard filterCreatureCard = new FilterCreatureCard("creature card in a graveyard");
@@ -47,7 +47,7 @@ public final class AngelOfSerenity extends CardImpl {
 
         // When Angel of Serenity enters the battlefield, you may exile up to three other target creatures from the battlefield and/or creature cards from graveyards.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new ExileTargetForSourceEffect().setText(rule), true
+                new ExileTargetForSourceEffect().setText(RULE_TEXT), true
         );
         ability.addTarget(new TargetCardInGraveyardBattlefieldOrStack(
                 0, 3, filterCreatureCard, filterCreaturePermanent

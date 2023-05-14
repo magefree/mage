@@ -30,7 +30,7 @@ public final class Paleoloth extends CardImpl {
         filter.add(AnotherPredicate.instance);
     }
 
-    private static final String rule = "Whenever another creature with power 5 or greater enters the battlefield under your control, you may return target creature card from your graveyard to your hand.";
+    private static final String RULE_TEXT = "Whenever another creature with power 5 or greater enters the battlefield under your control, you may return target creature card from your graveyard to your hand.";
 
     public Paleoloth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
@@ -40,7 +40,7 @@ public final class Paleoloth extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Whenever another creature with power 5 or greater enters the battlefield under your control, you may return target creature card from your graveyard to your hand.
-        Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), filter, true, rule);
+        Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), filter, true, RULE_TEXT);
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE));
         this.addAbility(ability);
 

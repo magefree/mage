@@ -59,11 +59,11 @@ public final class OathOfTeferi extends CardImpl {
 
 class OathOfTeferiBlinkEffect extends OneShotEffect {
 
-    private static final String effectText = "exile another target permanent you control. Return it to the battlefield under its owner's control at the beginning of the next end step";
+    private static final String EFFECT_TEXT = "exile another target permanent you control. Return it to the battlefield under its owner's control at the beginning of the next end step";
 
     OathOfTeferiBlinkEffect() {
         super(Outcome.Detriment);
-        staticText = effectText;
+        staticText = EFFECT_TEXT;
     }
 
     OathOfTeferiBlinkEffect(OathOfTeferiBlinkEffect effect) {

@@ -30,7 +30,7 @@ public final class RavagerWurm extends CardImpl {
             = new FilterPermanent("land with an activated ability that isn't a mana ability");
 
     static {
-        filter.add(RavagerWurmPredicate.instance);
+        filter.add(RavagerWurmPredicate.INSTANCE);
     }
 
     public RavagerWurm(UUID ownerId, CardSetInfo setInfo) {
@@ -70,7 +70,7 @@ public final class RavagerWurm extends CardImpl {
 }
 
 enum RavagerWurmPredicate implements Predicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Permanent input, Game game) {

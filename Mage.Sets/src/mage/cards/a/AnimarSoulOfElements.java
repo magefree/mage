@@ -79,12 +79,10 @@ class AnimarCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility) {
-            if (abilityToModify.isControlledBy(source.getControllerId())) {
-                Card spellCard = ((SpellAbility) abilityToModify).getCharacteristics(game);
-                if (spellCard != null) {
-                    return spellCard.isCreature(game);
-                }
+        if (abilityToModify instanceof SpellAbility && abilityToModify.isControlledBy(source.getControllerId())) {
+            Card spellCard = ((SpellAbility) abilityToModify).getCharacteristics(game);
+            if (spellCard != null) {
+                return spellCard.isCreature(game);
             }
         }
         return false;

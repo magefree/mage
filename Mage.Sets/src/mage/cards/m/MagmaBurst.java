@@ -33,7 +33,7 @@ public final class MagmaBurst extends CardImpl {
         Effect effect = new DamageTargetEffect(3);
         effect.setText("{this} deals 3 damage to any target. If this spell was kicked, it deals 3 damage to another target.");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().setTargetAdjuster(MagmaBurstAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(MagmaBurstAdjuster.INSTANCE);
     }
 
     private MagmaBurst(final MagmaBurst card) {
@@ -47,7 +47,7 @@ public final class MagmaBurst extends CardImpl {
 }
 
 enum MagmaBurstAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

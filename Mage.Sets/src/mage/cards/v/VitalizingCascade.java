@@ -21,7 +21,7 @@ public final class VitalizingCascade extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{G}{W}");
 
         // You gain X plus 3 life.
-        this.getSpellAbility().addEffect(new GainLifeEffect(VitalizingCascadeValue.instance));
+        this.getSpellAbility().addEffect(new GainLifeEffect(VitalizingCascadeValue.INSTANCE));
     }
 
     private VitalizingCascade(final VitalizingCascade card) {
@@ -35,7 +35,7 @@ public final class VitalizingCascade extends CardImpl {
 }
 
 enum VitalizingCascadeValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -44,7 +44,7 @@ enum VitalizingCascadeValue implements DynamicValue {
 
     @Override
     public VitalizingCascadeValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

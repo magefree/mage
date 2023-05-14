@@ -57,7 +57,7 @@ public final class RasputinDreamweaver extends CardImpl {
         this.addAbility(
                 new ConditionalInterveningIfTriggeredAbility(
                         new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.DREAM.createInstance()), TargetController.YOU, false),
-                        RasputinDreamweaverStartedUntappedCondition.instance,
+                        RasputinDreamweaverStartedUntappedCondition.INSTANCE,
                         "At the beginning of your upkeep, if {this} started the turn untapped, put a dream counter on it."),
                 new RasputinDreamweaverStartedUntappedWatcher());
 
@@ -76,8 +76,7 @@ public final class RasputinDreamweaver extends CardImpl {
 }
 
 enum RasputinDreamweaverStartedUntappedCondition implements Condition {
-
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

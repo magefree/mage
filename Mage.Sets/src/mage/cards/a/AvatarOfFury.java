@@ -44,9 +44,9 @@ public final class AvatarOfFury extends CardImpl {
         this.toughness = new MageInt(6);
 
         // If an opponent controls seven or more lands, Avatar of Fury costs {6} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(6, AvatarOfFuryCondition.instance)
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(6, AvatarOfFuryCondition.INSTANCE)
                 .setText("if an opponent controls seven or more lands, Avatar of Fury costs {6} less to cast"))
-                .addHint(new ConditionHint(AvatarOfFuryCondition.instance, "Opponent controls seven or more lands"))
+                .addHint(new ConditionHint(AvatarOfFuryCondition.INSTANCE, "Opponent controls seven or more lands"))
         );
 
         // Flying
@@ -67,8 +67,7 @@ public final class AvatarOfFury extends CardImpl {
 }
 
 enum AvatarOfFuryCondition implements Condition {
-
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

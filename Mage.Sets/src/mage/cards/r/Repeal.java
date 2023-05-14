@@ -27,7 +27,7 @@ public final class Repeal extends CardImpl {
         // Return target nonland permanent with converted mana cost X to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(new FilterNonlandPermanent("nonland permanent with mana value X")));
-        this.getSpellAbility().setTargetAdjuster(RepealAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(RepealAdjuster.INSTANCE);
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
@@ -44,7 +44,7 @@ public final class Repeal extends CardImpl {
 }
 
 enum RepealAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

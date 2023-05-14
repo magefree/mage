@@ -37,7 +37,7 @@ public final class LuxiorGiadasGift extends CardImpl {
 
         // Equipped creature gets +1/+1 for each counter on it.
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(
-                LuxiorGiadasGiftValue.instance, LuxiorGiadasGiftValue.instance
+                LuxiorGiadasGiftValue.INSTANCE, LuxiorGiadasGiftValue.INSTANCE
         )));
 
         // Equipped permanent isn't a planeswalker and is a creature in addition to its other types.
@@ -61,14 +61,13 @@ public final class LuxiorGiadasGift extends CardImpl {
 }
 
 enum LuxiorGiadasGiftValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         return Optional.ofNullable(sourceAbility.getSourcePermanentIfItStillExists(game))
                 .map(Permanent::getAttachedTo)
                 .map(game::getPermanent)
-                .filter(Objects::nonNull)
                 .map(permanent -> permanent.getCounters(game))
                 .map(HashMap::values)
                 .map(Collection::stream)

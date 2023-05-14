@@ -48,7 +48,7 @@ class ManaWebTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ManaWebeffect(), false);
     }
 
-    private static final String staticText = "Whenever a land an opponent controls is tapped for mana, " +
+    private static final String STATIC_TEXT = "Whenever a land an opponent controls is tapped for mana, " +
             "tap all lands that player controls that could produce any type of mana that land could produce.";
 
     private ManaWebTriggeredAbility(ManaWebTriggeredAbility ability) {
@@ -83,7 +83,7 @@ class ManaWebTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return staticText;
+        return STATIC_TEXT;
     }
 }
 

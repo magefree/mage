@@ -39,7 +39,7 @@ public final class BioessenceHydra extends CardImpl {
 
         // Bioessence Hydra enters the battlefield with a +1/+1 counter on it for each loyalty counter on planeswalkers you control.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(), BioessenceHydraDynamicValue.instance, true
+                CounterType.P1P1.createInstance(), BioessenceHydraDynamicValue.INSTANCE, true
         ), "with a +1/+1 counter on it for each loyalty counter on planeswalkers you control."
         ));
 
@@ -58,7 +58,7 @@ public final class BioessenceHydra extends CardImpl {
 }
 
 enum BioessenceHydraDynamicValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -75,7 +75,7 @@ enum BioessenceHydraDynamicValue implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

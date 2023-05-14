@@ -44,7 +44,7 @@ public final class ArclightPhoenix extends CardImpl {
                         Zone.GRAVEYARD,
                         new ReturnSourceFromGraveyardToBattlefieldEffect(),
                         TargetController.YOU, false, false
-                ), ArclightPhoenixCondition.instance,
+                ), ArclightPhoenixCondition.INSTANCE,
                 "At the beginning of combat on your turn, "
                         + "if you've cast three or more instant "
                         + "and sorcery spells this turn, return {this} "
@@ -63,7 +63,7 @@ public final class ArclightPhoenix extends CardImpl {
 }
 
 enum ArclightPhoenixCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

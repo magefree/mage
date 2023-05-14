@@ -41,7 +41,7 @@ public final class AngelOfVitality extends CardImpl {
         // Angel of Vitality gets +2/+2 as long as you have 25 or more life.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield),
-                AngelOfVitalityCondition.instance, "{this} gets +2/+2 as long as you have 25 or more life"
+                AngelOfVitalityCondition.INSTANCE, "{this} gets +2/+2 as long as you have 25 or more life"
         )));
     }
 
@@ -94,7 +94,7 @@ class AngelOfVitalityEffect extends ReplacementEffectImpl {
 }
 
 enum AngelOfVitalityCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

@@ -54,7 +54,7 @@ public final class BaneLordOfDarkness extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(
                         IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield
-                ), BaneLordOfDarknessCondition.instance, "as long as your life total is less than or equal " +
+                ), BaneLordOfDarknessCondition.INSTANCE, "as long as your life total is less than or equal " +
                 "to half your starting life total, {this} has indestructible"
         )));
 
@@ -75,13 +75,12 @@ public final class BaneLordOfDarkness extends CardImpl {
 }
 
 enum BaneLordOfDarknessCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {
         return Optional
                 .ofNullable(game.getPlayer(source.getControllerId()))
-                .filter(Objects::nonNull)
                 .map(Player::getLife)
                 .map(x -> 2 * x <= game.getStartingLife())
                 .orElse(false);

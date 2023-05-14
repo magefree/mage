@@ -53,10 +53,10 @@ public final class BladecoilSerpent extends CardImpl {
         ).setText("for each {R}{R} spent to cast it, it gets +1/+0"));
         ability.addEffect(new ConditionalOneShotEffect(new AddContinuousEffectToGame(
                 new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn)
-        ), BladecoilSerpentCondition.instance, "and gains trample"));
+        ), BladecoilSerpentCondition.INSTANCE, "and gains trample"));
         ability.addEffect(new ConditionalOneShotEffect(new AddContinuousEffectToGame(
                 new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn)
-        ), BladecoilSerpentCondition.instance, "and haste until end of turn"));
+        ), BladecoilSerpentCondition.INSTANCE, "and haste until end of turn"));
         this.addAbility(ability);
     }
 
@@ -71,7 +71,7 @@ public final class BladecoilSerpent extends CardImpl {
 }
 
 enum BladecoilSerpentCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

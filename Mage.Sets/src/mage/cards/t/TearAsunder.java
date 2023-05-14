@@ -28,7 +28,7 @@ public final class TearAsunder extends CardImpl {
 
         // Exile target artifact or enchantment. If this spell was kicked, exile target nonland permanent instead.
         this.getSpellAbility().addEffect(new ExileTargetEffect().setText("Exile target artifact or enchantment. If this spell was kicked, exile target nonland permanent instead."));
-        this.getSpellAbility().setTargetAdjuster(TearAsunderAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(TearAsunderAdjuster.INSTANCE);
     }
 
     private TearAsunder(final TearAsunder card) {
@@ -42,7 +42,7 @@ public final class TearAsunder extends CardImpl {
 }
 
 enum TearAsunderAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

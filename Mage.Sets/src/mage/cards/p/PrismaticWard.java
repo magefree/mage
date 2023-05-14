@@ -93,11 +93,8 @@ class PrismaticWardPreventDamageEffect extends PreventionEffectImpl {
             return false;
         }
         Permanent attachment = game.getPermanent(source.getSourceId());
-        if (attachment != null
+        return attachment != null
                 && attachment.getAttachedTo() != null
-                && event.getTargetId().equals(attachment.getAttachedTo())) {
-            return true;
-        }
-        return false;
+                && event.getTargetId().equals(attachment.getAttachedTo());
     }
 }

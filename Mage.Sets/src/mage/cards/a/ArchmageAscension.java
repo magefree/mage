@@ -34,7 +34,7 @@ public final class ArchmageAscension extends CardImpl {
                 new BeginningOfEndStepTriggeredAbility(
                         new AddCountersSourceEffect(CounterType.QUEST.createInstance(1)),
                         TargetController.EACH_PLAYER, true
-                ), ArchmageAscensionCondition.instance, "At the beginning of each end step, " +
+                ), ArchmageAscensionCondition.INSTANCE, "At the beginning of each end step, " +
                 "if you drew two or more cards this turn, you may put a quest counter on {this}."
         ), new CardsAmountDrawnThisTurnWatcher());
 
@@ -54,7 +54,7 @@ public final class ArchmageAscension extends CardImpl {
 }
 
 enum ArchmageAscensionCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

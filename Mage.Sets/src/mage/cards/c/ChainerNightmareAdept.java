@@ -123,7 +123,6 @@ class ChainerNightmareAdeptWatcher extends Watcher {
             }
             morMap.computeIfAbsent(event.getAdditionalReference().getApprovingMageObjectReference(), m -> new HashMap<>())
                     .compute(event.getPlayerId(), (u, i) -> i == null ? 0 : Integer.sum(i, -1));
-            return;
         }
     }
 
@@ -154,12 +153,12 @@ class ChainerNightmareAdeptWatcher extends Watcher {
 
 class ChainerNightmareAdeptTriggeredAbility extends EntersBattlefieldAllTriggeredAbility {
 
-    private final static String abilityText = "Whenever a nontoken creature "
+    private static final String ABILITY_TEXT = "Whenever a nontoken creature "
             + "enters the battlefield under your control, "
             + "if you didn't cast it from your hand, it gains haste until your next turn.";
-    private final static ContinuousEffect gainHasteUntilNextTurnEffect
+    private static final ContinuousEffect gainHasteUntilNextTurnEffect
             = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.UntilYourNextTurn);
-    private final static FilterControlledCreaturePermanent filter
+    private static final FilterControlledCreaturePermanent filter
             = new FilterControlledCreaturePermanent("nontoken creature");
 
     static {
@@ -169,7 +168,7 @@ class ChainerNightmareAdeptTriggeredAbility extends EntersBattlefieldAllTriggere
 
     ChainerNightmareAdeptTriggeredAbility() {
         super(Zone.BATTLEFIELD, gainHasteUntilNextTurnEffect, filter, false,
-                SetTargetPointer.PERMANENT, abilityText);
+                SetTargetPointer.PERMANENT, ABILITY_TEXT);
         this.addWatcher(new CastFromHandWatcher());
     }
 

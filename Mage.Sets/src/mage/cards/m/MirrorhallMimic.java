@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.abilities.keyword.DisturbAbility;
 import mage.cards.CardImpl;

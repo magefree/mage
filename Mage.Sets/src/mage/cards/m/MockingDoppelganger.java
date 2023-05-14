@@ -37,7 +37,7 @@ public final class MockingDoppelganger extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(MockingDoppelgangerPredicate.instance);
+        filter.add(MockingDoppelgangerPredicate.INSTANCE);
     }
 
     private static final CopyApplier applier = new CopyApplier() {
@@ -81,7 +81,7 @@ public final class MockingDoppelganger extends CardImpl {
 }
 
 enum MockingDoppelgangerPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {

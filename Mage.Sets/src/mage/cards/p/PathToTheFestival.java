@@ -31,7 +31,7 @@ public final class PathToTheFestival extends CardImpl {
                 new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true
         ));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new ScryEffect(1), PathToTheFestivalCondition.instance,
+                new ScryEffect(1), PathToTheFestivalCondition.INSTANCE,
                 "Then if there are three or more basic land types among lands you control, scry 1 " +
                         "<i>(Look at the top card of your library. " +
                         "You may put that card on the bottom of your library.)</i>"
@@ -53,7 +53,7 @@ public final class PathToTheFestival extends CardImpl {
 }
 
 enum PathToTheFestivalCondition implements Condition {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Game game, Ability source) {

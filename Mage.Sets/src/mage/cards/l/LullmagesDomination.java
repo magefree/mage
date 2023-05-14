@@ -34,7 +34,7 @@ public final class LullmagesDomination extends CardImpl {
     );
 
     static {
-        filter.add(LullmagesDominationPredicate.instance);
+        filter.add(LullmagesDominationPredicate.INSTANCE);
     }
 
     private static final Condition condition = new SourceTargetsPermanentCondition(filter);
@@ -50,7 +50,7 @@ public final class LullmagesDomination extends CardImpl {
         // Gain control of target creature with converted mana cost X.
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.Custom)
                 .setText("gain control of target creature with mana value X"));
-        this.getSpellAbility().setTargetAdjuster(LullmagesDominationAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(LullmagesDominationAdjuster.INSTANCE);
     }
 
     private LullmagesDomination(final LullmagesDomination card) {
@@ -64,7 +64,7 @@ public final class LullmagesDomination extends CardImpl {
 }
 
 enum LullmagesDominationPredicate implements Predicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(Permanent input, Game game) {
@@ -74,7 +74,7 @@ enum LullmagesDominationPredicate implements Predicate<Permanent> {
 }
 
 enum LullmagesDominationAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

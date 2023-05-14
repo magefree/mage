@@ -43,7 +43,7 @@ public final class MoggAssassin extends CardImpl {
         );
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         ability.addTarget(new TargetCreaturePermanent());
-        ability.setTargetAdjuster(MoggAssassinAdjuster.instance);
+        ability.setTargetAdjuster(MoggAssassinAdjuster.INSTANCE);
         this.addAbility(ability);
     }
 
@@ -59,7 +59,7 @@ public final class MoggAssassin extends CardImpl {
 }
 
 enum MoggAssassinAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

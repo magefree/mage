@@ -30,7 +30,7 @@ public final class TangleweaveArmor extends CardImpl {
 
         // Equipped creature gets +X/+X, where X is the greatest mana value among your commanders
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD, new BoostEquippedEffect(TangleweaveArmorDynamicValue.instance, TangleweaveArmorDynamicValue.instance)
+                Zone.BATTLEFIELD, new BoostEquippedEffect(TangleweaveArmorDynamicValue.INSTANCE, TangleweaveArmorDynamicValue.instance)
         ));
 
         // Equip {4}
@@ -48,7 +48,7 @@ public final class TangleweaveArmor extends CardImpl {
 }
 
 enum TangleweaveArmorDynamicValue implements DynamicValue {
-    instance;
+    INSTANCE;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

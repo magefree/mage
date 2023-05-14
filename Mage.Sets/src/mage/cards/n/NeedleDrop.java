@@ -25,8 +25,8 @@ public final class NeedleDrop extends CardImpl {
     private static final FilterPermanentOrPlayer filter = new FilterAnyTarget("any target that was dealt damage this turn");
 
     static {
-        filter.getPlayerFilter().add(DamagedThisTurnPredicate.instance);
-        filter.getPermanentFilter().add(DamagedThisTurnPredicate.instance);
+        filter.getPlayerFilter().add(DamagedThisTurnPredicate.INSTANCE);
+        filter.getPermanentFilter().add(DamagedThisTurnPredicate.INSTANCE);
     }
 
     public NeedleDrop(UUID ownerId, CardSetInfo setInfo) {
@@ -51,7 +51,7 @@ public final class NeedleDrop extends CardImpl {
 }
 
 enum DamagedThisTurnPredicate implements Predicate<MageItem> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(MageItem input, Game game) {

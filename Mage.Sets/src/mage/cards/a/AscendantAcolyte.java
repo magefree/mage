@@ -36,7 +36,7 @@ public final class AscendantAcolyte extends CardImpl {
 
         // Ascendant Acolyte enters the battlefield with a +1/+1 counter on it for each +1/+1 counter among other creatures you control.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(), AscendantAcolyteValue.instance, true
+                CounterType.P1P1.createInstance(), AscendantAcolyteValue.INSTANCE, true
         ), "with a +1/+1 counter on it for each +1/+1 counter among other creatures you control").addHint(AscendantAcolyteValue.getHint()));
 
         // At the beginning of your upkeep, double the number of +1/+1 counters on Ascendant Acolyte.
@@ -56,9 +56,9 @@ public final class AscendantAcolyte extends CardImpl {
 }
 
 enum AscendantAcolyteValue implements DynamicValue {
-    instance;
+    INSTANCE;
     private static final Hint hint = new ValueHint(
-            "Total +1/+1 counters on other creatures you control", instance
+            "Total +1/+1 counters on other creatures you control", INSTANCE
     );
 
     public static Hint getHint() {

@@ -25,8 +25,8 @@ import mage.filter.predicate.permanent.TappedPredicate;
  */
 public final class Orgg extends CardImpl {
 
-    static final private FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped creature with power 3 or greater");
-    static final private FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creatures with power 3 or greater");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped creature with power 3 or greater");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creatures with power 3 or greater");
 
     static {
         filter.add(Predicates.and(new PowerPredicate(ComparisonType.MORE_THAN, 2), TappedPredicate.UNTAPPED));

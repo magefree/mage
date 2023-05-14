@@ -135,10 +135,7 @@ class MarathWillOfTheWildRemoveCountersCost extends CostImpl {
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && permanent.getCounters(game).getCount(CounterType.P1P1) > 0) {
-            return true;
-        }
-        return false;
+        return permanent != null && permanent.getCounters(game).getCount(CounterType.P1P1) > 0;
     }
 
     @Override

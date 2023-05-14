@@ -49,7 +49,7 @@ public final class TashaTheWitchQueen extends CardImpl {
         // +1: Draw a card. For each opponent, exile up to one target instant or sorcery card from that player's graveyard and put a page counter on it.
         Ability ability = new LoyaltyAbility(new DrawCardSourceControllerEffect(1), 1);
         ability.addEffect(new TashaTheWitchQueenExileEffect());
-        ability.setTargetAdjuster(TashaTheWitchQueenAdjuster.instance);
+        ability.setTargetAdjuster(TashaTheWitchQueenAdjuster.INSTANCE);
         this.addAbility(ability);
 
         // −3: You may cast a spell from among cards in exile with page counters on them without paying its mana cost.
@@ -70,7 +70,7 @@ public final class TashaTheWitchQueen extends CardImpl {
 }
 
 enum TashaTheWitchQueenAdjuster implements TargetAdjuster {
-    instance;
+    INSTANCE;
 
     @Override
     public void adjustTargets(Ability ability, Game game) {

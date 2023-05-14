@@ -23,7 +23,7 @@ import mage.counters.CounterType;
  */
 public final class LuxaRiverShrine extends CardImpl {
 
-    private static final String rule = "{T}: You gain 2 life. Activate only if there are three or more brick counters on {this}.";
+    private static final String RULE_TEXT = "{T}: You gain 2 life. Activate only if there are three or more brick counters on {this}.";
 
     public LuxaRiverShrine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
@@ -36,7 +36,7 @@ public final class LuxaRiverShrine extends CardImpl {
 
         // {T}: You gain 2 life. Activate this ability only if there are three or more brick counters on Luxa River Shrine.
         Condition condition = new SourceHasCounterCondition(CounterType.BRICK, 3, Integer.MAX_VALUE);
-        this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), new TapSourceCost(), condition, rule));
+        this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), new TapSourceCost(), condition, RULE_TEXT));
 
     }
 

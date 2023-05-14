@@ -31,7 +31,7 @@ public final class BlastFurnaceHellkite extends CardImpl {
     private static final FilterPermanent filter2 = new FilterCreaturePermanent("creatures attacking your opponents");
 
     static {
-        filter2.add(BlastFurnaceHellkitePredicate.instance);
+        filter2.add(BlastFurnaceHellkitePredicate.INSTANCE);
     }
 
     public BlastFurnaceHellkite(UUID ownerId, CardSetInfo setInfo) {
@@ -67,7 +67,7 @@ public final class BlastFurnaceHellkite extends CardImpl {
 }
 
 enum BlastFurnaceHellkitePredicate implements ObjectSourcePlayerPredicate<Permanent> {
-    instance;
+    INSTANCE;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {

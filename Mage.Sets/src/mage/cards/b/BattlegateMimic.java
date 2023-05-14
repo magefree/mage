@@ -31,7 +31,7 @@ public final class BattlegateMimic extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
-    private static final String rule = "Whenever you cast a spell that's both red and white, {this} has base power and toughness 4/2 until end of turn and gains first strike until end of turn.";
+    private static final String RULE_TEXT = "Whenever you cast a spell that's both red and white, {this} has base power and toughness 4/2 until end of turn and gains first strike until end of turn.";
 
     public BattlegateMimic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R/W}");
@@ -42,7 +42,7 @@ public final class BattlegateMimic extends CardImpl {
 
         // Whenever you cast a spell that's both red and white, Battlegate Mimic has base power and toughness 4/2 and gains first strike until end of turn.
         SetBasePowerToughnessSourceEffect baseToughnessSourceEffect = new SetBasePowerToughnessSourceEffect(4, 2, Duration.EndOfTurn, SubLayer.SetPT_7b);
-        Ability ability = new SpellCastControllerTriggeredAbility(baseToughnessSourceEffect, filter, false, rule);
+        Ability ability = new SpellCastControllerTriggeredAbility(baseToughnessSourceEffect, filter, false, RULE_TEXT);
         ability.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, false, true));
         this.addAbility(ability);
 
