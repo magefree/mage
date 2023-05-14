@@ -25,10 +25,10 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect {
     }
 
     public SearchLibraryPutInPlayEffect(TargetCardInLibrary target, boolean tapped) {
-        this(target, tapped, true, false);
+        this(target, tapped, false);
     }
 
-    public SearchLibraryPutInPlayEffect(TargetCardInLibrary target, boolean tapped, boolean forceShuffle, boolean optional) {
+    public SearchLibraryPutInPlayEffect(TargetCardInLibrary target, boolean tapped, boolean optional) {
         super(target, Outcome.PutCardInPlay);
         this.tapped = tapped;
         this.optional = optional;
