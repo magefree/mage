@@ -20,28 +20,12 @@ import mage.util.CardUtil;
  */
 public class SearchLibraryPutInHandOrOnBattlefieldEffect extends SearchEffect {
 
-    private boolean revealCards = false;
-    private boolean forceShuffle;
-    private String rulePrefix;
-    private String nameToPutOnBattlefield = null;
-
-    public SearchLibraryPutInHandOrOnBattlefieldEffect(TargetCardInLibrary target, String nameToPutOnBattlefield) {
-        this(target, false, true, nameToPutOnBattlefield);
-    }
+    private boolean revealCards;
+    private String nameToPutOnBattlefield;
 
     public SearchLibraryPutInHandOrOnBattlefieldEffect(TargetCardInLibrary target, boolean revealCards, String nameToPutOnBattlefield) {
-        this(target, revealCards, true, nameToPutOnBattlefield);
-    }
-
-    public SearchLibraryPutInHandOrOnBattlefieldEffect(TargetCardInLibrary target, boolean revealCards, boolean forceShuffle, String nameToPutOnBattlefield) {
-        this(target, revealCards, forceShuffle, "search your library for ", nameToPutOnBattlefield);
-    }
-
-    public SearchLibraryPutInHandOrOnBattlefieldEffect(TargetCardInLibrary target, boolean revealCards, boolean forceShuffle, String rulePrefix, String nameToPutOnBattlefield) {
         super(target, Outcome.DrawCard);
         this.revealCards = revealCards;
-        this.forceShuffle = forceShuffle;
-        this.rulePrefix = rulePrefix;
         this.nameToPutOnBattlefield = nameToPutOnBattlefield;
         setText();
     }
@@ -49,8 +33,6 @@ public class SearchLibraryPutInHandOrOnBattlefieldEffect extends SearchEffect {
     public SearchLibraryPutInHandOrOnBattlefieldEffect(final SearchLibraryPutInHandOrOnBattlefieldEffect effect) {
         super(effect);
         this.revealCards = effect.revealCards;
-        this.forceShuffle = effect.forceShuffle;
-        this.rulePrefix = effect.rulePrefix;
         this.nameToPutOnBattlefield = effect.nameToPutOnBattlefield;
     }
 
@@ -98,15 +80,13 @@ public class SearchLibraryPutInHandOrOnBattlefieldEffect extends SearchEffect {
             controller.shuffleLibrary(source, game);
             return true;
         }
-        if (forceShuffle) {
-            controller.shuffleLibrary(source, game);
-        }
+        controller.shuffleLibrary(source, game);
         return false;
     }
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        sb.append(rulePrefix);
+        sb.append("search your library for ");
         if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
             sb.append("up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
             sb.append(target.getTargetName()).append(revealCards ? ", reveal them," : "").append(" and put them into your hand");
@@ -118,11 +98,7 @@ public class SearchLibraryPutInHandOrOnBattlefieldEffect extends SearchEffect {
             sb.append(nameToPutOnBattlefield);
             sb.append("this way, you may put it onto the battlefield instead");
         }
-        if (forceShuffle) {
-            sb.append(". Then shuffle");
-        } else {
-            sb.append(". If you do, shuffle");
-        }
+        sb.append(". Then shuffle");
         staticText = sb.toString();
     }
 
