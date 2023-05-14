@@ -39,7 +39,7 @@ public final class SliverOverlord extends CardImpl {
         this.toughness = new MageInt(7);
 
         // {3}: Search your library for a Sliver card, reveal that card, and put it into your hand. Then shuffle your library.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true), new ManaCostsImpl<>("{3}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true), new ManaCostsImpl<>("{3}")));
         
         // {3}: Gain control of target Sliver.
         Ability ability = (new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainControlTargetEffect(Duration.Custom), new ManaCostsImpl<>("{3}")));

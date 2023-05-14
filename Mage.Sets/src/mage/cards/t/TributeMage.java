@@ -36,7 +36,7 @@ public final class TributeMage extends CardImpl {
 
         // When Tribute Mage enters the battlefield, you may search your library for an artifact card with converted mana cost 2, reveal that card, put it into your hand, then shuffle your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(filter), true
+                new TargetCardInLibrary(filter), true, true
         ), true));
     }
 
