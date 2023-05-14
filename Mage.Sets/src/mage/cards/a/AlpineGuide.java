@@ -38,7 +38,7 @@ public final class AlpineGuide extends CardImpl {
 
         // When Alpine Guide enters the battlefield, you may search your library for a Mountain card, put that card onto the battlefield tapped, then shuffle your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(
-                new TargetCardInLibrary(filter), true
+                new TargetCardInLibrary(filter), true, true
         ), true));
 
         // Alpine Guide attacks each combat if able.

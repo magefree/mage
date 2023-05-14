@@ -35,7 +35,7 @@ public final class GolosTirelessPilgrim extends CardImpl {
 
         // When Golos, Tireless Pilgrim enters the battlefield, you may search your library for a land card, put that card onto the battlefield tapped, then shuffle your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(
-                new TargetCardInLibrary(StaticFilters.FILTER_CARD_LAND_A), true
+                new TargetCardInLibrary(StaticFilters.FILTER_CARD_LAND_A), true, true
         ), true));
 
         // {2}{W}{U}{B}{R}{G}: Exile the top three cards of your library. You may play them this turn without paying their mana costs.
