@@ -29,10 +29,6 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect {
         this(target, tapped, true);
     }
 
-    public SearchLibraryPutInPlayEffect(TargetCardInLibrary target, boolean tapped, Outcome outcome) {
-        this(target, tapped, true);
-    }
-
     public SearchLibraryPutInPlayEffect(TargetCardInLibrary target, boolean tapped, boolean forceShuffle) {
         this(target, tapped, forceShuffle, false);
     }
