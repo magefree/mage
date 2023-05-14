@@ -21,16 +21,23 @@ import java.util.UUID;
 public class SearchLibraryPutInHandEffect extends SearchEffect {
 
     private boolean revealCards;
+    private boolean textThatCard;
 
     public SearchLibraryPutInHandEffect(TargetCardInLibrary target, boolean revealCards) {
+        this(target, revealCards, false);
+    }
+
+    public SearchLibraryPutInHandEffect(TargetCardInLibrary target, boolean revealCards, boolean textThatCard) {
         super(target, Outcome.DrawCard);
         this.revealCards = revealCards;
+        this.textThatCard = textThatCard;
         setText();
     }
 
     public SearchLibraryPutInHandEffect(final SearchLibraryPutInHandEffect effect) {
         super(effect);
         this.revealCards = effect.revealCards;
+        this.textThatCard = effect.textThatCard;
     }
 
     @Override
@@ -77,13 +84,27 @@ public class SearchLibraryPutInHandEffect extends SearchEffect {
         if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
             sb.append("up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
             sb.append(target.getTargetName());
-            sb.append(revealCards ? ", reveal them" : "");
-            sb.append(", put them into your hand, then shuffle");
+            if (revealCards) {
+                sb.append(", reveal ");
+                sb.append(textThatCard ? "those cards" : "them");
+                sb.append(", put them");
+            } else {
+                sb.append(", put ");
+                sb.append(textThatCard ? "those cards" : "them");
+            }
         } else {
             sb.append(CardUtil.addArticle(target.getTargetName()));
-            sb.append(revealCards ? ", reveal it, put it" : ", put that card");
-            sb.append(" into your hand, then shuffle");
+            if (revealCards) {
+                sb.append(", reveal ");
+                sb.append(textThatCard ? "that card" : "it");
+                sb.append(", put it");
+            } else {
+                sb.append(", put ");
+                sb.append(textThatCard ? "that card" : "it");
+            }
+
         }
+        sb.append(" into your hand, then shuffle");
         staticText = sb.toString();
     }
 
