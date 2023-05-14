@@ -22,22 +22,18 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect {
     protected boolean optional;
 
     public SearchLibraryPutInPlayEffect(TargetCardInLibrary target) {
-        this(target, false, true, Outcome.PutCardInPlay);
+        this(target, false, true);
     }
 
     public SearchLibraryPutInPlayEffect(TargetCardInLibrary target, boolean tapped) {
-        this(target, tapped, true, Outcome.PutCardInPlay);
-    }
-
-    public SearchLibraryPutInPlayEffect(TargetCardInLibrary target, boolean tapped, boolean forceShuffle) {
-        this(target, tapped, forceShuffle, Outcome.PutCardInPlay);
+        this(target, tapped, true);
     }
 
     public SearchLibraryPutInPlayEffect(TargetCardInLibrary target, boolean tapped, Outcome outcome) {
-        this(target, tapped, true, outcome);
+        this(target, tapped, true);
     }
 
-    public SearchLibraryPutInPlayEffect(TargetCardInLibrary target, boolean tapped, boolean forceShuffle, Outcome outcome) {
+    public SearchLibraryPutInPlayEffect(TargetCardInLibrary target, boolean tapped, boolean forceShuffle) {
         this(target, tapped, forceShuffle, false);
     }
 
