@@ -86,7 +86,7 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect {
         }
         sb.append("search your library for ");
         sb.append(target.getDescription());
-        sb.append(", put");
+        sb.append(", put ");
         if (target.getMaxNumberOfTargets() > 1) {
             sb.append(textThatCard ? "those cards" : "them");
         } else {
