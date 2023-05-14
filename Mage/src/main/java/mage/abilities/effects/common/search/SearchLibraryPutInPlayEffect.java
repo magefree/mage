@@ -18,7 +18,6 @@ import java.util.UUID;
 public class SearchLibraryPutInPlayEffect extends SearchEffect {
 
     protected boolean tapped;
-    protected boolean forceShuffle;
     protected boolean optional;
 
     public SearchLibraryPutInPlayEffect(TargetCardInLibrary target) {
@@ -30,13 +29,12 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect {
     }
 
     public SearchLibraryPutInPlayEffect(TargetCardInLibrary target, boolean tapped, boolean forceShuffle) {
-        this(target, tapped, forceShuffle, false);
+        this(target, tapped, true, false);
     }
 
     public SearchLibraryPutInPlayEffect(TargetCardInLibrary target, boolean tapped, boolean forceShuffle, boolean optional) {
         super(target, Outcome.PutCardInPlay);
         this.tapped = tapped;
-        this.forceShuffle = forceShuffle;
         this.optional = optional;
         if (target.getDescription().contains("land")) {
             this.outcome = Outcome.PutLandInPlay;
@@ -46,16 +44,15 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect {
         staticText = (optional ? "you may " : "")
                 + "search your library for "
                 + target.getDescription()
-                + (forceShuffle ? ", " : " and ")
+                + ", "
                 + (target.getMaxNumberOfTargets() > 1 ? "put them onto the battlefield" : "put it onto the battlefield")
                 + (tapped ? " tapped" : "")
-                + (forceShuffle ? ", then shuffle" : ". If you do, shuffle");
+                + ", then shuffle";
     }
 
     public SearchLibraryPutInPlayEffect(final SearchLibraryPutInPlayEffect effect) {
         super(effect);
         this.tapped = effect.tapped;
-        this.forceShuffle = effect.forceShuffle;
         this.optional = effect.optional;
     }
 
@@ -81,10 +78,8 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect {
             player.shuffleLibrary(source, game);
             return true;
         }
-        if (forceShuffle) {
-            player.shuffleLibrary(source, game);
-        }
-        return true;
+        player.shuffleLibrary(source, game);
+        return false;
     }
 
     public List<UUID> getTargets() {
