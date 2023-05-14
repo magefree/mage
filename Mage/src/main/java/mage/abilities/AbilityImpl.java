@@ -433,7 +433,6 @@ public abstract class AbilityImpl implements Ability {
         if (this instanceof SpellAbility) {
             // A player can't apply two alternative methods of casting or two alternative costs to a single spell.
             switch (((SpellAbility) this).getSpellAbilityCastMode()) {
-                case MORE_THAN_MEETS_THE_EYE:
                 case FLASHBACK:
                 case MADNESS:
                 case TRANSFORMED:
