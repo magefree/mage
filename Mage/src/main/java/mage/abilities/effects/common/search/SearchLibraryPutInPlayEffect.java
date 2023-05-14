@@ -18,6 +18,7 @@ import java.util.UUID;
 public class SearchLibraryPutInPlayEffect extends SearchEffect {
 
     protected boolean tapped;
+    protected boolean textThatCard;
     protected boolean optional;
 
     public SearchLibraryPutInPlayEffect(TargetCardInLibrary target) {
@@ -28,27 +29,27 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect {
         this(target, tapped, false);
     }
 
-    public SearchLibraryPutInPlayEffect(TargetCardInLibrary target, boolean tapped, boolean optional) {
+    public SearchLibraryPutInPlayEffect(TargetCardInLibrary target, boolean tapped, boolean textThatCard) {
+        this(target, tapped, textThatCard, false);
+    }
+
+    public SearchLibraryPutInPlayEffect(TargetCardInLibrary target, boolean tapped, boolean textThatCard, boolean optional) {
         super(target, Outcome.PutCardInPlay);
         this.tapped = tapped;
+        this.textThatCard = textThatCard;
         this.optional = optional;
         if (target.getDescription().contains("land")) {
             this.outcome = Outcome.PutLandInPlay;
         } else if (target.getDescription().contains("creature")) {
             this.outcome = Outcome.PutCreatureInPlay;
         }
-        staticText = (optional ? "you may " : "")
-                + "search your library for "
-                + target.getDescription()
-                + ", "
-                + (target.getMaxNumberOfTargets() > 1 ? "put them onto the battlefield" : "put it onto the battlefield")
-                + (tapped ? " tapped" : "")
-                + ", then shuffle";
+        setText();
     }
 
     public SearchLibraryPutInPlayEffect(final SearchLibraryPutInPlayEffect effect) {
         super(effect);
         this.tapped = effect.tapped;
+        this.textThatCard = effect.textThatCard;
         this.optional = effect.optional;
     }
 
@@ -76,6 +77,27 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect {
         }
         player.shuffleLibrary(source, game);
         return false;
+    }
+
+    private void setText() {
+        StringBuilder sb = new StringBuilder();
+        if (optional) {
+            sb.append("you may ");
+        }
+        sb.append("search your library for ");
+        sb.append(target.getDescription());
+        sb.append(", put");
+        if (target.getMaxNumberOfTargets() > 1) {
+            sb.append(textThatCard ? "those cards" : "them");
+        } else {
+            sb.append(textThatCard ? "that card" : "it");
+        }
+        sb.append(" onto the battlefield");
+        if (tapped) {
+            sb.append(" tapped");
+        }
+        sb.append( ", then shuffle");
+        staticText = sb.toString();
     }
 
     public List<UUID> getTargets() {

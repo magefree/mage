@@ -11,7 +11,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -81,9 +80,8 @@ public class SearchLibraryPutInHandEffect extends SearchEffect {
     private void setText() {
         StringBuilder sb = new StringBuilder();
         sb.append("search your library for ");
-        if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
-            sb.append("up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
-            sb.append(target.getTargetName());
+        sb.append(target.getDescription());
+        if (target.getMaxNumberOfTargets() > 1) {
             if (revealCards) {
                 sb.append(", reveal ");
                 sb.append(textThatCard ? "those cards" : "them");
@@ -93,7 +91,6 @@ public class SearchLibraryPutInHandEffect extends SearchEffect {
                 sb.append(textThatCard ? "those cards" : "them");
             }
         } else {
-            sb.append(CardUtil.addArticle(target.getTargetName()));
             if (revealCards) {
                 sb.append(", reveal ");
                 sb.append(textThatCard ? "that card" : "it");
@@ -102,7 +99,6 @@ public class SearchLibraryPutInHandEffect extends SearchEffect {
                 sb.append(", put ");
                 sb.append(textThatCard ? "that card" : "it");
             }
-
         }
         sb.append(" into your hand, then shuffle");
         staticText = sb.toString();
