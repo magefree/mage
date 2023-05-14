@@ -26,7 +26,7 @@ public final class GaeasBounty extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
 
         // Search your library for up to two Forest cards, reveal those cards, and put them into your hand. Then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 2, filter), false));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 2, filter), false, true));
     }
 
     private GaeasBounty(final GaeasBounty card) {
