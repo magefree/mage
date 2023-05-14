@@ -38,14 +38,19 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect {
     }
 
     public SearchLibraryPutInPlayEffect(TargetCardInLibrary target, boolean tapped, boolean forceShuffle, Outcome outcome) {
-        this(target, tapped, forceShuffle, false, outcome);
+        this(target, tapped, forceShuffle, false);
     }
 
-    public SearchLibraryPutInPlayEffect(TargetCardInLibrary target, boolean tapped, boolean forceShuffle, boolean optional, Outcome outcome) {
-        super(target, outcome);
+    public SearchLibraryPutInPlayEffect(TargetCardInLibrary target, boolean tapped, boolean forceShuffle, boolean optional) {
+        super(target, Outcome.PutCardInPlay);
         this.tapped = tapped;
         this.forceShuffle = forceShuffle;
         this.optional = optional;
+        if (target.getDescription().contains("land")) {
+            this.outcome = Outcome.PutLandInPlay;
+        } else if (target.getDescription().contains("creature")) {
+            this.outcome = Outcome.PutCreatureInPlay;
+        }
         staticText = (optional ? "you may " : "")
                 + "search your library for "
                 + target.getDescription()
