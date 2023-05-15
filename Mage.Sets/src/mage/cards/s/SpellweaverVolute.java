@@ -26,7 +26,6 @@ import mage.target.common.TargetCardInGraveyard;
  * @author LevelX2
  */
 public final class SpellweaverVolute extends CardImpl {
-
     public SpellweaverVolute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
 
@@ -107,7 +106,7 @@ class SpellweaverVoluteEffect extends OneShotEffect {
                                         controller.choose(Outcome.Benefit, auraTarget, source, game);
                                         Card newAuraTarget = game.getCard(auraTarget.getFirstTarget());
                                         if (newAuraTarget != null) {
-                                            if (!enchantedCard.getId().equals(newAuraTarget.getId())) {
+                                            if (!enchantedCard.getId().equals(newAuraTarget.getId()) && newAuraTarget.addAttachment(sourcePermanent.getId(), source, game)) {
                                                 game.informPlayers(sourcePermanent.getLogName() + " was attached to " + newAuraTarget.getLogName());
                                             }
                                         }
