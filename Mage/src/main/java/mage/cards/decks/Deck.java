@@ -227,6 +227,13 @@ public class Deck implements Serializable, Copyable<Deck> {
         return cards;
     }
 
+    public Set<Card> getMaindeckCards() {
+        return cards
+                .stream()
+                .filter(card -> !card.isExtraDeckCard())
+                .collect(Collectors.toSet());
+    }
+
     public Card findCard(UUID cardId) {
         return cards
                 .stream()
