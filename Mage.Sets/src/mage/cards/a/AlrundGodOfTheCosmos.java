@@ -47,7 +47,7 @@ public final class AlrundGodOfTheCosmos extends ModalDoubleFacesCard {
         this.getLeftHalfCard().setPT(new MageInt(1), new MageInt(1));
 
         // Alrund gets +1/+1 for each card in your hand and each foretold card you own in exile.
-        Effect effect = new BoostSourceEffect(AlrundGodOfTheCosmosValue.INSTANCE, AlrundGodOfTheCosmosValue.instance, Duration.EndOfGame);
+        Effect effect = new BoostSourceEffect(AlrundGodOfTheCosmosValue.INSTANCE, AlrundGodOfTheCosmosValue.INSTANCE, Duration.EndOfGame);
         effect.setText("{this} gets +1/+1 for each card in your hand and each foretold card you own in exile.");
         Ability ability = new SimpleStaticAbility(effect);
         this.getLeftHalfCard().addAbility(ability);

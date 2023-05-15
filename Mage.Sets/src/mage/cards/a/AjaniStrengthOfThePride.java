@@ -72,7 +72,7 @@ enum AjaniStrengthOfThePrideValue implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return instance;
+        return INSTANCE;
     }
 
     @Override

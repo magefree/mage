@@ -121,11 +121,6 @@ class VolrathsCurseCantActivateAbilitiesEffect extends ContinuousRuleModifyingEf
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
     }
@@ -149,7 +144,7 @@ class VolrathsCurseSpecialAction extends SpecialAction {
     public VolrathsCurseSpecialAction() {
         super(Zone.BATTLEFIELD);
         this.addCost(new SacrificeTargetCost(new TargetControlledPermanent(), true));
-        this.addEffect(new VolrathsCurseIgnoreEffect(keyString));
+        this.addEffect(new VolrathsCurseIgnoreEffect());
         this.setMayActivate(TargetController.CONTROLLER_ATTACHED_TO);
     }
 

@@ -30,7 +30,7 @@ public final class VictoryChimes extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UntapSourceDuringEachOtherPlayersUntapStepEffect()));
 
         // {T}: A player of your choice adds {C}.
-        ManaEffect effect = new VictoryChimesManaEffect("chosen player");
+        ManaEffect effect = new VictoryChimesManaEffect();
         effect.setText("a player of your choice adds {C}");
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         // choosing player as first effect, before adding mana effect

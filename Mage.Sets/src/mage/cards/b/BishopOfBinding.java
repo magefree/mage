@@ -48,7 +48,7 @@ public final class BishopOfBinding extends CardImpl {
         this.addAbility(ability);
 
         // Whenever Bishop of Binding attacks, target Vampire gets +X/+X until end of turn, where X is the power of the exiled card.
-        ability = new AttacksTriggeredAbility(new BoostTargetEffect(BishopOfBindingValue.INSTANCE, BishopOfBindingValue.instance, Duration.EndOfTurn));
+        ability = new AttacksTriggeredAbility(new BoostTargetEffect(BishopOfBindingValue.INSTANCE, BishopOfBindingValue.INSTANCE, Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
