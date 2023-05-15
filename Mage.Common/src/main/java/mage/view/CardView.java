@@ -90,6 +90,7 @@ public class CardView extends SimpleCardView {
     protected CardView ability;
     protected int imageNumber;
 
+    protected boolean extraDeckCard;
     protected boolean transformable; // can toggle one card side to another (transformable cards, modal double faces)
     protected CardView secondCardFace;
     protected boolean transformed;
@@ -200,6 +201,7 @@ public class CardView extends SimpleCardView {
         this.isToken = cardView.isToken;
         this.ability = cardView.ability; // reference, not copy
 
+        this.extraDeckCard = cardView.extraDeckCard;
         this.transformable = cardView.transformable;
         this.secondCardFace = cardView.secondCardFace == null ? null : new CardView(cardView.secondCardFace);
         this.transformed = cardView.transformed;
@@ -493,6 +495,8 @@ public class CardView extends SimpleCardView {
             this.rarity = card.getRarity();
             this.isToken = false;
         }
+
+        this.extraDeckCard = card.isExtraDeckCard();
 
         // transformable, double faces cards
         this.transformable = card.isTransformable();
@@ -1227,6 +1231,9 @@ public class CardView extends SimpleCardView {
         return typeText.toString();
     }
 
+    public boolean isExtraDeckCard() {
+        return this.extraDeckCard;
+    }
     public boolean isLand() {
         return cardTypes.contains(CardType.LAND);
     }

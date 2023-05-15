@@ -38,6 +38,8 @@ public class MockCard extends CardImpl {
     protected boolean isModalDoubleFacesCard;
     protected int manaValue;
 
+    protected boolean isExtraDeckCard;
+
     public MockCard(CardInfo card) {
         super(null, card.getName());
         this.setExpansionSetCode(card.getSetCode());
@@ -88,6 +90,8 @@ public class MockCard extends CardImpl {
         for (String ruleText : card.getRules()) {
             this.addAbility(textAbilityFromString(ruleText));
         }
+
+        this.isExtraDeckCard = card.isExtraDeckCard();
     }
 
     public MockCard(final MockCard card) {
@@ -101,6 +105,7 @@ public class MockCard extends CardImpl {
         this.adventureSpellName = card.adventureSpellName;
         this.isModalDoubleFacesCard = card.isModalDoubleFacesCard;
         this.manaValue = card.manaValue;
+        this.isExtraDeckCard = card.isExtraDeckCard;
     }
 
     @Override
@@ -179,5 +184,10 @@ public class MockCard extends CardImpl {
     public boolean isTransformable() {
         // must enable toggle mode in deck editor (switch between card sides);
         return super.isTransformable() || this.isModalDoubleFacesCard || this.secondSideCard != null;
+    }
+
+    @Override
+    public boolean isExtraDeckCard() {
+        return isExtraDeckCard;
     }
 }
