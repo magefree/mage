@@ -12,7 +12,13 @@ import mage.abilities.effects.common.DrawCardForEachColorAmongControlledPermanen
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.AsThoughEffectType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.ManaType;
+import mage.constants.Outcome;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.ManaPoolItem;
 

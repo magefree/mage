@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -17,7 +16,7 @@ import mage.constants.SubType;
 public final class CentaurHealer extends CardImpl {
 
     public CentaurHealer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
         this.subtype.add(SubType.CENTAUR);
         this.subtype.add(SubType.CLERIC);
 

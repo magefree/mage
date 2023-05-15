@@ -1,11 +1,14 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -23,8 +26,7 @@ import mage.target.common.TargetCardInLibrary;
 public final class CongregationAtDawn extends CardImpl {
 
     public CongregationAtDawn(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{G}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}{G}{W}");
 
         // Search your library for up to three creature cards and reveal them. Shuffle your library, then put those cards on top of it in any order.
         this.getSpellAbility().addEffect(new CongregationAtDawnEffect());
@@ -41,12 +43,12 @@ public final class CongregationAtDawn extends CardImpl {
 }
 
 class CongregationAtDawnEffect extends OneShotEffect {
-    static final private String textTop = "card to put on your library (last chosen will be on top)";
+    private static final String textTop = "card to put on your library (last chosen will be on top)";
 
     public CongregationAtDawnEffect() {
         super(Outcome.Benefit);
-        this.staticText = "search your library for up to three creature cards, reveal them, " +
-                "then shuffle and put those cards on top in any order";
+        this.staticText = "search your library for up to three creature cards, reveal them, "
+                + "then shuffle and put those cards on top in any order";
     }
 
     public CongregationAtDawnEffect(final CongregationAtDawnEffect effect) {

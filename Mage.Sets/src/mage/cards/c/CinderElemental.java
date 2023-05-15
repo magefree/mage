@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -24,7 +23,7 @@ import mage.target.common.TargetAnyTarget;
 public final class CinderElemental extends CardImpl {
 
     public CinderElemental(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(2);

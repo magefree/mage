@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -28,7 +27,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class CapashenStandard extends CardImpl {
 
     public CapashenStandard(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature

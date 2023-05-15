@@ -53,8 +53,8 @@ class CourtOfCunningEffect extends OneShotEffect {
 
     CourtOfCunningEffect() {
         super(Outcome.Benefit);
-        staticText = "any number of target players each mill two cards. " +
-                "If you're the monarch, each of those players mills ten cards instead";
+        staticText = "any number of target players each mill two cards. "
+                + "If you're the monarch, each of those players mills ten cards instead";
     }
 
     private CourtOfCunningEffect(final CourtOfCunningEffect effect) {

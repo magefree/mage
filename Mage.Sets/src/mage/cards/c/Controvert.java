@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -17,7 +16,7 @@ import mage.target.TargetSpell;
 public final class Controvert extends CardImpl {
 
     public Controvert(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
 
         // Counter target spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

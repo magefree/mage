@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -9,7 +8,11 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -78,6 +81,7 @@ class ChainsOfMephistophelesReplacementEffect extends ReplacementEffectImpl {
         }
         return false;
     }
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DRAW_CARD;
@@ -87,12 +91,9 @@ class ChainsOfMephistophelesReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.isActivePlayer(event.getPlayerId()) && game.getPhase().getStep().getType() == PhaseStep.DRAW) {
             CardsDrawnDuringDrawStepWatcher watcher = game.getState().getWatcher(CardsDrawnDuringDrawStepWatcher.class);
-            if (watcher != null && watcher.getAmountCardsDrawn(event.getPlayerId()) > 0) {
-                return true;
-            }
+            return watcher != null && watcher.getAmountCardsDrawn(event.getPlayerId()) > 0;
         } else {
             return true;
         }
-        return false;
     }
 }

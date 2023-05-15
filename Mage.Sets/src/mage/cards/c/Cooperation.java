@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -25,7 +24,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class Cooperation extends CardImpl {
 
     public Cooperation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature

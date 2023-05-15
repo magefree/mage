@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -16,7 +15,7 @@ import mage.constants.SubType;
 public final class CatWarriors extends CardImpl {
 
     public CatWarriors(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.WARRIOR);
 

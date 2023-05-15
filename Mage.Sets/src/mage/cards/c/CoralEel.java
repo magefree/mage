@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -15,7 +14,7 @@ import mage.constants.SubType;
 public final class CoralEel extends CardImpl {
 
     public CoralEel(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add(SubType.FISH);
 
         this.power = new MageInt(2);

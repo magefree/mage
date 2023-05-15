@@ -17,7 +17,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class Corpsehatch extends CardImpl {
 
     public Corpsehatch(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

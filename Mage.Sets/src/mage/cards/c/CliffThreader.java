@@ -1,5 +1,3 @@
-
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -16,8 +14,8 @@ import mage.constants.SubType;
  */
 public final class CliffThreader extends CardImpl {
 
-    public CliffThreader (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
+    public CliffThreader(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.subtype.add(SubType.KOR);
         this.subtype.add(SubType.SCOUT);
 
@@ -26,7 +24,7 @@ public final class CliffThreader extends CardImpl {
         this.addAbility(new MountainwalkAbility());
     }
 
-    public CliffThreader (final CliffThreader card) {
+    public CliffThreader(final CliffThreader card) {
         super(card);
     }
 

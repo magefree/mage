@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -18,7 +17,7 @@ import mage.filter.common.FilterNonlandPermanent;
 public final class CleverImpersonator extends CardImpl {
 
     public CleverImpersonator(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
         this.subtype.add(SubType.SHAPESHIFTER);
 
         this.power = new MageInt(0);

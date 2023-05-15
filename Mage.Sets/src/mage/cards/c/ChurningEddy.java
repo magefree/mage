@@ -16,7 +16,7 @@ import mage.target.targetpointer.EachTargetPointer;
 public final class ChurningEddy extends CardImpl {
 
     public ChurningEddy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");
 
         // Return target creature and target land to their owners' hands.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect().setTargetPointer(new EachTargetPointer()));

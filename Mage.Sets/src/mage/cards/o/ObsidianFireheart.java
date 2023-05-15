@@ -135,7 +135,7 @@ class ObsidianFireheartGainAbilityEffect extends GainAbilityTargetEffect {
     @Override
     public boolean isInactive(Ability source, Game game) {
         Permanent targetLand = game.getPermanent(this.targetPointer.getFirst(game, source));
-        return targetLand != null && targetLand.getCounters(game).getCount(CounterType.BLAZE) < 1);
+        return targetLand != null && targetLand.getCounters(game).getCount(CounterType.BLAZE) < 1;
     }
 
     @Override

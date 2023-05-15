@@ -1,5 +1,3 @@
-
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -18,7 +16,7 @@ import mage.target.common.TargetEnchantmentPermanent;
 public final class Clear extends CardImpl {
 
     public Clear(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());

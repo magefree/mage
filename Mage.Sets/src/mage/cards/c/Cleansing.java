@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.Iterator;
@@ -50,28 +49,26 @@ class CleansingEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Iterator<Permanent> permanents = game.getBattlefield().getActivePermanents(source.getControllerId(), game).iterator();
-        while (permanents.hasNext()) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
             boolean paidLife = false;
-            Permanent p = permanents.next();
-            if (p.isLand(game)) {
-                game.informPlayers("Any player may pay 1 life to prevent the destruction of " + p.getLogName() + " controlled by " + game.getPlayer(p.getControllerId()).getLogName() + ".");
+            if (permanent.isLand(game)) {
+                game.informPlayers("Any player may pay 1 life to prevent the destruction of " + permanent.getLogName() + " controlled by " + game.getPlayer(permanent.getControllerId()).getLogName() + ".");
                 PayLifeCost cost = new PayLifeCost(1);
                 for (UUID playerId : game.getState().getPlayerList(source.getControllerId())) {
                     Player player = game.getPlayer(playerId);
-                    if(player != null) {
+                    if (player != null) {
                         cost.clearPaid();
                         if (cost.canPay(source, source, player.getId(), game)
                                 && player.chooseUse(outcome, "Pay 1 life to prevent this?", source, game)) {
                             if (cost.pay(source, game, source, player.getId(), false, null)) {
-                                game.informPlayers(player.getLogName() + " pays 1 life to prevent the destruction of " + p.getLogName());
+                                game.informPlayers(player.getLogName() + " pays 1 life to prevent the destruction of " + permanent.getLogName());
                                 paidLife = true;
                             }
                         }
                     }
                 }
                 if (!paidLife) {
-                    p.destroy(source, game, false);
+                    permanent.destroy(source, game, false);
                 }
             }
         }

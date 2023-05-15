@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -21,11 +20,13 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 public final class CelestialAncient extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an enchantment spell");
+
     static {
         filter.add(CardType.ENCHANTMENT.getPredicate());
     }
+
     public CelestialAncient(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(3);

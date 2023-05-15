@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -14,7 +13,7 @@ import mage.constants.CardType;
 public final class Concentrate extends CardImpl {
 
     public Concentrate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
 
 
         // Draw three cards.

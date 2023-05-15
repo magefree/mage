@@ -1,5 +1,3 @@
-
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -16,8 +14,8 @@ import mage.constants.SubType;
  */
 public final class ContagiousNim extends CardImpl {
 
-    public ContagiousNim (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+    public ContagiousNim(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ZOMBIE);
 
@@ -26,7 +24,7 @@ public final class ContagiousNim extends CardImpl {
         this.addAbility(InfectAbility.getInstance());
     }
 
-    public ContagiousNim (final ContagiousNim card) {
+    public ContagiousNim(final ContagiousNim card) {
         super(card);
     }
 

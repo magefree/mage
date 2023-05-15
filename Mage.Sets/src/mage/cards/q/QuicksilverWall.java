@@ -1,4 +1,3 @@
-
 package mage.cards.q;
 
 import java.util.UUID;
@@ -22,7 +21,7 @@ import mage.constants.Zone;
 public final class QuicksilverWall extends CardImpl {
 
     public QuicksilverWall(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.subtype.add(SubType.WALL);
         this.power = new MageInt(1);
         this.toughness = new MageInt(6);
