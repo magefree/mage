@@ -19,8 +19,6 @@ import java.util.List;
  * @author North
  */
 public class MockSplitCard extends SplitCard {
-    protected boolean isExtraDeckCard;
-
     public MockSplitCard(CardInfo card) {
         super(null, new CardSetInfo(card.getName(), card.getSetCode(), card.getCardNumber(), card.getRarity()),
                 card.getTypes().toArray(new CardType[0]),
@@ -64,12 +62,11 @@ public class MockSplitCard extends SplitCard {
             ((SplitCardHalf) this.rightHalfCard).setParentCard(this);
         }
 
-        this.isExtraDeckCard = card.isExtraDeckCard();
+        this.extraDeckCard = card.isExtraDeckCard();
     }
 
     public MockSplitCard(final MockSplitCard card) {
         super(card);
-        this.isExtraDeckCard = card.isExtraDeckCard();
     }
 
     @Override
@@ -132,10 +129,5 @@ public class MockSplitCard extends SplitCard {
     @Override
     public List<String> getRules(Game game) {
         return this.getRules();
-    }
-
-    @Override
-    public boolean isExtraDeckCard() {
-        return isExtraDeckCard;
     }
 }
