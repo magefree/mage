@@ -103,7 +103,6 @@ public class MockCard extends CardImpl {
         this.adventureSpellName = card.adventureSpellName;
         this.isModalDoubleFacesCard = card.isModalDoubleFacesCard;
         this.manaValue = card.manaValue;
-        this.extraDeckCard = card.extraDeckCard;
     }
 
     @Override
