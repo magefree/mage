@@ -106,7 +106,7 @@ class ETBSinceYourLastTurnWatcher extends Watcher {
                     if (!playerToETBMap.containsKey(player)) {
                         playerToETBMap.put(player, new HashSet<>());
                     }
-                    playerToETBMap.get(player).add(new MageObjectReference(etbPermanent.getBasicMageObject(game), game));
+                    playerToETBMap.get(player).add(new MageObjectReference(etbPermanent.getId(), game));
                 }
             }
         }
