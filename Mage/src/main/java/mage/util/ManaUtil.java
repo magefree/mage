@@ -15,7 +15,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.mana.*;
 import mage.cards.AdventureCard;
 import mage.cards.Card;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.cards.SplitCard;
 import mage.choices.Choice;
 import mage.constants.ColoredManaSymbol;
@@ -631,8 +631,8 @@ public final class ManaUtil {
             secondSide = ((SplitCard) card).getRightHalfCard();
         } else if (card instanceof AdventureCard) {
             secondSide = ((AdventureCard) card).getSpellCard();
-        } else if (card instanceof ModalDoubleFacesCard) {
-            secondSide = ((ModalDoubleFacesCard) card).getRightHalfCard();
+        } else if (card instanceof ModalDoubleFacedCard) {
+            secondSide = ((ModalDoubleFacedCard) card).getRightHalfCard();
         } else {
             secondSide = card.getSecondCardFace();
         }

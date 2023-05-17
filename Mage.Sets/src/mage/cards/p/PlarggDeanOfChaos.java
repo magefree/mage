@@ -16,7 +16,7 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -32,7 +32,7 @@ import java.util.UUID;
 /**
  * @author htrajan
  */
-public final class PlarggDeanOfChaos extends ModalDoubleFacesCard {
+public final class PlarggDeanOfChaos extends ModalDoubleFacedCard {
 
     private static final FilterCreaturePermanent tappedFilter = new FilterCreaturePermanent("tapped creatures you control");
     private static final FilterCreaturePermanent untappedFilter = new FilterCreaturePermanent("untapped creatures you control");

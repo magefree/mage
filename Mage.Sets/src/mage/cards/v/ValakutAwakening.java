@@ -19,7 +19,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class ValakutAwakening extends ModalDoubleFacesCard {
+public final class ValakutAwakening extends ModalDoubleFacedCard {
 
     public ValakutAwakening(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

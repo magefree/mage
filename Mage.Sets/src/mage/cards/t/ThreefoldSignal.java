@@ -8,10 +8,7 @@ import mage.abilities.effects.common.continuous.EachSpellYouCastHasReplicateEffe
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCardHalf;
-import mage.cards.SplitCardHalf;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;

@@ -33,7 +33,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class UvildaDeanOfPerfection extends ModalDoubleFacesCard {
+public final class UvildaDeanOfPerfection extends ModalDoubleFacedCard {
 
     public UvildaDeanOfPerfection(UUID ownerId, CardSetInfo setInfo) {
         super(

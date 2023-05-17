@@ -15,7 +15,7 @@ import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
@@ -38,7 +38,7 @@ import java.util.UUID;
 /**
  * @author weirddan455
  */
-public final class HalvarGodOfBattle extends ModalDoubleFacesCard {
+public final class HalvarGodOfBattle extends ModalDoubleFacedCard {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     private static final FilterPermanent filter2 = new FilterPermanent("aura or equipment attached to a creature you control");

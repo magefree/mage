@@ -13,7 +13,7 @@ import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -23,7 +23,7 @@ import java.util.UUID;
 /**
  * @author weirddan455
  */
-public final class EgonGodOfDeath extends ModalDoubleFacesCard {
+public final class EgonGodOfDeath extends ModalDoubleFacedCard {
 
     public EgonGodOfDeath(UUID ownerId, CardSetInfo setInfo) {
         super(

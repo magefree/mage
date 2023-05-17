@@ -1,4 +1,4 @@
-package org.mage.test.cards.cost.modaldoublefaces;
+package org.mage.test.cards.cost.modaldoublefaced;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -8,7 +8,7 @@ import org.mage.test.serverside.base.CardTestCommanderDuelBase;
 /**
  * @author JayDi85
  */
-public class ModalDoubleFacesCardsInCommanderTest extends CardTestCommanderDuelBase {
+public class ModalDoubleFacedCardsInCommanderTest extends CardTestCommanderDuelBase {
 
     @Test
     public void test_Triggers_MustAddTriggersOneTimeOnly() {

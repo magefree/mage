@@ -21,12 +21,12 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public abstract class ModalDoubleFacesCard extends CardImpl implements CardWithHalves {
+public abstract class ModalDoubleFacedCard extends CardImpl implements CardWithHalves {
 
     protected Card leftHalfCard; // main card in all zone
     protected Card rightHalfCard; // second side card, can be only in stack and battlefield zones
 
-    public ModalDoubleFacesCard(
+    public ModalDoubleFacedCard(
             UUID ownerId, CardSetInfo setInfo,
             CardType[] typesLeft, SubType[] subTypesLeft, String costsLeft,
             String secondSideName,
@@ -40,7 +40,7 @@ public abstract class ModalDoubleFacesCard extends CardImpl implements CardWithH
         );
     }
 
-    public ModalDoubleFacesCard(
+    public ModalDoubleFacedCard(
             UUID ownerId, CardSetInfo setInfo,
             SuperType[] superTypesLeft, CardType[] typesLeft, SubType[] subTypesLeft, String costsLeft,
             String secondSideName,
@@ -48,35 +48,35 @@ public abstract class ModalDoubleFacesCard extends CardImpl implements CardWithH
     ) {
         super(ownerId, setInfo, typesLeft, costsLeft + costsRight, SpellAbilityType.MODAL);
         // main card name must be same as left side
-        leftHalfCard = new ModalDoubleFacesCardHalfImpl(
+        leftHalfCard = new ModalDoubleFacedCardHalfImpl(
                 this.getOwnerId(), setInfo.copy(),
                 superTypesLeft, typesLeft, subTypesLeft, costsLeft,
                 this, SpellAbilityType.MODAL_LEFT
         );
-        rightHalfCard = new ModalDoubleFacesCardHalfImpl(
+        rightHalfCard = new ModalDoubleFacedCardHalfImpl(
                 this.getOwnerId(), new CardSetInfo(secondSideName, setInfo),
                 superTypesRight, typesRight, subTypesRight, costsRight,
                 this, SpellAbilityType.MODAL_RIGHT
         );
     }
 
-    public ModalDoubleFacesCard(ModalDoubleFacesCard card) {
+    public ModalDoubleFacedCard(ModalDoubleFacedCard card) {
         super(card);
         this.leftHalfCard = card.getLeftHalfCard().copy();
-        ((ModalDoubleFacesCardHalf) leftHalfCard).setParentCard(this);
+        ((ModalDoubleFacedCardHalf) leftHalfCard).setParentCard(this);
         this.rightHalfCard = card.rightHalfCard.copy();
-        ((ModalDoubleFacesCardHalf) rightHalfCard).setParentCard(this);
+        ((ModalDoubleFacedCardHalf) rightHalfCard).setParentCard(this);
     }
 
-    public ModalDoubleFacesCardHalf getLeftHalfCard() {
-        return (ModalDoubleFacesCardHalf) leftHalfCard;
+    public ModalDoubleFacedCardHalf getLeftHalfCard() {
+        return (ModalDoubleFacedCardHalf) leftHalfCard;
     }
 
-    public ModalDoubleFacesCardHalf getRightHalfCard() {
-        return (ModalDoubleFacesCardHalf) rightHalfCard;
+    public ModalDoubleFacedCardHalf getRightHalfCard() {
+        return (ModalDoubleFacedCardHalf) rightHalfCard;
     }
 
-    public void setParts(ModalDoubleFacesCardHalf leftHalfCard, ModalDoubleFacesCardHalf rightHalfCard) {
+    public void setParts(ModalDoubleFacedCardHalf leftHalfCard, ModalDoubleFacedCardHalf rightHalfCard) {
         // for card copy only - set new parts
         this.leftHalfCard = leftHalfCard;
         leftHalfCard.setParentCard(this);
