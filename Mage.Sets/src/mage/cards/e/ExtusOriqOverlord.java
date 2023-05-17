@@ -12,7 +12,7 @@ import mage.abilities.effects.common.SacrificeOpponentsEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
@@ -28,7 +28,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class ExtusOriqOverlord extends ModalDoubleFacesCard {
+public final class ExtusOriqOverlord extends ModalDoubleFacedCard {
 
     private static final FilterCard filter
             = new FilterCreatureCard("nonlegendary creature card from your graveyard");

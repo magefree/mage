@@ -1,8 +1,8 @@
-package org.mage.test.cards.cost.modaldoublefaces;
+package org.mage.test.cards.cost.modaldoublefaced;
 
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
@@ -18,7 +18,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 /**
  * @author JayDi85
  */
-public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
+public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
 
     @Test
     public void test_Playable_AsCreature() {
@@ -417,8 +417,8 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
                 .findFirst()
                 .orElse(null);
         Assert.assertNotNull(card);
-        Assert.assertTrue("must be mdf card", card instanceof ModalDoubleFacesCard);
-        ModalDoubleFacesCard mdfCard = (ModalDoubleFacesCard) card;
+        Assert.assertTrue("must be mdf card", card instanceof ModalDoubleFacedCard);
+        ModalDoubleFacedCard mdfCard = (ModalDoubleFacedCard) card;
         Assert.assertEquals("card must be on exile", Zone.EXILED, currentGame.getState().getZone(mdfCard.getId()));
         Assert.assertEquals("left part must be on exile", Zone.EXILED, currentGame.getState().getZone(mdfCard.getLeftHalfCard().getId()));
         Assert.assertEquals("right part must be on exile", Zone.EXILED, currentGame.getState().getZone(mdfCard.getRightHalfCard().getId()));

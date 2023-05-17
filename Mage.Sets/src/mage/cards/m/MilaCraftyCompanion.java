@@ -14,7 +14,7 @@ import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
@@ -35,7 +35,7 @@ import static mage.constants.Outcome.Benefit;
 /**
  * @author TheElk801
  */
-public final class MilaCraftyCompanion extends ModalDoubleFacesCard {
+public final class MilaCraftyCompanion extends ModalDoubleFacedCard {
 
     public MilaCraftyCompanion(UUID ownerId, CardSetInfo setInfo) {
         super(

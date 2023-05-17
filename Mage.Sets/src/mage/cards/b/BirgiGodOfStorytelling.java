@@ -10,7 +10,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
 import mage.abilities.keyword.BoastAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
@@ -20,7 +20,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class BirgiGodOfStorytelling extends ModalDoubleFacesCard {
+public final class BirgiGodOfStorytelling extends ModalDoubleFacedCard {
 
     public BirgiGodOfStorytelling(UUID ownerId, CardSetInfo setInfo) {
         super(

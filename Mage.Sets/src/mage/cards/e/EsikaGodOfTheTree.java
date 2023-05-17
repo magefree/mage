@@ -20,7 +20,7 @@ import java.util.UUID;
 /**
  * @author weirddan455
  */
-public final class EsikaGodOfTheTree extends ModalDoubleFacesCard {
+public final class EsikaGodOfTheTree extends ModalDoubleFacedCard {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creatures");
 

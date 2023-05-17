@@ -129,9 +129,9 @@ class EyeOfTheStormEffect1 extends OneShotEffect {
                         if (card instanceof SplitCard) {
                             copiedCards.add(((SplitCard) card).getLeftHalfCard());
                             copiedCards.add(((SplitCard) card).getRightHalfCard());
-                        } else if (card instanceof ModalDoubleFacesCard) {
-                            copiedCards.add(((ModalDoubleFacesCard) card).getLeftHalfCard());
-                            copiedCards.add(((ModalDoubleFacesCard) card).getRightHalfCard());
+                        } else if (card instanceof ModalDoubleFacedCard) {
+                            copiedCards.add(((ModalDoubleFacedCard) card).getLeftHalfCard());
+                            copiedCards.add(((ModalDoubleFacedCard) card).getRightHalfCard());
                         } else {
                             copiedCards.add(card);
                         }

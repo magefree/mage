@@ -18,7 +18,7 @@ import mage.abilities.effects.common.continuous.GainAbilityWithAttachmentEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterAnyTarget;
@@ -38,7 +38,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class ToralfGodOfFury extends ModalDoubleFacesCard {
+public final class ToralfGodOfFury extends ModalDoubleFacedCard {
 
     private static final Condition condition
             = new AttachedToMatchesFilterCondition(StaticFilters.FILTER_PERMANENT_LEGENDARY);

@@ -6,7 +6,7 @@ import mage.abilities.dynamicvalue.common.SacrificeCostCreaturesPower;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.common.TargetAnyTarget;
@@ -19,7 +19,7 @@ import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 /**
  * @author JayDi85
  */
-public final class KazuulsFury extends ModalDoubleFacesCard {
+public final class KazuulsFury extends ModalDoubleFacedCard {
 
     public KazuulsFury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

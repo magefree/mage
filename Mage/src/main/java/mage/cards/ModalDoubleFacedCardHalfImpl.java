@@ -12,14 +12,14 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public class ModalDoubleFacesCardHalfImpl extends CardImpl implements ModalDoubleFacesCardHalf {
+public class ModalDoubleFacedCardHalfImpl extends CardImpl implements ModalDoubleFacedCardHalf {
 
-    ModalDoubleFacesCard parentCard;
+    ModalDoubleFacedCard parentCard;
 
-    public ModalDoubleFacesCardHalfImpl(
+    public ModalDoubleFacedCardHalfImpl(
             UUID ownerId, CardSetInfo setInfo,
             SuperType[] cardSuperTypes, CardType[] cardTypes, SubType[] cardSubTypes,
-            String costs, ModalDoubleFacesCard parentCard, SpellAbilityType spellAbilityType
+            String costs, ModalDoubleFacedCard parentCard, SpellAbilityType spellAbilityType
     ) {
         super(ownerId, setInfo, cardTypes, costs, spellAbilityType);
         this.supertype.addAll(Arrays.asList(cardSuperTypes));
@@ -27,7 +27,7 @@ public class ModalDoubleFacesCardHalfImpl extends CardImpl implements ModalDoubl
         this.parentCard = parentCard;
     }
 
-    public ModalDoubleFacesCardHalfImpl(final ModalDoubleFacesCardHalfImpl card) {
+    public ModalDoubleFacedCardHalfImpl(final ModalDoubleFacedCardHalfImpl card) {
         super(card);
         this.parentCard = card.parentCard;
     }
@@ -65,7 +65,7 @@ public class ModalDoubleFacesCardHalfImpl extends CardImpl implements ModalDoubl
     }
 
     @Override
-    public ModalDoubleFacesCard getMainCard() {
+    public ModalDoubleFacedCard getMainCard() {
         return parentCard;
     }
 
@@ -77,17 +77,17 @@ public class ModalDoubleFacesCardHalfImpl extends CardImpl implements ModalDoubl
     }
 
     @Override
-    public ModalDoubleFacesCardHalfImpl copy() {
-        return new ModalDoubleFacesCardHalfImpl(this);
+    public ModalDoubleFacedCardHalfImpl copy() {
+        return new ModalDoubleFacedCardHalfImpl(this);
     }
 
     @Override
-    public void setParentCard(ModalDoubleFacesCard card) {
+    public void setParentCard(ModalDoubleFacedCard card) {
         this.parentCard = card;
     }
 
     @Override
-    public ModalDoubleFacesCard getParentCard() {
+    public ModalDoubleFacedCard getParentCard() {
         return this.parentCard;
     }
 

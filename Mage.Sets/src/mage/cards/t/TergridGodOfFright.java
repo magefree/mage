@@ -10,7 +10,7 @@ import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.*;
@@ -31,7 +31,7 @@ import java.util.UUID;
 /**
  * @author jeffwadsworth
  */
-public final class TergridGodOfFright extends ModalDoubleFacesCard {
+public final class TergridGodOfFright extends ModalDoubleFacedCard {
 
     public TergridGodOfFright(UUID ownerId, CardSetInfo setInfo) {
         super(

@@ -4,10 +4,8 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ForetellAbility;
@@ -15,17 +13,15 @@ import mage.cards.AdventureCard;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
-import mage.cards.ModalDoubleFacesCardHalf;
+import mage.cards.ModalDoubleFacedCard;
+import mage.cards.ModalDoubleFacedCardHalf;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.util.CardUtil;
@@ -105,12 +101,12 @@ class EtherealValkyrieEffect extends OneShotEffect {
             game.getState().setValue(exileCard.getMainCard().getId().toString() + "Foretell Cost", leftHalfCost);
             game.getState().setValue(exileCard.getMainCard().getId().toString() + "Foretell Split Cost", rightHalfCost);
             foretellAbility = new ForetellAbility(exileCard, leftHalfCost, rightHalfCost);
-        } else if (exileCard instanceof ModalDoubleFacesCard) {
-            ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) exileCard).getLeftHalfCard();
+        } else if (exileCard instanceof ModalDoubleFacedCard) {
+            ModalDoubleFacedCardHalf leftHalfCard = ((ModalDoubleFacedCard) exileCard).getLeftHalfCard();
             if (!leftHalfCard.isLand(game)) {  // Only MDFC cards with a left side a land have a land on the right side too
                 String leftHalfCost = CardUtil.reduceCost(leftHalfCard.getManaCost(), 2).getText();
                 game.getState().setValue(exileCard.getMainCard().getId().toString() + "Foretell Cost", leftHalfCost);
-                ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) exileCard).getRightHalfCard();
+                ModalDoubleFacedCardHalf rightHalfCard = ((ModalDoubleFacedCard) exileCard).getRightHalfCard();
                 if (rightHalfCard.isLand(game)) {
                     foretellAbility = new ForetellAbility(exileCard, leftHalfCost);
                 } else {
