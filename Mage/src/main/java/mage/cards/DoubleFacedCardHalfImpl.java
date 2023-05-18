@@ -1,6 +1,7 @@
 package mage.cards;
 
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.constants.*;
 import mage.game.Game;
@@ -12,22 +13,34 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public class ModalDoubleFacedCardHalfImpl extends CardImpl implements ModalDoubleFacedCardHalf {
+public class DoubleFacedCardHalfImpl extends CardImpl implements DoubleFacedCardHalf {
 
-    ModalDoubleFacedCard parentCard;
+    DoubleFacedCard parentCard;
 
-    public ModalDoubleFacedCardHalfImpl(
+    public DoubleFacedCardHalfImpl(
             UUID ownerId, CardSetInfo setInfo,
             SuperType[] cardSuperTypes, CardType[] cardTypes, SubType[] cardSubTypes,
-            String costs, ModalDoubleFacedCard parentCard, SpellAbilityType spellAbilityType
+            String costs, SpellAbilityType spellAbilityType
+    ) {
+        this(
+                ownerId, setInfo,
+                cardSuperTypes, cardTypes, cardSubTypes,
+                costs, spellAbilityType, ""
+        );
+    }
+
+    public DoubleFacedCardHalfImpl(
+            UUID ownerId, CardSetInfo setInfo,
+            SuperType[] cardSuperTypes, CardType[] cardTypes, SubType[] cardSubTypes,
+            String costs, SpellAbilityType spellAbilityType, String colors
     ) {
         super(ownerId, setInfo, cardTypes, costs, spellAbilityType);
         this.supertype.addAll(Arrays.asList(cardSuperTypes));
         this.subtype.addAll(Arrays.asList(cardSubTypes));
-        this.parentCard = parentCard;
+        this.color.addColor(new ObjectColor(colors));
     }
 
-    public ModalDoubleFacedCardHalfImpl(final ModalDoubleFacedCardHalfImpl card) {
+    public DoubleFacedCardHalfImpl(final DoubleFacedCardHalfImpl card) {
         super(card);
         this.parentCard = card.parentCard;
     }
@@ -65,7 +78,7 @@ public class ModalDoubleFacedCardHalfImpl extends CardImpl implements ModalDoubl
     }
 
     @Override
-    public ModalDoubleFacedCard getMainCard() {
+    public DoubleFacedCard getMainCard() {
         return parentCard;
     }
 
@@ -77,23 +90,18 @@ public class ModalDoubleFacedCardHalfImpl extends CardImpl implements ModalDoubl
     }
 
     @Override
-    public ModalDoubleFacedCardHalfImpl copy() {
-        return new ModalDoubleFacedCardHalfImpl(this);
+    public DoubleFacedCardHalfImpl copy() {
+        return new DoubleFacedCardHalfImpl(this);
     }
 
     @Override
-    public void setParentCard(ModalDoubleFacedCard card) {
-        this.parentCard = card;
+    public void setParentCard(DoubleFacedCard card) {
+        this.parentCard = (DoubleFacedCard) card;
     }
 
     @Override
-    public ModalDoubleFacedCard getParentCard() {
+    public DoubleFacedCard getParentCard() {
         return this.parentCard;
-    }
-
-    @Override
-    public void setPT(int power, int toughness) {
-        this.setPT(new MageInt(power), new MageInt(toughness));
     }
 
     @Override

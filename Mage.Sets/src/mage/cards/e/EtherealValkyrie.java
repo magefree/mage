@@ -14,7 +14,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.ModalDoubleFacedCard;
-import mage.cards.ModalDoubleFacedCardHalf;
+import mage.cards.DoubleFacedCardHalf;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -102,11 +102,11 @@ class EtherealValkyrieEffect extends OneShotEffect {
             game.getState().setValue(exileCard.getMainCard().getId().toString() + "Foretell Split Cost", rightHalfCost);
             foretellAbility = new ForetellAbility(exileCard, leftHalfCost, rightHalfCost);
         } else if (exileCard instanceof ModalDoubleFacedCard) {
-            ModalDoubleFacedCardHalf leftHalfCard = ((ModalDoubleFacedCard) exileCard).getLeftHalfCard();
+            DoubleFacedCardHalf leftHalfCard = ((ModalDoubleFacedCard) exileCard).getLeftHalfCard();
             if (!leftHalfCard.isLand(game)) {  // Only MDFC cards with a left side a land have a land on the right side too
                 String leftHalfCost = CardUtil.reduceCost(leftHalfCard.getManaCost(), 2).getText();
                 game.getState().setValue(exileCard.getMainCard().getId().toString() + "Foretell Cost", leftHalfCost);
-                ModalDoubleFacedCardHalf rightHalfCard = ((ModalDoubleFacedCard) exileCard).getRightHalfCard();
+                DoubleFacedCardHalf rightHalfCard = ((ModalDoubleFacedCard) exileCard).getRightHalfCard();
                 if (rightHalfCard.isLand(game)) {
                     foretellAbility = new ForetellAbility(exileCard, leftHalfCost);
                 } else {

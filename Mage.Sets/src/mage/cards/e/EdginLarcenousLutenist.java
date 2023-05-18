@@ -87,12 +87,12 @@ class EdginLarcenousLutenistEffect extends ContinuousEffectImpl {
                 String rightHalfCost = CardUtil.reduceCost(((SplitCard) card).getRightHalfCard().getManaCost(), 2).getText();
                 foretellAbility = new ForetellAbility(card, leftHalfCost, rightHalfCost);
             } else if (card instanceof ModalDoubleFacedCard) {
-                ModalDoubleFacedCardHalf leftHalfCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
+                DoubleFacedCardHalf leftHalfCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
                 // If front side of MDFC is land, do nothing as Dream Devourer does not apply to lands
                 // MDFC cards in hand are considered lands if front side is land
                 if (!leftHalfCard.isLand(game)) {
                     String leftHalfCost = CardUtil.reduceCost(leftHalfCard.getManaCost(), 2).getText();
-                    ModalDoubleFacedCardHalf rightHalfCard = ((ModalDoubleFacedCard) card).getRightHalfCard();
+                    DoubleFacedCardHalf rightHalfCard = ((ModalDoubleFacedCard) card).getRightHalfCard();
                     if (rightHalfCard.isLand(game)) {
                         foretellAbility = new ForetellAbility(card, leftHalfCost);
                     } else {

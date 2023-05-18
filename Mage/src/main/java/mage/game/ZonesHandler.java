@@ -83,11 +83,11 @@ public final class ZonesHandler {
             ZoneChangeInfo info = itr.next();
             if (info.event.getToZone().equals(Zone.BATTLEFIELD)) {
                 Card card = game.getCard(info.event.getTargetId());
-                if (card instanceof ModalDoubleFacedCard || card instanceof ModalDoubleFacedCardHalf) {
+                if (card instanceof ModalDoubleFacedCard || card instanceof DoubleFacedCardHalf) {
                     boolean forceToMainSide = false;
 
                     // if effect put half mdf card to battlefield then it must be the main side only (example: return targeted half card to battle)
-                    if (card instanceof ModalDoubleFacedCardHalf && !source.getAbilityType().isPlayCardAbility()) {
+                    if (card instanceof DoubleFacedCardHalf && !source.getAbilityType().isPlayCardAbility()) {
                         forceToMainSide = true;
                     }
 
@@ -149,7 +149,7 @@ public final class ZonesHandler {
                 cardsToMove = ((MeldCard) targetCard).getHalves();
                 cardsToUpdate.get(toZone).addAll(cardsToMove);
             } else if (targetCard instanceof ModalDoubleFacedCard
-                    || targetCard instanceof ModalDoubleFacedCardHalf) {
+                    || targetCard instanceof DoubleFacedCardHalf) {
                 // mdf cards must be moved as single object, but each half must be updated separately
                 ModalDoubleFacedCard mdfCard = (ModalDoubleFacedCard) targetCard.getMainCard();
                 cardsToMove = new CardsImpl(mdfCard);
