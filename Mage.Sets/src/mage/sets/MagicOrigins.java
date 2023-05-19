@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author fireshoes
  */
 public final class MagicOrigins extends ExpansionSet {
@@ -33,6 +32,7 @@ public final class MagicOrigins extends ExpansionSet {
         this.ratioBoosterMythic = 8;
         this.numBoosterDoubleFaced = -1;
         this.maxCardNumberInBooster = 272;
+
         cards.add(new SetCardInfo("Abbot of Keral Keep", 127, Rarity.RARE, mage.cards.a.AbbotOfKeralKeep.class));
         cards.add(new SetCardInfo("Acolyte of the Inferno", 128, Rarity.UNCOMMON, mage.cards.a.AcolyteOfTheInferno.class));
         cards.add(new SetCardInfo("Act of Treason", 129, Rarity.COMMON, mage.cards.a.ActOfTreason.class));
@@ -72,7 +72,6 @@ public final class MagicOrigins extends ExpansionSet {
         cards.add(new SetCardInfo("Caves of Koilos", 245, Rarity.RARE, mage.cards.c.CavesOfKoilos.class));
         cards.add(new SetCardInfo("Celestial Flare", 8, Rarity.COMMON, mage.cards.c.CelestialFlare.class));
         cards.add(new SetCardInfo("Chandra, Fire of Kaladesh", 135, Rarity.MYTHIC, mage.cards.c.ChandraFireOfKaladesh.class));
-        cards.add(new SetCardInfo("Chandra, Roaring Flame", 135, Rarity.MYTHIC, mage.cards.c.ChandraRoaringFlame.class));
         cards.add(new SetCardInfo("Chandra's Fury", 136, Rarity.COMMON, mage.cards.c.ChandrasFury.class));
         cards.add(new SetCardInfo("Chandra's Ignition", 137, Rarity.RARE, mage.cards.c.ChandrasIgnition.class));
         cards.add(new SetCardInfo("Charging Griffin", 9, Rarity.COMMON, mage.cards.c.ChargingGriffin.class));
@@ -133,7 +132,6 @@ public final class MagicOrigins extends ExpansionSet {
         cards.add(new SetCardInfo("Gather the Pack", 178, Rarity.UNCOMMON, mage.cards.g.GatherThePack.class));
         cards.add(new SetCardInfo("Ghirapur Aether Grid", 148, Rarity.UNCOMMON, mage.cards.g.GhirapurAetherGrid.class));
         cards.add(new SetCardInfo("Ghirapur Gearcrafter", 149, Rarity.COMMON, mage.cards.g.GhirapurGearcrafter.class));
-        cards.add(new SetCardInfo("Gideon, Battle-Forged", 23, Rarity.MYTHIC, mage.cards.g.GideonBattleForged.class));
         cards.add(new SetCardInfo("Gideon's Phalanx", 14, Rarity.RARE, mage.cards.g.GideonsPhalanx.class));
         cards.add(new SetCardInfo("Gilt-Leaf Winnower", 99, Rarity.RARE, mage.cards.g.GiltLeafWinnower.class));
         cards.add(new SetCardInfo("Gnarlroot Trapper", 100, Rarity.UNCOMMON, mage.cards.g.GnarlrootTrapper.class));
@@ -165,7 +163,6 @@ public final class MagicOrigins extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 259, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 260, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jace's Sanctum", 61, Rarity.RARE, mage.cards.j.JacesSanctum.class));
-        cards.add(new SetCardInfo("Jace, Telepath Unbound", 60, Rarity.MYTHIC, mage.cards.j.JaceTelepathUnbound.class));
         cards.add(new SetCardInfo("Jace, Vryn's Prodigy", 60, Rarity.MYTHIC, mage.cards.j.JaceVrynsProdigy.class));
         cards.add(new SetCardInfo("Jayemdae Tome", 231, Rarity.UNCOMMON, mage.cards.j.JayemdaeTome.class));
         cards.add(new SetCardInfo("Jhessian Thief", 62, Rarity.UNCOMMON, mage.cards.j.JhessianThief.class));
@@ -180,7 +177,6 @@ public final class MagicOrigins extends ExpansionSet {
         cards.add(new SetCardInfo("Languish", 105, Rarity.RARE, mage.cards.l.Languish.class));
         cards.add(new SetCardInfo("Leaf Gilder", 184, Rarity.COMMON, mage.cards.l.LeafGilder.class));
         cards.add(new SetCardInfo("Lightning Javelin", 153, Rarity.COMMON, mage.cards.l.LightningJavelin.class));
-        cards.add(new SetCardInfo("Liliana, Defiant Necromancer", 106, Rarity.MYTHIC, mage.cards.l.LilianaDefiantNecromancer.class));
         cards.add(new SetCardInfo("Liliana, Heretical Healer", 106, Rarity.MYTHIC, mage.cards.l.LilianaHereticalHealer.class));
         cards.add(new SetCardInfo("Llanowar Empath", 185, Rarity.COMMON, mage.cards.l.LlanowarEmpath.class));
         cards.add(new SetCardInfo("Llanowar Wastes", 248, Rarity.RARE, mage.cards.l.LlanowarWastes.class));
@@ -210,7 +206,6 @@ public final class MagicOrigins extends ExpansionSet {
         cards.add(new SetCardInfo("Negate", 65, Rarity.COMMON, mage.cards.n.Negate.class));
         cards.add(new SetCardInfo("Nightmare", 282, Rarity.RARE, mage.cards.n.Nightmare.class));
         cards.add(new SetCardInfo("Nightsnare", 111, Rarity.COMMON, mage.cards.n.Nightsnare.class));
-        cards.add(new SetCardInfo("Nissa, Sage Animist", 189, Rarity.MYTHIC, mage.cards.n.NissaSageAnimist.class));
         cards.add(new SetCardInfo("Nissa's Pilgrimage", 190, Rarity.COMMON, mage.cards.n.NissasPilgrimage.class));
         cards.add(new SetCardInfo("Nissa's Revelation", 191, Rarity.RARE, mage.cards.n.NissasRevelation.class));
         cards.add(new SetCardInfo("Nissa, Vastwood Seer", 189, Rarity.MYTHIC, mage.cards.n.NissaVastwoodSeer.class));

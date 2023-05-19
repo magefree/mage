@@ -42,7 +42,6 @@ public class IxalanPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Captivating Crew", "137s", Rarity.RARE, mage.cards.c.CaptivatingCrew.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Carnage Tyrant", "179p", Rarity.MYTHIC, mage.cards.c.CarnageTyrant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Carnage Tyrant", "179s", Rarity.MYTHIC, mage.cards.c.CarnageTyrant.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Conqueror's Foothold", "234s", Rarity.RARE, mage.cards.c.ConquerorsFoothold.class));
         cards.add(new SetCardInfo("Conqueror's Galleon", "234s", Rarity.RARE, mage.cards.c.ConquerorsGalleon.class));
         cards.add(new SetCardInfo("Daring Saboteur", "49s", Rarity.RARE, mage.cards.d.DaringSaboteur.class));
         cards.add(new SetCardInfo("Deadeye Tracker", "99p", Rarity.RARE, mage.cards.d.DeadeyeTracker.class, NON_FULL_USE_VARIOUS));

@@ -31,7 +31,6 @@ public final class FromTheVaultTransform extends ExpansionSet {
         cards.add(new SetCardInfo("Bruna, the Fading Light", "5a", Rarity.MYTHIC, mage.cards.b.BrunaTheFadingLight.class));
         cards.add(new SetCardInfo("Brisela, Voice of Nightmares", "5b", Rarity.MYTHIC, mage.cards.b.BriselaVoiceOfNightmares.class));
         cards.add(new SetCardInfo("Chandra, Fire of Kaladesh", 6, Rarity.MYTHIC, mage.cards.c.ChandraFireOfKaladesh.class));
-        cards.add(new SetCardInfo("Chandra, Roaring Flame", 6, Rarity.MYTHIC, mage.cards.c.ChandraRoaringFlame.class));
         cards.add(new SetCardInfo("Delver of Secrets", 7, Rarity.MYTHIC, mage.cards.d.DelverOfSecrets.class));
         cards.add(new SetCardInfo("Insectile Aberration", 7, Rarity.MYTHIC, mage.cards.i.InsectileAberration.class));
         cards.add(new SetCardInfo("Elbrus, the Binding Blade", 8, Rarity.MYTHIC, mage.cards.e.ElbrusTheBindingBlade.class));
@@ -41,12 +40,8 @@ public final class FromTheVaultTransform extends ExpansionSet {
         cards.add(new SetCardInfo("Gisela, the Broken Blade", 10, Rarity.MYTHIC, mage.cards.g.GiselaTheBrokenBlade.class));
         cards.add(new SetCardInfo("Huntmaster of the Fells", 11, Rarity.MYTHIC, mage.cards.h.HuntmasterOfTheFells.class));
         cards.add(new SetCardInfo("Jace, Vryn's Prodigy", 12, Rarity.MYTHIC, mage.cards.j.JaceVrynsProdigy.class));
-        cards.add(new SetCardInfo("Jace, Telepath Unbound", 12, Rarity.MYTHIC, mage.cards.j.JaceTelepathUnbound.class));
         cards.add(new SetCardInfo("Kytheon, Hero of Akros", 13, Rarity.MYTHIC, mage.cards.k.KytheonHeroOfAkros.class));
-        cards.add(new SetCardInfo("Gideon, Battle-Forged", 13, Rarity.MYTHIC, mage.cards.g.GideonBattleForged.class));
         cards.add(new SetCardInfo("Liliana, Heretical Healer", 14, Rarity.MYTHIC, mage.cards.l.LilianaHereticalHealer.class));
-        cards.add(new SetCardInfo("Liliana, Defiant Necromancer", 14, Rarity.MYTHIC, mage.cards.l.LilianaDefiantNecromancer.class));
         cards.add(new SetCardInfo("Nissa, Vastwood Seer", 15, Rarity.MYTHIC, mage.cards.n.NissaVastwoodSeer.class));
-        cards.add(new SetCardInfo("Nissa, Sage Animist", 15, Rarity.MYTHIC, mage.cards.n.NissaSageAnimist.class));
     }
 }

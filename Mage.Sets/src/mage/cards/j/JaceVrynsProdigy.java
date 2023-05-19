@@ -1,45 +1,69 @@
-
 package mage.cards.j;
 
-import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.LoyaltyAbility;
 import mage.abilities.Pronoun;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.Effect;
+import mage.abilities.effects.CastCardFromGraveyardThenExileItEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.effects.common.ExileAndReturnSourceEffect;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
+import mage.abilities.effects.common.GetEmblemEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
+import mage.filter.common.FilterInstantOrSorceryCard;
+import mage.game.command.emblems.JaceTelepathUnboundEmblem;
+import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
-public final class JaceVrynsProdigy extends CardImpl {
+public final class JaceVrynsProdigy extends TransformingDoubleFacedCard {
 
     public JaceVrynsProdigy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WIZARD);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(2);
-
-        this.secondSideCardClazz = mage.cards.j.JaceTelepathUnbound.class;
+        super(
+                ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WIZARD}, "{1}{U}",
+                "Jace, Telepath Unbound",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.PLANESWALKER}, new SubType[]{SubType.JACE}, "U"
+        );
+        this.getLeftHalfCard().setPT(0, 2);
+        this.getRightHalfCard().setStartingLoyalty(5);
 
         // {T}: Draw a card, then discard a card. If there are five or more cards in your graveyard, exile Jace, Vryn's Prodigy, then return him to the battefield transformed under his owner's control.
-        this.addAbility(new TransformAbility());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(1, 1), new TapSourceCost());
-        Effect effect = new ConditionalOneShotEffect(new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED,Pronoun.HE), new CardsInControllerGraveyardCondition(5));
-        ability.addEffect(effect);
-        this.addAbility(ability);
+        Ability ability = new SimpleActivatedAbility(
+                new DrawDiscardControllerEffect(1, 1), new TapSourceCost()
+        );
+        ability.addEffect(new ConditionalOneShotEffect(
+                new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED, Pronoun.HE),
+                new CardsInControllerGraveyardCondition(5)
+        ));
+        this.getLeftHalfCard().addAbility(ability);
 
+        // Jace, Telepath Unbound
+        // +1: Up to one target creature gets -2/-0 until your next turn.
+        ability = new LoyaltyAbility(new BoostTargetEffect(
+                -2, 0, Duration.UntilYourNextTurn
+        ).setText("Up to one target creature gets -2/-0 until your next turn"), 1);
+        ability.addTarget(new TargetCreaturePermanent(0, 1));
+        this.getRightHalfCard().addAbility(ability);
+
+        // -3: You may cast target instant or sorcery card from your graveyard this turn. If that card would be put into your graveyard this turn, exile it instead.
+        ability = new LoyaltyAbility(new CastCardFromGraveyardThenExileItEffect()
+                .setText("You may cast target instant or sorcery card from your graveyard this turn. " +
+                        "If that card would be put into your graveyard this turn, exile it instead"), -3);
+        ability.addTarget(new TargetCardInYourGraveyard(new FilterInstantOrSorceryCard()));
+        this.getRightHalfCard().addAbility(ability);
+
+        // −9: You get an emblem with "Whenever you cast a spell, target opponent mills five cards."
+        this.getRightHalfCard().addAbility(new LoyaltyAbility(new GetEmblemEffect(new JaceTelepathUnboundEmblem()), -9));
     }
 
     private JaceVrynsProdigy(final JaceVrynsProdigy card) {

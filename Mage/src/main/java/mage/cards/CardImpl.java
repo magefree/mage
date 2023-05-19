@@ -57,6 +57,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public CardImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs) {
         this(ownerId, setInfo, cardTypes, costs, SpellAbilityType.BASE);
     }
+
     public CardImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs, SpellAbilityType spellAbilityType) {
         this(ownerId, setInfo.getName());
 
@@ -322,11 +323,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 }
             }
         }
-    }
-
-    protected void addAbility(Ability ability, Watcher watcher) {
-        addAbility(ability);
-        ability.addWatcher(watcher);
     }
 
     public void replaceSpellAbility(SpellAbility newAbility) {
