@@ -1,20 +1,27 @@
 package mage.cards.t;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.DayboundAbility;
-import mage.cards.CardImpl;
+import mage.abilities.keyword.NightboundAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -29,7 +36,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class TovolarDireOverlord extends CardImpl {
+public final class TovolarDireOverlord extends TransformingDoubleFacedCard {
 
     private static final FilterPermanent filter = new FilterControlledPermanent("a Wolf or Werewolf you control");
 
@@ -44,23 +51,23 @@ public final class TovolarDireOverlord extends CardImpl {
     private static final Hint hint = new ValueHint("Wolves and Werewolves you control", new PermanentsOnBattlefieldCount(filter));
 
     public TovolarDireOverlord(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");
-
-        this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WEREWOLF);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-        this.secondSideCardClazz = mage.cards.t.TovolarTheMidnightScourge.class;
+        super(
+                ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WEREWOLF}, "{1}{R}{G}",
+                "Tovolar, the Midnight Scourge",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.WEREWOLF}, "GR"
+        );
+        this.getLeftHalfCard().setPT(3, 3);
+        this.getRightHalfCard().setPT(4, 4);
 
         // Whenever a Wolf or Werewolf you control deals combat damage to a player, draw a card.
-        this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
+        this.getLeftHalfCard().addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), filter,
                 false, SetTargetPointer.NONE, true
         ));
 
         // At the beginning of your upkeep, if you control three or more Wolves and/or Werewolves, it becomes night. Then transform any number of Human Werewolves you control.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
+        this.getLeftHalfCard().addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
                         new TovolarDireOverlordEffect(), TargetController.YOU, false
                 ), condition, "At the beginning of your upkeep, if you control three or more Wolves " +
@@ -68,7 +75,27 @@ public final class TovolarDireOverlord extends CardImpl {
         ));
 
         // Daybound
-        this.addAbility(new DayboundAbility());
+        this.getLeftHalfCard().addAbility(new DayboundAbility());
+
+        // Tovolar, the Midnight Scourge
+        // Whenever a Wolf or Werewolf you control deals combat damage to a player, draw a card.
+        this.getRightHalfCard().addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
+                new DrawCardSourceControllerEffect(1), filter,
+                false, SetTargetPointer.NONE, true
+        ));
+
+        // {X}{R}{G}: Target Wolf or Werewolf you control gets +X/+0 and gains trample until end of turn.
+        Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(
+                TrampleAbility.getInstance(), Duration.EndOfTurn
+        ).setText("Target Wolf or Werewolf you control gets +X/+0"), new ManaCostsImpl<>("{X}{R}{G}"));
+        ability.addEffect(new BoostTargetEffect(
+                ManacostVariableValue.REGULAR, StaticValue.get(0), Duration.EndOfTurn
+        ).setText("and gains trample until end of turn"));
+        ability.addTarget(new TargetPermanent(filter));
+        this.getRightHalfCard().addAbility(ability);
+
+        // Nightbound
+        this.getRightHalfCard().addAbility(new NightboundAbility());
     }
 
     private TovolarDireOverlord(final TovolarDireOverlord card) {

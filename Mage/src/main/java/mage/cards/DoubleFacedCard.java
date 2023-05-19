@@ -34,8 +34,10 @@ public abstract class DoubleFacedCard extends CardImpl implements CardWithHalves
         super(ownerId, setInfo, cardTypes, costs, spellAbilityType);
         this.leftHalfCard = leftHalfCard;
         this.leftHalfCard.setParentCard(this);
+        this.leftHalfCard.setIsFront(true);
         this.rightHalfCard = rightHalfCard;
         this.rightHalfCard.setParentCard(this);
+        this.rightHalfCard.setIsFront(false);
     }
 
     protected DoubleFacedCard(final DoubleFacedCard card) {

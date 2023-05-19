@@ -1713,11 +1713,19 @@ public class VerifyCardDataTest {
         }
 
         // special check: Werewolves front ability should only be on front and vice versa
-        if (card.getAbilities().containsClass(WerewolfFrontTriggeredAbility.class) && card.isNightCard()) {
+        if (card.getAbilities().containsClass(WerewolfFrontTriggeredAbility.class) && !((DoubleFacedCardHalf) card).isFront()) {
             fail(card, "abilities", "card is a back face werewolf with a front face ability");
         }
-        if (card.getAbilities().containsClass(WerewolfBackTriggeredAbility.class) && !card.isNightCard()) {
+        if (card.getAbilities().containsClass(WerewolfBackTriggeredAbility.class) && ((DoubleFacedCardHalf) card).isFront()) {
             fail(card, "abilities", "card is a front face werewolf with a back face ability");
+        }
+
+        // special check: Daybound/Nightbound should only be on front/back
+        if (card.getAbilities().containsClass(DayboundAbility.class) && !((DoubleFacedCardHalf) card).isFront()) {
+            fail(card, "abilities", "card has daybound on the back face");
+        }
+        if (card.getAbilities().containsClass(NightboundAbility.class) && ((DoubleFacedCardHalf) card).isFront()) {
+            fail(card, "abilities", "card has nightbound on the front face");
         }
 
         // special check: transform ability in TDFC should only be on front and vice versa

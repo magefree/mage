@@ -15,4 +15,8 @@ public interface DoubleFacedCardHalf extends SubCard<DoubleFacedCard> {
     }
 
     void setPT(MageInt power, MageInt toughness);
+
+    void setIsFront(boolean isFront);
+
+    boolean isFront();
 }

@@ -554,7 +554,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Hoodwink", 62449, Rarity.COMMON, mage.cards.h.Hoodwink.class));
         cards.add(new SetCardInfo("Hordeling Outburst", 55783, Rarity.UNCOMMON, mage.cards.h.HordelingOutburst.class));
         cards.add(new SetCardInfo("Hostage Taker", 69987, Rarity.RARE, mage.cards.h.HostageTaker.class));
-        cards.add(new SetCardInfo("Howlpack Alpha", 42866, Rarity.RARE, mage.cards.h.HowlpackAlpha.class));
         cards.add(new SetCardInfo("Huatli, the Sun's Heart", 72241, Rarity.RARE, mage.cards.h.HuatliTheSunsHeart.class));
         cards.add(new SetCardInfo("Hydra Broodmaster", 53850, Rarity.RARE, mage.cards.h.HydraBroodmaster.class));
         cards.add(new SetCardInfo("Hydroblast", 69979, Rarity.COMMON, mage.cards.h.Hydroblast.class));
@@ -1216,7 +1215,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Tormented Hero", 51934, Rarity.UNCOMMON, mage.cards.t.TormentedHero.class));
         cards.add(new SetCardInfo("Tormented Soul", 41652, Rarity.COMMON, mage.cards.t.TormentedSoul.class));
         cards.add(new SetCardInfo("Tormod's Crypt", 31427, Rarity.UNCOMMON, mage.cards.t.TormodsCrypt.class));
-        cards.add(new SetCardInfo("Tovolar's Magehunter", 43507, Rarity.RARE, mage.cards.t.TovolarsMagehunter.class));
         cards.add(new SetCardInfo("Tradewind Rider", 36048, Rarity.RARE, mage.cards.t.TradewindRider.class));
         cards.add(new SetCardInfo("Transmute Artifact", 65644, Rarity.RARE, mage.cards.t.TransmuteArtifact.class));
         cards.add(new SetCardInfo("Traxos, Scourge of Kroog", 69242, Rarity.RARE, mage.cards.t.TraxosScourgeOfKroog.class));

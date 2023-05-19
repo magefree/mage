@@ -1,53 +1,72 @@
 package mage.cards.k;
 
-import java.util.Set;
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SagaAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileSagaAndReturnTransformedEffect;
-import mage.abilities.keyword.TransformAbility;
-import mage.constants.*;
-import mage.cards.CardImpl;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
+import mage.watchers.common.DamagedByControlledWatcher;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
- *
  * @author weirddan455
  */
-public final class KumanoFacesKakkazan extends CardImpl {
+public final class KumanoFacesKakkazan extends TransformingDoubleFacedCard {
 
     public KumanoFacesKakkazan(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}");
-
-        this.subtype.add(SubType.SAGA);
-        this.secondSideCardClazz = mage.cards.e.EtchingOfKumano.class;
+        super(
+                ownerId, setInfo,
+                new CardType[]{CardType.ENCHANTMENT}, new SubType[]{SubType.SAGA}, "{R}",
+                "Etching of Kumano",
+                new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.SHAMAN}, "R"
+        );
+        this.getRightHalfCard().setPT(2, 2);
 
         // (As this Saga enters and after your draw step, add a lore counter.)
-        SagaAbility sagaAbility = new SagaAbility(this);
+        SagaAbility sagaAbility = new SagaAbility(this.getLeftHalfCard());
 
         // I — Kumano Faces Kakkazan deals 1 damage to each opponent and each planeswalker they control.
-        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, new KumanoFacesKakkazanDamageEffect());
+        sagaAbility.addChapterEffect(
+                this.getLeftHalfCard(), SagaChapter.CHAPTER_I,
+                new KumanoFacesKakkazanDamageEffect()
+        );
 
         // II — When you cast your next creature spell this turn, that creature enters the battlefield with an additional +1/+1 counter on it.
-        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_II, new CreateDelayedTriggeredAbilityEffect(new KumanoFacesKakkazanTriggeredAbility()));
+        sagaAbility.addChapterEffect(
+                this.getLeftHalfCard(), SagaChapter.CHAPTER_II,
+                new CreateDelayedTriggeredAbilityEffect(new KumanoFacesKakkazanTriggeredAbility())
+        );
 
         // III — Exile this Saga, then return it to the battlefield transformed under your control.
-        this.addAbility(new TransformAbility());
-        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new ExileSagaAndReturnTransformedEffect());
+        sagaAbility.addChapterEffect(
+                this.getLeftHalfCard(), SagaChapter.CHAPTER_III,
+                new ExileSagaAndReturnTransformedEffect()
+        );
+        sagaAbility.addWatcher(new DamagedByControlledWatcher());
+        this.getLeftHalfCard().addAbility(sagaAbility);
 
-        this.addAbility(sagaAbility);
+        // Haste
+        this.getRightHalfCard().addAbility(HasteAbility.getInstance());
+
+        // If a creature dealt damage this turn by a source you controlled would die, exile it instead.
+        this.getRightHalfCard().addAbility(new SimpleStaticAbility(new EtchingOfKumanoReplacementEffect()));
     }
 
     private KumanoFacesKakkazan(final KumanoFacesKakkazan card) {
@@ -170,6 +189,46 @@ class KumanoFacesKakkazanCounterEffect extends ReplacementEffectImpl {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         if (creature != null) {
             creature.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game, event.getAppliedEffects());
+        }
+        return false;
+    }
+}
+
+class EtchingOfKumanoReplacementEffect extends ReplacementEffectImpl {
+
+    public EtchingOfKumanoReplacementEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Exile);
+        this.staticText = "If a creature dealt damage this turn by a source you controlled would die, exile it instead";
+    }
+
+    private EtchingOfKumanoReplacementEffect(final EtchingOfKumanoReplacementEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public EtchingOfKumanoReplacementEffect copy() {
+        return new EtchingOfKumanoReplacementEffect(this);
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
+        return false;
+    }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        ZoneChangeEvent zce = (ZoneChangeEvent) event;
+        if (zce.isDiesEvent()) {
+            DamagedByControlledWatcher watcher = game.getState().getWatcher(DamagedByControlledWatcher.class, source.getControllerId());
+            if (watcher != null) {
+                return watcher.wasDamaged(zce.getTarget(), game);
+            }
         }
         return false;
     }

@@ -60,7 +60,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Avabruck Caretaker", 187, Rarity.MYTHIC, mage.cards.a.AvabruckCaretaker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avabruck Caretaker", 384, Rarity.MYTHIC, mage.cards.a.AvabruckCaretaker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ballista Watcher", 143, Rarity.UNCOMMON, mage.cards.b.BallistaWatcher.class));
-        cards.add(new SetCardInfo("Ballista Wielder", 143, Rarity.UNCOMMON, mage.cards.b.BallistaWielder.class));
         cards.add(new SetCardInfo("Belligerent Guest", 144, Rarity.COMMON, mage.cards.b.BelligerentGuest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Belligerent Guest", 301, Rarity.COMMON, mage.cards.b.BelligerentGuest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Binding Geist", 48, Rarity.COMMON, mage.cards.b.BindingGeist.class));
@@ -89,7 +88,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodvial Purveyor", 290, Rarity.RARE, mage.cards.b.BloodvialPurveyor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodvial Purveyor", 98, Rarity.RARE, mage.cards.b.BloodvialPurveyor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloody Betrayal", 147, Rarity.COMMON, mage.cards.b.BloodyBetrayal.class));
-        cards.add(new SetCardInfo("Blossom-Clad Werewolf", 226, Rarity.COMMON, mage.cards.b.BlossomCladWerewolf.class));
         cards.add(new SetCardInfo("Boarded Window", 253, Rarity.UNCOMMON, mage.cards.b.BoardedWindow.class));
         cards.add(new SetCardInfo("Bramble Armor", 188, Rarity.COMMON, mage.cards.b.BrambleArmor.class));
         cards.add(new SetCardInfo("Bramble Wurm", 189, Rarity.UNCOMMON, mage.cards.b.BrambleWurm.class));
@@ -154,8 +152,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Desperate Farmer", 104, Rarity.COMMON, mage.cards.d.DesperateFarmer.class));
         cards.add(new SetCardInfo("Dig Up", 197, Rarity.RARE, mage.cards.d.DigUp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dig Up", 387, Rarity.RARE, mage.cards.d.DigUp.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Dire-Strain Anarchist", 181, Rarity.MYTHIC, mage.cards.d.DireStrainAnarchist.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Dire-Strain Anarchist", 382, Rarity.MYTHIC, mage.cards.d.DireStrainAnarchist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Diregraf Scavenger", 105, Rarity.COMMON, mage.cards.d.DiregrafScavenger.class));
         cards.add(new SetCardInfo("Distracting Geist", 9, Rarity.UNCOMMON, mage.cards.d.DistractingGeist.class));
         cards.add(new SetCardInfo("Diver Skaab", 56, Rarity.UNCOMMON, mage.cards.d.DiverSkaab.class));
@@ -204,7 +200,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Falkenrath Forebear", 334, Rarity.RARE, mage.cards.f.FalkenrathForebear.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fear of Death", 59, Rarity.COMMON, mage.cards.f.FearOfDeath.class));
         cards.add(new SetCardInfo("Fearful Villager", 157, Rarity.COMMON, mage.cards.f.FearfulVillager.class));
-        cards.add(new SetCardInfo("Fearsome Werewolf", 157, Rarity.COMMON, mage.cards.f.FearsomeWerewolf.class));
         cards.add(new SetCardInfo("Fell Stinger", 112, Rarity.UNCOMMON, mage.cards.f.FellStinger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fell Stinger", 406, Rarity.UNCOMMON, mage.cards.f.FellStinger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fierce Retribution", 13, Rarity.COMMON, mage.cards.f.FierceRetribution.class));
@@ -262,8 +257,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Heron-Blessed Geist", 19, Rarity.COMMON, mage.cards.h.HeronBlessedGeist.class));
         cards.add(new SetCardInfo("Hiveheart Shaman", 202, Rarity.RARE, mage.cards.h.HiveheartShaman.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hiveheart Shaman", 390, Rarity.RARE, mage.cards.h.HiveheartShaman.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Hollowhenge Huntmaster", 187, Rarity.MYTHIC, mage.cards.h.HollowhengeHuntmaster.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Hollowhenge Huntmaster", 384, Rarity.MYTHIC, mage.cards.h.HollowhengeHuntmaster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Honeymoon Hearse", 160, Rarity.UNCOMMON, mage.cards.h.HoneymoonHearse.class));
         cards.add(new SetCardInfo("Honored Heirloom", 257, Rarity.COMMON, mage.cards.h.HonoredHeirloom.class));
         cards.add(new SetCardInfo("Hookhand Mariner", 203, Rarity.COMMON, mage.cards.h.HookhandMariner.class));
@@ -271,8 +264,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Hopeful Initiate", 350, Rarity.RARE, mage.cards.h.HopefulInitiate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Howling Moon", 204, Rarity.RARE, mage.cards.h.HowlingMoon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Howling Moon", 391, Rarity.RARE, mage.cards.h.HowlingMoon.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Howlpack Avenger", 162, Rarity.RARE, mage.cards.h.HowlpackAvenger.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Howlpack Avenger", 378, Rarity.RARE, mage.cards.h.HowlpackAvenger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Howlpack Piper", 205, Rarity.RARE, mage.cards.h.HowlpackPiper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Howlpack Piper", 392, Rarity.RARE, mage.cards.h.HowlpackPiper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hullbreaker Horror", 359, Rarity.RARE, mage.cards.h.HullbreakerHorror.class, NON_FULL_USE_VARIOUS));
@@ -281,7 +272,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Ill-Tempered Loner", 162, Rarity.RARE, mage.cards.i.IllTemperedLoner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ill-Tempered Loner", 378, Rarity.RARE, mage.cards.i.IllTemperedLoner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Infestation Expert", 206, Rarity.UNCOMMON, mage.cards.i.InfestationExpert.class));
-        cards.add(new SetCardInfo("Infested Werewolf", 206, Rarity.UNCOMMON, mage.cards.i.InfestedWerewolf.class));
         cards.add(new SetCardInfo("Innocent Traveler", 121, Rarity.UNCOMMON, mage.cards.i.InnocentTraveler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Innocent Traveler", 294, Rarity.UNCOMMON, mage.cards.i.InnocentTraveler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Innocent Traveler", 336, Rarity.UNCOMMON, mage.cards.i.InnocentTraveler.class, NON_FULL_USE_VARIOUS));
@@ -314,7 +304,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Lacerate Flesh", 166, Rarity.COMMON, mage.cards.l.LacerateFlesh.class));
         cards.add(new SetCardInfo("Laid to Rest", 207, Rarity.UNCOMMON, mage.cards.l.LaidToRest.class));
         cards.add(new SetCardInfo("Lambholt Raconteur", 167, Rarity.UNCOMMON, mage.cards.l.LambholtRaconteur.class));
-        cards.add(new SetCardInfo("Lambholt Ravager", 167, Rarity.UNCOMMON, mage.cards.l.LambholtRavager.class));
         cards.add(new SetCardInfo("Lantern Bearer", 66, Rarity.COMMON, mage.cards.l.LanternBearer.class));
         cards.add(new SetCardInfo("Lantern Flare", 23, Rarity.RARE, mage.cards.l.LanternFlare.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lantern Flare", 351, Rarity.RARE, mage.cards.l.LanternFlare.class, NON_FULL_USE_VARIOUS));
@@ -340,7 +329,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Mirrorhall Mimic", 68, Rarity.RARE, mage.cards.m.MirrorhallMimic.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mischievous Catgeist", 69, Rarity.UNCOMMON, mage.cards.m.MischievousCatgeist.class));
         cards.add(new SetCardInfo("Moldgraf Millipede", 209, Rarity.COMMON, mage.cards.m.MoldgrafMillipede.class));
-        cards.add(new SetCardInfo("Moonlit Ambusher", 212, Rarity.UNCOMMON, mage.cards.m.MoonlitAmbusher.class));
         cards.add(new SetCardInfo("Mountain", 274, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 401, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
@@ -395,7 +383,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Retrieve", 215, Rarity.UNCOMMON, mage.cards.r.Retrieve.class));
         cards.add(new SetCardInfo("Revealing Eye", 101, Rarity.RARE, mage.cards.r.RevealingEye.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Revealing Eye", 367, Rarity.RARE, mage.cards.r.RevealingEye.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Riphook Raider", 203, Rarity.COMMON, mage.cards.r.RiphookRaider.class));
         cards.add(new SetCardInfo("Rot-Tide Gargantua", 129, Rarity.COMMON, mage.cards.r.RotTideGargantua.class));
         cards.add(new SetCardInfo("Runebound Wolf", 176, Rarity.UNCOMMON, mage.cards.r.RuneboundWolf.class));
         cards.add(new SetCardInfo("Runo Stromkirk", 246, Rarity.RARE, mage.cards.r.RunoStromkirk.class, NON_FULL_USE_VARIOUS));
@@ -404,7 +391,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Rural Recruit", 216, Rarity.COMMON, mage.cards.r.RuralRecruit.class));
         cards.add(new SetCardInfo("Sanctify", 33, Rarity.COMMON, mage.cards.s.Sanctify.class));
         cards.add(new SetCardInfo("Sanguine Statuette", 177, Rarity.UNCOMMON, mage.cards.s.SanguineStatuette.class));
-        cards.add(new SetCardInfo("Savage Packmate", 234, Rarity.UNCOMMON, mage.cards.s.SavagePackmate.class));
         cards.add(new SetCardInfo("Savior of Ollenbock", 330, Rarity.MYTHIC, mage.cards.s.SaviorOfOllenbock.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Savior of Ollenbock", 34, Rarity.MYTHIC, mage.cards.s.SaviorOfOllenbock.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Savior of Ollenbock", 352, Rarity.MYTHIC, mage.cards.s.SaviorOfOllenbock.class, NON_FULL_USE_VARIOUS));
@@ -506,7 +492,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Weaver of Blossoms", 226, Rarity.COMMON, mage.cards.w.WeaverOfBlossoms.class));
         cards.add(new SetCardInfo("Wedding Announcement", 355, Rarity.RARE, mage.cards.w.WeddingAnnouncement.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wedding Announcement", 45, Rarity.RARE, mage.cards.w.WeddingAnnouncement.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Wedding Crasher", 229, Rarity.UNCOMMON, mage.cards.w.WeddingCrasher.class));
         cards.add(new SetCardInfo("Wedding Festivity", 355, Rarity.RARE, mage.cards.w.WeddingFestivity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wedding Festivity", 45, Rarity.RARE, mage.cards.w.WeddingFestivity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wedding Invitation", 260, Rarity.COMMON, mage.cards.w.WeddingInvitation.class));
@@ -515,15 +500,12 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Welcoming Vampire", 287, Rarity.RARE, mage.cards.w.WelcomingVampire.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Welcoming Vampire", 46, Rarity.RARE, mage.cards.w.WelcomingVampire.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Whispering Wizard", 88, Rarity.UNCOMMON, mage.cards.w.WhisperingWizard.class));
-        cards.add(new SetCardInfo("Wildsong Howler", 205, Rarity.RARE, mage.cards.w.WildsongHowler.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Wildsong Howler", 392, Rarity.RARE, mage.cards.w.WildsongHowler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Winged Portent", 365, Rarity.RARE, mage.cards.w.WingedPortent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Winged Portent", 89, Rarity.RARE, mage.cards.w.WingedPortent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Witch's Web", 227, Rarity.COMMON, mage.cards.w.WitchsWeb.class));
         cards.add(new SetCardInfo("Witness the Future", 90, Rarity.UNCOMMON, mage.cards.w.WitnessTheFuture.class));
         cards.add(new SetCardInfo("Wolf Strike", 228, Rarity.COMMON, mage.cards.w.WolfStrike.class));
         cards.add(new SetCardInfo("Wolfkin Outcast", 229, Rarity.UNCOMMON, mage.cards.w.WolfkinOutcast.class));
-        cards.add(new SetCardInfo("Wrathful Jailbreaker", 184, Rarity.COMMON, mage.cards.w.WrathfulJailbreaker.class));
         cards.add(new SetCardInfo("Wretched Throng", 91, Rarity.COMMON, mage.cards.w.WretchedThrong.class));
     }
 

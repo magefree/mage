@@ -6,9 +6,8 @@ import mage.abilities.effects.common.ExileSagaAndReturnTransformedEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SagaChapter;
 import mage.constants.SubType;
@@ -19,20 +18,23 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class BefriendingTheMoths extends CardImpl {
+public final class BefriendingTheMoths extends TransformingDoubleFacedCard {
 
     public BefriendingTheMoths(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
-
-        this.subtype.add(SubType.SAGA);
-        this.secondSideCardClazz = mage.cards.i.ImperialMoth.class;
+        super(
+                ownerId, setInfo,
+                new CardType[]{CardType.ENCHANTMENT}, new SubType[]{SubType.SAGA}, "{3}{W}",
+                "Imperial Moth",
+                new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, new SubType[]{SubType.INSECT}, "W"
+        );
+        this.getRightHalfCard().setPT(2, 4);
 
         // (As this Saga enters and after your draw step, add a lore counter.)
-        SagaAbility sagaAbility = new SagaAbility(this);
+        SagaAbility sagaAbility = new SagaAbility(this.getLeftHalfCard());
 
         // I, II — Target creature you control gets +1/+1 and gains flying until end of turn.
         sagaAbility.addChapterEffect(
-                this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II,
+                this.getLeftHalfCard(), SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II,
                 new Effects(
                         new BoostTargetEffect(1, 1)
                                 .setText("target creature you control gets +1/+1"),
@@ -42,10 +44,16 @@ public final class BefriendingTheMoths extends CardImpl {
         );
 
         // III — Exile this Saga, then return it to the battlefield transformed under your control.
-        this.addAbility(new TransformAbility());
-        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new ExileSagaAndReturnTransformedEffect());
+        sagaAbility.addChapterEffect(
+                this.getLeftHalfCard(), SagaChapter.CHAPTER_III,
+                new ExileSagaAndReturnTransformedEffect()
+        );
 
-        this.addAbility(sagaAbility);
+        this.getLeftHalfCard().addAbility(sagaAbility);
+
+        // Imperial Moth
+        // Flying
+        this.getRightHalfCard().addAbility(FlyingAbility.getInstance());
     }
 
     private BefriendingTheMoths(final BefriendingTheMoths card) {

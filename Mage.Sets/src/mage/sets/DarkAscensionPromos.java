@@ -25,7 +25,6 @@ public class DarkAscensionPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Mondronen Shaman", "98*", Rarity.RARE, mage.cards.m.MondronenShaman.class));
         cards.add(new SetCardInfo("Ravenous Demon", "71*", Rarity.RARE, mage.cards.r.RavenousDemon.class));
         cards.add(new SetCardInfo("Strangleroot Geist", 127, Rarity.UNCOMMON, mage.cards.s.StranglerootGeist.class));
-        cards.add(new SetCardInfo("Tovolar's Magehunter", "98*", Rarity.RARE, mage.cards.t.TovolarsMagehunter.class));
         cards.add(new SetCardInfo("Zombie Apocalypse", 80, Rarity.RARE, mage.cards.z.ZombieApocalypse.class));
     }
 }

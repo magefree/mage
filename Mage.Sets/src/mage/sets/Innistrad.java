@@ -47,7 +47,6 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Avacynian Priest", 4, Rarity.COMMON, mage.cards.a.AvacynianPriest.class));
         cards.add(new SetCardInfo("Back from the Brink", 44, Rarity.RARE, mage.cards.b.BackFromTheBrink.class));
         cards.add(new SetCardInfo("Balefire Dragon", 129, Rarity.MYTHIC, mage.cards.b.BalefireDragon.class));
-        cards.add(new SetCardInfo("Bane of Hanweir", 145, Rarity.UNCOMMON, mage.cards.b.BaneOfHanweir.class));
         cards.add(new SetCardInfo("Battleground Geist", 45, Rarity.UNCOMMON, mage.cards.b.BattlegroundGeist.class));
         cards.add(new SetCardInfo("Bitterheart Witch", 88, Rarity.UNCOMMON, mage.cards.b.BitterheartWitch.class));
         cards.add(new SetCardInfo("Blasphemous Act", 130, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
@@ -152,8 +151,6 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Hinterland Harbor", 241, Rarity.RARE, mage.cards.h.HinterlandHarbor.class));
         cards.add(new SetCardInfo("Hollowhenge Scavenger", 188, Rarity.UNCOMMON, mage.cards.h.HollowhengeScavenger.class));
         cards.add(new SetCardInfo("Homicidal Brute", 47, Rarity.UNCOMMON, mage.cards.h.HomicidalBrute.class));
-        cards.add(new SetCardInfo("Howlpack Alpha", 193, Rarity.RARE, mage.cards.h.HowlpackAlpha.class));
-        cards.add(new SetCardInfo("Howlpack of Estwald", 209, Rarity.COMMON, mage.cards.h.HowlpackOfEstwald.class));
         cards.add(new SetCardInfo("Hysterical Blindness", 59, Rarity.COMMON, mage.cards.h.HystericalBlindness.class));
         cards.add(new SetCardInfo("Infernal Plunge", 148, Rarity.COMMON, mage.cards.i.InfernalPlunge.class));
         cards.add(new SetCardInfo("Inquisitor's Flail", 227, Rarity.UNCOMMON, mage.cards.i.InquisitorsFlail.class));
@@ -162,7 +159,6 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Intangible Virtue", 19, Rarity.UNCOMMON, mage.cards.i.IntangibleVirtue.class));
         cards.add(new SetCardInfo("Into the Maw of Hell", 150, Rarity.UNCOMMON, mage.cards.i.IntoTheMawOfHell.class));
         cards.add(new SetCardInfo("Invisible Stalker", 60, Rarity.UNCOMMON, mage.cards.i.InvisibleStalker.class));
-        cards.add(new SetCardInfo("Ironfang", 168, Rarity.COMMON, mage.cards.i.Ironfang.class));
         cards.add(new SetCardInfo("Island", 253, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 254, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 255, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
@@ -171,7 +167,6 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Kessig Wolf Run", 243, Rarity.RARE, mage.cards.k.KessigWolfRun.class));
         cards.add(new SetCardInfo("Kessig Wolf", 151, Rarity.COMMON, mage.cards.k.KessigWolf.class));
         cards.add(new SetCardInfo("Kindercatch", 190, Rarity.COMMON, mage.cards.k.Kindercatch.class));
-        cards.add(new SetCardInfo("Krallenhorde Wantons", 185, Rarity.COMMON, mage.cards.k.KrallenhordeWantons.class));
         cards.add(new SetCardInfo("Kruin Outlaw", 152, Rarity.RARE, mage.cards.k.KruinOutlaw.class));
         cards.add(new SetCardInfo("Laboratory Maniac", 61, Rarity.RARE, mage.cards.l.LaboratoryManiac.class));
         cards.add(new SetCardInfo("Lantern Spirit", 62, Rarity.UNCOMMON, mage.cards.l.LanternSpirit.class));
@@ -192,7 +187,6 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Mayor of Avabruck", 193, Rarity.RARE, mage.cards.m.MayorOfAvabruck.class));
         cards.add(new SetCardInfo("Memory's Journey", 66, Rarity.UNCOMMON, mage.cards.m.MemorysJourney.class));
         cards.add(new SetCardInfo("Mentor of the Meek", 21, Rarity.RARE, mage.cards.m.MentorOfTheMeek.class));
-        cards.add(new SetCardInfo("Merciless Predator", 159, Rarity.UNCOMMON, mage.cards.m.MercilessPredator.class));
         cards.add(new SetCardInfo("Midnight Haunting", 22, Rarity.UNCOMMON, mage.cards.m.MidnightHaunting.class));
         cards.add(new SetCardInfo("Mikaeus, the Lunarch", 23, Rarity.MYTHIC, mage.cards.m.MikaeusTheLunarch.class));
         cards.add(new SetCardInfo("Mindshrieker", 67, Rarity.RARE, mage.cards.m.Mindshrieker.class));
@@ -215,7 +209,6 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Night Revelers", 153, Rarity.COMMON, mage.cards.n.NightRevelers.class));
         cards.add(new SetCardInfo("Night Terrors", 111, Rarity.COMMON, mage.cards.n.NightTerrors.class));
         cards.add(new SetCardInfo("Nightbird's Clutches", 154, Rarity.COMMON, mage.cards.n.NightbirdsClutches.class));
-        cards.add(new SetCardInfo("Nightfall Predator", 176, Rarity.RARE, mage.cards.n.NightfallPredator.class));
         cards.add(new SetCardInfo("Olivia Voldaren", 215, Rarity.MYTHIC, mage.cards.o.OliviaVoldaren.class));
         cards.add(new SetCardInfo("One-Eyed Scarecrow", 230, Rarity.COMMON, mage.cards.o.OneEyedScarecrow.class));
         cards.add(new SetCardInfo("Orchard Spirit", 198, Rarity.COMMON, mage.cards.o.OrchardSpirit.class));
@@ -231,7 +224,6 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Rage Thrower", 157, Rarity.UNCOMMON, mage.cards.r.RageThrower.class));
         cards.add(new SetCardInfo("Rakish Heir", 158, Rarity.UNCOMMON, mage.cards.r.RakishHeir.class));
         cards.add(new SetCardInfo("Rally the Peasants", 28, Rarity.UNCOMMON, mage.cards.r.RallyThePeasants.class));
-        cards.add(new SetCardInfo("Rampaging Werewolf", 165, Rarity.COMMON, mage.cards.r.RampagingWerewolf.class));
         cards.add(new SetCardInfo("Ranger's Guile", 201, Rarity.COMMON, mage.cards.r.RangersGuile.class));
         cards.add(new SetCardInfo("Reaper from the Abyss", 112, Rarity.MYTHIC, mage.cards.r.ReaperFromTheAbyss.class));
         cards.add(new SetCardInfo("Rebuke", 29, Rarity.COMMON, mage.cards.r.Rebuke.class));
@@ -280,7 +272,6 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 256, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 257, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 258, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Terror of Kruin Pass", 152, Rarity.RARE, mage.cards.t.TerrorOfKruinPass.class));
         cards.add(new SetCardInfo("Think Twice", 83, Rarity.COMMON, mage.cards.t.ThinkTwice.class));
         cards.add(new SetCardInfo("Thraben Militia", 38, Rarity.COMMON, mage.cards.t.ThrabenMilitia.class));
         cards.add(new SetCardInfo("Thraben Purebloods", 37, Rarity.COMMON, mage.cards.t.ThrabenPurebloods.class));
@@ -294,7 +285,6 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Tribute to Hunger", 119, Rarity.UNCOMMON, mage.cards.t.TributeToHunger.class));
         cards.add(new SetCardInfo("Typhoid Rats", 120, Rarity.COMMON, mage.cards.t.TyphoidRats.class));
         cards.add(new SetCardInfo("Ulvenwald Mystics", 208, Rarity.UNCOMMON, mage.cards.u.UlvenwaldMystics.class));
-        cards.add(new SetCardInfo("Ulvenwald Primordials", 208, Rarity.UNCOMMON, mage.cards.u.UlvenwaldPrimordials.class));
         cards.add(new SetCardInfo("Unbreathing Horde", 121, Rarity.RARE, mage.cards.u.UnbreathingHorde.class));
         cards.add(new SetCardInfo("Unburial Rites", 122, Rarity.UNCOMMON, mage.cards.u.UnburialRites.class));
         cards.add(new SetCardInfo("Undead Alchemist", 84, Rarity.RARE, mage.cards.u.UndeadAlchemist.class));
@@ -310,7 +300,6 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Villagers of Estwald", 209, Rarity.COMMON, mage.cards.v.VillagersOfEstwald.class));
         cards.add(new SetCardInfo("Voiceless Spirit", 42, Rarity.COMMON, mage.cards.v.VoicelessSpirit.class));
         cards.add(new SetCardInfo("Walking Corpse", 126, Rarity.COMMON, mage.cards.w.WalkingCorpse.class));
-        cards.add(new SetCardInfo("Wildblood Pack", 149, Rarity.RARE, mage.cards.w.WildbloodPack.class));
         cards.add(new SetCardInfo("Witchbane Orb", 236, Rarity.RARE, mage.cards.w.WitchbaneOrb.class));
         cards.add(new SetCardInfo("Wooden Stake", 237, Rarity.COMMON, mage.cards.w.WoodenStake.class));
         cards.add(new SetCardInfo("Woodland Cemetery", 249, Rarity.RARE, mage.cards.w.WoodlandCemetery.class));

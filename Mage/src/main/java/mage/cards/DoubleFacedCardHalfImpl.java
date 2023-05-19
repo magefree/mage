@@ -15,7 +15,8 @@ import java.util.UUID;
  */
 public class DoubleFacedCardHalfImpl extends CardImpl implements DoubleFacedCardHalf {
 
-    DoubleFacedCard parentCard;
+    private DoubleFacedCard parentCard;
+    private boolean isFront = false;
 
     public DoubleFacedCardHalfImpl(
             UUID ownerId, CardSetInfo setInfo,
@@ -43,6 +44,7 @@ public class DoubleFacedCardHalfImpl extends CardImpl implements DoubleFacedCard
     public DoubleFacedCardHalfImpl(final DoubleFacedCardHalfImpl card) {
         super(card);
         this.parentCard = card.parentCard;
+        this.isFront = card.isFront;
     }
 
     @Override
@@ -114,5 +116,15 @@ public class DoubleFacedCardHalfImpl extends CardImpl implements DoubleFacedCard
     public String getIdName() {
         // id must send to main card (popup card hint in game logs)
         return getName() + " [" + parentCard.getId().toString().substring(0, 3) + ']';
+    }
+
+    @Override
+    public void setIsFront(boolean isFront) {
+        this.isFront = isFront;
+    }
+
+    @Override
+    public boolean isFront() {
+        return isFront;
     }
 }

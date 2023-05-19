@@ -1,42 +1,47 @@
 package mage.cards.l;
 
-import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.WerewolfBackTriggeredAbility;
 import mage.abilities.common.WerewolfFrontTriggeredAbility;
-import mage.abilities.effects.RestrictionEffect;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
+import mage.abilities.condition.common.FerociousCondition;
+import mage.abilities.decorator.ConditionalRestrictionEffect;
+import mage.abilities.effects.common.combat.CantAttackSourceEffect;
+import mage.abilities.hint.common.FerociousHint;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.cards.TransformingDoubleFacedCard;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
 /**
  * @author fireshoes
  */
-public final class LambholtPacifist extends CardImpl {
+public final class LambholtPacifist extends TransformingDoubleFacedCard {
 
     public LambholtPacifist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.SHAMAN);
-        this.subtype.add(SubType.WEREWOLF);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-
-        this.secondSideCardClazz = mage.cards.l.LambholtButcher.class;
+        super(
+                ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.SHAMAN, SubType.WEREWOLF}, "{1}{G}",
+                "Lambholt Butcher",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.WEREWOLF}, "G"
+        );
+        this.getLeftHalfCard().setPT(3, 3);
+        this.getRightHalfCard().setPT(4, 4);
 
         // Lambholt Pacifist can't attack unless you control a creature with power 4 or greater.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LambholtPacifistEffect()));
+        this.getLeftHalfCard().addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
+                new CantAttackSourceEffect(Duration.WhileOnBattlefield), FerociousCondition.instance,
+                "{this} can't attack unless you control a creature with power 4 or greater"
+        )).addHint(FerociousHint.instance));
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Lambholt Pacifist.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new WerewolfFrontTriggeredAbility());
+        this.getLeftHalfCard().addAbility(new WerewolfFrontTriggeredAbility());
+
+        // Lambholt Butcher
+        // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Lambholt Butcher.
+        this.getRightHalfCard().addAbility(new WerewolfBackTriggeredAbility());
     }
 
     private LambholtPacifist(final LambholtPacifist card) {
@@ -48,40 +53,3 @@ public final class LambholtPacifist extends CardImpl {
         return new LambholtPacifist(this);
     }
 }
-
-class LambholtPacifistEffect extends RestrictionEffect {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a creature with power 4 or greater");
-
-    static {
-        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
-    }
-
-    public LambholtPacifistEffect() {
-        super(Duration.WhileOnBattlefield);
-        staticText = "{this} can't attack unless you control a creature with power 4 or greater";
-    }
-
-    public LambholtPacifistEffect(final LambholtPacifistEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public LambholtPacifistEffect copy() {
-        return new LambholtPacifistEffect(this);
-    }
-
-    @Override
-    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
-        return false;
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getId().equals(source.getSourceId())) {
-            return game.getBattlefield().countAll(filter, source.getControllerId(), game) <= 0;
-        }  // do not apply to other creatures.
-        return false;
-    }
-}
-

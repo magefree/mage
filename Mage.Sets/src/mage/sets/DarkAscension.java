@@ -84,8 +84,8 @@ public final class DarkAscension extends ExpansionSet {
         cards.add(new SetCardInfo("Erdwal Ripper", 86, Rarity.COMMON, mage.cards.e.ErdwalRipper.class));
         cards.add(new SetCardInfo("Evolving Wilds", 155, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Executioner's Hood", 148, Rarity.COMMON, mage.cards.e.ExecutionersHood.class));
-        cards.add(new SetCardInfo("Faithless Looting", 87, Rarity.COMMON, mage.cards.f.FaithlessLooting.class));
         cards.add(new SetCardInfo("Faith's Shield", 7, Rarity.UNCOMMON, mage.cards.f.FaithsShield.class));
+        cards.add(new SetCardInfo("Faithless Looting", 87, Rarity.COMMON, mage.cards.f.FaithlessLooting.class));
         cards.add(new SetCardInfo("Falkenrath Aristocrat", 138, Rarity.MYTHIC, mage.cards.f.FalkenrathAristocrat.class));
         cards.add(new SetCardInfo("Falkenrath Torturer", 60, Rarity.COMMON, mage.cards.f.FalkenrathTorturer.class));
         cards.add(new SetCardInfo("Farbog Boneflinger", 61, Rarity.UNCOMMON, mage.cards.f.FarbogBoneflinger.class));
@@ -121,7 +121,6 @@ public final class DarkAscension extends ExpansionSet {
         cards.add(new SetCardInfo("Helvault", 151, Rarity.MYTHIC, mage.cards.h.Helvault.class));
         cards.add(new SetCardInfo("Highborn Ghoul", 68, Rarity.COMMON, mage.cards.h.HighbornGhoul.class));
         cards.add(new SetCardInfo("Hinterland Hermit", 94, Rarity.COMMON, mage.cards.h.HinterlandHermit.class));
-        cards.add(new SetCardInfo("Hinterland Scourge", 94, Rarity.COMMON, mage.cards.h.HinterlandScourge.class));
         cards.add(new SetCardInfo("Hollowhenge Beast", 118, Rarity.COMMON, mage.cards.h.HollowhengeBeast.class));
         cards.add(new SetCardInfo("Hollowhenge Spirit", 10, Rarity.UNCOMMON, mage.cards.h.HollowhengeSpirit.class));
         cards.add(new SetCardInfo("Hunger of the Howlpack", 119, Rarity.COMMON, mage.cards.h.HungerOfTheHowlpack.class));
@@ -134,18 +133,16 @@ public final class DarkAscension extends ExpansionSet {
         cards.add(new SetCardInfo("Increasing Vengeance", 95, Rarity.RARE, mage.cards.i.IncreasingVengeance.class));
         cards.add(new SetCardInfo("Jar of Eyeballs", 152, Rarity.RARE, mage.cards.j.JarOfEyeballs.class));
         cards.add(new SetCardInfo("Kessig Recluse", 121, Rarity.COMMON, mage.cards.k.KessigRecluse.class));
-        cards.add(new SetCardInfo("Krallenhorde Killer", 133, Rarity.RARE, mage.cards.k.KrallenhordeKiller.class));
         cards.add(new SetCardInfo("Lambholt Elder", 122, Rarity.UNCOMMON, mage.cards.l.LambholtElder.class));
         cards.add(new SetCardInfo("Lingering Souls", 12, Rarity.UNCOMMON, mage.cards.l.LingeringSouls.class));
         cards.add(new SetCardInfo("Lost in the Woods", 123, Rarity.RARE, mage.cards.l.LostInTheWoods.class));
         cards.add(new SetCardInfo("Loyal Cathar", 13, Rarity.COMMON, mage.cards.l.LoyalCathar.class));
         cards.add(new SetCardInfo("Markov Blademaster", 96, Rarity.RARE, mage.cards.m.MarkovBlademaster.class));
-        cards.add(new SetCardInfo("Markov's Servant", 55, Rarity.COMMON, mage.cards.m.MarkovsServant.class));
         cards.add(new SetCardInfo("Markov Warlord", 97, Rarity.UNCOMMON, mage.cards.m.MarkovWarlord.class));
+        cards.add(new SetCardInfo("Markov's Servant", 55, Rarity.COMMON, mage.cards.m.MarkovsServant.class));
         cards.add(new SetCardInfo("Midnight Guard", 14, Rarity.COMMON, mage.cards.m.MidnightGuard.class));
         cards.add(new SetCardInfo("Mikaeus, the Unhallowed", 70, Rarity.MYTHIC, mage.cards.m.MikaeusTheUnhallowed.class));
         cards.add(new SetCardInfo("Mondronen Shaman", 98, Rarity.RARE, mage.cards.m.MondronenShaman.class));
-        cards.add(new SetCardInfo("Moonscarred Werewolf", 125, Rarity.COMMON, mage.cards.m.MoonscarredWerewolf.class));
         cards.add(new SetCardInfo("Moonveil Dragon", 99, Rarity.MYTHIC, mage.cards.m.MoonveilDragon.class));
         cards.add(new SetCardInfo("Mystic Retrieval", 42, Rarity.UNCOMMON, mage.cards.m.MysticRetrieval.class));
         cards.add(new SetCardInfo("Nearheath Stalker", 100, Rarity.COMMON, mage.cards.n.NearheathStalker.class));
@@ -155,7 +152,6 @@ public final class DarkAscension extends ExpansionSet {
         cards.add(new SetCardInfo("Niblis of the Urn", 16, Rarity.UNCOMMON, mage.cards.n.NiblisOfTheUrn.class));
         cards.add(new SetCardInfo("Predator Ooze", 124, Rarity.RARE, mage.cards.p.PredatorOoze.class));
         cards.add(new SetCardInfo("Pyreheart Wolf", 101, Rarity.UNCOMMON, mage.cards.p.PyreheartWolf.class));
-        cards.add(new SetCardInfo("Ravager of the Fells", 140, Rarity.MYTHIC, mage.cards.r.RavagerOfTheFells.class));
         cards.add(new SetCardInfo("Ravenous Demon", 71, Rarity.RARE, mage.cards.r.RavenousDemon.class));
         cards.add(new SetCardInfo("Ray of Revelation", 17, Rarity.COMMON, mage.cards.r.RayOfRevelation.class));
         cards.add(new SetCardInfo("Reap the Seagraf", 72, Rarity.COMMON, mage.cards.r.ReapTheSeagraf.class));
@@ -167,13 +163,11 @@ public final class DarkAscension extends ExpansionSet {
         cards.add(new SetCardInfo("Scorch the Fields", 103, Rarity.COMMON, mage.cards.s.ScorchTheFields.class));
         cards.add(new SetCardInfo("Scorned Villager", 125, Rarity.COMMON, mage.cards.s.ScornedVillager.class));
         cards.add(new SetCardInfo("Screeching Skaab", 47, Rarity.COMMON, mage.cards.s.ScreechingSkaab.class));
-        cards.add(new SetCardInfo("Seance", 20, Rarity.RARE, mage.cards.s.Seance.class));
         cards.add(new SetCardInfo("Secrets of the Dead", 48, Rarity.UNCOMMON, mage.cards.s.SecretsOfTheDead.class));
         cards.add(new SetCardInfo("Shattered Perception", 104, Rarity.UNCOMMON, mage.cards.s.ShatteredPerception.class));
         cards.add(new SetCardInfo("Shriekgeist", 49, Rarity.COMMON, mage.cards.s.Shriekgeist.class));
         cards.add(new SetCardInfo("Sightless Ghoul", 73, Rarity.COMMON, mage.cards.s.SightlessGhoul.class));
         cards.add(new SetCardInfo("Silverclaw Griffin", 21, Rarity.COMMON, mage.cards.s.SilverclawGriffin.class));
-        cards.add(new SetCardInfo("Silverpelt Werewolf", 122, Rarity.UNCOMMON, mage.cards.s.SilverpeltWerewolf.class));
         cards.add(new SetCardInfo("Skillful Lunge", 22, Rarity.COMMON, mage.cards.s.SkillfulLunge.class));
         cards.add(new SetCardInfo("Skirsdag Flayer", 74, Rarity.UNCOMMON, mage.cards.s.SkirsdagFlayer.class));
         cards.add(new SetCardInfo("Somberwald Dryad", 126, Rarity.COMMON, mage.cards.s.SomberwaldDryad.class));
@@ -190,7 +184,6 @@ public final class DarkAscension extends ExpansionSet {
         cards.add(new SetCardInfo("Thraben Doomsayer", 25, Rarity.RARE, mage.cards.t.ThrabenDoomsayer.class));
         cards.add(new SetCardInfo("Thraben Heretic", 26, Rarity.UNCOMMON, mage.cards.t.ThrabenHeretic.class));
         cards.add(new SetCardInfo("Torch Fiend", 106, Rarity.COMMON, mage.cards.t.TorchFiend.class));
-        cards.add(new SetCardInfo("Tovolar's Magehunter", 98, Rarity.RARE, mage.cards.t.TovolarsMagehunter.class));
         cards.add(new SetCardInfo("Tower Geist", 53, Rarity.UNCOMMON, mage.cards.t.TowerGeist.class));
         cards.add(new SetCardInfo("Tracker's Instincts", 128, Rarity.UNCOMMON, mage.cards.t.TrackersInstincts.class));
         cards.add(new SetCardInfo("Tragic Slip", 76, Rarity.COMMON, mage.cards.t.TragicSlip.class));
@@ -203,7 +196,6 @@ public final class DarkAscension extends ExpansionSet {
         cards.add(new SetCardInfo("Vorapede", 131, Rarity.MYTHIC, mage.cards.v.Vorapede.class));
         cards.add(new SetCardInfo("Wakedancer", 79, Rarity.UNCOMMON, mage.cards.w.Wakedancer.class));
         cards.add(new SetCardInfo("Warden of the Wall", 153, Rarity.UNCOMMON, mage.cards.w.WardenOfTheWall.class));
-        cards.add(new SetCardInfo("Werewolf Ransacker", 81, Rarity.UNCOMMON, mage.cards.w.WerewolfRansacker.class));
         cards.add(new SetCardInfo("Wild Hunger", 132, Rarity.COMMON, mage.cards.w.WildHunger.class));
         cards.add(new SetCardInfo("Withengar Unbound", 147, Rarity.MYTHIC, mage.cards.w.WithengarUnbound.class));
         cards.add(new SetCardInfo("Wolfbitten Captive", 133, Rarity.RARE, mage.cards.w.WolfbittenCaptive.class));
