@@ -6,6 +6,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
+import mage.util.CardUtil;
 
 /**
  * Adds condition to {@link OneShotEffect}. Acts as decorator.
@@ -78,9 +79,9 @@ public class ConditionalOneShotEffect extends OneShotEffect {
             return staticText;
         }
         if (otherwiseEffects.isEmpty()) {
-            return "if " + condition.toString() + ", " + effects.getText(mode);
+            return "if " + condition.toString() + ", " + CardUtil.getTextWithFirstCharLowerCase(effects.getText(mode));
         }
-        return effects.getText(mode) + ". If " + condition.toString() + ", " + otherwiseEffects.getText(mode);
+        return effects.getText(mode) + ". If " + condition.toString() + ", " + CardUtil.getTextWithFirstCharLowerCase(otherwiseEffects.getText(mode));
     }
 
     @Override
