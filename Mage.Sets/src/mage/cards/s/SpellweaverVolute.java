@@ -64,7 +64,7 @@ class SpellweaverVoluteEffect extends OneShotEffect {
 
     public SpellweaverVoluteEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "copy the enchanted instant card. You may cast the copy without paying its mana cost. \n"
+        this.staticText = "copy the enchanted instant card. You may cast the copy without paying its mana cost. "
                 + "If you do, exile the enchanted card and attach {this} to another instant card in a graveyard";
     }
 
