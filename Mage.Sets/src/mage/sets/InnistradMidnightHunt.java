@@ -47,7 +47,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Angelic Enforcer", 17, Rarity.MYTHIC, mage.cards.a.AngelicEnforcer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Angelic Enforcer", 327, Rarity.MYTHIC, mage.cards.a.AngelicEnforcer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arcane Infusion", 210, Rarity.UNCOMMON, mage.cards.a.ArcaneInfusion.class));
-        cards.add(new SetCardInfo("Archive Haunt", 68, Rarity.UNCOMMON, mage.cards.a.ArchiveHaunt.class));
         cards.add(new SetCardInfo("Ardent Elementalist", 128, Rarity.COMMON, mage.cards.a.ArdentElementalist.class));
         cards.add(new SetCardInfo("Arlinn, the Pack's Hope", 211, Rarity.MYTHIC, mage.cards.a.ArlinnThePacksHope.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arlinn, the Pack's Hope", 279, Rarity.MYTHIC, mage.cards.a.ArlinnThePacksHope.class, NON_FULL_USE_VARIOUS));
@@ -63,8 +62,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Baneblade Scoundrel", 85, Rarity.UNCOMMON, mage.cards.b.BanebladeScoundrel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bat Whisperer", 86, Rarity.COMMON, mage.cards.b.BatWhisperer.class));
         cards.add(new SetCardInfo("Beloved Beggar", 3, Rarity.UNCOMMON, mage.cards.b.BelovedBeggar.class));
-        cards.add(new SetCardInfo("Benevolent Geist", 336, Rarity.RARE, mage.cards.b.BenevolentGeist.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Benevolent Geist", 61, Rarity.RARE, mage.cards.b.BenevolentGeist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bereaved Survivor", 4, Rarity.UNCOMMON, mage.cards.b.BereavedSurvivor.class));
         cards.add(new SetCardInfo("Bird Admirer", 169, Rarity.COMMON, mage.cards.b.BirdAdmirer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bird Admirer", 298, Rarity.COMMON, mage.cards.b.BirdAdmirer.class, NON_FULL_USE_VARIOUS));
@@ -104,7 +101,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Champion of the Perished", 344, Rarity.RARE, mage.cards.c.ChampionOfThePerished.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Champion of the Perished", 385, Rarity.RARE, mage.cards.c.ChampionOfThePerished.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Champion of the Perished", 91, Rarity.RARE, mage.cards.c.ChampionOfThePerished.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Chapel Shieldgeist", 13, Rarity.UNCOMMON, mage.cards.c.ChapelShieldgeist.class));
         cards.add(new SetCardInfo("Chaplain of Alms", 13, Rarity.UNCOMMON, mage.cards.c.ChaplainOfAlms.class));
         cards.add(new SetCardInfo("Chilling Chronicle", 63, Rarity.UNCOMMON, mage.cards.c.ChillingChronicle.class));
         cards.add(new SetCardInfo("Clarion Cathars", 14, Rarity.COMMON, mage.cards.c.ClarionCathars.class));
@@ -118,7 +114,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Corpse Cobble", 214, Rarity.UNCOMMON, mage.cards.c.CorpseCobble.class));
         cards.add(new SetCardInfo("Covert Cutpurse", 92, Rarity.UNCOMMON, mage.cards.c.CovertCutpurse.class));
         cards.add(new SetCardInfo("Covetous Castaway", 45, Rarity.UNCOMMON, mage.cards.c.CovetousCastaway.class));
-        cards.add(new SetCardInfo("Covetous Geist", 92, Rarity.UNCOMMON, mage.cards.c.CovetousGeist.class));
         cards.add(new SetCardInfo("Crawl from the Cellar", 93, Rarity.COMMON, mage.cards.c.CrawlFromTheCellar.class));
         cards.add(new SetCardInfo("Creeping Inn", 264, Rarity.MYTHIC, mage.cards.c.CreepingInn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Creeping Inn", 379, Rarity.MYTHIC, mage.cards.c.CreepingInn.class, NON_FULL_USE_VARIOUS));
@@ -145,11 +140,8 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Defend the Celestus", 182, Rarity.UNCOMMON, mage.cards.d.DefendTheCelestus.class));
         cards.add(new SetCardInfo("Defenestrate", 95, Rarity.COMMON, mage.cards.d.Defenestrate.class));
         cards.add(new SetCardInfo("Delver of Secrets", 47, Rarity.UNCOMMON, mage.cards.d.DelverOfSecrets.class));
-        cards.add(new SetCardInfo("Dennick, Pious Apparition", 217, Rarity.RARE, mage.cards.d.DennickPiousApparition.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Dennick, Pious Apparition", 317, Rarity.RARE, mage.cards.d.DennickPiousApparition.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dennick, Pious Apprentice", 217, Rarity.RARE, mage.cards.d.DennickPiousApprentice.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dennick, Pious Apprentice", 317, Rarity.RARE, mage.cards.d.DennickPiousApprentice.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Departed Soulkeeper", 218, Rarity.UNCOMMON, mage.cards.d.DepartedSoulkeeper.class));
         cards.add(new SetCardInfo("Deserted Beach", 260, Rarity.RARE, mage.cards.d.DesertedBeach.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deserted Beach", 281, Rarity.RARE, mage.cards.d.DesertedBeach.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Devious Cover-Up", 48, Rarity.COMMON, mage.cards.d.DeviousCoverUp.class));
@@ -207,8 +199,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Geistflame Reservoir", 142, Rarity.RARE, mage.cards.g.GeistflameReservoir.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Geistflame Reservoir", 355, Rarity.RARE, mage.cards.g.GeistflameReservoir.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Geistwave", 56, Rarity.COMMON, mage.cards.g.Geistwave.class));
-        cards.add(new SetCardInfo("Generous Soul", 3, Rarity.UNCOMMON, mage.cards.g.GenerousSoul.class));
-        cards.add(new SetCardInfo("Ghostly Castigator", 45, Rarity.UNCOMMON, mage.cards.g.GhostlyCastigator.class));
         cards.add(new SetCardInfo("Ghoulcaller's Harvest", 225, Rarity.RARE, mage.cards.g.GhoulcallersHarvest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ghoulcaller's Harvest", 372, Rarity.RARE, mage.cards.g.GhoulcallersHarvest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ghoulish Procession", 102, Rarity.UNCOMMON, mage.cards.g.GhoulishProcession.class));
@@ -230,7 +220,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Heirloom Mirror", 105, Rarity.UNCOMMON, mage.cards.h.HeirloomMirror.class));
         cards.add(new SetCardInfo("Hobbling Zombie", 106, Rarity.COMMON, mage.cards.h.HobblingZombie.class));
         cards.add(new SetCardInfo("Homestead Courage", 24, Rarity.COMMON, mage.cards.h.HomesteadCourage.class));
-        cards.add(new SetCardInfo("Hook-Haunt Drifter", 42, Rarity.COMMON, mage.cards.h.HookHauntDrifter.class));
         cards.add(new SetCardInfo("Hostile Hostel", 264, Rarity.MYTHIC, mage.cards.h.HostileHostel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hostile Hostel", 379, Rarity.MYTHIC, mage.cards.h.HostileHostel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hound Tamer", 187, Rarity.UNCOMMON, mage.cards.h.HoundTamer.class, NON_FULL_USE_VARIOUS));
@@ -272,7 +261,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Loyal Gryff", 26, Rarity.UNCOMMON, mage.cards.l.LoyalGryff.class));
         cards.add(new SetCardInfo("Ludevic, Necrogenius", 233, Rarity.RARE, mage.cards.l.LudevicNecrogenius.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ludevic, Necrogenius", 320, Rarity.RARE, mage.cards.l.LudevicNecrogenius.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Luminous Phantom", 27, Rarity.COMMON, mage.cards.l.LuminousPhantom.class));
         cards.add(new SetCardInfo("Lunar Frenzy", 147, Rarity.UNCOMMON, mage.cards.l.LunarFrenzy.class));
         cards.add(new SetCardInfo("Lunarch Veteran", 27, Rarity.COMMON, mage.cards.l.LunarchVeteran.class));
         cards.add(new SetCardInfo("Malevolent Hermit", 336, Rarity.RARE, mage.cards.m.MalevolentHermit.class, NON_FULL_USE_VARIOUS));
@@ -288,7 +276,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Moonveil Regent", 357, Rarity.MYTHIC, mage.cards.m.MoonveilRegent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Morbid Opportunist", 113, Rarity.UNCOMMON, mage.cards.m.MorbidOpportunist.class));
         cards.add(new SetCardInfo("Morkrut Behemoth", 114, Rarity.COMMON, mage.cards.m.MorkrutBehemoth.class));
-        cards.add(new SetCardInfo("Morning Apparition", 28, Rarity.COMMON, mage.cards.m.MorningApparition.class));
         cards.add(new SetCardInfo("Mountain", 274, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 383, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
@@ -457,7 +444,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Vivisection", 83, Rarity.UNCOMMON, mage.cards.v.Vivisection.class));
         cards.add(new SetCardInfo("Voldaren Ambusher", 166, Rarity.UNCOMMON, mage.cards.v.VoldarenAmbusher.class));
         cards.add(new SetCardInfo("Voldaren Stinger", 167, Rarity.COMMON, mage.cards.v.VoldarenStinger.class));
-        cards.add(new SetCardInfo("Waildrifter", 55, Rarity.COMMON, mage.cards.w.Waildrifter.class));
         cards.add(new SetCardInfo("Wake to Slaughter", 250, Rarity.RARE, mage.cards.w.WakeToSlaughter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wake to Slaughter", 376, Rarity.RARE, mage.cards.w.WakeToSlaughter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Willow Geist", 207, Rarity.RARE, mage.cards.w.WillowGeist.class, NON_FULL_USE_VARIOUS));

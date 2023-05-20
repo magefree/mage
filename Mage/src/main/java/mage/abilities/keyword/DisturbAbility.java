@@ -2,9 +2,12 @@ package mage.abilities.keyword;
 
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
+import mage.abilities.common.PutIntoGraveFromAnywhereSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.ExileSourceEffect;
 import mage.cards.Card;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -29,12 +32,16 @@ public class DisturbAbility extends SpellAbility {
     private final String manaCost;
     private SpellAbility spellAbilityToResolve;
 
-    public DisturbAbility(Card card, String manaCost) {
-        super(card.getSecondFaceSpellAbility());
+    public static Ability makeExileAbility() {
+        return new PutIntoGraveFromAnywhereSourceAbility(new ExileSourceEffect().setText("exile it instead"));
+    }
+
+    public DisturbAbility(TransformingDoubleFacedCard card, String manaCost) {
+        super(card.getRightHalfCard().getSpellAbility());
         this.newId();
 
         // getSecondFaceSpellAbility() already verified that second face exists
-        this.setCardName(card.getSecondCardFace().getName() + " with Disturb");
+        this.setCardName(card.getRightHalfCard().getName() + " with Disturb");
         this.zone = Zone.GRAVEYARD;
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
         this.spellAbilityCastMode = SpellAbilityCastMode.TRANSFORMED;
