@@ -20,6 +20,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
     protected boolean loseAbilities;
     protected DynamicValue power = null;
     protected DynamicValue toughness = null;
+    protected boolean durationRuleAtStart = false; // put duration rule at the start of the rules text rather than the end
 
     public BecomesCreatureSourceEffect(Token token, String theyAreStillType, Duration duration) {
         this(token, theyAreStillType, duration, false, false);
@@ -59,6 +60,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
         if (effect.toughness != null) {
             this.toughness = effect.toughness.copy();
         }
+        this.durationRuleAtStart = effect.durationRuleAtStart;
     }
 
     @Override
@@ -145,11 +147,22 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
     }
 
     private void setText() {
-        if (theyAreStillType != null && !theyAreStillType.isEmpty()) {
-            staticText = duration.toString() + ", {this} becomes a " + token.getDescription() + " that's still a " + this.theyAreStillType;
-        } else {
-            staticText = duration.toString() + ", {this} becomes a " + token.getDescription();
+        StringBuilder sb = new StringBuilder();
+        if (!duration.toString().isEmpty() && durationRuleAtStart) {
+            sb.append(duration.toString());
+            sb.append(", ");
         }
+        sb.append("{this} becomes a ");
+        sb.append(token.getDescription());
+        if (!duration.toString().isEmpty() && !durationRuleAtStart) {
+            sb.append(" ");
+            sb.append(duration.toString());
+        }
+        if (theyAreStillType != null && !theyAreStillType.isEmpty()) {
+            sb.append(". It's still a ");
+            sb.append(theyAreStillType);
+        }
+        staticText = sb.toString();
     }
 
     @Override
