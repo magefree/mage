@@ -43,17 +43,17 @@ public abstract class DoubleFacedCard extends CardImpl implements CardWithHalves
     protected DoubleFacedCard(final DoubleFacedCard card) {
         super(card);
         this.leftHalfCard = card.getLeftHalfCard().copy();
-        ((DoubleFacedCardHalf) leftHalfCard).setParentCard(this);
-        this.rightHalfCard = card.rightHalfCard.copy();
-        ((DoubleFacedCardHalf) rightHalfCard).setParentCard(this);
+        this.leftHalfCard.setParentCard(this);
+        this.rightHalfCard = card.getRightHalfCard().copy();
+        this.rightHalfCard.setParentCard(this);
     }
 
     public DoubleFacedCardHalf getLeftHalfCard() {
-        return (DoubleFacedCardHalf) leftHalfCard;
+        return leftHalfCard;
     }
 
     public DoubleFacedCardHalf getRightHalfCard() {
-        return (DoubleFacedCardHalf) rightHalfCard;
+        return rightHalfCard;
     }
 
     public void setParts(DoubleFacedCardHalf leftHalfCard, DoubleFacedCardHalf rightHalfCard) {
