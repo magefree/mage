@@ -42,14 +42,14 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
     }
 
     /**
-     @param token Token as blueprint for creature to become
-     @param theyAreStillType String for rules text generation
-     @param duration Duration for the effect
-     @param losePreviousTypes if true, permanent loses its previous types
-     @param characterDefining if true, effect applies on layer 7a (it probably shouldn't)
-     @param loseAbilities if true, permanent loses its other abilities
+     * @param token             Token as blueprint for creature to become
+     * @param theyAreStillType  String for rules text generation
+     * @param duration          Duration for the effect
+     * @param losePreviousTypes if true, permanent loses its previous types
+     * @param loseAbilities     if true, permanent loses its other abilities
+     * @param characterDefining if true, effect applies on layer 7a (it probably shouldn't)
      */
-    public BecomesCreatureSourceEffect(Token token, String theyAreStillType, Duration duration, boolean losePreviousTypes, boolean characterDefining, boolean loseAbilities) {
+    public BecomesCreatureSourceEffect(Token token, String theyAreStillType, Duration duration, boolean losePreviousTypes, boolean loseAbilities, boolean characterDefining) {
         super(duration, Outcome.BecomeCreature);
         this.characterDefining = characterDefining;
         this.token = token;

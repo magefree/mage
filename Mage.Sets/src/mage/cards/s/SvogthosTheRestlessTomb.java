@@ -33,7 +33,7 @@ public final class SvogthosTheRestlessTomb extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
         // {3}{B}{G}: Until end of turn, Svogthos, the Restless Tomb becomes a black and green Plant Zombie creature with "This creature's power and toughness are each equal to the number of creature cards in your graveyard." It's still a land.
         // set to character defining to prevent setting P/T again to 0 becuase already set by CDA of the token
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new SvogthosToken(), "land", Duration.EndOfTurn, false, true, false), new ManaCostsImpl<>("{3}{B}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new SvogthosToken(), "land", Duration.EndOfTurn, false, false, true), new ManaCostsImpl<>("{3}{B}{G}"));
         this.addAbility(ability);
     }
 
