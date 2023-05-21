@@ -50,7 +50,7 @@ public final class HiddenHerd extends CardImpl {
 class HiddenHerdAbility extends TriggeredAbilityImpl {
 
     public HiddenHerdAbility() {
-        super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new HiddenHerdBeast(), "", Duration.WhileOnBattlefield, true, false), false);
+        super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new HiddenHerdBeast(), Duration.WhileOnBattlefield), false);
     }
 
     public HiddenHerdAbility(final HiddenHerdAbility ability) {

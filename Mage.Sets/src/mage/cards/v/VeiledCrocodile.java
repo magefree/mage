@@ -41,7 +41,7 @@ public final class VeiledCrocodile extends CardImpl {
 class VeiledCrocodileStateTriggeredAbility extends StateTriggeredAbility {
 
     public VeiledCrocodileStateTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new VeilCrocodileToken(), "", Duration.Custom, true, false));
+        super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new VeilCrocodileToken(), Duration.Custom));
         setTriggerPhrase("When a player has no cards in hand, if {this} is an enchantment, ");
     }
 

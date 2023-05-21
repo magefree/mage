@@ -22,18 +22,33 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
     protected DynamicValue toughness = null;
     protected boolean durationRuleAtStart = false; // put duration rule at the start of the rules text rather than the end
 
+    /**
+    Becomes a creature retaining its previous types
+     @param token Token as blueprint for creature to become
+     @param theyAreStillType String for rules text generation
+     @param duration Duration for the effect
+     */
     public BecomesCreatureSourceEffect(Token token, String theyAreStillType, Duration duration) {
         this(token, theyAreStillType, duration, false, false, false);
     }
 
+    /**
+    Becomes a creature losing its previous types
+     @param token Token as blueprint for creature to become
+     @param duration Duration for the effect
+     */
     public BecomesCreatureSourceEffect(Token token, Duration duration) {
         this(token, "", duration, true, false, false);
     }
 
-    public BecomesCreatureSourceEffect(Token token, String theyAreStillType, Duration duration, boolean losePreviousTypes, boolean characterDefining) {
-        this(token, theyAreStillType, duration, losePreviousTypes, characterDefining, false);
-    }
-
+    /**
+     @param token Token as blueprint for creature to become
+     @param theyAreStillType String for rules text generation
+     @param duration Duration for the effect
+     @param losePreviousTypes if true, permanent loses its previous types
+     @param characterDefining if true, effect applies on layer 7a (it probably shouldn't)
+     @param loseAbilities if true, permanent loses its other abilities
+     */
     public BecomesCreatureSourceEffect(Token token, String theyAreStillType, Duration duration, boolean losePreviousTypes, boolean characterDefining, boolean loseAbilities) {
         super(duration, Outcome.BecomeCreature);
         this.characterDefining = characterDefining;

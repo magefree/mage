@@ -103,7 +103,7 @@ class EbonyFlyEffect extends OneShotEffect {
                 new CreatureToken(result, result)
                         .withType(CardType.ARTIFACT)
                         .withAbility(FlyingAbility.getInstance()),
-                "", Duration.EndOfTurn, false, false
+                "", Duration.EndOfTurn, false, false, false
         ), source);
         return true;
     }
