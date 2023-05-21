@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.cards.Card;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -17,12 +17,11 @@ public class MoreThanMeetsTheEyeAbility extends SpellAbility {
     private final String manaCost;
     private SpellAbility spellAbilityToResolve;
 
-    public MoreThanMeetsTheEyeAbility(Card card, String manaCost) {
-        super(card.getSecondFaceSpellAbility());
+    public MoreThanMeetsTheEyeAbility(TransformingDoubleFacedCard card, String manaCost) {
+        super(card.getRightHalfCard().getSpellAbility());
         this.newId();
 
-        // getSecondFaceSpellAbility() already verified that second face exists
-        this.setCardName(card.getSecondCardFace().getName() + " with Disturb");
+        this.setCardName(card.getRightHalfCard().getName() + " with More Than Meets the Eye");
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
         this.spellAbilityCastMode = SpellAbilityCastMode.TRANSFORMED;
 
