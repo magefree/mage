@@ -20,7 +20,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
     protected boolean loseAbilities;
     protected DynamicValue power = null;
     protected DynamicValue toughness = null;
-    protected boolean durationRuleAtStart = false; // put duration rule at the start of the rules text rather than the end
+    protected boolean durationRuleAtStart; // put duration rule at the start of the rules text rather than the end
 
     /**
     Becomes a creature retaining its previous types
@@ -56,6 +56,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
         this.theyAreStillType = theyAreStillType;
         this.losePreviousTypes = losePreviousTypes;
         this.loseAbilities = loseAbilities;
+        this.durationRuleAtStart = (theyAreStillType != null && theyAreStillType.contains("planeswalker"));
         setText();
 
         this.addDependencyType(DependencyType.BecomeCreature);
@@ -167,6 +168,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
 
     public BecomesCreatureSourceEffect withDurationRuleAtStart(boolean durationRuleAtStart) {
         this.durationRuleAtStart = durationRuleAtStart;
+        setText();
         return this;
     }
 
@@ -183,7 +185,14 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
             sb.append(duration.toString());
         }
         if (theyAreStillType != null && !theyAreStillType.isEmpty()) {
-            sb.append(". It's still a ");
+            if (theyAreStillType.contains("planeswalker")) {
+                sb.append(" that's");
+            } else if (token.getDescription().endsWith("\"")) {
+                sb.append(" It's");
+            } else {
+                sb.append(". It's");
+            }
+            sb.append(" still a ");
             sb.append(theyAreStillType);
         }
         staticText = sb.toString();

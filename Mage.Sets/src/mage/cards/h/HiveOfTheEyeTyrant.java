@@ -64,7 +64,7 @@ public final class HiveOfTheEyeTyrant extends CardImpl {
                         "\"Whenever this creature attacks, exile target card from defending player's graveyard.\""
                 ).withSubType(SubType.BEHOLDER).withColor("B").withAbility(new MenaceAbility()).withAbility(ability),
                 "land", Duration.EndOfTurn
-        ), new ManaCostsImpl<>("{3}{B}")));
+        ).withDurationRuleAtStart(true), new ManaCostsImpl<>("{3}{B}")));
     }
 
     private HiveOfTheEyeTyrant(final HiveOfTheEyeTyrant card) {

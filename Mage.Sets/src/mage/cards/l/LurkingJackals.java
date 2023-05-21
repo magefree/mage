@@ -103,9 +103,9 @@ class LurkingJackalsStateTriggeredAbility extends StateTriggeredAbility {
 class LurkingJackalsToken extends TokenImpl {
 
     public LurkingJackalsToken() {
-        super("Dog", "3/2 Dog creature");
+        super("Dog", "3/2 Jackal creature");
         cardType.add(CardType.CREATURE);
-        subtype.add(SubType.DOG);
+        subtype.add(SubType.JACKAL);
         power = new MageInt(3);
         toughness = new MageInt(2);
     }

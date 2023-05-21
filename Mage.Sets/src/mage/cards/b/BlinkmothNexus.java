@@ -27,7 +27,7 @@ import mage.target.TargetPermanent;
  */
 public final class BlinkmothNexus extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("Blinkmoth");
+    private static final FilterPermanent filter = new FilterPermanent("Blinkmoth creature");
 
     static {
         filter.add(SubType.BLINKMOTH.getPredicate());
