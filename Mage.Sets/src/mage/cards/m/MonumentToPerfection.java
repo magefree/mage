@@ -21,13 +21,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.token.custom.CreatureToken;
-import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -65,7 +63,7 @@ public final class MonumentToPerfection extends CardImpl {
                         .withAbility(IndestructibleAbility.getInstance())
                         .withAbility(new ToxicAbility(9)),
                         null, Duration.Custom, true,
-                        false, null, null, true
+                        false, true
                 ), new GenericManaCost(3), MonumentToPerfectionCondition.instance
         ).addHint(MonumentToPerfectionValue.getHint()));
     }

@@ -23,25 +23,23 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
     protected boolean durationRuleAtStart = false; // put duration rule at the start of the rules text rather than the end
 
     public BecomesCreatureSourceEffect(Token token, String theyAreStillType, Duration duration) {
-        this(token, theyAreStillType, duration, false, false);
+        this(token, theyAreStillType, duration, false, false, false);
+    }
+
+    public BecomesCreatureSourceEffect(Token token, Duration duration) {
+        this(token, "", duration, true, false, false);
     }
 
     public BecomesCreatureSourceEffect(Token token, String theyAreStillType, Duration duration, boolean losePreviousTypes, boolean characterDefining) {
-        this(token, theyAreStillType, duration, losePreviousTypes, characterDefining, null, null);
+        this(token, theyAreStillType, duration, losePreviousTypes, characterDefining, false);
     }
 
-    public BecomesCreatureSourceEffect(Token token, String theyAreStillType, Duration duration, boolean losePreviousTypes, boolean characterDefining, DynamicValue power, DynamicValue toughness) {
-        this(token, theyAreStillType, duration, losePreviousTypes, characterDefining, power, toughness, false);
-    }
-
-    public BecomesCreatureSourceEffect(Token token, String theyAreStillType, Duration duration, boolean losePreviousTypes, boolean characterDefining, DynamicValue power, DynamicValue toughness, boolean loseAbilities) {
+    public BecomesCreatureSourceEffect(Token token, String theyAreStillType, Duration duration, boolean losePreviousTypes, boolean characterDefining, boolean loseAbilities) {
         super(duration, Outcome.BecomeCreature);
         this.characterDefining = characterDefining;
         this.token = token;
         this.theyAreStillType = theyAreStillType;
         this.losePreviousTypes = losePreviousTypes;
-        this.power = power;
-        this.toughness = toughness;
         this.loseAbilities = loseAbilities;
         setText();
 
