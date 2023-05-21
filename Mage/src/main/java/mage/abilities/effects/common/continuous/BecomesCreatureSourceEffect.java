@@ -146,6 +146,17 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
         return false;
     }
 
+    public BecomesCreatureSourceEffect withDynamicPT(DynamicValue power, DynamicValue toughness) {
+        this.power = power;
+        this.toughness = toughness;
+        return this;
+    }
+
+    public BecomesCreatureSourceEffect withDurationRuleAtStart(boolean durationRuleAtStart) {
+        this.durationRuleAtStart = durationRuleAtStart;
+        return this;
+    }
+
     private void setText() {
         StringBuilder sb = new StringBuilder();
         if (!duration.toString().isEmpty() && durationRuleAtStart) {
