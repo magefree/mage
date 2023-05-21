@@ -24,7 +24,6 @@ public class SiegeAbility extends StaticAbility {
 
     public SiegeAbility() {
         super(Zone.ALL, null);
-        this.addSubAbility(new TransformAbility());
         this.addSubAbility(new SiegeDefeatedTriggeredAbility());
     }
 
