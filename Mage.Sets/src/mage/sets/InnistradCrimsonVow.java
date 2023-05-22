@@ -138,8 +138,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Dawnhart Disciple", 196, Rarity.COMMON, mage.cards.d.DawnhartDisciple.class));
         cards.add(new SetCardInfo("Dawnhart Geist", 8, Rarity.UNCOMMON, mage.cards.d.DawnhartGeist.class));
         cards.add(new SetCardInfo("Daybreak Combatants", 153, Rarity.COMMON, mage.cards.d.DaybreakCombatants.class));
-        cards.add(new SetCardInfo("Deadly Dancer", 141, Rarity.UNCOMMON, mage.cards.d.DeadlyDancer.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Deadly Dancer", 300, Rarity.UNCOMMON, mage.cards.d.DeadlyDancer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deathcap Glade", 261, Rarity.RARE, mage.cards.d.DeathcapGlade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deathcap Glade", 281, Rarity.RARE, mage.cards.d.DeathcapGlade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Demonic Bargain", 103, Rarity.RARE, mage.cards.d.DemonicBargain.class, NON_FULL_USE_VARIOUS));

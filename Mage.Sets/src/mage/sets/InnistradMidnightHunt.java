@@ -348,7 +348,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Saryth, the Viper's Fang", 197, Rarity.RARE, mage.cards.s.SarythTheVipersFang.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Saryth, the Viper's Fang", 304, Rarity.RARE, mage.cards.s.SarythTheVipersFang.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Search Party Captain", 32, Rarity.COMMON, mage.cards.s.SearchPartyCaptain.class));
-        cards.add(new SetCardInfo("Seasoned Cathar", 2, Rarity.UNCOMMON, mage.cards.s.SeasonedCathar.class));
         cards.add(new SetCardInfo("Secrets of the Key", 73, Rarity.COMMON, mage.cards.s.SecretsOfTheKey.class));
         cards.add(new SetCardInfo("Seize the Storm", 158, Rarity.UNCOMMON, mage.cards.s.SeizeTheStorm.class));
         cards.add(new SetCardInfo("Shadowbeast Sighting", 198, Rarity.COMMON, mage.cards.s.ShadowbeastSighting.class));

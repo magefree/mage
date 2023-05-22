@@ -157,7 +157,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Dawnhart Rejuvenator", 180, Rarity.COMMON, mage.cards.d.DawnhartRejuvenator.class));
         cards.add(new SetCardInfo("Dawnhart Wardens", 216, Rarity.UNCOMMON, mage.cards.d.DawnhartWardens.class));
         cards.add(new SetCardInfo("Daybreak Combatants", 420, Rarity.COMMON, mage.cards.d.DaybreakCombatants.class));
-        cards.add(new SetCardInfo("Deadly Dancer", 408, Rarity.UNCOMMON, mage.cards.d.DeadlyDancer.class));
         cards.add(new SetCardInfo("Deathbonnet Hulk", 181, Rarity.UNCOMMON, mage.cards.d.DeathbonnetHulk.class));
         cards.add(new SetCardInfo("Deathbonnet Sprout", 181, Rarity.UNCOMMON, mage.cards.d.DeathbonnetSprout.class));
         cards.add(new SetCardInfo("Deathcap Glade", 528, Rarity.RARE, mage.cards.d.DeathcapGlade.class));
@@ -457,7 +456,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Scattered Thoughts", 341, Rarity.COMMON, mage.cards.s.ScatteredThoughts.class));
         cards.add(new SetCardInfo("Screaming Swarm", 342, Rarity.UNCOMMON, mage.cards.s.ScreamingSwarm.class));
         cards.add(new SetCardInfo("Search Party Captain", 32, Rarity.COMMON, mage.cards.s.SearchPartyCaptain.class));
-        cards.add(new SetCardInfo("Seasoned Cathar", 2, Rarity.UNCOMMON, mage.cards.s.SeasonedCathar.class));
         cards.add(new SetCardInfo("Secrets of the Key", 73, Rarity.COMMON, mage.cards.s.SecretsOfTheKey.class));
         cards.add(new SetCardInfo("Seize the Storm", 158, Rarity.UNCOMMON, mage.cards.s.SeizeTheStorm.class));
         cards.add(new SetCardInfo("Selhoff Entomber", 343, Rarity.COMMON, mage.cards.s.SelhoffEntomber.class));

@@ -80,7 +80,6 @@ public class RivalsOfIxalanPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Rekindling Phoenix", "111p", Rarity.MYTHIC, mage.cards.r.RekindlingPhoenix.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rekindling Phoenix", "111s", Rarity.MYTHIC, mage.cards.r.RekindlingPhoenix.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Release to the Wind", "46s", Rarity.RARE, mage.cards.r.ReleaseToTheWind.class));
-        cards.add(new SetCardInfo("Sanctum of the Sun", "176s", Rarity.MYTHIC, mage.cards.s.SanctumOfTheSun.class));
         cards.add(new SetCardInfo("Seafloor Oracle", "51p", Rarity.RARE, mage.cards.s.SeafloorOracle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Seafloor Oracle", "51s", Rarity.RARE, mage.cards.s.SeafloorOracle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Siegehorn Ceratops", "171p", Rarity.RARE, mage.cards.s.SiegehornCeratops.class, NON_FULL_USE_VARIOUS));
