@@ -63,7 +63,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Belligerent Guest", 301, Rarity.COMMON, mage.cards.b.BelligerentGuest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Binding Geist", 48, Rarity.COMMON, mage.cards.b.BindingGeist.class));
         cards.add(new SetCardInfo("Biolume Egg", 49, Rarity.UNCOMMON, mage.cards.b.BiolumeEgg.class));
-        cards.add(new SetCardInfo("Biolume Serpent", 49, Rarity.UNCOMMON, mage.cards.b.BiolumeSerpent.class));
         cards.add(new SetCardInfo("Bleed Dry", 94, Rarity.COMMON, mage.cards.b.BleedDry.class));
         cards.add(new SetCardInfo("Blood Fountain", 95, Rarity.COMMON, mage.cards.b.BloodFountain.class));
         cards.add(new SetCardInfo("Blood Hypnotist", 145, Rarity.UNCOMMON, mage.cards.b.BloodHypnotist.class, NON_FULL_USE_VARIOUS));
@@ -78,8 +77,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodcrazed Socialite", 96, Rarity.COMMON, mage.cards.b.BloodcrazedSocialite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodsoaked Reveler", 128, Rarity.UNCOMMON, mage.cards.b.BloodsoakedReveler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodsoaked Reveler", 295, Rarity.UNCOMMON, mage.cards.b.BloodsoakedReveler.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Bloodsworn Knight", 289, Rarity.UNCOMMON, mage.cards.b.BloodswornKnight.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Bloodsworn Knight", 97, Rarity.UNCOMMON, mage.cards.b.BloodswornKnight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodsworn Squire", 289, Rarity.UNCOMMON, mage.cards.b.BloodswornSquire.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodsworn Squire", 97, Rarity.UNCOMMON, mage.cards.b.BloodswornSquire.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodtithe Harvester", 232, Rarity.UNCOMMON, mage.cards.b.BloodtitheHarvester.class, NON_FULL_USE_VARIOUS));

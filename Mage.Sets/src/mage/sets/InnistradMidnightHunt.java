@@ -128,7 +128,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Curse of Silence", 326, Rarity.RARE, mage.cards.c.CurseOfSilence.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Curse of Surveillance", 334, Rarity.RARE, mage.cards.c.CurseOfSurveillance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Curse of Surveillance", 46, Rarity.RARE, mage.cards.c.CurseOfSurveillance.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Dauntless Avenger", 4, Rarity.UNCOMMON, mage.cards.d.DauntlessAvenger.class));
         cards.add(new SetCardInfo("Dawnhart Mentor", 179, Rarity.UNCOMMON, mage.cards.d.DawnhartMentor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dawnhart Mentor", 300, Rarity.UNCOMMON, mage.cards.d.DawnhartMentor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dawnhart Rejuvenator", 180, Rarity.COMMON, mage.cards.d.DawnhartRejuvenator.class, NON_FULL_USE_VARIOUS));
