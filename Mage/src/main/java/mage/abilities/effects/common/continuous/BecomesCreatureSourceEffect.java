@@ -40,7 +40,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
     protected Token token;
     protected String theyAreStillType;
     protected boolean losePreviousTypes;
-    protected boolean loseAbilities;
+    protected boolean loseAbilities = false;
     protected DynamicValue power = null;
     protected DynamicValue toughness = null;
     protected boolean durationRuleAtStart; // put duration rule at the start of the rules text rather than the end
@@ -53,7 +53,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
      * @param duration         Duration for the effect
      */
     public BecomesCreatureSourceEffect(Token token, String theyAreStillType, Duration duration) {
-        this(token, theyAreStillType, duration, false, false);
+        this(token, theyAreStillType, duration, false);
     }
 
     /**
@@ -62,7 +62,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
      * @param duration Duration for the effect
      */
     public BecomesCreatureSourceEffect(Token token, Duration duration) {
-        this(token, "", duration, true, false);
+        this(token, "", duration, true);
     }
 
     /**
@@ -70,14 +70,12 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
      * @param theyAreStillType  String for rules text generation
      * @param duration          Duration for the effect
      * @param losePreviousTypes if true, permanent loses its previous types
-     * @param loseAbilities     if true, permanent loses its other abilities
      */
-    public BecomesCreatureSourceEffect(Token token, String theyAreStillType, Duration duration, boolean losePreviousTypes, boolean loseAbilities) {
+    public BecomesCreatureSourceEffect(Token token, String theyAreStillType, Duration duration, boolean losePreviousTypes) {
         super(duration, Outcome.BecomeCreature);
         this.token = token;
         this.theyAreStillType = theyAreStillType;
         this.losePreviousTypes = losePreviousTypes;
-        this.loseAbilities = loseAbilities;
         this.durationRuleAtStart = (theyAreStillType != null && theyAreStillType.contains("planeswalker"));
         setText();
         this.hasCDA = checkTokenCDA();
@@ -186,6 +184,15 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
     public BecomesCreatureSourceEffect withDynamicPT(DynamicValue power, DynamicValue toughness) {
         this.power = power;
         this.toughness = toughness;
+        return this;
+    }
+
+    /**
+     * Source loses all other abilities as part of the effect
+     * Note: need to set text manually
+     */
+    public BecomesCreatureSourceEffect andLoseAbilities(boolean loseAbilities) {
+        this.loseAbilities = loseAbilities;
         return this;
     }
 

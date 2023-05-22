@@ -46,9 +46,8 @@ public final class ChromiumTheMutable extends CardImpl {
         // Discard a card: Until end of turn, Chromium, the Mutable becomes a Human with base power and toughness 1/1, loses all abilities, and gains hexproof. It can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(
                 new BecomesCreatureSourceEffect(
-                        new ChromiumTheMutableToken(), null, Duration.EndOfTurn,
-                        false, true
-                ).setText("Until end of turn, {this} becomes "
+                        new ChromiumTheMutableToken(), null, Duration.EndOfTurn
+                ).andLoseAbilities(true).setText("Until end of turn, {this} becomes "
                         + "a Human with base power and toughness 1/1, "
                         + "loses all abilities, and gains hexproof"),
                 new DiscardCardCost()

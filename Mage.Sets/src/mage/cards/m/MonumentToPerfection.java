@@ -2,6 +2,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -62,9 +63,8 @@ public final class MonumentToPerfection extends CardImpl {
                 ).withType(CardType.ARTIFACT)
                         .withAbility(IndestructibleAbility.getInstance())
                         .withAbility(new ToxicAbility(9)),
-                        null, Duration.Custom, true,
-                        true
-                ), new GenericManaCost(3), MonumentToPerfectionCondition.instance
+                        "", Duration.Custom
+                ).andLoseAbilities(true), new GenericManaCost(3), MonumentToPerfectionCondition.instance
         ).addHint(MonumentToPerfectionValue.getHint()));
     }
 
@@ -100,7 +100,7 @@ enum MonumentToPerfectionValue implements DynamicValue {
                 .getBattlefield()
                 .getActivePermanents(filter, sourceAbility.getControllerId(), game)
                 .stream()
-                .map(permanent -> permanent.getName())
+                .map(MageObject::getName)
                 .filter(s -> s.length() > 0)
                 .distinct()
                 .mapToInt(x -> 1)
