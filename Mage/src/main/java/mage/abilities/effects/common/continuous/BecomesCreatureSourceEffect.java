@@ -14,6 +14,27 @@ import mage.game.permanent.token.Token;
  */
 public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements SourceEffect {
 
+    /*
+     * CR 2023-04-14
+     * 205.1a. Some effects set an object's card type. In most such cases, the new card type(s) replaces any existing
+     * card types. However, an object with either the instant or sorcery card type retains that type. Counters,
+     * stickers, effects, and damage marked on the object remain with it, even if they are meaningless to the new card
+     * type. Similarly, when an effect sets one or more of an object's subtypes, the new subtype(s) replaces any
+     * existing subtypes from the appropriate set (creature types, land types, artifact types, enchantment types,
+     * planeswalker types, or spell types). If an object's card type is removed, the subtypes correlated with that card
+     * type will remain if they are also the subtypes of a card type the object currently has; otherwise, they are also
+     * removed for the entire time the object's card type is removed. Removing an object's subtype doesn't affect its
+     * card types at all.
+     * 205.1b. Some effects change an object's card type, supertype, or subtype but specify that the object retains a
+     * prior card type, supertype, or subtype. In such cases, all the object's prior card types, supertypes, and
+     * subtypes are retained. This rule applies to effects that use the phrase "in addition to its types" or that state
+     * that something is "still a [type, supertype, or subtype]." Some effects state that an object becomes an
+     * "artifact creature"; these effects also allow the object to retain all of its prior card types and subtypes.
+     * Some effects state that an object becomes a "[creature type or types] artifact creature"; these effects also
+     * allow the object to retain all of its prior card types and subtypes other than creature types, but replace any
+     * existing creature types.
+     */
+
     protected Token token;
     protected String theyAreStillType;
     protected boolean losePreviousTypes;
@@ -23,19 +44,19 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
     protected boolean durationRuleAtStart; // put duration rule at the start of the rules text rather than the end
 
     /**
-    Becomes a creature retaining its previous types
-     @param token Token as blueprint for creature to become
-     @param theyAreStillType String for rules text generation
-     @param duration Duration for the effect
+     * Becomes a creature retaining its previous types
+     * @param token            Token as blueprint for creature to become
+     * @param theyAreStillType String for rules text generation
+     * @param duration         Duration for the effect
      */
     public BecomesCreatureSourceEffect(Token token, String theyAreStillType, Duration duration) {
         this(token, theyAreStillType, duration, false, false, false);
     }
 
     /**
-    Becomes a creature losing its previous types
-     @param token Token as blueprint for creature to become
-     @param duration Duration for the effect
+     * Becomes a creature losing its previous types
+     * @param token    Token as blueprint for creature to become
+     * @param duration Duration for the effect
      */
     public BecomesCreatureSourceEffect(Token token, Duration duration) {
         this(token, "", duration, true, false, false);
