@@ -38,22 +38,13 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
      */
 
     protected Token token;
-
-    /*
-     null for losing previous types
-     ARTIFACT for becoming an artifact creature (retains previous types)
-     LAND for "It's still a land"
-     ENCHANTMENT for "in addition to its other types"
-     PLANESWALKER for "that's still a planeswalker"
-     CREATURE for when only creature types are overwritten
-     */
-    protected CardType retainType;
+    protected CardType retainType; // if null, loses previous types
     protected boolean loseAbilities = false;
     protected DynamicValue power = null;
     protected DynamicValue toughness = null;
     protected boolean durationRuleAtStart; // put duration rule at the start of the rules text rather than the end
-    protected boolean hasCDA;
-
+    protected boolean hasCDA; // used when becoming a creature with an ability that sets P/T in layer 7a
+    
     /**
      * @param token       Token as blueprint for creature to become
      * @param retainType  If null, permanent loses its previous types, otherwise retains types with appropriate text
@@ -63,7 +54,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
         super(duration, Outcome.BecomeCreature);
         this.token = token;
         this.retainType = retainType;
-        this.durationRuleAtStart = (retainType == CardType.PLANESWALKER);
+        this.durationRuleAtStart = (retainType == CardType.PLANESWALKER || retainType == CardType.CREATURE);
         this.hasCDA = checkTokenCDA();
         setText();
         this.addDependencyType(DependencyType.BecomeCreature);
@@ -226,7 +217,8 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
     /**
      * Check whether the token contains a characteristic-defining ability in layer 7a.
      * If it does, then need to not overwrite P/T in layer 7b.
-     * @return true if the token has a characteristic-defining ability
+     * (It might not really be a CDA, but applied as one for consistency with the effect type.)
+     * @return true if the token has an ability with an effect in layer 7a
      */
     private boolean checkTokenCDA() {
         for (Ability ability : token.getAbilities()) {
