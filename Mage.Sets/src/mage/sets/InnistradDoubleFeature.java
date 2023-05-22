@@ -98,7 +98,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Candlelit Cavalry", 175, Rarity.COMMON, mage.cards.c.CandlelitCavalry.class));
         cards.add(new SetCardInfo("Candletrap", 9, Rarity.COMMON, mage.cards.c.Candletrap.class));
         cards.add(new SetCardInfo("Cartographer's Survey", 457, Rarity.UNCOMMON, mage.cards.c.CartographersSurvey.class));
-        cards.add(new SetCardInfo("Catapult Captain", 366, Rarity.UNCOMMON, mage.cards.c.CatapultCaptain.class));
         cards.add(new SetCardInfo("Catapult Fodder", 366, Rarity.UNCOMMON, mage.cards.c.CatapultFodder.class));
         cards.add(new SetCardInfo("Cathar Commando", 10, Rarity.COMMON, mage.cards.c.CatharCommando.class));
         cards.add(new SetCardInfo("Cathar's Call", 11, Rarity.UNCOMMON, mage.cards.c.CatharsCall.class));
@@ -430,7 +429,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Restless Bloodseeker", 395, Rarity.UNCOMMON, mage.cards.r.RestlessBloodseeker.class));
         cards.add(new SetCardInfo("Retrieve", 482, Rarity.UNCOMMON, mage.cards.r.Retrieve.class));
         cards.add(new SetCardInfo("Return to Nature", 195, Rarity.COMMON, mage.cards.r.ReturnToNature.class));
-        cards.add(new SetCardInfo("Revealing Eye", 368, Rarity.RARE, mage.cards.r.RevealingEye.class));
         cards.add(new SetCardInfo("Revenge of the Drowned", 72, Rarity.COMMON, mage.cards.r.RevengeOfTheDrowned.class));
         cards.add(new SetCardInfo("Rise of the Ants", 196, Rarity.UNCOMMON, mage.cards.r.RiseOfTheAnts.class));
         cards.add(new SetCardInfo("Rite of Harmony", 236, Rarity.RARE, mage.cards.r.RiteOfHarmony.class));

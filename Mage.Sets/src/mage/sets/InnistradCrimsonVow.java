@@ -93,7 +93,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("By Invitation Only", 5, Rarity.RARE, mage.cards.b.ByInvitationOnly.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cackling Culprit", 28, Rarity.UNCOMMON, mage.cards.c.CacklingCulprit.class));
         cards.add(new SetCardInfo("Cartographer's Survey", 190, Rarity.UNCOMMON, mage.cards.c.CartographersSurvey.class));
-        cards.add(new SetCardInfo("Catapult Captain", 99, Rarity.UNCOMMON, mage.cards.c.CatapultCaptain.class));
         cards.add(new SetCardInfo("Catapult Fodder", 99, Rarity.UNCOMMON, mage.cards.c.CatapultFodder.class));
         cards.add(new SetCardInfo("Cemetery Desecrator", 100, Rarity.MYTHIC, mage.cards.c.CemeteryDesecrator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cemetery Desecrator", 366, Rarity.MYTHIC, mage.cards.c.CemeteryDesecrator.class, NON_FULL_USE_VARIOUS));
@@ -363,8 +362,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Restless Bloodseeker", 128, Rarity.UNCOMMON, mage.cards.r.RestlessBloodseeker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Restless Bloodseeker", 295, Rarity.UNCOMMON, mage.cards.r.RestlessBloodseeker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Retrieve", 215, Rarity.UNCOMMON, mage.cards.r.Retrieve.class));
-        cards.add(new SetCardInfo("Revealing Eye", 101, Rarity.RARE, mage.cards.r.RevealingEye.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Revealing Eye", 367, Rarity.RARE, mage.cards.r.RevealingEye.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rot-Tide Gargantua", 129, Rarity.COMMON, mage.cards.r.RotTideGargantua.class));
         cards.add(new SetCardInfo("Runebound Wolf", 176, Rarity.UNCOMMON, mage.cards.r.RuneboundWolf.class));
         cards.add(new SetCardInfo("Runo Stromkirk", 246, Rarity.RARE, mage.cards.r.RunoStromkirk.class, NON_FULL_USE_VARIOUS));

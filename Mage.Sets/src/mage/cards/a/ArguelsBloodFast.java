@@ -1,8 +1,6 @@
 
 package mage.cards.a;
 
-import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,8 +10,7 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.SacrificeCostCreaturesToughness;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
@@ -25,10 +22,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.util.CardUtil;
 
-import java.util.Collection;
 import java.util.UUID;
 
 /**
@@ -62,7 +56,7 @@ public final class ArguelsBloodFast extends TransformingDoubleFacedCard {
         this.getRightHalfCard().addAbility(new BlackManaAbility());
 
         // {T}, Sacrifice a creature: You gain life equal to the sacrificed creature's toughness.
-        ability = new SimpleActivatedAbility(new GainLifeEffect(TempleOfAclazotzValue.instance)
+        ability = new SimpleActivatedAbility(new GainLifeEffect(SacrificeCostCreaturesToughness.instance)
                 .setText("you gain life equal to the sacrificed creature's toughness"), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         this.getRightHalfCard().addAbility(ability);
@@ -75,35 +69,5 @@ public final class ArguelsBloodFast extends TransformingDoubleFacedCard {
     @Override
     public ArguelsBloodFast copy() {
         return new ArguelsBloodFast(this);
-    }
-}
-
-enum TempleOfAclazotzValue implements DynamicValue {
-    instance;
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return CardUtil
-                .castStream(sourceAbility.getCosts().stream(), SacrificeTargetCost.class)
-                .map(SacrificeTargetCost::getPermanents)
-                .flatMap(Collection::stream)
-                .map(MageObject::getToughness)
-                .mapToInt(MageInt::getValue)
-                .sum();
-    }
-
-    @Override
-    public TempleOfAclazotzValue copy() {
-        return this;
-    }
-
-    @Override
-    public String getMessage() {
-        return "";
-    }
-
-    @Override
-    public String toString() {
-        return "1";
     }
 }

@@ -47,7 +47,6 @@ public final class EldritchMoon extends ExpansionSet {
         cards.add(new SetCardInfo("Advanced Stitchwing", 49, Rarity.UNCOMMON, mage.cards.a.AdvancedStitchwing.class));
         cards.add(new SetCardInfo("Alchemist's Greeting", 116, Rarity.COMMON, mage.cards.a.AlchemistsGreeting.class));
         cards.add(new SetCardInfo("Assembled Alphas", 117, Rarity.RARE, mage.cards.a.AssembledAlphas.class));
-        cards.add(new SetCardInfo("Aurora of Emrakul", 193, Rarity.UNCOMMON, mage.cards.a.AuroraOfEmrakul.class));
         cards.add(new SetCardInfo("Backwoods Survivalists", 150, Rarity.COMMON, mage.cards.b.BackwoodsSurvivalists.class));
         cards.add(new SetCardInfo("Bedlam Reveler", 118, Rarity.RARE, mage.cards.b.BedlamReveler.class));
         cards.add(new SetCardInfo("Blessed Alliance", 13, Rarity.UNCOMMON, mage.cards.b.BlessedAlliance.class));
@@ -74,7 +73,6 @@ public final class EldritchMoon extends ExpansionSet {
         cards.add(new SetCardInfo("Collective Brutality", 85, Rarity.RARE, mage.cards.c.CollectiveBrutality.class));
         cards.add(new SetCardInfo("Collective Defiance", 123, Rarity.RARE, mage.cards.c.CollectiveDefiance.class));
         cards.add(new SetCardInfo("Collective Effort", 17, Rarity.RARE, mage.cards.c.CollectiveEffort.class));
-        cards.add(new SetCardInfo("Conduit of Emrakul", 124, Rarity.UNCOMMON, mage.cards.c.ConduitOfEmrakul.class));
         cards.add(new SetCardInfo("Conduit of Storms", 124, Rarity.UNCOMMON, mage.cards.c.ConduitOfStorms.class));
         cards.add(new SetCardInfo("Contingency Plan", 52, Rarity.COMMON, mage.cards.c.ContingencyPlan.class));
         cards.add(new SetCardInfo("Convolute", 53, Rarity.COMMON, mage.cards.c.Convolute.class));
@@ -252,7 +250,6 @@ public final class EldritchMoon extends ExpansionSet {
         cards.add(new SetCardInfo("Vexing Scuttler", 11, Rarity.UNCOMMON, mage.cards.v.VexingScuttler.class));
         cards.add(new SetCardInfo("Vildin-Pack Outcast", 148, Rarity.COMMON, mage.cards.v.VildinPackOutcast.class));
         cards.add(new SetCardInfo("Voldaren Pariah", 111, Rarity.RARE, mage.cards.v.VoldarenPariah.class));
-        cards.add(new SetCardInfo("Voracious Reader", 54, Rarity.UNCOMMON, mage.cards.v.VoraciousReader.class));
         cards.add(new SetCardInfo("Wailing Ghoul", 112, Rarity.COMMON, mage.cards.w.WailingGhoul.class));
         cards.add(new SetCardInfo("Waxing Moon", 177, Rarity.COMMON, mage.cards.w.WaxingMoon.class));
         cards.add(new SetCardInfo("Weaver of Lightning", 149, Rarity.UNCOMMON, mage.cards.w.WeaverOfLightning.class));
