@@ -45,7 +45,7 @@ public final class BlinkmothNexus extends CardImpl {
                         .withSubType(SubType.BLINKMOTH)
                         .withType(CardType.ARTIFACT)
                         .withAbility(FlyingAbility.getInstance()),
-                "land", Duration.EndOfTurn), new GenericManaCost(1)));
+                CardType.LAND, Duration.EndOfTurn), new GenericManaCost(1)));
 
         // {1}, {T}: Target Blinkmoth creature gets +1/+1 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn), new GenericManaCost(1));

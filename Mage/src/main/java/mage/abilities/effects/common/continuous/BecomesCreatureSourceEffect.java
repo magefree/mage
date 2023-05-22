@@ -38,8 +38,16 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
      */
 
     protected Token token;
-    protected String theyAreStillType;
-    protected boolean losePreviousTypes;
+
+    /*
+     null for losing previous types
+     ARTIFACT for becoming an artifact creature (retains previous types)
+     LAND for "It's still a land"
+     ENCHANTMENT for "in addition to its other types"
+     PLANESWALKER for "that's still a planeswalker"
+     CREATURE for when only creature types are overwritten
+     */
+    protected CardType retainType;
     protected boolean loseAbilities = false;
     protected DynamicValue power = null;
     protected DynamicValue toughness = null;
@@ -47,47 +55,24 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
     protected boolean hasCDA;
 
     /**
-     * Becomes a creature retaining its previous types
-     * @param token            Token as blueprint for creature to become
-     * @param theyAreStillType String for rules text generation
-     * @param duration         Duration for the effect
+     * @param token       Token as blueprint for creature to become
+     * @param retainType  If null, permanent loses its previous types, otherwise retains types with appropriate text
+     * @param duration    Duration for the effect
      */
-    public BecomesCreatureSourceEffect(Token token, String theyAreStillType, Duration duration) {
-        this(token, theyAreStillType, duration, false);
-    }
-
-    /**
-     * Becomes a creature losing its previous types
-     * @param token    Token as blueprint for creature to become
-     * @param duration Duration for the effect
-     */
-    public BecomesCreatureSourceEffect(Token token, Duration duration) {
-        this(token, "", duration, true);
-    }
-
-    /**
-     * @param token             Token as blueprint for creature to become
-     * @param theyAreStillType  String for rules text generation
-     * @param duration          Duration for the effect
-     * @param losePreviousTypes if true, permanent loses its previous types
-     */
-    public BecomesCreatureSourceEffect(Token token, String theyAreStillType, Duration duration, boolean losePreviousTypes) {
+    public BecomesCreatureSourceEffect(Token token, CardType retainType, Duration duration) {
         super(duration, Outcome.BecomeCreature);
         this.token = token;
-        this.theyAreStillType = theyAreStillType;
-        this.losePreviousTypes = losePreviousTypes;
-        this.durationRuleAtStart = (theyAreStillType != null && theyAreStillType.contains("planeswalker"));
-        setText();
+        this.retainType = retainType;
+        this.durationRuleAtStart = (retainType == CardType.PLANESWALKER);
         this.hasCDA = checkTokenCDA();
-
+        setText();
         this.addDependencyType(DependencyType.BecomeCreature);
     }
 
     public BecomesCreatureSourceEffect(final BecomesCreatureSourceEffect effect) {
         super(effect);
         this.token = effect.token.copy();
-        this.theyAreStillType = effect.theyAreStillType;
-        this.losePreviousTypes = effect.losePreviousTypes;
+        this.retainType = effect.retainType;
         this.loseAbilities = effect.loseAbilities;
         if (effect.power != null) {
             this.power = effect.power.copy();
@@ -128,15 +113,14 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
         }
         switch (layer) {
             case TypeChangingEffects_4:
-                if (losePreviousTypes) {
+                if (retainType == null) {
                     permanent.removeAllCardTypes(game);
+                    permanent.removeAllSubTypes(game);
                 }
                 for (CardType cardType : token.getCardType(game)) {
                     permanent.addCardType(game, cardType);
                 }
-
-                if (theyAreStillType != null && theyAreStillType.isEmpty()
-                        || theyAreStillType == null && permanent.isLand(game)) {
+                if (retainType == CardType.CREATURE || retainType == CardType.ARTIFACT) {
                     permanent.removeAllCreatureTypes(game);
                 }
                 permanent.copySubTypesFrom(game, token);
@@ -210,20 +194,23 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
         }
         sb.append("{this} becomes a ");
         sb.append(token.getDescription());
+        if (retainType == CardType.ENCHANTMENT) {
+            sb.append(" in addition to its other types");
+        }
         if (!duration.toString().isEmpty() && !durationRuleAtStart) {
             sb.append(" ");
             sb.append(duration.toString());
         }
-        if (theyAreStillType != null && !theyAreStillType.isEmpty()) {
-            if (theyAreStillType.contains("planeswalker")) {
-                sb.append(" that's");
-            } else if (token.getDescription().endsWith("\"")) {
+        if (retainType == CardType.PLANESWALKER) {
+            sb.append(" that's still a planeswalker");
+        }
+        if (retainType == CardType.LAND) {
+            if (token.getDescription().endsWith(".\"")) {
                 sb.append(" It's");
             } else {
                 sb.append(". It's");
             }
-            sb.append(" still a ");
-            sb.append(theyAreStillType);
+            sb.append(" still a land");
         }
         staticText = sb.toString();
     }

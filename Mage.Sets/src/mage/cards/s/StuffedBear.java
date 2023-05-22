@@ -26,7 +26,7 @@ public final class StuffedBear extends CardImpl {
                         .withColor("G")
                         .withSubType(SubType.BEAR)
                         .withType(CardType.ARTIFACT),
-                "", Duration.EndOfTurn
+                CardType.ARTIFACT, Duration.EndOfTurn
         ), new GenericManaCost(2)));
     }
 

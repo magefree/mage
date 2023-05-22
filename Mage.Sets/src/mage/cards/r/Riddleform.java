@@ -37,7 +37,7 @@ public final class Riddleform extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 
         // Whenever you cast a noncreature spell, you may have Riddleform become a 3/3 Sphinx creature with flying in addition to its other types until end of turn.
-        Effect effect = new BecomesCreatureSourceEffect(new RiddleformToken(), "", Duration.EndOfTurn);
+        Effect effect = new BecomesCreatureSourceEffect(new RiddleformToken(), CardType.ENCHANTMENT, Duration.EndOfTurn);
         effect.setText("have {this} become a 3/3 Sphinx creature with flying in addition to its other types until end of turn.");
         this.addAbility(new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, effect, filterNonCreature, true, true));
 

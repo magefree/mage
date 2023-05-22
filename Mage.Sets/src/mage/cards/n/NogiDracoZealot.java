@@ -59,7 +59,7 @@ public final class NogiDracoZealot extends CardImpl {
                         new CreatureToken(5, 5, "Dragon with base power and toughness 5/5 and gains flying")
                                 .withSubType(SubType.DRAGON)
                                 .withAbility(FlyingAbility.getInstance()),
-                        "", Duration.EndOfTurn), false
+                        CardType.CREATURE, Duration.EndOfTurn), false
                 ), condition, "Whenever {this} attacks, if you control three or more Dragons, until end of turn, " +
                 "{this} becomes a Dragon with base power and toughness 5/5 and gains flying"
         );

@@ -40,7 +40,7 @@ public final class RagingRavine extends CardImpl {
         this.addAbility(new RedManaAbility());
         Effect effect = new BecomesCreatureSourceEffect(
                 new CreatureToken(3, 3, "3/3 red and green Elemental creature", SubType.ELEMENTAL).withColor("RG"),
-                "land", Duration.EndOfTurn);
+                CardType.LAND, Duration.EndOfTurn);
         effect.setText("Until end of turn, {this} becomes a 3/3 red and green Elemental creature");
         // {2}{R}{G}: Until end of turn, Raging Ravine becomes a 3/3 red and green Elemental creature with "Whenever this creature attacks, put a +1/+1 counter on it." It's still a land.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}{R}{G}"));

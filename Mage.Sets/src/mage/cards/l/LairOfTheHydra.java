@@ -89,7 +89,7 @@ class LairOfTheHydraEffect extends OneShotEffect {
                 new CreatureToken(xValue, xValue, "X/X green Hydra creature")
                     .withColor("G")
                     .withSubType(SubType.HYDRA),
-                "land", Duration.EndOfTurn), source
+                CardType.LAND, Duration.EndOfTurn), source
         );
         return true;
     }

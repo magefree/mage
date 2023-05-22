@@ -40,7 +40,7 @@ public final class CreepingTarPit extends CardImpl {
                         .withColor("BU")
                         .withSubType(SubType.ELEMENTAL)
                         .withAbility(new CantBeBlockedSourceAbility()),
-                "land", Duration.EndOfTurn)
+                CardType.LAND, Duration.EndOfTurn)
                 .setText("{this} becomes a 3/2 blue and black Elemental creature until end of turn and can't be blocked this turn. It's still a land"),
                 new ManaCostsImpl<>("{1}{U}{B}")));
     }

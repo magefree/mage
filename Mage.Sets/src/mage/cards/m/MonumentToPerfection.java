@@ -63,7 +63,7 @@ public final class MonumentToPerfection extends CardImpl {
                 ).withType(CardType.ARTIFACT)
                         .withAbility(IndestructibleAbility.getInstance())
                         .withAbility(new ToxicAbility(9)),
-                        "", Duration.Custom
+                        CardType.ARTIFACT, Duration.Custom
                 ).andLoseAbilities(true), new GenericManaCost(3), MonumentToPerfectionCondition.instance
         ).addHint(MonumentToPerfectionValue.getHint()));
     }

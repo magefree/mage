@@ -38,7 +38,7 @@ public final class ChimericMass extends CardImpl {
                         .withType(CardType.ARTIFACT)
                         .withSubType(SubType.CONSTRUCT)
                         .withAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetBasePowerToughnessSourceEffect(new CountersSourceCount(CounterType.CHARGE)))),
-                "", Duration.EndOfTurn).withDurationRuleAtStart(true), new GenericManaCost(1)));
+                CardType.ARTIFACT, Duration.EndOfTurn).withDurationRuleAtStart(true), new GenericManaCost(1)));
     }
 
     private ChimericMass(final ChimericMass card) {
