@@ -3,7 +3,9 @@ package mage.abilities.effects.common.continuous;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.Effect;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -42,6 +44,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
     protected DynamicValue power = null;
     protected DynamicValue toughness = null;
     protected boolean durationRuleAtStart; // put duration rule at the start of the rules text rather than the end
+    protected boolean hasCDA;
 
     /**
      * Becomes a creature retaining its previous types
@@ -50,7 +53,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
      * @param duration         Duration for the effect
      */
     public BecomesCreatureSourceEffect(Token token, String theyAreStillType, Duration duration) {
-        this(token, theyAreStillType, duration, false, false, false);
+        this(token, theyAreStillType, duration, false, false);
     }
 
     /**
@@ -59,7 +62,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
      * @param duration Duration for the effect
      */
     public BecomesCreatureSourceEffect(Token token, Duration duration) {
-        this(token, "", duration, true, false, false);
+        this(token, "", duration, true, false);
     }
 
     /**
@@ -68,17 +71,16 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
      * @param duration          Duration for the effect
      * @param losePreviousTypes if true, permanent loses its previous types
      * @param loseAbilities     if true, permanent loses its other abilities
-     * @param characterDefining if true, effect applies on layer 7a (it probably shouldn't)
      */
-    public BecomesCreatureSourceEffect(Token token, String theyAreStillType, Duration duration, boolean losePreviousTypes, boolean loseAbilities, boolean characterDefining) {
+    public BecomesCreatureSourceEffect(Token token, String theyAreStillType, Duration duration, boolean losePreviousTypes, boolean loseAbilities) {
         super(duration, Outcome.BecomeCreature);
-        this.characterDefining = characterDefining;
         this.token = token;
         this.theyAreStillType = theyAreStillType;
         this.losePreviousTypes = losePreviousTypes;
         this.loseAbilities = loseAbilities;
         this.durationRuleAtStart = (theyAreStillType != null && theyAreStillType.contains("planeswalker"));
         setText();
+        this.hasCDA = checkTokenCDA();
 
         this.addDependencyType(DependencyType.BecomeCreature);
     }
@@ -96,6 +98,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
             this.toughness = effect.toughness.copy();
         }
         this.durationRuleAtStart = effect.durationRuleAtStart;
+        this.hasCDA = effect.hasCDA;
     }
 
     @Override
@@ -157,8 +160,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                 break;
 
             case PTChangingEffects_7:
-                if ((sublayer == SubLayer.CharacteristicDefining_7a && isCharacterDefining())
-                        || (sublayer == SubLayer.SetPT_7b && !isCharacterDefining())) {
+                if ((sublayer == SubLayer.SetPT_7b) && !hasCDA) {
                     if (power != null) {
                         permanent.getPower().setModifiedBaseValue(power.calculate(game, source, this)); // check all other becomes to use calculate?
                     } else if (token.getPower() != null) {
@@ -225,6 +227,22 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                 || layer == Layer.AbilityAddingRemovingEffects_6
                 || layer == Layer.ColorChangingEffects_5
                 || layer == Layer.TypeChangingEffects_4;
+    }
+
+    /**
+     * Check whether the token contains a characteristic-defining ability in layer 7a.
+     * If it does, then need to not overwrite P/T in layer 7b.
+     * @return true if the token has a characteristic-defining ability
+     */
+    private boolean checkTokenCDA() {
+        for (Ability ability : token.getAbilities()) {
+            for (Effect effect : ability.getEffects()) {
+                if (effect instanceof ContinuousEffect && ((ContinuousEffect) effect).getSublayer() == SubLayer.CharacteristicDefining_7a) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }
