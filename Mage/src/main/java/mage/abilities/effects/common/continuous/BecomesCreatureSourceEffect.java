@@ -12,7 +12,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, xenohedron
  */
 public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements SourceEffect {
 
@@ -40,11 +40,12 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
     protected Token token;
     protected CardType retainType; // if null, loses previous types
     protected boolean loseAbilities = false;
+    protected boolean loseEquipmentType = false;
     protected DynamicValue power = null;
     protected DynamicValue toughness = null;
     protected boolean durationRuleAtStart; // put duration rule at the start of the rules text rather than the end
     protected boolean hasCDA; // used when becoming a creature with an ability that sets P/T in layer 7a
-    
+
     /**
      * @param token       Token as blueprint for creature to become
      * @param retainType  If null, permanent loses its previous types, otherwise retains types with appropriate text
@@ -65,6 +66,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
         this.token = effect.token.copy();
         this.retainType = effect.retainType;
         this.loseAbilities = effect.loseAbilities;
+        this.loseEquipmentType = effect.loseEquipmentType;
         if (effect.power != null) {
             this.power = effect.power.copy();
         }
@@ -110,6 +112,9 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                 }
                 for (CardType cardType : token.getCardType(game)) {
                     permanent.addCardType(game, cardType);
+                }
+                if (loseEquipmentType) {
+                    permanent.removeSubType(game, SubType.EQUIPMENT);
                 }
                 if (retainType == CardType.CREATURE || retainType == CardType.ARTIFACT) {
                     permanent.removeAllCreatureTypes(game);
@@ -163,11 +168,18 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
     }
 
     /**
-     * Source loses all other abilities as part of the effect
-     * Note: need to set text manually
+     * Source loses all other abilities as part of the effect. Need to set text elsewhere.
      */
     public BecomesCreatureSourceEffect andLoseAbilities(boolean loseAbilities) {
         this.loseAbilities = loseAbilities;
+        return this;
+    }
+
+    /**
+     * Source loses Equipment subtype as part of the effect. Need to set text manually.
+     */
+    public BecomesCreatureSourceEffect andNotEquipment(boolean notEquipment) {
+        this.loseEquipmentType = notEquipment;
         return this;
     }
 
