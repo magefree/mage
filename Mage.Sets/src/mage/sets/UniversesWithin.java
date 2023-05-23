@@ -29,7 +29,6 @@ public final class UniversesWithin extends ExpansionSet {
         cards.add(new SetCardInfo("Elmar, Ulvenwald Informant", 4, Rarity.RARE, mage.cards.e.ElmarUlvenwaldInformant.class));
         cards.add(new SetCardInfo("Hargilde, Kindly Runechanter", 5, Rarity.RARE, mage.cards.h.HargildeKindlyRunechanter.class));
         cards.add(new SetCardInfo("Havengul Laboratory", 9, Rarity.RARE, mage.cards.h.HavengulLaboratory.class));
-        cards.add(new SetCardInfo("Havengul Mystery", 9, Rarity.RARE, mage.cards.h.HavengulMystery.class));
         cards.add(new SetCardInfo("Immard, the Stormcleaver", 14, Rarity.RARE, mage.cards.i.ImmardTheStormcleaver.class));
         cards.add(new SetCardInfo("Maarika, Brutal Gladiator", 15, Rarity.RARE, mage.cards.m.MaarikaBrutalGladiator.class));
         cards.add(new SetCardInfo("Othelm, Sigardian Outcast", 6, Rarity.RARE, mage.cards.o.OthelmSigardianOutcast.class));

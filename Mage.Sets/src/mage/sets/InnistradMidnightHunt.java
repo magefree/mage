@@ -112,8 +112,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Covert Cutpurse", 92, Rarity.UNCOMMON, mage.cards.c.CovertCutpurse.class));
         cards.add(new SetCardInfo("Covetous Castaway", 45, Rarity.UNCOMMON, mage.cards.c.CovetousCastaway.class));
         cards.add(new SetCardInfo("Crawl from the Cellar", 93, Rarity.COMMON, mage.cards.c.CrawlFromTheCellar.class));
-        cards.add(new SetCardInfo("Creeping Inn", 264, Rarity.MYTHIC, mage.cards.c.CreepingInn.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Creeping Inn", 379, Rarity.MYTHIC, mage.cards.c.CreepingInn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Croaking Counterpart", 215, Rarity.RARE, mage.cards.c.CroakingCounterpart.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Croaking Counterpart", 369, Rarity.RARE, mage.cards.c.CroakingCounterpart.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Crossroads Candleguide", 253, Rarity.COMMON, mage.cards.c.CrossroadsCandleguide.class));
@@ -223,7 +221,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Immolation", 144, Rarity.COMMON, mage.cards.i.Immolation.class));
         cards.add(new SetCardInfo("Infernal Grasp", 107, Rarity.UNCOMMON, mage.cards.i.InfernalGrasp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Infernal Grasp", 389, Rarity.UNCOMMON, mage.cards.i.InfernalGrasp.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Inherited Fiend", 105, Rarity.UNCOMMON, mage.cards.i.InheritedFiend.class));
         cards.add(new SetCardInfo("Intrepid Adversary", 25, Rarity.MYTHIC, mage.cards.i.IntrepidAdversary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Intrepid Adversary", 329, Rarity.MYTHIC, mage.cards.i.IntrepidAdversary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 270, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));

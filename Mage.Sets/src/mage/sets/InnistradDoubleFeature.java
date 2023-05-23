@@ -133,7 +133,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Cradle of Safety", 321, Rarity.COMMON, mage.cards.c.CradleOfSafety.class));
         cards.add(new SetCardInfo("Crawl from the Cellar", 93, Rarity.COMMON, mage.cards.c.CrawlFromTheCellar.class));
         cards.add(new SetCardInfo("Crawling Infestation", 460, Rarity.UNCOMMON, mage.cards.c.CrawlingInfestation.class));
-        cards.add(new SetCardInfo("Creeping Inn", 264, Rarity.MYTHIC, mage.cards.c.CreepingInn.class));
         cards.add(new SetCardInfo("Creepy Puppeteer", 418, Rarity.RARE, mage.cards.c.CreepyPuppeteer.class));
         cards.add(new SetCardInfo("Croaking Counterpart", 215, Rarity.RARE, mage.cards.c.CroakingCounterpart.class));
         cards.add(new SetCardInfo("Crossroads Candleguide", 253, Rarity.COMMON, mage.cards.c.CrossroadsCandleguide.class));
@@ -267,7 +266,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Hedgewitch's Mask", 23, Rarity.COMMON, mage.cards.h.HedgewitchsMask.class));
         cards.add(new SetCardInfo("Heirloom Mirror", 105, Rarity.UNCOMMON, mage.cards.h.HeirloomMirror.class));
         cards.add(new SetCardInfo("Henrika Domnathi", 386, Rarity.MYTHIC, mage.cards.h.HenrikaDomnathi.class));
-        cards.add(new SetCardInfo("Henrika, Infernal Seer", 386, Rarity.MYTHIC, mage.cards.h.HenrikaInfernalSeer.class));
         cards.add(new SetCardInfo("Hero's Downfall", 387, Rarity.UNCOMMON, mage.cards.h.HerosDownfall.class));
         cards.add(new SetCardInfo("Heron of Hope", 285, Rarity.COMMON, mage.cards.h.HeronOfHope.class));
         cards.add(new SetCardInfo("Heron-Blessed Geist", 286, Rarity.COMMON, mage.cards.h.HeronBlessedGeist.class));
@@ -290,7 +288,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Immolation", 144, Rarity.COMMON, mage.cards.i.Immolation.class));
         cards.add(new SetCardInfo("Infernal Grasp", 107, Rarity.UNCOMMON, mage.cards.i.InfernalGrasp.class));
         cards.add(new SetCardInfo("Infestation Expert", 473, Rarity.UNCOMMON, mage.cards.i.InfestationExpert.class));
-        cards.add(new SetCardInfo("Inherited Fiend", 105, Rarity.UNCOMMON, mage.cards.i.InheritedFiend.class));
         cards.add(new SetCardInfo("Innocent Traveler", 388, Rarity.UNCOMMON, mage.cards.i.InnocentTraveler.class));
         cards.add(new SetCardInfo("Inspired Idea", 331, Rarity.RARE, mage.cards.i.InspiredIdea.class));
         cards.add(new SetCardInfo("Into the Night", 430, Rarity.UNCOMMON, mage.cards.i.IntoTheNight.class));

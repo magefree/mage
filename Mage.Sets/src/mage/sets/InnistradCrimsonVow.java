@@ -227,9 +227,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Henrika Domnathi", 119, Rarity.MYTHIC, mage.cards.h.HenrikaDomnathi.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Henrika Domnathi", 293, Rarity.MYTHIC, mage.cards.h.HenrikaDomnathi.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Henrika Domnathi", 335, Rarity.MYTHIC, mage.cards.h.HenrikaDomnathi.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Henrika, Infernal Seer", 119, Rarity.MYTHIC, mage.cards.h.HenrikaInfernalSeer.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Henrika, Infernal Seer", 293, Rarity.MYTHIC, mage.cards.h.HenrikaInfernalSeer.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Henrika, Infernal Seer", 335, Rarity.MYTHIC, mage.cards.h.HenrikaInfernalSeer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hero's Downfall", 120, Rarity.UNCOMMON, mage.cards.h.HerosDownfall.class));
         cards.add(new SetCardInfo("Heron of Hope", 18, Rarity.COMMON, mage.cards.h.HeronOfHope.class));
         cards.add(new SetCardInfo("Heron-Blessed Geist", 19, Rarity.COMMON, mage.cards.h.HeronBlessedGeist.class));
