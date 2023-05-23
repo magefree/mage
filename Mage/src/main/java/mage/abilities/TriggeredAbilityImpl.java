@@ -238,7 +238,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 }
 
             }
-            sb.append(CardUtil.getTextWithFirstCharLowerCase(superRule));
+            sb.append(superRule);
             if (triggersOnce) {
                 sb.append(" This ability triggers only once each turn.");
             }
