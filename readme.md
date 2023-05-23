@@ -9,7 +9,7 @@
 [![Join the chat at https://gitter.im/magefree/mage](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/magefree/mage?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 XMage allows you to play Magic against one or more online players or computer opponents. 
-It includes full rules enforcement for over **20 000** unique cards and more than 50.000 reprints from different editions. 
+It includes full rules enforcement for over **25 000** unique cards and more than 65 000 reprints from different editions. 
 You can also find custom sets like Star Wars. All regular sets have nearly all implemented cards.
 
 It supports single matches and tournaments with dozens of game modes like duel, multiplayer, standard, modern, commander, 
@@ -22,19 +22,20 @@ There are [public servers](http://xmage.today/servers/) where you can play XMage
 You can also host your own server to play against the AI and/or your friends.
 
 XMage community and resources:
-* [Official XMage forum](http://www.slightlymagic.net/forum/viewforum.php?f=70);
 * [Official XMage support and feature request on github](https://github.com/magefree/mage/issues);
+* [Official XMage forum](http://www.slightlymagic.net/forum/viewforum.php?f=70) (outdated);
 * [Reddit XMage group](https://www.reddit.com/r/XMage/);
 * [Reddit XMage discord channel](https://discord.gg/Pqf42yn);
-* [Latest releases](https://github.com/magefree/mage/releases);
+* [Latest changes](https://github.com/magefree/mage/commits/master);
 * [Latest news](https://jaydi85.github.io/xmage-web-news/news.html);
+* [Latest releases](https://github.com/magefree/mage/releases); 
 * [Project documentation](https://github.com/magefree/mage/wiki).
 
 Servers status:
-* http://xmage.today/servers/
+* http://xmage.today/servers/ (temporarily out of service)
 
 Beta server with un-released or under development features:
-* http://xmage.today/
+* http://xmage.today/ (release version)
 
 ## Features
 
@@ -50,21 +51,13 @@ Beta server with un-released or under development features:
 
 ## Bug report / feature request
 
-The best way to report bug or feature request is [github's issues page](https://github.com/magefree/mage/issues). 
-There are another way to report bugs too:
-* Feedback from xmage app's main menu;
-* Bug thread in the [Official XMage forum](http://www.slightlymagic.net/forum/viewforum.php?f=70).  
+The best way to report bug or feature request is [github's issues page](https://github.com/magefree/mage/issues).
 
 ## Installation / running
 
-* Download [latest XMage launcher file](http://xmage.de) and put it to any folder like `D:\games\xmage`;
-* You need to have [Java version 8 or later](http://java.com/) to run launcher;
-* If you can't run it then create `run-LAUNCHER.cmd` text file in launcher folder and put that line to it and save as ANSI format:
-  * `java -Djava.net.preferIPv4Stack=true -jar XMageLauncher-0.3.8.jar`
-  * or just [downlod and unpack that archive](http://xmage.today/X/run.zip) to launcher folder.
+* Download [latest XMage launcher and app files](http://xmage.today/) and un-pack it to any folder like `D:\games\xmage`;
+* You need to have [Java version 8 or later](http://java.com/) to run launcher.
   
-Look [here](http://www.slightlymagic.net/forum/viewtopic.php?f=70&t=13632) for more detailed instructions. 
-
 [Wiki page](https://github.com/magefree/mage/wiki) contains detail information about private or public server setup.
 
 ### Server options
