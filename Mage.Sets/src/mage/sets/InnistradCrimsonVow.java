@@ -219,9 +219,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Hallowed Haunting", 349, Rarity.MYTHIC, mage.cards.h.HallowedHaunting.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hamlet Vanguard", 201, Rarity.RARE, mage.cards.h.HamletVanguard.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hamlet Vanguard", 389, Rarity.RARE, mage.cards.h.HamletVanguard.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Hauken's Insight", 320, Rarity.MYTHIC, mage.cards.h.HaukensInsight.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Hauken's Insight", 332, Rarity.MYTHIC, mage.cards.h.HaukensInsight.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Hauken's Insight", 65, Rarity.MYTHIC, mage.cards.h.HaukensInsight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Headless Rider", 118, Rarity.RARE, mage.cards.h.HeadlessRider.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Headless Rider", 372, Rarity.RARE, mage.cards.h.HeadlessRider.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Henrika Domnathi", 119, Rarity.MYTHIC, mage.cards.h.HenrikaDomnathi.class, NON_FULL_USE_VARIOUS));
@@ -284,9 +281,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Wolf", 168, Rarity.COMMON, mage.cards.l.LightningWolf.class));
         cards.add(new SetCardInfo("Lunar Rejection", 67, Rarity.UNCOMMON, mage.cards.l.LunarRejection.class));
         cards.add(new SetCardInfo("Magma Pummeler", 169, Rarity.UNCOMMON, mage.cards.m.MagmaPummeler.class));
-        cards.add(new SetCardInfo("Malicious Invader", 121, Rarity.UNCOMMON, mage.cards.m.MaliciousInvader.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Malicious Invader", 294, Rarity.UNCOMMON, mage.cards.m.MaliciousInvader.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Malicious Invader", 336, Rarity.UNCOMMON, mage.cards.m.MaliciousInvader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Manaform Hellkite", 170, Rarity.MYTHIC, mage.cards.m.ManaformHellkite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Manaform Hellkite", 380, Rarity.MYTHIC, mage.cards.m.ManaformHellkite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Markov Purifier", 241, Rarity.UNCOMMON, mage.cards.m.MarkovPurifier.class, NON_FULL_USE_VARIOUS));

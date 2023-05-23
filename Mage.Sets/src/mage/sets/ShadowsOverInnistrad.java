@@ -89,7 +89,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Dead Weight", 106, Rarity.COMMON, mage.cards.d.DeadWeight.class));
         cards.add(new SetCardInfo("Deathcap Cultivator", 202, Rarity.RARE, mage.cards.d.DeathcapCultivator.class));
         cards.add(new SetCardInfo("Declaration in Stone", 12, Rarity.RARE, mage.cards.d.DeclarationInStone.class));
-        cards.add(new SetCardInfo("Demon-Possessed Witch", 119, Rarity.UNCOMMON, mage.cards.d.DemonPossessedWitch.class));
         cards.add(new SetCardInfo("Deny Existence", 55, Rarity.COMMON, mage.cards.d.DenyExistence.class));
         cards.add(new SetCardInfo("Descend upon the Sinful", 13, Rarity.MYTHIC, mage.cards.d.DescendUponTheSinful.class));
         cards.add(new SetCardInfo("Devils' Playground", 151, Rarity.RARE, mage.cards.d.DevilsPlayground.class));
