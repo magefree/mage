@@ -74,7 +74,6 @@ public class IxalanPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Herald of Secret Streams", "59s", Rarity.RARE, mage.cards.h.HeraldOfSecretStreams.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hostage Taker", "223s", Rarity.RARE, mage.cards.h.HostageTaker.class));
         cards.add(new SetCardInfo("Huatli, Warrior Poet", "224s", Rarity.MYTHIC, mage.cards.h.HuatliWarriorPoet.class));
-        cards.add(new SetCardInfo("Itlimoc, Cradle of the Sun", "191s", Rarity.RARE, mage.cards.i.ItlimocCradleOfTheSun.class));
         cards.add(new SetCardInfo("Jace, Cunning Castaway", "60s", Rarity.MYTHIC, mage.cards.j.JaceCunningCastaway.class));
         cards.add(new SetCardInfo("Kinjalli's Sunwing", "19p", Rarity.RARE, mage.cards.k.KinjallisSunwing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kinjalli's Sunwing", "19s", Rarity.RARE, mage.cards.k.KinjallisSunwing.class, NON_FULL_USE_VARIOUS));

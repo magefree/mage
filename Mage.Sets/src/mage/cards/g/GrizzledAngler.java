@@ -1,42 +1,64 @@
-
 package mage.cards.g;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.RequirementEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.game.Game;
-import mage.players.Player;
+import mage.game.permanent.Permanent;
 
 import java.util.UUID;
 
 /**
  * @author fireshoes
  */
-public final class GrizzledAngler extends CardImpl {
+public final class GrizzledAngler extends TransformingDoubleFacedCard {
+
+    private static final FilterCard filter = new FilterCreatureCard();
+
+    static {
+        filter.add(ColorlessPredicate.instance);
+    }
+
+    private static final Condition condition = new CardsInControllerGraveyardCondition(1, filter);
 
     public GrizzledAngler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.subtype.add(SubType.HUMAN);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
-
-        this.secondSideCardClazz = mage.cards.g.GrislyAnglerfish.class;
+        super(
+                ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN}, "{2}{U}",
+                "Grisly Anglerfish",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.ELDRAZI, SubType.FISH}, ""
+        );
+        this.getLeftHalfCard().setPT(2, 3);
+        this.getRightHalfCard().setPT(4, 5);
 
         // {T}: Put the top two cards of your library into your graveyard. Then if there is a colorless creature card in your graveyard, transform Grizzled Angler.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrizzledAnglerEffect(), new TapSourceCost()));
+        Ability ability = new SimpleActivatedAbility(new MillCardsControllerEffect(2), new TapSourceCost());
+        ability.addEffect(new ConditionalOneShotEffect(
+                new TransformSourceEffect(), condition, "Then if there is " +
+                "a colorless creature card in your graveyard, transform {this}"
+        ));
+        this.getLeftHalfCard().addAbility(ability);
+
+        // Grisly Anglerfish
+        // {6}: Creatures your opponents control attack this turn if able.
+        this.getRightHalfCard().addAbility(new SimpleActivatedAbility(
+                new GrislyAnglerfishEffect(), new GenericManaCost(6)
+        ));
     }
 
     private GrizzledAngler(final GrizzledAngler card) {
@@ -49,37 +71,34 @@ public final class GrizzledAngler extends CardImpl {
     }
 }
 
-class GrizzledAnglerEffect extends OneShotEffect {
+class GrislyAnglerfishEffect extends RequirementEffect {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("a colorless creature card in your graveyard");
-
-    static {
-        filter.add(ColorlessPredicate.instance);
+    GrislyAnglerfishEffect() {
+        super(Duration.EndOfTurn);
+        staticText = "creatures your opponents control attack this turn if able";
     }
 
-    public GrizzledAnglerEffect() {
-        super(Outcome.Benefit);
-        staticText = "Mill two cards. Then if there is a colorless creature card in your graveyard, transform {this}";
-    }
-
-    public GrizzledAnglerEffect(final GrizzledAnglerEffect effect) {
+    private GrislyAnglerfishEffect(final GrislyAnglerfishEffect effect) {
         super(effect);
     }
 
     @Override
-    public GrizzledAnglerEffect copy() {
-        return new GrizzledAnglerEffect(this);
+    public GrislyAnglerfishEffect copy() {
+        return new GrislyAnglerfishEffect(this);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            controller.millCards(2, source, game);
-            if (controller.getGraveyard().count(filter, source.getControllerId(), source, game) >= 1) {
-                return new TransformSourceEffect().apply(game, source);
-            }
-        }
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return game.getOpponents(source.getControllerId()).contains(permanent.getControllerId());
+    }
+
+    @Override
+    public boolean mustAttack(Game game) {
+        return true;
+    }
+
+    @Override
+    public boolean mustBlock(Game game) {
         return false;
     }
 }
