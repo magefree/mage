@@ -3,9 +3,7 @@ package mage.abilities.effects.common.continuous;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.Effect;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -44,7 +42,6 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
     protected DynamicValue power = null;
     protected DynamicValue toughness = null;
     protected boolean durationRuleAtStart; // put duration rule at the start of the rules text rather than the end
-    protected boolean hasCDA; // used when becoming a creature with an ability that sets P/T in layer 7a
 
     /**
      * @param token       Token as blueprint for creature to become
@@ -56,7 +53,6 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
         this.token = token;
         this.retainType = retainType;
         this.durationRuleAtStart = (retainType == CardType.PLANESWALKER || retainType == CardType.CREATURE);
-        this.hasCDA = checkTokenCDA();
         setText();
         this.addDependencyType(DependencyType.BecomeCreature);
     }
@@ -74,7 +70,6 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
             this.toughness = effect.toughness.copy();
         }
         this.durationRuleAtStart = effect.durationRuleAtStart;
-        this.hasCDA = effect.hasCDA;
     }
 
     @Override
@@ -138,7 +133,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                 break;
 
             case PTChangingEffects_7:
-                if ((sublayer == SubLayer.SetPT_7b) && !hasCDA) {
+                if (sublayer == SubLayer.SetPT_7b) {
                     if (power != null) {
                         permanent.getPower().setModifiedBaseValue(power.calculate(game, source, this)); // check all other becomes to use calculate?
                     } else if (token.getPower() != null) {
@@ -224,23 +219,6 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                 || layer == Layer.AbilityAddingRemovingEffects_6
                 || layer == Layer.ColorChangingEffects_5
                 || layer == Layer.TypeChangingEffects_4;
-    }
-
-    /**
-     * Check whether the token contains a characteristic-defining ability in layer 7a.
-     * If it does, then need to not overwrite P/T in layer 7b.
-     * (It might not really be a CDA, but applied as one for consistency with the effect type.)
-     * @return true if the token has an ability with an effect in layer 7a
-     */
-    private boolean checkTokenCDA() {
-        for (Ability ability : token.getAbilities()) {
-            for (Effect effect : ability.getEffects()) {
-                if (effect instanceof ContinuousEffect && ((ContinuousEffect) effect).getSublayer() == SubLayer.CharacteristicDefining_7a) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
 }
