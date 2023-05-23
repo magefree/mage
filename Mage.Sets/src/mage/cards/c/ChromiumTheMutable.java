@@ -47,9 +47,7 @@ public final class ChromiumTheMutable extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new BecomesCreatureSourceEffect(
                         new ChromiumTheMutableToken(), CardType.CREATURE, Duration.EndOfTurn
-                ).andLoseAbilities(true).setText("Until end of turn, {this} becomes "
-                        + "a Human with base power and toughness 1/1, "
-                        + "loses all abilities, and gains hexproof"),
+                ).andLoseAbilities(true),
                 new DiscardCardCost()
         );
         ability.addEffect(

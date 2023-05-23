@@ -28,8 +28,7 @@ public final class DaxossTorment extends CardImpl {
                         .withSubType(SubType.DEMON)
                         .withAbility(FlyingAbility.getInstance())
                         .withAbility(HasteAbility.getInstance()),
-                CardType.ENCHANTMENT, Duration.EndOfTurn)
-                .setText("{this} becomes a 5/5 Demon creature with flying and haste in addition to its other types until end of turn")));
+                CardType.ENCHANTMENT, Duration.EndOfTurn)));
     }
 
     private DaxossTorment(final DaxossTorment card) {
