@@ -44,8 +44,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Ambitious Farmhand", 2, Rarity.UNCOMMON, mage.cards.a.AmbitiousFarmhand.class));
         cards.add(new SetCardInfo("Angelfire Ignition", 209, Rarity.RARE, mage.cards.a.AngelfireIgnition.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Angelfire Ignition", 367, Rarity.RARE, mage.cards.a.AngelfireIgnition.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Angelic Enforcer", 17, Rarity.MYTHIC, mage.cards.a.AngelicEnforcer.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Angelic Enforcer", 327, Rarity.MYTHIC, mage.cards.a.AngelicEnforcer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arcane Infusion", 210, Rarity.UNCOMMON, mage.cards.a.ArcaneInfusion.class));
         cards.add(new SetCardInfo("Ardent Elementalist", 128, Rarity.COMMON, mage.cards.a.ArdentElementalist.class));
         cards.add(new SetCardInfo("Arlinn, the Pack's Hope", 211, Rarity.MYTHIC, mage.cards.a.ArlinnThePacksHope.class, NON_FULL_USE_VARIOUS));
@@ -56,7 +54,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Ashmouth Dragon", 358, Rarity.RARE, mage.cards.a.AshmouthDragon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Augur of Autumn", 168, Rarity.RARE, mage.cards.a.AugurOfAutumn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Augur of Autumn", 360, Rarity.RARE, mage.cards.a.AugurOfAutumn.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Awoken Demon", 100, Rarity.COMMON, mage.cards.a.AwokenDemon.class));
         cards.add(new SetCardInfo("Baithook Angler", 42, Rarity.COMMON, mage.cards.b.BaithookAngler.class));
         cards.add(new SetCardInfo("Baneblade Scoundrel", 289, Rarity.UNCOMMON, mage.cards.b.BanebladeScoundrel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Baneblade Scoundrel", 85, Rarity.UNCOMMON, mage.cards.b.BanebladeScoundrel.class, NON_FULL_USE_VARIOUS));
@@ -159,7 +156,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Eccentric Farmer", 185, Rarity.COMMON, mage.cards.e.EccentricFarmer.class));
         cards.add(new SetCardInfo("Ecstatic Awakener", 100, Rarity.COMMON, mage.cards.e.EcstaticAwakener.class));
         cards.add(new SetCardInfo("Electric Revelation", 135, Rarity.COMMON, mage.cards.e.ElectricRevelation.class));
-        cards.add(new SetCardInfo("Embodiment of Flame", 141, Rarity.UNCOMMON, mage.cards.e.EmbodimentOfFlame.class));
         cards.add(new SetCardInfo("Enduring Angel", 17, Rarity.MYTHIC, mage.cards.e.EnduringAngel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Enduring Angel", 327, Rarity.MYTHIC, mage.cards.e.EnduringAngel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Evolving Wilds", 261, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));

@@ -579,7 +579,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Infest", 43568, Rarity.UNCOMMON, mage.cards.i.Infest.class, FULL_ART));
         cards.add(new SetCardInfo("Ink-Eyes, Servant of Oni", 32013, Rarity.RARE, mage.cards.i.InkEyesServantOfOni.class));
         cards.add(new SetCardInfo("Inkmoth Nexus", 62999, Rarity.RARE, mage.cards.i.InkmothNexus.class));
-        cards.add(new SetCardInfo("Insidious Mist", 60472, Rarity.RARE, mage.cards.i.InsidiousMist.class));
         cards.add(new SetCardInfo("Intuition", 36046, Rarity.RARE, mage.cards.i.Intuition.class));
         cards.add(new SetCardInfo("Island", 239, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 247, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));

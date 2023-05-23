@@ -164,9 +164,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Drogskol Infantry", 10, Rarity.COMMON, mage.cards.d.DrogskolInfantry.class));
         cards.add(new SetCardInfo("Dying to Serve", 109, Rarity.RARE, mage.cards.d.DyingToServe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dying to Serve", 370, Rarity.RARE, mage.cards.d.DyingToServe.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Edgar Markov's Coffin", 236, Rarity.RARE, mage.cards.e.EdgarMarkovsCoffin.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Edgar Markov's Coffin", 311, Rarity.RARE, mage.cards.e.EdgarMarkovsCoffin.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Edgar Markov's Coffin", 341, Rarity.RARE, mage.cards.e.EdgarMarkovsCoffin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Edgar's Awakening", 110, Rarity.UNCOMMON, mage.cards.e.EdgarsAwakening.class));
         cards.add(new SetCardInfo("Edgar, Charmed Groom", 236, Rarity.RARE, mage.cards.e.EdgarCharmedGroom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Edgar, Charmed Groom", 311, Rarity.RARE, mage.cards.e.EdgarCharmedGroom.class, NON_FULL_USE_VARIOUS));
@@ -197,7 +194,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 277, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 402, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 412, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Forsaken Thresher", 256, Rarity.UNCOMMON, mage.cards.f.ForsakenThresher.class));
         cards.add(new SetCardInfo("Frenzied Devils", 159, Rarity.UNCOMMON, mage.cards.f.FrenziedDevils.class));
         cards.add(new SetCardInfo("Geistlight Snare", 405, Rarity.UNCOMMON, mage.cards.g.GeistlightSnare.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Geistlight Snare", 60, Rarity.UNCOMMON, mage.cards.g.GeistlightSnare.class, NON_FULL_USE_VARIOUS));
