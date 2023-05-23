@@ -201,7 +201,8 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                         newRule.insert(4, "may ");
                         superRule = newRule.toString();
                     }
-                } else if (this.getTargets().isEmpty()
+                } else if (!ruleLow.startsWith("{this}")
+                        && (this.getTargets().isEmpty()
                         || ruleLow.startsWith("attach")
                         || ruleLow.startsWith("change")
                         || ruleLow.startsWith("counter")
@@ -220,7 +221,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                         || ruleLow.startsWith("shuffle")
                         || ruleLow.startsWith("turn")
                         || ruleLow.startsWith("tap")
-                        || ruleLow.startsWith("untap")) {
+                        || ruleLow.startsWith("untap"))) {
                     sb.append("you may ");
                 } else if (!ruleLow.startsWith("its controller may")) {
                     sb.append("you may have ");
