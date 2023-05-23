@@ -18,7 +18,7 @@ import mage.game.Game;
  * @author LevelX2
  */
 
-public class GainSuspendEffect extends ContinuousEffectImpl implements SourceEffect {
+public class GainSuspendEffect extends ContinuousEffectImpl {
 
     MageObjectReference mor;
 

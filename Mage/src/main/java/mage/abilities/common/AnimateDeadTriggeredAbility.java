@@ -6,7 +6,6 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
-import mage.abilities.effects.common.continuous.SourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.Card;
 import mage.constants.*;
@@ -63,7 +62,7 @@ public class AnimateDeadTriggeredAbility extends EntersBattlefieldTriggeredAbili
     }
 }
 
-class AnimateDeadReplaceAbilityEffect extends ContinuousEffectImpl implements SourceEffect {
+class AnimateDeadReplaceAbilityEffect extends ContinuousEffectImpl {
 
     private final boolean becomesAura;
     private Ability newAbility;

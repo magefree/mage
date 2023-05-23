@@ -14,7 +14,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class GainAbilitySourceEffect extends ContinuousEffectImpl implements SourceEffect {
+public class GainAbilitySourceEffect extends ContinuousEffectImpl {
 
     protected Ability ability;
     // shall a card gain the ability (otherwise permanent)
