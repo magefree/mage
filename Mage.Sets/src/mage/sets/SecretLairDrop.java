@@ -921,7 +921,6 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Forge, Neverwinter Charlatan", 1239, Rarity.RARE, mage.cards.f.ForgeNeverwinterCharlatan.class));
         cards.add(new SetCardInfo("Holga, Relentless Rager", 1240, Rarity.RARE, mage.cards.h.HolgaRelentlessRager.class));
         cards.add(new SetCardInfo("Doric, Nature's Warden", 1241, Rarity.RARE, mage.cards.d.DoricNaturesWarden.class));
-        cards.add(new SetCardInfo("Doric, Owlbear Avenger", 1241, Rarity.RARE, mage.cards.d.DoricOwlbearAvenger.class));
         cards.add(new SetCardInfo("Edgin, Larcenous Lutenist", 1242, Rarity.RARE, mage.cards.e.EdginLarcenousLutenist.class));
         cards.add(new SetCardInfo("Ugin, the Ineffable", 1243, Rarity.RARE, mage.cards.u.UginTheIneffable.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sorin, Imperious Bloodlord", 1244, Rarity.MYTHIC, mage.cards.s.SorinImperiousBloodlord.class));

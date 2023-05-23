@@ -138,7 +138,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Deathcap Glade", 281, Rarity.RARE, mage.cards.d.DeathcapGlade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Demonic Bargain", 103, Rarity.RARE, mage.cards.d.DemonicBargain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Demonic Bargain", 368, Rarity.RARE, mage.cards.d.DemonicBargain.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Depraved Harvester", 104, Rarity.COMMON, mage.cards.d.DepravedHarvester.class));
         cards.add(new SetCardInfo("Desperate Farmer", 104, Rarity.COMMON, mage.cards.d.DesperateFarmer.class));
         cards.add(new SetCardInfo("Dig Up", 197, Rarity.RARE, mage.cards.d.DigUp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dig Up", 387, Rarity.RARE, mage.cards.d.DigUp.class, NON_FULL_USE_VARIOUS));
@@ -209,7 +208,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Glorious Sunrise", 388, Rarity.RARE, mage.cards.g.GloriousSunrise.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gluttonous Guest", 114, Rarity.COMMON, mage.cards.g.GluttonousGuest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gluttonous Guest", 292, Rarity.COMMON, mage.cards.g.GluttonousGuest.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Gnarled Grovestrider", 198, Rarity.UNCOMMON, mage.cards.g.GnarledGrovestrider.class));
         cards.add(new SetCardInfo("Graf Reaver", 115, Rarity.RARE, mage.cards.g.GrafReaver.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Graf Reaver", 371, Rarity.RARE, mage.cards.g.GrafReaver.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grisly Ritual", 116, Rarity.COMMON, mage.cards.g.GrislyRitual.class));

@@ -55,7 +55,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Avacyn's Judgment", 145, Rarity.RARE, mage.cards.a.AvacynsJudgment.class));
         cards.add(new SetCardInfo("Avacynian Missionaries", 6, Rarity.UNCOMMON, mage.cards.a.AvacynianMissionaries.class));
         cards.add(new SetCardInfo("Awoken Horror", 92, Rarity.RARE, mage.cards.a.AwokenHorror.class));
-        cards.add(new SetCardInfo("Bearer of Overwhelming Truths", 54, Rarity.UNCOMMON, mage.cards.b.BearerOfOverwhelmingTruths.class));
         cards.add(new SetCardInfo("Behind the Scenes", 100, Rarity.UNCOMMON, mage.cards.b.BehindTheScenes.class));
         cards.add(new SetCardInfo("Behold the Beyond", 101, Rarity.MYTHIC, mage.cards.b.BeholdTheBeyond.class));
         cards.add(new SetCardInfo("Biting Rain", 102, Rarity.UNCOMMON, mage.cards.b.BitingRain.class));

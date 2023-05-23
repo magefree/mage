@@ -153,7 +153,6 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Hysterical Blindness", 59, Rarity.COMMON, mage.cards.h.HystericalBlindness.class));
         cards.add(new SetCardInfo("Infernal Plunge", 148, Rarity.COMMON, mage.cards.i.InfernalPlunge.class));
         cards.add(new SetCardInfo("Inquisitor's Flail", 227, Rarity.UNCOMMON, mage.cards.i.InquisitorsFlail.class));
-        cards.add(new SetCardInfo("Insectile Aberration", 51, Rarity.COMMON, mage.cards.i.InsectileAberration.class));
         cards.add(new SetCardInfo("Instigator Gang", 149, Rarity.RARE, mage.cards.i.InstigatorGang.class));
         cards.add(new SetCardInfo("Intangible Virtue", 19, Rarity.UNCOMMON, mage.cards.i.IntangibleVirtue.class));
         cards.add(new SetCardInfo("Into the Maw of Hell", 150, Rarity.UNCOMMON, mage.cards.i.IntoTheMawOfHell.class));

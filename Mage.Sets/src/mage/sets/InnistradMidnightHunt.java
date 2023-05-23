@@ -134,7 +134,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Dawnhart Rejuvenator", 301, Rarity.COMMON, mage.cards.d.DawnhartRejuvenator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dawnhart Wardens", 216, Rarity.UNCOMMON, mage.cards.d.DawnhartWardens.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dawnhart Wardens", 308, Rarity.UNCOMMON, mage.cards.d.DawnhartWardens.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Deathbonnet Hulk", 181, Rarity.UNCOMMON, mage.cards.d.DeathbonnetHulk.class));
         cards.add(new SetCardInfo("Deathbonnet Sprout", 181, Rarity.UNCOMMON, mage.cards.d.DeathbonnetSprout.class));
         cards.add(new SetCardInfo("Defend the Celestus", 182, Rarity.UNCOMMON, mage.cards.d.DefendTheCelestus.class));
         cards.add(new SetCardInfo("Defenestrate", 95, Rarity.COMMON, mage.cards.d.Defenestrate.class));
@@ -229,7 +228,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Infernal Grasp", 107, Rarity.UNCOMMON, mage.cards.i.InfernalGrasp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Infernal Grasp", 389, Rarity.UNCOMMON, mage.cards.i.InfernalGrasp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Inherited Fiend", 105, Rarity.UNCOMMON, mage.cards.i.InheritedFiend.class));
-        cards.add(new SetCardInfo("Insectile Aberration", 47, Rarity.UNCOMMON, mage.cards.i.InsectileAberration.class));
         cards.add(new SetCardInfo("Intrepid Adversary", 25, Rarity.MYTHIC, mage.cards.i.IntrepidAdversary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Intrepid Adversary", 329, Rarity.MYTHIC, mage.cards.i.IntrepidAdversary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 270, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));

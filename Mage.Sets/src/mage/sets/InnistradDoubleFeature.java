@@ -153,7 +153,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Dawnhart Rejuvenator", 180, Rarity.COMMON, mage.cards.d.DawnhartRejuvenator.class));
         cards.add(new SetCardInfo("Dawnhart Wardens", 216, Rarity.UNCOMMON, mage.cards.d.DawnhartWardens.class));
         cards.add(new SetCardInfo("Daybreak Combatants", 420, Rarity.COMMON, mage.cards.d.DaybreakCombatants.class));
-        cards.add(new SetCardInfo("Deathbonnet Hulk", 181, Rarity.UNCOMMON, mage.cards.d.DeathbonnetHulk.class));
         cards.add(new SetCardInfo("Deathbonnet Sprout", 181, Rarity.UNCOMMON, mage.cards.d.DeathbonnetSprout.class));
         cards.add(new SetCardInfo("Deathcap Glade", 528, Rarity.RARE, mage.cards.d.DeathcapGlade.class));
         cards.add(new SetCardInfo("Defend the Celestus", 182, Rarity.UNCOMMON, mage.cards.d.DefendTheCelestus.class));
@@ -161,7 +160,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Delver of Secrets", 47, Rarity.UNCOMMON, mage.cards.d.DelverOfSecrets.class));
         cards.add(new SetCardInfo("Demonic Bargain", 370, Rarity.RARE, mage.cards.d.DemonicBargain.class));
         cards.add(new SetCardInfo("Dennick, Pious Apprentice", 217, Rarity.RARE, mage.cards.d.DennickPiousApprentice.class));
-        cards.add(new SetCardInfo("Depraved Harvester", 371, Rarity.COMMON, mage.cards.d.DepravedHarvester.class));
         cards.add(new SetCardInfo("Deserted Beach", 260, Rarity.RARE, mage.cards.d.DesertedBeach.class));
         cards.add(new SetCardInfo("Desperate Farmer", 371, Rarity.COMMON, mage.cards.d.DesperateFarmer.class));
         cards.add(new SetCardInfo("Devious Cover-Up", 48, Rarity.COMMON, mage.cards.d.DeviousCoverUp.class));
@@ -252,7 +250,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Gisa, Glorious Resurrector", 103, Rarity.RARE, mage.cards.g.GisaGloriousResurrector.class));
         cards.add(new SetCardInfo("Glorious Sunrise", 467, Rarity.RARE, mage.cards.g.GloriousSunrise.class));
         cards.add(new SetCardInfo("Gluttonous Guest", 381, Rarity.COMMON, mage.cards.g.GluttonousGuest.class));
-        cards.add(new SetCardInfo("Gnarled Grovestrider", 465, Rarity.UNCOMMON, mage.cards.g.GnarledGrovestrider.class));
         cards.add(new SetCardInfo("Graf Reaver", 382, Rarity.RARE, mage.cards.g.GrafReaver.class));
         cards.add(new SetCardInfo("Grafted Identity", 57, Rarity.RARE, mage.cards.g.GraftedIdentity.class));
         cards.add(new SetCardInfo("Graveyard Trespasser", 104, Rarity.RARE, mage.cards.g.GraveyardTrespasser.class));
@@ -300,7 +297,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Infestation Expert", 473, Rarity.UNCOMMON, mage.cards.i.InfestationExpert.class));
         cards.add(new SetCardInfo("Inherited Fiend", 105, Rarity.UNCOMMON, mage.cards.i.InheritedFiend.class));
         cards.add(new SetCardInfo("Innocent Traveler", 388, Rarity.UNCOMMON, mage.cards.i.InnocentTraveler.class));
-        cards.add(new SetCardInfo("Insectile Aberration", 47, Rarity.UNCOMMON, mage.cards.i.InsectileAberration.class));
         cards.add(new SetCardInfo("Inspired Idea", 331, Rarity.RARE, mage.cards.i.InspiredIdea.class));
         cards.add(new SetCardInfo("Into the Night", 430, Rarity.UNCOMMON, mage.cards.i.IntoTheNight.class));
         cards.add(new SetCardInfo("Intrepid Adversary", 25, Rarity.MYTHIC, mage.cards.i.IntrepidAdversary.class));
