@@ -690,7 +690,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Lowland Oaf", 62415, Rarity.COMMON, mage.cards.l.LowlandOaf.class));
         cards.add(new SetCardInfo("Loyal Retainers", 47973, Rarity.UNCOMMON, mage.cards.l.LoyalRetainers.class));
         cards.add(new SetCardInfo("Lu Bu, Master-at-Arms", 36130, Rarity.RARE, mage.cards.l.LuBuMasterAtArms.class));
-        cards.add(new SetCardInfo("Ludevic's Abomination", 42874, Rarity.RARE, mage.cards.l.LudevicsAbomination.class));
         cards.add(new SetCardInfo("Ludevic's Test Subject", 42874, Rarity.RARE, mage.cards.l.LudevicsTestSubject.class));
         cards.add(new SetCardInfo("Mad Auntie", 35066, Rarity.RARE, mage.cards.m.MadAuntie.class));
         cards.add(new SetCardInfo("Maelstrom Pulse", 37845, Rarity.RARE, mage.cards.m.MaelstromPulse.class));

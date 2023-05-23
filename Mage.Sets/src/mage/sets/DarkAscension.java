@@ -187,7 +187,6 @@ public final class DarkAscension extends ExpansionSet {
         cards.add(new SetCardInfo("Tragic Slip", 76, Rarity.COMMON, mage.cards.t.TragicSlip.class));
         cards.add(new SetCardInfo("Ulvenwald Bear", 129, Rarity.COMMON, mage.cards.u.UlvenwaldBear.class));
         cards.add(new SetCardInfo("Undying Evil", 77, Rarity.COMMON, mage.cards.u.UndyingEvil.class));
-        cards.add(new SetCardInfo("Unhallowed Cathar", 13, Rarity.COMMON, mage.cards.u.UnhallowedCathar.class));
         cards.add(new SetCardInfo("Vault of the Archangel", 158, Rarity.RARE, mage.cards.v.VaultOfTheArchangel.class));
         cards.add(new SetCardInfo("Vengeful Vampire", 78, Rarity.UNCOMMON, mage.cards.v.VengefulVampire.class));
         cards.add(new SetCardInfo("Village Survivors", 130, Rarity.UNCOMMON, mage.cards.v.VillageSurvivors.class));

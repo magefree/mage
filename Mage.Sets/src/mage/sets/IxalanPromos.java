@@ -20,7 +20,6 @@ public class IxalanPromos extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Adanto, the First Fort", "22s", Rarity.RARE, mage.cards.a.AdantoTheFirstFort.class));
         cards.add(new SetCardInfo("Admiral Beckett Brass", "217s", Rarity.MYTHIC, mage.cards.a.AdmiralBeckettBrass.class));
         cards.add(new SetCardInfo("Angrath's Marauders", "132s", Rarity.RARE, mage.cards.a.AngrathsMarauders.class));
         cards.add(new SetCardInfo("Arcane Adaptation", "46p", Rarity.RARE, mage.cards.a.ArcaneAdaptation.class, NON_FULL_USE_VARIOUS));
