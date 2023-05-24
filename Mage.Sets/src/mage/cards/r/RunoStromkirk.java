@@ -1,22 +1,26 @@
 package mage.cards.r;
 
-import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterAttackingCreature;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -24,31 +28,47 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class RunoStromkirk extends CardImpl {
+public final class RunoStromkirk extends TransformingDoubleFacedCard {
+
+    private static final FilterPermanent filter = new FilterAttackingCreature("another attacking creature");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
 
     public RunoStromkirk(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
-
-        this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.VAMPIRE);
-        this.subtype.add(SubType.CLERIC);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(4);
-        this.secondSideCardClazz = mage.cards.k.KrothussLordOfTheDeep.class;
+        super(
+                ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.VAMPIRE, SubType.CLERIC}, "{1}{U}{B}",
+                "Krothuss, Lord of the Deep",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.KRAKEN, SubType.HORROR}, "BU"
+        );
+        this.getLeftHalfCard().setPT(1, 4);
+        this.getRightHalfCard().setPT(3, 5);
 
         // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // When Runo Stromkirk enters the battlefield, put up to one target creature card from your graveyard on top of your library.
         Ability ability = new EntersBattlefieldTriggeredAbility(new PutOnLibraryTargetEffect(true));
-        ability.addTarget(new TargetCardInYourGraveyard(0, 1, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
-        this.addAbility(ability);
+        ability.addTarget(new TargetCardInYourGraveyard(
+                0, 1, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD
+        ));
+        this.getLeftHalfCard().addAbility(ability);
 
         // At the beginning of your upkeep, look at the top card of your library. You may reveal that card. If a creature card with mana value 6 or greater is revealed this way, transform Runo Stromkirk.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+        this.getLeftHalfCard().addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new RunoStromkirkEffect(), TargetController.YOU, false
         ));
+
+        // Krothuss, Lord of the Deep
+        // Flying
+        this.getRightHalfCard().addAbility(FlyingAbility.getInstance());
+
+        // Whenever Krothuss, Lord of the Deep attacks, create a tapped and attacking token that's a copy of another target attacking creature. If that creature is a Kraken, Leviathan, Octopus, or Serpent, create two of those tokens instead.
+        ability = new AttacksTriggeredAbility(new KrothussLordOfTheDeepEffect());
+        ability.addTarget(new TargetPermanent(filter));
+        this.getRightHalfCard().addAbility(ability);
     }
 
     private RunoStromkirk(final RunoStromkirk card) {
@@ -101,5 +121,39 @@ class RunoStromkirkEffect extends OneShotEffect {
             permanent.transform(source, game);
         }
         return true;
+    }
+}
+
+class KrothussLordOfTheDeepEffect extends OneShotEffect {
+
+    KrothussLordOfTheDeepEffect() {
+        super(Outcome.Benefit);
+        staticText = "create a tapped and attacking token that's a copy of another target attacking creature. " +
+                "If that creature is a Kraken, Leviathan, Octopus, or Serpent, create two of those tokens instead";
+    }
+
+    private KrothussLordOfTheDeepEffect(final KrothussLordOfTheDeepEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public KrothussLordOfTheDeepEffect copy() {
+        return new KrothussLordOfTheDeepEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        if (permanent == null) {
+            return false;
+        }
+        int count = permanent.hasSubtype(SubType.KRAKEN, game)
+                || permanent.hasSubtype(SubType.LEVIATHAN, game)
+                || permanent.hasSubtype(SubType.OCTOPUS, game)
+                || permanent.hasSubtype(SubType.SERPENT, game) ? 2 : 1;
+        return new CreateTokenCopyTargetEffect(
+                null, null,
+                false, count, true, true
+        ).apply(game, source);
     }
 }

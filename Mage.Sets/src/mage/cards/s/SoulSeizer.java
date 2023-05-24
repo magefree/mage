@@ -1,13 +1,15 @@
 package mage.cards.s;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continuous.ControlEnchantedEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -19,6 +21,7 @@ import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -26,22 +29,32 @@ import java.util.UUID;
 /**
  * @author BetaSteward
  */
-public final class SoulSeizer extends CardImpl {
+public final class SoulSeizer extends TransformingDoubleFacedCard {
 
     public SoulSeizer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-        this.subtype.add(SubType.SPIRIT);
+        super(
+                ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.SPIRIT}, "{3}{U}{U}",
+                "Ghastly Haunting",
+                new CardType[]{CardType.ENCHANTMENT}, new SubType[]{SubType.AURA}, "U"
+        );
+        this.getLeftHalfCard().setPT(1, 3);
 
-        this.secondSideCardClazz = mage.cards.g.GhastlyHaunting.class;
-
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
-
-        this.addAbility(FlyingAbility.getInstance());
+        // Flying
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // When Soul Seizer deals combat damage to a player, you may transform it. If you do, attach it to target creature that player controls.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new SoulSeizerTriggeredAbility());
+        this.getLeftHalfCard().addAbility(new SoulSeizerTriggeredAbility());
+
+        // Ghastly Haunting
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getRightHalfCard().getSpellAbility().addTarget(auraTarget);
+        this.getRightHalfCard().getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.getRightHalfCard().addAbility(new EnchantAbility(auraTarget));
+
+        // You control enchanted creature.
+        this.getRightHalfCard().addAbility(new SimpleStaticAbility(new ControlEnchantedEffect()));
     }
 
     private SoulSeizer(final SoulSeizer card) {
@@ -121,5 +134,4 @@ class SoulSeizerEffect extends OneShotEffect {
     public SoulSeizerEffect copy() {
         return new SoulSeizerEffect(this);
     }
-
 }

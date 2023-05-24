@@ -225,7 +225,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Pack Guardian", 221, Rarity.UNCOMMON, mage.cards.p.PackGuardian.class));
         cards.add(new SetCardInfo("Pale Rider of Trostad", 128, Rarity.UNCOMMON, mage.cards.p.PaleRiderOfTrostad.class));
         cards.add(new SetCardInfo("Paranoid Parish-Blade", 33, Rarity.UNCOMMON, mage.cards.p.ParanoidParishBlade.class));
-        cards.add(new SetCardInfo("Persistent Nightmare", 88, Rarity.MYTHIC, mage.cards.p.PersistentNightmare.class));
         cards.add(new SetCardInfo("Pick the Brain", 129, Rarity.UNCOMMON, mage.cards.p.PickTheBrain.class));
         cards.add(new SetCardInfo("Pieces of the Puzzle", 78, Rarity.COMMON, mage.cards.p.PiecesOfThePuzzle.class));
         cards.add(new SetCardInfo("Pious Evangel", 34, Rarity.UNCOMMON, mage.cards.p.PiousEvangel.class));
@@ -271,7 +270,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Sinister Concoction", 135, Rarity.UNCOMMON, mage.cards.s.SinisterConcoction.class));
         cards.add(new SetCardInfo("Skeleton Key", 263, Rarity.UNCOMMON, mage.cards.s.SkeletonKey.class));
         cards.add(new SetCardInfo("Skin Invasion", 182, Rarity.UNCOMMON, mage.cards.s.SkinInvasion.class));
-        cards.add(new SetCardInfo("Skin Shedder", 182, Rarity.UNCOMMON, mage.cards.s.SkinShedder.class));
         cards.add(new SetCardInfo("Slayer's Plate", 264, Rarity.RARE, mage.cards.s.SlayersPlate.class));
         cards.add(new SetCardInfo("Sleep Paralysis", 87, Rarity.COMMON, mage.cards.s.SleepParalysis.class));
         cards.add(new SetCardInfo("Solitary Hunter", 229, Rarity.COMMON, mage.cards.s.SolitaryHunter.class));

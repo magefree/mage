@@ -66,7 +66,6 @@ public class MagicOnlinePromos extends ExpansionSet {
         cards.add(new SetCardInfo("Arc Lightning", 36116, Rarity.COMMON, mage.cards.a.ArcLightning.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arc Lightning", 55791, Rarity.RARE, mage.cards.a.ArcLightning.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arcanis the Omnipotent", 54547, Rarity.MYTHIC, mage.cards.a.ArcanisTheOmnipotent.class));
-        cards.add(new SetCardInfo("Archdemon of Greed", 43503, Rarity.RARE, mage.cards.a.ArchdemonOfGreed.class));
         cards.add(new SetCardInfo("Archfiend of Depravity", 55711, Rarity.RARE, mage.cards.a.ArchfiendOfDepravity.class));
         cards.add(new SetCardInfo("Archfiend of Ifnir", 64422, Rarity.RARE, mage.cards.a.ArchfiendOfIfnir.class));
         cards.add(new SetCardInfo("Archon of the Triumvirate", 46877, Rarity.RARE, mage.cards.a.ArchonOfTheTriumvirate.class));
