@@ -320,7 +320,6 @@ public final class ShadowsOverInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Ulvenwald Hydra", 235, Rarity.MYTHIC, mage.cards.u.UlvenwaldHydra.class));
         cards.add(new SetCardInfo("Ulvenwald Mysteries", 236, Rarity.UNCOMMON, mage.cards.u.UlvenwaldMysteries.class));
         cards.add(new SetCardInfo("Uncaged Fury", 188, Rarity.COMMON, mage.cards.u.UncagedFury.class));
-        cards.add(new SetCardInfo("Unimpeded Trespasser", 94, Rarity.UNCOMMON, mage.cards.u.UnimpededTrespasser.class));
         cards.add(new SetCardInfo("Uninvited Geist", 94, Rarity.UNCOMMON, mage.cards.u.UninvitedGeist.class));
         cards.add(new SetCardInfo("Unruly Mob", 47, Rarity.COMMON, mage.cards.u.UnrulyMob.class));
         cards.add(new SetCardInfo("Vampire Noble", 143, Rarity.COMMON, mage.cards.v.VampireNoble.class));
