@@ -52,7 +52,7 @@ public final class StartledAwake extends TransformingDoubleFacedCard {
 
         // When Persistent Nightmare deals combat damage to a player, return it to its owner's hand.
         this.getRightHalfCard().addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new ReturnToHandSourceEffect(), false
+                new ReturnToHandSourceEffect().setText("return it to its owner's hand"), false
         ).setTriggerPhrase("When {this} deals combat damage to a player, "));
     }
 

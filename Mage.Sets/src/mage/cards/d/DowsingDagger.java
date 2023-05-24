@@ -6,6 +6,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
@@ -55,6 +56,9 @@ public final class DowsingDagger extends TransformingDoubleFacedCard {
         this.getLeftHalfCard().addAbility(new EquipAbility(2, false));
 
         // Lost Vale
+        // (Transforms from Dowsing Dagger.)
+        this.getRightHalfCard().addAbility(new SimpleStaticAbility(new InfoEffect("<i>(Transforms from Dowsing Dagger.)</i>")));
+
         // T: Add three mana of any one color.
         this.getRightHalfCard().addAbility(new SimpleManaAbility(
                 Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new TapSourceCost()

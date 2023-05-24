@@ -97,9 +97,9 @@ public class CreateTokenTargetEffect extends OneShotEffect {
             if (token.getDescription().endsWith("token")) {
                 sb.append("s");
             }
-            int tokenLocation = sb.indexOf("token");
+            int tokenLocation = sb.indexOf("token ");
             if (tokenLocation != -1) {
-                sb.replace(tokenLocation, tokenLocation + 6, "tokens");
+                sb.replace(tokenLocation, tokenLocation + 6, "tokens ");
             }
         }
         if (attacking) {

@@ -74,7 +74,8 @@ public final class JuganDefendsTheTemple extends TransformingDoubleFacedCard {
         // II — Put a +1/+1 counter on each of up to two target creatures.
         sagaAbility.addChapterEffect(
                 this.getLeftHalfCard(), SagaChapter.CHAPTER_II, SagaChapter.CHAPTER_II,
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance())
+                        .setText("put a +1/+1 counter on each of up to two target creatures"),
                 new TargetPermanent(0, 2, StaticFilters.FILTER_PERMANENT_CREATURES)
         );
 

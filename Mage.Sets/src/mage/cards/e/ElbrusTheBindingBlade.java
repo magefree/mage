@@ -40,8 +40,8 @@ public final class ElbrusTheBindingBlade extends TransformingDoubleFacedCard {
 
         // When equipped creature deals combat damage to a player, unattach Elbrus, the Binding Blade, then transform it.
         this.getLeftHalfCard().addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(
-                new ElbrusTheBindingBladeEffect(), "equipped", true
-        ));
+                new ElbrusTheBindingBladeEffect(), "equipped", false
+        ).setTriggerPhrase("When equipped creature deals combat damage to a player, "));
 
         // Equip {1}
         this.getLeftHalfCard().addAbility(new EquipAbility(1, false));

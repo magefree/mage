@@ -61,9 +61,9 @@ public final class ThingInTheIce extends TransformingDoubleFacedCard {
         );
         ability.addEffect(new ConditionalOneShotEffect(
                 new TransformSourceEffect(), condition,
-                "Then if there are no ice counters on it, transform it"
+                "Then if it has no ice counters on it, transform it"
         ));
-        this.getRightHalfCard().addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
 
         // Awoken Horror
         // When this creature transforms into Awoken Horror, return all non-Horror creatures to their owners' hands.

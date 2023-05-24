@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class BanebladeScoundrel extends TransformingDoubleFacedCard {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature blocking {this}");
 
     static {
         filter.add(BlockingOrBlockedBySourcePredicate.BLOCKING);

@@ -2,11 +2,13 @@ package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.mana.ColorlessManaAbility;
@@ -28,7 +30,7 @@ import java.util.UUID;
  */
 public final class TreasureMap extends TransformingDoubleFacedCard {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.TREASURE);
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.TREASURE, "Treasure");
 
     public TreasureMap(UUID ownerId, CardSetInfo setInfo) {
         super(
@@ -48,6 +50,9 @@ public final class TreasureMap extends TransformingDoubleFacedCard {
         this.getLeftHalfCard().addAbility(ability);
 
         // Treasure Cove
+        // (Transforms from Treasure Map.)
+        this.getRightHalfCard().addAbility(new SimpleStaticAbility(new InfoEffect("<i>(Transforms from Treasure Map.)</i>")));
+
         // {T}: Add {C}.
         this.getRightHalfCard().addAbility(new ColorlessManaAbility());
 

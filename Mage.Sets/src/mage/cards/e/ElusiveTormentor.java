@@ -55,7 +55,7 @@ public final class ElusiveTormentor extends TransformingDoubleFacedCard {
 
         // Whenever Insideous Mist attacks and isn't blocked, you may pay {2}{B}. If you do, transform it.
         this.getRightHalfCard().addAbility(new AttacksAndIsNotBlockedTriggeredAbility(new DoIfCostPaid(
-                new TransformSourceEffect(), new ManaCostsImpl<>("{2}{B}")
+                new TransformSourceEffect().setText("transform it"), new ManaCostsImpl<>("{2}{B}")
         )));
     }
 

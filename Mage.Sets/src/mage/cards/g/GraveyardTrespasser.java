@@ -42,7 +42,7 @@ public final class GraveyardTrespasser extends TransformingDoubleFacedCard {
 
         // Whenever Graveyard Trespasser enters the battlefield or attacks, exile up to one target card from a graveyard. If a creature card was exiled this way, each opponent loses 1 life and you gain 1 life.
         Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(
-                new GraveyardTrespasserEffect("one target card from a graveyard. If a")
+                new GraveyardTrespasserEffect("one target card from a graveyard. If a creature card was")
         );
         ability.addTarget(new TargetCardInGraveyard(0, 1));
         this.getLeftHalfCard().addAbility(ability);
@@ -56,7 +56,7 @@ public final class GraveyardTrespasser extends TransformingDoubleFacedCard {
 
         // Whenever Graveyard Glutton enters the battlefield or attacks, exile up to two target cards from graveyards. For each creature card exiled this way, each opponent loses 1 life and you gain 1 life.
         ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(
-                new GraveyardTrespasserEffect("two target cards from graveyards. For each")
+                new GraveyardTrespasserEffect("two target cards from graveyards. For each creature card")
         );
         ability.addTarget(new TargetCardInGraveyard(0, 2));
         this.getRightHalfCard().addAbility(ability);
@@ -79,7 +79,7 @@ class GraveyardTrespasserEffect extends OneShotEffect {
 
     GraveyardTrespasserEffect(String text) {
         super(Outcome.Benefit);
-        staticText = "exile up to " + text + " creature card was exiled this way, " +
+        staticText = "exile up to " + text + " exiled this way, " +
                 "each opponent loses 1 life and you gain 1 life";
     }
 

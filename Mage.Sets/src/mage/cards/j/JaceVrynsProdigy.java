@@ -58,7 +58,7 @@ public final class JaceVrynsProdigy extends TransformingDoubleFacedCard {
         // -3: You may cast target instant or sorcery card from your graveyard this turn. If that card would be put into your graveyard this turn, exile it instead.
         ability = new LoyaltyAbility(new CastCardFromGraveyardThenExileItEffect()
                 .setText("You may cast target instant or sorcery card from your graveyard this turn. " +
-                        "If that card would be put into your graveyard this turn, exile it instead"), -3);
+                        "If that spell would be put into your graveyard, exile it instead"), -3);
         ability.addTarget(new TargetCardInYourGraveyard(new FilterInstantOrSorceryCard()));
         this.getRightHalfCard().addAbility(ability);
 

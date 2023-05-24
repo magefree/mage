@@ -43,8 +43,8 @@ public final class AvacynianMissionaries extends TransformingDoubleFacedCard {
 
         // At the beginning of your end step, if Avacynian Missionaries is equipped, transform it.
         this.getLeftHalfCard().addAbility(new BeginningOfEndStepTriggeredAbility(
-                new TransformSourceEffect(), TargetController.YOU,
-                EquippedSourceCondition.instance, false
+                new TransformSourceEffect().setText("transform it"),
+                TargetController.YOU, EquippedSourceCondition.instance, false
         ));
 
         // Lunarch Inquisitors

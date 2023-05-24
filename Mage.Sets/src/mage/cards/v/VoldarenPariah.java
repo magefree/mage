@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -49,8 +48,10 @@ public final class VoldarenPariah extends TransformingDoubleFacedCard {
         this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // Sacrifice three other creatures: Transform Voldaren Pariah.
-        this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(),
-                new SacrificeTargetCost(new TargetControlledPermanent(3, filter))));
+        this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(
+                new TransformSourceEffect(),
+                new SacrificeTargetCost(new TargetControlledPermanent(3, filter))
+        ));
 
         // Madness {B}{B}{B}
         this.getLeftHalfCard().addAbility(new MadnessAbility(new ManaCostsImpl<>("{B}{B}{B}")));
@@ -61,7 +62,7 @@ public final class VoldarenPariah extends TransformingDoubleFacedCard {
 
         // When this creature transforms into Abolisher of Bloodlines, target opponent sacrifices three creatures.
         Ability ability = new TransformIntoSourceTriggeredAbility(new SacrificeEffect(
-                StaticFilters.FILTER_PERMANENT_CREATURE, 3, "target opponent"
+                StaticFilters.FILTER_PERMANENT_CREATURES, 3, "target opponent"
         ));
         ability.addTarget(new TargetOpponent());
         this.getRightHalfCard().addAbility(ability);

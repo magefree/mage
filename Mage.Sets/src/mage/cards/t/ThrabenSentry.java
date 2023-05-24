@@ -44,7 +44,7 @@ public final class ThrabenSentry extends TransformingDoubleFacedCard {
         this.getLeftHalfCard().addAbility(VigilanceAbility.getInstance());
 
         // Whenever another creature you control dies, you may transform Thraben Sentry.
-        this.getRightHalfCard().addAbility(new DiesCreatureTriggeredAbility(
+        this.getLeftHalfCard().addAbility(new DiesCreatureTriggeredAbility(
                 new TransformSourceEffect(), true, filter
         ));
 

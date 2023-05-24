@@ -78,7 +78,7 @@ public final class BeholdTheUnspeakable extends TransformingDoubleFacedCard {
                 CardsInControllerHandCount.instance,
                 CardsInControllerHandCount.instance,
                 Duration.WhileOnBattlefield
-        )));
+        ).setText("{this} gets +1/+1 for each card in your hand")));
     }
 
     private BeholdTheUnspeakable(final BeholdTheUnspeakable card) {

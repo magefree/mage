@@ -83,7 +83,7 @@ public class VerifyCardDataTest {
     private static final String SKIP_LIST_SAMPLE_DECKS = "SAMPLE_DECKS";
     private static final List<String> evergreenKeywords = Arrays.asList(
             "flying", "lifelink", "menace", "trample", "haste", "first strike", "hexproof", "fear",
-            "deathtouch", "double strike", "indestructible", "reach", "flash", "defender", "vigilance",
+            "deathtouch", "double strike", "indestructible", "reach", "flash", "defender", "vigilance", "intimidate",
             "plainswalk", "islandwalk", "swampwalk", "mountainwalk", "forestwalk", "myriad", "prowess", "convoke"
     );
 

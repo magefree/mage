@@ -106,7 +106,7 @@ class SoulSeizerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When {this} deals combat damage to a player, you may transform it. If you do, attach it to target creature that player controls";
+        return "When {this} deals combat damage to a player, you may transform it. If you do, attach it to target creature that player controls.";
     }
 }
 

@@ -76,7 +76,7 @@ class LazotepConvertCopyEffect extends OneShotEffect {
             blueprint.getPower().setModifiedBaseValue(4);
             blueprint.getToughness().setModifiedBaseValue(4);
             blueprint.addSubType(SubType.ZOMBIE);
-            blueprint.getColor().setColor(ObjectColor.BLACK);
+            blueprint.getColor().addColor(ObjectColor.BLACK);
             return true;
         }
     };
@@ -86,7 +86,7 @@ class LazotepConvertCopyEffect extends OneShotEffect {
     public LazotepConvertCopyEffect() {
         super(Outcome.Copy);
         this.staticText = "as a copy of any creature card in a graveyard, " +
-                "except it's a 4/4 black Zombie in addition to its other types";
+                "except it's a 4/4 black Zombie in addition to its other colors and types";
     }
 
     public LazotepConvertCopyEffect(final LazotepConvertCopyEffect effect) {

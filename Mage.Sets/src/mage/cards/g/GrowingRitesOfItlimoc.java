@@ -3,10 +3,12 @@ package mage.cards.g;
 import mage.Mana;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.mana.DynamicManaAbility;
@@ -49,6 +51,9 @@ public final class GrowingRitesOfItlimoc extends TransformingDoubleFacedCard {
         ));
 
         // Itlimoc, Cradle of the Sun
+        // (Transforms from Growing Rites of Itlimoc.)
+        this.getRightHalfCard().addAbility(new SimpleStaticAbility(new InfoEffect("<i>(Transforms from Growing Rites of Itlimoc.)</i>")));
+
         // {T}: Add {G}.
         this.getRightHalfCard().addAbility(new GreenManaAbility());
 

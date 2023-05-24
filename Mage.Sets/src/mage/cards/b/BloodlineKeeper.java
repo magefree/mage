@@ -29,7 +29,7 @@ public final class BloodlineKeeper extends TransformingDoubleFacedCard {
     private static final FilterControlledPermanent filter
             = new FilterControlledPermanent(SubType.VAMPIRE, "you control five or more Vampires");
     private static final FilterCreaturePermanent filter2
-            = new FilterCreaturePermanent(SubType.VAMPIRE, "Other Vampire creatures");
+            = new FilterCreaturePermanent(SubType.VAMPIRE, "Vampire creatures");
 
     public BloodlineKeeper(UUID ownerId, CardSetInfo setInfo) {
         super(

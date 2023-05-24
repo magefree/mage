@@ -56,7 +56,7 @@ public final class MayorOfAvabruck extends TransformingDoubleFacedCard {
         // Other Werewolf and Wolf creatures you control get +1/+1.
         this.getRightHalfCard().addAbility(new SimpleStaticAbility(new BoostControlledEffect(
                 1, 1, Duration.WhileOnBattlefield, filter2, true
-        )));
+        ).setText("each other creature you control that's a Werewolf or a Wolf gets +1/+1")));
 
         // At the beginning of your end step, create a 2/2 green Wolf creature token.
         this.getRightHalfCard().addAbility(new BeginningOfYourEndStepTriggeredAbility(

@@ -4,6 +4,7 @@ package mage.cards.a;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.FatefulHourCondition;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -13,6 +14,7 @@ import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SacrificeCostCreaturesToughness;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardSetInfo;
@@ -51,6 +53,10 @@ public final class ArguelsBloodFast extends TransformingDoubleFacedCard {
                 FatefulHourCondition.instance,
                 "At the beginning of your upkeep, if you have 5 or less life, you may transform {this}"
         ));
+
+        // Temple of Aclazotz
+        // Transforms from Arguel's Blood Fast.
+        this.getRightHalfCard().addAbility(new SimpleStaticAbility(new InfoEffect("<i>(Transforms from Arguel's Blood Fast.)</i>")));
 
         // {T}: Add {B}
         this.getRightHalfCard().addAbility(new BlackManaAbility());

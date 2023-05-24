@@ -53,7 +53,7 @@ public final class NeglectedHeirloom extends TransformingDoubleFacedCard {
         this.getRightHalfCard().addAbility(ability);
 
         // Equip {3}
-        this.getRightHalfCard().addAbility(new EquipAbility(2, false));
+        this.getRightHalfCard().addAbility(new EquipAbility(3, false));
     }
 
     private NeglectedHeirloom(final NeglectedHeirloom card) {

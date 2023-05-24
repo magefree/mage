@@ -4,9 +4,11 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardSetInfo;
@@ -39,6 +41,9 @@ public final class LegionsLanding extends TransformingDoubleFacedCard {
                 .setTriggerPhrase("When you attack with three or more creatures, "));
 
         // Adanto, the First Fort
+        // (Transforms from Legion's Landing.)
+        this.getRightHalfCard().addAbility(new SimpleStaticAbility(new InfoEffect("<i>(Transforms from Legion's Landing.)</i>")));
+
         // T: Add W.
         this.getRightHalfCard().addAbility(new WhiteManaAbility());
 

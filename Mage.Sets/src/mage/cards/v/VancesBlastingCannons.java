@@ -4,12 +4,14 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.Card;
@@ -48,6 +50,9 @@ public final class VancesBlastingCannons extends TransformingDoubleFacedCard {
         this.getLeftHalfCard().addAbility(new VancesBlastingCannonsFlipTrigger());
 
         // Spitfire Bastion
+        // (Transforms from Vance's Blasting Cannons.)
+        this.getRightHalfCard().addAbility(new SimpleStaticAbility(new InfoEffect("<i>(Transforms from Vance's Blasting Cannons.)</i>")));
+
         // {T}: Add {R}.
         this.getRightHalfCard().addAbility(new RedManaAbility());
 
@@ -172,6 +177,6 @@ class VancesBlastingCannonsFlipTrigger extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you cast your third spell in a turn, you may transform {this}";
+        return "Whenever you cast your third spell in a turn, you may transform {this}.";
     }
 }

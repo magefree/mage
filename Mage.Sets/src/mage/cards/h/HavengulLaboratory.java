@@ -141,6 +141,7 @@ class HavengulMysteryEffect extends OneShotEffect {
 
     HavengulMysteryEffect() {
         super(Outcome.Benefit);
+        staticText = "return target creature card from your graveyard to the battlefield";
     }
 
     private HavengulMysteryEffect(final HavengulMysteryEffect effect) {

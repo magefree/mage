@@ -31,7 +31,9 @@ public final class UninvitedGeist extends TransformingDoubleFacedCard {
         this.getLeftHalfCard().addAbility(new SkulkAbility());
 
         // When Uninvited Geist deals combat damage to a player, transform it.
-        this.getLeftHalfCard().addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new TransformSourceEffect(), false));
+        this.getLeftHalfCard().addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
+                new TransformSourceEffect().setText("transform it"), false
+        ).setTriggerPhrase("When {this} deals combat damage to a player, "));
 
         // Unimpeded Trespasser
         // Unimpeded Trespasser can't be blocked.

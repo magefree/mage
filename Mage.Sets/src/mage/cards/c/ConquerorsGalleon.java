@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.Pronoun;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -39,7 +40,7 @@ public final class ConquerorsGalleon extends TransformingDoubleFacedCard {
                         new ExileAndReturnSourceEffect(
                                 PutCards.BATTLEFIELD_TRANSFORMED, Pronoun.IT, true
                         )
-                )), false, "When {this} attacks, exile it at the end of combat, " +
+                )), false, "When {this} attacks, exile it at end of combat, " +
                 "then return it to the battlefield transformed under your control."
         ));
 
@@ -47,6 +48,9 @@ public final class ConquerorsGalleon extends TransformingDoubleFacedCard {
         this.getLeftHalfCard().addAbility(new CrewAbility(4));
 
         // Conqueror's Foothold
+        // (Transforms from Conqueror's Galleon.)
+        this.getRightHalfCard().addAbility(new SimpleStaticAbility(new InfoEffect("<i>(Transforms from Conqueror's Galleon.)</i>")));
+
         // {T}: Add {C}.
         this.getRightHalfCard().addAbility(new ColorlessManaAbility());
 

@@ -3,10 +3,12 @@ package mage.cards.t;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.RemoveFromCombatTargetEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
@@ -65,6 +67,9 @@ public final class ThaumaticCompass extends TransformingDoubleFacedCard {
         ));
 
         // Thaumatic Compass
+        // (Transforms from Thaumatic Compass.)
+        this.getRightHalfCard().addAbility(new SimpleStaticAbility(new InfoEffect("<i>(Transforms from Thaumatic Compass.)</i>")));
+
         // {T}: Add {C}.
         this.getRightHalfCard().addAbility(new ColorlessManaAbility());
 

@@ -36,7 +36,7 @@ public final class SageOfAncientLore extends TransformingDoubleFacedCard {
         // Sage of Ancient Lore's power and toughness are each equal to the number of cards in your hand.
         this.getLeftHalfCard().addAbility(new SimpleStaticAbility(
                 Zone.ALL, new SetBasePowerToughnessSourceEffect(CardsInControllerHandCount.instance)
-                .setText("{this}'s power and toughness are each equal to the total number of cards in your hand")
+                .setText("{this}'s power and toughness are each equal to the number of cards in your hand")
         ));
 
         // When Sage of Ancient Lore enters the battlefield, draw a card.

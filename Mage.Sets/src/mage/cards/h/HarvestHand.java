@@ -70,7 +70,7 @@ class HarvestHandReturnTransformedEffect extends OneShotEffect {
 
     HarvestHandReturnTransformedEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "Return {this} to the battlefield transformed under your control";
+        this.staticText = "return it to the battlefield transformed under your control";
     }
 
     private HarvestHandReturnTransformedEffect(final HarvestHandReturnTransformedEffect effect) {

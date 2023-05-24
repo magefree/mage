@@ -75,7 +75,7 @@ public final class JetfireIngeniousScientist extends TransformingDoubleFacedCard
                         .setText("convert {this}"),
                 new ManaCostsImpl<>("{U}{U}{U}")
         );
-        ability.addEffect(new AdaptEffect(3).concatBy(", then"));
+        ability.addEffect(new AdaptEffect(3).setText(", then adapt 3"));
         this.getRightHalfCard().addAbility(ability);
     }
 

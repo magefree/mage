@@ -57,7 +57,7 @@ public final class WestvaleAbbey extends TransformingDoubleFacedCard {
         ability = new SimpleActivatedAbility(new TransformSourceEffect(), new GenericManaCost(5));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(5, 5, filter, true)));
-        ability.addEffect(new UntapSourceEffect());
+        ability.addEffect(new UntapSourceEffect().setText(", then untap it"));
         this.getLeftHalfCard().addAbility(ability);
 
         // Ormendahl, Profane Prince

@@ -62,7 +62,7 @@ public final class ExtricatorOfSin extends TransformingDoubleFacedCard {
                 new BeginningOfUpkeepTriggeredAbility(
                         new TransformSourceEffect(), TargetController.YOU, false
                 ), DeliriumCondition.instance, "At the beginning of your upkeep, if there are " +
-                "four or more card types among cards in your graveyard,  transform {this}."
+                "four or more card types among cards in your graveyard, transform {this}."
         ).addHint(CardTypesInGraveyardHint.YOU).setAbilityWord(AbilityWord.DELIRIUM));
 
         // Extricator of Flesh

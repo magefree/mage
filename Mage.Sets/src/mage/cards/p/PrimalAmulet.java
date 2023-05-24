@@ -7,6 +7,7 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardSetInfo;
@@ -55,6 +56,9 @@ public final class PrimalAmulet extends TransformingDoubleFacedCard {
         ));
 
         // Primal Wellspring
+        // (Transforms from Primal Amulet.)
+        this.getRightHalfCard().addAbility(new SimpleStaticAbility(new InfoEffect("<i>(Transforms from Primal Amulet.)</i>")));
+
         // Add one mana of any color.
         Ability ability = new AnyColorManaAbility();
         this.getRightHalfCard().addAbility(ability);

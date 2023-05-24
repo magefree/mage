@@ -52,9 +52,12 @@ public final class RavenousDemon extends TransformingDoubleFacedCard {
         this.getRightHalfCard().addAbility(TrampleAbility.getInstance());
 
         // At the beginning of your upkeep, sacrifice a Human. If you can't, tap Archdemon of Greed and it deals 9 damage to you.
-        this.getRightHalfCard().addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(
-                null, new TapSourceEffect(), new SacrificeTargetCost(filter), false
-        ).addOtherwiseEffect(new DamageControllerEffect(9)), TargetController.YOU, false));
+        this.getRightHalfCard().addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new DoIfCostPaid(null, new TapSourceEffect(), new SacrificeTargetCost(filter), false)
+                        .addOtherwiseEffect(new DamageControllerEffect(9))
+                        .setText("sacrifice a Human. If you can't, tap {this} and it deals 9 damage to you"),
+                TargetController.YOU, false
+        ));
     }
 
     private RavenousDemon(final RavenousDemon card) {
