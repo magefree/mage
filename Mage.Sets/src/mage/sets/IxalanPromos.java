@@ -85,7 +85,6 @@ public class IxalanPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Overflowing Insight", "66s", Rarity.MYTHIC, mage.cards.o.OverflowingInsight.class));
         cards.add(new SetCardInfo("Priest of the Wakening Sun", "27s", Rarity.RARE, mage.cards.p.PriestOfTheWakeningSun.class));
         cards.add(new SetCardInfo("Primal Amulet", "243s", Rarity.RARE, mage.cards.p.PrimalAmulet.class));
-        cards.add(new SetCardInfo("Primal Wellspring", "243s", Rarity.RARE, mage.cards.p.PrimalWellspring.class));
         cards.add(new SetCardInfo("Rampaging Ferocidon", "154s", Rarity.RARE, mage.cards.r.RampagingFerocidon.class));
         cards.add(new SetCardInfo("Regisaur Alpha", "227p", Rarity.RARE, mage.cards.r.RegisaurAlpha.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Regisaur Alpha", "227s", Rarity.RARE, mage.cards.r.RegisaurAlpha.class, NON_FULL_USE_VARIOUS));
