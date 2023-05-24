@@ -500,7 +500,9 @@ public class VerifyCardDataTest {
             if (mageSet == null) {
                 missingSets = missingSets + 1;
                 missingCards = missingCards + refSet.cards.size();
-                info.add("Warning: missing set " + refSet.code + " - " + refSet.name + " (cards: " + refSet.cards.size() + ", date: " + refSet.releaseDate + ")");
+                if (!CHECK_ONLY_ABILITIES_TEXT) {
+                    info.add("Warning: missing set " + refSet.code + " - " + refSet.name + " (cards: " + refSet.cards.size() + ", date: " + refSet.releaseDate + ")");
+                }
                 continue;
             }
 
@@ -1563,7 +1565,7 @@ public class VerifyCardDataTest {
         MtgJsonCard ref = MtgJsonService.cardFromSet(card.getExpansionSetCode(), card.getName(), card.getCardNumber());
         if (ref != null) {
             checkAll(card, ref, cardIndex);
-        } else {
+        } else if (!CHECK_ONLY_ABILITIES_TEXT) {
             warn(card, "Can't find card in mtgjson to verify");
         }
     }
@@ -1574,9 +1576,6 @@ public class VerifyCardDataTest {
 
     private static boolean wasCheckedByAbilityText(MtgJsonCard ref) {
         // ignore already checked cards, so no bloated logs from duplicated cards
-        if (CHECK_ONLY_ABILITIES_TEXT) {
-            return true;
-        }
         if (checkedNames.contains(ref.getNameAsFace())) {
             return true;
         }
@@ -1941,13 +1940,13 @@ public class VerifyCardDataTest {
 
         }
     }*/
-    private static final boolean compareText(String cardText, String refText, String name) {
+    private static boolean compareText(String cardText, String refText, String name) {
         return cardText.equals(refText)
                 || cardText.replace(name, name.split(", ")[0]).equals(refText)
                 || cardText.replace(name, name.split(" ")[0]).equals(refText);
     }
 
-    private static final boolean checkForEffect(Card card, Class<? extends Effect> effectClazz) {
+    private static boolean checkForEffect(Card card, Class<? extends Effect> effectClazz) {
         return card.getAbilities()
                 .stream()
                 .map(Ability::getModes)
@@ -1968,10 +1967,9 @@ public class VerifyCardDataTest {
     private void checkWrongAbilitiesTextEnd() {
         // TODO: implement tests result/stats by github actions to show in check message compared to prev version
         System.out.println(String.format(""));
-        System.out.println(String.format("Ability text checks ends with stats:"));
-        System.out.println(String.format(" - total: %d (%.2f)", wrongAbilityStatsTotal, 100.0));
-        System.out.println(String.format(" - good: %d (%.2f)", wrongAbilityStatsGood, wrongAbilityStatsGood * 100.0 / wrongAbilityStatsTotal));
-        System.out.println(String.format(" - bad: %d (%.2f)", wrongAbilityStatsBad, wrongAbilityStatsBad * 100.0 / wrongAbilityStatsTotal));
+        System.out.println(String.format("Stats for %d cards checked for abilities text:", wrongAbilityStatsTotal));
+        System.out.println(String.format(" - Cards with correct text:  %5d (%.2f)", wrongAbilityStatsGood, wrongAbilityStatsGood * 100.0 / wrongAbilityStatsTotal));
+        System.out.println(String.format(" - Cards with text errors:   %5d (%.2f)", wrongAbilityStatsBad, wrongAbilityStatsBad * 100.0 / wrongAbilityStatsTotal));
         System.out.println(String.format(""));
     }
 
