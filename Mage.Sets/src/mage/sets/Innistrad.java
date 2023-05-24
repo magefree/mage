@@ -267,7 +267,6 @@ public final class Innistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 257, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 258, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Think Twice", 83, Rarity.COMMON, mage.cards.t.ThinkTwice.class));
-        cards.add(new SetCardInfo("Thraben Militia", 38, Rarity.COMMON, mage.cards.t.ThrabenMilitia.class));
         cards.add(new SetCardInfo("Thraben Purebloods", 37, Rarity.COMMON, mage.cards.t.ThrabenPurebloods.class));
         cards.add(new SetCardInfo("Thraben Sentry", 38, Rarity.COMMON, mage.cards.t.ThrabenSentry.class));
         cards.add(new SetCardInfo("Tormented Pariah", 165, Rarity.COMMON, mage.cards.t.TormentedPariah.class));
