@@ -367,7 +367,6 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         cards.add(new SetCardInfo("Storm the Festival", 200, Rarity.RARE, mage.cards.s.StormTheFestival.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Storm the Festival", 364, Rarity.RARE, mage.cards.s.StormTheFestival.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stormrider Spirit", 79, Rarity.COMMON, mage.cards.s.StormriderSpirit.class));
-        cards.add(new SetCardInfo("Strangling Grasp", 126, Rarity.UNCOMMON, mage.cards.s.StranglingGrasp.class));
         cards.add(new SetCardInfo("Stromkirk Bloodthief", 123, Rarity.UNCOMMON, mage.cards.s.StromkirkBloodthief.class));
         cards.add(new SetCardInfo("Stuffed Bear", 259, Rarity.COMMON, mage.cards.s.StuffedBear.class));
         cards.add(new SetCardInfo("Sungold Barrage", 36, Rarity.COMMON, mage.cards.s.SungoldBarrage.class));

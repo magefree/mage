@@ -42,7 +42,6 @@ public final class EldritchMoon extends ExpansionSet {
         this.numBoosterDoubleFaced = 1;
 
         cards.add(new SetCardInfo("Abandon Reason", 115, Rarity.UNCOMMON, mage.cards.a.AbandonReason.class));
-        cards.add(new SetCardInfo("Abolisher of Bloodlines", 111, Rarity.RARE, mage.cards.a.AbolisherOfBloodlines.class));
         cards.add(new SetCardInfo("Abundant Maw", 1, Rarity.UNCOMMON, mage.cards.a.AbundantMaw.class));
         cards.add(new SetCardInfo("Advanced Stitchwing", 49, Rarity.UNCOMMON, mage.cards.a.AdvancedStitchwing.class));
         cards.add(new SetCardInfo("Alchemist's Greeting", 116, Rarity.COMMON, mage.cards.a.AlchemistsGreeting.class));
@@ -95,7 +94,6 @@ public final class EldritchMoon extends ExpansionSet {
         cards.add(new SetCardInfo("Docent of Perfection", 56, Rarity.RARE, mage.cards.d.DocentOfPerfection.class));
         cards.add(new SetCardInfo("Drag Under", 57, Rarity.COMMON, mage.cards.d.DragUnder.class));
         cards.add(new SetCardInfo("Drogskol Shieldmate", 22, Rarity.UNCOMMON, mage.cards.d.DrogskolShieldmate.class));
-        cards.add(new SetCardInfo("Dronepack Kindred", 148, Rarity.COMMON, mage.cards.d.DronepackKindred.class));
         cards.add(new SetCardInfo("Drownyard Behemoth", 4, Rarity.UNCOMMON, mage.cards.d.DrownyardBehemoth.class));
         cards.add(new SetCardInfo("Dusk Feaster", 88, Rarity.UNCOMMON, mage.cards.d.DuskFeaster.class));
         cards.add(new SetCardInfo("Elder Deep-Fiend", 5, Rarity.RARE, mage.cards.e.ElderDeepFiend.class));

@@ -20,7 +20,6 @@ public class EldritchMoonPromos extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Abolisher of Bloodlines", "111s", Rarity.RARE, mage.cards.a.AbolisherOfBloodlines.class));
         cards.add(new SetCardInfo("Assembled Alphas", 117, Rarity.RARE, mage.cards.a.AssembledAlphas.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Assembled Alphas", "117s", Rarity.RARE, mage.cards.a.AssembledAlphas.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bedlam Reveler", "118s", Rarity.RARE, mage.cards.b.BedlamReveler.class));

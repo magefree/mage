@@ -63,7 +63,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Blood Pact", 88, Rarity.COMMON, mage.cards.b.BloodPact.class));
         cards.add(new SetCardInfo("Blood Petal Celebrant", 413, Rarity.COMMON, mage.cards.b.BloodPetalCelebrant.class));
         cards.add(new SetCardInfo("Blood Servitor", 519, Rarity.COMMON, mage.cards.b.BloodServitor.class));
-        cards.add(new SetCardInfo("Bloodbat Summoner", 404, Rarity.RARE, mage.cards.b.BloodbatSummoner.class));
         cards.add(new SetCardInfo("Bloodcrazed Socialite", 363, Rarity.COMMON, mage.cards.b.BloodcrazedSocialite.class));
         cards.add(new SetCardInfo("Bloodline Culling", 89, Rarity.RARE, mage.cards.b.BloodlineCulling.class));
         cards.add(new SetCardInfo("Bloodsworn Squire", 364, Rarity.UNCOMMON, mage.cards.b.BloodswornSquire.class));
@@ -473,7 +472,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Stormcarved Coast", 532, Rarity.RARE, mage.cards.s.StormcarvedCoast.class));
         cards.add(new SetCardInfo("Stormchaser Drake", 349, Rarity.UNCOMMON, mage.cards.s.StormchaserDrake.class));
         cards.add(new SetCardInfo("Stormrider Spirit", 79, Rarity.COMMON, mage.cards.s.StormriderSpirit.class));
-        cards.add(new SetCardInfo("Strangling Grasp", 126, Rarity.UNCOMMON, mage.cards.s.StranglingGrasp.class));
         cards.add(new SetCardInfo("Stromkirk Bloodthief", 123, Rarity.UNCOMMON, mage.cards.s.StromkirkBloodthief.class));
         cards.add(new SetCardInfo("Stuffed Bear", 259, Rarity.COMMON, mage.cards.s.StuffedBear.class));
         cards.add(new SetCardInfo("Sundown Pass", 533, Rarity.RARE, mage.cards.s.SundownPass.class));
@@ -536,7 +534,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Voldaren Epicure", 449, Rarity.COMMON, mage.cards.v.VoldarenEpicure.class));
         cards.add(new SetCardInfo("Voldaren Estate", 534, Rarity.RARE, mage.cards.v.VoldarenEstate.class));
         cards.add(new SetCardInfo("Voldaren Stinger", 167, Rarity.COMMON, mage.cards.v.VoldarenStinger.class));
-        cards.add(new SetCardInfo("Volt-Charged Berserker", 450, Rarity.UNCOMMON, mage.cards.v.VoltChargedBerserker.class));
         cards.add(new SetCardInfo("Voltaic Visionary", 450, Rarity.UNCOMMON, mage.cards.v.VoltaicVisionary.class));
         cards.add(new SetCardInfo("Wake to Slaughter", 250, Rarity.RARE, mage.cards.w.WakeToSlaughter.class));
         cards.add(new SetCardInfo("Wandering Mind", 518, Rarity.UNCOMMON, mage.cards.w.WanderingMind.class));
@@ -545,7 +542,6 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Weary Prisoner", 451, Rarity.COMMON, mage.cards.w.WearyPrisoner.class));
         cards.add(new SetCardInfo("Weaver of Blossoms", 493, Rarity.COMMON, mage.cards.w.WeaverOfBlossoms.class));
         cards.add(new SetCardInfo("Wedding Announcement", 312, Rarity.RARE, mage.cards.w.WeddingAnnouncement.class));
-        cards.add(new SetCardInfo("Wedding Festivity", 312, Rarity.RARE, mage.cards.w.WeddingFestivity.class));
         cards.add(new SetCardInfo("Wedding Invitation", 527, Rarity.COMMON, mage.cards.w.WeddingInvitation.class));
         cards.add(new SetCardInfo("Wedding Security", 405, Rarity.UNCOMMON, mage.cards.w.WeddingSecurity.class));
         cards.add(new SetCardInfo("Welcoming Vampire", 313, Rarity.RARE, mage.cards.w.WelcomingVampire.class));

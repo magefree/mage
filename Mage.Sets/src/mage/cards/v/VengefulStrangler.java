@@ -1,17 +1,20 @@
 package mage.cards.v;
 
-import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.CantBlockAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
+import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -22,7 +25,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class VengefulStrangler extends CardImpl {
+public final class VengefulStrangler extends TransformingDoubleFacedCard {
 
     private static final FilterPermanent filter
             = new FilterCreatureOrPlaneswalkerPermanent("creature or planeswalker an opponent controls");
@@ -32,22 +35,33 @@ public final class VengefulStrangler extends CardImpl {
     }
 
     public VengefulStrangler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
-
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.ROGUE);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
-        this.secondSideCardClazz = mage.cards.s.StranglingGrasp.class;
+        super(
+                ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.ROGUE}, "{1}{B}",
+                "Strangling Grasp",
+                new CardType[]{CardType.ENCHANTMENT}, new SubType[]{SubType.AURA}, "B"
+        );
+        this.getLeftHalfCard().setPT(2, 1);
 
         // Vengeful Strangler can't block.
-        this.addAbility(new CantBlockAbility());
+        this.getLeftHalfCard().addAbility(new CantBlockAbility());
 
         // When Vengeful Strangler dies, return it to the battlefield transformed under your control attached to target creature or planeswalker an opponent controls.
-        this.addAbility(new TransformAbility());
         Ability ability = new DiesSourceTriggeredAbility(new VengefulStranglerEffect());
         ability.addTarget(new TargetPermanent(filter));
-        this.addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
+
+        // Strangling Grasp
+        // Enchant creature or planeswalker an opponent controls
+        TargetPermanent auraTarget = new TargetPermanent(filter);
+        this.getRightHalfCard().getSpellAbility().addTarget(auraTarget);
+        this.getRightHalfCard().getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.getRightHalfCard().addAbility(new EnchantAbility(auraTarget));
+
+        // At the beginning of your upkeep, enchanted permanent's controller sacrifices a nonland permanent and loses 1 life.
+        this.getRightHalfCard().addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new StranglingGraspEffect(), TargetController.YOU, false
+        ));
     }
 
     private VengefulStrangler(final VengefulStrangler card) {
@@ -100,3 +114,52 @@ class VengefulStranglerEffect extends OneShotEffect {
     }
 }
 
+class StranglingGraspEffect extends OneShotEffect {
+
+    private static final FilterPermanent filter = new FilterNonlandPermanent("nonland permanent you control");
+
+    static {
+        filter.add(TargetController.YOU.getControllerPredicate());
+    }
+
+    StranglingGraspEffect() {
+        super(Outcome.Benefit);
+        staticText = "enchanted permanent's controller sacrifices a nonland permanent, then that player loses 1 life";
+    }
+
+    private StranglingGraspEffect(final StranglingGraspEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public StranglingGraspEffect copy() {
+        return new StranglingGraspEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent sourcePermanent = source.getSourcePermanentOrLKI(game);
+        if (sourcePermanent == null) {
+            return false;
+        }
+        Permanent attachedTo = game.getPermanentOrLKIBattlefield(sourcePermanent.getAttachedTo());
+        if (attachedTo == null) {
+            return false;
+        }
+        Player player = game.getPlayer(attachedTo.getControllerId());
+        if (player == null) {
+            return false;
+        }
+        TargetPermanent target = new TargetPermanent(filter);
+        target.setNotTarget(true);
+        if (target.canChoose(player.getId(), source, game)) {
+            player.choose(outcome, target, source, game);
+            Permanent permanent = game.getPermanent(target.getFirstTarget());
+            if (permanent != null) {
+                permanent.sacrifice(source, game);
+            }
+        }
+        player.loseLife(1, game, source, false);
+        return true;
+    }
+}

@@ -70,9 +70,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Blood Petal Celebrant", 146, Rarity.COMMON, mage.cards.b.BloodPetalCelebrant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blood Petal Celebrant", 303, Rarity.COMMON, mage.cards.b.BloodPetalCelebrant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blood Servitor", 252, Rarity.COMMON, mage.cards.b.BloodServitor.class));
-        cards.add(new SetCardInfo("Bloodbat Summoner", 137, Rarity.RARE, mage.cards.b.BloodbatSummoner.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Bloodbat Summoner", 298, Rarity.RARE, mage.cards.b.BloodbatSummoner.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Bloodbat Summoner", 338, Rarity.RARE, mage.cards.b.BloodbatSummoner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodcrazed Socialite", 288, Rarity.COMMON, mage.cards.b.BloodcrazedSocialite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodcrazed Socialite", 96, Rarity.COMMON, mage.cards.b.BloodcrazedSocialite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodsworn Squire", 289, Rarity.UNCOMMON, mage.cards.b.BloodswornSquire.class, NON_FULL_USE_VARIOUS));
@@ -432,7 +429,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Voldaren Estate", 267, Rarity.RARE, mage.cards.v.VoldarenEstate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Voldaren Estate", 397, Rarity.RARE, mage.cards.v.VoldarenEstate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Voldaren Estate", 403, Rarity.RARE, mage.cards.v.VoldarenEstate.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Volt-Charged Berserker", 183, Rarity.UNCOMMON, mage.cards.v.VoltChargedBerserker.class));
         cards.add(new SetCardInfo("Voltaic Visionary", 183, Rarity.UNCOMMON, mage.cards.v.VoltaicVisionary.class));
         cards.add(new SetCardInfo("Wandering Mind", 251, Rarity.UNCOMMON, mage.cards.w.WanderingMind.class));
         cards.add(new SetCardInfo("Wanderlight Spirit", 86, Rarity.COMMON, mage.cards.w.WanderlightSpirit.class));
@@ -441,8 +437,6 @@ public final class InnistradCrimsonVow extends ExpansionSet {
         cards.add(new SetCardInfo("Weaver of Blossoms", 226, Rarity.COMMON, mage.cards.w.WeaverOfBlossoms.class));
         cards.add(new SetCardInfo("Wedding Announcement", 355, Rarity.RARE, mage.cards.w.WeddingAnnouncement.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wedding Announcement", 45, Rarity.RARE, mage.cards.w.WeddingAnnouncement.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Wedding Festivity", 355, Rarity.RARE, mage.cards.w.WeddingFestivity.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Wedding Festivity", 45, Rarity.RARE, mage.cards.w.WeddingFestivity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wedding Invitation", 260, Rarity.COMMON, mage.cards.w.WeddingInvitation.class));
         cards.add(new SetCardInfo("Wedding Security", 138, Rarity.UNCOMMON, mage.cards.w.WeddingSecurity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wedding Security", 299, Rarity.UNCOMMON, mage.cards.w.WeddingSecurity.class, NON_FULL_USE_VARIOUS));

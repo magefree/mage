@@ -112,7 +112,6 @@ public class IxalanPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Sorcerous Spyglass", "248s", Rarity.RARE, mage.cards.s.SorcerousSpyglass.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spell Swindle", "82p", Rarity.RARE, mage.cards.s.SpellSwindle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spell Swindle", "82s", Rarity.RARE, mage.cards.s.SpellSwindle.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Spitfire Bastion", "173s", Rarity.RARE, mage.cards.s.SpitfireBastion.class));
         cards.add(new SetCardInfo("Star of Extinction", "161p", Rarity.MYTHIC, mage.cards.s.StarOfExtinction.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Star of Extinction", "161s", Rarity.MYTHIC, mage.cards.s.StarOfExtinction.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sunbird's Invocation", "165p", Rarity.RARE, mage.cards.s.SunbirdsInvocation.class, NON_FULL_USE_VARIOUS));
