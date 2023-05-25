@@ -929,7 +929,6 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore // TODO: Zam Wesell must be reworked to use on cast + etb abilities
     public void test_Copy_AsCloneFromCard_ZamWesell() {
         // When you cast Zam Wesell, target opponent reveals their hand. You may choose a creature card from it
         // and have Zam Wesell enter the battlefield as a copy of that creature card.
@@ -941,9 +940,9 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
         // cast as copy of mdf card
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Zam Wesell");
         addTarget(playerA, playerB); // target opponent
-        setChoice(playerA, "Akoum Warrior"); // creature card to copy
+        addTarget(playerA, "Akoum Warrior"); // creature card to copy
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 2);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 1);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
