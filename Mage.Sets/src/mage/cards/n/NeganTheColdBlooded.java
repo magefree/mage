@@ -20,10 +20,7 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetOpponent;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author TheElk801
@@ -33,7 +30,7 @@ public final class NeganTheColdBlooded extends CardImpl {
     public NeganTheColdBlooded(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(4);
@@ -93,7 +90,7 @@ class NeganTheColdBloodedEffect extends OneShotEffect {
         if (!target.canChoose(source.getControllerId(), source, game)) {
             return false;
         }
-        Set<UUID> choices = new HashSet<>();
+        Set<UUID> choices = new LinkedHashSet<>();
         controller.choose(Outcome.DestroyPermanent, target, source, game);
         UUID controllerChoice = target.getFirstTarget();
         choices.add(controllerChoice);

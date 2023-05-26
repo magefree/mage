@@ -3,7 +3,7 @@ package mage.cards.b;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -12,7 +12,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class BlightstepPathway extends ModalDoubleFacesCard {
+public final class BlightstepPathway extends ModalDoubleFacedCard {
 
     public BlightstepPathway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

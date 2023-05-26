@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -19,8 +17,6 @@ public final class OxGreenToken extends TokenImpl {
         subtype.add(SubType.OX);
         power = new MageInt(4);
         toughness = new MageInt(4);
-
-        availableImageSetCodes = Arrays.asList("CLB");
     }
 
     public OxGreenToken(final OxGreenToken token) {

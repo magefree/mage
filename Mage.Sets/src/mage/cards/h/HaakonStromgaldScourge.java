@@ -25,7 +25,7 @@ public final class HaakonStromgaldScourge extends CardImpl {
 
     public HaakonStromgaldScourge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.KNIGHT);
 

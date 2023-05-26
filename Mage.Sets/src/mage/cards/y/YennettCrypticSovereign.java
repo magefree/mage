@@ -29,7 +29,7 @@ public final class YennettCrypticSovereign extends CardImpl {
     public YennettCrypticSovereign(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPHINX);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);

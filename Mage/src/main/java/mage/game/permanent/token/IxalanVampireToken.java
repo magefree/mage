@@ -1,15 +1,11 @@
-
 package mage.game.permanent.token;
 
-import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.LifelinkAbility;
-
-import java.util.Arrays;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author TheElk801
  */
 public final class IxalanVampireToken extends TokenImpl {
@@ -22,8 +18,6 @@ public final class IxalanVampireToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(LifelinkAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("XLN", "2X2");
     }
 
     public IxalanVampireToken(final IxalanVampireToken token) {

@@ -1,14 +1,10 @@
-
 package mage.game.permanent.token;
 
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
-
-import java.util.Arrays;
 
 /**
- *
  * @author spjspj
  */
 public final class BlackGreenWormToken extends TokenImpl {
@@ -21,8 +17,6 @@ public final class BlackGreenWormToken extends TokenImpl {
         subtype.add(SubType.WORM);
         power = new MageInt(1);
         toughness = new MageInt(1);
-
-        availableImageSetCodes = Arrays.asList("EVE", "MMA", "MM2", "C16", "C18", "2X2");
     }
 
     public BlackGreenWormToken(final BlackGreenWormToken token) {

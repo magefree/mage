@@ -9,7 +9,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 
@@ -30,7 +29,7 @@ public final class BattleSquadron extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Battle Squadron's power and toughness are each equal to the number of creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(CreaturesYouControlCount.instance, Duration.EndOfGame))
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(CreaturesYouControlCount.instance))
                 .addHint(CreaturesYouControlHint.instance));
     }
 

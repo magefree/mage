@@ -27,7 +27,7 @@ public final class GerrardsHourglassPendant extends CardImpl {
 
     public GerrardsHourglassPendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Flash
         this.addAbility(FlashAbility.getInstance());

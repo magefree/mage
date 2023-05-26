@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -18,8 +16,6 @@ public final class PlaguebearerOfNurgleToken extends TokenImpl {
         subtype.add(SubType.DEMON);
         power = new MageInt(1);
         toughness = new MageInt(3);
-
-        availableImageSetCodes = Arrays.asList("40K");
     }
 
     public PlaguebearerOfNurgleToken(final PlaguebearerOfNurgleToken token) {

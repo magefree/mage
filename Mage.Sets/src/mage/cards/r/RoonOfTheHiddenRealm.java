@@ -38,7 +38,7 @@ public final class RoonOfTheHiddenRealm extends CardImpl {
 
     public RoonOfTheHiddenRealm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.RHINO);
         this.subtype.add(SubType.SOLDIER);
 

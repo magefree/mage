@@ -1,18 +1,16 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class CorpseweftZombieToken extends TokenImpl {
 
     public CorpseweftZombieToken() {
-        this(2,2);
+        this(2, 2);
     }
 
     public CorpseweftZombieToken(int power, int toughness) {
@@ -23,7 +21,6 @@ public final class CorpseweftZombieToken extends TokenImpl {
         color.setBlack(true);
         this.power = new MageInt(power);
         this.toughness = new MageInt(toughness);
-        setOriginalExpansionSetCode("DTK");
     }
 
     public CorpseweftZombieToken(final CorpseweftZombieToken token) {

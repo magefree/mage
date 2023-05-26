@@ -6,8 +6,8 @@ import mage.game.result.ResultProtos.TourneyPlayerProto;
 import mage.game.result.ResultProtos.TourneyQuitStatus;
 import mage.players.Player;
 import mage.players.PlayerType;
+import mage.util.DeckBuildUtils;
 import mage.util.TournamentUtil;
-
 import java.util.Set;
 
 /**
@@ -91,7 +91,7 @@ public class TournamentPlayer {
     public boolean updateDeck(Deck deck) {
         // Check if the cards included in the deck are the same as in the original deck
         boolean validDeck = (getDeck().getDeckCompleteHashCode() == deck.getDeckCompleteHashCode());
-        if (validDeck == false) {
+        if (!validDeck) {
             // Clear the deck so the player cheating looses the game
             deck.getCards().clear();
             deck.getSideboard().clear();
@@ -100,26 +100,22 @@ public class TournamentPlayer {
         return validDeck;
     }
 
-    public Deck generateDeck() {
-        // user passed to submit deck in time
-        // all all cards to deck
-        deck.getCards().addAll(deck.getSideboard());
-        deck.getSideboard().clear();
-        // add lands to deck
-        int landsPerType = 7;
-        if (deck.getCards().size() >= 90) {
-            landsPerType = 14;
+    public Deck generateDeck(int minDeckSize) {
+        /*
+        If user fails to submit deck on time, submit deck as is if meets minimum size,
+        else add basic lands per suggested land counts
+         */
+        if (deck.getCards().size() < minDeckSize) {
+            int[] lands = DeckBuildUtils.landCountSuggestion(minDeckSize, deck.getCards());
+            Set<String> landSets = TournamentUtil.getLandSetCodeForDeckSets(deck.getExpansionSetCodes());
+            deck.getCards().addAll(TournamentUtil.getLands("Plains", lands[0], landSets));
+            deck.getCards().addAll(TournamentUtil.getLands("Island", lands[1], landSets));
+            deck.getCards().addAll(TournamentUtil.getLands("Swamp", lands[2], landSets));
+            deck.getCards().addAll(TournamentUtil.getLands("Mountain", lands[3], landSets));
+            deck.getCards().addAll(TournamentUtil.getLands("Forest", lands[4], landSets));
         }
-        Set<String> landSets = TournamentUtil.getLandSetCodeForDeckSets(deck.getExpansionSetCodes());
-        deck.getCards().addAll(TournamentUtil.getLands("Mountain", landsPerType, landSets));
-        deck.getCards().addAll(TournamentUtil.getLands("Plains", landsPerType, landSets));
-        deck.getCards().addAll(TournamentUtil.getLands("Swamp", landsPerType, landSets));
-        deck.getCards().addAll(TournamentUtil.getLands("Forest", landsPerType, landSets));
-        deck.getCards().addAll(TournamentUtil.getLands("Island", landsPerType, landSets));
-
         this.doneConstructing = true;
         this.setState(TournamentPlayerState.WAITING);
-
         return deck;
     }
 

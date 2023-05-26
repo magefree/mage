@@ -18,7 +18,6 @@ public final class XiraBlackInsectToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
-        setOriginalExpansionSetCode("DMC");
     }
 
     public XiraBlackInsectToken(final XiraBlackInsectToken token) {

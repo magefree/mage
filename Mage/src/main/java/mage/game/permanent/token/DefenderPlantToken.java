@@ -1,4 +1,3 @@
-
 package mage.game.permanent.token;
 
 import mage.MageInt;
@@ -7,7 +6,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author TheElk801
  */
 public final class DefenderPlantToken extends TokenImpl {
@@ -19,7 +17,6 @@ public final class DefenderPlantToken extends TokenImpl {
         subtype.add(SubType.PLANT);
         power = new MageInt(0);
         toughness = new MageInt(2);
-        setOriginalExpansionSetCode("XLN");
 
         this.addAbility(DefenderAbility.getInstance());
     }

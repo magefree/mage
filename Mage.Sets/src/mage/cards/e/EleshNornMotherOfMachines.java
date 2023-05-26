@@ -27,7 +27,7 @@ public final class EleshNornMotherOfMachines extends CardImpl {
     public EleshNornMotherOfMachines(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN, SubType.PRAETOR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(7);
@@ -73,14 +73,13 @@ class EleshNornMotherOfMachinesDoublingEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event instanceof NumberOfTriggersEvent) {
             NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
-            // Only triggers of the controller of Elesh Norn
+            // Only triggers for the controller of Elesh Norn
             if (source.isControlledBy(event.getPlayerId())) {
                 GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
                 // Only EtB triggers
                 if (sourceEvent != null
                         && sourceEvent.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
                         && sourceEvent instanceof EntersTheBattlefieldEvent) {
-                    EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) sourceEvent;
                     // Only for triggers of permanents
                     if (game.getPermanent(numberOfTriggersEvent.getSourceId()) != null) {
                         return true;

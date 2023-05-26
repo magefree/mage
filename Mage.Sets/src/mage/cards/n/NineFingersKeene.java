@@ -27,7 +27,7 @@ public final class NineFingersKeene extends CardImpl {
     public NineFingersKeene(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(4);
@@ -89,7 +89,7 @@ class NineFingersKeeneEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetCardInLibrary(0, 1, filter);
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {
             player.moveCards(card, Zone.BATTLEFIELD, source, game);

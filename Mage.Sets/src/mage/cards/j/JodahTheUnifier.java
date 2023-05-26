@@ -43,7 +43,7 @@ public final class JodahTheUnifier extends CardImpl {
     public JodahTheUnifier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(5);
@@ -102,7 +102,7 @@ class JodahTheUnifierEffect extends OneShotEffect {
             exiledCards.add(card);
             controller.moveCards(card, Zone.EXILED, source, game);
             game.getState().processAction(game);
-            if (card.isLegendary() && !card.isLand(game) && card.getManaValue() < manaValue) {
+            if (card.isLegendary(game) && !card.isLand(game) && card.getManaValue() < manaValue) {
                 CardUtil.castSpellWithAttributesForFree(controller, source, game, card);
                 break;
             }

@@ -27,7 +27,7 @@ public final class SarkhanTheMasterless extends CardImpl {
     public SarkhanTheMasterless(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SARKHAN);
         this.setStartingLoyalty(5);
 

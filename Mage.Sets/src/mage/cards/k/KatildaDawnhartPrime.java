@@ -41,7 +41,7 @@ public final class KatildaDawnhartPrime extends CardImpl {
     public KatildaDawnhartPrime(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARLOCK);
         this.power = new MageInt(1);
@@ -113,85 +113,85 @@ class KatildaDawnhartPrimeManaEffect extends ManaEffect {
 
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
+        if (game == null) {
+            return new ArrayList<>();
+        }
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (permanent == null) {
+            return new ArrayList<>();
+        }
         List<Mana> netMana = new ArrayList<>();
-        if (game != null) {
-            Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-            if (permanent != null) {
-                ObjectColor color = permanent.getColor(game);
-                if (color.isWhite()) {
-                    netMana.add(new Mana(ColoredManaSymbol.W));
-                }
-                if (color.isBlue()) {
-                    netMana.add(new Mana(ColoredManaSymbol.U));
-                }
-                if (color.isBlack()) {
-                    netMana.add(new Mana(ColoredManaSymbol.B));
-                }
-                if (color.isRed()) {
-                    netMana.add(new Mana(ColoredManaSymbol.R));
-                }
-                if (color.isGreen()) {
-                    netMana.add(new Mana(ColoredManaSymbol.G));
-                }
-            }
+        ObjectColor color = permanent.getColor(game);
+        if (color.isWhite()) {
+            netMana.add(Mana.WhiteMana(1));
+        }
+        if (color.isBlue()) {
+            netMana.add(Mana.BlueMana(1));
+        }
+        if (color.isBlack()) {
+            netMana.add(Mana.BlackMana(1));
+        }
+        if (color.isRed()) {
+            netMana.add(Mana.RedMana(1));
+        }
+        if (color.isGreen()) {
+            netMana.add(Mana.GreenMana(1));
         }
         return netMana;
     }
 
     @Override
     public Mana produceMana(Game game, Ability source) {
-        Mana mana = new Mana();
-        if (game != null) {
-            Player controller = game.getPlayer(source.getControllerId());
-            Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-            if (controller != null && permanent != null) {
-                Choice choice = new ChoiceImpl();
-                choice.setMessage("Pick a mana color");
-                ObjectColor color = permanent.getColor(game);
-                if (color.isWhite()) {
-                    choice.getChoices().add("White");
-                }
-                if (color.isBlue()) {
-                    choice.getChoices().add("Blue");
-                }
-                if (color.isBlack()) {
-                    choice.getChoices().add("Black");
-                }
-                if (color.isRed()) {
-                    choice.getChoices().add("Red");
-                }
-                if (color.isGreen()) {
-                    choice.getChoices().add("Green");
-                }
-                if (!choice.getChoices().isEmpty()) {
-                    if (choice.getChoices().size() == 1) {
-                        choice.setChoice(choice.getChoices().iterator().next());
-                    } else {
-                        controller.choose(outcome, choice, game);
-                    }
-
-                    if (choice.getChoice() != null) {
-                        switch (choice.getChoice()) {
-                            case "White":
-                                mana.setWhite(1);
-                                break;
-                            case "Blue":
-                                mana.setBlue(1);
-                                break;
-                            case "Black":
-                                mana.setBlack(1);
-                                break;
-                            case "Red":
-                                mana.setRed(1);
-                                break;
-                            case "Green":
-                                mana.setGreen(1);
-                                break;
-                        }
-                    }
-                }
-            }
+        if (game == null) {
+            return new Mana();
         }
-        return mana;
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (controller == null || permanent == null) {
+            return new Mana();
+        }
+        Choice choice = new ChoiceImpl();
+        choice.setMessage("Pick a mana color");
+        ObjectColor color = permanent.getColor(game);
+        if (color.isWhite()) {
+            choice.getChoices().add("White");
+        }
+        if (color.isBlue()) {
+            choice.getChoices().add("Blue");
+        }
+        if (color.isBlack()) {
+            choice.getChoices().add("Black");
+        }
+        if (color.isRed()) {
+            choice.getChoices().add("Red");
+        }
+        if (color.isGreen()) {
+            choice.getChoices().add("Green");
+        }
+        if (choice.getChoices().isEmpty()) {
+            return new Mana();
+        }
+        if (choice.getChoices().size() == 1) {
+            choice.setChoice(choice.getChoices().iterator().next());
+        } else {
+            controller.choose(outcome, choice, game);
+        }
+        if (choice.getChoice() == null) {
+            return new Mana();
+        }
+        switch (choice.getChoice()) {
+            case "White":
+                return Mana.WhiteMana(1);
+            case "Blue":
+                return Mana.BlueMana(1);
+            case "Black":
+                return Mana.BlackMana(1);
+            case "Red":
+                return Mana.RedMana(1);
+            case "Green":
+                return Mana.GreenMana(1);
+            default:
+                return new Mana();
+        }
     }
 }

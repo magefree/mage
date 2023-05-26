@@ -35,7 +35,7 @@ public final class DarthTyranusCountOfSerenno extends CardImpl {
 
     public DarthTyranusCountOfSerenno(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{W}{U}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DOOKU);
 
         this.setStartingLoyalty(3);

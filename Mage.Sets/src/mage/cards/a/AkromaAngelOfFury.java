@@ -24,7 +24,7 @@ public final class AkromaAngelOfFury extends CardImpl {
 
     public AkromaAngelOfFury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(6);

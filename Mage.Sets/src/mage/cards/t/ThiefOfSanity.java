@@ -80,7 +80,7 @@ class ThiefOfSanityEffect extends OneShotEffect {
             Cards topCards = new CardsImpl();
             topCards.addAll(damagedPlayer.getLibrary().getTopCards(game, 3));
             TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to exile face down"));
-            if (controller.choose(outcome, topCards, target, game)) {
+            if (controller.choose(outcome, topCards, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     topCards.remove(card);

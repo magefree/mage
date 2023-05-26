@@ -13,9 +13,9 @@ import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.token.EmptyToken;
+import mage.game.permanent.token.Token;
 import mage.players.Player;
-import mage.util.CardUtil;
+import mage.util.functions.CopyTokenFunction;
 
 import java.util.stream.Collectors;
 
@@ -87,11 +87,10 @@ class EmbalmEffect extends OneShotEffect {
         }
 
         // create token and modify all attributes permanently (without game usage)
-        EmptyToken token = new EmptyToken();
-        CardUtil.copyTo(token).from(card, game); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
-        token.getColor().setColor(ObjectColor.WHITE);
+        Token token = CopyTokenFunction.createTokenCopy(card, game); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
+        token.setColor(ObjectColor.WHITE);
         token.addSubType(SubType.ZOMBIE);
-        token.getManaCost().clear();
+        token.clearManaCost();
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.EMBALMED_CREATURE, token.getId(), source, controller.getId()));
         token.putOntoBattlefield(1, game, source, controller.getId(), false, false, null);
         // Probably it makes sense to remove also the Embalm ability (it's not shown on the token cards).

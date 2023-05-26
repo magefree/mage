@@ -5,8 +5,6 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -21,26 +19,6 @@ public final class WurmWithLifelinkToken extends TokenImpl {
         power = new MageInt(3);
         toughness = new MageInt(3);
         this.addAbility(LifelinkAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("C14", "SOM", "2XM", "CM2");
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode().equals("C14")) {
-            this.setTokenType(2);
-        }
-        if (getOriginalExpansionSetCode().equals("SOM")) {
-            this.setTokenType(2);
-        }
-        if (getOriginalExpansionSetCode().equals("CM2")) {
-            this.setTokenType(2);
-        }
-        if (getOriginalExpansionSetCode().equals("2XM")) {
-            this.setTokenType(2);
-        }
     }
 
     public WurmWithLifelinkToken(final WurmWithLifelinkToken token) {

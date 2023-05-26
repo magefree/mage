@@ -32,11 +32,6 @@ public class SplitCardHalfImpl extends CardImpl implements SplitCardHalf {
     }
 
     @Override
-    public String getImageName() {
-        return splitCardParent.getImageName();
-    }
-
-    @Override
     public String getExpansionSetCode() {
         return splitCardParent.getExpansionSetCode();
     }

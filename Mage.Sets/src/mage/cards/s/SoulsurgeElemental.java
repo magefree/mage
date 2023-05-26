@@ -10,7 +10,6 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 
@@ -32,7 +31,7 @@ public final class SoulsurgeElemental extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Soulsurge Elemental's power is equal to the number of creatures you control.
-        Effect effect = new SetBasePowerSourceEffect(CreaturesYouControlCount.instance, Duration.EndOfGame);
+        Effect effect = new SetBasePowerSourceEffect(CreaturesYouControlCount.instance);
         this.addAbility(new SimpleStaticAbility(Zone.ALL, effect)
                 .addHint(CreaturesYouControlHint.instance));
     }

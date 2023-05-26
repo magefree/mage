@@ -83,7 +83,7 @@ enum DoubleMajorApplier implements StackObjectCopyApplier {
 
     @Override
     public void modifySpell(StackObject stackObject, Game game) {
-        stackObject.getSuperType().remove(SuperType.LEGENDARY);
+        stackObject.removeSuperType(SuperType.LEGENDARY);
     }
 
     @Override

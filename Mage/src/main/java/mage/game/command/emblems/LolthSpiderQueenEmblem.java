@@ -22,8 +22,7 @@ public final class LolthSpiderQueenEmblem extends Emblem {
 
     // −8: You get an emblem with "Whenever an opponent is dealt combat damage by one or more creatures you control, if that player lost less than 8 life this turn, they lose life equal to the difference."
     public LolthSpiderQueenEmblem() {
-        this.setName("Emblem Lolth");
-        this.setExpansionSetCodeForImage("AFR");
+        super("Emblem Lolth");
         this.getAbilities().add(new ConditionalInterveningIfTriggeredAbility(
                 new DealCombatDamageControlledTriggeredAbility(
                         Zone.COMMAND, new LolthSpiderQueenEmblemEffect(), true, true
@@ -31,6 +30,15 @@ public final class LolthSpiderQueenEmblem extends Emblem {
                 "is dealt combat damage by one or more creatures you control, " +
                 "if that player lost less than 8 life this turn, they lose life equal to the difference."
         ));
+    }
+
+    private LolthSpiderQueenEmblem(final LolthSpiderQueenEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public LolthSpiderQueenEmblem copy() {
+        return new LolthSpiderQueenEmblem(this);
     }
 }
 

@@ -43,7 +43,6 @@ public class TrailOfTheMageRingsPlane extends Plane {
 
     public TrailOfTheMageRingsPlane() {
         this.setPlaneType(Planes.PLANE_TRAIL_OF_THE_MAGE_RINGS);
-        this.setExpansionSetCodeForImage("PCA");
 
         // Instant and sorcery spells have rebound
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new TrailOfTheMageRingsReboundEffect());
@@ -63,6 +62,15 @@ public class TrailOfTheMageRingsPlane extends Plane {
         this.getAbilities().add(chaosAbility);
         chaosAbility.setMayActivate(TargetController.ANY);
         this.getAbilities().add(new SimpleStaticAbility(Zone.ALL, new PlanarDieRollCostIncreasingEffect(chaosAbility.getOriginalId())));
+    }
+
+    private TrailOfTheMageRingsPlane(final TrailOfTheMageRingsPlane plane) {
+        super(plane);
+    }
+
+    @Override
+    public TrailOfTheMageRingsPlane copy() {
+        return new TrailOfTheMageRingsPlane(this);
     }
 }
 

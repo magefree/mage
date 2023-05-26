@@ -18,11 +18,18 @@ import mage.game.events.GameEvent;
 public final class GideonOfTheTrialsEmblem extends Emblem {
 
     public GideonOfTheTrialsEmblem() {
-        this.setName("Emblem Gideon");
+        super("Emblem Gideon");
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new GideonOfTheTrialsCantLoseEffect());
         this.getAbilities().add(ability);
+    }
 
-        this.setExpansionSetCodeForImage("AKH");
+    private GideonOfTheTrialsEmblem(final GideonOfTheTrialsEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public GideonOfTheTrialsEmblem copy() {
+        return new GideonOfTheTrialsEmblem(this);
     }
 }
 

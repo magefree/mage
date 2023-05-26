@@ -32,7 +32,7 @@ public final class KarnLiberated extends CardImpl {
 
     public KarnLiberated(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{7}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KARN);
         this.setStartingLoyalty(6);
 
@@ -186,27 +186,29 @@ class KarnLiberatedDelayedEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            ExileZone exile = game.getExile().getExileZone(exileId);
-            if (exile != null) {
-                // Creatures put onto the battlefield due to Karn's ability will have been under their controller's control continuously
-                // since the beginning of the first turn. They can attack and their activated abilities with {T} in the cost can be activated.
-                Cards cards = new CardsImpl(exile); // needed because putOntoTheBattlefield removes from exile
-                if (!cards.isEmpty()) {
-                    controller.moveCards(cards, Zone.BATTLEFIELD, source, game);
-                    for (Card card : cards.getCards(game)) {
-                        if (card != null) {
-                            Permanent permanent = game.getPermanent(card.getId());
-                            if (permanent != null) {
-                                ((PermanentImpl) permanent).removeSummoningSickness();
-                            }
-                        }
-                    }
+        ExileZone exileZone = game.getExile().getExileZone(exileId);
+        if (controller == null || exileZone == null) {
+            return false;
+        }
+
+        // Creatures put onto the battlefield due to Karn's ability will have been under their controller's control continuously
+        // since the beginning of the first turn. They can attack and their activated abilities with {T} in the cost can be activated.
+        Cards cards = new CardsImpl(exileZone); // needed because putOntoTheBattlefield removes from exile
+        if (cards.isEmpty()) {
+            return false;
+        }
+
+        controller.moveCards(cards, Zone.BATTLEFIELD, source, game);
+        for (Card card : cards.getCards(game)) {
+            if (card != null) {
+                Permanent permanent = game.getPermanent(card.getId());
+                if (permanent != null) {
+                    ((PermanentImpl) permanent).removeSummoningSickness();
                 }
             }
-            return true;
         }
-        return false;
+
+        return true;
     }
 
     @Override

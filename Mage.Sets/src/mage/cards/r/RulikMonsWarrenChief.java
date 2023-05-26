@@ -23,7 +23,7 @@ public final class RulikMonsWarrenChief extends CardImpl {
     public RulikMonsWarrenChief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

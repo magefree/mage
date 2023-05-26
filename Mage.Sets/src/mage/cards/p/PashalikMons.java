@@ -42,7 +42,7 @@ public final class PashalikMons extends CardImpl {
     public PashalikMons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);

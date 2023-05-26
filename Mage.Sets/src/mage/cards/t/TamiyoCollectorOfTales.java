@@ -28,7 +28,7 @@ public final class TamiyoCollectorOfTales extends CardImpl {
     public TamiyoCollectorOfTales(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TAMIYO);
         this.setStartingLoyalty(5);
 

@@ -1,41 +1,39 @@
-
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.OnEventTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.effects.common.counter.AddCountersPlayersEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.events.GameEvent.EventType;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
- *
  * @author Viserion
  */
 public final class PhyrexianVatmother extends CardImpl {
 
-    public PhyrexianVatmother (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
+    public PhyrexianVatmother(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HORROR);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
         this.addAbility(InfectAbility.getInstance());
-        this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new PoisonControllerEffect()));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new AddCountersPlayersEffect(
+                        CounterType.POISON.createInstance(), TargetController.YOU
+                ), TargetController.YOU, false
+        ));
     }
 
-    public PhyrexianVatmother (final PhyrexianVatmother card) {
+    public PhyrexianVatmother(final PhyrexianVatmother card) {
         super(card);
     }
 
@@ -43,34 +41,4 @@ public final class PhyrexianVatmother extends CardImpl {
     public PhyrexianVatmother copy() {
         return new PhyrexianVatmother(this);
     }
-
-}
-
-class PoisonControllerEffect extends OneShotEffect {
-
-    public PoisonControllerEffect() {
-        super(Outcome.Damage);
-        staticText = "you get a poison counter";
-
-    }
-
-    public PoisonControllerEffect(final PoisonControllerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public PoisonControllerEffect copy() {
-        return new PoisonControllerEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            player.addCounters(CounterType.POISON.createInstance(), source.getControllerId(), source, game);
-            return true;
-        }
-        return false;
-    }
-
 }

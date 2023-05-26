@@ -22,6 +22,7 @@ import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.UUID;
 
@@ -93,7 +94,7 @@ class SteelSeraphEffect extends OneShotEffect {
         }
         Choice choice = new ChoiceImpl(true);
         choice.setMessage("Choose an ability");
-        choice.setChoices(map.keySet());
+        choice.setChoices(new HashSet<>(map.keySet()));
         player.choose(outcome, choice, game);
         Ability ability = map.getOrDefault(choice.getChoice(), null);
         if (ability == null) {

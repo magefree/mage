@@ -23,7 +23,7 @@ public final class SyggRiverCutthroat extends CardImpl {
 
     public SyggRiverCutthroat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U/B}{U/B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.ROGUE);
 

@@ -38,7 +38,7 @@ public final class ImaryllElfhameElite extends CardImpl {
 
     public ImaryllElfhameElite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF, SubType.WARRIOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

@@ -39,7 +39,7 @@ public final class EmielTheBlessed extends CardImpl {
     public EmielTheBlessed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.UNICORN);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

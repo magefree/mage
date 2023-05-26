@@ -28,7 +28,7 @@ public final class DomriCitySmasher extends CardImpl {
     public DomriCitySmasher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DOMRI);
         this.setStartingLoyalty(4);
 

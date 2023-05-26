@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -18,8 +16,6 @@ public final class TitaniaProtectorOfArgothElementalToken extends TokenImpl {
         this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
-
-        availableImageSetCodes = Arrays.asList("C14", "CMA", "MH2", "BRC");
     }
 
     public TitaniaProtectorOfArgothElementalToken(final TitaniaProtectorOfArgothElementalToken token) {

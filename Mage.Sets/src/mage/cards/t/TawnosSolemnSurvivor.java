@@ -53,7 +53,7 @@ public final class TawnosSolemnSurvivor extends CardImpl {
     public TawnosSolemnSurvivor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(1);
@@ -116,7 +116,7 @@ class TawnosSolemnSurvivorEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        Permanent permanent = new PermanentCard(card, source.getControllerId(), game);
+        Permanent permanent = new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, card), source.getControllerId(), game);
         return new CreateTokenCopyTargetEffect(
                 null, CardType.ARTIFACT, false
         ).setSavedPermanent(permanent).apply(game, source);

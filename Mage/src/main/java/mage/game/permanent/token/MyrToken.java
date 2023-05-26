@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 public final class MyrToken extends TokenImpl {
 
     public MyrToken() {
@@ -15,8 +13,6 @@ public final class MyrToken extends TokenImpl {
         subtype.add(SubType.MYR);
         power = new MageInt(1);
         toughness = new MageInt(1);
-
-        availableImageSetCodes = Arrays.asList("C14", "C16", "C18", "DST", "MM2", "MRD", "SOM", "MH1", "C21", "NEC", "2XM", "BBD", "DDU", "CM2", "BRC");
     }
 
     public MyrToken(final MyrToken token) {

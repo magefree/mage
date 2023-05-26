@@ -24,7 +24,7 @@ public final class BibFortuna extends CardImpl {
 
     public BibFortuna(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TWILEK, SubType.ADVISOR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

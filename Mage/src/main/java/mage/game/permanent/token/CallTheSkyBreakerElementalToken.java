@@ -5,8 +5,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -22,21 +20,6 @@ public final class CallTheSkyBreakerElementalToken extends TokenImpl {
         toughness = new MageInt(5);
 
         this.addAbility(FlyingAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("C15", "EMA", "EVE", "C21", "NCC");
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("EMA")) {
-            setTokenType(2);
-        }
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("NCC")) {
-            setTokenType(2);
-        }
     }
 
     public CallTheSkyBreakerElementalToken(final CallTheSkyBreakerElementalToken token) {

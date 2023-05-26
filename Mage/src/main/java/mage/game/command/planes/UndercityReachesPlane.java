@@ -19,7 +19,6 @@ import mage.game.Game;
 import mage.game.command.Plane;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.targetpointer.FixedTarget;
@@ -41,7 +40,6 @@ public class UndercityReachesPlane extends Plane {
 
     public UndercityReachesPlane() {
         this.setPlaneType(Planes.PLANE_UNDERCITY_REACHES);
-        this.setExpansionSetCodeForImage("PCA");
 
         // Whenever a creature deals combat damage to a player, its controller may draw a card.
         Ability ability = new UndercityReachesTriggeredAbility();
@@ -62,6 +60,15 @@ public class UndercityReachesPlane extends Plane {
         this.getAbilities().add(chaosAbility);
         chaosAbility.setMayActivate(TargetController.ANY);
         this.getAbilities().add(new SimpleStaticAbility(Zone.ALL, new PlanarDieRollCostIncreasingEffect(chaosAbility.getOriginalId())));
+    }
+
+    private UndercityReachesPlane(final UndercityReachesPlane plane) {
+        super(plane);
+    }
+
+    @Override
+    public UndercityReachesPlane copy() {
+        return new UndercityReachesPlane(this);
     }
 }
 

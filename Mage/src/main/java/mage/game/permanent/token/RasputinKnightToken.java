@@ -19,7 +19,6 @@ public final class RasputinKnightToken extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(2);
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
-        setOriginalExpansionSetCode("DMC");
     }
 
     public RasputinKnightToken(final RasputinKnightToken token) {
@@ -28,14 +27,5 @@ public final class RasputinKnightToken extends TokenImpl {
 
     public RasputinKnightToken copy() {
         return new RasputinKnightToken(this);
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("DMC")) {
-            setTokenType(2);
-        }
     }
 }

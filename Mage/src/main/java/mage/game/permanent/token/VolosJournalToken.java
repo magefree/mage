@@ -7,18 +7,14 @@ import mage.abilities.hint.Hint;
 import mage.abilities.keyword.HexproofAbility;
 import mage.choices.ChoiceCreatureType;
 import mage.constants.*;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.util.RandomUtil;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -28,14 +24,12 @@ public final class VolosJournalToken extends TokenImpl {
 
     public VolosJournalToken() {
         super("Volo's Journal", "Volo's Journal, a legendary colorless artifact token with hexproof and \"Whenever you cast a creature spell, note one of its creature types that hasn't been noted for this artifact.\"");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.cardType.add(CardType.ARTIFACT);
         this.addAbility(HexproofAbility.getInstance());
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new VolosJournalTokenEffect(), StaticFilters.FILTER_SPELL_A_CREATURE, false
         ).addHint(VolosJournalTokenHint.instance));
-
-        availableImageSetCodes = Arrays.asList("CLB");
     }
 
     public VolosJournalToken(final VolosJournalToken token) {
@@ -121,10 +115,10 @@ class VolosJournalTokenEffect extends OneShotEffect {
         if (!spell.isAllCreatureTypes(game)) {
             choice.setChoices(
                     spell.getSubtype(game)
-                    .stream()
-                    .filter(subType -> subType.getSubTypeSet() == SubTypeSet.CreatureType)
-                    .map(SubType::getDescription)
-                    .collect(Collectors.toSet())
+                            .stream()
+                            .filter(subType -> subType.getSubTypeSet() == SubTypeSet.CreatureType)
+                            .map(SubType::getDescription)
+                            .collect(Collectors.toSet())
             );
         }
         // Remove from the possible choices the subtypes which have already been chosen.

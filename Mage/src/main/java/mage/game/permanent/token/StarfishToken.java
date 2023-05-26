@@ -5,16 +5,11 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author spike
  */
 public final class StarfishToken extends TokenImpl {
 
     public StarfishToken() {
-        this(null, 0);
-    }
-
-    public StarfishToken(String setCode, int tokenType) {
         super("Starfish Token", "0/1 blue Starfish creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.STARFISH);

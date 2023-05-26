@@ -9,7 +9,9 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -26,7 +28,7 @@ public class BoostAllEffect extends ContinuousEffectImpl {
     protected DynamicValue power;
     protected DynamicValue toughness;
     protected boolean excludeSource;
-    protected FilterCreaturePermanent filter;
+    protected FilterPermanent filter;
 
     public BoostAllEffect(int power, int toughness, Duration duration) {
         this(power, toughness, duration, false);
@@ -49,6 +51,28 @@ public class BoostAllEffect extends ContinuousEffectImpl {
     }
 
     public BoostAllEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource, String rule) {
+        super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, CardUtil.getBoostOutcome(power, toughness));
+        this.power = power;
+        this.toughness = toughness;
+        this.filter = filter;
+        this.excludeSource = excludeSource;
+
+        if (rule == null || rule.isEmpty()) {
+            setText();
+        } else {
+            this.staticText = rule;
+        }
+    }
+
+    public BoostAllEffect(int power, int toughness, Duration duration, FilterControlledCreaturePermanent filter, boolean excludeSource) {
+        this(StaticValue.get(power), StaticValue.get(toughness), duration, filter, excludeSource);
+    }
+
+    public BoostAllEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterControlledCreaturePermanent filter, boolean excludeSource) {
+        this(power, toughness, duration, filter, excludeSource, null);
+    }
+
+    public BoostAllEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterControlledCreaturePermanent filter, boolean excludeSource, String rule) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, CardUtil.getBoostOutcome(power, toughness));
         this.power = power;
         this.toughness = toughness;

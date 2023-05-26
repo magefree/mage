@@ -29,7 +29,7 @@ public final class CrovaxTheCursed extends CardImpl {
 
     public CrovaxTheCursed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.NOBLE);
         this.power = new MageInt(0);
@@ -77,7 +77,7 @@ class CrovaxTheCursedEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Permanent sourceObject = (Permanent) source.getSourceObjectIfItStillExists(game);
+            Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
             int creatures = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURES, source.getControllerId(), game);
             if (creatures > 0 && controller.chooseUse(outcome, "Sacrifice a creature?", source, game)) {
                 if (new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURES, 1, "").apply(game, source)) {

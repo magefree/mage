@@ -27,7 +27,7 @@ public final class LorthosTheTidemaker extends CardImpl {
 
     public LorthosTheTidemaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.OCTOPUS);
 
         this.power = new MageInt(8);

@@ -27,10 +27,11 @@ public final class TheMightstoneAndWeakstone extends CardImpl {
     public TheMightstoneAndWeakstone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.POWERSTONE);
 
         this.meldsWithClazz = mage.cards.u.UrzaLordProtector.class;
+        this.meldsToClazz = mage.cards.u.UrzaPlaneswalker.class;
 
         // When The Mightstone and Weakstone enters the battlefield, choose one --
         // * Draw two cards.

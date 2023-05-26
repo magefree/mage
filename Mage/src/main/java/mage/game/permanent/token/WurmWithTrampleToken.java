@@ -5,8 +5,6 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author LoneFox
  */
@@ -20,8 +18,6 @@ public final class WurmWithTrampleToken extends TokenImpl {
         power = new MageInt(5);
         toughness = new MageInt(5);
         addAbility(TrampleAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("RTR", "MM3", "GK1");
     }
 
     public WurmWithTrampleToken(final WurmWithTrampleToken token) {

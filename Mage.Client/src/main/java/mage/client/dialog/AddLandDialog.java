@@ -1,6 +1,5 @@
 package mage.client.dialog;
 
-import mage.Mana;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
 import mage.cards.decks.Deck;
@@ -10,6 +9,7 @@ import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.util.gui.FastSearchUtil;
 import mage.constants.Rarity;
 import mage.util.RandomUtil;
+import mage.util.DeckBuildUtils;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.ManaSymbols;
 
@@ -17,7 +17,6 @@ import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.List;
-import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -155,9 +154,11 @@ public class AddLandDialog extends MageDialog {
             criteria.ignoreSetsWithSnowLands();
         }
         if (mode == DeckEditorMode.FREE_BUILDING && expansionInfo != null && CardRepository.haveSnowLands(expansionInfo.getCode())) {
-            criteria.name(landName); // snow basics added only if in free mode and the chosen set has exclusively snow basics
+            // snow basics added only if in free mode and the chosen set has exclusively snow basics
+            // use contains to find snow lands too
+            criteria.nameContains(landName);
         } else {
-            criteria.nameExact(landName);
+            criteria.name(landName);
         }
         criteria.rarities(Rarity.LAND);        
         List<CardInfo> cards = CardRepository.instance.findCards(criteria);
@@ -471,57 +472,13 @@ public class AddLandDialog extends MageDialog {
     }//GEN-LAST:event_btnSetFastSearchActionPerformed
 
     private void autoAddLands() {
-        int red = 0;
-        int green = 0;
-        int black = 0;
-        int blue = 0;
-        int white = 0;
-        Set<Card> cards = deck.getCards();
-        int land_number = ((Number) spnDeckSize.getValue()).intValue() - cards.size();
-        if (land_number < 0) {
-            land_number = 0;
-        }
-        for (Card cd : cards) {
-            for (String s : cd.getManaCostSymbols()) {
-                if (s.contains("W")) white++;
-                if (s.contains("U")) blue++;
-                if (s.contains("B")) black++;
-                if (s.contains("R")) red++;
-                if (s.contains("G")) green++;
-            }
-        }
-        int total = red + green + black + blue + white;
-
-        int redcards = 0;
-        int greencards = 0;
-        int blackcards = 0;
-        int bluecards = 0;
-        int whitecards = 0;
-        if (total > 0) {
-            redcards = Math.round(land_number * ((float) red / (float) total));
-            total -= red;
-            land_number -= redcards;
-
-            greencards = Math.round(land_number * ((float) green / (float) total));
-            total -= green;
-            land_number -= greencards;
-
-            blackcards = Math.round(land_number * ((float) black / (float) total));
-            total -= black;
-            land_number -= blackcards;
-
-            bluecards = Math.round(land_number * ((float) blue / (float) total));
-            total -= blue;
-            land_number -= bluecards;
-
-            whitecards = land_number;
-        }
-
-        spnMountain.setValue(redcards);
-        spnForest.setValue(greencards);
-        spnSwamp.setValue(blackcards);
-        spnIsland.setValue(bluecards);
-        spnPlains.setValue(whitecards);
+        int deckSize = ((Number) spnDeckSize.getValue()).intValue();
+        int[] lands = DeckBuildUtils.landCountSuggestion(deckSize, deck.getCards());
+        spnPlains.setValue(lands[0]);
+        spnIsland.setValue(lands[1]);
+        spnSwamp.setValue(lands[2]);
+        spnMountain.setValue(lands[3]);
+        spnForest.setValue(lands[4]);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

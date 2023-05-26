@@ -27,7 +27,7 @@ public final class DomriRade extends CardImpl {
 
     public DomriRade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{R}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DOMRI);
 
         this.setStartingLoyalty(3);

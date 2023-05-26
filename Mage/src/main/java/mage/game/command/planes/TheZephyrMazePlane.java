@@ -46,7 +46,6 @@ public class TheZephyrMazePlane extends Plane {
 
     public TheZephyrMazePlane() {
         this.setPlaneType(Planes.PLANE_THE_ZEPHYR_MAZE_FOG);
-        this.setExpansionSetCodeForImage("PCA");
 
         // Creatures with flying get +2/+0
         // Creatures without flying get -2/+0
@@ -75,5 +74,14 @@ public class TheZephyrMazePlane extends Plane {
         this.getAbilities().add(chaosAbility);
         chaosAbility.setMayActivate(TargetController.ANY);
         this.getAbilities().add(new SimpleStaticAbility(Zone.ALL, new PlanarDieRollCostIncreasingEffect(chaosAbility.getOriginalId())));
+    }
+
+    private TheZephyrMazePlane(final TheZephyrMazePlane plane) {
+        super(plane);
+    }
+
+    @Override
+    public TheZephyrMazePlane copy() {
+        return new TheZephyrMazePlane(this);
     }
 }

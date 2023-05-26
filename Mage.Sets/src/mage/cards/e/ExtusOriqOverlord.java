@@ -12,7 +12,7 @@ import mage.abilities.effects.common.SacrificeOpponentsEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
@@ -28,7 +28,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class ExtusOriqOverlord extends ModalDoubleFacesCard {
+public final class ExtusOriqOverlord extends ModalDoubleFacedCard {
 
     private static final FilterCard filter
             = new FilterCreatureCard("nonlegendary creature card from your graveyard");
@@ -40,15 +40,14 @@ public final class ExtusOriqOverlord extends ModalDoubleFacesCard {
     public ExtusOriqOverlord(UUID ownerId, CardSetInfo setInfo) {
         super(
                 ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WARLOCK}, "{1}{W}{B}{B}",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WARLOCK}, "{1}{W}{B}{B}",
                 "Awaken the Blood Avatar",
-                new CardType[]{CardType.SORCERY}, new SubType[]{}, "{6}{B}{R}"
+                new SuperType[]{}, new CardType[]{CardType.SORCERY}, new SubType[]{}, "{6}{B}{R}"
         );
 
         // 1.
         // Extus, Oriq Overlord
         // Legendary Creature - Human Warlock
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getLeftHalfCard().setPT(2, 4);
 
         // Double strike

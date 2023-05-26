@@ -22,7 +22,7 @@ public final class JosuVessLichKnight extends CardImpl {
 
     public JosuVessLichKnight(UUID ownerID, CardSetInfo cardSetInfo){
         super(ownerID, cardSetInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE, SubType.KNIGHT);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);

@@ -28,7 +28,7 @@ public final class ChromiumTheMutable extends CardImpl {
     public ChromiumTheMutable(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDER);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(7);

@@ -37,6 +37,7 @@ Commander Legends: Battle for Baldur's Gate|CommanderLegendsBattleForBaldursGate
 Commander Anthology|CommanderAnthology|
 Commander Anthology 2018|CommanderAnthology2018|
 Commander's Arsenal|CommandersArsenal|
+Commander Masters|CommanderMasters|
 Conflux|Conflux|
 Conspiracy: Take the Crown|ConspiracyTakeTheCrown|
 Core Set 2019|CoreSet2019|
@@ -141,6 +142,8 @@ Legends|Legends|
 Legions|Legions|
 Limited Edition Alpha|LimitedEditionAlpha|
 Limited Edition Beta|LimitedEditionBeta|
+The Lord of the Rings: Tales of Middle-earth|TheLordOfTheRingsTalesOfMiddleEarth|
+Tales of Middle-earth Commander|TalesOfMiddleEarthCommander|
 Lorwyn|Lorwyn|
 Magic 2010|Magic2010|
 Magic 2011|Magic2011|
@@ -160,6 +163,9 @@ Masters Edition III|MastersEditionIII|
 Masters Edition IV|MastersEditionIV|
 Masters 25|Masters25|
 Media Inserts|MediaInserts|
+March of the Machine|MarchOfTheMachine|
+March of the Machine Commander|MarchOfTheMachineCommander|
+March of the Machine: The Aftermath|MarchOfTheMachineTheAftermath|
 Mercadian Masques|MercadianMasques|
 Mirage|Mirage|
 Mirrodin|Mirrodin|

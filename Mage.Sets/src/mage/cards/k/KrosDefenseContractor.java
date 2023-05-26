@@ -37,7 +37,7 @@ public final class KrosDefenseContractor extends CardImpl {
     public KrosDefenseContractor(UUID ownerID, CardSetInfo setInfo) {
         super(ownerID, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}{U}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(2);

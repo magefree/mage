@@ -1,12 +1,10 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class GrovetenderDruidsPlantToken extends TokenImpl {
@@ -18,7 +16,6 @@ public final class GrovetenderDruidsPlantToken extends TokenImpl {
         subtype.add(SubType.PLANT);
         power = new MageInt(1);
         toughness = new MageInt(1);
-        this.setOriginalExpansionSetCode("BFZ");
     }
 
     public GrovetenderDruidsPlantToken(final GrovetenderDruidsPlantToken token) {

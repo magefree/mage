@@ -7,7 +7,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author weirddan455
  */
 public final class Elemental21TrampleHasteToken extends TokenImpl {
@@ -19,7 +18,6 @@ public final class Elemental21TrampleHasteToken extends TokenImpl {
         subtype.add(SubType.ELEMENTAL);
         power = new MageInt(2);
         toughness = new MageInt(1);
-        setOriginalExpansionSetCode("DMU");
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
     }

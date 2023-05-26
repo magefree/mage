@@ -28,7 +28,7 @@ public final class MirriWeatherlightDuelist extends CardImpl {
     public MirriWeatherlightDuelist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);

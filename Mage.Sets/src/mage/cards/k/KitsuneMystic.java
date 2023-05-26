@@ -66,7 +66,7 @@ class AutumnTailKitsuneSage extends TokenImpl {
 
     AutumnTailKitsuneSage() {
         super("Autumn-Tail, Kitsune Sage", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.FOX);

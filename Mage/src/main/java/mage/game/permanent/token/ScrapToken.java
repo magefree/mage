@@ -10,8 +10,6 @@ public final class ScrapToken extends TokenImpl {
     public ScrapToken() {
         super("Scrap", "colorless artifact token named Scrap");
         cardType.add(CardType.ARTIFACT);
-
-        availableImageSetCodes.add("BRC");
     }
 
     public ScrapToken(final ScrapToken token) {

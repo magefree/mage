@@ -23,7 +23,7 @@ public final class BladewingDeathlessTyrant extends CardImpl {
 
     public BladewingDeathlessTyrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.subtype.add(SubType.SKELETON);
 

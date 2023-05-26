@@ -1,17 +1,12 @@
-
-
 package mage.game.permanent.token;
 
-import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.common.LoseGameTargetPlayerEffect;
-
-import java.util.Arrays;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class AssassinToken extends TokenImpl {
@@ -24,8 +19,6 @@ public final class AssassinToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new LoseGameTargetPlayerEffect(), false, true));
-
-        availableImageSetCodes = Arrays.asList("RTR", "DDM", "C19");
     }
 
     public AssassinToken(final AssassinToken token) {

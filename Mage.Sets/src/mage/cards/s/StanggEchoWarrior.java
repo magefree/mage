@@ -33,7 +33,7 @@ public final class StanggEchoWarrior extends CardImpl {
     public StanggEchoWarrior(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
@@ -110,7 +110,7 @@ class StanggEchoWarriorEffect extends OneShotEffect {
                 CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect();
                 effect.setSavedPermanent(attachment);
                 effect.apply(game, source);
-                effect.getAddedPermanents().stream().map(t -> permanent.addAttachment(t.getId(), source, game));
+                effect.getAddedPermanents().forEach(t -> permanent.addAttachment(t.getId(), source, game));
                 toSacrifice.addAll(effect.getAddedPermanents());
             }
         }

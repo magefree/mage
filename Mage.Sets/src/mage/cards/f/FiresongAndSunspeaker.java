@@ -38,7 +38,7 @@ public final class FiresongAndSunspeaker extends CardImpl {
     public FiresongAndSunspeaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MINOTAUR);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(4);

@@ -15,7 +15,7 @@ import mage.target.common.TargetAnyTarget;
 public final class BlueHorrorToken extends TokenImpl {
 
     public BlueHorrorToken() {
-        super("Blue Horror", "2/2 blue and red Demon Horror creature token named Blue Horror. It has \"Whenever you cast an instant or sorcery spell, this creature deals 1 damage to any target.\"");
+        super("Blue Horror", "2/2 blue and red Demon Horror creature token named Blue Horror with \"Whenever you cast an instant or sorcery spell, this creature deals 1 damage to any target.\"");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         color.setRed(true);
@@ -29,8 +29,6 @@ public final class BlueHorrorToken extends TokenImpl {
         );
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
-
-        this.setExpansionSetCodeForImage("40K");
     }
 
     public BlueHorrorToken(final BlueHorrorToken token) {

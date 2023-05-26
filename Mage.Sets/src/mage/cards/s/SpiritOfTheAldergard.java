@@ -44,7 +44,7 @@ public final class SpiritOfTheAldergard extends CardImpl {
     public SpiritOfTheAldergard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.BEAR);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(0);

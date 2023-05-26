@@ -32,7 +32,7 @@ public final class TolsimirFriendToWolves extends CardImpl {
     public TolsimirFriendToWolves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SCOUT);
         this.power = new MageInt(3);

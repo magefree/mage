@@ -91,7 +91,7 @@ class SoulReapEffect extends OneShotEffect {
 class SoulReapWatcher extends Watcher {
 
     private final Map<UUID, List<MageObjectReference>> spellMap = new HashMap<>();
-    private static final List<MageObjectReference> emptyList = new ArrayList<>();
+    private static final List<MageObjectReference> emptyList = Collections.unmodifiableList(new ArrayList<>());
 
     SoulReapWatcher() {
         super(WatcherScope.GAME);

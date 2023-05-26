@@ -6,8 +6,6 @@ import mage.abilities.keyword.HasteAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -29,8 +27,6 @@ public final class MinotaurToken extends TokenImpl {
         subtype.add(SubType.MINOTAUR);
         power = new MageInt(2);
         toughness = new MageInt(3);
-
-        availableImageSetCodes = Arrays.asList("JOU");
     }
 
     private MinotaurToken(final MinotaurToken token) {

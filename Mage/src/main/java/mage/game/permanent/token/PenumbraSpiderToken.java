@@ -1,14 +1,11 @@
 package mage.game.permanent.token;
 
-import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.ReachAbility;
-
-import java.util.Arrays;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class PenumbraSpiderToken extends TokenImpl {
@@ -23,8 +20,6 @@ public final class PenumbraSpiderToken extends TokenImpl {
         toughness = new MageInt(4);
 
         addAbility(ReachAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("MMA", "PC2", "TSR", "PCA", "MM3");
     }
 
     public PenumbraSpiderToken(final PenumbraSpiderToken token) {

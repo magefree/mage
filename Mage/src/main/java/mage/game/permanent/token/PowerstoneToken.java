@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.Game;
 
-import java.util.Arrays;
 import java.util.UUID;
 
 /**
@@ -29,8 +28,6 @@ public final class PowerstoneToken extends TokenImpl {
 
         // {T}: Add {C}. This mana can't be spent to cast a nonartifact spell.
         this.addAbility(new ConditionalColorlessManaAbility(1, makeBuilder()));
-
-        availableImageSetCodes = Arrays.asList("DMU", "BRO");
     }
 
     public PowerstoneToken(final PowerstoneToken token) {

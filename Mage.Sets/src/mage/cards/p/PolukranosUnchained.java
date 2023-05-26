@@ -41,7 +41,7 @@ public final class PolukranosUnchained extends CardImpl {
     public PolukranosUnchained(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.HYDRA);
         this.power = new MageInt(0);

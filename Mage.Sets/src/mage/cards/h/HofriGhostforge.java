@@ -48,7 +48,7 @@ public final class HofriGhostforge extends CardImpl {
     public HofriGhostforge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DWARF);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(4);

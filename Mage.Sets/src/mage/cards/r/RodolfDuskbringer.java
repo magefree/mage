@@ -42,7 +42,7 @@ public final class RodolfDuskbringer extends CardImpl {
     public RodolfDuskbringer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(4);

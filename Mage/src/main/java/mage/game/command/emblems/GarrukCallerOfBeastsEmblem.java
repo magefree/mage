@@ -1,4 +1,3 @@
-
 package mage.game.command.emblems;
 
 import mage.abilities.Ability;
@@ -13,7 +12,6 @@ import mage.game.command.Emblem;
 import mage.target.common.TargetCardInLibrary;
 
 /**
- *
  * @author spjspj
  */
 public final class GarrukCallerOfBeastsEmblem extends Emblem {
@@ -24,11 +22,18 @@ public final class GarrukCallerOfBeastsEmblem extends Emblem {
      * library."
      */
     public GarrukCallerOfBeastsEmblem() {
-        this.setName("Emblem Garruk");
+        super("Emblem Garruk");
         Effect effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterCreatureCard("creature card")), false, true, Outcome.PutCreatureInPlay);
         Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND, effect, StaticFilters.FILTER_SPELL_A_CREATURE, true, false);
         this.getAbilities().add(ability);
+    }
 
-        this.setExpansionSetCodeForImage("M14");
+    private GarrukCallerOfBeastsEmblem(final GarrukCallerOfBeastsEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public GarrukCallerOfBeastsEmblem copy() {
+        return new GarrukCallerOfBeastsEmblem(this);
     }
 }

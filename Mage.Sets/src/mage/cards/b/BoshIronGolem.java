@@ -29,7 +29,7 @@ public final class BoshIronGolem extends CardImpl {
 
     public BoshIronGolem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{8}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOLEM);
 
         this.power = new MageInt(6);

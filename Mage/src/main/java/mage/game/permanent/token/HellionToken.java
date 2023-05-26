@@ -1,4 +1,3 @@
-
 package mage.game.permanent.token;
 
 import mage.MageInt;
@@ -6,10 +5,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
- *
  * @author spjspj
  */
 public final class HellionToken extends TokenImpl {
@@ -30,8 +26,6 @@ public final class HellionToken extends TokenImpl {
         subtype.add(SubType.HELLION);
         power = new MageInt(4);
         toughness = new MageInt(4);
-
-        availableImageSetCodes = Arrays.asList("ROE", "DDP", "M13", "PCA");
     }
 
     public HellionToken(final HellionToken token) {

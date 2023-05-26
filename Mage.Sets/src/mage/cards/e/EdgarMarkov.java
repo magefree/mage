@@ -41,7 +41,7 @@ public final class EdgarMarkov extends CardImpl {
     public EdgarMarkov(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{W}{B}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(4);

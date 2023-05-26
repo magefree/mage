@@ -119,6 +119,6 @@ class DracoplasmEffect extends ReplacementEffectImpl {
         }
         ContinuousEffect effect = new SetBasePowerToughnessSourceEffect(power, toughness, Duration.Custom, SubLayer.SetPT_7b);
         game.addEffect(effect, source);
-        return true;
+        return false;
     }
 }

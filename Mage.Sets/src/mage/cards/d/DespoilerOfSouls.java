@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public final class DespoilerOfSouls extends CardImpl {
 
-    private static final FilterCard filter = new FilterCreatureCard("two other creature cards from your graveyard");
+    private static final FilterCard filter = new FilterCreatureCard("other creature cards from your graveyard");
 
     static {
         filter.add(AnotherPredicate.instance);

@@ -31,7 +31,7 @@ public final class SkyfireKirin extends CardImpl {
 
     public SkyfireKirin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KIRIN);
         this.subtype.add(SubType.SPIRIT);
 

@@ -40,7 +40,7 @@ public final class SolarTide extends CardImpl {
         this.getSpellAbility().getModes().addMode(mode);
         
         // Entwine-Sacrifice two lands.
-        this.addAbility(new EntwineAbility(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("two lands"), true))));
+        this.addAbility(new EntwineAbility(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("lands"), true))));
     }
 
     private SolarTide(final SolarTide card) {

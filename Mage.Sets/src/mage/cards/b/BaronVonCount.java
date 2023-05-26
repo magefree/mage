@@ -34,7 +34,7 @@ public final class BaronVonCount extends CardImpl {
 
     public BaronVonCount(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.VILLAIN);
         this.power = new MageInt(3);
@@ -141,7 +141,7 @@ class BaronVonCountTriggeredAbility extends TriggeredAbilityImpl {
                         || String.valueOf(spell.getToughness().getBaseValue()).contains(doomString)) {
                     return true;
                 } else {
-                    for (String string : spell.getCard().getRules()) {
+                    for (String string : spell.getCard().getRules(game)) {
                         if (string.contains(doomString)) {
                             return true;
                         }

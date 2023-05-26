@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -18,7 +16,6 @@ public final class Wurm44Token extends TokenImpl {
         subtype.add(SubType.WURM);
         power = new MageInt(4);
         toughness = new MageInt(4);
-        setOriginalExpansionSetCode("DMC");
     }
 
     public Wurm44Token(final Wurm44Token token) {

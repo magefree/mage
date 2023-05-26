@@ -40,7 +40,7 @@ public final class HigureTheStillWind extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.NINJA);
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

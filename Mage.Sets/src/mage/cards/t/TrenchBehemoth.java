@@ -85,8 +85,8 @@ class TrenchBehemothEffect extends RequirementEffect {
             return true;
         }
         return game.isActivePlayer(game.getControllerId(getTargetPointer().getFirst(game, source)))
-                && game.getPhase().getType() == TurnPhase.COMBAT
-                && game.getStep().getType() == PhaseStep.END_COMBAT;
+                && game.getTurnPhaseType() == TurnPhase.COMBAT
+                && game.getTurnStepType() == PhaseStep.END_COMBAT;
     }
 
     @Override

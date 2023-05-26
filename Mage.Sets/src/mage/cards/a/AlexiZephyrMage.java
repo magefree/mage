@@ -29,7 +29,7 @@ public final class AlexiZephyrMage extends CardImpl {
 
     public AlexiZephyrMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SPELLSHAPER);
         this.power = new MageInt(3);
@@ -40,7 +40,7 @@ public final class AlexiZephyrMage extends CardImpl {
         effect.setText("Return X target creatures to their owner's hands");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{X}{U}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("two cards"))));
+        ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS)));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURES));
         ability.setTargetAdjuster(XTargetsAdjuster.instance);
         this.addAbility(ability);

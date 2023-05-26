@@ -20,7 +20,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class RathiDragon extends CardImpl {
     
-    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("two Mountains");
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Mountains");
     
     static{
         filter.add(SubType.MOUNTAIN.getPredicate());

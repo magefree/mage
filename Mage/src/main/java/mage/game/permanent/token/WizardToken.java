@@ -16,8 +16,6 @@ public final class WizardToken extends TokenImpl {
         color.setBlue(true);
         power = new MageInt(2);
         toughness = new MageInt(2);
-
-        setOriginalExpansionSetCode("WAR");
     }
 
     private WizardToken(final WizardToken token) {

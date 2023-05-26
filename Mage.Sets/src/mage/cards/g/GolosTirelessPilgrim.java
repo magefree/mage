@@ -28,7 +28,7 @@ public final class GolosTirelessPilgrim extends CardImpl {
     public GolosTirelessPilgrim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SCOUT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);

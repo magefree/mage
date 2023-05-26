@@ -1,13 +1,10 @@
-
-
 package mage.game.permanent.token;
 
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class ForlornPseudammaZombieToken extends TokenImpl {
@@ -20,7 +17,6 @@ public final class ForlornPseudammaZombieToken extends TokenImpl {
         subtype.add(SubType.ZOMBIE);
         power = new MageInt(2);
         toughness = new MageInt(2);
-        this.setOriginalExpansionSetCode("BNG");
     }
 
     public ForlornPseudammaZombieToken(final ForlornPseudammaZombieToken token) {

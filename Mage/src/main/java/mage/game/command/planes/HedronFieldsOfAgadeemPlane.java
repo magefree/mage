@@ -30,7 +30,6 @@ public class HedronFieldsOfAgadeemPlane extends Plane {
 
     public HedronFieldsOfAgadeemPlane() {
         this.setPlaneType(Planes.PLANE_HEDRON_FIELDS_OF_AGADEEM);
-        this.setExpansionSetCodeForImage("PCA");
 
         // Creatures with power 7 or greater can't attack or block 
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new HedronFieldsOfAgadeemRestrictionEffect());
@@ -51,6 +50,15 @@ public class HedronFieldsOfAgadeemPlane extends Plane {
         this.getAbilities().add(chaosAbility);
         chaosAbility.setMayActivate(TargetController.ANY);
         this.getAbilities().add(new SimpleStaticAbility(Zone.ALL, new PlanarDieRollCostIncreasingEffect(chaosAbility.getOriginalId())));
+    }
+
+    private HedronFieldsOfAgadeemPlane(final HedronFieldsOfAgadeemPlane plane) {
+        super(plane);
+    }
+
+    @Override
+    public HedronFieldsOfAgadeemPlane copy() {
+        return new HedronFieldsOfAgadeemPlane(this);
     }
 }
 

@@ -31,7 +31,7 @@ public final class LagomosHandOfHatred extends CardImpl {
     public LagomosHandOfHatred(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(1);
@@ -46,7 +46,7 @@ public final class LagomosHandOfHatred extends CardImpl {
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary()),
                 new TapSourceCost(),
                 LagomosHandOfHatredCondition.instance
-        ), new CreaturesDiedWatcher());
+        ));
     }
 
     private LagomosHandOfHatred(final LagomosHandOfHatred card) {

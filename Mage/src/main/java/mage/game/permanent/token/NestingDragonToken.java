@@ -15,7 +15,7 @@ public final class NestingDragonToken extends TokenImpl {
 
     public NestingDragonToken() {
         super(
-                "Dragon Egg",
+                "Dragon Egg Token",
                 "0/2 red Dragon Egg creature token with defender and "
                 + "\""
                 + "When this creature dies, "

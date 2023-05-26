@@ -36,7 +36,7 @@ public final class OathOfTeferi extends CardImpl {
     public OathOfTeferi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // When Oath of Teferi enters the battlefield, exile another target permanent you control. Return it to the battlefield under its owner's control at the beginning of the next end step.
         Ability ability = new EntersBattlefieldTriggeredAbility(new OathOfTeferiBlinkEffect());
@@ -118,7 +118,7 @@ class OathOfTeferiLoyaltyEffect extends ContinuousEffectImpl {
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_PLANESWALKER,
                 source.getControllerId(), source, game
         )) {
-            permanent.incrementLoyaltyActivationsAvailable(2);
+            permanent.setLoyaltyActivationsAvailable(2);
         }
         return true;
     }

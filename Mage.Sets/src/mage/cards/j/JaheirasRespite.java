@@ -1,6 +1,7 @@
 package mage.cards.j;
 
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.common.CreaturesAttackingYouCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
@@ -13,11 +14,9 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.combat.CombatGroup;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -30,6 +29,7 @@ public final class JaheirasRespite extends CardImpl {
 
         // Search your library for up to X basic land cards, where X is the number of creatures attacking you, put those cards onto the battlefield tapped, then shuffle.
         this.getSpellAbility().addEffect(new JaheirasRespiteEffect());
+        this.getSpellAbility().addHint(CreaturesAttackingYouCount.getHint());
 
         // Prevent all combat damage that would be dealt this turn.
         this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true).concatBy("<br>"));
@@ -68,14 +68,10 @@ class JaheirasRespiteEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int count = game
-                .getCombat()
-                .getGroups()
-                .stream()
-                .filter(combatGroup -> source.isControlledBy(combatGroup.getDefenderId()))
-                .map(CombatGroup::getAttackers)
-                .mapToInt(List::size)
-                .sum();
+        int count = CreaturesAttackingYouCount.instance.calculate(game, source, this);
+        if (count == 0) {
+            return false;
+        }
         TargetCardInLibrary target = new TargetCardInLibrary(0, count, StaticFilters.FILTER_CARD_BASIC_LANDS);
         player.searchLibrary(target, source, game);
         Cards cards = new CardsImpl();

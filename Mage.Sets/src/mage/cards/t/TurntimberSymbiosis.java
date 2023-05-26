@@ -24,7 +24,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class TurntimberSymbiosis extends ModalDoubleFacesCard {
+public final class TurntimberSymbiosis extends ModalDoubleFacedCard {
 
     public TurntimberSymbiosis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,
@@ -95,7 +95,7 @@ class TurntimberSymbiosisEffect extends OneShotEffect {
         TargetCard target = new TargetCardInLibrary(
                 0, 1, StaticFilters.FILTER_CARD_CREATURE
         );
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {
             cards.remove(card);

@@ -26,6 +26,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -46,7 +47,7 @@ public final class RickSteadfastLeader extends CardImpl {
     public RickSteadfastLeader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(3);
@@ -77,7 +78,7 @@ public final class RickSteadfastLeader extends CardImpl {
 
 class RickSteadfastLeaderChooseEffect extends OneShotEffect {
 
-    private static final Set<String> choices = new HashSet();
+    private static final Set<String> choices = new LinkedHashSet<>();
 
     static {
         choices.add("First strike and vigilance");

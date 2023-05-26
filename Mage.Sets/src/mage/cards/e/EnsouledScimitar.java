@@ -51,13 +51,11 @@ class EnsouledScimitarToken extends TokenImpl {
 
     public EnsouledScimitarToken() {
         super("Pincher", "1/5 Spirit artifact creature with flying");
-        setOriginalExpansionSetCode("5ND");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SPIRIT);
         power = new MageInt(1);
         toughness = new MageInt(5);
         this.addAbility(FlyingAbility.getInstance());
-        
     }
 
     public EnsouledScimitarToken(final EnsouledScimitarToken token) {

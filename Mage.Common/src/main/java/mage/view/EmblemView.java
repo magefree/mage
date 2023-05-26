@@ -19,21 +19,10 @@ public class EmblemView implements CommandObjectView, Serializable {
     protected List<String> rules;
     protected PlayableObjectStats playableStats = new PlayableObjectStats();
 
-    public EmblemView(Emblem emblem, Card sourceCard) {
-        this.id = emblem.getId();
-        this.name = "Emblem " + sourceCard.getName();
-        if (emblem.getExpansionSetCodeForImage() == null) {
-            this.expansionSetCode = sourceCard.getExpansionSetCode();
-        } else {
-            this.expansionSetCode = emblem.getExpansionSetCodeForImage();
-        }
-        this.rules = emblem.getAbilities().getRules(sourceCard.getName());
-    }
-
     public EmblemView(Emblem emblem) {
         this.id = emblem.getId();
         this.name = emblem.getName();
-        this.expansionSetCode = emblem.getExpansionSetCodeForImage();
+        this.expansionSetCode = emblem.getExpansionSetCode();
         this.rules = emblem.getAbilities().getRules(emblem.getName());
     }
 

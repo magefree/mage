@@ -35,7 +35,7 @@ public final class GideonJura extends CardImpl {
 
     public GideonJura(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIDEON);
 
         this.setStartingLoyalty(6);
@@ -123,7 +123,7 @@ class GideonJuraEffect extends RequirementEffect {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        return (game.getPhase().getType() == TurnPhase.END && this.isYourNextTurn(game))
+        return (game.getTurnPhaseType() == TurnPhase.END && this.isYourNextTurn(game))
                 // 6/15/2010: If a creature controlled by the affected player can't attack Gideon Jura
                 // (because he's no longer on the battlefield, for example), that player may have it attack you,
                 // another one of your planeswalkers, or nothing at all.

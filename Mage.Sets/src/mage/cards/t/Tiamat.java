@@ -35,7 +35,7 @@ public final class Tiamat extends CardImpl {
     public Tiamat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}{B}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.subtype.add(SubType.GOD);
         this.power = new MageInt(7);

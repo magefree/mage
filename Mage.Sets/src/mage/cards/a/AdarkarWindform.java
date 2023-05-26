@@ -21,7 +21,7 @@ public final class AdarkarWindform extends CardImpl {
 
     public AdarkarWindform(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.ILLUSION);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

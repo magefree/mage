@@ -1,4 +1,3 @@
-
 package mage.game.command.emblems;
 
 import mage.abilities.Ability;
@@ -8,7 +7,6 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.constants.*;
-
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.command.Emblem;
@@ -16,17 +14,23 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
 
 /**
- *
  * @author spjspj
  */
 public final class KothOfTheHammerEmblem extends Emblem {
     // "Mountains you control have '{T}: This land deals 1 damage to any target.'"
 
     public KothOfTheHammerEmblem() {
-        this.setName("Emblem Koth");
+        super("Emblem Koth");
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new KothOfTheHammerThirdEffect()));
+    }
 
-        this.setExpansionSetCodeForImage("DDI");
+    private KothOfTheHammerEmblem(final KothOfTheHammerEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public KothOfTheHammerEmblem copy() {
+        return new KothOfTheHammerEmblem(this);
     }
 }
 

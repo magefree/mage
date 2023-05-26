@@ -39,7 +39,9 @@ public final class RitualOfSteel extends CardImpl {
         this.addAbility(ability);
         
         // When Ritual of Steel enters the battlefield, draw a card at the beginning of the next turn's upkeep.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
+                new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false)
+                .setText("draw a card at the beginning of the next turn's upkeep")));
         
         // Enchanted creature gets +0/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(0,2, Duration.WhileOnBattlefield)));

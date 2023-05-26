@@ -82,7 +82,7 @@ class TreeOfRedemptionEffect extends OneShotEffect {
             return false;
         }
         player.setLife(amount, game, source);
-        game.addEffect(new SetBasePowerToughnessSourceEffect(Integer.MIN_VALUE, life, Duration.WhileOnBattlefield, SubLayer.SetPT_7b, true), source);
+        game.addEffect(new SetBasePowerToughnessSourceEffect(Integer.MIN_VALUE, life, Duration.WhileOnBattlefield, SubLayer.SetPT_7b), source);
         return true;
     }
 

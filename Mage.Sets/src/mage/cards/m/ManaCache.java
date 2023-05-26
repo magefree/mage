@@ -104,7 +104,7 @@ class ManaCacheManaAbility extends ActivatedManaAbilityImpl {
         Player player = game.getPlayer(playerId);
         if (player == null
                 || !playerId.equals(game.getActivePlayerId())
-                || !game.getStep().getType().isBefore(PhaseStep.END_TURN)) {
+                || !game.getTurnStepType().isBefore(PhaseStep.END_TURN)) {
             return ActivationStatus.getFalse();
         }
 

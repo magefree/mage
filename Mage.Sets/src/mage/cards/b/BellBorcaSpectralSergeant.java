@@ -36,7 +36,7 @@ public final class BellBorcaSpectralSergeant extends CardImpl {
     public BellBorcaSpectralSergeant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(0);
@@ -47,7 +47,7 @@ public final class BellBorcaSpectralSergeant extends CardImpl {
 
         // Bell Borca, Spectral Sergeant's power is equal to the greatest number noted for it this turn.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(
-                BellBorcaSpectralSergeantValue.instance, Duration.EndOfGame
+                BellBorcaSpectralSergeantValue.instance
         ).setText("{this}'s power is equal to the greatest number noted for it this turn")));
 
         // At the beginning of your upkeep, exile the top card of your library. You may play that card this turn.

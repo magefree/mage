@@ -83,7 +83,7 @@ public interface ActivatedAbility extends Ability {
 
     int getMaxActivationsPerTurn(Game game);
 
-    public void setTiming(TimingRule timing);
+    ActivatedAbility setTiming(TimingRule timing);
 
-    public ActivatedAbility setCondition(Condition condition);
+    ActivatedAbility setCondition(Condition condition);
 }

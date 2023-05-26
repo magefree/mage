@@ -26,7 +26,7 @@ public final class SzadekLordOfSecrets extends CardImpl {
 
     public SzadekLordOfSecrets(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
 
         this.power = new MageInt(5);

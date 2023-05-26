@@ -30,7 +30,7 @@ public final class CoverOfWinter extends CardImpl {
     public CoverOfWinter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
 
         // Cumulative upkeep {S}
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{S}")));

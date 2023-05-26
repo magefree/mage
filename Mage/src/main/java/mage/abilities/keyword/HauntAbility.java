@@ -81,8 +81,7 @@ public class HauntAbility extends TriggeredAbilityImpl {
                     return false;
                 }
                 Card card = game.getCard(getSourceId());
-                if (card == null
-                        || game.getCard(event.getTargetId()) == null) {
+                if (card == null) {
                     return false;
                 }
                 String key = new StringBuilder("Haunting_")

@@ -28,7 +28,7 @@ public final class OathOfLiliana extends CardImpl {
 
     public OathOfLiliana(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // When Oath of Liliana enters the battlefield, each opponent sacrifices a creature.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeOpponentsEffect(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT), false));

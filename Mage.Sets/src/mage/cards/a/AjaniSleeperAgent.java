@@ -31,7 +31,7 @@ public final class AjaniSleeperAgent extends CardImpl {
     public AjaniSleeperAgent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{G}{G/W/P}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AJANI);
         this.setStartingLoyalty(4);
 

@@ -1,4 +1,3 @@
-
 package mage.game.permanent.token;
 
 import mage.MageInt;
@@ -6,7 +5,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public final class ZombieToken2 extends TokenImpl {
@@ -22,16 +20,6 @@ public final class ZombieToken2 extends TokenImpl {
         subtype.add(SubType.ZOMBIE);
         power = new MageInt(zPower);
         toughness = new MageInt(zToughness);
-        setOriginalExpansionSetCode("EMN");
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("EMN")) {
-            this.setTokenType(4);
-        }
     }
 
     public ZombieToken2(final ZombieToken2 token) {

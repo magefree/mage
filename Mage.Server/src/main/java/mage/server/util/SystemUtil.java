@@ -8,6 +8,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.cards.Card;
+import mage.cards.decks.importer.CardLookup;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -87,7 +88,10 @@ public final class SystemUtil {
 
     private static final Pattern patternGroup = Pattern.compile("\\[(.+)\\]"); // [test new card]
     private static final Pattern patternCommand = Pattern.compile("([\\w]+):([\\S ]+?):([\\S ]+):([\\d]+)"); // battlefield:Human:Island:10
-    private static final Pattern patternCardInfo = Pattern.compile("([\\S ]+):([\\S ]+)"); // Island:XLN
+    private static final Pattern patternCardInfo = Pattern.compile("(^[\\dA-Z]{2,7})@([\\S ]+)" // XLN-Island
+            .replace("7", String.valueOf(CardUtil.TESTS_SET_CODE_LOOKUP_LENGTH))
+            .replace("@", CardUtil.TESTS_SET_CODE_DELIMETER)
+    );
 
     // show ext info for special commands
     private static final String PARAM_COLOR_COST = "color cost";
@@ -220,17 +224,10 @@ public final class SystemUtil {
         }
 
         // card name can be with set
-        String cardInfo = matchCommand.group(3);
-        Matcher matchInfo = patternCardInfo.matcher(cardInfo);
-        if (matchInfo.matches()) {
-            // name with set
-            com.cardName = matchInfo.group(1);
-            com.cardSet = matchInfo.group(2);
-        } else {
-            // name only
-            com.cardName = cardInfo;
-            com.cardSet = "";
-        }
+        // example: XLN-Island
+        List<String> cardInfo = parseSetAndCardNameCommand(matchCommand.group(3));
+        com.cardSet = cardInfo.get(0);
+        com.cardName = cardInfo.get(1);
 
         if (com.cardName.isEmpty()) {
             com.Error = "Card name is empty";
@@ -271,6 +268,7 @@ public final class SystemUtil {
         Ability fakeSourceAbilityTemplate = new SimpleStaticAbility(Zone.OUTSIDE, new InfoEffect("adding testing cards"));
         fakeSourceAbilityTemplate.setControllerId(feedbackPlayer.getId());
 
+        List<String> errorsList = new ArrayList<>();
         try {
             String fileName = fileSource;
             if (fileName == null) {
@@ -279,7 +277,10 @@ public final class SystemUtil {
 
             File f = new File(fileName);
             if (!f.exists()) {
-                logger.warn("Couldn't find init file: " + fileName);
+                String mes = String.format("Couldn't find init file: %s", f.getAbsolutePath());
+                logger.warn(mes);
+                errorsList.add(mes);
+                sendCheatCommandsFeedback(game, feedbackPlayer, errorsList);
                 return;
             }
 
@@ -290,6 +291,7 @@ public final class SystemUtil {
             // 2. ask user if many groups
             // 3. process system commands
             // 4. run commands from selected group
+
             // 1. parse
             List<CommandGroup> groups = new ArrayList<>();
 
@@ -315,7 +317,9 @@ public final class SystemUtil {
                                 currentGroup = new CommandGroup(groupName, true);
                                 groups.add(currentGroup);
                             } else {
-                                logger.warn("Special group [" + groupName + "] is not supported.");
+                                String mes = String.format("Special group is not supported: %s", groupName);
+                                errorsList.add(mes);
+                                logger.warn(mes);
                             }
                             continue;
                         } else {
@@ -371,7 +375,10 @@ public final class SystemUtil {
                 return;
             }
 
-            logger.info("Selected group [" + runGroup.name + "] with " + runGroup.commands.size() + " commands");
+            logger.info(String.format("Selected group [%s] with %d commands",
+                    runGroup.name,
+                    runGroup.commands.size()
+            ));
 
             // 3. system commands
             if (runGroup.isSpecialCommand) {
@@ -450,7 +457,14 @@ public final class SystemUtil {
                             game.firePriorityEvent(savedPriorityPlayer);
                         }
                         break;
+
+                    default:
+                        String mes = String.format("Unknown system command: %s", runGroup.name);
+                        errorsList.add(mes);
+                        logger.error(mes);
+                        break;
                 }
+                sendCheatCommandsFeedback(game, feedbackPlayer, errorsList);
                 return;
             }
 
@@ -467,11 +481,16 @@ public final class SystemUtil {
                 if (line.startsWith(COMMAND_REF_PREFIX)) {
                     CommandGroup other = otherGroupRefs.getOrDefault(line, null);
                     if (other != null && !other.isSpecialCommand) {
-                        logger.info("Replace ref group " + line + " by " + other.commands.size() + " commands");
+                        logger.info(String.format("Replace ref group [%s] by %d child commands",
+                                line,
+                                other.commands.size()
+                        ));
                         runGroup.commands.remove(i);
                         runGroup.commands.addAll(i, other.commands);
                     } else {
-                        logger.error("Can't find ref group: " + line);
+                        String mes = String.format("Can't find ref group: %s", line);
+                        errorsList.add(mes);
+                        logger.error(mes);
                     }
                 }
             }
@@ -481,13 +500,17 @@ public final class SystemUtil {
 
                 CardCommandData command = parseCardCommand(line);
                 if (!command.OK) {
-                    logger.warn(command.Error + ": " + line);
+                    String mes = String.format("%s: %s", command.Error, line);
+                    errorsList.add(mes);
+                    logger.warn(mes);
                     continue;
                 }
 
                 Optional<Player> playerOptional = findPlayer(game, command.player);
                 if (!playerOptional.isPresent()) {
-                    logger.warn("Unknown player: " + line);
+                    String mes = String.format("Unknown player: %s", line);
+                    errorsList.add(mes);
+                    logger.warn(mes);
                     continue;
                 }
                 Player player = playerOptional.get();
@@ -532,9 +555,13 @@ public final class SystemUtil {
                     // simple cast (without targets or modes)
 
                     // find card info
-                    CardInfo cardInfo = CardRepository.instance.findCard(command.cardName);
+                    CardInfo cardInfo = CardLookup.instance.lookupCardInfo(command.cardName, command.cardSet).orElse(null);
                     if (cardInfo == null) {
-                        logger.warn("Unknown card for stack command [" + command.cardName + "]: " + line);
+                        String mes = String.format("Unknown card for stack command [%s]: %s",
+                                command.cardName,
+                                line);
+                        errorsList.add(mes);
+                        logger.warn(mes);
                         continue;
                     }
 
@@ -579,11 +606,15 @@ public final class SystemUtil {
                 } else if ("sideboard".equalsIgnoreCase(command.zone)) {
                     gameZone = Zone.OUTSIDE;
                 } else {
-                    logger.warn("Unknown zone [" + command.zone + "]: " + line);
+                    String mes = String.format("Unknown zone [%s]: %s",
+                            command.zone,
+                            line);
+                    errorsList.add(mes);
+                    logger.warn(mes);
                     continue;
                 }
 
-                List<CardInfo> cards = null;
+                List<CardInfo> cards;
                 if (command.cardSet.isEmpty()) {
                     // by name
                     cards = CardRepository.instance.findCards(command.cardName);
@@ -593,7 +624,13 @@ public final class SystemUtil {
                 }
 
                 if (cards.isEmpty()) {
-                    logger.warn("Unknown card [" + command.cardName + "]: " + line);
+                    String mes = String.format("Unknown card [%s%s]: %s",
+                            command.cardSet.isEmpty() ? "" : command.cardSet + "-",
+                            command.cardName,
+                            line
+                    );
+                    errorsList.add(mes);
+                    logger.warn(mes);
                     continue;
                 }
 
@@ -614,7 +651,9 @@ public final class SystemUtil {
                         cardsToLoad.forEach(card -> gameCommander.addCommander(card, player));
                         cardsToLoad.forEach(card -> gameCommander.initCommander(card, player));
                     } else {
-                        logger.fatal("Commander card can be used in commander game only: " + command.cardName);
+                        String mes = String.format("Commander card can be used in commander game only: %s", command.cardName);
+                        errorsList.add(mes);
+                        logger.error(mes);
                     }
                 } else if ("sideboard".equalsIgnoreCase(command.zone) && cardsToLoad.size() > 0) {
                     // put to sideboard
@@ -631,8 +670,24 @@ public final class SystemUtil {
                 }
             }
         } catch (Exception e) {
-            logger.fatal("", e);
+            String mes = String.format("Catch critical error: %s", e.getMessage());
+            errorsList.add(mes);
+            logger.error(mes, e);
         }
+        sendCheatCommandsFeedback(game, feedbackPlayer, errorsList);
+    }
+
+    private static void sendCheatCommandsFeedback(Game game, Player feedbackPlayer, List<String> errorsList) {
+        // inform all players about wrong commands or other errors
+        // TODO: it's a workaround to show a dialog with error message (must be replaced by message dialog for feedback player)
+        if (errorsList.size() > 0) {
+            String mes = String.format("Player %s tried to apply cheat commands and catch %d errors:\n\n",
+                    feedbackPlayer.getName(), errorsList.size());
+            mes += String.join("\n", errorsList);
+            mes += "\n";
+            game.fireErrorEvent("Cheat command errors", new IllegalArgumentException(mes));
+        }
+        game.informPlayers(String.format("%s: tried to apply cheat commands", feedbackPlayer.getLogName()));
     }
 
     /**
@@ -690,8 +745,7 @@ public final class SystemUtil {
         Planes planeType = Planes.fromClassName(planeClassName);
         Plane plane = Plane.createPlane(planeType);
         if (plane != null) {
-            plane.setControllerId(player.getId());
-            game.addPlane(plane, null, player.getId());
+            game.addPlane(plane, player.getId());
             return true;
         }
         return false;
@@ -728,5 +782,23 @@ public final class SystemUtil {
     public static long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
         long diffInMillies = date2.getTime() - date1.getTime();
         return timeUnit.convert(diffInMillies, TimeUnit.MILLISECONDS);
+    }
+
+    /**
+     * Parse set code and card name from command line
+     *
+     * @param info format example: XLN-Mountain (set code must be upper case)
+     * @return
+     */
+    public static List<String> parseSetAndCardNameCommand(String info) {
+        Matcher matchInfo = patternCardInfo.matcher(info);
+        String cardSet = "";
+        String cardName = info;
+        if (matchInfo.matches()) {
+            // set with card
+            cardSet = matchInfo.group(1);
+            cardName = matchInfo.group(2);
+        }
+        return Arrays.asList(cardSet, cardName);
     }
 }

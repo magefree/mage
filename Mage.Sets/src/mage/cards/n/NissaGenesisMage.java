@@ -33,7 +33,7 @@ public final class NissaGenesisMage extends CardImpl {
 
     public NissaGenesisMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{5}{G}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NISSA);
 
         this.setStartingLoyalty(5);

@@ -20,7 +20,7 @@ public final class SulfurousMire extends CardImpl {
     public SulfurousMire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.SWAMP);
         this.subtype.add(SubType.MOUNTAIN);
 

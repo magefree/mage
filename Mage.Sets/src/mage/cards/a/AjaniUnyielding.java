@@ -37,7 +37,7 @@ public final class AjaniUnyielding extends CardImpl {
 
     public AjaniUnyielding(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{G}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AJANI);
 
         this.setStartingLoyalty(4);

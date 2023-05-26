@@ -70,7 +70,7 @@ class HiddenHerdAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent land = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        return game.getOpponents(controllerId).contains(event.getPlayerId()) && !land.getSuperType().contains(SuperType.BASIC);
+        return game.getOpponents(controllerId).contains(event.getPlayerId()) && !land.isBasic(game);
     }
 
     @Override

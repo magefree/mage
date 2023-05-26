@@ -29,7 +29,7 @@ public final class FblthpTheLost extends CardImpl {
     public FblthpTheLost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HOMUNCULUS);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

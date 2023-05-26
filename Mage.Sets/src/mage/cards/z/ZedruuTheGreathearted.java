@@ -29,7 +29,7 @@ public final class ZedruuTheGreathearted extends CardImpl {
 
     public ZedruuTheGreathearted(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MINOTAUR, SubType.MONK);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);

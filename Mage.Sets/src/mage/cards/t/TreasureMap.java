@@ -29,7 +29,7 @@ public final class TreasureMap extends CardImpl {
     public TreasureMap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
-        this.secondSideCardClazz = TreasureCove.class;
+        this.secondSideCardClazz = mage.cards.t.TreasureCove.class;
 
         // {1}, {T}: Scry 1. Put a landmark counter on Treasure Map. Then if there are three or more landmark counters on it, remove those counters, transform Treasure Map, and create three colorless Treasure artifact tokens with "{T}, Sacrifice this artifact: Add one mana of any color."
         this.addAbility(new TransformAbility());

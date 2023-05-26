@@ -38,7 +38,7 @@ public final class RalZarek extends CardImpl {
 
     public RalZarek(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.RAL);
 
         this.setStartingLoyalty(4);

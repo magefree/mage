@@ -26,7 +26,7 @@ public final class KeldonNecropolis extends CardImpl {
 
     public KeldonNecropolis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());

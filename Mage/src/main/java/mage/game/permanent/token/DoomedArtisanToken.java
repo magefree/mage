@@ -6,7 +6,6 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
@@ -27,7 +26,6 @@ public final class DoomedArtisanToken extends TokenImpl {
 
     public DoomedArtisanToken() {
         super("Sculpture Token", "colorless Sculpture artifact creature token with \"This creature's power and toughness are each equal to the number of Sculptures you control.\"");
-        setOriginalExpansionSetCode("C19");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SCULPTURE);
@@ -36,7 +34,7 @@ public final class DoomedArtisanToken extends TokenImpl {
         toughness = new MageInt(0);
 
         // This creature's power and toughness are each equal to the number of Sculpturess you control.
-        this.addAbility(new SimpleStaticAbility(new SetBasePowerToughnessSourceEffect(xValue, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(new SetBasePowerToughnessSourceEffect(xValue)));
     }
 
     private DoomedArtisanToken(final DoomedArtisanToken token) {

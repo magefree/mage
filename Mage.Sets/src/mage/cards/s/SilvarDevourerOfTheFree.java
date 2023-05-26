@@ -32,7 +32,7 @@ public final class SilvarDevourerOfTheFree extends CardImpl {
     public SilvarDevourerOfTheFree(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.NIGHTMARE);
         this.power = new MageInt(4);

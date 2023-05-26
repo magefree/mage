@@ -39,7 +39,7 @@ public final class JalumGrifter extends CardImpl {
 
     public JalumGrifter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEVIL);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
@@ -117,7 +117,7 @@ class JalumGrifterEffect extends OneShotEffect {
             TargetCard targetCard = new TargetCard(Zone.HAND, new FilterCard());
             CardsImpl cards = new CardsImpl();
             cards.addAll(shellGamePile);
-            if (opponent.choose(Outcome.Sacrifice, cards, targetCard, game)) {
+            if (opponent.choose(Outcome.Sacrifice, cards, targetCard, source, game)) {
                 Card card = game.getCard(targetCard.getFirstTarget());
                 if (card != null) {
                     card.setFaceDown(false, game);

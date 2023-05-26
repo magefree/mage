@@ -19,7 +19,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 
 import java.util.UUID;
@@ -29,7 +28,7 @@ import java.util.UUID;
  */
 public final class SvyelunOfSeaAndSky extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.MERFOLK);
+    private static final FilterPermanent filter = new FilterPermanent(SubType.MERFOLK, "Merfolk");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -43,7 +42,7 @@ public final class SvyelunOfSeaAndSky extends CardImpl {
     public SvyelunOfSeaAndSky(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.GOD);
         this.power = new MageInt(3);

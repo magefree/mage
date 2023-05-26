@@ -46,7 +46,7 @@ public final class AbaddonTheDespoiler extends CardImpl {
     public AbaddonTheDespoiler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ASTARTES);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(5);
@@ -55,13 +55,13 @@ public final class AbaddonTheDespoiler extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // Mark of the Chaos Ascendant — During your turn, spells you cast from your hand with mana value X or less have cascade, where X is the total amount of life your opponents have lost this turn.
+        // Mark of Chaos Ascendant — During your turn, spells you cast from your hand with mana value X or less have cascade, where X is the total amount of life your opponents have lost this turn.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySpellsEffect(new CascadeAbility(false), filter),
                 MyTurnCondition.instance, "during your turn, spells you cast from " +
                 "your hand with mana value X or less have cascade, where X is the " +
                 "total amount of life your opponents have lost this turn"
-        )).addHint(hint).withFlavorWord("Mark of the Chaos Ascendant"));
+        )).addHint(hint).withFlavorWord("Mark of Chaos Ascendant"));
     }
 
     private AbaddonTheDespoiler(final AbaddonTheDespoiler card) {

@@ -29,7 +29,7 @@ public final class KefnetTheMindful extends CardImpl {
     public KefnetTheMindful(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

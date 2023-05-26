@@ -23,7 +23,7 @@ public final class KrarksThumb extends CardImpl {
 
     public KrarksThumb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // If you would flip a coin, instead flip two coins and ignore one.
         this.addAbility(new SimpleStaticAbility(new KrarksThumbEffect()));

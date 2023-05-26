@@ -33,7 +33,7 @@ public final class FeatherTheRedeemed extends CardImpl {
     public FeatherTheRedeemed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

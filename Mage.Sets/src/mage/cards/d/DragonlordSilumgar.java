@@ -23,7 +23,7 @@ public final class DragonlordSilumgar extends CardImpl {
 
     public DragonlordSilumgar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDER);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(3);

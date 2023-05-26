@@ -20,7 +20,7 @@ public final class DosanTheFallingLeaf extends CardImpl {
 
     public DosanTheFallingLeaf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.MONK);
 

@@ -8,7 +8,6 @@ public final class UnicornToken extends TokenImpl {
 
     public UnicornToken() {
         super("Unicorn Token", "2/2 white Unicorn creature token");
-        setExpansionSetCodeForImage("JMP");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.UNICORN);
         color.setWhite(true);

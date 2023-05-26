@@ -97,14 +97,14 @@ class GateToTheAfterlifeEffect extends OneShotEffect {
         // Graveyard check
         if (controller.chooseUse(Outcome.Benefit, "Search your graveyard for " + cardName + "?", source, game)) {
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(1, 1, filter, true);
-            if (controller.choose(outcome, controller.getGraveyard(), target, game)) {
+            if (controller.choose(outcome, controller.getGraveyard(), target, source, game)) {
                 card = game.getCard(target.getFirstTarget());
             }
         }
         // Hand check
         if (card == null && controller.chooseUse(Outcome.Benefit, "Search your hand for " + cardName + "?", source, game)) {
             TargetCardInHand target = new TargetCardInHand(0, 1, filter);
-            if (controller.choose(Outcome.PutCardInPlay, controller.getHand(), target, game)) {
+            if (controller.choose(Outcome.PutCardInPlay, controller.getHand(), target, source, game)) {
                 card = game.getCard(target.getFirstTarget());
             }
         }

@@ -1,9 +1,5 @@
-
 package mage.target.common;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.constants.Zone;
@@ -12,9 +8,12 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.target.TargetCard;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class TargetCardInExile extends TargetCard {
@@ -27,7 +26,6 @@ public class TargetCardInExile extends TargetCard {
     }
 
     /**
-     *
      * @param filter
      * @param zoneId - if null card can be in ever exile zone
      */
@@ -55,15 +53,15 @@ public class TargetCardInExile extends TargetCard {
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         if (allExileZones) {
-            for (Card card : game.getExile().getAllCards(game)) {
-                if (filter.match(card, sourceControllerId, game)) {
+            for (Card card : game.getExile().getAllCardsByRange(game, sourceControllerId)) {
+                if (filter.match(card, sourceControllerId, source, game)) {
                     possibleTargets.add(card.getId());
                 }
             }
         } else {
             ExileZone exileZone = game.getExile().getExileZone(zoneId);
             if (exileZone != null) {
-                for(Card card : exileZone.getCards(game)) {
+                for (Card card : exileZone.getCards(game)) {
                     if (filter.match(card, sourceControllerId, game)) {
                         possibleTargets.add(card.getId());
                     }
@@ -77,7 +75,7 @@ public class TargetCardInExile extends TargetCard {
     public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
         if (allExileZones) {
             int numberTargets = 0;
-            for(ExileZone exileZone : game.getExile().getExileZones()) {
+            for (ExileZone exileZone : game.getExile().getExileZones()) {
                 numberTargets += exileZone.count(filter, sourceControllerId, source, game);
                 if (numberTargets >= this.minNumberOfTargets) {
                     return true;
@@ -99,7 +97,7 @@ public class TargetCardInExile extends TargetCard {
         Card card = game.getCard(id);
         if (card != null && game.getState().getZone(card.getId()) == Zone.EXILED) {
             if (allExileZones) {
-                return filter.match(card, source.getControllerId(), game);
+                return filter.match(card, source.getControllerId(), source, game);
             }
             ExileZone exile;
             if (zoneId != null) {
@@ -108,7 +106,7 @@ public class TargetCardInExile extends TargetCard {
                 exile = game.getExile().getPermanentExile();
             }
             if (exile != null && exile.contains(id)) {
-                return filter.match(card, source.getControllerId(), game);
+                return filter.match(card, source.getControllerId(), source, game);
             }
         }
         return false;

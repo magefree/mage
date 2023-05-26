@@ -35,7 +35,7 @@ public final class GideonBattleForged extends CardImpl {
 
     public GideonBattleForged(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIDEON);
 
         this.color.setWhite(true);
@@ -127,7 +127,7 @@ class GideonBattleForgedAttacksIfAbleTargetEffect extends RequirementEffect {
         if (targetPermanent == null) {
             return true;
         }
-        return game.getPhase().getType() == TurnPhase.END && this.isYourNextTurn(game); // discard on end of their next turn
+        return game.getTurnPhaseType() == TurnPhase.END && this.isYourNextTurn(game); // discard on end of their next turn
     }
 
     @Override

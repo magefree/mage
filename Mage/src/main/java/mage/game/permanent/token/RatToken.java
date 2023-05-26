@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author LevelX2
  */
@@ -18,8 +16,6 @@ public final class RatToken extends TokenImpl {
         subtype.add(SubType.RAT);
         power = new MageInt(1);
         toughness = new MageInt(1);
-
-        availableImageSetCodes = Arrays.asList("GTC", "SHM", "ELD", "ZNC", "AFC");
     }
 
     public RatToken(final RatToken token) {

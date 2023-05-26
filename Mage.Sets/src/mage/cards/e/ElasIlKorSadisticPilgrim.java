@@ -23,7 +23,7 @@ public final class ElasIlKorSadisticPilgrim extends CardImpl {
     public ElasIlKorSadisticPilgrim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.KOR);
         this.subtype.add(SubType.CLERIC);

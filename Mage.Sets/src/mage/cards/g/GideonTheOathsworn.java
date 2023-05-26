@@ -32,7 +32,7 @@ public final class GideonTheOathsworn extends CardImpl {
     public GideonTheOathsworn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIDEON);
         this.setStartingLoyalty(4);
 

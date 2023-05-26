@@ -23,7 +23,7 @@ public final class AmbassadorLaquatus extends CardImpl {
 
     public AmbassadorLaquatus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.WIZARD);
 

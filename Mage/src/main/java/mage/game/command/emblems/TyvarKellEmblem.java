@@ -24,8 +24,7 @@ public final class TyvarKellEmblem extends Emblem {
 
     // −6: You get an emblem with "Whenever you cast an Elf spell, it gains haste until end of turn and you draw two cards."
     public TyvarKellEmblem() {
-        this.setName("Emblem Tyvar");
-        this.setExpansionSetCodeForImage("KHM");
+        super("Emblem Tyvar");
 
         Ability ability = new SpellCastControllerTriggeredAbility(
                 Zone.COMMAND,
@@ -35,5 +34,14 @@ public final class TyvarKellEmblem extends Emblem {
         );
         ability.addEffect(new DrawCardSourceControllerEffect(2, "you").concatBy("and"));
         this.getAbilities().add(ability);
+    }
+
+    private TyvarKellEmblem(final TyvarKellEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public TyvarKellEmblem copy() {
+        return new TyvarKellEmblem(this);
     }
 }

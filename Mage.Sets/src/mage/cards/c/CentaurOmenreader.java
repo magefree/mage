@@ -30,7 +30,7 @@ public final class CentaurOmenreader extends CardImpl {
 
     public CentaurOmenreader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.CENTAUR);
         this.subtype.add(SubType.SHAMAN);
 

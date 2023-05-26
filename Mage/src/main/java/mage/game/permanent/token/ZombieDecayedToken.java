@@ -4,9 +4,6 @@ import mage.MageInt;
 import mage.abilities.keyword.DecayedAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.util.RandomUtil;
-
-import java.util.Arrays;
 
 /**
  * @author TheElk801
@@ -21,8 +18,6 @@ public final class ZombieDecayedToken extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(2);
         this.addAbility(new DecayedAbility());
-
-        availableImageSetCodes.addAll(Arrays.asList("MID"));
     }
 
     public ZombieDecayedToken(final ZombieDecayedToken token) {

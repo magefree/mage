@@ -30,7 +30,7 @@ public final class KedissEmberclawFamiliar extends CardImpl {
     public KedissEmberclawFamiliar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.LIZARD);
         this.power = new MageInt(1);

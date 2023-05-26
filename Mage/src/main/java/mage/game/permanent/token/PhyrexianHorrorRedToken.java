@@ -6,12 +6,14 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
 public final class PhyrexianHorrorRedToken extends TokenImpl {
+
+    public PhyrexianHorrorRedToken() {
+        this(0);
+    }
 
     public PhyrexianHorrorRedToken(int xValue) {
         super("Phyrexian Horror Token", "X/1 red Phyrexian Horror creature token with trample and haste");
@@ -24,8 +26,6 @@ public final class PhyrexianHorrorRedToken extends TokenImpl {
 
         addAbility(TrampleAbility.getInstance());
         addAbility(HasteAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("ONE");
     }
 
     public PhyrexianHorrorRedToken(final PhyrexianHorrorRedToken token) {

@@ -23,7 +23,7 @@ public final class RuneTailKitsuneAscendant extends CardImpl {
 
     public RuneTailKitsuneAscendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FOX);
         this.subtype.add(SubType.MONK);
 
@@ -81,7 +81,7 @@ class RuneTailEssence extends TokenImpl {
 
     RuneTailEssence() {
         super("Rune-Tail's Essence", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.ENCHANTMENT);
 
         color.setWhite(true);

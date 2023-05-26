@@ -28,7 +28,7 @@ public final class YoseiTheMorningStar extends CardImpl {
 
     public YoseiTheMorningStar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.subtype.add(SubType.SPIRIT);
 

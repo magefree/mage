@@ -48,7 +48,7 @@ public final class LithoformEngine extends CardImpl {
     public LithoformEngine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {2}, {T}: Copy target activated or triggered ability you control. You may choose new targets for the copy.
         Ability ability = new SimpleActivatedAbility(new LithoformEngineEffect(), new GenericManaCost(2));

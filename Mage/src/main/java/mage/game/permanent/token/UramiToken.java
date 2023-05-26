@@ -18,7 +18,7 @@ public final class UramiToken extends TokenImpl {
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.DEMON);
         subtype.add(SubType.SPIRIT);
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         color.setBlack(true);
         power = new MageInt(5);

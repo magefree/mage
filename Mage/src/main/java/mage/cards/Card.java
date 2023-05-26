@@ -25,8 +25,6 @@ public interface Card extends MageObject {
 
     UUID getOwnerId();
 
-    String getCardNumber();
-
     Rarity getRarity(); // null for tokens
 
     void setOwnerId(UUID ownerId);
@@ -47,12 +45,6 @@ public interface Card extends MageObject {
     List<String> getRules(); // gets base card rules
 
     List<String> getRules(Game game);  // gets card rules + in game modifications
-
-    String getExpansionSetCode();
-
-    String getTokenSetCode();
-
-    String getTokenDescriptor();
 
     void checkForCountersToAdd(Permanent permanent, Ability source, Game game);
 
@@ -78,6 +70,14 @@ public interface Card extends MageObject {
 
     default boolean meldsWith(Card card) {
         return false;
+    }
+
+    default Class<? extends Card> getMeldsToClazz() {
+        return null;
+    }
+
+    default Card getMeldsToCard() {
+        return null;
     }
 
     void assignNewId();

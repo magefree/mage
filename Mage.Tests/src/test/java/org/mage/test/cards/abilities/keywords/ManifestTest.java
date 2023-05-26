@@ -4,13 +4,19 @@ import mage.cards.Card;
 import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.view.CardView;
+import mage.view.GameView;
+import mage.view.PermanentView;
+import mage.view.PlayerView;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- * @author LevelX2
+ * @author LevelX2, JayDi85
  */
 public class ManifestTest extends CardTestPlayerBase {
 
@@ -391,7 +397,7 @@ public class ManifestTest extends CardTestPlayerBase {
     @Test
     public void testWhisperwoodElemental() {
         setStrictChooseMode(true);
-        
+
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
         // Seismic Rupture deals 2 damage to each creature without flying.
         addCard(Zone.HAND, playerA, "Seismic Rupture", 1);
@@ -474,7 +480,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
     }
 
-  @Test
+    @Test
     public void test_ManifestSorceryAndBlinkIt() {
 
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);
@@ -483,11 +489,11 @@ public class ManifestTest extends CardTestPlayerBase {
         // {1}{B}, {T}, Sacrifice another creature: Manifest the top card of your library.
         addCard(Zone.BATTLEFIELD, playerB, "Qarsi High Priest", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
-        
+
         // Exile target creature you control, then return that card to the battlefield under your control.
         addCard(Zone.HAND, playerB, "Cloudshift", 1); //Instant {W}
 
-        
+
         // Devoid
         // Flying
         // At the beginning of your upkeep, sacrifice a creature
@@ -502,14 +508,14 @@ public class ManifestTest extends CardTestPlayerBase {
         setChoice(playerB, "Silvercoat Lion");
 
         waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN, playerB);
-        
+
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Cloudshift", EmptyNames.FACE_DOWN_CREATURE.toString());
 
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
-      // no life gain
+        // no life gain
         assertLife(playerA, 20);
         assertLife(playerB, 20);
 
@@ -517,11 +523,91 @@ public class ManifestTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
         assertGraveyardCount(playerB, "Cloudshift", 1);
-        
-        assertPermanentCount(playerB, "Lightning Bolt", 0);        
-        assertExileCount(playerB, "Lightning Bolt", 1);        
+
+        assertPermanentCount(playerB, "Lightning Bolt", 0);
+        assertExileCount(playerB, "Lightning Bolt", 1);
 
         assertHandCount(playerB, "Mountain", 1);
 
-    }    
+    }
+
+    private PermanentView findFaceDownPermanent(Game game, TestPlayer viewFromPlayer, TestPlayer searchInPlayer) {
+        Permanent perm = game.getBattlefield().getAllPermanents()
+                .stream()
+                .filter(permanent -> permanent.isFaceDown(game))
+                .findFirst()
+                .orElse(null);
+        Assert.assertNotNull(perm);
+        GameView gameView = new GameView(game.getState(), game, viewFromPlayer.getId(), null);
+        PlayerView playerView = gameView.getPlayers()
+                .stream()
+                .filter(view -> view.getPlayerId().equals(searchInPlayer.getId()))
+                .findFirst()
+                .orElse(null);
+        Assert.assertNotNull(playerView);
+        PermanentView permanentView = playerView.getBattlefield().values()
+                .stream()
+                .filter(CardView::isFaceDown)
+                .findFirst()
+                .orElse(null);
+        Assert.assertNotNull(permanentView);
+        return permanentView;
+    }
+
+    private void assertFaceDown(String info, PermanentView faceDownPermanent, String realPermanentName, boolean realInfoMustBeVisible) {
+        if (realInfoMustBeVisible) {
+            // show all info
+            Assert.assertEquals(realPermanentName, faceDownPermanent.getName()); // show real name
+            Assert.assertEquals("2", faceDownPermanent.getPower());
+            Assert.assertEquals("2", faceDownPermanent.getToughness());
+            //
+            Assert.assertNotNull(faceDownPermanent.getOriginal());
+            Assert.assertEquals(realPermanentName, faceDownPermanent.getOriginal().getName());
+        } else {
+            // hide original info
+            Assert.assertEquals(info, "", faceDownPermanent.getName());
+            Assert.assertEquals(info, "2", faceDownPermanent.getPower());
+            Assert.assertEquals(info, "2", faceDownPermanent.getToughness());
+            Assert.assertNull(info, faceDownPermanent.getOriginal());
+        }
+
+    }
+
+    @Test
+    public void test_FaceDownCardsMustBeVisibleOnGameEnd() {
+        // Exile target creature. Its controller manifests the top card of their library {1}{U}
+        addCard(Zone.HAND, playerA, "Reality Shift");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reality Shift", "Silvercoat Lion");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        runCode("on active game", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            // hide from opponent
+            PermanentView permanent = findFaceDownPermanent(game, playerA, playerB);
+            assertFaceDown("in game: must hide from opponent", permanent, "Mountain", false);
+
+            // show for yourself
+            permanent = findFaceDownPermanent(game, playerB, playerB);
+            assertFaceDown("in game: must show for yourself", permanent, "Mountain", true);
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+
+        // workaround to force end game (can't use other test commands after that)
+        playerA.won(currentGame);
+        Assert.assertTrue(currentGame.hasEnded());
+
+        // show all after game end
+        PermanentView permanent = findFaceDownPermanent(currentGame, playerA, playerB);
+        assertFaceDown("end game: must show for opponent", permanent, "Mountain", true);
+        //
+        permanent = findFaceDownPermanent(currentGame, playerB, playerB);
+        assertFaceDown("end game: must show for yourself", permanent, "Mountain", true);
+    }
 }

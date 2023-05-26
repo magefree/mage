@@ -39,7 +39,7 @@ public final class Carom extends CardImpl {
         target2.setTargetTag(2);
         this.getSpellAbility().addTarget(target2);
 
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Carom(final Carom card) {

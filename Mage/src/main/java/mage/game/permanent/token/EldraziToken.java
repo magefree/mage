@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -17,8 +15,6 @@ public final class EldraziToken extends TokenImpl {
         subtype.add(SubType.ELDRAZI);
         power = new MageInt(10);
         toughness = new MageInt(10);
-
-        availableImageSetCodes = Arrays.asList("BFZ", "C19", "C21", "NCC", "BRC");
     }
 
     public EldraziToken(final EldraziToken token) {

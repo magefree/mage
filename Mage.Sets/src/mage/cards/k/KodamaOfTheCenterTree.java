@@ -26,14 +26,14 @@ public final class KodamaOfTheCenterTree extends CardImpl {
 
     public KodamaOfTheCenterTree(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
         // Kodama of the Center Tree's power and toughness are each equal to the number of Spirits you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter))));
         
         // Kodama of the Center Tree has soulshift X, where X is the number of Spirits you control.
         this.addAbility(new SoulshiftAbility(new PermanentsOnBattlefieldCount(filter)));

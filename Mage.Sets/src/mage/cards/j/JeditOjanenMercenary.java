@@ -28,7 +28,7 @@ public final class JeditOjanenMercenary extends CardImpl {
 
     public JeditOjanenMercenary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.CAT);
         this.addSubType(SubType.MERCENARY);
         this.power = new MageInt(3);

@@ -126,7 +126,9 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Relic of Progenitus", 157, Rarity.UNCOMMON, mage.cards.r.RelicOfProgenitus.class));
         cards.add(new SetCardInfo("Reliquary Tower", 196, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("River of Tears", 197, Rarity.RARE, mage.cards.r.RiverOfTears.class));
+        cards.add(new SetCardInfo("Rootpath Purifier", 24, Rarity.MYTHIC, mage.cards.r.RootpathPurifier.class));
         cards.add(new SetCardInfo("Sai, Master Thopterist", 93, Rarity.RARE, mage.cards.s.SaiMasterThopterist.class));
+        cards.add(new SetCardInfo("Sanwell, Avenger Ace", 5, Rarity.RARE, mage.cards.s.SanwellAvengerAce.class));
         cards.add(new SetCardInfo("Sardian Avenger", 23, Rarity.RARE, mage.cards.s.SardianAvenger.class));
         cards.add(new SetCardInfo("Scavenged Brawler", 17, Rarity.RARE, mage.cards.s.ScavengedBrawler.class));
         cards.add(new SetCardInfo("Scholar of New Horizons", 6, Rarity.RARE, mage.cards.s.ScholarOfNewHorizons.class));
@@ -167,6 +169,7 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Terramorphic Expanse", 210, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("Teshar, Ancestor's Apostle", 77, Rarity.RARE, mage.cards.t.TesharAncestorsApostle.class));
         cards.add(new SetCardInfo("The Archimandrite", 26, Rarity.RARE, mage.cards.t.TheArchimandrite.class));
+        cards.add(new SetCardInfo("The Brothers' War", 22, Rarity.RARE, mage.cards.t.TheBrothersWar.class));
         cards.add(new SetCardInfo("Thirst for Knowledge", 96, Rarity.UNCOMMON, mage.cards.t.ThirstForKnowledge.class));
         cards.add(new SetCardInfo("Thopter Shop", 19, Rarity.RARE, mage.cards.t.ThopterShop.class));
         cards.add(new SetCardInfo("Thopter Spy Network", 97, Rarity.RARE, mage.cards.t.ThopterSpyNetwork.class));

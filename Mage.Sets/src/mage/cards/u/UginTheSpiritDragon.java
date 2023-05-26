@@ -38,7 +38,7 @@ public final class UginTheSpiritDragon extends CardImpl {
 
     public UginTheSpiritDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{8}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.UGIN);
 
         this.setStartingLoyalty(7);

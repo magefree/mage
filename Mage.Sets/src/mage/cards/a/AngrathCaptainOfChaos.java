@@ -23,7 +23,7 @@ public final class AngrathCaptainOfChaos extends CardImpl {
     public AngrathCaptainOfChaos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{B/R}{B/R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGRATH);
         this.setStartingLoyalty(5);
 

@@ -61,7 +61,8 @@ public final class KrovikanPlague extends CardImpl {
 
         // When Krovikan Plague enters the battlefield, draw a card at the beginning of the next turn's upkeep.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse)), false));
+                new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse))
+                .setText("draw a card at the beginning of the next turn's upkeep"), false));
 
         // Tap enchanted creature: Tap enchanted creature: Krovikan Plague deals 1 damage to any target. Put a -0/-1 counter on enchanted creature. Activate this ability only if enchanted creature is untapped.
         Ability ability2 = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,

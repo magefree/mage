@@ -22,7 +22,7 @@ public final class NehebDreadhordeChampion extends CardImpl {
     public NehebDreadhordeChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.MINOTAUR);
         this.subtype.add(SubType.WARRIOR);

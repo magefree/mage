@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -18,17 +16,6 @@ public final class ConstructToken extends TokenImpl {
         subtype.add(SubType.CONSTRUCT);
         power = new MageInt(1);
         toughness = new MageInt(1);
-
-        availableImageSetCodes = Arrays.asList("ZNR", "NEO", "CLB", "BRC");
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("NEO")) {
-            setTokenType(1);
-        }
     }
 
     public ConstructToken(final ConstructToken token) {

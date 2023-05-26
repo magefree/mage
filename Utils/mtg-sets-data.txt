@@ -47,6 +47,7 @@ Clash Pack|CLASH|
 Commander Anthology|CMA|
 Commander Anthology 2018|CM2|
 Commander's Arsenal|CM1|
+Commander Masters|CMM|
 Commander|CMD|
 Conspiracy|CNS|
 Conspiracy: Take the Crown|CN2|
@@ -139,6 +140,8 @@ Limited Edition Alpha|LEA|
 Limited Edition Beta|LEB|
 Legends|LEG|
 Legions|LGN|
+The Lord of the Rings: Tales of Middle-earth|LTR|
+Tales of Middle-earth Commander|LTC|
 Lorwyn|LRW|
 Magic 2010|M10|
 Magic 2011|M11|
@@ -153,6 +156,9 @@ Masters 25|A25|
 Magic: The Gathering-Commander|CMD|
 Magic: The Gathering-Conspiracy|CNS|
 Media Inserts|MBP|
+March of the Machine|MOM|
+March of the Machine Commander|MOC|
+March of the Machine: The Aftermath|MAT|
 Mirrodin Besieged|MBS|
 Masters Edition II|ME2|
 Masters Edition III|ME3|

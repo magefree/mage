@@ -7,7 +7,13 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author Styxo
@@ -16,6 +22,7 @@ public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
 
     private final FilterCreaturePermanent filter;
     private final int minAttackers;
+    private final boolean setTargetPointer;
 
     public AttacksWithCreaturesTriggeredAbility(Effect effect, int minAttackers) {
         this(effect, minAttackers, StaticFilters.FILTER_PERMANENT_CREATURES);
@@ -26,9 +33,14 @@ public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public AttacksWithCreaturesTriggeredAbility(Zone zone, Effect effect, int minAttackers, FilterCreaturePermanent filter) {
+        this(zone, effect, minAttackers, filter, false);
+    }
+
+    public AttacksWithCreaturesTriggeredAbility(Zone zone, Effect effect, int minAttackers, FilterCreaturePermanent filter, boolean setTargetPointer) {
         super(zone, effect);
         this.filter = filter;
         this.minAttackers = minAttackers;
+        this.setTargetPointer = setTargetPointer;
         if (minAttackers == 1) {
             setTriggerPhrase("Whenever you attack, ");
         } else {
@@ -45,6 +57,7 @@ public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
         super(ability);
         this.filter = ability.filter;
         this.minAttackers = ability.minAttackers;
+        this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
@@ -62,18 +75,21 @@ public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
         if (!isControlledBy(game.getCombat().getAttackingPlayerId())) {
             return false;
         }
-        int attackers = game
+        List<Permanent> attackers = game
                 .getCombat()
                 .getAttackers()
                 .stream()
                 .map(game::getPermanent)
+                .filter(Objects::nonNull)
                 .filter(permanent -> filter.match(permanent, controllerId, this, game))
-                .mapToInt(x -> 1)
-                .sum();
-        if (attackers < minAttackers) {
+                .collect(Collectors.toList());
+        if (attackers.size() < minAttackers) {
             return false;
         }
-        getEffects().setValue("attackers", attackers);
+        getEffects().setValue("attackers", attackers.size());
+        if (setTargetPointer) {
+            getEffects().setTargetPointer(new FixedTargets(attackers, game));
+        }
         return true;
     }
 }

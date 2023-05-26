@@ -32,7 +32,7 @@ public final class ChewbaccaTheBeast extends CardImpl {
     public ChewbaccaTheBeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
         
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.WOOKIEE);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);

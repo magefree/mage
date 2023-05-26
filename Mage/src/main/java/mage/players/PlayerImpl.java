@@ -58,6 +58,7 @@ import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetDiscard;
 import mage.util.CardUtil;
 import mage.util.GameLog;
@@ -176,6 +177,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     // mana colors the player can handle like Phyrexian mana
     protected FilterMana phyrexianColors;
 
+    protected UUID ringBearerId = null;
+
     // Used during available mana calculation to give back possible available net mana from triggered mana abilities (No need to copy)
     protected final List<List<Mana>> availableTriggeredManaList = new ArrayList<>();
 
@@ -285,6 +288,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         this.payManaMode = player.payManaMode;
         this.phyrexianColors = player.getPhyrexianColors() != null ? player.phyrexianColors.copy() : null;
+        this.ringBearerId = player.ringBearerId;
         for (Designation object : player.designations) {
             this.designations.add(object.copy());
         }
@@ -371,6 +375,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
 
         this.phyrexianColors = player.getPhyrexianColors() != null ? player.getPhyrexianColors().copy() : null;
+
+        this.ringBearerId = player.getRingBearerId();
 
         this.designations.clear();
         for (Designation object : player.getDesignations()) {
@@ -531,6 +537,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             // runtime check: inRange filled on beginTurn, but unit tests adds cards by cheat engine before game starting,
             // so inRange will be empty and some ETB effects can be broken (example: Spark Double puts direct to battlefield).
             // Cheat engine already have a workaround, so that error must not be visible in normal situation.
+            // TODO: that's error possible on GameView call before real game start (too laggy players on starting???)
             throw new IllegalStateException("Wrong code usage (game is not started, but you call getInRange in some effects).");
         }
 
@@ -937,7 +944,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         new FilterCard("card ORDER to put on the BOTTOM of your library (last one chosen will be bottommost)"));
                 target.setRequired(true);
                 while (cards.size() > 1 && this.canRespond()
-                        && this.choose(Outcome.Neutral, cards, target, game)) {
+                        && this.choose(Outcome.Neutral, cards, target, source, game)) {
                     UUID targetObjectId = target.getFirstTarget();
                     if (targetObjectId == null) {
                         break;
@@ -1031,7 +1038,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 target.setRequired(true);
                 while (cards.size() > 1
                         && this.canRespond()
-                        && this.choose(Outcome.Neutral, cards, target, game)) {
+                        && this.choose(Outcome.Neutral, cards, target, source, game)) {
                     UUID targetObjectId = target.getFirstTarget();
                     if (targetObjectId == null) {
                         break;
@@ -1294,8 +1301,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                 game.fireEvent(landEventAfter);
 
                 String playText = getLogName() + " plays " + card.getLogName();
-                if (card instanceof ModalDoubleFacesCardHalf) {
-                    ModalDoubleFacesCard mdfCard = (ModalDoubleFacesCard) card.getMainCard();
+                if (card instanceof ModalDoubleFacedCardHalf) {
+                    ModalDoubleFacedCard mdfCard = (ModalDoubleFacedCard) card.getMainCard();
                     playText = getLogName() + " plays " + GameLog.replaceNameByColoredName(card, card.getName(), mdfCard)
                             + " as MDF side of " + GameLog.getColoredObjectIdName(mdfCard);
                 }
@@ -2407,7 +2414,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             case PASS_PRIORITY_UNTIL_TURN_END_STEP: // F5
                 resetPlayerPassedActions();
                 passedUntilEndOfTurn = true;
-                skippedAtLeastOnce = PhaseStep.END_TURN != game.getTurn().getStepType();
+                skippedAtLeastOnce = PhaseStep.END_TURN != game.getTurnStepType();
                 this.skip();
                 break;
             case PASS_PRIORITY_UNTIL_NEXT_TURN: // F4
@@ -2423,8 +2430,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             case PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE: //F7
                 resetPlayerPassedActions();
                 passedUntilNextMain = true;
-                skippedAtLeastOnce = !(game.getTurn().getStepType() == PhaseStep.POSTCOMBAT_MAIN
-                        || game.getTurn().getStepType() == PhaseStep.PRECOMBAT_MAIN);
+                skippedAtLeastOnce = !(game.getTurnStepType() == PhaseStep.POSTCOMBAT_MAIN
+                        || game.getTurnStepType() == PhaseStep.PRECOMBAT_MAIN);
                 this.skip();
                 break;
             case PASS_PRIORITY_UNTIL_STACK_RESOLVED: // Default F10 - Skips until the current stack is resolved
@@ -2691,7 +2698,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
             // handling Panglacial Wurm - cast cards while searching from own library
             if (targetPlayer.getId().equals(searchingPlayer.getId())) {
-                if (handleCastableCardsWhileLibrarySearching(library, game, targetPlayer)) {
+                if (handleCastableCardsWhileLibrarySearching(library, targetPlayer, source, game)) {
                     // clear all choices to start from scratch (casted cards must be removed from library)
                     newTarget.clearChosen();
                     continue;
@@ -2748,7 +2755,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
     }
 
-    private boolean handleCastableCardsWhileLibrarySearching(Library library, Game game, Player targetPlayer) {
+    private boolean handleCastableCardsWhileLibrarySearching(Library library, Player targetPlayer, Ability source, Game game) {
         // must return true after cast try (to restart searching process without casted cards)
         // uses for handling Panglacial Wurm:
         // * While you're searching your library, you may cast Panglacial Wurm from your library.
@@ -2776,7 +2783,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         targetCard.setNotTarget(true);
         while (castableCards.size() > 0) {
             targetCard.clearChosen();
-            if (!targetPlayer.choose(Outcome.AIDontUseIt, new CardsImpl(castableCards), targetCard, game)) {
+            if (!targetPlayer.choose(Outcome.AIDontUseIt, new CardsImpl(castableCards), targetCard, source, game)) {
                 break;
             }
 
@@ -2906,7 +2913,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (rollsAmount == 1) {
             return rollDieInnerWithReplacement(game, source, rollDieType, sidesAmount, chaosSidesAmount, planarSidesAmount);
         }
-        Set<Object> choices = new HashSet<>();
+        Set<Object> choices = new LinkedHashSet<>();
         for (int j = 0; j < rollsAmount; j++) {
             choices.add(rollDieInnerWithReplacement(game, source, rollDieType, sidesAmount, chaosSidesAmount, planarSidesAmount));
         }
@@ -3790,8 +3797,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             getPlayableFromObjectSingle(game, fromZone, mainCard.getLeftHalfCard(), mainCard.getLeftHalfCard().getAbilities(game), availableMana, output);
             getPlayableFromObjectSingle(game, fromZone, mainCard.getRightHalfCard(), mainCard.getRightHalfCard().getAbilities(game), availableMana, output);
             getPlayableFromObjectSingle(game, fromZone, mainCard, mainCard.getSharedAbilities(game), availableMana, output);
-        } else if (object instanceof ModalDoubleFacesCard) {
-            ModalDoubleFacesCard mainCard = (ModalDoubleFacesCard) object;
+        } else if (object instanceof ModalDoubleFacedCard) {
+            ModalDoubleFacedCard mainCard = (ModalDoubleFacedCard) object;
             getPlayableFromObjectSingle(game, fromZone, mainCard.getLeftHalfCard(), mainCard.getLeftHalfCard().getAbilities(game), availableMana, output);
             getPlayableFromObjectSingle(game, fromZone, mainCard.getRightHalfCard(), mainCard.getRightHalfCard().getAbilities(game), availableMana, output);
             getPlayableFromObjectSingle(game, fromZone, mainCard, mainCard.getSharedAbilities(game), availableMana, output);
@@ -4539,7 +4546,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                             byOwner ? card.getOwnerId() : getId(), fromZone, Zone.BATTLEFIELD, appliedEffects);
                     infoList.add(new ZoneChangeInfo.Battlefield(event, faceDown, tapped, source));
                 }
-                infoList = ZonesHandler.moveCards(infoList, game, source);
+                infoList = ZonesHandler.moveCards(infoList, source, game);
                 for (ZoneChangeInfo info : infoList) {
                     Permanent permanent = game.getPermanent(info.event.getTargetId());
                     if (permanent != null) {
@@ -4640,6 +4647,15 @@ public abstract class PlayerImpl implements Player, Serializable {
             result |= moveCardToExileWithInfo(card, exileId, exileZoneName, source, game, fromZone, withName);
         }
         return result;
+    }
+
+    @Override
+    public boolean moveCardsToHandWithInfo(Cards cards, Ability source, Game game, boolean withName) {
+        Player player = this;
+        for (Card card : cards.getCards(game)) {
+            player.moveCardToHandWithInfo(card, source, game, withName);
+        }
+        return true;
     }
 
     @Override
@@ -5116,6 +5132,67 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public FilterMana getPhyrexianColors() {
         return this.phyrexianColors;
+    }
+
+    @Override
+    public UUID getRingBearerId() {
+        return ringBearerId;
+    }
+
+    @Override
+    public Permanent getRingBearer(Game game) {
+        if (ringBearerId == null) {
+            return null;
+        }
+        Permanent bearer = game.getPermanent(ringBearerId);
+        if (bearer != null && bearer.isControlledBy(getId())) {
+            return bearer;
+        }
+        ringBearerId = null;
+        return null;
+    }
+
+    @Override
+    public void chooseRingBearer(Game game) {
+        Permanent currentBearer = getRingBearer(game);
+        int creatureCount = game.getBattlefield().count(
+                StaticFilters.FILTER_CONTROLLED_CREATURE, getId(), null, game
+        );
+        boolean mustChoose;
+        if (currentBearer == null) {
+            if (creatureCount > 0) {
+                mustChoose = true;
+            } else {
+                return;
+            }
+        } else if (currentBearer.isCreature(game)) {
+            if (creatureCount > 1) {
+                mustChoose = false;
+            } else {
+                return;
+            }
+        } else if (creatureCount > 0) {
+            mustChoose = false;
+        } else {
+            return;
+        }
+        if (!mustChoose && !chooseUse(Outcome.Neutral, "Choose a new Ring-bearer?", null, game)) {
+            return;
+        }
+        TargetPermanent target = new TargetControlledCreaturePermanent();
+        target.setNotTarget(true);
+        target.withChooseHint("to be your Ring-bearer");
+        choose(Outcome.Neutral, target, null, game);
+        UUID newBearerId = target.getFirstTarget();
+        if (game.getPermanent(newBearerId) != null) {
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.RING_BEARER_CHOSEN, newBearerId, null, getId()));
+            this.ringBearerId = newBearerId;
+        }
+    }
+
+    @Override
+    public ActivatedAbility chooseLandOrSpellAbility(Card card, Game game, boolean noMana) {
+        return card.getSpellAbility();
     }
 
     @Override

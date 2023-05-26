@@ -42,7 +42,7 @@ public final class MomirVigSimicVisionary extends CardImpl {
 
     public MomirVigSimicVisionary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.WIZARD);
 

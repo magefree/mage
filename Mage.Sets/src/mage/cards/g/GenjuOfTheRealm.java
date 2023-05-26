@@ -28,7 +28,7 @@ public final class GenjuOfTheRealm extends CardImpl {
     public GenjuOfTheRealm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{U}{B}{R}{G}");
         this.subtype.add(SubType.AURA);
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Enchant Land
         TargetPermanent auraTarget = new TargetLandPermanent();
@@ -59,7 +59,7 @@ public final class GenjuOfTheRealm extends CardImpl {
 
         SpiritToken() {
             super("Spirit", "legendary 8/12 Spirit creature with trample");
-            addSuperType(SuperType.LEGENDARY);
+            this.supertype.add(SuperType.LEGENDARY);
             cardType.add(CardType.CREATURE);
             this.color.setWhite(true);
             this.color.setBlue(true);

@@ -1,13 +1,10 @@
-
-
 package mage.game.permanent.token;
 
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class ArchitectOfTheUntamedBeastToken extends TokenImpl {
@@ -19,8 +16,6 @@ public final class ArchitectOfTheUntamedBeastToken extends TokenImpl {
         subtype.add(SubType.BEAST);
         power = new MageInt(6);
         toughness = new MageInt(6);
-
-        setOriginalExpansionSetCode("KLD");
     }
 
     public ArchitectOfTheUntamedBeastToken(final ArchitectOfTheUntamedBeastToken token) {

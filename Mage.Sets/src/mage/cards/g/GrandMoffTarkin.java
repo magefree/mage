@@ -26,7 +26,7 @@ public final class GrandMoffTarkin extends CardImpl {
 
     public GrandMoffTarkin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(2);

@@ -9,7 +9,7 @@ import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.*;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -29,7 +29,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class PestilentCauldron extends ModalDoubleFacesCard {
+public final class PestilentCauldron extends ModalDoubleFacedCard {
 
     private static final FilterCard filter
             = new FilterCard("creature, land, and/or planeswalker cards from your graveyard");

@@ -1,20 +1,18 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 
 /**
- *
  * @author spjspj
  */
 public final class DokaiWeaverofLifeToken extends TokenImpl {
@@ -30,7 +28,6 @@ public final class DokaiWeaverofLifeToken extends TokenImpl {
         toughness = new MageInt(0);
         DynamicValue controlledLands = new PermanentsOnBattlefieldCount(filterLands);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(controlledLands, controlledLands, Duration.WhileOnBattlefield)));
-        setOriginalExpansionSetCode("C18");
     }
 
     public DokaiWeaverofLifeToken(final DokaiWeaverofLifeToken token) {
