@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
@@ -27,8 +28,8 @@ import java.util.stream.Collectors;
 public class GiveManaAbilityAndCastSourceAbility extends ActivatedAbilityImpl {
 
     // TODO: write automated tests for this (it works in manual testing)
-    public GiveManaAbilityAndCastSourceAbility(String colors) {
-        super(Zone.HAND, new GainManaAbilitiesWhileExiledEffect(colors), new GenericManaCost(2));
+    public GiveManaAbilityAndCastSourceAbility(String colors, int value) {
+        super(Zone.HAND, new GainManaAbilitiesWhileExiledEffect(colors), new GenericManaCost(value));
         this.addCost(new ExileSourceFromHandCost());
         this.addEffect(new CastExiledFromHandCardEffect());
         this.addTarget(new TargetLandPermanent());

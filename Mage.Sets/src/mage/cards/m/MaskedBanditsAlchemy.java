@@ -22,7 +22,7 @@ public final class MaskedBandits extends CardImpl {
         this.subtype.add(SubType.RACCOON);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
+        this.toughness = new MageInt(6);
 
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
@@ -31,7 +31,7 @@ public final class MaskedBandits extends CardImpl {
         this.addAbility(new MenaceAbility());
 
         // {2}, Exile Masked Bandits from your hand: Target land gains "{T}: Add {B}, {R}, or {G}" until Masked Bandits is cast from exile. You may cast Masked Bandits for as long as it remains exiled.
-        this.addAbility(new GiveManaAbilityAndCastSourceAbility("BRG",2));
+        this.addAbility(new GiveManaAbilityAndCastSourceAbility("BRG",1));
     }
 
     private MaskedBandits(final MaskedBandits card) {

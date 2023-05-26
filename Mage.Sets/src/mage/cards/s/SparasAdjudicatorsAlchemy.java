@@ -17,9 +17,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class SparasAdjudicators extends CardImpl {
+public final class SparasAdjudicatorsAlchemy extends CardImpl {
 
-    public SparasAdjudicators(UUID ownerId, CardSetInfo setInfo) {
+    public SparasAdjudicatorsAlchemy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}{U}");
 
         this.subtype.add(SubType.CAT);
@@ -35,15 +35,15 @@ public final class SparasAdjudicators extends CardImpl {
         this.addAbility(ability);
 
         // {2}, Exile Spara's Adjudicators from your hand: Target land gains "{T}: Add {G}, {W}, or {U}" until Spara's Adjudicators is cast from exile. You may cast Spara's Adjudicators for as long as it remains exiled.
-        this.addAbility(new GiveManaAbilityAndCastSourceAbility("GWU",2));
+        this.addAbility(new GiveManaAbilityAndCastSourceAbility("GWU",1));
     }
 
-    private SparasAdjudicators(final SparasAdjudicators card) {
+    private SparasAdjudicatorsAlchemy(final SparasAdjudicatorsAlchemy card) {
         super(card);
     }
 
     @Override
-    public SparasAdjudicators copy() {
-        return new SparasAdjudicators(this);
+    public SparasAdjudicatorsAlchemy copy() {
+        return new SparasAdjudicatorsAlchemy(this);
     }
 }

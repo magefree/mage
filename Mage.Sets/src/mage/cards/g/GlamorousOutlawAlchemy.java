@@ -17,9 +17,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class GlamorousOutlaw extends CardImpl {
+public final class GlamorousOutlawAlchemy extends CardImpl {
 
-    public GlamorousOutlaw(UUID ownerId, CardSetInfo setInfo) {
+    public GlamorousOutlawAlchemy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}{R}");
 
         this.subtype.add(SubType.VAMPIRE);
@@ -35,15 +35,15 @@ public final class GlamorousOutlaw extends CardImpl {
         this.addAbility(ability);
 
         // {2}, Exile Glamorous Outlaw from your hand: Target land gains "{T}: Add {U}, {B}, or {R}" until Glamorous Outlaw is cast from exile. You may cast Glamorous Outlaw for as long as it remains exiled.
-        this.addAbility(new GiveManaAbilityAndCastSourceAbility("UBR",2));
+        this.addAbility(new GiveManaAbilityAndCastSourceAbility("UBR",1));
     }
 
-    private GlamorousOutlaw(final GlamorousOutlaw card) {
+    private GlamorousOutlawAlchemy(final GlamorousOutlawAlchemy card) {
         super(card);
     }
 
     @Override
-    public GlamorousOutlaw copy() {
-        return new GlamorousOutlaw(this);
+    public GlamorousOutlawAlchemy copy() {
+        return new GlamorousOutlawAlchemy(this);
     }
 }

@@ -15,9 +15,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class RakishRevelers extends CardImpl {
+public final class RakishRevelersAlchemy extends CardImpl {
 
-    public RakishRevelers(UUID ownerId, CardSetInfo setInfo) {
+    public RakishRevelersAlchemy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}{W}");
 
         this.subtype.add(SubType.ELF);
@@ -30,15 +30,15 @@ public final class RakishRevelers extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new CitizenGreenWhiteToken())));
 
         // {2}, Exile Rakish Revelers from your hand: Target land gains "{T}: Add {R}, {G}, or {W}" until Rakish Revelers is cast from exile. You may cast Rakish Revelers for as long as it remains exiled.
-        this.addAbility(new GiveManaAbilityAndCastSourceAbility("RGW",2));
+        this.addAbility(new GiveManaAbilityAndCastSourceAbility("RGW",1));
     }
 
-    private RakishRevelers(final RakishRevelers card) {
+    private RakishRevelersAlchemy(final RakishRevelersAlchemy card) {
         super(card);
     }
 
     @Override
-    public RakishRevelers copy() {
-        return new RakishRevelers(this);
+    public RakishRevelersAlchemy copy() {
+        return new RakishRevelersAlchemy(this);
     }
 }
