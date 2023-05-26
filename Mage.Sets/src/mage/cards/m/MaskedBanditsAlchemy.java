@@ -14,9 +14,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class MaskedBandits extends CardImpl {
+public final class MaskedBanditsAlchemy extends CardImpl {
 
-    public MaskedBandits(UUID ownerId, CardSetInfo setInfo) {
+    public MaskedBanditsAlchemy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{R}{G}");
 
         this.subtype.add(SubType.RACCOON);
@@ -34,12 +34,12 @@ public final class MaskedBandits extends CardImpl {
         this.addAbility(new GiveManaAbilityAndCastSourceAbility("BRG",1));
     }
 
-    private MaskedBandits(final MaskedBandits card) {
+    private MaskedBanditsAlchemy(final MaskedBanditsAlchemy card) {
         super(card);
     }
 
     @Override
-    public MaskedBandits copy() {
-        return new MaskedBandits(this);
+    public MaskedBanditsAlchemy copy() {
+        return new MaskedBanditsAlchemy(this);
     }
 }

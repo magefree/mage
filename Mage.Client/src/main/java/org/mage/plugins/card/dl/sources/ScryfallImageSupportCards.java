@@ -988,10 +988,15 @@ public class ScryfallImageSupportCards {
             put("SNC/A-Celebrity Fencer/A-7","https://api.scryfall.com/cards/snc/A-7/");
             put("SNC/A-Deal Gone Bad/A-74","https://api.scryfall.com/cards/snc/A-74/");
             put("SNC/A-Demon's Due/A-75","https://api.scryfall.com/cards/snc/A-75/");
+            put("SNC/A-Glamourous Outlaw /A-190","https://api.scryfall.com/cards/snc/A-190/");
             put("SNC/A-Graveyard Shift/A-81","https://api.scryfall.com/cards/snc/A-81/");
+            put("SNC/A-Maked Bandits/A-201","https://api.scryfall.com/cards/snc/A-201/");
             put("SNC/A-Psionic Snoop/A-53","https://api.scryfall.com/cards/snc/A-53/");
             put("SNC/A-Public Enemy/A-55","https://api.scryfall.com/cards/snc/A-55/");
+            put("SNC/A-Rakish Revelers /A-214","https://api.scryfall.com/cards/snc/A-214/");
             put("SNC/A-Sewer Crocodile/A-60","https://api.scryfall.com/cards/snc/A-60/");
+            put("SNC/A-Shattered Seraph/A-221","https://api.scryfall.com/cards/snc/A-221/");
+            put("SNC/A-Spara's Adjuicators/A-224","https://api.scryfall.com/cards/snc/A-224/");
             put("SNC/A-Speakeasy Server/A-32","https://api.scryfall.com/cards/snc/A-32/");
             
         }

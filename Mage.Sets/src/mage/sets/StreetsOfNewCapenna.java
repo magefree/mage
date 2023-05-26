@@ -39,10 +39,15 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
         cards.add(new SetCardInfo("A-Celebrity Fencer", "A-7", Rarity.COMMON, mage.cards.c.CelebrityFencerAlchemy.class));
         cards.add(new SetCardInfo("A-Deal Gone Bad", "A-74", Rarity.COMMON, mage.cards.d.DealGoneBadAlchemy.class));
         cards.add(new SetCardInfo("A-Demon's Due", "A-75", Rarity.COMMON, mage.cards.d.DemonsDueAlchemy.class));
+        cards.add(new SetCardInfo("A-Glamourous Outlaw", "A-190", Rarity.COMMON, mage.cards.g.GlamorousOutlawAlchemy.class));
         cards.add(new SetCardInfo("A-Graveyard Shift", "A-81", Rarity.UNCOMMON, mage.cards.d.DemonsDueAlchemy.class));
+        cards.add(new SetCardInfo("A-Masked Bandits", "A-201", Rarity.COMMON, mage.cards.m.MaskedBanditsAlchemy.class));
         cards.add(new SetCardInfo("A-Psionic Snoop", "A-53", Rarity.COMMON, mage.cards.p.PsionicSnoopAlchemy.class));
         cards.add(new SetCardInfo("A-Public Enemy", "A-55", Rarity.UNCOMMON, mage.cards.p.PublicEnemyAlchemy.class));
+        cards.add(new SetCardInfo("A-Rakish Revelers", "A-214", Rarity.COMMON, mage.cards.r.RakishRevelersAlchemy.class));
         cards.add(new SetCardInfo("A-Sewer Crocodile", "A-57", Rarity.COMMON, mage.cards.s.SewerCrocodileAlchemy.class));
+        cards.add(new SetCardInfo("A-Shattered Seraph", "A-221", Rarity.COMMON, mage.cards.s.ShatteredSeraphAlchemy.class));
+        cards.add(new SetCardInfo("A-Spara's Adjudicators", "A-224", Rarity.COMMON, mage.cards.s.SparasAdjudicatorsAlchemy.class));
         cards.add(new SetCardInfo("A-Speakeasy Server", "A-32", Rarity.COMMON, mage.cards.s.SpeakeasyServerAlchemy.class));
         cards.add(new SetCardInfo("A Little Chat", 47, Rarity.UNCOMMON, mage.cards.a.ALittleChat.class));
         cards.add(new SetCardInfo("All-Seeing Arbiter", 286, Rarity.MYTHIC, mage.cards.a.AllSeeingArbiter.class, NON_FULL_USE_VARIOUS));
