@@ -5,7 +5,6 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.continuous.SourceEffect;
 import mage.abilities.keyword.*;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -49,7 +48,7 @@ public final class Soulflayer extends CardImpl {
     }
 }
 
-class SoulflayerEffect extends ContinuousEffectImpl implements SourceEffect {
+class SoulflayerEffect extends ContinuousEffectImpl {
 
     private Set<Ability> abilitiesToAdd;
     private MageObjectReference objectReference = null;

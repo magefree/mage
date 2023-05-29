@@ -555,6 +555,13 @@ public final class StaticFilters {
         FILTER_OPPONENTS_PERMANENT_ARTIFACT_OR_CREATURE.setLockedFilter(true);
     }
 
+    public static final FilterCreaturePermanent FILTER_ANOTHER_TARGET_CREATURE = new FilterCreaturePermanent("another target creature");
+
+    static {
+        FILTER_ANOTHER_TARGET_CREATURE.add(AnotherPredicate.instance);
+        FILTER_ANOTHER_TARGET_CREATURE.setLockedFilter(true);
+    }
+
     public static final FilterCreaturePermanent FILTER_ANOTHER_CREATURE_TARGET_2 = new FilterCreaturePermanent("another target creature");
 
     static {

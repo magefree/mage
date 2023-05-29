@@ -15,6 +15,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -102,7 +103,7 @@ class OliviaCrimsonBrideEffect extends OneShotEffect {
 
 class OliviaCrimsonBrideAbility extends StateTriggeredAbility {
 
-    private static final FilterPermanent filter = new FilterPermanent();
+    private static final FilterPermanent filter = new FilterControlledPermanent();
 
     static {
         filter.add(SuperType.LEGENDARY.getPredicate());
