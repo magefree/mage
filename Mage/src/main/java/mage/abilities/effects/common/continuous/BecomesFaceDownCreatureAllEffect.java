@@ -18,7 +18,7 @@ import java.util.*;
  * @author LevelX2
  */
 
-public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl implements SourceEffect {
+public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl {
 
     protected Map<UUID, Ability> turnFaceUpAbilityMap = new HashMap<>();
     protected FilterPermanent filter;

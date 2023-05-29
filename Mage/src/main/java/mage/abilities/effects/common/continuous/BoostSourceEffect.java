@@ -17,7 +17,7 @@ import org.apache.log4j.Logger;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class BoostSourceEffect extends ContinuousEffectImpl implements SourceEffect {
+public class BoostSourceEffect extends ContinuousEffectImpl {
     private DynamicValue power;
     private DynamicValue toughness;
     private final boolean lockedIn;
