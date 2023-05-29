@@ -3,7 +3,7 @@ package mage.cards.f;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.SourceEnteredThisTurnCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
@@ -15,8 +15,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -44,7 +42,7 @@ public final class FungusElemental extends CardImpl {
                 Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(CounterType.P2P2.createInstance()),
                 new ManaCostsImpl<>("{G}"),
-                FungusElementalCondition.instance
+                SourceEnteredThisTurnCondition.instance
         );
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
@@ -58,24 +56,4 @@ public final class FungusElemental extends CardImpl {
     public FungusElemental copy() {
         return new FungusElemental(this);
     }
-}
-
-enum FungusElementalCondition implements Condition {
-
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
-        if (permanent != null) {
-            return permanent.getTurnsOnBattlefield() == 0;
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "{this} entered the battlefield this turn";
-    }
-
 }
