@@ -104,7 +104,7 @@ class HaloForagerCastEffect extends OneShotEffect {
 
     HaloForagerCastEffect(int costX) {
         super(Outcome.Benefit);
-        staticText = "you may cast target instant or sorcery card with mana value " + costX + " from a graveyard " +
+        staticText = "You may cast target instant or sorcery card with mana value " + costX + " from a graveyard " +
                 "without paying its mana cost. If that spell would be put into a graveyard, exile it instead";
     }
 
@@ -124,7 +124,7 @@ class HaloForagerCastEffect extends OneShotEffect {
         return player != null && card != null
                 && CardUtil.castSpellWithAttributesForFree(
                 player, source, game, new CardsImpl(card),
-                StaticFilters.FILTER_CARD_CREATURE, HaloForagerTracker.instance
+                StaticFilters.FILTER_CARD, HaloForagerTracker.instance
         );
     }
 }
