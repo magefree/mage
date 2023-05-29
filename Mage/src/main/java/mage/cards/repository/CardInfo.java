@@ -95,22 +95,18 @@ public class CardInfo {
     protected boolean splitCardHalf;
     @DatabaseField
     protected boolean flipCard;
-    @DatabaseField
-    protected boolean doubleFaced;
     @DatabaseField(indexName = "meldCard_index")
     protected boolean meldCard;
     @DatabaseField
     protected String flipCardName;
     @DatabaseField
-    protected String secondSideName;
-    @DatabaseField
     protected boolean adventureCard;
     @DatabaseField
     protected String adventureSpellName;
     @DatabaseField
-    protected boolean modalDoubleFacedCard;
+    protected boolean doubleFaced;
     @DatabaseField
-    protected String modalDoubleFacedSecondSideName;
+    protected String doubleFacedSecondSideName;
     @DatabaseField
     protected String meldsToCardName;
 
@@ -145,20 +141,16 @@ public class CardInfo {
             this.meldsToCardName = meldToCard.getName();
         }
 
-        this.doubleFaced = card.isTransformable();
         this.meldCard = card instanceof MeldCard;
-        if (card instanceof TransformingDoubleFacedCard) {
-            this.secondSideName = ((TransformingDoubleFacedCard) card).getName();
-        }
 
         if (card instanceof AdventureCard) {
             this.adventureCard = true;
             this.adventureSpellName = ((AdventureCard) card).getSpellCard().getName();
         }
 
-        if (card instanceof ModalDoubleFacedCard) {
-            this.modalDoubleFacedCard = true;
-            this.modalDoubleFacedSecondSideName = ((ModalDoubleFacedCard) card).getRightHalfCard().getName();
+        if (card instanceof DoubleFacedCard) {
+            this.doubleFaced = true;
+            this.doubleFacedSecondSideName = ((DoubleFacedCard) card).getRightHalfCard().getName();
         }
 
         this.frameStyle = card.getFrameStyle().toString();
@@ -439,16 +431,8 @@ public class CardInfo {
         return meldsToCardName;
     }
 
-    public boolean isDoubleFaced() {
-        return doubleFaced;
-    }
-
     public boolean isMeldCard() {
         return meldCard;
-    }
-
-    public String getSecondSideName() {
-        return secondSideName;
     }
 
     public boolean isAdventureCard() {
@@ -459,12 +443,12 @@ public class CardInfo {
         return adventureSpellName;
     }
 
-    public boolean isModalDoubleFacedCard() {
-        return modalDoubleFacedCard;
+    public boolean isDoubleFaced() {
+        return doubleFaced;
     }
 
-    public String getModalDoubleFacedSecondSideName() {
-        return modalDoubleFacedSecondSideName;
+    public String getDoubleFacedSecondSideName() {
+        return doubleFacedSecondSideName;
     }
 
     @Override

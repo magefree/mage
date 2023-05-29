@@ -445,7 +445,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 if (!card.getCardNumber().isEmpty() && !"0".equals(card.getCardNumber()) && !card.getSetCode().isEmpty()) {
                     String cardName = card.getName();
                     boolean isType2 = type2SetsFilter.contains(card.getSetCode());
-                    CardDownloadData url = new CardDownloadData(cardName, card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, false, card.isDoubleFaced(), false);
+                    CardDownloadData url = new CardDownloadData(cardName, card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, false, false, false);
 
                     // variations must have diff file names with additional postfix
                     if (url.getUsesVariousArt()) {
@@ -459,27 +459,6 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                     // main side
                     allCardsUrls.add(url);
 
-                    // second side
-                    // xmage doesn't search night cards by default, so add it and other types manually
-                    if (card.isDoubleFaced()) {
-                        if (card.getSecondSideName() == null || card.getSecondSideName().trim().isEmpty()) {
-                            throw new IllegalStateException("Second side card can't have empty name.");
-                        }
-
-                        CardInfo secondSideCard = CardRepository.instance.findCardWithPreferredSetAndNumber(card.getSecondSideName(), card.getSetCode(), card.getCardNumber());
-                        if (secondSideCard == null) {
-                            throw new IllegalStateException("Can''t find second side card in database: " + card.getSecondSideName());
-                        }
-
-                        url = new CardDownloadData(
-                                card.getSecondSideName(),
-                                card.getSetCode(),
-                                secondSideCard.getCardNumber(),
-                                card.usesVariousArt(),
-                                0, false, card.isDoubleFaced(), true);
-                        url.setType2(isType2);
-                        allCardsUrls.add(url);
-                    }
                     if (card.isFlipCard()) {
                         if (card.getFlipCardName() == null || card.getFlipCardName().trim().isEmpty()) {
                             throw new IllegalStateException("Flipped card can't have empty name.");
@@ -489,7 +468,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                                 card.getSetCode(),
                                 card.getCardNumber(),
                                 card.usesVariousArt(),
-                                0, false, card.isDoubleFaced(), false);
+                                0, false, false, false);
                         cardDownloadData.setFlipCard(true);
                         cardDownloadData.setFlippedSide(true);
                         cardDownloadData.setType2(isType2);
@@ -515,12 +494,12 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         url.setType2(isType2);
                         allCardsUrls.add(url);
                     }
-                    if (card.isModalDoubleFacedCard()) {
-                        if (card.getModalDoubleFacedSecondSideName() == null || card.getModalDoubleFacedSecondSideName().trim().isEmpty()) {
+                    if (card.isDoubleFaced()) {
+                        if (card.getDoubleFacedSecondSideName() == null || card.getDoubleFacedSecondSideName().trim().isEmpty()) {
                             throw new IllegalStateException("MDF card can't have empty name.");
                         }
                         CardDownloadData cardDownloadData = new CardDownloadData(
-                                card.getModalDoubleFacedSecondSideName(),
+                                card.getDoubleFacedSecondSideName(),
                                 card.getSetCode(),
                                 card.getCardNumber(),
                                 card.usesVariousArt(),

@@ -1798,11 +1798,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public void setSecondCardFace(Card card) {
-        this.secondSideCard = card;
-    }
-
-    @Override
     public boolean isRingBearer(Game game) {
         Player player = game.getPlayer(getControllerId());
         return player != null && this.equals(player.getRingBearer(game));

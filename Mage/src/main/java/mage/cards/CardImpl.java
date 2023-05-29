@@ -43,7 +43,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected Class<? extends Card> meldsWithClazz;
     protected Class<? extends Card> meldsToClazz;
     protected Card meldsToCard;
-    protected Card secondSideCard;
     protected SpellAbility spellAbility;
     protected boolean flipCard;
     protected String flipCardName;
@@ -116,7 +115,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         ownerId = card.ownerId;
         rarity = card.rarity;
 
-        secondSideCard = null; // will be set on first getSecondCardFace call if card has one
         meldsWithClazz = card.meldsWithClazz;
         meldsToClazz = card.meldsToClazz;
         meldsToCard = null; // will be set on first getMeldsToCard call if card has one
@@ -582,10 +580,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public boolean isTransformable() {
-        // warning, not all multifaces cards can be transformable (meld, mdfc)
-        // mtg rules method: here
-        // GUI related method: search "transformable = true" in CardView
-        // TODO: check and fix method usage in game engine, it's must be mtg rules logic, not GUI
         return false;
     }
 
