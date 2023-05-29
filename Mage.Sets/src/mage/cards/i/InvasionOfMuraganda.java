@@ -15,10 +15,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -28,12 +25,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class InvasionOfMuraganda extends TransformingDoubleFacedCard {
-
-    private static final FilterPermanent filter = new FilterCreaturePermanent("another creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public InvasionOfMuraganda(UUID ownerId, CardSetInfo setInfo) {
         super(
@@ -67,7 +58,7 @@ public final class InvasionOfMuraganda extends TransformingDoubleFacedCard {
         );
         ability.addEffect(new LoseAllAbilitiesTargetEffect(Duration.EndOfTurn)
                 .setText("and loses all abilities until end of turn"));
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         this.getRightHalfCard().addAbility(ability);
     }
 

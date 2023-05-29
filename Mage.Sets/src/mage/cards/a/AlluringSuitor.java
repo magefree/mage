@@ -14,8 +14,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -27,12 +26,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class AlluringSuitor extends TransformingDoubleFacedCard {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public AlluringSuitor(UUID ownerId, CardSetInfo setInfo) {
         super(
@@ -60,7 +53,7 @@ public final class AlluringSuitor extends TransformingDoubleFacedCard {
         ).setText("{this}"), new ManaCostsImpl<>("{R}{R}"));
         ability.addEffect(new BoostTargetEffect(1, 0)
                 .setText("and another target creature each get +1/+0 until end of turn"));
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         this.getRightHalfCard().addAbility(ability);
     }
 
