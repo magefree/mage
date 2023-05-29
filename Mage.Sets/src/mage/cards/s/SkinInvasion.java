@@ -7,7 +7,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
 import mage.cards.TransformingDoubleFacedCard;
@@ -79,11 +78,12 @@ class SkinInvasionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
-        if (card != null && controller != null) {
-            game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
-            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-            return true;
+        if (card == null || controller == null
+                || card.getZoneChangeCounter(game) != source.getSourceObjectZoneChangeCounter() + 1) {
+            return false;
         }
-        return false;
+        TransformingDoubleFacedCard.setCardTransformed(card, game);
+        controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+        return true;
     }
 }

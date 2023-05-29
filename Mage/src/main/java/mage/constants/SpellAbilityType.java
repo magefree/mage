@@ -15,6 +15,9 @@ public enum SpellAbilityType {
     MODAL("Modal SpellAbility"), // used for modal double faces cards
     MODAL_LEFT("LeftModal SpellAbility"),
     MODAL_RIGHT("RightModal SpellAbility"),
+    TRANSFORMING("Transforming SpellAbility"),
+    TRANSFORMING_LEFT("LeftTransforming SpellAbility"),
+    TRANSFORMING_RIGHT("RightTransforming SpellAbility"),
     SPLICE("Spliced SpellAbility"),
     ADVENTURE_SPELL("Adventure SpellAbility");
 

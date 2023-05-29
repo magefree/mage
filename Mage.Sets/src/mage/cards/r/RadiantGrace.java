@@ -9,7 +9,6 @@ import mage.abilities.effects.common.PermanentsEnterBattlefieldTappedEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
@@ -116,7 +115,7 @@ class RadiantGraceEffect extends OneShotEffect {
             return false;
         }
 
-        game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
+        TransformingDoubleFacedCard.setCardTransformed(card, game);
         game.getState().setValue("attachTo:" + source.getSourceId(), player.getId());
         if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
             player.addAttachment(card.getId(), source, game);

@@ -46,7 +46,7 @@ public abstract class ModalDoubleFacedCard extends DoubleFacedCard {
         );
     }
 
-    public ModalDoubleFacedCard(ModalDoubleFacedCard card) {
+    protected ModalDoubleFacedCard(final ModalDoubleFacedCard card) {
         super(card);
     }
 

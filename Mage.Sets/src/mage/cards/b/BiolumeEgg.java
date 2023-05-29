@@ -1,24 +1,21 @@
 package mage.cards.b;
 
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SacrificeSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.common.ReturnSourceToBattlefieldTransformedEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.Card;
 import mage.cards.CardSetInfo;
 import mage.cards.TransformingDoubleFacedCard;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -49,7 +46,7 @@ public final class BiolumeEgg extends TransformingDoubleFacedCard {
 
         // When you sacrifice Biolume Egg, return it to the battlefield transformed under its owner's control at the beginning of the next end step.
         this.getLeftHalfCard().addAbility(new SacrificeSourceTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new BiolumeEggEffect()), true
+                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnSourceToBattlefieldTransformedEffect(true)), true
         ).setText("return it to the battlefield transformed under its owner's control at the beginning of the next end step"), false, true));
 
         // Biolume Serpent
@@ -67,36 +64,5 @@ public final class BiolumeEgg extends TransformingDoubleFacedCard {
     @Override
     public BiolumeEgg copy() {
         return new BiolumeEgg(this);
-    }
-}
-
-class BiolumeEggEffect extends OneShotEffect {
-
-    public BiolumeEggEffect() {
-        super(Outcome.PutCardInPlay);
-        this.staticText = "return it to the battlefield transformed under your control";
-    }
-
-    public BiolumeEggEffect(final BiolumeEggEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BiolumeEggEffect copy() {
-        return new BiolumeEggEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        Card card = game.getCard(targetPointer.getFirst(game, source));
-        if (card != null) {
-            game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId(), Boolean.TRUE);
-            controller.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null);
-        }
-        return true;
     }
 }

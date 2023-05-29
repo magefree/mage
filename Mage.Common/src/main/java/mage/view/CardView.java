@@ -508,9 +508,9 @@ public class CardView extends SimpleCardView {
             this.alternateName = card.getFlipCardName();
         }
 
-        if (card instanceof ModalDoubleFacedCard) {
+        if (card instanceof DoubleFacedCard) {
             this.transformable = true; // enable GUI day/night button
-            ModalDoubleFacedCard mdfCard = (ModalDoubleFacedCard) card;
+            DoubleFacedCard mdfCard = (DoubleFacedCard) card;
             this.secondCardFace = new CardView(mdfCard.getRightHalfCard(), game);
             this.alternateName = mdfCard.getRightHalfCard().getName();
         }

@@ -6,21 +6,13 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.InfoEffect;
-import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlAttachedEffect;
+import mage.abilities.effects.common.*;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.AnyColorManaAbility;
-import mage.cards.Card;
 import mage.cards.CardSetInfo;
 import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -48,7 +40,7 @@ public final class JourneyToEternity extends TransformingDoubleFacedCard {
 
         // When enchanted creature dies, return it to the battlefield under your control, then return Journey to Eternity to the battlefield transformed under your control.
         ability = new DiesAttachedTriggeredAbility(new ReturnToBattlefieldUnderYourControlAttachedEffect("it"), "enchanted creature");
-        ability.addEffect(new JourneyToEternityReturnTransformedSourceEffect());
+        ability.addEffect(new ReturnSourceToBattlefieldTransformedEffect(false).setText(", then return {this} to the battlefield transformed under your control"));
         this.getLeftHalfCard().addAbility(ability);
 
         // Atzal, Cave of Eternity
@@ -72,38 +64,5 @@ public final class JourneyToEternity extends TransformingDoubleFacedCard {
     @Override
     public JourneyToEternity copy() {
         return new JourneyToEternity(this);
-    }
-}
-
-class JourneyToEternityReturnTransformedSourceEffect extends OneShotEffect {
-
-    public JourneyToEternityReturnTransformedSourceEffect() {
-        super(Outcome.Benefit);
-        this.staticText = ", then return {this} to the battlefield transformed under your control.";
-    }
-
-    public JourneyToEternityReturnTransformedSourceEffect(final JourneyToEternityReturnTransformedSourceEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public JourneyToEternityReturnTransformedSourceEffect copy() {
-        return new JourneyToEternityReturnTransformedSourceEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getSourceId());
-        Player controller = game.getPlayer(source.getControllerId());
-        if (card != null && controller != null) {
-            Zone zone = game.getState().getZone(card.getId());
-            // cards needs to be in public non battlefield zone
-            if (zone == Zone.BATTLEFIELD || !zone.isPublicZone()) {
-                return true;
-            }
-            game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
-            controller.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, false, null);
-        }
-        return true;
     }
 }

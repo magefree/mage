@@ -1,24 +1,20 @@
 package mage.cards.h;
 
-import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.EquippedHasSubtypeCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ReturnSourceToBattlefieldTransformedEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.MenaceAbility;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.Card;
 import mage.cards.CardSetInfo;
 import mage.cards.TransformingDoubleFacedCard;
-import mage.constants.*;
-import mage.game.Game;
-import mage.players.Player;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -39,7 +35,7 @@ public final class HarvestHand extends TransformingDoubleFacedCard {
         this.getLeftHalfCard().setPT(2, 2);
 
         // When Harvest Hand dies, return it to the battlefield transformed under your control.
-        this.getLeftHalfCard().addAbility(new DiesSourceTriggeredAbility(new HarvestHandReturnTransformedEffect()));
+        this.getLeftHalfCard().addAbility(new DiesSourceTriggeredAbility(new ReturnSourceToBattlefieldTransformedEffect(false)));
 
         // Scrounged Scythe
         // Equipped creature gets +1/+1.
@@ -63,37 +59,5 @@ public final class HarvestHand extends TransformingDoubleFacedCard {
     @Override
     public HarvestHand copy() {
         return new HarvestHand(this);
-    }
-}
-
-class HarvestHandReturnTransformedEffect extends OneShotEffect {
-
-    HarvestHandReturnTransformedEffect() {
-        super(Outcome.PutCardInPlay);
-        this.staticText = "return it to the battlefield transformed under your control";
-    }
-
-    private HarvestHandReturnTransformedEffect(final HarvestHandReturnTransformedEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public HarvestHandReturnTransformedEffect copy() {
-        return new HarvestHandReturnTransformedEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        if (!(sourceObject instanceof Card)) {
-            return false;
-        }
-        game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
-        controller.moveCards((Card) sourceObject, Zone.BATTLEFIELD, source, game);
-        return true;
     }
 }

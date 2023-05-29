@@ -252,7 +252,7 @@ public class TransformTest extends CardTestPlayerBase {
      * Trespasser.
      */
     @Test
-    public void testTransformCopyrnansformed() {
+    public void testTransformCopyTransformed() {
         // Skulk (This creature can't be blocked by creatures with greater power.)
         // When Uninvited Geist deals combat damage to a player, transform it.
         addCard(Zone.BATTLEFIELD, playerA, "Uninvited Geist"); // Creature 2/2 {2}{U}

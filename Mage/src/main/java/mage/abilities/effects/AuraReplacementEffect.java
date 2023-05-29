@@ -7,6 +7,7 @@ import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -188,7 +189,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
             return false;
         }
         // in case of transformable enchantments
-        if (Boolean.TRUE.equals(game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId()))
+        if (Boolean.TRUE.equals(game.getState().getValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + card.getId()))
                 && card.getSecondCardFace() != null) {
             card = card.getSecondCardFace();
         }

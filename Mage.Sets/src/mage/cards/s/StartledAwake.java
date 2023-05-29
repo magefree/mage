@@ -9,7 +9,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.SkulkAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
 import mage.cards.TransformingDoubleFacedCard;
@@ -93,7 +92,7 @@ class StartledAwakeReturnTransformedEffect extends OneShotEffect {
             return true;
         }
         Card card = (Card) sourceObject;
-        game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), true);
+        TransformingDoubleFacedCard.setCardTransformed(card, game);
         controller.moveCards(card, Zone.BATTLEFIELD, source, game);
         return true;
     }

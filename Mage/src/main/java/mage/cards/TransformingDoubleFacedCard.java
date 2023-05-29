@@ -11,6 +11,12 @@ import java.util.UUID;
  */
 public abstract class TransformingDoubleFacedCard extends DoubleFacedCard {
 
+    public static final String VALUE_KEY_ENTER_TRANSFORMED = "EnterTransformed";
+
+    public static void setCardTransformed(Card card, Game game) {
+        game.getState().setValue(VALUE_KEY_ENTER_TRANSFORMED + card.getMainCard().getId(), true);
+    }
+
     public TransformingDoubleFacedCard(
             UUID ownerId, CardSetInfo setInfo,
             CardType[] typesLeft, SubType[] subTypesLeft, String costsLeft,
@@ -32,16 +38,16 @@ public abstract class TransformingDoubleFacedCard extends DoubleFacedCard {
             SuperType[] superTypesRight, CardType[] typesRight, SubType[] subTypesRight, String colorRight
     ) {
         super(
-                ownerId, setInfo, typesLeft, costsLeft, SpellAbilityType.BASE,
+                ownerId, setInfo, typesLeft, costsLeft, SpellAbilityType.TRANSFORMING,
                 new DoubleFacedCardHalfImpl(
                         ownerId, setInfo.copy(),
                         superTypesLeft, typesLeft, subTypesLeft, costsLeft,
-                        SpellAbilityType.BASE
+                        SpellAbilityType.TRANSFORMING_LEFT
                 ),
                 new DoubleFacedCardHalfImpl(
                         ownerId, new CardSetInfo(secondSideName, setInfo),
                         superTypesRight, typesRight, subTypesRight, "",
-                        SpellAbilityType.MODAL_RIGHT, colorRight
+                        SpellAbilityType.TRANSFORMING_RIGHT, colorRight
                 )
         );
     }
@@ -52,6 +58,22 @@ public abstract class TransformingDoubleFacedCard extends DoubleFacedCard {
 
     @Override
     public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
-        return super.cast(game, fromZone, ability, controllerId);
+        switch (ability.getSpellAbilityType()) {
+            case TRANSFORMING_LEFT:
+                return this.leftHalfCard.cast(game, fromZone, ability, controllerId);
+            case TRANSFORMING_RIGHT:
+                return this.rightHalfCard.cast(game, fromZone, ability, controllerId);
+            default:
+                if (this.leftHalfCard.getSpellAbility() != null)
+                    this.leftHalfCard.getSpellAbility().setControllerId(controllerId);
+                if (this.rightHalfCard.getSpellAbility() != null)
+                    this.rightHalfCard.getSpellAbility().setControllerId(controllerId);
+                return super.cast(game, fromZone, ability, controllerId);
+        }
+    }
+
+    @Override
+    public boolean isTransformable() {
+        return true;
     }
 }

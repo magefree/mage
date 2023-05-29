@@ -59,9 +59,9 @@ public abstract class DoubleFacedCard extends CardImpl implements CardWithHalves
     public void setParts(DoubleFacedCardHalf leftHalfCard, DoubleFacedCardHalf rightHalfCard) {
         // for card copy only - set new parts
         this.leftHalfCard = leftHalfCard;
-        leftHalfCard.setParentCard(this);
+        this.leftHalfCard.setParentCard(this);
         this.rightHalfCard = rightHalfCard;
-        rightHalfCard.setParentCard(this);
+        this.rightHalfCard.setParentCard(this);
     }
 
     @Override
@@ -202,8 +202,14 @@ public abstract class DoubleFacedCard extends CardImpl implements CardWithHalves
         // default abilities added on card creation from card type and can't be skipped
 
         // skip cast spell
-        if (ability instanceof SpellAbility && ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.MODAL) {
-            return true;
+        if (ability instanceof SpellAbility) {
+            switch (((SpellAbility) ability).getSpellAbilityType()) {
+                case MODAL:
+                case TRANSFORMING:
+                    return true;
+                default:
+                    return false;
+            }
         }
 
         // skip play land
@@ -331,5 +337,10 @@ public abstract class DoubleFacedCard extends CardImpl implements CardWithHalves
     @Override
     public MageInt getToughness() {
         return leftHalfCard.getToughness();
+    }
+
+    @Override
+    public Card getSecondCardFace() {
+        return rightHalfCard;
     }
 }

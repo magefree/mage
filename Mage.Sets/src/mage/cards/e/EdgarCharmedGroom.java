@@ -1,16 +1,14 @@
 package mage.cards.e;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.ReturnSourceToBattlefieldTransformedEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.Card;
 import mage.cards.CardSetInfo;
 import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
@@ -19,7 +17,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EdgarMarkovsCoffinVampireToken;
-import mage.players.Player;
 
 import java.util.UUID;
 
@@ -45,7 +42,7 @@ public final class EdgarCharmedGroom extends TransformingDoubleFacedCard {
         )));
 
         // When Edgar, Charmed Groom dies, return it to the battlefield transformed under its owner's control.
-        this.getLeftHalfCard().addAbility(new DiesSourceTriggeredAbility(new EdgarCharmedGroomEffect()));
+        this.getLeftHalfCard().addAbility(new DiesSourceTriggeredAbility(new ReturnSourceToBattlefieldTransformedEffect(true)));
 
         // Edgar Markov's Coffin
         // At the beginning of your upkeep, create a 1/1 white and black Vampire creature token with lifelink and put a bloodline counter on Edgar Markov's Coffin. Then if there are three or more bloodline counters on it, remove those counters and transform it.
@@ -67,38 +64,6 @@ public final class EdgarCharmedGroom extends TransformingDoubleFacedCard {
     @Override
     public EdgarCharmedGroom copy() {
         return new EdgarCharmedGroom(this);
-    }
-}
-
-class EdgarCharmedGroomEffect extends OneShotEffect {
-
-    EdgarCharmedGroomEffect() {
-        super(Outcome.Benefit);
-        staticText = "return it to the battlefield transformed under its owner's control";
-    }
-
-    private EdgarCharmedGroomEffect(final EdgarCharmedGroomEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public EdgarCharmedGroomEffect copy() {
-        return new EdgarCharmedGroomEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        if (!(sourceObject instanceof Card)) {
-            return false;
-        }
-        game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
-        controller.moveCards((Card) sourceObject, Zone.BATTLEFIELD, source, game, false, false, true, null);
-        return true;
     }
 }
 

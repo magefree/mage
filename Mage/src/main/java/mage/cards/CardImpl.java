@@ -41,7 +41,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     protected UUID ownerId;
     protected Rarity rarity;
-    protected Class<? extends Card> secondSideCardClazz;
     protected Class<? extends Card> meldsWithClazz;
     protected Class<? extends Card> meldsToClazz;
     protected Card meldsToCard;
@@ -119,7 +118,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         ownerId = card.ownerId;
         rarity = card.rarity;
 
-        secondSideCardClazz = card.secondSideCardClazz;
         secondSideCard = null; // will be set on first getSecondCardFace call if card has one
         nightCard = card.nightCard;
         meldsWithClazz = card.meldsWithClazz;
@@ -473,10 +471,10 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 }
 
                 // handle half of Modal Double Faces Cards on stack
-                if (stackObject == null && (this instanceof ModalDoubleFacedCard)) {
-                    stackObject = game.getStack().getSpell(((ModalDoubleFacedCard) this).getLeftHalfCard().getId(), false);
+                if (stackObject == null && (this instanceof DoubleFacedCard)) {
+                    stackObject = game.getStack().getSpell(((DoubleFacedCard) this).getLeftHalfCard().getId(), false);
                     if (stackObject == null) {
-                        stackObject = game.getStack().getSpell(((ModalDoubleFacedCard) this).getRightHalfCard().getId(), false);
+                        stackObject = game.getStack().getSpell(((DoubleFacedCard) this).getRightHalfCard().getId(), false);
                     }
                 }
 
@@ -591,26 +589,12 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         // mtg rules method: here
         // GUI related method: search "transformable = true" in CardView
         // TODO: check and fix method usage in game engine, it's must be mtg rules logic, not GUI
-        return this.secondSideCardClazz != null || this.nightCard;
+        return false;
     }
 
     @Override
-    public final Card getSecondCardFace() {
-        // init card side on first call
-        if (secondSideCardClazz == null && secondSideCard == null) {
-            return null;
-        }
-
-        if (secondSideCard == null) {
-            secondSideCard = initSecondSideCard(secondSideCardClazz);
-            if (secondSideCard != null && secondSideCard.getSpellAbility() != null) {
-                secondSideCard.getSpellAbility().setSourceId(this.getId());
-                secondSideCard.getSpellAbility().setSpellAbilityType(SpellAbilityType.BASE_ALTERNATE);
-                secondSideCard.getSpellAbility().setSpellAbilityCastMode(SpellAbilityCastMode.TRANSFORMED);
-            }
-        }
-
-        return secondSideCard;
+    public  Card getSecondCardFace() {
+        return this;
     }
 
     private Card initSecondSideCard(Class<? extends Card> cardClazz) {

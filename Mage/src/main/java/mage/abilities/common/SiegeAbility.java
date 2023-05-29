@@ -8,6 +8,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -109,7 +110,7 @@ class SiegeDefeatedEffect extends OneShotEffect {
         }
         game.getState().setValue("PlayFromNotOwnHandZone" + card.getSecondCardFace().getId(), Boolean.TRUE);
         if (player.cast(card.getSecondFaceSpellAbility(), game, true, new ApprovingObject(source, game))) {
-            game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId(), Boolean.TRUE);
+            game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + card.getId(), Boolean.TRUE);
             game.addEffect(new SiegeTransformEffect().setTargetPointer(new FixedTarget(card, game)), source);
         }
         game.getState().setValue("PlayFromNotOwnHandZone" + card.getSecondCardFace().getId(), null);

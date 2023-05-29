@@ -98,7 +98,7 @@ public class DoubleFacedCardHalfImpl extends CardImpl implements DoubleFacedCard
 
     @Override
     public void setParentCard(DoubleFacedCard card) {
-        this.parentCard = (DoubleFacedCard) card;
+        this.parentCard = card;
     }
 
     @Override
@@ -126,5 +126,15 @@ public class DoubleFacedCardHalfImpl extends CardImpl implements DoubleFacedCard
     @Override
     public boolean isFront() {
         return isFront;
+    }
+
+    @Override
+    public Card getSecondCardFace() {
+        return this.getMainCard().getSecondCardFace();
+    }
+
+    @Override
+    public boolean isTransformable() {
+        return parentCard.isTransformable();
     }
 }

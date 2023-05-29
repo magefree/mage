@@ -6,11 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.NightboundAbility;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.Card;
-import mage.cards.LevelerCard;
-import mage.cards.ModalDoubleFacedCard;
-import mage.cards.SplitCard;
+import mage.cards.*;
 import mage.constants.SpellAbilityType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
@@ -30,7 +26,7 @@ public class PermanentCard extends PermanentImpl {
 
     protected int maxLevelCounters;
     // A copy of the origin card that was cast (this is not the original card, so it's possible to change some attribute to this blueprint to change attributes to the permanent if it enters the battlefield with e.g. a subtype)
-    protected Card card;
+    protected final Card card;
     // the number this permanent instance had
     protected int zoneChangeCounter;
 
@@ -40,14 +36,18 @@ public class PermanentCard extends PermanentImpl {
         // usage check: you must put to play only real card's part
         // if you use it in test code then call CardUtil.getDefaultCardSideForBattlefield for default side
         // it's a basic check and still allows to create permanent from instant or sorcery
-        boolean goodForBattlefield = true;
-        if (card instanceof ModalDoubleFacedCard) {
+        boolean goodForBattlefield;
+        if (card instanceof DoubleFacedCard) {
             goodForBattlefield = false;
         } else if (card instanceof SplitCard) {
             // fused spells allowed (it uses main card)
             if (card.getSpellAbility() != null && !card.getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
                 goodForBattlefield = false;
+            } else {
+                goodForBattlefield = true;
             }
+        } else {
+            goodForBattlefield = true;
         }
         if (!goodForBattlefield) {
             throw new IllegalArgumentException("ERROR, can't create permanent card from split or mdf: " + card.getName());
@@ -59,11 +59,12 @@ public class PermanentCard extends PermanentImpl {
     }
 
     private void init(Card card, Game game) {
-        power = card.getPower().copy();
-        toughness = card.getToughness().copy();
-        startingLoyalty = card.getStartingLoyalty();
-        startingDefense = card.getStartingDefense();
-        copyFromCard(card, game);
+        if (card.isTransformable()
+                && (game.getState().getValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + card.getMainCard().getId()) != null
+                || NightboundAbility.checkCard(this, game))) {
+            this.transformed = true;
+        }
+        copyFromCard(game);
         // if temporary added abilities to the spell/card exist, you need to add it to the permanent derived from that card
         Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(card.getId());
         if (otherAbilities != null) {
@@ -71,13 +72,6 @@ public class PermanentCard extends PermanentImpl {
         }
         if (card instanceof LevelerCard) {
             maxLevelCounters = ((LevelerCard) card).getMaxLevelCounters();
-        }
-        if (card.isTransformable()) {
-            if (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId()) != null
-                    || NightboundAbility.checkCard(this, game)) {
-                game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId(), null);
-                TransformAbility.transformPermanent(this, getSecondCardFace(), game, null);
-            }
         }
     }
 
@@ -92,55 +86,55 @@ public class PermanentCard extends PermanentImpl {
     public void reset(Game game) {
         // when the permanent is reset, copy all original values from the card
         // must copy card each reset so that the original values don't get modified
-        copyFromCard(card, game);
-        power.resetToBaseValue();
-        toughness.resetToBaseValue();
+        copyFromCard(game);
         super.reset(game);
     }
 
-    protected void copyFromCard(final Card card, final Game game) {
-        this.name = card.getName();
+    protected void copyFromCard(final Game game) {
+        Card cardToCopy = this.transformed ? this.card.getMainCard().getSecondCardFace() : this.card;
+        this.name = cardToCopy.getName();
         this.abilities.clear();
         if (this.faceDown) {
-            for (Ability ability : card.getAbilities()) {
+            for (Ability ability : cardToCopy.getAbilities()) {
                 if (ability.getWorksFaceDown()) {
                     this.abilities.add(ability.copy());
                 }
             }
         } else {
             // copy only own abilities; all dynamic added abilities must be added in the parent call
-            this.abilities = card.getAbilities().copy();
+            this.abilities = cardToCopy.getAbilities().copy();
             this.spellAbility = null; // will be set on first getSpellAbility call if card has one.
         }
         this.abilities.setControllerId(this.controllerId);
         this.abilities.setSourceId(objectId);
         this.cardType.clear();
-        this.cardType.addAll(card.getCardType());
-        this.color = card.getColor(null).copy();
-        this.frameColor = card.getFrameColor(game).copy();
-        this.frameStyle = card.getFrameStyle();
-        this.manaCost = card.getManaCost().copy();
-        if (card instanceof PermanentCard) {
-            this.maxLevelCounters = ((PermanentCard) card).maxLevelCounters;
+        this.cardType.addAll(cardToCopy.getCardType());
+        this.color = cardToCopy.getColor(null).copy();
+        this.power = cardToCopy.getPower().copy();
+        this.toughness = cardToCopy.getToughness().copy();
+        this.startingLoyalty = cardToCopy.getStartingLoyalty();
+        this.startingDefense = cardToCopy.getStartingDefense();
+        this.frameColor = cardToCopy.getFrameColor(game).copy();
+        this.frameStyle = cardToCopy.getFrameStyle();
+        this.manaCost = cardToCopy.getManaCost().copy();
+        if (cardToCopy instanceof PermanentCard) {
+            this.maxLevelCounters = ((PermanentCard) cardToCopy).maxLevelCounters;
         }
-        this.subtype.copyFrom(card.getSubtype());
+        this.subtype.copyFrom(cardToCopy.getSubtype());
         this.supertype.clear();
-        this.supertype.addAll(card.getSuperType());
+        this.supertype.addAll(cardToCopy.getSuperType());
 
-        this.setExpansionSetCode(card.getExpansionSetCode());
-        this.setCardNumber(card.getCardNumber());
-        this.rarity = card.getRarity();
-        this.usesVariousArt = card.getUsesVariousArt();
+        this.setExpansionSetCode(cardToCopy.getExpansionSetCode());
+        this.setCardNumber(cardToCopy.getCardNumber());
+        this.rarity = cardToCopy.getRarity();
+        this.usesVariousArt = cardToCopy.getUsesVariousArt();
 
-        if (card.getSecondCardFace() != null) {
-            this.secondSideCardClazz = card.getSecondCardFace().getClass();
+        if (cardToCopy.getMeldsToCard() != null) {
+            this.meldsToClazz = cardToCopy.getMeldsToCard().getClass();
         }
-        if (card.getMeldsToCard() != null) {
-            this.meldsToClazz = card.getMeldsToCard().getClass();
-        }
-        this.nightCard = card.isNightCard();
-        this.flipCard = card.isFlipCard();
-        this.flipCardName = card.getFlipCardName();
+        this.nightCard = cardToCopy.isNightCard();
+        this.flipCard = cardToCopy.isFlipCard();
+        this.flipCardName = cardToCopy.getFlipCardName();
     }
 
     @Override

@@ -194,9 +194,9 @@ public class Spell extends StackObjectImpl implements Card {
         }
 
         if (card instanceof DoubleFacedCardHalf) {
-            ModalDoubleFacedCard mdfCard = (ModalDoubleFacedCard) card.getMainCard();
+            DoubleFacedCard mdfCard = (DoubleFacedCard) card.getMainCard();
             return GameLog.replaceNameByColoredName(card, getSpellAbility().toString(), mdfCard)
-                    + " as mdf side of " + GameLog.getColoredObjectIdName(mdfCard);
+                    + " as side of " + GameLog.getColoredObjectIdName(mdfCard);
         }
 
         return GameLog.replaceNameByColoredName(card, getSpellAbility().toString());

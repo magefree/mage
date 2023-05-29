@@ -41,38 +41,6 @@ public class TransformAbility extends SimpleStaticAbility {
     }
 
     public static void transformPermanent(Permanent permanent, MageObject sourceCard, Game game, Ability source) {
-        if (sourceCard == null) {
-            return;
-        }
-
-        permanent.setTransformed(true);
-        permanent.setName(sourceCard.getName());
-        permanent.getColor(game).setColor(sourceCard.getColor(game));
-        permanent.getManaCost().clear();
-        permanent.getManaCost().add(sourceCard.getManaCost().copy());
-        permanent.removeAllCardTypes(game);
-        for (CardType type : sourceCard.getCardType(game)) {
-            permanent.addCardType(game, type);
-        }
-        permanent.removeAllSubTypes(game);
-        permanent.copySubTypesFrom(game, sourceCard);
-        permanent.removeAllSuperTypes(game);
-        for (SuperType type : sourceCard.getSuperType(game)) {
-            permanent.addSuperType(game, type);
-        }
-
-        CardUtil.copySetAndCardNumber(permanent, sourceCard);
-
-        permanent.getAbilities().clear();
-        for (Ability ability : sourceCard.getAbilities()) {
-            // source == null -- call from init card (e.g. own abilities)
-            // source != null -- from apply effect
-            permanent.addAbility(ability, source == null ? permanent.getId() : source.getSourceId(), game);
-        }
-        permanent.getPower().setModifiedBaseValue(sourceCard.getPower().getValue());
-        permanent.getToughness().setModifiedBaseValue(sourceCard.getToughness().getValue());
-        permanent.setStartingLoyalty(sourceCard.getStartingLoyalty());
-        permanent.setStartingDefense(sourceCard.getStartingDefense());
     }
 
     public static Card transformCardSpellStatic(Card mainSide, Card otherSide, Game game) {

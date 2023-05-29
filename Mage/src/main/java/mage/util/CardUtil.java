@@ -1065,12 +1065,8 @@ public final class CardUtil {
 
         // must choose left side all time
         Card permCard;
-        if (card instanceof SplitCard) {
-            permCard = card;
-        } else if (card instanceof AdventureCard) {
-            permCard = card;
-        } else if (card instanceof ModalDoubleFacedCard) {
-            permCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
+        if (card instanceof DoubleFacedCard) {
+            permCard = ((DoubleFacedCard) card).getLeftHalfCard();
         } else {
             permCard = card;
         }
@@ -1581,8 +1577,8 @@ public final class CardUtil {
             res.add(mainCard);
             res.add(mainCard.getLeftHalfCard());
             res.add(mainCard.getRightHalfCard());
-        } else if (object instanceof ModalDoubleFacedCard || object instanceof DoubleFacedCardHalf) {
-            ModalDoubleFacedCard mainCard = (ModalDoubleFacedCard) ((Card) object).getMainCard();
+        } else if (object instanceof DoubleFacedCard || object instanceof DoubleFacedCardHalf) {
+            DoubleFacedCard mainCard = (DoubleFacedCard) ((Card) object).getMainCard();
             res.add(mainCard);
             res.add(mainCard.getLeftHalfCard());
             res.add(mainCard.getRightHalfCard());

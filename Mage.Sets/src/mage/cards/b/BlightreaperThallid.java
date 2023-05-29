@@ -1,15 +1,12 @@
 package mage.cards.b;
 
-import mage.MageInt;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.TransformIntoSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.keyword.TransformAbility;
 import mage.abilities.meta.OrTriggeredAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
@@ -27,12 +24,12 @@ public final class BlightreaperThallid extends TransformingDoubleFacedCard {
     public BlightreaperThallid(UUID ownerId, CardSetInfo setInfo) {
         super(
                 ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.FUNGUS},"{1}{B}",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.FUNGUS}, "{1}{B}",
                 "Blightsower Thallid",
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.PHYREXIAN,SubType.FUNGUS},"BG"
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.PHYREXIAN, SubType.FUNGUS}, "BG"
         );
-        this.getLeftHalfCard().setPT(2,2);
-        this.getRightHalfCard().setPT(3,3);
+        this.getLeftHalfCard().setPT(2, 2);
+        this.getRightHalfCard().setPT(3, 3);
 
         // {3}{G/P}: Transform Blightreaper Thallid. Activate only as a sorcery.
         this.getLeftHalfCard().addAbility(new ActivateAsSorceryActivatedAbility(

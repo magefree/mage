@@ -145,11 +145,10 @@ public class CardInfo {
             this.meldsToCardName = meldToCard.getName();
         }
 
-        this.doubleFaced = card.isTransformable() && card.getSecondCardFace() != null;
+        this.doubleFaced = card.isTransformable();
         this.nightCard = card.isNightCard();
-        Card secondSide = card.getSecondCardFace();
-        if (secondSide != null) {
-            this.secondSideName = secondSide.getName();
+        if (card instanceof TransformingDoubleFacedCard) {
+            this.secondSideName = ((TransformingDoubleFacedCard) card).getName();
         }
 
         if (card instanceof AdventureCard) {

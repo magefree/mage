@@ -66,7 +66,7 @@ public class DisturbAbility extends SpellAbility {
     @Override
     public boolean activate(Game game, boolean noMana) {
         if (super.activate(game, noMana)) {
-            game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getSourceId(), Boolean.TRUE);
+            game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + getSourceId(), Boolean.TRUE);
             // TODO: must be removed after transform cards (one side) migrated to MDF engine (multiple sides)
             game.addEffect(new DisturbEffect(), this);
             return true;

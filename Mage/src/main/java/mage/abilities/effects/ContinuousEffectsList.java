@@ -130,6 +130,11 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
                 boolean hasOwnerLeftGame = false;
                 if (object instanceof Card) {
                     Player owner = game.getPlayer(((Card) object).getOwnerId());
+                    if (owner==null){
+                        System.out.println(object);
+                        System.out.println(((Card) object).getOwnerId());
+                        System.out.println(((Card) object).getOwnerId());
+                    }
                     hasOwnerLeftGame = !owner.isInGame();
                 }
 
