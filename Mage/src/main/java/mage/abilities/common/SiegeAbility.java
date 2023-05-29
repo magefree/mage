@@ -6,7 +6,6 @@ import mage.abilities.StaticAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
@@ -139,9 +138,6 @@ class SiegeTransformEffect extends ContinuousEffectImpl {
         if (spell == null || spell.getCard().getSecondCardFace() == null) {
             return false;
         }
-
-        // simulate another side as new card (another code part in spell constructor)
-        TransformAbility.transformCardSpellDynamic(spell, spell.getCard().getSecondCardFace(), game);
         return true;
     }
 }

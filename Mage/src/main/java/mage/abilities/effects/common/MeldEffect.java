@@ -100,7 +100,7 @@ public class MeldEffect extends OneShotEffect {
                 new CardCriteria()
                         .name(meldIntoName)
                         .setCodes(sourceCard.getExpansionSetCode())
-                        .nightCard(true)
+                        .meldCard(true)
         );
         if (cardInfoList.isEmpty()) {
             return false;

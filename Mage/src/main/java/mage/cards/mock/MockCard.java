@@ -21,7 +21,7 @@ import java.util.List;
 public class MockCard extends CardImpl {
 
     static public String ADVENTURE_NAME_SEPARATOR = " // ";
-    static public String MODAL_DOUBLE_FACES_NAME_SEPARATOR = " // ";
+    static public String DOUBLE_FACED_NAME_SEPARATOR = " // ";
 
     // Needs to be here, as it is normally calculated from the
     // PlaneswalkerEntersWithLoyaltyAbility of the card... but the MockCard
@@ -63,8 +63,6 @@ public class MockCard extends CardImpl {
         this.frameStyle = card.getFrameStyle();
 
         this.flipCard = card.isFlipCard();
-
-        this.nightCard = card.isNightCard();
 
         if (card.getSecondSideName() != null && !card.getSecondSideName().isEmpty()) {
             this.secondSideCard = new MockCard(CardRepository.instance.findCardWithPreferredSetAndNumber(card.getSecondSideName(), card.getSetCode(), card.getCardNumber()));
@@ -155,7 +153,7 @@ public class MockCard extends CardImpl {
         if (adventureSpellName != null) {
             return getName() + ADVENTURE_NAME_SEPARATOR + adventureSpellName;
         } else if (isModalDoubleFacedCard) {
-            return getName() + MODAL_DOUBLE_FACES_NAME_SEPARATOR + this.secondSideCard.getName();
+            return getName() + DOUBLE_FACED_NAME_SEPARATOR + this.secondSideCard.getName();
         } else {
             return getName();
         }

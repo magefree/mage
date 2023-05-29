@@ -11,7 +11,6 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.MorphAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.*;
 import mage.constants.*;
 import mage.counters.Counter;
@@ -73,13 +72,6 @@ public class Spell extends StackObjectImpl implements Card {
 
     private Spell(Card card, SpellAbility ability, UUID controllerId, Zone fromZone, Game game, boolean isCopy) {
         Card affectedCard = card;
-
-        // TODO: must be removed after transform cards (one side) migrated to MDF engine (multiple sides)
-        if (ability.getSpellAbilityCastMode() == SpellAbilityCastMode.TRANSFORMED && affectedCard.getSecondCardFace() != null) {
-            // simulate another side as new card (another code part in continues effect from disturb ability)
-            affectedCard = TransformAbility.transformCardSpellStatic(card, card.getSecondCardFace(), game);
-        }
-
         this.card = affectedCard;
         this.color = affectedCard.getColor(null).copy();
         this.frameColor = affectedCard.getFrameColor(null).copy();
@@ -774,11 +766,6 @@ public class Spell extends StackObjectImpl implements Card {
     @Override
     public SpellAbility getSecondFaceSpellAbility() {
         return null;
-    }
-
-    @Override
-    public boolean isNightCard() {
-        return false;
     }
 
     @Override

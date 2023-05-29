@@ -32,7 +32,7 @@ public class CardCriteria {
     private Boolean variousArt;
     private Boolean doubleFaced;
     private Boolean modalDoubleFaced;
-    private boolean nightCard;
+    private boolean meldCard;
     private boolean black;
     private boolean blue;
     private boolean green;
@@ -56,7 +56,7 @@ public class CardCriteria {
         this.supertypes = new ArrayList<>();
         this.notSupertypes = new ArrayList<>();
         this.subtypes = new ArrayList<>();
-        this.nightCard = false;
+        this.meldCard = false;
 
         this.black = true;
         this.blue = true;
@@ -114,8 +114,8 @@ public class CardCriteria {
         return this;
     }
 
-    public CardCriteria nightCard(boolean nightCard) {
-        this.nightCard = nightCard;
+    public CardCriteria meldCard(boolean meldCard) {
+        this.meldCard = meldCard;
         return this;
     }
 
@@ -217,7 +217,7 @@ public class CardCriteria {
         optimize();
 
         Where where = qb.where();
-        where.eq("nightCard", nightCard);
+        where.eq("meldCard", meldCard);
         where.eq("splitCardHalf", false);
         int clausesCount = 2;
         if (nameContains != null) {

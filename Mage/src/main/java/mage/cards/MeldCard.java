@@ -25,7 +25,6 @@ public abstract class MeldCard extends CardImpl {
     public MeldCard(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs) {
         super(ownerId, setInfo, cardTypes, costs);
         halves = new CardsImpl();
-        this.nightCard = true;
     }
 
     public MeldCard(final MeldCard card) {

@@ -109,7 +109,7 @@ public class CardView extends SimpleCardView {
     protected List<String> rightSplitRules;
     protected String rightSplitTypeLine;
 
-    protected boolean isModalDoubleFacedCard;
+    protected boolean isDoubleFacedCard;
 
     protected ArtRect artRect = ArtRect.NORMAL;
 
@@ -217,7 +217,7 @@ public class CardView extends SimpleCardView {
         this.rightSplitRules = cardView.rightSplitRules == null ? null : new ArrayList<>(cardView.rightSplitRules);
         this.rightSplitTypeLine = cardView.rightSplitTypeLine;
 
-        this.isModalDoubleFacedCard = cardView.isModalDoubleFacedCard;
+        this.isDoubleFacedCard = cardView.isDoubleFacedCard;
 
         this.artRect = cardView.artRect;
         this.targets = cardView.targets == null ? null : new ArrayList<>(cardView.targets);
@@ -353,6 +353,8 @@ public class CardView extends SimpleCardView {
                     break;
                 case MODAL_LEFT:
                 case MODAL_RIGHT:
+                case TRANSFORMING_LEFT:
+                case TRANSFORMING_RIGHT:
                     rotate = false;
                     break;
             }
@@ -373,10 +375,10 @@ public class CardView extends SimpleCardView {
             fullCardName = card.getName(); // split card contains full name as normal
             this.manaCostLeftStr = String.join("", splitCard.getLeftHalfCard().getManaCostSymbols());
             this.manaCostRightStr = String.join("", splitCard.getRightHalfCard().getManaCostSymbols());
-        } else if (card instanceof ModalDoubleFacedCard) {
-            this.isModalDoubleFacedCard = true;
-            ModalDoubleFacedCard mainCard = ((ModalDoubleFacedCard) card);
-            fullCardName = mainCard.getLeftHalfCard().getName() + MockCard.MODAL_DOUBLE_FACES_NAME_SEPARATOR + mainCard.getRightHalfCard().getName();
+        } else if (card instanceof DoubleFacedCard) {
+            this.isDoubleFacedCard = true;
+            DoubleFacedCard mainCard = ((DoubleFacedCard) card);
+            fullCardName = mainCard.getLeftHalfCard().getName() + MockCard.DOUBLE_FACED_NAME_SEPARATOR + mainCard.getRightHalfCard().getName();
             this.manaCostLeftStr = String.join("", mainCard.getLeftHalfCard().getManaCostSymbols());
             this.manaCostRightStr = String.join("", mainCard.getRightHalfCard().getManaCostSymbols());
         } else if (card instanceof AdventureCard) {
@@ -496,12 +498,6 @@ public class CardView extends SimpleCardView {
 
         // transformable, double faces cards
         this.transformable = card.isTransformable();
-
-        Card secondSideCard = card.getSecondCardFace();
-        if (secondSideCard != null) {
-            this.secondCardFace = new CardView(secondSideCard, game);
-            this.alternateName = secondCardFace.getName();
-        }
 
         this.flipCard = card.isFlipCard();
         if (card.isFlipCard() && card.getFlipCardName() != null) {

@@ -63,7 +63,7 @@ public final class FableOfTheMirrorBreaker extends TransformingDoubleFacedCard {
                         .setText("you may discard up to two cards. If you do, draw that many cards")
         );
 
-        // III — Exile t his Saga, then return it to the battlefield transformed under your control.
+        // III — Exile this Saga, then return it to the battlefield transformed under your control.
         sagaAbility.addChapterEffect(
                 this.getLeftHalfCard(), SagaChapter.CHAPTER_III,
                 new ExileSagaAndReturnTransformedEffect()

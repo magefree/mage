@@ -132,7 +132,6 @@ public class PermanentCard extends PermanentImpl {
         if (cardToCopy.getMeldsToCard() != null) {
             this.meldsToClazz = cardToCopy.getMeldsToCard().getClass();
         }
-        this.nightCard = cardToCopy.isNightCard();
         this.flipCard = cardToCopy.isFlipCard();
         this.flipCardName = cardToCopy.getFlipCardName();
     }

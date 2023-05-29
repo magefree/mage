@@ -26,7 +26,6 @@ import mage.game.stack.StackObject;
 import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.ManaUtil;
-import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
 
 import java.lang.reflect.Constructor;
@@ -45,7 +44,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected Class<? extends Card> meldsToClazz;
     protected Card meldsToCard;
     protected Card secondSideCard;
-    protected boolean nightCard;
     protected SpellAbility spellAbility;
     protected boolean flipCard;
     protected String flipCardName;
@@ -119,7 +117,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         rarity = card.rarity;
 
         secondSideCard = null; // will be set on first getSecondCardFace call if card has one
-        nightCard = card.nightCard;
         meldsWithClazz = card.meldsWithClazz;
         meldsToClazz = card.meldsToClazz;
         meldsToCard = null; // will be set on first getMeldsToCard call if card has one
@@ -593,7 +590,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public  Card getSecondCardFace() {
+    public Card getSecondCardFace() {
         return this;
     }
 
@@ -639,11 +636,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         }
 
         return meldsToCard;
-    }
-
-    @Override
-    public boolean isNightCard() {
-        return this.nightCard;
     }
 
     @Override

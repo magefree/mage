@@ -1,11 +1,8 @@
 package mage.abilities.effects;
 
-import java.util.Locale;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
@@ -17,6 +14,9 @@ import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
+
+import java.util.Locale;
+import java.util.UUID;
 
 /**
  * Cards with the Aura subtype don't change the zone they are in, if there is no

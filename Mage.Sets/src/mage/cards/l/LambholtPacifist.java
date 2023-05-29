@@ -3,6 +3,8 @@ package mage.cards.l;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.WerewolfBackTriggeredAbility;
 import mage.abilities.common.WerewolfFrontTriggeredAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.common.combat.CantAttackSourceEffect;
@@ -20,6 +22,8 @@ import java.util.UUID;
  */
 public final class LambholtPacifist extends TransformingDoubleFacedCard {
 
+    private static final Condition condition = new InvertCondition(FerociousCondition.instance);
+
     public LambholtPacifist(UUID ownerId, CardSetInfo setInfo) {
         super(
                 ownerId, setInfo,
@@ -32,7 +36,7 @@ public final class LambholtPacifist extends TransformingDoubleFacedCard {
 
         // Lambholt Pacifist can't attack unless you control a creature with power 4 or greater.
         this.getLeftHalfCard().addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
-                new CantAttackSourceEffect(Duration.WhileOnBattlefield), FerociousCondition.instance,
+                new CantAttackSourceEffect(Duration.WhileOnBattlefield), condition,
                 "{this} can't attack unless you control a creature with power 4 or greater"
         )).addHint(FerociousHint.instance));
 

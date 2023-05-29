@@ -1943,9 +1943,6 @@ public abstract class GameImpl implements Game {
                 MorphAbility.setPermanentToFaceDownCreature(newBluePrint, copyFromPermanent, this);
             }
             newBluePrint.assignNewId();
-            if (copyFromPermanent.isTransformed()) {
-                TransformAbility.transformPermanent(newBluePrint, newBluePrint.getSecondCardFace(), this, source);
-            }
         }
         if (applier != null) {
             applier.apply(this, newBluePrint, source, copyToPermanentId);

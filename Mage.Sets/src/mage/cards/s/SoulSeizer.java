@@ -90,23 +90,25 @@ class SoulSeizerTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-        if (damageEvent.isCombatDamage() && event.getSourceId().equals(this.getSourceId())) {
-            Player opponent = game.getPlayer(event.getPlayerId());
-            if (opponent != null) {
-                FilterCreaturePermanent filter = new FilterCreaturePermanent("creature " + opponent.getLogName() + " controls");
-                filter.add(new ControllerIdPredicate(opponent.getId()));
-
-                this.getTargets().clear();
-                this.addTarget(new TargetCreaturePermanent(filter));
-                return true;
-            }
+        if (!damageEvent.isCombatDamage() || !event.getSourceId().equals(this.getSourceId())) {
+            return false;
         }
-        return false;
+        Player opponent = game.getPlayer(event.getPlayerId());
+        if (opponent == null) {
+            return false;
+        }
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature " + opponent.getLogName() + " controls");
+        filter.add(new ControllerIdPredicate(opponent.getId()));
+
+        this.getTargets().clear();
+        this.addTarget(new TargetCreaturePermanent(filter));
+        return true;
     }
 
     @Override
     public String getRule() {
-        return "When {this} deals combat damage to a player, you may transform it. If you do, attach it to target creature that player controls.";
+        return "When {this} deals combat damage to a player, you may transform it. " +
+                "If you do, attach it to target creature that player controls.";
     }
 }
 
@@ -122,12 +124,12 @@ class SoulSeizerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent == null || !permanent.transform(source, game)) {
             return false;
         }
-        Permanent attachTo = game.getPermanent(targetPointer.getFirst(game, source));
-        return attachTo != null && attachTo.addAttachment(source.getSourceId(), source, game);
+        Permanent attachTo = game.getPermanent(getTargetPointer().getFirst(game, source));
+        return attachTo != null && attachTo.addAttachment(permanent.getId(), source, game);
     }
 
     @Override

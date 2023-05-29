@@ -104,10 +104,10 @@ enum HomicidalBruteCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game
+        return !game
                 .getState()
                 .getWatcher(AttackedThisTurnWatcher.class)
-                .checkIfAttacked(source.getSourcePermanentOrLKI(game), game);
+                .checkIfAttacked(source.getSourcePermanentIfItStillExists(game), game);
     }
 
     @Override

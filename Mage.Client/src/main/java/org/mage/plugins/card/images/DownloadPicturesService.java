@@ -445,7 +445,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 if (!card.getCardNumber().isEmpty() && !"0".equals(card.getCardNumber()) && !card.getSetCode().isEmpty()) {
                     String cardName = card.getName();
                     boolean isType2 = type2SetsFilter.contains(card.getSetCode());
-                    CardDownloadData url = new CardDownloadData(cardName, card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, false, card.isDoubleFaced(), card.isNightCard());
+                    CardDownloadData url = new CardDownloadData(cardName, card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, false, card.isDoubleFaced(), false);
 
                     // variations must have diff file names with additional postfix
                     if (url.getUsesVariousArt()) {
@@ -489,7 +489,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                                 card.getSetCode(),
                                 card.getCardNumber(),
                                 card.usesVariousArt(),
-                                0, false, card.isDoubleFaced(), card.isNightCard());
+                                0, false, card.isDoubleFaced(), false);
                         cardDownloadData.setFlipCard(true);
                         cardDownloadData.setFlippedSide(true);
                         cardDownloadData.setType2(isType2);

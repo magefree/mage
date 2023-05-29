@@ -3,7 +3,6 @@ package mage.client.dialog;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.icon.*;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.*;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardInfo;
@@ -134,11 +133,6 @@ public class TestCardRenderDialog extends MageDialog {
             permanent = new PermanentMeld(permCard, controllerId, game);
         } else {
             permanent = new PermanentCard(permCard, controllerId, game);
-        }
-
-        if (transform) {
-            // need direct transform call to keep other side info (original)
-            TransformAbility.transformPermanent(permanent, permCard.getSecondCardFace(), game, null);
         }
 
         if (damage > 0) permanent.damage(damage, controllerId, null, game);

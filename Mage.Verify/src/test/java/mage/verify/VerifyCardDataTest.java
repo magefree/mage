@@ -325,9 +325,6 @@ public class VerifyCardDataTest {
                 // ignore double faced
                 Card realCard = CardImpl.createCard(checkCard.getCardClass(), new CardSetInfo(checkCard.getName(), set.getCode(),
                         checkCard.getCardNumber(), checkCard.getRarity(), checkCard.getGraphicInfo()));
-                if (realCard.isNightCard()) {
-                    continue;
-                }
 
                 if (cardsList.containsKey(cardNumber)) {
                     ExpansionSet.SetCardInfo prevCard = cardsList.get(cardNumber);
@@ -1726,19 +1723,6 @@ public class VerifyCardDataTest {
         }
         if (card.getAbilities().containsClass(NightboundAbility.class) && ((DoubleFacedCardHalf) card).isFront()) {
             fail(card, "abilities", "card has nightbound on the front face");
-        }
-
-        // special check: transform ability in TDFC should only be on front and vice versa
-        if (card.getSecondCardFace() != null && !card.isNightCard() && !card.getAbilities().containsClass(TransformAbility.class)) {
-            fail(card, "abilities", "double-faced cards should have transform ability on the front");
-        }
-        if (card.getSecondCardFace() != null && card.isNightCard() && card.getAbilities().containsClass(TransformAbility.class)) {
-            fail(card, "abilities", "double-faced cards should not have transform ability on the back");
-        }
-
-        // special check: back side in TDFC must be only night card
-        if (card.getSecondCardFace() != null && !card.getSecondCardFace().isNightCard()) {
-            fail(card, "abilities", "the back face of a double-faced card should be nightCard = true");
         }
 
         if (card.getAbilities().containsClass(MutateAbility.class)) {

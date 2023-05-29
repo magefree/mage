@@ -67,8 +67,6 @@ public interface Card extends MageObject {
 
     SpellAbility getSecondFaceSpellAbility();
 
-    boolean isNightCard();
-
     default boolean meldsWith(Card card) {
         return false;
     }

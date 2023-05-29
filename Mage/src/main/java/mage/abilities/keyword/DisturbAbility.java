@@ -123,9 +123,6 @@ class DisturbEffect extends ContinuousEffectImpl {
         if (spell.getCard().getSecondCardFace() == null) {
             return false;
         }
-
-        // simulate another side as new card (another code part in spell constructor)
-        TransformAbility.transformCardSpellDynamic(spell, spell.getCard().getSecondCardFace(), game);
         return true;
     }
 }

@@ -29,8 +29,8 @@ public final class RepositoryUtil {
         TokenRepository.instance.getAll().size();
 
         // stats
-        int totalCards = CardRepository.instance.findCards(new CardCriteria().nightCard(false)).size()
-                + CardRepository.instance.findCards(new CardCriteria().nightCard(true)).size();
+        int totalCards = CardRepository.instance.findCards(new CardCriteria().meldCard(false)).size()
+                + CardRepository.instance.findCards(new CardCriteria().meldCard(true)).size();
         logger.info("Database stats:");
         logger.info(" - sets: " + ExpansionRepository.instance.getAll().size());
         logger.info(" - cards: " + totalCards);
