@@ -38,7 +38,7 @@ public class Limited extends DeckValidator {
         Map<String, Integer> counts = new HashMap<>();
         countCards(counts, deck.getCards());
         for (Map.Entry<String, Integer> entry : counts.entrySet()) {
-            if (entry.getValue() > 7 && entry.getKey().equals("Seven Dwarves")) {
+            if (entry.getValue() > getMaxCopies(entry.getKey(), Integer.MAX_VALUE)) {
                 addError(DeckValidatorErrorType.OTHER, entry.getKey(), "Too many: " + entry.getValue(), true);
                 valid = false;
             }
