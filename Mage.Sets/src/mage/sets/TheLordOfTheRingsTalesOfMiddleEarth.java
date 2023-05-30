@@ -37,6 +37,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Nazgul", 100, Rarity.UNCOMMON, mage.cards.n.Nazgul.class));
         cards.add(new SetCardInfo("Plains", 272, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Prince Imrahil the Fair", 219, Rarity.UNCOMMON, mage.cards.p.PrinceImrahilTheFair.class));
+        cards.add(new SetCardInfo("Quickbeam, Upstart Ent", 183, Rarity.COMMON, mage.cards.q.QuickbeamUpstartEnt.class));
         cards.add(new SetCardInfo("Reprieve", 26, Rarity.UNCOMMON, mage.cards.r.Reprieve.class));
         cards.add(new SetCardInfo("Samwise the Stouthearted", 28, Rarity.UNCOMMON, mage.cards.s.SamwiseTheStouthearted.class));
         cards.add(new SetCardInfo("Saruman's Trickery", 68, Rarity.UNCOMMON, mage.cards.s.SarumansTrickery.class));
