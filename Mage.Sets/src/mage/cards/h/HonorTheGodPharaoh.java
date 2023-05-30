@@ -7,6 +7,7 @@ import mage.abilities.effects.keyword.AmassEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  * @author TheElk801
@@ -21,7 +22,7 @@ public final class HonorTheGodPharaoh extends CardImpl {
 
         // Draw two cards. Amass 1.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2).setText("draw two cards"));
-        this.getSpellAbility().addEffect(new AmassEffect(1));
+        this.getSpellAbility().addEffect(new AmassEffect(1, SubType.ZOMBIE));
     }
 
     private HonorTheGodPharaoh(final HonorTheGodPharaoh card) {

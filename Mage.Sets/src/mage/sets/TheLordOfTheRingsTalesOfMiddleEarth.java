@@ -21,6 +21,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Aragorn and Arwen, Wed", 287, Rarity.MYTHIC, mage.cards.a.AragornAndArwenWed.class));
         cards.add(new SetCardInfo("Bilbo, Retired Burglar", 196, Rarity.UNCOMMON, mage.cards.b.BilboRetiredBurglar.class));
         cards.add(new SetCardInfo("Call of the Ring", 79, Rarity.RARE, mage.cards.c.CallOfTheRing.class));
+        cards.add(new SetCardInfo("Dunland Crebain", 82, Rarity.COMMON, mage.cards.d.DunlandCrebain.class));
         cards.add(new SetCardInfo("Forest", 280, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Frodo Baggins", 205, Rarity.UNCOMMON, mage.cards.f.FrodoBaggins.class));
         cards.add(new SetCardInfo("Frodo, Sauron's Bane", 18, Rarity.RARE, mage.cards.f.FrodoSauronsBane.class));
