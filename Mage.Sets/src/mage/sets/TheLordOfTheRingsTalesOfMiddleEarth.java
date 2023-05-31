@@ -44,6 +44,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Pippin's Bravery", 182, Rarity.COMMON, mage.cards.p.PippinsBravery.class));
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prince Imrahil the Fair", 219, Rarity.UNCOMMON, mage.cards.p.PrinceImrahilTheFair.class));
+        cards.add(new SetCardInfo("Protector of Gondor", 25, Rarity.COMMON, mage.cards.p.ProtectorOfGondor.class));
         cards.add(new SetCardInfo("Quickbeam, Upstart Ent", 183, Rarity.UNCOMMON, mage.cards.q.QuickbeamUpstartEnt.class));
         cards.add(new SetCardInfo("Reprieve", 26, Rarity.UNCOMMON, mage.cards.r.Reprieve.class));
         cards.add(new SetCardInfo("Rising of the Day", 145, Rarity.UNCOMMON, mage.cards.r.RisingOfTheDay.class));
