@@ -26,8 +26,8 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Call of the Ring", 79, Rarity.RARE, mage.cards.c.CallOfTheRing.class));
         cards.add(new SetCardInfo("Cast into the Fire", 118, Rarity.COMMON, mage.cards.c.CastIntoTheFire.class));
         cards.add(new SetCardInfo("Council's Deliberation", 48, Rarity.UNCOMMON, mage.cards.c.CouncilsDeliberation.class));
-        cards.add(new SetCardInfo("Dunedain Blade", 6, Rarity.COMMON, mage.cards.d.DunedainBlade.class));
         cards.add(new SetCardInfo("Dunland Crebain", 82, Rarity.COMMON, mage.cards.d.DunlandCrebain.class));
+        cards.add(new SetCardInfo("Dunedain Blade", 6, Rarity.COMMON, mage.cards.d.DunedainBlade.class));
         cards.add(new SetCardInfo("Foray of Orcs", 128, Rarity.UNCOMMON, mage.cards.f.ForayOfOrcs.class));
         cards.add(new SetCardInfo("Forest", 270, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frodo Baggins", 205, Rarity.UNCOMMON, mage.cards.f.FrodoBaggins.class));
@@ -48,6 +48,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Mauhur, Uruk-hai Captain", 214, Rarity.UNCOMMON, mage.cards.m.MauhurUrukHaiCaptain.class));
         cards.add(new SetCardInfo("Mount Doom", 258, Rarity.MYTHIC, mage.cards.m.MountDoom.class));
         cards.add(new SetCardInfo("Mountain", 268, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nazgul", 100, Rarity.UNCOMMON, mage.cards.n.Nazgul.class));
         cards.add(new SetCardInfo("Pippin's Bravery", 182, Rarity.COMMON, mage.cards.p.PippinsBravery.class));
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prince Imrahil the Fair", 219, Rarity.UNCOMMON, mage.cards.p.PrinceImrahilTheFair.class));
@@ -60,6 +61,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Sauron, the Lidless Eye", 288, Rarity.MYTHIC, mage.cards.s.SauronTheLidlessEye.class));
         cards.add(new SetCardInfo("Sauron, the Necromancer", 106, Rarity.RARE, mage.cards.s.SauronTheNecromancer.class));
         cards.add(new SetCardInfo("Shire Terrace", 261, Rarity.COMMON, mage.cards.s.ShireTerrace.class));
+        cards.add(new SetCardInfo("Stew the Coneys", 189, Rarity.UNCOMMON, mage.cards.s.StewTheConeys.class));
         cards.add(new SetCardInfo("Swamp", 266, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swarming of Moria", 150, Rarity.COMMON, mage.cards.s.SwarmingOfMoria.class));
         cards.add(new SetCardInfo("The One Ring", 246, Rarity.MYTHIC, mage.cards.t.TheOneRing.class));
