@@ -37,7 +37,7 @@ public final class DunedainBlade extends CardImpl {
         ));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3, false));
+        this.addAbility(new EquipAbility(3));
     }
 
     private DunedainBlade(final DunedainBlade card) {
