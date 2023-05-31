@@ -13,7 +13,7 @@ import mage.target.Target;
 /**
  * @author LevelX2
  */
-public class BecomesAuraSourceEffect extends ContinuousEffectImpl implements SourceEffect {
+public class BecomesAuraSourceEffect extends ContinuousEffectImpl {
 
     private final Ability newAbility;
     private final Target target;

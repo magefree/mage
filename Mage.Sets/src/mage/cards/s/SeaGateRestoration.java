@@ -11,7 +11,7 @@ import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -21,7 +21,7 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public final class SeaGateRestoration extends ModalDoubleFacesCard {
+public final class SeaGateRestoration extends ModalDoubleFacedCard {
 
     private static final DynamicValue xValue = new AdditiveDynamicValue(CardsInControllerHandCount.instance, StaticValue.get(1));
 

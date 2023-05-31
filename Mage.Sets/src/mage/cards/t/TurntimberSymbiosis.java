@@ -24,7 +24,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class TurntimberSymbiosis extends ModalDoubleFacesCard {
+public final class TurntimberSymbiosis extends ModalDoubleFacedCard {
 
     public TurntimberSymbiosis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

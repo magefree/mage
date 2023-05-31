@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 /**
  * @author TheElk801
  */
-public final class KianneDeanOfSubstance extends ModalDoubleFacesCard {
+public final class KianneDeanOfSubstance extends ModalDoubleFacedCard {
 
     public KianneDeanOfSubstance(UUID ownerId, CardSetInfo setInfo) {
         super(

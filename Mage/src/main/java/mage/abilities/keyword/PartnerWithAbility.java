@@ -1,11 +1,10 @@
-
 package mage.abilities.keyword;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -17,7 +16,6 @@ import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
 
 /**
- *
  * @author TheElk801
  */
 public class PartnerWithAbility extends EntersBattlefieldTriggeredAbility {
@@ -73,6 +71,10 @@ public class PartnerWithAbility extends EntersBattlefieldTriggeredAbility {
         return partnerName;
     }
 
+    public boolean checkPartner(Card card) {
+        return partnerName.equals(card.getName());
+    }
+
     public static String shortenName(String st) {
         StringBuilder sb = new StringBuilder();
         for (char s : st.toCharArray()) {
@@ -108,29 +110,22 @@ class PartnersWithSearchEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Player player = game.getPlayer(source.getFirstTarget());
-            if (player != null) {
-                FilterCard filter = new FilterCard("card named " + partnerName);
-                filter.add(new NamePredicate(partnerName));
-                TargetCardInLibrary target = new TargetCardInLibrary(filter);
-                if (player.chooseUse(Outcome.Benefit, "Search your library for a card named " + partnerName + " and put it into your hand?", source, game)) {
-                    player.searchLibrary(target, source, game);
-                    for (UUID cardId : target.getTargets()) {
-                        Card card = player.getLibrary().getCard(cardId, game);
-                        if (card != null) {
-                            player.revealCards(source, new CardsImpl(card), game);
-                            player.moveCards(card, Zone.HAND, source, game);
-                        }
-                    }
-                    player.shuffleLibrary(source, game);
-                }
-            }
-            // prevent undo
-            controller.resetStoredBookmark(game);
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (player == null) {
+            return false;
+        }
+        if (!player.chooseUse(Outcome.Benefit, "Search your library for a card named " + partnerName + " and put it into your hand?", source, game)) {
             return true;
         }
-        return false;
+        FilterCard filter = new FilterCard("card named " + partnerName);
+        filter.add(new NamePredicate(partnerName));
+        TargetCardInLibrary target = new TargetCardInLibrary(filter);
+        player.searchLibrary(target, source, game);
+        Cards cards = new CardsImpl(target.getTargets());
+        cards.retainZone(Zone.LIBRARY, game);
+        player.revealCards(source, cards, game);
+        player.moveCards(cards, Zone.HAND, source, game);
+        player.shuffleLibrary(source, game);
+        return true;
     }
 }

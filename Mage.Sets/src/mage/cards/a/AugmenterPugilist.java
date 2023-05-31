@@ -10,7 +10,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.hint.common.LandsYouControlHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -24,7 +24,7 @@ import java.util.UUID;
  *
  * @author htrajan
  */
-public final class AugmenterPugilist extends ModalDoubleFacesCard {
+public final class AugmenterPugilist extends ModalDoubleFacedCard {
 
     public AugmenterPugilist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

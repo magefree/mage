@@ -1257,10 +1257,10 @@ public class HumanPlayer extends PlayerImpl {
         MageObject object = game.getObject(response.getUUID());
 
         // mdf cards
-        if (object instanceof ModalDoubleFacesCardHalf) {
+        if (object instanceof ModalDoubleFacedCardHalf) {
             if (!Zone.BATTLEFIELD.equals(game.getState().getZone(object.getId()))
                     && !Zone.STACK.equals(game.getState().getZone(object.getId()))) {
-                return ((ModalDoubleFacesCardHalf) object).getMainCard().getId();
+                return ((ModalDoubleFacedCardHalf) object).getMainCard().getId();
             }
         }
 
@@ -2217,7 +2217,7 @@ public class HumanPlayer extends PlayerImpl {
             if (mainCard != null && !Zone.BATTLEFIELD.equals(game.getState().getZone(mainCard.getId()))) {
                 if (mainCard instanceof SplitCard
                         || mainCard instanceof AdventureCard
-                        || mainCard instanceof ModalDoubleFacesCard) {
+                        || mainCard instanceof ModalDoubleFacedCard) {
                     return false;
                 }
             }

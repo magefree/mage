@@ -31,7 +31,7 @@ import java.util.UUID;
 /**
  * @author jeffwadsworth
  */
-public final class AlrundGodOfTheCosmos extends ModalDoubleFacesCard {
+public final class AlrundGodOfTheCosmos extends ModalDoubleFacedCard {
 
     public AlrundGodOfTheCosmos(UUID ownerId, CardSetInfo setInfo) {
         super(

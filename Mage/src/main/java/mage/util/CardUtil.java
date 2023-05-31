@@ -29,7 +29,6 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.CardState;
 import mage.game.Game;
 import mage.game.GameState;
-import mage.game.command.CommandObject;
 import mage.game.command.Commander;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -1070,8 +1069,8 @@ public final class CardUtil {
             permCard = card;
         } else if (card instanceof AdventureCard) {
             permCard = card;
-        } else if (card instanceof ModalDoubleFacesCard) {
-            permCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
+        } else if (card instanceof ModalDoubleFacedCard) {
+            permCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
         } else {
             permCard = card;
         }
@@ -1094,8 +1093,8 @@ public final class CardUtil {
         // it's ok to return one name only cause NamePredicate can find same card by first name
         if (card instanceof SplitCard) {
             return ((SplitCard) card).getLeftHalfCard().getName();
-        } else if (card instanceof ModalDoubleFacesCard) {
-            return ((ModalDoubleFacesCard) card).getLeftHalfCard().getName();
+        } else if (card instanceof ModalDoubleFacedCard) {
+            return ((ModalDoubleFacedCard) card).getLeftHalfCard().getName();
         } else {
             return card.getName();
         }
@@ -1384,9 +1383,9 @@ public final class CardUtil {
         }
 
         // handle MDFC
-        if (card instanceof ModalDoubleFacesCard) {
-            ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
-            ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
+        if (card instanceof ModalDoubleFacedCard) {
+            ModalDoubleFacedCardHalf leftHalfCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
+            ModalDoubleFacedCardHalf rightHalfCard = ((ModalDoubleFacedCard) card).getRightHalfCard();
             if (manaCost != null) {
                 // some MDFC cards are lands.  IE: sea gate restoration
                 if (!leftHalfCard.isLand(game)) {
@@ -1442,9 +1441,9 @@ public final class CardUtil {
             game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), null);
             game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), null);
         }
-        if (card instanceof ModalDoubleFacesCard) {
-            ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
-            ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
+        if (card instanceof ModalDoubleFacedCard) {
+            ModalDoubleFacedCardHalf leftHalfCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
+            ModalDoubleFacedCardHalf rightHalfCard = ((ModalDoubleFacedCard) card).getRightHalfCard();
             game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), null);
             game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), null);
         }
@@ -1582,8 +1581,8 @@ public final class CardUtil {
             res.add(mainCard);
             res.add(mainCard.getLeftHalfCard());
             res.add(mainCard.getRightHalfCard());
-        } else if (object instanceof ModalDoubleFacesCard || object instanceof ModalDoubleFacesCardHalf) {
-            ModalDoubleFacesCard mainCard = (ModalDoubleFacesCard) ((Card) object).getMainCard();
+        } else if (object instanceof ModalDoubleFacedCard || object instanceof ModalDoubleFacedCardHalf) {
+            ModalDoubleFacedCard mainCard = (ModalDoubleFacedCard) ((Card) object).getMainCard();
             res.add(mainCard);
             res.add(mainCard.getLeftHalfCard());
             res.add(mainCard.getRightHalfCard());

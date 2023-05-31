@@ -34,7 +34,7 @@ public final class AngrathCaptainOfChaos extends CardImpl {
         )));
 
         // -2: Amass 2. (Put two +1/+1 counters on an Army you control. If you don’t control one, create a 0/0 black Zombie Army creature token first.)
-        this.addAbility(new LoyaltyAbility(new AmassEffect(2), -2));
+        this.addAbility(new LoyaltyAbility(new AmassEffect(2, SubType.ZOMBIE), -2));
     }
 
     private AngrathCaptainOfChaos(final AngrathCaptainOfChaos card) {

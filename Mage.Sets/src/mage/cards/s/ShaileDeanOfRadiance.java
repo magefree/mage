@@ -11,7 +11,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
@@ -31,7 +31,7 @@ import java.util.UUID;
 /**
  * @author htrajan
  */
-public final class ShaileDeanOfRadiance extends ModalDoubleFacesCard {
+public final class ShaileDeanOfRadiance extends ModalDoubleFacedCard {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
     private static final FilterPermanent shaileFilter = new FilterControlledCreaturePermanent("creature that entered the battlefield under your control this turn");

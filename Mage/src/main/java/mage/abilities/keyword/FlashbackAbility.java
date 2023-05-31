@@ -7,7 +7,7 @@ import mage.abilities.costs.Costs;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.cards.SplitCard;
 import mage.constants.*;
 import mage.game.Game;
@@ -75,11 +75,11 @@ public class FlashbackAbility extends SpellAbility {
                     } else if (((SplitCard) card).getRightHalfCard().getName().equals(abilityName)) {
                         return ((SplitCard) card).getRightHalfCard().getSpellAbility().canActivate(playerId, game);
                     }
-                } else if (card instanceof ModalDoubleFacesCard) {
-                    if (((ModalDoubleFacesCard) card).getLeftHalfCard().getName().equals(abilityName)) {
-                        return ((ModalDoubleFacesCard) card).getLeftHalfCard().getSpellAbility().canActivate(playerId, game);
-                    } else if (((ModalDoubleFacesCard) card).getRightHalfCard().getName().equals(abilityName)) {
-                        return ((ModalDoubleFacesCard) card).getRightHalfCard().getSpellAbility().canActivate(playerId, game);
+                } else if (card instanceof ModalDoubleFacedCard) {
+                    if (((ModalDoubleFacedCard) card).getLeftHalfCard().getName().equals(abilityName)) {
+                        return ((ModalDoubleFacedCard) card).getLeftHalfCard().getSpellAbility().canActivate(playerId, game);
+                    } else if (((ModalDoubleFacedCard) card).getRightHalfCard().getName().equals(abilityName)) {
+                        return ((ModalDoubleFacedCard) card).getRightHalfCard().getSpellAbility().canActivate(playerId, game);
                     }
                 }
                 return card.getSpellAbility().canActivate(playerId, game);
@@ -100,11 +100,11 @@ public class FlashbackAbility extends SpellAbility {
                     } else if (((SplitCard) card).getRightHalfCard().getName().equals(abilityName)) {
                         spellAbilityCopy = ((SplitCard) card).getRightHalfCard().getSpellAbility().copy();
                     }
-                } else if (card instanceof ModalDoubleFacesCard) {
-                    if (((ModalDoubleFacesCard) card).getLeftHalfCard().getName().equals(abilityName)) {
-                        spellAbilityCopy = ((ModalDoubleFacesCard) card).getLeftHalfCard().getSpellAbility().copy();
-                    } else if (((ModalDoubleFacesCard) card).getRightHalfCard().getName().equals(abilityName)) {
-                        spellAbilityCopy = ((ModalDoubleFacesCard) card).getRightHalfCard().getSpellAbility().copy();
+                } else if (card instanceof ModalDoubleFacedCard) {
+                    if (((ModalDoubleFacedCard) card).getLeftHalfCard().getName().equals(abilityName)) {
+                        spellAbilityCopy = ((ModalDoubleFacedCard) card).getLeftHalfCard().getSpellAbility().copy();
+                    } else if (((ModalDoubleFacedCard) card).getRightHalfCard().getName().equals(abilityName)) {
+                        spellAbilityCopy = ((ModalDoubleFacedCard) card).getRightHalfCard().getSpellAbility().copy();
                     }
                 } else {
                     spellAbilityCopy = card.getSpellAbility().copy();

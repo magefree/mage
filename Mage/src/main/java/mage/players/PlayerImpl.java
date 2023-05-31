@@ -1301,8 +1301,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                 game.fireEvent(landEventAfter);
 
                 String playText = getLogName() + " plays " + card.getLogName();
-                if (card instanceof ModalDoubleFacesCardHalf) {
-                    ModalDoubleFacesCard mdfCard = (ModalDoubleFacesCard) card.getMainCard();
+                if (card instanceof ModalDoubleFacedCardHalf) {
+                    ModalDoubleFacedCard mdfCard = (ModalDoubleFacedCard) card.getMainCard();
                     playText = getLogName() + " plays " + GameLog.replaceNameByColoredName(card, card.getName(), mdfCard)
                             + " as MDF side of " + GameLog.getColoredObjectIdName(mdfCard);
                 }
@@ -3797,8 +3797,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             getPlayableFromObjectSingle(game, fromZone, mainCard.getLeftHalfCard(), mainCard.getLeftHalfCard().getAbilities(game), availableMana, output);
             getPlayableFromObjectSingle(game, fromZone, mainCard.getRightHalfCard(), mainCard.getRightHalfCard().getAbilities(game), availableMana, output);
             getPlayableFromObjectSingle(game, fromZone, mainCard, mainCard.getSharedAbilities(game), availableMana, output);
-        } else if (object instanceof ModalDoubleFacesCard) {
-            ModalDoubleFacesCard mainCard = (ModalDoubleFacesCard) object;
+        } else if (object instanceof ModalDoubleFacedCard) {
+            ModalDoubleFacedCard mainCard = (ModalDoubleFacedCard) object;
             getPlayableFromObjectSingle(game, fromZone, mainCard.getLeftHalfCard(), mainCard.getLeftHalfCard().getAbilities(game), availableMana, output);
             getPlayableFromObjectSingle(game, fromZone, mainCard.getRightHalfCard(), mainCard.getRightHalfCard().getAbilities(game), availableMana, output);
             getPlayableFromObjectSingle(game, fromZone, mainCard, mainCard.getSharedAbilities(game), availableMana, output);

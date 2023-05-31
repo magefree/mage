@@ -23,7 +23,7 @@ import java.util.List;
  *
  * @author LevelX2
  */
-public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implements SourceEffect {
+public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
 
     public enum FaceDownType {
         MANIFESTED,

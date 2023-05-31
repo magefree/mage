@@ -2,12 +2,10 @@ package mage.cards.b;
 
 import java.util.UUID;
 
-import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.GreenManaAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -15,7 +13,7 @@ import mage.constants.SubType;
  *
  * @author TheElk801
  */
-public final class BarkchannelPathway extends ModalDoubleFacesCard {
+public final class BarkchannelPathway extends ModalDoubleFacedCard {
 
     public BarkchannelPathway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

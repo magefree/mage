@@ -129,9 +129,9 @@ class PanopticMirrorCastEffect extends OneShotEffect {
                     if (card instanceof SplitCard) {
                         cards.add(((SplitCard) card).getLeftHalfCard());
                         cards.add(((SplitCard) card).getRightHalfCard());
-                    } else if (card instanceof ModalDoubleFacesCard) {
-                        cards.add(((ModalDoubleFacesCard) card).getLeftHalfCard());
-                        cards.add(((ModalDoubleFacesCard) card).getRightHalfCard());
+                    } else if (card instanceof ModalDoubleFacedCard) {
+                        cards.add(((ModalDoubleFacedCard) card).getLeftHalfCard());
+                        cards.add(((ModalDoubleFacedCard) card).getRightHalfCard());
                     } else {
                         cards.add(card);
                     }

@@ -96,9 +96,9 @@ class GodEternalKefnetDrawCardReplacementEffect extends ReplacementEffectImpl {
             if (blueprint instanceof SplitCard) {
                 ((SplitCard) blueprint).getLeftHalfCard().addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
                 ((SplitCard) blueprint).getRightHalfCard().addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
-            } else if (blueprint instanceof ModalDoubleFacesCard) {
-                ((ModalDoubleFacesCard) blueprint).getLeftHalfCard().addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
-                ((ModalDoubleFacesCard) blueprint).getRightHalfCard().addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
+            } else if (blueprint instanceof ModalDoubleFacedCard) {
+                ((ModalDoubleFacedCard) blueprint).getLeftHalfCard().addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
+                ((ModalDoubleFacedCard) blueprint).getRightHalfCard().addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
             } else {
                 blueprint.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
             }

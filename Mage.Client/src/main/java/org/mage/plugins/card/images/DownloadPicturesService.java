@@ -515,12 +515,12 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         url.setType2(isType2);
                         allCardsUrls.add(url);
                     }
-                    if (card.isModalDoubleFacesCard()) {
-                        if (card.getModalDoubleFacesSecondSideName() == null || card.getModalDoubleFacesSecondSideName().trim().isEmpty()) {
+                    if (card.isModalDoubleFacedCard()) {
+                        if (card.getModalDoubleFacedSecondSideName() == null || card.getModalDoubleFacedSecondSideName().trim().isEmpty()) {
                             throw new IllegalStateException("MDF card can't have empty name.");
                         }
                         CardDownloadData cardDownloadData = new CardDownloadData(
-                                card.getModalDoubleFacesSecondSideName(),
+                                card.getModalDoubleFacedSecondSideName(),
                                 card.getSetCode(),
                                 card.getCardNumber(),
                                 card.usesVariousArt(),

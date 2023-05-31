@@ -14,7 +14,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
@@ -30,7 +30,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class ReidaneGodOfTheWorthy extends ModalDoubleFacesCard {
+public final class ReidaneGodOfTheWorthy extends ModalDoubleFacedCard {
 
     private static final FilterPermanent filter = new FilterLandPermanent("snow lands your opponents control");
 

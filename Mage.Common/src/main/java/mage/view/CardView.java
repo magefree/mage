@@ -109,7 +109,7 @@ public class CardView extends SimpleCardView {
     protected List<String> rightSplitRules;
     protected String rightSplitTypeLine;
 
-    protected boolean isModalDoubleFacesCard;
+    protected boolean isModalDoubleFacedCard;
 
     protected ArtRect artRect = ArtRect.NORMAL;
 
@@ -217,7 +217,7 @@ public class CardView extends SimpleCardView {
         this.rightSplitRules = cardView.rightSplitRules == null ? null : new ArrayList<>(cardView.rightSplitRules);
         this.rightSplitTypeLine = cardView.rightSplitTypeLine;
 
-        this.isModalDoubleFacesCard = cardView.isModalDoubleFacesCard;
+        this.isModalDoubleFacedCard = cardView.isModalDoubleFacedCard;
 
         this.artRect = cardView.artRect;
         this.targets = cardView.targets == null ? null : new ArrayList<>(cardView.targets);
@@ -373,9 +373,9 @@ public class CardView extends SimpleCardView {
             fullCardName = card.getName(); // split card contains full name as normal
             this.manaCostLeftStr = String.join("", splitCard.getLeftHalfCard().getManaCostSymbols());
             this.manaCostRightStr = String.join("", splitCard.getRightHalfCard().getManaCostSymbols());
-        } else if (card instanceof ModalDoubleFacesCard) {
-            this.isModalDoubleFacesCard = true;
-            ModalDoubleFacesCard mainCard = ((ModalDoubleFacesCard) card);
+        } else if (card instanceof ModalDoubleFacedCard) {
+            this.isModalDoubleFacedCard = true;
+            ModalDoubleFacedCard mainCard = ((ModalDoubleFacedCard) card);
             fullCardName = mainCard.getLeftHalfCard().getName() + MockCard.MODAL_DOUBLE_FACES_NAME_SEPARATOR + mainCard.getRightHalfCard().getName();
             this.manaCostLeftStr = String.join("", mainCard.getLeftHalfCard().getManaCostSymbols());
             this.manaCostRightStr = String.join("", mainCard.getRightHalfCard().getManaCostSymbols());
@@ -508,9 +508,9 @@ public class CardView extends SimpleCardView {
             this.alternateName = card.getFlipCardName();
         }
 
-        if (card instanceof ModalDoubleFacesCard) {
+        if (card instanceof ModalDoubleFacedCard) {
             this.transformable = true; // enable GUI day/night button
-            ModalDoubleFacesCard mdfCard = (ModalDoubleFacesCard) card;
+            ModalDoubleFacedCard mdfCard = (ModalDoubleFacedCard) card;
             this.secondCardFace = new CardView(mdfCard.getRightHalfCard(), game);
             this.alternateName = mdfCard.getRightHalfCard().getName();
         }

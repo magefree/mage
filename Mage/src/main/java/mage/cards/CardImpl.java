@@ -477,10 +477,10 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 }
 
                 // handle half of Modal Double Faces Cards on stack
-                if (stackObject == null && (this instanceof ModalDoubleFacesCard)) {
-                    stackObject = game.getStack().getSpell(((ModalDoubleFacesCard) this).getLeftHalfCard().getId(), false);
+                if (stackObject == null && (this instanceof ModalDoubleFacedCard)) {
+                    stackObject = game.getStack().getSpell(((ModalDoubleFacedCard) this).getLeftHalfCard().getId(), false);
                     if (stackObject == null) {
-                        stackObject = game.getStack().getSpell(((ModalDoubleFacesCard) this).getRightHalfCard().getId(), false);
+                        stackObject = game.getStack().getSpell(((ModalDoubleFacedCard) this).getRightHalfCard().getId(), false);
                     }
                 }
 

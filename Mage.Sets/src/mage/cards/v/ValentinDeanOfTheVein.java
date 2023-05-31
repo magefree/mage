@@ -14,7 +14,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
@@ -29,7 +29,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class ValentinDeanOfTheVein extends ModalDoubleFacesCard {
+public final class ValentinDeanOfTheVein extends ModalDoubleFacedCard {
 
     public ValentinDeanOfTheVein(UUID ownerId, CardSetInfo setInfo) {
         super(

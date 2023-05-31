@@ -1357,19 +1357,19 @@ public class GameState implements Serializable, Copyable<GameState> {
             copiedParts.add(rightCopied);
             // sync parts
             ((SplitCard) copiedCard).setParts(leftCopied, rightCopied);
-        } else if (copiedCard instanceof ModalDoubleFacesCard) {
+        } else if (copiedCard instanceof ModalDoubleFacedCard) {
             // left
-            ModalDoubleFacesCardHalf leftOriginal = ((ModalDoubleFacesCard) copiedCard).getLeftHalfCard();
-            ModalDoubleFacesCardHalf leftCopied = leftOriginal.copy();
+            ModalDoubleFacedCardHalf leftOriginal = ((ModalDoubleFacedCard) copiedCard).getLeftHalfCard();
+            ModalDoubleFacedCardHalf leftCopied = leftOriginal.copy();
             prepareCardForCopy(leftOriginal, leftCopied, newController);
             copiedParts.add(leftCopied);
             // right
-            ModalDoubleFacesCardHalf rightOriginal = ((ModalDoubleFacesCard) copiedCard).getRightHalfCard();
-            ModalDoubleFacesCardHalf rightCopied = rightOriginal.copy();
+            ModalDoubleFacedCardHalf rightOriginal = ((ModalDoubleFacedCard) copiedCard).getRightHalfCard();
+            ModalDoubleFacedCardHalf rightCopied = rightOriginal.copy();
             prepareCardForCopy(rightOriginal, rightCopied, newController);
             copiedParts.add(rightCopied);
             // sync parts
-            ((ModalDoubleFacesCard) copiedCard).setParts(leftCopied, rightCopied);
+            ((ModalDoubleFacedCard) copiedCard).setParts(leftCopied, rightCopied);
         } else if (copiedCard instanceof AdventureCard) {
             // right
             AdventureCardSpell rightOriginal = ((AdventureCard) copiedCard).getSpellCard();
