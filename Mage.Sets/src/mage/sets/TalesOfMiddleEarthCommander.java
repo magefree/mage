@@ -23,8 +23,12 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Cloudstone Curio", 349, Rarity.MYTHIC, mage.cards.c.CloudstoneCurio.class));
         cards.add(new SetCardInfo("Deserted Temple", 363, Rarity.RARE, mage.cards.d.DesertedTemple.class));
         cards.add(new SetCardInfo("Ensnaring Bridge", 350, Rarity.MYTHIC, mage.cards.e.EnsnaringBridge.class));
+        cards.add(new SetCardInfo("Evolving Wilds", 306, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
+        cards.add(new SetCardInfo("Field of Ruin", 308, Rarity.COMMON, mage.cards.f.FieldOfRuin.class));
+        cards.add(new SetCardInfo("Graypelt Refuge", 316, Rarity.UNCOMMON, mage.cards.g.GraypeltRefuge.class));
         cards.add(new SetCardInfo("Homeward Path", 365, Rarity.MYTHIC, mage.cards.h.HomewardPath.class));
         cards.add(new SetCardInfo("Minamo, School at Water's Edge", 369, Rarity.MYTHIC, mage.cards.m.MinamoSchoolAtWatersEdge.class));
+        cards.add(new SetCardInfo("Mind Stone", 282, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Radagast, Wizard of Wilds", 66, Rarity.RARE, mage.cards.r.RadagastWizardOfWilds.class));
         cards.add(new SetCardInfo("Rings of Brighthearth", 352, Rarity.MYTHIC, mage.cards.r.RingsOfBrighthearth.class));
         cards.add(new SetCardInfo("Sam, Loyal Attendant", 7, Rarity.MYTHIC, mage.cards.s.SamLoyalAttendant.class));
