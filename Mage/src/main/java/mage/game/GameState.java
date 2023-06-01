@@ -41,6 +41,7 @@ import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static java.util.Collections.emptyList;
@@ -1096,6 +1097,10 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public Object getValue(String valueId) {
         return values.get(valueId);
+    }
+
+    public Object computeValueIfAbsent(String valueId, Function<String, ?> mappingFunction) {
+        return values.computeIfAbsent(valueId, mappingFunction);
     }
 
     /**
