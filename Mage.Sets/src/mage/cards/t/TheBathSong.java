@@ -38,7 +38,7 @@ public final class TheBathSong extends CardImpl {
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_III, SagaChapter.CHAPTER_III, new Effects(
                         new ShuffleIntoLibraryTargetEffect(), new BasicManaEffect(Mana.BlueMana(2))
-                ), new TargetCardInYourGraveyard()
+                ), new TargetCardInYourGraveyard(0, Integer.MAX_VALUE)
         );
 
         this.addAbility(sagaAbility);
