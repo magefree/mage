@@ -28,7 +28,7 @@ public final class SarumanTheWhite extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"),false));
 
         // Whenever you cast your second spell each turn, amass Orcs 2.
         this.addAbility(new CastSecondSpellTriggeredAbility(new AmassEffect(2, SubType.ORC)));
