@@ -201,8 +201,10 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                         newRule.insert(4, "may ");
                         superRule = newRule.toString();
                     }
-                } else if (this.getTargets().isEmpty()
+                } else if (!ruleLow.startsWith("{this}")
+                        && (this.getTargets().isEmpty()
                         || ruleLow.startsWith("attach")
+                        || ruleLow.startsWith("change")
                         || ruleLow.startsWith("counter")
                         || ruleLow.startsWith("destroy")
                         || ruleLow.startsWith("sacrifice")
@@ -210,15 +212,29 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                         || ruleLow.startsWith("exile")
                         || ruleLow.startsWith("gain")
                         || ruleLow.startsWith("goad")
+                        || ruleLow.startsWith("have")
+                        || ruleLow.startsWith("move")
                         || ruleLow.startsWith("prevent")
                         || ruleLow.startsWith("put")
                         || ruleLow.startsWith("remove")
                         || ruleLow.startsWith("return")
+                        || ruleLow.startsWith("shuffle")
+                        || ruleLow.startsWith("turn")
                         || ruleLow.startsWith("tap")
-                        || ruleLow.startsWith("untap")) {
+                        || ruleLow.startsWith("untap"))) {
                     sb.append("you may ");
                 } else if (!ruleLow.startsWith("its controller may")) {
                     sb.append("you may have ");
+                    superRule = superRule
+                            .replaceAll(" becomes ", " become ")
+                            .replaceAll(" blocks ", " block ")
+                            .replaceAll(" deals ", " deal ")
+                            .replaceAll(" discards ", " discard ")
+                            .replaceAll(" gains ", " gain ")
+                            .replaceAll(" gets ", " get ")
+                            .replaceAll(" loses ", " lose ")
+                            .replaceAll(" mills ", " mill ")
+                            .replaceAll(" sacrifices ", " sacrifice ");
                 }
 
             }
