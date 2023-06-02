@@ -48,6 +48,8 @@ public final class WarOfTheLastAlliance extends CardImpl {
                         StaticFilters.FILTER_PERMANENT_CREATURES
                 ), new TheRingTemptsYouEffect()
         );
+
+        this.addAbility(sagaAbility);
     }
 
     private WarOfTheLastAlliance(final WarOfTheLastAlliance card) {
