@@ -48,7 +48,7 @@ public final class RakdosRiteknife extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new SacrificeEffect(StaticFilters.FILTER_PERMANENT, xValue, "Target player")
                         .setText("target player sacrifices a permanent for each blood counter on {this}"),
-                new ManaCostsImpl<>("{R}{B}")
+                new ManaCostsImpl<>("{B}{R}")
         );
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPlayer());

@@ -17,7 +17,7 @@ import java.util.UUID;
  */
 public final class DjinnIlluminatus extends CardImpl {
 
-    private static final FilterInstantOrSorcerySpell filter = new FilterInstantOrSorcerySpell();
+    private static final FilterInstantOrSorcerySpell filter = new FilterInstantOrSorcerySpell("instant and sorcery spell");
 
     public DjinnIlluminatus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U/R}{U/R}");

@@ -25,7 +25,7 @@ public final class BondOfAgony extends CardImpl {
         this.getSpellAbility().addCost(new PayLifeCost(xValue, "X life"));
 
         // Each other player loses X life.
-        this.getSpellAbility().addEffect(new LoseLifeOpponentsEffect(xValue));
+        this.getSpellAbility().addEffect(new LoseLifeOpponentsEffect(xValue).setText("each other player loses X life"));
     }
 
     private BondOfAgony(final BondOfAgony card) {

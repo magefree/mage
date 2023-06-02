@@ -97,7 +97,7 @@ class BreathOfFuryEffect extends OneShotEffect {
 
     public BreathOfFuryEffect() {
         super(Outcome.Benefit);
-        staticText = "sacrifice enchanted creature and attach {this} to a creature you control. If you do, untap all creatures you control and after this phase, there is an additional combat phase";
+        staticText = "sacrifice it and attach {this} to a creature you control. If you do, untap all creatures you control and after this phase, there is an additional combat phase";
     }
 
     public BreathOfFuryEffect(final BreathOfFuryEffect effect) {
