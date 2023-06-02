@@ -67,6 +67,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Reprieve", 26, Rarity.UNCOMMON, mage.cards.r.Reprieve.class));
         cards.add(new SetCardInfo("Ringsight", 220, Rarity.UNCOMMON, mage.cards.r.Ringsight.class));
         cards.add(new SetCardInfo("Rising of the Day", 145, Rarity.UNCOMMON, mage.cards.r.RisingOfTheDay.class));
+        cards.add(new SetCardInfo("Rosie Cotton of South Lane", 27, Rarity.UNCOMMON, mage.cards.r.RosieCottonOfSouthLane.class));
         cards.add(new SetCardInfo("Samwise Gamgee", 222, Rarity.RARE, mage.cards.s.SamwiseGamgee.class));
         cards.add(new SetCardInfo("Samwise the Stouthearted", 28, Rarity.UNCOMMON, mage.cards.s.SamwiseTheStouthearted.class));
         cards.add(new SetCardInfo("Saruman the White", 67, Rarity.UNCOMMON, mage.cards.s.SarumanTheWhite.class));
