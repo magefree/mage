@@ -44,7 +44,7 @@ class FlamesOfTheBloodHandReplacementEffect extends ReplacementEffectImpl {
 
     public FlamesOfTheBloodHandReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "If that player would gain life this turn, that player gains no life instead";
+        staticText = "If that player or that planeswalker's controller would gain life this turn, that player gains no life instead";
     }
 
     public FlamesOfTheBloodHandReplacementEffect(final FlamesOfTheBloodHandReplacementEffect effect) {

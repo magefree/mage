@@ -291,6 +291,11 @@ public final class StaticFilters {
         FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT.setLockedFilter(true);
     }
 
+    public static final FilterArtifactOrEnchantmentPermanent FILTER_PERMANENT_ARTIFACTS_AND_ENCHANTMENTS = new FilterArtifactOrEnchantmentPermanent("artifacts and enchantments");
+
+    static {
+        FILTER_PERMANENT_ARTIFACTS_AND_ENCHANTMENTS.setLockedFilter(true);
+    }
 
     public static final FilterControlledPermanent FILTER_PERMANENT_CONTROLLED_ARTIFACT_OR_ENCHANTMENT = new FilterControlledPermanent("artifact or enchantment you control");
 
