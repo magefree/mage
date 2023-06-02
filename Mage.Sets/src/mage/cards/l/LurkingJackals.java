@@ -40,7 +40,7 @@ public final class LurkingJackals extends CardImpl {
 class LurkingJackalsStateTriggeredAbility extends StateTriggeredAbility {
 
     public LurkingJackalsStateTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new LurkingJackalsToken(), "", Duration.Custom, true, false));
+        super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new LurkingJackalsToken(), null, Duration.Custom));
         setTriggerPhrase("When an opponent has 10 or less life, if {this} is an enchantment, ");
     }
 
@@ -103,9 +103,9 @@ class LurkingJackalsStateTriggeredAbility extends StateTriggeredAbility {
 class LurkingJackalsToken extends TokenImpl {
 
     public LurkingJackalsToken() {
-        super("Dog", "3/2 Dog creature");
+        super("Dog", "3/2 Jackal creature");
         cardType.add(CardType.CREATURE);
-        subtype.add(SubType.DOG);
+        subtype.add(SubType.JACKAL);
         power = new MageInt(3);
         toughness = new MageInt(2);
     }

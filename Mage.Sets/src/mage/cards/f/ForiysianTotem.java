@@ -36,7 +36,7 @@ public final class ForiysianTotem extends CardImpl {
         this.addAbility(new RedManaAbility());
 
         // {4}{R}: Foriysian Totem becomes a 4/4 red Giant artifact creature with trample until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new ForiysianTotemToken(), "", Duration.EndOfTurn), new ManaCostsImpl<>("{4}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new ForiysianTotemToken(), CardType.ARTIFACT, Duration.EndOfTurn), new ManaCostsImpl<>("{4}{R}")));
 
         // As long as Foriysian Totem is a creature, it can block an additional creature each combat.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new CanBlockAdditionalCreatureEffect(1), new SourceMatchesFilterCondition(new FilterCreaturePermanent()), ruleText)));
