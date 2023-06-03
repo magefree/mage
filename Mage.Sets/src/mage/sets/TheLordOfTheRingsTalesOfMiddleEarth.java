@@ -57,6 +57,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Grishnakh, Brash Instigator", 134, Rarity.UNCOMMON, mage.cards.g.GrishnakhBrashInstigator.class));
         cards.add(new SetCardInfo("Grond, the Gatebreaker", 89, Rarity.UNCOMMON, mage.cards.g.GrondTheGatebreaker.class));
         cards.add(new SetCardInfo("Hew the Entwood", 136, Rarity.MYTHIC, mage.cards.h.HewTheEntwood.class));
+        cards.add(new SetCardInfo("Horn of Gondor", 240, Rarity.RARE, mage.cards.h.HornOfGondor.class));
         cards.add(new SetCardInfo("Island", 264, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Knight of the Keep", 291, Rarity.COMMON, mage.cards.k.KnightOfTheKeep.class));
         cards.add(new SetCardInfo("Knights of Dol Amroth", 59, Rarity.COMMON, mage.cards.k.KnightsOfDolAmroth.class));
