@@ -55,6 +55,8 @@ public final class FallOfGilGalad extends CardImpl {
             ability.addTarget(new TargetControlledCreaturePermanent());
             ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_CREATURE_TARGET_2).setTargetTag(2));
         });
+
+        this.addAbility(sagaAbility);
     }
 
     private FallOfGilGalad(final FallOfGilGalad card) {
