@@ -1089,6 +1089,13 @@ public final class StaticFilters {
         FILTER_PERMANENT_LEGENDARY.setLockedFilter(true);
     }
 
+    public static final FilterCreaturePermanent FILTER_CREATURE_LEGENDARY = new FilterCreaturePermanent();
+
+    static {
+        FILTER_CREATURE_LEGENDARY.add(SuperType.LEGENDARY.getPredicate());
+        FILTER_CREATURE_LEGENDARY.setLockedFilter(true);
+    }
+
     public static final FilterCard FILTER_CARD_ARTIFACT_OR_CREATURE = new FilterCard("artifact or creature card");
 
     static {
