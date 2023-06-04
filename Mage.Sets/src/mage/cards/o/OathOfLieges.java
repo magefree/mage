@@ -89,7 +89,7 @@ class OathOfLiegesEffect extends OneShotEffect {
         Player activePlayer = game.getPlayer(game.getActivePlayerId());
         if (activePlayer != null) {
             if (activePlayer.chooseUse(outcome, "Search your library for a basic land card, put that card onto the battlefield, then shuffle?", source, game)) {
-                Effect effect = new SearchLibraryPutInPlayTargetPlayerEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), false, false, Outcome.PutLandInPlay, true);
+                Effect effect = new SearchLibraryPutInPlayTargetPlayerEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), false, true);
                 effect.setTargetPointer(new FixedTarget(game.getActivePlayerId()));
                 return effect.apply(game, source);
             }

@@ -71,7 +71,7 @@ class UrzasHotTubEffect extends OneShotEffect {
                 if (discardedCard != null) {
                     FilterCard filter = new FilterCard();
                     filter.add(new UrzasHotTubPredicate(discardedCard.getName()));
-                    return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true).apply(game, source);
+                    return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true).apply(game, source);
                 }
             }
         }

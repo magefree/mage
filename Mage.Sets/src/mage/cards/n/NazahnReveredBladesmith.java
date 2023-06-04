@@ -57,7 +57,7 @@ public final class NazahnReveredBladesmith extends CardImpl {
 
         // When Nazahn, Revered Bladesmith enters the battlefield, search your library for an Equipment card and reveal it. If you reveal a card named Hammer of Nazahn this way, put it onto the battlefield. Otherwise, put that card into your hand. Then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(1, 1, filter);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandOrOnBattlefieldEffect(target, true, true, "Hammer of Nazahn"), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandOrOnBattlefieldEffect(target, true, "Hammer of Nazahn"), false));
 
         // Whenever an equipped creature you control attacks, you may tap target creature defending player controls.
         Ability ability = new AttacksCreatureYouControlTriggeredAbility(new NazahnTapEffect(), true, equippedFilter, true);
