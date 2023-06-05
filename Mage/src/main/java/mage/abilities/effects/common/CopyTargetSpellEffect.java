@@ -19,7 +19,7 @@ public class CopyTargetSpellEffect extends OneShotEffect {
     private final boolean useLKI;
     private String copyThatSpellName = "that spell";
     private final boolean chooseTargets;
-    private final int ammount;
+    private final int amount;
     private final StackObjectCopyApplier applier;
 
     public CopyTargetSpellEffect() {
@@ -38,8 +38,8 @@ public class CopyTargetSpellEffect extends OneShotEffect {
         this(useController, useLKI, chooseTargets, 1);
     }
 
-    public CopyTargetSpellEffect(boolean useController, boolean useLKI, boolean chooseTargets, int ammount) {
-        this(useController, useLKI, chooseTargets, ammount, null);
+    public CopyTargetSpellEffect(boolean useController, boolean useLKI, boolean chooseTargets, int amount) {
+        this(useController, useLKI, chooseTargets, amount, null);
     }
 
     /**
@@ -47,16 +47,16 @@ public class CopyTargetSpellEffect extends OneShotEffect {
      * @param useController Whether to create the copy under the control of the original spell's controller (true) or the controller of the ability that this effect is on (false)
      * @param useLKI        Whether to get last-known information about the spell before resolving the effect (for instance for abilities which don't target a spell but reference it some other way)
      * @param chooseTargets Whether the new copy and choose new targets
-     * @param ammount       The ammount of copies to create
+     * @param amount        The amount of copies to create
      * @param applier       An applier to apply to the newly created copies. Used to change copiable values of the copy, such as types or name
      */
-    public CopyTargetSpellEffect(boolean useController, boolean useLKI, boolean chooseTargets, int ammount,
+    public CopyTargetSpellEffect(boolean useController, boolean useLKI, boolean chooseTargets, int amount,
             StackObjectCopyApplier applier) {
         super(Outcome.Copy);
         this.useController = useController;
         this.useLKI = useLKI;
         this.chooseTargets = chooseTargets;
-        this.ammount = ammount;
+        this.amount = amount;
         this.applier = applier;
     }
 
@@ -66,7 +66,7 @@ public class CopyTargetSpellEffect extends OneShotEffect {
         this.useController = effect.useController;
         this.copyThatSpellName = effect.copyThatSpellName;
         this.chooseTargets = effect.chooseTargets;
-        this.ammount = effect.ammount;
+        this.amount = effect.amount;
         this.applier = effect.applier;
     }
 
@@ -88,7 +88,7 @@ public class CopyTargetSpellEffect extends OneShotEffect {
         }
         if (spell != null) {
             spell.createCopyOnStack(game, source, useController ? spell.getControllerId() : source.getControllerId(),
-                    chooseTargets, ammount, applier);
+                    chooseTargets, amount, applier);
             return true;
         }
         return false;
