@@ -8,8 +8,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
-import mage.players.Player;
+import mage.util.functions.StackObjectCopyApplier;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -20,6 +19,8 @@ public class CopyTargetSpellEffect extends OneShotEffect {
     private final boolean useLKI;
     private String copyThatSpellName = "that spell";
     private final boolean chooseTargets;
+    private final int ammount;
+    private final StackObjectCopyApplier applier;
 
     public CopyTargetSpellEffect() {
         this(false);
@@ -34,10 +35,29 @@ public class CopyTargetSpellEffect extends OneShotEffect {
     }
 
     public CopyTargetSpellEffect(boolean useController, boolean useLKI, boolean chooseTargets) {
+        this(useController, useLKI, chooseTargets, 1);
+    }
+
+    public CopyTargetSpellEffect(boolean useController, boolean useLKI, boolean chooseTargets, int ammount) {
+        this(useController, useLKI, chooseTargets, ammount, null);
+    }
+
+    /**
+     * 
+     * @param useController Whether to create the copy under the control of the original spell's controller (true) or the controller of the ability that this effect is on (false)
+     * @param useLKI        Whether to get last-known information about the spell before resolving the effect (for instance for abilities which don't target a spell but reference it some other way)
+     * @param chooseTargets Whether the new copy and choose new targets
+     * @param ammount       The ammount of copies to create
+     * @param applier       An applier to apply to the newly created copies. Used to change copiable values of the copy, such as types or name
+     */
+    public CopyTargetSpellEffect(boolean useController, boolean useLKI, boolean chooseTargets, int ammount,
+            StackObjectCopyApplier applier) {
         super(Outcome.Copy);
         this.useController = useController;
         this.useLKI = useLKI;
         this.chooseTargets = chooseTargets;
+        this.ammount = ammount;
+        this.applier = applier;
     }
 
     public CopyTargetSpellEffect(final CopyTargetSpellEffect effect) {
@@ -46,6 +66,8 @@ public class CopyTargetSpellEffect extends OneShotEffect {
         this.useController = effect.useController;
         this.copyThatSpellName = effect.copyThatSpellName;
         this.chooseTargets = effect.chooseTargets;
+        this.ammount = effect.ammount;
+        this.applier = effect.applier;
     }
 
     public Effect withSpellName(String copyThatSpellName) {
@@ -65,7 +87,8 @@ public class CopyTargetSpellEffect extends OneShotEffect {
             spell = (Spell) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK);
         }
         if (spell != null) {
-            spell.createCopyOnStack(game, source, useController ? spell.getControllerId() : source.getControllerId(), chooseTargets);
+            spell.createCopyOnStack(game, source, useController ? spell.getControllerId() : source.getControllerId(),
+                    chooseTargets, ammount, applier);
             return true;
         }
         return false;
