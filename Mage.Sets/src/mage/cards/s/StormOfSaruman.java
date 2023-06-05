@@ -20,7 +20,7 @@ public final class StormOfSaruman extends CardImpl {
         super(ownerId, setInfo, new CardType[] { CardType.ENCHANTMENT }, "{4}{U}{U}");
 
         // Ward {3}
-        this.addAbility(new WardAbility(new GenericManaCost(3)));
+        this.addAbility(new WardAbility(new GenericManaCost(3), false));
 
         // Whenever you cast your second spell each turn, copy it, except the copy isn't legendary. You may choose new targets for the copy.
         this.addAbility(new CastSecondSpellTriggeredAbility(Zone.BATTLEFIELD,
