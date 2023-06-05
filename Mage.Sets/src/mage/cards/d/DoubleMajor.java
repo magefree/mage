@@ -29,7 +29,9 @@ public final class DoubleMajor extends CardImpl {
 
         // Copy target creature spell you control, except it isn't legendary if the spell is legendary.
         this.getSpellAbility().addEffect(
-                new CopyTargetSpellEffect(false, false, false, 1, new RemoveTypeCopyApplier(SuperType.LEGENDARY)));
+                new CopyTargetSpellEffect(false, false, false, 1, new RemoveTypeCopyApplier(SuperType.LEGENDARY))
+                        .setText(
+                                "Copy target creature spell you control, except it isn't legendary if the spell is legendary."));
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
