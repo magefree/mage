@@ -3,6 +3,7 @@ package mage.cards.f;
 import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ExileTargetCardCopyAndCastEffect;
 import mage.abilities.keyword.CasualtyAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -38,7 +39,8 @@ public final class FlawlessForgery extends CardImpl {
         this.addAbility(new CasualtyAbility(3));
 
         // Exile target instant or sorcery card from an opponent's graveyard. Copy that card. You may cast the copy without paying its mana cost.
-        this.getSpellAbility().addEffect(new FlawlessForgeryEffect());
+        this.getSpellAbility().addEffect(new ExileTargetCardCopyAndCastEffect().setText(
+                "Exile target instant or sorcery card from an opponent's graveyard. Copy that card. You may cast the copy without paying its mana cost."));
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(filter));
     }
 
@@ -49,45 +51,5 @@ public final class FlawlessForgery extends CardImpl {
     @Override
     public FlawlessForgery copy() {
         return new FlawlessForgery(this);
-    }
-}
-
-class FlawlessForgeryEffect extends OneShotEffect {
-
-    FlawlessForgeryEffect() {
-        super(Outcome.Benefit);
-        staticText = "exile target instant or sorcery card from an opponent's graveyard. " +
-                "Copy that card. You may cast the copy without paying its mana cost";
-    }
-
-    private FlawlessForgeryEffect(final FlawlessForgeryEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public FlawlessForgeryEffect copy() {
-        return new FlawlessForgeryEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(getTargetPointer().getFirst(game, source));
-        if (player == null || card == null) {
-            return false;
-        }
-        player.moveCards(card, Zone.EXILED, source, game);
-        Card cardCopy = game.copyCard(card, source, source.getControllerId());
-        if (!player.chooseUse(outcome, "Cast copy of " +
-                card.getName() + " without paying its mana cost?", source, game)) {
-            return true;
-        }
-        game.getState().setValue("PlayFromNotOwnHandZone" + cardCopy.getId(), Boolean.TRUE);
-        player.cast(
-                player.chooseAbilityForCast(cardCopy, game, true),
-                game, true, new ApprovingObject(source, game)
-        );
-        game.getState().setValue("PlayFromNotOwnHandZone" + cardCopy.getId(), null);
-        return true;
     }
 }
