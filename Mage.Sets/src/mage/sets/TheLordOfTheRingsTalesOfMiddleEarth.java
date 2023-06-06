@@ -31,13 +31,12 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Butterbur, Bree Innkeeper", 197, Rarity.UNCOMMON, mage.cards.b.ButterburBreeInnkeeper.class));
         cards.add(new SetCardInfo("Call of the Ring", 79, Rarity.RARE, mage.cards.c.CallOfTheRing.class));
         cards.add(new SetCardInfo("Cast into the Fire", 118, Rarity.COMMON, mage.cards.c.CastIntoTheFire.class));
-        cards.add(new SetCardInfo("Council's Deliberation", 48, Rarity.UNCOMMON, mage.cards.c.CouncilsDeliberation.class));
+        cards.add(new SetCardInfo("Council's Deliberation", 46, Rarity.UNCOMMON, mage.cards.c.CouncilsDeliberation.class));
         cards.add(new SetCardInfo("Display of Power", 119, Rarity.RARE, mage.cards.d.DisplayOfPower.class));
         cards.add(new SetCardInfo("Dunland Crebain", 82, Rarity.COMMON, mage.cards.d.DunlandCrebain.class));
         cards.add(new SetCardInfo("Dunedain Blade", 6, Rarity.COMMON, mage.cards.d.DunedainBlade.class));
         cards.add(new SetCardInfo("Easterling Vanguard", 83, Rarity.COMMON, mage.cards.e.EasterlingVanguard.class));
         cards.add(new SetCardInfo("Eastfarthing Farmer", 8, Rarity.COMMON, mage.cards.e.EastfarthingFarmer.class));
-        cards.add(new SetCardInfo("Eowyn, Fearless Knight", 201, Rarity.RARE, mage.cards.e.EowynFearlessKnight.class));
         cards.add(new SetCardInfo("Fall of Gil-galad", 165, Rarity.RARE, mage.cards.f.FallOfGilGalad.class));
         cards.add(new SetCardInfo("Fangorn, Tree Shepherd", 166, Rarity.RARE, mage.cards.f.FangornTreeShepherd.class));
         cards.add(new SetCardInfo("Fire of Orthanc", 127, Rarity.COMMON, mage.cards.f.FireOfOrthanc.class));
@@ -125,5 +124,6 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Wizard's Rockets", 252, Rarity.COMMON, mage.cards.w.WizardsRockets.class));
         cards.add(new SetCardInfo("Wose Pathfinder", 190, Rarity.COMMON, mage.cards.w.WosePathfinder.class));
         cards.add(new SetCardInfo("You Cannot Pass!", 38, Rarity.UNCOMMON, mage.cards.y.YouCannotPass.class));
+        cards.add(new SetCardInfo("Eowyn, Fearless Knight", 201, Rarity.RARE, mage.cards.e.EowynFearlessKnight.class));
     }
 }
