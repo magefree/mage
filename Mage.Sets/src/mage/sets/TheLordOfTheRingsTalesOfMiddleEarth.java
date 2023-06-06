@@ -33,11 +33,12 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Cast into the Fire", 118, Rarity.COMMON, mage.cards.c.CastIntoTheFire.class));
         cards.add(new SetCardInfo("Council's Deliberation", 46, Rarity.UNCOMMON, mage.cards.c.CouncilsDeliberation.class));
         cards.add(new SetCardInfo("Display of Power", 119, Rarity.RARE, mage.cards.d.DisplayOfPower.class));
-        cards.add(new SetCardInfo("Dunland Crebain", 82, Rarity.COMMON, mage.cards.d.DunlandCrebain.class));
         cards.add(new SetCardInfo("Dunedain Blade", 6, Rarity.COMMON, mage.cards.d.DunedainBlade.class));
+        cards.add(new SetCardInfo("Dunland Crebain", 82, Rarity.COMMON, mage.cards.d.DunlandCrebain.class));
         cards.add(new SetCardInfo("Easterling Vanguard", 83, Rarity.COMMON, mage.cards.e.EasterlingVanguard.class));
         cards.add(new SetCardInfo("Eastfarthing Farmer", 8, Rarity.COMMON, mage.cards.e.EastfarthingFarmer.class));
         cards.add(new SetCardInfo("Elrond, Lord of Rivendell", 49, Rarity.UNCOMMON, mage.cards.e.ElrondLordOfRivendell.class));
+        cards.add(new SetCardInfo("Eowyn, Fearless Knight", 201, Rarity.RARE, mage.cards.e.EowynFearlessKnight.class));
         cards.add(new SetCardInfo("Fall of Gil-galad", 165, Rarity.RARE, mage.cards.f.FallOfGilGalad.class));
         cards.add(new SetCardInfo("Fangorn, Tree Shepherd", 166, Rarity.RARE, mage.cards.f.FangornTreeShepherd.class));
         cards.add(new SetCardInfo("Fiery Inscription", 126, Rarity.UNCOMMON, mage.cards.f.FieryInscription.class));
@@ -129,10 +130,5 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Wizard's Rockets", 252, Rarity.COMMON, mage.cards.w.WizardsRockets.class));
         cards.add(new SetCardInfo("Wose Pathfinder", 190, Rarity.COMMON, mage.cards.w.WosePathfinder.class));
         cards.add(new SetCardInfo("You Cannot Pass!", 38, Rarity.UNCOMMON, mage.cards.y.YouCannotPass.class));
-        cards.add(new SetCardInfo("Eowyn, Fearless Knight", 201, Rarity.RARE, mage.cards.e.EowynFearlessKnight.class));
-        cards.add(new SetCardInfo("Fiery Inscription", 126, Rarity.UNCOMMON, mage.cards.f.FieryInscription.class));
-        cards.add(new SetCardInfo("Gift of Strands", 170, Rarity.UNCOMMON, mage.cards.g.GiftOfStrands.class));
-        cards.add(new SetCardInfo("Oath of the Grey Host", 101, Rarity.UNCOMMON, mage.cards.o.OathOfTheGreyHost.class));
-        cards.add(new SetCardInfo("The Mouth of Sauron", 216, Rarity.UNCOMMON, mage.cards.t.TheMouthOfSauron.class));
     }
 }
