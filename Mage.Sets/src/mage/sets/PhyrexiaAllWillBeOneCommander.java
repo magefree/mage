@@ -124,6 +124,7 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Norn's Annex", 83, Rarity.RARE, mage.cards.n.NornsAnnex.class));
         cards.add(new SetCardInfo("Norn's Choirmaster", 8, Rarity.RARE, mage.cards.n.NornsChoirmaster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Norn's Choirmaster", 46, Rarity.RARE, mage.cards.n.NornsChoirmaster.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Norn's Decree", 9, Rarity.RARE, mage.cards.n.NornsDecree.class));
         cards.add(new SetCardInfo("Noxious Revival", 110, Rarity.UNCOMMON, mage.cards.n.NoxiousRevival.class));
         cards.add(new SetCardInfo("Otharri, Suns' Glory", 3, Rarity.MYTHIC, mage.cards.o.OtharriSunsGlory.class));
         cards.add(new SetCardInfo("Painful Truths", 95, Rarity.RARE, mage.cards.p.PainfulTruths.class));
