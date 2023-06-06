@@ -115,6 +115,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Tale of Tinuviel", 34, Rarity.UNCOMMON, mage.cards.t.TaleOfTinuviel.class));
         cards.add(new SetCardInfo("The Balrog, Flame of Udun", 395, Rarity.RARE, mage.cards.t.TheBalrogFlameOfUdun.class));
         cards.add(new SetCardInfo("The Bath Song", 40, Rarity.UNCOMMON, mage.cards.t.TheBathSong.class));
+        cards.add(new SetCardInfo("The Mouth of Sauron", 216, Rarity.UNCOMMON, mage.cards.t.TheMouthOfSauron.class));
         cards.add(new SetCardInfo("The One Ring", 246, Rarity.MYTHIC, mage.cards.t.TheOneRing.class));
         cards.add(new SetCardInfo("The Shire", 260, Rarity.RARE, mage.cards.t.TheShire.class));
         cards.add(new SetCardInfo("There and Back Again", 151, Rarity.RARE, mage.cards.t.ThereAndBackAgain.class));
@@ -131,5 +132,6 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Fiery Inscription", 126, Rarity.UNCOMMON, mage.cards.f.FieryInscription.class));
         cards.add(new SetCardInfo("Gift of Strands", 170, Rarity.UNCOMMON, mage.cards.g.GiftOfStrands.class));
         cards.add(new SetCardInfo("Oath of the Grey Host", 101, Rarity.UNCOMMON, mage.cards.o.OathOfTheGreyHost.class));
+        cards.add(new SetCardInfo("The Mouth of Sauron", 216, Rarity.UNCOMMON, mage.cards.t.TheMouthOfSauron.class));
     }
 }
