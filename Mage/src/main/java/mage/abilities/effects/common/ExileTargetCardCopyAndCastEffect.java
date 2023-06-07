@@ -52,7 +52,7 @@ public class ExileTargetCardCopyAndCastEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public ExileTargetCardCopyAndCastEffect copy() {
         return new ExileTargetCardCopyAndCastEffect(this);
     }
 

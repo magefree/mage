@@ -119,7 +119,7 @@ class SarumanOfManyColorsEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public SarumanOfManyColorsEffect copy() {
         return new SarumanOfManyColorsEffect(this);
     }
 
