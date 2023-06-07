@@ -39,7 +39,6 @@ public final class SarumanOfManyColors extends CardImpl {
 
     static {
         filter.add(predicate);
-        filter.setLockedFilter(true);
     }
 
     public SarumanOfManyColors(UUID ownerId, CardSetInfo setInfo) {
