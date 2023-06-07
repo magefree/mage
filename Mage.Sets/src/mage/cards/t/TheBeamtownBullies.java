@@ -39,12 +39,12 @@ import java.util.UUID;
 public final class TheBeamtownBullies extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("nonlegendary creature card");
-    private static final FilterPlayer playerFilter = (FilterPlayer) (new FilterOpponent()
-            .add(ActivePlayerPredicate.instance));
+    private static final FilterPlayer playerFilter = new FilterOpponent();
 
     static {
         filter.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));
         filter.add(CardType.CREATURE.getPredicate());
+        playerFilter.add(ActivePlayerPredicate.instance);
     }
     public TheBeamtownBullies(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}{G}");
