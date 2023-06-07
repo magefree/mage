@@ -88,8 +88,6 @@ class PsionicRitualEffect extends OneShotEffect {
         if (copiedCard == null) {
             return false;
         }
-        game.getExile().add(source.getSourceId(), "", copiedCard);
-        game.getState().setZone(copiedCard.getId(), Zone.EXILED);
         if (copiedCard.getSpellAbility() == null || !player.chooseUse(
                 outcome, "Cast the copied card without paying mana cost?", source, game
         )) {

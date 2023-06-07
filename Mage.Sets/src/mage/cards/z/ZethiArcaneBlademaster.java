@@ -131,8 +131,6 @@ class ZethiArcaneBlademasterCastEffect extends OneShotEffect {
         Cards copies = new CardsImpl();
         for (Card card : cards.getCards(game)) {
             Card copiedCard = game.copyCard(card, source, source.getControllerId());
-            game.getExile().add(source.getSourceId(), "", copiedCard);
-            game.getState().setZone(copiedCard.getId(), Zone.EXILED);
             copies.add(copiedCard);
         }
         // simple way to choose the spells to cast; if you have a better tech, implement it!
