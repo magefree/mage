@@ -1,21 +1,13 @@
 package mage.cards.f;
 
-import mage.ApprovingObject;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetCardCopyAndCastEffect;
 import mage.abilities.keyword.CasualtyAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 
 import java.util.UUID;
@@ -39,7 +31,7 @@ public final class FlawlessForgery extends CardImpl {
         this.addAbility(new CasualtyAbility(3));
 
         // Exile target instant or sorcery card from an opponent's graveyard. Copy that card. You may cast the copy without paying its mana cost.
-        this.getSpellAbility().addEffect(new ExileTargetCardCopyAndCastEffect().setText(
+        this.getSpellAbility().addEffect(new ExileTargetCardCopyAndCastEffect(true).setText(
                 "Exile target instant or sorcery card from an opponent's graveyard. Copy that card. You may cast the copy without paying its mana cost."));
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(filter));
     }

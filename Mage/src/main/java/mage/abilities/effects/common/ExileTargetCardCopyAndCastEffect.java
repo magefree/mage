@@ -10,24 +10,35 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
+// Author: alexander-novo
+// An effect for cards which instruct you to exile a card, then copy that card, and cast it.
+// NOTE: You must set effect text on your own
 public class ExileTargetCardCopyAndCastEffect extends OneShotEffect {
 
     private final boolean optional;
+    private final boolean noMana;
 
-    public ExileTargetCardCopyAndCastEffect() {
-        this(true);
+    public ExileTargetCardCopyAndCastEffect(boolean noMana) {
+        this(noMana, true);
     }
 
-    public ExileTargetCardCopyAndCastEffect(boolean optional) {
+    /**
+     * NOTE: You must supply your own effect text
+     * @param noMana   Whether the copy can be cast without paying its mana cost
+     * @param optional Whether the casting of the copy is optional (otherwise it must be cast if possible)
+     */
+    public ExileTargetCardCopyAndCastEffect(boolean noMana, boolean optional) {
         super(Outcome.PlayForFree);
 
         this.optional = optional;
+        this.noMana = noMana;
     }
 
     public ExileTargetCardCopyAndCastEffect(final ExileTargetCardCopyAndCastEffect effect) {
         super(effect);
 
         this.optional = effect.optional;
+        this.noMana = effect.noMana;
     }
 
     @Override
@@ -45,8 +56,8 @@ public class ExileTargetCardCopyAndCastEffect extends OneShotEffect {
         }
         game.getState().setValue("PlayFromNotOwnHandZone" + cardCopy.getId(), Boolean.TRUE);
         player.cast(
-                player.chooseAbilityForCast(cardCopy, game, true),
-                game, true, new ApprovingObject(source, game));
+                player.chooseAbilityForCast(cardCopy, game, this.noMana),
+                game, this.noMana, new ApprovingObject(source, game));
         game.getState().setValue("PlayFromNotOwnHandZone" + cardCopy.getId(), null);
         return true;
     }
