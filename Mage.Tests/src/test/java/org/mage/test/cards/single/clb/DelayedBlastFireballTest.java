@@ -26,7 +26,9 @@ public class DelayedBlastFireballTest extends CardTestPlayerBase {
 
         // Cast Mizzix's Mastery targetting delayed blast fireball. This hsoul exile it, copy it into exile, and then cast the copy from exile, which should end up dealing 5 damage to player B
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, mastery, fireball);
+        setChoice(playerA, true);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
