@@ -1329,6 +1329,9 @@ public class NewTournamentDialog extends MageDialog {
             tOptions.getMatchOptions().setDeckType((String) this.cbDeckType.getSelectedItem());
             tOptions.getMatchOptions().setGameType(((GameTypeView) this.cbGameType.getSelectedItem()).getName());
             tOptions.getMatchOptions().setLimited(tOptions.getMatchOptions().getDeckType().startsWith("Limited"));
+            if (tOptions.getMatchOptions().getDeckType().startsWith("Variant Magic - Freeform Unlimited Commander")) {
+                tOptions.getMatchOptions().setLimited(true); // limited-style sideboarding with unlimited basics enabled for Freeform Unlimited Commander
+            }
         }
 
         String serverAddress = SessionHandler.getSession().getServerHostname().orElse("");
