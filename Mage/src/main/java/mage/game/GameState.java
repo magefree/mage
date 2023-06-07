@@ -1388,10 +1388,16 @@ public class GameState implements Serializable, Copyable<GameState> {
         // main part prepare (must be called after other parts cause it change ids for all)
         prepareCardForCopy(mainCardToCopy, copiedCard, newController);
 
+        // Copies should be created in the Zone that the copied card is in
+        Zone copyToZone = game.getState().getZone(mainCardToCopy.getId());
+        if (copyToZone == Zone.BATTLEFIELD) {
+            throw new UnsupportedOperationException("Cards cannot be copied while on the Battlefield");
+        }
+
         // add all parts to the game
         copiedParts.forEach(card -> {
             copiedCards.put(card.getId(), card);
-            addCard(card);
+            addCard(card, copyToZone);
         });
 
         // copied cards removes from game after battlefield/stack leaves, so remember it here as workaround to fix freeze, see https://github.com/magefree/mage/issues/5437
