@@ -1,12 +1,11 @@
 package mage.cards.n;
 
-import mage.ApprovingObject;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ExileTargetCardCopyAndCastEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.ProwessAbility;
 import mage.cards.Card;
@@ -20,7 +19,6 @@ import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 
 import java.util.Objects;
@@ -56,7 +54,9 @@ public final class NarsetEnlightenedExile extends CardImpl {
         ).setText("creatures you control have prowess")));
 
         // Whenever Narset, Enlightened Exile attacks, exile target noncreature, nonland card with mana value less than Narset's power from a graveyard and copy it. You may cast the copy without paying its mana cost.
-        Ability ability = new AttacksTriggeredAbility(new NarsetEnlightenedExileEffect());
+        Ability ability = new AttacksTriggeredAbility(new ExileTargetCardCopyAndCastEffect(true)
+                .setText("exile target noncreature, nonland card with mana value less than {this}'s power " +
+                        "from a graveyard and copy it. You may cast the copy without paying its mana cost"));
         ability.addTarget(new TargetCardInGraveyard(filter));
         this.addAbility(ability);
     }
@@ -83,41 +83,5 @@ enum NarsetEnlightenedExilePredicate implements ObjectSourcePlayerPredicate<Card
                 .map(MageInt::getValue)
                 .map(p -> input.getObject().getManaValue() < p)
                 .orElse(false);
-    }
-}
-
-class NarsetEnlightenedExileEffect extends OneShotEffect {
-
-    NarsetEnlightenedExileEffect() {
-        super(Outcome.Benefit);
-        staticText = "exile target noncreature, nonland card with mana value less than {this}'s power " +
-                "from a graveyard and copy it. You may cast the copy without paying its mana cost";
-    }
-
-    private NarsetEnlightenedExileEffect(final NarsetEnlightenedExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public NarsetEnlightenedExileEffect copy() {
-        return new NarsetEnlightenedExileEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(getTargetPointer().getFirst(game, source));
-        if (player == null || card == null) {
-            return false;
-        }
-        player.moveCards(card, Zone.EXILED, source, game);
-        Card copiedCard = game.copyCard(card, source, source.getControllerId());
-        game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);
-        player.cast(
-                player.chooseAbilityForCast(copiedCard, game, true),
-                game, true, new ApprovingObject(source, game)
-        );
-        game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), null);
-        return true;
     }
 }
