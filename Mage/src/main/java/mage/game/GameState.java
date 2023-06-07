@@ -1388,7 +1388,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         // main part prepare (must be called after other parts cause it change ids for all)
         prepareCardForCopy(mainCardToCopy, copiedCard, newController);
 
-        // Copies should be created in the Zone that the copied card is in
+        // 707.12. An effect that instructs a player to cast a copy of an object (and not just copy a spell) follows the rules for casting spells, except that the copy is created in the same zone the object is in and then cast while another spell or ability is resolving.
         Zone copyToZone = game.getState().getZone(mainCardToCopy.getId());
         if (copyToZone == Zone.BATTLEFIELD) {
             throw new UnsupportedOperationException("Cards cannot be copied while on the Battlefield");
