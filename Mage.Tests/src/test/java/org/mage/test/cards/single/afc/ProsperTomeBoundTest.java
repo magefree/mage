@@ -19,7 +19,7 @@ public class ProsperTomeBoundTest extends CardTestPlayerBase {
         String mastery = "Mizzix's Mastery";
         String bolt = "Lightning Bolt";
 
-        // Cast mastery from hand targetting bolt, which wilkl be exiled, copied, and cast. Prosper will see this cast.
+        // Cast mastery from hand targetting bolt, which will be exiled, copied, and cast. Prosper will see this cast.
         addCard(Zone.GRAVEYARD, playerA, bolt);
         addCard(Zone.HAND, playerA, mastery);
         addCard(Zone.BATTLEFIELD, playerA, prosper);
@@ -36,6 +36,6 @@ public class ProsperTomeBoundTest extends CardTestPlayerBase {
 
         assertLife(playerB, 20 - 3);
         assertExileCount(playerA, bolt, 1);
-        assertTokenCount(playerA, "Treasure", 0);
+        assertTokenCount(playerA, "Treasure Token", 0);
     }
 }
