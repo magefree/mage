@@ -160,7 +160,7 @@ class ElminsterExileEffect extends OneShotEffect {
 
     ElminsterExileEffect() {
         super(Outcome.Benefit);
-        staticText = "exile the top card of your library. Create number of 1/1 " +
+        staticText = "exile the top card of your library. Create a number of 1/1 " +
                 "blue Faerie Dragon creature tokens with flying equal to that card's mana value";
     }
 

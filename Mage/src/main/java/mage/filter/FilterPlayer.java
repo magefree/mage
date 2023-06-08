@@ -31,11 +31,12 @@ public class FilterPlayer extends FilterImpl<Player> {
         this.extraPredicates.addAll(filter.extraPredicates);
     }
 
-    public void add(ObjectSourcePlayerPredicate predicate) {
+    public FilterPlayer add(ObjectSourcePlayerPredicate predicate) {
         if (isLockedFilter()) {
             throw new UnsupportedOperationException("You may not modify a locked filter");
         }
         extraPredicates.add(predicate);
+        return this;
     }
 
     @Override
