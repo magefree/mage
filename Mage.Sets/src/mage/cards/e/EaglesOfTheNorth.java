@@ -41,7 +41,7 @@ public final class EaglesOfTheNorth extends CardImpl {
         ability.addEffect(new GainAbilityControlledEffect(
                 FirstStrikeAbility.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_PERMANENT_CREATURE
-        ).setText("gain first strike until end of turn"));
+        ).setText("and gain first strike until end of turn"));
         this.addAbility(ability);
 
         // Plainscycling {1}

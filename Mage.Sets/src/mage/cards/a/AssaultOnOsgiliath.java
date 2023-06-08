@@ -36,7 +36,7 @@ public final class AssaultOnOsgiliath extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}{R}{R}");
 
         // Amass Orcs X, then Goblins and Orcs you control gain double strike and haste until end of turn.
-        this.getSpellAbility().addEffect(new AssimilateEssenceEffect());
+        this.getSpellAbility().addEffect(new AssaultOnOsgiliathEffect());
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(
                 DoubleStrikeAbility.getInstance(), Duration.EndOfTurn, filter
         ).setText(", then Goblins and Orcs you control gain double strike"));

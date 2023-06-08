@@ -73,7 +73,7 @@ enum RangersOfIthilienPredicate implements ObjectSourcePlayerPredicate<Permanent
                 .filter(Objects::nonNull)
                 .map(MageObject::getPower)
                 .map(MageInt::getValue)
-                .map(i -> i >= input.getObject().getPower().getValue())
+                .map(i -> i > input.getObject().getPower().getValue())
                 .orElse(false);
     }
 }
