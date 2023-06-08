@@ -334,6 +334,9 @@ public final class GuiDisplayUtil {
                 buffer.append("[only controlled] ");
             }
         }
+        if (card instanceof PermanentView && ((PermanentView) card).isAttachedToDifferentlyControlledPermanent()) {
+            buffer.append('(').append(((PermanentView) card).getNameController()).append(") ");
+        }
         if (card.getMageObjectType() != MageObjectType.NULL) {
             buffer.append(card.getMageObjectType().toString());
         }
