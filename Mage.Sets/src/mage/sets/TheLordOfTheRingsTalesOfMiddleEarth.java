@@ -130,6 +130,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("The Shire", 260, Rarity.RARE, mage.cards.t.TheShire.class));
         cards.add(new SetCardInfo("There and Back Again", 151, Rarity.RARE, mage.cards.t.ThereAndBackAgain.class));
         cards.add(new SetCardInfo("Tom Bombadil", 234, Rarity.MYTHIC, mage.cards.t.TomBombadil.class));
+        cards.add(new SetCardInfo("Took Reaper", 35, Rarity.COMMON, mage.cards.t.TookReaper.class));
         cards.add(new SetCardInfo("Trailblazer's Boots", 398, Rarity.RARE, mage.cards.t.TrailblazersBoots.class));
         cards.add(new SetCardInfo("Treason of Isengard", 74, Rarity.COMMON, mage.cards.t.TreasonOfIsengard.class));
         cards.add(new SetCardInfo("Troll of Khazad-dum", 111, Rarity.COMMON, mage.cards.t.TrollOfKhazadDum.class));
