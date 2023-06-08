@@ -24,6 +24,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Bag End Porter", 153, Rarity.COMMON, mage.cards.b.BagEndPorter.class));
         cards.add(new SetCardInfo("Barad-dur", 253, Rarity.RARE, mage.cards.b.BaradDur.class));
         cards.add(new SetCardInfo("Bilbo, Retired Burglar", 196, Rarity.UNCOMMON, mage.cards.b.BilboRetiredBurglar.class));
+        cards.add(new SetCardInfo("Birthday Escape", 43, Rarity.COMMON, mage.cards.b.BirthdayEscape.class));
         cards.add(new SetCardInfo("Bitter Downfall", 77, Rarity.UNCOMMON, mage.cards.b.BitterDownfall.class));
         cards.add(new SetCardInfo("Bombadil's Song", 154, Rarity.COMMON, mage.cards.b.BombadilsSong.class));
         cards.add(new SetCardInfo("Book of Mazarbul", 116, Rarity.UNCOMMON, mage.cards.b.BookOfMazarbul.class));
