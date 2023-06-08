@@ -37,7 +37,6 @@ public final class ArbiterOfTheIdeal extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // <i>Inspired</i> &mdash; Whenever Arbiter of the Ideal becomes untapped, reveal the top card of your library. If it's an artifact, creature, or land card, you may put it onto the battlefield with a manifestation counter on it. It's an enchantment in addition to its other types.
         this.addAbility(new InspiredAbility(new ArbiterOfTheIdealEffect()));
-
     }
 
     private ArbiterOfTheIdeal(final ArbiterOfTheIdeal card) {
@@ -85,7 +84,7 @@ class ArbiterOfTheIdealEffect extends OneShotEffect {
         Card card = controller.getLibrary().getFromTop(game);
         if (card != null) {
             controller.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
-            if (filter.match(card, game) && controller.chooseUse(outcome, "Put " + card.getName() + "onto battlefield?", source, game)) {
+            if (filter.match(card, game) && controller.chooseUse(outcome, "Put " + card.getName() + " onto the battlefield?", source, game)) {
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 Permanent permanent = game.getPermanent(card.getId());
                 if (permanent != null) {

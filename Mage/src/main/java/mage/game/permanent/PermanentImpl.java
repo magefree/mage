@@ -332,6 +332,12 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                         if (object != null) {
                             restrictHints.add(HintUtils.prepareText("Must attack defender " + object.getLogName() + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_REQUIRE));
                         }
+                        Player player = game.getPlayer(entry.getKey().mustAttackDefender(ability, game));
+                        if (player != null) {
+                            restrictHints.add(HintUtils.prepareText(
+                                    "Must attack defender " + player.getLogName() + addSourceObjectName(game, ability),
+                                    null, HintUtils.HINT_ICON_REQUIRE));
+                        }
                         object = game.getObject(entry.getKey().mustBlockAttacker(ability, game));
                         if (object != null) {
                             restrictHints.add(HintUtils.prepareText("Must block attacker " + object.getLogName() + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_REQUIRE));

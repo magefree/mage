@@ -14,7 +14,9 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author Alex-Vasile
@@ -31,8 +33,11 @@ public class StennParanoidPartisan extends CardImpl {
         this.toughness = new MageInt(2);
 
         // As Stenn, Paranoid Partisan enters the battlefield, choose a card type other than creature or land.
+        List<CardType> cardTypesOther = Arrays.stream(CardType.values()).collect(Collectors.toList());
+        cardTypesOther.remove(CardType.CREATURE);
+        cardTypesOther.remove(CardType.LAND);
         this.addAbility(new AsEntersBattlefieldAbility(
-                new ChooseCardTypeEffect(Outcome.Benefit, Arrays.asList(CardType.ARTIFACT, CardType.ENCHANTMENT, CardType.INSTANT, CardType.SORCERY))
+                new ChooseCardTypeEffect(Outcome.Benefit, cardTypesOther)
                         .setText("choose a card type other than creature or land")
         ));
 
