@@ -147,6 +147,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("The Mouth of Sauron", 216, Rarity.UNCOMMON, mage.cards.t.TheMouthOfSauron.class));
         cards.add(new SetCardInfo("The One Ring", 246, Rarity.MYTHIC, mage.cards.t.TheOneRing.class));
         cards.add(new SetCardInfo("The Shire", 260, Rarity.RARE, mage.cards.t.TheShire.class));
+        cards.add(new SetCardInfo("Theoden, King of Rohan", 233, Rarity.UNCOMMON, mage.cards.t.TheodenKingOfRohan.class));
         cards.add(new SetCardInfo("There and Back Again", 151, Rarity.RARE, mage.cards.t.ThereAndBackAgain.class));
         cards.add(new SetCardInfo("Tom Bombadil", 234, Rarity.MYTHIC, mage.cards.t.TomBombadil.class));
         cards.add(new SetCardInfo("Took Reaper", 35, Rarity.COMMON, mage.cards.t.TookReaper.class));
