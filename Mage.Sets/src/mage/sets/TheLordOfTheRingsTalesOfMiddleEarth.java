@@ -110,6 +110,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Protector of Gondor", 25, Rarity.COMMON, mage.cards.p.ProtectorOfGondor.class));
         cards.add(new SetCardInfo("Quickbeam, Upstart Ent", 183, Rarity.UNCOMMON, mage.cards.q.QuickbeamUpstartEnt.class));
         cards.add(new SetCardInfo("Rally at the Hornburg", 142, Rarity.COMMON, mage.cards.r.RallyAtTheHornburg.class));
+        cards.add(new SetCardInfo("Ranger's Firebrand", 143, Rarity.UNCOMMON, mage.cards.r.RangersFirebrand.class));
         cards.add(new SetCardInfo("Rangers of Ithilien", 66, Rarity.RARE, mage.cards.r.RangersOfIthilien.class));
         cards.add(new SetCardInfo("Reprieve", 26, Rarity.UNCOMMON, mage.cards.r.Reprieve.class));
         cards.add(new SetCardInfo("Revive the Shire", 185, Rarity.COMMON, mage.cards.r.ReviveTheShire.class));
