@@ -17,11 +17,11 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class ErkenbrandLordOfTheWestfold extends CardImpl {
+public final class ErkenbrandLordOfWestfold extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent(SubType.HUMAN, "Human creature");
 
-    public ErkenbrandLordOfTheWestfold(UUID ownerId, CardSetInfo setInfo) {
+    public ErkenbrandLordOfWestfold(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
 
         this.supertype.add(SuperType.LEGENDARY);
@@ -30,19 +30,19 @@ public final class ErkenbrandLordOfTheWestfold extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever Erkenbrand, Lord of the Westfold or another Human creature enters the battlefield under your control, creatures you control get +1/+0 until end of turn.
+        // Whenever Erkenbrand, Lord of Westfold or another Human creature enters the battlefield under your control, creatures you control get +1/+0 until end of turn.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new BoostControlledEffect(1, 0, Duration.EndOfTurn),
                 filter, false, true
         ));
     }
 
-    private ErkenbrandLordOfTheWestfold(final ErkenbrandLordOfTheWestfold card) {
+    private ErkenbrandLordOfWestfold(final ErkenbrandLordOfWestfold card) {
         super(card);
     }
 
     @Override
-    public ErkenbrandLordOfTheWestfold copy() {
-        return new ErkenbrandLordOfTheWestfold(this);
+    public ErkenbrandLordOfWestfold copy() {
+        return new ErkenbrandLordOfWestfold(this);
     }
 }
