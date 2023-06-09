@@ -1,6 +1,5 @@
 package mage.abilities.common;
 
-import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.TargetController;
@@ -21,10 +20,7 @@ public class PlayCardTriggeredAbility extends TriggeredAbilityImpl {
      * @param effect
      */
     public PlayCardTriggeredAbility(TargetController targetController, Zone zone, Effect effect) {
-        super(zone, effect);
-        this.targetController = targetController;
-
-        constructTriggerPhrase();
+        this(targetController, zone, effect, false);
     }
 
     /**
@@ -98,7 +94,7 @@ public class PlayCardTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public TriggeredAbility copy() {
+    public PlayCardTriggeredAbility copy() {
         return new PlayCardTriggeredAbility(this);
     }
 
