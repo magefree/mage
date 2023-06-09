@@ -93,6 +93,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Meriadoc Brandybuck", 177, Rarity.UNCOMMON, mage.cards.m.MeriadocBrandybuck.class));
         cards.add(new SetCardInfo("Minas Tirith", 256, Rarity.RARE, mage.cards.m.MinasTirith.class));
         cards.add(new SetCardInfo("Mines of Moria", 257, Rarity.RARE, mage.cards.m.MinesOfMoria.class));
+        cards.add(new SetCardInfo("Mirkwood Spider", 178, Rarity.COMMON, mage.cards.m.MirkwoodSpider.class));
         cards.add(new SetCardInfo("Morgul-Knife Wound", 98, Rarity.COMMON, mage.cards.m.MorgulKnifeWound.class));
         cards.add(new SetCardInfo("Moria Marauder", 138, Rarity.RARE, mage.cards.m.MoriaMarauder.class));
         cards.add(new SetCardInfo("Mount Doom", 258, Rarity.MYTHIC, mage.cards.m.MountDoom.class));
