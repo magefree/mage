@@ -22,6 +22,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Aragorn, the Uniter", 192, Rarity.MYTHIC, mage.cards.a.AragornTheUniter.class));
         cards.add(new SetCardInfo("Arwen Undomiel", 194, Rarity.UNCOMMON, mage.cards.a.ArwenUndomiel.class));
         cards.add(new SetCardInfo("Arwen's Gift", 39, Rarity.COMMON, mage.cards.a.ArwensGift.class));
+        cards.add(new SetCardInfo("Arwen, Mortal Queen", 193, Rarity.MYTHIC, mage.cards.a.ArwenMortalQueen.class));
         cards.add(new SetCardInfo("Assault on Osgiliath", 285, Rarity.RARE, mage.cards.a.AssaultOnOsgiliath.class));
         cards.add(new SetCardInfo("Bag End Porter", 153, Rarity.COMMON, mage.cards.b.BagEndPorter.class));
         cards.add(new SetCardInfo("Barad-dur", 253, Rarity.RARE, mage.cards.b.BaradDur.class));
