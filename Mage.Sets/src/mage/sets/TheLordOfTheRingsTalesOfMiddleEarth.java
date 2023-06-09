@@ -50,6 +50,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Fangorn, Tree Shepherd", 166, Rarity.RARE, mage.cards.f.FangornTreeShepherd.class));
         cards.add(new SetCardInfo("Fiery Inscription", 126, Rarity.UNCOMMON, mage.cards.f.FieryInscription.class));
         cards.add(new SetCardInfo("Fire of Orthanc", 127, Rarity.COMMON, mage.cards.f.FireOfOrthanc.class));
+        cards.add(new SetCardInfo("Flame of Anor", 203, Rarity.RARE, mage.cards.f.FlameOfAnor.class));
         cards.add(new SetCardInfo("Flowering of the White Tree", 15, Rarity.RARE, mage.cards.f.FloweringOfTheWhiteTree.class));
         cards.add(new SetCardInfo("Foray of Orcs", 128, Rarity.UNCOMMON, mage.cards.f.ForayOfOrcs.class));
         cards.add(new SetCardInfo("Forest", 270, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
