@@ -1,17 +1,18 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.TheRingTemptsYouChooseAnotherTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 
 import java.util.UUID;
 
@@ -42,7 +43,7 @@ public final class GandalfFriendOfTheShire extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter)));
 
         // Whenever the Ring tempts you, if you chose a creature other than Gandalf, Friend of the Shire as your Ring-bearer, draw a card.
-        this.addAbility(new GandalfFriendOfTheShireTriggeredAbility());
+        this.addAbility(new TheRingTemptsYouChooseAnotherTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
     private GandalfFriendOfTheShire(final GandalfFriendOfTheShire card) {
@@ -55,31 +56,3 @@ public final class GandalfFriendOfTheShire extends CardImpl {
     }
 }
 
-class GandalfFriendOfTheShireTriggeredAbility extends TriggeredAbilityImpl {
-
-    GandalfFriendOfTheShireTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
-        this.setTriggerPhrase("Whenever the Ring tempts you, if you chose a creature other than {this} as your Ring-bearer, ");
-    }
-
-    private GandalfFriendOfTheShireTriggeredAbility(final GandalfFriendOfTheShireTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public GandalfFriendOfTheShireTriggeredAbility copy() {
-        return new GandalfFriendOfTheShireTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TEMPTED_BY_RING;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return this.isControlledBy(event.getPlayerId())
-                && event.getTargetId() != null
-                && !event.getTargetId().equals(this.getSourceId());
-    }
-}

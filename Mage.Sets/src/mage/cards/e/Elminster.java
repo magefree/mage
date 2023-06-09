@@ -3,8 +3,8 @@ package mage.cards.e;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.SpellAbility;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.CanBeYourCommanderAbility;
+import mage.abilities.common.ScryTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
@@ -38,7 +38,7 @@ public final class Elminster extends CardImpl {
         this.setStartingLoyalty(5);
 
         // Whenever you scry, the next instant or sorcery spell you cast this turn costs {X} less to cast, where X is the number of cards looked at while scrying this way.
-        this.addAbility(new ElminsterTriggeredAbility());
+        this.addAbility(new ScryTriggeredAbility(new ElminsterReductionEffect()), new ElminsterWatcher());
 
         // +2: Draw a card, then scry 2.
         Ability ability = new LoyaltyAbility(new DrawCardSourceControllerEffect(1), 2);
@@ -62,58 +62,18 @@ public final class Elminster extends CardImpl {
     }
 }
 
-class ElminsterTriggeredAbility extends TriggeredAbilityImpl {
-
-    ElminsterTriggeredAbility() {
-        super(Zone.BATTLEFIELD, null);
-        this.addWatcher(new ElminsterWatcher());
-    }
-
-    private ElminsterTriggeredAbility(final ElminsterTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public ElminsterTriggeredAbility copy() {
-        return new ElminsterTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SCRIED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (isControlledBy(event.getPlayerId())) {
-            this.getEffects().clear();
-            this.addEffect(new ElminsterReductionEffect(event.getAmount()));
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you scry, the next instant or sorcery spell you cast this turn costs {X} less to cast, where X is the number of cards looked at while scrying this way.";
-    }
-}
-
 class ElminsterReductionEffect extends CostModificationEffectImpl {
 
     private int spellsCast;
-    private final int amount;
 
-    ElminsterReductionEffect(int amount) {
+    ElminsterReductionEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        this.amount = amount;
-        staticText = "the next instant or sorcery spell you cast this turn costs {X} less to cast, " +
-                "where X is {this}'s power as this ability resolves";
+        staticText = " the next instant or sorcery spell you cast this turn costs {X} less to cast, " +
+                "where X is the number of cards looked at while scrying this way";
     }
 
     private ElminsterReductionEffect(final ElminsterReductionEffect effect) {
         super(effect);
-        this.amount = effect.amount;
         this.spellsCast = effect.spellsCast;
     }
 
@@ -128,7 +88,7 @@ class ElminsterReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        CardUtil.reduceCost(abilityToModify, amount);
+        CardUtil.reduceCost(abilityToModify, (Integer) getValue("amount"));
         return true;
     }
 
