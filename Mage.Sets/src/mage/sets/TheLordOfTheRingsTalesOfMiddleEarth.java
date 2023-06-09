@@ -143,6 +143,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Shortcut to Mushrooms", 187, Rarity.UNCOMMON, mage.cards.s.ShortcutToMushrooms.class));
         cards.add(new SetCardInfo("Smite the Deathless", 148, Rarity.COMMON, mage.cards.s.SmiteTheDeathless.class));
         cards.add(new SetCardInfo("Snarling Warg", 109, Rarity.COMMON, mage.cards.s.SnarlingWarg.class));
+        cards.add(new SetCardInfo("Soldier of the Grey Host", 32, Rarity.COMMON, mage.cards.s.SoldierOfTheGreyHost.class));
         cards.add(new SetCardInfo("Soothing of Smeagol", 70, Rarity.COMMON, mage.cards.s.SoothingOfSmeagol.class));
         cards.add(new SetCardInfo("Stalwarts of Osgiliath", 33, Rarity.COMMON, mage.cards.s.StalwartsOfOsgiliath.class));
         cards.add(new SetCardInfo("Stern Scolding", 71, Rarity.UNCOMMON, mage.cards.s.SternScolding.class));
