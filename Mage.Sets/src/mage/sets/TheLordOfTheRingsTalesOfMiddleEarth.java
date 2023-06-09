@@ -119,6 +119,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Saruman's Trickery", 68, Rarity.UNCOMMON, mage.cards.s.SarumansTrickery.class));
         cards.add(new SetCardInfo("Sauron, the Lidless Eye", 288, Rarity.MYTHIC, mage.cards.s.SauronTheLidlessEye.class));
         cards.add(new SetCardInfo("Sauron, the Necromancer", 106, Rarity.RARE, mage.cards.s.SauronTheNecromancer.class));
+        cards.add(new SetCardInfo("Scroll of Isildur", 69, Rarity.RARE, mage.cards.s.ScrollOfIsildur.class));
         cards.add(new SetCardInfo("Second Breakfast", 29, Rarity.COMMON, mage.cards.s.SecondBreakfast.class));
         cards.add(new SetCardInfo("Shadow Summoning", 226, Rarity.UNCOMMON, mage.cards.s.ShadowSummoning.class));
         cards.add(new SetCardInfo("Shelob's Ambush", 108, Rarity.COMMON, mage.cards.s.ShelobsAmbush.class));
