@@ -86,6 +86,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 264, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Knight of the Keep", 291, Rarity.COMMON, mage.cards.k.KnightOfTheKeep.class));
         cards.add(new SetCardInfo("Knights of Dol Amroth", 59, Rarity.COMMON, mage.cards.k.KnightsOfDolAmroth.class));
+        cards.add(new SetCardInfo("Lash of the Balrog", 92, Rarity.COMMON, mage.cards.l.LashOfTheBalrog.class));
         cards.add(new SetCardInfo("Last March of the Ents", 172, Rarity.MYTHIC, mage.cards.l.LastMarchOfTheEnts.class));
         cards.add(new SetCardInfo("Legolas, Counter of Kills", 212, Rarity.UNCOMMON, mage.cards.l.LegolasCounterOfKills.class));
         cards.add(new SetCardInfo("Lobelia Sackville-Baggins", 93, Rarity.RARE, mage.cards.l.LobeliaSackvilleBaggins.class));
