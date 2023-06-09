@@ -109,6 +109,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 268, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mushroom Watchdogs", 180, Rarity.COMMON, mage.cards.m.MushroomWatchdogs.class));
         cards.add(new SetCardInfo("Nazgul", 100, Rarity.UNCOMMON, mage.cards.n.Nazgul.class));
+        cards.add(new SetCardInfo("Nimble Hobbit", 23, Rarity.COMMON, mage.cards.n.NimbleHobbit.class));
         cards.add(new SetCardInfo("Oath of the Grey Host", 101, Rarity.UNCOMMON, mage.cards.o.OathOfTheGreyHost.class));
         cards.add(new SetCardInfo("Oliphaunt", 139, Rarity.COMMON, mage.cards.o.Oliphaunt.class));
         cards.add(new SetCardInfo("Olog-hai Crusher", 140, Rarity.COMMON, mage.cards.o.OlogHaiCrusher.class));
