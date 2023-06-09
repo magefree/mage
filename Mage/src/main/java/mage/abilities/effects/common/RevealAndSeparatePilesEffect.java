@@ -92,7 +92,11 @@ public class RevealAndSeparatePilesEffect extends OneShotEffect {
                     Target targetOpponent = new TargetOpponent(true);
                     controller.chooseTarget(Outcome.Neutral, targetOpponent, source, game);
                     opponent = game.getPlayer(targetOpponent.getFirstTarget());
-                    game.informPlayers(controller.getLogName() + " chose " + opponent.getLogName() + " to " + message);
+                    if (opponent != null) {
+                        game.informPlayers(controller.getLogName() + " chose " + opponent.getLogName() + " to " + message);
+                    } else {
+                        game.informPlayers(controller.getLogName() + " chose nothing" + " to " + message);
+                    }
                 }
                 return opponent;
         }

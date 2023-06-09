@@ -38,7 +38,7 @@ public final class QuickbeamUpstartEnt extends CardImpl {
                 filter, false, true
         );
         ability.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance())
-                .setText("and gain trample until the end of turn"));
+                .setText("and gain trample until end of turn"));
         ability.addTarget(new TargetCreaturePermanent(0, 2));
         this.addAbility(ability);
     }

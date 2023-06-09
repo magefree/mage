@@ -275,6 +275,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 rules.addAll(info.values());
             }
 
+            if (game == null || game.getPhase() == null) {
+                // dynamic hints for started game only
+                return rules;
+            }
+
             // ability hints
             List<String> abilityHints = new ArrayList<>();
             if (HintUtils.ABILITY_HINTS_ENABLE) {
@@ -290,7 +295,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
             // restrict hints
             List<String> restrictHints = new ArrayList<>();
-            if (game != null && HintUtils.RESTRICT_HINTS_ENABLE) {
+            if (HintUtils.RESTRICT_HINTS_ENABLE) {
                 // restrict
                 for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
                     for (Ability ability : entry.getValue()) {
@@ -331,6 +336,12 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                         MageObject object = game.getObject(entry.getKey().mustAttackDefender(ability, game));
                         if (object != null) {
                             restrictHints.add(HintUtils.prepareText("Must attack defender " + object.getLogName() + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_REQUIRE));
+                        }
+                        Player player = game.getPlayer(entry.getKey().mustAttackDefender(ability, game));
+                        if (player != null) {
+                            restrictHints.add(HintUtils.prepareText(
+                                    "Must attack defender " + player.getLogName() + addSourceObjectName(game, ability),
+                                    null, HintUtils.HINT_ICON_REQUIRE));
                         }
                         object = game.getObject(entry.getKey().mustBlockAttacker(ability, game));
                         if (object != null) {

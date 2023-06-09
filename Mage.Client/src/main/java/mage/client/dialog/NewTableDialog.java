@@ -603,7 +603,6 @@ public class NewTableDialog extends MageDialog {
             options.getPlayerTypes().add(player.getPlayerType());
         }
         options.setDeckType((String) this.cbDeckType.getSelectedItem());
-        options.setLimited(options.getDeckType().startsWith("Limited"));
         options.setMatchTimeLimit((MatchTimeLimit) this.cbTimeLimit.getSelectedItem());
         options.setAttackOption((MultiplayerAttackOption) this.cbAttackOption.getSelectedItem());
         options.setSkillLevel((SkillLevel) this.cbSkillLevel.getSelectedItem());
@@ -621,6 +620,10 @@ public class NewTableDialog extends MageDialog {
         options.setMullgianType((MulliganType) this.cbMulligan.getSelectedItem());
         String serverAddress = SessionHandler.getSession().getServerHostname().orElse("");
         options.setBannedUsers(IgnoreList.getIgnoredUsers(serverAddress));
+        options.setLimited(options.getDeckType().startsWith("Limited"));
+        if (options.getDeckType().startsWith("Variant Magic - Freeform Unlimited Commander")) {
+            options.setLimited(true); // limited-style sideboarding with unlimited basics enabled for Freeform Unlimited Commander
+        }
 
         return options;
     }

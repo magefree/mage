@@ -17,7 +17,6 @@ import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.target.common.TargetCardInLibrary;
 import mage.watchers.Watcher;
@@ -48,7 +47,7 @@ public final class SiftThroughSands extends CardImpl {
         this.getSpellAbility().addEffect(effect);
 
         // If you've cast a spell named Peer Through Depths and a spell named Reach Through Mists this turn, you may search your library for a card named The Unspeakable, put it onto the battlefield, then shuffle your library.
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false, true), new SiftThroughSandsCondition(), rule));
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false), new SiftThroughSandsCondition(), rule));
         this.getSpellAbility().addWatcher(new SiftThroughSandsWatcher());
     }
 

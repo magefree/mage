@@ -21,7 +21,7 @@ import mage.filter.FilterPermanent;
  */
 public final class TraprootKami extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("the number of Forests on the battlefield");
+    private static final FilterPermanent filter = new FilterPermanent("Forests on the battlefield");
 
     static {
         filter.add(SubType.FOREST.getPredicate());

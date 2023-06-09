@@ -102,6 +102,7 @@ public class SacrificeEffect extends OneShotEffect {
             sb.append(CardUtil.addArticle(filter.getMessage()));
         } else {
             sb.append(CardUtil.numberToText(count.toString(), "a"));
+            sb.append(" ");
             sb.append(filter.getMessage());
         }
         staticText = sb.toString();

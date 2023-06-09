@@ -1,45 +1,41 @@
-
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class KazuulsTollCollector extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Equipment you control");
-
-    static {
-        filter.add(SubType.EQUIPMENT.getPredicate());
-    }
+    private static final FilterPermanent filter
+            = new FilterControlledPermanent(SubType.EQUIPMENT, "Equipment you control");
 
     public KazuulsTollCollector(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add(SubType.OGRE);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
         // {0}: Attach target Equipment you control to Kazuul's Toll Collector. Activate this ability only any time you could cast a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new KazuulsTollCollectorEffect(), new ManaCostsImpl<>("{0}"));
-        ability.addTarget(new TargetControlledPermanent(filter));
+        Ability ability = new ActivateAsSorceryActivatedAbility(new KazuulsTollCollectorEffect(), new GenericManaCost(0));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 
@@ -57,7 +53,7 @@ class KazuulsTollCollectorEffect extends OneShotEffect {
 
     public KazuulsTollCollectorEffect() {
         super(Outcome.BoostCreature);
-        staticText = "Attach target Equipment you control to {this}";
+        staticText = "attach target Equipment you control to {this}";
     }
 
     public KazuulsTollCollectorEffect(final KazuulsTollCollectorEffect effect) {
@@ -71,11 +67,9 @@ class KazuulsTollCollectorEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent equipment = game.getPermanent(source.getFirstTarget());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && equipment != null) {
-            return permanent.addAttachment(equipment.getId(), source, game);
-        }
-        return false;
+        Permanent equipment = game.getPermanent(getTargetPointer().getFirst(game, source));
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        return permanent != null && equipment != null
+                && permanent.addAttachment(equipment.getId(), source, game);
     }
 }

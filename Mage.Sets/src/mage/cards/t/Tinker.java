@@ -25,7 +25,7 @@ public final class Tinker extends CardImpl {
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))));
 
         // Search your library for an artifact card and put that card onto the battlefield. Then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterArtifactCard("an artifact card"))));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterArtifactCard("an artifact card")), false, true));
     }
 
     private Tinker(final Tinker card) {

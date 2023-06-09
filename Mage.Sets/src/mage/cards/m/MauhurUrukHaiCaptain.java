@@ -41,7 +41,7 @@ public final class MauhurUrukHaiCaptain extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // If one or more +1/+1 counters would be put on an Army, Goblin, or Orc you control, that many plus one +1/+1 counters are put on it instead.
         this.addAbility(new SimpleStaticAbility(new ModifyCountersAddedEffect(filter, CounterType.P1P1)));

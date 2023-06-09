@@ -49,7 +49,7 @@ public class TrailOfTheMageRingsPlane extends Plane {
         this.getAbilities().add(ability);
 
         // Active player can roll the planar die: Whenever you roll {CHAOS}, you may search your library for an instant or sorcery card, reveal it, put it into your hand, then shuffle your library
-        Effect chaosEffect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, new FilterInstantOrSorceryCard()), true, true);
+        Effect chaosEffect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, new FilterInstantOrSorceryCard()), true);
         Target chaosTarget = null;
 
         List<Effect> chaosEffects = new ArrayList<Effect>();

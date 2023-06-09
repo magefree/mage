@@ -20,56 +20,25 @@ import java.util.UUID;
 public class ReturnFromExileForSourceEffect extends OneShotEffect {
 
     private final Zone returnToZone;
-    private final boolean tapped;
-    private final boolean previousZone;
-    private String returnName = "cards";
-    private String returnControlName;
+    private boolean pluralCards;
+    private boolean pluralOwners;
 
     /**
      * @param zone Zone the card should return to
      */
     public ReturnFromExileForSourceEffect(Zone zone) {
-        this(zone, false);
-    }
-
-    public ReturnFromExileForSourceEffect(Zone zone, boolean tapped) {
-        this(zone, tapped, true);
-    }
-
-    /**
-     * @param zone
-     * @param tapped
-     * @param previousZone if this is used from a dies leave battlefield or
-     *                     destroyed trigger, the exile zone is based on previous zone of the object
-     */
-    public ReturnFromExileForSourceEffect(Zone zone, boolean tapped, boolean previousZone) {
         super(Outcome.PutCardInPlay);
         this.returnToZone = zone;
-        this.tapped = tapped;
-        this.previousZone = previousZone;
-
-        // different default name for zones
-        switch (zone) {
-            case BATTLEFIELD:
-                this.returnControlName = "its owner's";
-                break;
-            default:
-                this.returnControlName = "their owner's";
-                break;
-        }
-
+        this.pluralCards = false;
+        this.pluralOwners = false;
         updateText();
     }
 
     public ReturnFromExileForSourceEffect(final ReturnFromExileForSourceEffect effect) {
         super(effect);
         this.returnToZone = effect.returnToZone;
-        this.tapped = effect.tapped;
-        this.previousZone = effect.previousZone;
-        this.returnName = effect.returnName;
-        this.returnControlName = effect.returnControlName;
-
-        updateText();
+        this.pluralCards = effect.pluralCards;
+        this.pluralOwners = effect.pluralOwners;
     }
 
     @Override
@@ -108,30 +77,32 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
         return true;
     }
 
+    public ReturnFromExileForSourceEffect withText(boolean pluralCards, boolean pluralOwners) {
+        this.pluralCards = pluralCards;
+        this.pluralOwners = pluralOwners;
+        updateText();
+        return this;
+    }
+
     private void updateText() {
         StringBuilder sb = new StringBuilder();
-        sb.append("return the exiled ").append(this.returnName).append(" ");
+        sb.append("return the exiled ").append(pluralCards ? "cards" : "card").append(" to ");
+        if (returnToZone == Zone.BATTLEFIELD) {
+            sb.append("the battlefield under ");
+        }
+        sb.append(pluralCards ? "their " : "its ").append(pluralOwners ? "owners' " : "owner's ");
         switch (returnToZone) {
             case BATTLEFIELD:
-                sb.append("to the battlefield under ").append(this.returnControlName).append(" control");
-                if (tapped) {
-                    sb.append(" tapped");
-                }
+                sb.append("control");
                 break;
             case HAND:
-                sb.append("to ").append(this.returnControlName).append(" hand");
+                sb.append(pluralOwners ? "hands" : "hand");
                 break;
             case GRAVEYARD:
-                sb.append("to ").append(this.returnControlName).append(" graveyard");
+                sb.append(pluralOwners ? "graveyards" : "graveyard");
                 break;
         }
         staticText = sb.toString();
     }
 
-    public ReturnFromExileForSourceEffect withReturnName(String returnName, String returnControlName) {
-        this.returnName = returnName;
-        this.returnControlName = returnControlName;
-        updateText();
-        return this;
-    }
 }

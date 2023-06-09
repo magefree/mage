@@ -2,16 +2,15 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -105,6 +104,9 @@ enum DonalHeraldOfWingsApplier implements StackObjectCopyApplier {
         copiedSpell.addSubType(SubType.SPIRIT);
         copiedSpell.getPower().setModifiedBaseValue(1);
         copiedSpell.getToughness().setModifiedBaseValue(1);
+        Ability ability = new SimpleStaticAbility(new SetBasePowerToughnessSourceEffect(1,1, Duration.Custom, SubLayer.SetPT_7b));
+        ability.setRuleVisible(false);
+        copiedSpell.getAbilities().add(ability);
     }
 
     @Override

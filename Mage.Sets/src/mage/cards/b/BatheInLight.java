@@ -55,7 +55,7 @@ class BatheInLightEffect extends OneShotEffect {
 
     public BatheInLightEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Target creature and each other creature that shares a color with it gain protection from the chosen color until end of turn";
+        this.staticText = "Choose a color. Target creature and each other creature that shares a color with it gain protection from the chosen color until end of turn";
     }
 
     public BatheInLightEffect(final BatheInLightEffect effect) {

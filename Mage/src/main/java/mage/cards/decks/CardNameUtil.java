@@ -9,6 +9,7 @@ public class CardNameUtil {
     public static String normalizeCardName(String name) {
         return name
             .replace("&amp;", "//")
+            .replace("///", "//")
             .replace("Ã†", "Ae")
             .replace("Ã¶", "A")
             .replace("ö", "o")
@@ -19,7 +20,8 @@ public class CardNameUtil {
             .replace("à", "a")
             .replace("é", "e")
             .replace("ú", "u")
-            .replace("†", "+");
+            .replace("†", "+")
+            .replace("★", "*");
     }
 
 }

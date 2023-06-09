@@ -38,7 +38,7 @@ public final class RelicSeeker extends CardImpl {
 
         // When Relic Seeker becomes renowned, you may search your library for an Equipment card, reveal it, put it into your hand, then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(1, 1, filter);
-        this.addAbility(new BecomesRenownedSourceTriggeredAbility(new SearchLibraryPutInHandEffect(target, true, true), true));
+        this.addAbility(new BecomesRenownedSourceTriggeredAbility(new SearchLibraryPutInHandEffect(target, true), true));
 
     }
 

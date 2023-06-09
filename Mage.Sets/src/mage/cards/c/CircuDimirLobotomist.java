@@ -103,7 +103,7 @@ class CircuDimirLobotomistRuleModifyingEffect extends ContinuousRuleModifyingEff
 
     public CircuDimirLobotomistRuleModifyingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Your opponents can't cast nonland cards with the same name as a card exiled with {this}";
+        staticText = "Your opponents can't cast spells with the same name as a card exiled with {this}";
     }
 
     public CircuDimirLobotomistRuleModifyingEffect(final CircuDimirLobotomistRuleModifyingEffect effect) {

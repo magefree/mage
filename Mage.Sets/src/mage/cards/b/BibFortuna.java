@@ -30,7 +30,7 @@ public final class BibFortuna extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Bib Fortuna enters the battlefield search your library for a card then shuffle your library and put in on top. You lose 1 life.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary()), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(), false), false);
         ability.addEffect(new LoseLifeSourceControllerEffect(1));
         this.addAbility(ability);
 

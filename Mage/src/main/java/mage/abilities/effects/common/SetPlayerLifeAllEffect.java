@@ -85,7 +85,7 @@ public class SetPlayerLifeAllEffect extends OneShotEffect {
             default:
                 throw new UnsupportedOperationException("Not supported value for targetController");
         }
-        sb.append(" 's life total becomes ");
+        sb.append("'s life total becomes ");
         sb.append(amount.toString());
         return sb.toString();
     }

@@ -39,7 +39,7 @@ public final class WeatherseedTotem extends CardImpl {
                         .withSubType(SubType.TREEFOLK)
                         .withType(CardType.ARTIFACT)
                         .withAbility(TrampleAbility.getInstance()),
-                "", Duration.EndOfTurn
+                CardType.ARTIFACT, Duration.EndOfTurn
         ), new ManaCostsImpl<>("{2}{G}{G}{G}")));
 
         // When Weatherseed Totem is put into a graveyard from the battlefield, if it was a creature, return this card to its owner's hand.

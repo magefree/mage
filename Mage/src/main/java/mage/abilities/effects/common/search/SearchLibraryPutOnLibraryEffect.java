@@ -18,24 +18,16 @@ import mage.util.CardUtil;
 public class SearchLibraryPutOnLibraryEffect extends SearchEffect {
 
     private boolean reveal;
-    private boolean forceShuffle;
 
-    public SearchLibraryPutOnLibraryEffect(TargetCardInLibrary target) {
-        this(target, false, true);
-        setText();
-    }
-
-    public SearchLibraryPutOnLibraryEffect(TargetCardInLibrary target, boolean reveal, boolean forceShuffle) {
+    public SearchLibraryPutOnLibraryEffect(TargetCardInLibrary target, boolean reveal) {
         super(target, Outcome.DrawCard);
         this.reveal = reveal;
-        this.forceShuffle = forceShuffle;
         setText();
     }
 
     public SearchLibraryPutOnLibraryEffect(final SearchLibraryPutOnLibraryEffect effect) {
         super(effect);
         this.reveal = effect.reveal;
-        this.forceShuffle = effect.forceShuffle;
     }
 
     @Override
@@ -55,16 +47,11 @@ public class SearchLibraryPutOnLibraryEffect extends SearchEffect {
             if (reveal && !foundCards.isEmpty()) {
                 controller.revealCards(sourceObject.getIdName(), foundCards, game);
             }
-            if (forceShuffle) {
-                controller.shuffleLibrary(source, game);
-            }
+            controller.shuffleLibrary(source, game);
             controller.putCardsOnTopOfLibrary(foundCards, game, source, reveal);
             return true;
         }
-        // shuffle
-        if (forceShuffle) {
-            controller.shuffleLibrary(source, game);
-        }
+        controller.shuffleLibrary(source, game);
         return false;
     }
 

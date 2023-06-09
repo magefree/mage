@@ -43,7 +43,7 @@ public final class LagomosHandOfHatred extends CardImpl {
         // {T}: Search your library for a card, put it into your hand, then shuffle. Activate only if five or more creatures died this turn.
         this.addAbility(new ConditionalActivatedAbility(
                 Zone.BATTLEFIELD,
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary()),
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false),
                 new TapSourceCost(),
                 LagomosHandOfHatredCondition.instance
         ));

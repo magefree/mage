@@ -79,7 +79,7 @@ class RemembranceTriggeredAbility extends TriggeredAbilityImpl {
             filterCard.add(new NamePredicate(permanent.getName()));
             this.getEffects().clear();
             this.addEffect(new SearchLibraryPutInHandEffect(
-                    new TargetCardInLibrary(filterCard), true, true
+                    new TargetCardInLibrary(filterCard), true
             ));
             return true;
         }

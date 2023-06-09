@@ -41,6 +41,7 @@ import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static java.util.Collections.emptyList;
@@ -1098,6 +1099,10 @@ public class GameState implements Serializable, Copyable<GameState> {
         return values.get(valueId);
     }
 
+    public Object computeValueIfAbsent(String valueId, Function<String, ?> mappingFunction) {
+        return values.computeIfAbsent(valueId, mappingFunction);
+    }
+
     /**
      * Return values list starting with searching key.
      * <p>
@@ -1383,10 +1388,16 @@ public class GameState implements Serializable, Copyable<GameState> {
         // main part prepare (must be called after other parts cause it change ids for all)
         prepareCardForCopy(mainCardToCopy, copiedCard, newController);
 
+        // 707.12. An effect that instructs a player to cast a copy of an object (and not just copy a spell) follows the rules for casting spells, except that the copy is created in the same zone the object is in and then cast while another spell or ability is resolving.
+        Zone copyToZone = game.getState().getZone(mainCardToCopy.getId());
+        if (copyToZone == Zone.BATTLEFIELD) {
+            throw new UnsupportedOperationException("Cards cannot be copied while on the Battlefield");
+        }
+
         // add all parts to the game
         copiedParts.forEach(card -> {
             copiedCards.put(card.getId(), card);
-            addCard(card);
+            addCard(card, copyToZone);
         });
 
         // copied cards removes from game after battlefield/stack leaves, so remember it here as workaround to fix freeze, see https://github.com/magefree/mage/issues/5437

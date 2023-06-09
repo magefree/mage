@@ -38,7 +38,7 @@ public final class ScreamingSeahawk extends CardImpl {
         
         // When Screaming Seahawk enters the battlefield, you may search your library for a card named Screaming Seahawk, reveal it, and put it into your hand. If you do, shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(1, 1, filter);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true, true), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true), true));
     }
 
     private ScreamingSeahawk(final ScreamingSeahawk card) {

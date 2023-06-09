@@ -37,7 +37,7 @@ public final class InfernalTutor extends CardImpl {
         this.getSpellAbility().addEffect(new InfernalTutorEffect());
         // Hellbent - If you have no cards in hand, instead search your library for a card, put it into your hand, then shuffle your library.
         Effect effect = new ConditionalOneShotEffect(
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD), false, true),
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD), false),
                 HellbentCondition.instance,
                 "<br/><br/><i>Hellbent</i> &mdash; If you have no cards in hand, instead search your library for a card, put it into your hand, then shuffle");
         this.getSpellAbility().addEffect(effect);
@@ -95,7 +95,7 @@ class InfernalTutorEffect extends OneShotEffect {
                 } else {
                     filterCard = new FilterCard();
                 }
-                return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterCard), true, true).apply(game, source);
+                return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterCard), true).apply(game, source);
 
             }
             return true;

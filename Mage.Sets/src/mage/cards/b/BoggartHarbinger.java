@@ -34,7 +34,7 @@ public final class BoggartHarbinger extends CardImpl {
         // When Boggart Harbinger enters the battlefield, you may search your library for a Goblin card, reveal it,
         // then shuffle your library and put that card on top of it.
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(target, true, true),true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(target, true),true));
     }
 
     private BoggartHarbinger(final BoggartHarbinger card) {

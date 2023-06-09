@@ -58,7 +58,7 @@ public final class MagdaBrazenOutlaw extends CardImpl {
 
         // Sacrifice five Treasures: Search your library for an artifact or Dragon card, put that card onto the battlefield, then shuffle your library.
         this.addAbility(new SimpleActivatedAbility(
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter3)),
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter3), false, true),
                 new SacrificeTargetCost(new TargetControlledPermanent(5, filter4))
         ));
     }

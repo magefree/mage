@@ -1116,31 +1116,34 @@ public final class CardUtil {
         try {
             List<String> rules = rulesSource.getRules(cardName);
 
-            if (game != null) {
+            if (game == null || game.getPhase() == null) {
+                // dynamic hints for started game only
+                return rules;
+            }
 
-                // debug state
-                rules.addAll(game.getState().getCardState(cardId).getInfo().values());
+            // debug state
+            rules.addAll(game.getState().getCardState(cardId).getInfo().values());
 
-                // ability hints
-                List<String> abilityHints = new ArrayList<>();
-                if (HintUtils.ABILITY_HINTS_ENABLE) {
-                    for (Ability ability : hintsSource) {
-                        for (Hint hint : ability.getHints()) {
-                            String s = hint.getText(game, ability);
-                            if (s != null && !s.isEmpty()) {
-                                abilityHints.add(s);
-                            }
+            // ability hints
+            List<String> abilityHints = new ArrayList<>();
+            if (HintUtils.ABILITY_HINTS_ENABLE) {
+                for (Ability ability : hintsSource) {
+                    for (Hint hint : ability.getHints()) {
+                        String s = hint.getText(game, ability);
+                        if (s != null && !s.isEmpty()) {
+                            abilityHints.add(s);
                         }
                     }
                 }
-
-                // restrict hints only for permanents, not cards
-                // total hints
-                if (!abilityHints.isEmpty()) {
-                    rules.add(HintUtils.HINT_START_MARK);
-                    HintUtils.appendHints(rules, abilityHints);
-                }
             }
+
+            // restrict hints only for permanents, not cards
+            // total hints
+            if (!abilityHints.isEmpty()) {
+                rules.add(HintUtils.HINT_START_MARK);
+                HintUtils.appendHints(rules, abilityHints);
+            }
+
             return rules;
         } catch (Exception e) {
             logger.error("Exception in rules generation for card: " + cardName, e);

@@ -1191,7 +1191,11 @@ public class TestPlayer implements Player {
                         + (c.isPlaneswalker(game) ? " - L" + c.getCounters(game).getCount(CounterType.LOYALTY) : "")
                         + ", " + (c.isTapped() ? "Tapped" : "Untapped")
                         + getPrintableAliases(", [", c.getId(), "]")
-                        + (c.getAttachedTo() == null ? "" : ", attached to " + game.getPermanent(c.getAttachedTo()).getIdName())))
+                        + (c.getAttachedTo() == null ? ""
+                                : ", attached to "
+                                        + (game.getObject(c.getAttachedTo()) == null
+                                                ? game.getPlayer(c.getAttachedTo()).getName()
+                                                : game.getObject(c.getAttachedTo()).getIdName()))))
                 .sorted()
                 .collect(Collectors.toList());
 
