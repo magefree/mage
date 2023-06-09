@@ -686,7 +686,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 attackerList.remove(attackerId);
             }
         }
-        if (newAttackerOrder.size() == attackerOrder.size()) {
+        if (attackerOrder.isEmpty() || newAttackerOrder.size() == attackerOrder.size()) {
             attackerOrder.clear();
             attackerOrder.addAll(newAttackerOrder);
 
