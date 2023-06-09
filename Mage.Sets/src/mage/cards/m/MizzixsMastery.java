@@ -89,7 +89,7 @@ class MizzixsMasteryOverloadEffect extends OneShotEffect {
                     while (controller.canRespond()
                             && continueCasting
                             && !copiedCards.isEmpty()) {
-                        TargetCard targetCard = new TargetCard(0, 1, Zone.OUTSIDE,
+                        TargetCard targetCard = new TargetCard(0, 1, Zone.EXILED,
                                 new FilterCard("copied card to cast without paying its mana cost?"));
                         targetCard.setNotTarget(true);
                         if (controller.chooseTarget(Outcome.PlayForFree, copiedCards, targetCard, source, game)) {
