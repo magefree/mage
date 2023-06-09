@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class ZhulodokVoidGorger extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard();
+    private static final FilterCard filter = new FilterCard("colorless spells you cast from your hand with mana value 7 or greater");
 
     static {
         filter.add(ColorlessPredicate.instance);

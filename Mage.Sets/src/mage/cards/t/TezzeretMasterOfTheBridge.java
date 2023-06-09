@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public final class TezzeretMasterOfTheBridge extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("creature and planeswalker spells");
+    private static final FilterCard filter = new FilterCard("creature and planeswalker spells you cast");
 
     static {
         filter.add(Predicates.or(

@@ -4,11 +4,9 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.GainAbilitySpellsEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
 import mage.abilities.keyword.ConvokeAbility;
-import mage.abilities.keyword.ImproviseAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -16,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
-import mage.filter.FilterObject;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -28,7 +25,7 @@ import java.util.UUID;
  */
 public final class CaetusSeaTyrantOfSegovia extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("noncreature spells");
+    private static final FilterCard filter = new FilterCard("noncreature spells you cast");
 
     static {
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
