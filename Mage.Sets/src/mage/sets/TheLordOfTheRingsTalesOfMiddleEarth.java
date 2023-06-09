@@ -145,6 +145,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Trailblazer's Boots", 398, Rarity.RARE, mage.cards.t.TrailblazersBoots.class));
         cards.add(new SetCardInfo("Treason of Isengard", 74, Rarity.COMMON, mage.cards.t.TreasonOfIsengard.class));
         cards.add(new SetCardInfo("Troll of Khazad-dum", 111, Rarity.COMMON, mage.cards.t.TrollOfKhazadDum.class));
+        cards.add(new SetCardInfo("Uruk-hai Berserker", 112, Rarity.COMMON, mage.cards.u.UrukHaiBerserker.class));
         cards.add(new SetCardInfo("War of the Last Alliance", 36, Rarity.RARE, mage.cards.w.WarOfTheLastAlliance.class));
         cards.add(new SetCardInfo("Westfold Rider", 37, Rarity.COMMON, mage.cards.w.WestfoldRider.class));
         cards.add(new SetCardInfo("Wizard's Rockets", 252, Rarity.COMMON, mage.cards.w.WizardsRockets.class));
