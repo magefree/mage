@@ -783,7 +783,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     List<Ability> getPlayableOptions(Ability ability, Game game);
 
-    PlayableObjectsList getPlayableObjects(Game game, Zone zone, boolean ignoreManaCheck);
+    PlayableObjectsList getPlayableObjects(Game game, Zone zone);
 
     LinkedHashMap<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game game);
 

@@ -1636,7 +1636,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             Set<UUID> needIds = CardUtil.getObjectParts(object);
 
             // workaround to find all abilities first and filter it for one object
-            List<ActivatedAbility> allPlayable = getPlayable(game, true, zone, false, false);
+            List<ActivatedAbility> allPlayable = getPlayable(game, true, zone, false);
             for (ActivatedAbility ability : allPlayable) {
                 if (needIds.contains(ability.getSourceId())) {
                     useable.putIfAbsent(ability.getId(), ability);
@@ -3430,7 +3430,8 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     /**
      * @param ability
-     * @param availableMana if null, it won't be checked if enough mana is available
+     * @param availableMana if null, it won't be checked if enough mana is
+     *                      available
      * @param sourceObject
      * @param game
      * @return
@@ -3488,7 +3489,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * Returns a boolean indicating if the minimum mana cost of a given ability can be paid.
      *
      * @param ability       The ability to pay for.
-     * @param availableMana The available mana. If null, bypasses mana check and returns true
+     * @param availableMana The available mana.
      * @param game          The game to calculate this for.
      * @return Boolean. True if the minimum can be paid, false otherwise.
      */
@@ -3585,10 +3586,10 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     /**
-     * Returns a boolean indicating if any of the alternative mana costs for the given card can be afforded.
+     * Returns a boolean inidicating if any of the alternative mana costs for the given card can be afforded.
      *
      * @param sourceObject  The card
-     * @param availableMana The mana available for payments. If null, bypasses mana check and returns true
+     * @param availableMana The mana available for payments.
      * @param ability       The ability to play it by.
      * @param game          The game to check for.
      * @return Boolean, true if the card can be played by *any* of the available alternative costs, false otherwise.
@@ -3620,7 +3621,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 return true;
                             } else {
                                 if (availableMana == null) {
-                                    return true; // null is special case to bypass mana check
+                                    return true;
                                 }
 
                                 // alternative cost reduce
@@ -3684,8 +3685,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                             if (manaCosts.isEmpty()) {
                                 return true;
                             } else {
+                                // TODO: Why is it returning true if availableMana == null, one would think it should return false
                                 if (availableMana == null) {
-                                    return true; // null is special case to bypass mana check
+                                    return true;
                                 }
 
                                 // alternative cost reduce
@@ -3721,8 +3723,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected ActivatedAbility findActivatedAbilityFromPlayable(MageObject object, ManaOptions availableMana, Ability ability, Game game) {
 
         // special mana to pay spell cost
-        ManaOptions manaFull = (availableMana == null) ? null : availableMana.copy(); // null is special case to bypass mana check
-        if (ability instanceof SpellAbility && availableMana != null) {
+        ManaOptions manaFull = availableMana.copy();
+        if (ability instanceof SpellAbility) {
             for (AlternateManaPaymentAbility altAbility : CardUtil.getAbilities(object, game).stream()
                     .filter(AlternateManaPaymentAbility.class::isInstance)
                     .map(a -> (AlternateManaPaymentAbility) a)
@@ -3903,7 +3905,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public List<ActivatedAbility> getPlayable(Game game, boolean hidden) {
-        return getPlayable(game, hidden, Zone.ALL, true, false);
+        return getPlayable(game, hidden, Zone.ALL, true);
     }
 
     /**
@@ -3916,10 +3918,9 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @param fromZone                of objects from which zone (ALL = from all zones)
      * @param hideDuplicatedAbilities if equal abilities exist return only the
      *                                first instance
-     * @param ignoreManaCheck         if true, don't exclude based on available mana
      * @return
      */
-    public List<ActivatedAbility> getPlayable(Game game, boolean hidden, Zone fromZone, boolean hideDuplicatedAbilities, boolean ignoreManaCheck) {
+    public List<ActivatedAbility> getPlayable(Game game, boolean hidden, Zone fromZone, boolean hideDuplicatedAbilities) {
         List<ActivatedAbility> playable = new ArrayList<>();
         if (shouldSkipGettingPlayable(game)) {
             return playable;
@@ -3928,7 +3929,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         boolean previousState = game.inCheckPlayableState();
         game.setCheckPlayableState(true);
         try {
-            ManaOptions availableMana = ignoreManaCheck ? null : getManaAvailable(game); // get available mana options (mana pool and conditional mana added (but conditional still lose condition))
+            ManaOptions availableMana = getManaAvailable(game); // get available mana options (mana pool and conditional mana added (but conditional still lose condition))
             boolean fromAll = fromZone.equals(Zone.ALL);
             if (hidden && (fromAll || fromZone == Zone.HAND)) {
                 for (Card card : hand.getCards(game)) {
@@ -4109,14 +4110,13 @@ public abstract class PlayerImpl implements Player, Serializable {
      * show choose dialog or not)
      *
      * @param game
-     * @param ignoreManaCheck don't exclude objects based on available mana
      * @return A Set of cardIds that are playable and amount of playable
      * abilities
      */
     @Override
-    public PlayableObjectsList getPlayableObjects(Game game, Zone zone, boolean ignoreManaCheck) {
+    public PlayableObjectsList getPlayableObjects(Game game, Zone zone) {
         // collect abilities per object
-        List<ActivatedAbility> playableAbilities = getPlayable(game, true, zone, false, ignoreManaCheck); // do not hide duplicated abilities/cards
+        List<ActivatedAbility> playableAbilities = getPlayable(game, true, zone, false); // do not hide duplicated abilities/cards
         Map<UUID, List<ActivatedAbility>> playableObjects = new HashMap<>();
         for (ActivatedAbility ability : playableAbilities) {
             if (ability.getSourceId() != null) {
