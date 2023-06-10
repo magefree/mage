@@ -69,6 +69,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Frodo, Determined Hero", 289, Rarity.RARE, mage.cards.f.FrodoDeterminedHero.class));
         cards.add(new SetCardInfo("Frodo, Sauron's Bane", 18, Rarity.RARE, mage.cards.f.FrodoSauronsBane.class));
         cards.add(new SetCardInfo("Galadhrim Bow", 167, Rarity.COMMON, mage.cards.g.GaladhrimBow.class));
+        cards.add(new SetCardInfo("Galadhrim Guide", 168, Rarity.COMMON, mage.cards.g.GaladhrimGuide.class));
         cards.add(new SetCardInfo("Galadriel of Lothlorien", 206, Rarity.RARE, mage.cards.g.GaladrielOfLothlorien.class));
         cards.add(new SetCardInfo("Galadriel, Gift-Giver", 296, Rarity.RARE, mage.cards.g.GaladrielGiftGiver.class));
         cards.add(new SetCardInfo("Gandalf the Grey", 207, Rarity.RARE, mage.cards.g.GandalfTheGrey.class));
