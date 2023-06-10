@@ -595,7 +595,7 @@ public class TestPlayer implements Player {
                         break;
                     }
                     // must process all duplicated abilities (aliases need objects to search)
-                    for (ActivatedAbility ability : computerPlayer.getPlayable(game, true, Zone.ALL, false)) { // add wrong action log?
+                    for (ActivatedAbility ability : computerPlayer.getPlayable(game, true, Zone.ALL, false, false)) { // add wrong action log?
                         if (hasAbilityTargetNameOrAlias(game, ability, groups[0])) {
                             int bookmark = game.bookmarkState();
                             ActivatedAbility newAbility = ability.copy();
@@ -3638,8 +3638,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public PlayableObjectsList getPlayableObjects(Game game, Zone zone) {
-        return computerPlayer.getPlayableObjects(game, zone);
+    public PlayableObjectsList getPlayableObjects(Game game, Zone zone, boolean ignoreManaCheck) {
+        return computerPlayer.getPlayableObjects(game, zone, ignoreManaCheck);
     }
 
     @Override

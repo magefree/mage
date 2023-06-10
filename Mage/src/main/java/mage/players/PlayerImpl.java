@@ -1636,7 +1636,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             Set<UUID> needIds = CardUtil.getObjectParts(object);
 
             // workaround to find all abilities first and filter it for one object
-            List<ActivatedAbility> allPlayable = getPlayable(game, true, zone, false);
+            List<ActivatedAbility> allPlayable = getPlayable(game, true, zone, false, false);
             for (ActivatedAbility ability : allPlayable) {
                 if (needIds.contains(ability.getSourceId())) {
                     useable.putIfAbsent(ability.getId(), ability);
@@ -3905,7 +3905,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public List<ActivatedAbility> getPlayable(Game game, boolean hidden) {
-        return getPlayable(game, hidden, Zone.ALL, true);
+        return getPlayable(game, hidden, Zone.ALL, true, false);
     }
 
     /**
@@ -3918,9 +3918,10 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @param fromZone                of objects from which zone (ALL = from all zones)
      * @param hideDuplicatedAbilities if equal abilities exist return only the
      *                                first instance
+     * @param ignoreManaCheck         if true, don't exclude based on available mana
      * @return
      */
-    public List<ActivatedAbility> getPlayable(Game game, boolean hidden, Zone fromZone, boolean hideDuplicatedAbilities) {
+    public List<ActivatedAbility> getPlayable(Game game, boolean hidden, Zone fromZone, boolean hideDuplicatedAbilities, boolean ignoreManaCheck) {
         List<ActivatedAbility> playable = new ArrayList<>();
         if (shouldSkipGettingPlayable(game)) {
             return playable;
@@ -3929,7 +3930,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         boolean previousState = game.inCheckPlayableState();
         game.setCheckPlayableState(true);
         try {
-            ManaOptions availableMana = getManaAvailable(game); // get available mana options (mana pool and conditional mana added (but conditional still lose condition))
+            ManaOptions availableMana = ignoreManaCheck ? null : getManaAvailable(game); // get available mana options (mana pool and conditional mana added (but conditional still lose condition))
             boolean fromAll = fromZone.equals(Zone.ALL);
             if (hidden && (fromAll || fromZone == Zone.HAND)) {
                 for (Card card : hand.getCards(game)) {
@@ -4110,13 +4111,14 @@ public abstract class PlayerImpl implements Player, Serializable {
      * show choose dialog or not)
      *
      * @param game
+     * @param ignoreManaCheck don't exclude objects based on available mana
      * @return A Set of cardIds that are playable and amount of playable
      * abilities
      */
     @Override
-    public PlayableObjectsList getPlayableObjects(Game game, Zone zone) {
+    public PlayableObjectsList getPlayableObjects(Game game, Zone zone, boolean ignoreManaCheck) {
         // collect abilities per object
-        List<ActivatedAbility> playableAbilities = getPlayable(game, true, zone, false); // do not hide duplicated abilities/cards
+        List<ActivatedAbility> playableAbilities = getPlayable(game, true, zone, false, ignoreManaCheck); // do not hide duplicated abilities/cards
         Map<UUID, List<ActivatedAbility>> playableObjects = new HashMap<>();
         for (ActivatedAbility ability : playableAbilities) {
             if (ability.getSourceId() != null) {

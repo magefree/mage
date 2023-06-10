@@ -211,7 +211,7 @@ public class GameSessionPlayer extends GameSessionWatcher {
         GameView gameView = new GameView(game.getState(), game, playerId, null);
         gameView.setHand(new CardsView(game, player.getHand().getCards(game)));
         if (gameView.getPriorityPlayerName().equals(player.getName())) {
-            gameView.setCanPlayObjects(player.getPlayableObjects(game, Zone.ALL));
+            gameView.setCanPlayObjects(player.getPlayableObjects(game, Zone.ALL, false));
         }
 
         processControlledPlayers(game, player, gameView);

@@ -1080,7 +1080,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public PlayableObjectsList getPlayableObjects(Game game, Zone zone) {
+    public PlayableObjectsList getPlayableObjects(Game game, Zone zone, boolean ignoreManaCheck) {
         return null;
     }
 
