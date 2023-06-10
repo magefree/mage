@@ -91,6 +91,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Horn of Gondor", 240, Rarity.RARE, mage.cards.h.HornOfGondor.class));
         cards.add(new SetCardInfo("Horses of the Bruinen", 55, Rarity.UNCOMMON, mage.cards.h.HorsesOfTheBruinen.class));
         cards.add(new SetCardInfo("Improvised Club", 137, Rarity.COMMON, mage.cards.i.ImprovisedClub.class));
+        cards.add(new SetCardInfo("Inherited Envelope", 242, Rarity.COMMON, mage.cards.i.InheritedEnvelope.class));
         cards.add(new SetCardInfo("Ioreth of the Healing House", 56, Rarity.UNCOMMON, mage.cards.i.IorethOfTheHealingHouse.class));
         cards.add(new SetCardInfo("Isildur's Fateful Strike", 91, Rarity.RARE, mage.cards.i.IsildursFatefulStrike.class));
         cards.add(new SetCardInfo("Island", 264, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
