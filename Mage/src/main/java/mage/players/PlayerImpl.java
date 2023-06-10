@@ -3430,8 +3430,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     /**
      * @param ability
-     * @param availableMana if null, it won't be checked if enough mana is
-     *                      available
+     * @param availableMana if null, it won't be checked if enough mana is available
      * @param sourceObject
      * @param game
      * @return
@@ -3489,7 +3488,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * Returns a boolean indicating if the minimum mana cost of a given ability can be paid.
      *
      * @param ability       The ability to pay for.
-     * @param availableMana The available mana.
+     * @param availableMana The available mana. If null, bypasses mana check and returns true
      * @param game          The game to calculate this for.
      * @return Boolean. True if the minimum can be paid, false otherwise.
      */
@@ -3586,10 +3585,10 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     /**
-     * Returns a boolean inidicating if any of the alternative mana costs for the given card can be afforded.
+     * Returns a boolean indicating if any of the alternative mana costs for the given card can be afforded.
      *
      * @param sourceObject  The card
-     * @param availableMana The mana available for payments.
+     * @param availableMana The mana available for payments. If null, bypasses mana check and returns true
      * @param ability       The ability to play it by.
      * @param game          The game to check for.
      * @return Boolean, true if the card can be played by *any* of the available alternative costs, false otherwise.
@@ -3621,7 +3620,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 return true;
                             } else {
                                 if (availableMana == null) {
-                                    return true;
+                                    return true; // null is special case to bypass mana check
                                 }
 
                                 // alternative cost reduce
@@ -3685,9 +3684,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                             if (manaCosts.isEmpty()) {
                                 return true;
                             } else {
-                                // TODO: Why is it returning true if availableMana == null, one would think it should return false
                                 if (availableMana == null) {
-                                    return true;
+                                    return true; // null is special case to bypass mana check
                                 }
 
                                 // alternative cost reduce
@@ -3723,8 +3721,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected ActivatedAbility findActivatedAbilityFromPlayable(MageObject object, ManaOptions availableMana, Ability ability, Game game) {
 
         // special mana to pay spell cost
-        ManaOptions manaFull = availableMana.copy();
-        if (ability instanceof SpellAbility) {
+        ManaOptions manaFull = (availableMana == null) ? null : availableMana.copy(); // null is special case to bypass mana check
+        if (ability instanceof SpellAbility && availableMana != null) {
             for (AlternateManaPaymentAbility altAbility : CardUtil.getAbilities(object, game).stream()
                     .filter(AlternateManaPaymentAbility.class::isInstance)
                     .map(a -> (AlternateManaPaymentAbility) a)
