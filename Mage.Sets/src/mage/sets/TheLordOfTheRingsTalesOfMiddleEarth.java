@@ -106,6 +106,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Legolas, Counter of Kills", 212, Rarity.UNCOMMON, mage.cards.l.LegolasCounterOfKills.class));
         cards.add(new SetCardInfo("Lobelia Sackville-Baggins", 93, Rarity.RARE, mage.cards.l.LobeliaSackvilleBaggins.class));
         cards.add(new SetCardInfo("Long List of the Ents", 174, Rarity.UNCOMMON, mage.cards.l.LongListOfTheEnts.class));
+        cards.add(new SetCardInfo("Lorien Revealed", 60, Rarity.COMMON, mage.cards.l.LorienRevealed.class));
         cards.add(new SetCardInfo("Lost Isle Calling", 61, Rarity.RARE, mage.cards.l.LostIsleCalling.class));
         cards.add(new SetCardInfo("Lothlorien Lookout", 175, Rarity.COMMON, mage.cards.l.LothlorienLookout.class));
         cards.add(new SetCardInfo("Lotho, Corrupt Shirriff", 213, Rarity.RARE, mage.cards.l.LothoCorruptShirriff.class));
