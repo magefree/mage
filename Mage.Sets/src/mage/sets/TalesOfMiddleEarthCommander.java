@@ -81,6 +81,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Faithless Looting", 215, Rarity.COMMON, mage.cards.f.FaithlessLooting.class));
         cards.add(new SetCardInfo("Farhaven Elf", 243, Rarity.COMMON, mage.cards.f.FarhavenElf.class));
         cards.add(new SetCardInfo("Farseek", 244, Rarity.COMMON, mage.cards.f.Farseek.class));
+        cards.add(new SetCardInfo("Fealty to the Realm", 21, Rarity.RARE, mage.cards.f.FealtyToTheRealm.class));
         cards.add(new SetCardInfo("Feed the Swarm", 200, Rarity.COMMON, mage.cards.f.FeedTheSwarm.class));
         cards.add(new SetCardInfo("Fell the Mighty", 167, Rarity.RARE, mage.cards.f.FellTheMighty.class));
         cards.add(new SetCardInfo("Field of Ruin", 308, Rarity.UNCOMMON, mage.cards.f.FieldOfRuin.class));
